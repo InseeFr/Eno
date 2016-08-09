@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parametres>
+    <titre>
+        <sequence>
+            <niveau nom="Modele"/>
+            <niveau nom="Module">
+                <preSeq/>
+                <numParent>N</numParent>
+                <postNumParentSeq/>
+                <styleNumSeq>I</styleNumSeq>
+                <postNumSeq> - </postNumSeq>
+            </niveau>
+            <niveau nom="Paragraphe">
+                <preSeq/>
+                <numParent>N</numParent>
+                <postNumParentSeq/>
+                <styleNumSeq>1</styleNumSeq>
+                <postNumSeq>. </postNumSeq>
+            </niveau>
+            <niveau nom="Groupe">
+                <preSeq/>
+                <numParent>N</numParent>
+                <postNumParentSeq/>
+                <styleNumSeq>a</styleNumSeq>
+                <postNumSeq>. </postNumSeq>
+            </niveau>
+        </sequence>
+        <question>
+            <niveau nom="Module">
+                <preQuest>&#x27A1; </preQuest>
+                <numParent>N</numParent>
+                <postNumParentQuest/>
+                <styleNumQuest>1</styleNumQuest>
+                <postNumQuest>. </postNumQuest>
+            </niveau>
+            <niveau nom="Paragraphe">
+                <preQuest>&#x27A1; </preQuest>
+                <numParent>O</numParent>
+                <postNumParentQuest>-</postNumParentQuest>
+                <styleNumQuest>a</styleNumQuest>
+                <postNumQuest>. </postNumQuest>
+            </niveau>
+            <niveau nom="Groupe">
+                <preQuest></preQuest>
+                <numParent>O</numParent>
+                <postNumParentQuest/>
+                <styleNumQuest>1</styleNumQuest>
+                <postNumQuest>. </postNumQuest>
+            </niveau>
+        </question>
+    </titre>
+
+</parametres>

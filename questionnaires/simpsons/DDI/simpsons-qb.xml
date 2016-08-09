@@ -1,0 +1,2656 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd"
+ xmlns="ddi:instance:3_2" xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2"
+ xmlns:s="ddi:studyunit:3_2" xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+ xmlns:a="ddi:archive:3_2" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ xmlns:l="ddi:logicalproduct:3_2" isMaintainable="true">
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QB</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:Citation>
+      <r:Title>
+         <r:String xml:lang="en-IE">Modélisation en 3.2 du questionnaire, partie
+                        questions</r:String>
+         <r:String xml:lang="en-IE">3.2 Modelisation of the questionnaire,
+                        questions part</r:String>
+      </r:Title>
+   </r:Citation>
+   <g:ResourcePackage isMaintainable="true" versionDate="2013-08-24">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-RP-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:Purpose>
+         <r:Content xml:lang="en-IE">Objets du
+                        questionnaire</r:Content>
+         <r:Content xml:lang="en-IE">Questionnaire
+                        objects</r:Content>
+      </r:Purpose>
+      <d:InterviewerInstructionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-IIS</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">InterviewerInstructionScheme pour le
+                            questionnaire CIS</r:Content>
+            <r:Content xml:lang="en-IE">InterviewerInstructionScheme for the CIS
+                            questionnaire</r:Content>
+         </r:Label>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-IC-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="en-IE">Commentaire</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">This module asks about your general knowledge on the series</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-IC-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="en-IE">Commentaire</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">This module asks about your general knowledge on the characters</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-ERREUR-3</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="en-IE">Instruction</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">One possible answer</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-ERREUR-4</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="en-IE">Instruction</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">The total is different from the distribution. Please correct.</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+         <d:Instruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-II-IC-CI-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:InstructionName>
+               <r:String xml:lang="en-IE">Instruction</r:String>
+            </d:InstructionName>
+            <d:InstructionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">Several possible answers</d:Text>
+               </d:LiteralText>
+            </d:InstructionText>
+         </d:Instruction>
+      </d:InterviewerInstructionScheme>
+      
+      
+      <d:QuestionScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-QS</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">QuestionScheme pour le questionnaire
+                            Simpsons</r:Content>
+            <r:Content xml:lang="en-IE">QuestionScheme for the Simpsons
+                            questionnaire</r:Content>
+         </r:Label>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-QI-1-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-1-1-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">DATEFIRST</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-1-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-1-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">When was the first episode of the simpsons?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <!--<d:DateTimeDomain regExp="^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$">-->
+            <d:DateTimeDomain>
+               <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
+               <r:DateTypeCode codeListID="DARES-DTC-CV">date</r:DateTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-1-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:DateTimeRepresentation>
+                        <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
+                        <r:DateTypeCode codeListID="DARES-DTC-CV">date</r:DateTypeCode>
+                  </r:DateTimeRepresentation>
+               </r:OutParameter>
+            </d:DateTimeDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-QI-1-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-1-2-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">WHOISTHEPR</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-1-2-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-1-2-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">Who is the producer?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:TextDomain maxLength="30">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-1-2-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TextRepresentation maxLength="30"/>
+               </r:OutParameter>
+            </d:TextDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-QI-2-1-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-2-1-1-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">TOWN</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-1-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-2-1-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">In which town do the Simpsons reside?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:CodeDomain>
+               <r:GenericOutputFormat codeListID="INSEE'-GOF-CV'">boutonradio</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CL-CL_TOWN</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-1-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-CL-CL_TOWN</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:CodeDomain>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-ERREUR-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-QI-2-1-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-2-1-2-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">AGEBART</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-1-2-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-2-1-2-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">How old is Bart?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NumericDomain>
+               <r:NumberRange>
+                  <r:Low isInclusive="true">0</r:Low>
+                  <r:High isInclusive="true">120</r:High>
+               </r:NumberRange>
+               <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Format Numérique</r:NumericTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-1-2-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+               </r:OutParameter>
+            </d:NumericDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-QI-2-2-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-2-2-1-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">KENT</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-2-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-2-2-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">Do you know Kent Brockman?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:CodeDomain>
+               <r:GenericOutputFormat codeListID="INSEE'-GOF-CV'">boutonradio</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CL-CL_YESNO</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-2-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-CL-CL_YESNO</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:CodeDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-QI-2-2-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-2-2-2-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">REPORTING</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-2-2-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-2-2-2-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">Can you quote one of his best reporting?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:TextDomain maxLength="100">
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-2-2-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TextRepresentation maxLength="100"/>
+               </r:OutParameter>
+            </d:TextDomain>
+         </d:QuestionItem>
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-QI-5-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-1-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">POPSPG</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-5-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-5-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">What is the population of Springfield?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:NumericDomain>
+               <r:NumberRange>
+                  <r:Low>0</r:Low>
+                  <r:High>999999999</r:High>
+               </r:NumberRange>
+               <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-5-1-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:ParameterName>
+                     <r:String xml:lang="en-IE">POPSPG</r:String>
+                  </r:ParameterName>
+                  <r:NumericRepresentation>
+                     <r:NumberRange>
+                        <r:Low>0</r:Low>
+                        <r:High>999999999</r:High>
+                     </r:NumberRange>
+                     <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  </r:NumericRepresentation>
+               </r:OutParameter>
+            </d:NumericDomain>
+         </d:QuestionItem>
+         
+         <d:QuestionItem>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-QI-5-3</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">STATE</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-5-3-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-5-3-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">And finally! In which state do The Simpsons reside?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:CodeDomain>
+               <r:GenericOutputFormat codeListID="DARES-GOF-CV">listederoulante</r:GenericOutputFormat>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CL-STATE</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+               <r:OutParameter isArray="false">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-5-3-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:ParameterName>
+                     <r:String xml:lang="en-IE">STATE</r:String>
+                  </r:ParameterName>
+                  <r:CodeRepresentation>
+                     <r:CodeListReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-CL-STATE</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>CodeList</r:TypeOfObject>
+                     </r:CodeListReference>
+                  </r:CodeRepresentation>
+               </r:OutParameter>
+               <r:ResponseCardinality maximumResponses="1"/>
+            </d:CodeDomain>
+         </d:QuestionItem>
+         
+         
+         <d:QuestionGrid>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-QG-2-1-3</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-2-1-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">ANIMALS1</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-2-1-3-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">ANIMALS2</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-2-1-3-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">ANIMALS3</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-2-1-3-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">ANIMALS4</r:String>
+               </r:ParameterName>
+            </r:OutParameter>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-1-3-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-2-1-3-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-1-3-2</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-2-1-3-2</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-1-3-3</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-2-1-3-3</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <r:Binding>
+               <r:SourceParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-RDOP-2-1-3-4</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:SourceParameterReference>
+               <r:TargetParameterReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-QOP-2-1-3-4</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>OutParameter</r:TypeOfObject>
+               </r:TargetParameterReference>
+            </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">What are the names of animals that had the simpsons family?</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+            <d:GridDimension displayCode="false" displayLabel="false" rank="1">
+               <d:CodeDomain>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>INSEE-SIMPSONS-CL-CL_ANIMALS</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </d:CodeDomain>
+            </d:GridDimension>
+            <d:StructuredMixedGridResponseDomain>
+               <d:GridResponseDomain>
+                  <d:NominalDomain>
+                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">caseacocher</r:GenericOutputFormat>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-2-1-3-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <l:Code levelNumber="1" isDiscrete="true">
+                                       <r:Agency>fr.insee</r:Agency>
+                                       <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                       <r:Version>0.1.0</r:Version>
+                                       <r:CategoryReference>
+                                          <r:Agency>fr.insee</r:Agency>
+                                          <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+                                          <r:Version>0.1.0</r:Version>
+                                          <r:TypeOfObject>Category</r:TypeOfObject>
+                                       </r:CategoryReference>
+                                       <r:Value>1</r:Value>
+                                    </l:Code>
+                                    <r:Version>0.1.0</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomain>
+               <d:GridResponseDomain>
+                  <d:NominalDomain>
+                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">caseacocher</r:GenericOutputFormat>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-2-1-3-2</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <l:Code levelNumber="1" isDiscrete="true">
+                                       <r:Agency>fr.insee</r:Agency>
+                                       <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                       <r:Version>0.1.0</r:Version>
+                                       <r:CategoryReference>
+                                          <r:Agency>fr.insee</r:Agency>
+                                          <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+                                          <r:Version>0.1.0</r:Version>
+                                          <r:TypeOfObject>Category</r:TypeOfObject>
+                                       </r:CategoryReference>
+                                       <r:Value>1</r:Value>
+                                    </l:Code>
+                                    <r:Version>0.1.0</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomain>
+               <d:GridResponseDomain>
+                  <d:NominalDomain>
+                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">caseacocher</r:GenericOutputFormat>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-2-1-3-3</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <l:Code levelNumber="1" isDiscrete="true">
+                                       <r:Agency>fr.insee</r:Agency>
+                                       <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                       <r:Version>0.1.0</r:Version>
+                                       <r:CategoryReference>
+                                          <r:Agency>fr.insee</r:Agency>
+                                          <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+                                          <r:Version>0.1.0</r:Version>
+                                          <r:TypeOfObject>Category</r:TypeOfObject>
+                                       </r:CategoryReference>
+                                       <r:Value>1</r:Value>
+                                    </l:Code>
+                                    <r:Version>0.1.0</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomain>
+               <d:GridResponseDomain>
+                  <d:NominalDomain>
+                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">caseacocher</r:GenericOutputFormat>
+                     <r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-2-1-3-4</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:CodeRepresentation>
+                           <r:CodeSubsetInformation>
+                              <r:IncludedCode>
+                                 <r:CodeReference>
+                                    <r:Agency>fr.insee</r:Agency>
+                                    <l:Code levelNumber="1" isDiscrete="true">
+                                       <r:Agency>fr.insee</r:Agency>
+                                       <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                       <r:Version>0.1.0</r:Version>
+                                       <r:CategoryReference>
+                                          <r:Agency>fr.insee</r:Agency>
+                                          <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+                                          <r:Version>0.1.0</r:Version>
+                                          <r:TypeOfObject>Category</r:TypeOfObject>
+                                       </r:CategoryReference>
+                                       <r:Value>1</r:Value>
+                                    </l:Code>
+                                    <r:Version>0.1.0</r:Version>
+                                    <r:TypeOfObject>Code</r:TypeOfObject>
+                                 </r:CodeReference>
+                              </r:IncludedCode>
+                           </r:CodeSubsetInformation>
+                        </r:CodeRepresentation>
+                        <r:DefaultValue/>
+                     </r:OutParameter>
+                     <r:ResponseCardinality maximumResponses="1"/>
+                  </d:NominalDomain>
+                  <d:GridAttachment>
+                     <d:CellCoordinatesAsDefined>
+                        <d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
+                     </d:CellCoordinatesAsDefined>
+                  </d:GridAttachment>
+               </d:GridResponseDomain>
+            </d:StructuredMixedGridResponseDomain>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-II-IC-CI-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+         </d:QuestionGrid>
+         
+         <d:QuestionGrid>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>INSEE-SIMPSONS-QG-4-1</r:ID>
+                <r:Version>0.1.0</r:Version>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-QOP-4-1-1</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="en-IE">TURN_IC</r:String>
+                    </r:ParameterName>
+                    <r:NumericRepresentation>
+                       <r:NumberRange>
+                          <r:Low>0</r:Low>
+                          <r:High>999999999</r:High>
+                       </r:NumberRange>
+                       <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                    </r:NumericRepresentation>
+                </r:OutParameter>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-QOP-4-1-2</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="en-IE">TURN_JB</r:String>
+                    </r:ParameterName>
+                   <r:NumericRepresentation>
+                      <r:NumberRange>
+                         <r:Low>0</r:Low>
+                         <r:High>999999999</r:High>
+                      </r:NumberRange>
+                      <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                   </r:NumericRepresentation>
+                </r:OutParameter>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-QOP-4-1-3</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="en-IE">TURN_BAC</r:String>
+                    </r:ParameterName>
+                   <r:NumericRepresentation>
+                      <r:NumberRange>
+                         <r:Low>0</r:Low>
+                         <r:High>999999999</r:High>
+                      </r:NumberRange>
+                      <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                   </r:NumericRepresentation>
+                </r:OutParameter>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-QOP-4-1-4</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="en-IE">TURN_PKC</r:String>
+                    </r:ParameterName>
+                   <r:NumericRepresentation>
+                      <r:NumberRange>
+                         <r:Low>0</r:Low>
+                         <r:High>999999999</r:High>
+                      </r:NumberRange>
+                      <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                   </r:NumericRepresentation>
+                </r:OutParameter>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-QOP-4-1-5</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="en-IE">TURN_CHK</r:String>
+                    </r:ParameterName>
+                   <r:NumericRepresentation>
+                      <r:NumberRange>
+                         <r:Low>0</r:Low>
+                         <r:High>999999999</r:High>
+                      </r:NumberRange>
+                      <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                   </r:NumericRepresentation>
+                </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-1-6</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">PRP_IC</r:String>
+               </r:ParameterName>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low>0</r:Low>
+                     <r:High>100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-1-7</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">PRP_JB</r:String>
+               </r:ParameterName>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low>0</r:Low>
+                     <r:High>100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-1-8</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">PRP_BAC</r:String>
+               </r:ParameterName>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low>0</r:Low>
+                     <r:High>100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-1-9</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">PRP_PKC</r:String>
+               </r:ParameterName>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low>0</r:Low>
+                     <r:High>100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </r:OutParameter>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-1-10</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String xml:lang="en-IE">PRP_CHK</r:String>
+               </r:ParameterName>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low>0</r:Low>
+                     <r:High>100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </r:OutParameter>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-4-1-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-4-1-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-4-1-2</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-4-1-2</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-4-1-3</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-4-1-3</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-4-1-4</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-4-1-4</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-4-1-5</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-4-1-5</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-4-1-6</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-4-1-6</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-4-1-7</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-4-1-7</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-4-1-8</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-4-1-8</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-4-1-9</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-4-1-9</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-4-1-10</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-4-1-10</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+            <d:QuestionText>
+               <d:LiteralText>
+                  <d:Text xml:lang="en-IE">Please, divide the mini-market turnover by products.</d:Text>
+               </d:LiteralText>
+            </d:QuestionText>
+                <d:GridDimension rank="1" displayLabel="true">
+                    <d:CodeDomain>
+                        <r:CodeListReference>
+                            <r:Agency>fr.insee</r:Agency>
+                            <r:ID>INSEE-SIMPSONS-CL-PRDMM</r:ID>
+                            <r:Version>0.1.0</r:Version>
+                            <r:TypeOfObject>CodeList</r:TypeOfObject>
+                        </r:CodeListReference>
+                    </d:CodeDomain>
+                </d:GridDimension>
+            <d:GridDimension rank="2">
+               <d:CodeDomain>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>INSEE-SIMPSONS-CL-TURNPRP</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </d:CodeDomain>
+            </d:GridDimension>
+                <d:StructuredMixedGridResponseDomain>
+                    <d:NoDataByDefinition>
+                        <d:CellCoordinatesAsDefined>
+                            <d:SelectDimension rank="1" specificValue="1"/>
+                            <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="2"/>
+                        </d:CellCoordinatesAsDefined>
+                    </d:NoDataByDefinition>
+                   <d:NoDataByDefinition>
+                      <d:CellCoordinatesAsDefined>
+                         <d:SelectDimension rank="1" specificValue="4"/>
+                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="2"/>
+                      </d:CellCoordinatesAsDefined>
+                   </d:NoDataByDefinition>
+                    <d:GridResponseDomain>
+                        <d:NumericDomain>
+                           <r:NumberRange>
+                              <r:Low>0</r:Low>
+                              <r:High>999999999</r:High>
+                           </r:NumberRange>
+                           <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                            <r:OutParameter isArray="false">
+                                <r:Agency>fr.insee</r:Agency>
+                                <r:ID>INSEE-SIMPSONS-RDOP-4-1-1</r:ID>
+                                <r:Version>0.1.0</r:Version>
+                               <r:ParameterName>
+                                  <r:String xml:lang="en-IE">TURN_IC</r:String>
+                               </r:ParameterName>
+                               <r:NumericRepresentation>
+                                  <r:NumberRange>
+                                     <r:Low>0</r:Low>
+                                     <r:High>999999999</r:High>
+                                  </r:NumberRange>
+                                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                               </r:NumericRepresentation>
+                            </r:OutParameter>
+                        </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>999999999</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-4-1-2</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">TURN_JB</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>999999999</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>999999999</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-4-1-3</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">TURN_BAC</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>999999999</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="5" rangeMaximum="5"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>999999999</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-4-1-4</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">TURN_PKC</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>999999999</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="6" rangeMaximum="6"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>999999999</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-4-1-5</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">TURN_CHK</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>999999999</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="7" rangeMaximum="7"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>100</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-4-1-6</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">PRP_IC</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>100</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+                                <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                   <d:GridResponseDomain>
+                      <d:NumericDomain>
+                         <r:NumberRange>
+                            <r:Low>0</r:Low>
+                            <r:High>100</r:High>
+                         </r:NumberRange>
+                         <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                         <r:OutParameter isArray="false">
+                            <r:Agency>fr.insee</r:Agency>
+                            <r:ID>INSEE-SIMPSONS-RDOP-4-1-7</r:ID>
+                            <r:Version>0.1.0</r:Version>
+                            <r:ParameterName>
+                               <r:String xml:lang="en-IE">PRP_JB</r:String>
+                            </r:ParameterName>
+                            <r:NumericRepresentation>
+                               <r:NumberRange>
+                                  <r:Low>0</r:Low>
+                                  <r:High>100</r:High>
+                               </r:NumberRange>
+                               <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                            </r:NumericRepresentation>
+                         </r:OutParameter>
+                      </d:NumericDomain>
+                      <d:GridAttachment>
+                         <d:CellCoordinatesAsDefined>
+                            <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+                            <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
+                         </d:CellCoordinatesAsDefined>
+                      </d:GridAttachment>
+                   </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>100</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-4-1-8</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">PRP_BAC</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>100</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="5" rangeMaximum="5"/>
+                                <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>100</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-4-1-9</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">PRP_PKC</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>100</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="6" rangeMaximum="6"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>100</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-4-1-10</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">PRP_CHK</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>100</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="7" rangeMaximum="7"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                </d:StructuredMixedGridResponseDomain>
+            </d:QuestionGrid>
+         
+                  <d:QuestionGrid>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID>INSEE-SIMPSONS-QG-5-2</r:ID>
+                <r:Version>0.1.0</r:Version>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-QOP-5-2-1</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="en-IE">LESS_13</r:String>
+                    </r:ParameterName>
+                    <r:NumericRepresentation>
+                       <r:NumberRange>
+                          <r:Low>0</r:Low>
+                          <r:High>999999999</r:High>
+                       </r:NumberRange>
+                       <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                    </r:NumericRepresentation>
+                </r:OutParameter>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-QOP-5-2-2</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="en-IE">AGED_14_15</r:String>
+                    </r:ParameterName>
+                   <r:NumericRepresentation>
+                      <r:NumberRange>
+                         <r:Low>0</r:Low>
+                         <r:High>999999999</r:High>
+                      </r:NumberRange>
+                      <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                   </r:NumericRepresentation>
+                </r:OutParameter>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-QOP-5-2-3</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="en-IE">AGED_16_17</r:String>
+                    </r:ParameterName>
+                   <r:NumericRepresentation>
+                      <r:NumberRange>
+                         <r:Low>0</r:Low>
+                         <r:High>999999999</r:High>
+                      </r:NumberRange>
+                      <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                   </r:NumericRepresentation>
+                </r:OutParameter>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-QOP-5-2-4</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="en-IE">AGED_18_74</r:String>
+                    </r:ParameterName>
+                   <r:NumericRepresentation>
+                      <r:NumberRange>
+                         <r:Low>0</r:Low>
+                         <r:High>999999999</r:High>
+                      </r:NumberRange>
+                      <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                   </r:NumericRepresentation>
+                </r:OutParameter>
+                <r:OutParameter isArray="false">
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-QOP-5-2-5</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="en-IE">MORE_75</r:String>
+                    </r:ParameterName>
+                   <r:NumericRepresentation>
+                      <r:NumberRange>
+                         <r:Low>0</r:Low>
+                         <r:High>999999999</r:High>
+                      </r:NumberRange>
+                      <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                   </r:NumericRepresentation>
+                </r:OutParameter>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-5-2-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-5-2-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-5-2-2</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-5-2-2</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-5-2-3</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-5-2-3</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-5-2-4</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-5-2-4</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-RDOP-5-2-5</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-SIMPSONS-QOP-5-2-5</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>
+                     <d:QuestionText>
+                        <d:LiteralText>
+                           <d:Text xml:lang="en-IE">Please, classify the population by age.</d:Text>
+                        </d:LiteralText>
+                     </d:QuestionText>
+                <d:GridDimension rank="1" displayLabel="true">
+                    <d:CodeDomain>
+                        <r:CodeListReference>
+                            <r:Agency>fr.insee</r:Agency>
+                            <r:ID>INSEE-SIMPSONS-CL-AGEGRP</r:ID>
+                            <r:Version>0.1.0</r:Version>
+                            <r:TypeOfObject>CodeList</r:TypeOfObject>
+                        </r:CodeListReference>
+                    </d:CodeDomain>
+                </d:GridDimension>
+            <d:GridDimension rank="2">
+               <d:CodeDomain>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>INSEE-SIMPSONS-CL-NBPERS</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </d:CodeDomain>
+            </d:GridDimension>
+                <d:StructuredMixedGridResponseDomain>
+                    <d:GridResponseDomain>
+                        <d:NumericDomain>
+                           <r:NumberRange>
+                              <r:Low>0</r:Low>
+                              <r:High>999999999</r:High>
+                           </r:NumberRange>
+                           <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                            <r:OutParameter isArray="false">
+                                <r:Agency>fr.insee</r:Agency>
+                                <r:ID>INSEE-SIMPSONS-RDOP-5-2-1</r:ID>
+                                <r:Version>0.1.0</r:Version>
+                               <r:ParameterName>
+                                  <r:String xml:lang="en-IE">LESS_13</r:String>
+                               </r:ParameterName>
+                               <r:NumericRepresentation>
+                                  <r:NumberRange>
+                                     <r:Low>0</r:Low>
+                                     <r:High>999999999</r:High>
+                                  </r:NumberRange>
+                                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                               </r:NumericRepresentation>
+                            </r:OutParameter>
+                        </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>999999999</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-5-2-2</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">AGED_14_15</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>999999999</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>999999999</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-5-2-3</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">AGED_16_17</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>999999999</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>999999999</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-5-2-4</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">AGED_18_74</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>999999999</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                    <d:GridResponseDomain>
+                       <d:NumericDomain>
+                          <r:NumberRange>
+                             <r:Low>0</r:Low>
+                             <r:High>999999999</r:High>
+                          </r:NumberRange>
+                          <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                          <r:OutParameter isArray="false">
+                             <r:Agency>fr.insee</r:Agency>
+                             <r:ID>INSEE-SIMPSONS-RDOP-5-2-5</r:ID>
+                             <r:Version>0.1.0</r:Version>
+                             <r:ParameterName>
+                                <r:String xml:lang="en-IE">MORE_75</r:String>
+                             </r:ParameterName>
+                             <r:NumericRepresentation>
+                                <r:NumberRange>
+                                   <r:Low>0</r:Low>
+                                   <r:High>999999999</r:High>
+                                </r:NumberRange>
+                                <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                             </r:NumericRepresentation>
+                          </r:OutParameter>
+                       </d:NumericDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="5" rangeMaximum="5"/>
+                                <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
+                    </d:GridResponseDomain>
+                </d:StructuredMixedGridResponseDomain>
+            </d:QuestionGrid>
+         
+      </d:QuestionScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CAS-CL_TOWN</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">CL_TOWN</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-CL_TOWN-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Springfield</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-CL_TOWN-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Shelbyville</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-CL_TOWN-3</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Seinfeld</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CAS-CL_ANIMALS</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">CL_ANIMALS</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-CL_ANIMALS-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Santa's Little Helper</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-CL_ANIMALS-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Snowball I</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-CL_ANIMALS-3</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Coltrane</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CAS-CL_YESNO</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">CL_YESNO</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-CL_YESNO-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Yes</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-CL_YESNO-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">No</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CAS-PRDMM</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Products at the mini-market</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-PRDMM-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE"><xhtml:p><xhtml:b>Frozen products</xhtml:b></xhtml:p></r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-PRDMM-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Ice creams</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-PRDMM-3</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Jasper Beardly</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-PRDMM-4</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE"><xhtml:p><xhtml:b>Meat</xhtml:b></xhtml:p></r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-PRDMM-5</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Bacon</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-PRDMM-6</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Pork chop</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-PRDMM-7</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Chicken</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CAS-TURNPRP</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Products at the mini-market</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-TURNPRP-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Turnover</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-TURNPRP-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Proportion of total turnover</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CAS-AGEGRP</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Age group</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-AGEGRP-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">13 or less</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-AGEGRP-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">14 to 15</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-AGEGRP-3</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">16 to 17</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-AGEGRP-4</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">18 to 74</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-AGEGRP-5</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">75 or more</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CAS-NBPERS</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Age group</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-NBPERS-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Number of people</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      <l:CategoryScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CAS-STATE</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">States</r:Content>
+         </r:Label>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Washington</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Kentucky</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-3</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Ohio</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-4</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Maine</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-5</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">North Dakota</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-6</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Florida</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-7</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">North Takoma</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-8</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">California</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-9</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Texas</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-10</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Massachusetts</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-11</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Nevada</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-12</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Illinois</r:Content>
+            </r:Label>
+         </l:Category>
+         <l:Category>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CA-STATE-13</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Not in any state, you fool!</r:Content>
+            </r:Label>
+         </l:Category>
+      </l:CategoryScheme>
+      
+      <l:CodeListScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-COMMUNCLS</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Liste de codes de l'enquête</r:Content>
+            <r:Content xml:lang="en-IE">Codelists for the survey</r:Content>
+         </r:Label>
+      </l:CodeListScheme>
+      <l:CodeListScheme>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CLS</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:Label>
+            <r:Content xml:lang="en-IE">Liste de codes de l'enquête</r:Content>
+            <r:Content xml:lang="en-IE">Codelists for the survey</r:Content>
+         </r:Label>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-CL_TOWN</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">CL_TOWN</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-CL_TOWN-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-CL_TOWN-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-CL_TOWN-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-CL_TOWN-2</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-CL_TOWN-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-CL_TOWN-3</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-CL_ANIMALS</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">CL_ANIMALS</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-CL_ANIMALS-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-CL_ANIMALS-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-CL_ANIMALS-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-CL_ANIMALS-2</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-CL_ANIMALS-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-CL_ANIMALS-3</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-CL_YESNO</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">CL_YESNO</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-CL_YESNO-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-CL_YESNO-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-CL_YESNO-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-CL_YESNO-2</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-PRDMM</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Products</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-PRDMM-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-PRDMM-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-PRDMM-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-PRDMM-2</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-PRDMM-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-PRDMM-3</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-PRDMM-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-PRDMM-4</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>4</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-PRDMM-5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-PRDMM-5</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>5</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-PRDMM-6</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-PRDMM-6</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>6</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-PRDMM-7</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-PRDMM-7</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>7</r:Value>
+            </l:Code>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-TURNPRP</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Turnovers and proportions</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-TURNPRP-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-TURNPRP-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-TURNPRP-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-TURNPRP-2</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-AGEGRP</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Age group</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-AGEGRP-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-AGEGRP-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-AGEGRP-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-AGEGRP-2</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-AGEGRP-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-AGEGRP-3</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-AGEGRP-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-AGEGRP-4</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>4</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-AGEGRP-5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-AGEGRP-5</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>5</r:Value>
+            </l:Code>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-NBPERS</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-NBPERS-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-NBPERS-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+         </l:CodeList>
+         <l:CodeList>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-STATE</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="en-IE">States</r:Content>
+            </r:Label>
+            <l:HierarchyType>Regular</l:HierarchyType>
+            <l:Level levelNumber="1">
+               <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-1</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-2</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-3</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-4</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>4</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-5</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>5</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-6</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-6</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>6</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-7</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-7</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>7</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-8</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-8</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>8</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-9</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-9</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>9</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-10</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-10</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>10</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-11</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-11</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>11</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-12</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-12</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>12</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CL-STATE-13</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CA-STATE-13</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>13</r:Value>
+            </l:Code>
+         </l:CodeList>
+      </l:CodeListScheme>
+   </g:ResourcePackage>
+</DDIInstance>
