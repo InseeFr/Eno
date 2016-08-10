@@ -12,22 +12,24 @@ This document describes the naming rules for the different components found in E
 * Eno specific components
 * CSS classes
 
-Constraints:
-* constraint on modes and getters
-* constraint on XForms instance names (imposed by Orbeon)
-* XSLT modes should be named with the name of the template of function to which they correspond.
-
 ## General rules
 
 All components are names with English terms or combinations of terms.
 
 Except stated otherwise in the specific rules below, all names are formed with English terms or combination of terms in lower cases, with hyphens as separators.
 
-Verbs will be used for functions and equivalents: Ant targets, XSLT templates
+Verbs will be used for functions and equivalents: Ant targets, XSLT templates.
 
 TODO Give examples.
 
 ## Specific rules
+
+### Constraints
+
+The following constraints apply on the naming rules:
+* constraint on modes and getters
+* constraint on XForms instance names (imposed by Orbeon)
+* XSLT modes should be named with the name of the template or function to which they correspond.
 
 ### Files and folders
 
@@ -57,17 +59,17 @@ The components that have qualified names are: getters and associated modes and f
 
 ### XML elements and attributes
 
-XML elements are named with nouns (simple or compound) and attributes with adjectives.
+XML elements are named with nouns (simple or compound) and attributes with adjectives or nouns.
 
-XML elements are in upper camel case (e.g. `SendContainer`) and attributes in lower camel case (e.g. `genericName`).
+XML elements are in upper camel case (e.g. `SendContainer`) and attributes in lower camel case (e.g. `open`, `genericName`).
 
 ###  XSLT variables and parameters
 
-Differences in scope between parameters and variables imply that more attention should be given to the naming of the parameters.
+The difference in scope between parameters and variables imply that even more attention should be given to the naming of the parameters. In particular, a parameter name should be globally unique.
 
 ### XSLT modes, templates and functions
 
-When it corresponds to a template or function, a mode should be named like this template (see constraint). By extension, a mode shall be named with a verb even when it has no associated template. Modes and corresponding templates and functions have qualified names using one of the eno* names.
+When it corresponds to a template or function, a mode should be named like this template (see constraints). By extension, a mode shall be named with a verb, even when it has no associated template. Modes and corresponding templates and functions have qualified names using one of the eno* namespaces.
 
 ### Ant properties
 
