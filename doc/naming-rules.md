@@ -42,6 +42,19 @@ TODO: add something on the use of '-fixed'.
 
 All extensions should correspond to the format of the files, except temporary files that should have extension '.tmp'.
 
+### Namespaces
+
+The following namespaces are used by Eno:
+
+| Prefix        | Namespace           |
+|:------------- |:-------------|
+| eno      | http://xml.insee.fr/apps/eno |
+| enoddi      | http://xml.insee.fr/apps/eno/ddi |
+| enoxml      | http://xml.insee.fr/apps/eno/xml |
+| enofods      | http://xml.insee.fr/apps/eno/fods |
+
+The components that have qualified names are: getters and associated modes and functions.
+
 ### XML elements and attributes
 
 XML elements are named with nouns (simple or compound) and attributes with adjectives.
