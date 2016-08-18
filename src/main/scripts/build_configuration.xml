@@ -11,6 +11,7 @@
 
     <path id="classpath">
         <fileset dir="${lib.home}" includes="**/*.jar"/>
+        <pathelement location="${lib.home}/target" />
     </path>
     <taskdef name="foreach" classname="net.sf.antcontrib.logic.ForEach">
         <classpath refid="classpath"/>

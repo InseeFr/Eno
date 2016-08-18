@@ -20,7 +20,7 @@
         </foreach>
     </target>
 
-    <!--************************TARGETS POUR GENERER UN QUESTIONNAIRE *****************************-->
+	<!--************************TARGETS POUR GENERER UN QUESTIONNAIRE *****************************-->
 
     <!-- Il faut récupérer le mapping entre le VariableScheme et les identifiants côté QuestionScheme avant de lancer, d'où la dépendance -->
     <target name="ddi2fr">
@@ -216,4 +216,35 @@
         <antcall target="cleanQuestionnaire"/>
     </target>
     
+	<!--************************TARGETS WITH NON REGRESSION TEST *****************************-->
+
+	<!-- The full target with non regression tests calculate the difference with the generated Xforms Simpsons questionnaire expected -->
+    <target name="full-with-test" depends="compile-tests,full">
+
+        <!-- At the end of the treatment, the difference between the generated and the expected form written in the file diff.txt-->
+       <java 
+       		classname="fr.insee.eno.test.Difference"
+           	fork="true"
+           >
+         <!-- the output file with differences -->
+         <arg value="${dossierEnquete}/Xforms/v1/form/diff.txt"/>
+         <!-- the input generated form to compare -->
+         <arg value="${dossierEnquete}/Xforms/v1/form/form.xhtml"/>
+         <!-- the expected form -->
+         <arg value="${dossierEnquete}/form.xhtml"/>
+         <classpath refid="classpath"/>
+       </java>
+       <delete dir="${lib.home}/target" />
+    </target>
+
+    <!-- Classes compilation for tests -->
+	<target name="compile-tests">
+		<mkdir dir="${lib.home}/target" /> 
+		<javac srcdir="${test.java.home}/fr/insee/eno/test"
+			destdir="${lib.home}/target">
+			 <classpath refid="classpath"/>
+		</javac>
+	</target>
+
+
 </project>
