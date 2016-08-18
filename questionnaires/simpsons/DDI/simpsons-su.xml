@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DDIInstance xmlns="ddi:instance:3_2"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:g="ddi:group:3_2"
-             xmlns:d="ddi:datacollection:3_2"
-             xmlns:s="ddi:studyunit:3_2"
-             xmlns:r="ddi:reusable:3_2"
-             xmlns:xhtml="http://www.w3.org/1999/xhtml"
-             xmlns:a="ddi:archive:3_2"
-             xmlns:l="ddi:logicalproduct:3_2"
-             xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd"
-             isMaintainable="true">
+<DDIInstance xmlns="ddi:instance:3_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2"
+   xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_2"
+   xmlns:l="ddi:logicalproduct:3_2" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd" isMaintainable="true">
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-SIMPSONS-SU</r:ID>
    <r:Version>0.1.0</r:Version>
    <r:Citation>
       <r:Title>
-         <r:String xml:lang="fr-FR">Modélisation en 3.2 du questionnaire, partie opération statistique</r:String>
-         <r:String xml:lang="en-IE">3.2 Modelisation of the questionnaire, study unit part</r:String>
+         <r:String xml:lang="en-IE">3.2 Modelisation of the questionnaire, study unit
+            part</r:String>
       </r:Title>
    </r:Citation>
    <g:ResourcePackage isMaintainable="true" versionDate="2013-03-07">
@@ -25,7 +18,6 @@
       <r:ID>INSEE-SIMPSONS-RP-3</r:ID>
       <r:Version>0.1.0</r:Version>
       <r:Purpose>
-         <r:Content xml:lang="fr-FR">ensemble des objets de l'opération statistique</r:Content>
          <r:Content xml:lang="en-IE">study unit components</r:Content>
       </r:Purpose>
    </g:ResourcePackage>
@@ -61,14 +53,13 @@
             <r:ID>INSEE-SIMPSONS-InS</r:ID>
             <r:Version>0.1.0</r:Version>
             <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-                          xmlns:pr="ddi:ddiprofile:3_2"
-                          xmlns:c="ddi:conceptualcomponent:3_2"
-                          xmlns:cm="ddi:comparative:3_2">
+               xmlns:pr="ddi:ddiprofile:3_2" xmlns:c="ddi:conceptualcomponent:3_2"
+               xmlns:cm="ddi:comparative:3_2">
                <r:Agency>fr.insee</r:Agency>
                <r:ID>v1</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:Label>
-                  <r:Content xml:lang="fr-FR">Questionnaire Simpsons</r:Content>
+                  <r:Content xml:lang="fr-FR">Simpsons questionnaire</r:Content>
                </r:Label>
                <d:TypeOfInstrument>DDI XFORMS</d:TypeOfInstrument>
                <d:ControlConstructReference>

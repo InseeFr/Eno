@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd"
- xmlns="ddi:instance:3_2" xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2"
- xmlns:s="ddi:studyunit:3_2" xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml"
- xmlns:a="ddi:archive:3_2" xmlns:xs="http://www.w3.org/2001/XMLSchema"
- xmlns:l="ddi:logicalproduct:3_2" isMaintainable="true">
+   xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd" xmlns="ddi:instance:3_2"
+   xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2"
+   xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_2"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:l="ddi:logicalproduct:3_2"
+   isMaintainable="true">
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-SIMPSONS-CCS</r:ID>
    <r:Version>0.1.0</r:Version>
    <r:Citation>
       <r:Title>
-         <r:String xml:lang="en-IE">Modélisation en 3.2 du questionnaire, partie séquence</r:String>
-         <r:String xml:lang="en-IE">3.2 Modelisation of the questionnaire, control constructs part</r:String>
+         <r:String xml:lang="en-IE">3.2 Modelisation of the questionnaire, control constructs
+            part</r:String>
       </r:Title>
    </r:Citation>
    <g:ResourcePackage isMaintainable="true" versionDate="2012-01-02">
@@ -19,7 +19,6 @@
       <r:ID>INSEE-SIMPSONS-RP-2</r:ID>
       <r:Version>0.1.0</r:Version>
       <r:Purpose>
-         <r:Content xml:lang="en-IE">Séquences du questionnaire</r:Content>
          <r:Content xml:lang="en-IE">Questionnaire constructs</r:Content>
       </r:Purpose>
       <d:ControlConstructScheme>
@@ -315,7 +314,7 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
          </d:QuestionConstruct>
-         
+
          <d:Sequence>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>INSEE-SIMPSONS-SEQ-4</r:ID>
@@ -349,14 +348,14 @@
                <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Sequence>
-         
+
          <d:ComputationItem>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>INSEE-SIMPSONS-CI-4-2</r:ID>
             <r:Version>0.1.0</r:Version>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-ERREUR-4</r:ID>
+               <r:ID>INSEE-SIMPSONS-IW-1</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
@@ -495,21 +494,19 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>
-                     (number(if (INSEE-SIMPSONS-CIIP-4-2-1='') then 0 else INSEE-SIMPSONS-CIIP-4-2-1) 
-                     !=                     
-                     (number(if (INSEE-SIMPSONS-CIIP-4-2-6='') then 0 else INSEE-SIMPSONS-CIIP-4-2-6)
-                     +number(if (INSEE-SIMPSONS-CIIP-4-2-2='') then 0 else INSEE-SIMPSONS-CIIP-4-2-2)
-                     +number(if (INSEE-SIMPSONS-CIIP-4-2-3='') then 0 else INSEE-SIMPSONS-CIIP-4-2-3)
-                     +number(if (INSEE-SIMPSONS-CIIP-4-2-4='') then 0 else INSEE-SIMPSONS-CIIP-4-2-4)
-                     +number(if (INSEE-SIMPSONS-CIIP-4-2-5='') then 0 else INSEE-SIMPSONS-CIIP-4-2-5)))
-                                         
-                    </r:CommandContent>
+                  <r:CommandContent> (number(if (INSEE-SIMPSONS-CIIP-4-2-1='') then 0 else
+                     INSEE-SIMPSONS-CIIP-4-2-1) != (number(if (INSEE-SIMPSONS-CIIP-4-2-6='') then 0
+                     else INSEE-SIMPSONS-CIIP-4-2-6) +number(if (INSEE-SIMPSONS-CIIP-4-2-2='') then
+                     0 else INSEE-SIMPSONS-CIIP-4-2-2) +number(if (INSEE-SIMPSONS-CIIP-4-2-3='')
+                     then 0 else INSEE-SIMPSONS-CIIP-4-2-3) +number(if
+                     (INSEE-SIMPSONS-CIIP-4-2-4='') then 0 else INSEE-SIMPSONS-CIIP-4-2-4)
+                     +number(if (INSEE-SIMPSONS-CIIP-4-2-5='') then 0 else
+                     INSEE-SIMPSONS-CIIP-4-2-5))) </r:CommandContent>
                </r:Command>
             </r:CommandCode>
          </d:ComputationItem>
-         
-         
+
+
          <d:QuestionConstruct>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>INSEE-SIMPSONS-QC-4-1</r:ID>
@@ -543,7 +540,7 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
          </d:QuestionConstruct>
-         
+
       </d:ControlConstructScheme>
    </g:ResourcePackage>
 </DDIInstance>

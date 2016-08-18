@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd"
- xmlns="ddi:instance:3_2" xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2"
- xmlns:s="ddi:studyunit:3_2" xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml"
- xmlns:a="ddi:archive:3_2" xmlns:xs="http://www.w3.org/2001/XMLSchema"
- xmlns:l="ddi:logicalproduct:3_2" isMaintainable="true">
+   xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd" xmlns="ddi:instance:3_2"
+   xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2"
+   xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_2"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:l="ddi:logicalproduct:3_2"
+   isMaintainable="true">
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-SIMPSONS-VS</r:ID>
    <r:Version>0.1.0</r:Version>
@@ -19,17 +19,13 @@
       <r:ID>INSEE-SIMPSONS-</r:ID>
       <r:Version>0.1.0</r:Version>
       <r:Purpose>
-         <r:Content xml:lang="fr-FR">Resource package du fichier de variables pour
-                        l'enquête </r:Content>
-         <r:Content xml:lang="en-IE">Resource package containing the Variable Scheme
-                    </r:Content>
+         <r:Content xml:lang="en-IE">Resource package containing the Variable Scheme </r:Content>
       </r:Purpose>
       <l:VariableScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>INSEE-SIMPSONS-VS</r:ID>
          <r:Version>0.1.0</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Variables pour l'enquête </r:Content>
             <r:Content xml:lang="en-IE">Variable Scheme for the survey</r:Content>
          </r:Label>
          <l:Variable>
@@ -40,7 +36,7 @@
                <r:String xml:lang="fr-FR">DATEFIRST</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Libellé de DATEFIRST</r:Content>
+               <r:Content xml:lang="fr-FR">Label of DATEFIRST</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -64,7 +60,7 @@
                <r:String xml:lang="fr-FR">WHOISTHEPR</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Libellé de WHOISTHEPR</r:Content>
+               <r:Content xml:lang="fr-FR">Label of WHOISTHEPR</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -88,7 +84,7 @@
                <r:String xml:lang="fr-FR">TOWN</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Libellé de TOWN</r:Content>
+               <r:Content xml:lang="fr-FR">Label of TOWN</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -112,7 +108,7 @@
                <r:String xml:lang="fr-FR">AGEBART</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Libellé de AGEBART</r:Content>
+               <r:Content xml:lang="fr-FR">Label of AGEBART</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -136,7 +132,7 @@
                <r:String xml:lang="fr-FR">KENT</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Libellé de KENT</r:Content>
+               <r:Content xml:lang="fr-FR">Label of KENT</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -160,7 +156,7 @@
                <r:String xml:lang="fr-FR">REPORTING</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Libellé de REPORTING</r:Content>
+               <r:Content xml:lang="fr-FR">Label of REPORTING</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -184,7 +180,7 @@
                <r:String xml:lang="fr-FR">ANIMALS1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Libellé de ANIMALS1</r:Content>
+               <r:Content xml:lang="fr-FR">Label of ANIMALS1</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -208,7 +204,7 @@
                <r:String xml:lang="fr-FR">ANIMALS2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Libellé de ANIMALS2</r:Content>
+               <r:Content xml:lang="fr-FR">Label of ANIMALS2</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -232,7 +228,7 @@
                <r:String xml:lang="fr-FR">ANIMALS3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Libellé de ANIMALS3</r:Content>
+               <r:Content xml:lang="fr-FR">Label of ANIMALS3</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -256,7 +252,7 @@
                <r:String xml:lang="fr-FR">ANIMALS4</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Libellé de ANIMALS4</r:Content>
+               <r:Content xml:lang="fr-FR">Label of ANIMALS4</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -300,7 +296,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -332,7 +328,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -364,7 +360,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -396,7 +392,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -428,7 +424,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -440,7 +436,8 @@
                <r:String xml:lang="fr-FR">PRP_IC</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Proportion of the total turnover for ice creams</r:Content>
+               <r:Content xml:lang="fr-FR">Proportion of the total turnover for ice
+                  creams</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -460,7 +457,8 @@
                      <r:Low>0</r:Low>
                      <r:High>100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV"
+                     >Percentage</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -472,7 +470,8 @@
                <r:String xml:lang="fr-FR">PRP_JB</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Proportion of the total turnover for Jasper Beardly</r:Content>
+               <r:Content xml:lang="fr-FR">Proportion of the total turnover for Jasper
+                  Beardly</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -492,7 +491,8 @@
                      <r:Low>0</r:Low>
                      <r:High>100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV"
+                     >Percentage</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -504,7 +504,8 @@
                <r:String xml:lang="fr-FR">PRP_PKC</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Proportion of the total turnover for pork chop</r:Content>
+               <r:Content xml:lang="fr-FR">Proportion of the total turnover for pork
+                  chop</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -524,7 +525,8 @@
                      <r:Low>0</r:Low>
                      <r:High>100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV"
+                     >Percentage</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -556,7 +558,8 @@
                      <r:Low>0</r:Low>
                      <r:High>100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV"
+                     >Percentage</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -588,7 +591,8 @@
                      <r:Low>0</r:Low>
                      <r:High>100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Pourcentage</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV"
+                     >Percentage</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -620,7 +624,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -652,7 +656,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -684,7 +688,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -716,7 +720,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -748,7 +752,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -780,7 +784,7 @@
                      <r:Low>0</r:Low>
                      <r:High>999999999</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Entier</r:NumericTypeCode>
+                  <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">integer</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -808,7 +812,8 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:CodeRepresentation>
-                  <r:GenericOutputFormat codeListID="DARES-GOF-CV">listederoulante</r:GenericOutputFormat>
+                  <r:GenericOutputFormat codeListID="INSEE-GOF-CV"
+                     >listederoulante</r:GenericOutputFormat>
                   <r:CodeListReference>
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>INSEE-SIMPSONS-CL-STATE</r:ID>
