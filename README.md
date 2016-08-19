@@ -30,9 +30,9 @@ The generated XForms output will be located in a subdirectory of [/questionnaire
  
 ### Prior : 
  
-First you must install Apache Ant. You can download Ant from Apache, see also : [Ant Apache](http://ant.apache.org/)
+ * Apache Ant. You can download Ant from Apache, see also : [Ant Apache](http://ant.apache.org/)
  
-Donwload source code from github.com.
+ * Source code from github.com.
  
 Then you have to donwload Java Libraries : 
 
@@ -49,7 +49,7 @@ Paste the ".jar" file in a "/lib/" folder at the Eno project root.
 You can find on the subdirectory [/questionnaire/], the questionnaire example "Simpsons" specified in the DDI format.
 
 
-To generate the XForms form, you can't execute the main ant build file [/src/main/scripts/build_non_regression.xml]
+To generate the XForms form, execute the main ant build file [/src/main/scripts/build_non_regression.xml]
 
 
 The generated XForms form should be created in [/questionnaire/simpsons/Xforms/v1/] folder.
