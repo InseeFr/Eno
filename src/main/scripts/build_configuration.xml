@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <project>
     <property file="../config/config.properties"/>
-    <xmlproperty file="${root}/ddi2fr.xml"/>
+    <xmlproperty file="${root}/config/ddi2fr.xml"/>
     
     <!-- On récupère le chemin en dur du dossier contenant les xml (qu'on passera aux xsl) -->
     <dirname property="dossierRacine" file="${root}/dummy"/>
@@ -11,7 +11,7 @@
 
     <path id="classpath">
         <fileset dir="${lib.home}" includes="**/*.jar"/>
-        <pathelement location="${lib.home}/target" />
+        <pathelement location="${dossierRacine}/target/classes" />
     </path>
     <taskdef name="foreach" classname="net.sf.antcontrib.logic.ForEach">
         <classpath refid="classpath"/>

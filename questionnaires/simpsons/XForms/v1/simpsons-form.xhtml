@@ -1,0 +1,2513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xhtml:html xmlns:xhtml="http://www.w3.org/1999/xhtml"
+            xmlns:xf="http://www.w3.org/2002/xforms"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:fn="http://www.w3.org/2005/xpath-functions"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:ev="http://www.w3.org/2001/xml-events"
+            xmlns:xi="http://www.w3.org/2001/XInclude"
+            xmlns:xxi="http://orbeon.org/oxf/xml/xinclude"
+            xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+            xmlns:exf="http://www.exforms.org/exf/1-0"
+            xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+            xmlns:saxon="http://saxon.sf.net/"
+            xmlns:sql="http://orbeon.org/oxf/xml/sql"
+            xmlns:soap="http://schemas.xmlsoap.org/soap/envelope"
+            xmlns:iatfr="http://xml/insee.fr/xslt/apply-templates/form-runner">
+   <xhtml:head>
+      <xhtml:title>Simpsons</xhtml:title>
+      <xhtml:link rel="stylesheet" href="/css/common.css"/>
+      <xhtml:link rel="stylesheet" href="/css/simpsons/simpsons.css"/>
+      <xhtml:link rel="stylesheet" href="/css/simpsons/.css"/>
+      <xhtml:link rel="stylesheet" href="/css/simpsons/v1.css"/>
+      <xf:model id="fr-form-model"
+                xxf:expose-xpath-types="true"
+                xxf:noscript-support="true">
+         <xf:instance id="fr-form-instance">
+            <form>
+               <INSEE-SIMPSONS-SEQ-1>
+                  <INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1/>
+                  <INSEE-SIMPSONS-QOP-1-1-1/>
+                  <INSEE-SIMPSONS-QOP-1-2-1/>
+               </INSEE-SIMPSONS-SEQ-1>
+               <INSEE-SIMPSONS-SEQ-2>
+                  <INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2/>
+                  <INSEE-SIMPSONS-SEQ-2-1/>
+                  <INSEE-SIMPSONS-QOP-2-1-1-1/>
+                  <INSEE-SIMPSONS-QOP-2-1-2-1/>
+                  <INSEE-SIMPSONS-QG-2-1-3/>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-entete-1/>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1/>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2/>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3/>
+                  <INSEE-SIMPSONS-QOP-2-1-3-1/>
+                  <INSEE-SIMPSONS-QOP-2-1-3-2/>
+                  <INSEE-SIMPSONS-QOP-2-1-3-3/>
+                  <INSEE-SIMPSONS-QOP-2-1-3-4/>
+                  <INSEE-SIMPSONS-SEQ-2-2/>
+                  <INSEE-SIMPSONS-QOP-2-2-1-1/>
+                  <INSEE-SIMPSONS-SEQI-1>
+                     <INSEE-SIMPSONS-QOP-2-2-2-1/>
+                  </INSEE-SIMPSONS-SEQI-1>
+               </INSEE-SIMPSONS-SEQ-2>
+               <INSEE-SIMPSONS-SEQ-3>
+                  <INSEE-SIMPSONS-QG-4-1/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-entete-1/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1/>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2/>
+                  <INSEE-SIMPSONS-QOP-4-1-1/>
+                  <INSEE-SIMPSONS-QOP-4-1-2/>
+                  <INSEE-SIMPSONS-QOP-4-1-3/>
+                  <INSEE-SIMPSONS-QOP-4-1-4/>
+                  <INSEE-SIMPSONS-QOP-4-1-5/>
+                  <INSEE-SIMPSONS-QOP-4-1-6/>
+                  <INSEE-SIMPSONS-QOP-4-1-7/>
+                  <INSEE-SIMPSONS-QOP-4-1-8/>
+                  <INSEE-SIMPSONS-QOP-4-1-9/>
+                  <INSEE-SIMPSONS-QOP-4-1-10/>
+               </INSEE-SIMPSONS-SEQ-3>
+               <INSEE-SIMPSONS-SEQ-4>
+                  <INSEE-SIMPSONS-QOP-5-1-1/>
+                  <INSEE-SIMPSONS-QG-5-2/>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1/>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1/>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2/>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3/>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4/>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5/>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1/>
+                  <INSEE-SIMPSONS-QOP-5-2-1/>
+                  <INSEE-SIMPSONS-QOP-5-2-2/>
+                  <INSEE-SIMPSONS-QOP-5-2-3/>
+                  <INSEE-SIMPSONS-QOP-5-2-4/>
+                  <INSEE-SIMPSONS-QOP-5-2-5/>
+                  <INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1/>
+                  <INSEE-SIMPSONS-QOP-5-3-1/>
+               </INSEE-SIMPSONS-SEQ-4>
+               <VALIDATION>
+                  <dummy/>
+               </VALIDATION>
+               <CONFIRMATION>
+                  <dummy/>
+               </CONFIRMATION>
+               <FIN>
+                  <dummy/>
+               </FIN>
+               <stromae>
+                  <BarreFixe/>
+                  <util>
+                     <sectionCourante>1</sectionCourante>
+                     <nomSectionCourante/>
+                     <expedie>non</expedie>
+                     <extrait>non</extrait>
+                     <dateHeure/>
+                  </util>
+               </stromae>
+            </form>
+         </xf:instance>
+         <xf:instance id="fr-form-modeles">
+            <modeles/>
+         </xf:instance>
+         <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
+                  id="fr-form-instance-binds"
+                  ref="instance('fr-form-instance')">
+            <xf:bind id="INSEE-SIMPSONS-SEQ-1-bind"
+                     name="INSEE-SIMPSONS-SEQ-1"
+                     ref="INSEE-SIMPSONS-SEQ-1">
+               <xf:bind id="INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1-bind"
+                        name="INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1"
+                        ref="INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-1-1-1-bind"
+                        name="INSEE-SIMPSONS-QOP-1-1-1"
+                        ref="INSEE-SIMPSONS-QOP-1-1-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-1-2-1-bind"
+                        name="INSEE-SIMPSONS-QOP-1-2-1"
+                        ref="INSEE-SIMPSONS-QOP-1-2-1"/>
+            </xf:bind>
+            <xf:bind id="INSEE-SIMPSONS-SEQ-2-bind"
+                     name="INSEE-SIMPSONS-SEQ-2"
+                     ref="INSEE-SIMPSONS-SEQ-2">
+               <xf:bind id="INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2-bind"
+                        name="INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2"
+                        ref="INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2"/>
+               <xf:bind id="INSEE-SIMPSONS-SEQ-2-1-bind"
+                        name="INSEE-SIMPSONS-SEQ-2-1"
+                        ref="INSEE-SIMPSONS-SEQ-2-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-2-1-1-1-bind"
+                        name="INSEE-SIMPSONS-QOP-2-1-1-1"
+                        ref="INSEE-SIMPSONS-QOP-2-1-1-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-2-1-2-1-bind"
+                        name="INSEE-SIMPSONS-QOP-2-1-2-1"
+                        ref="INSEE-SIMPSONS-QOP-2-1-2-1">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=120 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QG-2-1-3-bind"
+                        name="INSEE-SIMPSONS-QG-2-1-3"
+                        ref="INSEE-SIMPSONS-QG-2-1-3"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-entete-1-bind"
+                        name="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-entete-1"
+                        ref="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-entete-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1-bind"
+                        name="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1"
+                        ref="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2-bind"
+                        name="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2"
+                        ref="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3-bind"
+                        name="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3"
+                        ref="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-2-1-3-1-bind"
+                        name="INSEE-SIMPSONS-QOP-2-1-3-1"
+                        ref="INSEE-SIMPSONS-QOP-2-1-3-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-2-1-3-2-bind"
+                        name="INSEE-SIMPSONS-QOP-2-1-3-2"
+                        ref="INSEE-SIMPSONS-QOP-2-1-3-2"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-2-1-3-3-bind"
+                        name="INSEE-SIMPSONS-QOP-2-1-3-3"
+                        ref="INSEE-SIMPSONS-QOP-2-1-3-3"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-2-1-3-4-bind"
+                        name="INSEE-SIMPSONS-QOP-2-1-3-4"
+                        ref="INSEE-SIMPSONS-QOP-2-1-3-4"/>
+               <xf:bind id="INSEE-SIMPSONS-SEQ-2-2-bind"
+                        name="INSEE-SIMPSONS-SEQ-2-2"
+                        ref="INSEE-SIMPSONS-SEQ-2-2"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-2-2-1-1-bind"
+                        name="INSEE-SIMPSONS-QOP-2-2-1-1"
+                        ref="INSEE-SIMPSONS-QOP-2-2-1-1"/>
+               <xf:bind id="INSEE-SIMPSONS-SEQI-1-bind"
+                        name="INSEE-SIMPSONS-SEQI-1"
+                        ref="INSEE-SIMPSONS-SEQI-1"
+                        relevant="not (//INSEE-SIMPSONS-QOP-2-2-1-1!='1')">
+                  <xf:bind id="INSEE-SIMPSONS-QOP-2-2-2-1-bind"
+                           name="INSEE-SIMPSONS-QOP-2-2-2-1"
+                           ref="INSEE-SIMPSONS-QOP-2-2-2-1"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="INSEE-SIMPSONS-SEQ-3-bind"
+                     name="INSEE-SIMPSONS-SEQ-3"
+                     ref="INSEE-SIMPSONS-SEQ-3">
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-bind"
+                        name="INSEE-SIMPSONS-QG-4-1"
+                        ref="INSEE-SIMPSONS-QG-4-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-entete-1-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-entete-1"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-entete-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2-bind"
+                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2"
+                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-4-1-1-bind"
+                        name="INSEE-SIMPSONS-QOP-4-1-1"
+                        ref="INSEE-SIMPSONS-QOP-4-1-1">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-4-1-2-bind"
+                        name="INSEE-SIMPSONS-QOP-4-1-2"
+                        ref="INSEE-SIMPSONS-QOP-4-1-2">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-4-1-3-bind"
+                        name="INSEE-SIMPSONS-QOP-4-1-3"
+                        ref="INSEE-SIMPSONS-QOP-4-1-3">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-4-1-4-bind"
+                        name="INSEE-SIMPSONS-QOP-4-1-4"
+                        ref="INSEE-SIMPSONS-QOP-4-1-4">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-4-1-5-bind"
+                        name="INSEE-SIMPSONS-QOP-4-1-5"
+                        ref="INSEE-SIMPSONS-QOP-4-1-5">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-4-1-6-bind"
+                        name="INSEE-SIMPSONS-QOP-4-1-6"
+                        ref="INSEE-SIMPSONS-QOP-4-1-6">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-4-1-7-bind"
+                        name="INSEE-SIMPSONS-QOP-4-1-7"
+                        ref="INSEE-SIMPSONS-QOP-4-1-7">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-4-1-8-bind"
+                        name="INSEE-SIMPSONS-QOP-4-1-8"
+                        ref="INSEE-SIMPSONS-QOP-4-1-8">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-4-1-9-bind"
+                        name="INSEE-SIMPSONS-QOP-4-1-9"
+                        ref="INSEE-SIMPSONS-QOP-4-1-9">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-4-1-10-bind"
+                        name="INSEE-SIMPSONS-QOP-4-1-10"
+                        ref="INSEE-SIMPSONS-QOP-4-1-10">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="INSEE-SIMPSONS-SEQ-4-bind"
+                     name="INSEE-SIMPSONS-SEQ-4"
+                     ref="INSEE-SIMPSONS-SEQ-4">
+               <xf:bind id="INSEE-SIMPSONS-QOP-5-1-1-bind"
+                        name="INSEE-SIMPSONS-QOP-5-1-1"
+                        ref="INSEE-SIMPSONS-QOP-5-1-1">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QG-5-2-bind"
+                        name="INSEE-SIMPSONS-QG-5-2"
+                        ref="INSEE-SIMPSONS-QG-5-2"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1-bind"
+                        name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1"
+                        ref="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1-bind"
+                        name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1"
+                        ref="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2-bind"
+                        name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2"
+                        ref="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3-bind"
+                        name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3"
+                        ref="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4-bind"
+                        name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4"
+                        ref="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5-bind"
+                        name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5"
+                        ref="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5"/>
+               <xf:bind id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1-bind"
+                        name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1"
+                        ref="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1"/>
+               <xf:bind id="INSEE-SIMPSONS-QOP-5-2-1-bind"
+                        name="INSEE-SIMPSONS-QOP-5-2-1"
+                        ref="INSEE-SIMPSONS-QOP-5-2-1">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-5-2-2-bind"
+                        name="INSEE-SIMPSONS-QOP-5-2-2"
+                        ref="INSEE-SIMPSONS-QOP-5-2-2">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-5-2-3-bind"
+                        name="INSEE-SIMPSONS-QOP-5-2-3"
+                        ref="INSEE-SIMPSONS-QOP-5-2-3">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-5-2-4-bind"
+                        name="INSEE-SIMPSONS-QOP-5-2-4"
+                        ref="INSEE-SIMPSONS-QOP-5-2-4">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-5-2-5-bind"
+                        name="INSEE-SIMPSONS-QOP-5-2-5"
+                        ref="INSEE-SIMPSONS-QOP-5-2-5">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=9.99999999E8 and xs:integer(.)&gt;=0) else (.=&#34;&#34;)"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1-bind"
+                        name="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1"
+                        ref="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1">
+                  <xf:constraint level="warning"
+                                 value="not((number(if (//INSEE-SIMPSONS-QOP-5-1-1='') then 0 else //INSEE-SIMPSONS-QOP-5-1-1) != (number(if (//INSEE-SIMPSONS-QOP-5-2-5='') then 0 else //INSEE-SIMPSONS-QOP-5-2-5) +number(if (//INSEE-SIMPSONS-QOP-5-2-1='') then 0 else //INSEE-SIMPSONS-QOP-5-2-1) +number(if (//INSEE-SIMPSONS-QOP-5-2-2='') then 0 else //INSEE-SIMPSONS-QOP-5-2-2) +number(if (//INSEE-SIMPSONS-QOP-5-2-3='') then 0 else //INSEE-SIMPSONS-QOP-5-2-3) +number(if (//INSEE-SIMPSONS-QOP-5-2-4='') then 0 else //INSEE-SIMPSONS-QOP-5-2-4))))"/>
+               </xf:bind>
+               <xf:bind id="INSEE-SIMPSONS-QOP-5-3-1-bind"
+                        name="INSEE-SIMPSONS-QOP-5-3-1"
+                        ref="INSEE-SIMPSONS-QOP-5-3-1"/>
+            </xf:bind>
+            <xf:bind id="VALIDATION-bind"
+                     name="VALIDATION"
+                     ref="VALIDATION"
+                     relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
+            <xf:bind id="CONFIRMATION-bind"
+                     name="CONFIRMATION"
+                     ref="CONFIRMATION"
+                     relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
+            <xf:bind id="FIN-bind" name="FIN" ref="FIN"/>
+            <xf:bind id="nomSectionCourante-bind"
+                     name="nomSectionCourante"
+                     ref="stromae/util/nomSectionCourante"
+                     calculate="(instance('fr-form-instance')/*[child::* and not(name()='stromae')])[position()=number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
+            <xf:bind id="BarreFixe-bind" ref="BarreFixe"/>
+         </xf:bind>
+         <xf:instance id="fr-form-metadata" xxf:readonly="true">
+            <metadata>
+               <application-name>INSEE-SIMPSONS-SEQ</application-name>
+               <form-name>INSEE-SIMPSONS-SEQ</form-name>
+               <title xml:lang="fr">Simpsons</title>
+               <description xml:lang="fr"/>
+               <title xml:lang="en">Simpsons</title>
+               <description xml:lang="en"/>
+            </metadata>
+         </xf:instance>
+         <xf:instance id="fr-form-attachments">
+            <attachments>
+               <css mediatype="text/css" filename="" size=""/>
+               <pdf mediatype="application/pdf" filename="" size=""/>
+            </attachments>
+         </xf:instance>
+         <xf:instance id="fr-form-resources">
+            <resources>
+               <resource xml:lang="fr">
+                  <INSEE-SIMPSONS-SEQ-1>
+                     <label>I - General knowledge on the series</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-1>
+                  <INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1>
+                     <label>This module asks about your general knowledge on the
+                     series</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1>
+                  <INSEE-SIMPSONS-QOP-1-1-1>
+                     <label>➡ 1. When was the first episode of the simpsons?</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QOP-1-1-1>
+                  <INSEE-SIMPSONS-QOP-1-2-1>
+                     <label>➡ 2. Who is the producer?</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QOP-1-2-1>
+                  <INSEE-SIMPSONS-SEQ-2>
+                     <label>II - General knowledge on the characters</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-2>
+                  <INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2>
+                     <label>This module asks about your general knowledge on the
+                     characters</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2>
+                  <INSEE-SIMPSONS-SEQ-2-1>
+                     <label>1. Simpsons family</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-2-1>
+                  <INSEE-SIMPSONS-QOP-2-1-1-1>
+                     <label>&lt;p&gt;&lt;span class="bloc"&gt;➡ 1-a. In which town do the Simpsons reside?&lt;/span&gt;&lt;span class="bloc"&gt;One possible answer&lt;/span&gt;&lt;/p&gt;</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label>Springfield</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>Shelbyville</label>
+                        <value>2</value>
+                     </item>
+                     <item>
+                        <label>Seinfeld</label>
+                        <value>3</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-1-1-1>
+                  <INSEE-SIMPSONS-QOP-2-1-2-1>
+                     <label>➡ 1-b. How old is Bart?</label>
+                     <hint>Exemple : 120</hint>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 120</alert>
+                  </INSEE-SIMPSONS-QOP-2-1-2-1>
+                  <INSEE-SIMPSONS-QG-2-1-3>
+                     <label>&lt;p&gt;&lt;span class="bloc"&gt;➡ 1-c. What are the names of animals that had the simpsons
+                     family?&lt;/span&gt;&lt;span class="bloc"&gt;Several possible answers&lt;/span&gt;&lt;/p&gt;</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-2-1-3>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-entete-1>
+                     <label>CL_ANIMALS</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-entete-1>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1>
+                     <label>Santa's Little Helper</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2>
+                     <label>Snowball I</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3>
+                     <label>Coltrane</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3>
+                  <INSEE-SIMPSONS-QOP-2-1-3-1>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label/>
+                        <value>1</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-1-3-1>
+                  <INSEE-SIMPSONS-QOP-2-1-3-2>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label/>
+                        <value>1</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-1-3-2>
+                  <INSEE-SIMPSONS-QOP-2-1-3-3>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label/>
+                        <value>1</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-1-3-3>
+                  <INSEE-SIMPSONS-QOP-2-1-3-4>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label/>
+                        <value>1</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-1-3-4>
+                  <INSEE-SIMPSONS-SEQ-2-2>
+                     <label>2. Other characters</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-2-2>
+                  <INSEE-SIMPSONS-QOP-2-2-1-1>
+                     <label>➡ 2-a. Do you know Kent Brockman?</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label>Yes</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>No</label>
+                        <value>2</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-2-1-1>
+                  <INSEE-SIMPSONS-SEQI-1>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQI-1>
+                  <INSEE-SIMPSONS-QOP-2-2-2-1>
+                     <label>➡ 2-b. Can you quote one of his best reporting?</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QOP-2-2-2-1>
+                  <INSEE-SIMPSONS-SEQ-3>
+                     <label>III - Turnover</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-3>
+                  <INSEE-SIMPSONS-QG-4-1>
+                     <label>➡ 1. Please, divide the mini-market turnover by
+                     products.</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1>
+                     <label>Products</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1>
+                     <label>&lt;p&gt;&lt;b&gt;Frozen products&lt;/b&gt;&lt;/p&gt;</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2>
+                     <label>Ice creams</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3>
+                     <label>Jasper Beardly</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4>
+                     <label>&lt;p&gt;&lt;b&gt;Meat&lt;/b&gt;&lt;/p&gt;</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5>
+                     <label>Bacon</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6>
+                     <label>Pork chop</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7>
+                     <label>Chicken</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-entete-1>
+                     <label>Turnovers and proportions</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-entete-1>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1>
+                     <label>Turnover</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2>
+                     <label>Proportion of total turnover</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2>
+                  <INSEE-SIMPSONS-QOP-4-1-1>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-1>
+                  <INSEE-SIMPSONS-QOP-4-1-2>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-2>
+                  <INSEE-SIMPSONS-QOP-4-1-3>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-3>
+                  <INSEE-SIMPSONS-QOP-4-1-4>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-4>
+                  <INSEE-SIMPSONS-QOP-4-1-5>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-5>
+                  <INSEE-SIMPSONS-QOP-4-1-6>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-6>
+                  <INSEE-SIMPSONS-QOP-4-1-7>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-7>
+                  <INSEE-SIMPSONS-QOP-4-1-8>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-8>
+                  <INSEE-SIMPSONS-QOP-4-1-9>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-9>
+                  <INSEE-SIMPSONS-QOP-4-1-10>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-10>
+                  <INSEE-SIMPSONS-SEQ-4>
+                     <label>IV - Springfield</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-4>
+                  <INSEE-SIMPSONS-QOP-5-1-1>
+                     <label>➡ 1. What is the population of Springfield?</label>
+                     <hint>Exemple : 999999999</hint>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-1-1>
+                  <INSEE-SIMPSONS-QG-5-2>
+                     <label>➡ 2. Please, classify the population by age.</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1>
+                     <label>Age group</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1>
+                     <label>13 or less</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2>
+                     <label>14 to 15</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3>
+                     <label>16 to 17</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4>
+                     <label>18 to 74</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5>
+                     <label>75 or more</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1>
+                     <label>Number of people</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1>
+                  <INSEE-SIMPSONS-QOP-5-2-1>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-2-1>
+                  <INSEE-SIMPSONS-QOP-5-2-2>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-2-2>
+                  <INSEE-SIMPSONS-QOP-5-2-3>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-2-3>
+                  <INSEE-SIMPSONS-QOP-5-2-4>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-2-4>
+                  <INSEE-SIMPSONS-QOP-5-2-5>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-2-5>
+                  <INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>The total is different from the distribution. Please
+                     correct.</alert>
+                  </INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1>
+                  <INSEE-SIMPSONS-QOP-5-3-1>
+                     <label>➡ 3. And finally! In which state do The Simpsons
+                     reside?</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label>Washington</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>Kentucky</label>
+                        <value>2</value>
+                     </item>
+                     <item>
+                        <label>Ohio</label>
+                        <value>3</value>
+                     </item>
+                     <item>
+                        <label>Maine</label>
+                        <value>4</value>
+                     </item>
+                     <item>
+                        <label>North Dakota</label>
+                        <value>5</value>
+                     </item>
+                     <item>
+                        <label>Florida</label>
+                        <value>6</value>
+                     </item>
+                     <item>
+                        <label>North Takoma</label>
+                        <value>7</value>
+                     </item>
+                     <item>
+                        <label>California</label>
+                        <value>8</value>
+                     </item>
+                     <item>
+                        <label>Texas</label>
+                        <value>9</value>
+                     </item>
+                     <item>
+                        <label>Massachusetts</label>
+                        <value>10</value>
+                     </item>
+                     <item>
+                        <label>Nevada</label>
+                        <value>11</value>
+                     </item>
+                     <item>
+                        <label>Illinois</label>
+                        <value>12</value>
+                     </item>
+                     <item>
+                        <label>Not in any state, you fool!</label>
+                        <value>13</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-5-3-1>
+                  <VALIDATION>
+                     <label>VALIDATION</label>
+                  </VALIDATION>
+                  <CONFIRMATION>
+                     <label>CONFIRMATION</label>
+                  </CONFIRMATION>
+                  <FIN>
+                     <label>FIN</label>
+                  </FIN>
+                  <BarreFixe>
+                     <label>Votre </label>
+                  </BarreFixe>
+                  <avancement>
+                     <label>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</label>
+                  </avancement>
+               </resource>
+               <resource xml:lang="en">
+                  <INSEE-SIMPSONS-SEQ-1>
+                     <label>I - General knowledge on the series</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-1>
+                  <INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1>
+                     <label>This module asks about your general knowledge on the
+                     series</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1>
+                  <INSEE-SIMPSONS-QOP-1-1-1>
+                     <label>➡ 1. When was the first episode of the simpsons?</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QOP-1-1-1>
+                  <INSEE-SIMPSONS-QOP-1-2-1>
+                     <label>➡ 2. Who is the producer?</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QOP-1-2-1>
+                  <INSEE-SIMPSONS-SEQ-2>
+                     <label>II - General knowledge on the characters</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-2>
+                  <INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2>
+                     <label>This module asks about your general knowledge on the
+                     characters</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2>
+                  <INSEE-SIMPSONS-SEQ-2-1>
+                     <label>1. Simpsons family</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-2-1>
+                  <INSEE-SIMPSONS-QOP-2-1-1-1>
+                     <label>&lt;p&gt;&lt;span class="bloc"&gt;➡ 1-a. In which town do the Simpsons reside?&lt;/span&gt;&lt;span class="bloc"&gt;One possible answer&lt;/span&gt;&lt;/p&gt;</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label>Springfield</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>Shelbyville</label>
+                        <value>2</value>
+                     </item>
+                     <item>
+                        <label>Seinfeld</label>
+                        <value>3</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-1-1-1>
+                  <INSEE-SIMPSONS-QOP-2-1-2-1>
+                     <label>➡ 1-b. How old is Bart?</label>
+                     <hint>Exemple : 120</hint>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 120</alert>
+                  </INSEE-SIMPSONS-QOP-2-1-2-1>
+                  <INSEE-SIMPSONS-QG-2-1-3>
+                     <label>&lt;p&gt;&lt;span class="bloc"&gt;➡ 1-c. What are the names of animals that had the simpsons
+                     family?&lt;/span&gt;&lt;span class="bloc"&gt;Several possible answers&lt;/span&gt;&lt;/p&gt;</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-2-1-3>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-entete-1>
+                     <label>CL_ANIMALS</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-entete-1>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1>
+                     <label>Santa's Little Helper</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2>
+                     <label>Snowball I</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2>
+                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3>
+                     <label>Coltrane</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3>
+                  <INSEE-SIMPSONS-QOP-2-1-3-1>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label/>
+                        <value>1</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-1-3-1>
+                  <INSEE-SIMPSONS-QOP-2-1-3-2>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label/>
+                        <value>1</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-1-3-2>
+                  <INSEE-SIMPSONS-QOP-2-1-3-3>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label/>
+                        <value>1</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-1-3-3>
+                  <INSEE-SIMPSONS-QOP-2-1-3-4>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label/>
+                        <value>1</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-1-3-4>
+                  <INSEE-SIMPSONS-SEQ-2-2>
+                     <label>2. Other characters</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-2-2>
+                  <INSEE-SIMPSONS-QOP-2-2-1-1>
+                     <label>➡ 2-a. Do you know Kent Brockman?</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label>Yes</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>No</label>
+                        <value>2</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-2-2-1-1>
+                  <INSEE-SIMPSONS-SEQI-1>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQI-1>
+                  <INSEE-SIMPSONS-QOP-2-2-2-1>
+                     <label>➡ 2-b. Can you quote one of his best reporting?</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QOP-2-2-2-1>
+                  <INSEE-SIMPSONS-SEQ-3>
+                     <label>III - Turnover</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-3>
+                  <INSEE-SIMPSONS-QG-4-1>
+                     <label>➡ 1. Please, divide the mini-market turnover by
+                     products.</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1>
+                     <label>Products</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1>
+                     <label>&lt;p&gt;&lt;b&gt;Frozen products&lt;/b&gt;&lt;/p&gt;</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2>
+                     <label>Ice creams</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3>
+                     <label>Jasper Beardly</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4>
+                     <label>&lt;p&gt;&lt;b&gt;Meat&lt;/b&gt;&lt;/p&gt;</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5>
+                     <label>Bacon</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6>
+                     <label>Pork chop</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7>
+                     <label>Chicken</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-entete-1>
+                     <label>Turnovers and proportions</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-entete-1>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1>
+                     <label>Turnover</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1>
+                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2>
+                     <label>Proportion of total turnover</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2>
+                  <INSEE-SIMPSONS-QOP-4-1-1>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-1>
+                  <INSEE-SIMPSONS-QOP-4-1-2>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-2>
+                  <INSEE-SIMPSONS-QOP-4-1-3>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-3>
+                  <INSEE-SIMPSONS-QOP-4-1-4>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-4>
+                  <INSEE-SIMPSONS-QOP-4-1-5>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-5>
+                  <INSEE-SIMPSONS-QOP-4-1-6>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-6>
+                  <INSEE-SIMPSONS-QOP-4-1-7>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-7>
+                  <INSEE-SIMPSONS-QOP-4-1-8>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-8>
+                  <INSEE-SIMPSONS-QOP-4-1-9>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-9>
+                  <INSEE-SIMPSONS-QOP-4-1-10>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
+                  </INSEE-SIMPSONS-QOP-4-1-10>
+                  <INSEE-SIMPSONS-SEQ-4>
+                     <label>IV - Springfield</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-SEQ-4>
+                  <INSEE-SIMPSONS-QOP-5-1-1>
+                     <label>➡ 1. What is the population of Springfield?</label>
+                     <hint>Exemple : 999999999</hint>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-1-1>
+                  <INSEE-SIMPSONS-QG-5-2>
+                     <label>➡ 2. Please, classify the population by age.</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1>
+                     <label>Age group</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1>
+                     <label>13 or less</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2>
+                     <label>14 to 15</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3>
+                     <label>16 to 17</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4>
+                     <label>18 to 74</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5>
+                     <label>75 or more</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5>
+                  <INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1>
+                     <label>Number of people</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                  </INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1>
+                  <INSEE-SIMPSONS-QOP-5-2-1>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-2-1>
+                  <INSEE-SIMPSONS-QOP-5-2-2>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-2-2>
+                  <INSEE-SIMPSONS-QOP-5-2-3>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-2-3>
+                  <INSEE-SIMPSONS-QOP-5-2-4>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-2-4>
+                  <INSEE-SIMPSONS-QOP-5-2-5>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
+                  </INSEE-SIMPSONS-QOP-5-2-5>
+                  <INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1>
+                     <label/>
+                     <hint/>
+                     <help/>
+                     <alert>The total is different from the distribution. Please
+                     correct.</alert>
+                  </INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1>
+                  <INSEE-SIMPSONS-QOP-5-3-1>
+                     <label>➡ 3. And finally! In which state do The Simpsons
+                     reside?</label>
+                     <hint/>
+                     <help/>
+                     <alert/>
+                     <item>
+                        <label>Washington</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>Kentucky</label>
+                        <value>2</value>
+                     </item>
+                     <item>
+                        <label>Ohio</label>
+                        <value>3</value>
+                     </item>
+                     <item>
+                        <label>Maine</label>
+                        <value>4</value>
+                     </item>
+                     <item>
+                        <label>North Dakota</label>
+                        <value>5</value>
+                     </item>
+                     <item>
+                        <label>Florida</label>
+                        <value>6</value>
+                     </item>
+                     <item>
+                        <label>North Takoma</label>
+                        <value>7</value>
+                     </item>
+                     <item>
+                        <label>California</label>
+                        <value>8</value>
+                     </item>
+                     <item>
+                        <label>Texas</label>
+                        <value>9</value>
+                     </item>
+                     <item>
+                        <label>Massachusetts</label>
+                        <value>10</value>
+                     </item>
+                     <item>
+                        <label>Nevada</label>
+                        <value>11</value>
+                     </item>
+                     <item>
+                        <label>Illinois</label>
+                        <value>12</value>
+                     </item>
+                     <item>
+                        <label>Not in any state, you fool!</label>
+                        <value>13</value>
+                     </item>
+                  </INSEE-SIMPSONS-QOP-5-3-1>
+                  <VALIDATION>
+                     <label>VALIDATION</label>
+                  </VALIDATION>
+                  <CONFIRMATION>
+                     <label>CONFIRMATION</label>
+                  </CONFIRMATION>
+                  <FIN>
+                     <label>FIN</label>
+                  </FIN>
+                  <BarreFixe>
+                     <label>Votre </label>
+                  </BarreFixe>
+                  <avancement>
+                     <label>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</label>
+                  </avancement>
+               </resource>
+            </resources>
+         </xf:instance>
+         <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
+                  id="fr-form-resources-bind"
+                  ref="instance('fr-form-resources')">
+            <xf:bind id="bind-resource-fr"
+                     name="resource-fr"
+                     ref="resource[@xml:lang='fr']"/>
+            <xf:bind id="bind-resource-en"
+                     name="resource-en"
+                     ref="resource[@xml:lang='en']"/>
+         </xf:bind>
+         <xf:instance id="fr-service-request-instance" xxf:exclude-result-prefixes="#all">
+            <request/>
+         </xf:instance>
+         <xf:instance id="fr-service-response-instance" xxf:exclude-result-prefixes="#all">
+            <response/>
+         </xf:instance>
+         <xf:instance id="fr-form-util">
+            <util>
+               <commencer/>
+               <precedent/>
+               <suivant/>
+               <envoyer/>
+               <confirmationNon/>
+               <confirmationOui/>
+               <envoi/>
+               <cliquable/>
+               <pourcentageAvancement/>
+               <avancement/>
+               <remontePage/>
+               <pages>
+                  <INSEE-SIMPSONS-SEQ-1/>
+                  <INSEE-SIMPSONS-SEQ-2/>
+                  <INSEE-SIMPSONS-SEQ-3/>
+                  <INSEE-SIMPSONS-SEQ-4/>
+                  <VALIDATION/>
+                  <CONFIRMATION/>
+                  <FIN/>
+               </pages>
+               <precedentSuivant/>
+               <changementPageEffectue/>
+               <messageConfirmation/>
+            </util>
+         </xf:instance>
+         <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
+                  id="fr-form-util-binds"
+                  ref="instance('fr-form-util')">
+            <xf:bind id="commencer-bind"
+                     relevant="instance('fr-form-instance')/stromae/util/sectionCourante='1'"
+                     ref="commencer"/>
+            <xf:bind id="precedent-bind"
+                     relevant="not(instance('fr-form-instance')/stromae/util/sectionCourante='1' or number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt;count(instance('fr-form-util')/pages/*)-2)"
+                     ref="precedent"/>
+            <xf:bind id="suivant-bind"
+                     relevant="not(instance('fr-form-instance')/stromae/util/sectionCourante='1' or number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt;count(instance('fr-form-util')/pages/*)-3)"
+                     ref="suivant"/>
+            <xf:bind id="envoyer-bind"
+                     ref="envoyer"
+                     readonly="instance('fr-form-util')/cliquable='non'"/>
+            <xf:bind id="confirmationNon-bind" ref="confirmationNon"/>
+            <xf:bind id="confirmationOui-bind" ref="confirmationOui"/>
+            <xf:bind id="envoi-bind"
+                     relevant="instance('fr-form-instance')/stromae/util/sectionCourante=string(count(instance('fr-form-instance')/*[child::* and not(name()='stromae')])) and instance('fr-form-instance')/stromae/util/expedie='non'"
+                     ref="envoi"/>
+            <xf:bind id="pourcentageAvancement-bind"
+                     name="pourcentageAvancement"
+                     ref="pourcentageAvancement"
+                     calculate="if (number(instance('fr-form-instance')/stromae/util/sectionCourante)=1) then '0'                     else (if (number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt;count(instance('fr-form-util')/pages/*)-2) then '100'                     else round(((number(instance('fr-form-instance')/stromae/util/sectionCourante)-2) div number(count(instance('fr-form-util')/pages/*)-4))*100))"/>
+            <xf:bind id="avancement-bind" ref="avancement"/>
+            <xf:bind id="remontePage-bind" ref="remontePage"/>
+            <xf:bind id="messageConfirmation-bind"
+                     ref="messageConfirmation"
+                     name="messageConfirmation"
+                     calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"/>
+            <xf:bind id="pages-bind" ref="pages">
+               <xf:bind id="page-INSEE-SIMPSONS-SEQ-1-bind"
+                        name="INSEE-SIMPSONS-SEQ-1"
+                        ref="INSEE-SIMPSONS-SEQ-1">
+                  <xf:calculate value="xxf:evaluate-bind-property(&#34;INSEE-SIMPSONS-SEQ-1-bind&#34;,&#34;relevant&#34;)"/>
+               </xf:bind>
+               <xf:bind id="page-INSEE-SIMPSONS-SEQ-2-bind"
+                        name="INSEE-SIMPSONS-SEQ-2"
+                        ref="INSEE-SIMPSONS-SEQ-2">
+                  <xf:calculate value="xxf:evaluate-bind-property(&#34;INSEE-SIMPSONS-SEQ-2-bind&#34;,&#34;relevant&#34;)"/>
+               </xf:bind>
+               <xf:bind id="page-INSEE-SIMPSONS-SEQ-3-bind"
+                        name="INSEE-SIMPSONS-SEQ-3"
+                        ref="INSEE-SIMPSONS-SEQ-3">
+                  <xf:calculate value="xxf:evaluate-bind-property(&#34;INSEE-SIMPSONS-SEQ-3-bind&#34;,&#34;relevant&#34;)"/>
+               </xf:bind>
+               <xf:bind id="page-INSEE-SIMPSONS-SEQ-4-bind"
+                        name="INSEE-SIMPSONS-SEQ-4"
+                        ref="INSEE-SIMPSONS-SEQ-4">
+                  <xf:calculate value="xxf:evaluate-bind-property(&#34;INSEE-SIMPSONS-SEQ-4-bind&#34;,&#34;relevant&#34;)"/>
+                  <xf:constraint value="not((number(if (instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-1-1='') then 0 else instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-1-1) != (number(if (instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-2-5='') then 0 else instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-2-5) +number(if (instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-2-1='') then 0 else instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-2-1) +number(if (instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-2-2='') then 0 else instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-2-2) +number(if (instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-2-3='') then 0 else instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-2-3) +number(if (instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-2-4='') then 0 else instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-5-2-4))))"/>
+               </xf:bind>
+            </xf:bind>
+         </xf:bind>
+         <xf:submission id="enregistrer"
+                        method="post"
+                        ref="instance('fr-form-instance')"
+                        replace="none"
+                        relevant="false"
+                        resource="{xxf:property(&#34;server-exist-orbeon&#34;)}/restxq/{xxf:property(&#34;enregistrer-service&#34;)}/simpsons/v1/{xxf:get-request-parameter(&#34;unite-enquete&#34;)}">
+            <xf:action ev:event="xforms-submit-error">
+               <xf:message>Problème lors de l'enregistrement de vos réponses.</xf:message>
+            </xf:action>
+            <xf:action ev:event="xforms-submit-done">
+               <xf:action if="instance('fr-form-util')/precedentSuivant='0'">
+                  <xf:message>Vos réponses ont bien été enregistrées.</xf:message>
+               </xf:action>
+               <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
+            </xf:action>
+         </xf:submission>
+         <xf:submission id="expedier"
+                        method="post"
+                        ref="instance('fr-form-instance')"
+                        replace="none"
+                        relevant="false"
+                        resource="{xxf:property(&#34;server-exist-orbeon&#34;)}/restxq/{xxf:property(&#34;enregistrer-service&#34;)}/simpsons/v1/{xxf:get-request-parameter(&#34;unite-enquete&#34;)}">
+            <xf:action ev:event="xforms-submit-error">
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
+                            value="string('non')"/>
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                            value="string(number(instance('fr-form-instance')/stromae/util/sectionCourante)-1)"/>
+               <xf:message>Problème lors de l'expédition de vos réponses.</xf:message>
+            </xf:action>
+            <xf:action ev:event="xforms-submit-done">
+               <xf:toggle case="{instance(&#34;fr-form-instance&#34;)/stromae/util/sectionCourante}"/>
+               <xf:setfocus control="remontePage-control"/>
+               <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
+            </xf:action>
+         </xf:submission>
+         <xf:submission id="expedierPdf"
+                        method="post"
+                        replace="none"
+                        resource="/expedier/simpsons/{xxf:get-request-parameter(&#34;unite-enquete&#34;)}?modele=v1"/>
+         <xf:action ev:event="xforms-ready">
+            <xf:toggle case="{instance(&#34;fr-form-instance&#34;)/stromae/util/sectionCourante}"/>
+            <xxf:show if="instance('fr-form-instance')/stromae/util/expedie='non' and not(instance('fr-form-instance')/stromae/util/sectionCourante='1')"
+                      dialog="bienvenue"/>
+         </xf:action>
+         <xf:action ev:event="ChangementPage">
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*">
+               <xf:dispatch name="DOMFocusOut" target="{concat(context()/@idVariable,&#34;-control&#34;)}"/>
+            </xf:action>
+            <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                         value="string('false')"/>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true()))">
+               <xxf:show ev:event="DOMActivate" dialog="erreur"/>
+               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                            value="string('true')"/>
+            </xf:action>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                     and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false()">
+               <xxf:show ev:event="DOMActivate" dialog="avertissement"/>
+               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                            value="string('true')"/>
+            </xf:action>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false())">
+               <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
+            </xf:action>
+         </xf:action>
+         <xf:action ev:event="ChangementPageEffectif">
+            <xf:var name="nbPagesApresPageFuture"
+                    as="xs:number"
+                    value="if (instance(&#34;fr-form-util&#34;)/precedentSuivant=&#34;1&#34;) then count((instance(&#34;fr-form-util&#34;)/pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/nomSectionCourante]/following-sibling::*[not(text()=&#34;false&#34;)])[1]/following-sibling::*) else count((instance(&#34;fr-form-util&#34;)/pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/nomSectionCourante]/preceding-sibling::*[not(text()=&#34;false&#34;)])[last()]/following-sibling::*)"/>
+            <xf:var name="nbPagesApresPageCourante"
+                    as="xs:number"
+                    value="count(instance(&#34;fr-form-util&#34;)/pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/nomSectionCourante]/following-sibling::*)"/>
+            <xf:var name="pageCourante"
+                    as="xs:number"
+                    value="number(instance(&#34;fr-form-instance&#34;)/stromae/util/sectionCourante)"/>
+            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                         value="string($pageCourante + $nbPagesApresPageCourante - $nbPagesApresPageFuture)"/>
+            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
+                         value="fn:format-dateTime(fn:current-dateTime(),                     '[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
+            <xf:toggle case="{instance(&#34;fr-form-instance&#34;)/stromae/util/sectionCourante}"/>
+            <xf:send submission="enregistrer"/>
+            <xf:setfocus control="remontePage-control"/>
+         </xf:action>
+      </xf:model>
+   </xhtml:head>
+   <xhtml:body>
+      <fr:view>
+         <fr:body xmlns:xbl="http://www.w3.org/ns/xbl"
+                  xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
+                  xmlns:oxf="http://www.orbeon.com/oxf/processors"
+                  xmlns:p="http://www.orbeon.com/oxf/pipeline">
+            <xf:input id="remontePage-control"
+                      bind="remontePage-bind"
+                      class="remontePage"/>
+            <xhtml:div class="barreFixe">
+               <xf:output id="BarreFixe-control" bind="BarreFixe-bind">
+                  <xf:label ref="$form-resources/BarreFixe/label" mediatype="text/html"/>
+               </xf:output>
+               <xhtml:span class="droite">
+                  <xf:output id="avancement-control" bind="avancement-bind">
+                     <xf:label ref="$form-resources/avancement/label" mediatype="text/html"/>
+                  </xf:output>
+                  <xhtml:progress id="avancement"
+                                  max="100"
+                                  value="{instance(&#34;fr-form-util&#34;)/pourcentageAvancement}"/>
+                  <xf:output id="pourcentageAvancement"
+                             ref="instance('fr-form-util')/pourcentageAvancement"/> %</xhtml:span>
+            </xhtml:div>
+            <xf:switch id="corpsSection">
+               <xf:case id="1">
+                  <fr:section id="INSEE-SIMPSONS-SEQ-1-control"
+                              bind="INSEE-SIMPSONS-SEQ-1-bind"
+                              name="INSEE-SIMPSONS-SEQ-1">
+                     <xf:label ref="$form-resources/INSEE-SIMPSONS-SEQ-1/label"/>
+                     <xf:output id="INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1-control"
+                                name="INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1"
+                                bind="INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1-bind"
+                                xxf:order="label control hint help alert">
+                        <xf:label ref="$form-resources/INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1/label"/>
+                        <xf:hint ref="$form-resources/INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1/hint"/>
+                        <xf:help ref="$form-resources/INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1/help"/>
+                        <xf:alert ref="$form-resources/INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1/alert"/>
+                     </xf:output>
+                     <xf:input id="INSEE-SIMPSONS-QOP-1-1-1-control"
+                               name="INSEE-SIMPSONS-QOP-1-1-1"
+                               bind="INSEE-SIMPSONS-QOP-1-1-1-bind"
+                               class="question"
+                               xxf:order="label control hint help alert">
+                        <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-1-1-1/label"/>
+                        <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-1-1-1/hint"/>
+                        <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-1-1-1/help"/>
+                        <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-1-1-1/alert"/>
+                     </xf:input>
+                     <xf:input id="INSEE-SIMPSONS-QOP-1-2-1-control"
+                               name="INSEE-SIMPSONS-QOP-1-2-1"
+                               bind="INSEE-SIMPSONS-QOP-1-2-1-bind"
+                               class="question texte texte30"
+                               xxf:order="label control hint help alert"
+                               xxf:maxlength="30">
+                        <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-1-2-1/label"/>
+                        <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-1-2-1/hint"/>
+                        <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-1-2-1/help"/>
+                        <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-1-2-1/alert"/>
+                     </xf:input>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="2">
+                  <fr:section id="INSEE-SIMPSONS-SEQ-2-control"
+                              bind="INSEE-SIMPSONS-SEQ-2-bind"
+                              name="INSEE-SIMPSONS-SEQ-2">
+                     <xf:label ref="$form-resources/INSEE-SIMPSONS-SEQ-2/label"/>
+                     <xf:output id="INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2-control"
+                                name="INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2"
+                                bind="INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2-bind"
+                                xxf:order="label control hint help alert">
+                        <xf:label ref="$form-resources/INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2/label"/>
+                        <xf:hint ref="$form-resources/INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2/hint"/>
+                        <xf:help ref="$form-resources/INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2/help"/>
+                        <xf:alert ref="$form-resources/INSEE-SIMPSONS-SEQ-2-INSEE-SIMPSONS-IC-2/alert"/>
+                     </xf:output>
+                     <xhtml:div class="paragraphe">
+                        <xhtml:h3>
+                           <xf:output id="INSEE-SIMPSONS-SEQ-2-1-control" bind="INSEE-SIMPSONS-SEQ-2-1-bind">
+                              <xf:label ref="$form-resources/INSEE-SIMPSONS-SEQ-2-1/label"
+                                        class="paragraphe"
+                                        mediatype="text/html"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <xf:select1 id="INSEE-SIMPSONS-QOP-2-1-1-1-control"
+                                    name="INSEE-SIMPSONS-QOP-2-1-1-1"
+                                    bind="INSEE-SIMPSONS-QOP-2-1-1-1-bind"
+                                    appearance="full"
+                                    class="question"
+                                    xxf:order="label control hint help alert">
+                           <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-1-1/label"
+                                     mediatype="text/html"/>
+                           <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-1-1/hint"/>
+                           <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-1-1/help"/>
+                           <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-1-1/alert"/>
+                           <xf:itemset ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-1-1/item">
+                              <xf:label ref="label"/>
+                              <xf:value ref="value"/>
+                           </xf:itemset>
+                        </xf:select1>
+                        <xf:input id="INSEE-SIMPSONS-QOP-2-1-2-1-control"
+                                  name="INSEE-SIMPSONS-QOP-2-1-2-1"
+                                  bind="INSEE-SIMPSONS-QOP-2-1-2-1-bind"
+                                  class="question nombre"
+                                  xxf:order="label control hint help alert"
+                                  xxf:maxlength="3">
+                           <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-2-1/label"/>
+                           <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-2-1/hint"/>
+                           <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-2-1/help"/>
+                           <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-2-1/alert"/>
+                        </xf:input>
+                        <xf:output id="INSEE-SIMPSONS-QG-2-1-3-control"
+                                   name="INSEE-SIMPSONS-QG-2-1-3"
+                                   bind="INSEE-SIMPSONS-QG-2-1-3-bind"
+                                   class="question fauxTableau"
+                                   xxf:order="label control hint help alert">
+                           <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3/label"
+                                     mediatype="text/html"/>
+                           <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3/hint"/>
+                           <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3/help"/>
+                           <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3/alert"/>
+                        </xf:output>
+                        <xhtml:table name="INSEE-SIMPSONS-QG-2-1-3" class="question fauxTableau">
+                           <xhtml:colgroup>
+                              <xhtml:col span="1"/>
+                           </xhtml:colgroup>
+                           <xhtml:thead/>
+                           <xhtml:tbody>
+                              <xhtml:tr>
+                                 <xhtml:th colspan="1" rowspan="1">
+                                    <xf:output id="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1-control"
+                                               name="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1"
+                                               bind="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1-bind"
+                                               xxf:order="label control hint help alert">
+                                       <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1/label"/>
+                                       <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1/hint"/>
+                                       <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1/help"/>
+                                       <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1/alert"/>
+                                    </xf:output>
+                                 </xhtml:th>
+                                 <xhtml:td align="center">
+                                    <xf:select id="INSEE-SIMPSONS-QOP-2-1-3-1-control"
+                                               name="INSEE-SIMPSONS-QOP-2-1-3-1"
+                                               bind="INSEE-SIMPSONS-QOP-2-1-3-1-bind"
+                                               appearance="full"
+                                               xxf:order="label control hint help alert">
+                                       <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-1/label"/>
+                                       <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-1/hint"/>
+                                       <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-1/help"/>
+                                       <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-1/alert"/>
+                                       <xf:itemset ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-1/item">
+                                          <xf:label ref="label"/>
+                                          <xf:value ref="value"/>
+                                       </xf:itemset>
+                                       <xf:action ev:event="xforms-value-changed"
+                                                  if="substring-after(instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-2-1-3-1,&#34; &#34;) ne &#34;&#34;">
+                                          <xf:setvalue ref="instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-2-1-3-1"
+                                                       value="substring-after(instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-2-1-3-1,&#34; &#34;)"/>
+                                       </xf:action>
+                                    </xf:select>
+                                 </xhtml:td>
+                              </xhtml:tr>
+                              <xhtml:tr>
+                                 <xhtml:th colspan="1" rowspan="1">
+                                    <xf:output id="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2-control"
+                                               name="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2"
+                                               bind="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2-bind"
+                                               xxf:order="label control hint help alert">
+                                       <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2/label"/>
+                                       <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2/hint"/>
+                                       <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2/help"/>
+                                       <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2/alert"/>
+                                    </xf:output>
+                                 </xhtml:th>
+                                 <xhtml:td align="center">
+                                    <xf:select id="INSEE-SIMPSONS-QOP-2-1-3-2-control"
+                                               name="INSEE-SIMPSONS-QOP-2-1-3-2"
+                                               bind="INSEE-SIMPSONS-QOP-2-1-3-2-bind"
+                                               appearance="full"
+                                               xxf:order="label control hint help alert">
+                                       <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-2/label"/>
+                                       <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-2/hint"/>
+                                       <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-2/help"/>
+                                       <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-2/alert"/>
+                                       <xf:itemset ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-2/item">
+                                          <xf:label ref="label"/>
+                                          <xf:value ref="value"/>
+                                       </xf:itemset>
+                                       <xf:action ev:event="xforms-value-changed"
+                                                  if="substring-after(instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-2-1-3-2,&#34; &#34;) ne &#34;&#34;">
+                                          <xf:setvalue ref="instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-2-1-3-2"
+                                                       value="substring-after(instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-2-1-3-2,&#34; &#34;)"/>
+                                       </xf:action>
+                                    </xf:select>
+                                 </xhtml:td>
+                              </xhtml:tr>
+                              <xhtml:tr>
+                                 <xhtml:th colspan="1" rowspan="1">
+                                    <xf:output id="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3-control"
+                                               name="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3"
+                                               bind="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3-bind"
+                                               xxf:order="label control hint help alert">
+                                       <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3/label"/>
+                                       <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3/hint"/>
+                                       <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3/help"/>
+                                       <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3/alert"/>
+                                    </xf:output>
+                                 </xhtml:th>
+                                 <xhtml:td align="center">
+                                    <xf:select id="INSEE-SIMPSONS-QOP-2-1-3-3-control"
+                                               name="INSEE-SIMPSONS-QOP-2-1-3-3"
+                                               bind="INSEE-SIMPSONS-QOP-2-1-3-3-bind"
+                                               appearance="full"
+                                               xxf:order="label control hint help alert">
+                                       <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-3/label"/>
+                                       <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-3/hint"/>
+                                       <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-3/help"/>
+                                       <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-3/alert"/>
+                                       <xf:itemset ref="$form-resources/INSEE-SIMPSONS-QOP-2-1-3-3/item">
+                                          <xf:label ref="label"/>
+                                          <xf:value ref="value"/>
+                                       </xf:itemset>
+                                       <xf:action ev:event="xforms-value-changed"
+                                                  if="substring-after(instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-2-1-3-3,&#34; &#34;) ne &#34;&#34;">
+                                          <xf:setvalue ref="instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-2-1-3-3"
+                                                       value="substring-after(instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-QOP-2-1-3-3,&#34; &#34;)"/>
+                                       </xf:action>
+                                    </xf:select>
+                                 </xhtml:td>
+                              </xhtml:tr>
+                           </xhtml:tbody>
+                        </xhtml:table>
+                     </xhtml:div>
+                     <xhtml:div class="paragraphe">
+                        <xhtml:h3>
+                           <xf:output id="INSEE-SIMPSONS-SEQ-2-2-control" bind="INSEE-SIMPSONS-SEQ-2-2-bind">
+                              <xf:label ref="$form-resources/INSEE-SIMPSONS-SEQ-2-2/label"
+                                        class="paragraphe"
+                                        mediatype="text/html"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <xf:select1 id="INSEE-SIMPSONS-QOP-2-2-1-1-control"
+                                    name="INSEE-SIMPSONS-QOP-2-2-1-1"
+                                    bind="INSEE-SIMPSONS-QOP-2-2-1-1-bind"
+                                    appearance="full"
+                                    class="question"
+                                    xxf:order="label control hint help alert">
+                           <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-2-2-1-1/label"/>
+                           <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-2-2-1-1/hint"/>
+                           <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-2-2-1-1/help"/>
+                           <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-2-2-1-1/alert"/>
+                           <xf:itemset ref="$form-resources/INSEE-SIMPSONS-QOP-2-2-1-1/item">
+                              <xf:label ref="label"/>
+                              <xf:value ref="value"/>
+                           </xf:itemset>
+                           <xf:action ev:event="xforms-value-changed"
+                                      if="not(xxf:evaluate-bind-property(&#34;INSEE-SIMPSONS-SEQI-1-bind&#34;,&#34;relevant&#34;))"
+                                      iterate="instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-SEQI-1//*">
+                              <xf:setvalue ref="." value="''"/>
+                           </xf:action>
+                        </xf:select1>
+                        <xf:group id="INSEE-SIMPSONS-SEQI-1-control" bind="INSEE-SIMPSONS-SEQI-1-bind">
+                           <xf:input id="INSEE-SIMPSONS-QOP-2-2-2-1-control"
+                                     name="INSEE-SIMPSONS-QOP-2-2-2-1"
+                                     bind="INSEE-SIMPSONS-QOP-2-2-2-1-bind"
+                                     class="question texte texte100"
+                                     xxf:order="label control hint help alert"
+                                     xxf:maxlength="100">
+                              <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-2-2-2-1/label"/>
+                              <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-2-2-2-1/hint"/>
+                              <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-2-2-2-1/help"/>
+                              <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-2-2-2-1/alert"/>
+                           </xf:input>
+                        </xf:group>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="3">
+                  <fr:section id="INSEE-SIMPSONS-SEQ-3-control"
+                              bind="INSEE-SIMPSONS-SEQ-3-bind"
+                              name="INSEE-SIMPSONS-SEQ-3">
+                     <xf:label ref="$form-resources/INSEE-SIMPSONS-SEQ-3/label"/>
+                     <xf:output id="INSEE-SIMPSONS-QG-4-1-control"
+                                name="INSEE-SIMPSONS-QG-4-1"
+                                bind="INSEE-SIMPSONS-QG-4-1-bind"
+                                class="question tableauComplexe"
+                                xxf:order="label control hint help alert">
+                        <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1/label"/>
+                        <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1/hint"/>
+                        <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1/help"/>
+                        <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1/alert"/>
+                     </xf:output>
+                     <xhtml:table name="INSEE-SIMPSONS-QG-4-1" class="question tableauComplexe">
+                        <xhtml:colgroup>
+                           <xhtml:col span="1"/>
+                        </xhtml:colgroup>
+                        <xhtml:thead>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1-control"
+                                            name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1"
+                                            bind="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-entete-1/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1-control"
+                                            name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1"
+                                            bind="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2-control"
+                                            name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2"
+                                            bind="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                           </xhtml:tr>
+                        </xhtml:thead>
+                        <xhtml:tbody>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1-control"
+                                            name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1"
+                                            bind="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1/label"
+                                              mediatype="text/html"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-1/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td colspan="2"/>
+                           </xhtml:tr>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2-control"
+                                            name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2"
+                                            bind="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-2/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-4-1-1-control"
+                                           name="INSEE-SIMPSONS-QOP-4-1-1"
+                                           bind="INSEE-SIMPSONS-QOP-4-1-1-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="9">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-1/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-1/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-1/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-1/alert"/>
+                                 </xf:input>
+                              </xhtml:td>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-4-1-6-control"
+                                           name="INSEE-SIMPSONS-QOP-4-1-6"
+                                           bind="INSEE-SIMPSONS-QOP-4-1-6-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="3">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-6/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-6/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-6/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-6/alert"/>
+                                 </xf:input>
+                              </xhtml:td>
+                           </xhtml:tr>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3-control"
+                                            name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3"
+                                            bind="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-3/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-4-1-2-control"
+                                           name="INSEE-SIMPSONS-QOP-4-1-2"
+                                           bind="INSEE-SIMPSONS-QOP-4-1-2-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="9">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-2/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-2/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-2/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-2/alert"/>
+                                 </xf:input>
+                              </xhtml:td>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-4-1-7-control"
+                                           name="INSEE-SIMPSONS-QOP-4-1-7"
+                                           bind="INSEE-SIMPSONS-QOP-4-1-7-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="3">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-7/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-7/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-7/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-7/alert"/>
+                                 </xf:input>
+                              </xhtml:td>
+                           </xhtml:tr>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4-control"
+                                            name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4"
+                                            bind="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4/label"
+                                              mediatype="text/html"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-4/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td colspan="2"/>
+                           </xhtml:tr>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5-control"
+                                            name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5"
+                                            bind="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-4-1-3-control"
+                                           name="INSEE-SIMPSONS-QOP-4-1-3"
+                                           bind="INSEE-SIMPSONS-QOP-4-1-3-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="9">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-3/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-3/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-3/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-3/alert"/>
+                                 </xf:input>
+                              </xhtml:td>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-4-1-8-control"
+                                           name="INSEE-SIMPSONS-QOP-4-1-8"
+                                           bind="INSEE-SIMPSONS-QOP-4-1-8-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="3">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-8/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-8/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-8/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-8/alert"/>
+                                 </xf:input>
+                              </xhtml:td>
+                           </xhtml:tr>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6-control"
+                                            name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6"
+                                            bind="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-4-1-4-control"
+                                           name="INSEE-SIMPSONS-QOP-4-1-4"
+                                           bind="INSEE-SIMPSONS-QOP-4-1-4-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="9">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-4/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-4/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-4/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-4/alert"/>
+                                 </xf:input>
+                              </xhtml:td>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-4-1-9-control"
+                                           name="INSEE-SIMPSONS-QOP-4-1-9"
+                                           bind="INSEE-SIMPSONS-QOP-4-1-9-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="3">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-9/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-9/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-9/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-9/alert"/>
+                                 </xf:input>
+                              </xhtml:td>
+                           </xhtml:tr>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7-control"
+                                            name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7"
+                                            bind="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-4-1-5-control"
+                                           name="INSEE-SIMPSONS-QOP-4-1-5"
+                                           bind="INSEE-SIMPSONS-QOP-4-1-5-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="9">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-5/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-5/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-5/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-5/alert"/>
+                                 </xf:input>
+                              </xhtml:td>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-4-1-10-control"
+                                           name="INSEE-SIMPSONS-QOP-4-1-10"
+                                           bind="INSEE-SIMPSONS-QOP-4-1-10-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="3">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-10/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-10/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-10/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-4-1-10/alert"/>
+                                 </xf:input>
+                              </xhtml:td>
+                           </xhtml:tr>
+                        </xhtml:tbody>
+                     </xhtml:table>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="4">
+                  <fr:section id="INSEE-SIMPSONS-SEQ-4-control"
+                              bind="INSEE-SIMPSONS-SEQ-4-bind"
+                              name="INSEE-SIMPSONS-SEQ-4">
+                     <xf:label ref="$form-resources/INSEE-SIMPSONS-SEQ-4/label"/>
+                     <xf:input id="INSEE-SIMPSONS-QOP-5-1-1-control"
+                               name="INSEE-SIMPSONS-QOP-5-1-1"
+                               bind="INSEE-SIMPSONS-QOP-5-1-1-bind"
+                               class="question nombre"
+                               xxf:order="label control hint help alert"
+                               xxf:maxlength="9">
+                        <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-5-1-1/label"/>
+                        <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-5-1-1/hint"/>
+                        <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-5-1-1/help"/>
+                        <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-5-1-1/alert"/>
+                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                     name="DOMFocusOut"
+                                     target="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1-control"/>
+                     </xf:input>
+                     <xf:output id="INSEE-SIMPSONS-QG-5-2-control"
+                                name="INSEE-SIMPSONS-QG-5-2"
+                                bind="INSEE-SIMPSONS-QG-5-2-bind"
+                                class="question tableauComplexe"
+                                xxf:order="label control hint help alert">
+                        <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-5-2/label"/>
+                        <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-5-2/hint"/>
+                        <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-5-2/help"/>
+                        <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-5-2/alert"/>
+                     </xf:output>
+                     <xhtml:table name="INSEE-SIMPSONS-QG-5-2" class="question tableauComplexe">
+                        <xhtml:colgroup>
+                           <xhtml:col span="1"/>
+                        </xhtml:colgroup>
+                        <xhtml:thead>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1-control"
+                                            name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1"
+                                            bind="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-entete-1/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1-control"
+                                            name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1"
+                                            bind="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-NBPERS-1/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                           </xhtml:tr>
+                        </xhtml:thead>
+                        <xhtml:tbody>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1-control"
+                                            name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1"
+                                            bind="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-1/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-5-2-1-control"
+                                           name="INSEE-SIMPSONS-QOP-5-2-1"
+                                           bind="INSEE-SIMPSONS-QOP-5-2-1-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="9">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-1/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-1/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-1/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-1/alert"/>
+                                    <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                                 name="DOMFocusOut"
+                                                 target="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1-control"/>
+                                 </xf:input>
+                              </xhtml:td>
+                           </xhtml:tr>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2-control"
+                                            name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2"
+                                            bind="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-2/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-5-2-2-control"
+                                           name="INSEE-SIMPSONS-QOP-5-2-2"
+                                           bind="INSEE-SIMPSONS-QOP-5-2-2-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="9">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-2/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-2/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-2/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-2/alert"/>
+                                    <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                                 name="DOMFocusOut"
+                                                 target="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1-control"/>
+                                 </xf:input>
+                              </xhtml:td>
+                           </xhtml:tr>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3-control"
+                                            name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3"
+                                            bind="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-3/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-5-2-3-control"
+                                           name="INSEE-SIMPSONS-QOP-5-2-3"
+                                           bind="INSEE-SIMPSONS-QOP-5-2-3-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="9">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-3/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-3/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-3/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-3/alert"/>
+                                    <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                                 name="DOMFocusOut"
+                                                 target="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1-control"/>
+                                 </xf:input>
+                              </xhtml:td>
+                           </xhtml:tr>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4-control"
+                                            name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4"
+                                            bind="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-4/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-5-2-4-control"
+                                           name="INSEE-SIMPSONS-QOP-5-2-4"
+                                           bind="INSEE-SIMPSONS-QOP-5-2-4-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="9">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-4/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-4/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-4/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-4/alert"/>
+                                    <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                                 name="DOMFocusOut"
+                                                 target="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1-control"/>
+                                 </xf:input>
+                              </xhtml:td>
+                           </xhtml:tr>
+                           <xhtml:tr>
+                              <xhtml:th colspan="1" rowspan="1">
+                                 <xf:output id="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5-control"
+                                            name="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5"
+                                            bind="INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5-bind"
+                                            xxf:order="label control hint help alert">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-5-2-INSEE-SIMPSONS-CL-AGEGRP-5/alert"/>
+                                 </xf:output>
+                              </xhtml:th>
+                              <xhtml:td align="center">
+                                 <xf:input id="INSEE-SIMPSONS-QOP-5-2-5-control"
+                                           name="INSEE-SIMPSONS-QOP-5-2-5"
+                                           bind="INSEE-SIMPSONS-QOP-5-2-5-bind"
+                                           class="nombre"
+                                           xxf:order="label control hint help alert"
+                                           xxf:maxlength="9">
+                                    <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-5/label"/>
+                                    <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-5/hint"/>
+                                    <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-5/help"/>
+                                    <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-5-2-5/alert"/>
+                                    <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                                 name="DOMFocusOut"
+                                                 target="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1-control"/>
+                                 </xf:input>
+                              </xhtml:td>
+                           </xhtml:tr>
+                        </xhtml:tbody>
+                     </xhtml:table>
+                     <xf:output id="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1-control"
+                                name="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1"
+                                bind="INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1-bind"
+                                xxf:order="label control hint help alert">
+                        <xf:label ref="$form-resources/INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1/label"/>
+                        <xf:hint ref="$form-resources/INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1/hint"/>
+                        <xf:help ref="$form-resources/INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1/help"/>
+                        <xf:alert ref="$form-resources/INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1/alert"
+                                  level="warning"/>
+                     </xf:output>
+                     <xf:select1 id="INSEE-SIMPSONS-QOP-5-3-1-control"
+                                 name="INSEE-SIMPSONS-QOP-5-3-1"
+                                 bind="INSEE-SIMPSONS-QOP-5-3-1-bind"
+                                 appearance="minimal"
+                                 class="question"
+                                 xxf:order="label control hint help alert">
+                        <xf:label ref="$form-resources/INSEE-SIMPSONS-QOP-5-3-1/label"/>
+                        <xf:hint ref="$form-resources/INSEE-SIMPSONS-QOP-5-3-1/hint"/>
+                        <xf:help ref="$form-resources/INSEE-SIMPSONS-QOP-5-3-1/help"/>
+                        <xf:alert ref="$form-resources/INSEE-SIMPSONS-QOP-5-3-1/alert"/>
+                        <xf:item>
+                           <xf:label/>
+                           <xf:value/>
+                        </xf:item>
+                        <xf:itemset ref="$form-resources/INSEE-SIMPSONS-QOP-5-3-1/item">
+                           <xf:label ref="label"/>
+                           <xf:value ref="value"/>
+                        </xf:itemset>
+                     </xf:select1>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="5">
+                  <fr:section id="VALIDATION-control" bind="VALIDATION-bind" name="VALIDATION">
+                     <xf:label ref="$form-resources/VALIDATION/label"/>
+                     <xhtml:div class="centre">
+                        <xhtml:div class="frame">
+                           <xhtml:p>
+                              <xhtml:b>Vous êtes arrivé à la fin du questionnaire.</xhtml:b>
+                           </xhtml:p>
+                           <xhtml:p class="retraitMarque">
+                              <xhtml:b>Si vous avez terminé de
+                                        renseigner </xhtml:b>votre questionnaire, pour le
+                                    transmettre à l'Insee, merci de cliquer ci-dessous sur le bouton
+                                    : "Envoyer".</xhtml:p>
+                           <xhtml:p class="retraitNonMarque">
+                              <xhtml:b>Une fois le questionnaire envoyé :</xhtml:b>
+                           </xhtml:p>
+                           <xhtml:p class="doubleRetrait">- vous ne pourrez <xhtml:b>plus
+                                        modifier vos réponses </xhtml:b> ;</xhtml:p>
+                           <xhtml:p class="doubleRetrait">- vous pourrez télécharger
+                                        le <xhtml:b>récapitulatif de vos réponses au format
+                                        pdf</xhtml:b>.</xhtml:p>
+                           <xhtml:div class="contenuCentre">
+                              <xf:trigger bind="envoyer-bind">
+                                 <xf:label>Envoyer</xf:label>
+                                 <xf:action ev:event="DOMActivate">
+                                    <xf:setvalue ref="instance('fr-form-util')/cliquable" value="string('non')"/>
+                                    <xf:setvalue ref="instance('fr-form-util')/precedentSuivant" value="1"/>
+                                    <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
+                                 </xf:action>
+                              </xf:trigger>
+                           </xhtml:div>
+                           <xhtml:p class="retraitMarque">
+                              <xhtml:b>Si vous souhaitez y apporter
+                                        des modifications</xhtml:b>, vous pouvez :</xhtml:p>
+                           <xhtml:p class="doubleRetrait">- revenir dessus dès à présent en
+                                    cliquant sur le bouton "Retour" ;</xhtml:p>
+                           <xhtml:p class="doubleRetrait">- ou plus tard en cliquant sur le
+                                    bouton "Fermer le questionnaire" et en vous authentifiant à
+                                    nouveau.</xhtml:p>
+                           <xhtml:p class="doubleRetrait">Dans les deux cas, vos données seront
+                                    enregistrées mais <xhtml:b>le questionnaire ne sera pas
+                                        envoyé à l'Insee</xhtml:b>.</xhtml:p>
+                           <xhtml:p class="contenuCentre">
+                              <xhtml:a href="{concat(xxf:property(&#34;url-orbeon&#34;),xxf:property(&#34;lien-deconnexion&#34;))}">Fermer le questionnaire</xhtml:a>
+                           </xhtml:p>
+                        </xhtml:div>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="6">
+                  <fr:section id="CONFIRMATION-control"
+                              bind="CONFIRMATION-bind"
+                              name="CONFIRMATION">
+                     <xf:label ref="$form-resources/CONFIRMATION/label"/>
+                     <xhtml:div class="centre contenuCentre">
+                        <xhtml:div class="frame">
+                           <xhtml:p>
+                              <xhtml:b>CONFIRMER VOTRE ENVOI</xhtml:b>
+                           </xhtml:p>
+                           <xhtml:p>Votre réponse est définitive et vous souhaitez
+                                    l'envoyer.</xhtml:p>
+                           <xf:trigger bind="confirmationOui-bind">
+                              <xf:label>Je confirme l'envoi</xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
+                                              value="string('oui')"/>
+                                 <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
+                                              value="fn:format-dateTime(fn:current-dateTime(),                                             '[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
+                                 <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                                              value="string(number(instance('fr-form-instance')/stromae/util/sectionCourante)+1)"/>
+                                 <xf:send submission="expedier"/>
+                                 <xf:send submission="expedierPdf"/>
+                              </xf:action>
+                           </xf:trigger>
+                           <xf:trigger bind="confirmationNon-bind">
+                              <xf:label>Ne pas envoyer</xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:setvalue ref="instance('fr-form-util')/cliquable" value="string('oui')"/>
+                                 <xf:setvalue ref="instance('fr-form-util')/precedentSuivant" value="-1"/>
+                                 <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
+                              </xf:action>
+                           </xf:trigger>
+                        </xhtml:div>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="7">
+                  <fr:section id="FIN-control" bind="FIN-bind" name="FIN">
+                     <xf:label ref="$form-resources/FIN/label"/>
+                     <xhtml:div class="centre contenuCentre">
+                        <xhtml:div class="frame">
+                           <xf:output id="messageConfirmation"
+                                      bind="messageConfirmation-bind"
+                                      class="messageConfirmation"
+                                      xxf:order="label control hint help alert"/>
+                           <xhtml:p>
+                              <xhtml:a href="recapitulatifPdf">Télécharger le récapitulatif de
+                                        vos réponses au format PDF</xhtml:a>.
+                                    <xhtml:img src="/img/pdf.png"/>
+                           </xhtml:p>
+                           <xhtml:p>
+                              <xhtml:b>La Statistique publique vous remercie de votre
+                                        collaboration à cette enquête.</xhtml:b>
+                           </xhtml:p>
+                        </xhtml:div>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+            </xf:switch>
+            <xxf:dialog id="erreur" draggable="false" close="false">
+               <xf:label>Erreur bloquante</xf:label>
+               <xhtml:p>Certains champs de cette page sont indiqués en erreur.</xhtml:p>
+               <xhtml:p>Vous devez corriger ces erreurs avant de poursuivre le remplissage de ce
+                    questionnaire.</xhtml:p>
+               <xf:trigger>
+                  <xf:label>Corriger</xf:label>
+                  <xxf:hide ev:event="DOMActivate" dialog="erreur"/>
+               </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="avertissement" close="false" draggable="false">
+               <xf:label>Avertissement</xf:label>
+               <xhtml:p>Certains champs de cette page sont indiqués en avertissement.</xhtml:p>
+               <xhtml:p>Souhaitez-vous corriger ces avertissements avant de poursuivre le
+                    remplissage de ce questionnaire ?</xhtml:p>
+               <xf:trigger>
+                  <xf:label>Corriger</xf:label>
+                  <xxf:hide ev:event="DOMActivate" dialog="avertissement"/>
+               </xf:trigger>
+               <xf:trigger>
+                  <xf:label>Poursuivre</xf:label>
+                  <xxf:hide ev:event="DOMActivate" dialog="avertissement"/>
+                  <xf:action ev:event="DOMActivate">
+                     <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
+                  </xf:action>
+               </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="bienvenue" close="false" draggable="false">
+               <xf:label>Bienvenue</xf:label>
+               <xhtml:p>Vous avez déjà commencé à renseigner le questionnaire. Pour poursuivre
+                    votre saisie dans le questionnaire, que souhaitez-vous faire ?</xhtml:p>
+               <xf:trigger>
+                  <xf:label>Revenir à la dernière page accédée</xf:label>
+                  <xxf:hide ev:event="DOMActivate" dialog="bienvenue"/>
+               </xf:trigger>
+               <xf:trigger>
+                  <xf:label>Aller à la première page</xf:label>
+                  <xf:action ev:event="DOMActivate">
+                     <xxf:hide dialog="bienvenue"/>
+                     <xf:setvalue ref="instance(&#34;fr-form-instance&#34;)/stromae/util/sectionCourante"
+                                  value="'1'"/>
+                     <xf:toggle case="{instance(&#34;fr-form-instance&#34;)/stromae/util/sectionCourante}"/>
+                  </xf:action>
+               </xf:trigger>
+            </xxf:dialog>
+         </fr:body>
+         <fr:buttons>
+            <xf:trigger bind="commencer-bind">
+               <xf:label>Commencer</xf:label>
+               <xf:action ev:event="DOMActivate">
+                  <xf:setvalue ref="instance('fr-form-util')/precedentSuivant" value="1"/>
+                  <xf:dispatch name="ChangementPage" targetid="fr-form-model"/>
+               </xf:action>
+            </xf:trigger>
+            <xf:trigger bind="precedent-bind">
+               <xf:label>Retour</xf:label>
+               <xf:action ev:event="DOMActivate">
+                  <xf:setvalue ref="instance('fr-form-util')/precedentSuivant" value="-1"/>
+                  <xf:dispatch name="ChangementPage" targetid="fr-form-model"/>
+               </xf:action>
+            </xf:trigger>
+            <xf:trigger bind="suivant-bind">
+               <xf:label>Enregistrer et continuer</xf:label>
+               <xf:action ev:event="DOMActivate">
+                  <xf:setvalue ref="instance('fr-form-util')/precedentSuivant" value="1"/>
+                  <xf:dispatch name="ChangementPage" targetid="fr-form-model"/>
+               </xf:action>
+            </xf:trigger>
+         </fr:buttons>
+      </fr:view>
+   </xhtml:body>
+</xhtml:html>

@@ -94,14 +94,6 @@
                         </xsl:apply-templates>
                     </xf:bind>
 
-                    <!-- Une instance pour éventuellement accueilir les données de Pilotage -->
-                    <xf:instance id="donnees-pilotage">
-                        <InformationsQuestionnaire/>
-                    </xf:instance>
-
-                    <!-- Et le bind correspondant -->
-                    <xf:bind id="donnees-pilotage-binds" ref="instance('donnees-pilotage')"/>
-
                     <!-- Metadata -->
                     <xf:instance id="fr-form-metadata" xxf:readonly="true">
                         <metadata>
@@ -189,8 +181,6 @@
                         xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
                         xmlns:oxf="http://www.orbeon.com/oxf/processors"
                         xmlns:p="http://www.orbeon.com/oxf/pipeline">
-                        <!-- Là où on place tous les éléments qui seront déplacé dans l'épilogue html d'orbeon -->
-                        <xhtml:div class="perso-formulaire"/>
                         <xsl:apply-templates select="iat:child-fields($source-context)"
                             mode="source">
                             <xsl:with-param name="driver"

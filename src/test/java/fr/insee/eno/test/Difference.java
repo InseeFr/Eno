@@ -1,4 +1,5 @@
-package fr.insee.eno.test ; 
+package fr.insee.eno.test;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -89,17 +90,19 @@ public class Difference {
 			}else{
 				System.out.println("Test success");
 			}
-			try (FileWriter fw = new FileWriter(diffFilePath, false);
-					BufferedWriter bw = new BufferedWriter(fw);
-					PrintWriter out = new PrintWriter(bw)) {
-					if(indexOfDiff>0){
-						out.println("Index at which the file begins to differ :" +indexOfDiff);
-					}
-					out.println(diff);
-					System.out.println("Difference written in file : "+diffFilePath);
-					
+			FileWriter fw;
+			try {
+				fw = new FileWriter(diffFilePath, false);
+				BufferedWriter bw = new BufferedWriter(fw);
+				PrintWriter out = new PrintWriter(bw);
+				if(indexOfDiff>0){
+					out.println("Index at which the file begins to differ :" +indexOfDiff);
+				}
+				out.println(diff);
+				System.out.println("Difference written in file : "+diffFilePath);
+				out.close();
 			} catch (IOException e) {
-				System.out.println("Impossible to write file : " + diffFilePath);
+				System.out.println("Impossible to write file : "+diffFilePath);
 				e.printStackTrace();
 			}
 			

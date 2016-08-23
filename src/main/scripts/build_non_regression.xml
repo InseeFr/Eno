@@ -29,27 +29,29 @@
         <propertyregex property="nomFormulaire" input="${nomFichier}" regexp="-final" replace=""
             global="true"/>
 
-        <!-- On génère le Xforms à partir du DDI -->
+        <!-- On génère le XForms à partir du DDI -->
         <xslt in="${temp.home}/${nomFichier}.xml"
-            out="${dossierEnquete}/Xforms/${nomFormulaire}/form/form-basique.xhtml"
+            out="${temp.home}/XForms/${nomFormulaire}/form-basique.xhtml"
             style="${xslt.home}/transformations/ddi2fr/ddi2fr.xsl" force="true"
             classpath="${saxon.jar}">
             <param name="campagne" expression="${nomEnquete}"/>
             <param name="modele" expression="${nomFormulaire}"/>
+            <param name="fichier-proprietes" expression="${dossierRacine}/config/ddi2fr.xml"/>
         </xslt>
 
         <!-- On rajoute la couche liée à la navigation du questionnaire -->
         <xslt
-            in="${dossierEnquete}/Xforms/${nomFormulaire}/form/form-basique.xhtml"
-            out="${dossierEnquete}/Xforms/${nomFormulaire}/form/form.xhtml"
+            in="${temp.home}/XForms/${nomFormulaire}/form-basique.xhtml"
+            out="${dossierRacine}/target/${nomEnquete}/${nomFormulaire}/form/form.xhtml"
             style="${xslt.home}/util/orbeon-form-runner/patron_et_navigation.xsl" force="true"
             classpath="${saxon.jar}">
             <param name="campagne" expression="${nomEnquete}"/>
             <param name="modele" expression="${nomFormulaire}"/>
+            <param name="fichier-proprietes" expression="${dossierRacine}/config/ddi2fr.xml"/>
         </xslt>
         
         <delete
-            file="${dossierEnquete}/Xforms/${nomFormulaire}/form/form-basique.xhtml"/>
+            file="${dossierEnquete}/XForms/${nomFormulaire}/form/form-basique.xhtml"/>
 
     </target>
 
@@ -202,46 +204,56 @@
     
     
     <!--************************TARGETS POUR NETTOYER LES REPERTOIRES*****************************-->
-    <!-- On nettoie le dossier questionnaire -->
-    <target name="cleanQuestionnaire">
-        <delete>
-            <fileset dir="${dossierEnquete}/Xforms/" includes="**/*"/>
-        </delete>
-    </target>
     <!-- On nettoie tout -->
     <target name="clean">
         <delete>
-            <fileset dir="${temp.home}/" includes="**/*"/>
+            <fileset dir="${dossierRacine}/target/temp" includes="**/*" />
+			 <fileset dir="${dossierRacine}/target/test" includes="**/*" />
+			  <fileset dir="${dossierRacine}/target/simpsons" includes="**/*" />
         </delete>
-        <antcall target="cleanQuestionnaire"/>
     </target>
     
 	<!--************************TARGETS WITH NON REGRESSION TEST *****************************-->
 
-	<!-- The full target with non regression tests calculate the difference with the generated Xforms Simpsons questionnaire expected -->
+	<!-- The full target with non regression tests calculate the difference with the generated XForms Simpsons questionnaire expected -->
     <target name="full-with-test" depends="compile-tests,full">
 
-        <!-- At the end of the treatment, the difference between the generated and the expected form written in the file diff.txt-->
-       <java 
+        <mkdir dir="${dossierRacine}/target/test/xslt" /> 
+        <!-- At the end of the treatment, the difference between the generated and the expected form written in the file target/test/xslt/diff.txt-->     
+		<foreach target="test" param="fichier" inheritall="true">
+            <path>
+                <fileset dir="${temp.home}" includes="*-final.xml"/>
+            </path>
+        </foreach>
+		<delete dir="${dossierRacine}/target/classes" />
+    </target>
+
+	<target name="test">
+	    <basename file="${fichier}" property="nomFichier" suffix=".xml"/>
+		<propertyregex property="nomFormulaire" input="${nomFichier}" regexp="-final" replace=""
+            global="true"/>
+		<mkdir dir="${dossierRacine}/target/test/xslt/${nomEnquete}/${nomFormulaire}" /> 
+        <java 
        		classname="fr.insee.eno.test.Difference"
            	fork="true"
            >
          <!-- the output file with differences -->
-         <arg value="${dossierEnquete}/Xforms/v1/form/diff.txt"/>
+         <arg value="${dossierRacine}/target/test/xslt/${nomEnquete}/${nomFormulaire}/diff.txt"/>
          <!-- the input generated form to compare -->
-         <arg value="${dossierEnquete}/Xforms/v1/form/form.xhtml"/>
+         <arg value="${dossierRacine}/target/${nomEnquete}/${nomFormulaire}/form/form.xhtml"/>
          <!-- the expected form -->
-         <arg value="${dossierEnquete}/form.xhtml"/>
+           <arg value="${dossierEnquete}/XForms/${nomFormulaire}/${nomEnquete}-form.xhtml"/>
          <classpath refid="classpath"/>
        </java>
-       <delete dir="${lib.home}/target" />
-    </target>
-
+	</target>
+	
+	
     <!-- Classes compilation for tests -->
 	<target name="compile-tests">
-		<mkdir dir="${lib.home}/target" /> 
+		<mkdir dir="${dossierRacine}/target/classes" /> 
 		<javac srcdir="${test.java.home}/fr/insee/eno/test"
-			destdir="${lib.home}/target">
+			destdir="${dossierRacine}/target/classes"
+			includeantruntime="false">
 			 <classpath refid="classpath"/>
 		</javac>
 	</target>

@@ -1,1 +1,0 @@
-temp directory, used to generate temp files.

@@ -4,40 +4,18 @@
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
     xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <xsl:output method="xml" encoding="utf-8"/>
+    <xsl:output method="xml" indent="yes" encoding="utf-8"/>
     <!-- Transformation pour ajouter la page d'accueil des différents questionnaires -->
 
     <!-- La campagne -->
     <xsl:param name="campagne" as="xs:string"/>
     <!-- Le modèle -->
     <xsl:param name="modele" as="xs:string"/>
-
-    <!-- En paramètre le fichier de paramétrage qui contient les informations provenant de Pilotage -->
-    <xsl:param name="fichier-parametrage"/>
-    <xsl:variable name="parametres" select="doc($fichier-parametrage)"/>
-    
     <!-- Fichier de propriétés eno -->
     <xsl:param name="fichier-proprietes"/>
+    
     <xsl:variable name="proprietes" select="doc($fichier-proprietes)"/>
 
-    <!-- On récupère ces informations, si le modèle de données change, on pourra simplement modifier cette partie -->
-    <xsl:variable name="LibelleSource" select="$parametres/InformationsCollecte/Source/LibelleLong"/>
-    <xsl:variable name="AnneeCampagne"
-        select="$parametres/InformationsCollecte/Campagne/AnneeReference"/>
-    <xsl:variable name="PeriodeCampagne"
-        select="$parametres/InformationsCollecte/Campagne/PeriodeReference"/>
-    <xsl:variable name="ArticleServiceProducteur" select="if($parametres/InformationsCollecte/ServiceProducteur/Article/text()='l''')
-        then($parametres/InformationsCollecte/ServiceProducteur/Article)
-        else (concat($parametres/InformationsCollecte/ServiceProducteur/Article/text(),' '))"/>
-    <xsl:variable name="LibelleServiceProducteur"
-        select="concat($ArticleServiceProducteur,$parametres/InformationsCollecte/ServiceProducteur/Libelle)"/>
-    <xsl:variable name="FrequenceEnquete"
-        select="$parametres/InformationsCollecte/Enquete/Frequence/Libelle"/>
-    <!-- La liste des fréquences qui font afficher la période, séparées par des virgules -->
-    <xsl:variable name="frequences"
-        select="('mensuelle','trimestrielle','bimestrielle','semestrielle')" as="xs:string *"/>
-    <xsl:variable name="URLNotice" select="$parametres/InformationsCollecte/Enquete/URLNotice"/>
-    <xsl:variable name="URLSpecimen" select="$parametres/InformationsCollecte/Enquete/URLSpecimen"/>
 
     <xsl:variable name="choix">
         <xsl:value-of
@@ -67,35 +45,9 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- On modifie le titre du formulaire -->
-    <xsl:template
-        match="xhtml:title | title[parent::metadata[parent::xf:instance[@id='fr-form-metadata']]]">
-        <xsl:copy>
-            <xsl:value-of select="$LibelleSource"/>
-            <xsl:if test="$FrequenceEnquete=$frequences">
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="$PeriodeCampagne"/>
-            </xsl:if>
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="$AnneeCampagne"/>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- On inscrit ces infos dans la partie perso-formulaire. Elles seront réorganisées dans orbeon -->
-    <xsl:template match="xhtml:div[@class='perso-formulaire']">
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-            <xsl:if test="$URLNotice/text()">
-                <xhtml:a href="{$URLNotice}" id="URLNotice"/>
-            </xsl:if>
-            <xsl:if test="$URLSpecimen/text()">
-                <xhtml:a href="{$URLSpecimen}" id="URLSpecimen"/>
-            </xsl:if>
-        </xsl:copy>
-    </xsl:template>
 
     <!-- On rajoute ces éléments dans l'instance principale -->
-    <xsl:template match="form[parent::xf:instance[@id='fr-form-instance']]">
+    <xsl:template match="xf:instance[@id='fr-form-instance']/form">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
             <VALIDATION>
@@ -108,6 +60,7 @@
                 <dummy/>
             </FIN>
             <stromae>
+                <BarreFixe/>
                 <util>
                     <sectionCourante>1</sectionCourante>
                     <nomSectionCourante/>
@@ -115,7 +68,6 @@
                     <extrait>non</extrait>
                     <dateHeure/>
                 </util>
-                <perso/>
             </stromae>
         </xsl:copy>
     </xsl:template>
@@ -133,28 +85,7 @@
                 ref="stromae/util/nomSectionCourante"
                 calculate="(instance('fr-form-instance')/*[child::* and not(name()='stromae')])[position()=number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"
             />
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- On rajoute des éléments à l'instance des données de pilotage -->
-    <xsl:template match="xf:instance[@id='donnees-pilotage']/InformationsQuestionnaire">
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-            <UniteEnquetee>
-                <BarreFixe/>
-                <LabelUniteEnquetee/>
-            </UniteEnquetee>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- On rajoute des éléments aux binds correspondants -->
-    <xsl:template match="xf:bind[@id='donnees-pilotage-binds']">
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-            <xf:bind id="UniteEnquetee-bind" ref="UniteEnquetee">
-                <xf:bind id="BarreFixe-bind" ref="BarreFixe"/>
-                <xf:bind id="LabelUniteEnquetee-bind" ref="LabelUniteEnquetee"/>
-            </xf:bind>
+        <xf:bind id="BarreFixe-bind" ref="BarreFixe"/>
         </xsl:copy>
     </xsl:template>
 
@@ -188,7 +119,6 @@
             <!-- Une instance pour gérer la navigation -->
             <xf:instance id="fr-form-util">
                 <util>
-                    <cadreLegal/>
                     <commencer/>
                     <precedent/>
                     <suivant/>
@@ -262,9 +192,7 @@
                                     <xsl:if test="not(position()=1)">
                                         <xsl:text> and </xsl:text>
                                     </xsl:if>
-                                    <xsl:value-of
-                                        select="replace(@value,'//Variable','instance(&#34;fr-form-instance&#34;)//Variable')"
-                                    />
+                                    <xsl:value-of select="replace(@value,'//','instance(&#34;fr-form-instance&#34;)//')"/>
                                 </xsl:for-each>
                             </xsl:variable>
                             <xsl:if test="$contrainte[not(text()='')]">
@@ -547,7 +475,7 @@
                                     nouveau.</xhtml:p>
                                 <xhtml:p class="doubleRetrait"><xsl:text>Dans les deux cas, vos données seront
                                     enregistrées mais</xsl:text>&#160;<xhtml:b><xsl:text>le questionnaire ne sera pas
-                                        envoyé à </xsl:text><xsl:value-of select="$LibelleServiceProducteur"/></xhtml:b>.</xhtml:p>
+                                        envoyé à </xsl:text>l'Insee</xhtml:b>.</xhtml:p>
                                 <xsl:variable name="lien">
                                     <xsl:value-of
                                         select="string('{concat(xxf:property(&#34;url-orbeon&#34;),xxf:property(&#34;lien-deconnexion&#34;))}')"
@@ -689,29 +617,6 @@
         </xf:case>
     </xsl:template>
 
-    <!-- On fait appraître/disparaître le cadre legal de la page d'accueil à l'aide d'un lien -->
-    <xsl:template match="xf:bind[@name='ACCUEIL-7']">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="relevant" select="string('if (instance(''fr-form-util'')/cadreLegal/text()!='''') then (true()) else (false())')"/>
-        </xsl:copy>
-    </xsl:template>
-    <xsl:template match="xf:output[@name='ACCUEIL-7']" priority="5">
-        <xf:trigger id="cadreLegal" appearance="minimal">
-            <xf:label>
-                <xf:output
-                    value="concat(if (instance('fr-form-util')/cadreLegal/text()!='') then ('-') else ('+'),&#34; Connaître le cadre légal de l'enquête ?&#34;)"
-                />
-            </xf:label>
-            <xf:setvalue ev:event="DOMActivate"
-                ref="instance('fr-form-util')/cadreLegal"
-                value="if (instance('fr-form-util')/cadreLegal/text()!='') then ('') else ('affiche')"
-            />
-        </xf:trigger>
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-        </xsl:copy>
-    </xsl:template>
 
     <!-- JAMAIS MIS EN PLACE, UN MENU. DEPLACE DEPUIS models.xsl. A REFAIRE -->
     <!--<xsl:template match="menu/module" mode="model" priority="1">
