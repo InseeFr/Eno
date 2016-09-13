@@ -74,14 +74,14 @@
                         </form>
                     </xf:instance>
 
-                    <xf:instance id="fr-form-modeles">
-                        <modeles>
+                    <xf:instance id="fr-form-loop-model">
+                        <LoopModels>
                             <xsl:apply-templates select="iat:child-fields($source-context)"
                                 mode="source">
                                 <xsl:with-param name="driver"
                                     select="il:append-empty-element('modele', .)" tunnel="yes"/>
                             </xsl:apply-templates>
-                        </modeles>
+                        </LoopModels>
                     </xf:instance>
 
                     <!-- Bindings -->
@@ -219,7 +219,7 @@
         <xsl:element name="{iatfr:get-name($source-context)}"/>
     </xsl:template>
 
-    <xsl:template match="instance//*[name()=('paragraphe','cellule-texte','questionMultiple')]"
+    <xsl:template match="instance//*[name()=('submodule','text-cell','multipleQuestion')]"
         mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{iatfr:get-name($source-context)}"/>
@@ -228,7 +228,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="*[name()=('resource','body')]//*[name()=('elementReponse')]" mode="model"
+    <xsl:template match="*[name()=('resource','body')]//*[name()=('responseElement')]" mode="model"
         priority="1"/>
 
     <xsl:template match="bind-resource//xf-output" mode="model" priority="2">
@@ -294,14 +294,14 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="modele//*[parent::cellule[ancestor::rowloop]]" priority="1" mode="model">
+    <xsl:template match="modele//*[parent::cell[ancestor::rowloop]]" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{iatfr:get-name($source-context)}">
             <xsl:value-of select="iatfr:get-default-value($source-context)"/>
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="instance//*[name()=('xf-item','cellule-vide')]" priority="1" mode="model"/>
+    <xsl:template match="instance//*[name()=('xf-item','empty-cell')]" priority="1" mode="model"/>
 
     <xsl:template match="instance//table | instance//tableloop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -314,7 +314,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="instance//xf-double-duree" mode="model" priority="1">
+    <xsl:template match="instance//xf-double-duration" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{iatfr:get-name($source-context)}"/>
         <xsl:element name="{replace(iatfr:get-name($source-context),'-','-A-')}"/>
@@ -371,7 +371,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="bind//elementReponse" mode="model" priority="1">
+    <xsl:template match="bind//responseElement" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="iatfr:get-name($source-context)"/>
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
@@ -433,7 +433,7 @@
         </xf:bind>
     </xsl:template>
 
-    <xsl:template match="bind//*[name()=('xf-item','cellule-vide')]" priority="1" mode="model"/>
+    <xsl:template match="bind//*[name()=('xf-item','empty-cell')]" priority="1" mode="model"/>
 
     <xsl:template match="bind//table | bind//tableloop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -490,7 +490,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="bind//xf-double-duree" mode="model" priority="1">
+    <xsl:template match="bind//xf-double-duration" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="iatfr:get-name($source-context)"/>
         <!-- On crée un élément qui correspond à la concaténation des deux -->
@@ -612,7 +612,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="resource//xf-double-duree" priority="1" mode="model">
+    <xsl:template match="resource//xf-double-duration" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:element name="{replace(iatfr:get-name($source-context),'-','-A-')}">
@@ -663,7 +663,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="resource//cellule-vide" priority="1" mode="model"/>
+    <xsl:template match="resource//empty-cell" priority="1" mode="model"/>
 
     <xsl:template match="resource//xf-item" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -690,7 +690,7 @@
         </fr:section>
     </xsl:template>
 
-    <xsl:template match="body//paragraphe" mode="model" priority="1">
+    <xsl:template match="body//submodule" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="iatfr:get-name($source-context)"/>
@@ -725,7 +725,7 @@
         </xhtml:div>
     </xsl:template>
 
-    <xsl:template match="body//regroupement" mode="model" priority="1">
+    <xsl:template match="body//group" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="iatfr:get-name($source-context)"/>
@@ -771,7 +771,7 @@
         </xf:group>
     </xsl:template>
 
-    <xsl:template match="body//questionMultiple" mode="model" priority="1">
+    <xsl:template match="body//multipleQuestion" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="iatfr:get-name($source-context)"/>
@@ -791,7 +791,7 @@
         </xhtml:div>
     </xsl:template>
 
-    <xsl:template match="*[name()=('instance','bind','resource')]//*[name()=('cellule')]"
+    <xsl:template match="*[name()=('instance','bind','resource')]//*[name()=('cell')]"
         mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
@@ -800,7 +800,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="body//cellule-texte" mode="model" priority="1">
+    <xsl:template match="body//text-cell" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xhtml:th colspan="{iatfr:get-colspan($source-context)}"
@@ -815,7 +815,7 @@
         </xhtml:th>
     </xsl:template>
 
-    <xsl:template match="body//cellule" mode="model" priority="1">
+    <xsl:template match="body//cell" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xhtml:td align="center">
@@ -825,7 +825,7 @@
         </xhtml:td>
     </xsl:template>
 
-    <xsl:template match="body//cellule-vide" mode="model" priority="1">
+    <xsl:template match="body//empty-cell" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xhtml:td colspan="{iatfr:get-colspan($source-context)}"/>
@@ -939,7 +939,7 @@
             <xf:label>Ajouter</xf:label>
             <xf:insert ev:event="DOMActivate" context="."
                 nodeset="{concat('//',iatfr:get-name($source-context),'-rowloop')}"
-                origin="{concat('instance(&#34;fr-form-modeles&#34;)/',iatfr:get-name($source-context),'-rowloop')}"
+                origin="{concat('instance(&#34;fr-form-loop-model&#34;)/',iatfr:get-name($source-context),'-rowloop')}"
             />
         </xf:trigger>
 
@@ -991,9 +991,9 @@
                     <xsl:value-of select="iatfr:get-format($source-context)"/>
                 </xsl:attribute>
             </xsl:if>-->
-            <xsl:if test="iatfr:get-longueur($source-context)">
+            <xsl:if test="iatfr:get-length($source-context)">
                 <xsl:attribute name="xxf:maxlength">
-                    <xsl:value-of select="iatfr:get-longueur($source-context)"/>
+                    <xsl:value-of select="iatfr:get-length($source-context)"/>
                 </xsl:attribute>
             </xsl:if>
             <xf:label ref="$form-resources/{$name}/label">
@@ -1072,16 +1072,16 @@
                 </xsl:for-each>
             <!--</xsl:if>-->
         </xsl:element>
-        <xsl:if test="iatfr:get-suffixe($source-context, $languages[1])">
+        <xsl:if test="iatfr:get-suffix($source-context, $languages[1])">
             <xsl:element name="xhtml:span">
                 <xsl:attribute name="class" select="'suffixe'"/>
-                <xsl:copy-of select="iatfr:get-suffixe($source-context, $languages[1])"
+                <xsl:copy-of select="iatfr:get-suffix($source-context, $languages[1])"
                     copy-namespaces="no"/>
             </xsl:element>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="body//xf-double-duree" mode="model" priority="1">
+    <xsl:template match="body//xf-double-duration" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="replace(iatfr:get-name($source-context),'-','-A-')"/>
@@ -1109,9 +1109,9 @@
                     <xsl:value-of select="iatfr:get-format($source-context)"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="iatfr:get-longueur($source-context)">
+            <xsl:if test="iatfr:get-length($source-context)">
                 <xsl:attribute name="xxf:maxlength">
-                    <xsl:value-of select="iatfr:get-longueur($source-context)"/>
+                    <xsl:value-of select="iatfr:get-length($source-context)"/>
                 </xsl:attribute>
             </xsl:if>
             <xf:label ref="$form-resources/{$name}/label">
@@ -1162,9 +1162,9 @@
                     <xsl:value-of select="iatfr:get-format($source-context)"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="iatfr:get-longueur($source-context)">
+            <xsl:if test="iatfr:get-length($source-context)">
                 <xsl:attribute name="xxf:maxlength">
-                    <xsl:value-of select="iatfr:get-longueur($source-context)"/>
+                    <xsl:value-of select="iatfr:get-length($source-context)"/>
                 </xsl:attribute>
             </xsl:if>
             <xf:label ref="$form-resources/{$name}/label">

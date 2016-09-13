@@ -72,7 +72,7 @@
                 select="d:QuestionText/d:LiteralText/d:Text | d:InterviewerInstructionReference/d:Instruction/d:InstructionText/d:LiteralText/d:Text">
                 <xsl:element name="xhtml:span">
                     <xsl:attribute name="class">
-                        <xsl:value-of select="string('bloc')"/>
+                        <xsl:value-of select="string('block')"/>
                     </xsl:attribute>
                     <xsl:if test="xhtml:p/@id">
                         <xsl:attribute name="id" select="xhtml:p/@id"/>
@@ -95,7 +95,7 @@
 
     <xsl:template
         match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='Format']] | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='Format']]"
-        mode="iatddi:get-instruction-consigne" priority="2">
+        mode="iatddi:get-hint-instruction" priority="2">
         <xsl:apply-templates
             select="descendant::d:Instruction[d:InstructionName/r:String/text()='Format']"
             mode="iatddi:get-label"/>
@@ -140,7 +140,7 @@
             <xd:p>On récupère le suffixe correspondant à certains domaines de réponse.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='HH']" mode="iatddi:get-suffixe">
+    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='HH']" mode="iatddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="$language='fr'">
@@ -151,7 +151,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='mm']" mode="iatddi:get-suffixe">
+    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='mm']" mode="iatddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="$language='fr'">
@@ -164,11 +164,11 @@
     </xsl:template>
 
     <xsl:template
-        match="d:QuestionItem[d:NumericDomainReference]" mode="iatddi:get-suffixe">
-        <xsl:apply-templates select="d:NumericDomainReference" mode="iatddi:get-suffixe"/>
+        match="d:QuestionItem[d:NumericDomainReference]" mode="iatddi:get-suffix">
+        <xsl:apply-templates select="d:NumericDomainReference" mode="iatddi:get-suffix"/>
     </xsl:template>
     
-    <xsl:template match="d:NumericDomainReference[r:ManagedNumericRepresentation]" mode="iatddi:get-suffixe">
+    <xsl:template match="d:NumericDomainReference[r:ManagedNumericRepresentation]" mode="iatddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="r:ManagedNumericRepresentation//r:Content/@xml:lang">
@@ -181,16 +181,16 @@
     </xsl:template>
     
 
-    <xsl:template match="d:QuestionGrid" mode="iatddi:get-niveaux-premiere-dimension">
+    <xsl:template match="d:QuestionGrid" mode="iatddi:get-levels-first-dimension">
         <xsl:apply-templates select="d:GridDimension[@rank='1']" mode="iatddi:get-niveaux"/>
     </xsl:template>
 
-    <xsl:template match="d:QuestionGrid" mode="iatddi:get-niveaux-seconde-dimension">
+    <xsl:template match="d:QuestionGrid" mode="iatddi:get-levels-second-dimension">
         <xsl:apply-templates select="d:GridDimension[@rank='2']" mode="iatddi:get-niveaux"/>
     </xsl:template>
 
     <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster]"
-        mode="iatddi:get-codes-premiere-dimension">
+        mode="iatddi:get-codes-first-dimension">
         <xsl:variable name="niveaux">
             <xsl:for-each-group
                 select="d:StructuredMixedGridResponseDomain/d:GridResponseDomain//d:SelectDimension[@rank='1']"
@@ -202,7 +202,7 @@
     </xsl:template>
 
     <xsl:template match="d:QuestionGrid[not(d:GridDimension/d:Roster)]"
-        mode="iatddi:get-codes-premiere-dimension">
+        mode="iatddi:get-codes-first-dimension">
         <xsl:sequence select="d:GridDimension[@rank='1']//l:Code[not(descendant::l:Code)]"/>
     </xsl:template>
 
@@ -223,7 +223,7 @@
     </xsl:template>
 
     <!-- On récupère une ligne de titre selon un numéro d'index -->
-    <xsl:template match="d:QuestionGrid" mode="iatddi:get-ligne-titre">
+    <xsl:template match="d:QuestionGrid" mode="iatddi:get-title-line">
         <xsl:param name="index" tunnel="yes" as="xs:integer"/>
         <!-- On compte les labels qui sont en haut de la liste référencée (car s'il y en a, ils ne sont pas censés être pris en compte) -->
         <xsl:variable name="labelOuNon">
@@ -245,17 +245,17 @@
         />
     </xsl:template>
 
-    <xsl:template match="d:QuestionGrid" mode="iatddi:get-ligne-tableau">
+    <xsl:template match="d:QuestionGrid" mode="iatddi:get-table-line">
         <xsl:param name="index" tunnel="yes"/>
         <xsl:variable name="codes">
-            <xsl:apply-templates select="." mode="iatddi:get-codes-premiere-dimension"/>
+            <xsl:apply-templates select="." mode="iatddi:get-codes-first-dimension"/>
         </xsl:variable>
         <xsl:variable name="id">
             <xsl:value-of select="$codes/l:Code[position()=$index]/r:ID"/>
         </xsl:variable>
 
         <xsl:apply-templates select="d:GridDimension[@rank='1']//l:Code[r:ID=$id]"
-            mode="iatddi:get-ligne-tableau"/>
+            mode="iatddi:get-table-line"/>
         <!--        <xsl:sequence
             select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)[.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]"
         />-->
@@ -269,7 +269,7 @@
 
     </xsl:template>
 
-    <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]" mode="iatddi:get-ligne-tableau">
+    <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]" mode="iatddi:get-table-line">
         <xsl:param name="index" tunnel="yes"/>
         
         <xsl:for-each
@@ -282,13 +282,13 @@
     </xsl:template>
     
 
-    <xsl:template match="l:Code" mode="iatddi:get-ligne-tableau">
+    <xsl:template match="l:Code" mode="iatddi:get-table-line">
         <xsl:if test="parent::l:Code">
             <xsl:variable name="idPremierCodeParent">
                 <xsl:value-of select="parent::l:Code/l:Code[1]/r:ID"/>
             </xsl:variable>
             <xsl:if test="r:ID=$idPremierCodeParent">
-                <xsl:apply-templates select="parent::l:Code" mode="iatddi:get-ligne-tableau"/>
+                <xsl:apply-templates select="parent::l:Code" mode="iatddi:get-table-line"/>
             </xsl:if>
         </xsl:if>
         <xsl:sequence select="."/>
@@ -391,11 +391,11 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='Module']" mode="iatddi:get-controle">
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='Module']" mode="iatddi:get-control">
         <xsl:variable name="controles">
             <xsl:for-each select=".//d:Instruction[ancestor::d:ComputationItem]">
                 <xsl:text> and </xsl:text>
-                <xsl:apply-templates select="current()" mode="iatddi:get-controle"/>
+                <xsl:apply-templates select="current()" mode="iatddi:get-control"/>
             </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="resultat">
@@ -412,7 +412,7 @@
     </xsl:template>
 
 
-    <xsl:template match="l:Variable" mode="iatddi:get-lien">
+    <xsl:template match="l:Variable" mode="iatddi:get-link">
         <xsl:variable name="id">
             <xsl:apply-templates select="." mode="iatddi:get-id"/>
         </xsl:variable>

@@ -234,7 +234,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="xhtml:span[@class='bloc']" mode="modifTitre" priority="2">
+    <xsl:template match="xhtml:span[@class='block']" mode="modifTitre" priority="2">
         <xsl:param name="prefixe" tunnel="yes"/>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>

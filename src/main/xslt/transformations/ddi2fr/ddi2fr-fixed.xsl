@@ -28,7 +28,7 @@
     <!-- On met ça là, c'est en effet très dépendant du langage d'entrée et de sortie -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and not(ancestor::d:ComputationItem)]"
-        mode="iatddi:get-texte-conditionne" priority="1">
+        mode="iatddi:get-conditionned-text" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
@@ -63,7 +63,7 @@
     <!-- On met ça là, c'est en effet très dépendant du langage d'entrée et de sortie -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and ancestor::d:ComputationItem]"
-        mode="iatddi:get-texte-conditionneBis" priority="1">
+        mode="iatddi:get-conditionned-text-bis" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
@@ -97,7 +97,7 @@
 
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[d:Expression] and not(ancestor::d:ComputationItem)]"
-        mode="iatddi:get-texte-conditionne" priority="1">
+        mode="iatddi:get-conditionned-text" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
@@ -131,7 +131,7 @@
 
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[d:Expression] and ancestor::d:ComputationItem]"
-        mode="iatddi:get-texte-conditionneBis" priority="1">
+        mode="iatddi:get-conditionned-text-bis" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>

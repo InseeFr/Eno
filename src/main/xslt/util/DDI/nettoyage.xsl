@@ -37,7 +37,7 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:for-each-group select="node()" group-ending-with="xhtml:br">
-                <xhtml:span class="bloc">
+                <xhtml:span class="block">
                     <xsl:for-each select="current-group()[not(name()='xhtml:br')]">
                         <xsl:apply-templates select="."/>
                     </xsl:for-each>

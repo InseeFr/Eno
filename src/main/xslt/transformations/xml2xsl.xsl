@@ -51,7 +51,7 @@
         <xd:p>A l'élément elementGenerique où un xpath est renseigné, et où un match est renseigné, mais sans mode, on associe le driver implementation simple</xd:p>
         <xd:p>Il s'agit du cas où on implémente une fonction pour un élément source donné, et qu'on renvoie juste la value d'un élément</xd:p>
     </xd:desc>
-    <xsl:template match="elementGenerique[elementDefini[@nom='Xpath']/text()!='' and elementDefini[@nom='Match']/text()!='' and not(elementDefini[@nom='Mode_Match']/text()!='')]" mode="source">
+    <xsl:template match="elementGenerique[elementDefini[@nom='Xpath']/text()!='' and elementDefini[@nom='Match']/text()!='' and not(elementDefini[@nom='Match_Mode']/text()!='')]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -64,7 +64,7 @@
         <xd:p>A l'élément elementGenerique où un xpath est renseigné, et où un match est renseigné, avec un  mode, on associe le driver implementation complexe</xd:p>
         <xd:p>Il s'agit du cas où on implémente une fonction pour un élément source donné, et qu'on renvoie quelque chose de plus complexe (à l'aide d'un mode)</xd:p>
     </xd:desc>
-    <xsl:template match="elementGenerique[elementDefini[@nom='Xpath']/text()!='' and elementDefini[@nom='Match']/text()!='' and elementDefini[@nom='Mode_Match']/text()!='']" mode="source">
+    <xsl:template match="elementGenerique[elementDefini[@nom='Xpath']/text()!='' and elementDefini[@nom='Match']/text()!='' and elementDefini[@nom='Match_Mode']/text()!='']" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -89,7 +89,7 @@
     <xd:desc>
         <xd:p>A l'élément elementGenerique où une fonction est renseignée, on associe le driver fonction</xd:p>
     </xd:desc>
-    <xsl:template match="elementGenerique[elementDefini[@nom='Fonction_Sortie']/text()!='' and elementDefini[@nom='Fonction_Entree']/text()]" mode="source">
+    <xsl:template match="elementGenerique[elementDefini[@nom='Out_Function']/text()!='' and elementDefini[@nom='In_Function']/text()]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -101,7 +101,7 @@
     <xd:desc>
         <xd:p>A l'élément elementGenerique où une fonction n'est pas renseignée, on associe le driver fonctionNonSupportee</xd:p>
     </xd:desc>
-    <xsl:template match="elementGenerique[elementDefini[@nom='Fonction_Sortie']/text()!='' and not(elementDefini[@nom='Fonction_Entree']/text())]" mode="source">
+    <xsl:template match="elementGenerique[elementDefini[@nom='Out_Function']/text()!='' and not(elementDefini[@nom='In_Function']/text())]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -168,7 +168,7 @@
     </xsl:function>
     
     <xsl:template match="elementGenerique" mode="iatxml:get-mode-xpath">
-        <xsl:value-of select="iatxml:get-valeur(./elementDefini[@nom='Mode_Xpath'])"/>
+        <xsl:value-of select="iatxml:get-valeur(./elementDefini[@nom='Xpath_Mode'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -192,7 +192,7 @@
     </xsl:function>
     
     <xsl:template match="elementGenerique" mode="iatxml:get-mode-match">
-        <xsl:value-of select="iatxml:get-valeur(./elementDefini[@nom='Mode_Match'])"/>
+        <xsl:value-of select="iatxml:get-valeur(./elementDefini[@nom='Match_Mode'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -216,7 +216,7 @@
     </xsl:function>
     
     <xsl:template match="elementGenerique" mode="iatxml:get-fonction-sortie">
-        <xsl:value-of select="iatxml:get-valeur(./elementDefini[@nom='Fonction_Sortie'])"/>
+        <xsl:value-of select="iatxml:get-valeur(./elementDefini[@nom='Out_Function'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -228,7 +228,7 @@
     </xsl:function>
     
     <xsl:template match="elementGenerique" mode="iatxml:get-fonction-entree">
-        <xsl:value-of select="iatxml:get-valeur(./elementDefini[@nom='Fonction_Entree'])"/>
+        <xsl:value-of select="iatxml:get-valeur(./elementDefini[@nom='In_Function'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -253,7 +253,7 @@
     
     <xsl:template match="elementGenerique" mode="iatxml:get-parametres">
         <xsl:call-template name="split">
-            <xsl:with-param name="chaine" select="iatxml:get-valeur(./elementDefini[@nom='Parametres'])"/>
+            <xsl:with-param name="chaine" select="iatxml:get-valeur(./elementDefini[@nom='Parameters'])"/>
         </xsl:call-template>
     </xsl:template>
     
@@ -290,7 +290,7 @@
     </xsl:function>
     
     <xsl:template match="elementGenerique" mode="iatxml:get-enfants">
-        <xsl:value-of select="iatxml:get-valeur(./elementDefini[@nom='Enfants'])"/>
+        <xsl:value-of select="iatxml:get-valeur(./elementDefini[@nom='Children'])"/>
     </xsl:template>
     
     <xsl:template name="split">
