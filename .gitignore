@@ -2,11 +2,11 @@ full.bat
 full-with-test.bat
 target/
 lib/
-src/main/xslt/entrees/DDI/source.xsl
-src/main/xslt/entrees/DDI/templates.xsl
-src/main/xslt/entrees/DDI/fonctions.xsl
+src/main/xslt/inputs/DDI/source.xsl
+src/main/xslt/inputs/DDI/templates.xsl
+src/main/xslt/inputs/DDI/functions.xsl
 src/main/xslt/transformations/ddi2fr/ddi2fr.xsl
-src/main/xslt/transformations/ddi2fr/parcours.xsl
-src/main/xslt/transformations/ddi2fr/fonctions.xsl
+src/main/xslt/transformations/ddi2fr/browsing.xsl
+src/main/xslt/transformations/ddi2fr/functions.xsl
 src/main/xslt/transformations/ddi2fr/drivers.xsl
 src/main/xml/null.xml
