@@ -7,8 +7,8 @@
     xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
     exclude-result-prefixes="xd" version="2.0">
 
-    <xsl:import href="../../entrees/ddi/source.xsl"/>
-    <xsl:import href="../../sorties/orbeon-form-runner/models.xsl"/>
+    <xsl:import href="../../inputs/ddi/source.xsl"/>
+    <xsl:import href="../../outputs/orbeon-form-runner/models.xsl"/>
     <xsl:import href="../../lib.xsl"/>
 
     <xsl:output method="xml" indent="yes"/>
@@ -25,19 +25,19 @@
         <xsl:apply-templates select="/" mode="source"/>
     </xsl:template>
 
-    <!-- On met ça là, c'est en effet très dépendant du langage d'entrée et de sortie -->
+    <!-- Getting this here, actually dependent of the input and ouput language -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and not(ancestor::d:ComputationItem)]"
         mode="iatddi:get-conditionned-text" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
-        <xsl:variable name="texte">
+        <xsl:variable name="text">
             <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
         </xsl:variable>
-        <xsl:variable name="resultat">
+        <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($texte,'&#248;')">
+            <xsl:for-each select="tokenize($text,'&#248;')">
                 <xsl:text>,</xsl:text>
                 <xsl:choose>
                     <xsl:when
@@ -47,9 +47,7 @@
                         </xsl:when>
                     <xsl:otherwise>
                         <xsl:text>'</xsl:text>
-                        <!-- On remplace les singles quotes par deux singles quotes
-                        car on génère un concat, on a besoin de doubler les quotes pour
-                        ne pas déclencher une erreur lors du concat générer dans xforms-->
+                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
                         <xsl:value-of select='replace(.,"&apos;","&apos;&apos;")'/>
                         <xsl:text>'</xsl:text>
                     </xsl:otherwise>
@@ -57,22 +55,22 @@
             </xsl:for-each>
             <xsl:text>)</xsl:text>
         </xsl:variable>
-        <xsl:value-of select="$resultat"/>
+        <xsl:value-of select="$result"/>
     </xsl:template>
 
-    <!-- On met ça là, c'est en effet très dépendant du langage d'entrée et de sortie -->
+    <!-- Getting this here, actually dependent of the input and ouput language -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and ancestor::d:ComputationItem]"
         mode="iatddi:get-conditionned-text-bis" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
-        <xsl:variable name="texte">
+        <xsl:variable name="text">
             <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
         </xsl:variable>
-        <xsl:variable name="resultat">
+        <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($texte,'&#248;')">
+            <xsl:for-each select="tokenize($text,'&#248;')">
                 <xsl:text>,</xsl:text>
                 <xsl:choose>
                     <xsl:when
@@ -82,9 +80,7 @@
                         </xsl:when>
                     <xsl:otherwise>
                         <xsl:text>'</xsl:text>
-                        <!-- On remplace les singles quotes par deux singles quotes
-                        car on génère un concat, on a besoin de doubler les quotes pour
-                        ne pas déclencher une erreur lors du concat générer dans xforms-->
+                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
                         <xsl:value-of select='replace(.,"&apos;","&apos;&apos;")'/>
                         <xsl:text>'</xsl:text>
                     </xsl:otherwise>
@@ -92,7 +88,7 @@
             </xsl:for-each>
             <xsl:text>)</xsl:text>
         </xsl:variable>
-        <xsl:value-of select="$resultat"/>
+        <xsl:value-of select="$result"/>
     </xsl:template>
 
     <xsl:template
@@ -101,12 +97,12 @@
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
-        <xsl:variable name="texte">
+        <xsl:variable name="text">
             <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
         </xsl:variable>
-        <xsl:variable name="resultat">
+        <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($texte,'&#248;')[not(.='')]">
+            <xsl:for-each select="tokenize($text,'&#248;')[not(.='')]">
                 <xsl:text>,</xsl:text>
                 <xsl:choose>
                     <xsl:when
@@ -116,9 +112,7 @@
                         </xsl:when>
                     <xsl:otherwise>
                         <xsl:text>'</xsl:text>
-                        <!-- On remplace les singles quotes par deux singles quotes
-                        car on génère un concat, on a besoin de doubler les quotes pour
-                        ne pas déclencher une erreur lors du concat générer dans xforms-->
+                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
                         <xsl:value-of select='replace(.,"&apos;","&apos;&apos;")'/>
                         <xsl:text>'</xsl:text>
                     </xsl:otherwise>
@@ -126,7 +120,7 @@
             </xsl:for-each>
             <xsl:text>)</xsl:text>
         </xsl:variable>
-        <xsl:value-of select="$resultat"/>
+        <xsl:value-of select="$result"/>
     </xsl:template>
 
     <xsl:template
@@ -135,12 +129,12 @@
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
-        <xsl:variable name="texte">
+        <xsl:variable name="text">
             <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
         </xsl:variable>
-        <xsl:variable name="resultat">
+        <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($texte,'&#248;')[not(.='')]">
+            <xsl:for-each select="tokenize($text,'&#248;')[not(.='')]">
                 <xsl:text>,</xsl:text>
                 <xsl:choose>
                     <xsl:when
@@ -150,9 +144,7 @@
                         </xsl:when>
                     <xsl:otherwise>
                         <xsl:text>'</xsl:text>
-                        <!-- On remplace les singles quotes par deux singles quotes
-                        car on génère un concat, on a besoin de doubler les quotes pour
-                        ne pas déclencher une erreur lors du concat générer dans xforms-->
+                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
                         <xsl:value-of select='replace(.,"&apos;","&apos;&apos;")'/>
                         <xsl:text>'</xsl:text>
                     </xsl:otherwise>
@@ -160,7 +152,7 @@
             </xsl:for-each>
             <xsl:text>)</xsl:text>
         </xsl:variable>
-        <xsl:value-of select="$resultat"/>
+        <xsl:value-of select="$result"/>
     </xsl:template>
 
 </xsl:stylesheet>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0"?>
+<project>
+    <property file="../config/config.properties"/>
+    <xmlproperty file="${root}/config/ddi2fr.xml"/>
+    
+    <!-- Getting the path to the xml folder (that will be passed to xsl files) -->
+    <dirname property="root-folder" file="${root}/dummy"/>
+    <dirname property="temp-folder" file="${temp.home}/dummy"/>
+    <dirname property="xml-folder" file="${xml.home}/dummy"/>
+    <dirname property="surveys-folder" file="${surveys.home}/dummy"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.home}" includes="**/*.jar"/>
+        <pathelement location="${root-folder}/target/classes" />
+    </path>
+    <taskdef name="foreach" classname="net.sf.antcontrib.logic.ForEach">
+        <classpath refid="classpath"/>
+    </taskdef>
+    <taskdef name="if" classname="net.sf.antcontrib.logic.IfTask">
+        <classpath refid="classpath"/>
+    </taskdef>
+    <taskdef name="propertyregex" classname="net.sf.antcontrib.property.RegexTask">
+        <classpath refid="classpath"/>
+    </taskdef>
+</project>

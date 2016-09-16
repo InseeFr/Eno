@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><!--Linking the form driver to the instrument-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"><!--Linking the Form driver to the instrument-->
    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='Modele']" mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('form',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('Form',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
-   <!--Linking the module driver to d:Sequence elements with Module type-->
+   <!--Linking the Module driver to d:Sequence elements with Module type-->
    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='Module']" mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('module',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('Module',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
-   <!--Linking the submodule driver to d:Sequence elements with Paragraph type-->
+   <!--Linking the Submodule driver to d:Sequence elements with Paragraph type-->
    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='Paragraphe']" mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('submodule',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('SubModule',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -31,7 +31,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('group',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('Group',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -222,13 +222,13 @@
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
-   <!--Linking responseElement to a variable-->
+   <!--Linking ResponseElement to a variable-->
    <xsl:template match="l:Variable[not(r:QuestionReference or r:SourceParameterReference)]"
                  mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('responseElement',$driver)"
+      <xsl:apply-templates select="il:append-empty-element('ResponseElement',$driver)"
                            mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
@@ -239,7 +239,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('text-cell',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('TextCell',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -248,7 +248,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('text-cell',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('TextCell',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -257,7 +257,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('cell',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('Cell',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -266,7 +266,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('empty-cell',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('EmptyCell',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -285,7 +285,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('multipleQuestion',$driver)"
+      <xsl:apply-templates select="il:append-empty-element('MultipleQuestion',$driver)"
                            mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
@@ -296,8 +296,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('xf-double-duration',$driver)"
-                           mode="model">
+      <xsl:apply-templates select="il:append-empty-element('DoubleDuration',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -327,7 +326,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('rowloop',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('RowLoop',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -337,7 +336,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('tableloop',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('TableLoop',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -347,7 +346,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('table',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('Table',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>

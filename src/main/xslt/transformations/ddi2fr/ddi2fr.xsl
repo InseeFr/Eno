@@ -10,8 +10,8 @@
                 xmlns:l="ddi:logicalproduct:3_2"
                 exclude-result-prefixes="xd"
                 version="2.0">
-   <xsl:import href="../../entrees/ddi/source.xsl"/>
-   <xsl:import href="../../sorties/orbeon-form-runner/models.xsl"/>
+   <xsl:import href="../../inputs/ddi/source.xsl"/>
+   <xsl:import href="../../outputs/orbeon-form-runner/models.xsl"/>
    <xsl:import href="../../lib.xsl"/>
    <xsl:output method="xml" indent="yes"/>
    <xd:doc scope="stylesheet">
@@ -26,19 +26,19 @@
    <xsl:template match="/">
       <xsl:apply-templates select="/" mode="source"/>
    </xsl:template>
-   <!-- On met ça là, c'est en effet très dépendant du langage d'entrée et de sortie -->
+   <!-- Getting this here, actually dependent of the input and ouput language -->
    <xsl:template match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and not(ancestor::d:ComputationItem)]"
                  mode="iatddi:get-conditionned-text"
                  priority="1">
       <xsl:variable name="condition">
          <xsl:copy-of select="descendant::d:ConditionalText"/>
       </xsl:variable>
-      <xsl:variable name="texte">
+      <xsl:variable name="text">
          <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
       </xsl:variable>
-      <xsl:variable name="resultat">
+      <xsl:variable name="result">
          <xsl:text>concat(''</xsl:text>
-         <xsl:for-each select="tokenize($texte,'ø')">
+         <xsl:for-each select="tokenize($text,'ø')">
             <xsl:text>,</xsl:text>
             <xsl:choose>
                <xsl:when test=".=$condition/d:ConditionalText/r:SourceParameterReference/r:OutParameter/r:ID/text()">
@@ -47,9 +47,7 @@
                </xsl:when>
                <xsl:otherwise>
                   <xsl:text>'</xsl:text>
-                  <!-- On remplace les singles quotes par deux singles quotes
-                        car on génère un concat, on a besoin de doubler les quotes pour
-                        ne pas déclencher une erreur lors du concat générer dans xforms-->
+                  <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
                   <xsl:value-of select="replace(.,&#34;'&#34;,&#34;''&#34;)"/>
                   <xsl:text>'</xsl:text>
                </xsl:otherwise>
@@ -57,21 +55,21 @@
          </xsl:for-each>
          <xsl:text>)</xsl:text>
       </xsl:variable>
-      <xsl:value-of select="$resultat"/>
+      <xsl:value-of select="$result"/>
    </xsl:template>
-   <!-- On met ça là, c'est en effet très dépendant du langage d'entrée et de sortie -->
+   <!-- Getting this here, actually dependent of the input and ouput language -->
    <xsl:template match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and ancestor::d:ComputationItem]"
                  mode="iatddi:get-conditionned-text-bis"
                  priority="1">
       <xsl:variable name="condition">
          <xsl:copy-of select="descendant::d:ConditionalText"/>
       </xsl:variable>
-      <xsl:variable name="texte">
+      <xsl:variable name="text">
          <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
       </xsl:variable>
-      <xsl:variable name="resultat">
+      <xsl:variable name="result">
          <xsl:text>concat(''</xsl:text>
-         <xsl:for-each select="tokenize($texte,'ø')">
+         <xsl:for-each select="tokenize($text,'ø')">
             <xsl:text>,</xsl:text>
             <xsl:choose>
                <xsl:when test=".=$condition/d:ConditionalText/r:SourceParameterReference/r:OutParameter/r:ID/text()">
@@ -80,9 +78,7 @@
                </xsl:when>
                <xsl:otherwise>
                   <xsl:text>'</xsl:text>
-                  <!-- On remplace les singles quotes par deux singles quotes
-                        car on génère un concat, on a besoin de doubler les quotes pour
-                        ne pas déclencher une erreur lors du concat générer dans xforms-->
+                  <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
                   <xsl:value-of select="replace(.,&#34;'&#34;,&#34;''&#34;)"/>
                   <xsl:text>'</xsl:text>
                </xsl:otherwise>
@@ -90,7 +86,7 @@
          </xsl:for-each>
          <xsl:text>)</xsl:text>
       </xsl:variable>
-      <xsl:value-of select="$resultat"/>
+      <xsl:value-of select="$result"/>
    </xsl:template>
    <xsl:template match="d:Instruction[descendant::d:ConditionalText[d:Expression] and not(ancestor::d:ComputationItem)]"
                  mode="iatddi:get-conditionned-text"
@@ -98,12 +94,12 @@
       <xsl:variable name="condition">
          <xsl:copy-of select="descendant::d:ConditionalText"/>
       </xsl:variable>
-      <xsl:variable name="texte">
+      <xsl:variable name="text">
          <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
       </xsl:variable>
-      <xsl:variable name="resultat">
+      <xsl:variable name="result">
          <xsl:text>concat(''</xsl:text>
-         <xsl:for-each select="tokenize($texte,'ø')[not(.='')]">
+         <xsl:for-each select="tokenize($text,'ø')[not(.='')]">
             <xsl:text>,</xsl:text>
             <xsl:choose>
                <xsl:when test="contains($condition/d:ConditionalText/d:Expression/r:Command/r:CommandContent/text(),.)">
@@ -112,9 +108,7 @@
                </xsl:when>
                <xsl:otherwise>
                   <xsl:text>'</xsl:text>
-                  <!-- On remplace les singles quotes par deux singles quotes
-                        car on génère un concat, on a besoin de doubler les quotes pour
-                        ne pas déclencher une erreur lors du concat générer dans xforms-->
+                  <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
                   <xsl:value-of select="replace(.,&#34;'&#34;,&#34;''&#34;)"/>
                   <xsl:text>'</xsl:text>
                </xsl:otherwise>
@@ -122,7 +116,7 @@
          </xsl:for-each>
          <xsl:text>)</xsl:text>
       </xsl:variable>
-      <xsl:value-of select="$resultat"/>
+      <xsl:value-of select="$result"/>
    </xsl:template>
    <xsl:template match="d:Instruction[descendant::d:ConditionalText[d:Expression] and ancestor::d:ComputationItem]"
                  mode="iatddi:get-conditionned-text-bis"
@@ -130,12 +124,12 @@
       <xsl:variable name="condition">
          <xsl:copy-of select="descendant::d:ConditionalText"/>
       </xsl:variable>
-      <xsl:variable name="texte">
+      <xsl:variable name="text">
          <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
       </xsl:variable>
-      <xsl:variable name="resultat">
+      <xsl:variable name="result">
          <xsl:text>concat(''</xsl:text>
-         <xsl:for-each select="tokenize($texte,'ø')[not(.='')]">
+         <xsl:for-each select="tokenize($text,'ø')[not(.='')]">
             <xsl:text>,</xsl:text>
             <xsl:choose>
                <xsl:when test="contains($condition/d:ConditionalText/d:Expression/r:Command/r:CommandContent/text(),.)">
@@ -144,9 +138,7 @@
                </xsl:when>
                <xsl:otherwise>
                   <xsl:text>'</xsl:text>
-                  <!-- On remplace les singles quotes par deux singles quotes
-                        car on génère un concat, on a besoin de doubler les quotes pour
-                        ne pas déclencher une erreur lors du concat générer dans xforms-->
+                  <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
                   <xsl:value-of select="replace(.,&#34;'&#34;,&#34;''&#34;)"/>
                   <xsl:text>'</xsl:text>
                </xsl:otherwise>
@@ -154,32 +146,32 @@
          </xsl:for-each>
          <xsl:text>)</xsl:text>
       </xsl:variable>
-      <xsl:value-of select="$resultat"/>
+      <xsl:value-of select="$result"/>
    </xsl:template>
-   <!--Linking the form driver to the instrument-->
+   <!--Linking the Form driver to the instrument-->
    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='Modele']" mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('form',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('Form',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
-   <!--Linking the module driver to d:Sequence elements with Module type-->
+   <!--Linking the Module driver to d:Sequence elements with Module type-->
    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='Module']" mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('module',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('Module',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
-   <!--Linking the submodule driver to d:Sequence elements with Paragraph type-->
+   <!--Linking the Submodule driver to d:Sequence elements with Paragraph type-->
    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='Paragraphe']" mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('submodule',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('SubModule',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -188,7 +180,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('group',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('Group',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -379,13 +371,13 @@
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
-   <!--Linking responseElement to a variable-->
+   <!--Linking ResponseElement to a variable-->
    <xsl:template match="l:Variable[not(r:QuestionReference or r:SourceParameterReference)]"
                  mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('responseElement',$driver)"
+      <xsl:apply-templates select="il:append-empty-element('ResponseElement',$driver)"
                            mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
@@ -396,7 +388,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('text-cell',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('TextCell',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -405,7 +397,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('text-cell',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('TextCell',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -414,7 +406,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('cell',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('Cell',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -423,7 +415,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('empty-cell',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('EmptyCell',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -442,7 +434,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('multipleQuestion',$driver)"
+      <xsl:apply-templates select="il:append-empty-element('MultipleQuestion',$driver)"
                            mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
@@ -453,8 +445,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('xf-double-duration',$driver)"
-                           mode="model">
+      <xsl:apply-templates select="il:append-empty-element('DoubleDuration',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -484,7 +475,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('rowloop',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('RowLoop',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -494,7 +485,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('tableloop',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('TableLoop',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -504,7 +495,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="il:append-empty-element('table',$driver)" mode="model">
+      <xsl:apply-templates select="il:append-empty-element('Table',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -514,7 +505,7 @@
       <xsl:param name="language"/>
       <xsl:sequence select="iatddi:get-label($context,$language)"/>
    </xsl:function>
-   <!--Linking the DDI language getter function to the form languages getter function-->
+   <!--Linking the DDI languages getter function to the form languages getter function-->
    <xsl:function name="iatfr:get-form-languages">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="iatddi:get-languages($context)"/>
@@ -583,14 +574,14 @@
       <xsl:sequence select="iatddi:get-control($context)"/>
    </xsl:function>
    <!---->
-   <xsl:function name="iatfr:get-nombre-decimales">
+   <xsl:function name="iatfr:get-number-of-decimals">
       <xsl:param name="context" as="item()"/>
-      <xsl:sequence select="iatddi:get-number-decimal($context)"/>
+      <xsl:sequence select="iatddi:get-number-of-decimals($context)"/>
    </xsl:function>
    <!---->
    <xsl:function name="iatfr:get-alert-level">
       <xsl:param name="context" as="item()"/>
-      <xsl:sequence select="iatddi:get-type-message($context)"/>
+      <xsl:sequence select="iatddi:get-message-type($context)"/>
    </xsl:function>
    <!--Linking the DDI Instruction (Help Type) getter function to the Xforms help element getter function-->
    <xsl:function name="iatfr:get-help">
@@ -624,7 +615,7 @@
    <!--Linking the DDI code list representation format sending function to the Xforms list appearance getter function-->
    <xsl:function name="iatfr:get-appearance">
       <xsl:param name="context" as="item()"/>
-      <xsl:sequence select="iatddi:get-outputformat($context)"/>
+      <xsl:sequence select="iatddi:get-output-format($context)"/>
    </xsl:function>
    <!--Linking the DDI style sending function to the css class getter function-->
    <xsl:function name="iatfr:get-css-class">
@@ -687,15 +678,15 @@
    <!---->
    <xsl:function name="iatfr:get-minimum-lines">
       <xsl:param name="context" as="item()"/>
-      <xsl:sequence select="iatddi:get-minimumRequired($context)"/>
+      <xsl:sequence select="iatddi:get-minimum-required($context)"/>
    </xsl:function>
    <!---->
-   <xsl:function name="iatfr:get-dependants-constraint">
+   <xsl:function name="iatfr:get-constraint-dependencies">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="iatddi:get-computation-items($context)"/>
    </xsl:function>
    <!---->
-   <xsl:function name="iatfr:get-dependants-relevant">
+   <xsl:function name="iatfr:get-relevant-dependencies">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="iatddi:get-then($context)"/>
    </xsl:function>

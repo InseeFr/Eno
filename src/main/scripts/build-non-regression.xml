@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Quesaco" basedir="." default="full">
+    <!-- Importing the configuration part that is common to every script -->
+    <import file="build-configuration.xml"/>
+    
+    <!-- Script properties Capgemini -->
+    <property name="survey-name" value="simpsons"/>
+    <property name="survey-folder" value="${root-folder}/surveys/${survey-name}"/>    
+    
+    <!--************************MAIN TARGETS*****************************-->
+    
+    <!-- The first main target that can be called -->
+    <!-- Cleaning, preprocessing the DDI and preprocessing the generator -->
+    <target name="full" depends="clean, DDIPreprocessing, ENOPreprocessing">
+        <!-- For each unindexed file create in temp, creating the corresponding XForms -->
+        <foreach target="ddi2fr" param="file" inheritall="true">
+            <path>
+                <fileset dir="${temp.home}" includes="*-final.xml"/>
+            </path>
+        </foreach>
+    </target>
+
+	<!--************************TARGETS TO GENERATE A SURVEY *****************************-->
+
+    <!-- We must get the mapping between the VariableScheme and the identifiers (QuestionScheme side) before launching, which explains the dependence -->
+    <target name="ddi2fr">
+
+        <basename file="${file}" property="file-name" suffix=".xml"/>
+        <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
+            global="true"/>
+
+        <!-- Generating XForms from the DDI -->
+        <xslt in="${temp.home}/${file-name}.xml"
+            out="${temp.home}/XForms/${form-name}/basic-form.xhtml"
+            style="${xslt.home}/transformations/ddi2fr/ddi2fr.xsl" force="true"
+            classpath="${saxon.jar}">
+            <param name="campaign" expression="${survey-name}"/>
+            <param name="model" expression="${form-name}"/>
+            <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
+        </xslt>
+
+        <!-- Adding the layer in charge of the survey's browsing -->
+        <xslt
+            in="${temp.home}/XForms/${form-name}/basic-form.xhtml"
+            out="${root-folder}/target/${survey-name}/${form-name}/form/form.xhtml"
+            style="${xslt.home}/util/orbeon-form-runner/browsing-and-template.xsl" force="true"
+            classpath="${saxon.jar}">
+            <param name="campaign" expression="${survey-name}"/>
+            <param name="model" expression="${form-name}"/>
+            <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
+        </xslt>
+        
+        <delete
+            file="${survey-folder}/XForms/${form-name}/form/basic-form.xhtml"/>
+
+    </target>
+
+    <!--************************TARGETS : PREPROCESSING ENO*****************************-->
+    
+    <target name="ENOPreprocessing">
+        
+        <!-- Generating the xsl files -->
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/transformations/ddi2fr"/>
+            <param name="name" value="drivers"/>
+        </antcall>
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/transformations/ddi2fr"/>
+            <param name="name" value="functions"/>
+        </antcall>
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/transformations/ddi2fr"/>
+            <param name="name" value="browsing"/>
+        </antcall>
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/inputs/ddi/"/>
+            <param name="name" value="functions"/>
+        </antcall>
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/inputs/ddi/"/>
+            <param name="name" value="templates"/>
+        </antcall>
+        
+        <!-- This will generate Xsl but without dynamic creation of namespaces. -->
+        
+        
+        <!-- Using a sheet from the util folder in order to create a link-sheet from DDI to form-runner from the 
+        generated sheet and the non-generated sheets.
+        The sheets's content is directly integrated in the first one (the one that will contain the appropriate namespaces)
+        -->
+        
+        <xslt in="${xslt.home}/transformations/ddi2fr/ddi2fr-fixed.xsl" out="${temp.home}/temp.xsl"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../transformations/ddi2fr/drivers.xsl"/>
+        </xslt>
+        
+        <xslt in="${temp.home}/temp.xsl" out="${temp.home}/temp-bis.xsl"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../transformations/ddi2fr/functions.xsl"/>
+        </xslt>
+        
+        <xslt in="${temp.home}/temp-bis.xsl" out="${xslt.home}/transformations/ddi2fr/ddi2fr.xsl"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../transformations/ddi2fr/browsing.xsl"/>
+        </xslt>
+        
+        <xslt in="${xslt.home}/inputs/ddi/source-fixed.xsl" out="${temp.home}/temp.xsl"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../inputs/ddi/functions.xsl"/>
+        </xslt>
+        
+        <xslt in="${temp.home}/temp.xsl" out="${xslt.home}/inputs/ddi/source.xsl"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../inputs/ddi/templates.xsl"/>
+        </xslt>
+        
+    </target>
+    
+    <!-- The target used to transform a fods into an xsl stylesheet. -->
+    <target name="fods2xsl">
+        <!-- Preformatting a matrix using a sheet for the util folder -->
+        <xslt in="${dir}/${name}.fods" out="${temp.home}/preformate.fods"
+            style="${xslt.home}/util/fods/preformatting.xsl" force="true" classpath="${saxon.jar}"/>
+        
+        <!-- From fods to xml using the generator -->
+        <xslt in="${temp.home}/preformate.fods" out="${temp.home}/xml.xml"
+            style="${xslt.home}/transformations/fods2xml.xsl" force="true" classpath="${saxon.jar}"/>
+        
+        <!-- From xml to xsl using the generator -->
+        <xslt in="${temp.home}/xml.xml" out="${dir}/${name}.xsl"
+            style="${xslt.home}/transformations/xml2xsl.xsl" force="true" classpath="${saxon.jar}"/>
+    </target>
+    
+    <!--************************TARGETS : PREPROCESSING DDI *****************************-->
+
+    <target name="DDIPreprocessing">
+        <!-- Unindexing -->
+        <antcall target="unindexing"/>
+        <!-- For each created file (one by model), we clean. -->
+        <foreach target="cleaning" param="file" inheritall="true">
+            <path>
+                <fileset dir="${temp.home}" excludes="*-unindexed.xml"/>
+            </path>
+        </foreach>
+        <!-- Then adding titles to the created file below -->
+        <foreach target="titling" param="file" inheritall="true">
+            <path>
+                <fileset dir="${temp.home}" includes="*-cleaned.xml"/>
+            </path>
+        </foreach>
+    </target>
+    
+    <!-- Unindexing -->
+    <target name="unindexing">
+        
+        <!-- The QuestionScheme unindexes itself -->
+        <xslt in="${xml.home}/dummy.xml"
+            out="${temp.home}/${survey-name}-qb-unindexed.xml"
+            style="${xslt.home}/util/DDI/unindexing.xsl" classpath="${saxon.jar}" force="true">
+            <param name="main-file"
+                expression="${survey-folder}/DDI/${survey-name}-qb.xml"/>
+            <param name="secondary-file" expression="${xml-folder}/dummy.xml"/>
+        </xslt>
+        
+        <!-- CCS unindexes with itself and the already-unindexed QuestionScheme -->
+        <xslt in="${xml.home}/dummy.xml"
+            out="${temp.home}/${survey-name}-ccs-unindexed.xml"
+            style="${xslt.home}/util/DDI/unindexing.xsl" classpath="${saxon.jar}" force="true">
+            <param name="main-file"
+                expression="${survey-folder}/DDI/${survey-name}-ccs.xml"/>
+            <param name="secondary-file"
+                expression="${temp-folder}/${survey-name}-qb-unindexed.xml"/>
+        </xslt>
+        
+        <!-- Creating an unindexed DDI for each model with the already unindexed files and adding some variables from the VariableScheme to the upcoming result -->
+        <xslt in="${xml.home}/dummy.xml" out="${xml.home}/null.xml"
+            style="${xslt.home}/util/DDI/unindexing.xsl" classpath="${saxon.jar}" force="true">
+            <param name="main-file"
+                expression="${survey-folder}/DDI/${survey-name}-su.xml"/>
+            <param name="secondary-file"
+                expression="${temp-folder}/${survey-name}-ccs-unindexed.xml"/>
+            <param name="variables-file"
+                expression="${survey-folder}/DDI/${survey-name}-vs.xml"/>
+            <param name="output-folder" expression="${temp-folder}"/>
+        </xslt>
+
+    </target>    
+    
+    <target name="cleaning" description="Cleaning DDI">
+        <basename file="${file}" property="file-name" suffix=".xml"/>
+        <xslt in="${temp.home}/${file-name}.xml" out="${temp.home}/${file-name}-cleaned.xml"
+            style="${xslt.home}/util/DDI/cleaning.xsl" classpath="${saxon.jar}" force="true"/>
+    </target>
+    
+    <target name="titling" description="Adding titles">
+        <basename file="${file}" property="file-name" suffix=".xml"/>
+        <propertyregex property="output-name" input="${file-name}" regexp="-cleaned" replace=""
+            global="true"/>
+        <xslt in="${temp.home}/${file-name}.xml" out="${temp.home}/${output-name}-final.xml"
+            style="${xslt.home}/util/DDI/titling.xsl" classpath="${saxon.jar}" force="true">
+            <param name="parameters-file"
+                expression="${survey-folder}/parameters.xml"/>
+        </xslt>
+    </target> 
+    
+    
+    <!--************************TARGET : CLEAN*****************************-->
+    <!-- Cleaning everything -->
+    <target name="clean">
+        <delete>
+            <fileset dir="${root-folder}/target/temp" includes="**/*" />
+			 <fileset dir="${root-folder}/target/test" includes="**/*" />
+			  <fileset dir="${root-folder}/target/simpsons" includes="**/*" />
+        </delete>
+    </target>
+    
+	<!--************************TARGETS WITH NON REGRESSION TEST *****************************-->
+
+	<!-- The full target with non regression tests calculates the difference with the generated XForms Simpsons questionnaire expected -->
+    <target name="full-with-test" depends="compile-tests,full">
+
+        <mkdir dir="${root-folder}/target/test/xslt" /> 
+        <!-- At the end of the treatment, the difference between the generated and the expected form written in the file target/test/xslt/diff.txt-->     
+		<foreach target="test" param="file" inheritall="true">
+            <path>
+                <fileset dir="${temp.home}" includes="*-final.xml"/>
+            </path>
+        </foreach>
+		<delete dir="${root-folder}/target/classes" />
+    </target>
+
+	<target name="test">
+	    <basename file="${file}" property="file-name" suffix=".xml"/>
+		<propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
+            global="true"/>
+		<mkdir dir="${root-folder}/target/test/xslt/${survey-name}/${form-name}" /> 
+        <java 
+       		classname="fr.insee.eno.test.Difference"
+           	fork="true"
+           >
+         <!-- the output file with differences -->
+         <arg value="${root-folder}/target/test/xslt/${survey-name}/${form-name}/diff.txt"/>
+         <!-- the input generated form to compare -->
+         <arg value="${root-folder}/target/${survey-name}/${form-name}/form/form.xhtml"/>
+         <!-- the expected form -->
+           <arg value="${survey-folder}/XForms/${form-name}/${survey-name}-form.xhtml"/>
+         <classpath refid="classpath"/>
+       </java>
+	</target>
+	
+	
+    <!-- Classes compilation for tests -->
+	<target name="compile-tests">
+		<mkdir dir="${root-folder}/target/classes" /> 
+		<javac srcdir="${test.java.home}/fr/insee/eno/test"
+			destdir="${root-folder}/target/classes"
+			includeantruntime="false">
+			 <classpath refid="classpath"/>
+		</javac>
+	</target>
+
+
+</project>
