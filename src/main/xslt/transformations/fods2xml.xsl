@@ -7,8 +7,8 @@
     xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" exclude-result-prefixes="#all"
     version="2.0">
 
-    <xsl:import href="../entrees/fods/source.xsl"/>
-    <xsl:import href="../sorties/xml/models.xsl"/>
+    <xsl:import href="../inputs/fods/source.xsl"/>
+    <xsl:import href="../outputs/xml/models.xsl"/>
     <xsl:import href="../lib.xsl"/>
 
     <xsl:output method="xml" indent="yes"/>
@@ -26,61 +26,61 @@
 
     
     <xd:desc>
-        <xd:p>A l'élément table, on associe la racine d'un élément</xd:p>
+        <xd:p>Linking and element's root the table element</xd:p>
     </xd:desc>
     <xsl:template match="table:table" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('racine',$driver)" mode="model">
+        <xsl:apply-templates select="il:append-empty-element('root',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
 
     <xd:desc>
-        <xd:p>Au premier table:table-row, on associe rien (elle va contenir le nom des colonnes)</xd:p>
+        <xd:p>To the first table:table-row, not linking anything (it will contain the columns names)</xd:p>
     </xd:desc>
     <xsl:template match="table:table-row[position()=1]" mode="source"/>
 
     <xd:desc>
-        <xd:p>Aux autres table:table-row, on associe l'élément elementGenerique</xd:p>
+        <xd:p>To the other table:table-row, linking the GenericElement element</xd:p>
     </xd:desc>
     <xsl:template match="table:table-row[position()>1]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('elementGenerique',$driver)"
+        <xsl:apply-templates select="il:append-empty-element('GenericElement',$driver)"
             mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
 
     <xd:desc>
-        <xd:p>A l'élément table:table-table-cell on associe l'élément elementDefini</xd:p>
+        <xd:p>Linking the DefinedElement element to the table:table-table-cell element</xd:p>
     </xd:desc>
     <xsl:template match="table:table-cell" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('elementDefini',$driver)" mode="model">
+        <xsl:apply-templates select="il:append-empty-element('DefinedElement',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
 
     <xd:desc>
-        <xd:p>A la fonction de recuperation du nom d'un élément xml, on associe la fonction d'envoi de nom d'une colonne</xd:p>
+        <xd:p>Linking the column name getter function to the xml element name getter function</xd:p>
     </xd:desc>
-    <xsl:function name="iatxml:get-nomElement">
+    <xsl:function name="iatxml:get-element-name">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="iatfods:get-nomColonne($context)"/>
+        <xsl:apply-templates select="iatfods:get-column-name($context)"/>
     </xsl:function>
 
     <xd:desc>
-        <xd:p>A la fonction de recuperation de la valeur d'un élément xml, on associe la fonction d'envoi du contenu d'une cellule</xd:p>
+        <xd:p>Linking the cell content getter function to the xml element value getter function</xd:p>
     </xd:desc>
-    <xsl:function name="iatxml:get-valeur">
+    <xsl:function name="iatxml:get-value">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="iatfods:get-contenu($context)"/>
+        <xsl:apply-templates select="iatfods:get-content($context)"/>
     </xsl:function>
 
 </xsl:stylesheet>
