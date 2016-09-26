@@ -6,7 +6,7 @@ src/main/xslt/inputs/ddi/source.xsl
 src/main/xslt/inputs/ddi/templates.xsl
 src/main/xslt/inputs/ddi/functions.xsl
 src/main/xslt/transformations/ddi2fr/ddi2fr.xsl
-src/main/xslt/transformations/ddi2fr/browsing.xsl
+src/main/xslt/transformations/ddi2fr/tree-navigation.xsl
 src/main/xslt/transformations/ddi2fr/functions.xsl
 src/main/xslt/transformations/ddi2fr/drivers.xsl
 src/main/xml/null.xml
