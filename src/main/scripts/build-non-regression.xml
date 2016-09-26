@@ -5,17 +5,17 @@
     
     <!-- Script properties Capgemini -->
     <property name="survey-name" value="simpsons"/>
-    <property name="survey-folder" value="${root-folder}/surveys/${survey-name}"/>    
+    <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>    
     
     <!--************************MAIN TARGETS*****************************-->
     
     <!-- The first main target that can be called -->
     <!-- Cleaning, preprocessing the DDI and preprocessing the generator -->
     <target name="full" depends="clean, DDIPreprocessing, ENOPreprocessing">
-        <!-- For each unindexed file create in temp, creating the corresponding XForms -->
+        <!-- For each dereferenced file create in temp, creating the corresponding xforms -->
         <foreach target="ddi2fr" param="file" inheritall="true">
             <path>
-                <fileset dir="${temp.home}" includes="*-final.xml"/>
+                <fileset dir="${temp.home}" includes="*-final.tmp"/>
             </path>
         </foreach>
     </target>
@@ -25,13 +25,13 @@
     <!-- We must get the mapping between the VariableScheme and the identifiers (QuestionScheme side) before launching, which explains the dependence -->
     <target name="ddi2fr">
 
-        <basename file="${file}" property="file-name" suffix=".xml"/>
+        <basename file="${file}" property="file-name" suffix=".tmp"/>
         <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
             global="true"/>
 
-        <!-- Generating XForms from the DDI -->
-        <xslt in="${temp.home}/${file-name}.xml"
-            out="${temp.home}/XForms/${form-name}/basic-form.xhtml"
+        <!-- Generating xforms from the DDI -->
+        <xslt in="${temp.home}/${file-name}.tmp"
+            out="${temp.home}/xforms/${form-name}/basic-form.tmp"
             style="${xslt.home}/transformations/ddi2fr/ddi2fr.xsl" force="true"
             classpath="${saxon.jar}">
             <param name="campaign" expression="${survey-name}"/>
@@ -39,11 +39,11 @@
             <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
         </xslt>
 
-        <!-- Adding the layer in charge of the survey's browsing -->
+        <!-- Adding the layer in charge of the survey's navigation -->
         <xslt
-            in="${temp.home}/XForms/${form-name}/basic-form.xhtml"
+            in="${temp.home}/xforms/${form-name}/basic-form.tmp"
             out="${root-folder}/target/${survey-name}/${form-name}/form/form.xhtml"
-            style="${xslt.home}/util/orbeon-form-runner/browsing-and-template.xsl" force="true"
+            style="${xslt.home}/util/fr/browsing-and-template.xsl" force="true"
             classpath="${saxon.jar}">
             <param name="campaign" expression="${survey-name}"/>
             <param name="model" expression="${form-name}"/>
@@ -51,7 +51,7 @@
         </xslt>
         
         <delete
-            file="${survey-folder}/XForms/${form-name}/form/basic-form.xhtml"/>
+            file="${survey-folder}/xforms/${form-name}/form/basic-form.tmp"/>
 
     </target>
 
@@ -70,7 +70,7 @@
         </antcall>
         <antcall target="fods2xsl">
             <param name="dir" value="${xslt.home}/transformations/ddi2fr"/>
-            <param name="name" value="browsing"/>
+            <param name="name" value="tree-navigation"/>
         </antcall>
         <antcall target="fods2xsl">
             <param name="dir" value="${xslt.home}/inputs/ddi/"/>
@@ -89,27 +89,27 @@
         The sheets's content is directly integrated in the first one (the one that will contain the appropriate namespaces)
         -->
         
-        <xslt in="${xslt.home}/transformations/ddi2fr/ddi2fr-fixed.xsl" out="${temp.home}/temp.xsl"
+        <xslt in="${xslt.home}/transformations/ddi2fr/ddi2fr-fixed.xsl" out="${temp.home}/temp.tmp"
             style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
             <param name="generated-file" expression="../../transformations/ddi2fr/drivers.xsl"/>
         </xslt>
         
-        <xslt in="${temp.home}/temp.xsl" out="${temp.home}/temp-bis.xsl"
+        <xslt in="${temp.home}/temp.tmp" out="${temp.home}/temp-bis.tmp"
             style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
             <param name="generated-file" expression="../../transformations/ddi2fr/functions.xsl"/>
         </xslt>
         
-        <xslt in="${temp.home}/temp-bis.xsl" out="${xslt.home}/transformations/ddi2fr/ddi2fr.xsl"
+        <xslt in="${temp.home}/temp-bis.tmp" out="${xslt.home}/transformations/ddi2fr/ddi2fr.xsl"
             style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
-            <param name="generated-file" expression="../../transformations/ddi2fr/browsing.xsl"/>
+            <param name="generated-file" expression="../../transformations/ddi2fr/tree-navigation.xsl"/>
         </xslt>
         
-        <xslt in="${xslt.home}/inputs/ddi/source-fixed.xsl" out="${temp.home}/temp.xsl"
+        <xslt in="${xslt.home}/inputs/ddi/source-fixed.xsl" out="${temp.home}/temp.tmp"
             style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
             <param name="generated-file" expression="../../inputs/ddi/functions.xsl"/>
         </xslt>
         
-        <xslt in="${temp.home}/temp.xsl" out="${xslt.home}/inputs/ddi/source.xsl"
+        <xslt in="${temp.home}/temp.tmp" out="${xslt.home}/inputs/ddi/source.xsl"
             style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
             <param name="generated-file" expression="../../inputs/ddi/templates.xsl"/>
         </xslt>
@@ -119,85 +119,85 @@
     <!-- The target used to transform a fods into an xsl stylesheet. -->
     <target name="fods2xsl">
         <!-- Preformatting a matrix using a sheet for the util folder -->
-        <xslt in="${dir}/${name}.fods" out="${temp.home}/preformate.fods"
+        <xslt in="${dir}/${name}.fods" out="${temp.home}/preformate.tmp"
             style="${xslt.home}/util/fods/preformatting.xsl" force="true" classpath="${saxon.jar}"/>
         
         <!-- From fods to xml using the generator -->
-        <xslt in="${temp.home}/preformate.fods" out="${temp.home}/xml.xml"
+        <xslt in="${temp.home}/preformate.tmp" out="${temp.home}/xml.tmp"
             style="${xslt.home}/transformations/fods2xml.xsl" force="true" classpath="${saxon.jar}"/>
         
         <!-- From xml to xsl using the generator -->
-        <xslt in="${temp.home}/xml.xml" out="${dir}/${name}.xsl"
+        <xslt in="${temp.home}/xml.tmp" out="${dir}/${name}.xsl"
             style="${xslt.home}/transformations/xml2xsl.xsl" force="true" classpath="${saxon.jar}"/>
     </target>
     
     <!--************************TARGETS : PREPROCESSING DDI *****************************-->
 
     <target name="DDIPreprocessing">
-        <!-- Unindexing -->
-        <antcall target="unindexing"/>
+        <!-- dereferencing -->
+        <antcall target="dereferencing"/>
         <!-- For each created file (one by model), we clean. -->
         <foreach target="cleaning" param="file" inheritall="true">
             <path>
-                <fileset dir="${temp.home}" excludes="*-unindexed.xml"/>
+                <fileset dir="${temp.home}" excludes="*-dereferenced.tmp"/>
             </path>
         </foreach>
         <!-- Then adding titles to the created file below -->
         <foreach target="titling" param="file" inheritall="true">
             <path>
-                <fileset dir="${temp.home}" includes="*-cleaned.xml"/>
+                <fileset dir="${temp.home}" includes="*-cleaned.tmp"/>
             </path>
         </foreach>
     </target>
     
-    <!-- Unindexing -->
-    <target name="unindexing">
+    <!-- dereferencing -->
+    <target name="dereferencing">
         
-        <!-- The QuestionScheme unindexes itself -->
+        <!-- The QuestionScheme dereferences itself -->
         <xslt in="${xml.home}/dummy.xml"
-            out="${temp.home}/${survey-name}-qb-unindexed.xml"
-            style="${xslt.home}/util/DDI/unindexing.xsl" classpath="${saxon.jar}" force="true">
+            out="${temp.home}/${survey-name}-qb-dereferenced.tmp"
+            style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
             <param name="main-file"
-                expression="${survey-folder}/DDI/${survey-name}-qb.xml"/>
+                expression="${survey-folder}/ddi/${survey-name}-qb.xml"/>
             <param name="secondary-file" expression="${xml-folder}/dummy.xml"/>
         </xslt>
         
-        <!-- CCS unindexes with itself and the already-unindexed QuestionScheme -->
+        <!-- CCS dereferences with itself and the already-dereferenced QuestionScheme -->
         <xslt in="${xml.home}/dummy.xml"
-            out="${temp.home}/${survey-name}-ccs-unindexed.xml"
-            style="${xslt.home}/util/DDI/unindexing.xsl" classpath="${saxon.jar}" force="true">
+            out="${temp.home}/${survey-name}-ccs-dereferenced.tmp"
+            style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
             <param name="main-file"
-                expression="${survey-folder}/DDI/${survey-name}-ccs.xml"/>
+                expression="${survey-folder}/ddi/${survey-name}-ccs.xml"/>
             <param name="secondary-file"
-                expression="${temp-folder}/${survey-name}-qb-unindexed.xml"/>
+                expression="${temp-folder}/${survey-name}-qb-dereferenced.tmp"/>
         </xslt>
         
-        <!-- Creating an unindexed DDI for each model with the already unindexed files and adding some variables from the VariableScheme to the upcoming result -->
+        <!-- Creating an dereferenced DDI for each model with the already dereferenced files and adding some variables from the VariableScheme to the upcoming result -->
         <xslt in="${xml.home}/dummy.xml" out="${xml.home}/null.xml"
-            style="${xslt.home}/util/DDI/unindexing.xsl" classpath="${saxon.jar}" force="true">
+            style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
             <param name="main-file"
-                expression="${survey-folder}/DDI/${survey-name}-su.xml"/>
+                expression="${survey-folder}/ddi/${survey-name}-su.xml"/>
             <param name="secondary-file"
-                expression="${temp-folder}/${survey-name}-ccs-unindexed.xml"/>
+                expression="${temp-folder}/${survey-name}-ccs-dereferenced.tmp"/>
             <param name="variables-file"
-                expression="${survey-folder}/DDI/${survey-name}-vs.xml"/>
+                expression="${survey-folder}/ddi/${survey-name}-vs.tmp"/>
             <param name="output-folder" expression="${temp-folder}"/>
         </xslt>
 
     </target>    
     
     <target name="cleaning" description="Cleaning DDI">
-        <basename file="${file}" property="file-name" suffix=".xml"/>
-        <xslt in="${temp.home}/${file-name}.xml" out="${temp.home}/${file-name}-cleaned.xml"
-            style="${xslt.home}/util/DDI/cleaning.xsl" classpath="${saxon.jar}" force="true"/>
+        <basename file="${file}" property="file-name" suffix=".tmp"/>
+        <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${file-name}-cleaned.tmp"
+            style="${xslt.home}/util/ddi/cleaning.xsl" classpath="${saxon.jar}" force="true"/>
     </target>
     
     <target name="titling" description="Adding titles">
-        <basename file="${file}" property="file-name" suffix=".xml"/>
+        <basename file="${file}" property="file-name" suffix=".tmp"/>
         <propertyregex property="output-name" input="${file-name}" regexp="-cleaned" replace=""
             global="true"/>
-        <xslt in="${temp.home}/${file-name}.xml" out="${temp.home}/${output-name}-final.xml"
-            style="${xslt.home}/util/DDI/titling.xsl" classpath="${saxon.jar}" force="true">
+        <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${output-name}-final.tmp"
+            style="${xslt.home}/util/ddi/titling.xsl" classpath="${saxon.jar}" force="true">
             <param name="parameters-file"
                 expression="${survey-folder}/parameters.xml"/>
         </xslt>
@@ -216,21 +216,21 @@
     
 	<!--************************TARGETS WITH NON REGRESSION TEST *****************************-->
 
-	<!-- The full target with non regression tests calculates the difference with the generated XForms Simpsons questionnaire expected -->
+	<!-- The full target with non regression tests calculates the difference with the generated xforms Simpsons questionnaire expected -->
     <target name="full-with-test" depends="compile-tests,full">
 
         <mkdir dir="${root-folder}/target/test/xslt" /> 
         <!-- At the end of the treatment, the difference between the generated and the expected form written in the file target/test/xslt/diff.txt-->     
 		<foreach target="test" param="file" inheritall="true">
             <path>
-                <fileset dir="${temp.home}" includes="*-final.xml"/>
+                <fileset dir="${temp.home}" includes="*-final.tmp"/>
             </path>
         </foreach>
 		<delete dir="${root-folder}/target/classes" />
     </target>
 
 	<target name="test">
-	    <basename file="${file}" property="file-name" suffix=".xml"/>
+	    <basename file="${file}" property="file-name" suffix=".tmp"/>
 		<propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
             global="true"/>
 		<mkdir dir="${root-folder}/target/test/xslt/${survey-name}/${form-name}" /> 
@@ -243,7 +243,7 @@
          <!-- the input generated form to compare -->
          <arg value="${root-folder}/target/${survey-name}/${form-name}/form/form.xhtml"/>
          <!-- the expected form -->
-           <arg value="${survey-folder}/XForms/${form-name}/${survey-name}-form.xhtml"/>
+           <arg value="${survey-folder}/xforms/${form-name}/${survey-name}-form.xhtml"/>
          <classpath refid="classpath"/>
        </java>
 	</target>

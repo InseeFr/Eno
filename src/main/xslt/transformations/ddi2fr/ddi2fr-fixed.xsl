@@ -8,7 +8,7 @@
     exclude-result-prefixes="xd" version="2.0">
 
     <xsl:import href="../../inputs/ddi/source.xsl"/>
-    <xsl:import href="../../outputs/orbeon-form-runner/models.xsl"/>
+    <xsl:import href="../../outputs/fr/models.xsl"/>
     <xsl:import href="../../lib.xsl"/>
 
     <xsl:output method="xml" indent="yes"/>

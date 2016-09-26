@@ -30,7 +30,7 @@
     <xsl:template match="/">
         <!-- Several cases -->
         <xsl:choose>
-            <!-- studyUnit case, unindexing every instrument -->
+            <!-- studyUnit case, dereferencing every instrument -->
             <xsl:when test="document($main-file)//d:Instrument">
                 <xsl:variable name="root">
                     <xsl:value-of
@@ -39,7 +39,7 @@
                 </xsl:variable>
                 <xsl:for-each select="document($main-file)//d:Instrument">
                     <xsl:result-document
-                        href="{lower-case(concat('file:///',replace($output-folder, '\\' , '/'),'/',replace(r:ID/text(), concat($root/text(),'-In-'), ''),'.xml'))}"
+                        href="{lower-case(concat('file:///',replace($output-folder, '\\' , '/'),'/',replace(r:ID/text(), concat($root/text(),'-In-'), ''),'.tmp'))}"
                         method="xml">
                         <DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                             <s:StudyUnit>
@@ -53,7 +53,7 @@
                 </xsl:for-each>
             </xsl:when>
 
-            <!-- ControlConstructScheme pool case, unindexing the ControlConstructScheme -->
+            <!-- ControlConstructScheme pool case, dereferencing the ControlConstructScheme -->
             <xsl:when test="document($main-file)//d:ControlConstructScheme">
                 <d:ControlConstructScheme>
                     <xsl:apply-templates
@@ -62,7 +62,7 @@
                 </d:ControlConstructScheme>
             </xsl:when>
 
-            <!-- Questions/interviews/categories/codes pool case. Unindexing the principal elements : questions and interviews
+            <!-- Questions/interviews/categories/codes pool case. dereferencing the principal elements : questions and interviews
              -->
             <xsl:otherwise>
                 <g:ResourcePackage>

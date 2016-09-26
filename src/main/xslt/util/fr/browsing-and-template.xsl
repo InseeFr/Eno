@@ -5,7 +5,7 @@
     xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xsl:output method="xml" indent="yes" encoding="utf-8"/>
-    <!-- Transformation used to add the home page on the different surveys. -->
+    <!-- Transformation used to add the home page on the different questionnaires. -->
 
     <!-- The campaign -->
     <xsl:param name="campaign" as="xs:string"/>
