@@ -50,30 +50,30 @@
     </xsl:function>
 
 
-    <!-- Pour faire apparaître un arbre xml comme un chaîne texte -->
+    <!-- To display an xml tree like a text chain -->
     <xsl:function name="il:serialize" as="xs:string">
-        <!-- On a un noeud en entrée -->
+        <!-- Input : a node -->
         <xsl:param name="node-set"/>
-        <!-- On crée une variable -->
+        <!-- Creating a variable -->
         <xsl:variable name="rooted">
             <root>
                 <xsl:choose>
-                    <!-- Si le noeud n'est en fait que du texte, on recopie -->
+                    <!-- If the node is actually only text : recopying -->
                     <xsl:when test="$node-set instance of xs:string">
                         <xsl:copy-of select="$node-set"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <!-- S'il s'agit d'un véritable arbre xml, on enlève les balises et on les met en tant que texte -->
+                        <!-- If the node is an xml tree, we get rid of the tags and we transform then into text -->
                         <xsl:apply-templates select="$node-set" mode="il:remove-xml"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </root>
         </xsl:variable>
-        <!-- Et on renvoie le texte -->
+        <!-- Then we return the text -->
         <xsl:sequence select="$rooted/root"/>
     </xsl:function>
 
-    <!-- Pour transformer le xml en texte, pour les attributs -->
+    <!-- Used to transform the xml into text, concerning the attributes -->
     <xsl:template match="@*" mode="il:remove-xml">
         <xsl:text> </xsl:text>
         <xsl:value-of select="name()"/>
@@ -82,12 +82,12 @@
         <xsl:text>"</xsl:text>
     </xsl:template>
 
-    <!-- Lorsqu'il s'agit déjà d'un texte, on le renvoie, il n'y a rien à faire -->
+    <!-- If it is already text-typed, we return it, nothing more to do -->
     <xsl:template match="text()" mode="il:remove-xml">
         <xsl:value-of select="."/>
     </xsl:template>
 
-    <!-- on textualise le noeud qui n'a pas d'enfants -->
+    <!-- Transforming the children free node into text -->
     <xsl:template match="*[not(child::node())]" mode="il:remove-xml">
         <xsl:text>&lt;</xsl:text>
         <xsl:value-of select="local-name()"/>
@@ -95,7 +95,7 @@
         <xsl:text>/&gt;</xsl:text>
     </xsl:template>
 
-    <!-- on textualise le noeud qui a des enfants -->
+    <!-- Transforming the node that has children into text -->
     <xsl:template match="*[child::node()]" mode="il:remove-xml">
         <xsl:text>&lt;</xsl:text>
         <xsl:value-of select="local-name()"/>
@@ -107,13 +107,13 @@
         <xsl:text>&gt;</xsl:text>
     </xsl:template>
 
-    <!-- On dégage les instructions et les commentaires -->
+    <!-- Getting rid of the instructions and comments -->
     <xsl:template match="processing-instruction()|comment()" mode="il:remove-xml"/>
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Fonction pour récupérer les "enfants" d'un élément, elle est commune à toutes les entrées et sorties.</xd:p>
-            <xd:p>En effet toute sortie demandera la poursuite de l'arbre en entrée et toute entrée devra avoir une fonction décrivant le parcours de l'arbre.</xd:p>
+            <xd:p>Function to get the children of an element, common to every input and output.</xd:p>
+            <xd:p>Indeed, every output will need the follow-up of the input tree, and every input must have a function describing the tree's parsing.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:function name="iat:child-fields" as="node()*">
@@ -123,8 +123,8 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Par défaut on parcourt l'arbre xml classiquement en récupérant les enfants d'un élément.</xd:p>
-            <xd:p>Mais la fonction est surchargeable si on souhaite parcourir un arbre de manière non classique.</xd:p>
+            <xd:p>Default template to parse the xml tree while getting the children of an element.</xd:p>
+            <xd:p>But the function can be overloaded if we need to parse the tree in a non-classic way.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="@*|node()" mode="iat:child-fields" as="node()*">
@@ -133,7 +133,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Par défaut si un noeud ne renvoie rien, on passera à ses éléments enfants</xd:p>
+            <xd:p>If a node doesn't return anything, we continue with it's children elements.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="source">
@@ -142,7 +142,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Par défaut les éléments autre qu'un noeud ne déclenchent rien côté source</xd:p>
+            <xd:p>Elements that aren't nodes won't trigger anything from the source side.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="@*|text()|processing-instruction()|comment()" mode="source"/>
