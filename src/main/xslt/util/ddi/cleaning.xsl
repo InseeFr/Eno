@@ -170,7 +170,7 @@
     </xsl:template>-->
 
     <xsl:template
-        match="xhtml:p[ancestor::d:Instruction[d:InstructionName/r:String/text()='Renvoi/Note']]">
+        match="xhtml:p[ancestor::d:Instruction[d:InstructionName/r:String/text()='footnote']]">
         <xsl:copy>
             <xsl:variable name="identifier">
                 <xsl:value-of select="concat('#',@id)"/>

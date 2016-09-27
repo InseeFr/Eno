@@ -57,7 +57,7 @@
             <xsl:when test="document($main-file)//d:ControlConstructScheme">
                 <d:ControlConstructScheme>
                     <xsl:apply-templates
-                        select="document($main-file)//d:Sequence[d:TypeOfSequence/text()='Modele']"
+                        select="document($main-file)//d:Sequence[d:TypeOfSequence/text()='template']"
                     />
                 </d:ControlConstructScheme>
             </xsl:when>

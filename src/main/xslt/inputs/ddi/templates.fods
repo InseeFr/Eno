@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT6H44M58S</meta:editing-duration><meta:editing-cycles>81</meta:editing-cycles><meta:generator>LibreOffice/5.2.0.4$Windows_x86 LibreOffice_project/066b007f5ebcc236395c7d282ba488bca6720265</meta:generator><dc:date>2016-09-26T18:00:26.316000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="437" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT7H45M50S</meta:editing-duration><meta:editing-cycles>94</meta:editing-cycles><meta:generator>LibreOffice/5.2.0.4$Windows_x86 LibreOffice_project/066b007f5ebcc236395c7d282ba488bca6720265</meta:generator><dc:date>2016-09-27T11:54:08.914000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="437" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
@@ -14,7 +14,7 @@
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
        <config:config-item config:name="CursorPositionX" config:type="int">4</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">49</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">16</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -23,7 +23,7 @@
        <config:config-item config:name="PositionLeft" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionRight" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionTop" config:type="int">0</config:config-item>
-       <config:config-item config:name="PositionBottom" config:type="int">33</config:config-item>
+       <config:config-item config:name="PositionBottom" config:type="int">5</config:config-item>
        <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
        <config:config-item config:name="ZoomValue" config:type="int">85</config:config-item>
        <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -31,7 +31,7 @@
       </config:config-item-map-entry>
      </config:config-item-map-named>
      <config:config-item config:name="ActiveTable" config:type="string">Sheet1</config:config-item>
-     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1852</config:config-item>
+     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1612</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
      <config:config-item config:name="ZoomValue" config:type="int">85</config:config-item>
      <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -625,7 +625,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2016-09-26">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="16:59:29.477000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2016-09-27">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="10:53:13.297000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -916,7 +916,7 @@
       <text:p>source</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>//d:Sequence[d:TypeOfSequence/text()=&apos;Modele&apos;]</text:p>
+      <text:p>//d:Sequence[d:TypeOfSequence/text()=&apos;template&apos;]</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
       <text:p>source</text:p>
@@ -1081,33 +1081,33 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:Sequence[d:TypeOfSequence/text()=&apos;Module&apos;]</text:p>
+      <text:p>d:Sequence[d:TypeOfSequence/text()=&apos;module&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-index</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
-      <text:p>count(ancestor::d:ControlConstructReference/preceding-sibling::d:ControlConstructReference/descendant-or-self::d:Sequence[d:TypeOfSequence/text()=&apos;Module&apos;])+1</text:p>
+      <text:p>count(ancestor::d:ControlConstructReference/preceding-sibling::d:ControlConstructReference/descendant-or-self::d:Sequence[d:TypeOfSequence/text()=&apos;module&apos;])+1</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Index from a Module type sequence</text:p>
+      <text:p>Index from a module type sequence</text:p>
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro4">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:Sequence[d:TypeOfSequence/text()=&apos;Paragraphe&apos;]</text:p>
+      <text:p>d:Sequence[d:TypeOfSequence/text()=&apos;submodule&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-index</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
-      <text:p>count(parent::d:ControlConstructReference/preceding-sibling::d:ControlConstructReference/d:Sequence[d:TypeOfSequence/text()=&apos;Paragraphe&apos;])+count(ancestor::d:Sequence[d:TypeOfSequence/text()=&apos;Module&apos;]/parent::d:ControlConstructReference/preceding-sibling::d:ControlConstructReference/d:Sequence[d:TypeOfSequence/text()=&apos;Module&apos;]//d:Sequence[d:TypeOfSequence/text()=&apos;Paragraphe&apos;])+1</text:p>
+      <text:p>count(parent::d:ControlConstructReference/preceding-sibling::d:ControlConstructReference/d:Sequence[d:TypeOfSequence/text()=&apos;submodule&apos;])+count(ancestor::d:Sequence[d:TypeOfSequence/text()=&apos;module&apos;]/parent::d:ControlConstructReference/preceding-sibling::d:ControlConstructReference/d:Sequence[d:TypeOfSequence/text()=&apos;module&apos;]//d:Sequence[d:TypeOfSequence/text()=&apos;submodule&apos;])+1</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Index from a Paragraphe type sequence</text:p>
+      <text:p>Index from a submodule type sequence</text:p>
      </table:table-cell>
      <table:table-cell/>
     </table:table-row>
@@ -1188,7 +1188,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[not(descendant::d:Instruction[not(d:InstructionName/r:String/text()=&apos;Format&apos;)])]</text:p>
+      <text:p>d:QuestionItem[not(descendant::d:Instruction[not(d:InstructionName/r:String/text()=&apos;format&apos;)])]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-label</text:p>
@@ -1206,7 +1206,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionGrid[not(descendant::d:Instruction[not(d:InstructionName/r:String/text()=&apos;Format&apos;)])]</text:p>
+      <text:p>d:QuestionGrid[not(descendant::d:Instruction[not(d:InstructionName/r:String/text()=&apos;format&apos;)])]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-label</text:p>
@@ -1285,7 +1285,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;boutonradio&apos;]]</text:p>
+      <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;radio-button&apos;]]</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-output-format</text:p>
@@ -1301,7 +1301,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;listederoulante&apos;]]</text:p>
+      <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;drop-down-list&apos;]]</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-output-format</text:p>
@@ -1317,7 +1317,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;caseacocher&apos;]]</text:p>
+      <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;checkbox&apos;]]</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-output-format</text:p>
@@ -1349,7 +1349,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed) and r:GenericOutputFormat/text()=&apos;boutonradio&apos;]</text:p>
+      <text:p>d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed) and r:GenericOutputFormat/text()=&apos;radio-button&apos;]</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-output-format</text:p>
@@ -1365,7 +1365,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed) and r:GenericOutputFormat/text()=&apos;listederoulante&apos;]</text:p>
+      <text:p>d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed) and r:GenericOutputFormat/text()=&apos;drop-down-list&apos;]</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-output-format</text:p>
@@ -1381,7 +1381,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed) and r:GenericOutputFormat/text()=&apos;caseacocher&apos;]</text:p>
+      <text:p>d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed) and r:GenericOutputFormat/text()=&apos;checkbox&apos;]</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-output-format</text:p>
@@ -1650,7 +1650,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:Sequence[d:TypeOfSequence/text()=&apos;Paragraphe&apos;]</text:p>
+      <text:p>d:Sequence[d:TypeOfSequence/text()=&apos;submodule&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-style</text:p>
@@ -1662,7 +1662,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:Sequence[d:TypeOfSequence/text()=&apos;Groupe&apos;]</text:p>
+      <text:p>d:Sequence[d:TypeOfSequence/text()=&apos;group&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-style</text:p>
@@ -1674,7 +1674,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro4">
      <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
-      <text:p>d:Instruction[d:InstructionName/r:String=&apos;Aide&apos;]</text:p>
+      <text:p>d:Instruction[d:InstructionName/r:String=&apos;help&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-style</text:p>
@@ -1686,7 +1686,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
-      <text:p>d:Instruction[d:InstructionName/r:String=&apos;Consigne&apos;]</text:p>
+      <text:p>d:Instruction[d:InstructionName/r:String=&apos;instruction&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-style</text:p>
@@ -1785,7 +1785,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:Sequence[child::d:TypeOfSequence/text()=&apos;Module&apos; and (ancestor::d:ThenConstructReference or ancestor::d:ElseConstructReference) and ancestor::d:Sequence[child::d:TypeOfSequence/text()=&apos;Cachable&apos;]]</text:p>
+      <text:p>d:Sequence[child::d:TypeOfSequence/text()=&apos;module&apos; and (ancestor::d:ThenConstructReference or ancestor::d:ElseConstructReference) and ancestor::d:Sequence[child::d:TypeOfSequence/text()=&apos;potentially-hidden&apos;]]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-cachable</text:p>
@@ -1797,7 +1797,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:Sequence[(parent::d:ThenConstructReference or parent::d:ElseConstructReference) and child::d:TypeOfSequence/text()=&apos;Cachable&apos; and not(child::d:TypeOfSequence/text()=&apos;Module&apos;)]</text:p>
+      <text:p>d:Sequence[(parent::d:ThenConstructReference or parent::d:ElseConstructReference) and child::d:TypeOfSequence/text()=&apos;potentially-hidden&apos; and not(child::d:TypeOfSequence/text()=&apos;module&apos;)]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-cachable</text:p>
@@ -1809,7 +1809,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:Sequence[(parent::d:ThenConstructReference or parent::d:ElseConstructReference) and child::d:TypeOfSequence/text()=&apos;Grisable&apos;]</text:p>
+      <text:p>d:Sequence[(parent::d:ThenConstructReference or parent::d:ElseConstructReference) and child::d:TypeOfSequence/text()=&apos;potentially-readonly&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>iatddi:get-grisable</text:p>
