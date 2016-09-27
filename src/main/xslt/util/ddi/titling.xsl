@@ -9,10 +9,10 @@
     <xsl:strip-space elements="*"/>
 
     <xsl:variable name="style">
-        <xsl:copy-of select="document($parameters-file)/parameters/title"/>
+        <xsl:copy-of select="document($parameters-file)/Parameters/Title"/>
     </xsl:variable>
-    <xsl:variable name="number-free-seq" select="$style/title/sequence/numberFreeSeq"/>
-    <xsl:variable name="number-free-filter" select="$style/title/question/notNumberedLastFilter"/>
+    <xsl:variable name="number-free-seq" select="$style/Title/Sequence/numberFreeSeq"/>
+    <xsl:variable name="number-free-filter" select="$style/Title/question/notNumberedLastFilter"/>
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
@@ -41,9 +41,9 @@
     </xd:doc>
     <xsl:template match="d:Sequence[d:TypeOfSequence='Module' or d:TypeOfSequence='Paragraphe' or d:TypeOfSequence='Groupe']/r:Label">
         <xsl:variable name="level" select="parent::d:Sequence/d:TypeOfSequence"/>
-        <xsl:variable name="seq-style" select="$style/title/sequence/level[@nom=$level]"/>
-        <xsl:variable name="parent-level" select="$style/title/sequence/level[following-sibling::level[1]/@nom=$level]/@nom"/>
-        <xsl:variable name="gd-parent-level" select="$style/title/sequence/level[following-sibling::level[2]/@nom=$level]/@nom"/>
+        <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@nom=$level]"/>
+        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@nom=$level]/@nom"/>
+        <xsl:variable name="gd-parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[2]/@nom=$level]/@nom"/>
 
         <xsl:variable name="number">
             <xsl:apply-templates select="parent::d:Sequence" mode="calculate-number"/>
@@ -52,10 +52,10 @@
         <xsl:variable name="prefix">
             <xsl:choose>
                 <xsl:when test="$number=''">
-                    <xsl:value-of select="$seq-style/preSeq"/>
+                    <xsl:value-of select="$seq-style/PreSeq"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="concat($seq-style/preSeq,$number,$seq-style/postNumSeq)"/>
+                    <xsl:value-of select="concat($seq-style/PreSeq,$number,$seq-style/PostNumSeq)"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -82,34 +82,34 @@
                 <xsl:otherwise>Module</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="parent-level" select="$style/title/sequence/level[following-sibling::level[1]/@nom=$question-seq-level]/@nom"/>
-        <xsl:variable name="styleQuest" select="$style/title/question/level[@nom=$question-seq-level]"/>
+        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@nom=$question-seq-level]/@nom"/>
+        <xsl:variable name="styleQuest" select="$style/Title/question/Level[@nom=$question-seq-level]"/>
         
         <xsl:variable name="parent-number">
-            <xsl:if test="$styleQuest/numParent !='N'">
+            <xsl:if test="$styleQuest/NumParent !='N'">
                 <xsl:apply-templates select="ancestor::d:Sequence[d:TypeOfSequence='Module' or d:TypeOfSequence='Paragraphe' or d:TypeOfSequence='Groupe']
                     [1]" mode="calculate-number"/>
             </xsl:if>
         </xsl:variable>
 
         <xsl:variable name="number">
-            <xsl:if test="iatddi:isSubQuestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
+            <xsl:if test="iatddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
                 <!-- Counting the questions that aren't subQuestions -->
-<!--                <xsl:number count="d:ControlConstructReference[d:QuestionConstruct and (iatddi:isSubQuestion(d:QuestionConstruct,$niveauSeqQuest))]" 
-                    level="any" format="{$styleQuest/styleNumQuest}" from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$niveauSeqQuest]]"/>
--->                <xsl:number count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (iatddi:isSubQuestion(ancestor::d:QuestionConstruct,$question-seq-level))=0]" 
-                    level="any" format="{$styleQuest/styleNumQuest}" from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"/>
+<!--                <xsl:number count="d:ControlConstructReference[d:QuestionConstruct and (iatddi:is-subquestion(d:QuestionConstruct,$niveauSeqQuest))]" 
+                    level="any" format="{$styleQuest/StyleNumQuest}" from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$niveauSeqQuest]]"/>
+-->                <xsl:number count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (iatddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))=0]" 
+                    level="any" format="{$styleQuest/StyleNumQuest}" from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"/>
             </xsl:if>
         </xsl:variable>
 
-        <!--Question number by concatenation: preQuest + (($parent-number + postNumParentQuest) + $number + postNumQuest)-->
+        <!--Question number by concatenation: PreQuest + (($parent-number + PostNumParentQuest) + $number + PostNumQuest)-->
         <xsl:variable name="prefix">
-            <xsl:value-of select="$styleQuest/preQuest"/>
+            <xsl:value-of select="$styleQuest/PreQuest"/>
             <xsl:if test="$number!=''">
                 <xsl:if test="$parent-number!=''">
-                    <xsl:value-of select="concat($parent-number,$styleQuest/postNumParentQuest)"/>
+                    <xsl:value-of select="concat($parent-number,$styleQuest/PostNumParentQuest)"/>
                 </xsl:if>
-                <xsl:value-of select="concat($number,$styleQuest/postNumQuest)"/>
+                <xsl:value-of select="concat($number,$styleQuest/PostNumQuest)"/>
             </xsl:if>
         </xsl:variable> 
         
@@ -127,24 +127,24 @@
     </xd:doc>    
     <xsl:template match="d:Sequence" mode="calculate-number">
         <xsl:variable name="level" select="d:TypeOfSequence"/>
-        <xsl:variable name="seq-style" select="$style/title/sequence/level[@nom=$level]"/>
-        <xsl:variable name="parent-level" select="$style/title/sequence/level[following-sibling::level[1]/@nom=$level]/@nom"/>
+        <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@nom=$level]"/>
+        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@nom=$level]/@nom"/>
         
         <xsl:variable name="number">
             <xsl:if test="not(index-of($number-free-seq,r:ID)>0)">
                 <xsl:number count="d:Sequence[d:TypeOfSequence/text()=$level and not(index-of($number-free-seq,r:ID)>0)]" 
-                    level="any" format="{$seq-style/styleNumSeq}" from="d:Sequence[d:TypeOfSequence/text()=$parent-level]"/>
+                    level="any" format="{$seq-style/StyleNumSeq}" from="d:Sequence[d:TypeOfSequence/text()=$parent-level]"/>
             </xsl:if>
         </xsl:variable>
         <xsl:variable name="parent-number">
-            <xsl:if test="$seq-style/numParent !='N'">
+            <xsl:if test="$seq-style/NumParent !='N'">
                 <xsl:apply-templates select="ancestor::d:Sequence[d:TypeOfSequence/text()=$parent-level]" mode="calculate-number"/>
             </xsl:if>
         </xsl:variable>
         
         <xsl:if test="$number!=''">
             <xsl:if test="$parent-number!=''">
-                <xsl:value-of select="concat($parent-number,$seq-style/postNumParentSeq)"/>
+                <xsl:value-of select="concat($parent-number,$seq-style/PostNumParentSeq)"/>
             </xsl:if>
             <xsl:value-of select="$number"/>
         </xsl:if>
@@ -155,7 +155,7 @@
             <xd:p>Function used to identify if 2 lists have common elements</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="iatddi:isCommon">
+    <xsl:function name="iatddi:is-common">
         <xsl:param name="list1"/>
         <xsl:param name="list2"/>
         <xsl:variable name="isCommon">
@@ -165,7 +165,7 @@
                 <xsl:when test="index-of($list1,$list2[1])>0">true</xsl:when>
                 <xsl:when test="empty($list2[2])">false</xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="iatddi:isCommon($list1,$list2[position()>1])"/>
+                    <xsl:value-of select="iatddi:is-common($list1,$list2[position()>1])"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -182,7 +182,7 @@
             - Isn't the last element of it's actual sequence
     This sub-question can depend on one or more of these filters, we just verify that there are more than 0 -->
 
-    <xsl:function name="iatddi:isSubQuestion">
+    <xsl:function name="iatddi:is-subquestion">
         <xsl:param name="context"/>
         <xsl:param name="seq-level"/>
         
@@ -196,7 +196,7 @@
             and (following-sibling::d:ControlConstructReference[d:IfThenElse or d:QuestionConstruct]
             or index-of($number-free-filter,d:IfThenElse/r:ID)>0)
             and preceding-sibling::d:ControlConstructReference[d:QuestionConstruct]]
-            [iatddi:isCommon(preceding-sibling::d:ControlConstructReference[d:QuestionConstruct][1]//r:TargetParameterReference/r:ID,
+            [iatddi:is-common(preceding-sibling::d:ControlConstructReference[d:QuestionConstruct][1]//r:TargetParameterReference/r:ID,
             d:IfThenElse/d:IfCondition//r:SourceParameterReference/r:ID)])"/>
     </xsl:function>
 

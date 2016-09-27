@@ -22,7 +22,7 @@
             <xd:p>The default element to match</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="sheet" mode="model">
+    <xsl:template match="Sheet" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- Creating the root element of an xsl sheet -->
         <xsl:element name='xsl:stylesheet'>
@@ -41,7 +41,7 @@
             <xd:p>Calls a function to get the driver to launch linked to the xpath.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="template" mode="model">
+    <xsl:template match="Template" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:comment select="iatxsl:get-documentation($source-context)"/>
         <xsl:text>&#xA;</xsl:text>

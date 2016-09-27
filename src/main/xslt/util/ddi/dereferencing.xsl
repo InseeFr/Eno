@@ -16,10 +16,10 @@
         </xd:desc>
     </xd:doc>
     <xsl:variable name="total-ddi">
-        <conteneur>
+        <Container>
             <xsl:copy-of select="document($main-file)"/>
             <xsl:copy-of select="document($secondary-file)"/>
-        </conteneur>
+        </Container>
     </xsl:variable>
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">

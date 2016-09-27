@@ -641,7 +641,7 @@
                 <xsl:value-of select="il:serialize(iatfr:get-hint($source-context, $language))"/>
             </hint>
             <xsl:for-each select="0 to 99">
-                <xsl:variable name="caption">
+                <xsl:variable name="label">
                     <xsl:choose>
                         <xsl:when test="number(.)&lt;10">
                             <xsl:value-of select="concat('0',string(.))"/>
@@ -653,10 +653,10 @@
                 </xsl:variable>
                 <item>
                     <label>
-                        <xsl:value-of select="$caption"/>
+                        <xsl:value-of select="$label"/>
                     </label>
                     <value>
-                        <xsl:value-of select="$caption"/>
+                        <xsl:value-of select="$label"/>
                     </value>
                 </item>
             </xsl:for-each>
@@ -1134,7 +1134,7 @@
             </xf:itemset>
         </xsl:element>
         <xsl:element name="xhtml:span">
-            <xsl:attribute name="class" select="'suffixe-double-duration'"/>
+            <xsl:attribute name="class" select="'double-duration-suffix'"/>
             <xsl:text>heure(s)</xsl:text>
         </xsl:element>
 
@@ -1187,7 +1187,7 @@
             </xf:itemset>
         </xsl:element>
         <xsl:element name="xhtml:span">
-            <xsl:attribute name="class" select="'suffixe-double-duration'"/>
+            <xsl:attribute name="class" select="'double-duration-suffix'"/>
             <xsl:text>centième(s)</xsl:text>
         </xsl:element>
     </xsl:template>

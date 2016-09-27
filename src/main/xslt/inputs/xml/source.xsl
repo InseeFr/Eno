@@ -19,7 +19,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="/" mode="source">
-        <xsl:apply-templates select="root" mode="source"/>
+        <xsl:apply-templates select="Root" mode="source"/>
     </xsl:template>
 
     <xd:doc>

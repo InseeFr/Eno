@@ -10,3 +10,4 @@ src/main/xslt/transformations/ddi2fr/tree-navigation.xsl
 src/main/xslt/transformations/ddi2fr/functions.xsl
 src/main/xslt/transformations/ddi2fr/drivers.xsl
 src/main/xml/null.xml
+DDI/
