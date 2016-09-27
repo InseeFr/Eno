@@ -12,7 +12,7 @@
         <xsl:copy-of select="document($parameters-file)/Parameters/Title"/>
     </xsl:variable>
     <xsl:variable name="number-free-seq" select="$style/Title/Sequence/NumberFreeSeq"/>
-    <xsl:variable name="number-free-filter" select="$style/Title/question/NotNumberedLastFilter"/>
+    <xsl:variable name="number-free-filter" select="$style/Title/Question/NotNumberedLastFilter"/>
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
@@ -83,7 +83,7 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@nom=$question-seq-level]/@nom"/>
-        <xsl:variable name="styleQuest" select="$style/Title/question/Level[@nom=$question-seq-level]"/>
+        <xsl:variable name="styleQuest" select="$style/Title/Question/Level[@nom=$question-seq-level]"/>
         
         <xsl:variable name="parent-number">
             <xsl:if test="$styleQuest/NumParent !='N'">
