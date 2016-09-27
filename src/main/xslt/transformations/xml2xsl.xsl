@@ -25,11 +25,11 @@
     <xd:desc>
         <xd:p>Linking an xsl sheet to the root element of the xml file</xd:p>
     </xd:desc>
-    <xsl:template match="root" mode="source">
+    <xsl:template match="Root" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('sheet',$driver)" mode="model">
+        <xsl:apply-templates select="il:append-empty-element('Sheet',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -42,7 +42,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('template',$driver)" mode="model">
+        <xsl:apply-templates select="il:append-empty-element('Template',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>

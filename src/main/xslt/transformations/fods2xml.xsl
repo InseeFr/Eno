@@ -32,7 +32,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('root',$driver)" mode="model">
+        <xsl:apply-templates select="il:append-empty-element('Root',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>

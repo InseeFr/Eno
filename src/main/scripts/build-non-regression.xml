@@ -11,6 +11,7 @@
     
     <!-- The first main target that can be called -->
     <!-- Cleaning, preprocessing the DDI and preprocessing the generator -->
+    <!-- Targets are called in the strict order of the depends attribute : clean first, then DDIPreprocessing and finally ENOPreprocessing-->
     <target name="full" depends="clean, DDIPreprocessing, ENOPreprocessing">
         <!-- For each dereferenced file create in temp, creating the corresponding xforms -->
         <foreach target="ddi2fr" param="file" inheritall="true">
@@ -134,7 +135,8 @@
     <!--************************TARGETS : PREPROCESSING DDI *****************************-->
 
     <target name="DDIPreprocessing">
-        <!-- dereferencing -->
+        <!-- Dereferencing : -->
+        <!-- Creates multiple files with a -dereferenced suffix in the temp folder-->
         <antcall target="dereferencing"/>
         <!-- For each created file (one by model), we clean. -->
         <foreach target="cleaning" param="file" inheritall="true">
@@ -150,10 +152,11 @@
         </foreach>
     </target>
     
-    <!-- dereferencing -->
+    <!-- Dereferencing -->
     <target name="dereferencing">
         
         <!-- The QuestionScheme dereferences itself -->
+        <!-- Creates the output file with a -qb-dereferenced suffix -->
         <xslt in="${xml.home}/dummy.xml"
             out="${temp.home}/${survey-name}-qb-dereferenced.tmp"
             style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
@@ -163,6 +166,7 @@
         </xslt>
         
         <!-- CCS dereferences with itself and the already-dereferenced QuestionScheme -->
+        <!-- Creates the output file with -ccs-dereferenced suffix -->
         <xslt in="${xml.home}/dummy.xml"
             out="${temp.home}/${survey-name}-ccs-dereferenced.tmp"
             style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
@@ -172,7 +176,7 @@
                 expression="${temp-folder}/${survey-name}-qb-dereferenced.tmp"/>
         </xslt>
         
-        <!-- Creating an dereferenced DDI for each model with the already dereferenced files and adding some variables from the VariableScheme to the upcoming result -->
+        <!-- Creates an dereferenced DDI for each model with the already dereferenced files and adding some variables from the VariableScheme to the upcoming result -->
         <xslt in="${xml.home}/dummy.xml" out="${xml.home}/null.xml"
             style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
             <param name="main-file"
@@ -186,12 +190,16 @@
 
     </target>    
     
+    <!-- Cleaning -->
+    <!-- Creates a -cleaned suffixed file after applying the cleaning.xsl stylesheet to the input file -->
     <target name="cleaning" description="Cleaning DDI">
         <basename file="${file}" property="file-name" suffix=".tmp"/>
         <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${file-name}-cleaned.tmp"
             style="${xslt.home}/util/ddi/cleaning.xsl" classpath="${saxon.jar}" force="true"/>
     </target>
     
+    <!-- Titling -->
+    <!-- Creates a -final suffixed file after applying the titling.xsl stylesheet to the input file -->
     <target name="titling" description="Adding titles">
         <basename file="${file}" property="file-name" suffix=".tmp"/>
         <propertyregex property="output-name" input="${file-name}" regexp="-cleaned" replace=""
@@ -205,7 +213,8 @@
     
     
     <!--************************TARGET : CLEAN*****************************-->
-    <!-- Cleaning everything -->
+    <!-- Cleaning everything : -->
+    <!-- Deleting the content of the temporary folders : temp, test and simpsons -->
     <target name="clean">
         <delete>
             <fileset dir="${root-folder}/target/temp" includes="**/*" />
@@ -229,6 +238,7 @@
 		<delete dir="${root-folder}/target/classes" />
     </target>
 
+    <!-- The test target comparing form.xhtml with ${survey-name}-form.xhtml -->
 	<target name="test">
 	    <basename file="${file}" property="file-name" suffix=".tmp"/>
 		<propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
@@ -247,7 +257,6 @@
          <classpath refid="classpath"/>
        </java>
 	</target>
-	
 	
     <!-- Classes compilation for tests -->
 	<target name="compile-tests">

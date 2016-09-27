@@ -20,9 +20,9 @@
             <xd:p>The default matching element</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="root" mode="model">
+    <xsl:template match="Root" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:element name="root">
+        <xsl:element name="Root">
             <!-- This will call children elements that will create an xml structure -->
             <xsl:apply-templates select="iat:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>

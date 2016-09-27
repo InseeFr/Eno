@@ -184,10 +184,10 @@
                             <xf:calculate
                                 value="{concat('xxf:evaluate-bind-property(&#34;',concat(name(),'-bind'),'&#34;,&#34;relevant&#34;)')}"/>
                             <!-- Creating a constraint equals to the sum of warning-level constraints -->
-                            <xsl:variable name="moduleName" select="name()"/>
+                            <xsl:variable name="module-name" select="name()"/>
                             <xsl:variable name="constraint">
                                 <xsl:for-each
-                                    select="//xf:bind[@name=$moduleName]//xf:constraint[@level='warning']">
+                                    select="//xf:bind[@name=$module-name]//xf:constraint[@level='warning']">
                                     <xsl:if test="not(position()=1)">
                                         <xsl:text> and </xsl:text>
                                     </xsl:if>

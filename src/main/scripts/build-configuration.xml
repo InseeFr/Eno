@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0"?>
 <project>
+    <!-- Importing the configuration files -->
     <property file="../config/config.properties"/>
     <xmlproperty file="${root}/config/ddi2fr.xml"/>
     
