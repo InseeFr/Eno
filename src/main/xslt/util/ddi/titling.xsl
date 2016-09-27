@@ -11,8 +11,8 @@
     <xsl:variable name="style">
         <xsl:copy-of select="document($parameters-file)/Parameters/Title"/>
     </xsl:variable>
-    <xsl:variable name="number-free-seq" select="$style/Title/Sequence/numberFreeSeq"/>
-    <xsl:variable name="number-free-filter" select="$style/Title/question/notNumberedLastFilter"/>
+    <xsl:variable name="number-free-seq" select="$style/Title/Sequence/NumberFreeSeq"/>
+    <xsl:variable name="number-free-filter" select="$style/Title/question/NotNumberedLastFilter"/>
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
