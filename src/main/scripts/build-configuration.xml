@@ -10,6 +10,7 @@
     <dirname property="xml-folder" file="${xml.home}/dummy"/>
     <dirname property="questionnaires-folder" file="${questionnaires.home}/dummy"/>
 
+    <!-- Tasks initialization -->
     <path id="classpath">
         <fileset dir="${lib.home}" includes="**/*.jar"/>
         <pathelement location="${root-folder}/target/classes" />
