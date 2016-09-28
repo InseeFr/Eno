@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT9H3M55S</meta:editing-duration><meta:editing-cycles>114</meta:editing-cycles><meta:generator>LibreOffice/5.2.0.4$Windows_x86 LibreOffice_project/066b007f5ebcc236395c7d282ba488bca6720265</meta:generator><dc:date>2016-09-27T16:00:02.781000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="485" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT9H55M48S</meta:editing-duration><meta:editing-cycles>132</meta:editing-cycles><meta:generator>LibreOffice/5.2.0.4$Windows_x86 LibreOffice_project/066b007f5ebcc236395c7d282ba488bca6720265</meta:generator><dc:date>2016-09-28T10:54:57.807000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="522" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">39052</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">78251</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">78357</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
-       <config:config-item config:name="CursorPositionX" config:type="int">4</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">102</config:config-item>
+       <config:config-item config:name="CursorPositionX" config:type="int">0</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">152</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -23,7 +23,7 @@
        <config:config-item config:name="PositionLeft" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionRight" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionTop" config:type="int">0</config:config-item>
-       <config:config-item config:name="PositionBottom" config:type="int">93</config:config-item>
+       <config:config-item config:name="PositionBottom" config:type="int">126</config:config-item>
        <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
        <config:config-item config:name="ZoomValue" config:type="int">85</config:config-item>
        <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -622,7 +622,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2016-09-27">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="14:41:47.723000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2016-09-28">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="10:02:58.724000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -2392,7 +2392,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez saisir un nombre entier compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text())</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and no r:Low descendant having a @isInclusive = false attribute and no @decimalPositions in r :ManagedNumericRepresentation</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
@@ -2404,7 +2408,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez saisir un nombre entier compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text())</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference child with the same specifications as before</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce11"/>
@@ -2422,7 +2430,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(r:NumberRange/r:Low/text())+1), &apos; et &apos;, r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:Low descendant with a @isInclusive = false attribute and a @decimalPositions attribute greater than 1</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2434,7 +2446,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(d:NumericDomain/r:NumberRange/r:Low/text())+1), &apos; et &apos;, d:NumericDomain/r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,d:NumericDomain/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomain child with a @isInclusive = false attribute in a r :Low descendant and a @decimalPositions attribute greater than 1</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2446,7 +2462,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, r:NumberRange/r:Low/text(), &apos; et &apos;, r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and no r:Low descendant with a @isInclusive = false attribute and a @decimalPositions attribute greater than 1</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2458,7 +2478,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, d:NumericDomain/r:NumberRange/r:Low/text(), &apos; et &apos;, d:NumericDomain/r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,d:NumericDomain/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomain child without a @isInclusive = false attribute in a r :Low descendant and a @decimalPositions attribute greater than 1</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2470,7 +2494,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(descendant::r:Low[not(ancestor::r:OutParameter)]/text())+1), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,r:ManagedNumericRepresentation/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:Low descendant having a @isInclusive = false attribute and a @decimalPositions greater than 1 in r :ManagedNumericRepresentation</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2482,7 +2510,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(descendant::r:Low[not(ancestor::r:OutParameter)]/text())+1), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,descendant::r:ManagedNumericRepresentation[not(ancestor::r:OutParameter)]/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference having a @isInclusive = false attribute in a r:Low descendant and a @decimalPositions attribute greater than 1 in a r:ManagedNumericRepresentation</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2494,7 +2526,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,r:ManagedNumericRepresentation/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and not having a r:Low descendant having a @isInclusive = false attribute and a @decimalPositions greater than 1 in r :ManagedNumericRepresentation</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
@@ -2506,7 +2542,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,descendant::r:ManagedNumericRepresentation[not(ancestor::r:OutParameter)]/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference and not having a r :Low descendant with a @isInclusive = false attribute and a @decimalPositions attribute greater than 1 in a r:ManagedNumericRepresentation</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce11"/>
@@ -2524,7 +2564,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(r:NumberRange/r:Low/text())+1), &apos; et &apos;, r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:Low descendant with a @isInclusive = false attribute and a @decimalPositions = 1 attribute</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2536,7 +2580,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(d:NumericDomain/r:NumberRange/r:Low/text())+1), &apos; et &apos;, d:NumericDomain/r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,d:NumericDomain/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomain child with a @isInclusive = false attribute in a r :Low descendant and a @decimalPositions =1 attribute</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2548,7 +2596,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, r:NumberRange/r:Low/text(), &apos; et &apos;, r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and no r:Low descendant with a @isInclusive = false attribute and a @decimalPositions = 1 attribute</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2560,7 +2612,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, d:NumericDomain/r:NumberRange/r:Low/text(), &apos; et &apos;, d:NumericDomain/r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,d:NumericDomain/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomain child without a @isInclusive = false attribute in a r :Low descendant and with a @decimalPositions =1 attribute</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2572,7 +2628,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(descendant::r:Low[not(ancestor::r:OutParameter)]/text())+1), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,r:ManagedNumericRepresentation/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:Low descendant having a @isInclusive = false attribute and a @decimalPositions = 1 attribute in r :ManagedNumericRepresentation</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2584,7 +2644,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(descendant::r:Low[not(ancestor::r:OutParameter)]/text())+1), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,descendant::r:ManagedNumericRepresentation[not(ancestor::r:OutParameter)]/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference having a @isInclusive = false attribute in a r:Low descendant and a @decimalPositions =1 attribute in a r:ManagedNumericRepresentation</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2596,7 +2660,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,r:ManagedNumericRepresentation/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and not having a r:Low descendant having a @isInclusive = false attribute and a @decimalPositions = 1 attribute in r :ManagedNumericRepresentation</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
@@ -2608,7 +2676,11 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,descendant::r:ManagedNumericRepresentation[not(ancestor::r:OutParameter)]/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference not having a @isInclusive = false attribute in a r:Low descendant and a @decimalPositions =1 attribute in a r:ManagedNumericRepresentation</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce11"/>
@@ -2626,7 +2698,11 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>string(&apos;Vous devez saisir une valeur correcte&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a child name ending with &apos;Domain&apos; and having a @regExp attribute </text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2638,7 +2714,11 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>string(&apos;Vous devez saisir une valeur correcte&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of any item with name ending with &apos;Domain&apos;, a @regExp attribute and a d:GridResponseDomain or d:ResponseDomainInMixed parent</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:number-columns-repeated="2"/>
@@ -2655,7 +2735,11 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>string(&apos;Entrez une date valide&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:DateTimeDomainReference being a DateTypeCode &apos;date&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2667,7 +2751,11 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>string(&apos;Entrez une date valide&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message of a d:QuestionItem having a d:DateTimeDomainReference descendant being a DateTypeCode &apos;date&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="2"/>
@@ -2684,7 +2772,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>string(&apos;warning&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the message type of a d:Instruction being a descendant of a d:ComputationItem</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="6"/>
@@ -2699,7 +2791,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>&quot;if (. castable as xs:integer) then replace(format-number(xs:integer(.),&apos;###,###,###,###,###,###,###,###,###,##0&apos;),&apos;,&apos;,&apos; &apos;) else &apos;&apos;&quot;</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the format of a d:QuestionItem having a d:NumericDomain child</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2711,7 +2807,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>&quot;if (. castable as xs:integer) then replace(format-number(xs:integer(.),&apos;###,###,###,###,###,###,###,###,###,##0&apos;),&apos;,&apos;,&apos; &apos;) else &apos;&apos;&quot;</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the format of a d:NumericDomain <text:s/>having a d:GridResponseDomain parent</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="6"/>
@@ -2726,7 +2826,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>max((string-length(d:NumericDomain/r:NumberRange/r:Low),string-length(d:NumericDomain/r:NumberRange/r:High)))</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the length of a d:QuestionItem having a d:NumericDomain/r:NumberRange child</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2738,7 +2842,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>max((string-length(r:NumberRange/r:Low),string-length(r:NumberRange/r:High)))</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the length of a d:NumericDomain having a d:GridResponseDomain or d:ResponseDomainInMixed parent and having a r:NumberRange child</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2750,7 +2858,11 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>max((string-length(descendant::r:Low[not(ancestor::r:OutParameter)]),string-length(descendant::r:High[not(ancestor::r:OutParameter)])))</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the length of a d :QuestionItem having a d :NumericDomainReference child having a r :NumberRange descendant</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2762,7 +2874,11 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>max((string-length(descendant::r:Low[not(ancestor::r:OutParameter)]),string-length(descendant::r:High[not(ancestor::r:OutParameter)])))</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the length of a d:NumericDomainReference having a d:GridResponseDomain or a d :ResponseDomainInMixed parent and a r :NumberRange descendant</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -2774,7 +2890,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>number(d:TextDomain/@maxLength)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the length of a d:QuestionItem having a d:TextDomain child with a @maxLength attribute</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2786,7 +2906,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>number(@maxLength)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the length of a d:TextDomain item having a @maxLength attribute and a d:GridResponseDomain or d:ResponseDomainInMixed parent </text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2798,7 +2922,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>string-length(r:DateFieldFormat)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the length of a d:DateTimeDomain being a &apos;duration&apos; DateTypeCode</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2810,7 +2938,11 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>string-length(descendant::r:DateFieldFormat)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the length of a d:DateTimeDomainReference being a &apos;duration&apos; DateTypeCode</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce4" table:number-columns-repeated="3"/>
@@ -2826,7 +2958,11 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>string(&apos;date&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the type of a d:DateTimeDomainReference being a &apos;date&apos; DateTypeCode</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -2838,7 +2974,11 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>string(&apos;date&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the type of a d:QuestionItem having a d:DateTimeDomainReference being a &apos;date&apos; DateTypeCode</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="6"/>
@@ -2880,12 +3020,15 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>lang-choice</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the label depending on the lang-choice for each r:Label</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:number-columns-repeated="6"/>
     </table:table-row>
-    <table:table-row table:style-name="ro2">
+    <table:table-row table:style-name="ro3">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:StructuredMixedGridResponseDomain[parent::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]]</text:p>
      </table:table-cell>
@@ -2895,7 +3038,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>../d:GridDimension/d:Roster/@minimumRequired</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the minimum required of a d:StructuredMixedGridResponseDomain using the d:Roster/@minimumRequired attribute</text:p>
+     </table:table-cell>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro3" table:number-rows-repeated="1048423">
      <table:table-cell table:number-columns-repeated="6"/>
