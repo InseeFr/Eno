@@ -32,7 +32,7 @@
             <r:Label>
                <r:Content>Simpsons</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Modele</d:TypeOfSequence>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>INSEE-SIMPSONS-SEQ-1</r:ID>
@@ -71,7 +71,7 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Module</d:TypeOfSequence>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>INSEE-SIMPSONS-QC-1-1</r:ID>
@@ -120,7 +120,7 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Module</d:TypeOfSequence>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>INSEE-SIMPSONS-SEQ-2-1</r:ID>
@@ -141,7 +141,7 @@
             <r:Label>
                <r:Content xml:lang="en-IE">Simpsons family</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Paragraphe</d:TypeOfSequence>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>INSEE-SIMPSONS-QC-2-1-1</r:ID>
@@ -201,7 +201,7 @@
             <r:Label>
                <r:Content xml:lang="en-IE">Other characters</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Paragraphe</d:TypeOfSequence>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>INSEE-SIMPSONS-QC-2-2-1</r:ID>
@@ -269,7 +269,7 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>INSEE-SIMPSONS-SEQI-1</r:ID>
             <r:Version>0.1.0</r:Version>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Cachable</d:TypeOfSequence>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">potentially-hidden</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>INSEE-SIMPSONS-QC-2-2-2</r:ID>
@@ -295,7 +295,7 @@
             <r:Label>
                <r:Content xml:lang="en-IE">Turnover</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Module</d:TypeOfSequence>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>INSEE-SIMPSONS-QC-3-1</r:ID>
@@ -322,7 +322,7 @@
             <r:Label>
                <r:Content xml:lang="en-IE">Springfield</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Module</d:TypeOfSequence>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>INSEE-SIMPSONS-QC-4-1</r:ID>

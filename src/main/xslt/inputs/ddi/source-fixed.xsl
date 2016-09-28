@@ -21,7 +21,7 @@
             <xd:p>Getting the languages list used in the ddi.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='Modele']" mode="iatddi:get-languages"
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='template']" mode="iatddi:get-languages"
         as="xs:string *">
         <xsl:for-each-group select="//@xml:lang" group-by=".">
             <xsl:value-of select="current-grouping-key()"/>
@@ -34,7 +34,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="iatddi:get-nb-of-modules" as="xs:integer">
-        <xsl:value-of select="count(//d:Sequence[d:TypeOfSequence/text()='Module'])"/>
+        <xsl:value-of select="count(//d:Sequence[d:TypeOfSequence/text()='module'])"/>
     </xsl:template>
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
@@ -60,10 +60,10 @@
         </xd:desc>
     </xd:doc>
     <xsl:template
-        match="d:QuestionGrid[not(descendant::d:Instruction[d:InstructionName/r:String/text()='Format'])
-        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='Format')]]
-        | d:QuestionItem[not(descendant::d:Instruction[d:InstructionName/r:String/text()='Format'])
-        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='Format')]]"
+        match="d:QuestionGrid[not(descendant::d:Instruction[d:InstructionName/r:String/text()='format'])
+        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]
+        | d:QuestionItem[not(descendant::d:Instruction[d:InstructionName/r:String/text()='format'])
+        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
         mode="iatddi:get-label">
         <xsl:element name="xhtml:p">
             <xsl:for-each
@@ -83,19 +83,19 @@
     </xsl:template>
 
     <xsl:template
-        match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='Format']
-        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='Format')]]
-        | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='Format']
-        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='Format')]]"
+        match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='format']
+        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]
+        | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='format']
+        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
         mode="iatddi:get-label">
         <xsl:apply-templates select="d:QuestionText/d:LiteralText/d:Text" mode="lang-choice"/>
     </xsl:template>
 
     <xsl:template
-        match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='Format']] | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='Format']]"
+        match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='format']] | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='format']]"
         mode="iatddi:get-hint-instruction" priority="2">
         <xsl:apply-templates
-            select="descendant::d:Instruction[d:InstructionName/r:String/text()='Format']"
+            select="descendant::d:Instruction[d:InstructionName/r:String/text()='format']"
             mode="iatddi:get-label"/>
     </xsl:template>
 
@@ -384,12 +384,12 @@
             <xsl:value-of select="iatddi:get-id(.)"/>
         </xsl:variable>
         <xsl:for-each
-            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='Cachable'] and contains(d:IfCondition/r:Command/r:CommandContent/text(),$id)]">
+            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='potentially-hidden'] and contains(d:IfCondition/r:Command/r:CommandContent/text(),$id)]">
             <xsl:value-of select="iatddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='Module']" mode="iatddi:get-control">
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']" mode="iatddi:get-control">
         <xsl:variable name="controls">
             <xsl:for-each select=".//d:Instruction[ancestor::d:ComputationItem]">
                 <xsl:text> and </xsl:text>

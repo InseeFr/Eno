@@ -39,7 +39,7 @@
             <xd:p>Template used to add numbers to sequences</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:Sequence[d:TypeOfSequence='Module' or d:TypeOfSequence='Paragraphe' or d:TypeOfSequence='Groupe']/r:Label">
+    <xsl:template match="d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']/r:Label">
         <xsl:variable name="level" select="parent::d:Sequence/d:TypeOfSequence"/>
         <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@nom=$level]"/>
         <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@nom=$level]/@nom"/>
@@ -77,9 +77,9 @@
         
         <xsl:variable name="question-seq-level">
             <xsl:choose>
-                <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='Groupe']">Groupe</xsl:when>
-                <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='Paragraphe']">Paragraphe</xsl:when>
-                <xsl:otherwise>Module</xsl:otherwise>
+                <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='group']">group</xsl:when>
+                <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='submodule']">submodule</xsl:when>
+                <xsl:otherwise>module</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@nom=$question-seq-level]/@nom"/>
@@ -87,7 +87,7 @@
         
         <xsl:variable name="parent-number">
             <xsl:if test="$styleQuest/NumParent !='N'">
-                <xsl:apply-templates select="ancestor::d:Sequence[d:TypeOfSequence='Module' or d:TypeOfSequence='Paragraphe' or d:TypeOfSequence='Groupe']
+                <xsl:apply-templates select="ancestor::d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']
                     [1]" mode="calculate-number"/>
             </xsl:if>
         </xsl:variable>
@@ -186,12 +186,12 @@
         <xsl:param name="context"/>
         <xsl:param name="seq-level"/>
         
-        <!-- Gets the Module, Paragraphe or Groupe (depending on the $seq-level) of which the question belongs in order to only get the useful filters -->
+        <!-- Gets the module, submodule or group (depending on the $seq-level) of which the question belongs in order to only get the useful filters -->
         <xsl:variable name="ancestors">
             <xsl:copy-of select="root($context)//d:Sequence[d:TypeOfSequence=$seq-level and descendant::d:QuestionConstruct=$context]"/>
         </xsl:variable>
         <xsl:value-of select="count($ancestors//d:ControlConstructReference
-            [d:IfThenElse//d:TypeOfSequence[text()='Cachable']
+            [d:IfThenElse//d:TypeOfSequence[text()='potentially-hidden']
             and descendant::d:QuestionConstruct[r:ID=$context/r:ID]
             and (following-sibling::d:ControlConstructReference[d:IfThenElse or d:QuestionConstruct]
             or index-of($number-free-filter,d:IfThenElse/r:ID)>0)
