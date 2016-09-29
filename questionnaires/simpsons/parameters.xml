@@ -2,22 +2,22 @@
 <Parameters>
     <Title>
         <Sequence>
-            <Level nom="template"/>
-            <Level nom="module">
+            <Level name="template"/>
+            <Level name="module">
                 <PreSeq/>
                 <NumParent>N</NumParent>
                 <PostNumParentSeq/>
                 <StyleNumSeq>I</StyleNumSeq>
                 <PostNumSeq> - </PostNumSeq>
             </Level>
-            <Level nom="submodule">
+            <Level name="submodule">
                 <PreSeq/>
                 <NumParent>N</NumParent>
                 <PostNumParentSeq/>
                 <StyleNumSeq>1</StyleNumSeq>
                 <PostNumSeq>. </PostNumSeq>
             </Level>
-            <Level nom="group">
+            <Level name="group">
                 <PreSeq/>
                 <NumParent>N</NumParent>
                 <PostNumParentSeq/>
@@ -26,21 +26,21 @@
             </Level>
         </Sequence>
         <Question>
-            <Level nom="module">
+            <Level name="module">
                 <PreQuest>&#x27A1; </PreQuest>
                 <NumParent>N</NumParent>
                 <PostNumParentQuest/>
                 <StyleNumQuest>1</StyleNumQuest>
                 <PostNumQuest>. </PostNumQuest>
             </Level>
-            <Level nom="submodule">
+            <Level name="submodule">
                 <PreQuest>&#x27A1; </PreQuest>
                 <NumParent>O</NumParent>
                 <PostNumParentQuest>-</PostNumParentQuest>
                 <StyleNumQuest>a</StyleNumQuest>
                 <PostNumQuest>. </PostNumQuest>
             </Level>
-            <Level nom="group">
+            <Level name="group">
                 <PreQuest></PreQuest>
                 <NumParent>O</NumParent>
                 <PostNumParentQuest/>

@@ -4,6 +4,11 @@
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:g="ddi:group:3_2"
     xmlns:s="ddi:studyunit:3_2" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+    <!-- This xsl stylesheet is used in the 'cleaning' target of the ant build -->
+    <!-- Therefore, it will be applied on the input ddi file (ccs, qb etc.) -->
+    <!-- Basically, this stylesheet does a bit of cleaning in order to change some attribute names and delete unwanted links -->
+
+    <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="no" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
 

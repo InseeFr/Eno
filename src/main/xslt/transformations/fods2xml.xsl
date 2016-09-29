@@ -7,10 +7,18 @@
     xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" exclude-result-prefixes="#all"
     version="2.0">
 
+    <!-- xsl stylesheet applied to preformate.tmp in the temporary process of xsl files creation (fods2xml then xml2xsl) -->
+    <!-- This stylesheet will read the preformate.tmp, get the different informations required (with source.xsl) -->
+    <!-- models.xml will then use the different retrieved information to create xml.tmp -->
+    <!-- The content of this file (fods2xml.xsl will help linking the different elements with each other -->
+    <!-- lib.xsl : used to parse a file with defined constraints -->
+
+    <!-- Importing the different resources -->
     <xsl:import href="../inputs/fods/source.xsl"/>
     <xsl:import href="../outputs/xml/models.xsl"/>
     <xsl:import href="../lib.xsl"/>
 
+    <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes"/>
 
     <xd:doc scope="stylesheet">
@@ -24,7 +32,6 @@
         <xsl:apply-templates select="/" mode="source"/>
     </xsl:template>
 
-    
     <xd:desc>
         <xd:p>Linking and element's root the table element</xd:p>
     </xd:desc>

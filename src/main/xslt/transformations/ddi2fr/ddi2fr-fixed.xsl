@@ -7,10 +7,17 @@
     xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
     exclude-result-prefixes="xd" version="2.0">
 
+    <!-- Base file of the upcoming ddi2fr.xsl stylesheet (that will be used in the ddi2fr target to create basic-form.tmp) -->
+
+    <!-- Importing the different files used in the process -->
+    <!-- source.xsl : the xsl created by merging inputs/ddi/functions.xsl, source-fixed.xsl and templates.xsl -->
+    <!-- models.xsl : Orbeon related transformations -->
+    <!-- lib.xsl : used to parse a file with defined constraints -->
     <xsl:import href="../../inputs/ddi/source.xsl"/>
     <xsl:import href="../../outputs/fr/models.xsl"/>
     <xsl:import href="../../lib.xsl"/>
 
+    <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes"/>
 
     <xd:doc scope="stylesheet">
@@ -25,7 +32,7 @@
         <xsl:apply-templates select="/" mode="source"/>
     </xsl:template>
 
-    <!-- Getting this here, actually dependent of the input and ouput language -->
+    <!-- Getting this here, actually dependent of the input and output language -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and not(ancestor::d:ComputationItem)]"
         mode="iatddi:get-conditionned-text" priority="1">

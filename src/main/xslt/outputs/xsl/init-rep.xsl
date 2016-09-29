@@ -5,6 +5,9 @@
     xmlns:xxf="http://orbeon.org/oxf/xml/xforms" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:ev="http://www.w3.org/2001/xml-events">
 
+    <!-- Not used: supposed to initialize a file with the following namespaces. -->
+    
+    <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
     

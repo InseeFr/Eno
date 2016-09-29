@@ -10,6 +10,7 @@
     xmlns:im="http://www.insee.fr/schemas/ItemML"
     exclude-result-prefixes="#all" version="2.0">
     
+    <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     
     <!-- This stylesheet preformates the ODS xml files in order to delete the number-columns-repeated attributes while 

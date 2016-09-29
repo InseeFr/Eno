@@ -4,7 +4,14 @@
     xmlns:l="ddi:logicalproduct:3_2" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:iatddi="http://xml/insee.fr/xslt/apply-templates/ddi"
     xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+    <!-- This xsl stylesheet will be applied to the -cleaned suffix file (having the survey's name) -->
+    <!-- The goal here is to add numbers to questions, while identifying the different depth (subQuestions...) -->
+
+    <!-- Parameter given in build-non-regression.xml -->
     <xsl:param name="parameters-file"/>
+
+    <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="no" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
 
@@ -41,9 +48,9 @@
     </xd:doc>
     <xsl:template match="d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']/r:Label">
         <xsl:variable name="level" select="parent::d:Sequence/d:TypeOfSequence"/>
-        <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@nom=$level]"/>
-        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@nom=$level]/@nom"/>
-        <xsl:variable name="gd-parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[2]/@nom=$level]/@nom"/>
+        <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@name=$level]"/>
+        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$level]/@name"/>
+        <xsl:variable name="gd-parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[2]/@name=$level]/@name"/>
 
         <xsl:variable name="number">
             <xsl:apply-templates select="parent::d:Sequence" mode="calculate-number"/>
@@ -82,8 +89,8 @@
                 <xsl:otherwise>module</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@nom=$question-seq-level]/@nom"/>
-        <xsl:variable name="styleQuest" select="$style/Title/Question/Level[@nom=$question-seq-level]"/>
+        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$question-seq-level]/@name"/>
+        <xsl:variable name="styleQuest" select="$style/Title/Question/Level[@name=$question-seq-level]"/>
         
         <xsl:variable name="parent-number">
             <xsl:if test="$styleQuest/NumParent !='N'">
@@ -127,8 +134,8 @@
     </xd:doc>    
     <xsl:template match="d:Sequence" mode="calculate-number">
         <xsl:variable name="level" select="d:TypeOfSequence"/>
-        <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@nom=$level]"/>
-        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@nom=$level]/@nom"/>
+        <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@name=$level]"/>
+        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$level]/@name"/>
         
         <xsl:variable name="number">
             <xsl:if test="not(index-of($number-free-seq,r:ID)>0)">

@@ -13,6 +13,9 @@
     xmlns:iatfr="http://xml/insee.fr/xslt/apply-templates/form-runner"
     xmlns:il="http://xml/insee.fr/xslt/lib" exclude-result-prefixes="xd iat il" version="2.0">
 
+<!-- Orbeon-form-runner related file -->
+<!-- This file is imported in the ddi2fr.xsl file (already in ddi2fr-fixed.xsl) -->
+
     <xsl:param name="campaign" as="xs:string"/>
     <xsl:param name="model" as="xs:string"/>
     <xsl:param name="properties-file"/>

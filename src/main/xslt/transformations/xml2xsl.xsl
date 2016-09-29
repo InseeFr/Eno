@@ -5,10 +5,19 @@
     xmlns:iatxsl="http://xml/insee.fr/xslt/apply-templates/xsl"
     exclude-result-prefixes="xs xd" version="2.0">
 
+    <!-- xsl stylesheet applied to xml.tmp in the temporary process of xsl files creation (fods2xml then xml2xsl) -->
+    <!-- This stylesheet will read the xml.tmp, get the different informations required (with source.xsl) -->
+    <!-- models.xml will then use the different retrieved information to create the desired .xsl file -->
+    <!-- which can be drivers.xsl, templates.xsl... given the state of the build process -->
+    <!-- The content of this file (xml2xsl.xsl will help linking the different elements with each other -->
+    <!-- lib.xsl : used to parse a file with defined constraints -->
+
+    <!-- Importing the different resources -->
     <xsl:import href="../inputs/xml/source.xsl"/>
     <xsl:import href="../outputs/xsl/models.xsl"/>
     <xsl:import href="../lib.xsl"/>
 
+    <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes"/>
 
     <xd:doc scope="stylesheet">
@@ -38,7 +47,7 @@
         <xd:p>Linking the 'Driver' driver to a GenericElement element if the xpath is given and a driver is linked.</xd:p>
         <xd:p>This covers the case where we link an output driver to an input element</xd:p>
     </xd:desc>
-    <xsl:template match="GenericElement[DefinedElement[@nom='Xpath']/text()!='' and DefinedElement[@nom='Driver']]" mode="source">
+    <xsl:template match="GenericElement[DefinedElement[@name='Xpath']/text()!='' and DefinedElement[@name='Driver']]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -51,7 +60,7 @@
         <xd:p>Linking the simple implementation driver to a GenericElement element when it has : an xpath, a match but no mode</xd:p>
         <xd:p>This covers the case where we implement a function for a given source element, and we only return this element's value</xd:p>
     </xd:desc>
-    <xsl:template match="GenericElement[DefinedElement[@nom='Xpath']/text()!='' and DefinedElement[@nom='Match']/text()!='' and not(DefinedElement[@nom='Match_Mode']/text()!='')]" mode="source">
+    <xsl:template match="GenericElement[DefinedElement[@name='Xpath']/text()!='' and DefinedElement[@name='Match']/text()!='' and not(DefinedElement[@name='Match_Mode']/text()!='')]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -65,7 +74,7 @@
         </xd:p>
         <xd:p>This covers the case where we implement a function for a given source element, and we return something more xomplex (using a mode)</xd:p>
     </xd:desc>
-    <xsl:template match="GenericElement[DefinedElement[@nom='Xpath']/text()!='' and DefinedElement[@nom='Match']/text()!='' and DefinedElement[@nom='Match_Mode']/text()!='']" mode="source">
+    <xsl:template match="GenericElement[DefinedElement[@name='Xpath']/text()!='' and DefinedElement[@name='Match']/text()!='' and DefinedElement[@name='Match_Mode']/text()!='']" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -79,7 +88,7 @@
         </xd:p>
         <xd:p>This covers the case where we implement a function for a given source element, and nothing is returned</xd:p>
     </xd:desc>
-    <xsl:template match="GenericElement[DefinedElement[@nom='Xpath']/text()!='' and not(DefinedElement[@nom='Driver'] or DefinedElement[@nom='Match']/text()!='')]" mode="source">
+    <xsl:template match="GenericElement[DefinedElement[@name='Xpath']/text()!='' and not(DefinedElement[@name='Driver'] or DefinedElement[@name='Match']/text()!='')]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -91,7 +100,7 @@
     <xd:desc>
         <xd:p>Linking the function driver to GenericElement element where a function is provided</xd:p>
     </xd:desc>
-    <xsl:template match="GenericElement[DefinedElement[@nom='Out_Function']/text()!='' and DefinedElement[@nom='In_Function']/text()]" mode="source">
+    <xsl:template match="GenericElement[DefinedElement[@name='Out_Function']/text()!='' and DefinedElement[@name='In_Function']/text()]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -103,7 +112,7 @@
     <xd:desc>
         <xd:p>Linking the NotSupportedFunction driver to a GenericElement element where no function is provided</xd:p>
     </xd:desc>
-    <xsl:template match="GenericElement[DefinedElement[@nom='Out_Function']/text()!='' and not(DefinedElement[@nom='In_Function']/text())]" mode="source">
+    <xsl:template match="GenericElement[DefinedElement[@name='Out_Function']/text()!='' and not(DefinedElement[@name='In_Function']/text())]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -116,7 +125,7 @@
     <xd:desc>
         <xd:p>Linking the function driver to a genricElement element where a function is provided</xd:p>
     </xd:desc>
-    <xsl:template match="GenericElement[DefinedElement[@nom='Function']/text()!='']" mode="source">
+    <xsl:template match="GenericElement[DefinedElement[@name='Function']/text()!='']" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -128,7 +137,7 @@
     <xd:desc>
         <xd:p>Linking the GetChildren driver to a GenericElement element where a parent is provided</xd:p>
     </xd:desc>
-    <xsl:template match="GenericElement[DefinedElement[@nom='Parent']/text()!='']" mode="source">
+    <xsl:template match="GenericElement[DefinedElement[@name='Parent']/text()!='']" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -146,7 +155,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-documentation">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='Documentation'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Documentation'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -158,7 +167,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-xpath">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='Xpath'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Xpath'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -170,7 +179,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-mode-xpath">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='Xpath_Mode'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Xpath_Mode'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -182,7 +191,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-match">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='Match'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Match'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -194,7 +203,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-match-mode">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='Match_Mode'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Match_Mode'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -206,7 +215,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-function">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='Function'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Function'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -218,7 +227,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-output-function">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='Out_Function'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Out_Function'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -230,7 +239,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-input-function">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='In_Function'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='In_Function'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -242,7 +251,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-driver">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='Driver'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Driver'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -255,7 +264,7 @@
     
     <xsl:template match="GenericElement" mode="iatxml:get-parameters">
         <xsl:call-template name="split">
-            <xsl:with-param name="chain" select="iatxml:get-value(./DefinedElement[@nom='Parameters'])"/>
+            <xsl:with-param name="chain" select="iatxml:get-value(./DefinedElement[@name='Parameters'])"/>
         </xsl:call-template>
     </xsl:template>
     
@@ -268,7 +277,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-parent">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='Parent'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Parent'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -280,7 +289,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-as">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='As'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='As'])"/>
     </xsl:template>
     
     <xd:desc>
@@ -292,7 +301,7 @@
     </xsl:function>
     
     <xsl:template match="GenericElement" mode="iatxml:get-children">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@nom='Children'])"/>
+        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Children'])"/>
     </xsl:template>
     
     <xsl:template name="split">

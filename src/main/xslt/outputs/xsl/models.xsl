@@ -7,6 +7,10 @@
     xmlns:iatxsl="http://xml/insee.fr/xslt/apply-templates/xsl"
     exclude-result-prefixes="xd" version="2.0">
 
+    <!-- This xsl stylesheet is used in the xml2xsl target (imported by xml2xsl.xsl)-->
+    <!-- It creates the different templates, associates the appropriate match from what was defined is the xml.tmp file, -->
+    <!-- adds the documentation and associates the functions (modes) -->
+
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> Jan 6, 2013</xd:p>

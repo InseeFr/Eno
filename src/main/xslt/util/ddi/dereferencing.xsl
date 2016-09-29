@@ -3,10 +3,17 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:g="ddi:group:3_2"
     xmlns:s="ddi:studyunit:3_2" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <!-- This xsl stylesheet will be applied to ddi input files (part of the dereferencing target) -->
+    <!-- Clearing all the pointers reference in those input files -->
+
+    <!-- Parameters given in the build-non-regression.xml -->
     <xsl:param name="main-file"/>
     <xsl:param name="secondary-file"/>
     <xsl:param name="variables-file"/>
     <xsl:param name="output-folder"/>
+
+    <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="no" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
 
