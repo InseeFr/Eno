@@ -192,7 +192,7 @@
             <param name="secondary-file"
                 expression="${temp-folder}/${survey-name}-ccs-dereferenced.tmp"/>
             <param name="variables-file"
-                expression="${survey-folder}/ddi/${survey-name}-vs.tmp"/>
+                expression="${survey-folder}/ddi/${survey-name}-vs.xml"/>
             <param name="output-folder" expression="${temp-folder}"/>
         </xslt>
 

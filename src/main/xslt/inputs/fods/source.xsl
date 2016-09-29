@@ -7,6 +7,10 @@
     version="2.0">
     <xsl:output method="xml" indent="yes"/>
 
+    <!-- This xsl stylesheet is used in the fods2xml target (imported by fods2xml.xsl)-->
+    <!-- Its purpose is to retrieve several elements in a fods file (like cell content, column name etc) -->
+    <!-- The information retrieved will then be used in fods2xml.xsl in order to create the output xml file -->
+
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> Jan 6, 2013</xd:p>

@@ -5,6 +5,10 @@
     xmlns:iatxml="http://xml/insee.fr/xslt/apply-templates/xml" exclude-result-prefixes="#all"
     version="2.0">
 
+    <!-- This xsl stylesheet is used in the fods2xml target (imported by fods2xml.xsl)-->
+    <!-- Its purpose is to create the output xml file (xml.tmp) -->
+    <!-- xml.tmp will be a tree of GenericElement/DefinedElement with information stored in the @name attribute -->
+
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> Jan 6, 2013</xd:p>
@@ -33,7 +37,7 @@
     <xd:doc>
         <xd:desc>
             <xd:p>A generic xml element. Helpful to structure the different levels over the input format</xd:p>
-            <xd:p>For example, for a fods file, each line of the document will correspond to a generic element (expect the first one)</xd:p>
+            <xd:p>For example, for a fods file, each line of the document will correspond to a generic element (except the first one)</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="GenericElement" mode="model">
@@ -58,7 +62,7 @@
             <xsl:apply-templates select="iatxml:get-element-name($source-context)"/>
         </xsl:variable>
         <xsl:element name="DefinedElement">
-            <xsl:attribute name="nom" select="$element-name"/>
+            <xsl:attribute name="name" select="$element-name"/>
             <xsl:apply-templates select="iatxml:get-value($source-context)"/>
         </xsl:element>
     </xsl:template>

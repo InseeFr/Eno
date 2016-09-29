@@ -4,7 +4,14 @@
     xmlns:l="ddi:logicalproduct:3_2" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:iatddi="http://xml/insee.fr/xslt/apply-templates/ddi"
     xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+    <!-- This xsl stylesheet will be applied to the -cleaned suffix file (having the survey's name) -->
+    <!-- The goal here is to add numbers to questions, while identifying the different depth (subQuestions...) -->
+
+    <!-- Parameter given in build-non-regression.xml -->
     <xsl:param name="parameters-file"/>
+
+    <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="no" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
 

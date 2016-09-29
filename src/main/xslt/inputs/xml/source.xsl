@@ -4,7 +4,11 @@
     xmlns:iatxml="http://xml/insee.fr/xslt/apply-templates/xml" exclude-result-prefixes="xs xd"
     version="2.0">
     <xsl:output method="xml" indent="yes"/>
-    
+
+    <!-- This xsl stylesheet is used in the xml2xsl target (imported by xml2xsl.xsl)-->
+    <!-- Its purpose is to retrieve several elements in a xml file (xml.tmp) containing Generic and DefinedElement created -->
+    <!-- by fods2xml -->
+    <!-- The information retrieved will then be used in xml2xsl.xsl in order to create the output xsl file -->
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -34,7 +38,7 @@
 
     <!-- Only called by the DefinedElement object-->
     <xsl:template match="DefinedElement" mode="iatxml:get-element-name" as="xs:string">
-        <xsl:value-of select="@nom"/>
+        <xsl:value-of select="@name"/>
     </xsl:template>
 
     <xd:doc>
