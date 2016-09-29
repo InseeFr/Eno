@@ -7,13 +7,13 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:il="http://xml/insee.fr/xslt/lib"
     exclude-result-prefixes="#all" version="2.0">
 
-<!-- This .xsl document is the base of the upcoming source.xsl : ENOPreprocessing target -->
-<!-- This source.xsl file will contain : -->
-<!-- source-fixed.xsl -->
-<!-- functions.xsl -->
-<!-- templates.xsl -->
-<!-- Also, it will be used in the later stages of the application (imported in transformations/ddi2fr/ddi2fr.xsl) -->
-<!-- Therefore, source.xsl role belongs in the creation of the basic-form.tmp : ddi2fr target-->
+    <!-- This .xsl document is the base of the upcoming source.xsl : ENOPreprocessing target -->
+    <!-- This source.xsl file will contain : -->
+    <!-- source-fixed.xsl -->
+    <!-- functions.xsl -->
+    <!-- templates.xsl -->
+    <!-- Also, it will be used in the later stages of the application (imported in transformations/ddi2fr/ddi2fr.xsl) -->
+    <!-- Therefore, source.xsl role belongs in the creation of the basic-form.tmp : ddi2fr target-->
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>

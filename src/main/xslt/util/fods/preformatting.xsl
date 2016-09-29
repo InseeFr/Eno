@@ -10,15 +10,15 @@
     xmlns:im="http://www.insee.fr/schemas/ItemML"
     exclude-result-prefixes="#all" version="2.0">
     
-    <!-- The output file generated will be xml type -->
-    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
-    
-    <!-- This stylesheet preformates the ODS xml files in order to delete the number-columns-repeated attributes while 
+<!-- This stylesheet preformates the ODS xml files in order to delete the number-columns-repeated attributes while 
         adding a fictional attribute cell-position (that doesn't exist in odt format).
         This attribute will help doing the next transformations (using the cells position in a line).
         Elements are literally copied (except attributes @table:number-columns-repeated) x times
         x being the value of the @table:number-columns-repeated attribute. The attribute itself isn't kept. -->
-    
+
+    <!-- The output file generated will be xml type -->
+    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+  
     <xsl:template match="/">
         <xsl:variable name="preformat-1">
             <xsl:copy>          
