@@ -9,7 +9,9 @@
     <!-- This stylesheet will read the xml.tmp, get the different informations required (with source.xsl) -->
     <!-- models.xml will then use the different retrieved information to create the desired .xsl file -->
     <!-- which can be drivers.xsl, templates.xsl... given the state of the build process -->
-    <!-- The content of this file (xml2xsl.xsl will help linking the different elements with each other -->
+    <!-- The content of this file (xml2xsl.xsl) will help linking the different elements with each other -->
+    <!-- Particularly by linking drivers to the different elements so that xsl/models.xsl can read it and -->
+    <!-- create to desired output file. -->
     <!-- lib.xsl : used to parse a file with defined constraints -->
 
     <!-- Importing the different resources -->
@@ -123,7 +125,7 @@
     </xsl:template>
     
     <xd:desc>
-        <xd:p>Linking the function driver to a genricElement element where a function is provided</xd:p>
+        <xd:p>Linking the function driver to a genericElement element where a function is provided</xd:p>
     </xd:desc>
     <xsl:template match="GenericElement[DefinedElement[@name='Function']/text()!='']" mode="source">
         <xsl:param name="driver" tunnel="yes">
@@ -299,7 +301,7 @@
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="iatxml:get-children"/>
     </xsl:function>
-    
+
     <xsl:template match="GenericElement" mode="iatxml:get-children">
         <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Children'])"/>
     </xsl:template>

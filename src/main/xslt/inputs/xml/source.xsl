@@ -21,7 +21,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Starting the transformation from xml par the root element</xd:p>
+            <xd:p>Starting the transformation from xml by the root element</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="/" mode="source">
