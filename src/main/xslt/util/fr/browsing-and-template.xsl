@@ -4,11 +4,10 @@
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
     xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-
     <!-- This stylesheet is applied to basic-form.tmp (previously created in the ddi2fr target) -->
-
-    <xsl:output method="xml" indent="yes" encoding="utf-8"/>
     <!-- Transformation used to add the home page on the different questionnaires. -->
+
+    <xsl:output method="xml" indent="yes" encoding="utf-8"/>    
 
     <!-- The campaign -->
     <xsl:param name="campaign" as="xs:string"/>

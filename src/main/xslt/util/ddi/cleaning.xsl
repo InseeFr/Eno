@@ -6,7 +6,7 @@
 
     <!-- This xsl stylesheet is used in the 'cleaning' target of the ant build -->
     <!-- Therefore, it will be applied on the input ddi file (ccs, qb etc.) -->
-    <!-- Basically, this stylesheet does a bit of cleaning in order to change some attribute names and delete unwanted links -->
+    <!-- Basically, this stylesheet does a bit of cleaning in order to change some attribute names and delete undesired links -->
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="no" encoding="UTF-8"/>
