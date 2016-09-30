@@ -38,7 +38,6 @@
             <xsl:apply-templates select="table:table-row" mode="add-position"/>
         </xsl:copy>
     </xsl:template>
-    
     <xsl:template match="table:table-row" mode="add-position">
         <xsl:copy>
         <xsl:copy-of select="@*"/>

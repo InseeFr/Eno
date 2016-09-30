@@ -47,12 +47,10 @@
         </xsl:copy>
     </xsl:template>
 
-
     <xsl:function name="il:is-rich-content" as="xs:boolean">
         <xsl:param name="node-set"/>
         <xsl:sequence select="if ($node-set instance of xs:string) then false() else boolean($node-set//node())"/>
     </xsl:function>
-
 
     <!-- To display an xml tree like a text chain -->
     <xsl:function name="il:serialize" as="xs:string">

@@ -100,7 +100,7 @@
     </xsl:template>
     
     <xd:desc>
-        <xd:p>Linking the function driver to GenericElement element where a function is provided</xd:p>
+        <xd:p>Linking the function driver to GenericElement element where an input function is provided</xd:p>
     </xd:desc>
     <xsl:template match="GenericElement[DefinedElement[@name='Out_Function']/text()!='' and DefinedElement[@name='In_Function']/text()]" mode="source">
         <xsl:param name="driver" tunnel="yes">
@@ -112,7 +112,7 @@
     </xsl:template>
     
     <xd:desc>
-        <xd:p>Linking the NotSupportedFunction driver to a GenericElement element where no function is provided</xd:p>
+        <xd:p>Linking the NotSupportedFunction driver to a GenericElement element where no input function is provided</xd:p>
     </xd:desc>
     <xsl:template match="GenericElement[DefinedElement[@name='Out_Function']/text()!='' and not(DefinedElement[@name='In_Function']/text())]" mode="source">
         <xsl:param name="driver" tunnel="yes">
@@ -306,6 +306,9 @@
         <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Children'])"/>
     </xsl:template>
     
+
+    <!-- Template called when matching with the Parameters name element -->
+    <!-- Recursively splits a string chain on the "," character -->
     <xsl:template name="split">
         <xsl:param name="chain"/>
         <xsl:choose>

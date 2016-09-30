@@ -149,6 +149,7 @@
         </xsl:copy>
     </xsl:template>
 
+    <!-- Changing format of the displayed language from xx-XX to xx -->
     <xsl:template match="@xml:lang[.='fr-FR']">
         <xsl:attribute name="xml:lang" select="'fr'"/>
     </xsl:template>
@@ -157,6 +158,7 @@
         <xsl:attribute name="xml:lang" select="'en'"/>
     </xsl:template>
 
+    <!-- For each xhtml:a element not having a @href attribute : replacing it with an empty text -->
     <xsl:template match="xhtml:a[not(contains(@href,'#'))]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
@@ -174,6 +176,7 @@
         </xsl:copy>
     </xsl:template>-->
 
+    <!-- Adding identifier to footnote type d:Instruction in xhtml:p elements -->
     <xsl:template
         match="xhtml:p[ancestor::d:Instruction[d:InstructionName/r:String/text()='footnote']]">
         <xsl:copy>

@@ -5,7 +5,7 @@
     xmlns:iatddi="http://xml/insee.fr/xslt/apply-templates/ddi"
     xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-    <!-- This xsl stylesheet will be applied to the -cleaned suffix file (having the survey's name) -->
+    <!-- This xsl stylesheet will be applied to the -cleaned suffix file (having the questionnaire's name) -->
     <!-- The goal here is to add numbers to questions, while identifying the different depth (subQuestions...) -->
 
     <!-- Parameter given in build-non-regression.xml -->
@@ -21,6 +21,7 @@
     <xsl:variable name="number-free-seq" select="$style/Title/Sequence/NumberFreeSeq"/>
     <xsl:variable name="number-free-filter" select="$style/Title/Question/NotNumberedLastFilter"/>
 
+    <!-- Namespace required for xsl documentation -->
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
             <xd:p>Root template, applying all the children templates</xd:p>
@@ -46,6 +47,7 @@
             <xd:p>Template used to add numbers to sequences</xd:p>
         </xd:desc>
     </xd:doc>
+    <!-- For every 'module', 'submodule' or 'group' type d:Sequence, prefixing the title -->
     <xsl:template match="d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']/r:Label">
         <xsl:variable name="level" select="parent::d:Sequence/d:TypeOfSequence"/>
         <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@name=$level]"/>
@@ -79,6 +81,7 @@
             <xd:p>Template used to add numbers to questions</xd:p>
         </xd:desc>
     </xd:doc>
+    <!-- For every d:LiteralText wrapped in a d:QuestionText -->
     <xsl:template match="d:QuestionText/d:LiteralText">
         <!-- The goal is to calculate the prefix, concatenation of element's numbers -->
         
@@ -212,6 +215,7 @@
             <xd:p>Template used to add code before labels from dropdown lists and tables headers</xd:p>
         </xd:desc>
     </xd:doc>
+    <!-- When l:Code is within a d:GridDimension where attributes @displyCode and displayLabel are true : adding labels -->
     <xsl:template match="l:Code[ancestor::d:GridDimension[@displayCode='true' and @displayLabel='true']]
         /r:CategoryReference/l:Category/r:Label/r:Content">
         <xsl:variable name="prefix">
