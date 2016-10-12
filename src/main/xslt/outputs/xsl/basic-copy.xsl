@@ -5,7 +5,7 @@
     xmlns:xxf="http://orbeon.org/oxf/xml/xforms" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:ev="http://www.w3.org/2001/xml-events">
 
-    <!-- Not used, supposed to create a copy of the xml file its applied to. -->
+    <!-- Not used: supposed to create a copy of the xml file its applied to. -->
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>

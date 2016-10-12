@@ -7,13 +7,13 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:il="http://xml/insee.fr/xslt/lib"
     exclude-result-prefixes="#all" version="2.0">
 
-<!-- This .xsl document is the base of the upcoming source.xsl : ENOPreprocessing target -->
-<!-- This source.xsl file will contain : -->
-<!-- source-fixed.xsl -->
-<!-- functions.xsl -->
-<!-- templates.xsl -->
-<!-- Also, it will be used in the later stages of the application (imported in transformations/ddi2fr/ddi2fr.xsl) -->
-<!-- Therefore, source.xsl role belongs in the creation of the basic-form.tmp : ddi2fr target-->
+    <!-- This .xsl document is the base of the upcoming source.xsl : ENOPreprocessing target -->
+    <!-- This source.xsl file will contain : -->
+    <!-- source-fixed.xsl -->
+    <!-- functions.xsl -->
+    <!-- templates.xsl -->
+    <!-- Also, it will be used in the later stages of the application (imported in transformations/ddi2fr/ddi2fr.xsl) -->
+    <!-- Therefore, source.xsl role belongs in the creation of the basic-form.tmp : ddi2fr target-->
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
@@ -148,6 +148,7 @@
             <xd:p>Getting the corresponding suffix from different reponse domains.</xd:p>
         </xd:desc>
     </xd:doc>
+    <!-- Getting suffix for 'HH' DateFieldFormat -->
     <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='HH']" mode="iatddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
@@ -159,6 +160,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    <!-- Getting suffix for 'mm' DateFieldFormat -->
     <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='mm']" mode="iatddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
@@ -170,12 +172,12 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
+    <!-- Getting suffix for d:QuestionItem elements having a d:NumericDomainReference child -->
     <xsl:template
         match="d:QuestionItem[d:NumericDomainReference]" mode="iatddi:get-suffix">
         <xsl:apply-templates select="d:NumericDomainReference" mode="iatddi:get-suffix"/>
     </xsl:template>
-    
+    <!-- Getting suffix for d:NumericDomainReference having a r:ManagedNumericRepresentation -->
     <xsl:template match="d:NumericDomainReference[r:ManagedNumericRepresentation]" mode="iatddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>

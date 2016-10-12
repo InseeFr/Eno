@@ -17,6 +17,7 @@
     <xsl:output method="xml" indent="no" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
 
+    <!-- Namespace required for xsl documentation -->
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
             <xd:p>Variable that concatenates the DDI</xd:p>
@@ -44,6 +45,7 @@
                         select="replace(document($main-file)//s:StudyUnit/r:ID/text(), '-SU', '')"
                     />
                 </xsl:variable>
+                <!-- For each d:Instrument -->
                 <xsl:for-each select="document($main-file)//d:Instrument">
                     <xsl:result-document
                         href="{lower-case(concat('file:///',replace($output-folder, '\\' , '/'),'/',replace(r:ID/text(), concat($root/text(),'-In-'), ''),'.tmp'))}"

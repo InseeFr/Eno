@@ -5,11 +5,13 @@
     xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
     xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" exclude-result-prefixes="xs xd"
     version="2.0">
-    <xsl:output method="xml" indent="yes"/>
 
-    <!-- This xsl stylesheet is used in the fods2xml target (imported by fods2xml.xsl)-->
+    <!-- This xsl stylesheet is used in the fods2xsl target (imported by fods2xml.xsl)-->
     <!-- Its purpose is to retrieve several elements in a fods file (like cell content, column name etc) -->
     <!-- The information retrieved will then be used in fods2xml.xsl in order to create the output xml file -->
+
+    <!-- The output file generated will be xml type -->
+    <xsl:output method="xml" indent="yes"/>
 
     <xd:doc scope="stylesheet">
         <xd:desc>

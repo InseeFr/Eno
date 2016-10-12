@@ -13,9 +13,11 @@
     xmlns:iatfr="http://xml/insee.fr/xslt/apply-templates/form-runner"
     xmlns:il="http://xml/insee.fr/xslt/lib" exclude-result-prefixes="xd iat il" version="2.0">
 
-<!-- Orbeon-form-runner related file -->
-<!-- This file is imported in the ddi2fr.xsl file (already in ddi2fr-fixed.xsl) -->
+    <!-- Orbeon-form-runner related file -->
+    <!-- This file is imported in the ddi2fr.xsl file (already in ddi2fr-fixed.xsl) -->
 
+
+    <!-- Parameters defined in build-non-regression.xml -->
     <xsl:param name="campaign" as="xs:string"/>
     <xsl:param name="model" as="xs:string"/>
     <xsl:param name="properties-file"/>
@@ -29,6 +31,7 @@
         </xd:desc>
     </xd:doc>
 
+    <!-- The output file generated will be xml type -->
     <xsl:output name="concise-xml" method="xml" indent="no" omit-xml-declaration="yes"
         exclude-result-prefixes="#all"/>
 

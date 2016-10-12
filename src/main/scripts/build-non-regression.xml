@@ -23,7 +23,6 @@
 
 	<!--************************TARGETS TO GENERATE A SURVEY *****************************-->
 
-    <!-- We must get the mapping between the VariableScheme and the identifiers (QuestionScheme side) before launching, which explains the dependence -->
     <target name="ddi2fr">
         <!-- From the -final suffixed file, this target will create a orbeon readable questionnaire -->
         <basename file="${file}" property="file-name" suffix=".tmp"/>

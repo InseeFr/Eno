@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:il="http://xml/insee.fr/xslt/lib" xmlns:iat="http://xml/insee.fr/xslt/apply-templates" exclude-result-prefixes="#all" version="2.0">
 
+    <!-- This stylesheet is imported in several files : ddi2fr.xsl, fods2xml.xsl, xml2xsl.xsl -->
+    <!-- lib.xsl defines functions used in the previous files -->
+    <!-- Also clearing the xml file on which its applied by deleting some elements (comments, instructions) -->
+
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> Apr 9, 2013</xd:p>
@@ -43,12 +47,10 @@
         </xsl:copy>
     </xsl:template>
 
-
     <xsl:function name="il:is-rich-content" as="xs:boolean">
         <xsl:param name="node-set"/>
         <xsl:sequence select="if ($node-set instance of xs:string) then false() else boolean($node-set//node())"/>
     </xsl:function>
-
 
     <!-- To display an xml tree like a text chain -->
     <xsl:function name="il:serialize" as="xs:string">

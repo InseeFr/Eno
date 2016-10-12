@@ -5,8 +5,8 @@
     xmlns:iatxml="http://xml/insee.fr/xslt/apply-templates/xml" exclude-result-prefixes="#all"
     version="2.0">
 
-    <!-- This xsl stylesheet is used in the fods2xml target (imported by fods2xml.xsl)-->
-    <!-- Its purpose is to create the output xml file (xml.tmp) -->
+    <!-- This xsl stylesheet is used in the fods2xsl target (imported by fods2xml.xsl)-->
+    <!-- Its purpose is to participate in the creation of the temporary output xml file (xml.tmp) from a fods input -->
     <!-- xml.tmp will be a tree of GenericElement/DefinedElement with information stored in the @name attribute -->
 
     <xd:doc scope="stylesheet">
@@ -16,6 +16,7 @@
         </xd:desc>
     </xd:doc>
 
+    <!-- The output file generated will be xml type -->
     <xsl:output name="concise-xml" method="xml" indent="no" omit-xml-declaration="yes"
         exclude-result-prefixes="#all"/>
 

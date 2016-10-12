@@ -4,8 +4,11 @@
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
     xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <xsl:output method="xml" indent="yes" encoding="utf-8"/>
+    <!-- This stylesheet is applied to basic-form.tmp (previously created in the ddi2fr target) -->
+    <!-- It adds orbeon related elements to enable the desired navigation. -->
     <!-- Transformation used to add the home page on the different questionnaires. -->
+
+    <xsl:output method="xml" indent="yes" encoding="utf-8"/>    
 
     <!-- The campaign -->
     <xsl:param name="campaign" as="xs:string"/>
@@ -16,13 +19,14 @@
     
     <xsl:variable name="properties" select="doc($properties-file)"/>
 
-
+    <!-- Saving the CurrentSection in a variable -->
     <xsl:variable name="choice">
         <xsl:value-of
             select="string('{instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection}')"
         />
     </xsl:variable>
 
+    <!-- Counting the number of modules and storing it -->
     <xsl:variable name="nb-of-modules">
         <xsl:value-of
             select="count(//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and child::*])"
@@ -43,7 +47,6 @@
             <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
     </xsl:template>
-
 
     <!-- Adding those elements to the main instance -->
     <xsl:template match="xf:instance[@id='fr-form-instance']/form">

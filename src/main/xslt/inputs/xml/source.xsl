@@ -3,12 +3,14 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:iatxml="http://xml/insee.fr/xslt/apply-templates/xml" exclude-result-prefixes="xs xd"
     version="2.0">
-    <xsl:output method="xml" indent="yes"/>
 
-    <!-- This xsl stylesheet is used in the xml2xsl target (imported by xml2xsl.xsl)-->
+    <!-- This xsl stylesheet is used in the fods2xsl target (imported by xml2xsl.xsl)-->
     <!-- Its purpose is to retrieve several elements in a xml file (xml.tmp) containing Generic and DefinedElement created -->
     <!-- by fods2xml -->
     <!-- The information retrieved will then be used in xml2xsl.xsl in order to create the output xsl file -->
+
+    <!-- The output file generated will be xml type -->
+    <xsl:output method="xml" indent="yes"/>
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -19,7 +21,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Starting the transformation from xml par the root element</xd:p>
+            <xd:p>Starting the transformation from xml by the root element</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="/" mode="source">

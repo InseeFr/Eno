@@ -10,8 +10,8 @@
     <!-- xsl stylesheet applied to preformate.tmp in the temporary process of xsl files creation (fods2xml then xml2xsl) -->
     <!-- This stylesheet will read the preformate.tmp, get the different informations required (with source.xsl) -->
     <!-- models.xml will then use the different retrieved information to create xml.tmp -->
-    <!-- The content of this file (fods2xml.xsl will help linking the different elements with each other -->
-    <!-- lib.xsl : used to parse a file with defined constraints -->
+    <!-- The content of this file (fods2xml.xsl) will create the output xml.tmp file from the input fods file -->
+    <!-- The output xml file will be a tree of Root/GenericElement/DefinedElement -->
 
     <!-- Importing the different resources -->
     <xsl:import href="../inputs/fods/source.xsl"/>
