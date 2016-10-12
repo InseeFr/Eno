@@ -33,7 +33,7 @@
             <r:ID>INSEE-SIMPSONS-IC-1</r:ID>
             <r:Version>0.1.0</r:Version>
             <d:InstructionName>
-               <r:String xml:lang="en-IE">Commentaire</r:String>
+               <r:String xml:lang="en-IE">comment</r:String>
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
@@ -47,7 +47,7 @@
             <r:ID>INSEE-SIMPSONS-IC-2</r:ID>
             <r:Version>0.1.0</r:Version>
             <d:InstructionName>
-               <r:String xml:lang="en-IE">Commentaire</r:String>
+               <r:String xml:lang="en-IE">comment</r:String>
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
@@ -74,7 +74,7 @@
             <r:ID>INSEE-SIMPSONS-IW-1</r:ID>
             <r:Version>0.1.0</r:Version>
             <d:InstructionName>
-               <r:String xml:lang="en-IE">Avertissement</r:String>
+               <r:String xml:lang="en-IE">warning</r:String>
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
