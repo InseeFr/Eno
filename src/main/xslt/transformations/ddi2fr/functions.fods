@@ -669,13 +669,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-form-title</text:p>
+      <text:p>enofr:get-form-title</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-label</text:p>
+      <text:p>enoddi:get-label</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element label sending function to the form title getter function</text:p>
@@ -683,11 +683,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-form-languages</text:p>
+      <text:p>enofr:get-form-languages</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-languages</text:p>
+      <text:p>enoddi:get-languages</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI languages getter function to the form languages getter function</text:p>
@@ -695,11 +695,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-application-name</text:p>
+      <text:p>enofr:get-application-name</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-id</text:p>
+      <text:p>enoddi:get-id</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element id sender function to the application name getter function</text:p>
@@ -707,11 +707,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-form-name</text:p>
+      <text:p>enofr:get-form-name</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-id</text:p>
+      <text:p>enoddi:get-id</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element id sender function to the form name getter function</text:p>
@@ -719,7 +719,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-form-description</text:p>
+      <text:p>enofr:get-form-description</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
@@ -731,7 +731,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-default-value</text:p>
+      <text:p>enofr:get-default-value</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2"/>
@@ -741,11 +741,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-name</text:p>
+      <text:p>enofr:get-name</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-id</text:p>
+      <text:p>enoddi:get-id</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element id sender function to the Xforms element name getter function</text:p>
@@ -753,11 +753,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-relevant</text:p>
+      <text:p>enofr:get-relevant</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-cachable</text:p>
+      <text:p>enoddi:get-cachable</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Not linked yet</text:p>
@@ -765,11 +765,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-readonly</text:p>
+      <text:p>enofr:get-readonly</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-grisable</text:p>
+      <text:p>enoddi:get-grisable</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Not linked yet</text:p>
@@ -777,7 +777,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-required</text:p>
+      <text:p>enofr:get-required</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2"/>
@@ -787,11 +787,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-calculate</text:p>
+      <text:p>enofr:get-calculate</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-link</text:p>
+      <text:p>enoddi:get-link</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Not linked yet</text:p>
@@ -799,11 +799,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-calculate-label</text:p>
+      <text:p>enofr:get-calculate-label</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-conditionned-text</text:p>
+      <text:p>enoddi:get-conditionned-text</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element conditionned-text to the calculate label getter function</text:p>
@@ -811,11 +811,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-calculate-alert</text:p>
+      <text:p>enofr:get-calculate-alert</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-conditionned-text-bis</text:p>
+      <text:p>enoddi:get-conditionned-text-bis</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element conditionned-text-bis to the calculate alert getter function</text:p>
@@ -823,11 +823,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-type</text:p>
+      <text:p>enofr:get-type</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-type</text:p>
+      <text:p>enoddi:get-type</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Used to specify the character string to identify as xf:date</text:p>
@@ -835,11 +835,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-constraint</text:p>
+      <text:p>enofr:get-constraint</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-control</text:p>
+      <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element control to the constraint getter function</text:p>
@@ -847,11 +847,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-number-of-decimals</text:p>
+      <text:p>enofr:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-number-of-decimals</text:p>
+      <text:p>enoddi:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking both number of decimals getter functions</text:p>
@@ -859,11 +859,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-alert-level</text:p>
+      <text:p>enofr:get-alert-level</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-message-type</text:p>
+      <text:p>enoddi:get-message-type</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element message-type to the alert-level getter function</text:p>
@@ -871,13 +871,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-help</text:p>
+      <text:p>enofr:get-help</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-help-instruction</text:p>
+      <text:p>enoddi:get-help-instruction</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI Instruction (Help Type) getter function to the Xforms help element getter function</text:p>
@@ -885,13 +885,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-hint</text:p>
+      <text:p>enofr:get-hint</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-hint-instruction</text:p>
+      <text:p>enoddi:get-hint-instruction</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI Instruction (Hint Type) getter function to the Xforms hint element getter function</text:p>
@@ -899,13 +899,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-alert</text:p>
+      <text:p>enofr:get-alert</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-message</text:p>
+      <text:p>enoddi:get-message</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Not linked yet</text:p>
@@ -913,13 +913,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-label</text:p>
+      <text:p>enofr:get-label</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-label</text:p>
+      <text:p>enoddi:get-label</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element label sending function to the Xforms elements label getter function</text:p>
@@ -927,11 +927,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-value</text:p>
+      <text:p>enofr:get-value</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-value</text:p>
+      <text:p>enoddi:get-value</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI code value sending function to the Xforms item value getter function</text:p>
@@ -939,11 +939,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-appearance</text:p>
+      <text:p>enofr:get-appearance</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-output-format</text:p>
+      <text:p>enoddi:get-output-format</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI code list representation format sending function to the Xforms list appearance getter function</text:p>
@@ -951,11 +951,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-css-class</text:p>
+      <text:p>enofr:get-css-class</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-style</text:p>
+      <text:p>enoddi:get-style</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI style sending function to the css class getter function</text:p>
@@ -963,11 +963,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-format</text:p>
+      <text:p>enofr:get-format</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-format</text:p>
+      <text:p>enoddi:get-format</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking both format getter functions</text:p>
@@ -975,11 +975,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-length</text:p>
+      <text:p>enofr:get-length</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-length</text:p>
+      <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking both length getter functions</text:p>
@@ -987,13 +987,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-suffix</text:p>
+      <text:p>enofr:get-suffix</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-suffix</text:p>
+      <text:p>enoddi:get-suffix</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking both suffix getter functions</text:p>
@@ -1001,11 +1001,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-header-columns</text:p>
+      <text:p>enofr:get-header-columns</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-levels-first-dimension</text:p>
+      <text:p>enoddi:get-levels-first-dimension</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element levels-first-dimension to the header-columns getter function</text:p>
@@ -1013,11 +1013,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-header-lines</text:p>
+      <text:p>enofr:get-header-lines</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-levels-second-dimension</text:p>
+      <text:p>enoddi:get-levels-second-dimension</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element levels-second-dimension to the header-lines getter function</text:p>
@@ -1025,11 +1025,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-body-lines</text:p>
+      <text:p>enofr:get-body-lines</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-codes-first-dimension</text:p>
+      <text:p>enoddi:get-codes-first-dimension</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element codes-first-dimension to the body-lines getter function</text:p>
@@ -1037,13 +1037,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-header-line</text:p>
+      <text:p>enofr:get-header-line</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>index</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-title-line</text:p>
+      <text:p>enoddi:get-title-line</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element title-line to the header-line getter function</text:p>
@@ -1051,13 +1051,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-body-line</text:p>
+      <text:p>enofr:get-body-line</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>index</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-table-line</text:p>
+      <text:p>enoddi:get-table-line</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element table-line to the body-line getter function</text:p>
@@ -1065,11 +1065,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-rowspan</text:p>
+      <text:p>enofr:get-rowspan</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-rowspan</text:p>
+      <text:p>enoddi:get-rowspan</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking both rowspan element getter functions</text:p>
@@ -1077,11 +1077,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-colspan</text:p>
+      <text:p>enofr:get-colspan</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-colspan</text:p>
+      <text:p>enoddi:get-colspan</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking both colspan element getter functions</text:p>
@@ -1089,11 +1089,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-minimum-lines</text:p>
+      <text:p>enofr:get-minimum-lines</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-minimum-required</text:p>
+      <text:p>enoddi:get-minimum-required</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element minimum-required to the minimum-lines getter function</text:p>
@@ -1101,11 +1101,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-constraint-dependencies</text:p>
+      <text:p>enofr:get-constraint-dependencies</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-computation-items</text:p>
+      <text:p>enoddi:get-computation-items</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element computation-items to the constraint-dependencies getter function</text:p>
@@ -1113,11 +1113,11 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatfr:get-relevant-dependencies</text:p>
+      <text:p>enofr:get-relevant-dependencies</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-then</text:p>
+      <text:p>enoddi:get-then</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the DDI element &apos;then&apos; to the relevant-dependencies getter function</text:p>

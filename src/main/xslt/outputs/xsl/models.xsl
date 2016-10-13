@@ -3,8 +3,8 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:iat="http://xml/insee.fr/xslt/apply-templates"
-    xmlns:iatxsl="http://xml/insee.fr/xslt/apply-templates/xsl"
+    xmlns:eno="http://xml.insee.fr/apps/eno"
+    xmlns:enoxsl="http://xml.insee.fr/apps/eno/xsl"
     exclude-result-prefixes="xd" version="2.0">
 
     <!-- This xsl stylesheet is used in the xml2xsl target (imported by xml2xsl.xsl)-->
@@ -32,7 +32,7 @@
         <!-- Creating the root element of an xsl sheet -->
         <xsl:element name='xsl:stylesheet'>
             <!-- This will call children elements that will create an xml structure -->
-            <xsl:apply-templates select="iat:child-fields($source-context)" mode="source">
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:element>
@@ -48,10 +48,10 @@
     </xd:doc>
     <xsl:template match="Template" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="iatxsl:get-documentation($source-context)"/>
+        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
         <xsl:text>&#xA;</xsl:text>
         <xsl:element name="xsl:template">
-            <xsl:attribute name="match" select="normalize-space(iatxsl:get-xpath($source-context))"/>
+            <xsl:attribute name="match" select="normalize-space(enoxsl:get-xpath($source-context))"/>
             <xsl:attribute name="mode" select="'source'"/>
             <xsl:element name="xsl:param">
                 <xsl:attribute name="name" select="'driver'"/>
@@ -60,7 +60,7 @@
             </xsl:element>
             <xsl:element name="xsl:apply-templates">
                 <xsl:attribute name="select"
-                    select="concat('il:append-empty-element(''',normalize-space(iatxsl:get-driver($source-context)),''',$driver)')"/>
+                    select="concat('eno:append-empty-element(''',normalize-space(enoxsl:get-driver($source-context)),''',$driver)')"/>
                 <xsl:attribute name="mode" select="'model'"/>
                 <xsl:element name="xsl:with-param">
                     <xsl:attribute name="name" select="'source-context'"/>
@@ -82,15 +82,15 @@
     </xd:doc>
     <xsl:template match="TransitionFunction" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="iatxsl:get-documentation($source-context)"/>
+        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
         <xsl:text>&#xA;</xsl:text>
         <xsl:element name="xsl:function">
-            <xsl:attribute name="name" select="normalize-space(iatxsl:get-output-function($source-context))"/>
+            <xsl:attribute name="name" select="normalize-space(enoxsl:get-output-function($source-context))"/>
             <xsl:element name="xsl:param">
                 <xsl:attribute name="name" select="'context'"/>
                 <xsl:attribute name="as" select="'item()'"/>
             </xsl:element>
-            <xsl:variable name="parameters" select="iatxsl:get-parameters($source-context)" as="xs:string +"/>
+            <xsl:variable name="parameters" select="enoxsl:get-parameters($source-context)" as="xs:string +"/>
             <xsl:if test="$parameters!=''">
                 <xsl:for-each select="$parameters">
                     <xsl:element name="xsl:param">
@@ -109,7 +109,7 @@
             </xsl:variable>
             <xsl:element name="xsl:sequence">
                 <xsl:attribute name="select"
-                    select="concat(normalize-space(iatxsl:get-input-function($source-context)),'(',$function-parameters/text(),')')"/>
+                    select="concat(normalize-space(enoxsl:get-input-function($source-context)),'(',$function-parameters/text(),')')"/>
             </xsl:element>
         </xsl:element>
         <xsl:text>&#xA;</xsl:text>
@@ -125,12 +125,12 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:text>&#xA;</xsl:text>
         <xsl:element name="xsl:function">
-            <xsl:attribute name="name" select="normalize-space(iatxsl:get-output-function($source-context))"/>
+            <xsl:attribute name="name" select="normalize-space(enoxsl:get-output-function($source-context))"/>
             <xsl:element name="xsl:param">
                 <xsl:attribute name="name" select="'context'"/>
                 <xsl:attribute name="as" select="'item()'"/>
             </xsl:element>
-            <xsl:variable name="parameters" select="iatxsl:get-parameters($source-context)" as="xs:string +"/>
+            <xsl:variable name="parameters" select="enoxsl:get-parameters($source-context)" as="xs:string +"/>
             <xsl:if test="$parameters!=''">
                 <xsl:for-each select="$parameters">
                     <xsl:element name="xsl:param">
@@ -150,13 +150,13 @@
     </xd:doc>
     <xsl:template match="SimpleImplementation" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="iatxsl:get-documentation($source-context)"/>
+        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
         <xsl:text>&#xA;</xsl:text>
         <xsl:element name="xsl:template">
-            <xsl:attribute name="match" select="normalize-space(iatxsl:get-xpath($source-context))"/>
-            <xsl:attribute name="mode" select="normalize-space(iatxsl:get-mode-xpath($source-context))"/>
+            <xsl:attribute name="match" select="normalize-space(enoxsl:get-xpath($source-context))"/>
+            <xsl:attribute name="mode" select="normalize-space(enoxsl:get-mode-xpath($source-context))"/>
             <xsl:element name="xsl:value-of">
-                <xsl:attribute name="select" select="normalize-space(iatxsl:get-match($source-context))"/>
+                <xsl:attribute name="select" select="normalize-space(enoxsl:get-match($source-context))"/>
             </xsl:element>
         </xsl:element>
         <xsl:text>&#xA;</xsl:text>
@@ -169,14 +169,14 @@
     </xd:doc>
     <xsl:template match="ComplexImplementation" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="iatxsl:get-documentation($source-context)"/>
+        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
         <xsl:text>&#xA;</xsl:text>
         <xsl:element name="xsl:template">
-            <xsl:attribute name="match" select="normalize-space(iatxsl:get-xpath($source-context))"/>
-            <xsl:attribute name="mode" select="normalize-space(iatxsl:get-mode-xpath($source-context))"/>
+            <xsl:attribute name="match" select="normalize-space(enoxsl:get-xpath($source-context))"/>
+            <xsl:attribute name="mode" select="normalize-space(enoxsl:get-mode-xpath($source-context))"/>
             <xsl:element name="xsl:apply-templates">
-                <xsl:attribute name="select" select="normalize-space(iatxsl:get-match($source-context))"/>
-                <xsl:attribute name="mode" select="normalize-space(iatxsl:get-match-mode($source-context))"/>
+                <xsl:attribute name="select" select="normalize-space(enoxsl:get-match($source-context))"/>
+                <xsl:attribute name="mode" select="normalize-space(enoxsl:get-match-mode($source-context))"/>
             </xsl:element>
         </xsl:element>
         <xsl:text>&#xA;</xsl:text>
@@ -189,11 +189,11 @@
     </xd:doc>
     <xsl:template match="EmptyImplementation" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="iatxsl:get-documentation($source-context)"/>
+        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
         <xsl:text>&#xA;</xsl:text>
         <xsl:element name="xsl:template">
-            <xsl:attribute name="match" select="normalize-space(iatxsl:get-xpath($source-context))"/>
-            <xsl:attribute name="mode" select="normalize-space(iatxsl:get-mode-xpath($source-context))"/>
+            <xsl:attribute name="match" select="normalize-space(enoxsl:get-xpath($source-context))"/>
+            <xsl:attribute name="mode" select="normalize-space(enoxsl:get-mode-xpath($source-context))"/>
             <xsl:element name="xsl:text"/>
         </xsl:element>
         <xsl:text>&#xA;</xsl:text>
@@ -207,13 +207,13 @@
     <xsl:template match="SourceFunction" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="function-name">
-            <xsl:value-of select="normalize-space(iatxsl:get-function($source-context))"/>
+            <xsl:value-of select="normalize-space(enoxsl:get-function($source-context))"/>
         </xsl:variable>
-        <xsl:comment select="iatxsl:get-documentation($source-context)"/>
+        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
         <xsl:text>&#xA;</xsl:text>
         <xsl:element name="xsl:function">
             <xsl:attribute name="name" select="$function-name"/>
-            <xsl:variable name="type" select="iatxsl:get-as($source-context)"/>
+            <xsl:variable name="type" select="enoxsl:get-as($source-context)"/>
             <xsl:if test="$type!=''">
                 <xsl:attribute name="as" select="$type"/>
             </xsl:if>
@@ -221,7 +221,7 @@
                 <xsl:attribute name="name" select="'context'"/>
                 <xsl:attribute name="as" select="'item()'"/>
             </xsl:element>
-            <xsl:variable name="parameters" select="iatxsl:get-parameters($source-context)" as="xs:string +"/>
+            <xsl:variable name="parameters" select="enoxsl:get-parameters($source-context)" as="xs:string +"/>
             <xsl:if test="$parameters!=''">
                 <xsl:for-each select="$parameters">
                     <xsl:element name="xsl:param">
@@ -256,15 +256,15 @@
     </xd:doc>
     <xsl:template match="GetChildren" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="iatxsl:get-documentation($source-context)"/>
+        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
         <xsl:text>&#xA;</xsl:text>
         <xsl:element name="xsl:template">
-            <xsl:attribute name="match" select="normalize-space(iatxsl:get-parent($source-context))"/>
-            <xsl:attribute name="mode" select="'iat:child-fields'"/>
+            <xsl:attribute name="match" select="normalize-space(enoxsl:get-parent($source-context))"/>
+            <xsl:attribute name="mode" select="'eno:child-fields'"/>
             <xsl:attribute name="as" select="'node()*'"/>
             <xsl:element name="xsl:sequence">
                 <xsl:attribute name="select"
-                    select="normalize-space(iatxsl:get-children($source-context))"/>
+                    select="normalize-space(enoxsl:get-children($source-context))"/>
             </xsl:element>
         </xsl:element>
         <xsl:text>&#xA;</xsl:text>

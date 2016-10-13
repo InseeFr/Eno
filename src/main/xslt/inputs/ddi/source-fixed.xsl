@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:iat="http://xml/insee.fr/xslt/apply-templates"
-    xmlns:iatddi="http://xml/insee.fr/xslt/apply-templates/ddi" xmlns:d="ddi:datacollection:3_2"
+    xmlns:eno="http://xml.insee.fr/apps/eno"
+    xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi" xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:il="http://xml/insee.fr/xslt/lib"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="#all" version="2.0">
 
     <!-- This .xsl document is the base of the upcoming source.xsl : ENOPreprocessing target -->
@@ -29,7 +29,7 @@
             <xd:p>Getting the languages list used in the ddi.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='template']" mode="iatddi:get-languages"
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='template']" mode="enoddi:get-languages"
         as="xs:string *">
         <xsl:for-each-group select="//@xml:lang" group-by=".">
             <xsl:value-of select="current-grouping-key()"/>
@@ -41,7 +41,7 @@
             <xd:p>Getting the number of modules in the ddi.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*" mode="iatddi:get-nb-of-modules" as="xs:integer">
+    <xsl:template match="*" mode="enoddi:get-nb-of-modules" as="xs:integer">
         <xsl:value-of select="count(//d:Sequence[d:TypeOfSequence/text()='module'])"/>
     </xsl:template>
 
@@ -50,11 +50,11 @@
             <xd:p>Getting the id for d:ResponseDomainInMixed.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:ResponseDomainInMixed" mode="iatddi:get-id">
+    <xsl:template match="d:ResponseDomainInMixed" mode="enoddi:get-id">
         <xsl:variable name="parent-id">
             <xsl:apply-templates
                 select="parent::d:StructuredMixedResponseDomain/parent::d:QuestionItem"
-                mode="iatddi:get-id"/>
+                mode="enoddi:get-id"/>
         </xsl:variable>
         <xsl:variable name="sub-id">
             <xsl:value-of select="count(preceding-sibling::d:ResponseDomainInMixed)+1"/>
@@ -72,7 +72,7 @@
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]
         | d:QuestionItem[not(descendant::d:Instruction[d:InstructionName/r:String/text()='format'])
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
-        mode="iatddi:get-label">
+        mode="enoddi:get-label">
         <xsl:element name="xhtml:p">
             <xsl:for-each
                 select="d:QuestionText/d:LiteralText/d:Text | d:InterviewerInstructionReference/d:Instruction/d:InstructionText/d:LiteralText/d:Text">
@@ -97,17 +97,17 @@
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]
         | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='format']
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
-        mode="iatddi:get-label">
+        mode="enoddi:get-label">
         <xsl:apply-templates select="d:QuestionText/d:LiteralText/d:Text" mode="lang-choice"/>
     </xsl:template>
 
     <!-- Getting the label from a d:QuestionGrid OR d:QuestionItem having a d:Instruction of 'format' type -->
     <xsl:template
         match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='format']] | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='format']]"
-        mode="iatddi:get-hint-instruction" priority="2">
+        mode="enoddi:get-hint-instruction" priority="2">
         <xsl:apply-templates
             select="descendant::d:Instruction[d:InstructionName/r:String/text()='format']"
-            mode="iatddi:get-label"/>
+            mode="enoddi:get-label"/>
     </xsl:template>
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
@@ -149,7 +149,7 @@
         </xd:desc>
     </xd:doc>
     <!-- Getting suffix for 'HH' DateFieldFormat -->
-    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='HH']" mode="iatddi:get-suffix">
+    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='HH']" mode="enoddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="$language='fr'">
@@ -161,7 +161,7 @@
         </xsl:choose>
     </xsl:template>
     <!-- Getting suffix for 'mm' DateFieldFormat -->
-    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='mm']" mode="iatddi:get-suffix">
+    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='mm']" mode="enoddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="$language='fr'">
@@ -174,11 +174,11 @@
     </xsl:template>
     <!-- Getting suffix for d:QuestionItem elements having a d:NumericDomainReference child -->
     <xsl:template
-        match="d:QuestionItem[d:NumericDomainReference]" mode="iatddi:get-suffix">
-        <xsl:apply-templates select="d:NumericDomainReference" mode="iatddi:get-suffix"/>
+        match="d:QuestionItem[d:NumericDomainReference]" mode="enoddi:get-suffix">
+        <xsl:apply-templates select="d:NumericDomainReference" mode="enoddi:get-suffix"/>
     </xsl:template>
     <!-- Getting suffix for d:NumericDomainReference having a r:ManagedNumericRepresentation -->
-    <xsl:template match="d:NumericDomainReference[r:ManagedNumericRepresentation]" mode="iatddi:get-suffix">
+    <xsl:template match="d:NumericDomainReference[r:ManagedNumericRepresentation]" mode="enoddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="r:ManagedNumericRepresentation//r:Content/@xml:lang">
@@ -191,18 +191,18 @@
     </xsl:template>
     
     <!-- Getting levels of first dimension in d:QuestionGrid elements -->
-    <xsl:template match="d:QuestionGrid" mode="iatddi:get-levels-first-dimension">
-        <xsl:apply-templates select="d:GridDimension[@rank='1']" mode="iatddi:get-levels"/>
+    <xsl:template match="d:QuestionGrid" mode="enoddi:get-levels-first-dimension">
+        <xsl:apply-templates select="d:GridDimension[@rank='1']" mode="enoddi:get-levels"/>
     </xsl:template>
 
     <!-- Getting levels of second dimension in d:QuestionGrid elements -->
-    <xsl:template match="d:QuestionGrid" mode="iatddi:get-levels-second-dimension">
-        <xsl:apply-templates select="d:GridDimension[@rank='2']" mode="iatddi:get-levels"/>
+    <xsl:template match="d:QuestionGrid" mode="enoddi:get-levels-second-dimension">
+        <xsl:apply-templates select="d:GridDimension[@rank='2']" mode="enoddi:get-levels"/>
     </xsl:template>
 
     <!-- Getting codes of first dimension in d:QuestionGrid elements having d:GridDimension/d:Roster child -->
     <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster]"
-        mode="iatddi:get-codes-first-dimension">
+        mode="enoddi:get-codes-first-dimension">
         <xsl:variable name="levels">
             <xsl:for-each-group
                 select="d:StructuredMixedGridResponseDomain/d:GridResponseDomain//d:SelectDimension[@rank='1']"
@@ -215,12 +215,12 @@
 
     <!-- Getting codes of first dimension in d:QuestionGrid elements not having d:GridDimension/d:Roster child -->
     <xsl:template match="d:QuestionGrid[not(d:GridDimension/d:Roster)]"
-        mode="iatddi:get-codes-first-dimension">
+        mode="enoddi:get-codes-first-dimension">
         <xsl:sequence select="d:GridDimension[@rank='1']//l:Code[not(descendant::l:Code)]"/>
     </xsl:template>
 
     <!-- Getting the number of levels of a d:GridDimension element -->
-    <xsl:template match="d:GridDimension" mode="iatddi:get-levels">
+    <xsl:template match="d:GridDimension" mode="enoddi:get-levels">
         <xsl:variable name="levels">
             <xsl:for-each select="d:CodeDomain/r:CodeListReference/l:CodeList//l:CodeList[r:Label]">
                 <dummy/>
@@ -237,7 +237,7 @@
     </xsl:template>
 
     <!-- Getting the title line depending on an index number -->
-    <xsl:template match="d:QuestionGrid" mode="iatddi:get-title-line">
+    <xsl:template match="d:QuestionGrid" mode="enoddi:get-title-line">
         <xsl:param name="index" tunnel="yes" as="xs:integer"/>
         <!-- Counting the labels located at the top of the referenced list (if they exist, they should not be taken into account)-->
         <xsl:variable name="label-or-no">
@@ -260,17 +260,17 @@
     </xsl:template>
 
     <!-- Getting the table line depending on an index number -->
-    <xsl:template match="d:QuestionGrid" mode="iatddi:get-table-line">
+    <xsl:template match="d:QuestionGrid" mode="enoddi:get-table-line">
         <xsl:param name="index" tunnel="yes"/>
         <xsl:variable name="codes">
-            <xsl:apply-templates select="." mode="iatddi:get-codes-first-dimension"/>
+            <xsl:apply-templates select="." mode="enoddi:get-codes-first-dimension"/>
         </xsl:variable>
         <xsl:variable name="id">
             <xsl:value-of select="$codes/l:Code[position()=$index]/r:ID"/>
         </xsl:variable>
 
         <xsl:apply-templates select="d:GridDimension[@rank='1']//l:Code[r:ID=$id]"
-            mode="iatddi:get-table-line"/>
+            mode="enoddi:get-table-line"/>
         <!--        <xsl:sequence
             select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)[.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]"
         />-->
@@ -284,7 +284,7 @@
 
     <!-- Getting the table line depending on an index number on d:QuestionGrid elements not having a @maximumAllowed attribute -->
     <!-- in their d:Roster descendant -->
-    <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]" mode="iatddi:get-table-line">
+    <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]" mode="enoddi:get-table-line">
         <xsl:param name="index" tunnel="yes"/>
         <xsl:for-each
             select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)">
@@ -295,13 +295,13 @@
     </xsl:template>
     
     <!-- Getting the table line for an l:Code element -->
-    <xsl:template match="l:Code" mode="iatddi:get-table-line">
+    <xsl:template match="l:Code" mode="enoddi:get-table-line">
         <xsl:if test="parent::l:Code">
             <xsl:variable name="first-parent-code-id">
                 <xsl:value-of select="parent::l:Code/l:Code[1]/r:ID"/>
             </xsl:variable>
             <xsl:if test="r:ID=$first-parent-code-id">
-                <xsl:apply-templates select="parent::l:Code" mode="iatddi:get-table-line"/>
+                <xsl:apply-templates select="parent::l:Code" mode="enoddi:get-table-line"/>
             </xsl:if>
         </xsl:if>
         <xsl:sequence select="."/>
@@ -310,7 +310,7 @@
     <!-- For codes belonging to a 1-dimension of several levels -->
     <xsl:template
         match="l:Code[max(ancestor::d:GridDimension[@rank='1']//l:Code[not(child::l:Code)]/count(ancestor::l:CodeList | ancestor::l:Code))>1]"
-        mode="iatddi:get-colspan" priority="1">
+        mode="enoddi:get-colspan" priority="1">
         <!-- Getting the depth-level of parents codes -->
         <xsl:variable name="parents">
             <xsl:value-of
@@ -336,7 +336,7 @@
     and we keep the maximum, which will be the depth of the 2nd dimension-->
     <xsl:template
         match="r:Label[parent::l:CodeList/parent::r:CodeListReference/parent::d:CodeDomain/parent::d:GridDimension[@rank='1']]"
-        mode="iatddi:get-rowspan" priority="1">
+        mode="enoddi:get-rowspan" priority="1">
         <xsl:variable name="label-or-no">
             <xsl:value-of
                 select="count(ancestor::d:GridDimension[@rank='1']/following-sibling::d:GridDimension[@rank='2']/d:CodeDomain/r:CodeListReference/l:CodeList/r:Label)"
@@ -349,20 +349,20 @@
 
     <!--Concerning the columns, when l:Code has a l:Code (representing a box dispatched in sub-boxes), we get the number of children l:Code -->
     <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='1'] and child::l:Code]"
-        mode="iatddi:get-rowspan" priority="1">
+        mode="enoddi:get-rowspan" priority="1">
         <xsl:value-of select="count(descendant::l:Code[not(child::l:Code)])"/>
     </xsl:template>
 
     <!-- WARNING -->
     <!-- At the moment, this is equal to the number of l:Code that we find lower. This will only work with 2 levels. -->
     <!-- Consider an evolution where the table header would have 3 levels -->
-    <xsl:template match="r:Label[ancestor::d:GridDimension[@rank='2']]" mode="iatddi:get-colspan"
+    <xsl:template match="r:Label[ancestor::d:GridDimension[@rank='2']]" mode="enoddi:get-colspan"
         priority="1">
         <xsl:value-of select="count(parent::l:CodeList//l:Code)"/>
     </xsl:template>
 
     <!-- For the line labels (2nd dimension), as we did previously, we calculate the depth level -->
-    <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='2']]" mode="iatddi:get-rowspan"
+    <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='2']]" mode="enoddi:get-rowspan"
         priority="1">
         <xsl:value-of
             select="max(ancestor::d:GridDimension[@rank='2']//l:Code[not(child::l:Code)]/count(ancestor::l:CodeList[r:Label]))+1-count(ancestor::l:CodeList[r:Label])"
@@ -370,15 +370,15 @@
     </xsl:template>
 
     <!--Getting colspan for d:NoDataByDefinition elements -->
-    <xsl:template match="d:NoDataByDefinition" mode="iatddi:get-colspan" priority="1">
+    <xsl:template match="d:NoDataByDefinition" mode="enoddi:get-colspan" priority="1">
         <xsl:value-of
             select="string(1+number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum)-number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum))"
         />
     </xsl:template>
 
-    <xsl:template match="*" mode="iatddi:get-computation-items" as="xs:string *">
+    <xsl:template match="*" mode="enoddi:get-computation-items" as="xs:string *">
         <xsl:variable name="id">
-            <xsl:value-of select="iatddi:get-id(.)"/>
+            <xsl:value-of select="enoddi:get-id(.)"/>
         </xsl:variable>
         <xsl:for-each
             select="//d:ComputationItem[contains(r:CommandCode/r:Command/r:CommandContent/text(), $id)]">
@@ -390,27 +390,27 @@
             <!-- If the modified condition still contains the value, then it's ok -->
             <xsl:if test="contains($condition,$id)">
                 <xsl:value-of
-                    select="iatddi:get-id(current()/d:InterviewerInstructionReference/d:Instruction)"/>
+                    select="enoddi:get-id(current()/d:InterviewerInstructionReference/d:Instruction)"/>
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template match="*" mode="iatddi:get-then" as="xs:string *">
+    <xsl:template match="*" mode="enoddi:get-then" as="xs:string *">
         <xsl:variable name="id">
-            <xsl:value-of select="iatddi:get-id(.)"/>
+            <xsl:value-of select="enoddi:get-id(.)"/>
         </xsl:variable>
         <xsl:for-each
             select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='potentially-hidden'] and contains(d:IfCondition/r:Command/r:CommandContent/text(),$id)]">
-            <xsl:value-of select="iatddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
+            <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
         </xsl:for-each>
     </xsl:template>
 
     <!-- Getting controls for module type sequence elements -->
-    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']" mode="iatddi:get-control">
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']" mode="enoddi:get-control">
         <xsl:variable name="controls">
             <xsl:for-each select=".//d:Instruction[ancestor::d:ComputationItem]">
                 <xsl:text> and </xsl:text>
-                <xsl:apply-templates select="current()" mode="iatddi:get-control"/>
+                <xsl:apply-templates select="current()" mode="enoddi:get-control"/>
             </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="result">
@@ -427,9 +427,9 @@
     </xsl:template>
 
     <!-- Getting the link of a l:Variable depending on a id -->
-    <xsl:template match="l:Variable" mode="iatddi:get-link">
+    <xsl:template match="l:Variable" mode="enoddi:get-link">
         <xsl:variable name="id">
-            <xsl:apply-templates select="." mode="iatddi:get-id"/>
+            <xsl:apply-templates select="." mode="enoddi:get-id"/>
         </xsl:variable>
         <xsl:value-of select="substring-after(//d:Expression/r:Command/r:CommandContent[contains(text(),$id)]/text(),'=')"
         />
@@ -437,14 +437,14 @@
     
     <!-- Getting the message for a 'HH' type d:DateTimeDomain element having a @regExp attribute -->
     <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='HH' and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]"
-        mode="iatddi:get-message" priority="2">
+        mode="enoddi:get-message" priority="2">
         <xsl:variable name="apos">'</xsl:variable>
         <xsl:value-of select="concat('Le nombre d',$apos,'heures doit être compris entre 0 et 99.')"/>
     </xsl:template>
     
     <!-- Getting the message for a 'mm' type d:DateTimeDomain element having a @regExp attribute -->
     <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='mm' and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]"
-        mode="iatddi:get-message" priority="2">
+        mode="enoddi:get-message" priority="2">
         <xsl:value-of select="string('Le nombre de minutes doit être compris entre 0 et 59.')"/>
     </xsl:template>
 

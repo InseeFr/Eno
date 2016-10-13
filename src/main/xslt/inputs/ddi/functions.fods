@@ -637,7 +637,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-id</text:p>
+      <text:p>enoddi:get-id</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce6" table:number-columns-repeated="2"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -646,7 +646,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-label</text:p>
+      <text:p>enoddi:get-label</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce6" office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
@@ -658,7 +658,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-languages</text:p>
+      <text:p>enoddi:get-languages</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce6"/>
      <table:table-cell table:style-name="ce6" office:value-type="string" calcext:value-type="string">
@@ -670,7 +670,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-value</text:p>
+      <text:p>enoddi:get-value</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce6"/>
      <table:table-cell table:style-name="ce6" office:value-type="string" calcext:value-type="string">
@@ -682,7 +682,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-output-format</text:p>
+      <text:p>enoddi:get-output-format</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce6"/>
      <table:table-cell table:style-name="ce6" office:value-type="string" calcext:value-type="string">
@@ -694,7 +694,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-index</text:p>
+      <text:p>enoddi:get-index</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -706,7 +706,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-help-instruction</text:p>
+      <text:p>enoddi:get-help-instruction</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce6" office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
@@ -718,7 +718,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-hint-instruction</text:p>
+      <text:p>enoddi:get-hint-instruction</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce6" office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
@@ -730,7 +730,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-style</text:p>
+      <text:p>enoddi:get-style</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -742,7 +742,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-type</text:p>
+      <text:p>enoddi:get-type</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce4"/>
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -754,7 +754,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-cachable</text:p>
+      <text:p>enoddi:get-cachable</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -763,7 +763,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-grisable</text:p>
+      <text:p>enoddi:get-grisable</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -775,7 +775,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-control</text:p>
+      <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -785,7 +785,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-number-of-decimals</text:p>
+      <text:p>enoddi:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -797,7 +797,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-message</text:p>
+      <text:p>enoddi:get-message</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
@@ -811,7 +811,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-message-type</text:p>
+      <text:p>enoddi:get-message-type</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -823,7 +823,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-link</text:p>
+      <text:p>enoddi:get-link</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -835,7 +835,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-format</text:p>
+      <text:p>enoddi:get-format</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -844,7 +844,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-length</text:p>
+      <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -856,7 +856,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-conditionned-text</text:p>
+      <text:p>enoddi:get-conditionned-text</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -868,7 +868,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-conditionned-text-bis</text:p>
+      <text:p>enoddi:get-conditionned-text-bis</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -880,7 +880,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-nb-of-modules</text:p>
+      <text:p>enoddi:get-nb-of-modules</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -892,7 +892,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-suffix</text:p>
+      <text:p>enoddi:get-suffix</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>language</text:p>
@@ -909,7 +909,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-levels-first-dimension</text:p>
+      <text:p>enoddi:get-levels-first-dimension</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -918,7 +918,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-levels-second-dimension</text:p>
+      <text:p>enoddi:get-levels-second-dimension</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -927,7 +927,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-codes-first-dimension</text:p>
+      <text:p>enoddi:get-codes-first-dimension</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -936,7 +936,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-title-line</text:p>
+      <text:p>enoddi:get-title-line</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>index</text:p>
@@ -948,7 +948,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-table-line</text:p>
+      <text:p>enoddi:get-table-line</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>index</text:p>
@@ -960,7 +960,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-rowspan</text:p>
+      <text:p>enoddi:get-rowspan</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -972,7 +972,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-colspan</text:p>
+      <text:p>enoddi:get-colspan</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -984,7 +984,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-minimum-required</text:p>
+      <text:p>enoddi:get-minimum-required</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -996,7 +996,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-computation-items</text:p>
+      <text:p>enoddi:get-computation-items</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1008,7 +1008,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>iatddi:get-then</text:p>
+      <text:p>enoddi:get-then</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">

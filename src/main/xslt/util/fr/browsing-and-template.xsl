@@ -420,10 +420,10 @@
             </xhtml:div>
             <!--<xhtml:div class="menu">
                             <xhtml:ul>
-                                <xsl:apply-templates select="iat:child-fields($source-context)"
+                                <xsl:apply-templates select="eno:child-fields($source-context)"
                                     mode="source">
                                     <xsl:with-param name="driver"
-                                        select="il:append-empty-element('menu', .)" tunnel="yes"/>
+                                        select="eno:append-empty-element('menu', .)" tunnel="yes"/>
                                     <xsl:with-param name="languages" select="$languages"
                                         tunnel="yes"/>
                                 </xsl:apply-templates>
@@ -624,8 +624,8 @@
     <!--<xsl:template match="menu/module" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
-        <xsl:variable name="name" select="iatfr:get-name($source-context)"/>
-        <xsl:variable name="index" select="string(number(iatfr:get-index($source-context)))"/>
+        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:variable name="index" select="string(number(enofr:get-index($source-context)))"/>
         <xhtml:li>
             <xsl:variable name="cssDynamique">
                 <xsl:value-of
