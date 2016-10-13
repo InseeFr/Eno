@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT11H43M3S</meta:editing-duration><meta:editing-cycles>77</meta:editing-cycles><meta:generator>LibreOffice/4.3.5.2$Windows_x86 LibreOffice_project/3a87456aaa6a95c63eea1c1b3201acedf0751bd5</meta:generator><dc:date>2016-10-13T10:29:41.189000000</dc:date><dc:creator>Guillaume Jardillier</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="111" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT11H48M35S</meta:editing-duration><meta:editing-cycles>79</meta:editing-cycles><meta:generator>LibreOffice/4.3.5.2$Windows_x86 LibreOffice_project/3a87456aaa6a95c63eea1c1b3201acedf0751bd5</meta:generator><dc:date>2016-10-13T11:15:15.962000000</dc:date><dc:creator>Guillaume Jardillier</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="111" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">44746</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">23029</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">23050</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
@@ -197,13 +197,13 @@
    <style:table-column-properties fo:break-before="auto" style:column-width="25.303cm"/>
   </style:style>
   <style:style style:name="co4" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="12.234cm"/>
-  </style:style>
-  <style:style style:name="co5" style:family="table-column">
    <style:table-column-properties fo:break-before="auto" style:column-width="2.258cm"/>
   </style:style>
   <style:style style:name="ro1" style:family="table-row">
    <style:table-row-properties style:row-height="0.452cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
+  </style:style>
+  <style:style style:name="ro2" style:family="table-row">
+   <style:table-row-properties style:row-height="0.473cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
   </style:style>
   <style:style style:name="ta1" style:family="table" style:master-page-name="Default">
    <style:table-properties table:display="true" style:writing-mode="lr-tb"/>
@@ -265,7 +265,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2016-10-13">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="10:27:10.089000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2016-10-13">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="11:13:33.738000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -281,7 +281,6 @@
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co2" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Xpath</text:p>
@@ -292,7 +291,6 @@
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Documentation</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -304,10 +302,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the Form driver to the instrument</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -319,10 +316,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the Module driver to d:Sequence elements with module type</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -334,10 +330,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the Submodule driver to d:Sequence elements with submodule type</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -349,10 +344,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the Group driver to d:Sequence elements with group type</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -364,7 +358,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-output driver to d:Instruction elements that are comments</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -376,10 +369,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-output driver to d :StatementItem elements</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -391,7 +383,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-input driver to d:QuestionItem elements with numeric or text answer</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -403,7 +394,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-input driver to d:TextDomain elements having a d:GridResponseDomain or d:ResponseDomainInMixed parent and either no @maxLength attribute, or a @maxLength attribute &lt; 250</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -415,7 +405,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-select1 driver to d:CodeDomain elements having a r:ResponseCardinality/@maximumResponses=1 and not a &apos;checkbox&apos; type r:GenericOutputFormat</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -427,7 +416,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-select driver to d:CodeDomain elements having a r:ResponseCardinality/@maximumResponses=1 and a &apos;checkbox&apos; type r:GenericOutputFormat</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -439,7 +427,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-select driver to d:CodeDomain elements not having a r:ResponseCardinality child</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -451,7 +438,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-select driver to d:QuestionItem having a d:NominalDomain child</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -463,7 +449,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-input driver to d:NumericDomain elements having a d:GridResponseDomain or d:ResponseDomainInMixed parent</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -475,11 +460,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-input driver to d:NumericDomainReference elements having a d:GridResponseDomain or a d:ResponseDomainInMixed parent</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" table:number-columns-repeated="2"/>
-     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -491,7 +475,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-textarea driver to d:QuestionItem elements having a d:TextDomain child with a @maxLength attribute &gt; 250</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -503,10 +486,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-textarea driver to d:TextDomain elements with a @maxLength attribute &gt; 250 </text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -518,7 +500,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking xf-select1 driver to d:QuestionItem elements when there is only one possible answer with d :CodeDomain type</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -530,7 +511,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-select driver to d:QuestionItem when there is only one possible answer and the r:GenericOutPutFormat is a &apos;checkbox&apos; type</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -542,7 +522,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking xf-select driver to d:QuestionItem elements when there are multiple possible answers with d :CodeDomain type</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -554,7 +533,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking xf-select driver to d:QuestionItem elements when there is no information about the number of possible answer with d :CodeDomain type</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -566,10 +544,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-select driver to d:NominalDomain which are descendants of d:GridResponseDomain or d:ResponseDomainInMixed</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
@@ -581,7 +558,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-item driver to the l:Code elements that will correspond to the answer&apos;s modality (and only those)</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
@@ -593,10 +569,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-item driver to the l:Code elements that have a r:CodeReference parent and a d:NominalDomain ancestor</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -608,12 +583,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking ResponseElement to a variable</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>r:Label[parent::l:CodeList/ancestor::d:GridDimension]</text:p>
      </table:table-cell>
@@ -623,7 +597,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking TextCell to a label</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -635,7 +608,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking TextCell to a code</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -647,7 +619,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking Cell to a d:GridResponseDomain</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -659,10 +630,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking EmptyCell to a d:NoDataByDefinition</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -674,10 +644,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-group driver to d:Sequence elements that are not &apos;module&apos; type Sequence</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -689,10 +658,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking MultipleQuestion to d:QuestionItem elements having a d:StructuredMixedResponseDomain child</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
+     <table:table-cell table:number-columns-repeated="3"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -704,7 +672,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking DoubleDuration to d:DateTimeDomain elements having the &apos;HH:CH&apos; format</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -716,7 +683,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-input driver to d:DateTimeDomain elements not having the &apos;HH:CH&apos; format</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -728,11 +694,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking the xf-input driver to d:DateTimeDomainReference not having the &apos;HH:CH&apos; format</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" table:number-columns-repeated="2"/>
-     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -744,7 +709,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking RowLoop to d:StructuredMixedGridResponseDomain not having a @maximumAllowed attribute in its d:Roster descendant</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -756,7 +720,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking TableLoop to d:QuestionGrid elements not having a @maximumAllowed attribute in its d :Roster descendant</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -768,7 +731,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Linking Table to d:QuestionGrid elements not having a @maximumAllowed attribute in its d :Roster descendant</text:p>
      </table:table-cell>
-     <table:table-cell/>
     </table:table-row>
    </table:table>
    <table:named-expressions/>

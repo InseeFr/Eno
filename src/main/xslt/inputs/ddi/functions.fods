@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT3H30M37S</meta:editing-duration><meta:editing-cycles>32</meta:editing-cycles><meta:generator>LibreOffice/4.3.5.2$Windows_x86 LibreOffice_project/3a87456aaa6a95c63eea1c1b3201acedf0751bd5</meta:generator><dc:date>2016-10-13T10:30:18.277000000</dc:date><dc:creator>Guillaume Jardillier</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="97" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT3H32M42S</meta:editing-duration><meta:editing-cycles>34</meta:editing-cycles><meta:generator>LibreOffice/4.3.5.2$Windows_x86 LibreOffice_project/3a87456aaa6a95c63eea1c1b3201acedf0751bd5</meta:generator><dc:date>2016-10-13T11:14:24.663000000</dc:date><dc:creator>Guillaume Jardillier</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="97" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">28303</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">18605</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">20066</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
@@ -456,11 +456,8 @@
   <style:style style:name="co4" style:family="table-column">
    <style:table-column-properties fo:break-before="auto" style:column-width="16.344cm"/>
   </style:style>
-  <style:style style:name="co5" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="12.873cm"/>
-  </style:style>
   <style:style style:name="ro1" style:family="table-row">
-   <style:table-row-properties style:row-height="0.517cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
+   <style:table-row-properties style:row-height="0.557cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
   </style:style>
   <style:style style:name="ta1" style:family="table" style:master-page-name="Default">
    <style:table-properties table:display="true" style:writing-mode="lr-tb"/>
@@ -535,7 +532,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2016-10-13">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="10:27:04.198000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2016-10-13">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="11:13:46.836000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -624,8 +621,6 @@
     <table:table-column table:style-name="co2" table:default-cell-style-name="ce3"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="ce3"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="ce3"/>
-    <table:table-column table:style-name="co5" table:default-cell-style-name="ce3"/>
-    <table:table-column table:style-name="co2" table:number-columns-repeated="1019" table:default-cell-style-name="ce3"/>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Function</text:p>
@@ -639,7 +634,6 @@
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Documentation</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -649,7 +643,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element identifier</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -662,7 +655,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element label</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -675,7 +667,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI document languages </text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -688,7 +679,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element value</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
@@ -701,7 +691,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of some DDI element display format</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -714,7 +703,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element index</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -727,7 +715,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of a help-type instruction</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -740,7 +727,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of a hint-type instruction</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -753,7 +739,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element style</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -766,7 +751,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element type</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -776,7 +760,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the relevant status of a DDI element</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -789,7 +772,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the read-only status of a DDI element</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -799,7 +781,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>xs:string</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1021"/>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -812,7 +794,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the number of decimals (using the @decimalPositions attribute)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -827,7 +808,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element message</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -840,7 +820,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element message-type</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -853,7 +832,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element link</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -863,7 +841,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element format</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -876,7 +853,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element length</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -889,7 +865,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element conditionnal text</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -902,7 +877,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element conditionnal text</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -915,7 +889,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the number of elements in the DDI element</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -930,10 +903,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the DDI element suffix (matching with d:NumericDomainReference)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="1024"/>
+     <table:table-cell table:number-columns-repeated="4"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -943,7 +915,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the first level dimension elements (using the @rank attribute)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -953,7 +924,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the second level dimension elements (using the @rank attribute)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -963,7 +933,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the codes from the first level dimension elements (using the @rank attribute)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -976,7 +945,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of a title line depending on an index number</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -989,7 +957,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of a table line depending on an index number</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1002,7 +969,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the row span of a grid element</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1015,7 +981,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the column span of a grid element</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1025,10 +990,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the minimum number of lines to display in a dynamic table</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="1024"/>
+     <table:table-cell table:number-columns-repeated="4"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1041,7 +1005,6 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the computation-items (d:ComputationItem elements)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1054,13 +1017,12 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getter function of the d:IfThenElse elements </text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="1048539">
-     <table:table-cell table:number-columns-repeated="1024"/>
+     <table:table-cell table:number-columns-repeated="4"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="1024"/>
+     <table:table-cell table:number-columns-repeated="4"/>
     </table:table-row>
    </table:table>
    <table:named-expressions/>
