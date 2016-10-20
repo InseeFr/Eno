@@ -2,7 +2,7 @@
 <xsl:transform version="2.0" xmlns:i="ddi:instance:3_2" xmlns:g="ddi:group:3_2"
     xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2" xmlns:a="ddi:archive:3_2"
     xmlns:l="ddi:logicalproduct:3_2" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:iatddi="http://xml/insee.fr/xslt/apply-templates/ddi"
+    xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
     <!-- This xsl stylesheet will be applied to the -cleaned suffix file (having the questionnaire's name) -->
@@ -103,11 +103,11 @@
         </xsl:variable>
 
         <xsl:variable name="number">
-            <xsl:if test="iatddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
+            <xsl:if test="enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
                 <!-- Counting the questions that aren't subQuestions -->
-<!--                <xsl:number count="d:ControlConstructReference[d:QuestionConstruct and (iatddi:is-subquestion(d:QuestionConstruct,$niveauSeqQuest))]" 
+<!--                <xsl:number count="d:ControlConstructReference[d:QuestionConstruct and (enoddi:is-subquestion(d:QuestionConstruct,$niveauSeqQuest))]" 
                     level="any" format="{$styleQuest/StyleNumQuest}" from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$niveauSeqQuest]]"/>
--->                <xsl:number count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (iatddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))=0]" 
+-->                <xsl:number count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))=0]" 
                     level="any" format="{$styleQuest/StyleNumQuest}" from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"/>
             </xsl:if>
         </xsl:variable>
@@ -165,7 +165,7 @@
             <xd:p>Function used to identify if 2 lists have common elements</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="iatddi:is-common">
+    <xsl:function name="enoddi:is-common">
         <xsl:param name="list1"/>
         <xsl:param name="list2"/>
         <xsl:variable name="isCommon">
@@ -175,7 +175,7 @@
                 <xsl:when test="index-of($list1,$list2[1])>0">true</xsl:when>
                 <xsl:when test="empty($list2[2])">false</xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="iatddi:is-common($list1,$list2[position()>1])"/>
+                    <xsl:value-of select="enoddi:is-common($list1,$list2[position()>1])"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -192,7 +192,7 @@
             - Isn't the last element of it's actual sequence
     This sub-question can depend on one or more of these filters, we just verify that there are more than 0 -->
 
-    <xsl:function name="iatddi:is-subquestion">
+    <xsl:function name="enoddi:is-subquestion">
         <xsl:param name="context"/>
         <xsl:param name="seq-level"/>
         
@@ -201,12 +201,12 @@
             <xsl:copy-of select="root($context)//d:Sequence[d:TypeOfSequence=$seq-level and descendant::d:QuestionConstruct=$context]"/>
         </xsl:variable>
         <xsl:value-of select="count($ancestors//d:ControlConstructReference
-            [d:IfThenElse//d:TypeOfSequence[text()='potentially-hidden']
+            [d:IfThenElse//d:TypeOfSequence[text()='hideable']
             and descendant::d:QuestionConstruct[r:ID=$context/r:ID]
             and (following-sibling::d:ControlConstructReference[d:IfThenElse or d:QuestionConstruct]
             or index-of($number-free-filter,d:IfThenElse/r:ID)>0)
             and preceding-sibling::d:ControlConstructReference[d:QuestionConstruct]]
-            [iatddi:is-common(preceding-sibling::d:ControlConstructReference[d:QuestionConstruct][1]//r:TargetParameterReference/r:ID,
+            [enoddi:is-common(preceding-sibling::d:ControlConstructReference[d:QuestionConstruct][1]//r:TargetParameterReference/r:ID,
             d:IfThenElse/d:IfCondition//r:SourceParameterReference/r:ID)])"/>
     </xsl:function>
 

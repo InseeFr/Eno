@@ -13,7 +13,7 @@
             xmlns:saxon="http://saxon.sf.net/"
             xmlns:sql="http://orbeon.org/oxf/xml/sql"
             xmlns:soap="http://schemas.xmlsoap.org/soap/envelope"
-            xmlns:iatfr="http://xml/insee.fr/xslt/apply-templates/form-runner">
+            xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner">
    <xhtml:head>
       <xhtml:title>Simpsons</xhtml:title>
       <xhtml:link rel="stylesheet" href="/css/common.css"/>
@@ -93,13 +93,13 @@
                   <INSEE-SIMPSONS-QOP-5-3-1/>
                </INSEE-SIMPSONS-SEQ-4>
                <Validation>
-                  <dummy/>
+                  <Dummy/>
                </Validation>
                <Confirmation>
-                  <dummy/>
+                  <Dummy/>
                </Confirmation>
                <End>
-                  <dummy/>
+                  <Dummy/>
                </End>
                <stromae>
                   <ProgressBarContainer/>
@@ -1366,7 +1366,7 @@
             <response/>
          </xf:instance>
          <xf:instance id="fr-form-util">
-            <util>
+            <Util>
                <Start/>
                <Previous/>
                <Next/>
@@ -1378,7 +1378,7 @@
                <ProgressPercent/>
                <Progress/>
                <PageTop/>
-               <pages>
+               <Pages>
                   <INSEE-SIMPSONS-SEQ-1/>
                   <INSEE-SIMPSONS-SEQ-2/>
                   <INSEE-SIMPSONS-SEQ-3/>
@@ -1386,11 +1386,11 @@
                   <Validation/>
                   <Confirmation/>
                   <End/>
-               </pages>
+               </Pages>
                <PreviousNext/>
                <PageChangeDone/>
                <ConfirmationMessage/>
-            </util>
+            </Util>
          </xf:instance>
          <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
                   id="fr-form-util-binds"
@@ -1399,10 +1399,10 @@
                      relevant="instance('fr-form-instance')/stromae/util/CurrentSection='1'"
                      ref="Start"/>
             <xf:bind id="previous-bind"
-                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/pages/*)-2)"
+                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2)"
                      ref="Previous"/>
             <xf:bind id="next-bind"
-                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/pages/*)-3)"
+                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-3)"
                      ref="Next"/>
             <xf:bind id="send-bind"
                      ref="Send"
@@ -1415,14 +1415,14 @@
             <xf:bind id="progress-percent-bind"
                      name="progress-percent"
                      ref="ProgressPercent"
-                     calculate="if (number(instance('fr-form-instance')/stromae/util/CurrentSection)=1) then '0'                     else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/pages/*)-2) then '100'                     else round(((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2) div number(count(instance('fr-form-util')/pages/*)-4))*100))"/>
+                     calculate="if (number(instance('fr-form-instance')/stromae/util/CurrentSection)=1) then '0'                     else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100'                     else round(((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2) div number(count(instance('fr-form-util')/Pages/*)-4))*100))"/>
             <xf:bind id="progress-bind" ref="Progress"/>
             <xf:bind id="page-top-bind" ref="PageTop"/>
             <xf:bind id="confirmation-message-bind"
                      ref="ConfirmationMessage"
                      name="confirmation-message"
                      calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"/>
-            <xf:bind id="pages-bind" ref="pages">
+            <xf:bind id="pages-bind" ref="Pages">
                <xf:bind id="page-INSEE-SIMPSONS-SEQ-1-bind"
                         name="INSEE-SIMPSONS-SEQ-1"
                         ref="INSEE-SIMPSONS-SEQ-1">
@@ -1510,10 +1510,10 @@
          <xf:action ev:event="page-change-done">
             <xf:var name="new-number-of-following-pages"
                     as="xs:number"
-                    value="if (instance(&#34;fr-form-util&#34;)/PreviousNext=&#34;1&#34;) then count((instance(&#34;fr-form-util&#34;)/pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/following-sibling::*[not(text()=&#34;false&#34;)])[1]/following-sibling::*) else count((instance(&#34;fr-form-util&#34;)/pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/preceding-sibling::*[not(text()=&#34;false&#34;)])[last()]/following-sibling::*)"/>
+                    value="if (instance(&#34;fr-form-util&#34;)/PreviousNext=&#34;1&#34;) then count((instance(&#34;fr-form-util&#34;)/Pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/following-sibling::*[not(text()=&#34;false&#34;)])[1]/following-sibling::*) else count((instance(&#34;fr-form-util&#34;)/Pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/preceding-sibling::*[not(text()=&#34;false&#34;)])[last()]/following-sibling::*)"/>
             <xf:var name="old-number-of-following-pages"
                     as="xs:number"
-                    value="count(instance(&#34;fr-form-util&#34;)/pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/following-sibling::*)"/>
+                    value="count(instance(&#34;fr-form-util&#34;)/Pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/following-sibling::*)"/>
             <xf:var name="number-of-left-page"
                     as="xs:number"
                     value="number(instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSection)"/>

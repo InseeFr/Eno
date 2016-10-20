@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:il="http://xml/insee.fr/xslt/lib"
-    xmlns:iatxml="http://xml/insee.fr/xslt/apply-templates/xml"
-    xmlns:iatxsl="http://xml/insee.fr/xslt/apply-templates/xsl"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
+    xmlns:enoxml="http://xml.insee.fr/apps/eno/xml"
+    xmlns:enoxsl="http://xml.insee.fr/apps/eno/xsl"
     exclude-result-prefixes="xs xd" version="2.0">
 
     <!-- xsl stylesheet applied to xml.tmp in the temporary process of xsl files creation (fods2xml then xml2xsl) -->
@@ -40,7 +40,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('Sheet',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('Sheet',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -53,7 +53,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('Template',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('Template',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -66,7 +66,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('SimpleImplementation',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('SimpleImplementation',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -80,7 +80,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('ComplexImplementation',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('ComplexImplementation',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -94,7 +94,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('EmptyImplementation',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('EmptyImplementation',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -106,7 +106,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('TransitionFunction',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('TransitionFunction',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -119,7 +119,7 @@
             <driver/>
         </xsl:param>
         <xsl:message>Je ne suis pas supporté</xsl:message>
-        <xsl:apply-templates select="il:append-empty-element('NotSupportedFunction',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('NotSupportedFunction',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -131,7 +131,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('SourceFunction',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('SourceFunction',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -143,7 +143,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('GetChildren',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('GetChildren',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -151,159 +151,159 @@
     <xd:desc>
         <xd:p>Linking a documentation sending function a the documentation getter function</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-documentation">
+    <xsl:function name="enoxsl:get-documentation">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-documentation"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-documentation"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-documentation">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Documentation'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-documentation">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Documentation'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The xpath getter function returns the associated value from Xpath name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-xpath">
+    <xsl:function name="enoxsl:get-xpath">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-xpath"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-xpath"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-xpath">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Xpath'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-xpath">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Xpath'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The xpath mode function returns the associated value from Xpath_Mode name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-mode-xpath">
+    <xsl:function name="enoxsl:get-mode-xpath">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-mode-xpath"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-mode-xpath"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-mode-xpath">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Xpath_Mode'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-mode-xpath">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Xpath_Mode'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The match getter function returns the associated value from Match name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-match">
+    <xsl:function name="enoxsl:get-match">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-match"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-match"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-match">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Match'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-match">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Match'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The match mode getter function returns the associated value from Match_Mode name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-match-mode">
+    <xsl:function name="enoxsl:get-match-mode">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-match-mode"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-match-mode"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-match-mode">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Match_Mode'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-match-mode">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Match_Mode'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The function getter function returns the associated value from Function name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-function">
+    <xsl:function name="enoxsl:get-function">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-function"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-function"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-function">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Function'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-function">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Function'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The out-function getter function returns the associated value from Out_Function name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-output-function">
+    <xsl:function name="enoxsl:get-output-function">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-output-function"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-output-function"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-output-function">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Out_Function'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-output-function">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Out_Function'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The in-function getter function returns the associated value from In_Function name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-input-function">
+    <xsl:function name="enoxsl:get-input-function">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-input-function"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-input-function"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-input-function">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='In_Function'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-input-function">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='In_Function'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The driver getter function returns the associated value from Driver name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-driver">
+    <xsl:function name="enoxsl:get-driver">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-driver"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-driver"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-driver">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Driver'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-driver">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Driver'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The associatedFunction getter function returns the associated value from Parameters name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-parameters" as="xs:string *">
+    <xsl:function name="enoxsl:get-parameters" as="xs:string *">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-parameters"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-parameters"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-parameters">
+    <xsl:template match="GenericElement" mode="enoxml:get-parameters">
         <xsl:call-template name="split">
-            <xsl:with-param name="chain" select="iatxml:get-value(./DefinedElement[@name='Parameters'])"/>
+            <xsl:with-param name="chain" select="enoxml:get-value(./DefinedElement[@name='Parameters'])"/>
         </xsl:call-template>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The parent getter function returns the associated value from Parent name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-parent">
+    <xsl:function name="enoxsl:get-parent">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-parent"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-parent"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-parent">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Parent'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-parent">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Parent'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The return-type-getter function returns the associated value from As name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-as">
+    <xsl:function name="enoxsl:get-as">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-as"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-as"/>
     </xsl:function>
     
-    <xsl:template match="GenericElement" mode="iatxml:get-as">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='As'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-as">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='As'])"/>
     </xsl:template>
     
     <xd:desc>
         <xd:p>The children-getter function returns the associated vluae from Children name element</xd:p>
     </xd:desc>
-    <xsl:function name="iatxsl:get-children">
+    <xsl:function name="enoxsl:get-children">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="iatxml:get-children"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-children"/>
     </xsl:function>
 
-    <xsl:template match="GenericElement" mode="iatxml:get-children">
-        <xsl:value-of select="iatxml:get-value(./DefinedElement[@name='Children'])"/>
+    <xsl:template match="GenericElement" mode="enoxml:get-children">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Children'])"/>
     </xsl:template>
     
 

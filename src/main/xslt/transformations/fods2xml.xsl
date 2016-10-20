@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:il="http://xml/insee.fr/xslt/lib" xmlns:iat="http://xml/insee.fr/xslt/apply-templates"
-    xmlns:iatfods="http://xml/insee.fr/xslt/apply-templates/fods"
-    xmlns:iatxml="http://xml/insee.fr/xslt/apply-templates/xml"
+    xmlns:eno="http://xml.insee.fr/apps/eno"
+    xmlns:enofods="http://xml.insee.fr/apps/eno/fods"
+    xmlns:enoxml="http://xml.insee.fr/apps/eno/xml"
     xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" exclude-result-prefixes="#all"
     version="2.0">
 
@@ -39,7 +39,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('Root',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('Root',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -56,7 +56,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('GenericElement',$driver)"
+        <xsl:apply-templates select="eno:append-empty-element('GenericElement',$driver)"
             mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
@@ -69,7 +69,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="il:append-empty-element('DefinedElement',$driver)" mode="model">
+        <xsl:apply-templates select="eno:append-empty-element('DefinedElement',$driver)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -77,17 +77,17 @@
     <xd:desc>
         <xd:p>Linking the column name getter function to the xml element name getter function</xd:p>
     </xd:desc>
-    <xsl:function name="iatxml:get-element-name">
+    <xsl:function name="enoxml:get-element-name">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="iatfods:get-column-name($context)"/>
+        <xsl:apply-templates select="enofods:get-column-name($context)"/>
     </xsl:function>
 
     <xd:desc>
         <xd:p>Linking the cell content getter function to the xml element value getter function</xd:p>
     </xd:desc>
-    <xsl:function name="iatxml:get-value">
+    <xsl:function name="enoxml:get-value">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="iatfods:get-content($context)"/>
+        <xsl:apply-templates select="enofods:get-content($context)"/>
     </xsl:function>
 
 </xsl:stylesheet>

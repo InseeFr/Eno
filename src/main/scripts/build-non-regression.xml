@@ -147,7 +147,7 @@
         <!-- Creating a -cleaned suffixed file -->
         <foreach target="cleaning" param="file" inheritall="true">
             <path>
-                <fileset dir="${temp.home}" excludes="*-dereferenced.tmp"/>
+                <fileset dir="${temp.home}" excludes="*-dereferenced.tmp, null.tmp"/>
             </path>
         </foreach>
         <!-- Then adding titles to the created file below -->
@@ -184,7 +184,7 @@
         </xslt>
         
         <!-- Creates an dereferenced DDI for each model with the already dereferenced files and adding some variables from the VariableScheme to the upcoming result -->
-        <xslt in="${xml.home}/dummy.xml" out="${xml.home}/null.xml"
+        <xslt in="${xml.home}/dummy.xml" out="${temp.home}/null.tmp"
             style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
             <param name="main-file"
                 expression="${survey-folder}/ddi/${survey-name}-su.xml"/>

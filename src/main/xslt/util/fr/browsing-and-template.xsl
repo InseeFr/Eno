@@ -53,13 +53,13 @@
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
             <Validation>
-                <dummy/>
+                <Dummy/>
             </Validation>
             <Confirmation>
-                <dummy/>
+                <Dummy/>
             </Confirmation>
             <End>
-                <dummy/>
+                <Dummy/>
             </End>
             <stromae>
                 <ProgressBarContainer/>
@@ -120,7 +120,7 @@
 
             <!-- Instance in charge of the navigation -->
             <xf:instance id="fr-form-util">
-                <util>
+                <Util>
                     <Start/>
                     <Previous/>
                     <Next/>
@@ -134,7 +134,7 @@
                     <ProgressPercent/>
                     <Progress/>
                     <PageTop/>
-                    <pages>
+                    <Pages>
                         <xsl:for-each
                             select="//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and not(name()='stromae') and child::*]">
                             <xsl:element name="{name()}"/>
@@ -142,11 +142,11 @@
                         <Validation/>
                         <Confirmation/>
                         <End/>
-                    </pages>
+                    </Pages>
                     <PreviousNext/>
                     <PageChangeDone/>
                     <ConfirmationMessage/>
-                </util>
+                </Util>
             </xf:instance>
 
             <!-- The corresponding binds -->
@@ -156,10 +156,10 @@
                     relevant="instance('fr-form-instance')/stromae/util/CurrentSection='1'"
                     ref="Start"/>
                 <xf:bind id="previous-bind"
-                    relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/pages/*)-2)"
+                    relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2)"
                     ref="Previous"/>
                 <xf:bind id="next-bind"
-                    relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/pages/*)-3)"
+                    relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-3)"
                     ref="Next"/>
                 <!-- The sending button is readonly if he's not clickable -->
                 <xf:bind id="send-bind" ref="Send"
@@ -172,14 +172,14 @@
                 <xf:bind id="progress-percent-bind" name="progress-percent"
                     ref="ProgressPercent"
                     calculate="if (number(instance('fr-form-instance')/stromae/util/CurrentSection)=1) then '0'
-                    else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/pages/*)-2) then '100'
-                    else round(((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2) div number(count(instance('fr-form-util')/pages/*)-4))*100))"/>
+                    else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100'
+                    else round(((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2) div number(count(instance('fr-form-util')/Pages/*)-4))*100))"/>
                 <xf:bind id="progress-bind" ref="Progress"/>
                 <xf:bind id="page-top-bind" ref="PageTop"/>
                 <xf:bind id="confirmation-message-bind" ref="ConfirmationMessage"
                     name="confirmation-message"
                     calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"/>
-                <xf:bind id="pages-bind" ref="pages">
+                <xf:bind id="pages-bind" ref="Pages">
                     <xsl:for-each
                         select="//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and child::*]">
                         <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}"
@@ -333,9 +333,9 @@
             <!-- What happens when the page change is effective -->
             <xf:action ev:event="page-change-done">
                 <xf:var name="new-number-of-following-pages" as="xs:number"
-                    value="{string('if (instance(&#34;fr-form-util&#34;)/PreviousNext=&#34;1&#34;) then count((instance(&#34;fr-form-util&#34;)/pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/following-sibling::*[not(text()=&#34;false&#34;)])[1]/following-sibling::*) else count((instance(&#34;fr-form-util&#34;)/pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/preceding-sibling::*[not(text()=&#34;false&#34;)])[last()]/following-sibling::*)')}"/>
+                    value="{string('if (instance(&#34;fr-form-util&#34;)/PreviousNext=&#34;1&#34;) then count((instance(&#34;fr-form-util&#34;)/Pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/following-sibling::*[not(text()=&#34;false&#34;)])[1]/following-sibling::*) else count((instance(&#34;fr-form-util&#34;)/Pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/preceding-sibling::*[not(text()=&#34;false&#34;)])[last()]/following-sibling::*)')}"/>
                 <xf:var name="old-number-of-following-pages" as="xs:number"
-                    value="{string('count(instance(&#34;fr-form-util&#34;)/pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/following-sibling::*)')}"/>
+                    value="{string('count(instance(&#34;fr-form-util&#34;)/Pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/following-sibling::*)')}"/>
                 <xf:var name="number-of-left-page" as="xs:number"
                     value="{string('number(instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSection)')}"/>
 
@@ -420,10 +420,10 @@
             </xhtml:div>
             <!--<xhtml:div class="menu">
                             <xhtml:ul>
-                                <xsl:apply-templates select="iat:child-fields($source-context)"
+                                <xsl:apply-templates select="eno:child-fields($source-context)"
                                     mode="source">
                                     <xsl:with-param name="driver"
-                                        select="il:append-empty-element('menu', .)" tunnel="yes"/>
+                                        select="eno:append-empty-element('menu', .)" tunnel="yes"/>
                                     <xsl:with-param name="languages" select="$languages"
                                         tunnel="yes"/>
                                 </xsl:apply-templates>
@@ -624,8 +624,8 @@
     <!--<xsl:template match="menu/module" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
-        <xsl:variable name="name" select="iatfr:get-name($source-context)"/>
-        <xsl:variable name="index" select="string(number(iatfr:get-index($source-context)))"/>
+        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:variable name="index" select="string(number(enofr:get-index($source-context)))"/>
         <xhtml:li>
             <xsl:variable name="cssDynamique">
                 <xsl:value-of

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:il="http://xml/insee.fr/xslt/lib"
-    xmlns:iat="http://xml/insee.fr/xslt/apply-templates"
-    xmlns:iatddi="http://xml/insee.fr/xslt/apply-templates/ddi"
-    xmlns:iatfr="http://xml/insee.fr/xslt/apply-templates/form-runner"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+    xmlns:eno="http://xml.insee.fr/apps/eno"
+    xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
+    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
     xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
     exclude-result-prefixes="xd" version="2.0">
 
@@ -37,12 +37,12 @@
     <!-- d:ComputationItem ancestor  -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and not(ancestor::d:ComputationItem)]"
-        mode="iatddi:get-conditionned-text" priority="1">
+        mode="enoddi:get-conditionned-text" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
         <xsl:variable name="text">
-            <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
+            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
         </xsl:variable>
         <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
@@ -72,12 +72,12 @@
     <!-- d:ComputationItem ancestor  -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and ancestor::d:ComputationItem]"
-        mode="iatddi:get-conditionned-text-bis" priority="1">
+        mode="enoddi:get-conditionned-text-bis" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
         <xsl:variable name="text">
-            <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
+            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
         </xsl:variable>
         <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
@@ -106,12 +106,12 @@
     <!-- and no d:ComputationItem ancestor -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[d:Expression] and not(ancestor::d:ComputationItem)]"
-        mode="iatddi:get-conditionned-text" priority="1">
+        mode="enoddi:get-conditionned-text" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
         <xsl:variable name="text">
-            <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
+            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
         </xsl:variable>
         <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
@@ -140,12 +140,12 @@
     <!-- and a d:ComputationItem ancestor -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[d:Expression] and ancestor::d:ComputationItem]"
-        mode="iatddi:get-conditionned-text-bis" priority="1">
+        mode="enoddi:get-conditionned-text-bis" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
         <xsl:variable name="text">
-            <xsl:value-of select="il:serialize(descendant::d:LiteralText/d:Text/node())"/>
+            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
         </xsl:variable>
         <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
