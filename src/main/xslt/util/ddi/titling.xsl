@@ -201,7 +201,7 @@
             <xsl:copy-of select="root($context)//d:Sequence[d:TypeOfSequence=$seq-level and descendant::d:QuestionConstruct=$context]"/>
         </xsl:variable>
         <xsl:value-of select="count($ancestors//d:ControlConstructReference
-            [d:IfThenElse//d:TypeOfSequence[text()='potentially-hidden']
+            [d:IfThenElse//d:TypeOfSequence[text()='hideable']
             and descendant::d:QuestionConstruct[r:ID=$context/r:ID]
             and (following-sibling::d:ControlConstructReference[d:IfThenElse or d:QuestionConstruct]
             or index-of($number-free-filter,d:IfThenElse/r:ID)>0)

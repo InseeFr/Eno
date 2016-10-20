@@ -400,7 +400,7 @@
             <xsl:value-of select="enoddi:get-id(.)"/>
         </xsl:variable>
         <xsl:for-each
-            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='potentially-hidden'] and contains(d:IfCondition/r:Command/r:CommandContent/text(),$id)]">
+            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='hideable'] and contains(d:IfCondition/r:Command/r:CommandContent/text(),$id)]">
             <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
         </xsl:for-each>
     </xsl:template>

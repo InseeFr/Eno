@@ -269,7 +269,7 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>INSEE-SIMPSONS-SEQI-1</r:ID>
             <r:Version>0.1.0</r:Version>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">potentially-hidden</d:TypeOfSequence>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>INSEE-SIMPSONS-QC-2-2-2</r:ID>
