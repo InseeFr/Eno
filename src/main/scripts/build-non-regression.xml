@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Quesaco" basedir="." default="DDIPreprocessing">
+<project name="Quesaco" basedir="." default="full">
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
     
