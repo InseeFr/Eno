@@ -162,36 +162,10 @@
     <!-- Dereferencing -->
     <target name="dereferencing">
         
-        <!-- The QuestionScheme dereferences itself -->
-        <!-- Creates the output file with a -qb-dereferenced suffix -->
-        <xslt in="${xml.home}/dummy.xml"
-            out="${temp.home}/${survey-name}-qb-dereferenced.tmp"
+        <!-- Creates a dereferenced DDI for each model with the already dereferenced files and adding some variables from the VariableScheme to the upcoming result -->
+        <xslt in="${questionnaires.home}/${survey-name}/ddi/${survey-name}.xml"
+            out="${temp.home}/null.tmp"
             style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
-            <param name="main-file"
-                expression="${survey-folder}/ddi/${survey-name}-qb.xml"/>
-            <param name="secondary-file" expression="${xml-folder}/dummy.xml"/>
-        </xslt>
-        
-        <!-- CCS dereferences with itself and the already-dereferenced QuestionScheme -->
-        <!-- Creates the output file with -ccs-dereferenced suffix -->
-        <xslt in="${xml.home}/dummy.xml"
-            out="${temp.home}/${survey-name}-ccs-dereferenced.tmp"
-            style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
-            <param name="main-file"
-                expression="${survey-folder}/ddi/${survey-name}-ccs.xml"/>
-            <param name="secondary-file"
-                expression="${temp-folder}/${survey-name}-qb-dereferenced.tmp"/>
-        </xslt>
-        
-        <!-- Creates an dereferenced DDI for each model with the already dereferenced files and adding some variables from the VariableScheme to the upcoming result -->
-        <xslt in="${xml.home}/dummy.xml" out="${temp.home}/null.tmp"
-            style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
-            <param name="main-file"
-                expression="${survey-folder}/ddi/${survey-name}-su.xml"/>
-            <param name="secondary-file"
-                expression="${temp-folder}/${survey-name}-ccs-dereferenced.tmp"/>
-            <param name="variables-file"
-                expression="${survey-folder}/ddi/${survey-name}-vs.xml"/>
             <param name="output-folder" expression="${temp-folder}"/>
         </xslt>
 
