@@ -64,7 +64,7 @@
         <!-- The d:ControlConstructScheme are dereferenced -->
         <xsl:variable name="dereferenced">
             <xsl:element name="g:ResourcePackage">
-                <xsl:apply-templates select="//d:ControlConstructScheme">
+                <xsl:apply-templates select="//d:ControlConstructScheme/d:Sequence[d:TypeOfSequence/text()='template']">
                     <xsl:with-param name="references" select="$references" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:element>
