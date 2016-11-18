@@ -198,9 +198,9 @@
     <!-- Deleting the content of the temporary folders : temp, test and simpsons -->
     <target name="clean">
         <delete>
-            <fileset dir="${root-folder}/target/temp" includes="**/*" />
-			 <fileset dir="${root-folder}/target/test" includes="**/*" />
-			  <fileset dir="${root-folder}/target/simpsons" includes="**/*" />
+            <fileset dir="${root-folder}/target/temp" includes="**/*" erroronmissingdir="false"/>
+            <fileset dir="${root-folder}/target/test" includes="**/*" erroronmissingdir="false"/>
+            <fileset dir="${root-folder}/target/simpsons" includes="**/*" erroronmissingdir="false"/>
         </delete>
     </target>
     
