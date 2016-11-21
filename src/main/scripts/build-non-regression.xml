@@ -39,12 +39,12 @@
             <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
         </xslt>
 
-        <!-- Adding the layer in charge of the survey's navigation by applying browsing-and-template.xsl stylesheet -->
+        <!-- Adding the layer in charge of the survey's navigation by applying browsing.xsl stylesheet -->
         <!-- The final Xforms file will be called form.xhtml -->
         <xslt
             in="${temp.home}/xforms/${form-name}/basic-form.tmp"
             out="${root-folder}/target/${survey-name}/${form-name}/form/form.xhtml"
-            style="${xslt.home}/util/fr/browsing-and-template.xsl" force="true"
+            style="${xslt.home}/util/fr/browsing.xsl" force="true"
             classpath="${saxon.jar}">
             <param name="campaign" expression="${survey-name}"/>
             <param name="model" expression="${form-name}"/>
