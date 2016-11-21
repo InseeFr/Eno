@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding='utf-8'?>
-<xsl:transform version="2.0" xmlns:i="ddi:instance:3_2" xmlns:g="ddi:group:3_2"
+<xsl:stylesheet version="2.0" xmlns:i="ddi:instance:3_2" xmlns:g="ddi:group:3_2"
     xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2" xmlns:a="ddi:archive:3_2"
     xmlns:l="ddi:logicalproduct:3_2" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
@@ -261,4 +261,4 @@
         <xsl:value-of select="concat($prefix,.)"/>
     </xsl:template>
 
-</xsl:transform>
+</xsl:stylesheet>

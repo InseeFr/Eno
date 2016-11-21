@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding='utf-8'?>
-<xsl:transform version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<xsl:stylesheet version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <!-- This stylesheet is used in the ENOPreprocessing target after the xsl files (functions.xsl etc.) are created. -->
@@ -50,4 +50,4 @@
         </xsl:copy>
     </xsl:template>
 
-</xsl:transform>
+</xsl:stylesheet>

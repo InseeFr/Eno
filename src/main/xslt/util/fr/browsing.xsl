@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding='utf-8'?>
-<xsl:transform version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
     xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -739,4 +739,4 @@
         </xhtml:li>
     </xsl:template>-->
 
-</xsl:transform>
+</xsl:stylesheet>
