@@ -75,7 +75,7 @@
                             <xsl:apply-templates select="eno:child-fields($source-context)"
                                 mode="source">
                                 <xsl:with-param name="driver"
-                                    select="eno:append-empty-element('instance', .)" tunnel="yes"/>
+                                    select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
                             </xsl:apply-templates>
                         </form>
                     </xf:instance>
@@ -85,7 +85,7 @@
                             <xsl:apply-templates select="eno:child-fields($source-context)"
                                 mode="source">
                                 <xsl:with-param name="driver"
-                                    select="eno:append-empty-element('model', .)" tunnel="yes"/>
+                                    select="eno:append-empty-element('Model', .)" tunnel="yes"/>
                             </xsl:apply-templates>
                         </LoopModels>
                     </xf:instance>
@@ -96,7 +96,7 @@
                         <xsl:apply-templates select="eno:child-fields($source-context)"
                             mode="source">
                             <xsl:with-param name="driver"
-                                select="eno:append-empty-element('bind', .)" tunnel="yes"/>
+                                select="eno:append-empty-element('Bind', .)" tunnel="yes"/>
                         </xsl:apply-templates>
                     </xf:bind>
 
@@ -140,7 +140,7 @@
                                     <xsl:apply-templates select="eno:child-fields($source-context)"
                                         mode="source">
                                         <xsl:with-param name="driver"
-                                            select="eno:append-empty-element('resource', $driver)"
+                                            select="eno:append-empty-element('Resource', $driver)"
                                             tunnel="yes"/>
                                         <xsl:with-param name="language" select="." tunnel="yes"/>
                                     </xsl:apply-templates>
@@ -161,7 +161,7 @@
                                 <xsl:apply-templates select="eno:child-fields($source-context)"
                                     mode="source">
                                     <xsl:with-param name="driver"
-                                        select="eno:append-empty-element('bind-resource', $driver)"
+                                        select="eno:append-empty-element('ResourceBind', $driver)"
                                         tunnel="yes"/>
                                     <xsl:with-param name="language" select="." tunnel="yes"/>
                                 </xsl:apply-templates>
@@ -190,7 +190,7 @@
                         <xsl:apply-templates select="eno:child-fields($source-context)"
                             mode="source">
                             <xsl:with-param name="driver"
-                                select="eno:append-empty-element('body', .)" tunnel="yes"/>
+                                select="eno:append-empty-element('Body', .)" tunnel="yes"/>
                             <xsl:with-param name="languages" select="$languages" tunnel="yes"/>
                         </xsl:apply-templates>
                     </fr:body>
@@ -200,7 +200,7 @@
     </xsl:template>
 
     <!-- Default template, creating the corresponding instance element, and going on on the children -->
-    <xsl:template match="instance//*" mode="model">
+    <xsl:template match="Instance//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:value-of select="enofr:get-default-value($source-context)"/>
@@ -210,7 +210,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="instance//*[name()=('xf-group','Module')]" priority="1" mode="model">
+    <xsl:template match="Instance//*[name()=('xf-group','Module')]" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:value-of select="enofr:get-default-value($source-context)"/>
@@ -220,12 +220,12 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="instance//xf-output" mode="model" priority="2">
+    <xsl:template match="Instance//xf-output" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}"/>
     </xsl:template>
 
-    <xsl:template match="instance//*[name()=('SubModule','TextCell','MultipleQuestion')]"
+    <xsl:template match="Instance//*[name()=('SubModule','TextCell','MultipleQuestion')]"
         mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}"/>
@@ -234,10 +234,10 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="*[name()=('resource','body')]//*[name()=('ResponseElement')]" mode="model"
+    <xsl:template match="*[name()=('Resource','Body')]//*[name()=('ResponseElement')]" mode="model"
         priority="1"/>
 
-    <xsl:template match="bind-resource//xf-output" mode="model" priority="2">
+    <xsl:template match="ResourceBind//xf-output" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:if
@@ -265,14 +265,14 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="bind-resource//*" mode="#all">
+    <xsl:template match="ResourceBind//*" mode="#all">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="instance//RowLoop" priority="1" mode="model">
+    <xsl:template match="Instance//RowLoop" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -284,19 +284,19 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="model//*[not(ancestor::instance)]" mode="model">
+    <xsl:template match="Model//*[not(ancestor::Instance)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
     
-    <xsl:template match="model//RowLoop | model//QuestionLoop" priority="1" mode="model">
+    <xsl:template match="Model//RowLoop | Model//QuestionLoop" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- create element with same name and acts like what is done for the instance part -->
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('instance', .)" tunnel="yes"/>
+                <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:element>
         <!-- keep going down the tree in case there are other loops -->
@@ -305,7 +305,7 @@
         </xsl:apply-templates>
     </xsl:template>
     
-    <xsl:template match="instance//QuestionLoop" priority="1" mode="model">
+    <xsl:template match="Instance//QuestionLoop" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -314,16 +314,16 @@
         </xsl:element>
     </xsl:template>
 
-    <!--<xsl:template match="model//*[parent::Cell[ancestor::RowLoop]]" priority="1" mode="model">
+    <!--<xsl:template match="Model//*[parent::Cell[ancestor::RowLoop]]" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:value-of select="enofr:get-default-value($source-context)"/>
         </xsl:element>
     </xsl:template>-->
 
-    <xsl:template match="instance//*[name()=('xf-item','EmptyCell')]" priority="1" mode="model"/>
+    <xsl:template match="Instance//*[name()=('xf-item','EmptyCell')]" priority="1" mode="model"/>
 
-    <xsl:template match="instance//table | instance//TableLoop" mode="model" priority="1">
+    <xsl:template match="Instance//table | Instance//TableLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:value-of select="enofr:get-default-value($source-context)"/>
@@ -334,7 +334,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="instance//DoubleDuration" mode="model" priority="1">
+    <xsl:template match="Instance//DoubleDuration" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}"/>
         <xsl:element name="{replace(enofr:get-name($source-context),'-','-A-')}"/>
@@ -344,7 +344,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="bind//*" mode="model">
+    <xsl:template match="Bind//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
@@ -391,7 +391,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="bind//ResponseElement" mode="model" priority="1">
+    <xsl:template match="Bind//ResponseElement" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
@@ -403,7 +403,7 @@
         </xf:bind>
     </xsl:template>
 
-    <xsl:template match="bind//Module" mode="model" priority="1">
+    <xsl:template match="Bind//Module" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
@@ -423,7 +423,7 @@
         </xf:bind>
     </xsl:template>
 
-    <xsl:template match="bind//xf-group" mode="model" priority="1">
+    <xsl:template match="Bind//xf-group" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
@@ -443,7 +443,7 @@
         </xf:bind>
     </xsl:template>
 
-    <xsl:template match="bind//RowLoop | bind//QuestionLoop" mode="model" priority="1">
+    <xsl:template match="Bind//RowLoop | Bind//QuestionLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xf:bind id="{$name}-bind" name="{$name}" nodeset="{$name}">
@@ -453,9 +453,9 @@
         </xf:bind>
     </xsl:template>
 
-    <xsl:template match="bind//*[name()=('xf-item','EmptyCell')]" priority="1" mode="model"/>
+    <xsl:template match="Bind//*[name()=('xf-item','EmptyCell')]" priority="1" mode="model"/>
 
-    <xsl:template match="bind//Table | bind//TableLoop" mode="model" priority="1">
+    <xsl:template match="Bind//Table | Bind//TableLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
@@ -510,7 +510,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="bind//DoubleDuration" mode="model" priority="1">
+    <xsl:template match="Bind//DoubleDuration" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <!-- Creating one element that correspond to the concatenation of the two ones -->
@@ -588,7 +588,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="resource//*" mode="model">
+    <xsl:template match="Resource//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
@@ -610,7 +610,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="resource//*[starts-with(name(),'xf-select')]" priority="1" mode="model">
+    <xsl:template match="Resource//*[starts-with(name(),'xf-select')]" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
@@ -632,7 +632,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="resource//DoubleDuration" priority="1" mode="model">
+    <xsl:template match="Resource//DoubleDuration" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:element name="{replace(enofr:get-name($source-context),'-','-A-')}">
@@ -683,9 +683,9 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="resource//EmptyCell" priority="1" mode="model"/>
+    <xsl:template match="Resource//EmptyCell" priority="1" mode="model"/>
 
-    <xsl:template match="resource//xf-item" priority="1" mode="model">
+    <xsl:template match="Resource//xf-item" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <item>
@@ -698,7 +698,7 @@
         </item>
     </xsl:template>
 
-    <xsl:template match="body//Module" mode="model" priority="1">
+    <xsl:template match="Body//Module" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -710,7 +710,7 @@
         </fr:section>
     </xsl:template>
 
-    <xsl:template match="body//SubModule" mode="model" priority="1">
+    <xsl:template match="Body//SubModule" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -745,7 +745,7 @@
         </xhtml:div>
     </xsl:template>
 
-    <xsl:template match="body//Group" mode="model" priority="1">
+    <xsl:template match="Body//Group" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -780,7 +780,7 @@
         </xhtml:div>
     </xsl:template>
 
-    <xsl:template match="body//xf-group" mode="model" priority="1">
+    <xsl:template match="Body//xf-group" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -791,7 +791,7 @@
         </xf:group>
     </xsl:template>
 
-    <xsl:template match="body//MultipleQuestion" mode="model" priority="1">
+    <xsl:template match="Body//MultipleQuestion" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -811,7 +811,7 @@
         </xhtml:div>
     </xsl:template>
 
-    <xsl:template match="*[name()=('instance','bind','resource')]//*[name()=('Cell')]"
+    <xsl:template match="*[name()=('Instance','Bind','Resource')]//*[name()=('Cell')]"
         mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
@@ -820,7 +820,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="body//TextCell" mode="model" priority="1">
+    <xsl:template match="Body//TextCell" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xhtml:th colspan="{enofr:get-colspan($source-context)}"
@@ -835,7 +835,7 @@
         </xhtml:th>
     </xsl:template>
 
-    <xsl:template match="body//Cell" mode="model" priority="1">
+    <xsl:template match="Body//Cell" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xhtml:td align="center">
@@ -845,13 +845,13 @@
         </xhtml:td>
     </xsl:template>
 
-    <xsl:template match="body//EmptyCell" mode="model" priority="1">
+    <xsl:template match="Body//EmptyCell" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xhtml:td colspan="{enofr:get-colspan($source-context)}"/>
     </xsl:template>
 
-    <xsl:template match="body//Table" mode="model" priority="1">
+    <xsl:template match="Body//Table" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="table-title">
@@ -904,7 +904,7 @@
         <!--</xf:group>-->
     </xsl:template>
     
-    <xsl:template match="body//QuestionLoop" mode="model" priority="1">
+    <xsl:template match="Body//QuestionLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xf:repeat nodeset="{concat('//',enofr:get-name($source-context))}"
@@ -915,7 +915,7 @@
         </xf:repeat>
     </xsl:template>
 
-    <xsl:template match="body//TableLoop" mode="model" priority="1">
+    <xsl:template match="Body//TableLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="table-title">
@@ -990,7 +990,7 @@
 
     <xsl:template match="tbody/body-line"/>-->
 
-    <xsl:template match="body//*" mode="model">
+    <xsl:template match="Body//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -1112,7 +1112,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="body//DoubleDuration" mode="model" priority="1">
+    <xsl:template match="Body//DoubleDuration" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="replace(enofr:get-name($source-context),'-','-A-')"/>
