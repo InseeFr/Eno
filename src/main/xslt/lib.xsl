@@ -77,7 +77,8 @@
 
     <!-- Used to transform the xml into text, concerning the attributes -->
     <xsl:template match="@*" mode="eno:remove-xml">
-        <xsl:text> </xsl:text>
+        <xsl:variable name="space" select="' '"/>
+        <xsl:value-of select="$space"/>
         <xsl:value-of select="name()"/>
         <xsl:text>="</xsl:text>
         <xsl:value-of select="."/>
