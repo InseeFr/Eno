@@ -11,7 +11,7 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
-    exclude-result-prefixes="xd eno" version="2.0">
+    exclude-result-prefixes="xd eno enofr" version="2.0">
 
     <!-- Orbeon-form-runner related file -->
     <!-- This file is imported in the ddi2fr.xsl file (already in ddi2fr-fixed.xsl) -->
@@ -284,14 +284,28 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="model//*" mode="model">
+    <xsl:template match="model//*[not(ancestor::instance)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
-
-    <xsl:template match="model//RowLoop" priority="1" mode="model">
+    
+    <xsl:template match="model//RowLoop | model//QuestionLoop" priority="1" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <!-- create element with same name and acts like what is done for the instance part -->
+        <xsl:element name="{enofr:get-name($source-context)}">
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('instance', .)" tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:element>
+        <!-- keep going down the tree in case there are other loops -->
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template match="instance//QuestionLoop" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -300,12 +314,12 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="model//*[parent::Cell[ancestor::RowLoop]]" priority="1" mode="model">
+    <!--<xsl:template match="model//*[parent::Cell[ancestor::RowLoop]]" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:value-of select="enofr:get-default-value($source-context)"/>
         </xsl:element>
-    </xsl:template>
+    </xsl:template>-->
 
     <xsl:template match="instance//*[name()=('xf-item','EmptyCell')]" priority="1" mode="model"/>
 
@@ -429,7 +443,7 @@
         </xf:bind>
     </xsl:template>
 
-    <xsl:template match="bind//RowLoop" mode="model" priority="1">
+    <xsl:template match="bind//RowLoop | bind//QuestionLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xf:bind id="{$name}-bind" name="{$name}" nodeset="{$name}">
@@ -684,7 +698,7 @@
         </item>
     </xsl:template>
 
-    <xsl:template match="body/Module" mode="model" priority="1">
+    <xsl:template match="body//Module" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -888,6 +902,17 @@
             </xhtml:tbody>
         </xhtml:table>
         <!--</xf:group>-->
+    </xsl:template>
+    
+    <xsl:template match="body//QuestionLoop" mode="model" priority="1">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="languages" tunnel="yes"/>
+        <xf:repeat nodeset="{concat('//',enofr:get-name($source-context))}"
+            id="{enofr:get-name($source-context)}">
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>           
+        </xf:repeat>
     </xsl:template>
 
     <xsl:template match="body//TableLoop" mode="model" priority="1">

@@ -12,8 +12,7 @@
             xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
             xmlns:saxon="http://saxon.sf.net/"
             xmlns:sql="http://orbeon.org/oxf/xml/sql"
-            xmlns:soap="http://schemas.xmlsoap.org/soap/envelope"
-            xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner">
+            xmlns:soap="http://schemas.xmlsoap.org/soap/envelope">
    <xhtml:head>
       <xhtml:title>Simpsons</xhtml:title>
       <xhtml:link rel="stylesheet" href="/css/common.css"/>
@@ -1367,7 +1366,6 @@
          </xf:instance>
          <xf:instance id="fr-form-util">
             <Util>
-               <Start/>
                <Previous/>
                <Next/>
                <Send/>
@@ -1395,14 +1393,11 @@
          <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
                   id="fr-form-util-binds"
                   ref="instance('fr-form-util')">
-            <xf:bind id="start-bind"
-                     relevant="instance('fr-form-instance')/stromae/util/CurrentSection='1'"
-                     ref="Start"/>
             <xf:bind id="previous-bind"
                      relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2)"
                      ref="Previous"/>
             <xf:bind id="next-bind"
-                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-3)"
+                     relevant="not(number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-3)"
                      ref="Next"/>
             <xf:bind id="send-bind"
                      ref="Send"
@@ -1508,17 +1503,17 @@
             </xf:action>
          </xf:action>
          <xf:action ev:event="page-change-done">
-            <xf:var name="new-number-of-following-pages"
-                    as="xs:number"
-                    value="if (instance(&#34;fr-form-util&#34;)/PreviousNext=&#34;1&#34;) then count((instance(&#34;fr-form-util&#34;)/Pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/following-sibling::*[not(text()=&#34;false&#34;)])[1]/following-sibling::*) else count((instance(&#34;fr-form-util&#34;)/Pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/preceding-sibling::*[not(text()=&#34;false&#34;)])[last()]/following-sibling::*)"/>
-            <xf:var name="old-number-of-following-pages"
-                    as="xs:number"
-                    value="count(instance(&#34;fr-form-util&#34;)/Pages/*[name()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSectionName]/following-sibling::*)"/>
-            <xf:var name="number-of-left-page"
-                    as="xs:number"
-                    value="number(instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSection)"/>
-            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-               value="string($number-of-left-page + $old-number-of-following-pages - $new-number-of-following-pages)"/>
+            <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
+            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='1'">
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
+                            value="count(instance(&#34;fr-form-util&#34;)/Pages/*[position()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSection]/following-sibling::*[not(text()=&#34;false&#34;)][1]/preceding-sibling::*)+1"/>
+               <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+            </xf:action>
+            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='-1'">
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
+                            value="count(instance(&#34;fr-form-util&#34;)/Pages/*[position()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSection]/preceding-sibling::*[not(text()=&#34;false&#34;)][1]/preceding-sibling::*)+1"/>
+               <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+            </xf:action>
             <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
                          value="fn:format-dateTime(fn:current-dateTime(),                     '[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
             <xf:toggle case="{instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSection}"/>
@@ -1645,8 +1640,8 @@
                            <xf:help ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3/help"/>
                            <xf:alert ref="$form-resources/INSEE-SIMPSONS-QG-2-1-3/alert"/>
                         </xf:output>
-                        <xhtml:table name="INSEE-SIMPSONS-QG-2-1-3" 
-									 class="question multiple-choice-question">
+                        <xhtml:table name="INSEE-SIMPSONS-QG-2-1-3"
+                                     class="question multiple-choice-question">
                            <xhtml:colgroup>
                               <xhtml:col span="1"/>
                            </xhtml:colgroup>
@@ -2481,13 +2476,6 @@
             </xxf:dialog>
          </fr:body>
          <fr:buttons>
-            <xf:trigger bind="start-bind">
-               <xf:label>Commencer</xf:label>
-               <xf:action ev:event="DOMActivate">
-                  <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
-                  <xf:dispatch name="page-change" targetid="fr-form-model"/>
-               </xf:action>
-            </xf:trigger>
             <xf:trigger bind="previous-bind">
                <xf:label>Retour</xf:label>
                <xf:action ev:event="DOMActivate">

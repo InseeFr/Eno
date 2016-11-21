@@ -425,6 +425,26 @@
         </xsl:variable>
         <xsl:value-of select="$result"/>
     </xsl:template>
+    
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']" mode="enoddi:get-hideable-command">
+        <xsl:variable name="filters">
+            <xsl:for-each select="ancestor::d:Sequence[d:TypeOfSequence/text()='hideable']">
+                <xsl:text> and </xsl:text>
+                <xsl:apply-templates select="current()" mode="enoddi:get-hideable-command"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="result">
+            <xsl:choose>
+                <xsl:when test="contains($filters,'and ')">
+                    <xsl:value-of select="substring($filters,6)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$filters"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="$result"/>
+    </xsl:template>
 
     <!-- Getting the link of a l:Variable depending on a id -->
     <xsl:template match="l:Variable" mode="enoddi:get-link">
