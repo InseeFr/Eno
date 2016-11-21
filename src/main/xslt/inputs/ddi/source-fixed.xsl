@@ -41,7 +41,7 @@
             <xd:p>Getting the number of modules in the ddi.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-nb-of-modules" as="xs:integer">
+    <xsl:template match="*" mode="enoddi:get-number-of-modules" as="xs:integer">
         <xsl:value-of select="count(//d:Sequence[d:TypeOfSequence/text()='module'])"/>
     </xsl:template>
 
@@ -230,7 +230,7 @@
                 <dummy/>
             </xsl:for-each-group>
         </xsl:variable>
-        <xsl:variable name="nb-of-levels">
+        <xsl:variable name="number-of-levels">
             <xsl:value-of select="count($levels//dummy)"/>
         </xsl:variable>
         <xsl:sequence select="$levels/*"/>

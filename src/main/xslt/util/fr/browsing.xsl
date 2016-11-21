@@ -27,7 +27,7 @@
     </xsl:variable>
 
     <!-- Counting the number of modules and storing it -->
-    <xsl:variable name="nb-of-modules">
+    <xsl:variable name="number-of-modules">
         <xsl:value-of select="count(//fr:body/*[name()='fr:section' or name()='xf:repeat'])"/>
         <!--<xsl:value-of
             select="count(//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and child::*])"
@@ -517,7 +517,7 @@
             <xsl:apply-templates select="*[not(name()='fr:section') and not(name()='xf:repeat')]"/>
             <xf:switch id="section-body">
                 <xsl:apply-templates select="*[name()='fr:section' or name()='xf:repeat']"/>
-                <xf:case id="{string(number($nb-of-modules)+1)}">
+                <xf:case id="{string(number($number-of-modules)+1)}">
                     <fr:section id="validation-control" bind="validation-bind" name="validation">
                         <xf:label ref="$form-resources/Validation/label"/>
                         <xhtml:div class="center">
@@ -574,7 +574,7 @@
                         </xhtml:div>
                     </fr:section>
                 </xf:case>
-                <xf:case id="{string(number($nb-of-modules)+2)}">
+                <xf:case id="{string(number($number-of-modules)+2)}">
                     <fr:section id="confirmation-control" bind="confirmation-bind"
                         name="confirmation">
                         <xf:label ref="$form-resources/Confirmation/label"/>
@@ -621,7 +621,7 @@
                         </xhtml:div>
                     </fr:section>
                 </xf:case>
-                <xf:case id="{string(number($nb-of-modules)+3)}">
+                <xf:case id="{string(number($number-of-modules)+3)}">
                     <fr:section id="end-control" bind="end-bind" name="end">
                         <xf:label ref="$form-resources/End/label"/>
                         <xhtml:div class="center center-body">
@@ -695,7 +695,7 @@
 
     <!-- Wrapping the existing modules in a xf:case -->
     <xsl:template match="fr:section[parent::fr:body] | xf:repeat[parent::fr:body]">
-        <xsl:variable name="index" select="number($nb-of-modules)-count(following-sibling::fr:section)-count(following-sibling::xf:repeat)"/>
+        <xsl:variable name="index" select="number($number-of-modules)-count(following-sibling::fr:section)-count(following-sibling::xf:repeat)"/>
         <xf:case id="{$index}">
             <xsl:copy>
                 <xsl:apply-templates select="node() | @*"/>

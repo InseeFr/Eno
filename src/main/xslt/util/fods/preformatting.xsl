@@ -68,7 +68,7 @@
         This applies only in the default mode. In copy mode, those elements are recopied (used below). -->
     <xsl:template match="*[@table:number-columns-repeated &gt; 1]">
         <xsl:call-template name="repetition">
-            <xsl:with-param name="nb-repetition" select="@table:number-columns-repeated" tunnel="yes"/>
+            <xsl:with-param name="repetition-number" select="@table:number-columns-repeated" tunnel="yes"/>
             <xsl:with-param name="element" select="." tunnel="yes"/>
         </xsl:call-template>
     </xsl:template>
@@ -83,13 +83,13 @@
     
     <!-- Recursive template of element recopy. -->
     <xsl:template name="repetition">
-        <xsl:param name="nb-repetition" select="1" tunnel="yes"/>
+        <xsl:param name="repetition-number" select="1" tunnel="yes"/>
         <xsl:param name="element" tunnel="yes"/>
         <xsl:param name="index" select="1"/>
         <!-- Recopy (using the copy mode to force the recopy). -->
         <xsl:apply-templates select="$element" mode="copy"/>
         <!-- Recursive call if there are still copies to do. -->
-        <xsl:if test="$nb-repetition - $index &gt; 0">
+        <xsl:if test="$repetition-number - $index &gt; 0">
             <xsl:call-template name="repetition">
                 <xsl:with-param name="index" select="$index + 1"/>
             </xsl:call-template>
