@@ -800,9 +800,9 @@
         </xsl:variable>
         <xhtml:div class="question">
             <xsl:variable name="question-title">
-                <body>
+                <Body>
                     <xf-output/>
-                </body>
+                </Body>
             </xsl:variable>
             <xsl:apply-templates select="$question-title//xf-output" mode="model"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -826,9 +826,9 @@
         <xhtml:th colspan="{enofr:get-colspan($source-context)}"
             rowspan="{enofr:get-rowspan($source-context)}">
             <xsl:variable name="cell-text">
-                <body>
+                <Body>
                     <xf-output/>
-                </body>
+                </Body>
             </xsl:variable>
             <xsl:apply-templates select="$cell-text//xf-output" mode="model"/>
             <!--            <xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>-->
@@ -855,9 +855,9 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="table-title">
-            <body>
+            <Body>
                 <xf-output/>
-            </body>
+            </Body>
         </xsl:variable>
         <xsl:apply-templates select="$table-title//xf-output" mode="model"/>
 
@@ -919,9 +919,9 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="table-title">
-            <body>
+            <Body>
                 <xf-output/>
-            </body>
+            </Body>
         </xsl:variable>
         <xsl:apply-templates select="$table-title//xf-output" mode="model"/>
 
