@@ -18,7 +18,9 @@
     <xsl:import href="../../lib.xsl"/>
 
     <!-- The output file generated will be xml type -->
-    <xsl:output method="xml" indent="yes"/>
+    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    
+    <xsl:strip-space elements="*"/>
 
     <xd:doc scope="stylesheet">
         <xd:desc>

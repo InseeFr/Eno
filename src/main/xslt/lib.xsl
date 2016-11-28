@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno" exclude-result-prefixes="#all" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+    xmlns:eno="http://xml.insee.fr/apps/eno" exclude-result-prefixes="#all" version="2.0">
 
     <!-- This stylesheet is imported in several files : ddi2fr.xsl, fods2xml.xsl, xml2xsl.xsl -->
     <!-- lib.xsl defines functions used in the previous files -->
@@ -49,7 +51,9 @@
 
     <xsl:function name="eno:is-rich-content" as="xs:boolean">
         <xsl:param name="node-set"/>
-        <xsl:sequence select="if ($node-set instance of xs:string) then false() else boolean($node-set//node())"/>
+        <xsl:sequence
+            select="if ($node-set instance of xs:string) then false() else boolean($node-set//node())"
+        />
     </xsl:function>
 
     <!-- To display an xml tree like a text chain -->
@@ -115,8 +119,10 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Function to get the children of an element, common to every input and output.</xd:p>
-            <xd:p>Indeed, every output will need the follow-up of the input tree, and every input must have a function describing the tree's parsing.</xd:p>
+            <xd:p>Function to get the children of an element, common to every input and
+                output.</xd:p>
+            <xd:p>Indeed, every output will need the follow-up of the input tree, and every input
+                must have a function describing the tree's parsing.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:function name="eno:child-fields" as="node()*">
@@ -126,8 +132,10 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Default template to parse the xml tree while getting the children of an element.</xd:p>
-            <xd:p>But the function can be overloaded if we need to parse the tree in a non-classic way.</xd:p>
+            <xd:p>Default template to parse the xml tree while getting the children of an
+                element.</xd:p>
+            <xd:p>But the function can be overloaded if we need to parse the tree in a non-classic
+                way.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="@*|node()" mode="eno:child-fields" as="node()*">

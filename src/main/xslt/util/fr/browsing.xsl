@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding='utf-8'?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
-    xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
+    exclude-result-prefixes="#all">
 
     <!-- This stylesheet is applied to basic-form.tmp (previously created in the ddi2fr target) -->
     <!-- It adds orbeon related elements to enable the desired navigation. -->
     <!-- Transformation used to add the home page on the different questionnaires. -->
 
-    <xsl:output method="xml" indent="yes" encoding="utf-8"/>    
+    <!-- The output file generated will be xml type -->
+    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    
+    <xsl:strip-space elements="*"/>
 
     <!-- The campaign -->
     <xsl:param name="campaign" as="xs:string"/>
@@ -38,7 +42,7 @@
         <xsl:apply-templates select="xhtml:html"/>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Default template for every element and every attribute, simply coying to the output file</xd:p>
         </xd:desc>
@@ -168,7 +172,7 @@
             </xf:instance>
 
             <!-- The corresponding binds -->
-            <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel" id="fr-form-util-binds"
+            <xf:bind id="fr-form-util-binds"
                 ref="instance('fr-form-util')">
                 <xf:bind id="previous-bind"
                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2)"

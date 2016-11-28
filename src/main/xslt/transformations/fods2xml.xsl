@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enofods="http://xml.insee.fr/apps/eno/fods"
     xmlns:enoxml="http://xml.insee.fr/apps/eno/xml"
-    xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" exclude-result-prefixes="#all"
+    xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
     version="2.0">
 
     <!-- xsl stylesheet applied to preformate.tmp in the temporary process of xsl files creation (fods2xml then xml2xsl) -->
@@ -19,7 +19,9 @@
     <xsl:import href="../lib.xsl"/>
 
     <!-- The output file generated will be xml type -->
-    <xsl:output method="xml" indent="yes"/>
+    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    
+    <xsl:strip-space elements="*"/>
 
     <xd:doc scope="stylesheet">
         <xd:desc>

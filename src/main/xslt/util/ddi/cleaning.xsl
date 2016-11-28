@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding='utf-8'?>
-<xsl:stylesheet version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:d="ddi:datacollection:3_2"
-    xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:g="ddi:group:3_2"
-    xmlns:s="ddi:studyunit:3_2" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
 
     <!-- This xsl stylesheet is used in the 'cleaning' target of the ant build -->
     <!-- Therefore, it will be applied on the input ddi file (ccs, qb etc.) -->
     <!-- Basically, this stylesheet does a bit of cleaning in order to change some attribute names and delete undesired links -->
 
     <!-- The output file generated will be xml type -->
-    <xsl:output method="xml" indent="no" encoding="UTF-8"/>
+    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    
     <xsl:strip-space elements="*"/>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Root template, applying the templates of all children</xd:p>
         </xd:desc>
@@ -21,7 +21,7 @@
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Default template for every element and every attribute, simply copying to the output</xd:p>
         </xd:desc>
@@ -111,14 +111,14 @@
         </xsl:if>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Deleting the Internet link (replacing it by r:Descritpion/r:Content, see below)</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="xhtml:sup"/>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Copying everything</xd:p>
             <xd:p>Applying the xhtml:sup template won't do anything (see above)</xd:p>

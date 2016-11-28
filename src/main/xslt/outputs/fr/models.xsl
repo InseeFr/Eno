@@ -8,14 +8,14 @@
     xmlns:exf="http://www.exforms.org/exf/1-0" xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
     xmlns:saxon="http://saxon.sf.net/" xmlns:sql="http://orbeon.org/oxf/xml/sql"
     xmlns:soap="http://schemas.xmlsoap.org/soap/envelope"
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:eno="http://xml.insee.fr/apps/eno"
-    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
+    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner" xmlns:xbl="http://www.w3.org/ns/xbl"
+    xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
+    xmlns:oxf="http://www.orbeon.com/oxf/processors" xmlns:p="http://www.orbeon.com/oxf/pipeline"
     exclude-result-prefixes="xd eno enofr" version="2.0">
 
     <!-- Orbeon-form-runner related file -->
     <!-- This file is imported in the ddi2fr.xsl file (already in ddi2fr-fixed.xsl) -->
-
 
     <!-- Parameters defined in build-non-regression.xml -->
     <xsl:param name="campaign" as="xs:string"/>
@@ -30,10 +30,6 @@
             <xd:p/>
         </xd:desc>
     </xd:doc>
-
-    <!-- The output file generated will be xml type -->
-    <xsl:output name="concise-xml" method="xml" indent="no" omit-xml-declaration="yes"
-        exclude-result-prefixes="#all"/>
 
     <xd:doc>
         <xd:desc>
@@ -53,17 +49,17 @@
                     href="{concat('/',$properties//css/dossier,'/',$properties//css/principale)}"/>
                 <xhtml:link rel="stylesheet">
                     <xsl:attribute name="href"
-                        select="concat('/',$properties//css/dossier,'/',tokenize($campaign,'-')[1],'/',tokenize($campaign,'-')[1],'.css')"
+                        select="concat('/', $properties//css/dossier, '/', tokenize($campaign, '-')[1], '/', tokenize($campaign, '-')[1], '.css')"
                     />
                 </xhtml:link>
                 <xhtml:link rel="stylesheet">
                     <xsl:attribute name="href"
-                        select="concat('/',$properties//css/dossier,'/',tokenize($campaign,'-')[1],'/',tokenize($campaign,'-')[2],'.css')"
+                        select="concat('/', $properties//css/dossier, '/', tokenize($campaign, '-')[1], '/', tokenize($campaign, '-')[2], '.css')"
                     />
                 </xhtml:link>
                 <xhtml:link rel="stylesheet">
                     <xsl:attribute name="href"
-                        select="concat('/',$properties//css/dossier,'/',tokenize($campaign,'-')[1],'/',$model,'.css')"
+                        select="concat('/', $properties//css/dossier, '/', tokenize($campaign, '-')[1], '/', $model, '.css')"
                     />
                 </xhtml:link>
                 <xf:model id="fr-form-model" xxf:expose-xpath-types="true"
@@ -91,8 +87,7 @@
                     </xf:instance>
 
                     <!-- Bindings -->
-                    <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
-                        id="fr-form-instance-binds" ref="instance('fr-form-instance')">
+                    <xf:bind id="fr-form-instance-binds" ref="instance('fr-form-instance')">
                         <xsl:apply-templates select="eno:child-fields($source-context)"
                             mode="source">
                             <xsl:with-param name="driver"
@@ -150,8 +145,7 @@
                     </xf:instance>
 
                     <!-- Bind of resources for the ones that are dynamic (text depends from the answer to another question) -->
-                    <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
-                        id="fr-form-resources-bind" ref="instance('fr-form-resources')">
+                    <xf:bind id="fr-form-resources-bind" ref="instance('fr-form-resources')">
                         <xsl:variable name="driver" select="."/>
                         <xsl:variable name="apos">'</xsl:variable>
                         <xsl:for-each select="$languages">
@@ -183,10 +177,7 @@
             </xhtml:head>
             <xhtml:body>
                 <fr:view>
-                    <fr:body xmlns:xbl="http://www.w3.org/ns/xbl"
-                        xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
-                        xmlns:oxf="http://www.orbeon.com/oxf/processors"
-                        xmlns:p="http://www.orbeon.com/oxf/pipeline">
+                    <fr:body>
                         <xsl:apply-templates select="eno:child-fields($source-context)"
                             mode="source">
                             <xsl:with-param name="driver"
@@ -210,7 +201,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="Instance//*[name()=('xf-group','Module')]" priority="1" mode="model">
+    <xsl:template match="Instance//*[name() = ('xf-group', 'Module')]" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:value-of select="enofr:get-default-value($source-context)"/>
@@ -225,7 +216,7 @@
         <xsl:element name="{enofr:get-name($source-context)}"/>
     </xsl:template>
 
-    <xsl:template match="Instance//*[name()=('SubModule','TextCell','MultipleQuestion')]"
+    <xsl:template match="Instance//*[name() = ('SubModule', 'TextCell', 'MultipleQuestion')]"
         mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}"/>
@@ -234,8 +225,8 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="*[name()=('Resource','Body')]//*[name()=('ResponseElement')]" mode="model"
-        priority="1"/>
+    <xsl:template match="*[name() = ('Resource', 'Body')]//*[name() = ('ResponseElement')]"
+        mode="model" priority="1"/>
 
     <xsl:template match="ResourceBind//xf-output" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -290,13 +281,14 @@
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
-    
+
     <xsl:template match="Model//RowLoop | Model//QuestionLoop" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- create element with same name and acts like what is done for the instance part -->
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
+                <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)"
+                    tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:element>
         <!-- keep going down the tree in case there are other loops -->
@@ -304,7 +296,7 @@
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
-    
+
     <xsl:template match="Instance//QuestionLoop" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
@@ -321,9 +313,9 @@
         </xsl:element>
     </xsl:template>-->
 
-    <xsl:template match="Instance//*[name()=('xf-item','EmptyCell')]" priority="1" mode="model"/>
+    <xsl:template match="Instance//*[name() = ('xf-item', 'EmptyCell')]" priority="1" mode="model"/>
 
-    <xsl:template match="Instance//table | Instance//TableLoop" mode="model" priority="1">
+    <xsl:template match="Instance//Table | Instance//TableLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:value-of select="enofr:get-default-value($source-context)"/>
@@ -365,12 +357,13 @@
             </xsl:if>
             <xsl:if test="enofr:get-type($source-context) = 'date'">
                 <xsl:attribute name="type">
-                    <xsl:value-of select="concat('xf:',enofr:get-type($source-context))"/>
+                    <xsl:value-of select="concat('xf:', enofr:get-type($source-context))"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="not(enofr:get-readonly($source-context) = ('false()', ''))">
                 <xsl:attribute name="readonly">
-                    <xsl:value-of select="concat('not(',enofr:get-readonly($source-context),')')"/>
+                    <xsl:value-of select="concat('not(', enofr:get-readonly($source-context), ')')"
+                    />
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="enofr:get-constraint($source-context) != ''">
@@ -414,7 +407,8 @@
             </xsl:if>
             <xsl:if test="not(enofr:get-readonly($source-context) = ('false()', ''))">
                 <xsl:attribute name="readonly">
-                    <xsl:value-of select="concat('not(',enofr:get-readonly($source-context),')')"/>
+                    <xsl:value-of select="concat('not(', enofr:get-readonly($source-context), ')')"
+                    />
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -434,7 +428,8 @@
             </xsl:if>
             <xsl:if test="not(enofr:get-readonly($source-context) = ('false()', ''))">
                 <xsl:attribute name="readonly">
-                    <xsl:value-of select="concat('not(',enofr:get-readonly($source-context),')')"/>
+                    <xsl:value-of select="concat('not(', enofr:get-readonly($source-context), ')')"
+                    />
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -453,7 +448,7 @@
         </xf:bind>
     </xsl:template>
 
-    <xsl:template match="Bind//*[name()=('xf-item','EmptyCell')]" priority="1" mode="model"/>
+    <xsl:template match="Bind//*[name() = ('xf-item', 'EmptyCell')]" priority="1" mode="model"/>
 
     <xsl:template match="Bind//Table | Bind//TableLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -481,7 +476,8 @@
             </xsl:if>
             <xsl:if test="not(enofr:get-readonly($source-context) = ('false()', ''))">
                 <xsl:attribute name="readonly">
-                    <xsl:value-of select="concat('not(',enofr:get-readonly($source-context),')')"/>
+                    <xsl:value-of select="concat('not(', enofr:get-readonly($source-context), ')')"
+                    />
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="enofr:get-constraint($source-context) != ''">
@@ -497,7 +493,7 @@
                 </xsl:element>
             </xsl:if>
         </xf:bind>
-        <xsl:variable name="name-bis" select="concat(enofr:get-name($source-context),'-group')"/>
+        <xsl:variable name="name-bis" select="concat(enofr:get-name($source-context), '-group')"/>
         <!--<xf:bind id="{$name-bis}-bind" name="{$name-bis}" ref="{$name-bis}">
             <xsl:if test="enofr:get-relevant($source-context) != ''">
                 <xsl:attribute name="relevant">
@@ -517,17 +513,18 @@
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:attribute name="calculate">
                 <xsl:value-of
-                    select="concat('if (not(instance(&quot;fr-form-instance&quot;)//', replace($name,'-','-A-'),
-                    ' castable as xs:integer or instance(&quot;fr-form-instance&quot;)//', replace($name,'-','-B-'),
-                    ' castable as xs:integer)) then &quot;&quot; else (100*number(if (instance(&quot;fr-form-instance&quot;)//', replace($name,'-','-A-'),
-                    ' castable as xs:integer) then instance(&quot;fr-form-instance&quot;)//', replace($name,'-','-A-'),
-                    ' else 0)+number(if (instance(&quot;fr-form-instance&quot;)//', replace($name,'-','-B-'),
-                    ' castable as xs:integer) then instance(&quot;fr-form-instance&quot;)//', replace($name,'-','-B-'),
-                    ' else 0))')"
+                    select="
+                        concat('if (not(instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-A-'),
+                        ' castable as xs:integer or instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-B-'),
+                        ' castable as xs:integer)) then &quot;&quot; else (100*number(if (instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-A-'),
+                        ' castable as xs:integer) then instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-A-'),
+                        ' else 0)+number(if (instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-B-'),
+                        ' castable as xs:integer) then instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-B-'),
+                        ' else 0))')"
                 />
             </xsl:attribute>
         </xf:bind>
-        <xsl:variable name="name" select="replace(enofr:get-name($source-context),'-','-A-')"/>
+        <xsl:variable name="name" select="replace(enofr:get-name($source-context), '-', '-A-')"/>
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="not(enofr:get-required($source-context) = ('false()', ''))">
                 <xsl:attribute name="required">
@@ -551,11 +548,12 @@
             </xsl:if>
             <xsl:if test="not(enofr:get-readonly($source-context) = ('false()', ''))">
                 <xsl:attribute name="readonly">
-                    <xsl:value-of select="concat('not(',enofr:get-readonly($source-context),')')"/>
+                    <xsl:value-of select="concat('not(', enofr:get-readonly($source-context), ')')"
+                    />
                 </xsl:attribute>
             </xsl:if>
         </xf:bind>
-        <xsl:variable name="name" select="replace(enofr:get-name($source-context),'-','-B-')"/>
+        <xsl:variable name="name" select="replace(enofr:get-name($source-context), '-', '-B-')"/>
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="not(enofr:get-required($source-context) = ('false()', ''))">
                 <xsl:attribute name="required">
@@ -579,7 +577,8 @@
             </xsl:if>
             <xsl:if test="not(enofr:get-readonly($source-context) = ('false()', ''))">
                 <xsl:attribute name="readonly">
-                    <xsl:value-of select="concat('not(',enofr:get-readonly($source-context),')')"/>
+                    <xsl:value-of select="concat('not(', enofr:get-readonly($source-context), ')')"
+                    />
                 </xsl:attribute>
             </xsl:if>
         </xf:bind>
@@ -610,7 +609,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xsl:template match="Resource//*[starts-with(name(),'xf-select')]" priority="1" mode="model">
+    <xsl:template match="Resource//*[starts-with(name(), 'xf-select')]" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
@@ -663,8 +662,8 @@
             <xsl:for-each select="0 to 99">
                 <xsl:variable name="label">
                     <xsl:choose>
-                        <xsl:when test="number(.)&lt;10">
-                            <xsl:value-of select="concat('0',string(.))"/>
+                        <xsl:when test="number(.) &lt; 10">
+                            <xsl:value-of select="concat('0', string(.))"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="string(.)"/>
@@ -723,7 +722,7 @@
                     <xsl:value-of select="enofr:get-css-class($source-context)"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="not($label='')">
+            <xsl:if test="not($label = '')">
                 <xhtml:h3>
                     <xf:output id="{$name}-control" bind="{$name}-bind">
                         <xf:label ref="$form-resources/{$name}/label">
@@ -758,7 +757,7 @@
                     <xsl:value-of select="enofr:get-css-class($source-context)"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="not($label='')">
+            <xsl:if test="not($label = '')">
                 <xhtml:h4>
                     <xf:output id="{$name}-control" bind="{$name}-bind">
                         <xf:label ref="$form-resources/{$name}/label">
@@ -811,7 +810,7 @@
         </xhtml:div>
     </xsl:template>
 
-    <xsl:template match="*[name()=('Instance','Bind','Resource')]//*[name()=('Cell')]"
+    <xsl:template match="*[name() = ('Instance', 'Bind', 'Resource')]//*[name() = ('Cell')]"
         mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
@@ -882,7 +881,7 @@
                             select="enofr:get-header-line($source-context, position())"
                             mode="source">
                             <xsl:with-param name="driver"
-                                select="$ancestors//*[not(child::*) and not(name()='driver')]"
+                                select="$ancestors//*[not(child::*) and not(name() = 'driver')]"
                                 tunnel="yes"/>
                         </xsl:apply-templates>
                     </xhtml:tr>
@@ -894,7 +893,7 @@
                         <xsl:apply-templates
                             select="enofr:get-body-line($source-context, position())" mode="source">
                             <xsl:with-param name="driver"
-                                select="$ancestors//*[not(child::*) and not(name()='driver')]"
+                                select="$ancestors//*[not(child::*) and not(name() = 'driver')]"
                                 tunnel="yes"/>
                         </xsl:apply-templates>
                     </xhtml:tr>
@@ -903,7 +902,7 @@
         </xhtml:table>
         <!--</xf:group>-->
     </xsl:template>
-    
+
     <xsl:template match="Body//QuestionLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
@@ -911,7 +910,7 @@
             id="{enofr:get-name($source-context)}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>           
+            </xsl:apply-templates>
         </xf:repeat>
     </xsl:template>
 
@@ -946,7 +945,7 @@
                             select="enofr:get-header-line($source-context, position())"
                             mode="source">
                             <xsl:with-param name="driver"
-                                select="$ancestors//*[not(child::*) and not(name()='driver')]"
+                                select="$ancestors//*[not(child::*) and not(name() = 'driver')]"
                                 tunnel="yes"/>
                         </xsl:apply-templates>
                     </xhtml:tr>
@@ -959,7 +958,7 @@
                         <xsl:apply-templates select="enofr:get-body-line($source-context, 1)"
                             mode="source">
                             <xsl:with-param name="driver"
-                                select="$ancestors//*[not(child::*) and not(name()='driver')]"
+                                select="$ancestors//*[not(child::*) and not(name() = 'driver')]"
                                 tunnel="yes"/>
                         </xsl:apply-templates>
                     </xhtml:tr>
@@ -1083,24 +1082,24 @@
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
             </xsl:for-each>
-<!--            <!-\- If constraints depend on this field's value -\->
+            <!--            <!-\- If constraints depend on this field's value -\->
             <xsl:if test="count(enofr:get-constraint-dependencies($source-context))>0">
                 <xf:setvalue ev:event="xforms-value-changed"
                     ref="{concat('instance(&quot;fr-form-instance&quot;)//',$name)}"
                     value="{concat('replace(instance(&quot;fr-form-instance&quot;)//',$name,',&quot; &quot;,&quot;&quot;)')}"/>-->
-                <xsl:for-each select="enofr:get-constraint-dependencies($source-context)">
-                    <xsl:element name="xf:dispatch">
-                        <xsl:attribute name="ev:event">
-                            <xsl:text>DOMFocusOut xforms-value-changed</xsl:text>
-                        </xsl:attribute>
-                        <xsl:attribute name="name">
-                            <xsl:text>DOMFocusOut</xsl:text>
-                        </xsl:attribute>
-                        <xsl:attribute name="target">
-                            <xsl:value-of select="concat(.,'-control')"/>
-                        </xsl:attribute>
-                    </xsl:element>
-                </xsl:for-each>
+            <xsl:for-each select="enofr:get-constraint-dependencies($source-context)">
+                <xsl:element name="xf:dispatch">
+                    <xsl:attribute name="ev:event">
+                        <xsl:text>DOMFocusOut xforms-value-changed</xsl:text>
+                    </xsl:attribute>
+                    <xsl:attribute name="name">
+                        <xsl:text>DOMFocusOut</xsl:text>
+                    </xsl:attribute>
+                    <xsl:attribute name="target">
+                        <xsl:value-of select="concat(., '-control')"/>
+                    </xsl:attribute>
+                </xsl:element>
+            </xsl:for-each>
             <!--</xsl:if>-->
         </xsl:element>
         <xsl:if test="enofr:get-suffix($source-context, $languages[1])">
@@ -1115,7 +1114,7 @@
     <xsl:template match="Body//DoubleDuration" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
-        <xsl:variable name="name" select="replace(enofr:get-name($source-context),'-','-A-')"/>
+        <xsl:variable name="name" select="replace(enofr:get-name($source-context), '-', '-A-')"/>
         <xsl:element name="xf:select1">
             <xsl:attribute name="id">
                 <xsl:value-of select="concat($name, '-control')"/>
@@ -1169,7 +1168,7 @@
             <xsl:text>heure(s)</xsl:text>
         </xsl:element>
 
-        <xsl:variable name="name" select="replace(enofr:get-name($source-context),'-','-B-')"/>
+        <xsl:variable name="name" select="replace(enofr:get-name($source-context), '-', '-B-')"/>
         <xsl:element name="xf:select1">
             <xsl:attribute name="id">
                 <xsl:value-of select="concat($name, '-control')"/>

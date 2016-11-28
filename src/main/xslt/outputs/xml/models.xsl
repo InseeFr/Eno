@@ -16,10 +16,6 @@
         </xd:desc>
     </xd:doc>
 
-    <!-- The output file generated will be xml type -->
-    <xsl:output name="concise-xml" method="xml" indent="no" omit-xml-declaration="yes"
-        exclude-result-prefixes="#all"/>
-
     <xd:doc>
         <xd:desc>
             <xd:p>The default matching element</xd:p>

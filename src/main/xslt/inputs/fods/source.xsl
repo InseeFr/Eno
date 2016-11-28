@@ -10,9 +10,6 @@
     <!-- Its purpose is to retrieve several elements in a fods file (like cell content, column name etc) -->
     <!-- The information retrieved will then be used in fods2xml.xsl in order to create the output xml file -->
 
-    <!-- The output file generated will be xml type -->
-    <xsl:output method="xml" indent="yes"/>
-
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> Jan 6, 2013</xd:p>
