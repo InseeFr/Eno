@@ -24,9 +24,7 @@
 
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p><xd:b>Created on:</xd:b> Apr 9, 2013</xd:p>
-            <xd:p><xd:b>Author:</xd:b> vdv</xd:p>
-            <xd:p>Transforms DDI into Orbeon Form Builder!</xd:p>
+            <xd:p>Transforms DDI into Orbeon Form Runner!</xd:p>
         </xd:desc>
     </xd:doc>
 

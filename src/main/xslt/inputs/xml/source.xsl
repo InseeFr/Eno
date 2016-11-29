@@ -10,7 +10,6 @@
 
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p><xd:b>Created on:</xd:b> Jan 6, 2013</xd:p>
             <xd:p>Generation from xml</xd:p>
         </xd:desc>
     </xd:doc>

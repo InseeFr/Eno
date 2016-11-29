@@ -23,14 +23,6 @@
     <xsl:param name="properties-file"/>
     <xsl:variable name="properties" select="doc($properties-file)"/>
 
-    <xd:doc scope="stylesheet">
-        <xd:desc>
-            <xd:p><xd:b>Created on:</xd:b> Apr 9, 2013</xd:p>
-            <xd:p><xd:b>Author:</xd:b> vdv</xd:p>
-            <xd:p/>
-        </xd:desc>
-    </xd:doc>
-
     <xd:doc>
         <xd:desc>
             <xd:p>Form generation</xd:p>

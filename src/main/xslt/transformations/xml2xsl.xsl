@@ -25,7 +25,6 @@
 
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p><xd:b>Created on:</xd:b> Jan 7, 2013</xd:p>
             <xd:p>Transforms XML into XSL!</xd:p>
         </xd:desc>
     </xd:doc>
