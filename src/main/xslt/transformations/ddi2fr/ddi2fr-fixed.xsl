@@ -3,8 +3,7 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
-    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
-    xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
+    xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2"
     exclude-result-prefixes="xd" version="2.0">
 
     <!-- Base file of the upcoming ddi2fr.xsl stylesheet (that will be used in the ddi2fr target to create basic-form.tmp) -->

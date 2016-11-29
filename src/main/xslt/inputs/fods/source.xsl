@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:enofods="http://xml.insee.fr/apps/eno/fods"
     xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
-    xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" exclude-result-prefixes="xs xd"
+    xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" exclude-result-prefixes="xd"
     version="2.0">
 
     <!-- This xsl stylesheet is used in the fods2xsl target (imported by fods2xml.xsl)-->
