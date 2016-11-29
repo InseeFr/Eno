@@ -109,10 +109,6 @@
                                     <xsl:value-of select="enofr:get-form-title($source-context, .)"
                                     />
                                 </title>
-                                <description xml:lang="{.}">
-                                    <xsl:value-of
-                                        select="enofr:get-form-description($source-context, .)"/>
-                                </description>
                             </xsl:for-each>
                         </metadata>
                     </xf:instance>
@@ -193,9 +189,7 @@
     <!-- Default template, creating the corresponding instance element, and going on on the children -->
     <xsl:template match="Instance//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:element name="{enofr:get-name($source-context)}">
-            <xsl:value-of select="enofr:get-default-value($source-context)"/>
-        </xsl:element>
+        <xsl:element name="{enofr:get-name($source-context)}"/>        
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
@@ -204,7 +198,6 @@
     <xsl:template match="Instance//*[name() = ('xf-group', 'Module')]" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
-            <xsl:value-of select="enofr:get-default-value($source-context)"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
@@ -308,18 +301,14 @@
 
     <!--<xsl:template match="Model//*[parent::Cell[ancestor::RowLoop]]" priority="1" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:element name="{enofr:get-name($source-context)}">
-            <xsl:value-of select="enofr:get-default-value($source-context)"/>
-        </xsl:element>
+        <xsl:element name="{enofr:get-name($source-context)}"/>
     </xsl:template>-->
 
     <xsl:template match="Instance//*[name() = ('xf-item', 'EmptyCell')]" priority="1" mode="model"/>
 
     <xsl:template match="Instance//Table | Instance//TableLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:element name="{enofr:get-name($source-context)}">
-            <xsl:value-of select="enofr:get-default-value($source-context)"/>
-        </xsl:element>
+        <xsl:element name="{enofr:get-name($source-context)}"/>        
         <!--<xsl:element name="{concat(enofr:get-name($source-context),'-group')}"/>-->
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>

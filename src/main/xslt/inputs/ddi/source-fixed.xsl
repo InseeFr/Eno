@@ -36,15 +36,6 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Getting the number of modules in the ddi.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-number-of-modules" as="xs:integer">
-        <xsl:value-of select="count(//d:Sequence[d:TypeOfSequence/text()='module'])"/>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
             <xd:p>Getting the id for d:ResponseDomainInMixed.</xd:p>
         </xd:desc>
     </xd:doc>
