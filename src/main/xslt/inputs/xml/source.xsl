@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:enoxml="http://xml.insee.fr/apps/eno/xml" exclude-result-prefixes="xs xd" version="2.0">
+    xmlns:enoxml="http://xml.insee.fr/apps/eno/xml" version="2.0">
 
     <!-- This xsl stylesheet is used in the fods2xsl target (imported by xml2xsl.xsl)-->
     <!-- Its purpose is to retrieve several elements in a xml file (xml.tmp) containing Generic and DefinedElement created -->

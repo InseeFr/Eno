@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno"
-    xmlns:enoxml="http://xml.insee.fr/apps/eno/xml" exclude-result-prefixes="#all"
+    xmlns:enoxml="http://xml.insee.fr/apps/eno/xml"
     version="2.0">
 
     <!-- This xsl stylesheet is used in the fods2xsl target (imported by fods2xml.xsl)-->

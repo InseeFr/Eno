@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:eno="http://xml.insee.fr/apps/eno" exclude-result-prefixes="#all" version="2.0">
+    xmlns:eno="http://xml.insee.fr/apps/eno" version="2.0">
 
     <!-- This stylesheet is imported in several files : ddi2fr.xsl, fods2xml.xsl, xml2xsl.xsl -->
     <!-- lib.xsl defines functions used in the previous files -->

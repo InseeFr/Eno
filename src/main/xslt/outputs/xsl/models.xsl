@@ -5,7 +5,7 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoxsl="http://xml.insee.fr/apps/eno/xsl"
-    exclude-result-prefixes="xd" version="2.0">
+    version="2.0">
 
     <!-- This xsl stylesheet is used in the xml2xsl target (imported by xml2xsl.xsl)-->
     <!-- It creates the different templates, associates the appropriate match from what was defined is the xml.tmp file, -->
