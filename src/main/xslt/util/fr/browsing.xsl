@@ -506,17 +506,7 @@
                     <xf:output id="progress-percent"
                         ref="instance('fr-form-util')/ProgressPercent"/> %</xhtml:span>
             </xhtml:div>
-            <!--<xhtml:div class="menu">
-                            <xhtml:ul>
-                                <xsl:apply-templates select="eno:child-fields($source-context)"
-                                    mode="source">
-                                    <xsl:with-param name="driver"
-                                        select="eno:append-empty-element('menu', .)" tunnel="yes"/>
-                                    <xsl:with-param name="languages" select="$languages"
-                                        tunnel="yes"/>
-                                </xsl:apply-templates>
-                            </xhtml:ul>
-                        </xhtml:div>-->
+
             <!-- Using a switch in order to display each module on the same page -->
             <xsl:apply-templates select="*[not(name()='fr:section') and not(name()='xf:repeat')]"/>
             <xf:switch id="section-body">
@@ -706,41 +696,5 @@
             </xsl:copy>
         </xf:case>
     </xsl:template>
-
-
-    <!-- Never used, a menu. Moved from models.xsl : to redo. -->
-    <!--<xsl:template match="menu/module" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="languages" tunnel="yes"/>
-        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:variable name="index" select="string(number(enofr:get-index($source-context)))"/>
-        <xhtml:li>
-            <xsl:variable name="cssDynamique">
-                <xsl:value-of
-                    select="concat('{if(instance(&quot;fr-form-instance&quot;)/stromae/util/sectionCourante = string(&quot;',$index,'&quot;)) then (&quot;active&quot;) else()}')"
-                />
-            </xsl:variable>
-            <xf:trigger class="{$cssDynamique}">
-                <xf:label ref="$form-resources/{$name}/label"/>
-                <!-\-                <xf:action ev:event="DOMActivate"
-                    if="instance('fr-form-instance')/stromae/util/sectionCourante">
-                    <xf:dispatch name="ChangementPage">
-                        <xsl:attribute name="target">
-                            <xsl:value-of
-                                select="string('{concat(instance(&quot;fr-form-instance&quot;)/stromae/util/nomSectionCourante,&quot;-control&quot;)}')"
-                            />
-                        </xsl:attribute>
-                    </xf:dispatch>
-                    <xf:action
-                        if="xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())">
-                        <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
-                            value="{$index}"/>
-                        <xf:toggle case="{$choix}"/>
-                        <xf:send submission="enregistrer"/>
-                    </xf:action>
-                </xf:action>-\->
-            </xf:trigger>
-        </xhtml:li>
-    </xsl:template>-->
 
 </xsl:stylesheet>

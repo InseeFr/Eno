@@ -169,13 +169,6 @@
         </xsl:copy>
     </xsl:template>
 
-    <!--<xsl:template match="xhtml:a[contains(@href,'#')]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:apply-templates select="node()"/>
-        </xsl:copy>
-    </xsl:template>-->
-
     <!-- Adding identifier to footnote type d:Instruction in xhtml:p elements -->
     <xsl:template
         match="xhtml:p[ancestor::d:Instruction[d:InstructionName/r:String/text()='footnote']]">

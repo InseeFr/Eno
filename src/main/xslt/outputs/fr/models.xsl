@@ -845,7 +845,6 @@
             <xsl:copy-of select="root(.)"/>
         </xsl:variable>
 
-        <!--        <xf:group id="{concat(enofr:get-name($source-context),'-group')}" bind="{concat(enofr:get-name($source-context),'-group-bind')}">-->
         <xhtml:table name="{enofr:get-name($source-context)}">
             <xsl:if test="enofr:get-css-class($source-context) != ''">
                 <xsl:attribute name="class">
@@ -881,7 +880,6 @@
                 </xsl:for-each>
             </xhtml:tbody>
         </xhtml:table>
-        <!--</xf:group>-->
     </xsl:template>
 
     <xsl:template match="Body//QuestionLoop" mode="model" priority="1">
@@ -909,7 +907,6 @@
             <xsl:copy-of select="root(.)"/>
         </xsl:variable>
 
-        <!--        <xf:group id="{concat(enofr:get-name($source-context),'-group')}" bind="{concat(enofr:get-name($source-context),'-group-bind')}">-->
         <xhtml:table name="{enofr:get-name($source-context)}">
             <xsl:if test="enofr:get-css-class($source-context) != ''">
                 <xsl:attribute name="class">
@@ -953,22 +950,7 @@
                 origin="{concat('instance(&#34;fr-form-loop-model&#34;)/',enofr:get-name($source-context),'-RowLoop')}"
             />
         </xf:trigger>
-
-        <!--</xf:group>-->
     </xsl:template>
-
-    <!--
-    <xsl:template match="thead/header-line"/>
-
-    <!-\- The header-line driver doesn't return anything for the tbody parent.
-    Indeed, the header-line templates aren't applied inside the tbody of the table -\->
-    <xsl:template match="tbody/header-line"/>
-
-    <!-\- The body-line driver doesn't return anything for the thead parent.
-    Indeed, the body-line templates aren't applied inside the tbody of the thead -\->
-    <xsl:template match="thead/body-line"/>
-
-    <xsl:template match="tbody/body-line"/>-->
 
     <xsl:template match="Body//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -997,11 +979,6 @@
             <xsl:attribute name="xxf:order">
                 <xsl:value-of select="string('label control hint help alert')"/>
             </xsl:attribute>
-            <!--<xsl:if test="enofr:get-format($source-context) != ''">
-                <xsl:attribute name="xxf:format">
-                    <xsl:value-of select="enofr:get-format($source-context)"/>
-                </xsl:attribute>
-            </xsl:if>-->
             <xsl:if test="enofr:get-length($source-context)">
                 <xsl:attribute name="xxf:maxlength">
                     <xsl:value-of select="enofr:get-length($source-context)"/>
@@ -1063,11 +1040,6 @@
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
             </xsl:for-each>
-            <!--            <!-\- If constraints depend on this field's value -\->
-            <xsl:if test="count(enofr:get-constraint-dependencies($source-context))>0">
-                <xf:setvalue ev:event="xforms-value-changed"
-                    ref="{concat('instance(&quot;fr-form-instance&quot;)//',$name)}"
-                    value="{concat('replace(instance(&quot;fr-form-instance&quot;)//',$name,',&quot; &quot;,&quot;&quot;)')}"/>-->
             <xsl:for-each select="enofr:get-constraint-dependencies($source-context)">
                 <xsl:element name="xf:dispatch">
                     <xsl:attribute name="ev:event">
@@ -1081,7 +1053,6 @@
                     </xsl:attribute>
                 </xsl:element>
             </xsl:for-each>
-            <!--</xsl:if>-->
         </xsl:element>
         <xsl:if test="enofr:get-suffix($source-context, $languages[1])">
             <xsl:element name="xhtml:span">
@@ -1111,15 +1082,9 @@
             <xsl:attribute name="class">
                 <xsl:value-of select="string('double-duration')"/>
             </xsl:attribute>
-
             <xsl:attribute name="xxf:order">
                 <xsl:value-of select="string('label control hint help alert')"/>
             </xsl:attribute>
-            <xsl:if test="enofr:get-format($source-context) != ''">
-                <xsl:attribute name="xxf:format">
-                    <xsl:value-of select="enofr:get-format($source-context)"/>
-                </xsl:attribute>
-            </xsl:if>
             <xsl:if test="enofr:get-length($source-context)">
                 <xsl:attribute name="xxf:maxlength">
                     <xsl:value-of select="enofr:get-length($source-context)"/>
@@ -1168,11 +1133,6 @@
             <xsl:attribute name="xxf:order">
                 <xsl:value-of select="string('label control hint help alert')"/>
             </xsl:attribute>
-            <xsl:if test="enofr:get-format($source-context) != ''">
-                <xsl:attribute name="xxf:format">
-                    <xsl:value-of select="enofr:get-format($source-context)"/>
-                </xsl:attribute>
-            </xsl:if>
             <xsl:if test="enofr:get-length($source-context)">
                 <xsl:attribute name="xxf:maxlength">
                     <xsl:value-of select="enofr:get-length($source-context)"/>
