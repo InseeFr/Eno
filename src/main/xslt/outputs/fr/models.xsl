@@ -2,17 +2,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xf="http://www.w3.org/2002/xforms"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xi="http://www.w3.org/2001/XInclude"
-    xmlns:xxi="http://orbeon.org/oxf/xml/xinclude" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
-    xmlns:exf="http://www.exforms.org/exf/1-0" xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
-    xmlns:saxon="http://saxon.sf.net/" xmlns:sql="http://orbeon.org/oxf/xml/sql"
-    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope"
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
-    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner" xmlns:xbl="http://www.w3.org/ns/xbl"
-    xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
-    xmlns:oxf="http://www.orbeon.com/oxf/processors" xmlns:p="http://www.orbeon.com/oxf/pipeline"
-    exclude-result-prefixes="xd eno enofr" version="2.0">
+    xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+    xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+    xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner" exclude-result-prefixes="xd eno enofr" version="2.0">
 
     <!-- Orbeon-form-runner related file -->
     <!-- This file is imported in the ddi2fr.xsl file (already in ddi2fr-fixed.xsl) -->
