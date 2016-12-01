@@ -1,18 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xhtml:html xmlns:xhtml="http://www.w3.org/1999/xhtml"
             xmlns:xf="http://www.w3.org/2002/xforms"
             xmlns:xs="http://www.w3.org/2001/XMLSchema"
             xmlns:fn="http://www.w3.org/2005/xpath-functions"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:ev="http://www.w3.org/2001/xml-events"
-            xmlns:xi="http://www.w3.org/2001/XInclude"
-            xmlns:xxi="http://orbeon.org/oxf/xml/xinclude"
             xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
-            xmlns:exf="http://www.exforms.org/exf/1-0"
-            xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
-            xmlns:saxon="http://saxon.sf.net/"
-            xmlns:sql="http://orbeon.org/oxf/xml/sql"
-            xmlns:soap="http://schemas.xmlsoap.org/soap/envelope">
+            xmlns:fr="http://orbeon.org/oxf/xml/form-runner">
    <xhtml:head>
       <xhtml:title>Simpsons</xhtml:title>
       <xhtml:link rel="stylesheet" href="/css/common.css"/>
@@ -115,9 +108,7 @@
          <xf:instance id="fr-form-loop-model">
             <LoopModels/>
          </xf:instance>
-         <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
-                  id="fr-form-instance-binds"
-                  ref="instance('fr-form-instance')">
+         <xf:bind id="fr-form-instance-binds" ref="instance('fr-form-instance')">
             <xf:bind id="INSEE-SIMPSONS-SEQ-1-bind"
                      name="INSEE-SIMPSONS-SEQ-1"
                      ref="INSEE-SIMPSONS-SEQ-1">
@@ -367,9 +358,7 @@
                <application-name>INSEE-SIMPSONS-SEQ</application-name>
                <form-name>INSEE-SIMPSONS-SEQ</form-name>
                <title xml:lang="fr">Simpsons</title>
-               <description xml:lang="fr"/>
                <title xml:lang="en">Simpsons</title>
-               <description xml:lang="en"/>
             </metadata>
          </xf:instance>
          <xf:instance id="fr-form-attachments">
@@ -1348,9 +1337,7 @@
                </resource>
             </resources>
          </xf:instance>
-         <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
-                  id="fr-form-resources-bind"
-                  ref="instance('fr-form-resources')">
+         <xf:bind id="fr-form-resources-bind" ref="instance('fr-form-resources')">
             <xf:bind id="bind-resource-fr"
                      name="resource-fr"
                      ref="resource[@xml:lang='fr']"/>
@@ -1390,9 +1377,7 @@
                <ConfirmationMessage/>
             </Util>
          </xf:instance>
-         <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
-                  id="fr-form-util-binds"
-                  ref="instance('fr-form-util')">
+         <xf:bind id="fr-form-util-binds" ref="instance('fr-form-util')">
             <xf:bind id="previous-bind"
                      relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2)"
                      ref="Previous"/>
@@ -1524,10 +1509,7 @@
    </xhtml:head>
    <xhtml:body>
       <fr:view>
-         <fr:body xmlns:xbl="http://www.w3.org/ns/xbl"
-                  xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel"
-                  xmlns:oxf="http://www.orbeon.com/oxf/processors"
-                  xmlns:p="http://www.orbeon.com/oxf/pipeline">
+         <fr:body>
             <xf:input id="page-top-control" bind="page-top-bind" class="page-top"/>
             <xhtml:div class="progress-bar-container">
                <xf:output id="progress-bar-container-control" bind="progress-bar-container-bind">
