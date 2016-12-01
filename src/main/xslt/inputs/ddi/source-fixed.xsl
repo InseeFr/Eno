@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi" xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    exclude-result-prefixes="#all" version="2.0">
+    xmlns:xhtml="http://www.w3.org/1999/xhtml" version="2.0">
 
     <!-- This .xsl document is the base of the upcoming source.xsl : ENOPreprocessing target -->
     <!-- This source.xsl file will contain : -->
@@ -15,7 +13,7 @@
     <!-- Also, it will be used in the later stages of the application (imported in transformations/ddi2fr/ddi2fr.xsl) -->
     <!-- Therefore, source.xsl role belongs in the creation of the basic-form.tmp : ddi2fr target-->
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>For each element, the default behaviour is to return empty text.</xd:p>
         </xd:desc>
@@ -24,7 +22,7 @@
         <xsl:text/>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Getting the languages list used in the ddi.</xd:p>
         </xd:desc>
@@ -36,16 +34,7 @@
         </xsl:for-each-group>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
-        <xd:desc>
-            <xd:p>Getting the number of modules in the ddi.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-nb-of-modules" as="xs:integer">
-        <xsl:value-of select="count(//d:Sequence[d:TypeOfSequence/text()='module'])"/>
-    </xsl:template>
-
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Getting the id for d:ResponseDomainInMixed.</xd:p>
         </xd:desc>
@@ -62,9 +51,10 @@
         <xsl:value-of select="concat($parent-id,'-',$sub-id)"/>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
-            <xd:p>Concatenation of the instruction labels in order to create a question label.</xd:p>
+            <xd:p>Concatenation of the instruction labels in order to create a question
+                label.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template
@@ -110,9 +100,10 @@
             mode="enoddi:get-label"/>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
-            <xd:p>The different labels that we return depending on the existence of the xml:lang attribute</xd:p>
+            <xd:p>The different labels that we return depending on the existence of the xml:lang
+                attribute</xd:p>
             <xd:p>Depends on the language</xd:p>
         </xd:desc>
     </xd:doc>
@@ -143,7 +134,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Getting the corresponding suffix from different reponse domains.</xd:p>
         </xd:desc>
@@ -173,23 +164,24 @@
         </xsl:choose>
     </xsl:template>
     <!-- Getting suffix for d:QuestionItem elements having a d:NumericDomainReference child -->
-    <xsl:template
-        match="d:QuestionItem[d:NumericDomainReference]" mode="enoddi:get-suffix">
+    <xsl:template match="d:QuestionItem[d:NumericDomainReference]" mode="enoddi:get-suffix">
         <xsl:apply-templates select="d:NumericDomainReference" mode="enoddi:get-suffix"/>
     </xsl:template>
     <!-- Getting suffix for d:NumericDomainReference having a r:ManagedNumericRepresentation -->
-    <xsl:template match="d:NumericDomainReference[r:ManagedNumericRepresentation]" mode="enoddi:get-suffix">
+    <xsl:template match="d:NumericDomainReference[r:ManagedNumericRepresentation]"
+        mode="enoddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
             <xsl:when test="r:ManagedNumericRepresentation//r:Content/@xml:lang">
-                <xsl:value-of select="r:ManagedNumericRepresentation//r:Content[@xml:lang=$language]"/>
+                <xsl:value-of
+                    select="r:ManagedNumericRepresentation//r:Content[@xml:lang=$language]"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="r:ManagedNumericRepresentation//r:Content"/>        
+                <xsl:value-of select="r:ManagedNumericRepresentation//r:Content"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <!-- Getting levels of first dimension in d:QuestionGrid elements -->
     <xsl:template match="d:QuestionGrid" mode="enoddi:get-levels-first-dimension">
         <xsl:apply-templates select="d:GridDimension[@rank='1']" mode="enoddi:get-levels"/>
@@ -230,7 +222,7 @@
                 <dummy/>
             </xsl:for-each-group>
         </xsl:variable>
-        <xsl:variable name="nb-of-levels">
+        <xsl:variable name="number-of-levels">
             <xsl:value-of select="count($levels//dummy)"/>
         </xsl:variable>
         <xsl:sequence select="$levels/*"/>
@@ -284,7 +276,8 @@
 
     <!-- Getting the table line depending on an index number on d:QuestionGrid elements not having a @maximumAllowed attribute -->
     <!-- in their d:Roster descendant -->
-    <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]" mode="enoddi:get-table-line">
+    <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]"
+        mode="enoddi:get-table-line">
         <xsl:param name="index" tunnel="yes"/>
         <xsl:for-each
             select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)">
@@ -293,7 +286,7 @@
             <xsl:sequence select="."/>
         </xsl:for-each>
     </xsl:template>
-    
+
     <!-- Getting the table line for an l:Code element -->
     <xsl:template match="l:Code" mode="enoddi:get-table-line">
         <xsl:if test="parent::l:Code">
@@ -385,12 +378,15 @@
             <!-- The computation Item contains a chain corresponding to the variable. But it might not correspond exactly to this variable. -->
             <!-- Therefore, we modify the condition by deleting the potential false positive (same value followed by a dash or a number) -->
             <xsl:variable name="condition">
-                <xsl:value-of select="replace(r:CommandCode/r:Command/r:CommandContent/text(),concat($id,'(\-|[0-9])'),'')"/>
+                <xsl:value-of
+                    select="replace(r:CommandCode/r:Command/r:CommandContent/text(),concat($id,'(\-|[0-9])'),'')"
+                />
             </xsl:variable>
             <!-- If the modified condition still contains the value, then it's ok -->
             <xsl:if test="contains($condition,$id)">
                 <xsl:value-of
-                    select="enoddi:get-id(current()/d:InterviewerInstructionReference/d:Instruction)"/>
+                    select="enoddi:get-id(current()/d:InterviewerInstructionReference/d:Instruction)"
+                />
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
@@ -425,8 +421,9 @@
         </xsl:variable>
         <xsl:value-of select="$result"/>
     </xsl:template>
-    
-    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']" mode="enoddi:get-hideable-command">
+
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']"
+        mode="enoddi:get-hideable-command">
         <xsl:variable name="filters">
             <xsl:for-each select="ancestor::d:Sequence[d:TypeOfSequence/text()='hideable']">
                 <xsl:text> and </xsl:text>
@@ -451,19 +448,23 @@
         <xsl:variable name="id">
             <xsl:apply-templates select="." mode="enoddi:get-id"/>
         </xsl:variable>
-        <xsl:value-of select="substring-after(//d:Expression/r:Command/r:CommandContent[contains(text(),$id)]/text(),'=')"
+        <xsl:value-of
+            select="substring-after(//d:Expression/r:Command/r:CommandContent[contains(text(),$id)]/text(),'=')"
         />
     </xsl:template>
-    
+
     <!-- Getting the message for a 'HH' type d:DateTimeDomain element having a @regExp attribute -->
-    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='HH' and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]"
+    <xsl:template
+        match="d:DateTimeDomain[r:DateFieldFormat/text()='HH' and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]"
         mode="enoddi:get-message" priority="2">
         <xsl:variable name="apos">'</xsl:variable>
-        <xsl:value-of select="concat('Le nombre d',$apos,'heures doit être compris entre 0 et 99.')"/>
+        <xsl:value-of select="concat('Le nombre d',$apos,'heures doit être compris entre 0 et 99.')"
+        />
     </xsl:template>
-    
+
     <!-- Getting the message for a 'mm' type d:DateTimeDomain element having a @regExp attribute -->
-    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='mm' and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]"
+    <xsl:template
+        match="d:DateTimeDomain[r:DateFieldFormat/text()='mm' and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]"
         mode="enoddi:get-message" priority="2">
         <xsl:value-of select="string('Le nombre de minutes doit être compris entre 0 et 59.')"/>
     </xsl:template>

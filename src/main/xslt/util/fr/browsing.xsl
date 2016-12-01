@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding='utf-8'?>
-<xsl:transform version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
-    xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="xd"
+    version="2.0">
 
     <!-- This stylesheet is applied to basic-form.tmp (previously created in the ddi2fr target) -->
     <!-- It adds orbeon related elements to enable the desired navigation. -->
     <!-- Transformation used to add the home page on the different questionnaires. -->
 
-    <xsl:output method="xml" indent="yes" encoding="utf-8"/>    
+    <!-- The output file generated will be xml type -->
+    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    
+    <xsl:strip-space elements="*"/>
 
     <!-- The campaign -->
     <xsl:param name="campaign" as="xs:string"/>
@@ -27,7 +32,7 @@
     </xsl:variable>
 
     <!-- Counting the number of modules and storing it -->
-    <xsl:variable name="nb-of-modules">
+    <xsl:variable name="number-of-modules">
         <xsl:value-of select="count(//fr:body/*[name()='fr:section' or name()='xf:repeat'])"/>
         <!--<xsl:value-of
             select="count(//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and child::*])"
@@ -38,7 +43,7 @@
         <xsl:apply-templates select="xhtml:html"/>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Default template for every element and every attribute, simply coying to the output file</xd:p>
         </xd:desc>
@@ -168,7 +173,7 @@
             </xf:instance>
 
             <!-- The corresponding binds -->
-            <xf:bind xmlns:dataModel="java:org.orbeon.oxf.fb.DataModel" id="fr-form-util-binds"
+            <xf:bind id="fr-form-util-binds"
                 ref="instance('fr-form-util')">
                 <xf:bind id="previous-bind"
                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2)"
@@ -502,22 +507,12 @@
                     <xf:output id="progress-percent"
                         ref="instance('fr-form-util')/ProgressPercent"/> %</xhtml:span>
             </xhtml:div>
-            <!--<xhtml:div class="menu">
-                            <xhtml:ul>
-                                <xsl:apply-templates select="eno:child-fields($source-context)"
-                                    mode="source">
-                                    <xsl:with-param name="driver"
-                                        select="eno:append-empty-element('menu', .)" tunnel="yes"/>
-                                    <xsl:with-param name="languages" select="$languages"
-                                        tunnel="yes"/>
-                                </xsl:apply-templates>
-                            </xhtml:ul>
-                        </xhtml:div>-->
+
             <!-- Using a switch in order to display each module on the same page -->
             <xsl:apply-templates select="*[not(name()='fr:section') and not(name()='xf:repeat')]"/>
             <xf:switch id="section-body">
                 <xsl:apply-templates select="*[name()='fr:section' or name()='xf:repeat']"/>
-                <xf:case id="{string(number($nb-of-modules)+1)}">
+                <xf:case id="{string(number($number-of-modules)+1)}">
                     <fr:section id="validation-control" bind="validation-bind" name="validation">
                         <xf:label ref="$form-resources/Validation/label"/>
                         <xhtml:div class="center">
@@ -574,7 +569,7 @@
                         </xhtml:div>
                     </fr:section>
                 </xf:case>
-                <xf:case id="{string(number($nb-of-modules)+2)}">
+                <xf:case id="{string(number($number-of-modules)+2)}">
                     <fr:section id="confirmation-control" bind="confirmation-bind"
                         name="confirmation">
                         <xf:label ref="$form-resources/Confirmation/label"/>
@@ -621,7 +616,7 @@
                         </xhtml:div>
                     </fr:section>
                 </xf:case>
-                <xf:case id="{string(number($nb-of-modules)+3)}">
+                <xf:case id="{string(number($number-of-modules)+3)}">
                     <fr:section id="end-control" bind="end-bind" name="end">
                         <xf:label ref="$form-resources/End/label"/>
                         <xhtml:div class="center center-body">
@@ -695,7 +690,7 @@
 
     <!-- Wrapping the existing modules in a xf:case -->
     <xsl:template match="fr:section[parent::fr:body] | xf:repeat[parent::fr:body]">
-        <xsl:variable name="index" select="number($nb-of-modules)-count(following-sibling::fr:section)-count(following-sibling::xf:repeat)"/>
+        <xsl:variable name="index" select="number($number-of-modules)-count(following-sibling::fr:section)-count(following-sibling::xf:repeat)"/>
         <xf:case id="{$index}">
             <xsl:copy>
                 <xsl:apply-templates select="node() | @*"/>
@@ -703,40 +698,4 @@
         </xf:case>
     </xsl:template>
 
-
-    <!-- Never used, a menu. Moved from models.xsl : to redo. -->
-    <!--<xsl:template match="menu/module" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="languages" tunnel="yes"/>
-        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:variable name="index" select="string(number(enofr:get-index($source-context)))"/>
-        <xhtml:li>
-            <xsl:variable name="cssDynamique">
-                <xsl:value-of
-                    select="concat('{if(instance(&quot;fr-form-instance&quot;)/stromae/util/sectionCourante = string(&quot;',$index,'&quot;)) then (&quot;active&quot;) else()}')"
-                />
-            </xsl:variable>
-            <xf:trigger class="{$cssDynamique}">
-                <xf:label ref="$form-resources/{$name}/label"/>
-                <!-\-                <xf:action ev:event="DOMActivate"
-                    if="instance('fr-form-instance')/stromae/util/sectionCourante">
-                    <xf:dispatch name="ChangementPage">
-                        <xsl:attribute name="target">
-                            <xsl:value-of
-                                select="string('{concat(instance(&quot;fr-form-instance&quot;)/stromae/util/nomSectionCourante,&quot;-control&quot;)}')"
-                            />
-                        </xsl:attribute>
-                    </xf:dispatch>
-                    <xf:action
-                        if="xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())">
-                        <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
-                            value="{$index}"/>
-                        <xf:toggle case="{$choix}"/>
-                        <xf:send submission="enregistrer"/>
-                    </xf:action>
-                </xf:action>-\->
-            </xf:trigger>
-        </xhtml:li>
-    </xsl:template>-->
-
-</xsl:transform>
+</xsl:stylesheet>

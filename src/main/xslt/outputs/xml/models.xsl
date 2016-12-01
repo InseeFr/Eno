@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno"
-    xmlns:enoxml="http://xml.insee.fr/apps/eno/xml" exclude-result-prefixes="#all"
+    xmlns:enoxml="http://xml.insee.fr/apps/eno/xml"
     version="2.0">
 
     <!-- This xsl stylesheet is used in the fods2xsl target (imported by fods2xml.xsl)-->
@@ -11,14 +11,9 @@
 
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p><xd:b>Created on:</xd:b> Jan 6, 2013</xd:p>
             <xd:p>Generation of XML!</xd:p>
         </xd:desc>
     </xd:doc>
-
-    <!-- The output file generated will be xml type -->
-    <xsl:output name="concise-xml" method="xml" indent="no" omit-xml-declaration="yes"
-        exclude-result-prefixes="#all"/>
 
     <xd:doc>
         <xd:desc>

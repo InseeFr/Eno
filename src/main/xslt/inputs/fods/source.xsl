@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:enofods="http://xml.insee.fr/apps/eno/fods"
     xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
-    xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" exclude-result-prefixes="xs xd"
-    version="2.0">
+    xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" version="2.0">
 
     <!-- This xsl stylesheet is used in the fods2xsl target (imported by fods2xml.xsl)-->
     <!-- Its purpose is to retrieve several elements in a fods file (like cell content, column name etc) -->
     <!-- The information retrieved will then be used in fods2xml.xsl in order to create the output xml file -->
 
-    <!-- The output file generated will be xml type -->
-    <xsl:output method="xml" indent="yes"/>
-
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p><xd:b>Created on:</xd:b> Jan 6, 2013</xd:p>
             <xd:p>Generation from fods</xd:p>
         </xd:desc>
     </xd:doc>

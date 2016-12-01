@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding='utf-8'?>
-<xsl:transform version="2.0" xmlns:i="ddi:instance:3_2" xmlns:g="ddi:group:3_2"
-    xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2" xmlns:a="ddi:archive:3_2"
-    xmlns:l="ddi:logicalproduct:3_2" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:d="ddi:datacollection:3_2"
+    xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
+    xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    version="2.0">
 
     <!-- This xsl stylesheet will be applied to the -cleaned suffix file (having the questionnaire's name) -->
     <!-- The goal here is to add numbers to questions, while identifying the different depth (subQuestions...) -->
@@ -12,7 +12,8 @@
     <xsl:param name="parameters-file"/>
 
     <!-- The output file generated will be xml type -->
-    <xsl:output method="xml" indent="no" encoding="UTF-8"/>
+    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    
     <xsl:strip-space elements="*"/>
 
     <xsl:variable name="style">
@@ -22,7 +23,7 @@
     <xsl:variable name="number-free-filter" select="$style/Title/Question/NotNumberedLastFilter"/>
 
     <!-- Namespace required for xsl documentation -->
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Root template, applying all the children templates</xd:p>
         </xd:desc>
@@ -31,9 +32,10 @@
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
-            <xd:p>Default template for every element and every attribute, getting to the child</xd:p>
+            <xd:p>Default template for every element and every attribute, getting to the
+                child</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="node() | @*" mode="#all">
@@ -42,22 +44,25 @@
         </xsl:copy>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Template used to add numbers to sequences</xd:p>
         </xd:desc>
     </xd:doc>
     <!-- For every 'module', 'submodule' or 'group' type d:Sequence, prefixing the title -->
-    <xsl:template match="d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']/r:Label">
+    <xsl:template
+        match="d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']/r:Label">
         <xsl:variable name="level" select="parent::d:Sequence/d:TypeOfSequence"/>
         <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@name=$level]"/>
-        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$level]/@name"/>
-        <xsl:variable name="gd-parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[2]/@name=$level]/@name"/>
+        <xsl:variable name="parent-level"
+            select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$level]/@name"/>
+        <xsl:variable name="gd-parent-level"
+            select="$style/Title/Sequence/Level[following-sibling::Level[2]/@name=$level]/@name"/>
 
         <xsl:variable name="number">
             <xsl:apply-templates select="parent::d:Sequence" mode="calculate-number"/>
         </xsl:variable>
-        
+
         <xsl:variable name="prefix">
             <xsl:choose>
                 <xsl:when test="$number=''">
@@ -68,7 +73,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        
+
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" mode="modif-title">
                 <xsl:with-param name="prefix" select="$prefix" tunnel="yes"/>
@@ -76,7 +81,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Template used to add numbers to questions</xd:p>
         </xd:desc>
@@ -84,31 +89,41 @@
     <!-- For every d:LiteralText wrapped in a d:QuestionText -->
     <xsl:template match="d:QuestionText/d:LiteralText">
         <!-- The goal is to calculate the prefix, concatenation of element's numbers -->
-        
+
         <xsl:variable name="question-seq-level">
             <xsl:choose>
                 <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='group']">group</xsl:when>
-                <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='submodule']">submodule</xsl:when>
+                <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='submodule']"
+                    >submodule</xsl:when>
                 <xsl:otherwise>module</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$question-seq-level]/@name"/>
-        <xsl:variable name="styleQuest" select="$style/Title/Question/Level[@name=$question-seq-level]"/>
-        
+        <xsl:variable name="parent-level"
+            select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$question-seq-level]/@name"/>
+        <xsl:variable name="styleQuest"
+            select="$style/Title/Question/Level[@name=$question-seq-level]"/>
+
         <xsl:variable name="parent-number">
             <xsl:if test="$styleQuest/NumParent !='N'">
-                <xsl:apply-templates select="ancestor::d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']
-                    [1]" mode="calculate-number"/>
+                <xsl:apply-templates
+                    select="ancestor::d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']
+                    [1]"
+                    mode="calculate-number"/>
             </xsl:if>
         </xsl:variable>
 
         <xsl:variable name="number">
-            <xsl:if test="enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
+            <xsl:if
+                test="enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
                 <!-- Counting the questions that aren't subQuestions -->
-<!--                <xsl:number count="d:ControlConstructReference[d:QuestionConstruct and (enoddi:is-subquestion(d:QuestionConstruct,$niveauSeqQuest))]" 
+                <!--                <xsl:number count="d:ControlConstructReference[d:QuestionConstruct and (enoddi:is-subquestion(d:QuestionConstruct,$niveauSeqQuest))]" 
                     level="any" format="{$styleQuest/StyleNumQuest}" from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$niveauSeqQuest]]"/>
--->                <xsl:number count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))=0]" 
-                    level="any" format="{$styleQuest/StyleNumQuest}" from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"/>
+-->
+                <xsl:number
+                    count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))=0]"
+                    level="any" format="{$styleQuest/StyleNumQuest}"
+                    from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"
+                />
             </xsl:if>
         </xsl:variable>
 
@@ -121,46 +136,51 @@
                 </xsl:if>
                 <xsl:value-of select="concat($number,$styleQuest/PostNumQuest)"/>
             </xsl:if>
-        </xsl:variable> 
-        
+        </xsl:variable>
+
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" mode="modif-title">
                 <xsl:with-param name="prefix" select="$prefix" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
-    
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+
+    <xd:doc>
         <xd:desc>
             <xd:p>Template used to get recursively the sequence's number</xd:p>
         </xd:desc>
-    </xd:doc>    
+    </xd:doc>
     <xsl:template match="d:Sequence" mode="calculate-number">
         <xsl:variable name="level" select="d:TypeOfSequence"/>
         <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@name=$level]"/>
-        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$level]/@name"/>
-        
+        <xsl:variable name="parent-level"
+            select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$level]/@name"/>
+
         <xsl:variable name="number">
             <xsl:if test="not(index-of($number-free-seq,r:ID)>0)">
-                <xsl:number count="d:Sequence[d:TypeOfSequence/text()=$level and not(index-of($number-free-seq,r:ID)>0)]" 
-                    level="any" format="{$seq-style/StyleNumSeq}" from="d:Sequence[d:TypeOfSequence/text()=$parent-level]"/>
+                <xsl:number
+                    count="d:Sequence[d:TypeOfSequence/text()=$level and not(index-of($number-free-seq,r:ID)>0)]"
+                    level="any" format="{$seq-style/StyleNumSeq}"
+                    from="d:Sequence[d:TypeOfSequence/text()=$parent-level]"/>
             </xsl:if>
         </xsl:variable>
         <xsl:variable name="parent-number">
             <xsl:if test="$seq-style/NumParent !='N'">
-                <xsl:apply-templates select="ancestor::d:Sequence[d:TypeOfSequence/text()=$parent-level]" mode="calculate-number"/>
+                <xsl:apply-templates
+                    select="ancestor::d:Sequence[d:TypeOfSequence/text()=$parent-level]"
+                    mode="calculate-number"/>
             </xsl:if>
         </xsl:variable>
-        
+
         <xsl:if test="$number!=''">
             <xsl:if test="$parent-number!=''">
                 <xsl:value-of select="concat($parent-number,$seq-style/PostNumParentSeq)"/>
             </xsl:if>
             <xsl:value-of select="$number"/>
         </xsl:if>
-    </xsl:template>    
-    
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    </xsl:template>
+
+    <xd:doc>
         <xd:desc>
             <xd:p>Function used to identify if 2 lists have common elements</xd:p>
         </xd:desc>
@@ -182,7 +202,7 @@
         <xsl:value-of select="$isCommon"/>
     </xsl:function>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
             <xd:p>Function used to identify if a question is a subQuestion</xd:p>
         </xd:desc>
@@ -195,28 +215,34 @@
     <xsl:function name="enoddi:is-subquestion">
         <xsl:param name="context"/>
         <xsl:param name="seq-level"/>
-        
+
         <!-- Gets the module, submodule or group (depending on the $seq-level) of which the question belongs in order to only get the useful filters -->
         <xsl:variable name="ancestors">
-            <xsl:copy-of select="root($context)//d:Sequence[d:TypeOfSequence=$seq-level and descendant::d:QuestionConstruct=$context]"/>
+            <xsl:copy-of
+                select="root($context)//d:Sequence[d:TypeOfSequence=$seq-level and descendant::d:QuestionConstruct=$context]"
+            />
         </xsl:variable>
-        <xsl:value-of select="count($ancestors//d:ControlConstructReference
+        <xsl:value-of
+            select="count($ancestors//d:ControlConstructReference
             [d:IfThenElse//d:TypeOfSequence[text()='hideable']
             and descendant::d:QuestionConstruct[r:ID=$context/r:ID]
             and (following-sibling::d:ControlConstructReference[d:IfThenElse or d:QuestionConstruct]
             or index-of($number-free-filter,d:IfThenElse/r:ID)>0)
             and preceding-sibling::d:ControlConstructReference[d:QuestionConstruct]]
             [enoddi:is-common(preceding-sibling::d:ControlConstructReference[d:QuestionConstruct][1]//r:TargetParameterReference/r:ID,
-            d:IfThenElse/d:IfCondition//r:SourceParameterReference/r:ID)])"/>
+            d:IfThenElse/d:IfCondition//r:SourceParameterReference/r:ID)])"
+        />
     </xsl:function>
 
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+    <xd:doc>
         <xd:desc>
-            <xd:p>Template used to add code before labels from dropdown lists and tables headers</xd:p>
+            <xd:p>Template used to add code before labels from dropdown lists and tables
+                headers</xd:p>
         </xd:desc>
     </xd:doc>
     <!-- When l:Code is within a d:GridDimension where attributes @displyCode and displayLabel are true : adding labels -->
-    <xsl:template match="l:Code[ancestor::d:GridDimension[@displayCode='true' and @displayLabel='true']]
+    <xsl:template
+        match="l:Code[ancestor::d:GridDimension[@displayCode='true' and @displayLabel='true']]
         /r:CategoryReference/l:Category/r:Label/r:Content">
         <xsl:variable name="prefix">
             <xsl:value-of select="concat(../../../../r:Value,' - ')"/>
@@ -245,7 +271,7 @@
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="xhtml:span[@class='block']" mode="modif-title" priority="2">
         <xsl:param name="prefix" tunnel="yes"/>
         <xsl:copy>
@@ -261,4 +287,4 @@
         <xsl:value-of select="concat($prefix,.)"/>
     </xsl:template>
 
-</xsl:transform>
+</xsl:stylesheet>

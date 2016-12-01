@@ -5,7 +5,7 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoxsl="http://xml.insee.fr/apps/eno/xsl"
-    exclude-result-prefixes="xd" version="2.0">
+    version="2.0">
 
     <!-- This xsl stylesheet is used in the xml2xsl target (imported by xml2xsl.xsl)-->
     <!-- It creates the different templates, associates the appropriate match from what was defined is the xml.tmp file, -->
@@ -13,14 +13,9 @@
 
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p><xd:b>Created on:</xd:b> Jan 6, 2013</xd:p>
             <xd:p>Generation of XSL!</xd:p>
         </xd:desc>
     </xd:doc>
-
-    <!-- The output file generated will be xml type -->
-    <xsl:output name="concise-xml" method="xml" indent="no" omit-xml-declaration="yes"
-        exclude-result-prefixes="#all"/>
 
     <xd:doc>
         <xd:desc>
