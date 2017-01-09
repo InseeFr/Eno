@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml" 
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:g="ddi:group:3_2"
     xmlns:s="ddi:studyunit:3_2" version="2.0">
@@ -149,6 +150,40 @@
         <xsl:apply-templates
             select="$references//*[r:ID = $ID and not(ancestor-or-self::node()[ends-with(name(), 'Reference')])]"
         />
+    </xsl:template>
+
+<xd:doc>
+        <xd:desc>
+            <xd:p>Instruction are not allowed in Category for DDI 3.2. This template allows to insert tooltips into arrays' labels</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="xhtml:a">
+        <xsl:variable name="ref" select="replace(@href,'#','')"/>
+        <xsl:variable name="language" select="ancestor::*[@xml:lang][1]/@xml:lang"/>
+        
+        <xsl:choose>
+            <xsl:when test="//*[@id=$ref 
+                                and ancestor-or-self::*[@xml:lang][1]/@xml:lang=$language 
+                                and ancestor::d:Instruction/d:InstructionName/r:String[@xml:lang=$language]='tooltip']">
+                <xsl:element name="xhtml:span">
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="normalize-space(//*[@id=$ref 
+                                                                    and ancestor-or-self::*[@xml:lang][1]/@xml:lang=$language 
+                                                                    and ancestor::d:Instruction/d:InstructionName/r:String[@xml:lang=$language]='tooltip'])"/>
+                    </xsl:attribute>
+                    <xsl:text>&#160;</xsl:text>
+                    <xsl:element name="img">
+                        <xsl:attribute name="src" select="'/img/Help-browser.svg.png'"/>
+                    </xsl:element>
+                    <xsl:text>&#160;</xsl:text>
+                </xsl:element>            
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="node() | @*"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>

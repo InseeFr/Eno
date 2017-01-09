@@ -365,7 +365,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="*[not(ends-with(name(),'-loop'))]" mode="page-bind">
+    <xsl:template match="*[not(ends-with(name(),'-Loop'))]" mode="page-bind">
         <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}"
             ref="{name()}">
             <xf:calculate
@@ -376,13 +376,14 @@
                 <xsl:for-each
                     select="//xf:bind[@name=$module-name]//xf:constraint[@level='warning']">
                     <xsl:if test="not(position()=1)">
-                        <xsl:text> and </xsl:text>
+                        <xsl:text>) and (</xsl:text>
                     </xsl:if>
-                    <xsl:value-of select="replace(@value,'//','instance(&#34;fr-form-instance&#34;)//')"/>
+                    <xsl:value-of select="replace(replace(@value,'//','instance(&#34;fr-form-instance&#34;)//'),
+                        '\[1\]instance\(&#34;fr-form-instance&#34;\)','[1]')"/>
                 </xsl:for-each>
             </xsl:variable>
             <xsl:if test="$constraint[not(text()='')]">
-                <xf:constraint value="{$constraint/text()}"/>
+                <xf:constraint value="{concat('(',$constraint/text(),')')}"/>
             </xsl:if>
         </xf:bind>
     </xsl:template>
