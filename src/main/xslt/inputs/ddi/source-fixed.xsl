@@ -64,8 +64,31 @@
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
         mode="enoddi:get-label">
         <xsl:element name="xhtml:p">
-            <xsl:for-each
-                select="d:QuestionText/d:LiteralText/d:Text | d:InterviewerInstructionReference/d:Instruction/d:InstructionText/d:LiteralText/d:Text">
+            <xsl:element name="xhtml:span">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="string('block')"/>
+                </xsl:attribute>
+                <xsl:if test="d:QuestionText/d:LiteralText/d:Text/xhtml:p/@id">
+                    <xsl:attribute name="id" select="d:QuestionText/d:LiteralText/d:Text/xhtml:p/@id"/>
+                </xsl:if>
+                <xsl:apply-templates select="d:QuestionText/d:LiteralText/d:Text/node()[not(name()='xhtml:p')] | d:QuestionText/d:LiteralText/d:Text/xhtml:p/node()"
+                    mode="lang-choice"/>
+                <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[d:InstructionName/r:String/text()='tooltip']
+                                                                                      /d:InstructionText/d:LiteralText/d:Text">
+                    <xsl:element name="xhtml:span">
+                        <xsl:attribute name="title">
+                            <xsl:apply-templates select="node()[not(name()='xhtml:p')] | xhtml:p/node()"
+                                mode="lang-choice"/>
+                        </xsl:attribute>
+                        <xsl:text>&#160;</xsl:text>
+                        <xsl:element name="img">
+                            <xsl:attribute name="src" select="'/img/Help-browser.svg.png'"/>
+                        </xsl:element>
+                        <xsl:text>&#160;</xsl:text>
+                    </xsl:element>
+                </xsl:for-each>
+            </xsl:element>
+            <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[not(d:InstructionName/r:String[text()='tooltip'])]/d:InstructionText/d:LiteralText/d:Text">
                 <xsl:element name="xhtml:span">
                     <xsl:attribute name="class">
                         <xsl:value-of select="string('block')"/>
@@ -78,6 +101,23 @@
                 </xsl:element>
             </xsl:for-each>
         </xsl:element>
+    </xsl:template>
+
+    <!-- Inserting the Tooltip label into the Sequence label -->
+    <xsl:template match="d:Sequence[d:InterviewerInstructionReference/d:Instruction/d:InstructionName/r:String[text()='tooltip']]" mode="enoddi:get-label" priority="2">
+        <xsl:apply-templates select="r:Label" mode="lang-choice"/>
+        <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[d:InstructionName/r:String='tooltip']">
+            <xsl:element name="xhtml:span">
+                <xsl:attribute name="title">
+                    <xsl:apply-templates select="d:InstructionText/d:LiteralText/d:Text" mode="lang-choice"/>
+                </xsl:attribute>
+                <xsl:text>&#160;</xsl:text>
+                <xsl:element name="img">
+                    <xsl:attribute name="src" select="'/img/Help-browser.svg.png'"/>
+                </xsl:element>
+                <xsl:text>&#160;</xsl:text>
+            </xsl:element>            
+        </xsl:for-each>
     </xsl:template>
 
     <!-- Getting the label from a d:QuestionGrid OR d:QuestionItem having a d:Instruction of 'format' type -->

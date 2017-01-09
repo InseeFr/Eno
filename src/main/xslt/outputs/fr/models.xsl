@@ -797,6 +797,9 @@
         <xsl:param name="languages" tunnel="yes"/>
         <xhtml:th colspan="{enofr:get-colspan($source-context)}"
             rowspan="{enofr:get-rowspan($source-context)}">
+            <xsl:if test="enofr:get-code-depth($source-context)!='1' and enofr:get-code-depth($source-context)!=''">
+                <xsl:attribute name="class" select="concat('depth',enofr:get-code-depth($source-context))"/>
+            </xsl:if>
             <xsl:variable name="cell-text">
                 <Body>
                     <xf-output/>
@@ -936,7 +939,7 @@
             </xhtml:tbody>
         </xhtml:table>
         <xf:trigger>
-            <xf:label>Ajouter</xf:label>
+            <xf:label>Ajouter une ligne</xf:label>
             <xf:insert ev:event="DOMActivate" context="."
                 nodeset="{concat('//',enofr:get-name($source-context),'-RowLoop')}"
                 origin="{concat('instance(&#34;fr-form-loop-model&#34;)/',enofr:get-name($source-context),'-RowLoop')}"
