@@ -27,7 +27,7 @@
     <!-- Saving the CurrentSection in a variable -->
     <xsl:variable name="choice">
         <xsl:value-of
-            select="string('{instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection}')"
+            select="'{instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection}'"
         />
     </xsl:variable>
 
@@ -284,7 +284,7 @@
                     <xf:dispatch name="DOMFocusOut">
                         <xsl:attribute name="target">
                             <xsl:value-of
-                                select="string('{concat(context()/@idVariable,&quot;-control&quot;)}')"/>
+                                select="'{concat(context()/@idVariable,&quot;-control&quot;)}'"/>
                         </xsl:attribute>
                     </xf:dispatch>
                 </xf:action>
@@ -501,7 +501,7 @@
                     <xhtml:progress id="progress" max="100">
                         <xsl:attribute name="value">
                             <xsl:value-of
-                                select="string('{instance(&quot;fr-form-util&quot;)/ProgressPercent}')"
+                                select="'{instance(&quot;fr-form-util&quot;)/ProgressPercent}'"
                             />
                         </xsl:attribute>
                     </xhtml:progress>
@@ -560,7 +560,7 @@
                                         envoyé à </xsl:text>l'Insee</xhtml:b>.</xhtml:p>
                                 <xsl:variable name="link">
                                     <xsl:value-of
-                                        select="string('{concat(xxf:property(&#34;url-orbeon&#34;),xxf:property(&#34;lien-deconnexion&#34;))}')"
+                                        select="'{concat(xxf:property(&#34;url-orbeon&#34;),xxf:property(&#34;lien-deconnexion&#34;))}'"
                                     />
                                 </xsl:variable>
                                 <xhtml:p class="center-body">

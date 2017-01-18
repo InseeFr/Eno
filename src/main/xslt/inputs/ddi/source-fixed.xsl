@@ -66,7 +66,7 @@
         <xsl:element name="xhtml:p">
             <xsl:element name="xhtml:span">
                 <xsl:attribute name="class">
-                    <xsl:value-of select="string('block')"/>
+                    <xsl:value-of select="'block'"/>
                 </xsl:attribute>
                 <xsl:if test="d:QuestionText/d:LiteralText/d:Text/xhtml:p/@id">
                     <xsl:attribute name="id" select="d:QuestionText/d:LiteralText/d:Text/xhtml:p/@id"/>
@@ -91,7 +91,7 @@
             <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[not(d:InstructionName/r:String[text()='tooltip'])]/d:InstructionText/d:LiteralText/d:Text">
                 <xsl:element name="xhtml:span">
                     <xsl:attribute name="class">
-                        <xsl:value-of select="string('block')"/>
+                        <xsl:value-of select="'block'"/>
                     </xsl:attribute>
                     <xsl:if test="xhtml:p/@id">
                         <xsl:attribute name="id" select="xhtml:p/@id"/>
@@ -342,7 +342,7 @@
 
     <!-- For codes belonging to a 1-dimension of several levels -->
     <xsl:template
-        match="l:Code[max(ancestor::d:GridDimension[@rank='1']//l:Code[not(child::l:Code)]/count(ancestor::l:CodeList | ancestor::l:Code))>1]"
+        match="l:Code[max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList | ancestor::l:Code))>1]"
         mode="enoddi:get-colspan" priority="1">
         <!-- Getting the depth-level of parents codes -->
         <xsl:variable name="parents">
@@ -353,11 +353,11 @@
         <!-- Getting the depth-level of children codes -->
         <xsl:variable name="children">
             <xsl:value-of
-                select="if (string(max(.//l:Code[not(child::l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))-count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) !='') then max(.//l:Code[not(child::l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))-count(ancestor::l:CodeList[r:Label] | ancestor::l:Code) else 0"
+                select="if (string(max(.//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))-count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) !='') then max(.//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))-count(ancestor::l:CodeList[r:Label] | ancestor::l:Code) else 0"
             />
         </xsl:variable>
         <xsl:value-of
-            select="max(ancestor::d:GridDimension[@rank='1']//l:Code[not(child::l:Code)]/count(ancestor::l:CodeList | ancestor::l:Code))-number($parents)-number($children)+1"
+            select="max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList | ancestor::l:Code))-number($parents)-number($children)+1"
         />
     </xsl:template>
 
@@ -376,14 +376,14 @@
             />
         </xsl:variable>
         <xsl:value-of
-            select="max(ancestor::d:GridDimension[@rank='1']/following-sibling::d:GridDimension[@rank='2']//l:Code[not(child::l:Code)]/count(ancestor::l:CodeList[r:Label]))+1-number($label-or-no)"
+            select="max(ancestor::d:GridDimension[@rank='1']/following-sibling::d:GridDimension[@rank='2']//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label]))+1-number($label-or-no)"
         />
     </xsl:template>
 
     <!--Concerning the columns, when l:Code has a l:Code (representing a box dispatched in sub-boxes), we get the number of children l:Code -->
-    <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='1'] and child::l:Code]"
+    <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='1'] and l:Code]"
         mode="enoddi:get-rowspan" priority="1">
-        <xsl:value-of select="count(descendant::l:Code[not(child::l:Code)])"/>
+        <xsl:value-of select="count(descendant::l:Code[not(l:Code)])"/>
     </xsl:template>
 
     <!-- WARNING -->
@@ -398,7 +398,7 @@
     <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='2']]" mode="enoddi:get-rowspan"
         priority="1">
         <xsl:value-of
-            select="max(ancestor::d:GridDimension[@rank='2']//l:Code[not(child::l:Code)]/count(ancestor::l:CodeList[r:Label]))+1-count(ancestor::l:CodeList[r:Label])"
+            select="max(ancestor::d:GridDimension[@rank='2']//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label]))+1-count(ancestor::l:CodeList[r:Label])"
         />
     </xsl:template>
 
@@ -506,7 +506,7 @@
     <xsl:template
         match="d:DateTimeDomain[r:DateFieldFormat/text()='mm' and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]"
         mode="enoddi:get-message" priority="2">
-        <xsl:value-of select="string('Le nombre de minutes doit être compris entre 0 et 59.')"/>
+        <xsl:text>Le nombre de minutes doit être compris entre 0 et 59.</xsl:text>
     </xsl:template>
 
 </xsl:stylesheet>

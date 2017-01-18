@@ -972,7 +972,7 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:attribute name="xxf:order">
-                <xsl:value-of select="string('label control hint help alert')"/>
+                <xsl:value-of select="'label control hint help alert'"/>
             </xsl:attribute>
             <xsl:if test="enofr:get-length($source-context)">
                 <xsl:attribute name="xxf:maxlength">
@@ -1075,10 +1075,10 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:attribute name="class">
-                <xsl:value-of select="string('double-duration')"/>
+                <xsl:value-of select="'double-duration'"/>
             </xsl:attribute>
             <xsl:attribute name="xxf:order">
-                <xsl:value-of select="string('label control hint help alert')"/>
+                <xsl:value-of select="'label control hint help alert'"/>
             </xsl:attribute>
             <xsl:if test="enofr:get-length($source-context)">
                 <xsl:attribute name="xxf:maxlength">
@@ -1123,10 +1123,10 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:attribute name="class">
-                <xsl:value-of select="string('double-duration')"/>
+                <xsl:value-of select="'double-duration'"/>
             </xsl:attribute>
             <xsl:attribute name="xxf:order">
-                <xsl:value-of select="string('label control hint help alert')"/>
+                <xsl:value-of select="'label control hint help alert'"/>
             </xsl:attribute>
             <xsl:if test="enofr:get-length($source-context)">
                 <xsl:attribute name="xxf:maxlength">
