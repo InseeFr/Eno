@@ -175,7 +175,7 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="target">
-                <xsl:value-of select="string('_blank')"/>
+                <xsl:value-of select="'_blank'"/>
             </xsl:attribute>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
