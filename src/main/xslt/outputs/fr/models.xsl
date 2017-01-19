@@ -131,7 +131,7 @@
                         <xsl:for-each select="$languages">
                             <xf:bind id="{concat('bind-resource-',.)}"
                                 name="{concat('resource-',.)}"
-                                ref="{concat('resource[@xml:lang=',$apos,.,$apos,']')}">
+                                ref="{concat('resource[@xml:lang=''',.,''']')}">
                                 <xsl:apply-templates select="eno:child-fields($source-context)"
                                     mode="source">
                                     <xsl:with-param name="driver"

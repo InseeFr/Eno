@@ -119,7 +119,7 @@
             </xsl:call-template>
         </xsl:if>
         <xsl:if test="number($min) = number($max)">
-            <xsl:value-of select="replace($modified-command,'&#8709;','&#39;&#39;&#39;&#39;')"/>
+            <xsl:value-of select="replace($modified-command,'∅','''''')"/>
         </xsl:if>
     </xsl:template>
 
