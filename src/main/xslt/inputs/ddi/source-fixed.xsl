@@ -497,9 +497,7 @@
     <xsl:template
         match="d:DateTimeDomain[r:DateFieldFormat/text()='HH' and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]"
         mode="enoddi:get-message" priority="2">
-        <xsl:variable name="apos">'</xsl:variable>
-        <xsl:value-of select="concat('Le nombre d',$apos,'heures doit être compris entre 0 et 99.')"
-        />
+        <xsl:text>Le nombre d'heures doit être compris entre 0 et 99.</xsl:text>
     </xsl:template>
 
     <!-- Getting the message for a 'mm' type d:DateTimeDomain element having a @regExp attribute -->

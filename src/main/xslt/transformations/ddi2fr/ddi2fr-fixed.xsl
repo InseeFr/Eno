@@ -47,7 +47,7 @@
         </xsl:variable>
         <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($text,'&#248;')">
+            <xsl:for-each select="tokenize($text,'ø')">
                 <xsl:text>,</xsl:text>
                 <xsl:choose>
                     <xsl:when
@@ -58,7 +58,7 @@
                     <xsl:otherwise>
                         <xsl:text>'</xsl:text>
                         <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select='replace(.,"&apos;","&apos;&apos;")'/>
+                        <xsl:value-of select="replace(.,'''','''''')"/>
                         <xsl:text>'</xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -82,7 +82,7 @@
         </xsl:variable>
         <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($text,'&#248;')">
+            <xsl:for-each select="tokenize($text,'ø')">
                 <xsl:text>,</xsl:text>
                 <xsl:choose>
                     <xsl:when
@@ -93,7 +93,7 @@
                     <xsl:otherwise>
                         <xsl:text>'</xsl:text>
                         <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select='replace(.,"&apos;","&apos;&apos;")'/>
+                        <xsl:value-of select="replace(.,'''','''''')"/>
                         <xsl:text>'</xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -116,7 +116,7 @@
         </xsl:variable>
         <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($text,'&#248;')[not(.='')]">
+            <xsl:for-each select="tokenize($text,'ø')[not(.='')]">
                 <xsl:text>,</xsl:text>
                 <xsl:choose>
                     <xsl:when
@@ -127,7 +127,7 @@
                     <xsl:otherwise>
                         <xsl:text>'</xsl:text>
                         <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select='replace(.,"&apos;","&apos;&apos;")'/>
+                        <xsl:value-of select="replace(.,'''','''''')"/>
                         <xsl:text>'</xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -150,7 +150,7 @@
         </xsl:variable>
         <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($text,'&#248;')[not(.='')]">
+            <xsl:for-each select="tokenize($text,'ø')[not(.='')]">
                 <xsl:text>,</xsl:text>
                 <xsl:choose>
                     <xsl:when
@@ -161,7 +161,7 @@
                     <xsl:otherwise>
                         <xsl:text>'</xsl:text>
                         <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select='replace(.,"&apos;","&apos;&apos;")'/>
+                        <xsl:value-of select="replace(.,'''','''''')"/>
                         <xsl:text>'</xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
