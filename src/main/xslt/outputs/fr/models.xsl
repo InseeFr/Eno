@@ -163,6 +163,7 @@
                             <xsl:with-param name="driver"
                                 select="eno:append-empty-element('Body', .)" tunnel="yes"/>
                             <xsl:with-param name="languages" select="$languages" tunnel="yes"/>
+                            <xsl:with-param name="instance-ancestor" select="'instance(&quot;fr-form-instance&quot;)//'" tunnel="yes"/>
                         </xsl:apply-templates>
                     </fr:body>
                 </fr:view>
@@ -880,10 +881,16 @@
     <xsl:template match="Body//QuestionLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
-        <xf:repeat nodeset="{concat('//',enofr:get-name($source-context))}"
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        <xf:repeat nodeset="{concat($instance-ancestor,enofr:get-name($source-context))}"
             id="{enofr:get-name($source-context)}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <xsl:with-param name="instance-ancestor"
+                    select="concat($instance-ancestor,'*[name()=&quot;',enofr:get-name($source-context),
+                    '&quot; and count(preceding-sibling::*)=count(current()/ancestor::*[name()=&quot;',
+                    enofr:get-name($source-context),'&quot;]/preceding-sibling::*)]//')"
+                    tunnel="yes"/>
             </xsl:apply-templates>
         </xf:repeat>
     </xsl:template>
@@ -891,6 +898,7 @@
     <xsl:template match="Body//TableLoop" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="table-title">
             <Body>
                 <xf-output/>
@@ -925,13 +933,18 @@
                 </xsl:for-each>
             </xhtml:thead>
             <xhtml:tbody>
-                <xf:repeat nodeset="{concat('//',enofr:get-name($source-context),'-RowLoop')}"
+                <xf:repeat nodeset="{concat($instance-ancestor,enofr:get-name($source-context),'-RowLoop')}"
                     id="{concat(enofr:get-name($source-context),'-RowLoop')}">
                     <xhtml:tr>
                         <xsl:apply-templates select="enofr:get-body-line($source-context, 1)"
                             mode="source">
                             <xsl:with-param name="driver"
                                 select="$ancestors//*[not(child::*) and not(name() = 'driver')]"
+                                tunnel="yes"/>
+                            <xsl:with-param name="instance-ancestor"
+                                select="concat($instance-ancestor,'*[name()=&quot;',enofr:get-name($source-context),
+                                '&quot; and count(preceding-sibling::*)=count(current()/ancestor::*[name()=&quot;',
+                                enofr:get-name($source-context),'&quot;]/preceding-sibling::*)]//')"
                                 tunnel="yes"/>
                         </xsl:apply-templates>
                     </xhtml:tr>
@@ -950,6 +963,7 @@
     <xsl:template match="Body//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:element name="{translate(name(), '-', ':')}">
             <xsl:attribute name="id">
@@ -1021,9 +1035,9 @@
             This unchecks the first box that was checked -->
             <xsl:if test="self::xf-select">
                 <xf:action ev:event="xforms-value-changed"
-                    if="{concat('substring-after(instance(&quot;fr-form-instance&quot;)//',$name,',&quot; &quot;) ne &quot;&quot;')}">
-                    <xf:setvalue ref="{concat('instance(&quot;fr-form-instance&quot;)//',$name)}"
-                        value="{concat('substring-after(instance(&quot;fr-form-instance&quot;)//',$name,',&quot; &quot;)')}"
+                    if="{concat('substring-after(',$instance-ancestor,$name,',&quot; &quot;) ne &quot;&quot;')}">
+                    <xf:setvalue ref="{concat($instance-ancestor,$name)}"
+                        value="{concat('substring-after(',$instance-ancestor,$name,',&quot; &quot;)')}"
                     />
                 </xf:action>
             </xsl:if>
@@ -1031,10 +1045,19 @@
             <xsl:for-each select="enofr:get-relevant-dependencies($source-context)">
                 <xf:action ev:event="xforms-value-changed"
                     if="{concat('not(xxf:evaluate-bind-property(&quot;',.,'-bind&quot;,&quot;relevant&quot;))')}"
-                    iterate="{concat('instance(&quot;fr-form-instance&quot;)//',.,'//*')}">
+                    iterate="{concat($instance-ancestor,.,'/descendant::*')}">
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
             </xsl:for-each>
+            <!-- For each element which readonly status depends on this field, we erase the data if it became readonly -->
+            <xsl:for-each select="enofr:get-readonly-dependencies($source-context)">
+                <xf:action ev:event="xforms-value-changed"
+                    if="{concat('xxf:evaluate-bind-property(&quot;',.,'-bind&quot;,&quot;readonly&quot;)')}"
+                    iterate="{concat($instance-ancestor,.,'/descendant::*')}">
+                    <xf:setvalue ref="." value="''"/>
+                </xf:action>
+            </xsl:for-each>
+            
             <xsl:for-each select="enofr:get-constraint-dependencies($source-context)">
                 <xsl:element name="xf:dispatch">
                     <xsl:attribute name="ev:event">
