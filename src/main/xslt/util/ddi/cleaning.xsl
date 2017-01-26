@@ -74,16 +74,23 @@
                     <xsl:variable name="new-identifier">
                         <xsl:value-of select="parent::r:Command/r:Binding[r:TargetParameterReference/r:ID=$old-identifier]/r:SourceParameterReference/r:ID"/>
                     </xsl:variable>
-                <r:ID>
-                        <xsl:choose>
-                            <!-- for filters and controls in loops, fetching the nearest variable in the tree -->
+                    <r:ID>
+                        <xsl:value-of>//</xsl:value-of>
+                        <xsl:for-each select="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]">
+                            <xsl:value-of select="concat('*[name()=&quot;',r:ID,
+                                '&quot; and count(preceding-sibling::*)=count(current()/ancestor::*[name()=&quot;',
+                                r:ID,'&quot;]/preceding-sibling::*)]//')"/>
+                        </xsl:for-each>
+                        <xsl:value-of select="$new-identifier"/>
+<!--                        <xsl:choose>
+                            <!-\- for filters and controls in loops, fetching the nearest variable in the tree -\->
                             <xsl:when test="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]">
                                 <xsl:value-of select="concat('ancestor::*[descendant::',$new-identifier,'][1]//',$new-identifier)"/>                           
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:value-of select="concat('//',$new-identifier)"/>
                             </xsl:otherwise>
-                        </xsl:choose>
+                        </xsl:choose>-->
                     </r:ID>
                 </xsl:for-each>
             </xsl:variable>

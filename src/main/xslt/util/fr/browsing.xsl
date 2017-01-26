@@ -379,7 +379,7 @@
                         <xsl:text>) and (</xsl:text>
                     </xsl:if>
                     <xsl:value-of select="replace(replace(@value,'//','instance(&#34;fr-form-instance&#34;)//'),
-                        '\[1\]instance\(&#34;fr-form-instance&#34;\)','[1]')"/>
+                        '\]instance\(&#34;fr-form-instance&#34;\)',']')"/>
                 </xsl:for-each>
             </xsl:variable>
             <xsl:if test="$constraint[not(text()='')]">
@@ -403,14 +403,14 @@
             if="{concat('instance(&quot;fr-form-util&quot;)/PreviousNext=&quot;1&quot;
             and number(instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection) = ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;]')}"
+                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;]')}"
                 value="{concat('string(if (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[position() 
-                &gt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;] and not(text()=&#34;false&#34;)]) &gt; 0)
+                &gt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] and not(text()=&#34;false&#34;)]) &gt; 0)
                 then (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[position() 
-                &gt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;] and not(text()=&#34;false&#34;)][1]/preceding-sibling::*)+1)
+                &gt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] and not(text()=&#34;false&#34;)][1]/preceding-sibling::*)+1)
                 else 0)')}"/>
             <xf:action
-                if="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;] &gt; 0')}">
+                if="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] &gt; 0')}">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                     value="string('true')"/>
             </xf:action>
@@ -420,14 +420,14 @@
             if="{concat('instance(&quot;fr-form-util&quot;)/PreviousNext=&quot;-1&quot;
             and number(instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection) = ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;]')}"
+                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;]')}"
                 value="{concat('string(if (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[position() 
-                &lt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;] and not(text()=&#34;false&#34;)]) &gt; 0)
+                &lt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] and not(text()=&#34;false&#34;)]) &gt; 0)
                 then (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[position() 
-                &lt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;] and not(text()=&#34;false&#34;)][last()]/preceding-sibling::*)+1)
+                &lt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] and not(text()=&#34;false&#34;)][last()]/preceding-sibling::*)+1)
                 else 0)')}"/>
             <xf:action
-                if="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;] &gt; 0')}">
+                if="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] &gt; 0')}">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                     value="string('true')"/>
             </xf:action>
@@ -437,7 +437,7 @@
             if="{concat('instance(&quot;fr-form-util&quot;)/PreviousNext=&quot;1&quot;
             and number(instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection) &lt; ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;]')}"
+                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;]')}"
                 value="{concat('string(if (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[not(text()=&#34;false&#34;)]) &gt; 0)
                 then (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[not(text()=&#34;false&#34;)][1]/preceding-sibling::*)+1)
                 else 0)')}"
@@ -448,7 +448,7 @@
             if="{concat('instance(&quot;fr-form-util&quot;)/PreviousNext=&quot;-1&quot;
             and number(instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection) &gt; ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;]')}"
+                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;]')}"
                 value="{concat('string(if (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[not(text()=&#34;false&#34;)]) &gt; 0)
                 then (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[not(text()=&#34;false&#34;)][last()]/preceding-sibling::*)+1)
                 else 0)')}"
