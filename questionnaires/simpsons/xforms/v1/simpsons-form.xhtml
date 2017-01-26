@@ -1758,7 +1758,7 @@
                            </xf:itemset>
                            <xf:action ev:event="xforms-value-changed"
                                       if="not(xxf:evaluate-bind-property(&#34;INSEE-SIMPSONS-SEQI-1-bind&#34;,&#34;relevant&#34;))"
-                                      iterate="instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-SEQI-1//*">
+                                      iterate="instance(&#34;fr-form-instance&#34;)//INSEE-SIMPSONS-SEQI-1/descendant::*">
                               <xf:setvalue ref="." value="''"/>
                            </xf:action>
                         </xf:select1>
