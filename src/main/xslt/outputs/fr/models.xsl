@@ -127,7 +127,6 @@
                     <!-- Bind of resources for the ones that are dynamic (text depends from the answer to another question) -->
                     <xf:bind id="fr-form-resources-bind" ref="instance('fr-form-resources')">
                         <xsl:variable name="driver" select="."/>
-                        <xsl:variable name="apos">'</xsl:variable>
                         <xsl:for-each select="$languages">
                             <xf:bind id="{concat('bind-resource-',.)}"
                                 name="{concat('resource-',.)}"
@@ -163,7 +162,7 @@
                             <xsl:with-param name="driver"
                                 select="eno:append-empty-element('Body', .)" tunnel="yes"/>
                             <xsl:with-param name="languages" select="$languages" tunnel="yes"/>
-                            <xsl:with-param name="instance-ancestor" select="'instance(&quot;fr-form-instance&quot;)//'" tunnel="yes"/>
+                            <xsl:with-param name="instance-ancestor" select="'instance(''fr-form-instance'')//'" tunnel="yes"/>
                         </xsl:apply-templates>
                     </fr:body>
                 </fr:view>
@@ -488,12 +487,12 @@
             <xsl:attribute name="calculate">
                 <xsl:value-of
                     select="
-                        concat('if (not(instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-A-'),
-                        ' castable as xs:integer or instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-B-'),
-                        ' castable as xs:integer)) then &quot;&quot; else (100*number(if (instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-A-'),
-                        ' castable as xs:integer) then instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-A-'),
-                        ' else 0)+number(if (instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-B-'),
-                        ' castable as xs:integer) then instance(&quot;fr-form-instance&quot;)//', replace($name, '-', '-B-'),
+                        concat('if (not(instance(''fr-form-instance'')//', replace($name, '-', '-A-'),
+                        ' castable as xs:integer or instance(''fr-form-instance'')//', replace($name, '-', '-B-'),
+                        ' castable as xs:integer)) then '''' else (100*number(if (instance(''fr-form-instance'')//', replace($name, '-', '-A-'),
+                        ' castable as xs:integer) then instance(''fr-form-instance'')//', replace($name, '-', '-A-'),
+                        ' else 0)+number(if (instance(''fr-form-instance'')//', replace($name, '-', '-B-'),
+                        ' castable as xs:integer) then instance(''fr-form-instance'')//', replace($name, '-', '-B-'),
                         ' else 0))')"
                 />
             </xsl:attribute>
@@ -887,9 +886,9 @@
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <xsl:with-param name="instance-ancestor"
-                    select="concat($instance-ancestor,'*[name()=&quot;',enofr:get-name($source-context),
-                    '&quot; and count(preceding-sibling::*)=count(current()/ancestor::*[name()=&quot;',
-                    enofr:get-name($source-context),'&quot;]/preceding-sibling::*)]//')"
+                    select="concat($instance-ancestor,'*[name()=''',enofr:get-name($source-context),
+                    ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
+                    enofr:get-name($source-context),''']/preceding-sibling::*)]//')"
                     tunnel="yes"/>
             </xsl:apply-templates>
         </xf:repeat>
@@ -942,9 +941,9 @@
                                 select="$ancestors//*[not(child::*) and not(name() = 'driver')]"
                                 tunnel="yes"/>
                             <xsl:with-param name="instance-ancestor"
-                                select="concat($instance-ancestor,'*[name()=&quot;',enofr:get-name($source-context),
-                                '&quot; and count(preceding-sibling::*)=count(current()/ancestor::*[name()=&quot;',
-                                enofr:get-name($source-context),'&quot;]/preceding-sibling::*)]//')"
+                                select="concat($instance-ancestor,'*[name()=''',enofr:get-name($source-context),
+                                ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
+                                enofr:get-name($source-context),''']/preceding-sibling::*)]//')"
                                 tunnel="yes"/>
                         </xsl:apply-templates>
                     </xhtml:tr>
@@ -955,7 +954,7 @@
             <xf:label>Ajouter une ligne</xf:label>
             <xf:insert ev:event="DOMActivate" context="."
                 nodeset="{concat('//',enofr:get-name($source-context),'-RowLoop')}"
-                origin="{concat('instance(&#34;fr-form-loop-model&#34;)/',enofr:get-name($source-context),'-RowLoop')}"
+                origin="{concat('instance(''fr-form-loop-model'')/',enofr:get-name($source-context),'-RowLoop')}"
             />
         </xf:trigger>
     </xsl:template>
@@ -1035,16 +1034,16 @@
             This unchecks the first box that was checked -->
             <xsl:if test="self::xf-select">
                 <xf:action ev:event="xforms-value-changed"
-                    if="{concat('substring-after(',$instance-ancestor,$name,',&quot; &quot;) ne &quot;&quot;')}">
+                    if="{concat('substring-after(',$instance-ancestor,$name,','' '') ne ''''')}">
                     <xf:setvalue ref="{concat($instance-ancestor,$name)}"
-                        value="{concat('substring-after(',$instance-ancestor,$name,',&quot; &quot;)')}"
+                        value="{concat('substring-after(',$instance-ancestor,$name,','' '')')}"
                     />
                 </xf:action>
             </xsl:if>
             <!-- For each element which relevance depends on this field, we erase the data if it became unrelevant -->
             <xsl:for-each select="enofr:get-relevant-dependencies($source-context)">
                 <xf:action ev:event="xforms-value-changed"
-                    if="{concat('not(xxf:evaluate-bind-property(&quot;',.,'-bind&quot;,&quot;relevant&quot;))')}"
+                    if="{concat('not(xxf:evaluate-bind-property(''',.,'-bind'',''relevant''))')}"
                     iterate="{concat($instance-ancestor,.,'/descendant::*')}">
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
@@ -1052,7 +1051,7 @@
             <!-- For each element which readonly status depends on this field, we erase the data if it became readonly -->
             <xsl:for-each select="enofr:get-readonly-dependencies($source-context)">
                 <xf:action ev:event="xforms-value-changed"
-                    if="{concat('xxf:evaluate-bind-property(&quot;',.,'-bind&quot;,&quot;readonly&quot;)')}"
+                    if="{concat('xxf:evaluate-bind-property(''',.,'-bind'',''readonly'')')}"
                     iterate="{concat($instance-ancestor,.,'/descendant::*')}">
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
