@@ -27,7 +27,7 @@
     <!-- Saving the CurrentSection in a variable -->
     <xsl:variable name="choice">
         <xsl:value-of
-            select="'{instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection}'"
+            select="'{instance(''fr-form-instance'')/stromae/util/CurrentSection}'"
         />
     </xsl:variable>
 
@@ -108,7 +108,7 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="relevant">
-                <xsl:value-of select="concat('position()=instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;',@nodeset,'&quot;]')"/>
+                <xsl:value-of select="concat('position()=instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@nodeset,''']')"/>
             </xsl:attribute>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
@@ -209,7 +209,7 @@
                 replace="none" relevant="false">
                 <xsl:variable name="resource">
                     <xsl:value-of
-                        select="concat('{xxf:property(&#34;server-exist-orbeon&#34;)}/restxq/{xxf:property(&#34;enregistrer-service&#34;)}/',$campaign,'/',$model,'/{xxf:get-request-parameter(&quot;unite-enquete&quot;)}')"
+                        select="concat('{xxf:property(''server-exist-orbeon'')}/restxq/{xxf:property(''enregistrer-service'')}/',$campaign,'/',$model,'/{xxf:get-request-parameter(''unite-enquete'')}')"
                     />
                 </xsl:variable>
                 <xsl:attribute name="resource" select="$resource"/>
@@ -234,7 +234,7 @@
                 <!-- Trying to save -->
                 <xsl:variable name="resource">
                     <xsl:value-of
-                        select="concat('{xxf:property(&#34;server-exist-orbeon&#34;)}/restxq/{xxf:property(&#34;enregistrer-service&#34;)}/',$campaign,'/',$model,'/{xxf:get-request-parameter(&quot;unite-enquete&quot;)}')"
+                        select="concat('{xxf:property(''server-exist-orbeon'')}/restxq/{xxf:property(''enregistrer-service'')}/',$campaign,'/',$model,'/{xxf:get-request-parameter(''unite-enquete'')}')"
                     />
                 </xsl:variable>
                 <xsl:attribute name="resource" select="$resource"/>
@@ -259,7 +259,7 @@
             <xf:submission id="submit-pdf" method="post" replace="none">
                 <xsl:variable name="resource">
                     <xsl:value-of
-                        select="concat('/expedier/',$campaign,'/{xxf:get-request-parameter(&quot;unite-enquete&quot;)}?modele=',$model)"
+                        select="concat('/expedier/',$campaign,'/{xxf:get-request-parameter(''unite-enquete'')}?modele=',$model)"
                     />
                 </xsl:variable>
                 <xsl:attribute name="resource" select="$resource"/>
@@ -284,7 +284,7 @@
                     <xf:dispatch name="DOMFocusOut">
                         <xsl:attribute name="target">
                             <xsl:value-of
-                                select="'{concat(context()/@idVariable,&quot;-control&quot;)}'"/>
+                                select="'{concat(context()/@idVariable,''-control'')}'"/>
                         </xsl:attribute>
                     </xf:dispatch>
                 </xf:action>
@@ -339,13 +339,13 @@
                 <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='1'">
                     <!-- Not handled : loop whose all elements are hidden -->
                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                        value="{string('count(instance(&#34;fr-form-util&#34;)/Pages/*[position()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSection]/following-sibling::*[not(text()=&#34;false&#34;)][1]/preceding-sibling::*)+1')}"/>
+                        value="{string('count(instance(''fr-form-util'')/Pages/*[position()=instance(''fr-form-instance'')/stromae/util/CurrentSection]/following-sibling::*[not(text()=''false'')][1]/preceding-sibling::*)+1')}"/>
                     <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                 </xf:action>
                 <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='-1'">
                     <!-- Non handled : loop whose all elements are hidden -->
                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                        value="{string('count(instance(&#34;fr-form-util&#34;)/Pages/*[position()=instance(&#34;fr-form-instance&#34;)/stromae/util/CurrentSection]/preceding-sibling::*[not(text()=&#34;false&#34;)][1]/preceding-sibling::*)+1')}"/>
+                        value="{string('count(instance(''fr-form-util'')/Pages/*[position()=instance(''fr-form-instance'')/stromae/util/CurrentSection]/preceding-sibling::*[not(text()=''false'')][1]/preceding-sibling::*)+1')}"/>
                     <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                 </xf:action>
 
@@ -369,7 +369,7 @@
         <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}"
             ref="{name()}">
             <xf:calculate
-                value="{concat('xxf:evaluate-bind-property(&#34;',concat(name(),'-bind'),'&#34;,&#34;relevant&#34;)')}"/>
+                value="{concat('xxf:evaluate-bind-property(''',concat(name(),'-bind'),''',''relevant'')')}"/>
             <!-- Creating a constraint equals to the sum of warning-level constraints -->
             <xsl:variable name="module-name" select="name()"/>
             <xsl:variable name="constraint">
@@ -378,8 +378,8 @@
                     <xsl:if test="not(position()=1)">
                         <xsl:text>) and (</xsl:text>
                     </xsl:if>
-                    <xsl:value-of select="replace(replace(@value,'//','instance(&#34;fr-form-instance&#34;)//'),
-                        '\]instance\(&#34;fr-form-instance&#34;\)',']')"/>
+                    <xsl:value-of select="replace(replace(@value,'//','instance(''fr-form-instance'')//'),
+                        '\]instance\(''fr-form-instance''\)',']')"/>
                 </xsl:for-each>
             </xsl:variable>
             <xsl:if test="$constraint[not(text()='')]">
@@ -400,57 +400,57 @@
         </xsl:variable>
         <!-- if we're on the group and next button was clicked then : if all modules are hidden then 0 else next minimum value -->
         <xf:action
-            if="{concat('instance(&quot;fr-form-util&quot;)/PreviousNext=&quot;1&quot;
-            and number(instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection) = ',$module-position)}">
+            if="{concat('instance(''fr-form-util'')/PreviousNext=''1''
+            and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) = ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;]')}"
-                value="{concat('string(if (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[position() 
-                &gt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] and not(text()=&#34;false&#34;)]) &gt; 0)
-                then (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[position() 
-                &gt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] and not(text()=&#34;false&#34;)][1]/preceding-sibling::*)+1)
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[position() 
+                &gt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] and not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'/*[position() 
+                &gt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] and not(text()=''false'')][1]/preceding-sibling::*)+1)
                 else 0)')}"/>
             <xf:action
-                if="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] &gt; 0')}">
+                if="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] &gt; 0')}">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                     value="string('true')"/>
             </xf:action>
         </xf:action>
         <!-- if we're on the group and previous button was clicked then : if all modules are hidden then 0 else next maximum value -->
         <xf:action
-            if="{concat('instance(&quot;fr-form-util&quot;)/PreviousNext=&quot;-1&quot;
-            and number(instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection) = ',$module-position)}">
+            if="{concat('instance(''fr-form-util'')/PreviousNext=''-1''
+            and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) = ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;]')}"
-                value="{concat('string(if (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[position() 
-                &lt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] and not(text()=&#34;false&#34;)]) &gt; 0)
-                then (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[position() 
-                &lt; instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] and not(text()=&#34;false&#34;)][last()]/preceding-sibling::*)+1)
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[position() 
+                &lt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] and not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'/*[position() 
+                &lt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] and not(text()=''false'')][last()]/preceding-sibling::*)+1)
                 else 0)')}"/>
             <xf:action
-                if="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;] &gt; 0')}">
+                if="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] &gt; 0')}">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                     value="string('true')"/>
             </xf:action>
         </xf:action>
         <!-- if we're on a previous group and next button was clicked then : if all modules are hidden then 0 else minimum value -->
         <xf:action
-            if="{concat('instance(&quot;fr-form-util&quot;)/PreviousNext=&quot;1&quot;
-            and number(instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection) &lt; ',$module-position)}">
+            if="{concat('instance(''fr-form-util'')/PreviousNext=''1''
+            and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) &lt; ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;]')}"
-                value="{concat('string(if (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[not(text()=&#34;false&#34;)]) &gt; 0)
-                then (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[not(text()=&#34;false&#34;)][1]/preceding-sibling::*)+1)
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')][1]/preceding-sibling::*)+1)
                 else 0)')}"
             />
         </xf:action>
         <!-- if we're on a next group and previous button was clicked then : if all modules are hidden then 0 else maximum value -->
         <xf:action
-            if="{concat('instance(&quot;fr-form-util&quot;)/PreviousNext=&quot;-1&quot;
-            and number(instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection) &gt; ',$module-position)}">
+            if="{concat('instance(''fr-form-util'')/PreviousNext=''-1''
+            and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) &gt; ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(&quot;fr-form-instance&quot;)/stromae/util/groupeCourant[@groupe=&quot;//',substring-after(@nodeset,'//'),'&quot;]')}"
-                value="{concat('string(if (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[not(text()=&#34;false&#34;)]) &gt; 0)
-                then (count(instance(&quot;fr-form-instance&quot;)/',@id,'/*[not(text()=&#34;false&#34;)][last()]/preceding-sibling::*)+1)
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')][last()]/preceding-sibling::*)+1)
                 else 0)')}"
             />
         </xf:action>
@@ -501,7 +501,7 @@
                     <xhtml:progress id="progress" max="100">
                         <xsl:attribute name="value">
                             <xsl:value-of
-                                select="'{instance(&quot;fr-form-util&quot;)/ProgressPercent}'"
+                                select="'{instance(''fr-form-util'')/ProgressPercent}'"
                             />
                         </xsl:attribute>
                     </xhtml:progress>
@@ -560,7 +560,7 @@
                                         envoyé à </xsl:text>l'Insee</xhtml:b>.</xhtml:p>
                                 <xsl:variable name="link">
                                     <xsl:value-of
-                                        select="'{concat(xxf:property(&#34;url-orbeon&#34;),xxf:property(&#34;lien-deconnexion&#34;))}'"
+                                        select="'{concat(xxf:property(''url-orbeon''),xxf:property(''lien-deconnexion''))}'"
                                     />
                                 </xsl:variable>
                                 <xhtml:p class="center-body">
@@ -680,7 +680,7 @@
                         <xxf:hide dialog="welcome-back"/>
                         <!-- Always going back to the first page except if the survey is submitted -->
                         <xf:setvalue
-                            ref="instance(&quot;fr-form-instance&quot;)/stromae/util/CurrentSection"
+                            ref="instance('fr-form-instance')/stromae/util/CurrentSection"
                             value="'1'"/>
                         <xf:toggle case="{$choice}"/>
                     </xf:action>

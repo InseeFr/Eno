@@ -77,9 +77,9 @@
                     <r:ID>
                         <xsl:value-of>//</xsl:value-of>
                         <xsl:for-each select="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]">
-                            <xsl:value-of select="concat('*[name()=&quot;',r:ID,
-                                '&quot; and count(preceding-sibling::*)=count(current()/ancestor::*[name()=&quot;',
-                                r:ID,'&quot;]/preceding-sibling::*)]//')"/>
+                            <xsl:value-of select="concat('*[name()=''',r:ID,
+                                ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
+                                r:ID,''']/preceding-sibling::*)]//')"/>
                         </xsl:for-each>
                         <xsl:value-of select="$new-identifier"/>
 <!--                        <xsl:choose>
@@ -126,7 +126,7 @@
             </xsl:call-template>
         </xsl:if>
         <xsl:if test="number($min) = number($max)">
-            <xsl:value-of select="replace($modified-command,'∅','''''')"/>
+            <xsl:value-of select="replace(replace($modified-command,'&quot;',''''),'∅','''''')"/>
         </xsl:if>
     </xsl:template>
 
