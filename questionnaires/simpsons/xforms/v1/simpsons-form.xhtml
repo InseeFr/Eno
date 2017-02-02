@@ -851,6 +851,50 @@
                   <Progress>
                      <label>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</label>
                   </Progress>
+                  <Previous>
+                     <label>Retour</label>
+                  </Previous>
+                  <Next>
+                     <label>Enregistrer et continuer</label>
+                  </Next>
+                  <FatalError>
+                     <label>Problème lors de l'enregistrement/l'expédition de vos réponses.</label>
+                  </FatalError>
+                  <Correct>
+                     <label>Corriger</label>
+                  </Correct>
+                  <Continue>
+                     <label>Poursuivre</label>
+                  </Continue>
+                  <GoBack>
+                     <label>Revenir à la dernière page accédée</label>
+                  </GoBack>
+                  <GoToFirstPage>
+                     <label>Aller à la première page</label>
+                  </GoToFirstPage>
+                  <WelcomeBack>
+                     <label>Bienvenue</label>
+                  </WelcomeBack>
+                  <Warning>
+                     <label>Avertissement</label>
+                  </Warning>
+                  <Error>
+                     <label>Erreur bloquante</label>
+                  </Error>
+                  <WelcomeBackText>
+                     <label>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour poursuivre votre
+                    saisie dans le questionnaire, que souhaitez-vous faire ?&lt;/p&gt;</label>
+                  </WelcomeBackText>
+                  <WarningText>
+                     <label>&lt;p&gt;Certains champs de cette page sont indiqués en
+                    avertissement.&lt;/p&gt;&lt;p&gt;Souhaitez-vous corriger ces avertissements
+                    avant de poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;</label>
+                  </WarningText>
+                  <ErrorText>
+                     <label>&lt;p&gt;Certains champs de cette page sont indiqués en
+                    erreur.&lt;/p&gt;&lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le
+                    remplissage de ce questionnaire.&lt;/p&gt;</label>
+                  </ErrorText>
                </resource>
                <resource xml:lang="en">
                   <INSEE-SIMPSONS-SEQ-1>
@@ -1326,14 +1370,53 @@
                      <label>CONFIRMATION</label>
                   </Confirmation>
                   <End>
-                     <label>FIN</label>
+                     <label>END</label>
                   </End>
                   <ProgressBarContainer>
-                     <label>Votre </label>
+                     <label>Your </label>
                   </ProgressBarContainer>
                   <Progress>
-                     <label>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</label>
+                     <label>&lt;p&gt;&lt;b&gt;Progress&lt;/b&gt;&lt;/p&gt;</label>
                   </Progress>
+                  <Previous>
+                     <label>Go Back</label>
+                  </Previous>
+                  <Next>
+                     <label>Save and continue</label>
+                  </Next>
+                  <FatalError>
+                     <label>There was a problem with saving/submitting your answers.</label>
+                  </FatalError>
+                  <Correct>
+                     <label>Correct</label>
+                  </Correct>
+                  <Continue>
+                     <label>Continue</label>
+                  </Continue>
+                  <GoBack>
+                     <label>Go back to the last accessed page</label>
+                  </GoBack>
+                  <GoToFirstPage>
+                     <label>Go to the first page</label>
+                  </GoToFirstPage>
+                  <WelcomeBack>
+                     <label>Welcome</label>
+                  </WelcomeBack>
+                  <Warning>
+                     <label>Warning</label>
+                  </Warning>
+                  <Error>
+                     <label>Blocking error</label>
+                  </Error>
+                  <WelcomeBackText>
+                     <label>&lt;p&gt;You started filling the questionnaire. To continue, what do you wish to do ?&lt;/p&gt;</label>
+                  </WelcomeBackText>
+                  <WarningText>
+                     <label>&lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;&lt;p&gt;Do you wish to correct those warnings before going on filling the questionnaire ?&lt;/p&gt;</label>
+                  </WarningText>
+                  <ErrorText>
+                     <label>&lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;&lt;p&gt;You need to correct those warnings before going on filling the questionnaire.&lt;/p&gt;</label>
+                  </ErrorText>
                </resource>
             </resources>
          </xf:instance>
@@ -1375,6 +1458,10 @@
                <PreviousNext/>
                <PageChangeDone/>
                <ConfirmationMessage/>
+               <FatalError/>
+               <ErrorText/>
+               <WarningText/>
+               <WelcomeBackText/>
             </Util>
          </xf:instance>
          <xf:bind id="fr-form-util-binds" ref="instance('fr-form-util')">
@@ -1433,12 +1520,9 @@
                         relevant="false"
                         resource="{xxf:property('server-exist-orbeon')}/restxq/{xxf:property('enregistrer-service')}/simpsons/v1/{xxf:get-request-parameter('unite-enquete')}">
             <xf:action ev:event="xforms-submit-error">
-               <xf:message>Problème lors de l'enregistrement de vos réponses.</xf:message>
+               <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
             </xf:action>
             <xf:action ev:event="xforms-submit-done">
-               <xf:action if="instance('fr-form-util')/PreviousNext='0'">
-                  <xf:message>Vos réponses ont bien été enregistrées.</xf:message>
-               </xf:action>
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
@@ -1453,7 +1537,7 @@
                             value="string('non')"/>
                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
                             value="string(number(instance('fr-form-instance')/stromae/util/CurrentSection)-1)"/>
-               <xf:message>Problème lors de l'expédition de vos réponses.</xf:message>
+               <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
             </xf:action>
             <xf:action ev:event="xforms-submit-done">
                <xf:toggle case="{instance('fr-form-instance')/stromae/util/CurrentSection}"/>
@@ -2311,15 +2395,16 @@
                               <xhtml:b>Vous êtes arrivé à la fin du questionnaire.</xhtml:b>
                            </xhtml:p>
                            <xhtml:p class="indentation-with-bullet">
-                              <xhtml:b>Si vous avez terminé de
-                                        renseigner </xhtml:b>votre questionnaire, pour le
-                                    transmettre à l'Insee, merci de cliquer ci-dessous sur le bouton
-                                    : "Envoyer".</xhtml:p>
+                              <xhtml:b>Si vous avez
+                                        terminé de renseigner </xhtml:b>votre questionnaire,
+                                    pour le transmettre à l'Insee, merci de cliquer ci-dessous sur
+                                    le bouton : "Envoyer".</xhtml:p>
                            <xhtml:p class="simple-identation">
                               <xhtml:b>Une fois le questionnaire envoyé :</xhtml:b>
                            </xhtml:p>
-                           <xhtml:p class="double-indentation">- vous ne pourrez <xhtml:b>plus
-                                        modifier vos réponses </xhtml:b> ;</xhtml:p>
+                           <xhtml:p class="double-indentation">- vous ne
+                                        pourrez <xhtml:b>plus modifier vos réponses
+                                    </xhtml:b> ;</xhtml:p>
                            <xhtml:p class="double-indentation">- vous pourrez télécharger
                                         le <xhtml:b>récapitulatif de vos réponses au format
                                         pdf</xhtml:b>.</xhtml:p>
@@ -2334,12 +2419,13 @@
                               </xf:trigger>
                            </xhtml:div>
                            <xhtml:p class="indentation-with-bullet">
-                              <xhtml:b>Si vous souhaitez y apporter
-                                        des modifications</xhtml:b>, vous pouvez :</xhtml:p>
-                           <xhtml:p class="double-indentation">- revenir dessus dès à présent en
-                                    cliquant sur le bouton "Retour" ;</xhtml:p>
-                           <xhtml:p class="double-indentation">- ou plus tard en cliquant sur le
-                                    bouton "Fermer le questionnaire" et en vous authentifiant à
+                              <xhtml:b>Si vous souhaitez
+                                        y apporter des modifications</xhtml:b>, vous pouvez
+                                    :</xhtml:p>
+                           <xhtml:p class="double-indentation">- revenir dessus dès à présent
+                                    en cliquant sur le bouton "Retour" ;</xhtml:p>
+                           <xhtml:p class="double-indentation">- ou plus tard en cliquant sur
+                                    le bouton "Fermer le questionnaire" et en vous authentifiant à
                                     nouveau.</xhtml:p>
                            <xhtml:p class="double-indentation">Dans les deux cas, vos données seront
                                     enregistrées mais <xhtml:b>le questionnaire ne sera pas
@@ -2398,9 +2484,8 @@
                                       class="confirmation-message"
                                       xxf:order="label control hint help alert"/>
                            <xhtml:p>
-                              <xhtml:a href="PDFSummary">Télécharger le récapitulatif de
-                                        vos réponses au format PDF</xhtml:a>.
-                                    <xhtml:img src="/img/pdf.png"/>
+                              <xhtml:a href="PDFSummary">Télécharger le récapitulatif de vos
+                                        réponses au format PDF</xhtml:a>. <xhtml:img src="/img/pdf.png"/>
                            </xhtml:p>
                            <xhtml:p>
                               <xhtml:b>La Statistique publique vous remercie de votre
@@ -2412,26 +2497,26 @@
                </xf:case>
             </xf:switch>
             <xxf:dialog id="error" draggable="false" close="false">
-               <xf:label>Erreur bloquante</xf:label>
-               <xhtml:p>Certains champs de cette page sont indiqués en erreur.</xhtml:p>
-               <xhtml:p>Vous devez corriger ces erreurs avant de poursuivre le remplissage de ce
-                    questionnaire.</xhtml:p>
-               <xf:trigger>
-                  <xf:label>Corriger</xf:label>
+               <xf:label ref="$form-resources/Error/label"/>
+               <xf:output ref="instance('fr-form-util')/ErrorText">
+                  <xf:label ref="$form-resources/ErrorText/label" mediatype="text/html"/>
+               </xf:output>
+               <xf:trigger id="CorrectError">
+                  <xf:label ref="$form-resources/Correct/label"/>
                   <xxf:hide ev:event="DOMActivate" dialog="error"/>
                </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="warning" close="false" draggable="false">
-               <xf:label>Avertissement</xf:label>
-               <xhtml:p>Certains champs de cette page sont indiqués en avertissement.</xhtml:p>
-               <xhtml:p>Souhaitez-vous corriger ces avertissements avant de poursuivre le
-                    remplissage de ce questionnaire ?</xhtml:p>
-               <xf:trigger>
-                  <xf:label>Corriger</xf:label>
+               <xf:label ref="$form-resources/Warning/label"/>
+               <xf:output ref="instance('fr-form-util')/WarningText">
+                  <xf:label ref="$form-resources/WarningText/label" mediatype="text/html"/>
+               </xf:output>
+               <xf:trigger id="CorrectWarning">
+                  <xf:label ref="$form-resources/Correct/label"/>
                   <xxf:hide ev:event="DOMActivate" dialog="warning"/>
                </xf:trigger>
-               <xf:trigger>
-                  <xf:label>Poursuivre</xf:label>
+               <xf:trigger id="Continue">
+                  <xf:label ref="$form-resources/Continue/label"/>
                   <xxf:hide ev:event="DOMActivate" dialog="warning"/>
                   <xf:action ev:event="DOMActivate">
                      <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
@@ -2439,15 +2524,16 @@
                </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="welcome-back" close="false" draggable="false">
-               <xf:label>Bienvenue</xf:label>
-               <xhtml:p>Vous avez déjà commencé à renseigner le questionnaire. Pour poursuivre
-                    votre saisie dans le questionnaire, que souhaitez-vous faire ?</xhtml:p>
-               <xf:trigger>
-                  <xf:label>Revenir à la dernière page accédée</xf:label>
+               <xf:label ref="$form-resources/WelcomeBack/label"/>
+               <xf:output ref="instance('fr-form-util')/WelcomeBackText">
+                  <xf:label ref="$form-resources/WelcomeBackText/label" mediatype="text/html"/>
+               </xf:output>
+               <xf:trigger id="GoBack">
+                  <xf:label ref="$form-resources/GoBack/label"/>
                   <xxf:hide ev:event="DOMActivate" dialog="welcome-back"/>
                </xf:trigger>
-               <xf:trigger>
-                  <xf:label>Aller à la première page</xf:label>
+               <xf:trigger id="GoToFirstPage">
+                  <xf:label ref="$form-resources/GoToFirstPage/label"/>
                   <xf:action ev:event="DOMActivate">
                      <xxf:hide dialog="welcome-back"/>
                      <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
@@ -2456,17 +2542,23 @@
                   </xf:action>
                </xf:trigger>
             </xxf:dialog>
+            <xxf:dialog id="fatal-error" close="true" draggable="false">
+               <xf:label ref="$form-resources/Error/label"/>
+               <xf:output ref="instance('fr-form-util')/FatalError">
+                  <xf:label ref="$form-resources/FatalError/label"/>
+               </xf:output>
+            </xxf:dialog>
          </fr:body>
          <fr:buttons>
-            <xf:trigger bind="previous-bind">
-               <xf:label>Retour</xf:label>
+            <xf:trigger id="previous" bind="previous-bind">
+               <xf:label ref="$form-resources/Previous/label"/>
                <xf:action ev:event="DOMActivate">
                   <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="-1"/>
                   <xf:dispatch name="page-change" targetid="fr-form-model"/>
                </xf:action>
             </xf:trigger>
-            <xf:trigger bind="next-bind">
-               <xf:label>Enregistrer et continuer</xf:label>
+            <xf:trigger id="next" bind="next-bind">
+               <xf:label ref="$form-resources/Next/label"/>
                <xf:action ev:event="DOMActivate">
                   <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
                   <xf:dispatch name="page-change" targetid="fr-form-model"/>
