@@ -34,9 +34,6 @@
     <!-- Counting the number of modules and storing it -->
     <xsl:variable name="number-of-modules">
         <xsl:value-of select="count(//fr:body/*[name()='fr:section' or name()='xf:repeat'])"/>
-        <!--<xsl:value-of
-            select="count(//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and child::*])"
-        />-->
     </xsl:variable>
 
     <xsl:template match="/">
@@ -108,7 +105,7 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="relevant">
-                <xsl:value-of select="concat('position()=instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@nodeset,''']')"/>
+                <xsl:value-of select="concat('position()=instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@name,''']')"/>
             </xsl:attribute>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
@@ -190,10 +187,56 @@
                     relevant="instance('fr-form-instance')/stromae/util/CurrentSection=string(count(instance('fr-form-instance')/*[child::* and not(name()='stromae')])) and instance('fr-form-instance')/stromae/util/expedie='non'"
                     ref="Sending"/>
                 <xf:bind id="progress-percent-bind" name="progress-percent"
-                    ref="ProgressPercent"
+                    ref="ProgressPercent">
+                    <!-- 
                     calculate="if (number(instance('fr-form-instance')/stromae/util/CurrentSection)=1) then '0'
                     else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100'
-                    else round(((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2) div number(count(instance('fr-form-util')/Pages/*)-4))*100))"/>
+                    else round(((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2) div number(count(instance('fr-form-util')/Pages/*)-4))*100))"
+                    -->
+                    <xsl:attribute name="calculate">
+                        <xsl:variable name="total-group-pages-count">
+                            <xsl:for-each select="//fr:body/xf:repeat">
+                                <xsl:variable name="group-pages-number" select="count(fr:section)"/>
+                                <xsl:variable name="group-name" select="@id"/>
+                                <xsl:value-of select="concat('+(count(instance(''fr-form-instance'')/',$group-name,')-1)*',$group-pages-number)"/>
+                            </xsl:for-each>                            
+                        </xsl:variable>
+                        <xsl:variable name="denominator">
+                            <xsl:value-of select="concat('(count(instance(''fr-form-util'')/Pages/*)-4',$total-group-pages-count,')')"/>
+                        </xsl:variable>
+                        
+                        <xsl:value-of select="'if (number(instance(''fr-form-instance'')/stromae/util/CurrentSection)=1) then ''0'' '"/>
+                        <xsl:value-of select="'else (if (number(instance(''fr-form-instance'')/stromae/util/CurrentSection)&gt;count(instance(''fr-form-util'')/Pages/*)-2) then ''100'''"/>
+                        <xsl:for-each select="//fr:body/xf:repeat">
+                            <xsl:variable name="occurrence-position" select="count(//fr:body/xf:repeat/preceding-sibling::fr:section)+1"/>
+                            <xsl:variable name="group-name" select="@id"/>
+                            <xsl:variable name="previous-group-pages-count">
+                                <xsl:for-each select="//fr:body/xf:repeat[following-sibling::xf:repeat/@id=$group-name]">
+                                    <xsl:variable name="previous-group-pages-number" select="count(fr:section)"/>
+                                    <xsl:variable name="previous-group-name" select="@id"/>
+                                    <xsl:value-of select="concat('+(count(instance(''fr-form-instance'')/',$previous-group-name,')*',$previous-group-pages-number,'-1)')"/>
+                                </xsl:for-each>
+                            </xsl:variable>
+                            <xsl:variable name="group-pages-number" select="count(fr:section)"/>
+
+                            <xsl:value-of select="concat(' else (if (number(instance(''fr-form-instance'')/stromae/util/CurrentSection) &lt;',$occurrence-position,')')"/>
+                            <xsl:value-of select="concat(' then round((number(instance(''fr-form-instance'')/stromae/util/CurrentSection)-2',$previous-group-pages-count,')')"/>
+                            <xsl:value-of select="concat(' div ',$denominator,'*100)')"/>
+                            <xsl:value-of select="concat(' else (if (instance(''fr-form-instance'')/stromae/util/CurrentSection =',$occurrence-position,')')"/>
+                            <!-- pages due to sections previous from the repeat + pages due to previous occurrences + pages due to previous sections in the current occurrence -->
+                            <xsl:value-of select="concat(' then round((',$occurrence-position,'-2',$previous-group-pages-count)"/>
+                            <xsl:value-of select="concat('+(number(instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',$group-name,'''])-1)*',$group-pages-number)"/>
+                            <xsl:value-of select="'+count(instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/stromae/util/CurrentSectionName]/preceding-sibling::*))'"/>
+                            <xsl:value-of select="concat(' div ',$denominator,'*100)')"/>
+                        </xsl:for-each>
+                        <xsl:value-of select="' else round((number(instance(''fr-form-instance'')/stromae/util/CurrentSection)-2',$total-group-pages-count,')'"/>
+                        <xsl:value-of select="concat(' div ',$denominator,'*100))')"/>
+                        <!-- if ends -->
+                        <xsl:for-each select="//fr:body/xf:repeat">
+                            <xsl:value-of select="'))'"/>
+                        </xsl:for-each>
+                    </xsl:attribute>
+                </xf:bind>
                 <xf:bind id="progress-bind" ref="Progress"/>
                 <xf:bind id="page-top-bind" ref="PageTop"/>
                 <xf:bind id="confirmation-message-bind" ref="ConfirmationMessage"
@@ -403,14 +446,14 @@
             if="{concat('instance(''fr-form-util'')/PreviousNext=''1''
             and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) = ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),''']')}"
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,''']')}"
                 value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[position() 
-                &gt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] and not(text()=''false'')]) &gt; 0)
+                &gt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] and not(text()=''false'')]) &gt; 0)
                 then (count(instance(''fr-form-instance'')/',@id,'/*[position() 
-                &gt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] and not(text()=''false'')][1]/preceding-sibling::*)+1)
+                &gt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] and not(text()=''false'')][1]/preceding-sibling::*)+1)
                 else 0)')}"/>
             <xf:action
-                if="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] &gt; 0')}">
+                if="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] &gt; 0')}">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                     value="string('true')"/>
             </xf:action>
@@ -420,14 +463,14 @@
             if="{concat('instance(''fr-form-util'')/PreviousNext=''-1''
             and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) = ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),''']')}"
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,''']')}"
                 value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[position() 
-                &lt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] and not(text()=''false'')]) &gt; 0)
+                &lt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] and not(text()=''false'')]) &gt; 0)
                 then (count(instance(''fr-form-instance'')/',@id,'/*[position() 
-                &lt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] and not(text()=''false'')][last()]/preceding-sibling::*)+1)
+                &lt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] and not(text()=''false'')][last()]/preceding-sibling::*)+1)
                 else 0)')}"/>
             <xf:action
-                if="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] &gt; 0')}">
+                if="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] &gt; 0')}">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                     value="string('true')"/>
             </xf:action>
@@ -437,7 +480,7 @@
             if="{concat('instance(''fr-form-util'')/PreviousNext=''1''
             and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) &lt; ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),''']')}"
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,''']')}"
                 value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')]) &gt; 0)
                 then (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')][1]/preceding-sibling::*)+1)
                 else 0)')}"
@@ -448,7 +491,7 @@
             if="{concat('instance(''fr-form-util'')/PreviousNext=''-1''
             and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) &gt; ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),''']')}"
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,''']')}"
                 value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')]) &gt; 0)
                 then (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')][last()]/preceding-sibling::*)+1)
                 else 0)')}"
