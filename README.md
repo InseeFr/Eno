@@ -61,3 +61,7 @@ The expected XForms form file for the Simpsons questionnaire is present in [/que
 
 
 The difference file [questionnaire/simpsons/Xforms/v1/diff.txt] specifed, if there has, index at which the file begins to differ and the difference beetwen the generated Xform file and the expected Xform file.
+
+## Road Map
+
+New output format : PDF for paper questionnaire
