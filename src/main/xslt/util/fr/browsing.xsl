@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
-    xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="xd"
-    version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xf="http://www.w3.org/2002/xforms"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+    xmlns:xxf="http://orbeon.org/oxf/xml/xforms" xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xd" version="2.0">
 
     <!-- This stylesheet is applied to basic-form.tmp (previously created in the ddi2fr target) -->
     <!-- It adds orbeon related elements to enable the desired navigation. -->
@@ -12,7 +11,7 @@
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
-    
+
     <xsl:strip-space elements="*"/>
 
     <!-- The campaign -->
@@ -21,14 +20,12 @@
     <xsl:param name="model" as="xs:string"/>
     <!-- Eno properties file -->
     <xsl:param name="properties-file"/>
-    
+
     <xsl:variable name="properties" select="doc($properties-file)"/>
 
     <!-- Saving the CurrentSection in a variable -->
     <xsl:variable name="choice">
-        <xsl:value-of
-            select="'{instance(''fr-form-instance'')/stromae/util/CurrentSection}'"
-        />
+        <xsl:value-of select="'{instance(''fr-form-instance'')/stromae/util/CurrentSection}'"/>
     </xsl:variable>
 
     <!-- Counting the number of modules and storing it -->
@@ -45,7 +42,8 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Default template for every element and every attribute, simply coying to the output file</xd:p>
+            <xd:p>Default template for every element and every attribute, simply coying to the
+                output file</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="node() | @*">
@@ -80,7 +78,7 @@
             </stromae>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="xf:repeat" mode="page-loop">
         <xsl:variable name="group-name" select="@id"/>
         <groupeCourant groupe="{$group-name}">0</groupeCourant>
@@ -97,18 +95,19 @@
             <xf:bind id="end-bind" name="end" ref="End"/>
             <xf:bind id="current-section-name-bind" name="current-section-name"
                 ref="stromae/util/CurrentSectionName"
-                calculate="(instance('fr-form-instance')/*[child::* and not(name()='stromae')])[position()=number(instance('fr-form-instance')/stromae/util/CurrentSection)]/name()"
-            />
-        <xf:bind id="progress-bar-container-bind" ref="ProgressBarContainer"/>
+                calculate="(instance('fr-form-instance')/*[child::* and not(name()='stromae')])[position()=number(instance('fr-form-instance')/stromae/util/CurrentSection)]/name()"/>
+            <xf:bind id="progress-bar-container-bind" ref="ProgressBarContainer"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- Direct child of a loop at the root of the questionnaire : it means this child is considered as a module -->
-        <xsl:template match="xf:bind[@id='fr-form-instance-binds']/xf:bind[@nodeset]">
+    <xsl:template match="xf:bind[@id='fr-form-instance-binds']/xf:bind[@nodeset]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="relevant">
-                <xsl:value-of select="concat('position()=instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@nodeset,''']')"/>
+                <xsl:value-of
+                    select="concat('position()=instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@nodeset,''']')"
+                />
             </xsl:attribute>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
@@ -116,7 +115,68 @@
 
 
     <!-- Adding those elements to the resources -->
-    <xsl:template match="resource[ancestor::xf:instance[@id='fr-form-resources']]">
+    <xsl:template
+        match="resource[@xml:lang='en' and ancestor::xf:instance[@id='fr-form-resources']]">
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*"/>
+            <Validation>
+                <label>VALIDATION</label>
+            </Validation>
+            <Confirmation>
+                <label>CONFIRMATION</label>
+            </Confirmation>
+            <End>
+                <label>END</label>
+            </End>
+            <ProgressBarContainer>
+                <label>Your </label>
+            </ProgressBarContainer>
+            <Progress>
+                <label>&lt;p&gt;&lt;b&gt;Progress&lt;/b&gt;&lt;/p&gt;</label>
+            </Progress>
+            <Previous>
+                <label>Go Back</label>
+            </Previous>
+            <Next>
+                <label>Save and continue</label>
+            </Next>
+            <FatalError>
+                <label>There was a problem with saving/submitting your answers.</label>
+            </FatalError>
+            <Correct>
+                <label>Correct</label>
+            </Correct>
+            <Continue>
+                <label>Continue</label>
+            </Continue>
+            <GoBack>
+                <label>Go back to the last accessed page</label>
+            </GoBack>
+            <GoToFirstPage>
+                <label>Go to the first page</label>
+            </GoToFirstPage>
+            <WelcomeBack>
+                <label>Welcome</label>
+            </WelcomeBack>
+            <Warning>
+                <label>Warning</label>
+            </Warning>
+            <Error>
+                <label>Blocking error</label>
+            </Error>
+            <WelcomeBackText>
+                <label>&lt;p&gt;You started filling the questionnaire. To continue, what do you wish to do ?&lt;/p&gt;</label>
+            </WelcomeBackText>
+            <WarningText>
+                <label>&lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;&lt;p&gt;Do you wish to correct those warnings before going on filling the questionnaire ?&lt;/p&gt;</label>
+            </WarningText>
+            <ErrorText>
+                <label>&lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;&lt;p&gt;You need to correct those warnings before going on filling the questionnaire.&lt;/p&gt;</label>
+            </ErrorText>
+        </xsl:copy>
+    </xsl:template>
+    <xsl:template
+        match="resource[@xml:lang='fr' and ancestor::xf:instance[@id='fr-form-resources']]">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
             <Validation>
@@ -134,6 +194,50 @@
             <Progress>
                 <label>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</label>
             </Progress>
+            <Previous>
+                <label>Retour</label>
+            </Previous>
+            <Next>
+                <label>Enregistrer et continuer</label>
+            </Next>
+            <FatalError>
+                <label>Problème lors de l'enregistrement/l'expédition de vos réponses.</label>
+            </FatalError>
+            <Correct>
+                <label>Corriger</label>
+            </Correct>
+            <Continue>
+                <label>Poursuivre</label>
+            </Continue>
+            <GoBack>
+                <label>Revenir à la dernière page accédée</label>
+            </GoBack>
+            <GoToFirstPage>
+                <label>Aller à la première page</label>
+            </GoToFirstPage>
+            <WelcomeBack>
+                <label>Bienvenue</label>
+            </WelcomeBack>
+            <Warning>
+                <label>Avertissement</label>
+            </Warning>
+            <Error>
+                <label>Erreur bloquante</label>
+            </Error>
+            <WelcomeBackText>
+                <label>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour poursuivre votre
+                    saisie dans le questionnaire, que souhaitez-vous faire ?&lt;/p&gt;</label>
+            </WelcomeBackText>
+            <WarningText>
+                <label>&lt;p&gt;Certains champs de cette page sont indiqués en
+                    avertissement.&lt;/p&gt;&lt;p&gt;Souhaitez-vous corriger ces avertissements
+                    avant de poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;</label>
+            </WarningText>
+            <ErrorText>
+                <label>&lt;p&gt;Certains champs de cette page sont indiqués en
+                    erreur.&lt;/p&gt;&lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le
+                    remplissage de ce questionnaire.&lt;/p&gt;</label>
+            </ErrorText>
         </xsl:copy>
     </xsl:template>
 
@@ -169,12 +273,15 @@
                     <PreviousNext/>
                     <PageChangeDone/>
                     <ConfirmationMessage/>
+                    <FatalError/>
+                    <ErrorText/>
+                    <WarningText/>
+                    <WelcomeBackText/>
                 </Util>
             </xf:instance>
 
             <!-- The corresponding binds -->
-            <xf:bind id="fr-form-util-binds"
-                ref="instance('fr-form-util')">
+            <xf:bind id="fr-form-util-binds" ref="instance('fr-form-util')">
                 <xf:bind id="previous-bind"
                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2)"
                     ref="Previous"/>
@@ -189,8 +296,7 @@
                 <xf:bind id="sending-bind"
                     relevant="instance('fr-form-instance')/stromae/util/CurrentSection=string(count(instance('fr-form-instance')/*[child::* and not(name()='stromae')])) and instance('fr-form-instance')/stromae/util/expedie='non'"
                     ref="Sending"/>
-                <xf:bind id="progress-percent-bind" name="progress-percent"
-                    ref="ProgressPercent"
+                <xf:bind id="progress-percent-bind" name="progress-percent" ref="ProgressPercent"
                     calculate="if (number(instance('fr-form-instance')/stromae/util/CurrentSection)=1) then '0'
                     else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100'
                     else round(((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2) div number(count(instance('fr-form-util')/Pages/*)-4))*100))"/>
@@ -200,13 +306,15 @@
                     name="confirmation-message"
                     calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"/>
                 <xf:bind id="pages-bind" ref="Pages">
-                    <xsl:apply-templates select="//xf:instance[@id='fr-form-instance']/form/*[child::*]" mode="page-bind"/>
+                    <xsl:apply-templates
+                        select="//xf:instance[@id='fr-form-instance']/form/*[child::*]"
+                        mode="page-bind"/>
                 </xf:bind>
             </xf:bind>
 
             <!--  Saving : be careful on the parameters order : formulaire must stand before unite-enquete -->
-            <xf:submission id="save" method="post" ref="instance('fr-form-instance')"
-                replace="none" relevant="false">
+            <xf:submission id="save" method="post" ref="instance('fr-form-instance')" replace="none"
+                relevant="false">
                 <xsl:variable name="resource">
                     <xsl:value-of
                         select="concat('{xxf:property(''server-exist-orbeon'')}/restxq/{xxf:property(''enregistrer-service'')}/',$campaign,'/',$model,'/{xxf:get-request-parameter(''unite-enquete'')}')"
@@ -214,13 +322,9 @@
                 </xsl:variable>
                 <xsl:attribute name="resource" select="$resource"/>
                 <xf:action ev:event="xforms-submit-error">
-                    <xf:message>Problème lors de l'enregistrement de vos réponses.</xf:message>
+                    <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
                 </xf:action>
                 <xf:action ev:event="xforms-submit-done">
-                    <!-- Only displayed if a page change happened. Old code from time where there would've been a save button -->
-                    <xf:action if="instance('fr-form-util')/PreviousNext='0'">
-                        <xf:message>Vos réponses ont bien été enregistrées.</xf:message>
-                    </xf:action>
                     <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override"
                         >true</xf:setvalue>
                 </xf:action>
@@ -244,7 +348,7 @@
                         value="string('non')"/>
                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
                         value="string(number(instance('fr-form-instance')/stromae/util/CurrentSection)-1)"/>
-                    <xf:message>Problème lors de l'expédition de vos réponses.</xf:message>
+                    <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
                 </xf:action>
                 <xf:action ev:event="xforms-submit-done">
                     <!-- Switching page -->
@@ -283,15 +387,13 @@
                     iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName]//*">
                     <xf:dispatch name="DOMFocusOut">
                         <xsl:attribute name="target">
-                            <xsl:value-of
-                                select="'{concat(context()/@idVariable,''-control'')}'"/>
+                            <xsl:value-of select="'{concat(context()/@idVariable,''-control'')}'"/>
                         </xsl:attribute>
                     </xf:dispatch>
                 </xf:action>
 
                 <!-- Forcing this to false to notify that the page change isn't done yet. -->
-                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
-                    value="string('false')"/>
+                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
 
 
                 <!-- Every action below is exclusive (works as a switch case)
@@ -332,21 +434,25 @@
             <!-- What happens when the page change is effective -->
             <xf:action ev:event="page-change-done">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
-                
+
                 <!-- For each CurrentGroup, we calculate the corresponding value -->
                 <xsl:apply-templates select="//fr:body/xf:repeat" mode="page-change"/>
-                
-                <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='1'">
+
+                <xf:action
+                    if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='1'">
                     <!-- Not handled : loop whose all elements are hidden -->
                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
                         value="{string('count(instance(''fr-form-util'')/Pages/*[position()=instance(''fr-form-instance'')/stromae/util/CurrentSection]/following-sibling::*[not(text()=''false'')][1]/preceding-sibling::*)+1')}"/>
-                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
+                        value="string('true')"/>
                 </xf:action>
-                <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='-1'">
+                <xf:action
+                    if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='-1'">
                     <!-- Non handled : loop whose all elements are hidden -->
                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
                         value="{string('count(instance(''fr-form-util'')/Pages/*[position()=instance(''fr-form-instance'')/stromae/util/CurrentSection]/preceding-sibling::*[not(text()=''false'')][1]/preceding-sibling::*)+1')}"/>
-                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
+                        value="string('true')"/>
                 </xf:action>
 
                 <!-- Saving the time when the saving happened -->
@@ -364,10 +470,9 @@
 
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="*[not(ends-with(name(),'-Loop'))]" mode="page-bind">
-        <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}"
-            ref="{name()}">
+        <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}" ref="{name()}">
             <xf:calculate
                 value="{concat('xxf:evaluate-bind-property(''',concat(name(),'-bind'),''',''relevant'')')}"/>
             <!-- Creating a constraint equals to the sum of warning-level constraints -->
@@ -378,8 +483,10 @@
                     <xsl:if test="not(position()=1)">
                         <xsl:text>) and (</xsl:text>
                     </xsl:if>
-                    <xsl:value-of select="replace(replace(@value,'//','instance(''fr-form-instance'')//'),
-                        '\]instance\(''fr-form-instance''\)',']')"/>
+                    <xsl:value-of
+                        select="replace(replace(@value,'//','instance(''fr-form-instance'')//'),
+                        '\]instance\(''fr-form-instance''\)',']')"
+                    />
                 </xsl:for-each>
             </xsl:variable>
             <xsl:if test="$constraint[not(text()='')]">
@@ -387,13 +494,13 @@
             </xsl:if>
         </xf:bind>
     </xsl:template>
-    
+
     <xsl:template match="*[ends-with(name(),'-Loop')]" mode="page-bind">
         <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}" nodeset="{name()}">
             <xsl:apply-templates select="child::*[child::*]" mode="page-bind"/>
         </xf:bind>
     </xsl:template>
-    
+
     <xsl:template match="xf:repeat" mode="page-change">
         <xsl:variable name="module-position">
             <xsl:value-of select="count(preceding-sibling::*)+1"/>
@@ -411,8 +518,7 @@
                 else 0)')}"/>
             <xf:action
                 if="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] &gt; 0')}">
-                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
-                    value="string('true')"/>
+                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
         </xf:action>
         <!-- if we're on the group and previous button was clicked then : if all modules are hidden then 0 else next maximum value -->
@@ -428,8 +534,7 @@
                 else 0)')}"/>
             <xf:action
                 if="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''//',substring-after(@nodeset,'//'),'''] &gt; 0')}">
-                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
-                    value="string('true')"/>
+                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
         </xf:action>
         <!-- if we're on a previous group and next button was clicked then : if all modules are hidden then 0 else minimum value -->
@@ -461,15 +566,15 @@
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
             <fr:buttons>
-                <xf:trigger bind="previous-bind">
-                    <xf:label>Retour</xf:label>
+                <xf:trigger id="previous" bind="previous-bind">
+                    <xf:label ref="$form-resources/Previous/label"/>
                     <xf:action ev:event="DOMActivate">
                         <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="-1"/>
                         <xf:dispatch name="page-change" targetid="fr-form-model"/>
                     </xf:action>
                 </xf:trigger>
-                <xf:trigger bind="next-bind">
-                    <xf:label>Enregistrer et continuer</xf:label>
+                <xf:trigger id="next" bind="next-bind">
+                    <xf:label ref="$form-resources/Next/label"/>
                     <xf:action ev:event="DOMActivate">
                         <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
                         <xf:dispatch name="page-change" targetid="fr-form-model"/>
@@ -489,7 +594,8 @@
             <xhtml:div class="progress-bar-container">
                 <!-- This element gives information on the questionned unit -->
                 <xf:output id="progress-bar-container-control" bind="progress-bar-container-bind">
-                    <xf:label ref="$form-resources/ProgressBarContainer/label" mediatype="text/html"/>
+                    <xf:label ref="$form-resources/ProgressBarContainer/label" mediatype="text/html"
+                    />
                 </xf:output>
                 <!-- This element measures the survey's progress -->
                 <xhtml:span class="right">
@@ -500,13 +606,11 @@
                     </xf:output>
                     <xhtml:progress id="progress" max="100">
                         <xsl:attribute name="value">
-                            <xsl:value-of
-                                select="'{instance(''fr-form-util'')/ProgressPercent}'"
-                            />
+                            <xsl:value-of select="'{instance(''fr-form-util'')/ProgressPercent}'"/>
                         </xsl:attribute>
                     </xhtml:progress>
-                    <xf:output id="progress-percent"
-                        ref="instance('fr-form-util')/ProgressPercent"/> %</xhtml:span>
+                    <xf:output id="progress-percent" ref="instance('fr-form-util')/ProgressPercent"
+                    /> %</xhtml:span>
             </xhtml:div>
 
             <!-- Using a switch in order to display each module on the same page -->
@@ -521,15 +625,16 @@
                                 <xhtml:p>
                                     <xhtml:b>Vous êtes arrivé à la fin du questionnaire.</xhtml:b>
                                 </xhtml:p>
-                                <xhtml:p class="indentation-with-bullet"><xhtml:b>Si vous avez terminé de
-                                        renseigner&#160;</xhtml:b>votre questionnaire, pour le
-                                    transmettre à l'Insee, merci de cliquer ci-dessous sur le bouton
-                                    : "Envoyer".</xhtml:p>
+                                <xhtml:p class="indentation-with-bullet"><xhtml:b>Si vous avez
+                                        terminé de renseigner&#160;</xhtml:b>votre questionnaire,
+                                    pour le transmettre à l'Insee, merci de cliquer ci-dessous sur
+                                    le bouton : "Envoyer".</xhtml:p>
                                 <xhtml:p class="simple-identation">
                                     <xhtml:b>Une fois le questionnaire envoyé :</xhtml:b>
                                 </xhtml:p>
-                                <xhtml:p class="double-indentation">- vous ne pourrez&#160;<xhtml:b>plus
-                                        modifier vos réponses </xhtml:b>&#160;;</xhtml:p>
+                                <xhtml:p class="double-indentation">- vous ne
+                                        pourrez&#160;<xhtml:b>plus modifier vos réponses
+                                    </xhtml:b>&#160;;</xhtml:p>
                                 <xhtml:p class="double-indentation">- vous pourrez télécharger
                                         le&#160;<xhtml:b>récapitulatif de vos réponses au format
                                         pdf</xhtml:b>.</xhtml:p>
@@ -540,22 +645,23 @@
                                         <xf:action ev:event="DOMActivate">
                                             <xf:setvalue ref="instance('fr-form-util')/Clickable"
                                                 value="string('non')"/>
-                                            <xf:setvalue
-                                                ref="instance('fr-form-util')/PreviousNext"
+                                            <xf:setvalue ref="instance('fr-form-util')/PreviousNext"
                                                 value="1"/>
                                             <xf:dispatch name="page-change-done"
                                                 targetid="fr-form-model"/>
                                         </xf:action>
                                     </xf:trigger>
                                 </xhtml:div>
-                                <xhtml:p class="indentation-with-bullet"><xhtml:b>Si vous souhaitez y apporter
-                                        des modifications</xhtml:b>, vous pouvez :</xhtml:p>
-                                <xhtml:p class="double-indentation">- revenir dessus dès à présent en
-                                    cliquant sur le bouton "Retour" ;</xhtml:p>
-                                <xhtml:p class="double-indentation">- ou plus tard en cliquant sur le
-                                    bouton "Fermer le questionnaire" et en vous authentifiant à
+                                <xhtml:p class="indentation-with-bullet"><xhtml:b>Si vous souhaitez
+                                        y apporter des modifications</xhtml:b>, vous pouvez
+                                    :</xhtml:p>
+                                <xhtml:p class="double-indentation">- revenir dessus dès à présent
+                                    en cliquant sur le bouton "Retour" ;</xhtml:p>
+                                <xhtml:p class="double-indentation">- ou plus tard en cliquant sur
+                                    le bouton "Fermer le questionnaire" et en vous authentifiant à
                                     nouveau.</xhtml:p>
-                                <xhtml:p class="double-indentation"><xsl:text>Dans les deux cas, vos données seront
+                                <xhtml:p class="double-indentation"
+                                        ><xsl:text>Dans les deux cas, vos données seront
                                     enregistrées mais</xsl:text>&#160;<xhtml:b><xsl:text>le questionnaire ne sera pas
                                         envoyé à </xsl:text>l'Insee</xhtml:b>.</xhtml:p>
                                 <xsl:variable name="link">
@@ -622,13 +728,14 @@
                         <xf:label ref="$form-resources/End/label"/>
                         <xhtml:div class="center center-body">
                             <xhtml:div class="frame">
-                                <xf:output id="confirmation-message" bind="confirmation-message-bind"
-                                    class="confirmation-message"
+                                <xf:output id="confirmation-message"
+                                    bind="confirmation-message-bind" class="confirmation-message"
                                     xxf:order="label control hint help alert"/>
                                 <xhtml:p>
-                                    <xhtml:a href="PDFSummary">Télécharger le récapitulatif de
-                                        vos réponses au format PDF</xhtml:a>.
-                                    <xhtml:img src="{concat('/',$properties//images/dossier,'/',$properties//images/pdf)}"/>
+                                    <xhtml:a href="PDFSummary">Télécharger le récapitulatif de vos
+                                        réponses au format PDF</xhtml:a>. <xhtml:img
+                                        src="{concat('/',$properties//images/dossier,'/',$properties//images/pdf)}"
+                                    />
                                 </xhtml:p>
                                 <xhtml:p>
                                     <xhtml:b>La Statistique publique vous remercie de votre
@@ -640,26 +747,26 @@
                 </xf:case>
             </xf:switch>
             <xxf:dialog id="error" draggable="false" close="false">
-                <xf:label>Erreur bloquante</xf:label>
-                <xhtml:p>Certains champs de cette page sont indiqués en erreur.</xhtml:p>
-                <xhtml:p>Vous devez corriger ces erreurs avant de poursuivre le remplissage de ce
-                    questionnaire.</xhtml:p>
-                <xf:trigger>
-                    <xf:label>Corriger</xf:label>
+                <xf:label ref="$form-resources/Error/label"/>
+                <xf:output ref="instance('fr-form-util')/ErrorText">
+                    <xf:label ref="$form-resources/ErrorText/label" mediatype="text/html"/>
+                </xf:output>
+                <xf:trigger id="CorrectError">
+                    <xf:label ref="$form-resources/Correct/label"/>
                     <xxf:hide ev:event="DOMActivate" dialog="error"/>
                 </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="warning" close="false" draggable="false">
-                <xf:label>Avertissement</xf:label>
-                <xhtml:p>Certains champs de cette page sont indiqués en avertissement.</xhtml:p>
-                <xhtml:p>Souhaitez-vous corriger ces avertissements avant de poursuivre le
-                    remplissage de ce questionnaire ?</xhtml:p>
-                <xf:trigger>
-                    <xf:label>Corriger</xf:label>
+                <xf:label ref="$form-resources/Warning/label"/>
+                <xf:output ref="instance('fr-form-util')/WarningText">
+                    <xf:label ref="$form-resources/WarningText/label" mediatype="text/html"/>
+                </xf:output>
+                <xf:trigger id="CorrectWarning">
+                    <xf:label ref="$form-resources/Correct/label"/>
                     <xxf:hide ev:event="DOMActivate" dialog="warning"/>
                 </xf:trigger>
-                <xf:trigger>
-                    <xf:label>Poursuivre</xf:label>
+                <xf:trigger id="Continue">
+                    <xf:label ref="$form-resources/Continue/label"/>
                     <xxf:hide ev:event="DOMActivate" dialog="warning"/>
                     <xf:action ev:event="DOMActivate">
                         <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
@@ -667,31 +774,38 @@
                 </xf:trigger>
             </xxf:dialog>
             <xxf:dialog id="welcome-back" close="false" draggable="false">
-                <xf:label>Bienvenue</xf:label>
-                <xhtml:p>Vous avez déjà commencé à renseigner le questionnaire. Pour poursuivre
-                    votre saisie dans le questionnaire, que souhaitez-vous faire ?</xhtml:p>
-                <xf:trigger>
-                    <xf:label>Revenir à la dernière page accédée</xf:label>
+                <xf:label ref="$form-resources/WelcomeBack/label"/>
+                <xf:output ref="instance('fr-form-util')/WelcomeBackText">
+                    <xf:label ref="$form-resources/WelcomeBackText/label" mediatype="text/html"/>
+                </xf:output>
+                <xf:trigger id="GoBack">
+                    <xf:label ref="$form-resources/GoBack/label"/>
                     <xxf:hide ev:event="DOMActivate" dialog="welcome-back"/>
                 </xf:trigger>
-                <xf:trigger>
-                    <xf:label>Aller à la première page</xf:label>
+                <xf:trigger id="GoToFirstPage">
+                    <xf:label ref="$form-resources/GoToFirstPage/label"/>
                     <xf:action ev:event="DOMActivate">
                         <xxf:hide dialog="welcome-back"/>
                         <!-- Always going back to the first page except if the survey is submitted -->
-                        <xf:setvalue
-                            ref="instance('fr-form-instance')/stromae/util/CurrentSection"
+                        <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
                             value="'1'"/>
                         <xf:toggle case="{$choice}"/>
                     </xf:action>
                 </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="fatal-error" close="true" draggable="false">
+                <xf:label ref="$form-resources/Error/label"/>
+                <xf:output ref="instance('fr-form-util')/FatalError">
+                    <xf:label ref="$form-resources/FatalError/label"/>
+                </xf:output>
             </xxf:dialog>
         </xsl:copy>
     </xsl:template>
 
     <!-- Wrapping the existing modules in a xf:case -->
     <xsl:template match="fr:section[parent::fr:body] | xf:repeat[parent::fr:body]">
-        <xsl:variable name="index" select="number($number-of-modules)-count(following-sibling::fr:section)-count(following-sibling::xf:repeat)"/>
+        <xsl:variable name="index"
+            select="number($number-of-modules)-count(following-sibling::fr:section)-count(following-sibling::xf:repeat)"/>
         <xf:case id="{$index}">
             <xsl:copy>
                 <xsl:apply-templates select="node() | @*"/>
