@@ -1482,7 +1482,7 @@
             <xf:bind id="progress-percent-bind"
                      name="progress-percent"
                      ref="ProgressPercent"
-                     calculate="if (number(instance('fr-form-instance')/stromae/util/CurrentSection)=1) then '0'                     else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100'                     else round(((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2) div number(count(instance('fr-form-util')/Pages/*)-4))*100))"/>
+                     calculate="if (number(instance('fr-form-instance')/stromae/util/CurrentSection)=1) then '0' else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100' else round((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2  ) div (count(instance('fr-form-util')/Pages/*)-4)*100))"/>
             <xf:bind id="progress-bind" ref="Progress"/>
             <xf:bind id="page-top-bind" ref="PageTop"/>
             <xf:bind id="confirmation-message-bind"
@@ -1556,7 +1556,7 @@
          </xf:action>
          <xf:action ev:event="page-change">
             <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName]//*">
-               <xf:dispatch name="DOMFocusOut" target="{concat(context()/@idVariable,'-control')}"/>
+               <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
             </xf:action>
             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
             <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName],true(),true()))">
@@ -1842,7 +1842,7 @@
                            </xf:itemset>
                            <xf:action ev:event="xforms-value-changed"
                                       if="not(xxf:evaluate-bind-property('INSEE-SIMPSONS-SEQI-1-bind','relevant'))"
-                                      iterate="instance('fr-form-instance')//INSEE-SIMPSONS-SEQI-1/descendant::*">
+                                      iterate="instance('fr-form-instance')//INSEE-SIMPSONS-SEQI-1//*[not(descendant::*)]">
                               <xf:setvalue ref="." value="''"/>
                            </xf:action>
                         </xf:select1>

@@ -1169,7 +1169,7 @@
             <xsl:for-each select="enofr:get-relevant-dependencies($source-context)">
                 <xf:action ev:event="xforms-value-changed"
                     if="{concat('not(xxf:evaluate-bind-property(''',.,'-bind'',''relevant''))')}"
-                    iterate="{concat($instance-ancestor,.,'//*')}">
+                    iterate="{concat($instance-ancestor,.,'//*[not(descendant::*)]')}">
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
             </xsl:for-each>
@@ -1178,7 +1178,7 @@
 <!--            <xsl:for-each select="enofr:get-readonly-dependencies($source-context)">
                 <xf:action ev:event="xforms-value-changed"
                     if="{concat('xxf:evaluate-bind-property(''',.,'-bind'',''readonly'')')}"
-                    iterate="{concat($instance-ancestor,.,'//*')}">
+                    iterate="{concat($instance-ancestor,.,'//*[not(descendant::*)]')}">
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
             </xsl:for-each>-->
