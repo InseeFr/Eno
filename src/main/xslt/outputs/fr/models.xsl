@@ -988,15 +988,15 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
-        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xf:repeat nodeset="{concat($instance-ancestor,$name)}"
-            id="{$name}">
+        <xsl:variable name="loop-name" select="enofr:get-name($source-context)"/>
+        <xf:repeat nodeset="{concat($instance-ancestor,$loop-name)}"
+            id="{$loop-name}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <xsl:with-param name="instance-ancestor"
-                    select="concat($instance-ancestor,'*[name()=''',$name,
+                    select="concat($instance-ancestor,'*[name()=''',$loop-name,
                     ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
-                    $name,''']/preceding-sibling::*)]//')"
+                    $loop-name,''']/preceding-sibling::*)]//')"
                     tunnel="yes"/>
             </xsl:apply-templates>
         </xf:repeat>
@@ -1169,18 +1169,19 @@
             <xsl:for-each select="enofr:get-relevant-dependencies($source-context)">
                 <xf:action ev:event="xforms-value-changed"
                     if="{concat('not(xxf:evaluate-bind-property(''',.,'-bind'',''relevant''))')}"
-                    iterate="{concat($instance-ancestor,.,'/descendant::*')}">
+                    iterate="{concat($instance-ancestor,.,'//*')}">
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
             </xsl:for-each>
             <!-- For each element which readonly status depends on this field, we erase the data if it became readonly -->
-            <xsl:for-each select="enofr:get-readonly-dependencies($source-context)">
+            <!-- change in the point of view : we keep then now -->
+<!--            <xsl:for-each select="enofr:get-readonly-dependencies($source-context)">
                 <xf:action ev:event="xforms-value-changed"
                     if="{concat('xxf:evaluate-bind-property(''',.,'-bind'',''readonly'')')}"
-                    iterate="{concat($instance-ancestor,.,'/descendant::*')}">
+                    iterate="{concat($instance-ancestor,.,'//*')}">
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
-            </xsl:for-each>
+            </xsl:for-each>-->
 
             <xsl:for-each select="enofr:get-constraint-dependencies($source-context)">
                 <xsl:element name="xf:dispatch">
