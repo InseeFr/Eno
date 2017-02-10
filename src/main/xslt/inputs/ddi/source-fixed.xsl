@@ -179,45 +179,21 @@
             <xd:p>Getting the corresponding suffix from different reponse domains.</xd:p>
         </xd:desc>
     </xd:doc>
-    <!-- Getting suffix for 'HH' DateFieldFormat -->
-    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='HH']" mode="enoddi:get-suffix">
-        <xsl:param name="language" tunnel="yes"/>
-        <xsl:choose>
-            <xsl:when test="$language='fr'">
-                <xsl:text>heures</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text/>
-            </xsl:otherwise>
-        </xsl:choose>
+    <!-- Getting suffix for d:QuestionItem elements having a referenced DomainResponse -->
+    <xsl:template match="d:QuestionItem[*[ends-with(name(),'DomainReference')]]" mode="enoddi:get-suffix">
+        <xsl:apply-templates select="*[ends-with(name(),'DomainReference')]" mode="enoddi:get-suffix"/>
     </xsl:template>
-    <!-- Getting suffix for 'mm' DateFieldFormat -->
-    <xsl:template match="d:DateTimeDomain[r:DateFieldFormat/text()='mm']" mode="enoddi:get-suffix">
-        <xsl:param name="language" tunnel="yes"/>
-        <xsl:choose>
-            <xsl:when test="$language='fr'">
-                <xsl:text>minutes</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-    <!-- Getting suffix for d:QuestionItem elements having a d:NumericDomainReference child -->
-    <xsl:template match="d:QuestionItem[d:NumericDomainReference]" mode="enoddi:get-suffix">
-        <xsl:apply-templates select="d:NumericDomainReference" mode="enoddi:get-suffix"/>
-    </xsl:template>
-    <!-- Getting suffix for d:NumericDomainReference having a r:ManagedNumericRepresentation -->
-    <xsl:template match="d:NumericDomainReference[r:ManagedNumericRepresentation]"
+    <!-- Getting suffix for d:NumericDomainReference having a referenced DomainResponse -->
+    <xsl:template match="*[ends-with(name(),'DomainReference')]"
         mode="enoddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
-            <xsl:when test="r:ManagedNumericRepresentation//r:Content/@xml:lang">
+            <xsl:when test="*[ends-with(name(),'Representation')]/r:Label/r:Content/@xml:lang">
                 <xsl:value-of
-                    select="r:ManagedNumericRepresentation//r:Content[@xml:lang=$language]"/>
+                    select="*[ends-with(name(),'Representation')]/r:Label/r:Content[@xml:lang=$language]"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="r:ManagedNumericRepresentation//r:Content"/>
+                <xsl:value-of select="*[ends-with(name(),'Representation')]/r:Label/r:Content"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -505,14 +481,14 @@
 
     <!-- Getting the message for a 'HH' type d:DateTimeDomain element having a @regExp attribute -->
     <xsl:template
-        match="d:DateTimeDomain[r:DateFieldFormat/text()='HH' and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]"
+        match="d:DateTimeDomainReference[r:ManagedDateTimeRepresentation[r:DateFieldFormat/text()='hh' and r:DateTypeCode='duration']]"
         mode="enoddi:get-message" priority="2">
         <xsl:text>Le nombre d'heures doit être compris entre 0 et 99.</xsl:text>
     </xsl:template>
 
     <!-- Getting the message for a 'mm' type d:DateTimeDomain element having a @regExp attribute -->
     <xsl:template
-        match="d:DateTimeDomain[r:DateFieldFormat/text()='mm' and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]"
+        match="d:DateTimeDomainReference[r:ManagedDateTimeRepresentation[r:DateFieldFormat/text()='mm' and r:DateTypeCode='duration']]"
         mode="enoddi:get-message" priority="2">
         <xsl:text>Le nombre de minutes doit être compris entre 0 et 59.</xsl:text>
     </xsl:template>
