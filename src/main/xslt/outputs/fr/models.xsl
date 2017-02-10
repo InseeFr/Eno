@@ -1181,13 +1181,8 @@
                     iterate="{concat($instance-ancestor,.,'//*')}">
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
-<<<<<<< Updated upstream
-            </xsl:for-each>
-
-=======
             </xsl:for-each>-->
-            
->>>>>>> Stashed changes
+
             <xsl:for-each select="enofr:get-constraint-dependencies($source-context)">
                 <xsl:element name="xf:dispatch">
                     <xsl:attribute name="ev:event">
