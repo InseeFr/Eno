@@ -77,8 +77,8 @@
     </xsl:template>
 
     <xsl:template match="xf:repeat" mode="page-loop">
-        <xsl:variable name="group-name" select="@id"/>
-        <groupeCourant groupe="{$group-name}">0</groupeCourant>
+        <xsl:variable name="loop-name" select="@id"/>
+        <CurrentLoopElement loop-name="{$loop-name}">0</CurrentLoopElement>
     </xsl:template>
 
     <!-- Adding those elements in the corresponding bind -->
@@ -91,9 +91,23 @@
                 relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
             <xf:bind id="end-bind" name="end" ref="End"/>
             <xf:bind id="current-section-name-bind" name="current-section-name"
-                ref="stromae/util/CurrentSectionName"
-                calculate="(instance('fr-form-instance')/*[child::* and not(name()='stromae')])[position()=number(instance('fr-form-instance')/stromae/util/CurrentSection)]/name()"/>
-            <xf:bind id="progress-bar-container-bind" ref="ProgressBarContainer"/>
+                ref="stromae/util/CurrentSectionName">
+                <xsl:attribute name="calculate">
+                    <xsl:for-each select="//fr:body/xf:repeat">
+                        <xsl:variable name="section-position">
+                            <xsl:value-of select="count(preceding-sibling::*)+1"/>
+                        </xsl:variable>
+                        <xsl:variable name="loop-module" select="fr:section/@name"/>
+                        <xsl:value-of select="concat('(if (instance(''fr-form-instance'')/stromae/util/CurrentSection=''',$section-position,''')
+                            then ''',$loop-module,''' else ')"></xsl:value-of>
+                    </xsl:for-each>
+                    <xsl:value-of select="'(instance(''fr-form-instance'')/*[child::* and not(name()=''stromae'')])[position()=number(instance(''fr-form-instance'')/stromae/util/CurrentSection)]/name()'"/>
+                    <xsl:for-each select="//fr:body/xf:repeat">
+                        <xsl:value-of select="')'"/>
+                    </xsl:for-each>
+                </xsl:attribute>
+            </xf:bind>
+        <xf:bind id="progress-bar-container-bind" ref="ProgressBarContainer"/>
         </xsl:copy>
     </xsl:template>
 
@@ -102,7 +116,7 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="relevant">
-                <xsl:value-of select="concat('position()=instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@name,''']')"/>
+                <xsl:value-of select="concat('(count(preceding-sibling::*[name()=''',@name,'''])+1)=instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@name,''']')"/>
             </xsl:attribute>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
@@ -293,17 +307,12 @@
                     ref="Sending"/>
                 <xf:bind id="progress-percent-bind" name="progress-percent"
                     ref="ProgressPercent">
-                    <!-- 
-                    calculate="if (number(instance('fr-form-instance')/stromae/util/CurrentSection)=1) then '0'
-                    else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100'
-                    else round(((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2) div number(count(instance('fr-form-util')/Pages/*)-4))*100))"
-                    -->
                     <xsl:attribute name="calculate">
                         <xsl:variable name="total-group-pages-count">
                             <xsl:for-each select="//fr:body/xf:repeat">
                                 <xsl:variable name="group-pages-number" select="count(fr:section)"/>
                                 <xsl:variable name="group-name" select="@id"/>
-                                <xsl:value-of select="concat('+(count(instance(''fr-form-instance'')/',$group-name,')-1)*',$group-pages-number)"/>
+                                <xsl:value-of select="concat('+count(instance(''fr-form-instance'')/',$group-name,')*',$group-pages-number,'-1')"/>
                             </xsl:for-each>                            
                         </xsl:variable>
                         <xsl:variable name="denominator">
@@ -330,7 +339,7 @@
                             <xsl:value-of select="concat(' else (if (instance(''fr-form-instance'')/stromae/util/CurrentSection =',$occurrence-position,')')"/>
                             <!-- pages due to sections previous from the repeat + pages due to previous occurrences + pages due to previous sections in the current occurrence -->
                             <xsl:value-of select="concat(' then round((',$occurrence-position,'-2',$previous-group-pages-count)"/>
-                            <xsl:value-of select="concat('+(number(instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',$group-name,'''])-1)*',$group-pages-number)"/>
+                            <xsl:value-of select="concat('+(number(instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',$group-name,'''])-1)*',$group-pages-number)"/>
                             <xsl:value-of select="'+count(instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/stromae/util/CurrentSectionName]/preceding-sibling::*))'"/>
                             <xsl:value-of select="concat(' div ',$denominator,'*100)')"/>
                         </xsl:for-each>
@@ -429,10 +438,35 @@
                     iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName]//*">
                     <xf:dispatch name="DOMFocusOut">
                         <xsl:attribute name="target">
-                            <xsl:value-of select="'{concat(context()/@idVariable,''-control'')}'"/>
+                            <xsl:value-of select="'{concat(context()/name(),''-control'')}'"/>
                         </xsl:attribute>
                     </xf:dispatch>
                 </xf:action>
+                <!-- The same for loops of pages -->
+                <xsl:for-each select="//fr:body/xf:repeat">
+                    <xsl:variable name="section-position">
+                        <xsl:value-of select="count(preceding-sibling::*)+1"/>
+                    </xsl:variable>
+                    <xsl:variable name="loop-name" select="@id"/>
+                    <xf:action>
+                        <xsl:attribute name="if">
+                            <xsl:value-of select="concat('instance(''fr-form-instance'')/stromae/util/CurrentSection=''',$section-position,'''')"/>
+                        </xsl:attribute>
+                        <xf:action>
+                            <xsl:attribute name="iterate" 
+                                select="concat('instance(''fr-form-instance'')/',$loop-name,
+                                '[count(preceding-sibling::',$loop-name,
+                                ')+1=number(instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',$loop-name,
+                                '''])]/*[name()=instance(''fr-form-instance'')/stromae/util/CurrentSectionName]//*')"/>
+                            <xf:dispatch name="DOMFocusOut">
+                                <xsl:attribute name="target">
+                                    <xsl:value-of select="'{concat(context()/name(),''-control'')}'"/>
+                                </xsl:attribute>
+                            </xf:dispatch>
+                        </xf:action>
+                    </xf:action>
+                </xsl:for-each>
+                
 
                 <!-- Forcing this to false to notify that the page change isn't done yet. -->
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
@@ -448,10 +482,32 @@
                     <!-- Displaying the dialog window that correspond to an error -->
                     <xxf:show ev:event="DOMActivate" dialog="error"/>
                     <!-- And we don't change page -->
-
-                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
-                        value="string('true')"/>
+                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                 </xf:action>
+                <!-- The same for loops of pages -->
+                <xsl:for-each select="//fr:body/xf:repeat">
+                    <xsl:variable name="section-position">
+                        <xsl:value-of select="count(preceding-sibling::*)+1"/>
+                    </xsl:variable>
+                    <xsl:variable name="loop-name" select="@id"/>
+                    <xf:action>
+                        <xsl:attribute name="if">
+                            <xsl:value-of select="concat('instance(''fr-form-instance'')/stromae/util/CurrentSection=''',$section-position,'''')"/>
+                        </xsl:attribute>
+                        <xf:action>
+                            <xsl:attribute name="if" 
+                                select="concat('instance(''fr-form-util'')/PageChangeDone=''false''
+                                and not(xxf:valid(instance(''fr-form-instance'')/',$loop-name,
+                                '[count(preceding-sibling::',$loop-name,
+                                ')+1=number(instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',$loop-name,
+                                '''])]/*[name()=instance(''fr-form-instance'')/stromae/util/CurrentSectionName],true(),true()))')"/>
+                            <xxf:show ev:event="DOMActivate" dialog="error"/>
+                            <!-- And we don't change page -->
+                            <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+                        </xf:action>
+                    </xf:action>               
+                </xsl:for-each>
+                
                 <xf:action
                     if="instance('fr-form-util')/PageChangeDone='false'
                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName],true(),true())
@@ -459,10 +515,33 @@
                     <!-- Displaying the dialog window that correspond to an error -->
                     <xxf:show ev:event="DOMActivate" dialog="warning"/>
                     <!-- And we don't change page. The page change can happen at the level of this dialog window -->
-
-                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
-                        value="string('true')"/>
+                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                 </xf:action>
+                <!-- The same for loops of pages -->
+                <xsl:for-each select="//fr:body/xf:repeat">
+                    <xsl:variable name="section-position">
+                        <xsl:value-of select="count(preceding-sibling::*)+1"/>
+                    </xsl:variable>
+                    <xsl:variable name="loop-name" select="@id"/>
+                    <xf:action>
+                        <xsl:attribute name="if">
+                            <xsl:value-of select="concat('instance(''fr-form-instance'')/stromae/util/CurrentSection=''',$section-position,'''')"/>
+                        </xsl:attribute>
+                        <xf:action>
+                            <xsl:attribute name="if" 
+                                select="concat('instance(''fr-form-util'')/PageChangeDone=''false''
+                                and xxf:valid(instance(''fr-form-instance'')/',$loop-name,
+                                '[count(preceding-sibling::',$loop-name,
+                                ')+1=number(instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',$loop-name,
+                                '''])]/*[name()=instance(''fr-form-instance'')/stromae/util/CurrentSectionName],true(),true())
+                                and xxf:evaluate-bind-property(concat(''page-'',instance(''fr-form-instance'')/stromae/util/CurrentSectionName,''-bind''),''constraint'')=false()')"/>
+                            <xxf:show ev:event="DOMActivate" dialog="warning"/>
+                            <!-- And we don't change page -->
+                            <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+                        </xf:action>
+                    </xf:action>               
+                </xsl:for-each>
+                
                 <xf:action
                     if="instance('fr-form-util')/PageChangeDone='false'
                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName],true(),true())
@@ -470,14 +549,36 @@
                     <!-- The page change happens -->
                     <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
                 </xf:action>
-
+                <!-- The same for loops of pages -->
+                <xsl:for-each select="//fr:body/xf:repeat">
+                    <xsl:variable name="section-position">
+                        <xsl:value-of select="count(preceding-sibling::*)+1"/>
+                    </xsl:variable>
+                    <xsl:variable name="loop-name" select="@id"/>
+                    <xf:action>
+                        <xsl:attribute name="if">
+                            <xsl:value-of select="concat('instance(''fr-form-instance'')/stromae/util/CurrentSection=''',$section-position,'''')"/>
+                        </xsl:attribute>
+                        <xf:action>
+                            <xsl:attribute name="if" 
+                                select="concat('instance(''fr-form-util'')/PageChangeDone=''false''
+                                and xxf:valid(instance(''fr-form-instance'')/',$loop-name,
+                                '[count(preceding-sibling::',$loop-name,
+                                ')+1=number(instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',$loop-name,
+                                '''])]/*[name()=instance(''fr-form-instance'')/stromae/util/CurrentSectionName],true(),true())
+                                and not(xxf:evaluate-bind-property(concat(''page-'',instance(''fr-form-instance'')/stromae/util/CurrentSectionName,''-bind''),''constraint'')=false())')"/>
+                            <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
+                        </xf:action>
+                    </xf:action>               
+                </xsl:for-each>
+                
             </xf:action>
 
             <!-- What happens when the page change is effective -->
             <xf:action ev:event="page-change-done">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
 
-                <!-- For each CurrentGroup, we calculate the corresponding value -->
+                <!-- For each CurrentLoopElement, we calculate the corresponding value -->
                 <xsl:apply-templates select="//fr:body/xf:repeat" mode="page-change"/>
 
                 <xf:action
@@ -520,19 +621,19 @@
             <!-- Creating a constraint equals to the sum of warning-level constraints -->
             <xsl:variable name="module-name" select="name()"/>
             <xsl:variable name="constraint">
+                <xsl:value-of select="'('"/>
                 <xsl:for-each
                     select="//xf:bind[@name=$module-name]//xf:constraint[@level='warning']">
                     <xsl:if test="not(position()=1)">
                         <xsl:text>) and (</xsl:text>
                     </xsl:if>
-                    <xsl:value-of
-                        select="replace(replace(@value,'//','instance(''fr-form-instance'')//'),
-                        '\]instance\(''fr-form-instance''\)',']')"
-                    />
+                    <xsl:value-of select="replace(replace(@value,'//','instance(''fr-form-instance'')//'),
+                        '\]instance\(''fr-form-instance''\)',']')"/>
                 </xsl:for-each>
+            <xsl:value-of select="')'"/>
             </xsl:variable>
-            <xsl:if test="$constraint[not(text()='')]">
-                <xf:constraint value="{concat('(',$constraint/text(),')')}"/>
+            <xsl:if test="$constraint[not(text()='()')]">
+                <xf:constraint value="{$constraint}"/>
             </xsl:if>
         </xf:bind>
     </xsl:template>
@@ -552,14 +653,14 @@
             if="{concat('instance(''fr-form-util'')/PreviousNext=''1''
             and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) = ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,''']')}"
-                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[position() 
-                &gt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] and not(text()=''false'')]) &gt; 0)
-                then (count(instance(''fr-form-instance'')/',@id,'/*[position() 
-                &gt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] and not(text()=''false'')][1]/preceding-sibling::*)+1)
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'[(count(preceding-sibling::*[name()=''',@id,'''])+1) 
+                &gt; instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] and not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'[(count(preceding-sibling::*[name()=''',@id,'''])+1) 
+                &gt; instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] and not(text()=''false'')][1]/preceding-sibling::*)+1)
                 else 0)')}"/>
             <xf:action
-                if="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] &gt; 0')}">
+                if="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] &gt; 0')}">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                     value="string('true')"/>
             </xf:action>
@@ -569,14 +670,14 @@
             if="{concat('instance(''fr-form-util'')/PreviousNext=''-1''
             and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) = ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,''']')}"
-                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[position() 
-                &lt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] and not(text()=''false'')]) &gt; 0)
-                then (count(instance(''fr-form-instance'')/',@id,'/*[position() 
-                &lt; instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] and not(text()=''false'')][last()]/preceding-sibling::*)+1)
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'[(count(preceding-sibling::*[name()=''',@id,'''])+1) 
+                &lt; instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] and not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'[(count(preceding-sibling::*[name()=''',@id,'''])+1)
+                &lt; instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] and not(text()=''false'')][last()]/preceding-sibling::*)+1)
                 else 0)')}"/>
             <xf:action
-                if="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,'''] &gt; 0')}">
+                if="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] &gt; 0')}">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                     value="string('true')"/>
             </xf:action>
@@ -586,9 +687,9 @@
             if="{concat('instance(''fr-form-util'')/PreviousNext=''1''
             and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) &lt; ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,''']')}"
-                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')]) &gt; 0)
-                then (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')][1]/preceding-sibling::*)+1)
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'[not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'[not(text()=''false'')][1]/preceding-sibling::*[name()=''',@id,'''])+1)
                 else 0)')}"
             />
         </xf:action>
@@ -597,12 +698,66 @@
             if="{concat('instance(''fr-form-util'')/PreviousNext=''-1''
             and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) &gt; ',$module-position)}">
             <xf:setvalue
-                ref="{concat('instance(''fr-form-instance'')/stromae/util/groupeCourant[@groupe=''',@id,''']')}"
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'[not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'[not(text()=''false'')][last()]/preceding-sibling::*[name()=''',@id,'''])+1)
+                else 0)')}"
+            />
+        </xf:action>
+
+<!--        <xf:action
+            if="{concat('instance(''fr-form-util'')/PreviousNext=''1''
+            and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) = ',$module-position)}">
+            <xf:setvalue
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[position() 
+                &gt; instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] and not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'/*[position() 
+                &gt; instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] and not(text()=''false'')][1]/preceding-sibling::*)+1)
+                else 0)')}"/>
+            <xf:action
+                if="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] &gt; 0')}">
+                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
+                    value="string('true')"/>
+            </xf:action>
+        </xf:action>
+        <xf:action
+            if="{concat('instance(''fr-form-util'')/PreviousNext=''-1''
+            and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) = ',$module-position)}">
+            <xf:setvalue
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[position() 
+                &lt; instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] and not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'/*[position() 
+                &lt; instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] and not(text()=''false'')][last()]/preceding-sibling::*)+1)
+                else 0)')}"/>
+            <xf:action
+                if="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,'''] &gt; 0')}">
+                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
+                    value="string('true')"/>
+            </xf:action>
+        </xf:action>
+        <xf:action
+            if="{concat('instance(''fr-form-util'')/PreviousNext=''1''
+            and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) &lt; ',$module-position)}">
+            <xf:setvalue
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,''']')}"
+                value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')]) &gt; 0)
+                then (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')][1]/preceding-sibling::*)+1)
+                else 0)')}"
+            />
+        </xf:action>
+        <xf:action
+            if="{concat('instance(''fr-form-util'')/PreviousNext=''-1''
+            and number(instance(''fr-form-instance'')/stromae/util/CurrentSection) &gt; ',$module-position)}">
+            <xf:setvalue
+                ref="{concat('instance(''fr-form-instance'')/stromae/util/CurrentLoopElement[@loop-name=''',@id,''']')}"
                 value="{concat('string(if (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')]) &gt; 0)
                 then (count(instance(''fr-form-instance'')/',@id,'/*[not(text()=''false'')][last()]/preceding-sibling::*)+1)
                 else 0)')}"
             />
         </xf:action>
+-->        
     </xsl:template>
 
     <!-- Adding buttons at the end of the survey-->
