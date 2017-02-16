@@ -51,3 +51,7 @@ Actions:
 ### Use the maven package in Eno-WS
 
 In Eno-WS, use the Eno package and the provided services.
+
+### Create a command line client
+
+Eno-cli, a Java command line client using the core package.
