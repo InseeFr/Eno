@@ -513,9 +513,9 @@
                     <xsl:value-of select="$calculate"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="$type != ''">
+            <xsl:if test="$type = 'date'">
                 <xsl:attribute name="type">
-                    <xsl:value-of select="$type"/>
+                    <xsl:value-of select="concat('xf:', $type)"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="not($readonly = ('false()', ''))">
@@ -565,9 +565,6 @@
         <xsl:variable name="calculate">
             <xsl:value-of select="enofr:get-calculate($source-context)"/>
         </xsl:variable>
-        <xsl:variable name="type">
-            <xsl:value-of select="enofr:get-type($source-context)"/>
-        </xsl:variable>
         <xsl:variable name="readonly">
             <xsl:value-of select="enofr:get-readonly($source-context)"/>
         </xsl:variable>
@@ -603,11 +600,6 @@
                     <xsl:value-of select="$calculate"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="$type != ''">
-                <xsl:attribute name="type">
-                    <xsl:value-of select="$type"/>
-                </xsl:attribute>
-            </xsl:if>
             <xsl:if test="not($readonly = ('false()', ''))">
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="concat('not(', $readonly, ')')"
@@ -630,11 +622,6 @@
             <xsl:if test="$calculate != ''">
                 <xsl:attribute name="calculate">
                     <xsl:value-of select="$calculate"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="$type != ''">
-                <xsl:attribute name="type">
-                    <xsl:value-of select="$type"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="not($readonly = ('false()', ''))">
