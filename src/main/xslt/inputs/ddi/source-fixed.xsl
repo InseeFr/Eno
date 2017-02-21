@@ -134,7 +134,7 @@
     <!-- Getting the label from a d:QuestionGrid OR d:QuestionItem having a d:Instruction of 'format' type -->
     <xsl:template
         match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='format']] | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='format']]"
-        mode="enoddi:get-hint-instruction" priority="2">
+        mode="enoddi:get-format-instruction" priority="2">
         <xsl:apply-templates
             select="descendant::d:Instruction[d:InstructionName/r:String/text()='format']"
             mode="enoddi:get-label"/>
@@ -477,20 +477,6 @@
         <xsl:value-of
             select="substring-after(//d:Expression/r:Command/r:CommandContent[contains(text(),$id)]/text(),'=')"
         />
-    </xsl:template>
-
-    <!-- Getting the message for a 'HH' type d:DateTimeDomain element having a @regExp attribute -->
-    <xsl:template
-        match="d:DateTimeDomainReference[r:ManagedDateTimeRepresentation[r:DateFieldFormat/text()='hh' and r:DateTypeCode='duration']]"
-        mode="enoddi:get-message" priority="2">
-        <xsl:text>Le nombre d'heures doit être compris entre 0 et 99.</xsl:text>
-    </xsl:template>
-
-    <!-- Getting the message for a 'mm' type d:DateTimeDomain element having a @regExp attribute -->
-    <xsl:template
-        match="d:DateTimeDomainReference[r:ManagedDateTimeRepresentation[r:DateFieldFormat/text()='mm' and r:DateTypeCode='duration']]"
-        mode="enoddi:get-message" priority="2">
-        <xsl:text>Le nombre de minutes doit être compris entre 0 et 59.</xsl:text>
     </xsl:template>
 
 </xsl:stylesheet>

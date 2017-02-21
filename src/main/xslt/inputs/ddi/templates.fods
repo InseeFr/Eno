@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT10H41M30S</meta:editing-duration><meta:editing-cycles>157</meta:editing-cycles><meta:generator>LibreOffice/4.3.5.2$Windows_x86 LibreOffice_project/3a87456aaa6a95c63eea1c1b3201acedf0751bd5</meta:generator><dc:date>2017-02-10T15:24:20.662000000</dc:date><dc:creator>Guillaume Jardillier</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="519" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT13H38M4S</meta:editing-duration><meta:editing-cycles>185</meta:editing-cycles><meta:generator>LibreOffice/4.3.5.2$Windows_x86 LibreOffice_project/3a87456aaa6a95c63eea1c1b3201acedf0751bd5</meta:generator><dc:date>2017-02-21T17:52:27.215000000</dc:date><dc:creator>Guillaume Jardillier</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="460" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
-   <config:config-item config:name="VisibleAreaWidth" config:type="int">73891</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">81960</config:config-item>
+   <config:config-item config:name="VisibleAreaWidth" config:type="int">45610</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">70079</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
@@ -468,13 +468,13 @@
  </office:styles>
  <office:automatic-styles>
   <style:style style:name="co1" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="26.457cm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="11.252cm"/>
   </style:style>
   <style:style style:name="co2" style:family="table-column">
    <style:table-column-properties fo:break-before="auto" style:column-width="5.396cm"/>
   </style:style>
   <style:style style:name="co3" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="21.258cm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="8.183cm"/>
   </style:style>
   <style:style style:name="co4" style:family="table-column">
    <style:table-column-properties fo:break-before="auto" style:column-width="2.258cm"/>
@@ -526,24 +526,16 @@
    <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Tahoma" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
   </style:style>
   <style:style style:name="ce9" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="transparent" fo:border="none"/>
-   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Mangal" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
-  </style:style>
-  <style:style style:name="ce10" style:family="table-cell" style:parent-style-name="Default">
    <style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:language="en" fo:country="US" style:font-name-asian="Segoe UI" style:font-size-asian="10pt" style:language-asian="en" style:country-asian="US" style:font-size-complex="10pt" style:language-complex="en" style:country-complex="US"/>
   </style:style>
-  <style:style style:name="ce11" style:family="table-cell" style:parent-style-name="Default">
+  <style:style style:name="ce10" style:family="table-cell" style:parent-style-name="Default">
    <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial1" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Arial1" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Arial1" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
   </style:style>
-  <style:style style:name="ce12" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="transparent"/>
-   <style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:font-weight="normal" style:font-size-asian="10pt" style:font-weight-asian="normal" style:font-size-complex="10pt" style:font-weight-complex="normal"/>
-  </style:style>
-  <style:style style:name="ce13" style:family="table-cell" style:parent-style-name="Default">
+  <style:style style:name="ce11" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:padding="0.071cm"/>
    <style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
   </style:style>
-  <style:style style:name="ce14" style:family="table-cell" style:parent-style-name="Default">
+  <style:style style:name="ce12" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:background-color="transparent"/>
    <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
   </style:style>
@@ -596,7 +588,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2017-02-10">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="15:18:39.924000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2017-02-21">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="17:51:03.272000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -893,6 +885,55 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Starting with d:Instrument</text:p>
      </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce2"/>
+     <table:table-cell table:style-name="ce7" table:number-columns-repeated="3"/>
+     <table:table-cell/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+      <text:p>*[(ends-with(name(),&apos;Domain&apos;) or ends-with(name(),&apos;DomainReference&apos;)) and ancestor::d:QuestionItem]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-container</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;question&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7"/>
+     <table:table-cell/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+      <text:p>*[(ends-with(name(),&apos;Domain&apos;) or ends-with(name(),&apos;DomainReference&apos;)) and ancestor::d:QuestionGrid]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-container</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;grid&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7"/>
+     <table:table-cell/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-container</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;question&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7"/>
+     <table:table-cell/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce2"/>
+     <table:table-cell table:style-name="ce7" table:number-columns-repeated="3"/>
+     <table:table-cell/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:number-columns-repeated="5"/>
@@ -1265,7 +1306,7 @@
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>&apos;full&apos;</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce14"/>
+     <table:table-cell table:style-name="ce12"/>
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
       <text:p>Getting the output format for d:QuestionItem item having a d:NominalDomain child</text:p>
      </table:table-cell>
@@ -1348,101 +1389,6 @@
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getting the help instruction for a l:Code having a r:Description child</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="3"/>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell/>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomain]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-hint-instruction</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Exemple : &apos;,d:NumericDomain/r:NumberRange/r:High/text())</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the hint instruction for a d:QuestionItem having a d:NumericDomain child</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomain[parent::d:ResponseDomainInMixed]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-hint-instruction</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Exemple : &apos;,r:NumberRange/r:High/text())</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the hint instruction for a d:NumericDomain having a d:ResponseDomainInMixed parent</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomainReference]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-hint-instruction</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Exemple : &apos;,descendant::r:High[not(ancestor::r:OutParameter)]/text())</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the hint instruction for a d:QuestionItem having a d:NumericDomainReference child</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomainReference[parent::d:ResponseDomainInMixed]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-hint-instruction</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Exemple : &apos;,descendant::r:High[not(ancestor::r:OutParameter)]/text())</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the hint instruction for a d:NumericDomainReference having a d:ResponseDomainInMixed parent</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
-      <text:p>d:DateTimeDomainReference[descendant::r:DateTypeCode/text()=&apos;date&apos;]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-hint-instruction</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;Date au format JJ/MM/AAAA&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the hint instruction for a d:DateTimeDomainReference having a r:DateTypeCode &apos;date&apos; descendant</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:DateTimeDomainReference/descendant::r:DateTypeCode/text()=&apos;date&apos;]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-hint-instruction</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;Date au format JJ/MM/AAAA&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the hint instruction for a d:QuestionItem having a d:DateTimeDomainReference having a r:DateTypeCode &apos;date&apos; descendant</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1599,7 +1545,7 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
       <text:p>d:Instruction[d:InstructionName/r:String=&apos;help&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1614,7 +1560,7 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
       <text:p>d:Instruction[d:InstructionName/r:String=&apos;instruction&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1737,13 +1683,13 @@
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>d:Sequence[parent::d:ThenConstructReference and d:TypeOfSequence/text()=&apos;hideable&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-hideable-command</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>../../d:IfCondition/r:Command/r:CommandContent</text:p>
      </table:table-cell>
      <table:table-cell/>
@@ -1752,13 +1698,13 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>d:Sequence[parent::d:ElseConstructReference and d:TypeOfSequence/text()=&apos;hideable&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-hideable-command</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;not (&apos;,../../d:IfCondition/r:Command/r:CommandContent,&apos;)&apos;)</text:p>
      </table:table-cell>
      <table:table-cell/>
@@ -1767,13 +1713,13 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>d:Sequence[parent::d:ThenConstructReference and d:TypeOfSequence/text()=&apos;deactivatable&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-deactivatable-command</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>../../d:IfCondition/r:Command/r:CommandContent</text:p>
      </table:table-cell>
      <table:table-cell/>
@@ -1782,13 +1728,13 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>d:Sequence[parent::d:ElseConstructReference and d:TypeOfSequence/text()=&apos;deactivatable&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-deactivatable-command</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;not (&apos;,../../d:IfCondition/r:Command/r:CommandContent,&apos;)&apos;)</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="2"/>
@@ -1800,7 +1746,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:Instruction[ancestor::d:ComputationItem]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1815,7 +1761,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and not(@decimalPositions)]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1830,7 +1776,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain[descendant::r:Low[@isInclusive=&apos;false&apos;] and not(@decimalPositions)]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1845,7 +1791,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(@decimalPositions)]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1860,7 +1806,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(@decimalPositions)]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1875,7 +1821,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and not(r:ManagedNumericRepresentation/@decimalPositions)]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1890,7 +1836,7 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference[descendant::r:Low[@isInclusive=&apos;false&apos;] and not(r:ManagedNumericRepresentation/@decimalPositions)]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -1905,7 +1851,7 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(r:ManagedNumericRepresentation/@decimalPositions)]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1920,7 +1866,7 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(r:ManagedNumericRepresentation/@decimalPositions)]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1935,7 +1881,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and @decimalPositions]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1950,7 +1896,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain[descendant::r:Low[@isInclusive=&apos;false&apos;] and @decimalPositions]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1965,7 +1911,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and @decimalPositions]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1980,7 +1926,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and @decimalPositions]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1995,7 +1941,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and r:ManagedNumericRepresentation/@decimalPositions]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2010,7 +1956,7 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference[descendant::r:Low[@isInclusive=&apos;false&apos;] and r:ManagedNumericRepresentation/@decimalPositions]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2025,7 +1971,7 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and r:ManagedNumericRepresentation/@decimalPositions]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2040,7 +1986,7 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and r:ManagedNumericRepresentation/@decimalPositions]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2055,7 +2001,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[*[ends-with(name(),&apos;Domain&apos;) and @regExp]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2070,7 +2016,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*[ends-with(name(),&apos;Domain&apos;) and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2085,7 +2031,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:DateTimeDomainReference[r:ManagedDateTimeRepresentation/r:DateTypeCode/text()=&apos;duration&apos;]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2096,11 +2042,107 @@
     <table:table-row table:style-name="ro2">
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:NumericDomainReference</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-minimum</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:Low[not(ancestor::r:OutParameter)]</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the minimum of a numeric domain response</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:NumericDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-minimum</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:Low[not(ancestor::r:OutParameter)]</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the minimum of a numeric domain response</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem[d:NumericDomain or d:NumericDomainReference]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-minimum</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:Low[not(ancestor::r:OutParameter)]</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the minimum of a numeric domain response</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:number-columns-repeated="5"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:NumericDomainReference</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-maximum</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:High[not(ancestor::r:OutParameter)]</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the maximum of a numeric domain response</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:NumericDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-maximum</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:High[not(ancestor::r:OutParameter)]</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the maximum of a numeric domain response</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem[d:NumericDomain or d:NumericDomainReference]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-maximum</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:High[not(ancestor::r:OutParameter)]</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the maximum of a numeric domain response</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:number-columns-repeated="5"/>
+    </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2115,7 +2157,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2130,7 +2172,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:ManagedNumericRepresentation]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2145,7 +2187,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference and descendant::r:ManagedNumericRepresentation]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2164,7 +2206,7 @@
       <text:p>d:Instruction[ancestor::d:ComputationItem]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
+      <text:p>enoddi:get-consistency-message</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>d:InstructionText/d:LiteralText/d:Text</text:p>
@@ -2174,460 +2216,7 @@
       <text:p>Getting the message of a d:Instruction item being a descendant of a d:ComputationItem</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell table:number-columns-repeated="2"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and not(@decimalPositions)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez saisir un nombre entier compris entre &apos;, string(number(r:NumberRange/r:Low/text())+1), &apos; et &apos;, r:NumberRange/r:High/text())</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomain item having no @decimalPositions attribute, having a d :GridResponseDomain or d:ResponseDomainInMixed parent and having a r:Low descendant with a @isInclusive attribute = false </text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomain[descendant::r:Low[@isInclusive=&apos;false&apos;] and not(@decimalPositions)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez saisir un nombre entier compris entre &apos;, string(number(d:NumericDomain/r:NumberRange/r:Low/text())+1), &apos; et &apos;, d:NumericDomain/r:NumberRange/r:High/text())</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomain child with the same specifications as before</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(@decimalPositions)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez saisir un nombre entier compris entre &apos;, r:NumberRange/r:Low/text(), &apos; et &apos;, r:NumberRange/r:High/text())</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and no r:Low descendant with a @isInclusive = false attribute and no @decimalPositions attribute</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomain[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(@decimalPositions)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez saisir un nombre entier compris entre &apos;, d:NumericDomain/r:NumberRange/r:Low/text(), &apos; et &apos;, d:NumericDomain/r:NumberRange/r:High/text())</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomain child with the same specifications as before</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and not(r:ManagedNumericRepresentation/@decimalPositions)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez saisir un nombre entier compris entre &apos;, string(number(descendant::r:Low[not(ancestor::r:OutParameter)]/text())+1), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text())</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:Low descendant having a @isInclusive = false attribute and no @decimalPositions in r :ManagedNumericRepresentation</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomainReference[descendant::r:Low[@isInclusive=&apos;false&apos;] and not(r:ManagedNumericRepresentation/@decimalPositions)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez saisir un nombre entier compris entre &apos;, string(number(descendant::r:Low[not(ancestor::r:OutParameter)]/text())+1), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text())</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference child with the same specifications as before</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(r:ManagedNumericRepresentation/@decimalPositions)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez saisir un nombre entier compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text())</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and no r:Low descendant having a @isInclusive = false attribute and no @decimalPositions in r :ManagedNumericRepresentation</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomainReference[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(r:ManagedNumericRepresentation/@decimalPositions)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez saisir un nombre entier compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text())</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference child with the same specifications as before</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce12"/>
-     <table:table-cell table:style-name="ce5"/>
-     <table:table-cell table:style-name="ce8"/>
-     <table:table-cell table:number-columns-repeated="2"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and (@decimalPositions &gt; 1)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(r:NumberRange/r:Low/text())+1), &apos; et &apos;, r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:Low descendant with a @isInclusive = false attribute and a @decimalPositions attribute greater than 1</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomain[descendant::r:Low[@isInclusive=&apos;false&apos;] and (@decimalPositions &gt; 1)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(d:NumericDomain/r:NumberRange/r:Low/text())+1), &apos; et &apos;, d:NumericDomain/r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,d:NumericDomain/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomain child with a @isInclusive = false attribute in a r :Low descendant and a @decimalPositions attribute greater than 1</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and (@decimalPositions &gt; 1)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, r:NumberRange/r:Low/text(), &apos; et &apos;, r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and no r:Low descendant with a @isInclusive = false attribute and a @decimalPositions attribute greater than 1</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomain[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and (@decimalPositions &gt; 1)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, d:NumericDomain/r:NumberRange/r:Low/text(), &apos; et &apos;, d:NumericDomain/r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,d:NumericDomain/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomain child without a @isInclusive = false attribute in a r :Low descendant and a @decimalPositions attribute greater than 1</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and (r:ManagedNumericRepresentation/@decimalPositions &gt; 1)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(descendant::r:Low[not(ancestor::r:OutParameter)]/text())+1), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,r:ManagedNumericRepresentation/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:Low descendant having a @isInclusive = false attribute and a @decimalPositions greater than 1 in r :ManagedNumericRepresentation</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomainReference[descendant::r:Low[@isInclusive=&apos;false&apos;] and (r:ManagedNumericRepresentation/@decimalPositions &gt; 1)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(descendant::r:Low[not(ancestor::r:OutParameter)]/text())+1), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,descendant::r:ManagedNumericRepresentation[not(ancestor::r:OutParameter)]/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference having a @isInclusive = false attribute in a r:Low descendant and a @decimalPositions attribute greater than 1 in a r:ManagedNumericRepresentation</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and (r:ManagedNumericRepresentation/@decimalPositions &gt; 1)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,r:ManagedNumericRepresentation/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and not having a r:Low descendant having a @isInclusive = false attribute and a @decimalPositions greater than 1 in r :ManagedNumericRepresentation</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomainReference[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and (r:ManagedNumericRepresentation/@decimalPositions &gt; 1)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,descendant::r:ManagedNumericRepresentation[not(ancestor::r:OutParameter)]/@decimalPositions,&apos; chiffres derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference and not having a r :Low descendant with a @isInclusive = false attribute and a @decimalPositions attribute greater than 1 in a r:ManagedNumericRepresentation</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce12"/>
-     <table:table-cell table:style-name="ce5"/>
-     <table:table-cell table:style-name="ce8"/>
-     <table:table-cell table:number-columns-repeated="2"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and (@decimalPositions =1)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(r:NumberRange/r:Low/text())+1), &apos; et &apos;, r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:Low descendant with a @isInclusive = false attribute and a @decimalPositions = 1 attribute</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomain[descendant::r:Low[@isInclusive=&apos;false&apos;] and (@decimalPositions =1)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(d:NumericDomain/r:NumberRange/r:Low/text())+1), &apos; et &apos;, d:NumericDomain/r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,d:NumericDomain/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomain child with a @isInclusive = false attribute in a r :Low descendant and a @decimalPositions =1 attribute</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and (@decimalPositions =1)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, r:NumberRange/r:Low/text(), &apos; et &apos;, r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and no r:Low descendant with a @isInclusive = false attribute and a @decimalPositions = 1 attribute</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomain[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and (@decimalPositions =1)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, d:NumericDomain/r:NumberRange/r:Low/text(), &apos; et &apos;, d:NumericDomain/r:NumberRange/r:High/text(),&apos; (avec au plus &apos;,d:NumericDomain/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomain child without a @isInclusive = false attribute in a r :Low descendant and with a @decimalPositions =1 attribute</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and (r:ManagedNumericRepresentation/@decimalPositions =1)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(descendant::r:Low[not(ancestor::r:OutParameter)]/text())+1), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,r:ManagedNumericRepresentation/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:Low descendant having a @isInclusive = false attribute and a @decimalPositions = 1 attribute in r :ManagedNumericRepresentation</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomainReference[descendant::r:Low[@isInclusive=&apos;false&apos;] and (r:ManagedNumericRepresentation/@decimalPositions =1)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, string(number(descendant::r:Low[not(ancestor::r:OutParameter)]/text())+1), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,descendant::r:ManagedNumericRepresentation[not(ancestor::r:OutParameter)]/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference having a @isInclusive = false attribute in a r:Low descendant and a @decimalPositions =1 attribute in a r:ManagedNumericRepresentation</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and (r:ManagedNumericRepresentation/@decimalPositions =1)]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,r:ManagedNumericRepresentation/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent and not having a r:Low descendant having a @isInclusive = false attribute and a @decimalPositions = 1 attribute in r :ManagedNumericRepresentation</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NumericDomainReference[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and (r:ManagedNumericRepresentation/@decimalPositions =1)]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(&apos;Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre &apos;, descendant::r:Low[not(ancestor::r:OutParameter)]/text(), &apos; et &apos;, descendant::r:High[not(ancestor::r:OutParameter)]/text(),&apos; (avec au plus &apos;,descendant::r:ManagedNumericRepresentation[not(ancestor::r:OutParameter)]/@decimalPositions,&apos; chiffre derrière le séparateur &quot;.&quot;)&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:NumericDomainReference not having a @isInclusive = false attribute in a r:Low descendant and a @decimalPositions =1 attribute in a r:ManagedNumericRepresentation</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce12"/>
-     <table:table-cell table:style-name="ce5"/>
-     <table:table-cell table:style-name="ce8"/>
-     <table:table-cell table:number-columns-repeated="2"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[*[ends-with(name(),&apos;Domain&apos;) and @regExp]]</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;Vous devez saisir une valeur correcte&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a child name ending with &apos;Domain&apos; and having a @regExp attribute </text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>*[ends-with(name(),&apos;Domain&apos;) and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;Vous devez saisir une valeur correcte&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of any item with name ending with &apos;Domain&apos;, a @regExp attribute and a d:GridResponseDomain or d:ResponseDomainInMixed parent</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell table:number-columns-repeated="2"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:DateTimeDomainReference[descendant::r:DateTypeCode/text()=&apos;date&apos;]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;Entrez une date valide&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:DateTimeDomainReference being a DateTypeCode &apos;date&apos;</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:DateTimeDomainReference/descendant::r:DateTypeCode/text()=&apos;date&apos;]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-message</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;Entrez une date valide&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:QuestionItem having a d:DateTimeDomainReference descendant being a DateTypeCode &apos;date&apos;</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell table:number-columns-repeated="2"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
+    <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:Instruction[ancestor::d:ComputationItem]</text:p>
      </table:table-cell>
@@ -2649,7 +2238,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain[r:NumberRange]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2664,7 +2253,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and r:NumberRange]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2679,7 +2268,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference[descendant::r:NumberRange]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2694,7 +2283,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:NumberRange]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2709,7 +2298,7 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:TextDomain[@maxLength]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2724,7 +2313,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:TextDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and @maxLength]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2739,7 +2328,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:DateTimeDomain[r:DateTypeCode/text()=&apos;duration&apos;]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2754,7 +2343,7 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:DateTimeDomainReference[descendant::r:DateTypeCode/text()=&apos;duration&apos;]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce13" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2769,34 +2358,203 @@
      <table:table-cell table:style-name="ce5" table:number-columns-repeated="3"/>
      <table:table-cell table:number-columns-repeated="2"/>
     </table:table-row>
-    <table:table-row table:style-name="ro2">
+    <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:DateTimeDomainReference[descendant::r:DateTypeCode/text()=&apos;date&apos;]</text:p>
+      <text:p>d:DateTimeDomainReference</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-type</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;date&apos;</text:p>
+      <text:p>descendant::r:DateTypeCode[not(ancestor::r:OutParameter)]</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the type of a d:DateTimeDomainReference being a &apos;date&apos; DateTypeCode</text:p>
+      <text:p>Getting the type of a d:DateTimeDomainReference</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:DateTimeDomainReference/descendant::r:DateTypeCode/text()=&apos;date&apos;]</text:p>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>d:DateTimeDomain</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-type</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;date&apos;</text:p>
+      <text:p>descendant::r:DateTypeCode[not(ancestor::r:OutParameter)]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the type of a d:DateTimeDomain</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem[d:DateTimeDomainReference or d:DateTimeDomain]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-type</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:DateTypeCode[not(ancestor::r:OutParameter)]</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the type of a d:QuestionItem having a d:DateTimeDomainReference being a &apos;date&apos; DateTypeCode</text:p>
+      <text:p>Getting the type of a d:QuestionItem having a d:DateTimeDomainReference or a d:DateTimeDomain</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:NumericDomainReference</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-type</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;number&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the type of a d:NumericDomainReference</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:NumericDomain</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-type</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;number&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the type of a d:NumericDomain</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem[d:NumericDomainReference or d:NumericDomain]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-type</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;number&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the type of a d:QuestionItem having a d:NumericDomainReference or a d:NumericDomain</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:TextDomain</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-type</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;text&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the type of a d:TextDomain</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem[d:TextDomain]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-type</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;text&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the type of a d:QuestionItem having a d:TextDomain</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" table:number-columns-repeated="3"/>
+     <table:table-cell table:number-columns-repeated="2"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:DateTimeDomainReference</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-format</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:DateFieldFormat[not(ancestor::r:OutParameter)]</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the format of a d:DateTimeDomainReference</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>d:DateTimeDomain</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-format</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:DateFieldFormat[not(ancestor::r:OutParameter)]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the format of a d:DateTimeDomain</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem[d:DateTimeDomainReference or d:DateTimeDomain]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-format</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:DateFieldFormat[not(ancestor::r:OutParameter)]</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the format of a d:QuestionItem having a d:DateTimeDomainReference or a d:DateTimeDomain</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:TextDomain</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-format</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>@regExp</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the format of a d:TextDomain</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem[d:TextDomain]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-format</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+      <text:p>d:TextDomain/@regExp</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the format of a d:QuestionItem having a d:TextDomain</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
@@ -2877,10 +2635,10 @@
       <text:p>Getting the minimum required of a d:StructuredMixedGridResponseDomain using the d:Roster/@minimumRequired attribute</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro2" table:number-rows-repeated="1048422">
+    <table:table-row table:style-name="ro2" table:number-rows-repeated="1048401">
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1" table:number-rows-repeated="3">
+    <table:table-row table:style-name="ro1" table:number-rows-repeated="40">
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
