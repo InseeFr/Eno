@@ -179,14 +179,10 @@
     </xsl:template>
 
     <!-- Changing format of the displayed language from xx-XX to xx -->
-    <xsl:template match="@xml:lang[.='fr-FR']">
-        <xsl:attribute name="xml:lang" select="'fr'"/>
+    <xsl:template match="@xml:lang[contains(.,'-')]">
+        <xsl:attribute name="xml:lang" select="substring-before(.,'-')"/>
     </xsl:template>
-
-    <xsl:template match="@xml:lang[.='en-IE']">
-        <xsl:attribute name="xml:lang" select="'en'"/>
-    </xsl:template>
-
+    
     <!-- For each xhtml:a element not having a @href attribute : replacing it with an empty text -->
     <xsl:template match="xhtml:a[not(contains(@href,'#'))]">
         <xsl:copy>
