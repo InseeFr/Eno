@@ -32,21 +32,6 @@
                 </xhtml:title>
                 <xhtml:link rel="stylesheet"
                     href="{concat('/',$properties//css/dossier,'/',$properties//css/principale)}"/>
-                <xhtml:link rel="stylesheet">
-                    <xsl:attribute name="href"
-                        select="concat('/', $properties//css/dossier, '/', tokenize($campaign, '-')[1], '/', tokenize($campaign, '-')[1], '.css')"
-                    />
-                </xhtml:link>
-                <xhtml:link rel="stylesheet">
-                    <xsl:attribute name="href"
-                        select="concat('/', $properties//css/dossier, '/', tokenize($campaign, '-')[1], '/', tokenize($campaign, '-')[2], '.css')"
-                    />
-                </xhtml:link>
-                <xhtml:link rel="stylesheet">
-                    <xsl:attribute name="href"
-                        select="concat('/', $properties//css/dossier, '/', tokenize($campaign, '-')[1], '/', $model, '.css')"
-                    />
-                </xhtml:link>
                 <xf:model id="fr-form-model" xxf:expose-xpath-types="true"
                     xxf:noscript-support="true">
 
