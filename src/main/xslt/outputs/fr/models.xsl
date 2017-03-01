@@ -11,8 +11,6 @@
     <!-- This file is imported in the ddi2fr.xsl file (already in ddi2fr-fixed.xsl) -->
 
     <!-- Parameters defined in build-non-regression.xml -->
-    <xsl:param name="campaign" as="xs:string"/>
-    <xsl:param name="model" as="xs:string"/>
     <xsl:param name="properties-file"/>
     <xsl:variable name="properties" select="doc($properties-file)"/>
 

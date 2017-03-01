@@ -14,10 +14,6 @@
 
     <xsl:strip-space elements="*"/>
 
-    <!-- The campaign -->
-    <xsl:param name="campaign" as="xs:string"/>
-    <!-- The model -->
-    <xsl:param name="model" as="xs:string"/>
     <!-- Eno properties file -->
     <xsl:param name="properties-file"/>
 
@@ -31,6 +27,13 @@
     <!-- Counting the number of modules and storing it -->
     <xsl:variable name="number-of-modules">
         <xsl:value-of select="count(//fr:body/*[name()='fr:section' or name()='xf:repeat'])"/>
+    </xsl:variable>
+    
+    <xsl:variable name="number-of-pages-before-progress-start" as="xs:integer">
+        <xsl:value-of select="number(1)"/>
+    </xsl:variable>
+    <xsl:variable name="number-of-pages-after-progress-end" as="xs:integer">
+        <xsl:value-of select="number(1)"/>
     </xsl:variable>
 
     <xsl:template match="/">
@@ -52,25 +55,21 @@
     <!-- Adding those elements to the main instance -->
     <xsl:template match="xf:instance[@id='fr-form-instance']/form">
         <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-            <Validation>
+            <xsl:apply-templates select="@*"/>
+            <Beginning>
                 <Dummy/>
-            </Validation>
-            <Confirmation>
-                <Dummy/>
-            </Confirmation>
+            </Beginning>
+            <xsl:apply-templates select="node()"/>
             <End>
                 <Dummy/>
             </End>
             <stromae>
-                <ProgressBarContainer/>
                 <util>
                     <CurrentSection>1</CurrentSection>
                     <CurrentSectionName/>
                     <xsl:apply-templates select="//fr:body/xf:repeat" mode="page-loop"/>
-                    <expedie>non</expedie>
-                    <extrait>non</extrait>
-                    <dateHeure/>
+                    <Send>non</Send>
+                    <DateTime/>
                 </util>
             </stromae>
         </xsl:copy>
@@ -84,11 +83,9 @@
     <!-- Adding those elements in the corresponding bind -->
     <xsl:template match="xf:bind[@id='fr-form-instance-binds']">
         <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-            <xf:bind id="validation-bind" name="validation" ref="Validation"
-                relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
-            <xf:bind id="confirmation-bind" name="confirmation" ref="Confirmation"
-                relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
+            <xsl:apply-templates select="@*"/>
+            <xf:bind id="beginning-bind" name="beginning" ref="Beginning"/>
+            <xsl:apply-templates select="node()"/>
             <xf:bind id="end-bind" name="end" ref="End"/>
             <xf:bind id="current-section-name-bind" name="current-section-name"
                 ref="stromae/util/CurrentSectionName">
@@ -107,7 +104,6 @@
                     </xsl:for-each>
                 </xsl:attribute>
             </xf:bind>
-        <xf:bind id="progress-bar-container-bind" ref="ProgressBarContainer"/>
         </xsl:copy>
     </xsl:template>
 
@@ -127,28 +123,32 @@
     <xsl:template
         match="resource[@xml:lang='en' and ancestor::xf:instance[@id='fr-form-resources']]">
         <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-            <Validation>
-                <label>VALIDATION</label>
-            </Validation>
-            <Confirmation>
-                <label>CONFIRMATION</label>
-            </Confirmation>
+            <xsl:apply-templates select="@*"/>
+            <Beginning>
+                <label>BEGINNING</label>
+            </Beginning>
+            <xsl:apply-templates select="node()"/>
             <End>
                 <label>END</label>
             </End>
-            <ProgressBarContainer>
-                <label>Your </label>
-            </ProgressBarContainer>
             <Progress>
                 <label>&lt;p&gt;&lt;b&gt;Progress&lt;/b&gt;&lt;/p&gt;</label>
             </Progress>
+            <Start>
+                <label>Start</label>
+            </Start>
             <Previous>
                 <label>Go Back</label>
             </Previous>
             <Next>
                 <label>Save and continue</label>
             </Next>
+            <Send>
+                <label>Send</label>
+            </Send>
+            <ConfirmationMessage>
+                <label>Your questionnaire was submitted the</label>
+            </ConfirmationMessage>
             <FatalError>
                 <label>There was a problem with saving/submitting your answers.</label>
             </FatalError>
@@ -187,28 +187,32 @@
     <xsl:template
         match="resource[@xml:lang='fr' and ancestor::xf:instance[@id='fr-form-resources']]">
         <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-            <Validation>
-                <label>VALIDATION</label>
-            </Validation>
-            <Confirmation>
-                <label>CONFIRMATION</label>
-            </Confirmation>
+            <xsl:apply-templates select="@*"/>
+            <Beginning>
+                <label>DEBUT</label>
+            </Beginning>
+            <xsl:apply-templates select="node()"/>
             <End>
                 <label>FIN</label>
             </End>
-            <ProgressBarContainer>
-                <label>Votre </label>
-            </ProgressBarContainer>
             <Progress>
                 <label>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</label>
             </Progress>
+            <Start>
+                <label>Commencer</label>
+            </Start>
             <Previous>
                 <label>Retour</label>
             </Previous>
             <Next>
                 <label>Enregistrer et continuer</label>
             </Next>
+            <Send>
+                <label>Envoyer</label>
+            </Send>
+            <ConfirmationMessage>
+                <label>Votre questionnaire a bien été expédié le</label>
+            </ConfirmationMessage>
             <FatalError>
                 <label>Problème lors de l'enregistrement/l'expédition de vos réponses.</label>
             </FatalError>
@@ -258,25 +262,19 @@
             <!-- Instance in charge of the navigation -->
             <xf:instance id="fr-form-util">
                 <Util>
+                    <Start/>
                     <Previous/>
                     <Next/>
                     <Send/>
-                    <ConfirmationNo/>
-                    <ConfirmationYes/>
-                    <Sending/>
-                    <!-- Element that prevent the user from clicking 2 times on the sending button -->
-                    <Clickable/>
-                    <!--                            <deblocage/>-->
                     <ProgressPercent/>
                     <Progress/>
                     <PageTop/>
                     <Pages>
+                        <Beginning/>
                         <xsl:for-each
                             select="//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and not(name()='stromae') and child::*]">
                             <xsl:element name="{name()}"/>
                         </xsl:for-each>
-                        <Validation/>
-                        <Confirmation/>
                         <End/>
                     </Pages>
                     <PreviousNext/>
@@ -291,20 +289,16 @@
 
             <!-- The corresponding binds -->
             <xf:bind id="fr-form-util-binds" ref="instance('fr-form-util')">
+                <xf:bind id="start-bind"
+                    relevant="instance('fr-form-instance')/stromae/util/CurrentSection='1'"
+                    ref="Start"/>
                 <xf:bind id="previous-bind"
-                    relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2)"
+                    relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*))"
                     ref="Previous"/>
                 <xf:bind id="next-bind"
-                    relevant="not(number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-3)"
+                    relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-1)"
                     ref="Next"/>
-                <!-- The sending button is readonly if he's not clickable -->
-                <xf:bind id="send-bind" ref="Send"
-                    readonly="instance('fr-form-util')/Clickable='non'"/>
-                <xf:bind id="confirmation-no-bind" ref="ConfirmationNo"/>
-                <xf:bind id="confirmation-yes-bind" ref="ConfirmationYes"/>
-                <xf:bind id="sending-bind"
-                    relevant="instance('fr-form-instance')/stromae/util/CurrentSection=string(count(instance('fr-form-instance')/*[child::* and not(name()='stromae')])) and instance('fr-form-instance')/stromae/util/expedie='non'"
-                    ref="Sending"/>
+                <xf:bind id="send-bind" ref="Send" relevant="instance('fr-form-instance')/stromae/util/Send='non'"/>
                 <xf:bind id="progress-percent-bind" name="progress-percent"
                     ref="ProgressPercent">
                     <xsl:attribute name="calculate">
@@ -355,7 +349,7 @@
                 <xf:bind id="page-top-bind" ref="PageTop"/>
                 <xf:bind id="confirmation-message-bind" ref="ConfirmationMessage"
                     name="confirmation-message"
-                    calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"/>
+                    relevant="instance('fr-form-instance')/stromae/util/Send='oui'"/>
                 <xf:bind id="pages-bind" ref="Pages">
                     <xsl:apply-templates
                         select="//xf:instance[@id='fr-form-instance']/form/*[child::*]"
@@ -364,14 +358,9 @@
             </xf:bind>
 
             <!--  Saving : be careful on the parameters order : formulaire must stand before unite-enquete -->
+            <xsl:comment>You can add a resource attribute for the save submission by processing the result with your own xslt.</xsl:comment>
             <xf:submission id="save" method="post" ref="instance('fr-form-instance')" replace="none"
                 relevant="false">
-                <xsl:variable name="resource">
-                    <xsl:value-of
-                        select="concat('{xxf:property(''server-exist-orbeon'')}/restxq/{xxf:property(''enregistrer-service'')}/',$campaign,'/',$model,'/{xxf:get-request-parameter(''unite-enquete'')}')"
-                    />
-                </xsl:variable>
-                <xsl:attribute name="resource" select="$resource"/>
                 <xf:action ev:event="xforms-submit-error">
                     <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
                 </xf:action>
@@ -383,41 +372,20 @@
 
             <!--  Submitting. -->
             <!--  Hint / Instruction generation : the model must be configured, rest is static. -->
+            <xsl:comment>You can add a resource attribute for the submit submission by processing the result with your own xslt.</xsl:comment>
             <xf:submission id="submit" method="post" ref="instance('fr-form-instance')"
                 replace="none" relevant="false">
-
-                <!-- Trying to save -->
-                <xsl:variable name="resource">
-                    <xsl:value-of
-                        select="concat('{xxf:property(''server-exist-orbeon'')}/restxq/{xxf:property(''enregistrer-service'')}/',$campaign,'/',$model,'/{xxf:get-request-parameter(''unite-enquete'')}')"
-                    />
-                </xsl:variable>
-                <xsl:attribute name="resource" select="$resource"/>
                 <!-- If somehow it crashes, we register the survey as not submitted and the page marker is brought down-->
                 <xf:action ev:event="xforms-submit-error">
-                    <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
+                    <xf:setvalue ref="instance('fr-form-instance')/stromae/util/Send"
                         value="string('non')"/>
-                    <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                        value="string(number(instance('fr-form-instance')/stromae/util/CurrentSection)-1)"/>
                     <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
                 </xf:action>
                 <xf:action ev:event="xforms-submit-done">
-                    <!-- Switching page -->
-                    <xf:toggle case="{$choice}"/>
-                    <!-- Going to the top of the page -->
-                    <xf:setfocus control="page-top-control"/>
                     <!-- This helps to avoid native Orbeon alert messages when wanting to leave the survey even thought the datas are saved. -->
                     <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override"
                         >true</xf:setvalue>
                 </xf:action>
-            </xf:submission>
-            <xf:submission id="submit-pdf" method="post" replace="none">
-                <xsl:variable name="resource">
-                    <xsl:value-of
-                        select="concat('/expedier/',$campaign,'/{xxf:get-request-parameter(''unite-enquete'')}?modele=',$model)"
-                    />
-                </xsl:variable>
-                <xsl:attribute name="resource" select="$resource"/>
             </xf:submission>
             <!-- Initialization action -->
             <!-- Initialization of all variable text fields -->
@@ -426,7 +394,7 @@
                 <xf:toggle case="{$choice}"/>
                 <!-- If this isn't submitted yet, and we're not on the first page -->
                 <xxf:show
-                    if="instance('fr-form-instance')/stromae/util/expedie='non' and not(instance('fr-form-instance')/stromae/util/CurrentSection='1')"
+                    if="instance('fr-form-instance')/stromae/util/Send='non' and not(instance('fr-form-instance')/stromae/util/CurrentSection='1')"
                     dialog="welcome-back"/>
             </xf:action>
 
@@ -599,9 +567,8 @@
                 </xf:action>
 
                 <!-- Saving the time when the saving happened -->
-                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
-                    value="fn:format-dateTime(fn:current-dateTime(),
-                    '[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
+                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/DateTime"
+                    value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
 
                 <!-- Switching page -->
                 <xf:toggle case="{$choice}"/>
@@ -611,6 +578,17 @@
                 <xf:setfocus control="page-top-control"/>
             </xf:action>
 
+            <!-- What happens when the form is submitted -->
+            <xf:action ev:event="submit-form">
+                <!-- Writing in the instance that the survey is submitted -->
+                <xf:setvalue
+                    ref="instance('fr-form-instance')/stromae/util/Send" value="string('oui')"/>
+                <xf:setvalue
+                    ref="instance('fr-form-instance')/stromae/util/DateTime"
+                    value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
+                <!-- Dispatching the submission -->
+                <xf:send submission="submit"/>
+            </xf:action>
         </xsl:copy>
     </xsl:template>
 
@@ -765,6 +743,13 @@
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
             <fr:buttons>
+                <xf:trigger id="start" bind="start-bind">
+                    <xf:label ref="$form-resources/Start/label"/>
+                    <xf:action ev:event="DOMActivate">
+                        <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
+                        <xf:dispatch name="page-change" targetid="fr-form-model"/>
+                    </xf:action>
+                </xf:trigger>
                 <xf:trigger id="previous" bind="previous-bind">
                     <xf:label ref="$form-resources/Previous/label"/>
                     <xf:action ev:event="DOMActivate">
@@ -791,11 +776,6 @@
             <xf:input id="page-top-control" bind="page-top-bind" class="page-top"/>
             <!-- Representing the progress-bar element on every page -->
             <xhtml:div class="progress-bar-container">
-                <!-- This element gives information on the questionned unit -->
-                <xf:output id="progress-bar-container-control" bind="progress-bar-container-bind">
-                    <xf:label ref="$form-resources/ProgressBarContainer/label" mediatype="text/html"
-                    />
-                </xf:output>
                 <!-- This element measures the survey's progress -->
                 <xhtml:span class="right">
                     <xf:output id="progress-control" bind="progress-bind">
@@ -815,132 +795,27 @@
             <!-- Using a switch in order to display each module on the same page -->
             <xsl:apply-templates select="*[not(name()='fr:section') and not(name()='xf:repeat')]"/>
             <xf:switch id="section-body">
+                <xf:case id="1">
+                    <fr:section id="beginning-control" bind="beginning-bind" name="beginning">
+                        <xf:label ref="$form-resources/Beginning/label"/>
+                        <xhtml:div class="center"><xhtml:p>Generic beginning page, can be overridden or removed by processing your own xslt on the result.</xhtml:p></xhtml:div>
+                    </fr:section>
+                </xf:case>
                 <xsl:apply-templates select="*[name()='fr:section' or name()='xf:repeat']"/>
-                <xf:case id="{string(number($number-of-modules)+1)}">
-                    <fr:section id="validation-control" bind="validation-bind" name="validation">
-                        <xf:label ref="$form-resources/Validation/label"/>
-                        <xhtml:div class="center">
-                            <xhtml:div class="frame">
-                                <xhtml:p>
-                                    <xhtml:b>Vous êtes arrivé à la fin du questionnaire.</xhtml:b>
-                                </xhtml:p>
-                                <xhtml:p class="indentation-with-bullet"><xhtml:b>Si vous avez
-                                        terminé de renseigner&#160;</xhtml:b>votre questionnaire,
-                                    pour le transmettre à l'Insee, merci de cliquer ci-dessous sur
-                                    le bouton : "Envoyer".</xhtml:p>
-                                <xhtml:p class="simple-identation">
-                                    <xhtml:b>Une fois le questionnaire envoyé :</xhtml:b>
-                                </xhtml:p>
-                                <xhtml:p class="double-indentation">- vous ne
-                                        pourrez&#160;<xhtml:b>plus modifier vos réponses
-                                    </xhtml:b>&#160;;</xhtml:p>
-                                <xhtml:p class="double-indentation">- vous pourrez télécharger
-                                        le&#160;<xhtml:b>récapitulatif de vos réponses au format
-                                        pdf</xhtml:b>.</xhtml:p>
-                                <xhtml:div class="center-body">
-                                    <xf:trigger bind="send-bind">
-                                        <xf:label>Envoyer</xf:label>
-                                        <!-- When clicking on the sending button, making it not clickable -->
-                                        <xf:action ev:event="DOMActivate">
-                                            <xf:setvalue ref="instance('fr-form-util')/Clickable"
-                                                value="string('non')"/>
-                                            <xf:setvalue ref="instance('fr-form-util')/PreviousNext"
-                                                value="1"/>
-                                            <xf:dispatch name="page-change-done"
-                                                targetid="fr-form-model"/>
-                                        </xf:action>
-                                    </xf:trigger>
-                                </xhtml:div>
-                                <xhtml:p class="indentation-with-bullet"><xhtml:b>Si vous souhaitez
-                                        y apporter des modifications</xhtml:b>, vous pouvez
-                                    :</xhtml:p>
-                                <xhtml:p class="double-indentation">- revenir dessus dès à présent
-                                    en cliquant sur le bouton "Retour" ;</xhtml:p>
-                                <xhtml:p class="double-indentation">- ou plus tard en cliquant sur
-                                    le bouton "Fermer le questionnaire" et en vous authentifiant à
-                                    nouveau.</xhtml:p>
-                                <xhtml:p class="double-indentation"
-                                        ><xsl:text>Dans les deux cas, vos données seront
-                                    enregistrées mais</xsl:text>&#160;<xhtml:b><xsl:text>le questionnaire ne sera pas
-                                        envoyé à </xsl:text>l'Insee</xhtml:b>.</xhtml:p>
-                                <xsl:variable name="link">
-                                    <xsl:value-of
-                                        select="'{concat(xxf:property(''url-orbeon''),xxf:property(''lien-deconnexion''))}'"
-                                    />
-                                </xsl:variable>
-                                <xhtml:p class="center-body">
-                                    <xhtml:a href="{$link}">Fermer le questionnaire</xhtml:a>
-                                </xhtml:p>
-                            </xhtml:div>
-                        </xhtml:div>
-                    </fr:section>
-                </xf:case>
                 <xf:case id="{string(number($number-of-modules)+2)}">
-                    <fr:section id="confirmation-control" bind="confirmation-bind"
-                        name="confirmation">
-                        <xf:label ref="$form-resources/Confirmation/label"/>
-                        <xhtml:div class="center center-body">
-                            <xhtml:div class="frame">
-                                <xhtml:p>
-                                    <xhtml:b>CONFIRMER VOTRE ENVOI</xhtml:b>
-                                </xhtml:p>
-                                <xhtml:p>Votre réponse est définitive et vous souhaitez
-                                    l'envoyer.</xhtml:p>
-                                <xf:trigger bind="confirmation-yes-bind">
-                                    <xf:label>Je confirme l'envoi</xf:label>
-                                    <xf:action ev:event="DOMActivate">
-                                        <!-- Writing in the instance that the survey is submitted -->
-                                        <xf:setvalue
-                                            ref="instance('fr-form-instance')/stromae/util/expedie"
-                                            value="string('oui')"/>
-                                        <xf:setvalue
-                                            ref="instance('fr-form-instance')/stromae/util/dateHeure"
-                                            value="fn:format-dateTime(fn:current-dateTime(),
-                                            '[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
-                                        <!-- Setting the page indicator + 1-->
-                                        <xf:setvalue
-                                            ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                                            value="string(number(instance('fr-form-instance')/stromae/util/CurrentSection)+1)"/>
-                                        <!-- Dispatching the submission -->
-                                        <xf:send submission="submit"/>
-                                        <xf:send submission="submit-pdf"/>
-                                    </xf:action>
-                                </xf:trigger>
-                                <xf:trigger bind="confirmation-no-bind">
-                                    <xf:label>Ne pas envoyer</xf:label>
-                                    <xf:action ev:event="DOMActivate">
-                                        <!-- When clicking on this button, we make the Sending button clickable again -->
-                                        <xf:setvalue ref="instance('fr-form-util')/Clickable"
-                                            value="string('oui')"/>
-                                        <xf:setvalue ref="instance('fr-form-util')/PreviousNext"
-                                            value="-1"/>
-                                        <xf:dispatch name="page-change-done"
-                                            targetid="fr-form-model"/>
-                                    </xf:action>
-                                </xf:trigger>
-                            </xhtml:div>
-                        </xhtml:div>
-                    </fr:section>
-                </xf:case>
-                <xf:case id="{string(number($number-of-modules)+3)}">
                     <fr:section id="end-control" bind="end-bind" name="end">
                         <xf:label ref="$form-resources/End/label"/>
-                        <xhtml:div class="center center-body">
-                            <xhtml:div class="frame">
-                                <xf:output id="confirmation-message"
-                                    bind="confirmation-message-bind" class="confirmation-message"
-                                    xxf:order="label control hint help alert"/>
-                                <xhtml:p>
-                                    <xhtml:a href="PDFSummary">Télécharger le récapitulatif de vos
-                                        réponses au format PDF</xhtml:a>. <xhtml:img
-                                        src="{concat('/',$properties//images/dossier,'/',$properties//images/pdf)}"
-                                    />
-                                </xhtml:p>
-                                <xhtml:p>
-                                    <xhtml:b>La Statistique publique vous remercie de votre
-                                        collaboration à cette enquête.</xhtml:b>
-                                </xhtml:p>
-                            </xhtml:div>
+                        <xhtml:div class="center">
+                            <xhtml:p>Generic end page, can be overridden or removed by processing your own xslt on the result.</xhtml:p>
+                            <xf:trigger id="send" bind="send-bind">
+                                <xf:label ref="$form-resources/Send/label"/>
+                                <xf:action ev:event="DOMActivate">
+                                    <xf:dispatch name="submit-form" targetid="fr-form-model"/>
+                                </xf:action>
+                            </xf:trigger>
+                            <xf:output id="confirmation-message" bind="confirmation-message-bind">
+                                <xf:label ref="concat($form-resources/ConfirmationMessage/label,' ',instance('fr-form-instance')/stromae/util/DateTime)"/>
+                            </xf:output>
                         </xhtml:div>
                     </fr:section>
                 </xf:case>
@@ -950,7 +825,7 @@
                 <xf:output ref="instance('fr-form-util')/ErrorText">
                     <xf:label ref="$form-resources/ErrorText/label" mediatype="text/html"/>
                 </xf:output>
-                <xf:trigger id="CorrectError">
+                <xf:trigger id="correct-error">
                     <xf:label ref="$form-resources/Correct/label"/>
                     <xxf:hide ev:event="DOMActivate" dialog="error"/>
                 </xf:trigger>
@@ -960,11 +835,11 @@
                 <xf:output ref="instance('fr-form-util')/WarningText">
                     <xf:label ref="$form-resources/WarningText/label" mediatype="text/html"/>
                 </xf:output>
-                <xf:trigger id="CorrectWarning">
+                <xf:trigger id="correct-warning">
                     <xf:label ref="$form-resources/Correct/label"/>
                     <xxf:hide ev:event="DOMActivate" dialog="warning"/>
                 </xf:trigger>
-                <xf:trigger id="Continue">
+                <xf:trigger id="continue">
                     <xf:label ref="$form-resources/Continue/label"/>
                     <xxf:hide ev:event="DOMActivate" dialog="warning"/>
                     <xf:action ev:event="DOMActivate">
@@ -977,11 +852,11 @@
                 <xf:output ref="instance('fr-form-util')/WelcomeBackText">
                     <xf:label ref="$form-resources/WelcomeBackText/label" mediatype="text/html"/>
                 </xf:output>
-                <xf:trigger id="GoBack">
+                <xf:trigger id="go-back">
                     <xf:label ref="$form-resources/GoBack/label"/>
                     <xxf:hide ev:event="DOMActivate" dialog="welcome-back"/>
                 </xf:trigger>
-                <xf:trigger id="GoToFirstPage">
+                <xf:trigger id="go-to-first-page">
                     <xf:label ref="$form-resources/GoToFirstPage/label"/>
                     <xf:action ev:event="DOMActivate">
                         <xxf:hide dialog="welcome-back"/>
@@ -1004,7 +879,7 @@
     <!-- Wrapping the existing modules in a xf:case -->
     <xsl:template match="fr:section[parent::fr:body] | xf:repeat[parent::fr:body]">
         <xsl:variable name="index"
-            select="number($number-of-modules)-count(following-sibling::fr:section)-count(following-sibling::xf:repeat)"/>
+            select="number($number-of-modules)-count(following-sibling::fr:section)-count(following-sibling::xf:repeat)+1"/>
         <xf:case id="{$index}">
             <xsl:copy>
                 <xsl:apply-templates select="node() | @*"/>
