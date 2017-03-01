@@ -90,7 +90,7 @@
                <Util>
                   <CurrentSection>1</CurrentSection>
                   <CurrentSectionName/>
-                  <Send>non</Send>
+                  <Send>false</Send>
                   <DateTime/>
                </Util>
             </form>
@@ -1467,7 +1467,7 @@
                      ref="Next"/>
             <xf:bind id="send-bind"
                      ref="Send"
-                     relevant="instance('fr-form-instance')/Util/Send='non'"/>
+                     relevant="instance('fr-form-instance')/Util/Send='false'"/>
             <xf:bind id="progress-percent-bind"
                      name="progress-percent"
                      ref="ProgressPercent"
@@ -1477,7 +1477,7 @@
             <xf:bind id="confirmation-message-bind"
                      ref="ConfirmationMessage"
                      name="confirmation-message"
-                     relevant="instance('fr-form-instance')/Util/Send='oui'"/>
+                     relevant="instance('fr-form-instance')/Util/Send='true'"/>
             <xf:bind id="pages-bind" ref="Pages">
                <xf:bind id="page-INSEE-SIMPSONS-SEQ-1-bind"
                         name="INSEE-SIMPSONS-SEQ-1"
@@ -1520,7 +1520,7 @@
                         replace="none"
                         relevant="false">
             <xf:action ev:event="xforms-submit-error">
-               <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('non')"/>
+               <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('false')"/>
                <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
             </xf:action>
             <xf:action ev:event="xforms-submit-done">
@@ -1529,7 +1529,7 @@
          </xf:submission>
          <xf:action ev:event="xforms-ready">
             <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
-            <xxf:show if="instance('fr-form-instance')/Util/Send='non' and not(instance('fr-form-instance')/Util/CurrentSection='1')"
+            <xxf:show if="instance('fr-form-instance')/Util/Send='false' and not(instance('fr-form-instance')/Util/CurrentSection='1')"
                       dialog="welcome-back"/>
          </xf:action>
          <xf:action ev:event="page-change">
@@ -1568,7 +1568,7 @@
             <xf:setfocus control="page-top-control"/>
          </xf:action>
          <xf:action ev:event="submit-form">
-            <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('oui')"/>
+            <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('true')"/>
             <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime"
                          value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
             <xf:send submission="submit"/>

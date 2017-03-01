@@ -67,7 +67,7 @@
                 <CurrentSection>1</CurrentSection>
                 <CurrentSectionName/>
                 <xsl:apply-templates select="//fr:body/xf:repeat" mode="page-loop"/>
-                <Send>non</Send>
+                <Send>false</Send>
                 <DateTime/>
             </Util>
         </xsl:copy>
@@ -308,7 +308,7 @@
                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-1)"
                     ref="Next"/>
                 <xf:bind id="send-bind" ref="Send"
-                    relevant="instance('fr-form-instance')/Util/Send='non'"/>
+                    relevant="instance('fr-form-instance')/Util/Send='false'"/>
                 <xf:bind id="progress-percent-bind" name="progress-percent" ref="ProgressPercent">
                     <xsl:attribute name="calculate">
                         <xsl:variable name="total-group-pages-count">
@@ -376,7 +376,7 @@
                 <xf:bind id="page-top-bind" ref="PageTop"/>
                 <xf:bind id="confirmation-message-bind" ref="ConfirmationMessage"
                     name="confirmation-message"
-                    relevant="instance('fr-form-instance')/Util/Send='oui'"/>
+                    relevant="instance('fr-form-instance')/Util/Send='true'"/>
                 <xf:bind id="pages-bind" ref="Pages">
                     <xsl:apply-templates
                         select="//xf:instance[@id='fr-form-instance']/form/*[child::*]"
@@ -405,7 +405,7 @@
                 <!-- If somehow it crashes, we register the survey as not submitted and the page marker is brought down-->
                 <xf:action ev:event="xforms-submit-error">
                     <xf:setvalue ref="instance('fr-form-instance')/Util/Send"
-                        value="string('non')"/>
+                        value="string('false')"/>
                     <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
                 </xf:action>
                 <xf:action ev:event="xforms-submit-done">
@@ -421,7 +421,7 @@
                 <xf:toggle case="{$choice}"/>
                 <!-- If this isn't submitted yet, and we're not on the first page -->
                 <xxf:show
-                    if="instance('fr-form-instance')/Util/Send='non' and not(instance('fr-form-instance')/Util/CurrentSection='1')"
+                    if="instance('fr-form-instance')/Util/Send='false' and not(instance('fr-form-instance')/Util/CurrentSection='1')"
                     dialog="welcome-back"/>
             </xf:action>
 
@@ -622,7 +622,7 @@
             <xf:action ev:event="submit-form">
                 <!-- Writing in the instance that the survey is submitted -->
                 <xf:setvalue ref="instance('fr-form-instance')/Util/Send"
-                    value="string('oui')"/>
+                    value="string('true')"/>
                 <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime"
                     value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
                 <!-- Dispatching the submission -->
