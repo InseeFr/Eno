@@ -87,14 +87,12 @@
                <End>
                   <Dummy/>
                </End>
-               <stromae>
-                  <util>
-                     <CurrentSection>1</CurrentSection>
-                     <CurrentSectionName/>
-                     <Send>non</Send>
-                     <DateTime/>
-                  </util>
-               </stromae>
+               <Util>
+                  <CurrentSection>1</CurrentSection>
+                  <CurrentSectionName/>
+                  <Send>non</Send>
+                  <DateTime/>
+               </Util>
             </form>
          </xf:instance>
          <xf:instance id="fr-form-loop-model">
@@ -335,8 +333,8 @@
             <xf:bind id="end-bind" name="end" ref="End"/>
             <xf:bind id="current-section-name-bind"
                      name="current-section-name"
-                     ref="stromae/util/CurrentSectionName"
-                     calculate="(instance('fr-form-instance')/*[child::* and not(name()='stromae')])[position()=number(instance('fr-form-instance')/stromae/util/CurrentSection)]/name()"/>
+                     ref="Util/CurrentSectionName"
+                     calculate="(instance('fr-form-instance')/*[child::* and not(name()='Util')])[position()=number(instance('fr-form-instance')/Util/CurrentSection)]/name()"/>
          </xf:bind>
          <xf:instance id="fr-form-metadata" xxf:readonly="true">
             <metadata>
@@ -870,8 +868,9 @@
                      <label>Erreur bloquante</label>
                   </Error>
                   <WelcomeBackText>
-                     <label>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour poursuivre votre
-                    saisie dans le questionnaire, que souhaitez-vous faire ?&lt;/p&gt;</label>
+                     <label>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour
+                    poursuivre votre saisie dans le questionnaire, que souhaitez-vous faire
+                    ?&lt;/p&gt;</label>
                   </WelcomeBackText>
                   <WarningText>
                      <label>&lt;p&gt;Certains champs de cette page sont indiqués en
@@ -1400,13 +1399,18 @@
                      <label>Blocking error</label>
                   </Error>
                   <WelcomeBackText>
-                     <label>&lt;p&gt;You started filling the questionnaire. To continue, what do you wish to do ?&lt;/p&gt;</label>
+                     <label>&lt;p&gt;You started filling the questionnaire. To continue, what do you wish
+                    to do ?&lt;/p&gt;</label>
                   </WelcomeBackText>
                   <WarningText>
-                     <label>&lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;&lt;p&gt;Do you wish to correct those warnings before going on filling the questionnaire ?&lt;/p&gt;</label>
+                     <label>&lt;p&gt;Some fields of this page are marked as
+                    warnings.&lt;/p&gt;&lt;p&gt;Do you wish to correct those warnings before going
+                    on filling the questionnaire ?&lt;/p&gt;</label>
                   </WarningText>
                   <ErrorText>
-                     <label>&lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;&lt;p&gt;You need to correct those warnings before going on filling the questionnaire.&lt;/p&gt;</label>
+                     <label>&lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;&lt;p&gt;You
+                    need to correct those warnings before going on filling the
+                    questionnaire.&lt;/p&gt;</label>
                   </ErrorText>
                </resource>
             </resources>
@@ -1453,27 +1457,27 @@
          </xf:instance>
          <xf:bind id="fr-form-util-binds" ref="instance('fr-form-util')">
             <xf:bind id="start-bind"
-                     relevant="instance('fr-form-instance')/stromae/util/CurrentSection='1'"
+                     relevant="instance('fr-form-instance')/Util/CurrentSection='1'"
                      ref="Start"/>
             <xf:bind id="previous-bind"
-                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*))"
+                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*))"
                      ref="Previous"/>
             <xf:bind id="next-bind"
-                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-1)"
+                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-1)"
                      ref="Next"/>
             <xf:bind id="send-bind"
                      ref="Send"
-                     relevant="instance('fr-form-instance')/stromae/util/Send='non'"/>
+                     relevant="instance('fr-form-instance')/Util/Send='non'"/>
             <xf:bind id="progress-percent-bind"
                      name="progress-percent"
                      ref="ProgressPercent"
-                     calculate="if (number(instance('fr-form-instance')/stromae/util/CurrentSection)=1) then '0' else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100' else round((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2  ) div (count(instance('fr-form-util')/Pages/*)-4)*100))"/>
+                     calculate="if (number(instance('fr-form-instance')/Util/CurrentSection)=1) then '0' else (if (number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100' else round((number(instance('fr-form-instance')/Util/CurrentSection)-2  ) div (count(instance('fr-form-util')/Pages/*)-4)*100))"/>
             <xf:bind id="progress-bind" ref="Progress"/>
             <xf:bind id="page-top-bind" ref="PageTop"/>
             <xf:bind id="confirmation-message-bind"
                      ref="ConfirmationMessage"
                      name="confirmation-message"
-                     relevant="instance('fr-form-instance')/stromae/util/Send='oui'"/>
+                     relevant="instance('fr-form-instance')/Util/Send='oui'"/>
             <xf:bind id="pages-bind" ref="Pages">
                <xf:bind id="page-INSEE-SIMPSONS-SEQ-1-bind"
                         name="INSEE-SIMPSONS-SEQ-1"
@@ -1516,8 +1520,7 @@
                         replace="none"
                         relevant="false">
             <xf:action ev:event="xforms-submit-error">
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/Send"
-                            value="string('non')"/>
+               <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('non')"/>
                <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
             </xf:action>
             <xf:action ev:event="xforms-submit-done">
@@ -1525,49 +1528,48 @@
             </xf:action>
          </xf:submission>
          <xf:action ev:event="xforms-ready">
-            <xf:toggle case="{instance('fr-form-instance')/stromae/util/CurrentSection}"/>
-            <xxf:show if="instance('fr-form-instance')/stromae/util/Send='non' and not(instance('fr-form-instance')/stromae/util/CurrentSection='1')"
+            <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
+            <xxf:show if="instance('fr-form-instance')/Util/Send='non' and not(instance('fr-form-instance')/Util/CurrentSection='1')"
                       dialog="welcome-back"/>
          </xf:action>
          <xf:action ev:event="page-change">
-            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName]//*">
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*">
                <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
             </xf:action>
             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName],true(),true()))">
+            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true()))">
                <xxf:show ev:event="DOMActivate" dialog="error"/>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName],true(),true())                     and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/CurrentSectionName,'-bind'),'constraint')=false()">
+            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())                     and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false()">
                <xxf:show ev:event="DOMActivate" dialog="warning"/>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/CurrentSectionName,'-bind'),'constraint')=false())">
+            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false())">
                <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
             </xf:action>
          </xf:action>
          <xf:action ev:event="page-change-done">
             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
             <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='1'">
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/CurrentSection]/following-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
+               <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
+                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/Util/CurrentSection]/following-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
             <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='-1'">
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/CurrentSection]/preceding-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
+               <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
+                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/Util/CurrentSection]/preceding-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
-            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/DateTime"
+            <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime"
                          value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
-            <xf:toggle case="{instance('fr-form-instance')/stromae/util/CurrentSection}"/>
+            <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
             <xf:send submission="save"/>
             <xf:setfocus control="page-top-control"/>
          </xf:action>
          <xf:action ev:event="submit-form">
-            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/Send"
-                         value="string('oui')"/>
-            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/DateTime"
+            <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('oui')"/>
+            <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime"
                          value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
             <xf:send submission="submit"/>
          </xf:action>
@@ -1592,7 +1594,8 @@
                   <fr:section id="beginning-control" bind="beginning-bind" name="beginning">
                      <xf:label ref="$form-resources/Beginning/label"/>
                      <xhtml:div class="center">
-                        <xhtml:p>Generic beginning page, can be overridden or removed by processing your own xslt on the result.</xhtml:p>
+                        <xhtml:p>Generic beginning page, can be overridden or removed by
+                                processing your own xslt on the result.</xhtml:p>
                      </xhtml:div>
                   </fr:section>
                </xf:case>
@@ -2377,7 +2380,8 @@
                   <fr:section id="end-control" bind="end-bind" name="end">
                      <xf:label ref="$form-resources/End/label"/>
                      <xhtml:div class="center">
-                        <xhtml:p>Generic end page, can be overridden or removed by processing your own xslt on the result.</xhtml:p>
+                        <xhtml:p>Generic end page, can be overridden or removed by processing
+                                your own xslt on the result.</xhtml:p>
                         <xf:trigger id="send" bind="send-bind">
                            <xf:label ref="$form-resources/Send/label"/>
                            <xf:action ev:event="DOMActivate">
@@ -2385,7 +2389,7 @@
                            </xf:action>
                         </xf:trigger>
                         <xf:output id="confirmation-message" bind="confirmation-message-bind">
-                           <xf:label ref="concat($form-resources/ConfirmationMessage/label,' ',instance('fr-form-instance')/stromae/util/DateTime)"/>
+                           <xf:label ref="concat($form-resources/ConfirmationMessage/label,' ',instance('fr-form-instance')/Util/DateTime)"/>
                         </xf:output>
                      </xhtml:div>
                   </fr:section>
@@ -2431,9 +2435,8 @@
                   <xf:label ref="$form-resources/GoToFirstPage/label"/>
                   <xf:action ev:event="DOMActivate">
                      <xxf:hide dialog="welcome-back"/>
-                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                                  value="'1'"/>
-                     <xf:toggle case="{instance('fr-form-instance')/stromae/util/CurrentSection}"/>
+                     <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="'1'"/>
+                     <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
                   </xf:action>
                </xf:trigger>
             </xxf:dialog>
