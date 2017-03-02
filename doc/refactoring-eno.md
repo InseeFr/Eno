@@ -18,8 +18,10 @@ In order to make Eno a Java dependency of Eno-WS and Eno-cli, it must be package
 
 Actions:
 
-- add a proper pom.xml,
-- deploy to the maven central repository
+- [X] add a proper pom.xml,
+ - groupId is `fr.insee.eno`, artifactId is `eno-core`
+- [ ] deploy to the maven central repository
+  - see [requirements](http://central.sonatype.org/pages/requirements.html)
 
 ### Provide Java interfaces to the transformation process
 
