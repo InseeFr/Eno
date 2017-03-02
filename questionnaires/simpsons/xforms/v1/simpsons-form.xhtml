@@ -9,14 +9,14 @@
    <xhtml:head>
       <xhtml:title>Simpsons</xhtml:title>
       <xhtml:link rel="stylesheet" href="/css/common.css"/>
-      <xhtml:link rel="stylesheet" href="/css/simpsons/simpsons.css"/>
-      <xhtml:link rel="stylesheet" href="/css/simpsons/.css"/>
-      <xhtml:link rel="stylesheet" href="/css/simpsons/v1.css"/>
       <xf:model id="fr-form-model"
                 xxf:expose-xpath-types="true"
                 xxf:noscript-support="true">
          <xf:instance id="fr-form-instance">
             <form>
+               <Beginning>
+                  <Dummy/>
+               </Beginning>
                <INSEE-SIMPSONS-SEQ-1>
                   <INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1/>
                   <INSEE-SIMPSONS-QOP-1-1-1/>
@@ -84,31 +84,22 @@
                   <INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1/>
                   <INSEE-SIMPSONS-QOP-5-3-1/>
                </INSEE-SIMPSONS-SEQ-4>
-               <Validation>
-                  <Dummy/>
-               </Validation>
-               <Confirmation>
-                  <Dummy/>
-               </Confirmation>
                <End>
                   <Dummy/>
                </End>
-               <stromae>
-                  <ProgressBarContainer/>
-                  <util>
-                     <CurrentSection>1</CurrentSection>
-                     <CurrentSectionName/>
-                     <expedie>non</expedie>
-                     <extrait>non</extrait>
-                     <dateHeure/>
-                  </util>
-               </stromae>
+               <Util>
+                  <CurrentSection>1</CurrentSection>
+                  <CurrentSectionName/>
+                  <Send>false</Send>
+                  <DateTime/>
+               </Util>
             </form>
          </xf:instance>
          <xf:instance id="fr-form-loop-model">
             <LoopModels/>
          </xf:instance>
          <xf:bind id="fr-form-instance-binds" ref="instance('fr-form-instance')">
+            <xf:bind id="beginning-bind" name="beginning" ref="Beginning"/>
             <xf:bind id="INSEE-SIMPSONS-SEQ-1-bind"
                      name="INSEE-SIMPSONS-SEQ-1"
                      ref="INSEE-SIMPSONS-SEQ-1">
@@ -339,20 +330,11 @@
                         name="INSEE-SIMPSONS-QOP-5-3-1"
                         ref="INSEE-SIMPSONS-QOP-5-3-1"/>
             </xf:bind>
-            <xf:bind id="validation-bind"
-                     name="validation"
-                     ref="Validation"
-                     relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
-            <xf:bind id="confirmation-bind"
-                     name="confirmation"
-                     ref="Confirmation"
-                     relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
             <xf:bind id="end-bind" name="end" ref="End"/>
             <xf:bind id="current-section-name-bind"
                      name="current-section-name"
-                     ref="stromae/util/CurrentSectionName"
-                     calculate="(instance('fr-form-instance')/*[child::* and not(name()='stromae')])[position()=number(instance('fr-form-instance')/stromae/util/CurrentSection)]/name()"/>
-            <xf:bind id="progress-bar-container-bind" ref="ProgressBarContainer"/>
+                     ref="Util/CurrentSectionName"
+                     calculate="(instance('fr-form-instance')/*[child::* and not(name()='Util')])[position()=number(instance('fr-form-instance')/Util/CurrentSection)]/name()"/>
          </xf:bind>
          <xf:instance id="fr-form-metadata" xxf:readonly="true">
             <metadata>
@@ -371,6 +353,9 @@
          <xf:instance id="fr-form-resources">
             <resources>
                <resource xml:lang="fr">
+                  <Beginning>
+                     <label>DEBUT</label>
+                  </Beginning>
                   <INSEE-SIMPSONS-SEQ-1>
                      <label>I - General knowledge on the series</label>
                      <hint/>
@@ -447,7 +432,7 @@
                      <alert/>
                   </INSEE-SIMPSONS-QG-2-1-3>
                   <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-Header-1>
-                     <label>CL_ANIMALS</label>
+                     <label/>
                      <hint/>
                      <help/>
                      <alert/>
@@ -837,27 +822,27 @@
                         <value>13</value>
                      </item>
                   </INSEE-SIMPSONS-QOP-5-3-1>
-                  <Validation>
-                     <label>VALIDATION</label>
-                  </Validation>
-                  <Confirmation>
-                     <label>CONFIRMATION</label>
-                  </Confirmation>
                   <End>
                      <label>FIN</label>
                   </End>
-                  <ProgressBarContainer>
-                     <label>Votre </label>
-                  </ProgressBarContainer>
                   <Progress>
                      <label>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</label>
                   </Progress>
+                  <Start>
+                     <label>Commencer</label>
+                  </Start>
                   <Previous>
                      <label>Retour</label>
                   </Previous>
                   <Next>
                      <label>Enregistrer et continuer</label>
                   </Next>
+                  <Send>
+                     <label>Envoyer</label>
+                  </Send>
+                  <ConfirmationMessage>
+                     <label>Votre questionnaire a bien été expédié le</label>
+                  </ConfirmationMessage>
                   <FatalError>
                      <label>Problème lors de l'enregistrement/l'expédition de vos réponses.</label>
                   </FatalError>
@@ -883,8 +868,9 @@
                      <label>Erreur bloquante</label>
                   </Error>
                   <WelcomeBackText>
-                     <label>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour poursuivre votre
-                    saisie dans le questionnaire, que souhaitez-vous faire ?&lt;/p&gt;</label>
+                     <label>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour
+                    poursuivre votre saisie dans le questionnaire, que souhaitez-vous faire
+                    ?&lt;/p&gt;</label>
                   </WelcomeBackText>
                   <WarningText>
                      <label>&lt;p&gt;Certains champs de cette page sont indiqués en
@@ -898,6 +884,9 @@
                   </ErrorText>
                </resource>
                <resource xml:lang="en">
+                  <Beginning>
+                     <label>BEGINNING</label>
+                  </Beginning>
                   <INSEE-SIMPSONS-SEQ-1>
                      <label>I - General knowledge on the series</label>
                      <hint/>
@@ -974,7 +963,7 @@
                      <alert/>
                   </INSEE-SIMPSONS-QG-2-1-3>
                   <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-Header-1>
-                     <label>CL_ANIMALS</label>
+                     <label/>
                      <hint/>
                      <help/>
                      <alert/>
@@ -1364,27 +1353,27 @@
                         <value>13</value>
                      </item>
                   </INSEE-SIMPSONS-QOP-5-3-1>
-                  <Validation>
-                     <label>VALIDATION</label>
-                  </Validation>
-                  <Confirmation>
-                     <label>CONFIRMATION</label>
-                  </Confirmation>
                   <End>
                      <label>END</label>
                   </End>
-                  <ProgressBarContainer>
-                     <label>Your </label>
-                  </ProgressBarContainer>
                   <Progress>
                      <label>&lt;p&gt;&lt;b&gt;Progress&lt;/b&gt;&lt;/p&gt;</label>
                   </Progress>
+                  <Start>
+                     <label>Start</label>
+                  </Start>
                   <Previous>
                      <label>Go Back</label>
                   </Previous>
                   <Next>
                      <label>Save and continue</label>
                   </Next>
+                  <Send>
+                     <label>Send</label>
+                  </Send>
+                  <ConfirmationMessage>
+                     <label>Your questionnaire was submitted the</label>
+                  </ConfirmationMessage>
                   <FatalError>
                      <label>There was a problem with saving/submitting your answers.</label>
                   </FatalError>
@@ -1410,13 +1399,18 @@
                      <label>Blocking error</label>
                   </Error>
                   <WelcomeBackText>
-                     <label>&lt;p&gt;You started filling the questionnaire. To continue, what do you wish to do ?&lt;/p&gt;</label>
+                     <label>&lt;p&gt;You started filling the questionnaire. To continue, what do you wish
+                    to do ?&lt;/p&gt;</label>
                   </WelcomeBackText>
                   <WarningText>
-                     <label>&lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;&lt;p&gt;Do you wish to correct those warnings before going on filling the questionnaire ?&lt;/p&gt;</label>
+                     <label>&lt;p&gt;Some fields of this page are marked as
+                    warnings.&lt;/p&gt;&lt;p&gt;Do you wish to correct those warnings before going
+                    on filling the questionnaire ?&lt;/p&gt;</label>
                   </WarningText>
                   <ErrorText>
-                     <label>&lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;&lt;p&gt;You need to correct those warnings before going on filling the questionnaire.&lt;/p&gt;</label>
+                     <label>&lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;&lt;p&gt;You
+                    need to correct those warnings before going on filling the
+                    questionnaire.&lt;/p&gt;</label>
                   </ErrorText>
                </resource>
             </resources>
@@ -1437,23 +1431,19 @@
          </xf:instance>
          <xf:instance id="fr-form-util">
             <Util>
+               <Start/>
                <Previous/>
                <Next/>
                <Send/>
-               <ConfirmationNo/>
-               <ConfirmationYes/>
-               <Sending/>
-               <Clickable/>
                <ProgressPercent/>
                <Progress/>
                <PageTop/>
                <Pages>
+                  <Beginning/>
                   <INSEE-SIMPSONS-SEQ-1/>
                   <INSEE-SIMPSONS-SEQ-2/>
                   <INSEE-SIMPSONS-SEQ-3/>
                   <INSEE-SIMPSONS-SEQ-4/>
-                  <Validation/>
-                  <Confirmation/>
                   <End/>
                </Pages>
                <PreviousNext/>
@@ -1466,30 +1456,28 @@
             </Util>
          </xf:instance>
          <xf:bind id="fr-form-util-binds" ref="instance('fr-form-util')">
+            <xf:bind id="start-bind"
+                     relevant="instance('fr-form-instance')/Util/CurrentSection='1'"
+                     ref="Start"/>
             <xf:bind id="previous-bind"
-                     relevant="not(instance('fr-form-instance')/stromae/util/CurrentSection='1' or number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2)"
+                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*))"
                      ref="Previous"/>
             <xf:bind id="next-bind"
-                     relevant="not(number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-3)"
+                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-1)"
                      ref="Next"/>
             <xf:bind id="send-bind"
                      ref="Send"
-                     readonly="instance('fr-form-util')/Clickable='non'"/>
-            <xf:bind id="confirmation-no-bind" ref="ConfirmationNo"/>
-            <xf:bind id="confirmation-yes-bind" ref="ConfirmationYes"/>
-            <xf:bind id="sending-bind"
-                     relevant="instance('fr-form-instance')/stromae/util/CurrentSection=string(count(instance('fr-form-instance')/*[child::* and not(name()='stromae')])) and instance('fr-form-instance')/stromae/util/expedie='non'"
-                     ref="Sending"/>
+                     relevant="instance('fr-form-instance')/Util/Send='false'"/>
             <xf:bind id="progress-percent-bind"
                      name="progress-percent"
                      ref="ProgressPercent"
-                     calculate="if (number(instance('fr-form-instance')/stromae/util/CurrentSection)=1) then '0' else (if (number(instance('fr-form-instance')/stromae/util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100' else round((number(instance('fr-form-instance')/stromae/util/CurrentSection)-2  ) div (count(instance('fr-form-util')/Pages/*)-4)*100))"/>
+                     calculate="if (number(instance('fr-form-instance')/Util/CurrentSection)=1) then '0' else (if (number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100' else round((number(instance('fr-form-instance')/Util/CurrentSection)-2  ) div (count(instance('fr-form-util')/Pages/*)-4)*100))"/>
             <xf:bind id="progress-bind" ref="Progress"/>
             <xf:bind id="page-top-bind" ref="PageTop"/>
             <xf:bind id="confirmation-message-bind"
                      ref="ConfirmationMessage"
                      name="confirmation-message"
-                     calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"/>
+                     relevant="instance('fr-form-instance')/Util/Send='true'"/>
             <xf:bind id="pages-bind" ref="Pages">
                <xf:bind id="page-INSEE-SIMPSONS-SEQ-1-bind"
                         name="INSEE-SIMPSONS-SEQ-1"
@@ -1514,12 +1502,11 @@
                </xf:bind>
             </xf:bind>
          </xf:bind>
-         <xf:submission id="save"
+         <!--You can add a resource attribute for the save submission by processing the result with your own xslt.--><xf:submission id="save"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
-                        relevant="false"
-                        resource="{xxf:property('server-exist-orbeon')}/restxq/{xxf:property('enregistrer-service')}/simpsons/v1/{xxf:get-request-parameter('unite-enquete')}">
+                        relevant="false">
             <xf:action ev:event="xforms-submit-error">
                <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
             </xf:action>
@@ -1527,68 +1514,64 @@
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
-         <xf:submission id="submit"
+         <!--You can add a resource attribute for the submit submission by processing the result with your own xslt.--><xf:submission id="submit"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
-                        relevant="false"
-                        resource="{xxf:property('server-exist-orbeon')}/restxq/{xxf:property('enregistrer-service')}/simpsons/v1/{xxf:get-request-parameter('unite-enquete')}">
+                        relevant="false">
             <xf:action ev:event="xforms-submit-error">
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
-                            value="string('non')"/>
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                            value="string(number(instance('fr-form-instance')/stromae/util/CurrentSection)-1)"/>
+               <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('false')"/>
                <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
             </xf:action>
             <xf:action ev:event="xforms-submit-done">
-               <xf:toggle case="{instance('fr-form-instance')/stromae/util/CurrentSection}"/>
-               <xf:setfocus control="page-top-control"/>
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
-         <xf:submission id="submit-pdf"
-                        method="post"
-                        replace="none"
-                        resource="/expedier/simpsons/{xxf:get-request-parameter('unite-enquete')}?modele=v1"/>
          <xf:action ev:event="xforms-ready">
-            <xf:toggle case="{instance('fr-form-instance')/stromae/util/CurrentSection}"/>
-            <xxf:show if="instance('fr-form-instance')/stromae/util/expedie='non' and not(instance('fr-form-instance')/stromae/util/CurrentSection='1')"
+            <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
+            <xxf:show if="instance('fr-form-instance')/Util/Send='false' and not(instance('fr-form-instance')/Util/CurrentSection='1')"
                       dialog="welcome-back"/>
          </xf:action>
          <xf:action ev:event="page-change">
-            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName]//*">
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*">
                <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
             </xf:action>
             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName],true(),true()))">
+            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true()))">
                <xxf:show ev:event="DOMActivate" dialog="error"/>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName],true(),true())                     and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/CurrentSectionName,'-bind'),'constraint')=false()">
+            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())                     and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false()">
                <xxf:show ev:event="DOMActivate" dialog="warning"/>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/CurrentSectionName],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/CurrentSectionName,'-bind'),'constraint')=false())">
+            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false())">
                <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
             </xf:action>
          </xf:action>
          <xf:action ev:event="page-change-done">
             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
             <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='1'">
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/CurrentSection]/following-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
+               <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
+                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/Util/CurrentSection]/following-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
             <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='-1'">
-               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/CurrentSection]/preceding-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
+               <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
+                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/Util/CurrentSection]/preceding-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
-            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
-                         value="fn:format-dateTime(fn:current-dateTime(),                     '[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
-            <xf:toggle case="{instance('fr-form-instance')/stromae/util/CurrentSection}"/>
+            <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime"
+                         value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
+            <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
             <xf:send submission="save"/>
             <xf:setfocus control="page-top-control"/>
+         </xf:action>
+         <xf:action ev:event="submit-form">
+            <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('true')"/>
+            <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime"
+                         value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
+            <xf:send submission="submit"/>
          </xf:action>
       </xf:model>
    </xhtml:head>
@@ -1597,9 +1580,6 @@
          <fr:body>
             <xf:input id="page-top-control" bind="page-top-bind" class="page-top"/>
             <xhtml:div class="progress-bar-container">
-               <xf:output id="progress-bar-container-control" bind="progress-bar-container-bind">
-                  <xf:label ref="$form-resources/ProgressBarContainer/label" mediatype="text/html"/>
-               </xf:output>
                <xhtml:span class="right">
                   <xf:output id="progress-control" bind="progress-bind">
                      <xf:label ref="$form-resources/Progress/label" mediatype="text/html"/>
@@ -1611,6 +1591,15 @@
             </xhtml:div>
             <xf:switch id="section-body">
                <xf:case id="1">
+                  <fr:section id="beginning-control" bind="beginning-bind" name="beginning">
+                     <xf:label ref="$form-resources/Beginning/label"/>
+                     <xhtml:div class="center">
+                        <xhtml:p>Generic beginning page, can be overridden or removed by
+                                processing your own xslt on the result.</xhtml:p>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="2">
                   <fr:section id="INSEE-SIMPSONS-SEQ-1-control"
                               bind="INSEE-SIMPSONS-SEQ-1-bind"
                               name="INSEE-SIMPSONS-SEQ-1">
@@ -1647,7 +1636,7 @@
                      </xf:input>
                   </fr:section>
                </xf:case>
-               <xf:case id="2">
+               <xf:case id="3">
                   <fr:section id="INSEE-SIMPSONS-SEQ-2-control"
                               bind="INSEE-SIMPSONS-SEQ-2-bind"
                               name="INSEE-SIMPSONS-SEQ-2">
@@ -1863,7 +1852,7 @@
                      </xhtml:div>
                   </fr:section>
                </xf:case>
-               <xf:case id="3">
+               <xf:case id="4">
                   <fr:section id="INSEE-SIMPSONS-SEQ-3-control"
                               bind="INSEE-SIMPSONS-SEQ-3-bind"
                               name="INSEE-SIMPSONS-SEQ-3">
@@ -2149,7 +2138,7 @@
                      </xhtml:table>
                   </fr:section>
                </xf:case>
-               <xf:case id="4">
+               <xf:case id="5">
                   <fr:section id="INSEE-SIMPSONS-SEQ-4-control"
                               bind="INSEE-SIMPSONS-SEQ-4-bind"
                               name="INSEE-SIMPSONS-SEQ-4">
@@ -2387,112 +2376,21 @@
                      </xf:select1>
                   </fr:section>
                </xf:case>
-               <xf:case id="5">
-                  <fr:section id="validation-control" bind="validation-bind" name="validation">
-                     <xf:label ref="$form-resources/Validation/label"/>
-                     <xhtml:div class="center">
-                        <xhtml:div class="frame">
-                           <xhtml:p>
-                              <xhtml:b>Vous êtes arrivé à la fin du questionnaire.</xhtml:b>
-                           </xhtml:p>
-                           <xhtml:p class="indentation-with-bullet">
-                              <xhtml:b>Si vous avez
-                                        terminé de renseigner </xhtml:b>votre questionnaire,
-                                    pour le transmettre à l'Insee, merci de cliquer ci-dessous sur
-                                    le bouton : "Envoyer".</xhtml:p>
-                           <xhtml:p class="simple-identation">
-                              <xhtml:b>Une fois le questionnaire envoyé :</xhtml:b>
-                           </xhtml:p>
-                           <xhtml:p class="double-indentation">- vous ne
-                                        pourrez <xhtml:b>plus modifier vos réponses
-                                    </xhtml:b> ;</xhtml:p>
-                           <xhtml:p class="double-indentation">- vous pourrez télécharger
-                                        le <xhtml:b>récapitulatif de vos réponses au format
-                                        pdf</xhtml:b>.</xhtml:p>
-                           <xhtml:div class="center-body">
-                              <xf:trigger bind="send-bind">
-                                 <xf:label>Envoyer</xf:label>
-                                 <xf:action ev:event="DOMActivate">
-                                    <xf:setvalue ref="instance('fr-form-util')/Clickable" value="string('non')"/>
-                                    <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
-                                    <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
-                                 </xf:action>
-                              </xf:trigger>
-                           </xhtml:div>
-                           <xhtml:p class="indentation-with-bullet">
-                              <xhtml:b>Si vous souhaitez
-                                        y apporter des modifications</xhtml:b>, vous pouvez
-                                    :</xhtml:p>
-                           <xhtml:p class="double-indentation">- revenir dessus dès à présent
-                                    en cliquant sur le bouton "Retour" ;</xhtml:p>
-                           <xhtml:p class="double-indentation">- ou plus tard en cliquant sur
-                                    le bouton "Fermer le questionnaire" et en vous authentifiant à
-                                    nouveau.</xhtml:p>
-                           <xhtml:p class="double-indentation">Dans les deux cas, vos données seront
-                                    enregistrées mais <xhtml:b>le questionnaire ne sera pas
-                                        envoyé à l'Insee</xhtml:b>.</xhtml:p>
-                           <xhtml:p class="center-body">
-                              <xhtml:a href="{concat(xxf:property('url-orbeon'),xxf:property('lien-deconnexion'))}">Fermer le questionnaire</xhtml:a>
-                           </xhtml:p>
-                        </xhtml:div>
-                     </xhtml:div>
-                  </fr:section>
-               </xf:case>
                <xf:case id="6">
-                  <fr:section id="confirmation-control"
-                              bind="confirmation-bind"
-                              name="confirmation">
-                     <xf:label ref="$form-resources/Confirmation/label"/>
-                     <xhtml:div class="center center-body">
-                        <xhtml:div class="frame">
-                           <xhtml:p>
-                              <xhtml:b>CONFIRMER VOTRE ENVOI</xhtml:b>
-                           </xhtml:p>
-                           <xhtml:p>Votre réponse est définitive et vous souhaitez
-                                    l'envoyer.</xhtml:p>
-                           <xf:trigger bind="confirmation-yes-bind">
-                              <xf:label>Je confirme l'envoi</xf:label>
-                              <xf:action ev:event="DOMActivate">
-                                 <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
-                                              value="string('oui')"/>
-                                 <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
-                                              value="fn:format-dateTime(fn:current-dateTime(),                                             '[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
-                                 <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                                              value="string(number(instance('fr-form-instance')/stromae/util/CurrentSection)+1)"/>
-                                 <xf:send submission="submit"/>
-                                 <xf:send submission="submit-pdf"/>
-                              </xf:action>
-                           </xf:trigger>
-                           <xf:trigger bind="confirmation-no-bind">
-                              <xf:label>Ne pas envoyer</xf:label>
-                              <xf:action ev:event="DOMActivate">
-                                 <xf:setvalue ref="instance('fr-form-util')/Clickable" value="string('oui')"/>
-                                 <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="-1"/>
-                                 <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
-                              </xf:action>
-                           </xf:trigger>
-                        </xhtml:div>
-                     </xhtml:div>
-                  </fr:section>
-               </xf:case>
-               <xf:case id="7">
                   <fr:section id="end-control" bind="end-bind" name="end">
                      <xf:label ref="$form-resources/End/label"/>
-                     <xhtml:div class="center center-body">
-                        <xhtml:div class="frame">
-                           <xf:output id="confirmation-message"
-                                      bind="confirmation-message-bind"
-                                      class="confirmation-message"
-                                      xxf:order="label control hint help alert"/>
-                           <xhtml:p>
-                              <xhtml:a href="PDFSummary">Télécharger le récapitulatif de vos
-                                        réponses au format PDF</xhtml:a>. <xhtml:img src="/img/pdf.png"/>
-                           </xhtml:p>
-                           <xhtml:p>
-                              <xhtml:b>La Statistique publique vous remercie de votre
-                                        collaboration à cette enquête.</xhtml:b>
-                           </xhtml:p>
-                        </xhtml:div>
+                     <xhtml:div class="center">
+                        <xhtml:p>Generic end page, can be overridden or removed by processing
+                                your own xslt on the result.</xhtml:p>
+                        <xf:trigger id="send" bind="send-bind">
+                           <xf:label ref="$form-resources/Send/label"/>
+                           <xf:action ev:event="DOMActivate">
+                              <xf:dispatch name="submit-form" targetid="fr-form-model"/>
+                           </xf:action>
+                        </xf:trigger>
+                        <xf:output id="confirmation-message" bind="confirmation-message-bind">
+                           <xf:label ref="concat($form-resources/ConfirmationMessage/label,' ',instance('fr-form-instance')/Util/DateTime)"/>
+                        </xf:output>
                      </xhtml:div>
                   </fr:section>
                </xf:case>
@@ -2502,7 +2400,7 @@
                <xf:output ref="instance('fr-form-util')/ErrorText">
                   <xf:label ref="$form-resources/ErrorText/label" mediatype="text/html"/>
                </xf:output>
-               <xf:trigger id="CorrectError">
+               <xf:trigger id="correct-error">
                   <xf:label ref="$form-resources/Correct/label"/>
                   <xxf:hide ev:event="DOMActivate" dialog="error"/>
                </xf:trigger>
@@ -2512,11 +2410,11 @@
                <xf:output ref="instance('fr-form-util')/WarningText">
                   <xf:label ref="$form-resources/WarningText/label" mediatype="text/html"/>
                </xf:output>
-               <xf:trigger id="CorrectWarning">
+               <xf:trigger id="correct-warning">
                   <xf:label ref="$form-resources/Correct/label"/>
                   <xxf:hide ev:event="DOMActivate" dialog="warning"/>
                </xf:trigger>
-               <xf:trigger id="Continue">
+               <xf:trigger id="continue">
                   <xf:label ref="$form-resources/Continue/label"/>
                   <xxf:hide ev:event="DOMActivate" dialog="warning"/>
                   <xf:action ev:event="DOMActivate">
@@ -2529,17 +2427,16 @@
                <xf:output ref="instance('fr-form-util')/WelcomeBackText">
                   <xf:label ref="$form-resources/WelcomeBackText/label" mediatype="text/html"/>
                </xf:output>
-               <xf:trigger id="GoBack">
+               <xf:trigger id="go-back">
                   <xf:label ref="$form-resources/GoBack/label"/>
                   <xxf:hide ev:event="DOMActivate" dialog="welcome-back"/>
                </xf:trigger>
-               <xf:trigger id="GoToFirstPage">
+               <xf:trigger id="go-to-first-page">
                   <xf:label ref="$form-resources/GoToFirstPage/label"/>
                   <xf:action ev:event="DOMActivate">
                      <xxf:hide dialog="welcome-back"/>
-                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/CurrentSection"
-                                  value="'1'"/>
-                     <xf:toggle case="{instance('fr-form-instance')/stromae/util/CurrentSection}"/>
+                     <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="'1'"/>
+                     <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
                   </xf:action>
                </xf:trigger>
             </xxf:dialog>
@@ -2551,6 +2448,13 @@
             </xxf:dialog>
          </fr:body>
          <fr:buttons>
+            <xf:trigger id="start" bind="start-bind">
+               <xf:label ref="$form-resources/Start/label"/>
+               <xf:action ev:event="DOMActivate">
+                  <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
+                  <xf:dispatch name="page-change" targetid="fr-form-model"/>
+               </xf:action>
+            </xf:trigger>
             <xf:trigger id="previous" bind="previous-bind">
                <xf:label ref="$form-resources/Previous/label"/>
                <xf:action ev:event="DOMActivate">

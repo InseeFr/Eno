@@ -141,7 +141,7 @@
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:message>Je ne suis pas supporté</xsl:message>
+        <xsl:message><xsl:value-of select="concat('Not supported yet : ',DefinedElement[@name='Out_Function']/text())"/></xsl:message>
         <xsl:apply-templates select="eno:append-empty-element('NotSupportedFunction',$driver)"
             mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
