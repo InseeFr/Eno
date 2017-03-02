@@ -11,8 +11,6 @@
     <!-- This file is imported in the ddi2fr.xsl file (already in ddi2fr-fixed.xsl) -->
 
     <!-- Parameters defined in build-non-regression.xml -->
-    <xsl:param name="campaign" as="xs:string"/>
-    <xsl:param name="model" as="xs:string"/>
     <xsl:param name="properties-file"/>
     <xsl:variable name="properties" select="doc($properties-file)"/>
 
@@ -32,21 +30,6 @@
                 </xhtml:title>
                 <xhtml:link rel="stylesheet"
                     href="{concat('/',$properties//css/dossier,'/',$properties//css/principale)}"/>
-                <xhtml:link rel="stylesheet">
-                    <xsl:attribute name="href"
-                        select="concat('/', $properties//css/dossier, '/', tokenize($campaign, '-')[1], '/', tokenize($campaign, '-')[1], '.css')"
-                    />
-                </xhtml:link>
-                <xhtml:link rel="stylesheet">
-                    <xsl:attribute name="href"
-                        select="concat('/', $properties//css/dossier, '/', tokenize($campaign, '-')[1], '/', tokenize($campaign, '-')[2], '.css')"
-                    />
-                </xhtml:link>
-                <xhtml:link rel="stylesheet">
-                    <xsl:attribute name="href"
-                        select="concat('/', $properties//css/dossier, '/', tokenize($campaign, '-')[1], '/', $model, '.css')"
-                    />
-                </xhtml:link>
                 <xf:model id="fr-form-model" xxf:expose-xpath-types="true"
                     xxf:noscript-support="true">
 

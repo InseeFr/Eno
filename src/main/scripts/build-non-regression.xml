@@ -34,8 +34,6 @@
             out="${temp.home}/xforms/${form-name}/basic-form.tmp"
             style="${xslt.home}/transformations/ddi2fr/ddi2fr.xsl" force="true"
             classpath="${saxon.jar}">
-            <param name="campaign" expression="${survey-name}"/>
-            <param name="model" expression="${form-name}"/>
             <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
         </xslt>
 
@@ -46,8 +44,6 @@
             out="${root-folder}/target/${survey-name}/${form-name}/form/form.xhtml"
             style="${xslt.home}/util/fr/browsing.xsl" force="true"
             classpath="${saxon.jar}">
-            <param name="campaign" expression="${survey-name}"/>
-            <param name="model" expression="${form-name}"/>
             <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
         </xslt>
         <!-- A bit of cleaning -->
