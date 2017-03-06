@@ -12,7 +12,7 @@ public class DDI2FRContext extends AbstractModule {
 	protected void configure() {
 		bind(Preprocessor.class).to(DDIPreprocessor.class);
 		bind(Generator.class).to(DDI2FRGenerator.class);
-		bind(Postprocessor.class).to(Nooppostprocessor.class);
+		bind(Postprocessor.class).to(NoopPostprocessor.class);
 	}
 
 }
