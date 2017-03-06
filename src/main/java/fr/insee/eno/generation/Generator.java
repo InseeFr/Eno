@@ -1,4 +1,4 @@
-package fr.insee.eno;
+package fr.insee.eno.generation;
 
 /**
  * This interface describes the API of a generator which main function is to

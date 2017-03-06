@@ -2,6 +2,10 @@ package fr.insee.eno;
 
 import com.google.inject.Inject;
 
+import fr.insee.eno.generation.Generator;
+import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
+
 /**
  * Orchestrates the whole generation process.
  * */

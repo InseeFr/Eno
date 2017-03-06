@@ -1,4 +1,4 @@
-package fr.insee.eno;
+package fr.insee.eno.preprocessing;
 
 /**
  * A DDI specific preprocessor.

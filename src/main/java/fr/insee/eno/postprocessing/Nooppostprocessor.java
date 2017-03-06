@@ -1,4 +1,4 @@
-package fr.insee.eno;
+package fr.insee.eno.postprocessing;
 
 /**
  * No-op postprocessor.
