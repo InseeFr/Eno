@@ -7,7 +7,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Main Saxon Service used to perform XSLT transformations
@@ -17,7 +18,7 @@ import org.apache.log4j.Logger;
  */
 public class XslTransformation {
 
-	final static Logger logger = Logger.getLogger(XslTransformation.class);
+	final static Logger logger = LogManager.getLogger(XslTransformation.class);
 
 	/**
 	 * Main Saxon transformation method

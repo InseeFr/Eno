@@ -14,7 +14,10 @@ public final class Constants {
 	}
 
 	// Root folder of the project : must be filled
-	public static final String ROOT_FOLDER = "D:/Users/gerose/Documents/Insee/UO3 CSPA/TestsREST/New_Eno_OneInput_Test/Eno-master";
+	// public static final String ROOT_FOLDER =
+	// "D:/Users/gerose/Documents/Insee/UO3
+	// CSPA/TestsREST/New_Eno_OneInput_Test/Eno-master";
+	public static final String ROOT_FOLDER = "D:/arkn1q/Mes Documents/eclipse_workspace/Eno";
 
 	// Useful folders
 	public static final String INPUTS_FOLDER = ROOT_FOLDER + "/src/main/xslt/inputs";

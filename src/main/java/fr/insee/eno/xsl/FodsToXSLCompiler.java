@@ -22,6 +22,7 @@ public class FodsToXSLCompiler {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println("Current log level is:" + logger.getLevel());
 
 		try {
 
