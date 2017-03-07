@@ -356,6 +356,19 @@
         />
     </xsl:template>
 
+    <xsl:template
+        match="r:Label[parent::l:CodeList/parent::r:CodeListReference/parent::d:CodeDomain/parent::d:GridDimension[@rank='1' and ../d:GridDimension[@rank='2']]]"
+        mode="enoddi:get-colspan" priority="1">
+        <xsl:variable name="label-or-no">
+            <xsl:value-of
+                select="count(../r:Label)-1"
+            />
+        </xsl:variable>
+        
+        <xsl:value-of select="max(parent::l:CodeList//l:Code[not(l:Code)]/count(ancestor::l:Code))+1-$label-or-no"/>
+    </xsl:template>
+    
+
     <!--Concerning the columns, when l:Code has a l:Code (representing a box dispatched in sub-boxes), we get the number of children l:Code -->
     <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='1'] and l:Code]"
         mode="enoddi:get-rowspan" priority="1">
