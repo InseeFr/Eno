@@ -99,7 +99,7 @@
                         />
                     </xsl:for-each>
                     <xsl:value-of
-                        select="'(instance(''fr-form-instance'')/*[child::* and not(name()=''Util'')])[position()=number(instance(''fr-form-instance'')/Util/CurrentSection)]/name()'"/>
+                        select="'(instance(''fr-form-util'')/Pages/*)[position()=number(instance(''fr-form-instance'')/Util/CurrentSection)]/name()'"/>
                     <xsl:for-each select="//fr:body/xf:repeat">
                         <xsl:value-of select="')'"/>
                     </xsl:for-each>
