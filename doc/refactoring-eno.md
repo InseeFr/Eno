@@ -36,9 +36,11 @@ Those classes should live in Eno and be provided throught the maven produced JAR
 
 Actions:
 
-- describe interfaces,
-- add the default implementation,
-- (provide dependency injection mecanism)
+- [X] describe interfaces,
+  - [Base architecture](https://github.com/InseeFr/Eno/commit/c3c755651cac4ebdcba922a622e986603ce1f8e0)
+- [ ] add the default implementation,
+- [X]provide dependency injection mecanism
+  - [Using Guice](https://github.com/InseeFr/Eno/blob/packaging-java-maven/src/main/java/fr/insee/eno/DDI2FRContext.java)
 
 ### Add test cases using the Java API
 
