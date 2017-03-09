@@ -1,6 +1,5 @@
 package fr.insee.eno.xsl;
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +21,6 @@ public class FodsToXSLCompiler {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println("Current log level is:" + logger.getLevel());
 
 		try {
 
