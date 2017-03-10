@@ -28,7 +28,6 @@
                   <INSEE-SIMPSONS-QOP-2-1-1-1/>
                   <INSEE-SIMPSONS-QOP-2-1-2-1/>
                   <INSEE-SIMPSONS-QG-2-1-3/>
-                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-Header-1/>
                   <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1/>
                   <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-2/>
                   <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-3/>
@@ -52,7 +51,6 @@
                   <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-5/>
                   <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-6/>
                   <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7/>
-                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-Header-1/>
                   <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1/>
                   <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-2/>
                   <INSEE-SIMPSONS-QOP-4-1-1/>
@@ -134,9 +132,6 @@
                <xf:bind id="INSEE-SIMPSONS-QG-2-1-3-bind"
                         name="INSEE-SIMPSONS-QG-2-1-3"
                         ref="INSEE-SIMPSONS-QG-2-1-3"/>
-               <xf:bind id="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-Header-1-bind"
-                        name="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-Header-1"
-                        ref="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-Header-1"/>
                <xf:bind id="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1-bind"
                         name="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1"
                         ref="INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1"/>
@@ -203,9 +198,6 @@
                <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7-bind"
                         name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7"
                         ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7"/>
-               <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-Header-1-bind"
-                        name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-Header-1"
-                        ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-Header-1"/>
                <xf:bind id="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1-bind"
                         name="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1"
                         ref="INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1"/>
@@ -334,7 +326,7 @@
             <xf:bind id="current-section-name-bind"
                      name="current-section-name"
                      ref="Util/CurrentSectionName"
-                     calculate="(instance('fr-form-instance')/*[child::* and not(name()='Util')])[position()=number(instance('fr-form-instance')/Util/CurrentSection)]/name()"/>
+                     calculate="(instance('fr-form-util')/Pages/*)[position()=number(instance('fr-form-instance')/Util/CurrentSection)]/name()"/>
          </xf:bind>
          <xf:instance id="fr-form-metadata" xxf:readonly="true">
             <metadata>
@@ -431,12 +423,6 @@
                      <help/>
                      <alert/>
                   </INSEE-SIMPSONS-QG-2-1-3>
-                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-Header-1>
-                     <label/>
-                     <hint/>
-                     <help/>
-                     <alert/>
-                  </INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-Header-1>
                   <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1>
                      <label>Santa's Little Helper</label>
                      <hint/>
@@ -588,12 +574,6 @@
                      <help/>
                      <alert/>
                   </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7>
-                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-Header-1>
-                     <label>Turnovers and proportions</label>
-                     <hint/>
-                     <help/>
-                     <alert/>
-                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-Header-1>
                   <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1>
                      <label>Turnover</label>
                      <hint/>
@@ -962,12 +942,6 @@
                      <help/>
                      <alert/>
                   </INSEE-SIMPSONS-QG-2-1-3>
-                  <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-Header-1>
-                     <label/>
-                     <hint/>
-                     <help/>
-                     <alert/>
-                  </INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-Header-1>
                   <INSEE-SIMPSONS-QG-2-1-3-INSEE-SIMPSONS-CL-CL_ANIMALS-1>
                      <label>Santa's Little Helper</label>
                      <hint/>
@@ -1119,12 +1093,6 @@
                      <help/>
                      <alert/>
                   </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-PRDMM-7>
-                  <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-Header-1>
-                     <label>Turnovers and proportions</label>
-                     <hint/>
-                     <help/>
-                     <alert/>
-                  </INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-Header-1>
                   <INSEE-SIMPSONS-QG-4-1-INSEE-SIMPSONS-CL-TURNPRP-1>
                      <label>Turnover</label>
                      <hint/>
