@@ -1,5 +1,7 @@
 package fr.insee.eno;
 
+import java.io.File;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -12,7 +14,8 @@ public class DummyMain {
 		Injector injector = Guice.createInjector(new DDI2FRContext());
 		GenerationService service = injector.getInstance(GenerationService.class);
 		try {
-			service.generateQuestionnaire("dummy.input", "dummy.params");
+			File f = service.generateQuestionnaire(Constants.TEST_INPUT_XML, null);
+			System.out.println(f);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

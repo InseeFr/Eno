@@ -14,7 +14,7 @@ public final class Constants {
 	}
 
 	// Root folder of the project : must be filled
-	// FIXME use a dynamic path if possible
+	// FIXME use a dynamic path
 	public static final String ROOT_FOLDER = "D:/arkn1q/Mes Documents/eclipse_workspace/Eno";
 
 	// Useful folders

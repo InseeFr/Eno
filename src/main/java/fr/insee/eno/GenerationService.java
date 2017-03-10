@@ -33,6 +33,7 @@ public class GenerationService {
 	public File generateQuestionnaire(String inputFileName, String parametersFileName) throws Exception {
 		this.preprocessor.process(inputFileName, parametersFileName);
 		this.generator.generate("", "");
+		//postprocessing
 		return new File("dummy.file");
 	}
 
