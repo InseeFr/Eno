@@ -96,7 +96,7 @@ public final class Constants {
 	/********************************************************/
 	public static final String CONFIG_FOLDER = ROOT_FOLDER + "/config";
 	public static final String PROPERTIES_FILE = CONFIG_FOLDER + "/ddi2fr.xml";
-	public static final String BROWSING_TEMPLATE_XSL = UTIL_FOLDER + "/fr/browsing-and-template.xsl";
+	public static final String BROWSING_TEMPLATE_XSL = UTIL_FOLDER + "/fr/browsing.xsl";
 	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
 	public static final String FINAL_EXTENSION = "-final.tmp";
 	public static final String TEMP_XFORMS_FOLDER = TARGET_TEMP_FOLDER + "/xforms";
