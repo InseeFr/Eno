@@ -38,8 +38,9 @@ Actions:
 
 - [X] describe interfaces,
   - [Base architecture](https://github.com/InseeFr/Eno/commit/c3c755651cac4ebdcba922a622e986603ce1f8e0)
-- [ ] add the default implementation,
-- [X]provide dependency injection mecanism
+- [X] add the default implementation,
+  - [Follow the injection path](https://github.com/InseeFr/Eno/blob/packaging-java-maven/src/main/java/fr/insee/eno/DDI2FRContext.java)
+- [X] provide dependency injection mecanism
   - [Using Guice](https://github.com/InseeFr/Eno/blob/packaging-java-maven/src/main/java/fr/insee/eno/DDI2FRContext.java)
 
 ### Add test cases using the Java API
@@ -50,7 +51,7 @@ The idea is to use a Java testing framework to perform this task.
 
 Actions:
 
-- use the Java API via a Java test suite to perform non regression tests.
+- [ ] use the Java API via a Java test suite to perform non regression tests.
 
 ### Use the maven package in Eno-WS
 
@@ -59,3 +60,9 @@ In Eno-WS, use the Eno package and the provided services.
 ### Create a command line client
 
 Eno-cli, a Java command line client using the core package.
+
+Actions:
+
+- [X] create the Github repo
+  - [There](https://github.com/InseeFr/Eno-CLI)
+- [ ] import and use Eno-core
