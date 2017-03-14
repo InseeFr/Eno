@@ -42,7 +42,7 @@ public class GenerationService {
 		File outputForm = this.generator.generate(preprocessResultFileName, "simpsons");
 		logger.debug("Path to generated questionnaire: "+ outputForm.getAbsolutePath());
 		//postprocessing
-		return new File("dummy.file");
+		return outputForm;
 	}
 
 }
