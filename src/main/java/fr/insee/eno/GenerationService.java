@@ -2,6 +2,9 @@ package fr.insee.eno;
 
 import java.io.File;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.inject.Inject;
 
 import fr.insee.eno.generation.Generator;
@@ -12,6 +15,9 @@ import fr.insee.eno.preprocessing.Preprocessor;
  * Orchestrates the whole generation process.
  */
 public class GenerationService {
+	
+	private static final Logger logger = LogManager.getLogger(GenerationService.class);
+	
 	private final Preprocessor preprocessor;
 	private final Generator generator;
 	private final Postprocessor postprocessor;
@@ -31,8 +37,10 @@ public class GenerationService {
 	 */
 	// TODO finish implementation
 	public File generateQuestionnaire(String inputFileName, String parametersFileName) throws Exception {
-		this.preprocessor.process(inputFileName, parametersFileName);
-		this.generator.generate("", "");
+		logger.info("Generating questionnaire:" + inputFileName);
+		String preprocessResultFileName = this.preprocessor.process(inputFileName, parametersFileName);
+		File outputForm = this.generator.generate(preprocessResultFileName, "simpsons");
+		logger.debug("Path to generated questionnaire: "+ outputForm.getAbsolutePath());
 		//postprocessing
 		return new File("dummy.file");
 	}

@@ -14,7 +14,7 @@ public class DummyMain {
 		Injector injector = Guice.createInjector(new DDI2FRContext());
 		GenerationService service = injector.getInstance(GenerationService.class);
 		try {
-			File f = service.generateQuestionnaire(Constants.TEST_INPUT_XML, null);
+			File f = service.generateQuestionnaire("questionnaires/simpsons/ddi/simpsons.xml", null);
 			System.out.println(f);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
