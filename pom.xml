@@ -10,7 +10,7 @@
 		<log4j.version>2.8.1</log4j.version>
 		<commons-io.version>2.5</commons-io.version>
 		<saxon.version>9.7.0-8</saxon.version>
-		
+
 		<sources.plugin.version>2.0.4</sources.plugin.version>
 		<javadoc.plugin.version>2.3</javadoc.plugin.version>
 
@@ -63,6 +63,20 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/xslt</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
