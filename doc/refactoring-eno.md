@@ -22,6 +22,8 @@ Actions:
  - groupId is `fr.insee.eno`, artifactId is `eno-core`
 - [ ] deploy to the maven central repository
   - see [requirements](http://central.sonatype.org/pages/requirements.html)
+  - [ ] produce sources and javadoc JARs
+  - [ ] provide a security hash for the package
 
 ### Provide Java interfaces to the transformation process
 
