@@ -32,13 +32,16 @@ public class GenerationService {
 	/**
 	 * Launch every step needed in order to generate the target questionnaire.
 	 * 
+	 * @param inputFile The source file
+	 * @param parametersFile Custom parameters file, could be null
+	 * 
 	 * @return The generated file
 	 * @throws Exception
 	 */
 	// TODO finish implementation
-	public File generateQuestionnaire(String inputFileName, String parametersFileName) throws Exception {
-		logger.info("Generating questionnaire:" + inputFileName);
-		String preprocessResultFileName = this.preprocessor.process(inputFileName, parametersFileName);
+	public File generateQuestionnaire(File inputFile, File parametersFile) throws Exception {
+		logger.info("Generating questionnaire:" + inputFile);
+		File preprocessResultFileName = this.preprocessor.process(inputFile, parametersFile);
 		File outputForm = this.generator.generate(preprocessResultFileName, "simpsons");
 		logger.debug("Path to generated questionnaire: "+ outputForm.getAbsolutePath());
 		//postprocessing

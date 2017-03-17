@@ -1,5 +1,7 @@
 package fr.insee.eno.xsl;
 
+import java.io.File;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,6 +10,11 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 
 import fr.insee.eno.utils.FolderCleaner;
 
+/**
+ * The core engine of Eno is based on XSL functions that are generated from a catalog
+ * of drivers stored in a FODS spreadsheet. This class manage this generation
+ * process.
+ * */
 public class FodsToXSLCompiler {
 	final static Logger logger = LogManager.getLogger(FodsToXSLCompiler.class);
 
@@ -84,17 +91,26 @@ public class FodsToXSLCompiler {
 		// From inputfile.fods to preformate.tmp using preformatting.xsl
 		logger.debug("Preformatting : -Input : " + inputFodsPath + " -Output : " + Constants.TEMP_PREFORMATE_TMP
 				+ " -Stylesheet : " + Constants.UTIL_FODS_PREFORMATTING_XSL);
-		saxonService.transform(inputFodsPath, Constants.UTIL_FODS_PREFORMATTING_XSL, Constants.TEMP_PREFORMATE_TMP);
+		saxonService.transform(
+				new File(inputFodsPath),
+				new File(Constants.UTIL_FODS_PREFORMATTING_XSL),
+				new File(Constants.TEMP_PREFORMATE_TMP));
 
 		// From preformate.tmp to xml.tmp using fods2xml.xsl
 		logger.debug("Fods2Xml : -Input : " + Constants.TEMP_PREFORMATE_TMP + " -Output : " + Constants.TEMP_XML_TMP
 				+ " -Stylesheet : " + Constants.FODS_2_XML_XSL);
-		saxonService.transform(Constants.TEMP_PREFORMATE_TMP, Constants.FODS_2_XML_XSL, Constants.TEMP_XML_TMP);
+		saxonService.transform(
+				new File(Constants.TEMP_PREFORMATE_TMP),
+				new File(Constants.FODS_2_XML_XSL),
+				new File(Constants.TEMP_XML_TMP));
 
 		// From xml.tmp to inputfile.xsl
 		logger.debug("Xml2Xsl : -Input : " + Constants.TEMP_XML_TMP + " -Output : " + outputXslPath + " -Stylesheet : "
 				+ Constants.XML_2_XSL_XSL);
-		saxonService.transform(Constants.TEMP_XML_TMP, Constants.XML_2_XSL_XSL, outputXslPath);
+		saxonService.transform(
+				new File(Constants.TEMP_XML_TMP),
+				new File(Constants.XML_2_XSL_XSL),
+				new File(outputXslPath));
 
 		logger.debug("Leaving Fods2Xsl");
 	}
@@ -110,32 +126,46 @@ public class FodsToXSLCompiler {
 		// tree-navigation.xsl into ddi2fr.xsl
 		logger.debug("Incorporating " + Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL + " and "
 				+ Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL + " in " + Constants.TEMP_TEMP_TMP);
-		saxonService.transformIncorporation(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL,
-				Constants.UTIL_XSL_INCORPORATION_XSL, Constants.TEMP_TEMP_TMP,
-				Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL);
+		saxonService.transformIncorporation(
+				new File(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL),
+				new File(Constants.UTIL_XSL_INCORPORATION_XSL),
+				new File(Constants.TEMP_TEMP_TMP),
+				new File(Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL));
 
 		logger.debug("Incorporating " + Constants.TEMP_TEMP_TMP + " and "
 				+ Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL + " in " + Constants.TEMP_TEMP_BIS_TMP);
-		saxonService.transformIncorporation(Constants.TEMP_TEMP_TMP, Constants.UTIL_XSL_INCORPORATION_XSL,
-				Constants.TEMP_TEMP_BIS_TMP, Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL);
+		saxonService.transformIncorporation(
+				new File(Constants.TEMP_TEMP_TMP),
+				new File(Constants.UTIL_XSL_INCORPORATION_XSL),
+				new File(Constants.TEMP_TEMP_BIS_TMP),
+				new File(Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL));
 
 		logger.debug("Incorporating " + Constants.TEMP_TEMP_BIS_TMP + " and "
 				+ Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL + " in "
 				+ Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL);
-		saxonService.transformIncorporation(Constants.TEMP_TEMP_BIS_TMP, Constants.UTIL_XSL_INCORPORATION_XSL,
-				Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL, Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL);
+		saxonService.transformIncorporation(
+				new File(Constants.TEMP_TEMP_BIS_TMP),
+				new File(Constants.UTIL_XSL_INCORPORATION_XSL),
+				new File(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL),
+				new File(Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL));
 
 		// Incorporating source-fixed.xsl, functions.xsl and templates.xsl into
 		// source.xsl
 		logger.debug("Incorporating " + Constants.INPUTS_DDI_SOURCE_FIXED_XSL + " and "
 				+ Constants.INPUTS_DDI_FUNCTIONS_XSL + " in " + Constants.TEMP_TEMP_TMP);
-		saxonService.transformIncorporation(Constants.INPUTS_DDI_SOURCE_FIXED_XSL, Constants.UTIL_XSL_INCORPORATION_XSL,
-				Constants.TEMP_TEMP_TMP, Constants.INPUTS_DDI_FUNCTIONS_XSL);
+		saxonService.transformIncorporation(
+				new File(Constants.INPUTS_DDI_SOURCE_FIXED_XSL), 
+				new File(Constants.UTIL_XSL_INCORPORATION_XSL),
+				new File(Constants.TEMP_TEMP_TMP), 
+				new File(Constants.INPUTS_DDI_FUNCTIONS_XSL));
 
 		logger.debug("Incorporating " + Constants.TEMP_TEMP_TMP + " and " + Constants.INPUTS_DDI_TEMPLATES_XSL + " in "
 				+ Constants.INPUTS_DDI_SOURCE_XSL);
-		saxonService.transformIncorporation(Constants.TEMP_TEMP_TMP, Constants.UTIL_XSL_INCORPORATION_XSL,
-				Constants.INPUTS_DDI_SOURCE_XSL, Constants.INPUTS_DDI_TEMPLATES_XSL);
+		saxonService.transformIncorporation(
+				new File(Constants.TEMP_TEMP_TMP), 
+				new File(Constants.UTIL_XSL_INCORPORATION_XSL),
+				new File(Constants.INPUTS_DDI_SOURCE_XSL), 
+				new File(Constants.INPUTS_DDI_TEMPLATES_XSL));
 		logger.debug("Leaving Incorporation");
 	}
 }

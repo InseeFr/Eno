@@ -1,5 +1,7 @@
 package fr.insee.eno.preprocessing;
 
+import java.io.File;
+
 /**
  * Operates a set of transformation to prepare the generation.
  */
@@ -11,6 +13,6 @@ public interface Preprocessor {
 	 * TODO Exception is also weak, change to a more robust Exception
 	 * @throws Exception 
 	 */
-	public String process(String inputFile, String parametersFile) throws Exception;
+	public File process(File inputFile, File parametersFile) throws Exception;
 
 }

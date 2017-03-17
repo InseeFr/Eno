@@ -3,6 +3,7 @@ package fr.insee.eno.preprocessing;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.net.URL;
+import java.nio.file.Paths;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
@@ -22,14 +23,18 @@ public class DDIPreprocessor implements Preprocessor {
 	private static XslTransformation saxonService = new XslTransformation();
 
 	@Override
-	public String process(String inputFile, String parametersFile) throws Exception {
+	public File process(File inputFile, File parametersFile) throws Exception {
 		logger.debug("DDIPreprocessing Target : START");
 
 		logger.debug(
 				"Dereferencing : -Input : " + inputFile + " -Output : " + Constants.TEMP_NULL_TMP + " -Stylesheet : "
 						+ Constants.UTIL_DDI_DEREFERENCING_XSL + " -Parameters : " + Constants.TARGET_TEMP_FOLDER);
-		saxonService.transformDereferencing(inputFile, Constants.UTIL_DDI_DEREFERENCING_XSL, Constants.TEMP_NULL_TMP,
-				Constants.TARGET_TEMP_FOLDER);
+		
+		saxonService.transformDereferencing(
+				inputFile, 
+				new File(Constants.UTIL_DDI_DEREFERENCING_XSL),
+				new File(Constants.TEMP_NULL_TMP),
+				new File(Constants.TARGET_TEMP_FOLDER));
 
 		// CLEANING
 		logger.debug("Cleaning target");
@@ -54,7 +59,10 @@ public class DDIPreprocessor implements Preprocessor {
 		logger.debug("Cleaned output file to be created : " + cleaningOutput);
 		logger.debug("Cleaning : -Input : " + cleaningInput + " -Output : " + cleaningOutput + " -Stylesheet : "
 				+ Constants.UTIL_DDI_CLEANING_XSL);
-		saxonService.transform(cleaningInput, Constants.UTIL_DDI_CLEANING_XSL, cleaningOutput);
+		saxonService.transform(
+				new File(cleaningInput),
+				new File(Constants.UTIL_DDI_CLEANING_XSL), 
+				new File(cleaningOutput));
 
 		// TITLING
 		// titlinginput = cleaningoutput
@@ -67,7 +75,7 @@ public class DDIPreprocessor implements Preprocessor {
 			ClassLoader loader = DDIPreprocessor.class.getClassLoader();
 
 			URL url = loader.getResource(Constants.PARAMETERS_FILE);
-			parametersFile = url.toString();
+			parametersFile = Paths.get(url.toURI()).toFile();			
 		}
 
 		logger.debug("Loading Parameters.xml located in : " + parametersFile);
@@ -76,10 +84,14 @@ public class DDIPreprocessor implements Preprocessor {
 
 		logger.debug("Titling : -Input : " + cleaningOutput + " -Output : " + outputTitling + " -Stylesheet : "
 				+ Constants.UTIL_DDI_TITLING_XSL + " -Parameters : " + parametersFile);
-		saxonService.transformTitling(cleaningOutput, Constants.UTIL_DDI_TITLING_XSL, outputTitling, parametersFile);
+		saxonService.transformTitling(
+				new File(cleaningOutput),
+				new File(Constants.UTIL_DDI_TITLING_XSL),
+				new File(outputTitling),
+				parametersFile);
 
 		logger.debug("DDIPreprocessing : END");
-		return outputTitling;
+		return new File(outputTitling);
 	}
 
 }

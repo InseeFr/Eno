@@ -20,7 +20,9 @@ public class DummyMain {
 		Injector injector = Guice.createInjector(new DDI2FRContext());
 		GenerationService service = injector.getInstance(GenerationService.class);
 		try {
-			File generatedFile = service.generateQuestionnaire("questionnaires/simpsons/ddi/simpsons.xml", null);
+			File generatedFile = service.generateQuestionnaire(
+					new File("questionnaires/simpsons/ddi/simpsons.xml"),
+					null);
 			logger.info("Generation successful! >> " + generatedFile);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
