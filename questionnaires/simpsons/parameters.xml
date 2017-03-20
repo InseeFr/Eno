@@ -49,5 +49,8 @@
             </Level>
         </Question>
     </Title>
-
+    <Languages>
+        <Language>fr</Language>
+        <Language>en</Language>
+    </Languages>
 </Parameters>

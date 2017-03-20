@@ -19,6 +19,10 @@
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
     <xsl:strip-space elements="*"/>
+    
+    <!-- Parameters defined in build-non-regression.xml -->
+    <xsl:param name="parameters-file"/>
+    <xsl:variable name="parameters" select="doc($parameters-file)"/>
 
     <xd:doc scope="stylesheet">
         <xd:desc>

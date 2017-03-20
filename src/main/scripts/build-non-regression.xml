@@ -35,6 +35,8 @@
             style="${xslt.home}/transformations/ddi2fr/ddi2fr.xsl" force="true"
             classpath="${saxon.jar}">
             <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
+            <param name="parameters-file"
+                expression="${survey-folder}/parameters.xml"/>
         </xslt>
 
         <!-- Adding the layer in charge of the survey's navigation by applying browsing.xsl stylesheet -->
