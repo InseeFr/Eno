@@ -56,13 +56,9 @@
     <xsl:template match="xf:instance[@id='fr-form-instance']/form">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <Beginning>
-                <Dummy/>
-            </Beginning>
+            <Beginning/>
             <xsl:apply-templates select="node()"/>
-            <End>
-                <Dummy/>
-            </End>
+            <End/>
             <Util>
                 <CurrentSection>1</CurrentSection>
                 <CurrentSectionName/>
