@@ -18,9 +18,9 @@ public final class Constants {
 	public static final String ROOT_FOLDER = "D:/arkn1q/Mes Documents/eclipse_workspace/Eno";
 
 	// Useful folders
-	public static final String INPUTS_FOLDER = ROOT_FOLDER + "/src/main/xslt/inputs";
-	public static final String TRANSFORMATIONS_FOLDER = ROOT_FOLDER + "/src/main/xslt/transformations";
-	public static final String UTIL_FOLDER = ROOT_FOLDER + "/src/main/xslt/util";
+	public static final String INPUTS_FOLDER = ROOT_FOLDER + "/src/main/resources/xslt/inputs";
+	public static final String TRANSFORMATIONS_FOLDER = ROOT_FOLDER + "/src/main/resources/xslt/transformations";
+	public static final String UTIL_FOLDER = ROOT_FOLDER + "/src/main/resources/xslt/util";
 	public static final String TARGET_FOLDER = ROOT_FOLDER + "/target";
 	public static final String QUESTIONNAIRE_FOLDER = ROOT_FOLDER + "/questionnaires";
 	public static final String TEMP_TEST_FOLDER = TARGET_FOLDER + "/nonRegressionTest";

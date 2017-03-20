@@ -79,7 +79,7 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setParameter(XslParameters.INCORPORATION_GENERATED_FILE, generatedFileParameter);
+		transformer.setParameter(XslParameters.INCORPORATION_GENERATED_FILE, generatedFileParameter.toURI().toString());
 		xslTransform(transformer, input, output);
 	}
 
