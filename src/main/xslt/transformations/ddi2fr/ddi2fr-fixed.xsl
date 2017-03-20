@@ -284,5 +284,20 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
+    
+    <!--Linking the DDI languages getter function to the form languages getter function-->
+    <xsl:function name="enofr:get-form-languages">
+        <xsl:param name="context" as="item()"/>
+        <xsl:choose>
+            <xsl:when test="$parameters/Parameters/Languages">
+                <xsl:for-each select="$parameters/Parameters/Languages/Language">
+                    <xsl:value-of select="."/>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="enoddi:get-languages($context)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 </xsl:stylesheet>

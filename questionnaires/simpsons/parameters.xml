@@ -49,6 +49,7 @@
             </Level>
         </Question>
     </Title>
+    <!-- The list of languages to be charged in the generated form can be defined here. If this element is missing, the xml:lang attributes of the DDI file are used instead. -->
     <Languages>
         <Language>fr</Language>
         <Language>en</Language>
