@@ -26,9 +26,9 @@
     
     <xsl:param name="labels-folder"/>
     
-    <xsl:param name="labels-resource">
+    <xsl:variable name="labels-resource">
         <xsl:sequence select="eno:build-labels-resource($labels-folder,enofr:get-form-languages(root()))"/>
-    </xsl:param>
+    </xsl:variable>
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -200,11 +200,11 @@
                     </xsl:variable>
                     <!-- If it is number, we display this hint -->
                     <xsl:if test="$type='number'">
-                        <xsl:value-of select="concat('Exemple : ',enoddi:get-maximum($context))"/>
+                        <xsl:value-of select="concat($labels-resource/Languages/Language[@xml:lang=$language]/Hint/Number,enoddi:get-maximum($context))"/>
                     </xsl:if>
                     <!-- If it is a date, we display this hint -->
                     <xsl:if test="$type='date'">
-                        <xsl:text>Date au format JJ/MM/AAAA</xsl:text>
+                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Hint/Date"/>
                     </xsl:if>
                 </xsl:if>
             </xsl:when>
@@ -238,7 +238,7 @@
                 <!-- If it is a 'text' and a format is defined, we use a generic sentence as an alert -->
                 <xsl:if test="$type='text'">
                     <xsl:if test="not($format='')">
-                        <xsl:text>Vous devez saisir une valeur correcte</xsl:text>
+                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Text"/>
                     </xsl:if>
                 </xsl:if>
                 <!-- If it is a number, we look for infos about the format and deduce a message for the alert element -->
@@ -255,33 +255,41 @@
                     <xsl:variable name="beginning">
                         <xsl:choose>
                             <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
-                                <xsl:text>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre</xsl:text>
+                                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Beginning"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:text>Vous devez saisir un nombre entier compris entre</xsl:text>
+                                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Integer"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:variable>
                     <xsl:variable name="end">
                         <xsl:choose>
                             <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
-                                <xsl:value-of select="concat('(avec au plus ',$number-of-decimals,' chiffre',if (number($number-of-decimals)&gt;1) then 's' else '',' derrière le séparateur &quot;.&quot;)')"/>
+                                <xsl:value-of select="' '
+                                    ,concat($labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/DecimalCondition
+                                    ,' '
+                                    ,$number-of-decimals
+                                    ,' '
+                                    ,$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Digit
+                                    ,if (number($number-of-decimals)&gt;1) then $labels-resource/Languages/Language[@xml:lang=$language]/Plural else ''
+                                    ,' '
+                                    ,$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/End)"/>
                             </xsl:when>
                         </xsl:choose>
                     </xsl:variable>
-                    <xsl:value-of select="concat($beginning,' ',$minimum, ' et ',$maximum,' ', $end)"/>
+                    <xsl:value-of select="concat($beginning,' ',$minimum, ' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',$maximum, $end)"/>
                 </xsl:if>
                 <!-- If it is a 'date', we use a generic sentence as an alert -->
                 <xsl:if test="$type='date'">
-                    <xsl:text>Entrez une date valide</xsl:text>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
                 </xsl:if>
                 <!-- In those cases, we use specific messages as alert messages -->
                 <xsl:if test="$type='duration'">
                     <xsl:if test="$format='hh'">
-                        <xsl:text>Le nombre d'heures doit être compris entre 0 et 99.</xsl:text>
+                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Hours"/>
                     </xsl:if>
                     <xsl:if test="$format='mm'">
-                        <xsl:text>Le nombre de minutes doit être compris entre 0 et 59.</xsl:text>
+                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Minutes"/>
                     </xsl:if>
                 </xsl:if>
             </xsl:when>

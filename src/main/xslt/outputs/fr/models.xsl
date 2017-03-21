@@ -95,14 +95,18 @@
                         <resources>
                             <xsl:variable name="driver" select="."/>
                             <xsl:for-each select="$languages">
+                                <xsl:variable name="language" select="."/>
                                 <resource xml:lang="{.}">
                                     <xsl:apply-templates select="eno:child-fields($source-context)"
                                         mode="source">
                                         <xsl:with-param name="driver"
                                             select="eno:append-empty-element('Resource', $driver)"
                                             tunnel="yes"/>
-                                        <xsl:with-param name="language" select="." tunnel="yes"/>
+                                        <xsl:with-param name="language" select="$language" tunnel="yes"/>
                                     </xsl:apply-templates>
+                                    <AddLine>
+                                        <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/AddLine"/></label>
+                                    </AddLine>
                                 </resource>
                             </xsl:for-each>
                         </resources>
@@ -1035,7 +1039,7 @@
             </xhtml:tbody>
         </xhtml:table>
         <xf:trigger>
-            <xf:label>Ajouter une ligne</xf:label>
+            <xf:label ref="$form-resources/AddLine/label"/>
             <xf:insert ev:event="DOMActivate" context="."
                 nodeset="{concat('//',$name,'-RowLoop')}"
                 origin="{concat('instance(''fr-form-loop-model'')/',$name,'-RowLoop')}"

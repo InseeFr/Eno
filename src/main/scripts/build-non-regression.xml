@@ -48,7 +48,6 @@
             out="${root-folder}/target/${survey-name}/${form-name}/form/form.xhtml"
             style="${xslt.home}/util/fr/browsing.xsl" force="true"
             classpath="${saxon.jar}">
-            <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
             <param name="labels-folder"
                 expression="${lang-folder}/fr"/>
         </xslt>

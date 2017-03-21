@@ -3,21 +3,30 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xf="http://www.w3.org/2002/xforms"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
     xmlns:xxf="http://orbeon.org/oxf/xml/xforms" xmlns:ev="http://www.w3.org/2001/xml-events"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xd" version="2.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:eno="http://xml.insee.fr/apps/eno" exclude-result-prefixes="eno xd" version="2.0">
 
     <!-- This stylesheet is applied to basic-form.tmp (previously created in the ddi2fr target) -->
     <!-- It adds orbeon related elements to enable the desired navigation. -->
     <!-- Transformation used to add the home page on the different questionnaires. -->
+
+    <xsl:import href="../../lib.xsl"/>
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
     <xsl:strip-space elements="*"/>
 
-    <!-- Eno properties file -->
-    <xsl:param name="properties-file"/>
-
-    <xsl:variable name="properties" select="doc($properties-file)"/>
+    <xsl:param name="labels-folder"/>
+    
+    <xsl:variable name="labels-resource">
+        <xsl:variable name="languages" as="xs:string*">
+            <xsl:for-each select="root()//@xml:lang">
+                <xsl:value-of select="."/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:sequence select="eno:build-labels-resource($labels-folder,$languages)"/>
+    </xsl:variable>
 
     <!-- Saving the CurrentSection in a variable -->
     <xsl:variable name="choice">
@@ -27,13 +36,6 @@
     <!-- Counting the number of modules and storing it -->
     <xsl:variable name="number-of-modules">
         <xsl:value-of select="count(//fr:body/*[name()='fr:section' or name()='xf:repeat'])"/>
-    </xsl:variable>
-
-    <xsl:variable name="number-of-pages-before-progress-start" as="xs:integer">
-        <xsl:value-of select="number(1)"/>
-    </xsl:variable>
-    <xsl:variable name="number-of-pages-after-progress-end" as="xs:integer">
-        <xsl:value-of select="number(1)"/>
     </xsl:variable>
 
     <xsl:template match="/">
@@ -56,9 +58,13 @@
     <xsl:template match="xf:instance[@id='fr-form-instance']/form">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <Beginning/>
+            <Beginning>
+                <GenericBeginningText/>
+            </Beginning>
             <xsl:apply-templates select="node()"/>
-            <End/>
+            <End>
+                <GenericEndText/>
+            </End>
             <Util>
                 <CurrentSection>1</CurrentSection>
                 <CurrentSectionName/>
@@ -78,9 +84,13 @@
     <xsl:template match="xf:bind[@id='fr-form-instance-binds']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xf:bind id="beginning-bind" name="beginning" ref="Beginning"/>
+            <xf:bind id="beginning-bind" name="beginning" ref="Beginning">
+                <xf:bind id="generic-beginning-text-bind" name="generic-beginning-text" ref="GenericBeginningText"/>
+            </xf:bind>
             <xsl:apply-templates select="node()"/>
-            <xf:bind id="end-bind" name="end" ref="End"/>
+            <xf:bind id="end-bind" name="end" ref="End">
+                <xf:bind id="generic-end-text-bind" name="generic-end-text" ref="GenericEndText"/>
+            </xf:bind>
             <xf:bind id="current-section-name-bind" name="current-section-name"
                 ref="Util/CurrentSectionName">
                 <xsl:attribute name="calculate">
@@ -120,145 +130,77 @@
 
     <!-- Adding those elements to the resources -->
     <xsl:template
-        match="resource[@xml:lang='en' and ancestor::xf:instance[@id='fr-form-resources']]">
+        match="resource[ancestor::xf:instance[@id='fr-form-resources']]">
+        <xsl:variable name="language" select="@xml:lang"/>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <Beginning>
-                <label>BEGINNING</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Beginning"/></label>
             </Beginning>
+            <GenericBeginningText>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GenericBeginningText"/></label>
+            </GenericBeginningText>
             <xsl:apply-templates select="node()"/>
             <End>
-                <label>END</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/End"/></label>
             </End>
+            <GenericEndText>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GenericEndText"/></label>
+            </GenericEndText>
             <Progress>
-                <label>&lt;p&gt;&lt;b&gt;Progress&lt;/b&gt;&lt;/p&gt;</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Progress"/></label>
             </Progress>
             <Start>
-                <label>Start</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Start"/></label>
             </Start>
             <Previous>
-                <label>Go Back</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Previous"/></label>
             </Previous>
             <Next>
-                <label>Save and continue</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Next"/></label>
             </Next>
             <Send>
-                <label>Send</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Send"/></label>
             </Send>
             <ConfirmationMessage>
-                <label>Your questionnaire was submitted the</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ConfirmationMessage"/></label>
             </ConfirmationMessage>
             <FatalError>
-                <label>There was a problem with saving/submitting your answers.</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/FatalError"/></label>
             </FatalError>
             <Correct>
-                <label>Correct</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Correct"/></label>
             </Correct>
             <Continue>
-                <label>Continue</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Continue"/></label>
             </Continue>
             <GoBack>
-                <label>Go back to the last accessed page</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoBack"/></label>
             </GoBack>
             <GoToFirstPage>
-                <label>Go to the first page</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoToFirstPage"/></label>
             </GoToFirstPage>
             <WelcomeBack>
-                <label>Welcome</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBack"/></label>
             </WelcomeBack>
             <Warning>
-                <label>Warning</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Warning"/></label>
             </Warning>
             <Error>
-                <label>Blocking error</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Error"/></label>
             </Error>
             <WelcomeBackText>
-                <label>&lt;p&gt;You started filling the questionnaire. To continue, what do you wish
-                    to do ?&lt;/p&gt;</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBackText"/></label>
             </WelcomeBackText>
             <WarningText>
-                <label>&lt;p&gt;Some fields of this page are marked as
-                    warnings.&lt;/p&gt;&lt;p&gt;Do you wish to correct those warnings before going
-                    on filling the questionnaire ?&lt;/p&gt;</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WarningText"/></label>
             </WarningText>
             <ErrorText>
-                <label>&lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;&lt;p&gt;You
-                    need to correct those warnings before going on filling the
-                    questionnaire.&lt;/p&gt;</label>
+                <label><xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ErrorText"/></label>
             </ErrorText>
         </xsl:copy>
     </xsl:template>
-    <xsl:template
-        match="resource[@xml:lang='fr' and ancestor::xf:instance[@id='fr-form-resources']]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <Beginning>
-                <label>DEBUT</label>
-            </Beginning>
-            <xsl:apply-templates select="node()"/>
-            <End>
-                <label>FIN</label>
-            </End>
-            <Progress>
-                <label>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</label>
-            </Progress>
-            <Start>
-                <label>Commencer</label>
-            </Start>
-            <Previous>
-                <label>Retour</label>
-            </Previous>
-            <Next>
-                <label>Enregistrer et continuer</label>
-            </Next>
-            <Send>
-                <label>Envoyer</label>
-            </Send>
-            <ConfirmationMessage>
-                <label>Votre questionnaire a bien été expédié le</label>
-            </ConfirmationMessage>
-            <FatalError>
-                <label>Problème lors de l'enregistrement/l'expédition de vos réponses.</label>
-            </FatalError>
-            <Correct>
-                <label>Corriger</label>
-            </Correct>
-            <Continue>
-                <label>Poursuivre</label>
-            </Continue>
-            <GoBack>
-                <label>Revenir à la dernière page accédée</label>
-            </GoBack>
-            <GoToFirstPage>
-                <label>Aller à la première page</label>
-            </GoToFirstPage>
-            <WelcomeBack>
-                <label>Bienvenue</label>
-            </WelcomeBack>
-            <Warning>
-                <label>Avertissement</label>
-            </Warning>
-            <Error>
-                <label>Erreur bloquante</label>
-            </Error>
-            <WelcomeBackText>
-                <label>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour
-                    poursuivre votre saisie dans le questionnaire, que souhaitez-vous faire
-                    ?&lt;/p&gt;</label>
-            </WelcomeBackText>
-            <WarningText>
-                <label>&lt;p&gt;Certains champs de cette page sont indiqués en
-                    avertissement.&lt;/p&gt;&lt;p&gt;Souhaitez-vous corriger ces avertissements
-                    avant de poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;</label>
-            </WarningText>
-            <ErrorText>
-                <label>&lt;p&gt;Certains champs de cette page sont indiqués en
-                    erreur.&lt;/p&gt;&lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le
-                    remplissage de ce questionnaire.&lt;/p&gt;</label>
-            </ErrorText>
-        </xsl:copy>
-    </xsl:template>
-
+   
     <!-- Adding many elements to the model -->
     <xsl:template match="xf:model[@id='fr-form-model']">
         <xsl:copy>
@@ -834,8 +776,11 @@
                     <fr:section id="beginning-control" bind="beginning-bind" name="beginning">
                         <xf:label ref="$form-resources/Beginning/label"/>
                         <xhtml:div class="center">
-                            <xhtml:p>Generic beginning page, can be overridden or removed by
-                                processing your own xslt on the result.</xhtml:p>
+                            <xf:output id="generic-beginning-text-control" bind="generic-beginning-text-bind">
+                                <xf:label ref="$form-resources/GenericBeginningText/label">
+                                    <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                                </xf:label>
+                            </xf:output>
                         </xhtml:div>
                     </fr:section>
                 </xf:case>
@@ -844,8 +789,11 @@
                     <fr:section id="end-control" bind="end-bind" name="end">
                         <xf:label ref="$form-resources/End/label"/>
                         <xhtml:div class="center">
-                            <xhtml:p>Generic end page, can be overridden or removed by processing
-                                your own xslt on the result.</xhtml:p>
+                            <xf:output id="generic-end-text-control" bind="generic-end-text-bind">
+                                <xf:label ref="$form-resources/GenericEndText/label">
+                                    <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                                </xf:label>
+                            </xf:output>
                             <xf:trigger id="send" bind="send-bind">
                                 <xf:label ref="$form-resources/Send/label"/>
                                 <xf:action ev:event="DOMActivate">
