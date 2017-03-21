@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Quesaco" basedir="." default="full">
+<project name="Eno" basedir="." default="full">
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
     
@@ -35,6 +35,8 @@
             style="${xslt.home}/transformations/ddi2fr/ddi2fr.xsl" force="true"
             classpath="${saxon.jar}">
             <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
+            <param name="parameters-file"
+                expression="${survey-folder}/parameters.xml"/>
         </xslt>
 
         <!-- Adding the layer in charge of the survey's navigation by applying browsing.xsl stylesheet -->

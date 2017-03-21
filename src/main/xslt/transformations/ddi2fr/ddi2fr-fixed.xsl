@@ -19,6 +19,10 @@
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
     <xsl:strip-space elements="*"/>
+    
+    <!-- Parameters defined in build-non-regression.xml -->
+    <xsl:param name="parameters-file"/>
+    <xsl:variable name="parameters" select="doc($parameters-file)"/>
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -277,6 +281,21 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:sequence select="$message/node()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+    
+    <!--Linking the DDI languages getter function to the form languages getter function-->
+    <xsl:function name="enofr:get-form-languages">
+        <xsl:param name="context" as="item()"/>
+        <xsl:choose>
+            <xsl:when test="$parameters/Parameters/Languages">
+                <xsl:for-each select="$parameters/Parameters/Languages/Language">
+                    <xsl:value-of select="."/>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="enoddi:get-languages($context)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
