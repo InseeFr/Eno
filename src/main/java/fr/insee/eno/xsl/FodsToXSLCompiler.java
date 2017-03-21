@@ -32,7 +32,7 @@ public class FodsToXSLCompiler {
 		try {
 
 			logger.debug("Before EnoPreprocessing : Cleaning /temp folder");
-			cleanService.cleanOneFolder(Constants.TARGET_TEMP_FOLDER);
+			cleanService.cleanOneFolder(Constants.SUB_TEMP_FOLDER);
 			logger.debug("/temp folder cleaned");
 
 			logger.debug("EnoPreprocessing : START");
@@ -146,7 +146,7 @@ public class FodsToXSLCompiler {
 		saxonService.transformIncorporation(
 				new File(Constants.TEMP_TEMP_BIS_TMP),
 				new File(Constants.UTIL_XSL_INCORPORATION_XSL),
-				new File(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL),
+				Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL,
 				new File(Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL));
 
 		// Incorporating source-fixed.xsl, functions.xsl and templates.xsl into

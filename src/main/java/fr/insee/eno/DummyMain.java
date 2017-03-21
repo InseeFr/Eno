@@ -32,9 +32,11 @@ public class DummyMain {
 		}
 	}
 	
+	// FIXME should the generation service handle the cleaning ?
+	// Or should every client handle it ?
 	private static boolean cleanTempDirectory() {
-		logger.debug("Cleaning temp directory at " + Constants.TEMP_FOLDER);
-		File tempDir = new File(Constants.TEMP_FOLDER);
+		logger.debug("Cleaning temp directory at " + Constants.TEMP_FOLDER_PATH);
+		File tempDir = new File(Constants.TEMP_FOLDER_PATH);
 		if(!tempDir.exists()) {
 			logger.debug("Temp dir does not exist.");
 			return false;

@@ -31,8 +31,8 @@ public class FolderCleaner {
 	 */
 	public void cleanTarget(String questionnaireFolder) throws Exception {
 
-		String tempFolder = Constants.TEMP_FOLDER + "/temp";
-		String testFolder = Constants.TEMP_FOLDER + "/test";
+		String tempFolder = Constants.TEMP_FOLDER_PATH + "/temp";
+		String testFolder = Constants.TEMP_FOLDER_PATH + "/test";
 
 		logger.debug("Cleaning directories : " + tempFolder + " | " + testFolder + " | " + questionnaireFolder);
 
@@ -50,15 +50,15 @@ public class FolderCleaner {
 	/**
 	 * Generic method to clean one folder
 	 * 
-	 * @param pathToFolder
+	 * @param folder
 	 *            : the folder to be cleaned
 	 * @throws Exception
 	 *             : FileNotfound / NoAccess mainly
 	 */
-	public void cleanOneFolder(String pathToFolder) throws Exception {
-		logger.debug("Cleaning " + pathToFolder);
-		FileUtils.forceMkdir(new File(pathToFolder));
-		FileUtils.cleanDirectory(new File(pathToFolder));
+	public void cleanOneFolder(File folder) throws Exception {
+		logger.debug("Cleaning " + folder);
+		FileUtils.forceMkdir(folder);
+		FileUtils.cleanDirectory(folder);
 
 	}
 }

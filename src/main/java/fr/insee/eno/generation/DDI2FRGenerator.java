@@ -39,13 +39,13 @@ public class DDI2FRGenerator implements Generator {
 		logger.debug("-Parameters : " + surveyName + " | " + formNameFolder + " | " + Constants.PROPERTIES_FILE);
 		saxonService.transformDdi2frBasicForm(
 				finalInput,
-				new File(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL),
+				Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL,
 				new File(outputBasicForm),
 				surveyName,
 				new File(formNameFolder),
-				new File(Constants.PROPERTIES_FILE));
+				Constants.PROPERTIES_FILE);
 
-		String outputForm = Constants.TEMP_FOLDER + "/" + surveyName + "/" + formNameFolder + "/form/form.xhtml";
+		String outputForm = Constants.TEMP_FOLDER_PATH + "/" + surveyName + "/" + formNameFolder + "/form/form.xhtml";
 
 		logger.debug("Ddi2fr part 2 : from basic-form to form.xhtml");
 		logger.debug("-Input : " + outputBasicForm + " -Output : " + outputForm + " -Stylesheet : "
@@ -53,11 +53,11 @@ public class DDI2FRGenerator implements Generator {
 		logger.debug("-Parameters : " + surveyName + " | " + formNameFolder + " | " + Constants.PROPERTIES_FILE);
 		saxonService.transformDdi2frBasicForm(
 				new File(outputBasicForm),
-				new File(Constants.BROWSING_TEMPLATE_XSL),
+				Constants.BROWSING_TEMPLATE_XSL,
 				new File(outputForm),
 				surveyName,
 				new File(formNameFolder),
-				new File(Constants.PROPERTIES_FILE));
+				Constants.PROPERTIES_FILE);
 
 		return new File(outputForm);
 	}
