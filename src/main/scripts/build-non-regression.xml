@@ -28,8 +28,6 @@
         <basename file="${file}" property="file-name" suffix=".tmp"/>
         <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
             global="true"/>
-
-        <echo message="${lang-folder}"/>
         
         <!-- Generating xforms from the DDI : basic-form.tmp using the ddi2fr.xsl stylesheet -->
         <xslt in="${temp.home}/${file-name}.tmp"
