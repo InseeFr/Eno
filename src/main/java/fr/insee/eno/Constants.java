@@ -21,9 +21,11 @@ public final class Constants {
 	public static final String INPUTS_FOLDER = ROOT_FOLDER + "/src/main/resources/xslt/inputs";
 	public static final String TRANSFORMATIONS_FOLDER = ROOT_FOLDER + "/src/main/resources/xslt/transformations";
 	public static final String UTIL_FOLDER = ROOT_FOLDER + "/src/main/resources/xslt/util";
-	public static final String TARGET_FOLDER = ROOT_FOLDER + "/target";
+	
+	public static final String TEMP_FOLDER = System.getProperty("java.io.tmpdir") + "/Eno";
+	
 	public static final String QUESTIONNAIRE_FOLDER = ROOT_FOLDER + "/questionnaires";
-	public static final String TEMP_TEST_FOLDER = TARGET_FOLDER + "/nonRegressionTest";
+	public static final String TEMP_TEST_FOLDER = TEMP_FOLDER + "/nonRegressionTest";
 
 	/********************************************************/
 	/******************* ENOPreprocessing *******************/
@@ -47,8 +49,8 @@ public final class Constants {
 	public static final String XML_2_XSL_XSL = TRANSFORMATIONS_FOLDER + "/xml2xsl.xsl";
 
 	// Temporary files used in FODS2XSL
-	public static final String TEMP_PREFORMATE_TMP = TARGET_FOLDER + "/temp/preformate.tmp";
-	public static final String TEMP_XML_TMP = TARGET_FOLDER + "/temp/xml.tmp";
+	public static final String TEMP_PREFORMATE_TMP = TEMP_FOLDER + "/temp/preformate.tmp";
+	public static final String TEMP_XML_TMP = TEMP_FOLDER + "/temp/xml.tmp";
 
 	//// Output xsl files created by ENOPreprocessing
 	// output/ddi
@@ -63,8 +65,8 @@ public final class Constants {
 
 	////// INCORPORATION TARGET
 	//// Temporary files used in INCORPORATION
-	public static final String TEMP_TEMP_TMP = TARGET_FOLDER + "/temp/temp.tmp";
-	public static final String TEMP_TEMP_BIS_TMP = TARGET_FOLDER + "/temp/temp-bis.tmp";
+	public static final String TEMP_TEMP_TMP = TEMP_FOLDER + "/temp/temp.tmp";
+	public static final String TEMP_TEMP_BIS_TMP = TEMP_FOLDER + "/temp/temp-bis.tmp";
 
 	//// Xsl stylesheets used in INCORPORATION
 	public static final String TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL = TRANSFORMATIONS_FOLDER
@@ -75,7 +77,7 @@ public final class Constants {
 	public static final String INPUTS_DDI_SOURCE_XSL = INPUTS_FOLDER + "/ddi/source.xsl";
 
 	//// Used for Cleaning
-	public static final String TARGET_TEMP_FOLDER = TARGET_FOLDER + "/temp";
+	public static final String TARGET_TEMP_FOLDER = TEMP_FOLDER + "/temp";
 
 	/********************************************************/
 	/******************* DDIPreprocessing *******************/
@@ -106,7 +108,7 @@ public final class Constants {
 	/***************** NON REGRESSION TEST ******************/
 	/********************************************************/
 
-	public static final String TEST_FILE_TO_COMPARE = TARGET_FOLDER + "/simpsons/v1/form/form.xhtml";
+	public static final String TEST_FILE_TO_COMPARE = TEMP_FOLDER + "/simpsons/v1/form/form.xhtml";
 	public static final String TEST_REFERENCE_FILE = "simpsons-form.xhtml";
 	public static final String TEST_INPUT_XML = "simpsons.xml";
 }

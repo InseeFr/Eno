@@ -31,8 +31,8 @@ public class FolderCleaner {
 	 */
 	public void cleanTarget(String questionnaireFolder) throws Exception {
 
-		String tempFolder = Constants.TARGET_FOLDER + "/temp";
-		String testFolder = Constants.TARGET_FOLDER + "/test";
+		String tempFolder = Constants.TEMP_FOLDER + "/temp";
+		String testFolder = Constants.TEMP_FOLDER + "/test";
 
 		logger.debug("Cleaning directories : " + tempFolder + " | " + testFolder + " | " + questionnaireFolder);
 

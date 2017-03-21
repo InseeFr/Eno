@@ -45,7 +45,7 @@ public class DDI2FRGenerator implements Generator {
 				new File(formNameFolder),
 				new File(Constants.PROPERTIES_FILE));
 
-		String outputForm = Constants.TARGET_FOLDER + "/" + surveyName + "/" + formNameFolder + "/form/form.xhtml";
+		String outputForm = Constants.TEMP_FOLDER + "/" + surveyName + "/" + formNameFolder + "/form/form.xhtml";
 
 		logger.debug("Ddi2fr part 2 : from basic-form to form.xhtml");
 		logger.debug("-Input : " + outputBasicForm + " -Output : " + outputForm + " -Stylesheet : "

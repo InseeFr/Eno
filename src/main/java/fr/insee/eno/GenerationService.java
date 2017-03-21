@@ -42,7 +42,7 @@ public class GenerationService {
 	public File generateQuestionnaire(File inputFile, File parametersFile) throws Exception {
 		logger.info("Generating questionnaire:" + inputFile);
 		File preprocessResultFileName = this.preprocessor.process(inputFile, parametersFile);
-		File outputForm = this.generator.generate(preprocessResultFileName, "simpsons");
+		File outputForm = this.generator.generate(preprocessResultFileName, "simpsons"); //FIXME get survey name dynamically
 		logger.debug("Path to generated questionnaire: "+ outputForm.getAbsolutePath());
 		//postprocessing
 		return outputForm;
