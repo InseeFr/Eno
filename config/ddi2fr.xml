@@ -1,6 +1,6 @@
-﻿<proprietes>
-    <css>
-        <dossier>css</dossier>
-        <principale>common.css</principale>
-    </css>
-</proprietes>
+﻿<Properties>
+    <Css>
+        <Folder>css</Folder>
+        <Common>common.css</Common>
+    </Css>
+</Properties>

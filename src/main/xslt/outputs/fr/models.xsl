@@ -29,7 +29,7 @@
                     <xsl:value-of select="enofr:get-form-title($source-context, $languages[1])"/>
                 </xhtml:title>
                 <xhtml:link rel="stylesheet"
-                    href="{concat('/',$properties//css/dossier,'/',$properties//css/principale)}"/>
+                    href="{concat('/',$properties//Css/Folder,'/',$properties//Css/Common)}"/>
                 <xf:model id="fr-form-model" xxf:expose-xpath-types="true"
                     xxf:noscript-support="true">
 
