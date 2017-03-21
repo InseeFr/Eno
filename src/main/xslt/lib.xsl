@@ -157,4 +157,23 @@
     </xd:doc>
     <xsl:template match="@*|text()|processing-instruction()|comment()" mode="source"/>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p/>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="eno:build-labels-resource">
+        <xsl:param name="folder"/>
+        <xsl:param name="languages" as="xs:string*"/>
+        <Languages>
+            <xsl:for-each
+                select="collection(concat('file:///', replace($folder, '\\' , '/'), '?select=*.xml'))/Language"
+            >
+                <xsl:if test="@xml:lang=$languages">
+                    <xsl:copy-of select="."/>
+                </xsl:if>
+            </xsl:for-each>
+        </Languages>
+    </xsl:function>
+
 </xsl:stylesheet>

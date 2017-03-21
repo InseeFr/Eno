@@ -29,6 +29,8 @@
         <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
             global="true"/>
 
+        <echo message="${lang-folder}"/>
+        
         <!-- Generating xforms from the DDI : basic-form.tmp using the ddi2fr.xsl stylesheet -->
         <xslt in="${temp.home}/${file-name}.tmp"
             out="${temp.home}/xforms/${form-name}/basic-form.tmp"
@@ -37,6 +39,8 @@
             <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
             <param name="parameters-file"
                 expression="${survey-folder}/parameters.xml"/>
+            <param name="labels-folder"
+                expression="${lang-folder}/fr"/>
         </xslt>
 
         <!-- Adding the layer in charge of the survey's navigation by applying browsing.xsl stylesheet -->
