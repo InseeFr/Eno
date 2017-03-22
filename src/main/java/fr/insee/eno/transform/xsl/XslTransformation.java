@@ -152,7 +152,7 @@ public class XslTransformation {
 	 *             incorrect
 	 */
 	public void transformDdi2frBasicForm(File input, File xslSheet, File output, String campaignParameter,
-			File modelParameter, File propertiesFileParameter) throws Exception {
+			File modelParameter, File propertiesFileParameter, File labelFolder) throws Exception {
 		logger.debug("Using the DDI to XForms transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
@@ -160,6 +160,7 @@ public class XslTransformation {
 		transformer.setParameter(XslParameters.DDI2FR_CAMPAIGN, campaignParameter);
 		transformer.setParameter(XslParameters.DDI2FR_MODEL, modelParameter);
 		transformer.setParameter(XslParameters.DDI2FR_PROPERTIES_FILE, propertiesFileParameter.toURI().toString());
+		transformer.setParameter(XslParameters.DDI2FR_LABELS_FOLDER, labelFolder);
 		xslTransform(transformer, input, output);
 	}
 

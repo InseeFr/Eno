@@ -32,6 +32,7 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_FOLDER = "/xslt/transformations";
 	public static final String CONFIG_FOLDER = "/config";
 	public static final String INPUTS_FOLDER = "/xslt/inputs";
+	public static final File LABEL_FOLDER = getResourceFileFromPath("/lang/fr");
 	
 	// ----- Files
 	public static final File DDI_DEREFERENCING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");

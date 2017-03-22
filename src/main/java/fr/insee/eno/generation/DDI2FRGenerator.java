@@ -43,7 +43,8 @@ public class DDI2FRGenerator implements Generator {
 				new File(outputBasicForm),
 				surveyName,
 				new File(formNameFolder),
-				Constants.PROPERTIES_FILE);
+				Constants.PROPERTIES_FILE,
+				Constants.LABEL_FOLDER);
 
 		String outputForm = Constants.TEMP_FOLDER_PATH + "/" + surveyName + "/" + formNameFolder + "/form/form.xhtml";
 
@@ -57,7 +58,8 @@ public class DDI2FRGenerator implements Generator {
 				new File(outputForm),
 				surveyName,
 				new File(formNameFolder),
-				Constants.PROPERTIES_FILE);
+				Constants.PROPERTIES_FILE,
+				Constants.LABEL_FOLDER);
 
 		return new File(outputForm);
 	}
