@@ -1,13 +1,6 @@
-﻿<proprietes>
-    <images>
-        <dossier>img</dossier>
-        <precedent>retour.png</precedent>
-        <suivant>enregistrer.png</suivant>
-        <modifier>modifier.png</modifier>
-        <pdf>pdf.png</pdf>
-    </images>
-    <css>
-        <dossier>css</dossier>
-        <principale>common.css</principale>
-    </css>
-</proprietes>
+﻿<Properties>
+    <Css>
+        <Folder>css</Folder>
+        <Common>common.css</Common>
+    </Css>
+</Properties>
