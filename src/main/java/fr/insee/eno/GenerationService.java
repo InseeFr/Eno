@@ -1,6 +1,7 @@
 package fr.insee.eno;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,7 +38,7 @@ public class GenerationService {
 	 * @param parametersFile Custom parameters file, could be null
 	 * 
 	 * @return The generated file
-	 * @throws Exception
+	 * @throws Exception bim
 	 */
 	// TODO finish implementation
 	public File generateQuestionnaire(File inputFile, File parametersFile) throws Exception {
@@ -51,9 +52,10 @@ public class GenerationService {
 	}
 
 	/**
-	 * @throws Exception
+	 * Clean the temp dir if it exists
+	 * @throws IOException if Eno temp dir doesn't exist
 	 */
-	private void cleanTempFolder() throws Exception {
+	private void cleanTempFolder() throws IOException {
 		FolderCleaner cleanService = new FolderCleaner();
 		cleanService.cleanOneFolder(new File(Constants.TEMP_FOLDER_PATH));
 	}

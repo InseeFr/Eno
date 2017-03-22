@@ -54,7 +54,7 @@ public class FolderCleaner {
 	 * 
 	 * @param folder
 	 *            : the folder to be cleaned
-	 * @throws Exception
+	 * @throws IOException
 	 *             : FileNotfound / NoAccess mainly
 	 */
 	public void cleanOneFolder(File folder) throws IOException {

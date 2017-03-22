@@ -147,6 +147,8 @@ public class XslTransformation {
 	 *            : Ddi2fr xsl parameter
 	 * @param propertiesFileParameter
 	 *            : Ddi2fr xsl parameter
+	 * @param labelFolder
+	 * 			  : the folder where the i18n labels reside
 	 * @throws Exception
 	 *             : if the factory couldn't be found or if the paths are
 	 *             incorrect
