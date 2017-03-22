@@ -2,6 +2,8 @@ full.bat
 full-with-test.bat
 target/
 lib/
+
+# Old file structure, kept temporarily
 src/main/xslt/inputs/ddi/source.xsl
 src/main/xslt/inputs/ddi/templates.xsl
 src/main/xslt/inputs/ddi/functions.xsl
@@ -16,3 +18,13 @@ DDI/
 .classpath
 .project
 .settings/
+
+# New file structure for Java interop
+src/main/resources/xslt/inputs/ddi/source.xsl
+src/main/resources/xslt/inputs/ddi/templates.xsl
+src/main/resources/xslt/inputs/ddi/functions.xsl
+src/main/resources/xslt/transformations/ddi2fr/ddi2fr.xsl
+src/main/resources/xslt/transformations/ddi2fr/tree-navigation.xsl
+src/main/resources/xslt/transformations/ddi2fr/functions.xsl
+src/main/resources/xslt/transformations/ddi2fr/drivers.xsl
+src/main/resources/xml/null.xml
