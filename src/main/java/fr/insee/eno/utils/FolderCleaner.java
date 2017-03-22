@@ -1,6 +1,8 @@
 package fr.insee.eno.utils;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -55,10 +57,10 @@ public class FolderCleaner {
 	 * @throws Exception
 	 *             : FileNotfound / NoAccess mainly
 	 */
-	public void cleanOneFolder(File folder) throws Exception {
+	public void cleanOneFolder(File folder) throws IOException {
 		logger.debug("Cleaning " + folder);
-		FileUtils.forceMkdir(folder);
-		FileUtils.cleanDirectory(folder);
-
+		if (folder.exists() && Files.isDirectory(folder.toPath())) {
+			FileUtils.cleanDirectory(folder);
+		}		
 	}
 }

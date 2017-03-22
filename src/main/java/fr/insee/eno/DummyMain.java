@@ -43,7 +43,6 @@ public class DummyMain {
 			return false;
 		}
 		try {
-			FileUtils.forceMkdir(tempDir);
 			FileUtils.cleanDirectory(tempDir);
 			return true;
 		} catch (IOException e) {

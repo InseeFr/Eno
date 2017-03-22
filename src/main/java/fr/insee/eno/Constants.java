@@ -77,14 +77,16 @@ public final class Constants {
 	
 	
 	// ---------- Utilies
-	/** Generic file getter from classpath */
+	/** Generic file getter from classpath 
+	 * @return the file or null when not found.
+	 * */
 	private static File getResourceFileFromPath(String path) {
 		logger.debug("Loading " + path);
 		try {
 			return Paths.get(Constants.class.getResource(path).toURI()).toFile();
 		} catch (URISyntaxException e) {
 			logger.error("Error when loading to a file");
-			return new File("null");
+			return null;
 		}
 	}
 	
