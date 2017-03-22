@@ -34,6 +34,7 @@ public class DummyMain {
 	
 	// FIXME should the generation service handle the cleaning ?
 	// Or should every client handle it ?
+	// FIXME there is an existing class for that, FolderCleaner
 	private static boolean cleanTempDirectory() {
 		logger.debug("Cleaning temp directory at " + Constants.TEMP_FOLDER_PATH);
 		File tempDir = new File(Constants.TEMP_FOLDER_PATH);
