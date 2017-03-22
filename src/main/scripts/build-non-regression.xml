@@ -28,7 +28,7 @@
         <basename file="${file}" property="file-name" suffix=".tmp"/>
         <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
             global="true"/>
-
+        
         <!-- Generating xforms from the DDI : basic-form.tmp using the ddi2fr.xsl stylesheet -->
         <xslt in="${temp.home}/${file-name}.tmp"
             out="${temp.home}/xforms/${form-name}/basic-form.tmp"
@@ -37,6 +37,8 @@
             <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
             <param name="parameters-file"
                 expression="${survey-folder}/parameters.xml"/>
+            <param name="labels-folder"
+                expression="${lang-folder}/fr"/>
         </xslt>
 
         <!-- Adding the layer in charge of the survey's navigation by applying browsing.xsl stylesheet -->
@@ -47,6 +49,8 @@
             style="${xslt.home}/util/fr/browsing.xsl" force="true"
             classpath="${saxon.jar}">
             <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
+            <param name="labels-folder"
+                expression="${lang-folder}/fr"/>
         </xslt>
         <!-- A bit of cleaning -->
         <delete

@@ -8,6 +8,7 @@
     <dirname property="root-folder" file="${root}/dummy"/>
     <dirname property="temp-folder" file="${temp.home}/dummy"/>
     <dirname property="xml-folder" file="${xml.home}/dummy"/>
+    <dirname property="lang-folder" file="${languages.home}/dummy"/>
     <dirname property="questionnaires-folder" file="${questionnaires.home}/dummy"/>
 
     <!-- Tasks initialization -->

@@ -23,6 +23,12 @@
     <!-- Parameters defined in build-non-regression.xml -->
     <xsl:param name="parameters-file"/>
     <xsl:variable name="parameters" select="doc($parameters-file)"/>
+    
+    <xsl:param name="labels-folder"/>
+    
+    <xsl:param name="labels-resource">
+        <xsl:sequence select="eno:build-labels-resource($labels-folder,enofr:get-form-languages(root()))"/>
+    </xsl:param>
 
     <xd:doc scope="stylesheet">
         <xd:desc>
