@@ -27,7 +27,7 @@
     <xsl:param name="labels-folder"/>
     
     <xsl:variable name="labels-resource">
-        <xsl:sequence select="eno:build-labels-resource($labels-folder,enofr:get-form-languages(root()))"/>
+        <xsl:sequence select="eno:build-labels-resource($labels-folder,enofr:get-form-languages(//d:Sequence[d:TypeOfSequence/text()='template']))"/>
     </xsl:variable>
 
     <xd:doc scope="stylesheet">
