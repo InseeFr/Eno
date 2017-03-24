@@ -1453,10 +1453,10 @@
                      relevant="instance('fr-form-instance')/Util/CurrentSection='1'"
                      ref="Start"/>
             <xf:bind id="previous-bind"
-                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*))"
+                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;6)"
                      ref="Previous"/>
             <xf:bind id="next-bind"
-                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-1)"
+                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;5)"
                      ref="Next"/>
             <xf:bind id="send-bind"
                      ref="Send"
@@ -1464,7 +1464,7 @@
             <xf:bind id="progress-percent-bind"
                      name="progress-percent"
                      ref="ProgressPercent"
-                     calculate="if (number(instance('fr-form-instance')/Util/CurrentSection)=1) then '0' else (if (number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100' else round((number(instance('fr-form-instance')/Util/CurrentSection)-2  ) div (count(instance('fr-form-util')/Pages/*)-4)*100))"/>
+                     calculate="if (number(instance('fr-form-instance')/Util/CurrentSection)=1) then '0' else (if (number(instance('fr-form-instance')/Util/CurrentSection)&gt;5) then '100' else round((number(instance('fr-form-instance')/Util/CurrentSection) - 2) div (4)*100))"/>
             <xf:bind id="progress-bind" ref="Progress"/>
             <xf:bind id="page-top-bind" ref="PageTop"/>
             <xf:bind id="confirmation-message-bind"
