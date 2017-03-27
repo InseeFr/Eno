@@ -3,126 +3,79 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno" version="2.0">
 
-    <!-- This stylesheet is imported in several files : ddi2fr.xsl, fods2xml.xsl, xml2xsl.xsl -->
-    <!-- lib.xsl defines functions used in the previous files -->
-    <!-- Also clearing the xml file on which its applied by deleting some elements (comments, instructions) -->
-
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p><xd:b>Created on:</xd:b> Apr 9, 2013</xd:p>
-            <xd:p><xd:b>Author:</xd:b> Eric van der Vlist</xd:p>
+            <xd:p>This stylesheet contains functions and templates common to all xslt
+                transformations of Eno.</xd:p>
         </xd:desc>
     </xd:doc>
 
     <xd:doc>
-        <xd:desc>Appends a new empty element in a fragment as a last child of $target</xd:desc>
+        <xd:desc>
+            <xd:p>This function appends a new empty element into an other existing element.</xd:p>
+            <xd:p>This function is written in a way that the context is not lost.</xd:p>
+            <xd:p>This function is used to build the virtual trees that are used in templates of the
+                output stylesheets in Eno.</xd:p>
+        </xd:desc>
+        <xd:param name="source">The name of the new empty element to be created.</xd:param>
+        <xd:param name="target">The existing element in which the new empty element is
+            created.</xd:param>
+        <xd:return>It returns a sequence whose context is on the new element (the last
+            child).</xd:return>
     </xd:doc>
     <xsl:function name="eno:append-empty-element" as="element()">
         <xsl:param name="source" as="xs:string"/>
         <xsl:param name="target" as="item()"/>
         <xsl:variable name="new-element" as="element()">
+            <!-- The new element is created -->
             <xsl:element name="{$source}">
+                <!-- His rank is calculated in the whole tree and placed in an attribute -->
                 <xsl:attribute name="id">
                     <xsl:value-of select="concat('_', count(root($target)//*))"/>
                 </xsl:attribute>
             </xsl:element>
         </xsl:variable>
+        <!-- The whole tree is built again with the new element added -->
         <xsl:variable name="new-fragment">
             <xsl:apply-templates select="$target/root()" mode="eno:append">
                 <xsl:with-param name="source" select="$new-element" tunnel="yes"/>
                 <xsl:with-param name="target" select="$target" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:variable>
+        <!-- The context is placed on this new element -->
         <xsl:sequence select="$new-fragment//*[@id=$new-element/@id]"/>
     </xsl:function>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This mode is used to rebuild a tree, and create the source element into the target
+                element of the tree.</xd:p>
+        </xd:desc>
+        <xd:param name="source">The new element to be created.</xd:param>
+        <xd:param name="target">The existing element in which the new element is created.</xd:param>
+    </xd:doc>
     <xsl:template match="/|*" mode="eno:append">
         <xsl:param name="source" as="item()" tunnel="yes"/>
         <xsl:param name="target" as="item()" tunnel="yes"/>
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="node()" mode="eno:append"/>
+            <!-- When the target element is reached, the source element is created -->
             <xsl:if test=". is $target">
                 <xsl:copy-of select="$source"/>
             </xsl:if>
         </xsl:copy>
     </xsl:template>
 
-    <xsl:function name="eno:is-rich-content" as="xs:boolean">
-        <xsl:param name="node-set"/>
-        <xsl:sequence
-            select="if ($node-set instance of xs:string) then false() else boolean($node-set//node())"
-        />
-    </xsl:function>
-
-    <!-- To display an xml tree like a text chain -->
-    <xsl:function name="eno:serialize" as="xs:string">
-        <!-- Input : a node -->
-        <xsl:param name="node-set"/>
-        <!-- Creating a variable -->
-        <xsl:variable name="rooted">
-            <root>
-                <xsl:choose>
-                    <!-- If the node is actually only text : recopying -->
-                    <xsl:when test="$node-set instance of xs:string">
-                        <xsl:copy-of select="$node-set"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <!-- If the node is an xml tree, we get rid of the tags and we transform then into text -->
-                        <xsl:apply-templates select="$node-set" mode="eno:remove-xml"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </root>
-        </xsl:variable>
-        <!-- Then we return the text -->
-        <xsl:sequence select="$rooted/root"/>
-    </xsl:function>
-
-    <!-- Used to transform the xml into text, concerning the attributes -->
-    <xsl:template match="@*" mode="eno:remove-xml">
-        <xsl:variable name="space" select="' '"/>
-        <xsl:value-of select="$space"/>
-        <xsl:value-of select="name()"/>
-        <xsl:text>="</xsl:text>
-        <xsl:value-of select="."/>
-        <xsl:text>"</xsl:text>
-    </xsl:template>
-
-    <!-- If it is already text-typed, we return it, nothing more to do -->
-    <xsl:template match="text()" mode="eno:remove-xml">
-        <xsl:value-of select="."/>
-    </xsl:template>
-
-    <!-- Transforming the children free node into text -->
-    <xsl:template match="*[not(child::node())]" mode="eno:remove-xml">
-        <xsl:text>&lt;</xsl:text>
-        <xsl:value-of select="local-name()"/>
-        <xsl:apply-templates select="@*" mode="eno:remove-xml"/>
-        <xsl:text>/&gt;</xsl:text>
-    </xsl:template>
-
-    <!-- Transforming the node that has children into text -->
-    <xsl:template match="*[child::node()]" mode="eno:remove-xml">
-        <xsl:text>&lt;</xsl:text>
-        <xsl:value-of select="local-name()"/>
-        <xsl:apply-templates select="@*" mode="eno:remove-xml"/>
-        <xsl:text>&gt;</xsl:text>
-        <xsl:apply-templates select="node()" mode="eno:remove-xml"/>
-        <xsl:text>&lt;/</xsl:text>
-        <xsl:value-of select="local-name()"/>
-        <xsl:text>&gt;</xsl:text>
-    </xsl:template>
-
-    <!-- Getting rid of the instructions and comments -->
-    <xsl:template match="processing-instruction()|comment()" mode="eno:remove-xml"/>
-
     <xd:doc>
         <xd:desc>
-            <xd:p>Function to get the children of an element, common to every input and
-                output.</xd:p>
+            <xd:p>Function to get the children of an element, common to every transformation in
+                Eno.</xd:p>
             <xd:p>Indeed, every output will need the follow-up of the input tree, and every input
                 must have a function describing the tree's parsing.</xd:p>
         </xd:desc>
+        <xd:param name="context">The current context.</xd:param>
+        <xd:return>The next element which shall get context.</xd:return>
     </xd:doc>
     <xsl:function name="eno:child-fields" as="node()*">
         <xsl:param name="context" as="item()"/>
@@ -143,7 +96,8 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>If a node doesn't return anything, we continue with it's children elements.</xd:p>
+            <xd:p>By default, if an input xml node is not linked to a driver in the output side, we
+                continue with it's children elements.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="source">
@@ -152,23 +106,117 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Elements that aren't nodes won't trigger anything from the source side.</xd:p>
+            <xd:p>Elements that aren't nodes won't trigger anything from the source side (they
+                cannot be linked to a driver).</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="@*|text()|processing-instruction()|comment()" mode="source"/>
 
     <xd:doc>
         <xd:desc>
+            <xd:p>This function determines if a set of node is a simple text or a true xml
+                tree.</xd:p>
+        </xd:desc>
+        <xd:param name="node-set">The set of nodes which is checked.</xd:param>
+        <xd:return>false() if it is a text, true() if it is an xml tree.</xd:return>
+    </xd:doc>
+    <xsl:function name="eno:is-rich-content" as="xs:boolean">
+        <xsl:param name="node-set"/>
+        <xsl:sequence
+            select="if ($node-set instance of xs:string) then false() else boolean($node-set//node())"
+        />
+    </xsl:function>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Escape an xml tree to get the corresponding text chain.</xd:p>
+        </xd:desc>
+        <xd:param name="node-set">The xml tree to serialize.</xd:param>
+        <xd:return>The text chain corresponding to the xml tree.</xd:return>
+    </xd:doc>
+    <xsl:function name="eno:serialize" as="xs:string">
+        <xsl:param name="node-set"/>
+        <xsl:variable name="result">
+            <xsl:apply-templates select="$node-set" mode="eno:serialize"/>
+        </xsl:variable>
+        <xsl:value-of select="$result"/>
+    </xsl:function>
+
+    <!-- Used to transform the xml into text, concerning the attributes -->
+    <xd:doc>
+        <xd:desc>
             <xd:p/>
         </xd:desc>
+    </xd:doc>
+    <xsl:template match="@*" mode="eno:serialize">
+        <xsl:value-of select="' '"/>
+        <xsl:value-of select="name()"/>
+        <xsl:text>="</xsl:text>
+        <xsl:value-of select="."/>
+        <xsl:text>"</xsl:text>
+    </xsl:template>
+
+    <!-- If it is already text-typed, we return it, nothing more to do -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p/>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="text()" mode="eno:serialize">
+        <xsl:value-of select="."/>
+    </xsl:template>
+
+    <!-- Transforming the children free node into text -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p/>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*[not(child::node())]" mode="eno:serialize">
+        <xsl:text>&lt;</xsl:text>
+        <xsl:value-of select="local-name()"/>
+        <xsl:apply-templates select="@*" mode="eno:serialize"/>
+        <xsl:text>/&gt;</xsl:text>
+    </xsl:template>
+
+    <!-- Transforming the node that has children into text -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p/>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*[child::node()]" mode="eno:serialize">
+        <xsl:text>&lt;</xsl:text>
+        <xsl:value-of select="local-name()"/>
+        <xsl:apply-templates select="@*" mode="eno:serialize"/>
+        <xsl:text>&gt;</xsl:text>
+        <xsl:apply-templates select="node()" mode="eno:serialize"/>
+        <xsl:text>&lt;/</xsl:text>
+        <xsl:value-of select="local-name()"/>
+        <xsl:text>&gt;</xsl:text>
+    </xsl:template>
+
+    <!-- Getting rid of the instructions and comments -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p/>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="processing-instruction()|comment()" mode="eno:serialize"/>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p/>
+        </xd:desc>
+        <xd:param name="folder"/>
+        <xd:param name="languages"/>
     </xd:doc>
     <xsl:function name="eno:build-labels-resource">
         <xsl:param name="folder"/>
         <xsl:param name="languages" as="xs:string*"/>
         <Languages>
             <xsl:for-each
-                select="collection(concat('file:///', replace($folder, '\\' , '/'), '?select=*.xml'))/Language"
-            >
+                select="collection(concat('file:///', replace($folder, '\\' , '/'), '?select=*.xml'))/Language">
                 <xsl:if test="@xml:lang=$languages">
                     <xsl:copy-of select="."/>
                 </xsl:if>
