@@ -142,34 +142,9 @@
         <xsl:value-of select="$result"/>
     </xsl:function>
 
-    <!-- Used to transform the xml into text, concerning the attributes -->
     <xd:doc>
         <xd:desc>
-            <xd:p/>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="@*" mode="eno:serialize">
-        <xsl:value-of select="' '"/>
-        <xsl:value-of select="name()"/>
-        <xsl:text>="</xsl:text>
-        <xsl:value-of select="."/>
-        <xsl:text>"</xsl:text>
-    </xsl:template>
-
-    <!-- If it is already text-typed, we return it, nothing more to do -->
-    <xd:doc>
-        <xd:desc>
-            <xd:p/>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="text()" mode="eno:serialize">
-        <xsl:value-of select="."/>
-    </xsl:template>
-
-    <!-- Transforming the children free node into text -->
-    <xd:doc>
-        <xd:desc>
-            <xd:p/>
+            <xd:p>Serialization of an empty node into text.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[not(child::node())]" mode="eno:serialize">
@@ -179,10 +154,9 @@
         <xsl:text>/&gt;</xsl:text>
     </xsl:template>
 
-    <!-- Transforming the node that has children into text -->
     <xd:doc>
         <xd:desc>
-            <xd:p/>
+            <xd:p>Serialization of a node which is not empty into text.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[child::node()]" mode="eno:serialize">
@@ -195,21 +169,42 @@
         <xsl:value-of select="local-name()"/>
         <xsl:text>&gt;</xsl:text>
     </xsl:template>
-
-    <!-- Getting rid of the instructions and comments -->
+    
     <xd:doc>
         <xd:desc>
-            <xd:p/>
+            <xd:p>Serialization of an attribute into text.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="@*" mode="eno:serialize">
+        <xsl:value-of select="' '"/>
+        <xsl:value-of select="name()"/>
+        <xsl:text>="</xsl:text>
+        <xsl:value-of select="."/>
+        <xsl:text>"</xsl:text>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Serialization of a text node into text.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="text()" mode="eno:serialize">
+        <xsl:value-of select="."/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>When a tree is serialized into text, processing-instructions and comments are not relevant.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="processing-instruction()|comment()" mode="eno:serialize"/>
 
     <xd:doc>
         <xd:desc>
-            <xd:p/>
+            <xd:p>This function builds a set of label resources in different languages.</xd:p>
         </xd:desc>
-        <xd:param name="folder"/>
-        <xd:param name="languages"/>
+        <xd:param name="folder">The folder containing the label resources for a given output.</xd:param>
+        <xd:param name="languages">The list of languages that are wanted among those available in the folder.</xd:param>
     </xd:doc>
     <xsl:function name="eno:build-labels-resource">
         <xsl:param name="folder"/>
