@@ -219,4 +219,38 @@
         </Languages>
     </xsl:function>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>A function to modify a set of old strings in a text with a set of new
+                strings.</xd:p>
+        </xd:desc>
+        <xd:param name="old-strings">The set of old strings to be replaced.</xd:param>
+        <xd:param name="new-strings">The set of new strings which replace the old
+            strings.</xd:param>
+        <xd:param name="text">The text which is modified.</xd:param>
+        <xd:param name="index">The index of the string which is currently replaced.</xd:param>
+        <xd:return>The modified text chain.</xd:return>
+    </xd:doc>
+    <xsl:function name="eno:text-modification">
+        <xsl:param name="old-strings"/>
+        <xsl:param name="new-strings"/>
+        <xsl:param name="text"/>
+        <xsl:param name="index" as="xs:integer"/>
+        <xsl:variable name="max" select="count($new-strings)"/>
+        <xsl:variable name="new-string">
+            <xsl:value-of select="$new-strings[$index]"/>
+        </xsl:variable>
+        <xsl:variable name="modified-text">
+            <xsl:value-of select="replace($text,$old-strings[$index],$new-string)"/>
+        </xsl:variable>
+        <!-- If there still are other strings to be replaced, the function is used again with an incremented index and the already modified text -->
+        <xsl:if test="$index &lt; $max">
+            <xsl:value-of select="eno:text-modification($old-strings,$new-strings,$modified-text,$index+1)"/>
+        </xsl:if>
+        <!-- If not, the final modified text is returned -->
+        <xsl:if test="$index = $max">
+            <xsl:value-of select="$modified-text"/>
+        </xsl:if>
+    </xsl:function>
+    
 </xsl:stylesheet>
