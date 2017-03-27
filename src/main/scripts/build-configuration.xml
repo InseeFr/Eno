@@ -1,21 +1,22 @@
-﻿<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project>
     <!-- Importing the configuration files -->
     <property file="../config/config.properties"/>
     <xmlproperty file="${root}/config/ddi2fr.xml"/>
     
-    <!-- Getting the path to the xml folder (that will be passed to xsl files) -->
+    <!-- Getting the path to the folders (that will be passed to xsl files) -->
     <dirname property="root-folder" file="${root}/dummy"/>
     <dirname property="temp-folder" file="${temp.home}/dummy"/>
     <dirname property="xml-folder" file="${xml.home}/dummy"/>
     <dirname property="lang-folder" file="${languages.home}/dummy"/>
     <dirname property="questionnaires-folder" file="${questionnaires.home}/dummy"/>
 
-    <!-- Tasks initialization -->
+    <!-- Definition of the classpath -->
     <path id="classpath">
         <fileset dir="${lib.home}" includes="**/*.jar"/>
         <pathelement location="${root-folder}/target/classes" />
     </path>
+    <!-- antcontrib tasks initialization -->
     <taskdef name="foreach" classname="net.sf.antcontrib.logic.ForEach">
         <classpath refid="classpath"/>
     </taskdef>
