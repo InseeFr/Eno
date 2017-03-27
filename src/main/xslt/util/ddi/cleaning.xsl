@@ -2,11 +2,14 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
-
-    <!-- This xsl stylesheet is used in the 'cleaning' target of the ant build -->
-    <!-- Therefore, it will be applied on the input ddi file (ccs, qb etc.) -->
-    <!-- Basically, this stylesheet does a bit of cleaning in order to change some attribute names and delete undesired links -->
-
+    
+    <xd:doc scope="stylesheet">
+        <xd:desc>
+            <xd:p>This xslt stylesheet is used on dereferenced ddi to make some adaptations.</xd:p>
+            <xd:p>The purpose is to simplify the main ddi2fr transformation and make the result compatible with Orbeon form.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     
@@ -14,7 +17,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Root template, applying the templates of all children</xd:p>
+            <xd:p>Root template.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="/">
@@ -23,7 +26,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Default template for every element and every attribute, simply copying to the output</xd:p>
+            <xd:p>Default template for every element and every attribute, simply copying to the output.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="node() | @*">
@@ -32,9 +35,13 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- To delete someday, this compensate a Bootstrap/Orbeon bug -->
-    <!-- br tags report an error when the label where they're contained has a dynamic behaviour (relevant label for example)-->
-    <!-- Replacing them by span tags (a span tag with a css line break) : dirty work here-->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This template compensates a Bootstrap/Orbeon bug.</xd:p>
+            <xd:p>br tags create errors when the label where they are contained has a dynamic behavious (if there is a relevant attribute on the xforms element for example).</xd:p>
+            <xd:p>They are replaced by a span element here with a specific css class.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="xhtml:p[xhtml:br]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
@@ -48,6 +55,12 @@
         </xsl:copy>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This template modifies the identifiers used in the r:CommandContent.</xd:p>
+            <xd:p>The identifiers used are local. They are replaced by identifiers that are linked to OutParameters of questions.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="r:CommandContent[parent::r:Command/r:InParameter]">
         <xsl:variable name="command">
             <xsl:value-of select="."/>
@@ -74,7 +87,7 @@
                     <xsl:variable name="new-identifier">
                         <xsl:value-of select="parent::r:Command/r:Binding[r:TargetParameterReference/r:ID=$old-identifier]/r:SourceParameterReference/r:ID"/>
                     </xsl:variable>
-                    <r:ID>
+                        <!-- Added to be selected with Xpath on the Xforms side-->
                         <xsl:value-of>//</xsl:value-of>
                         <xsl:for-each select="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]">
                             <xsl:variable name="id">
@@ -101,19 +114,30 @@
                                 <xsl:value-of select="concat('//',$new-identifier)"/>
                             </xsl:otherwise>
                         </xsl:choose>-->
-                    </r:ID>
+                    
                 </xsl:for-each>
             </xsl:variable>
+            <!-- The modifications are made through this template -->
             <xsl:call-template name="command-modification">
                 <xsl:with-param name="old-identifiers" select="$old-identifiers"/>
                 <xsl:with-param name="new-identifiers" select="$new-identifiers"/>
                 <xsl:with-param name="command" select="$command"/>
                 <xsl:with-param name="min" select="number(1)"/>
-                <xsl:with-param name="max" select="count($old-identifiers/r:ID)"/>
+                <xsl:with-param name="max" select="count($old-identifiers/*)"/>
             </xsl:call-template>
         </xsl:copy>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>A template to modify a set of old identifiers in a text with a set of new identifiers.</xd:p>
+        </xd:desc>
+        <xd:param name="old-identifiers"></xd:param>
+        <xd:param name="new-identifiers"></xd:param>
+        <xd:param name="command"></xd:param>
+        <xd:param name="min"></xd:param>
+        <xd:param name="max"></xd:param>
+    </xd:doc>
     <xsl:template name="command-modification">
         <xsl:param name="old-identifiers"/>
         <xsl:param name="new-identifiers"/>
@@ -121,10 +145,10 @@
         <xsl:param name="min"/>
         <xsl:param name="max"/>
         <xsl:variable name="new-identifier">
-            <xsl:value-of select="$new-identifiers/r:ID[$min]"/>
+            <xsl:value-of select="$new-identifiers/*[$min]"/>
         </xsl:variable>
         <xsl:variable name="modified-command">
-            <xsl:value-of select="replace($command,$old-identifiers/r:ID[$min],$new-identifier)"/>
+            <xsl:value-of select="replace($command,$old-identifiers/*[$min],$new-identifier)"/>
         </xsl:variable>
         <xsl:if test="number($min) &lt; number($max)">
             <xsl:call-template name="command-modification">
@@ -154,6 +178,11 @@
             <xd:p>Creating a r:Description/r:Content for each element met</xd:p>
         </xd:desc>
     </xd:doc>
+    <xd:doc>
+        <xd:desc>
+            <xd:p></xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="l:Category[r:Label//xhtml:sup]">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
@@ -178,12 +207,21 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- Changing format of the displayed language from xx-XX to xx -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Changing format of the displayed language from xx-XX to xx</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="@xml:lang[contains(.,'-')]">
         <xsl:attribute name="xml:lang" select="substring-before(.,'-')"/>
     </xsl:template>
     
     <!-- For each xhtml:a element not having a @href attribute : replacing it with an empty text -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p></xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="xhtml:a[not(contains(@href,'#'))]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
@@ -195,6 +233,11 @@
     </xsl:template>
 
     <!-- Adding identifier to footnote type d:Instruction in xhtml:p elements -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p></xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template
         match="xhtml:p[ancestor::d:Instruction[d:InstructionName/r:String/text()='footnote']]">
         <xsl:copy>
