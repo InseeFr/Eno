@@ -3,64 +3,66 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" version="2.0">
 
-    <!-- This stylesheet preformates the ODS xml files in order to delete the number-columns-repeated attributes while -->
-    <!-- adding a fictional attribute cell-position (that doesn't exist in odt format). -->
-    <!-- This attribute will help doing the next transformations (using the cells position in a line). -->
-    <!-- Elements are literally copied (except attributes @table:number-columns-repeated) x times -->
-    <!-- x being the value of the @table:number-columns-repeated attribute. The attribute itself isn't kept. -->
-    <!-- This stylesheet is applied to every fods file during the fods2xsl target (creating preformate.fods for every input). -->
+    <xd:doc scope="stylesheet">
+        <xd:desc>
+            <xd:p>This xslt stylesheet is used to clean tables in OpenDocument xml files.</xd:p>
+            <xd:p>It removes empty lines, creates the right number of cells in each row, and adds an attribute to know the position of a cell in a row.</xd:p>
+        </xd:desc>
+    </xd:doc>
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     
     <xsl:strip-space elements="*"/>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Root template.</xd:p>
+            <xd:p>At first, the empty lines are removed from the fods and the cells are repeated as many times as the table:number-columns-repeated attribute.</xd:p>
+            <xd:p>Then, a fictional attribute cell-position (that doesn't exist in fods format) is added in the output.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="/">
-        <xsl:variable name="preformat-1">
+        <xsl:variable name="preformatted">
             <xsl:copy>
-                <!-- Applying the preformatting templates (repeating the cells by taking into account @table:number-columns-repeated ) -->
                 <xsl:apply-templates select="node()"/>
             </xsl:copy>
         </xsl:variable>
         <!-- Then applying the templates that will add the position -->
-        <xsl:apply-templates select="$preformat-1" mode="add-position"/>
+        <xsl:apply-templates select="$preformatted" mode="add-position"/>
     </xsl:template>
-
-    <!-- Adding position to the table elements, then to table-rows -->
-    <xsl:template match="table:table" mode="add-position">
-        <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="table:table-row" mode="add-position"/>
-        </xsl:copy>
-    </xsl:template>
-    <xsl:template match="table:table-row" mode="add-position">
-        <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="*" mode="add-position"/>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- Necessary to avoid getting empty lines : cleaning the fods file by deleting the empty lines -->
-    <xsl:template match="table:table-row[normalize-space(string(.))='']"/>
-
-    <!-- Template called to add positions to table-rows -->
-    <xsl:template match="table:table-row/*" mode="add-position">
-        <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:attribute name="table:cell-position" select="position()"/>
-            <xsl:copy-of select="*"/>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- Generic recopy template. The copy mode makes a forced copy of all elements. The #default mode is used to only recopy the elements that don't have the @table:number-columns-repeated attribute. -->
-    <xsl:template match="node()" mode="#all">
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Default template for every element and every attribute (and both modes), simply copying to the
+                output.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="node() | @*" mode="#all">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" mode="#current"/>
         </xsl:copy>
     </xsl:template>
 
-    <!-- Elements with @table:number-columns-repeated are copied as many times as the attribute's value.
-        This applies only in the default mode. In copy mode, those elements are recopied (used below). -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Removing empty lines from the fods file.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="table:table-row[normalize-space(string(.))='']"/>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Removing the table:number-columns-repeated attribute from the fods file.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="@table:number-columns-repeated" mode="#all"/>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Elements with @table:number-columns-repeated are copied as many times as the attribute's value, through the 'repetition' template.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="*[@table:number-columns-repeated &gt; 1]">
         <xsl:call-template name="repetition">
             <xsl:with-param name="repetition-number" select="@table:number-columns-repeated"
@@ -69,27 +71,62 @@
         </xsl:call-template>
     </xsl:template>
 
-    <!-- Attributes are always recopied -->
-    <xsl:template match="@*" mode="#all">
-        <xsl:copy-of select="."/>
-    </xsl:template>
-
-    <!-- The @table:number-columns-repeated is never kept. -->
-    <xsl:template match="@table:number-columns-repeated" mode="#all"/>
-
-    <!-- Recursive template of element recopy. -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The template to copy many times a same element.</xd:p>
+        </xd:desc>
+        <xd:param name="repetition-number">The number of times the element must be copied.</xd:param>
+        <xd:param name="element">The element to copy.</xd:param>
+        <xd:param name="index">The index is incremented at each copy.</xd:param>
+    </xd:doc>
     <xsl:template name="repetition">
         <xsl:param name="repetition-number" select="1" tunnel="yes"/>
         <xsl:param name="element" tunnel="yes"/>
         <xsl:param name="index" select="1"/>
-        <!-- Recopy (using the copy mode to force the recopy). -->
         <xsl:apply-templates select="$element" mode="copy"/>
-        <!-- Recursive call if there are still copies to do. -->
         <xsl:if test="$repetition-number - $index &gt; 0">
             <xsl:call-template name="repetition">
                 <xsl:with-param name="index" select="$index + 1"/>
             </xsl:call-template>
         </xsl:if>
+    </xsl:template>
+    
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>A different mode to add postions to cell descendants.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="table:table" mode="add-position">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="table:table-row" mode="add-position"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>A different mode to add postions to cell descendants.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="table:table-row" mode="add-position">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="*" mode="add-position"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Add a cell position to children of table:table-row.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="table:table-row/*" mode="add-position">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:attribute name="table:cell-position" select="position()"/>
+            <xsl:copy-of select="*"/>
+        </xsl:copy>
     </xsl:template>
 
 </xsl:stylesheet>
