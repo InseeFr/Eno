@@ -5,28 +5,15 @@
     xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
     xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" version="2.0">
 
-    <!-- This xsl stylesheet is used in the fods2xsl target (imported by fods2xml.xsl)-->
-    <!-- Its purpose is to retrieve several elements in a fods file (like cell content, column name etc) -->
-    <!-- The information retrieved will then be used in fods2xml.xsl in order to create the output xml file -->
-
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p>Generation from fods</xd:p>
+            <xd:p>A library of getter functions for fods with their implementations for different elements.</xd:p>
         </xd:desc>
     </xd:doc>
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Starting the transformation from a fods file by the element : table:table</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="/" mode="source">
-        <xsl:apply-templates select="//table:table" mode="source"/>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Function that gets the element content from a fods</xd:p>
+            <xd:p>Function that gets the content from a fods element.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:function name="enofods:get-content">
@@ -34,14 +21,18 @@
         <xsl:apply-templates select="$context" mode="enofods:get-content"/>
     </xsl:function>
 
-    <!-- Only called by the cell object-->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For a table-cell object, the funtion will return the text inside the cell.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="table:table-cell" mode="enofods:get-content">
         <xsl:value-of select="text:p/text()"/>
     </xsl:template>
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Function that gets the name of a column</xd:p>
+            <xd:p>Function that gets the name of a column.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:function name="enofods:get-column-name">
@@ -49,11 +40,17 @@
         <xsl:apply-templates select="$context" mode="enofods:get-column-name"/>
     </xsl:function>
 
-    <!-- Only called by the cell object here, titles are located on the first line of the document-->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For a table-cell object, the function will return the text of the first table-cell of the same column.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="table:table-cell" mode="enofods:get-column-name">
+        <!-- The index of the cell is calculated within the row -->
         <xsl:variable name="index">
             <xsl:value-of select="count(preceding-sibling::table:table-cell)+1"/>
         </xsl:variable>
+        <!-- The text of the cell with the same index in the first line is returned -->
         <xsl:value-of
             select="ancestor::table:table/table:table-row[1]/table:table-cell[position()=$index]/text:p/text()"
         />

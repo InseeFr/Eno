@@ -5,19 +5,16 @@
     xmlns:enoxml="http://xml.insee.fr/apps/eno/xml"
     version="2.0">
 
-    <!-- This xsl stylesheet is used in the fods2xsl target (imported by fods2xml.xsl)-->
-    <!-- Its purpose is to participate in the creation of the temporary output xml file (xml.tmp) from a fods input -->
-    <!-- xml.tmp will be a tree of GenericElement/DefinedElement with information stored in the @name attribute -->
-
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p>Generation of XML!</xd:p>
+            <xd:p>An xslt stylesheet who transforms an input into XML through generic driver templates.</xd:p>
+            <xd:p>The real input is mapped with the drivers.</xd:p>
         </xd:desc>
     </xd:doc>
 
     <xd:doc>
         <xd:desc>
-            <xd:p>The default matching element</xd:p>
+            <xd:p>The default matching element, the root of the produced xml.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="Root" mode="model">
@@ -32,8 +29,8 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>A generic xml element. Helpful to structure the different levels over the input format</xd:p>
-            <xd:p>For example, for a fods file, each line of the document will correspond to a generic element (except the first one)</xd:p>
+            <xd:p>A generic xml element. Helpful to structure the different levels of the input format.</xd:p>
+            <xd:p>For example, for a spreadsheet, each line of the document will correspond to a generic element.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="GenericElement" mode="model">
@@ -48,8 +45,8 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>An xml element</xd:p>
-            <xd:p>Calls an element name function and another one to get the value.</xd:p>
+            <xd:p>An xml element.</xd:p>
+            <xd:p>Calls a function to name the element through an attribute and another one to get its value.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="DefinedElement" mode="model">
