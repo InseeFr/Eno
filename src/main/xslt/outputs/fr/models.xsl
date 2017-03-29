@@ -198,10 +198,10 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:variable name="calculate-label">
-            <xsl:value-of select="enofr:get-calculate-label($source-context)"/>
+            <xsl:value-of select="enofr:get-calculate-text($source-context,'label')"/>
         </xsl:variable>
         <xsl:variable name="calculate-alert">
-            <xsl:value-of select="enofr:get-calculate-alert($source-context)"/>
+            <xsl:value-of select="enofr:get-calculate-text($source-context,'alert')"/>
         </xsl:variable>
         <xsl:if test="$calculate-label != '' or $calculate-alert != ''">
             <xsl:variable name="name" select="enofr:get-name($source-context)"/>

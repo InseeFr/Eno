@@ -2,7 +2,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
-    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner" xmlns:d="ddi:datacollection:3_2"
+    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
+    xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
+    xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
 
     <!-- Base file of the upcoming ddi2fr.xsl stylesheet (that will be used in the ddi2fr target to create basic-form.tmp) -->
@@ -36,85 +38,58 @@
         </xd:desc>
     </xd:doc>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Root template :</xd:p>
+            <xd:p>The transformation starts with the main Sequence.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="/">
-        <xsl:apply-templates select="/" mode="source"/>
+        <xsl:apply-templates select="//d:Sequence[d:TypeOfSequence/text()='template']" mode="source"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This xforms function is used to get an xpath corresponding to a dynamic text.</xd:p>
+            <xd:p>It can be associated with different modes depending of the text type.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:get-calculate-text">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="text-type"/>
+        <xsl:choose>
+            <xsl:when test="$text-type='label'">
+                <xsl:apply-templates select="$context" mode="enoddi2fr:get-calculate-label"/>
+            </xsl:when>
+            <xsl:when test="$text-type='alert'">
+                <xsl:apply-templates select="$context" mode="enoddi2fr:get-calculate-alert"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Instructions having a ConditionalText are matched for this mode only if there aren't inside a ComputationItem.</xd:p>
+            <xd:p>But the treatment (using the enoddi2fr:get-calculate-text mode) is the same whether they are or are not inside a ComputationItem.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Instruction[descendant::d:ConditionalText and not(ancestor::d:ComputationItem)]" mode="enoddi2fr:get-calculate-label">
+        <xsl:apply-templates select="." mode="enoddi2fr:get-calculate-text"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Instruction having a ConditionalText are matched for this mode only if there are inside a ComputationItem.</xd:p>
+            <xd:p>But the treatment (using the enoddi2fr:get-calculate-text mode) is the same whether they are or are not inside a ComputationItem.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Instruction[descendant::d:ConditionalText and ancestor::d:ComputationItem]" mode="enoddi2fr:get-calculate-alert">
+        <xsl:apply-templates select="." mode="enoddi2fr:get-calculate-text"/>
     </xsl:template>
 
-    <!-- Getting this here, actually dependent of the input and output language -->
-    <!-- Getting conditional text for d:Instruction elements having a r:SourceParameterReference descendant and no  -->
-    <!-- d:ComputationItem ancestor  -->
     <xsl:template
-        match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and not(ancestor::d:ComputationItem)]"
-        mode="enoddi:get-conditional-text" priority="1">
-        <xsl:variable name="condition">
-            <xsl:copy-of select="descendant::d:ConditionalText"/>
-        </xsl:variable>
-        <xsl:variable name="text">
-            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
-        </xsl:variable>
-        <xsl:variable name="result">
-            <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($text,'ø')">
-                <xsl:text>,</xsl:text>
-                <xsl:choose>
-                    <xsl:when
-                        test=".=$condition/d:ConditionalText/r:SourceParameterReference/r:OutParameter/r:ID/text()">
-                        <xsl:text>instance('fr-form-instance')//</xsl:text>
-                        <xsl:value-of select="."/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>'</xsl:text>
-                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select="replace(.,'''','''''')"/>
-                        <xsl:text>'</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
-            <xsl:text>)</xsl:text>
-        </xsl:variable>
-        <xsl:value-of select="$result"/>
-    </xsl:template>
-
-    <!-- Getting this here, actually dependent of the input and ouput language -->
-    <!-- Getting conditional text for d:Instruction elements having a r:SourceParameterReference descendant and a  -->
-    <!-- d:ComputationItem ancestor  -->
-    <xsl:template
-        match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and ancestor::d:ComputationItem]"
-        mode="enoddi:get-conditional-text-bis" priority="1">
-        <xsl:variable name="condition">
-            <xsl:copy-of select="descendant::d:ConditionalText"/>
-        </xsl:variable>
-        <xsl:variable name="text">
-            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
-        </xsl:variable>
-        <xsl:variable name="result">
-            <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($text,'ø')">
-                <xsl:text>,</xsl:text>
-                <xsl:choose>
-                    <xsl:when
-                        test=".=$condition/d:ConditionalText/r:SourceParameterReference/r:OutParameter/r:ID/text()">
-                        <xsl:text>instance('fr-form-instance')//</xsl:text>
-                        <xsl:value-of select="."/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>'</xsl:text>
-                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select="replace(.,'''','''''')"/>
-                        <xsl:text>'</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
-            <xsl:text>)</xsl:text>
-        </xsl:variable>
-        <xsl:value-of select="$result"/>
-    </xsl:template>
-
-    <!-- Getting the conditional text for d:Instruction elements having a d:ConditionalText/d:Expression descendant -->
-    <!-- and no d:ComputationItem ancestor -->
-    <xsl:template
-        match="d:Instruction[descendant::d:ConditionalText[d:Expression] and not(ancestor::d:ComputationItem)]"
-        mode="enoddi:get-conditional-text" priority="1">
+        match="d:Instruction[descendant::d:ConditionalText]"
+        mode="enoddi2fr:get-calculate-text" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
@@ -127,41 +102,8 @@
                 <xsl:text>,</xsl:text>
                 <xsl:choose>
                     <xsl:when
-                        test="contains($condition/d:ConditionalText/d:Expression/r:Command/r:CommandContent/text(),.)">
-                        <xsl:text>instance('fr-form-instance')//</xsl:text>
-                        <xsl:value-of select="."/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>'</xsl:text>
-                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select="replace(.,'''','''''')"/>
-                        <xsl:text>'</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
-            <xsl:text>)</xsl:text>
-        </xsl:variable>
-        <xsl:value-of select="$result"/>
-    </xsl:template>
-
-    <!-- Getting the conditional text for d:Instruction elements having a d:ConditionalText/d:Expression descendant -->
-    <!-- and a d:ComputationItem ancestor -->
-    <xsl:template
-        match="d:Instruction[descendant::d:ConditionalText[d:Expression] and ancestor::d:ComputationItem]"
-        mode="enoddi:get-conditional-text-bis" priority="1">
-        <xsl:variable name="condition">
-            <xsl:copy-of select="descendant::d:ConditionalText"/>
-        </xsl:variable>
-        <xsl:variable name="text">
-            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
-        </xsl:variable>
-        <xsl:variable name="result">
-            <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($text,'ø')[not(.='')]">
-                <xsl:text>,</xsl:text>
-                <xsl:choose>
-                    <xsl:when
-                        test="contains($condition/d:ConditionalText/d:Expression/r:Command/r:CommandContent/text(),.)">
+                        test=".=$condition/d:ConditionalText/r:SourceParameterReference/r:OutParameter/r:ID/text()
+                        or contains($condition/d:ConditionalText/d:Expression/r:Command/r:CommandContent/text(),.)">
                         <xsl:text>instance('fr-form-instance')//</xsl:text>
                         <xsl:value-of select="."/>
                     </xsl:when>
