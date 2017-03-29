@@ -41,11 +41,11 @@
     </xsl:template>
 
     <!-- Getting this here, actually dependent of the input and output language -->
-    <!-- Getting conditionned text for d:Instruction elements having a r:SourceParameterReference descendant and no  -->
+    <!-- Getting conditional text for d:Instruction elements having a r:SourceParameterReference descendant and no  -->
     <!-- d:ComputationItem ancestor  -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and not(ancestor::d:ComputationItem)]"
-        mode="enoddi:get-conditionned-text" priority="1">
+        mode="enoddi:get-conditional-text" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
@@ -76,11 +76,11 @@
     </xsl:template>
 
     <!-- Getting this here, actually dependent of the input and ouput language -->
-    <!-- Getting conditionned text for d:Instruction elements having a r:SourceParameterReference descendant and a  -->
+    <!-- Getting conditional text for d:Instruction elements having a r:SourceParameterReference descendant and a  -->
     <!-- d:ComputationItem ancestor  -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and ancestor::d:ComputationItem]"
-        mode="enoddi:get-conditionned-text-bis" priority="1">
+        mode="enoddi:get-conditional-text-bis" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
@@ -110,11 +110,11 @@
         <xsl:value-of select="$result"/>
     </xsl:template>
 
-    <!-- Getting the conditionned text for d:Instruction elements having a d:ConditionalText/d:Expression descendant -->
+    <!-- Getting the conditional text for d:Instruction elements having a d:ConditionalText/d:Expression descendant -->
     <!-- and no d:ComputationItem ancestor -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[d:Expression] and not(ancestor::d:ComputationItem)]"
-        mode="enoddi:get-conditionned-text" priority="1">
+        mode="enoddi:get-conditional-text" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
@@ -144,11 +144,11 @@
         <xsl:value-of select="$result"/>
     </xsl:template>
 
-    <!-- Getting the conditionned text for d:Instruction elements having a d:ConditionalText/d:Expression descendant -->
+    <!-- Getting the conditional text for d:Instruction elements having a d:ConditionalText/d:Expression descendant -->
     <!-- and a d:ComputationItem ancestor -->
     <xsl:template
         match="d:Instruction[descendant::d:ConditionalText[d:Expression] and ancestor::d:ComputationItem]"
-        mode="enoddi:get-conditionned-text-bis" priority="1">
+        mode="enoddi:get-conditional-text-bis" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
