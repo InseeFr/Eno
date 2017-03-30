@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT4H58M1S</meta:editing-duration><meta:editing-cycles>53</meta:editing-cycles><meta:generator>LibreOffice/4.3.5.2$Windows_x86 LibreOffice_project/3a87456aaa6a95c63eea1c1b3201acedf0751bd5</meta:generator><dc:date>2017-03-29T09:41:56.525000000</dc:date><dc:creator>Guillaume Jardillier</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="102" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT7H59M53S</meta:editing-duration><meta:editing-cycles>57</meta:editing-cycles><meta:generator>LibreOffice/4.3.5.2$Windows_x86 LibreOffice_project/3a87456aaa6a95c63eea1c1b3201acedf0751bd5</meta:generator><dc:date>2017-03-29T14:14:24.689000000</dc:date><dc:creator>Guillaume Jardillier</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="102" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
-   <config:config-item config:name="VisibleAreaWidth" config:type="int">35916</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">16973</config:config-item>
+   <config:config-item config:name="VisibleAreaWidth" config:type="int">31587</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">18386</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
        <config:config-item config:name="CursorPositionX" config:type="int">0</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">9</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">0</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -459,16 +459,16 @@
  </office:styles>
  <office:automatic-styles>
   <style:style style:name="co1" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="4.976cm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="5.701cm"/>
   </style:style>
   <style:style style:name="co2" style:family="table-column">
    <style:table-column-properties fo:break-before="auto" style:column-width="2.321cm"/>
   </style:style>
   <style:style style:name="co3" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="6.357cm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="6.033cm"/>
   </style:style>
   <style:style style:name="co4" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="22.262cm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="17.533cm"/>
   </style:style>
   <style:style style:name="co5" style:family="table-column">
    <style:table-column-properties fo:break-before="auto" style:column-width="2.258cm"/>
@@ -477,10 +477,7 @@
    <style:table-row-properties style:row-height="0.452cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
   </style:style>
   <style:style style:name="ro2" style:family="table-row">
-   <style:table-row-properties style:row-height="0.557cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
-  </style:style>
-  <style:style style:name="ro3" style:family="table-row">
-   <style:table-row-properties style:row-height="0.517cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
+   <style:table-row-properties style:row-height="0.579cm" fo:break-before="auto" style:use-optimal-row-height="false"/>
   </style:style>
   <style:style style:name="ta1" style:family="table" style:master-page-name="Default">
    <style:table-properties table:display="true" style:writing-mode="lr-tb"/>
@@ -553,7 +550,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2017-03-29">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="09:15:20.955000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2017-03-29">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="11:12:30.811000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -678,8 +675,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-label</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element label sending function to the form title getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-form-title to input function enoddi:get-label.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -690,8 +687,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-id</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element id sender function to the application name getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-application-name to input function enoddi:get-id.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -702,8 +699,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-id</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element id sender function to the form name getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-form-name to input function enoddi:get-id.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -714,8 +711,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-id</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element id sender function to the Xforms element name getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-name to input function enoddi:get-id.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -726,11 +723,11 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-hideable-command</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Not linked yet</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-relevant to input function enoddi:get-hideable-command.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enofr:get-readonly</text:p>
      </table:table-cell>
@@ -738,8 +735,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-deactivatable-command</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Not linked yet</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-readonly to input function enoddi:get-deactivatable-command.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -748,8 +745,8 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2"/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Not linked yet</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Not linked yet.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -758,10 +755,10 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-link</text:p>
+      <text:p>enoddi:get-variable-calculation</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Not linked yet</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-calculate to input function enoddi:get-variable-calculation.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -772,11 +769,11 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-type</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Used to specify the character string to identify as xf:date</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-type to input function enoddi:get-type.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enofr:get-format</text:p>
      </table:table-cell>
@@ -784,11 +781,11 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-format</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking a Xforms function to a DDI function giving infos about format</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-format to input function enoddi:get-format.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enofr:get-constraint</text:p>
      </table:table-cell>
@@ -796,11 +793,11 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element control to the constraint getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-constraint to input function enoddi:get-control.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enofr:get-alert-level</text:p>
      </table:table-cell>
@@ -808,8 +805,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-message-type</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element message-type to the alert-level getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-alert-level to input function enoddi:get-message-type.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -822,8 +819,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-help-instruction</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI Instruction (Help Type) getter function to the Xforms help element getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-help to input function enoddi:get-help-instruction.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -836,8 +833,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-label</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element label sending function to the Xforms elements label getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-label to input function enoddi:get-label.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -848,8 +845,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-value</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI code value sending function to the Xforms item value getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-value to input function enoddi:get-value.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -860,11 +857,11 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-output-format</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI code list representation format sending function to the Xforms list appearance getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-appearance to input function enoddi:get-output-format.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enofr:get-css-class</text:p>
      </table:table-cell>
@@ -872,11 +869,11 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-style</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI style sending function to the css class getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-css-class to input function enoddi:get-style.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enofr:get-length</text:p>
      </table:table-cell>
@@ -884,11 +881,11 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking both length getter functions</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-length to input function enoddi:get-length.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enofr:get-suffix</text:p>
      </table:table-cell>
@@ -898,8 +895,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-suffix</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking both suffix getter functions</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-suffix to input function enoddi:get-suffix.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -910,8 +907,8 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-levels-first-dimension</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element levels-first-dimension to the header-columns getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-header-columns to input function enoddi:get-levels-first-dimension.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -922,8 +919,8 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-levels-second-dimension</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element levels-second-dimension to the header-lines getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-header-lines to input function enoddi:get-levels-second-dimension.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -934,8 +931,8 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-codes-first-dimension</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element codes-first-dimension to the body-lines getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-body-lines to input function enoddi:get-codes-first-dimension.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -948,8 +945,8 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-title-line</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element title-line to the header-line getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-header-line to input function enoddi:get-title-line.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -962,8 +959,8 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-table-line</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element table-line to the body-line getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-body-line to input function enoddi:get-table-line.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -974,8 +971,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-rowspan</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking both rowspan element getter functions</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-rowspan to input function enoddi:get-rowspan.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -986,8 +983,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-colspan</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking both colspan element getter functions</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-colspan to input function enoddi:get-colspan.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -998,8 +995,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-minimum-required</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element minimum-required to the minimum-lines getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-minimum-lines to input function enoddi:get-minimum-required.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1010,8 +1007,8 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-computation-items</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element computation-items to the constraint-dependencies getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-constraint-dependencies to input function enoddi:get-computation-items.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1022,11 +1019,11 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-hideable-then</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element &apos;then&apos; to the relevant-dependencies getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-relevant-dependencies to input function enoddi:get-hideable-then.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enofr:get-readonly-dependencies</text:p>
      </table:table-cell>
@@ -1034,11 +1031,11 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-deactivatable-then</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI element &apos;then&apos; to the readonly-dependencies getter function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-readonly-dependencies to input function enoddi:get-deactivatable-then.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enofr:get-code-depth</text:p>
      </table:table-cell>
@@ -1046,17 +1043,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-level-number</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking the DDI attribute levelNumber to the code-depth function</text:p>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enofr:get-code-depth to input function enoddi:get-level-number.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="4"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro2" table:number-rows-repeated="1048533">
-     <table:table-cell table:number-columns-repeated="4"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro1" table:number-rows-repeated="9">
+    <table:table-row table:style-name="ro1" table:number-rows-repeated="1048543">
      <table:table-cell table:number-columns-repeated="4"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">

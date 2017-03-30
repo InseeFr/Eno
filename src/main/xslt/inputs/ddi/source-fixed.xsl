@@ -5,13 +5,11 @@
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" version="2.0">
 
-    <!-- This .xsl document is the base of the upcoming source.xsl : ENOPreprocessing target -->
-    <!-- This source.xsl file will contain : -->
-    <!-- source-fixed.xsl -->
-    <!-- functions.xsl -->
-    <!-- templates.xsl -->
-    <!-- Also, it will be used in the later stages of the application (imported in transformations/ddi2fr/ddi2fr.xsl) -->
-    <!-- Therefore, source.xsl role belongs in the creation of the basic-form.tmp : ddi2fr target-->
+    <xd:doc scope="stylesheet">
+        <xd:desc>
+            <xd:p>A library of getter functions for fods with their implementations for different elements.</xd:p>
+        </xd:desc>
+    </xd:doc>
 
     <xd:doc>
         <xd:desc>
@@ -24,7 +22,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Getting the languages list used in the ddi.</xd:p>
+            <xd:p>Getting the languages list used in the DDI input.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:Sequence[d:TypeOfSequence/text()='template']" mode="enoddi:get-languages"
@@ -32,23 +30,6 @@
         <xsl:for-each-group select="//@xml:lang" group-by=".">
             <xsl:value-of select="current-grouping-key()"/>
         </xsl:for-each-group>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Getting the id for d:ResponseDomainInMixed.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="d:ResponseDomainInMixed" mode="enoddi:get-id">
-        <xsl:variable name="parent-id">
-            <xsl:apply-templates
-                select="parent::d:StructuredMixedResponseDomain/parent::d:QuestionItem"
-                mode="enoddi:get-id"/>
-        </xsl:variable>
-        <xsl:variable name="sub-id">
-            <xsl:value-of select="count(preceding-sibling::d:ResponseDomainInMixed)+1"/>
-        </xsl:variable>
-        <xsl:value-of select="concat($parent-id,'-',$sub-id)"/>
     </xsl:template>
 
     <xd:doc>
@@ -103,7 +84,11 @@
         </xsl:element>
     </xsl:template>
 
-    <!-- Inserting the Tooltip label into the Sequence label -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Inserting the Tooltip label into the Sequence label.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:Sequence[d:InterviewerInstructionReference/d:Instruction/d:InstructionName/r:String[text()='tooltip']]" mode="enoddi:get-label" priority="2">
         <xsl:apply-templates select="r:Label" mode="lang-choice"/>
         <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[d:InstructionName/r:String='tooltip']">
@@ -120,21 +105,31 @@
         </xsl:for-each>
     </xsl:template>
 
-    <!-- Getting the label from a d:QuestionGrid OR d:QuestionItem having a d:Instruction of 'format' type -->
-    <!-- and a d:Instruction not being a 'format' type -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For questions which have both a 'format' Instruction and an other Instruction which is not of 'format' type.</xd:p>
+            <xd:p>The instruction is not used for the label. It will be used in the enoddi:get-format-instruction instead.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template
         match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='format']
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]
         | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='format']
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
         mode="enoddi:get-label">
+        <!-- We get the text of the QuestionText -->
         <xsl:apply-templates select="d:QuestionText/d:LiteralText/d:Text" mode="lang-choice"/>
     </xsl:template>
 
-    <!-- Getting the label from a d:QuestionGrid OR d:QuestionItem having a d:Instruction of 'format' type -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For questions which have a 'format' Instruction.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template
         match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='format']] | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='format']]"
-        mode="enoddi:get-format-instruction" priority="2">
+        mode="enoddi:get-format-instruction">
+        <!-- We get the label of the 'format' Instruction -->
         <xsl:apply-templates
             select="descendant::d:Instruction[d:InstructionName/r:String/text()='format']"
             mode="enoddi:get-label"/>
@@ -142,20 +137,37 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>The different labels that we return depending on the existence of the xml:lang
-                attribute</xd:p>
-            <xd:p>Depends on the language</xd:p>
+            <xd:p>For a node() which isn't one of those three, there can't be a defined language.</xd:p>
+            <xd:p>It's child is returned.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[not(r:String) and not(r:Content) and not(xhtml:p)]" mode="lang-choice">
         <xsl:sequence select="child::node()"/>
     </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For a child of an xhtml:p element, it is directly returned.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="*[parent::xhtml:p]" priority="1" mode="lang-choice">
         <xsl:sequence select="."/>
     </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For a text(). The value is simply returned</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="text()" mode="lang-choice">
         <xsl:value-of select="."/>
     </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For those nodes, the language is used to return the right text.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="node()[r:Content or r:String or xhtml:p]" mode="lang-choice">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
@@ -176,14 +188,18 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Getting the corresponding suffix from different reponse domains.</xd:p>
+            <xd:p>Getting the suffix for a QuestionItem for different response domains.</xd:p>
         </xd:desc>
     </xd:doc>
-    <!-- Getting suffix for d:QuestionItem elements having a referenced DomainResponse -->
     <xsl:template match="d:QuestionItem[*[ends-with(name(),'DomainReference')]]" mode="enoddi:get-suffix">
         <xsl:apply-templates select="*[ends-with(name(),'DomainReference')]" mode="enoddi:get-suffix"/>
     </xsl:template>
-    <!-- Getting suffix for d:NumericDomainReference having a referenced DomainResponse -->
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting the suffix for different response domains.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="*[ends-with(name(),'DomainReference')]"
         mode="enoddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
@@ -198,17 +214,29 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- Getting levels of first dimension in d:QuestionGrid elements -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting levels of first dimension in d:QuestionGrid elements.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:QuestionGrid" mode="enoddi:get-levels-first-dimension">
         <xsl:apply-templates select="d:GridDimension[@rank='1']" mode="enoddi:get-levels"/>
     </xsl:template>
 
-    <!-- Getting levels of second dimension in d:QuestionGrid elements -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting levels of second dimension in d:QuestionGrid elements.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:QuestionGrid" mode="enoddi:get-levels-second-dimension">
         <xsl:apply-templates select="d:GridDimension[@rank='2']" mode="enoddi:get-levels"/>
     </xsl:template>
 
-    <!-- Getting codes of first dimension in d:QuestionGrid elements having d:GridDimension/d:Roster child -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting codes of first dimension in d:QuestionGrid elements having d:GridDimension/d:Roster child.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster]"
         mode="enoddi:get-codes-first-dimension">
         <xsl:variable name="levels">
@@ -221,7 +249,11 @@
         <xsl:sequence select="$levels/*"/>
     </xsl:template>
 
-    <!-- Getting codes of first dimension in d:QuestionGrid elements not having d:GridDimension/d:Roster child -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting codes of first dimension in d:QuestionGrid elements not having d:GridDimension/d:Roster child.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:QuestionGrid[not(d:GridDimension/d:Roster)]"
         mode="enoddi:get-codes-first-dimension">
         <xsl:sequence select="d:GridDimension[@rank='1']//l:Code[not(descendant::l:Code)]"/>
@@ -237,9 +269,6 @@
                 group-by="@levelNumber">
                 <dummy/>
             </xsl:for-each-group>
-        </xsl:variable>
-        <xsl:variable name="number-of-levels">
-            <xsl:value-of select="count($levels//dummy)"/>
         </xsl:variable>
         <xsl:sequence select="$levels/*"/>
     </xsl:template>
@@ -483,7 +512,7 @@
     </xsl:template>
 
     <!-- Getting the link of a l:Variable depending on a id -->
-    <xsl:template match="l:Variable" mode="enoddi:get-link">
+    <xsl:template match="l:Variable" mode="enoddi:get-variable-calculation">
         <xsl:variable name="id">
             <xsl:apply-templates select="." mode="enoddi:get-id"/>
         </xsl:variable>

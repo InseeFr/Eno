@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT15H41M9S</meta:editing-duration><meta:editing-cycles>191</meta:editing-cycles><meta:generator>LibreOffice/4.3.5.2$Windows_x86 LibreOffice_project/3a87456aaa6a95c63eea1c1b3201acedf0751bd5</meta:generator><dc:date>2017-03-29T10:40:55.738000000</dc:date><dc:creator>Guillaume Jardillier</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="464" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT22H30M38S</meta:editing-duration><meta:editing-cycles>247</meta:editing-cycles><meta:generator>LibreOffice/4.3.5.2$Windows_x86 LibreOffice_project/3a87456aaa6a95c63eea1c1b3201acedf0751bd5</meta:generator><dc:date>2017-03-30T09:13:18.319000000</dc:date><dc:creator>Guillaume Jardillier</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="467" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
-   <config:config-item config:name="VisibleAreaWidth" config:type="int">46245</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">70319</config:config-item>
+   <config:config-item config:name="VisibleAreaWidth" config:type="int">54602</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">78556</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
@@ -31,7 +31,7 @@
       </config:config-item-map-entry>
      </config:config-item-map-named>
      <config:config-item config:name="ActiveTable" config:type="string">Sheet1</config:config-item>
-     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">160</config:config-item>
+     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1265</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
      <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
      <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -116,7 +116,6 @@
   </office:script>
  </office:scripts>
  <office:font-face-decls>
-  <style:font-face style:name="F" svg:font-family="" style:font-family-generic="roman"/>
   <style:font-face style:name="Arial1" svg:font-family="Arial" style:font-family-generic="swiss"/>
   <style:font-face style:name="Mangal" svg:font-family="Mangal" style:font-pitch="variable"/>
   <style:font-face style:name="Arial" svg:font-family="Arial" style:font-family-generic="swiss" style:font-pitch="variable"/>
@@ -472,28 +471,28 @@
    <style:table-column-properties fo:break-before="auto" style:column-width="11.252cm"/>
   </style:style>
   <style:style style:name="co2" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="5.396cm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="2.902cm"/>
   </style:style>
   <style:style style:name="co3" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="8.818cm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="6.414cm"/>
   </style:style>
   <style:style style:name="co4" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="2.258cm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="0.773cm"/>
   </style:style>
   <style:style style:name="co5" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="18.523cm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="33.263cm"/>
+  </style:style>
+  <style:style style:name="co6" style:family="table-column">
+   <style:table-column-properties fo:break-before="auto" style:column-width="2.258cm"/>
   </style:style>
   <style:style style:name="ro1" style:family="table-row">
    <style:table-row-properties style:row-height="0.452cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
   </style:style>
   <style:style style:name="ro2" style:family="table-row">
-   <style:table-row-properties style:row-height="0.557cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
-  </style:style>
-  <style:style style:name="ro3" style:family="table-row">
    <style:table-row-properties style:row-height="0.579cm" fo:break-before="auto" style:use-optimal-row-height="false"/>
   </style:style>
-  <style:style style:name="ro4" style:family="table-row">
-   <style:table-row-properties style:row-height="0.517cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
+  <style:style style:name="ro3" style:family="table-row">
+   <style:table-row-properties style:row-height="0.557cm" fo:break-before="auto" style:use-optimal-row-height="true"/>
   </style:style>
   <style:style style:name="ta1" style:family="table" style:master-page-name="Default">
    <style:table-properties table:display="true" style:writing-mode="lr-tb"/>
@@ -503,7 +502,8 @@
    <style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:font-weight="bold" style:font-size-asian="10pt" style:font-weight-asian="bold" style:font-size-complex="10pt" style:font-weight-complex="bold"/>
   </style:style>
   <style:style style:name="ce2" style:family="table-cell" style:parent-style-name="Default">
-   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Tahoma" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" fo:font-weight="bold" style:font-size-asian="10pt" style:font-weight-asian="bold" style:font-size-complex="10pt" style:font-weight-complex="bold"/>
   </style:style>
   <style:style style:name="ce3" style:family="table-cell" style:parent-style-name="Default">
    <style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
@@ -523,22 +523,29 @@
    <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
   </style:style>
   <style:style style:name="ce8" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="transparent"/>
    <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Tahoma" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
   </style:style>
   <style:style style:name="ce9" style:family="table-cell" style:parent-style-name="Default">
-   <style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:language="en" fo:country="US" style:font-name-asian="Segoe UI" style:font-size-asian="10pt" style:language-asian="en" style:country-asian="US" style:font-size-complex="10pt" style:language-complex="en" style:country-complex="US"/>
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Tahoma" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
   </style:style>
   <style:style style:name="ce10" style:family="table-cell" style:parent-style-name="Default">
-   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial1" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Arial1" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Arial1" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+   <style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:language="en" fo:country="US" style:font-name-asian="Segoe UI" style:font-size-asian="10pt" style:language-asian="en" style:country-asian="US" style:font-size-complex="10pt" style:language-complex="en" style:country-complex="US"/>
   </style:style>
   <style:style style:name="ce11" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial1" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Arial1" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Arial1" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+  </style:style>
+  <style:style style:name="ce12" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:padding="0.071cm"/>
    <style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
   </style:style>
-  <style:style style:name="ce12" style:family="table-cell" style:parent-style-name="Default">
+  <style:style style:name="ce13" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:background-color="transparent"/>
    <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="ce14" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:use-window-font-color="true"/>
   </style:style>
   <style:page-layout style:name="pm1">
    <style:page-layout-properties style:first-page-number="continue" style:writing-mode="lr-tb"/>
@@ -589,7 +596,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2017-03-29">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="10:19:36.585000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2017-03-30">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="09:03:24.722000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -853,6 +860,7 @@
     <table:table-column table:style-name="co3" table:default-cell-style-name="ce3"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="ce3"/>
     <table:table-column table:style-name="co5" table:default-cell-style-name="ce3"/>
+    <table:table-column table:style-name="co6" table:number-columns-repeated="1019" table:default-cell-style-name="Default"/>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Xpath</text:p>
@@ -869,77 +877,13 @@
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Documentation</text:p>
      </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>/</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>source</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>//d:Sequence[d:TypeOfSequence/text()=&apos;template&apos;]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>source</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Starting with d:Instrument</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell table:style-name="ce7" table:number-columns-repeated="3"/>
-     <table:table-cell/>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>*[(ends-with(name(),&apos;Domain&apos;) or ends-with(name(),&apos;DomainReference&apos;)) and ancestor::d:QuestionItem]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-container</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;question&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7"/>
-     <table:table-cell/>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>*[(ends-with(name(),&apos;Domain&apos;) or ends-with(name(),&apos;DomainReference&apos;)) and ancestor::d:QuestionGrid]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-container</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;grid&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7"/>
-     <table:table-cell/>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-container</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;question&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7"/>
-     <table:table-cell/>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell table:style-name="ce7" table:number-columns-repeated="3"/>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="5"/>
+     <table:table-cell table:style-name="ce2" table:number-columns-repeated="5"/>
+     <table:table-cell table:style-name="ce14" table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
@@ -951,8 +895,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>r:ID is the element identifier in DDI</text:p>
+      <text:p>r:ID is the element identifier in DDI by default.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -966,8 +911,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>If a d:QuestionItem has either of the following domains, getting his id using r:OutParameter/r:ID</text:p>
+      <text:p>If a d:QuestionItem has either one of the following ResponseDomain, r:OutParameter/r:ID is returned as its id.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -981,8 +927,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>When an element ends with ‘Domain’ and has either a d :GridResponseDomain or d :ResponseDomainInMixed parent, getting the r :ID from a r :TargetParameterReference</text:p>
+      <text:p>For a ResponseDomain within a QuestionGrid or a ResponseDomainInMixed, the r:ID of the output parameter of the question is returned as its id.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -996,8 +943,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>When an element ends with ‘DomainReference’ and has either a d :GridResponseDomain or d :ResponseDomainInMixed parent, getting the r :ID from a r :TargetParameterReference</text:p>
+      <text:p>For a ResponseDomainReference within a QuestionGrid or a ResponseDomainInMixed, the r:ID of the output parameter of the question is returned as its id.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1011,13 +959,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>For d :Instruction elements, getting the id by concatenating the d :InterviewerInstructionReference parent r :ID with the current r :ID</text:p>
+      <text:p>For d:Instruction elements, getting the id by concatenating the d:InterviewerInstructionReference parent r:ID with the current r:ID (because it can appear several times in the DDI and it needs to be unique).</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="5"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:Loop</text:p>
      </table:table-cell>
@@ -1027,9 +973,13 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>concat(r:ID,&apos;-Loop&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>The id returned for a d:Loop.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:StructuredMixedGridResponseDomain[parent::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]]</text:p>
      </table:table-cell>
@@ -1041,8 +991,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>For d :StructuredMixedGridResponseDomain elements having a same level d:Roster without maximumAllowed attribute, getting the id in the d:QuestionGrid/r:ID and concatenating -RowLoop for later purposes</text:p>
+      <text:p>The GridDimension has a Roster with no maximumAllowed attribute. It means the SMGRD can be repeated many times. An id is created by concatenating its QuestionGrid id with the &apos;-RowLoop&apos; string.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce6" office:value-type="string" calcext:value-type="string">
@@ -1055,11 +1006,12 @@
       <text:p>concat(ancestor::d:GridDimension/parent::d:QuestionGrid/r:ID,&apos;-&apos;,r:ID)</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Identifiers for rows and columns (table name is included)</text:p>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Identifiers for texts within cells in header rows and header columns (are concatenated because they can appear several times and need to be unique).</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce6" office:value-type="string" calcext:value-type="string">
       <text:p>r:Label[parent::l:CodeList[ancestor::d:GridDimension]]</text:p>
      </table:table-cell>
@@ -1070,11 +1022,12 @@
       <text:p>concat(ancestor::d:QuestionGrid/r:ID,&apos;-&apos;,parent::l:CodeList/r:ID,&apos;-Header-&apos;,count(preceding-sibling::r:Label)+1)</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Identifiers for top-left case in two dimensions array</text:p>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Identifiers for texts within cells in header rows and header columns (are concatenated because they can appear several times and need to be unique).</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro3">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>l:Variable</text:p>
      </table:table-cell>
@@ -1086,11 +1039,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Identifiers for l :Variables</text:p>
+      <text:p>Identifier returned for a l:Variable : not using its DDI identifier but its name.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="5"/>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1102,12 +1056,13 @@
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
       <text:p>r:Label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>lang-choice</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting label for Sequence item</text:p>
+      <text:p>The label of a Sequence is its r:Label element.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1116,15 +1071,16 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:DisplayText/d:LiteralText/d:Text</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>lang-choice</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting label for StatementItem item</text:p>
+      <text:p>The label of a StatementItem is its descendant Text.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1133,15 +1089,16 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:InstructionText/d:LiteralText/d:Text</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>lang-choice</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting label for Instruction items not having ComputationItem ancestor</text:p>
+      <text:p>The label of an Instruction is its descendant Text.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
@@ -1150,66 +1107,70 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>child::node()/r:Label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>lang-choice</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting label for ResponseDomainInMixed item</text:p>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>The label of a d:ResponseDomainInMixed is the Label of its ResponseDomain child.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[not(descendant::d:Instruction[not(d:InstructionName/r:String/text()=&apos;format&apos;)])]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionText/d:LiteralText/d:Text</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>lang-choice</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting label for QuestionItem item not having Instruction with name &apos;Format&apos;</text:p>
+      <text:p>The label of a QuestionItem is the text of its QuestionText (default case).</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionGrid[not(descendant::d:Instruction[not(d:InstructionName/r:String/text()=&apos;format&apos;)])]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionText/d:LiteralText/d:Text</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>lang-choice</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting label for QuestionItem item not having Instruction with name &apos;Format&apos;</text:p>
+      <text:p>The label of a QuestionGrid is the text of its QuestionText (default case).</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>l:Code</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>r:CategoryReference/l:Category/r:Label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>lang-choice</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting label for l:Code item</text:p>
+      <text:p>The label of a Code is its descendant r:Label.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1218,21 +1179,56 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>r:Label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>lang-choice</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getting label for items ending with &apos;Domain&apos; and not having a ResponseDomainInMixed parent</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>r:Label[not(parent::l:CodeList[ancestor::d:GridDimension[@displayLabel=&apos;false&apos;]])]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-label</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>.</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>lang-choice</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>The label of a Label is its own value !</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>r:Label[parent::l:CodeList[ancestor::d:GridDimension[@displayLabel=&apos;false&apos;]]]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-label</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce8"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>The label of a Label with displayLabel attribute as &apos;false&apos; is empty.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce8"/>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce2" table:number-columns-repeated="2"/>
-     <table:table-cell/>
+     <table:table-cell table:style-name="ce8" table:number-columns-repeated="2"/>
+     <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
@@ -1246,157 +1242,167 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting value for l:Code item</text:p>
+      <text:p>The value of a Code is its Value child.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="5"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;radio-button&apos;]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-output-format</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;full&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7"/>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the output format for radio in d:QuestionItem/d:CodeDomain item</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;drop-down-list&apos;]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-output-format</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;minimal&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7"/>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the output format for dropdown in d:QuestionItem/d:CodeDomain item</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;checkbox&apos;]]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-output-format</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;full&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7"/>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the output format for checkbox in d:QuestionItem/d:CodeDomain item</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem[d:NominalDomain]</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-output-format</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>&apos;full&apos;</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce12"/>
+     <table:table-cell table:style-name="ce7"/>
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the output format for d:QuestionItem item having a d:NominalDomain child</text:p>
+      <text:p>Getting the output format for radio in d:QuestionItem/d:CodeDomain item.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed) and r:GenericOutputFormat/text()=&apos;radio-button&apos;]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-output-format</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>&apos;full&apos;</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce7"/>
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the output format for radio in d:CodeDomain item having d:GridResponseDomain or d:ResponseDomainInMixed ancestor</text:p>
+      <text:p>Getting the output format for radio in d:CodeDomain item having d:GridResponseDomain or d:ResponseDomainInMixed ancestor.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed) and r:GenericOutputFormat/text()=&apos;drop-down-list&apos;]</text:p>
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;drop-down-list&apos;]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-output-format</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>&apos;minimal&apos;</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce7"/>
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the output format for dropdown in d:CodeDomain item having d:GridResponseDomain or d:ResponseDomainInMixed ancestor</text:p>
+      <text:p>Getting the output format for dropdown in d:QuestionItem/d:CodeDomain item.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed) and r:GenericOutputFormat/text()=&apos;drop-down-list&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-output-format</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;minimal&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7"/>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the output format for dropdown in d:CodeDomain item having d:GridResponseDomain or d:ResponseDomainInMixed ancestor.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem[d:CodeDomain[r:GenericOutputFormat/text()=&apos;checkbox&apos;]]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-output-format</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;full&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7"/>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the output format for checkbox in d:QuestionItem/d:CodeDomain item.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed) and r:GenericOutputFormat/text()=&apos;checkbox&apos;]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-output-format</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>&apos;full&apos;</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce7"/>
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the output format for checkbox in d:CodeDomain item having d:GridResponseDomain or d:ResponseDomainInMixed ancestor</text:p>
+      <text:p>Getting the output format for checkbox in d:CodeDomain item having d:GridResponseDomain or d:ResponseDomainInMixed ancestor.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem[d:NominalDomain]</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-output-format</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;full&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce13"/>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the output format for d:QuestionItem item having a d:NominalDomain child.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
       <text:p>d:NominalDomain[ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-output-format</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
       <text:p>&apos;full&apos;</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce7"/>
      <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the output format for d:NominalDomain having d:GridResponseDomain or d:ResponseDomainInMixed ancestor</text:p>
+      <text:p>Getting the output format for d:NominalDomain having d:GridResponseDomain or d:ResponseDomainInMixed ancestor.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="5"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>l:Code[.//r:Description]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-help-instruction</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>r:CategoryReference/l:Category/r:Description</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>lang-choice</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the help instruction for a l:Code having a r:Description child</text:p>
+      <text:p>Getting the help instruction for a l:Code having a r:Description child.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="5"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1407,11 +1413,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:QuestonItem item</text:p>
+      <text:p>Getting the style of a d:QuestonItem element.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:TextDomain[not(@maxLength)]]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1422,11 +1429,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:QuestonItem item having a d:TextDomain child without maxLength attribute</text:p>
+      <text:p>Getting the style of a d:QuestonItem element having a d:TextDomain child without maxLength attribute.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:TextDomain[@maxLength]]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1437,11 +1445,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:QuestonItem item having a d:TextDomain child with maxLength attribute</text:p>
+      <text:p>Getting the style of a d:QuestonItem element having a d:TextDomain child with maxLength attribute.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:TextDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(@maxLength)]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1452,11 +1461,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:TextDomain (without maxLength attribute) having a d:GridResponseDomain or d:ResponseDomainInMixed parent</text:p>
+      <text:p>Getting the style of a d:TextDomain (without maxLength attribute) having a d:GridResponseDomain or d:ResponseDomainInMixed parent.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:TextDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and @maxLength]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1467,11 +1477,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:TextDomain (with maxLength attribute) having a d:GridResponseDomain or d:ResponseDomainInMixed parent</text:p>
+      <text:p>Getting the style of a d:TextDomain (with maxLength attribute) having a d:GridResponseDomain or d:ResponseDomainInMixed parent.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain or d:NumericDomainReference]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1482,8 +1493,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:QuestionItem item having a d:NumericDomain or d:NumericDomainReference child</text:p>
+      <text:p>Getting the style of a d:QuestionItem element having a d:NumericDomain or d:NumericDomainReference child.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1497,8 +1509,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent</text:p>
+      <text:p>Getting the style of a d:NumericDomain element having a d:GridResponseDomain or d:ResponseDomainInMixed parent.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1512,8 +1525,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent</text:p>
+      <text:p>Getting the style of a d:NumericDomainReference having a d:GridResponseDomain or d:ResponseDomainInMixed parent.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1527,8 +1541,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a submodule type Sequence</text:p>
+      <text:p>Getting the style of a submodule type Sequence.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1542,11 +1557,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a group type Sequence</text:p>
+      <text:p>Getting the style of a group type Sequence.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>d:Instruction[d:InstructionName/r:String=&apos;help&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1557,11 +1573,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a help type Sequence</text:p>
+      <text:p>Getting the style of a help type Instruction.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce9" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>d:Instruction[d:InstructionName/r:String=&apos;instruction&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1572,8 +1589,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a hint type Instruction</text:p>
+      <text:p>Getting the style of a hint type Instruction.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1587,8 +1605,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:QuestionGrid item where the d:GridDimension = 2 and there is not @maximumAllowed attribute in d:GridDimension/d:Roster</text:p>
+      <text:p>Getting the style of a d:QuestionGrid with two dimensions and no @maximumAllowed attribute in d:GridDimension/d:Roster.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1602,8 +1621,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:QuestionGrid having a d:GridDimension = 1</text:p>
+      <text:p>Getting the style of a d:QuestionGrid with only one dimension.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1617,8 +1637,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a d:QuestionGrid item having a d:GridDimension = 2 and a @maximumAllowed attribute in d:GridDimension/d:Roster</text:p>
+      <text:p>Getting the style of a d:QuestionGrid with two dimensions and a @maximumAllowed attribute in d:GridDimension/d:Roster</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1632,8 +1653,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a duration type d:DateTimeDomain</text:p>
+      <text:p>Getting the style of a duration type d:DateTimeDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1647,8 +1669,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a date type d:DateTimeDomain</text:p>
+      <text:p>Getting the style of a date type d:DateTimeDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1662,8 +1685,9 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a duration type d:DateTimeDomainReference</text:p>
+      <text:p>Getting the style of a duration type d:DateTimeDomainReference.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1677,77 +1701,91 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the style of a date type d:DateTimeDomainReference</text:p>
+      <text:p>Getting the style of a date type d:DateTimeDomainReference.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="5"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>d:Sequence[parent::d:ThenConstructReference and d:TypeOfSequence/text()=&apos;hideable&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-hideable-command</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>../../d:IfCondition/r:Command/r:CommandContent</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the r:CommandContent of a module Sequence if a hideable sequence exists</text:p>
+      <text:p>The command associated to a hideable Sequence inside a ThenConstructReference.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>d:Sequence[parent::d:ElseConstructReference and d:TypeOfSequence/text()=&apos;hideable&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-hideable-command</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;not (&apos;,../../d:IfCondition/r:Command/r:CommandContent,&apos;)&apos;)</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the r:CommandContent of a hideable Sequence </text:p>
+      <text:p>The command associated to a hideable Sequence inside an ElseConstructReference.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce11"/>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce11"/>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>d:Sequence[parent::d:ThenConstructReference and d:TypeOfSequence/text()=&apos;deactivatable&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-deactivatable-command</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>../../d:IfCondition/r:Command/r:CommandContent</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the r:CommandContent of a deactivatable Sequence</text:p>
+      <text:p>The command associated to a deactivatable Sequence inside a ThenConstructReference.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>d:Sequence[parent::d:ElseConstructReference and d:TypeOfSequence/text()=&apos;deactivatable&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-deactivatable-command</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;not (&apos;,../../d:IfCondition/r:Command/r:CommandContent,&apos;)&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>The command associated to a deactivatable Sequence inside an ElseConstructReference.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="5"/>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:Instruction[ancestor::d:ComputationItem]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1755,14 +1793,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:Instruction that have a d:ComputationItem ancestor</text:p>
+      <text:p>Getting the control of a d:Instruction that have a d:ComputationItem ancestor.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and not(@decimalPositions)]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1770,14 +1809,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:NumericDomain having a r:Low descendant with @isInclusive attribute = false and no @decimalPositions attribute</text:p>
+      <text:p>Getting the control of a d:NumericDomain having a r:Low descendant with @isInclusive attribute = false and no @decimalPositions attribute.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain[descendant::r:Low[@isInclusive=&apos;false&apos;] and not(@decimalPositions)]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1785,14 +1825,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomain child with the same specification as before</text:p>
+      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomain child with the same specification as above.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(@decimalPositions)]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1800,14 +1841,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:NumericDomain not having a r:Low descendant with @isInclusive attribute = false and no @decimalPositions attribute</text:p>
+      <text:p>Getting the control of a d:NumericDomain not having a r:Low descendant with @isInclusive attribute = false and no @decimalPositions attribute.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(@decimalPositions)]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1815,14 +1857,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomain child with the same specification as before</text:p>
+      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomain child with the same specification as above.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and not(r:ManagedNumericRepresentation/@decimalPositions)]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1830,14 +1873,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:NumericDomainReference having a r:Low descendant with @isInclusive attribute = false and no @decimalPositions attribute in r:ManagedNumericRepresentation</text:p>
+      <text:p>Getting the control of a d:NumericDomainReference having a r:Low descendant with @isInclusive attribute = false and no @decimalPositions attribute in r:ManagedNumericRepresentation.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference[descendant::r:Low[@isInclusive=&apos;false&apos;] and not(r:ManagedNumericRepresentation/@decimalPositions)]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -1845,14 +1889,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomainReference child with the same specification as before</text:p>
+      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomainReference child with the same specification as above.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(r:ManagedNumericRepresentation/@decimalPositions)]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1860,14 +1905,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:NumericDomainReference not having a r:Low descendant with @isInclusive attribute = false and no @decimalPositions attribute in r:ManagedNumericRepresentation</text:p>
+      <text:p>Getting the control of a d:NumericDomainReference not having a r:Low descendant with @isInclusive attribute = false and no @decimalPositions attribute in r:ManagedNumericRepresentation.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and not(r:ManagedNumericRepresentation/@decimalPositions)]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1875,14 +1921,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomainReference child with the same specification as before</text:p>
+      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomainReference child with the same specification as above.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and @decimalPositions]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1890,14 +1937,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:NumericDomain having a r:Low descendant with @isInclusive attribute = false and a @decimalPositions attribute</text:p>
+      <text:p>Getting the control of a d:NumericDomain having a r:Low descendant with @isInclusive attribute = false and a @decimalPositions attribute.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain[descendant::r:Low[@isInclusive=&apos;false&apos;] and @decimalPositions]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1905,14 +1953,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomain child with the same specification as before</text:p>
+      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomain child with the same specification as above.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and @decimalPositions]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1920,14 +1969,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:NumericDomain not having a r:Low descendant with @isInclusive attribute = false and a @decimalPositions attribute</text:p>
+      <text:p>Getting the control of a d:NumericDomain not having a r:Low descendant with @isInclusive attribute = false and a @decimalPositions attribute.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and @decimalPositions]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1935,14 +1985,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomain child with the same specification as before</text:p>
+      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomain child with the same specification as above.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:Low[@isInclusive=&apos;false&apos;] and r:ManagedNumericRepresentation/@decimalPositions]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1950,14 +2001,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:NumericDomainReference having a r:Low descendant with @isInclusive attribute = false and a @decimalPositions attribute in r:ManagedNumericRepresentation</text:p>
+      <text:p>Getting the control of a d:NumericDomainReference having a r:Low descendant with @isInclusive attribute = false and a @decimalPositions attribute in r:ManagedNumericRepresentation.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference[descendant::r:Low[@isInclusive=&apos;false&apos;] and r:ManagedNumericRepresentation/@decimalPositions]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1965,14 +2017,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomainReference child with the same specification as before</text:p>
+      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomainReference child with the same specification as above.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and r:ManagedNumericRepresentation/@decimalPositions]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1980,14 +2033,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:NumericDomainReference not having a r:Low descendant with @isInclusive attribute = false and a @decimalPositions attribute in r:ManagedNumericRepresentation</text:p>
+      <text:p>Getting the control of a d:NumericDomainReference not having a r:Low descendant with @isInclusive attribute = false and a @decimalPositions attribute in r:ManagedNumericRepresentation.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference[not(descendant::r:Low[@isInclusive=&apos;false&apos;]) and r:ManagedNumericRepresentation/@decimalPositions]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -1995,14 +2049,15 @@
      </table:table-cell>
      <table:table-cell table:style-name="ce5"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomainReference child with the same specification as before</text:p>
+      <text:p>Getting the control of a d:QuestionItem having a d:NumericDomainReference child with the same specification as above.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[*[ends-with(name(),&apos;Domain&apos;) and @regExp]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2010,14 +2065,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:QuestionItem having children names ending by ‘Domain’ and having a @regExp attribute</text:p>
+      <text:p>Getting the control of a d:QuestionItem having children names ending by ‘Domain’ and having a @regExp attribute.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro4">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*[ends-with(name(),&apos;Domain&apos;) and @regExp and (parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed)]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2025,25 +2081,30 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the control of a d:QuestionItem having children names ending by ‘Domain’ and having a @regExp attribute and either a d :GridResponseDomain or d :ResponseDomainInMixed parent</text:p>
+      <text:p>Getting the control of a ResponseDomain having a @regExp attribute and either a d:GridResponseDomain or d:ResponseDomainInMixed parent.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro4">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:DateTimeDomainReference[r:ManagedDateTimeRepresentation/r:DateTypeCode/text()=&apos;duration&apos;]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-control</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>concat(&apos;matches(.,&apos;&apos;&apos;,r:ManagedDateTimeRepresentation/@regExp,&apos;&apos;&apos;) or .=&apos;&apos;&apos;&apos;&apos;)</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the control of a DateTimeDomainReference having a ManagedDateTimeRepresentation of duration type.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="5"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference</text:p>
      </table:table-cell>
@@ -2055,10 +2116,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the minimum of a numeric domain response</text:p>
+      <text:p>Getting the minimum of a numeric response domain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain</text:p>
      </table:table-cell>
@@ -2070,10 +2132,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the minimum of a numeric domain response</text:p>
+      <text:p>Getting the minimum of a numeric response domain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain or d:NumericDomainReference]</text:p>
      </table:table-cell>
@@ -2085,13 +2148,14 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the minimum of a numeric domain response</text:p>
+      <text:p>Getting the minimum of a numeric response domain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="5"/>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference</text:p>
      </table:table-cell>
@@ -2103,10 +2167,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the maximum of a numeric domain response</text:p>
+      <text:p>Getting the minimum of a numeric response domain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain</text:p>
      </table:table-cell>
@@ -2118,10 +2183,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the maximum of a numeric domain response</text:p>
+      <text:p>Getting the minimum of a numeric response domain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain or d:NumericDomainReference]</text:p>
      </table:table-cell>
@@ -2133,17 +2199,18 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the maximum of a numeric domain response</text:p>
+      <text:p>Getting the minimum of a numeric response domain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="5"/>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2151,14 +2218,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the number of decimals of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent (using the @decimalPositions attribute)</text:p>
+      <text:p>Getting the number of decimals of a d:NumericDomain item having a d:GridResponseDomain or d:ResponseDomainInMixed parent (using the @decimalPositions attribute).</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2166,14 +2234,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the number of decimals of a d:QuestionItem using the @decimalPositions attribute in its d:NumericDomain child</text:p>
+      <text:p>Getting the number of decimals of a d:QuestionItem using the @decimalPositions attribute in its d:NumericDomain child.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:ManagedNumericRepresentation]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2181,14 +2250,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the number of decimals of a d:NumericDomainReference item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:ManagedNumericRepresentation child</text:p>
+      <text:p>Getting the number of decimals of a d:NumericDomainReference item having a d:GridResponseDomain or d:ResponseDomainInMixed parent and a r:ManagedNumericRepresentation child.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference and descendant::r:ManagedNumericRepresentation]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-number-of-decimals</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2196,11 +2266,12 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the number of decimals of a d:QuestionItem having a d:NumericDomainReference with a r:ManagedNumericRepresentation descendant</text:p>
+      <text:p>Getting the number of decimals of a d:QuestionItem having a d:NumericDomainReference with a r:ManagedNumericRepresentation descendant.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:number-columns-repeated="5"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2209,15 +2280,21 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-consistency-message</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:InstructionText/d:LiteralText/d:Text</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message of a d:Instruction item being a descendant of a d:ComputationItem</text:p>
+      <text:p>It corresponds to the text of the Instruction within a ComputationItem.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce8"/>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:Instruction[ancestor::d:ComputationItem]</text:p>
      </table:table-cell>
@@ -2229,17 +2306,18 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the message type of a d:Instruction being a descendant of a d:ComputationItem</text:p>
+      <text:p>Getting the message type of a d:Instruction being a descendant of a d:ComputationItem.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="5"/>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomain[r:NumberRange]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2247,14 +2325,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the length of a d:QuestionItem having a d:NumericDomain/r:NumberRange child</text:p>
+      <text:p>Getting the length of a d:QuestionItem having a d:NumericDomain/r:NumberRange child.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and r:NumberRange]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2262,14 +2341,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the length of a d:NumericDomain having a d:GridResponseDomain or d:ResponseDomainInMixed parent and having a r:NumberRange child</text:p>
+      <text:p>Getting the length of a d:NumericDomain having a d:GridResponseDomain or d:ResponseDomainInMixed parent and having a r:NumberRange child.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference[descendant::r:NumberRange]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2277,14 +2357,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the length of a d :QuestionItem having a d :NumericDomainReference child having a r :NumberRange descendant</text:p>
+      <text:p>Getting the length of a d:QuestionItem having a d:NumericDomainReference child having a r:NumberRange descendant.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and descendant::r:NumberRange]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2292,14 +2373,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the length of a d:NumericDomainReference having a d:GridResponseDomain or a d :ResponseDomainInMixed parent and a r :NumberRange descendant</text:p>
+      <text:p>Getting the length of a d:NumericDomainReference having a d:GridResponseDomain or a d:ResponseDomainInMixed parent and a r:NumberRange descendant.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:TextDomain[@maxLength]]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2307,14 +2389,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the length of a d:QuestionItem having a d:TextDomain child with a @maxLength attribute</text:p>
+      <text:p>Getting the length of a d:QuestionItem having a d:TextDomain child with a @maxLength attribute.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:TextDomain[(parent::d:GridResponseDomain or parent::d:ResponseDomainInMixed) and @maxLength]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2322,14 +2405,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the length of a d:TextDomain item having a @maxLength attribute and a d:GridResponseDomain or d:ResponseDomainInMixed parent </text:p>
+      <text:p>Getting the length of a d:TextDomain item having a @maxLength attribute and a d:GridResponseDomain or d:ResponseDomainInMixed parent .</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:DateTimeDomain[r:DateTypeCode/text()=&apos;duration&apos;]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2337,14 +2421,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the length of a d:DateTimeDomain being a &apos;duration&apos; DateTypeCode</text:p>
+      <text:p>Getting the length of a &apos;duration&apos; d:DateTimeDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:DateTimeDomainReference[descendant::r:DateTypeCode/text()=&apos;duration&apos;]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
       <text:p>enoddi:get-length</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
@@ -2352,14 +2437,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the length of a d:DateTimeDomainReference being a &apos;duration&apos; DateTypeCode</text:p>
+      <text:p>Getting the length of a &apos;duration&apos; d:DateTimeDomainReference.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" table:number-columns-repeated="3"/>
-     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:DateTimeDomainReference</text:p>
      </table:table-cell>
@@ -2371,10 +2457,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the type of a d:DateTimeDomainReference</text:p>
+      <text:p>Getting the type of a d:DateTimeDomainReference.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>d:DateTimeDomain</text:p>
      </table:table-cell>
@@ -2386,10 +2473,11 @@
      </table:table-cell>
      <table:table-cell table:style-name="Default"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the type of a d:DateTimeDomain</text:p>
+      <text:p>Getting the type of a d:DateTimeDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:DateTimeDomainReference or d:DateTimeDomain]</text:p>
      </table:table-cell>
@@ -2401,10 +2489,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the type of a d:QuestionItem having a d:DateTimeDomainReference or a d:DateTimeDomain</text:p>
+      <text:p>Getting the type of a d:QuestionItem having a d:DateTimeDomainReference or a d:DateTimeDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomainReference</text:p>
      </table:table-cell>
@@ -2416,10 +2505,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the type of a d:NumericDomainReference</text:p>
+      <text:p>Getting the type of a d:NumericDomainReference.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:NumericDomain</text:p>
      </table:table-cell>
@@ -2431,10 +2521,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the type of a d:NumericDomain</text:p>
+      <text:p>Getting the type of a d:NumericDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:NumericDomainReference or d:NumericDomain]</text:p>
      </table:table-cell>
@@ -2446,10 +2537,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the type of a d:QuestionItem having a d:NumericDomainReference or a d:NumericDomain</text:p>
+      <text:p>Getting the type of a d:QuestionItem having a d:NumericDomainReference or a d:NumericDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:TextDomain</text:p>
      </table:table-cell>
@@ -2461,10 +2553,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the type of a d:TextDomain</text:p>
+      <text:p>Getting the type of a d:TextDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:TextDomain]</text:p>
      </table:table-cell>
@@ -2476,14 +2569,15 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the type of a d:QuestionItem having a d:TextDomain</text:p>
+      <text:p>Getting the type of a d:QuestionItem having a d:TextDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" table:number-columns-repeated="3"/>
-     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:DateTimeDomainReference</text:p>
      </table:table-cell>
@@ -2495,10 +2589,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the format of a d:DateTimeDomainReference</text:p>
+      <text:p>Getting the format of a d:DateTimeDomainReference.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>d:DateTimeDomain</text:p>
      </table:table-cell>
@@ -2510,10 +2605,11 @@
      </table:table-cell>
      <table:table-cell table:style-name="Default"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the format of a d:DateTimeDomain</text:p>
+      <text:p>Getting the format of a d:DateTimeDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:DateTimeDomainReference or d:DateTimeDomain]</text:p>
      </table:table-cell>
@@ -2525,10 +2621,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the format of a d:QuestionItem having a d:DateTimeDomainReference or a d:DateTimeDomain</text:p>
+      <text:p>Getting the format of a d:QuestionItem having a d:DateTimeDomainReference or a d:DateTimeDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:TextDomain</text:p>
      </table:table-cell>
@@ -2540,10 +2637,11 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the format of a d:TextDomain</text:p>
+      <text:p>Getting the format of a d:TextDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:QuestionItem[d:TextDomain]</text:p>
      </table:table-cell>
@@ -2555,12 +2653,14 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the format of a d:QuestionItem having a d:TextDomain</text:p>
+      <text:p>Getting the format of a d:QuestionItem having a d:TextDomain.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:number-columns-repeated="4"/>
      <table:table-cell table:style-name="Default"/>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2572,7 +2672,14 @@
      <table:table-cell office:value-type="float" office:value="1" calcext:value-type="float">
       <text:p>1</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Default case for this function.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2584,41 +2691,16 @@
      <table:table-cell office:value-type="float" office:value="1" calcext:value-type="float">
       <text:p>1</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="2"/>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Default case for this function.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>r:Label[not(parent::l:CodeList[ancestor::d:GridDimension[@displayLabel=&apos;false&apos;]])]</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-label</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>.</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>lang-choice</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the label depending on the lang-choice for each r:Label</text:p>
-     </table:table-cell>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>r:Label[parent::l:CodeList[ancestor::d:GridDimension[@displayLabel=&apos;false&apos;]]]</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-label</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>string(&apos;&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>No label when @displayLabel=&apos;false&apos;</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>l:Code[parent::l:CodeList]</text:p>
      </table:table-cell>
@@ -2628,13 +2710,14 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>@levelNumber</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce2"/>
+     <table:table-cell table:style-name="ce8"/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the level of a l:Code when it has no other code as parent</text:p>
+      <text:p>Getting the level of a l:Code when it has no parent CodeList.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="5"/>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2648,17 +2731,69 @@
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Getting the minimum required of a d:StructuredMixedGridResponseDomain using the d:Roster/@minimumRequired attribute</text:p>
+      <text:p>Getting the minimum required associated to a d:StructuredMixedGridResponseDomain when there is no maximumAllowed attribute.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
-    <table:table-row table:style-name="ro2" table:number-rows-repeated="1048399">
-     <table:table-cell table:number-columns-repeated="5"/>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1" table:number-rows-repeated="41">
-     <table:table-cell table:number-columns-repeated="5"/>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>*[(ends-with(name(),&apos;Domain&apos;) or ends-with(name(),&apos;DomainReference&apos;)) and ancestor::d:QuestionItem]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-container</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;question&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return a string describing the significant ancestor of a ResponseDomain or a ResponseDomainReference.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>*[(ends-with(name(),&apos;Domain&apos;) or ends-with(name(),&apos;DomainReference&apos;)) and ancestor::d:QuestionGrid]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-container</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;grid&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return a string describing the significant ancestor of a ResponseDomain or a ResponseDomainReference.</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+      <text:p>d:QuestionItem</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-container</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;question&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return a string describing the significant ancestor of a QuestionItem (itself here).</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro3" table:number-rows-repeated="1048395">
+     <table:table-cell table:number-columns-repeated="1024"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1" table:number-rows-repeated="44">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="5"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
    </table:table>
    <table:named-expressions/>
