@@ -259,7 +259,11 @@
         <xsl:sequence select="d:GridDimension[@rank='1']//l:Code[not(descendant::l:Code)]"/>
     </xsl:template>
 
-    <!-- Getting the number of levels of a d:GridDimension element -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting the virtual 'levels' in a d:GridDimension.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:GridDimension" mode="enoddi:get-levels">
         <xsl:variable name="levels">
             <xsl:for-each select="d:CodeDomain/r:CodeListReference/l:CodeList//l:CodeList[r:Label]">
@@ -273,7 +277,11 @@
         <xsl:sequence select="$levels/*"/>
     </xsl:template>
 
-    <!-- Getting the title line depending on an index number -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting a title line depending on an index number within a d:QuestionGrid.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:QuestionGrid" mode="enoddi:get-title-line">
         <xsl:param name="index" tunnel="yes" as="xs:integer"/>
         <!-- Counting the labels located at the top of the referenced list (if they exist, they should not be taken into account)-->
@@ -296,7 +304,11 @@
         />
     </xsl:template>
 
-    <!-- Getting the table line depending on an index number -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting a table line depending on an index number within a d:QuestionGrid.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:QuestionGrid" mode="enoddi:get-table-line">
         <xsl:param name="index" tunnel="yes"/>
         <xsl:variable name="codes">
@@ -319,8 +331,11 @@
         </xsl:for-each>
     </xsl:template>
 
-    <!-- Getting the table line depending on an index number on d:QuestionGrid elements not having a @maximumAllowed attribute -->
-    <!-- in their d:Roster descendant -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting a table line depending on an index number within a d:QuestionGrid elements not having a @maximumAllowed attribute in their d:Roster.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]"
         mode="enoddi:get-table-line">
         <xsl:param name="index" tunnel="yes"/>
@@ -332,7 +347,11 @@
         </xsl:for-each>
     </xsl:template>
 
-    <!-- Getting the table line for an l:Code element -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting a table line for an l:Code.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="l:Code" mode="enoddi:get-table-line">
         <xsl:if test="parent::l:Code">
             <xsl:variable name="first-parent-code-id">
@@ -345,7 +364,11 @@
         <xsl:sequence select="."/>
     </xsl:template>
 
-    <!-- For codes belonging to a 1-dimension of several levels -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting the colspan for l:Code belonging to a 1-dimension of several levels.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template
         match="l:Code[max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList | ancestor::l:Code))>1]"
         mode="enoddi:get-colspan" priority="1">
@@ -397,8 +420,12 @@
         <xsl:value-of select="max(parent::l:CodeList//l:Code[not(l:Code)]/count(ancestor::l:Code))+1-$label-or-no"/>
     </xsl:template>
     
-
-    <!--Concerning the columns, when l:Code has a l:Code (representing a box dispatched in sub-boxes), we get the number of children l:Code -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting rowspan for the line labels (1st dimension). It depends on the depth level.</xd:p>
+            <xd:p>When l:Code has a l:Code (representing a box dispatched in sub-boxes), we get the number of children l:Code</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='1'] and l:Code]"
         mode="enoddi:get-rowspan" priority="1">
         <xsl:value-of select="count(descendant::l:Code[not(l:Code)])"/>
@@ -411,8 +438,12 @@
         priority="1">
         <xsl:value-of select="count(parent::l:CodeList//l:Code)"/>
     </xsl:template>
-
-    <!-- For the line labels (2nd dimension), as we did previously, we calculate the depth level -->
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting rowspan for the line labels (2nd dimension). It depends on the depth level.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='2']]" mode="enoddi:get-rowspan"
         priority="1">
         <xsl:value-of
@@ -420,13 +451,22 @@
         />
     </xsl:template>
 
-    <!--Getting colspan for d:NoDataByDefinition elements -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting colspan for d:NoDataByDefinition elements.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:NoDataByDefinition" mode="enoddi:get-colspan" priority="1">
         <xsl:value-of
             select="string(1+number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum)-number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum))"
         />
     </xsl:template>
-
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For a given element, return a set of the Instruction ids which are dependent of the said.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="*" mode="enoddi:get-computation-items" as="xs:string *">
         <xsl:variable name="id">
             <xsl:value-of select="enoddi:get-id(.)"/>
@@ -449,6 +489,11 @@
         </xsl:for-each>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For a given element, return a set of the Sequence ids which are dependent of the said element regarding their hideable property.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="*" mode="enoddi:get-hideable-then" as="xs:string *">
         <xsl:variable name="id">
             <xsl:value-of select="enoddi:get-id(.)"/>
@@ -459,6 +504,11 @@
         </xsl:for-each>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For a given element, return a set of the Sequence ids which are dependent of the said element regarding their deactivatable property.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="*" mode="enoddi:get-deactivatable-then" as="xs:string *">
         <xsl:variable name="id">
             <xsl:value-of select="enoddi:get-id(.)"/>
@@ -469,7 +519,11 @@
         </xsl:for-each>
     </xsl:template>
 
-    <!-- Getting controls for module type sequence elements -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Get the concatenate formula of all ComputationItem controls for a given module.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']" mode="enoddi:get-control">
         <xsl:variable name="controls">
             <xsl:for-each select=".//d:Instruction[ancestor::d:ComputationItem]">
@@ -490,6 +544,11 @@
         <xsl:value-of select="$result"/>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Get the formula to know when a module is hidden or not.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']"
         mode="enoddi:get-hideable-command">
         <xsl:variable name="filters">
@@ -511,7 +570,11 @@
         <xsl:value-of select="$result"/>
     </xsl:template>
 
-    <!-- Getting the link of a l:Variable depending on a id -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Get the formula to calculate a Variable.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="l:Variable" mode="enoddi:get-variable-calculation">
         <xsl:variable name="id">
             <xsl:apply-templates select="." mode="enoddi:get-id"/>
