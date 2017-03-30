@@ -2,7 +2,9 @@ package fr.insee.eno.preprocessing;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.InputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,9 +31,9 @@ public class DDIPreprocessor implements Preprocessor {
 						+ Constants.UTIL_DDI_DEREFERENCING_XSL + " -Parameters : " + Constants.SUB_TEMP_FOLDER);
 		
 		saxonService.transformDereferencing(
-				inputFile, 
+				FileUtils.openInputStream(inputFile), 
 				Constants.DDI_DEREFERENCING_XSL,
-				Constants.TEMP_NULL_TMP,
+				FileUtils.openOutputStream(Constants.TEMP_NULL_TMP),
 				Constants.SUB_TEMP_FOLDER); //FIXME 4th param should be a parameters file (?!!?).
 
 		// CLEANING
@@ -58,32 +60,35 @@ public class DDIPreprocessor implements Preprocessor {
 		logger.debug("Cleaning : -Input : " + cleaningInput + " -Output : " + cleaningOutput + " -Stylesheet : "
 				+ Constants.UTIL_DDI_CLEANING_XSL);
 		saxonService.transform(
-				new File(cleaningInput),
+				FileUtils.openInputStream(new File(cleaningInput)),
 				Constants.UTIL_DDI_CLEANING_XSL, 
-				new File(cleaningOutput));
+				FileUtils.openOutputStream(new File(cleaningOutput)));
 
 		// TITLING
 		// titlinginput = cleaningoutput
 
 		String outputTitling = null;
 
+		InputStream parametersFileStream;
 		// If no parameters file was provided : loading the default one
 		// Else : using the provided one
-		if (parametersFile == null) {			
-			parametersFile = Constants.PARAMETERS_FILE;			
+		if (parametersFile == null) {
+			logger.debug("Using default parameters");
+			parametersFileStream = Constants.PARAMETERS_FILE;			
+		} else {
+			logger.debug("Using provided parameters");
+			parametersFileStream = FileUtils.openInputStream(parametersFile);
 		}
-
-		logger.debug("Loading Parameters.xml located in : " + parametersFile);
 
 		outputTitling = FilenameUtils.removeExtension(cleaningInput) + Constants.FINAL_EXTENSION;
 
 		logger.debug("Titling : -Input : " + cleaningOutput + " -Output : " + outputTitling + " -Stylesheet : "
-				+ Constants.UTIL_DDI_TITLING_XSL + " -Parameters : " + parametersFile);
+				+ Constants.UTIL_DDI_TITLING_XSL + " -Parameters : " + (parametersFile == null ? "Default parameters": "Provided parameters"));
 		saxonService.transformTitling(
-				new File(cleaningOutput),
+				FileUtils.openInputStream(new File(cleaningOutput)),
 				Constants.UTIL_DDI_TITLING_XSL,
-				new File(outputTitling),
-				parametersFile);
+				FileUtils.openOutputStream(new File(outputTitling)),
+				parametersFileStream);
 
 		logger.debug("DDIPreprocessing : END");
 		return new File(outputTitling);

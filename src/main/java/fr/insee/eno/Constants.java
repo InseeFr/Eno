@@ -1,9 +1,13 @@
 package fr.insee.eno;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,6 +19,7 @@ import org.apache.logging.log4j.Logger;
  *
  */
 public final class Constants {
+	
 	
 	private static final Logger logger = LogManager.getLogger(Constants.class);
 
@@ -32,40 +37,43 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_FOLDER = "/xslt/transformations";
 	public static final String CONFIG_FOLDER = "/config";
 	public static final String INPUTS_FOLDER = "/xslt/inputs";
-	public static final File LABEL_FOLDER = getResourceFileFromPath("/lang/fr");
+	public static final File LABEL_FOLDER = getFileFromUrl(Constants.class.getResource("/lang/fr"));
+	
+	// ----- Ref
+	public static final String PARAMETERS_XML = "parameters.xml";
 	
 	// ----- Files
-	public static final File DDI_DEREFERENCING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
-	public static final File PARAMETERS_FILE = getResourceFileFromPath("/parameters.xml");
-	public static final File UTIL_DDI_TITLING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/titling.xsl");
-	public static final File UTIL_DDI_CLEANING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/cleaning.xsl");
-	public static final File UTIL_FODS_PREFORMATTING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/fods/preformatting.xsl");
-	public static final File UTIL_XSL_INCORPORATION_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/xsl/incorporation.xsl");
-	public static final File UTIL_DDI_DEREFERENCING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
-	public static final File BROWSING_TEMPLATE_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/fr/browsing.xsl");	
-	public static final File PROPERTIES_FILE = getResourceFileFromPath(CONFIG_FOLDER + "/ddi2fr.xml");
-	public static final File TRANSFORMATIONS_DDI2FR_DDI2FR_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr.xsl");
-	public static final File TRANSFORMATIONS_DDI2FR_DRIVERS_FODS = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.fods");
-	public static final File TRANSFORMATIONS_DDI2FR_DRIVERS_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.xsl");
-	public static final File TRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS = getResourceFileFromPath(TRANSFORMATIONS_FOLDER	+ "/ddi2fr/functions.fods");
-	public static final File TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/functions.xsl");
-	public static final File TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.fods");
-	public static final File TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.xsl");
-	public static final File TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr-fixed.xsl");
-	public static final File INPUTS_DDI_FUNCTIONS_FODS = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/functions.fods");
-	public static final File INPUTS_DDI_FUNCTIONS_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/functions.xsl");
-	public static final File INPUTS_DDI_TEMPLATES_FODS = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/templates.fods");
-	public static final File INPUTS_DDI_TEMPLATES_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/templates.xsl");
-	public static final File INPUTS_DDI_SOURCE_FIXED_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/source-fixed.xsl");
-	public static final File INPUTS_DDI_SOURCE_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/source.xsl");
-	public static final File FODS_2_XML_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/fods2xml.xsl");
-	public static final File XML_2_XSL_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/xml2xsl.xsl");
+	public static final InputStream DDI_DEREFERENCING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
+	public static final InputStream PARAMETERS_FILE = getResourceFileFromPath("/" + PARAMETERS_XML);
+	public static final InputStream UTIL_DDI_TITLING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/titling.xsl");
+	public static final InputStream UTIL_DDI_CLEANING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/cleaning.xsl");
+	public static final InputStream UTIL_FODS_PREFORMATTING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/fods/preformatting.xsl");
+	public static final InputStream UTIL_XSL_INCORPORATION_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/xsl/incorporation.xsl");
+	public static final InputStream UTIL_DDI_DEREFERENCING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
+	public static final InputStream BROWSING_TEMPLATE_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/fr/browsing.xsl");	
+	public static final InputStream PROPERTIES_FILE = getResourceFileFromPath(CONFIG_FOLDER + "/ddi2fr.xml");
+	public static final InputStream TRANSFORMATIONS_DDI2FR_DDI2FR_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr.xsl");
+	public static final InputStream TRANSFORMATIONS_DDI2FR_DRIVERS_FODS = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.fods");
+	public static final InputStream TRANSFORMATIONS_DDI2FR_DRIVERS_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.xsl");
+	public static final InputStream TRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS = getResourceFileFromPath(TRANSFORMATIONS_FOLDER	+ "/ddi2fr/functions.fods");
+	public static final InputStream TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/functions.xsl");
+	public static final InputStream TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.fods");
+	public static final InputStream TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.xsl");
+	public static final InputStream TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr-fixed.xsl");
+	public static final InputStream INPUTS_DDI_FUNCTIONS_FODS = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/functions.fods");
+	public static final InputStream INPUTS_DDI_FUNCTIONS_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/functions.xsl");
+	public static final InputStream INPUTS_DDI_TEMPLATES_FODS = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/templates.fods");
+	public static final InputStream INPUTS_DDI_TEMPLATES_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/templates.xsl");
+	public static final InputStream INPUTS_DDI_SOURCE_FIXED_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/source-fixed.xsl");
+	public static final InputStream INPUTS_DDI_SOURCE_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/source.xsl");
+	public static final InputStream FODS_2_XML_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/fods2xml.xsl");
+	public static final InputStream XML_2_XSL_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/xml2xsl.xsl");
 	
 	// ---------- Temporary file system
 	
 	// ----- Folders
 	public static final String TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "Eno";
-	//Used for Cleaning
+	
 	public static final File SUB_TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp");
 	
 	// ----- Files
@@ -80,12 +88,12 @@ public final class Constants {
 	/** Generic file getter from classpath 
 	 * @return the file or null when not found.
 	 * */
-	private static File getResourceFileFromPath(String path) {
+	private static InputStream getResourceFileFromPath(String path) {
 		logger.debug("Loading " + path);
 		try {
-			return Paths.get(Constants.class.getResource(path).toURI()).toFile();
-		} catch (URISyntaxException e) {
-			logger.error("Error when loading to a file");
+			return Constants.class.getResourceAsStream(path);
+		} catch (Exception e) {
+			logger.error("Error when loading file");
 			return null;
 		}
 	}
@@ -93,6 +101,17 @@ public final class Constants {
 	/** Generic getter for files or directories */
 	private static File getFileOrDirectoryFromPath(String path) {
 		return Paths.get(path).toFile();
+	}
+	
+	private static File getFileFromUrl(URL url) {
+		File file = null;
+	    try {
+	        file = new File(url.toURI());
+	    } catch (URISyntaxException e) {
+	        file = new File(url.getPath());
+	    } finally {
+	        return file;
+	    }
 	}
 	
 	// TODO Under this comment are the legacy references to files and directories that eventually will be deleted.

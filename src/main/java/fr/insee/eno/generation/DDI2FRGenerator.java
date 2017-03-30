@@ -2,6 +2,7 @@ package fr.insee.eno.generation;
 
 import java.io.File;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,11 +39,11 @@ public class DDI2FRGenerator implements Generator {
 				+ Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL);
 		logger.debug("-Parameters : " + surveyName + " | " + formNameFolder + " | " + Constants.PROPERTIES_FILE);
 		saxonService.transformDdi2frBasicForm(
-				finalInput,
+				FileUtils.openInputStream(finalInput),
 				Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL,
-				new File(outputBasicForm),
+				FileUtils.openOutputStream(new File(outputBasicForm)),
 				surveyName,
-				new File(formNameFolder),
+				FileUtils.openInputStream(new File(formNameFolder)),
 				Constants.PROPERTIES_FILE,
 				Constants.LABEL_FOLDER);
 
@@ -53,11 +54,11 @@ public class DDI2FRGenerator implements Generator {
 				+ Constants.BROWSING_TEMPLATE_XSL);
 		logger.debug("-Parameters : " + surveyName + " | " + formNameFolder + " | " + Constants.PROPERTIES_FILE);
 		saxonService.transformDdi2frBasicForm(
-				new File(outputBasicForm),
+				FileUtils.openInputStream(new File(outputBasicForm)),
 				Constants.BROWSING_TEMPLATE_XSL,
-				new File(outputForm),
+				FileUtils.openOutputStream(new File(outputForm)),
 				surveyName,
-				new File(formNameFolder),
+				FileUtils.openInputStream(new File(formNameFolder)),
 				Constants.PROPERTIES_FILE,
 				Constants.LABEL_FOLDER);
 

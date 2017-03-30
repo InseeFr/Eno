@@ -1,6 +1,9 @@
 package fr.insee.eno.transform.xsl;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -9,6 +12,8 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import fr.insee.eno.Constants;
 
 /**
  * Main Saxon Service used to perform XSLT transformations
@@ -33,7 +38,7 @@ public class XslTransformation {
 	 * @throws Exception
 	 *             : Mainly if the input/output files path are incorrect
 	 */
-	public void xslTransform(Transformer transformer, File xmlInput, File xmlOutput) throws Exception {
+	public void xslTransform(Transformer transformer, InputStream xmlInput, OutputStream xmlOutput) throws Exception {
 		logger.debug("Starting xsl transformation -Input : " + xmlInput + " -Output : " + xmlOutput);
 		transformer.transform(new StreamSource(xmlInput), new StreamResult(xmlOutput));
 	}
@@ -51,7 +56,7 @@ public class XslTransformation {
 	 *             : if the factory couldn't be found or if the paths are
 	 *             incorrect
 	 */
-	public void transform(File input, File xslSheet, File output) throws Exception {
+	public void transform(InputStream input, InputStream xslSheet, OutputStream output) throws Exception {
 		logger.debug("Using the basic transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
@@ -73,13 +78,13 @@ public class XslTransformation {
 	 *             : if the factory couldn't be found or if the paths are
 	 *             incorrect
 	 */
-	public void transformIncorporation(File input, File xslSheet, File output, File generatedFileParameter)
+	public void transformIncorporation(InputStream input, InputStream xslSheet, OutputStream output, InputStream generatedFileParameter)
 			throws Exception {
 		logger.debug("Using the incorporation transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setParameter(XslParameters.INCORPORATION_GENERATED_FILE, generatedFileParameter.toURI().toString());
+		transformer.setParameter(XslParameters.INCORPORATION_GENERATED_FILE, generatedFileParameter);
 		xslTransform(transformer, input, output);
 	}
 
@@ -98,7 +103,7 @@ public class XslTransformation {
 	 *             : if the factory couldn't be found or if the paths are
 	 *             incorrect
 	 */
-	public void transformDereferencing(File input, File xslSheet, File output, File outputFolderParameter)
+	public void transformDereferencing(InputStream input, InputStream xslSheet, OutputStream output, File outputFolderParameter)
 			throws Exception {
 		logger.debug("Using the dereferencing transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
@@ -123,12 +128,14 @@ public class XslTransformation {
 	 *             : if the factory couldn't be found or if the paths are
 	 *             incorrect
 	 */
-	public void transformTitling(File input, File xslSheet, File output, File parametersFileParameter)
+	public void transformTitling(InputStream input, InputStream xslSheet, OutputStream output, InputStream parametersFileParameter)
 			throws Exception {
 		logger.debug("Using the titling transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setParameter(XslParameters.TITLING_PARAMETERS_FILE, parametersFileParameter.toURI().toString());
+		transformer.setParameter(
+				XslParameters.TITLING_PARAMETERS_FILE, 
+				new URI("classpath:" + Constants.PARAMETERS_XML));
 		xslTransform(transformer, input, output);
 	}
 
@@ -153,15 +160,15 @@ public class XslTransformation {
 	 *             : if the factory couldn't be found or if the paths are
 	 *             incorrect
 	 */
-	public void transformDdi2frBasicForm(File input, File xslSheet, File output, String campaignParameter,
-			File modelParameter, File propertiesFileParameter, File labelFolder) throws Exception {
+	public void transformDdi2frBasicForm(InputStream input, InputStream xslSheet, OutputStream output, String campaignParameter,
+			InputStream modelParameter, InputStream propertiesFileParameter, File labelFolder) throws Exception {
 		logger.debug("Using the DDI to XForms transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
 		transformer.setParameter(XslParameters.DDI2FR_CAMPAIGN, campaignParameter);
 		transformer.setParameter(XslParameters.DDI2FR_MODEL, modelParameter);
-		transformer.setParameter(XslParameters.DDI2FR_PROPERTIES_FILE, propertiesFileParameter.toURI().toString());
+		transformer.setParameter(XslParameters.DDI2FR_PROPERTIES_FILE, propertiesFileParameter);
 		transformer.setParameter(XslParameters.DDI2FR_LABELS_FOLDER, labelFolder);
 		xslTransform(transformer, input, output);
 	}
