@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Eno" basedir="." default="full">
+<project name="enoNonRegression" basedir="." default="full">
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
     
-    <!-- Script properties Capgemini -->
+    <!-- Properties for this non regression script -->
     <property name="survey-name" value="simpsons"/>
     <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>    
     
@@ -24,7 +24,7 @@
 	<!--************************TARGETS TO GENERATE A SURVEY *****************************-->
 
     <target name="ddi2fr">
-        <!-- From the -final suffixed file, this target will create a orbeon readable questionnaire -->
+        <!-- From the -final suffixed file, this target will create an orbeon readable questionnaire -->
         <basename file="${file}" property="file-name" suffix=".tmp"/>
         <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
             global="true"/>
@@ -48,7 +48,6 @@
             out="${root-folder}/target/${survey-name}/${form-name}/form/form.xhtml"
             style="${xslt.home}/util/fr/browsing.xsl" force="true"
             classpath="${saxon.jar}">
-            <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
             <param name="labels-folder"
                 expression="${lang-folder}/fr"/>
         </xslt>

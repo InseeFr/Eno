@@ -1,4 +1,6 @@
-﻿<Properties>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file contains common properties used by the ddi2fr transformation  -->
+<Properties>
     <Css>
         <Folder>css</Folder>
         <Common>common.css</Common>

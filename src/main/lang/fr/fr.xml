@@ -1,1 +1,56 @@
-<Language xml:lang='fr'/>
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xml:lang="fr">
+    <Hint>
+        <Number>Exemple : </Number>
+        <Date>Date au format JJ/MM/AAAA</Date>
+    </Hint>
+    <Alert>
+        <Text>Vous devez saisir une valeur correcte</Text>
+        <Number>
+            <Integer>Vous devez saisir un nombre entier compris entre</Integer>
+            <Decimal>
+                <Beginning>Vous devez utiliser le point comme séparateur de décimale, sans espace,
+                    et saisir un nombre compris entre</Beginning>
+                <DecimalCondition>(avec au plus</DecimalCondition>
+                <Digit>chiffre</Digit>
+                <End>derrière le séparateur ".")</End>
+            </Decimal>
+        </Number>
+        <Date>Entrez une date valide</Date>
+        <Duration>
+            <Hours>Le nombre d'heures doit être compris entre 0 et 99.</Hours>
+            <Minutes>Le nombre de minutes doit être compris entre 0 et 59.</Minutes>
+        </Duration>
+    </Alert>
+    <And>et</And>
+    <Plural>s</Plural>
+    <AddLine>Ajouter une ligne</AddLine>
+    <Browsing>
+        <Beginning>DEBUT</Beginning>
+        <GenericBeginningText>&lt;p&gt;Page de commencement générique, peut être surchargée ou supprimée en passant une feuille xslt supplémentaire.&lt;/p&gt;</GenericBeginningText>
+        <End>FIN</End>
+        <GenericEndText>&lt;p&gt;Page de fin générique, peut être surchargée ou supprimée en passant une feuille xslt supplémentaire.&lt;/p&gt;</GenericEndText>
+        <Progress>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</Progress>
+        <Start>Commencer</Start>
+        <Previous>Retour</Previous>
+        <Next>Enregistrer et continuer</Next>
+        <Send>Envoyer</Send>
+        <ConfirmationMessage>Votre questionnaire a bien été expédié le</ConfirmationMessage>
+        <FatalError>Problème lors de l'enregistrement/l'expédition de vos réponses.</FatalError>
+        <Correct>Corriger</Correct>
+        <Continue>Poursuivre</Continue>
+        <GoBack>Revenir à la dernière page accédée</GoBack>
+        <GoToFirstPage>Aller à la première page</GoToFirstPage>
+        <WelcomeBack>Bienvenue</WelcomeBack>
+        <Warning>Avertissement</Warning>
+        <Error>Erreur bloquante</Error>
+        <WelcomeBackText>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour
+            poursuivre votre saisie dans le questionnaire, que souhaitez-vous faire ?&lt;/p&gt;</WelcomeBackText>
+        <WarningText>&lt;p&gt;Certains champs de cette page sont indiqués en
+            avertissement.&lt;/p&gt;&lt;p&gt;Souhaitez-vous corriger ces avertissements avant de
+            poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;</WarningText>
+        <ErrorText>&lt;p&gt;Certains champs de cette page sont indiqués en
+            erreur.&lt;/p&gt;&lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le
+            remplissage de ce questionnaire.&lt;/p&gt;</ErrorText>
+    </Browsing>
+</Language>

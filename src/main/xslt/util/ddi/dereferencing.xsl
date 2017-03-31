@@ -5,10 +5,18 @@
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:g="ddi:group:3_2"
     xmlns:s="ddi:studyunit:3_2" version="2.0">
 
-    <!-- This xsl stylesheet will be applied to ddi input files (part of the dereferencing target) -->
-    <!-- Clearing all the pointers reference in those input files -->
+    <xd:doc scope="stylesheet">
+        <xd:desc>
+            <xd:p>This stylesheet is used to dereference DDI.</xd:p>
+        </xd:desc>
+    </xd:doc>
 
-    <!-- Parameters given in the build-non-regression.xml -->
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The output folder in which the dereferenced files (one for each main sequence) are generated.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:param name="output-folder"/>
 
     <!-- The output file generated will be xml type -->
@@ -18,11 +26,12 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Root template, applying every template of every child</xd:p>
+            <xd:p>Root template :</xd:p>
+            <xd:p>Successively, some group of elements is used to dereference some other group of elements.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="/">
-        <!-- The references used to dereference -->
+        <!-- The references used to dereference at the beginning -->
         <xsl:variable name="references">
             <xsl:element name="g:ResourcePackage">
                 <xsl:copy-of select="//l:CodeListScheme"/>
@@ -63,7 +72,7 @@
             <xsl:copy-of select="$dereferenced//d:QuestionScheme"/>
         </xsl:variable>
 
-        <!-- The d:ControlConstructScheme are dereferenced -->
+        <!-- The main sequences of the DDI are dereferenced -->
         <xsl:variable name="dereferenced">
             <xsl:element name="g:ResourcePackage">
                 <xsl:apply-templates
@@ -109,7 +118,7 @@
     <xd:doc>
         <xd:desc>
             <xd:p>Default template for every element and every attribute, simply copying to the
-                output file</xd:p>
+                output result.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="node() | @*">
@@ -120,14 +129,14 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Not retrieving the variables that correspond to a question</xd:p>
+            <xd:p>Not retrieving the variables that correspond to a question.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="l:Variable[r:QuestionReference or r:SourceParameterReference]" priority="1"/>
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Only retrieving the variables not corresponding to a question</xd:p>
+            <xd:p>Only retrieving the variables which are not corresponding to a question.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="l:Variable[not(r:QuestionReference or r:SourceParameterReference)]"
@@ -139,7 +148,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Default template for every element that corresponds to a reference</xd:p>
+            <xd:p>Default template for every element that corresponds to a reference.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="node()[ends-with(name(), 'Reference') and not(parent::r:Binding)]/r:ID">
@@ -152,7 +161,7 @@
         />
     </xsl:template>
 
-<xd:doc>
+    <xd:doc>
         <xd:desc>
             <xd:p>Instruction are not allowed in Category for DDI 3.2. This template allows to insert tooltips into arrays' labels</xd:p>
         </xd:desc>

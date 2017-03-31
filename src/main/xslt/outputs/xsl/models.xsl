@@ -7,19 +7,18 @@
     xmlns:enoxsl="http://xml.insee.fr/apps/eno/xsl"
     version="2.0">
 
-    <!-- This xsl stylesheet is used in the xml2xsl target (imported by xml2xsl.xsl)-->
-    <!-- It creates the different templates, associates the appropriate match from what was defined is the xml.tmp file, -->
-    <!-- adds the documentation and associates the functions (modes) -->
-
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p>Generation of XSL!</xd:p>
+            <xd:p>An xslt stylesheet who transforms an input into XSL through generic driver templates.</xd:p>
+            <xd:p>The real input is mapped with the drivers.</xd:p>
+            <xd:p>The generated XSL follows some Eno patterns.</xd:p>
         </xd:desc>
     </xd:doc>
 
     <xd:doc>
         <xd:desc>
-            <xd:p>The default element to match</xd:p>
+            <xd:p>The default element to match :</xd:p>
+            <xd:p>it creates the root of an xslt stylesheet.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="Sheet" mode="model">
@@ -35,16 +34,19 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p>A template</xd:p>
-            <xd:p>Calls a function to get the element in charge of the documentation creation.</xd:p>
+            <xd:p>A driver to generate an Eno xsl template.</xd:p>
             <xd:p>Calls a function to get the xpath to match.</xd:p>
-            <xd:p>Calls a function to get the driver to launch linked to the xpath.</xd:p>
+            <xd:p>Calls a function to get the driver to launch, linked to the xpath.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="Template" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
+        <!-- Call of this template to write comments -->
+        <xsl:call-template name="documentation">
+            <xsl:with-param name="context" select="$source-context"/>
+        </xsl:call-template>
         <xsl:text>&#xA;</xsl:text>
+        <!-- The generated template follows some Eno pattern rules -->
         <xsl:element name="xsl:template">
             <xsl:attribute name="match" select="normalize-space(enoxsl:get-xpath($source-context))"/>
             <xsl:attribute name="mode" select="'source'"/>
@@ -69,16 +71,20 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p>A function</xd:p>
-            <xd:p>Calls a function to get element in charge of the documentation creation.</xd:p>
+            <xd:p>A driver to link a function (on the output side) to another one (on the input side).</xd:p>
             <xd:p>Calls a function that gets the name of the function.</xd:p>
-            <xd:p>Calls a function to get the value of the linked function (source side).</xd:p>
+            <xd:p>Calls a function to get the value of the linked function (input side).</xd:p>
+            <xd:p>Calls a function to get the parameters of the function.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="TransitionFunction" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
+        <!-- Call of this template to write comments -->
+        <xsl:call-template name="documentation">
+            <xsl:with-param name="context" select="$source-context"/>
+        </xsl:call-template>
         <xsl:text>&#xA;</xsl:text>
+        <!-- The generated function follows some Eno pattern rules -->
         <xsl:element name="xsl:function">
             <xsl:attribute name="name" select="normalize-space(enoxsl:get-output-function($source-context))"/>
             <xsl:element name="xsl:param">
@@ -112,13 +118,13 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p>Not supported function</xd:p>
-            <xd:p>A not yet supported function.</xd:p>
+            <xd:p>A driver to generate something for the output function (returns empty text value) when there is no input function linked to it.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="NotSupportedFunction" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:text>&#xA;</xsl:text>
+        <!-- The generated function follows some Eno pattern rules -->
         <xsl:element name="xsl:function">
             <xsl:attribute name="name" select="normalize-space(enoxsl:get-output-function($source-context))"/>
             <xsl:element name="xsl:param">
@@ -140,56 +146,38 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p>A simple implementation of a source function</xd:p>
+            <xd:p>An implementation of a source function.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="SimpleImplementation" mode="model">
+    <xsl:template match="Implementation" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
+        <!-- Call of this template to write comments -->
+        <xsl:call-template name="documentation">
+            <xsl:with-param name="context" select="$source-context"/>
+        </xsl:call-template>
         <xsl:text>&#xA;</xsl:text>
+        
+        <!-- The generated template follows some Eno pattern rules -->
         <xsl:element name="xsl:template">
             <xsl:attribute name="match" select="normalize-space(enoxsl:get-xpath($source-context))"/>
-            <xsl:attribute name="mode" select="normalize-space(enoxsl:get-mode-xpath($source-context))"/>
-            <xsl:element name="xsl:value-of">
-                <xsl:attribute name="select" select="normalize-space(enoxsl:get-match($source-context))"/>
-            </xsl:element>
-        </xsl:element>
-        <xsl:text>&#xA;</xsl:text>
-    </xsl:template>
-    
-    <xd:doc>
-        <xd:desc>
-            <xd:p>A complex implementation of a source function</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="ComplexImplementation" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
-        <xsl:text>&#xA;</xsl:text>
-        <xsl:element name="xsl:template">
-            <xsl:attribute name="match" select="normalize-space(enoxsl:get-xpath($source-context))"/>
-            <xsl:attribute name="mode" select="normalize-space(enoxsl:get-mode-xpath($source-context))"/>
-            <xsl:element name="xsl:apply-templates">
-                <xsl:attribute name="select" select="normalize-space(enoxsl:get-match($source-context))"/>
-                <xsl:attribute name="mode" select="normalize-space(enoxsl:get-match-mode($source-context))"/>
-            </xsl:element>
-        </xsl:element>
-        <xsl:text>&#xA;</xsl:text>
-    </xsl:template>
-    
-    <xd:doc>
-        <xd:desc>
-            <xd:p>A source function implementation that won't return anything</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="EmptyImplementation" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
-        <xsl:text>&#xA;</xsl:text>
-        <xsl:element name="xsl:template">
-            <xsl:attribute name="match" select="normalize-space(enoxsl:get-xpath($source-context))"/>
-            <xsl:attribute name="mode" select="normalize-space(enoxsl:get-mode-xpath($source-context))"/>
-            <xsl:element name="xsl:text"/>
+            <xsl:attribute name="mode" select="normalize-space(enoxsl:get-xpath-mode($source-context))"/>
+            
+            <xsl:variable name="select" select="normalize-space(enoxsl:get-match($source-context))"></xsl:variable>
+            <xsl:variable name="mode" select="normalize-space(enoxsl:get-match-mode($source-context))" as="xs:string"/>
+            
+            <xsl:choose>
+                <xsl:when test="$mode=''">
+                    <xsl:element name="xsl:value-of">
+                        <xsl:attribute name="select" select="$select"/>
+                    </xsl:element>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:element name="xsl:apply-templates">
+                        <xsl:attribute name="select" select="$select"/>
+                        <xsl:attribute name="mode" select="$mode"/>
+                    </xsl:element>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:element>
         <xsl:text>&#xA;</xsl:text>
     </xsl:template>
@@ -204,8 +192,12 @@
         <xsl:variable name="function-name">
             <xsl:value-of select="normalize-space(enoxsl:get-function($source-context))"/>
         </xsl:variable>
-        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
+        <!-- Call of this template to write comments -->
+        <xsl:call-template name="documentation">
+            <xsl:with-param name="context" select="$source-context"/>
+        </xsl:call-template>
         <xsl:text>&#xA;</xsl:text>
+        <!-- The generated function follows some Eno pattern rules -->
         <xsl:element name="xsl:function">
             <xsl:attribute name="name" select="$function-name"/>
             <xsl:variable name="type" select="enoxsl:get-as($source-context)"/>
@@ -244,15 +236,18 @@
     <xd:doc>
         <xd:desc>
             <xd:p>A template used to get children</xd:p>
-            <xd:p>Calls a function that gets the element in charge of the documentation creation.</xd:p>
             <xd:p>Calls a function that gets the xpath to match (parent).</xd:p>
             <xd:p>Calls a function that gets the xpath returned (children).</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="GetChildren" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:comment select="enoxsl:get-documentation($source-context)"/>
+        <!-- Call of this template to write comments -->
+        <xsl:call-template name="documentation">
+            <xsl:with-param name="context" select="$source-context"/>
+        </xsl:call-template>
         <xsl:text>&#xA;</xsl:text>
+        <!-- The generated template follows some Eno pattern rules -->
         <xsl:element name="xsl:template">
             <xsl:attribute name="match" select="normalize-space(enoxsl:get-parent($source-context))"/>
             <xsl:attribute name="mode" select="'eno:child-fields'"/>
@@ -263,6 +258,23 @@
             </xsl:element>
         </xsl:element>
         <xsl:text>&#xA;</xsl:text>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>A template to write oXygen documentation elements with their content.</xd:p>
+            <xd:p>Calls a function to get the documentation content.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template name="documentation">
+        <xsl:param name="context"/>
+        <xsl:element name="xd:doc">
+            <xsl:element name="xd:desc">
+                <xsl:element name="xd:p">
+                    <xsl:value-of select="enoxsl:get-documentation($context)"/>
+                </xsl:element>
+            </xsl:element>
+        </xsl:element>
     </xsl:template>
 
 </xsl:stylesheet>

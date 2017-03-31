@@ -2,135 +2,137 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
-    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner" xmlns:d="ddi:datacollection:3_2"
+    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
+    xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
+    xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
 
-    <!-- Base file of the upcoming ddi2fr.xsl stylesheet (that will be used in the ddi2fr target to create basic-form.tmp) -->
-
-    <!-- Importing the different files used in the process -->
-    <!-- source.xsl : the xsl created by merging inputs/ddi/functions.xsl, source-fixed.xsl and templates.xsl -->
-    <!-- models.xsl : Orbeon related transformations -->
-    <!-- lib.xsl : used to parse a file with defined constraints -->
+    <!-- Importing the different resources -->
     <xsl:import href="../../inputs/ddi/source.xsl"/>
     <xsl:import href="../../outputs/fr/models.xsl"/>
     <xsl:import href="../../lib.xsl"/>
+    
+    <xd:doc scope="stylesheet">
+        <xd:desc>
+            <xd:p>This stylesheet is used to transform a DDI input into an Xforms form (containing orbeon form runner adherences).</xd:p>
+        </xd:desc>
+    </xd:doc>
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
     <xsl:strip-space elements="*"/>
     
-    <!-- Parameters defined in build-non-regression.xml -->
-    <xsl:param name="parameters-file"/>
-    <xsl:variable name="parameters" select="doc($parameters-file)"/>
-    
-    <xsl:param name="labels-folder"/>
-    
-    <xsl:param name="labels-resource">
-        <xsl:sequence select="eno:build-labels-resource($labels-folder,enofr:get-form-languages(root()))"/>
-    </xsl:param>
-
-    <xd:doc scope="stylesheet">
+    <xd:doc>
         <xd:desc>
-            <xd:p>Transforms DDI into Orbeon Form Runner!</xd:p>
+            <xd:p>The parameter file used by the stylesheet.</xd:p>
         </xd:desc>
     </xd:doc>
+    <xsl:param name="parameters-file"/>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The parameters are charged as an xml tree.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="parameters" select="doc($parameters-file)"/>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The folder containing label resources in different languages.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:param name="labels-folder"/>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>A variable is created to build a set of label resources in different languages.</xd:p>
+            <xd:p>Only the resources in languages already present in the DDI input are charged.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="labels-resource">
+        <xsl:sequence select="eno:build-labels-resource($labels-folder,enofr:get-form-languages(//d:Sequence[d:TypeOfSequence/text()='template']))"/>
+    </xsl:variable>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Root template :</xd:p>
+            <xd:p>The transformation starts with the main Sequence.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="/">
-        <xsl:apply-templates select="/" mode="source"/>
+        <xsl:apply-templates select="//d:Sequence[d:TypeOfSequence/text()='template']" mode="source"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This xforms function is used to get an xpath corresponding to a dynamic text.</xd:p>
+            <xd:p>It can be associated with different modes depending of the text type.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:get-calculate-text">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="text-type"/>
+        <xsl:choose>
+            <xsl:when test="$text-type='label'">
+                <xsl:apply-templates select="$context" mode="enoddi2fr:get-calculate-label"/>
+            </xsl:when>
+            <xsl:when test="$text-type='alert'">
+                <xsl:apply-templates select="$context" mode="enoddi2fr:get-calculate-alert"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Instructions having a ConditionalText are matched for this mode only if there aren't inside a ComputationItem.</xd:p>
+            <xd:p>But the treatment (using the enoddi2fr:get-calculate-text mode) is the same whether they are or are not inside a ComputationItem.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Instruction[descendant::d:ConditionalText and not(ancestor::d:ComputationItem)]" mode="enoddi2fr:get-calculate-label">
+        <xsl:apply-templates select="." mode="enoddi2fr:get-calculate-text"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Instruction having a ConditionalText are matched for this mode only if there are inside a ComputationItem.</xd:p>
+            <xd:p>But the treatment (using the enoddi2fr:get-calculate-text mode) is the same whether they are or are not inside a ComputationItem.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Instruction[descendant::d:ConditionalText and ancestor::d:ComputationItem]" mode="enoddi2fr:get-calculate-alert">
+        <xsl:apply-templates select="." mode="enoddi2fr:get-calculate-text"/>
     </xsl:template>
 
-    <!-- Getting this here, actually dependent of the input and output language -->
-    <!-- Getting conditionned text for d:Instruction elements having a r:SourceParameterReference descendant and no  -->
-    <!-- d:ComputationItem ancestor  -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This mode is only used on Instructions having a ConditionalText.</xd:p>
+            <xd:p>Each dynamic string of the conditional text is surrounded by 'ø' characters.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template
-        match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and not(ancestor::d:ComputationItem)]"
-        mode="enoddi:get-conditionned-text" priority="1">
+        match="d:Instruction[descendant::d:ConditionalText]"
+        mode="enoddi2fr:get-calculate-text" priority="1">
         <xsl:variable name="condition">
             <xsl:copy-of select="descendant::d:ConditionalText"/>
         </xsl:variable>
         <xsl:variable name="text">
             <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
         </xsl:variable>
+        <!-- The result is an xpath concat of different values -->
         <xsl:variable name="result">
             <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($text,'ø')">
-                <xsl:text>,</xsl:text>
-                <xsl:choose>
-                    <xsl:when
-                        test=".=$condition/d:ConditionalText/r:SourceParameterReference/r:OutParameter/r:ID/text()">
-                        <xsl:text>instance('fr-form-instance')//</xsl:text>
-                        <xsl:value-of select="."/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>'</xsl:text>
-                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select="replace(.,'''','''''')"/>
-                        <xsl:text>'</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
-            <xsl:text>)</xsl:text>
-        </xsl:variable>
-        <xsl:value-of select="$result"/>
-    </xsl:template>
-
-    <!-- Getting this here, actually dependent of the input and ouput language -->
-    <!-- Getting conditionned text for d:Instruction elements having a r:SourceParameterReference descendant and a  -->
-    <!-- d:ComputationItem ancestor  -->
-    <xsl:template
-        match="d:Instruction[descendant::d:ConditionalText[r:SourceParameterReference] and ancestor::d:ComputationItem]"
-        mode="enoddi:get-conditionned-text-bis" priority="1">
-        <xsl:variable name="condition">
-            <xsl:copy-of select="descendant::d:ConditionalText"/>
-        </xsl:variable>
-        <xsl:variable name="text">
-            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
-        </xsl:variable>
-        <xsl:variable name="result">
-            <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($text,'ø')">
-                <xsl:text>,</xsl:text>
-                <xsl:choose>
-                    <xsl:when
-                        test=".=$condition/d:ConditionalText/r:SourceParameterReference/r:OutParameter/r:ID/text()">
-                        <xsl:text>instance('fr-form-instance')//</xsl:text>
-                        <xsl:value-of select="."/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>'</xsl:text>
-                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select="replace(.,'''','''''')"/>
-                        <xsl:text>'</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
-            <xsl:text>)</xsl:text>
-        </xsl:variable>
-        <xsl:value-of select="$result"/>
-    </xsl:template>
-
-    <!-- Getting the conditionned text for d:Instruction elements having a d:ConditionalText/d:Expression descendant -->
-    <!-- and no d:ComputationItem ancestor -->
-    <xsl:template
-        match="d:Instruction[descendant::d:ConditionalText[d:Expression] and not(ancestor::d:ComputationItem)]"
-        mode="enoddi:get-conditionned-text" priority="1">
-        <xsl:variable name="condition">
-            <xsl:copy-of select="descendant::d:ConditionalText"/>
-        </xsl:variable>
-        <xsl:variable name="text">
-            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
-        </xsl:variable>
-        <xsl:variable name="result">
-            <xsl:text>concat(''</xsl:text>
+            <!-- The conditional text is split with the character 'ø' -->
             <xsl:for-each select="tokenize($text,'ø')[not(.='')]">
                 <xsl:text>,</xsl:text>
                 <xsl:choose>
+                    <!-- If the split string has a match in the following elements, it means it is a dynamic part of the text, it will be in the instance of the generated xforms -->
                     <xsl:when
-                        test="contains($condition/d:ConditionalText/d:Expression/r:Command/r:CommandContent/text(),.)">
+                        test=".=$condition/d:ConditionalText/r:SourceParameterReference/r:OutParameter/r:ID/text()
+                        or contains($condition/d:ConditionalText/d:Expression/r:Command/r:CommandContent/text(),.)">
                         <xsl:text>instance('fr-form-instance')//</xsl:text>
                         <xsl:value-of select="."/>
                     </xsl:when>
+                    <!-- if not, it's a static text which is returned -->
                     <xsl:otherwise>
                         <xsl:text>'</xsl:text>
                         <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
@@ -144,41 +146,12 @@
         <xsl:value-of select="$result"/>
     </xsl:template>
 
-    <!-- Getting the conditionned text for d:Instruction elements having a d:ConditionalText/d:Expression descendant -->
-    <!-- and a d:ComputationItem ancestor -->
-    <xsl:template
-        match="d:Instruction[descendant::d:ConditionalText[d:Expression] and ancestor::d:ComputationItem]"
-        mode="enoddi:get-conditionned-text-bis" priority="1">
-        <xsl:variable name="condition">
-            <xsl:copy-of select="descendant::d:ConditionalText"/>
-        </xsl:variable>
-        <xsl:variable name="text">
-            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
-        </xsl:variable>
-        <xsl:variable name="result">
-            <xsl:text>concat(''</xsl:text>
-            <xsl:for-each select="tokenize($text,'ø')[not(.='')]">
-                <xsl:text>,</xsl:text>
-                <xsl:choose>
-                    <xsl:when
-                        test="contains($condition/d:ConditionalText/d:Expression/r:Command/r:CommandContent/text(),.)">
-                        <xsl:text>instance('fr-form-instance')//</xsl:text>
-                        <xsl:value-of select="."/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>'</xsl:text>
-                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select="replace(.,'''','''''')"/>
-                        <xsl:text>'</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
-            <xsl:text>)</xsl:text>
-        </xsl:variable>
-        <xsl:value-of select="$result"/>
-    </xsl:template>
-
-    <!--Linking the Xforms hint getter function to multiple DDI getter functions -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
+            <xd:p>It uses different DDI functions to do this job.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enofr:get-hint">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
@@ -200,11 +173,11 @@
                     </xsl:variable>
                     <!-- If it is number, we display this hint -->
                     <xsl:if test="$type='number'">
-                        <xsl:value-of select="concat('Exemple : ',enoddi:get-maximum($context))"/>
+                        <xsl:value-of select="concat($labels-resource/Languages/Language[@xml:lang=$language]/Hint/Number,enoddi:get-maximum($context))"/>
                     </xsl:if>
                     <!-- If it is a date, we display this hint -->
                     <xsl:if test="$type='date'">
-                        <xsl:text>Date au format JJ/MM/AAAA</xsl:text>
+                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Hint/Date"/>
                     </xsl:if>
                 </xsl:if>
             </xsl:when>
@@ -215,7 +188,12 @@
         </xsl:choose>
     </xsl:function>
     
-    <!--Linking the Xforms alert getter function to multiple DDI getter functions -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This function returns an xforms alert for the context on which it is applied.</xd:p>
+            <xd:p>It uses different DDI functions to do this job.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enofr:get-alert">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
@@ -238,7 +216,7 @@
                 <!-- If it is a 'text' and a format is defined, we use a generic sentence as an alert -->
                 <xsl:if test="$type='text'">
                     <xsl:if test="not($format='')">
-                        <xsl:text>Vous devez saisir une valeur correcte</xsl:text>
+                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Text"/>
                     </xsl:if>
                 </xsl:if>
                 <!-- If it is a number, we look for infos about the format and deduce a message for the alert element -->
@@ -255,33 +233,41 @@
                     <xsl:variable name="beginning">
                         <xsl:choose>
                             <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
-                                <xsl:text>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre</xsl:text>
+                                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Beginning"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:text>Vous devez saisir un nombre entier compris entre</xsl:text>
+                                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Integer"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:variable>
                     <xsl:variable name="end">
                         <xsl:choose>
                             <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
-                                <xsl:value-of select="concat('(avec au plus ',$number-of-decimals,' chiffre',if (number($number-of-decimals)&gt;1) then 's' else '',' derrière le séparateur &quot;.&quot;)')"/>
+                                <xsl:value-of select="' '
+                                    ,concat($labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/DecimalCondition
+                                    ,' '
+                                    ,$number-of-decimals
+                                    ,' '
+                                    ,$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Digit
+                                    ,if (number($number-of-decimals)&gt;1) then $labels-resource/Languages/Language[@xml:lang=$language]/Plural else ''
+                                    ,' '
+                                    ,$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/End)"/>
                             </xsl:when>
                         </xsl:choose>
                     </xsl:variable>
-                    <xsl:value-of select="concat($beginning,' ',$minimum, ' et ',$maximum,' ', $end)"/>
+                    <xsl:value-of select="concat($beginning,' ',$minimum, ' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',$maximum, $end)"/>
                 </xsl:if>
                 <!-- If it is a 'date', we use a generic sentence as an alert -->
                 <xsl:if test="$type='date'">
-                    <xsl:text>Entrez une date valide</xsl:text>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
                 </xsl:if>
                 <!-- In those cases, we use specific messages as alert messages -->
                 <xsl:if test="$type='duration'">
                     <xsl:if test="$format='hh'">
-                        <xsl:text>Le nombre d'heures doit être compris entre 0 et 99.</xsl:text>
+                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Hours"/>
                     </xsl:if>
                     <xsl:if test="$format='mm'">
-                        <xsl:text>Le nombre de minutes doit être compris entre 0 et 59.</xsl:text>
+                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Minutes"/>
                     </xsl:if>
                 </xsl:if>
             </xsl:when>
@@ -291,7 +277,13 @@
         </xsl:choose>
     </xsl:function>
     
-    <!--Linking the DDI languages getter function to the form languages getter function-->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This function retrieves the languages to appear in the generated Xforms.</xd:p>
+            <xd:p>Those languages can be specified in a parameters file on a questionnaire level.</xd:p>
+            <xd:p>If not, it will get the languages defined in the DDI input.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enofr:get-form-languages">
         <xsl:param name="context" as="item()"/>
         <xsl:choose>

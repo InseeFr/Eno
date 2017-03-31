@@ -5,10 +5,18 @@
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi" xmlns:xhtml="http://www.w3.org/1999/xhtml"
     version="2.0">
 
-    <!-- This xsl stylesheet will be applied to the -cleaned suffix file (having the questionnaire's name) -->
-    <!-- The goal here is to add numbers to questions, while identifying the different depth (subQuestions...) -->
+    <xd:doc scope="stylesheet">
+        <xd:desc>
+            <xd:p>This xslt stylesheet is used to add numbering to DDI elements, by identifying the different depths.</xd:p>
+            <xd:p>It uses a parameter file on a questionnaire level to do this job.</xd:p>
+        </xd:desc>
+    </xd:doc>
 
-    <!-- Parameter given in build-non-regression.xml -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The parameter file used by the stylesheet.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:param name="parameters-file"/>
 
     <!-- The output file generated will be xml type -->
@@ -16,16 +24,32 @@
     
     <xsl:strip-space elements="*"/>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The involved parameters are charged as an xml tree.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:variable name="style">
         <xsl:copy-of select="document($parameters-file)/Parameters/Title"/>
     </xsl:variable>
-    <xsl:variable name="number-free-seq" select="$style/Title/Sequence/NumberFreeSeq"/>
-    <xsl:variable name="number-free-filter" select="$style/Title/Question/NotNumberedLastFilter"/>
-
-    <!-- Namespace required for xsl documentation -->
+    
     <xd:doc>
         <xd:desc>
-            <xd:p>Root template, applying all the children templates</xd:p>
+            <xd:p></xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="number-free-seq" select="$style/Title/Sequence/NumberFreeSeq"/>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p></xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="number-free-filter" select="$style/Title/Question/NotNumberedLastFilter"/>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Root template.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="/">
@@ -35,7 +59,7 @@
     <xd:doc>
         <xd:desc>
             <xd:p>Default template for every element and every attribute, getting to the
-                child</xd:p>
+                child.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="node() | @*" mode="#all">
@@ -46,10 +70,10 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template used to add numbers to sequences</xd:p>
+            <xd:p>Template used to add numbers to sequences.</xd:p>
+            <xd:p>For every 'module', 'submodule' or 'group' type d:Sequence, prefixing the title.</xd:p>
         </xd:desc>
     </xd:doc>
-    <!-- For every 'module', 'submodule' or 'group' type d:Sequence, prefixing the title -->
     <xsl:template
         match="d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']/r:Label">
         <xsl:variable name="level" select="parent::d:Sequence/d:TypeOfSequence"/>
@@ -83,13 +107,13 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template used to add numbers to questions</xd:p>
+            <xd:p>Template used to add numbers to questions.</xd:p>
+            <xd:p>For every d:LiteralText wrapped in a d:QuestionText.</xd:p>
         </xd:desc>
     </xd:doc>
-    <!-- For every d:LiteralText wrapped in a d:QuestionText -->
+    <!--  -->
     <xsl:template match="d:QuestionText/d:LiteralText">
         <!-- The goal is to calculate the prefix, concatenation of element's numbers -->
-
         <xsl:variable name="question-seq-level">
             <xsl:choose>
                 <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='group']">group</xsl:when>
@@ -147,7 +171,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template used to get recursively the sequence's number</xd:p>
+            <xd:p>Template used to get recursively the sequence's number.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:Sequence" mode="calculate-number">
@@ -182,7 +206,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Function used to identify if 2 lists have common elements</xd:p>
+            <xd:p>Function used to identify if 2 lists have common elements.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:function name="enoddi:is-common">
@@ -204,14 +228,13 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Function used to identify if a question is a subQuestion</xd:p>
+            <xd:p>Function used to identify if a question is a sub-question.</xd:p>
+            <xd:p>It depends of a filter having the following features :</xd:p>
+            <xd:p>- is based on the directly previous question</xd:p>
+            <xd:p>- isn't the last element of it's actual sequence</xd:p>
+            <xd:p>This sub-question can depend on one or more of these filters, we just verify that there are more than 0.</xd:p>
         </xd:desc>
     </xd:doc>
-    <!-- Used to determine if a question is a sub-question, meaning that it depends of a filter having the following features :
-            - Is based on the directly previous question
-            - Isn't the last element of it's actual sequence
-    This sub-question can depend on one or more of these filters, we just verify that there are more than 0 -->
-
     <xsl:function name="enoddi:is-subquestion">
         <xsl:param name="context"/>
         <xsl:param name="seq-level"/>
@@ -237,10 +260,10 @@
     <xd:doc>
         <xd:desc>
             <xd:p>Template used to add code before labels from dropdown lists and tables
-                headers</xd:p>
+                headers.</xd:p>
+            <xd:p>When l:Code is within a d:GridDimension where attributes @displyCode and displayLabel are true : adding labels.</xd:p>
         </xd:desc>
     </xd:doc>
-    <!-- When l:Code is within a d:GridDimension where attributes @displyCode and displayLabel are true : adding labels -->
     <xsl:template
         match="l:Code[ancestor::d:GridDimension[@displayCode='true' and @displayLabel='true']]
         /r:CategoryReference/l:Category/r:Label/r:Content">
@@ -254,6 +277,11 @@
         </xsl:copy>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p></xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="xhtml:p" mode="modif-title" priority="2">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
@@ -262,7 +290,11 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- When we match a node starting by xhtml, we only process the first child node with modif-title mode -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>When we match a node starting by xhtml, we only process the first child node with modif-title mode.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="*[starts-with(name(),'xhtml')]" mode="modif-title">
         <xsl:param name="prefix" tunnel="yes"/>
         <xsl:value-of select="$prefix"/>
@@ -272,6 +304,11 @@
         </xsl:copy>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p></xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="xhtml:span[@class='block']" mode="modif-title" priority="2">
         <xsl:param name="prefix" tunnel="yes"/>
         <xsl:copy>
@@ -281,7 +318,11 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- Adding the prefix -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Adding the prefix.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="text()" mode="modif-title" priority="1">
         <xsl:param name="prefix" tunnel="yes"/>
         <xsl:value-of select="concat($prefix,.)"/>

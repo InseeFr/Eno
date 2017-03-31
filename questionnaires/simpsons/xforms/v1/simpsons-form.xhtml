@@ -14,7 +14,9 @@
                 xxf:noscript-support="true">
          <xf:instance id="fr-form-instance">
             <form>
-               <Beginning/>
+               <Beginning>
+                  <GenericBeginningText/>
+               </Beginning>
                <INSEE-SIMPSONS-SEQ-1>
                   <INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1/>
                   <INSEE-SIMPSONS-QOP-1-1-1/>
@@ -80,7 +82,9 @@
                   <INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1/>
                   <INSEE-SIMPSONS-QOP-5-3-1/>
                </INSEE-SIMPSONS-SEQ-4>
-               <End/>
+               <End>
+                  <GenericEndText/>
+               </End>
                <Util>
                   <CurrentSection>1</CurrentSection>
                   <CurrentSectionName/>
@@ -93,7 +97,11 @@
             <LoopModels/>
          </xf:instance>
          <xf:bind id="fr-form-instance-binds" ref="instance('fr-form-instance')">
-            <xf:bind id="beginning-bind" name="beginning" ref="Beginning"/>
+            <xf:bind id="beginning-bind" name="beginning" ref="Beginning">
+               <xf:bind id="generic-beginning-text-bind"
+                        name="generic-beginning-text"
+                        ref="GenericBeginningText"/>
+            </xf:bind>
             <xf:bind id="INSEE-SIMPSONS-SEQ-1-bind"
                      name="INSEE-SIMPSONS-SEQ-1"
                      ref="INSEE-SIMPSONS-SEQ-1">
@@ -318,7 +326,11 @@
                         name="INSEE-SIMPSONS-QOP-5-3-1"
                         ref="INSEE-SIMPSONS-QOP-5-3-1"/>
             </xf:bind>
-            <xf:bind id="end-bind" name="end" ref="End"/>
+            <xf:bind id="end-bind" name="end" ref="End">
+               <xf:bind id="generic-end-text-bind"
+                        name="generic-end-text"
+                        ref="GenericEndText"/>
+            </xf:bind>
             <xf:bind id="current-section-name-bind"
                      name="current-section-name"
                      ref="Util/CurrentSectionName"
@@ -344,6 +356,9 @@
                   <Beginning>
                      <label>DEBUT</label>
                   </Beginning>
+                  <GenericBeginningText>
+                     <label>&lt;p&gt;Page de commencement générique, peut être surchargée ou supprimée en passant une feuille xslt supplémentaire.&lt;/p&gt;</label>
+                  </GenericBeginningText>
                   <INSEE-SIMPSONS-SEQ-1>
                      <label>I - General knowledge on the series</label>
                      <hint/>
@@ -410,7 +425,7 @@
                      <label>➡ 1-b. How old is Bart?</label>
                      <hint>Exemple : 120</hint>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 120 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 120</alert>
                   </INSEE-SIMPSONS-QOP-2-1-2-1>
                   <INSEE-SIMPSONS-QG-2-1-3>
                      <label>&lt;p&gt;&lt;span class="block"&gt;➡ 1-c. What are the names of animals that had the simpsons
@@ -586,61 +601,61 @@
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-4-1-1>
                   <INSEE-SIMPSONS-QOP-4-1-2>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-4-1-2>
                   <INSEE-SIMPSONS-QOP-4-1-3>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-4-1-3>
                   <INSEE-SIMPSONS-QOP-4-1-4>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-4-1-4>
                   <INSEE-SIMPSONS-QOP-4-1-5>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-4-1-5>
                   <INSEE-SIMPSONS-QOP-4-1-6>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
                   </INSEE-SIMPSONS-QOP-4-1-6>
                   <INSEE-SIMPSONS-QOP-4-1-7>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
                   </INSEE-SIMPSONS-QOP-4-1-7>
                   <INSEE-SIMPSONS-QOP-4-1-8>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
                   </INSEE-SIMPSONS-QOP-4-1-8>
                   <INSEE-SIMPSONS-QOP-4-1-9>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
                   </INSEE-SIMPSONS-QOP-4-1-9>
                   <INSEE-SIMPSONS-QOP-4-1-10>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100</alert>
                   </INSEE-SIMPSONS-QOP-4-1-10>
                   <INSEE-SIMPSONS-SEQ-4>
                      <label>IV - Springfield</label>
@@ -652,7 +667,7 @@
                      <label>➡ 1. What is the population of Springfield?</label>
                      <hint>Exemple : 999999999</hint>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-1-1>
                   <INSEE-SIMPSONS-QG-5-2>
                      <label>➡ 2. Please, classify the population by age.</label>
@@ -706,31 +721,31 @@
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-2-1>
                   <INSEE-SIMPSONS-QOP-5-2-2>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-2-2>
                   <INSEE-SIMPSONS-QOP-5-2-3>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-2-3>
                   <INSEE-SIMPSONS-QOP-5-2-4>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-2-4>
                   <INSEE-SIMPSONS-QOP-5-2-5>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-2-5>
                   <INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1>
                      <label/>
@@ -798,9 +813,15 @@
                         <value>13</value>
                      </item>
                   </INSEE-SIMPSONS-QOP-5-3-1>
+                  <AddLine>
+                     <label>Ajouter une ligne</label>
+                  </AddLine>
                   <End>
                      <label>FIN</label>
                   </End>
+                  <GenericEndText>
+                     <label>&lt;p&gt;Page de fin générique, peut être surchargée ou supprimée en passant une feuille xslt supplémentaire.&lt;/p&gt;</label>
+                  </GenericEndText>
                   <Progress>
                      <label>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</label>
                   </Progress>
@@ -845,24 +866,27 @@
                   </Error>
                   <WelcomeBackText>
                      <label>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour
-                    poursuivre votre saisie dans le questionnaire, que souhaitez-vous faire
-                    ?&lt;/p&gt;</label>
+            poursuivre votre saisie dans le questionnaire, que souhaitez-vous faire ?&lt;/p&gt;</label>
                   </WelcomeBackText>
                   <WarningText>
                      <label>&lt;p&gt;Certains champs de cette page sont indiqués en
-                    avertissement.&lt;/p&gt;&lt;p&gt;Souhaitez-vous corriger ces avertissements
-                    avant de poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;</label>
+            avertissement.&lt;/p&gt;&lt;p&gt;Souhaitez-vous corriger ces avertissements avant de
+            poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;</label>
                   </WarningText>
                   <ErrorText>
                      <label>&lt;p&gt;Certains champs de cette page sont indiqués en
-                    erreur.&lt;/p&gt;&lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le
-                    remplissage de ce questionnaire.&lt;/p&gt;</label>
+            erreur.&lt;/p&gt;&lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le
+            remplissage de ce questionnaire.&lt;/p&gt;</label>
                   </ErrorText>
                </resource>
                <resource xml:lang="en">
                   <Beginning>
                      <label>BEGINNING</label>
                   </Beginning>
+                  <GenericBeginningText>
+                     <label>&lt;p&gt;Generic beginning page, can be overridden or removed by
+            processing your own xslt on the result.&lt;/p&gt;</label>
+                  </GenericBeginningText>
                   <INSEE-SIMPSONS-SEQ-1>
                      <label>I - General knowledge on the series</label>
                      <hint/>
@@ -878,9 +902,9 @@
                   </INSEE-SIMPSONS-SEQ-1-INSEE-SIMPSONS-IC-1>
                   <INSEE-SIMPSONS-QOP-1-1-1>
                      <label>➡ 1. When was the first episode of the simpsons?</label>
-                     <hint>Date au format JJ/MM/AAAA</hint>
+                     <hint>Date in JJ/MM/AAAA format</hint>
                      <help/>
-                     <alert>Entrez une date valide</alert>
+                     <alert>Type a valid date</alert>
                   </INSEE-SIMPSONS-QOP-1-1-1>
                   <INSEE-SIMPSONS-QOP-1-2-1>
                      <label>➡ 2. Who is the producer?</label>
@@ -927,9 +951,9 @@
                   </INSEE-SIMPSONS-QOP-2-1-1-1>
                   <INSEE-SIMPSONS-QOP-2-1-2-1>
                      <label>➡ 1-b. How old is Bart?</label>
-                     <hint>Exemple : 120</hint>
+                     <hint>Example : 120</hint>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 120 </alert>
+                     <alert>You shall type an integer number between 0 and 120</alert>
                   </INSEE-SIMPSONS-QOP-2-1-2-1>
                   <INSEE-SIMPSONS-QG-2-1-3>
                      <label>&lt;p&gt;&lt;span class="block"&gt;➡ 1-c. What are the names of animals that had the simpsons
@@ -1105,61 +1129,61 @@
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-4-1-1>
                   <INSEE-SIMPSONS-QOP-4-1-2>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-4-1-2>
                   <INSEE-SIMPSONS-QOP-4-1-3>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-4-1-3>
                   <INSEE-SIMPSONS-QOP-4-1-4>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-4-1-4>
                   <INSEE-SIMPSONS-QOP-4-1-5>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-4-1-5>
                   <INSEE-SIMPSONS-QOP-4-1-6>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100 </alert>
+                     <alert>You shall type an integer number between 0 and 100</alert>
                   </INSEE-SIMPSONS-QOP-4-1-6>
                   <INSEE-SIMPSONS-QOP-4-1-7>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100 </alert>
+                     <alert>You shall type an integer number between 0 and 100</alert>
                   </INSEE-SIMPSONS-QOP-4-1-7>
                   <INSEE-SIMPSONS-QOP-4-1-8>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100 </alert>
+                     <alert>You shall type an integer number between 0 and 100</alert>
                   </INSEE-SIMPSONS-QOP-4-1-8>
                   <INSEE-SIMPSONS-QOP-4-1-9>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100 </alert>
+                     <alert>You shall type an integer number between 0 and 100</alert>
                   </INSEE-SIMPSONS-QOP-4-1-9>
                   <INSEE-SIMPSONS-QOP-4-1-10>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 100 </alert>
+                     <alert>You shall type an integer number between 0 and 100</alert>
                   </INSEE-SIMPSONS-QOP-4-1-10>
                   <INSEE-SIMPSONS-SEQ-4>
                      <label>IV - Springfield</label>
@@ -1169,9 +1193,9 @@
                   </INSEE-SIMPSONS-SEQ-4>
                   <INSEE-SIMPSONS-QOP-5-1-1>
                      <label>➡ 1. What is the population of Springfield?</label>
-                     <hint>Exemple : 999999999</hint>
+                     <hint>Example : 999999999</hint>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-1-1>
                   <INSEE-SIMPSONS-QG-5-2>
                      <label>➡ 2. Please, classify the population by age.</label>
@@ -1225,31 +1249,31 @@
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-2-1>
                   <INSEE-SIMPSONS-QOP-5-2-2>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-2-2>
                   <INSEE-SIMPSONS-QOP-5-2-3>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-2-3>
                   <INSEE-SIMPSONS-QOP-5-2-4>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-2-4>
                   <INSEE-SIMPSONS-QOP-5-2-5>
                      <label/>
                      <hint/>
                      <help/>
-                     <alert>Vous devez saisir un nombre entier compris entre 0 et 999999999 </alert>
+                     <alert>You shall type an integer number between 0 and 999999999</alert>
                   </INSEE-SIMPSONS-QOP-5-2-5>
                   <INSEE-SIMPSONS-CI-4-2-INSEE-SIMPSONS-IW-1>
                      <label/>
@@ -1317,9 +1341,16 @@
                         <value>13</value>
                      </item>
                   </INSEE-SIMPSONS-QOP-5-3-1>
+                  <AddLine>
+                     <label>Add a line</label>
+                  </AddLine>
                   <End>
                      <label>END</label>
                   </End>
+                  <GenericEndText>
+                     <label>&lt;p&gt;Generic end page, can be overridden or removed by processing
+            your own xslt on the result.&lt;/p&gt;</label>
+                  </GenericEndText>
                   <Progress>
                      <label>&lt;p&gt;&lt;b&gt;Progress&lt;/b&gt;&lt;/p&gt;</label>
                   </Progress>
@@ -1363,18 +1394,16 @@
                      <label>Blocking error</label>
                   </Error>
                   <WelcomeBackText>
-                     <label>&lt;p&gt;You started filling the questionnaire. To continue, what do you wish
-                    to do ?&lt;/p&gt;</label>
+                     <label>&lt;p&gt;You started filling the questionnaire. To continue, what do you
+            wish to do ?&lt;/p&gt;</label>
                   </WelcomeBackText>
                   <WarningText>
-                     <label>&lt;p&gt;Some fields of this page are marked as
-                    warnings.&lt;/p&gt;&lt;p&gt;Do you wish to correct those warnings before going
-                    on filling the questionnaire ?&lt;/p&gt;</label>
+                     <label>&lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;&lt;p&gt;Do
+            you wish to correct those warnings before going on filling the questionnaire ?&lt;/p&gt;</label>
                   </WarningText>
                   <ErrorText>
                      <label>&lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;&lt;p&gt;You
-                    need to correct those warnings before going on filling the
-                    questionnaire.&lt;/p&gt;</label>
+            need to correct those warnings before going on filling the questionnaire.&lt;/p&gt;</label>
                   </ErrorText>
                </resource>
             </resources>
@@ -1424,10 +1453,10 @@
                      relevant="instance('fr-form-instance')/Util/CurrentSection='1'"
                      ref="Start"/>
             <xf:bind id="previous-bind"
-                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*))"
+                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;6)"
                      ref="Previous"/>
             <xf:bind id="next-bind"
-                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-1)"
+                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;5)"
                      ref="Next"/>
             <xf:bind id="send-bind"
                      ref="Send"
@@ -1435,7 +1464,7 @@
             <xf:bind id="progress-percent-bind"
                      name="progress-percent"
                      ref="ProgressPercent"
-                     calculate="if (number(instance('fr-form-instance')/Util/CurrentSection)=1) then '0' else (if (number(instance('fr-form-instance')/Util/CurrentSection)&gt;count(instance('fr-form-util')/Pages/*)-2) then '100' else round((number(instance('fr-form-instance')/Util/CurrentSection)-2  ) div (count(instance('fr-form-util')/Pages/*)-4)*100))"/>
+                     calculate="if (number(instance('fr-form-instance')/Util/CurrentSection)=1) then '0' else (if (number(instance('fr-form-instance')/Util/CurrentSection)&gt;5) then '100' else round((number(instance('fr-form-instance')/Util/CurrentSection) - 2) div (4)*100))"/>
             <xf:bind id="progress-bind" ref="Progress"/>
             <xf:bind id="page-top-bind" ref="PageTop"/>
             <xf:bind id="confirmation-message-bind"
@@ -1558,8 +1587,9 @@
                   <fr:section id="beginning-control" bind="beginning-bind" name="beginning">
                      <xf:label ref="$form-resources/Beginning/label"/>
                      <xhtml:div class="center">
-                        <xhtml:p>Generic beginning page, can be overridden or removed by
-                                processing your own xslt on the result.</xhtml:p>
+                        <xf:output id="generic-beginning-text-control" bind="generic-beginning-text-bind">
+                           <xf:label ref="$form-resources/GenericBeginningText/label" mediatype="text/html"/>
+                        </xf:output>
                      </xhtml:div>
                   </fr:section>
                </xf:case>
@@ -2344,8 +2374,9 @@
                   <fr:section id="end-control" bind="end-bind" name="end">
                      <xf:label ref="$form-resources/End/label"/>
                      <xhtml:div class="center">
-                        <xhtml:p>Generic end page, can be overridden or removed by processing
-                                your own xslt on the result.</xhtml:p>
+                        <xf:output id="generic-end-text-control" bind="generic-end-text-bind">
+                           <xf:label ref="$form-resources/GenericEndText/label" mediatype="text/html"/>
+                        </xf:output>
                         <xf:trigger id="send" bind="send-bind">
                            <xf:label ref="$form-resources/Send/label"/>
                            <xf:action ev:event="DOMActivate">
