@@ -59,7 +59,9 @@ public class XslTransformation {
 	public void transform(InputStream input, InputStream xslSheet, OutputStream output) throws Exception {
 		logger.debug("Using the basic transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		//transformer.setURIResolver(new ClasspathURIResolver());
 		xslTransform(transformer, input, output);
 	}
 
@@ -78,13 +80,13 @@ public class XslTransformation {
 	 *             : if the factory couldn't be found or if the paths are
 	 *             incorrect
 	 */
-	public void transformIncorporation(InputStream input, InputStream xslSheet, OutputStream output, InputStream generatedFileParameter)
+	public void transformIncorporation(InputStream input, InputStream xslSheet, OutputStream output, File generatedFileParameter)
 			throws Exception {
 		logger.debug("Using the incorporation transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setParameter(XslParameters.INCORPORATION_GENERATED_FILE, generatedFileParameter);
+		transformer.setParameter(XslParameters.INCORPORATION_GENERATED_FILE, generatedFileParameter.toURI());
 		xslTransform(transformer, input, output);
 	}
 

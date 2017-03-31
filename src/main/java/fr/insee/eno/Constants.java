@@ -1,13 +1,11 @@
 package fr.insee.eno;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,10 +25,7 @@ public final class Constants {
 
 	}
 	
-	// ----------------------------------------------- //
-	// TODO Instead of using static reference to a file system, adapt to use
-	
-	// ---------- Core resources
+	// ---------- Core resources: references to XSL, XML, etc. resources used to generate a questionnaire
 	
 	// ----- Folders
 	public static final String UTIL_FOLDER_PATH = "/xslt/util";
@@ -43,37 +38,47 @@ public final class Constants {
 	public static final String PARAMETERS_XML = "parameters.xml";
 	
 	// ----- Files
-	public static final InputStream DDI_DEREFERENCING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
-	public static final InputStream PARAMETERS_FILE = getResourceFileFromPath("/" + PARAMETERS_XML);
-	public static final InputStream UTIL_DDI_TITLING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/titling.xsl");
-	public static final InputStream UTIL_DDI_CLEANING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/cleaning.xsl");
-	public static final InputStream UTIL_FODS_PREFORMATTING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/fods/preformatting.xsl");
-	public static final InputStream UTIL_XSL_INCORPORATION_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/xsl/incorporation.xsl");
-	public static final InputStream UTIL_DDI_DEREFERENCING_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
-	public static final InputStream BROWSING_TEMPLATE_XSL = getResourceFileFromPath(UTIL_FOLDER_PATH + "/fr/browsing.xsl");	
-	public static final InputStream PROPERTIES_FILE = getResourceFileFromPath(CONFIG_FOLDER + "/ddi2fr.xml");
-	public static final InputStream TRANSFORMATIONS_DDI2FR_DDI2FR_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr.xsl");
-	public static final InputStream TRANSFORMATIONS_DDI2FR_DRIVERS_FODS = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.fods");
-	public static final InputStream TRANSFORMATIONS_DDI2FR_DRIVERS_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.xsl");
-	public static final InputStream TRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS = getResourceFileFromPath(TRANSFORMATIONS_FOLDER	+ "/ddi2fr/functions.fods");
-	public static final InputStream TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/functions.xsl");
-	public static final InputStream TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.fods");
-	public static final InputStream TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.xsl");
-	public static final InputStream TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr-fixed.xsl");
-	public static final InputStream INPUTS_DDI_FUNCTIONS_FODS = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/functions.fods");
-	public static final InputStream INPUTS_DDI_FUNCTIONS_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/functions.xsl");
-	public static final InputStream INPUTS_DDI_TEMPLATES_FODS = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/templates.fods");
-	public static final InputStream INPUTS_DDI_TEMPLATES_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/templates.xsl");
-	public static final InputStream INPUTS_DDI_SOURCE_FIXED_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/source-fixed.xsl");
-	public static final InputStream INPUTS_DDI_SOURCE_XSL = getResourceFileFromPath(INPUTS_FOLDER + "/ddi/source.xsl");
-	public static final InputStream FODS_2_XML_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/fods2xml.xsl");
-	public static final InputStream XML_2_XSL_XSL = getResourceFileFromPath(TRANSFORMATIONS_FOLDER + "/xml2xsl.xsl");
+	public static final InputStream DDI_DEREFERENCING_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
+	public static final InputStream PARAMETERS_FILE = getInputStreamFromPath("/" + PARAMETERS_XML);
+	public static final InputStream UTIL_DDI_TITLING_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/ddi/titling.xsl");
+	public static final InputStream UTIL_DDI_CLEANING_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/ddi/cleaning.xsl");
+	public static final String UTIL_FODS_PREFORMATTING_XSL = UTIL_FOLDER_PATH + "/fods/preformatting.xsl";
+	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
+	public static final InputStream UTIL_DDI_DEREFERENCING_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
+	public static final InputStream BROWSING_TEMPLATE_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/fr/browsing.xsl");	
+	public static final InputStream PROPERTIES_FILE = getInputStreamFromPath(CONFIG_FOLDER + "/ddi2fr.xml");
+	
+	// ---------- XSL generation
+	public static final InputStream TRANSFORMATIONS_DDI2FR_DDI2FR_XSL = getInputStreamFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr.xsl");
+	
+	public static final String TRANSFORMATIONS_DDI2FR_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.fods";
+	public static final String TRANSFORMATIONS_DDI2FR_DRIVERS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.xsl";
+	
+	public static final String TRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2fr/functions.fods";
+	public static final String TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/functions.xsl";
+	
+	public static final String TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.fods";
+	public static final String TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.xsl";
+	
+	public static final String TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr-fixed.xsl";
+	
+	// ---------- 
+	public static final String INPUTS_DDI_FUNCTIONS_FODS = INPUTS_FOLDER + "/ddi/functions.fods";
+	public static final String INPUTS_DDI_FUNCTIONS_XSL = INPUTS_FOLDER + "/ddi/functions.xsl";
+	public static final String INPUTS_DDI_TEMPLATES_FODS = INPUTS_FOLDER + "/ddi/templates.fods";
+	public static final String INPUTS_DDI_TEMPLATES_XSL = INPUTS_FOLDER + "/ddi/templates.xsl";
+	
+	public static final String INPUTS_DDI_SOURCE_FIXED_XSL = INPUTS_FOLDER + "/ddi/source-fixed.xsl";
+	public static final String INPUTS_DDI_SOURCE_XSL = INPUTS_FOLDER + "/ddi/source.xsl";
+	public static final String FODS_2_XML_XSL = TRANSFORMATIONS_FOLDER + "/fods2xml.xsl";
+	public static final String XML_2_XSL_XSL = TRANSFORMATIONS_FOLDER + "/xml2xsl.xsl";
 	
 	// ---------- Temporary file system
 	
 	// ----- Folders
 	public static final String TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "Eno";
 	
+	public static final File TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH);
 	public static final File SUB_TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp");
 	
 	// ----- Files
@@ -82,13 +87,20 @@ public final class Constants {
 	public static final File TEMP_XML_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/xml.tmp");
 	public static final File TEMP_TEMP_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp.tmp");
 	public static final File TEMP_TEMP_BIS_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp-bis.tmp");
-	
+	// Those files holds the XSL generated from FODS ; they will be then copied to resource directory when packaging to JAR
+	public static final File TRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/ddi2fr.xsl");
+	public static final File TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/tree-navigation.xsl");
+	public static final File INPUTS_DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/functions.xsl");
+	public static final File INPUTS_DDI_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/templates.xsl");
+	public static final File INPUTS_DDI_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/source.xsl");
 	
 	// ---------- Utilies
 	/** Generic file getter from classpath 
 	 * @return the file or null when not found.
 	 * */
-	private static InputStream getResourceFileFromPath(String path) {
+	public static InputStream getInputStreamFromPath(String path) {
 		logger.debug("Loading " + path);
 		try {
 			return Constants.class.getResourceAsStream(path);
