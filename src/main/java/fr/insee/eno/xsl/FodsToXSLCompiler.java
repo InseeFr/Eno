@@ -1,12 +1,10 @@
 package fr.insee.eno.xsl;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,23 +35,16 @@ public class FodsToXSLCompiler {
 	public static void main(String[] args) {
 
 		try {
-
 			cleaning();
-
-			logger.info("Fods to XSL: START");
-			logger.debug(FIVE_SPACES + "Fods2Xsl target called for each .fods file");
-
+			logger.info("Fods to XSL: START");			
 			// Fods2Xsl for /transformations/ddi/.fods files
 			generateDDI2FRDrivers();
 			generateDDI2FRFunctions();
 			generateDDI2FRTreeNavigation();
-
 			// Fods2Xsl for /output/ddi/.fods files
 			generateDDIFunctions();
-			generateDDITemplates();
-			
+			generateDDITemplates();			
 			logger.info("Fods2Xsl : xsl stylesheets created.");
-
 			// Incorporation target : creating ddi2fr.xsl
 			ddi2frIncorporationTarget();
 			logger.debug("Fods to XSL: END");
@@ -65,7 +56,7 @@ public class FodsToXSLCompiler {
 	}
 
 	/**
-	 * Be sure the temporary directories are cleaned.
+	 * Make sure the temporary directories are cleaned.
 	 * @throws IOException
 	 */
 	private static void cleaning() throws IOException {
@@ -83,7 +74,7 @@ public class FodsToXSLCompiler {
 		logger.debug(
 				FIVE_SPACES + 
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_FODS +
-				" -Output : " + Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL);
+				" -Output : " + Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP);
 		fods2XslTarget(
 				Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_FODS),
 				FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP));
