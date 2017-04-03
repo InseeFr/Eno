@@ -4,38 +4,37 @@
     xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enoxml="http://xml.insee.fr/apps/eno/xml"
     xmlns:enoxsl="http://xml.insee.fr/apps/eno/xsl" version="2.0">
 
-    <!-- xsl stylesheet applied to xml.tmp in the temporary process of xsl files creation (fods2xml then xml2xsl) -->
-    <!-- This stylesheet will read the xml.tmp, get the different informations required (with source.xsl) -->
-    <!-- models.xml will then use the different retrieved information to create the desired .xsl file -->
-    <!-- which can be drivers.xsl, templates.xsl... given the state of the build process -->
-    <!-- The content of this file (xml2xsl.xsl) will help linking the different elements with each other -->
-    <!-- Particularly by linking drivers to the different elements so that xsl/models.xsl can read it and -->
-    <!-- create to desired output file. -->
-    <!-- lib.xsl : used to parse a file with defined constraints -->
-
     <!-- Importing the different resources -->
     <xsl:import href="../inputs/xml/source.xsl"/>
     <xsl:import href="../outputs/xsl/models.xsl"/>
     <xsl:import href="../lib.xsl"/>
+
+    <xd:doc scope="stylesheet">
+        <xd:desc>
+            <xd:p>This stylesheet is used to transform a generic xml structure into xsl
+                stylesheet.</xd:p>
+        </xd:desc>
+    </xd:doc>
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
     <xsl:strip-space elements="*"/>
 
-    <xd:doc scope="stylesheet">
+    <xd:doc>
         <xd:desc>
-            <xd:p>Transforms XML into XSL!</xd:p>
+            <xd:p>Starting the transformation from xml by the 'Root' element.</xd:p>
         </xd:desc>
     </xd:doc>
-
     <xsl:template match="/">
-        <xsl:apply-templates select="/" mode="source"/>
+        <xsl:apply-templates select="Root" mode="source"/>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>Linking an xsl sheet to the root element of the xml file</xd:p>
-    </xd:desc>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The Root element is linked to the 'Sheet' driver.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="Root" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
@@ -45,13 +44,17 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>Linking the 'Driver' driver to a GenericElement element if the xpath is given and a
-            driver is linked.</xd:p>
-        <xd:p>This covers the case where we link an output driver to an input element</xd:p>
-    </xd:desc>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This specific template is used to generate xslt stylesheet for Eno :</xd:p>
+            <xd:p>the presence of those two elements means that the input xml comes from a
+                drivers.fods file.</xd:p>
+            <xd:p>So it is linked to the 'Template' driver :</xd:p>
+            <xd:p>it will connect an input Xpath to a output driver through a template.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template
-        match="GenericElement[DefinedElement[@name='Xpath']/text()!='' and DefinedElement[@name='Driver']]"
+        match="GenericElement[DefinedElement[@name='Xpath'] and DefinedElement[@name='Driver']]"
         mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
@@ -61,66 +64,40 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>Linking the simple implementation driver to a GenericElement element when it has : an
-            xpath, a match but no mode</xd:p>
-        <xd:p>This covers the case where we implement a function for a given source element, and we
-            only return this element's value</xd:p>
-    </xd:desc>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This specific template is used to generate xslt stylesheet for Eno :</xd:p>
+            <xd:p>the presence of those two elements means that the input xml comes from a
+                templates.fods file.</xd:p>
+            <xd:p>So it is linked to the 'Implementation' driver :</xd:p>
+            <xd:p>it will create a template for an input Xpath for a given input function
+                mode.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template
-        match="GenericElement[DefinedElement[@name='Xpath']/text()!='' and DefinedElement[@name='Match']/text()!='' and not(DefinedElement[@name='Match_Mode']/text()!='')]"
+        match="GenericElement[DefinedElement[@name='Xpath'] and DefinedElement[@name='Match']]"
         mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:apply-templates select="eno:append-empty-element('SimpleImplementation',$driver)"
+        <xsl:apply-templates select="eno:append-empty-element('Implementation',$driver)"
             mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>Linking the complex implementation driver to a GenericElement element when it has : an
-            xpath, a match and a mode. </xd:p>
-        <xd:p>This covers the case where we implement a function for a given source element, and we
-            return something more xomplex (using a mode)</xd:p>
-    </xd:desc>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This specific template is used to generate xslt stylesheet for Eno :</xd:p>
+            <xd:p>the presence of those two elements means that the input xml comes from a
+                functions.fods file (in transformations folder).</xd:p>
+            <xd:p>So it is linked to the 'TransitionFunction' driver :</xd:p>
+            <xd:p>it will generate an output function which will be linked to an unique input
+                function.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template
-        match="GenericElement[DefinedElement[@name='Xpath']/text()!='' and DefinedElement[@name='Match']/text()!='' and DefinedElement[@name='Match_Mode']/text()!='']"
-        mode="source">
-        <xsl:param name="driver" tunnel="yes">
-            <driver/>
-        </xsl:param>
-        <xsl:apply-templates select="eno:append-empty-element('ComplexImplementation',$driver)"
-            mode="model">
-            <xsl:with-param name="source-context" select="." tunnel="yes"/>
-        </xsl:apply-templates>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>Linking the empty-implementation driver to a GenericElement element when it has : an
-            xpath, no driver and no match. </xd:p>
-        <xd:p>This covers the case where we implement a function for a given source element, and
-            nothing is returned</xd:p>
-    </xd:desc>
-    <xsl:template
-        match="GenericElement[DefinedElement[@name='Xpath']/text()!='' and not(DefinedElement[@name='Driver'] or DefinedElement[@name='Match']/text()!='')]"
-        mode="source">
-        <xsl:param name="driver" tunnel="yes">
-            <driver/>
-        </xsl:param>
-        <xsl:apply-templates select="eno:append-empty-element('EmptyImplementation',$driver)"
-            mode="model">
-            <xsl:with-param name="source-context" select="." tunnel="yes"/>
-        </xsl:apply-templates>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>Linking the function driver to GenericElement element where an input function is
-            provided</xd:p>
-    </xd:desc>
-    <xsl:template
-        match="GenericElement[DefinedElement[@name='Out_Function']/text()!='' and DefinedElement[@name='In_Function']/text()]"
+        match="GenericElement[DefinedElement[@name='Out_Function'] and DefinedElement[@name='In_Function']/text()]"
         mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
@@ -131,28 +108,43 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>Linking the NotSupportedFunction driver to a GenericElement element where no input
-            function is provided</xd:p>
-    </xd:desc>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This specific template is used to generate xslt stylesheet for Eno :</xd:p>
+            <xd:p>the presence of those two elements means that the input xml comes from a
+                functions.fods file (on transformation side).</xd:p>
+            <xd:p>So it is linked to the 'TransitionFunction' driver :</xd:p>
+            <xd:p>it will generate an output function which will return an empty text because it
+                isn't linked to an input function.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template
-        match="GenericElement[DefinedElement[@name='Out_Function']/text()!='' and not(DefinedElement[@name='In_Function']/text())]"
+        match="GenericElement[DefinedElement[@name='Out_Function'] and not(DefinedElement[@name='In_Function']/text())]"
         mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
-        <xsl:message><xsl:value-of select="concat('Not supported yet : ',DefinedElement[@name='Out_Function']/text())"/></xsl:message>
+        <xsl:message>
+            <xsl:value-of
+                select="concat('Not supported yet : ',DefinedElement[@name='Out_Function']/text())"
+            />
+        </xsl:message>
         <xsl:apply-templates select="eno:append-empty-element('NotSupportedFunction',$driver)"
             mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>Linking the function driver to a genericElement element where a function is
-            provided</xd:p>
-    </xd:desc>
-    <xsl:template match="GenericElement[DefinedElement[@name='Function']/text()!='']" mode="source">
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This specific template is used to generate xslt stylesheet for Eno :</xd:p>
+            <xd:p>the presence of this element means that the input xml comes from a functions.fods
+                file (on input side).</xd:p>
+            <xd:p>So it is linked to the 'SourceFunction' driver :</xd:p>
+            <xd:p>it will create a function who calls a template on its context.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement[DefinedElement[@name='Function']]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -162,11 +154,17 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>Linking the GetChildren driver to a GenericElement element where a parent is
-            provided</xd:p>
-    </xd:desc>
-    <xsl:template match="GenericElement[DefinedElement[@name='Parent']/text()!='']" mode="source">
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This specific template is used to generate xslt stylesheet for Eno :</xd:p>
+            <xd:p>the presence of this element means that the input xml comes from a
+                tree-navigation.fods file (on input side).</xd:p>
+            <xd:p>So it is linked to the 'GetChildren' driver :</xd:p>
+            <xd:p>it creates a template who indicates which elements to parse after the
+                'Parent'.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement[DefinedElement[@name='Parent']]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -175,129 +173,235 @@
         </xsl:apply-templates>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>Linking a documentation sending function a the documentation getter function</xd:p>
-    </xd:desc>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-documentation to input function
+                enoxml:get-documentation.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enoxsl:get-documentation">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoxml:get-documentation"/>
     </xsl:function>
-
-    <xsl:template match="GenericElement" mode="enoxml:get-documentation">
-        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Documentation'])"/>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>The xpath getter function returns the associated value from Xpath name element</xd:p>
-    </xd:desc>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-xpath to input function
+                enoxml:get-xpath.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enoxsl:get-xpath">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoxml:get-xpath"/>
     </xsl:function>
-
-    <xsl:template match="GenericElement" mode="enoxml:get-xpath">
-        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Xpath'])"/>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>The xpath mode function returns the associated value from Xpath_Mode name
-            element</xd:p>
-    </xd:desc>
-    <xsl:function name="enoxsl:get-mode-xpath">
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-xpath-mode to input function
+                enoxml:get-xpath-mode.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoxsl:get-xpath-mode">
         <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="enoxml:get-mode-xpath"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-xpath-mode"/>
     </xsl:function>
-
-    <xsl:template match="GenericElement" mode="enoxml:get-mode-xpath">
-        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Xpath_Mode'])"/>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>The match getter function returns the associated value from Match name element</xd:p>
-    </xd:desc>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-match to input function
+                enoxml:get-match.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enoxsl:get-match">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoxml:get-match"/>
     </xsl:function>
-
-    <xsl:template match="GenericElement" mode="enoxml:get-match">
-        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Match'])"/>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>The match mode getter function returns the associated value from Match_Mode name
-            element</xd:p>
-    </xd:desc>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-match-mode to input function
+                enoxml:get-match-mode.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enoxsl:get-match-mode">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoxml:get-match-mode"/>
     </xsl:function>
-
-    <xsl:template match="GenericElement" mode="enoxml:get-match-mode">
-        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Match_Mode'])"/>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>The function getter function returns the associated value from Function name
-            element</xd:p>
-    </xd:desc>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-function to input function
+                enoxml:get-function.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enoxsl:get-function">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoxml:get-function"/>
     </xsl:function>
-
-    <xsl:template match="GenericElement" mode="enoxml:get-function">
-        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Function'])"/>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>The out-function getter function returns the associated value from Out_Function name
-            element</xd:p>
-    </xd:desc>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-output-function to input function
+                enoxml:get-output-function.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enoxsl:get-output-function">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoxml:get-output-function"/>
     </xsl:function>
-
-    <xsl:template match="GenericElement" mode="enoxml:get-output-function">
-        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Out_Function'])"/>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>The in-function getter function returns the associated value from In_Function name
-            element</xd:p>
-    </xd:desc>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-input-function to input function
+                enoxml:get-input-function.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enoxsl:get-input-function">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoxml:get-input-function"/>
     </xsl:function>
-
-    <xsl:template match="GenericElement" mode="enoxml:get-input-function">
-        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='In_Function'])"/>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>The driver getter function returns the associated value from Driver name
-            element</xd:p>
-    </xd:desc>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-driver to input function
+                enoxml:get-driver.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enoxsl:get-driver">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoxml:get-driver"/>
     </xsl:function>
-
-    <xsl:template match="GenericElement" mode="enoxml:get-driver">
-        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Driver'])"/>
-    </xsl:template>
-
-    <xd:desc>
-        <xd:p>The associatedFunction getter function returns the associated value from Parameters
-            name element</xd:p>
-    </xd:desc>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-parameters to input function
+                enoxml:get-parameters.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:function name="enoxsl:get-parameters" as="xs:string *">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoxml:get-parameters"/>
     </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-parent to input function
+                enoxml:get-parent.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoxsl:get-parent">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-parent"/>
+    </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-as to input function
+                enoxml:get-as.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoxsl:get-as">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-as"/>
+    </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enoxsl:get-children to input function
+                enoxml:get-get-children.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoxsl:get-children">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-children"/>
+    </xsl:function>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-documentation function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement" mode="enoxml:get-documentation">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Documentation'])"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-xpath function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement" mode="enoxml:get-xpath">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Xpath'])"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-xpath-mode function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement" mode="enoxml:get-xpath-mode">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Xpath_Mode'])"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-match function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement" mode="enoxml:get-match">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Match'])"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-match-mode function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement" mode="enoxml:get-match-mode">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Match_Mode'])"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-function function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement" mode="enoxml:get-function">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Function'])"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-output-function function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement" mode="enoxml:get-output-function">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Out_Function'])"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-input-function function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement" mode="enoxml:get-input-function">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='In_Function'])"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-driver function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement" mode="enoxml:get-driver">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Driver'])"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-parameters function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="GenericElement" mode="enoxml:get-parameters">
         <xsl:call-template name="split">
             <xsl:with-param name="chain"
@@ -305,48 +409,38 @@
         </xsl:call-template>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>The parent getter function returns the associated value from Parent name
-            element</xd:p>
-    </xd:desc>
-    <xsl:function name="enoxsl:get-parent">
-        <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="enoxml:get-parent"/>
-    </xsl:function>
-
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-parent function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="GenericElement" mode="enoxml:get-parent">
         <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Parent'])"/>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>The return-type-getter function returns the associated value from As name
-            element</xd:p>
-    </xd:desc>
-    <xsl:function name="enoxsl:get-as">
-        <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="enoxml:get-as"/>
-    </xsl:function>
-
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-as function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="GenericElement" mode="enoxml:get-as">
         <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='As'])"/>
     </xsl:template>
 
-    <xd:desc>
-        <xd:p>The children-getter function returns the associated vluae from Children name
-            element</xd:p>
-    </xd:desc>
-    <xsl:function name="enoxsl:get-children">
-        <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="enoxml:get-children"/>
-    </xsl:function>
-
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-children function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="GenericElement" mode="enoxml:get-children">
         <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Children'])"/>
     </xsl:template>
 
-
-    <!-- Template called when matching with the Parameters name element -->
-    <!-- Recursively splits a string chain on the "," character -->
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This template recursively splits a string chain on the "," character to build a set of strings.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template name="split">
         <xsl:param name="chain"/>
         <xsl:choose>

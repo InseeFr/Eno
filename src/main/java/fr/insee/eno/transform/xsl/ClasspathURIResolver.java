@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Use for controlling the resolution of includes
+ * FIXME we need to urgently change the includes to match a simpler scheme
+ * i.e. <xsl:import href=</path/in/resources> />
  * */
 public class ClasspathURIResolver implements URIResolver {
 	

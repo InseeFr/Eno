@@ -7,34 +7,34 @@
     xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
     version="2.0">
 
-    <!-- xsl stylesheet applied to preformate.tmp in the temporary process of xsl files creation (fods2xml then xml2xsl) -->
-    <!-- This stylesheet will read the preformate.tmp, get the different informations required (with source.xsl) -->
-    <!-- models.xml will then use the different retrieved information to create xml.tmp -->
-    <!-- The content of this file (fods2xml.xsl) will create the output xml.tmp file from the input fods file -->
-    <!-- The output xml file will be a tree of Root/GenericElement/DefinedElement -->
-
     <!-- Importing the different resources -->
     <xsl:import href="../inputs/fods/source.xsl"/>
     <xsl:import href="../outputs/xml/models.xsl"/>
     <xsl:import href="../lib.xsl"/>
+    
+    <xd:doc scope="stylesheet">
+        <xd:desc>
+            <xd:p>This stylesheet is used to transform fods into xml.</xd:p>
+        </xd:desc>
+    </xd:doc>
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     
     <xsl:strip-space elements="*"/>
 
-    <xd:doc scope="stylesheet">
+    <xd:doc>
         <xd:desc>
-            <xd:p>Transforms fods to XML!</xd:p>
+            <xd:p>Root template :</xd:p>
+            <xd:p>Only the table:table elements are used.</xd:p>
         </xd:desc>
     </xd:doc>
-
     <xsl:template match="/">
-        <xsl:apply-templates select="/" mode="source"/>
+        <xsl:apply-templates select="//table:table" mode="source"/>
     </xsl:template>
 
     <xd:desc>
-        <xd:p>Linking and element's root the table element</xd:p>
+        <xd:p>The table:table element is linked to the 'Root' driver (the root of the generated xml tree).</xd:p>
     </xd:desc>
     <xsl:template match="table:table" mode="source">
         <xsl:param name="driver" tunnel="yes">
@@ -46,12 +46,7 @@
     </xsl:template>
 
     <xd:desc>
-        <xd:p>To the first table:table-row, not linking anything (it will contain the columns names)</xd:p>
-    </xd:desc>
-    <xsl:template match="table:table-row[position()=1]" mode="source"/>
-
-    <xd:desc>
-        <xd:p>To the other table:table-row, linking the GenericElement element</xd:p>
+        <xd:p>The table:table-row element (except the first one which contains the column titles), is linked to the 'GenericElement' driver.</xd:p>
     </xd:desc>
     <xsl:template match="table:table-row[position()>1]" mode="source">
         <xsl:param name="driver" tunnel="yes">
@@ -64,9 +59,10 @@
     </xsl:template>
 
     <xd:desc>
-        <xd:p>Linking the DefinedElement element to the table:table-table-cell element</xd:p>
+        <xd:p>The table:table-cell element is linked to the 'DefinedElement' driver.</xd:p>
+        <xd:p>Except the cells of the first row (column names).</xd:p>
     </xd:desc>
-    <xsl:template match="table:table-cell" mode="source">
+    <xsl:template match="table:table-cell[parent::table:table-row[preceding-sibling::table:table-row]]" mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
         </xsl:param>
@@ -76,7 +72,7 @@
     </xsl:template>
 
     <xd:desc>
-        <xd:p>Linking the column name getter function to the xml element name getter function</xd:p>
+        <xd:p>Linking the column name getter function to the xml element name getter function.</xd:p>
     </xd:desc>
     <xsl:function name="enoxml:get-element-name">
         <xsl:param name="context" as="item()"/>
@@ -84,7 +80,7 @@
     </xsl:function>
 
     <xd:desc>
-        <xd:p>Linking the cell content getter function to the xml element value getter function</xd:p>
+        <xd:p>Linking the content getter function to the xml element value getter function.</xd:p>
     </xd:desc>
     <xsl:function name="enoxml:get-value">
         <xsl:param name="context" as="item()"/>

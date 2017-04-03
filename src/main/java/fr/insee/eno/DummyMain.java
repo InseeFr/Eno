@@ -24,7 +24,7 @@ public class DummyMain {
 		GenerationService service = injector.getInstance(GenerationService.class);
 		try {
 			File generatedFile = service.generateQuestionnaire(
-					new File("questionnaires/simpsons/ddi/simpsons.xml"),
+					new File("D:/__TEMP/eno-test/simpsons.xml"),
 					null);
 			logger.info("Generation successful! >> " + generatedFile);
 		} catch (Exception e) {

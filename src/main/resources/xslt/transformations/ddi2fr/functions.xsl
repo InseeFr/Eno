@@ -5,11 +5,6 @@
       <xsl:param name="language"/>
       <xsl:sequence select="enoddi:get-label($context,$language)"/>
    </xsl:function>
-   <!--Linking the DDI languages getter function to the form languages getter function-->
-   <xsl:function name="enofr:get-form-languages">
-      <xsl:param name="context" as="item()"/>
-      <xsl:sequence select="enoddi:get-languages($context)"/>
-   </xsl:function>
    <!--Linking the DDI element id sender function to the application name getter function-->
    <xsl:function name="enofr:get-application-name">
       <xsl:param name="context" as="item()"/>

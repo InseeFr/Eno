@@ -47,6 +47,7 @@ public class FodsToXSLCompiler {
 			logger.info("Fods2Xsl : xsl stylesheets created.");
 			// Incorporation target : creating ddi2fr.xsl
 			ddi2frIncorporationTarget();
+			// TODO Copy generated files to JAR or classpath
 			logger.debug("Fods to XSL: END");
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -142,6 +143,23 @@ public class FodsToXSLCompiler {
 
 	/**
 	 * This is the generic method called when generating XSLs from a FODS description file.
+	 * 
+	 * There are three steps: 
+	 * 
+	 * <ol>
+	 * 	<li>
+	 * 		<p>first, a preformating step that ensure the file is ready to be processed.</p>
+	 * 		<p><code>XSL: /xslt/util/fods/preformatting.xsl</code></p>
+	 * 	</li>
+	 *  <li>
+	 *  	<p>then the fods is transformed in a proper XML file.</p>
+	 *  	<p><code>XSL: /xslt/transformations/fods2xml.xsl</code></p>
+	 *  </li>
+	 *  <li>
+	 *  	<p>finally, from this XML is generated the XSL.</p>
+	 *  	<p><code>XSL: /xslt/transformations/xml2xsl.xsl</code></p>
+	 *  </li>
+	 * </ol>  
 	 * 
 	 * @param inputFods : the input fods file
 	 * @param outputXsl : the output xsl file to be created
@@ -252,5 +270,18 @@ public class FodsToXSLCompiler {
 				FileUtils.openOutputStream(Constants.INPUTS_DDI_SOURCE_XSL_TMP), 
 				Constants.INPUTS_DDI_TEMPLATES_XSL_TMP);
 		logger.debug("Leaving Incorporation");
+	}
+	
+	private enum Env {
+		DEV,
+		PROD
+	}
+	
+	/**
+	 * When every file has been generated, we want to copy them in the /xslt directory to be
+	 * used through the Java API.
+	 * */
+	private static void copyGeneratedFiles(Env env) {
+		// FIXME how to implement something that works when developping and when publishing Eno ?
 	}
 }
