@@ -747,15 +747,35 @@
             <xsl:variable name="module-name" select="name()"/>
             <xsl:variable name="constraint">
                 <xsl:value-of select="'('"/>
-                <xsl:for-each
-                    select="//xf:bind[@name=$module-name]//xf:constraint[@level='warning']">
+                <xsl:for-each select="//xf:bind[@name=$module-name]//xf:constraint[@level='warning']">
                     <xsl:if test="not(position()=1)">
                         <xsl:text>) and (</xsl:text>
+                    </xsl:if>
+                    <!-- if the constraint is not relevant or readonly, then it doesn't block the page changing : 
+                        useful when the constraint is : you must answer the hidden question -->
+                    <xsl:if test="ancestor::xf:bind[@relevant or @readonly][ancestor::xf:bind/@name=$module-name]">
+                        <xsl:text>(</xsl:text>
+                        <xsl:for-each select="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
+                            <xsl:value-of select="concat('not(',
+                                replace(replace(@relevant,'//','instance(''fr-form-instance'')//'),
+                                '\]instance\(''fr-form-instance''\)',']')
+                                ,')')"/>
+                            <xsl:text>) or (</xsl:text>
+                        </xsl:for-each>
+                        <xsl:for-each select="ancestor::xf:bind[@readonly][ancestor::xf:bind/@name=$module-name]">
+                            <xsl:value-of select="concat('(',
+                                replace(replace(@readonly,'//','instance(''fr-form-instance'')//'), '\]instance\(''fr-form-instance''\)',']')
+                                ,')')"/>
+                            <xsl:text>) or (</xsl:text>
+                        </xsl:for-each>
                     </xsl:if>
                     <xsl:value-of
                         select="replace(replace(@value,'//','instance(''fr-form-instance'')//'),
                         '\]instance\(''fr-form-instance''\)',']')"
                     />
+                    <xsl:if test="ancestor::xf:bind[@relevant or @readonly][ancestor::xf:bind/@name=$module-name]">
+                        <xsl:text>)</xsl:text>
+                    </xsl:if>
                 </xsl:for-each>
                 <xsl:value-of select="')'"/>
             </xsl:variable>
