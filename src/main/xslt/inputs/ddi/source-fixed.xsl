@@ -58,8 +58,11 @@
                                                                                       /d:InstructionText/d:LiteralText/d:Text">
                     <xsl:element name="xhtml:span">
                         <xsl:attribute name="title">
-                            <xsl:apply-templates select="node()[not(name()='xhtml:p')] | xhtml:p/node()"
-                                mode="lang-choice"/>
+                            <xsl:variable name="title">
+                                <xsl:apply-templates select="node()[not(name()='xhtml:p')] | xhtml:p/node()"
+                                    mode="lang-choice"/>                                
+                            </xsl:variable>
+                            <xsl:value-of select="normalize-space($title)"/>
                         </xsl:attribute>
                         <xsl:text>&#160;</xsl:text>
                         <xsl:element name="img">
@@ -94,7 +97,10 @@
         <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[d:InstructionName/r:String='tooltip']">
             <xsl:element name="xhtml:span">
                 <xsl:attribute name="title">
-                    <xsl:apply-templates select="d:InstructionText/d:LiteralText/d:Text" mode="lang-choice"/>
+                    <xsl:variable name="title">
+                        <xsl:apply-templates select="d:InstructionText/d:LiteralText/d:Text" mode="lang-choice"/>    
+                    </xsl:variable>
+                    <xsl:value-of select="normalize-space($title)"/>
                 </xsl:attribute>
                 <xsl:text>&#160;</xsl:text>
                 <xsl:element name="img">
