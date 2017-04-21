@@ -463,9 +463,14 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:NoDataByDefinition" mode="enoddi:get-colspan" priority="1">
-        <xsl:value-of
-            select="string(1+number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum)-number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum))"
-        />
+        <xsl:choose>
+            <xsl:when test="d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum">
+                <xsl:value-of select="string(1
+                                            +number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum)
+                                            -number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum))"/>                
+            </xsl:when>
+            <xsl:otherwise>1</xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xd:doc>
