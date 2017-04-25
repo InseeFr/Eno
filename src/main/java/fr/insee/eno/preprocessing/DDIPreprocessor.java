@@ -24,8 +24,9 @@ public class DDIPreprocessor implements Preprocessor {
 
 	@Override
 	public File process(File inputFile, File parametersFile) throws Exception {
-		logger.debug("DDIPreprocessing Target : START");
-
+		logger.info("DDIPreprocessing Target : START");
+		
+		// ----- Dereferencing
 		logger.debug(
 				"Dereferencing : -Input : " + inputFile + " -Output : " + Constants.TEMP_NULL_TMP + " -Stylesheet : "
 						+ Constants.UTIL_DDI_DEREFERENCING_XSL + " -Parameters : " + Constants.SUB_TEMP_FOLDER);
@@ -36,7 +37,7 @@ public class DDIPreprocessor implements Preprocessor {
 				FileUtils.openOutputStream(Constants.TEMP_NULL_TMP),
 				Constants.SUB_TEMP_FOLDER); //FIXME 4th param should be a parameters file (?!!?).
 
-		// CLEANING
+		// ----- Cleaning
 		logger.debug("Cleaning target");
 		File f = Constants.SUB_TEMP_FOLDER;
 		File[] matchCleaningInput = f.listFiles(new FilenameFilter() {
@@ -64,7 +65,7 @@ public class DDIPreprocessor implements Preprocessor {
 				Constants.UTIL_DDI_CLEANING_XSL, 
 				FileUtils.openOutputStream(new File(cleaningOutput)));
 
-		// TITLING
+		// ----- Titling
 		// titlinginput = cleaningoutput
 
 		String outputTitling = null;

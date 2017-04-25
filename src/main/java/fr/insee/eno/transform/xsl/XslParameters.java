@@ -15,4 +15,5 @@ public class XslParameters {
 	public static final String CLEANED_EXTENSION = "-cleaned";
 	public static final String TITLED_EXTENSION = "-final";
 	public static final String DDI2FR_LABELS_FOLDER = "labels-folder ";
+	public static final String DDI2FR_PARAMETERS_FILE = "parameters-file";
 }

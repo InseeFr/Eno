@@ -20,49 +20,46 @@ public class DDI2FRGenerator implements Generator {
 
 	@Override
 	public File generate(File finalInput, String surveyName) throws Exception {
-		logger.debug("DDI2FR Target : START");
+		logger.info("DDI2FR Target : START");
 		logger.debug("Arguments : finalInput : " + finalInput + " surveyName " + surveyName);
 		String formNameFolder = null;
-		String outputBasicForm = null;
+		String outputBasicFormPath = null;
 
-		formNameFolder = FilenameUtils.getBaseName(finalInput.getAbsolutePath());
-		formNameFolder = FilenameUtils.removeExtension(formNameFolder);
-		formNameFolder = formNameFolder.replace(XslParameters.TITLED_EXTENSION, "");
+		formNameFolder = getFormNameFolder(finalInput);
 
 		logger.debug("formNameFolder : " + formNameFolder);
 
-		outputBasicForm = Constants.TEMP_XFORMS_FOLDER + "/" + formNameFolder + "/" + Constants.BASIC_FORM_TMP_FILENAME;
-		logger.debug("Output folder for basic-form : " + outputBasicForm);
-
-		logger.debug("Ddi2fr part 1 : from -final to basic-form");
-		logger.debug("-Input : " + finalInput + " -Output : " + outputBasicForm + " -Stylesheet : "
-				+ Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL);
-		logger.debug("-Parameters : " + surveyName + " | " + formNameFolder + " | " + Constants.PROPERTIES_FILE);
-		saxonService.transformDdi2frBasicForm(
+		outputBasicFormPath = Constants.TEMP_XFORMS_FOLDER + "/" + formNameFolder + "/" + Constants.BASIC_FORM_TMP_FILENAME;
+		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
+		
+		saxonService.transformDDI2FR(
 				FileUtils.openInputStream(finalInput),
+				FileUtils.openOutputStream(new File(outputBasicFormPath)),
 				Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL,
-				FileUtils.openOutputStream(new File(outputBasicForm)),
-				surveyName,
-				FileUtils.openInputStream(new File(formNameFolder)),
 				Constants.PROPERTIES_FILE,
-				Constants.LABEL_FOLDER);
+				Constants.PARAMETERS_FILE);
 
 		String outputForm = Constants.TEMP_FOLDER_PATH + "/" + surveyName + "/" + formNameFolder + "/form/form.xhtml";
-
-		logger.debug("Ddi2fr part 2 : from basic-form to form.xhtml");
-		logger.debug("-Input : " + outputBasicForm + " -Output : " + outputForm + " -Stylesheet : "
-				+ Constants.BROWSING_TEMPLATE_XSL);
-		logger.debug("-Parameters : " + surveyName + " | " + formNameFolder + " | " + Constants.PROPERTIES_FILE);
-		saxonService.transformDdi2frBasicForm(
-				FileUtils.openInputStream(new File(outputBasicForm)),
-				Constants.BROWSING_TEMPLATE_XSL,
+		
+		saxonService.transformBrowsing(
+				FileUtils.openInputStream(new File(outputBasicFormPath)),
 				FileUtils.openOutputStream(new File(outputForm)),
-				surveyName,
-				FileUtils.openInputStream(new File(formNameFolder)),
-				Constants.PROPERTIES_FILE,
+				Constants.BROWSING_TEMPLATE_XSL,
 				Constants.LABEL_FOLDER);
 
 		return new File(outputForm);
+	}
+
+	/**
+	 * @param finalInput
+	 * @return
+	 */
+	private String getFormNameFolder(File finalInput) {
+		String formNameFolder;
+		formNameFolder = FilenameUtils.getBaseName(finalInput.getAbsolutePath());
+		formNameFolder = FilenameUtils.removeExtension(formNameFolder);
+		formNameFolder = formNameFolder.replace(XslParameters.TITLED_EXTENSION, "");
+		return formNameFolder;
 	}
 
 }

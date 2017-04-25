@@ -1,11 +1,13 @@
 package fr.insee.eno.transform.xsl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -162,8 +164,16 @@ public class XslTransformation {
 	 *             : if the factory couldn't be found or if the paths are
 	 *             incorrect
 	 */
-	public void transformDdi2frBasicForm(InputStream input, InputStream xslSheet, OutputStream output, String campaignParameter,
-			InputStream modelParameter, InputStream propertiesFileParameter, File labelFolder) throws Exception {
+	@Deprecated
+	public void transformDdi2frBasicForm(
+			InputStream input,
+			InputStream xslSheet,
+			OutputStream output,
+			String campaignParameter,
+			InputStream modelParameter,
+			InputStream propertiesFileParameter,
+			File labelFolder) 
+					throws Exception {
 		logger.debug("Using the DDI to XForms transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
@@ -173,6 +183,27 @@ public class XslTransformation {
 		transformer.setParameter(XslParameters.DDI2FR_PROPERTIES_FILE, propertiesFileParameter);
 		transformer.setParameter(XslParameters.DDI2FR_LABELS_FOLDER, labelFolder);
 		xslTransform(transformer, input, output);
+	}
+	
+	public void transformDDI2FR(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+			InputStream propertiesFile, InputStream parametersFile) throws Exception {
+		logger.info("Producing a basic XForms from the DDI spec");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setParameter(XslParameters.DDI2FR_PROPERTIES_FILE, "D:/__TEMP/Eno/config/ddi2fr.xml");
+		transformer.setParameter(XslParameters.DDI2FR_PARAMETERS_FILE, "D:/__TEMP/Eno/questionnaires/simpsons/parameters.xml");
+		xslTransform(transformer, inputFile, outputFile);
+		
+	}
+	
+	public void transformBrowsing(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, File labelFolder) throws Exception {
+		logger.info("Include the navigation elements to the XForm");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setParameter(XslParameters.DDI2FR_LABELS_FOLDER, labelFolder);
+		xslTransform(transformer, inputFile, outputFile);
 	}
 
 }

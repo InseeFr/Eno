@@ -22,11 +22,16 @@ public class ClasspathURIResolver implements URIResolver {
 		logger.debug("Resolving URI with href: " + href + " and base: " + base);
 		String resolvedHref;
 		if (href.startsWith("..")) {
-			resolvedHref = href.replaceFirst("..", "/xslt");
-			logger.trace("Resolved URI is: " + resolvedHref);
+			if (href.startsWith("../..")) {
+				resolvedHref = href.replaceFirst("../..", "/xslt");
+				logger.debug("Resolved URI is: " + resolvedHref);
+			} else {
+				resolvedHref = href.replaceFirst("..", "/xslt");
+				logger.debug("Resolved XSLT URI is: " + resolvedHref);
+			}			
 		} else {
 			resolvedHref = href;
-			logger.trace("Resolved URI is: " + resolvedHref);
+			logger.debug("Resolved URI href is: " + resolvedHref);
 		}
 		return new StreamSource(ClasspathURIResolver.class.getResourceAsStream(resolvedHref));
 	}
