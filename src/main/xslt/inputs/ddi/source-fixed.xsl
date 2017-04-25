@@ -583,6 +583,52 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Get the formula to know when a response is hidden or not.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    
+    <xsl:template match="*[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference'))
+                            and parent::d:ResponseDomainInMixed[d:AttachmentLocation]]" 
+                            mode="enoddi:get-hideable-command">
+        
+        <xsl:variable name="attachment-domain" select="../d:AttachmentLocation/d:DomainSpecificValue/@attachmentDomain"/>
+        <xsl:variable name="source-response-out-parameter" select="../../d:ResponseDomainInMixed[@attachmentBase=$attachment-domain]//r:OutParameter/r:ID"/>
+        
+        <!-- relative-path code comes from cleaning.xsl -->
+        <xsl:variable name="source-response-id">
+            <xsl:variable name="relative-path">
+                <xsl:value-of>//</xsl:value-of>
+                <xsl:for-each select="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]">
+                    <xsl:variable name="id">
+                        <xsl:choose>
+                            <xsl:when test="name()='d:Loop'">
+                                <xsl:value-of select="concat(r:ID,'-Loop')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat(r:ID,'-RowLoop')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:value-of
+                        select="concat('*[name()=''',$id,
+                        ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
+                        $id,''']/preceding-sibling::*)]//')"
+                    />
+                </xsl:for-each>
+            </xsl:variable>
+            <xsl:value-of select="concat($relative-path,../../../r:Binding[r:SourceParameterReference/r:ID=$source-response-out-parameter]/r:TargetParameterReference/r:ID)"/>
+        </xsl:variable>
+
+        <xsl:for-each select="../d:AttachmentLocation/d:DomainSpecificValue/r:Value">
+            <xsl:if test="position()!=1">
+                <xsl:text> or </xsl:text>
+            </xsl:if>
+            <xsl:value-of select="concat($source-response-id,'=''',.,'''')"/>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Get the formula to calculate a Variable.</xd:p>
         </xd:desc>
     </xd:doc>
