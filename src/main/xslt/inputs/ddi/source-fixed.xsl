@@ -391,7 +391,7 @@
             />
         </xsl:variable>
         <xsl:value-of
-            select="max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList | ancestor::l:Code))-number($parents)-number($children)+1"
+            select="max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))-number($parents)-number($children)+1"
         />
     </xsl:template>
 
@@ -459,18 +459,13 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Getting colspan for d:NoDataByDefinition elements.</xd:p>
+            <xd:p>Getting colspan for d:NoDataByDefinition elements for which colspan can be different from 1.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:NoDataByDefinition" mode="enoddi:get-colspan" priority="1">
-        <xsl:choose>
-            <xsl:when test="d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum">
-                <xsl:value-of select="string(1
-                                            +number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum)
-                                            -number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum))"/>                
-            </xsl:when>
-            <xsl:otherwise>1</xsl:otherwise>
-        </xsl:choose>
+    <xsl:template match="d:NoDataByDefinition[d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum]" mode="enoddi:get-colspan" priority="1">
+        <xsl:value-of select="string(1
+                                    +number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum)
+                                    -number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum))"/>
     </xsl:template>
     
     <xd:doc>
