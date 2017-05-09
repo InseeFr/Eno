@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"/>
+	<link href="css/qg-guide.css" rel="stylesheet"/>
+    <title>DDI Questionnaire Modelling Guide</title>
+  </head>
+  <body>
+	<h1 class="general-title">DDI Questionnaire Modelling</h1>
+    <p>Purpose of the document: Define good practice for modelling statistical survey questionnaires using the DDI standard.</p>
+    <p>Creation and update</p>
+    <table>
+      <tbody>
+        <tr class="odd">
+          <td>Version</td>
+          <td>Date</td>
+          <td>Contributors</td>
+          <td>Purpose of the update</td>
+        </tr>
+        <tr class="even">
+          <td>0.1</td>
+          <td>13/02/2014</td>
+          <td>T. Dubois &amp; G. Duffes</td>
+          <td>Creation</td>
+        </tr>
+        <tr class="odd">
+          <td>0.8</td>
+          <td>15/04/2016</td>
+          <td>T. Dubois &amp; G. Duffes</td>
+          <td>Questions updated</td>
+        </tr>
+        <tr class="even">
+          <td>0.9</td>
+          <td>28/07/2016</td>
+          <td>T. Dubois &amp; G. Duffes</td>
+          <td>Terminology updated</td>
+        </tr>
+        <tr class="odd">
+          <td>1.0</td>
+          <td>28/07/2016</td>
+          <td>T. Dubois &amp; G. Duffes</td>
+          <td>English translation</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Status</p>
+    <table>
+      <tbody>
+        <tr class="odd">
+          <td>Version number</td>
+          <td>Date</td>
+          <td>Approval</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1 id="general-overview">General overview</h1>
+    <p>The questionnaire metamodel is comprised of description of the metadata necessary for constituting the questionnaire template: questions, variables, code lists, statements (instructions, help, comments, warnings) as well as the statement and question grouping and flow (question blocks), filtering and controls. This description will be based on the <strong>XML DDI</strong> (Data Description Initiative) <strong>metamodel version 3.2</strong>.</p>
+    <p>It is assumed below that all the XML-based DDI objects are identifiable, maintainable and versionable under the guise of a mandatory triple as follows (example):</p>
+
+    <textarea class="xml" rows="3" cols="200" readonly="true">
+<r:Agency>fr.insee</r:Agency>
+<r:ID>INSEE-SIMPSONS-SU</r:ID>
+<r:Version>0.1.0</r:Version></textarea>
+
+    <p>In order to reduce the verbosity of the XML code which could impair its readability, the above-mentioned triple is not repeated in the following examples, it is implicit.</p>
+    <p>Furthermore the XML chunks used in the examples, taken individually, are not syntactically valid and are for illustrative purposes only.</p>
+    <p class="important">This document is a guide to good pratices for modelling statistical questionnaires using DDI. The point is to make explicit the top (or mid)-level business object representation in DDI constituting a questionnaire. It does not give any detail on the DDI objects used, information provided by a DDI profile, to which the reader could refer if necessary.</p>
+    <p><u><b>Figure showing the logical structure of a questionnaire template:</b></u></p>
+    <img src="img/questionnaire-template.png"/>
+    <p><u><b>Text layout</b></u></p>
+    <p>Some DDI elements allow to use XHTML markups to format text (&lt;Text&gt; and &lt;Content&gt; elements). It is recommended to use only a couple of cursory elements such as the XHTML markups « underline », « bold » and « italics » as well as references to explanatory notes which are represented as footnotes in desktop tools.</p>
+
+    <textarea class="xml" rows="3" cols="200" readonly="true">
+<xhtml:p xml:lang="en-IE">
+   <xhtml:b>If you responded « No » to each of these questions, please jump to module 3.<xhtml:br/>Otherwise, please move on.</xhtml:b>
+</xhtml:p></textarea>
+
+    <h2 id="questionnaire-template-level">First level: questionnaire template</h2>
+    <p><strong>A questionnaire template</strong> is the sequencing of modules. It also includes the questionnaire logic (including filtering) and coherence controls. A questionnaire template is a survey instrument related to a specific thematic issue.</p>
+    <p>Questionnaire means that a questionnaire template is customised at the surveyed unit level. It is a concrete human-readable (interviewer or interviewee) representation of the questionnaire shown to a respondent. It can be either the prefilling of the principal activity of a business or the number of employees already known by the statistical institute in the case of a business survey.</p>
+    <h3 id="qt-ddi-modelling">DDI modelling</h3>
+    <p>The box below lists the DDI elements which describe a questionnaire template:</p>
+    <ul>
+      <li><p>The StudyUnit is the top element representing a statistical operation and one to many DataCollection is associated with a data collection campaign.</p></li>
+      <li><p>Each DataCollection elements contains information on the data collection activities during a data collection campaign among which are the survey instruments. It contains a reference to the survey instrument component banks stored in the resource packages:</p>
+        <ul>
+          <li><p>A reference to a question bank used by the survey instrument(s) (DDI QuestionScheme);</p></li>
+          <li><p>A reference to a control construct bank (DDI ControlConstructScheme);</p></li>
+          <li><p>A reference to a statement bank (DDI InterviewerInstructionScheme).</p></li>
+        </ul>
+	  </li>
+    </ul>
+
+    <textarea class="xml" rows="6" cols="200" readonly="true">
+<s:StudyUnit xmlns="ddi:studyunit:3_2">
+   <d:DataCollection>
+      <r:QuestionSchemeReference/>                      
+      <r:ControlConstructSchemeReference/>
+      <r:InterviewerInstructionSchemeReference/>
+   <d:InstrumentScheme/></textarea>
+
+    <p>All the object banks referenced in the DataCollection, also known as « Schemes », are stored and maintained in packages, called ResourcePackage (see the box below):</p>
+
+    <textarea class="xml" rows="6" cols="200" readonly="true">
+<s:StudyUnit xmlns="ddi:studyunit:3_2">
+   <d:DataCollection>
+      <r:QuestionSchemeReference/>                      
+      <r:ControlConstructSchemeReference/>
+      <r:InterviewerInstructionSchemeReference/>
+   <d:InstrumentScheme/></textarea>
+
+    <p>Each ResourcePackage contains an object type which has specific functions in the questionnaire, some of them are made explicit in the examples below.</p>
+
+    <h2 id="module-level">Second level: module</h2>
+    <p><strong>A module</strong> is a level-“1”-of-depth sequence. It is a sub-theme of the thematic issue. A module is made of a title and can contain the sequencing of sub-modules. For instance the Business Outlook Survey among households distinguishes the module « Business Outlook » from the module « sociodemographic », etc.</p>
+    <h3 id="m-ddi-modelling">DDI modelling</h3>
+    <p><strong>A module</strong> is represented by a DDI sequence, which references one or more constructs.</p>
+    <p>It is characterised as a module through an element Type of Sequence (TypeOfSequence) which takes the value « <strong>Module</strong> » from a controlled vocabulary<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> (a codelist) delimiting the range of values allowed for describing the business parts of the questionnaire. This process is known as typing the sequence. The title of the module is the sequence label.</p>
+
+    <textarea class="xml" rows="6" cols="200" readonly="true">
+<d:Sequence>
+   <r:Label>
+      <r:Content xml:lang="en-IE">Business Outlook</r:Content>
+   </r:Label>
+   <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Module</d:TypeOfSequence>
+   <d:ControlConstructReference></textarea>
+
+    <h2 id="sub-module-level">Third level: sub-module</h2>
+    <p><strong>A sub-module</strong> breaks down a module into a title and a sequencing of statements and questions. It is the finest semantic grouping of statements and questions.</p>
+    <h3 id="m-ddi-modelling">DDI modelling</h3>
+
+    <textarea class="xml" rows="3" cols="200" readonly="true">
+<d:Sequence>
+   <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Submodule</d:TypeOfSequence>
+   <d:ControlConstructReference></textarea>
+
+    <h1 id="statements">Statements</h1>
+    <p><strong>A Statement</strong> is a generic term that designates a textual element from the questionnaire (other than the question text, response modalities…).</p>
+    <p>The different types of statement are: comment, instruction, help, or warning.</p>
+
+    <h2 id="statement-comment">Type of statement: « Comment »</h2>
+    <p><strong>A comment</strong> is a statement which conveys quite a « generic » information on the context without interaction with the interviewee/interviewer. It is an introductory text preceding one or more questions generally.</p>
+    <p><em>Example</em>: «We are going to move on to the questions on the computer and internet access equipment in your household».</p>
+    <h3 id="comment-ddi-modelling">DDI Modelling</h3>
+
+    <textarea class="xml" rows="3" cols="200" readonly="true">
+<d:InstructionName>
+   <r:String xml:lang="en-IE">Comment</r:String>
+</d:InstructionName></textarea>
+
+    <h2 id="statement-instruction">Type of statement: « Instruction »</h2>
+    <p><strong>An instruction</strong> is a formal step to be completed by the interviewee/interviewer.</p>
+    <p><em>For instance</em>: « Enter 0 if your business has not incurred any innovation expense. » or « Check off all appropriate boxes. ».</p>
+    <p><em>DDI</em> is a little bit “twisted” with the use of the element InstructionName for typing the instruction.</p>
+    <h3 id="instruction-ddi-modelling">DDI modelling</h3>
+
+    <textarea class="xml" rows="15" cols="200" readonly="true">
+<d:Instruction>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-II-22</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:InstructionName>
+      <r:String xml:lang="en-IE">Instruction</r:String>
+   </d:InstructionName>
+   <d:InstructionText>
+      <d:LiteralText>
+         <d:Text>
+            <xhtml:p xml:lang="en-IE"><xhtml:i>Check off all appropriate boxes</xhtml:i></xhtml:p>
+         </d:Text>
+      </d:LiteralText>
+   </d:InstructionText>
+</d:Instruction></textarea>
+
+    <h2 id="statement-help">Type of statement « Help »</h2>
+    <p><strong>A help</strong> is a statement that enhances the understanding of a question and its expected response.</p>
+    <p><em>Example</em>: « Include non-salary employees.»</p>
+    <h3 id="help-ddi-modelling-5">DDI modelling</h3>
+
+    <textarea class="xml" rows="3" cols="200" readonly="true">
+<d:InstructionName>
+   <r:String xml:lang="en-IE">Help</r:String>
+</d:InstructionName></textarea>
+
+    <h2 id="statement-warning">Type of statement « Warning »</h2>
+    <p><strong>A warning</strong> is a message alerting the interviewee an error occurred or an error can potentially occur (a sort of cautionary statement).</p>
+    <p><em>For instance</em>: « The sum of the respective turnover is not equal to the total turnover. Please correct it.»</p>
+    <h3 id="warning-ddi-modelling">DDI modelling</h3>
+
+    <textarea class="xml" rows="3" cols="200" readonly="true">
+<d:InstructionName>
+   <r:String xml:lang="en-IE">Warning</r:String>
+</d:InstructionName></textarea>
+
+    <h2 id="statement-tooltip">Type of statement « Tooltip »</h2>
+    <p>A message which appears when a cursor is positioned over an icon, image, hyperlink, or other element in the graphical user interface. It took over from the “footnote” type implemented in the early Eno versions. Those messages are culled from an instruction booklet essentially. Although this type of statement is mainly representational, its content is in most of the cases an instruction. </p>
+    <p>It is implemented in several elements, however in two different ways to make up for a DDI shortfall in the &lt;Category&gt; that misses an instruction reference feature:</p>
+    <ul>
+      <li>The tooltip instruction are handled in the sequence and question texts correctly using the &lt;InterviewerInstructionReference&gt; element the same way it is implemented for the other types of statement. In those cases, the tooltip icon is attached the sequence/question text automatically.</li>
+      <li>In a category often used to capture the row or column header in a table, the mechanism implemented is a temporary solution (DDI 3.3 should add a &lt;InterviewerInstructionReference&gt; in the &lt;Category&gt;). It makes use of &lt;xhtm:p&gt; markup and more precisely its “id” attribute in the instruction, set to “ftn” concatenated with an incremental number. This “ftnxxx” value prefixed by a “#” character is referenced in the attribute “href” of the &lt;xhtml:a&gt; markup embedded at the category &lt;Content&gt; element.</li>
+    </ul>
+    <p>Eno has chosen the following icon, however this depends on the Eno implementing environment totally: <img src="img/tooltip.png" width="23" height="23" style="vertical-align:middle"/></p>
+    <h3 id="tooltip-ddi-modelling">DDI modelling</h3>
+    <p>Since the tooltip is an instruction semantically, its “type” segment in the ID is “II”.</p>
+    <p><em>Case 1: Question text</em></p>
+    <p>The first case below shows the “usual” and “correct” implementation in a &lt;QuestionItem&gt;.</p>
+
+    <textarea class="xml" rows="15" cols="200" readonly="true">
+<d:Instruction>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-II-8</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:InstructionName>
+      <r:String xml:lang="fr-FR">tooltip</r:String>
+   </d:InstructionName>
+   <d:InstructionText>
+      <d:LiteralText>
+         <d:Text xml:lang="en-IE">
+            <xhtml:p id="ftn34">Expenses refers to the money spent on the goods</xhtml:p>
+         </d:Text>
+      </d:LiteralText>
+   </d:InstructionText>
+</d:Instruction></textarea>
+
+    <textarea class="xml" rows="20" cols="200" readonly="true">
+<d:QuestionItem>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-ANTIPOLV1-QI-3-1-1</r:ID>
+   <r:Version>0.1.0</r:Version>
+   [...]
+   <d:QuestionText>
+      <d:LiteralText>
+         <d:Text>
+            <xhtml:p><xhtml:b>Please estimate the expenses at the minimarket</xhtml:b></xhtml:p>
+         </d:Text>
+      </d:LiteralText>
+   </d:QuestionText>
+   [...]
+   <d:InterviewerInstructionReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-ANTIPOLV1-II-8</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Instruction</r:TypeOfObject>
+   </d:InterviewerInstructionReference>
+</d:QuestionItem></textarea>
+
+    <p><em>Case 2: Category in a grid</em></p>
+    <p>The category which contains the tooltip reference is used à the row stub in a table.</p>
+
+    <textarea class="xml" rows="15" cols="200" readonly="true">
+<d:Instruction>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-II-31</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:InstructionName>
+      <r:String xml:lang="fr-FR">tooltip</r:String>
+   </d:InstructionName>
+   <d:InstructionText>
+      <d:LiteralText>
+         <d:Text xml:lang="en-IE">
+            <xhtml:p id="ftn22">Ice cream refers to A soft frozen food made with sweetened and flavoured milk fat.</xhtml:p>
+         </d:Text>
+      </d:LiteralText>
+   </d:InstructionText>
+</d:Instruction></textarea>
+
+    <textarea class="xml" rows="8" cols="200" readonly="true">
+<l:Category>
+    <r:Agency>fr.insee</r:Agency>
+    <r:ID>INSEE-SIMPSON-CA-3</r:ID>
+    <r:Version>0.1.0</r:Version>
+    <r:Label>
+        <r:Content xml:lang="en-IE"><xhtml:p>Ice cream<xhtml:a href="#ftn22"/></xhtml:p></r:Content>
+    </r:Label>
+</l:Category></textarea>
+
+    <h3 id="tooltip-graphical-representation">Graphical representation</h3>
+    <p><em>Case 1: Question text</em></p>
+    <p><img src="img/tooltip-case-1.png"/></p>
+    <p><em>Case 2: Category in a grid</em></p>
+    <p><img src="img/tooltip-case-2.png"/></p>
+
+    <h2 id="conditional-statement">Conditional statement</h2>
+    <p>A conditional statement is either a comment, or an instruction, or an help or a warning with a value determined by one or more responses to questions from the survey instrument.</p>
+    <h3 id="conditional-ddi-modelling-8">DDI modelling</h3>
+    <p>The condition for displaying a text is expressed within a command contained in a &lt;d:ConditionalText&gt; element. DDI does not handle currently the link between a text to be displayed and its related condition: the assumption is made that the text expressed in the &lt;d:LiteralText&gt; follows its condition within the sequence of DDI elements<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
+
+    <h3 id="conditional-graphical-representation">Graphical representation</h3>
+    <p>If the variable VAR take the value of 7 then the statement text is as follows:</p>
+    <p>« Your inadequate knowledge of the Simpsons does not allow to continue the questionnaire. »</p>
+    <p><em>Otherwise nothing is displayed.</em></p>
+
+    <h1 id="question-bank">Question bank</h1>
+    <p>A question bank is simply a set of questions which can take various forms from a business point of view. A non-exhaustive set of question types identified through the statistical surveys is presented below.</p>
+    <h2 id="question-bank-ddi-modelling">DDI modelling of question bank</h2>
+    <p>A question bank is represented by a DDI QuestionScheme which can contain four DDI object types: QuestionItem, QuestionGrid, QuestionBlock and QuestionGroup. </p>
+    <p>The QuestionBlock and QuestionGroup are not addressed in this version of the document.</p>
+
+    <textarea class="xml" rows="7" cols="200" readonly="true">
+<d:QuestionScheme>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QS</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:Label>
+      <r:Content xml:lang="en-IE">QuestionScheme for the Simpsons questionnaire</r:Content>
+   </r:Label></textarea>
+
+    <h2 id="question-types">Question types</h2>
+    <p>The classification of question types has been reviewed several times and the current proposal remains a moot point. It would be of great interest to define a common vocabulary at the European Statistical System level in order to move towards shared tools and documentation.</p>
+    <h3 id="question-single-response-domain">Question with a single response domain</h3>
+    <p>A question with a « single response domain » is a question made of<strong> a label and only one response domain</strong> whichever its type be: text, numeric, date, boolean, or less frequently any type available in the DDI schemas.</p>
+    <h4 id="question-single-response-domain-ddi-modelling">DDI modelling</h4>
+    <p>It is represented as a DDI QuestionItem.</p>
+
+    <textarea class="xml" rows="11" cols="200" readonly="true">
+<d:QuestionItem>
+    <r:Agency>fr.insee</r:Agency>
+    <r:ID>INSEE-SIMPSONS-QI-1</r:ID>
+    <r:Version>0.1.0</r:Version>
+    <d:QuestionText>
+        <d:LiteralText>
+            <d:Text>How much is Margaret at checkout?</d:Text>
+        </d:LiteralText>
+    </d:QuestionText>
+    <d:NumericDomain decimalPositions="2"/>
+</d:QuestionItem></textarea>
+
+    <h4 id="question-single-response-domain-graphical-representation">Graphical representation</h4>
+    <p>The representation associated with the above modelling is as follows:</p>
+    <p><strong>⇒ How much is Margaret at checkout?</strong></p>
+    <input type="text"/>
+
+    <h3 id="question-multiple-response-domain">Question with a multiple response domain</h3>
+    <p>A so-called question with « a multiple response domain » is a question made of a label and several response domains typed mainly as text, numeric, date, boolean, less frequently any type available in the DDI schemas. Each of these response domains can be preceded by a label and those labels <em>taken as a whole are <strong>not an information axis</strong></em> and can respectively be of different types (text, numeric, date, boolean, etc.).</p>
+    <p>In most statistical questionnaires these labels are an information axis. The tendency would then be to add a column header which leads to the two-dimension grid representation (cf. § <a href="#table">3.2.5 - Table</a>). The case 2 (<a href="#table-use-case-2">Table – numeric answers</a>) is a good illustration.</p>
+    <h4 id="question-multiple-response-domain-ddi-modelling">DDI modelling</h4>
+    <p>It is a DDI QuestionItem with various types of response domain nested in a multiple response domain &lt;ResponseDomainInMixed&gt; contained itself -along with the other response domains- in a &lt;StructuredMixedResponseDomain&gt;. Each response domain (&lt;TextDomain&gt; in the following example) contains a certain number of elements such as &lt;r :label&gt; which allows to add a label to the response (« house number» in the following example).</p>
+    <p>It should be noted that the DDI response format is also included in the representation of the out parameter from the response domain.</p>
+
+    <textarea class="xml" rows="20" cols="200" readonly="true">
+<d:QuestionItem>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QI-102</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:QuestionText>
+      <d:LiteralText>
+         <d:Text>What are Jay's postal details?</d:Text>
+      </d:LiteralText>
+   </d:QuestionText>
+   <d:StructuredMixedResponseDomain>
+      <d:ResponseDomainInMixed>
+         <d:TextDomain>
+            <r:Label>
+               <r:Content xml:lang="en-IE">House number</r:Content>
+            </r:Label>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-102-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String>CN1</r:String>
+               </r:ParameterName>
+               <r:TextRepresentation />
+            </r:OutParameter>
+         </d:TextDomain>
+      </d:ResponseDomainInMixed>
+      <d:ResponseDomainInMixed>
+         <d:TextDomain>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Street name</r:Content>
+            </r:Label>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-102-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String>CN1</r:String>
+               </r:ParameterName>
+               <r:TextRepresentation />
+            </r:OutParameter>
+         </d:TextDomain>
+      </d:ResponseDomainInMixed>
+      <d:ResponseDomainInMixed>
+         <d:TextDomain>
+            <r:Label>
+               <r:Content xml:lang="en-IE">City</r:Content>
+            </r:Label>
+            <r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-102-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:ParameterName>
+                  <r:String>CN1</r:String>
+               </r:ParameterName>
+               <r:TextRepresentation />
+            </r:OutParameter>
+         </d:TextDomain>
+      </d:ResponseDomainInMixed>
+   </d:StructuredMixedResponseDomain>
+</d:QuestionItem></textarea>
+
+    <h4 id="question-multiple-response-domain-graphical-representation">Graphical representation</h4>
+    <p>The representation associated with the DDI modelling is as follows:</p>
+    <table>
+      <tbody>
+        <tr class="odd">
+          <td colspan="2">⇒ What are Jay's postal details?</td>
+        </tr>
+        <tr class="even">
+          <td>House number</td>
+          <td><input type="text"></td>
+        </tr>
+        <tr class="odd">
+          <td>Street</td>
+          <td><input type="text"></td>
+        </tr>
+        <tr class="even">
+          <td>City</td>
+          <td><input type="text"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 id="single-choice-question">Single choice question</h3>
+    <p>A question with a single response domain is a question made of a label and a response domain typed as a code list. This type of question allows the respondent to select one single response from a predefined list.</p>
+    <h4 id="single-choice-question-ddi-modelling">DDI Modelling</h4>
+    <p>It is a QuestionItem which has as a response domain a &lt;CodeDomain&gt; with the following content model elements:</p>
+    <ul>
+      <li>&lt;ResponseCardinality&gt; with a « <strong>1</strong>» fixed value;</li>
+      <li>&lt;GenericOutputFormat&gt; which takes its value among the following: « <strong>radio </strong>», « <strong>dropdown</strong> » or « <strong>checkbox</strong> ».</li>
+    </ul>
+    <p><em>Case 1: Radio Button</em></p>
+
+    <textarea class="xml" rows="16" cols="200" readonly="true">
+   <d:QuestionText>
+      <d:LiteralText>
+         <d:Text>Did you enjoy the movie?</d:Text>
+      </d:LiteralText>
+   </d:QuestionText>
+   <d:CodeDomain>
+      <r:GenericOutputFormat codeListID="INSEE-GOF-CV">radio</r:GenericOutputFormat>
+      <r:CodeListReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-YesNo-CL</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>CodeList</r:TypeOfObject>
+      </r:CodeListReference>        
+      <r:ResponseCardinality maximumResponses="1"></r:ResponseCardinality>
+   </d:CodeDomain>
+</d:QuestionItem
+</textarea>
+
+    <p><em>Case 2: Drop-down box</em></p>
+
+    <textarea class="xml" rows="10" cols="200" readonly="true">
+<d:CodeDomain>
+   <r:GenericOutputFormat codeListID="INSEE-GOF-CV">dropdown</r:GenericOutputFormat>
+   <r:CodeListReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CL-13</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>CodeList</r:TypeOfObject>
+   </r:CodeListReference>                 
+   <r:ResponseCardinality maximumResponses="1"/>
+</d:CodeDomain>
+</textarea>
+
+    <p></p>
+    <h4 id="single-choice-question-graphical-representation">Graphical representation</h4>
+    <p>The representation associated with the DDI modelling is as follows:</p>
+    <p><em>Case 1: Radio Button</em></p>
+    <p><strong>⇒ Did you enjoy the movie?</strong></p>
+	<input type="radio" name="enjoy" checked="true"> Yes
+	<br/>
+	<input type="radio" name="enjoy"> No
+    <p><em>Case 2: Drop-down box</em></p>
+    <p><strong>⇒ What is the year of the first broadcast?</strong></p>
+	<select>
+	  <option>2015</option>
+	  <option>2016</option> 
+	  <option>2017</option>
+	</select>
+    <h3 id="multiple-choice-question">Multiple choice question </h3>
+    <p>A multiple choice question is a question whose label is the mutual part of several sub-questions (constituting a coherent whole i.e. an information axis). Each modality of the information axis is peculiar to a specific response domain. This type of question allows the respondent to select the best possible answers out of a number of choices from a predefined list.</p>
+    <h4 id="multiple-choice-question-ddi-modelling">DDI modelling</h4>
+    <p>A multiple choice question defines <em>only one dimension since the second axis represented is <strong>not a « true » dimension</strong> (i.e an information axis) but rather <strong>a response domain</strong></em> (for instance a boolean response domain or a « Yes/No » code domain).</p>
+    <p>It is represented by a DDI QuestionGrid:</p>
+    <ul>
+      <li>its unique dimension is a &lt;CodeDomain&gt; included in an element &lt;GridDimension&gt; ;</li>
+      <li>the response domain is a &lt;CodeDomain&gt; included in a multiple response domain &lt;GridResponseDomain&gt; nested in a &lt;StructuredMixedGridResponseDomain&gt;.</li>
+    </ul>
+    <p>Each &lt;CodeDomain&gt; has a reference to the code list that represents it as well as a &lt;GenericOutputFormat&gt; that types the code list representing the response domain.</p>
+    <p>It should be noted that the format of the DDI response is also contained in the out parameter representation defined at the beginning of the question.</p>
+    <p>In the example given in <a href="#3.5.2.Exemple de représentation|outline">§3.5.2 Graphical Representation</a>, a QuestionGrid has an element &lt;CodeDomain&gt; that references a code list « Yes/No » (represented as radio buttons).</p>
+	<div class="frame">
+	  <p>⇒ <strong>Design choice</strong>: in this case we chose to define <strong>a variable that is measured for each modality of the information axis</strong>.</p>
+	  <p>An alternative would have been to use vectors of variables allowing to capture the response list corresponding to all the chosen modalities of the information axis. This solution was rejected essentially for technical implementation reasons. Although the DDI <strong>QuestionGrid</strong> element is used, this use case is not classified as a table (<a href="#table">3.2.5.Table</a>). This means that DDI has nothing strictly equivalent to what is known as a Table by subject-matter people.</p>
+    </div>
+
+    <textarea class="xml" rows="20" cols="200" readonly="true">
+<d:QuestionGrid>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QG-21</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-21-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:CodeRepresentation>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-CL-YesNo</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+      </r:CodeRepresentation>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-21-2</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:CodeRepresentation>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-CL-YesNo</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+      </r:CodeRepresentation>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-21-3</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:CodeRepresentation>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-CL-YesNo</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+      </r:CodeRepresentation>
+   </r:OutParameter>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-21-1</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-21-1</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>  
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-21-2</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-21-2</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-21-3</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-21-3</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <d:QuestionText>
+      <d:LiteralText>
+         <d:Text>Do you like the following ice cream flavours?</d:Text>
+      </d:LiteralText>
+   </d:QuestionText>
+   <d:GridDimension rank="1" displayCode="false" displayLabel="false">
+      <d:CodeDomain>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-21</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+      </d:CodeDomain>
+   </d:GridDimension>
+   <d:StructuredMixedGridResponseDomain><d:GridResponseDomain>
+      <d:CodeDomain><r:GenericOutputFormat codeListID="INSEE-GOF-CV">radio</r:GenericOutputFormat>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-YesNo-CL</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+         <r:ResponseCardinality maximumResponses="1"/>
+      </d:CodeDomain>
+      <d:GridAttachment>
+         <d:CellCoordinatesAsDefined>
+            <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+         </d:CellCoordinatesAsDefined>
+      </d:GridAttachment>
+   </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:CodeDomain><r:GenericOutputFormat codeListID="INSEE-GOF-CV">radio</r:GenericOutputFormat>
+            <r:CodeListReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-YesNo-CL</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>CodeList</r:TypeOfObject>
+            </r:CodeListReference>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:CodeDomain>
+         <d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:CodeDomain><r:GenericOutputFormat codeListID="INSEE-GOF-CV">radio</r:GenericOutputFormat>
+            <r:CodeListReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-YesNo-CL</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>CodeList</r:TypeOfObject>
+            </r:CodeListReference>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:CodeDomain>
+         <d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      </d:GridResponseDomain>
+   </d:StructuredMixedGridResponseDomain>
+</d:QuestionGrid></textarea>
+
+    <h4 id="multiple-choice-question-graphical-representation">Graphical representation</h4>
+    <p>The representation associated with the DDI modelling is as follows:</p>
+    <table>
+      <tbody>
+        <tr class="odd">
+          <td colspan="3">⇒ Do you like the following ice cream flavours?</td>
+        </tr>
+        <tr class="even">
+          <td>Vanilla</td>
+		  <td><input type="radio" name="vanilla-1"> Yes</td>
+		  <td><input type="radio" name="vanilla-1"> No</td>
+        </tr>
+        <tr class="odd">
+          <td>Strawberry</td>
+		  <td><input type="radio" name="strawberry-1"> Yes</td>
+		  <td><input type="radio" name="strawberry-1"> No</td>
+        </tr>
+        <tr class="even">
+          <td>Apple</td>
+		  <td><input type="radio" name="apple-1"> Yes</td>
+		  <td><input type="radio" name="apple-1"> No</td>
+        </tr>
+        <tr class="odd">
+          <td>Bacon</td>
+		  <td><input type="radio" name="bacon-1"> Yes</td>
+		  <td><input type="radio" name="bacon-1"> No</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>An alternative representation would be as follows, however the DDI modelling and the business objects would remain the same (the columns yes-no are the response fields associated with each row and not an information axis).</p>
+    <table>
+      <tbody>
+        <tr class="odd">
+          <td>⇒ Do you like the following ice cream flavours?</td>
+          <td>Yes</td>
+          <td>No</td>
+        </tr>
+        <tr class="even">
+          <td>Vanilla</td>
+		  <td><input type="radio" name="vanilla-2"/></td>
+		  <td><input type="radio" name="vanilla-2"/></td>
+        </tr>
+        <tr class="odd">
+          <td>Strawberry</td>
+		  <td><input type="radio" name="strawberry-2"/></td>
+		  <td><input type="radio" name="strawberry-2"/></td>
+        </tr>
+        <tr class="even">
+          <td>Apple</td>
+		  <td><input type="radio" name="apple-2"/></td>
+		  <td><input type="radio" name="apple-2"/></td>
+        </tr>
+        <tr class="odd">
+          <td>Bacon</td>
+		  <td><input type="radio" name="bacon-2"/></td>
+		  <td><input type="radio" name="bacon-2"/></td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <p><em>This example could have been represented by check boxes instead of radio buttons yes/no. In this case, only the response domain is different.</em></p>
+
+    <h3 id="table">Table</h3>
+    <p>A Table is a two-way table. It is a question made of a label and a response domain defined by two dimensions. The information located at the intersection of a row and a column corresponds to a response.</p>
+    <p>There are a lot of types of tables, more or less equivalent from a semantic point of view, however their representations can be very varied. The main purpose here is to describe different use cases relevant to the survey designer, and provide a DDI modelling.</p>
+	<div class="frame">
+	  <p><em><strong>One dimension versus two dimensions</strong></em></p>
+      <p>This is a semantic distinction not a representational one.</p>
+      <p>Further to the choice made in the paragraph 3.2.4 (no vector), a two-dimension table is a table where each row-column modality intersection corresponds to a variable that is measured.</p>
+      <p>In the case of a “fake” one-dimension table, what could be interpreted as a dimension, is only the list of the response modalities for each row (please see the second representation in 3.2.4).</p>
+	  <p><em>For instance, in the </em><a href="table-boolean-responses"><em>Case 1: Table – boolean responses</em></a>, the modes of transport and the geographic areas are “real” information axis that are intersected each other. <em>Two DDI dimensions are then defined</em>, one for the modes of transport, the other for the geographic areas. Each cell corresponds to a measured variable.</p>
+      <p><em>On the other hand in the use case in the paragraph <a href="#multiple-choice-question">3.2.4.</a> Multiple choice question</em>, the code list « Yes/No » is a simple response field for each modality of the dimension related to the question: in this example, a list of ice cream flavours is given to the discretion of the respondent. There will be <em>only one dimension and the code list « Yes/No » will be part of the response domain</em>(CodeDomain). Each line is a measured variable.</p>
+	</div>
+
+    <h4 id="table-two-information-axis">Table (with two explicit information axis)</h4>
+    <p>A two-way table with two explicit information axis is a table with two dimensions whose modalities are already known.</p>
+    <h5 id="table-two-information-axis-ddi-modelling">DDI Modelling (generic)</h5>
+    <p>It is a QuestionGrid with two dimensions and a response field associated with the intersection of each modality of each dimension, as opposed to the QuestionGrid with only one dimension according to the rule mentioned in the text box « <em><strong>One dimension versus two dimensions</strong></em> ».</p>
+    <p>The representation of the out parameters in the question was voluntarily left out, for XML verbosity purposes, the one of the out parameters in the response domain was only given once (to learn more about the value representation in the &lt;ResponseDomain&gt;, please see § <a ref="#dead-link">3.7.1.Response domains</a>).</p>
+    <h5 id="table-boolean-responses">Use case 1: Table – boolean responses</h5>
+    <p><em>In the DDI below, we chose as an example a check-off response domain (DDI NominalDomain) for each intersection of the two dimensions. The entire table is akin to a question with several possible response modalities where each response modality takes its meaning from the intersection of information axis. The reasoning remains the same when each intersection defines a single choice response (radio button yes-no), only the type of the response domain changes (CodeDomain in this case).</em></p>
+    <h6 id="table-boolean-responses-ddi-modelling">DDI modelling</h6>
+
+    <textarea class="xml" rows="20" cols="200" readonly="true">
+<d:QuestionGrid>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QG-63</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-2</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-3</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-4</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-5</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-6</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-7</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-8</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-9</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-10</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-11</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-12</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-13</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-14</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-15</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-16</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-17</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:OutParameter isArray="false">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QOP-63-18</r:ID>
+      <r:Version>0.1.0</r:Version>
+   </r:OutParameter>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-1</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-1</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-2</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-2</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding> 
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-3</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-3</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-4</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-4</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-5</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-5</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-6</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-6</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-7</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-7</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>  
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-8</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-8</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-9</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-9</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-10</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-10</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-11</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-11</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>  
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-12</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-12</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-13</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-13</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-14</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-14</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <r:Binding>
+      <r:SourceParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-15</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:SourceParameterReference>
+      <r:TargetParameterReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-RDOP-63-15</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>OutParameter</r:TypeOfObject>
+      </r:TargetParameterReference>
+   </r:Binding>
+   <d:QuestionText>
+      <d:LiteralText>
+         <d:Text>With which characters and in which country did the hero travel?</d:Text>
+      </d:LiteralText>
+   </d:QuestionText> 
+   <d:GridDimension rank="1" displayCode="true" displayLabel="false">
+      <d:CodeDomain>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-63</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+      </d:CodeDomain>
+   </d:GridDimension>
+   <d:GridDimension rank="2" displayCode="true" displayLabel="false">
+      <d:CodeDomain>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-64</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+      </d:CodeDomain>
+   </d:GridDimension>
+   <d:StructuredMixedGridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CodeRepresentation><r:CodeSubsetInformation>
+                  <r:IncludedCode><r:CodeReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <l:Code levelNumber="1" isDiscrete="true">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:CategoryReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+                           <r:Version>0.1.0</r:Version>
+                           <r:TypeOfObject>Category</r:TypeOfObject>
+                        </r:CategoryReference>
+                        <r:Value>1</r:Value></l:Code>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>Code</r:TypeOfObject>
+                  </r:CodeReference></r:IncludedCode>
+               </r:CodeSubsetInformation></r:CodeRepresentation>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+               <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+               <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+               <d:SelectDimension rank="2" rangeMinimum="3" rangeMaximum="3"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+               <d:SelectDimension rank="2" rangeMinimum="4" rangeMaximum="4"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+               <d:SelectDimension rank="2" rangeMinimum="5" rangeMaximum="5"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-6</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+               <d:SelectDimension rank="2" rangeMinimum="6" rangeMaximum="6"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-7</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+               <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-8</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+               <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-9</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+               <d:SelectDimension rank="2" rangeMinimum="6" rangeMaximum="6"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-10</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+               <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-11</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+               <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-12</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+               <d:SelectDimension rank="2" rangeMinimum="3" rangeMaximum="3"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-13</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+               <d:SelectDimension rank="2" rangeMinimum="4" rangeMaximum="4"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-14</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+               <d:SelectDimension rank="2" rangeMinimum="5" rangeMaximum="5"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NominalDomain>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat><r:OutParameter isArray="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-RDOP-63-14</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:DefaultValue/></r:OutParameter>
+            <r:ResponseCardinality maximumResponses="1"/>
+         </d:NominalDomain><d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+               <d:SelectDimension rank="2" rangeMinimum="5" rangeMaximum="5"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+   </d:StructuredMixedGridResponseDomain>
+</d:QuestionGrid></textarea>
+
+    <h6 id="table-boolean-responses-graphical-representation">Graphical Representation</h6>
+    <p>The representation associated with the DDI modelling is as follows:</p>
+    <table>
+      <tbody>
+        <tr class="odd">
+          <td colspan="7"><strong>⇒ Which of the following forms of transport were used by the hero and in which country?</strong></td>
+        </tr>
+        <tr class="even">
+          <td colspan="7"><em>Several answers possible: check off all the relevant boxes<em></td>
+        </tr>
+        <tr class="odd">
+          <td></td>
+          <td>Brazil</td>
+          <td>Canada</td>
+          <td>Japan</td>
+          <td>France</td>
+          <td>Other country</td>
+          <td>Other planet</td>
+        </tr>
+        <tr class="even">
+          <td>Car</td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+        </tr>
+        <tr class="odd">
+          <td>Bike</td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+        </tr>
+        <tr class="even">
+          <td>Skateboard</td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+          <td><input type="checkbox"/></td>
+        </tr>
+      </tbody>
+    </table>
+    <h5 id="table-numeric-responses">Use case 2: Table – numeric answers</h5>
+    <p>The use case 2 presented below is equivalent from the DDI point of view to the case 1 contrary to what the representation suggests.</p>
+    <h6 id="table-numeric-responses-ddi-modelling">DDI modelling</h6>
+    <p>The difference, as opposed to the case 1, is as follows:</p>
+    <ul>
+      <li>The response domains are &lt;d :NumericDomain&gt;;</li>
+      <li>The unit of measurement is the Dollar. The « $ » icon is defined in the &lt;r:Label&gt; contained in the &lt;d:NumericDomain&gt; (added in-line or referenced from a &lt;r:ManagedNumericRepresentation&gt;);</li>
+      <li>The totals are not handled well by DDI yet. An issue is opened and discussed with the DDI Alliance.</li>
+    </ul>
+    <p>It should be noted that the column headers and the row stubs are defined as follows:</p>
+    <ul>
+      <li>Regarding the table dimension 2 (the column in this case), it is the first category from the code list representing the dimension which defines what appears as the column header (« Price »);</li>
+      <li>Regarding the total of the table dimension 1, it is simply a category (« Total expenses »).</li>
+      <li>The stub “Products” is not a category but the label of the &lt;CodeList&gt; representing the dimension. Please note that the &lt;GridDimension&gt; attribute “displayLabel” has to be set to “true” in this case.</li>
+    </ul>
+
+    <textarea class="xml" rows="20" cols="200" readonly="true">
+<d:QuestionGrid>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QG-52</r:ID>
+   <r:Version>0.1.0</r:Version> 
+   <d:QuestionText>
+      <d:LiteralText>
+         <d:Text>Please estimate your expenses at the mini-market ?</d:Text>
+      </d:LiteralText>
+   </d:QuestionText>
+   <d:GridDimension rank="1" displayCode="false" displayLabel="true">
+      <d:CodeDomain>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-52</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+      </d:CodeDomain>
+   </d:GridDimension>
+   <d:GridDimension rank="2" displayCode="false" displayLabel="false">
+      <d:CodeDomain>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-58</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+      </d:CodeDomain>
+   </d:GridDimension>
+   <d:StructuredMixedGridResponseDomain> 
+      <d:GridResponseDomain> 
+         <d:NumericDomain>
+            <r:NumberRange>
+               <r:Low>0</r:Low>
+            </r:NumberRange>
+            <r:NumericTypeCode codeListID="INSEE-ND-CV">Decimal</r:NumericTypeCode>
+            <r:Label>
+               <r:Content><xhtml:p><xhtml:b>$</xhtml:b></xhtml:p></r:Content>
+            </r:Label>
+         </d:NumericDomain>
+         <d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+               <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain> 
+      <d:GridResponseDomain> 
+         <d:NumericDomain>
+            <r:NumberRange>
+               <r:Low>0</r:Low>
+            </r:NumberRange>
+            <r:NumericTypeCode codeListID="INSEE-ND-CV">Decimal</r:NumericTypeCode>
+            <r:Label>
+               <r:Content><xhtml:p><xhtml:b>$</xhtml:b></xhtml:p></r:Content>
+            </r:Label>
+         </d:NumericDomain>
+         <d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
+               <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain> 
+         <d:NumericDomain>
+            <r:NumberRange>
+               <r:Low>0</r:Low>
+            </r:NumberRange>
+            <r:NumericTypeCode codeListID="INSEE-ND-CV">Decimal</r:NumericTypeCode>
+            <r:Label>
+               <r:Content><xhtml:p><xhtml:b>$</xhtml:b></xhtml:p></r:Content>
+            </r:Label>
+         </d:NumericDomain>
+         <d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
+               <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain> 
+         <d:NumericDomain>
+            <r:NumberRange>
+               <r:Low>0</r:Low>
+            </r:NumberRange>
+            <r:NumericTypeCode codeListID="INSEE-ND-CV">Decimal</r:NumericTypeCode>
+            <r:Label>
+               <r:Content><xhtml:p><xhtml:b>$</xhtml:b></xhtml:p></r:Content>
+            </r:Label>
+         </d:NumericDomain>
+         <d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
+               <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain> 
+         <d:NumericDomain><r:NumberRange>
+            <r:Low>0</r:Low></r:NumberRange>
+            <r:NumericTypeCode codeListID="INSEE-ND-CV">Decimal</r:NumericTypeCode>
+            <r:Label>
+               <r:Content><xhtml:p><xhtml:b>$</xhtml:b></xhtml:p></r:Content>
+            </r:Label></d:NumericDomain>
+         <d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="1" rangeMinimum="5" rangeMaximum="5"/>
+               <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+   </d:StructuredMixedGridResponseDomain>
+</d:QuestionGrid> 
+<l:CategoryScheme>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-CAS-17</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:Label>
+      <r:Content xml:lang="en-IE">List of product categories</r:Content>
+   </r:Label>
+   <l:Category>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CA-17-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:Label>
+         <r:Content xml:lang="en-IE">Ice cream</r:Content>
+      </r:Label>
+   </l:Category>
+   <l:Category>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CA-17-2</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:Label>
+         <r:Content xml:lang="en-IE">Candies</r:Content>
+      </r:Label>
+   </l:Category>
+   <l:Category>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CA-17-3</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:Label>
+         <r:Content xml:lang="en-IE">T-Bone</r:Content>
+      </r:Label>
+   </l:Category>
+   <l:Category>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CA-17-4</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:Label>
+         <r:Content xml:lang="en-IE">Donut</r:Content>
+      </r:Label>
+   </l:Category>
+</l:CategoryScheme>
+<l:CategoryScheme>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-CAS-18</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:Label>
+      <r:Content xml:lang="en-IE">List of the total category</r:Content>
+   </r:Label>
+   <l:Category>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CA-18-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:Label>
+         <r:Content xml:lang="en-IE">Total expenses</r:Content>
+      </r:Label></l:Category>
+</l:CategoryScheme>
+<l:CategoryScheme>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-CAS-19</r:ID>
+   <r:Version>0.1.0</r:Version> <r:Label>
+      <r:Content xml:lang="en-IE">Categroy list amount</r:Content>
+   </r:Label>
+   <l:Category>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CA-19-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:Label>
+         <r:Content xml:lang="en-IE">Amount</r:Content>
+      </r:Label>
+   </l:Category>
+</l:CategoryScheme>
+<l:CodeList>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-CL-10</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:Label><r:Content xml:lang="en-IE">Products</r:Content></r:Label>
+   <l:HierarchyType>Regular</l:HierarchyType>
+   <l:Level levelNumber="1">
+      <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+   </l:Level>
+   <l:Code levelNumber="1" isDiscrete="true">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CL-10-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:CategoryReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CA-17-1</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>Category</r:TypeOfObject>
+      </r:CategoryReference>
+      <r:Value>1</r:Value>
+   </l:Code>
+   <l:Code levelNumber="1" isDiscrete="true">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CL-10-2</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:CategoryReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CA-17-2</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>Category</r:TypeOfObject>
+      </r:CategoryReference>
+      <r:Value>2</r:Value>
+   </l:Code>
+   <l:Code levelNumber="1" isDiscrete="true">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CL-10-3</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:CategoryReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CA-18-3</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>Category</r:TypeOfObject>
+      </r:CategoryReference>
+      <r:Value>3</r:Value>
+   </l:Code>
+   <l:Code levelNumber="1" isDiscrete="true">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CL-10-4</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:CategoryReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CA-18-4</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>Category</r:TypeOfObject>
+      </r:CategoryReference>
+      <r:Value>4</r:Value>
+   </l:Code>
+   <l:Code levelNumber="1" isDiscrete="true">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CL-10-5</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:CategoryReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CA-18-1</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>Category</r:TypeOfObject>
+      </r:CategoryReference>
+      <r:Value>5</r:Value>
+   </l:Code>
+</l:CodeList>
+<l:CodeList>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-CL-12</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <l:HierarchyType>Regular</l:HierarchyType>
+   <l:Level levelNumber="1">
+      <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+   </l:Level>
+   <l:Code levelNumber="1" isDiscrete="true">
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CL-12-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:CategoryReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-SIMPSONS-CA-19-1</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>Category</r:TypeOfObject>
+      </r:CategoryReference>
+      <r:Value>1</r:Value>
+   </l:Code>
+</l:CodeList></textarea>
+
+    <h5 id="table-numeric-responses-graphical-representation">Graphical representation</h5>
+    <p>The representation associated with the DDI modelling is as follows:</p>
+    <p></p>
+    <table>
+      <tbody>
+        <tr class="odd">
+          <td colspan="2">⇒ Please estimate the expenses at the mini-market?</td>
+        </tr>
+        <tr class="even">
+          <td>Products</td>
+          <td>Amount</td>
+        </tr>
+        <tr class="odd">
+          <td>Ice cream</td>
+		  <td><input type="text"/> $</td>
+        </tr>
+        <tr class="even">
+          <td>Candies</td>
+		  <td><input type="text"/> $</td>
+        </tr>
+        <tr class="odd">
+          <td>T-Bone</td>
+		  <td><input type="text"/> $</td>
+        </tr>
+        <tr class="even">
+          <td>Donut</td>
+		  <td><input type="text"/> $</td>
+        </tr>
+        <tr class="odd">
+          <td>Total expenses</td>
+		  <td><input type="text"/> $</td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <h5 id="complex-table">Case 3: Table – complex table...</h5>
+    <p><em><strong>We don't know (yet?) how to model properly the grid below:</strong></em></p>
+    <p></p>
+    <table>
+      <tbody>
+		<tr>
+          <td colspan="5"><strong>⇒ Please break down the total salaries by occupation category:</strong></td>		
+		</tr>
+        <tr>
+          <td rowspan="2">Occupation<br/>categories</td>
+          <td rowspan="2">Code</td>
+          <td colspan="2">Description of the job</td>
+          <td rowspan="2">Gross monthly<br/>salary in April</td>
+        </tr>
+        <tr>
+          <td>Occupation label</td>
+          <td>Coefficient</td>
+        </tr>
+        <tr>
+          <td rowspan="2">Workers</td>
+          <td>1</td>
+          <td>Snowplough operator</td>
+          <td>170</td>
+		  <td><input type="text"/></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Public transport drivers </td>
+          <td>200</td>
+		  <td><input type="text"/></td>
+        </tr>
+        <tr>
+          <td rowspan="2">Employees</td>
+          <td>1</td>
+          <td>Government employees</td>
+          <td>270</td>
+		  <td><input type="text"/></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Supervisory staff</td>
+          <td>280</td>
+		  <td><input type="text"/></td>
+       </tr>
+        <tr>
+          <td rowspan="2">Managers</td>
+          <td>1</td>
+          <td>Primary school teacher</td>
+          <td>290</td>
+		  <td><input type="text"/></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Research and development technician </td>
+          <td>300</td>
+		  <td><input type="text"/></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Only the information necessary to identify a cell (box, intersection) in a table can be represented in the DDI grids. Here the column « Monthly gross salary » is the second dimension. The first dimension (row) corresponds to one and only one lowest-level element chosen here among the code, the occupation label or the coefficient. The remaining two (out of three) are only additional and descriptive information that is not possible to represent in the table currently.</p>
+    <p>Remark: if the code/job label pair were a subset of a real classification (such as the European NACE), this information could have been modelled in the QuestionGrid. It is not the case here, since the same code (e.g. 1) is used with distinct labels.</p>
+    <p>The code list that represents the first dimension (rows) is hierarchical. Let's assume from what precedes that only the occupation label is kept. Then the codes associated with the categories “Workers”, “Employees” and “Managers” have their attributes “levelNumber” set to “1” and “isDiscrete” to “false”. The codes associated with the other occupational categories (“occupation label”) are nested within their respective parent node (e.g. the one for “Supervisory statt” is nested in “Employees” code) its attribute “levelNumber” is set to “2” and “isDiscrete” to “true”</p>
+    <p>In addition to the present hierarchical code list represented on the first two columns the label “Code” can not be modelled correctly (only one label of code list is allowed regardless of the level). The issue is being discussed with the DDI Alliance.</p>
+
+    <h4 id="table-implicit-axis">Table with an implicit information axis</h4>
+    <p>A two-way table with an implicit information axis is a table where the modalities of one out of the two dimensions is not known a priori (e.g. a table that lists individuals in a household).</p>
+    <h5 id="table-no-row-stubs">Case 4: Table without row stubs</h5>
+    <h6 id="table-implicit-axis-ddi-modelling">DDI modelling</h4>
+    <p>Tables without row stubs are represented by a DDI QuestionGrid including a « Roster » dimension which allows to define a minimum and maximum number of rows.</p>
+    <p>Different business rules are implemented in Eno:</p>
+    <ul>
+      <li>If the attributes “minimumRequired” and “maximumAllowed” are equal and greater than 1, then Eno produces a grid with a fixed number of rows and without stubs.</li>
+      <li>If the attribute “maximumAllowed” is missing, Eno generates a dynamic table with an unlimited number of rows. An “Add a row” button is always displayed. The &lt;VariableGroup&gt; element to loop on the instance variables defined in the group. The &lt;TypeOfVariableGroup&gt; is then set to “TableLoop” in order to tell Eno to instantiate each variable any time a row is added to the table.</li>
+    </ul>
+    <p>New rules could be added to Eno, two would be of interest particularly:</p>
+    <ul>
+      <li>If both attributes “minimumRequired” and “maximumAllowed” are equal to 1, then the dynamic table has no button “Add a row” available.</li>
+      <li>If the attributes “minimumRequired” and “maximumAllowed” are different, then the button “Add a row” disappears when the “maximumAllowed” value is reached.</li>
+      <li>Implement a “Delete a row” button which would be compliant with the “minimumRequired” value.</li>
+    </ul>
+
+	<textarea class="xml" rows="20" cols="200" readonly="true">
+<d:QuestionGrid>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QG-36-1</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:QuestionText>
+      <d:LiteralText>
+         <d:Text>Please indicate the presents purchased at Itchy and Scratchy and their cost:</d:Text>
+      </d:LiteralText>
+   </d:QuestionText>
+   <d:GridDimension rank="2" displayCode="false" displayLabel="true">
+      <d:CodeDomain>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-7</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+      </d:CodeDomain>
+   </d:GridDimension>
+   <d:GridDimension rank="1" displayCode="false" displayLabel="false">
+      <d:Roster baseCodeValue="1" codeIterationValue="1" maximumAllowed="10" minimumRequired="4"/>
+   </d:GridDimension>
+   <d:StructuredMixedGridResponseDomain>               
+      <d:GridResponseDomain>
+         <d:TextDomain maxLength="200">
+         </d:TextDomain>
+         <d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="2"/>
+               <d:SelectDimension rank="1" allValues="true"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+      <d:GridResponseDomain>
+         <d:NumericDomain>
+         </d:NumericDomain>
+         <d:GridAttachment>
+            <d:CellCoordinatesAsDefined>
+               <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
+               <d:SelectDimension rank="1" allValues="true"/>
+            </d:CellCoordinatesAsDefined>
+         </d:GridAttachment>
+      </d:GridResponseDomain>
+   </d:StructuredMixedGridResponseDomain>
+</d:QuestionGrid></textarea>
+
+    <h6 id="table-implicit-axis-graphical-representation">Graphical representation</h6>
+    
+    <table>
+      <tbody>
+		<tr class="odd">
+		  <td colspan="2">
+		    <p>⇒ Please indicate the presents purchased at Itchy and Scratchy and their cost:</p>
+		  </td>
+        <tr class="even">
+          <td>Label</td>
+          <td>Cost</td>
+        </tr>
+        <tr class="odd">
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+        </tr>
+        <tr class="even">
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+        </tr>
+        <tr class="odd">
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+        </tr>
+        <tr class="even">
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="transversal">Transversal</h2>
+    <h3 id="response-domain">Response domain</h3>
+    <h4 id="response-domain-ddi-modelling">DDI Modelling</h4>
+    <p>There are two types of DDI response domains:</p>
+    <ul>
+      <li>those added in-line like in the examples provided in this document;</li>
+      <li>those that can be reused, defined in ad hoc structures, the « Managed*Representation » contained in a « ManagedRepresentationScheme ». The only response domain types available are the following:
+        <ul>
+          <li>ManagedDateTimeRepresentation;</li>
+          <li>ManagedMissingValuesRepresentation;</li>
+          <li>ManagedNumericRepresentation;</li>
+          <li>ManagedScaleRepresentation;</li>
+          <li>ManagedTextRepresentation.</li>
+        </ul></li>
+    </ul>
+    <p>It should be noted that the numeric response domain can be subtyped through the &lt;NumericTypeCode&gt; element which takes meaning from an external controlled vocabulary.</p>
+    <p>Here is below an example of a ManagedNumericRepresentation referenced in a QuestionItem.</p>
+
+	<textarea class="xml" rows="20" cols="200" readonly="true">
+<r:ManagedRepresentationScheme>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-MRS</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:ManagedNumericRepresentation>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-MNR-EFF</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:NumberRange>
+         <r:Low>1000</r:Low>
+         <r:High>999999999</r:High>
+      </r:NumberRange>
+      <r:NumericTypeCode codeListID="INSEE-PIPA-NTC-CV">Integer</r:NumericTypeCode>
+   </r:ManagedNumericRepresentation>
+</r:ManagedRepresentationScheme>
+<d:QuestionItem>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QI-2-6</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:QuestionText>
+      <d:LiteralText>
+         <d:Text>How many people work at the nuclear power plant?</d:Text>
+      </d:LiteralText>
+   </d:QuestionText>
+   <d:NumericDomainReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-MNR-EFF</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>ManagedNumericRepresentation</r:TypeOfObject>
+   </d:NumericDomainReference>
+</d:QuestionItem></textarea>
+
+    <h4 id="response-domain-graphical-representation">Graphical representation</h4>
+    <p>Any of the response domains defined in the previous examples can be an illustration of the use of a Managed*Representation.</p>
+
+    <h3 id="conditional-question">Conditional question</h3>
+    <p>A conditional question is a question with a conditional text parametrised by the responses to one or more questions from the instrument.</p>
+    <h4 id="conditional-question-ddi-modelling">DDI modelling</h4>
+    <p>The condition for displaying a text is expressed within a command contained in a &lt;d:ConditionalText&gt; element. DDI does not handle currently the link between a text to be displayed and its related condition: the assumption is made that the text expressed in the &lt;d:LiteralText&gt; follows its condition within the sequence of DDI elements<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>.</p>
+    <h4 id="conditional-question-graphical-representation">Graphical representation</h4>
+    <p><em>If the variable VAR takes the value of 2 then the question text is as follows:</em></p>
+    <p><strong>⇒ After his dismissal did Homer seek advice of any public body?</strong></p>
+    <p><em>If the variable VAR takes the value of 1 or 3, then the question text is as follows:</em></p>
+    <p><strong>⇒ After his dismissal did Homer get in touch with Employment Agency?</strong></p>
+
+    <h1 id="parameters">Parameters</h1>
+    <h2 id="parameter-flow">Parameter flow</h2>
+    <h3 id="parameter-flow-ddi-modelling">DDI modelling</h3>
+    <p>The parameter flow principle especially in the case of filtering, conditional text (question, instruction or categories), derived variables or computation items is described in annex to the DDI 3.2 specification. It is recommended to track the parameter value at each step of the DDI questionnaire flow. An illustration provided by Wendy Thomas is given below.</p>
+    <img src="img/parameters.png"/>
+	<p>The path followed by the parameter values is as follows: QI1 &rarr; RD &rarr; QC1 &rarr; SEQ &rarr; QC2 &rarr; QI2, if the assumption is made that the QuestionConstruct and the IfThenElse are nested in a mutual Sequence (otherwise an extra element layer should be added: &lt;r:binding&gt; and &lt;r:Outparameter&gt;/&lt;r:Inparameter&gt;).</p>
+    <p>Insee has adopted a simplified version of it which links directly the parameters from the response domains to the question objects that take these parameters as inputs, e.g: QI1 &rarr; RD1 &rarr; QI2.</p>
+
+    <h1 id="filter">Filter</h1>
+    <p>A filter question is a particular type of question in a questionnaire. Its purpose is to target a segment of the statistical population and drive it to specific branches of the questionnaire tree taking into account the responses provided previously (e.g. if yes, go to question 6, if no, go to question 9).</p>
+    <h2 id="filter-ddi-modelling">DDI modelling (general)</h2>
+    <p>It is divided into three parts:</p>
+    <ul>
+      <li><p>The sequence which references the condition (IfThenElse) the same way as the other subsequences. The “target” sequence which is monitored by the filter can be of a different nature, specified by the element TypeOfSequence:</p>
+        <ul>
+          <li><p>« Hideable » , i.e not displayed on the screen, called « dynamic filter» (use case 1);</p>
+            <p>It should be noted <strong>that an algorithmic choice for optimising the size of the XML tree and being compliant with the XForms output standard</strong> was done. The condition that defines the filter is always the one <strong>that validates the path via the next contiguous sequence</strong>. The non-validation of this condition does not trigger any specific behaviour apart from the display of the sequence defined after the condition construct (IfThenElse), which is from a business point of view the target sequence when the condition is met. For instance if a filtering condition is met which skips from the sequence 4 to the sequence 8, the opposite condition shall be defined. We then end up with SEQ-4, ITE-4, SEQ-8 with ITE-4 leading to the series of sequences SEQ-5, SEQ-6, SEQ-7 if the condition is met and does not trigger anything otherwise, and <strong>not</strong> SEQ-4, ITE-4, SEQ-9 with ITE-4 which displays SEQ-8 if the condition is true; SEQ-5, SEQ-6, SEQ-7 and SEQ-8 otherwise. Another example is given below.</p></li>
+          <li>« Greyed out », i.e. that has become deactivated and greyed out, called « greyed out filter » (use case 2);</p></li>
+        </ul></li>
+      <li><p>The condition that defines the filter is expressed through a construct IfThenElse (see below). Usually parameters from previous questions are reused.</li>
+      <li><p>The constructs that reference the questions either in the sequences targeted in the condition (IfThenElse), or directly in the top-level sequence (the one that references the IfThenElse).</p></li>
+    </ul>
+    <h3 id="hideable-filter-simple">Simple example: « Hideable »</h3>
+
+	<textarea class="xml" rows="20" cols="200" readonly="true">
+<d:Sequence>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-SEQ-14</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:Label>
+      <r:Content xml:lang="en-IE">
+         <xhtml:p>Knowledge on the characters</xhtml:p>
+      </r:Content>
+   </r:Label>
+   <d:InterviewerInstructionReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-IC-12-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Instruction</r:TypeOfObject>
+   </d:InterviewerInstructionReference>
+   <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Submodule</d:TypeOfSequence>
+   <d:ControlConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QC-14-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+   </d:ControlConstructReference>
+   <d:ControlConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-ITE-14-2</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>IfThenElse</r:TypeOfObject>
+   </d:ControlConstructReference>
+</d:Sequence>
+<d:Sequence>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-SEQ-14-2</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:TypeOfSequence codeListID="INSEE-CV-1">Hideable</d:TypeOfSequence>
+   <d:ControlConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QC-14-2</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+   </d:ControlConstructReference>
+</d:Sequence>
+<d:IfThenElse>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-ITE-14-2</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:IfCondition>
+      <r:Command>
+         <r:ProgramLanguage>Neutral</r:ProgramLanguage>
+         <r:InParameter isArray="true">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-ITEIP-14-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:ParameterName>
+               <r:String xml:lang="en-IE">CHOMPART</r:String>
+            </r:ParameterName>
+            <r:NumericRepresentation> </r:NumericRepresentation>
+         </r:InParameter>
+         <r:Binding>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QIOP-14-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:TargetParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-ITEIP-14-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>InParameter</r:TypeOfObject>
+            </r:TargetParameterReference>
+         </r:Binding>
+         <r:CommandContent>INSEE-SIMPSONS-ITEIP-14-1='O'</r:CommandContent>
+      </r:Command>
+   </d:IfCondition>
+   <d:ThenConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-SEQ-14-2</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Sequence</r:TypeOfObject>
+   </d:ThenConstructReference>
+</d:IfThenElse>
+<d:QuestionConstruct>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QC-14-1</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:QuestionReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QI-14-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+   </r:QuestionReference>
+</d:QuestionConstruct>
+<d:QuestionConstruct>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QC-14-2</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:QuestionReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QI-14-2</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+   </r:QuestionReference>
+</d:QuestionConstruct></textarea>
+
+    <h3 id="hideable-filter-complex">Complex example: « Hideable »</h3>
+
+	<textarea class="xml" rows="23" cols="200" readonly="true">
+<d:Sequence>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-SEQ-3567</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:ControlConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-SEQ-35</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Sequence</r:TypeOfObject>
+   </d:ControlConstructReference>
+   <d:ControlConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-SEQ-36</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Sequence</r:TypeOfObject>
+   </d:ControlConstructReference>
+   <d:ControlConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>IINSEE-SIMPSONS -SEQ-37</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Sequence</r:TypeOfObject>
+   </d:ControlConstructReference>
+</d:Sequence></textarea>
+
+    <p>The detailed version of the sequences 32, 33, 34, 35, 36 et 37 is not provided for XML verbosity purposes.</p>
+
+	<textarea class="xml" rows="20" cols="200" readonly="true">
+<d:IfThenElse>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-ITE-3</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:IfCondition>
+      <r:Command>
+         <r:ProgramLanguage>Neutral</r:ProgramLanguage>
+         <r:InParameter isArray="true">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS ITEIP-31</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:ParameterName>
+               <r:String xml:lang="en-IE">Condition31ITE</r:String>
+            </r:ParameterName>
+            <r:CodeRepresentation>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CL-31</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+            </r:CodeRepresentation>
+         </r:InParameter>
+         <r:Binding>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QGOP-31</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:TargetParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-ITEIP-31</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>InParameter</r:TypeOfObject>
+            </r:TargetParameterReference>
+         </r:Binding>
+         <r:CommandContent>if Condition31ITE = 1,</r:CommandContent>
+      </r:Command>
+   </d:IfCondition>
+   <d:ThenConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-SEQ-3234</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Sequence</r:TypeOfObject>
+   </d:ThenConstructReference>
+</d:IfThenElse>
+<d:ElseIf>
+   <d:IfCondition>
+      <r:Command>
+         <r:ProgramLanguage>Neutral</r:ProgramLanguage>
+         <r:InParameter isArray="true">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS -ITEIP-31</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:ParameterName>
+               <r:String xml:lang="en-IE">Condition31ITE</r:String>
+            </r:ParameterName>
+            <r:CodeRepresentation>
+               <r:CodeListReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-SIMPSONS-CL-31</r:ID>
+                  <r:Version>0.1.0</r:Version>
+                  <r:TypeOfObject>CodeList</r:TypeOfObject>
+               </r:CodeListReference>
+            </r:CodeRepresentation>
+         </r:InParameter>
+         <r:Binding>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QGOP-31</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:TargetParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-ITEIP-31</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>InParameter</r:TypeOfObject>
+            </r:TargetParameterReference>
+         </r:Binding>
+         <r:CommandContent>if Condition31ITE = 2</r:CommandContent>
+      </r:Command>
+   </d:IfCondition>
+   <d:ThenConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-SEQ-3256</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Sequence</r:TypeOfObject>
+   </d:ThenConstructReference>
+</d:ElseIf></textarea>
+
+    <p>In this example three choices (see below) are proposed to the respondent, each of them determines a specific path of the questionnaire tree.</p>
+    <p>The first two choices lead to specific questionnaire branches that are not contiguous to the main current branch. The DDI elements “If” and “ElseIf” together with a “Then” which allow tospecify the sequence to which the respondent should be directed.</p>
+    <p>The third choice is the default behaviour, i.e the main branch if the first two conditions (choices 1 and 2) are not met. In this precise use case we simply move on and reach the next contiguous sequence (that is sequence 4).</p>
+
+    <h3 id="greyed-out-filter">Example: « Greyed out »</h3>
+    <p>The DDI is the same as the previous use case <a href="#hideable-filter-simple">Simple example: « Hideable »</a> where « Greyed out » is the value of the sequence type instead of « Hideable ».</p>
+
+    <h2 id="filter-graphical-representation">Graphical representation</h2>
+    <h3 id="hideable-filter-simple-graphical-representation">Simple example: « Hideable »</h3>
+    <p>In the Web questionnaire, the dynamic filter makes appear/disappear dynamically one or more questions. This choice of ergonomics allows notably to make the questionnaire more readable to the respondents.</p>
+    <p>The representation associated with the DDI modelling is as follows:</p>
+    <p><strong>⇒ Do you know Kent Brockman ?</strong></p>
+	<input type="radio" name="enjoy" checked="true"> Yes
+	<br/>
+	<input type="radio" name="enjoy"> No
+    <p>If the answer is “Yes”, then the following question is displayed:</p>
+    <p><strong>⇒ Can you mention his best coverages?</strong></p>
+	<textarea rows="3" cols="40"></textarea>
+
+    <h3 id="hideable-filter-complex-graphical-representation">Complex example: « Hideable »</h3>
+    <p>This example is not feasible in this document for verbosity sake. However to give a broad idea on it an example would be to jump from a Web page N to a Web page N+4.</p>
+
+    <h3 id="greyed-out-filter-graphical-representation">Example: « Greyed out »</h3>
+    <p>In the Web questionnaire, the greyed out filter locks/unlocks one or more questions. Although the question is visible, the respondent could answer it only if the respondent gives the responses that allow to unlock the question(s).</p>
+    <p>The representation associated with the DDI modelling (“Greyed out” is the type of sequence) is as follows:</p>
+    <p><strong>⇒ Do you know Kent Brockman ?</strong></p>
+	<input type="radio" name="enjoy" checked="true"> Yes
+	<br/>
+	<input type="radio" name="enjoy"> No
+    <p>If the answer is “Yes”, then the following question is displayed:</p>
+	<div class="adjust greyed">
+      <p><strong>⇒ Can you mention his best coverages?</strong></p>
+	  <textarea class="greyed" rows="3" cols="40"></textarea>
+	</div>
+
+    <h1 id="check">Check</h1>
+    <p>The web questionnaire allows to operate online checks and then raise the response quality. There are two types of checks: the data entry checks and the micro-checks (e.g. the coherence checks).</p>
+
+    <h2 id="data-entry-check">Data entry check</h2>
+    <p>The input check is linked to the response domain, e.g. checking the data type of a response input. A very same data entry check will be applied to any identical response domain. Thus the check per se is not made explicit (apart from the regular expressions), it is simply embedded in the response domain. These checks do not trigger any DDI tailor-made error message or require any level of criticality.</p>
+    <p><em>Example</em>: text field up to 200 characters maximum, integer up to 3 digits between 0 and 100, date format DDMMYYYY, etc.</p>
+
+    <h3 id="data-entry-check-ddi-modelling">DDI modelling</h3>
+    <p>An example checking the length of a string:</p>
+
+	<textarea class="xml" rows="2" cols="200" readonly="true">
+<d:TextDomain maxLength="200">              
+</d:TextDomain>
+</textarea>
+
+    <p>A check on a numeric field:</p>
+
+	<textarea class="xml" rows="7" cols="200" readonly="true">
+<d:NumericDomain>
+   <r:NumberRange>
+      <r:Low>0</r:Low>
+      <r:High>99999999</r:High>
+   </r:NumberRange>
+   <r:NumericTypeCode codeListID="INSEE-SIMPSONS-NTC-CV">Integer</r:NumericTypeCode>
+</d:NumericDomain>
+</textarea>
+
+    <p>A check on a date field:</p>
+
+	<textarea class="xml" rows="3" cols="200" readonly="true">
+<r:DateTimeDomain regExp="\d{3}\-\d{2}\-\d{4}">
+   <r:DateTypeCode>date</r:DateTypeCode>
+</r:DateTimeDomain></textarea>
+
+    <h2 id="microcheck">Microcheck</h2>
+    <p>There are currently three types of microchecks:</p>
+    <ul>
+      <li>the internal coherence checks;</li>
+      <li>the internal likelihood-ratio checks (the comparison of a ratio with its distribution);</li>
+      <li>Temporal likelihood-ratio checks (ditto but using the ratio N/N-1).</li>
+    </ul>
+    <p>A microcheck is defined by:</p>
+    <ul>
+      <li>a check condition;</li>
+      <li>a DDI error message displayed if the condition is met;</li>
+      <li>a criticality level.</li>
+    </ul>
+    <p>Example: a coherence check on the total expenses and the total amount spent broken down by products. The error message would then be « <strong>The total expenses at the mini-market is different from the sum of the amounts claimed. Please correct it</strong> ».</p>
+
+    <h3 id="microcheck-ddi-modelling">DDI modelling</h3>
+    <p>The coherence checks are represented by the &lt;ComputationItem&gt; which are constructs per se. The condition within the command which determines whether or not the messages be displayed (as statements typed as warning).</p>
+    <p>The input values to the check are brought by and stored within the parameters.</p>
+    <p>It should be noted that it is not possible for the time being to specify a criticality level for the check. A satisfactory solution would be to type the &lt;ComputationItem&gt; (TypeOfComputationItem?)<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>.</p>
+    <p>It should be also noted that a work in progress at Insee aims to define a check specification language. In this version of the document, the checks are expressed using the XPath language.</p>
+
+	<textarea class="xml" rows="20" cols="200" readonly="true">
+<d:Sequence>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-SEQ-23</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:Label>
+      <r:Content xml:lang="en-IE">
+         <xhtml:p>Shopping at the mini-market</xhtml:p>
+      </r:Content>
+   </r:Label>
+   <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">Submodule</d:TypeOfSequence>
+   <d:ControlConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QC-23-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+   </d:ControlConstructReference>
+   <d:ControlConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-CI-23-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>ComputationItem</r:TypeOfObject>
+   </d:ControlConstructReference>
+</d:Sequence>
+<d:QuestionConstruct>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-QC-23-1</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:QuestionReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QI-23</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+   </r:QuestionReference>
+</d:QuestionConstruct></textarea>
+
+	<textarea class="xml" rows="20" cols="200" readonly="true">
+<d:ComputationItem>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-CI-23-1</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:InterviewerInstructionReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-II-e</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Instruction</r:TypeOfObject>
+   </d:InterviewerInstructionReference>
+   <r:CommandCode>
+      <r:Command>
+         <r:ProgramLanguage>Neutral</r:ProgramLanguage>
+         <r:InParameter isArray="true">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CIIP-23-1</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:ParameterName>
+               <r:String xml:lang="en-IE">icecream</r:String>
+            </r:ParameterName>
+         </r:InParameter>
+         <r:InParameter isArray="true">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CIIP-23-2</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:ParameterName>
+               <r:String xml:lang="en-IE">candies</r:String>
+            </r:ParameterName>
+         </r:InParameter>
+         <r:InParameter isArray="true">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CIIP-23-3</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:ParameterName>
+               <r:String xml:lang="en-IE">tbone</r:String>
+            </r:ParameterName>
+         </r:InParameter>
+         <r:InParameter isArray="true">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CIIP-23-4</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:ParameterName>
+               <r:String xml:lang="en-IE">donut</r:String>
+            </r:ParameterName>
+         </r:InParameter>
+         <r:InParameter isArray="true">
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CIIP-23-5</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:ParameterName>
+               <r:String xml:lang="en-IE">TotalExpenses</r:String>
+            </r:ParameterName>            
+         </r:InParameter>
+         <r:Binding>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QIOP-23-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:TargetParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CIIP-23-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>InParameter</r:TypeOfObject>
+            </r:TargetParameterReference>
+         </r:Binding> <r:Binding>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QIOP-23-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:TargetParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CIIP-23-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>InParameter</r:TypeOfObject>
+            </r:TargetParameterReference>
+         </r:Binding>
+         <r:Binding>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QIOP-23-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:TargetParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CIIP-23-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>InParameter</r:TypeOfObject>
+            </r:TargetParameterReference>
+         </r:Binding> <r:Binding>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QIOP-23-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:TargetParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CIIP-23-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>InParameter</r:TypeOfObject>
+            </r:TargetParameterReference>
+         </r:Binding>
+         <r:Binding>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QIOP-23-5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:TargetParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-CIIP-23-5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>InParameter</r:TypeOfObject>
+            </r:TargetParameterReference>
+         </r:Binding>
+         <r:CommandContent>INSEE-SIMPSONS-CIIP-23-5 = INSEE-SIMPSONS-CIIP-23-1 + INSEE-SIMPSONS-CIIP-23-2 + INSEE-SIMPSONS-CIIP-23-3 + INSEE-SIMPSONS-CIIP-23-4</r:CommandContent>
+      </r:Command>
+   </r:CommandCode>
+</d:ComputationItem></textarea>
+
+    <h3 id="microcheck-example">Example</h3>
+    <p>If INSEE-SIMPSONS-CIIP-23-5 = INSEE-SIMPSONS-CIIP-23-1 + INSEE-SIMPSONS-CIIP-23-2 + INSEE-SIMPSONS-CIIP-23-3 + INSEE-SIMPSONS-CIIP-23-4, then the following message is displayed:</p>
+    <p><strong>The total expenses at the mini-market is different from the sum of the amounts claimed. Please correct it.</strong></p>
+
+    <h1 id="loop">Loop</h1>
+    <p>It is quite common in household survey questionnaires to ask the same question block to each household member. The element needed in DDI (and other survey programming language) is a loop.</p>
+    <p>A loop is a way of describing an action which loops until a limiting condition is met. This action often takes the form of a given set of questions or even of a questionnaire. In this case the condition is defined by the number of statistical units surveyed (e.g. persons or businesses).</p>
+    <p><em>Example</em>: A first questionnaire form surveys a business, and a second one is specific to each employee. A loop is then needed to submit the same questionnaire to each employee, the stop condition being met when the total number of employees is reached.</p>
+
+    <h2 id="loop-ddi-modelling">DDI modelling</h3>
+    <p><strong>An example which loops on the number of employees of a business previously surveyed is used here.</strong></p>
+    <p>The XML chunk below is the usual DDI modelling of a loop. A loop, similarly to the &lt;IfThenElse&gt; or the &lt;Sequence&gt;, is a type of control construct.</p>
+    <p>The &lt;InitialValue&gt; gives the information on the command used to set the initial value for the process. It could be a simple value just as the example shows.</p>
+    <p>The &lt;LoopWhile&gt; defines the command used to determine whether the relation condition is met. Eno uses an xpath command that checks that the count of generated occurrences of a given sequence is lower than an external parameter (surrounded by the Danish letter 'ø'). The sequence sub-string identifier in the example is 'INSEE-ECMOSSETAB2-SEQ-3-a-' and the external parameter representing the number of employees is 'nbsal'.</p>
+    <p>The &lt;StepValue&gt; is the command or simple value used to set the incremental or step value for the process.</p>
+    <p>The &lt;LoopVariableReference&gt; is not used, but it should be, in order to reference the variable defining the loop. However, since the variable is very often not collected but provided a priori by the questionnaire owner, it is modelled as an usual external parameter (with the 'ø' character).</p>
+
+	<textarea class="xml" rows="20" cols="200" readonly="true">
+<d:Loop>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-ECMOSSETAB2-LO-SALARIE</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <d:InitialValue>
+      <r:Command>
+         <r:ProgramLanguage>xpath</r:ProgramLanguage>
+         <r:CommandContent>1</r:CommandContent>
+      </r:Command>
+   </d:InitialValue>
+   <d:LoopWhile>
+      <r:Command>
+         <r:ProgramLanguage>xpath</r:ProgramLanguage>
+         <r:CommandContent>count(d:Sequence/child::r:ID[substring(normalize-space(text()),1,26)='INSEE-ECMOSSETAB2-SEQ-3-a-'])&lt;ønbsalø</r:CommandContent>
+      </r:Command>
+   </d:LoopWhile>
+   <d:StepValue>
+      <r:Command>
+         <r:ProgramLanguage>xpath</r:ProgramLanguage>
+         <r:CommandContent>1</r:CommandContent>
+      </r:Command>
+   </d:StepValue>
+   <d:ControlConstructReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-ECMOSSETAB2-SEQ-3-a-0</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Sequence</r:TypeOfObject>
+   </d:ControlConstructReference>
+</d:Loop></textarea>
+
+    <p>The &lt;VariableGroup&gt; has a specific role in the context of a loop: it allows to loop on the instance variables attached to the questions that are in a loop. </p>
+    <p>Two sub-elements are particularly important:</p>
+    <ul>
+      <li>the &lt;BasedOnObject&gt; allows to link the variable group to the correct &lt;Loop&gt; by reference</li>
+      <li>the &lt;TypeOfVariableGroup&gt; indicates to Eno how to process this loop. In the example below the 'QuestionLoop' value means that questions should be replicated. Up to now the other type supported by Eno is 'TableLoop' that Eno interprets as 'instantiate each variable defined in the group any time a row is added to the table'.</li>
+    </ul>
+    <p>Each variable that is duplicated any time the loop condition is met is referenced in the variable group.</p>
+
+	<textarea class="xml" rows="20" cols="200" readonly="true">
+<l:VariableGroup>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-ECMOSSETAB2-VLO-SALARIE</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <r:BasedOnObject>
+      <r:BasedOnReference>
+         <r:Agency>fr.insee</r:Agency>
+         <r:ID>INSEE-ECMOSSETAB2-LO-SALARIE</r:ID>
+         <r:Version>0.1.0</r:Version>
+         <r:TypeOfObject>Loop</r:TypeOfObject>
+      </r:BasedOnReference>
+   </r:BasedOnObject>
+   <l:TypeOfVariableGroup>QuestionLoop</l:TypeOfVariableGroup>
+   <l:VariableGroupName>
+      <r:String>BOUCLE_SALARIES</r:String>
+   </l:VariableGroupName>
+   <r:VariableReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-ECMOSSETAB2-VR-NOM_SAL</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Variable</r:TypeOfObject>
+   </r:VariableReference>
+   <r:VariableReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-ECMOSSETAB2-VR-QUIT_ETB</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Variable</r:TypeOfObject>
+   </r:VariableReference>
+   <r:VariableReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-ECMOSSETAB2-VR-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Variable</r:TypeOfObject>
+   </r:VariableReference>
+   <r:VariableReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-ECMOSSETAB2-VR-1_1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Variable</r:TypeOfObject>
+   </r:VariableReference>
+   <r:VariableReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-ECMOSSETAB2-VR-1_2</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>Variable</r:TypeOfObject>
+   </r:VariableReference>
+</l:VariableGroup></textarea>
+
+    <h1 id="variable">Variable</h1>
+    <p>In the context of a questionnaire, only the instance variables are used (conceptual and represented variables are not considered).</p>
+    <p>The instance variable takes its value <em>from the dataset context</em> . The instance variable is used to described the data collected.</p>
+    <p>For example the instance variable « Sex », Margaret is a &lt;w, Woman&gt; and Bart is a &lt;m, Man&gt;.</p>
+
+    <h2 id="variable-ddi-modelling"><span id="anchor-62"></span>DDI modelling</h2>
+    <p>The instance variable includes both:</p>
+    <ul>
+      <li>a reference to the question which collects it;</li>
+      <li>and the <em>output</em> parameter (OutParameter) defined in this question that contains its value.</li>
+    </ul>
+
+	<textarea class="xml" rows="20" cols="200" readonly="true">
+<l:Variable>
+   <r:Agency>fr.insee</r:Agency>
+   <r:ID>INSEE-SIMPSONS-VR-SEX</r:ID>
+   <r:Version>0.1.0</r:Version>
+   <l:VariableName>
+      <r:String xml:lang="en-IE">SEX</r:String>
+   </l:VariableName>
+   <r:Label>
+      <r:Content xml:lang="en-IE">Sex</r:Content>
+   </r:Label>
+   <r:SourceParameterReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QGOP-2-1-4</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>OutParameter</r:TypeOfObject>
+   </r:SourceParameterReference>
+   <r:QuestionReference>
+      <r:Agency>fr.insee</r:Agency>
+      <r:ID>INSEE-SIMPSONS-QG-2-1</r:ID>
+      <r:Version>0.1.0</r:Version>
+      <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+   </r:QuestionReference>
+   <l:VariableRepresentation>
+      <r:CodeRepresentation>
+         <r:CodeListReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-CL-4</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>CodeList</r:TypeOfObject>
+         </r:CodeListReference>
+      </r:CodeRepresentation>
+   </l:VariableRepresentation>
+</l:Variable></textarea>
+
+    <div class="footnotes">
+      <hr />
+      <ol>
+        <li id="fn1"><p>Still to be implémented.<a href="#fnref1">↩</a></p></li>
+        <li id="fn2"><p>A more satisfactory solution is being worked out in collaboration with the DDI Alliance.<a href="#fnref2">↩</a></p></li>
+        <li id="fn3"><p>A more satisfactory solution is being worked out in collaboration with the DDI Alliance.<a href="#fnref3">↩</a></p></li>
+        <li id="fn4"><p>A more satisfactory solution is being worked out in collaboration with the DDI Alliance.<a href="#fnref4">↩</a></p></li>
+      </ol>
+    </div>
+  </body>
+</html>
