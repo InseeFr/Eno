@@ -34,8 +34,8 @@
     </xd:doc>
     <xsl:variable name="labels-resource">
         <xsl:variable name="languages" as="xs:string*">
-            <xsl:for-each select="root()//@xml:lang">
-                <xsl:value-of select="."/>
+            <xsl:for-each select="distinct-values(root()//@xml:lang)">
+                <xsl:value-of select="."/>    
             </xsl:for-each>
         </xsl:variable>
         <xsl:sequence select="eno:build-labels-resource($labels-folder,$languages)"/>
