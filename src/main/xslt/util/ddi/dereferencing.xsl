@@ -3,7 +3,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml" 
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:g="ddi:group:3_2"
-    xmlns:s="ddi:studyunit:3_2" version="2.0">
+    xmlns:s="ddi:studyunit:3_2" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0">
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -11,7 +11,6 @@
         </xd:desc>
     </xd:doc>
 
-    
     <xd:doc>
         <xd:desc>
             <xd:p>The output folder in which the dereferenced files (one for each main sequence) are generated.</xd:p>
@@ -23,6 +22,21 @@
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
     <xsl:strip-space elements="*"/>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Successively, some group of elements is used to dereference some other group of elements.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="calculated-variables-sequences" as="node()">
+        <Variables>
+            <xsl:for-each select="//d:GenerationInstruction/d:ControlConstructReference">
+                <Variable>
+                    <xsl:value-of select="r:ID"/>
+                </Variable>
+            </xsl:for-each>
+        </Variables>
+    </xsl:variable>    
 
     <xd:doc>
         <xd:desc>
@@ -69,6 +83,7 @@
         <xsl:variable name="references">
             <xsl:copy-of select="//d:ControlConstructScheme"/>
             <xsl:copy-of select="//d:InterviewerInstructionScheme"/>
+            <xsl:copy-of select="//d:ProcessingInstructionScheme"/>
             <xsl:copy-of select="$dereferenced//d:QuestionScheme"/>
         </xsl:variable>
 
@@ -129,22 +144,37 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Not retrieving the variables that correspond to a question.</xd:p>
+            <xd:p>Not retrieving the variables that correspond to a question or a calculated variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="l:Variable[r:QuestionReference or r:SourceParameterReference]" priority="1"/>
+    <xsl:template match="l:Variable[r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference]" priority="1"/>
 
     <xd:doc>
         <xd:desc>
             <xd:p>Only retrieving the variables which are not corresponding to a question.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="l:Variable[not(r:QuestionReference or r:SourceParameterReference)]"
+    <xsl:template match="l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"
         priority="1">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
     </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template to insert GenerationInstruction, which reference the element they have to be included in.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="node()[r:ID=$calculated-variables-sequences/Variable and not(ends-with(name(), 'Reference'))]">
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*"/>
+            <xsl:apply-templates select="//d:GenerationInstruction[d:ControlConstructReference/r:ID=current()/r:ID]"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="d:GenerationInstruction/d:ControlConstructReference"/>
+    
 
     <xd:doc>
         <xd:desc>
@@ -157,7 +187,7 @@
         <!-- Copying the element -->
         <!-- Making sure we're not copying an element that isn't itself inside another reference (and that would actually not the base element but an already indexed reference) -->
         <xsl:apply-templates
-            select="$references//*[r:ID = $ID and not(ancestor-or-self::node()[ends-with(name(), 'Reference')])]"
+            select="$references//*[r:ID = $ID and not(ancestor-or-self::node()[ends-with(name(), 'Reference') or starts-with(name(), 'd:Source')])]"
         />
     </xsl:template>
 

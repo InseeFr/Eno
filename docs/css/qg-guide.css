@@ -1,0 +1,51 @@
+code {
+	white-space: pre;
+}
+
+body {
+	font-family: "Arial";
+}
+
+h1 {
+	color: #007682;
+	font-size: 250%;
+}
+
+h2 {
+	color: #007682;
+	font-size: 200%;
+}
+
+h3 {
+	color: #007682;
+	font-size: 150%;
+}
+
+h4 {
+	color: #007682;
+	font-size: 130%;
+}
+
+p.important {
+	color: #4b8e3c;
+	font-weight: bold;
+	font-style: italic;
+}
+
+textarea.xml {
+    border: none;
+	background-color: lightyellow;
+}
+
+div.frame {
+	border: 1px solid black;
+	padding: 3px;
+}
+
+div.adjust {
+	display: inline-block;
+}
+
+.greyed {
+	background-color: lightgrey;
+}

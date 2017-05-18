@@ -6,7 +6,9 @@
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
     exclude-result-prefixes="xd eno enofr" version="2.0">
-
+    
+    <!--<xsl:import href="../../transformations/ddi2fr/ddi2fr.xsl"/>-->
+    
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>An xslt stylesheet who transforms an input into Xforms (Orbeon Form-Runner) through generic driver templates.</xd:p>
@@ -1405,12 +1407,12 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template for Body for the ResponseElement driver.</xd:p>
-            <xd:p>It corresponds to an element which will be present in the Instance and Bind but not in the Resource and the Body.</xd:p>
-            <xd:p>Its prefilled value can have an impact on other elements of the form.</xd:p>
+            <xd:p>Template for Body for the ResponseElement and CalculatedVariable drivers.</xd:p>
+            <xd:p>It corresponds to elements which will be present in the Instance and Bind but not in the Resource and the Body.</xd:p>
+            <xd:p>Their prefilled value can have an impact on other elements of the form.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*[name() = ('Resource', 'Body')]//*[name() = ('ResponseElement')]"
+    <xsl:template match="*[name() = ('Resource', 'Body')]//*[name() = ('ResponseElement','CalculatedVariable')]"
         mode="model"/>
     
 </xsl:stylesheet>
