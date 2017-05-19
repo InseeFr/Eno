@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Use for controlling the resolution of includes
  * FIXME we need to urgently change the includes to match a simpler scheme
- * i.e. <xsl:import href=</path/in/resources> />
+ * i.e. import statements href are equal to <code>/path/to/resources/directory</code>
  * */
 public class ClasspathURIResolver implements URIResolver {
 	
