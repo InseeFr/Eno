@@ -35,14 +35,15 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p></xd:p>
+            <xd:p>The list of sequences not to title with a number</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:variable name="number-free-seq" select="$style/Title/Sequence/NumberFreeSeq"/>
     
     <xd:doc>
         <xd:desc>
-            <xd:p></xd:p>
+            <xd:p>The list of filters which are at the end of a sequence, </xd:p>
+            <xd:p>but for which questions must not be titled with a number</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:variable name="number-free-filter" select="$style/Title/Question/NotNumberedLastFilter"/>
@@ -58,8 +59,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Default template for every element and every attribute, getting to the
-                child.</xd:p>
+            <xd:p>Default template for every element and every attribute, getting to the child.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="node() | @*" mode="#all">
@@ -140,9 +140,6 @@
             <xsl:if
                 test="enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
                 <!-- Counting the questions that aren't subQuestions -->
-                <!--                <xsl:number count="d:ControlConstructReference[d:QuestionConstruct and (enoddi:is-subquestion(d:QuestionConstruct,$niveauSeqQuest))]" 
-                    level="any" format="{$styleQuest/StyleNumQuest}" from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$niveauSeqQuest]]"/>
--->
                 <xsl:number
                     count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))=0]"
                     level="any" format="{$styleQuest/StyleNumQuest}"
@@ -215,7 +212,6 @@
         <xsl:variable name="isCommon">
             <xsl:choose>
                 <xsl:when test="empty($list2[1])">false</xsl:when>
-                <!--<xsl:when test="contains($list1,$list2[1])">true</xsl:when>-->
                 <xsl:when test="index-of($list1,$list2[1])>0">true</xsl:when>
                 <xsl:when test="empty($list2[2])">false</xsl:when>
                 <xsl:otherwise>
@@ -245,16 +241,15 @@
                 select="root($context)//d:Sequence[d:TypeOfSequence=$seq-level and descendant::d:QuestionConstruct=$context]"
             />
         </xsl:variable>
-        <xsl:value-of
-            select="count($ancestors//d:ControlConstructReference
-            [d:IfThenElse//d:TypeOfSequence[text()='hideable']
-            and descendant::d:QuestionConstruct[r:ID=$context/r:ID]
-            and (following-sibling::d:ControlConstructReference[d:IfThenElse or d:QuestionConstruct]
-            or index-of($number-free-filter,d:IfThenElse/r:ID)>0)
-            and preceding-sibling::d:ControlConstructReference[d:QuestionConstruct]]
-            [enoddi:is-common(preceding-sibling::d:ControlConstructReference[d:QuestionConstruct][1]//r:TargetParameterReference/r:ID,
-            d:IfThenElse/d:IfCondition//r:SourceParameterReference/r:ID)])"
-        />
+        <xsl:value-of select="count($ancestors//d:ControlConstructReference
+                            [d:IfThenElse//d:TypeOfSequence[text()='hideable']
+                             and descendant::d:QuestionConstruct[r:ID=$context/r:ID]
+                             and (following-sibling::d:ControlConstructReference[d:IfThenElse or d:QuestionConstruct]
+                                  or index-of($number-free-filter,d:IfThenElse/r:ID)>0)
+                             and preceding-sibling::d:ControlConstructReference[d:QuestionConstruct]]
+                            [enoddi:is-common(preceding-sibling::d:ControlConstructReference[d:QuestionConstruct][1]//r:TargetParameterReference/r:ID,
+                                              d:IfThenElse/d:IfCondition//r:SourceParameterReference/r:ID)]
+                                   )"/>
     </xsl:function>
 
     <xd:doc>
@@ -265,7 +260,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template
-        match="l:Code[ancestor::d:GridDimension[@displayCode='true' and @displayLabel='true']]
+        match="l:Code[ancestor::d:GridDimension[@displayCode='true'] and not(descendant::l:Code)]
         /r:CategoryReference/l:Category/r:Label/r:Content">
         <xsl:variable name="prefix">
             <xsl:value-of select="concat(../../../../r:Value,' - ')"/>
@@ -279,7 +274,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p></xd:p>
+            <xd:p>Only the first child of a xhtml:p must be titled</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="xhtml:p" mode="modif-title" priority="2">
@@ -306,7 +301,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p></xd:p>
+            <xd:p>Adding the prefix.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="xhtml:span[@class='block']" mode="modif-title" priority="2">

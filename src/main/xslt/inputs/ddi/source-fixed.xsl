@@ -58,8 +58,11 @@
                                                                                       /d:InstructionText/d:LiteralText/d:Text">
                     <xsl:element name="xhtml:span">
                         <xsl:attribute name="title">
-                            <xsl:apply-templates select="node()[not(name()='xhtml:p')] | xhtml:p/node()"
-                                mode="lang-choice"/>
+                            <xsl:variable name="title">
+                                <xsl:apply-templates select="node()[not(name()='xhtml:p')] | xhtml:p/node()"
+                                    mode="lang-choice"/>                                
+                            </xsl:variable>
+                            <xsl:value-of select="normalize-space($title)"/>
                         </xsl:attribute>
                         <xsl:text>&#160;</xsl:text>
                         <xsl:element name="img">
@@ -94,7 +97,10 @@
         <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[d:InstructionName/r:String='tooltip']">
             <xsl:element name="xhtml:span">
                 <xsl:attribute name="title">
-                    <xsl:apply-templates select="d:InstructionText/d:LiteralText/d:Text" mode="lang-choice"/>
+                    <xsl:variable name="title">
+                        <xsl:apply-templates select="d:InstructionText/d:LiteralText/d:Text" mode="lang-choice"/>    
+                    </xsl:variable>
+                    <xsl:value-of select="normalize-space($title)"/>
                 </xsl:attribute>
                 <xsl:text>&#160;</xsl:text>
                 <xsl:element name="img">
@@ -385,7 +391,7 @@
             />
         </xsl:variable>
         <xsl:value-of
-            select="max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList | ancestor::l:Code))-number($parents)-number($children)+1"
+            select="max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))-number($parents)-number($children)+1"
         />
     </xsl:template>
 
@@ -453,13 +459,13 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Getting colspan for d:NoDataByDefinition elements.</xd:p>
+            <xd:p>Getting colspan for d:NoDataByDefinition elements for which colspan can be different from 1.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:NoDataByDefinition" mode="enoddi:get-colspan" priority="1">
-        <xsl:value-of
-            select="string(1+number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum)-number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum))"
-        />
+    <xsl:template match="d:NoDataByDefinition[d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum]" mode="enoddi:get-colspan" priority="1">
+        <xsl:value-of select="string(1
+                                    +number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum)
+                                    -number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum))"/>
     </xsl:template>
     
     <xd:doc>
@@ -568,6 +574,52 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:value-of select="$result"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Get the formula to know when a response is hidden or not.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    
+    <xsl:template match="*[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference'))
+                            and parent::d:ResponseDomainInMixed[d:AttachmentLocation]]" 
+                            mode="enoddi:get-hideable-command">
+        
+        <xsl:variable name="attachment-domain" select="../d:AttachmentLocation/d:DomainSpecificValue/@attachmentDomain"/>
+        <xsl:variable name="source-response-out-parameter" select="../../d:ResponseDomainInMixed[@attachmentBase=$attachment-domain]//r:OutParameter/r:ID"/>
+        
+        <!-- relative-path code comes from cleaning.xsl -->
+        <xsl:variable name="source-response-id">
+            <xsl:variable name="relative-path">
+                <xsl:value-of>//</xsl:value-of>
+                <xsl:for-each select="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]">
+                    <xsl:variable name="id">
+                        <xsl:choose>
+                            <xsl:when test="name()='d:Loop'">
+                                <xsl:value-of select="concat(r:ID,'-Loop')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat(r:ID,'-RowLoop')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:value-of
+                        select="concat('*[name()=''',$id,
+                        ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
+                        $id,''']/preceding-sibling::*)]//')"
+                    />
+                </xsl:for-each>
+            </xsl:variable>
+            <xsl:value-of select="concat($relative-path,../../../r:Binding[r:SourceParameterReference/r:ID=$source-response-out-parameter]/r:TargetParameterReference/r:ID)"/>
+        </xsl:variable>
+
+        <xsl:for-each select="../d:AttachmentLocation/d:DomainSpecificValue/r:Value">
+            <xsl:if test="position()!=1">
+                <xsl:text> or </xsl:text>
+            </xsl:if>
+            <xsl:value-of select="concat($source-response-id,'=''',.,'''')"/>
+        </xsl:for-each>
     </xsl:template>
 
     <xd:doc>
