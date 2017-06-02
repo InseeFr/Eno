@@ -6,7 +6,7 @@ First of all, the conceptual model behind the `Table` driver has two layers :
 - headers
 - body
 
-![Grid has two layers : headers and body](/img/grid-model.png)
+![Grid has two layers : headers and body](/doc/img/grid-model.png)
 
 So, when implementing the `Table` driver inside a `models.xsl` output implementation, one has to first deal with the headers, then with the body.
 
