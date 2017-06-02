@@ -5,4 +5,10 @@
         <Folder>css</Folder>
         <Common>common.css</Common>
     </Css>
+    <TextConditioningVariable>
+        <ddi>
+            <Before>¤</Before>
+            <After>¤</After>
+        </ddi>
+    </TextConditioningVariable>
 </Properties>

@@ -67,6 +67,7 @@
             <xsl:copy-of select="//d:QuestionScheme"/>
             <xsl:copy-of select="//d:InterviewerInstructionScheme"/>
             <xsl:copy-of select="//r:ManagedRepresentationScheme"/>
+            <xsl:copy-of select="//d:ProcessingInstructionScheme"/>
             <xsl:copy-of select="$dereferenced//l:CodeListScheme"/>
         </xsl:variable>
 

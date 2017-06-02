@@ -56,6 +56,14 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Characters used to surround variables in conditioned text.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="conditioning-variable-begin" select="$properties//TextConditioningVariable/ddi/Before"/>
+    <xsl:variable name="conditioning-variable-end" select="$properties//TextConditioningVariable/ddi/After"/>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Root template :</xd:p>
             <xd:p>The transformation starts with the main Sequence.</xd:p>
         </xd:desc>
@@ -66,86 +74,108 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p>This xforms function is used to get an xpath corresponding to a dynamic text.</xd:p>
-            <xd:p>It can be associated with different modes depending of the text type.</xd:p>
+            <xd:p>This xforms function is used to get the concatened string corresponding to a dynamic text.</xd:p>
+            <xd:p>It is created by calling the static text and making it dynamic.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:function name="enofr:get-calculate-text">
         <xsl:param name="context" as="item()"/>
+        <xsl:param name="language" as="item()"/>
         <xsl:param name="text-type"/>
-        <xsl:choose>
-            <xsl:when test="$text-type='label'">
-                <xsl:apply-templates select="$context" mode="enoddi2fr:get-calculate-label"/>
-            </xsl:when>
-            <xsl:when test="$text-type='alert'">
-                <xsl:apply-templates select="$context" mode="enoddi2fr:get-calculate-alert"/>
-            </xsl:when>
-        </xsl:choose>
+        
+        <xsl:variable name="static-text-content">
+            <xsl:choose>
+                <xsl:when test="$text-type='label'">
+                    <xsl:sequence select="enoddi:get-label($context,$language)"/>
+                </xsl:when>
+                <xsl:when test="$text-type='alert'">
+                    <xsl:sequence select="enoddi:get-consistency-message($context,$language)"/>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+
+        <xsl:if test="contains(substring-after($static-text-content,$conditioning-variable-begin),$conditioning-variable-end)">
+            <xsl:variable name="condition-variables">
+                <conditions>
+                    <xsl:copy-of select="$context/descendant::d:ConditionalText"/>
+                </conditions>
+            </xsl:variable>
+
+            <xsl:variable name="calculated-text">
+                <xsl:call-template name="enoddi2fr:calculate-text">
+                    <xsl:with-param name="text-to-calculate" select="$static-text-content"/>
+                    <xsl:with-param name="condition-variables" select="$condition-variables"/>
+                </xsl:call-template>
+            </xsl:variable>
+
+            <xsl:text>concat(</xsl:text>
+            <xsl:value-of select="substring($calculated-text,2)"/>
+            <xsl:text>)</xsl:text>
+        </xsl:if>
     </xsl:function>
-    
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Instructions having a ConditionalText are matched for this mode only if there aren't inside a ComputationItem.</xd:p>
-            <xd:p>But the treatment (using the enoddi2fr:get-calculate-text mode) is the same whether they are or are not inside a ComputationItem.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="d:Instruction[descendant::d:ConditionalText and not(ancestor::d:ComputationItem)]" mode="enoddi2fr:get-calculate-label">
-        <xsl:apply-templates select="." mode="enoddi2fr:get-calculate-text"/>
-    </xsl:template>
-    
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Instruction having a ConditionalText are matched for this mode only if there are inside a ComputationItem.</xd:p>
-            <xd:p>But the treatment (using the enoddi2fr:get-calculate-text mode) is the same whether they are or are not inside a ComputationItem.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="d:Instruction[descendant::d:ConditionalText and ancestor::d:ComputationItem]" mode="enoddi2fr:get-calculate-alert">
-        <xsl:apply-templates select="." mode="enoddi2fr:get-calculate-text"/>
-    </xsl:template>
 
     <xd:doc>
         <xd:desc>
-            <xd:p>This mode is only used on Instructions having a ConditionalText.</xd:p>
-            <xd:p>Each dynamic string of the conditional text is surrounded by 'ø' characters.</xd:p>
+            <xd:p>This recursive template returns the calculated conditional text from the static one.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template
-        match="d:Instruction[descendant::d:ConditionalText]"
-        mode="enoddi2fr:get-calculate-text" priority="1">
-        <xsl:variable name="condition">
-            <xsl:copy-of select="descendant::d:ConditionalText"/>
-        </xsl:variable>
-        <xsl:variable name="text">
-            <xsl:value-of select="eno:serialize(descendant::d:LiteralText/d:Text/node())"/>
-        </xsl:variable>
-        <!-- The result is an xpath concat of different values -->
-        <xsl:variable name="result">
-            <xsl:text>concat(''</xsl:text>
-            <!-- The conditional text is split with the character 'ø' -->
-            <xsl:for-each select="tokenize($text,'ø')[not(.='')]">
-                <xsl:text>,</xsl:text>
+    
+    <xsl:template name="enoddi2fr:calculate-text">
+        <xsl:param name="text-to-calculate"/>
+        <xsl:param name="condition-variables"/>
+        
+        <xsl:text>,</xsl:text>
+        <xsl:choose>
+            <xsl:when test="contains(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)">
+                <xsl:text>'</xsl:text>
+                <!-- Replacing the single quote by 2 single quotes because a concatenation is made -->
+                <!-- We actually need to double the quotes in order not to generate an error in the xforms concat.-->
+                <xsl:value-of select="replace(substring-before($text-to-calculate,$conditioning-variable-begin),'''','''''')"/>
+                <xsl:text>',</xsl:text>
                 <xsl:choose>
-                    <!-- If the split string has a match in the following elements, it means it is a dynamic part of the text, it will be in the instance of the generated xforms -->
-                    <xsl:when
-                        test=".=$condition/d:ConditionalText/r:SourceParameterReference/r:OutParameter/r:ID/text()
-                        or contains($condition/d:ConditionalText/d:Expression/r:Command/r:CommandContent/text(),.)">
+                    <!-- conditionalText doesn't exist for the element in the DDI structure or it exists and references the variable -->
+                    <xsl:when test="not($condition-variables//text())">
                         <xsl:text>instance('fr-form-instance')//</xsl:text>
-                        <xsl:value-of select="."/>
+                        <!-- TODO : add the elements that will show which variable to use when it is in a loop -->
+                        <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
                     </xsl:when>
-                    <!-- if not, it's a static text which is returned -->
+                    <!-- conditionalText exists and references the variable -->
+                    <xsl:when test="index-of($condition-variables//r:SourceParameterReference/r:OutParameter/r:ID,
+                        substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) >0">
+                        <xsl:text>instance('fr-form-instance')//</xsl:text>
+                        <!-- TODO : add the elements that will show which variable to use when it is in a loop -->
+                        <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                    </xsl:when>
+                    <!-- conditionalText contains the calculation of the variable -->
+                    <xsl:when test="index-of($condition-variables//d:Expression/r:Command/r:OutParameter/r:ID,
+                        substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) >0">
+                        <!-- TODO : perhaps to change so that the label includes the calculation, not a temporary variable -->
+                        <xsl:text>instance('fr-form-instance')//</xsl:text>
+                        <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                    </xsl:when>
                     <xsl:otherwise>
+                        <!-- conditionalText exists, but the variable is not in it -->
                         <xsl:text>'</xsl:text>
-                        <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                        <xsl:value-of select="replace(.,'''','''''')"/>
+                        <xsl:value-of select="concat($conditioning-variable-begin,
+                            replace(substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end),'''',''''''),
+                            $conditioning-variable-end)"/>
                         <xsl:text>'</xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:for-each>
-            <xsl:text>)</xsl:text>
-        </xsl:variable>
-        <xsl:value-of select="$result"/>
+                <xsl:call-template name="enoddi2fr:calculate-text">
+                    <xsl:with-param name="text-to-calculate" select="substring-after(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                    <xsl:with-param name="condition-variables" select="$condition-variables"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>'</xsl:text>
+                <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
+                <xsl:value-of select="replace($text-to-calculate,'''','''''')"/>
+                <xsl:text>'</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
