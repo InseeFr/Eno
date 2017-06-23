@@ -103,7 +103,7 @@
 
             <xsl:variable name="calculated-text">
                 <xsl:call-template name="enoddi2fr:calculate-text">
-                    <xsl:with-param name="text-to-calculate" select="$static-text-content"/>
+                    <xsl:with-param name="text-to-calculate" select="eno:serialize($static-text-content)"/>
                     <xsl:with-param name="condition-variables" select="$condition-variables"/>
                 </xsl:call-template>
             </xsl:variable>
