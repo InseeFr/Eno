@@ -654,9 +654,25 @@
     <xsl:template match="Resource//xf-item" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
+        
+        <xsl:variable name="image">
+            <xsl:value-of select="enofr:get-image($source-context)"/>
+        </xsl:variable>
+        
         <item>
             <label>
-                <xsl:value-of select="enofr:get-label($source-context, $language)"/>
+                <xsl:choose>
+                    <xsl:when test="$image=''">
+                        <xsl:value-of select="enofr:get-label($source-context, $language)"/>        
+                    </xsl:when>
+                    <xsl:when test="starts-with($image,'http')">
+                        <xsl:value-of select="concat('&lt;img src=&quot;',$image,'&quot; title=&quot;',enofr:get-label($source-context, $language),'&quot; &gt;')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('&lt;img src=&quot;/',$properties//Images/Folder,'/',$image,'&quot; title=&quot;',enofr:get-label($source-context, $language),'&quot; &gt;')"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                
             </label>
             <value>
                 <xsl:value-of select="enofr:get-value($source-context)"/>
@@ -1004,7 +1020,11 @@
                     </xf:item>
                 </xsl:if>
                 <xf:itemset ref="$form-resources/{$name}/item">
-                    <xf:label ref="label"/>
+                    <xf:label ref="label">
+                        <xsl:if test="enofr:get-image($source-context)">
+                            <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                        </xsl:if>                        
+                    </xf:label>
                     <xf:value ref="value"/>
                 </xf:itemset>
             </xsl:if>
