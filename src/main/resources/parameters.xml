@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Parameters>
+    <Title>
+        <Sequence>
+            <Level name="template"/>
+            <Level name="module">
+                <PreSeq/>
+                <NumParent>N</NumParent>
+                <PostNumParentSeq/>
+                <StyleNumSeq>I</StyleNumSeq>
+                <PostNumSeq> - </PostNumSeq>
+            </Level>
+            <Level name="submodule">
+                <PreSeq/>
+                <NumParent>N</NumParent>
+                <PostNumParentSeq/>
+                <StyleNumSeq>1</StyleNumSeq>
+                <PostNumSeq>. </PostNumSeq>
+            </Level>
+            <Level name="group">
+                <PreSeq/>
+                <NumParent>N</NumParent>
+                <PostNumParentSeq/>
+                <StyleNumSeq>a</StyleNumSeq>
+                <PostNumSeq>. </PostNumSeq>
+            </Level>
+        </Sequence>
+        <Question>
+            <Level name="module">
+                <PreQuest>&#x27A1; </PreQuest>
+                <NumParent>N</NumParent>
+                <PostNumParentQuest/>
+                <StyleNumQuest>1</StyleNumQuest>
+                <PostNumQuest>. </PostNumQuest>
+            </Level>
+            <Level name="submodule">
+                <PreQuest>&#x27A1; </PreQuest>
+                <NumParent>O</NumParent>
+                <PostNumParentQuest>-</PostNumParentQuest>
+                <StyleNumQuest>a</StyleNumQuest>
+                <PostNumQuest>. </PostNumQuest>
+            </Level>
+            <Level name="group">
+                <PreQuest></PreQuest>
+                <NumParent>O</NumParent>
+                <PostNumParentQuest/>
+                <StyleNumQuest>1</StyleNumQuest>
+                <PostNumQuest>. </PostNumQuest>
+            </Level>
+        </Question>
+    </Title>
+
+</Parameters>

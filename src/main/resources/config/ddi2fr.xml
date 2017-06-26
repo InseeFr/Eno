@@ -1,0 +1,6 @@
+﻿<Properties>
+    <Css>
+        <Folder>css</Folder>
+        <Common>common.css</Common>
+    </Css>
+</Properties>
