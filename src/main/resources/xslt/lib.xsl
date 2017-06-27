@@ -210,11 +210,8 @@
         <xsl:param name="folder"/>
         <xsl:param name="languages" as="xs:string*"/>
         <Languages>
-            <xsl:for-each
-                select="collection(concat('file:///', replace($folder, '\\' , '/'), '?select=*.xml'))/Language">
-                <xsl:if test="@xml:lang=$languages">
-                    <xsl:copy-of select="."/>
-                </xsl:if>
+            <xsl:for-each select="$languages">
+                <xsl:copy-of select="doc(concat($folder,'/',current(),'.xml'))/Language"/> 
             </xsl:for-each>
         </Languages>
     </xsl:function>

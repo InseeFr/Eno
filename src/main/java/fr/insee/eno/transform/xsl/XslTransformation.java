@@ -1,13 +1,11 @@
 package fr.insee.eno.transform.xsl;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -191,18 +189,29 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setParameter(XslParameters.DDI2FR_PROPERTIES_FILE, "D:/__TEMP/Eno/config/ddi2fr.xml");
-		transformer.setParameter(XslParameters.DDI2FR_PARAMETERS_FILE, "D:/__TEMP/Eno/questionnaires/simpsons/parameters.xml");
+		transformer.setParameter(XslParameters.DDI2FR_PROPERTIES_FILE, Constants.CONFIG_DDI2FR);
+		transformer.setParameter(XslParameters.DDI2FR_PARAMETERS_FILE, Constants.PARAMETERS);
+		transformer.setParameter(XslParameters.DDI2FR_LABELS_FOLDER, Constants.LABELS_FOLDER);
+		logger.debug(
+				String.format(
+						"Transformer parameters are: %s, %s",
+						transformer.getParameter(XslParameters.DDI2FR_PROPERTIES_FILE),
+						transformer.getParameter(XslParameters.DDI2FR_PARAMETERS_FILE),
+						transformer.getParameter(XslParameters.DDI2FR_LABELS_FOLDER)));
 		xslTransform(transformer, inputFile, outputFile);
 		
 	}
 	
 	public void transformBrowsing(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, File labelFolder) throws Exception {
-		logger.info("Include the navigation elements to the XForm");
+		logger.info("Include the navigation elements into the XForms questionnaire");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setParameter(XslParameters.DDI2FR_LABELS_FOLDER, labelFolder);
+		transformer.setParameter(XslParameters.DDI2FR_LABELS_FOLDER, Constants.LABELS_FOLDER);
+		logger.debug(
+				String.format(
+						"Transformer parameter is: %s",
+						transformer.getParameter(XslParameters.DDI2FR_LABELS_FOLDER)));
 		xslTransform(transformer, inputFile, outputFile);
 	}
 

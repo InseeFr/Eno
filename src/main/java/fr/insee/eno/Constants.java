@@ -37,6 +37,12 @@ public final class Constants {
 	// ----- Ref
 	public static final String PARAMETERS_XML = "parameters.xml";
 	
+	// ----- XSL Parameters path
+	public static final String CONFIG_DDI2FR = "/config/ddi2fr.xml";
+	public static final String PARAMETERS = "/parameters.xml";
+	public static final String LABELS_FOLDER = "/lang/fr/";
+	
+	
 	// ----- Files
 	public static final InputStream DDI_DEREFERENCING_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
 	public static final InputStream PARAMETERS_FILE = getInputStreamFromPath("/" + PARAMETERS_XML);
