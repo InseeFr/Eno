@@ -6,7 +6,9 @@
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
     exclude-result-prefixes="xd eno enofr" version="2.0">
-
+    
+    <!--<xsl:import href="../../transformations/ddi2fr/ddi2fr.xsl"/>-->
+    
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>An xslt stylesheet who transforms an input into Xforms (Orbeon Form-Runner) through generic driver templates.</xd:p>
@@ -652,9 +654,25 @@
     <xsl:template match="Resource//xf-item" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
+        
+        <xsl:variable name="image">
+            <xsl:value-of select="enofr:get-image($source-context)"/>
+        </xsl:variable>
+        
         <item>
             <label>
-                <xsl:value-of select="enofr:get-label($source-context, $language)"/>
+                <xsl:choose>
+                    <xsl:when test="$image=''">
+                        <xsl:value-of select="enofr:get-label($source-context, $language)"/>        
+                    </xsl:when>
+                    <xsl:when test="starts-with($image,'http')">
+                        <xsl:value-of select="concat('&lt;img src=&quot;',$image,'&quot; title=&quot;',enofr:get-label($source-context, $language),'&quot; &gt;')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat('&lt;img src=&quot;/',$properties//Images/Folder,'/',$image,'&quot; title=&quot;',enofr:get-label($source-context, $language),'&quot; &gt;')"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                
             </label>
             <value>
                 <xsl:value-of select="enofr:get-value($source-context)"/>
@@ -745,10 +763,10 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:variable name="calculate-label">
-            <xsl:value-of select="enofr:get-calculate-text($source-context,'label')"/>
+            <xsl:value-of select="enofr:get-calculate-text($source-context,$language,'label')"/>
         </xsl:variable>
         <xsl:variable name="calculate-alert">
-            <xsl:value-of select="enofr:get-calculate-text($source-context,'alert')"/>
+            <xsl:value-of select="enofr:get-calculate-text($source-context,$language,'alert')"/>
         </xsl:variable>
         <xsl:if test="$calculate-label != '' or $calculate-alert != ''">
             <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -1002,7 +1020,11 @@
                     </xf:item>
                 </xsl:if>
                 <xf:itemset ref="$form-resources/{$name}/item">
-                    <xf:label ref="label"/>
+                    <xf:label ref="label">
+                        <xsl:if test="contains(enofr:get-css-class($source-context),'image')">
+                            <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                        </xsl:if>                        
+                    </xf:label>
                     <xf:value ref="value"/>
                 </xf:itemset>
             </xsl:if>
@@ -1405,12 +1427,12 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template for Body for the ResponseElement driver.</xd:p>
-            <xd:p>It corresponds to an element which will be present in the Instance and Bind but not in the Resource and the Body.</xd:p>
-            <xd:p>Its prefilled value can have an impact on other elements of the form.</xd:p>
+            <xd:p>Template for Body for the ResponseElement and CalculatedVariable drivers.</xd:p>
+            <xd:p>It corresponds to elements which will be present in the Instance and Bind but not in the Resource and the Body.</xd:p>
+            <xd:p>Their prefilled value can have an impact on other elements of the form.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*[name() = ('Resource', 'Body')]//*[name() = ('ResponseElement')]"
+    <xsl:template match="*[name() = ('Resource', 'Body')]//*[name() = ('ResponseElement','CalculatedVariable')]"
         mode="model"/>
     
 </xsl:stylesheet>

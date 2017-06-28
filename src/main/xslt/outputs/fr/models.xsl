@@ -1021,7 +1021,7 @@
                 </xsl:if>
                 <xf:itemset ref="$form-resources/{$name}/item">
                     <xf:label ref="label">
-                        <xsl:if test="enofr:get-image($source-context)">
+                        <xsl:if test="contains(enofr:get-css-class($source-context),'image')">
                             <xsl:attribute name="mediatype">text/html</xsl:attribute>
                         </xsl:if>                        
                     </xf:label>
