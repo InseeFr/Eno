@@ -150,12 +150,16 @@
                     <xsl:when test="index-of($condition-variables//d:Expression/r:Command/r:OutParameter/r:ID,
                         substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) >0">
                         <!-- TODO : perhaps to change so that the label includes the calculation, not a temporary variable -->
-                        <xsl:value-of select="$condition-variables//d:Expression/r:Command
-                                                                                [r:OutParameter/r:ID=substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)]
-                                                                                          /r:CommandContent"/>
-<!--                        <xsl:text>instance('fr-form-instance')//</xsl:text>
+                        <xsl:value-of select="replace(replace(
+                            $condition-variables//d:Expression/r:Command
+                                                                        [r:OutParameter/r:ID=substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)]
+                                                                        /r:CommandContent,
+                                                      '//','instance(''fr-form-instance'')//'),
+                                              '\]instance(''fr-form-instance'')',']')"/>
+                        <!--                        <xsl:text>instance('fr-form-instance')//</xsl:text>
                         <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
--->                    </xsl:when>
+-->
+                    </xsl:when>
                     <xsl:otherwise>
                         <!-- conditionalText exists, but the variable is not in it -->
                         <xsl:text>'</xsl:text>
