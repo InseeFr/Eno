@@ -622,7 +622,7 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xd:doc>
+<!--    <xd:doc>
         <xd:desc>
             <xd:p>Get the formula to calculate a Variable.</xd:p>
         </xd:desc>
@@ -634,6 +634,6 @@
         <xsl:value-of
             select="substring-after(//d:Expression/r:Command/r:CommandContent[contains(text(),$id)]/text(),'=')"
         />
-    </xsl:template>
+    </xsl:template>-->
 
 </xsl:stylesheet>
