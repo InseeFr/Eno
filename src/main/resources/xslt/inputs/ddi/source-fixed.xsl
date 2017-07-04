@@ -505,8 +505,20 @@
             <xsl:value-of select="enoddi:get-id(.)"/>
         </xsl:variable>
         <xsl:for-each
-            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='hideable'] and contains(d:IfCondition/r:Command/r:CommandContent/text(),$id)]">
-            <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
+            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='hideable'] and index-of(d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID,$id) > 0]">
+            <xsl:choose>
+                <xsl:when test="descendant::d:Sequence/d:TypeOfSequence[text()='module']">
+                    <xsl:for-each select="descendant::d:Sequence[d:TypeOfSequence='module']">
+                        <xsl:value-of select="enoddi:get-id(current())"/>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
+        <xsl:for-each select="ancestor::d:StructuredMixedResponseDomain/d:ResponseDomainInMixed[d:AttachmentLocation/d:DomainSpecificValue/@attachmentDomain=current()/parent::d:ResponseDomainInMixed/@attachmentBase]">
+            <xsl:value-of select="enoddi:get-id(current()/*[1])"/>
         </xsl:for-each>
     </xsl:template>
 

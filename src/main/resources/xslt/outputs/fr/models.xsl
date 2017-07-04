@@ -1113,7 +1113,7 @@
         <xd:desc>Template to add mediatype html/css to rich text items</xd:desc>
     </xd:doc>
     
-    <xsl:template match="Rich-Body//xf-item" mode="model">
+    <xsl:template match="Rich-Body//xf-item" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         
