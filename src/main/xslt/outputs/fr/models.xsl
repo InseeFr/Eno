@@ -694,10 +694,10 @@
                         <xsl:value-of select="eno:serialize(enofr:get-label($source-context, $language))"/>        
                     </xsl:when>
                     <xsl:when test="starts-with($image,'http')">
-                        <xsl:value-of select="concat('&lt;img src=&quot;',$image,'&quot; title=&quot;',eno:serialize(enofr:get-label($source-context, $language)),'&quot; &gt;')"/>
+                        <xsl:value-of select="concat('&lt;img src=&quot;',$image,'&quot; title=&quot;',eno:serialize(enofr:get-label($source-context, $language)),'&quot; /&gt;')"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="concat('&lt;img src=&quot;/',$properties//Images/Folder,'/',$image,'&quot; title=&quot;',eno:serialize(enofr:get-label($source-context, $language)),'&quot; &gt;')"/>
+                        <xsl:value-of select="concat('&lt;img src=&quot;/',$properties//Images/Folder,'/',$image,'&quot; title=&quot;',eno:serialize(enofr:get-label($source-context, $language)),'&quot; /&gt;')"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 
