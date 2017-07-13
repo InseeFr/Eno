@@ -518,7 +518,7 @@
             </xsl:choose>
         </xsl:for-each>
         <xsl:for-each select="ancestor::d:StructuredMixedResponseDomain/d:ResponseDomainInMixed[d:AttachmentLocation/d:DomainSpecificValue/@attachmentDomain=current()/parent::d:ResponseDomainInMixed/@attachmentBase]">
-            <xsl:value-of select="enoddi:get-id(current()/*[1])"/>
+            <xsl:value-of select="enoddi:get-id(current())"/>
         </xsl:for-each>
     </xsl:template>
 
@@ -594,12 +594,10 @@
         </xd:desc>
     </xd:doc>
     
-    <xsl:template match="*[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference'))
-                            and parent::d:ResponseDomainInMixed[d:AttachmentLocation]]" 
-                            mode="enoddi:get-hideable-command">
+    <xsl:template match="d:ResponseDomainInMixed[d:AttachmentLocation]" mode="enoddi:get-hideable-command">
         
-        <xsl:variable name="attachment-domain" select="../d:AttachmentLocation/d:DomainSpecificValue/@attachmentDomain"/>
-        <xsl:variable name="source-response-out-parameter" select="../../d:ResponseDomainInMixed[@attachmentBase=$attachment-domain]//r:OutParameter/r:ID"/>
+        <xsl:variable name="attachment-domain" select="d:AttachmentLocation/d:DomainSpecificValue/@attachmentDomain"/>
+        <xsl:variable name="source-response-out-parameter" select="../d:ResponseDomainInMixed[@attachmentBase=$attachment-domain]//r:OutParameter/r:ID"/>
         
         <!-- relative-path code comes from cleaning.xsl -->
         <xsl:variable name="source-response-id">
@@ -623,10 +621,10 @@
                     />
                 </xsl:for-each>
             </xsl:variable>
-            <xsl:value-of select="concat($relative-path,../../../r:Binding[r:SourceParameterReference/r:ID=$source-response-out-parameter]/r:TargetParameterReference/r:ID)"/>
+            <xsl:value-of select="concat($relative-path,../../r:Binding[r:SourceParameterReference/r:ID=$source-response-out-parameter]/r:TargetParameterReference/r:ID)"/>
         </xsl:variable>
 
-        <xsl:for-each select="../d:AttachmentLocation/d:DomainSpecificValue/r:Value">
+        <xsl:for-each select="d:AttachmentLocation/d:DomainSpecificValue/r:Value">
             <xsl:if test="position()!=1">
                 <xsl:text> or </xsl:text>
             </xsl:if>
