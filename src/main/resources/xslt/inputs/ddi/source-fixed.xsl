@@ -299,7 +299,14 @@
 
         <!-- If it is the first line -->
         <xsl:if test="$index=1">
-            <xsl:sequence select="d:GridDimension[@rank='1']//l:CodeList/r:Label"/>
+            <xsl:choose>
+                <xsl:when test="d:GridDimension[@rank='1']//l:CodeList/r:Label">
+                    <xsl:sequence select="d:GridDimension[@rank='1']//l:CodeList/r:Label"/>        
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:sequence select="d:GridDimension[@rank='1']"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
         <!-- Getting :
         1) codes which nesting level in codes lists with labels is equal to index+1

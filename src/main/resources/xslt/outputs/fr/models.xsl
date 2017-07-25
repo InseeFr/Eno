@@ -1318,6 +1318,31 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Template for Body for the FixedCell driver.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Body//FixedCell" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="languages" tunnel="yes"/>
+        
+        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:variable name="label">
+            <xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+        </xsl:variable>
+        
+        <xhtml:td colspan="{enofr:get-colspan($source-context)}">
+            <xf:output id="{$name}-control" bind="{$name}-bind">
+                <xf:label ref="$form-resources/{$name}/label">
+                    <xsl:if test="eno:is-rich-content($label)">
+                        <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                    </xsl:if>
+                </xf:label>
+            </xf:output>
+        </xhtml:td>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Template for Body for the EmptyCell driver.</xd:p>
         </xd:desc>
     </xd:doc>
