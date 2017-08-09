@@ -1,14 +1,13 @@
 package fr.insee.eno;
 
-import java.io.File;
-import java.io.IOException;
-
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Only for dev purposes.
@@ -19,12 +18,20 @@ public class DummyMain {
 
 	public static void main(String[] args) {
 		logger.info("Starting generation program");
+		String inputFilePath = "";
+		try {
+			inputFilePath = args[0];
+		} catch(ArrayIndexOutOfBoundsException e) {
+			logger.error("Please provide path to a valid ddi input file as an argument");
+		}
+		System.out.println(args[0]);
+
 		cleanTempDirectory();		
 		Injector injector = Guice.createInjector(new DDI2FRContext());
 		GenerationService service = injector.getInstance(GenerationService.class);
 		try {
 			File generatedFile = service.generateQuestionnaire(
-					new File("D:/__TEMP/eno-test/simpsons.xml"),
+					new File(inputFilePath),
 					null);
 			logger.info("Generation successful! >> " + generatedFile);
 		} catch (Exception e) {

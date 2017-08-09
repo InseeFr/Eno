@@ -99,6 +99,12 @@
 						</goals>
 						<configuration>
 							<mainClass>fr.insee.eno.xsl.FodsToXSLCompiler</mainClass>
+							<systemProperties>
+								<property>
+									<key>dest</key>
+									<value>${project.basedir}/src/main/resources</value>
+								</property>
+							</systemProperties>
 						</configuration>
 					</execution>
 				</executions>
