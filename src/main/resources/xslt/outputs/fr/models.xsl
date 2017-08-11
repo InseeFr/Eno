@@ -1327,10 +1327,10 @@
         
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="label">
-            <xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+            <xsl:value-of select="enofr:get-label($source-context, $languages)"/>
         </xsl:variable>
         
-        <xhtml:td colspan="{enofr:get-colspan($source-context)}">
+        <xhtml:td colspan="{enofr:get-colspan($source-context)}" rowspan="{enofr:get-rowspan($source-context)}">
             <xf:output id="{$name}-control" bind="{$name}-bind">
                 <xf:label ref="$form-resources/{$name}/label">
                     <xsl:if test="eno:is-rich-content($label)">
@@ -1349,7 +1349,7 @@
     <xsl:template match="Body//EmptyCell" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
-        <xhtml:td colspan="{enofr:get-colspan($source-context)}"/>
+        <xhtml:td colspan="{enofr:get-colspan($source-context)}" rowspan="{enofr:get-rowspan($source-context)}"/>
     </xsl:template>
 
     <xd:doc>

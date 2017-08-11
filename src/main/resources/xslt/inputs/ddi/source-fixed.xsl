@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi" xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" version="2.0">
 
+    <!-- Importing the different resources -->
+<!--    <xsl:import href="../../lib.xsl"/>-->
+    
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>A library of getter functions for fods with their implementations for different elements.</xd:p>
@@ -474,6 +477,18 @@
                                     +number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMaximum)
                                     -number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum))"/>
     </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting rowspan for d:NoDataByDefinition elements for which rowspan can be different from 1.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:NoDataByDefinition[d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1']/@rangeMaximum]" mode="enoddi:get-rowspan" priority="1">
+        <xsl:value-of select="string(1
+            +number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1']/@rangeMaximum)
+            -number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1']/@rangeMinimum))"/>
+    </xsl:template>
+    
     
     <xd:doc>
         <xd:desc>
