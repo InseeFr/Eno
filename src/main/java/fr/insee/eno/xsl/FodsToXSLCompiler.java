@@ -1,16 +1,16 @@
 package fr.insee.eno.xsl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
+import fr.insee.eno.Constants;
+import fr.insee.eno.transform.xsl.XslTransformation;
+import fr.insee.eno.utils.FolderCleaner;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import fr.insee.eno.Constants;
-import fr.insee.eno.transform.xsl.XslTransformation;
-import fr.insee.eno.utils.FolderCleaner;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * The core engine of Eno is based on XSL functions that are generated from a catalog
@@ -43,12 +43,13 @@ public class FodsToXSLCompiler {
 			generateDDI2FRTreeNavigation();
 			// Fods2Xsl for /output/ddi/.fods files
 			generateDDIFunctions();
-			generateDDITemplates();			
+			generateDDITemplates();
 			logger.info("Fods2Xsl : xsl stylesheets created.");
 			// Incorporation target : creating ddi2fr.xsl
 			ddi2frIncorporationTarget();
 			// TODO Copy generated files to JAR or classpath
 			logger.debug("Fods to XSL: END");
+			copyGeneratedFiles();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			logger.debug("Fods to XSL : END");
@@ -281,7 +282,17 @@ public class FodsToXSLCompiler {
 	 * When every file has been generated, we want to copy them in the /xslt directory to be
 	 * used through the Java API.
 	 * */
-	private static void copyGeneratedFiles(Env env) {
-		// FIXME how to implement something that works when developping and when publishing Eno ?
+	private static void copyGeneratedFiles() throws Exception {
+		String destinationBasePath = System.getProperty("dest");
+		logger.info(String.format("Copying generated files to %s", destinationBasePath));
+		File inputsDestination = new File(destinationBasePath + "/xslt/inputs/ddi");
+		File transformsDestination = new File(destinationBasePath + "/xslt/transformations/ddi2fr");
+		try {
+			FileUtils.copyDirectory(Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP.getParentFile(), inputsDestination);
+			FileUtils.copyDirectory(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP.getParentFile(), transformsDestination);
+		} catch(Exception e){
+			throw e;
+		}
 	}
+
 }
