@@ -19,6 +19,7 @@ public class DummyMain {
 	public static void main(String[] args) {
 		logger.info("Starting generation program");
 		String inputFilePath = "";
+		
 		try {
 			inputFilePath = args[0];
 		} catch(ArrayIndexOutOfBoundsException e) {

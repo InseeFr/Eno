@@ -1,6 +1,8 @@
 package fr.insee.eno.generation;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -32,21 +34,37 @@ public class DDI2FRGenerator implements Generator {
 		outputBasicFormPath = Constants.TEMP_XFORMS_FOLDER + "/" + formNameFolder + "/" + Constants.BASIC_FORM_TMP_FILENAME;
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
 		
+		
+		InputStream isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL);
+		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE);
+		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
+		
 		saxonService.transformDDI2FR(
 				FileUtils.openInputStream(finalInput),
 				FileUtils.openOutputStream(new File(outputBasicFormPath)),
-				Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL,
-				Constants.PROPERTIES_FILE,
-				Constants.PARAMETERS_FILE);
-
+				isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL,
+				isPROPERTIES_FILE,
+				isPARAMETERS_FILE);
+		
+		isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL.close();
+		isPROPERTIES_FILE.close();
+		isPARAMETERS_FILE.close();
+		
 		String outputForm = Constants.TEMP_FOLDER_PATH + "/" + surveyName + "/" + formNameFolder + "/form/form.xhtml";
 		
+		InputStream isOutputBasicFormPath = FileUtils.openInputStream(new File(outputBasicFormPath));
+		OutputStream osOutputForm = FileUtils.openOutputStream(new File(outputForm));
+		InputStream isBROWSING_TEMPLATE_XSL = Constants.getInputStreamFromPath(Constants.BROWSING_TEMPLATE_XSL);
 		saxonService.transformBrowsing(
-				FileUtils.openInputStream(new File(outputBasicFormPath)),
-				FileUtils.openOutputStream(new File(outputForm)),
-				Constants.BROWSING_TEMPLATE_XSL,
+				isOutputBasicFormPath,
+				osOutputForm,
+				isBROWSING_TEMPLATE_XSL,
 				Constants.LABEL_FOLDER);
-
+		isOutputBasicFormPath.close();
+		osOutputForm.close();
+		isBROWSING_TEMPLATE_XSL.close();
+		
+		
 		return new File(outputForm);
 	}
 

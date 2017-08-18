@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -44,18 +45,19 @@ public final class Constants {
 	
 	
 	// ----- Files
-	public static final InputStream DDI_DEREFERENCING_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
-	public static final InputStream PARAMETERS_FILE = getInputStreamFromPath("/" + PARAMETERS_XML);
-	public static final InputStream UTIL_DDI_TITLING_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/ddi/titling.xsl");
-	public static final InputStream UTIL_DDI_CLEANING_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/ddi/cleaning.xsl");
+	public static final String DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
+	public static final String PARAMETERS_FILE = "/" + PARAMETERS_XML;
+	public static final String UTIL_DDI_TITLING_XSL = UTIL_FOLDER_PATH + "/ddi/titling.xsl";
+	public static final String UTIL_DDI_CLEANING_XSL = UTIL_FOLDER_PATH + "/ddi/cleaning.xsl";
 	public static final String UTIL_FODS_PREFORMATTING_XSL = UTIL_FOLDER_PATH + "/fods/preformatting.xsl";
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
-	public static final InputStream UTIL_DDI_DEREFERENCING_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl");
-	public static final InputStream BROWSING_TEMPLATE_XSL = getInputStreamFromPath(UTIL_FOLDER_PATH + "/fr/browsing.xsl");	
-	public static final InputStream PROPERTIES_FILE = getInputStreamFromPath(CONFIG_FOLDER + "/ddi2fr.xml");
+	public static final String UTIL_DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
+	public static final String BROWSING_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/fr/browsing.xsl";	
+	public static final String PROPERTIES_FILE = CONFIG_FOLDER + "/ddi2fr.xml";
+	
 	
 	// ---------- XSL generation
-	public static final InputStream TRANSFORMATIONS_DDI2FR_DDI2FR_XSL = getInputStreamFromPath(TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr.xsl");
+	public static final String TRANSFORMATIONS_DDI2FR_DDI2FR_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr.xsl";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.fods";
 //	public static final String TRANSFORMATIONS_DDI2FR_DRIVERS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.xsl";
@@ -115,6 +117,7 @@ public final class Constants {
 			return null;
 		}
 	}
+		
 	
 	/** Generic getter for files or directories */
 	private static File getFileOrDirectoryFromPath(String path) {

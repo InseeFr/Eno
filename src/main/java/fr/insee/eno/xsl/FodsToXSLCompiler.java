@@ -77,9 +77,13 @@ public class FodsToXSLCompiler {
 				FIVE_SPACES + 
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_FODS +
 				" -Output : " + Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP);
+		InputStream isTRANSFORMATIONS_DDI2FR_DRIVERS_FODS = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_FODS);
+		OutputStream osTRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP);
 		fods2XslTarget(
-				Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_FODS),
-				FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP));
+				isTRANSFORMATIONS_DDI2FR_DRIVERS_FODS,
+				osTRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP);
+		isTRANSFORMATIONS_DDI2FR_DRIVERS_FODS.close();
+		osTRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP.close();
 	}
 	
 	/**
@@ -92,9 +96,13 @@ public class FodsToXSLCompiler {
 				FIVE_SPACES +
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS +
 				" -Output : " + Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL);
+		InputStream isTRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS);
+		OutputStream osTRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP);
 		fods2XslTarget(
-				Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS),
-				FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP));
+				isTRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS,
+				osTRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP);
+		isTRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS.close();
+		osTRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP.close();
 	}
 	
 	/**
@@ -107,9 +115,13 @@ public class FodsToXSLCompiler {
 				FIVE_SPACES +
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS + 
 				" -Output : " + Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL);
+		InputStream isTRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS);
+		OutputStream osTRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP);
 		fods2XslTarget(
-				Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS),
-				FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP));
+				isTRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS,
+				osTRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP);
+		isTRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS.close();
+		osTRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP.close();
 	}
 	
 	/**
@@ -122,9 +134,13 @@ public class FodsToXSLCompiler {
 				FIVE_SPACES + 
 				"Fods2Xsl -Input : " + Constants.INPUTS_DDI_FUNCTIONS_FODS + 
 				" -Output : " + Constants.INPUTS_DDI_FUNCTIONS_XSL);
+		InputStream isINPUTS_DDI_FUNCTIONS_FODS = Constants.getInputStreamFromPath(Constants.INPUTS_DDI_FUNCTIONS_FODS);
+		OutputStream osINPUTS_DDI_FUNCTIONS_XSL_TMP = FileUtils.openOutputStream(Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP);
 		fods2XslTarget(
-				Constants.getInputStreamFromPath(Constants.INPUTS_DDI_FUNCTIONS_FODS),
-				FileUtils.openOutputStream(Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP));
+				isINPUTS_DDI_FUNCTIONS_FODS,
+				osINPUTS_DDI_FUNCTIONS_XSL_TMP);
+		isINPUTS_DDI_FUNCTIONS_FODS.close();
+		osINPUTS_DDI_FUNCTIONS_XSL_TMP.close();
 	}
 
 	/**
@@ -137,9 +153,13 @@ public class FodsToXSLCompiler {
 				FIVE_SPACES + 
 				"Fods2Xsl -Input : " + Constants.INPUTS_DDI_TEMPLATES_FODS + 
 				" -Output : " + Constants.INPUTS_DDI_TEMPLATES_XSL);
+		InputStream isINPUTS_DDI_TEMPLATES_FODS = Constants.getInputStreamFromPath(Constants.INPUTS_DDI_TEMPLATES_FODS);
+		OutputStream osINPUTS_DDI_TEMPLATES_XSL_TMP = FileUtils.openOutputStream(Constants.INPUTS_DDI_TEMPLATES_XSL_TMP);
 		fods2XslTarget(
-				Constants.getInputStreamFromPath(Constants.INPUTS_DDI_TEMPLATES_FODS),
-				FileUtils.openOutputStream(Constants.INPUTS_DDI_TEMPLATES_XSL_TMP));
+				isINPUTS_DDI_TEMPLATES_FODS,
+				osINPUTS_DDI_TEMPLATES_XSL_TMP);
+		isINPUTS_DDI_TEMPLATES_FODS.close();
+		osINPUTS_DDI_TEMPLATES_XSL_TMP.close();
 	}
 
 	/**
@@ -175,33 +195,52 @@ public class FodsToXSLCompiler {
 				" -Output : " + Constants.TEMP_PREFORMATE_TMP +
 				 " -Stylesheet : " + Constants.UTIL_FODS_PREFORMATTING_XSL);
 		
+		InputStream isUTIL_FODS_PREFORMATTING_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FODS_PREFORMATTING_XSL);
+		OutputStream osTEMP_PREFORMATE_TMP = FileUtils.openOutputStream(Constants.TEMP_PREFORMATE_TMP);
+		
 		saxonService.transform(
 				inputFods,
-				Constants.getInputStreamFromPath(Constants.UTIL_FODS_PREFORMATTING_XSL),
-				FileUtils.openOutputStream(Constants.TEMP_PREFORMATE_TMP));
-
+				isUTIL_FODS_PREFORMATTING_XSL,
+				osTEMP_PREFORMATE_TMP);
+		
+		isUTIL_FODS_PREFORMATTING_XSL.close();
+		osTEMP_PREFORMATE_TMP.close();
+		
 		// From preformate.tmp to xml.tmp using fods2xml.xsl
 		logger.debug(
 				"Fods2Xml : -Input : " + Constants.TEMP_PREFORMATE_TMP +
 				" -Output : " + Constants.TEMP_XML_TMP +
 				" -Stylesheet : " + Constants.FODS_2_XML_XSL);
 		
+		InputStream isTEMP_PREFORMATE_TMP = FileUtils.openInputStream(Constants.TEMP_PREFORMATE_TMP);
+		InputStream isFODS_2_XML_XSL = Constants.getInputStreamFromPath(Constants.FODS_2_XML_XSL);
+		OutputStream osTEMP_XML_TMP = FileUtils.openOutputStream(Constants.TEMP_XML_TMP);
+		
 		saxonService.transform(
-				FileUtils.openInputStream(Constants.TEMP_PREFORMATE_TMP),
-				Constants.getInputStreamFromPath(Constants.FODS_2_XML_XSL),
-				FileUtils.openOutputStream(Constants.TEMP_XML_TMP));
-
+				isTEMP_PREFORMATE_TMP,
+				isFODS_2_XML_XSL,
+				osTEMP_XML_TMP);
+		
+		isTEMP_PREFORMATE_TMP.close();
+		isFODS_2_XML_XSL.close();
+		osTEMP_XML_TMP.close();
+		
 		// From xml.tmp to inputfile.xsl
 		logger.debug(
 				"Xml2Xsl : -Input : " + Constants.TEMP_XML_TMP + 
 				" -Output : " + outputXsl + 
 				" -Stylesheet : " + Constants.XML_2_XSL_XSL);
 		
+		InputStream isTEMP_XML_TMP = FileUtils.openInputStream(Constants.TEMP_XML_TMP);
+		InputStream isXML_2_XSL_XSL = Constants.getInputStreamFromPath(Constants.XML_2_XSL_XSL);
+		
 		saxonService.transform(
-				FileUtils.openInputStream(Constants.TEMP_XML_TMP),
-				Constants.getInputStreamFromPath(Constants.XML_2_XSL_XSL),
+				isTEMP_XML_TMP,
+				isXML_2_XSL_XSL,
 				outputXsl);
-
+		
+		isTEMP_XML_TMP.close();
+		isXML_2_XSL_XSL.close();
 		logger.info("Leaving Fods2Xsl");
 	}
 
@@ -219,34 +258,50 @@ public class FodsToXSLCompiler {
 				" and " + Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP +
 				" in " + Constants.TEMP_TEMP_TMP);
 		
+		InputStream isTRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL);
+		InputStream isUTIL_XSL_INCORPORATION_XSL = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osTEMP_TEMP_TMP = FileUtils.openOutputStream(Constants.TEMP_TEMP_TMP);
 		saxonService.transformIncorporation(
-				Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL),
-				Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL),
-				FileUtils.openOutputStream(Constants.TEMP_TEMP_TMP),
+				isTRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL,
+				isUTIL_XSL_INCORPORATION_XSL,
+				osTEMP_TEMP_TMP,
 				Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP);
-
+		isTRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL.close();
+		isUTIL_XSL_INCORPORATION_XSL.close();
+		osTEMP_TEMP_TMP.close();
+		
 		logger.debug(
 				"Incorporating " + Constants.TEMP_TEMP_TMP + 
 				" and " + Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP +
 				" in " + Constants.TEMP_TEMP_BIS_TMP);
-		
+		InputStream isTEMP_TEMP_TMP = FileUtils.openInputStream(Constants.TEMP_TEMP_TMP);
+		InputStream isUTIL_XSL_INCORPORATION_XSL2 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osTEMP_TEMP_BIS_TMP = FileUtils.openOutputStream(Constants.TEMP_TEMP_BIS_TMP);
 		saxonService.transformIncorporation(
-				FileUtils.openInputStream(Constants.TEMP_TEMP_TMP),
-				Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL),
-				FileUtils.openOutputStream(Constants.TEMP_TEMP_BIS_TMP),
+				isTEMP_TEMP_TMP,
+				isUTIL_XSL_INCORPORATION_XSL2,
+				osTEMP_TEMP_BIS_TMP,
 				Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP);
-
+		isTEMP_TEMP_TMP.close();
+		isUTIL_XSL_INCORPORATION_XSL2.close();
+		osTEMP_TEMP_BIS_TMP.close();
+		
 		logger.debug(
 				"Incorporating " + Constants.TEMP_TEMP_BIS_TMP +
 				" and " + Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP + 
 				" in " + Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP);
 		
+		InputStream isTEMP_TEMP_BIS_TMP = FileUtils.openInputStream(Constants.TEMP_TEMP_BIS_TMP);
+		InputStream isUTIL_XSL_INCORPORATION_XSL3 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osTRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP);
 		saxonService.transformIncorporation(
-				FileUtils.openInputStream(Constants.TEMP_TEMP_BIS_TMP),
-				Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL),
-				FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP),
+				isTEMP_TEMP_BIS_TMP,
+				isUTIL_XSL_INCORPORATION_XSL3,
+				osTRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP,
 				Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP);
-
+		isTEMP_TEMP_BIS_TMP.close();
+		isUTIL_XSL_INCORPORATION_XSL3.close();
+		osTRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP.close();
 		// Incorporating source-fixed.xsl, functions.xsl and templates.xsl into
 		// source.xsl
 		logger.debug(
@@ -254,22 +309,34 @@ public class FodsToXSLCompiler {
 				" and " + Constants.INPUTS_DDI_FUNCTIONS_XSL +
 				" in " + Constants.TEMP_TEMP_TMP);
 		
+		InputStream isINPUTS_DDI_SOURCE_FIXED_XSL = Constants.getInputStreamFromPath(Constants.INPUTS_DDI_SOURCE_FIXED_XSL);
+		InputStream isUTIL_XSL_INCORPORATION_XSL4 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osTEMP_TEMP_TMP2 = FileUtils.openOutputStream(Constants.TEMP_TEMP_TMP);
 		saxonService.transformIncorporation(
-				Constants.getInputStreamFromPath(Constants.INPUTS_DDI_SOURCE_FIXED_XSL), 
-				Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL),
-				FileUtils.openOutputStream(Constants.TEMP_TEMP_TMP), 
+				isINPUTS_DDI_SOURCE_FIXED_XSL, 
+				isUTIL_XSL_INCORPORATION_XSL4,
+				osTEMP_TEMP_TMP2, 
 				Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP);
-
+		isINPUTS_DDI_SOURCE_FIXED_XSL.close();
+		isUTIL_XSL_INCORPORATION_XSL4.close();
+		osTEMP_TEMP_TMP2.close();
 		logger.debug(
 				"Incorporating " + Constants.TEMP_TEMP_TMP +
 				" and " + Constants.INPUTS_DDI_TEMPLATES_XSL +
 				" in " + Constants.INPUTS_DDI_SOURCE_XSL_TMP);
 		
+		InputStream isTEMP_TEMP_TMP2 = FileUtils.openInputStream(Constants.TEMP_TEMP_TMP);
+		InputStream isUTIL_XSL_INCORPORATION_XSL5 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osINPUTS_DDI_SOURCE_XSL_TMP = FileUtils.openOutputStream(Constants.INPUTS_DDI_SOURCE_XSL_TMP);
+		
 		saxonService.transformIncorporation(
-				FileUtils.openInputStream(Constants.TEMP_TEMP_TMP), 
-				Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL),
-				FileUtils.openOutputStream(Constants.INPUTS_DDI_SOURCE_XSL_TMP), 
+				isTEMP_TEMP_TMP2, 
+				isUTIL_XSL_INCORPORATION_XSL5,
+				osINPUTS_DDI_SOURCE_XSL_TMP, 
 				Constants.INPUTS_DDI_TEMPLATES_XSL_TMP);
+		isTEMP_TEMP_TMP2.close();
+		isUTIL_XSL_INCORPORATION_XSL5.close();
+		osINPUTS_DDI_SOURCE_XSL_TMP.close();
 		logger.debug("Leaving Incorporation");
 	}
 	

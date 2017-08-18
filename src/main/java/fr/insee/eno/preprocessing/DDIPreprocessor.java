@@ -3,6 +3,7 @@ package fr.insee.eno.preprocessing;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -31,12 +32,17 @@ public class DDIPreprocessor implements Preprocessor {
 				"Dereferencing : -Input : " + inputFile + " -Output : " + Constants.TEMP_NULL_TMP + " -Stylesheet : "
 						+ Constants.UTIL_DDI_DEREFERENCING_XSL + " -Parameters : " + Constants.SUB_TEMP_FOLDER);
 		
+		InputStream isDDI_DEREFERENCING_XSL = Constants.getInputStreamFromPath(Constants.DDI_DEREFERENCING_XSL);
+		InputStream isInputFile =  FileUtils.openInputStream(inputFile);
+		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(Constants.TEMP_NULL_TMP);
 		saxonService.transformDereferencing(
-				FileUtils.openInputStream(inputFile), 
-				Constants.DDI_DEREFERENCING_XSL,
-				FileUtils.openOutputStream(Constants.TEMP_NULL_TMP),
+				isInputFile, 
+				isDDI_DEREFERENCING_XSL,
+				osTEMP_NULL_TMP,
 				Constants.SUB_TEMP_FOLDER); //FIXME 4th param should be a parameters file (?!!?).
-
+		isInputFile.close();
+		isDDI_DEREFERENCING_XSL.close();
+		osTEMP_NULL_TMP.close();
 		// ----- Cleaning
 		logger.debug("Cleaning target");
 		File f = Constants.SUB_TEMP_FOLDER;
@@ -60,11 +66,16 @@ public class DDIPreprocessor implements Preprocessor {
 		logger.debug("Cleaned output file to be created : " + cleaningOutput);
 		logger.debug("Cleaning : -Input : " + cleaningInput + " -Output : " + cleaningOutput + " -Stylesheet : "
 				+ Constants.UTIL_DDI_CLEANING_XSL);
+		InputStream isCleaningIn = FileUtils.openInputStream(new File(cleaningInput));
+		OutputStream osCleaning = FileUtils.openOutputStream(new File(cleaningOutput));
+		InputStream isUTIL_DDI_CLEANING_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_CLEANING_XSL);
 		saxonService.transform(
-				FileUtils.openInputStream(new File(cleaningInput)),
-				Constants.UTIL_DDI_CLEANING_XSL, 
-				FileUtils.openOutputStream(new File(cleaningOutput)));
-
+				isCleaningIn,
+				isUTIL_DDI_CLEANING_XSL, 
+				osCleaning);
+		isCleaningIn.close();
+		isUTIL_DDI_CLEANING_XSL.close();
+		osCleaning.close();
 		// ----- Titling
 		// titlinginput = cleaningoutput
 
@@ -75,7 +86,7 @@ public class DDIPreprocessor implements Preprocessor {
 		// Else : using the provided one
 		if (parametersFile == null) {
 			logger.debug("Using default parameters");
-			parametersFileStream = Constants.PARAMETERS_FILE;			
+			parametersFileStream = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);			
 		} else {
 			logger.debug("Using provided parameters");
 			parametersFileStream = FileUtils.openInputStream(parametersFile);
@@ -85,12 +96,19 @@ public class DDIPreprocessor implements Preprocessor {
 
 		logger.debug("Titling : -Input : " + cleaningOutput + " -Output : " + outputTitling + " -Stylesheet : "
 				+ Constants.UTIL_DDI_TITLING_XSL + " -Parameters : " + (parametersFile == null ? "Default parameters": "Provided parameters"));
+		
+		InputStream isCleaningTitling = FileUtils.openInputStream(new File(cleaningOutput));
+		InputStream isUTIL_DDI_TITLING_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_TITLING_XSL);
+		OutputStream osTitling = FileUtils.openOutputStream(new File(outputTitling));
 		saxonService.transformTitling(
-				FileUtils.openInputStream(new File(cleaningOutput)),
-				Constants.UTIL_DDI_TITLING_XSL,
-				FileUtils.openOutputStream(new File(outputTitling)),
+				isCleaningTitling,
+				isUTIL_DDI_TITLING_XSL,
+				osTitling,
 				parametersFileStream);
-
+		isCleaningTitling.close();
+		isUTIL_DDI_TITLING_XSL.close();
+		osTitling.close();
+		parametersFileStream.close();
 		logger.debug("DDIPreprocessing : END");
 		return new File(outputTitling);
 	}
