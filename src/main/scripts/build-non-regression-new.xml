@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="enoNonRegression" basedir="." default="full-light">
+<project name="enoNonRegression" basedir="." default="full">
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
 
     <!-- Properties for this non regression script -->
-    <property name="survey-name" value="simpsons"/>
+    <property name="survey-name" value="DOC-en"/>
     <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>
     
     <!--************************** This value is to be set to "fr" to generate a xform *******************************************-->
     <!--***** other value aceptables:-"plop" to see the 'track' of the drivers and getters (resut at:Eno\target\temp\plop\v1)*****-->    
     
-    <property name="Param" value="ddi2fr"/>
+    <property name="Param" value="pogues-xml2ddi"/>
     
     
     <!--to implement new value of this parameter, you have to make duplicate of every folders or files in the eno folder that 

@@ -63,4 +63,31 @@
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:get-value($context)"/>
    </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-lang">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-lang($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-version">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-version($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-generic-output-format">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-visualization-hint($context)"/>
+   </xsl:function>
 </xsl:stylesheet>

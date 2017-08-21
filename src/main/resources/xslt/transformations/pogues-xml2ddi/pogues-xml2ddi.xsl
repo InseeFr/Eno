@@ -42,7 +42,7 @@
       </xd:desc>
    </xd:doc>
    <xsl:template match="/">
-      <xsl:apply-templates select="//pogues:Questionnaire" mode="source"/>
+      <xsl:apply-templates select="/pogues:Questionnaire" mode="source"/>
    </xsl:template>
    <xd:doc>
       <xd:desc>
@@ -54,6 +54,20 @@
          <driver/>
       </xsl:param>
       <xsl:apply-templates select="eno:append-empty-element('Form',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Response" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('ResponseDomain',$driver)"
+                           mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -158,5 +172,32 @@
    <xsl:function name="enoddi32:get-value">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:get-value($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-lang">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-lang($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-version">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-version($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-generic-output-format">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-visualization-hint($context)"/>
    </xsl:function>
 </xsl:stylesheet>

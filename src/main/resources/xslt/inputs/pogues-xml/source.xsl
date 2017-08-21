@@ -69,7 +69,38 @@
       <xsl:param name="context" as="item()"/>
       <xsl:apply-templates select="$context" mode="enopogues:get-value"/>
    </xsl:function>
-   
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-lang">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-lang"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-version">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-version"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-visualization-hint">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-visualization-hint"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Label is the default element for labels in Pogues.</xd:p>
+      </xd:desc>
+   </xd:doc>
    <xsl:template match="*" mode="enopogues:get-label">
       <xsl:value-of select="pogues:Label"/>
    </xsl:template>
@@ -120,5 +151,29 @@
    </xd:doc>
    <xsl:template match="*" mode="enopogues:get-value">
       <xsl:value-of select="pogues:Value"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="*" mode="enopogues:get-version">
+      <xsl:value-of select="'0.1.1'"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="*" mode="enopogues:get-lang">
+      <xsl:value-of select="'fr-FR'"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Response" mode="enopogues:get-visualization-hint">
+      <xsl:value-of select="pogues:Datatype/@visualizationHint"/>
    </xsl:template>
 </xsl:stylesheet>

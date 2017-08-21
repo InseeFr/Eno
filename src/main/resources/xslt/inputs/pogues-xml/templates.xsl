@@ -56,4 +56,28 @@
    <xsl:template match="*" mode="enopogues:get-value">
       <xsl:value-of select="pogues:Value"/>
    </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="*" mode="enopogues:get-version">
+      <xsl:value-of select="'0.1.1'"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="*" mode="enopogues:get-lang">
+      <xsl:value-of select="'fr-FR'"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Response" mode="enopogues:get-visualization-hint">
+      <xsl:value-of select="pogues:Datatype/@visualizationHint"/>
+   </xsl:template>
 </xsl:stylesheet>
