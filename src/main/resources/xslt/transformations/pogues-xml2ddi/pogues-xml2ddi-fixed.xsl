@@ -48,7 +48,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="/">
-        <xsl:apply-templates select="//pogues:Questionnaire" mode="source"/>
+        <xsl:apply-templates select="/pogues:Questionnaire" mode="source"/>
     </xsl:template>
     
    

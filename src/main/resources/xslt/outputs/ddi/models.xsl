@@ -9,22 +9,6 @@
     version="2.0">
 
 
-    <xd:doc>
-        <xd:desc>
-            <xd:p>The highest driver, which starts the generation of the xforms.</xd:p>
-            <xd:p>It writes codes on different levels for a same driver by adding an element to the
-                virtuel tree :</xd:p>
-            <xd:p>- Instance : to write the main instance</xd:p>
-            <xd:p>- Bind : to writes the binds associated to the elements of the instance</xd:p>
-            <xd:p>- Resource : an instance which stores the externalized texts used in the body part
-                (xforms labels, hints, helps, alerts)</xd:p>
-            <xd:p>- ResourceBind : to write the few binds of the elements of the resource instance
-                which are calculated</xd:p>
-            <xd:p>- Body : to write the fields</xd:p>
-            <xd:p>- Model : to write model elements of the instance which could be potentially added
-                by the user in the instance</xd:p>
-        </xd:desc>
-    </xd:doc>
     <xsl:template match="Form" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="citation" select="enoddi32:get-citation($source-context)" as="xs:string"/>
@@ -67,7 +51,6 @@
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                 </d:InterviewerInstructionScheme>
-
                 <d:ControlConstructScheme>
                     <r:Agency>fr.insee</r:Agency>
                     <r:ID>INSEE-SIMPSONS-CCS</r:ID>
@@ -174,7 +157,7 @@
     
     <xsl:template match="IIS//Instruction" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="agency"  select="enoddi32:get-agency($source-context)" as="xs:string" tunnel="yes"/>
         <d:Instruction>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>A définir</r:ID>
@@ -188,6 +171,17 @@
                 </d:LiteralText>
             </d:InstructionText>
         </d:Instruction>    
+    </xsl:template>
+    
+    <xsl:template match="Instruction" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" select="enoddi32:get-agency($source-context)" as="xs:string"/>
+        <d:InterviewerInstructionReference>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID>A définir</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>Instruction</r:TypeOfObject>
+        </d:InterviewerInstructionReference>
     </xsl:template>
 
     <xsl:template match="CLS//*" mode="model" priority="-1"/>
@@ -230,4 +224,10 @@
             <r:Value><xsl:value-of select="enoddi32:get-value($source-context)"/></r:Value>
         </l:Code>
     </xsl:template>
+    
+    <xsl:template match="Sequence/Sequence" mode="model" priority="5"/>
+    
+    <xsl:template match="CCS//Sequence" mode="model"/>        
+    
+    
 </xsl:stylesheet>

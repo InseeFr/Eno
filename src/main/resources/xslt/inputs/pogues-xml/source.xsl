@@ -69,11 +69,7 @@
       <xsl:param name="context" as="item()"/>
       <xsl:apply-templates select="$context" mode="enopogues:get-value"/>
    </xsl:function>
-   <xd:doc>
-      <xd:desc>
-         <xd:p>Label is the default element for labels in Pogues.</xd:p>
-      </xd:desc>
-   </xd:doc>
+   
    <xsl:template match="*" mode="enopogues:get-label">
       <xsl:value-of select="pogues:Label"/>
    </xsl:template>
