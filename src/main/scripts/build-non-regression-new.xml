@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="enoNonRegression" basedir="." default="full">
+<project name="enoNonRegression" basedir="." default="full-light">
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
 
     <!-- Properties for this non regression script -->
-    <property name="survey-name" value="DOC-en"/>
+    <property name="survey-name" value="simpsons"/>
     <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>
     
     <!--************************** This value is to be set to "fr" to generate a xform *******************************************-->
     <!--***** other value aceptables:-"plop" to see the 'track' of the drivers and getters (resut at:Eno\target\temp\plop\v1)*****-->    
     
-    <property name="Param" value="pogues-xml2ddi"/>
+    <property name="Param" value="ddi2fr"/>
     
     
     <!--to implement new value of this parameter, you have to make duplicate of every folders or files in the eno folder that 
@@ -38,7 +38,6 @@
     <!-- The first main target that can be called -->
     <!-- Cleaning, preprocessing the DDI and preprocessing the generator -->
     <!-- Targets are called in the strict order of the 'depends' attribute : clean first, then DDIPreprocessing and finally ENOPreprocessing-->
-   <!-- <target name="full" depends="clean, DDIPreprocessing, ENOPreprocessing">-->
         <target name="full" depends="clean, InPreprocessing, ENOPreprocessing">
             <echo message="Go !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" />
         <!-- For each dereferenced file created in temp, creating the corresponding out-format -->
@@ -48,6 +47,17 @@
             </path>
         </foreach>
     </target>
+
+    <target name="full-light" depends="clean, InPreprocessing">
+        <echo message="Go !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" />
+        <!-- For each dereferenced file created in temp, creating the corresponding out-format -->
+        <foreach target="in2out" param="file" inheritall="true">
+            <path>
+                <fileset dir="${temp.home}" includes="*-final.tmp"/>
+            </path>
+        </foreach>
+    </target>
+
 
     <!--************************TARGETS TO GENERATE A SURVEY *****************************-->
 
