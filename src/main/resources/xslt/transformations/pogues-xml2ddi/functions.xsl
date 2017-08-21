@@ -90,4 +90,49 @@
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:get-visualization-hint($context)"/>
    </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-type">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-type($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-type-name">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-type-name($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-max-length">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-max-length($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-mandatory">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-mandatory($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-sequence-type">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-generic-name($context)"/>
+   </xsl:function>
 </xsl:stylesheet>

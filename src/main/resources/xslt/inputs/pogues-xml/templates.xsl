@@ -80,4 +80,54 @@
    <xsl:template match="pogues:Response" mode="enopogues:get-visualization-hint">
       <xsl:value-of select="pogues:Datatype/@visualizationHint"/>
    </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Response" mode="enopogues:get-type">
+      <xsl:value-of select="pogues:Datatype/@xsi:type"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Child[@xsi:type='QuestionType']"
+                 mode="enopogues:get-type">
+      <xsl:value-of select="@questionType"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Response" mode="enopogues:get-type-name">
+      <xsl:value-of select="pogues:Datatype/@typeName"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Response" mode="enopogues:get-max-length">
+      <xsl:value-of select="pogues:Datatype/pogues:MaxLength"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Response" mode="enopogues:get-mandatory">
+      <xsl:value-of select="@mandatory"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Child[@xsi:type='SequenceType']"
+                 mode="enopogues:get-generic-name">
+      <xsl:value-of select="@genericName"/>
+   </xsl:template>
 </xsl:stylesheet>

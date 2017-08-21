@@ -347,8 +347,17 @@
             </r:Value>
         </l:Code>
     </xsl:template>
+    
+    <xsl:template match="driver-CategoryScheme//*" mode="model" priority="-1"/>
+    
+    <xsl:template match="driver-CategoryScheme//CodeList" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>        
+    </xsl:template>
 
-    <xsl:template match="driver-CategoryScheme//category" mode="model">
+    <xsl:template match="driver-CategoryScheme//Code" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <l:Category>
