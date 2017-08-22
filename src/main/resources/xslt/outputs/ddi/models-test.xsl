@@ -6,18 +6,18 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_2"
     xmlns:l="ddi:logicalproduct:3_2" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
     exclude-result-prefixes="#all" version="2.0">
-
+    
     <xsl:template match="*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:copy>
             <xsl:apply-templates select="$source-context" mode="test-getter"/>
-       
+            
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
-
+    
     <xsl:template match="*" mode="test-getter">
         <get-citation><xsl:value-of select="enoddi32:get-citation(.)"/></get-citation>
         <get-agency><xsl:value-of select="enoddi32:get-agency(.)"/></get-agency>
@@ -35,8 +35,12 @@
         <get-max-length><xsl:value-of select="enoddi32:get-max-length(.)"/></get-max-length>
         <get-mandatory><xsl:value-of select="enoddi32:get-mandatory(.)"/></get-mandatory>
         <get-sequence-type><xsl:value-of select="enoddi32:get-sequence-type(.)"/></get-sequence-type>
-        
+        <get-sequences><xsl:sequence select="enoddi32:get-sequences(.)"/></get-sequences>
+        <get-questions><xsl:sequence select="enoddi32:get-questions(.)"/></get-questions> 
+        <get-instructions><xsl:copy-of select="enoddi32:get-instructions(.)"/></get-instructions> 
+        <get-decimal-positions><xsl:copy-of select="enoddi32:get-decimal-positions(.)"/></get-decimal-positions>
+            
     </xsl:template>
-
-
+    
+    
 </xsl:stylesheet>

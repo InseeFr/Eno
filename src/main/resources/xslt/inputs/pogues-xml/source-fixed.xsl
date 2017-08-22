@@ -17,4 +17,17 @@
         <xsl:text/>
     </xsl:template>
     
+    <xsl:template match="//pogues:Child[@xsi:type='QuestionType']" mode="with-tag">
+        <xsl:sequence select="."/>
+    </xsl:template>
+    
+    <xsl:template match="//pogues:Child[@xsi:type='SequenceType']" mode="with-tag">
+        <xsl:sequence select="."/>
+    </xsl:template>
+    
+    <xsl:template match="//pogues:Declaration" mode="with-tag">
+        <xsl:sequence select="."/>
+    </xsl:template>
+    
+    
 </xsl:stylesheet>

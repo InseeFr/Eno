@@ -16,6 +16,15 @@
    <xsl:template match="*" mode="#all" priority="-1">
       <xsl:text/>
    </xsl:template>
+   <xsl:template match="//pogues:Child[@xsi:type='QuestionType']" mode="with-tag">
+      <xsl:sequence select="."/>
+   </xsl:template>
+   <xsl:template match="//pogues:Child[@xsi:type='SequenceType']" mode="with-tag">
+      <xsl:sequence select="."/>
+   </xsl:template>
+   <xsl:template match="//pogues:Declaration" mode="with-tag">
+      <xsl:sequence select="."/>
+   </xsl:template>
    <xd:doc>
       <xd:desc>
          <xd:p>Function that returns the label of a pogues element.</xd:p>
@@ -144,6 +153,69 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-sequences">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-sequences"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-questions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-questions"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-instructions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-instructions"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-decimals">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-decimals"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-minimum">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-minimum"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-maximum">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-maximum"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:is-discrete">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:is-discrete"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
          <xd:p>Label is the default element for labels in Pogues.</xd:p>
       </xd:desc>
    </xd:doc>
@@ -252,8 +324,8 @@
          <xd:p/>
       </xd:desc>
    </xd:doc>
-   <xsl:template match="pogues:Response" mode="enopogues:get-max-length">
-      <xsl:value-of select="pogues:Datatype/pogues:MaxLength"/>
+   <xsl:template match="pogues:Datatype" mode="enopogues:get-max-length">
+      <xsl:value-of select="pogues:MaxLength"/>
    </xsl:template>
    <xd:doc>
       <xd:desc>
@@ -271,5 +343,63 @@
    <xsl:template match="pogues:Child[@xsi:type='SequenceType']"
                  mode="enopogues:get-generic-name">
       <xsl:value-of select="@genericName"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="*" mode="enopogues:get-questions">
+      <xsl:apply-templates select="//pogues:Child[@xsi:type='QuestionType']" mode="with-tag"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="*" mode="enopogues:get-sequences">
+      <xsl:apply-templates select="//pogues:Child[@xsi:type='SequenceType']" mode="with-tag"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="*" mode="enopogues:get-instructions">
+      <xsl:apply-templates select="//pogues:Declaration" mode="with-tag"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Datatype" mode="enopogues:get-decimals">
+      <xsl:value-of select="pogues:Decimals"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Datatype[not(@visualizationHint) and @xsi:type='NumericDatatypeType']"
+                 mode="enopogues:get-minimum">
+      <xsl:value-of select="pogues:Minimum"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Datatype[not(@visualizationHint) and @xsi:type='NumericDatatypeType']"
+                 mode="enopogues:get-maximum">
+      <xsl:value-of select="pogues:Maximum"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Code" mode="enopogues:is-discrete">
+      <xsl:value-of select="'true'"/>
    </xsl:template>
 </xsl:stylesheet>

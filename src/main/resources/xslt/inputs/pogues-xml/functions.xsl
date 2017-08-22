@@ -126,4 +126,67 @@
       <xsl:param name="context" as="item()"/>
       <xsl:apply-templates select="$context" mode="enopogues:get-generic-name"/>
    </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-sequences">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-sequences"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-questions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-questions"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-instructions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-instructions"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-decimals">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-decimals"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-minimum">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-minimum"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-maximum">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-maximum"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:is-discrete">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:is-discrete"/>
+   </xsl:function>
 </xsl:stylesheet>

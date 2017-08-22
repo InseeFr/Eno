@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT18H51M41S</meta:editing-duration><meta:editing-cycles>151</meta:editing-cycles><meta:generator>LibreOffice/5.2.6.2$Windows_X86_64 LibreOffice_project/a3100ed2409ebf1c212f5048fbe377c281438fdc</meta:generator><dc:date>2017-08-21T18:54:11.360000000</dc:date><dc:creator>Eric Sigaud</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="18" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT19H17M39S</meta:editing-duration><meta:editing-cycles>158</meta:editing-cycles><meta:generator>LibreOffice/5.2.6.2$Windows_X86_64 LibreOffice_project/a3100ed2409ebf1c212f5048fbe377c281438fdc</meta:generator><dc:date>2017-08-22T16:56:19.608000000</dc:date><dc:creator>Eric Sigaud</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="1089" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
-   <config:config-item config:name="VisibleAreaWidth" config:type="int">50597</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">6321</config:config-item>
+   <config:config-item config:name="VisibleAreaWidth" config:type="int">2358552</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">14901</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
-       <config:config-item config:name="CursorPositionX" config:type="int">2</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">6</config:config-item>
+       <config:config-item config:name="CursorPositionX" config:type="int">0</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">26</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -190,7 +190,7 @@
  </office:styles>
  <office:automatic-styles>
   <style:style style:name="co1" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="138.78mm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="166.42mm"/>
   </style:style>
   <style:style style:name="co2" style:family="table-column">
    <style:table-column-properties fo:break-before="auto" style:column-width="41.19mm"/>
@@ -257,7 +257,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2017-08-21">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="18:14:10.476000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2017-08-22">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="10:18:59.266000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -273,6 +273,7 @@
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co2" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co4" table:number-columns-repeated="1021" table:default-cell-style-name="Default"/>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Xpath</text:p>
@@ -283,6 +284,7 @@
      <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Documentation</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -294,9 +296,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>The main Sequence activates the higher driver &apos;Form&apos;.</text:p>
      </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -305,10 +308,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>ResponseDomain</text:p>
      </table:table-cell>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -317,10 +320,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Instruction</text:p>
      </table:table-cell>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -329,10 +332,22 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>CodeList</text:p>
      </table:table-cell>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:CodeListReference</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>CodeListReference</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1021" office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:CodeListReference</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -341,22 +356,49 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Code</text:p>
      </table:table-cell>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos;]</text:p>
+      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;SIMPLE&apos; ]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Question</text:p>
+      <text:p>QuestionSimple</text:p>
      </table:table-cell>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;SINGLE_CHOICE&apos; ]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>QuestionSingleChoice</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1022"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;MULTIPLE_CHOICE&apos; ]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>QuestionMultipleChoice</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1022"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;TABLE&apos; ]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>QuestionTable</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1022"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -365,68 +407,236 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Sequence</text:p>
      </table:table-cell>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1" table:number-rows-repeated="7">
-     <table:table-cell table:number-columns-repeated="3"/>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
-    <table:table-row table:style-name="ro1" table:number-rows-repeated="10">
-     <table:table-cell/>
-     <table:table-cell table:style-name="ce2"/>
-     <table:table-cell/>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:GoTo</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Goto</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Not implemented yet</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Survey | pogues:DataCollection</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>DataCollection</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Not implemented yet</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:ComponentGroup</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>CompoenentGroup</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Not implemented yet</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:MemberReference</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>MemberReference</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Not implemented yet</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Datatype[not(@visualizationHint) and @xsi:type=&apos;TextDatatypeType&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>TextDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>s&apos;applique aux &lt;Datatype&gt; n&apos;ayant pas d&apos;atribut &quot;visualizationHint&quot; et dont l&apos;atribut &quot;xsi:type&quot; est egal à &quot;TextDatatypeType&quot;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Datatype[not(@visualizationHint) and @xsi:type=&apos;NumericDatatypeType&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>NumericDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>s&apos;applique aux &lt;Datatype&gt; n&apos;ayant pas d&apos;atribut &quot;visualizationHint&quot; et dont l&apos;atribut &quot;xsi:type&quot; est egal à &quot;NumericDatatypeType&quot;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Datatype[not(@visualizationHint) and @xsi:type=&apos;DateDatatypeType&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>DateTimeDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>s&apos;applique aux &lt;Datatype&gt; n&apos;ayant pas d&apos;atribut &quot;visualizationHint&quot; et dont l&apos;atribut &quot;xsi:type&quot; est egal à &quot;DateDatatypeType&quot;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Datatype[not(@visualizationHint) and @xsi:type=&apos;BooleanDatatypeType&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>BooleanDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>s&apos;applique aux &lt;Datatype&gt; n&apos;ayant pas d&apos;atribut &quot;visualizationHint&quot; et dont l&apos;atribut &quot;xsi:type&quot; est egal à &quot;BooleanDatatypeType&quot;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Datatype[@visualizationHint=&apos;RADIO&apos; and @xsi:type=&apos;TextDatatypeType&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>RadioDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>s&apos;applique aux &lt;Datatype&gt; dont l&apos;atribut &quot;visualizationHint&quot; est &quot;RADIO&quot; et dont l&apos;atribut &quot;xsi:type&quot; est egal à &quot;TextDatatypeType&quot;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Datatype[@visualizationHint=&apos;CHECKBOX&apos; and @xsi:type=&apos;TextDatatypeType&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>CheckBoxDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>s&apos;applique aux &lt;Datatype&gt; dont l&apos;atribut &quot;visualizationHint&quot; est &quot;CHECKBOX&quot; et dont l&apos;atribut &quot;xsi:type&quot; est egal à &quot;TextDatatypeType&quot;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Datatype[@visualizationHint=&apos;DROPDOWN&apos; and @xsi:type=&apos;TextDatatypeType&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>DropDownListDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>s&apos;applique aux &lt;Datatype&gt; dont l&apos;atribut &quot;visualizationHint&quot; est &quot;DROPDOWN&quot; et dont l&apos;atribut &quot;xsi:type&quot; est egal à &quot;TextDatatypeType&quot;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Dimension[@dimensionType=&apos;PRIMARY&apos; and @dynamic != &apos;0&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>RosterDimension</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>s&apos;applique aux &lt;Dimension&gt; dont l&apos;atribut &quot;dimensionType&quot; est &quot;PRIMARY&quot; et dont l&apos;atribut &quot;dynamic&quot; est egal à &quot;0&quot;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Dimension[@dimensionType=&apos;MEASURE&apos; and @dynamic=&apos;0&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>UnknownDimension</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>s&apos;applique aux &lt;Dimension&gt; dont l&apos;atribut &quot;dimensionType&quot; est &quot;MEASURE&quot; et dont l&apos;atribut &quot;dynamic&quot; est egal à &quot;0&quot;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Dimension[@dimensionType=&apos;PRIMARY&apos; and @dynamic=&apos;0&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>CodeDomainDimension</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>s&apos;applique aux &lt;Dimension&gt; dont l&apos;atribut &quot;dimensionType&quot; est &quot;PRIMARY&quot; et dont l&apos;atribut &quot;dynamic&quot; est egal à &quot;0&quot;</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce2"/>
+     <table:table-cell table:number-columns-repeated="1022"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell/>
      <table:table-cell table:style-name="ce2"/>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell/>
      <table:table-cell table:style-name="ce2"/>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
      <table:table-cell/>
      <table:table-cell table:style-name="ce2"/>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
      <table:table-cell/>
      <table:table-cell table:style-name="ce2"/>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
      <table:table-cell/>
      <table:table-cell table:style-name="ce3"/>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="6">
-     <table:table-cell table:number-columns-repeated="3"/>
+     <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="5">
      <table:table-cell/>
      <table:table-cell table:style-name="ce2"/>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell/>
      <table:table-cell table:style-name="ce2"/>
-     <table:table-cell/>
+     <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
    </table:table>
    <table:named-expressions/>

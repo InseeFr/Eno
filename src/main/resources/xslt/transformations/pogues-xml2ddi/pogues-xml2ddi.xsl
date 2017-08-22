@@ -103,6 +103,20 @@
          <xd:p/>
       </xd:desc>
    </xd:doc>
+   <xsl:template match="pogues:CodeListReference" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('CodeListReference',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
    <xsl:template match="pogues:Code" mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
@@ -116,11 +130,57 @@
          <xd:p/>
       </xd:desc>
    </xd:doc>
-   <xsl:template match="pogues:Child[@xsi:type='QuestionType']" mode="source">
+   <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='SIMPLE' ]"
+                 mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="eno:append-empty-element('Question',$driver)" mode="model">
+      <xsl:apply-templates select="eno:append-empty-element('QuestionSimple',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='SINGLE_CHOICE' ]"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('QuestionSingleChoice',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='MULTIPLE_CHOICE' ]"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('QuestionMultipleChoice',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='TABLE' ]"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('QuestionTable',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -134,6 +194,207 @@
          <driver/>
       </xsl:param>
       <xsl:apply-templates select="eno:append-empty-element('Sequence',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Not implemented yet</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:GoTo" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('Goto',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Not implemented yet</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Survey | pogues:DataCollection" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('DataCollection',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Not implemented yet</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:ComponentGroup" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('CompoenentGroup',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Not implemented yet</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:MemberReference" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('MemberReference',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>s'applique aux &lt;Datatype&gt; n'ayant pas d'atribut "visualizationHint" et dont l'atribut "xsi:type" est egal à "TextDatatypeType"</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Datatype[not(@visualizationHint) and @xsi:type='TextDatatypeType']"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('TextDomain',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>s'applique aux &lt;Datatype&gt; n'ayant pas d'atribut "visualizationHint" et dont l'atribut "xsi:type" est egal à "NumericDatatypeType"</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Datatype[not(@visualizationHint) and @xsi:type='NumericDatatypeType']"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('NumericDomain',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>s'applique aux &lt;Datatype&gt; n'ayant pas d'atribut "visualizationHint" et dont l'atribut "xsi:type" est egal à "DateDatatypeType"</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Datatype[not(@visualizationHint) and @xsi:type='DateDatatypeType']"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('DateTimeDomain',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>s'applique aux &lt;Datatype&gt; n'ayant pas d'atribut "visualizationHint" et dont l'atribut "xsi:type" est egal à "BooleanDatatypeType"</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Datatype[not(@visualizationHint) and @xsi:type='BooleanDatatypeType']"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('BooleanDomain',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>s'applique aux &lt;Datatype&gt; dont l'atribut "visualizationHint" est "RADIO" et dont l'atribut "xsi:type" est egal à "TextDatatypeType"</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Datatype[@visualizationHint='RADIO' and @xsi:type='TextDatatypeType']"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('RadioDomain',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>s'applique aux &lt;Datatype&gt; dont l'atribut "visualizationHint" est "CHECKBOX" et dont l'atribut "xsi:type" est egal à "TextDatatypeType"</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Datatype[@visualizationHint='CHECKBOX' and @xsi:type='TextDatatypeType']"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('CheckBoxDomain',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>s'applique aux &lt;Datatype&gt; dont l'atribut "visualizationHint" est "DROPDOWN" et dont l'atribut "xsi:type" est egal à "TextDatatypeType"</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Datatype[@visualizationHint='DROPDOWN' and @xsi:type='TextDatatypeType']"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('DropDownListDomain',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>s'applique aux &lt;Dimension&gt; dont l'atribut "dimensionType" est "PRIMARY" et dont l'atribut "dynamic" est egal à "0"</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Dimension[@dimensionType='PRIMARY' and @dynamic != '0']"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('RosterDimension',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>s'applique aux &lt;Dimension&gt; dont l'atribut "dimensionType" est "MEASURE" et dont l'atribut "dynamic" est egal à "0"</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Dimension[@dimensionType='MEASURE' and @dynamic='0']"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('UnknownDimension',$driver)"
+                           mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>s'applique aux &lt;Dimension&gt; dont l'atribut "dimensionType" est "PRIMARY" et dont l'atribut "dynamic" est egal à "0"</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Dimension[@dimensionType='PRIMARY' and @dynamic='0']"
+                 mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('CodeDomainDimension',$driver)"
+                           mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -271,5 +532,68 @@
    <xsl:function name="enoddi32:get-sequence-type">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:get-generic-name($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-sequences">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-sequences($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-questions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-questions($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-instructions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-instructions($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-decimal-positions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-decimals($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-low">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-minimum($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-high">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-maximum($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:is-discrete">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:is-discrete($context)"/>
    </xsl:function>
 </xsl:stylesheet>

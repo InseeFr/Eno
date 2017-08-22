@@ -51,6 +51,5 @@
     <xsl:template match="/">
         <xsl:apply-templates select="/pogues:Questionnaire" mode="source"/>
     </xsl:template>
-    
-   
+      
 </xsl:stylesheet>

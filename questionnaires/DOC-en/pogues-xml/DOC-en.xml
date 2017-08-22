@@ -39,6 +39,7 @@
                     <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
                         <Minimum>0</Minimum>
                         <Maximum>120</Maximum>
+                        <Decimals>2</Decimals>
                     </Datatype>
                 </Response>
             </Child>
@@ -217,6 +218,7 @@
                     <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
                         <Minimum>0</Minimum>
                         <Maximum>100</Maximum>
+                        <Decimals>2</Decimals>
                     </Datatype>
                 </Response>
                 <Response>

@@ -135,4 +135,67 @@
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:get-generic-name($context)"/>
    </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-sequences">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-sequences($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-questions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-questions($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-instructions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-instructions($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-decimal-positions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-decimals($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-low">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-minimum($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-high">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-maximum($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:is-discrete">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:is-discrete($context)"/>
+   </xsl:function>
 </xsl:stylesheet>
