@@ -35,11 +35,11 @@
         <get-max-length><xsl:value-of select="enoddi32:get-max-length(.)"/></get-max-length>
         <get-mandatory><xsl:value-of select="enoddi32:get-mandatory(.)"/></get-mandatory>
         <get-sequence-type><xsl:value-of select="enoddi32:get-sequence-type(.)"/></get-sequence-type>
-        <get-sequences><xsl:sequence select="enoddi32:get-sequences(.)"/></get-sequences>
-        <get-questions><xsl:sequence select="enoddi32:get-questions(.)"/></get-questions> 
+        <!--<get-sequences><xsl:sequence select="enoddi32:get-sequences(.)"/></get-sequences>
+        <get-questions><xsl:sequence select="enoddi32:get-questions(.)"/></get-questions>--> 
         <get-instructions><xsl:copy-of select="enoddi32:get-instructions(.)"/></get-instructions> 
         <get-decimal-positions><xsl:copy-of select="enoddi32:get-decimal-positions(.)"/></get-decimal-positions>
-            
+        <get-dynamic><xsl:value-of select="enoddi32:get-dynamic(.)"/></get-dynamic>
     </xsl:template>
     
     
