@@ -206,7 +206,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="eno:append-empty-element('Goto',$driver)" mode="model">
+      <xsl:apply-templates select="eno:append-empty-element('GoTo',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -395,6 +395,19 @@
       </xsl:param>
       <xsl:apply-templates select="eno:append-empty-element('CodeDomainDimension',$driver)"
                            mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:IfThenElse" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('IfThenElse',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -613,5 +626,32 @@
    <xsl:function name="enoddi32:exist-boolean">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:exist-boolean($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-expression">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-expression($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-if-true">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-if-true($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-ifthenelses">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-ifthenelses($context)"/>
    </xsl:function>
 </xsl:stylesheet>

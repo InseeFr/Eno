@@ -212,4 +212,36 @@
    <xsl:template match="pogues:Questionnaire" mode="enopogues:exist-boolean">
       <xsl:value-of select="pogues:Datatype[not(@visualizationHint) and @xsi:type='BooleanDatatypeType']"/>
    </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:*" mode="enopogues:get-expression">
+      <xsl:value-of select="pogues:Expression"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:IfThenElse" mode="enopogues:get-then-id">
+      <xsl:value-of select="pogues:IfTrue/@id"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:GoTo" mode="enopogues:get-if-true">
+      <xsl:value-of select="pogues:IfTrue"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="*" mode="enopogues:get-ifthenelses">
+      <xsl:apply-templates select="//pogues:IfThenElse" mode="with-tag"/>
+   </xsl:template>
 </xsl:stylesheet>

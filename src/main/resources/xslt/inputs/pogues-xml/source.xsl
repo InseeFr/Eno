@@ -25,6 +25,9 @@
    <xsl:template match="//pogues:Declaration" mode="with-tag">
       <xsl:sequence select="."/>
    </xsl:template>
+   <xsl:template match="//pogues:IfThenElse" mode="with-tag">
+      <xsl:sequence select="."/>
+   </xsl:template>
    <xd:doc>
       <xd:desc>
          <xd:p>Function that returns the label of a pogues element.</xd:p>
@@ -231,6 +234,42 @@
    <xsl:function name="enopogues:exist-boolean">
       <xsl:param name="context" as="item()"/>
       <xsl:apply-templates select="$context" mode="enopogues:exist-boolean"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-expression">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-expression"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-then-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-then-id"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-if-true">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-if-true"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-ifthenelses">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-ifthenelses"/>
    </xsl:function>
    <xd:doc>
       <xd:desc>
@@ -443,5 +482,37 @@
    </xd:doc>
    <xsl:template match="pogues:Questionnaire" mode="enopogues:exist-boolean">
       <xsl:value-of select="pogues:Datatype[not(@visualizationHint) and @xsi:type='BooleanDatatypeType']"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:*" mode="enopogues:get-expression">
+      <xsl:value-of select="pogues:Expression"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:IfThenElse" mode="enopogues:get-then-id">
+      <xsl:value-of select="pogues:IfTrue/@id"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:GoTo" mode="enopogues:get-if-true">
+      <xsl:value-of select="pogues:IfTrue"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="*" mode="enopogues:get-ifthenelses">
+      <xsl:apply-templates select="//pogues:IfThenElse" mode="with-tag"/>
    </xsl:template>
 </xsl:stylesheet>
