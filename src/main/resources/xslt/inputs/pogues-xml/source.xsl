@@ -216,6 +216,24 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-dynamic">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-dynamic"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:exist-boolean">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:exist-boolean"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
          <xd:p>Label is the default element for labels in Pogues.</xd:p>
       </xd:desc>
    </xd:doc>
@@ -253,6 +271,14 @@
    </xd:doc>
    <xsl:template match="*" mode="enopogues:get-id">
       <xsl:value-of select="@id"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:CodeListReference" mode="enopogues:get-id">
+      <xsl:value-of select="./text()"/>
    </xsl:template>
    <xd:doc>
       <xd:desc>
@@ -401,5 +427,21 @@
    </xd:doc>
    <xsl:template match="pogues:Code" mode="enopogues:is-discrete">
       <xsl:value-of select="'true'"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Dimension" mode="enopogues:get-dynamic">
+      <xsl:value-of select="@dynamic"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Questionnaire" mode="enopogues:exist-boolean">
+      <xsl:value-of select="pogues:Datatype[not(@visualizationHint) and @xsi:type='BooleanDatatypeType']"/>
    </xsl:template>
 </xsl:stylesheet>

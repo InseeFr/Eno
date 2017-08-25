@@ -189,4 +189,22 @@
       <xsl:param name="context" as="item()"/>
       <xsl:apply-templates select="$context" mode="enopogues:is-discrete"/>
    </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-dynamic">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-dynamic"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:exist-boolean">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:exist-boolean"/>
+   </xsl:function>
 </xsl:stylesheet>

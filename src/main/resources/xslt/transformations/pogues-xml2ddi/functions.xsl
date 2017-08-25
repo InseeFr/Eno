@@ -198,4 +198,22 @@
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:is-discrete($context)"/>
    </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-dynamic">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-dynamic($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:exist-boolean">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:exist-boolean($context)"/>
+   </xsl:function>
 </xsl:stylesheet>

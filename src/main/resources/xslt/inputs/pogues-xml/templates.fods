@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>P2DT3H7M31S</meta:editing-duration><meta:editing-cycles>298</meta:editing-cycles><meta:generator>LibreOffice/5.2.6.2$Windows_X86_64 LibreOffice_project/a3100ed2409ebf1c212f5048fbe377c281438fdc</meta:generator><dc:date>2017-08-22T18:04:07.954000000</dc:date><dc:creator>Eric Sigaud</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="78" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>P2DT6H15M24S</meta:editing-duration><meta:editing-cycles>310</meta:editing-cycles><meta:generator>LibreOffice/5.1.5.2$Windows_x86 LibreOffice_project/7a864d8825610a8c07cfc3bc01dd4fce6a9447e5</meta:generator><dc:date>2017-08-23T14:34:19.839000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="87" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">74063</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">14336</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">16072</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
        <config:config-item config:name="CursorPositionX" config:type="int">1</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">28</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">27</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -31,7 +31,7 @@
       </config:config-item-map-entry>
      </config:config-item-map-named>
      <config:config-item config:name="ActiveTable" config:type="string">Sheet1</config:config-item>
-     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1600</config:config-item>
+     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1857</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
      <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
      <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -75,8 +75,8 @@
    <config:config-item config:name="IsRasterAxisSynchronized" config:type="boolean">true</config:config-item>
    <config:config-item config:name="AutoCalculate" config:type="boolean">true</config:config-item>
    <config:config-item config:name="ApplyUserData" config:type="boolean">true</config:config-item>
-   <config:config-item config:name="PrinterName" config:type="string">\\s90imp1\MK1-ET12-RICOH MP4054SP</config:config-item>
-   <config:config-item config:name="PrinterSetup" config:type="base64Binary">0RP+/1xcczkwaW1wMVxNSzEtRVQxMi1SSUNPSCBNUDQwNTRTUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUklDT0ggUENMNiBVbml2ZXJzYWxEcml2ZXIgVjQuNgAWAAEA8hIAAAAAAAAEAAhSAAAEdAAAM1ROVwAAAAAKAFwAXABzADkAMABpAG0AcAAxAFwATQBLADEALQBFAFQAMQAyAC0AUgBJAEMATwBIACAATQBQADQAMAA1AAAAAAABBAAg3AAMEg//AAIBAAkAmgs0CGQAAQAHAFgCAQACAFgCAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAAAAAAxMERSZ3KRYiXmYykAAAAA0QoAAHicnVbLctswDPwXn3uw204fufYD2mtPGoiEJMYUweHDqdvpvxeQKFuSbSXTS2ICy+USAAH92UXVoc4WtQ/GpaqjHHZPu/3u3drTG5cTFh86qC0qshYG2wDBwJ4UQB2NZhsvVAeezR5ajFXElIxrR08TyCVFJ5TTqGlW4IuxZrYlLFrjY4eYbi2VcT4nVnBmn/w7jIJc9BDQqfMCADmR/IzIN0kLTXeJYgKnIejxNptMF9VvIOpRG0hnP4TRgnHsDKjOiiO/lv8K9hqIIR89aQFahBPWFtxxoewhRKnRd02MqqYzA57QJUNOkT97SJwvN22546oCeoQFk3jbzLevCgabhoMmGXcUerBbdNH8Fhmf91ughgbtEMw2WcJfqdwrRwwaG+OGMD7c0UM8lh2OHG5BNbpokmS9N1rbTSy41grnh/06RFvhe7xrFaWrY+vGV9Rb42d5M1emenwWO759//Fzi+Q/iuCtzMQJYBtDFZbmtFC4rf/edkstN0GOnIMeq7uRHFbU89OcY6RBsPOZ6kv5yC3HZzZuMvo+4bILX0pBk8o962KsPOaGrGZZua9xat+oW0wkf5c7wXtrFMjdfhP1J7BZTj3s93PasYTgo4Qlx0S9B49BzFV2Rtj6/o7vxejUVex62r0fGQOrV4jOQmiFsjEp0aBoOOOWwqJrLxxfx8TcPcU41THmy/vPj1kK5nD49JVBt/e9CnnaRU4YRAqGkwy2qOMlhwNKJXgK3I+N5CwQW1Ffwsq55R9xNpYsnCnL8iCNXoQNU4uDnL3FX9J2ybWSIItNYmby4gzw0gSWUhNXwXXs1URHO2OfDauHnVzOnVhKwyo01dxFnq9IcxFc/Gk+mclSqF94zczqyEPnpTNJ6NoAvjMqltNP/IhJXorp5cqBFMY4zvxp6A0lEcnmEtJPQx4SqwsRTiN2Gv18DYWgnzm3UpTCggmspfp5mrMrSFVcPGylS5QE8xZZQhzkXw4QG794xymNqbyawVZzDXSJu0MsViZYA31Hie4bb7ZPUdrwrIjkwBuwlApHmlK3DJNz41fT8p2v7K99sCzBr31oJPDD8BmPkv4bIi4L1ufx7ZVy5QY1qydvhm+8w1hcNx+R/G6uYouZWyJkK2Jjx3WqMucuhzDWxeT8+w8vweWgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAENPTVBBVF9EVVBMRVhfTU9ERQ8ARFVQTEVYX0xPTkdFREdF</config:config-item>
+   <config:config-item config:name="PrinterName" config:type="string">Microsoft XPS Document Writer</config:config-item>
+   <config:config-item config:name="PrinterSetup" config:type="base64Binary">FAX+/01pY3Jvc29mdCBYUFMgRG9jdW1lbnQgV3JpdGVyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATWljcm9zb2Z0IFhQUyBEb2N1bWVudCBXcml0ZXIAAAAWAAEAOgQAAAAAAAAEAAhSAAAEdAAAM1ROVwYATQBpAGMAcgBvAHMAbwBmAHQAIABYAFAAUwAgAEQAbwBjAHUAbQBlAG4AdAAgAFcAcgBpAHQAZQByAAAAAAAAAAEEAAbcAFgDA/8AAAEACQCaCzQIZAABAA8AWAICAAEAWAICAAAAQQA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAgAAAAEAAAD/////AAAAAAAAAAAAAAAAAAAAAERJTlUiABABTAMMAMrS9nIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAEAEAAFNNVEoAAAAAEAAAAU0AaQBjAHIAbwBzAG8AZgB0ACAAWABQAFMAIABEAG8AYwB1AG0AZQBuAHQAIABXAHIAaQB0AGUAcgAAAElucHV0QmluAEZPUk1TT1VSQ0UAUkVTRExMAFVuaXJlc0RMTABJbnRlcmxlYXZpbmcAT0ZGAEltYWdlVHlwZQBKUEVHTWVkAE9yaWVudGF0aW9uAFBPUlRSQUlUAENvbGxhdGUAT0ZGAFJlc29sdXRpb24AT3B0aW9uMQBQYXBlclNpemUATEVUVEVSAENvbG9yTW9kZQAyNGJwcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAATVhEVwEBAAASAENPTVBBVF9EVVBMRVhfTU9ERQoARFVQTEVYX09GRg==</config:config-item>
    <config:config-item-map-indexed config:name="ForbiddenCharacters">
     <config:config-item-map-entry>
      <config:config-item config:name="Language" config:type="string">zxx</config:config-item>
@@ -498,48 +498,95 @@
   </style:style>
   <style:style style:name="ce1" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:background-color="#99ccff"/>
-   <style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:font-weight="bold" style:font-size-asian="10pt" style:font-weight-asian="bold" style:font-size-complex="10pt" style:font-weight-complex="bold"/>
-  </style:style>
-  <style:style style:name="ce2" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="transparent"/>
-   <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" fo:font-weight="bold" style:font-size-asian="10pt" style:font-weight-asian="bold" style:font-size-complex="10pt" style:font-weight-complex="bold"/>
-  </style:style>
-  <style:style style:name="ce3" style:family="table-cell" style:parent-style-name="Default">
-   <style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
-  </style:style>
-  <style:style style:name="ce4" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="transparent"/>
-   <style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
-  </style:style>
-  <style:style style:name="ce5" style:family="table-cell" style:parent-style-name="Default">
-   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Tahoma" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
-  </style:style>
-  <style:style style:name="ce6" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:padding="0.71mm"/>
-   <style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
-  </style:style>
-  <style:style style:name="ce7" style:family="table-cell" style:parent-style-name="Default">
-   <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
-  </style:style>
-  <style:style style:name="ce8" style:family="table-cell" style:parent-style-name="Default">
-   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Mangal" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
-  </style:style>
-  <style:style style:name="ce9" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="transparent"/>
-   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Tahoma" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+   <style:text-properties style:text-position="" style:font-name="Arial" fo:font-size="10pt" fo:font-weight="bold" style:font-size-asian="10pt" style:font-weight-asian="bold" style:font-size-complex="10pt" style:font-weight-complex="bold"/>
   </style:style>
   <style:style style:name="ce10" style:family="table-cell" style:parent-style-name="Default">
-   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial1" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Arial1" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Arial1" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:text-position="" style:font-name="Arial1" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Arial1" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Arial1" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
   </style:style>
   <style:style style:name="ce11" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:background-color="transparent"/>
-   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Mangal" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:text-position="" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Mangal" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
   </style:style>
   <style:style style:name="ce12" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:background-color="transparent"/>
-   <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+   <style:text-properties style:use-window-font-color="true" style:text-position="" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
   </style:style>
   <style:style style:name="ce13" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:use-window-font-color="true" style:text-position=""/>
+  </style:style>
+  <style:style style:name="ce2" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:use-window-font-color="true" style:text-position="" style:font-name="Arial" fo:font-size="10pt" fo:font-weight="bold" style:font-size-asian="10pt" style:font-weight-asian="bold" style:font-size-complex="10pt" style:font-weight-complex="bold"/>
+  </style:style>
+  <style:style style:name="ce3" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:text-position="" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="ce4" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:text-position="" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="ce5" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:padding="0.71mm"/>
+   <style:text-properties style:text-position="" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="ce6" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:text-position="" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Tahoma" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+  </style:style>
+  <style:style style:name="ce7" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:use-window-font-color="true" style:text-position="" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="ce8" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:text-position="" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Mangal" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+  </style:style>
+  <style:style style:name="ce9" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:text-position="" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Tahoma" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+  </style:style>
+  <style:style style:name="ce18" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="#99ccff"/>
+   <style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:font-weight="bold" style:font-size-asian="10pt" style:font-weight-asian="bold" style:font-size-complex="10pt" style:font-weight-complex="bold"/>
+  </style:style>
+  <style:style style:name="ce19" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" fo:font-weight="bold" style:font-size-asian="10pt" style:font-weight-asian="bold" style:font-size-complex="10pt" style:font-weight-complex="bold"/>
+  </style:style>
+  <style:style style:name="ce20" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="ce21" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="ce22" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:padding="0.71mm"/>
+   <style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="ce23" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Tahoma" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+  </style:style>
+  <style:style style:name="ce24" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="ce25" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Mangal" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+  </style:style>
+  <style:style style:name="ce26" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Tahoma" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+  </style:style>
+  <style:style style:name="ce27" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial1" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Arial1" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Arial1" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+  </style:style>
+  <style:style style:name="ce28" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Mangal" style:font-size-asian="10pt" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
+  </style:style>
+  <style:style style:name="ce29" style:family="table-cell" style:parent-style-name="Default">
+   <style:table-cell-properties fo:background-color="transparent"/>
+   <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="ce30" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:background-color="transparent"/>
    <style:text-properties style:use-window-font-color="true"/>
   </style:style>
@@ -592,7 +639,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2017-08-22">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="10:15:14.018000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2017-08-23">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="14:34:45.376000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -852,33 +899,33 @@
   <office:spreadsheet>
    <table:table table:name="Sheet1" table:style-name="ta1" table:print="false">
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co2" table:default-cell-style-name="ce3"/>
-    <table:table-column table:style-name="co3" table:default-cell-style-name="ce3"/>
-    <table:table-column table:style-name="co4" table:default-cell-style-name="ce3"/>
-    <table:table-column table:style-name="co5" table:default-cell-style-name="ce3"/>
+    <table:table-column table:style-name="co2" table:default-cell-style-name="ce20"/>
+    <table:table-column table:style-name="co3" table:default-cell-style-name="ce20"/>
+    <table:table-column table:style-name="co4" table:default-cell-style-name="ce20"/>
+    <table:table-column table:style-name="co5" table:default-cell-style-name="ce20"/>
     <table:table-column table:style-name="co6" table:number-columns-repeated="1019" table:default-cell-style-name="Default"/>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce18" office:value-type="string" calcext:value-type="string">
       <text:p>Xpath</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce18" office:value-type="string" calcext:value-type="string">
       <text:p>Xpath_Mode</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce18" office:value-type="string" calcext:value-type="string">
       <text:p>Match</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce18" office:value-type="string" calcext:value-type="string">
       <text:p>Match_Mode</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce18" office:value-type="string" calcext:value-type="string">
       <text:p>Documentation</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce2" table:number-columns-repeated="4"/>
-     <table:table-cell table:style-name="ce13" table:number-columns-repeated="1019"/>
+     <table:table-cell table:style-name="ce19" table:number-columns-repeated="4"/>
+     <table:table-cell table:style-name="ce30" table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -936,13 +983,26 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>*</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce21" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-id</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce21" office:value-type="string" calcext:value-type="string">
       <text:p>@id</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="1021"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:CodeListReference</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce21" office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:get-id</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>./text()</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default" table:number-columns-repeated="2"/>
+     <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -963,7 +1023,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-value</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce21" office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Value</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="1021"/>
@@ -975,11 +1035,11 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-version</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce25" office:value-type="string" calcext:value-type="string">
       <text:p>&apos;0.1.1&apos;</text:p>
      </table:table-cell>
      <table:table-cell/>
-     <table:table-cell table:style-name="ce7"/>
+     <table:table-cell table:style-name="ce24"/>
      <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1016,7 +1076,7 @@
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Datatype/@xsi:type</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1029,7 +1089,7 @@
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>@questionType</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1042,7 +1102,7 @@
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Datatype/@typeName</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1055,7 +1115,7 @@
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>pogues:MaxLength</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1068,7 +1128,7 @@
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>@mandatory</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1081,7 +1141,7 @@
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>@genericName</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1094,7 +1154,7 @@
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>//pogues:Child[@xsi:type=&apos;QuestionType&apos;]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce23" office:value-type="string" calcext:value-type="string">
       <text:p>with-tag</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="1020"/>
@@ -1109,7 +1169,7 @@
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>//pogues:Child[@xsi:type=&apos;SequenceType&apos;]</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce23" office:value-type="string" calcext:value-type="string">
       <text:p>with-tag</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="1020"/>
@@ -1124,7 +1184,7 @@
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
       <text:p>//pogues:Declaration</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce23" office:value-type="string" calcext:value-type="string">
       <text:p>with-tag</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="1020"/>
@@ -1139,7 +1199,7 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Decimals</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1149,10 +1209,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-minimum</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce23" office:value-type="string" calcext:value-type="string">
       <text:p>pogues:Minimum</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1179,25 +1239,51 @@
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
-    <table:table-row table:style-name="ro2" table:number-rows-repeated="6">
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Dimension</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce22" office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:get-dynamic</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce23" office:value-type="string" calcext:value-type="string">
+      <text:p>@dynamic</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce24" table:number-columns-repeated="2"/>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Questionnaire</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce23" office:value-type="string" calcext:value-type="string">
+      <text:p>enopogues:exist-boolean</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Datatype[not(@visualizationHint) and @xsi:type=&apos;BooleanDatatypeType&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce24" table:number-columns-repeated="2"/>
+     <table:table-cell table:number-columns-repeated="1019"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2" table:number-rows-repeated="3">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce5" table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce7" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce23" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce24" table:number-columns-repeated="2"/>
      <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce5"/>
-     <table:table-cell table:style-name="ce9"/>
-     <table:table-cell table:style-name="ce12"/>
-     <table:table-cell table:style-name="ce7"/>
+     <table:table-cell table:style-name="ce23"/>
+     <table:table-cell table:style-name="ce26"/>
+     <table:table-cell table:style-name="ce29"/>
+     <table:table-cell table:style-name="ce24"/>
      <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce5"/>
-     <table:table-cell table:style-name="ce9"/>
-     <table:table-cell table:style-name="ce7" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce23"/>
+     <table:table-cell table:style-name="ce26"/>
+     <table:table-cell table:style-name="ce24" table:number-columns-repeated="2"/>
      <table:table-cell table:number-columns-repeated="1019"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1205,7 +1291,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce5" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce23" table:number-columns-repeated="2"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="8">
@@ -1213,7 +1299,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce4" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce21" table:number-columns-repeated="2"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="4">
@@ -1221,7 +1307,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce4" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce21" table:number-columns-repeated="2"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1229,7 +1315,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce4" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce21" table:number-columns-repeated="2"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="2">
@@ -1237,7 +1323,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="4">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce4" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce21" table:number-columns-repeated="2"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1245,7 +1331,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="5">
      <table:table-cell table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce10"/>
+     <table:table-cell table:style-name="ce27"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1253,31 +1339,31 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
+     <table:table-cell table:style-name="ce22"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="5">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
-     <table:table-cell table:style-name="ce4" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce22"/>
+     <table:table-cell table:style-name="ce21" table:number-columns-repeated="2"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
-     <table:table-cell table:style-name="ce11"/>
-     <table:table-cell table:style-name="ce4"/>
+     <table:table-cell table:style-name="ce22"/>
+     <table:table-cell table:style-name="ce28"/>
+     <table:table-cell table:style-name="ce21"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="10">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
-     <table:table-cell table:style-name="ce4" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce22"/>
+     <table:table-cell table:style-name="ce21" table:number-columns-repeated="2"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="3">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
+     <table:table-cell table:style-name="ce22"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="9">
@@ -1285,13 +1371,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
+     <table:table-cell table:style-name="ce22"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
-     <table:table-cell table:style-name="ce4"/>
+     <table:table-cell table:style-name="ce22"/>
+     <table:table-cell table:style-name="ce21"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1299,7 +1385,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="2">
      <table:table-cell table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="2">
@@ -1307,29 +1393,29 @@
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
+     <table:table-cell table:style-name="ce22"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
-     <table:table-cell table:style-name="ce4"/>
+     <table:table-cell table:style-name="ce22"/>
+     <table:table-cell table:style-name="ce21"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="3">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
+     <table:table-cell table:style-name="ce22"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
-     <table:table-cell table:style-name="ce4"/>
+     <table:table-cell table:style-name="ce22"/>
+     <table:table-cell table:style-name="ce21"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="12">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce4" table:number-columns-repeated="2"/>
+     <table:table-cell table:style-name="ce21" table:number-columns-repeated="2"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1342,7 +1428,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:number-columns-repeated="3"/>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="3">
@@ -1350,7 +1436,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="3">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce7" table:number-columns-repeated="3"/>
+     <table:table-cell table:style-name="ce24" table:number-columns-repeated="3"/>
      <table:table-cell table:number-columns-repeated="1020"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="3">
@@ -1358,7 +1444,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="2"/>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce23"/>
      <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="1048437">

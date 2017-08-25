@@ -45,6 +45,14 @@
          <xd:p/>
       </xd:desc>
    </xd:doc>
+   <xsl:template match="pogues:CodeListReference" mode="enopogues:get-id">
+      <xsl:value-of select="./text()"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
    <xsl:template match="pogues:Declaration" mode="enopogues:get-declaration-text">
       <xsl:value-of select="pogues:Text"/>
    </xsl:template>
@@ -187,5 +195,21 @@
    </xd:doc>
    <xsl:template match="pogues:Code" mode="enopogues:is-discrete">
       <xsl:value-of select="'true'"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Dimension" mode="enopogues:get-dynamic">
+      <xsl:value-of select="@dynamic"/>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Questionnaire" mode="enopogues:exist-boolean">
+      <xsl:value-of select="pogues:Datatype[not(@visualizationHint) and @xsi:type='BooleanDatatypeType']"/>
    </xsl:template>
 </xsl:stylesheet>
