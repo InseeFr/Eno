@@ -161,7 +161,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="eno:append-empty-element('Goto',$driver)" mode="model">
+      <xsl:apply-templates select="eno:append-empty-element('GoTo',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -350,6 +350,19 @@
       </xsl:param>
       <xsl:apply-templates select="eno:append-empty-element('CodeDomainDimension',$driver)"
                            mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:IfThenElse" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('IfThenElse',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>

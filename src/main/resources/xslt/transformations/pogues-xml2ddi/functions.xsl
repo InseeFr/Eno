@@ -216,4 +216,31 @@
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:exist-boolean($context)"/>
    </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-expression">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-expression($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-if-true">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-if-true($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-ifthenelses">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-ifthenelses($context)"/>
+   </xsl:function>
 </xsl:stylesheet>

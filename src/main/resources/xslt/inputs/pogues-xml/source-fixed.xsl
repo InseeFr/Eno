@@ -29,5 +29,9 @@
         <xsl:sequence select="."/>
     </xsl:template>
     
+    <xsl:template match="//pogues:IfThenElse" mode="with-tag">
+        <xsl:sequence select="."/>
+    </xsl:template>
+    
     
 </xsl:stylesheet>
