@@ -2,7 +2,7 @@
 <project>
     <!-- Importing the configuration files -->
     <property file="../config/config.properties"/>
-    <xmlproperty file="${source}/config/ddi2fr.xml"/>
+    <xmlproperty file="${root}/config/ddi2fr.xml"/>           
     
     <!-- Getting the path to the folders (that will be passed to xsl files) -->
     <dirname property="root-folder" file="${root}/dummy"/>
@@ -22,7 +22,7 @@
     </taskdef>
     <taskdef name="if" classname="net.sf.antcontrib.logic.IfTask">
         <classpath refid="classpath"/>
-    </taskdef>
+    </taskdef>    
     <taskdef name="propertyregex" classname="net.sf.antcontrib.property.RegexTask">
         <classpath refid="classpath"/>
     </taskdef>
