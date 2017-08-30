@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT18H45M57S</meta:editing-duration><meta:editing-cycles>83</meta:editing-cycles><meta:generator>LibreOffice/5.1.5.2$Windows_x86 LibreOffice_project/7a864d8825610a8c07cfc3bc01dd4fce6a9447e5</meta:generator><dc:date>2017-08-25T16:02:48.768000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="58" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT18H57M47S</meta:editing-duration><meta:editing-cycles>84</meta:editing-cycles><meta:generator>LibreOffice/5.1.5.2$Windows_x86 LibreOffice_project/7a864d8825610a8c07cfc3bc01dd4fce6a9447e5</meta:generator><dc:date>2017-08-29T14:59:23.701000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="85" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
@@ -13,8 +13,8 @@
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
-       <config:config-item config:name="CursorPositionX" config:type="int">0</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">28</config:config-item>
+       <config:config-item config:name="CursorPositionX" config:type="int">3</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">1</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -315,6 +315,9 @@
    <number:currency-symbol number:language="fr" number:country="FR">€</number:currency-symbol>
    <style:map style:condition="value()&gt;=0" style:apply-style-name="N133P0"/>
   </number:currency-style>
+  <number:number-style style:name="N134">
+   <number:scientific-number number:decimal-places="12" loext:min-decimal-places="12" number:min-integer-digits="1" number:min-exponent-digits="2" loext:exponent-interval="1" loext:forced-exponent-sign="true"/>
+  </number:number-style>
   <number:date-style style:name="N10107" number:language="fr" number:country="FR">
    <number:day number:style="long"/>
    <number:text>-</number:text>
@@ -506,6 +509,9 @@
    <style:table-cell-properties style:vertical-align="middle"/>
    <style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
   </style:style>
+  <style:style style:name="ce7" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties style:use-window-font-color="true" style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
   <style:page-layout style:name="pm1">
    <style:page-layout-properties style:first-page-number="continue" style:writing-mode="lr-tb"/>
    <style:header-style>
@@ -555,7 +561,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2017-08-25">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="15:45:13.772000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2017-08-29">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="14:47:33.060000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -678,7 +684,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Function that returns the label of a pogues element.</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -688,7 +696,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-name</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Name is the default element for names in Pogues.</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -698,7 +708,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-agency</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the agency that created the survey</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -708,7 +720,9 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-id</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the ID attribute of the element</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -718,7 +732,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-declaration-text</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the text of the Declaration</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -728,7 +744,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-label</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Value is the default element for values in Pogues.</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -738,7 +756,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-value</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Return a lang for the survey. As this information in not available in PoguesXML, it is hard-coded</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -748,7 +768,9 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-lang</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Return a version for the survey. As this information in not available in PoguesXML, it is hard-coded</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -758,7 +780,9 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-version</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the type of visualisation of a response (checkbox, radio-button,..)</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -768,7 +792,9 @@
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-visualization-hint</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Return the type of a question or of the data of a response</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -778,7 +804,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-type</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the name of the type of data of a response (TEXT, NUMERIC,...)</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -788,7 +816,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-type-name</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the maximum length of the data type</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -798,7 +828,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-max-length</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the attribut coding if the anwser is mandatory. This part is not implemented</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -808,7 +840,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-mandatory</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the attribut coding the level of the sequence (QUESTIONNAIRE, MODULE, SUBMODULE,...)</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -818,7 +852,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-generic-name</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return all Sequenses elements of the survey.</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -828,7 +864,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-sequences</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return all Questions elements of the survey.</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -838,7 +876,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-questions</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return all Declarations elements of the survey.</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -848,7 +888,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-instructions</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the number of decimals of the data type.</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -858,7 +900,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-decimals</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the minimal value of the data type</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -868,7 +912,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-minimum</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the maximal value of the data type</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -878,7 +924,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-maximum</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Return the string expected as value of the isDiscrete attribut of l:code in ddi3.2 . This value is hard-coded</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -888,7 +936,9 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:is-discrete</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Return the dynamic attribute of the pogues:Dimension. This value is used to compute positions in grids</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
@@ -898,7 +948,9 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-dynamic</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>This is used to implement the code of booleans if this return something</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
@@ -908,7 +960,9 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:exist-boolean</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Expression is the default element for expressions in Pogues.</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
@@ -918,7 +972,9 @@
      <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-expression</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Return the ID of the element that result a true condition.</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
@@ -928,7 +984,9 @@
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-if-true</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Return the ID to which the GoTo aim</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -938,7 +996,9 @@
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
       <text:p>enopogues:get-ifthenelses</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="Default"/>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>Return all IfThenElses elements of the survey.</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2" table:number-rows-repeated="2">
      <table:table-cell table:number-columns-repeated="2"/>

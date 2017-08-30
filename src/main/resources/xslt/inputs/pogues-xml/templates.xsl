@@ -10,7 +10,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Name is the default element for names in Pogues.</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="*" mode="enopogues:get-name">
@@ -18,7 +18,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>The &lt;d:InstructionName&gt; of ddi InterviwerInstruction is equal to the Declaration@declarationType of PoguesXML</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Declaration" mode="enopogues:get-name">
@@ -26,7 +26,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Return the agency that created the survey</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="*" mode="enopogues:get-agency">
@@ -34,7 +34,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Return the ID attribute of the element</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="*" mode="enopogues:get-id">
@@ -42,7 +42,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>The CodeListRefence element contains the ID of the CodeList it reference. It doesn't have an ID attribute</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:CodeListReference" mode="enopogues:get-id">
@@ -50,7 +50,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Return the text of the Declaration</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Declaration" mode="enopogues:get-declaration-text">
@@ -58,7 +58,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Value is the default element for values in Pogues.</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="*" mode="enopogues:get-value">
@@ -66,7 +66,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Return a version for the survey. As this information in not available in PoguesXML, it is hard-coded in this document</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="*" mode="enopogues:get-version">
@@ -74,7 +74,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Return a lang for the survey. As this information in not available in PoguesXML, it is hard-coded in this document</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="*" mode="enopogues:get-lang">
@@ -82,7 +82,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Return the type of visualisation of a response (checkbox, radio-button,..)</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Response" mode="enopogues:get-visualization-hint">
@@ -90,7 +90,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Return the type of data of a response (TextDatatypeType, NumericDatatypeType,...)</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Response" mode="enopogues:get-type">
@@ -98,7 +98,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Return the type of the question (SIMPLE, SINGLE_CHOICE, MULTIPLE_CHOICE, TABLE)</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='QuestionType']"
@@ -107,7 +107,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p/>
+         <xd:p>Return the name of the type of data of a response (TEXT, NUMERIC,...)</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Response" mode="enopogues:get-type-name">

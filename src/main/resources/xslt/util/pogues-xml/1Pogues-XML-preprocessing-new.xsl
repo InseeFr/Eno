@@ -25,7 +25,8 @@
         id attribute
         <xd:desc/>
     </xd:doc>
-    <xsl:template match="pogues:Questionnaire | pogues:Declaration | pogues:CodeList | pogues:Code | pogues:Child | pogues:Response">
+    <xsl:template match="pogues:Questionnaire | pogues:Declaration | pogues:CodeList | pogues:Code | pogues:Child | pogues:Response | pogues:IfThenElse">
+        <!--xsl:message>HELLO : <xsl:value-of select="@id"/>::<xsl:value-of select="matches(@id,'^[A-Za-z0-9\*@$\-_]+$')"/></xsl:message-->
         <xsl:copy>
             <xsl:choose>
                 <xsl:when test="not(@id)">
@@ -33,7 +34,7 @@
                     <!--xsl:message>Missing id in <xsl:value-of select="name()"/></xsl:message-->
                     <xsl:attribute name="id"><xsl:value-of select="generate-id()"/></xsl:attribute>
                 </xsl:when>
-                <xsl:when test="matches(@id,'[A-Za-z0-9\*@$\-_]+')">
+                <xsl:when test="matches(@id,'^[A-Za-z0-9\*@$\-_]+$')">
                     <!-- It is OK-->
                     <xsl:copy-of select="@id"/>
                 </xsl:when>
@@ -48,7 +49,7 @@
                 <xsl:when test="not(@agency)">
                     <!-- It is OK-->
                 </xsl:when>
-                <xsl:when test="matches(@agency,'[a-zA-Z0-9\-]{1,63}(\.[a-zA-Z0-9\-]{1,63})*')">
+                <xsl:when test="matches(@agency,'^[a-zA-Z0-9\-]{1,63}(\.[a-zA-Z0-9\-]{1,63})*$')">
                     <!-- It is OK-->
                     <xsl:copy-of select="@agency"/>
                 </xsl:when>
@@ -75,7 +76,7 @@
                     <xsl:message>Missing id in <xsl:value-of select="name()"/></xsl:message>
                     <xsl:value-of select="generate-id()"/>
                 </xsl:when>
-                <xsl:when test="matches(text(),'[A-Za-z0-9\*@$\-_]+')">
+                <xsl:when test="matches(text(),'^[A-Za-z0-9\*@$\-_]+$')">
                     <!-- It is OK-->
                     <xsl:copy-of select="text()"/>
                 </xsl:when>
@@ -102,7 +103,7 @@
         <xsl:copy>
             <xsl:choose>
                 <xsl:when test="not(@dynamic)"/>                                   
-                <xsl:when test="@dynamic='0' or matches(@dynamic,'[0-9]+-[0-9]+')">
+                <xsl:when test="@dynamic='0' or matches(@dynamic,'^[0-9]+-[0-9]+$')">
                     <xsl:copy-of select="@dynamic"/>
                 </xsl:when>
                 <xsl:otherwise>

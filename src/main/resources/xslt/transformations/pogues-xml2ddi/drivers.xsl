@@ -366,4 +366,17 @@
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:ResponseStructure" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('GridDimension',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
 </xsl:stylesheet>
