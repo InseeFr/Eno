@@ -98,11 +98,7 @@
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>
                     <xsl:apply-templates select="enoddi32:get-questions($source-context)" mode="source">
-                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionItem', .)" tunnel="yes"/>
-                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-                    </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi32:get-questions($source-context)" mode="source">
-                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionGrid', .)" tunnel="yes"/>
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                 </d:QuestionScheme>
@@ -521,7 +517,7 @@
         </d:QuestionConstruct>
     </xsl:template>
 
-    <xsl:template match="driver-QuestionItem//QuestionSimple" mode="model">
+    <xsl:template match="driver-QuestionScheme//QuestionSimple" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:QuestionItem>
@@ -626,7 +622,7 @@
     </xsl:template>
     
 
-    <xsl:template match="driver-QuestionItem//QuestionSingleChoice" mode="model">
+    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:QuestionItem>
@@ -772,7 +768,7 @@
         </r:CodeListReference>
     </xsl:template>
 
-    <xsl:template match="driver-QuestionGrid//QuestionMultipleChoice" mode="model">
+    <xsl:template match="driver-QuestionScheme//QuestionMultipleChoice" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:QuestionGrid>
@@ -864,19 +860,19 @@
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionMultipleChoice//driver-OutParameter//*" mode="model" priority="1">
+    <xsl:template match="QuestionMultipleChoice//driver-OutParameter//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionMultipleChoice//driver-Binding//*" mode="model" priority="1">
+    <xsl:template match="QuestionMultipleChoice//driver-Binding//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
 
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionMultipleChoice//driver-OutParameter//ResponseDomain" mode="model" priority="2">
+    <xsl:template match="QuestionMultipleChoice//driver-OutParameter//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:OutParameter isArray="false">
@@ -890,7 +886,7 @@
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionMultipleChoice//driver-Binding//ResponseDomain" mode="model" priority="2">
+    <xsl:template match="QuestionMultipleChoice//driver-Binding//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:Binding>
@@ -908,19 +904,9 @@
             </r:TargetParameterReference>
         </r:Binding>
     </xsl:template>
-    
-    <xsl:template match="driver-QuestionGrid//GridDimension" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:GridDimension displayCode="false" displayLabel="false" rank="1">
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>    
-        </d:GridDimension>
-    </xsl:template>
 
 
-    <xsl:template match="driver-QuestionGrid//QuestionTable" mode="model">
+    <xsl:template match="driver-QuestionScheme//QuestionTable" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:QuestionGrid>
@@ -1019,19 +1005,19 @@
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionTable//driver-OutParameter//*" mode="model" priority="1">
+    <xsl:template match="QuestionTable//driver-OutParameter//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionTable//driver-Binding//*" mode="model" priority="1">
+    <xsl:template match="QuestionTable//driver-Binding//*" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
 
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionTable//driver-OutParameter//ResponseDomain" mode="model" priority="2">
+    <xsl:template match="QuestionTable//driver-OutParameter//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:OutParameter isArray="false">
@@ -1045,7 +1031,7 @@
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionTable//driver-Binding//ResponseDomain" mode="model" priority="2">
+    <xsl:template match="QuestionTable//driver-Binding//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:Binding>
@@ -1183,6 +1169,10 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!--TODO : find rank value-->
+        <d:GridDimension>
+            <xsl:attribute name="rank"><xsl:value-of select="1"/></xsl:attribute>
+            <!--xsl:attribute name="displayCode"><xsl:value-of select=""/></xsl:attribute>
+            <xsl:attribute name="displayLabel"><xsl:value-of select=""/></xsl:attribute-->
         <d:Roster baseCodeValue="1" codeIterationValue="1">
             <xsl:attribute name="minimumRequired">
                 <xsl:value-of select="substring-before(enoddi32:get-dynamic($source-context), '-')"/>
@@ -1191,6 +1181,7 @@
                 <xsl:value-of select="substring-after(enoddi32:get-dynamic($source-context), '-')"/>
             </xsl:attribute>
         </d:Roster>
+        </d:GridDimension>
     </xsl:template>
 
     <xsl:template match="UnknownDimension" mode="model">

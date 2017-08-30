@@ -187,39 +187,4 @@
         </xsl:copy>
     </xsl:template>
 
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Instruction are not allowed in Category for DDI 3.2. This template allows to insert tooltips into arrays' labels</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="xhtml:a">
-        <xsl:variable name="ref" select="replace(@href,'#','')"/>
-        <xsl:variable name="language" select="ancestor::*[@xml:lang][1]/@xml:lang"/>
-        
-        <xsl:choose>
-            <xsl:when test="//*[@id=$ref 
-                and ancestor-or-self::*[@xml:lang][1]/@xml:lang=$language 
-                and ancestor::d:Instruction/d:InstructionName/r:String[@xml:lang=$language]='tooltip']">
-                <xsl:element name="xhtml:span">
-                    <xsl:attribute name="title">
-                        <xsl:value-of select="normalize-space(//*[@id=$ref 
-                            and ancestor-or-self::*[@xml:lang][1]/@xml:lang=$language 
-                            and ancestor::d:Instruction/d:InstructionName/r:String[@xml:lang=$language]='tooltip'])"/>
-                    </xsl:attribute>
-                    <xsl:text>&#160;</xsl:text>
-                    <xsl:element name="img">
-                        <xsl:attribute name="src" select="'/img/Help-browser.svg.png'"/>
-                    </xsl:element>
-                    <xsl:text>&#160;</xsl:text>
-                </xsl:element>            
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:copy>
-                    <xsl:apply-templates select="node() | @*"/>
-                </xsl:copy>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-    
-
 </xsl:stylesheet>

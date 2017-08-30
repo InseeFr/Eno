@@ -189,4 +189,58 @@
       <xsl:param name="context" as="item()"/>
       <xsl:apply-templates select="$context" mode="enopogues:is-discrete"/>
    </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-dynamic">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-dynamic"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:exist-boolean">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:exist-boolean"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-expression">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-expression"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-then-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-then-id"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-if-true">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-if-true"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enopogues:get-ifthenelses">
+      <xsl:param name="context" as="item()"/>
+      <xsl:apply-templates select="$context" mode="enopogues:get-ifthenelses"/>
+   </xsl:function>
 </xsl:stylesheet>
