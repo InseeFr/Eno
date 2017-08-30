@@ -1,0 +1,451 @@
+<Questionnaire xmlns="http://xml.insee.fr/schema/applis/pogues" id="fr.insee-POPO-QPO-TESTERICCH" depth="0" genericName="QUESTIONNAIRE" agency="fr.insee">
+    <Name>TESTERICCH</Name>
+    <Label>Test Eric Churlet</Label>
+    <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="j49osfhx" depth="1" genericName="MODULE" xsi:type="SequenceType">
+        <Name>TEST</Name>
+        <Label>Test</Label>
+        <Child id="j49vo5jx" questionType="SINGLE_CHOICE" xsi:type="QuestionType">
+            <Name>TESVOUS</Name>
+            <Label>##{"label":"êtes vous ?","conditions":[]} êtes vous ?</Label>
+            <GoTo id="j49w1pyx">
+                <Expression>${S1-Q1-R1}='1'</Expression>
+                <IfTrue>j49p5f5e</IfTrue>
+            </GoTo>
+            <Response mandatory="true">
+                <CodeListReference>j49vo4il</CodeListReference>
+                <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
+                    <MaxLength>1</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+        </Child>
+        <Child id="j49w2rnx" depth="2" genericName="SUBMODULE" xsi:type="SequenceType">
+            <Name>TEST2</Name>
+            <Label>test 2</Label>
+            <Declaration declarationType="INSTRUCTION">
+                <Text>**Consigne gras**
+</Text>
+            </Declaration>
+            <Declaration declarationType="COMMENT">
+                <Text>_Commentaire italique_
+</Text>
+            </Declaration>
+            <Declaration declarationType="HELP">
+                <Text>[Aide](. "plop")
+</Text>
+            </Declaration>
+            <Declaration declarationType="WARNING">
+                <Text>[Avertissement](TEST2)
+</Text>
+            </Declaration>
+            <Child id="j49w8jt4" questionType="SINGLE_CHOICE" xsi:type="QuestionType">
+                <Name>NON</Name>
+                <Label>##{"label":"non?","conditions":[]} non?</Label>
+                <Declaration declarationType="INSTRUCTION" position="AFTER_QUESTION_TEXT">
+                    <Text>Cons-après libellé
+</Text>
+                </Declaration>
+                <Declaration declarationType="COMMENT" position="AFTER_RESPONSE">
+                    <Text>Comm-après champs
+</Text>
+                </Declaration>
+                <Declaration declarationType="HELP" position="BEFORE_QUESTION_TEXT">
+                    <Text>Aide-avant libellé
+</Text>
+                </Declaration>
+                <Declaration declarationType="WARNING" position="DETACHABLE">
+                    <Text>Aver-notes de bas de pages
+</Text>
+                </Declaration>
+                <Response mandatory="false">
+                    <CodeListReference>j49vsqsi</CodeListReference>
+                    <Datatype typeName="TEXT" visualizationHint="CHECKBOX" xsi:type="TextDatatypeType">
+                        <MaxLength>1</MaxLength>
+                        <Pattern/>
+                    </Datatype>
+                </Response>
+            </Child>
+        </Child>
+        <Child id="j49p5f5e" depth="2" genericName="SUBMODULE" xsi:type="SequenceType">
+            <Name>TEST1</Name>
+            <Label>test 1</Label>
+            <Child id="j49oz3jm" questionType="SINGLE_CHOICE" xsi:type="QuestionType">
+                <Name>COMMENTALL</Name>
+                <Label>##{"label":"Comment allez vous?","conditions":[{"id":"j4gqi3l5","label":"Comment allez vous monsieur ?\n","condition":"${S1-Q1-R1}='1'"},{"id":"j4gri4uf","label":"Comment allez vous madame ?\n","condition":"${S1-Q1-R1}='2'"}]} #if(${S1-Q1-R1}='1') Comment allez vous monsieur ? #elseif(${S1-Q1-R1}='2') Comment allez vous madame ? #end</Label>
+                <GoTo id="j4gsf0lo">
+                    <Expression>${S1-Q1-R1}='1'</Expression>
+                    <IfTrue>j49tiqpy</IfTrue>
+                </GoTo>
+                <Response mandatory="false">
+                    <CodeListReference>j49sl2gd</CodeListReference>
+                    <Datatype typeName="TEXT" visualizationHint="CHECKBOX" xsi:type="TextDatatypeType">
+                        <MaxLength>1</MaxLength>
+                        <Pattern/>
+                    </Datatype>
+                </Response>
+            </Child>
+            <Child id="j49p5ygp" questionType="SIMPLE" xsi:type="QuestionType">
+                <Name>QUELLEHEUR</Name>
+                <Label>##{"label":"Quelle heure est-il?","conditions":[]} Quelle heure est-il?</Label>
+                <Declaration declarationType="INSTRUCTION" position="AFTER_RESPONSE">
+                    <Text>exemple: 13.35
+</Text>
+                </Declaration>
+                <Response mandatory="false">
+                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                        <Minimum>0</Minimum>
+                        <Maximum>24</Maximum>
+                        <Decimals>2</Decimals>
+                    </Datatype>
+                </Response>
+            </Child>
+            <Child id="j49tiqpy" questionType="TABLE" xsi:type="QuestionType">
+                <Name>TABLEAU</Name>
+                <Label>##{"label":"Tableau","conditions":[]} Tableau</Label>
+                <Response>
+                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+                </Response>
+                <Response>
+                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+                </Response>
+                <Response>
+                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+                </Response>
+                <Response>
+                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+                </Response>
+                <Response>
+                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+                </Response>
+                <Response>
+                    <CodeListReference>j49sl2gd</CodeListReference>
+                    <Datatype typeName="TEXT" visualizationHint="CHECKBOX" xsi:type="TextDatatypeType">
+                        <MaxLength>1</MaxLength>
+                        <Pattern/>
+                    </Datatype>
+                </Response>
+                <Response>
+                    <CodeListReference>j49sl2gd</CodeListReference>
+                    <Datatype typeName="TEXT" visualizationHint="CHECKBOX" xsi:type="TextDatatypeType">
+                        <MaxLength>1</MaxLength>
+                        <Pattern/>
+                    </Datatype>
+                </Response>
+                <Response>
+                    <CodeListReference>j49sl2gd</CodeListReference>
+                    <Datatype typeName="TEXT" visualizationHint="CHECKBOX" xsi:type="TextDatatypeType">
+                        <MaxLength>1</MaxLength>
+                        <Pattern/>
+                    </Datatype>
+                </Response>
+                <Response>
+                    <CodeListReference>j49sl2gd</CodeListReference>
+                    <Datatype typeName="TEXT" visualizationHint="CHECKBOX" xsi:type="TextDatatypeType">
+                        <MaxLength>1</MaxLength>
+                        <Pattern/>
+                    </Datatype>
+                </Response>
+                <Response>
+                    <CodeListReference>j49sl2gd</CodeListReference>
+                    <Datatype typeName="TEXT" visualizationHint="CHECKBOX" xsi:type="TextDatatypeType">
+                        <MaxLength>1</MaxLength>
+                        <Pattern/>
+                    </Datatype>
+                </Response>
+                <ResponseStructure>
+                    <Dimension dimensionType="PRIMARY" dynamic="0">
+                        <CodeListReference>j49peim2</CodeListReference>
+                    </Dimension>
+                    <Dimension dimensionType="MEASURE" dynamic="0">
+                        <Label>Avez vous testé</Label>
+                    </Dimension>
+                    <Dimension dimensionType="MEASURE" dynamic="0">
+                        <Label>Un avis svp</Label>
+                    </Dimension>
+                </ResponseStructure>
+            </Child>
+        </Child>
+    </Child>
+    <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="j4grr5bq" depth="1" genericName="MODULE" xsi:type="SequenceType">
+        <Name>BLABLA</Name>
+        <Label>BlaBla</Label>
+        <Child id="j4gscodn" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>TOTO</Name>
+            <Label>##{"label":"toto","conditions":[]} toto</Label>
+            <Response mandatory="false">
+                <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                    <MaxLength>249</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+        </Child>
+    </Child>
+    <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="j4gsak44" depth="1" genericName="MODULE" xsi:type="SequenceType">
+        <Name>PLOP</Name>
+        <Label>Plop</Label>
+        <Child id="j4gs4qzy" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>TATA</Name>
+            <Label>##{"label":"tata","conditions":[]} tata</Label>
+            <Response mandatory="false">
+                <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                    <MaxLength>251</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+        </Child>
+        <Child id="j4gty8rx" questionType="MULTIPLE_CHOICE" xsi:type="QuestionType">
+            <Name>TITI</Name>
+            <Label>##{"label":"titi","conditions":[]} titi</Label>
+            <Response>
+                <CodeListReference>j49sl2gd</CodeListReference>
+                <Datatype typeName="TEXT" visualizationHint="DROPDOWN" xsi:type="TextDatatypeType">
+                    <MaxLength>1</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+            <Response>
+                <CodeListReference>j49sl2gd</CodeListReference>
+                <Datatype typeName="TEXT" visualizationHint="DROPDOWN" xsi:type="TextDatatypeType">
+                    <MaxLength>1</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+            <ResponseStructure>
+                <Dimension dimensionType="PRIMARY" dynamic="0">
+                    <CodeListReference>j49vo4il</CodeListReference>
+                </Dimension>
+                <Dimension dimensionType="MEASURE" dynamic="0"/>
+            </ResponseStructure>
+        </Child>
+        <Child id="j4gtporx" questionType="TABLE" xsi:type="QuestionType">
+            <Name>TUTU</Name>
+            <Label>##{"label":"tutu","conditions":[]} tutu</Label>
+            <Response>
+                <CodeListReference>j4gu3tff</CodeListReference>
+                <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
+                    <MaxLength>1</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+            <Response>
+                <CodeListReference>j4gu3tff</CodeListReference>
+                <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
+                    <MaxLength>1</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+            <Response>
+                <CodeListReference>j4gu3tff</CodeListReference>
+                <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
+                    <MaxLength>1</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+            <Response>
+                <CodeListReference>j4gu3tff</CodeListReference>
+                <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
+                    <MaxLength>1</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+            <Response>
+                <CodeListReference>j4gu3tff</CodeListReference>
+                <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
+                    <MaxLength>1</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+            <Response>
+                <CodeListReference>j4gu3tff</CodeListReference>
+                <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
+                    <MaxLength>1</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+            <Response>
+                <CodeListReference>j4gu3tff</CodeListReference>
+                <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
+                    <MaxLength>1</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+            <Response>
+                <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                    <Minimum>-150</Minimum>
+                    <Maximum>150</Maximum>
+                    <Decimals>4</Decimals>
+                </Datatype>
+            </Response>
+            <Response>
+                <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                    <Minimum>-150</Minimum>
+                    <Maximum>150</Maximum>
+                    <Decimals>4</Decimals>
+                </Datatype>
+            </Response>
+            <Response>
+                <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                    <Minimum>-150</Minimum>
+                    <Maximum>150</Maximum>
+                    <Decimals>4</Decimals>
+                </Datatype>
+            </Response>
+            <Response>
+                <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                    <Minimum>-150</Minimum>
+                    <Maximum>150</Maximum>
+                    <Decimals>4</Decimals>
+                </Datatype>
+            </Response>
+            <Response>
+                <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                    <Minimum>-150</Minimum>
+                    <Maximum>150</Maximum>
+                    <Decimals>4</Decimals>
+                </Datatype>
+            </Response>
+            <Response>
+                <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                    <Minimum>-150</Minimum>
+                    <Maximum>150</Maximum>
+                    <Decimals>4</Decimals>
+                </Datatype>
+            </Response>
+            <Response>
+                <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                    <Minimum>-150</Minimum>
+                    <Maximum>150</Maximum>
+                    <Decimals>4</Decimals>
+                </Datatype>
+            </Response>
+            <ResponseStructure>
+                <Dimension dimensionType="PRIMARY" dynamic="2-7">
+                    <TotalLabel>total</TotalLabel>
+                </Dimension>
+                <Dimension dimensionType="MEASURE" dynamic="0">
+                    <Label>rien</Label>
+                </Dimension>
+                <Dimension dimensionType="MEASURE" dynamic="0">
+                    <Label>reRien</Label>
+                </Dimension>
+            </ResponseStructure>
+        </Child>
+    </Child>
+    <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="j4gueck2" depth="1" genericName="MODULE" xsi:type="SequenceType">
+        <Name>SEQ</Name>
+        <Label>seq</Label>
+        <Child id="j4guehiw" depth="2" genericName="SUBMODULE" xsi:type="SequenceType">
+            <Name>SEQ1</Name>
+            <Label>seq.1</Label>
+        </Child>
+    </Child>
+    <Survey id="j49oq618" agency="fr.insee">
+        <Name>POPO</Name>
+    </Survey>
+    <ComponentGroup id="j4i9dsgb">
+        <Name>PAGE_1</Name>
+        <Label>Components for page 1</Label>
+        <MemberReference>j49osfhx</MemberReference>
+        <MemberReference>j49vo5jx</MemberReference>
+        <MemberReference>j49w2rnx</MemberReference>
+        <MemberReference>j49w8jt4</MemberReference>
+        <MemberReference>j49p5f5e</MemberReference>
+        <MemberReference>j49oz3jm</MemberReference>
+        <MemberReference>j49p5ygp</MemberReference>
+        <MemberReference>j49tiqpy</MemberReference>
+        <MemberReference>j4grr5bq</MemberReference>
+        <MemberReference>j4gscodn</MemberReference>
+        <MemberReference>j4gsak44</MemberReference>
+        <MemberReference>j4gs4qzy</MemberReference>
+        <MemberReference>j4gty8rx</MemberReference>
+        <MemberReference>j4gtporx</MemberReference>
+        <MemberReference>j4gueck2</MemberReference>
+        <MemberReference>j4guehiw</MemberReference>
+    </ComponentGroup>
+    <CodeLists>
+        <CodeList id="j49peim2">
+            <Name/>
+            <Label>testEC2</Label>
+            <Code>
+                <Value/>
+                <Label>Windows XP</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>Windows vista</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>Windows 7</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>Windows 8</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>Windows 10</Label>
+            </Code>
+        </CodeList>
+        <CodeList id="j49sl2gd">
+            <Name/>
+            <Label>testEC1</Label>
+            <Code>
+                <Value/>
+                <Label>Bien</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>Pas trop mal</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>Bof</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>Pas bien</Label>
+            </Code>
+        </CodeList>
+        <CodeList id="j49vo4il">
+            <Name/>
+            <Label>sexe</Label>
+            <Code>
+                <Value/>
+                <Label>Un homme</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>Une femme</Label>
+            </Code>
+        </CodeList>
+        <CodeList id="j49vsqsi">
+            <Name/>
+            <Label>non?</Label>
+            <Code>
+                <Value/>
+                <Label>Si!</Label>
+            </Code>
+        </CodeList>
+        <CodeList id="j4gu3tff">
+            <Name/>
+            <Label>1234</Label>
+            <Code>
+                <Value/>
+                <Label>1</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>2</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>3</Label>
+            </Code>
+            <Code>
+                <Value/>
+                <Label>4</Label>
+            </Code>
+        </CodeList>
+    </CodeLists>
+</Questionnaire>

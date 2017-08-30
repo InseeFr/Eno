@@ -6,7 +6,7 @@
     xmlns:d="ddi:datacollection:3_2"
     xmlns:ddi-instance="ddi:instance:3_2"
     xmlns:dereferencing="dereferencing"
-    exclude-result-prefixes="xs xd"
+    exclude-result-prefixes="xs xd ddi-instance"
     version="2.0">
     <xd:doc scope="stylesheet">
         <xd:desc>

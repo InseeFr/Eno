@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="enoNonRegression" basedir="." default="full-light">
+<project name="enoNonRegression" basedir="." default="full">
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
 
     <!-- Properties for this non regression script -->
-    <property name="survey-name" value="fr.insee-POPO-QPO-TEST_EC_2_DDI"/>
+    <property name="survey-name" value="TESTERICCH"/>
     <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>
     
     <!--************************** This value is to be set to "fr" to generate a xform *******************************************-->

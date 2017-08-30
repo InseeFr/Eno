@@ -14,7 +14,7 @@
     xmlns:cm="ddi:comparative:3_2"
     xmlns:ddi-instance="ddi:instance:3_2"
     xmlns:dereferencing="dereferencing"
-    exclude-result-prefixes="xs xd"
+    exclude-result-prefixes="xs xd ddi-instance"
     version="2.0">
     
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
@@ -204,7 +204,9 @@
         <xsl:for-each select="ddi-instance:DDIInstance/s:StudyUnit/d:DataCollection/d:InstrumentScheme/d:Instrument">
             <dereferencing:dereferencing-result-DDI instrument-name="{./r:ID}" studyUnit-name="{../../../r:ID}">  
                 <ddi-instance:DDIInstance>
+                    <r:ID><xsl:value-of select="./r:ID"/></r:ID>
                     <s:StudyUnit>
+                        <r:ID><xsl:value-of select="../../../r:ID"/></r:ID>
                         <xsl:apply-templates select=".">
                             <xsl:with-param name="output-DDI" select="true()"/>
                             <xsl:with-param name="output-message" select="false()"/>
