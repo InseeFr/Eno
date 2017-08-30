@@ -10,7 +10,7 @@
     <!--************************** This value is to be set to "fr" to generate a xform *******************************************-->
     <!--***** other value aceptables:-"plop" to see the 'track' of the drivers and getters (resut at:Eno\target\temp\plop\v1)*****-->    
     
-    <property name="Param" value="pogues-xml2ddi"/>
+    <property name="Param" value="ddi"/>
     
     
     <!--to implement new value of this parameter, you have to make duplicate of every folders or files in the eno folder that 
@@ -222,21 +222,35 @@
     <target name="DDIPreprocessing">
         <!-- Dereferencing : the input DDI files (ccs, qb...) -->
         <!-- Creates multiple files with a -dereferenced suffix in the temp folder-->
-        <antcall target="dereferencing"/>
+        <!--antcall target="dereferencing"/-->
+        <xslt in="${questionnaires.home}/${survey-name}/ddi/${survey-name}.xml"
+            out="${temp.home}/deref.tmp" style="${xslt.home}/util/ddi/dereferencing.xsl"
+            classpath="${saxon.jar}" force="true">
+        </xslt>
+        <xslt in="${temp.home}/deref.tmp"
+            out="${temp.home}/deref-titled.tmp" style="${xslt.home}/util/ddi/titling.xsl"
+            classpath="${saxon.jar}" force="true">
+            <param name="output-folder" expression="${temp-folder}"/>
+        </xslt>
+        <xslt in="${temp.home}/deref-titled.tmp"
+            out="${temp.home}/null.tmp" style="${xslt.home}/util/ddi/splitting.xsl"
+            classpath="${saxon.jar}" force="true">
+            <param name="output-folder" expression="${temp-folder}"/>
+        </xslt>
         <!-- For each created file (one by model), we clean. -->
         <!-- Creating a -cleaned suffixed file -->
         <foreach target="cleaning" param="file" inheritall="true">
             <path>
-                <fileset dir="${temp.home}" excludes="*-dereferenced.tmp, null.tmp"/>
+                <fileset dir="${temp.home}" includes="*-dereferenced.tmp"/>
             </path>
         </foreach>
         <!-- Then adding titles to the created file below -->
         <!-- Creating a -final suffixed file -->
-        <foreach target="titling" param="file" inheritall="true">
+        <!--foreach target="titling" param="file" inheritall="true">
             <path>
                 <fileset dir="${temp.home}" includes="*-cleaned.tmp"/>
             </path>
-        </foreach>
+        </foreach-->
     </target>
 
     <!-- Dereferencing -->
@@ -255,7 +269,7 @@
     <!-- Creates a -cleaned suffixed file after applying the cleaning.xsl stylesheet to the input file -->
     <target name="cleaning" description="Cleaning DDI">
         <basename file="${file}" property="file-name" suffix=".tmp"/>
-        <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${file-name}-cleaned.tmp"
+        <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${file-name}-final.tmp"
             style="${xslt.home}/util/ddi/cleaning.xsl" classpath="${saxon.jar}" force="true"/>
     </target>
 

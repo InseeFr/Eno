@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT19H30M12S</meta:editing-duration><meta:editing-cycles>162</meta:editing-cycles><meta:generator>LibreOffice/5.1.5.2$Windows_x86 LibreOffice_project/7a864d8825610a8c07cfc3bc01dd4fce6a9447e5</meta:generator><dc:date>2017-08-25T15:04:05.141000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="1091" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT21H34M20S</meta:editing-duration><meta:editing-cycles>166</meta:editing-cycles><meta:generator>LibreOffice/5.1.5.2$Windows_x86 LibreOffice_project/7a864d8825610a8c07cfc3bc01dd4fce6a9447e5</meta:generator><dc:date>2017-08-29T14:57:08.015000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="1105" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
-   <config:config-item config:name="VisibleAreaWidth" config:type="int">2358552</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">15352</config:config-item>
+   <config:config-item config:name="VisibleAreaWidth" config:type="int">2348233</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">15804</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
@@ -194,7 +194,7 @@
    <style:table-column-properties fo:break-before="auto" style:column-width="41.19mm"/>
   </style:style>
   <style:style style:name="co3" style:family="table-column">
-   <style:table-column-properties fo:break-before="auto" style:column-width="326mm"/>
+   <style:table-column-properties fo:break-before="auto" style:column-width="222.81mm"/>
   </style:style>
   <style:style style:name="co4" style:family="table-column">
    <style:table-column-properties fo:break-before="auto" style:column-width="22.58mm"/>
@@ -207,24 +207,12 @@
   </style:style>
   <style:style style:name="ce1" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:background-color="#99ccff"/>
-   <style:text-properties style:text-position="" fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+   <style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
   </style:style>
   <style:style style:name="ce2" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:background-color="transparent"/>
-   <style:text-properties style:text-position=""/>
   </style:style>
   <style:style style:name="ce3" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:wrap-option="wrap"/>
-   <style:text-properties style:text-position=""/>
-  </style:style>
-  <style:style style:name="ce4" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="#99ccff"/>
-   <style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
-  </style:style>
-  <style:style style:name="ce5" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="transparent"/>
-  </style:style>
-  <style:style style:name="ce6" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:wrap-option="wrap"/>
   </style:style>
   <style:page-layout style:name="pm1">
@@ -267,7 +255,7 @@
      <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2017-08-25">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="15:45:15.551000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2017-08-29">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="14:47:33.715000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -285,13 +273,13 @@
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:number-columns-repeated="1021" table:default-cell-style-name="Default"/>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Xpath</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Driver</text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce4" office:value-type="string" calcext:value-type="string">
+     <table:table-cell table:style-name="ce1" office:value-type="string" calcext:value-type="string">
       <text:p>Documentation</text:p>
      </table:table-cell>
      <table:table-cell table:number-columns-repeated="1021"/>
@@ -318,7 +306,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>ResponseDomain</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>A data to be colected with all it&apos;s implementation</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="1024"/>
@@ -330,7 +321,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Instruction</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>An instuction from the interviewer</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="1024"/>
@@ -342,7 +336,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>CodeList</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>A list a categories to be called in questions</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -351,7 +348,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>CodeListReference</text:p>
      </table:table-cell>
-     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>A refernce calling a CodeList</text:p>
+     </table:table-cell>
      <table:table-cell table:number-columns-repeated="1021" office:value-type="string" calcext:value-type="string">
       <text:p>pogues:CodeListReference</text:p>
      </table:table-cell>
@@ -366,7 +365,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Code</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>A category, generaly stored in CodeLists</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="1024"/>
@@ -378,7 +380,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>QuestionSimple</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>The simplest question with a type of data</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -387,7 +392,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>QuestionSingleChoice</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>A question with a choice to be made between categories or elementsof a CodeList</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -396,7 +404,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>QuestionMultipleChoice</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>A question with multiple choices to be made between categories or elements of CodeLists</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -405,7 +416,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>QuestionTable</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>A question table with each cell representing an answer</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="1024"/>
@@ -417,7 +431,10 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Sequence</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>A sequence that can contains other sequenses or questions</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="1024"/>
@@ -597,19 +614,29 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>IfThenElse</text:p>
      </table:table-cell>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>A specific sequence construct that can hide it&apos;s childs</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell/>
-     <table:table-cell table:style-name="ce5"/>
-     <table:table-cell table:number-columns-repeated="1022"/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:ResponseStructure</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>GridDimension</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>An information about the structure of the answers of a complex question</text:p>
+     </table:table-cell>
+     <table:table-cell table:number-columns-repeated="1021"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
      <table:table-cell table:number-columns-repeated="1024"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce2"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
@@ -617,7 +644,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce2"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
@@ -625,7 +652,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce2"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
@@ -633,7 +660,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce2"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
@@ -641,7 +668,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="2">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce6"/>
+     <table:table-cell table:style-name="ce3"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="6">
@@ -649,12 +676,12 @@
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="5">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce2"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell/>
-     <table:table-cell table:style-name="ce5"/>
+     <table:table-cell table:style-name="ce2"/>
      <table:table-cell table:number-columns-repeated="1022"/>
     </table:table-row>
    </table:table>

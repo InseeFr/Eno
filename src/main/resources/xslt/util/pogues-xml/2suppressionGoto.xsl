@@ -49,8 +49,7 @@
             </xsl:for-each>
         </xsl:variable>
         
-        <xsl:message>O<xsl:copy-of select="$list_id"></xsl:copy-of>O</xsl:message>
-            
+               
         <!-- list of the gotos-->
         <xsl:variable name="list_goto">
             <xsl:for-each select="//pogues:GoTo">
@@ -96,7 +95,7 @@
                 <!--/xsl:if-->
             </xsl:for-each>
         </xsl:variable>
-         <xsl:message>Z<xsl:copy-of select="$list_goto"></xsl:copy-of>Z</xsl:message>
+        
          
              <poguesGoto:GotoParameters>
                 <poguesGoto:IdList>
@@ -157,13 +156,13 @@
     <xsl:template match="pogues:Child">
         <!--*[@id and not(self::pogues:GoTo)  and not(self::pogues:Questionnaire)]-->
         <xsl:param name="list_id_with_forward_goto_tree"/>
-        <xsl:message>H<xsl:copy-of select="$list_id_with_forward_goto_tree"/></xsl:message>
+        
         <xsl:variable name="id_with_goto"><xsl:copy-of select="$list_id_with_forward_goto_tree//*[@id=current()/@id]"/></xsl:variable>
         
         <!--xsl:message>*<xsl:copy-of select="$id_with_goto/*/poguesGoto:GoToExpressions"></xsl:copy-of></xsl:message-->
         <xsl:choose>
             <xsl:when test="count($id_with_goto/*/poguesGoto:GoToExpressions) ne 0">
-                <pogues:IfThenElse>
+                <pogues:IfThenElse id="{generate-id()}">
                     <!--TODO : Put a template here to transform expressions-->
                     <xsl:call-template name="transform_goto_expressions">
                         <xsl:with-param name="goto_expressions" select="$id_with_goto/*/poguesGoto:GoToExpressions"/>

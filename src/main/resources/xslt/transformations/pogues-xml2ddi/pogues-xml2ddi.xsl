@@ -416,6 +416,19 @@
          <xd:p/>
       </xd:desc>
    </xd:doc>
+   <xsl:template match="pogues:ResponseStructure" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('GridDimension',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
    <xsl:function name="enoddi32:get-citation">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:get-label($context)"/>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="enoNonRegression" basedir="." default="full-light">
+<project name="enoNonRegression" basedir="." default="full">
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
 
     <!-- Properties for this non regression script -->
-    <property name="survey-name" value="fr.insee-POPO-QPO-TEST_EC_2_DDI"/>
+    <property name="survey-name" value="TestWithGoto"/>
     <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>
     
     <!--************************** This value is to be set to "fr" to generate a xform *******************************************-->
@@ -46,7 +46,6 @@
                 <fileset dir="${temp.home}" includes="*-final.tmp"/>
             </path>
         </foreach>
-            <!--TODO : add dereferencing and titling-->
     </target>
 
     <target name="full-light" depends="clean, InPreprocessing">
@@ -222,7 +221,24 @@
     <target name="DDIPreprocessing">
         <!-- Dereferencing : the input DDI files (ccs, qb...) -->
         <!-- Creates multiple files with a -dereferenced suffix in the temp folder-->
-        <antcall target="dereferencing"/>
+        <xslt in="${questionnaires.home}/${survey-name}/ddi/${survey-name}.xml"
+            out="${temp.home}/dereferenced.tmp" style="${xslt.home}/util/ddi/dereferencing.xsl"
+            classpath="${saxon.jar}" force="true">
+        </xslt>
+        <xslt in="${temp.home}/dereferenced.tmp"
+            out="${temp.home}/dreferenced-titled.tmp" style="${xslt.home}/util/ddi/titling.xsl"
+            classpath="${saxon.jar}" force="true">
+        </xslt>
+        <xslt in="${temp.home}/dreferenced-titled.tmp"
+            out="${temp.home}/dreferenced-titled2.tmp" style="${xslt.home}/util/ddi/TODOconcat-titling.xsl"
+            classpath="${saxon.jar}" force="true">
+        </xslt>
+        <xslt in="${temp.home}/dreferenced-titled2.tmp"
+            out="${temp.home}/null.tmp" style="${xslt.home}/util/ddi/splitting.xsl"
+            classpath="${saxon.jar}" force="true">
+            <param name="output-folder" expression="${temp-folder}"/>
+        </xslt>
+        
         <!-- For each created file (one by model), we clean. -->
         <!-- Creating a -cleaned suffixed file -->
         <foreach target="cleaning" param="file" inheritall="true">
@@ -232,11 +248,11 @@
         </foreach>
         <!-- Then adding titles to the created file below -->
         <!-- Creating a -final suffixed file -->
-        <foreach target="titling" param="file" inheritall="true">
+        <!--foreach target="titling" param="file" inheritall="true">
             <path>
                 <fileset dir="${temp.home}" includes="*-cleaned.tmp"/>
             </path>
-        </foreach>
+        </foreach-->
     </target>
 
     <!-- Dereferencing -->
