@@ -1,0 +1,81 @@
+<Questionnaire xmlns="http://xml.insee.fr/schema/applis/pogues" id="fr.insee-POPO-QPO-TEST_EC_2_DDI" depth="0" genericName="QUESTIONNAIRE" agency="fr.insee">
+    <Name>TEST_EC_2_DDI</Name>
+    <Label>Test EC_to DDI</Label>
+    <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="j67k23dw" depth="1" genericName="MODULE" xsi:type="SequenceType">
+        <Name>SEQUENCE1Q</Name>
+        <Label>Sequence1 questions simples</Label>
+        <Child id="j67jylci" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>QUESTIONSI</Name>
+            <Label>##{"label":"Question simple texte","conditions":[]} Question simple texte</Label>
+            <Response mandatory="false">
+                <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                    <MaxLength>25</MaxLength>
+                    <Pattern/>
+                </Datatype>
+            </Response>
+        </Child>
+        <Child id="j67jjwsw" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>QUESTIONSI</Name>
+            <Label>##{"label":"Question simple numeric","conditions":[]} Question simple numeric</Label>
+            <Response mandatory="false">
+                <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                    <Minimum>-10</Minimum>
+                    <Maximum>10</Maximum>
+                    <Decimals>2</Decimals>
+                </Datatype>
+            </Response>
+        </Child>
+    </Child>
+    <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="j67jplo1" depth="1" genericName="MODULE" xsi:type="SequenceType">
+        <Name>SEQUENCE2S</Name>
+        <Label>Sequence2 sous sequences et declarations</Label>
+        <Child id="j67jvhbx" depth="2" genericName="SUBMODULE" xsi:type="SequenceType">
+            <Name>SOUSSEQUEN</Name>
+            <Label>Sous sequence1</Label>
+            <Child id="j67jt8pk" questionType="SIMPLE" xsi:type="QuestionType">
+                <Name>QUESTIONSI</Name>
+                <Label>##{"label":"Question simple Instruction","conditions":[]} Question simple Instruction</Label>
+                <Declaration declarationType="INSTRUCTION" position="AFTER_QUESTION_TEXT">
+                    <Text>instruction date
+</Text>
+                </Declaration>
+                <Response mandatory="false">
+                    <Datatype typeName="DATE" xsi:type="DateDatatypeType">
+                        <Format/>
+                    </Datatype>
+                </Response>
+            </Child>
+        </Child>
+        <Child id="j67jyrc6" depth="2" genericName="SUBMODULE" xsi:type="SequenceType">
+            <Name>SOUSSEQUEN</Name>
+            <Label>Sous sequence2</Label>
+            <Child id="j67jpga7" questionType="SIMPLE" xsi:type="QuestionType">
+                <Name>QUESTIONSI</Name>
+                <Label>##{"label":"Question simple aide","conditions":[]} Question simple aide</Label>
+                <Declaration declarationType="HELP" position="AFTER_QUESTION_TEXT">
+                    <Text>aide booleen
+</Text>
+                </Declaration>
+                <Response mandatory="false">
+                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+                </Response>
+            </Child>
+        </Child>
+    </Child>
+    <Survey id="j67jy0ix" agency="fr.insee">
+        <Name>POPO</Name>
+    </Survey>
+    <ComponentGroup id="j67kb47x">
+        <Name>PAGE_1</Name>
+        <Label>Components for page 1</Label>
+        <MemberReference>j67k23dw</MemberReference>
+        <MemberReference>j67jylci</MemberReference>
+        <MemberReference>j67jjwsw</MemberReference>
+        <MemberReference>j67jplo1</MemberReference>
+        <MemberReference>j67jvhbx</MemberReference>
+        <MemberReference>j67jt8pk</MemberReference>
+        <MemberReference>j67jyrc6</MemberReference>
+        <MemberReference>j67jpga7</MemberReference>
+    </ComponentGroup>
+    <CodeLists/>
+</Questionnaire>

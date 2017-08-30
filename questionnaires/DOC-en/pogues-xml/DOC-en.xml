@@ -1,907 +1,980 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Questionnaire xmlns="http://xml.insee.fr/schema/applis/pogues" id="fr.insee-POPO-QPO-DOC-EN" depth="0" genericName="QUESTIONNAIRE" agency="fr.insee">
-    <Name>DOC-EN</Name>
-    <Label>Questionnaire title</Label>
-    <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="iwg9ajdg" depth="1" genericName="MODULE" xsi:type="SequenceType">
-        <Name>MODULE_EN</Name>
-        <Label>Title of the module</Label>
-        <Child id="iwg8ykge" depth="2" genericName="SUBMODULE" xsi:type="SequenceType">
-            <Name>SIMPLEQUES</Name>
-            <Label>Simple questions</Label>
-            <Child id="iwg8ox6k" questionType="SIMPLE" xsi:type="QuestionType">
-                <Name>SIMPLE_TEXT_EN</Name>
-                <Label>##{"label":"I am the question text of a simple question, with a text response domain\n","conditions":[]} I am the question text of a simple question, with a text response domain</Label>
-                <Declaration declarationType="INSTRUCTION" position="AFTER_QUESTION_TEXT">
-                    <Text>I am the text of the declaration
-</Text>
-                </Declaration>
-                <Response mandatory="false">
-                    <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
-                        <MaxLength>50</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-            </Child>
-            <Child id="iwg8nmvs" questionType="SIMPLE" xsi:type="QuestionType">
-                <Name>NAME</Name>
-                <Label>##{"label":"What's your name ?","conditions":[]} What's your name ?</Label>
-                <Response mandatory="false">
-                    <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
-                        <MaxLength>50</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-            </Child>
-            <Child id="iwg8nbvu" questionType="SIMPLE" xsi:type="QuestionType">
-                <Name>SIMPLE_NUMERIC_EN</Name>
-                <Label>##{"label":"I am the question text of a simple question, with a numeric response domain\n","conditions":[]} I am the question text of a simple question, with a numeric response domain</Label>
-                <Response mandatory="false">
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>120</Maximum>
-                        <Decimals>2</Decimals>
-                    </Datatype>
-                </Response>
-            </Child>
-            <Child id="iwg93r64" questionType="SIMPLE" xsi:type="QuestionType">
-                <Name>AGE</Name>
-                <Label>##{"label":"How old are you ?","conditions":[]} How old are you ?</Label>
-                <Control id="iwg940bw">
-                    <Expression>NUM(${S1-S1-Q4-R1})&lt;18 and ${S1-S1-Q4-R1}!=''</Expression>
-                    <FailMessage>Do your parents agree with your participation to this survey ?</FailMessage>
-                </Control>
-                <Response mandatory="false">
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>120</Maximum>
-                    </Datatype>
-                </Response>
-            </Child>
-            <Child id="iwg8saa4" questionType="SIMPLE" xsi:type="QuestionType">
-                <Name>SIMPLE_BOOL_EN</Name>
-                <Label>##{"label":"I am the question text of a simple question, with a boolean response domain\n","conditions":[]} I am the question text of a simple question, with a boolean response domain</Label>
-                <Response mandatory="false">
-                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
-                </Response>
-            </Child>
-            <Child id="iwg8r7oh" questionType="SIMPLE" xsi:type="QuestionType">
-                <Name>FUNSURVEY</Name>
-                <Label>##{"label":"Do you have fun answering this questionnaire ?\n","conditions":[]} Do you have fun answering this questionnaire ?</Label>
-                <Declaration declarationType="INSTRUCTION" position="AFTER_QUESTION_TEXT">
-                    <Text>Just check the box if you're ok
-</Text>
-                </Declaration>
-                <GoTo id="iwgevcrw">
-                    <Expression>${S1-S1-Q6-R1}='' or ${S1-S1-Q6-R1}='0' </Expression>
-                    <IfTrue>iwg8y4tf</IfTrue>
-                </GoTo>
-                <Response mandatory="false">
-                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
-                </Response>
-            </Child>
-            <Child id="iwg8ymu6" questionType="SIMPLE" xsi:type="QuestionType">
-                <Name>SIMPLE_DATE_EN</Name>
-                <Label>##{"label":"I am the question text of a simple question, with a date response domain\n","conditions":[]} I am the question text of a simple question, with a date response domain</Label>
-                <Declaration declarationType="INSTRUCTION" position="BEFORE_QUESTION_TEXT">
-                    <Text>So you would be pleased to answer a few more questions
-</Text>
-                </Declaration>
-                <Response mandatory="false">
-                    <Datatype typeName="DATE" xsi:type="DateDatatypeType">
-                        <Format/>
-                    </Datatype>
-                </Response>
-            </Child>
-            <Child id="iwg8qsgz" questionType="SIMPLE" xsi:type="QuestionType">
-                <Name>DATEBIRTHDAY</Name>
-                <Label>##{"label":"Date of your next birthday ?","conditions":[]} Date of your next birthday ?</Label>
-                <Response mandatory="false">
-                    <Datatype typeName="DATE" xsi:type="DateDatatypeType">
-                        <Format/>
-                    </Datatype>
-                </Response>
-            </Child>
-        </Child>
-        <Child id="iwg8y4tf" depth="2" genericName="SUBMODULE" xsi:type="SequenceType">
-            <Name>SINGLE_EN</Name>
-            <Label>Single choice questions</Label>
-            <Child id="iwg8ruc3" questionType="SINGLE_CHOICE" xsi:type="QuestionType">
-                <Name>SINGLE_CHECKBOX_EN</Name>
-                <Label>##{"label":"I am the question text of a single choice question, the response format is a checkbox\n","conditions":[]} I am the question text of a single choice question, the response format is a checkbox</Label>
-                <Response mandatory="false">
-                    <CodeListReference>iwg8titv</CodeListReference>
-                    <Datatype typeName="TEXT" visualizationHint="CHECKBOX" xsi:type="TextDatatypeType">
-                        <MaxLength>1</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-            </Child>
-            <Child id="iwg97pbq" questionType="SINGLE_CHOICE" xsi:type="QuestionType">
-                <Name>WEATHER_EN</Name>
-                <Label>##{"label":"What's the weather like today ?","conditions":[]} What's the weather like today ?</Label>
-                <Response mandatory="false">
-                    <CodeListReference>iwgdzvye</CodeListReference>
-                    <Datatype typeName="TEXT" visualizationHint="CHECKBOX" xsi:type="TextDatatypeType">
-                        <MaxLength>1</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-            </Child>
-        </Child>
-        <Child id="iwg9609i" depth="2" genericName="SUBMODULE" xsi:type="SequenceType">
+<Questionnaire xmlns="http://xml.insee.fr/schema/applis/pogues"
+               id="fr-insee-POPO-QPO-DOC-EN"
+               depth="0"
+               genericName="QUESTIONNAIRE"
+               agency="fr-insee">
+   <Name>DOC-EN</Name>
+   <Label>Questionnaire title</Label>
+   <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          id="iwg9ajdg"
+          depth="1"
+          genericName="MODULE"
+          xsi:type="SequenceType">
+      <Name>MODULE_EN</Name>
+      <Label>Title of the module</Label>
+      <Child id="iwg8ykge"
+             depth="2"
+             genericName="SUBMODULE"
+             xsi:type="SequenceType">
+         <Name>SIMPLEQUES</Name>
+         <Label>Simple questions</Label>
+         <Child id="iwg8ox6k" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>SIMPLE_TEXT_EN</Name>
+            <Label>##{"label":"I am the question text of a simple question, with a text response
+                    domain\n","conditions":[]} I am the question text of a simple question, with a
+                    text response domain</Label>
+            <Declaration id="d1e21"
+                         declarationType="INSTRUCTION"
+                         position="AFTER_QUESTION_TEXT">
+               <Text>I am the text of the declaration </Text>
+            </Declaration>
+            <Response id="d1e24" mandatory="false">
+               <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                  <MaxLength>50</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+         </Child>
+         <Child id="iwg8nmvs" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>NAME</Name>
+            <Label>##{"label":"What's your name ?","conditions":[]} What's your name ?</Label>
+            <Response id="d1e34" mandatory="false">
+               <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                  <MaxLength>50</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+         </Child>
+         <Child id="iwg8nbvu" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>SIMPLE_NUMERIC_EN</Name>
+            <Label>##{"label":"I am the question text of a simple question, with a numeric
+                    response domain\n","conditions":[]} I am the question text of a simple question,
+                    with a numeric response domain</Label>
+            <Response id="d1e44" mandatory="false">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>120</Maximum>
+                  <Decimals>2</Decimals>
+               </Datatype>
+            </Response>
+         </Child>
+         <Child id="iwg93r64" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>AGE</Name>
+            <Label>##{"label":"How old are you ?","conditions":[]} How old are you ?</Label>
+            <Control id="iwg940bw">
+               <Expression>NUM(${S1-S1-Q4-R1})&lt;18 and ${S1-S1-Q4-R1}!=''</Expression>
+               <FailMessage>Do your parents agree with your participation to this survey
+                        ?</FailMessage>
+            </Control>
+            <Response id="d1e62" mandatory="false">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>120</Maximum>
+               </Datatype>
+            </Response>
+         </Child>
+         <Child id="iwg8saa4" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>SIMPLE_BOOL_EN</Name>
+            <Label>##{"label":"I am the question text of a simple question, with a boolean
+                    response domain\n","conditions":[]} I am the question text of a simple question,
+                    with a boolean response domain</Label>
+            <Response id="d1e73" mandatory="false">
+               <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+            </Response>
+         </Child>
+         <Child id="iwg8r7oh" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>FUNSURVEY</Name>
+            <Label>##{"label":"Do you have fun answering this questionnaire
+                    ?\n","conditions":[]} Do you have fun answering this questionnaire ?</Label>
+            <Declaration id="d1e80"
+                         declarationType="INSTRUCTION"
+                         position="AFTER_QUESTION_TEXT">
+               <Text>Just check the box if you're ok </Text>
+            </Declaration>
+            <GoTo id="iwgevcrw">
+               <Expression>${S1-S1-Q6-R1}='' or ${S1-S1-Q6-R1}='0' </Expression>
+               <IfTrue>iwg8y4tf</IfTrue>
+            </GoTo>
+            <Response id="d1e88" mandatory="false">
+               <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+            </Response>
+         </Child>
+         <Child id="iwg8ymu6" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>SIMPLE_DATE_EN</Name>
+            <Label>##{"label":"I am the question text of a simple question, with a date response
+                    domain\n","conditions":[]} I am the question text of a simple question, with a
+                    date response domain</Label>
+            <Declaration id="d1e95"
+                         declarationType="INSTRUCTION"
+                         position="BEFORE_QUESTION_TEXT">
+               <Text>So you would be pleased to answer a few more questions </Text>
+            </Declaration>
+            <Response id="d1e98" mandatory="false">
+               <Datatype typeName="DATE" xsi:type="DateDatatypeType">
+                  <Format/>
+               </Datatype>
+            </Response>
+         </Child>
+         <Child id="iwg8qsgz" questionType="SIMPLE" xsi:type="QuestionType">
+            <Name>DATEBIRTHDAY</Name>
+            <Label>##{"label":"Date of your next birthday ?","conditions":[]} Date of your next
+                    birthday ?</Label>
+            <Response id="d1e106" mandatory="false">
+               <Datatype typeName="DATE" xsi:type="DateDatatypeType">
+                  <Format/>
+               </Datatype>
+            </Response>
+         </Child>
+      </Child>
+      <Child id="iwg8y4tf"
+             depth="2"
+             genericName="SUBMODULE"
+             xsi:type="SequenceType">
+         <Name>SINGLE_EN</Name>
+         <Label>Single choice questions</Label>
+         <Child id="iwg8ruc3" questionType="SINGLE_CHOICE" xsi:type="QuestionType">
+            <Name>SINGLE_CHECKBOX_EN</Name>
+            <Label>##{"label":"I am the question text of a single choice question, the response
+                    format is a checkbox\n","conditions":[]} I am the question text of a single
+                    choice question, the response format is a checkbox</Label>
+            <Response id="d1e119" mandatory="false">
+               <CodeListReference>iwg8titv</CodeListReference>
+               <Datatype typeName="TEXT"
+                         visualizationHint="CHECKBOX"
+                         xsi:type="TextDatatypeType">
+                  <MaxLength>1</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+         </Child>
+         <Child id="iwg97pbq" questionType="SINGLE_CHOICE" xsi:type="QuestionType">
+            <Name>WEATHER_EN</Name>
+            <Label>##{"label":"What's the weather like today ?","conditions":[]} What's the
+                    weather like today ?</Label>
+            <Response id="d1e131" mandatory="false">
+               <CodeListReference>iwgdzvye</CodeListReference>
+               <Datatype typeName="TEXT"
+                         visualizationHint="CHECKBOX"
+                         xsi:type="TextDatatypeType">
+                  <MaxLength>1</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+         </Child>
+      </Child>
+      <Child id="iwg9609i"
+             depth="2"
+             genericName="SUBMODULE"
+             xsi:type="SequenceType">
+         <Name>MULTIPLE_EN</Name>
+         <Label>Multiple choice questions</Label>
+         <Child id="iwg8s7u6"
+                questionType="MULTIPLE_CHOICE"
+                xsi:type="QuestionType">
             <Name>MULTIPLE_EN</Name>
-            <Label>Multiple choice questions</Label>
-            <Child id="iwg8s7u6" questionType="MULTIPLE_CHOICE" xsi:type="QuestionType">
-                <Name>MULTIPLE_EN</Name>
-                <Label>##{"label":"I am the question text of a multiple choice question, with a yes/no response domain (response format radio button)\n","conditions":[]} I am the question text of a multiple choice question, with a yes/no response domain (response format radio button)</Label>
-                <Response>
-                    <CodeListReference>iwgehiif</CodeListReference>
-                    <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
-                        <MaxLength>1</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <CodeListReference>iwgehiif</CodeListReference>
-                    <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
-                        <MaxLength>1</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <CodeListReference>iwgehiif</CodeListReference>
-                    <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
-                        <MaxLength>1</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <CodeListReference>iwgehiif</CodeListReference>
-                    <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
-                        <MaxLength>1</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <CodeListReference>iwgehiif</CodeListReference>
-                    <Datatype typeName="TEXT" visualizationHint="RADIO" xsi:type="TextDatatypeType">
-                        <MaxLength>1</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <ResponseStructure>
-                    <Dimension dimensionType="PRIMARY" dynamic="0">
-                        <CodeListReference>iwg8titv</CodeListReference>
-                    </Dimension>
-                    <Dimension dimensionType="MEASURE" dynamic="0"/>
-                </ResponseStructure>
-            </Child>
-            <Child id="iwgecrpk" questionType="MULTIPLE_CHOICE" xsi:type="QuestionType">
-                <Name>DIV_EN</Name>
-                <Label>##{"label":"What do you like to do on friday evening ?\n","conditions":[]} What do you like to do on friday evening ?</Label>
-                <Response>
-                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
-                </Response>
-                <Response>
-                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
-                </Response>
-                <Response>
-                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
-                </Response>
-                <Response>
-                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
-                </Response>
-                <Response>
-                    <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
-                </Response>
-                <ResponseStructure>
-                    <Dimension dimensionType="PRIMARY" dynamic="0">
-                        <CodeListReference>iwgebn3a</CodeListReference>
-                    </Dimension>
-                    <Dimension dimensionType="MEASURE" dynamic="0"/>
-                </ResponseStructure>
-            </Child>
-        </Child>
-        <Child id="iwg91gt8" depth="2" genericName="SUBMODULE" xsi:type="SequenceType">
-            <Name>GRIDQUESTI</Name>
-            <Label>Grid questions</Label>
-            <Child id="iwg91qps" questionType="TABLE" xsi:type="QuestionType">
-                <Name>GRID_2D_EN</Name>
-                <Label>##{"label":"I am the question text of a grid question, two dimensions and numeric response domain\n","conditions":[]} I am the question text of a grid question, two dimensions and numeric response domain</Label>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                        <Decimals>2</Decimals>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <ResponseStructure>
-                    <Dimension dimensionType="PRIMARY" dynamic="0">
-                        <CodeListReference>iwg8titv</CodeListReference>
-                    </Dimension>
-                    <Dimension dimensionType="SECONDARY" dynamic="0">
-                        <CodeListReference>iwge4s84</CodeListReference>
-                    </Dimension>
-                    <Dimension dimensionType="MEASURE" dynamic="0">
-                        <Label/>
-                    </Dimension>
-                </ResponseStructure>
-            </Child>
-            <Child id="iwg93pqo" questionType="TABLE" xsi:type="QuestionType">
-                <Name>GRID_1D_EN</Name>
-                <Label>##{"label":"I am the question text of a grid question, one dimension, two measures\n","conditions":[]} I am the question text of a grid question, one dimension, two measures</Label>
-                <Response>
-                    <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
-                        <MaxLength>20</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
-                        <MaxLength>20</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
-                        <MaxLength>20</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
-                        <MaxLength>20</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
-                        <MaxLength>20</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>100</Maximum>
-                    </Datatype>
-                </Response>
-                <ResponseStructure>
-                    <Dimension dimensionType="PRIMARY" dynamic="0">
-                        <CodeListReference>iwg8titv</CodeListReference>
-                    </Dimension>
-                    <Dimension dimensionType="MEASURE" dynamic="0">
-                        <Label>Text</Label>
-                    </Dimension>
-                    <Dimension dimensionType="MEASURE" dynamic="0">
-                        <Label>Numeric</Label>
-                    </Dimension>
-                </ResponseStructure>
-            </Child>
-            <Child id="iwgej2p6" questionType="TABLE" xsi:type="QuestionType">
-                <Name>LIST_EN</Name>
-                <Label>##{"label":"Who attend this awesome presentation ?\n","conditions":[]} Who attend this awesome presentation ?</Label>
-                <Declaration declarationType="INSTRUCTION" position="AFTER_QUESTION_TEXT">
-                    <Text>I am a type of list (possible to add lines for the respondant)
-</Text>
-                </Declaration>
-                <Response>
-                    <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
-                        <MaxLength>50</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
-                        <Minimum>0</Minimum>
-                        <Maximum>120</Maximum>
-                    </Datatype>
-                </Response>
-                <Response>
-                    <CodeListReference>iwgeg7ek</CodeListReference>
-                    <Datatype typeName="TEXT" visualizationHint="DROPDOWN" xsi:type="TextDatatypeType">
-                        <MaxLength>1</MaxLength>
-                        <Pattern/>
-                    </Datatype>
-                </Response>
-                <ResponseStructure>
-                    <Dimension dimensionType="PRIMARY" dynamic="-"/>
-                    <Dimension dimensionType="MEASURE" dynamic="0">
-                        <Label>Name</Label>
-                    </Dimension>
-                    <Dimension dimensionType="MEASURE" dynamic="0">
-                        <Label>Age</Label>
-                    </Dimension>
-                    <Dimension dimensionType="MEASURE" dynamic="0">
-                        <Label>Sex</Label>
-                    </Dimension>
-                </ResponseStructure>
-            </Child>
-        </Child>
-    </Child>
-    <Survey agency="fr.insee">
-        <Name>POPO</Name>
-    </Survey>
-    <ComponentGroup id="j4sh7h4p">
-        <Name>PAGE_1</Name>
-        <Label>Components for page 1</Label>
-        <MemberReference>iwg9ajdg</MemberReference>
-        <MemberReference>iwg8ykge</MemberReference>
-        <MemberReference>iwg8ox6k</MemberReference>
-        <MemberReference>iwg8nmvs</MemberReference>
-        <MemberReference>iwg8nbvu</MemberReference>
-        <MemberReference>iwg93r64</MemberReference>
-        <MemberReference>iwg8saa4</MemberReference>
-        <MemberReference>iwg8r7oh</MemberReference>
-        <MemberReference>iwg8ymu6</MemberReference>
-        <MemberReference>iwg8qsgz</MemberReference>
-        <MemberReference>iwg8y4tf</MemberReference>
-        <MemberReference>iwg8ruc3</MemberReference>
-        <MemberReference>iwg97pbq</MemberReference>
-        <MemberReference>iwg9609i</MemberReference>
-        <MemberReference>iwg8s7u6</MemberReference>
-        <MemberReference>iwgecrpk</MemberReference>
-        <MemberReference>iwg91gt8</MemberReference>
-        <MemberReference>iwg91qps</MemberReference>
-        <MemberReference>iwg93pqo</MemberReference>
-        <MemberReference>iwgej2p6</MemberReference>
-    </ComponentGroup>
-    <CodeLists>
-        <CodeList id="isg1g6zo">
-            <Name/>
-            <Label>LISTE_TEST</Label>
-            <Code>
-                <Value>TestYo</Value>
-                <Label>choix 1</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>choix 2</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>choix 3</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>choix 4</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>choix 5</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="isg1uorv">
-            <Name/>
-            <Label>Oui_Non</Label>
-            <Code>
-                <Value/>
-                <Label>Oui</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Non</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="isg27fpv">
-            <Name/>
-            <Label>LISTE_TEST_2</Label>
-            <Code>
-                <Value/>
-                <Label>choix 6</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>choix 7</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>choix 8</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>choix 9</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iw22dla9">
-            <Name/>
-            <Label>DOMAINE</Label>
-            <Code>
-                <Value/>
-                <Label>Eaux usées</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Déchets hors radioactifs</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Protection de l’air</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Limitation des émissions de gaz à effet de serre</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Bruits et vibrations</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Sols, eaux souterraines et de surface</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Sites, paysages et biodiversité</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Autres (rayonnement, R&amp;D sur l’environnement…)</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iw22fswu">
-            <Name/>
-            <Label>L_SEXE</Label>
-            <Code>
-                <Value/>
-                <Label>Masculin</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Féminin</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iw22r14q">
-            <Name/>
-            <Label>NATURE</Label>
-            <Code>
-                <Value/>
-                <Label>Pré-traitement, traitement et élimination</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Mesure et contrôle</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Recyclage, tri et valorisation</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Prévention des pollutions</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iw22xe2u">
-            <Name/>
-            <Label>L_effectifs</Label>
-            <Code>
-                <Value/>
-                <Label>Effectifs salariés à temps plein</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Effectifs salariés à temps partiel moins de 6 mois</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Effectifs salariés à temps partiel 6 mois et plus</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Apprentis, stagiaires rémunérés</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Total</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iw25euzq">
-            <Name/>
-            <Label>L_GLACE</Label>
-            <Code>
-                <Value/>
-                <Label>vanille</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>chocolat</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>fraise</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>abricot</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>citron</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>rhum raisins</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iw25voxc">
-            <Name/>
-            <Label>L_fréquence</Label>
-            <Code>
-                <Value/>
-                <Label>Toujours</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Souvent</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Parfois</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Jamais</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iwg8titv">
-            <Name/>
-            <Label>LIST_ONE</Label>
-            <Code>
-                <Value/>
-                <Label>Item 1</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Item 2</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Item 3</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Item 4</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Item 5</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iwgdyhwp">
-            <Name/>
-            <Label/>
-        </CodeList>
-        <CodeList id="iwgdzvye">
-            <Name/>
-            <Label>weather_list</Label>
-            <Code>
-                <Value/>
-                <Label>sunny</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>cloudy</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>rainy</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>a mix of all, I'm in Brittany</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iwge4s84">
-            <Name/>
-            <Label>LIST_TWO</Label>
-            <Code>
-                <Value/>
-                <Label>item 6</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>item 7</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>item 8</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>item 9</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>item 10</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iwgebn3a">
-            <Name/>
-            <Label>EVENING</Label>
-            <Code>
-                <Value/>
-                <Label>Drink some beers</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Go to cinema</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Watch a movie at home</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Cook good meals for my friends</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Read a novel</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iwgeg7ek">
-            <Name/>
-            <Label>LIST_SEX_EN</Label>
-            <Code>
-                <Value/>
-                <Label>Man</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Woman</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iwgehiif">
-            <Name/>
-            <Label>Yes_No_EN</Label>
-            <Code>
-                <Value/>
-                <Label>Yes</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>No</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iwm8rfv5">
-            <Name/>
-            <Label>L_TIC_TPE</Label>
-            <Code>
-                <Value/>
-                <Label>La commande ou la réservation en ligne (panier virtuel) ?</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>La description de biens ou services, ou des listes de prix ?</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Des liens permettant d’accéder aux pages de l’entreprise dans les médias sociaux (Facebook, Twitter, Google+, LinkedIn, Viadeo, etc.) ?</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iwm8rneb">
-            <Name/>
-            <Label>L_ventes</Label>
-            <Code>
-                <Value/>
-                <Label>A des particuliers</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>A des professionnels ou revendeurs</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iwm8zloc">
-            <Name/>
-            <Label>L_activite</Label>
-            <Code>
-                <Value/>
-                <Label>à temps complet</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>à temps partiel 80 % ou plus</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>de mi-temps à moins de 80 %</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>moins d’un mi-temps</Label>
-            </Code>
-        </CodeList>
-        <CodeList id="iwm9fhue">
-            <Name/>
-            <Label>L_formation</Label>
-            <Code>
-                <Value/>
-                <Label>Formation financée ou organisée par l’employeur ou une agence d’intérim (hors apprentissage et contrats de professionnalisation)</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Formation donnée par une école de la 2e chance, par l’EPIDE</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Formation conseillée ou organisée par Pôle emploi, par une mission locale, une chambre des métiers, une agence de placement (APEC, INGEUS, …), (y compris ateliers de techniques de recherche d’emploi, ateliers CV)</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Une formation professionnalisante ou à but professionnel (pour trouver un emploi, améliorer votre situation, …)</Label>
-            </Code>
-            <Code>
-                <Value/>
-                <Label>Aucune de ces formations depuis la fin des études, même pour quelques jours</Label>
-            </Code>
-        </CodeList>
-    </CodeLists>
+            <Label>##{"label":"I am the question text of a multiple choice question, with a
+                    yes/no response domain (response format radio button)\n","conditions":[]} I am
+                    the question text of a multiple choice question, with a yes/no response domain
+                    (response format radio button)</Label>
+            <Response id="d1e148">
+               <CodeListReference>iwgehiif</CodeListReference>
+               <Datatype typeName="TEXT"
+                         visualizationHint="RADIO"
+                         xsi:type="TextDatatypeType">
+                  <MaxLength>1</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <Response id="d1e155">
+               <CodeListReference>iwgehiif</CodeListReference>
+               <Datatype typeName="TEXT"
+                         visualizationHint="RADIO"
+                         xsi:type="TextDatatypeType">
+                  <MaxLength>1</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <Response id="d1e162">
+               <CodeListReference>iwgehiif</CodeListReference>
+               <Datatype typeName="TEXT"
+                         visualizationHint="RADIO"
+                         xsi:type="TextDatatypeType">
+                  <MaxLength>1</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <Response id="d1e169">
+               <CodeListReference>iwgehiif</CodeListReference>
+               <Datatype typeName="TEXT"
+                         visualizationHint="RADIO"
+                         xsi:type="TextDatatypeType">
+                  <MaxLength>1</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <Response id="d1e176">
+               <CodeListReference>iwgehiif</CodeListReference>
+               <Datatype typeName="TEXT"
+                         visualizationHint="RADIO"
+                         xsi:type="TextDatatypeType">
+                  <MaxLength>1</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <ResponseStructure>
+               <Dimension dimensionType="PRIMARY" dynamic="0-0">
+                  <CodeListReference>iwg8titv</CodeListReference>
+               </Dimension>
+               <Dimension dimensionType="MEASURE" dynamic="0-0"/>
+            </ResponseStructure>
+         </Child>
+         <Child id="iwgecrpk"
+                questionType="MULTIPLE_CHOICE"
+                xsi:type="QuestionType">
+            <Name>DIV_EN</Name>
+            <Label>##{"label":"What do you like to do on friday evening ?\n","conditions":[]}
+                    What do you like to do on friday evening ?</Label>
+            <Response id="d1e193">
+               <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+            </Response>
+            <Response id="d1e195">
+               <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+            </Response>
+            <Response id="d1e197">
+               <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+            </Response>
+            <Response id="d1e199">
+               <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+            </Response>
+            <Response id="d1e201">
+               <Datatype typeName="BOOLEAN" xsi:type="BooleanDatatypeType"/>
+            </Response>
+            <ResponseStructure>
+               <Dimension dimensionType="PRIMARY" dynamic="0-0">
+                  <CodeListReference>iwgebn3a</CodeListReference>
+               </Dimension>
+               <Dimension dimensionType="MEASURE" dynamic="0-0"/>
+            </ResponseStructure>
+         </Child>
+      </Child>
+      <Child id="iwg91gt8"
+             depth="2"
+             genericName="SUBMODULE"
+             xsi:type="SequenceType">
+         <Name>GRIDQUESTI</Name>
+         <Label>Grid questions</Label>
+         <Child id="iwg91qps" questionType="TABLE" xsi:type="QuestionType">
+            <Name>GRID_2D_EN</Name>
+            <Label>##{"label":"I am the question text of a grid question, two dimensions and
+                    numeric response domain\n","conditions":[]} I am the question text of a grid
+                    question, two dimensions and numeric response domain</Label>
+            <Response id="d1e218">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e224">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+                  <Decimals>2</Decimals>
+               </Datatype>
+            </Response>
+            <Response id="d1e232">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e238">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e244">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e250">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e256">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e262">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e268">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e275">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e281">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e287">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e293">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e299">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e305">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e311">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e317">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e323">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e329">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e335">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e342">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e348">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e354">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e360">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e366">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <ResponseStructure>
+               <Dimension dimensionType="PRIMARY" dynamic="0-0">
+                  <CodeListReference>iwg8titv</CodeListReference>
+               </Dimension>
+               <Dimension dimensionType="SECONDARY" dynamic="0-0">
+                  <CodeListReference>iwge4s84</CodeListReference>
+               </Dimension>
+               <Dimension dimensionType="MEASURE" dynamic="0-0">
+                  <Label/>
+               </Dimension>
+            </ResponseStructure>
+         </Child>
+         <Child id="iwg93pqo" questionType="TABLE" xsi:type="QuestionType">
+            <Name>GRID_1D_EN</Name>
+            <Label>##{"label":"I am the question text of a grid question, one dimension, two
+                    measures\n","conditions":[]} I am the question text of a grid question, one
+                    dimension, two measures</Label>
+            <Response id="d1e386">
+               <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                  <MaxLength>20</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <Response id="d1e391">
+               <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                  <MaxLength>20</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <Response id="d1e396">
+               <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                  <MaxLength>20</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <Response id="d1e401">
+               <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                  <MaxLength>20</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <Response id="d1e406">
+               <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                  <MaxLength>20</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <Response id="d1e411">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e417">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e423">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e429">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e436">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>100</Maximum>
+               </Datatype>
+            </Response>
+            <ResponseStructure>
+               <Dimension dimensionType="PRIMARY" dynamic="0-0">
+                  <CodeListReference>iwg8titv</CodeListReference>
+               </Dimension>
+               <Dimension dimensionType="MEASURE" dynamic="0-0">
+                  <Label>Text</Label>
+               </Dimension>
+               <Dimension dimensionType="MEASURE" dynamic="0-0">
+                  <Label>Numeric</Label>
+               </Dimension>
+            </ResponseStructure>
+         </Child>
+         <Child id="iwgej2p6" questionType="TABLE" xsi:type="QuestionType">
+            <Name>LIST_EN</Name>
+            <Label>##{"label":"Who attend this awesome presentation ?\n","conditions":[]} Who
+                    attend this awesome presentation ?</Label>
+            <Declaration id="d1e457"
+                         declarationType="INSTRUCTION"
+                         position="AFTER_QUESTION_TEXT">
+               <Text>I am a type of list (possible to add lines for the respondant) </Text>
+            </Declaration>
+            <Response id="d1e460">
+               <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
+                  <MaxLength>50</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <Response id="d1e465">
+               <Datatype typeName="NUMERIC" xsi:type="NumericDatatypeType">
+                  <Minimum>0</Minimum>
+                  <Maximum>120</Maximum>
+               </Datatype>
+            </Response>
+            <Response id="d1e471">
+               <CodeListReference>iwgeg7ek</CodeListReference>
+               <Datatype typeName="TEXT"
+                         visualizationHint="DROPDOWN"
+                         xsi:type="TextDatatypeType">
+                  <MaxLength>1</MaxLength>
+                  <Pattern/>
+               </Datatype>
+            </Response>
+            <ResponseStructure>
+               <Dimension dimensionType="PRIMARY" dynamic="0-0"/>
+               <Dimension dimensionType="MEASURE" dynamic="0-0">
+                  <Label>Name</Label>
+               </Dimension>
+               <Dimension dimensionType="MEASURE" dynamic="0-0">
+                  <Label>Age</Label>
+               </Dimension>
+               <Dimension dimensionType="MEASURE" dynamic="0-0">
+                  <Label>Sex</Label>
+               </Dimension>
+            </ResponseStructure>
+         </Child>
+      </Child>
+   </Child>
+   <Survey agency="fr-insee">
+      <Name>POPO</Name>
+   </Survey>
+   <ComponentGroup id="j4sh7h4p">
+      <Name>PAGE_1</Name>
+      <Label>Components for page 1</Label>
+      <MemberReference>iwg9ajdg</MemberReference>
+      <MemberReference>iwg8ykge</MemberReference>
+      <MemberReference>iwg8ox6k</MemberReference>
+      <MemberReference>iwg8nmvs</MemberReference>
+      <MemberReference>iwg8nbvu</MemberReference>
+      <MemberReference>iwg93r64</MemberReference>
+      <MemberReference>iwg8saa4</MemberReference>
+      <MemberReference>iwg8r7oh</MemberReference>
+      <MemberReference>iwg8ymu6</MemberReference>
+      <MemberReference>iwg8qsgz</MemberReference>
+      <MemberReference>iwg8y4tf</MemberReference>
+      <MemberReference>iwg8ruc3</MemberReference>
+      <MemberReference>iwg97pbq</MemberReference>
+      <MemberReference>iwg9609i</MemberReference>
+      <MemberReference>iwg8s7u6</MemberReference>
+      <MemberReference>iwgecrpk</MemberReference>
+      <MemberReference>iwg91gt8</MemberReference>
+      <MemberReference>iwg91qps</MemberReference>
+      <MemberReference>iwg93pqo</MemberReference>
+      <MemberReference>iwgej2p6</MemberReference>
+   </ComponentGroup>
+   <CodeLists>
+      <CodeList id="isg1g6zo">
+         <Name/>
+         <Label>LISTE_TEST</Label>
+         <Code id="d1e543">
+            <Value>TestYo</Value>
+            <Label>choix 1</Label>
+         </Code>
+         <Code id="d1e548">
+            <Value/>
+            <Label>choix 2</Label>
+         </Code>
+         <Code id="d1e552">
+            <Value/>
+            <Label>choix 3</Label>
+         </Code>
+         <Code id="d1e556">
+            <Value/>
+            <Label>choix 4</Label>
+         </Code>
+         <Code id="d1e560">
+            <Value/>
+            <Label>choix 5</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="isg1uorv">
+         <Name/>
+         <Label>Oui_Non</Label>
+         <Code id="d1e568">
+            <Value/>
+            <Label>Oui</Label>
+         </Code>
+         <Code id="d1e572">
+            <Value/>
+            <Label>Non</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="isg27fpv">
+         <Name/>
+         <Label>LISTE_TEST_2</Label>
+         <Code id="d1e580">
+            <Value/>
+            <Label>choix 6</Label>
+         </Code>
+         <Code id="d1e584">
+            <Value/>
+            <Label>choix 7</Label>
+         </Code>
+         <Code id="d1e588">
+            <Value/>
+            <Label>choix 8</Label>
+         </Code>
+         <Code id="d1e592">
+            <Value/>
+            <Label>choix 9</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iw22dla9">
+         <Name/>
+         <Label>DOMAINE</Label>
+         <Code id="d1e600">
+            <Value/>
+            <Label>Eaux usées</Label>
+         </Code>
+         <Code id="d1e604">
+            <Value/>
+            <Label>Déchets hors radioactifs</Label>
+         </Code>
+         <Code id="d1e608">
+            <Value/>
+            <Label>Protection de l’air</Label>
+         </Code>
+         <Code id="d1e612">
+            <Value/>
+            <Label>Limitation des émissions de gaz à effet de serre</Label>
+         </Code>
+         <Code id="d1e616">
+            <Value/>
+            <Label>Bruits et vibrations</Label>
+         </Code>
+         <Code id="d1e620">
+            <Value/>
+            <Label>Sols, eaux souterraines et de surface</Label>
+         </Code>
+         <Code id="d1e624">
+            <Value/>
+            <Label>Sites, paysages et biodiversité</Label>
+         </Code>
+         <Code id="d1e628">
+            <Value/>
+            <Label>Autres (rayonnement, R&amp;D sur l’environnement…)</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iw22fswu">
+         <Name/>
+         <Label>L_SEXE</Label>
+         <Code id="d1e636">
+            <Value/>
+            <Label>Masculin</Label>
+         </Code>
+         <Code id="d1e640">
+            <Value/>
+            <Label>Féminin</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iw22r14q">
+         <Name/>
+         <Label>NATURE</Label>
+         <Code id="d1e648">
+            <Value/>
+            <Label>Pré-traitement, traitement et élimination</Label>
+         </Code>
+         <Code id="d1e652">
+            <Value/>
+            <Label>Mesure et contrôle</Label>
+         </Code>
+         <Code id="d1e656">
+            <Value/>
+            <Label>Recyclage, tri et valorisation</Label>
+         </Code>
+         <Code id="d1e660">
+            <Value/>
+            <Label>Prévention des pollutions</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iw22xe2u">
+         <Name/>
+         <Label>L_effectifs</Label>
+         <Code id="d1e668">
+            <Value/>
+            <Label>Effectifs salariés à temps plein</Label>
+         </Code>
+         <Code id="d1e672">
+            <Value/>
+            <Label>Effectifs salariés à temps partiel moins de 6 mois</Label>
+         </Code>
+         <Code id="d1e676">
+            <Value/>
+            <Label>Effectifs salariés à temps partiel 6 mois et plus</Label>
+         </Code>
+         <Code id="d1e680">
+            <Value/>
+            <Label>Apprentis, stagiaires rémunérés</Label>
+         </Code>
+         <Code id="d1e684">
+            <Value/>
+            <Label>Total</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iw25euzq">
+         <Name/>
+         <Label>L_GLACE</Label>
+         <Code id="d1e692">
+            <Value/>
+            <Label>vanille</Label>
+         </Code>
+         <Code id="d1e696">
+            <Value/>
+            <Label>chocolat</Label>
+         </Code>
+         <Code id="d1e700">
+            <Value/>
+            <Label>fraise</Label>
+         </Code>
+         <Code id="d1e704">
+            <Value/>
+            <Label>abricot</Label>
+         </Code>
+         <Code id="d1e708">
+            <Value/>
+            <Label>citron</Label>
+         </Code>
+         <Code id="d1e712">
+            <Value/>
+            <Label>rhum raisins</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iw25voxc">
+         <Name/>
+         <Label>L_fréquence</Label>
+         <Code id="d1e720">
+            <Value/>
+            <Label>Toujours</Label>
+         </Code>
+         <Code id="d1e724">
+            <Value/>
+            <Label>Souvent</Label>
+         </Code>
+         <Code id="d1e728">
+            <Value/>
+            <Label>Parfois</Label>
+         </Code>
+         <Code id="d1e732">
+            <Value/>
+            <Label>Jamais</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iwg8titv">
+         <Name/>
+         <Label>LIST_ONE</Label>
+         <Code id="d1e740">
+            <Value/>
+            <Label>Item 1</Label>
+         </Code>
+         <Code id="d1e744">
+            <Value/>
+            <Label>Item 2</Label>
+         </Code>
+         <Code id="d1e748">
+            <Value/>
+            <Label>Item 3</Label>
+         </Code>
+         <Code id="d1e752">
+            <Value/>
+            <Label>Item 4</Label>
+         </Code>
+         <Code id="d1e756">
+            <Value/>
+            <Label>Item 5</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iwgdyhwp">
+         <Name/>
+         <Label/>
+      </CodeList>
+      <CodeList id="iwgdzvye">
+         <Name/>
+         <Label>weather_list</Label>
+         <Code id="d1e768">
+            <Value/>
+            <Label>sunny</Label>
+         </Code>
+         <Code id="d1e772">
+            <Value/>
+            <Label>cloudy</Label>
+         </Code>
+         <Code id="d1e776">
+            <Value/>
+            <Label>rainy</Label>
+         </Code>
+         <Code id="d1e780">
+            <Value/>
+            <Label>a mix of all, I'm in Brittany</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iwge4s84">
+         <Name/>
+         <Label>LIST_TWO</Label>
+         <Code id="d1e788">
+            <Value/>
+            <Label>item 6</Label>
+         </Code>
+         <Code id="d1e792">
+            <Value/>
+            <Label>item 7</Label>
+         </Code>
+         <Code id="d1e796">
+            <Value/>
+            <Label>item 8</Label>
+         </Code>
+         <Code id="d1e800">
+            <Value/>
+            <Label>item 9</Label>
+         </Code>
+         <Code id="d1e804">
+            <Value/>
+            <Label>item 10</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iwgebn3a">
+         <Name/>
+         <Label>EVENING</Label>
+         <Code id="d1e812">
+            <Value/>
+            <Label>Drink some beers</Label>
+         </Code>
+         <Code id="d1e816">
+            <Value/>
+            <Label>Go to cinema</Label>
+         </Code>
+         <Code id="d1e820">
+            <Value/>
+            <Label>Watch a movie at home</Label>
+         </Code>
+         <Code id="d1e824">
+            <Value/>
+            <Label>Cook good meals for my friends</Label>
+         </Code>
+         <Code id="d1e828">
+            <Value/>
+            <Label>Read a novel</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iwgeg7ek">
+         <Name/>
+         <Label>LIST_SEX_EN</Label>
+         <Code id="d1e836">
+            <Value/>
+            <Label>Man</Label>
+         </Code>
+         <Code id="d1e840">
+            <Value/>
+            <Label>Woman</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iwgehiif">
+         <Name/>
+         <Label>Yes_No_EN</Label>
+         <Code id="d1e848">
+            <Value/>
+            <Label>Yes</Label>
+         </Code>
+         <Code id="d1e852">
+            <Value/>
+            <Label>No</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iwm8rfv5">
+         <Name/>
+         <Label>L_TIC_TPE</Label>
+         <Code id="d1e860">
+            <Value/>
+            <Label>La commande ou la réservation en ligne (panier virtuel) ?</Label>
+         </Code>
+         <Code id="d1e864">
+            <Value/>
+            <Label>La description de biens ou services, ou des listes de prix ?</Label>
+         </Code>
+         <Code id="d1e868">
+            <Value/>
+            <Label>Des liens permettant d’accéder aux pages de l’entreprise dans les médias
+                    sociaux (Facebook, Twitter, Google+, LinkedIn, Viadeo, etc.) ?</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iwm8rneb">
+         <Name/>
+         <Label>L_ventes</Label>
+         <Code id="d1e876">
+            <Value/>
+            <Label>A des particuliers</Label>
+         </Code>
+         <Code id="d1e880">
+            <Value/>
+            <Label>A des professionnels ou revendeurs</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iwm8zloc">
+         <Name/>
+         <Label>L_activite</Label>
+         <Code id="d1e888">
+            <Value/>
+            <Label>à temps complet</Label>
+         </Code>
+         <Code id="d1e892">
+            <Value/>
+            <Label>à temps partiel 80 % ou plus</Label>
+         </Code>
+         <Code id="d1e896">
+            <Value/>
+            <Label>de mi-temps à moins de 80 %</Label>
+         </Code>
+         <Code id="d1e900">
+            <Value/>
+            <Label>moins d’un mi-temps</Label>
+         </Code>
+      </CodeList>
+      <CodeList id="iwm9fhue">
+         <Name/>
+         <Label>L_formation</Label>
+         <Code id="d1e908">
+            <Value/>
+            <Label>Formation financée ou organisée par l’employeur ou une agence d’intérim (hors
+                    apprentissage et contrats de professionnalisation)</Label>
+         </Code>
+         <Code id="d1e912">
+            <Value/>
+            <Label>Formation donnée par une école de la 2e chance, par l’EPIDE</Label>
+         </Code>
+         <Code id="d1e916">
+            <Value/>
+            <Label>Formation conseillée ou organisée par Pôle emploi, par une mission locale,
+                    une chambre des métiers, une agence de placement (APEC, INGEUS, …), (y compris
+                    ateliers de techniques de recherche d’emploi, ateliers CV)</Label>
+         </Code>
+         <Code id="d1e920">
+            <Value/>
+            <Label>Une formation professionnalisante ou à but professionnel (pour trouver un
+                    emploi, améliorer votre situation, …)</Label>
+         </Code>
+         <Code id="d1e924">
+            <Value/>
+            <Label>Aucune de ces formations depuis la fin des études, même pour quelques
+                    jours</Label>
+         </Code>
+      </CodeList>
+   </CodeLists>
 </Questionnaire>

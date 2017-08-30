@@ -3,7 +3,7 @@
    xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2"
    xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_2"
    xmlns:l="ddi:logicalproduct:3_2" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-   xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd" isMaintainable="true">
+   xsi:schemaLocation="ddi:instance:3_2 ../../../target/schema/instance.xsd" isMaintainable="true">
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-SIMPSONS</r:ID>
    <r:Version>0.1.0</r:Version>
