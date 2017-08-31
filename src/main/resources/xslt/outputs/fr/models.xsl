@@ -358,6 +358,11 @@
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:attribute name="value">
+                        <xsl:if test="enofr:get-readonly-ancestors($source-context)!=''">
+                            <xsl:for-each select="enofr:get-readonly-ancestors($source-context)">
+                                <xsl:value-of select="concat('not(',.,') or ')"/>
+                            </xsl:for-each>                            
+                        </xsl:if>
                         <xsl:value-of select="$constraint"/>
                     </xsl:attribute>
                 </xsl:element>

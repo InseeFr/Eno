@@ -654,17 +654,15 @@
         </xsl:for-each>
     </xsl:template>
 
-    <!--    <xd:doc>
+    <xd:doc>
         <xd:desc>
-            <xd:p>Get the formula to calculate a Variable.</xd:p>
+            <xd:p>For the Instruction of a ComputationItem, returns the conditions of all its deactivatable ancestors.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="l:Variable" mode="enoddi:get-variable-calculation">
-        <xsl:variable name="id">
-            <xsl:apply-templates select="." mode="enoddi:get-id"/>
-        </xsl:variable>
-        <xsl:value-of
-            select="substring-after(//d:Expression/r:Command/r:CommandContent[contains(text(),$id)]/text(),'=')"
-        />
-    </xsl:template>-->
-    </xsl:stylesheet>
+    <xsl:template match="d:Instruction[ancestor::d:ComputationItem]" mode="enoddi:get-deactivatable-ancestors" as="xs:string *">
+        <xsl:for-each select="ancestor::d:Sequence[d:TypeOfSequence/text()='deactivatable']">
+            <xsl:value-of select="enoddi:get-deactivatable-command(.)"/>
+        </xsl:for-each>
+    </xsl:template>
+
+</xsl:stylesheet>
