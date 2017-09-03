@@ -2,14 +2,18 @@
 <project name="enoNonRegression" basedir="." default="full">
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
-
+    <!-- Importing the builds for each interface. -->
+    <import file="build-fr.xml"/>
+    <import file="build-ddi.xml"/>
+    <import file="build-pogues-xml.xml"/>    
+    <import file="build-pdf.xml"/>
     <!-- Properties for this non regression script -->
     
     <!-- ******************************* Main properties for the non-regression script depending on the input and transformation to be processed *********************************** -->
     <!-- The name of the survey, conditionning the name of the input file processed. -->
     <property name="survey-name" value="simpsons"/>
     <!-- The transformation to be processed, usually named using a <in>2<out> template. -->
-    <property name="transformation-name" value="ddi2fr"/>
+    <property name="transformation-name" value="ddi2pdf"/>
     <!-- ****************************************************************************************************************************************************** -->
             
     <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>
@@ -40,6 +44,7 @@
     <!-- Targets are called in the strict order of the 'depends' attribute : clean first, then DDIPreprocessing and finally ENOPreprocessing-->
         <target name="full" depends="clean, InPreprocessing, ENOPreprocessing">
         <!-- For each dereferenced file created in temp, creating the corresponding out-format -->
+        <echo message="${file}"/>
         <foreach target="in2out" param="file" inheritall="true">
             <path>
                 <fileset dir="${temp.home}" includes="*-final.tmp"/>
@@ -170,85 +175,17 @@
         <antcall target="${in-format}Preprocessing"/>
     </target>
     
-    <!-- pogues-xmlPreprocessing : Only copying temp final to the temp.home folder and renaming as final -->
-    <target name="pogues-xmlPreprocessing">
-        <copy file="${questionnaires.home}/${survey-name}/${in-format}/${survey-name}.xml" tofile="${temp.home}/${survey-name}-final.tmp"/>
-    </target>
     
-    <!-- ********************************************** ddiPreprocessing ************************************************ -->
-    <!-- This target will call 3 sub targets : dereferencing / cleaning / titling -->
-    <target name="ddiPreprocessing">
-        <!-- Dereferencing : the input DDI files (ccs, qb...) -->
-        <!-- Creates multiple files with a -dereferenced suffix in the temp folder-->
-        <antcall target="dereferencing"/>
-        <!-- For each created file (one by model), we clean. -->
-        <!-- Creating a -cleaned suffixed file -->
-        <foreach target="cleaning" param="file" inheritall="true">
-            <path>
-                <fileset dir="${temp.home}" excludes="*-dereferenced.tmp, null.tmp"/>
-            </path>
-        </foreach>
-        <!-- Then adding titles to the created file below -->
-        <!-- Creating a -final suffixed file -->
-        <foreach target="titling" param="file" inheritall="true">
-            <path>
-                <fileset dir="${temp.home}" includes="*-cleaned.tmp"/>
-            </path>
-        </foreach>
-    </target>
+    
 
-    <!-- Dereferencing -->
-    <target name="dereferencing">
-
-        <!-- Creates a dereferenced DDI for each model with the already dereferenced files and adding some variables from the VariableScheme to the upcoming result -->
-        <xslt in="${questionnaires.home}/${survey-name}/ddi/${survey-name}.xml"
-            out="${temp.home}/null.tmp" style="${xslt.home}/util/ddi/dereferencing.xsl"
-            classpath="${saxon.jar}" force="true">
-            <param name="output-folder" expression="${temp-folder}"/>
-        </xslt>
-
-    </target>
-
-    <!-- Cleaning -->
-    <!-- Creates a -cleaned suffixed file after applying the cleaning.xsl stylesheet to the input file -->
-    <target name="cleaning" description="Cleaning DDI">
-        <basename file="${file}" property="file-name" suffix=".tmp"/>
-        <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${file-name}-cleaned.tmp"
-            style="${xslt.home}/util/ddi/cleaning.xsl" classpath="${saxon.jar}" force="true"/>
-    </target>
-
-    <!-- Titling -->
-    <!-- Creates a -final suffixed file after applying the titling.xsl stylesheet to the input file -->
-    <target name="titling" description="Adding titles">
-        <basename file="${file}" property="file-name" suffix=".tmp"/>
-        <propertyregex property="output-name" input="${file-name}" regexp="-cleaned" replace=""
-            global="true"/>
-        <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${output-name}-final.tmp"
-            style="${xslt.home}/util/ddi/titling.xsl" classpath="${saxon.jar}" force="true">
-            <param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
-        </xslt>
-    </target>
 
     <!-- ********************************************** Targets OutPostProcessing ************************************************ -->
     
     <target name="OutPostProcessing">
         <antcall target="${out-format}PostProcessing"/>       
     </target>
-    <!-- **************************** frPostProcessing ************************************************************************** -->
-    <target name="frPostProcessing">
-        <!-- Adding the layer in charge of the survey's navigation by applying browsing.xsl stylesheet -->
-        <xslt in="${temp.home}/${out-format}/${form-name}/basic-form.tmp"
-            out="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
-            style="${xslt.home}/util/${out-format}/browsing.xsl" force="true" classpath="${saxon.jar}">
-            <param name="labels-folder" expression="${lang-folder}/fr"/>
-        </xslt>
-    </target>
-    
-    <!-- ddiPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
-    <target name="ddiPostProcessing">
-        <copy file="${temp.home}/${out-format}/${form-name}/basic-form.tmp" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
-    </target>
-
+   
+        
     <!--************************TARGET : CLEAN*****************************-->
     <!-- Cleaning everything : -->
     <!-- Deleting the content of the temporary folders : temp, test and simpsons -->

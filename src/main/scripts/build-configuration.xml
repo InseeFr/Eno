@@ -2,7 +2,7 @@
 <project>
     <!-- Importing the configuration files -->
     <property file="../config/config.properties"/>
-    <xmlproperty file="${root}/config/ddi2fr.xml"/>           
+    <xmlproperty file="${root}/config/${transformation-name}.xml"/>           
     
     <!-- Getting the path to the folders (that will be passed to xsl files) -->
     <dirname property="root-folder" file="${root}/dummy"/>

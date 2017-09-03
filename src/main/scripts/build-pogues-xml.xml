@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="enoPogues-xml">
+  
+    <!-- pogues-xmlPreprocessing : Only copying temp final to the temp.home folder and renaming as final -->
+    <target name="pogues-xmlPreprocessing">
+        <copy file="${questionnaires.home}/${survey-name}/${in-format}/${survey-name}.xml" tofile="${temp.home}/${survey-name}-final.tmp"/>
+    </target>
+  
+</project>
