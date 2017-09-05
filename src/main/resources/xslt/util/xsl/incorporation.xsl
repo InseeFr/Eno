@@ -70,8 +70,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="xsl:import[contains(@href,'models.xsl')]">
-        <xsl:message select="concat('debug :',$debug)"/>
+    <xsl:template match="xsl:import[contains(@href,'models.xsl')]">     
         <xsl:copy>
             <xsl:attribute name="href" select="if($debug=true()) then(concat(substring-before(@href,'.xsl'),'-debug.xsl')) else(@href)"/>
         </xsl:copy>
