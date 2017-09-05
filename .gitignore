@@ -3,6 +3,9 @@ full-with-test.bat
 target/
 lib/
 
+#Ignore generated debug-transformations
+**/models-debug.xsl
+
 # Old file structure, kept temporarily
 src/main/xslt/inputs/ddi/source.xsl
 src/main/xslt/inputs/ddi/templates.xsl
