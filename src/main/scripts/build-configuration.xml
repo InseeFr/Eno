@@ -16,8 +16,11 @@
         <fileset dir="${lib.home}" includes="**/*.jar"/>
         <pathelement location="${root-folder}/target/classes" />
     </path>
-    <!-- antcontrib tasks initialization -->
+    <!-- antcontrib tasks initialization -->    
     <taskdef name="foreach" classname="net.sf.antcontrib.logic.ForEach">
+        <classpath refid="classpath"/>
+    </taskdef>
+    <taskdef name="switch" classname="net.sf.antcontrib.logic.Switch">
         <classpath refid="classpath"/>
     </taskdef>
     <taskdef name="if" classname="net.sf.antcontrib.logic.IfTask">

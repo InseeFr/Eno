@@ -8,7 +8,22 @@
     <xsl:import href="../inputs/xml/source.xsl"/>
     <xsl:import href="../outputs/xsl/models.xsl"/>
     <xsl:import href="../lib.xsl"/>
-
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Param driving the debug mode (outputting driver-name and result of a call of each getter.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:param name="debug" select="false()" as="xs:boolean"/>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Param needed for the debug mode to retrieve namespaces for the models-debug generated.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:param name="models-uri-for-debug-mode" select="''" as="xs:string"/>
+    
+    
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>This stylesheet is used to transform a generic xml structure into xsl
@@ -106,6 +121,7 @@
             mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
+        
     </xsl:template>
 
     <xd:doc>
@@ -281,6 +297,18 @@
     <xsl:function name="enoxsl:get-parameters" as="xs:string *">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoxml:get-parameters"/>
+    </xsl:function>
+    
+    <xsl:function name="enoxsl:get-default-value">
+        <xsl:param name="parameter-name"/>
+        <xsl:choose>
+            <xsl:when test="$parameter-name = 'language'">
+                <xsl:value-of select="'fr'"/>
+            </xsl:when>
+            <xsl:when test="$parameter-name = 'index'">
+                <xsl:sequence select="0"/>
+            </xsl:when>
+        </xsl:choose>
     </xsl:function>
     
     <xd:doc>

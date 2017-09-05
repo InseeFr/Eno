@@ -13,29 +13,14 @@
     <!-- The name of the survey, conditionning the name of the input file processed. -->
     <property name="survey-name" value="simpsons"/>
     <!-- The transformation to be processed, usually named using a <in>2<out> template. -->
-    <property name="transformation-name" value="ddi2pdf"/>
+    <property name="transformation-name" value="ddi2fr"/>   
+    <!-- Enabling debug mode (debug=true) will output the name of the drivers encountered and for each an exhaustive call of the getters, instead of the normal output. -->
+    <property name="debug" value="false"/>
     <!-- ****************************************************************************************************************************************************** -->
             
     <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>
     <property file="../config/${transformation-name}.properties"/>
-    
-    
-    
-    <!--**************************************************************************************************************************-->
-
-    <!--<if>
-        <equals arg1="${Param}" arg2="pogues-xml2ddi"/>
-        <then>
-            <property name="out-format" value="ddi"/>  
-            <property name="out-extension" value="xml"/>
-            <property name="in-format" value="pogues-xml"/>
-        </then>
-        <else>
-            <property name="out-format" value="fr"/>
-            <property name="out-extension" value="xhtml"/>
-            <property name="in-format" value="ddi"/>
-        </else>
-    </if>-->
+    <!-- Enabling the debug mode will conduct to an output with only the name of the drivers encountered and a call of each getter in the driver context. -->
 
     <!--************************MAIN TARGETS*****************************-->
 
@@ -43,14 +28,25 @@
     <!-- Cleaning, preprocessing the DDI and preprocessing the generator -->
     <!-- Targets are called in the strict order of the 'depends' attribute : clean first, then DDIPreprocessing and finally ENOPreprocessing-->
         <target name="full" depends="clean, InPreprocessing, ENOPreprocessing">
-        <!-- For each dereferenced file created in temp, creating the corresponding out-format -->
-        <echo message="${file}"/>
-        <foreach target="in2out" param="file" inheritall="true">
-            <path>
-                <fileset dir="${temp.home}" includes="*-final.tmp"/>
-            </path>
-        </foreach>
         
+            
+        <!-- For each dereferenced file created in temp, creating the corresponding out-format -->        
+            <switch value="${debug}">
+                <case value="true">
+                    <foreach target="in2debug" param="file" inheritall="true">
+                        <path>
+                            <fileset dir="${temp.home}" includes="*-final.tmp"/>
+                        </path>
+                    </foreach>
+                </case>                
+                <default>
+                    <foreach target="in2out" param="file" inheritall="true">
+                        <path>
+                            <fileset dir="${temp.home}" includes="*-final.tmp"/>
+                        </path>
+                    </foreach>
+                </default>
+            </switch>                            
     </target>
 
     <target name="full-light" depends="clean, InPreprocessing">
@@ -62,7 +58,7 @@
         </foreach>
     </target>
 
-
+        
     <!--************************TARGETS TO GENERATE A SURVEY *****************************-->
 
     <target name="in2out">       
@@ -88,6 +84,22 @@
         <delete file="${survey-folder}/${out-format}/${form-name}/form/basic-form.tmp"/>
     </target>
 
+    <target name="in2debug">
+        <basename file="${file}" property="file-name" suffix=".tmp"/>
+        <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
+            global="true"/>
+        
+        <!-- Generating out-format from the in-format : basic-form.tmp using the in2out.xsl stylesheet -->
+        <xslt in="${temp.home}/${file-name}.tmp"
+            out="${root-folder}/target/${survey-name}/${form-name}/form/form-debug.${out-extension}"
+            style="${xslt.home}/transformations/${in-format}2${out-format}/${in-format}2${out-format}.xsl" force="true"
+            classpath="${saxon.jar}">
+            <param name="properties-file" expression="${root-folder}/config/${in-format}2${out-format}.xml"/>
+            <param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
+            <param name="labels-folder" expression="${lang-folder}/fr"/>
+        </xslt>
+    </target>
+
     <!--************************TARGETS : PREPROCESSING ENO*****************************-->
 
     <target name="ENOPreprocessing">
@@ -100,6 +112,7 @@
         <antcall target="fods2xsl">
             <param name="dir" value="${xslt.home}/transformations/${in-format}2${out-format}"/>
             <param name="name" value="functions"/>
+            <param name="process-debug" value="true"/>
         </antcall>
         <antcall target="fods2xsl">
             <param name="dir" value="${xslt.home}/transformations/${in-format}2${out-format}"/>
@@ -136,6 +149,7 @@
             style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
             <param name="generated-file"
                 expression="../../transformations/${in-format}2${out-format}/tree-navigation.xsl"/>
+            <param name="debug" expression="${debug}"/>            
         </xslt>
 
         <!-- Generating inputs/ddi/functions.xsl with appropriate namespaces -->
@@ -168,23 +182,35 @@
         <!-- From xml to xsl using the generator -->
         <xslt in="${temp.home}/xml.tmp" out="${dir}/${name}.xsl"
             style="${xslt.home}/transformations/xml2xsl.xsl" force="true" classpath="${saxon.jar}"/>
+        
+        <if>
+            <and>
+            <equals arg1="${debug}" arg2="true"/>
+            <equals arg1="${process-debug}" arg2="true"/>
+            </and>
+            <then>                
+                <!-- From xml to xsl using the generator -->
+                <xslt in="${temp.home}/xml.tmp" out="${xslt.home}/outputs/${out-format}/models-debug.xsl"
+                    style="${xslt.home}/transformations/xml2xsl.xsl" force="true" classpath="${saxon.jar}">
+                    <!-- debug mode param -->
+                    <param name="debug" expression="${debug}"/>
+                    <!-- needed for getting back the namespaces  -->
+                    <param name="models-uri-for-debug-mode" expression="../../outputs/${out-format}/models.xsl"/>
+                </xslt>                                
+            </then>
+            
+        </if>
     </target>
 
     <!--************************TARGETS : PREPROCESSING *****************************-->
     <target name="InPreprocessing">
         <antcall target="${in-format}Preprocessing"/>
     </target>
-    
-    
-    
-
-
-    <!-- ********************************************** Targets OutPostProcessing ************************************************ -->
-    
+   
+    <!-- ********************************************** Targets OutPostProcessing ************************************************ -->  
     <target name="OutPostProcessing">
         <antcall target="${out-format}PostProcessing"/>       
     </target>
-   
         
     <!--************************TARGET : CLEAN*****************************-->
     <!-- Cleaning everything : -->

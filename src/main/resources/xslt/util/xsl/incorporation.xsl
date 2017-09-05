@@ -21,6 +21,14 @@
     
     <xd:doc>
         <xd:desc>
+            <xd:p>The debug mode changes the models.xsl imported.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:param name="debug" select="false()"/>
+    
+    
+    <xd:doc>
+        <xd:desc>
             <xd:p>The generated xsl stylesheet is charged as a document.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -59,6 +67,13 @@
             <xsl:apply-templates select="node()"/>
             <!-- The content of the generated xsl stylesheet is copied within the existing one. -->
             <xsl:apply-templates select="$templates/xsl:stylesheet/node()"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="xsl:import[contains(@href,'models.xsl')]">
+        <xsl:message select="concat('debug :',$debug)"/>
+        <xsl:copy>
+            <xsl:attribute name="href" select="if($debug=true()) then(concat(substring-before(@href,'.xsl'),'-debug.xsl')) else(@href)"/>
         </xsl:copy>
     </xsl:template>
 
