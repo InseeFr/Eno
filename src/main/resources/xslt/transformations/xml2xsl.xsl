@@ -14,7 +14,7 @@
             <xd:p>Param driving the debug mode (outputting driver-name and result of a call of each getter.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:param name="debug" select="false()" as="xs:boolean"/>
+    <xsl:param name="debug" select="false()"/>
     
     <xd:doc>
         <xd:desc>
@@ -35,6 +35,9 @@
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
     <xsl:strip-space elements="*"/>
+
+    <!-- Failover : needed cause the dynamic casting is not occuring, depending on the lib version, between ant param and xslt. -->
+    <xsl:variable name="debug2" select="xs:boolean($debug)"/>
 
     <xd:doc>
         <xd:desc>
@@ -462,7 +465,7 @@
     </xd:doc>
     <xsl:template match="GenericElement" mode="enoxml:get-children">
         <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='Children'])"/>
-    </xsl:template>
+    </xsl:template> 
 
     <xd:doc>
         <xd:desc>

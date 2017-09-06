@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -25,6 +25,8 @@
         </xd:desc>
     </xd:doc>
     <xsl:param name="debug" select="false()"/>
+     
+    <xsl:variable name="debug2" select="xs:boolean($debug)"/>
     
     
     <xd:doc>
@@ -72,7 +74,7 @@
 
     <xsl:template match="xsl:import[contains(@href,'models.xsl')]">     
         <xsl:copy>
-            <xsl:attribute name="href" select="if($debug=true()) then(concat(substring-before(@href,'.xsl'),'-debug.xsl')) else(@href)"/>
+            <xsl:attribute name="href" select="if($debug2=true()) then(concat(substring-before(@href,'.xsl'),'-debug.xsl')) else(@href)"/>
         </xsl:copy>
     </xsl:template>
 

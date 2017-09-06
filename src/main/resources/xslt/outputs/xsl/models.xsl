@@ -28,7 +28,7 @@
             <!-- Choosing between debug-mode or standard (can't easily use template matching pattern cause it's drived by a xsl global param. -->
             <xsl:choose>
                 <!-- If debug is implemented a special stylesheet is created to output the name of the drivers encountered and test each getter on it. -->                
-                <xsl:when test="$debug">
+                <xsl:when test="$debug2"> 
 <!--                    <xsl:message select="concat('Yo : ',document($models-uri-for-debug-mode)//xsl:stylesheet/namespace::*)"/>-->                    
                     <xsl:variable name="models-sheet" select="document($models-uri-for-debug-mode)"/>
                     <xsl:copy-of select="$models-sheet/xsl:stylesheet/namespace::*"/>
