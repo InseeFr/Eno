@@ -160,11 +160,20 @@
                         <xsl:value-of select="."/>
                     </xsl:for-each>
                 </xsl:if>
-            </xsl:variable>
+            </xsl:variable>                        
             <xsl:element name="xsl:sequence">
-                <xsl:attribute name="select"
-                    select="concat(normalize-space(enoxsl:get-input-function($source-context)),'(',$function-parameters/text(),')')"
-                />
+                <xsl:variable name="input-function" select="normalize-space(enoxsl:get-input-function($source-context))"/>
+                <xsl:choose>
+                    <xsl:when test="$input-function != ''">
+                        <xsl:attribute name="select"
+                            select="concat(normalize-space(enoxsl:get-input-function($source-context)),'(',$function-parameters/text(),')')"
+                        />        
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="select"
+                            select="normalize-space(enoxsl:get-input-expression($source-context))"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:element>
         </xsl:element>
         <xsl:text>&#xA;</xsl:text>

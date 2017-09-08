@@ -115,7 +115,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template
-        match="GenericElement[DefinedElement[@name='Out_Function'] and DefinedElement[@name='In_Function']/text()]"
+        match="GenericElement[DefinedElement[@name='Out_Function'] and (DefinedElement[@name='In_Function']/text() or DefinedElement[@name='In_Expression']/text())]"
         mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
@@ -138,7 +138,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template
-        match="GenericElement[DefinedElement[@name='Out_Function'] and not(DefinedElement[@name='In_Function']/text())]"
+        match="GenericElement[DefinedElement[@name='Out_Function'] and not(DefinedElement[@name='In_Function']/text() or DefinedElement[@name='In_Expression']/text())]"
         mode="source">
         <xsl:param name="driver" tunnel="yes">
             <driver/>
@@ -282,6 +282,17 @@
     
     <xd:doc>
         <xd:desc>
+            <xd:p>Linking output function enoxsl:get-input-function to input function
+                enoxml:get-input-function.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoxsl:get-input-expression">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoxml:get-input-expression"/>
+    </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>
             <xd:p>Linking output function enoxsl:get-driver to input function
                 enoxml:get-driver.</xd:p>
         </xd:desc>
@@ -417,6 +428,15 @@
     </xd:doc>
     <xsl:template match="GenericElement" mode="enoxml:get-input-function">
         <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='In_Function'])"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Implementation of the enoxml:get-input-expression function for the GenericElement element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GenericElement" mode="enoxml:get-input-expression">
+        <xsl:value-of select="enoxml:get-value(./DefinedElement[@name='In_Expression'])"/>
     </xsl:template>
     
     <xd:doc>
