@@ -39,6 +39,7 @@
         <xd:desc>
             <xd:p>Concatenation of the instruction labels in order to create a question
                 label.</xd:p>
+            <xd:p>TODO : Deprecate this implementation. Concatenation is not the right way.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template
@@ -46,7 +47,7 @@
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]
         | d:QuestionItem[not(descendant::d:Instruction[d:InstructionName/r:String/text()='format'])
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
-        mode="enoddi:get-label">
+        mode="enoddi:get-concatened-label" priority="2">
         <xsl:element name="xhtml:p">
             <xsl:element name="xhtml:span">
                 <xsl:attribute name="class">
@@ -93,9 +94,10 @@
     <xd:doc>
         <xd:desc>
             <xd:p>Inserting the Tooltip label into the Sequence label.</xd:p>
+            <xd:p>TODO : Deprecate this implementation. Concatenation is not the right way.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:Sequence[d:InterviewerInstructionReference/d:Instruction/d:InstructionName/r:String[text()='tooltip']]" mode="enoddi:get-label" priority="2">
+    <xsl:template match="d:Sequence[d:InterviewerInstructionReference/d:Instruction/d:InstructionName/r:String[text()='tooltip']]" mode="enoddi:get-concatened-label" priority="2">
         <xsl:apply-templates select="r:Label" mode="lang-choice"/>
         <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[d:InstructionName/r:String='tooltip']">
             <xsl:element name="xhtml:span">
@@ -114,11 +116,25 @@
         </xsl:for-each>
     </xsl:template>
 
+
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For consistency, get-concatened-label is same as get-label for element with no child d:Instruction or which is not a d:QuestionItem/Grid.</xd:p>
+            </xd:desc>
+        <xd:p>TODO : Deprecate this implementation. Concatenation is not the right way.</xd:p>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-concatened-label">
+        <xsl:apply-templates select="." mode="enoddi:get-label"/>
+    </xsl:template>
+        
+
     <xd:doc>
         <xd:desc>
             <xd:p>For questions which have both a 'format' Instruction and an other Instruction which is not of 'format' type.</xd:p>
             <xd:p>The instruction is not used for the label. It will be used in the enoddi:get-format-instruction instead.</xd:p>
         </xd:desc>
+        <xd:p>TODO : Deprecate this implementation. Format instructions is not used anymore.</xd:p>
     </xd:doc>
     <xsl:template
         match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='format']
@@ -133,6 +149,7 @@
     <xd:doc>
         <xd:desc>
             <xd:p>For questions which have a 'format' Instruction.</xd:p>
+            <xd:p>TODO : Deprecate this implementation. Format instructions is not used anymore.</xd:p>            
         </xd:desc>
     </xd:doc>
     <xsl:template
