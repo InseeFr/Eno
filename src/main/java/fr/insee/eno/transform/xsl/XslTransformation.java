@@ -1,19 +1,17 @@
 package fr.insee.eno.transform.xsl;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URI;
+import fr.insee.eno.Constants;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import fr.insee.eno.Constants;
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
 
 /**
  * Main Saxon Service used to perform XSLT transformations
@@ -61,6 +59,7 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
 		//transformer.setURIResolver(new ClasspathURIResolver());
 		xslTransform(transformer, input, output);
 	}
@@ -86,6 +85,7 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
 		transformer.setParameter(XslParameters.INCORPORATION_GENERATED_FILE, generatedFileParameter.toURI());
 		xslTransform(transformer, input, output);
 	}
@@ -111,6 +111,7 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
 		transformer.setParameter(XslParameters.DEREFERENCING_OUTPUT_FOLDER, outputFolderParameter);
 		xslTransform(transformer, input, output);
 	}
@@ -135,6 +136,7 @@ public class XslTransformation {
 		logger.debug("Using the titling transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
 		transformer.setParameter(
 				XslParameters.TITLING_PARAMETERS_FILE, 
 				new URI("classpath:" + Constants.PARAMETERS_XML));
@@ -176,6 +178,7 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
 		transformer.setParameter(XslParameters.DDI2FR_CAMPAIGN, campaignParameter);
 		transformer.setParameter(XslParameters.DDI2FR_MODEL, modelParameter);
 		transformer.setParameter(XslParameters.DDI2FR_PROPERTIES_FILE, propertiesFileParameter);
@@ -189,6 +192,7 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
 		transformer.setParameter(XslParameters.DDI2FR_PROPERTIES_FILE, Constants.CONFIG_DDI2FR);
 		transformer.setParameter(XslParameters.DDI2FR_PARAMETERS_FILE, Constants.PARAMETERS);
 		transformer.setParameter(XslParameters.DDI2FR_LABELS_FOLDER, Constants.LABELS_FOLDER);
@@ -207,6 +211,7 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
 		transformer.setParameter(XslParameters.DDI2FR_LABELS_FOLDER, Constants.LABELS_FOLDER);
 		logger.debug(
 				String.format(
