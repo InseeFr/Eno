@@ -31,20 +31,27 @@ In the pdf output interface, there are two drivers for this :
 
 One needs to call explicitely these getters, inside the question body drivers where corresponding instructions must be outputted, to catch needed instructions.
 Then one needs to apply-templates on the result of these calls in `source` mode.  
-ex: `<xsl:apply-templates select="enopdf:get-after-question-title-instructions($context)" mode="source">`
+ex: 
+```xslt
+<xsl:apply-templates select="enopdf:get-after-question-title-instructions($context)" mode="source">
+```
 
 **Warning**  
 One needs to deactivate standard drivers for instructions or output interface will output instructions twice (one during the explicit getter call and one during the implicit driver mechanism).
 To deal with this issues, a simple way is using a silent driver like `noInstruction` (name is not reserved and one could choose its own, see the examples below where the name choosen is used).  
 Inside the question body, when calling recursive templates on the question child, just add the silent driver like this :  
 *models.xsl, inside the question driver body implementation*  
-`<xsl:apply-templates select="eno:child-fields($source-context)"           mode="source">
-  <xsl:with-param name="driver"                              select="eno:append-empty-element('noInstruction', .)" tunnel="yes"/>
-</xsl:apply-templates>`
+```xslt
+<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+  <xsl:with-param name="driver" select="eno:append-empty-element('noInstruction', .)" tunnel="yes"/>
+</xsl:apply-templates>
+```
 
 Then simply deactivate standard driver for instruction like this (inside models.xsl) :  
 *models.xsl, driver implementation*  
-`<xsl:template match="noInstruction//xf-output" mode="models"/>`
+```xslt
+<xsl:template match="noInstruction//xf-output" mode="models"/>
+```
 
 ### Instructions attached to Module or SubModule
 During ConctrolConstruct sequencing, there is no constraint on Instruction location and simply basing their output location on the sequence of the driver tree should be sufficient.  
