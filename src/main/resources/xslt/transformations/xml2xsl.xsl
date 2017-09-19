@@ -314,13 +314,16 @@
     </xsl:function>
     
     <xsl:function name="enoxsl:get-default-value">
-        <xsl:param name="parameter-name"/>
+        <xsl:param name="parameter-name"/>      
         <xsl:choose>
             <xsl:when test="$parameter-name = 'language'">
-                <xsl:value-of select="'fr'"/>
+                <xsl:value-of select="'''fr'''"/>
             </xsl:when>
             <xsl:when test="$parameter-name = 'index'">
                 <xsl:sequence select="0"/>
+            </xsl:when>
+            <xsl:when test="$parameter-name = 'format'">
+                <xsl:value-of select="'''#all'''"/>
             </xsl:when>
         </xsl:choose>
     </xsl:function>

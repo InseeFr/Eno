@@ -671,6 +671,11 @@
         </xsl:for-each>
     </xsl:template>
 
+    <xsl:template match="*" mode="enoddi:get-instructions-by-format">
+        <xsl:param name="format" select="'#all'" tunnel="yes"/>
+        <xsl:sequence select="d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true()) else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
+    </xsl:template>
+    
     <!--    <xd:doc>
         <xd:desc>
             <xd:p>Get the formula to calculate a Variable.</xd:p>
