@@ -21,7 +21,7 @@
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
-    
+
     <xsl:strip-space elements="*"/>
 
     <xd:doc>
@@ -32,14 +32,32 @@
     <xsl:variable name="style">
         <xsl:copy-of select="document($parameters-file)/Parameters/Title"/>
     </xsl:variable>
-    
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Where to restart counting questions :</xd:p>
+            <xd:p>sequence : template, module, submodule, group</xd:p>
+            <xd:p>filter : numbered-filter, unnumbered-filter : questions inside them don't count for following-sibling, but can be numbered or not</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="numbering-browser">
+        <xsl:choose>
+            <xsl:when test="$style/Title/Browsing">
+                <xsl:value-of select="$style/Title/Browsing"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="'unnumbered-filter'"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
     <xd:doc>
         <xd:desc>
             <xd:p>The list of sequences not to title with a number</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:variable name="number-free-seq" select="$style/Title/Sequence/NumberFreeSeq"/>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>The list of filters which are at the end of a sequence, </xd:p>
@@ -47,6 +65,59 @@
         </xd:desc>
     </xd:doc>
     <xsl:variable name="number-free-filter" select="$style/Title/Question/NotNumberedLastFilter"/>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>A virtual tree to easy question numbering for numbered filter</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="virtual-tree">
+        <xsl:if test="$numbering-browser='numbered-filter'">
+            <xsl:apply-templates select="node()[1]" mode="virtual-tree"/>
+        </xsl:if>
+    </xsl:variable>
+    
+    <xsl:template match="node() | @*" mode="virtual-tree">
+        <xsl:apply-templates select="node()[1]" mode="virtual-tree"/>
+        <xsl:apply-templates select="following-sibling::node()[1]" mode="virtual-tree"/>
+    </xsl:template>
+    <xsl:template match="d:ControlConstructReference[d:Sequence]" mode="virtual-tree">
+        <Sequence>
+            <xsl:attribute name="id" select="d:Sequence/r:ID"/>
+            <xsl:apply-templates select="node()[1]" mode="virtual-tree"/>
+        </Sequence>
+        <xsl:apply-templates select="following-sibling::node()[1]" mode="virtual-tree"/>
+    </xsl:template>
+    
+    <!-- Following-sibling IfThenElse is inside the Question if necessary -->
+    <xsl:template match="d:ControlConstructReference[d:QuestionConstruct]" mode="virtual-tree">
+        <Question>
+            <xsl:attribute name="id" select="d:QuestionConstruct/r:ID"/>
+            <xsl:apply-templates select="node()[1]" mode="virtual-tree"/>
+            <xsl:if test="following-sibling::d:ControlConstructReference[not(d:ComputationItem)][1][d:IfThenElse]
+                                                                        /following-sibling::d:ControlConstructReference[not(d:ComputationItem)]">
+                <xsl:apply-templates select="following-sibling::d:ControlConstructReference[not(d:ComputationItem)][1]" mode="virtual-tree"/>        
+            </xsl:if>
+        </Question>
+        <xsl:choose>
+            <xsl:when test="following-sibling::d:ControlConstructReference[not(d:ComputationItem)][1][d:IfThenElse]
+                /following-sibling::d:ControlConstructReference[not(d:ComputationItem)]">
+                <xsl:apply-templates select="following-sibling::d:ControlConstructReference[not(d:ComputationItem)
+                    and (not(d:IfThenElse) or not(following-sibling::d:ControlConstructReference[not(d:ComputationItem)]))][1]" mode="virtual-tree"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="following-sibling::node()[1]" mode="virtual-tree"/>    
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="d:ControlConstructReference[d:IfThenElse]" mode="virtual-tree">
+        <xsl:apply-templates select="node()[1]" mode="virtual-tree"/>
+        <xsl:if test="following-sibling::d:ControlConstructReference[not(d:ComputationItem)][1][d:IfThenElse and following-sibling::d:ControlConstructReference[not(d:ComputationItem)]]">
+            <xsl:apply-templates select="following-sibling::d:ControlConstructReference[not(d:ComputationItem)][1]" mode="virtual-tree"/>
+        </xsl:if>
+    </xsl:template>
+    
+    
 
     <xd:doc>
         <xd:desc>
@@ -78,10 +149,8 @@
         match="d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']/r:Label">
         <xsl:variable name="level" select="parent::d:Sequence/d:TypeOfSequence"/>
         <xsl:variable name="seq-style" select="$style/Title/Sequence/Level[@name=$level]"/>
-        <xsl:variable name="parent-level"
-            select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$level]/@name"/>
-        <xsl:variable name="gd-parent-level"
-            select="$style/Title/Sequence/Level[following-sibling::Level[2]/@name=$level]/@name"/>
+        <xsl:variable name="parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$level]/@name"/>
+        <xsl:variable name="gd-parent-level" select="$style/Title/Sequence/Level[following-sibling::Level[2]/@name=$level]/@name"/>
 
         <xsl:variable name="number">
             <xsl:apply-templates select="parent::d:Sequence" mode="calculate-number"/>
@@ -117,8 +186,7 @@
         <xsl:variable name="question-seq-level">
             <xsl:choose>
                 <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='group']">group</xsl:when>
-                <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='submodule']"
-                    >submodule</xsl:when>
+                <xsl:when test="ancestor::d:Sequence[d:TypeOfSequence='submodule']">submodule</xsl:when>
                 <xsl:otherwise>module</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -137,15 +205,51 @@
         </xsl:variable>
 
         <xsl:variable name="number">
-            <xsl:if
-                test="enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
-                <!-- Counting the questions that aren't subQuestions -->
-                <xsl:number
-                    count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))=0]"
-                    level="any" format="{$styleQuest/StyleNumQuest}"
-                    from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"
-                />
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$numbering-browser='unnumbered-filter'">
+                    <xsl:if
+                        test="enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
+                        <!-- Counting the questions that aren't subQuestions -->
+                        <xsl:number
+                            count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))=0]"
+                            level="any" format="{$styleQuest/StyleNumQuest}"
+                            from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"
+                        />
+                    </xsl:if>
+                </xsl:when>
+                <xsl:when test="$numbering-browser='numbered-filter' and enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
+                    <!-- Counting the questions that aren't subQuestions -->
+                    <xsl:number
+                        count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))=0]"
+                        level="any" format="{$styleQuest/StyleNumQuest}"
+                        from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"
+                    />
+                </xsl:when>
+                <xsl:when test="$numbering-browser='numbered-filter' and enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
+                    <!-- Counting the subQuestions -->
+                    <xsl:number
+                        count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))&gt;0]"
+                        level="any" format="{$styleQuest/StyleNumQuest}"
+                        from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"
+                    />
+                </xsl:when>
+                <xsl:otherwise>
+                    <!--<xsl:variable name="starting-sequence" select="$style/Title/Sequence/Level[following-sibling::Level/@name=$question-seq-level or @name=$question-seq-level]
+                                                                                              /@name">
+                    </xsl:variable>
+                    <!-\- Counting all questions from the Sequence which TypeOfSequence is numbering-browser -\->
+                    <xsl:number
+                        count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid')]"
+                        level="any" format="{$styleQuest/StyleNumQuest}"
+                        from="d:ControlConstructReference[d:Sequence[index-of($starting-sequence,d:TypeOfSequence)&gt;0]]"
+                    />-->
+                    <xsl:number
+                        count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid')]"
+                        level="any" format="{$styleQuest/StyleNumQuest}"
+                        from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$numbering-browser]]"
+                    />
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
 
         <!--Question number by concatenation: PreQuest + (($parent-number + PostNumParentQuest) + $number + PostNumQuest)-->
@@ -178,11 +282,13 @@
             select="$style/Title/Sequence/Level[following-sibling::Level[1]/@name=$level]/@name"/>
 
         <xsl:variable name="number">
-            <xsl:if test="not(index-of($number-free-seq,r:ID)>0)">
-                <xsl:number
-                    count="d:Sequence[d:TypeOfSequence/text()=$level and not(index-of($number-free-seq,r:ID)>0)]"
-                    level="any" format="{$seq-style/StyleNumSeq}"
-                    from="d:Sequence[d:TypeOfSequence/text()=$parent-level]"/>
+            <xsl:if test="$seq-style/StyleNumSeq">
+                <xsl:if test="not(index-of($number-free-seq,r:ID)>0)">
+                    <xsl:number
+                        count="d:Sequence[d:TypeOfSequence/text()=$level and not(index-of($number-free-seq,r:ID)>0)]"
+                        level="any" format="{$seq-style/StyleNumSeq}"
+                        from="d:Sequence[d:TypeOfSequence/text()=$parent-level]"/>
+                </xsl:if>                
             </xsl:if>
         </xsl:variable>
         <xsl:variable name="parent-number">
