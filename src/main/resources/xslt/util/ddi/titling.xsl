@@ -65,7 +65,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:variable name="number-free-filter" select="$style/Title/Question/NotNumberedLastFilter"/>
-
+<!--
     <xd:doc>
         <xd:desc>
             <xd:p>A virtual tree to easy question numbering for numbered filter</xd:p>
@@ -89,7 +89,7 @@
         <xsl:apply-templates select="following-sibling::node()[1]" mode="virtual-tree"/>
     </xsl:template>
     
-    <!-- Following-sibling IfThenElse is inside the Question if necessary -->
+    <!-\- Following-sibling IfThenElse is inside the Question if necessary -\->
     <xsl:template match="d:ControlConstructReference[d:QuestionConstruct]" mode="virtual-tree">
         <Question>
             <xsl:attribute name="id" select="d:QuestionConstruct/r:ID"/>
@@ -116,7 +116,7 @@
             <xsl:apply-templates select="following-sibling::d:ControlConstructReference[not(d:ComputationItem)][1]" mode="virtual-tree"/>
         </xsl:if>
     </xsl:template>
-    
+   --> 
     
 
     <xd:doc>
@@ -225,24 +225,11 @@
                         from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"
                     />
                 </xsl:when>
-                <xsl:when test="$numbering-browser='numbered-filter' and enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
+                <xsl:when test="$numbering-browser='numbered-filter' and enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)&gt;0">
                     <!-- Counting the subQuestions -->
-                    <xsl:number
-                        count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid') and (enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level))&gt;0]"
-                        level="any" format="{$styleQuest/StyleNumQuest}"
-                        from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$question-seq-level]]"
-                    />
+                    <!-- Doesn't work : trying to use a virtual tree ; started, not finished, and not prioritary -->
                 </xsl:when>
                 <xsl:otherwise>
-                    <!--<xsl:variable name="starting-sequence" select="$style/Title/Sequence/Level[following-sibling::Level/@name=$question-seq-level or @name=$question-seq-level]
-                                                                                              /@name">
-                    </xsl:variable>
-                    <!-\- Counting all questions from the Sequence which TypeOfSequence is numbering-browser -\->
-                    <xsl:number
-                        count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid')]"
-                        level="any" format="{$styleQuest/StyleNumQuest}"
-                        from="d:ControlConstructReference[d:Sequence[index-of($starting-sequence,d:TypeOfSequence)&gt;0]]"
-                    />-->
                     <xsl:number
                         count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid')]"
                         level="any" format="{$styleQuest/StyleNumQuest}"
