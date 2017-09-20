@@ -188,150 +188,108 @@
             <xsl:apply-templates select="@*"/>
             <Beginning>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Beginning"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Beginning"/>
                 </label>
             </Beginning>
             <GenericBeginningText>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GenericBeginningText"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GenericBeginningText"/>
                 </label>
             </GenericBeginningText>
             <xsl:apply-templates select="node()"/>
             <End>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/End"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/End"/>
                 </label>
             </End>
             <GenericEndText>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GenericEndText"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GenericEndText"/>
                 </label>
             </GenericEndText>
             <Progress>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Progress"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Progress"/>
                 </label>
             </Progress>
             <Start>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Start"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Start"/>
                 </label>
             </Start>
             <Previous>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Previous"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Previous"/>
                 </label>
             </Previous>
             <Next>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Next"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Next"/>
                 </label>
             </Next>
             <Send>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Send"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Send"/>
                 </label>
             </Send>
             <ConfirmationMessage>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ConfirmationMessage"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ConfirmationMessage"/>
                 </label>
             </ConfirmationMessage>
             <FatalError>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/FatalError"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/FatalError"/>
                 </label>
             </FatalError>
             <Correct>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Correct"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Correct"/>
                 </label>
             </Correct>
             <Continue>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Continue"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Continue"/>
                 </label>
             </Continue>
             <GoBack>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoBack"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoBack"/>
                 </label>
             </GoBack>
             <GoToFirstPage>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoToFirstPage"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoToFirstPage"/>
                 </label>
             </GoToFirstPage>
             <WelcomeBack>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBack"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBack"/>
                 </label>
             </WelcomeBack>
             <Warning>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Warning"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Warning"/>
                 </label>
             </Warning>
             <Error>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Error"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Error"/>
                 </label>
             </Error>
             <WelcomeBackText>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBackText"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBackText"/>
                 </label>
             </WelcomeBackText>
             <WarningText>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WarningText"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WarningText"/>
                 </label>
             </WarningText>
             <ErrorText>
                 <label>
-                    <xsl:value-of
-                        select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ErrorText"
-                    />
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ErrorText"/>
                 </label>
             </ErrorText>
         </xsl:copy>
@@ -367,8 +325,7 @@
                     <Pages>
                         <Beginning/>
                         <!-- One element is created for each page -->
-                        <xsl:for-each
-                            select="//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and not(name()='Util') and child::*]">
+                        <xsl:for-each select="//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and not(name()='Util') and child::*]">
                             <xsl:element name="{name()}"/>
                         </xsl:for-each>
                         <End/>
@@ -393,15 +350,15 @@
                     relevant="instance('fr-form-instance')/Util/CurrentSection='1'" ref="Start"/>
                 <!-- The previous button does not appear on first page and after the last page -->
                 <xf:bind id="previous-bind"
-                    relevant="{concat('not(instance(''fr-form-instance'')/Util/CurrentSection=''1'' or number(instance(''fr-form-instance'')/Util/CurrentSection)&gt;'
-                    ,$inner-questionnaire-pages-or-repeats-number+2
-                    ,')')}"
+                    relevant="{concat('not(instance(''fr-form-instance'')/Util/CurrentSection=''1'' or number(instance(''fr-form-instance'')/Util/CurrentSection)&gt;',
+                                      $inner-questionnaire-pages-or-repeats-number+2,
+                                      ')')}"
                     ref="Previous"/>
                 <!-- The next button does not appear on first and last pages -->
                 <xf:bind id="next-bind"
                     relevant="{concat('not(instance(''fr-form-instance'')/Util/CurrentSection=''1'' or number(instance(''fr-form-instance'')/Util/CurrentSection)&gt;',
-                    $inner-questionnaire-pages-or-repeats-number+1
-                    ,')')}"
+                                      $inner-questionnaire-pages-or-repeats-number+1,
+                                      ')')}"
                     ref="Next"/>
                 <xf:bind id="send-bind" ref="Send"
                     relevant="instance('fr-form-instance')/Util/Send='false'"/>
@@ -415,9 +372,7 @@
                             <xsl:for-each select="//fr:body/xf:repeat">
                                 <xsl:variable name="group-name" select="@id"/>
                                 <xsl:variable name="group-pages-number" select="count(fr:section)"/>
-                                <xsl:value-of
-                                    select="concat('+count(instance(''fr-form-instance'')/',$group-name,')*',$group-pages-number)"
-                                />
+                                <xsl:value-of select="concat('+count(instance(''fr-form-instance'')/',$group-name,')*',$group-pages-number)"/>
                             </xsl:for-each>
                         </xsl:variable>
                         <!-- The number of repeats is removed from the number pages because it is counted in the total number of pages instead -->
@@ -427,21 +382,18 @@
                             />
                         </xsl:variable>
 
+                        <xsl:value-of select="'if (number(instance(''fr-form-instance'')/Util/CurrentSection)=1) then ''0'' '"/>
                         <xsl:value-of
-                            select="'if (number(instance(''fr-form-instance'')/Util/CurrentSection)=1) then ''0'' '"/>
-                        <xsl:value-of
-                            select="concat('else (if (number(instance(''fr-form-instance'')/Util/CurrentSection)&gt;'
-                            ,$inner-questionnaire-pages-or-repeats-number+1,
-                            ') then ''100''')"/>
+                            select="concat('else (if (number(instance(''fr-form-instance'')/Util/CurrentSection)&gt;',
+                                           $inner-questionnaire-pages-or-repeats-number+1,
+                                           ') then ''100''')"/>
                         <xsl:for-each select="//fr:body/xf:repeat">
                             <xsl:variable name="occurrence-position"
                                 select="count(//fr:body/xf:repeat/preceding-sibling::fr:section)+1"/>
                             <xsl:variable name="group-name" select="@id"/>
                             <xsl:variable name="previous-group-pages-count">
-                                <xsl:for-each
-                                    select="//fr:body/xf:repeat[following-sibling::xf:repeat/@id=$group-name]">
-                                    <xsl:variable name="previous-group-pages-number"
-                                        select="count(fr:section)"/>
+                                <xsl:for-each select="//fr:body/xf:repeat[following-sibling::xf:repeat/@id=$group-name]">
+                                    <xsl:variable name="previous-group-pages-number" select="count(fr:section)"/>
                                     <xsl:variable name="previous-group-name" select="@id"/>
                                     <xsl:value-of
                                         select="concat('+(count(instance(''fr-form-instance'')/',$previous-group-name,')*',$previous-group-pages-number,'-1)')"
@@ -450,25 +402,19 @@
                             </xsl:variable>
                             <xsl:variable name="group-pages-number" select="count(fr:section)"/>
 
-                            <xsl:value-of
-                                select="concat(' else (if (number(instance(''fr-form-instance'')/Util/CurrentSection) &lt;',$occurrence-position,')')"/>
-                            <xsl:value-of
-                                select="concat(' then round((number(instance(''fr-form-instance'')/Util/CurrentSection)-2',$previous-group-pages-count,')')"/>
+                            <xsl:value-of select="concat(' else (if (number(instance(''fr-form-instance'')/Util/CurrentSection) &lt;',$occurrence-position,')')"/>
+                            <xsl:value-of select="concat(' then round((number(instance(''fr-form-instance'')/Util/CurrentSection)-2',$previous-group-pages-count,')')"/>
                             <xsl:value-of select="concat(' div ',$denominator,'*100)')"/>
-                            <xsl:value-of
-                                select="concat(' else (if (instance(''fr-form-instance'')/Util/CurrentSection =',$occurrence-position,')')"/>
+                            <xsl:value-of select="concat(' else (if (instance(''fr-form-instance'')/Util/CurrentSection =',$occurrence-position,')')"/>
                             <!-- pages due to sections previous from the repeat + pages due to previous occurrences + pages due to previous sections in the current occurrence -->
-                            <xsl:value-of
-                                select="concat(' then round((',$occurrence-position,'-2',$previous-group-pages-count)"/>
-                            <xsl:value-of
-                                select="concat('+(number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$group-name,'''])-1)*',$group-pages-number)"/>
-                            <xsl:value-of
-                                select="'+count(instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]/preceding-sibling::*))'"/>
+                            <xsl:value-of select="concat(' then round((',$occurrence-position,'-2',$previous-group-pages-count)"/>
+                            <xsl:value-of select="concat('+(number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$group-name,'''])-1)*',$group-pages-number)"/>
+                            <xsl:value-of select="'+count(instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]/preceding-sibling::*))'"/>
                             <xsl:value-of select="concat(' div ',$denominator,'*100)')"/>
                         </xsl:for-each>
-                        <xsl:value-of
-                            select="concat(' else round((number(instance(''fr-form-instance'')/Util/CurrentSection) - 2'
-                            ,$total-group-pages-count,')')"/>
+                        <xsl:value-of select="concat(' else round((number(instance(''fr-form-instance'')/Util/CurrentSection) - 2',
+                                                     $total-group-pages-count,
+                                                     ')')"/>
                         <xsl:value-of select="concat(' div ',$denominator,'*100))')"/>
                         <!-- if ends -->
                         <xsl:for-each select="//fr:body/xf:repeat">
@@ -478,43 +424,35 @@
                 </xf:bind>
                 <xf:bind id="progress-bind" ref="Progress"/>
                 <xf:bind id="page-top-bind" ref="PageTop"/>
-                <xf:bind id="confirmation-message-bind" ref="ConfirmationMessage"
-                    name="confirmation-message"
+                <xf:bind id="confirmation-message-bind" ref="ConfirmationMessage" name="confirmation-message"
                     relevant="instance('fr-form-instance')/Util/Send='true'"/>
                 <xf:bind id="pages-bind" ref="Pages">
-                    <xsl:apply-templates
-                        select="//xf:instance[@id='fr-form-instance']/form/*[child::*]"
-                        mode="page-bind"/>
+                    <xsl:apply-templates select="//xf:instance[@id='fr-form-instance']/form/*[child::*]" mode="page-bind"/>
                 </xf:bind>
             </xf:bind>
 
             <!--  Save submission -->
             <xsl:comment>You can add a resource attribute for the save submission by processing the result with your own xslt.</xsl:comment>
-            <xf:submission id="save" method="post" ref="instance('fr-form-instance')" replace="none"
-                relevant="false">
+            <xf:submission id="save" method="post" ref="instance('fr-form-instance')" replace="none" relevant="false">
                 <xf:action ev:event="xforms-submit-error">
                     <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
                 </xf:action>
                 <xf:action ev:event="xforms-submit-done">
-                    <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override"
-                        >true</xf:setvalue>
+                    <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
                 </xf:action>
             </xf:submission>
 
             <!-- Send/Validate submission (final) -->
             <xsl:comment>You can add a resource attribute for the submit submission by processing the result with your own xslt.</xsl:comment>
-            <xf:submission id="submit" method="post" ref="instance('fr-form-instance')"
-                replace="none" relevant="false">
+            <xf:submission id="submit" method="post" ref="instance('fr-form-instance')" replace="none" relevant="false">
                 <!-- If somehow it crashes, we register the survey as not submitted and show an error dialog -->
                 <xf:action ev:event="xforms-submit-error">
-                    <xf:setvalue ref="instance('fr-form-instance')/Util/Send"
-                        value="string('false')"/>
+                    <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('false')"/>
                     <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
                 </xf:action>
                 <xf:action ev:event="xforms-submit-done">
                     <!-- This helps to avoid native Orbeon alert messages when wanting to leave the survey even thought the datas are saved. -->
-                    <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override"
-                        >true</xf:setvalue>
+                    <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
                 </xf:action>
             </xf:submission>
             
@@ -548,20 +486,17 @@
                     <xsl:variable name="loop-name" select="@id"/>
                     <xf:action>
                         <xsl:attribute name="if">
-                            <xsl:value-of
-                                select="concat('instance(''fr-form-instance'')/Util/CurrentSection=''',$section-position,'''')"
-                            />
+                            <xsl:value-of select="concat('instance(''fr-form-instance'')/Util/CurrentSection=''',$section-position,'''')"/>
                         </xsl:attribute>
                         <xf:action>
                             <xsl:attribute name="iterate"
                                 select="concat('instance(''fr-form-instance'')/',$loop-name,
-                                '[count(preceding-sibling::',$loop-name,
-                                ')+1=number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$loop-name,
-                                '''])]/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]//*')"/>
+                                               '[count(preceding-sibling::',$loop-name,
+                                               ')+1=number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$loop-name,
+                                               '''])]/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]//*')"/>
                             <xf:dispatch name="DOMFocusOut">
                                 <xsl:attribute name="target">
-                                    <xsl:value-of select="'{concat(context()/name(),''-control'')}'"
-                                    />
+                                    <xsl:value-of select="'{concat(context()/name(),''-control'')}'"/>
                                 </xsl:attribute>
                             </xf:dispatch>
                         </xf:action>
@@ -583,8 +518,7 @@
                     <!-- Displaying the dialog window that correspond to an error -->
                     <xxf:show ev:event="DOMActivate" dialog="error"/>
                     <!-- And we don't change page -->
-                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
-                        value="string('true')"/>
+                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                 </xf:action>
                 <!-- The same for loops of pages -->
                 <xsl:for-each select="//fr:body/xf:repeat">
@@ -594,21 +528,18 @@
                     <xsl:variable name="loop-name" select="@id"/>
                     <xf:action>
                         <xsl:attribute name="if">
-                            <xsl:value-of
-                                select="concat('instance(''fr-form-instance'')/Util/CurrentSection=''',$section-position,'''')"
-                            />
+                            <xsl:value-of select="concat('instance(''fr-form-instance'')/Util/CurrentSection=''',$section-position,'''')"/>
                         </xsl:attribute>
                         <xf:action>
                             <xsl:attribute name="if"
-                                select="concat('instance(''fr-form-util'')/PageChangeDone=''false''
-                                and not(xxf:valid(instance(''fr-form-instance'')/',$loop-name,
-                                '[count(preceding-sibling::',$loop-name,
-                                ')+1=number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$loop-name,
-                                '''])]/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName],true(),true()))')"/>
+                                select="concat('instance(''fr-form-util'')/PageChangeDone=''false'' and not(xxf:valid(instance(''fr-form-instance'')/',
+                                               $loop-name,
+                                               '[count(preceding-sibling::',$loop-name,
+                                               ')+1=number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$loop-name,
+                                               '''])]/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName],true(),true()))')"/>
                             <xxf:show ev:event="DOMActivate" dialog="error"/>
                             <!-- And we don't change page -->
-                            <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
-                                value="string('true')"/>
+                            <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                         </xf:action>
                     </xf:action>
                 </xsl:for-each>
@@ -697,16 +628,14 @@
                     <!-- Not handled : loop whose all elements are hidden -->
                     <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
                         value="{string('count(instance(''fr-form-util'')/Pages/*[position()=instance(''fr-form-instance'')/Util/CurrentSection]/following-sibling::*[not(text()=''false'')][1]/preceding-sibling::*)+1')}"/>
-                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
-                        value="string('true')"/>
+                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                 </xf:action>
                 <xf:action
                     if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='-1'">
                     <!-- Non handled : loop whose all elements are hidden -->
                     <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
                         value="{string('count(instance(''fr-form-util'')/Pages/*[position()=instance(''fr-form-instance'')/Util/CurrentSection]/preceding-sibling::*[not(text()=''false'')][1]/preceding-sibling::*)+1')}"/>
-                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
-                        value="string('true')"/>
+                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                 </xf:action>
 
                 <!-- Saving the time when the saving happened -->
@@ -757,16 +686,17 @@
                         <xsl:text>(</xsl:text>
                         <xsl:for-each select="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
                             <xsl:value-of select="concat('not(',
-                                replace(replace(@relevant,'//','instance(''fr-form-instance'')//'),
-                                '\]instance\(''fr-form-instance''\)',']')
-                                ,')')"/>
+                                                         replace(replace(@relevant,'//','instance(''fr-form-instance'')//'),
+                                                                 '\]instance\(''fr-form-instance''\)',
+                                                                 ']'),
+                                                         ')')"/>
                             <xsl:text>) or (</xsl:text>
                         </xsl:for-each>
                     </xsl:if>
                     <xsl:value-of
                         select="replace(replace(@value,'//','instance(''fr-form-instance'')//'),
-                        '\]instance\(''fr-form-instance''\)',']')"
-                    />
+                                        '\]instance\(''fr-form-instance''\)',
+                                        ']')"/>
                     <xsl:if test="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
                         <xsl:text>)</xsl:text>
                     </xsl:if>
@@ -970,8 +900,7 @@
                             <xsl:value-of select="'{instance(''fr-form-util'')/ProgressPercent}'"/>
                         </xsl:attribute>
                     </xhtml:progress>
-                    <xf:output id="progress-percent" ref="instance('fr-form-util')/ProgressPercent"
-                    /> %</xhtml:span>
+                    <xf:output id="progress-percent" ref="instance('fr-form-util')/ProgressPercent"/> %</xhtml:span>
             </xhtml:div>
 
             <xsl:apply-templates select="*[not(name()='fr:section') and not(name()='xf:repeat')]"/>
@@ -981,8 +910,7 @@
                     <fr:section id="beginning-control" bind="beginning-bind" name="beginning">
                         <xf:label ref="$form-resources/Beginning/label"/>
                         <xhtml:div class="center">
-                            <xf:output id="generic-beginning-text-control"
-                                bind="generic-beginning-text-bind">
+                            <xf:output id="generic-beginning-text-control" bind="generic-beginning-text-bind">
                                 <xf:label ref="$form-resources/GenericBeginningText/label">
                                     <xsl:attribute name="mediatype">text/html</xsl:attribute>
                                 </xf:label>
@@ -1009,9 +937,7 @@
                             </xf:trigger>
                             <!-- When submitted, this message appears -->
                             <xf:output id="confirmation-message" bind="confirmation-message-bind">
-                                <xf:label
-                                    ref="concat($form-resources/ConfirmationMessage/label,' ',instance('fr-form-instance')/Util/DateTime)"
-                                />
+                                <xf:label ref="concat($form-resources/ConfirmationMessage/label,' ',instance('fr-form-instance')/Util/DateTime)"/>
                             </xf:output>
                         </xhtml:div>
                     </fr:section>
@@ -1060,8 +986,7 @@
                     <xf:label ref="$form-resources/GoToFirstPage/label"/>
                     <xf:action ev:event="DOMActivate">
                         <xxf:hide dialog="welcome-back"/>
-                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
-                            value="'1'"/>
+                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="'1'"/>
                         <xf:toggle case="{$choice}"/>
                     </xf:action>
                 </xf:trigger>
