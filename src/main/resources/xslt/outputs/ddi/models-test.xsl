@@ -22,6 +22,7 @@
         <get-citation><xsl:value-of select="enoddi32:get-citation(.)"/></get-citation>
         <get-agency><xsl:value-of select="enoddi32:get-agency(.)"/></get-agency>
         <get-id><xsl:value-of select="concat('INSEE-', enoddi32:get-id(.))"/></get-id>
+        <get-parent-id><xsl:value-of select="enoddi32:get-parent-id(.)"/></get-parent-id>
         <get-lang><xsl:value-of select="enoddi32:get-lang(.)"/></get-lang>
         <get-name><xsl:value-of select="enoddi32:get-name(.)"/></get-name>
         <get-text><xsl:value-of select="enoddi32:get-text(.)"/></get-text>
