@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"/>
+	<link href="css/qg-guide.css" rel="stylesheet"/>
+    <title>Developer Guide - Create a new output format</title>
+  </head>
+  <body>
+	<h1 class="general-title">Developer Guide - Create a new output format</h1>
+    <p>Purpose of the document: Describe how to create a new output format for Eno.</p>
+    <p>Creation and update</p>
+    <table>
+      <tbody>
+        <tr class="odd">
+          <td>Version</td>
+          <td>Date</td>
+          <td>Contributors</td>
+          <td>Purpose of the update</td>
+        </tr>
+        <tr class="even">
+          <td>0.1</td>
+          <td>22/07/2017</td>
+          <td>Franck Cotton</td>
+          <td>Creation</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Status</p>
+
+    <h1 id="general-overview">General overview</h1>
+    <p>This guide shows how to create a new output format for Eno. Here we take the example of a format referred to as 'odt'.</p>
+
+	<h2>Initialize the project</h2>
+	<ul>
+		<li><p>clone Eno repository and create development branch</p></li>
+		<li><p>create an Oxygen project and import the Eno folder</p></li>
+		<li><p>create an Eno/lib folder according to instructions on the Github repository main page. if Saxon Jar is not named saxon9he.jar, change Eno/src/main/config/config.properties accordingly (or better: rename the Saxon Jar).</p></li>
+	</ul>
+
+	<h2>Create the basic file structure</h2>
+	<ul>
+		<li><p>create a new file Eno/src/main/config/ddi2odt.properties by copying sibling file, change properties for new format (e.g. out-format=odt, out-extension=fodt)</p></li>
+		<li><p>create new file Eno/config/ddi2odt.xml (copy existing file)</p></li>
+		<li><p>create new output folder Eno/src/main/resources/xslt/outputs/odt</p></li>
+		<li><p>create a models.xsl file in that folder (can be copied from a sibling folder)</p></li>
+		<li><p>create new output folder Eno/src/main/resources/xslt/transformations</p></li>
+		<li><p>copy the content of a sibling folder, and keep only ddi2odt.xsl (renamed from ddi2xxx.xsl), drivers.fods, functions.fods, tree-navigation.fods. <strong>Question on ddi2xxx-treedriver.xsl: should it also be kept?</strong></p></li>
+		<li><p>create new file Eno/src/main/scripts/ddi2odt.xml (copy existing file); change only project name (e.g. enoPdf -> enoOdt) at this stage</p></li>
+	</ul>
+
+	<h2>Run the non-regession test</h2>
+    <p>in src/main/scripts/build-non-regression.xml, add</p>
+	<textarea class="xml" rows="1" cols="200" readonly="true">
+<import file="build-odt.xml"/>
+	</textarea>
+
+	<p>Change</p>
+	<textarea class="xml" rows="2" cols="200" readonly="true">
+<property name="transformation-name" value="ddi2xxx"/> to
+<property name="transformation-name" value="ddi2odt"/>
+	</textarea>
+	<p>Run the build script</p>
+  </body>
+</html>
