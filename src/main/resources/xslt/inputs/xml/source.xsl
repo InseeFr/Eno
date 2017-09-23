@@ -5,8 +5,13 @@
 
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p>A library of getter functions for a generic xml structure with their
+            <xd:p>A library of getter functions for a generic xml structure (see fods2xml.xsl for the format definition) with their
                 implementations for different elements.</xd:p>
+            <xd:p>inGetters implemented :
+                <xd:ul>
+                    <xd:li>enoxml:get-element-name : getting the @name value of a DefinedElement</xd:li>
+                    <xd:li>enoxml:get-value : getting the content of a DefinedElement</xd:li>
+                </xd:ul></xd:p>
         </xd:desc>
     </xd:doc>
 
