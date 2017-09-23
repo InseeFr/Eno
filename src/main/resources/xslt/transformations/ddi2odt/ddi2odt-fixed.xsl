@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
-    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
+    xmlns:enoodt="http://xml.insee.fr/apps/eno/out/odt"
     xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
     xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
@@ -51,7 +51,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:variable name="labels-resource">
-        <xsl:sequence select="eno:build-labels-resource($labels-folder,enofr:get-form-languages(//d:Sequence[d:TypeOfSequence/text()='template']))"/>
+        <xsl:sequence select="eno:build-labels-resource($labels-folder,enoodt:get-form-languages(//d:Sequence[d:TypeOfSequence/text()='template']))"/>
     </xsl:variable>
 
     <xd:doc>
@@ -78,7 +78,7 @@
             <xd:p>It is created by calling the static text and making it dynamic.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enofr:get-calculate-text">
+    <xsl:function name="enoodt:get-calculate-text">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language" as="item()"/>
         <xsl:param name="text-type"/>
@@ -189,7 +189,7 @@
             <xd:p>It uses different DDI functions to do this job.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enofr:get-hint">
+    <xsl:function name="enoodt:get-hint">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
         <!-- We look for an instruction of 'Format' type -->
@@ -231,7 +231,7 @@
             <xd:p>It uses different DDI functions to do this job.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enofr:get-alert">
+    <xsl:function name="enoodt:get-alert">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
         <!-- We look for a 'message' -->
@@ -321,7 +321,7 @@
             <xd:p>If not, it will get the languages defined in the DDI input.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enofr:get-form-languages">
+    <xsl:function name="enoodt:get-form-languages">
         <xsl:param name="context" as="item()"/>
         <xsl:choose>
             <xsl:when test="$parameters/Parameters/Languages">
