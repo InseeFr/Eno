@@ -9,33 +9,33 @@ It will be directly imported by the final transformation produced by the ENO con
 ## XSLT syntax and design principles of models.xsl
 * Templates from models.xsl will be applied an a 'driver-tree'
 
-   Then all match attribute value should be valid Xpath on this 'driver tree', often simple driver-name.
+   Then all match attribute value should be valid XPath on this 'driver tree', often simple driver-name.
    ```xslt
    <xslt:template match="driver-name"...
    ```   
-* Each template must be in "source" mode.
+* Each template must be in "model" mode.
    
    ```xslt   
-   <xslt:template match="driver-name" mode="source">
+   <xslt:template match="driver-name" mode="model">
    ```
-* Each template should have a 'source-context' param declaration with tunnel mode on
+* Each template should have a 'source-context' parameter declaration with tunnel mode on
 
-   As the models stylesheet is applied on a driver tree, this param permits to retrieve the real input tree in the context of the template.
+   As the models stylesheet is applied on a driver tree, this parameter permits to retrieve the real input tree in the context of the template.
    ```xslt   
-   <xslt:template match="driver-name" mode="source">
+   <xslt:template match="driver-name" mode="model">
       <xsl:param name="source-context" as="item()" tunnel="yes"/>
    ```
-* Getting back to the input tree iteration is done by applying templates on the source-context param through the `eno:child-fields(input-tree)` xpath function
+* Getting back to the input tree iteration is done by applying templates on the source-context parameter through the `eno:child-fields(input-tree)` XPath function
 
-   The `eno:child-fields(input-tree)` xpath function offers tree navigation overwrite mechanisme driven by the navigation-tree.fods sheet.
+   The `eno:child-fields(input-tree)` XPath function offers tree navigation overwrite mechanism driven by the navigation-tree.fods sheet.
    ```xslt   
    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
    </xsl:apply-templates>  
    ```
-   Note the use of the param named 'driver' to keep the driver tree, tunnel mode must be on for this param too.
+   Note the use of the parameter named 'driver' to keep the driver tree, tunnel mode must be on for this parameter too.
 
-* Adding new driver to the driver tree is done through the Xpath function `eno:append-empty-element('Driver-name', driver-tree)` during the callback to the input tree
+* Adding new driver to the driver tree is done through the XPath function `eno:append-empty-element('Driver-name', driver-tree)` during the callback to the input tree
 
    ```xslt   
    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -43,5 +43,5 @@ It will be directly imported by the final transformation produced by the ENO con
    </xsl:apply-templates>  
    ```
    This offers mechanism to modify the matching context for the next appended driver.
-   In this example, the next appended driver will match `Instance/*` Xpath over `*`. Thus, one could have several templates for the same driver depending of the driver's Xpath context (ie : being or not child of an Instance driver in this example).
+   In this example, the next appended driver will match `Instance/*` XPath over `*`. Thus, one could have several templates for the same driver depending of the driver's XPath context (ie: being or not child of an Instance driver in this example).
 
