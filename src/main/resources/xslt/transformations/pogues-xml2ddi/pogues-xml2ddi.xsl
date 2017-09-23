@@ -60,7 +60,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A data to be colected with all it's implementation</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Response" mode="source">
@@ -74,7 +74,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>An instuction from the interviewer</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Declaration" mode="source">
@@ -87,7 +87,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A list a categories to be called in questions</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:CodeList" mode="source">
@@ -100,7 +100,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A refernce calling a CodeList</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:CodeListReference" mode="source">
@@ -114,7 +114,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A category, generaly stored in CodeLists</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Code" mode="source">
@@ -127,7 +127,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>The simplest question with a type of data</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='SIMPLE' ]"
@@ -142,7 +142,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A question with a choice to be made between categories or elementsof a CodeList</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='SINGLE_CHOICE' ]"
@@ -157,7 +157,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A question with multiple choices to be made between categories or elements of CodeLists</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='MULTIPLE_CHOICE' ]"
@@ -172,7 +172,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A question table with each cell representing an answer</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='TABLE' ]"
@@ -186,7 +186,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A sequence that can contains other sequenses or questions</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='SequenceType']" mode="source">
@@ -400,7 +400,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A specific sequence construct that can hide it's childs</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:IfThenElse" mode="source">
@@ -413,7 +413,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>An information about the structure of the answers of a complex question</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:ResponseStructure" mode="source">
@@ -426,7 +426,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>Function that returns the label of a pogues element.</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-citation">
@@ -435,7 +435,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Name is the default element for names in Pogues.</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-name">
@@ -444,7 +444,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the agency that created the survey</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-agency">
@@ -453,7 +453,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the ID attribute of the element</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-id">
@@ -462,7 +462,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the text of the Declaration</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-text">
@@ -471,7 +471,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Value is the default element for values in Pogues.</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-label">
@@ -480,7 +480,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return a lang for the survey. As this information in not available in PoguesXML, it is hard-coded</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-value">
@@ -489,7 +489,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return a version for the survey. As this information in not available in PoguesXML, it is hard-coded</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-lang">
@@ -498,7 +498,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the type of visualisation of a response (checkbox, radio-button,..)</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-version">
@@ -507,7 +507,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the type of a question or of the data of a response</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-generic-output-format">
@@ -516,7 +516,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the name of the type of data of a response (TEXT, NUMERIC,...)</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-type">
@@ -525,7 +525,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the maximum length of the data type</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-type-name">
@@ -534,7 +534,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the attribut coding if the anwser is mandatory. This part is not implemented</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-max-length">
@@ -543,7 +543,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the attribut coding the level of the sequence (QUESTIONNAIRE, MODULE, SUBMODULE,...)</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-mandatory">
@@ -552,7 +552,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return all Sequenses elements of the survey.</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-sequence-type">
@@ -561,7 +561,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return all Questions elements of the survey.</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-sequences">
@@ -570,7 +570,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return all Declarations elements of the survey.</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-questions">
@@ -579,7 +579,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the number of decimals of the data type.</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-instructions">
@@ -588,7 +588,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the minimal value of the data type</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-decimal-positions">
@@ -597,7 +597,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the maximal value of the data type</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-low">
@@ -606,7 +606,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the string expected as value of the isDiscrete attribut of l:code in ddi3.2 . This value is hard-coded</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-high">
@@ -615,7 +615,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the dynamic attribute of the pogues:Dimension. This value is used to compute positions in grids</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:is-discrete">
@@ -624,7 +624,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>This is used to implement the code of booleans if this return something</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-dynamic">
@@ -633,7 +633,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Expression is the default element for expressions in Pogues.</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:exist-boolean">
@@ -642,7 +642,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the ID of the element that result a true condition.</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-expression">
@@ -651,7 +651,7 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return the ID to which the GoTo aim</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-if-true">
@@ -660,20 +660,11 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p>Return all IfThenElses elements of the survey.</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-ifthenelses">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:get-ifthenelses($context)"/>
-   </xsl:function>
-   <xd:doc>
-      <xd:desc>
-         <xd:p/>
-      </xd:desc>
-   </xd:doc>
-   <xsl:function name="enoddi32:get-parent-id">
-      <xsl:param name="context" as="item()"/>
-      <xsl:sequence select="enopogues:get-parent-id($context)"/>
    </xsl:function>
 </xsl:stylesheet>
