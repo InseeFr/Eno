@@ -30,14 +30,15 @@
     <h1 id="general-overview">General overview</h1>
     <p>This guide shows how to create a new output format for Eno. Here we take the example of a format referred to as 'odt'.</p>
 
-	<h2>Initialize the project</h2>
+	<h2>Creation of the basic file structure</h2>
+	<h3>Initialize the project</h3>
 	<ul>
 		<li><p>clone Eno repository and create development branch</p></li>
 		<li><p>create an Oxygen project and import the Eno folder</p></li>
 		<li><p>create an Eno/lib folder according to instructions on the Github repository main page. if Saxon Jar is not named saxon9he.jar, change Eno/src/main/config/config.properties accordingly (or better: rename the Saxon Jar).</p></li>
 	</ul>
 
-	<h2>Create the basic file structure</h2>
+	<h3>Create the basic file structure</h3>
 	<ul>
 		<li><p>create a new file Eno/src/main/config/ddi2odt.properties by copying sibling file, change properties for new format (e.g. out-format=odt, out-extension=fodt)</p></li>
 		<li><p>create new file Eno/config/ddi2odt.xml (copy existing file)</p></li>
@@ -48,17 +49,38 @@
 		<li><p>create new file Eno/src/main/scripts/ddi2odt.xml (copy existing file); change only project name (e.g. enoPdf -> enoOdt) at this stage</p></li>
 	</ul>
 
-	<h2>Run the non-regession test</h2>
+	<h3>Run the non-regession test</h3>
     <p>in src/main/scripts/build-non-regression.xml, add</p>
 	<textarea class="xml" rows="1" cols="200" readonly="true">
-<import file="build-odt.xml"/>
-	</textarea>
+<import file="build-odt.xml"/></textarea>
 
 	<p>Change</p>
 	<textarea class="xml" rows="2" cols="200" readonly="true">
 <property name="transformation-name" value="ddi2xxx"/> to
-<property name="transformation-name" value="ddi2odt"/>
-	</textarea>
-	<p>Run the build script</p>
+<property name="transformation-name" value="ddi2odt"/></textarea>
+	<p>Run the build script (Ctrl+Shift+T). The result will be in the /target/simpsons/v1/form/ folder.</p>
+
+	<h2>First steps</h2>
+
+	<h3>Introduction</h3>
+
+	<p>For the initial developments, we will continue to use the example Simpsons questionnaire and the non-regression script (build-non-regression.xml). An interesting figure of this script is that if it is executed with the "debug" property set to "true", it produces, instead of the normal output, the tree of all the drivers encountered in the input document, and the list of all getters called for each driver. This is a useful debug tool.</p>
+
+	<p>The main part of the programming will take place in the models.xsl transformation. This transformation is a collection of templates that will match the drivers declared for the input format, and call getters to produce the output document (see <a href="https://github.com/InseeFr/Eno/blob/master/doc/models-guideline.md">here</a> for more details).</p>
+
+	<h3>Drivers and getters</h3>
+
+	<p>The drivers for the input and outputs formats are defined in \src\main\resources\xslt\transformations\{input-format}2{output-format}\drivers.fods (for example \src\main\resources\xslt\transformations\ddi2odt\drivers.fods). The name of the driver (in the "Driver" column) is used in the templates of the models.xls transformation.</p>
+
+	<p>The getters for the input format (in-getters) are declared in \src\main\resources\xslt\inputs\{format}\functions.fods (for example \src\main\resources\xslt\inputs\ddi\functions.fods) and defined in \src\main\resources\xslt\inputs\{format}\templates.fods.</p>
+
+	<p>The getters for the output format (out-getters) are defined in \src\main\resources\xslt\transformations\{input-format}2{output-format}\functions.fods (for example \src\main\resources\xslt\transformations\ddi2odt\functions.fods). Each out-getter (column Out_Function) is defined as a simple call to an in-getter (column In_Function) or a function of in-getters (column In_Expression).</p>
+
+	<p>In order to distinguish the out-getters corresponding to the new output format that we are implementing, we will change their namespace and associated prefix:</p>
+	<ul>
+		<li>In the functions.fods file defining the out-getters, change the existing prefix (for example enofr or enopdf) for each line of the Out_Function column to enoodt.</li>
+		<li>In the models.xsl and ddi2odt-fixed.xsl transformations, change the namespace declaration for the prefix that we just changed. For example, change the declaration to xnmlns:enoodt="http://xml.insee.fr/apps/eno/out/odt".</li>
+	<ul>
+
   </body>
 </html>
