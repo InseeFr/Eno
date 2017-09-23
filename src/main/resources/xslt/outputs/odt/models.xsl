@@ -25,7 +25,7 @@
 
 	<xsl:variable name="properties" select="doc($properties-file)"/>
 	
-	<!-- Match on the Form driver: write the root of the document -->
+	<!-- Match on the Form driver: write the root of the document with the main title -->
 	<xsl:template match="Form" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -51,7 +51,19 @@
 				</xsl:apply-templates>
 			</office:body>
 		</office:document>
+	</xsl:template>
 
+	<!-- Match on the Module driver: write the module label -->
+	<xsl:template match="Module" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
+		<office:text>
+			<text:p text:style-name="Title"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
+		</office:text>
+		<!-- Returns to the parent -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
 	</xsl:template>
 
 </xsl:stylesheet>
