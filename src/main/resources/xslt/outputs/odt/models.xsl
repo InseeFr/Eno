@@ -38,7 +38,15 @@
 				<style:style style:name="Standard" style:family="paragraph" style:class="text"/>
 				<style:style style:name="Title" style:family="paragraph" style:class="chapter">
 					<style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
-					<style:text-properties fo:font-size="28pt" fo:font-weight="bold" style:font-size-asian="28pt" style:font-weight-asian="bold" style:font-size-complex="28pt" style:font-weight-complex="bold"/>
+					<style:text-properties fo:font-size="28pt" fo:font-weight="bold"/>
+				</style:style>
+				<style:style style:name="Module" style:family="paragraph" style:default-outline-level="1" style:class="text">
+					<style:paragraph-properties fo:text-align="left" fo:break-before="page"/>
+					<style:text-properties fo:font-size="24pt" fo:font-weight="bold"/>
+				</style:style>
+				<style:style style:name="SubModule" style:family="paragraph" style:default-outline-level="2" style:class="text">
+					<style:paragraph-properties fo:text-align="left"/>
+					<style:text-properties fo:font-size="20pt" fo:font-weight="bold"/>
 				</style:style>
 			</office:styles>
 			<office:body>
@@ -58,7 +66,20 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<office:text>
-			<text:p text:style-name="Title"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
+			<text:p text:style-name="Module"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
+		</office:text>
+		<!-- Returns to the parent -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+
+	<!-- Match on the SubModule driver: write the sub-module label -->
+	<xsl:template match="SubModule" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
+		<office:text>
+			<text:p text:style-name="SubModule"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
 		</office:text>
 		<!-- Returns to the parent -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
