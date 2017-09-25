@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<office:document office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.text"
+    xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" 
+    xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0">
+
+    <office:styles>
+        <style:style style:name="Standard" style:family="paragraph" style:class="text"/>
+        <style:style style:name="Title" style:family="paragraph" style:class="chapter">
+            <style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+            <style:text-properties fo:font-size="28pt" fo:font-weight="bold"/>
+        </style:style>
+        <style:style style:name="Module" style:family="paragraph" style:default-outline-level="1" style:class="text">
+            <style:paragraph-properties fo:text-align="left" fo:break-before="page"/>
+            <style:text-properties fo:font-size="24pt" fo:font-weight="bold"/>
+        </style:style>
+        <style:style style:name="SubModule" style:family="paragraph" style:default-outline-level="2" style:class="text">
+            <style:paragraph-properties fo:text-align="left"/>
+            <style:text-properties fo:font-size="20pt" fo:font-weight="bold"/>
+        </style:style>
+    </office:styles>
+    <office:body>
+        <office:text/>
+    </office:body>
+</office:document>
+
