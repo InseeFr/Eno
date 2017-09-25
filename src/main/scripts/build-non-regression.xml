@@ -139,10 +139,7 @@
         </antcall>
         <!-- Generating debug model file (models-debug.xsl) if debug mode is enabled based on outGetters (in2out/functions.fods). -->
         <if>
-            <and>
-                <equals arg1="${debug}" arg2="true"/>
-                <equals arg1="${process-debug}" arg2="true"/>
-            </and>
+            <equals arg1="${debug}" arg2="true"/>            
             <then>
                 <antcall target="fods2xsl">
                     <param name="dir"
