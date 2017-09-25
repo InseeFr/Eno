@@ -82,5 +82,36 @@
 		<li>In the models.xsl and ddi2odt-fixed.xsl transformations, change the namespace declaration for the prefix that we just changed. For example, change the declaration to xnmlns:enoodt="http://xml.insee.fr/apps/eno/out/odt".</li>
 	<ul>
 
+	<h3>First output</h3>
+
+	<p>For our first step, we will produce an ODT document containing only the title of the example Simpsons questionnaire. We need to use the 'Form' driver to match at the form level of the input questionnaire, and the get-label getter to retrieve the label of the corresponding element. The template, including the XML code required to produce a minimal ODT document, could thus be:</p>
+	<textarea class="xml" rows="24" cols="200" readonly="true">
+<xsl:template match="Form" mode="model">
+	<xsl:param name="source-context" as="item()" tunnel="yes"/>
+	<office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"  xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.text">
+		<office:font-face-decls>
+			<style:font-face style:name="Arial" svg:font-family="Arial" style:font-family-generic="system" style:font-pitch="variable"/>
+		</office:font-face-decls>
+		<office:styles>
+			<style:style style:name="Standard" style:family="paragraph" style:class="text"/>
+			<style:style style:name="Title" style:family="paragraph" style:class="chapter">
+				<style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+				<style:text-properties fo:font-size="28pt" fo:font-weight="bold" style:font-size-asian="28pt" style:font-weight-asian="bold" style:font-size-complex="28pt" style:font-weight-complex="bold"/>
+			</style:style>
+		</office:styles>
+		<office:body>
+			<office:text>
+				<text:p text:style-name="Title"><xsl:value-of select="enofr:get-label($source-context, $languages[1])"/></text:p>
+			</office:text>
+			<!-- Returns to the parent -->
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
+		</office:body>
+	</office:document>
+</xsl:template></textarea>
+
+	<p>Replace all the templates of the models.xsl sheet by the template above and run the non-regression script: you should obtain a FODS file containing only one title: 'Simpsons'<p/>
+
   </body>
 </html>
