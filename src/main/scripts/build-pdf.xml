@@ -26,7 +26,7 @@
 	-->
 	<!-- pdfPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
 	<target name="pdfPostProcessing">
-		<copy file="${temp.home}/${out-format}/${form-name}/basic-form.tmp" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
+		<copy file="${input-file}" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
 	</target>
 	
 </project>

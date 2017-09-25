@@ -671,6 +671,35 @@
         </xsl:for-each>
     </xsl:template>
 
+    <xsl:template match="*" mode="enoddi:get-instructions-by-format">
+        <xsl:param name="format" select="'#all'" tunnel="yes"/>
+        <xsl:sequence select="d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true()) else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining specific getter is-first for multiple questions.</xd:p>
+            <xd:p>Testing if the parent Question is-first, then testing if it's the first ResponseDomainInMixed</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:ResponseDomainInMixed//*" mode="enoddi:is-first" priority="2">
+        <xsl:variable name="isFirstQuestion" select="enoddi:is-first(ancestor::*[local-name() = ('QuestionItem','QuestionGrid','QuestionBlock')])"/>
+        <xsl:value-of select="if($isFirstQuestion) then(count(ancestor::d:ResponseDomainInMixed/preceding-sibling::d:ResponseDomainInMixed) = 0) else(false())"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining specific getter is-first for questions in questionBlock.</xd:p>
+            <xd:p>Testing if the parent QuestionBlock is-first, then testing if it's the first in the QuestionBlock</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:QuestionBlock//*[local-name()=('QuestionItem','QuestionGrid')]" mode="enoddi:is-first" priority="2">
+        <xsl:variable name="isFirstQuestionBlock" select="enoddi:is-first(ancestor::d:QuestionBlock)"/>
+        <xsl:value-of select="if($isFirstQuestionBlock) then(count(ancestor::*[local-name()=('QuestionItemReference','QuestionGridReference')]/preceding-sibling::*[local-name()=('QuestionItemReference','QuestionGridReference')]) = 0) else(false())"/>
+    </xsl:template>
+    
+    
+    
     <!--    <xd:doc>
         <xd:desc>
             <xd:p>Get the formula to calculate a Variable.</xd:p>

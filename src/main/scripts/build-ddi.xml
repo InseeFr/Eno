@@ -3,10 +3,13 @@
     
     <!-- ********************************************** ddiPreprocessing ************************************************ -->
     <!-- This target will call 3 sub targets : dereferencing / cleaning / titling -->
+    <!-- It expects an 'input-file' param for the beginning file uri of the pipeline.  -->
     <target name="ddiPreprocessing">
         <!-- Dereferencing : the input DDI files (ccs, qb...) -->
         <!-- Creates multiple files with a -dereferenced suffix in the temp folder-->
-        <antcall target="dereferencing"/>
+        <antcall target="dereferencing">
+            <param name="input-file" value="${input-file}"/>
+        </antcall>
         <!-- For each created file (one by model), we clean. -->
         <!-- Creating a -cleaned suffixed file -->
         <foreach target="cleaning" param="file" inheritall="true">
@@ -27,7 +30,7 @@
     <target name="dereferencing">
         
         <!-- Creates a dereferenced DDI for each model with the already dereferenced files and adding some variables from the VariableScheme to the upcoming result -->
-        <xslt in="${questionnaires.home}/${survey-name}/ddi/${survey-name}.xml"
+        <xslt in="${input-file}"
             out="${temp.home}/null.tmp" style="${xslt.home}/util/ddi/dereferencing.xsl"
             classpath="${saxon.jar}" force="true">
             <param name="output-folder" expression="${temp-folder}"/>
@@ -57,7 +60,7 @@
         
     <!-- ddiPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
     <target name="ddiPostProcessing">
-        <copy file="${temp.home}/${out-format}/${form-name}/basic-form.tmp" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
+        <copy file="${input-file}" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
     </target>
   
 </project>

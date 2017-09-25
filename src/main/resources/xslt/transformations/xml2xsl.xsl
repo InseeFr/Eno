@@ -10,15 +10,41 @@
     <xsl:import href="../lib.xsl"/>
     
     <xd:doc>
-        <xd:desc>
-            <xd:p>Param driving the debug mode (outputting driver-name and result of a call of each getter.</xd:p>
-        </xd:desc>
+        <xd:desc>Transform xml generic document (see fods2xml.xsl) into xslt stylesheet.</xd:desc>
+        <xd:p>Main principles of the transformation:
+        <xd:ul>
+            <xd:il>Based on formatDrivers : A high level driver, based on the format parameter value, drives which templates should apply</xd:il>
+            <xd:il>Different implementations : based on a formatDriver, each driver implementation depends on which output is expected</xd:il>
+            <xd:il>Expected specific xml input structure : The GenericElements of the input should have specific content (consistent whith the FormatDriver).</xd:il>
+        </xd:ul>
+        </xd:p>
+        <xd:p>formatDriver and associated driver :
+            <xd:ul>
+                <xd:il>DriverFlow - Template: takes transformations/in2out/drivers.fods (after fods2xml) and expects Xpath and Driver columns.</xd:il>                
+                <xd:il>InGetterImplementation - Implementation : takes inputs/in/templates.fods (after fods2xml) and expects Xpath and Match columns.</xd:il>
+                <xd:il>OutGetterImplementation - TransitionFunction and NotSupportedFunction: takes transformations/in2out/functions.fods and expects Out_Function and InFunction or InExpression columns (no InFunction nor InExpresion drives to NotSupportedFunction)to  .</xd:il>
+                <xd:il>InGetterLibrairy - SourceFunction: takes inputs/in/functions.fods and expects a Function column. </xd:il>
+                <xd:il>TreeNavigation - GetChildren: takes transformations/in2out/tree-navigation.fods and expects a Parent column.</xd:il>
+                <xd:il>Debug - TransitionFunction and NotSupportedFunction : same as OutGetterImplementation but generates a models-debug.xsl.</xd:il>
+            </xd:ul>
+        </xd:p>
+        <xd:p>Architecture of the transformation:
+        <xd:ul>
+            <xd:il>xml2xsl:xsl: entry point, drivers flow implementation, outGetters implementation</xd:il>
+            <xd:il>xml/source.xsl: inGetters implementation</xd:il>
+            <xd:il>xsl/models.xsl: drivers implementation</xd:il>
+        </xd:ul></xd:p>
     </xd:doc>
-    <xsl:param name="debug" select="false()"/>
     
     <xd:doc>
         <xd:desc>
-            <xd:p>Param needed for the debug mode to retrieve namespaces for the models-debug generated.</xd:p>
+            <xd:p>Param driving the output format mode.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:param name="format" select="'NoFormat'"/>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Param needed for the debug format to retrieve namespaces for the models-debug generated.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:param name="models-uri-for-debug-mode" select="''" as="xs:string"/>
@@ -36,9 +62,6 @@
 
     <xsl:strip-space elements="*"/>
 
-    <!-- Failover : needed cause the dynamic casting is not occuring, depending on the lib version, between ant param and xslt. -->
-    <xsl:variable name="debug2" select="xs:boolean($debug)"/>
-
     <xd:doc>
         <xd:desc>
             <xd:p>Starting the transformation from xml by the 'Root' element.</xd:p>
@@ -50,14 +73,15 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>The Root element is linked to the 'Sheet' driver.</xd:p>
+            <xd:p>The Root element first add a FormatDriver, then the 'Sheet' driver.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="Root" mode="source">
-        <xsl:param name="driver" tunnel="yes">
-            <driver/>
-        </xsl:param>
-        <xsl:apply-templates select="eno:append-empty-element('Sheet',$driver)" mode="model">
+        <xsl:variable name="driver">
+            <driver/>                               
+        </xsl:variable>
+        <xsl:variable name="driverFormatted" select="eno:append-empty-element($format,$driver)"/>
+         <xsl:apply-templates select="eno:append-empty-element('Sheet',$driverFormatted)" mode="model">
             <xsl:with-param name="source-context" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -67,7 +91,7 @@
             <xd:p>This specific template is used to generate xslt stylesheet for Eno :</xd:p>
             <xd:p>the presence of those two elements means that the input xml comes from a
                 drivers.fods file.</xd:p>
-            <xd:p>So it is linked to the 'Template' driver :</xd:p>
+            <xd:p>So it is linked to the 'DriverFlow' driver :</xd:p>
             <xd:p>it will connect an input Xpath to a output driver through a template.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -314,13 +338,16 @@
     </xsl:function>
     
     <xsl:function name="enoxsl:get-default-value">
-        <xsl:param name="parameter-name"/>
+        <xsl:param name="parameter-name"/>      
         <xsl:choose>
             <xsl:when test="$parameter-name = 'language'">
-                <xsl:value-of select="'fr'"/>
+                <xsl:value-of select="'''fr'''"/>
             </xsl:when>
             <xsl:when test="$parameter-name = 'index'">
                 <xsl:sequence select="0"/>
+            </xsl:when>
+            <xsl:when test="$parameter-name = 'format'">
+                <xsl:value-of select="'''#all'''"/>
             </xsl:when>
         </xsl:choose>
     </xsl:function>
