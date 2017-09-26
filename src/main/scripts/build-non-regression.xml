@@ -7,6 +7,7 @@
     <import file="build-ddi.xml"/>
     <import file="build-pogues-xml.xml"/>
     <import file="build-pdf.xml"/>
+    <import file="build-odt.xml"/>
     <!-- Properties for this non regression script -->
 
     <!-- ******************************* Main properties for the non-regression script depending on the input and transformation to be processed *********************************** -->
@@ -14,6 +15,7 @@
     <property name="survey-name" value="simpsons"/>
     <!-- The transformation to be processed, usually named using a <in>2<out> template. -->
     <property name="transformation-name" value="ddi2fr"/>
+
     <!-- Enabling debug mode (debug=true) will output the name of the drivers encountered and for each an exhaustive call of the getters, instead of the normal output. -->
     <property name="debug" value="false"/>
     <!-- ****************************************************************************************************************************************************** -->
@@ -139,10 +141,7 @@
         </antcall>
         <!-- Generating debug model file (models-debug.xsl) if debug mode is enabled based on outGetters (in2out/functions.fods). -->
         <if>
-            <and>
-                <equals arg1="${debug}" arg2="true"/>
-                <equals arg1="${process-debug}" arg2="true"/>
-            </and>
+            <equals arg1="${debug}" arg2="true"/>            
             <then>
                 <antcall target="fods2xsl">
                     <param name="dir"
