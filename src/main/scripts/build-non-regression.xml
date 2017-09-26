@@ -11,11 +11,11 @@
 
     <!-- ******************************* Main properties for the non-regression script depending on the input and transformation to be processed *********************************** -->
     <!-- The name of the survey, conditionning the name of the input file processed. -->
-    <property name="survey-name" value="simpsons"/>
+    <property name="survey-name" value="eacei-2017-a00"/>
     <!-- The transformation to be processed, usually named using a <in>2<out> template. -->
-    <property name="transformation-name" value="ddi2fr"/>
+    <property name="transformation-name" value="ddi2pdf"/>
     <!-- Enabling debug mode (debug=true) will output the name of the drivers encountered and for each an exhaustive call of the getters, instead of the normal output. -->
-    <property name="debug" value="false"/>
+    <property name="debug" value="true"/>
     <!-- ****************************************************************************************************************************************************** -->
 
     <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>
