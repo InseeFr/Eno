@@ -4,8 +4,8 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions"
 	xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
 	xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-	xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
-	xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="xd eno enofr"
+	xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner"
+	xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="xd eno enopdf"
 	xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
 	version="2.0">
 	
@@ -33,7 +33,7 @@
 	<!--Afficher le titre dans le drvier FORM . Permet aussi l'encapsulation <fo:root> -->
 	<xsl:template match="Form" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 
 		<fo:root>
@@ -69,7 +69,7 @@
 							<fo:inline-container width="97mm">
 								<fo:block-container height="20mm" overflow="hidden">
 									<fo:block font-weight="bold" font-size="18pt" font-family="arial" margin="3mm">
-										<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+										<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 									</fo:block>
 								</fo:block-container>
 							</fo:inline-container>
@@ -300,7 +300,7 @@
 	<!--Afficher le titre dans le driver Module -->
 	<xsl:template match="Module" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 				
 		<xsl:text disable-output-escaping="yes">
@@ -308,7 +308,7 @@
 		</xsl:text>
 		
 		<fo:block xsl:use-attribute-sets="Titre-sequence" border-color="black" border-style="solid">
-			<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+			<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 
 		<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
@@ -321,17 +321,17 @@
 	<!--Afficher le titre dans le driver SubModule -->
 	<xsl:template match="SubModule" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		
-		<xsl:if test="enofr:is-first($source-context) != 'true'">
+		<xsl:if test="enopdf:is-first($source-context) != 'true'">
 			<xsl:text disable-output-escaping="yes">
 				&lt;fo:block page-break-inside="avoid" &gt;
 			</xsl:text>
 		</xsl:if>
 
 		<fo:block xsl:use-attribute-sets="Titre-paragraphe">
-			<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+			<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 		
 		<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
@@ -346,15 +346,15 @@
 	<!--<xsl:template match="*//Form//Module//xf-output"-->
 	<xsl:template match="xf-output" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 
 		<!--FLAG -->
 		<!--<xf-output/>-->
-		<!--<NBRowspan><xsl:value-of select="enofr:get-rowspan($source-context)"/></NBRowspan>
-		<NBColspan><xsl:value-of select="enofr:get-colspan($source-context)"/></NBColspan>-->
+		<!--<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
+		<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
 		<xsl:choose>
-			<xsl:when test="enofr:get-format($source-context) = 'instruction'">
+			<xsl:when test="enopdf:get-format($source-context) = 'instruction'">
 				<fo:block>
 					<fo:footnote>
 						<fo:inline font-size="75%" 
@@ -369,7 +369,7 @@
 									baseline-shift="super">
 									<xsl:value-of select="$footnote-count"/>
 								</fo:inline>-->
-								<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+								<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 							</fo:block>
 						</fo:footnote-body>
 					</fo:footnote>
@@ -377,7 +377,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:block xsl:use-attribute-sets="general-style">
-					<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+					<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 				</fo:block>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -393,12 +393,12 @@
 
 	<xsl:template match="//Form/Module/xf-output" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 
-		<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<xsl:choose>
-				<xsl:when test="enofr:get-format($source-context) = 'instruction'">
+				<xsl:when test="enopdf:get-format($source-context) = 'instruction'">
 					<xsl:variable name="footnote-count" select="($footnote-count + 1)"/>
 					<fo:block>
 						<fo:footnote>
@@ -414,7 +414,7 @@
 										baseline-shift="super">
 										<xsl:value-of select="$footnote-count"/>
 									</fo:inline>-->
-									<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+									<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 								</fo:block>
 							</fo:footnote-body>
 						</fo:footnote>
@@ -422,7 +422,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block xsl:use-attribute-sets="general-style">
-						<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+						<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 					</fo:block>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -438,12 +438,12 @@
 	
 	<xsl:template match="//Form/Module/SubModule/xf-output" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 
-		<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<xsl:choose>
-				<xsl:when test="enofr:get-format($source-context) = 'instruction'">
+				<xsl:when test="enopdf:get-format($source-context) = 'instruction'">
 					<xsl:variable name="footnote-count" select="($footnote-count + 1)"/>
 					<fo:block>
 						<fo:footnote>
@@ -459,7 +459,7 @@
 										baseline-shift="super">
 										<xsl:value-of select="$footnote-count"/>
 									</fo:inline>-->
-									<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+									<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 								</fo:block>
 							</fo:footnote-body>
 						</fo:footnote>
@@ -467,7 +467,7 @@
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block xsl:use-attribute-sets="general-style">
-						<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+						<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 					</fo:block>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -485,13 +485,13 @@
 
 	<!--<xsl:template match="//TextCell/xf-output" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		
-		<xsl:if test="enofr:get-label($source-context, $languages[1]) !='' ">
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) !='' ">
 			<fo:block font-size="10pt" font-weight="normal" color="black">
 				<!-\-<fo:inline font-family="ZapfDingbats" font-size="10pt">&#x274F;</fo:inline>-\->
-				<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+				<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 			</fo:block>
 		</xsl:if>
 		
@@ -508,32 +508,32 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		
 		
 		<!-- FLAG Recupérer les formats des réponses pour anticiper le cadre -->
 		<!-- <xf-input/> -->
-		<!--<Type><xsl:value-of select="enofr:get-type($source-context)"/></Type>-->
-		<!--<Format><xsl:value-of select="enofr:get-format($source-context)"/></Format>-->
-		<!--<Longueur><xsl:value-of select="enofr:get-length($source-context)"/></Longueur>-->
-		<!--<Decimal><xsl:value-of select="enofr:get-number-of-decimals($source-context)"/></Decimal>-->
-		<!--<Unite><xsl:value-of select="enofr:get-suffix($source-context, $languages[1])"/></Unite>-->
-		<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+		<!--<Type><xsl:value-of select="enopdf:get-type($source-context)"/></Type>-->
+		<!--<Format><xsl:value-of select="enopdf:get-format($source-context)"/></Format>-->
+		<!--<Longueur><xsl:value-of select="enopdf:get-length($source-context)"/></Longueur>-->
+		<!--<Decimal><xsl:value-of select="enopdf:get-number-of-decimals($source-context)"/></Decimal>-->
+		<!--<Unite><xsl:value-of select="enopdf:get-suffix($source-context, $languages[1])"/></Unite>-->
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			
 		
-			<xsl:if test="enofr:get-type($source-context) = 'text'">
+			<xsl:if test="enopdf:get-type($source-context) = 'text'">
 				<fo:block page-break-inside="avoid">
-					<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+					<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 						<fo:block xsl:use-attribute-sets="label-question">
-							<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>						
+							<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>						
 						</fo:block>
 					</xsl:if>
 					<xsl:choose>
-						<xsl:when test="enofr:get-format($source-context)">
-							<xsl:for-each select="1 to xs:integer(number(enofr:get-length($source-context)))">
+						<xsl:when test="enopdf:get-format($source-context)">
+							<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
 								<xsl:variable name="curVal" select="."/>
-								<xsl:if test="number(enofr:get-length($source-context)) = $curVal">
+								<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 									<xsl:for-each select="1 to $curVal">
 										<fo:inline-container width="4mm" background-color="#CCCCCC" color="#CCCCCC" border="solid white">
 											<fo:block>A</fo:block>
@@ -551,11 +551,11 @@
 				</fo:block>
 			</xsl:if>
 
-			<xsl:if test="enofr:get-type($source-context) = 'date'">
-				<xsl:variable name="field" select="enofr:get-format($source-context)"/>
+			<xsl:if test="enopdf:get-type($source-context) = 'date'">
+				<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
 				<fo:block page-break-inside="avoid">
 					<fo:block xsl:use-attribute-sets="label-question">
-						<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>						
+						<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>						
 					</fo:block>
 					<fo:block xsl:use-attribute-sets="general-style">
 						<fo:table width="50%">
@@ -591,13 +591,13 @@
 				</fo:block>
 			</xsl:if>
 			
-			<xsl:if test="enofr:get-type($source-context) = 'duration'"> 
-				<xsl:variable name="field" select="enofr:get-format($source-context)"/>
+			<xsl:if test="enopdf:get-type($source-context) = 'duration'"> 
+				<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
 				
 				<fo:inline xsl:use-attribute-sets="general-style">
-					<xsl:for-each select="1 to xs:integer(number(enofr:get-length($source-context)))">
+					<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
 						<xsl:variable name="curVal" select="."/>
-						<xsl:if test="number(enofr:get-length($source-context)) = $curVal">
+						<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 							<xsl:for-each select="1 to $curVal">
 								<xsl:variable name="curVal2" select="."/>
 								<fo:inline width="5mm" min-height="10mm" background-color="#CCCCCC" border="solid white" color="#CCCCCC">HH</fo:inline>
@@ -614,7 +614,7 @@
 				</fo:inline>
 				
 				
-				<xsl:if test="enofr:is-first($source-context) = 'true' and $field = 'mm'">
+				<xsl:if test="enopdf:is-first($source-context) = 'true' and $field = 'mm'">
 					<xsl:text disable-output-escaping="yes">
 						&lt;/fo:block&gt;
 					</xsl:text>
@@ -622,17 +622,17 @@
 			</xsl:if>
 			
 			<!-- get-numberof decimal -->
-			<xsl:if test="enofr:get-type($source-context) = 'number'">
+			<xsl:if test="enopdf:get-type($source-context) = 'number'">
 				<fo:block page-break-inside="avoid">
-					<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+					<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 						<fo:block xsl:use-attribute-sets="label-question">
-							<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>						
+							<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>						
 						</fo:block>
 					</xsl:if>
 					<fo:block xsl:use-attribute-sets="general-style">
-							<xsl:for-each select="1 to xs:integer(number(enofr:get-length($source-context)))">
+							<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
 								<xsl:variable name="curVal" select="."/>
-								<xsl:if test="number(enofr:get-length($source-context)) = $curVal">
+								<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 									<xsl:for-each select="1 to $curVal">
 										<fo:inline-container width="4mm" background-color="#CCCCCC" color="#CCCCCC" border="solid white">
 											<fo:block>A</fo:block>
@@ -640,13 +640,13 @@
 									</xsl:for-each>
 								</xsl:if>
 							</xsl:for-each>
-						<fo:inline><xsl:value-of select="enofr:get-suffix($source-context, $languages[1])"/></fo:inline>
+						<fo:inline><xsl:value-of select="enopdf:get-suffix($source-context, $languages[1])"/></fo:inline>
 					</fo:block>
 				</fo:block>
 			</xsl:if>
 			
 			<fo:block>
-				<xsl:if test="enofr:is-first($source-context) = 'true'">
+				<xsl:if test="enopdf:is-first($source-context) = 'true'">
 					<xsl:text disable-output-escaping="yes">
 						&lt;/fo:block&gt;						
 					</xsl:text>
@@ -655,19 +655,19 @@
 			
 		</xsl:if>
 
-		<xsl:if test="enofr:get-label($source-context, $languages[1]) = ''">
-			<xsl:if test="enofr:get-type($source-context) = 'text'">
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) = ''">
+			<xsl:if test="enopdf:get-type($source-context) = 'text'">
 				<fo:block>
-					<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+					<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 						<fo:block xsl:use-attribute-sets="label-question">
-							<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>						
+							<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>						
 						</fo:block>
 					</xsl:if>
 					<xsl:choose>
-						<xsl:when test="enofr:get-format($source-context)">
-							<xsl:for-each select="1 to xs:integer(number(enofr:get-length($source-context)))">
+						<xsl:when test="enopdf:get-format($source-context)">
+							<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
 								<xsl:variable name="curVal" select="."/>
-								<xsl:if test="number(enofr:get-length($source-context)) = $curVal">
+								<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 									<xsl:for-each select="1 to $curVal">
 										<fo:inline-container width="4mm" background-color="#CCCCCC" color="#CCCCCC" border="solid white">
 											<fo:block>A</fo:block>
@@ -685,20 +685,20 @@
 				</fo:block>
 			</xsl:if>
 
-			<xsl:if test="enofr:get-type($source-context) = 'date'">
-				<xsl:variable name="field" select="enofr:get-format($source-context)"/>
-				<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+			<xsl:if test="enopdf:get-type($source-context) = 'date'">
+				<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
+				<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 					<fo:block xsl:use-attribute-sets="label-question">
-						<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>						
+						<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>						
 					</fo:block>
 				</xsl:if>
 				<fo:block xsl:use-attribute-sets="general-style">
 					<xsl:if test="$isTable = 'YES'">
 						<xsl:attribute name="text-align">right</xsl:attribute>
 					</xsl:if>
-					<xsl:for-each select="1 to xs:integer(number(enofr:get-length($source-context)))">
+					<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
 						<xsl:variable name="curVal" select="."/>
-						<xsl:if test="number(enofr:get-length($source-context)) = $curVal">
+						<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 							<xsl:for-each select="1 to $curVal">
 								<xsl:variable name="curVal2" select="."/>
 								<fo:inline-container width="4mm" background-color="#CCCCCC" color="#CCCCCC" border="solid white">
@@ -710,13 +710,13 @@
 				</fo:block>
 			</xsl:if>
 			
-			<xsl:if test="enofr:get-type($source-context) = 'duration'"> 
-				<xsl:variable name="field" select="enofr:get-format($source-context)"/>
+			<xsl:if test="enopdf:get-type($source-context) = 'duration'"> 
+				<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
 				
 					<fo:inline xsl:use-attribute-sets="general-style">
-						<xsl:for-each select="1 to xs:integer(number(enofr:get-length($source-context)))">
+						<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
 							<xsl:variable name="curVal" select="."/>
-							<xsl:if test="number(enofr:get-length($source-context)) = $curVal">
+							<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 								<xsl:for-each select="1 to $curVal">
 									<xsl:variable name="curVal2" select="."/>
 									<fo:inline width="5mm" min-height="10mm" background-color="#CCCCCC" border="solid white" color="#CCCCCC">HH</fo:inline>
@@ -734,23 +734,23 @@
 			</xsl:if>
 
 
-			<xsl:if test="enofr:get-type($source-context) = 'number'">
+			<xsl:if test="enopdf:get-type($source-context) = 'number'">
 				<fo:block>
 					<xsl:if test="$isTable = 'YES'">
 						<xsl:attribute name="text-align">right</xsl:attribute>
 					</xsl:if>
-					<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+					<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 						<fo:block xsl:use-attribute-sets="label-question">
-							<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+							<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 						</fo:block>
 					</xsl:if>
 					<fo:block xsl:use-attribute-sets="general-style">
 						<xsl:attribute name="width">
-							<xsl:value-of select="5 * number(enofr:get-length($source-context))"/>mm
+							<xsl:value-of select="5 * number(enopdf:get-length($source-context))"/>mm
 						</xsl:attribute>
-						<xsl:for-each select="1 to xs:integer(number(enofr:get-length($source-context)))">
+						<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
 							<xsl:variable name="curVal" select="."/>
-							<xsl:if test="number(enofr:get-length($source-context)) = $curVal">
+							<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 								<xsl:for-each select="1 to $curVal">
 									<fo:inline-container width="4mm" background-color="#CCCCCC" color="#CCCCCC" border="solid white">
 										<fo:block>A</fo:block>
@@ -759,9 +759,9 @@
 							</xsl:if>
 						</xsl:for-each>
 						<!--<fo:inline> , </fo:inline>
-						<xsl:for-each select="1 to xs:integer(number(enofr:get-number-of-decimals($source-context)))">
+						<xsl:for-each select="1 to xs:integer(number(enopdf:get-number-of-decimals($source-context)))">
 							<xsl:variable name="curVal" select="."/>
-							<xsl:if test="number(enofr:get-number-of-decimals($source-context)) = $curVal">
+							<xsl:if test="number(enopdf:get-number-of-decimals($source-context)) = $curVal">
 								<xsl:for-each select="1 to $curVal">
 									<fo:inline-container width="4mm" background-color="#CCCCCC" color="#CCCCCC" border="solid white">
 										<fo:block>A</fo:block>
@@ -769,7 +769,7 @@
 								</xsl:for-each>
 							</xsl:if>
 						</xsl:for-each>-->
-						<fo:inline><xsl:value-of select="enofr:get-suffix($source-context, $languages[1])"/></fo:inline>
+						<fo:inline><xsl:value-of select="enopdf:get-suffix($source-context, $languages[1])"/></fo:inline>
 					</fo:block>
 				</fo:block>
 			</xsl:if>
@@ -788,18 +788,18 @@
 	<xsl:template match="xf-item" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		
 		<xsl:variable name="image">
-			<xsl:value-of select="enofr:get-image($source-context)"/>
+			<xsl:value-of select="enopdf:get-image($source-context)"/>
 		</xsl:variable>
 		
 		<xsl:choose>
-			<xsl:when test="enofr:get-image($source-context) != ''" >
+			<xsl:when test="enopdf:get-image($source-context) != ''" >
 				<xsl:choose>
 					<xsl:when test="starts-with($image,'http')">
-						<!-- <xsl:value-of select="concat('<fo:external-graphic src=\"',$image,'\" title=\"',eno:serialize(enofr:get-label($source-context, $languages[1])),'\" /&gt;')"/> -->
+						<!-- <xsl:value-of select="concat('<fo:external-graphic src=\"',$image,'\" title=\"',eno:serialize(enopdf:get-label($source-context, $languages[1])),'\" /&gt;')"/> -->
 							<fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm" >&#x274F;</fo:inline>
 							<fo:external-graphic padding-right="3mm">
 								<xsl:attribute name="src">
@@ -808,7 +808,7 @@
 							</fo:external-graphic>
 					</xsl:when>
 					<xsl:otherwise>
-						<!--  <xsl:value-of select="concat('&lt;fo:external-graphic src=&quot;/',$properties//Images/Folder,'/',$image,'&quot; title=&quot;',eno:serialize(enofr:get-label($source-context, $languages[1])),'&quot; /&gt;')"/>-->
+						<!--  <xsl:value-of select="concat('&lt;fo:external-graphic src=&quot;/',$properties//Images/Folder,'/',$image,'&quot; title=&quot;',eno:serialize(enopdf:get-label($source-context, $languages[1])),'&quot; /&gt;')"/>-->
 							<fo:inline font-family="ZapfDingbats" font-size="10pt"
 								margin-top="3mm">&#x274F;</fo:inline>
 							<fo:external-graphic padding-right="3mm">
@@ -827,9 +827,9 @@
 					<xsl:when test="$no-border = 'no-border'">
 						<fo:inline font-family="ZapfDingbats" font-size="10pt" padding-right="4mm" padding-left="6mm"
 							margin-top="3mm">&#x274F;</fo:inline>
-						<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+						<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 							<fo:inline>
-								<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+								<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 							</fo:inline>
 						</xsl:if>
 					</xsl:when>
@@ -837,8 +837,8 @@
 						<fo:block>
 							<fo:inline font-family="ZapfDingbats" font-size="10pt" padding-right="5mm"
 								margin-top="3mm">&#x274F;</fo:inline>
-							<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
-								<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+							<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+								<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 							</xsl:if>
 						</fo:block>
 					</xsl:otherwise>
@@ -846,10 +846,10 @@
 				
 			</xsl:otherwise>
 		</xsl:choose>
-		<!--<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+		<!--<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<fo:table-cell>
 						<fo:block>
-							<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+							<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 						</fo:block>
 					</fo:table-cell>
 
@@ -857,7 +857,7 @@
 			<fo:block font-size="10pt" font-weight="normal" color="black">
 				<fo:inline font-family="ZapfDingbats" font-size="10pt" padding-right="7mm"
 					margin-top="3mm">&#x274F;</fo:inline>
-				<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+				<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 			</fo:block>
 			</fo:table-cell>
 		</xsl:if>-->
@@ -875,12 +875,12 @@
 	<!-- Déclenche tous les xf-select de l'arbre des divers -->
 	<xsl:template match="xf-select" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		<fo:block page-break-inside="avoid">	
-			<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+			<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 				<fo:block xsl:use-attribute-sets="label-question">
-					<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+					<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 				</fo:block>
 			</xsl:if>
 	
@@ -889,9 +889,9 @@
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
 			
-			<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+			<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 				<fo:block>
-					<xsl:if test="enofr:is-first($source-context) = 'true'">
+					<xsl:if test="enopdf:is-first($source-context) = 'true'">
 						<xsl:text disable-output-escaping="yes">
 							&lt;/fo:block&gt;						
 						</xsl:text>
@@ -907,15 +907,15 @@
 		
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
-		<xsl:variable name="format" select="enofr:get-appearance($source-context)"/>
+		<xsl:variable name="format" select="enopdf:get-appearance($source-context)"/>
 		
 		
 		<fo:block page-break-inside="avoid">
-			<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+			<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 				<fo:block xsl:use-attribute-sets="label-question">
-					<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+					<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 				</fo:block>
 			</xsl:if>
 			
@@ -934,8 +934,8 @@
 			</xsl:choose>
 		</fo:block><!-- Cant work veriry dom of simpson.fo -->
 		
-		<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
-				<xsl:if test="enofr:is-first($source-context) = 'true'">
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+				<xsl:if test="enopdf:is-first($source-context) = 'true'">
 					<xsl:text disable-output-escaping="yes">
 						&lt;/fo:block&gt;					
 					</xsl:text>
@@ -947,22 +947,22 @@
 	<!-- Déclenche tous les Table de l'arbre des drivers -->
 	<xsl:template match="Table" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 
 		
 		<!-- On récupére la question associée à la table -->
 		<fo:block xsl:use-attribute-sets="label-question" margin-bottom="4mm">
-			<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+			<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 
 		<!-- FLAG Recupérer les caractéristiques du tableau pour le construire dynamiquement -->
 
-		<!--<NBHeaderCols><xsl:value-of select="count(enofr:get-header-columns($source-context))"/></NBHeaderCols>
-			<NBHeaderLines><xsl:value-of select="count(enofr:get-header-lines($source-context))"/></NBHeaderLines>	
-			<NBHeaderLine><xsl:value-of select="count(enofr:get-header-line($source-context, position()))"/></NBHeaderLine>
-			<NBBodyLines><xsl:value-of select="count(enofr:get-body-lines($source-context))"/></NBBodyLines>
-			<NBBodyLine><xsl:value-of select="count(enofr:get-body-line($source-context, position()))"/></NBBodyLine>-->
+		<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
+			<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>	
+			<NBHeaderLine><xsl:value-of select="count(enopdf:get-header-line($source-context, position()))"/></NBHeaderLine>
+			<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
+			<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>-->
 
 
 		<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
@@ -974,12 +974,12 @@
 			</xsl:variable>
 
 			<!--Gestion du nombre de colonnes pour la construction du tableau-->
-			<!--<xsl:for-each select="enofr:get-header-line($source-context, position())">
+			<!--<xsl:for-each select="enopdf:get-header-line($source-context, position())">
 				<fo:table-column column-width="proportional-column-width(1)"/>
 			</xsl:for-each>-->
 
 			<!--Gestion du header-->
-			<xsl:if test="count(enofr:get-header-lines($source-context)) != 0">
+			<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
 
 				<!-- Avant d'entrer dans un for-each, sauvegarde obligatoire de l'arbre des driver -->
 				<xsl:variable name="ancestors">
@@ -988,23 +988,23 @@
 
 				<fo:table-header>
 					<!-- Récupére le nombre de header-lines = Nombre de lignes dans le tableau -->
-					<xsl:for-each select="enofr:get-header-lines($source-context)">
+					<xsl:for-each select="enopdf:get-header-lines($source-context)">
 						<fo:table-row xsl:use-attribute-sets="entete-ligne" text-align="center">
-							<!--<NBHeaderCols><xsl:value-of select="count(enofr:get-header-columns($source-context))"/></NBHeaderCols>
-									<NBHeaderLines><xsl:value-of select="count(enofr:get-header-lines($source-context))"/></NBHeaderLines>
-									<NBHeaderLine><xsl:value-of select="count(enofr:get-header-line($source-context, position()))"/></NBHeaderLine>
-									<NBBodyLines><xsl:value-of select="count(enofr:get-body-lines($source-context))"/></NBBodyLines>
-									<NBBodyLine><xsl:value-of select="count(enofr:get-body-line($source-context, position()))"/></NBBodyLine>
-									<NBRowspan><xsl:value-of select="enofr:get-rowspan($source-context)"/></NBRowspan>
-									<NBColspan><xsl:value-of select="enofr:get-colspan($source-context)"/></NBColspan>-->
+							<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
+									<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>
+									<NBHeaderLine><xsl:value-of select="count(enopdf:get-header-line($source-context, position()))"/></NBHeaderLine>
+									<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
+									<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>
+									<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
+									<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
 
 							<!-- Dans un for-each, la fonction position() renvoie la position de l'élément dans l'arbre temporaire créé dans le select du for-each -->
 							<xsl:apply-templates
-								select="enofr:get-header-line($source-context, position())"
+								select="enopdf:get-header-line($source-context, position())"
 								mode="source">
 								<xsl:with-param name="driver" select="." tunnel="yes"/>
 								<xsl:with-param name="header"  select="'YES'" tunnel="yes"/>
-								<xsl:with-param name="no-border" select="enofr:get-style($source-context)" tunnel="yes"/>
+								<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
 							</xsl:apply-templates>
 							<!-- Pour chaque boucle , on récupére les infos du header -->
 						</fo:table-row>
@@ -1019,19 +1019,19 @@
 
 			<!--Gestion du body-->
 			<fo:table-body>
-				<xsl:for-each select="enofr:get-body-lines($source-context)">
+				<xsl:for-each select="enopdf:get-body-lines($source-context)">
 					<fo:table-row border-color="black" >
-						<!--<NBHeaderCols><xsl:value-of select="count(enofr:get-header-columns($source-context))"/></NBHeaderCols>
-							<NBHeaderLines><xsl:value-of select="count(enofr:get-header-lines($source-context))"/></NBHeaderLines>
-							<NBHeaderLine><xsl:value-of select="count(enofr:get-header-line($source-context, position()))"/></NBHeaderLine>
-							<NBBodyLines><xsl:value-of select="count(enofr:get-body-lines($source-context))"/></NBBodyLines>
-							<NBBodyLine><xsl:value-of select="count(enofr:get-body-line($source-context, position()))"/></NBBodyLine>
-							<NBRowspan><xsl:value-of select="enofr:get-rowspan($source-context)"/></NBRowspan>
-							<NBColspan><xsl:value-of select="enofr:get-colspan($source-context)"/></NBColspan>-->
+						<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
+							<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>
+							<NBHeaderLine><xsl:value-of select="count(enopdf:get-header-line($source-context, position()))"/></NBHeaderLine>
+							<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
+							<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>
+							<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
+							<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
 						<xsl:apply-templates
-							select="enofr:get-body-line($source-context, position())" mode="source">
+							select="enopdf:get-body-line($source-context, position())" mode="source">
 							<xsl:with-param name="driver" select="." tunnel="yes"/>
-							<xsl:with-param name="no-border" select="enofr:get-style($source-context)" tunnel="yes"/>
+							<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
 						</xsl:apply-templates>
 						<!-- Pour chaque boucle , on récupére les infos des lignes du tableau -->
 					</fo:table-row>
@@ -1041,8 +1041,8 @@
 			
 		
 		
-		<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
-			<xsl:if test="enofr:is-first($source-context) = 'true'">
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+			<xsl:if test="enopdf:is-first($source-context) = 'true'">
 				<xsl:text disable-output-escaping="yes">
 						&lt;/fo:block&gt;					
 					</xsl:text>
@@ -1057,18 +1057,18 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="instance-ancestor" tunnel="yes"/>
 		
-		<xsl:if test="enofr:get-rooster-number-lines($source-context) = 8">
+		<xsl:if test="enopdf:get-rooster-number-lines($source-context) = 8">
 			<fo:block xsl:use-attribute-sets="label-question" margin-bottom="4mm">
-				<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+				<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 			</fo:block>
 			
 			<!-- FLAG Recupérer les caractéristiques du tableau pour le construire dynamiquement -->
 			
-			<!--<NBHeaderCols><xsl:value-of select="count(enofr:get-header-columns($source-context))"/></NBHeaderCols>
-			<NBHeaderLines><xsl:value-of select="count(enofr:get-header-lines($source-context))"/></NBHeaderLines>	
-			<NBHeaderLine><xsl:value-of select="count(enofr:get-header-line($source-context, position()))"/></NBHeaderLine>
-			<NBBodyLines><xsl:value-of select="count(enofr:get-body-lines($source-context))"/></NBBodyLines>
-			<NBBodyLine><xsl:value-of select="count(enofr:get-body-line($source-context, position()))"/></NBBodyLine>-->
+			<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
+			<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>	
+			<NBHeaderLine><xsl:value-of select="count(enopdf:get-header-line($source-context, position()))"/></NBHeaderLine>
+			<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
+			<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>-->
 			
 			
 			<fo:table inline-progression-dimension="auto" font-size="10pt" table-layout="fixed" width="100%" border-width="0.35mm"
@@ -1080,12 +1080,12 @@
 				</xsl:variable>
 				
 				<!--Gestion du nombre de colonnes pour la construction du tableau-->
-				<!--<xsl:for-each select="enofr:get-header-line($source-context, position())">
+				<!--<xsl:for-each select="enopdf:get-header-line($source-context, position())">
 				<fo:table-column column-width="proportional-column-width(1)"/>
 			</xsl:for-each>-->
 				
 				<!--Gestion du header-->
-				<xsl:if test="count(enofr:get-header-lines($source-context)) != 0">
+				<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
 					
 					<!-- Avant d'entrer dans un for-each, sauvegarde obligatoire de l'arbre des driver -->
 					<xsl:variable name="ancestors">
@@ -1094,16 +1094,16 @@
 					
 					<fo:table-header>
 						<!-- Récupére le nombre de header-lines = Nombre de lignes dans le tableau -->
-						<xsl:for-each select="enofr:get-header-lines($source-context)">
+						<xsl:for-each select="enopdf:get-header-lines($source-context)">
 							<fo:table-row xsl:use-attribute-sets="entete-ligne" text-align="center">
 								
 								<!-- Dans un for-each, la fonction position() renvoie la position de l'élément dans l'arbre temporaire créé dans le select du for-each -->
 								<xsl:apply-templates
-									select="enofr:get-header-line($source-context, position())"
+									select="enopdf:get-header-line($source-context, position())"
 									mode="source">
 									<xsl:with-param name="driver" select="." tunnel="yes"/>
 									<xsl:with-param name="header"  select="'YES'" tunnel="yes"/>
-									<xsl:with-param name="no-border" select="enofr:get-style($source-context)" tunnel="yes"/>
+									<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
 								</xsl:apply-templates>
 								<!-- Pour chaque boucle , on récupére les infos du header -->
 							</fo:table-row>
@@ -1118,19 +1118,19 @@
 				
 				<!--Gestion du body-->
 				<fo:table-body>
-					<xsl:for-each select="enofr:get-body-lines($source-context)">
+					<xsl:for-each select="enopdf:get-body-lines($source-context)">
 						<fo:table-row border-color="black" >
-							<!--<NBHeaderCols><xsl:value-of select="count(enofr:get-header-columns($source-context))"/></NBHeaderCols>
-							<NBHeaderLines><xsl:value-of select="count(enofr:get-header-lines($source-context))"/></NBHeaderLines>
-							<NBHeaderLine><xsl:value-of select="count(enofr:get-header-line($source-context, position()))"/></NBHeaderLine>
-							<NBBodyLines><xsl:value-of select="count(enofr:get-body-lines($source-context))"/></NBBodyLines>
-							<NBBodyLine><xsl:value-of select="count(enofr:get-body-line($source-context, position()))"/></NBBodyLine>
-							<NBRowspan><xsl:value-of select="enofr:get-rowspan($source-context)"/></NBRowspan>
-							<NBColspan><xsl:value-of select="enofr:get-colspan($source-context)"/></NBColspan>-->
+							<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
+							<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>
+							<NBHeaderLine><xsl:value-of select="count(enopdf:get-header-line($source-context, position()))"/></NBHeaderLine>
+							<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
+							<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>
+							<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
+							<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
 							<xsl:apply-templates
-								select="enofr:get-body-line($source-context, position())" mode="source">
+								select="enopdf:get-body-line($source-context, position())" mode="source">
 								<xsl:with-param name="driver" select="." tunnel="yes"/>
-								<xsl:with-param name="no-border" select="enofr:get-style($source-context)" tunnel="yes"/>
+								<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
 							</xsl:apply-templates>
 							<!-- Pour chaque boucle , on récupére les infos des lignes du tableau -->
 						</fo:table-row>
@@ -1138,8 +1138,8 @@
 				</fo:table-body>
 			</fo:table>
 
-			<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
-				<xsl:if test="enofr:is-first($source-context) = 'true'">
+			<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+				<xsl:if test="enopdf:is-first($source-context) = 'true'">
 					<xsl:text disable-output-escaping="yes">
 						&lt;/fo:block&gt;					
 					</xsl:text>
@@ -1160,13 +1160,13 @@
 		
 		<!--FLAG-->
 		<!--<TextCell/>
-		<NBRowspan><xsl:value-of select="enofr:get-rowspan($source-context)"/></NBRowspan>
-		<NBColspan><xsl:value-of select="enofr:get-colspan($source-context)"/></NBColspan>-->
-		<!--<CodeDepth><xsl:value-of select="enofr:get-code-depth($source-context)"/></CodeDepth>-\->-->
+		<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
+		<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
+		<!--<CodeDepth><xsl:value-of select="enopdf:get-code-depth($source-context)"/></CodeDepth>-\->-->
 		
 		<fo:table-cell xsl:use-attribute-sets="colonne-tableau"
-			number-rows-spanned="{enofr:get-rowspan($source-context)}"
-			number-columns-spanned="{enofr:get-colspan($source-context)}">
+			number-rows-spanned="{enopdf:get-rowspan($source-context)}"
+			number-columns-spanned="{enopdf:get-colspan($source-context)}">
 			<xsl:if test="$header">
 				<xsl:attribute name="text-align">center</xsl:attribute>
 			</xsl:if>
@@ -1199,15 +1199,15 @@
 
 		<!--FLAG-->
 		<!--<BodyTextCell/>-->
-		<!--<NBRowspan><xsl:value-of select="enofr:get-rowspan($source-context)"/></NBRowspan>
-			<NBColspan><xsl:value-of select="enofr:get-colspan($source-context)"/></NBColspan>-->
-		<!--<CodeDepth><xsl:value-of select="enofr:get-code-depth($source-context)"/></CodeDepth>-->
+		<!--<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
+			<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
+		<!--<CodeDepth><xsl:value-of select="enopdf:get-code-depth($source-context)"/></CodeDepth>-->
 
 		<xsl:variable name="depth">
-			<xsl:value-of select="enofr:get-code-depth($source-context)"/>
+			<xsl:value-of select="enopdf:get-code-depth($source-context)"/>
 		</xsl:variable>
 
-		<!--<fo:table-cell border-color="black" border-style="solid" text-align="left" number-rows-spanned="{enofr:get-rowspan($source-context)}" number-columns-spanned="{enofr:get-colspan($source-context)}">-->
+		<!--<fo:table-cell border-color="black" border-style="solid" text-align="left" number-rows-spanned="{enopdf:get-rowspan($source-context)}" number-columns-spanned="{enopdf:get-colspan($source-context)}">-->
 
 
 		<xsl:if test="$depth != '1' and $depth != ''">
@@ -1234,7 +1234,7 @@
 	<xsl:template match="Cell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		
 		<fo:table-cell text-align="left" border-color="black" border-style="solid" padding="1mm">
@@ -1255,19 +1255,19 @@
 	<!-- Déclenche tous les EmptyCell de l'arbre des divers -->
 	<xsl:template match="EmptyCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		<!--FLAG-->
 		<!--<EmptyCell/>-->
 		<fo:table-cell background-color="#CCCCCC" border-color="black" border-style="solid">
-			<!--<xsl:if test="enofr:get-label($source-context,$languages[1]) !=''">-->
+			<!--<xsl:if test="enopdf:get-label($source-context,$languages[1]) !=''">-->
 			<fo:block>
-				<!--<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>-->
+				<!--<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>-->
 				 </fo:block>
 		</fo:table-cell>
 		<!--</xsl:if>-->
 
-		<xsl:if test="enofr:get-colspan($source-context) = '2'">
+		<xsl:if test="enopdf:get-colspan($source-context) = '2'">
 			<fo:table-cell background-color="#CCCCCC" border-color="black" border-style="solid">
 				<fo:block>  </fo:block>
 			</fo:table-cell>
@@ -1284,11 +1284,11 @@
 	<!-- Déclenche tous les xf-group de l'arbre des divers -->
 	<xsl:template match="xf-group" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 
 		<fo:block font-size="10pt" font-weight="bold" color="black">
-			<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+			<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 
 		<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
@@ -1301,12 +1301,12 @@
 	<!-- Déclenche tous les xf-textarea de l'arbre des divers -->
 	<xsl:template match="xf-textarea" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		
 		<fo:block page-break-inside="avoid">
 			<fo:block xsl:use-attribute-sets="label-question">
-				<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+				<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 			</fo:block>
 			
 			<fo:block xsl:use-attribute-sets="Line-drawing">
@@ -1326,9 +1326,9 @@
 			</fo:block>
 		</fo:block>
 		
-		<xsl:if test="enofr:get-label($source-context, $languages[1]) != ''">
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<fo:block>
-				<xsl:if test="enofr:is-first($source-context) = 'true'">
+				<xsl:if test="enopdf:is-first($source-context) = 'true'">
 					<xsl:text disable-output-escaping="yes">
 						&lt;/fo:block&gt;						
 					</xsl:text>
@@ -1347,11 +1347,11 @@
 	<!-- Déclenche tous les ResponseElement de l'arbre des divers -->
 	<xsl:template match="ResponseElement" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 
 		<fo:block font-size="10pt" font-weight="bold" color="black">
-			<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+			<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 
 		<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
@@ -1364,10 +1364,10 @@
 	<!-- Déclenche tous les ResponseElement de l'arbre des divers -->
 	<xsl:template match="MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		<fo:block xsl:use-attribute-sets="label-question">
-			<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
+			<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 		<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
 		<fo:block>
@@ -1376,7 +1376,7 @@
 			</xsl:apply-templates>
 		</fo:block>
 		
-		<xsl:if test="enofr:is-first($source-context) = 'true'">
+		<xsl:if test="enopdf:is-first($source-context) = 'true'">
 			<xsl:text disable-output-escaping="yes">
 				&lt;/fo:block&gt;
 			</xsl:text>
@@ -1388,12 +1388,12 @@
 	<!-- Déclenche tous les Rowloop de l'arbre des divers -->
 	<!--<xsl:template match="RowLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>Check-OK-2
 
 		<fo:block font-size="10pt" font-weight="bold" color="black">
-			<xsl:value-of select="enofr:get-label($source-context, $languages[1])"/>
-			<xsl:value-of select="enofr:get-minimum-lines($source-context)"/>
+			<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
+			<xsl:value-of select="enopdf:get-minimum-lines($source-context)"/>
 		</fo:block>
 
 		
@@ -1402,7 +1402,7 @@
 		</xsl:apply-templates>
 		
 		<fo:block>
-			<xsl:if test="enofr:is-first($source-context) = 'true'">
+			<xsl:if test="enopdf:is-first($source-context) = 'true'">
 				<xsl:text disable-output-escaping="yes">
 						&lt;/fo:block&gt;						
 					</xsl:text>
@@ -1413,11 +1413,11 @@
 
 	<xsl:template match="DoubleDuration" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		
-		<xsl:if test="enofr:get-type($source-context) = 'duration'"> 
-			<xsl:variable name="field" select="enofr:get-format($source-context)"/>
+		<xsl:if test="enopdf:get-type($source-context) = 'duration'"> 
+			<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
 			<fo:inline xsl:use-attribute-sets="general-style">
 				<xsl:for-each select="1 to string-length($field)">
 					<xsl:variable name="curVal" select="."/>
