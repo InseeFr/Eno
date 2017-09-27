@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="enoPdf" basedir=".">
+<project name="enoOdt" basedir=".">
 	
 	<!-- May be included as a pdfPostProcessing operation or handled completely separately from Eno
 		Issues to be directly included :
@@ -25,8 +25,8 @@
 	</target>
 	-->
 	<!-- pdfPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
-	<target name="pdfPostProcessing">
-		<copy file="${input-file}" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
+	<target name="odtPostProcessing">
+		<copy file="${temp.home}/${out-format}/${form-name}/basic-form.tmp" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
 	</target>
 	
 </project>

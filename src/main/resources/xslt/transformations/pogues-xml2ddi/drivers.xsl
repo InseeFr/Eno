@@ -15,7 +15,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>A data to be colected with all it's implementation</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Response" mode="source">
@@ -29,7 +29,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>An instuction from the interviewer</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Declaration" mode="source">
@@ -42,7 +42,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>A list a categories to be called in questions</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:CodeList" mode="source">
@@ -55,7 +55,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>A refernce calling a CodeList</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:CodeListReference" mode="source">
@@ -69,7 +69,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>A category, generaly stored in CodeLists</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Code" mode="source">
@@ -82,7 +82,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>The simplest question with a type of data</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='SIMPLE' ]"
@@ -97,7 +97,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>A question with a choice to be made between categories or elementsof a CodeList</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='SINGLE_CHOICE' ]"
@@ -112,7 +112,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>A question with multiple choices to be made between categories or elements of CodeLists</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='MULTIPLE_CHOICE' ]"
@@ -127,7 +127,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>A question table with each cell representing an answer</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='QuestionType' and @questionType='TABLE' ]"
@@ -141,7 +141,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>A sequence that can contains other sequenses or questions</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Child[@xsi:type='SequenceType']" mode="source">
@@ -355,7 +355,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>A specific sequence construct that can hide it's childs</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:IfThenElse" mode="source">
@@ -368,7 +368,7 @@
    </xsl:template>
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
-         <xd:p>An information about the structure of the answers of a complex question</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:ResponseStructure" mode="source">

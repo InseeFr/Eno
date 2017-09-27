@@ -2,16 +2,16 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
-    xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner"
-    xmlns:enoddi2pdf="http://xml.insee.fr/apps/eno/ddi2pdf"
+    xmlns:enoodt="http://xml.insee.fr/apps/eno/out/odt"
+    xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
     xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
 
     <!-- Importing the different resources -->
     <xsl:import href="../../inputs/ddi/source.xsl"/>
-    <xsl:import href="../../outputs/pdf/models.xsl"/>
+    <xsl:import href="../../outputs/odt/models.xsl"/>
     <xsl:import href="../../lib.xsl"/>
-
+    
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>This stylesheet is used to transform a DDI input into an Xforms form (containing orbeon form runner adherences).</xd:p>
@@ -22,28 +22,28 @@
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
     <xsl:strip-space elements="*"/>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>The parameter file used by the stylesheet.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:param name="parameters-file"/>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>The parameters are charged as an xml tree.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:variable name="parameters" select="doc($parameters-file)"/>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>The folder containing label resources in different languages.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:param name="labels-folder"/>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>A variable is created to build a set of label resources in different languages.</xd:p>
@@ -51,7 +51,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:variable name="labels-resource">
-        <xsl:sequence select="eno:build-labels-resource($labels-folder,enopdf:get-form-languages(//d:Sequence[d:TypeOfSequence/text()='template']))"/>
+        <xsl:sequence select="eno:build-labels-resource($labels-folder,enoodt:get-form-languages(//d:Sequence[d:TypeOfSequence/text()='template']))"/>
     </xsl:variable>
 
     <xd:doc>
@@ -71,18 +71,18 @@
     <xsl:template match="/">
         <xsl:apply-templates select="//d:Sequence[d:TypeOfSequence/text()='template']" mode="source"/>
     </xsl:template>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>This xforms function is used to get the concatened string corresponding to a dynamic text.</xd:p>
             <xd:p>It is created by calling the static text and making it dynamic.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-calculate-text">
+    <xsl:function name="enoodt:get-calculate-text">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language" as="item()"/>
         <xsl:param name="text-type"/>
-
+        
         <xsl:variable name="static-text-content">
             <xsl:choose>
                 <xsl:when test="$text-type='label'">
@@ -102,7 +102,7 @@
             </xsl:variable>
 
             <xsl:variable name="calculated-text">
-                <xsl:call-template name="enoddi2pdf:calculate-text">
+                <xsl:call-template name="enoddi2fr:calculate-text">
                     <xsl:with-param name="text-to-calculate" select="eno:serialize($static-text-content)"/>
                     <xsl:with-param name="condition-variables" select="$condition-variables"/>
                 </xsl:call-template>
@@ -119,11 +119,11 @@
             <xd:p>This recursive template returns the calculated conditional text from the static one.</xd:p>
         </xd:desc>
     </xd:doc>
-
-    <xsl:template name="enoddi2pdf:calculate-text">
+    
+    <xsl:template name="enoddi2fr:calculate-text">
         <xsl:param name="text-to-calculate"/>
         <xsl:param name="condition-variables"/>
-
+        
         <xsl:text>,</xsl:text>
         <xsl:choose>
             <xsl:when test="contains(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)">
@@ -169,7 +169,7 @@
                         <xsl:text>'</xsl:text>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:call-template name="enoddi2pdf:calculate-text">
+                <xsl:call-template name="enoddi2fr:calculate-text">
                     <xsl:with-param name="text-to-calculate" select="substring-after(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
                     <xsl:with-param name="condition-variables" select="$condition-variables"/>
                 </xsl:call-template>
@@ -182,14 +182,14 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
             <xd:p>It uses different DDI functions to do this job.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-hint">
+    <xsl:function name="enoodt:get-hint">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
         <!-- We look for an instruction of 'Format' type -->
@@ -224,14 +224,14 @@
             </xsl:when>
         </xsl:choose>
     </xsl:function>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms alert for the context on which it is applied.</xd:p>
             <xd:p>It uses different DDI functions to do this job.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-alert">
+    <xsl:function name="enoodt:get-alert">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
         <!-- We look for a 'message' -->
@@ -313,7 +313,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>This function retrieves the languages to appear in the generated Xforms.</xd:p>
@@ -321,7 +321,7 @@
             <xd:p>If not, it will get the languages defined in the DDI input.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-form-languages">
+    <xsl:function name="enoodt:get-form-languages">
         <xsl:param name="context" as="item()"/>
         <xsl:choose>
             <xsl:when test="$parameters/Parameters/Languages">
