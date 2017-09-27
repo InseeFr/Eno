@@ -698,7 +698,19 @@
         <xsl:value-of select="if($isFirstQuestionBlock) then(count(ancestor::*[local-name()=('QuestionItemReference','QuestionGridReference')]/preceding-sibling::*[local-name()=('QuestionItemReference','QuestionGridReference')]) = 0) else(false())"/>
     </xsl:template>
     
-    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-instruction-index for Instruction.</xd:p>
+            <xd:p>Retrieving the index of an instruction based of previous Instructions matching the $formats param (several formats whith ',' separator accepted).</xd:p>
+            <xd:p>For consistency purpose the getter won't return anything if the self::Instruction format doesn't match the $formats param.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Instruction" mode="enoddi:get-instruction-index" priority="2">
+        <xsl:param name="formats" select="'#none'" tunnel="yes"/>
+        <!-- Formatting the param value for use in Xpath expression. -->
+        <xsl:variable name="formatsForXpath" select="tokenize($formats,',')"/>       
+        <xsl:value-of select="if($formats = '#none' or not(d:InstructionName = $formatsForXpath)) then() else(count(preceding::d:Instruction[d:InstructionName/r:String=$formatsForXpath])+1)"/>
+    </xsl:template>
     
     <!--    <xd:doc>
         <xd:desc>
