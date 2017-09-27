@@ -13,7 +13,7 @@
     <!-- The name of the survey, conditionning the name of the input file processed. -->
     <property name="survey-name" value="simpsons"/>
     <!-- The transformation to be processed, usually named using a <in>2<out> template. -->
-    <property name="transformation-name" value="ddi2pdf"/>   
+    <property name="transformation-name" value="ddi2fr"/>   
     <!-- Enabling debug mode (debug=true) will output the name of the drivers encountered and for each an exhaustive call of the getters, instead of the normal output. -->
     <property name="debug" value="false"/>
     <!-- ****************************************************************************************************************************************************** -->
@@ -81,7 +81,10 @@
         <antcall target="OutPostProcessing"/>
         
         <!-- Deleting temp file -->
-        <delete file="${survey-folder}/${out-format}/${form-name}/form/basic-form.tmp"/>
+        <delete file="${temp.home}/${file-name}.tmp"/>
+        <delete file="${temp.home}/${out-format}/${form-name}/basic-form.tmp"/>
+        <delete dir="${temp.home}"/>
+        <!--delete file="${survey-folder}/${out-format}/${form-name}/form/basic-form.tmp"/-->
     </target>
 
     <target name="in2debug">
@@ -163,6 +166,8 @@
             style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
             <param name="generated-file" expression="../../inputs/${in-format}/templates.xsl"/>
         </xslt>
+        <delete file="${temp.home}/temp.tmp"/>
+        <delete file="${temp.home}/temp-bis.tmp"/>
     </target>
 
     <!-- The target used to transform a fods into an xsl stylesheet. -->
@@ -200,6 +205,8 @@
             </then>
             
         </if>
+        <delete file="${temp.home}/preformate.tmp"/>
+        <delete file="${temp.home}/xml.tmp"/>
     </target>
 
     <!--************************TARGETS : PREPROCESSING *****************************-->

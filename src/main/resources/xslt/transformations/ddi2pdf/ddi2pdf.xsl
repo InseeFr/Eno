@@ -8,7 +8,8 @@
                 xmlns:d="ddi:datacollection:3_2"
                 xmlns:r="ddi:reusable:3_2"
                 xmlns:l="ddi:logicalproduct:3_2"
-                version="2.0"><!-- Importing the different resources --><xsl:import href="../../inputs/ddi/source.xsl"/>
+                version="2.0"><!-- Importing the different resources -->
+   <xsl:import href="../../inputs/ddi/source.xsl"/>
    <xsl:import href="../../outputs/pdf/models.xsl"/>
    <xsl:import href="../../lib.xsl"/>
    <xd:doc scope="stylesheet">
@@ -16,7 +17,8 @@
          <xd:p>This stylesheet is used to transform a DDI input into an Xforms form (containing orbeon form runner adherences).</xd:p>
       </xd:desc>
    </xd:doc>
-   <!-- The output file generated will be xml type --><xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+   <!-- The output file generated will be xml type -->
+   <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
    <xsl:strip-space elements="*"/>
    <xd:doc>
       <xd:desc>
@@ -112,21 +114,31 @@
       <xsl:choose>
          <xsl:when test="contains(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)">
             <xsl:text>'</xsl:text>
-            <!-- Replacing the single quote by 2 single quotes because a concatenation is made --><!-- We actually need to double the quotes in order not to generate an error in the xforms concat.--><xsl:value-of select="replace(substring-before($text-to-calculate,$conditioning-variable-begin),'''','''''')"/>
+            <!-- Replacing the single quote by 2 single quotes because a concatenation is made -->
+            <!-- We actually need to double the quotes in order not to generate an error in the xforms concat.-->
+            <xsl:value-of select="replace(substring-before($text-to-calculate,$conditioning-variable-begin),'''','''''')"/>
             <xsl:text>',</xsl:text>
-            <xsl:choose><!-- conditionalText doesn't exist for the element in the DDI structure or it exists and references the variable --><xsl:when test="not($condition-variables//text())">
+            <xsl:choose><!-- conditionalText doesn't exist for the element in the DDI structure or it exists and references the variable -->
+               <xsl:when test="not($condition-variables//text())">
                   <xsl:text>instance('fr-form-instance')//</xsl:text>
-                  <!-- TODO : add the elements that will show which variable to use when it is in a loop --><xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                  <!-- TODO : add the elements that will show which variable to use when it is in a loop -->
+                  <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
                </xsl:when>
-               <!-- conditionalText exists and references the variable --><xsl:when test="index-of($condition-variables//r:SourceParameterReference/r:OutParameter/r:ID,                         substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) &gt;0">
+               <!-- conditionalText exists and references the variable -->
+               <xsl:when test="index-of($condition-variables//r:SourceParameterReference/r:OutParameter/r:ID,                         substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) &gt;0">
                   <xsl:text>instance('fr-form-instance')//</xsl:text>
-                  <!-- TODO : add the elements that will show which variable to use when it is in a loop --><xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                  <!-- TODO : add the elements that will show which variable to use when it is in a loop -->
+                  <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
                </xsl:when>
-               <!-- conditionalText contains the calculation of the variable --><xsl:when test="index-of($condition-variables//d:Expression/r:Command/r:OutParameter/r:ID,                         substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) &gt;0"><!-- TODO : perhaps to change so that the label includes the calculation, not a temporary variable --><xsl:value-of select="replace(replace(                             $condition-variables//d:Expression/r:Command                                                                         [r:OutParameter/r:ID=substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)]                                                                         /r:CommandContent,                                                       '//','instance(''fr-form-instance'')//'),                                               '\]instance(''fr-form-instance'')',']')"/>
+               <!-- conditionalText contains the calculation of the variable -->
+               <xsl:when test="index-of($condition-variables//d:Expression/r:Command/r:OutParameter/r:ID,                         substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) &gt;0"><!-- TODO : perhaps to change so that the label includes the calculation, not a temporary variable -->
+                  <xsl:value-of select="replace(replace(                             $condition-variables//d:Expression/r:Command                                                                         [r:OutParameter/r:ID=substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)]                                                                         /r:CommandContent,                                                       '//','instance(''fr-form-instance'')//'),                                               '\]instance(''fr-form-instance'')',']')"/>
                   <!--                        <xsl:text>instance('fr-form-instance')//</xsl:text>
                         <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
---></xsl:when>
-               <xsl:otherwise><!-- conditionalText exists, but the variable is not in it --><xsl:text>'</xsl:text>
+-->
+               </xsl:when>
+               <xsl:otherwise><!-- conditionalText exists, but the variable is not in it -->
+                  <xsl:text>'</xsl:text>
                   <xsl:value-of select="concat($conditioning-variable-begin,                             replace(substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end),'''',''''''),                             $conditioning-variable-end)"/>
                   <xsl:text>'</xsl:text>
                </xsl:otherwise>
@@ -139,7 +151,8 @@
          </xsl:when>
          <xsl:otherwise>
             <xsl:text>'</xsl:text>
-            <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.--><xsl:value-of select="replace($text-to-calculate,'''','''''')"/>
+            <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
+            <xsl:value-of select="replace($text-to-calculate,'''','''''')"/>
             <xsl:text>'</xsl:text>
          </xsl:otherwise>
       </xsl:choose>
@@ -153,25 +166,32 @@
    <xsl:function name="enofr:get-hint">
       <xsl:param name="context" as="item()"/>
       <xsl:param name="language"/>
-      <!-- We look for an instruction of 'Format' type --><xsl:variable name="format-instruction">
+      <!-- We look for an instruction of 'Format' type -->
+      <xsl:variable name="format-instruction">
          <xsl:sequence select="enoddi:get-format-instruction($context,$language)"/>
       </xsl:variable>
-      <xsl:choose><!-- If there is no such instruction --><xsl:when test="not($format-instruction/*)"><!-- We look for the container of the element --><xsl:variable name="question-type">
+      <xsl:choose><!-- If there is no such instruction -->
+         <xsl:when test="not($format-instruction/*)"><!-- We look for the container of the element -->
+            <xsl:variable name="question-type">
                <xsl:value-of select="enoddi:get-container($context)"/>
             </xsl:variable>
-            <!-- If it is a grid we do not want the hint to be displayed for n fields. If it is a question, we can display this info --><xsl:if test="$question-type='question'">
+            <!-- If it is a grid we do not want the hint to be displayed for n fields. If it is a question, we can display this info -->
+            <xsl:if test="$question-type='question'">
                <xsl:variable name="type">
                   <xsl:value-of select="enoddi:get-type($context)"/>
                </xsl:variable>
-               <!-- If it is number, we display this hint --><xsl:if test="$type='number'">
+               <!-- If it is number, we display this hint -->
+               <xsl:if test="$type='number'">
                   <xsl:value-of select="concat($labels-resource/Languages/Language[@xml:lang=$language]/Hint/Number,enoddi:get-maximum($context))"/>
                </xsl:if>
-               <!-- If it is a date, we display this hint --><xsl:if test="$type='date'">
+               <!-- If it is a date, we display this hint -->
+               <xsl:if test="$type='date'">
                   <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Hint/Date"/>
                </xsl:if>
             </xsl:if>
          </xsl:when>
-         <!-- If there is such an instruction, it is used for the hint xforms element --><xsl:when test="$format-instruction/*">
+         <!-- If there is such an instruction, it is used for the hint xforms element -->
+         <xsl:when test="$format-instruction/*">
             <xsl:sequence select="$format-instruction/*"/>
          </xsl:when>
       </xsl:choose>
@@ -185,21 +205,28 @@
    <xsl:function name="enofr:get-alert">
       <xsl:param name="context" as="item()"/>
       <xsl:param name="language"/>
-      <!-- We look for a 'message' --><!-- 02-21-2017 : this function is only called for an Instruction in a ComputationItem on the DDI side --><xsl:variable name="message">
+      <!-- We look for a 'message' -->
+      <!-- 02-21-2017 : this function is only called for an Instruction in a ComputationItem on the DDI side -->
+      <xsl:variable name="message">
          <xsl:sequence select="enoddi:get-consistency-message($context,$language)"/>
       </xsl:variable>
-      <xsl:choose><!-- if there is no such message --><xsl:when test="not($message/node())"><!-- We retrieve the question type --><xsl:variable name="type">
+      <xsl:choose><!-- if there is no such message -->
+         <xsl:when test="not($message/node())"><!-- We retrieve the question type -->
+            <xsl:variable name="type">
                <xsl:value-of select="enoddi:get-type($context)"/>
             </xsl:variable>
-            <!-- We retrieve the format --><xsl:variable name="format">
+            <!-- We retrieve the format -->
+            <xsl:variable name="format">
                <xsl:value-of select="enoddi:get-format($context)"/>
             </xsl:variable>
-            <!-- If it is a 'text' and a format is defined, we use a generic sentence as an alert --><xsl:if test="$type='text'">
+            <!-- If it is a 'text' and a format is defined, we use a generic sentence as an alert -->
+            <xsl:if test="$type='text'">
                <xsl:if test="not($format='')">
                   <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Text"/>
                </xsl:if>
             </xsl:if>
-            <!-- If it is a number, we look for infos about the format and deduce a message for the alert element --><xsl:if test="$type='number'">
+            <!-- If it is a number, we look for infos about the format and deduce a message for the alert element -->
+            <xsl:if test="$type='number'">
                <xsl:variable name="number-of-decimals">
                   <xsl:value-of select="enoddi:get-number-of-decimals($context)"/>
                </xsl:variable>
@@ -228,10 +255,12 @@
                </xsl:variable>
                <xsl:value-of select="concat($beginning,' ',$minimum, ' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',$maximum, $end)"/>
             </xsl:if>
-            <!-- If it is a 'date', we use a generic sentence as an alert --><xsl:if test="$type='date'">
+            <!-- If it is a 'date', we use a generic sentence as an alert -->
+            <xsl:if test="$type='date'">
                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
             </xsl:if>
-            <!-- In those cases, we use specific messages as alert messages --><xsl:if test="$type='duration'">
+            <!-- In those cases, we use specific messages as alert messages -->
+            <xsl:if test="$type='duration'">
                <xsl:if test="$format='hh'">
                   <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Hours"/>
                </xsl:if>
@@ -362,8 +391,7 @@
          <xd:p>Most Instruction elements activates the xf-output driver.</xd:p>
       </xd:desc>
    </xd:doc>
-   <xsl:template match="d:Instruction[not(ancestor::r:QuestionReference) and not(d:InstructionName/r:String/text()='tooltip')]"
-                 mode="source">
+   <xsl:template match="d:Instruction" mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
@@ -1104,6 +1132,42 @@
    <xsl:function name="enofr:get-image">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enoddi:get-image($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Linking output function enofr:is-first to input function enoddi:is-first.</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enofr:is-first">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enoddi:is-first($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enofr:get-ddi-element">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="local-name($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enofr:get-after-question-title-instructions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enoddi:get-instructions-by-format($context,'instruction,comment')"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enofr:get-end-question-instructions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote,tooltip')"/>
    </xsl:function>
    <xd:doc>
       <xd:desc>

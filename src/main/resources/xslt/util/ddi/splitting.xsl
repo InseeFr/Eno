@@ -21,7 +21,7 @@
     
     <xsl:template match="/">
         <xsl:for-each select="dereferencing:dereferencing-results/dereferencing:dereferencing-result-DDI">
-            <xsl:result-document href="{concat('file:///',replace($output-folder, '\\' , '/'),'/',lower-case(replace(./@instrument-name, '.*-', '')),$suffix)}">
+            <xsl:result-document href="{concat('file:///',replace($output-folder, '\\' , '/'),'/',lower-case(replace(./@instrument-name, '.*-', '')),$file-suffix)}">
                 <xsl:copy-of select="."/>
              </xsl:result-document>
         </xsl:for-each>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
          <xd:p>Linking output function enofr:get-form-title to input function enoddi:get-label.</xd:p>
@@ -289,5 +289,41 @@
    <xsl:function name="enofr:get-image">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enoddi:get-image($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p>Linking output function enofr:is-first to input function enoddi:is-first.</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enofr:is-first">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enoddi:is-first($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enofr:get-ddi-element">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="local-name($context)"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enofr:get-after-question-title-instructions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enoddi:get-instructions-by-format($context,'instruction,comment')"/>
+   </xsl:function>
+   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enofr:get-end-question-instructions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote,tooltip')"/>
    </xsl:function>
 </xsl:stylesheet>

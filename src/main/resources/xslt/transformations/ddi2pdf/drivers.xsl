@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
          <xd:p>The main Sequence activates the higher driver 'Form'.</xd:p>
@@ -97,8 +97,7 @@
          <xd:p>Most Instruction elements activates the xf-output driver.</xd:p>
       </xd:desc>
    </xd:doc>
-   <xsl:template match="d:Instruction[not(ancestor::r:QuestionReference) and not(d:InstructionName/r:String/text()='tooltip')]"
-                 mode="source">
+   <xsl:template match="d:Instruction" mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>

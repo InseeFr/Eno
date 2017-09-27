@@ -34,15 +34,18 @@
         
         <!--splitting-->
         <xslt 
-            in="${temp.home}/${survey-name}-titled.xml"
+            in="${temp.home}/${survey-name}-cleaned.xml"
             out="${temp.home}/null.tmp"
             style="${xslt.home}/util/ddi/splitting.xsl"
             classpath="${saxon.jar}" 
             force="true">
             <param name="output-folder" expression="${temp-folder}"/>
-            <param name="file-suffix" expression="-${survey-name}-splitted.xml"/>
+            <param name="file-suffix" expression="-${survey-name}-final.tmp"/>
         </xslt>
-        
+        <delete file="${temp.home}/${survey-name}-dereferenced.xml"/>
+        <delete file="${temp.home}/${survey-name}-titled.xml"/>
+        <delete file="${temp.home}/${survey-name}-cleaned.xml"/>
+        <delete file="${temp.home}/null.tmp"/>
         <!-- For each created file (one by model), we clean. -->
         <!-- Creating a -cleaned suffixed file -->
         <!--foreach target="cleaning-alpha" param="file" inheritall="true">
