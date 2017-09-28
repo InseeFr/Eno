@@ -6,7 +6,7 @@
     xmlns:d="ddi:datacollection:3_2"
     xmlns:ddi-instance="ddi:instance:3_2"
     xmlns:dereferencing="dereferencing"
-    exclude-result-prefixes="xs xd"
+    exclude-result-prefixes="xs xd ddi-instance"
     version="2.0">
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -16,11 +16,12 @@
         </xd:desc>
     </xd:doc>
     <xsl:param name="output-folder"/>
+    <xsl:param name="file-suffix"/>
     <!--xsl:param name="output-folder" select="'./'"/-->
     
     <xsl:template match="/">
         <xsl:for-each select="dereferencing:dereferencing-results/dereferencing:dereferencing-result-DDI">
-            <xsl:result-document href="{concat('file:///',replace($output-folder, '\\' , '/'),'/',lower-case(replace(./@instrument-name, '.*-', '')),'-dereferenced.tmp')}">
+            <xsl:result-document href="{concat('file:///',replace($output-folder, '\\' , '/'),'/',lower-case(replace(./@instrument-name, '.*-', '')),$file-suffix)}">
                 <xsl:copy-of select="."/>
              </xsl:result-document>
         </xsl:for-each>

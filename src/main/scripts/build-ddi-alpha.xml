@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="EnoDDI">
+    
+    <!-- ********************************************** ddiPreprocessing ************************************************ -->
+    <!-- This target will call 3 sub targets : dereferencing / cleaning / titling -->
+    <target name="ddiPreprocessing">
+        <!-- Dereferencing : the input DDI files (ccs, qb...) -->
+        <!-- Creates multiple files with a -dereferenced suffix in the temp folder-->
+        <xslt 
+            in="${questionnaires.home}/${survey-name}/ddi/${survey-name}.xml"
+            out="${temp.home}/${survey-name}-dereferenced.xml" 
+            style="${xslt.home}/util/ddi/dereferencing-alpha.xsl"
+            classpath="${saxon.jar}" 
+            force="true">
+        </xslt>
+        
+        <!--titling-->
+        <xslt 
+            in="${temp.home}/${survey-name}-dereferenced.xml"
+            out="${temp.home}/${survey-name}-titled.xml" 
+            style="${xslt.home}/util/ddi/titling-alpha.xsl"
+            classpath="${saxon.jar}" 
+            force="true">
+        </xslt>
+        
+        <!--cleaning-->
+        <xslt 
+            in="${temp.home}/${survey-name}-titled.xml"
+            out="${temp.home}/${survey-name}-cleaned.xml"
+            style="${xslt.home}/util/ddi/cleaning-alpha.xsl"
+            classpath="${saxon.jar}" 
+            force="true">
+         </xslt>
+        
+        <!--splitting-->
+        <xslt 
+            in="${temp.home}/${survey-name}-cleaned.xml"
+            out="${temp.home}/null.tmp"
+            style="${xslt.home}/util/ddi/splitting.xsl"
+            classpath="${saxon.jar}" 
+            force="true">
+            <param name="output-folder" expression="${temp-folder}"/>
+            <param name="file-suffix" expression="-${survey-name}-final.tmp"/>
+        </xslt>
+        <delete file="${temp.home}/${survey-name}-dereferenced.xml"/>
+        <delete file="${temp.home}/${survey-name}-titled.xml"/>
+        <delete file="${temp.home}/${survey-name}-cleaned.xml"/>
+        <delete file="${temp.home}/null.tmp"/>
+        <!-- For each created file (one by model), we clean. -->
+        <!-- Creating a -cleaned suffixed file -->
+        <!--foreach target="cleaning-alpha" param="file" inheritall="true">
+            <path>
+                <fileset dir="${temp.home}" includes="*-${survey-name}-splitted.xml"/>
+            </path>
+        </foreach-->
+        <!-- Then adding titles to the created file below -->
+        <!-- Creating a -final suffixed file -->
+        <!--foreach target="titling" param="file" inheritall="true">
+            <path>
+                <fileset dir="${temp.home}" includes="*-cleaned.tmp"/>
+            </path>
+        </foreach-->
+    </target>
+    
+    <!-- Dereferencing -->
+    <!--target name="dereferencing"-->
+        
+        <!-- Creates a dereferenced DDI for each model with the already dereferenced files and adding some variables from the VariableScheme to the upcoming result -->
+
+        
+    <!--/target-->
+    
+    <!-- Cleaning -->
+    <!-- Creates a -cleaned suffixed file after applying the cleaning.xsl stylesheet to the input file -->
+    <!--target name="cleaning" description="Cleaning DDI">
+        <basename file="${file}" property="file-name" suffix=".tmp"/>
+        <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${file-name}-final.tmp"
+            style="${xslt.home}/util/ddi/cleaning-alpha.xsl" classpath="${saxon.jar}" force="true"/>
+    </target-->
+    
+    <!-- Titling -->
+    <!-- Creates a -final suffixed file after applying the titling.xsl stylesheet to the input file -->
+    <!--target name="titling" description="Adding titles">
+        <basename file="${file}" property="file-name" suffix=".tmp"/>
+        <propertyregex property="output-name" input="${file-name}" regexp="-cleaned" replace=""
+            global="true"/>
+        <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${output-name}-final.tmp"
+            style="${xslt.home}/util/ddi/titling.xsl" classpath="${saxon.jar}" force="true">
+            <param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
+        </xslt>
+    </target-->
+        
+    <!-- ddiPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
+    <target name="ddiPostProcessing">
+        <copy file="${temp.home}/${out-format}/${form-name}/basic-form.tmp" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
+    </target>
+  
+</project>
