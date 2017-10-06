@@ -496,26 +496,68 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-computation-items" as="xs:string *">
-        <xsl:variable name="id">
-            <xsl:value-of select="enoddi:get-id(.)"/>
+
+        <xsl:variable name="modified-variables" as="node()">
+            <xsl:call-template name="enoddi:modified-variables">
+                <xsl:with-param name="position" select="1"/>
+                <xsl:with-param name="list-of-variables">
+                    <Variables>
+                        <Variable><xsl:value-of select="enoddi:get-id(.)"/></Variable>
+                    </Variables>
+                </xsl:with-param>
+            </xsl:call-template>
         </xsl:variable>
-        <xsl:for-each
-            select="//d:ComputationItem[contains(r:CommandCode/r:Command/r:CommandContent/text(), $id)]">
-            <!-- The computation Item contains a chain corresponding to the variable. But it might not correspond exactly to this variable. -->
-            <!-- Therefore, we modify the condition by deleting the potential false positive (same value followed by a dash or a number) -->
-            <xsl:variable name="condition">
-                <xsl:value-of
-                    select="replace(r:CommandCode/r:Command/r:CommandContent/text(),concat($id,'(\-|[0-9])'),'')"
-                />
-            </xsl:variable>
-            <!-- If the modified condition still contains the value, then it's ok -->
-            <xsl:if test="contains($condition,$id)">
-                <xsl:value-of
-                    select="enoddi:get-id(current()/d:InterviewerInstructionReference/d:Instruction)"
-                />
-            </xsl:if>
+        
+        <xsl:for-each select="//d:ComputationItem[r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable]">
+            <xsl:value-of select="enoddi:get-id(current()/d:InterviewerInstructionReference/d:Instruction)"/>
         </xsl:for-each>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Recursive template that returns the list of variables depending on the first one (the other ones are all calculated variables).</xd:p>
+        </xd:desc>
+    </xd:doc>
+    
+    <xsl:template name="enoddi:modified-variables">
+        <xsl:param name="position" as="xs:integer"/>
+        <xsl:param name="list-of-variables"/>
+        
+        <xsl:choose>
+            <xsl:when test="count($list-of-variables//Variable)&lt;$position">
+                <xsl:copy-of select="$list-of-variables"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="variable-id" select="$list-of-variables//Variable[position()=$position]"/>
+                <xsl:variable name="calculated-variables" as="xs:string *"
+                    select="//d:GenerationInstruction[r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID = $variable-id]"/>
+                <xsl:variable name="calculated-variables">
+                    <Variables>
+                        <!-- variables that are not already in the list and calculated with the $position variable -->
+                        <xsl:for-each select="//d:GenerationInstruction/r:CommandCode/r:Command
+                                                 [not($list-of-variables//Variable = r:OutParameter/r:ID)
+                                                  and r:Binding/r:SourceParameterReference/r:ID = $variable-id]">
+                            <Variable>
+                                <xsl:value-of select="r:OutParameter/r:ID"/>
+                            </Variable>
+                        </xsl:for-each>                        
+                    </Variables>
+                </xsl:variable>
+                <xsl:call-template name="enoddi:modified-variables">
+                    <xsl:with-param name="position" select="$position +1"/>
+                    <xsl:with-param name="list-of-variables">
+                        <Variables>
+                            <xsl:copy-of select="$list-of-variables//Variable"/>
+                            <xsl:copy-of select="$calculated-variables//Variable"/>
+                        </Variables>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
 
     <xd:doc>
         <xd:desc>
@@ -523,11 +565,19 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-hideable-then" as="xs:string *">
-        <xsl:variable name="id">
-            <xsl:value-of select="enoddi:get-id(.)"/>
+        <xsl:variable name="modified-variables" as="node()">
+            <xsl:call-template name="enoddi:modified-variables">
+                <xsl:with-param name="position" select="1"/>
+                <xsl:with-param name="list-of-variables">
+                    <Variables>
+                        <Variable><xsl:value-of select="enoddi:get-id(.)"/></Variable>
+                    </Variables>
+                </xsl:with-param>
+            </xsl:call-template>
         </xsl:variable>
+        
         <xsl:for-each
-            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='hideable'] and index-of(d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID,$id) > 0]">
+            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='hideable'] and (d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable)]">
             <xsl:choose>
                 <xsl:when test="descendant::d:Sequence/d:TypeOfSequence[text()='module']">
                     <xsl:for-each select="descendant::d:Sequence[d:TypeOfSequence='module']">
@@ -550,11 +600,19 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-deactivatable-then" as="xs:string *">
-        <xsl:variable name="id">
-            <xsl:value-of select="enoddi:get-id(.)"/>
+        <xsl:variable name="modified-variables" as="node()">
+            <xsl:call-template name="enoddi:modified-variables">
+                <xsl:with-param name="position" select="1"/>
+                <xsl:with-param name="list-of-variables">
+                    <Variables>
+                        <Variable><xsl:value-of select="enoddi:get-id(.)"/></Variable>
+                    </Variables>
+                </xsl:with-param>
+            </xsl:call-template>
         </xsl:variable>
+
         <xsl:for-each
-            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='deactivatable'] and contains(d:IfCondition/r:Command/r:CommandContent/text(),$id)]">
+            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='deactivatable'] and contains(d:IfCondition/r:Command/r:CommandContent/text(),$modified-variables//Variable)]">
             <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
         </xsl:for-each>
     </xsl:template>
