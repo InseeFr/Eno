@@ -607,6 +607,9 @@
         <xsl:element name="{enofr:get-name($source-context)}">
             <label>
                 <xsl:choose>
+                    <!-- No label for alert's copy -->
+                    <xsl:when test="eno:serialize(enofr:get-alert($source-context, $language))
+                        = eno:serialize(enofr:get-label($source-context, $language))"/>
                     <xsl:when test="enofr:get-calculate-text($source-context,$language,'label') != ''">
                         <xsl:value-of select="'custom label'"/>
                     </xsl:when>
@@ -628,7 +631,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="eno:serialize(enofr:get-alert($source-context, $language))"/>
-                    </xsl:otherwise>                    
+                    </xsl:otherwise>
                 </xsl:choose>
             </alert>
         </xsl:element>
@@ -649,6 +652,9 @@
         <xsl:element name="{enofr:get-name($source-context)}">
             <label>
                 <xsl:choose>
+                    <!-- No label for alert's copy -->
+                    <xsl:when test="eno:serialize(enofr:get-alert($source-context, $language))
+                        = eno:serialize(enofr:get-label($source-context, $language))"/>
                     <xsl:when test="enofr:get-calculate-text($source-context,$language,'label') != ''">
                         <xsl:value-of select="'custom label'"/>
                     </xsl:when>
@@ -805,22 +811,25 @@
             <xsl:variable name="name" select="enofr:get-name($source-context)"/>
             <xf:bind id="{$name}-resource-{$language}-bind" name="{$name}-{$language}-resource"
                 ref="{$name}">
-                <xsl:if test="$calculate-label != ''">
-                    <xf:bind id="{$name}-resource-{$language}-bind-label"
-                        name="{$name}-{$language}-resource-label" ref="label">
-                        <xsl:attribute name="calculate">
-                            <xsl:value-of select="$calculate-label"/>
-                        </xsl:attribute>
-                    </xf:bind>
-                </xsl:if>
-                <xsl:if test="$calculate-alert != ''">
-                    <xf:bind id="{$name}-resource-{$language}-bind-alert"
-                        name="{$name}-{$language}-resource-alert" ref="alert">
-                        <xsl:attribute name="calculate">
-                            <xsl:value-of select="$calculate-alert"/>
-                        </xsl:attribute>
-                    </xf:bind>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="$calculate-alert != ''">
+                        <xf:bind id="{$name}-resource-{$language}-bind-alert"
+                            name="{$name}-{$language}-resource-alert" ref="alert">
+                            <xsl:attribute name="calculate">
+                                <xsl:value-of select="$calculate-alert"/>
+                            </xsl:attribute>
+                        </xf:bind>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <!-- When there is an alert, the label is not used -->
+                        <xf:bind id="{$name}-resource-{$language}-bind-label"
+                            name="{$name}-{$language}-resource-label" ref="label">
+                            <xsl:attribute name="calculate">
+                                <xsl:value-of select="$calculate-label"/>
+                            </xsl:attribute>
+                        </xf:bind>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xf:bind>
         </xsl:if>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -1021,7 +1030,9 @@
                 </xsl:attribute>
             </xsl:if>
             <xf:label ref="$form-resources/{$name}/label">
-                <xsl:if test="eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
+                <xsl:if test="eno:is-rich-content(enofr:get-label($source-context, $languages[1]))
+                    and not(eno:serialize(enofr:get-alert($source-context, $languages[1]))
+                    = eno:serialize(enofr:get-label($source-context, $languages[1])))">
                     <xsl:attribute name="mediatype">text/html</xsl:attribute>
                 </xsl:if>
             </xf:label>

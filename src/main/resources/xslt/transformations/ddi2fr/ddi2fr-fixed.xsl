@@ -86,7 +86,7 @@
         <xsl:variable name="static-text-content">
             <xsl:choose>
                 <xsl:when test="$text-type='label'">
-                    <xsl:sequence select="enoddi:get-label($context,$language)"/>
+                    <xsl:sequence select="enoddi:get-concatened-label($context,$language)"/>
                 </xsl:when>
                 <xsl:when test="$text-type='alert'">
                     <xsl:sequence select="enoddi:get-consistency-message($context,$language)"/>
@@ -309,7 +309,8 @@
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:sequence select="$message/node()"/>
+                <!--<xsl:value-of select="$message"/>-->
+                <xsl:sequence select="enoddi:get-consistency-message($context,$language)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>

@@ -39,6 +39,7 @@
         <xd:desc>
             <xd:p>Concatenation of the instruction labels in order to create a question
                 label.</xd:p>
+            <xd:p>TODO : Deprecate this implementation. Concatenation is not the right way.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template
@@ -46,7 +47,7 @@
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]
         | d:QuestionItem[not(descendant::d:Instruction[d:InstructionName/r:String/text()='format'])
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
-        mode="enoddi:get-label">
+        mode="enoddi:get-concatened-label" priority="2">
         <xsl:element name="xhtml:p">
             <xsl:element name="xhtml:span">
                 <xsl:attribute name="class">
@@ -93,9 +94,10 @@
     <xd:doc>
         <xd:desc>
             <xd:p>Inserting the Tooltip label into the Sequence label.</xd:p>
+            <xd:p>TODO : Deprecate this implementation. Concatenation is not the right way.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:Sequence[d:InterviewerInstructionReference/d:Instruction/d:InstructionName/r:String[text()='tooltip']]" mode="enoddi:get-label" priority="2">
+    <xsl:template match="d:Sequence[d:InterviewerInstructionReference/d:Instruction/d:InstructionName/r:String[text()='tooltip']]" mode="enoddi:get-concatened-label" priority="2">
         <xsl:apply-templates select="r:Label" mode="lang-choice"/>
         <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[d:InstructionName/r:String='tooltip']">
             <xsl:element name="xhtml:span">
@@ -114,18 +116,32 @@
         </xsl:for-each>
     </xsl:template>
 
+
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>For consistency, get-concatened-label is same as get-label for element with no child d:Instruction or which is not a d:QuestionItem/Grid.</xd:p>
+            </xd:desc>
+        <xd:p>TODO : Deprecate this implementation. Concatenation is not the right way.</xd:p>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-concatened-label">
+        <xsl:apply-templates select="." mode="enoddi:get-label"/>
+    </xsl:template>
+        
+
     <xd:doc>
         <xd:desc>
             <xd:p>For questions which have both a 'format' Instruction and an other Instruction which is not of 'format' type.</xd:p>
             <xd:p>The instruction is not used for the label. It will be used in the enoddi:get-format-instruction instead.</xd:p>
         </xd:desc>
+        <xd:p>TODO : Deprecate this implementation. Format instructions is not used anymore.</xd:p>
     </xd:doc>
     <xsl:template
         match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='format']
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]
         | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='format']
         and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
-        mode="enoddi:get-label">
+        mode="enoddi:get-concatened-label">
         <!-- We get the text of the QuestionText -->
         <xsl:apply-templates select="d:QuestionText/d:LiteralText/d:Text" mode="lang-choice"/>
     </xsl:template>
@@ -133,6 +149,7 @@
     <xd:doc>
         <xd:desc>
             <xd:p>For questions which have a 'format' Instruction.</xd:p>
+            <xd:p>TODO : Deprecate this implementation. Format instructions is not used anymore.</xd:p>            
         </xd:desc>
     </xd:doc>
     <xsl:template
@@ -141,7 +158,7 @@
         <!-- We get the label of the 'format' Instruction -->
         <xsl:apply-templates
             select="descendant::d:Instruction[d:InstructionName/r:String/text()='format']"
-            mode="enoddi:get-label"/>
+            mode="enoddi:get-concatened-label"/>
     </xsl:template>
 
     <xd:doc>
@@ -496,7 +513,6 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-computation-items" as="xs:string *">
-
         <xsl:variable name="modified-variables" as="node()">
             <xsl:call-template name="enoddi:modified-variables">
                 <xsl:with-param name="position" select="1"/>
@@ -513,13 +529,11 @@
         </xsl:for-each>
     </xsl:template>
 
-
     <xd:doc>
         <xd:desc>
             <xd:p>Recursive template that returns the list of variables depending on the first one (the other ones are all calculated variables).</xd:p>
         </xd:desc>
     </xd:doc>
-    
     <xsl:template name="enoddi:modified-variables">
         <xsl:param name="position" as="xs:integer"/>
         <xsl:param name="list-of-variables"/>
@@ -556,8 +570,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
-
 
     <xd:doc>
         <xd:desc>
@@ -723,4 +735,50 @@
         </xsl:for-each>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>get-instruction restricted to a format list (if not #all).</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-instructions-by-format">
+        <xsl:param name="format" select="'#all'" tunnel="yes"/>
+        <xsl:sequence select="d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true()) else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining specific getter is-first for multiple questions.</xd:p>
+            <xd:p>Testing if the parent Question is-first, then testing if it's the first ResponseDomainInMixed</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:ResponseDomainInMixed//*" mode="enoddi:is-first" priority="2">
+        <xsl:variable name="isFirstQuestion" select="enoddi:is-first(ancestor::*[local-name() = ('QuestionItem','QuestionGrid','QuestionBlock')])"/>
+        <xsl:value-of select="if($isFirstQuestion) then(count(ancestor::d:ResponseDomainInMixed/preceding-sibling::d:ResponseDomainInMixed) = 0) else(false())"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining specific getter is-first for questions in questionBlock.</xd:p>
+            <xd:p>Testing if the parent QuestionBlock is-first, then testing if it's the first in the QuestionBlock</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:QuestionBlock//*[local-name()=('QuestionItem','QuestionGrid')]" mode="enoddi:is-first" priority="2">
+        <xsl:variable name="isFirstQuestionBlock" select="enoddi:is-first(ancestor::d:QuestionBlock)"/>
+        <xsl:value-of select="if($isFirstQuestionBlock) then(count(ancestor::*[local-name()=('QuestionItemReference','QuestionGridReference')]/preceding-sibling::*[local-name()=('QuestionItemReference','QuestionGridReference')]) = 0) else(false())"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-instruction-index for Instruction.</xd:p>
+            <xd:p>Retrieving the index of an instruction based of previous Instructions matching the $formats param (several formats whith ',' separator accepted).</xd:p>
+            <xd:p>For consistency purpose the getter won't return anything if the self::Instruction format doesn't match the $formats param.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Instruction" mode="enoddi:get-instruction-index" priority="2">
+        <xsl:param name="formats" select="'#none'" tunnel="yes"/>
+        <!-- Formatting the param value for use in Xpath expression. -->
+        <xsl:variable name="formatsForXpath" select="tokenize($formats,',')"/>       
+        <xsl:value-of select="if($formats = '#none' or not(d:InstructionName = $formatsForXpath)) then() else(count(preceding::d:Instruction[d:InstructionName/r:String=$formatsForXpath])+1)"/>
+    </xsl:template>
+    
 </xsl:stylesheet>
