@@ -230,10 +230,19 @@
                     <!-- Doesn't work : trying to use a virtual tree ; started, not finished, and not prioritary -->
                 </xsl:when>
                 <xsl:otherwise>
+                    <xsl:variable name="levels">
+                        <Levels>
+                            <Level>template</Level>
+                            <Level>module</Level>
+                            <Level>submodule</Level>
+                            <Level>group</Level>
+                        </Levels>
+                    </xsl:variable>
+                    <xsl:variable name="numbering-start" select="$levels//Level[text()=$numbering-browser or following-sibling::Level=$numbering-browser]/text()"/>
                     <xsl:number
                         count="*[(name()='d:QuestionItem' or name()='d:QuestionGrid')]"
                         level="any" format="{$styleQuest/StyleNumQuest}"
-                        from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$numbering-browser]]"
+                        from="d:ControlConstructReference[d:Sequence[d:TypeOfSequence=$numbering-start]]"
                     />
                 </xsl:otherwise>
             </xsl:choose>
