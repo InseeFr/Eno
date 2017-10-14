@@ -398,9 +398,7 @@
             <xsl:when test="$relatedInstruction">
                 <xsl:value-of select="enoddi:get-instruction-index($relatedInstruction,'footnote')"/>                                
             </xsl:when>
-            <xsl:otherwise>
-                <xsl:text>Nada !</xsl:text>
-            </xsl:otherwise>                
+            <xsl:otherwise/>                             
         </xsl:choose>                
     </xsl:template>
     
