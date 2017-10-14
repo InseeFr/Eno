@@ -5,7 +5,7 @@
     xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner"
     xmlns:enoddi2pdf="http://xml.insee.fr/apps/eno/ddi2pdf"
     xmlns:d="ddi:datacollection:3_2"
-    xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
+    xmlns:r="ddi:reusable:3_2" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
 
     <!-- Importing the different resources -->
     <xsl:import href="../../inputs/ddi/source.xsl"/>
@@ -335,4 +335,73 @@
         </xsl:choose>
     </xsl:function>
 
+    <xsl:function name="enopdf:get-formatted-label">
+        <xsl:param name="label" as="item()"/>
+        <xsl:param name="language"/>
+        <xsl:variable name="tempLabel">
+            <xsl:apply-templates select="enoddi:get-label($label,$language)" mode="enopdf:format-label"/>
+        </xsl:variable>
+        <xsl:sequence select="$tempLabel"/>
+    </xsl:function>
+    
+    
+    <xsl:template match="*" mode="enopdf:format-label">
+      <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+    </xsl:template>
+    
+    <xsl:template match="xhtml:p[.//xhtml:br]" mode="enopdf:format-label">
+        <xsl:element name="fo:block">
+            <xsl:attribute name="linefeed-treatment" select="'preserve'"/>
+            <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="*[not(descendant-or-self::xhtml:*)]" mode="enopdf:format-label">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+    
+    <xsl:template match="text()" mode="enopdf:format-label">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+    
+    <xsl:template match="xhtml:i" mode="enopdf:format-label">
+        <xsl:element name="fo:inline">          
+            <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="xhtml:b" mode="enopdf:format-label">
+        <xsl:element name="fo:inline">
+            <xsl:attribute name="font-weight" select="'bold'"/>
+            <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+        </xsl:element>        
+    </xsl:template>
+    
+    <xsl:template match="xhtml:span[@style='text-decoration:underline']" mode="enopdf:format-label">
+        <xsl:element name="fo:wrapper">
+            <xsl:attribute name="text-decoration" select="'underline'"/>
+            <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="xhtml:br" mode="enopdf:format-label">
+        <xsl:text xml:space="preserve">&#xA;</xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="xhtml:a[contains(@href,'#ftn')]" mode="enopdf:format-label">
+        <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+        <xsl:variable name="relatedInstruction" select="//d:Instruction[.//xhtml:p/@id = substring-after(current()/@href,'#')]"/>
+        <xsl:choose>
+            <xsl:when test="$relatedInstruction/d:InstructionName/r:String = 'tooltip'">
+                <xsl:text>*</xsl:text>
+            </xsl:when>
+            <xsl:when test="$relatedInstruction">
+                <xsl:value-of select="enoddi:get-instruction-index($relatedInstruction,'footnote')"/>                                
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>Nada !</xsl:text>
+            </xsl:otherwise>                
+        </xsl:choose>                
+    </xsl:template>
+    
 </xsl:stylesheet>
