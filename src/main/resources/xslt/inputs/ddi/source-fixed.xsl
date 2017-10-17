@@ -51,7 +51,8 @@
         <xsl:element name="xhtml:p">
             <xsl:element name="xhtml:span">
                 <xsl:attribute name="class">
-                    <xsl:value-of select="'block'"/>
+                    <xsl:value-of select="'block '"/>
+                    <xsl:value-of select="enoddi:get-style(.)"/>
                 </xsl:attribute>
                 <xsl:if test="d:QuestionText/d:LiteralText/d:Text/xhtml:p/@id">
                     <xsl:attribute name="id" select="d:QuestionText/d:LiteralText/d:Text/xhtml:p/@id"/>
@@ -76,15 +77,16 @@
                     </xsl:element>
                 </xsl:for-each>
             </xsl:element>
-            <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[not(d:InstructionName/r:String[text()='tooltip'])]/d:InstructionText/d:LiteralText/d:Text">
+            <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[not(d:InstructionName/r:String[text()='tooltip'])]">
                 <xsl:element name="xhtml:span">
                     <xsl:attribute name="class">
-                        <xsl:value-of select="'block'"/>
+                        <xsl:value-of select="'block '"/>
+                        <xsl:value-of select="enoddi:get-style(.)"/>
                     </xsl:attribute>
-                    <xsl:if test="xhtml:p/@id">
-                        <xsl:attribute name="id" select="xhtml:p/@id"/>
+                    <xsl:if test="d:InstructionText/d:LiteralText/d:Text/xhtml:p/@id">
+                        <xsl:attribute name="id" select="d:InstructionText/d:LiteralText/d:Text/xhtml:p/@id"/>
                     </xsl:if>
-                    <xsl:apply-templates select="node()[not(name()='xhtml:p')] | xhtml:p/node()"
+                    <xsl:apply-templates select="d:InstructionText/d:LiteralText/d:Text/node()[not(name()='xhtml:p')] | d:InstructionText/d:LiteralText/d:Text/xhtml:p/node()"
                         mode="lang-choice"/>
                 </xsl:element>
             </xsl:for-each>
