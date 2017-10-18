@@ -34,21 +34,7 @@
 			<office:font-face-decls>
 				<style:font-face style:name="Arial" svg:font-family="Arial" style:font-family-generic="system" style:font-pitch="variable"/>
 			</office:font-face-decls>
-			<office:styles>
-				<style:style style:name="Standard" style:family="paragraph" style:class="text"/>
-				<style:style style:name="Title" style:family="paragraph" style:class="chapter">
-					<style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
-					<style:text-properties fo:font-size="28pt" fo:font-weight="bold"/>
-				</style:style>
-				<style:style style:name="Module" style:family="paragraph" style:default-outline-level="1" style:class="text">
-					<style:paragraph-properties fo:text-align="left" fo:break-before="page"/>
-					<style:text-properties fo:font-size="24pt" fo:font-weight="bold"/>
-				</style:style>
-				<style:style style:name="SubModule" style:family="paragraph" style:default-outline-level="2" style:class="text">
-					<style:paragraph-properties fo:text-align="left"/>
-					<style:text-properties fo:font-size="20pt" fo:font-weight="bold"/>
-				</style:style>
-			</office:styles>
+			<xsl:copy-of select="document('office-headers.xml')/office:document/office:styles"></xsl:copy-of>
 			<office:body>
 				<office:text>
 					<text:p text:style-name="Title"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
