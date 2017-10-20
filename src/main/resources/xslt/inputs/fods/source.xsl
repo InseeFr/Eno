@@ -8,6 +8,11 @@
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>A library of getter functions for fods with their implementations for different elements.</xd:p>
+        <xd:p>Getters implemented :</xd:p>
+            <xd:ul>
+                <xd:li>get-content : send the cell content back</xd:li>
+                <xd:li>get-column-name : send the column name of a cell back based on the first line of the table (supposed to be a header line)</xd:li>
+            </xd:ul>
         </xd:desc>
     </xd:doc>
 

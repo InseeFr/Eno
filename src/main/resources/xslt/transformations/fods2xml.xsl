@@ -15,6 +15,30 @@
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>This stylesheet is used to transform fods into xml.</xd:p>
+        <xd:p>Main principles of the transformation :</xd:p>
+            <xd:ul>
+                <xd:li>It implements driver/getter eno pattern</xd:li>
+                <xd:li>2 drivers : GenericElement (lines) and DefinedElement (cells)</xd:li>
+                <xd:li>Drivers flow is implemented below</xd:li>
+                <xd:li>2 getters : enoxml:get-element-name (= column name) and enoxml:get-content (= cell content)</xd:li>
+                <xd:li>getters implementations in the "source.xsl" file of the fods input interface.</xd:li>
+            </xd:ul>
+            <xd:p>Architecture of the transformation :
+                <xd:ul>
+                    <xd:li>fods2xml.xsl : entry point, drivers flow implementation, outGetters definitions</xd:li>
+                    <xd:li>inGetters implementation : inputs/fods/source.xsl</xd:li>
+                    <xd:li>drivers implementation : xml/models.xsl</xd:li>
+                </xd:ul></xd:p>
+            <xd:p>Outputted file format</xd:p>
+            <xd:p>
+                <Root>
+                    <GenericElement><!-- Corresponding to a fods line (ignoring the first line, supposed to be a header line) -->
+                        <DefinedElement name="element-name"/><!-- Corresponding to a cell -->
+                        <!-- content of the DefinedElement (cell content) -->
+                    </GenericElement>
+                    <!-- Other fods lines -->
+                </Root>
+            </xd:p>
         </xd:desc>
     </xd:doc>
 

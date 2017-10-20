@@ -19,12 +19,15 @@
         <xd:desc>
             <xd:p>The default element to match :</xd:p>
             <xd:p>it creates the root of an xslt stylesheet.</xd:p>
+        <xd:d>if debug, is enabled it creates some specific testing templates. </xd:d>
         </xd:desc>
     </xd:doc>
     <xsl:template match="Sheet" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- Creating the root element of an xsl sheet -->
         <xsl:element name='xsl:stylesheet'>
+            <xsl:attribute name="version" select="'2.0'"/>
+            <!-- Choosing between debug-mode or standard (can't easily use template matching pattern cause it's drived by a xsl global param. -->
             <!-- This will call children elements that will create an xml structure -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -32,6 +35,55 @@
         </xsl:element>
     </xsl:template>
     
+    <xsl:template match="Debug//Sheet" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <!-- Creating the root element of an xsl sheet -->
+        <xsl:element name="xsl:stylesheet">
+            <xsl:attribute name="version" select="'2.0'"/>
+            <!-- Choosing between debug-mode or standard (can't easily use template matching pattern cause it's drived by a xsl global param. -->
+            <xsl:variable name="models-sheet" select="document($models-uri-for-debug-mode)"/>
+            <xsl:copy-of select="$models-sheet/xsl:stylesheet/namespace::*"/>
+            <xsl:attribute name="exclude-result-prefixes" select="'#all'"/>
+            <xsl:copy-of
+                select="$models-sheet/xsl:stylesheet/xsl:param | $models-sheet/xsl:stylesheet/xsl:variable"/>
+            <xsl:element name="xsl:template">
+                <xsl:attribute name="match" select="'*'"/>
+                <xsl:attribute name="mode" select="'model'"/>
+                <xsl:element name="xsl:param">
+                    <xsl:attribute name="name" select="'source-context'"/>
+                    <xsl:attribute name="as" select="'item()'"/>
+                    <xsl:attribute name="tunnel" select="'yes'"/>
+                </xsl:element>
+                <xsl:element name="xsl:copy">
+                    <xsl:element name="xsl:apply-templates">
+                        <xsl:attribute name="select" select="'$source-context'"/>
+                        <xsl:attribute name="mode" select="'test-getter'"/>
+                    </xsl:element>
+                    <xsl:element name="xsl:apply-templates">
+                        <xsl:attribute name="select" select="'eno:child-fields($source-context)'"/>
+                        <xsl:attribute name="mode" select="'source'"/>
+                        <xsl:element name="xsl:with-param">
+                            <xsl:attribute name="name" select="'driver'"/>
+                            <xsl:attribute name="select" select="'.'"/>
+                            <xsl:attribute name="tunnel" select="'yes'"/>
+                        </xsl:element>
+                    </xsl:element>
+                </xsl:element>
+            </xsl:element>
+            <xsl:element name="xsl:template">
+                <xsl:attribute name="match" select="'*'"/>
+                <xsl:attribute name="mode" select="'test-getter'"/>
+                <xsl:element name="getters-calls" exclude-result-prefixes="#all">
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver"
+                            select="eno:append-empty-element('DebugFunction', .)" tunnel="yes"/>
+                    </xsl:apply-templates>
+                </xsl:element>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:desc>
             <xd:p>A driver to generate an Eno xsl template.</xd:p>
@@ -39,7 +91,7 @@
             <xd:p>Calls a function to get the driver to launch, linked to the xpath.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Template" mode="model">
+    <xsl:template match="DriverFlow//Template" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- Call of this template to write comments -->
         <xsl:call-template name="documentation">
@@ -57,7 +109,7 @@
             </xsl:element>
             <xsl:element name="xsl:apply-templates">
                 <xsl:attribute name="select"
-                    select="concat('eno:append-empty-element(''',normalize-space(enoxsl:get-driver($source-context)),''',$driver)')"/>
+                    select="concat('eno:append-empty-element(''', normalize-space(enoxsl:get-driver($source-context)), ''',$driver)')"/>
                 <xsl:attribute name="mode" select="'model'"/>
                 <xsl:element name="xsl:with-param">
                     <xsl:attribute name="name" select="'source-context'"/>
@@ -77,7 +129,7 @@
             <xd:p>Calls a function to get the parameters of the function.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="TransitionFunction" mode="model">
+    <xsl:template match="OutGetterImplementation//TransitionFunction" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- Call of this template to write comments -->
         <xsl:call-template name="documentation">
@@ -92,7 +144,7 @@
                 <xsl:attribute name="as" select="'item()'"/>
             </xsl:element>
             <xsl:variable name="parameters" select="enoxsl:get-parameters($source-context)" as="xs:string +"/>
-            <xsl:if test="$parameters!=''">
+            <xsl:if test="$parameters != ''">
                 <xsl:for-each select="$parameters">
                     <xsl:element name="xsl:param">
                         <xsl:attribute name="name" select="current()"/>
@@ -101,7 +153,7 @@
             </xsl:if>
             <xsl:variable name="function-parameters">
                 <xsl:text>$context</xsl:text>
-                <xsl:if test="$parameters!=''">
+                <xsl:if test="$parameters != ''">
                     <xsl:for-each select="$parameters">
                         <xsl:text>,$</xsl:text>
                         <xsl:value-of select="."/>
@@ -109,13 +161,61 @@
                 </xsl:if>
             </xsl:variable>
             <xsl:element name="xsl:sequence">
-                <xsl:attribute name="select"
-                    select="concat(normalize-space(enoxsl:get-input-function($source-context)),'(',$function-parameters/text(),')')"/>
+                <xsl:variable name="input-function"
+                    select="normalize-space(enoxsl:get-input-function($source-context))"/>
+            <xsl:choose>
+                    <xsl:when test="$input-function != ''">
+                        <xsl:attribute name="select"
+                            select="concat(normalize-space(enoxsl:get-input-function($source-context)), '(', $function-parameters/text(), ')')"
+                        />
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="select"
+                            select="normalize-space(enoxsl:get-input-expression($source-context))"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:element>
         </xsl:element>
         <xsl:text>&#xA;</xsl:text>
     </xsl:template>
     
+    <xd:doc>
+        <xd:desc>
+            <xd:p>In debug processing, a TransitionFunction is a call to the corresponding
+                getter.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="DebugFunction//TransitionFunction" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:variable name="debug-function-name"
+            select="normalize-space(enoxsl:get-output-function($source-context))"/>
+        <xsl:variable name="parameters" select="enoxsl:get-parameters($source-context)"
+            as="xs:string +"/>
+        <xsl:variable name="function-parameters">
+            <xsl:text>.</xsl:text>
+            <xsl:if test="$parameters != ''">
+                <xsl:for-each select="$parameters">
+                    <xsl:value-of select="concat(',', enoxsl:get-default-value(current()))"/>
+                </xsl:for-each>
+            </xsl:if>
+        </xsl:variable>
+        <!-- Call of this template to write comments -->
+        <!--  <xsl:call-template name="documentation">
+            <xsl:with-param name="context" select="$source-context"/>
+        </xsl:call-template>
+      -->
+        <xsl:text>&#xA;</xsl:text>
+        <xsl:element name="{substring-after($debug-function-name,':')}">
+            <xsl:element name="xsl:value-of">
+                <xsl:attribute name="select"
+                    select="concat($debug-function-name, '(', $function-parameters/text(), ')')"/>
+            </xsl:element>
+        </xsl:element>
+        <xsl:text>&#xA;</xsl:text>
+    </xsl:template>
+
+
+
     <xd:doc>
         <xd:desc>
             <xd:p>A driver to generate something for the output function (returns empty text value) when there is no input function linked to it.</xd:p>
@@ -132,7 +232,7 @@
                 <xsl:attribute name="as" select="'item()'"/>
             </xsl:element>
             <xsl:variable name="parameters" select="enoxsl:get-parameters($source-context)" as="xs:string +"/>
-            <xsl:if test="$parameters!=''">
+            <xsl:if test="$parameters != ''">
                 <xsl:for-each select="$parameters">
                     <xsl:element name="xsl:param">
                         <xsl:attribute name="name" select="current()"/>
@@ -146,10 +246,18 @@
     
     <xd:doc>
         <xd:desc>
+            <xd:p>In debug processing, NotSupportedFunction are escaped.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="DebugFunction//NotSupportedFunction" mode="model"/>
+
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>An implementation of a source function.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Implementation" mode="model">
+    <xsl:template match="InGetterImplementation//Implementation" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- Call of this template to write comments -->
         <xsl:call-template name="documentation">
@@ -162,11 +270,11 @@
             <xsl:attribute name="match" select="normalize-space(enoxsl:get-xpath($source-context))"/>
             <xsl:attribute name="mode" select="normalize-space(enoxsl:get-xpath-mode($source-context))"/>
             
-            <xsl:variable name="select" select="normalize-space(enoxsl:get-match($source-context))"></xsl:variable>
+            <xsl:variable name="select" select="normalize-space(enoxsl:get-match($source-context))"/>
             <xsl:variable name="mode" select="normalize-space(enoxsl:get-match-mode($source-context))" as="xs:string"/>
             
             <xsl:choose>
-                <xsl:when test="$mode=''">
+                <xsl:when test="$mode = ''">
                     <xsl:element name="xsl:value-of">
                         <xsl:attribute name="select" select="$select"/>
                     </xsl:element>
@@ -187,7 +295,7 @@
             <xd:p>A function defined for the source</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="SourceFunction" mode="model">
+    <xsl:template match="InGetterLibrairy//SourceFunction" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="function-name">
             <xsl:value-of select="normalize-space(enoxsl:get-function($source-context))"/>
@@ -201,7 +309,7 @@
         <xsl:element name="xsl:function">
             <xsl:attribute name="name" select="$function-name"/>
             <xsl:variable name="type" select="enoxsl:get-as($source-context)"/>
-            <xsl:if test="$type!=''">
+            <xsl:if test="$type != ''">
                 <xsl:attribute name="as" select="$type"/>
             </xsl:if>
             <xsl:element name="xsl:param">
@@ -209,7 +317,7 @@
                 <xsl:attribute name="as" select="'item()'"/>
             </xsl:element>
             <xsl:variable name="parameters" select="enoxsl:get-parameters($source-context)" as="xs:string +"/>
-            <xsl:if test="$parameters!=''">
+            <xsl:if test="$parameters != ''">
                 <xsl:for-each select="$parameters">
                     <xsl:element name="xsl:param">
                         <xsl:attribute name="name" select="current()"/>
@@ -219,11 +327,11 @@
             <xsl:element name="xsl:apply-templates">
                 <xsl:attribute name="select" select="'$context'"/>
                 <xsl:attribute name="mode" select="$function-name"/>
-                <xsl:if test="$parameters!=''">
+                <xsl:if test="$parameters != ''">
                     <xsl:for-each select="$parameters">
                         <xsl:element name="xsl:with-param">
                             <xsl:attribute name="name" select="current()"/>
-                            <xsl:attribute name="select" select="concat('$',current())"/>
+                            <xsl:attribute name="select" select="concat('$', current())"/>
                             <xsl:attribute name="tunnel" select="'yes'"/>
                         </xsl:element>
                     </xsl:for-each>
@@ -240,7 +348,7 @@
             <xd:p>Calls a function that gets the xpath returned (children).</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="GetChildren" mode="model">
+    <xsl:template match="TreeNavigation//GetChildren" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- Call of this template to write comments -->
         <xsl:call-template name="documentation">

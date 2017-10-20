@@ -54,10 +54,15 @@
         <xsl:variable name="element-name">
             <xsl:apply-templates select="enoxml:get-element-name($source-context)"/>
         </xsl:variable>
-        <xsl:element name="DefinedElement">
-            <xsl:attribute name="name" select="$element-name"/>
+        <xsl:variable name="element-content">
             <xsl:apply-templates select="enoxml:get-value($source-context)"/>
-        </xsl:element>
+        </xsl:variable>
+        <xsl:if test="$element-name/text() or $element-content/text()">
+            <xsl:element name="DefinedElement">
+                <xsl:attribute name="name" select="$element-name"/>
+                <xsl:value-of select="$element-content"/>
+            </xsl:element>            
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>
