@@ -390,12 +390,12 @@
     
     <xsl:template match="xhtml:a[contains(@href,'#ftn')]" mode="enopdf:format-label">
         <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
-        <xsl:variable name="relatedInstruction" select="//d:Instruction[.//xhtml:p/@id = substring-after(current()/@href,'#')]"/>
+        <xsl:variable name="relatedInstruction" select="enoddi:get-instruction-by-anchor-ref(.,@href)"/>        
         <xsl:choose>
             <xsl:when test="$relatedInstruction/d:InstructionName/r:String = 'tooltip'">
                 <xsl:text>*</xsl:text>
             </xsl:when>
-            <xsl:when test="$relatedInstruction">
+            <xsl:when test="$relatedInstruction/d:InstructionName/r:String = 'footnote'">
                 <xsl:value-of select="enoddi:get-instruction-index($relatedInstruction,'footnote')"/>                                
             </xsl:when>
             <xsl:otherwise/>                             
