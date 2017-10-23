@@ -712,17 +712,18 @@
         <xsl:value-of select="if($formats = '#none' or not(d:InstructionName = $formatsForXpath)) then() else(count(preceding::d:Instruction[d:InstructionName/r:String=$formatsForXpath])+1)"/>
     </xsl:template>
     
-    <!--    <xd:doc>
+    <xd:doc>
         <xd:desc>
-            <xd:p>Get the formula to calculate a Variable.</xd:p>
+            <xd:p>Defining getter get-instruction-by-anchor-ref.</xd:p>
+            <xd:p>Retrieving an instruction based on the value of @href attribute.</xd:p>
+            <xd:p>If the href param value contains a '#' as first character it will be ignored for the match criteria.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="l:Variable" mode="enoddi:get-variable-calculation">
-        <xsl:variable name="id">
-            <xsl:apply-templates select="." mode="enoddi:get-id"/>
-        </xsl:variable>
-        <xsl:value-of
-            select="substring-after(//d:Expression/r:Command/r:CommandContent[contains(text(),$id)]/text(),'=')"
-        />
-    </xsl:template>-->
+    <xsl:template match="*" mode="enoddi:get-instruction-by-anchor-ref" priority="2">
+        <xsl:param name="href" select="''" tunnel="yes"/>
+        <!-- Checking if '#' first character should be ommitted. -->
+        <xsl:variable name="href-formatted" select="if(starts-with($href,'#')) then(substring-after($href,'#')) else($href)"/>
+        <xsl:sequence select="//d:Instruction[.//xhtml:p/@id = $href-formatted]"/>            
+    </xsl:template>
+   
     </xsl:stylesheet>

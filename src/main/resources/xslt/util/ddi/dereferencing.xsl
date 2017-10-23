@@ -197,7 +197,7 @@
             <xd:p>Instruction are not allowed in Category for DDI 3.2. This template allows to insert tooltips into arrays' labels</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="xhtml:a">
+  <!--  <xsl:template match="xhtml:a">
         <xsl:variable name="ref" select="replace(@href,'#','')"/>
         <xsl:variable name="language" select="ancestor::*[@xml:lang][1]/@xml:lang"/>
         
@@ -224,6 +224,6 @@
                 </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
+    </xsl:template>-->
 
 </xsl:stylesheet>
