@@ -50,7 +50,7 @@
             <xd:p>They are replaced by a span element here with a specific css class.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="xhtml:p[xhtml:br]">
+   <!-- <xsl:template match="xhtml:p[xhtml:br]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:for-each-group select="node()" group-ending-with="xhtml:br">
@@ -62,7 +62,7 @@
             </xsl:for-each-group>
         </xsl:copy>
     </xsl:template>
-
+-->
     <xd:doc>
         <xd:desc>
             <xd:p>This template modifies the identifiers used in the r:CommandContent.</xd:p>
