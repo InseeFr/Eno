@@ -361,7 +361,7 @@
     </xsl:template>
     
     <xsl:template match="text()" mode="enopdf:format-label">
-        <xsl:copy-of select="."/>
+        <xsl:copy-of select="normalize-space(.)"/>
     </xsl:template>
     
     <xsl:template match="xhtml:i" mode="enopdf:format-label">
