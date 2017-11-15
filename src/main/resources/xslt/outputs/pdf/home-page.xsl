@@ -15,7 +15,11 @@
                 <fo:inline-container width="72mm">
                     <fo:block-container height="20mm" max-height="20mm" overflow="hidden">
                         <fo:block>
-                            <fo:external-graphic height="5mm" src="./Images/logo-insee-header.png"></fo:external-graphic>
+                            <fo:external-graphic height="5mm">
+                                <xsl:attribute name="src">
+                                    <xsl:value-of select="concat($properties//Images/Folder,'logo-insee-header.png')"/>
+                                </xsl:attribute>
+                            </fo:external-graphic>
                         </fo:block>
                     </fo:block-container>
                 </fo:inline-container>
@@ -26,14 +30,14 @@
                 </fo:inline-container>
                 <fo:inline-container width="97mm">
                     <fo:block-container height="20mm" overflow="hidden">
-                        <fo:block font-weight="bold" font-size="18pt" font-family="arial" margin="3mm">
+                        <fo:block font-weight="bold" font-size="18pt" font-family="sans-serif" margin="3mm">
                             <xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
                         </fo:block>
                     </fo:block-container>
                 </fo:inline-container>
             </fo:block>
             
-            <fo:block width="100%" margin-top="7mm" font-family="arial" font-size="10pt">
+            <fo:block width="100%" margin-top="7mm" font-family="sans-serif" font-size="10pt">
                 <fo:inline-container width="72mm">
                     <fo:block-container height="35mm" overflow="hidden">
                         <fo:block margin-left="3mm" margin-right="3mm" margin-top="1mm" margin-bottom="1mm">
@@ -67,7 +71,7 @@
                 </fo:inline-container>
             </fo:block>
             
-            <fo:block width="100%" margin-top="5mm" font-family="arial" font-size="10pt">
+            <fo:block width="100%" margin-top="5mm" font-family="sans-serif" font-size="10pt">
                 <fo:inline-container width="72mm">
                     <fo:block-container height="35mm" >
                         <fo:block margin-left="3mm" margin-right="3mm" margin-top="1mm" margin-bottom="1mm">
@@ -82,7 +86,7 @@
                 </fo:inline-container>
             </fo:block>
             
-            <fo:block font-weight="bold" margin-top="5mm" font-family="arial" font-size="12pt" width="100%">
+            <fo:block font-weight="bold" margin-top="5mm" font-family="sans-serif" font-size="12pt" width="100%">
                 <fo:inline-container width="194mm">
                     <fo:block height="10mm">
                         Merci de nous retourner ce questionnaire au plus tard le : $Date
@@ -91,7 +95,7 @@
             </fo:block>
             
             <!-- TODO I am here -->
-            <fo:block width="100%" margin-top="5mm" font-family="arial" font-weight="bold" font-size="10pt" border="solid black 1pt">
+            <fo:block width="100%" margin-top="5mm" font-family="sans-serif" font-weight="bold" font-size="10pt" border="solid black 1pt">
                 <fo:inline-container width="194mm">
                     <fo:block-container height="35mm" >
                         <fo:block margin="3mm">
@@ -123,7 +127,7 @@
                 </fo:inline-container>
             </fo:block>
             
-            <fo:block width="100%" height="35mm" font-family="arial" font-size="7pt" margin-top="5mm" border="solid black 0.5pt">
+            <fo:block width="100%" height="35mm" font-family="sans-serif" font-size="7pt" margin-top="5mm" border="solid black 0.5pt">
                 <fo:inline-container width="194mm">
                     <fo:block margin="3mm">
                         <fo:block>Vu l'avis favorable du Conseil national de l'information statistique, cette enquête, reconnue d$utilite_publique, est $obligatoire.</fo:block>
@@ -166,7 +170,7 @@
                     </fo:block-container>
                 </fo:inline-container>
             </fo:block>
-            <fo:block width="100%" margin-top="5mm" position="fixed">
+            <fo:block width="100%" margin-top="5mm" position="fixed" font-family="sans-serif">
                 <fo:inline-container width="72mm" height="10mm" margin-top="5mm">
                     <fo:block-container position="absolute" top="222mm" left="0mm">
                         <fo:block>
