@@ -1,0 +1,14 @@
+﻿<project basedir="." name="enoFr">
+    
+    <!-- **************************** frPostProcessing ************************************************************************** -->
+    <target name="frPostProcessing">
+        <property name="out-extension" value="xhtml"/>
+        <!-- Adding the layer in charge of the survey's navigation by applying browsing.xsl stylesheet -->
+        <xslt in="${postprocessing-input-file}"
+            out="${root-folder}/target/${Properties.SurveyName}/${form-name}/form/form.${out-extension}"
+            style="${xslt.home}/util/fr/browsing.xsl" force="true" classpath="${saxon.jar}">
+            <param name="labels-folder" expression="${lang-folder}/fr"/>
+        </xslt>
+    </target>
+    
+</project>

@@ -1,0 +1,31 @@
+﻿<project name="enoPdf" basedir=".">
+    
+    <!-- May be included as a pdfPostProcessing operation or handled completely separately from Eno
+		Issues to be directly included :
+			- fop librairy needed
+			- personnalization should be done before pdf generation and would be done outside Eno process
+	<taskdef name="fop"
+			 classname="org.apache.fop.tools.anttasks.Fop">
+	  <classpath>
+		<fileset dir="${fop.home}/lib">
+		  <include name="*.jar"/>
+		</fileset>
+		<fileset dir="${fop.home}/build">
+		  <include name="fop.jar"/>
+		  <include name="fop-hyph.jar" />
+		</fileset>
+	  </classpath>
+	</taskdef>
+	
+	<target name="generate-pdf" description="Generates a single PDF file">
+	   <fop format="application/pdf"
+			fofile="${temp.home}\pdf\simpson.fo"
+			outfile="${temp.home}\pdf\pdfDocument.pdf" />
+	</target>
+	-->
+    <!-- pdfPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
+    <target name="pdfPostProcessing">
+    	<copy file="${postprocessing-input-file}" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
+    </target>
+    
+</project>

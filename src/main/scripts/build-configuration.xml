@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<project>
+﻿<project>
     <!-- Importing the configuration files -->
     <property file="../config/config.properties"/>
-    <xmlproperty file="${source}/config/ddi2fr.xml"/>
-    
+    <xmlproperty file="${root}/config/in2out.xml"/>
+    <xmlproperty file="${root}/config/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
+   
     <!-- Getting the path to the folders (that will be passed to xsl files) -->
     <dirname property="root-folder" file="${root}/dummy"/>
     <dirname property="temp-folder" file="${temp.home}/dummy"/>
@@ -18,6 +18,9 @@
     </path>
     <!-- antcontrib tasks initialization -->
     <taskdef name="foreach" classname="net.sf.antcontrib.logic.ForEach">
+        <classpath refid="classpath"/>
+    </taskdef>
+    <taskdef name="switch" classname="net.sf.antcontrib.logic.Switch">
         <classpath refid="classpath"/>
     </taskdef>
     <taskdef name="if" classname="net.sf.antcontrib.logic.IfTask">

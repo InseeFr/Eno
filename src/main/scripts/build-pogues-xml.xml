@@ -1,0 +1,10 @@
+﻿<project basedir="." name="enoPogues-xml">
+	<!-- pogues-xmlPreprocessing : needs GoTo2IfThenElse transformation (but not present in this branch) -->
+	<target name="pogues-xmlPreprocessing">
+		<copy file="${preprocessing-input-file}" tofile="${temp.home}/${survey-name}-final.tmp"/>
+	</target>
+	<!-- pogues-xmlPostprocessing : Only copying temp final to the temp.home folder and renaming as final -->
+	<target name="pogues-xmlPostProcessing">
+		<copy file="${postprocessing-input-file}" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
+	</target>
+</project>
