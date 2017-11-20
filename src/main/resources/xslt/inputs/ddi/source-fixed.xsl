@@ -626,7 +626,7 @@
         </xsl:variable>
 
         <xsl:for-each
-            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='deactivatable'] and contains(d:IfCondition/r:Command/r:CommandContent/text(),$modified-variables//Variable)]">
+            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='deactivatable'] and d:IfCondition/r:Command/r:CommandContent/text() = $modified-variables//Variable]">
             <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
         </xsl:for-each>
     </xsl:template>
