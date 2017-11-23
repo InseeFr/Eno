@@ -601,7 +601,7 @@
             <xd:p>It builds the resources by using different enofr functions then the process goes on next to the created resource.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Resource//*" mode="model" priority="-1">
+    <xsl:template match="Resource//*[not(ancestor::ResourceItem)]" mode="model" priority="-1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
@@ -646,7 +646,7 @@
             <xd:p>It builds the resources by using different enofr functions then the process goes on within the created resource.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Resource//*[starts-with(name(), 'xf-select')]" mode="model">
+    <xsl:template match="Resource//*[starts-with(name(), 'xf-select') and not(ancestor::ResourceItem)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
@@ -680,17 +680,20 @@
                 </xsl:choose>
             </alert>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <xsl:with-param name="driver" select="eno:append-empty-element('ResourceItem', .)" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:element>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
     </xsl:template>
     
     <xd:doc>
         <xd:desc>
-            <xd:p>Template for Resource for xf-item driver.</xd:p>
+            <xd:p>Template for ResourceItem for xf-item driver.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Resource//xf-item" mode="model">
+    <xsl:template match="ResourceItem//xf-item" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         
@@ -711,7 +714,6 @@
                         <xsl:value-of select="concat('&lt;img src=&quot;/',$properties//Images/Folder,'/',$image,'&quot; title=&quot;',eno:serialize(enofr:get-label($source-context, $language)),'&quot; /&gt;')"/>
                     </xsl:otherwise>
                 </xsl:choose>
-                
             </label>
             <value>
                 <xsl:value-of select="enofr:get-value($source-context)"/>
@@ -721,17 +723,29 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p>The xf-item driver produces something only in the Resource part.</xd:p>
+            <xd:p>The xf-item driver produces something only in the ResourceItem part.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*[name() = ('Instance', 'Bind', 'Body')]//xf-item" mode="model"/>
-
+    <xsl:template match="*[name() = ('Instance', 'Bind', 'Body')]//xf-item" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    <xsl:template match="Resource//xf-item[not(ancestor::ResourceItem)]" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Template for Resource for DoubleDuration driver.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Resource//DoubleDuration" mode="model">
+    <xsl:template match="Resource//DoubleDuration[not(ancestor::ResourceItem)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:variable name="name">
@@ -1122,6 +1136,11 @@
                 <xsl:copy-of select="$suffix"
                     copy-namespaces="no"/>
             </xsl:element>
+        </xsl:if>
+        <xsl:if test="self::xf-select1 or self::xf-select">
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
         </xsl:if>
     </xsl:template>
 
