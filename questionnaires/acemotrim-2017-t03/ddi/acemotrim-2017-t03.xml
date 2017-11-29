@@ -7036,7 +7036,7 @@
                   </d:CodeDomain>
                </d:ResponseDomainInMixed>
                <d:ResponseDomainInMixed>
-                  <d:TextDomain>
+                  <d:TextDomain maxLength="20">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>DARES-ACEMO-RDOP-11-3-2</r:ID>

@@ -14653,7 +14653,7 @@
                   </d:GridAttachment>
                </d:GridResponseDomain>
                <d:GridResponseDomain>
-                  <d:TextDomain>
+                  <d:TextDomain maxLength="60">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>INSEE-EACEI-RDOP-2111-2</r:ID>
@@ -22546,7 +22546,7 @@
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
                <d:GridResponseDomain>
-                  <d:TextDomain>
+                  <d:TextDomain maxLength="40">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>INSEE-EACEI-RDOP-3111-1</r:ID>
@@ -22628,7 +22628,7 @@
                   </d:GridAttachment>
                </d:GridResponseDomain>
                <d:GridResponseDomain>
-                  <d:TextDomain>
+                  <d:TextDomain maxLength="5">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>INSEE-EACEI-RDOP-3111-4</r:ID>
