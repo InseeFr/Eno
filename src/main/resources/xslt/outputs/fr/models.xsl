@@ -84,6 +84,8 @@
                             mode="source">
                             <xsl:with-param name="driver"
                                 select="eno:append-empty-element('Bind', .)" tunnel="yes"/>
+                            <xsl:with-param name="instance-ancestor"
+                                select="'instance(''fr-form-instance'')//'" tunnel="yes"/>
                         </xsl:apply-templates>
                     </xf:bind>
 
@@ -228,11 +230,30 @@
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:element>
-        <xsl:element name="{concat($name,'-Count')}">
+        <xsl:element name="{$name}-Count">
             <xsl:value-of select="enofr:get-minimum-lines($source-context)"/>
         </xsl:element>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Special template for Instance for the TableLoop driver.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Instance//TableLoop" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:variable name="name">
+            <xsl:value-of select="enofr:get-name($source-context)"/>
+        </xsl:variable>
+        <xsl:element name="{enofr:get-name($source-context)}"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+        <xsl:if test="enofr:get-minimum-lines($source-context) &lt; enofr:get-maximum-lines($source-context)">
+            <xsl:element name="{$name}-AddLine"/>
+        </xsl:if>
+    </xsl:template>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Special template for Instance for the DoubleDuration driver.</xd:p>
@@ -415,10 +436,17 @@
     </xd:doc>
     <xsl:template match="Bind//RowLoop | Bind//QuestionLoop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xf:bind id="{$name}-bind" name="{$name}" nodeset="{$name}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <xsl:with-param name="instance-ancestor" 
+                    select="concat($instance-ancestor,'*[name()=''',$name,
+                    ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
+                    $name,''']/preceding-sibling::*)]//')"
+                    tunnel="yes"/>
             </xsl:apply-templates>
         </xf:bind>
     </xsl:template>
@@ -430,6 +458,7 @@
     </xd:doc>
     <xsl:template match="Bind//Table | Bind//TableLoop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name">
             <xsl:value-of select="enofr:get-name($source-context)"/>
         </xsl:variable>
@@ -494,8 +523,8 @@
                 </xsl:element>
             </xsl:if>
         </xf:bind>
-        <xsl:variable name="name-bis" select="concat($name, '-group')"/>
-        <!--<xf:bind id="{$name-bis}-bind" name="{$name-bis}" ref="{$name-bis}">
+        <!--<xsl:variable name="name-bis" select="concat($name, '-group')"/>
+        <xf:bind id="{$name-bis}-bind" name="{$name-bis}" ref="{$name-bis}">
             <xsl:if test="enofr:get-relevant($source-context) != ''">
                 <xsl:attribute name="relevant">
                     <xsl:value-of select="enofr:get-relevant($source-context)"/>
@@ -505,6 +534,10 @@
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
+        <xsl:if test="enofr:get-minimum-lines($source-context) &lt; enofr:get-maximum-lines($source-context)">
+            <xf:bind id="{$name}-addline-bind" ref="{$name}-AddLine"
+                relevant="count({$instance-ancestor}{$name}-RowLoop) &lt; {enofr:get-maximum-lines($source-context)}"/>
+        </xsl:if>
     </xsl:template>
    
     <xd:doc>
@@ -1284,13 +1317,22 @@
                 </xf:repeat>
             </xhtml:tbody>
         </xhtml:table>
-        <xf:trigger>
-            <xf:label ref="$form-resources/AddLine/label"/>
-            <xf:insert ev:event="DOMActivate" context="."
-                nodeset="{concat('//',$name,'-RowLoop')}"
-                origin="{concat('instance(''fr-form-loop-model'')/',$name,'-RowLoop')}"
-            />
-        </xf:trigger>
+        
+        <xsl:variable name="max-lines" select="enofr:get-maximum-lines($source-context)"/>
+        
+        <xsl:if test="not($max-lines != '') or $max-lines &gt; enofr:get-minimum-lines($source-context)">
+            <xf:trigger>
+                <xsl:if test="$max-lines != ''">
+                    <!--<xsl:attribute name="relevant" select="concat('count(',$instance-ancestor,$name,'-RowLoop) &lt; ',$max-lines)"/>-->
+                    <xsl:attribute name="id" select="concat($name,'-addline')"/>
+                    <xsl:attribute name="bind" select="concat($name,'-addline-bind')"/>
+                </xsl:if>
+                <xf:label ref="$form-resources/AddLine/label"/>
+                <xf:insert ev:event="DOMActivate" context="."
+                    nodeset="{concat('//',$name,'-RowLoop')}"
+                    origin="{concat('instance(''fr-form-loop-model'')/',$name,'-RowLoop')}"/>
+            </xf:trigger>
+        </xsl:if>
     </xsl:template>
     
     <xd:doc>
