@@ -73,4 +73,34 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
+	<!-- Match on the xf-input driver: write the question label (does not seem to match anything in the Simpson questionnaire) -->
+	<xsl:template match="xf-input" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
+
+		<office:text>
+			<text:p text:style-name="Question"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
+		</office:text>
+
+		<!-- Returns to the parent -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+
+	<!-- Match on the xf-select driver: write the question label -->
+	<xsl:template match="xf-select1" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
+		
+		<office:text>
+			<text:p text:style-name="QuestionSelect"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
+		</office:text>
+		
+		<!-- Returns to the parent -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+
 </xsl:stylesheet>
