@@ -24,7 +24,16 @@
 	</xd:doc>
 
 	<xsl:variable name="properties" select="doc($properties-file)"/>
-	
+
+	<!-- Forces the traversal of the whole driver tree. Must be present once in the transformation. -->
+	<!--Permet de parcourir tout l'arbre des drivers A RAJOUTER UNE FOIS -->
+	<xsl:template match="*" mode="model" priority="-1">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+
 	<!-- Match on the Form driver: write the root of the document with the main title -->
 	<xsl:template match="Form" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -38,6 +47,7 @@
 			<office:body>
 				<office:text>
 					<text:p text:style-name="Title"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
+					<text:p>Specification generated on: <xsl:value-of select="current-dateTime()"/></text:p>
 				</office:text>
 				<!-- Returns to the parent -->
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -102,5 +112,32 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
+	
+	<!-- Match on the xf-output driver: write the instruction text -->
+	<xsl:template match="xf-output" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 
+		<xsl:choose>
+			<xsl:when test="enoodt:get-format($source-context) = 'instruction'">
+				<office:text>
+					<text:p text:style-name="Instruction"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
+					<text:p text:style-name="Instruction"><xsl:value-of select="enoodt:get-format($source-context)"/></text:p>
+				</office:text>
+			</xsl:when>
+			<xsl:otherwise>
+				<office:text>
+					<text:p text:style-name="InstructionOther"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
+					<text:p text:style-name="InstructionOther"><xsl:value-of select="enoodt:get-format($source-context)"/></text:p>
+				</office:text>
+			</xsl:otherwise>
+		</xsl:choose>
+
+		<!-- Returns to the parent -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+
+	</xsl:template>
+	
 </xsl:stylesheet>
