@@ -1130,19 +1130,21 @@
             </xhtml:thead>
             <xhtml:tbody>
                 <xf:repeat nodeset="{$instance-ancestor}{$name}-RowLoop" id="{$name}-RowLoop">
-                    <xhtml:tr>
-                        <xsl:apply-templates select="enofr:get-body-line($source-context, 1)"
-                            mode="source">
-                            <xsl:with-param name="driver"
-                                select="$ancestors//*[not(child::*) and not(name() = 'driver')]"
-                                tunnel="yes"/>
-                            <xsl:with-param name="instance-ancestor"
-                                select="concat($instance-ancestor,'*[name()=''',$name,
-                                ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
-                                $name,''']/preceding-sibling::*)]//')"
-                                tunnel="yes"/>
-                        </xsl:apply-templates>
-                    </xhtml:tr>
+                    <xsl:for-each select="enofr:get-body-lines($source-context)">
+                        <xhtml:tr>
+                            <xsl:apply-templates select="enofr:get-body-line($source-context, position())"
+                                mode="source">
+                                <xsl:with-param name="driver"
+                                    select="$ancestors//*[not(child::*) and not(name() = 'driver')]"
+                                    tunnel="yes"/>
+                                <xsl:with-param name="instance-ancestor"
+                                    select="concat($instance-ancestor,'*[name()=''',$name,
+                                    ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
+                                    $name,''']/preceding-sibling::*)]//')"
+                                    tunnel="yes"/>
+                            </xsl:apply-templates>
+                        </xhtml:tr>
+                    </xsl:for-each>
                 </xf:repeat>
             </xhtml:tbody>
         </xhtml:table>
