@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="enoPogues-xml2DDI" basedir="." default="pogues-xml2ddi">
+    <!-- Importing the configuration part that is common to every script -->
+    <import file="build-configuration.xml"/>
+    <import file="build-non-regression.xml"/>
+    
+    <!-- Properties for this non regression script -->
+    <property name="survey-name" value="simpsons"/>
+    <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>    
+    
+   <!-- Main Target -->
+    <target name="pogues-xml2ddi" depends="ENOPreprocessingPogues-xml2ddi">
+        
+        <!-- Generating xforms from the DDI : basic-form.tmp using the pogues-xml2ddi.xsl stylesheet -->
+        <xslt in="${survey-folder}/pogues-xml/${survey-name}.xml"
+            out="${root-folder}/target/${survey-name}/ddi-test/${survey-name}.xml"
+            style="${xslt.home}/transformations/pogues-xml2ddi/pogues-xml2ddi.xsl" force="true"
+            classpath="${saxon.jar}">
+          </xslt>
+
+    </target>
+
+    <!--************************TARGETS : PREPROCESSING ENO FOR POGUES-XML2DDI*****************************-->
+    
+    <target name="ENOPreprocessingPogues-xml2ddi">
+        <!-- Generating the xsl files from the different fods files -->
+        <!-- This will generate Xsl but without dynamic creation of namespaces. -->
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/transformations/pogues-xml2ddi"/>
+            <param name="name" value="drivers"/>
+        </antcall>
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/transformations/pogues-xml2ddi"/>
+            <param name="name" value="functions"/>
+        </antcall>
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/transformations/pogues-xml2ddi"/>
+            <param name="name" value="tree-navigation"/>
+        </antcall>
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/inputs/pogues-xml/"/>
+            <param name="name" value="functions"/>
+        </antcall>
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/inputs/pogues-xml/"/>
+            <param name="name" value="templates"/>
+        </antcall>
+        
+        <!-- Using a sheet from the util folder in order to create a link-sheet from DDI to form-runner from the 
+        generated sheet and the non-generated sheets.
+        The sheets's content is directly integrated in the first one (the one that will contain the appropriate namespaces)
+        -->
+
+        <!-- Generating transformations/pogues-xml2ddi/drivers.xsl with appropriate namespaces -->
+        <xslt in="${xslt.home}/transformations/pogues-xml2ddi/pogues-xml2ddi-fixed.xsl" out="${temp.home}/temp.tmp"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../transformations/pogues-xml2ddi/drivers.xsl"/>
+        </xslt>
+
+        <!-- Generating transformations/pogues-xml2ddi/functions.xsl with appropriate namespaces -->
+        <xslt in="${temp.home}/temp.tmp" out="${temp.home}/temp-bis.tmp"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../transformations/pogues-xml2ddi/functions.xsl"/>
+        </xslt>
+        
+        <!-- Generating transformations/pogues-xml2ddi/tree-navigation.xsl with appropriate namespaces -->
+        <xslt in="${temp.home}/temp-bis.tmp" out="${xslt.home}/transformations/pogues-xml2ddi/pogues-xml2ddi.xsl"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../transformations/pogues-xml2ddi/tree-navigation.xsl"/>
+        </xslt>
+        
+        <!-- Generating inputs/ddi/functions.xsl with appropriate namespaces -->
+        <xslt in="${xslt.home}/inputs/pogues-xml/source-fixed.xsl" out="${temp.home}/temp.tmp"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../inputs/pogues-xml/functions.xsl"/>
+        </xslt>
+        
+        <!-- Generating inputs/ddi/templates.xsl with appropriate namespaces -->
+        <xslt in="${temp.home}/temp.tmp" out="${xslt.home}/inputs/pogues-xml/source.xsl"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../inputs/pogues-xml/templates.xsl"/>
+        </xslt>
+    </target>
+  
+    
+   
+</project>
