@@ -49,3 +49,17 @@ div.adjust {
 .greyed {
 	background-color: lightgrey;
 }
+
+table.versions {
+	border-collapse: collapse;
+}
+
+table.versions > thead {
+	background: #FFFFE0;
+}
+
+table.versions  td {
+	border: 1px solid black;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
