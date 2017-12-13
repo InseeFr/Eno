@@ -102,7 +102,7 @@
                     <xsl:variable name="relative-path">
                         <xsl:value-of>//</xsl:value-of>
                         <xsl:for-each
-                            select="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]">
+                            select="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster]">
                             <xsl:variable name="id">
                                 <xsl:choose>
                                     <xsl:when test="name()='d:Loop'">
@@ -123,7 +123,7 @@
                     <xsl:value-of select="concat($relative-path,$new-identifier)"/>
                     <!--                        <xsl:choose>
                             <!-\- for filters and controls in loops, fetching the nearest variable in the tree -\->
-                            <xsl:when test="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]">
+                            <xsl:when test="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster]">
                                 <xsl:value-of select="concat('ancestor::*[descendant::',$new-identifier,'][1]//',$new-identifier)"/>                           
                             </xsl:when>
                             <xsl:otherwise>
