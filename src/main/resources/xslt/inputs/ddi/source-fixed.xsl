@@ -279,7 +279,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Getting codes of first dimension in d:QuestionGrid elements having d:GridDimension/d:Roster child.</xd:p>
+            <xd:p>Getting codes of first dimension in d:QuestionGrid elements not having d:GridDimension/d:Roster child.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:QuestionGrid[not(d:GridDimension/d:Roster)]"
@@ -355,9 +355,6 @@
 
         <xsl:apply-templates select="d:GridDimension[@rank='1']//l:Code[r:ID=$id]"
             mode="enoddi:get-table-line"/>
-        <!--        <xsl:sequence
-            select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)[.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]"
-        />-->
         <xsl:for-each
             select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)[.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]">
             <xsl:sort
@@ -366,22 +363,6 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Getting a table line depending on an index number within a d:QuestionGrid elements having a d:Roster GridDimension.</xd:p>
-        </xd:desc>
-    </xd:doc>
-<!--    <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster]"
-        mode="enoddi:get-table-line">
-        <xsl:param name="index" tunnel="yes"/>
-        <xsl:for-each
-            select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)">
-            <xsl:sort
-                select="number(.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum)"/>
-            <xsl:sequence select="."/>
-        </xsl:for-each>
-    </xsl:template>
--->
     <xd:doc>
         <xd:desc>
             <xd:p>Getting a table line for an l:Code.</xd:p>
