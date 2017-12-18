@@ -12,7 +12,7 @@
         
         <fo:block page-break-inside="avoid">
             <fo:block width="100%" >
-                <fo:inline-container width="72mm">
+                <fo:inline-container width="50mm">
                     <fo:block-container height="20mm" max-height="20mm" overflow="hidden">
                         <fo:block>
                             <fo:external-graphic height="5mm">
@@ -23,12 +23,12 @@
                         </fo:block>
                     </fo:block-container>
                 </fo:inline-container>
-                <fo:inline-container width="13mm">
+                <fo:inline-container width="5mm">
                     <fo:block height="20mm">
                         &#160;
                     </fo:block>
                 </fo:inline-container>
-                <fo:inline-container width="97mm">
+                <fo:inline-container width="127mm">
                     <fo:block-container height="20mm" overflow="hidden">
                         <fo:block font-weight="bold" font-size="18pt" font-family="sans-serif" margin="3mm">
                             <xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>

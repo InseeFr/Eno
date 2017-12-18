@@ -31,3 +31,5 @@ src/main/resources/xslt/transformations/ddi2fr/tree-navigation.xsl
 src/main/resources/xslt/transformations/ddi2fr/functions.xsl
 src/main/resources/xslt/transformations/ddi2fr/drivers.xsl
 src/main/resources/xml/null.xml
+
+src/main/scripts/build.cmd

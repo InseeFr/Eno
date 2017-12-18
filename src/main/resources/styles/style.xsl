@@ -62,6 +62,7 @@
         <xsl:attribute name="border-color">black</xsl:attribute>
         <xsl:attribute name="border-style">solid</xsl:attribute>
         <xsl:attribute name="background-color">#CCCCCC</xsl:attribute>
+        <xsl:attribute name="text-align">center</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="footnote">
         <xsl:attribute name="font-size">9pt</xsl:attribute>
