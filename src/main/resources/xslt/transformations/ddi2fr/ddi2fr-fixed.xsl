@@ -206,7 +206,19 @@
                     </xsl:variable>
                     <!-- If it is number, we display this hint -->
                     <xsl:if test="$type='number'">
-                        <xsl:value-of select="concat($labels-resource/Languages/Language[@xml:lang=$language]/Hint/Number,enoddi:get-maximum($context))"/>
+                        <xsl:variable name="number-of-decimals" select="enoddi:get-number-of-decimals($context)"/>
+                        <xsl:variable name="number-format">
+                            <xsl:value-of select="'#'"/>
+                            <xsl:if test="$number-of-decimals!='' and $number-of-decimals!='0'">
+                                <xsl:value-of select="'.'"/>
+                                <xsl:for-each select="1 to $number-of-decimals">
+                                    <xsl:value-of select="'#'"/>        
+                                </xsl:for-each>
+                            </xsl:if>
+                        </xsl:variable>
+                        <xsl:value-of select="concat($labels-resource/Languages/Language[@xml:lang=$language]/Hint/Number,
+                            format-number((number(enoddi:get-minimum($context))*3+number(enoddi:get-maximum($context))) div 4,
+                            $number-format))"/>
                     </xsl:if>
                     <!-- If it is a date, we display this hint -->
                     <xsl:if test="$type='date'">
