@@ -253,8 +253,10 @@
     </xsl:template>
 
     <!--creation de la reference de l'InterviwerInstruction-->
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="driver-InterviewerInstructionReference//Instruction" mode="model" priority="3">
+    <!--this part is designed in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
+    <!--<xsl:template match="driver-InterviewerInstructionReference//Instruction" mode="model" priority="3">
+    -->
+    <xsl:template match="driver-InterviewerInstructionReference//Instruction | driver-ControlConstructScheme//Instruction" mode="model" priority="3">           
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:InterviewerInstructionReference>
@@ -295,7 +297,8 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <l:CodeList>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID>                
+                <xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:Label>
                 <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
@@ -330,7 +333,8 @@
         <!--TODO : define levelNumber-->
         <l:Code levelNumber="0" isDiscrete="{enoddi32:is-discrete($source-context)}">
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID>
+                <xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:CategoryReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
