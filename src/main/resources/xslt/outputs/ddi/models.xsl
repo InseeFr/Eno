@@ -158,6 +158,10 @@
                     <r:ID><xsl:value-of select="concat('VariableScheme-',enoddi32:get-id($source-context))"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">Variable Scheme for the survey</r:Content></r:Label>
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                    </xsl:apply-templates>
                 </l:VariableScheme>
             </g:ResourcePackage>
             <s:StudyUnit xmlns="ddi:studyunit:3_2">
@@ -215,14 +219,40 @@
     </xsl:template>
 
 
-    <!--    <xsl:template match="driver-InterviewerInstructionScheme//* | driver-CodeListScheme//* | driver-CategoryScheme//*" mode="model" priority="3">        
+    <xsl:template match="driver-VariableScheme//Variable" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
-        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-            <xsl:with-param name="driver" select="." tunnel="yes"/>
-            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-        </xsl:apply-templates>        
-    </xsl:template>-->
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="id" select="enoddi32:get-id($source-context)"/>
+        <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID><xsl:value-of select="$id"/></r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+                <r:String xml:lang="fr-FR"><xsl:value-of select="enoddi32:get-name($source-context)"/></r:String>
+            </l:VariableName>
+            <r:Label>
+                <r:Content xml:lang="fr-FR"><xsl:value-of select="enoddi32:get-label($source-context)"/></r:Content>
+            </r:Label>
+            <xsl:for-each select="enoddi32:get-related-response($source-context,$id)">
+                <xsl:variable name="idQuestion" select="enoddi32:get-parent-id(current())"/>
+                <xsl:variable name="idResponse" select="enoddi32:get-id(current())"/>
+                <r:SourceParameterReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID><xsl:value-of select="enoddi32:get-qop-id(current())"/></r:ID>                    
+                    <r:Version>0.1.0</r:Version>
+                    <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                </r:SourceParameterReference>
+                <r:QuestionReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID><xsl:value-of select="$idQuestion"/></r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+                </r:QuestionReference>
+                <l:VariableRepresentation/>
+            </xsl:for-each>
+        </l:Variable>
+    </xsl:template>
+
 
     <xsl:template match="driver-InterviewerInstructionScheme//Instruction" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -583,53 +613,18 @@
         </xsl:apply-templates>
     </xsl:template>
     
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
+    <!--<!-\-this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-\->
     <xsl:template match="QuestionSimple//driver-OutParameter//*" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
+    </xsl:template>-->
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionSimple//driver-Binding//*" mode="model" priority="2">
+    <xsl:template match="driver-Binding//*" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
-    
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionSimple//driver-OutParameter//ResponseDomain" mode="model" priority="3">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:OutParameter isArray="false">
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:ParameterName>
-                <r:String xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:String>
-            </r:ParameterName>
-        </r:OutParameter>
-    </xsl:template>
-    
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionSimple//driver-Binding//ResponseDomain" mode="model" priority="3">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:Binding>
-            <r:SourceParameterReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:TargetParameterReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>QOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:TargetParameterReference>
-        </r:Binding>
-    </xsl:template>
-    
-
+   
     <xsl:template match="driver-QuestionItem//QuestionSingleChoice" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -705,7 +700,7 @@
             </xsl:apply-templates>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:CodeRepresentation>
                     <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -718,53 +713,12 @@
         </d:CodeDomain>
     </xsl:template>
     
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
+    <!--<!-\-this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-\->
     <xsl:template match="QuestionSingleChoice//driver-OutParameter//*" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
-    
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionSingleChoice//driver-Binding//*" mode="model" priority="2">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
-    
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionSingleChoice//driver-OutParameter//ResponseDomain" mode="model" priority="3">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:OutParameter isArray="false">
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:ParameterName>
-                <r:String xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:String>
-            </r:ParameterName>
-        </r:OutParameter>
-    </xsl:template>
-    
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionSingleChoice//driver-Binding//ResponseDomain" mode="model" priority="3">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:Binding>
-            <r:SourceParameterReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:TargetParameterReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>QOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:TargetParameterReference>
-        </r:Binding>
-    </xsl:template>
-    
-    
+    </xsl:template>-->
+     
     <xsl:template name="CodeRepresentation_CodeListReference">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -809,7 +763,7 @@
                         <d:CodeDomain>
                             <r:OutParameter isArray="false">
                                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                                <r:ID><xsl:value-of select="enoddi32:get-rdop-id(.)"/></r:ID>
                                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                                 <r:CodeRepresentation>
                                     <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -868,45 +822,41 @@
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionMultipleChoice//driver-OutParameter//*" mode="model" priority="1">
+    <xsl:template match="driver-OutParameter//*" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
+   
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionMultipleChoice//driver-Binding//*" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
-
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionMultipleChoice//driver-OutParameter//ResponseDomain" mode="model" priority="2">
+    <xsl:template match="driver-OutParameter//ResponseDomain" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:OutParameter isArray="false">
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>            
+            <r:ID><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>            
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:ParameterName>
-                <r:String xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:String>
+                <xsl:variable name="relatedVariable" select="enoddi32:get-related-variable($source-context)"/>
+                <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-name($relatedVariable)"/></r:String>
             </r:ParameterName>
         </r:OutParameter>
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionMultipleChoice//driver-Binding//ResponseDomain" mode="model" priority="2">
+    <xsl:template match="driver-Binding//ResponseDomain" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:Binding>
             <r:SourceParameterReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
             <r:TargetParameterReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>QOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                <r:ID><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:TargetParameterReference>
@@ -958,7 +908,7 @@
                         <d:CodeDomain>
                             <r:OutParameter isArray="false">
                                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                                <r:ID><xsl:value-of select="enoddi32:get-rdop-id(current())"/></r:ID>
                                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                                 <r:CodeRepresentation>
                                     <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -1021,53 +971,7 @@
             <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
         </d:ControlConstructReference>
     </xsl:template>
-    
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionTable//driver-OutParameter//*" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
-    
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionTable//driver-Binding//*" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
 
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionTable//driver-OutParameter//ResponseDomain" mode="model" priority="2">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:OutParameter isArray="false">
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:ParameterName>
-                <r:String xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:String>
-            </r:ParameterName>
-        </r:OutParameter>
-    </xsl:template>
-    
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <xsl:template match="QuestionTable//driver-Binding//ResponseDomain" mode="model" priority="2">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:Binding>
-            <r:SourceParameterReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:TargetParameterReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>QOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:TargetParameterReference>
-        </r:Binding>
-    </xsl:template>
-    
     <xsl:template match="driver-CodeListReference//*" mode="model"/>
     
 
@@ -1088,7 +992,7 @@
         <d:TextDomain maxLength="{enoddi32:get-max-length($source-context)}">
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
             </r:OutParameter>
@@ -1114,7 +1018,7 @@
             <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             </r:OutParameter>
         </d:NumericDomain>
@@ -1128,7 +1032,7 @@
             <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:DateTimeRepresentation>
                     <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
@@ -1145,7 +1049,7 @@
             <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>RDOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:CodeRepresentation>
                     <r:CodeSubsetInformation>
