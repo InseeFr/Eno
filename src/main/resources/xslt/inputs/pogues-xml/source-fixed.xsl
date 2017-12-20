@@ -33,5 +33,9 @@
         <xsl:sequence select="."/>
     </xsl:template>
     
+    <xsl:template match="pogues:Variable" mode="enopogues:get-related-question">
+        <xsl:param name="id" tunnel="yes"/>
+        <xsl:sequence select="//pogues:Child[pogues:Response/pogues:CollectedVariableReference = $id]"/>
+    </xsl:template>
     
 </xsl:stylesheet>
