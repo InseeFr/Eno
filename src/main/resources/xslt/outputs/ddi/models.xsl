@@ -360,8 +360,8 @@
     <xsl:template match="driver-CodeListScheme//Code" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <!--TODO : define levelNumber-->
-        <l:Code levelNumber="0" isDiscrete="{enoddi32:is-discrete($source-context)}">
+        <xsl:param name="levelNumber" as="xs:integer" tunnel="yes" select="1"/>        
+        <l:Code levelNumber="{$levelNumber}" isDiscrete="{enoddi32:is-discrete($source-context)}">
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>
                 <xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
@@ -375,6 +375,10 @@
             <r:Value>
                 <xsl:value-of select="enoddi32:get-value($source-context)"/>
             </r:Value>
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <xsl:with-param name="levelNumber" select="$levelNumber + 1" tunnel="yes"/>
+            </xsl:apply-templates>
         </l:Code>
     </xsl:template>
 
@@ -613,12 +617,6 @@
         </xsl:apply-templates>
     </xsl:template>
     
-    <!--<!-\-this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-\->
-    <xsl:template match="QuestionSimple//driver-OutParameter//*" mode="model" priority="2">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>-->
-    
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
     <xsl:template match="driver-Binding//*" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -712,23 +710,18 @@
             <r:ResponseCardinality maximumResponses="1"/>
         </d:CodeDomain>
     </xsl:template>
-    
-    <!--<!-\-this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-\->
-    <xsl:template match="QuestionSingleChoice//driver-OutParameter//*" mode="model" priority="2">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>-->
-     
+  
+    <!-- Useless ??
     <xsl:template name="CodeRepresentation_CodeListReference">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
         <r:CodeListReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>CodeList</r:TypeOfObject>
         </r:CodeListReference>
-    </xsl:template>
+    </xsl:template>-->
 
     <xsl:template match="driver-QuestionGrid//QuestionMultipleChoice" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
