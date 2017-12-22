@@ -448,22 +448,12 @@
         </d:Sequence>
     </xsl:template>
     
-    <xsl:template match="text()" mode="test">        
-        <xsl:variable name="test" select="tokenize(.,'\$')"/>        
-        <xsl:for-each select="$test">
-            <xsl:sequence select="substring-before(.,' ')"/>
-        </xsl:for-each>               
-    </xsl:template>
-    
+    <!-- This utility template is used to recursively replace names of pogues:Variable in an expression by their correspondant id of ddi:InParameter -->
     <xsl:template name="replace-pogues-name-variable-by-ddi-id-ip">
         <xsl:param name="expression"/>
         <xsl:param name="current-variable-with-id"/>
         <xsl:variable name="next-variable-with-id" select="$current-variable-with-id/following-sibling::*[1]"/>
         <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/ip-id)"/>
-        <!--<xsl:message select="$current-variable-with-id"/>
-        <xsl:message select="$next-variable-with-id"/>
-        <xsl:message select="concat('Test2',./ip-id)"/>
-        <xsl:message select="concat('Test3',.//ip-id)"/>-->
         <xsl:choose>
             <xsl:when test="$next-variable-with-id">
                 <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
@@ -523,9 +513,7 @@
                     <r:Binding>
                         <r:SourceParameterReference>
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                            <!--<xsl:variable name="related-question" select="enoddi32:get-related-response(.)"/>
-                            <xsl:if test="not($related-question)"><xsl:message select="'Only collected variables are implemented'"/></xsl:if>
-                            --><r:ID><xsl:value-of select="./qop-id"/></r:ID>
+                            <r:ID><xsl:value-of select="./qop-id"/></r:ID>
                             <r:Version>0.1.0</r:Version>
                             <r:TypeOfObject>OutParameter</r:TypeOfObject>
                         </r:SourceParameterReference>
