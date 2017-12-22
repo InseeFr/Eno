@@ -17,8 +17,64 @@
         <xsl:text/>
     </xsl:template>
     
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This mode is used to return nodes instead of strings.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="*" mode="with-tag">
         <xsl:sequence select="."/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This mode is used when a conversion table is needed between Pogues and DDI.</xd:p>
+            <xd:p>TODO : Move this out of the input interface and put it in the transformation one (depends both on input and output).</xd:p>
+        </xd:desc>
+    </xd:doc>   
+    <xsl:template match="*" mode="conversion-table">
+        <xsl:value-of select="."/>
+    </xsl:template>
+    
+    <xsl:template match="* | @*" mode="conversion-table-error-message">
+        <xsl:message select="concat('The value ',.,' for ',name(),' are not supported')"/>
+    </xsl:template>
+
+    <xsl:template match="pogues:Declaration/@declarationType" mode="conversion-table">        
+        <xsl:choose>
+            <xsl:when test=". ='COMMENT'">
+                <xsl:value-of select="'comment'"/>
+            </xsl:when>
+            <xsl:when test=". ='INSTRUCTION'">
+                <xsl:value-of select="'instruction'"/>
+            </xsl:when>
+            <xsl:when test=". ='HELP'">
+                <xsl:value-of select="'help'"/>
+            </xsl:when>
+            <xsl:when test=". ='WARNING'">
+                <xsl:value-of select="'warning'"/>
+            </xsl:when>            
+            <xsl:otherwise>
+                <xsl:apply-templates select="." mode="conversion-table-error-message"/>
+            </xsl:otherwise>
+        </xsl:choose>    
+    </xsl:template>
+    
+    <xsl:template match="pogues:Datatype/@visualizationHint" mode="conversion-table">
+        <xsl:choose>
+            <xsl:when test=". ='RADIO'">
+                <xsl:value-of select="'radio-button'"/>
+            </xsl:when>
+            <xsl:when test=". ='CHECKDOWN'">
+                <xsl:value-of select="'checkbox'"/>
+            </xsl:when>
+            <xsl:when test=". ='DROPDOWN'">
+                <xsl:value-of select="'drop-down-list'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="." mode="conversion-table-error-message"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
    <!-- <xsl:template match="pogues:Variable" mode="enopogues:get-related-response">

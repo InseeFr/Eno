@@ -101,6 +101,11 @@
                     <r:ID><xsl:value-of select="concat('QuestionScheme-',enoddi32:get-id($source-context))"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>
+                    <xsl:for-each select="enoddi32:get-questions($source-context)">
+                        <xsl:copy>
+                            <xsl:copy-of select="@*"/>
+                        </xsl:copy>
+                    </xsl:for-each>
                     <xsl:apply-templates select="enoddi32:get-questions($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionItem', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
@@ -832,8 +837,36 @@
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
             <d:StructuredMixedGridResponseDomain>
+                <!-- TODO : Fix the 'Response' reference which depends only on input format and shouldn't be in the output interface. -->
                 <xsl:for-each select="eno:child-fields($source-context)[local-name() = 'Response']">
                     <d:GridResponseDomain>
+                        <d:NominalDomain>
+                            <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format(.)"/></r:GenericOutputFormat>
+                            <r:OutParameter isArray="false">
+                                <r:Agency>fr.insee</r:Agency>
+                                <r:ID>INSEE-SIMPSONS-RDOP-3-1-1</r:ID>
+                                <r:Version>0.1.0</r:Version>
+                                <r:CodeRepresentation>
+                                    <r:CodeSubsetInformation>
+                                        <r:IncludedCode>
+                                            <r:CodeReference>
+                                                <r:Agency>fr.insee</r:Agency>
+                                                <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                                                <r:Version>0.1.0</r:Version>
+                                                <r:TypeOfObject>Code</r:TypeOfObject>
+                                            </r:CodeReference>
+                                        </r:IncludedCode>
+                                    </r:CodeSubsetInformation>
+                                </r:CodeRepresentation>
+                                <r:DefaultValue/>
+                            </r:OutParameter>
+                            <r:ResponseCardinality maximumResponses="1"/>
+                        </d:NominalDomain>
+                        <d:GridAttachment>
+                            <d:CellCoordinatesAsDefined>
+                                <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
+                            </d:CellCoordinatesAsDefined>
+                        </d:GridAttachment>
                         <d:CodeDomain>
                             <r:OutParameter isArray="false">
                                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -1198,7 +1231,12 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:CodeDomain>
-            <xsl:copy-of select="./*"/>
+            <r:CodeListReference>
+                <r:Agency><xsl:value-of select="enoddi32:get-agency($source-context)"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:TypeOfObject>CodeList</r:TypeOfObject>
+            </r:CodeListReference>
         </d:CodeDomain>
     </xsl:template>
 
