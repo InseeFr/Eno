@@ -17,30 +17,33 @@
         <xsl:text/>
     </xsl:template>
     
-    <xsl:template match="//pogues:Child[@xsi:type='QuestionType']" mode="with-tag">
+    <xsl:template match="*" mode="with-tag">
         <xsl:sequence select="."/>
     </xsl:template>
     
-    <xsl:template match="//pogues:Child[@xsi:type='SequenceType']" mode="with-tag">
-        <xsl:sequence select="."/>
+   <!-- <xsl:template match="pogues:Variable" mode="enopogues:get-related-response">
+        <xsl:sequence select="//pogues:Response[pogues:CollectedVariableReference = current/@id]"/>
+    </xsl:template>-->
+    
+    <xsl:template match="pogues:Control" mode="enopogues:get-ip-id">
+        <xsl:param name="index" tunnel="yes"/>        
+        <xsl:value-of select="concat(enopogues:get-id(.),'-IP-',$index)"/>
     </xsl:template>
     
-    <xsl:template match="//pogues:Declaration" mode="with-tag">
-        <xsl:sequence select="."/>
-    </xsl:template>
-    
-    <xsl:template match="//pogues:IfThenElse" mode="with-tag">
-        <xsl:sequence select="."/>
-    </xsl:template>
-    
-    <xsl:template match="pogues:Variable" mode="enopogues:get-related-response">
-        <xsl:param name="id" tunnel="yes"/>
-        <xsl:sequence select="//pogues:Response[pogues:CollectedVariableReference = $id]"/>
-    </xsl:template>
     
     <xsl:template match="pogues:Response" mode="enopogues:get-related-variable">
         <xsl:variable name="idVariable" select="pogues:CollectedVariableReference"/>
         <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
     </xsl:template>
+    
+    <xsl:template match="pogues:Control" mode="enopogues:get-related-variable">
+        <xsl:variable name="expressionVariable" select="tokenize(pogues:Expression,'\$')"/>
+        <xsl:variable name="variables" select="//pogues:Variables"/>        
+        <xsl:sequence select="$variables/pogues:Variable[some $x in $expressionVariable satisfies substring-before($x,' ')=pogues:Name/text()]"></xsl:sequence>
+        <!-- 
+        <xsl:sequence select="//pogues:Variables/pogues:Variable[some $x in tokenize(pogues:Expression,'\$') satisfies substring-before($x,' ')=pogues:Name/text()]"></xsl:sequence>        
+        -->
+    </xsl:template>
+    
     
 </xsl:stylesheet>

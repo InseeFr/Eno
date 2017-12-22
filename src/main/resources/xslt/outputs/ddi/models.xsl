@@ -53,7 +53,7 @@
                     <r:ID><xsl:value-of select="concat('InterviewerInstructionScheme-', enoddi32:get-id($source-context))"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>
-                    <xsl:apply-templates select="enoddi32:get-instructions($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi32:get-instructions($source-context) | enoddi32:get-controls($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -91,6 +91,10 @@
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
+                    <xsl:apply-templates select="enoddi32:get-controls($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                    </xsl:apply-templates>                    
                 </d:ControlConstructScheme>
                 <d:QuestionScheme>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -233,7 +237,7 @@
             <r:Label>
                 <r:Content xml:lang="fr-FR"><xsl:value-of select="enoddi32:get-label($source-context)"/></r:Content>
             </r:Label>
-            <xsl:for-each select="enoddi32:get-related-response($source-context,$id)">
+            <xsl:for-each select="enoddi32:get-related-response($source-context)">
                 <xsl:variable name="idQuestion" select="enoddi32:get-parent-id(current())"/>
                 <xsl:variable name="idResponse" select="enoddi32:get-id(current())"/>
                 <r:SourceParameterReference>
@@ -254,22 +258,25 @@
     </xsl:template>
 
 
-    <xsl:template match="driver-InterviewerInstructionScheme//Instruction" mode="model">
+    <xsl:template match="driver-InterviewerInstructionScheme//*[name() = ('Instruction','Control')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:Instruction>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <!-- Use of a specific getter for instruction to cover both Instruction&Control in one case, regular getter are called in Instruction context, specific in Control context -->
+            <r:ID><xsl:value-of select="enoddi32:get-instruction-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <d:InstructionName>
                 <r:String xml:lang="{enoddi32:get-lang($source-context)}">
-                    <xsl:value-of select="enoddi32:get-name($source-context)"/>
+                    <!-- Use of a specific getter for instruction to cover both Instruction&Control in one case, regular getter are called in Instruction context, specific in Control context -->                    
+                    <xsl:value-of select="enoddi32:get-instruction-name($source-context)"/>
                 </r:String>
             </d:InstructionName>
             <d:InstructionText>
                 <d:LiteralText>
                     <d:Text xml:lang="{enoddi32:get-lang($source-context)}">
-                        <xsl:value-of select="enoddi32:get-text($source-context)"/>
+                        <!-- Use of a specific getter for instruction to cover both Instruction&Control in one case, regular getter are called in Instruction context, specific in Control context -->                        
+                        <xsl:value-of select="enoddi32:get-instruction-text($source-context)"/>
                     </d:Text>
                 </d:LiteralText>
             </d:InstructionText>
@@ -441,6 +448,105 @@
         </d:Sequence>
     </xsl:template>
     
+    <xsl:template match="text()" mode="test">        
+        <xsl:variable name="test" select="tokenize(.,'\$')"/>        
+        <xsl:for-each select="$test">
+            <xsl:sequence select="substring-before(.,' ')"/>
+        </xsl:for-each>               
+    </xsl:template>
+    
+    <xsl:template name="replace-pogues-name-variable-by-ddi-id-ip">
+        <xsl:param name="expression"/>
+        <xsl:param name="current-variable-with-id"/>
+        <xsl:variable name="next-variable-with-id" select="$current-variable-with-id/following-sibling::*[1]"/>
+        <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/ip-id)"/>
+        <!--<xsl:message select="$current-variable-with-id"/>
+        <xsl:message select="$next-variable-with-id"/>
+        <xsl:message select="concat('Test2',./ip-id)"/>
+        <xsl:message select="concat('Test3',.//ip-id)"/>-->
+        <xsl:choose>
+            <xsl:when test="$next-variable-with-id">
+                <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
+                    <xsl:with-param name="expression" select="$new-expression"/>
+                    <xsl:with-param name="current-variable-with-id" select="$next-variable-with-id"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$new-expression"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="driver-ControlConstructScheme//Control" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <!-- Getting all related variables from the command expression to build parameters and bindings -->
+        <xsl:variable name="related-variables" select="enoddi32:get-related-variable($source-context)"/>
+        <!-- Calculating ids needed from the related-variable -->
+        <xsl:variable name="related-variables-with-id">
+            <xsl:for-each select="$related-variables">
+                <Container xmlns="" xsl:exclude-result-prefixes="#all">
+                    <ip-id><xsl:value-of select="enoddi32:get-ip-id($source-context,position())"/></ip-id>
+                    <qop-id>
+                        <xsl:variable name="related-question" select="enoddi32:get-related-response(.)"/>
+                        <xsl:if test="not($related-question)"><xsl:message select="'Only collected variables are implemented'"/></xsl:if>
+                        <xsl:value-of select="enoddi32:get-qop-id($related-question)"/>
+                    </qop-id>
+                    <name><xsl:value-of select="enoddi32:get-name(.)"/></name>                   
+                </Container>
+            </xsl:for-each>
+        </xsl:variable>        
+        <d:ComputationItem>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <d:InterviewerInstructionReference>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi32:get-generated-instruction-id($source-context)"/></r:ID>
+                <r:Version>0.1.0</r:Version>
+                <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
+            <r:CommandCode>
+                <r:Command>
+                    <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                    <xsl:for-each select="$related-variables-with-id/*">                        
+                        <r:InParameter isArray="false">
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
+                        <r:ID><xsl:value-of select="ip-id"/></r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:ParameterName>
+                            <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="name"/></r:String>
+                        </r:ParameterName>
+                    </r:InParameter>
+                    </xsl:for-each>
+                    <xsl:for-each select="$related-variables-with-id/*">
+                    <r:Binding>
+                        <r:SourceParameterReference>
+                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                            <!--<xsl:variable name="related-question" select="enoddi32:get-related-response(.)"/>
+                            <xsl:if test="not($related-question)"><xsl:message select="'Only collected variables are implemented'"/></xsl:if>
+                            --><r:ID><xsl:value-of select="./qop-id"/></r:ID>
+                            <r:Version>0.1.0</r:Version>
+                            <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                        </r:SourceParameterReference>
+                        <r:TargetParameterReference>
+                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
+                            <r:ID><xsl:value-of select="ip-id"/></r:ID>
+                            <r:Version>0.1.0</r:Version>
+                            <r:TypeOfObject>InParameter</r:TypeOfObject>
+                        </r:TargetParameterReference>
+                    </r:Binding>                    
+                    </xsl:for-each>
+                    <r:CommandContent>
+                        <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
+                            <xsl:with-param name="expression" select="enoddi32:get-expression($source-context)"/>
+                            <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
+                        </xsl:call-template>
+                    </r:CommandContent>
+                </r:Command>
+            </r:CommandCode>
+        </d:ComputationItem>
+    </xsl:template>
     
     
     
@@ -513,6 +619,7 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>Sequence</r:TypeOfObject>
         </d:ControlConstructReference>
+        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>                    
     </xsl:template>
     
     <xsl:template match="Sequence//IfThenElse | IfThenElse//IfThenElse" mode="model" priority="1">
@@ -524,24 +631,8 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>IfThenElse</r:TypeOfObject>
         </d:ControlConstructReference>
+        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>
     </xsl:template>
-
-    
-    <!-- <!-\-ne sert peut etre a rien-\->
-    <xsl:template match="Sequence" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:ControlConstructReference>	
-            <r:Agency>
-                <xsl:value-of select="$agency"/>
-            </r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version>
-                <xsl:value-of select="enoddi32:get-version($source-context)"/>
-            </r:Version>
-            <r:TypeOfObject>Sequence</r:TypeOfObject>
-        </d:ControlConstructReference>	
-    </xsl:template>-->
 
     <xsl:template match="driver-ControlConstructScheme//QuestionSimple" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -607,6 +698,7 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
         </d:ControlConstructReference>
+        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>
     </xsl:template>
 
     <xsl:template match="QuestionSimple//ResponseDomain" mode="model" priority="1">
@@ -687,6 +779,7 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
         </d:ControlConstructReference>
+        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>        
     </xsl:template>
 
     <xsl:template match="QuestionSingleChoice//ResponseDomain" mode="model" priority="1">
@@ -812,6 +905,7 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
         </d:ControlConstructReference>
+        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
@@ -963,6 +1057,19 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
         </d:ControlConstructReference>
+        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>
+    </xsl:template>
+    
+    
+    <xsl:template match="Sequence//Control | IfThenElse//Control" mode="model" priority="1">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <d:ControlConstructReference>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:TypeOfObject>ComputationItem</r:TypeOfObject>
+        </d:ControlConstructReference>        
     </xsl:template>
 
     <xsl:template match="driver-CodeListReference//*" mode="model"/>
