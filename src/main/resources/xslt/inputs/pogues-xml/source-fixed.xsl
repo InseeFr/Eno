@@ -65,7 +65,7 @@
             <xsl:when test=". ='RADIO'">
                 <xsl:value-of select="'radio-button'"/>
             </xsl:when>
-            <xsl:when test=". ='CHECKDOWN'">
+            <xsl:when test=". ='CHECKBOX'">
                 <xsl:value-of select="'checkbox'"/>
             </xsl:when>
             <xsl:when test=". ='DROPDOWN'">
@@ -101,5 +101,9 @@
         -->
     </xsl:template>
     
+    <xsl:template match="pogues:Response" mode="enopogues:get-cell-coordinates">
+        <xsl:variable name="correspondingMapping" select="following-sibling::pogues:ResponseStructure/pogues:Mapping[pogues:MappingSource = current()/@id]"/>
+        <xsl:sequence select="tokenize($correspondingMapping/pogues:MappingTarget,' ')"/>
+    </xsl:template>
     
 </xsl:stylesheet>
