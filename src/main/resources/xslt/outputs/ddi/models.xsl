@@ -28,7 +28,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="citation" select="enoddi32:get-citation($source-context)" as="xs:string"/>
         <xsl:variable name="agency" select="enoddi32:get-agency($source-context)" as="xs:string"/>
-        <DDIInstance xmlns="ddi:instance:3_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        <DDIInstance xmlns="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2"
             xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml"
             xmlns:a="ddi:archive:3_2" xmlns:l="ddi:logicalproduct:3_2"
@@ -105,58 +105,34 @@
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi32:get-questions($source-context)" mode="source">
-                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionScheme', .)" tunnel="yes"/>
-                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-                    </xsl:apply-templates>
-                </d:QuestionScheme>
-                <l:CategoryScheme>
-                    <r:Agency><xsl:value-of select="enoddi32:get-agency($source-context)"/></r:Agency>
-                    <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi32:get-id($source-context))"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                    <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>
-                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-CategoryScheme', .)" tunnel="yes"/>
-                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-                    </xsl:apply-templates>
-                    <xsl:if test="enoddi32:exist-boolean($source-context)">
+                </d:QuestionScheme>               
+                
+                <!-- CategoryScheme part -->
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="eno:append-empty-element('driver-CategoryScheme', .)" tunnel="yes"/>
+                    <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                </xsl:apply-templates>
+                <!-- If needed, add of a codeList for boolean representation. -->
+                <xsl:if test="enoddi32:exist-boolean($source-context)">                    
+                    <l:CategoryScheme>
+                        <r:Agency><xsl:value-of select="enoddi32:get-agency($source-context)"/></r:Agency>
+                        <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi32:get-id($source-context))"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                        <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>                        
                         <l:Category>		
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                             <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>	
                             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                             <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}"/></r:Label>	
                         </l:Category>		
-                    </xsl:if>
-                </l:CategoryScheme>
-                <l:CodeListScheme>
-                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="concat('CodeListScheme-',enoddi32:get-id($source-context))"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                    <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">Codelists for the survey</r:Content></r:Label>
-                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-CodeListScheme', .)" tunnel="yes"/>
-                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-                    </xsl:apply-templates>
-                    <xsl:if test="enoddi32:exist-boolean($source-context)">
-                        <l:CodeList>
-                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                            <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
-                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                            <l:Code levelNumber="1" isDiscrete="true">		
-                                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                <r:ID>INSEE-COMMUN-CL-C-Booleen-1</r:ID>	
-                                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                                <r:CategoryReference>	
-                                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                    <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
-                                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                                    <r:TypeOfObject>Category</r:TypeOfObject>                                    
-                                </r:CategoryReference>	
-                                <r:Value>1</r:Value>	
-                            </l:Code>
-                        </l:CodeList>
-                    </xsl:if>
-                </l:CodeListScheme>
+                    </l:CategoryScheme>
+                </xsl:if>
+                <!-- CodeListScheme Part -->
+               <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="eno:append-empty-element('driver-CodeListScheme', .)" tunnel="yes"/>
+                    <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+               </xsl:apply-templates>
+                <!-- VariableScheme -->
                 <l:VariableScheme>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="concat('VariableScheme-',enoddi32:get-id($source-context))"/></r:ID>
@@ -329,6 +305,51 @@
         </d:ExternalAid>
     </xsl:template>
 
+    <xsl:template match="driver-CodeListScheme//CodeLists" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" tunnel="yes"/>
+        <!-- All CodeLists (regular, fakes and boolean) are stored in a same CodeListScheme. -->
+        <l:CodeListScheme xmlns="ddi:instance:3_2">
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="concat(enoddi32:get-survey-name($source-context),'-CLS')"/></r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:CodeListSchemeName>
+                <r:String xml:lang="en-IE"><xsl:value-of select="enoddi32:get-survey-name($source-context)"/></r:String>
+            </l:CodeListSchemeName>
+            <!-- Output the regular codeLists -->
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
+            <!-- If needed, create the fake codeLists for TABLE question with implicit second dimension. -->
+            <xsl:variable name="fake-code-lists" select="enoddi32:get-fake-code-lists($source-context)"/>
+            <xsl:if test="$fake-code-lists">
+                <xsl:apply-templates select="$fake-code-lists" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>               
+            </xsl:if>
+            <!-- If needed, create the boolean codeList. -->
+            <xsl:if test="enoddi32:exist-boolean($source-context)">
+                <l:CodeList>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <l:Code levelNumber="1" isDiscrete="true">		
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID>INSEE-COMMUN-CL-C-Booleen-1</r:ID>	
+                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                        <r:CategoryReference>	
+                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                            <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
+                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                            <r:TypeOfObject>Category</r:TypeOfObject>                                    
+                        </r:CategoryReference>	
+                        <r:Value>1</r:Value>	
+                    </l:Code>
+                </l:CodeList>
+            </xsl:if>                                
+        </l:CodeListScheme>
+    </xsl:template>
+    
     <xsl:template match="driver-CodeListScheme//CodeList" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -404,12 +425,32 @@
             <r:Value>Code.Value</r:Value>
         </l:Code>
     </xsl:template>
-
-    <xsl:template match="driver-CategoryScheme//CodeList" mode="model">
+    
+    <xsl:template match="driver-CategoryScheme//CodeLists" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
+        <!-- Adding fake categorySchemes -->
+        <xsl:variable name="fake-code-lists" select="enoddi32:get-fake-code-lists($source-context)"/>
+        <xsl:if test="$fake-code-lists">
+            <xsl:apply-templates select="$fake-code-lists" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="driver-CategoryScheme//CodeList" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <l:CategoryScheme>
+            <r:Agency><xsl:value-of select="enoddi32:get-agency($source-context)"/></r:Agency>
+            <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi32:get-id($source-context))"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-label($source-context)"/></r:Content></r:Label>
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
+        </l:CategoryScheme>
     </xsl:template>
 
     <xsl:template match="driver-CategoryScheme//Code" mode="model">
@@ -638,45 +679,6 @@
         </d:QuestionConstruct>
     </xsl:template>
 
-    <xsl:template match="driver-QuestionScheme//QuestionSimple" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:QuestionItem>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QI-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-OutParameter', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-Binding', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-            <d:QuestionText>
-                <d:LiteralText>
-                    <d:Text xml:lang="{enoddi32:get-lang($source-context)}">
-                        <xsl:value-of select="enoddi32:get-label($source-context)"/>
-                    </d:Text>
-                </d:LiteralText>
-            </d:QuestionText>
-            <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-ExternalAid', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-        </d:QuestionItem>
-    </xsl:template>
-    
-
     <xsl:template match="Sequence//QuestionSimple | IfThenElse//QuestionSimple" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -702,45 +704,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
-   
-    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:QuestionItem>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QI-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>  
-            <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-OutParameter', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-Binding', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-            <d:QuestionText>
-                <d:LiteralText>
-                    <d:Text xml:lang="{enoddi32:get-lang($source-context)}">
-                        <xsl:value-of select="enoddi32:get-label($source-context)"/>
-                    </d:Text>
-                </d:LiteralText>
-            </d:QuestionText>
-            <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-ExternalAid', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-        </d:QuestionItem>
-    </xsl:template>
-
+ 
     <xsl:template match="driver-ControlConstructScheme//QuestionSingleChoice" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -793,43 +757,90 @@
         </d:CodeDomain>
     </xsl:template>
     
-    <xsl:template match="driver-SMRG//ResponseDomain" mode="model" priority="1">
+    <xsl:template match="driver-SMGRD/ResponseDomain" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:GridResponseDomain>
-           <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>
-            <d:GridAttachment>
-                <d:CellCoordinatesAsDefined>
-                    <xsl:for-each select="enoddi32:get-cell-coordinates($source-context)">
-                        <d:SelectDimension rank="{position()}" rangeMinimum="{.}" rangeMaximum="{.}"/>
-                    </xsl:for-each>
-                </d:CellCoordinatesAsDefined>
-            </d:GridAttachment>
-            </d:GridResponseDomain>        
+        <!-- Because of the xsl:for-each, driver context needs to be kept. -->
+        <xsl:variable name="driver" select="."/>
+        <xsl:for-each select="enoddi32:get-grid-dimensions($source-context)">
+            <d:GridResponseDomain>
+               <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
+                </xsl:apply-templates>
+                <d:GridAttachment>
+                    <d:CellCoordinatesAsDefined>
+                        <xsl:for-each select="enoddi32:get-cell-coordinates($source-context)">
+                            <d:SelectDimension rank="{position()}" rangeMinimum="{.}" rangeMaximum="{.}"/>
+                        </xsl:for-each>
+                    </d:CellCoordinatesAsDefined>
+                </d:GridAttachment>
+            </d:GridResponseDomain>
+        </xsl:for-each>
     </xsl:template>
-  
-    <!-- Useless ??
-    <xsl:template name="CodeRepresentation_CodeListReference">
+    
+    <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
+    <xsl:template match="driver-ResponseDomain/QuestionSimple | driver-ResponseDomain/QuestionSingleChoice" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
-        <r:CodeListReference>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>CodeList</r:TypeOfObject>
-        </r:CodeListReference>
-    </xsl:template>-->
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates> 
+    </xsl:template>
+    
+    <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
+    <xsl:template match="driver-ResponseDomain/QuestionTable | driver-ResponseDomain/QuestionMultipleChoice" mode="model" priority="3">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <d:StructuredMixedGridResponseDomain>
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMGRD', .)" tunnel="yes"/>
+            </xsl:apply-templates> 
+        </d:StructuredMixedGridResponseDomain>
+    </xsl:template>
 
-    <xsl:template match="driver-QuestionScheme//QuestionMultipleChoice" mode="model">
+    <xsl:template name="Question" match="driver-QuestionScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionSimple','QuestionSingleChoice')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:QuestionGrid>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QI-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <!-- To respect DDI schema, element order particularly, fake drivers (driver artifically added directly by this stylesheet) are used to control the flow of the expected output (aka. a ddi compliant file). -->            
+        <!-- 
+            Question drivers are implemented in a specific way to maintain strict ddi elements order.
+            "Fake" drivers are used, they're named with a 'driver-' prefix and they control the exact output flow intended.
+        -->
+        <!-- Retrieve the ddi corresponding element name and store it -->
+        <xsl:variable name="ddi-element-name">
+            <xsl:choose>
+                <xsl:when test="./name() = ('QuestionMultipleChoice','QuestionTable')">
+                    <xsl:value-of select="'d:QuestionGrid'"/>
+                </xsl:when>
+                <xsl:when test="./name() = ('QuestionSimple','QuestionSingleChoice')">
+                    <xsl:value-of select="'d:QuestionItem'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:message select="concat('Driver ',./name(),' is not implemented as a Question')"/>                
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <!-- Retrieving the ddi corresponding element name for the QuestionName and store it. -->
+        <xsl:variable name="ddi-question-name-element">
+            <xsl:choose>
+                <xsl:when test="$ddi-element-name = 'd:QuestionGrid'">
+                    <xsl:value-of select="'d:QuestionGridName'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="'d:QuestionItemName'"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <!-- Creating the ddi question element. -->
+        <xsl:element name="{$ddi-element-name}">
+            <!-- Getting the triplet Agency/Id/Version -->
+            <xsl:element name="r:Agency"><xsl:value-of select="$agency"/></xsl:element>
+            <xsl:element name="r:ID"><xsl:value-of select="enoddi32:get-id($source-context)"/></xsl:element>
+            <xsl:element name="r:Version"><xsl:value-of select="enoddi32:get-version($source-context)"/></xsl:element>
+            <!-- QuestionName part -->
+            <xsl:element name="{$ddi-question-name-element}">                
+               <xsl:element name="r:String">
+                   <xsl:attribute name="xml:lang" select="enoddi32:get-lang($source-context)"/>
+                   <xsl:value-of select="enoddi32:get-name($source-context)"/>
+               </xsl:element>                
+            </xsl:element>            
             <!-- OutParameter part -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-OutParameter', .)" tunnel="yes"/>
@@ -839,26 +850,28 @@
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-Binding', .)" tunnel="yes"/>
                 <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
+            </xsl:apply-templates>            
             <!-- QuestionText -->
-            <d:QuestionText>
-                <d:LiteralText>
-                    <d:Text xml:lang="{enoddi32:get-lang($source-context)}">
+            <xsl:element name="d:QuestionText">            
+                <xsl:element name="d:LiteralText">
+                    <xsl:element name="d:Text">
+                        <xsl:attribute name="xml:lang" select="enoddi32:get-lang($source-context)"/>
                         <xsl:value-of select="enoddi32:get-label($source-context)"/>
-                    </d:Text>
-                </d:LiteralText>
-            </d:QuestionText>
+                    </xsl:element>
+                </xsl:element>
+            </xsl:element>
             <!-- GridDimension part -->
             <!--No need of any fake drivers as this part has common behavious for all questionTypes.-->
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>
-            <!-- StructureMixedGridResponseDomain (SMGRD) part -->
-            <d:StructuredMixedGridResponseDomain>
-                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                     <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMRG', .)" tunnel="yes"/>
+            <xsl:if test="$ddi-element-name = 'd:QuestionGrid'">
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
                 </xsl:apply-templates>
-            </d:StructuredMixedGridResponseDomain>
+            </xsl:if>           
+            <!-- ResponseDomain Part. -->
+            <!-- As a StructuredMixedGridResponseDomain may be needed, use of driver-ResponseDomain on the current source context instead of its childs. -->               
+             <xsl:apply-templates select="$source-context" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-ResponseDomain', .)" tunnel="yes"/>
+             </xsl:apply-templates>
             <!--External-Aid part - Used to store specific Pogues UI element -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-ExternalAid', .)" tunnel="yes"/>
@@ -868,8 +881,8 @@
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference', .)" tunnel="yes"/>
                 <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-        </d:QuestionGrid>
+            </xsl:apply-templates>        
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="driver-ControlConstructScheme//QuestionMultipleChoice" mode="model">
@@ -912,18 +925,21 @@
     <xsl:template match="driver-OutParameter//ResponseDomain" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:OutParameter isArray="false">
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>            
-            <r:ID><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>            
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:ParameterName>
+        <xsl:element name="r:OutParameter">
+            <xsl:attribute name="isArray" select="'false'"/>
+            <xsl:element name="r:Agency"><xsl:value-of select="$agency"/></xsl:element>
+            <xsl:element name="r:ID"><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></xsl:element>
+            <xsl:element name="r:Version"><xsl:value-of select="enoddi32:get-version($source-context)"/></xsl:element><xsl:element name="r:ParameterName">
                 <xsl:variable name="relatedVariable" select="enoddi32:get-related-variable($source-context)"/>
-                <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-name($relatedVariable)"/></r:String>
-            </r:ParameterName>
-        </r:OutParameter>
+                <xsl:element name="r:String">
+                    <xsl:attribute name="xml:lang" select="enoddi32:get-lang($source-context)"/>
+                    <xsl:value-of select="enoddi32:get-name($relatedVariable)"/>
+                </xsl:element>
+            </xsl:element>
+        </xsl:element>
     </xsl:template>
-    
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
+           
+    <!--this part is designed in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
     <xsl:template match="driver-Binding//ResponseDomain" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -943,89 +959,29 @@
         </r:Binding>
     </xsl:template>
     
-    <!-- This template is common to all questionType drivers. -->
-    <xsl:template match="driver-QuestionScheme//GridDimension" mode="model">
+   
+    <xsl:template match="driver-QuestionScheme//QuestionMultipleChoice//GridDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:GridDimension displayCode="false" displayLabel="false" rank="1">
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>    
-        </d:GridDimension>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>    
     </xsl:template>
 
-
-    <xsl:template match="driver-QuestionScheme//QuestionTable" mode="model">
+    <xsl:template match="driver-QuestionScheme//QuestionTable//GridDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:QuestionGrid>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QI-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="eno:append-empty-element('driver-OutParameter', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-Binding', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-            <d:QuestionText>
-                <d:LiteralText>
-                    <d:Text xml:lang="{enoddi32:get-lang($source-context)}">
-                        <xsl:value-of select="enoddi32:get-label($source-context)"/>
-                    </d:Text>
-                </d:LiteralText>
-            </d:QuestionText>
-            <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>       
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+        <xsl:variable name="fake-dimension" select="enoddi32:get-fake-dimension($source-context)"/>                
+        <xsl:if test="$fake-dimension">
+            <xsl:apply-templates select="$fake-dimension" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
-            <d:StructuredMixedGridResponseDomain>
-                <xsl:for-each select="eno:child-fields($source-context)[local-name() = 'Response']">
-                    <xsl:variable name="NResponse" select="position()"/>
-                    <d:GridResponseDomain>
-                        <!-- TODO : Refactor according to QuestionMultipleChoice implementation. -->
-                        <d:CodeDomain>
-                            <r:OutParameter isArray="false">
-                                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                <r:ID><xsl:value-of select="enoddi32:get-rdop-id(current())"/></r:ID>
-                                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                                <r:CodeRepresentation>
-                                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-CodeListReference', .)" tunnel="yes"/>
-                                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-                                    </xsl:apply-templates>
-                                </r:CodeRepresentation>
-                            </r:OutParameter>
-                            <r:ResponseCardinality maximumResponses="1"/>
-                            <!--TODO vérifier commentaire-->
-                            <!--xsl:apply-templates select="eno:child-fields($source-context)"
-                                mode="source">
-                                <xsl:with-param name="driver" select="." tunnel="yes"/>
-                            </xsl:apply-templates-->
-                        </d:CodeDomain>
-                        <d:GridAttachment>
-                            <d:CellCoordinatesAsDefined>
-                                <d:SelectDimension rank="1" rangeMinimum="{$NResponse}" rangeMaximum="{$NResponse}"/>
-                            </d:CellCoordinatesAsDefined>
-                        </d:GridAttachment>
-                    </d:GridResponseDomain>
-                </xsl:for-each>
-            </d:StructuredMixedGridResponseDomain>
-            <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-ExternalAid', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>
-        </d:QuestionGrid>
+        </xsl:if>
     </xsl:template>
-
+ 
     <xsl:template match="driver-ControlConstructScheme//QuestionTable" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -1042,7 +998,6 @@
         </d:QuestionConstruct>
     </xsl:template>
 
-
     <xsl:template match="Sequence//QuestionTable | IfThenElse//QuestionTable" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -1054,7 +1009,6 @@
         </d:ControlConstructReference>
         <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>
     </xsl:template>
-    
     
     <xsl:template match="Sequence//Control | IfThenElse//Control" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -1141,7 +1095,6 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:NominalDomain>
-            <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
@@ -1164,7 +1117,9 @@
         </d:NominalDomain>
     </xsl:template>
     
-    <xsl:template match="driver-SMRG//CodeDomain" mode="model">
+    <xsl:template match="driver-SMGRD/*" mode="model" priority="2"/>
+    
+    <xsl:template match="driver-SMGRD/ResponseDomain/CodeDomain" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:CodeDomain>
@@ -1192,37 +1147,19 @@
         </d:CodeDomain>
       </xsl:template>
 
-
-    <xsl:template match="RadioDomain" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:GenericOutputFormat codeListID="INSEE'-GOF-CV'">radio-button</r:GenericOutputFormat>
-    </xsl:template>
-
-    <xsl:template match="CheckBoxDomain" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:GenericOutputFormat codeListID="INSEE'-GOF-CV'">checkbox</r:GenericOutputFormat>
-    </xsl:template>
-
-    <xsl:template match="DropDownListDomain" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:GenericOutputFormat codeListID="INSEE'-GOF-CV'">drop-down-list</r:GenericOutputFormat>
-    </xsl:template>
-
     <xsl:template match="RosterDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <!--TODO : find rank value-->
-        <d:Roster baseCodeValue="1" codeIterationValue="1">
-            <xsl:attribute name="minimumRequired">
-                <xsl:value-of select="substring-before(enoddi32:get-dynamic($source-context), '-')"/>
-            </xsl:attribute>
-            <xsl:attribute name="maximumAllowed">
-                <xsl:value-of select="substring-after(enoddi32:get-dynamic($source-context), '-')"/>
-            </xsl:attribute>
-        </d:Roster>
+        <d:GridDimension displayCode="false" displayLabel="false" rank="{enoddi32:get-rank($source-context)}">
+            <d:Roster baseCodeValue="1" codeIterationValue="1">
+                <xsl:attribute name="minimumRequired">
+                    <xsl:value-of select="substring-before(enoddi32:get-dynamic($source-context), '-')"/>
+                </xsl:attribute>
+                <xsl:attribute name="maximumAllowed">
+                    <xsl:value-of select="substring-after(enoddi32:get-dynamic($source-context), '-')"/>
+                </xsl:attribute>
+            </d:Roster>
+       </d:GridDimension>
     </xsl:template>
 
     <xsl:template match="UnknownDimension" mode="model">
@@ -1232,15 +1169,17 @@
 
     <xsl:template match="CodeDomainDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:CodeDomain>
-            <r:CodeListReference>
-                <r:Agency><xsl:value-of select="enoddi32:get-agency($source-context)"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>CodeList</r:TypeOfObject>
-            </r:CodeListReference>
-        </d:CodeDomain>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
+        <d:GridDimension displayCode="false" displayLabel="false" rank="{enoddi32:get-rank($source-context)}">
+            <d:CodeDomain>
+                <r:CodeListReference>
+                    <r:Agency><xsl:value-of select="enoddi32:get-agency($source-context)"/></r:Agency>
+                    <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:TypeOfObject>CodeList</r:TypeOfObject>
+                </r:CodeListReference>
+            </d:CodeDomain>
+        </d:GridDimension>
     </xsl:template>
 
 </xsl:stylesheet>
