@@ -97,10 +97,7 @@
         <xsl:sequence
             select="
                 $variables/pogues:Variable[some $x in $expressionVariable
-                    satisfies substring-before($x, ' ') = pogues:Name/text()]"/>
-        <!-- 
-        <xsl:sequence select="//pogues:Variables/pogues:Variable[some $x in tokenize(pogues:Expression,'\$') satisfies substring-before($x,' ')=pogues:Name/text()]"></xsl:sequence>        
-        -->
+                    satisfies substring-before($x, ' ') = pogues:Name/text()]"/>        
     </xsl:template>
 
     <xsl:template match="pogues:Response" mode="enopogues:get-cell-coordinates">

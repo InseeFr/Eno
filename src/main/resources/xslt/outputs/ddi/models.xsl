@@ -1024,7 +1024,7 @@
     <xsl:template match="driver-CodeListReference//*" mode="model"/>
     
 
-    <xsl:template match="driver-CodeListReference//CodeListReference" mode="model" priority="2">
+    <xsl:template match="driver-CodeListReference//CodeListReference | QuestionSingleChoice//ResponseDomain/CodeListReference" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:CodeListReference>	
