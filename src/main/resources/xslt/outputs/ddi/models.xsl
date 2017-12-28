@@ -222,17 +222,11 @@
                     <r:Version>0.1.0</r:Version>
                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
                 </r:SourceParameterReference>
-                <r:QuestionReference>
-                    <r:Agency>fr.insee</r:Agency>
-                    <r:ID><xsl:value-of select="$idQuestion"/></r:ID>
-                    <r:Version>0.1.0</r:Version>
-                    <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-                </r:QuestionReference>
+                <xsl:apply-templates select="." mode="enoddi32:question-reference"/>
                 <l:VariableRepresentation/>
             </xsl:for-each>
         </l:Variable>
     </xsl:template>
-
 
     <xsl:template match="driver-InterviewerInstructionScheme//*[name() = ('Instruction','Control')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -670,12 +664,7 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>QC-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:QuestionReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>QI-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </r:QuestionReference>
+            <xsl:apply-templates select="$source-context" mode="enoddi32:question-reference"/>
         </d:QuestionConstruct>
     </xsl:template>
 
@@ -712,12 +701,7 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>QC-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:QuestionReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>QI-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </r:QuestionReference>
+            <xsl:apply-templates select="$source-context" mode="enoddi32:question-reference"/>
         </d:QuestionConstruct>
     </xsl:template>
 
@@ -1180,6 +1164,16 @@
                 </r:CodeListReference>
             </d:CodeDomain>
         </d:GridDimension>
+    </xsl:template>
+    
+    <xsl:template match="*" mode="enoddi32:question-reference">        
+            <xsl:variable name="elementName" select="if(enoddi32:get-question-type(.) = ('MULTIPLE_CHOICE','TABLE')) then('QuestionGrid') else('QuestionItem')"/>
+            <r:QuestionReference>
+                <r:Agency><xsl:value-of select="enoddi32:get-agency(.)"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi32:get-question-id(.)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi32:get-version(.)"/></r:Version>
+                <r:TypeOfObject><xsl:value-of select="$elementName"/></r:TypeOfObject>
+            </r:QuestionReference>        
     </xsl:template>
 
 </xsl:stylesheet>

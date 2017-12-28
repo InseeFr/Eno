@@ -17,9 +17,9 @@
       </r:Title>
    </r:Citation>
    <g:ResourcePackage isMaintainable="true" versionDate="2012-01-02">
-      <r:Agency xmlns="ddi:instance:3_2">fr.insee</r:Agency>
+      <r:Agency>fr.insee</r:Agency>
       <r:ID>INSEE-SIMPSONS-RP</r:ID>
-      <r:Version xmlns="ddi:instance:3_2">0.1.0</r:Version>
+      <r:Version>0.1.0</r:Version>
       <r:Citation>
          <r:Title>
             <r:String xml:lang="fr-FR">Paquet de ressources pour le questionnaire SIMPSONS</r:String>
@@ -49,7 +49,8 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="en-IE">We're going to test your knowledge about the simpsons
-                     series. <xhtml:p><xhtml:b>Welcome in the simspons world!</xhtml:b></xhtml:p></d:Text>
+                     series. <xhtml:p><xhtml:b>Welcome in the simspons
+                     world!</xhtml:b></xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -102,7 +103,8 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="en-IE"><xhtml:p><xhtml:i>Several possible answers></xhtml:i></xhtml:p></d:Text>
+                  <d:Text xml:lang="en-IE"><xhtml:p><xhtml:i>Several possible
+                        answers></xhtml:i></xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -115,7 +117,8 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="en-IE">The sum of percentages is: ¤SUM_EXPENSES¤. The total of pourcentages must be equal to 100%.</d:Text>
+                  <d:Text xml:lang="en-IE">The sum of percentages is: ¤SUM_EXPENSES¤. The total of
+                     percentages must be equal to 100%.</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -134,7 +137,7 @@
             </d:InstructionText>
          </d:Instruction>
       </d:InterviewerInstructionScheme>
-      <d:ControlConstructScheme xmlns="ddi:instance:3_2">
+      <d:ControlConstructScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>INSEE-SIMPSONS-CCS</r:ID>
          <r:Version>0.1.0</r:Version>
@@ -243,8 +246,8 @@
                <r:String xml:lang="en-IE">SIMPSONS1</r:String>
             </d:ConstructName>
             <r:Description>
-               <r:Content xml:lang="en-IE">If you are not ready, please go to the end of the end of
-                  the questionnaire</r:Content>
+               <r:Content xml:lang="en-IE">If you are not ready, please go to the end of the
+                  questionnaire</r:Content>
             </r:Description>
             <d:IfCondition>
                <r:Command>
@@ -1078,7 +1081,7 @@
             </r:QuestionReference>
          </d:QuestionConstruct>
       </d:ControlConstructScheme>
-      <d:QuestionScheme xmlns="ddi:instance:3_2">
+      <d:QuestionScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>INSEE-SIMPSONS-QS</r:ID>
          <r:Version>0.1.0</r:Version>
@@ -1857,7 +1860,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-2-1</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">ICE_FLAVOUR_1</r:String>
+                  <r:String xml:lang="en-IE">ICE_FLAVOUR1</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -1865,7 +1868,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-2-2</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">ICE_FLAVOUR_2</r:String>
+                  <r:String xml:lang="en-IE">ICE_FLAVOUR2</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -1873,7 +1876,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-2-3</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">ICE_FLAVOUR_3</r:String>
+                  <r:String xml:lang="en-IE">ICE_FLAVOUR3</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -1881,7 +1884,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-2-4</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">ICE_FLAVOUR_4</r:String>
+                  <r:String xml:lang="en-IE">ICE_FLAVOUR4</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:Binding>
@@ -2090,7 +2093,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-3-1</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">NUCLEAR_CHARACTER_1</r:String>
+                  <r:String xml:lang="en-IE">NUCLEAR_CHARACTER1</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2098,7 +2101,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-3-2</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">NUCLEAR_CHARACTER_2</r:String>
+                  <r:String xml:lang="en-IE">NUCLEAR_CHARACTER2</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2106,7 +2109,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-3-3</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">NUCLEAR_CHARACTER_3</r:String>
+                  <r:String xml:lang="en-IE">NUCLEAR_CHARACTER3</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2114,7 +2117,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-3-4</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">NUCLEAR_CHARACTER_4</r:String>
+                  <r:String xml:lang="en-IE">NUCLEAR_CHARACTER4</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:Binding>
@@ -2324,7 +2327,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-4-1</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">BIRTH_CHARACTER_1</r:String>
+                  <r:String xml:lang="en-IE">BIRTH_CHARACTER1</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2332,7 +2335,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-4-2</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">BIRTH_CHARACTER_2</r:String>
+                  <r:String xml:lang="en-IE">BIRTH_CHARACTER2</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2340,7 +2343,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-4-3</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">BIRTH_CHARACTER_3</r:String>
+                  <r:String xml:lang="en-IE">BIRTH_CHARACTER3</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2348,7 +2351,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-4-4</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">BIRTH_CHARACTER_4</r:String>
+                  <r:String xml:lang="en-IE">BIRTH_CHARACTER4</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2356,7 +2359,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-3-4-5</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">BIRTH_CHARACTER_5</r:String>
+                  <r:String xml:lang="en-IE">BIRTH_CHARACTER5</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:Binding>
@@ -2609,7 +2612,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-1-1-1</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_1_1</r:String>
+                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES11</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2617,7 +2620,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-1-1-2</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_2_1</r:String>
+                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES21</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2625,7 +2628,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-1-1-3</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_3_1</r:String>
+                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES31</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2633,7 +2636,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-1-1-4</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_4_1</r:String>
+                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES41</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2641,7 +2644,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-1-1-5</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_5_1</r:String>
+                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES51</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2649,7 +2652,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-1-1-6</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_6_1</r:String>
+                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES61</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2657,7 +2660,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-1-1-7</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_7_1</r:String>
+                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES71</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2665,7 +2668,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-1-1-8</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_8_1</r:String>
+                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES81</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2673,7 +2676,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-1-1-9</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_9_1</r:String>
+                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES91</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -2681,7 +2684,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-1-1-10</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_10_1</r:String>
+                  <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES101</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:Binding>
@@ -3065,7 +3068,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-2-1-1</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">CLOWNING_1_1</r:String>
+                  <r:String xml:lang="en-IE">CLOWNING11</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3073,7 +3076,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-2-1-2</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">CLOWNING_2_1</r:String>
+                  <r:String xml:lang="en-IE">CLOWNING21</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3081,7 +3084,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-2-1-3</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">CLOWNING_3_1</r:String>
+                  <r:String xml:lang="en-IE">CLOWNING31</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3089,7 +3092,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-2-1-4</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">CLOWNING_4_1</r:String>
+                  <r:String xml:lang="en-IE">CLOWNING41</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3097,7 +3100,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-2-1-5</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">CLOWNING_1_2</r:String>
+                  <r:String xml:lang="en-IE">CLOWNING12</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3105,7 +3108,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-2-1-6</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">CLOWNING_2_2</r:String>
+                  <r:String xml:lang="en-IE">CLOWNING22</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3113,7 +3116,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-2-1-7</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">CLOWNING_3_2</r:String>
+                  <r:String xml:lang="en-IE">CLOWNING32</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3121,7 +3124,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-2-1-8</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">CLOWNING_4_2</r:String>
+                  <r:String xml:lang="en-IE">CLOWNING42</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:Binding>
@@ -3465,7 +3468,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-1</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_1_1</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL11</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3473,7 +3476,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-2</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_2_1</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL21</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3481,7 +3484,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-3</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_3_1</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL31</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3489,7 +3492,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-4</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_4_1</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL41</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3497,7 +3500,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-5</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_1_2</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL12</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3505,7 +3508,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-6</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_2_2</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL22</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3513,7 +3516,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-7</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_3_2</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL32</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3521,7 +3524,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-8</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_4_2</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL42</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3529,7 +3532,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-9</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_1_3</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL13</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3537,7 +3540,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-10</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_2_3</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL23</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3545,7 +3548,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-11</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_3_3</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL33</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3553,7 +3556,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-12</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_4_3</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL43</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3561,7 +3564,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-13</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_1_4</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL14</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3569,7 +3572,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-14</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_2_4</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL24</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3577,7 +3580,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-15</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_3_4</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL34</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3585,7 +3588,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-16</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_4_4</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL44</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3593,7 +3596,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-17</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_1_5</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL15</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3601,7 +3604,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-18</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_2_5</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL25</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3609,7 +3612,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-19</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_3_5</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL35</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3617,7 +3620,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-20</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_4_5</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL45</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3625,7 +3628,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-21</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_1_6</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL16</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3633,7 +3636,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-22</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_2_6</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL26</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3641,7 +3644,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-23</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_3_6</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL36</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -3649,7 +3652,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-4-3-1-24</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">TRAVEL_4_6</r:String>
+                  <r:String xml:lang="en-IE">TRAVEL46</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:Binding>
@@ -4755,7 +4758,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-1</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_1_1</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS11</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4763,7 +4766,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-2</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_2_1</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS21</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4771,7 +4774,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-3</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_3_1</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS31</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4779,7 +4782,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-4</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_4_1</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS41</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4787,7 +4790,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-5</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_5_1</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS51</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4795,7 +4798,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-6</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_6_1</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS61</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4803,7 +4806,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-7</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_7_1</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS71</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4811,7 +4814,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-8</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_8_1</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS81</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4819,7 +4822,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-9</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_9_1</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS91</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4827,7 +4830,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-10</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_10_1</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS101</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4835,7 +4838,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-11</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_1_2</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS12</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4843,7 +4846,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-12</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_2_2</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS22</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4851,7 +4854,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-13</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_3_2</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS32</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4859,7 +4862,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-14</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_4_2</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS42</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4867,7 +4870,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-15</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_5_2</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS52</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4875,7 +4878,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-16</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_6_2</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS62</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4883,7 +4886,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-17</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_7_2</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS72</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4891,7 +4894,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-18</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_8_2</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS82</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4899,7 +4902,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-19</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_9_2</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS92</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:OutParameter isArray="false">
@@ -4907,7 +4910,7 @@
                <r:ID>INSEE-SIMPSONS-QOP-5-1-20</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:ParameterName>
-                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_10_2</r:String>
+                  <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS102</r:String>
                </r:ParameterName>
             </r:OutParameter>
             <r:Binding>
@@ -6343,7 +6346,8 @@
                <r:String xml:lang="en-IE">Clownings1</r:String>
             </l:CategoryName>
             <r:Label>
-               <r:Content xml:lang="en-IE"><xhtml:p><xhtml:i><xhtml:b>Break the windows of the whole city</xhtml:b></xhtml:i></xhtml:p></r:Content>
+               <r:Content xml:lang="en-IE"><xhtml:p><xhtml:i><xhtml:b>Break the windows of the whole
+                           city</xhtml:b></xhtml:i></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -6354,8 +6358,8 @@
                <r:String xml:lang="en-IE">Clownings2</r:String>
             </l:CategoryName>
             <r:Label>
-               <r:Content xml:lang="en-IE"><xhtml:p><xhtml:i><xhtml:b>Loose the violin of his daughter playing
-                  poker</xhtml:b></xhtml:i></xhtml:p></r:Content>
+               <r:Content xml:lang="en-IE"><xhtml:p><xhtml:i><xhtml:b>Loose the violin of his
+                           daughter playing poker</xhtml:b></xhtml:i></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -6366,7 +6370,8 @@
                <r:String xml:lang="en-IE">Clownings3</r:String>
             </l:CategoryName>
             <r:Label>
-               <r:Content xml:lang="en-IE"><xhtml:p><xhtml:i><xhtml:b>Kill Mr Burns</xhtml:b></xhtml:i></xhtml:p></r:Content>
+               <r:Content xml:lang="en-IE"><xhtml:p><xhtml:i><xhtml:b>Kill Mr
+                        Burns</xhtml:b></xhtml:i></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -6377,8 +6382,8 @@
                <r:String xml:lang="en-IE">Clownings4</r:String>
             </l:CategoryName>
             <r:Label>
-               <r:Content xml:lang="en-IE"><xhtml:p><xhtml:i><xhtml:b>Leaving a mechanical object to control the nuclear power
-                  plant</xhtml:b></xhtml:i></xhtml:p></r:Content>
+               <r:Content xml:lang="en-IE"><xhtml:p><xhtml:i><xhtml:b>Leaving a mechanical object to
+                           control the nuclear power plant</xhtml:b></xhtml:i></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -6634,7 +6639,7 @@
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
-      <l:CodeListScheme xmlns="ddi:instance:3_2">
+      <l:CodeListScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>INSEE-COMMUN-CLS</r:ID>
          <r:Version>0.1.0</r:Version>
@@ -6672,7 +6677,7 @@
          </l:CodeList>
       </l:CodeListScheme>
 
-      <l:CodeListScheme xmlns="ddi:instance:3_2">
+      <l:CodeListScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>INSEE-SIMPSONS-CLS</r:ID>
          <r:Version>0.1.0</r:Version>
@@ -7866,7 +7871,7 @@
             </l:Code>
          </l:CodeList>
       </l:CodeListScheme>
-      <l:VariableScheme xmlns="ddi:instance:3_2">
+      <l:VariableScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>INSEE-SIMPSONS-VS</r:ID>
          <r:Version>0.1.0</r:Version>
@@ -7885,7 +7890,7 @@
                <r:String xml:lang="en-IE">COMMENT</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de COMMENT</r:Content>
+               <r:Content xml:lang="en-IE">COMMENT label</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7909,7 +7914,7 @@
                <r:String xml:lang="en-IE">READY</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de READY</r:Content>
+               <r:Content xml:lang="en-IE">READY label</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7933,7 +7938,7 @@
                <r:String xml:lang="en-IE">PRODUCER</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PRODUCER</r:Content>
+               <r:Content xml:lang="en-IE">PRODUCER label</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7957,7 +7962,7 @@
                <r:String xml:lang="en-IE">SEASON_NUMBER</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de SEASON_NUMBER</r:Content>
+               <r:Content xml:lang="en-IE">SEASON_NUMBER label</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7981,7 +7986,7 @@
                <r:String xml:lang="en-IE">DATEFIRST</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de DATEFIRST</r:Content>
+               <r:Content xml:lang="en-IE">DATEFIRST label</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8005,7 +8010,7 @@
                <r:String xml:lang="en-IE">AUDIENCE_SHARE</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de AUDIENCE_SHARE</r:Content>
+               <r:Content xml:lang="en-IE">AUDIENCE_SHARE label</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8029,7 +8034,7 @@
                <r:String xml:lang="en-IE">CITY</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de CITY</r:Content>
+               <r:Content xml:lang="en-IE">CITY label</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8053,7 +8058,7 @@
                <r:String xml:lang="en-IE">MAYOR</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de MAYOR</r:Content>
+               <r:Content xml:lang="en-IE">MAYOR label</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8077,7 +8082,7 @@
                <r:String xml:lang="en-IE">STATE</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de STATE</r:Content>
+               <r:Content xml:lang="en-IE">STATE label</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8095,37 +8100,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-SURVEY_COMMENT</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PET1</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">SURVEY_COMMENT</r:String>
+               <r:String xml:lang="en-IE">PET1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de SURVEY_COMMENT</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-6-1-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QI-6-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PET_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">PET_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PET_1</r:Content>
+               <r:Content xml:lang="en-IE">1 - Santa's Little Helper</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8143,13 +8124,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PET_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PET2</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PET_2</r:String>
+               <r:String xml:lang="en-IE">PET2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PET_2</r:Content>
+               <r:Content xml:lang="en-IE">2 - Snowball I</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8167,13 +8148,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PET_3</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PET3</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PET_3</r:String>
+               <r:String xml:lang="en-IE">PET3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PET_3</r:Content>
+               <r:Content xml:lang="en-IE">3 - Coltrane</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8191,13 +8172,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PET_4</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PET4</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PET_4</r:String>
+               <r:String xml:lang="en-IE">PET4</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PET_4</r:Content>
+               <r:Content xml:lang="en-IE">4 - Mojo the Helper Monkey</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8215,13 +8196,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-ICE_FLAVOUR_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-ICE_FLAVOUR1</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">ICE_FLAVOUR_1</r:String>
+               <r:String xml:lang="en-IE">ICE_FLAVOUR1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de ICE_FLAVOUR_1</r:Content>
+               <r:Content xml:lang="en-IE">1 - Vanilla</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8239,13 +8220,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-ICE_FLAVOUR_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-ICE_FLAVOUR2</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">ICE_FLAVOUR_2</r:String>
+               <r:String xml:lang="en-IE">ICE_FLAVOUR2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de ICE_FLAVOUR_2</r:Content>
+               <r:Content xml:lang="en-IE">2 - Strawberry</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8263,13 +8244,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-ICE_FLAVOUR_3</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-ICE_FLAVOUR3</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">ICE_FLAVOUR_3</r:String>
+               <r:String xml:lang="en-IE">ICE_FLAVOUR3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de ICE_FLAVOUR_3</r:Content>
+               <r:Content xml:lang="en-IE">3 - Apple</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8287,13 +8268,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-ICE_FLAVOUR_4</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-ICE_FLAVOUR4</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">ICE_FLAVOUR_4</r:String>
+               <r:String xml:lang="en-IE">ICE_FLAVOUR4</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de ICE_FLAVOUR_4</r:Content>
+               <r:Content xml:lang="en-IE">4 - Bacon</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8311,13 +8292,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-NUCLEAR_CHARACTER_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-NUCLEAR_CHARACTER1</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">NUCLEAR_CHARACTER_1</r:String>
+               <r:String xml:lang="en-IE">NUCLEAR_CHARACTER1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de NUCLEAR_CHARACTER_1</r:Content>
+               <r:Content xml:lang="en-IE">1 - Charles Montgomery Burns</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8335,13 +8316,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-NUCLEAR_CHARACTER_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-NUCLEAR_CHARACTER2</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">NUCLEAR_CHARACTER_2</r:String>
+               <r:String xml:lang="en-IE">NUCLEAR_CHARACTER2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de NUCLEAR_CHARACTER_2</r:Content>
+               <r:Content xml:lang="en-IE">2 - Carl Carlson</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8359,13 +8340,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-NUCLEAR_CHARACTER_3</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-NUCLEAR_CHARACTER3</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">NUCLEAR_CHARACTER_3</r:String>
+               <r:String xml:lang="en-IE">NUCLEAR_CHARACTER3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de NUCLEAR_CHARACTER_3</r:Content>
+               <r:Content xml:lang="en-IE">3 - Otto Mann</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8383,13 +8364,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-NUCLEAR_CHARACTER_4</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-NUCLEAR_CHARACTER4</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">NUCLEAR_CHARACTER_4</r:String>
+               <r:String xml:lang="en-IE">NUCLEAR_CHARACTER4</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de NUCLEAR_CHARACTER_4</r:Content>
+               <r:Content xml:lang="en-IE">4 - Carl Carlson</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8407,13 +8388,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-BIRTH_CHARACTER_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-BIRTH_CHARACTER1</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">BIRTH_CHARACTER_1</r:String>
+               <r:String xml:lang="en-IE">BIRTH_CHARACTER1</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de BIRTH_CHARACTER_1</r:Content>
+               <r:Content xml:lang="en-IE">1 - Selma Bouvier</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8431,13 +8412,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-BIRTH_CHARACTER_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-BIRTH_CHARACTER2</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">BIRTH_CHARACTER_2</r:String>
+               <r:String xml:lang="en-IE">BIRTH_CHARACTER2</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de BIRTH_CHARACTER_2</r:Content>
+               <r:Content xml:lang="en-IE">2 - Kent Brockman</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8455,13 +8436,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-BIRTH_CHARACTER_3</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-BIRTH_CHARACTER3</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">BIRTH_CHARACTER_3</r:String>
+               <r:String xml:lang="en-IE">BIRTH_CHARACTER3</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de BIRTH_CHARACTER_3</r:Content>
+               <r:Content xml:lang="en-IE">3 - Milhouse Van Houten</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8479,13 +8460,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-BIRTH_CHARACTER_4</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-BIRTH_CHARACTER4</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">BIRTH_CHARACTER_4</r:String>
+               <r:String xml:lang="en-IE">BIRTH_CHARACTER4</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de BIRTH_CHARACTER_4</r:Content>
+               <r:Content xml:lang="en-IE">4 - Nelson Muntz</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8503,13 +8484,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-BIRTH_CHARACTER_5</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-BIRTH_CHARACTER5</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">BIRTH_CHARACTER_5</r:String>
+               <r:String xml:lang="en-IE">BIRTH_CHARACTER5</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de BIRTH_CHARACTER_5</r:Content>
+               <r:Content xml:lang="en-IE">5 - Crazy Cat Lady</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8527,13 +8508,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_1_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES11</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_1_1</r:String>
+               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES11</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PERCENTAGE_EXPENSES_1_1</r:Content>
+               <r:Content xml:lang="en-IE">Frozen products-Percentage</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8551,13 +8532,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_2_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES21</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_2_1</r:String>
+               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PERCENTAGE_EXPENSES_2_1</r:Content>
+               <r:Content xml:lang="en-IE">Ice creams-Percentage</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8575,13 +8556,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_3_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES31</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_3_1</r:String>
+               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES31</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PERCENTAGE_EXPENSES_3_1</r:Content>
+               <r:Content xml:lang="en-IE">Jasper Beardly-Percentage</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8599,13 +8580,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_4_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES41</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_4_1</r:String>
+               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES41</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PERCENTAGE_EXPENSES_4_1</r:Content>
+               <r:Content xml:lang="en-IE">Meat-Percentage</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8623,13 +8604,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_5_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES51</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_5_1</r:String>
+               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES51</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PERCENTAGE_EXPENSES_5_1</r:Content>
+               <r:Content xml:lang="en-IE">Bacon-Percentage</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8647,13 +8628,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_6_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES61</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_6_1</r:String>
+               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES61</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PERCENTAGE_EXPENSES_6_1</r:Content>
+               <r:Content xml:lang="en-IE">Pork chop-Percentage</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8671,13 +8652,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_7_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES71</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_7_1</r:String>
+               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES71</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PERCENTAGE_EXPENSES_7_1</r:Content>
+               <r:Content xml:lang="en-IE">Chicken-Percentage</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8695,13 +8676,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_8_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES81</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_8_1</r:String>
+               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES81</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PERCENTAGE_EXPENSES_8_1</r:Content>
+               <r:Content xml:lang="en-IE">Compote-Percentage</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8719,13 +8700,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_9_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES91</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_9_1</r:String>
+               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES91</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PERCENTAGE_EXPENSES_9_1</r:Content>
+               <r:Content xml:lang="en-IE">Powersauce-Percentage</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8743,13 +8724,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_10_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES101</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES_10_1</r:String>
+               <r:String xml:lang="en-IE">PERCENTAGE_EXPENSES101</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de PERCENTAGE_EXPENSES_10_1</r:Content>
+               <r:Content xml:lang="en-IE">Other-Percentage</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8767,13 +8748,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-CLOWNING_1_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-CLOWNING11</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">CLOWNING_1_1</r:String>
+               <r:String xml:lang="en-IE">CLOWNING11</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de CLOWNING_1_1</r:Content>
+               <r:Content xml:lang="en-IE">Break the windows of the whole city-Clowning</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8791,85 +8772,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-CLOWNING_2_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-CLOWNING12</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">CLOWNING_2_1</r:String>
+               <r:String xml:lang="en-IE">CLOWNING12</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de CLOWNING_2_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-2-1-2</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-2-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-CLOWNING_3_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">CLOWNING_3_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de CLOWNING_3_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-2-1-3</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-2-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-CLOWNING_4_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">CLOWNING_4_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de CLOWNING_4_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-2-1-4</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-2-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-CLOWNING_1_2</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">CLOWNING_1_2</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de CLOWNING_1_2</r:Content>
+               <r:Content xml:lang="en-IE">Break the windows of the whole city-Remember?</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8887,13 +8796,39 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-CLOWNING_2_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-CLOWNING21</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">CLOWNING_2_2</r:String>
+               <r:String xml:lang="en-IE">CLOWNING21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de CLOWNING_2_2</r:Content>
+               <r:Content xml:lang="en-IE">Loose the violin of his daughter playing
+                  poker-Clowning</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-2-1-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-2-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-CLOWNING22</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">CLOWNING22</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Loose the violin of his daughter playing
+                  poker-Remember?</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8911,13 +8846,37 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-CLOWNING_3_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-CLOWNING31</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">CLOWNING_3_2</r:String>
+               <r:String xml:lang="en-IE">CLOWNING31</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de CLOWNING_3_2</r:Content>
+               <r:Content xml:lang="en-IE">Kill Mr Burns-Clowning</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-2-1-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-2-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-CLOWNING32</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">CLOWNING32</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Kill Mr Burns-Remember?</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8935,13 +8894,39 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-CLOWNING_4_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-CLOWNING41</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">CLOWNING_4_2</r:String>
+               <r:String xml:lang="en-IE">CLOWNING41</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de CLOWNING_4_2</r:Content>
+               <r:Content xml:lang="en-IE">Leaving a mechanical object to control the nuclear power
+                  plant-Clowning</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-2-1-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-2-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-CLOWNING42</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">CLOWNING42</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Leaving a mechanical object to control the nuclear power
+                  plant-Remember?</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8959,13 +8944,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_1_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL11</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_1_1</r:String>
+               <r:String xml:lang="en-IE">TRAVEL11</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_1_1</r:Content>
+               <r:Content xml:lang="en-IE">Car-Brazil-Means</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8983,85 +8968,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_2_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL12</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_2_1</r:String>
+               <r:String xml:lang="en-IE">TRAVEL12</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_2_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-2</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_3_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_3_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_3_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-3</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_4_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_4_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_4_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-4</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_1_2</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_1_2</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_1_2</r:Content>
+               <r:Content xml:lang="en-IE">Car-Canada-Means</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9079,85 +8992,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_2_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL13</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_2_2</r:String>
+               <r:String xml:lang="en-IE">TRAVEL13</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_2_2</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-6</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_3_2</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_3_2</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_3_2</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-7</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_4_2</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_4_2</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_4_2</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-8</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_1_3</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_1_3</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_1_3</r:Content>
+               <r:Content xml:lang="en-IE">Car-Japan-Means</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9175,85 +9016,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_2_3</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL14</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_2_3</r:String>
+               <r:String xml:lang="en-IE">TRAVEL14</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_2_3</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-10</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_3_3</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_3_3</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_3_3</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-11</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_4_3</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_4_3</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_4_3</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-12</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_1_4</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_1_4</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_1_4</r:Content>
+               <r:Content xml:lang="en-IE">Car-France-Means</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9271,85 +9040,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_2_4</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL15</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_2_4</r:String>
+               <r:String xml:lang="en-IE">TRAVEL15</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_2_4</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-14</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_3_4</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_3_4</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_3_4</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-15</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_4_4</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_4_4</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_4_4</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-16</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_1_5</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_1_5</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_1_5</r:Content>
+               <r:Content xml:lang="en-IE">Car-Other country-Means</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9367,85 +9064,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_2_5</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL16</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_2_5</r:String>
+               <r:String xml:lang="en-IE">TRAVEL16</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_2_5</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-18</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_3_5</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_3_5</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_3_5</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-19</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_4_5</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_4_5</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_4_5</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-20</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_1_6</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_1_6</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_1_6</r:Content>
+               <r:Content xml:lang="en-IE">Car-Other planet-Means</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9463,13 +9088,133 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_2_6</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL21</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_2_6</r:String>
+               <r:String xml:lang="en-IE">TRAVEL21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_2_6</r:Content>
+               <r:Content xml:lang="en-IE">Bike-Brazil-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL22</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL22</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Bike-Canada-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-6</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL23</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL23</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Bike-Japan-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-10</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL24</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL24</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Bike-France-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-14</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL25</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL25</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Bike-Other country-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-18</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL26</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL26</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Bike-Other planet-Means</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9487,13 +9232,133 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_3_6</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL31</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_3_6</r:String>
+               <r:String xml:lang="en-IE">TRAVEL31</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_3_6</r:Content>
+               <r:Content xml:lang="en-IE">Skateboard-Brazil-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL32</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL32</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Skateboard-Canada-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-7</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL33</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL33</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Skateboard-Japan-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-11</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL34</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL34</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Skateboard-France-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-15</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL35</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL35</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Skateboard-Other country-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-19</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL36</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL36</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Skateboard-Other planet-Means</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9511,13 +9376,133 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-TRAVEL_4_6</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL41</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">TRAVEL_4_6</r:String>
+               <r:String xml:lang="en-IE">TRAVEL41</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de TRAVEL_4_6</r:Content>
+               <r:Content xml:lang="en-IE">Plane-Brazil-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL42</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL42</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Plane-Canada-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-8</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL43</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL43</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Plane-Japan-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-12</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL44</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL44</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Plane-France-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-16</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL45</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL45</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Plane-Other country-Means</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-4-3-1-20</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-4-3-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-TRAVEL46</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">TRAVEL46</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Plane-Other planet-Means</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9535,13 +9520,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_1_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS11</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_1_1</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS11</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_1_1</r:Content>
+               <r:Content xml:lang="en-IE">Line1-Name</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9559,229 +9544,13 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_2_1</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS12</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_2_1</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS12</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_2_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-5-1-2</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_3_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_3_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_3_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-5-1-3</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_4_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_4_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_4_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-5-1-4</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_5_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_5_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_5_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-5-1-5</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_6_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_6_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_6_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-5-1-6</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_7_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_7_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_7_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-5-1-7</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_8_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_8_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_8_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-5-1-8</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_9_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_9_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_9_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-5-1-9</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_10_1</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_10_1</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_10_1</r:Content>
-            </r:Label>
-            <r:SourceParameterReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QOP-5-1-10</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>OutParameter</r:TypeOfObject>
-            </r:SourceParameterReference>
-            <r:QuestionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-            <l:VariableRepresentation/>
-         </l:Variable>
-         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_1_2</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_1_2</r:String>
-            </l:VariableName>
-            <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_1_2</r:Content>
+               <r:Content xml:lang="en-IE">Line1-Age</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9799,13 +9568,37 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_2_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS21</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_2_2</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_2_2</r:Content>
+               <r:Content xml:lang="en-IE">Line2-Name</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-1-2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS22</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS22</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Line2-Age</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9823,13 +9616,37 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_3_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS31</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_3_2</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS31</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_3_2</r:Content>
+               <r:Content xml:lang="en-IE">Line3-Name</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-1-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS32</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS32</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Line3-Age</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9847,13 +9664,37 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_4_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS41</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_4_2</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS41</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_4_2</r:Content>
+               <r:Content xml:lang="en-IE">Line4-Name</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-1-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS42</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS42</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Line4-Age</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9871,13 +9712,37 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_5_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS51</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_5_2</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS51</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_5_2</r:Content>
+               <r:Content xml:lang="en-IE">Line5-Name</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-1-5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS52</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS52</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Line5-Age</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9895,13 +9760,37 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_6_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS61</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_6_2</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS61</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_6_2</r:Content>
+               <r:Content xml:lang="en-IE">Line6-Name</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-1-6</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS62</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS62</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Line6-Age</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9919,13 +9808,37 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_7_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS71</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_7_2</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS71</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_7_2</r:Content>
+               <r:Content xml:lang="en-IE">Line7-Name</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-1-7</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS72</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS72</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Line7-Age</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9943,13 +9856,37 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_8_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS81</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_8_2</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS81</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_8_2</r:Content>
+               <r:Content xml:lang="en-IE">Line8-Name</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-1-8</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS82</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS82</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Line8-Age</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9967,13 +9904,37 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_9_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS91</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_9_2</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS91</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_9_2</r:Content>
+               <r:Content xml:lang="en-IE">Line9-Name</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-1-9</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS92</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS92</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Line9-Age</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9991,13 +9952,37 @@
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS_10_2</r:ID>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS101</r:ID>
             <r:Version>0.1.0</r:Version>
             <l:VariableName>
-               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS_10_2</r:String>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS101</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="en-IE">Libellé de FAVOURITE_CHARACTERS_10_2</r:Content>
+               <r:Content xml:lang="en-IE">Line10-Name</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-5-1-10</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QG-5-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-FAVOURITE_CHARACTERS102</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">FAVOURITE_CHARACTERS102</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">Line10-Age</r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10013,8 +9998,32 @@
             </r:QuestionReference>
             <l:VariableRepresentation/>
          </l:Variable>
+         <l:Variable>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-VR-SURVEY_COMMENT</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <l:VariableName>
+               <r:String xml:lang="en-IE">SURVEY_COMMENT</r:String>
+            </l:VariableName>
+            <r:Label>
+               <r:Content xml:lang="en-IE">SURVEY_COMMENT label</r:Content>
+            </r:Label>
+            <r:SourceParameterReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QOP-6-1-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>OutParameter</r:TypeOfObject>
+            </r:SourceParameterReference>
+            <r:QuestionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>INSEE-SIMPSONS-QI-6-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>QuestionItem</r:TypeOfObject>
+            </r:QuestionReference>
+            <l:VariableRepresentation/>
+         </l:Variable>
       </l:VariableScheme>
-      <l:VariableScheme xmlns="ddi:instance:3_2">
+      <l:VariableScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>INSEE-SIMPSONSEXT-VS</r:ID>
          <r:Version>0.1.0</r:Version>
@@ -10045,7 +10054,8 @@
             <r:String xml:lang="en-IE">SIMPSONS</r:String>
          </d:ProcessingInstructionSchemeName>
          <r:Label>
-            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire</r:Content>
+            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons
+               questionnaire</r:Content>
          </r:Label>
          <d:GenerationInstruction>
             <r:Agency>fr.insee</r:Agency>
@@ -10059,61 +10069,61 @@
             </d:SourceQuestion>
             <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_1_1</r:ID>
+               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES11</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_2_1</r:ID>
+               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES21</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_3_1</r:ID>
+               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES31</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_4_1</r:ID>
+               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES41</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_5_1</r:ID>
+               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES51</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_6_1</r:ID>
+               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES6_1</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_7_1</r:ID>
+               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES71</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_8_1</r:ID>
+               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES81</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_9_1</r:ID>
+               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES91</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES_10_1</r:ID>
+               <r:ID>INSEE-SIMPSONS-VR-PERCENTAGE_EXPENSES101</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
@@ -10328,8 +10338,8 @@
             </d:ControlConstructReference>
          </d:GenerationInstruction>
       </d:ProcessingInstructionScheme>
-            
-      <r:ManagedRepresentationScheme xmlns="ddi:instance:3_2">
+
+      <r:ManagedRepresentationScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>INSEE-SIMPSONS-MRS</r:ID>
          <r:Version>0.1.0</r:Version>
@@ -10347,7 +10357,7 @@
          </r:ManagedDateTimeRepresentation>
       </r:ManagedRepresentationScheme>
    </g:ResourcePackage>
-   <s:StudyUnit xmlns="ddi:studyunit:3_2">
+   <s:StudyUnit>
       <r:Agency>fr.insee</r:Agency>
       <r:ID>INSEE-SIMPSONS-SU</r:ID>
       <r:Version>0.1.0</r:Version>
@@ -10396,9 +10406,7 @@
                <r:Content xml:lang="en-IE">Set of survey instruments for the SIMPSONS
                   survey</r:Content>
             </r:Label>
-            <d:Instrument xmlns:pr="ddi:ddiprofile:3_2" xmlns:c="ddi:conceptualcomponent:3_2"
-               xmlns:cm="ddi:comparative:3_2"
-               xmlns:pogues="http://xml.insee.fr/schema/applis/pogues">
+            <d:Instrument>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>SIMPSONS</r:ID>
                <r:Version>0.1.0</r:Version>
