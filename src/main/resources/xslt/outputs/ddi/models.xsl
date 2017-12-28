@@ -101,7 +101,12 @@
                     <r:ID><xsl:value-of select="concat('QuestionScheme-',enoddi32:get-id($source-context))"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>                  
-                    <xsl:apply-templates select="enoddi32:get-questions($source-context)" mode="source">
+                    <!-- This 'hack' is needed to output the question in correct order (QuestionItem first, then QuestionGrid). -->
+                    <xsl:apply-templates select="enoddi32:get-questions-simple($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionScheme', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                    </xsl:apply-templates>
+                    <xsl:apply-templates select="enoddi32:get-questions-table($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
