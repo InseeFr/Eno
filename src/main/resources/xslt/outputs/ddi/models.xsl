@@ -424,22 +424,6 @@
         </l:Code>
     </xsl:template>
 
-    <xsl:template match="Code" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <l:Code levelNumber="1" isDiscrete="true">
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:CategoryReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>CA-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            </r:CategoryReference>
-            <r:Value>Code.Value</r:Value>
-        </l:Code>
-    </xsl:template>
-    
     <xsl:template match="driver-CategoryScheme//CodeLists" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -742,7 +726,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:CodeDomain>            
-            <r:GenericOutputFormat codeListID="INSEE'-GOF-CV'"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
@@ -1057,7 +1041,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:NumericDomain>
             <xsl:variable name="decimalPositions" select="enoddi32:get-decimal-positions($source-context)"/>
-            <xsl:if test="number($decimalPositions) = number($decimalPositions)">
+            <xsl:if test="number($decimalPositions) = number($decimalPositions) and number($decimalPositions) &gt; 0">
                 <xsl:attribute name="decimalPositions" select="$decimalPositions"/>
             </xsl:if>
             <r:NumberRange>
@@ -1127,7 +1111,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:CodeDomain>
-            <r:GenericOutputFormat codeListID="INSEE'-GOF-CV'"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>            
+            <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>            
             <r:CodeListReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-code-list-id($source-context)"/></r:ID>
