@@ -76,9 +76,28 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- <xsl:template match="pogues:Variable" mode="enopogues:get-related-response">
-        <xsl:sequence select="//pogues:Response[pogues:CollectedVariableReference = current/@id]"/>
-    </xsl:template>-->
+    <xsl:template match="pogues:Child/@genericName" mode="conversion-table">
+        <xsl:choose>
+            <xsl:when test=". = 'COMMENT'">
+                <xsl:value-of select="'template'"/>
+            </xsl:when>
+            <xsl:when test=". = 'MODULE'">
+                <xsl:value-of select="'module'"/>
+            </xsl:when>            
+            <xsl:when test=". = 'SUBMODULE'">
+                <xsl:value-of select="'submodule'"/>
+            </xsl:when>
+            <xsl:when test=". = 'HIDEABLE'">
+                <xsl:value-of select="'hideable'"/>
+            </xsl:when>
+            <xsl:when test=". = 'DEACTIVATABLE'">
+                <xsl:value-of select="'deactivatable'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="." mode="conversion-table-error-message"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <xsl:template match="pogues:Control" mode="enopogues:get-ip-id">
         <xsl:param name="index" tunnel="yes"/>
