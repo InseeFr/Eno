@@ -71,7 +71,7 @@
                                 <xsl:value-of select="enoddi32:get-label($source-context)"/>
                             </r:Content>
                         </r:Label>
-                        <d:TypeOfSequence>template</d:TypeOfSequence>
+                        <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
                         <!--creation of references of direct children-->
                         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                             <xsl:with-param name="driver" select="eno:append-empty-element('Sequence', .)" tunnel="yes"/>
@@ -203,6 +203,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="id" select="enoddi32:get-id($source-context)"/>
+        <xsl:variable name="driver" select="."/>
         <l:Variable>
             <r:Agency>fr.insee</r:Agency>
             <r:ID><xsl:value-of select="$id"/></r:ID>
@@ -223,9 +224,28 @@
                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
                 </r:SourceParameterReference>
                 <xsl:apply-templates select="." mode="enoddi32:question-reference"/>
-                <l:VariableRepresentation/>
+                <l:VariableRepresentation>
+                    <xsl:apply-templates select="eno:child-fields(.)" mode="source">
+                        <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
+                    </xsl:apply-templates>   
+                </l:VariableRepresentation>
             </xsl:for-each>
         </l:Variable>
+    </xsl:template>
+    
+    <xsl:template match="driver-VariableScheme//Variable/*[./name()= ('TextDomain','NumericDomain','DateTimeDomain','BooleanDomain','CodeDomain')]" mode="model" priority="5">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xsl:template match="driver-VariableScheme//Variable//Unit" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>     
+        <xsl:variable name="unit" select="'%'"/>
+        <xsl:if test="normalize-space($unit) != ''">
+            <r:MeasurementUnit>%</r:MeasurementUnit>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="driver-InterviewerInstructionScheme//*[name() = ('Instruction','Control')]" mode="model">
@@ -474,7 +494,7 @@
                     <xsl:value-of select="enoddi32:get-label($source-context)"/>
                 </r:Content>
             </r:Label>
-            <d:TypeOfSequence>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">
                 <xsl:value-of select="enoddi32:get-sequence-type($source-context)"/>
             </d:TypeOfSequence>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
