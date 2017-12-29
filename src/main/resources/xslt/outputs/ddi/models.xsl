@@ -1030,11 +1030,11 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:QuestionConstruct>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QC-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:QuestionReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>QI-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
