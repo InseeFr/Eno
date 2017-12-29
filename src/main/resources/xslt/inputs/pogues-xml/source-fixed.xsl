@@ -139,6 +139,15 @@
                     satisfies substring-before($x, ' ') = pogues:Name/text()]"/>        
     </xsl:template>
 
+    <xsl:template match="pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label" mode="enopogues:get-related-variable">
+        <xsl:variable name="variable-names-temp" select="tokenize(.,'\$')"/>
+        <xsl:variable name="context" select="."/>        
+        <xsl:for-each select="$variable-names-temp">
+            <xsl:variable name="variable-name" select="if(contains(.,' ')) then(substring-before(.,' ')) else(.)"/>
+            <xsl:sequence select="$context/ancestor::pogues:Questionnaire//pogues:Variable[pogues:Name = $variable-name]"/>
+        </xsl:for-each>
+    </xsl:template>
+    
     <xsl:template match="pogues:Response" mode="enopogues:get-cell-coordinates">
         <xsl:variable name="correspondingMapping"
             select="following-sibling::pogues:ResponseStructure/pogues:Mapping[pogues:MappingSource = current()/@id]"/>
@@ -189,5 +198,59 @@
         <xsl:value-of
             select="concat($context/parent::pogues:Child/@id, '-secondDimension-fakeCL-1')"/>
     </xsl:function>
+
+    <xsl:template match="pogues:Declaration/pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label" mode="id-variable">
+        <xsl:variable name="variables" select="enopogues:get-related-variable(.)"/>       
+        <xsl:choose>
+            <xsl:when test="$variables">
+                <xsl:call-template name="enopogues:id-variable-to-ddi">
+                     <xsl:with-param name="variables" select="$variables" as="item()*"/>
+                     <xsl:with-param name="expression" select="./text()"/>            
+                </xsl:call-template>        
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:template>
+
+    <xsl:template name="enopogues:id-variable-to-ddi">
+        <xsl:param name="variables" as="item()*"/>
+        <xsl:param name="index" select="1"/>
+        <xsl:param name="expression"/>
+        <xsl:choose>
+            <xsl:when test="$index &gt; count($variables)">
+                <xsl:value-of select="$expression"/>
+            </xsl:when>            
+            <xsl:otherwise>
+                <xsl:variable name="variable-name" select="enopogues:get-name($variables[$index])"/>
+                <xsl:variable name="variable-type" select="enopogues:get-type($variables[$index])"/>
+                <xsl:choose>
+                    <xsl:when test="$variable-type = ('CollectedVariableType','CalculatedVariableType')">
+                        <xsl:call-template name="enopogues:id-variable-to-ddi">
+                            <xsl:with-param name="variables" select="$variables"/>
+                            <xsl:with-param name="index" select="$index + 1"/>
+                            <xsl:with-param name="expression" select="replace($expression,concat('\$',$variable-name),concat('¤',$variable-name,'¤'))"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="$variable-type = 'ExternalVariableType'">
+                            <xsl:call-template name="enopogues:id-variable-to-ddi">
+                                <xsl:with-param name="variables" select="$variables"/>
+                                <xsl:with-param name="index" select="$index + 1"/>
+                                <xsl:with-param name="expression" select="replace($expression,concat('\$',$variable-name),concat('ø',$variable-name,'ø'))"/>
+                            </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="enopogues:id-variable-to-ddi">
+                            <xsl:with-param name="variables" select="$variables"/>
+                            <xsl:with-param name="index" select="$index + 1"/>
+                            <xsl:with-param name="expression" select="$expression"/>
+                        </xsl:call-template>                       
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
 </xsl:stylesheet>

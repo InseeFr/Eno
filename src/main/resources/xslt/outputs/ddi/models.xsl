@@ -721,7 +721,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:QuestionConstruct>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QC-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <xsl:apply-templates select="$source-context" mode="enoddi32:question-reference"/>
         </d:QuestionConstruct>
@@ -732,7 +732,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QC-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
         </d:ControlConstructReference>
@@ -758,7 +758,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:QuestionConstruct>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QC-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <xsl:apply-templates select="$source-context" mode="enoddi32:question-reference"/>
         </d:QuestionConstruct>
@@ -770,7 +770,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QC-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
         </d:ControlConstructReference>
@@ -950,7 +950,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QC-<xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
         </d:ControlConstructReference>
@@ -1046,7 +1046,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QC-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
         </d:ControlConstructReference>
