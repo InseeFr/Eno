@@ -247,8 +247,8 @@
 
     <xsl:template match="driver-VariableScheme//Variable//Unit" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>     
-        <xsl:variable name="unit" select="'%'"/>
-        <xsl:if test="normalize-space($unit) != ''">
+        <xsl:variable name="unit" select="enoddi32:get-unit($source-context)"/>
+        <xsl:if test="not(normalize-space($unit) = ('',' '))">
             <r:MeasurementUnit>%</r:MeasurementUnit>
         </xsl:if>
     </xsl:template>
