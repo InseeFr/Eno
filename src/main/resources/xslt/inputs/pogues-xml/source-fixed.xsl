@@ -98,6 +98,26 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    <xsl:template match="pogues:Control/@criticity" mode="conversion-table">
+        <xsl:choose>
+            <xsl:when test=". = 'INFO'">
+                <xsl:value-of select="'info'"/>
+            </xsl:when>
+            <xsl:when test=". = 'WARN'">
+                <xsl:value-of select="'warn'"/>
+            </xsl:when>            
+            <xsl:when test=". = 'ERROR'">
+                <xsl:value-of select="'error'"/>
+            </xsl:when>
+            <xsl:when test=". = 'MANDATORY'">
+                <xsl:value-of select="'mandatory'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="." mode="conversion-table-error-message"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <xsl:template match="pogues:Control" mode="enopogues:get-ip-id">
         <xsl:param name="index" tunnel="yes"/>

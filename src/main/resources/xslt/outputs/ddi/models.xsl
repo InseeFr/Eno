@@ -534,6 +534,12 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <d:ConstructName>
+                <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-description($source-context)"/></r:String>
+            </d:ConstructName>
+            <r:Description>
+                <r:Content xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-description($source-context)"/></r:Content>
+            </r:Description>
             <d:InterviewerInstructionReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-generated-instruction-id($source-context)"/></r:ID>
@@ -577,6 +583,14 @@
                     </r:CommandContent>
                 </r:Command>
             </r:CommandCode>
+            <xsl:variable name="type" select="enoddi32:get-type($source-context)"/>
+            <xsl:if test="not(normalize-space($type)=('',' '))">
+                <xsl:comment>
+                    <xsl:text disable-output-escaping="yes">&lt;r:TypeOfComputationItem&gt;</xsl:text>
+                        <xsl:value-of select="$type"/>
+                    <xsl:text disable-output-escaping="yes">&lt;/r:TypeOfComputationItem&gt;</xsl:text>                    
+                </xsl:comment>
+            </xsl:if>
         </d:ComputationItem>
     </xsl:template>
     
