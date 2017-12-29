@@ -306,7 +306,7 @@
     <!--this part is designed in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
     <!--<xsl:template match="driver-InterviewerInstructionReference//Instruction" mode="model" priority="3">
     -->
-    <xsl:template match="driver-InterviewerInstructionReference//Instruction | driver-ControlConstructScheme//Instruction" mode="model" priority="3">           
+    <xsl:template match="driver-InterviewerInstructionReference//Instruction" mode="model" priority="3">           
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:InterviewerInstructionReference>
@@ -516,6 +516,9 @@
                     <xsl:value-of select="enoddi32:get-label($source-context)"/>
                 </r:Content>
             </r:Label>
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference', .)" tunnel="yes"/>
+            </xsl:apply-templates>
             <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">
                 <xsl:value-of select="enoddi32:get-sequence-type($source-context)"/>
             </d:TypeOfSequence>
