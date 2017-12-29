@@ -487,6 +487,10 @@
                 </r:Content>
             </r:Label>
         </l:Category>
+        <!-- Needed because Category should be flat when Codes are hierarchical. -->
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
     </xsl:template>
 
     <xsl:template match="driver-ControlConstructScheme//Sequence" mode="model">
@@ -1205,7 +1209,7 @@
         <d:GridDimension displayCode="false" displayLabel="false" rank="{enoddi32:get-rank($source-context)}">
             <d:CodeDomain>
                 <r:CodeListReference>
-                    <r:Agency><xsl:value-of select="enoddi32:get-agency($source-context)"/></r:Agency>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>CodeList</r:TypeOfObject>
