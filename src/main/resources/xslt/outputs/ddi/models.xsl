@@ -148,6 +148,24 @@
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                 </l:VariableScheme>
+                <!-- ManagedRepresenationScheme part. Full hard-coded at the moment. -->
+                <r:ManagedRepresentationScheme>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-MRS</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:Label>
+                        <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
+                            l'enquête</r:Content>
+                        <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey</r:Content>
+                    </r:Label>
+                    <r:ManagedDateTimeRepresentation>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
+                        <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
+                    </r:ManagedDateTimeRepresentation>
+                </r:ManagedRepresentationScheme>
             </g:ResourcePackage>
             <s:StudyUnit xmlns="ddi:studyunit:3_2">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -388,16 +406,16 @@
             "Irregular" A hierarchy where each section can vary in the number of nested levels it contains. The most discrete objects in an irregular hierarchy must be individually identified.
             -->
             <l:HierarchyType>Regular</l:HierarchyType>
-            <!--TODO : define levelNumber-->
-            <l:Level levelNumber="0">
-                <!--TODO : Enumeration:	
+            <!--TODO : define levelNumber-->            
+            <l:Level levelNumber="1">    
+            <!--TODO : Enumeration:	
 "Nominal" A relationship of less than, or greater than, cannot be established among the included categories. This type of relationship is also called categorical or discrete.
 "Ordinal" The categories in the domain have a rank order.
 "Interval" The categories in the domain are in rank order and have a consistent interval between each category so that differences between arbitrary pairs of measurements can be meaningfully compared.
 "Ratio" The categories have all the features of interval measurement and also have meaningful ratios between arbitrary pairs of numbers.
-"Continuous" May be used to identify both interval and ratio classification levels, when more precise information is not available.-->
-                <l:CategoryRelationship>Nominal</l:CategoryRelationship>
-            </l:Level>
+"Continuous" May be used to identify both interval and ratio classification levels, when more precise information is not available.-->                
+                <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+            </l:Level>                
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
@@ -478,6 +496,9 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <d:ConstructName>
+                <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-name($source-context)"></xsl:value-of></r:String>
+            </d:ConstructName>                       
             <r:Label>
                 <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
                     <xsl:value-of select="enoddi32:get-label($source-context)"/>
@@ -1083,19 +1104,23 @@
     <xsl:template match="DateTimeDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:DateTimeDomain>
-            <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
-            <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
+        <d:DateTimeDomainReference>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:DateTimeRepresentation>
-                    <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
-                    <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
-                </r:DateTimeRepresentation>
+                <r:DateTimeRepresentationReference>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+                </r:DateTimeRepresentationReference>
             </r:OutParameter>
-        </d:DateTimeDomain>
+        </d:DateTimeDomainReference>        
     </xsl:template>
 
     <xsl:template match="BooleanDomain" mode="model">
