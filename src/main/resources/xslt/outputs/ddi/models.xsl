@@ -367,22 +367,29 @@
             <!-- If needed, create the boolean codeList. -->
             <xsl:if test="enoddi32:exist-boolean($source-context)">
                 <l:CodeList>
-                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                    <l:Code levelNumber="1" isDiscrete="true">		
-                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID>INSEE-COMMUN-CL-C-Booleen-1</r:ID>	
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                        <r:CategoryReference>	
-                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-COMMUN-CL-Booleen</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <l:CodeListName>
+                        <r:String xml:lang="fr-FR">Booleen</r:String>
+                    </l:CodeListName>
+                    <l:HierarchyType>Regular</l:HierarchyType>
+                    <l:Level levelNumber="1">
+                        <l:CategoryRelationship>Ordinal</l:CategoryRelationship>
+                    </l:Level>
+                    <l:Code levelNumber="1" isDiscrete="true">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:CategoryReference>
+                            <r:Agency>fr.insee</r:Agency>
                             <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
-                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                            <r:TypeOfObject>Category</r:TypeOfObject>                                    
-                        </r:CategoryReference>	
-                        <r:Value>1</r:Value>	
+                            <r:Version>0.1.0</r:Version>
+                            <r:TypeOfObject>Category</r:TypeOfObject>
+                        </r:CategoryReference>
+                        <r:Value>1</r:Value>
                     </l:Code>
-                </l:CodeList>
+                </l:CodeList>                                
             </xsl:if>                                
         </l:CodeListScheme>
     </xsl:template>
@@ -463,8 +470,9 @@
     
     <xsl:template match="driver-CategoryScheme//CodeList" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" tunnel="yes"/>
         <l:CategoryScheme>
-            <r:Agency><xsl:value-of select="enoddi32:get-agency($source-context)"/></r:Agency>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi32:get-id($source-context))"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-label($source-context)"/></r:Content></r:Label>
@@ -922,11 +930,11 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:QuestionConstruct>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QC-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:QuestionReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>QI-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+                <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
@@ -939,7 +947,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>QC-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID>QC-<xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
         </d:ControlConstructReference>
