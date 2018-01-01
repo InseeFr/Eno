@@ -549,7 +549,7 @@
         <xsl:param name="expression"/>
         <xsl:param name="current-variable-with-id"/>
         <xsl:variable name="next-variable-with-id" select="$current-variable-with-id/following-sibling::*[1]"/>
-        <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/ip-id)"/>
+        <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/command-id)"/>
         <xsl:choose>
             <xsl:when test="$next-variable-with-id">
                 <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
@@ -612,12 +612,14 @@
         <!-- Calculating ids needed from the related-variable -->
         <xsl:variable name="related-variables-with-id">
             <xsl:for-each select="$related-variables">
+                <xsl:variable name="ip-id" select="enoddi32:get-ip-id($source-context,position())"/>
+                <xsl:variable name="related-response" select="enoddi32:get-related-response(.)"/>                
+                <xsl:if test="not($related-response)"><xsl:message select="'Only collected variables are correctly implemented'"/></xsl:if>                
                 <Container xmlns="" xsl:exclude-result-prefixes="#all">
-                    <ip-id><xsl:value-of select="enoddi32:get-ip-id($source-context,position())"/></ip-id>
+                    <ip-id><xsl:value-of select="$ip-id"/></ip-id>
+                    <command-id><xsl:value-of select="enoddi32:get-command-id($related-response,$ip-id)"/></command-id>
                     <qop-id>
-                        <xsl:variable name="related-question" select="enoddi32:get-related-response(.)"/>
-                        <xsl:if test="not($related-question)"><xsl:message select="'Only collected variables are implemented'"/></xsl:if>
-                        <xsl:value-of select="enoddi32:get-qop-id($related-question)"/>
+                        <xsl:value-of select="enoddi32:get-qop-id($related-response)"/>
                     </qop-id>
                     <name><xsl:value-of select="enoddi32:get-name(.)"/></name>                   
                 </Container>

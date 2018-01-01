@@ -228,8 +228,10 @@
                 <xsl:value-of select="$expression"/>
             </xsl:when>            
             <xsl:otherwise>
-                <xsl:variable name="variable-name" select="enopogues:get-name($variables[$index])"/>
-                <xsl:variable name="variable-type" select="enopogues:get-type($variables[$index])"/>
+                <xsl:variable name="currentVariable" select="$variables[$index]"/>
+                <!-- TO DO, variable-name is only for external variables, others should refer to outParam. -->                
+                <xsl:variable name="variable-name" select="enopogues:get-name($currentVariable)"/>
+                <xsl:variable name="variable-type" select="enopogues:get-type($currentVariable)"/>
                 <xsl:choose>
                     <xsl:when test="$variable-type = ('CollectedVariableType','CalculatedVariableType')">
                         <xsl:call-template name="enopogues:id-variable-to-ddi">
@@ -253,6 +255,19 @@
                         </xsl:call-template>                       
                     </xsl:otherwise>
                 </xsl:choose>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="pogues:Response" mode="enopogues:get-command-id">
+        <xsl:param name="ip-id" tunnel="yes"/>
+        <xsl:message select="enopogues:get-type(.)"/>
+        <xsl:choose>
+            <xsl:when test="enopogues:get-type(.) = 'NumericDatatypeType'">
+                <xsl:value-of select="concat('number(if (',$ip-id,'='''') then ''0'' else ',$ip-id,')')"/>  
+            </xsl:when>        
+            <xsl:otherwise>
+                <xsl:value-of select="$ip-id"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
