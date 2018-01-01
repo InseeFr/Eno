@@ -148,6 +148,22 @@
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                 </l:VariableScheme>
+                <!-- ProcessingInstructionScheme -->
+                <d:ProcessingInstructionScheme>
+                    <r:Agency>fr.insee</r:Agency>
+                    <r:ID>INSEE-SIMPSONS-PIS-1</r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <d:ProcessingInstructionSchemeName>
+                        <r:String xml:lang="en-IE">SIMPSONS</r:String>
+                    </d:ProcessingInstructionSchemeName>
+                    <r:Label>
+                        <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire</r:Content>
+                    </r:Label>
+                    <xsl:apply-templates select="enoddi32:get-generation-instructions($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-ProcessingInstructionScheme', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" tunnel="yes"/>                        
+                    </xsl:apply-templates>
+                </d:ProcessingInstructionScheme>
                 <!-- ManagedRepresenationScheme part. Full hard-coded at the moment. -->
                 <r:ManagedRepresentationScheme>
                     <r:Agency>fr.insee</r:Agency>
@@ -550,22 +566,6 @@
     <xsl:template match="driver-ControlConstructScheme//Control" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <!-- Getting all related variables from the command expression to build parameters and bindings -->
-        <xsl:variable name="related-variables" select="enoddi32:get-related-variable($source-context)"/>
-        <!-- Calculating ids needed from the related-variable -->
-        <xsl:variable name="related-variables-with-id">
-            <xsl:for-each select="$related-variables">
-                <Container xmlns="" xsl:exclude-result-prefixes="#all">
-                    <ip-id><xsl:value-of select="enoddi32:get-ip-id($source-context,position())"/></ip-id>
-                    <qop-id>
-                        <xsl:variable name="related-question" select="enoddi32:get-related-response(.)"/>
-                        <xsl:if test="not($related-question)"><xsl:message select="'Only collected variables are implemented'"/></xsl:if>
-                        <xsl:value-of select="enoddi32:get-qop-id($related-question)"/>
-                    </qop-id>
-                    <name><xsl:value-of select="enoddi32:get-name(.)"/></name>                   
-                </Container>
-            </xsl:for-each>
-        </xsl:variable>        
         <d:ComputationItem>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
@@ -582,11 +582,52 @@
                 <r:Version>0.1.0</r:Version>
                 <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <r:CommandCode>
-                <r:Command>
-                    <r:ProgramLanguage>xpath</r:ProgramLanguage>
-                    <xsl:for-each select="$related-variables-with-id/*">                        
-                        <r:InParameter isArray="false">
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
+            <xsl:variable name="type" select="enoddi32:get-type($source-context)"/>
+            <xsl:if test="not(normalize-space($type)=('',' '))">
+                <xsl:comment>
+                    <xsl:text disable-output-escaping="yes">&lt;r:TypeOfComputationItem&gt;</xsl:text>
+                        <xsl:value-of select="$type"/>
+                    <xsl:text disable-output-escaping="yes">&lt;/r:TypeOfComputationItem&gt;</xsl:text>                    
+                </xsl:comment>
+            </xsl:if>
+        </d:ComputationItem>
+    </xsl:template>
+    
+    <xsl:template match="driver-ProcessingInstructionScheme//*" mode="model">
+        <xsl:param name="source-context" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="."/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xsl:template match="driver-ControlConstructScheme//Command | driver-ProcessingInstructionScheme//Command" mode="model" priority="2">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" tunnel="yes"/>
+        <!-- Getting all related variables from the command expression to build parameters and bindings -->
+        <!-- Could be done if needed in the parent (external variable case) so it's a param not a variable -->
+        <xsl:param name="related-variables" select="enoddi32:get-related-variable($source-context)"/>
+        <!-- Calculating ids needed from the related-variable -->
+        <xsl:variable name="related-variables-with-id">
+            <xsl:for-each select="$related-variables">
+                <Container xmlns="" xsl:exclude-result-prefixes="#all">
+                    <ip-id><xsl:value-of select="enoddi32:get-ip-id($source-context,position())"/></ip-id>
+                    <qop-id>
+                        <xsl:variable name="related-question" select="enoddi32:get-related-response(.)"/>
+                        <xsl:if test="not($related-question)"><xsl:message select="'Only collected variables are implemented'"/></xsl:if>
+                        <xsl:value-of select="enoddi32:get-qop-id($related-question)"/>
+                    </qop-id>
+                    <name><xsl:value-of select="enoddi32:get-name(.)"/></name>                   
+                </Container>
+            </xsl:for-each>
+        </xsl:variable>                
+        <r:CommandCode>
+            <r:Command>
+                <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                <xsl:for-each select="$related-variables-with-id/*">                        
+                    <r:InParameter isArray="false">
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
                         <r:ID><xsl:value-of select="ip-id"/></r:ID>
                         <r:Version>0.1.0</r:Version>
@@ -594,8 +635,16 @@
                             <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="name"/></r:String>
                         </r:ParameterName>
                     </r:InParameter>
-                    </xsl:for-each>
-                    <xsl:for-each select="$related-variables-with-id/*">
+                </xsl:for-each>
+                <!-- Adding outParameter based on the context (for calculated Variable, but not needed for Filtrer&Control Command) -->
+                <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
+                    <r:OutParameter>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID>I<xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>
+                        <r:Version>0.1.0</r:Version>
+                    </r:OutParameter>
+                </xsl:if>
+                <xsl:for-each select="$related-variables-with-id/*">
                     <r:Binding>
                         <r:SourceParameterReference>
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -610,28 +659,44 @@
                             <r:TypeOfObject>InParameter</r:TypeOfObject>
                         </r:TargetParameterReference>
                     </r:Binding>                    
-                    </xsl:for-each>
-                    <r:CommandContent>
-                        <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
-                            <xsl:with-param name="expression" select="enoddi32:get-expression($source-context)"/>
-                            <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
-                        </xsl:call-template>
-                    </r:CommandContent>
-                </r:Command>
-            </r:CommandCode>
-            <xsl:variable name="type" select="enoddi32:get-type($source-context)"/>
-            <xsl:if test="not(normalize-space($type)=('',' '))">
-                <xsl:comment>
-                    <xsl:text disable-output-escaping="yes">&lt;r:TypeOfComputationItem&gt;</xsl:text>
-                        <xsl:value-of select="$type"/>
-                    <xsl:text disable-output-escaping="yes">&lt;/r:TypeOfComputationItem&gt;</xsl:text>                    
-                </xsl:comment>
-            </xsl:if>
-        </d:ComputationItem>
+                </xsl:for-each>
+                <r:CommandContent>
+                    <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
+                        <xsl:with-param name="expression" select="$source-context"/>
+                        <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
+                    </xsl:call-template>
+                </r:CommandContent>
+            </r:Command>
+        </r:CommandCode>
     </xsl:template>
     
-    
-    
+  
+    <xsl:template match="driver-ProcessingInstructionScheme//Variable" mode="model" priority="2">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <d:GenerationInstruction>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-SIMPSONS-GI-SUM_EXPENSES</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <xsl:variable name="related-variables" select="enoddi32:get-related-variable($source-context)"/>
+            <d:SourceQuestion>
+                <xsl:comment>Not implemented.</xsl:comment>
+            </d:SourceQuestion>            
+            <xsl:for-each select="$related-variables">            
+            <d:SourceVariable>
+                <r:Agency>fr.insee</r:Agency>
+                <r:ID><xsl:value-of select="enoddi32:get-id(.)"/></r:ID>
+                <r:Version>0.1.0</r:Version>
+                <r:TypeOfObject>Variable</r:TypeOfObject>
+            </d:SourceVariable>
+            </xsl:for-each>
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <xsl:with-param name="related-variables" select="$related-variables"/>
+            </xsl:apply-templates>
+        </d:GenerationInstruction>
+    </xsl:template>
+
     <!-- that does'nt work (I hate you!!!!!!!!!!!!!!!!!) -->
     <xsl:template match="driver-ControlConstructScheme//IfThenElse" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
