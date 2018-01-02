@@ -231,15 +231,18 @@
                 <xsl:variable name="currentVariable" select="$variables[$index]"/>
                 <!-- TO DO, variable-name is only for external variables, others should refer to outParam. -->                
                 <xsl:variable name="variable-name" select="enopogues:get-name($currentVariable)"/>
-                <xsl:variable name="variable-type" select="enopogues:get-type($currentVariable)"/>
+                <xsl:variable name="variable-type" select="enopogues:get-type($currentVariable)"/>                              
                 <xsl:choose>
+                    <!-- In this case the variable id separator is '¤' and variable id is the outparam related to the variable (QOP for collected, GOP for calculated).  -->
                     <xsl:when test="$variable-type = ('CollectedVariableType','CalculatedVariableType')">
+                        <xsl:variable name="variable-ref" select="enopogues:get-qop-id($currentVariable)"/>
                         <xsl:call-template name="enopogues:id-variable-to-ddi">
                             <xsl:with-param name="variables" select="$variables"/>
                             <xsl:with-param name="index" select="$index + 1"/>
-                            <xsl:with-param name="expression" select="replace($expression,concat('\$',$variable-name),concat('¤',$variable-name,'¤'))"/>
+                            <xsl:with-param name="expression" select="replace($expression,concat('\$',$variable-name),concat('¤',$variable-ref,'¤'))"/>
                         </xsl:call-template>
                     </xsl:when>
+                    <!-- In this case the variable id separator is 'ø' and variable id is the variable name.  -->                    
                     <xsl:when test="$variable-type = 'ExternalVariableType'">
                             <xsl:call-template name="enopogues:id-variable-to-ddi">
                                 <xsl:with-param name="variables" select="$variables"/>

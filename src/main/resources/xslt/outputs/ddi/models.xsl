@@ -642,7 +642,7 @@
                 <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
                     <r:OutParameter>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID>I<xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>
+                        <r:ID><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>
                         <r:Version>0.1.0</r:Version>
                     </r:OutParameter>
                 </xsl:if>
