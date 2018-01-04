@@ -129,18 +129,19 @@
             <xsl:result-document
                 href="{lower-case(concat('file:///',replace($output-folder, '\\' , '/'),'/',replace(r:ID/text(), concat($root/text(),'-In-'), ''),'.tmp'))}">
                 <DDIInstance>
-                    <s:StudyUnit>
-                        <xsl:apply-templates select=".">
-                            <xsl:with-param name="references" select="$dereferenced-template-sequence" tunnel="yes"/>
-                        </xsl:apply-templates>
-                    </s:StudyUnit>
                     <!-- And the VariableScheme is dereferenced with itself as references -->
-                    <!-- Only copying the variables that don't correspond to a question -->
+                    <!-- Only copying the external variables, that don't correspond to a question or a calculated variable -->
+                    <!-- They are before so that they appear as first variables in the instance, not as last ones -->
                     <xsl:element name="g:ResourcePackage">
                         <xsl:apply-templates select="//l:VariableScheme">
                             <xsl:with-param name="references" select="$references-variables" tunnel="yes"/>
                         </xsl:apply-templates>
                     </xsl:element>
+                    <s:StudyUnit>
+                        <xsl:apply-templates select=".">
+                            <xsl:with-param name="references" select="$dereferenced-template-sequence" tunnel="yes"/>
+                        </xsl:apply-templates>
+                    </s:StudyUnit>
                 </DDIInstance>
             </xsl:result-document>
         </xsl:for-each>
