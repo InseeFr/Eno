@@ -36,7 +36,23 @@
                 </Variable>
             </xsl:for-each>
         </Variables>
-    </xsl:variable>    
+    </xsl:variable>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Some variable belong to a vector.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="multiple-variables" as="node()">
+        <Variables>
+            <xsl:for-each select="//l:VariableGroup/r:VariableReference">
+                <Variable>
+                    <xsl:value-of select="r:ID"/>
+                </Variable>
+            </xsl:for-each>
+        </Variables>
+    </xsl:variable>
+
 
     <xd:doc>
         <xd:desc>
@@ -145,6 +161,17 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Variables belonging to VariableGroup are not directly called from the VariableScheme.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="l:VariableScheme" priority="1">
+        <xsl:copy>
+            <xsl:apply-templates select="node()[not(r:ID=$multiple-variables/Variable)]"/>
+        </xsl:copy>        
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Not retrieving the variables that correspond to a question or a calculated variable.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -182,7 +209,7 @@
             <xd:p>Default template for every element that corresponds to a reference.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="node()[ends-with(name(), 'Reference') and not(parent::r:Binding)]/r:ID">
+    <xsl:template match="node()[ends-with(name(), 'Reference') and not(parent::r:Binding) and not(name()='r:BasedOnReference')]/r:ID">
         <xsl:param name="references" tunnel="yes"/>
         <xsl:variable name="ID" select="."/>
         <!-- Copying the element -->
