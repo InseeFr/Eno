@@ -21,11 +21,12 @@ src/main/xml/null.xml
 
 # New file structure for Java interop
 source.xsl
-**/templates.xsl
-/**/functions.xsl
-src/main/resources/xslt/transformations/ddi2fr/ddi2fr.xsl
-**/tree-navigation.xsl
-/**/drivers.xsl
+templates.xsl
+functions.xsl
+ddi2fr.xsl
+pogues-xml2ddi.xsl
+tree-navigation.xsl
+drivers.xsl
 src/main/resources/xml/null.xml
 src/main/resources/schema/*
 *.fods#
