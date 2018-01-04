@@ -268,9 +268,10 @@
     <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster]"
         mode="enoddi:get-codes-first-dimension">
         <xsl:variable name="levels">
+            <!-- Only one attribute amongst rangeMinimum and specificValue is present -->
             <xsl:for-each-group
-                select="d:StructuredMixedGridResponseDomain/d:GridResponseDomain//d:SelectDimension[@rank='1']"
-                group-by="@rangeMinimum">
+                select="d:StructuredMixedGridResponseDomain/*[name()='d:GridResponseDomain' or name()='d:NoDataByDefinition']//d:SelectDimension[@rank='1']"
+                group-by="concat(@rangeMinimum,@specificValue)">
                 <dummy/>
             </xsl:for-each-group>
         </xsl:variable>
