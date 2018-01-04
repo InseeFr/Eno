@@ -20,11 +20,13 @@ src/main/xml/null.xml
 .settings/
 
 # New file structure for Java interop
-src/main/resources/xslt/inputs/ddi/source.xsl
-src/main/resources/xslt/inputs/ddi/templates.xsl
-src/main/resources/xslt/inputs/ddi/functions.xsl
+source.xsl
+**/templates.xsl
+/**/functions.xsl
 src/main/resources/xslt/transformations/ddi2fr/ddi2fr.xsl
-src/main/resources/xslt/transformations/ddi2fr/tree-navigation.xsl
-src/main/resources/xslt/transformations/ddi2fr/functions.xsl
-src/main/resources/xslt/transformations/ddi2fr/drivers.xsl
+**/tree-navigation.xsl
+/**/drivers.xsl
 src/main/resources/xml/null.xml
+src/main/resources/schema/*
+*.fods#
+questionnaires/**

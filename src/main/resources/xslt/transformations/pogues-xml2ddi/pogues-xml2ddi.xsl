@@ -87,6 +87,19 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
+         <xd:p>The container for CodeLists</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:CodeLists" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('CodeLists',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
          <xd:p>A list a categories to be called in questions</xd:p>
       </xd:desc>
    </xd:doc>
@@ -100,7 +113,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A refernce calling a CodeList</xd:p>
+         <xd:p>A reference calling a CodeList</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:CodeListReference" mode="source">
@@ -199,7 +212,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>Not implemented yet</xd:p>
+         <xd:p>GoTo from Pogues stored in ExternalAid element ; with the help of xhtml elements to keep the structure.</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:GoTo" mode="source">
@@ -233,7 +246,7 @@
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="eno:append-empty-element('CompoenentGroup',$driver)"
+      <xsl:apply-templates select="eno:append-empty-element('ComponentGroup',$driver)"
                            mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
@@ -254,7 +267,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>s'applique aux &lt;Datatype&gt; n'ayant pas d'atribut "visualizationHint" et dont l'atribut "xsi:type" est egal à "TextDatatypeType"</xd:p>
+         <xd:p>Datatype of a text Response</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Datatype[not(@visualizationHint) and @xsi:type='TextDatatypeType']"
@@ -268,7 +281,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>s'applique aux &lt;Datatype&gt; n'ayant pas d'atribut "visualizationHint" et dont l'atribut "xsi:type" est egal à "NumericDatatypeType"</xd:p>
+         <xd:p>Datatype of a numeric Response</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Datatype[not(@visualizationHint) and @xsi:type='NumericDatatypeType']"
@@ -282,7 +295,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>s'applique aux &lt;Datatype&gt; n'ayant pas d'atribut "visualizationHint" et dont l'atribut "xsi:type" est egal à "DateDatatypeType"</xd:p>
+         <xd:p>Datatype of a Date Response</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Datatype[not(@visualizationHint) and @xsi:type='DateDatatypeType']"
@@ -297,7 +310,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>s'applique aux &lt;Datatype&gt; n'ayant pas d'atribut "visualizationHint" et dont l'atribut "xsi:type" est egal à "BooleanDatatypeType"</xd:p>
+         <xd:p>Datatype of a boolean Response</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Datatype[not(@visualizationHint) and @xsi:type='BooleanDatatypeType']"
@@ -311,51 +324,21 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>s'applique aux &lt;Datatype&gt; dont l'atribut "visualizationHint" est "RADIO" et dont l'atribut "xsi:type" est egal à "TextDatatypeType"</xd:p>
+         <xd:p/>
       </xd:desc>
    </xd:doc>
-   <xsl:template match="pogues:Datatype[@visualizationHint='RADIO' and @xsi:type='TextDatatypeType']"
+   <xsl:template match="pogues:Datatype[@visualizationHint and @xsi:type='TextDatatypeType']"
                  mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>
-      <xsl:apply-templates select="eno:append-empty-element('RadioDomain',$driver)" mode="model">
+      <xsl:apply-templates select="eno:append-empty-element('CodeDomain',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>s'applique aux &lt;Datatype&gt; dont l'atribut "visualizationHint" est "CHECKBOX" et dont l'atribut "xsi:type" est egal à "TextDatatypeType"</xd:p>
-      </xd:desc>
-   </xd:doc>
-   <xsl:template match="pogues:Datatype[@visualizationHint='CHECKBOX' and @xsi:type='TextDatatypeType']"
-                 mode="source">
-      <xsl:param name="driver" tunnel="yes">
-         <driver/>
-      </xsl:param>
-      <xsl:apply-templates select="eno:append-empty-element('CheckBoxDomain',$driver)"
-                           mode="model">
-         <xsl:with-param name="source-context" select="." tunnel="yes"/>
-      </xsl:apply-templates>
-   </xsl:template>
-   <xd:doc>
-      <xd:desc>
-         <xd:p>s'applique aux &lt;Datatype&gt; dont l'atribut "visualizationHint" est "DROPDOWN" et dont l'atribut "xsi:type" est egal à "TextDatatypeType"</xd:p>
-      </xd:desc>
-   </xd:doc>
-   <xsl:template match="pogues:Datatype[@visualizationHint='DROPDOWN' and @xsi:type='TextDatatypeType']"
-                 mode="source">
-      <xsl:param name="driver" tunnel="yes">
-         <driver/>
-      </xsl:param>
-      <xsl:apply-templates select="eno:append-empty-element('DropDownListDomain',$driver)"
-                           mode="model">
-         <xsl:with-param name="source-context" select="." tunnel="yes"/>
-      </xsl:apply-templates>
-   </xsl:template>
-   <xd:doc>
-      <xd:desc>
-         <xd:p>s'applique aux &lt;Dimension&gt; dont l'atribut "dimensionType" est "PRIMARY" et dont l'atribut "dynamic" est egal à "0"</xd:p>
+         <xd:p>Header or column names of a table or a multiple choice question (Roster : layout can be automatically generated)</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Dimension[@dimensionType='PRIMARY' and @dynamic != '0']"
@@ -370,7 +353,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>s'applique aux &lt;Dimension&gt; dont l'atribut "dimensionType" est "MEASURE" et dont l'atribut "dynamic" est egal à "0"</xd:p>
+         <xd:p>Header or column names of a table or a multiple choice question (Individual name of category) Not fully implemented yet</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:Dimension[@dimensionType='MEASURE' and @dynamic='0']"
@@ -385,10 +368,10 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>s'applique aux &lt;Dimension&gt; dont l'atribut "dimensionType" est "PRIMARY" et dont l'atribut "dynamic" est egal à "0"</xd:p>
+         <xd:p>Header or column names of a table or a multiple choice question (layout is fixed), if a CodeList is referenced (if not </xd:p>
       </xd:desc>
    </xd:doc>
-   <xsl:template match="pogues:Dimension[@dimensionType='PRIMARY' and @dynamic='0']"
+   <xsl:template match="pogues:Dimension[@dimensionType=('PRIMARY','SECONDARY') and @dynamic='0'][pogues:CodeListReference]"
                  mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
@@ -400,7 +383,7 @@
    </xsl:template>
    <xd:doc>
       <xd:desc>
-         <xd:p>A specific sequence construct that can hide it's childs</xd:p>
+         <xd:p>A specific sequence construct that can hide its children</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:template match="pogues:IfThenElse" mode="source">
@@ -421,6 +404,58 @@
          <driver/>
       </xsl:param>
       <xsl:apply-templates select="eno:append-empty-element('GridDimension',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Variable</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Variable" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('Variable',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Control</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Control" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('Control',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>A unit of measure</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Unit" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('Unit',$driver)" mode="model">
+         <xsl:with-param name="source-context" select="." tunnel="yes"/>
+      </xsl:apply-templates>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Expression | pogues:Formula" mode="source">
+      <xsl:param name="driver" tunnel="yes">
+         <driver/>
+      </xsl:param>
+      <xsl:apply-templates select="eno:append-empty-element('Command',$driver)" mode="model">
          <xsl:with-param name="source-context" select="." tunnel="yes"/>
       </xsl:apply-templates>
    </xsl:template>
@@ -669,11 +704,280 @@
    </xsl:function>
    <xd:doc>
       <xd:desc>
-         <xd:p/>
+         <xd:p>Return the ID of the parent of the current element</xd:p>
       </xd:desc>
    </xd:doc>
    <xsl:function name="enoddi32:get-parent-id">
       <xsl:param name="context" as="item()"/>
       <xsl:sequence select="enopogues:get-parent-id($context)"/>
    </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Return the responses referencing the current element</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-related-response">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-related-response($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-related-variable">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-related-variable($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-qop-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-qop-id($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-rdop-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-rdop-id($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-related-controls">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-related-controls($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-controls">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-controls($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-generated-instruction-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-generated-instruction-id($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-ip-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:param name="index"/>
+      <xsl:sequence select="enopogues:get-ip-id($context,$index)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-instruction-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-instruction-id($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-instruction-name">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-instruction-name($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-instruction-text">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-instruction-text($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-cell-coordinates">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-cell-coordinates($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-code-list-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-code-list-id($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-grid-dimensions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-grid-dimensions($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-rank">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-rank($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-fake-dimension">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-fake-dimension($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-fake-code-lists">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-fake-code-lists($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-survey-name">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-survey-name($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-question-type">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-question-type($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-question-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-question-id($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-questions-simple">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-questions-simple($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-questions-table">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-questions-table($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-unit">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-unit($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-description">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-description($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-qc-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-qc-id($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-generation-instructions">
+      <xsl:param name="context" as="item()"/>
+      <xsl:sequence select="enopogues:get-calculated-variables($context)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p/>
+      </xd:desc>
+   </xd:doc>
+   <xsl:function name="enoddi32:get-command-id">
+      <xsl:param name="context" as="item()"/>
+      <xsl:param name="ip-id"/>
+      <xsl:sequence select="enopogues:get-command-id($context,$ip-id)"/>
+   </xsl:function>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Code that are not level 1 doesn't appear as child of CodeList</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:CodeList" mode="eno:child-fields" as="node()*">
+      <xsl:sequence select="*[not(self::pogues:Code/pogues:Parent/normalize-space(text()) != '')]"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Code that are not level 1 appears as child of their parent</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Code" mode="eno:child-fields" as="node()*">
+      <xsl:sequence select="ancestor::pogues:CodeList/pogues:Code[pogues:Parent = current()/pogues:Value]"/>
+   </xsl:template>
+   <xd:doc>
+      <xd:desc>
+         <xd:p>Control should appear as sibling of the controlled pogues element, not as child</xd:p>
+      </xd:desc>
+   </xd:doc>
+   <xsl:template match="pogues:Child" mode="eno:child-fields" as="node()*">
+      <xsl:sequence select="*[not(self::pogues:Control)]"/>
+   </xsl:template>
 </xsl:stylesheet>
