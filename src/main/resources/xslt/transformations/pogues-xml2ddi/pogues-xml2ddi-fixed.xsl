@@ -51,5 +51,43 @@
     <xsl:template match="/">
         <xsl:apply-templates select="/pogues:Questionnaire" mode="source"/>
     </xsl:template>
-      
+    
+    <!--TODO The implementation of retrieving reference id (aka qc-id,cc-id...) should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:get-reference-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-reference-id"/>
+    </xsl:function>
+    
+    <xsl:template match="*[enopogues:is-question(.) = 'true']" mode="enoddi32:get-reference-id">
+        <xsl:value-of select="enoddi32:get-qc-id(.)"/>
+    </xsl:template>
+    
+    <xsl:template match="*[enopogues:is-sequence(.) = 'true']" mode="enoddi32:get-reference-id">
+        <xsl:value-of select="enoddi32:get-id(.)"/>
+    </xsl:template>
+    
+    <!--TODO The implementation of retrieving reference element name (aka Sequence,QuestionConstruct...) should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:get-reference-element-name">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-reference-element-name"/>
+    </xsl:function>
+    
+    <xsl:template match="*[enopogues:is-question(.) = 'true']" mode="enoddi32:get-reference-element-name">
+        <xsl:value-of select="'QuestionConstruct'"/>
+    </xsl:template>
+    
+    <xsl:template match="*[enopogues:is-sequence(.) = 'true']" mode="enoddi32:get-reference-element-name">
+        <xsl:value-of select="'Sequence'"/>
+    </xsl:template>
+    
+    <!--TODO The implementation of building id should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:get-si-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-si-id"/>
+    </xsl:function>
+    
+    <xsl:template match="pogues:Declaration" mode="enoddi32:get-si-id">
+        <xsl:value-of select="concat(enoddi32:get-id(.),'-SI')"/>
+    </xsl:template>
+    
 </xsl:stylesheet>

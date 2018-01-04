@@ -94,6 +94,10 @@
                     <xsl:apply-templates select="enoddi32:get-controls($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                    </xsl:apply-templates>
+                    <xsl:apply-templates select="enoddi32:get-statement-item($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-StatementItem', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>                    
                 </d:ControlConstructScheme>
                 <d:QuestionScheme>
@@ -111,6 +115,8 @@
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                 </d:QuestionScheme>               
+                
+             
                 
                 <!-- CategoryScheme part -->
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -317,11 +323,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
-
-    <!--creation de la reference de l'InterviwerInstruction-->
-    <!--this part is designed in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
-    <!--<xsl:template match="driver-InterviewerInstructionReference//Instruction" mode="model" priority="3">
-    -->
+    
     <xsl:template match="driver-InterviewerInstructionReference//Instruction" mode="model" priority="3">           
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -563,6 +565,19 @@
         </xsl:choose>
     </xsl:template>
     
+    
+    <xsl:template name="StatementItem" match="driver-StatementItem//Instruction[not(ancestor::driver-InterviewerInstructionReference)]" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
+        <d:StatementItem>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi32:get-si-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <xsl:apply-templates select="$source-context" mode="source">
+                    <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference',.)" tunnel="yes"/>
+                </xsl:apply-templates>
+        </d:StatementItem>
+    </xsl:template>
     <xsl:template match="driver-ControlConstructScheme//Control" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -759,53 +774,27 @@
     </xsl:template>
     
     
-    <xsl:template match="Sequence//Sequence | IfThenElse//Sequence" mode="model" priority="1">
+    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse')]//*[name() =('Sequence','IfThenElse','QuestionMultipleChoice','QuestionSingleChoice','QuestionTable','QuestionSimple')]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="driver" select="."/>
+        <xsl:for-each select="enoddi32:get-instructions($source-context)[enoddi32:get-position(.) = 'BEFORE_QUESTION_TEXT']">                        
+            <d:ControlConstructReference>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi32:get-si-id(.)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi32:get-version(.)"/></r:Version>
+                <r:TypeOfObject>StatementItem</r:TypeOfObject>
+            </d:ControlConstructReference>
+        </xsl:for-each>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-reference-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>Sequence</r:TypeOfObject>
+            <r:TypeOfObject><xsl:value-of select="enoddi32:get-reference-element-name($source-context)"/></r:TypeOfObject>
         </d:ControlConstructReference>
         <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>                    
     </xsl:template>
-    
-    <xsl:template match="Sequence//IfThenElse | IfThenElse//IfThenElse" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:ControlConstructReference>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>IfThenElse</r:TypeOfObject>
-        </d:ControlConstructReference>
-        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>
-    </xsl:template>
-
-    <xsl:template match="driver-ControlConstructScheme//QuestionSimple" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:QuestionConstruct>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <xsl:apply-templates select="$source-context" mode="enoddi32:question-reference"/>
-        </d:QuestionConstruct>
-    </xsl:template>
-
-    <xsl:template match="Sequence//QuestionSimple | IfThenElse//QuestionSimple" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:ControlConstructReference>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
-        </d:ControlConstructReference>
-        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>
-    </xsl:template>
-
+   
     <xsl:template match="QuestionSimple//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -820,28 +809,15 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
  
-    <xsl:template match="driver-ControlConstructScheme//QuestionSingleChoice" mode="model">
+    <xsl:template name="QuestionConstruct" match="driver-ControlConstructScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionSimple','QuestionSingleChoice')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
         <d:QuestionConstruct>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <xsl:apply-templates select="$source-context" mode="enoddi32:question-reference"/>
         </d:QuestionConstruct>
-    </xsl:template>
-
-
-    <xsl:template match="Sequence//QuestionSingleChoice | IfThenElse//QuestionSingleChoice" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:ControlConstructReference>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
-        </d:ControlConstructReference>
-        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>        
     </xsl:template>
 
     <xsl:template match="QuestionSingleChoice//ResponseDomain" mode="model" priority="1">
@@ -995,35 +971,6 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="driver-ControlConstructScheme//QuestionMultipleChoice" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:QuestionConstruct>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:QuestionReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-        </d:QuestionConstruct>
-    </xsl:template>
-
-
-    <xsl:template match="Sequence//QuestionMultipleChoice | IfThenElse//QuestionMultipleChoice" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:ControlConstructReference>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
-        </d:ControlConstructReference>
-        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>
-    </xsl:template>
-    
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
     <xsl:template match="driver-OutParameter//*" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -1091,35 +1038,7 @@
             </xsl:apply-templates>
         </xsl:if>
     </xsl:template>
- 
-    <xsl:template match="driver-ControlConstructScheme//QuestionTable" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:QuestionConstruct>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:QuestionReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
-            </r:QuestionReference>
-        </d:QuestionConstruct>
-    </xsl:template>
-
-    <xsl:template match="Sequence//QuestionTable | IfThenElse//QuestionTable" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:ControlConstructReference>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
-        </d:ControlConstructReference>
-        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>
-    </xsl:template>
-    
+  
     <xsl:template match="Sequence//Control | IfThenElse//Control" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
