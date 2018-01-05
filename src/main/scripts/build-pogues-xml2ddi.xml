@@ -15,9 +15,15 @@
             out="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO.xml"
             style="${xslt.home}/transformations/pogues-xml2ddi/pogues-xml2ddi.xsl" force="true"
             classpath="${saxon.jar}">
-          </xslt>
-
+        </xslt>
+        
+        <antcall target="DDIPostProcessing">
+            <param name="input-file" value="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO.xml"/>
+            <param name="output-file" value="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO-with-html.xml"/>
+        </antcall>
     </target>
+    
+    <!-- Secondary Target without EnoPreprocessing -->
     <target name="pogues-xml2ddi2" >
         <!-- Generating xforms from the DDI : basic-form.tmp using the pogues-xml2ddi.xsl stylesheet -->
         <xslt in="${survey-folder}/pogues-xml/${survey-name}.xml"
@@ -25,6 +31,11 @@
             style="${xslt.home}/transformations/pogues-xml2ddi/pogues-xml2ddi.xsl" force="true"
             classpath="${saxon.jar}">
         </xslt>
+        
+        <antcall target="DDIPostProcessing">
+            <param name="input-file" value="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO.xml"/>
+            <param name="output-file" value="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO-with-html.xml"/>
+        </antcall>
         
     </target>
 
@@ -90,6 +101,13 @@
         </xslt>
     </target>
   
-    
+    <target name="DDIPostProcessing">
+        
+       <xslt in="${input-file}"
+           out="${output-file}"
+            style="${xslt.home}/util/ddi/mw2xhtml.xsl" classpath="${saxon.jar}" force="true">
+        </xslt>
+        
+    </target>
    
 </project>
