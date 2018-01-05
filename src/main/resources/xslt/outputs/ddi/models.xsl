@@ -64,7 +64,7 @@
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <d:Sequence>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="concat('Sequence-', enoddi32:get-id($source-context))"/></r:ID>
+                        <r:ID><xsl:value-of select="enoddi32:get-main-sequence-id($source-context)"/></r:ID>
                         <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                         <r:Label>
                             <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
@@ -232,7 +232,7 @@
                             <d:TypeOfInstrument>A définir</d:TypeOfInstrument>
                             <d:ControlConstructReference>
                                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                <r:ID><xsl:value-of select="concat('Sequence-',enoddi32:get-id($source-context))"/></r:ID>
+                                <r:ID><xsl:value-of select="enoddi32:get-main-sequence-id($source-context)"/></r:ID>
                                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                                 <r:TypeOfObject>Sequence</r:TypeOfObject>
                             </d:ControlConstructReference>
@@ -250,22 +250,23 @@
         <xsl:variable name="id" select="enoddi32:get-id($source-context)"/>
         <xsl:variable name="driver" select="."/>
         <l:Variable>
-            <r:Agency>fr.insee</r:Agency>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="$id"/></r:ID>
-            <r:Version>0.1.0</r:Version>
+            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <l:VariableName>
                 <r:String xml:lang="fr-FR"><xsl:value-of select="enoddi32:get-name($source-context)"/></r:String>
             </l:VariableName>
             <r:Label>
                 <r:Content xml:lang="fr-FR"><xsl:value-of select="enoddi32:get-label($source-context)"/></r:Content>
             </r:Label>
+            <!-- It's a hack to test if Variable got a related-response (aka = CollectedVariable), only 0 or 1 are expected, could be done better way (@att on driver ?). -->
             <xsl:for-each select="enoddi32:get-related-response($source-context)">
                 <xsl:variable name="idQuestion" select="enoddi32:get-parent-id(current())"/>
                 <xsl:variable name="idResponse" select="enoddi32:get-id(current())"/>
                 <r:SourceParameterReference>
-                    <r:Agency>fr.insee</r:Agency>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="enoddi32:get-qop-id(current())"/></r:ID>                    
-                    <r:Version>0.1.0</r:Version>
+                    <r:Version><xsl:value-of select="enoddi32:get-version(current())"/></r:Version>
                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
                 </r:SourceParameterReference>
                 <xsl:apply-templates select="." mode="enoddi32:question-reference"/>
@@ -273,6 +274,37 @@
                     <xsl:apply-templates select="eno:child-fields(.)" mode="source">
                         <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
                     </xsl:apply-templates>   
+                </l:VariableRepresentation>
+            </xsl:for-each>
+            <!-- It's a dirty (large part is static) hack to test if Variable got formula (aka = CalcultatedVariable), only 0 or 1 are expected, could be done better way (@att on driver ?) -->
+            <xsl:for-each select="enoddi32:get-processing-instruction($source-context)">
+                <r:OutParameter>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:ID><xsl:value-of select="enoddi32:get-vrop-id(current())"/></r:ID>                    
+                    <r:Version><xsl:value-of select="enoddi32:get-version(current())"/></r:Version>
+                </r:OutParameter>
+                <l:VariableRepresentation>
+                    <r:ProcessingInstructionReference>                        
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="enoddi32:get-gi-id(current())"/></r:ID>                    
+                        <r:Version><xsl:value-of select="enoddi32:get-version(current())"/></r:Version>
+                        <r:TypeOfObject>GenerationInstruction</r:TypeOfObject>
+                        <r:Binding>
+                            <r:SourceParameterReference>
+                                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                                <r:ID><xsl:value-of select="enoddi32:get-qop-id(current())"/></r:ID>
+                                <r:Version><xsl:value-of select="enoddi32:get-version(current())"/></r:Version>
+                                <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                            </r:SourceParameterReference>
+                            <r:TargetParameterReference>
+                                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                                <r:ID><xsl:value-of select="enoddi32:get-vrop-id(current())"/></r:ID>
+                                <r:Version><xsl:value-of select="enoddi32:get-version(current())"/></r:Version>
+                                <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                            </r:TargetParameterReference>
+                        </r:Binding>
+                    </r:ProcessingInstructionReference>
+                    <r:NumericRepresentation/>
                 </l:VariableRepresentation>
             </xsl:for-each>
         </l:Variable>
@@ -314,6 +346,16 @@
                         <xsl:value-of select="enoddi32:get-instruction-text($source-context)"/>
                     </d:Text>
                 </d:LiteralText>
+                <xsl:if test="self::Control">
+                    <d:ConditionalText>
+                        <r:SourceParameterReference>
+                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                            <r:ID><xsl:value-of select="enoddi32:get-qop-conditional-text-id($source-context)"/></r:ID>
+                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>                            
+                            <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                        </r:SourceParameterReference>
+                    </d:ConditionalText>
+                </xsl:if>
             </d:InstructionText>
         </d:Instruction>
     </xsl:template>
@@ -688,6 +730,15 @@
                 </r:CommandContent>
             </r:Command>
         </r:CommandCode>
+        <!-- Define the scope of the Variable, because of loop. Outside loops, it's the main sequence which is referenced. -->
+        <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
+            <d:ControlConstructReference>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi32:get-referenced-sequence-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+        </xsl:if>
     </xsl:template>
     
   
@@ -695,18 +746,18 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:GenerationInstruction>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-SIMPSONS-GI-SUM_EXPENSES</r:ID>
-            <r:Version>0.1.0</r:Version>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="enoddi32:get-gi-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <xsl:variable name="related-variables" select="enoddi32:get-related-variable($source-context)"/>
             <d:SourceQuestion>
                 <xsl:comment>Not implemented.</xsl:comment>
             </d:SourceQuestion>            
             <xsl:for-each select="$related-variables">            
             <d:SourceVariable>
-                <r:Agency>fr.insee</r:Agency>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-id(.)"/></r:ID>
-                <r:Version>0.1.0</r:Version>
+                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             </xsl:for-each>

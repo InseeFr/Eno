@@ -103,6 +103,50 @@
         <xsl:value-of select="concat(enoddi32:get-id(.),'-SI')"/>
     </xsl:template>
     
+    <!--TODO The implementation of building id should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:get-vrop-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-vrop-id"/>
+    </xsl:function>
+    
+    <xsl:template match="pogues:Formula" mode="enoddi32:get-vrop-id">
+        <xsl:value-of select="concat(enoddi32:get-id(parent::pogues:Variable),'-VROP')"/>
+    </xsl:template>
+    
+    <!--TODO The implementation of building id should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:get-gi-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-gi-id"/>
+    </xsl:function>
+    
+    <xsl:template match="pogues:Variable[@xsi:type='CalculatedVariableType']" mode="enoddi32:get-gi-id">
+        <xsl:value-of select="concat(enoddi32:get-id(.),'-GI')"/>
+    </xsl:template>
+    
+    <xsl:template match="pogues:Formula" mode="enoddi32:get-gi-id">
+        <xsl:apply-templates select="parent::pogues:Variable" mode="enoddi32:get-gi-id"/>
+    </xsl:template>
+    
+    <!--TODO The implementation building id should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:get-main-sequence-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-main-sequence-id"/>
+    </xsl:function>
+    
+    <xsl:template match="*" mode="enoddi32:get-main-sequence-id">
+        <xsl:value-of select="concat('Sequence-',enopogues:get-questionnaire-id(.))"/>
+    </xsl:template>
+    
+    <!--TODO The implementation building id should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:get-referenced-sequence-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-referenced-sequence-id"/>
+    </xsl:function>
+    
+    <xsl:template match="pogues:Formula" mode="enoddi32:get-referenced-sequence-id">
+        <xsl:value-of select="enoddi32:get-main-sequence-id(.)"/>
+    </xsl:template>
+    
     <!--TODO The implementation of ComputationItem type should be done with "rich" outGetter mechanism =>@v2.0 -->
     <xsl:function name="enoddi32:get-ci-type">
         <xsl:param name="context" as="item()"/>
@@ -131,7 +175,15 @@
         <xsl:value-of select="concat('ComputationItem for the mandatory question ',enoddi32:get-id(.))"/>
     </xsl:template>
     
+    <!--TODO The implementation of Parameter Reference for conditional text should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:get-qop-conditional-text-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-qop-conditional-text-id"/>
+    </xsl:function>
     
+    <xsl:template match="pogues:Control[pogues:FailMessage]" mode="enoddi32:get-qop-conditional-text-id">
+        <xsl:value-of select="enoddi32:get-qop-id(pogues:FailMessage)"/>
+    </xsl:template>          
     
     
 </xsl:stylesheet>
