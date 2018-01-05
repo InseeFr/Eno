@@ -66,6 +66,15 @@
         <xsl:value-of select="enoddi32:get-id(.)"/>
     </xsl:template>
     
+    <xsl:template match="pogues:Control" mode="enoddi32:get-reference-id">
+        <xsl:value-of select="enoddi32:get-id(.)"/>
+    </xsl:template>
+    
+    <xsl:template match="pogues:Response[@mandatory='true']" mode="enoddi32:get-reference-id">
+        <xsl:value-of select="enoddi32:get-ci-id(.)"/>
+    </xsl:template>
+    
+    
     <!--TODO The implementation of retrieving reference element name (aka Sequence,QuestionConstruct...) should be done with "rich" outGetter mechanism =>@v2.0 -->
     <xsl:function name="enoddi32:get-reference-element-name">
         <xsl:param name="context" as="item()"/>
@@ -80,6 +89,10 @@
         <xsl:value-of select="'Sequence'"/>
     </xsl:template>
     
+    <xsl:template match="pogues:Control | pogues:Response[@mandatory='true']" mode="enoddi32:get-reference-element-name">
+        <xsl:value-of select="'ComputationItem'"/>
+    </xsl:template>
+    
     <!--TODO The implementation of building id should be done with "rich" outGetter mechanism =>@v2.0 -->
     <xsl:function name="enoddi32:get-si-id">
         <xsl:param name="context" as="item()"/>
@@ -89,5 +102,36 @@
     <xsl:template match="pogues:Declaration" mode="enoddi32:get-si-id">
         <xsl:value-of select="concat(enoddi32:get-id(.),'-SI')"/>
     </xsl:template>
+    
+    <!--TODO The implementation of ComputationItem type should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:get-ci-type">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-ci-type"/>
+    </xsl:function>
+    
+    <xsl:template match="pogues:Control" mode="enoddi32:get-ci-type">
+        <xsl:value-of select="enoddi32:get-type(.)"/>
+    </xsl:template>
+    
+    <xsl:template match="pogues:Response[@mandatory='true']" mode="enoddi32:get-ci-type">
+        <xsl:value-of select="'mandatory'"/>
+    </xsl:template>
+    
+    <!--TODO The implementation of ComputationItem type should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:get-ci-name">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-ci-name"/>
+    </xsl:function>
+    
+    <xsl:template match="pogues:Control" mode="enoddi32:get-ci-name">
+        <xsl:value-of select="enoddi32:get-description(.)"/>
+    </xsl:template>
+    
+    <xsl:template match="pogues:Response[@mandatory='true']" mode="enoddi32:get-ci-name">
+        <xsl:value-of select="concat('ComputationItem for the mandatory question ',enoddi32:get-id(.))"/>
+    </xsl:template>
+    
+    
+    
     
 </xsl:stylesheet>

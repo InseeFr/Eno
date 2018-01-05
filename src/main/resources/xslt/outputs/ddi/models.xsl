@@ -578,29 +578,32 @@
                 </xsl:apply-templates>
         </d:StatementItem>
     </xsl:template>
-    <xsl:template match="driver-ControlConstructScheme//Control" mode="model">
+    <xsl:template match="driver-ControlConstructScheme/Control | driver-ControlConstructScheme/ResponseDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ComputationItem>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-ci-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <d:ConstructName>
-                <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-description($source-context)"/></r:String>
+                <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-ci-name($source-context)"/></r:String>
             </d:ConstructName>
             <r:Description>
-                <r:Content xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-description($source-context)"/></r:Content>
+                <r:Content xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-ci-name($source-context)"/></r:Content>
             </r:Description>
-            <d:InterviewerInstructionReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-generated-instruction-id($source-context)"/></r:ID>
-                <r:Version>0.1.0</r:Version>
-                <r:TypeOfObject>Instruction</r:TypeOfObject>
-            </d:InterviewerInstructionReference>
+            <!-- If it's a control, an instruction would be generated, if it's a mandatory response, the instruction is not generated, it's handled by the output format. -->
+            <xsl:if test="self::Control">
+                <d:InterviewerInstructionReference>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:ID><xsl:value-of select="enoddi32:get-generated-instruction-id($source-context)"/></r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:TypeOfObject>Instruction</r:TypeOfObject>
+                </d:InterviewerInstructionReference>
+            </xsl:if>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
-            <xsl:variable name="type" select="enoddi32:get-type($source-context)"/>
+            <xsl:variable name="type" select="enoddi32:get-ci-type($source-context)"/>
             <xsl:if test="not(normalize-space($type)=('',' '))">
                 <xsl:comment>
                     <xsl:text disable-output-escaping="yes">&lt;r:TypeOfComputationItem&gt;</xsl:text>
@@ -774,7 +777,7 @@
     </xsl:template>
     
     
-    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse')]//*[name() =('Sequence','IfThenElse','QuestionMultipleChoice','QuestionSingleChoice','QuestionTable','QuestionSimple')]" mode="model" priority="1">
+    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse')]//*[name() =('Sequence','IfThenElse','QuestionMultipleChoice','QuestionSingleChoice','QuestionTable','QuestionSimple','Control','ResponseDomain')]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="driver" select="."/>
@@ -792,7 +795,9 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject><xsl:value-of select="enoddi32:get-reference-element-name($source-context)"/></r:TypeOfObject>
         </d:ControlConstructReference>
-        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source"/>                    
+        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>                    
     </xsl:template>
    
     <xsl:template match="QuestionSimple//ResponseDomain" mode="model" priority="1">
@@ -820,7 +825,7 @@
         </d:QuestionConstruct>
     </xsl:template>
 
-    <xsl:template match="QuestionSingleChoice//ResponseDomain" mode="model" priority="1">
+    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:CodeDomain>            
@@ -1039,7 +1044,7 @@
         </xsl:if>
     </xsl:template>
   
-    <xsl:template match="Sequence//Control | IfThenElse//Control" mode="model" priority="1">
+   <!-- <xsl:template match="Sequence//Control | IfThenElse//Control" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ControlConstructReference>
@@ -1048,7 +1053,7 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>ComputationItem</r:TypeOfObject>
         </d:ControlConstructReference>        
-    </xsl:template>
+    </xsl:template>-->
 
     <xsl:template match="driver-CodeListReference//*" mode="model"/>
     
