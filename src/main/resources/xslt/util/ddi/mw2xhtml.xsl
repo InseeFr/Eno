@@ -10,8 +10,25 @@
         *** : for both bold&italic
         \n : for line break
          
-        It works by parsing first the "tags" (bold and italic which needs creation of xhtml element), then elements (line break and other "element" which doesn't need to deal with embrace tags)
+        It works by parsing first the "tags" (bold and italic which need creation of xhtml element), then elements (line break and other "element" which doesn't need to deal with embrace tags)
     -->
+    
+    <!-- Char used for italic -->
+    <xsl:variable name="italic-mw" select="'*'"/>
+    <!-- Char used for bold -->
+    <xsl:variable name="bold-mw" select="'**'"/>
+    <!-- tags for italic open -->
+    <xsl:variable name="i-open" select="'&lt;xhtml:i&gt;'"/>
+    <!-- tags for italic close -->
+    <xsl:variable name="i-close" select="'&lt;/xhtml:i&gt;'"/>
+    <!-- tags for bold open -->
+    <xsl:variable name="b-open" select="'&lt;xhtml:b&gt;'"/>
+    <!-- tags for bold close -->
+    <xsl:variable name="b-close" select="'&lt;/xhtml:b&gt;'"/>
+    <!-- tags for p open -->
+    <xsl:variable name="p-open" select="'&lt;xhtml:p&gt;'"/>
+    <!-- tags for p close -->
+    <xsl:variable name="p-close" select="'&lt;/xhtml:p&gt;'"/>
     
     <!-- Standard identity pattern. -->
     <xsl:template match="*">
@@ -27,10 +44,17 @@
     </xsl:template>
     
     <!-- Parsing is done on the text nodes -->
+    <xsl:template match="text()[matches(.,'([*]|\\n)')]">
+        <xhtml:p>
+            <xsl:call-template name="parse-tags">
+              <xsl:with-param name="expression" select="."/>
+            </xsl:call-template>
+        </xhtml:p>
+    </xsl:template>
+    
+    <!-- Parsing is done on the text nodes -->
     <xsl:template match="text()">
-        <xsl:call-template name="parse-tags">
-          <xsl:with-param name="expression" select="."/>
-        </xsl:call-template>        
+        <xsl:copy-of select="."/>        
     </xsl:template>
     
     <!-- 
@@ -40,24 +64,14 @@
     <xsl:template name="parse-tags">
         <!-- The expression to be parsed -->        
         <xsl:param name="expression"/>
+        <!-- If it's the first iteration of parsing-tags (for <p> handling) -->
+        <xsl:param name="first" select="true()"/>
         <!-- If italic is open (needed to deal with embrace tags) -->        
         <xsl:param name="italic" select="false()" as="xs:boolean"/>
         <!-- If bold is open (needed to deal with embrace tags) -->                
         <xsl:param name="bold" select="false()" as="xs:boolean"/>
         <!-- To store which is the parent tags (to deal with order of close tags) -->                
-        <xsl:param name="parent" select="'none'"/>
-        <!-- Char used for italic -->
-        <xsl:variable name="italic-mw" select="'*'"/>
-        <!-- Char used for bold -->
-        <xsl:variable name="bold-mw" select="'**'"/>
-        <!-- tags for italic open -->
-        <xsl:variable name="i-open" select="'&lt;xhtml:i&gt;'"/>
-        <!-- tags for italic close -->
-        <xsl:variable name="i-close" select="'&lt;/xhtml:i&gt;'"/>
-        <!-- tags for bold open -->
-        <xsl:variable name="b-open" select="'&lt;xhtml:b&gt;'"/>
-        <!-- tags for bold close -->
-        <xsl:variable name="b-close" select="'&lt;/xhtml:b&gt;'"/>
+        <xsl:param name="parent" select="'none'"/>        
         <!-- 
             Defining a regexp where :
             - regexp(1) is what is before the markdown tag, free from other tag.
@@ -67,7 +81,10 @@
         -->        
         <xsl:analyze-string select="$expression" regex="(^[^*]*)([*]{{1,3}})(([^*]{{1}}.*$)|$)">
             <xsl:matching-substring>
-                <!-- Part in front of markdown tag (free from markdown tags) -->
+                <!--<xsl:if test="$first">
+                    <xsl:value-of select="$p-open" disable-output-escaping="yes"/>
+                </xsl:if>
+                --><!-- Part in front of markdown tag (free from markdown tags) -->
                 <xsl:call-template name="parse-elements">
                     <xsl:with-param name="expression" select="regex-group(1)"/>
                 </xsl:call-template>                
@@ -161,11 +178,15 @@
                 </xsl:variable>
                 <!-- Part after the markdown tag, could contains other tags. -->
                 <xsl:call-template name="parse-tags">
+                    <xsl:with-param name="first" select="false()"/>
                     <xsl:with-param name="expression" select="regex-group(3)"/>                        
                     <xsl:with-param name="italic" select="$new-italic"/>
                     <xsl:with-param name="bold" select="$new-bold"/>
                     <xsl:with-param name="parent" select="$new-parent"/>
-                 </xsl:call-template>                
+                 </xsl:call-template>
+                <!--<xsl:if test="$first">
+                    <xsl:value-of select="$p-close" disable-output-escaping="yes"/>
+                </xsl:if>                -->
             </xsl:matching-substring>
             <xsl:non-matching-substring>
                 <!-- Part without markdown tag. -->
@@ -207,9 +228,10 @@
     
     <xsl:template name="parse-elements">
         <xsl:param name="expression"/>
+        <xsl:param name="first" select="true()"/>
         <xsl:analyze-string select="$expression" regex="(\\n){{1}}">
              <xsl:matching-substring>
-                 <xsl:element name="xhtml:br"/>
+                 <xsl:element name="xhtml:br"/>                 
              </xsl:matching-substring>
              <xsl:non-matching-substring>
                  <xsl:copy-of select="."/>
