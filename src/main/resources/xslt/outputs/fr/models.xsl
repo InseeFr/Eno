@@ -152,6 +152,9 @@
                                         select="eno:append-empty-element('ResourceBind', $driver)"
                                         tunnel="yes"/>
                                     <xsl:with-param name="language" select="." tunnel="yes"/>
+                                    <!-- the instance ancestor is used for having the absolute, not relative, address of the element -->
+                                    <xsl:with-param name="instance-ancestor"
+                                        select="'instance(''fr-form-instance'')//'" tunnel="yes"/>
                                 </xsl:apply-templates>
                             </xf:bind>
                         </xsl:for-each>
@@ -535,13 +538,15 @@
     <xsl:template match="Resource//*[not(ancestor::ResourceItem)]" mode="model" priority="-1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
         <xsl:element name="{enofr:get-name($source-context)}">
             <label>
                 <xsl:choose>
                     <!-- No label for alert's copy -->
                     <xsl:when test="eno:serialize(enofr:get-alert($source-context, $language))
                         = eno:serialize(enofr:get-label($source-context, $language))"/>
-                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'label') != ''">
+                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'label',$instance-ancestor) != ''">
                         <xsl:value-of select="'custom label'"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -557,7 +562,7 @@
             </help>
             <alert>
                 <xsl:choose>
-                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'alert') != ''">
+                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'alert',$instance-ancestor) != ''">
                         <xsl:value-of select="'custom alert'"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -580,13 +585,15 @@
     <xsl:template match="Resource//*[starts-with(name(), 'xf-select') and not(ancestor::ResourceItem)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
         <xsl:element name="{enofr:get-name($source-context)}">
             <label>
                 <xsl:choose>
                     <!-- No label for alert's copy -->
                     <xsl:when test="eno:serialize(enofr:get-alert($source-context, $language))
                         = eno:serialize(enofr:get-label($source-context, $language))"/>
-                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'label') != ''">
+                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'label',$instance-ancestor) != ''">
                         <xsl:value-of select="'custom label'"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -602,7 +609,7 @@
             </help>
             <alert>
                 <xsl:choose>
-                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'alert') != ''">
+                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'alert',$instance-ancestor) != ''">
                         <xsl:value-of select="'custom alert'"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -736,11 +743,37 @@
             <xd:p>The process goes on next to the created bind.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="ResourceBind//*" mode="model">
+    <xsl:template match="ResourceBind//RowLoop | ResourceBind//QuestionLoop" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
+        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+            <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
+            <xsl:with-param name="instance-ancestor" 
+                    select="concat($instance-ancestor,'*[name()=''',$name,
+                    ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
+                    $name,''']/preceding-sibling::*)]//')"
+                    tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Default template for ResourceBind for the drivers.</xd:p>
+            <xd:p>If the label or the alert is dynamic, it creates a bind.</xd:p>
+            <xd:p>The process goes on next to the created bind.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="ResourceBind//*" mode="model" priority="-1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
-        <xsl:variable name="calculate-label" select="enofr:get-calculate-text($source-context,$language,'label')"/>
-        <xsl:variable name="calculate-alert" select="enofr:get-calculate-text($source-context,$language,'alert')"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
+        <xsl:variable name="calculate-label" select="enofr:get-calculate-text($source-context,$language,'label',$instance-ancestor)"/>
+        <xsl:variable name="calculate-alert" select="enofr:get-calculate-text($source-context,$language,'alert',$instance-ancestor)"/>
 
         <xsl:if test="$calculate-label != '' or $calculate-alert != ''">
             <xsl:variable name="name" select="enofr:get-name($source-context)"/>
