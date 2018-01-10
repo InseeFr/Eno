@@ -93,7 +93,34 @@
         <xsl:value-of select="'ComputationItem'"/>
     </xsl:template>
     
-    <!--TODO The implementation of building id should be done with "rich" outGetter mechanism =>@v2.0 -->
+    
+    <!-- Building Id Implementation, should be done through rich out-getters in @v2.0 -->
+    <!-- **************************************************************************** -->
+    
+    <!-- Id for QuestionConstruct (QC) -->
+    <xsl:function name="enoddi32:get-qc-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-qc-id"/>
+    </xsl:function>
+    
+    <xsl:template match="*[enopogues:is-question(.)]" mode="enoddi32:get-qc-id">
+        <xsl:value-of select="concat(enopogues:get-id(.),'-QC')"/>
+    </xsl:template>
+    
+    <!-- Id for ResponseDomain OutParameter (rdop) -->
+    <xsl:function name="enoddi32:get-rdop-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-rdop-id"/>
+    </xsl:function>
+    
+    <xsl:template match="pogues:Response" mode="enoddi32:get-rdop-id">
+        <xsl:value-of select="concat(parent::*/@id,'-RDOP-',@id)"/>
+    </xsl:template>
+    
+    <xsl:template match="pogues:Datatype" mode="enoddi32:get-rdop-id">
+        <xsl:value-of select="enoddi32:get-rdop-id(parent::*)"/>
+    </xsl:template>
+    
     <xsl:function name="enoddi32:get-si-id">
         <xsl:param name="context" as="item()"/>
         <xsl:apply-templates select="$context" mode="enoddi32:get-si-id"/>
