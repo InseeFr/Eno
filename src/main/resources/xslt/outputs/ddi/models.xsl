@@ -744,7 +744,7 @@
                         </xsl:when>
                         <!-- When no driver is associated (= no regular Control case), it's a mandatory response Case, for this case only single answer is implemented. -->
                         <xsl:when test="count($related-variables-with-id/*)=1">
-                            <r:CommandContent><xsl:value-of select="concat('if ',$related-variables-with-id/*[1]/ip-id,'=&apos;'''')"/></r:CommandContent>                            
+                            <xsl:value-of select="concat('if ',$related-variables-with-id/*[1]/ip-id,'=&apos;'''')"/>                            
                         </xsl:when>
                         <xsl:otherwise>
                         <xsl:message>Only madatory Response with unique answer is supported.</xsl:message>    
