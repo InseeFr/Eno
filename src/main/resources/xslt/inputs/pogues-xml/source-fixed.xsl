@@ -119,7 +119,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="pogues:Expression | pogues:Formula" mode="enopogues:get-ip-id">
+    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Response" mode="enopogues:get-ip-id">
         <xsl:param name="index" tunnel="yes"/>
         <xsl:value-of select="concat(enopogues:get-id(.), '-IP-', $index)"/>
     </xsl:template>

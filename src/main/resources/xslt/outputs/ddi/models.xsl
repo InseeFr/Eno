@@ -620,7 +620,9 @@
                 </xsl:apply-templates>
         </d:StatementItem>
     </xsl:template>
-    <xsl:template match="driver-ControlConstructScheme/Control | driver-ControlConstructScheme/ResponseDomain" mode="model">
+    
+    
+    <xsl:template name="ComputationItem" match="driver-ControlConstructScheme/Control | driver-ControlConstructScheme/ResponseDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ComputationItem>
@@ -642,9 +644,18 @@
                     <r:TypeOfObject>Instruction</r:TypeOfObject>
                 </d:InterviewerInstructionReference>
             </xsl:if>
+            <!-- Have a simpler way to deal with regular controls & mandatory response. -->
+            <!-- An apply-templates on Expression will Output CommandeCode for Regular Control. -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
+            <!-- But in case of Mandatory Response, no Regular Control but an induced one, so an explicit call is required. -->
+            <xsl:if test="self::ResponseDomain">
+                <xsl:call-template name="CommandCode">
+                    <!-- In this explicit call, the ResponseDomain itself is used to generated the CommandCode -->    
+                    <xsl:with-param name="source-context" select="$source-context" tunnel="yes"/>
+                </xsl:call-template>
+            </xsl:if>
             <xsl:variable name="type" select="enoddi32:get-ci-type($source-context)"/>
             <xsl:if test="not(normalize-space($type)=('',' '))">
                 <xsl:comment>
@@ -663,7 +674,7 @@
         </xsl:apply-templates>
     </xsl:template>
     
-    <xsl:template match="driver-ControlConstructScheme//Command | driver-ProcessingInstructionScheme//Command" mode="model" priority="2">
+    <xsl:template name="CommandCode" match="driver-ControlConstructScheme//Command | driver-ProcessingInstructionScheme//Command" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" tunnel="yes"/>
         <!-- Getting all related variables from the command expression to build parameters and bindings -->
@@ -723,10 +734,22 @@
                     </r:Binding>                    
                 </xsl:for-each>
                 <r:CommandContent>
-                    <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
-                        <xsl:with-param name="expression" select="$source-context"/>
-                        <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
-                    </xsl:call-template>
+                    <xsl:choose>
+                        <!-- Calling the specifc template to handle CommandContent when in regular Command case. -->
+                        <xsl:when test="self::Command">
+                            <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
+                                <xsl:with-param name="expression" select="$source-context"/>
+                                <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
+                            </xsl:call-template>        
+                        </xsl:when>
+                        <!-- When no driver is associated (= no regular Control case), it's a mandatory response Case, for this case only single answer is implemented. -->
+                        <xsl:when test="count($related-variables-with-id/*)=1">
+                            <r:CommandContent><xsl:value-of select="concat('if ',$related-variables-with-id/*[1]/ip-id,'=&apos;'''')"/></r:CommandContent>                            
+                        </xsl:when>
+                        <xsl:otherwise>
+                        <xsl:message>Only madatory Response with unique answer is supported.</xsl:message>    
+                        </xsl:otherwise>
+                    </xsl:choose>                    
                 </r:CommandContent>
             </r:Command>
         </r:CommandCode>

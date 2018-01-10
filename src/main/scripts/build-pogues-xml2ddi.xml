@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="enoPogues-xml2DDI" basedir="." default="pogues-xml2ddi">
+<project name="enoPogues-xml2DDI" basedir="." default="pogues-xml2ddi2">
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
     <import file="build-non-regression.xml"/>
