@@ -23,20 +23,16 @@
 
     <xsl:strip-space elements="*"/>
 
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Successively, some group of elements is used to dereference some other group of elements.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:variable name="calculated-variables-sequences" as="node()">
-        <Variables>
-            <xsl:for-each select="//d:GenerationInstruction/d:ControlConstructReference">
+    <xsl:variable name="external-variables">
+        <ExternalVariables>
+            <xsl:for-each select="//l:VariableScheme/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]">
                 <Variable>
-                    <xsl:value-of select="r:ID"/>
+                    <xsl:attribute name="id" select="r:ID"/>
+                    <xsl:attribute name="variable-name" select="l:VariableName/r:String"/>
                 </Variable>
             </xsl:for-each>
-        </Variables>
-    </xsl:variable>    
+        </ExternalVariables>
+    </xsl:variable>
 
     <xd:doc>
         <xd:desc>
@@ -82,6 +78,7 @@
 
         <!-- The dereferenced d:QuestionScheme, the d:InterviewerInstructionScheme, and the ControlConstructScheme are used as new references -->
         <xsl:variable name="references-for-template-sequence">
+            <xsl:copy-of select="//l:VariableScheme"/>
             <xsl:copy-of select="//d:ControlConstructScheme"/>
             <xsl:copy-of select="//d:InterviewerInstructionScheme"/>
             <xsl:copy-of select="//d:ProcessingInstructionScheme"/>
@@ -96,11 +93,6 @@
                     <xsl:with-param name="references" select="$references-for-template-sequence" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:element>
-        </xsl:variable>
-
-        <!-- The l:VariableScheme are used as new references -->
-        <xsl:variable name="references-variables">
-            <xsl:copy-of select="//l:VariableScheme"/>
         </xsl:variable>
 
         <!-- The root of all identifiers in the survey -->
@@ -118,13 +110,6 @@
                             <xsl:with-param name="references" select="$dereferenced-template-sequence" tunnel="yes"/>
                         </xsl:apply-templates>
                     </s:StudyUnit>
-                    <!-- And the VariableScheme is dereferenced with itself as references -->
-                    <!-- Only copying the variables that don't correspond to a question -->
-                    <xsl:element name="g:ResourcePackage">
-                        <xsl:apply-templates select="//l:VariableScheme">
-                            <xsl:with-param name="references" select="$references-variables" tunnel="yes"/>
-                        </xsl:apply-templates>
-                    </xsl:element>
                 </DDIInstance>
             </xsl:result-document>
         </xsl:for-each>
@@ -145,35 +130,70 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Not retrieving the variables that correspond to a question or a calculated variable.</xd:p>
+            <xd:p>Insert External Variable and Calculated Variable to the root template.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="l:Variable[r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference]" priority="1"/>
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text() = 'template']">
+        <xsl:param name="references" tunnel="yes"/>
+        <xsl:variable name="ID" select="r:ID"/>
+        
+        <xsl:variable name="multiple-variables" as="node()">
+            <Variables>
+                <xsl:for-each select="$references//l:VariableGroup/r:VariableReference">
+                    <Variable>
+                        <xsl:value-of select="r:ID"/>
+                    </Variable>
+                </xsl:for-each>
+            </Variables>
+        </xsl:variable>
 
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Only retrieving the variables which are not corresponding to a question.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"
-        priority="1">
         <xsl:copy>
+            <xsl:apply-templates select="$references//l:VariableScheme
+                                                        /l:Variable[r:ID=$external-variables//Variable/@id and not(r:ID=$multiple-variables/Variable)]"/>
             <xsl:apply-templates select="node() | @*"/>
+            <xsl:apply-templates select="$references//d:GenerationInstruction[d:ControlConstructReference/r:ID=$ID]"/>
         </xsl:copy>
     </xsl:template>
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template to insert GenerationInstruction, which reference the element they have to be included in.</xd:p>
+            <xd:p>Insert External Variable and Calculated Variable to loops.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="node()[r:ID=$calculated-variables-sequences/Variable and not(ends-with(name(), 'Reference'))]">
+    <xsl:template match="d:Loop">
+        <xsl:param name="references" tunnel="yes"/>
+        <xsl:variable name="ID" select="r:ID"/>
+
         <xsl:copy>
+            <xsl:apply-templates select="$references//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID=$ID]
+                /r:VariableReference[r:ID=$external-variables//Variable/@id]"/>
             <xsl:apply-templates select="node() | @*"/>
-            <xsl:apply-templates select="//d:GenerationInstruction[d:ControlConstructReference/r:ID=current()/r:ID]"/>
+            <xsl:apply-templates select="$references//d:GenerationInstruction[d:ControlConstructReference/r:ID=$ID]"/>
         </xsl:copy>
     </xsl:template>
     
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Insert External Variable and Calculated Variable to dynamical tables.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster]/d:StructuredMixedGridResponseDomain">
+        <xsl:param name="references" tunnel="yes"/>
+        <xsl:variable name="ID" select="../r:ID"/>
+
+        <xsl:copy>
+              <xsl:apply-templates select="$references//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID=$ID]
+                  /r:VariableReference[r:ID=$external-variables//Variable/@id]"/>
+            <xsl:apply-templates select="node() | @*"/>
+            <xsl:apply-templates select="$references//d:GenerationInstruction[d:ControlConstructReference/r:ID=$ID]"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Calculated variables refer the ControlContructs they belong to, not the contrary.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="d:GenerationInstruction/d:ControlConstructReference"/>
     
 
@@ -191,6 +211,23 @@
             select="$references//*[r:ID = $ID and not(ancestor-or-self::node()[ends-with(name(), 'Reference') or starts-with(name(), 'd:Source')])]"
         />
     </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Specific template for external variables, for which there is no OutParameter to refer.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:ConditionalText/r:SourceParameterReference[r:TypeOfObject='InParameter']/r:ID" priority="2">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+<!--    
+    <xsl:template match="d:ConditionalText/r:SourceParameterReference/r:ID">
+        <xsl:variable name="ID" select="."/>
+        toto
+        <xsl:copy-of select="$external-variables/Variable"/>
+    </xsl:template>
+    
+-->
 
     <xd:doc>
         <xd:desc>

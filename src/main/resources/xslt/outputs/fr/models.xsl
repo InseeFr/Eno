@@ -84,6 +84,7 @@
                             mode="source">
                             <xsl:with-param name="driver"
                                 select="eno:append-empty-element('Bind', .)" tunnel="yes"/>
+                            <!-- the instance ancestor is used for having the absolute, not relative, address of the element -->
                             <xsl:with-param name="instance-ancestor"
                                 select="'instance(''fr-form-instance'')//'" tunnel="yes"/>
                         </xsl:apply-templates>
@@ -151,6 +152,9 @@
                                         select="eno:append-empty-element('ResourceBind', $driver)"
                                         tunnel="yes"/>
                                     <xsl:with-param name="language" select="." tunnel="yes"/>
+                                    <!-- the instance ancestor is used for having the absolute, not relative, address of the element -->
+                                    <xsl:with-param name="instance-ancestor"
+                                        select="'instance(''fr-form-instance'')//'" tunnel="yes"/>
                                 </xsl:apply-templates>
                             </xf:bind>
                         </xsl:for-each>
@@ -177,6 +181,7 @@
                             <xsl:with-param name="driver"
                                 select="eno:append-empty-element('Body', .)" tunnel="yes"/>
                             <xsl:with-param name="languages" select="$languages" tunnel="yes"/>
+                            <!-- the instance ancestor is used for having the absolute, not relative, address of the element -->
                             <xsl:with-param name="instance-ancestor"
                                 select="'instance(''fr-form-instance'')//'" tunnel="yes"/>
                         </xsl:apply-templates>
@@ -242,7 +247,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
 
-        <xsl:element name="{enofr:get-name($source-context)}"/>
+        <xsl:element name="{$name}"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
@@ -267,11 +272,6 @@
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
-
-    <!--<xsl:template match="Model//*[parent::Cell[ancestor::RowLoop]]" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:element name="{enofr:get-name($source-context)}"/>
-    </xsl:template>-->
 
     <xd:doc>
         <xd:desc>
@@ -402,6 +402,7 @@
         <xf:bind id="{$name}-bind" name="{$name}" nodeset="{$name}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
                 <xsl:with-param name="instance-ancestor" 
                     select="concat($instance-ancestor,'*[name()=''',$name,
                     ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
@@ -537,13 +538,15 @@
     <xsl:template match="Resource//*[not(ancestor::ResourceItem)]" mode="model" priority="-1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
         <xsl:element name="{enofr:get-name($source-context)}">
             <label>
                 <xsl:choose>
                     <!-- No label for alert's copy -->
                     <xsl:when test="eno:serialize(enofr:get-alert($source-context, $language))
                         = eno:serialize(enofr:get-label($source-context, $language))"/>
-                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'label') != ''">
+                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'label',$instance-ancestor) != ''">
                         <xsl:value-of select="'custom label'"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -559,7 +562,7 @@
             </help>
             <alert>
                 <xsl:choose>
-                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'alert') != ''">
+                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'alert',$instance-ancestor) != ''">
                         <xsl:value-of select="'custom alert'"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -582,13 +585,15 @@
     <xsl:template match="Resource//*[starts-with(name(), 'xf-select') and not(ancestor::ResourceItem)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
         <xsl:element name="{enofr:get-name($source-context)}">
             <label>
                 <xsl:choose>
                     <!-- No label for alert's copy -->
                     <xsl:when test="eno:serialize(enofr:get-alert($source-context, $language))
                         = eno:serialize(enofr:get-label($source-context, $language))"/>
-                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'label') != ''">
+                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'label',$instance-ancestor) != ''">
                         <xsl:value-of select="'custom label'"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -604,7 +609,7 @@
             </help>
             <alert>
                 <xsl:choose>
-                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'alert') != ''">
+                    <xsl:when test="enofr:get-calculate-text($source-context,$language,'alert',$instance-ancestor) != ''">
                         <xsl:value-of select="'custom alert'"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -738,11 +743,37 @@
             <xd:p>The process goes on next to the created bind.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="ResourceBind//*" mode="model">
+    <xsl:template match="ResourceBind//RowLoop | ResourceBind//QuestionLoop" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
+        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+            <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
+            <xsl:with-param name="instance-ancestor" 
+                    select="concat($instance-ancestor,'*[name()=''',$name,
+                    ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
+                    $name,''']/preceding-sibling::*)]//')"
+                    tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Default template for ResourceBind for the drivers.</xd:p>
+            <xd:p>If the label or the alert is dynamic, it creates a bind.</xd:p>
+            <xd:p>The process goes on next to the created bind.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="ResourceBind//*" mode="model" priority="-1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
-        <xsl:variable name="calculate-label" select="enofr:get-calculate-text($source-context,$language,'label')"/>
-        <xsl:variable name="calculate-alert" select="enofr:get-calculate-text($source-context,$language,'alert')"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
+        <xsl:variable name="calculate-label" select="enofr:get-calculate-text($source-context,$language,'label',$instance-ancestor)"/>
+        <xsl:variable name="calculate-alert" select="enofr:get-calculate-text($source-context,$language,'alert',$instance-ancestor)"/>
 
         <xsl:if test="$calculate-label != '' or $calculate-alert != ''">
             <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -974,12 +1005,14 @@
             <xsl:if test="self::xf-select">
                 <xf:action ev:event="xforms-value-changed"
                     if="substring-after({$instance-ancestor}{$name},' ') ne ''">
+                    <!-- if the collected variable is in a loop, instance-ancestor helps choosing the good collected variable -->
                     <xf:setvalue ref="{$instance-ancestor}{$name}"
                         value="substring-after({$instance-ancestor}{$name},' ')"/>
                 </xf:action>
             </xsl:if>
             <!-- For each element which relevance depends on this field, we erase the data if it became unrelevant -->
             <xsl:for-each select="enofr:get-relevant-dependencies($source-context)">
+                <!-- if the filter is in a loop, instance-ancestor helps choosing the good filter -->
                 <xf:action ev:event="xforms-value-changed"
                     if="not(xxf:evaluate-bind-property('{.}-bind','relevant'))"
                     iterate="{$instance-ancestor}{.}//*[not(descendant::*)]">
@@ -1129,7 +1162,9 @@
                 </xsl:for-each>
             </xhtml:thead>
             <xhtml:tbody>
+                <!-- if the loop is in a loop, instance-ancestor helps choosing the good ancestor loop instance -->
                 <xf:repeat nodeset="{$instance-ancestor}{$name}-RowLoop" id="{$name}-RowLoop">
+                    <!-- the table has a repeated zone that may have more than one line -->
                     <xsl:for-each select="enofr:get-body-lines($source-context)">
                         <xhtml:tr>
                             <xsl:apply-templates select="enofr:get-body-line($source-context, position())"
@@ -1137,6 +1172,7 @@
                                 <xsl:with-param name="driver"
                                     select="$ancestors//*[not(child::*) and not(name() = 'driver')]"
                                     tunnel="yes"/>
+                                <!-- the absolute address of the element in enriched for TableLoop, for which several instances of RowLoop are possible -->
                                 <xsl:with-param name="instance-ancestor"
                                     select="concat($instance-ancestor,'*[name()=''',$name,
                                     ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
@@ -1154,7 +1190,6 @@
         <xsl:if test="not($max-lines != '') or $max-lines &gt; enofr:get-minimum-lines($source-context)">
             <xf:trigger>
                 <xsl:if test="$max-lines != ''">
-                    <!--<xsl:attribute name="relevant" select="concat('count(',$instance-ancestor,$name,'-RowLoop) &lt; ',$max-lines)"/>-->
                     <xsl:attribute name="id" select="concat($name,'-addline')"/>
                     <xsl:attribute name="bind" select="concat($name,'-addline-bind')"/>
                 </xsl:if>
@@ -1276,6 +1311,7 @@
         <xf:repeat nodeset="{$instance-ancestor}{$loop-name}" id="{$loop-name}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <!-- the absolute address of the element in enriched for Loops, for which several instances are possible -->
                 <xsl:with-param name="instance-ancestor"
                     select="concat($instance-ancestor,'*[name()=''',$loop-name,
                     ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
