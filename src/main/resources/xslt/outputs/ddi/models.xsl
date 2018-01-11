@@ -895,6 +895,12 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <d:ConstructName>
+                <xsl:element name="r:String">
+                   <xsl:attribute name="xml:lang" select="enoddi32:get-lang($source-context)"/>
+                   <xsl:value-of select="enoddi32:get-name($source-context)"/>
+                </xsl:element>
+            </d:ConstructName>
             <xsl:apply-templates select="$source-context" mode="enoddi32:question-reference"/>
         </d:QuestionConstruct>
     </xsl:template>
