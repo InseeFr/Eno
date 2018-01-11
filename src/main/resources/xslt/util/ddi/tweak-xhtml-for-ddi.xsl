@@ -38,7 +38,7 @@
         <!-- Output its content -->
         <xsl:value-of select="."/>
         <xsl:element name="xhtml:a">
-            <!-- Building an href=ftn<index> -->
+            <!-- Building an href=#ftn{index}, index is based on the number of xhtml:a footnote -->
             <xsl:attribute name="href"
                 select="concat('#ftn', 1 + count(preceding::xhtml:a[key('is-footnote',true())]))"/>
         </xsl:element>
@@ -56,13 +56,14 @@
                 <xsl:variable name="agency" select="ancestor-or-self::*[r:Agency][1]/r:Agency"/>
                 <xsl:variable name="version" select="ancestor-or-self::*[r:Version][1]/r:Version"/>
                 <xsl:variable name="lang" select="ancestor-or-self::*[@xml:lang][1]/@xml:lang"/>
-                <!-- The id is build with the pattern ftn<index>, index is based on the number of xhtml:a 'footnote'. -->
+                <!-- The id is build with the pattern ftn{index}, index is based on the number of xhtml:a 'footnote'. -->
                 <xsl:variable name="id"
                     select="concat('#ftn', 1 + count(preceding::xhtml:a[key('is-footnote',true())]))"/>
                 <d:Instruction>
                     <r:Agency>
                         <xsl:value-of select="$agency"/>
                     </r:Agency>
+                    <!-- An Id is created (but its never called) -->
                     <r:ID>
                         <xsl:value-of select="concat('FTN-INSTRUCTION-', position())"/>
                     </r:ID>
@@ -75,8 +76,9 @@
                     <d:InstructionText>
                         <d:LiteralText>
                             <d:Text xml:lang="{$lang}">
+                                <!-- The id referenced by the xhtml:a is the id of the xhtml:p. -->
                                 <xhtml:p id="{$id}">
-                                    <!-- Keeping only the sequence between escaped quotes (\") -->
+                                    <!-- Keeping in @href only the sequence between escaped quotes (\") as InstructionText-->
                                     <xsl:analyze-string select="@href" regex="\\&quot;(.+)\\&quot;">
                                         <xsl:matching-substring>
                                             <xsl:copy-of select="regex-group(1)"/>
