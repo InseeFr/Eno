@@ -44,7 +44,7 @@
     </xsl:template>
     
     <!-- Parsing is done on the text nodes -->
-    <xsl:template match="text()[matches(.,'([*]|\\n)')]">
+    <xsl:template match="text()[matches(.,'[*]|\\n|\[.*\]\(.*\)')]">
         <xhtml:p>
             <xsl:call-template name="parse-tags">
               <xsl:with-param name="expression" select="."/>
@@ -52,10 +52,17 @@
         </xhtml:p>
     </xsl:template>
     
+    
     <!-- Parsing is done on the text nodes -->
     <xsl:template match="text()">
         <xsl:copy-of select="."/>        
     </xsl:template>
+    
+   <!-- <xsl:template match="text()">        
+            <xsl:call-template name="test-regex">
+                <xsl:with-param name="expression" select="."/>
+            </xsl:call-template>        
+    </xsl:template>-->
     
     <!-- 
         Parsing tags
@@ -80,11 +87,8 @@
             - non-matching is what doesn't have any markdown tags.
         -->        
         <xsl:analyze-string select="$expression" regex="(^[^*]*)([*]{{1,3}})(([^*]{{1}}.*$)|$)">
-            <xsl:matching-substring>
-                <!--<xsl:if test="$first">
-                    <xsl:value-of select="$p-open" disable-output-escaping="yes"/>
-                </xsl:if>
-                --><!-- Part in front of markdown tag (free from markdown tags) -->
+            <xsl:matching-substring>                
+                <!-- Part in front of markdown tag (free from markdown tags) -->
                 <xsl:call-template name="parse-elements">
                     <xsl:with-param name="expression" select="regex-group(1)"/>
                 </xsl:call-template>                
@@ -184,9 +188,6 @@
                     <xsl:with-param name="bold" select="$new-bold"/>
                     <xsl:with-param name="parent" select="$new-parent"/>
                  </xsl:call-template>
-                <!--<xsl:if test="$first">
-                    <xsl:value-of select="$p-close" disable-output-escaping="yes"/>
-                </xsl:if>                -->
             </xsl:matching-substring>
             <xsl:non-matching-substring>
                 <!-- Part without markdown tag. -->
@@ -197,14 +198,14 @@
         </xsl:analyze-string>
     </xsl:template>
     
-   <!-- <xsl:template name="test-regex">
+    <xsl:template name="test-regex">
         <xsl:param name="expression"/>
         <xsl:param name="next" select="false()"/>
         <xsl:param name="italic" select="false()" as="xs:boolean"/>
         <xsl:param name="bold" select="false()" as="xs:boolean"/>
         <xsl:variable name="italic-mw" select="'*'"/>
-        <xsl:variable name="bold-mw" select="'**'"/>              
-        <xsl:analyze-string select="$expression" regex="(\\n){{1}}">
+        <xsl:variable name="bold-mw" select="'**'"/>        
+        <xsl:analyze-string select="$expression" regex="(\\n)|(\[(.*)\]\((.*)\)){{1}}">
             <xsl:matching-substring>
                 regexp-group1 :
                 <xsl:copy-of select="regex-group(1)"/>                
@@ -224,14 +225,34 @@
                 <xsl:copy-of select="."/>
             </xsl:non-matching-substring>
         </xsl:analyze-string>
-    </xsl:template>-->
+    </xsl:template>
     
     <xsl:template name="parse-elements">
         <xsl:param name="expression"/>
         <xsl:param name="first" select="true()"/>
-        <xsl:analyze-string select="$expression" regex="(\\n){{1}}">
+        <!-- 
+            Defining a regexp where :
+            - regexp(1) is the sequence \n if encountered, for breaklines,
+            - regexp(2) is the sequence [.*](.) if encountered, for links.
+            - regexp(3) is the sub-sequence [.*] if regexp(2) has matched, for the text associated to the link,
+            - regexp(4) is the sub-sequence (.*) if regexp(2) has matched, for the url associated to the link.
+        -->
+        <xsl:analyze-string select="$expression" regex="(\\n)|(\[(.*)\]\((.*)\)){{1}}">
              <xsl:matching-substring>
-                 <xsl:element name="xhtml:br"/>                 
+                 <xsl:choose>
+                     <!-- Breakline case -->
+                     <xsl:when test="regex-group(1)">
+                         <xsl:element name="xhtml:br"/>        
+                     </xsl:when>
+                     <!-- Link case -->
+                     <xsl:when test="regex-group(2)">
+                         <xsl:element name="xhtml:a">
+                             <xsl:attribute name="href" select="regex-group(4)"/>
+                             <xsl:copy-of select="regex-group(3)"/>
+                         </xsl:element>
+                     </xsl:when>
+                 </xsl:choose>
+                                  
              </xsl:matching-substring>
              <xsl:non-matching-substring>
                  <xsl:copy-of select="."/>

@@ -33,8 +33,9 @@
         </xslt>
         
         <antcall target="DDIPostProcessing">
-            <param name="input-file" value="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO.xml"/>
-            <param name="output-file" value="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO-with-html.xml"/>
+            <param name="input-file" value="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO"/>
+            <param name="output-file" value="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO-with-html"/>
+            <param name="file-extension" value="xml"/>
         </antcall>
         
     </target>
@@ -103,9 +104,14 @@
   
     <target name="DDIPostProcessing">
         
-       <xslt in="${input-file}"
-           out="${output-file}"
+       <xslt in="${input-file}.${file-extension}"
+           out="${output-file}-temp.${file-extension}"
             style="${xslt.home}/util/ddi/mw2xhtml.xsl" classpath="${saxon.jar}" force="true">
+        </xslt>
+        
+        <xslt in="${output-file}-temp.${file-extension}"
+            out="${output-file}.${file-extension}"
+            style="${xslt.home}/util/ddi/tweak-xhtml-for-ddi.xsl" classpath="${saxon.jar}" force="true">
         </xslt>
         
     </target>
