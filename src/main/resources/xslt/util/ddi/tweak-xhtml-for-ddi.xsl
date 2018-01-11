@@ -58,7 +58,7 @@
                 <xsl:variable name="lang" select="ancestor-or-self::*[@xml:lang][1]/@xml:lang"/>
                 <!-- The id is build with the pattern ftn{index}, index is based on the number of xhtml:a 'footnote'. -->
                 <xsl:variable name="id"
-                    select="concat('#ftn', 1 + count(preceding::xhtml:a[key('is-footnote',true())]))"/>
+                    select="concat('ftn', 1 + count(preceding::xhtml:a[key('is-footnote',true())]))"/>
                 <d:Instruction>
                     <r:Agency>
                         <xsl:value-of select="$agency"/>
