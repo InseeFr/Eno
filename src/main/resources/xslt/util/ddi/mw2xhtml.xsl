@@ -47,7 +47,7 @@
     <xsl:template match="text()[matches(.,'[*]|\\n|\[.*\]\(.*\)')]">
         <xhtml:p>
             <xsl:call-template name="parse-tags">
-              <xsl:with-param name="expression" select="."/>
+              <xsl:with-param name="expression" select="normalize-space(.)"/>
             </xsl:call-template>
         </xhtml:p>
     </xsl:template>
