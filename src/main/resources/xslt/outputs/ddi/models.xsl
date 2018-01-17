@@ -28,12 +28,19 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="citation" select="enoddi32:get-citation($source-context)" as="xs:string"/>
         <xsl:variable name="agency" select="enoddi32:get-agency($source-context)" as="xs:string"/>
-        <DDIInstance xmlns="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2"
-            xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml"
-            xmlns:a="ddi:archive:3_2" xmlns:l="ddi:logicalproduct:3_2"
-            xmlns:xs="http://www.w3.org/2001/XMLSchema"
-            xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd" isMaintainable="true">
+        <xsl:processing-instruction name="xml-model">
+            href="../../../src/main/resources/schema/eno-schema-draft-fb.sch" 
+            type="application/xml" 
+            schematypens="http://purl.oclc.org/dsdl/schematron"
+        </xsl:processing-instruction>
+        <DDIInstance xmlns="ddi:instance:3_2"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="ddi:instance:3_2 ../../../src/main/resources/schema/instance.xsd"
+            xmlns:a="ddi:archive:3_2" xmlns:r="ddi:reusable:3_2" xmlns:s="ddi:studyunit:3_2"
+            xmlns:d="ddi:datacollection:3_2" xmlns:g="ddi:group:3_2" xmlns:eno="http://xml.insee.fr/apps/eno"
+            xmlns:l="ddi:logicalproduct:3_2" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+            xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+            isMaintainable="true">
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="concat('INSEE-', enoddi32:get-id($source-context))"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
@@ -383,7 +390,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
     
-    <xsl:template match="driver-ExternalAid//GoTo" mode="model" priority="4">
+    <xsl:template match="driver-ExternalAid//FlowControl" mode="model" priority="4">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ExternalAid>
@@ -393,7 +400,8 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:Description>
                 <r:Content>
-                    <xhtml:div class="GoTo" id="{$ID}">
+                    <xhtml:div class="FlowControl" id="{$ID}">
+                        <xhtml:div class="Description"><xsl:value-of select="enoddi32:get-description($source-context)"/></xhtml:div>                        
                         <xhtml:div class="Expression"><xsl:value-of select="enoddi32:get-expression($source-context)"/></xhtml:div>
                         <xhtml:div class="IfTrue"><xsl:value-of select="enoddi32:get-if-true($source-context)"/></xhtml:div>
                     </xhtml:div>
@@ -674,12 +682,36 @@
         </xsl:apply-templates>
     </xsl:template>
     
-    <xsl:template name="CommandCode" match="driver-ControlConstructScheme//Command | driver-ProcessingInstructionScheme//Command" mode="model" priority="2">
+    <!-- This is a quick&dirty IfThenElse support. Needs a refactor priority is a mess to maintain with several levels. -->    
+    <xsl:template match="driver-ThenSequence//Command" mode="model" priority="3"/>
+    
+    <xsl:template name="CommandCode" match="*[name(.) =('driver-ControlConstructScheme','driver-ProcessingInstructionScheme')]//Command" mode="model" priority="2">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" tunnel="yes"/>
+        <!-- Use of a call-template because this part is common whit IfCondition/Command but latter doesn't support parent CommandeCode -->
+        <r:CommandCode>
+            <xsl:call-template name="Command">
+                <xsl:with-param name="source-context" select="$source-context" tunnel="yes"/>
+            </xsl:call-template>
+        </r:CommandCode>
+        <!-- Define the scope of the Variable, because of loop. Outside loops, it's the main sequence which is referenced. -->
+        <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
+            <d:ControlConstructReference>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi32:get-referenced-sequence-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- This specific template is needed because for IfInstruction Command no CommandCode is required (driver missing ?) -->
+    <xsl:template name="Command">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" tunnel="yes"/>
         <!-- Getting all related variables from the command expression to build parameters and bindings -->
         <!-- Could be done if needed in the parent (external variable case) so it's a param not a variable -->
-        <xsl:param name="related-variables" select="enoddi32:get-related-variable($source-context)"/>
+        <xsl:param name="related-variables" select="enoddi32:get-related-variable($source-context)" tunnel="yes"/>
         <!-- Calculating ids needed from the related-variable -->
         <xsl:variable name="related-variables-with-id">
             <xsl:for-each select="$related-variables">
@@ -696,75 +728,64 @@
                 </Container>
             </xsl:for-each>
         </xsl:variable>                
-        <r:CommandCode>
-            <r:Command>
-                <r:ProgramLanguage>xpath</r:ProgramLanguage>
-                <xsl:for-each select="$related-variables-with-id/*">                        
-                    <r:InParameter isArray="false">
+        <r:Command>
+            <r:ProgramLanguage>xpath</r:ProgramLanguage>
+            <xsl:for-each select="$related-variables-with-id/*">                        
+                <r:InParameter isArray="false">
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
+                    <r:ID><xsl:value-of select="ip-id"/></r:ID>
+                    <r:Version>0.1.0</r:Version>
+                    <r:ParameterName>
+                        <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="name"/></r:String>
+                    </r:ParameterName>
+                </r:InParameter>
+            </xsl:for-each>
+            <!-- Adding outParameter based on the context (for calculated Variable, but not needed for Filtrer&Control Command) -->
+            <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
+                <r:OutParameter>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:ID><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>
+                    <r:Version>0.1.0</r:Version>
+                </r:OutParameter>
+            </xsl:if>
+            <xsl:for-each select="$related-variables-with-id/*">
+                <r:Binding>
+                    <r:SourceParameterReference>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="./qop-id"/></r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                    </r:SourceParameterReference>
+                    <r:TargetParameterReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
                         <r:ID><xsl:value-of select="ip-id"/></r:ID>
                         <r:Version>0.1.0</r:Version>
-                        <r:ParameterName>
-                            <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="name"/></r:String>
-                        </r:ParameterName>
-                    </r:InParameter>
-                </xsl:for-each>
-                <!-- Adding outParameter based on the context (for calculated Variable, but not needed for Filtrer&Control Command) -->
-                <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
-                    <r:OutParameter>
-                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>
-                        <r:Version>0.1.0</r:Version>
-                    </r:OutParameter>
-                </xsl:if>
-                <xsl:for-each select="$related-variables-with-id/*">
-                    <r:Binding>
-                        <r:SourceParameterReference>
-                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                            <r:ID><xsl:value-of select="./qop-id"/></r:ID>
-                            <r:Version>0.1.0</r:Version>
-                            <r:TypeOfObject>OutParameter</r:TypeOfObject>
-                        </r:SourceParameterReference>
-                        <r:TargetParameterReference>
-                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
-                            <r:ID><xsl:value-of select="ip-id"/></r:ID>
-                            <r:Version>0.1.0</r:Version>
-                            <r:TypeOfObject>InParameter</r:TypeOfObject>
-                        </r:TargetParameterReference>
-                    </r:Binding>                    
-                </xsl:for-each>
-                <r:CommandContent>
-                    <xsl:choose>
-                        <!-- Calling the specifc template to handle CommandContent when in regular Command case. -->
-                        <xsl:when test="self::Command">
-                            <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
-                                <xsl:with-param name="expression" select="$source-context"/>
-                                <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
-                            </xsl:call-template>        
-                        </xsl:when>
-                        <!-- When no driver is associated (= no regular Control case), it's a mandatory response Case, for this case only single answer is implemented. -->
-                        <xsl:when test="count($related-variables-with-id/*)=1">
-                            <xsl:value-of select="concat('if ',$related-variables-with-id/*[1]/ip-id,'=&apos;'''')"/>                            
-                        </xsl:when>
-                        <xsl:otherwise>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                    </r:TargetParameterReference>
+                </r:Binding>                    
+            </xsl:for-each>
+            <r:CommandContent>
+                <xsl:choose>
+                    <!-- Calling the specifc template to handle CommandContent when in regular Command case. -->
+                    <xsl:when test="self::Command or ancestor-or-self::IfThenElse">
+                        <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
+                            <xsl:with-param name="expression" select="$source-context"/>
+                            <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
+                        </xsl:call-template>        
+                    </xsl:when>
+                    <!-- When no driver is associated (= no regular Control case), it's a mandatory response Case, for this case only single answer is implemented. -->
+                    <xsl:when test="count($related-variables-with-id/*)=1">
+                        <!-- The command value associated with the error message Instruction is VAR1 = '' -->
+                        <xsl:value-of select="concat('if ',$related-variables-with-id/*[1]/ip-id,'=&apos;'''')"/>                            
+                    </xsl:when>
+                    <xsl:otherwise>
                         <xsl:message>Only madatory Response with unique answer is supported.</xsl:message>    
-                        </xsl:otherwise>
-                    </xsl:choose>                    
-                </r:CommandContent>
-            </r:Command>
-        </r:CommandCode>
-        <!-- Define the scope of the Variable, because of loop. Outside loops, it's the main sequence which is referenced. -->
-        <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
-            <d:ControlConstructReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-referenced-sequence-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>Sequence</r:TypeOfObject>
-            </d:ControlConstructReference>
-        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>                    
+            </r:CommandContent>
+        </r:Command>        
     </xsl:template>
     
-  
     <xsl:template match="driver-ProcessingInstructionScheme//Variable" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -786,7 +807,7 @@
             </xsl:for-each>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
-                <xsl:with-param name="related-variables" select="$related-variables"/>
+                <xsl:with-param name="related-variables" select="$related-variables" tunnel="yes"/>
             </xsl:apply-templates>
         </d:GenerationInstruction>
     </xsl:template>
@@ -799,44 +820,21 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>				
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <d:IfCondition>				
-                <r:Command>			
-                    <r:ProgramLanguage>xpath</r:ProgramLanguage>		
-                    <r:InParameter isArray="false">		
-                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID>ITE-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>				
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>	
-                        <r:ParameterName>	
-                            <r:String xml:lang="en-IE"/>
-                        </r:ParameterName>	
-                    </r:InParameter>		
-                    <r:Binding>		
-                        <r:SourceParameterReference>	
-                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                            <r:ID>QOP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>				
-                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                            <r:TypeOfObject>OutParameter</r:TypeOfObject>
-                        </r:SourceParameterReference>	
-                        <r:TargetParameterReference>	
-                            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                            <r:ID>ITEIP-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>				
-                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                            <r:TypeOfObject>InParameter</r:TypeOfObject>
-                        </r:TargetParameterReference>	
-                    </r:Binding>		
-                    <r:CommandContent><xsl:value-of select="enoddi32:get-expression($source-context)"/></r:CommandContent>		
-                </r:Command>			
-            </d:IfCondition>				
+            <d:IfCondition>
+                <xsl:call-template name="Command">
+                    <xsl:with-param name="source-context" select="enoddi32:get-command($source-context)" tunnel="yes"/>
+                </xsl:call-template>
+           </d:IfCondition>				
             <d:ThenConstructReference>				
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>		
-                <r:ID>ITEHS-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>			
+                <r:ID><xsl:value-of select="enoddi32:get-then-sequence-id($source-context)"/></r:ID>			
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>Sequence</r:TypeOfObject>			
             </d:ThenConstructReference>				
         </d:IfThenElse>					
         <d:Sequence>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>ITEHS-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi32:get-then-sequence-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:Label>
                 <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
@@ -845,7 +843,7 @@
             </r:Label>
             <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-ThenSequence',.)" tunnel="yes"/>
             </xsl:apply-templates>
         </d:Sequence>
     </xsl:template>

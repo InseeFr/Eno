@@ -86,13 +86,27 @@
     </xsl:template>
     
     <xsl:template match="*[enopogues:is-sequence(.) = 'true']" mode="enoddi32:get-reference-element-name">
-        <xsl:value-of select="'Sequence'"/>
+        <xsl:choose>
+            <xsl:when test="local-name(.)='IfThenElse'">                                   
+                <xsl:value-of select="'IfThenElse'"/>
+            </xsl:when>
+            <xsl:when test="pogues:Child">
+                <xsl:value-of select="'Sequence'"/>                
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message select="concat('enoddi32:get-reference-element-name does not explicitly support ',name(.))"/>
+                <xsl:value-of select="local-name(.)"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="pogues:Control | pogues:Response[@mandatory='true']" mode="enoddi32:get-reference-element-name">
         <xsl:value-of select="'ComputationItem'"/>
     </xsl:template>
     
+    <xsl:template match="pogues:IfThenElse" mode="enoddi32:get-reference-element-name">
+        <xsl:value-of select="local-name(.)"/>
+    </xsl:template>        
     
     <!-- Building Id Implementation, should be done through rich out-getters in @v2.0 -->
     <!-- **************************************************************************** -->
@@ -105,6 +119,17 @@
     
     <xsl:template match="*[enopogues:is-question(.)]" mode="enoddi32:get-qc-id">
         <xsl:value-of select="concat(enopogues:get-id(.),'-QC')"/>
+    </xsl:template>
+    
+    <!-- Id for Then Sequence in IfThenElse -->
+    <xsl:function name="enoddi32:get-then-sequence-id">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:get-then-sequence-id"/>
+    </xsl:function>
+    
+    <!-- TODO : Reduce the XPath, * is needed because of a bug on the namespace for outputted pogues:IfThenElse-->
+    <xsl:template match="*" mode="enoddi32:get-then-sequence-id">
+        <xsl:value-of select="concat(enoddi32:get-id(.),'-THEN')"/>
     </xsl:template>
     
     <!-- Id for ResponseDomain OutParameter (rdop) -->

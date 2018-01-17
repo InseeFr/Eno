@@ -10,8 +10,14 @@
     
    <!-- Main Target -->
     <target name="pogues-xml2ddi" depends="ENOPreprocessingPogues-xml2ddi">
+                
+        <antcall target="Pogues-xmlPreProcessing">
+            <param name="input-file" value="${survey-folder}/pogues-xml/${survey-name}.xml"/>
+            <param name="output-file" value="${survey-folder}/pogues-xml/${survey-name}-tmp.xml"/>
+        </antcall>  
+               
         <!-- Generating xforms from the DDI : basic-form.tmp using the pogues-xml2ddi.xsl stylesheet -->
-        <xslt in="${survey-folder}/pogues-xml/${survey-name}.xml"
+        <xslt in="${survey-folder}/pogues-xml/${survey-name}-tmp.xml"
             out="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO.xml"
             style="${xslt.home}/transformations/pogues-xml2ddi/pogues-xml2ddi.xsl" force="true"
             classpath="${saxon.jar}">
@@ -25,9 +31,10 @@
     </target>
     
     <!-- Secondary Target without EnoPreprocessing -->
-    <target name="pogues-xml2ddi2" >
+    <target name="pogues-xml2ddi2" >                
+        
         <!-- Generating xforms from the DDI : basic-form.tmp using the pogues-xml2ddi.xsl stylesheet -->
-        <xslt in="${survey-folder}/pogues-xml/${survey-name}.xml"
+        <xslt in="${survey-folder}/pogues-xml/${survey-name}-tmp.xml"
             out="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO.xml"
             style="${xslt.home}/transformations/pogues-xml2ddi/pogues-xml2ddi.xsl" force="true"
             classpath="${saxon.jar}">
@@ -101,6 +108,15 @@
             style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
             <param name="generated-file" expression="../../inputs/pogues-xml/templates.xsl"/>
         </xslt>
+    </target>
+  
+    <target name="Pogues-xmlPreProcessing">               
+        
+        <xslt in="${input-file}"
+            out="${output-file}"
+            style="${xslt.home}/util/pogues-xml/2suppressionGoto.xsl" classpath="${saxon.jar}" force="true">
+        </xslt>
+        
     </target>
   
     <target name="DDIPostProcessing">
