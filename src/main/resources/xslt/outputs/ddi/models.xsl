@@ -353,7 +353,7 @@
                         <xsl:value-of select="enoddi32:get-instruction-text($source-context)"/>
                     </d:Text>
                 </d:LiteralText>
-                <xsl:if test="self::Control">
+                <xsl:if test="enoddi32:is-with-conditionnal-text($source-context) = true()">
                     <d:ConditionalText>
                         <r:SourceParameterReference>
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>

@@ -237,5 +237,36 @@
         <xsl:value-of select="enoddi32:get-qop-id(pogues:FailMessage)"/>
     </xsl:template>          
     
+    <xsl:template match="pogues:Declaration" mode="enoddi32:get-qop-conditional-text-id">
+        <xsl:value-of select="enoddi32:get-qop-id(pogues:Text)"/>
+    </xsl:template>
+    
+    <!--TODO The implementation of Parameter Reference for conditional text should be done with "rich" outGetter mechanism =>@v2.0 -->
+    <xsl:function name="enoddi32:is-with-conditionnal-text">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi32:is-with-conditionnal-text"/>
+    </xsl:function>
+    
+    <xsl:template match="*[pogues:Text or pogues:FailMessage]" mode="enoddi32:is-with-conditionnal-text">
+        <xsl:value-of select="enoddi32:is-with-conditionnal-text(*[self::pogues:Text or self::pogues:FailMessage])"/>
+    </xsl:template>    
+
+    <!-- ConditionnalText are required when dynamic text with at least one non external variable. -->
+    <xsl:template match="pogues:Text | pogues:FailMessage" mode="enoddi32:is-with-conditionnal-text">
+        <xsl:choose>
+            <xsl:when test="enopogues:is-with-dynamic-text(.) = true()">
+                <xsl:variable name="variables" select="enopogues:get-related-variable(.)"/>
+                <xsl:value-of select="some $x in $variables satisfies enopogues:get-type($x) = ('CollectedVariableType','CalculatedVariableType')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="false()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="*" mode="enoddi32:is-with-conditionnal-text">
+        <xsl:apply-templates select="." mode="enopogues:is-with-dynamic-text"/>
+    </xsl:template>
+    
     
 </xsl:stylesheet>

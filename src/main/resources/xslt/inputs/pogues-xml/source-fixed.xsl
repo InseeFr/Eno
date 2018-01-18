@@ -275,7 +275,7 @@
     </xsl:template>
     
     <!--TODO Better handling of multi variable references  -->    
-    <xsl:template match="pogues:FailMessage" mode="enopogues:get-qop-id">
+    <xsl:template match="pogues:FailMessage | pogues:Text" mode="enopogues:get-qop-id">
         <xsl:variable name="related-variables" select="enopogues:get-related-variable(.)"/>
         <xsl:if test="count($related-variables) &gt; 1">
             <xsl:message>Multi Variables references in ConditionnalText (coming from FailMessage) are not supported.</xsl:message>

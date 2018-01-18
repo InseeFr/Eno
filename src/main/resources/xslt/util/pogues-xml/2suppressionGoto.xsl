@@ -465,7 +465,7 @@
     <xsl:template name="transform_goto_expressions">
         <xsl:param name="goto_expressions"/>
         <Expression>
-            <xsl:value-of select="concat('NOT( ',string-join(($goto_expressions/*),' ) AND NOT( '),')')"/>
+            <xsl:value-of select="concat('not( ',string-join(($goto_expressions/*),' ) and not( '),')')"/>
         </Expression>
     </xsl:template>
     
