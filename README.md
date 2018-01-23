@@ -1,5 +1,7 @@
 # Eno – Questionnaire generator
 
+This is a forked repo of ENO to implement Pogues Back-Office in eno v1 master
+
 ## Introduction
 
 Eno is a tool that generates survey questionnaires starting from their formal description in [DDI](http://ddialliance.org/).
