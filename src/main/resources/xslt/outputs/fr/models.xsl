@@ -1310,9 +1310,13 @@
         
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="label" select="enofr:get-label($source-context, $languages)"/>
-        
+        <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
+
         <xhtml:td colspan="{enofr:get-colspan($source-context)}" rowspan="{enofr:get-rowspan($source-context)}">
             <xf:output id="{$name}-control" bind="{$name}-bind">
+                <xsl:if test="$css-class != ''">
+                    <xsl:attribute name="class" select="$css-class"/>
+                </xsl:if>
                 <xf:label ref="$form-resources/{$name}/label">
                     <xsl:if test="eno:is-rich-content($label)">
                         <xsl:attribute name="mediatype">text/html</xsl:attribute>
