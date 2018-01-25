@@ -1,6 +1,6 @@
 # Eno – Questionnaire generator
 
-This is a forked repo of ENO to implement Pogues Back-Office in eno v1 master
+[![Build Status](https://travis-ci.org/InseeFr/Eno.svg?branch=master)](https://travis-ci.org/InseeFr/Eno)
 
 ## Introduction
 
