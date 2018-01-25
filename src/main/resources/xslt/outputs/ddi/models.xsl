@@ -51,7 +51,7 @@
                     </r:String>
                 </r:Title>
             </r:Citation>
-            <g:ResourcePackage isMaintainable="true" versionDate="{current-date()}">
+            <g:ResourcePackage isMaintainable="true" versionDate="2018-01-25+01:00">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="concat('RessourcePackage-', enoddi32:get-id($source-context))"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
