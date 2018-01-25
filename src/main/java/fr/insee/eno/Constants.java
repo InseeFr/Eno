@@ -212,6 +212,7 @@ public final class Constants {
 	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
 	public static final String MW_EXTENSION = "-mw.tmp";
 	public static final String FINAL_EXTENSION = "-final.tmp";
+	public static final String FINAL_DDI_EXTENSION = "-final.xml";
 	public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
 	public static final String TEMP_ODT_FOLDER = SUB_TEMP_FOLDER + "/odt";
 	public static final String TEMP_DDI_FOLDER = SUB_TEMP_FOLDER + "/ddi";
@@ -225,4 +226,5 @@ public final class Constants {
 	public static final String TEST_FILE_TO_COMPARE = TEMP_FOLDER_PATH + "/simpsons/v1/form/form.xhtml";
 	public static final String TEST_REFERENCE_FILE = "simpsons-form.xhtml";
 	public static final String TEST_INPUT_XML = "simpsons.xml";
+	
 }
