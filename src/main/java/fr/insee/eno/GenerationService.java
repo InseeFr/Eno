@@ -46,7 +46,7 @@ public class GenerationService {
 		cleanTempFolder();
 		File preprocessResultFileName = this.preprocessor.process(inputFile, parametersFile);
 		File generatedForm = this.generator.generate(preprocessResultFileName, "simpsons"); //FIXME get survey name dynamically
-		File outputForm = this.postprocessor.process(generatedForm);
+		File outputForm = this.postprocessor.process(generatedForm, parametersFile);
 		logger.debug("Path to generated questionnaire: "+ outputForm.getAbsolutePath());
 		//Constants.closeAllInputStreams();
 		return outputForm;

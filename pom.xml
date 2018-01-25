@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.insee</groupId>
 	<artifactId>eno-core</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 
 	<properties>
 		<guice.version>4.1.0</guice.version>
@@ -58,6 +58,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.xmlunit</groupId>
+			<artifactId>xmlunit-matchers</artifactId>
+			<version>2.3.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -1,0 +1,27 @@
+package fr.insee.eno.main;
+
+import java.io.File;
+
+import fr.insee.eno.GenerationService;
+import fr.insee.eno.generation.PoguesXML2DDIGenerator;
+import fr.insee.eno.postprocessing.DDIPostprocessor;
+import fr.insee.eno.preprocessing.PoguesXMLPreprocessor;
+
+public class DummyTestPoguesXML2DDI {
+
+	public static void main(String[] args) {
+		
+		String basePath = "src/test/resources/pogues-xml-to-ddi";
+		GenerationService genService = new GenerationService(new PoguesXMLPreprocessor(), new PoguesXML2DDIGenerator(),
+				new DDIPostprocessor());
+		File in = new File(String.format("%s/test-controle.xml", basePath));
+		try {
+			File output = genService.generateQuestionnaire(in, null);
+			System.out.println(output.getAbsolutePath());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

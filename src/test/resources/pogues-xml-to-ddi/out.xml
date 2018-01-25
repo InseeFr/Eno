@@ -1,17 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:g="ddi:group:3_2"
-             xmlns:d="ddi:datacollection:3_2"
-             xmlns:s="ddi:studyunit:3_2"
-             xmlns:r="ddi:reusable:3_2"
-             xmlns:xhtml="http://www.w3.org/1999/xhtml"
-             xmlns:a="ddi:archive:3_2"
-             xmlns:l="ddi:logicalproduct:3_2"
-             xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-             xmlns:eno="http://xml.insee.fr/apps/eno"
-             xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
-             xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd"
-             isMaintainable="true">
+<?xml version="1.0" encoding="UTF-8"?><DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2" xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32" xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd" isMaintainable="true">
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-i6vwid</r:ID>
    <r:Version>0.1.0</r:Version>
@@ -20,7 +7,7 @@
          <r:String>Questionnaire SIMPSONS</r:String>
       </r:Title>
    </r:Citation>
-   <g:ResourcePackage isMaintainable="true" versionDate="2018-01-16+01:00">
+   <g:ResourcePackage isMaintainable="true" versionDate="2018-01-15+01:00">
       <r:Agency>fr.insee</r:Agency>
       <r:ID>RessourcePackage-i6vwid</r:ID>
       <r:Version>0.1.0</r:Version>
@@ -40,7 +27,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">We're going to test your knowledge about the simpsons series.\n**Welcome in the simspons world!**</d:Text>
+                  <d:Text xml:lang="fr-FR"><xhtml:p>We're going to test your knowledge about the simpsons series.<xhtml:br/><xhtml:b>Welcome in the simspons world!</xhtml:b></xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -105,7 +92,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">*Several possible answers*</d:Text>
+                  <d:Text xml:lang="fr-FR"><xhtml:p><xhtml:i>Several possible answers</xhtml:i></xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -118,7 +105,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">**Now we are going to know if you think that Jay is a gluton.**</d:Text>
+                  <d:Text xml:lang="fr-FR"><xhtml:p><xhtml:b>Now we are going to know if you think that Jay is a gluton.</xhtml:b></xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -156,7 +143,7 @@
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
-      </d:InterviewerInstructionScheme>
+      <d:Instruction><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>0.1.0</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR"><xhtml:p id="ftn1">Included principalities</xhtml:p></d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
       <d:ControlConstructScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>ControlConstructScheme-i6vwid</r:ID>
@@ -5077,10 +5064,7 @@
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
-               <d:Roster baseCodeValue="1"
-                         codeIterationValue="1"
-                         minimumRequired="1"
-                         maximumAllowed="10"/>
+               <d:Roster baseCodeValue="1" codeIterationValue="1" minimumRequired="1" maximumAllowed="10"/>
             </d:GridDimension>
             <d:GridDimension displayCode="false" displayLabel="false" rank="2">
                <d:CodeDomain>
@@ -5980,7 +5964,7 @@
             <r:ID>CA-j77dav9b--1</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">***Break the windows of the whole city***</r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Break the windows of the whole city</xhtml:i></xhtml:b></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -5988,7 +5972,7 @@
             <r:ID>CA-j77dav9b-0</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">***Loose the violin of his daughter playing poker***</r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Loose the violin of his daughter playing poker</xhtml:i></xhtml:b></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -5996,7 +5980,7 @@
             <r:ID>CA-j77dav9b-1</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">***Kill Mr Burns***</r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Kill Mr Burns</xhtml:i></xhtml:b></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -6004,7 +5988,7 @@
             <r:ID>CA-j77dav9b-2</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">***Leaving a mechanical object to control the nuclear power plant***</r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Leaving a mechanical object to control the nuclear power plant</xhtml:i></xhtml:b></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -6132,7 +6116,7 @@
             <r:ID>CA-jbdye1wa-3</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">[Other country](. \"Included principalities\")</r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p>Other country<xhtml:a href="#ftn1"/></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -9961,10 +9945,7 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>InstrumentScheme-i6vwid</r:ID>
             <r:Version>0.1.0</r:Version>
-            <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-                          xmlns:pr="ddi:ddiprofile:3_2"
-                          xmlns:c="ddi:conceptualcomponent:3_2"
-                          xmlns:cm="ddi:comparative:3_2">
+            <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues" xmlns:pr="ddi:ddiprofile:3_2" xmlns:c="ddi:conceptualcomponent:3_2" xmlns:cm="ddi:comparative:3_2">
                <r:Agency>fr.insee</r:Agency>
                <r:ID>Instrument-i6vwid</r:ID>
                <r:Version>0.1.0</r:Version>

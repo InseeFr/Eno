@@ -1,14 +1,13 @@
 package fr.insee.eno;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This class contains all the different paths used in the application Based on
@@ -40,6 +39,8 @@ public final class Constants {
 	
 	// ----- XSL Parameters path
 	public static final String CONFIG_DDI2FR = "/config/ddi2fr.xml";
+	public static final String CONFIG_DDI2ODT = "/config/ddi2odt.xml";
+	public static final String CONFIG_POGUES_XML2DDI = "/config/pogues-xml2ddi.xml";
 	public static final String PARAMETERS = "/parameters.xml";
 	public static final String LABELS_FOLDER = "/lang/fr/";
 	
@@ -48,27 +49,46 @@ public final class Constants {
 	public static final String DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
 	public static final String PARAMETERS_FILE = "/" + PARAMETERS_XML;
 	public static final String UTIL_DDI_TITLING_XSL = UTIL_FOLDER_PATH + "/ddi/titling.xsl";
+	public static final String UTIL_POGUES_XML_SUPP_GOTO_XSL = UTIL_FOLDER_PATH + "/pogues-xml/2suppressionGoto.xsl";
+	public static final String UTIL_DDI_MW2XHTML_XSL = UTIL_FOLDER_PATH + "/ddi/mw2xhtml.xsl";
+	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = UTIL_FOLDER_PATH + "/ddi/tweak-xhtml-for-ddi.xsl";
 	public static final String UTIL_DDI_CLEANING_XSL = UTIL_FOLDER_PATH + "/ddi/cleaning.xsl";
 	public static final String UTIL_FODS_PREFORMATTING_XSL = UTIL_FOLDER_PATH + "/fods/preformatting.xsl";
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
 	public static final String UTIL_DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
-	public static final String BROWSING_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/fr/browsing.xsl";	
-	public static final String PROPERTIES_FILE = CONFIG_FOLDER + "/ddi2fr.xml";
-	
+	public static final String BROWSING_FR_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/fr/browsing.xsl";
+	public static final String BROWSING_ODT_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/odt/browsing.xsl";
+	public static final String PROPERTIES_FILE_FR = CONFIG_FOLDER + "/ddi2fr.xml";
+	public static final String PROPERTIES_FILE_ODT = CONFIG_FOLDER + "/ddi2odt.xml";
+	public static final String PROPERTIES_FILE_DDI = CONFIG_FOLDER + "/pogues-xml2ddi.xml";
 	
 	// ---------- XSL generation
 	public static final String TRANSFORMATIONS_DDI2FR_DDI2FR_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr.xsl";
+	public static final String TRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL = TRANSFORMATIONS_FOLDER + "/ddi2odt/ddi2odt.xsl";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/pogues-xml2ddi.xsl";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.fods";
-//	public static final String TRANSFORMATIONS_DDI2FR_DRIVERS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.xsl";
+	public static final String TRANSFORMATIONS_DDI2ODT_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2odt/drivers.fods";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/drivers.fods";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2fr/functions.fods";
+	public static final String TRANSFORMATIONS_DDI2ODT_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2odt/functions.fods";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/pogues-xml2ddi/functions.fods";
+	
 	public static final String TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/functions.xsl";
+	public static final String TRANSFORMATIONS_DDI2ODT_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2odt/functions.xsl";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/functions.xsl";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.fods";
+	public static final String TRANSFORMATIONS_DDI2ODT_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2odt/tree-navigation.fods";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/tree-navigation.fods";
 	public static final String TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.xsl";
+	public static final String TRANSFORMATIONS_DDI2ODT_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2odt/tree-navigation.xsl";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/tree-navigation.xsl";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr-fixed.xsl";
+	public static final String TRANSFORMATIONS_DDI2ODT_DDI2ODT_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2odt/ddi2odt-fixed.xsl";
+	public static final String TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/pogues-xml2ddi-fixed.xsl";
 	
 	// ---------- 
 	public static final String INPUTS_DDI_FUNCTIONS_FODS = INPUTS_FOLDER + "/ddi/functions.fods";
@@ -76,8 +96,13 @@ public final class Constants {
 	public static final String INPUTS_DDI_TEMPLATES_FODS = INPUTS_FOLDER + "/ddi/templates.fods";
 	public static final String INPUTS_DDI_TEMPLATES_XSL = INPUTS_FOLDER + "/ddi/templates.xsl";
 	
+	public static final String INPUTS_POGUES_XML_FUNCTIONS_FODS = INPUTS_FOLDER + "/pogues-xml/functions.fods";
+	public static final String INPUTS_POGUES_XML_FUNCTIONS_XSL = INPUTS_FOLDER + "/pogues-xml/functions.xsl";
+	public static final String INPUTS_POGUES_XML_TEMPLATES_FODS = INPUTS_FOLDER + "/pogues-xml/templates.fods";
+	public static final String INPUTS_POGUES_XML_TEMPLATES_XSL = INPUTS_FOLDER + "/pogues-xml/templates.xsl";
+	
 	public static final String INPUTS_DDI_SOURCE_FIXED_XSL = INPUTS_FOLDER + "/ddi/source-fixed.xsl";
-//	public static final String INPUTS_DDI_SOURCE_XSL = INPUTS_FOLDER + "/ddi/source.xsl";
+	public static final String INPUTS_POGUES_XML_SOURCE_FIXED_XSL = INPUTS_FOLDER + "/pogues-xml/source-fixed.xsl";
 	public static final String FODS_2_XML_XSL = TRANSFORMATIONS_FOLDER + "/fods2xml.xsl";
 	public static final String XML_2_XSL_XSL = TRANSFORMATIONS_FOLDER + "/xml2xsl.xsl";
 	
@@ -97,12 +122,25 @@ public final class Constants {
 	public static final File TEMP_TEMP_BIS_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp-bis.tmp");
 	// Those files holds the XSL generated from FODS ; they will be then copied to resource directory when packaging to JAR
 	public static final File TRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/ddi2fr.xsl");
+	public static final File TRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2odt/ddi2odt.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/pogues-xml2ddi.xsl");
 	public static final File TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2ODT_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2odt/drivers.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/drivers.xsl");
 	public static final File TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2ODT_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2odt/functions.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/functions.xsl");
 	public static final File TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_DDI2ODT_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2odt/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/tree-navigation.xsl");
+	
 	public static final File INPUTS_DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/functions.xsl");
 	public static final File INPUTS_DDI_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/templates.xsl");
 	public static final File INPUTS_DDI_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/source.xsl");
+	
+	public static final File INPUTS_POGUES_XML_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/functions.xsl");
+	public static final File INPUTS_POGUES_XML_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/templates.xsl");
+	public static final File INPUTS_POGUES_XML_SOURCE_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml/source.xsl");
 	
 	// ---------- Utilies
 	/** Generic file getter from classpath 
@@ -170,15 +208,14 @@ public final class Constants {
 
 	//// Xsl stylesheets used in DDIPreprocessing
 
-
-	/********************************************************/
-	/************************ DDI2FR ************************/
-	/********************************************************/
-
 	
 	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
+	public static final String MW_EXTENSION = "-mw.tmp";
 	public static final String FINAL_EXTENSION = "-final.tmp";
 	public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
+	public static final String TEMP_ODT_FOLDER = SUB_TEMP_FOLDER + "/odt";
+	public static final String TEMP_DDI_FOLDER = SUB_TEMP_FOLDER + "/ddi";
+	public static final String TEMP_POGUES_XML_FOLDER = SUB_TEMP_FOLDER + "/pogues-xml";
 	public static final String BASIC_FORM_TMP_FILENAME = "basic-form.tmp";
 
 	/********************************************************/

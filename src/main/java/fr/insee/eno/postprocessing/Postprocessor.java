@@ -8,6 +8,6 @@ import java.io.File;
  */
 public interface Postprocessor {
 	
-	File process(File input);
+	File process(File input, File parametersFile)  throws Exception;
 
 }
