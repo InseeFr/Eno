@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:d="ddi:datacollection:3_2"
     xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:g="ddi:group:3_2"
     xmlns:s="ddi:studyunit:3_2" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0">
@@ -23,6 +23,11 @@
 
     <xsl:strip-space elements="*"/>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The external-variables are not collected nor calculated.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:variable name="external-variables">
         <ExternalVariables>
             <xsl:for-each select="//l:VariableScheme/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]">
@@ -32,6 +37,27 @@
                 </Variable>
             </xsl:for-each>
         </ExternalVariables>
+    </xsl:variable>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The calculated variables refer to control construct, not the contrary.</xd:p>
+            <xd:p>templates sequences, loops and dynamic tables always verify if there are calculated variables</xd:p>
+            <xd:p>this variable lists the other elements linked to calculated variables</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="calculated-variables-sequences" as="node()">
+        <Variables>
+            <xsl:for-each select="//d:GenerationInstruction/d:ControlConstructReference">
+                <xsl:if test="not(current()/r:ID = //d:Sequence[d:TypeOfSequence = 'template']/r:ID)
+                        and not(current()/r:ID = //d:Loop/r:ID)
+                        and not(current()/r:ID = //d:QuestionGrid[d:GridDimension/d:Roster]/r:ID)">
+                    <Variable>
+                        <xsl:value-of select="r:ID"/>
+                    </Variable>
+                </xsl:if>
+            </xsl:for-each>
+        </Variables>
     </xsl:variable>
 
     <xd:doc>
@@ -136,7 +162,7 @@
     <xsl:template match="d:Sequence[d:TypeOfSequence/text() = 'template']">
         <xsl:param name="references" tunnel="yes"/>
         <xsl:variable name="ID" select="r:ID"/>
-        
+
         <xsl:variable name="multiple-variables" as="node()">
             <Variables>
                 <xsl:for-each select="$references//l:VariableGroup/r:VariableReference">
@@ -171,7 +197,7 @@
             <xsl:apply-templates select="$references//d:GenerationInstruction[d:ControlConstructReference/r:ID=$ID]"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Insert External Variable and Calculated Variable to dynamical tables.</xd:p>
@@ -188,14 +214,27 @@
             <xsl:apply-templates select="$references//d:GenerationInstruction[d:ControlConstructReference/r:ID=$ID]"/>
         </xsl:copy>
     </xsl:template>
-    
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template to insert GenerationInstruction, which reference the element they have to be included in.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="node()[r:ID=$calculated-variables-sequences/Variable and not(ends-with(name(), 'Reference'))]">
+        <xsl:param name="references" tunnel="yes"/>
+        
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*"/>
+            <xsl:apply-templates select="$references//d:GenerationInstruction[d:ControlConstructReference/r:ID=current()/r:ID]"/>
+        </xsl:copy>
+    </xsl:template>
+
     <xd:doc>
         <xd:desc>
             <xd:p>Calculated variables refer the ControlContructs they belong to, not the contrary.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:GenerationInstruction/d:ControlConstructReference"/>
-    
 
     <xd:doc>
         <xd:desc>
@@ -220,14 +259,6 @@
     <xsl:template match="d:ConditionalText/r:SourceParameterReference[r:TypeOfObject='InParameter']/r:ID" priority="2">
         <xsl:copy-of select="."/>
     </xsl:template>
-<!--    
-    <xsl:template match="d:ConditionalText/r:SourceParameterReference/r:ID">
-        <xsl:variable name="ID" select="."/>
-        toto
-        <xsl:copy-of select="$external-variables/Variable"/>
-    </xsl:template>
-    
--->
 
     <xd:doc>
         <xd:desc>
@@ -237,15 +268,15 @@
     <xsl:template match="xhtml:a">
         <xsl:variable name="ref" select="replace(@href,'#','')"/>
         <xsl:variable name="language" select="ancestor::*[@xml:lang][1]/@xml:lang"/>
-        
+
         <xsl:choose>
-            <xsl:when test="//*[@id=$ref 
-                                and ancestor-or-self::*[@xml:lang][1]/@xml:lang=$language 
+            <xsl:when test="//*[@id=$ref
+                                and ancestor-or-self::*[@xml:lang][1]/@xml:lang=$language
                                 and ancestor::d:Instruction/d:InstructionName/r:String[@xml:lang=$language]='tooltip']">
                 <xsl:element name="xhtml:span">
                     <xsl:attribute name="title">
-                        <xsl:value-of select="normalize-space(//*[@id=$ref 
-                                                                    and ancestor-or-self::*[@xml:lang][1]/@xml:lang=$language 
+                        <xsl:value-of select="normalize-space(//*[@id=$ref
+                                                                    and ancestor-or-self::*[@xml:lang][1]/@xml:lang=$language
                                                                     and ancestor::d:Instruction/d:InstructionName/r:String[@xml:lang=$language]='tooltip'])"/>
                     </xsl:attribute>
                     <xsl:text>&#160;</xsl:text>
@@ -253,7 +284,7 @@
                         <xsl:attribute name="src" select="'/img/Help-browser.svg.png'"/>
                     </xsl:element>
                     <xsl:text>&#160;</xsl:text>
-                </xsl:element>            
+                </xsl:element>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy>
