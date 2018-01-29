@@ -20,6 +20,7 @@ public class TestDDIToXForm {
 
 	private XMLDiff xmlDiff = new XMLDiff();
 
+	
 	@Test
 	public void simpleDiffTest() {
 		try {
@@ -27,10 +28,9 @@ public class TestDDIToXForm {
 			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2FRGenerator(),
 					new NoopPostprocessor());
 			File in = new File(String.format("%s/in.xml", basePath));
-			File output = genService.generateQuestionnaire(in, null);
-			InputStream out = new FileInputStream(output);;
-			String expectedFilePath = String.format("%s/out.xhtml", basePath);	
-			Diff diff = xmlDiff.getDiff(out,expectedFilePath);
+			File outputFile = genService.generateQuestionnaire(in, null);
+			File expectedFile = new File(String.format("%s/out.xhtml", basePath));
+			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
 			
 		} catch (IOException e) {
@@ -40,13 +40,14 @@ public class TestDDIToXForm {
 			e.printStackTrace();
 			Assert.fail();
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println(e.getMessage());
 			Assert.fail();
 		}
 	}
 
 	private String getDiffMessage(Diff diff, String path) {
-		return String.format("Transformed output for %s should match expected DDI document:\n %s", path,
+		return String.format("Transformed output for %s should match expected XML document:\n %s", path,
 				diff.toString());
 	}
 }

@@ -50,7 +50,7 @@ public class DDIPostprocessor implements Postprocessor {
 		// ----- tweak-xhtml-for-ddi
 		// tweak-xhtml-for-ddi-input = mw2xhtml-output
 
-		String outputTweakXhtmlForDdi = FilenameUtils.removeExtension(input.getPath()) + Constants.FINAL_EXTENSION;
+		String outputTweakXhtmlForDdi = FilenameUtils.removeExtension(input.getPath()) + Constants.FINAL_DDI_EXTENSION;
 
 		logger.debug("Tweak-xhtml-for-ddi : -Input : " + mw2xhtmlOutput + " -Output : " + outputTweakXhtmlForDdi
 				+ " -Stylesheet : " + Constants.UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL + " -Parameters : "

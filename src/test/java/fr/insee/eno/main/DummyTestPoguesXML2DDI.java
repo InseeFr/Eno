@@ -14,7 +14,7 @@ public class DummyTestPoguesXML2DDI {
 		String basePath = "src/test/resources/pogues-xml-to-ddi";
 		GenerationService genService = new GenerationService(new PoguesXMLPreprocessor(), new PoguesXML2DDIGenerator(),
 				new DDIPostprocessor());
-		File in = new File(String.format("%s/test-controle.xml", basePath));
+		File in = new File(String.format("%s/in.xml", basePath));
 		try {
 			File output = genService.generateQuestionnaire(in, null);
 			System.out.println(output.getAbsolutePath());

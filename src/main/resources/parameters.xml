@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Parameters>
-    <Title>
-        <Sequence>
-            <Level name="template"/>
-            <Level name="module">
-                <PreSeq/>
-                <NumParent>N</NumParent>
-                <PostNumParentSeq/>
-                <StyleNumSeq>I</StyleNumSeq>
-                <PostNumSeq> - </PostNumSeq>
-            </Level>
-            <Level name="submodule">
-                <PreSeq/>
-                <NumParent>N</NumParent>
-                <PostNumParentSeq/>
-                <StyleNumSeq>1</StyleNumSeq>
-                <PostNumSeq>. </PostNumSeq>
-            </Level>
-            <Level name="group">
-                <PreSeq/>
-                <NumParent>N</NumParent>
-                <PostNumParentSeq/>
-                <StyleNumSeq>a</StyleNumSeq>
-                <PostNumSeq>. </PostNumSeq>
-            </Level>
-        </Sequence>
-        <Question>
-            <Level name="module">
-                <PreQuest>&#x27A1; </PreQuest>
-                <NumParent>N</NumParent>
-                <PostNumParentQuest/>
-                <StyleNumQuest>1</StyleNumQuest>
-                <PostNumQuest>. </PostNumQuest>
-            </Level>
-            <Level name="submodule">
-                <PreQuest>&#x27A1; </PreQuest>
-                <NumParent>O</NumParent>
-                <PostNumParentQuest>-</PostNumParentQuest>
-                <StyleNumQuest>a</StyleNumQuest>
-                <PostNumQuest>. </PostNumQuest>
-            </Level>
-            <Level name="group">
-                <PreQuest></PreQuest>
-                <NumParent>O</NumParent>
-                <PostNumParentQuest/>
-                <StyleNumQuest>1</StyleNumQuest>
-                <PostNumQuest>. </PostNumQuest>
-            </Level>
-        </Question>
-    </Title>
-
+	<Title>
+		<Sequence>
+			<Level name="template" />
+			<Level name="module">
+				<PreSeq />
+				<NumParent>N</NumParent>
+				<PostNumParentSeq />
+				<StyleNumSeq>I</StyleNumSeq>
+				<PostNumSeq> - </PostNumSeq>
+			</Level>
+			<Level name="submodule">
+				<PreSeq />
+				<NumParent>N</NumParent>
+				<PostNumParentSeq />
+				<StyleNumSeq>1</StyleNumSeq>
+				<PostNumSeq>. </PostNumSeq>
+			</Level>
+			<Level name="group">
+				<PreSeq />
+				<NumParent>N</NumParent>
+				<PostNumParentSeq />
+				<StyleNumSeq>a</StyleNumSeq>
+				<PostNumSeq>. </PostNumSeq>
+			</Level>
+		</Sequence>
+		<Question>
+			<Level name="module">
+				<PreQuest>&#x27A1; </PreQuest>
+				<NumParent>N</NumParent>
+				<PostNumParentQuest />
+				<StyleNumQuest>1</StyleNumQuest>
+				<PostNumQuest>. </PostNumQuest>
+			</Level>
+			<Level name="submodule">
+				<PreQuest>&#x27A1; </PreQuest>
+				<NumParent>O</NumParent>
+				<PostNumParentQuest>-</PostNumParentQuest>
+				<StyleNumQuest>a</StyleNumQuest>
+				<PostNumQuest>. </PostNumQuest>
+			</Level>
+			<Level name="group">
+				<PreQuest></PreQuest>
+				<NumParent>O</NumParent>
+				<PostNumParentQuest />
+				<StyleNumQuest>1</StyleNumQuest>
+				<PostNumQuest>. </PostNumQuest>
+			</Level>
+		</Question>
+	</Title>
+	<!-- The list of languages to be charged in the generated form can be defined 
+		here. If this element is missing, the xml:lang attributes of the DDI file 
+		are used instead. -->
+	<Languages>
+		<Language>fr</Language>
+		<Language>en</Language>
+	</Languages>
 </Parameters>

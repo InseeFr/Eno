@@ -25,10 +25,9 @@ public class TestPoguesXMLToDDI {
 			GenerationService genService = new GenerationService(new PoguesXMLPreprocessor(), new PoguesXML2DDIGenerator(),
 					new DDIPostprocessor());
 			File in = new File(String.format("%s/in.xml", basePath));
-			File output = genService.generateQuestionnaire(in, null);
-			InputStream out = new FileInputStream(output);
-			String expectedFilePath = String.format("%s/out.xml", basePath);
-			Diff diff = xmlDiff.getDiff(out,expectedFilePath);
+			File outputFile = genService.generateQuestionnaire(in, null);
+			File expectedFile = new File(String.format("%s/out.xml", basePath));
+			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
 			
 		} catch (IOException e) {
@@ -38,12 +37,13 @@ public class TestPoguesXMLToDDI {
 			e.printStackTrace();
 			Assert.fail();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
+			Assert.fail();
 		}
 	}
 
 	private String getDiffMessage(Diff diff, String path) {
-		return String.format("Transformed output for %s should match expected DDI document:\n %s", path,
+		return String.format("Transformed output for %s should match expected XML document:\n %s", path,
 				diff.toString());
 	}
 }

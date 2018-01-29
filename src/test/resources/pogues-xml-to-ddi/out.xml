@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:g="ddi:group:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2" xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32" xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd" isMaintainable="true">
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="../../../src/main/resources/schema/eno-schema-draft-fb.sch" 
+            type="application/xml" 
+            schematypens="http://purl.oclc.org/dsdl/schematron"
+        ?><DDIInstance xmlns="ddi:instance:3_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:a="ddi:archive:3_2" xmlns:r="ddi:reusable:3_2" xmlns:s="ddi:studyunit:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:g="ddi:group:3_2" xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:l="ddi:logicalproduct:3_2" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32" xmlns:xhtml="http://www.w3.org/1999/xhtml" xsi:schemaLocation="ddi:instance:3_2 ../../../src/main/resources/schema/instance.xsd" isMaintainable="true">
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-i6vwid</r:ID>
    <r:Version>0.1.0</r:Version>
@@ -7,7 +10,7 @@
          <r:String>Questionnaire SIMPSONS</r:String>
       </r:Title>
    </r:Citation>
-   <g:ResourcePackage isMaintainable="true" versionDate="2018-01-15+01:00">
+   <g:ResourcePackage isMaintainable="true" versionDate="2018-01-25+01:00">
       <r:Agency>fr.insee</r:Agency>
       <r:ID>RessourcePackage-i6vwid</r:ID>
       <r:Version>0.1.0</r:Version>
@@ -164,27 +167,27 @@
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j3341528</r:ID>
+               <r:ID>d1e101</r:ID>
                <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Sequence</r:TypeOfObject>
+               <r:TypeOfObject>IfThenElse</r:TypeOfObject>
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qe0h9q</r:ID>
+               <r:ID>d1e157</r:ID>
                <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Sequence</r:TypeOfObject>
+               <r:TypeOfObject>IfThenElse</r:TypeOfObject>
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nw88h2</r:ID>
+               <r:ID>d1e426</r:ID>
                <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Sequence</r:TypeOfObject>
+               <r:TypeOfObject>IfThenElse</r:TypeOfObject>
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qfx9qe</r:ID>
+               <r:ID>d1e994</r:ID>
                <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Sequence</r:TypeOfObject>
+               <r:TypeOfObject>IfThenElse</r:TypeOfObject>
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
@@ -224,9 +227,9 @@
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p0s7o5</r:ID>
+               <r:ID>d1e42</r:ID>
                <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Sequence</r:TypeOfObject>
+               <r:TypeOfObject>IfThenElse</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Sequence>
          <d:Sequence>
@@ -467,6 +470,276 @@
                <r:ID>j6z0z3us-QC</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:IfThenElse>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e42</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:IfCondition>
+               <r:Command>
+                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>d1e42-IP-1</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">READY</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j6p0np9q-QOP-jbgd3set</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>d1e42-IP-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>not( d1e42-IP-1 != '1')</r:CommandContent>
+               </r:Command>
+            </d:IfCondition>
+            <d:ThenConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>d1e42-THEN</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ThenConstructReference>
+         </d:IfThenElse>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e42-THEN</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6p0s7o5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:IfThenElse>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e101</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:IfCondition>
+               <r:Command>
+                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>d1e101-IP-1</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">READY</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j6p0np9q-QOP-jbgd3set</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>d1e101-IP-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>not( d1e101-IP-1 != '1')</r:CommandContent>
+               </r:Command>
+            </d:IfCondition>
+            <d:ThenConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>d1e101-THEN</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ThenConstructReference>
+         </d:IfThenElse>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e101-THEN</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j3341528</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:IfThenElse>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e157</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:IfCondition>
+               <r:Command>
+                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>d1e157-IP-1</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">READY</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j6p0np9q-QOP-jbgd3set</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>d1e157-IP-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>not( d1e157-IP-1 != '1')</r:CommandContent>
+               </r:Command>
+            </d:IfCondition>
+            <d:ThenConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>d1e157-THEN</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ThenConstructReference>
+         </d:IfThenElse>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e157-THEN</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6qe0h9q</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:IfThenElse>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e426</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:IfCondition>
+               <r:Command>
+                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>d1e426-IP-1</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">READY</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j6p0np9q-QOP-jbgd3set</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>d1e426-IP-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>not( d1e426-IP-1 != '1')</r:CommandContent>
+               </r:Command>
+            </d:IfCondition>
+            <d:ThenConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>d1e426-THEN</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ThenConstructReference>
+         </d:IfThenElse>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e426-THEN</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nw88h2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:IfThenElse>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e994</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:IfCondition>
+               <r:Command>
+                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>d1e994-IP-1</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">READY</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j6p0np9q-QOP-jbgd3set</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>d1e994-IP-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>not( d1e994-IP-1 != '1')</r:CommandContent>
+               </r:Command>
+            </d:IfCondition>
+            <d:ThenConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>d1e994-THEN</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ThenConstructReference>
+         </d:IfThenElse>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e994-THEN</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6qfx9qe</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Sequence>
          <d:QuestionConstruct>
@@ -1082,6 +1355,21 @@
                </r:OutParameter>
                <r:ResponseCardinality maximumResponses="1"/>
             </d:NominalDomain>
+            <d:ExternalAid>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6p6my1d</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:Description>
+                  <r:Content>
+                     <xhtml:div class="FlowControl" id="j6p6my1d">
+                        <xhtml:div class="Description">If you are not ready, please go to the end of
+          the questionnaire</xhtml:div>
+                        <xhtml:div class="Expression">$READY != '1'</xhtml:div>
+                        <xhtml:div class="IfTrue">j6z12s2d</xhtml:div>
+                     </xhtml:div>
+                  </r:Content>
+               </r:Description>
+            </d:ExternalAid>
          </d:QuestionItem>
          <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
@@ -1971,6 +2259,12 @@
                   </d:GridAttachment>
                </d:GridResponseDomain>
             </d:StructuredMixedGridResponseDomain>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>d12</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
          </d:QuestionGrid>
          <d:QuestionGrid>
             <r:Agency>fr.insee</r:Agency>
@@ -6208,7 +6502,7 @@
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
-      <l:CodeListScheme xmlns="ddi:instance:3_2">
+      <l:CodeListScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>SIMPSONS-CLS</r:ID>
          <r:Version>0.1.0</r:Version>
@@ -6873,30 +7167,30 @@
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
                <r:Value>A</r:Value>
-               <l:Code levelNumber="2" isDiscrete="true">
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-0</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-0</r:ID>
+                  <r:ID>CA-j4nwh16i-0</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-0</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>A1</r:Value>
-               </l:Code>
-               <l:Code levelNumber="2" isDiscrete="true">
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>A1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-1</r:ID>
+                  <r:ID>CA-j4nwh16i-1</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-1</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>A2</r:Value>
-               </l:Code>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>A2</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="false">
                <r:Agency>fr.insee</r:Agency>
@@ -6909,42 +7203,42 @@
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
                <r:Value>B</r:Value>
-               <l:Code levelNumber="2" isDiscrete="true">
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-3</r:ID>
+                  <r:ID>CA-j4nwh16i-3</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-3</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>B1</r:Value>
-               </l:Code>
-               <l:Code levelNumber="2" isDiscrete="true">
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>B1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-4</r:ID>
+                  <r:ID>CA-j4nwh16i-4</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-4</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>B2</r:Value>
-               </l:Code>
-               <l:Code levelNumber="2" isDiscrete="true">
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>B2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-5</r:ID>
+                  <r:ID>CA-j4nwh16i-5</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-5</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>B3</r:Value>
-               </l:Code>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>B3</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="false">
                <r:Agency>fr.insee</r:Agency>
@@ -6957,18 +7251,18 @@
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
                <r:Value>C</r:Value>
-               <l:Code levelNumber="2" isDiscrete="true">
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-7</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-7</r:ID>
+                  <r:ID>CA-j4nwh16i-7</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-7</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>C1</r:Value>
-               </l:Code>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>C1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
