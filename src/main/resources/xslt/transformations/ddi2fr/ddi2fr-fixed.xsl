@@ -98,9 +98,7 @@
         <xsl:if test="contains(substring-after($static-text-content,$conditioning-variable-begin),$conditioning-variable-end)">
             <!-- doesn't work : takes all the ConditionalText in the questionnaire... -->
             <xsl:variable name="condition-variables">
-                <conditions>
-                    <xsl:copy-of select="$context/descendant::d:ConditionalText"/>
-                </conditions>
+                <xsl:sequence select="enoddi:get-label-conditioner($context,$language)"/>
             </xsl:variable>
 
             <xsl:variable name="calculated-text">
@@ -140,39 +138,32 @@
                     <!-- conditionalText doesn't exist for the element in the DDI structure or it exists and references the variable -->
                     <xsl:when test="not($condition-variables//text())">
                         <xsl:value-of select="$instance-ancestor"/>
-                        <!--<xsl:text>instance('fr-form-instance')//</xsl:text>-->
-                        <!-- TODO : add the elements that will show which variable to use when it is in a loop -->
                         <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
                     </xsl:when>
                     <!-- conditionalText exists and references the variable -->
                     <xsl:when test="index-of($condition-variables//r:SourceParameterReference//r:ID,
                         substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) >0">
                         <xsl:value-of select="$instance-ancestor"/>
-                        <!--<xsl:text>instance('fr-form-instance')//</xsl:text>-->
-                        <!-- TODO : add the elements that will show which variable to use when it is in a loop -->
                         <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
                     </xsl:when>
                     <!-- conditionalText contains the calculation of the variable -->
                     <xsl:when test="index-of($condition-variables//d:Expression/r:Command/r:OutParameter/r:ID,
                         substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) >0">
-                        <xsl:value-of select="replace(
+                        <xsl:value-of select="replace(replace(
                             $condition-variables//d:Expression/r:Command
                                                                         [r:OutParameter/r:ID=substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)]
                                                                         /r:CommandContent,
-                                                                        '[^\]]//',concat($instance-ancestor,'//'))"/>
+                                                                        '//',$instance-ancestor),
+                                                                        concat('\]',$instance-ancestor),']//')"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <!-- conditionalText exists, but the variable is not in it -->
-                        <!--<xsl:text>'</xsl:text>
+                        <xsl:text>'</xsl:text>
                         <xsl:value-of select="concat($conditioning-variable-begin,
                             replace(substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end),'''',''''''),
                             $conditioning-variable-end)"/>
                         <xsl:text>'</xsl:text>
-                        <xsl:copy-of select="$condition-variables"></xsl:copy-of>-->
-                        <!-- Until I discover how to create $condition-variables properly -->
-                        <xsl:value-of select="$instance-ancestor"/>
-                        <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
-                        
+                        <xsl:value-of select="eno:serialize($condition-variables)"/>
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:call-template name="enoddi2fr:calculate-text">
