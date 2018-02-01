@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="enoPogues-xml2DDI" basedir="." default="pogues-xml2ddi">
+<project name="enoPogues-xml2DDI" basedir="." default="pogues-xml2ddi2">
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
     <import file="build-non-regression.xml"/>
@@ -12,12 +12,13 @@
     <target name="pogues-xml2ddi" depends="ENOPreprocessingPogues-xml2ddi">
                 
         <antcall target="Pogues-xmlPreProcessing">
-            <param name="input-file" value="${survey-folder}/pogues-xml/${survey-name}.xml"/>
-            <param name="output-file" value="${survey-folder}/pogues-xml/${survey-name}-tmp.xml"/>
+            <param name="input-file" value="${survey-folder}/pogues-xml/${survey-name}"/>
+            <param name="output-file" value="${survey-folder}/pogues-xml/${survey-name}-ready"/>
+            <param name="file-extension" value="xml"/>
         </antcall>  
                
         <!-- Generating xforms from the DDI : basic-form.tmp using the pogues-xml2ddi.xsl stylesheet -->
-        <xslt in="${survey-folder}/pogues-xml/${survey-name}-tmp.xml"
+        <xslt in="${survey-folder}/pogues-xml/${survey-name}-ready.xml"
             out="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO.xml"
             style="${xslt.home}/transformations/pogues-xml2ddi/pogues-xml2ddi.xsl" force="true"
             classpath="${saxon.jar}">
@@ -31,10 +32,16 @@
     </target>
     
     <!-- Secondary Target without EnoPreprocessing -->
-    <target name="pogues-xml2ddi2" >                
+    <target name="pogues-xml2ddi2" >     
+        
+        <antcall target="Pogues-xmlPreProcessing">
+            <param name="input-file" value="${survey-folder}/pogues-xml/${survey-name}"/>
+            <param name="output-file" value="${survey-folder}/pogues-xml/${survey-name}-ready"/>
+            <param name="file-extension" value="xml"/>
+        </antcall>
         
         <!-- Generating xforms from the DDI : basic-form.tmp using the pogues-xml2ddi.xsl stylesheet -->
-        <xslt in="${survey-folder}/pogues-xml/${survey-name}-tmp.xml"
+        <xslt in="${survey-folder}/pogues-xml/${survey-name}-ready.xml"
             out="${root-folder}/target/${survey-name}/ddi-test/${survey-name}-outBO.xml"
             style="${xslt.home}/transformations/pogues-xml2ddi/pogues-xml2ddi.xsl" force="true"
             classpath="${saxon.jar}">
@@ -112,9 +119,14 @@
   
     <target name="Pogues-xmlPreProcessing">               
         
-        <xslt in="${input-file}"
-            out="${output-file}"
+        <xslt in="${input-file}.${file-extension}"
+            out="${input-file}-tmp.${file-extension}"
             style="${xslt.home}/util/pogues-xml/2suppressionGoto.xsl" classpath="${saxon.jar}" force="true">
+        </xslt>
+        
+        <xslt in="${input-file}-tmp.${file-extension}"
+            out="${output-file}.${file-extension}"
+            style="${xslt.home}/util/pogues-xml/tweak-to-merge-equivalent-ite.xsl" classpath="${saxon.jar}" force="true">
         </xslt>
         
     </target>
