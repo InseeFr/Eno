@@ -60,11 +60,7 @@
                     <r:ID><xsl:value-of select="concat('InterviewerInstructionScheme-', enoddi32:get-id($source-context))"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>
-                    <!--<xsl:apply-templates select="enoddi32:get-instructions($source-context) | enoddi32:get-controls($source-context)" mode="source">
-                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionScheme', .)" tunnel="yes"/>
-                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-                    </xsl:apply-templates>-->
-                    <xsl:apply-templates select="enoddi32:get-instructions($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi32:get-instructions($source-context) | enoddi32:get-controls($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -336,8 +332,7 @@
         </xsl:if>
     </xsl:template>
 
-    <!--<xsl:template match="driver-InterviewerInstructionScheme//*[name() = ('Instruction','Control')]" mode="model">-->
-    <xsl:template match="driver-InterviewerInstructionScheme//Instruction" mode="model">
+    <xsl:template match="driver-InterviewerInstructionScheme//*[name() = ('Instruction','Control')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:Instruction>
@@ -650,19 +645,12 @@
             </r:Description>
             <!-- If it's a control, an instruction would be generated, if it's a mandatory response, the instruction is not generated, it's handled by the output format. -->
             <xsl:if test="self::Control">
-                <!--<d:InterviewerInstructionReference>
+                <d:InterviewerInstructionReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="enoddi32:get-generated-instruction-id($source-context)"/></r:ID>
                     <r:Version>0.1.0</r:Version>
                     <r:TypeOfObject>Instruction</r:TypeOfObject>
-                </d:InterviewerInstructionReference>-->
-                <d:DisplayText>
-                    <d:LiteralText>
-                        <d:Text xml:lang="{enoddi32:get-lang($source-context)}">
-                            <xsl:value-of select="enoddi32:get-instruction-text($source-context)"/>
-                        </d:Text>
-                    </d:LiteralText>
-                </d:DisplayText>
+                </d:InterviewerInstructionReference>
             </xsl:if>
             <!-- Have a simpler way to deal with regular controls & mandatory response. -->
             <!-- An apply-templates on Expression will Output CommandeCode for Regular Control. -->
