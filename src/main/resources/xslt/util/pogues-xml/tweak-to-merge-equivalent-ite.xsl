@@ -10,6 +10,8 @@
         The expected output is the minimum of IfThenElse.
         So this stylesheet merges consecutive pogues:IfThenElse whith the exact same pogues:Expression.    
     -->
+    
+    <!-- Copying. -->
     <xsl:template match="/ | *" mode="#all">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
@@ -21,15 +23,8 @@
         <xsl:copy-of select="."/>
     </xsl:template>
     
+    <!-- ITE with an equivalent ITE (aka same Expression) as the first preceding-sibling => Skipped. It's handled by the first ITE of the "equivalent class". -->
     <xsl:template match="pogues:IfThenElse[preceding-sibling::*[1][self::pogues:IfThenElse/pogues:Expression = current()/pogues:Expression]]"/>
-        
-
-    <xsl:template match="pogues:IfThenElse[not(preceding-sibling::*[1][self::pogues:IfThenElse/pogues:Expression = current()/pogues:Expression])][following-sibling::*[1][self::pogues:IfThenElse/pogues:Expression = current()/pogues:Expression]]">
-        <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="node()"/>
-        </xsl:copy>        
-    </xsl:template>
     
     <xsl:template match="pogues:IfThenElse/pogues:IfTrue">
         <xsl:copy>
