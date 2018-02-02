@@ -590,6 +590,9 @@
             <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">
                 <xsl:value-of select="enoddi32:get-sequence-type($source-context)"/>
             </d:TypeOfSequence>
+            <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
@@ -874,9 +877,11 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject><xsl:value-of select="enoddi32:get-reference-element-name($source-context)"/></r:TypeOfObject>
         </d:ControlConstructReference>
-        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
-            <xsl:with-param name="driver" select="." tunnel="yes"/>
-        </xsl:apply-templates>                    
+        <xsl:if test="not(name()=('Sequence','IfThenElse'))">
+            <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:if>
     </xsl:template>
    
     <xsl:template match="QuestionSimple//ResponseDomain" mode="model" priority="1">
