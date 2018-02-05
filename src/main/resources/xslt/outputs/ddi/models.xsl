@@ -60,7 +60,7 @@
                     <r:ID><xsl:value-of select="concat('InterviewerInstructionScheme-', enoddi32:get-id($source-context))"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>
-                    <xsl:apply-templates select="enoddi32:get-instructions($source-context) | enoddi32:get-controls($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi32:get-instructions($source-context)[not(enoddi32:get-position(.) = 'BEFORE_QUESTION_TEXT')] | enoddi32:get-controls($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -590,6 +590,9 @@
             <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">
                 <xsl:value-of select="enoddi32:get-sequence-type($source-context)"/>
             </d:TypeOfSequence>
+            <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
@@ -623,9 +626,16 @@
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-si-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <xsl:apply-templates select="$source-context" mode="source">
+                <!--<xsl:apply-templates select="$source-context" mode="source">
                     <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference',.)" tunnel="yes"/>
-                </xsl:apply-templates>
+                </xsl:apply-templates>-->
+            <d:DisplayText>
+                <d:LiteralText>
+                    <d:Text xml:lang="{enoddi32:get-lang($source-context)}">
+                        <xsl:value-of select="enoddi32:get-instruction-text($source-context)"/>
+                    </d:Text>
+                </d:LiteralText>
+            </d:DisplayText>
         </d:StatementItem>
     </xsl:template>
     
@@ -867,9 +877,11 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject><xsl:value-of select="enoddi32:get-reference-element-name($source-context)"/></r:TypeOfObject>
         </d:ControlConstructReference>
-        <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
-            <xsl:with-param name="driver" select="." tunnel="yes"/>
-        </xsl:apply-templates>                    
+        <xsl:if test="not(name()=('Sequence','IfThenElse'))">
+            <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:if>
     </xsl:template>
    
     <xsl:template match="QuestionSimple//ResponseDomain" mode="model" priority="1">

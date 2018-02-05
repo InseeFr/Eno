@@ -7,14 +7,15 @@
     <!-- 
         *************************** Tweak-xhtml-for-ddi for ENO **************************************
         This stylesheet is used as a tweak to fit a very specific DDI pattern representing footnote for ENO.
-        The syntax expected as input is : <xhtml:a href=". \"Some Footnote Text\"">Some other Text<xhtml:a>.
+        The syntax expected as input is : <xhtml:a href=". "Some Footnote Text" ">Some other Text<xhtml:a>.
         The syntax expected as output is : Some Other Text<xhtml:a href="#ftn{index}"/>, whith an d:Instruction generated containing <xhtml:p id="ftn{index}">Some Footnote Text"</xhtml:p> as InstructionText.
         All other elements not matching this syntax is simply copied untouched.               
     -->
     
     
     <!-- Defining what is an xhtml:a 'footnote'. -->
-    <xsl:key name="is-footnote" match="xhtml:a" use="if(@href) then(matches(@href,'^\.\s\\&quot;.+\\&quot;')) else(false())"/>
+   <!-- <xsl:key name="is-footnote" match="xhtml:a" use="if(@href) then(matches(@href,'^\.\s\\&quot;.+\\&quot;')) else(false())"/>-->
+    <xsl:key name="is-footnote" match="xhtml:a" use="if(@href) then(matches(@href,'^\.\s&quot;.+&quot;')) else(false())"/>
     
     <!-- Standard identity pattern. -->
     <xsl:template match="*">
@@ -78,8 +79,8 @@
                             <d:Text xml:lang="{$lang}">
                                 <!-- The id referenced by the xhtml:a is the id of the xhtml:p. -->
                                 <xhtml:p id="{$id}">
-                                    <!-- Keeping in @href only the sequence between escaped quotes (\") as InstructionText-->
-                                    <xsl:analyze-string select="@href" regex="\\&quot;(.+)\\&quot;">
+                                    <!-- Keeping in @href only the sequence between quotes (") as InstructionText-->
+                                    <xsl:analyze-string select="@href" regex="&quot;(.+)&quot;">
                                         <xsl:matching-substring>
                                             <xsl:copy-of select="regex-group(1)"/>
                                         </xsl:matching-substring>
