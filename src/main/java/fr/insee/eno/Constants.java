@@ -50,6 +50,7 @@ public final class Constants {
 	public static final String PARAMETERS_FILE = "/" + PARAMETERS_XML;
 	public static final String UTIL_DDI_TITLING_XSL = UTIL_FOLDER_PATH + "/ddi/titling.xsl";
 	public static final String UTIL_POGUES_XML_SUPP_GOTO_XSL = UTIL_FOLDER_PATH + "/pogues-xml/2suppressionGoto.xsl";
+	public static final String UTIL_POGUES_XML_MERGE_ITE_XSL = UTIL_FOLDER_PATH + "/pogues-xml/tweak-to-merge-equivalent-ite.xsl";
 	public static final String UTIL_DDI_MW2XHTML_XSL = UTIL_FOLDER_PATH + "/ddi/mw2xhtml.xsl";
 	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = UTIL_FOLDER_PATH + "/ddi/tweak-xhtml-for-ddi.xsl";
 	public static final String UTIL_DDI_CLEANING_XSL = UTIL_FOLDER_PATH + "/ddi/cleaning.xsl";
@@ -212,6 +213,7 @@ public final class Constants {
 	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
 	public static final String MW_EXTENSION = "-mw.tmp";
 	public static final String FINAL_EXTENSION = "-final.tmp";
+	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
 	public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
 	public static final String TEMP_ODT_FOLDER = SUB_TEMP_FOLDER + "/odt";
