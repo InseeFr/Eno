@@ -2088,6 +2088,12 @@
                   </d:GridAttachment>
                </d:GridResponseDomain>
             </d:StructuredMixedGridResponseDomain>
+            <d:InterviewerInstructionReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>d12</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Instruction</r:TypeOfObject>
+            </d:InterviewerInstructionReference>
          </d:QuestionGrid>
          <d:QuestionGrid>
             <r:Agency>fr.insee</r:Agency>
@@ -6990,30 +6996,30 @@
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
                <r:Value>A</r:Value>
-               <l:Code levelNumber="2" isDiscrete="true">
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-0</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-0</r:ID>
+                  <r:ID>CA-j4nwh16i-0</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-0</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>A1</r:Value>
-               </l:Code>
-               <l:Code levelNumber="2" isDiscrete="true">
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>A1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-1</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-1</r:ID>
+                  <r:ID>CA-j4nwh16i-1</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-1</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>A2</r:Value>
-               </l:Code>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>A2</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="false">
                <r:Agency>fr.insee</r:Agency>
@@ -7026,42 +7032,42 @@
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
                <r:Value>B</r:Value>
-               <l:Code levelNumber="2" isDiscrete="true">
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-3</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-3</r:ID>
+                  <r:ID>CA-j4nwh16i-3</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-3</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>B1</r:Value>
-               </l:Code>
-               <l:Code levelNumber="2" isDiscrete="true">
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>B1</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-4</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-4</r:ID>
+                  <r:ID>CA-j4nwh16i-4</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-4</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>B2</r:Value>
-               </l:Code>
-               <l:Code levelNumber="2" isDiscrete="true">
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>B2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-5</r:ID>
+                  <r:ID>CA-j4nwh16i-5</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-5</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>B3</r:Value>
-               </l:Code>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>B3</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="false">
                <r:Agency>fr.insee</r:Agency>
@@ -7074,18 +7080,18 @@
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
                <r:Value>C</r:Value>
-               <l:Code levelNumber="2" isDiscrete="true">
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-7</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-7</r:ID>
+                  <r:ID>CA-j4nwh16i-7</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-7</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>C1</r:Value>
-               </l:Code>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>C1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
