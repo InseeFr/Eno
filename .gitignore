@@ -1,5 +1,8 @@
 # Ignore generated questionnaies
 target/
+
+# Ignore temp generated files
+*.tmp
  
 # Ignore java libraries
 lib/

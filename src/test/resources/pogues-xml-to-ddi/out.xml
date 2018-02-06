@@ -43,7 +43,8 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">For your information, the date of the last broadcast was on øLAST_BROADCASTø</d:Text>
+                  <d:Text xml:lang="fr-FR">For your information, the date of the last broadcast was on
+						øLAST_BROADCASTø</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -108,7 +109,8 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of percentages must be equal to 100%.</d:Text>
+                  <d:Text xml:lang="fr-FR">The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of
+						percentages must be equal to 100%.</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
@@ -129,11 +131,11 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Several answers possible: check off all the relevant boxes</d:Text>
+                  <d:Text xml:lang="fr-FR">Several answers possible: check off all the relevant boxes </d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
-      </d:InterviewerInstructionScheme>
+      <d:Instruction><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>0.1.0</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR"><xhtml:p id="ftn1">Included principalities</xhtml:p></d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
       <d:ControlConstructScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>ControlConstructScheme-i6vwid</r:ID>
@@ -1058,7 +1060,10 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1) + number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2) + number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3) + number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4) + number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5) + number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6) + number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7) + number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8) + number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9) + number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10) != 100</r:CommandContent>
+                  <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1) + number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2) +
+						number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3) + number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4) + number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5) +
+						number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6) + number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7) + number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8) +
+						number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9) + number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10) != 100 </r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <!--<r:TypeOfComputationItem>error</r:TypeOfComputationItem>-->
@@ -1186,8 +1191,8 @@
                <r:Description>
                   <r:Content>
                      <xhtml:div class="FlowControl" id="j6p6my1d">
-                        <xhtml:div class="Description">If you are not ready, please go to the end of
-          the questionnaire</xhtml:div>
+                        <xhtml:div class="Description">If you are not ready, please go to the end of the
+					questionnaire</xhtml:div>
                         <xhtml:div class="Expression">$READY != '1'</xhtml:div>
                         <xhtml:div class="IfTrue">j6z12s2d</xhtml:div>
                      </xhtml:div>
@@ -1375,7 +1380,7 @@
             <d:QuestionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">In your opinion, how much is the part of audience share in US for the 2016
-          season?</d:Text>
+					season? </d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NumericDomain decimalPositions="1">
@@ -2083,12 +2088,6 @@
                   </d:GridAttachment>
                </d:GridResponseDomain>
             </d:StructuredMixedGridResponseDomain>
-            <d:InterviewerInstructionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>d12</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Instruction</r:TypeOfObject>
-            </d:InterviewerInstructionReference>
          </d:QuestionGrid>
          <d:QuestionGrid>
             <r:Agency>fr.insee</r:Agency>
@@ -2838,7 +2837,7 @@
             <d:QuestionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each
-          product?</d:Text>
+					product? </d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -3249,7 +3248,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Who did these clownings and tell us what you remember?</d:Text>
+                  <d:Text xml:lang="fr-FR">Who did these clownings and tell us what you remember? </d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -4001,7 +4000,7 @@
             <d:QuestionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">Which of the following means of transport were used by the hero and in which
-          country?</d:Text>
+					country? </d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -6234,7 +6233,7 @@
             <r:ID>CA-jbdye1wa-3</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:a href=". \&#34;Included principalities\&#34;">Other country</xhtml:a></xhtml:p></r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p>Other country<xhtml:a href="#ftn1"/></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -6991,30 +6990,30 @@
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
                <r:Value>A</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwh16i-0</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:CategoryReference>
+               <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwh16i-0</r:ID>
+                  <r:ID>j4nwh16i-0</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>A1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwh16i-1</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:CategoryReference>
+                  <r:CategoryReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>CA-j4nwh16i-0</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>Category</r:TypeOfObject>
+                  </r:CategoryReference>
+                  <r:Value>A1</r:Value>
+               </l:Code>
+               <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwh16i-1</r:ID>
+                  <r:ID>j4nwh16i-1</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>A2</r:Value>
+                  <r:CategoryReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>CA-j4nwh16i-1</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>Category</r:TypeOfObject>
+                  </r:CategoryReference>
+                  <r:Value>A2</r:Value>
+               </l:Code>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="false">
                <r:Agency>fr.insee</r:Agency>
@@ -7027,42 +7026,42 @@
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
                <r:Value>B</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwh16i-3</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:CategoryReference>
+               <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwh16i-3</r:ID>
+                  <r:ID>j4nwh16i-3</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>B1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwh16i-4</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:CategoryReference>
+                  <r:CategoryReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>CA-j4nwh16i-3</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>Category</r:TypeOfObject>
+                  </r:CategoryReference>
+                  <r:Value>B1</r:Value>
+               </l:Code>
+               <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwh16i-4</r:ID>
+                  <r:ID>j4nwh16i-4</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>B2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwh16i-5</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:CategoryReference>
+                  <r:CategoryReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>CA-j4nwh16i-4</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>Category</r:TypeOfObject>
+                  </r:CategoryReference>
+                  <r:Value>B2</r:Value>
+               </l:Code>
+               <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwh16i-5</r:ID>
+                  <r:ID>j4nwh16i-5</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>B3</r:Value>
+                  <r:CategoryReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>CA-j4nwh16i-5</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>Category</r:TypeOfObject>
+                  </r:CategoryReference>
+                  <r:Value>B3</r:Value>
+               </l:Code>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="false">
                <r:Agency>fr.insee</r:Agency>
@@ -7075,18 +7074,18 @@
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
                <r:Value>C</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwh16i-7</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:CategoryReference>
+               <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwh16i-7</r:ID>
+                  <r:ID>j4nwh16i-7</r:ID>
                   <r:Version>0.1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>C1</r:Value>
+                  <r:CategoryReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>CA-j4nwh16i-7</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>Category</r:TypeOfObject>
+                  </r:CategoryReference>
+                  <r:Value>C1</r:Value>
+               </l:Code>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -8409,7 +8408,7 @@
                <r:String xml:lang="fr-FR">CLOWNING21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Loose the violin of his daughter playing poker-Clowning</r:Content>
+               <r:Content xml:lang="fr-FR">Loose the violin of his daughter playing poker-Clowning </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8505,7 +8504,7 @@
                <r:String xml:lang="fr-FR">CLOWNING22</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Loose the violin of his daughter playing poker-Remember?</r:Content>
+               <r:Content xml:lang="fr-FR">Loose the violin of his daughter playing poker-Remember? </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -10003,7 +10002,10 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1) + number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2) + number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3) + number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4) + number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5) + number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6) + number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7) + number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8) + number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9) + number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10)</r:CommandContent>
+                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1) + number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2) + number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3) +
+				number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4) + number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5) + number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6) +
+				number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7) + number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8) + number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9) +
+				number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10) </r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <d:ControlConstructReference>

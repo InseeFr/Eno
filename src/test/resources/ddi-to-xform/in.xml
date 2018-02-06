@@ -1,17 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xmlns:g="ddi:group:3_2"
-             xmlns:d="ddi:datacollection:3_2"
-             xmlns:s="ddi:studyunit:3_2"
-             xmlns:r="ddi:reusable:3_2"
-             xmlns:xhtml="http://www.w3.org/1999/xhtml"
-             xmlns:a="ddi:archive:3_2"
-             xmlns:l="ddi:logicalproduct:3_2"
-             xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-             xmlns:eno="http://xml.insee.fr/apps/eno"
-             xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
-             xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd"
-             isMaintainable="true">
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="../../../src/main/resources/schema/eno-schema-draft-fb.sch" 
+            type="application/xml" 
+            schematypens="http://purl.oclc.org/dsdl/schematron"
+        ?><DDIInstance xmlns="ddi:instance:3_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:a="ddi:archive:3_2" xmlns:r="ddi:reusable:3_2" xmlns:s="ddi:studyunit:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:g="ddi:group:3_2" xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:l="ddi:logicalproduct:3_2" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32" xmlns:xhtml="http://www.w3.org/1999/xhtml" xsi:schemaLocation="ddi:instance:3_2 ../../../src/main/resources/schema/instance.xsd" isMaintainable="true">
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-i6vwid</r:ID>
    <r:Version>0.1.0</r:Version>
@@ -20,7 +10,7 @@
          <r:String>Questionnaire SIMPSONS</r:String>
       </r:Title>
    </r:Citation>
-   <g:ResourcePackage isMaintainable="true" versionDate="2018-01-16+01:00">
+   <g:ResourcePackage isMaintainable="true" versionDate="2018-01-25+01:00">
       <r:Agency>fr.insee</r:Agency>
       <r:ID>RessourcePackage-i6vwid</r:ID>
       <r:Version>0.1.0</r:Version>
@@ -40,7 +30,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">We're going to test your knowledge about the simpsons series.\n**Welcome in the simspons world!**</d:Text>
+                  <d:Text xml:lang="fr-FR"><xhtml:p xmlns="">We're going to test your knowledge about the simpsons series.<xhtml:br/><xhtml:b>Welcome in the simspons world!</xhtml:b></xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -53,7 +43,8 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">For your information, the date of the last broadcast was on øLAST_BROADCASTø</d:Text>
+                  <d:Text xml:lang="fr-FR">For your information, the date of the last broadcast was on
+						øLAST_BROADCASTø</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -105,20 +96,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">*Several possible answers*</d:Text>
-               </d:LiteralText>
-            </d:InstructionText>
-         </d:Instruction>
-         <d:Instruction>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>d12</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <d:InstructionName>
-               <r:String xml:lang="fr-FR">comment</r:String>
-            </d:InstructionName>
-            <d:InstructionText>
-               <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">**Now we are going to know if you think that Jay is a gluton.**</d:Text>
+                  <d:Text xml:lang="fr-FR"><xhtml:p xmlns=""><xhtml:i>Several possible answers</xhtml:i></xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -131,7 +109,8 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of percentages must be equal to 100%.</d:Text>
+                  <d:Text xml:lang="fr-FR">The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of
+						percentages must be equal to 100%.</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
@@ -152,11 +131,11 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Several answers possible: check off all the relevant boxes</d:Text>
+                  <d:Text xml:lang="fr-FR">Several answers possible: check off all the relevant boxes </d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
-      </d:InterviewerInstructionScheme>
+      <d:Instruction xmlns=""><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>0.1.0</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR"><xhtml:p id="ftn1">Included principalities</xhtml:p></d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
       <d:ControlConstructScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>ControlConstructScheme-i6vwid</r:ID>
@@ -177,27 +156,9 @@
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j3341528</r:ID>
+               <r:ID>d1e101</r:ID>
                <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Sequence</r:TypeOfObject>
-            </d:ControlConstructReference>
-            <d:ControlConstructReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qe0h9q</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Sequence</r:TypeOfObject>
-            </d:ControlConstructReference>
-            <d:ControlConstructReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nw88h2</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Sequence</r:TypeOfObject>
-            </d:ControlConstructReference>
-            <d:ControlConstructReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qfx9qe</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Sequence</r:TypeOfObject>
+               <r:TypeOfObject>IfThenElse</r:TypeOfObject>
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
@@ -237,9 +198,9 @@
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p0s7o5</r:ID>
+               <r:ID>d1e42</r:ID>
                <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Sequence</r:TypeOfObject>
+               <r:TypeOfObject>IfThenElse</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Sequence>
          <d:Sequence>
@@ -480,6 +441,132 @@
                <r:ID>j6z0z3us-QC</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:IfThenElse>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e42</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:IfCondition>
+               <r:Command>
+                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>d1e42-IP-1</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">READY</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j6p0np9q-QOP-jbgd3set</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>d1e42-IP-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>not( d1e42-IP-1 != '1')</r:CommandContent>
+               </r:Command>
+            </d:IfCondition>
+            <d:ThenConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>d1e42-THEN</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ThenConstructReference>
+         </d:IfThenElse>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e42-THEN</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6p0s7o5</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+         </d:Sequence>
+         <d:IfThenElse>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e101</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:IfCondition>
+               <r:Command>
+                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>d1e101-IP-1</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">READY</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j6p0np9q-QOP-jbgd3set</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>d1e101-IP-1</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>not( d1e101-IP-1 != '1')</r:CommandContent>
+               </r:Command>
+            </d:IfCondition>
+            <d:ThenConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>d1e101-THEN</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ThenConstructReference>
+         </d:IfThenElse>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>d1e101-THEN</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR"/>
+            </r:Label>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j3341528</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6qe0h9q</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nw88h2</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6qfx9qe</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
          </d:Sequence>
          <d:QuestionConstruct>
@@ -973,21 +1060,22 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1) + number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2) + number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3) + number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4) + number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5) + number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6) + number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7) + number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8) + number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9) + number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10) != 100</r:CommandContent>
+                  <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1) + number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2) +
+						number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3) + number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4) + number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5) +
+						number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6) + number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7) + number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8) +
+						number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9) + number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10) != 100 </r:CommandContent>
                </r:Command>
             </r:CommandCode>
-            <!--<r:TypeOfComputationItem>error</r:TypeOfComputationItem>-->
-         </d:ComputationItem>
+            <!--<r:TypeOfComputationItem>error</r:TypeOfComputationItem>--></d:ComputationItem>
          <d:StatementItem>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>d12-SI</r:ID>
             <r:Version>0.1.0</r:Version>
-            <d:InterviewerInstructionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>d12</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Instruction</r:TypeOfObject>
-            </d:InterviewerInstructionReference>
+            <d:DisplayText>
+               <d:LiteralText>
+                  <d:Text xml:lang="fr-FR"><xhtml:p><xhtml:b>Now we are going to know if you think that Jay is a gluton.</xhtml:b></xhtml:p></d:Text>
+               </d:LiteralText>
+            </d:DisplayText>
          </d:StatementItem>
       </d:ControlConstructScheme>
       <d:QuestionScheme>
@@ -1095,6 +1183,21 @@
                </r:OutParameter>
                <r:ResponseCardinality maximumResponses="1"/>
             </d:NominalDomain>
+            <d:ExternalAid>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6p6my1d</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:Description>
+                  <r:Content>
+                     <xhtml:div class="FlowControl" id="j6p6my1d">
+                        <xhtml:div class="Description">If you are not ready, please go to the end of the
+					questionnaire</xhtml:div>
+                        <xhtml:div class="Expression">$READY != '1'</xhtml:div>
+                        <xhtml:div class="IfTrue">j6z12s2d</xhtml:div>
+                     </xhtml:div>
+                  </r:Content>
+               </r:Description>
+            </d:ExternalAid>
          </d:QuestionItem>
          <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
@@ -1276,7 +1379,7 @@
             <d:QuestionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">In your opinion, how much is the part of audience share in US for the 2016
-          season?</d:Text>
+					season? </d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:NumericDomain decimalPositions="1">
@@ -2733,7 +2836,7 @@
             <d:QuestionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each
-          product?</d:Text>
+					product? </d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -3144,7 +3247,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Who did these clownings and tell us what you remember?</d:Text>
+                  <d:Text xml:lang="fr-FR">Who did these clownings and tell us what you remember? </d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -3896,7 +3999,7 @@
             <d:QuestionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">Which of the following means of transport were used by the hero and in which
-          country?</d:Text>
+					country? </d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
@@ -5077,10 +5180,7 @@
                </d:LiteralText>
             </d:QuestionText>
             <d:GridDimension displayCode="false" displayLabel="false" rank="1">
-               <d:Roster baseCodeValue="1"
-                         codeIterationValue="1"
-                         minimumRequired="1"
-                         maximumAllowed="10"/>
+               <d:Roster baseCodeValue="1" codeIterationValue="1" minimumRequired="1" maximumAllowed="10"/>
             </d:GridDimension>
             <d:GridDimension displayCode="false" displayLabel="false" rank="2">
                <d:CodeDomain>
@@ -5980,7 +6080,7 @@
             <r:ID>CA-j77dav9b--1</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">***Break the windows of the whole city***</r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Break the windows of the whole city</xhtml:i></xhtml:b></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -5988,7 +6088,7 @@
             <r:ID>CA-j77dav9b-0</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">***Loose the violin of his daughter playing poker***</r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Loose the violin of his daughter playing poker</xhtml:i></xhtml:b></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -5996,7 +6096,7 @@
             <r:ID>CA-j77dav9b-1</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">***Kill Mr Burns***</r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Kill Mr Burns</xhtml:i></xhtml:b></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -6004,7 +6104,7 @@
             <r:ID>CA-j77dav9b-2</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">***Leaving a mechanical object to control the nuclear power plant***</r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Leaving a mechanical object to control the nuclear power plant</xhtml:i></xhtml:b></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
@@ -6132,7 +6232,7 @@
             <r:ID>CA-jbdye1wa-3</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">[Other country](. \"Included principalities\")</r:Content>
+               <r:Content xml:lang="fr-FR"><xhtml:p>Other country<xhtml:a href="#ftn1"/></xhtml:p></r:Content>
             </r:Label>
          </l:Category>
          <l:Category>
@@ -6224,7 +6324,7 @@
             </r:Label>
          </l:Category>
       </l:CategoryScheme>
-      <l:CodeListScheme xmlns="ddi:instance:3_2">
+      <l:CodeListScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>SIMPSONS-CLS</r:ID>
          <r:Version>0.1.0</r:Version>
@@ -8307,7 +8407,7 @@
                <r:String xml:lang="fr-FR">CLOWNING21</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Loose the violin of his daughter playing poker-Clowning</r:Content>
+               <r:Content xml:lang="fr-FR">Loose the violin of his daughter playing poker-Clowning </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -8403,7 +8503,7 @@
                <r:String xml:lang="fr-FR">CLOWNING22</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Loose the violin of his daughter playing poker-Remember?</r:Content>
+               <r:Content xml:lang="fr-FR">Loose the violin of his daughter playing poker-Remember? </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9901,7 +10001,10 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1) + number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2) + number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3) + number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4) + number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5) + number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6) + number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7) + number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8) + number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9) + number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10)</r:CommandContent>
+                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1) + number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2) + number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3) +
+				number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4) + number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5) + number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6) +
+				number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7) + number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8) + number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9) +
+				number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10) </r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <d:ControlConstructReference>
@@ -9961,10 +10064,7 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>InstrumentScheme-i6vwid</r:ID>
             <r:Version>0.1.0</r:Version>
-            <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-                          xmlns:pr="ddi:ddiprofile:3_2"
-                          xmlns:c="ddi:conceptualcomponent:3_2"
-                          xmlns:cm="ddi:comparative:3_2">
+            <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues" xmlns:pr="ddi:ddiprofile:3_2" xmlns:c="ddi:conceptualcomponent:3_2" xmlns:cm="ddi:comparative:3_2">
                <r:Agency>fr.insee</r:Agency>
                <r:ID>Instrument-i6vwid</r:ID>
                <r:Version>0.1.0</r:Version>
