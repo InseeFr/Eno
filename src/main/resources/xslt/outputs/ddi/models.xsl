@@ -606,7 +606,18 @@
         <xsl:param name="expression"/>
         <xsl:param name="current-variable-with-id"/>
         <xsl:variable name="next-variable-with-id" select="$current-variable-with-id/following-sibling::*[1]"/>
-        <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/command-id)"/>
+<!--        <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/command-id)"/>-->
+        <xsl:variable name="current-variable-name" select="$current-variable-with-id/name"/>
+        <xsl:variable name="new-expression">
+            <xsl:analyze-string select="$expression" regex="(\${$current-variable-name})( |$)">
+                <xsl:matching-substring>
+                    <xsl:value-of select="$current-variable-with-id/command-id"/>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:copy-of select="."/>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="$next-variable-with-id">
                 <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
