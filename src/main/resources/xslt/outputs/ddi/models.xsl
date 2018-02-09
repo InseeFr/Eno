@@ -355,12 +355,14 @@
                 </d:LiteralText>
                 <xsl:if test="enoddi32:is-with-conditionnal-text($source-context) = true()">
                     <d:ConditionalText>
+                        <xsl:for-each select="enoddi32:get-related-variable($source-context)[enoddi32:get-type(.) = ('CollectedVariableType','CalculatedVariableType')]">
                         <r:SourceParameterReference>
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                            <r:ID><xsl:value-of select="enoddi32:get-qop-conditional-text-id($source-context)"/></r:ID>
-                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>                            
+                            <r:ID><xsl:value-of select="enoddi32:get-qop-id(.)"/></r:ID>
+                            <r:Version><xsl:value-of select="enoddi32:get-version(.)"/></r:Version>                            
                             <r:TypeOfObject>OutParameter</r:TypeOfObject>
                         </r:SourceParameterReference>
+                        </xsl:for-each>
                     </d:ConditionalText>
                 </xsl:if>
             </d:InstructionText>
@@ -604,7 +606,18 @@
         <xsl:param name="expression"/>
         <xsl:param name="current-variable-with-id"/>
         <xsl:variable name="next-variable-with-id" select="$current-variable-with-id/following-sibling::*[1]"/>
-        <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/command-id)"/>
+<!--        <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/command-id)"/>-->
+        <xsl:variable name="current-variable-name" select="$current-variable-with-id/name"/>
+        <xsl:variable name="new-expression">
+            <xsl:analyze-string select="$expression" regex="(\${$current-variable-name})( |$)">
+                <xsl:matching-substring>
+                    <xsl:value-of select="$current-variable-with-id/command-id"/>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:copy-of select="."/>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="$next-variable-with-id">
                 <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
