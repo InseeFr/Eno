@@ -112,7 +112,14 @@
                   <d:Text xml:lang="fr-FR">The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of
 						percentages must be equal to 100%.</d:Text>
                </d:LiteralText>
-               <d:ConditionalText/>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbcggtca-GOP</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
             </d:InstructionText>
          </d:Instruction>
          <d:Instruction>
