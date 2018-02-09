@@ -112,14 +112,7 @@
                   <d:Text xml:lang="fr-FR">The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of
 						percentages must be equal to 100%.</d:Text>
                </d:LiteralText>
-               <d:ConditionalText>
-                  <r:SourceParameterReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>jbcggtca-GOP</r:ID>
-                     <r:Version>0.1.0</r:Version>
-                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
-                  </r:SourceParameterReference>
-               </d:ConditionalText>
+               <d:ConditionalText/>
             </d:InstructionText>
          </d:Instruction>
          <d:Instruction>
@@ -472,7 +465,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not( d1e42-IP-1 != '1')</r:CommandContent>
+                  <r:CommandContent>not( d1e42-IP-1!= '1')</r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -526,7 +519,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not( d1e101-IP-1 != '1')</r:CommandContent>
+                  <r:CommandContent>not( d1e101-IP-1!= '1')</r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -1060,10 +1053,10 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1) + number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2) +
-						number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3) + number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4) + number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5) +
-						number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6) + number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7) + number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8) +
-						number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9) + number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10) != 100 </r:CommandContent>
+                  <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1)+ number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2)+
+						number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3)+ number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4)+ number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5)+
+						number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6)+ number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7)+ number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8)+
+						number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9)+ number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10)!= 100 </r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <!--<r:TypeOfComputationItem>error</r:TypeOfComputationItem>-->
@@ -10008,10 +10001,10 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1) + number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2) + number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3) +
-				number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4) + number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5) + number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6) +
-				number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7) + number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8) + number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9) +
-				number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10) </r:CommandContent>
+                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1)+ number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2)+ number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3)+
+				number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4)+ number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5)+ number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6)+
+				number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7)+ number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8)+ number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9)+
+				number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10)</r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <d:ControlConstructReference>
