@@ -258,7 +258,7 @@
     <xsl:template match="pogues:Variable" mode="enopogues:get-command-id">
         <xsl:param name="ip-id" tunnel="yes"/>
         <xsl:choose>
-            <xsl:when test="enopogues:get-related-response(.) and enopogues:get-type(enopogues:get-related-response(.)) = 'NumericDatatypeType'">
+            <xsl:when test="enopogues:get-related-response(.) and enopogues:get-type(enopogues:get-related-response(.)) = 'NUMERIC'">
                 <xsl:value-of select="concat('number(if (',$ip-id,'='''') then ''0'' else ',$ip-id,')')"/>  
             </xsl:when>        
             <xsl:otherwise>
