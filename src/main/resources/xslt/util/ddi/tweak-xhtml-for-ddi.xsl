@@ -7,8 +7,8 @@
     <!-- 
         *************************** Tweak-xhtml-for-ddi for ENO **************************************
         This stylesheet is used as a tweak to fit a very specific DDI pattern representing footnote for ENO.
-        The syntax expected as input is : <xhtml:a href=". "Some Footnote Text" ">Some other Text<xhtml:a>.
-        The syntax expected as output is : Some Other Text<xhtml:a href="#ftn{index}"/>, whith an d:Instruction generated containing <xhtml:p id="ftn{index}">Some Footnote Text"</xhtml:p> as InstructionText.
+        The syntax expected as input is : <xhtml:a href=". 'Some Footnote Text' ">Some other Text<xhtml:a>.
+        The syntax expected as output is : Some Other Text<xhtml:a href="#ftn{index}"/>, whith an d:Instruction generated containing <xhtml:p id="ftn{index}">Some Footnote Text</xhtml:p> as InstructionText.
         All other elements not matching this syntax is simply copied untouched.               
     -->
     

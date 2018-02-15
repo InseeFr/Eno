@@ -130,7 +130,7 @@
         <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
     </xsl:template>
 
-    <xsl:template match="pogues:Expression | pogues:Formula" mode="enopogues:get-related-variable">
+    <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label" mode="enopogues:get-related-variable">
         <xsl:variable name="expressionVariable" select="tokenize(., '\$')"/>
         <xsl:variable name="variables" select="//pogues:Variables"/>
         <!-- Variable names start with a '$' and finish with a ' ', but for the last part of an expression which could not have a ' ' finisher because of extra space handling. -->
@@ -139,14 +139,14 @@
                     satisfies (if(contains($x,' ')) then(substring-before($x, ' ')) else($x)) = pogues:Name/text()]"/>        
     </xsl:template>
 
-    <xsl:template match="pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label" mode="enopogues:get-related-variable">
+   <!-- <xsl:template match="pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label" mode="enopogues:get-related-variable">
         <xsl:variable name="variable-names-temp" select="tokenize(.,'\$')"/>
         <xsl:variable name="context" select="."/>        
         <xsl:for-each select="$variable-names-temp">
             <xsl:variable name="variable-name" select="if(contains(.,' ')) then(substring-before(.,' ')) else(.)"/>
             <xsl:sequence select="$context/ancestor::pogues:Questionnaire//pogues:Variable[pogues:Name = $variable-name]"/>
         </xsl:for-each>
-    </xsl:template>
+    </xsl:template>-->
     
     <xsl:template match="pogues:Variable[pogues:Formula]" mode="enopogues:get-related-variable">
         <xsl:sequence select="enopogues:get-related-variable(pogues:Formula)"/>
