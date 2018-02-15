@@ -134,20 +134,12 @@
         <xsl:variable name="expressionVariable" select="tokenize(., '\$')"/>
         <xsl:variable name="variables" select="//pogues:Variables"/>
         <!-- Variable names start with a '$' and finish with a ' ', but for the last part of an expression which could not have a ' ' finisher because of extra space handling. -->
+        <!-- TODO : Use regexp matches instead to handle several ' ' and linebreak cases. -->
         <xsl:sequence select="
                 $variables/pogues:Variable[some $x in $expressionVariable
                     satisfies (if(contains($x,' ')) then(substring-before($x, ' ')) else($x)) = pogues:Name/text()]"/>        
     </xsl:template>
 
-   <!-- <xsl:template match="pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label" mode="enopogues:get-related-variable">
-        <xsl:variable name="variable-names-temp" select="tokenize(.,'\$')"/>
-        <xsl:variable name="context" select="."/>        
-        <xsl:for-each select="$variable-names-temp">
-            <xsl:variable name="variable-name" select="if(contains(.,' ')) then(substring-before(.,' ')) else(.)"/>
-            <xsl:sequence select="$context/ancestor::pogues:Questionnaire//pogues:Variable[pogues:Name = $variable-name]"/>
-        </xsl:for-each>
-    </xsl:template>-->
-    
     <xsl:template match="pogues:Variable[pogues:Formula]" mode="enopogues:get-related-variable">
         <xsl:sequence select="enopogues:get-related-variable(pogues:Formula)"/>
     </xsl:template>
@@ -262,10 +254,11 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="pogues:Response" mode="enopogues:get-command-id">
+    
+    <xsl:template match="pogues:Variable" mode="enopogues:get-command-id">
         <xsl:param name="ip-id" tunnel="yes"/>
         <xsl:choose>
-            <xsl:when test="enopogues:get-type(.) = 'NumericDatatypeType'">
+            <xsl:when test="enopogues:get-related-response(.) and enopogues:get-type(enopogues:get-related-response(.)) = 'NumericDatatypeType'">
                 <xsl:value-of select="concat('number(if (',$ip-id,'='''') then ''0'' else ',$ip-id,')')"/>  
             </xsl:when>        
             <xsl:otherwise>

@@ -739,13 +739,17 @@
         <xsl:variable name="related-variables-with-id">
             <xsl:for-each select="$related-variables">
                 <xsl:variable name="ip-id" select="enoddi32:get-ip-id($source-context,position())"/>
-                <xsl:variable name="related-response" select="enoddi32:get-related-response(.)"/>                
-                <xsl:if test="not($related-response)"><xsl:message select="'Only collected variables are correctly implemented'"/></xsl:if>                
+                <xsl:variable name="related-response" select="enoddi32:get-related-response(.)"/>                                
+                <!-- A container is created to save all the pre-calculted data to output the command. -->
                 <Container xmlns="" xsl:exclude-result-prefixes="#all">
+                    <!-- Corresponding to the inputParameter id. -->
                     <ip-id><xsl:value-of select="$ip-id"/></ip-id>
-                    <command-id><xsl:value-of select="enoddi32:get-command-id($related-response,$ip-id)"/></command-id>
+                    <!-- Corresponding to the id used in the final command code for the current variable. -->
+                    <command-id><xsl:value-of select="enoddi32:get-command-id(.,$ip-id)"/></command-id>
+                    <!-- Corresponding to the Out Parameter.
+                        TODO : Rename correctly the getter, to get-op-id ?-->
                     <qop-id>
-                        <xsl:value-of select="enoddi32:get-qop-id($related-response)"/>
+                        <xsl:value-of select="enoddi32:get-qop-id(.)"/>
                     </qop-id>
                     <name><xsl:value-of select="enoddi32:get-name(.)"/></name>                   
                 </Container>
