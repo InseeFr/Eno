@@ -258,7 +258,8 @@
     <xsl:template match="pogues:Variable" mode="enopogues:get-command-id">
         <xsl:param name="ip-id" tunnel="yes"/>
         <xsl:choose>
-            <xsl:when test="enopogues:get-related-response(.) and enopogues:get-type(enopogues:get-related-response(.)) = 'NUMERIC'">
+            <!-- FailOver : Variable data types is an evolution and this Xpath is intended to keep handling the previous data type for variable (only collectedVariable had type through their related-response) -->
+            <xsl:when test="if(enopogues:get-data-type(.)!='') then(enopogues:get-data-type(.) = 'NUMERIC') else(enopogues:get-related-response(.) and enopogues:get-type(enopogues:get-related-response(.)) = 'NUMERIC')">
                 <xsl:value-of select="concat('number(if (',$ip-id,'='''') then ''0'' else ',$ip-id,')')"/>  
             </xsl:when>        
             <xsl:otherwise>
