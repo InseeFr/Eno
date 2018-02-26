@@ -36,7 +36,7 @@ The maven goal `mvn install` build a JAR that you can use on a JAVA program usin
 
 `
 <dependency>
-			<groupId>fr.insee</groupId>
+			<groupId>fr.insee.eno</groupId>
 			<artifactId>eno-core</artifactId>
 			<version>1.0.0</version>
 </dependency>

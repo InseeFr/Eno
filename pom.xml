@@ -1,9 +1,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.insee</groupId>
+	<groupId>fr.insee.eno</groupId>
 	<artifactId>eno-core</artifactId>
 	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>Eno – Questionnaire generator</name>
+	<description>Eno is a tool that generates survey questionnaires starting from their formal description in DDI</description>
+	<url>https://inseefr.github.io/Eno/eno-for-dummies</url>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:https://github.com/InseeFr/Eno.git</connection>
+		<developerConnection>scm:git:https://github.com/InseeFr/Eno.git</developerConnection>
+		<url>https://github.com/InseeFr/Eno/tree/${project.scm.tag}</url>
+		<tag>master</tag>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/InseeFr/Eno/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Travis</system>
+		<url>https://travis-ci.org/InseeFr/Eno</url>
+	</ciManagement>
 
 	<properties>
 		<guice.version>4.1.0</guice.version>
@@ -69,20 +97,6 @@
 	</dependencies>
 
 	<build>
-<!-- 		<resources> -->
-<!-- 			<resource> -->
-<!-- 				<directory>src/main/xslt</directory> -->
-<!-- 				<includes> -->
-<!-- 					<include>**/*.*</include> -->
-<!-- 				</includes> -->
-<!-- 			</resource> -->
-<!-- 			<resource> -->
-<!-- 				<directory>src/main/resources</directory> -->
-<!-- 				<includes> -->
-<!-- 					<include>**/*.*</include> -->
-<!-- 				</includes> -->
-<!-- 			</resource> -->
-<!-- 		</resources> -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -143,4 +157,26 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<contributors>
+		<contributor>
+			<name>François Bulot</name>
+		</contributor>
+		<contributor>
+			<name>Franck Cotton</name>
+		</contributor>
+		<contributor>
+			<name>Thomas Dubois</name>
+		</contributor>
+		<contributor>
+			<name>Heidi Koumarianos</name>
+		</contributor>
+		<contributor>
+			<name>Eric Sigaud</name>
+		</contributor>
+		<contributor>
+			<name>Benoit Werquin</name>
+		</contributor>
+	</contributors>
+
 </project>
