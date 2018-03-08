@@ -233,6 +233,9 @@
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                             <r:ID><xsl:value-of select="concat('Instrument-',enoddi32:get-id($source-context))"/></r:ID>
                             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                            <d:InstrumentName>
+                                <r:String><xsl:value-of select="enoddi32:get-name($source-context)"/></r:String>
+                            </d:InstrumentName>
                             <r:Label>
                                 <r:Content xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-label($source-context)"/> questionnaire</r:Content>
                             </r:Label>
