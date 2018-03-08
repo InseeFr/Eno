@@ -421,6 +421,8 @@ public class FodsToXSLCompiler {
 		logger.debug("Entering Incorporation");
 		// Incorporating ddi2fr-fixed.xsl, drivers.xsl, functions.xsl and
 		// tree-navigation.xsl into ddi2fr.xsl
+		
+		// Incorporating ddi2fr-fixed.xsl and drivers into TEMP_TEMP_TMP
 		logger.debug(
 				"Incorporating " + Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL +
 				" and " + Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP +
@@ -438,6 +440,7 @@ public class FodsToXSLCompiler {
 		isUTIL_XSL_INCORPORATION_XSL.close();
 		osTEMP_TEMP_TMP.close();
 		
+		// Fusion : functions.xsl and the file TEMP_TEMP_TMP into TEMP_TEMP_BIS_TMP
 		logger.debug(
 				"Incorporating " + Constants.TEMP_TEMP_TMP + 
 				" and " + Constants.TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP +
@@ -454,6 +457,7 @@ public class FodsToXSLCompiler {
 		isUTIL_XSL_INCORPORATION_XSL2.close();
 		osTEMP_TEMP_BIS_TMP.close();
 		
+		// Fusion : tree-navigations.xsl and the file TEMP_TEMP_BIS_TMP into ddi2fr.xsl
 		logger.debug(
 				"Incorporating " + Constants.TEMP_TEMP_BIS_TMP +
 				" and " + Constants.TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP + 
@@ -470,8 +474,12 @@ public class FodsToXSLCompiler {
 		isTEMP_TEMP_BIS_TMP.close();
 		isUTIL_XSL_INCORPORATION_XSL3.close();
 		osTRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP.close();
-		// Incorporating source-fixed.xsl, functions.xsl and templates.xsl into
-		// source.xsl
+
+		
+		// Incorporating source-fixed.xsl, functions.xsl and
+		// template.xsl into source.xsl
+		
+		// Incorporating source-fixed.xsl and functions.xsl on TEMP_TEMP_TMP
 		logger.debug(
 				"Incorporating " + Constants.INPUTS_DDI_SOURCE_FIXED_XSL +
 				" and " + Constants.INPUTS_DDI_FUNCTIONS_XSL +
@@ -488,6 +496,8 @@ public class FodsToXSLCompiler {
 		isINPUTS_DDI_SOURCE_FIXED_XSL.close();
 		isUTIL_XSL_INCORPORATION_XSL4.close();
 		osTEMP_TEMP_TMP2.close();
+		
+		// Incorporating TEMP_TEMP_TMP and template.xsl on source.xsl
 		logger.debug(
 				"Incorporating " + Constants.TEMP_TEMP_TMP +
 				" and " + Constants.INPUTS_DDI_TEMPLATES_XSL +
@@ -612,8 +622,12 @@ public class FodsToXSLCompiler {
 	 */
 	public static void poguesxml2ddiIncorporationTarget() throws Exception {
 		logger.debug("Entering Incorporation");
+		
 		// Incorporating poguesxml2ddi-fixed.xsl, drivers.xsl, functions.xsl and
+		// tree-navigation.xsl 
 		// into poguesxml2ddi.xsl
+		
+		// Incorporating poguesxml2ddi-fixed.xsl and drivers into TEMP_TEMP_TMP
 		logger.debug(
 				"Incorporating " + Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_FIXED_XSL +
 				" and " + Constants.TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_XSL_TMP +
@@ -631,13 +645,14 @@ public class FodsToXSLCompiler {
 		isUTIL_XSL_INCORPORATION_XSL.close();
 		osTEMP_TEMP_TMP.close();
 		
+		// Fusion : functions.xsl and the file TEMP_TEMP_TMP into TEMP_TEMP_BIS_TMP
 		logger.debug(
 				"Incorporating " + Constants.TEMP_TEMP_TMP + 
 				" and " + Constants.TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL_TMP +
-				" in " + Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP);
+				" in " + Constants.TEMP_TEMP_BIS_TMP);
 		InputStream isTEMP_TEMP_TMP = FileUtils.openInputStream(Constants.TEMP_TEMP_TMP);
 		InputStream isUTIL_XSL_INCORPORATION_XSL2 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
-		OutputStream osTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP);
+		OutputStream osTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL_TMP = FileUtils.openOutputStream(Constants.TEMP_TEMP_BIS_TMP);
 		saxonService.transformIncorporation(
 				isTEMP_TEMP_TMP,
 				isUTIL_XSL_INCORPORATION_XSL2,
@@ -646,6 +661,24 @@ public class FodsToXSLCompiler {
 		isTEMP_TEMP_TMP.close();
 		isUTIL_XSL_INCORPORATION_XSL2.close();
 		osTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL_TMP.close();
+		
+		// Fusion : tree-navigations.xsl and the file TEMP_TEMP_BIS_TMP into ddi2fr.xsl
+		logger.debug(
+				"Incorporating " + Constants.TEMP_TEMP_BIS_TMP +
+				" and " + Constants.TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP + 
+				" in " + Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP);
+		
+		InputStream isTEMP_TEMP_BIS_TMP = FileUtils.openInputStream(Constants.TEMP_TEMP_BIS_TMP);
+		InputStream isUTIL_XSL_INCORPORATION_XSL3 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP);
+		saxonService.transformIncorporation(
+				isTEMP_TEMP_BIS_TMP,
+				isUTIL_XSL_INCORPORATION_XSL3,
+				osTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP,
+				Constants.TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP);
+		isTEMP_TEMP_BIS_TMP.close();
+		isUTIL_XSL_INCORPORATION_XSL3.close();
+		osTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP.close();
 		
 		// Incorporating source-fixed.xsl, functions.xsl and templates.xsl into
 		// source.xsl
