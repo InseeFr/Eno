@@ -527,6 +527,8 @@ public class FodsToXSLCompiler {
 		logger.debug("Entering Incorporation");
 		// Incorporating ddi2odt-fixed.xsl, drivers.xsl, functions.xsl and
 		// tree-navigation.xsl into ddi2odt.xsl
+		
+		// Incorporating ddi2odt-fixed.xsl and drivers into TEMP_TEMP_TMP
 		logger.debug(
 				"Incorporating " + Constants.TRANSFORMATIONS_DDI2ODT_DDI2ODT_FIXED_XSL +
 				" and " + Constants.TRANSFORMATIONS_DDI2ODT_DRIVERS_XSL_TMP +
@@ -539,7 +541,7 @@ public class FodsToXSLCompiler {
 				isTRANSFORMATIONS_DDI2ODT_DDI2ODT_FIXED_XSL,
 				isUTIL_XSL_INCORPORATION_XSL,
 				osTEMP_TEMP_TMP,
-				Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP);
+				Constants.TRANSFORMATIONS_DDI2ODT_DRIVERS_XSL_TMP);
 		isTRANSFORMATIONS_DDI2ODT_DDI2ODT_FIXED_XSL.close();
 		isUTIL_XSL_INCORPORATION_XSL.close();
 		osTEMP_TEMP_TMP.close();
