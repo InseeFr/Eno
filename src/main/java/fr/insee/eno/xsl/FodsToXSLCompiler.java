@@ -39,6 +39,7 @@ public class FodsToXSLCompiler {
 			logger.info("Fods to XSL: START");			
 			// Fods2Xsl for /transformations/ddi/.fods files
 			generateDDI2FRDrivers();
+			// Add generateDDI2ODTFunctions();
 			generateDDI2FRFunctions();
 			generateDDI2FRTreeNavigation();
 			// Fods2Xsl for /output/ddi/.fods files
