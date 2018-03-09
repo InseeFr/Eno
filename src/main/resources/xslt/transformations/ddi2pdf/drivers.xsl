@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
       <xd:desc>
          <xd:p>The main Sequence activates the higher driver 'Form'.</xd:p>
@@ -97,20 +97,8 @@
          <xd:p>Most Instruction elements activates the xf-output driver.</xd:p>
       </xd:desc>
    </xd:doc>
-   <xsl:template match="d:Instruction" mode="source">
-      <xsl:param name="driver" tunnel="yes">
-         <driver/>
-      </xsl:param>
-      <xsl:apply-templates select="eno:append-empty-element('xf-output',$driver)" mode="model">
-         <xsl:with-param name="source-context" select="." tunnel="yes"/>
-      </xsl:apply-templates>
-   </xsl:template>
-   <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
-      <xd:desc>
-         <xd:p>The Description of a IfThenElse is an alternative text for non dynamic output format, so it activates the xf-output drivers as other Instruction-like.</xd:p>
-      </xd:desc>
-   </xd:doc>
-   <xsl:template match="r:Description[parent::d:IfThenElse]" mode="source">
+   <xsl:template match="d:Instruction[not(ancestor::r:QuestionReference) and not(d:InstructionName/r:String/text()='tooltip')]"
+                 mode="source">
       <xsl:param name="driver" tunnel="yes">
          <driver/>
       </xsl:param>

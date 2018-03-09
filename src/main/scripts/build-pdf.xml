@@ -24,39 +24,9 @@
 			outfile="${temp.home}\pdf\pdfDocument.pdf" />
 	</target>
 	-->
-	
-	<target name="compile-TableColumnSizeProcessor">
-        <mkdir dir="${root-folder}/target/build/TableColumnSizeProcessor/classes"/>
-        <javac srcdir="${plugin.TableColumnSizeProcessor.java.home}/src/com/calculator" destdir="${root-folder}/target/build/TableColumnSizeProcessor/classes"
-            includeantruntime="false">
-            <classpath refid="classpath"/>
-        </javac>
-    </target>
-	
-	<target name="jar-TableColumnSizeProcessor">
-        <mkdir dir="${root-folder}/target/build/TableColumnSizeProcessor/jar"/>
-        <jar destfile="${root-folder}/target/build/TableColumnSizeProcessor/jar/TableColumnSizeProcessor.jar" basedir="${root-folder}/target/build/TableColumnSizeProcessor/classes">
-            <manifest>
-                <attribute name="Main-Class" value="com.calculator.Main"/>
-            </manifest>
-        </jar>
-    </target>
-	
 	<!-- pdfPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
 	<target name="pdfPostProcessing">
 		<copy file="${input-file}" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
-		<antcall target="compile-TableColumnSizeProcessor"/>
-		<antcall target="jar-TableColumnSizeProcessor"/>
-		<antcall target="call-TableColumnSizeProcessor"/>
-	</target>
-	
-	<!-- pdfPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
-	<target name="call-TableColumnSizeProcessor">
-		<java jar="${root-folder}/target/build/TableColumnSizeProcessor/jar/TableColumnSizeProcessor.jar" fork="true">
-			<arg value="inFileName=${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}" />
-			<arg value="outFileName=${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}" />
-			<arg value="xmlConfFile=${root-folder}/config/plugins-conf.xml" />
-		</java>
 	</target>
 	
 </project>
