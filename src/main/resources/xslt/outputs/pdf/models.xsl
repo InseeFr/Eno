@@ -346,6 +346,10 @@
 	<!--<xsl:template match="*//Form//Module//xf-output"-->
 	<xsl:template match="xf-output" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+<<<<<<< HEAD
+=======
+		<xsl:param name="noInstructions" tunnel="yes"/>
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 
@@ -354,6 +358,7 @@
 		<!--<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
 		<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
 		<xsl:choose>
+<<<<<<< HEAD
 			<xsl:when test="enopdf:get-format($source-context) = 'instruction'">
 				<fo:block>
 					<fo:footnote>
@@ -374,6 +379,40 @@
 						</fo:footnote-body>
 					</fo:footnote>
 				</fo:block>
+=======
+			<xsl:when test="$noInstructions != 'YES'">
+				<xsl:choose>
+					<xsl:when test="enopdf:get-format($source-context) = 'footnote'">
+						<fo:block>
+							<fo:footnote>
+								<fo:inline></fo:inline>
+								<fo:footnote-body  xsl:use-attribute-sets="footnote">
+									<fo:block>
+										<fo:inline font-size="75%" 
+											baseline-shift="super">
+											<xsl:value-of select="enopdf:get-end-question-instructions-index($source-context)"/>
+										</fo:inline>
+										<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+									</fo:block>
+								</fo:footnote-body>
+							</fo:footnote>
+						</fo:block>
+					</xsl:when>
+					<xsl:when test="enopdf:get-format($source-context) = 'tooltip'">
+						<!-- Do nothing -->
+					</xsl:when>
+					<xsl:when test="enopdf:get-format($source-context) = 'comment' or enopdf:get-format($source-context) = 'help' or enopdf:get-format($source-context) = 'instruction'">
+						<fo:block xsl:use-attribute-sets="instruction">
+							<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+						</fo:block>
+					</xsl:when>
+					<xsl:otherwise>
+						<fo:block xsl:use-attribute-sets="general-style">
+							<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+						</fo:block>
+					</xsl:otherwise>
+				</xsl:choose>
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:block xsl:use-attribute-sets="general-style">
@@ -442,6 +481,7 @@
 			as="xs:string +"/>
 
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+<<<<<<< HEAD
 			<xsl:choose>
 				<xsl:when test="enopdf:get-format($source-context) = 'instruction'">
 					<xsl:variable name="footnote-count" select="($footnote-count + 1)"/>
@@ -471,6 +511,13 @@
 					</fo:block>
 				</xsl:otherwise>
 			</xsl:choose>
+=======
+			<xsl:if test="enopdf:get-format($source-context) = 'filter-alternative-text'">
+				<fo:block xsl:use-attribute-sets="filter-alternative">
+					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+				</fo:block>
+			</xsl:if>
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 		</xsl:if>
 		
 		
@@ -735,6 +782,7 @@
 
 
 			<xsl:if test="enopdf:get-type($source-context) = 'number'">
+<<<<<<< HEAD
 				<fo:block>
 					<xsl:if test="$isTable = 'YES'">
 						<xsl:attribute name="text-align">right</xsl:attribute>
@@ -756,6 +804,30 @@
 										<fo:block>A</fo:block>
 									</fo:inline-container>
 								</xsl:for-each>
+=======
+				<xsl:choose>
+					<xsl:when test="$autreHandle">
+						<fo:inline xsl:use-attribute-sets="general-style">
+							<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
+								<xsl:variable name="curVal" select="."/>
+								<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
+									<xsl:for-each select="1 to $curVal">
+										<fo:external-graphic>
+											<xsl:attribute name="src">
+												<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
+											</xsl:attribute>
+										</fo:external-graphic>
+									</xsl:for-each>
+								</xsl:if>
+							</xsl:for-each>
+							<fo:inline><xsl:value-of select="enopdf:get-suffix($source-context, $languages[1])"/></fo:inline>
+						</fo:inline>
+					</xsl:when>
+					<xsl:otherwise>
+						<fo:block>
+							<xsl:if test="$isTable = 'YES'">
+								<xsl:attribute name="text-align">right</xsl:attribute>
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 							</xsl:if>
 						</xsl:for-each>
 						<!--<fo:inline> , </fo:inline>
@@ -768,10 +840,60 @@
 									</fo:inline-container>
 								</xsl:for-each>
 							</xsl:if>
+<<<<<<< HEAD
 						</xsl:for-each>-->
 						<fo:inline><xsl:value-of select="enopdf:get-suffix($source-context, $languages[1])"/></fo:inline>
 					</fo:block>
 				</fo:block>
+=======
+							<fo:block xsl:use-attribute-sets="general-style">
+								<!-- if decimals in mask -->
+								<xsl:choose>
+									<xsl:when test="enopdf:get-number-of-decimals($source-context) != ''">
+										<xsl:variable name="comaPos" select="(number(enopdf:get-length($source-context)) - number(enopdf:get-number-of-decimals($source-context)))"/>
+										<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
+											<xsl:variable name="curVal" select="."/>
+											<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
+												<xsl:for-each select="1 to $curVal">
+													<xsl:variable name="curVal2" select="."/>
+													<xsl:choose>
+														<xsl:when test="$curVal2 = $comaPos">
+															<xsl:text>,</xsl:text>
+														</xsl:when>
+														<xsl:otherwise>
+															<fo:external-graphic>
+																<xsl:attribute name="src">
+																	<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
+																</xsl:attribute>
+															</fo:external-graphic>
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:for-each>
+											</xsl:if>
+										</xsl:for-each>
+									</xsl:when>
+									<!-- if not decimals -->
+									<xsl:otherwise>
+										<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
+											<xsl:variable name="curVal" select="."/>
+											<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
+												<xsl:for-each select="1 to $curVal">
+													<fo:external-graphic>
+														<xsl:attribute name="src">
+															<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
+														</xsl:attribute>
+													</fo:external-graphic>
+												</xsl:for-each>
+											</xsl:if>
+										</xsl:for-each>
+									</xsl:otherwise>
+								</xsl:choose>
+								<fo:inline><xsl:value-of select="enopdf:get-suffix($source-context, $languages[1])"/></fo:inline>
+							</fo:block>
+						</fo:block>
+					</xsl:otherwise>
+				</xsl:choose>
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 			</xsl:if>
 			
 		</xsl:if>
@@ -878,11 +1000,15 @@
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		<fo:block page-break-inside="avoid">	
+<<<<<<< HEAD
 			<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 				<fo:block xsl:use-attribute-sets="label-question">
 					<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 				</fo:block>
 			</xsl:if>
+=======
+			<xsl:value-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)" disable-output-escaping="yes"/>
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 	
 			<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE  -->
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -1130,6 +1256,10 @@
 							<xsl:apply-templates
 								select="enopdf:get-body-line($source-context, position())" mode="source">
 								<xsl:with-param name="driver" select="." tunnel="yes"/>
+<<<<<<< HEAD
+=======
+								<xsl:with-param name="row-number"  select="position()" tunnel="yes"/>
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 								<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
 							</xsl:apply-templates>
 							<!-- Pour chaque boucle , on récupére les infos des lignes du tableau -->

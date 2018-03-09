@@ -54,4 +54,28 @@
         <xsl:attribute name="position">relative</xsl:attribute>
         <xsl:attribute name="border-bottom">1px dotted black</xsl:attribute>
     </xsl:attribute-set>
+<<<<<<< HEAD
+=======
+    <xsl:attribute-set name="filter-alternative">
+        <xsl:attribute name="font-size">10pt</xsl:attribute>
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
+        <xsl:attribute name="margin-top">6pt</xsl:attribute>
+        <xsl:attribute name="margin-bottom">6pt</xsl:attribute>
+        <xsl:attribute name="border-color">black</xsl:attribute>
+        <xsl:attribute name="border-style">solid</xsl:attribute>
+        <xsl:attribute name="background-color">#CCCCCC</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="footnote">
+        <xsl:attribute name="font-size">9pt</xsl:attribute>
+        <xsl:attribute name="font-weight">normal</xsl:attribute>
+        <xsl:attribute name="margin-bottom">3pt</xsl:attribute>
+        <xsl:attribute name="margin-left">3pt</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="instruction">
+        <xsl:attribute name="font-size">9pt</xsl:attribute>
+        <xsl:attribute name="font-weight">normal</xsl:attribute>
+        <xsl:attribute name="margin-bottom">3pt</xsl:attribute>
+        <xsl:attribute name="margin-left">3pt</xsl:attribute>
+    </xsl:attribute-set>
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 </xsl:stylesheet>
