@@ -39,14 +39,14 @@ public class FodsToXSLCompiler {
 			logger.info("Fods to XSL: START");			
 			// Fods2Xsl for /transformations/ddi/.fods files
 			generateDDI2FRDrivers();
-			//generateDDI2ODTDrivers();
+			generateDDI2ODTDrivers();
 			generatePOGUESXML2DDIDrivers();
 			generateDDI2FRFunctions();
-			//generateDDI2ODTFunctions();
+			generateDDI2ODTFunctions();
 			generatePOGUESXML2DDIFunctions();
 			generateDDI2FRTreeNavigation();
 			generatePOGUESXML2DDITreeNavigation();
-			//generateDDI2ODTTreeNavigation();
+			generateDDI2ODTTreeNavigation();
 			// Fods2Xsl for /output/ddi/.fods files
 			generateDDIFunctions();
 			generatePOGUESXMLFunctions();
@@ -55,12 +55,12 @@ public class FodsToXSLCompiler {
 			logger.info("Fods2Xsl : xsl stylesheets created.");
 			// Incorporation target : creating ddi2fr.xsl
 			ddi2frIncorporationTarget();
-			//ddi2odtIncorporationTarget();
+			ddi2odtIncorporationTarget();
 			poguesxml2ddiIncorporationTarget();
 			// TODO Copy generated files to JAR or classpath
 			logger.debug("Fods to XSL: END");
 			copyGeneratedFilesDDI2FR();
-			//copyGeneratedFilesDDI2ODT();
+			copyGeneratedFilesDDI2ODT();
 			copyGeneratedFilesPOGUESXML2DDI();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
