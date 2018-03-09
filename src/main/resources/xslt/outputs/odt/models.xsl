@@ -31,11 +31,50 @@
 			<office:font-face-decls>
 				<style:font-face style:name="Arial" svg:font-family="Arial" style:font-family-generic="system" style:font-pitch="variable"/>
 			</office:font-face-decls>
-			<xsl:copy-of select="document('office-headers.xml')/office:document/office:styles"></xsl:copy-of> <!-- TODO use parameter defined -->
+
+    <office:styles>
+        <style:style style:name="Standard" style:family="paragraph" style:class="text"/>
+        <style:style style:name="Title" style:family="paragraph" style:class="chapter">
+            <style:paragraph-properties fo:text-align="center" fo:margin-top="3cm" style:justify-single-word="false"/>
+            <style:text-properties fo:font-size="36pt" fo:font-weight="bold" fo:color="#7b7c7c"/>
+        </style:style>
+        <style:style style:name="TitleComment" style:family="paragraph">
+            <style:paragraph-properties fo:text-align="center" fo:margin-top="3cm" style:justify-single-word="false"/>
+            <style:text-properties fo:font-size="22pt" fo:font-weight="bold"/>
+        </style:style>
+        <style:style style:name="Module" style:family="paragraph" style:default-outline-level="1" style:class="text">
+            <style:paragraph-properties fo:text-align="left" fo:break-before="page"/>
+            <style:text-properties fo:font-size="24pt" fo:font-weight="bold"/>
+        </style:style>
+        <style:style style:name="SubModule" style:family="paragraph" style:default-outline-level="2" style:class="text">
+            <style:paragraph-properties fo:text-align="left"/>
+            <style:text-properties fo:font-size="20pt" fo:font-weight="bold" fo:color="#ff3333"/>
+        </style:style>
+        <style:style style:name="Question" style:family="paragraph" style:default-outline-level="2" style:class="text">
+            <style:paragraph-properties fo:text-align="left"/>
+            <style:text-properties fo:font-size="14pt" fo:font-weight="bold" fo:color="#6666ff"/>
+        </style:style>
+        <style:style style:name="QuestionSelect" style:family="paragraph" style:default-outline-level="2" style:class="text">
+            <style:paragraph-properties fo:text-align="left"/>
+            <style:text-properties fo:font-size="14pt" fo:font-weight="bold" fo:color="#a5106c"/>
+        </style:style>
+        <style:style style:name="ModuleInstruction" style:family="paragraph" style:default-outline-level="2" style:class="text">
+            <style:paragraph-properties fo:text-align="right"/>
+            <style:text-properties fo:font-size="14pt" fo:font-weight="bold" style:text-underline-style="solid"/>
+        </style:style>
+        <style:style style:name="OtherInstruction" style:family="paragraph" style:default-outline-level="2" style:class="text">
+            <style:paragraph-properties fo:text-align="right"/>
+            <style:text-properties fo:font-size="14pt" fo:font-weight="bold"/>
+        </style:style>
+        <style:style style:name="CodeItem" style:family="paragraph" style:default-outline-level="2" style:class="text">
+            <style:text-properties fo:font-size="12pt" fo:background-color="#d3d3d3"/>
+        </style:style>
+    </office:styles>
+			
 			<office:body>
 				<office:text>
 					<text:p text:style-name="Title"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
-					<text:p text:style-name="TitleComment">Specification generated on: <xsl:value-of select="format-dateTime(current-dateTime(), '[D01]/[M01]/[Y0001] - [H01]:[m01]:[s01]')"/></text:p>
+					<text:p text:style-name="TitleComment">Specification generated</text:p>
 				</office:text>
 				<!-- Returns to the parent -->
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
