@@ -349,6 +349,9 @@
 <<<<<<< HEAD
 =======
 		<xsl:param name="noInstructions" tunnel="yes"/>
+<<<<<<< HEAD
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
+=======
 >>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
@@ -827,6 +830,9 @@
 						<fo:block>
 							<xsl:if test="$isTable = 'YES'">
 								<xsl:attribute name="text-align">right</xsl:attribute>
+<<<<<<< HEAD
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
+=======
 >>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 							</xsl:if>
 						</xsl:for-each>
@@ -841,11 +847,14 @@
 								</xsl:for-each>
 							</xsl:if>
 <<<<<<< HEAD
+<<<<<<< HEAD
 						</xsl:for-each>-->
 						<fo:inline><xsl:value-of select="enopdf:get-suffix($source-context, $languages[1])"/></fo:inline>
 					</fo:block>
 				</fo:block>
 =======
+=======
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 							<fo:block xsl:use-attribute-sets="general-style">
 								<!-- if decimals in mask -->
 								<xsl:choose>
@@ -1001,11 +1010,15 @@
 			as="xs:string +"/>
 		<fo:block page-break-inside="avoid">	
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 				<fo:block xsl:use-attribute-sets="label-question">
 					<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 				</fo:block>
 			</xsl:if>
+=======
+			<xsl:value-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)" disable-output-escaping="yes"/>
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 =======
 			<xsl:value-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)" disable-output-escaping="yes"/>
 >>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
@@ -1257,7 +1270,10 @@
 								select="enopdf:get-body-line($source-context, position())" mode="source">
 								<xsl:with-param name="driver" select="." tunnel="yes"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 								<xsl:with-param name="row-number"  select="position()" tunnel="yes"/>
 >>>>>>> parent of 9adc753... TableColumnSizeProcessor plugin and title position
 								<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
