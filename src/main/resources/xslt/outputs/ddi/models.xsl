@@ -27,12 +27,7 @@
     <xsl:template match="Form" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="citation" select="enoddi32:get-citation($source-context)" as="xs:string"/>
-        <xsl:variable name="agency" select="enoddi32:get-agency($source-context)" as="xs:string"/>
-        <xsl:processing-instruction name="xml-model">
-            href="../../../src/main/resources/schema/eno-schema-draft-fb.sch" 
-            type="application/xml" 
-            schematypens="http://purl.oclc.org/dsdl/schematron"
-        </xsl:processing-instruction>
+        <xsl:variable name="agency" select="enoddi32:get-agency($source-context)" as="xs:string"/>        
         <DDIInstance xmlns="ddi:instance:3_2"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="ddi:instance:3_2 ../../../src/main/resources/schema/instance.xsd"
@@ -233,6 +228,9 @@
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                             <r:ID><xsl:value-of select="concat('Instrument-',enoddi32:get-id($source-context))"/></r:ID>
                             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                            <d:InstrumentName>
+                                <r:String><xsl:value-of select="enoddi32:get-name($source-context)"/></r:String>
+                            </d:InstrumentName>
                             <r:Label>
                                 <r:Content xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-label($source-context)"/> questionnaire</r:Content>
                             </r:Label>
