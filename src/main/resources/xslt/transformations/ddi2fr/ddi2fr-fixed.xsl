@@ -81,18 +81,10 @@
     <xsl:function name="enofr:get-calculate-text">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language" as="item()"/>
-        <xsl:param name="text-type"/>
         <xsl:param name="instance-ancestor"/>
         
         <xsl:variable name="static-text-content">
-            <xsl:choose>
-                <xsl:when test="$text-type='label'">
-                    <xsl:sequence select="enoddi:get-concatened-label($context,$language)"/>
-                </xsl:when>
-                <xsl:when test="$text-type='alert'">
-                    <xsl:sequence select="enoddi:get-consistency-message($context,$language)"/>
-                </xsl:when>
-            </xsl:choose>
+            <xsl:sequence select="enoddi:get-concatened-label($context,$language)"/>
         </xsl:variable>
 
         <xsl:if test="contains(substring-after($static-text-content,$conditioning-variable-begin),$conditioning-variable-end)">
@@ -320,7 +312,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <!-- $message must not be as node() for the test to success and node() is necessary here -->
-                <xsl:sequence select="enoddi:get-consistency-message($context,$language)"/>
+                <xsl:sequence select="enoddi:get-label($context,$language)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>

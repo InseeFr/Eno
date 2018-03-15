@@ -713,7 +713,7 @@
             <xd:p>For the Instruction of a ComputationItem, returns the conditions of all its deactivatable ancestors.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:Instruction[ancestor::d:ComputationItem]" mode="enoddi:get-deactivatable-ancestors" as="xs:string *">
+    <xsl:template match="d:ComputationItem" mode="enoddi:get-deactivatable-ancestors" as="xs:string *">
         <xsl:for-each select="ancestor::d:Sequence[d:TypeOfSequence/text()='deactivatable']">
             <xsl:value-of select="enoddi:get-deactivatable-command(.)"/>
         </xsl:for-each>

@@ -546,12 +546,10 @@
         <xsl:variable name="alert" select="eno:serialize(enofr:get-alert($source-context, $language))"/>
         
         <xsl:element name="{enofr:get-name($source-context)}">
-            <xsl:if test="$label!='' and $alert != $label">
+            <xsl:if test="$label!=''">
                 <label>
                     <xsl:choose>
-                        <!-- No label for alert's copy -->
-                        <!--<xsl:when test="$alert = $label"/>-->
-                        <xsl:when test="enofr:get-calculate-text($source-context,$language,'label',$instance-ancestor) != ''">
+                        <xsl:when test="enofr:get-calculate-text($source-context,$language,$instance-ancestor) != ''">
                             <xsl:value-of select="'custom label'"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -572,14 +570,7 @@
             </xsl:if>
             <xsl:if test="$alert!=''">
                 <alert>
-                    <xsl:choose>
-                        <xsl:when test="enofr:get-calculate-text($source-context,$language,'alert',$instance-ancestor) != ''">
-                            <xsl:value-of select="'custom alert'"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="$alert"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:value-of select="$alert"/>
                 </alert>
             </xsl:if>
         </xsl:element>
@@ -605,12 +596,10 @@
         <xsl:variable name="alert" select="eno:serialize(enofr:get-alert($source-context, $language))"/>
 
         <xsl:element name="{enofr:get-name($source-context)}">
-            <xsl:if test="$label!='' and $alert != $label">
+            <xsl:if test="$label!=''">
                 <label>
                     <xsl:choose>
-                        <!-- No label for alert's copy -->
-                        <!--<xsl:when test="$alert = $label"/>-->
-                        <xsl:when test="enofr:get-calculate-text($source-context,$language,'label',$instance-ancestor) != ''">
+                        <xsl:when test="enofr:get-calculate-text($source-context,$language,$instance-ancestor) != ''">
                             <xsl:value-of select="'custom label'"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -632,7 +621,7 @@
             <xsl:if test="$alert!=''">
                 <alert>
                     <xsl:choose>
-                        <xsl:when test="enofr:get-calculate-text($source-context,$language,'alert',$instance-ancestor) != ''">
+                        <xsl:when test="enofr:get-calculate-text($source-context,$language,$instance-ancestor) != ''">
                             <xsl:value-of select="'custom alert'"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -644,6 +633,37 @@
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('ResourceItem', .)" tunnel="yes"/>
             </xsl:apply-templates>
+        </xsl:element>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template for Resource for the driver ConsistencyCheck.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Resource//ConsistencyCheck" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
+        <xsl:variable name="alert" select="eno:serialize(enofr:get-label($source-context, $language))"/>
+        
+        <xsl:element name="{enofr:get-name($source-context)}">
+            <xsl:if test="$alert!=''">
+                <alert>
+                    <xsl:choose>
+                        <xsl:when test="enofr:get-calculate-text($source-context,$language,$instance-ancestor) != ''">
+                            <xsl:value-of select="'custom alert'"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$alert"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </alert>
+            </xsl:if>
         </xsl:element>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -804,26 +824,15 @@
         <xsl:param name="language" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         
-        <xsl:variable name="calculate-label" select="enofr:get-calculate-text($source-context,$language,'label',$instance-ancestor)"/>
-        <xsl:variable name="calculate-alert" select="enofr:get-calculate-text($source-context,$language,'alert',$instance-ancestor)"/>
+        <xsl:variable name="calculate-label" select="enofr:get-calculate-text($source-context,$language,$instance-ancestor)"/>
 
-        <xsl:if test="$calculate-label != '' or $calculate-alert != ''">
+        <xsl:if test="$calculate-label != ''">
             <xsl:variable name="name" select="enofr:get-name($source-context)"/>
             <xf:bind id="{$name}-resource-{$language}-bind" name="{$name}-{$language}-resource"
                 ref="{$name}">
-                <xsl:choose>
-                    <xsl:when test="$calculate-alert != ''">
-                        <xf:bind id="{$name}-resource-{$language}-bind-alert"
-                            name="{$name}-{$language}-resource-alert" ref="alert"
-                            calculate="{$calculate-alert}"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <!-- When there is an alert, the label is not used -->
-                        <xf:bind id="{$name}-resource-{$language}-bind-label"
-                            name="{$name}-{$language}-resource-label" ref="label"
-                            calculate="{$calculate-label}"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xf:bind id="{$name}-resource-{$language}-bind-label"
+                    name="{$name}-{$language}-resource-label" ref="label"
+                    calculate="{$calculate-label}"/>
             </xf:bind>
         </xsl:if>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -831,6 +840,31 @@
         </xsl:apply-templates>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template for ResourceBind for the driver ConsistencyCheck.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="ResourceBind//ConsistencyCheck" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
+        <xsl:variable name="calculate-alert" select="enofr:get-calculate-text($source-context,$language,$instance-ancestor)"/>
+
+        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:if test="$calculate-alert != ''">
+            <xf:bind id="{$name}-resource-{$language}-bind" name="{$name}-{$language}-resource" ref="{$name}">
+                <xf:bind id="{$name}-resource-{$language}-bind-alert"
+                    name="{$name}-{$language}-resource-alert" ref="alert"
+                    calculate="{$calculate-alert}"/>
+            </xf:bind>
+        </xsl:if>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Template for Body for the Module driver.</xd:p>
@@ -992,7 +1026,7 @@
             <xsl:if test="not($length='')">
                 <xsl:attribute name="xxf:maxlength" select="$length"/>
             </xsl:if>
-            <xsl:if test="$label != '' and not($alert = $label)">
+            <xsl:if test="$label != ''">
                 <xf:label ref="$form-resources/{$name}/label">
                     <xsl:if test="eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
                         <xsl:attribute name="mediatype">text/html</xsl:attribute>
@@ -1092,6 +1126,39 @@
         </xsl:if>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Default template for Body for the drivers.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Body//ConsistencyCheck" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="languages" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:variable name="alert" select="eno:serialize(enofr:get-label($source-context, $languages[1]))"/>
+        <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
+        
+        <xsl:element name="xf:output">
+            <xsl:attribute name="id" select="concat($name, '-control')"/>
+            <xsl:attribute name="name" select="$name"/>
+            <xsl:attribute name="bind" select="concat($name, '-bind')"/>
+            <xsl:if test="$css-class != ''">
+                <xsl:attribute name="class" select="$css-class"/>
+            </xsl:if>
+            <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
+            <xf:alert ref="$form-resources/{$name}/alert">
+                <xsl:if test="enofr:get-alert-level($source-context) != ''">
+                    <xsl:attribute name="level" select="enofr:get-alert-level($source-context)"/>
+                </xsl:if>
+                <xsl:if test="eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
+                    <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                </xsl:if>
+            </xf:alert>
+        </xsl:element>
+    </xsl:template>
+    
     <xd:doc>
         <xd:desc>Template to add mediatype html/css to rich text items</xd:desc>
     </xd:doc>
