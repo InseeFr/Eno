@@ -13,8 +13,7 @@
 
     <xd:doc scope="stylesheet">
         <xd:desc>
-            <xd:p>This stylesheet is used to transform a DDI input into an Xforms form (containing
-                orbeon form runner adherences).</xd:p>
+            <xd:p>This stylesheet is used to transform a DDI input into an Xforms form (containing orbeon form runner adherences).</xd:p>
         </xd:desc>
     </xd:doc>
 
@@ -46,10 +45,8 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>A variable is created to build a set of label resources in different
-                languages.</xd:p>
-            <xd:p>Only the resources in languages already present in the DDI input are
-                charged.</xd:p>
+            <xd:p>A variable is created to build a set of label resources in different languages.</xd:p>
+            <xd:p>Only the resources in languages already present in the DDI input are charged.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:variable name="labels-resource">
@@ -63,10 +60,8 @@
             <xd:p>Characters used to surround variables in conditioned text.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:variable name="conditioning-variable-begin"
-        select="$properties//TextConditioningVariable/ddi/Before"/>
-    <xsl:variable name="conditioning-variable-end"
-        select="$properties//TextConditioningVariable/ddi/After"/>
+    <xsl:variable name="conditioning-variable-begin" select="$properties//TextConditioningVariable/ddi/Before"/>
+    <xsl:variable name="conditioning-variable-end" select="$properties//TextConditioningVariable/ddi/After"/>
 
     <xd:doc>
         <xd:desc>
@@ -81,8 +76,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>This xforms function is used to get the concatened string corresponding to a
-                dynamic text.</xd:p>
+            <xd:p>This xforms function is used to get the concatened string corresponding to a dynamic text.</xd:p>
             <xd:p>It is created by calling the static text and making it dynamic.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -119,8 +113,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>This recursive template returns the calculated conditional text from the static
-                one.</xd:p>
+            <xd:p>This recursive template returns the calculated conditional text from the static one.</xd:p>
         </xd:desc>
     </xd:doc>
 
@@ -152,9 +145,7 @@
                         test="index-of($condition-variables//r:SourceParameterReference//r:ID,
                         substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) >0">
                         <xsl:value-of select="$instance-ancestor"/>
-                        <xsl:value-of
-                            select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"
-                        />
+                        <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
                     </xsl:when>
                     <!-- conditionalText contains the calculation of the variable -->
                     <xsl:when
@@ -198,8 +189,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>This function returns an xforms hint for the context on which it is
-                applied.</xd:p>
+            <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
             <xd:p>It uses different DDI functions to do this job.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -235,17 +225,14 @@
                                 </xsl:for-each>
                             </xsl:if>
                         </xsl:variable>
-                        <xsl:value-of
-                            select="concat($labels-resource/Languages/Language[@xml:lang=$language]/Hint/Number,
-                            format-number((number(enoddi:get-minimum($context))*3+number(enoddi:get-maximum($context))) div 4,
-                            $number-format))"
+                        <xsl:value-of select="concat($labels-resource/Languages/Language[@xml:lang=$language]/Hint/Number,
+                                                     format-number((number(enoddi:get-minimum($context))*3+number(enoddi:get-maximum($context))) div 4,
+                                                     $number-format))"
                         />
                     </xsl:if>
                     <!-- If it is a date, we display this hint -->
                     <xsl:if test="$type='date'">
-                        <xsl:value-of
-                            select="$labels-resource/Languages/Language[@xml:lang=$language]/Hint/Date"
-                        />
+                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Hint/Date"/>
                     </xsl:if>
                 </xsl:if>
             </xsl:when>
@@ -258,8 +245,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>This function returns an xforms alert for the context on which it is
-                applied.</xd:p>
+            <xd:p>This function returns an xforms alert for the context on which it is applied.</xd:p>
             <xd:p>It uses different DDI functions to do this job.</xd:p>
         </xd:desc>
     </xd:doc>
