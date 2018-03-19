@@ -118,6 +118,20 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    <xsl:template match="pogues:Unit" mode="conversion-table">
+        <xsl:choose>
+            <xsl:when test=". = 'http://id.insee.fr/unit/euro'">
+                <xsl:value-of select="'€'"/>
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/keuro'">
+                <xsl:value-of select="'k€'"/>
+            </xsl:when>          
+            <xsl:when test=". = 'http://id.insee.fr/unit/percent'">
+                <xsl:value-of select="'%'"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
 
     <xsl:template match="pogues:Expression | pogues:Formula | pogues:Response" mode="enopogues:get-ip-id">
         <xsl:param name="index" tunnel="yes"/>

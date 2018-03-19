@@ -326,7 +326,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>     
         <xsl:variable name="unit" select="enoddi32:get-unit($source-context)"/>
         <xsl:if test="not(normalize-space($unit) = ('',' '))">
-            <r:MeasurementUnit>%</r:MeasurementUnit>
+            <r:MeasurementUnit><xsl:value-of select="$unit"/></r:MeasurementUnit>
         </xsl:if>
     </xsl:template>
 
