@@ -205,10 +205,22 @@
 		</profile>
 	</profiles>
 
-	<contributors>
-		<contributor>
+	<developers>
+		<developer>
 			<name>François Bulot</name>
-		</contributor>
+		</developer>
+		<developer>
+			<name>Guillaume Jardillier</name>
+		</developer>
+		<developer>
+			<name>Eric Sigaud</name>
+		</developer>
+		<developer>
+			<name>Benoit Werquin</name>
+		</developer>
+	</developers>
+
+	<contributors>
 		<contributor>
 			<name>Franck Cotton</name>
 		</contributor>
@@ -216,13 +228,7 @@
 			<name>Thomas Dubois</name>
 		</contributor>
 		<contributor>
-			<name>Heidi Koumarianos</name>
-		</contributor>
-		<contributor>
-			<name>Eric Sigaud</name>
-		</contributor>
-		<contributor>
-			<name>Benoit Werquin</name>
+			<name>Heïdi Koumarianos</name>
 		</contributor>
 	</contributors>
 
