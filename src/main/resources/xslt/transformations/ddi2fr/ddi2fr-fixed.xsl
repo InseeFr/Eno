@@ -323,6 +323,105 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
+            <xd:p>It uses different DDI functions to do this job.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:get-constraint">
+        <xsl:param name="context" as="item()"/>
+
+        <xsl:variable name="control">
+            <xsl:value-of select="enoddi:get-control($context)"/>
+        </xsl:variable>
+        
+        <xsl:choose>
+            <xsl:when test="$control != ''">
+                <xsl:value-of select="$control"/>
+            </xsl:when>
+            <xsl:when test="enoddi:get-type($context)='number'">
+                <xsl:variable name="number-of-decimals" select="enoddi:get-number-of-decimals($context)"/>
+                <xsl:variable name="minimum" select="enoddi:get-minimum($context)"/>
+                <xsl:variable name="maximum" select="enoddi:get-maximum($context)"/>
+                <xsl:variable name="minimum-included" select="enoddi:get-is-minimum-included($context)"/>
+                <xsl:variable name="maximum-included" select="enoddi:get-is-maximum-included($context)"/>
+                <xsl:variable name="type-of-number">
+                    <xsl:choose>
+                        <xsl:when test="number($number-of-decimals) &gt; 0">xs:float</xsl:when>
+                        <xsl:otherwise>xs:integer</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+
+                <xsl:value-of select="concat('if(. castable as ',$type-of-number,') then (',$type-of-number,'(.)&lt;')"/>
+                <xsl:if test="not($maximum-included = 'false')">=</xsl:if>
+                <xsl:choose>
+                    <xsl:when test="string-length($maximum) &gt; 9 and $type-of-number='xs:float'">
+                        <xsl:value-of select="concat('xs:float(',$maximum,')')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$maximum"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:value-of select="concat(' and ',$type-of-number,'(.)&gt;')"/>
+                <xsl:if test="not($minimum-included = 'false')">=</xsl:if>
+                <xsl:choose>
+                    <xsl:when test="string-length($minimum) &gt; 9 and $type-of-number='xs:float'">
+                        <xsl:value-of select="concat('xs:float(',$minimum,')')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$minimum"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:if test="$type-of-number='xs:float'">
+                    <xsl:variable name="numbers-before-dot-for-minimum">
+                        <xsl:choose>
+                            <xsl:when test="contains($minimum,'.')">
+                                <xsl:value-of select="string-length(substring-before(replace($minimum,'-',''),'.'))"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="string-length(replace($minimum,'-',''))"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:variable name="numbers-before-dot-for-maximum">
+                        <xsl:choose>
+                            <xsl:when test="contains($maximum,'.')">
+                                <xsl:value-of select="string-length(substring-before(replace($maximum,'-',''),'.'))"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="string-length(replace($maximum,'-',''))"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:variable name="numbers-before-dot-minus-one">
+                        <xsl:choose>
+                            <xsl:when test="number($numbers-before-dot-for-minimum) &gt; number($numbers-before-dot-for-maximum)">
+                                <xsl:value-of select="number($numbers-before-dot-for-minimum)-1"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="number($numbers-before-dot-for-maximum)-1"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+
+                    <xsl:value-of select="' and matches(.,''^'"/>
+                    <xsl:if test="number($minimum) &lt; 0 and number($maximum) &lt; 0"><xsl:value-of select="'-'"/></xsl:if>
+                    <xsl:if test="number($minimum) &lt; 0 and number($maximum) &gt;= 0"><xsl:value-of select="'(-)?'"/></xsl:if>
+                    <xsl:value-of select="'(0|[1-9][0-9]{0,'"/>
+                    <xsl:value-of select="$numbers-before-dot-minus-one"/>
+                    <xsl:value-of select="'})(\.[0-9]{1,'"/>
+                    <xsl:value-of select="concat($number-of-decimals,'})?$'')')"/>
+                </xsl:if>
+                <xsl:value-of select="') else (.='''')'"/>
+            </xsl:when>
+            <xsl:when test="enoddi:get-format-constraint($context)">
+                <xsl:value-of select="concat('matches(.,''',enoddi:get-format-constraint($context),''') or .=''''')"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:function>
+    
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>This function retrieves the languages to appear in the generated Xforms.</xd:p>
             <xd:p>Those languages can be specified in a parameters file on a questionnaire
                 level.</xd:p>

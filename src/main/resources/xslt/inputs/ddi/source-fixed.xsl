@@ -615,31 +615,6 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Get the concatenate formula of all ComputationItem controls for a given module.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']" mode="enoddi:get-control">
-        <xsl:variable name="controls">
-            <xsl:for-each select=".//d:Instruction[ancestor::d:ComputationItem]">
-                <xsl:text> and </xsl:text>
-                <xsl:apply-templates select="current()" mode="enoddi:get-control"/>
-            </xsl:for-each>
-        </xsl:variable>
-        <xsl:variable name="result">
-            <xsl:choose>
-                <xsl:when test="contains($controls,'and ')">
-                    <xsl:value-of select="substring($controls,6)"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$controls"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:value-of select="$result"/>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
             <xd:p>Get the formula to know when a module is hidden or not.</xd:p>
         </xd:desc>
     </xd:doc>
