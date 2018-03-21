@@ -342,8 +342,6 @@
                 <xsl:variable name="number-of-decimals" select="enoddi:get-number-of-decimals($context)"/>
                 <xsl:variable name="minimum" select="enoddi:get-minimum($context)"/>
                 <xsl:variable name="maximum" select="enoddi:get-maximum($context)"/>
-                <xsl:variable name="minimum-included" select="enoddi:get-is-minimum-included($context)"/>
-                <xsl:variable name="maximum-included" select="enoddi:get-is-maximum-included($context)"/>
                 <xsl:variable name="type-of-number">
                     <xsl:choose>
                         <xsl:when test="number($number-of-decimals) &gt; 0">xs:float</xsl:when>
@@ -351,8 +349,7 @@
                     </xsl:choose>
                 </xsl:variable>
 
-                <xsl:value-of select="concat('if(. castable as ',$type-of-number,') then (',$type-of-number,'(.)&lt;')"/>
-                <xsl:if test="not($maximum-included = 'false')">=</xsl:if>
+                <xsl:value-of select="concat('if(. castable as ',$type-of-number,') then (',$type-of-number,'(.)&lt;=')"/>
                 <xsl:choose>
                     <xsl:when test="string-length($maximum) &gt; 9 and $type-of-number='xs:float'">
                         <xsl:value-of select="concat('xs:float(',$maximum,')')"/>
@@ -361,8 +358,7 @@
                         <xsl:value-of select="$maximum"/>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:value-of select="concat(' and ',$type-of-number,'(.)&gt;')"/>
-                <xsl:if test="not($minimum-included = 'false')">=</xsl:if>
+                <xsl:value-of select="concat(' and ',$type-of-number,'(.)&gt;=')"/>
                 <xsl:choose>
                     <xsl:when test="string-length($minimum) &gt; 9 and $type-of-number='xs:float'">
                         <xsl:value-of select="concat('xs:float(',$minimum,')')"/>

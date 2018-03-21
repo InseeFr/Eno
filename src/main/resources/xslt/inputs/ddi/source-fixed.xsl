@@ -243,6 +243,54 @@
     </xsl:template>
 
     <xd:doc>
+        <xd:desc>Getting the minimum, when difficult to recalculate</xd:desc>
+    </xd:doc>
+    <xsl:template match="*[name()='d:NumericDomainReference' or name()='d:NumericDomain'][descendant::r:Low/@isInclusive='false' and descendant::*/@decimalPositions &gt; 0]
+                            | d:QuestionItem[d:NumericDomain or d:NumericDomainReference][descendant::r:Low/@isInclusive='false' and descendant::*/@decimalPositions &gt; 0]"
+                            mode="enoddi:get-minimum">
+        <xsl:variable name="initial-minimum" select="descendant::r:Low[not(ancestor::r:OutParameter)]"/>
+        <xsl:variable name="decimal-position" select="enoddi:get-number-of-decimals(.)"/>
+        <xsl:variable name="power">
+            <xsl:value-of select="'1'"/>
+            <xsl:for-each select="1,$decimal-position">
+                <xsl:value-of select="'0'"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="format">
+            <xsl:value-of select="'#.'"/>
+            <xsl:for-each select="1,$decimal-position">
+                <xsl:value-of select="'#'"/>
+            </xsl:for-each>
+        </xsl:variable>
+
+        <xsl:value-of select="format-number(($initial-minimum * $power +1) div $power,$format)"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>Getting the maximum, when difficult to recalculate</xd:desc>
+    </xd:doc>
+    <xsl:template match="*[name()='d:NumericDomainReference' or name()='d:NumericDomain'][descendant::r:High/@isInclusive='false' and descendant::*/@decimalPositions &gt; 0]
+        | d:QuestionItem[d:NumericDomain or d:NumericDomainReference][descendant::r:High/@isInclusive='false' and descendant::*/@decimalPositions &gt; 0]"
+        mode="enoddi:get-maximum">
+        <xsl:variable name="initial-maximum" select="descendant::r:High[not(ancestor::r:OutParameter)]"/>
+        <xsl:variable name="decimal-position" select="enoddi:get-number-of-decimals(.)"/>
+        <xsl:variable name="power">
+            <xsl:value-of select="'1'"/>
+            <xsl:for-each select="1,$decimal-position">
+                <xsl:value-of select="'0'"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="format">
+            <xsl:value-of select="'#.'"/>
+            <xsl:for-each select="1,$decimal-position">
+                <xsl:value-of select="'#'"/>
+            </xsl:for-each>
+        </xsl:variable>
+
+        <xsl:value-of select="format-number(($initial-maximum * $power -1) div $power,$format)"/>
+    </xsl:template>
+
+    <xd:doc>
         <xd:desc>
             <xd:p>Getting levels of first dimension in d:QuestionGrid elements.</xd:p>
         </xd:desc>
