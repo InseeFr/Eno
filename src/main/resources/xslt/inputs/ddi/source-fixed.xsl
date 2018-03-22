@@ -252,18 +252,18 @@
         <xsl:variable name="decimal-position" select="enoddi:get-number-of-decimals(.)"/>
         <xsl:variable name="power">
             <xsl:value-of select="'1'"/>
-            <xsl:for-each select="1,$decimal-position">
+            <xsl:for-each select="1 to $decimal-position">
                 <xsl:value-of select="'0'"/>
             </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="format">
-            <xsl:value-of select="'#.'"/>
-            <xsl:for-each select="1,$decimal-position">
-                <xsl:value-of select="'#'"/>
+            <xsl:value-of select="'0.'"/>
+            <xsl:for-each select="1 to $decimal-position">
+                <xsl:value-of select="'0'"/>
             </xsl:for-each>
         </xsl:variable>
 
-        <xsl:value-of select="format-number(($initial-minimum * $power +1) div $power,$format)"/>
+        <xsl:value-of select="substring-before(substring-after(format-number(($initial-minimum * $power +1) div $power,$format),''''),'''')"/>
     </xsl:template>
 
     <xd:doc>
@@ -276,18 +276,18 @@
         <xsl:variable name="decimal-position" select="enoddi:get-number-of-decimals(.)"/>
         <xsl:variable name="power">
             <xsl:value-of select="'1'"/>
-            <xsl:for-each select="1,$decimal-position">
+            <xsl:for-each select="1 to $decimal-position">
                 <xsl:value-of select="'0'"/>
             </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="format">
-            <xsl:value-of select="'#.'"/>
-            <xsl:for-each select="1,$decimal-position">
-                <xsl:value-of select="'#'"/>
+            <xsl:value-of select="'0.'"/>
+            <xsl:for-each select="1 to $decimal-position">
+                <xsl:value-of select="'0'"/>
             </xsl:for-each>
         </xsl:variable>
 
-        <xsl:value-of select="format-number(($initial-maximum * $power -1) div $power,$format)"/>
+        <xsl:value-of select="substring-before(substring-after(format-number(($initial-maximum * $power -1) div $power,$format),''''),'''')"/>
     </xsl:template>
 
     <xd:doc>

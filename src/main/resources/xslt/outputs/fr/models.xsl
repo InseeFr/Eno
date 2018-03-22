@@ -323,6 +323,7 @@
         <xsl:variable name="type" select="enofr:get-type($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="constraint" select="enofr:get-constraint($source-context)"/>
+        <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="not($required = ('false()', ''))">
@@ -356,10 +357,275 @@
                     </xsl:attribute>
                 </xsl:element>
             </xsl:if>
+            <xsl:if test="$format-constraint != ''">
+                <xsl:element name="xf:constraint">
+                    <xsl:attribute name="value">
+                        <xsl:if test="enofr:get-readonly-ancestors($source-context)!=''">
+                            <xsl:for-each select="enofr:get-readonly-ancestors($source-context)">
+                                <xsl:value-of select="concat('not(',.,') or ')"/>
+                            </xsl:for-each>                            
+                        </xsl:if>
+                        <xsl:value-of select="concat('matches(.,''',$format-constraint,''') or .=''''')"/>
+                    </xsl:attribute>
+                </xsl:element>
+            </xsl:if>
+            <xsl:if test="enofr:get-type($source-context)='number'">
+                <xsl:variable name="number-of-decimals" select="enofr:get-number-of-decimals($source-context)"/>
+                <xsl:variable name="minimum" select="enofr:get-minimum($source-context)"/>
+                <xsl:variable name="maximum" select="enofr:get-maximum($source-context)"/>
+                <xsl:variable name="type-of-number">
+                    <xsl:choose>
+                        <xsl:when test="number($number-of-decimals) &gt; 0">xs:float</xsl:when>
+                        <xsl:otherwise>xs:integer</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                
+                <xsl:element name="xf:constraint">
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="concat('if(. castable as ',$type-of-number,') then (',$type-of-number,'(.)&lt;=')"/>
+                        <xsl:choose>
+                            <xsl:when test="string-length($maximum) &gt; 9 and $type-of-number='xs:float'">
+                                <xsl:value-of select="concat('xs:float(',$maximum,')')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$maximum"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:value-of select="concat(' and ',$type-of-number,'(.)&gt;=')"/>
+                        <xsl:choose>
+                            <xsl:when test="string-length($minimum) &gt; 9 and $type-of-number='xs:float'">
+                                <xsl:value-of select="concat('xs:float(',$minimum,')')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="$minimum"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:if test="$type-of-number='xs:float'">
+                            <xsl:value-of select="' and matches(.,'"/>
+                            <xsl:choose>
+                                <xsl:when test="number($minimum) = 0">
+                                    <xsl:value-of select="'''^('"/>
+                                    <xsl:call-template name="number-regexp">
+                                        <xsl:with-param name="number" select="$maximum"/>
+                                    </xsl:call-template>
+                                    <xsl:value-of select="')$'''"/>
+                                </xsl:when>
+                                <xsl:when test="number($maximum)+number($minimum) = 0">
+                                    <xsl:value-of select="'''^-?('"/>
+                                    <xsl:call-template name="number-regexp">
+                                        <xsl:with-param name="number" select="$maximum"/>
+                                    </xsl:call-template>
+                                    <xsl:value-of select="')$'''"/>
+                                </xsl:when>
+                                <xsl:when test="number($maximum) = 0">
+                                    <xsl:value-of select="'''^-('"/>
+                                    <xsl:call-template name="number-regexp">
+                                        <xsl:with-param name="number" select="substring($minimum,2)"/>
+                                    </xsl:call-template>
+                                    <xsl:value-of select="')$'''"/>
+                                </xsl:when>
+                                <xsl:when test="number($minimum) &gt; 0 ">
+                                    <xsl:value-of select="'''^('"/>
+                                    <xsl:call-template name="number-regexp">
+                                        <xsl:with-param name="number" select="$maximum"/>
+                                    </xsl:call-template>
+                                    <xsl:value-of select="')$'') and not(matches(.,''^('"/>
+                                    <xsl:variable name="excluded-minimum">
+                                        <xsl:variable name="power">
+                                            <xsl:value-of select="'1'"/>
+                                            <xsl:for-each select="1 to $number-of-decimals">
+                                                <xsl:value-of select="'0'"/>
+                                            </xsl:for-each>
+                                        </xsl:variable>
+                                        <xsl:variable name="format">
+                                            <xsl:value-of select="'''0.'"/>
+                                            <xsl:for-each select="1 to $number-of-decimals">
+                                                <xsl:value-of select="'0'"/>
+                                            </xsl:for-each>
+                                            <xsl:value-of select="''''"/>
+                                        </xsl:variable>
+                                        <xsl:value-of select="substring-before(substring-after(format-number(($minimum * $power -1) div $power,$format),''''),'''')"/>
+                                    </xsl:variable>
+                                    <xsl:call-template name="number-regexp">
+                                        <xsl:with-param name="number" select="$excluded-minimum"/>
+                                    </xsl:call-template>
+                                    <xsl:value-of select="')$'')'"/>
+                                </xsl:when>
+                                <xsl:when test="number($minimum) &lt; 0 and number($maximum) &gt; 0">
+                                    <xsl:value-of select="'''^('"/>
+                                    <xsl:call-template name="number-regexp">
+                                        <xsl:with-param name="number" select="$maximum"/>
+                                    </xsl:call-template>
+                                    <xsl:value-of select="')$'') or matches(.,''^-('"/>
+                                    <xsl:call-template name="number-regexp">
+                                        <xsl:with-param name="number" select="substring($minimum,2)"/>
+                                    </xsl:call-template>
+                                    <xsl:value-of select="')$'''"/>
+                                </xsl:when>
+                                <xsl:when test="number($maximum) &lt; 0 ">
+                                    <xsl:value-of select="'''^-('"/>
+                                    <xsl:call-template name="number-regexp">
+                                        <xsl:with-param name="number" select="substring($minimum,2)"/>
+                                    </xsl:call-template>
+                                    <xsl:value-of select="')$'') and not(matches(.,''^-('"/>
+                                    <xsl:variable name="excluded-maximum">
+                                        <xsl:variable name="power">
+                                            <xsl:value-of select="'1'"/>
+                                            <xsl:for-each select="1 to $number-of-decimals">
+                                                <xsl:value-of select="'0'"/>
+                                            </xsl:for-each>
+                                        </xsl:variable>
+                                        <xsl:variable name="format">
+                                            <xsl:value-of select="'''0.'"/>
+                                            <xsl:for-each select="1 to $number-of-decimals">
+                                                <xsl:value-of select="'0'"/>
+                                            </xsl:for-each>
+                                            <xsl:value-of select="''''"/>
+                                        </xsl:variable>
+                                        <xsl:value-of select="substring-before(substring-after(format-number(($maximum * $power +1) div $power,$format),''''),'''')"/>
+                                    </xsl:variable>
+                                    <xsl:call-template name="number-regexp">
+                                        <xsl:with-param name="number" select="substring($maximum,2)"/>
+                                    </xsl:call-template>
+                                    <xsl:value-of select="')$'')'"/>
+                                </xsl:when>
+                            </xsl:choose>
+                            <xsl:value-of select="')'"/>
+                        </xsl:if>
+                        <xsl:value-of select="') else (.='''')'"/>
+                    </xsl:attribute>
+                </xsl:element>
+            </xsl:if>
         </xf:bind>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
+    </xsl:template>
+
+
+    <xsl:template name="number-regexp">
+        <xsl:param name="number"/>
+        
+        <xsl:analyze-string select="$number" regex="^([9]*)\.([9]*)$">
+            <xsl:matching-substring>
+                <xsl:value-of select="'(0|[1-9]'"/>
+                <xsl:if test="string-length(regex-group(1)) != 1">
+                    <xsl:value-of select="concat('[0-9]{0,',
+                                                 string-length(regex-group(1))-1,
+                                                 '}')"/>
+                </xsl:if>
+                <xsl:value-of select="concat(')(\.[0-9]{1,',
+                                             string-length(regex-group(2)),
+                                             '})?')"/>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <xsl:analyze-string select="$number" regex="^([0-8])([9]*)\.([9]*)$">
+                    <xsl:matching-substring>
+                        <xsl:if test="string-length(regex-group(2)) != 0">
+                            <xsl:call-template name="number-regexp">
+                                <xsl:with-param name="number" select="substring($number,2)"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="'|'"/>
+                        </xsl:if>
+                        <xsl:value-of select="concat('([1-',regex-group(1),']')"/>
+                        <xsl:if test="string-length(regex-group(2)) != 0">
+                            <xsl:value-of select="concat('[0-9]{',
+                                                         string-length(regex-group(2)),
+                                                         '}')"/>                            
+                        </xsl:if>
+                        <xsl:value-of select="concat(')(\.[0-9]{1,',
+                                                     string-length(regex-group(3)),
+                                                     '})?')"/>
+                    </xsl:matching-substring>
+                    <xsl:non-matching-substring>
+                        <xsl:analyze-string select="$number" regex="^([1-9])([0-9]*)([0-8])([9]*)\.([9]*)$">
+                            <xsl:matching-substring>
+                                <xsl:variable name="integer-begin" select="string(number(concat(regex-group(1),regex-group(2)))-1)"/>
+                                <xsl:choose>
+                                    <xsl:when test="contains($integer-begin,'E')">
+                                        <xsl:call-template name="number-regexp">
+                                            <xsl:with-param name="number" select="concat(replace(substring-before($integer-begin,'E'),'\.',''),'9',regex-group(4),'.',regex-group(5))"/>
+                                        </xsl:call-template>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:call-template name="number-regexp">
+                                            <xsl:with-param name="number" select="concat($integer-begin,'9',regex-group(4),'.',regex-group(5))"/>
+                                        </xsl:call-template>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                <xsl:value-of select="concat('|(',regex-group(1),regex-group(2),'[0-',regex-group(3),']')"/>
+                                <xsl:if test="string-length(regex-group(4)) != 0">
+                                    <xsl:value-of select="concat('[0-9]{',
+                                                                 string-length(regex-group(4)),
+                                                                 '}')"/>                                    
+                                </xsl:if>
+                                <xsl:value-of select="concat(')(\.[0-9]{1,',
+                                                             string-length(regex-group(5)),
+                                                             '})?')"/>
+                            </xsl:matching-substring>
+                            <xsl:non-matching-substring>
+                                <xsl:analyze-string select="$number" regex="^([0-9]*)\.(0*)([0-8])([9]*)$">
+                                    <xsl:matching-substring>
+                                        <xsl:if test="regex-group(1) != '0'">
+                                            <xsl:variable name="integer-begin" select="string(number(regex-group(1))-1)"/>
+                                            <xsl:choose>
+                                                <xsl:when test="contains($integer-begin,'E')">
+                                                    <xsl:call-template name="number-regexp">
+                                                        <xsl:with-param name="number" select="concat(replace(substring-before($integer-begin,'E'),'\.',''),'.',replace(regex-group(2),'0','9'),'9',regex-group(4))"/>
+                                                    </xsl:call-template>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:call-template name="number-regexp">
+                                                        <xsl:with-param name="number" select="concat($integer-begin,'.',replace(regex-group(2),'0','9'),'9',regex-group(4))"/>
+                                                    </xsl:call-template>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                            <xsl:value-of select="'|'"/>
+                                        </xsl:if>
+                                        <xsl:value-of select="concat(regex-group(1),'(\.',regex-group(2),'[0-',regex-group(3),']')"/>
+                                        <xsl:if test="string-length(regex-group(4)) != 0">
+                                            <xsl:value-of select="concat('[0-9]{0,',
+                                                                  string-length(regex-group(4)),
+                                                                  '}')"/>
+                                        </xsl:if>
+                                        <xsl:value-of select="')?'"/>
+                                    </xsl:matching-substring>
+                                    <xsl:non-matching-substring>
+                                        <xsl:analyze-string select="$number" regex="^([0-9]*)\.(0*)([1-9][0-9]*)([0-8])([9]*)$">
+                                            <xsl:matching-substring>
+                                                <xsl:variable name="decimal-begin" select="string(number(regex-group(3))-1)"/>
+                                                <xsl:variable name="new-number">
+                                                    <xsl:value-of select="concat(regex-group(1),'.',regex-group(2))"/>
+                                                    <xsl:if test="string-length($decimal-begin) &lt; string-length(regex-group(3))">
+                                                        <xsl:value-of select="'0'"/>
+                                                    </xsl:if>
+                                                    <xsl:value-of select="concat($decimal-begin,'9',regex-group(5))"/>
+                                                </xsl:variable>
+                                                <xsl:call-template name="number-regexp">
+                                                    <xsl:with-param name="number" select="$new-number"/>
+                                                </xsl:call-template>                                                
+                                                <xsl:value-of select="concat('|',regex-group(1),'\.',regex-group(2),regex-group(3),'([0-',regex-group(4),']')"/>
+                                                <xsl:if test="string-length(regex-group(5)) != 0">
+                                                    <xsl:value-of select="concat('[0-9]{0,',
+                                                                                 string-length(regex-group(5)),
+                                                                                 '}')"/>                                                    
+                                                </xsl:if>
+                                                <xsl:value-of select="')?'"/>
+                                            </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="'NotANumber'"/>
+                                                <xsl:value-of select="$number"/>
+                                                <xsl:value-of select="'NotANumber'"/>
+                                            </xsl:non-matching-substring>
+                                        </xsl:analyze-string>                                        
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
+                            </xsl:non-matching-substring>
+                        </xsl:analyze-string>
+                    </xsl:non-matching-substring>
+                </xsl:analyze-string>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
     </xsl:template>
 
     <xd:doc>
@@ -421,45 +687,8 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:variable name="required" select="enofr:get-required($source-context)"/>
-        <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
-        <xsl:variable name="calculate" select="enofr:get-calculate($source-context)"/>
-        <xsl:variable name="type" select="enofr:get-type($source-context)"/>
-        <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
-        <xsl:variable name="constraint" select="enofr:get-constraint($source-context)"/>
 
-        <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
-            <xsl:if test="not($required = ('false()', ''))">
-                <xsl:attribute name="required" select="$required"/>
-            </xsl:if>
-            <xsl:if test="$relevant != ''">
-                <xsl:attribute name="relevant" select="$relevant"/>
-            </xsl:if>
-            <xsl:if test="$calculate != ''">
-                <xsl:attribute name="calculate" select="$calculate"/>
-            </xsl:if>
-            <xsl:if test="$type = 'date'">
-                <xsl:attribute name="type"  select="concat('xf:', $type)"/>
-            </xsl:if>
-            <xsl:if test="not($readonly = ('false()', ''))">
-                <xsl:attribute name="readonly" select="concat('not(', $readonly, ')')"/>
-            </xsl:if>
-            <xsl:if test="$constraint != ''">
-                <xsl:element name="xf:constraint">
-                    <xsl:variable name="alert-level" select="enofr:get-alert-level($source-context)"/>
-                    <xsl:if test="$alert-level != ''">
-                        <xsl:attribute name="level" select="$alert-level"/>
-                    </xsl:if>
-                    <xsl:attribute name="value" select="$constraint"/>
-                </xsl:element>
-            </xsl:if>
-        </xf:bind>
-        <!--<xsl:variable name="name-bis" select="concat($name, '-group')"/>
-        <xf:bind id="{$name-bis}-bind" name="{$name-bis}" ref="{$name-bis}">
-            <xsl:if test="enofr:get-relevant($source-context) != ''">
-                <xsl:attribute name="relevant" select="enofr:get-relevant($source-context)"/>
-            </xsl:if>
-        </xf:bind>-->
+        <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>

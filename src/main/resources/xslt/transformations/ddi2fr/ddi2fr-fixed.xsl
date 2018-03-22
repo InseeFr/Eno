@@ -320,7 +320,7 @@
             </xsl:if>
         </xsl:if>
     </xsl:function>
-
+<!--
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
@@ -414,7 +414,7 @@
             </xsl:when>
         </xsl:choose>
     </xsl:function>
-    
+    -->
 
     <xd:doc>
         <xd:desc>
