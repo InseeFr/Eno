@@ -12,22 +12,6 @@ lib/
 .project
 .settings/
 
-# Generated files
-#src/main/resources/xslt/inputs/ddi/source.xsl
-#src/main/resources/xslt/inputs/ddi/templates.xsl
-#src/main/resources/xslt/inputs/ddi/functions.xsl
-#src/main/resources/xslt/inputs/pogues-xml/source.xsl
-#src/main/resources/xslt/inputs/pogues-xml/templates.xsl
-#src/main/resources/xslt/inputs/pogues-xml/functions.xsl
-#src/main/resources/xslt/transformations/ddi2fr/ddi2fr.xsl
-#src/main/resources/xslt/transformations/ddi2fr/drivers.xsl
-#src/main/resources/xslt/transformations/ddi2fr/functions.xsl
-#src/main/resources/xslt/transformations/ddi2fr/tree-navigation.xsl
-#src/main/resources/xslt/transformations/pogues-xml2ddi/drivers.xsl
-#src/main/resources/xslt/transformations/pogues-xml2ddi/functions.xsl
-#src/main/resources/xslt/transformations/pogues-xml2ddi/pogues-xml2ddi.xsl
-#src/main/resources/xslt/transformations/pogues-xml2ddi/tree-navigation.xsl
-
 # Locked Fods files
 *.fods#
  
@@ -37,8 +21,13 @@ src/main/resources/xslt/inputs/*/templates.xsl
 src/main/resources/xslt/inputs/*/functions.xsl
 src/main/resources/xslt/transformations/*/*.xsl
 src/main/resources/xml/null.xml
+
+# Ignore generated xml files
+questionnaires/*/ddi/*-ready.xml
  
 # Don't ignore not generated files looking like generated ones
 !src/main/resources/xslt/inputs/fods/source.xsl
 !src/main/resources/xslt/inputs/xml/source.xsl
 !src/main/resources/xslt/transformations/*/*-fixed.xsl
+
+

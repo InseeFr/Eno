@@ -39,14 +39,14 @@ public class FodsToXSLCompiler {
 			logger.info("Fods to XSL: START");			
 			// Fods2Xsl for /transformations/ddi/.fods files
 			generateDDI2FRDrivers();
-			//generateDDI2ODTDrivers();
+			generateDDI2ODTDrivers();
 			generatePOGUESXML2DDIDrivers();
 			generateDDI2FRFunctions();
-			//generateDDI2ODTFunctions();
+			generateDDI2ODTFunctions();
 			generatePOGUESXML2DDIFunctions();
 			generateDDI2FRTreeNavigation();
 			generatePOGUESXML2DDITreeNavigation();
-			//generateDDI2ODTTreeNavigation();
+			generateDDI2ODTTreeNavigation();
 			// Fods2Xsl for /output/ddi/.fods files
 			generateDDIFunctions();
 			generatePOGUESXMLFunctions();
@@ -55,12 +55,12 @@ public class FodsToXSLCompiler {
 			logger.info("Fods2Xsl : xsl stylesheets created.");
 			// Incorporation target : creating ddi2fr.xsl
 			ddi2frIncorporationTarget();
-			//ddi2odtIncorporationTarget();
+			ddi2odtIncorporationTarget();
 			poguesxml2ddiIncorporationTarget();
 			// TODO Copy generated files to JAR or classpath
 			logger.debug("Fods to XSL: END");
 			copyGeneratedFilesDDI2FR();
-			//copyGeneratedFilesDDI2ODT();
+			copyGeneratedFilesDDI2ODT();
 			copyGeneratedFilesPOGUESXML2DDI();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -527,6 +527,8 @@ public class FodsToXSLCompiler {
 		logger.debug("Entering Incorporation");
 		// Incorporating ddi2odt-fixed.xsl, drivers.xsl, functions.xsl and
 		// tree-navigation.xsl into ddi2odt.xsl
+		
+		// Incorporating ddi2odt-fixed.xsl and drivers into TEMP_TEMP_TMP
 		logger.debug(
 				"Incorporating " + Constants.TRANSFORMATIONS_DDI2ODT_DDI2ODT_FIXED_XSL +
 				" and " + Constants.TRANSFORMATIONS_DDI2ODT_DRIVERS_XSL_TMP +
@@ -539,7 +541,7 @@ public class FodsToXSLCompiler {
 				isTRANSFORMATIONS_DDI2ODT_DDI2ODT_FIXED_XSL,
 				isUTIL_XSL_INCORPORATION_XSL,
 				osTEMP_TEMP_TMP,
-				Constants.TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP);
+				Constants.TRANSFORMATIONS_DDI2ODT_DRIVERS_XSL_TMP);
 		isTRANSFORMATIONS_DDI2ODT_DDI2ODT_FIXED_XSL.close();
 		isUTIL_XSL_INCORPORATION_XSL.close();
 		osTEMP_TEMP_TMP.close();

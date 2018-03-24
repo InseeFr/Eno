@@ -39,8 +39,6 @@ public final class Constants {
 	
 	// ----- XSL Parameters path
 	public static final String CONFIG_DDI2FR = "/config/ddi2fr.xml";
-	public static final String CONFIG_DDI2ODT = "/config/ddi2odt.xml";
-	public static final String CONFIG_POGUES_XML2DDI = "/config/pogues-xml2ddi.xml";
 	public static final String PARAMETERS = "/parameters.xml";
 	public static final String LABELS_FOLDER = "/lang/fr/";
 	

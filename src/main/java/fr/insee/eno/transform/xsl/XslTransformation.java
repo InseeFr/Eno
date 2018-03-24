@@ -309,7 +309,6 @@ public class XslTransformation {
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
 		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.DDI2ODT_PROPERTIES_FILE, Constants.CONFIG_DDI2ODT);
 		transformer.setParameter(XslParameters.DDI2ODT_PARAMETERS_FILE, Constants.PARAMETERS);
 		transformer.setParameter(XslParameters.DDI2ODT_LABELS_FOLDER, Constants.LABELS_FOLDER);
 		logger.debug(
@@ -330,7 +329,6 @@ public class XslTransformation {
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
 		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.POGUES_XML2DDI_PROPERTIES_FILE, Constants.CONFIG_POGUES_XML2DDI);
 		transformer.setParameter(XslParameters.POGUES_XML2DDI_PARAMETERS_FILE, Constants.PARAMETERS);
 		transformer.setParameter(XslParameters.POGUES_XML2DDI_LABELS_FOLDER, Constants.LABELS_FOLDER);
 		logger.debug(
@@ -356,20 +354,5 @@ public class XslTransformation {
 						transformer.getParameter(XslParameters.DDI2FR_LABELS_FOLDER)));
 		xslTransform(transformer, inputFile, outputFile);
 	}
-	
-	public void transformBrowsingDDI2ODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, File labelFolder) throws Exception {
-		logger.info("Include the navigation elements into the ODT questionnaire");
-		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
-		tFactory.setURIResolver(new ClasspathURIResolver());
-		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.DDI2ODT_LABELS_FOLDER, Constants.LABELS_FOLDER);
-		logger.debug(
-				String.format(
-						"Transformer parameter is: %s",
-						transformer.getParameter(XslParameters.DDI2ODT_LABELS_FOLDER)));
-		xslTransform(transformer, inputFile, outputFile);
-	}
-	
 
 }
