@@ -400,6 +400,7 @@
                                 <xsl:value-of select="$minimum"/>
                             </xsl:otherwise>
                         </xsl:choose>
+                        <!-- The regex for number depends on the sign of minimum and maximum ; each case calls the named template : number-regexp -->
                         <xsl:if test="$type-of-number='xs:float'">
                             <xsl:value-of select="' and matches(.,'"/>
                             <xsl:choose>
@@ -503,10 +504,22 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:desc>Recursive named template which calculated the regex of a positive number</xd:desc>
+        <xd:desc>5 cases :
+            - only 9s (ex : 99999999.999999)
+            - only 9s except the first digit
+            - only 9s after the dot ; something different for a digit before the dot and different from the first one
+            - something different from 9s after the dot and the number made by the digits before the 9s is less than 10 (ex : 123456798.00000079999 or 12.5)
+            - something different from 9s after the dot and the number made by the digits before the 9s is more than 9 (ex : 12.109)
+            Each case adds a regex and, except the first one, calls itself or a previous one with at least one digit less different from 9 at the end
+            Ex : numbers less than 31.01299 : numbers between 31.01 and 31.01299 + numbers between 31 and 31.00999 + numbers between 30 and 30.999999 + numbers between 10 and 29.99999 + numbers between 0 and 9.99999
+        </xd:desc>
+    </xd:doc>
     <xsl:template name="number-regexp">
         <xsl:param name="number"/>
         
-        <xsl:analyze-string select="$number" regex="^([9]*)\.([9]*)$">
+        <xsl:analyze-string select="$number" regex="^([9]+)(\.9+)?$">
             <xsl:matching-substring>
                 <xsl:value-of select="'(0|[1-9]'"/>
                 <xsl:if test="string-length(regex-group(1)) != 1">
@@ -515,11 +528,11 @@
                                                  '}')"/>
                 </xsl:if>
                 <xsl:value-of select="concat(')(\.[0-9]{1,',
-                                             string-length(regex-group(2)),
+                                             string-length(regex-group(2))-1,
                                              '})?')"/>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
-                <xsl:analyze-string select="$number" regex="^([0-8])([9]*)\.([9]*)$">
+                <xsl:analyze-string select="$number" regex="^([0-8])([9]*)(\.9+)?$">
                     <xsl:matching-substring>
                         <xsl:if test="string-length(regex-group(2)) != 0">
                             <xsl:call-template name="number-regexp">
@@ -534,7 +547,7 @@
                                                          '}')"/>                            
                         </xsl:if>
                         <xsl:value-of select="concat(')(\.[0-9]{1,',
-                                                     string-length(regex-group(3)),
+                                                     string-length(regex-group(3))-1,
                                                      '})?')"/>
                     </xsl:matching-substring>
                     <xsl:non-matching-substring>
