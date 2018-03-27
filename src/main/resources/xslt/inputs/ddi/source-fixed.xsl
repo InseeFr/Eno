@@ -243,11 +243,40 @@
     </xsl:template>
 
     <xd:doc>
+        <xd:desc>Getting the minimum, when the number of digits after the dot is not good</xd:desc>
+    </xd:doc>
+    <xsl:template match="*[name()='d:NumericDomainReference' or name()='d:NumericDomain'][not(descendant::r:Low/@isInclusive='false') and descendant-or-self::*/@decimalPositions &gt; 0
+                            and (not(contains(descendant::r:Low[not(ancestor::r:OutParameter)],'.')) or string-length(substring-after(descendant::r:Low[not(ancestor::r:OutParameter)],'.'))!=descendant::*/@decimalPositions)]
+                            | d:QuestionItem[d:NumericDomain or d:NumericDomainReference][not(descendant::r:Low/@isInclusive='false') and descendant::*/@decimalPositions &gt; 0
+                            and (not(contains(descendant::r:Low[not(ancestor::r:OutParameter)],'.')) or string-length(substring-after(descendant::r:Low[not(ancestor::r:OutParameter)],'.'))!=descendant::*/@decimalPositions)]"
+                            mode="enoddi:get-minimum">
+        <xsl:variable name="decimal-position" select="enoddi:get-number-of-decimals(.)"/>
+        <xsl:variable name="initial-minimum" select="descendant::r:Low[not(ancestor::r:OutParameter)]"/>
+        <xsl:variable name="new-minimum">
+            <xsl:value-of select="$initial-minimum"/>
+            <xsl:choose>
+                <xsl:when test="contains($initial-minimum,'.')">
+                    <xsl:for-each select="string-length(substring-after($initial-minimum,'.'))+1 to $decimal-position">
+                        <xsl:value-of select="'0'"/>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="'.'"/>
+                    <xsl:for-each select="1 to $decimal-position">
+                        <xsl:value-of select="'0'"/>
+                    </xsl:for-each>                
+                </xsl:otherwise>
+            </xsl:choose>            
+        </xsl:variable>
+        <xsl:value-of select="$new-minimum"/>
+    </xsl:template>
+    
+    <xd:doc>
         <xd:desc>Getting the minimum, when difficult to recalculate</xd:desc>
     </xd:doc>
     <xsl:template match="*[name()='d:NumericDomainReference' or name()='d:NumericDomain'][descendant::r:Low/@isInclusive='false' and descendant::*/@decimalPositions &gt; 0]
-                            | d:QuestionItem[d:NumericDomain or d:NumericDomainReference][descendant::r:Low/@isInclusive='false' and descendant::*/@decimalPositions &gt; 0]"
-                            mode="enoddi:get-minimum">
+        | d:QuestionItem[d:NumericDomain or d:NumericDomainReference][descendant::r:Low/@isInclusive='false' and descendant::*/@decimalPositions &gt; 0]"
+        mode="enoddi:get-minimum">
         <xsl:variable name="initial-minimum" select="descendant::r:Low[not(ancestor::r:OutParameter)]"/>
         <xsl:variable name="decimal-position" select="enoddi:get-number-of-decimals(.)"/>
         <xsl:variable name="power">
@@ -262,8 +291,37 @@
                 <xsl:value-of select="'0'"/>
             </xsl:for-each>
         </xsl:variable>
-
+        
         <xsl:value-of select="substring-before(substring-after(format-number(($initial-minimum * $power +1) div $power,$format),''''),'''')"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>Getting the maximum, when the number of digits after the dot is not good</xd:desc>
+    </xd:doc>
+    <xsl:template match="*[name()='d:NumericDomainReference' or name()='d:NumericDomain'][not(descendant::r:High/@isInclusive='false') and descendant-or-self::*/@decimalPositions &gt; 0
+        and (not(contains(descendant::r:High[not(ancestor::r:OutParameter)],'.')) or string-length(substring-after(descendant::r:High[not(ancestor::r:OutParameter)],'.'))!=descendant::*/@decimalPositions)]
+        | d:QuestionItem[d:NumericDomain or d:NumericDomainReference][not(descendant::r:High/@isInclusive='false') and descendant::*/@decimalPositions &gt; 0
+        and (not(contains(descendant::r:High[not(ancestor::r:OutParameter)],'.')) or string-length(substring-after(descendant::r:High[not(ancestor::r:OutParameter)],'.'))!=descendant::*/@decimalPositions)]"
+        mode="enoddi:get-maximum">
+        <xsl:variable name="decimal-position" select="enoddi:get-number-of-decimals(.)"/>
+        <xsl:variable name="initial-maximum" select="descendant::r:High[not(ancestor::r:OutParameter)]"/>
+        <xsl:variable name="new-maximum">
+            <xsl:value-of select="$initial-maximum"/>
+            <xsl:choose>
+                <xsl:when test="contains($initial-maximum,'.')">
+                    <xsl:for-each select="string-length(substring-after($initial-maximum,'.'))+1 to $decimal-position">
+                        <xsl:value-of select="'0'"/>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="'.'"/>
+                    <xsl:for-each select="1 to $decimal-position">
+                        <xsl:value-of select="'0'"/>
+                    </xsl:for-each>                
+                </xsl:otherwise>
+            </xsl:choose>            
+        </xsl:variable>
+        <xsl:value-of select="$new-maximum"/>
     </xsl:template>
 
     <xd:doc>

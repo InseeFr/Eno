@@ -214,8 +214,7 @@
                     </xsl:variable>
                     <!-- If it is number, we display this hint -->
                     <xsl:if test="$type='number'">
-                        <xsl:variable name="number-of-decimals"
-                            select="enoddi:get-number-of-decimals($context)"/>
+                        <xsl:variable name="number-of-decimals" select="enoddi:get-number-of-decimals($context)"/>
                         <xsl:variable name="number-format">
                             <xsl:value-of select="'#'"/>
                             <xsl:if test="$number-of-decimals!='' and $number-of-decimals!='0'">
