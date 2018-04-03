@@ -128,8 +128,17 @@
 
         <!-- Then each d:Instrument is dereferenced with the previous dereferenced tree used as references -->
         <xsl:for-each select="//d:Instrument">
-            <xsl:result-document
-                href="{lower-case(concat('file:///',replace($output-folder, '\\' , '/'),'/',replace(r:ID/text(), concat($root/text(),'-In-'), ''),'.tmp'))}">
+            <xsl:variable name="form-name">
+                <xsl:choose>
+                    <xsl:when test="d:InstrumentName">
+                        <xsl:value-of select="d:InstrumentName/r:String"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="replace(r:ID/text(), concat($root/text(),'-In-'), '')"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <xsl:result-document href="{lower-case(concat('file:///',replace($output-folder, '\\' , '/'),'/',$form-name,'.tmp'))}">
                 <DDIInstance>
                     <s:StudyUnit>
                         <xsl:apply-templates select=".">
