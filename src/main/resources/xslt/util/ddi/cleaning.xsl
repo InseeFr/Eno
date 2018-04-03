@@ -187,4 +187,63 @@
         </xsl:copy>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Correct r:Low when @isInclusive='false' or number of digits after the dot is not good</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="r:Low|r:High">
+        <xsl:variable name="initial-extremum" select="text()"/>
+        <xsl:variable name="evolution">
+            <xsl:choose>
+                <xsl:when test="@isInclusive='false' and name()='r:Low'">
+                    <xsl:value-of select="'1'"/>
+                </xsl:when>
+                <xsl:when test="@isInclusive='false' and name()='r:High'">
+                    <xsl:value-of select="'-1'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="'0'"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="decimal-position">
+            <xsl:choose>
+                <xsl:when test="../../@decimalPositions">
+                    <xsl:value-of select="../../@decimalPositions"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="'0'"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        
+        <xsl:copy>
+            <xsl:choose>
+                <xsl:when test="$evolution='0' and $decimal-position='0' and not(contains($initial-extremum,'.'))">
+                    <xsl:value-of select="$initial-extremum"/>
+                </xsl:when>
+                <xsl:when test="$evolution='0' and contains($initial-extremum,'.') and string-length(substring-after($initial-extremum,'.')) = number($decimal-position)">
+                    <xsl:value-of select="$initial-extremum"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:variable name="power">
+                        <xsl:value-of select="'1'"/>
+                        <xsl:for-each select="1 to $decimal-position">
+                            <xsl:value-of select="'0'"/>
+                        </xsl:for-each>
+                    </xsl:variable>
+                    <xsl:variable name="format">
+                        <xsl:value-of select="'0.'"/>
+                        <xsl:for-each select="1 to $decimal-position">
+                            <xsl:value-of select="'0'"/>
+                        </xsl:for-each>
+                    </xsl:variable>
+                    <xsl:value-of select="format-number(($initial-extremum * $power + $evolution) div $power,$format)"/>
+                    <!--<xsl:value-of select="substring-before(substring-after(format-number(($initial-extremum * $power + $evolution) div $power,$format),''''),'''')"/>-->
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:copy>
+    </xsl:template>
 </xsl:stylesheet>
