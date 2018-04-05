@@ -1,20 +1,21 @@
 package fr.insee.eno;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.File;
 import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * Only for dev purposes.
  * */
 public class DummyMain {
 	
-	private static final Logger logger = LogManager.getLogger(DummyMain.class);
+	private static final Logger logger = LoggerFactory.getLogger(DummyMain.class);
 
 	public static void main(String[] args) {
 		logger.info("Starting generation program");

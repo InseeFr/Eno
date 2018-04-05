@@ -1,17 +1,19 @@
 package fr.insee.eno.transform.xsl;
 
-import fr.insee.eno.Constants;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URI;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import fr.insee.eno.Constants;
 
 /**
  * Main Saxon Service used to perform XSLT transformations
@@ -21,7 +23,7 @@ import java.net.URI;
  */
 public class XslTransformation {
 
-	final static Logger logger = LogManager.getLogger(XslTransformation.class);
+	final static Logger logger = LoggerFactory.getLogger(XslTransformation.class);
 
 	/**
 	 * Main Saxon transformation method

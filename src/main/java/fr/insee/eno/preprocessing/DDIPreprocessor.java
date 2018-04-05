@@ -7,8 +7,8 @@ import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -18,7 +18,7 @@ import fr.insee.eno.transform.xsl.XslTransformation;
  */
 public class DDIPreprocessor implements Preprocessor {
 
-	private static final Logger logger = LogManager.getLogger(DDIPreprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(DDIPreprocessor.class);
 
 	// FIXME Inject !
 	private static XslTransformation saxonService = new XslTransformation();

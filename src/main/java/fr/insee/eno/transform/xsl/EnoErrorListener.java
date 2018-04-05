@@ -1,14 +1,17 @@
 package fr.insee.eno.transform.xsl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
 public class EnoErrorListener implements ErrorListener {
 
-    private final static Logger logger = LogManager.getLogger(EnoErrorListener.class);
+	private final static Marker fatal = MarkerFactory.getMarker("FATAL");
+    private final static Logger logger = LoggerFactory.getLogger(EnoErrorListener.class);
 
     @Override
     public void warning(TransformerException e) throws TransformerException {
@@ -22,7 +25,7 @@ public class EnoErrorListener implements ErrorListener {
 
     @Override
     public void fatalError(TransformerException e) throws TransformerException {
-        logger.fatal(e.getMessage(), e);
+        logger.error(fatal,e.getMessage(), e);
     }
 
 }
