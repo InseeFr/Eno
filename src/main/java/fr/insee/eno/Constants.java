@@ -6,8 +6,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class contains all the different paths used in the application Based on
@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 public final class Constants {
 	
 	
-	private static final Logger logger = LogManager.getLogger(Constants.class);
+	private static final Logger logger = LoggerFactory.getLogger(Constants.class);
 
 	private Constants() {
 

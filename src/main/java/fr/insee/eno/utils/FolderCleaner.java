@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 
@@ -18,7 +18,7 @@ import fr.insee.eno.Constants;
  */
 public class FolderCleaner {
 
-	private final static Logger logger = LogManager.getLogger(FolderCleaner.class);
+	private final static Logger logger = LoggerFactory.getLogger(FolderCleaner.class);
 
 	/**
 	 * Method representing the Clean ant target : Cleaning the current

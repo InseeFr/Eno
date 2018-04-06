@@ -3,8 +3,8 @@ package fr.insee.eno;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.inject.Inject;
 
@@ -18,7 +18,7 @@ import fr.insee.eno.utils.FolderCleaner;
  */
 public class GenerationService {
 	
-	private static final Logger logger = LogManager.getLogger(GenerationService.class);
+	private static final Logger logger = LoggerFactory.getLogger(GenerationService.class);
 	
 	private final Preprocessor preprocessor;
 	private final Generator generator;

@@ -5,8 +5,8 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Use for controlling the resolution of includes
@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
  * */
 public class ClasspathURIResolver implements URIResolver {
 	
-	final static Logger logger = LogManager.getLogger(ClasspathURIResolver.class);
+	final static Logger logger = LoggerFactory.getLogger(ClasspathURIResolver.class);
 
 	@Override
 	public Source resolve(String href, String base) throws TransformerException {

@@ -5,8 +5,8 @@ import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.transform.xsl.XslParameters;
@@ -14,7 +14,7 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 
 public class PoguesXML2DDIGenerator implements Generator {
 	
-	private static final Logger logger = LogManager.getLogger(PoguesXML2DDIGenerator.class);
+	private static final Logger logger = LoggerFactory.getLogger(PoguesXML2DDIGenerator.class);
 	
 	// FIXME Inject !
 	private static XslTransformation saxonService = new XslTransformation();
