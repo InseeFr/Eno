@@ -58,7 +58,6 @@ public final class Constants {
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
 	public static final String UTIL_DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
 	public static final String BROWSING_FR_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/fr/browsing.xsl";
-	public static final String BROWSING_ODT_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/odt/browsing.xsl";
 	public static final String PROPERTIES_FILE_FR = CONFIG_FOLDER + "/ddi2fr.xml";
 	public static final String PROPERTIES_FILE_ODT = CONFIG_FOLDER + "/ddi2odt.xml";
 	public static final String PROPERTIES_FILE_DDI = CONFIG_FOLDER + "/pogues-xml2ddi.xml";
