@@ -13,6 +13,27 @@ Due to its modular design, Eno can create questionnaires in different formats fr
 The generation of XForms forms is performed using a number of XSLT transformations from a DDI input managed by a Ant script.
  
 
+### With Java
+
+Use the maven dependency to provide the Jar from maven central
+
+`
+	
+	<dependency>
+
+		<groupId>fr.insee.eno</groupId>
+		
+		<artifactId>eno-core</artifactId>
+		
+		<version>1.0.0</version>
+	
+	</dependency>
+`
+
+
+See examples in `src/test/resources`
+
+
 ### With Ant
 
 The main Ant build file is [/src/main/scripts/build_non_regression.xml] and its main target is "full".
@@ -28,22 +49,6 @@ Generic Ant properties which drive the transformations are stored in [/src/main/
 
  
 The generated XForms output will be located in a subdirectory of [/questionnaire/].
-
-
-### With Java
-
-The maven goal `mvn install` build a JAR that you can use on a JAVA program using maven referenced dependency (on your local repository) : 
-
-`
-<dependency>
-			<groupId>fr.insee.eno</groupId>
-			<artifactId>eno-core</artifactId>
-			<version>1.0.0</version>
-</dependency>
-`
-
-
-TODO : provide via central
 
 
 ## Getting Started
@@ -83,8 +88,6 @@ The expected XForms form file for the Simpsons questionnaire is present in [/que
 The difference file [questionnaire/simpsons/Xforms/v1/diff.txt] specifed, if there has, index at which the file begins to differ and the difference beetwen the generated Xform file and the expected Xform file.
 
 ## Road Map
-
-Maven central publication
 
 
 New output format : PDF for paper questionnaire
