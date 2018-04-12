@@ -219,8 +219,17 @@
             <xd:p>Getting the suffix for a QuestionItem for different response domains.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:QuestionItem[*[ends-with(name(),'DomainReference')]]" mode="enoddi:get-suffix">
-        <xsl:apply-templates select="*[ends-with(name(),'DomainReference')]" mode="enoddi:get-suffix"/>
+    <xsl:template match="d:QuestionItem[*[ends-with(name(),'DomainReference') or ends-with(name(),'Domain')]]" mode="enoddi:get-suffix">
+        <xsl:variable name="ddi-variable" select="enoddi:get-id(.)"/>
+        <xsl:variable name="variable-measurement-unit" select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $ddi-variable]/l:VariableRepresentation/r:MeasurementUnit"/>
+        <xsl:choose>
+            <xsl:when test="$variable-measurement-unit != ''">
+                <xsl:value-of select="$variable-measurement-unit"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="*[ends-with(name(),'DomainReference') or ends-with(name(),'Domain')]" mode="enoddi:get-suffix"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xd:doc>
@@ -228,10 +237,16 @@
             <xd:p>Getting the suffix for different response domains.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*[ends-with(name(),'DomainReference')]"
+    <xsl:template match="*[ends-with(name(),'DomainReference') or ends-with(name(),'Domain')]"
         mode="enoddi:get-suffix">
         <xsl:param name="language" tunnel="yes"/>
+        
+        <xsl:variable name="ddi-variable" select="enoddi:get-id(.)"/>
+        <xsl:variable name="variable-measurement-unit" select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $ddi-variable]/l:VariableRepresentation/r:MeasurementUnit"/>
         <xsl:choose>
+            <xsl:when test="$variable-measurement-unit != ''">
+                <xsl:value-of select="$variable-measurement-unit"/>
+            </xsl:when>
             <xsl:when test="*[ends-with(name(),'Representation')]/r:Label/r:Content/@xml:lang">
                 <xsl:value-of
                     select="*[ends-with(name(),'Representation')]/r:Label/r:Content[@xml:lang=$language]"/>
