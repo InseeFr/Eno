@@ -4,7 +4,7 @@
     <import file="build-configuration.xml"/>
     
     <!-- Properties for this non regression script -->
-    <property name="survey-name" value="achats"/>
+    <property name="survey-name" value="simpsons"/>
     <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>    
     
     <!--************************MAIN TARGETS*****************************-->
