@@ -30,8 +30,9 @@
 		</xd:desc>
 	</xd:doc>
 	
-	<!-- Forces the traversal of the whole driver tree. Must be present once in the transformation. -->
+	
 	<xsl:variable name="varName" select="parent"/>
+	<!-- Forces the traversal of the whole driver tree. Must be present once in the transformation. -->
 	<xsl:template match="*" mode="model" priority="-1">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -217,7 +218,6 @@
 				<xsl:value-of select="concat('[',$questionName,']')"/>
 			</text:p>
 		</xsl:if>
-		<xsl:if test="$typeResponse!=''">
 			<text:p text:style-name="Format">
 				<xsl:choose>
 					<xsl:when test="$typeResponse='text'">
@@ -232,12 +232,12 @@
 					<xsl:when test="$typeResponse='date'">
 						<xsl:value-of select="$typeResponse"/>
 					</xsl:when>
-					<xsl:when test="$typeResponse='boolean'">
+					<xsl:otherwise>
 						<xsl:value-of select="'Booléen'"/>
-					</xsl:when>
+					</xsl:otherwise>
 				</xsl:choose>
 			</text:p>
-		</xsl:if>		
+				
 		<xsl:if test="$questionLabel!=''">
 			<text:p text:style-name="Question"><xsl:value-of select="$questionLabel"/></text:p>
 		</xsl:if>
@@ -322,9 +322,9 @@
 					</text:p>
 				</xsl:if>
 			</xsl:when>
-			<xsl:when test="$typeResponse='boolean'">
+			<xsl:otherwise>
 				<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
-			</xsl:when>
+			</xsl:otherwise>
 		</xsl:choose>
 		<xsl:if test="$questionLabel!=''">
 			<text:p text:style-name="Question"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
@@ -540,15 +540,12 @@
 		<xsl:choose>
 			<xsl:when test="$instructionFormat='comment'">
 				<text:p text:style-name="Comment"><xsl:value-of select="$instructionLabel"/></text:p>
-				<!--<text:p text:style-name="Comment"><xsl:value-of select="$instructionFormatMaj"/></text:p>-->
 			</xsl:when>
 			<xsl:when test="$instructionFormat='instruction'">
 				<text:p text:style-name="Instruction"><xsl:value-of select="$instructionLabel"/></text:p>
-				<!--<text:p text:style-name="Instruction"><xsl:value-of select="$instructionFormatMaj"/></text:p>-->
 			</xsl:when>
 			<xsl:when test="$instructionFormat='warning'">
 				<text:p text:style-name="Warning"><xsl:value-of select="$instructionLabel"/></text:p>
-				<!--<text:p text:style-name="Warning"><xsl:value-of select="$instructionFormatMaj"/></text:p>-->
 			</xsl:when>
 			
 		</xsl:choose>
