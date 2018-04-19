@@ -413,9 +413,7 @@
             <table:table-column/>
             <table:table-column/>
             <table:table-row>
-               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="2">
-                  <text:p text:style-name="ColumnHeader">Products</text:p>
-               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="2"/>
                <table:covered-table-cell/>
                <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="ColumnHeader">Percentage</text:p>
@@ -511,9 +509,7 @@
             <table:table-column/>
             <table:table-column/>
             <table:table-row>
-               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
-                  <text:p text:style-name="ColumnHeader">Clownings</text:p>
-               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1"/>
                <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="ColumnHeader">Clowning</text:p>
                </table:table-cell>
@@ -595,9 +591,7 @@
             <table:table-column/>
             <table:table-column/>
             <table:table-row>
-               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
-                  <text:p text:style-name="ColumnHeader">Means of transport</text:p>
-               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1"/>
                <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="ColumnHeader">Brazil</text:p>
                </table:table-cell>
