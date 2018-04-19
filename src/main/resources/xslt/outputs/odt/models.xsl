@@ -175,7 +175,7 @@
 			</office:body>
 		</office:document>
 	</xsl:template>
-	
+
 	<!-- Match on the Module driver: write the module label -->
 	<xsl:template match="Module" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -238,7 +238,7 @@
 					</xsl:when>
 				</xsl:choose>
 			</text:p>
-		</xsl:if>		
+		</xsl:if>
 		<xsl:if test="$questionLabel!=''">
 			<text:p text:style-name="Question"><xsl:value-of select="$questionLabel"/></text:p>
 		</xsl:if>
@@ -299,10 +299,8 @@
 	<xsl:template match="xf-select " mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
-		<!--<xsl:param name="ancestor" tunnel="yes"/>-->
 		
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
-		<!--<xsl:variable name="typeResponse" select="enoodt:get-type($ancestor)"/>-->
 		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
 		<xsl:variable name="idQuestion" select="enoodt:get-name($source-context)"/>
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context)"/>
@@ -348,7 +346,7 @@
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
 		<xsl:variable name="questionLabel" select="enoodt:get-label($source-context, $languages[1])"/>
-
+		
 		<xsl:if test="$questionName != ''">
 			<text:p text:style-name="QuestionName">
 				<xsl:value-of select="concat('[',$questionName,']')"/>
@@ -364,7 +362,7 @@
 				</xsl:if>
 			</xsl:when>
 			<xsl:otherwise>
-				<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
+				<text:p text:style-name="Format"><xsl:value-of select="'Booleen'"/></text:p>
 			</xsl:otherwise>
 		</xsl:choose>
 		<xsl:if test="$questionLabel!=''">
@@ -449,7 +447,7 @@
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="col-span" select="number(enoodt:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enoodt:get-rowspan($source-context))"/>
-		
+
 		<xsl:if test="$ancestorTable!=''">
 			<table:table-cell table:number-rows-spanned="{$row-span}" 
 				table:number-columns-spanned="{$col-span}">
@@ -463,7 +461,7 @@
 					</xsl:when>
 				</xsl:choose>
 			</table:table-cell>
-						
+			
 			<!-- To add spanned rows / columns -->
 			<xsl:if test="$row-span &gt;1">
 				<xsl:for-each select="2 to xs:integer(floor($row-span))">
@@ -476,7 +474,6 @@
 				</xsl:for-each>
 			</xsl:if>
 		</xsl:if>
-		
 	</xsl:template>
 	
 	<xsl:template match="Cell" mode="model">
@@ -485,51 +482,36 @@
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="col-span" select="enoodt:get-colspan($source-context)"/>
 		<xsl:variable name="row-span" select="enoodt:get-rowspan($source-context)"/>
-		
 		<xsl:if test="$ancestorTable!=''">
 			<table:table-cell table:number-rows-spanned="{$row-span}" 
 				table:number-columns-spanned="{$col-span}">
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 				</xsl:apply-templates>
-			</table:table-cell>
+			</table:table-cell>		
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template match="EmptyCell" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
-		<table:table-cell>
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-			</xsl:apply-templates>
-		</table:table-cell>
-	</xsl:template>
+	
 	
 	<!-- Match on the xf-item driver: write the code value and label -->
 	<xsl:template match="xf-item" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="label" select="enoodt:get-label($source-context, $languages[1])"/>
-		<xsl:variable name="ancestors">
-			<xsl:copy-of select="root(.)"/>
-		</xsl:variable>
+		
 		<xsl:if test="$label !='' and not(ancestor::Table)">
 			<text:p text:style-name="CodeItem">
 				<xsl:value-of select="fn:concat(enoodt:get-value($source-context), ' - ', $label)"/>
 			</text:p>
-			<!--<text:p><xsl:value-of select="concat('container :',enoodt:get-name($ancestors[1]))"/></text:p>
-		--></xsl:if>
-			
-			
+		</xsl:if>
 		
 		<!-- Got to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
-	
+
 	<!-- Match on the xf-output driver: write the instruction text, with a different styles for comments and instructions -->
 	<xsl:template match="xf-output" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -543,12 +525,12 @@
 				<text:p text:style-name="Comment"><xsl:value-of select="$instructionLabel"/></text:p>
 			</xsl:when>
 			<xsl:when test="$instructionFormat='instruction'">
+				
 				<text:p text:style-name="Instruction"><xsl:value-of select="$instructionLabel"/></text:p>
 			</xsl:when>
 			<xsl:when test="$instructionFormat='warning'">
-				<text:p text:style-name="Warning"><xsl:value-of select="$instructionLabel"/></text:p>
+				<text:p text:style-name="Warning"><xsl:value-of select="$instructionLabel"/></text:p>				
 			</xsl:when>
-			
 		</xsl:choose>
 		
 		<!-- Go to the children -->
@@ -568,7 +550,6 @@
 		<text:p><xsl:value-of select="$variableCalculation"/></text:p>
 		<text:p><xsl:value-of select="$variableCalculationLabel"/></text:p>
 		<text:p><xsl:value-of select="$variableCalculationAlert"/></text:p>
-		
 		<!-- Go to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -597,6 +578,6 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>		
 	</xsl:template>
-		
 	
 </xsl:stylesheet>
+
