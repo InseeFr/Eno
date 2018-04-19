@@ -175,7 +175,7 @@
 			</office:body>
 		</office:document>
 	</xsl:template>
-	<!--                   -->
+	
 	<!-- Match on the Module driver: write the module label -->
 	<xsl:template match="Module" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -218,6 +218,7 @@
 				<xsl:value-of select="concat('[',$questionName,']')"/>
 			</text:p>
 		</xsl:if>
+		<xsl:if test="$typeResponse!=''">
 			<text:p text:style-name="Format">
 				<xsl:choose>
 					<xsl:when test="$typeResponse='text'">
@@ -232,12 +233,12 @@
 					<xsl:when test="$typeResponse='date'">
 						<xsl:value-of select="$typeResponse"/>
 					</xsl:when>
-					<xsl:otherwise>
+					<xsl:when test="$typeResponse='boolean'">
 						<xsl:value-of select="'Booléen'"/>
-					</xsl:otherwise>
+					</xsl:when>
 				</xsl:choose>
 			</text:p>
-				
+		</xsl:if>		
 		<xsl:if test="$questionLabel!=''">
 			<text:p text:style-name="Question"><xsl:value-of select="$questionLabel"/></text:p>
 		</xsl:if>
@@ -322,9 +323,9 @@
 					</text:p>
 				</xsl:if>
 			</xsl:when>
-			<xsl:otherwise>
+			<xsl:when test="$typeResponse='boolean'">
 				<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
-			</xsl:otherwise>
+			</xsl:when>
 		</xsl:choose>
 		<xsl:if test="$questionLabel!=''">
 			<text:p text:style-name="Question"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
