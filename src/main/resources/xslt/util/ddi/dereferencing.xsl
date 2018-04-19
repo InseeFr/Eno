@@ -139,12 +139,28 @@
                 </xsl:choose>
             </xsl:variable>
             <xsl:result-document href="{lower-case(concat('file:///',replace($output-folder, '\\' , '/'),'/',$form-name,'.tmp'))}">
-                <DDIInstance>
+                <DDIInstance xmlns="ddi:instance:3_2"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xmlns:a="ddi:archive:3_2"
+                    xmlns:eno="http://xml.insee.fr/apps/eno"
+                    xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
+                    xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
+                    xmlns:pr="ddi:ddiprofile:3_2"
+                    xmlns:c="ddi:conceptualcomponent:3_2"
+                    xmlns:cm="ddi:comparative:3_2">
                     <s:StudyUnit>
                         <xsl:apply-templates select=".">
                             <xsl:with-param name="references" select="$dereferenced-template-sequence" tunnel="yes"/>
                         </xsl:apply-templates>
                     </s:StudyUnit>
+                    <g:ResourcePackage>
+                        <l:VariableScheme>
+                            <xsl:apply-templates select="//l:VariableScheme/l:Variable[not(r:ID=//l:VariableScheme//r:VariableReference/r:ID)]
+                                |//l:VariableScheme/l:VariableGroup[not(r:ID=//l:VariableScheme//r:VariableGroupReference/r:ID)]">
+                                <xsl:with-param name="references" select="//l:VariableScheme" tunnel="yes"/>
+                            </xsl:apply-templates>
+                        </l:VariableScheme>
+                    </g:ResourcePackage>
                 </DDIInstance>
             </xsl:result-document>
         </xsl:for-each>
@@ -269,6 +285,13 @@
         <xsl:copy-of select="."/>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>In VariableScheme, Variable are used only for getters, not drivers and are simply copied</xd:desc>
+    </xd:doc>
+    <xsl:template match="l:Variable">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Instruction are not allowed in Category for DDI 3.2. This template allows to insert tooltips into arrays' labels</xd:p>
