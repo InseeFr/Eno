@@ -758,8 +758,8 @@
     <xd:doc>
         <xd:desc>Return the maximum length of a code domain, if is blank then it is a boolean</xd:desc>
     </xd:doc>
-    <xsl:template match="d:QuestionGrid | d:QuestionItem[d:CodeDomain] | d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed)]
-        " mode="enoddi:get-code-maximum-length" priority="2">
+    <xsl:template match="d:QuestionItem[d:CodeDomain] | d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed)]
+        |d:QuestionGrid[not(d:GridDimension/d:Roster[not(@maximumAllowed)])]" mode="enoddi:get-code-maximum-length" priority="2">
         <xsl:variable name="listLengthCode" as="xs:double*">
             <xsl:for-each select="descendant::r:Value">
                 <xsl:value-of select="string-length(.)"/>
