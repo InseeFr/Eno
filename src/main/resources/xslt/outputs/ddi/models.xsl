@@ -160,7 +160,7 @@
                 <d:ProcessingInstructionScheme>
                     <r:Agency>fr.insee</r:Agency>
                     <r:ID>INSEE-SIMPSONS-PIS-1</r:ID>
-                    <r:Version>0.1.0</r:Version>
+                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <d:ProcessingInstructionSchemeName>
                         <r:String xml:lang="en-IE">SIMPSONS</r:String>
                     </d:ProcessingInstructionSchemeName>
@@ -176,7 +176,7 @@
                 <r:ManagedRepresentationScheme>
                     <r:Agency>fr.insee</r:Agency>
                     <r:ID>INSEE-SIMPSONS-MRS</r:ID>
-                    <r:Version>0.1.0</r:Version>
+                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:Label>
                         <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
                             l'enquête</r:Content>
@@ -185,7 +185,7 @@
                     <r:ManagedDateTimeRepresentation>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
-                        <r:Version>0.1.0</r:Version>
+                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                         <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
                         <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
                     </r:ManagedDateTimeRepresentation>
@@ -417,7 +417,7 @@
         <l:CodeListScheme xmlns="ddi:instance:3_2">
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="concat(enoddi32:get-survey-name($source-context),'-CLS')"/></r:ID>
-            <r:Version>0.1.0</r:Version>
+            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <l:CodeListSchemeName>
                 <r:String xml:lang="en-IE"><xsl:value-of select="enoddi32:get-survey-name($source-context)"/></r:String>
             </l:CodeListSchemeName>
@@ -437,7 +437,7 @@
                 <l:CodeList>
                     <r:Agency>fr.insee</r:Agency>
                     <r:ID>INSEE-COMMUN-CL-Booleen</r:ID>
-                    <r:Version>0.1.0</r:Version>
+                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <l:CodeListName>
                         <r:String xml:lang="fr-FR">Booleen</r:String>
                     </l:CodeListName>
@@ -448,11 +448,11 @@
                     <l:Code levelNumber="1" isDiscrete="true">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
-                        <r:Version>0.1.0</r:Version>
+                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                         <r:CategoryReference>
                             <r:Agency>fr.insee</r:Agency>
                             <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
-                            <r:Version>0.1.0</r:Version>
+                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                             <r:TypeOfObject>Category</r:TypeOfObject>
                         </r:CategoryReference>
                         <r:Value>1</r:Value>
@@ -669,7 +669,7 @@
                 <d:InterviewerInstructionReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="enoddi32:get-generated-instruction-id($source-context)"/></r:ID>
-                    <r:Version>0.1.0</r:Version>
+                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>Instruction</r:TypeOfObject>
                 </d:InterviewerInstructionReference>
             </xsl:if>
@@ -759,7 +759,7 @@
                 <r:InParameter isArray="false">
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
                     <r:ID><xsl:value-of select="ip-id"/></r:ID>
-                    <r:Version>0.1.0</r:Version>
+                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:ParameterName>
                         <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="name"/></r:String>
                     </r:ParameterName>
@@ -770,7 +770,7 @@
                 <r:OutParameter>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>
-                    <r:Version>0.1.0</r:Version>
+                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 </r:OutParameter>
             </xsl:if>
             <xsl:for-each select="$related-variables-with-id/*">
@@ -778,13 +778,13 @@
                     <r:SourceParameterReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                         <r:ID><xsl:value-of select="./qop-id"/></r:ID>
-                        <r:Version>0.1.0</r:Version>
+                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                     </r:SourceParameterReference>
                     <r:TargetParameterReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
                         <r:ID><xsl:value-of select="ip-id"/></r:ID>
-                        <r:Version>0.1.0</r:Version>
+                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                     </r:TargetParameterReference>
                 </r:Binding>                    
@@ -1216,7 +1216,7 @@
         <d:DateTimeDomainReference>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
-            <r:Version>0.1.0</r:Version>
+            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -1225,7 +1225,7 @@
                 <r:DateTimeRepresentationReference>
                     <r:Agency>fr.insee</r:Agency>
                     <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
-                    <r:Version>0.1.0</r:Version>
+                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
                 </r:DateTimeRepresentationReference>
             </r:OutParameter>
@@ -1268,18 +1268,18 @@
             <r:CodeListReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-code-list-id($source-context)"/></r:ID>
-                <r:Version>0.1.0</r:Version>
+                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>CodeList</r:TypeOfObject>
             </r:CodeListReference>
             <r:OutParameter isArray="false">
                 <r:Agency>fr.insee</r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version>0.1.0</r:Version>
+                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:CodeRepresentation>
                     <r:CodeListReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                         <r:ID><xsl:value-of select="enoddi32:get-code-list-id($source-context)"/></r:ID>
-                        <r:Version>0.1.0</r:Version>
+                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                         <r:TypeOfObject>CodeList</r:TypeOfObject>
                     </r:CodeListReference>
                 </r:CodeRepresentation>
