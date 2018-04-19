@@ -155,10 +155,10 @@
          <text:p text:style-name="Module">I - Introduction</text:p>
          <text:p text:style-name="Comment">We're going to test your knowledge about the simpsons series.Welcome in the simspons world!</text:p>
          <text:p text:style-name="QuestionName">[COMMENT]</text:p>
-         <text:p>Car 500</text:p>
+         <text:p text:style-name="Format">Car 500</text:p>
          <text:p text:style-name="Question">➡ 1. Before starting, do you have any comments about the Simpsons family?</text:p>
          <text:p text:style-name="QuestionName">[READY]</text:p>
-         <text:p>Booleen</text:p>
+         <text:p text:style-name="Format">Booléen</text:p>
          <text:p text:style-name="Question">➡ 2. Are you ready?</text:p>
          <text:p text:style-name="SubModule">General knowledge of the series</text:p>
          <text:p text:style-name="QuestionName">[PRODUCER]</text:p>
@@ -173,20 +173,20 @@
          <text:p text:style-name="Comment">For your information, the date of the last broadcast was on
 						øLAST_BROADCASTø</text:p>
          <text:p text:style-name="QuestionName">[AUDIENCE_SHARE]</text:p>
-         <text:p text:style-name="Format">num 0.0..99.0 - 1 chiffre(s) après la virgule</text:p>
+         <text:p text:style-name="Format">num 0..99 - 1 chiffre(s) après la virgule</text:p>
          <text:p text:style-name="Question">➡ 6. In your opinion, how much is the part of audience share in US for the 2016
 					season? </text:p>
          <text:p text:style-name="Module">II - Simpsons' city</text:p>
          <text:p text:style-name="Comment">This module asks about your general knowledge of the Simpsons city</text:p>
          <text:p text:style-name="QuestionName">[CITY]</text:p>
-         <text:p>Car 5 - liste de modalités</text:p>
+         <text:p text:style-name="Format">Car 5 - liste de modalités</text:p>
          <text:p text:style-name="QuestionSelect">➡ 1. In which city do the Simpsons reside?</text:p>
          <text:p text:style-name="CodeItem">00001 - Springfield</text:p>
          <text:p text:style-name="CodeItem">00002 - Shelbyville</text:p>
          <text:p text:style-name="CodeItem">00003 - Seinfeld</text:p>
          <text:p text:style-name="Instruction">One possible answer</text:p>
          <text:p text:style-name="QuestionName">[MAYOR]</text:p>
-         <text:p>Car 1 - liste de modalités</text:p>
+         <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
          <text:p text:style-name="Question">➡ 2. Who is the Simpsons city mayor?</text:p>
          <text:p text:style-name="CodeItem">1 - Constance Harm</text:p>
          <text:p text:style-name="CodeItem">2 - Timothy Lovejoy</text:p>
@@ -194,7 +194,7 @@
          <text:p text:style-name="CodeItem">4 - Poochie</text:p>
          <text:p text:style-name="Instruction">Only one possible answer</text:p>
          <text:p text:style-name="QuestionName">[STATE]</text:p>
-         <text:p>Car 2 - liste de modalités</text:p>
+         <text:p text:style-name="Format">Car 2 - liste de modalités</text:p>
          <text:p text:style-name="QuestionSelect">➡ 3. In which state do The Simpsons reside?</text:p>
          <text:p text:style-name="CodeItem">1 - Washington</text:p>
          <text:p text:style-name="CodeItem">2 - Kentucky</text:p>
@@ -216,72 +216,39 @@
          <table:table table:name="j334akov">
             <table:table-column/>
             <table:table-column/>
-            <table:table-row/>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Santa's Little Helper</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Santa's Little Helper</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Snowball I</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Snowball I</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Coltrane</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Coltrane</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Mojo the Helper Monkey</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Mojo the Helper Monkey</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
             </table:table-row>
          </table:table>
-         <table:table-cell>
-            <text:p>Santa's Little Helper</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Snowball I</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Coltrane</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Mojo the Helper Monkey</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
          <text:p text:style-name="Instruction">Several possible answers</text:p>
          <text:p text:style-name="QuestionName">[ICE_FLAVOUR]</text:p>
          <text:p>Car 1</text:p>
@@ -289,205 +256,97 @@
          <table:table table:name="j6p29i81">
             <table:table-column/>
             <table:table-column/>
-            <table:table-row/>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Vanilla</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Vanilla</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Yes</text:p>
                   <text:p text:style-name="CodeItem">0 - No</text:p>
                </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Strawberry</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Strawberry</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Yes</text:p>
                   <text:p text:style-name="CodeItem">0 - No</text:p>
                </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Apple</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Apple</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Yes</text:p>
                   <text:p text:style-name="CodeItem">0 - No</text:p>
                </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Bacon</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Bacon</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Yes</text:p>
                   <text:p text:style-name="CodeItem">0 - No</text:p>
                </table:table-cell>
             </table:table-row>
          </table:table>
-         <table:table-cell>
-            <text:p>Vanilla</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Strawberry</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Apple</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Bacon</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Yes</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>0 - No</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Yes</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>0 - No</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Yes</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>0 - No</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Yes</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>0 - No</text:p>
-            </text:table-cell>
-         </table:table-cell>
          <text:p text:style-name="QuestionName">[NUCLEAR_CHARACTER]</text:p>
          <text:p>Car 1</text:p>
          <text:p text:style-name="Question">➡ 3. Which character works in the nuclear power plant?</text:p>
          <table:table table:name="j6qefnga">
             <table:table-column/>
             <table:table-column/>
-            <table:table-row/>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Charles Montgomery Burns</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Charles Montgomery Burns</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Yes</text:p>
                   <text:p text:style-name="CodeItem">0 - No</text:p>
                </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Carl Carlson</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Carl Carlson</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Yes</text:p>
                   <text:p text:style-name="CodeItem">0 - No</text:p>
                </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Otto Mann</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Otto Mann</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Yes</text:p>
                   <text:p text:style-name="CodeItem">0 - No</text:p>
                </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Carl Carlson</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Carl Carlson</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Yes</text:p>
                   <text:p text:style-name="CodeItem">0 - No</text:p>
                </table:table-cell>
             </table:table-row>
          </table:table>
-         <table:table-cell>
-            <text:p>Charles Montgomery Burns</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Carl Carlson</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Otto Mann</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Carl Carlson</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Yes</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>0 - No</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Yes</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>0 - No</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Yes</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>0 - No</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Yes</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>0 - No</text:p>
-            </text:table-cell>
-         </table:table-cell>
          <text:p text:style-name="QuestionName">[BIRTH_CHARACTER]</text:p>
          <text:p>Car 1</text:p>
          <text:p text:style-name="Question">➡ 4. In which city each character was born?</text:p>
          <table:table table:name="j6yzoc6g">
             <table:table-column/>
             <table:table-column/>
-            <table:table-row/>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Selma Bouvier</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Selma Bouvier</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                   <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                   <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -496,11 +355,10 @@
                </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Kent Brockman</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Kent Brockman</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                   <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                   <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -509,11 +367,10 @@
                </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Milhouse Van Houten</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Milhouse Van Houten</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                   <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                   <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -522,11 +379,10 @@
                </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Nelson Muntz</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Nelson Muntz</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                   <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                   <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -535,11 +391,10 @@
                </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Crazy Cat Lady</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Crazy Cat Lady</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                   <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                   <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -548,783 +403,406 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
-         <table:table-cell>
-            <text:p>Selma Bouvier</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Kent Brockman</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Milhouse Van Houten</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Nelson Muntz</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Crazy Cat Lady</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Albuquerque</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>2 - Springfield</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>3 - Portland</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>4 - Shelbyville</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>5 - Dagstuhl</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Albuquerque</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>2 - Springfield</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>3 - Portland</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>4 - Shelbyville</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>5 - Dagstuhl</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Albuquerque</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>2 - Springfield</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>3 - Portland</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>4 - Shelbyville</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>5 - Dagstuhl</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Albuquerque</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>2 - Springfield</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>3 - Portland</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>4 - Shelbyville</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>5 - Dagstuhl</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Albuquerque</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>2 - Springfield</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>3 - Portland</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>4 - Shelbyville</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>5 - Dagstuhl</text:p>
-            </text:table-cell>
-         </table:table-cell>
          <text:p text:style-name="Module">IV - General questions</text:p>
          <text:p text:style-name="SubModule">Kwik-E-Mart</text:p>
          <text:p text:style-name="QuestionName">[PERCENTAGE_EXPENSES]</text:p>
-         <text:p>Car 2</text:p>
          <text:p text:style-name="Question">➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each
 					product? </text:p>
          <table:table table:name="j4nwc63q">
             <table:table-column/>
             <table:table-column/>
+            <table:table-column/>
             <table:table-row>
-               <table:table-cell>
-                  <text:p/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="2"/>
+               <table:covered-table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">Percentage</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
-                  <text:p>Percentage</text:p>
-               </table:table-cell>
-               <table:table-cell/>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Frozen products</text:p>
+               <table:table-cell table:number-rows-spanned="2" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Frozen products</text:p>
                </table:table-cell>
-               <table:table-cell>
-                  <table:table-cell>
-                     <text:p>Ice creams</text:p>
-                  </table:table-cell>
-                  <table:table-cell/>
-                  <table:table-cell>
-                     <text:p>Jasper Beardly</text:p>
-                  </table:table-cell>
-                  <table:table-cell/>
+               <table:covered-table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Ice creams</text:p>
                </table:table-cell>
-               <table:table-cell>
-                  <text:p>Ice creams</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Jasper Beardly</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Jasper Beardly</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Meat</text:p>
+               <table:table-cell table:number-rows-spanned="3" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Meat</text:p>
                </table:table-cell>
-               <table:table-cell>
-                  <table:table-cell>
-                     <text:p>Bacon</text:p>
-                  </table:table-cell>
-                  <table:table-cell/>
-                  <table:table-cell>
-                     <text:p>Pork chop</text:p>
-                  </table:table-cell>
-                  <table:table-cell/>
-                  <table:table-cell>
-                     <text:p>Chicken</text:p>
-                  </table:table-cell>
-                  <table:table-cell/>
+               <table:covered-table-cell/>
+               <table:covered-table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Bacon</text:p>
                </table:table-cell>
-               <table:table-cell>
-                  <text:p>Bacon</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Pork chop</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Pork chop</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Chicken</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Chicken</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Compote</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Compote</text:p>
                </table:table-cell>
-               <table:table-cell>
-                  <table:table-cell>
-                     <text:p>Powersauce</text:p>
-                  </table:table-cell>
-                  <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Powersauce</text:p>
                </table:table-cell>
-               <table:table-cell>
-                  <text:p>Powersauce</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Other</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="2">
+                  <text:p text:style-name="Question">Other</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:covered-table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
+               </table:table-cell>
             </table:table-row>
          </table:table>
-         <table:table-cell>
-            <text:p/>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Frozen products</text:p>
-         </table:table-cell>
-         <table:table-cell>
-            <table:table-cell>
-               <text:p>Ice creams</text:p>
-            </table:table-cell>
-            <table:table-cell/>
-            <table:table-cell>
-               <text:p>Jasper Beardly</text:p>
-            </table:table-cell>
-            <table:table-cell/>
-         </table:table-cell>
-         <table:table-cell>
-            <text:p>Meat</text:p>
-         </table:table-cell>
-         <table:table-cell>
-            <table:table-cell>
-               <text:p>Bacon</text:p>
-            </table:table-cell>
-            <table:table-cell/>
-            <table:table-cell>
-               <text:p>Pork chop</text:p>
-            </table:table-cell>
-            <table:table-cell/>
-            <table:table-cell>
-               <text:p>Chicken</text:p>
-            </table:table-cell>
-            <table:table-cell/>
-         </table:table-cell>
-         <table:table-cell>
-            <text:p>Compote</text:p>
-         </table:table-cell>
-         <table:table-cell>
-            <table:table-cell>
-               <text:p>Powersauce</text:p>
-            </table:table-cell>
-            <table:table-cell/>
-         </table:table-cell>
-         <table:table-cell>
-            <text:p>Other</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Percentage</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
+         <text:p text:style-name="Control">j4nwc63q-QOP-jbgde5yl</text:p>
+         <text:p text:style-name="Control">j4nwc63q-QOP-jbgd2x2t</text:p>
+         <text:p text:style-name="Control">j4nwc63q-QOP-jbgdjypz</text:p>
+         <text:p text:style-name="Control">j4nwc63q-QOP-jbgdcftu</text:p>
+         <text:p text:style-name="Control">j4nwc63q-QOP-jbgdiyfe</text:p>
+         <text:p text:style-name="Control">j4nwc63q-QOP-jbgdj1wd</text:p>
+         <text:p text:style-name="Control">j4nwc63q-QOP-jbgddylk</text:p>
+         <text:p text:style-name="Control">j4nwc63q-QOP-jbgd3jj6</text:p>
+         <text:p text:style-name="Control">j4nwc63q-QOP-jbgd4w3k</text:p>
+         <text:p text:style-name="Control">j4nwc63q-QOP-jbgd4w4k</text:p>
+         <text:p text:style-name="Warning">The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of
+						percentages must be equal to 100%.</text:p>
          <text:p text:style-name="SubModule">Clowning</text:p>
          <text:p text:style-name="QuestionName">[CLOWNING]</text:p>
-         <text:p>Car 1</text:p>
          <text:p text:style-name="Question">➡ 2. Who did these clownings and tell us what you remember? </text:p>
          <table:table table:name="j4nw0rr6">
             <table:table-column/>
             <table:table-column/>
+            <table:table-column/>
             <table:table-row>
-               <table:table-cell>
-                  <text:p/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1"/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">Clowning</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
-                  <text:p>Clowning</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">Remember?</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
-                  <text:p>Remember?</text:p>
-               </table:table-cell>
-               <table:table-cell/>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Break the windows of the whole city</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Break the windows of the whole city</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
                   <text:p text:style-name="CodeItem">1 - Jay</text:p>
                   <text:p text:style-name="CodeItem">2 - Bart</text:p>
                   <text:p text:style-name="CodeItem">3 - Krusty the clown</text:p>
                   <text:p text:style-name="CodeItem">4 - Maggie</text:p>
                </table:table-cell>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Loose the violin of his daughter playing poker</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Loose the violin of his daughter playing poker</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
                   <text:p text:style-name="CodeItem">1 - Jay</text:p>
                   <text:p text:style-name="CodeItem">2 - Bart</text:p>
                   <text:p text:style-name="CodeItem">3 - Krusty the clown</text:p>
                   <text:p text:style-name="CodeItem">4 - Maggie</text:p>
                </table:table-cell>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Kill Mr Burns</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Kill Mr Burns</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
                   <text:p text:style-name="CodeItem">1 - Jay</text:p>
                   <text:p text:style-name="CodeItem">2 - Bart</text:p>
                   <text:p text:style-name="CodeItem">3 - Krusty the clown</text:p>
                   <text:p text:style-name="CodeItem">4 - Maggie</text:p>
                </table:table-cell>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Leaving a mechanical object to control the nuclear power plant</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Leaving a mechanical object to control the nuclear power plant</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
                   <text:p text:style-name="CodeItem">1 - Jay</text:p>
                   <text:p text:style-name="CodeItem">2 - Bart</text:p>
                   <text:p text:style-name="CodeItem">3 - Krusty the clown</text:p>
                   <text:p text:style-name="CodeItem">4 - Maggie</text:p>
                </table:table-cell>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
             </table:table-row>
          </table:table>
-         <table:table-cell>
-            <text:p/>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Break the windows of the whole city</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Loose the violin of his daughter playing poker</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Kill Mr Burns</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Leaving a mechanical object to control the nuclear power plant</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Clowning</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Remember?</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Jay</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>2 - Bart</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>3 - Krusty the clown</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>4 - Maggie</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Jay</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>2 - Bart</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>3 - Krusty the clown</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>4 - Maggie</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Jay</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>2 - Bart</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>3 - Krusty the clown</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>4 - Maggie</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - Jay</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>2 - Bart</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>3 - Krusty the clown</text:p>
-            </text:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>4 - Maggie</text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
          <text:p text:style-name="SubModule">Transport</text:p>
          <text:p text:style-name="QuestionName">[TRAVEL]</text:p>
-         <text:p>Car 1</text:p>
          <text:p text:style-name="Question">➡ 3. Which of the following means of transport were used by the hero and in which
 					country? </text:p>
          <table:table table:name="j6p2lwuj">
             <table:table-column/>
             <table:table-column/>
+            <table:table-column/>
+            <table:table-column/>
+            <table:table-column/>
+            <table:table-column/>
+            <table:table-column/>
             <table:table-row>
-               <table:table-cell>
-                  <text:p/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1"/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">Brazil</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
-                  <text:p>Brazil</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">Canada</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
-                  <text:p>Canada</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">Japan</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
-                  <text:p>Japan</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">France</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
-                  <text:p>France</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">Other country  </text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
-                  <text:p>Other country  </text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">Other planet</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
-                  <text:p>Other planet</text:p>
-               </table:table-cell>
-               <table:table-cell/>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Car</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Car</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Bike</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Bike</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Skateboard</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Skateboard</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Plane</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Question">Plane</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Booléen</text:p>
+               </table:table-cell>
             </table:table-row>
          </table:table>
-         <table:table-cell>
-            <text:p/>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Car</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Bike</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Skateboard</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Plane</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Brazil</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Canada</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Japan</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>France</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Other country  </text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Other planet</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
-         <table:table-cell>
-            <text:table-cell text:style-name="CodeItem">
-               <text:p>1 - </text:p>
-            </text:table-cell>
-         </table:table-cell>
          <text:p text:style-name="Instruction">Several answers possible: check off all the relevant boxes </text:p>
          <text:p text:style-name="Module">V - Favourite characters</text:p>
          <text:p text:style-name="QuestionName">[FAVOURITE_CHARACTERS]</text:p>
-         <text:p>Car 1</text:p>
          <text:p text:style-name="Question">➡ 1. Please, complete the following grid with your favourite characters</text:p>
          <table:table table:name="j6qg8rc6">
             <table:table-column/>
             <table:table-column/>
             <table:table-row>
-               <table:table-cell>
-                  <text:p>Name</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">Name</text:p>
                </table:table-cell>
-               <table:table-cell/>
-               <table:table-cell>
-                  <text:p>Age</text:p>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="ColumnHeader">Age</text:p>
                </table:table-cell>
-               <table:table-cell/>
             </table:table-row>
             <table:table-row>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..120</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..120</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..120</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..120</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..120</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..120</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..120</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..120</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..120</text:p>
+               </table:table-cell>
             </table:table-row>
             <table:table-row>
-               <table:table-cell/>
-               <table:table-cell/>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">Car 255</text:p>
+               </table:table-cell>
+               <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
+                  <text:p text:style-name="Format">num 0..120</text:p>
+               </table:table-cell>
             </table:table-row>
          </table:table>
-         <table:table-cell>
-            <text:p>Name</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell>
-            <text:p>Age</text:p>
-         </table:table-cell>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
-         <table:table-cell/>
          <text:p text:style-name="Module">VI - Comment</text:p>
          <text:p text:style-name="QuestionName">[SURVEY_COMMENT]</text:p>
-         <text:p>Car 255</text:p>
+         <text:p text:style-name="Format">Car 255</text:p>
          <text:p text:style-name="Question">➡ 1. Do you have any comment about the survey?</text:p>
          <text:p>number(if (//j4nwc63q-QOP-jbgde5yl='') then '0' else //j4nwc63q-QOP-jbgde5yl) + number(if (//j4nwc63q-QOP-jbgd2x2t='') then '0' else //j4nwc63q-QOP-jbgd2x2t) + number(if (//j4nwc63q-QOP-jbgdjypz='') then '0' else //j4nwc63q-QOP-jbgdjypz) +
 				number(if (//j4nwc63q-QOP-jbgdcftu='') then '0' else //j4nwc63q-QOP-jbgdcftu) + number(if (//j4nwc63q-QOP-jbgdiyfe='') then '0' else //j4nwc63q-QOP-jbgdiyfe) + number(if (//j4nwc63q-QOP-jbgdj1wd='') then '0' else //j4nwc63q-QOP-jbgdj1wd) +
