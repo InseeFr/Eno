@@ -819,9 +819,7 @@
             <r:ID><xsl:value-of select="enoddi32:get-gi-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <xsl:variable name="related-variables" select="enoddi32:get-related-variable($source-context)"/>
-            <d:SourceQuestion>
-                <xsl:comment>Not implemented.</xsl:comment>
-            </d:SourceQuestion>            
+            <xsl:comment><![CDATA[<d:SourceQuestion>Not implemented.</d:SourceQuestion>]]></xsl:comment>
             <xsl:for-each select="$related-variables">            
             <d:SourceVariable>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
