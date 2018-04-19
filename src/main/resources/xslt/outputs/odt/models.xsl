@@ -584,17 +584,14 @@
 		<xsl:variable name="nameOfControl" select="enoodt:get-label($source-context,$languages)"/>
 		<xsl:variable name="control" select="enoodt:get-constraint($source-context)"/>
 		
-		<xsl:variable name="items">
-			<xsl:call-template name="splitStringToItems">
-				<xsl:with-param name="delimiter" />
-				<xsl:with-param name="list" select="$control" />
-			</xsl:call-template>
+		<xsl:variable name="idVariables" as="xs:string*">
+			<xsl:for-each select="tokenize($control,'\+')">
+				<xsl:value-of select="substring-before(substring-after(.,'//'),'=')"/>
+			</xsl:for-each>
 		</xsl:variable>
 		
-		<xsl:for-each select="$items">
-			<text:p text:style-name="Control">
-				<xsl:value-of select="."/>
-			</text:p>
+		<xsl:for-each select="$idVariables">
+			<text:p text:style-name="Control"><xsl:value-of select="."/></text:p>
 		</xsl:for-each>
 		
 		<!-- Go to the children -->
@@ -603,39 +600,5 @@
 		</xsl:apply-templates>		
 	</xsl:template>
 		
-		
-	<xsl:template name="splitStringToItems">
-		<xsl:param name="list" />
-		<xsl:param name="delimiter" select="'+'"  />
-		<xsl:variable name="_delimiter">
-			<xsl:choose>
-				<xsl:when test="string-length($delimiter)=0">,</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="$delimiter"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-		<xsl:variable name="newlist">
-			<xsl:choose>
-				<xsl:when test="contains($list, $_delimiter)">
-					<xsl:value-of select="normalize-space($list)" />
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="concat(normalize-space($list), $_delimiter)"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-		<xsl:variable name="first" select="substring-before($newlist, $_delimiter)" />
-		<xsl:variable name="remaining" select="substring-after($newlist, $_delimiter)" />
-		<item>
-			<xsl:value-of select="$first" />
-		</item>
-		<xsl:if test="$remaining">
-			<xsl:call-template name="splitStringToItems">
-				<xsl:with-param name="list" select="$remaining" />
-				<xsl:with-param name="delimiter" select="$_delimiter" />
-			</xsl:call-template>
-		</xsl:if>
-	</xsl:template>
 	
 </xsl:stylesheet>
