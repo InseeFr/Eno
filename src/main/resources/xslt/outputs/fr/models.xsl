@@ -747,7 +747,7 @@
             <xd:p>Template for Bind for the following drivers.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Bind//Table | Bind//TableLoop" mode="model">
+    <xsl:template match="Bind//Table | Bind//TableLoop | Bind//MultipleChoiceQuestion" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -878,7 +878,7 @@
             <xd:p>It builds the resources by using different enofr functions then the process goes on within the created resource.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Resource//*[starts-with(name(), 'xf-select') and not(ancestor::ResourceItem)]" mode="model">
+    <xsl:template match="Resource//*[starts-with(name(), 'xf-select') and not(ancestor::ResourceItem) and not(ancestor::MultipleChoiceQuestion)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
@@ -934,6 +934,26 @@
     
     <xd:doc>
         <xd:desc>
+            <xd:p>Template for Resource for the drivers xf-select in MultipleChoiceQuestion.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Resource//xf-select[not(ancestor::ResourceItem) and ancestor::MultipleChoiceQuestion]" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
+        <xsl:variable name="label" select="eno:serialize(enofr:get-label($source-context, $language))"/>
+        
+        <xsl:element name="{enofr:get-name($source-context)}">
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('ResourceItem', .)" tunnel="yes"/>
+                <xsl:with-param name="item-label" select="$label" tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:element>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
             <xd:p>Template for Resource for the driver ConsistencyCheck.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -971,12 +991,16 @@
     <xsl:template match="ResourceItem//xf-item" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="item-label" tunnel="yes"/>
         
         <xsl:variable name="image" select="enofr:get-image($source-context)"/>
 
         <item>
             <label>
                 <xsl:choose>
+                    <xsl:when test="$item-label != ''">
+                        <xsl:value-of select="$item-label"/>
+                    </xsl:when>
                     <xsl:when test="$image=''">
                         <xsl:value-of select="eno:serialize(enofr:get-label($source-context, $language))"/>        
                     </xsl:when>
@@ -1268,7 +1292,7 @@
             <xd:p>Template for Body for the MultipleQuestion driver.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Body//MultipleQuestion" mode="model">
+    <xsl:template match="Body//MultipleQuestion | Body//MultipleChoiceQuestion" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xhtml:div class="question">
@@ -1422,7 +1446,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Default template for Body for the drivers.</xd:p>
+            <xd:p>Default template for Body for the ConsistencyCheck.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="Body//ConsistencyCheck" mode="model">
@@ -1451,7 +1475,7 @@
             </xf:alert>
         </xsl:element>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>Template to add mediatype html/css to rich text items</xd:desc>
     </xd:doc>
@@ -1608,7 +1632,7 @@
             <xd:p>Template for Body for the TextCell driver.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Body//TextCell" mode="model">
+    <xsl:template match="Body//TextCell[not(ancestor::MultipleChoiceQuestion)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="depth" select="enofr:get-code-depth($source-context)"/>
@@ -1632,10 +1656,17 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>The template for Body for the TextCell driver is unactivated in MultipleChoiceQuestion.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Body//MultipleChoiceQuestion//TextCell" mode="model"/>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Template for Body for the Cell driver.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Body//Cell" mode="model">
+    <xsl:template match="Body//Cell[not(ancestor::MultipleChoiceQuestion)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xhtml:td align="center">
@@ -1644,7 +1675,18 @@
             </xsl:apply-templates>
         </xhtml:td>
     </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template for Body for the Cell driver. It does nothing for MultipleChoiceQuestion</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Body//MultipleChoiceQuestion//Cell" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source"/>
+    </xsl:template>
     
+
     <xd:doc>
         <xd:desc>
             <xd:p>The Cell driver produces something only in the Body part but its children can produce something.</xd:p>
