@@ -804,10 +804,6 @@
          <text:p text:style-name="QuestionName">[SURVEY_COMMENT]</text:p>
          <text:p text:style-name="Format">Car 255</text:p>
          <text:p text:style-name="Question">➡ 1. Do you have any comment about the survey?</text:p>
-         <text:p>number(if (//j4nwc63q-QOP-jbgde5yl='') then '0' else //j4nwc63q-QOP-jbgde5yl) + number(if (//j4nwc63q-QOP-jbgd2x2t='') then '0' else //j4nwc63q-QOP-jbgd2x2t) + number(if (//j4nwc63q-QOP-jbgdjypz='') then '0' else //j4nwc63q-QOP-jbgdjypz) +
-				number(if (//j4nwc63q-QOP-jbgdcftu='') then '0' else //j4nwc63q-QOP-jbgdcftu) + number(if (//j4nwc63q-QOP-jbgdiyfe='') then '0' else //j4nwc63q-QOP-jbgdiyfe) + number(if (//j4nwc63q-QOP-jbgdj1wd='') then '0' else //j4nwc63q-QOP-jbgdj1wd) +
-				number(if (//j4nwc63q-QOP-jbgddylk='') then '0' else //j4nwc63q-QOP-jbgddylk) + number(if (//j4nwc63q-QOP-jbgd3jj6='') then '0' else //j4nwc63q-QOP-jbgd3jj6) + number(if (//j4nwc63q-QOP-jbgd4w3k='') then '0' else //j4nwc63q-QOP-jbgd4w3k) +
-				number(if (//j4nwc63q-QOP-jbgd4w4k='') then '0' else //j4nwc63q-QOP-jbgd4w4k) </text:p>
          <text:p/>
          <text:p/>
       </office:text>
