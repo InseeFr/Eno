@@ -11,8 +11,10 @@
         \n : for line break
          
         It works by parsing first the "tags" (bold and italic which need creation of xhtml element), then elements (line break and other "element" which doesn't need to deal with embrace tags)
+        It implements a black list (black-list param) for element that shouldn't be checked for markdown (as '*' is used in formula for example).
     -->
-    
+    <!-- black list param, it's a string list of the local name of excluded elements, ';' used as a separator -->
+    <xsl:param name="black-list" select="'CommandContent;ExternalAid;'" as="xs:string"/>
     <!-- Char used for italic -->
     <xsl:variable name="italic-mw" select="'*'"/>
     <!-- Char used for bold -->
@@ -29,12 +31,24 @@
     <xsl:variable name="p-open" select="'&lt;xhtml:p&gt;'"/>
     <!-- tags for p close -->
     <xsl:variable name="p-close" select="'&lt;/xhtml:p&gt;'"/>
-    
+    <!-- Tokenized version of the black-list -->
+    <xsl:variable name="_black-list" select="tokenize($black-list,';')"/>
+        
     <!-- Standard identity pattern. -->
     <xsl:template match="*">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="node()"/>
+            <xsl:choose>
+                <xsl:when test="local-name(.) = $_black-list">
+                    <!-- No MW parsing only a flat copy. -->
+                    <xsl:copy-of select="node()"/>        
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- Default mode. -->
+                    <xsl:apply-templates select="node()"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            
         </xsl:copy>
     </xsl:template>
      
@@ -43,8 +57,8 @@
         <xsl:copy-of select="."/>
     </xsl:template>
     
-    <!-- Parsing is done on the text nodes -->
-    <xsl:template match="text()[matches(.,'[*]|\\n|\[.*\]\(.*\)')]">
+    <!-- Parsing is done on the text nodes for the default mode only -->
+    <xsl:template match="text()[matches(normalize-space(.),'[*]|\\n|\[.*\]\(.*\)')]">
         <xhtml:p>
             <xsl:call-template name="parse-tags">
               <xsl:with-param name="expression" select="normalize-space(.)"/>
@@ -53,7 +67,7 @@
     </xsl:template>
     
     
-    <!-- Parsing is done on the text nodes -->
+    <!-- Parsing is done on the text nodes. -->
     <xsl:template match="text()">
         <xsl:copy-of select="."/>        
     </xsl:template>
