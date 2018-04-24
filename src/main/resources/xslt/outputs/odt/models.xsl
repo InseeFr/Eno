@@ -379,7 +379,7 @@
 	
 	
 	<!-- Match on the Table driver: write the question label -->
-	<xsl:template match="Table" mode="model">
+	<xsl:template match="Table | TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="ancestors">
@@ -565,7 +565,7 @@
 		<xsl:variable name="variableCalculationLabel" select="enoodt:get-calculate-text($source-context,$languages[1],'label')"/>
 		<xsl:variable name="variableCalculationAlert" select="enoodt:get-calculate-text($source-context,$languages[1],'alert')"/>
 		
-		<text:p><xsl:value-of select="$variableCalculation"/></text:p>
+		<!--<text:p><xsl:value-of select="$variableCalculation"/></text:p>-->
 		<text:p><xsl:value-of select="$variableCalculationLabel"/></text:p>
 		<text:p><xsl:value-of select="$variableCalculationAlert"/></text:p>
 		
@@ -575,12 +575,13 @@
 		</xsl:apply-templates>		
 	</xsl:template>
 	
-	<xsl:template match="Control" mode="model">
+	<xsl:template match="ConsistencyCheck" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="name" select="enoodt:get-label-conditioner($source-context,$languages[1])"/>
 		<xsl:variable name="nameOfControl" select="enoodt:get-label($source-context,$languages)"/>
 		<xsl:variable name="control" select="enoodt:get-constraint($source-context)"/>
+				
 		
 		<xsl:variable name="idVariables" as="xs:string*">
 			<xsl:for-each select="tokenize($control,'\+')">
