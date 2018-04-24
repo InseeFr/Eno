@@ -1655,10 +1655,10 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>The template for Body for the TextCell driver is unactivated in MultipleChoiceQuestion.</xd:p>
+            <xd:p>The templates for the TextCell driver is unactivated in MultipleChoiceQuestion.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Body//MultipleChoiceQuestion//TextCell" mode="model"/>
+    <xsl:template match="MultipleChoiceQuestion//TextCell" mode="model" priority="2"/>
 
     <xd:doc>
         <xd:desc>
