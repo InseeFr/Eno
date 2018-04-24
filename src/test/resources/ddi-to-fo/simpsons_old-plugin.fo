@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fox="http://xmlgraphics.apache.org/fop/extensions" xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xxf="http://orbeon.org/oxf/xml/xforms">
+<?xml version="1.0" encoding="UTF-8"?><fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fox="http://xmlgraphics.apache.org/fop/extensions" xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xxf="http://orbeon.org/oxf/xml/xforms">
    <fo:layout-master-set>
       <fo:simple-page-master font-family="arial" font-size="10pt" font-weight="normal" margin-bottom="5mm" master-name="Cover-A4" page-height="297mm" page-width="210mm">
          <fo:region-body column-count="1" margin="13mm"/>
@@ -18,7 +18,7 @@
                <fo:inline-container width="50mm">
                   <fo:block-container height="20mm" max-height="20mm" overflow="hidden">
                      <fo:block>
-                        <fo:external-graphic height="5mm" src="img/logo-insee-header.png"/>
+                        <fo:external-graphic height="5mm" src="logo-insee-header.png"/>
                      </fo:block>
                   </fo:block-container>
                </fo:inline-container>
@@ -29,7 +29,7 @@
                </fo:inline-container>
                <fo:inline-container width="127mm">
                   <fo:block-container height="20mm" overflow="hidden">
-                     <fo:block font-family="sans-serif" font-size="18pt" font-weight="bold" margin="3mm">Simpsons 2</fo:block>
+                     <fo:block font-family="sans-serif" font-size="18pt" font-weight="bold" margin="3mm">Simpsons</fo:block>
                   </fo:block-container>
                </fo:inline-container>
             </fo:block>
@@ -189,7 +189,7 @@
    <fo:page-sequence master-reference="A4-portrail">
       <fo:static-content flow-name="xsl-region-before">
          <fo:block margin="10mm" position="absolute" text-align="right">
-            <fo:external-graphic src="img/encoche-top-right.png"/>
+            <fo:external-graphic src="encoche-top-right.png"/>
          </fo:block>
          <fo:block margin-top="80%" position="absolute" text-align="right">
             <fo:instream-foreign-object>
@@ -203,7 +203,7 @@
       </fo:static-content>
       <fo:static-content flow-name="xsl-region-after">
          <fo:block bottom="0px" margin-left="10mm" margin-top="15mm" position="absolute" text-align="left">
-            <fo:external-graphic src="img/encoche-bottom-left.png"/>
+            <fo:external-graphic src="encoche-bottom-left.png"/>
          </fo:block>
          <fo:block text-align="center">
             <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
@@ -225,14 +225,14 @@
             <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 1. When was the first episode of the simpsons?</fo:block>
             <fo:block/>
             <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/> (jj/mm/aaaa) </fo:block>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/> (jj/mm/aaaa) </fo:block>
          </fo:block>
          <fo:block>
 						</fo:block>						
@@ -263,9 +263,9 @@
 			<fo:block page-break-inside="avoid">  
 		<fo:block background-color="#666666" border-color="black" border-style="solid" color="White" font-size="14pt" font-weight="Bold" margin-bottom="9pt" margin-top="3pt">II - General knowledge on the characters</fo:block>
          <fo:block font-size="9pt" font-weight="normal" margin-bottom="3pt" margin-left="3pt">This module asks about your general knowledge on the characters</fo:block>
-         <fo:block background-color="#CCCCCC" color="black" font-size="12pt" font-weight="Bold" margin-bottom="9pt" margin-top="3pt">1. Simpsons family</fo:block>
+         <fo:block background-color="#CCCCCC" color="black" font-size="12pt" font-weight="Bold" margin-bottom="9pt" margin-top="3pt">Simpsons family</fo:block>
          <fo:block page-break-inside="avoid">
-            <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 1-a. In which town do the Simpsons reside?</fo:block>
+            <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 1. In which town do the Simpsons reside?</fo:block>
             <fo:block/>
             <fo:block>
                <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm" padding-right="5mm">❏</fo:inline>Springfield</fo:block>
@@ -285,45 +285,41 @@
          </fo:block>
 						</fo:block>					
 					<fo:block page-break-inside="avoid">
-            <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 1-b. How old is Bart?</fo:block>
+            <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 2. How old is Bart?</fo:block>
             <fo:block/>
             <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
                <fo:inline/>
             </fo:block>
          </fo:block>
          <fo:block/>
          <fo:block page-break-inside="avoid">
-            <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 1-c. What are the names of animals that had the simpsons family?</fo:block>
+            <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 3. What are the names of animals that had the simpsons family?</fo:block>
             <fo:block>
                <fo:block font-size="9pt" font-weight="normal" margin-bottom="3pt" margin-left="3pt">Several possible answers</fo:block>
             </fo:block>
             <fo:block>
-		none =&gt; select
-		<fo:block page-break-inside="avoid">
+               <fo:block page-break-inside="avoid">
                   <fo:block>
                      <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm" padding-right="5mm">❏</fo:inline>Santa's Little Helper</fo:block>
                </fo:block>
-		none =&gt; select
-		<fo:block page-break-inside="avoid">
+               <fo:block page-break-inside="avoid">
                   <fo:block>
                      <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm" padding-right="5mm">❏</fo:inline>Snowball I</fo:block>
                </fo:block>
-		none =&gt; select
-		<fo:block page-break-inside="avoid">
+               <fo:block page-break-inside="avoid">
                   <fo:block>
                      <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm" padding-right="5mm">❏</fo:inline>Coltrane</fo:block>
                </fo:block>
-		none =&gt; select
-		<fo:block page-break-inside="avoid"/>
+               <fo:block page-break-inside="avoid"/>
             </fo:block>
          </fo:block>
 				<fo:block page-break-inside="avoid">
-			<fo:block background-color="#CCCCCC" color="black" font-size="12pt" font-weight="Bold" margin-bottom="9pt" margin-top="3pt">2. Other characters</fo:block>
+			<fo:block background-color="#CCCCCC" color="black" font-size="12pt" font-weight="Bold" margin-bottom="9pt" margin-top="3pt">Other characters</fo:block>
          <fo:block page-break-inside="avoid">
-            <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 2-a. Do you know Kent Brockman?</fo:block>
+            <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 4. Do you know Kent Brockman?</fo:block>
             <fo:block/>
             <fo:block>
                <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm" padding-right="5mm">❏</fo:inline>Yes</fo:block>
@@ -335,7 +331,7 @@
             <fo:inline-container width="10%">
                <fo:block-container>
                   <fo:block>
-                     <fo:external-graphic src="img/filter_arrow_25.png"/>
+                     <fo:external-graphic src="filter_arrow_25.png"/>
                   </fo:block>
                </fo:block-container>
             </fo:inline-container>
@@ -346,7 +342,7 @@
          <fo:block color="black" font-size="10pt" font-weight="bold"/>
          <fo:block page-break-inside="avoid">
             <fo:block/>
-            <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 2-b. Can you quote one of his best reporting?</fo:block>
+            <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 5. Can you quote one of his best reporting?</fo:block>
             <fo:block/>
             <fo:block border-bottom="1px dotted black" height="10mm" position="relative" width="100%">
 								 
@@ -393,15 +389,15 @@
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -411,9 +407,9 @@
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -428,15 +424,15 @@
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -446,9 +442,9 @@
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -475,15 +471,15 @@
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -493,9 +489,9 @@
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -510,15 +506,15 @@
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -528,9 +524,9 @@
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -545,15 +541,15 @@
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -563,9 +559,9 @@
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -583,12 +579,8 @@
             <fo:table border-width="0.35mm" display-align="center" font-size="10pt" inline-progression-dimension="auto" margin-top="1mm" max-width="190mm" space-after="5mm" table-layout="fixed" text-align="center" width="100%">
                <fo:table-header>
                   <fo:table-row color="black" font-size="10pt" font-weight="normal" text-align="center">
-                     <fo:table-cell border-color="black" border-style="solid" id="111172" number-columns-spanned="1" number-rows-spanned="2" text-align="center" width="34.33749958mm">
-                        <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">
-                           <fo:block linefeed-treatment="preserve">Catégorie
-de salariés
-(Nomenclature PCS)</fo:block>
-                        </fo:block>
+                     <fo:table-cell border-color="black" border-style="solid" id="111172" number-columns-spanned="1" number-rows-spanned="2" text-align="center" width="32.22083294mm">
+                        <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">Catégorie de salariés (Nomenclature PCS)</fo:block>
                      </fo:table-cell>
                      <fo:table-cell border-color="black" border-style="solid" id="111375" number-columns-spanned="1" number-rows-spanned="2" text-align="center" width="17.40416646mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">NIVEAU</fo:block>
@@ -600,43 +592,29 @@ de salariés
                         <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">
                            <fo:block linefeed-treatment="preserve">
                               <fo:inline font-weight="bold">Salaire mensuel
-brut de base</fo:inline>
-(hors primes)
-en øMOISø
-C*</fo:block>
+brut de base</fo:inline>(hors primes) en øMOISø  <img xmlns:a="ddi:archive:3_2" xmlns:c="ddi:conceptualcomponent:3_2" xmlns:cm="ddi:comparative:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32" xmlns:g="ddi:group:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:pogues="http://xml.insee.fr/schema/applis/pogues" xmlns:pr="ddi:ddiprofile:3_2" xmlns:r="ddi:reusable:3_2" xmlns:s="ddi:studyunit:3_2" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="/img/Help-browser.svg.png"/> </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="111984" number-columns-spanned="1" number-rows-spanned="2" text-align="center" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="111984" number-columns-spanned="1" number-rows-spanned="2" text-align="center" width="26.929166340000002mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">
                            <fo:block linefeed-treatment="preserve">
                               <fo:inline font-weight="bold">Horaire mensuel
-de base</fo:inline>
-(arrondir en heures)
-en øMOISø
-</fo:block>
+de base</fo:inline>(arrondir en heures) en øMOISø</fo:block>
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
                   <fo:table-row color="black" font-size="10pt" font-weight="normal" text-align="center">
                      <fo:table-cell border-color="black" border-style="solid" id="113187" number-columns-spanned="1" number-rows-spanned="1" text-align="center" width="53.38749934mm">
-                        <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">
-                           <fo:block linefeed-treatment="preserve">Libellé d'emploi
-</fo:block>
-                        </fo:block>
+                        <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">Libellé d'emploi</fo:block>
                      </fo:table-cell>
                      <fo:table-cell border-color="black" border-style="solid" id="113390" number-columns-spanned="1" number-rows-spanned="1" text-align="center" width="17.93333312mm">
-                        <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">
-                           <fo:block linefeed-treatment="preserve">Coeff. ou
-niveau
-hierarch.
-</fo:block>
-                        </fo:block>
+                        <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">Coeff. ou niveau hierarch.</fo:block>
                      </fo:table-cell>
                   </fo:table-row>
                </fo:table-header>
                <fo:table-body>
                   <fo:table-row border-color="black">
-                     <fo:table-cell border-color="black" border-style="solid" id="131193" number-columns-spanned="1" number-rows-spanned="3" text-align="left" width="34.33749958mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="131193" number-columns-spanned="1" number-rows-spanned="3" text-align="left" width="32.22083294mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" margin-left="1mm" padding="1mm">
                            <fo:inline font-weight="bold">Ouvriers</fo:inline>
                         </fo:block>
@@ -666,23 +644,23 @@ hierarch.
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="13111108" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="13111108" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -715,23 +693,23 @@ hierarch.
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="1339123" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="1339123" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -764,23 +742,23 @@ hierarch.
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="1359138" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="1359138" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -788,7 +766,7 @@ hierarch.
                      </fo:table-cell>
                   </fo:table-row>
                   <fo:table-row border-color="black">
-                     <fo:table-cell border-color="black" border-style="solid" id="1371141" number-columns-spanned="1" number-rows-spanned="3" text-align="left" width="34.33749958mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="1371141" number-columns-spanned="1" number-rows-spanned="3" text-align="left" width="32.22083294mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" margin-left="1mm" padding="1mm">
                            <fo:inline font-weight="bold">Employés</fo:inline>
                         </fo:block>
@@ -818,23 +796,23 @@ hierarch.
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="13711156" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="13711156" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -867,23 +845,23 @@ hierarch.
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="1399171" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="1399171" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -916,23 +894,23 @@ hierarch.
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="13119186" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="13119186" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -940,7 +918,7 @@ hierarch.
                      </fo:table-cell>
                   </fo:table-row>
                   <fo:table-row border-color="black">
-                     <fo:table-cell border-color="black" border-style="solid" id="13131189" number-columns-spanned="1" number-rows-spanned="3" text-align="left" width="34.33749958mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="13131189" number-columns-spanned="1" number-rows-spanned="3" text-align="left" width="32.22083294mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" margin-left="1mm" padding="1mm">
                            <fo:block linefeed-treatment="preserve">
                               <fo:inline font-weight="bold">Professions
@@ -973,23 +951,23 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="131311204" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="131311204" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1022,23 +1000,23 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="13159219" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="13159219" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1071,23 +1049,23 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="13179234" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="13179234" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1095,7 +1073,7 @@ intermédiaires</fo:inline>
                      </fo:table-cell>
                   </fo:table-row>
                   <fo:table-row border-color="black">
-                     <fo:table-cell border-color="black" border-style="solid" id="13191237" number-columns-spanned="1" number-rows-spanned="3" text-align="left" width="34.33749958mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="13191237" number-columns-spanned="1" number-rows-spanned="3" text-align="left" width="32.22083294mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" margin-left="1mm" padding="1mm">
                            <fo:inline font-weight="bold">Cadres</fo:inline>(1)</fo:block>
                      </fo:table-cell>
@@ -1124,23 +1102,23 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="131911252" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="131911252" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1173,23 +1151,23 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="13219267" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="13219267" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1222,23 +1200,23 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="13239282" padding="1mm" text-align="left" width="24.8124997mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="13239282" padding="1mm" text-align="left" width="26.929166340000002mm">
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1254,15 +1232,15 @@ intermédiaires</fo:inline>
             <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 1. What is the population of Springfield?</fo:block>
             <fo:block/>
             <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
-               <fo:external-graphic src="img/mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
                <fo:inline/>
             </fo:block>
          </fo:block>
@@ -1292,15 +1270,15 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1315,15 +1293,15 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1338,15 +1316,15 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1361,15 +1339,15 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1384,15 +1362,15 @@ intermédiaires</fo:inline>
                         <fo:block>
                            <fo:block padding-bottom="0px" padding-top="0px" text-align="right">
                               <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm" padding-bottom="0mm" padding-top="0mm">
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
-                                 <fo:external-graphic src="img/mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -1401,15 +1379,6 @@ intermédiaires</fo:inline>
                   </fo:table-row>
                </fo:table-body>
             </fo:table>
-         </fo:block>
-         <fo:block>
-            <fo:footnote>
-               <fo:inline/>
-               <fo:footnote-body font-size="9pt" font-weight="normal" margin-bottom="3pt" margin-left="3pt">
-                  <fo:block>
-                     <fo:inline baseline-shift="super" font-size="75%">4</fo:inline>The total is different from the distribution. Please correct.</fo:block>
-               </fo:footnote-body>
-            </fo:footnote>
          </fo:block>
          <fo:block page-break-inside="avoid">
             <fo:block color="black" font-size="10pt" font-weight="bold" margin-bottom="3pt" margin-top="9pt">➡ 3. And finally! In which state do The Simpsons reside?</fo:block>
@@ -1424,69 +1393,66 @@ intermédiaires</fo:inline>
             <fo:table border-width="0.35mm" display-align="center" font-size="10pt" inline-progression-dimension="auto" margin-top="1mm" max-width="190mm" space-after="5mm" table-layout="fixed" text-align="center" width="100%">
                <fo:table-header>
                   <fo:table-row color="black" font-size="10pt" font-weight="normal" text-align="center">
-                     <fo:table-cell border-color="black" border-style="solid" id="3111321" number-columns-spanned="1" number-rows-spanned="1" text-align="center" width="65.02916586mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="3111321" number-columns-spanned="1" number-rows-spanned="1" text-align="center" width="62.11874923mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm"/>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="3113324" number-columns-spanned="1" number-rows-spanned="1" text-align="center" width="79.58124901000001mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="3113324" number-columns-spanned="1" number-rows-spanned="1" text-align="center" width="77.19999904mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" padding="1mm">Évolution probable en 2016 par rapport à 2015</fo:block>
                      </fo:table-cell>
                   </fo:table-row>
                </fo:table-header>
                <fo:table-body>
                   <fo:table-row border-color="black">
-                     <fo:table-cell border-color="black" border-style="solid" id="3311327" number-columns-spanned="1" number-rows-spanned="1" text-align="left" width="65.02916586mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="3311327" number-columns-spanned="1" number-rows-spanned="1" text-align="left" width="62.11874923mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" margin-left="1mm" padding="1mm">Recettes de fonctionnement</fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="3313330" padding="1mm" text-align="left" width="79.58124901000001mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="3313330" padding="1mm" text-align="left" width="77.19999904mm">
                         <fo:block>
-		none =&gt; select
-		<fo:block page-break-inside="avoid">
+                           <fo:block page-break-inside="avoid">
                               <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm">❏</fo:inline>
-                              <fo:external-graphic padding-right="3mm" src="img/en-hausse.jpg"/>
+                              <fo:external-graphic padding-right="3mm" src="en-hausse.jpg"/>
                               <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm">❏</fo:inline>
-                              <fo:external-graphic padding-right="3mm" src="img/en-baisse.jpg"/>
+                              <fo:external-graphic padding-right="3mm" src="en-baisse.jpg"/>
                               <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm">❏</fo:inline>
-                              <fo:external-graphic padding-right="3mm" src="img/stable.jpg"/>
+                              <fo:external-graphic padding-right="3mm" src="stable.jpg"/>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
                   <fo:table-row border-color="black">
-                     <fo:table-cell border-color="black" border-style="solid" id="3331333" number-columns-spanned="1" number-rows-spanned="1" text-align="left" width="65.02916586mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="3331333" number-columns-spanned="1" number-rows-spanned="1" text-align="left" width="62.11874923mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" margin-left="1mm" padding="1mm">
                            <fo:inline>concours financiers de l’État</fo:inline>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="3333336" padding="1mm" text-align="left" width="79.58124901000001mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="3333336" padding="1mm" text-align="left" width="77.19999904mm">
                         <fo:block>
-		none =&gt; select
-		<fo:block page-break-inside="avoid">
+                           <fo:block page-break-inside="avoid">
                               <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm">❏</fo:inline>
-                              <fo:external-graphic padding-right="3mm" src="img/en-hausse.jpg"/>
+                              <fo:external-graphic padding-right="3mm" src="en-hausse.jpg"/>
                               <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm">❏</fo:inline>
-                              <fo:external-graphic padding-right="3mm" src="img/en-baisse.jpg"/>
+                              <fo:external-graphic padding-right="3mm" src="en-baisse.jpg"/>
                               <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm">❏</fo:inline>
-                              <fo:external-graphic padding-right="3mm" src="img/stable.jpg"/>
+                              <fo:external-graphic padding-right="3mm" src="stable.jpg"/>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
                   <fo:table-row border-color="black">
-                     <fo:table-cell border-color="black" border-style="solid" id="3351339" number-columns-spanned="1" number-rows-spanned="1" text-align="left" width="65.02916586mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="3351339" number-columns-spanned="1" number-rows-spanned="1" text-align="left" width="62.11874923mm">
                         <fo:block color="black" font-size="10pt" font-weight="normal" margin-left="1mm" padding="1mm">
                            <fo:inline>impôts locaux, autres impôts et taxes</fo:inline>
                         </fo:block>
                      </fo:table-cell>
-                     <fo:table-cell border-color="black" border-style="solid" id="3353342" padding="1mm" text-align="left" width="79.58124901000001mm">
+                     <fo:table-cell border-color="black" border-style="solid" id="3353342" padding="1mm" text-align="left" width="77.19999904mm">
                         <fo:block>
-		none =&gt; select
-		<fo:block page-break-inside="avoid">
+                           <fo:block page-break-inside="avoid">
                               <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm">❏</fo:inline>
-                              <fo:external-graphic padding-right="3mm" src="img/en-hausse.jpg"/>
+                              <fo:external-graphic padding-right="3mm" src="en-hausse.jpg"/>
                               <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm">❏</fo:inline>
-                              <fo:external-graphic padding-right="3mm" src="img/en-baisse.jpg"/>
+                              <fo:external-graphic padding-right="3mm" src="en-baisse.jpg"/>
                               <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm">❏</fo:inline>
-                              <fo:external-graphic padding-right="3mm" src="img/stable.jpg"/>
+                              <fo:external-graphic padding-right="3mm" src="stable.jpg"/>
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
@@ -1505,9 +1471,9 @@ intermédiaires</fo:inline>
                      <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm" padding-right="5mm">❏</fo:inline>100%</fo:block>
                   <fo:block>
                      <fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm" padding-right="5mm">❏</fo:inline>Autre : précisez<fo:inline color="black" font-size="10pt" font-weight="normal" padding="1mm">
-                        <fo:external-graphic src="img/mask_number.png"/>
-                        <fo:external-graphic src="img/mask_number.png"/>
-                        <fo:external-graphic src="img/mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
+                        <fo:external-graphic src="mask_number.png"/>
                         <fo:inline>%</fo:inline>
                      </fo:inline>
                   </fo:block>
@@ -1522,13 +1488,13 @@ intermédiaires</fo:inline>
             <fo:block/>
             <fo:block>
                <fo:inline color="black" font-size="10pt" font-weight="normal" padding="1mm">
-                  <fo:external-graphic src="img/mask_number.png"/>
-                  <fo:external-graphic src="img/mask_number.png"/>
+                  <fo:external-graphic src="mask_number.png"/>
+                  <fo:external-graphic src="mask_number.png"/>
                   <fo:inline color="black" font-size="10pt" font-weight="normal" padding="1mm">heures</fo:inline>
                </fo:inline>
                <fo:inline color="black" font-size="10pt" font-weight="normal" padding="1mm">
-                  <fo:external-graphic src="img/mask_number.png"/>
-                  <fo:external-graphic src="img/mask_number.png"/>
+                  <fo:external-graphic src="mask_number.png"/>
+                  <fo:external-graphic src="mask_number.png"/>
                   <fo:inline color="black" font-size="10pt" font-weight="normal" padding="1mm">minutes</fo:inline>
                </fo:inline>
             </fo:block>

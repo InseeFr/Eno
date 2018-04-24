@@ -49,6 +49,7 @@
 		<guice.version>4.1.0</guice.version>
 		<commons-io.version>2.5</commons-io.version>
 		<saxon.version>9.7.0-8</saxon.version>
+		<fop.version>2.2</fop.version>
 		<source.plugin.version>3.0.1</source.plugin.version>
 		<javadoc.plugin.version>3.0.0</javadoc.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -78,16 +79,10 @@
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>fop</artifactId>
-			<version>2.2</version>
+			<version>${fop.version}</version>
 		</dependency>
 
 		<!-- LOG4j and SL4J depandancies -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.25</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -113,7 +108,12 @@
 			<version>2.3.0</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>2.11.0</version>
+			<scope>test</scope>
+		</dependency>
 
 
 
