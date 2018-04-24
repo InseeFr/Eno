@@ -951,4 +951,20 @@
         </xsl:choose>
     </xsl:template>
    
+   
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-instruction-by-anchor-ref.</xd:p>
+            <xd:p>Retrieving an instruction based on the value of @href attribute.</xd:p>
+            <xd:p>If the href param value contains a '#' as first character it will be ignored for the match criteria.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-instruction-by-anchor-ref" priority="2">
+        <xsl:param name="href" select="''" tunnel="yes"/>
+        <!-- Checking if '#' first character should be ommitted. -->
+        <xsl:variable name="href-formatted" select="if(starts-with($href,'#')) then(substring-after($href,'#')) else($href)"/>
+        <xsl:sequence select="//d:Instruction[.//xhtml:p/@id = $href-formatted]"/>            
+    </xsl:template>
+   
+   
 </xsl:stylesheet>
