@@ -965,6 +965,17 @@
         <xsl:variable name="href-formatted" select="if(starts-with($href,'#')) then(substring-after($href,'#')) else($href)"/>
         <xsl:sequence select="//d:Instruction[.//xhtml:p/@id = $href-formatted]"/>            
     </xsl:template>
-   
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function that retruns the instruction related to an href value. The current implementation retrieve the instruction anywhere in the input, so href should be unique inside the input context. If the href param starts with the '#' charac, it will be omitted in the matching criteria.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoddi:get-instruction-by-anchor-ref">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="href"/>
+        <xsl:apply-templates select="$context" mode="enoddi:get-instruction-by-anchor-ref">
+            <xsl:with-param name="href" select="$href" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:function>
    
 </xsl:stylesheet>
