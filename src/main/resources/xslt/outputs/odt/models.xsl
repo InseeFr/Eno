@@ -505,8 +505,6 @@
 			</xsl:apply-templates>
 		</table:table-cell>
 	</xsl:template>
-	
-	<!-- Match on the xf-item driver: write the code value and label -->
 	<xsl:template match="xf-item" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
