@@ -118,8 +118,6 @@
         </xsl:for-each>
     </xsl:template>
 
-
-
     <xd:doc>
         <xd:desc>
             <xd:p>For consistency, get-concatened-label is same as get-label for element with no child d:Instruction or which is not a d:QuestionItem/Grid.</xd:p>
@@ -129,8 +127,7 @@
     <xsl:template match="*" mode="enoddi:get-concatened-label">
         <xsl:apply-templates select="." mode="enoddi:get-label"/>
     </xsl:template>
-        
-
+      
     <xd:doc>
         <xd:desc>
             <xd:p>For questions which have both a 'format' Instruction and an other Instruction which is not of 'format' type.</xd:p>
@@ -756,11 +753,13 @@
     </xsl:template>
     
     <xd:doc>
-        <xd:desc>Return the maximum length of a code domain, if is blank then it is a boolean</xd:desc>
+        <xd:desc>
+            <xd:p>Defining getter get-code-maximum-length for several questions.</xd:p>
+            <xd:p>Return the maximum length of a code domain, if is blank then it is a boolean.</xd:p>
+        </xd:desc>
     </xd:doc>
     <xsl:template match="d:QuestionItem[d:CodeDomain] | d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed)]
-        |d:QuestionGrid[not(d:GridDimension/d:Roster[not(@maximumAllowed)])]
-        " mode="enoddi:get-code-maximum-length" priority="2">
+        |d:QuestionGrid[not(d:GridDimension/d:Roster[not(@maximumAllowed)])]" mode="enoddi:get-code-maximum-length" priority="2">
         <xsl:variable name="listLengthCode" as="xs:double*">
             <xsl:for-each select="descendant::r:Value">
                 <xsl:value-of select="string-length(.)"/>
@@ -768,8 +767,7 @@
         </xsl:variable>
         <xsl:value-of select="max($listLengthCode)"/>
     </xsl:template>
-    
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-label for MultipleChoiceQuestion.</xd:p>
@@ -783,4 +781,188 @@
         <xsl:variable name="correspondingCode" select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]"/>
         <xsl:apply-templates select="$correspondingCode" mode="enoddi:get-label"/>
     </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-label-conditioning-variables.</xd:p>
+            <xd:p>Function that returns the list of the variables conditioning a label.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-label-conditioning-variables">
+        <xsl:param name="language" tunnel="yes"/>
+        <xsl:variable name="variable-list" as="xs:string *">
+            <xsl:call-template name="enoddi:variables-from-label">
+                <xsl:with-param name="label" select="enoddi:get-label(.,$language)"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:sequence select="$variable-list"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-concatened-label-conditioning-variables.</xd:p>
+            <xd:p>Function that returns the list of the variables conditioning a concatened-label.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-concatened-label-conditioning-variables">
+        <xsl:param name="language" tunnel="yes"/>
+        <xsl:variable name="variable-list" as="xs:string *">
+            <xsl:call-template name="enoddi:variables-from-label">
+                <xsl:with-param name="label" select="enoddi:get-concatened-label(.,$language)"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:sequence select="distinct-values($variable-list)"/>
+    </xsl:template>
+    
+    <xsl:template name="enoddi:variables-from-label">
+        <xsl:param name="label"/>
+        
+        <xsl:if test="contains(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)">
+            <xsl:sequence select="substring-before(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
+            <xsl:call-template name="enoddi:variables-from-label">
+                <xsl:with-param name="label" select="substring-after(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
+            </xsl:call-template>
+        </xsl:if> 
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-conditioning-variable-formula for StatementItem, Instruction, QuestionItem and QuestionGrid.</xd:p>
+            <xd:p>Function that returns the formula of a conditioning variable.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid" mode="enoddi:get-conditioning-variable-formula" priority="2">
+        <xsl:param name="variable" tunnel="yes"/>
+        <!-- The markup containing the text has different names, but it is always a child of the element -->
+        <xsl:variable name="conditional-text" select="descendant::d:ConditionalText"/>
+        <xsl:variable name="possible-formulas" as="xs:string *">
+            <xsl:for-each select="$conditional-text//d:Expression/r:Command">
+                <xsl:if test="r:OutParameter/r:ID = $variable">
+                    <xsl:sequence select="r:CommandContent"/>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:variable>
+        
+        <xsl:choose>
+            <xsl:when test="$possible-formulas != ''">
+                <xsl:value-of select="$possible-formulas[1]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$variable"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-conditioning-variable-formula for StatementItem, Instruction, QuestionItem and QuestionGrid.</xd:p>
+            <xd:p>Function that returns the variables of the formula of a conditioning variable.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid" mode="enoddi:get-conditioning-variable-formula-variables" priority="2">
+        <xsl:param name="variable" tunnel="yes"/>
+        <!-- The markup containing the text has different names, but it is always a child of the element -->
+        <xsl:variable name="conditional-text" select="descendant::d:ConditionalText"/>
+        <xsl:variable name="formula-variables" as="node()">
+            <Variables>
+                <xsl:for-each select="$conditional-text//d:Expression/r:Command">
+                    <xsl:if test="r:OutParameter/r:ID = $variable">
+                        <Variable>
+                            <xsl:sequence select="r:Binding/r:SourceParameterReference/r:ID"/>    
+                        </Variable>
+                    </xsl:if>
+                </xsl:for-each>                
+            </Variables>
+        </xsl:variable>
+        
+        <xsl:choose>
+            <xsl:when test="$formula-variables/*">
+                <xsl:variable name="ordered-variables">
+                    <xsl:for-each select="$formula-variables//Variable">
+                        <xsl:sort select="string-length(.)" order="descending"/>
+                        <xsl:copy-of select="."/>
+                    </xsl:for-each>
+                </xsl:variable>
+                <xsl:sequence select="distinct-values($ordered-variables)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$variable"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-conditioning-variable-formula for the others</xd:p>
+            <xd:p>Function that returns the formula of a conditioning variable.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-conditioning-variable-formula">
+        <xsl:param name="variable" tunnel="yes"/>
+        
+        <xsl:value-of select="$variable"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-conditioning-variable-formula for the others.</xd:p>
+            <xd:p>Function that returns the variables of the formula of a conditioning variable.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-conditioning-variable-formula-variables">
+        <xsl:param name="variable" tunnel="yes"/>
+        
+        <xsl:value-of select="$variable"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-business-name.</xd:p>
+            <xd:p>Function that returns the business variable from the DDI one.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-business-name">
+        <xsl:param name="variable" tunnel="yes"/>
+        <xsl:choose>
+            <!-- collected variable -->
+            <xsl:when test="//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
+                <xsl:value-of select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $variable]/l:VariableName/r:String"/>
+            </xsl:when>
+            <!-- calculated variable -->
+            <xsl:when test="//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
+                <xsl:value-of select="//l:VariableScheme//l:Variable[descendant::r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable]/l:VariableName/r:String"/>
+            </xsl:when>
+            <!-- external variable -->
+            <xsl:when test="//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
+                <xsl:value-of select="$variable"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-business-ascendants.</xd:p>
+            <xd:p>Function that returns the business ascendants loop and rowloop business names from a DDI variable.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-business-ascendants">
+        <xsl:param name="variable" tunnel="yes"/>
+        <xsl:choose>
+            <!-- collected or calculated variable -->
+            <xsl:when test="(//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable)
+                or (//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable)">
+                <xsl:for-each select="//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable]">
+                    <xsl:sequence select="l:VariableGroupName/r:String"/>
+                </xsl:for-each>
+                <!--<xsl:value-of select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $variable]/l:VariableName/r:String"/>-->
+            </xsl:when>
+            <!-- external variable -->
+            <xsl:when test="//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
+                <xsl:for-each select="//l:VariableScheme//l:VariableGroup[descendant::l:VariableName/r:String= $variable]">
+                    <xsl:sequence select="l:VariableGroupName/r:String"/>
+                </xsl:for-each>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+   
 </xsl:stylesheet>

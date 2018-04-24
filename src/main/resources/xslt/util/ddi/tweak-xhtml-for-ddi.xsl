@@ -47,9 +47,10 @@
 
     <!-- For each xhtml:a 'footnote', an Instruction needs to be generated. -->
     <xsl:template match="d:InterviewerInstructionScheme">
-        <!-- First all the Scheme is copied. -->
+        <!-- First all the Scheme is processed. -->
         <xsl:copy>
-            <xsl:copy-of select="@* | node()"/>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="node()"/>
             <!-- Then an instruction is generated for each xhmtl:a "footnote". -->
             <xsl:for-each select="//xhtml:a[key('is-footnote',true())]">
                 <!-- Calculating the variables needed. -->
