@@ -378,7 +378,7 @@
 	
 	
 	<!-- Match on the Table driver: write the question label -->
-	<xsl:template match="Table" mode="model">
+	<xsl:template match="Table | TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="ancestors">
@@ -386,7 +386,6 @@
 		</xsl:variable>
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
-		<xsl:variable name="nbCol" select="count(enoodt:get-body-line($source-context, position()))"/>
 		<xsl:variable name="nbLine" select="count(enoodt:get-body-lines($source-context))"/>
 		<xsl:variable name="headerCol" select="enoodt:get-body-line($source-context,position())"/>
 		<xsl:variable name="type" select="enoodt:get-css-class($source-context)"/>
@@ -405,14 +404,9 @@
 		<text:p text:style-name="Question"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
 		
 		<table:table table:name="{enoodt:get-name($source-context)}">
-			<!-- nbCol -->
-			<xsl:choose>
-				<xsl:when test="$nbCol>0">
-					<xsl:for-each select="$headerCol">
-						<table:table-column/>
-					</xsl:for-each>
-				</xsl:when>
-			</xsl:choose>
+			<xsl:for-each select="$headerCol">
+				<table:table-column/>
+			</xsl:for-each>
 			<!--    Header   -->
 			<xsl:for-each select="enoodt:get-header-lines($source-context)">
 				<table:table-row>		
@@ -431,44 +425,22 @@
 						<xsl:with-param name="typeOfAncestor" select="$type" tunnel="yes"/>
 					</xsl:apply-templates>
 				</table:table-row>
-			</xsl:for-each>			
+			</xsl:for-each>
 		</table:table>
 		
-		<!-- Go to the children -->
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
+		<xsl:variable name="nbMaximumLines" select="enoodt:get-maximum-lines($source-context)"/>
+		<xsl:variable name="nbMinimumLines" select="enoodt:get-minimum-lines($source-context)"/>
+		<xsl:if test="$nbMinimumLines!=''">
+			<text:p><xsl:value-of select="concat('Nb line(s) minimum required : ',$nbMinimumLines)"/></text:p>
+		</xsl:if>
+		<xsl:if test="$nbMaximumLines!=''">
+			<text:p><xsl:value-of select="concat('Nb line(s) maximum allowed : ',$nbMaximumLines)"/></text:p>
+		</xsl:if>
 		
-	<!-- Match on the driver RowLoop and QuestionLoop -->
-	<xsl:template match="RowLoop | QuestionLoop" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<!-- create element with same name and acts like what is done for the instance part -->
-		<xsl:element name="{enoodt:get-name($source-context)}">
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)"
-					tunnel="yes"/>
-			</xsl:apply-templates>
-		</xsl:element>
-		<!-- keep going down the tree in case there are other loops -->
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
+		
+		
 	</xsl:template>
 	
-	<!-- Match on the driver TableLoop -->
-	<xsl:template match="TableLoop" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="name" select="enoodt:get-name($source-context)"/>
-		
-		<xsl:element name="{$name}"/>
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-		<xsl:if test="enoodt:get-minimum-lines($source-context) &lt; enoodt:get-maximum-lines($source-context)">
-			<xsl:element name="{$name}-AddLine"/>
-		</xsl:if>
-	</xsl:template>
 	<!-- For headers (top or left) -->
 	<xsl:template match="TextCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -663,7 +635,7 @@
 			</xsl:when>
 		</xsl:choose>
 		
-		<xsl:variable name="regex" select="'\+\-'" as="xs:string"/>
+		<xsl:variable name="regex" select="'number\([a-zA-Z0-9\-\s/\(\)='''']*\)'" as="xs:string"/>
 		
 		<text:p text:style-name="Control">
 			<xsl:value-of select="replace($control,$regex,'hi')"></xsl:value-of>
