@@ -957,24 +957,8 @@
             <xd:p>Function that returns the list of the variables in a control-text (get-control).</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:ComputationItem" mode="enoddi:get-control-variables">
-        <xsl:param name="variable" tunnel="yes"/>
-        <xsl:variable name="regexStep1" select="'number\([a-zA-Z0-9_\-\s/\(\)='''']*\)'" as="xs:string"/>
-        <xsl:variable name="regexStep2" select="'/{2,2}[a-zA-Z0-9\-\s_]*='''''" as="xs:string"/>
-        
-        <xsl:variable name="idVariables" as="xs:string*">
-            <xsl:analyze-string select="$variable" regex="{$regexStep1}">
-                <xsl:matching-substring>
-                    <xsl:analyze-string select="." regex="{$regexStep2}">
-                        <xsl:matching-substring>
-                            <xsl:value-of select="substring-before(substring-after(.,'//'),'=')"/>
-                        </xsl:matching-substring>
-                    </xsl:analyze-string>
-                </xsl:matching-substring>
-            </xsl:analyze-string>
-        </xsl:variable>
-        
-        <xsl:value-of select="$idVariables"/>
+    <xsl:template match="d:ComputationItem" mode="enoddi:get-control-variables">        
+        <xsl:sequence select="r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID"/>
     </xsl:template>
  
 </xsl:stylesheet>
