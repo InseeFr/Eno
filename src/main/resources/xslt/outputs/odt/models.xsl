@@ -482,8 +482,8 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="ancestorTable" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
-		<xsl:variable name="col-span" select="enoodt:get-colspan($source-context)"/>
-		<xsl:variable name="row-span" select="enoodt:get-rowspan($source-context)"/>
+		<xsl:variable name="col-span" select="number(enoodt:get-colspan($source-context))"/>
+		<xsl:variable name="row-span" select="number(enoodt:get-rowspan($source-context))"/>
 		
 		<xsl:if test="$ancestorTable!=''">
 			<table:table-cell table:number-rows-spanned="{$row-span}" 
@@ -492,17 +492,47 @@
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 				</xsl:apply-templates>
 			</table:table-cell>
+			
+			<!-- To add spanned rows / columns -->
+			<xsl:if test="$row-span &gt;1">
+				<xsl:for-each select="2 to xs:integer(floor($row-span))">
+					<table:covered-table-cell/>
+				</xsl:for-each>
+			</xsl:if>
+			<xsl:if test="$col-span &gt;1">
+				<xsl:for-each select="2 to xs:integer(floor($col-span))">
+					<table:covered-table-cell/>
+				</xsl:for-each>
+			</xsl:if>
 		</xsl:if>
 	</xsl:template>
 	
 	<xsl:template match="EmptyCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="ancestorTable" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
-		<table:table-cell>
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-			</xsl:apply-templates>
-		</table:table-cell>
+		<xsl:variable name="col-span" select="number(enoodt:get-colspan($source-context))"/>
+		<xsl:variable name="row-span" select="number(enoodt:get-rowspan($source-context))"/>
+		<xsl:if test="$ancestorTable!=''">
+			<table:table-cell table:number-rows-spanned="{$row-span}" 
+				table:number-columns-spanned="{$col-span}">
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+			</table:table-cell>
+		</xsl:if>
+		
+		<!-- To add spanned rows / columns -->
+		<xsl:if test="$row-span &gt;1">
+			<xsl:for-each select="2 to xs:integer(floor($row-span))">
+				<table:covered-table-cell/>
+			</xsl:for-each>
+		</xsl:if>
+		<xsl:if test="$col-span &gt;1">
+			<xsl:for-each select="2 to xs:integer(floor($col-span))">
+				<table:covered-table-cell/>
+			</xsl:for-each>
+		</xsl:if>
 	</xsl:template>
 	
 	<!-- Match on the xf-item driver: write the code value and label -->
@@ -593,10 +623,7 @@
 		
 		<xsl:for-each select="$idVariables">
 			<text:p text:style-name="Control"><xsl:value-of select="enoodt:get-business-name($source-context,.)"/></text:p>
-		</xsl:for-each>
-		
-		
-		
+		</xsl:for-each>		
 		
 		<xsl:choose>
 			<xsl:when test="$instructionFormat=''">
