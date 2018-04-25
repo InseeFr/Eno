@@ -378,7 +378,7 @@
 	
 	
 	<!-- Match on the Table driver: write the question label -->
-	<xsl:template match="Table | TableLoop" mode="model">
+	<xsl:template match="Table" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="ancestors">
@@ -439,7 +439,22 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
+		
+	<!-- Match on the driver RowLoop and QuestionLoop -->
+	<xsl:template match="RowLoop | QuestionLoop" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<!-- create element with same name and acts like what is done for the instance part -->
+		<xsl:element name="{enoodt:get-name($source-context)}">
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)"
+					tunnel="yes"/>
+			</xsl:apply-templates>
+		</xsl:element>
+		<!-- keep going down the tree in case there are other loops -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
 	
 	<!-- For headers (top or left) -->
 	<xsl:template match="TextCell" mode="model">
@@ -550,8 +565,6 @@
 			<!--<text:p><xsl:value-of select="concat('container :',enoodt:get-name($ancestors[1]))"/></text:p>
 		--></xsl:if>
 			
-			
-		
 		<!-- Got to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
