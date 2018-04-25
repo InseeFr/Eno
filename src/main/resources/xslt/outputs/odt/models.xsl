@@ -435,9 +435,7 @@
 		</xsl:if>
 		<xsl:if test="$nbMaximumLines!=''">
 			<text:p><xsl:value-of select="concat('Nb line(s) maximum allowed : ',$nbMaximumLines)"/></text:p>
-		</xsl:if>
-		
-		
+		</xsl:if>		
 		
 	</xsl:template>
 	
@@ -594,7 +592,7 @@
 		<xsl:variable name="variableCalculationLabel" select="enoodt:get-calculate-text($source-context,$languages[1],'label')"/>
 		<xsl:variable name="variableCalculationAlert" select="enoodt:get-calculate-text($source-context,$languages[1],'alert')"/>
 		
-		<!--<text:p><xsl:value-of select="$variableCalculation"/></text:p>-->
+		<text:p><xsl:value-of select="$variableCalculation"/></text:p>
 		<text:p><xsl:value-of select="$variableCalculationLabel"/></text:p>
 		<text:p><xsl:value-of select="$variableCalculationAlert"/></text:p>
 		
@@ -608,20 +606,33 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="name" select="enoodt:get-label-conditioner($source-context,$languages[1])"/>
-		<xsl:variable name="nameOfControl" select="enoodt:get-label($source-context,$languages)"/>
+		<xsl:variable name="nameOfControl" select="enoodt:get-check-name($source-context,$languages)"/>
 		<xsl:variable name="control" select="enoodt:get-constraint($source-context)"/>
-		<xsl:variable name="instructionLabel" select="enoodt:get-label($source-context, $languages)"/>
 		<xsl:variable name="instructionFormat" select="enoodt:get-css-class($source-context)"/>
-		
-		<xsl:variable name="idVariables" as="xs:string*">
-			<xsl:for-each select="tokenize($control,'\+')">
-				<xsl:value-of select="substring-before(substring-after(.,'//'),'=')"/>
-			</xsl:for-each>
+		<xsl:variable name="vars" select="enoodt:get-label-conditioning-variables($source-context,$languages)"/>
+		<xsl:variable name="instructionLabel">
+			<xsl:call-template name="replaceVariablesInInstruction">
+				<xsl:with-param name="instruction" select="enoodt:get-label($source-context, $languages)"/>
+				<xsl:with-param name="variables" select="$vars"/>
+			</xsl:call-template>	
 		</xsl:variable>
 		
-		<xsl:for-each select="$idVariables">
-			<text:p text:style-name="Control"><xsl:value-of select="enoodt:get-business-name($source-context,.)"/></text:p>
-		</xsl:for-each>		
+		<text:p text:style-name="CalculatedVariableTitle"><xsl:value-of select="'Calcul de la variable'"/></text:p>
+		<text:p text:style-name="CalculatedVariableContent">
+			<xsl:value-of select="'here compute'"/>
+		</text:p>
+		
+		<xsl:if test="$control!=''">
+			<text:p text:style-name="Control"><xsl:value-of select="concat('Contrôle bloquant : ',$nameOfControl)"/></text:p>
+			<xsl:variable name="idVariables" select="enoodt:get-control-variables($source-context)"/>
+			<text:p text:style-name="Control">
+				<xsl:value-of select="'Expression du contrôle : '"/>
+				<xsl:call-template name="replaceVariablesInFormula">
+					<xsl:with-param name="formula" select="$control"/>
+					<xsl:with-param name="variables" select="$idVariables"/>
+				</xsl:call-template>				
+			</text:p>	
+		</xsl:if>
 		
 		<xsl:choose>
 			<xsl:when test="$instructionFormat=''">
@@ -633,28 +644,61 @@
 			<xsl:when test="$instructionFormat='help'">
 				<text:p text:style-name="Help"><xsl:value-of select="$instructionLabel"/></text:p>
 			</xsl:when>
-		</xsl:choose>
-		
-		<xsl:variable name="regex" select="'number\([a-zA-Z0-9\-\s/\(\)='''']*\)'" as="xs:string"/>
-		
-		<text:p text:style-name="Control">
-			<xsl:value-of select="replace($control,$regex,'hi')"></xsl:value-of>
-		</text:p>
-		
-		<xsl:variable name="vars" select="enoodt:get-label-conditioning-variables($source-context,$languages)"/>
-		<xsl:variable name="formula" select="enoodt:get-conditioning-variable-formula-variables($source-context,'jbcggtca-GOP')"/>
-		<xsl:for-each select="$vars">
-			<text:p text:style-name="Control"><xsl:value-of select="enoodt:get-business-name($source-context,.)"/></text:p>
-		</xsl:for-each>
-		
-		<text:p><xsl:value-of select="$formula"/></text:p>
-		
-		
+		</xsl:choose>		
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>		
 	</xsl:template>
+	
+	<xsl:template name="replaceVariablesInFormula">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="formula"/>
+		<xsl:param name="variables" as="xs:string*"/>
 		
+		<xsl:variable name="regex1" select="'number\(if\s\(//'" as="xs:string"/>
+		<xsl:variable name="regex2" select="'=''''\)\sthen\s''0''\selse\s//'" as="xs:string"/>
+		<xsl:variable name="regex3" select="'\)'" as="xs:string"/>
+		
+		<xsl:choose>
+			<xsl:when test="count($variables)=1">
+				<xsl:variable name="regex" select="concat($regex1,$variables[1],$regex2,$variables[1],$regex3)"/>
+				<xsl:value-of select="replace($formula,$regex,enoodt:get-business-name($source-context,$variables[1]))"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:variable name="regex" select="concat($regex1,$variables[1],$regex2,$variables[1],$regex3)"/>
+				<xsl:variable name="newFormula" select="replace($formula,$regex,enoodt:get-business-name($source-context,$variables[1]))"/>
+				
+				<xsl:call-template name="replaceVariablesInFormula">
+					<xsl:with-param name="formula" select="$newFormula"></xsl:with-param>
+					<xsl:with-param name="variables" select="$variables[position() &gt; 1]"></xsl:with-param>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>		
+	</xsl:template>
+	<xsl:template name="replaceVariablesInInstruction">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="instruction"/>
+		<xsl:param name="variables" as="xs:string*"/>
+		
+		<xsl:variable name="regex1" select="'¤'" as="xs:string"/>
+		<xsl:variable name="regex2" select="'¤'" as="xs:string"/>
+		
+		<xsl:choose>
+			<xsl:when test="count($variables)=1">
+				<xsl:variable name="regex" select="concat($regex1,$variables[1],$regex2)"/>
+				<xsl:value-of select="replace($instruction,$regex,enoodt:get-business-name($source-context,$variables[1]))"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:variable name="regex" select="concat($regex1,$variables[1],$regex2)"/>
+				<xsl:variable name="newInstruction" select="replace($instruction,$regex,enoodt:get-business-name($source-context,$variables[1]))"/>
+				
+				<xsl:call-template name="replaceVariablesInInstruction">
+					<xsl:with-param name="instruction" select="$newInstruction"></xsl:with-param>
+					<xsl:with-param name="variables" select="$variables[position() &gt; 1]"></xsl:with-param>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>		
+	</xsl:template>
 	
 </xsl:stylesheet>
