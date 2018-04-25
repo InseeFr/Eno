@@ -456,6 +456,19 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
+	<!-- Match on the driver TableLoop -->
+	<xsl:template match="TableLoop" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:variable name="name" select="enoodt:get-name($source-context)"/>
+		
+		<xsl:element name="{$name}"/>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+		<xsl:if test="enoodt:get-minimum-lines($source-context) &lt; enoodt:get-maximum-lines($source-context)">
+			<xsl:element name="{$name}-AddLine"/>
+		</xsl:if>
+	</xsl:template>
 	<!-- For headers (top or left) -->
 	<xsl:template match="TextCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
