@@ -251,7 +251,6 @@
 	</xsl:template>
 	
 	
-	<!-- [ancestor::MultipleQuestion ] -->
 	<xsl:template match="xf-textarea" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -548,7 +547,9 @@
 			<xsl:when test="$instructionFormat='warning'">
 				<text:p text:style-name="Warning"><xsl:value-of select="$instructionLabel"/></text:p>
 			</xsl:when>
-			
+			<xsl:when test="$instructionFormat='help'">
+				<text:p text:style-name="Help"><xsl:value-of select="$instructionLabel"/></text:p>
+			</xsl:when>
 		</xsl:choose>
 		
 		<!-- Go to the children -->
@@ -581,7 +582,8 @@
 		<xsl:variable name="name" select="enoodt:get-label-conditioner($source-context,$languages[1])"/>
 		<xsl:variable name="nameOfControl" select="enoodt:get-label($source-context,$languages)"/>
 		<xsl:variable name="control" select="enoodt:get-constraint($source-context)"/>
-				
+		<xsl:variable name="instructionLabel" select="enoodt:get-label($source-context, $languages)"/>
+		<xsl:variable name="instructionFormat" select="enoodt:get-css-class($source-context)"/>
 		
 		<xsl:variable name="idVariables" as="xs:string*">
 			<xsl:for-each select="tokenize($control,'\+')">
@@ -590,10 +592,40 @@
 		</xsl:variable>
 		
 		<xsl:for-each select="$idVariables">
-			<text:p text:style-name="Control"><xsl:value-of select="."/></text:p>
+			<text:p text:style-name="Control"><xsl:value-of select="enoodt:get-business-name($source-context,.)"/></text:p>
 		</xsl:for-each>
 		
-		<!-- Go to the children -->
+		
+		
+		
+		<xsl:choose>
+			<xsl:when test="$instructionFormat=''">
+				<text:p text:style-name="Warning"><xsl:value-of select="concat('Message d','''','erreur : ',$instructionLabel)"/></text:p>
+			</xsl:when>
+			<xsl:when test="$instructionFormat='hint'">
+				<text:p text:style-name="Instruction"><xsl:value-of select="$instructionLabel"/></text:p>
+			</xsl:when>
+			<xsl:when test="$instructionFormat='help'">
+				<text:p text:style-name="Help"><xsl:value-of select="$instructionLabel"/></text:p>
+			</xsl:when>
+		</xsl:choose>
+		
+		<xsl:variable name="regex" select="'\+\-'" as="xs:string"/>
+		
+		<text:p text:style-name="Control">
+			<xsl:value-of select="replace($control,$regex,'hi')"></xsl:value-of>
+		</text:p>
+		
+		<xsl:variable name="vars" select="enoodt:get-label-conditioning-variables($source-context,$languages)"/>
+		<xsl:variable name="formula" select="enoodt:get-conditioning-variable-formula-variables($source-context,'jbcggtca-GOP')"/>
+		<xsl:for-each select="$vars">
+			<text:p text:style-name="Control"><xsl:value-of select="enoodt:get-business-name($source-context,.)"/></text:p>
+		</xsl:for-each>
+		
+		<text:p><xsl:value-of select="$formula"/></text:p>
+		
+		
+		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>		
