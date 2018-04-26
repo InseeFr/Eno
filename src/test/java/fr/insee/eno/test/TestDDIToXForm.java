@@ -32,7 +32,7 @@ public class TestDDIToXForm {
 			File expectedFile = new File(String.format("%s/out.xhtml", basePath));
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
-			
+			genService.cleanTempFolder();
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();

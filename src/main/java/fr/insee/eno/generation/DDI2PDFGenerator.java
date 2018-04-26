@@ -2,6 +2,7 @@ package fr.insee.eno.generation;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -38,9 +39,11 @@ public class DDI2PDFGenerator implements Generator {
 		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_PDF);
 		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
 		
+		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
+		OutputStream osOutputForm = FileUtils.openOutputStream(new File(outputForm));
 		saxonService.transformDDI2PDF(
-				FileUtils.openInputStream(finalInput),
-				FileUtils.openOutputStream(new File(outputForm)),
+				isFinalInput,
+				osOutputForm,
 				isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL,
 				isPROPERTIES_FILE,
 				isPARAMETERS_FILE);
@@ -48,6 +51,8 @@ public class DDI2PDFGenerator implements Generator {
 		isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL.close();
 		isPROPERTIES_FILE.close();
 		isPARAMETERS_FILE.close();
+		isFinalInput.close();
+		osOutputForm.close();
 		
 		return new File(outputForm);
 	}

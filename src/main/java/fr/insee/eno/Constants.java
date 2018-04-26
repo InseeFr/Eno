@@ -118,6 +118,7 @@ public final class Constants {
 	// ---------- Temporary file system
 	
 	// ----- Folders
+	//public static final String TEMP_FOLDER_PATH = "/target/eno";
 	public static final String TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "/eno";
 	
 	public static final File TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH);
@@ -214,7 +215,7 @@ public final class Constants {
 	/******************* DDIPreprocessing *******************/
 	/********************************************************/
 	//// Plugin Conf
-	public static final String PDF_PLUGIN_XML_CONF = getFileFromUrl(Constants.class.getResource(CONFIG_FOLDER + "/plugins-conf.xml")).getAbsolutePath();
+	public static final String PDF_PLUGIN_XML_CONF = "src/main/resources/config/plugins-conf.xml";
 	
 	
 
