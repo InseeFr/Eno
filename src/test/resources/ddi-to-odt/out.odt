@@ -489,17 +489,11 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
-         <text:p text:style-name="Control">j4nwc63q-QOP-jbgde5yl</text:p>
-         <text:p text:style-name="Control">j4nwc63q-QOP-jbgd2x2t</text:p>
-         <text:p text:style-name="Control">j4nwc63q-QOP-jbgdjypz</text:p>
-         <text:p text:style-name="Control">j4nwc63q-QOP-jbgdcftu</text:p>
-         <text:p text:style-name="Control">j4nwc63q-QOP-jbgdiyfe</text:p>
-         <text:p text:style-name="Control">j4nwc63q-QOP-jbgdj1wd</text:p>
-         <text:p text:style-name="Control">j4nwc63q-QOP-jbgddylk</text:p>
-         <text:p text:style-name="Control">j4nwc63q-QOP-jbgd3jj6</text:p>
-         <text:p text:style-name="Control">j4nwc63q-QOP-jbgd4w3k</text:p>
-         <text:p text:style-name="Control">j4nwc63q-QOP-jbgd4w4k</text:p>
-         <text:p text:style-name="Warning">The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of
+         <text:p text:style-name="CalculatedVariableTitle">Calcul de la variable</text:p>
+         <text:p text:style-name="CalculatedVariableContent">here compute</text:p>
+         <text:p text:style-name="Control">Contrôle bloquant : Total of percentages</text:p>
+         <text:p text:style-name="Control">Expression du contrôle : not(PERCENTAGE_EXPENSES11 + PERCENTAGE_EXPENSES21 + PERCENTAGE_EXPENSES31 + PERCENTAGE_EXPENSES41 + PERCENTAGE_EXPENSES51 + PERCENTAGE_EXPENSES61 + PERCENTAGE_EXPENSES71 + PERCENTAGE_EXPENSES81 + PERCENTAGE_EXPENSES91 + PERCENTAGE_EXPENSES101 != 100)</text:p>
+         <text:p text:style-name="Warning">Message d'erreur : The sum of percentages is: SUM_EXPENSES %. The total of
 						percentages must be equal to 100%.</text:p>
          <text:p text:style-name="SubModule">Clowning</text:p>
          <text:p text:style-name="QuestionName">[CLOWNING]</text:p>
@@ -800,10 +794,16 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
+         <text:p>Nb line(s) minimum required : 1</text:p>
+         <text:p>Nb line(s) maximum allowed : 10</text:p>
          <text:p text:style-name="Module">VI - Comment</text:p>
          <text:p text:style-name="QuestionName">[SURVEY_COMMENT]</text:p>
          <text:p text:style-name="Format">Car 255</text:p>
          <text:p text:style-name="Question">➡ 1. Do you have any comment about the survey?</text:p>
+         <text:p>number(if (//j4nwc63q-QOP-jbgde5yl='') then '0' else //j4nwc63q-QOP-jbgde5yl) + number(if (//j4nwc63q-QOP-jbgd2x2t='') then '0' else //j4nwc63q-QOP-jbgd2x2t) + number(if (//j4nwc63q-QOP-jbgdjypz='') then '0' else //j4nwc63q-QOP-jbgdjypz) +
+				number(if (//j4nwc63q-QOP-jbgdcftu='') then '0' else //j4nwc63q-QOP-jbgdcftu) + number(if (//j4nwc63q-QOP-jbgdiyfe='') then '0' else //j4nwc63q-QOP-jbgdiyfe) + number(if (//j4nwc63q-QOP-jbgdj1wd='') then '0' else //j4nwc63q-QOP-jbgdj1wd) +
+				number(if (//j4nwc63q-QOP-jbgddylk='') then '0' else //j4nwc63q-QOP-jbgddylk) + number(if (//j4nwc63q-QOP-jbgd3jj6='') then '0' else //j4nwc63q-QOP-jbgd3jj6) + number(if (//j4nwc63q-QOP-jbgd4w3k='') then '0' else //j4nwc63q-QOP-jbgd4w3k) +
+				number(if (//j4nwc63q-QOP-jbgd4w4k='') then '0' else //j4nwc63q-QOP-jbgd4w4k) </text:p>
          <text:p/>
          <text:p/>
       </office:text>

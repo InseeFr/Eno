@@ -951,6 +951,17 @@
         </xsl:choose>
     </xsl:template>
    
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-control-variables.</xd:p>
+            <xd:p>Function that returns the list of the variables in a control-text (get-control).</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:ComputationItem" mode="enoddi:get-control-variables">        
+        <xsl:sequence select="r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID"/>
+    </xsl:template>
+
    
     <xd:doc>
         <xd:desc>
@@ -978,4 +989,5 @@
         </xsl:apply-templates>
     </xsl:function>
    
+
 </xsl:stylesheet>
