@@ -402,7 +402,7 @@
 		</xsl:if>
 		
 		<text:p text:style-name="Question"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
-		
+				
 		<table:table table:name="{enoodt:get-name($source-context)}">
 			<xsl:for-each select="$headerCol">
 				<table:table-column/>
@@ -436,7 +436,6 @@
 		<xsl:if test="$nbMaximumLines!=''">
 			<text:p><xsl:value-of select="concat('Nb line(s) maximum allowed : ',$nbMaximumLines)"/></text:p>
 		</xsl:if>		
-		
 	</xsl:template>
 	
 	<!-- For headers (top or left) -->
@@ -447,32 +446,43 @@
 		<xsl:variable name="col-span" select="number(enoodt:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enoodt:get-rowspan($source-context))"/>
 		
-		<xsl:if test="$ancestorTable!=''">
-			<table:table-cell table:number-rows-spanned="{$row-span}" 
-				table:number-columns-spanned="{$col-span}">
+		<xsl:choose>
+			<xsl:when test="$ancestorTable!=''">
+				<table:table-cell table:number-rows-spanned="{$row-span}" 
+					table:number-columns-spanned="{$col-span}">
+					<xsl:variable name="label" select="enoodt:get-label($source-context,$languages)"/>
+					<xsl:choose>
+						<xsl:when test="$label!='' and $ancestorTable='line'">
+							<text:p text:style-name="Question"><xsl:value-of select="$label"/></text:p>
+						</xsl:when>
+						<xsl:when test="$label!='' and $ancestorTable='headerLine'">
+							<text:p text:style-name="ColumnHeader"><xsl:value-of select="$label"/></text:p>
+						</xsl:when>
+					</xsl:choose>
+				</table:table-cell>
+				
+				<!-- To add spanned rows / columns -->
+				<xsl:if test="$row-span &gt;1">
+					<xsl:for-each select="2 to xs:integer(floor($row-span))">
+						<table:covered-table-cell/>
+					</xsl:for-each>
+				</xsl:if>
+				<xsl:if test="$col-span &gt;1">
+					<xsl:for-each select="2 to xs:integer(floor($col-span))">
+						<table:covered-table-cell/>
+					</xsl:for-each>
+				</xsl:if>
+				
+			</xsl:when>
+			<xsl:otherwise>
 				<xsl:variable name="label" select="enoodt:get-label($source-context,$languages)"/>
-				<xsl:choose>
-					<xsl:when test="$label!='' and $ancestorTable='line'">
-						<text:p text:style-name="Question"><xsl:value-of select="$label"/></text:p>
-					</xsl:when>
-					<xsl:when test="$label!='' and $ancestorTable='headerLine'">
-						<text:p text:style-name="ColumnHeader"><xsl:value-of select="$label"/></text:p>
-					</xsl:when>
-				</xsl:choose>
-			</table:table-cell>
-						
-			<!-- To add spanned rows / columns -->
-			<xsl:if test="$row-span &gt;1">
-				<xsl:for-each select="2 to xs:integer(floor($row-span))">
-					<table:covered-table-cell/>
-				</xsl:for-each>
-			</xsl:if>
-			<xsl:if test="$col-span &gt;1">
-				<xsl:for-each select="2 to xs:integer(floor($col-span))">
-					<table:covered-table-cell/>
-				</xsl:for-each>
-			</xsl:if>
-		</xsl:if>
+				<xsl:if test="$label!='' and $ancestorTable='no'">
+					<text:p text:style-name="CodeItem">
+						<xsl:value-of select="fn:concat(enoodt:get-value($source-context), ' - ', $label)"/>
+					</text:p>
+				</xsl:if>
+			</xsl:otherwise>
+		</xsl:choose>
 		
 	</xsl:template>
 	
@@ -482,7 +492,6 @@
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="col-span" select="number(enoodt:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enoodt:get-rowspan($source-context))"/>
-		
 		<xsl:if test="$ancestorTable!=''">
 			<table:table-cell table:number-rows-spanned="{$row-span}" 
 				table:number-columns-spanned="{$col-span}">
@@ -490,7 +499,7 @@
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 				</xsl:apply-templates>
 			</table:table-cell>
-			
+				
 			<!-- To add spanned rows / columns -->
 			<xsl:if test="$row-span &gt;1">
 				<xsl:for-each select="2 to xs:integer(floor($row-span))">
@@ -502,7 +511,12 @@
 					<table:covered-table-cell/>
 				</xsl:for-each>
 			</xsl:if>
-		</xsl:if>
+		</xsl:if>	
+		
+		<!-- Got to the children -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>	
 	</xsl:template>
 	
 	<xsl:template match="EmptyCell" mode="model">
@@ -536,16 +550,13 @@
 	<!-- Match on the xf-item driver: write the code value and label -->
 	<xsl:template match="xf-item" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="ancestorTable" tunnel="yes"></xsl:param>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="label" select="enoodt:get-label($source-context, $languages[1])"/>
-		<xsl:variable name="ancestors">
-			<xsl:copy-of select="root(.)"/>
-		</xsl:variable>
-		<xsl:if test="$label !='' and not(ancestor::Table)">
+		<xsl:if test="$label !=''">
 			<text:p text:style-name="CodeItem">
 				<xsl:value-of select="fn:concat(enoodt:get-value($source-context), ' - ', $label)"/>
 			</text:p>
-			<!--<text:p><xsl:value-of select="concat('container :',enoodt:get-name($ancestors[1]))"/></text:p>
 		--></xsl:if>
 			
 		<!-- Got to the children -->

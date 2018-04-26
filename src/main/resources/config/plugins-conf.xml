@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Eno>
+	<pdf>
+		<TableColumnSizeProcessor>
+			<imageDirectory>K:/karim-workspace/INSEE/ENO/Eno/Images/</imageDirectory>
+			<pageWidth>720</pageWidth>
+			<pageHeight>720</pageHeight>
+		</TableColumnSizeProcessor>
+	</pdf>
+</Eno>

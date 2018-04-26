@@ -951,6 +951,7 @@
         </xsl:choose>
     </xsl:template>
    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-control-variables.</xd:p>
@@ -960,5 +961,33 @@
     <xsl:template match="d:ComputationItem" mode="enoddi:get-control-variables">        
         <xsl:sequence select="r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID"/>
     </xsl:template>
- 
+
+   
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-instruction-by-anchor-ref.</xd:p>
+            <xd:p>Retrieving an instruction based on the value of @href attribute.</xd:p>
+            <xd:p>If the href param value contains a '#' as first character it will be ignored for the match criteria.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-instruction-by-anchor-ref" priority="2">
+        <xsl:param name="href" select="''" tunnel="yes"/>
+        <!-- Checking if '#' first character should be ommitted. -->
+        <xsl:variable name="href-formatted" select="if(starts-with($href,'#')) then(substring-after($href,'#')) else($href)"/>
+        <xsl:sequence select="//d:Instruction[.//xhtml:p/@id = $href-formatted]"/>            
+    </xsl:template>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function that retruns the instruction related to an href value. The current implementation retrieve the instruction anywhere in the input, so href should be unique inside the input context. If the href param starts with the '#' charac, it will be omitted in the matching criteria.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoddi:get-instruction-by-anchor-ref">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="href"/>
+        <xsl:apply-templates select="$context" mode="enoddi:get-instruction-by-anchor-ref">
+            <xsl:with-param name="href" select="$href" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:function>
+   
+
 </xsl:stylesheet>

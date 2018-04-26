@@ -324,6 +324,26 @@ public class XslTransformation {
 		
 	}
 	
+	public void transformDDI2PDF(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+			InputStream propertiesFile, InputStream parametersFile) throws Exception {
+		logger.info("Producing a basic PDF (Fo) from the DDI spec");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		transformer.setParameter(XslParameters.DDI2PDF_PROPERTIES_FILE, Constants.CONFIG_DDI2PDF);
+		transformer.setParameter(XslParameters.DDI2PDF_PARAMETERS_FILE, Constants.PARAMETERS);
+		transformer.setParameter(XslParameters.DDI2PDF_LABELS_FOLDER, Constants.LABELS_FOLDER);
+		logger.debug(
+				String.format(
+						"Transformer parameters are: %s, %s",
+						transformer.getParameter(XslParameters.DDI2ODT_PROPERTIES_FILE),
+						transformer.getParameter(XslParameters.DDI2ODT_PARAMETERS_FILE),
+						transformer.getParameter(XslParameters.DDI2ODT_LABELS_FOLDER)));
+		xslTransform(transformer, inputFile, outputFile);
+		
+	}
+	
 	
 	public void transformPoguesXML2DDI(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			InputStream propertiesFile, InputStream parametersFile) throws Exception {
