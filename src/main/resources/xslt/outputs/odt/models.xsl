@@ -297,11 +297,8 @@
 	
 	<xsl:template match="xf-select " mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="typeOfAncestor" tunnel="yes"/>
-		<!--<xsl:param name="ancestor" tunnel="yes"/>-->
-		
+		<xsl:param name="typeOfAncestor" tunnel="yes"/>		
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
-		<!--<xsl:variable name="typeResponse" select="enoodt:get-type($ancestor)"/>-->
 		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
 		<xsl:variable name="idQuestion" select="enoodt:get-name($source-context)"/>
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context)"/>
@@ -329,9 +326,10 @@
 		<xsl:if test="$questionLabel!=''">
 			<text:p text:style-name="Question"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
 		</xsl:if>		
-		<!-- Returns to the parent -->
+		<!-- Go to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
+			<xsl:with-param name="typeResponse" select="$typeResponse" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
 	
@@ -512,11 +510,6 @@
 				</xsl:for-each>
 			</xsl:if>
 		</xsl:if>	
-		
-		<!-- Got to the children -->
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>	
 	</xsl:template>
 	
 	<xsl:template match="EmptyCell" mode="model">
@@ -550,14 +543,15 @@
 	<!-- Match on the xf-item driver: write the code value and label -->
 	<xsl:template match="xf-item" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="ancestorTable" tunnel="yes"></xsl:param>
+		<xsl:param name="ancestorTable" tunnel="yes"/>
+		<xsl:param name="typeResponse" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="label" select="enoodt:get-label($source-context, $languages[1])"/>
-		<xsl:if test="$label !=''">
+		<xsl:if test="$label !='' and $typeResponse!='boolean'">
 			<text:p text:style-name="CodeItem">
 				<xsl:value-of select="fn:concat(enoodt:get-value($source-context), ' - ', $label)"/>
 			</text:p>
-		--></xsl:if>
+		</xsl:if>
 			
 		<!-- Got to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
