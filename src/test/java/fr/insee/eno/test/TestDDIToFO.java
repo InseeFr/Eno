@@ -40,7 +40,7 @@ public class TestDDIToFO {
 //			diff = xmlDiff.getDiff(outputFileWithPlugins,expectedFileWithPlugins);
 			
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
-		
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
