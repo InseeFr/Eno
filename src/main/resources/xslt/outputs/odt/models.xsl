@@ -32,7 +32,12 @@
 	
 	
 	<xsl:variable name="varName" select="parent"/>
-	<!-- Forces the traversal of the whole driver tree. Must be present once in the transformation. -->
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Forces the traversal of the whole driver tree. Must be present once in the transformation.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="*" mode="model" priority="-1">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -40,7 +45,12 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
-	<!-- Match on the Form driver: write the root of the document with the main title -->
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on Form driver.</xd:p>
+			<xd:p>It writes the root of the document with the main title.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="Form" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -176,7 +186,12 @@
 		</office:document>
 	</xsl:template>
 	
-	<!-- Match on the Module driver: write the module label -->
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on Module driver.</xd:p>
+			<xd:p>It writes module label.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="Module" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -189,7 +204,12 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
-	<!-- Match on the SubModule driver: write the sub-module label -->
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on SubModule driver.</xd:p>
+			<xd:p>It writes sub-module label.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="SubModule" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -202,6 +222,12 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on xf-input driver.</xd:p>
+			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="xf-input" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -250,7 +276,12 @@
 		
 	</xsl:template>
 	
-	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on xf-textarea driver.</xd:p>
+			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="xf-textarea" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -295,6 +326,12 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on xf-select driver.</xd:p>
+			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="xf-select " mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>		
@@ -319,7 +356,7 @@
 					</text:p>
 				</xsl:if>
 			</xsl:when>
-			<xsl:when test="$typeResponse='boolean'">
+			<xsl:when test="$typeResponse='boolean' and ($typeOfAncestor!='' or $questionName!='')">
 				<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
 			</xsl:when>
 		</xsl:choose>
@@ -333,8 +370,12 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
-	
-	<!-- Match on the xf-select driver: write the question label -->
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on xf-select1 driver.</xd:p>
+			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="xf-select1" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
@@ -374,8 +415,11 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
-	
-	<!-- Match on the Table driver: write the question label -->
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the Table driver and TableLoop driver.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="Table | TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -434,9 +478,19 @@
 		<xsl:if test="$nbMaximumLines!=''">
 			<text:p><xsl:value-of select="concat('Nb line(s) maximum allowed : ',$nbMaximumLines)"/></text:p>
 		</xsl:if>		
+		
+		<!-- Go to the children -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
 	</xsl:template>
 	
-	<!-- For headers (top or left) -->
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the TextCell driver.</xd:p>
+			<xd:p>It displays the headers on the top and the left.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="TextCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="ancestorTable" tunnel="yes"/>
@@ -484,6 +538,12 @@
 		
 	</xsl:template>
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the Cell driver.</xd:p>
+			<xd:p>Create a cell and call templates for children to fill the cell.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="Cell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="ancestorTable" tunnel="yes"/>
@@ -512,6 +572,12 @@
 		</xsl:if>	
 	</xsl:template>
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the EmptyCell driver.</xd:p>
+			<xd:p>Create a cell and call templates for children to fill the cell (a priori nothing).</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="EmptyCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="ancestorTable" tunnel="yes"/>
@@ -525,28 +591,35 @@
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 				</xsl:apply-templates>
 			</table:table-cell>
-		</xsl:if>
-		
-		<!-- To add spanned rows / columns -->
-		<xsl:if test="$row-span &gt;1">
-			<xsl:for-each select="2 to xs:integer(floor($row-span))">
-				<table:covered-table-cell/>
-			</xsl:for-each>
-		</xsl:if>
-		<xsl:if test="$col-span &gt;1">
-			<xsl:for-each select="2 to xs:integer(floor($col-span))">
-				<table:covered-table-cell/>
-			</xsl:for-each>
+			
+			<!-- To add spanned rows / columns -->
+			<xsl:if test="$row-span &gt;1">
+				<xsl:for-each select="2 to xs:integer(floor($row-span))">
+					<table:covered-table-cell/>
+				</xsl:for-each>
+			</xsl:if>
+			<xsl:if test="$col-span &gt;1">
+				<xsl:for-each select="2 to xs:integer(floor($col-span))">
+					<table:covered-table-cell/>
+				</xsl:for-each>
+			</xsl:if>
 		</xsl:if>
 	</xsl:template>
 	
-	<!-- Match on the xf-item driver: write the code value and label -->
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the xf-item driver.</xd:p>
+			<xd:p>It writes the code value and the label of the item.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="xf-item" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="ancestorTable" tunnel="yes"/>
 		<xsl:param name="typeResponse" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="label" select="enoodt:get-label($source-context, $languages[1])"/>
+		
+		<!-- remove item in the cell for table when the response is boolean-->
 		<xsl:if test="$label !='' and $typeResponse!='boolean'">
 			<text:p text:style-name="CodeItem">
 				<xsl:value-of select="fn:concat(enoodt:get-value($source-context), ' - ', $label)"/>
@@ -559,8 +632,12 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
-	
-	<!-- Match on the xf-output driver: write the instruction text, with a different styles for comments and instructions -->
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the xf-output driver.</xd:p>
+			<xd:p>It writes the instruction text, with a different styles for comments, instructions, warning and help.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="xf-output" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -581,6 +658,9 @@
 			<xsl:when test="$instructionFormat='help'">
 				<text:p text:style-name="Help"><xsl:value-of select="$instructionLabel"/></text:p>
 			</xsl:when>
+			<!--<xsl:otherwise>
+				<text:p text:style-name="Instruction"><xsl:value-of select="$instructionFormat"/></text:p>
+			</xsl:otherwise>-->
 		</xsl:choose>
 		
 		<!-- Go to the children -->
@@ -590,6 +670,12 @@
 		
 	</xsl:template>
 
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the CalculatedVariable driver.</xd:p>
+			<xd:p>Its displays the formula of the calculated variable.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="CalculatedVariable" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -607,6 +693,12 @@
 		</xsl:apply-templates>		
 	</xsl:template>
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the ConsistencyCheck driver.</xd:p>
+			<xd:p>It writes the formula of the check.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template match="ConsistencyCheck" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -656,6 +748,12 @@
 		</xsl:apply-templates>		
 	</xsl:template>
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Template named:replaceVariablesInFormula.</xd:p>
+			<xd:p>It replaces variables in a formula.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template name="replaceVariablesInFormula">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="formula"/>
@@ -681,6 +779,13 @@
 			</xsl:otherwise>
 		</xsl:choose>		
 	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Template named: replaceVariablesInInstruction.</xd:p>
+			<xd:p>It replaces variables in a formula.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template name="replaceVariablesInInstruction">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="instruction"/>
