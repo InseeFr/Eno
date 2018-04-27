@@ -61,12 +61,16 @@ public class FakeApp extends Application {
 		doc = inputXml.calculateNewTableDimensions();
 		launch();
 		HashMap<Object, Object> idWidthValues;
-		// launch(args);
 		idWidthValues = browser.getMapResult();
 		for (Map.Entry<Object, Object> entry : idWidthValues.entrySet()) {
 			String key = ((String) entry.getKey());
 			String val = (((Integer) entry.getValue() * PX_TO_MM_COEF) + 1) + "";
-			Element element = ((Element) XPathFactory.newInstance().newXPath().evaluate("//*[@id='" + key + "']", doc,
+			
+			XPathFactory xpf = XPathFactory.newInstance(
+					  XPathFactory.DEFAULT_OBJECT_MODEL_URI,
+					  "net.sf.saxon.xpath.XPathFactoryImpl",
+					  ClassLoader.getSystemClassLoader());
+			Element element = ((Element) xpf.newXPath().evaluate("//*[@id='" + key + "']", doc,
 					XPathConstants.NODE));
 			if (element != null)
 				element.setAttribute("width", val + "mm");

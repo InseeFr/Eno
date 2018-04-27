@@ -2,6 +2,7 @@ package fr.insee.eno.generation;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -38,9 +39,12 @@ public class DDI2ODTGenerator implements Generator {
 		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_ODT);
 		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
 		
+		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
+		OutputStream osOutputFile = FileUtils.openOutputStream(new File(outputForm));
+		
 		saxonService.transformDDI2ODT(
-				FileUtils.openInputStream(finalInput),
-				FileUtils.openOutputStream(new File(outputForm)),
+				isFinalInput,
+				osOutputFile,
 				isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL,
 				isPROPERTIES_FILE,
 				isPARAMETERS_FILE);
@@ -48,7 +52,8 @@ public class DDI2ODTGenerator implements Generator {
 		isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL.close();
 		isPROPERTIES_FILE.close();
 		isPARAMETERS_FILE.close();
-		
+		isFinalInput.close();
+		osOutputFile.close();
 		return new File(outputForm);
 	}
 

@@ -17,9 +17,9 @@ import fr.insee.eno.utils.FolderCleaner;
  * Orchestrates the whole generation process.
  */
 public class GenerationService {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(GenerationService.class);
-	
+
 	private final Preprocessor preprocessor;
 	private final Generator generator;
 	private final Postprocessor postprocessor;
@@ -34,31 +34,62 @@ public class GenerationService {
 	/**
 	 * Launch every step needed in order to generate the target questionnaire.
 	 * 
-	 * @param inputFile The source file
-	 * @param parametersFile Custom parameters file, could be null
+	 * @param inputFile
+	 *            The source file
+	 * @param parametersFile
+	 *            Custom parameters file, could be null
 	 * 
 	 * @return The generated file
-	 * @throws Exception bim
+	 * @throws Exception
+	 *             bim
 	 */
 	// TODO finish implementation
 	public File generateQuestionnaire(File inputFile, File parametersFile) throws Exception {
 		logger.info("Generating questionnaire for: " + inputFile);
+		logger.debug("Temp folder: "+ System.getProperty("java.io.tmpdir")); 
+		
 		cleanTempFolder();
 		File preprocessResultFileName = this.preprocessor.process(inputFile, parametersFile);
-		File generatedForm = this.generator.generate(preprocessResultFileName, "simpsons"); //FIXME get survey name dynamically
+		File generatedForm = this.generator.generate(preprocessResultFileName, "simpsons"); // FIXME
+																							// get
+																							// survey
+																							// name
+																							// dynamically
 		File outputForm = this.postprocessor.process(generatedForm, parametersFile);
-		logger.debug("Path to generated questionnaire: "+ outputForm.getAbsolutePath());
-		//Constants.closeAllInputStreams();
+		logger.debug("Path to generated questionnaire: " + outputForm.getAbsolutePath());
 		return outputForm;
 	}
 
 	/**
 	 * Clean the temp dir if it exists
-	 * @throws IOException if Eno temp dir doesn't exist
+	 * 
+	 * @throws IOException
+	 *           
 	 */
-	private void cleanTempFolder() throws IOException {
+	public void cleanTempFolder() throws IOException {
 		FolderCleaner cleanService = new FolderCleaner();
-		cleanService.cleanOneFolder(new File(Constants.TEMP_FOLDER_PATH));
+		if(Constants.TEMP_FOLDER_PATH !=null){
+			File folderTemp = new File(Constants.TEMP_FOLDER_PATH);
+			cleanService.cleanOneFolder(folderTemp);
+		}
+		else{
+			logger.debug("Temp Folder is null");
+		}
+	}
+	/**
+	 * Clean the temp dir if it exists
+	 * 
+	 * @throws IOException
+	 *           
+	 */
+	private void cleanTempFolder(File folder) throws IOException {
+		FolderCleaner cleanService = new FolderCleaner();
+		if(folder !=null){	
+			cleanService.cleanOneFolder(folder);
+		}
+		else{
+			logger.debug("Temp Folder is null");
+		}
 	}
 
 }

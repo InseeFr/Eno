@@ -39,9 +39,12 @@ public class DDI2FRGenerator implements Generator {
 		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_FR);
 		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
 		
+		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
+		OutputStream osOutputBasicForm = FileUtils.openOutputStream(new File(outputBasicFormPath));
+		
 		saxonService.transformDDI2FR(
-				FileUtils.openInputStream(finalInput),
-				FileUtils.openOutputStream(new File(outputBasicFormPath)),
+				isFinalInput,
+				osOutputBasicForm,
 				isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL,
 				isPROPERTIES_FILE,
 				isPARAMETERS_FILE);
@@ -49,6 +52,8 @@ public class DDI2FRGenerator implements Generator {
 		isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL.close();
 		isPROPERTIES_FILE.close();
 		isPARAMETERS_FILE.close();
+		isFinalInput.close();
+		osOutputBasicForm.close();
 		
 		String outputForm = Constants.TEMP_FOLDER_PATH + "/" + surveyName + "/" + formNameFolder + "/form/form.xhtml";
 		

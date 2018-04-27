@@ -968,6 +968,16 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Defining getter get-control-variables.</xd:p>
+            <xd:p>Function that returns the list of the variables in a control-text (get-control).</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:ComputationItem" mode="enoddi:get-control-variables">        
+        <xsl:sequence select="r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Defining getter get-instruction-by-anchor-ref.</xd:p>
             <xd:p>Retrieving an instruction based on the value of @href attribute.</xd:p>
             <xd:p>If the href param value contains a '#' as first character it will be ignored for the match criteria.</xd:p>
