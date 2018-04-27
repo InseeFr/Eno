@@ -1,6 +1,8 @@
 package fr.insee.eno.postprocessing;
 
 import java.io.File;
+import java.io.InputStream;
+import java.nio.file.StandardCopyOption;
 
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -24,10 +26,26 @@ public class PDFPostprocessor implements Postprocessor {
 
 		String outputForFO = FilenameUtils.removeExtension(input.getPath()) + Constants.FINAL_PDF_EXTENSION;
 
+		String confFilePath = null;
+		
+		if(Constants.PDF_PLUGIN_XML_CONF_FILE !=null){
+			logger.debug("Get conf file : "+Constants.PDF_PLUGIN_XML_CONF_FILE.getAbsolutePath());
+			confFilePath =Constants.PDF_PLUGIN_XML_CONF_FILE.getAbsolutePath();
+		}else{
+			InputStream isConfFile = getClass().getClassLoader().getResourceAsStream("/config/plugins-conf.xml");
+			confFilePath = FilenameUtils.removeExtension(input.getPath())+"-conf.xml";
+			File confFile = new File(confFilePath);
+			java.nio.file.Files.copy(
+					isConfFile, 
+					confFile.toPath(), 
+				      StandardCopyOption.REPLACE_EXISTING);
+			isConfFile.close();
+			logger.debug("Get conf file : "+confFile.getAbsolutePath());
+		}
+		
 		serviceTableColumnSize.tableColumnSizeProcessor(input.getAbsolutePath(), outputForFO,
-				Constants.PDF_PLUGIN_XML_CONF);
+				confFilePath);
 
-		// Identity
 		return new File(outputForFO);
 
 	}
