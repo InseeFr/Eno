@@ -767,7 +767,22 @@
         </xsl:variable>
         <xsl:value-of select="max($listLengthCode)"/>
     </xsl:template>
-        
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-label for MultipleChoiceQuestion.</xd:p>
+            <xd:p>In MCQ, the label of ResponseDomain is retrieve through the corresponding l:Code in the Dimension (only rank="1" in MCQ).</xd:p>            
+        </xd:desc>
+    </xd:doc>
+    <!-- TODO : Simplify the Xpath match ? Only "MCQ" needed ? -->
+    <xsl:template match="l:Code[parent::r:CodeReference/ancestor::d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2') 
+        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])] 
+        and parent::d:GridResponseDomain and following-sibling::d:GridAttachment//d:SelectDimension]]" mode="enoddi:get-label" priority="2">        
+        <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension"/>
+        <xsl:variable name="correspondingCode" select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]"/>
+        <xsl:apply-templates select="$correspondingCode" mode="enoddi:get-label"/>
+    </xsl:template>
+
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-label-conditioning-variables.</xd:p>
@@ -950,7 +965,6 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-   
 
     <xd:doc>
         <xd:desc>
@@ -962,7 +976,6 @@
         <xsl:sequence select="r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID"/>
     </xsl:template>
 
-   
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-instruction-by-anchor-ref.</xd:p>
@@ -989,5 +1002,4 @@
         </xsl:apply-templates>
     </xsl:function>
    
-
 </xsl:stylesheet>
