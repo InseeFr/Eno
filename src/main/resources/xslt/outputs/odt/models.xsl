@@ -643,14 +643,12 @@
 	</xd:doc>
 	<xsl:template match="xf-output" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="hello" tunnel="yes"/>
 		
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="instructionFormat" select="enoodt:get-format($source-context)"/>
 		<xsl:variable name="instructionLabel" select="enoodt:get-label($source-context, $languages)"/>
 		<xsl:variable name="instructionFormatMaj" select="concat(upper-case(substring($instructionFormat,1,1)),
 			substring($instructionFormat,2))" as="xs:string"></xsl:variable>
-		<text:p><xsl:value-of select="$hello"/></text:p>
 		
 		<xsl:choose>
 			<xsl:when test="$instructionFormat='comment'">
