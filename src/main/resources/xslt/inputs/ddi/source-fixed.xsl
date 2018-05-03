@@ -767,7 +767,7 @@
         </xsl:variable>
         <xsl:value-of select="max($listLengthCode)"/>
     </xsl:template>
-        
+
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-label for MultipleChoiceQuestion.</xd:p>
@@ -781,8 +781,8 @@
         <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension"/>
         <xsl:variable name="correspondingCode" select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]"/>
         <xsl:apply-templates select="$correspondingCode" mode="enoddi:get-label"/>
-    </xsl:template>    
-        
+    </xsl:template>
+
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-label-conditioning-variables.</xd:p>
@@ -991,6 +991,5 @@
             <xsl:with-param name="href" select="$href" tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:function>
-   
 
 </xsl:stylesheet>
