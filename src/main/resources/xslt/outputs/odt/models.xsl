@@ -238,7 +238,7 @@
 		<xsl:variable name="maximumResponse" select="enoodt:get-maximum($source-context)"/>
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context,$languages[1])"/>
 		<xsl:variable name="questionLabel" select="enoodt:get-label($source-context, $languages[1])"/>
-				
+
 		<xsl:if test="$questionName != ''">
 			<text:p text:style-name="QuestionName">
 				<xsl:value-of select="concat('[',$questionName,']')"/>
@@ -342,7 +342,7 @@
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context,$languages[1])"/>
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
 		<xsl:variable name="questionLabel" select="enoodt:get-label($source-context, $languages[1])"/>
-				
+
 		<xsl:if test="$questionName != ''">
 			<text:p text:style-name="QuestionName">
 				<xsl:value-of select="concat('[',$questionName,']')"/>
@@ -691,8 +691,8 @@
 		<text:p text:style-name="Control"><xsl:value-of select="'Filtre : '"/></text:p>
 		
 		<text:p text:style-name="Control">
-			<xsl:call-template name="replaceVariablesInFilter">
-				<xsl:with-param name="filter" select="$filter"/>
+			<xsl:call-template name="replaceVariablesInFormula">
+				<xsl:with-param name="formula" select="$filter"/>
 				<xsl:with-param name="variables" select="$idVariables"/>
 			</xsl:call-template>				
 		</text:p>
@@ -757,8 +757,8 @@
 		<xsl:variable name="instructionFormat" select="enoodt:get-css-class($source-context)"/>
 		<xsl:variable name="vars" select="enoodt:get-label-conditioning-variables($source-context,$languages)"/>
 		<xsl:variable name="instructionLabel">
-			<xsl:call-template name="replaceVariablesInInstruction">
-				<xsl:with-param name="instruction" select="enoodt:get-label($source-context, $languages)"/>
+			<xsl:call-template name="replaceVariablesInFormula">
+				<xsl:with-param name="formula" select="enoodt:get-label($source-context, $languages)"/>
 				<xsl:with-param name="variables" select="$vars"/>
 			</xsl:call-template>	
 		</xsl:variable>
@@ -794,10 +794,11 @@
 				
 	</xsl:template>
 	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Template named:replaceVariablesInFormula.</xd:p>
-			<xd:p>It replaces variables in a formula.</xd:p>
+			<xd:p>It replaces variables in a all formula (control, instruction, filter).</xd:p>
 		</xd:desc>
 	</xd:doc>
 	<xsl:template name="replaceVariablesInFormula">
@@ -805,18 +806,28 @@
 		<xsl:param name="formula"/>
 		<xsl:param name="variables" as="xs:string*"/>
 		
-		<xsl:variable name="regex1" select="'number\(if\s\(//'" as="xs:string"/>
-		<xsl:variable name="regex2" select="'=''''\)\sthen\s''0''\selse\s//'" as="xs:string"/>
-		<xsl:variable name="regex3" select="'\)'" as="xs:string"/>
+		<xsl:variable name="regex1" select="$conditioning-variable-begin" as="xs:string"/>
+		<xsl:variable name="regex2" select="$conditioning-variable-end" as="xs:string"/>
+		<xsl:variable name="regex3" select="'number\(if\s\(//'" as="xs:string"/>
+		<xsl:variable name="regex4" select="'=''''\)\sthen\s''0''\selse\s//'" as="xs:string"/>
+		<xsl:variable name="regex5" select="'\)'" as="xs:string"/>
+		<xsl:variable name="regexA" select="concat($regex1,$variables[1],$regex2)"/>				
+		<xsl:variable name="regexB" select="concat($regex3,$variables[1],$regex4,$variables[1],$regex5)"/>
+		<xsl:variable name="regexC" select="concat('//',$variables[1])"/>
+		<xsl:variable name="expressionToReplace" select="concat('^',enoodt:get-business-name($source-context,$variables[1]))"/>
 		
 		<xsl:choose>
 			<xsl:when test="count($variables)=1">
-				<xsl:variable name="regex" select="concat($regex1,$variables[1],$regex2,$variables[1],$regex3)"/>
-				<xsl:value-of select="replace($formula,$regex,concat('^',enoodt:get-business-name($source-context,$variables[1])))"/>
+				<xsl:value-of select="replace(replace(replace($formula,
+					$regexA,$expressionToReplace),
+					$regexB,$expressionToReplace),
+					$regexC,$expressionToReplace)"/>
 			</xsl:when>
-			<xsl:otherwise>
-				<xsl:variable name="regex" select="concat($regex1,$variables[1],$regex2,$variables[1],$regex3)"/>
-				<xsl:variable name="newFormula" select="replace($formula,$regex,concat('^',enoodt:get-business-name($source-context,$variables[1])))"/>
+			<xsl:otherwise>				
+				<xsl:variable name="newFormula" select="replace(replace(replace($formula,
+					$regexA,$expressionToReplace),
+					$regexB,$expressionToReplace),
+					$regexC,$expressionToReplace)"/>
 				
 				<xsl:call-template name="replaceVariablesInFormula">
 					<xsl:with-param name="formula" select="$newFormula"></xsl:with-param>
@@ -825,65 +836,5 @@
 			</xsl:otherwise>
 		</xsl:choose>		
 	</xsl:template>
-	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Template named: replaceVariablesInInstruction.</xd:p>
-			<xd:p>It replaces variables in a formula.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:template name="replaceVariablesInInstruction">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="instruction"/>
-		<xsl:param name="variables" as="xs:string*"/>
-		
-		<xsl:variable name="regex1" select="'¤'" as="xs:string"/>
-		<xsl:variable name="regex2" select="'¤'" as="xs:string"/>
-		
-		<xsl:choose>
-			<xsl:when test="count($variables)=1">
-				<xsl:variable name="regex" select="concat($regex1,$variables[1],$regex2)"/>
-				<xsl:value-of select="replace($instruction,$regex,concat('^',enoodt:get-business-name($source-context,$variables[1])))"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:variable name="regex" select="concat($regex1,$variables[1],$regex2)"/>
-				<xsl:variable name="newInstruction" select="replace($instruction,$regex,concat('^',enoodt:get-business-name($source-context,$variables[1])))"/>
-				
-				<xsl:call-template name="replaceVariablesInInstruction">
-					<xsl:with-param name="instruction" select="$newInstruction"></xsl:with-param>
-					<xsl:with-param name="variables" select="$variables[position() &gt; 1]"></xsl:with-param>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>		
-	</xsl:template>
-	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Template named:replaceVariablesInFilter.</xd:p>
-			<xd:p>It replaces variables in a filter.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:template name="replaceVariablesInFilter">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="filter"/>
-		<xsl:param name="variables" as="xs:string*"/>
-		
-		<xsl:variable name="regex1" select="'//'" as="xs:string"/>
-		
-		<xsl:choose>
-			<xsl:when test="count($variables)=1">
-				<xsl:variable name="regex" select="concat($regex1,$variables[1])"/>
-				<xsl:value-of select="replace($filter,$regex,concat('^',enoodt:get-business-name($source-context,$variables[1])))"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:variable name="regex" select="concat($regex1,$variables[1])"/>
-				<xsl:variable name="newFormula" select="replace($filter,$regex,concat('^',enoodt:get-business-name($source-context,$variables[1])))"/>
-				
-				<xsl:call-template name="replaceVariablesInFormula">
-					<xsl:with-param name="formula" select="$newFormula"></xsl:with-param>
-					<xsl:with-param name="variables" select="$variables[position() &gt; 1]"></xsl:with-param>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>		
-	</xsl:template>
+
 </xsl:stylesheet>
