@@ -153,6 +153,7 @@
 						Specification generated from Eno
 					</text:p>
          <text:p text:style-name="Module">I - Introduction</text:p>
+         <text:p/>
          <text:p text:style-name="Comment">We're going to test your knowledge about the simpsons series.Welcome in the simspons world!</text:p>
          <text:p text:style-name="QuestionName">[COMMENT]</text:p>
          <text:p text:style-name="Format">Car 500</text:p>
@@ -160,6 +161,8 @@
          <text:p text:style-name="QuestionName">[READY]</text:p>
          <text:p text:style-name="Format">Booléen</text:p>
          <text:p text:style-name="Question">➡ 2. Are you ready?</text:p>
+         <text:p text:style-name="Control">Filtre : </text:p>
+         <text:p text:style-name="Control">not( ^READY != '1')</text:p>
          <text:p text:style-name="SubModule">General knowledge of the series</text:p>
          <text:p text:style-name="QuestionName">[PRODUCER]</text:p>
          <text:p text:style-name="Format">Car 30</text:p>
@@ -170,6 +173,7 @@
          <text:p text:style-name="QuestionName">[DATEFIRST]</text:p>
          <text:p text:style-name="Format">date</text:p>
          <text:p text:style-name="Question">➡ 5. When was the first episode of the Simpsons?</text:p>
+         <text:p/>
          <text:p text:style-name="Comment">For your information, the date of the last broadcast was on
 						øLAST_BROADCASTø</text:p>
          <text:p text:style-name="QuestionName">[AUDIENCE_SHARE]</text:p>
@@ -177,6 +181,7 @@
          <text:p text:style-name="Question">➡ 6. In your opinion, how much is the part of audience share in US for the 2016
 					season? </text:p>
          <text:p text:style-name="Module">II - Simpsons' city</text:p>
+         <text:p/>
          <text:p text:style-name="Comment">This module asks about your general knowledge of the Simpsons city</text:p>
          <text:p text:style-name="QuestionName">[CITY]</text:p>
          <text:p text:style-name="Format">Car 5 - liste de modalités</text:p>
@@ -184,6 +189,7 @@
          <text:p text:style-name="CodeItem">00001 - Springfield</text:p>
          <text:p text:style-name="CodeItem">00002 - Shelbyville</text:p>
          <text:p text:style-name="CodeItem">00003 - Seinfeld</text:p>
+         <text:p/>
          <text:p text:style-name="Instruction">One possible answer</text:p>
          <text:p text:style-name="QuestionName">[MAYOR]</text:p>
          <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
@@ -192,6 +198,7 @@
          <text:p text:style-name="CodeItem">2 - Timothy Lovejoy</text:p>
          <text:p text:style-name="CodeItem">3 - Joe Quimby</text:p>
          <text:p text:style-name="CodeItem">4 - Poochie</text:p>
+         <text:p/>
          <text:p text:style-name="Instruction">Only one possible answer</text:p>
          <text:p text:style-name="QuestionName">[STATE]</text:p>
          <text:p text:style-name="Format">Car 2 - liste de modalités</text:p>
@@ -211,7 +218,6 @@
          <text:p text:style-name="CodeItem">13 - Not in any state, you fool!</text:p>
          <text:p text:style-name="Module">III - Characters</text:p>
          <text:p text:style-name="QuestionName">[PET]</text:p>
-         <text:p>Car 1</text:p>
          <text:p text:style-name="Question">➡ 1. What are the pet names that the Simpsons family had?</text:p>
          <table:table table:name="j334akov">
             <table:table-column/>
@@ -249,7 +255,9 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
+         <text:p/>
          <text:p text:style-name="Instruction">Several possible answers</text:p>
+         <text:p/>
          <text:p text:style-name="QuestionName">[ICE_FLAVOUR]</text:p>
          <text:p>Car 1</text:p>
          <text:p text:style-name="Question">➡ 2. Does Jay like the following ice cream flavours?</text:p>
@@ -489,11 +497,9 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
-         <text:p text:style-name="CalculatedVariableTitle">Calcul de la variable</text:p>
-         <text:p text:style-name="CalculatedVariableContent">here compute</text:p>
          <text:p text:style-name="Control">Contrôle bloquant : Total of percentages</text:p>
-         <text:p text:style-name="Control">Expression du contrôle : not(PERCENTAGE_EXPENSES11 + PERCENTAGE_EXPENSES21 + PERCENTAGE_EXPENSES31 + PERCENTAGE_EXPENSES41 + PERCENTAGE_EXPENSES51 + PERCENTAGE_EXPENSES61 + PERCENTAGE_EXPENSES71 + PERCENTAGE_EXPENSES81 + PERCENTAGE_EXPENSES91 + PERCENTAGE_EXPENSES101 != 100)</text:p>
-         <text:p text:style-name="Warning">Message d'erreur : The sum of percentages is: SUM_EXPENSES %. The total of
+         <text:p text:style-name="Control">Expression du contrôle : not(^PERCENTAGE_EXPENSES11 + ^PERCENTAGE_EXPENSES21 + ^PERCENTAGE_EXPENSES31 + ^PERCENTAGE_EXPENSES41 + ^PERCENTAGE_EXPENSES51 + ^PERCENTAGE_EXPENSES61 + ^PERCENTAGE_EXPENSES71 + ^PERCENTAGE_EXPENSES81 + ^PERCENTAGE_EXPENSES91 + ^PERCENTAGE_EXPENSES101 != 100)</text:p>
+         <text:p text:style-name="Warning">Message d'erreur : The sum of percentages is: ^SUM_EXPENSES %. The total of
 						percentages must be equal to 100%.</text:p>
          <text:p text:style-name="SubModule">Clowning</text:p>
          <text:p text:style-name="QuestionName">[CLOWNING]</text:p>
@@ -698,6 +704,7 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
+         <text:p/>
          <text:p text:style-name="Instruction">Several answers possible: check off all the relevant boxes </text:p>
          <text:p text:style-name="Module">V - Favourite characters</text:p>
          <text:p text:style-name="QuestionName">[FAVOURITE_CHARACTERS]</text:p>
@@ -800,12 +807,12 @@
          <text:p text:style-name="QuestionName">[SURVEY_COMMENT]</text:p>
          <text:p text:style-name="Format">Car 255</text:p>
          <text:p text:style-name="Question">➡ 1. Do you have any comment about the survey?</text:p>
-         <text:p>number(if (//j4nwc63q-QOP-jbgde5yl='') then '0' else //j4nwc63q-QOP-jbgde5yl) + number(if (//j4nwc63q-QOP-jbgd2x2t='') then '0' else //j4nwc63q-QOP-jbgd2x2t) + number(if (//j4nwc63q-QOP-jbgdjypz='') then '0' else //j4nwc63q-QOP-jbgdjypz) +
-				number(if (//j4nwc63q-QOP-jbgdcftu='') then '0' else //j4nwc63q-QOP-jbgdcftu) + number(if (//j4nwc63q-QOP-jbgdiyfe='') then '0' else //j4nwc63q-QOP-jbgdiyfe) + number(if (//j4nwc63q-QOP-jbgdj1wd='') then '0' else //j4nwc63q-QOP-jbgdj1wd) +
-				number(if (//j4nwc63q-QOP-jbgddylk='') then '0' else //j4nwc63q-QOP-jbgddylk) + number(if (//j4nwc63q-QOP-jbgd3jj6='') then '0' else //j4nwc63q-QOP-jbgd3jj6) + number(if (//j4nwc63q-QOP-jbgd4w3k='') then '0' else //j4nwc63q-QOP-jbgd4w3k) +
-				number(if (//j4nwc63q-QOP-jbgd4w4k='') then '0' else //j4nwc63q-QOP-jbgd4w4k) </text:p>
          <text:p/>
-         <text:p/>
+         <text:p text:style-name="CalculatedVariableTitle">Calcul de la variable SUM_EXPENSES Label : [SUM_EXPENSES]</text:p>
+         <text:p text:style-name="CalculatedVariableContent">Formule de calcul : SUM_EXPENSES = ^PERCENTAGE_EXPENSES11 + ^PERCENTAGE_EXPENSES21 + ^PERCENTAGE_EXPENSES31 +
+				^PERCENTAGE_EXPENSES41 + ^PERCENTAGE_EXPENSES51 + ^PERCENTAGE_EXPENSES61 +
+				^PERCENTAGE_EXPENSES71 + ^PERCENTAGE_EXPENSES81 + ^PERCENTAGE_EXPENSES91 +
+				^PERCENTAGE_EXPENSES101 </text:p>
       </office:text>
    </office:body>
 </office:document>
