@@ -758,16 +758,16 @@
             <xd:p>Return the maximum length of a code domain, if is blank then it is a boolean.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:QuestionItem[d:CodeDomain] | d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed)]
-        |d:QuestionGrid[not(d:GridDimension/d:Roster[not(@maximumAllowed)])]" mode="enoddi:get-code-maximum-length" priority="2">
+    <xsl:template match="d:QuestionItem[descendant::d:CodeDomain] |d:QuestionGrid[descendant::d:CodeDomain[not(ancestor::d:GridDimension)]] | d:CodeDomain[not(ancestor::d:GridDimension)]" 
+        mode="enoddi:get-code-maximum-length" priority="2">
         <xsl:variable name="listLengthCode" as="xs:double*">
-            <xsl:for-each select="descendant::r:Value">
+            <xsl:for-each select="descendant::r:Value[not(ancestor::d:GridDimension)]">
                 <xsl:value-of select="string-length(.)"/>
             </xsl:for-each>
         </xsl:variable>
         <xsl:value-of select="max($listLengthCode)"/>
     </xsl:template>
-
+        
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-label for MultipleChoiceQuestion.</xd:p>
@@ -781,8 +781,8 @@
         <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension"/>
         <xsl:variable name="correspondingCode" select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]"/>
         <xsl:apply-templates select="$correspondingCode" mode="enoddi:get-label"/>
-    </xsl:template>
-
+    </xsl:template>    
+        
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-label-conditioning-variables.</xd:p>
@@ -965,17 +965,7 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Defining getter get-control-variables.</xd:p>
-            <xd:p>Function that returns the list of the variables in a control-text (get-control).</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="d:ComputationItem" mode="enoddi:get-control-variables">        
-        <xsl:sequence select="r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID"/>
-    </xsl:template>
-
+           
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-instruction-by-anchor-ref.</xd:p>
@@ -1002,4 +992,5 @@
         </xsl:apply-templates>
     </xsl:function>
    
+
 </xsl:stylesheet>
