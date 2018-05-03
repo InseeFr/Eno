@@ -153,7 +153,6 @@
 						Specification generated from Eno
 					</text:p>
          <text:p text:style-name="Module">I - Introduction</text:p>
-         <text:p/>
          <text:p text:style-name="Comment">We're going to test your knowledge about the simpsons series.Welcome in the simspons world!</text:p>
          <text:p text:style-name="QuestionName">[COMMENT]</text:p>
          <text:p text:style-name="Format">Car 500</text:p>
@@ -173,7 +172,6 @@
          <text:p text:style-name="QuestionName">[DATEFIRST]</text:p>
          <text:p text:style-name="Format">date</text:p>
          <text:p text:style-name="Question">➡ 5. When was the first episode of the Simpsons?</text:p>
-         <text:p/>
          <text:p text:style-name="Comment">For your information, the date of the last broadcast was on
 						øLAST_BROADCASTø</text:p>
          <text:p text:style-name="QuestionName">[AUDIENCE_SHARE]</text:p>
@@ -181,7 +179,6 @@
          <text:p text:style-name="Question">➡ 6. In your opinion, how much is the part of audience share in US for the 2016
 					season? </text:p>
          <text:p text:style-name="Module">II - Simpsons' city</text:p>
-         <text:p/>
          <text:p text:style-name="Comment">This module asks about your general knowledge of the Simpsons city</text:p>
          <text:p text:style-name="QuestionName">[CITY]</text:p>
          <text:p text:style-name="Format">Car 5 - liste de modalités</text:p>
@@ -189,7 +186,6 @@
          <text:p text:style-name="CodeItem">00001 - Springfield</text:p>
          <text:p text:style-name="CodeItem">00002 - Shelbyville</text:p>
          <text:p text:style-name="CodeItem">00003 - Seinfeld</text:p>
-         <text:p/>
          <text:p text:style-name="Instruction">One possible answer</text:p>
          <text:p text:style-name="QuestionName">[MAYOR]</text:p>
          <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
@@ -198,7 +194,6 @@
          <text:p text:style-name="CodeItem">2 - Timothy Lovejoy</text:p>
          <text:p text:style-name="CodeItem">3 - Joe Quimby</text:p>
          <text:p text:style-name="CodeItem">4 - Poochie</text:p>
-         <text:p/>
          <text:p text:style-name="Instruction">Only one possible answer</text:p>
          <text:p text:style-name="QuestionName">[STATE]</text:p>
          <text:p text:style-name="Format">Car 2 - liste de modalités</text:p>
@@ -255,9 +250,7 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
-         <text:p/>
          <text:p text:style-name="Instruction">Several possible answers</text:p>
-         <text:p/>
          <text:p text:style-name="QuestionName">[ICE_FLAVOUR]</text:p>
          <text:p>Car 1</text:p>
          <text:p text:style-name="Question">➡ 2. Does Jay like the following ice cream flavours?</text:p>
@@ -704,7 +697,6 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
-         <text:p/>
          <text:p text:style-name="Instruction">Several answers possible: check off all the relevant boxes </text:p>
          <text:p text:style-name="Module">V - Favourite characters</text:p>
          <text:p text:style-name="QuestionName">[FAVOURITE_CHARACTERS]</text:p>
