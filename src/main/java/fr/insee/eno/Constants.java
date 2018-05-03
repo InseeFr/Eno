@@ -216,7 +216,7 @@ public final class Constants {
 	/********************************************************/
 	//// Plugin Conf
 	public static final String PDF_PLUGIN_XML_CONF = "src/main/resources/config/plugins-conf.xml";
-	
+	public static final File PDF_PLUGIN_XML_CONF_FILE = getFileFromUrl(Constants.class.getResource("/config/plugins-conf.xml"));
 	
 
 
@@ -225,7 +225,7 @@ public final class Constants {
 	/********************************************************/
 
 	//// Temporary files used in DDIPreprocessing
-	public static final String OLD_TEMP_NULL_TMP = SUB_TEMP_FOLDER + "/null.tmp";
+	public static final String OLD_TEMP_NULL_TMP2 = SUB_TEMP_FOLDER + "/null.tmp";
 
 	//// Xsl stylesheets used in DDIPreprocessing
 
