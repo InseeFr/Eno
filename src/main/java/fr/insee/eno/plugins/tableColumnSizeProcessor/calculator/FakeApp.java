@@ -65,11 +65,11 @@ public class FakeApp extends Application {
 		for (Map.Entry<Object, Object> entry : idWidthValues.entrySet()) {
 			String key = ((String) entry.getKey());
 			String val = (((Integer) entry.getValue() * PX_TO_MM_COEF) + 1) + "";
-			
-			XPathFactory xpf = XPathFactory.newInstance(
-					  XPathFactory.DEFAULT_OBJECT_MODEL_URI,
-					  "net.sf.saxon.xpath.XPathFactoryImpl",
-					  ClassLoader.getSystemClassLoader());
+			XPathFactory xpf = XPathFactory.newInstance();
+//			XPathFactory xpf = XPathFactory.newInstance(
+//					  XPathFactory.DEFAULT_OBJECT_MODEL_URI,
+//					  "net.sf.saxon.xpath.XPathFactoryImpl",
+//					  ClassLoader.getSystemClassLoader());
 			Element element = ((Element) xpf.newXPath().evaluate("//*[@id='" + key + "']", doc,
 					XPathConstants.NODE));
 			if (element != null)
