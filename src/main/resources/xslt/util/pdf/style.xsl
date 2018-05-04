@@ -2,8 +2,8 @@
     
     <xsl:attribute-set name="Titre-sequence">
         <xsl:attribute name="background-color">#666666</xsl:attribute>
-        <xsl:attribute name="color">White</xsl:attribute>
-        <xsl:attribute name="font-weight">Bold</xsl:attribute>
+        <xsl:attribute name="color">white</xsl:attribute>
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
         <xsl:attribute name="margin-bottom">9pt</xsl:attribute>
         <xsl:attribute name="margin-top">3pt</xsl:attribute>
         <xsl:attribute name="font-size">14pt</xsl:attribute>
@@ -11,7 +11,7 @@
     <xsl:attribute-set name="Titre-paragraphe">
         <xsl:attribute name="background-color">#CCCCCC</xsl:attribute>
         <xsl:attribute name="color">black</xsl:attribute>
-        <xsl:attribute name="font-weight">Bold</xsl:attribute>
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
         <xsl:attribute name="margin-bottom">9pt</xsl:attribute>
         <xsl:attribute name="margin-top">3pt</xsl:attribute>
         <xsl:attribute name="font-size">12pt</xsl:attribute>

@@ -439,7 +439,7 @@
     </xd:doc>
     <xsl:function name="enopdf:get-rooster-number-lines">
         <xsl:param name="context" as="item()"/>
-        <xsl:sequence select="if($context/self::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]) then(8) else()"/>
+       <xsl:sequence select="if($context/self::d:QuestionGrid[d:GridDimension/d:Roster]) then(8) else()"/>
     </xsl:function>
     
     <xd:doc>

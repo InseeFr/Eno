@@ -41,17 +41,17 @@
 					page-width="210mm" font-family="arial" font-size="10pt" 
 					font-weight="normal" margin-bottom="5mm">
 					<fo:region-body margin="13mm" column-count="1"/>
-					<fo:region-before region-name="xsl-region-before-cover" extent="25mm" margin="10mm"
+					<fo:region-before region-name="xsl-region-before-cover" extent="25mm" 
 						display-align="before" precedence="true"/>
 					<fo:region-after extent="25mm" region-name="xsl-region-after-cover"
 						display-align="before" precedence="true"/>
 				</fo:simple-page-master>
 				<!-- reference-orientation="90" column-count="2" -->
-				<fo:simple-page-master master-name="A4-portrail" page-height="297mm"
-					page-width="210mm" font-family="arial" font-size="10pt" 
+				<fo:simple-page-master master-name="A4-portrail" page-height="297mm" 
+					page-width="210mm" font-family="arial" font-size="10pt" reference-orientation="0"
 					font-weight="normal" margin-bottom="5mm">
-					<fo:region-body margin="13mm" column-count="2"/>
-					<fo:region-before region-name="xsl-region-before" extent="25mm" margin="10mm"
+					<fo:region-body margin="13mm" column-count="1"/>
+					<fo:region-before region-name="xsl-region-before" extent="25mm"
 						display-align="before" precedence="true"/>
 					<fo:region-after extent="25mm" region-name="xsl-region-after"
 						display-align="before" precedence="true"/>
@@ -87,7 +87,7 @@
 					</fo:block>
 				</fo:static-content>
 				<fo:static-content flow-name="xsl-region-after">
-					<fo:block position="absolute" margin-left="10mm" margin-top="15mm" bottom="0px" text-align="left">
+					<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0px" text-align="left">
 						<fo:external-graphic>
 							<xsl:attribute name="src">
 								<xsl:value-of select="concat($properties//Images/Folder,'encoche-bottom-left.png')"/>
@@ -648,7 +648,8 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
-		<!--none => select-->
+		
+
 		<fo:block page-break-inside="avoid">	
 			<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/>
 			<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE  -->
@@ -705,58 +706,7 @@
 		
 	</xsl:template>
 	
-	
-	
-	<xsl:template match="MultipleChoiceQuestion/xf-select1" mode="model">
-		
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="position" tunnel="yes"/>
-		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
-			as="xs:string +"/>
-		<xsl:variable name="format" select="enopdf:get-appearance($source-context)"/>
-		<fo:block page-break-inside="avoid">
-			<fo:block>
-				MultipleChoiceQuestion/xf-select1
-			</fo:block>
-		</fo:block>
-		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-			<xsl:if test="enopdf:is-first($source-context) = 'true'">
-				<xsl:text disable-output-escaping="yes">
-						&lt;/fo:block&gt;					
-					</xsl:text>
-			</xsl:if>
-		</xsl:if>
-		
-	</xsl:template>
-	
-	<xsl:template match="MultipleChoiceQuestion/xf-select" mode="model">
-		
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="position" tunnel="yes"/>
-		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
-			as="xs:string +"/>
-		<xsl:variable name="format" select="enopdf:get-appearance($source-context)"/>
-		<fo:block page-break-inside="avoid">
-			<fo:block>
-				<fo:inline font-family="ZapfDingbats" font-size="10pt"
-					margin-top="3mm">
-					&#x274F;
-				</fo:inline>
-				<fo:inline>
-					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-				</fo:inline>
-			</fo:block>
-		</fo:block>
-		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-			<xsl:if test="enopdf:is-first($source-context) = 'true'">
-				<xsl:text disable-output-escaping="yes">
-						&lt;/fo:block&gt;					
-					</xsl:text>
-			</xsl:if>
-		</xsl:if>
-		
-	</xsl:template>
-	
+
 	<!-- Déclenche tous les xf-select de l'arbre des divers -->
 	<xsl:template match="xf-select1" mode="model">
 		
@@ -1003,14 +953,16 @@
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 				</xsl:apply-templates>
 			</fo:block>
-			
-			<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-				<xsl:if test="enopdf:is-first($source-context) = 'true'">
-					<xsl:text disable-output-escaping="yes">
-						&lt;/fo:block&gt;					
-					</xsl:text>
-				</xsl:if>
-			</xsl:if>
+		
+
+
+		<xsl:if test="enopdf:is-first($source-context) = 'true'">
+			<xsl:text disable-output-escaping="yes">
+							&lt;/fo:block&gt;					
+						</xsl:text>
+		</xsl:if>
+				
+
 	</xsl:template>
 
 
@@ -1180,13 +1132,13 @@
 		</fo:block>
 		
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-			<fo:block>
+			
 				<xsl:if test="enopdf:is-first($source-context) = 'true'">
 					<xsl:text disable-output-escaping="yes">
 						&lt;/fo:block&gt;						
 					</xsl:text>
 				</xsl:if>
-			</fo:block>
+			
 		</xsl:if>
 		
 		<!-- Temporaire -->
