@@ -198,7 +198,8 @@
         <xsl:param name="language"/>
         <!-- We look for an instruction of 'Format' type -->
         <xsl:variable name="format-instruction">
-            <xsl:sequence select="enoddi:get-format-instruction($context,$language)"/>
+            <!--<xsl:sequence select="enoddi:get-label(enoddi:get-instructions-by-format($context,'format'),$language)"/>-->
+            <xsl:sequence select="enoddi:get-instructions-by-format($context,'format')"/>
         </xsl:variable>
         <xsl:choose>
             <!-- If there is no such instruction -->
@@ -237,7 +238,7 @@
             </xsl:when>
             <!-- If there is such an instruction, it is used for the hint xforms element -->
             <xsl:when test="$format-instruction/*">
-                <xsl:sequence select="$format-instruction/*"/>
+                <xsl:sequence select="enoddi:get-label($format-instruction,$language)"/>
             </xsl:when>
         </xsl:choose>
     </xsl:function>

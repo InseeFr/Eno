@@ -147,21 +147,6 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>For questions which have a 'format' Instruction.</xd:p>
-            <xd:p>TODO : Deprecate this implementation. Format instructions is not used anymore.</xd:p>            
-        </xd:desc>
-    </xd:doc>
-    <xsl:template
-        match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='format']] | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='format']]"
-        mode="enoddi:get-format-instruction">
-        <!-- We get the label of the 'format' Instruction -->
-        <xsl:apply-templates
-            select="descendant::d:Instruction[d:InstructionName/r:String/text()='format']"
-            mode="enoddi:get-concatened-label"/>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
             <xd:p>For a node() which isn't one of those three, there can't be a defined language.</xd:p>
             <xd:p>It's child is returned.</xd:p>
         </xd:desc>
@@ -740,10 +725,10 @@
             <xd:p>Return the maximum length of a code domain, if is blank then it is a boolean.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:QuestionItem[d:CodeDomain] | d:CodeDomain[(ancestor::d:GridResponseDomain or ancestor::d:ResponseDomainInMixed)]
-        |d:QuestionGrid[not(d:GridDimension/d:Roster[not(@maximumAllowed)])]" mode="enoddi:get-code-maximum-length" priority="2">
+    <xsl:template match="d:QuestionItem[descendant::d:CodeDomain] |d:QuestionGrid[descendant::d:CodeDomain[not(ancestor::d:GridDimension)]] | d:CodeDomain[not(ancestor::d:GridDimension)]" 
+        mode="enoddi:get-code-maximum-length" priority="2">
         <xsl:variable name="listLengthCode" as="xs:double*">
-            <xsl:for-each select="descendant::r:Value">
+            <xsl:for-each select="descendant::r:Value[not(ancestor::d:GridDimension)]">
                 <xsl:value-of select="string-length(.)"/>
             </xsl:for-each>
         </xsl:variable>
@@ -947,17 +932,7 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Defining getter get-control-variables.</xd:p>
-            <xd:p>Function that returns the list of the variables in a control-text (get-control).</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="d:ComputationItem" mode="enoddi:get-control-variables">        
-        <xsl:sequence select="r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID"/>
-    </xsl:template>
-
+           
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-instruction-by-anchor-ref.</xd:p>
@@ -983,5 +958,5 @@
             <xsl:with-param name="href" select="$href" tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:function>
-   
+
 </xsl:stylesheet>
