@@ -37,116 +37,6 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Concatenation of the instruction labels in order to create a question
-                label.</xd:p>
-            <xd:p>TODO : Deprecate this implementation. Concatenation is not the right way.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template
-        match="d:QuestionGrid[not(descendant::d:Instruction[d:InstructionName/r:String/text()='format'])
-        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]
-        | d:QuestionItem[not(descendant::d:Instruction[d:InstructionName/r:String/text()='format'])
-        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
-        mode="enoddi:get-concatened-label" priority="2">
-        <xsl:element name="xhtml:p">
-            <xsl:element name="xhtml:span">
-                <xsl:attribute name="class">
-                    <xsl:value-of select="'block '"/>
-                    <xsl:value-of select="enoddi:get-style(.)"/>
-                </xsl:attribute>
-                <xsl:if test="d:QuestionText/d:LiteralText/d:Text/xhtml:p/@id">
-                    <xsl:attribute name="id" select="d:QuestionText/d:LiteralText/d:Text/xhtml:p/@id"/>
-                </xsl:if>
-                <xsl:apply-templates select="d:QuestionText/d:LiteralText/d:Text/node()[not(name()='xhtml:p')] | d:QuestionText/d:LiteralText/d:Text/xhtml:p/node()"
-                    mode="lang-choice"/>
-                <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[d:InstructionName/r:String/text()='tooltip']
-                                                                                      /d:InstructionText/d:LiteralText/d:Text">
-                    <xsl:element name="xhtml:span">
-                        <xsl:attribute name="title">
-                            <xsl:variable name="title">
-                                <xsl:apply-templates select="node()[not(name()='xhtml:p')] | xhtml:p/node()"
-                                    mode="lang-choice"/>                                
-                            </xsl:variable>
-                            <xsl:value-of select="normalize-space($title)"/>
-                        </xsl:attribute>
-                        <xsl:text>&#160;</xsl:text>
-                        <xsl:element name="img">
-                            <xsl:attribute name="src" select="'/img/Help-browser.svg.png'"/>
-                        </xsl:element>
-                        <xsl:text>&#160;</xsl:text>
-                    </xsl:element>
-                </xsl:for-each>
-            </xsl:element>
-            <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[not(d:InstructionName/r:String[text()='tooltip'])]">
-                <xsl:element name="xhtml:span">
-                    <xsl:attribute name="class">
-                        <xsl:value-of select="'block '"/>
-                        <xsl:value-of select="enoddi:get-style(.)"/>
-                    </xsl:attribute>
-                    <xsl:if test="d:InstructionText/d:LiteralText/d:Text/xhtml:p/@id">
-                        <xsl:attribute name="id" select="d:InstructionText/d:LiteralText/d:Text/xhtml:p/@id"/>
-                    </xsl:if>
-                    <xsl:apply-templates select="d:InstructionText/d:LiteralText/d:Text/node()[not(name()='xhtml:p')] | d:InstructionText/d:LiteralText/d:Text/xhtml:p/node()"
-                        mode="lang-choice"/>
-                </xsl:element>
-            </xsl:for-each>
-        </xsl:element>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Inserting the Tooltip label into the Sequence label.</xd:p>
-            <xd:p>TODO : Deprecate this implementation. Concatenation is not the right way.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="d:Sequence[d:InterviewerInstructionReference/d:Instruction/d:InstructionName/r:String[text()='tooltip']]" mode="enoddi:get-concatened-label" priority="2">
-        <xsl:apply-templates select="r:Label" mode="lang-choice"/>
-        <xsl:for-each select="d:InterviewerInstructionReference/d:Instruction[d:InstructionName/r:String='tooltip']">
-            <xsl:element name="xhtml:span">
-                <xsl:attribute name="title">
-                    <xsl:variable name="title">
-                        <xsl:apply-templates select="d:InstructionText/d:LiteralText/d:Text" mode="lang-choice"/>    
-                    </xsl:variable>
-                    <xsl:value-of select="normalize-space($title)"/>
-                </xsl:attribute>
-                <xsl:text>&#160;</xsl:text>
-                <xsl:element name="img">
-                    <xsl:attribute name="src" select="'/img/Help-browser.svg.png'"/>
-                </xsl:element>
-                <xsl:text>&#160;</xsl:text>
-            </xsl:element>            
-        </xsl:for-each>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>For consistency, get-concatened-label is same as get-label for element with no child d:Instruction or which is not a d:QuestionItem/Grid.</xd:p>
-            </xd:desc>
-        <xd:p>TODO : Deprecate this implementation. Concatenation is not the right way.</xd:p>
-    </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-concatened-label">
-        <xsl:apply-templates select="." mode="enoddi:get-label"/>
-    </xsl:template>
-      
-    <xd:doc>
-        <xd:desc>
-            <xd:p>For questions which have both a 'format' Instruction and an other Instruction which is not of 'format' type.</xd:p>
-            <xd:p>The instruction is not used for the label. It will be used in the enoddi:get-format-instruction instead.</xd:p>
-        </xd:desc>
-        <xd:p>TODO : Deprecate this implementation. Format instructions is not used anymore.</xd:p>
-    </xd:doc>
-    <xsl:template
-        match="d:QuestionGrid[descendant::d:Instruction[d:InstructionName/r:String/text()='format']
-        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]
-        | d:QuestionItem[descendant::d:Instruction[d:InstructionName/r:String/text()='format']
-        and descendant::d:Instruction[not(d:InstructionName/r:String/text()='format')]]"
-        mode="enoddi:get-concatened-label">
-        <!-- We get the text of the QuestionText -->
-        <xsl:apply-templates select="d:QuestionText/d:LiteralText/d:Text" mode="lang-choice"/>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
             <xd:p>For a node() which isn't one of those three, there can't be a defined language.</xd:p>
             <xd:p>It's child is returned.</xd:p>
         </xd:desc>
@@ -765,23 +655,7 @@
         </xsl:variable>
         <xsl:sequence select="$variable-list"/>
     </xsl:template>
-    
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Defining getter get-concatened-label-conditioning-variables.</xd:p>
-            <xd:p>Function that returns the list of the variables conditioning a concatened-label.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-concatened-label-conditioning-variables">
-        <xsl:param name="language" tunnel="yes"/>
-        <xsl:variable name="variable-list" as="xs:string *">
-            <xsl:call-template name="enoddi:variables-from-label">
-                <xsl:with-param name="label" select="enoddi:get-concatened-label(.,$language)"/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:sequence select="distinct-values($variable-list)"/>
-    </xsl:template>
-    
+
     <xsl:template name="enoddi:variables-from-label">
         <xsl:param name="label"/>
         

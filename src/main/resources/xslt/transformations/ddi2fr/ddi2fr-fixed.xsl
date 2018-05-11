@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml" 
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
@@ -86,7 +87,7 @@
         <xsl:param name="instance-ancestor"/>
 
         <xsl:variable name="static-text-content">
-            <xsl:sequence select="enoddi:get-concatened-label($context,$language)"/>
+            <xsl:sequence select="enofr:get-label($context,$language)"/>
         </xsl:variable>
 
         <xsl:if
@@ -187,6 +188,117 @@
         </xsl:choose>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>This function returns an xforms label for the context on which it is applied.</xd:p>
+            <xd:p>It concats different labels to do this job.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    
+    <xsl:function name="enofr:get-label">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="language"/>
+        
+        <xsl:variable name="ddi-label" select="enoddi:get-label($context,$language)"/>
+        <xsl:variable name="tooltip" select="enoddi:get-instructions-by-format($context,'tooltip')"/>
+        <xsl:variable name="other-instructions" select="enoddi:get-instructions-by-format($context,'instruction,comment,help')" as="node()*"/>
+        
+        <xsl:choose>
+            <xsl:when test="(name($context)='d:QuestionItem' or name($context)='d:QuestionGrid') and ($other-instructions != '' or $tooltip != '')">
+                <xsl:element name="xhtml:p">
+                    <xsl:element name="xhtml:span">
+                        <xsl:attribute name="class">
+                            <xsl:value-of select="'block '"/>
+                            <xsl:value-of select="enoddi:get-style($context)"/>
+                        </xsl:attribute>
+                        <xsl:if test="$ddi-label/@id">
+                            <xsl:attribute name="id" select="$ddi-label/@id"/>
+                        </xsl:if>
+                        <xsl:choose>
+                            <xsl:when test="$ddi-label/name()='xhtml:p'">
+                                <xsl:copy-of select="$ddi-label/* | $ddi-label/text()"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:copy-of select="$ddi-label"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:for-each select="$tooltip">
+                            <xsl:variable name="tooltip-label" select="enoddi:get-label(.,$language)"/>
+                            <xsl:element name="xhtml:span">
+                                <xsl:attribute name="title">
+                                    <xsl:variable name="title">
+                                        <xsl:choose>
+                                            <xsl:when test="$tooltip-label/name()='xhtml:p'">
+                                                <xsl:copy-of select="$tooltip-label/* | $tooltip-label/text()"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:copy-of select="$tooltip-label"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:variable>
+                                    <xsl:value-of select="normalize-space($title)"/>
+                                </xsl:attribute>
+                                <xsl:text>&#160;</xsl:text>
+                                <xsl:element name="img">
+                                    <xsl:attribute name="src" select="'/img/Help-browser.svg.png'"/>
+                                </xsl:element>
+                                <xsl:text>&#160;</xsl:text>
+                            </xsl:element>
+                        </xsl:for-each>
+                    </xsl:element>
+                    <xsl:for-each select="$other-instructions">
+                        <xsl:variable name="instruction-label" select="enoddi:get-label(.,$language)"/>
+                        <xsl:element name="xhtml:span">
+                            <xsl:attribute name="class">
+                                <xsl:value-of select="'block '"/>
+                                <xsl:value-of select="enoddi:get-style(.)"/>
+                            </xsl:attribute>
+                            <xsl:if test="$instruction-label/@id">
+                                <xsl:attribute name="id" select="$instruction-label/@id"/>
+                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="$instruction-label/name()='xhtml:p'">
+                                    <xsl:copy-of select="$instruction-label/* | $instruction-label/text()"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:copy-of select="$instruction-label"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:element>
+                    </xsl:for-each>
+                </xsl:element>
+            </xsl:when>
+            <xsl:when test="$tooltip != ''">
+                <xsl:sequence select="$ddi-label"/>
+                <xsl:for-each select="$tooltip">
+                    <xsl:variable name="tooltip-label" select="enoddi:get-label(.,$language)"/>
+                    <xsl:element name="xhtml:span">
+                        <xsl:attribute name="title">
+                            <xsl:variable name="title">
+                                <xsl:choose>
+                                    <xsl:when test="$tooltip-label/name()='xhtml:p'">
+                                        <xsl:copy-of select="$tooltip-label/* | $tooltip-label/text()"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:copy-of select="$tooltip-label"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                            <xsl:value-of select="normalize-space($title)"/>
+                        </xsl:attribute>
+                        <xsl:text>&#160;</xsl:text>
+                        <xsl:element name="img">
+                            <xsl:attribute name="src" select="'/img/Help-browser.svg.png'"/>
+                        </xsl:element>
+                        <xsl:text>&#160;</xsl:text>
+                    </xsl:element>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="$ddi-label"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
