@@ -572,7 +572,19 @@
         <xsl:param name="format" select="'#all'" tunnel="yes"/>
         <xsl:sequence select="d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true()) else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
     </xsl:template>
-    
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>get-instruction for tooltips and codes.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="l:Code" mode="enoddi:get-instructions-by-format">
+        <xsl:param name="format" select="'#all'" tunnel="yes"/>
+        <xsl:sequence select="r:CategoryReference/l:Category/d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true()) 
+            else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:desc>
             <xd:p>Defining specific getter is-first for multiple questions.</xd:p>
