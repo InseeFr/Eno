@@ -335,4 +335,24 @@
         </xsl:choose>
     </xsl:function>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoodt:get-after-question-title-instructions">
+        <xsl:param name="context" as="item()"/>
+        <xsl:sequence select="enoddi:get-instructions-by-format($context,'instruction,comment,help')"/>
+    </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoodt:get-end-question-instructions">
+        <xsl:param name="context" as="item()"/>
+        <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote') | enoddi:get-next-filter-description($context)"/>
+    </xsl:function>
+
 </xsl:stylesheet>
