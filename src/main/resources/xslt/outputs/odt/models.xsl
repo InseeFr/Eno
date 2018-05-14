@@ -228,7 +228,7 @@
 			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-input" mode="model">
+	<xsl:template match="xf-input[not(ancestor::SortedInstructions)]" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
@@ -237,8 +237,7 @@
 		<xsl:variable name="minimumResponse" select="enoodt:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enoodt:get-maximum($source-context)"/>
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context,$languages[1])"/>
-		<xsl:variable name="questionLabel" select="enoodt:get-label($source-context, $languages[1])"/>
-
+		
 		<xsl:if test="$questionName != ''">
 			<text:p text:style-name="QuestionName">
 				<xsl:value-of select="concat('[',$questionName,']')"/>
@@ -259,16 +258,12 @@
 					<xsl:when test="$typeResponse='date'">
 						<xsl:value-of select="$typeResponse"/>
 					</xsl:when>
-					<xsl:when test="$typeResponse='boolean'">
-						<xsl:value-of select="'Booléen'"/>
-					</xsl:when>
 				</xsl:choose>
 			</text:p>
 		</xsl:if>		
-		<xsl:if test="$questionLabel!=''">
-			<text:p text:style-name="Question"><xsl:value-of select="$questionLabel"/></text:p>
-		</xsl:if>
-			
+		
+		<!-- print the question label and its instructions -->
+		<xsl:call-template name="eno:printQuestionTitleWithInstruction"/>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -282,7 +277,7 @@
 			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-textarea" mode="model">
+	<xsl:template match="xf-textarea[not(ancestor::SortedInstructions)]" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
@@ -317,10 +312,9 @@
 				</xsl:choose>
 			</text:p>
 		</xsl:if>
-		<xsl:if test="$questionLabel!=''">
-			<text:p text:style-name="Question"><xsl:value-of select="$questionLabel"/></text:p>
-		</xsl:if>
-
+		
+		<!-- print the question label and its instructions -->
+		<xsl:call-template name="eno:printQuestionTitleWithInstruction"/>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -333,7 +327,7 @@
 			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-select " mode="model">
+	<xsl:template match="xf-select[not(ancestor::SortedInstructions)]" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>		
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
@@ -341,15 +335,13 @@
 		<xsl:variable name="idQuestion" select="enoodt:get-name($source-context)"/>
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context,$languages[1])"/>
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
-		<xsl:variable name="questionLabel" select="enoodt:get-label($source-context, $languages[1])"/>
 
 		<xsl:if test="$questionName != ''">
 			<text:p text:style-name="QuestionName">
 				<xsl:value-of select="concat('[',$questionName,']')"/>
 			</text:p>
 		</xsl:if>
-		
-		
+				
 		<xsl:choose>
 			<xsl:when test="$maximumLengthCode != ''">
 				<!-- remove Format in the cell for table 'question multiple-choice-question'-->
@@ -363,9 +355,9 @@
 				<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:if test="$questionLabel!=''">
-			<text:p text:style-name="Question"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
-		</xsl:if>		
+		<!-- print the question label and its instructions -->
+		<xsl:call-template name="eno:printQuestionTitleWithInstruction"/>
+		
 		<!-- Go to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -379,7 +371,7 @@
 			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-select1" mode="model">
+	<xsl:template match="xf-select1[not(ancestor::SortedInstructions)]" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		
@@ -388,7 +380,6 @@
 		<xsl:variable name="lengthResponse" select="enoodt:get-length($source-context)"/>
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context,$languages[1])"/>
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
-		<xsl:variable name="questionLabel" select="enoodt:get-label($source-context, $languages[1])"/>
 
 		<xsl:if test="$questionName != ''">
 			<text:p text:style-name="QuestionName">
@@ -408,9 +399,8 @@
 				<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
 			</xsl:otherwise>
 		</xsl:choose>
-		<xsl:if test="$questionLabel!=''">
-			<text:p text:style-name="QuestionSelect"><xsl:value-of select="$questionLabel"/></text:p>
-		</xsl:if>
+		<!-- print the question label and its instructions -->
+		<xsl:call-template name="eno:printQuestionTitleWithInstruction"/>
 		
 		<!-- Go to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -426,27 +416,20 @@
 	<xsl:template match="Table | TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
-		<xsl:variable name="ancestors">
-			<xsl:copy-of select="root(.)"/>
-		</xsl:variable>
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context,$languages[1])"/>
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
-		<xsl:variable name="nbLine" select="count(enoodt:get-body-lines($source-context))"/>
 		<xsl:variable name="headerCol" select="enoodt:get-body-line($source-context,position())"/>
 		<xsl:variable name="type" select="enoodt:get-css-class($source-context)"/>
 		
 		<xsl:if test="$questionName != ''">
-			<text:p text:style-name="QuestionName">
-				<xsl:value-of select="concat('[',$questionName,']')"/>
-			</text:p>
+			<text:p text:style-name="QuestionName"><xsl:value-of select="concat('[',$questionName,']')"/></text:p>
 		</xsl:if>
 		<xsl:if test="$type='question multiple-choice-question' and $maximumLengthCode!=''">
-			<text:p>
-				<xsl:value-of select="concat('Car ',$maximumLengthCode)"/>
-			</text:p>
+			<text:p><xsl:value-of select="concat('Car ',$maximumLengthCode)"/></text:p>
 		</xsl:if>
 		
-		<text:p text:style-name="Question"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
+		<!-- print the question label and its instructions -->
+		<xsl:call-template name="eno:printQuestionTitleWithInstruction"/>
 				
 		<table:table table:name="{enoodt:get-name($source-context)}">
 			<xsl:for-each select="$headerCol">
@@ -455,8 +438,7 @@
 			<!--    Header   -->
 			<xsl:for-each select="enoodt:get-header-lines($source-context)">
 				<table:table-row>		
-					<xsl:apply-templates 
-						select="enoodt:get-header-line($source-context,position())" mode="source">
+					<xsl:apply-templates select="enoodt:get-header-line($source-context,position())" mode="source">
 						<xsl:with-param name="ancestorTable" select="'headerLine'" tunnel="yes"/>
 					</xsl:apply-templates>
 				</table:table-row>
@@ -464,8 +446,7 @@
 			<!--   Body    -->
 			<xsl:for-each select="enoodt:get-body-lines($source-context)">
 				<table:table-row>
-					<xsl:apply-templates
-						select="enoodt:get-body-line($source-context, position())" mode="source">
+					<xsl:apply-templates select="enoodt:get-body-line($source-context, position())" mode="source">
 						<xsl:with-param name="ancestorTable" select="'line'" tunnel="yes"/>
 						<xsl:with-param name="typeOfAncestor" select="$type" tunnel="yes"/>
 					</xsl:apply-templates>
@@ -501,8 +482,8 @@
 		<xsl:variable name="col-span" select="number(enoodt:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enoodt:get-rowspan($source-context))"/>
 		
-		<xsl:choose>
-			<xsl:when test="$ancestorTable!=''">
+		
+			<!--<xsl:if test="$ancestorTable!=''">-->
 				<table:table-cell table:number-rows-spanned="{$row-span}" 
 					table:number-columns-spanned="{$col-span}">
 					<xsl:variable name="label" select="enoodt:get-label($source-context,$languages)"/>
@@ -528,16 +509,8 @@
 					</xsl:for-each>
 				</xsl:if>
 				
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:variable name="label" select="enoodt:get-label($source-context,$languages)"/>
-				<xsl:if test="$label!='' and $ancestorTable='no'">
-					<text:p text:style-name="CodeItem">
-						<xsl:value-of select="fn:concat(enoodt:get-value($source-context), ' - ', $label)"/>
-					</text:p>
-				</xsl:if>
-			</xsl:otherwise>
-		</xsl:choose>
+			<!--</xsl:if>-->
+		
 		
 	</xsl:template>
 	
@@ -615,7 +588,7 @@
 			<xd:p>It writes the code value and the label of the item.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-item" mode="model">
+	<xsl:template match="xf-item[not(ancestor::SortedInstructions)]" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="ancestorTable" tunnel="yes"/>
 		<xsl:param name="typeResponse" tunnel="yes"/>
@@ -641,12 +614,12 @@
 			<xd:p>It writes the instruction text, with a different styles for comments, instructions, warning and help.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-output" mode="model">
+	<xsl:template match="SortedInstructions//xf-output" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="instructionFormat" select="enoodt:get-format($source-context)"/>
-		<xsl:variable name="instructionLabel" select="enoodt:get-label($source-context, $languages)"/>
+		<xsl:variable name="instructionLabel" select="enoodt:get-label($source-context, $languages[1])"/>
 		<xsl:variable name="instructionFormatMaj" select="concat(upper-case(substring($instructionFormat,1,1)),
 			substring($instructionFormat,2))" as="xs:string"></xsl:variable>
 		
@@ -667,12 +640,10 @@
 				<text:p text:style-name="Instruction"><xsl:value-of select="$instructionFormat"/></text:p>
 			</xsl:otherwise>-->
 		</xsl:choose>
-		
-		<!-- Go to the children -->
+		<!-- Got to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
-		
 	</xsl:template>
 
 	<xd:doc>
@@ -804,35 +775,55 @@
 		<xsl:param name="formula"/>
 		<xsl:param name="variables" as="xs:string*"/>
 		
-		<xsl:variable name="regex1" select="$conditioning-variable-begin" as="xs:string"/>
-		<xsl:variable name="regex2" select="$conditioning-variable-end" as="xs:string"/>
-		<xsl:variable name="regex3" select="'number\(if\s\(//'" as="xs:string"/>
-		<xsl:variable name="regex4" select="'=''''\)\sthen\s''0''\selse\s//'" as="xs:string"/>
-		<xsl:variable name="regex5" select="'\)'" as="xs:string"/>
-		<xsl:variable name="regexA" select="concat($regex1,$variables[1],$regex2)"/>				
-		<xsl:variable name="regexB" select="concat($regex3,$variables[1],$regex4,$variables[1],$regex5)"/>
-		<xsl:variable name="regexC" select="concat('//',$variables[1])"/>
-		<xsl:variable name="expressionToReplace" select="concat('^',enoodt:get-business-name($source-context,$variables[1]))"/>
-		
 		<xsl:choose>
-			<xsl:when test="count($variables)=1">
-				<xsl:value-of select="replace(replace(replace($formula,
-					$regexA,$expressionToReplace),
-					$regexB,$expressionToReplace),
-					$regexC,$expressionToReplace)"/>
+			<xsl:when test="count($variables)=0">
+				<xsl:value-of select="$formula"/>
 			</xsl:when>
-			<xsl:otherwise>				
+			<xsl:otherwise>
+				<xsl:variable name="regexA" select="concat($conditioning-variable-begin,$variables[1],$conditioning-variable-end)"/>				
+				<xsl:variable name="regexB" select="concat('number\(if\s+\(//',$variables[1],'=''''\)\sthen\s+''0''\s+else\s+//',$variables[1],'\)')"/>
+				<xsl:variable name="regexC" select="concat('//',$variables[1])"/>
+				<xsl:variable name="expressionToReplace" select="concat('^',enoodt:get-business-name($source-context,$variables[1]))"/>				
 				<xsl:variable name="newFormula" select="replace(replace(replace($formula,
 					$regexA,$expressionToReplace),
 					$regexB,$expressionToReplace),
 					$regexC,$expressionToReplace)"/>
 				
 				<xsl:call-template name="replaceVariablesInFormula">
-					<xsl:with-param name="formula" select="$newFormula"></xsl:with-param>
-					<xsl:with-param name="variables" select="$variables[position() &gt; 1]"></xsl:with-param>
+					<xsl:with-param name="formula" select="$newFormula"/>
+					<xsl:with-param name="variables" select="$variables[position() &gt; 1]"/>
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>		
 	</xsl:template>
 
+	<xsl:template name="eno:printQuestionTitleWithInstruction" >
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
+		<xsl:variable name="new-context">
+			<SortedInstructions/>
+		</xsl:variable>
+		<xsl:variable name="driver-before" select="enoodt:get-before-question-title-instructions($source-context)"/>
+		<xsl:variable name="driver-after" select="enoodt:get-after-question-title-instructions($source-context)"/>
+		
+		
+		<!--<!-\- This new driver is applied on the same source-context -\->
+		<xsl:apply-templates select="$new-driver//xf-output" mode="model">
+			<xsl:with-param name="driver" select="enoodt:get-instructions($source-context)"/>
+		</xsl:apply-templates>-->
+
+		<xsl:if test="enoodt:get-label($source-context, $languages[1]) != ''">
+			<xsl:if test="enoodt:get-before-question-title-instructions($source-context) != ''">
+				<xsl:apply-templates select="$new-context" mode="model">
+					<xsl:with-param name="driver" select="$driver-before"/>
+				</xsl:apply-templates>			
+			</xsl:if>
+			<text:p text:style-name="Question">
+				<xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/>
+			</text:p>
+			<xsl:apply-templates select="$new-context" mode="model">
+				<xsl:with-param name="driver" select="$driver-after"/>
+			</xsl:apply-templates>
+		</xsl:if>
+	</xsl:template>
 </xsl:stylesheet>
