@@ -194,7 +194,7 @@
         <xsl:param name="language"/>
         <!-- We look for an instruction of 'Format' type -->
         <xsl:variable name="format-instruction">
-            <xsl:sequence select="enoddi:get-format-instruction($context,$language)"/>
+            <xsl:sequence select="enoddi:get-instructions-by-format($context,'format')"/>
         </xsl:variable>
         <xsl:choose>
             <!-- If there is no such instruction -->
