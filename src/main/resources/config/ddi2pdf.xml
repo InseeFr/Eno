@@ -7,4 +7,34 @@
 			<After>¤</After>
 		</ddi>
 	</TextConditioningVariable>
+	<Format>
+		<Columns>1</Columns>
+		<!-- Orientation : portrait or landsacape -->
+		<Orientation>portrait</Orientation>
+	</Format>
+	<HomePage>
+		<Folder>xslt/outputs/pdf</Folder>
+		<File>home-page.xsl</File>
+	</HomePage>
+	<Style>
+		<Folder>styles</Folder>
+		<File>style.xsl</File>
+	</Style>
+	<Images>
+        <Folder>img/pdf</Folder>
+    </Images>
+    <Rooster>
+    	<Row>
+    		<DefaultSize>15</DefaultSize>
+    	</Row>
+    </Rooster>
+    <TextArea>
+    	<Row>
+    		<DefaultSize>5</DefaultSize>
+    	</Row>
+    </TextArea>
+    <!-- BarCode type: Datamatrix ou 2D -->
+    <BarCode>
+    	<Type>Datamatrix</Type>
+    </BarCode>
 </Properties>
