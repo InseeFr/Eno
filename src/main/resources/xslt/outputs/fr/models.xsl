@@ -222,6 +222,36 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Template for Instance and Bind for SingleResponseQuestion.</xd:p>
+            <xd:p>The element is invisible and absorbed in its Response.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="SingleResponseQuestion[ancestor::Instance or ancestor::Bind]" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template for Resource and ResourceBind for SingleResponseQuestion.</xd:p>
+            <xd:p>The element is invisible, but sends its label to its Response.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="SingleResponseQuestion[ancestor::Resource or ancestor::ResourceBind]" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+            <xsl:with-param name="question-label" select="eno:serialize(enofr:get-label($source-context,$language))" tunnel="yes"/>
+            <xsl:with-param name="question-calculate-label" select="eno:serialize(enofr:get-calculate-text($source-context,$language,$instance-ancestor))" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Special template for Instance for the RowLoop driver.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -832,6 +862,8 @@
     <xsl:template match="Resource//*[not(ancestor::ResourceItem)]" mode="model" priority="-1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="question-label" tunnel="yes"/>
+        <xsl:param name="question-calculate-label" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
 
         <xsl:variable name="label" select="eno:serialize(enofr:get-label($source-context, $language))"/>
@@ -840,9 +872,23 @@
         <xsl:variable name="alert" select="eno:serialize(enofr:get-alert($source-context, $language))"/>
 
         <xsl:element name="{enofr:get-name($source-context)}">
-            <xsl:if test="$label!=''">
+            <xsl:if test="$label!='' or $question-label!=''">
                 <label>
                     <xsl:choose>
+                        <xsl:when test="$question-calculate-label != ''">
+                            <xsl:value-of select="'custom label'"/>
+                        </xsl:when>
+                        <xsl:when test="$question-label!=''">
+                            <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
+                            <xsl:choose>
+                                <xsl:when test="$css-class != ''">
+                                    <xsl:value-of select="replace($question-label,'block question',concat('block question ',$css-class))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$question-label"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
                         <xsl:when test="enofr:get-calculate-text($source-context,$language,$instance-ancestor) != ''">
                             <xsl:value-of select="'custom label'"/>
                         </xsl:when>
@@ -882,6 +928,8 @@
     <xsl:template match="Resource//*[starts-with(name(), 'xf-select') and not(ancestor::ResourceItem)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="question-label" tunnel="yes"/>
+        <xsl:param name="question-calculate-label" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
 
         <xsl:variable name="label" select="eno:serialize(enofr:get-label($source-context, $language))"/>
@@ -890,9 +938,23 @@
         <xsl:variable name="alert" select="eno:serialize(enofr:get-alert($source-context, $language))"/>
 
         <xsl:element name="{enofr:get-name($source-context)}">
-            <xsl:if test="$label!=''">
+            <xsl:if test="$label!='' or $question-label!=''">
                 <label>
                     <xsl:choose>
+                        <xsl:when test="$question-calculate-label != ''">
+                            <xsl:value-of select="'custom label'"/>
+                        </xsl:when>
+                        <xsl:when test="$question-label!=''">
+                            <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
+                            <xsl:choose>
+                                <xsl:when test="$css-class != ''">
+                                    <xsl:value-of select="replace($question-label,'block question',concat('block question ',$css-class))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="$question-label"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
                         <xsl:when test="enofr:get-calculate-text($source-context,$language,$instance-ancestor) != ''">
                             <xsl:value-of select="'custom label'"/>
                         </xsl:when>
@@ -1114,17 +1176,34 @@
     <xsl:template match="ResourceBind//*" mode="model" priority="-1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
+        <xsl:param name="question-calculate-label" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
 
         <xsl:variable name="calculate-label" select="enofr:get-calculate-text($source-context,$language,$instance-ancestor)"/>
 
-        <xsl:if test="$calculate-label != ''">
+        <xsl:if test="$calculate-label != '' or ($question-calculate-label != '' and (self::xf-input or self::xf-textarea or self::xf-select1 or self::xf-select)) ">
             <xsl:variable name="name" select="enofr:get-name($source-context)"/>
             <xf:bind id="{$name}-resource-{$language}-bind" name="{$name}-{$language}-resource"
                 ref="{$name}">
                 <xf:bind id="{$name}-resource-{$language}-bind-label"
-                    name="{$name}-{$language}-resource-label" ref="label"
-                    calculate="{$calculate-label}"/>
+                    name="{$name}-{$language}-resource-label" ref="label">
+                    <xsl:choose>
+                        <xsl:when test="$question-calculate-label">
+                            <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
+                            <xsl:choose>
+                                <xsl:when test="$css-class != ''">
+                                    <xsl:attribute name="calculate" select="replace($question-calculate-label,'block question',concat('block question ',$css-class))"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="calculate" select="$question-calculate-label"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="calculate" select="$calculate-label"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xf:bind>
             </xf:bind>
         </xsl:if>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -1264,7 +1343,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template for Body for the MultipleQuestion driver.</xd:p>
+            <xd:p>Template for Body for the MultipleQuestion or MultipleChoiceQuestion driver.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="Body//MultipleQuestion | Body//MultipleChoiceQuestion" mode="model">
@@ -1287,12 +1366,29 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Template for Body for the SingleResponseQuestion driver.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Body//SingleResponseQuestion" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="languages" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+            <xsl:with-param name="question-label" select="eno:serialize(enofr:get-label($source-context,$languages[1]))" tunnel="yes"/>
+            <xsl:with-param name="rich-question-label" select="eno:is-rich-content(enofr:get-label($source-context, $languages[1]))" tunnel="yes" as="xs:boolean"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Default template for Body for the drivers.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="Body//*" mode="model" priority="-1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
+        <xsl:param name="question-label" tunnel="yes"/>
+        <xsl:param name="rich-question-label" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="appearance" select="enofr:get-appearance($source-context)"/>
@@ -1311,16 +1407,26 @@
             <xsl:if test="$appearance != ''">
                 <xsl:attribute name="appearance" select="$appearance"/>
             </xsl:if>
-            <xsl:if test="$css-class != ''">
-                <xsl:attribute name="class" select="$css-class"/>
+            <xsl:if test="$css-class != '' or $question-label!=''">
+                <xsl:choose>
+                    <xsl:when test="$question-label!='' and $css-class!=''">
+                        <xsl:attribute name="class" select="concat('question ',$css-class)"/>
+                    </xsl:when>
+                    <xsl:when test="$question-label !=''">
+                        <xsl:attribute name="class" select="'question'"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="class" select="$css-class"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:if>
             <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
             <xsl:if test="not($length='')">
                 <xsl:attribute name="xxf:maxlength" select="$length"/>
             </xsl:if>
-            <xsl:if test="$label != ''">
+            <xsl:if test="$label != '' or $question-label!= ''">
                 <xf:label ref="$form-resources/{$name}/label">
-                    <xsl:if test="eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
+                    <xsl:if test="$rich-question-label or eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
                         <xsl:attribute name="mediatype">text/html</xsl:attribute>
                     </xsl:if>
                 </xf:label>

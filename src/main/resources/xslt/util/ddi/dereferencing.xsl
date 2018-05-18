@@ -291,7 +291,7 @@
     <xsl:template match="l:Variable">
         <xsl:copy-of select="."/>
     </xsl:template>
-    
+    <!--
     <xd:doc>
         <xd:desc>
             <xd:p>Instruction are not allowed in Category for DDI 3.2. This template allows to insert tooltips into arrays' labels</xd:p>
@@ -324,6 +324,24 @@
                 </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+-->
+    <xsl:template match="*[name()='r:Label' or name()='d:DisplayText' or name()='d:InstructionText' or name()='d:QuestionText'][descendant::xhtml:a]">
+        <xsl:variable name="ref" as="xs:string *">
+            <xsl:for-each select="descendant::xhtml:a">
+                <xsl:value-of select="replace(@href,'#','')"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="existing-tooltip" select="following-sibling::d:InterviewerInstructionReference/r:ID | following-sibling::d:InterviewerInstructionReference/d:Instruction/r:ID"/>
+        <xsl:copy-of select="."/>
+        
+        <xsl:for-each select="//d:InterviewerInstructionScheme/d:Instruction[d:InstructionName/r:String='tooltip' and descendant::*/@id=$ref]">
+            <xsl:if test="not(r:ID = $existing-tooltip)">
+                <d:InterviewerInstructionReference>
+                    <xsl:copy-of select="."/>
+                </d:InterviewerInstructionReference>
+            </xsl:if>
+        </xsl:for-each>
     </xsl:template>
 
 </xsl:stylesheet>
