@@ -267,6 +267,7 @@
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
+			<xsl:with-param name="noInstructions" select="'YES'" tunnel="yes"/>
 		</xsl:apply-templates>
 		
 	</xsl:template>
@@ -318,6 +319,7 @@
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
+			<xsl:with-param name="noInstructions" select="'YES'" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
 	
@@ -362,6 +364,7 @@
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 			<xsl:with-param name="typeResponse" select="$typeResponse" tunnel="yes"/>
+			<xsl:with-param name="noInstructions" select="'YES'" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
 	
@@ -405,6 +408,7 @@
 		<!-- Go to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
+			<xsl:with-param name="noInstructions" select="'YES'" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
 	
@@ -466,6 +470,7 @@
 		<!-- Go to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
+			<xsl:with-param name="noInstructions" select="'YES'" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
 	
@@ -483,7 +488,7 @@
 		<xsl:variable name="row-span" select="number(enoodt:get-rowspan($source-context))"/>
 		
 		
-			<!--<xsl:if test="$ancestorTable!=''">-->
+			<xsl:if test="$ancestorTable!=''">
 				<table:table-cell table:number-rows-spanned="{$row-span}" 
 					table:number-columns-spanned="{$col-span}">
 					<xsl:variable name="label" select="enoodt:get-label($source-context,$languages)"/>
@@ -508,10 +513,7 @@
 						<table:covered-table-cell/>
 					</xsl:for-each>
 				</xsl:if>
-				
-			<!--</xsl:if>-->
-		
-		
+			</xsl:if>
 	</xsl:template>
 	
 	<xd:doc>
@@ -610,7 +612,7 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on the xf-output driver.</xd:p>
+			<xd:p>Match on the SortedInstructions//xf-output driver.</xd:p>
 			<xd:p>It writes the instruction text, with a different styles for comments, instructions, warning and help.</xd:p>
 		</xd:desc>
 	</xd:doc>
@@ -640,6 +642,49 @@
 				<text:p text:style-name="Instruction"><xsl:value-of select="$instructionFormat"/></text:p>
 			</xsl:otherwise>-->
 		</xsl:choose>
+		<!-- Got to the children -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the xf-output driver.</xd:p>
+			<xd:p>It writes the instruction text, with a different styles for comments, instructions, warning and help.</xd:p>
+			<xd:p>It works for all drivers except for drivers whose contain a question.</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="xf-output" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="noInstructions" tunnel="yes"/>
+		
+		<xsl:if test="$noInstructions != 'YES'">
+		
+			<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>
+			<xsl:variable name="instructionFormat" select="enoodt:get-format($source-context)"/>
+			<xsl:variable name="instructionLabel" select="enoodt:get-label($source-context, $languages[1])"/>
+			<xsl:variable name="instructionFormatMaj" select="concat(upper-case(substring($instructionFormat,1,1)),
+				substring($instructionFormat,2))" as="xs:string"></xsl:variable>
+		
+			<xsl:choose>
+				<xsl:when test="$instructionFormat='comment'">
+					<text:p text:style-name="Comment"><xsl:value-of select="$instructionLabel"/></text:p>
+				</xsl:when>
+				<xsl:when test="$instructionFormat='instruction'">
+					<text:p text:style-name="Instruction"><xsl:value-of select="$instructionLabel"/></text:p>
+				</xsl:when>
+				<xsl:when test="$instructionFormat='warning'">
+					<text:p text:style-name="Warning"><xsl:value-of select="$instructionLabel"/></text:p>
+				</xsl:when>
+				<xsl:when test="$instructionFormat='help'">
+					<text:p text:style-name="Help"><xsl:value-of select="$instructionLabel"/></text:p>
+				</xsl:when>
+				<!--<xsl:otherwise>
+					<text:p text:style-name="Instruction"><xsl:value-of select="$instructionFormat"/></text:p>
+				</xsl:otherwise>-->
+			</xsl:choose>
+		</xsl:if>
 		<!-- Got to the children -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -797,6 +842,12 @@
 		</xsl:choose>		
 	</xsl:template>
 
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Template named:eno:printQuestionTitleWithInstruction.</xd:p>
+			<xd:p>It prints the question label and its instructions.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:template name="eno:printQuestionTitleWithInstruction" >
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enoodt:get-form-languages($source-context)" as="xs:string +"/>

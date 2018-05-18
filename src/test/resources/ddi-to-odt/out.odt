@@ -182,22 +182,22 @@
          <text:p text:style-name="Comment">This module asks about your general knowledge of the Simpsons city</text:p>
          <text:p text:style-name="QuestionName">[CITY]</text:p>
          <text:p text:style-name="Format">Car 5 - liste de modalités</text:p>
-         <text:p text:style-name="QuestionSelect">➡ 1. In which city do the Simpsons reside?</text:p>
+         <text:p text:style-name="Question">➡ 1. In which city do the Simpsons reside?</text:p>
+         <text:p text:style-name="Instruction">One possible answer</text:p>
          <text:p text:style-name="CodeItem">00001 - Springfield</text:p>
          <text:p text:style-name="CodeItem">00002 - Shelbyville</text:p>
          <text:p text:style-name="CodeItem">00003 - Seinfeld</text:p>
-         <text:p text:style-name="Instruction">One possible answer</text:p>
          <text:p text:style-name="QuestionName">[MAYOR]</text:p>
          <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
          <text:p text:style-name="Question">➡ 2. Who is the Simpsons city mayor?</text:p>
+         <text:p text:style-name="Instruction">Only one possible answer</text:p>
          <text:p text:style-name="CodeItem">1 - Constance Harm</text:p>
          <text:p text:style-name="CodeItem">2 - Timothy Lovejoy</text:p>
          <text:p text:style-name="CodeItem">3 - Joe Quimby</text:p>
          <text:p text:style-name="CodeItem">4 - Poochie</text:p>
-         <text:p text:style-name="Instruction">Only one possible answer</text:p>
          <text:p text:style-name="QuestionName">[STATE]</text:p>
          <text:p text:style-name="Format">Car 2 - liste de modalités</text:p>
-         <text:p text:style-name="QuestionSelect">➡ 3. In which state do The Simpsons reside?</text:p>
+         <text:p text:style-name="Question">➡ 3. In which state do The Simpsons reside?</text:p>
          <text:p text:style-name="CodeItem">1 - Washington</text:p>
          <text:p text:style-name="CodeItem">2 - Kentucky</text:p>
          <text:p text:style-name="CodeItem">3 - Ohio</text:p>
@@ -214,6 +214,7 @@
          <text:p text:style-name="Module">III - Characters</text:p>
          <text:p text:style-name="QuestionName">[PET]</text:p>
          <text:p text:style-name="Question">➡ 1. What are the pet names that the Simpsons family had?</text:p>
+         <text:p text:style-name="Instruction">Several possible answers</text:p>
          <table:table table:name="j334akov">
             <table:table-column/>
             <table:table-column/>
@@ -250,7 +251,6 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
-         <text:p text:style-name="Instruction">Several possible answers</text:p>
          <text:p text:style-name="QuestionName">[ICE_FLAVOUR]</text:p>
          <text:p>Car 1</text:p>
          <text:p text:style-name="Question">➡ 2. Does Jay like the following ice cream flavours?</text:p>
@@ -575,6 +575,7 @@
          <text:p text:style-name="QuestionName">[TRAVEL]</text:p>
          <text:p text:style-name="Question">➡ 3. Which of the following means of transport were used by the hero and in which
 					country? </text:p>
+         <text:p text:style-name="Instruction">Several answers possible: check off all the relevant boxes </text:p>
          <table:table table:name="j6p2lwuj">
             <table:table-column/>
             <table:table-column/>
@@ -697,7 +698,6 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
-         <text:p text:style-name="Instruction">Several answers possible: check off all the relevant boxes </text:p>
          <text:p text:style-name="Module">V - Favourite characters</text:p>
          <text:p text:style-name="QuestionName">[FAVOURITE_CHARACTERS]</text:p>
          <text:p text:style-name="Question">➡ 1. Please, complete the following grid with your favourite characters</text:p>
