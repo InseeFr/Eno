@@ -200,11 +200,11 @@
         <xsl:param name="language"/>
         
         <xsl:variable name="ddi-label" select="enoddi:get-label($context,$language)"/>
-        <xsl:variable name="tooltip" select="enoddi:get-instructions-by-format($context,'tooltip')"/>
+        <xsl:variable name="tooltip" select="enoddi:get-instructions-by-format($context,'tooltip')" as="node() *"/>
         <xsl:variable name="other-instructions" select="enoddi:get-instructions-by-format($context,'instruction,comment,help')" as="node()*"/>
         
         <xsl:choose>
-            <xsl:when test="(name($context)='d:QuestionItem' or name($context)='d:QuestionGrid') and ($other-instructions != '' or $tooltip != '')">
+            <xsl:when test="(name($context)='d:QuestionItem' or name($context)='d:QuestionGrid') and ($other-instructions/* or $tooltip/*)">
                 <xsl:element name="xhtml:p">
                     <xsl:element name="xhtml:span">
                         <xsl:attribute name="class">
@@ -218,29 +218,29 @@
                             <xsl:choose>
                                 <xsl:when test="$ddi-label/name()='xhtml:p'">
                                     <xsl:apply-templates select="$ddi-label/* | $ddi-label/text()" mode="lang-choice">
-                                        <xsl:with-param name="tooltips" select="$tooltip[descendant-or-self::*/@id]" tunnel="yes"/>
+                                        <xsl:with-param name="id-tooltips" select="$tooltip[descendant-or-self::*/@id]" as="node() *" tunnel="yes"/>
                                     </xsl:apply-templates>
                                 </xsl:when>
                                 <xsl:otherwise>
                                        <xsl:apply-templates select="$ddi-label" mode="lang-choice">
-                                           <xsl:with-param name="tooltips" select="$tooltip[descendant-or-self::*/@id]" tunnel="yes"/>
+                                           <xsl:with-param name="id-tooltips" select="$tooltip[descendant-or-self::*/@id]" as="node() *" tunnel="yes"/>
                                        </xsl:apply-templates>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:variable>
                         <xsl:copy-of select="$original-label"/>
-                        <xsl:for-each select="$tooltip[not(@id) or not(concat('#',@id) = $ddi-label//xhtml:a/@href)]">
+                        <xsl:for-each select="$tooltip[not(@id) or not(concat('#',descendant-or-self::*/@id) = $ddi-label//xhtml:a/@href)]">
                             <xsl:variable name="tooltip-label" select="enoddi:get-label(.,$language)"/>
                             <xsl:variable name="title">
                                 <xsl:choose>
                                     <xsl:when test="$tooltip-label/name()='xhtml:p'">
                                         <xsl:apply-templates select="$tooltip-label/* | $tooltip-label/text()" mode="lang-choice">
-                                            <xsl:with-param name="tooltips" select="$tooltip[descendant-or-self::*/@id]" tunnel="yes"/>
+                                            <xsl:with-param name="id-tooltips" select="$tooltip[descendant-or-self::*/@id]" as="node() *" tunnel="yes"/>
                                         </xsl:apply-templates>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:apply-templates select="$tooltip-label" mode="lang-choice">
-                                            <xsl:with-param name="tooltips" select="$tooltip[descendant-or-self::*/@id]" tunnel="yes"/>
+                                            <xsl:with-param name="id-tooltips" select="$tooltip[descendant-or-self::*/@id]" as="node() *" tunnel="yes"/>
                                         </xsl:apply-templates>
                                     </xsl:otherwise>
                                 </xsl:choose>
@@ -269,12 +269,12 @@
                             <xsl:choose>
                                 <xsl:when test="$instruction-label/name()='xhtml:p'">
                                     <xsl:apply-templates select="$instruction-label/* | $instruction-label/text()" mode="lang-choice">
-                                        <xsl:with-param name="tooltips" select="$tooltip[descendant-or-self::*/@id]" tunnel="yes"/>
+                                        <xsl:with-param name="id-tooltips" select="$tooltip[descendant-or-self::*/@id]" as="node() *" tunnel="yes"/>
                                     </xsl:apply-templates>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:apply-templates select="$instruction-label" mode="lang-choice">
-                                        <xsl:with-param name="tooltips" select="$tooltip[descendant-or-self::*/@id]" tunnel="yes"/>
+                                        <xsl:with-param name="id-tooltips" select="$tooltip[descendant-or-self::*/@id]" as="node() *" tunnel="yes"/>
                                     </xsl:apply-templates>
                                 </xsl:otherwise>
                             </xsl:choose>
@@ -282,33 +282,39 @@
                     </xsl:for-each>
                 </xsl:element>
             </xsl:when>
-            <xsl:when test="$tooltip != ''">
-                <xsl:apply-templates select="$ddi-label" mode="lang-choice">
-                    <xsl:with-param name="tooltips" select="$tooltip[descendant-or-self::*/@id]" tunnel="yes"/>
-                </xsl:apply-templates>
-                <xsl:for-each select="$tooltip[not(descendant-or-self::*/@id) or not(concat('#',descendant-or-self::*/@id) = $ddi-label//xhtml:a/@href)]">
-                    <xsl:variable name="tooltip-label" select="enoddi:get-label(.,$language)"/>
-                    <xsl:variable name="title">
-                        <xsl:choose>
-                            <xsl:when test="$tooltip-label/name()='xhtml:p'">
-                                <xsl:apply-templates select="$tooltip-label/* | $tooltip-label/text()" mode="lang-choice">
-                                    <xsl:with-param name="tooltips" select="$tooltip[descendant-or-self::*/@id]" tunnel="yes"/>
-                                </xsl:apply-templates>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:apply-templates select="$tooltip-label" mode="lang-choice">
-                                    <xsl:with-param name="tooltips" select="$tooltip[descendant-or-self::*/@id]" tunnel="yes"/>
-                                </xsl:apply-templates>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <xsl:element name="xhtml:span">
-                        <xsl:attribute name="title" select="normalize-space($title)"/>
-                        <xsl:text>&#160;</xsl:text>
-                        <img src="/img/Help-browser.svg.png"/>
-                        <xsl:text>&#160;</xsl:text>
-                    </xsl:element>
-                </xsl:for-each>
+            <xsl:when test="$tooltip/*">
+                <xsl:element name="xhtml:p">
+                    <!--<xsl:if test="$tooltip[descendant-or-self::*/@id][1]">
+                        <xsl:copy-of select="enoddi:get-label($tooltip[descendant-or-self::*/@id][1],$language)"/>    
+                    </xsl:if>-->
+                    <xsl:apply-templates select="$ddi-label" mode="lang-choice">
+                        <xsl:with-param name="id-tooltips" select="$tooltip[descendant-or-self::*/@id]" as="node() *" tunnel="yes"/>
+                    </xsl:apply-templates>
+                    
+                    <xsl:for-each select="$tooltip[not(descendant-or-self::*/@id) or not(concat('#',descendant-or-self::*/@id) = $ddi-label//xhtml:a/@href)]">
+                        <xsl:variable name="tooltip-label" select="enoddi:get-label(.,$language)"/>
+                        <xsl:variable name="title">
+                            <xsl:choose>
+                                <xsl:when test="$tooltip-label/name()='xhtml:p'">
+                                    <xsl:apply-templates select="$tooltip-label/* | $tooltip-label/text()" mode="lang-choice">
+                                        <xsl:with-param name="id-tooltips" select="$tooltip[descendant-or-self::*/@id]" as="node() *" tunnel="yes"/>
+                                    </xsl:apply-templates>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:apply-templates select="$tooltip-label" mode="lang-choice">
+                                        <xsl:with-param name="id-tooltips" select="$tooltip[descendant-or-self::*/@id]" as="node() *" tunnel="yes"/>
+                                    </xsl:apply-templates>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:element name="xhtml:span">
+                            <xsl:attribute name="title" select="normalize-space($title)"/>
+                            <xsl:text>&#160;</xsl:text>
+                            <img src="/img/Help-browser.svg.png"/>
+                            <xsl:text>&#160;</xsl:text>
+                        </xsl:element>
+                    </xsl:for-each>
+                </xsl:element>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:sequence select="$ddi-label"/>
@@ -316,9 +322,10 @@
         </xsl:choose>
     </xsl:function>
 
-    <xsl:template match="*[(ancestor::xhtml:p or ancestor::r:Content or ancestor::r:String)]" priority="2" mode="lang-choice">
+    <xsl:template match="*[(ancestor::xhtml:p or ancestor::r:Content or ancestor::r:String)] 
+        | @*[(ancestor::xhtml:p or ancestor::r:Content or ancestor::r:String)]" priority="2" mode="lang-choice">
         <xsl:copy>
-            <xsl:apply-templates select="*|text()" mode="lang-choice"/>
+            <xsl:apply-templates select="@*|*|text()" mode="lang-choice"/>
         </xsl:copy>
     </xsl:template>
     <xsl:template match="node()[r:Content or r:String or xhtml:p][descendant::xhtml:a]" priority="2" mode="lang-choice">
@@ -342,12 +349,12 @@
 
     <xsl:template match="xhtml:a" priority="5" mode="lang-choice">
         <xsl:param name="language" tunnel="yes"/>
-        <xsl:param name="tooltips" as="node()*" tunnel="yes"/>
+        <xsl:param name="id-tooltips" as="node() *" tunnel="yes"/>
         
         <xsl:choose>
-            <xsl:when test="@href=concat('#',$tooltips/descendant-or-self::*/@id)">
+            <xsl:when test="@href=concat('#',$id-tooltips/descendant-or-self::*/@id)">
                 <xsl:variable name="href" select="substring-after(@href,'#')"/>
-                <xsl:variable name="tooltip-label" select="enoddi:get-label($tooltips[descendant-or-self::*/@id=$href],$language)"/>
+                <xsl:variable name="tooltip-label" select="enoddi:get-label($id-tooltips[descendant-or-self::*/@id=$href],$language)"/>
                 <xsl:variable name="title">
                     <xsl:choose>
                         <xsl:when test="$tooltip-label/name()='xhtml:p'">
@@ -366,7 +373,12 @@
                 </xsl:element>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="."/>
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|*|text()" mode="lang-choice"/>
+                    <xsl:value-of select="'toto'"/>
+                    <xsl:value-of select="$id-tooltips"/>
+                </xsl:copy>
+                <!--<xsl:copy-of select="."/>-->
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
