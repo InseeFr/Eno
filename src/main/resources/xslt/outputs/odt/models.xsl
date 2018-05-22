@@ -808,7 +808,6 @@
 				
 	</xsl:template>
 	
-
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Template named:replaceVariablesInFormula.</xd:p>
