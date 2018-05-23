@@ -570,7 +570,8 @@
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-instructions-by-format">
         <xsl:param name="format" select="'#all'" tunnel="yes"/>
-        <xsl:sequence select="d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true()) else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
+        <xsl:sequence select="d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true())
+            else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>        
     </xsl:template>
 
     <xd:doc>
@@ -582,6 +583,22 @@
         <xsl:param name="format" select="'#all'" tunnel="yes"/>
         <xsl:sequence select="r:CategoryReference/l:Category/d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true()) 
             else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
+        <xsl:choose>
+            <!-- MCQ -->
+            <xsl:when test="parent::r:CodeReference/ancestor::d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2') 
+                and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])] 
+                and parent::d:GridResponseDomain and following-sibling::d:GridAttachment//d:SelectDimension]">
+                <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension"/>
+                <xsl:sequence select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]/
+                    r:CategoryReference/l:Category/d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true()) 
+                    else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="r:CategoryReference/l:Category/d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true()) 
+                    else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
 
 
