@@ -375,7 +375,7 @@
                         <xsl:attribute name="level" select="$alert-level"/>
                     </xsl:if>
                     <xsl:attribute name="value">
-                        <xsl:if test="enofr:get-readonly-ancestors($source-context)!=''">
+                        <xsl:if test="enofr:get-readonly-ancestors($source-context) != ''">
                             <xsl:for-each select="enofr:get-readonly-ancestors($source-context)">
                                 <xsl:value-of select="concat('not(',.,') or ')"/>
                             </xsl:for-each>
@@ -1040,7 +1040,7 @@
         <item>
             <label>
                 <xsl:choose>
-                    <xsl:when test="$image=''">
+                    <xsl:when test="$image = ''">
                         <xsl:value-of select="eno:serialize(enofr:get-label($source-context, $language))"/>
                     </xsl:when>
                     <xsl:when test="starts-with($image,'http')">
@@ -1511,7 +1511,7 @@
                 </xsl:element>
             </xsl:for-each>
         </xsl:element>
-        <xsl:if test="not($suffix='')">
+        <xsl:if test="not($suffix = '')">
             <xsl:element name="xhtml:span">
                 <xsl:attribute name="class" select="'suffixe'"/>
                 <xsl:copy-of select="$suffix" copy-namespaces="no"/>
@@ -1565,7 +1565,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
 
-        <xsl:if test="enofr:get-image($source-context) !='' or eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
+        <xsl:if test="enofr:get-image($source-context) != '' or eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
             <xsl:attribute name="mediatype">text/html</xsl:attribute>
         </xsl:if>
     </xsl:template>
@@ -1671,6 +1671,7 @@
             <xhtml:tbody>
                 <!-- if the loop is in a loop, instance-ancestor helps choosing the good ancestor loop instance -->
                 <xf:repeat nodeset="{$instance-ancestor}{$name}-RowLoop" id="{$name}-RowLoop">
+                    <xf:var name="{$name}-RowLoop-position" value="position()"/>
                     <!-- the table has a repeated zone that may have more than one line -->
                     <xsl:for-each select="enofr:get-body-lines($source-context)">
                         <xhtml:tr>
@@ -1721,7 +1722,7 @@
         <xhtml:th colspan="{enofr:get-colspan($source-context)}"
             rowspan="{enofr:get-rowspan($source-context)}">
             <xsl:if
-                test="$depth!='1' and $depth!=''">
+                test="$depth != '1' and $depth != ''">
                 <xsl:attribute name="class" select="concat('depth',$depth)"/>
             </xsl:if>
             <!-- A new virtual tree is created as driver -->
@@ -1820,6 +1821,7 @@
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="loop-name" select="enofr:get-name($source-context)"/>
         <xf:repeat nodeset="{$instance-ancestor}{$loop-name}" id="{$loop-name}">
+            <xf:var name="{$loop-name}-position" value="position()"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for Loops, for which several instances are possible -->
@@ -1852,7 +1854,7 @@
             </xsl:if>
             <xsl:attribute name="class" select="'double-duration'"/>
             <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
-            <xsl:if test="not($length='')">
+            <xsl:if test="not($length = '')">
                 <xsl:attribute name="xxf:maxlength" select="$length"/>
             </xsl:if>
             <xsl:if test="enofr:get-label($source-context, $languages[1])/node()">
