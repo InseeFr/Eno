@@ -155,49 +155,49 @@
          <text:p text:style-name="Module">I - Introduction</text:p>
          <text:p text:style-name="Comment">We're going to test your knowledge about the simpsons series.Welcome in the simspons world!</text:p>
          <text:p text:style-name="QuestionName">[COMMENT]</text:p>
-         <text:p text:style-name="Format">Car 500</text:p>
          <text:p text:style-name="Question">➡ 1. Before starting, do you have any comments about the Simpsons family?</text:p>
+         <text:p text:style-name="Format">Car 500</text:p>
          <text:p text:style-name="QuestionName">[READY]</text:p>
-         <text:p text:style-name="Format">Booléen</text:p>
          <text:p text:style-name="Question">➡ 2. Are you ready?</text:p>
+         <text:p text:style-name="Format">Booléen</text:p>
          <text:p text:style-name="Control">Filtre : </text:p>
          <text:p text:style-name="Control">not( ^READY != '1')</text:p>
          <text:p text:style-name="SubModule">General knowledge of the series</text:p>
          <text:p text:style-name="QuestionName">[PRODUCER]</text:p>
-         <text:p text:style-name="Format">Car 30</text:p>
          <text:p text:style-name="Question">➡ 3. Who is the producer?</text:p>
+         <text:p text:style-name="Format">Car 30</text:p>
          <text:p text:style-name="QuestionName">[SEASON_NUMBER]</text:p>
-         <text:p text:style-name="Format">num 0..99</text:p>
          <text:p text:style-name="Question">➡ 4. What is the current season number?</text:p>
+         <text:p text:style-name="Format">num 0..99</text:p>
          <text:p text:style-name="QuestionName">[DATEFIRST]</text:p>
-         <text:p text:style-name="Format">date</text:p>
          <text:p text:style-name="Question">➡ 5. When was the first episode of the Simpsons?</text:p>
          <text:p text:style-name="Comment">For your information, the date of the last broadcast was on
 						øLAST_BROADCASTø</text:p>
+         <text:p text:style-name="Format">date</text:p>
          <text:p text:style-name="QuestionName">[AUDIENCE_SHARE]</text:p>
-         <text:p text:style-name="Format">num 0..99 - 1 chiffre(s) après la virgule</text:p>
          <text:p text:style-name="Question">➡ 6. In your opinion, how much is the part of audience share in US for the 2016
 					season? </text:p>
+         <text:p text:style-name="Format">num 0..99 - 1 chiffre(s) après la virgule</text:p>
          <text:p text:style-name="Module">II - Simpsons' city</text:p>
          <text:p text:style-name="Comment">This module asks about your general knowledge of the Simpsons city</text:p>
          <text:p text:style-name="QuestionName">[CITY]</text:p>
-         <text:p text:style-name="Format">Car 5 - liste de modalités</text:p>
          <text:p text:style-name="Question">➡ 1. In which city do the Simpsons reside?</text:p>
          <text:p text:style-name="Instruction">One possible answer</text:p>
+         <text:p text:style-name="Format">Car 5 - liste de modalités</text:p>
          <text:p text:style-name="CodeItem">00001 - Springfield</text:p>
          <text:p text:style-name="CodeItem">00002 - Shelbyville</text:p>
          <text:p text:style-name="CodeItem">00003 - Seinfeld</text:p>
          <text:p text:style-name="QuestionName">[MAYOR]</text:p>
-         <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
          <text:p text:style-name="Question">➡ 2. Who is the Simpsons city mayor?</text:p>
          <text:p text:style-name="Instruction">Only one possible answer</text:p>
+         <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
          <text:p text:style-name="CodeItem">1 - Constance Harm</text:p>
          <text:p text:style-name="CodeItem">2 - Timothy Lovejoy</text:p>
          <text:p text:style-name="CodeItem">3 - Joe Quimby</text:p>
          <text:p text:style-name="CodeItem">4 - Poochie</text:p>
          <text:p text:style-name="QuestionName">[STATE]</text:p>
-         <text:p text:style-name="Format">Car 2 - liste de modalités</text:p>
          <text:p text:style-name="Question">➡ 3. In which state do The Simpsons reside?</text:p>
+         <text:p text:style-name="Format">Car 2 - liste de modalités</text:p>
          <text:p text:style-name="CodeItem">1 - Washington</text:p>
          <text:p text:style-name="CodeItem">2 - Kentucky</text:p>
          <text:p text:style-name="CodeItem">3 - Ohio</text:p>
@@ -599,7 +599,7 @@
                   <text:p text:style-name="ColumnHeader">France</text:p>
                </table:table-cell>
                <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
-                  <text:p text:style-name="ColumnHeader">Other country  </text:p>
+                  <text:p text:style-name="ColumnHeader">Other country</text:p>
                </table:table-cell>
                <table:table-cell table:number-rows-spanned="1" table:number-columns-spanned="1">
                   <text:p text:style-name="ColumnHeader">Other planet</text:p>
@@ -797,8 +797,8 @@
          <text:p>Nb line(s) maximum allowed : 10</text:p>
          <text:p text:style-name="Module">VI - Comment</text:p>
          <text:p text:style-name="QuestionName">[SURVEY_COMMENT]</text:p>
-         <text:p text:style-name="Format">Car 255</text:p>
          <text:p text:style-name="Question">➡ 1. Do you have any comment about the survey?</text:p>
+         <text:p text:style-name="Format">Car 255</text:p>
          <text:p/>
          <text:p text:style-name="CalculatedVariableTitle">Calcul de la variable SUM_EXPENSES Label : [SUM_EXPENSES]</text:p>
          <text:p text:style-name="CalculatedVariableContent">Formule de calcul : SUM_EXPENSES = ^PERCENTAGE_EXPENSES11 + ^PERCENTAGE_EXPENSES21 + ^PERCENTAGE_EXPENSES31 +
