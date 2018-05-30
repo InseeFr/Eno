@@ -28,10 +28,10 @@
 	<property name="javac1.8" location="C:/Program Files/Java/jdk1.8.0_101/bin/javac"/>
 
 	<target name="compile-TableColumnSizeProcessor">
-		<mkdir dir="${root-folder}/target/build/TableColumnSizeProcessor/classes"/>
+		<mkdir dir="${root-folder}/target/classes"/>
 		<javac executable="${javac1.8}" fork="yes"
 			srcdir="${root-folder}/src/main/java/fr/insee/eno/plugins/tableColumnSizeProcessor/calculator"
-			destdir="${root-folder}/target/build/TableColumnSizeProcessor/classes"
+			destdir="${root-folder}/target/classes"
 			includeantruntime="false">
 			<classpath refid="classpath"/>
 		</javac>
