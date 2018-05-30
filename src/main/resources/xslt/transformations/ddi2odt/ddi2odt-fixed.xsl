@@ -183,7 +183,7 @@
         </xsl:choose>
     </xsl:template>
     
-    <xd:doc>
+    <!--<xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
             <xd:p>It uses different DDI functions to do this job.</xd:p>
@@ -192,39 +192,39 @@
     <xsl:function name="enoodt:get-hint">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
-        <!-- We look for an instruction of 'Format' type -->
+        <!-\- We look for an instruction of 'Format' type -\->
         <xsl:variable name="format-instruction">
             <xsl:sequence select="enoddi:get-format-instruction($context,$language)"/>
         </xsl:variable>
         <xsl:choose>
-            <!-- If there is no such instruction -->
+            <!-\- If there is no such instruction -\->
             <xsl:when test="not($format-instruction/*)">
-                <!-- We look for the container of the element -->
+                <!-\- We look for the container of the element -\->
                 <xsl:variable name="question-type">
                     <xsl:value-of select="enoddi:get-container($context)"/>
                 </xsl:variable>
-                <!-- If it is a grid we do not want the hint to be displayed for n fields. If it is a question, we can display this info -->
+                <!-\- If it is a grid we do not want the hint to be displayed for n fields. If it is a question, we can display this info -\->
                 <xsl:if test="$question-type='question'">
                     <xsl:variable name="type">
                         <xsl:value-of select="enoddi:get-type($context)"/>
                     </xsl:variable>
-                    <!-- If it is number, we display this hint -->
+                    <!-\- If it is number, we display this hint -\->
                     <xsl:if test="$type='number'">
                         <xsl:value-of select="concat($labels-resource/Languages/Language[@xml:lang=$language]/Hint/Number,enoddi:get-maximum($context))"/>
                     </xsl:if>
-                    <!-- If it is a date, we display this hint -->
+                    <!-\- If it is a date, we display this hint -\->
                     <xsl:if test="$type='date'">
                         <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Hint/Date"/>
                     </xsl:if>
                 </xsl:if>
             </xsl:when>
-            <!-- If there is such an instruction, it is used for the hint xforms element -->
+            <!-\- If there is such an instruction, it is used for the hint xforms element -\->
             <xsl:when test="$format-instruction/*">
                 <xsl:sequence select="$format-instruction/*"/>
             </xsl:when>
         </xsl:choose>
     </xsl:function>
-    
+    -->
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms alert for the context on which it is applied.</xd:p>
