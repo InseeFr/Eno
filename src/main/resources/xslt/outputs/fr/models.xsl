@@ -211,7 +211,7 @@
             <xd:p>The element is created and we continue to parse the input tree next within the created element.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Instance//*[name() = ('xf-group', 'Module', 'QuestionLoop')]" mode="model">
+    <xsl:template match="Instance//*[name() = ('xf-group', 'Module')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -258,13 +258,33 @@
     <xsl:template match="Instance//RowLoop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:element name="{$name}">
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>
+        <xsl:element name="{$name}-Container">
+            <xsl:element name="{$name}">
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:element>            
         </xsl:element>
         <xsl:element name="{$name}-Count">
             <xsl:value-of select="enofr:get-minimum-lines($source-context)"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template for Instance for those drivers.</xd:p>
+            <xd:p>The element is created and we continue to parse the input tree next within the created element.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Instance//QuestionLoop" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:element name="{$name}-Container">
+            <xsl:element name="{$name}">
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:element>
         </xsl:element>
     </xsl:template>
 
@@ -760,14 +780,12 @@
         <xsl:param name="instance-ancestor" tunnel="yes"/>
 
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xf:bind id="{$name}-bind" name="{$name}" nodeset="{$name}">
+        <xf:bind id="{$name}-bind" name="{$name}" nodeset="{$name}-Container/{$name}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
                 <xsl:with-param name="instance-ancestor"
-                    select="concat($instance-ancestor,'*[name()=''',$name,
-                    ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
-                    $name,''']/preceding-sibling::*)]//')"
+                    select="concat($instance-ancestor,'*[name()=''',$name,''' and position()= $',$name,'-position ]//')"
                     tunnel="yes"/>
             </xsl:apply-templates>
         </xf:bind>
@@ -1159,10 +1177,8 @@
             <xsl:with-param name="driver" select="." tunnel="yes"/>
             <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
             <xsl:with-param name="instance-ancestor"
-                    select="concat($instance-ancestor,'*[name()=''',$name,
-                    ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
-                    $name,''']/preceding-sibling::*)]//')"
-                    tunnel="yes"/>
+                select="concat($instance-ancestor,'*[name()=''',$name,''' and position()= $',$name,'-position ]//')"
+                tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
 
@@ -1670,21 +1686,18 @@
             </xhtml:thead>
             <xhtml:tbody>
                 <!-- if the loop is in a loop, instance-ancestor helps choosing the good ancestor loop instance -->
-                <xf:repeat nodeset="{$instance-ancestor}{$name}-RowLoop" id="{$name}-RowLoop">
+                <xf:repeat id="{$name}-RowLoop" nodeset="{$instance-ancestor}{$name}-RowLoop">
                     <xf:var name="{$name}-RowLoop-position" value="position()"/>
                     <!-- the table has a repeated zone that may have more than one line -->
                     <xsl:for-each select="enofr:get-body-lines($source-context)">
                         <xhtml:tr>
-                            <xsl:apply-templates select="enofr:get-body-line($source-context, position())"
-                                mode="source">
+                            <xsl:apply-templates select="enofr:get-body-line($source-context, position())" mode="source">
                                 <xsl:with-param name="driver"
                                     select="$ancestors//*[not(child::*) and not(name() = 'driver')]"
                                     tunnel="yes"/>
                                 <!-- the absolute address of the element in enriched for TableLoop, for which several instances of RowLoop are possible -->
                                 <xsl:with-param name="instance-ancestor"
-                                    select="concat($instance-ancestor,'*[name()=''',$name,
-                                    ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
-                                    $name,''']/preceding-sibling::*)]//')"
+                                    select="concat($instance-ancestor,'*[name()=''',$name,''' and position()= $',$name,'-position ]//')"
                                     tunnel="yes"/>
                             </xsl:apply-templates>
                         </xhtml:tr>
@@ -1702,8 +1715,9 @@
                     <xsl:attribute name="bind" select="concat($name,'-addline-bind')"/>
                 </xsl:if>
                 <xf:label ref="$form-resources/AddLine/label"/>
-                <xf:insert ev:event="DOMActivate" context="."
-                    nodeset="//{$name}-RowLoop"
+                <xf:insert ev:event="DOMActivate" context="{$instance-ancestor}{$name}-RowLoop-Container"
+                    nodeset="{$instance-ancestor}{$name}-RowLoop"
+                    position="after"
                     origin="instance('fr-form-loop-model')/{$name}-RowLoop"/>
             </xf:trigger>
         </xsl:if>
@@ -1819,16 +1833,14 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
-        <xsl:variable name="loop-name" select="enofr:get-name($source-context)"/>
-        <xf:repeat nodeset="{$instance-ancestor}{$loop-name}" id="{$loop-name}">
-            <xf:var name="{$loop-name}-position" value="position()"/>
+        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xf:repeat id="{$name}" nodeset="{$instance-ancestor}{$name}">
+            <xf:var name="{$name}-position" value="position()"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for Loops, for which several instances are possible -->
                 <xsl:with-param name="instance-ancestor"
-                    select="concat($instance-ancestor,'*[name()=''',$loop-name,
-                    ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
-                    $loop-name,''']/preceding-sibling::*)]//')"
+                    select="concat($instance-ancestor,'*[name()=''',$name,''' and position()= $',$name,'-position ]//')"
                     tunnel="yes"/>
             </xsl:apply-templates>
         </xf:repeat>
