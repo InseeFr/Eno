@@ -251,6 +251,7 @@
                </table:table-cell>
             </table:table-row>
          </table:table>
+         <text:p text:style-name="Instruction">Now we are going to know if you think that Jay is a gluton.</text:p>
          <text:p text:style-name="QuestionName">[ICE_FLAVOUR]</text:p>
          <text:p>Car 1</text:p>
          <text:p text:style-name="Question">➡ 2. Does Jay like the following ice cream flavours?</text:p>
