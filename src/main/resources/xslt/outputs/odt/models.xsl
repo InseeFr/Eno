@@ -774,6 +774,7 @@
 				<xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/>
 			</text:p>
 		</xsl:if>
+		<!-- The enoddi:get-instructions-by-format getter produces in-language fragments, on which templates must be applied in "source" mode. -->
 		<xsl:apply-templates select="enoodt:get-after-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="$driver"/>
 		</xsl:apply-templates>
