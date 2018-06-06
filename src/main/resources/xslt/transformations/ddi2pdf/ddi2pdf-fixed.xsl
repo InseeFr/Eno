@@ -194,7 +194,7 @@
         <xsl:param name="language"/>
         <!-- We look for an instruction of 'Format' type -->
         <xsl:variable name="format-instruction">
-            <xsl:sequence select="enoddi:get-format-instruction($context,$language)"/>
+            <xsl:sequence select="enoddi:get-instructions-by-format($context,'format')"/>
         </xsl:variable>
         <xsl:choose>
             <!-- If there is no such instruction -->
@@ -439,7 +439,7 @@
     </xd:doc>
     <xsl:function name="enopdf:get-rooster-number-lines">
         <xsl:param name="context" as="item()"/>
-       <xsl:sequence select="if($context/self::d:QuestionGrid[d:GridDimension/d:Roster]) then(8) else()"/>
+		<xsl:sequence select="if($context/self::d:QuestionGrid[d:GridDimension/d:Roster]) then(8) else()"/>
     </xsl:function>
     
     <xd:doc>
