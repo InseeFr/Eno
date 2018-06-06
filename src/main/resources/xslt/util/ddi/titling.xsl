@@ -38,6 +38,7 @@
             <xd:p>Where to restart counting questions :</xd:p>
             <xd:p>sequence : template, module, submodule, group</xd:p>
             <xd:p>filter : numbered-filter, unnumbered-filter : questions inside them don't count for following-sibling, but can be numbered or not</xd:p>
+            <xd:p>no-number : no number for questions</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:variable name="numbering-browser">
@@ -206,6 +207,7 @@
 
         <xsl:variable name="number">
             <xsl:choose>
+                <xsl:when test="$numbering-browser='no-number'"/>
                 <xsl:when test="$numbering-browser='unnumbered-filter'">
                     <xsl:if
                         test="enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
