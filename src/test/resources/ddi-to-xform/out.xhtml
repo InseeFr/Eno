@@ -158,28 +158,30 @@
                   <j6qg8rc6/>
                   <j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1--1/>
                   <j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-0/>
-                  <j6qg8rc6-RowLoop>
-                     <j6qg8rc6-QOP-jbgdl5jb/>
-                     <j6qg8rc6-QOP-jbgd8lwo/>
-                     <j6qg8rc6-QOP-jbgdbfag/>
-                     <j6qg8rc6-QOP-jbgdlgja/>
-                     <j6qg8rc6-QOP-jbgd745y/>
-                     <j6qg8rc6-QOP-jbgdjkts/>
-                     <j6qg8rc6-QOP-jbgdcax7/>
-                     <j6qg8rc6-QOP-jbgdjye1/>
-                     <j6qg8rc6-QOP-jbgd5jet/>
-                     <j6qg8rc6-QOP-jbgdjw90/>
-                     <j6qg8rc6-QOP-jbgdfndq/>
-                     <j6qg8rc6-QOP-jbgd7osi/>
-                     <j6qg8rc6-QOP-jbgd7bnw/>
-                     <j6qg8rc6-QOP-jbgd9k71/>
-                     <j6qg8rc6-QOP-jbgdimks/>
-                     <j6qg8rc6-QOP-jbgdjquz/>
-                     <j6qg8rc6-QOP-jbgdd2w3/>
-                     <j6qg8rc6-QOP-jbgdkosc/>
-                     <j6qg8rc6-QOP-jbgdk0x4/>
-                     <j6qg8rc6-QOP-jbgd2wgf/>
-                  </j6qg8rc6-RowLoop>
+                  <j6qg8rc6-RowLoop-Container>
+                     <j6qg8rc6-RowLoop>
+                        <j6qg8rc6-QOP-jbgdl5jb/>
+                        <j6qg8rc6-QOP-jbgd8lwo/>
+                        <j6qg8rc6-QOP-jbgdbfag/>
+                        <j6qg8rc6-QOP-jbgdlgja/>
+                        <j6qg8rc6-QOP-jbgd745y/>
+                        <j6qg8rc6-QOP-jbgdjkts/>
+                        <j6qg8rc6-QOP-jbgdcax7/>
+                        <j6qg8rc6-QOP-jbgdjye1/>
+                        <j6qg8rc6-QOP-jbgd5jet/>
+                        <j6qg8rc6-QOP-jbgdjw90/>
+                        <j6qg8rc6-QOP-jbgdfndq/>
+                        <j6qg8rc6-QOP-jbgd7osi/>
+                        <j6qg8rc6-QOP-jbgd7bnw/>
+                        <j6qg8rc6-QOP-jbgd9k71/>
+                        <j6qg8rc6-QOP-jbgdimks/>
+                        <j6qg8rc6-QOP-jbgdjquz/>
+                        <j6qg8rc6-QOP-jbgdd2w3/>
+                        <j6qg8rc6-QOP-jbgdkosc/>
+                        <j6qg8rc6-QOP-jbgdk0x4/>
+                        <j6qg8rc6-QOP-jbgd2wgf/>
+                     </j6qg8rc6-RowLoop>
+                  </j6qg8rc6-RowLoop-Container>
                   <j6qg8rc6-RowLoop-Count>1</j6qg8rc6-RowLoop-Count>
                   <j6qg8rc6-AddLine/>
                </j6qfx9qe>
@@ -644,7 +646,7 @@
                         ref="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-0"/>
                <xf:bind id="j6qg8rc6-RowLoop-bind"
                         name="j6qg8rc6-RowLoop"
-                        nodeset="j6qg8rc6-RowLoop">
+                        nodeset="j6qg8rc6-RowLoop-Container/j6qg8rc6-RowLoop">
                   <xf:bind id="j6qg8rc6-QOP-jbgdl5jb-bind"
                            name="j6qg8rc6-QOP-jbgdl5jb"
                            ref="j6qg8rc6-QOP-jbgdl5jb"/>
@@ -2716,6 +2718,18 @@
             </xf:action>
          </xf:submission>
          <xf:action ev:event="xforms-ready">
+            <xf:action if="not(instance('fr-form-instance')//j6qg8rc6-RowLoop-Container/*)                         or count(instance('fr-form-instance')//j6qg8rc6-RowLoop &lt; instance('fr-form-instance')//j6qg8rc6-RowLoop-Count)">
+               <xf:action while="count(instance('fr-form-instance')//j6qg8rc6-RowLoop) &lt; instance('fr-form-instance')//j6qg8rc6-RowLoop-Count">
+                  <xf:insert context="instance('fr-form-instance')//j6qg8rc6-RowLoop-Container"
+                             nodeset="instance('fr-form-instance')//j6qg8rc6-RowLoop"
+                             position="after"
+                             origin="instance('fr-form-loop-model')/j6qg8rc6-RowLoop"/>
+               </xf:action>
+            </xf:action>
+            <xf:action if="count(instance('fr-form-instance')//j6qg8rc6-RowLoop) &gt; instance('fr-form-instance')//j6qg8rc6-RowLoop-Count">
+               <xf:setvalue ref="instance('fr-form-instance')//j6qg8rc6-RowLoop-Count"
+                            value="count(instance('fr-form-instance')//j6qg8rc6-RowLoop)"/>
+            </xf:action>
             <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
             <xxf:show if="instance('fr-form-instance')/Util/Send='false' and not(instance('fr-form-instance')/Util/CurrentSection='1')"
                       dialog="welcome-back"/>
@@ -4394,6 +4408,7 @@
                         <xhtml:tbody>
                            <xf:repeat nodeset="instance('fr-form-instance')//j6qg8rc6-RowLoop"
                                       id="j6qg8rc6-RowLoop">
+                              <xf:var name="j6qg8rc6-RowLoop-position" value="position()"/>
                               <xhtml:tr>
                                  <xhtml:td align="center">
                                     <xf:textarea id="j6qg8rc6-QOP-jbgdl5jb-control"
@@ -4600,8 +4615,9 @@
                      <xf:trigger id="j6qg8rc6-addline" bind="j6qg8rc6-addline-bind">
                         <xf:label ref="$form-resources/AddLine/label"/>
                         <xf:insert ev:event="DOMActivate"
-                                   context="."
-                                   nodeset="//j6qg8rc6-RowLoop"
+                                   context="instance('fr-form-instance')//j6qg8rc6-RowLoop-Container"
+                                   nodeset="instance('fr-form-instance')//j6qg8rc6-RowLoop"
+                                   position="after"
                                    origin="instance('fr-form-loop-model')/j6qg8rc6-RowLoop"/>
                      </xf:trigger>
                   </fr:section>
