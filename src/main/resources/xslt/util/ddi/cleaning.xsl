@@ -103,20 +103,10 @@
                         <xsl:value-of>//</xsl:value-of>
                         <xsl:for-each
                             select="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster]">
-                            <xsl:variable name="id">
-                                <xsl:choose>
-                                    <xsl:when test="name()='d:Loop'">
-                                        <xsl:value-of select="concat(r:ID,'-Loop')"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="concat(r:ID,'-RowLoop')"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:variable>
                             <xsl:value-of
-                                select="concat('*[name()=''',$id,
+                                select="concat('*[name()=''',r:ID,
                                 ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
-                                $id,''']/preceding-sibling::*)]//')"
+                                r:ID,''']/preceding-sibling::*)]//')"
                             />
                         </xsl:for-each>
                     </xsl:variable>

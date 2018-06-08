@@ -266,7 +266,7 @@
             <xd:p>Default template for every element that corresponds to a reference.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="node()[ends-with(name(), 'Reference') and not(parent::r:Binding)]/r:ID">
+    <xsl:template match="node()[ends-with(name(), 'Reference') and not(parent::r:Binding) and not(name()='r:BasedOnReference')]/r:ID">
         <xsl:param name="references" tunnel="yes"/>
         <xsl:variable name="ID" select="."/>
         <!-- Copying the element -->

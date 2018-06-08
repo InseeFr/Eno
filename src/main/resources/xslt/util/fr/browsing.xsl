@@ -671,7 +671,7 @@
             <xd:p></xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*[not(ends-with(name(),'-Loop-Container'))]" mode="page-bind">
+    <xsl:template match="*[not(ends-with(name(),'-Container'))]" mode="page-bind">
         <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}" ref="{name()}">
             <xf:calculate
                 value="{concat('xxf:evaluate-bind-property(''',concat(name(),'-bind'),''',''relevant'')')}"/>
@@ -717,7 +717,7 @@
             <xd:p></xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*[ends-with(name(),'-Loop-Container')]" mode="page-bind">
+    <xsl:template match="*[ends-with(name(),'-Container')]" mode="page-bind">
         <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}" nodeset="{name()}">
             <xsl:apply-templates select="child::*/child::*[child::*]" mode="page-bind"/>
         </xf:bind>

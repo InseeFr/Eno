@@ -807,7 +807,7 @@
         </xsl:apply-templates>
         <xsl:if test="enofr:get-minimum-lines($source-context) &lt; enofr:get-maximum-lines($source-context)">
             <xf:bind id="{$name}-addline-bind" ref="{$name}-AddLine"
-                relevant="count({$instance-ancestor}{$name}-RowLoop) &lt; {enofr:get-maximum-lines($source-context)}"/>
+                relevant="count({$instance-ancestor}{$name}) &lt; {enofr:get-maximum-lines($source-context)}"/>
         </xsl:if>
     </xsl:template>
 
@@ -1686,8 +1686,8 @@
             </xhtml:thead>
             <xhtml:tbody>
                 <!-- if the loop is in a loop, instance-ancestor helps choosing the good ancestor loop instance -->
-                <xf:repeat id="{$name}-RowLoop" nodeset="{$instance-ancestor}{$name}-RowLoop">
-                    <xf:var name="{$name}-RowLoop-position" value="position()"/>
+                <xf:repeat id="{$name}" nodeset="{$instance-ancestor}{$name}">
+                    <xf:var name="{$name}-position" value="position()"/>
                     <!-- the table has a repeated zone that may have more than one line -->
                     <xsl:for-each select="enofr:get-body-lines($source-context)">
                         <xhtml:tr>
@@ -1715,10 +1715,10 @@
                     <xsl:attribute name="bind" select="concat($name,'-addline-bind')"/>
                 </xsl:if>
                 <xf:label ref="$form-resources/AddLine/label"/>
-                <xf:insert ev:event="DOMActivate" context="{$instance-ancestor}{$name}-RowLoop-Container"
-                    nodeset="{$instance-ancestor}{$name}-RowLoop"
+                <xf:insert ev:event="DOMActivate" context="{$instance-ancestor}{$name}-Container"
+                    nodeset="{$instance-ancestor}{$name}"
                     position="after"
-                    origin="instance('fr-form-loop-model')/{$name}-RowLoop"/>
+                    origin="instance('fr-form-loop-model')/{$name}"/>
             </xf:trigger>
         </xsl:if>
     </xsl:template>

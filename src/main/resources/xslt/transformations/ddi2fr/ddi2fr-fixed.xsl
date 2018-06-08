@@ -76,6 +76,26 @@
     </xsl:template>
 
     <xd:doc>
+        <xd:desc>For business variables, their name is their business name ; for other objects, their name is their id</xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:get-name">
+        <xsl:param name="context" as="item()"/>
+        
+        <xsl:variable name="id" select="enoddi:get-id($context)"/>
+        <xsl:variable name="ddi-markup" select="name($context)"/>
+        
+        <xsl:choose>
+            <xsl:when test="($ddi-markup = ('l:Variable','d:GenerationInstruction','d:Loop')) or ends-with($ddi-markup,'Domain') or ends-with($ddi-markup,'DomainReference')">
+                <xsl:sequence select="enoddi:get-business-name($context,$id)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="$id"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:function>
+    
+    <xd:doc>
         <xd:desc>
             <xd:p>This xforms function is used to get the concatened string corresponding to a dynamic text.</xd:p>
             <xd:p>It is created by calling the static text and making it dynamic.</xd:p>
