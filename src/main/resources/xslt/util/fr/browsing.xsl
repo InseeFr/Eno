@@ -455,7 +455,7 @@
                 <xsl:for-each select="//xf:repeat[xhtml:tr]">
                     <xsl:variable name="dynamic-array" select="@id"/>
                     <xf:action if="not(instance('fr-form-instance')//{$dynamic-array}-Container/*)
-                        or count(instance('fr-form-instance')//{$dynamic-array} &lt; instance('fr-form-instance')//{$dynamic-array}-Count)">
+                        or count(instance('fr-form-instance')//{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count)">
                         <xf:action while="count(instance('fr-form-instance')//{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
                             <xf:insert context="instance('fr-form-instance')//{$dynamic-array}-Container"
                                 nodeset="instance('fr-form-instance')//{$dynamic-array}"

@@ -65,6 +65,22 @@
     <xsl:variable name="conditioning-variable-end" select="$properties//TextConditioningVariable/ddi/After"/>
 
     <xd:doc>
+        <xd:desc>Loops and dynamic array's ids may be called in many calculs : filters, consistency checks, calculated variables</xd:desc>
+        <xd:dec>To change their in-language-ID into business-name, everywhere it is necessary, it is simple to try everywhere it could be necessary</xd:dec>
+    </xd:doc>
+    <xsl:variable name="list-of-groups">
+        <Groups>
+            <xsl:for-each select="//VariableGroup">
+                <xsl:sort select="string-length(r:ID)" order="descending"/>
+                <Group>
+                    <xsl:attribute name="id" select="r:ID"/>
+                    <xsl:attribute name="name" select="l:VariableGroupName/r:String"/>
+                </Group>
+            </xsl:for-each>
+        </Groups>
+    </xsl:variable>
+
+    <xd:doc>
         <xd:desc>
             <xd:p>Root template :</xd:p>
             <xd:p>The transformation starts with the main Sequence.</xd:p>
@@ -88,6 +104,9 @@
             <xsl:when test="($ddi-markup = ('l:Variable','d:GenerationInstruction','d:Loop')) or ends-with($ddi-markup,'Domain') or ends-with($ddi-markup,'DomainReference')">
                 <xsl:sequence select="enoddi:get-business-name($context,$id)"/>
             </xsl:when>
+            <!--<xsl:when test="enoddi:get-minimum-lines($context)">
+                <xsl:sequence select="enoddi:get-business-name($context,$id)"/>
+            </xsl:when>-->
             <xsl:otherwise>
                 <xsl:sequence select="$id"/>
             </xsl:otherwise>

@@ -747,7 +747,7 @@
                 <xsl:sequence select="distinct-values($ordered-variables)"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$variable"/>
+                <xsl:sequence select="$variable"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -773,7 +773,7 @@
     <xsl:template match="*" mode="enoddi:get-conditioning-variable-formula-variables">
         <xsl:param name="variable" tunnel="yes"/>
         
-        <xsl:value-of select="$variable"/>
+        <xsl:sequence select="$variable"/>
     </xsl:template>
     
     <xd:doc>
@@ -801,6 +801,10 @@
             <xsl:when test="//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference/r:ID = $variable">
                 <xsl:value-of select="//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID= $variable]/l:VariableGroupName/r:String"/>
             </xsl:when>
+            <!-- Grid with roster, but without VariableGroup -->
+            <xsl:otherwise>
+                <xsl:value-of select="$variable"/>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     
