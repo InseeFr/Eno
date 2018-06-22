@@ -26,17 +26,18 @@
 	<xsl:variable name="properties" select="doc($properties-file)"/>
 	
 
-	<xsl:include href="../../../xslt/util/pdf/style.xsl"/>
+	<xsl:include href="../../../styles/style.xsl"/>
 	
 	 
 	<xsl:include href="../../../xslt/outputs/pdf/home-page.xsl"/>
-	
 	
 	<!-- Remove all the ConsistencyCheck messages from the pdf -->
 	<xsl:template match="ConsistencyCheck" mode="model"/>
 	
 	
-	<!--Afficher le titre dans le drvier FORM . Permet aussi l'encapsulation <fo:root> -->
+	<!--Afficher le titre dans le driver FORM . 
+			Définit la structure du questionnaire
+			Permet aussi l'encapsulation <fo:root> -->
 	<xsl:template match="Form" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
@@ -55,7 +56,7 @@
 				</fo:simple-page-master>
 				<!-- reference-orientation="90" column-count="2" -->
 				<fo:simple-page-master master-name="A4-portrait" page-height="297mm" 
-					page-width="210mm" font-family="arial" font-size="10pt" reference-orientation="0"
+					page-width="210mm" font-family="arial" font-size="10pt" reference-orientation="{$properties//Format/Orientation}"
 					font-weight="normal" margin-bottom="5mm">
 					<fo:region-body margin="13mm" column-count="1"/>
 					<fo:region-before region-name="xsl-region-before" extent="25mm"
@@ -66,6 +67,8 @@
 				
 			</fo:layout-master-set>
 			
+			
+			<!-- DEFINITION DELA PAGE DE GARDE -->
 			<fo:page-sequence master-reference="Cover-A4" font-family="arial" font-size="10pt">
 				<fo:flow flow-name="xsl-region-body">
 					<xsl:copy-of select="eno:Home-Page($source-context)"/>
@@ -75,11 +78,7 @@
 			<fo:page-sequence master-reference="A4-portrait">
 				<fo:static-content flow-name="xsl-region-before">
 					<fo:block position="absolute" margin="10mm" text-align="right">
-						<fo:external-graphic>
-							<xsl:attribute name="src">
-								<xsl:value-of select="concat($properties//Images/Folder,'encoche-top-right.png')"/>
-							</xsl:attribute>
-						</fo:external-graphic>
+						<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/encoche-top-right.png')"/>
 					</fo:block>
 					<fo:block position="absolute" margin-top="80%" text-align="right">
 						<fo:instream-foreign-object>
@@ -95,11 +94,11 @@
 				</fo:static-content>
 				<fo:static-content flow-name="xsl-region-after">
 					<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0px" text-align="left">
-						<fo:external-graphic>
-							<xsl:attribute name="src">
-								<xsl:value-of select="concat($properties//Images/Folder,'encoche-bottom-left.png')"/>
-							</xsl:attribute>
-						</fo:external-graphic>
+						<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/encoche-bottom-left.png')"/>
+<!-- 							<xsl:attribute name="src"> -->
+<!-- 								<xsl:value-of select="concat('url(''',$properties//Images/Folder,'encoche-bottom-left.png'')')"/> -->
+<!-- 							</xsl:attribute> -->
+<!-- 						</fo:external-graphic> -->
 					</fo:block>
 					<fo:block text-align="center">
 						<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
@@ -107,10 +106,12 @@
 				</fo:static-content>
 				<fo:flow flow-name="xsl-region-body" border-collapse="collapse"
 					font-size="10pt">
+					
 					<!-- Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
 					</xsl:apply-templates>
+					
 					<fo:block id="TheVeryLastPage"> </fo:block>
 				</fo:flow>
 			</fo:page-sequence>
@@ -131,9 +132,6 @@
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 				
-		<xsl:text disable-output-escaping="yes">
-			&lt;fo:block page-break-inside="avoid" &gt;  
-		</xsl:text>
 		
 		<fo:block xsl:use-attribute-sets="Titre-sequence" border-color="black" border-style="solid">
 			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
@@ -151,14 +149,8 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
-		
-		<xsl:if test="enopdf:is-first($source-context) != 'true'">
-			<xsl:text disable-output-escaping="yes">
-				&lt;fo:block page-break-inside="avoid" &gt;
-			</xsl:text>
-		</xsl:if>
-
-		<fo:block xsl:use-attribute-sets="Titre-paragraphe">
+	
+		<fo:block xsl:use-attribute-sets="Titre-paragraphe" keep-with-next="always">
 			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 		
@@ -169,7 +161,8 @@
 		
 	</xsl:template>
 
-	<!-- Déclenche tous les xf-output de l'arbre des drivers -->
+	<!-- Déclenche tous les xf-output de l'arbre des drivers 
+			Definit les instructions liees au questions-->
 	<!--<xsl:template match="*//Form//Module//xf-output"-->
 	<xsl:template match="xf-output" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -210,11 +203,11 @@
 							<fo:inline-container width="10%">
 								<fo:block-container>
 									<fo:block>
-										<fo:external-graphic>
-											<xsl:attribute name="src">
-												<xsl:value-of select="concat($properties//Images/Folder,'filter_arrow_25.png')"/>
-											</xsl:attribute>
-										</fo:external-graphic>
+										<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/filter_arrow_25.png')"/>
+<!-- 											<xsl:attribute name="src"> -->
+<!-- 												<xsl:value-of select="concat('url(''',$properties//Images/Folder,'filter_arrow_25.png'')')"/> -->
+<!-- 											</xsl:attribute> -->
+<!-- 										</fo:external-graphic> -->
 									</fo:block>
 								</fo:block-container>
 							</fo:inline-container>
@@ -226,7 +219,7 @@
 						</fo:block>
 					</xsl:when>
 					<xsl:otherwise>
-						<fo:block xsl:use-attribute-sets="general-style">
+						<fo:block xsl:use-attribute-sets="general-style" keep-with-next="always">
 							<xsl:if test="$isTable = 'YES'">
 								<xsl:attribute name="margin-left">1mm</xsl:attribute>
 							</xsl:if>
@@ -243,8 +236,108 @@
 		</xsl:apply-templates>
 
 	</xsl:template>
+	
+	<!--Gérer les codes dans les entetes de lignes-->
+	<xsl:template match="Body//xf-output" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="isTable" tunnel="yes"/>
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
+			as="xs:string +"/>
+	
+		<fo:block xsl:use-attribute-sets="general-style">
+			<xsl:if test="$isTable = 'YES'">
+				<xsl:attribute name="margin-left">1mm</xsl:attribute>
+			</xsl:if>
+			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+		</fo:block>
+		
+<!--  		Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE  -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+		
+	</xsl:template>
+	
+	
+	
+	<!-- QUESTIONS     -->
+	
+	<!-- Appel driver SingleResponseQuestion : 
+	   xf-input, xf-select, xf-select1 et xf-textaera ne contiennent que les réponses -->
+	   
+	<xsl:template match="SingleResponseQuestion" mode="model">
 
-	<!-- Déclenche tous les xf-input de l'arbre des drivers s'il est précédé su driver Module :  DONNEES QUI DOIVENT ETRE RENSEIGNEES DANS LE QUESTIONNAIRE-->
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="driver" select="." tunnel="yes"/>
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
+			as="xs:string +"/>
+		
+		<fo:block font-size="10pt" font-weight="bold" color="black" keep-with-next="always">
+		<!-- print the question label and its instructions -->
+			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
+				<xsl:with-param name="driver" select="."/>
+			</xsl:call-template>
+		</fo:block>
+		
+		<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+ 			<xsl:with-param name="typeOfAncestor" select="'question'" tunnel="yes"/> 
+		</xsl:apply-templates>
+		
+	</xsl:template>
+		
+
+
+	<!-- Déclenche tous les Questions à choix multiple de l'arbre des drivers -->
+	<xsl:template match="MultipleQuestion" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
+			as="xs:string +"/>
+
+			<fo:block xsl:use-attribute-sets="label-question" keep-with-next="always">
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+					<xsl:with-param name="noInstructions" select="'YES'" tunnel="yes"></xsl:with-param>
+				</xsl:apply-templates>
+			</fo:block>
+			
+			<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
+
+		<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+		
+	</xsl:template>
+	
+		<!-- Déclenche tous les question multiples de l'arbre des drivers -->
+	<xsl:template match="MultipleChoiceQuestion" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)" as="xs:string +"/>
+			
+			<fo:block xsl:use-attribute-sets="label-question">
+
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+				<xsl:with-param name="noInstructions" select="'YES'" tunnel="yes"/>
+				</xsl:apply-templates>
+			
+				<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+			
+			</fo:block>
+		
+	</xsl:template>
+	
+	
+	
+<!-- 	REPONSES -->
+	
+	<!-- Déclenche tous les xf-input  :  REPONSES QUI DOIVENT ETRE RENSEIGNEES DANS LE QUESTIONNAIRE-->
 	<xsl:template match="xf-input" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
@@ -258,8 +351,6 @@
 			
 		
 			<xsl:if test="enopdf:get-type($source-context) = 'text'">
-<!-- 				<fo:block page-break-inside="avoid"> -->
-<!-- 					<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/> -->
 					<xsl:choose>
 						<xsl:when test="enopdf:get-format($source-context)">
 							<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
@@ -279,38 +370,41 @@
 							</fo:block>
 						</xsl:otherwise>
 					</xsl:choose>
+					
 					<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
 					</xsl:apply-templates>
-			<!-- 	/fo:block> -->
+
 			</xsl:if>
 
 			<xsl:if test="enopdf:get-type($source-context) = 'date'">
 				<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
-<!-- 				<fo:block page-break-inside="avoid"> -->
-<!-- 					<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/> -->
 					<fo:block xsl:use-attribute-sets="general-style">
 							<xsl:for-each select="1 to xs:integer(number(string-length(replace($field,'/',''))))">
 								<xsl:variable name="curVal" select="."/>
 								<xsl:if test="number(string-length(replace($field,'/',''))) = $curVal">
 									<xsl:for-each select="1 to $curVal">
 										<xsl:variable name="curVal2" select="."/>
-										<fo:external-graphic>
-											<xsl:attribute name="src">
-												<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
-											</xsl:attribute>
-										</fo:external-graphic>
+										<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
+<!-- 											<xsl:attribute name="src"> -->
+<!-- 												<xsl:value-of select="concat('url(''',$properties//Images/Folder,'mask_number.png'')')"/> -->								
+<!-- 											</xsl:attribute> -->
+<!-- 										</fo:external-graphic> -->
 										<xsl:if test="$curVal2 = number(string-length(replace($field,'/','')))"> (<xsl:value-of select="$field"/>) </xsl:if>
 									</xsl:for-each>
 								</xsl:if>
 							</xsl:for-each>
 					</fo:block>
+					
 					<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
 					</xsl:apply-templates>
-				<!--  /fo:block -->
+
 			</xsl:if>
-			<xsl:if test="enopdf:get-type($source-context) = 'duration'"> 
+			
+		
+			<xsl:if test="enopdf:get-type($source-context) = 'duration'">
+			<fo:block xsl:use-attribute-sets="general-style">	 
 				<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
 				<fo:inline xsl:use-attribute-sets="general-style">
 					<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
@@ -318,11 +412,11 @@
 						<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 							<xsl:for-each select="1 to $curVal">
 								<xsl:variable name="curVal2" select="."/>
-								<fo:external-graphic>
-									<xsl:attribute name="src">
-										<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
-									</xsl:attribute>
-								</fo:external-graphic>
+								<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
+<!-- 									<xsl:attribute name="src"> -->
+<!-- 										<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
+<!-- 									</xsl:attribute> -->
+<!-- 								</fo:external-graphic> -->
 							</xsl:for-each>
 						</xsl:if>
 					</xsl:for-each>
@@ -334,29 +428,21 @@
 						</xsl:choose>
 					</fo:inline>
 				</fo:inline>
-				
-				
-				<xsl:if test="enopdf:is-first($source-context) = 'true' and $field = 'mm'">
-					<xsl:text disable-output-escaping="yes">
-						&lt;/fo:block&gt;
-					</xsl:text>
-				</xsl:if>
+			</fo:block>
 			</xsl:if>
 			
-			<!-- get-numberof decimal -->
+			
 			<xsl:if test="enopdf:get-type($source-context) = 'number'">
-<!-- 				<fo:block page-break-inside="avoid"> -->
-<!-- 					<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/> -->
 					<fo:block xsl:use-attribute-sets="general-style">
 						<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
 							<xsl:variable name="curVal" select="."/>
 							<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 								<xsl:for-each select="1 to $curVal">
-									<fo:external-graphic>
-										<xsl:attribute name="src">
-											<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
-										</xsl:attribute>
-									</fo:external-graphic>
+									<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
+<!-- 										<xsl:attribute name="src"> -->
+<!-- 											<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
+<!-- 										</xsl:attribute> -->
+<!-- 									</fo:external-graphic> -->
 								</xsl:for-each>
 							</xsl:if>
 						</xsl:for-each>
@@ -365,17 +451,9 @@
 					<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
 					</xsl:apply-templates>
-<!-- 				/fo:block> -->
+
 			</xsl:if>
-			
-			
-				<xsl:if test="enopdf:is-first($source-context) = 'true'">
-					<xsl:text disable-output-escaping="yes">
-						&lt;/fo:block&gt;						
-					</xsl:text>
-				</xsl:if>
-			
-			
+				
 		</xsl:if>
 
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) = ''">
@@ -393,11 +471,11 @@
 									<xsl:variable name="curVal" select="."/>
 									<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 										<xsl:for-each select="1 to $curVal">
-											<fo:external-graphic>
-												<xsl:attribute name="src">
-													<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
-												</xsl:attribute>
-											</fo:external-graphic>
+											<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
+<!-- 												<xsl:attribute name="src"> -->
+<!-- 													<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
+<!-- 												</xsl:attribute> -->
+<!-- 											</fo:external-graphic> -->
 										</xsl:for-each>
 									</xsl:if>
 								</xsl:for-each>
@@ -433,11 +511,11 @@
 						<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 							<xsl:for-each select="1 to $curVal">
 								<xsl:variable name="curVal2" select="."/>
-								<fo:external-graphic>
-									<xsl:attribute name="src">
-										<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
-									</xsl:attribute>
-								</fo:external-graphic>
+								<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
+<!-- 									<xsl:attribute name="src"> -->
+<!-- 										<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
+<!-- 									</xsl:attribute> -->
+<!-- 								</fo:external-graphic> -->
 							</xsl:for-each>
 						</xsl:if>
 					</xsl:for-each>
@@ -453,11 +531,11 @@
 							<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 								<xsl:for-each select="1 to $curVal">
 									<xsl:variable name="curVal2" select="."/>
-									<fo:external-graphic>
-										<xsl:attribute name="src">
-											<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
-										</xsl:attribute>
-									</fo:external-graphic>
+									<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
+<!-- 										<xsl:attribute name="src"> -->
+<!-- 											<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
+<!-- 										</xsl:attribute> -->
+<!-- 									</fo:external-graphic> -->
 								</xsl:for-each>
 							</xsl:if>
 						</xsl:for-each>
@@ -480,11 +558,11 @@
 								<xsl:variable name="curVal" select="."/>
 								<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 									<xsl:for-each select="1 to $curVal">
-										<fo:external-graphic>
-											<xsl:attribute name="src">
-												<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
-											</xsl:attribute>
-										</fo:external-graphic>
+										<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
+<!-- 											<xsl:attribute name="src"> -->
+<!-- 												<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
+<!-- 											</xsl:attribute> -->
+<!-- 										</fo:external-graphic> -->
 									</xsl:for-each>
 								</xsl:if>
 							</xsl:for-each>
@@ -518,11 +596,11 @@
 															<xsl:text>,</xsl:text>
 														</xsl:when>
 														<xsl:otherwise>
-															<fo:external-graphic>
-																<xsl:attribute name="src">
-																	<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
-																</xsl:attribute>
-															</fo:external-graphic>
+															<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
+<!-- 																<xsl:attribute name="src"> -->
+<!-- 																	<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
+<!-- 																</xsl:attribute> -->
+<!-- 															</fo:external-graphic> -->
 														</xsl:otherwise>
 													</xsl:choose>
 												</xsl:for-each>
@@ -535,11 +613,11 @@
 											<xsl:variable name="curVal" select="."/>
 											<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 												<xsl:for-each select="1 to $curVal">
-													<fo:external-graphic>
-														<xsl:attribute name="src">
-															<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
-														</xsl:attribute>
-													</fo:external-graphic>
+													<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
+<!-- 														<xsl:attribute name="src"> -->
+<!-- 															<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
+<!-- 														</xsl:attribute> -->
+<!-- 													</fo:external-graphic> -->
 												</xsl:for-each>
 											</xsl:if>
 										</xsl:for-each>
@@ -578,7 +656,7 @@
 			<xsl:when test="enopdf:get-image($source-context) != ''" >
 				<xsl:choose>
 					<xsl:when test="starts-with($image,'http')">
-						<!-- <xsl:value-of select="concat('<fo:external-graphic src=\"',$image,'\" title=\"',eno:serialize(enopdf:get-label($source-context, $languages[1])),'\" /&gt;')"/> -->
+<!-- 						<xsl:value-of select="concat('<fo:external-graphic src=\"',$image,'\" title=\"',eno:serialize(enopdf:get-label($source-context, $languages[1])),'\" /&gt;')"/> -->
 							<fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm" >&#x274F;</fo:inline>
 							<fo:external-graphic padding-right="3mm">
 								<xsl:attribute name="src">
@@ -587,7 +665,7 @@
 							</fo:external-graphic>
 					</xsl:when>
 					<xsl:otherwise>
-						<!--  <xsl:value-of select="concat('&lt;fo:external-graphic src=&quot;/',$properties//Images/Folder,'/',$image,'&quot; title=&quot;',eno:serialize(enopdf:get-label($source-context, $languages[1])),'&quot; /&gt;')"/>-->
+<!-- 						 <xsl:value-of select="concat('&lt;fo:external-graphic src=&quot;/',$properties//Images/Folder,'/',$image,'&quot; title=&quot;',eno:serialize(enopdf:get-label($source-context, $languages[1])),'&quot; /&gt;')"/> -->
 							<fo:inline font-family="ZapfDingbats" font-size="10pt"
 								margin-top="3mm">&#x274F;</fo:inline>
 							<fo:external-graphic padding-right="3mm">
@@ -595,9 +673,9 @@
 									<xsl:value-of select="concat($properties//Images/Folder,$image)"/>
 								</xsl:attribute>
 							</fo:external-graphic>										
-							<!--<fo:inline>
+							<fo:inline>
 								<xsl:value-of select="$image"/>
-							</fo:inline>-->
+							</fo:inline>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
@@ -644,11 +722,9 @@
 				
 			</xsl:otherwise>
 		</xsl:choose>
-
-		<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
+		
 	</xsl:template>
-
-
+	
 
 	<!-- Déclenche tous les xf-select de l'arbre des drivers -->
 	<xsl:template match="xf-select" mode="model">
@@ -657,8 +733,6 @@
 			as="xs:string +"/>
 		
 
-<!-- 		<fo:block page-break-inside="avoid">	 -->
-<!-- 			<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/> -->
 			<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE  -->
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -670,47 +744,9 @@
 			</xsl:apply-templates>
 			
 			<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-				
-					<xsl:if test="enopdf:is-first($source-context) = 'true'">
-						<xsl:text disable-output-escaping="yes">
-							&lt;/fo:block&gt;						
-						</xsl:text>
-					</xsl:if>
 			
 			</xsl:if>
-<!-- 	/fo:block> -->
 
-	</xsl:template>
-	
-	<!-- Déclenche tous les xf-select de l'arbre des drivers -->
-	<xsl:template match="MultipleChoiceQuestion" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
-			as="xs:string +"/>
-		<fo:block page-break-inside="avoid">	
-<!-- 			<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/> -->
-			<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE  -->
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-				<xsl:with-param name="noInstructions" select="'YES'" tunnel="yes"/>
-			</xsl:apply-templates>
-			
-			<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-			</xsl:apply-templates>
-			
-			<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-				
-					<xsl:if test="enopdf:is-first($source-context) = 'true'">
-						<xsl:text disable-output-escaping="yes">
-							&lt;/fo:block&gt;						
-						</xsl:text>
-					</xsl:if>
-				
-			</xsl:if>
-			
-		</fo:block>
-		
 	</xsl:template>
 	
 
@@ -722,10 +758,7 @@
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 		<xsl:variable name="format" select="enopdf:get-appearance($source-context)"/>
-		
-<!-- 		<fo:block page-break-inside="avoid"> -->
-<!-- 			<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/> -->
-			
+					
 			<xsl:choose>
 				<xsl:when test="$format = 'minimal'">
 					<fo:block xsl:use-attribute-sets="Line-drawing">
@@ -741,20 +774,12 @@
 					</xsl:apply-templates>
 				</xsl:otherwise>
 			</xsl:choose>
-<!-- 		/fo:block>Cant work veriry dom of simpson.fo -->
+
 		
 		<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 		
-		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-				<xsl:if test="enopdf:is-first($source-context) = 'true'">
-					<xsl:text disable-output-escaping="yes">
-						&lt;/fo:block&gt;					
-					</xsl:text>
-				</xsl:if>
-		</xsl:if>
-
 	</xsl:template>
 	
 	<!-- Déclenche tous les Table de l'arbre des drivers -->
@@ -762,12 +787,11 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
-		
-		<fo:block page-break-inside="avoid">
-		
-			<!-- On récupére la question associée à la table -->
-<!-- 			<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/> -->
 			
+			<fo:block xsl:use-attribute-sets="label-question">
+					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+			</fo:block>	
+					
 			<!-- FLAG Recupérer les caractéristiques du tableau pour le construire dynamiquement -->
 	
 			<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
@@ -776,27 +800,21 @@
 				<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
 				<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>-->
 	
+	<!-- On fixe le nombre max de ligne dans un tableau (DefaultSize) pour pagination -->
+		<xsl:variable name="line-number" select="count(enopdf:get-body-lines($source-context))"/>
+		<xsl:variable name="table-pages" select="xs:integer(1+(($line-number -1) div $properties//Table/Row/DefaultSize))" as="xs:integer"/>
+		<xsl:for-each select="1 to $table-pages">
+		<xsl:variable name="page-position" select="position()"/>
 	
+		<fo:block>
+		<xsl:if test="$line-number &gt;= $properties//Table/Row/DefaultSize">
+		<xsl:attribute name="page-break-after" select="'always'"/>
+		</xsl:if>
 			<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
 				text-align="center" margin-top="1mm" display-align="center" space-after="5mm">
-				
-				<!-- Avant d'entrer dans un for-each, sauvegarde obligatoire de l'arbre des driver -->
-				<xsl:variable name="ancestors">
-					<xsl:copy-of select="root(.)"/>
-				</xsl:variable>
-	
-				<!--Gestion du nombre de colonnes pour la construction du tableau-->
-				<!--<xsl:for-each select="enopdf:get-header-line($source-context, position())">
-					<fo:table-column column-width="proportional-column-width(1)"/>
-				</xsl:for-each>-->
 	
 				<!--Gestion du header-->
 				<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
-	
-					<!-- Avant d'entrer dans un for-each, sauvegarde obligatoire de l'arbre des driver -->
-					<xsl:variable name="ancestors">
-						<xsl:copy-of select="root(.)"/>
-					</xsl:variable>
 	
 					<fo:table-header>
 						<!-- Récupére le nombre de header-lines = Nombre de lignes dans le tableau -->
@@ -824,14 +842,11 @@
 					</fo:table-header>
 				</xsl:if>
 	
-				<!-- Avant d'entrer dans un for-each, sauvegarde obligatoire de l'arbre des driver -->
-				<xsl:variable name="ancestors">
-					<xsl:copy-of select="root(.)"/>
-				</xsl:variable>
-	
 				<!--Gestion du body-->
 				<fo:table-body>
 					<xsl:for-each select="enopdf:get-body-lines($source-context)">
+					<xsl:variable name="position" select="position()"/>
+					<xsl:if test="($position &gt; $properties//Table/Row/DefaultSize*($page-position -1)) and ($position &lt;= $properties//Table/Row/DefaultSize*$page-position)" >
 						<fo:table-row border-color="black" >
 							<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
 								<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>
@@ -840,6 +855,7 @@
 								<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>
 								<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
 								<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
+							
 							<xsl:apply-templates
 								select="enopdf:get-body-line($source-context, position())" mode="source">
 								<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -847,26 +863,20 @@
 								<xsl:with-param name="row-number"  select="position()" tunnel="yes"/>
 								<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
 							</xsl:apply-templates>
+							
 							<!-- Pour chaque boucle , on récupére les infos des lignes du tableau -->
 						</fo:table-row>
+						</xsl:if>
 					</xsl:for-each>
 				</fo:table-body>
 			</fo:table>
-			
+		</fo:block>
+			</xsl:for-each>
+		
 			<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
-		
-		</fo:block>
-		
-		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-			<xsl:if test="enopdf:is-first($source-context) = 'true'">
-				<xsl:text disable-output-escaping="yes">
-							&lt;/fo:block&gt;					
-						</xsl:text>
-			</xsl:if>
-		</xsl:if>
-		
+				
 	</xsl:template>
 
 	<!--TableLoop renvoie seulment des headers avec des lignes vierges en des- (rowloop est dupliqué) -->
@@ -874,10 +884,10 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="instance-ancestor" tunnel="yes"/>
-		
-			<fo:block page-break-inside="avoid">
-			
-<!-- 				<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/> -->
+				
+				<fo:block xsl:use-attribute-sets="label-question">
+					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+				</fo:block>		
 				
 				<!-- FLAG Recupérer les caractéristiques du tableau pour le construire dynamiquement -->
 				
@@ -887,27 +897,33 @@
 				<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
 				<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>-->
 				
+				<!-- On fixe le nombre max de ligne dans un tableau (DefaultSize) pour pagination -->
+				<xsl:variable name="line-number" select="count(enopdf:get-body-lines($source-context))"/>
+				<xsl:variable name="table-pages" select="xs:integer(1+(($line-number -1) div $properties//Table/Row/DefaultSize))" as="xs:integer"/>
+				<xsl:for-each select="1 to $table-pages">
+				<xsl:variable name="page-position" select="position()"/>
+				<fo:block>
 				
-				<fo:table inline-progression-dimension="auto" font-size="10pt" table-layout="fixed" width="100%" border-width="0.35mm"
+				<xsl:if test="$line-number &gt;= $properties//Table/Row/DefaultSize">
+					<xsl:attribute name="page-break-after" select="'always'"/>
+				</xsl:if>
+				
+					<fo:table inline-progression-dimension="auto" font-size="10pt" table-layout="fixed" width="100%" border-width="0.35mm"
 					text-align="center" display-align="center" space-after="5mm">
 					
 					<!-- Avant d'entrer dans un for-each, sauvegarde obligatoire de l'arbre des driver -->
-					<xsl:variable name="ancestors">
-						<xsl:copy-of select="root(.)"/>
-					</xsl:variable>
+<!-- 					<xsl:variable name="ancestors"> -->
+<!-- 						<xsl:copy-of select="xs:integer(root(.))"/> -->
+<!-- 					</xsl:variable> -->
 					
-					<!--Gestion du nombre de colonnes pour la construction du tableau-->
-					<!--<xsl:for-each select="enopdf:get-header-line($source-context, position())">
-					<fo:table-column column-width="proportional-column-width(1)"/>
-				</xsl:for-each>-->
-					
+		<!-- Debut boucle page-break after -->								
 					<!--Gestion du header-->
 					<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
 						
 						<!-- Avant d'entrer dans un for-each, sauvegarde obligatoire de l'arbre des driver -->
-						<xsl:variable name="ancestors">
-							<xsl:copy-of select="root(.)"/>
-						</xsl:variable>
+<!-- 						<xsl:variable name="ancestors"> -->
+<!-- 							<xsl:copy-of select="root(.)"/> -->
+<!-- 						</xsl:variable> -->
 						
 						<fo:table-header>
 							<!-- Récupére le nombre de header-lines = Nombre de lignes dans le tableau -->
@@ -929,14 +945,19 @@
 					</xsl:if>
 					
 					<!-- Avant d'entrer dans un for-each, sauvegarde obligatoire de l'arbre des driver -->
-					<xsl:variable name="ancestors">
-						<xsl:copy-of select="root(.)"/>
-					</xsl:variable>
+<!-- 					<xsl:variable name="ancestors"> -->
+<!-- 						<xsl:copy-of select="root(.)"/> -->
+<!-- 					</xsl:variable> -->
 					
 					<!--Gestion du body-->
 					<fo:table-body>
 						<xsl:for-each select="1 to xs:integer(enopdf:get-rooster-number-lines($source-context))">
+<!-- 						<xsl:for-each select="1 to xs:integer(enopdf:get-maximum-lines($source-context))"> -->
 							<xsl:for-each select="enopdf:get-body-lines($source-context)">
+							
+							<xsl:variable name="position" select="position()"/>
+							<xsl:if test="($position &gt; $properties//Table/Row/DefaultSize*($page-position -1)) and ($position &lt;= $properties//Table/Row/DefaultSize*$page-position)" >
+							
 								<fo:table-row border-color="black" >
 									<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
 									<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>
@@ -952,27 +973,22 @@
 									</xsl:apply-templates>
 									<!-- Pour chaque boucle , on récupére les infos des lignes du tableau -->
 								</fo:table-row>
+								
+								</xsl:if>
+								
 							</xsl:for-each>
 						</xsl:for-each>
 					</fo:table-body>
 				</fo:table>
+				
+				</fo:block>
+				</xsl:for-each>
+				
 				<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 				</xsl:apply-templates>
-			</fo:block>
-		
-
-
-		<xsl:if test="enopdf:is-first($source-context) = 'true'">
-			<xsl:text disable-output-escaping="yes">
-							&lt;/fo:block&gt;					
-						</xsl:text>
-		</xsl:if>
-				
 
 	</xsl:template>
-
-
 
 	<!-- Déclenche tous les TextCell de l'arbre des drivers -->
 	<xsl:template match="TextCell" mode="model">
@@ -1010,9 +1026,6 @@
 
 		</fo:table-cell>
 		<!--<FinTextCell/>-->
-
-		<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
-		
 
 	</xsl:template>
 
@@ -1090,10 +1103,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
-		
-<!-- 		<fo:block page-break-inside="avoid"> -->
-<!-- 			<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/> -->
-			
+					
 			<fo:block xsl:use-attribute-sets="Line-drawing">
 				&#160;
 			</fo:block>
@@ -1112,23 +1122,11 @@
 			<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
-		<!--  /fo:block -->
-		
-		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-			
-				<xsl:if test="enopdf:is-first($source-context) = 'true'">
-					<xsl:text disable-output-escaping="yes">
-						&lt;/fo:block&gt;						
-					</xsl:text>
-				</xsl:if>
-			
-		</xsl:if>
-		
-		<!-- Temporaire -->
+				
 		<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
-		<!--<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>-->
+		</xsl:apply-templates>
 
 	</xsl:template>
 
@@ -1148,60 +1146,7 @@
 		</xsl:apply-templates>
 
 	</xsl:template>
-
-	<!-- Déclenche tous les ResponseElement de l'arbre des drivers -->
-	<xsl:template match="MultipleQuestion" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
-			as="xs:string +"/>
-		<fo:block page-break-inside="avoid">
-<!-- 			<xsl:copy-of select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)"/> -->
-			<!--Revient au parent A RAJOUTER DANS CHAQUE TEMPLATE -->
-			<fo:block>
-				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-					<xsl:with-param name="driver" select="." tunnel="yes"/>
-					<xsl:with-param name="noInstructions" select="'YES'" tunnel="yes"></xsl:with-param>
-				</xsl:apply-templates>
-			</fo:block>
-			<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-			</xsl:apply-templates>
-		</fo:block>
-		<xsl:if test="enopdf:is-first($source-context) = 'true'">
-			<xsl:text disable-output-escaping="yes">
-				&lt;/fo:block&gt;
-			</xsl:text>
-		</xsl:if>
-	</xsl:template>
-	
-		<xsl:template match="SingleResponseQuestion" mode="model">
-
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="driver" select="." tunnel="yes"/>
-		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
-			as="xs:string +"/>
-		<xsl:variable name="questionName" select="enopdf:get-question-name($source-context,$languages[1])"/>
-		
-		<xsl:if test="$questionName != ''">
-			<xsl:value-of select="concat('[',$questionName,']')"/>
-		</xsl:if>
-		
-		
 				
-		<!-- print the question label and its instructions -->
-<!-- 		<xsl:apply-templates select="eno:printQuestionTitleWithInstruction($source-context,$languages[1],.)" /> -->
-
-			
-				<!-- print the question label and its instructions -->
-		<xsl:call-template name="eno:printQuestionTitleWithInstruction">
-			<xsl:with-param name="driver" select="."/>
-		</xsl:call-template>
-		
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-			<xsl:with-param name="typeOfAncestor" select="'question'" tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
 
 	<xsl:template match="DoubleDuration" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -1222,11 +1167,11 @@
 										<fo:inline>:</fo:inline>
 									</xsl:when>
 									<xsl:otherwise>
-										<fo:external-graphic>
-											<xsl:attribute name="src">
-												<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/>
-											</xsl:attribute>
-										</fo:external-graphic>
+										<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
+<!-- 											<xsl:attribute name="src"> -->
+<!-- 												<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
+<!-- 											</xsl:attribute> -->
+<!-- 										</fo:external-graphic> -->
 									</xsl:otherwise>
 								</xsl:choose>
 							</xsl:for-each>
@@ -1243,29 +1188,29 @@
 		
 	</xsl:template>
 		
-<!-- 	<xsl:function name="eno:printQuestionTitleWithInstruction" > -->
-<!-- 		<xsl:param name="source" tunnel="no"/> -->
-<!-- 		<xsl:param name="language" tunnel="no"/> -->
-<!-- 		<xsl:param name="driver" tunnel="no"/> -->
+	<xsl:function name="eno:printQuestionTitleWithInstruction" >
+		<xsl:param name="source" tunnel="no"/>
+		<xsl:param name="language" tunnel="no"/>
+		<xsl:param name="driver" tunnel="no"/>
 
-<!-- 		<xsl:if test="enopdf:get-label($source, $language) != ''"> -->
-<!-- 			<xsl:if test="enopdf:get-before-question-title-instructions($source) != ''"> -->
-<!-- 				<fo:block> -->
-<!-- 					<xsl:apply-templates select="enopdf:get-before-question-title-instructions($source)" mode="source"> -->
-<!-- 						<xsl:with-param name="driver" select="$driver" tunnel="yes"/> -->
-<!-- 					</xsl:apply-templates> -->
-<!-- 				</fo:block>				 -->
-<!-- 			</xsl:if> -->
-<!-- 			<fo:block xsl:use-attribute-sets="label-question"> -->
-<!-- 				<xsl:copy-of select="enopdf:get-label($source, $language)"/> -->
-<!-- 			</fo:block> -->
-<!-- 			<fo:block> -->
-<!-- 				<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source)" mode="source"> -->
-<!-- 					<xsl:with-param name="driver" select="$driver" tunnel="yes"/> -->
-<!-- 				</xsl:apply-templates> -->
-<!-- 			</fo:block> -->
-<!-- 		</xsl:if> -->
-<!-- 	</xsl:function> -->
+		<xsl:if test="enopdf:get-label($source, $language) != ''">
+			<xsl:if test="enopdf:get-before-question-title-instructions($source) != ''">
+				<fo:block>
+					<xsl:apply-templates select="enopdf:get-before-question-title-instructions($source)" mode="source">
+						<xsl:with-param name="driver" select="$driver" tunnel="yes"/>
+					</xsl:apply-templates>
+				</fo:block>				
+			</xsl:if>
+			<fo:block xsl:use-attribute-sets="label-question">
+				<xsl:copy-of select="enopdf:get-label($source, $language)"/>
+			</fo:block>
+			<fo:block>
+				<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source)" mode="source">
+					<xsl:with-param name="driver" select="$driver" tunnel="yes"/>
+				</xsl:apply-templates>
+			</fo:block>
+		</xsl:if>
+	</xsl:function>
 
 	<xd:doc>
 		<xd:desc>
@@ -1273,6 +1218,8 @@
 			<xd:p>It prints the question label and its instructions.</xd:p>
 		</xd:desc>
 	</xd:doc>
+	
+	
 	<xsl:template name="eno:printQuestionTitleWithInstruction" >
 		<xsl:param name="driver" tunnel="no"/>
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -1280,16 +1227,19 @@
 	
 		<xsl:apply-templates select="enopdf:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="$driver"/>
-		</xsl:apply-templates>			
-		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-			
-				<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
+		</xsl:apply-templates>	
 		
+				
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+				<xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</xsl:if>
+		
 		<!-- The enoddi:get-instructions-by-format getter produces in-language fragments, on which templates must be applied in "source" mode. -->
+		
 		<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="$driver"/>
 		</xsl:apply-templates>
+		
 	</xsl:template>
 	
 </xsl:stylesheet>
