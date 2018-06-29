@@ -801,7 +801,7 @@
                      <alert>Vous devez saisir un nombre entier compris entre 0 et 99</alert>
                   </j6q9h8tj-QOP-jbgdjy8h>
                   <j334cyqb-QOP-jbgdih2z>
-                     <label>&lt;p&gt;&lt;span class="block question"&gt;➡ 5. When was the first episode of the Simpsons?&lt;/span&gt;&lt;span class="block "&gt;For your information, the date of the last broadcast was on
+                     <label>&lt;p&gt;&lt;span class="block question date"&gt;➡ 5. When was the first episode of the Simpsons?&lt;/span&gt;&lt;span class="block "&gt;For your information, the date of the last broadcast was on
 						øLAST_BROADCASTø&lt;/span&gt;&lt;/p&gt;</label>
                      <hint>Date au format JJ/MM/AAAA</hint>
                      <alert>Entrez une date valide</alert>
@@ -1711,7 +1711,7 @@
                      <alert>You shall type an integer number between 0 and 99</alert>
                   </j6q9h8tj-QOP-jbgdjy8h>
                   <j334cyqb-QOP-jbgdih2z>
-                     <label>&lt;p&gt;&lt;span class="block question"&gt;➡ 5. When was the first episode of the Simpsons?&lt;/span&gt;&lt;span class="block "&gt;For your information, the date of the last broadcast was on
+                     <label>&lt;p&gt;&lt;span class="block question date"&gt;➡ 5. When was the first episode of the Simpsons?&lt;/span&gt;&lt;span class="block "&gt;For your information, the date of the last broadcast was on
 						øLAST_BROADCASTø&lt;/span&gt;&lt;/p&gt;</label>
                      <hint>Date in JJ/MM/AAAA format</hint>
                      <alert>Type a valid date</alert>
@@ -2690,7 +2690,8 @@
                </xf:bind>
             </xf:bind>
          </xf:bind>
-         <!--You can add a resource attribute for the save submission by processing the result with your own xslt.--><xf:submission id="save"
+         <!--You can add a resource attribute for the save submission by processing the result with your own xslt.-->
+         <xf:submission id="save"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
@@ -2702,7 +2703,8 @@
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
-         <!--You can add a resource attribute for the submit submission by processing the result with your own xslt.--><xf:submission id="submit"
+         <!--You can add a resource attribute for the submit submission by processing the result with your own xslt.-->
+         <xf:submission id="submit"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
@@ -2875,7 +2877,7 @@
                            <xf:input id="j334cyqb-QOP-jbgdih2z-control"
                                      name="j334cyqb-QOP-jbgdih2z"
                                      bind="j334cyqb-QOP-jbgdih2z-bind"
-                                     class="question"
+                                     class="question date"
                                      xxf:order="label control hint help alert">
                               <xf:label ref="$form-resources/j334cyqb-QOP-jbgdih2z/label" mediatype="text/html"/>
                               <xf:hint ref="$form-resources/j334cyqb-QOP-jbgdih2z/hint"/>
