@@ -33,7 +33,7 @@
     <!-- Definit le nombre maximum de lignes dans un tableau -->
     <Table>
     	<Row>
-    		<DefaultSize>10</DefaultSize>
+    		<DefaultSize>15</DefaultSize>
     		<NbRow>1</NbRow>
     	</Row>
     </Table>
