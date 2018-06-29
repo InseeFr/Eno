@@ -15,11 +15,8 @@
                 <fo:inline-container width="50mm">
                     <fo:block-container height="20mm" max-height="20mm" overflow="hidden">
                         <fo:block>
-                            <fo:external-graphic height="5mm">
-                                <xsl:attribute name="src">
-                                    <xsl:value-of select="concat($properties//Images/Folder,'logo-insee-header.png')"/>
-                                </xsl:attribute>
-                            </fo:external-graphic>
+                            <fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/logo-insee-header.png')" height="5mm"/>
+<!--                              <fo:external-graphic src="concat('url('''file:',$properties//Images/Folder,'logo-insee-header.png')')"/> -->
                         </fo:block>
                     </fo:block-container>
                 </fo:inline-container>
@@ -55,7 +52,7 @@
                 <fo:inline-container width="13mm">
                     <fo:block height="20mm">
                         &#160;
-                    </fo:block>
+                   </fo:block>
                 </fo:inline-container>
                 <fo:inline-container width="97mm" height="35mm">
                     <fo:block-container height="35mm" overflow="hidden">
