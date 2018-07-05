@@ -60,7 +60,7 @@
             style="${xslt.home}/transformations/${in-format}2${out-format}/${in-format}2${out-format}.xsl"
             force="true" classpath="${saxon.jar}">
             <param name="properties-file"
-                expression="${root-folder}/config/${in-format}2${out-format}.xml"/>
+                expression="${config-folder}/${in-format}2${out-format}.xml"/>
             <param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
             <param name="labels-folder" expression="${lang-folder}/fr"/>
         </xslt>

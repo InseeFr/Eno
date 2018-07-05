@@ -56,7 +56,7 @@
 		<xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/pdf/${form-name}/basic-form.tmp"
 			style="${xslt.home}/transformations/ddi2pdf/ddi2pdf.xsl" force="true"
 			classpath="${saxon.jar}">
-			<param name="properties-file" expression="${root-folder}/config/ddi2pdf.xml"/>
+			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
 			<param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
 			<param name="labels-folder" expression="${lang-folder}/fr"/>
 		</xslt>

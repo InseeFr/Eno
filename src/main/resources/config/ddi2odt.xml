@@ -7,4 +7,5 @@
 			<After>¤</After>
 		</ddi>
 	</TextConditioningVariable>
+	 <HeaderFile>office-headers.xml</HeaderFile>
 </Properties>

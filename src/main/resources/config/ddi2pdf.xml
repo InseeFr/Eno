@@ -22,7 +22,8 @@
 	</Style>
 	<Images>
 <!--         <Folder>file:c:///Users/Laurent/AppData/Local/Temp/img/</Folder> -->
-    <Folder>c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/</Folder>
+    <!--<Folder>c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/</Folder>-->
+	<Folder>C:///git_workspace/PDF/Eno/src/test/resources/ddi-to-pdf/img/</Folder>
     </Images>
     <!-- Definit la taille par défaut des rosters -->
     <Roster>
