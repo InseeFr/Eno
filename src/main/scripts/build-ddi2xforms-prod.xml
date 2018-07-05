@@ -34,7 +34,7 @@
             out="${temp.home}/xforms/${form-name}/basic-form.tmp"
             style="${xslt.home}/transformations/ddi2fr/ddi2fr.xsl" force="true"
             classpath="${saxon.jar}">
-            <param name="properties-file" expression="${root-folder}/config/ddi2fr.xml"/>
+            <param name="properties-file" expression="${config-folder}/ddi2fr.xml"/>
             <param name="parameters-file"
                 expression="${survey-folder}/parameters.xml"/>
             <param name="labels-folder"

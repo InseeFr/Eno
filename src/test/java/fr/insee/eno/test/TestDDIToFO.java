@@ -18,7 +18,7 @@ public class TestDDIToFO {
 	private XMLDiff xmlDiff = new XMLDiff();
 
 	
-	@Test
+	//@Test
 	public void simpleDiffTest() {
 		try {
 			String basePath = "src/test/resources/ddi-to-fo";

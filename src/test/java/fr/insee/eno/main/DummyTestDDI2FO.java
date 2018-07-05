@@ -14,7 +14,7 @@ public class DummyTestDDI2FO {
 		String basePathDDI2FO = "src/test/resources/ddi-to-fo";
 		GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
 				new NoopPostprocessor());
-		File in = new File(String.format("%s/simpsons_old.xml", basePathDDI2FO));
+		File in = new File(String.format("%s/in.xml", basePathDDI2FO));
 		try {
 			File output = genServiceDDI2PDF.generateQuestionnaire(in, null);
 			System.out.println(output.getAbsolutePath());

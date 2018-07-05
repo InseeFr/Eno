@@ -28,7 +28,7 @@ public class DummyTestDDI2PDF {
 		String basePathddi2PDF = "src/test/resources/ddi-to-pdf";
 		GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
 				new PDFPostprocessor());
-		File in = new File(String.format("%s/simpsons_old.xml", basePathddi2PDF));
+		File in = new File(String.format("%s/in.xml", basePathddi2PDF));
 		File conf = new File(String.format("%s/fop.xconf", basePathddi2PDF));
 		try {
 			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, null);
