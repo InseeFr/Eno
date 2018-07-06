@@ -968,8 +968,10 @@
 								<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
 								<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
 
-									<xsl:apply-templates select="enopdf:get-body-line($source-context, position())" mode="source">
+									<xsl:apply-templates select="enopdf:get-body-line($source-context, position(),$maxlines-by-table*($page-position -1) +1)" mode="source">
 										<xsl:with-param name="driver" select="." tunnel="yes"/>
+										<xsl:with-param name="table-first-line" select="$maxlines-by-table*($page-position -1) +1" tunnel="yes"/>
+										<xsl:with-param name="table-last-line" select="$maxlines-by-table*$page-position" tunnel="yes"/>
 										<xsl:with-param name="isTable" select="'YES'" tunnel="yes"/>
 										<xsl:with-param name="row-number"  select="position()" tunnel="yes"/>
 										<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
@@ -1108,6 +1110,9 @@
 		<xsl:param name="header" tunnel="yes"/>
 		<xsl:param name="row-number" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
+		<xsl:param name="table-first-line" tunnel="yes"/>
+		<xsl:param name="table-last-line" tunnel="yes"/>
+		
 		
 		<!--FLAG-->
 		<!--<TextCell/>
@@ -1116,7 +1121,7 @@
 		<!--<CodeDepth><xsl:value-of select="enopdf:get-code-depth($source-context)"/></CodeDepth>-\->-->
 		
 		<fo:table-cell xsl:use-attribute-sets="colonne-tableau"
-			number-rows-spanned="{enopdf:get-rowspan($source-context)}"
+			number-rows-spanned="{enopdf:get-rowspan($source-context,$table-first-line,$table-last-line)}"
 			number-columns-spanned="{enopdf:get-colspan($source-context)}">
 			
 			<xsl:if test="$header">

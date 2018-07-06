@@ -74,6 +74,32 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Linking output function enopdf:get-body-line to input function enoddi:get-table-line.</xd:p>
+            <xd:p>This function has too many parameters to stay in the functions.fods file</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enopdf:get-body-line">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="index"/>
+        <xsl:param name="table-first-line"/>
+        <xsl:sequence select="enoddi:get-table-line($context,$index,$table-first-line)"/>
+    </xsl:function>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Linking output function enopdf:get-rowspan to input function enoddi:get-rowspan.</xd:p>
+            <xd:p>This function has too many parameters to stay in the functions.fods file</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enopdf:get-rowspan">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="table-first-line"/>
+        <xsl:param name="table-last-line"/>
+        <xsl:sequence select="enoddi:get-rowspan($context,$table-first-line,$table-last-line)"/>
+    </xsl:function>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>This xforms function is used to get the concatened string corresponding to a dynamic text.</xd:p>
             <xd:p>It is created by calling the static text and making it dynamic.</xd:p>
         </xd:desc>
