@@ -78,7 +78,18 @@
 			<fo:page-sequence master-reference="A4-portrait">
 				<fo:static-content flow-name="xsl-region-before">
 					<fo:block position="absolute" margin="10mm" text-align="right">
-						<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/encoche-top-right.png')"/>
+						<fo:external-graphic>
+							<xsl:attribute name="src">
+								<xsl:choose>
+									<xsl:when test="$properties//Images/Folder != ''">
+										<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'encoche-top-right.png'')')"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="'encoche-top-right.png'"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+						</fo:external-graphic>
 					</fo:block>
 					<fo:block position="absolute" margin-top="80%" text-align="right">
 						<fo:instream-foreign-object>
@@ -94,11 +105,18 @@
 				</fo:static-content>
 				<fo:static-content flow-name="xsl-region-after">
 					<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0px" text-align="left">
-						<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/encoche-bottom-left.png')"/>
-<!-- 							<xsl:attribute name="src"> -->
-<!-- 								<xsl:value-of select="concat('url(''',$properties//Images/Folder,'encoche-bottom-left.png'')')"/> -->
-<!-- 							</xsl:attribute> -->
-<!-- 						</fo:external-graphic> -->
+						<fo:external-graphic>
+							<xsl:attribute name="src">
+								<xsl:choose>
+									<xsl:when test="$properties//Images/Folder != ''">
+										<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'encoche-bottom-left.png'')')"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="'encoche-bottom-left.png'"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
+						</fo:external-graphic>
 					</fo:block>
 					<fo:block text-align="center">
 						<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
@@ -204,11 +222,18 @@
 							<fo:inline-container width="10%">
 								<fo:block-container>
 									<fo:block>
-										<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/filter_arrow_25.png')"/>
-<!-- 											<xsl:attribute name="src"> -->
-<!-- 												<xsl:value-of select="concat('url(''',$properties//Images/Folder,'filter_arrow_25.png'')')"/> -->
-<!-- 											</xsl:attribute> -->
-<!-- 										</fo:external-graphic> -->
+										<fo:external-graphic>
+											<xsl:attribute name="src">
+												<xsl:choose>
+													<xsl:when test="$properties//Images/Folder != ''">
+														<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'filter_arrow_25.png'')')"/>
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:value-of select="'filter_arrow_25.png'"/>
+													</xsl:otherwise>
+												</xsl:choose>
+											</xsl:attribute>
+										</fo:external-graphic>
 									</fo:block>
 								</fo:block-container>
 							</fo:inline-container>
@@ -389,11 +414,18 @@
 								<xsl:if test="number(string-length(replace($field,'/',''))) = $curVal">
 									<xsl:for-each select="1 to $curVal">
 										<xsl:variable name="curVal2" select="."/>
-										<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
-<!-- 											<xsl:attribute name="src"> -->
-<!-- 												<xsl:value-of select="concat('url(''',$properties//Images/Folder,'mask_number.png'')')"/> -->								
-<!-- 											</xsl:attribute> -->
-<!-- 										</fo:external-graphic> -->
+										<fo:external-graphic>
+											<xsl:attribute name="src">
+												<xsl:choose>
+													<xsl:when test="$properties//Images/Folder != ''">
+														<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'mask_number.png'')')"/>
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:value-of select="'mask_number.png'"/>
+													</xsl:otherwise>
+												</xsl:choose>
+											</xsl:attribute>
+										</fo:external-graphic>
 										<xsl:if test="$curVal2 = number(string-length(replace($field,'/','')))"> (<xsl:value-of select="$field"/>) </xsl:if>
 									</xsl:for-each>
 								</xsl:if>
@@ -415,11 +447,18 @@
 						<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 							<xsl:for-each select="1 to $curVal">
 								<xsl:variable name="curVal2" select="."/>
-								<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
-<!-- 									<xsl:attribute name="src"> -->
-<!-- 										<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
-<!-- 									</xsl:attribute> -->
-<!-- 								</fo:external-graphic> -->
+								<fo:external-graphic>
+									<xsl:attribute name="src">
+										<xsl:choose>
+											<xsl:when test="$properties//Images/Folder != ''">
+												<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'mask_number.png'')')"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="'mask_number.png'"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:attribute>
+								</fo:external-graphic>
 							</xsl:for-each>
 						</xsl:if>
 					</xsl:for-each>
@@ -440,11 +479,18 @@
 							<xsl:variable name="curVal" select="."/>
 							<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 								<xsl:for-each select="1 to $curVal">
-									<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
-<!-- 										<xsl:attribute name="src"> -->
-<!-- 											<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
-<!-- 										</xsl:attribute> -->
-<!-- 									</fo:external-graphic> -->
+									<fo:external-graphic>
+										<xsl:attribute name="src">
+											<xsl:choose>
+												<xsl:when test="$properties//Images/Folder != ''">
+													<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'mask_number.png'')')"/>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:value-of select="'mask_number.png'"/>
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:attribute>
+									</fo:external-graphic>
 								</xsl:for-each>
 							</xsl:if>
 						</xsl:for-each>
@@ -473,11 +519,18 @@
 									<xsl:variable name="curVal" select="."/>
 									<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 										<xsl:for-each select="1 to $curVal">
-											<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
-<!-- 												<xsl:attribute name="src"> -->
-<!-- 													<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
-<!-- 												</xsl:attribute> -->
-<!-- 											</fo:external-graphic> -->
+											<fo:external-graphic>
+												<xsl:attribute name="src">
+													<xsl:choose>
+														<xsl:when test="$properties//Images/Folder != ''">
+															<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'mask_number.png'')')"/>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:value-of select="'mask_number.png'"/>
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:attribute>
+											</fo:external-graphic>
 										</xsl:for-each>
 									</xsl:if>
 								</xsl:for-each>
@@ -515,11 +568,18 @@
 								<xsl:if test="number(string-length(replace($field,'/',''))) = $curVal">
 									<xsl:for-each select="1 to $curVal">
 										<xsl:variable name="curVal2" select="."/>
-										<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
-<!-- 											<xsl:attribute name="src"> -->
-<!-- 												<xsl:value-of select="concat('url(''',$properties//Images/Folder,'mask_number.png'')')"/> -->								
-<!-- 											</xsl:attribute> -->
-<!-- 										</fo:external-graphic> -->
+										<fo:external-graphic>
+											<xsl:attribute name="src">
+												<xsl:choose>
+													<xsl:when test="$properties//Images/Folder != ''">
+														<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'mask_number.png'')')"/>
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:value-of select="'mask_number.png'"/>
+													</xsl:otherwise>
+												</xsl:choose>
+											</xsl:attribute>
+										</fo:external-graphic>
 										<xsl:if test="$curVal2 = number(string-length(replace($field,'/','')))"> (<xsl:value-of select="$field"/>) </xsl:if>
 									</xsl:for-each>
 								</xsl:if>
@@ -540,8 +600,19 @@
 <!-- 							<xsl:if test="number(enopdf:get-length($source-context)) = $curVal"> -->
 <!-- 								<xsl:for-each select="1 to $curVal"> -->
 <!-- 									<xsl:variable name="curVal2" select="."/> -->
-<!-- 									<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/> -->
-
+ 									<!--<fo:external-graphic>
+ 										<xsl:attribute name="src">
+ 											<xsl:choose>
+ 												<xsl:when test="$properties//Images/Folder != ''">
+ 													<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'mask_number.png'')')"/>
+ 												</xsl:when>
+ 												<xsl:otherwise>
+ 													<xsl:value-of select="'mask_number.png'"/>
+ 												</xsl:otherwise>
+ 											</xsl:choose>
+ 										</xsl:attribute>
+ 									</fo:external-graphic> 
+-->
 
 <!-- 										<xsl:attribute name="src"> -->
 <!-- 											<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
@@ -571,11 +642,18 @@
 								<xsl:variable name="curVal" select="."/>
 								<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 									<xsl:for-each select="1 to $curVal">
-										<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
-<!-- 											<xsl:attribute name="src"> -->
-<!-- 												<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
-<!-- 											</xsl:attribute> -->
-<!-- 										</fo:external-graphic> -->
+										<fo:external-graphic>
+											<xsl:attribute name="src">
+												<xsl:choose>
+													<xsl:when test="$properties//Images/Folder != ''">
+														<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'mask_number.png'')')"/>
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:value-of select="'mask_number.png'"/>
+													</xsl:otherwise>
+												</xsl:choose>
+											</xsl:attribute>
+										</fo:external-graphic>
 									</xsl:for-each>
 								</xsl:if>
 							</xsl:for-each>
@@ -609,11 +687,18 @@
 															<xsl:text>,</xsl:text>
 														</xsl:when>
 														<xsl:otherwise>
-															<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
-<!-- 																<xsl:attribute name="src"> -->
-<!-- 																	<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
-<!-- 																</xsl:attribute> -->
-<!-- 															</fo:external-graphic> -->
+															<fo:external-graphic>
+																<xsl:attribute name="src">
+																	<xsl:choose>
+																		<xsl:when test="$properties//Images/Folder != ''">
+																			<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'mask_number.png'')')"/>
+																		</xsl:when>
+																		<xsl:otherwise>
+																			<xsl:value-of select="'mask_number.png'"/>
+																		</xsl:otherwise>
+																	</xsl:choose>
+																</xsl:attribute>
+															</fo:external-graphic>
 														</xsl:otherwise>
 													</xsl:choose>
 												</xsl:for-each>
@@ -626,11 +711,18 @@
 											<xsl:variable name="curVal" select="."/>
 											<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
 												<xsl:for-each select="1 to $curVal">
-													<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
-<!-- 														<xsl:attribute name="src"> -->
-<!-- 															<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
-<!-- 														</xsl:attribute> -->
-<!-- 													</fo:external-graphic> -->
+													<fo:external-graphic>
+														<xsl:attribute name="src">
+															<xsl:choose>
+																<xsl:when test="$properties//Images/Folder != ''">
+																	<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'mask_number.png'')')"/>
+																</xsl:when>
+																<xsl:otherwise>
+																	<xsl:value-of select="'mask_number.png'"/>
+																</xsl:otherwise>
+															</xsl:choose>
+														</xsl:attribute>
+													</fo:external-graphic>
 												</xsl:for-each>
 											</xsl:if>
 										</xsl:for-each>
@@ -807,9 +899,9 @@
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)"
 			as="xs:string +"/>
 			
-			<fo:block xsl:use-attribute-sets="label-question">
-					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-			</fo:block>	
+		<fo:block xsl:use-attribute-sets="label-question" keep-with-next="always">
+			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+		</fo:block>	
 					
 			<!-- FLAG Recupérer les caractéristiques du tableau pour le construire dynamiquement -->
 	
@@ -821,24 +913,25 @@
 	
 	<!-- On fixe le nombre max de ligne dans un tableau (DefaultSize) pour pagination -->
 		<xsl:variable name="line-number" select="count(enopdf:get-body-lines($source-context))"/>
-		<xsl:variable name="table-pages" select="xs:integer(1+(($line-number -1) div $properties//Table/Row/DefaultSize))" as="xs:integer"/>
+		<xsl:variable name="maxlines-by-table" select="$properties//Table/Row/DefaultSize"/>
+		<xsl:variable name="table-pages" select="xs:integer(1+(($line-number -1) div $maxlines-by-table))" as="xs:integer"/>
+		
 		<xsl:for-each select="1 to $table-pages">
-		<xsl:variable name="page-position" select="position()"/>
+			<xsl:variable name="page-position" select="position()"/>
 	
-		<fo:block>
-		<xsl:if test="$line-number &gt;= $properties//Table/Row/DefaultSize">
-		<xsl:attribute name="page-break-after" select="'always'"/>
-		</xsl:if>
-			<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
-				text-align="center" margin-top="1mm" display-align="center" space-after="5mm">
+			<fo:block page-break-inside="avoid">
+				<xsl:if test="$line-number &gt;= $maxlines-by-table">
+					<xsl:attribute name="page-break-after" select="'always'"/>
+				</xsl:if>
+				<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
+					text-align="center" margin-top="1mm" display-align="center" space-after="5mm">
 	
 				<!--Gestion du header-->
-				<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
-	
-					<fo:table-header>
+					<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
+						<fo:table-header>
 						<!-- Récupére le nombre de header-lines = Nombre de lignes dans le tableau -->
-						<xsl:for-each select="enopdf:get-header-lines($source-context)">
-							<fo:table-row xsl:use-attribute-sets="entete-ligne" text-align="center">
+							<xsl:for-each select="enopdf:get-header-lines($source-context)">
+								<fo:table-row xsl:use-attribute-sets="entete-ligne" text-align="center">
 								<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
 										<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>
 										<NBHeaderLine><xsl:value-of select="count(enopdf:get-header-line($source-context, position()))"/></NBHeaderLine>
@@ -848,60 +941,54 @@
 										<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
 	
 								<!-- Dans un for-each, la fonction position() renvoie la position de l'élément dans l'arbre temporaire créé dans le select du for-each -->
-								<xsl:apply-templates
-									select="enopdf:get-header-line($source-context, position())"
-									mode="source">
-									<xsl:with-param name="driver" select="." tunnel="yes"/>
-									<xsl:with-param name="header"  select="'YES'" tunnel="yes"/>
-									<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
-								</xsl:apply-templates>
+									<xsl:apply-templates
+										select="enopdf:get-header-line($source-context, position())"
+										mode="source">
+										<xsl:with-param name="driver" select="." tunnel="yes"/>
+										<xsl:with-param name="header"  select="'YES'" tunnel="yes"/>
+										<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
+									</xsl:apply-templates>
 								<!-- Pour chaque boucle , on récupére les infos du header -->
-							</fo:table-row>
-						</xsl:for-each>
-					</fo:table-header>
-				</xsl:if>
+								</fo:table-row>
+							</xsl:for-each>
+						</fo:table-header>
+					</xsl:if>
 	
 				<!--Gestion du body-->
-				<fo:table-body>
-					<xsl:for-each select="enopdf:get-body-lines($source-context)">
-					<xsl:variable name="position" select="position()"/>
-					<xsl:if test="($position &gt; $properties//Table/Row/DefaultSize*($page-position -1)) and ($position &lt;= $properties//Table/Row/DefaultSize*$page-position)" >
-						
-						<fo:table-row border-color="black" >
-						
-						
-						
-							<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
+					<fo:table-body>
+						<xsl:for-each select="enopdf:get-body-lines($source-context)">
+							<xsl:variable name="position" select="position()"/>
+							<xsl:if test="($position &gt; $maxlines-by-table*($page-position -1)) and ($position &lt;= $maxlines-by-table*$page-position)" >
+								<fo:table-row border-color="black" >
+									<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
 								<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>
 								<NBHeaderLine><xsl:value-of select="count(enopdf:get-header-line($source-context, position()))"/></NBHeaderLine>
 								<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
 								<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>
 								<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
 								<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
-							
-							<xsl:apply-templates
-								select="enopdf:get-body-line($source-context, position())" mode="source">
-								<xsl:with-param name="driver" select="." tunnel="yes"/>
-								<xsl:with-param name="isTable" select="'YES'" tunnel="yes"/>
-								<xsl:with-param name="row-number"  select="position()" tunnel="yes"/>
-								<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
-							</xsl:apply-templates>
+
+									<xsl:apply-templates select="enopdf:get-body-line($source-context, position(),$maxlines-by-table*($page-position -1) +1)" mode="source">
+										<xsl:with-param name="driver" select="." tunnel="yes"/>
+										<xsl:with-param name="table-first-line" select="$maxlines-by-table*($page-position -1) +1" tunnel="yes"/>
+										<xsl:with-param name="table-last-line" select="$maxlines-by-table*$page-position" tunnel="yes"/>
+										<xsl:with-param name="isTable" select="'YES'" tunnel="yes"/>
+										<xsl:with-param name="row-number"  select="position()" tunnel="yes"/>
+										<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
+									</xsl:apply-templates>
 							
 							<!-- Pour chaque boucle , on récupére les infos des lignes du tableau -->
-							
-						
-							
-						</fo:table-row>
-						</xsl:if>
-					</xsl:for-each>
-				</fo:table-body>
-			</fo:table>
-		</fo:block>
-			</xsl:for-each>
+								</fo:table-row>
+							</xsl:if>
+						</xsl:for-each>
+					</fo:table-body>
+				</fo:table>
+			</fo:block>
+		</xsl:for-each>
 		
-			<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-			</xsl:apply-templates>
+		<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
 				
 	</xsl:template>
 
@@ -911,7 +998,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="instance-ancestor" tunnel="yes"/>
 				
-				<fo:block xsl:use-attribute-sets="label-question">
+		<fo:block xsl:use-attribute-sets="label-question" keep-with-next="always">
 					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 				</fo:block>		
 				
@@ -928,7 +1015,7 @@
 				<xsl:variable name="table-pages" select="xs:integer(1+(($line-number -1) div $properties//Table/Row/DefaultSize))" as="xs:integer"/>
 				<xsl:for-each select="1 to $table-pages">
 				<xsl:variable name="page-position" select="position()"/>
-				<fo:block>
+					<fo:block  page-break-inside="avoid">
 				
 				<xsl:if test="$line-number &gt;= $properties//Table/Row/DefaultSize">
 					<xsl:attribute name="page-break-after" select="'always'"/>
@@ -1023,6 +1110,9 @@
 		<xsl:param name="header" tunnel="yes"/>
 		<xsl:param name="row-number" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
+		<xsl:param name="table-first-line" tunnel="yes"/>
+		<xsl:param name="table-last-line" tunnel="yes"/>
+		
 		
 		<!--FLAG-->
 		<!--<TextCell/>
@@ -1031,7 +1121,7 @@
 		<!--<CodeDepth><xsl:value-of select="enopdf:get-code-depth($source-context)"/></CodeDepth>-\->-->
 		
 		<fo:table-cell xsl:use-attribute-sets="colonne-tableau"
-			number-rows-spanned="{enopdf:get-rowspan($source-context)}"
+			number-rows-spanned="{enopdf:get-rowspan($source-context,$table-first-line,$table-last-line)}"
 			number-columns-spanned="{enopdf:get-colspan($source-context)}">
 			
 			<xsl:if test="$header">
@@ -1194,11 +1284,18 @@
 										<fo:inline>:</fo:inline>
 									</xsl:when>
 									<xsl:otherwise>
-										<fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/mask_number.png')"/>
-<!-- 											<xsl:attribute name="src"> -->
-<!-- 												<xsl:value-of select="concat($properties//Images/Folder,'mask_number.png')"/> -->
-<!-- 											</xsl:attribute> -->
-<!-- 										</fo:external-graphic> -->
+										<fo:external-graphic>
+											<xsl:attribute name="src">
+												<xsl:choose>
+													<xsl:when test="$properties//Images/Folder != ''">
+														<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'mask_number.png'')')"/>
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:value-of select="'mask_number.png'"/>
+													</xsl:otherwise>
+												</xsl:choose>
+											</xsl:attribute>
+										</fo:external-graphic>
 									</xsl:otherwise>
 								</xsl:choose>
 							</xsl:for-each>

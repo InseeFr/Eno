@@ -15,7 +15,19 @@
                 <fo:inline-container width="50mm">
                     <fo:block-container height="20mm" max-height="20mm" overflow="hidden">
                         <fo:block>
-                            <fo:external-graphic src="url('file:c:///Users/Laurent/git/EnoLaurent/src/test/resources/ddi-to-pdf/img/logo-insee-header.png')" height="5mm"/>
+                            <fo:external-graphic>
+                                <xsl:attribute name="src">
+                                    <xsl:choose>
+                                        <xsl:when test="$properties//Images/Folder != ''">
+                                            <xsl:value-of select="concat('url(''file:',$properties//Images/Folder,'logo-insee-header.png'')')"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="'logo-insee-header.png'"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:attribute>
+                                <xsl:attribute name="height" select="'5mm'"/>
+                            </fo:external-graphic>
 <!--                              <fo:external-graphic src="concat('url('''file:',$properties//Images/Folder,'logo-insee-header.png')')"/> -->
                         </fo:block>
                     </fo:block-container>
