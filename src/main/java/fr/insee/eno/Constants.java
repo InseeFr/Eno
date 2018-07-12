@@ -122,14 +122,38 @@ public final class Constants {
 	public static final String TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "/eno";
 	
 	public static final File TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH);
-	public static final File SUB_TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp");
+	//public static final File SUB_TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp");
+	public static File sUB_TEMP_FOLDER_FILE (String survey){
+		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/"+survey);
+	}
+	
+	public static String sUB_TEMP_FOLDER (String survey){
+		return TEMP_FOLDER_PATH + "/"+survey;
+	}
+	
 	
 	// ----- Files
-	public static final File TEMP_NULL_TMP = getFileOrDirectoryFromPath(SUB_TEMP_FOLDER + "/null.tmp");
+	//public static final File TEMP_NULL_TMP = getFileOrDirectoryFromPath(SUB_TEMP_FOLDER + "/null.tmp");
+	public static File tEMP_NULL_TMP (String sUB_TEMP_FOLDER){
+		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/null.tmp");
+	}
 	public static final File TEMP_PREFORMATE_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/preformate.tmp");
+//	public static File tEMP_PREFORMATE_TMP (String sUB_TEMP_FOLDER) {
+//		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/preformate.tmp");
+//	}
 	public static final File TEMP_XML_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/xml.tmp");
+//	public static File tEMP_XML_TMP (String sUB_TEMP_FOLDER){
+//		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/xml.tmp");
+//	}
 	public static final File TEMP_TEMP_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp.tmp");
+//	public static File tEMP_TEMP_TMP(String sUB_TEMP_FOLDER){
+//		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/temp.tmp");
+//	}
 	public static final File TEMP_TEMP_BIS_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp-bis.tmp");
+//	public static File tEMP_TEMP_BIS_TMP(String sUB_TEMP_FOLDER){
+//		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/temp-bis.tmp");
+//	}
+	
 	// Those files holds the XSL generated from FODS ; they will be then copied to resource directory when packaging to JAR
 	public static final File TRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/ddi2fr.xsl");
 	public static final File TRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2odt/ddi2odt.xsl");
@@ -225,7 +249,10 @@ public final class Constants {
 	/********************************************************/
 
 	//// Temporary files used in DDIPreprocessing
-	public static final String OLD_TEMP_NULL_TMP2 = SUB_TEMP_FOLDER + "/null.tmp";
+	//public static final String OLD_TEMP_NULL_TMP2 = SUB_TEMP_FOLDER + "/null.tmp";
+	public String oLD_TEMP_NULL_TMP2(String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER + "/null.tmp";
+	}
 
 	//// Xsl stylesheets used in DDIPreprocessing
 
@@ -236,20 +263,29 @@ public final class Constants {
 	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
 	public static final String FINAL_PDF_EXTENSION = "-out.fo";
-	public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
-	public static final String TEMP_ODT_FOLDER = SUB_TEMP_FOLDER + "/odt";
-	public static final String TEMP_PDF_FOLDER = SUB_TEMP_FOLDER + "/pdf";
-	public static final String TEMP_DDI_FOLDER = SUB_TEMP_FOLDER + "/ddi";
-	public static final String TEMP_POGUES_XML_FOLDER = SUB_TEMP_FOLDER + "/pogues-xml";
+	//public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
+	public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER + "/xforms";
+	}
+	//public static final String TEMP_ODT_FOLDER = SUB_TEMP_FOLDER + "/odt";
+	public static String tEMP_ODT_FOLDER(String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER + "/odt";
+	}
+	
+	//public static final String TEMP_PDF_FOLDER = SUB_TEMP_FOLDER + "/pdf";
+	public static String tEMP_PDF_FOLDER(String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER+ "/pdf";
+	}
+	//public static final String TEMP_DDI_FOLDER = SUB_TEMP_FOLDER + "/ddi";
+	public static String tEMP_DDI_FOLDER(String sUB_TEMP_FOLDER){
+		 return sUB_TEMP_FOLDER + "/ddi";
+	}
+	//public static final String TEMP_POGUES_XML_FOLDER = SUB_TEMP_FOLDER + "/pogues-xml";
+	public static String tEMP_POGUES_XML_FOLDER(String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER + "/pogues-xml";
+	}
 	public static final String BASIC_FORM_TMP_FILENAME = "basic-form.tmp";
 
-	/********************************************************/
-	/***************** NON REGRESSION TEST ******************/
-	/********************************************************/
-
-	public static final String TEST_FILE_TO_COMPARE = TEMP_FOLDER_PATH + "/simpsons/v1/form/form.xhtml";
-	public static final String TEST_REFERENCE_FILE = "simpsons-form.xhtml";
-	public static final String TEST_INPUT_XML = "simpsons.xml";
 	
 	
 }

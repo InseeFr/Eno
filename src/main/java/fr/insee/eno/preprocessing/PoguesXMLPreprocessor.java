@@ -23,7 +23,7 @@ public class PoguesXMLPreprocessor implements Preprocessor {
 	private static XslTransformation saxonService = new XslTransformation();
 	
 	@Override
-	public File process(File inputFile, File parametersFile) throws Exception {
+	public File process(File inputFile, File parametersFile, String surveyName) throws Exception {
 		logger.info("PoguesXMLPreprocessing Target : START");
 		
 		String outputPreprocessSuppGoto = null;

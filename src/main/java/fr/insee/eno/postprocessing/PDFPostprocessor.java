@@ -22,7 +22,7 @@ public class PDFPostprocessor implements Postprocessor {
 	private static CalculatorService serviceTableColumnSize = new CalculatorService();
 
 	@Override
-	public File process(File input, File parametersFile) throws Exception {
+	public File process(File input, File parametersFile, String survey) throws Exception {
 
 		String outputForFO = FilenameUtils.removeExtension(input.getPath()) + Constants.FINAL_PDF_EXTENSION;
 

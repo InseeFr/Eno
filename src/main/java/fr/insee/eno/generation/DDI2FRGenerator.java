@@ -15,6 +15,8 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 
 public class DDI2FRGenerator implements Generator {
 	
+	private InputStream propertiesFiles;
+	
 	private static final Logger logger = LoggerFactory.getLogger(DDI2FRGenerator.class);
 	
 	// FIXME Inject !
@@ -30,13 +32,13 @@ public class DDI2FRGenerator implements Generator {
 		formNameFolder = getFormNameFolder(finalInput);
 
 		logger.debug("formNameFolder : " + formNameFolder);
-
-		outputBasicFormPath = Constants.TEMP_XFORMS_FOLDER + "/" + formNameFolder + "/" + Constants.BASIC_FORM_TMP_FILENAME;
+		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(surveyName);
+		outputBasicFormPath = Constants.tEMP_XFORMS_FOLDER(sUB_TEMP_FOLDER) + "/" + formNameFolder + "/" + Constants.BASIC_FORM_TMP_FILENAME;
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
 		
 		
 		InputStream isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL);
-		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_FR);
+		InputStream isPROPERTIES_FILE = this.getPropertiesFiles();
 		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
 		
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
@@ -85,4 +87,16 @@ public class DDI2FRGenerator implements Generator {
 		return formNameFolder;
 	}
 
+	public void setPropertiesFile(InputStream propertiesFiles) {
+		this.propertiesFiles = propertiesFiles;
+	}
+	private InputStream getPropertiesFiles() {
+		InputStream isPROPERTIES_FILE = null;
+		if (propertiesFiles == null) {
+			isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_FR);
+		}else{
+			isPROPERTIES_FILE = propertiesFiles;
+		}
+		return isPROPERTIES_FILE;
+	}
 }
