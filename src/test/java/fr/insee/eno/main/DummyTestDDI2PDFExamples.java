@@ -2,9 +2,11 @@ package fr.insee.eno.main;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -19,26 +21,26 @@ import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
 
-import fr.insee.eno.Constants;
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.PDFPostprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
-import fr.insee.eno.transform.xsl.XslParameters;
 
 public class DummyTestDDI2PDFExamples {
 
 	public static void main(String[] args) {
 
 		String basePathExamples = "src/test/resources/examples";
+		String basePathImg = "src/test/resources/examples/img/";
 		
 		DDI2PDFGenerator generator =  new DDI2PDFGenerator();
 
 		File in = new File(String.format("%s/achats-ddi.xml", basePathExamples));
-		File conf = new File(String.format("%s/fop.xconf", basePathExamples));
+		File xconf = new File(String.format("%s/fop.xconf", basePathExamples));
 		File propertiesFile = new File(String.format("%s/achats-ddi2pdf-conf.xml", basePathExamples));
 		try {
-			
+			InputStream isXconf = new FileInputStream(xconf);
+			URI imgFolderUri = new File(basePathImg).toURI();
 			generator.setPropertiesFile(FileUtils.openInputStream(propertiesFile));
 			
 			GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), generator,
@@ -49,7 +51,7 @@ public class DummyTestDDI2PDFExamples {
 			// Step 1: Construct a FopFactory by specifying a reference to the
 			// configuration file
 			// (reuse if you plan to render multiple documents!)
-			FopFactory fopFactory = FopFactory.newInstance(conf);
+			FopFactory fopFactory = FopFactory.newInstance(imgFolderUri,isXconf);
 			
 			File outFilePDF = new File(String.format("%s.pdf", FilenameUtils.removeExtension(outputFO.getAbsolutePath())));
 

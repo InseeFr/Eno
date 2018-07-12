@@ -2,9 +2,11 @@ package fr.insee.eno.main;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -14,7 +16,6 @@ import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
@@ -29,22 +30,25 @@ public class DummyTestDDI2PDF {
 	public static void main(String[] args) {
 
 		String basePathddi2PDF = "src/test/resources/ddi-to-pdf";
+		String basePathImg = "src/test/resources/examples/img/";
 		GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
 				new PDFPostprocessor());
 		File in = new File(String.format("%s/in.xml", basePathddi2PDF));
-		File conf = new File(String.format("%s/fop.xconf", basePathddi2PDF));
-		try {
-			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, null,"test");
+		File xconf = new File(String.format("%s/fop.xconf", basePathddi2PDF));
 
-			File imgTempFolder = new File(FilenameUtils.getPath(outputFO.getAbsolutePath()));
-			File imgFolder = new File(String.format("%s/img", basePathddi2PDF));
-			FileUtils.copyDirectory(imgFolder, imgTempFolder);
+		try {
+			InputStream isXconf = new FileInputStream(xconf);
+			URI imgFolderUri = new File(basePathImg).toURI();
+
+			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, null, "test");
+
 			// Step 1: Construct a FopFactory by specifying a reference to the
 			// configuration file
 			// (reuse if you plan to render multiple documents!)
-			FopFactory fopFactory = FopFactory.newInstance(conf);
+			FopFactory fopFactory = FopFactory.newInstance(imgFolderUri, isXconf);
 
-			File outFilePDF = new File(String.format("%s.pdf", FilenameUtils.removeExtension(outputFO.getAbsolutePath())));
+			File outFilePDF = new File(
+					String.format("%s.pdf", FilenameUtils.removeExtension(outputFO.getAbsolutePath())));
 
 			// Step 2: Set up output stream.
 			// Note: Using BufferedOutputStream for performance reasons
@@ -71,8 +75,8 @@ public class DummyTestDDI2PDF {
 
 			// Clean-up
 			out.close();
-
 			System.out.println(outFilePDF.getAbsolutePath());
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

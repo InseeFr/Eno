@@ -54,7 +54,7 @@
                <fo:inline-container width="50mm">
                   <fo:block-container height="20mm" max-height="20mm" overflow="hidden">
                      <fo:block>
-                        <fo:external-graphic src="url('file:img/logo-insee-header.png')" height="5mm"/>
+                        <fo:external-graphic src="logo-insee-header.png" height="5mm"/>
                      </fo:block>
                   </fo:block-container>
                </fo:inline-container>
@@ -262,7 +262,7 @@
    <fo:page-sequence master-reference="A4-portrait">
       <fo:static-content flow-name="xsl-region-before">
          <fo:block position="absolute" margin="10mm" text-align="right">
-            <fo:external-graphic src="url('file:img/encoche-top-right.png')"/>
+            <fo:external-graphic src="encoche-top-right.png"/>
          </fo:block>
          <fo:block position="absolute" margin-top="80%" text-align="right">
             <fo:instream-foreign-object>
@@ -282,7 +282,7 @@
                    margin-top="10mm"
                    bottom="0px"
                    text-align="left">
-            <fo:external-graphic src="url('file:img/encoche-bottom-left.png')"/>
+            <fo:external-graphic src="encoche-bottom-left.png"/>
          </fo:block>
          <fo:block text-align="center">
             <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
@@ -390,8 +390,8 @@
                       padding="1mm"
                       padding-bottom="0mm"
                       padding-top="0mm">
-               <fo:external-graphic src="url('file:img/mask_number.png')"/>
-               <fo:external-graphic src="url('file:img/mask_number.png')"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
                <fo:inline/>
             </fo:block>
          </fo:block>
@@ -412,14 +412,14 @@
                    font-size="10pt"
                    padding="1mm">
             <Flag508>Date+Label_vide</Flag508>
-            <fo:external-graphic src="url('file:img/mask_number.png')"/>
-            <fo:external-graphic src="url('file:img/mask_number.png')"/>
-            <fo:external-graphic src="url('file:img/mask_number.png')"/>
-            <fo:external-graphic src="url('file:img/mask_number.png')"/>
-            <fo:external-graphic src="url('file:img/mask_number.png')"/>
-            <fo:external-graphic src="url('file:img/mask_number.png')"/>
-            <fo:external-graphic src="url('file:img/mask_number.png')"/>
-            <fo:external-graphic src="url('file:img/mask_number.png')"/> (jj/mm/aaaa) </fo:block>
+            <fo:external-graphic src="mask_number.png"/>
+            <fo:external-graphic src="mask_number.png"/>
+            <fo:external-graphic src="mask_number.png"/>
+            <fo:external-graphic src="mask_number.png"/>
+            <fo:external-graphic src="mask_number.png"/>
+            <fo:external-graphic src="mask_number.png"/>
+            <fo:external-graphic src="mask_number.png"/>
+            <fo:external-graphic src="mask_number.png"/> (jj/mm/aaaa) </fo:block>
          <fo:block font-size="10pt"
                    font-weight="bold"
                    color="black"
@@ -435,8 +435,8 @@
                       padding="1mm"
                       padding-bottom="0mm"
                       padding-top="0mm">
-               <fo:external-graphic src="url('file:img/mask_number.png')"/>
-               <fo:external-graphic src="url('file:img/mask_number.png')"/>,<fo:external-graphic src="url('file:img/mask_number.png')"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>,<fo:external-graphic src="mask_number.png"/>
                <fo:inline/>
             </fo:block>
          </fo:block>
@@ -1211,9 +1211,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>,<fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>,<fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
@@ -1248,9 +1248,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>,<fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>,<fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
@@ -1296,9 +1296,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>,<fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>,<fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
@@ -1333,9 +1333,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>,<fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>,<fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
@@ -1370,9 +1370,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>,<fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>,<fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
@@ -1418,9 +1418,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>,<fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>,<fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
@@ -1455,9 +1455,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>,<fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>,<fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
                            </fo:block>
@@ -2396,9 +2396,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -2459,9 +2459,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -2522,9 +2522,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -2585,9 +2585,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -2648,9 +2648,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -2711,9 +2711,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -2774,9 +2774,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -2837,9 +2837,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -2900,9 +2900,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -2963,9 +2963,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3026,9 +3026,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3089,9 +3089,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3152,9 +3152,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3215,9 +3215,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3278,9 +3278,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3341,9 +3341,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3404,9 +3404,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3467,9 +3467,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3530,9 +3530,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3593,9 +3593,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3656,9 +3656,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3719,9 +3719,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3782,9 +3782,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3845,9 +3845,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3908,9 +3908,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -3971,9 +3971,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4034,9 +4034,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4097,9 +4097,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4160,9 +4160,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4223,9 +4223,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4286,9 +4286,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4349,9 +4349,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4412,9 +4412,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4475,9 +4475,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4538,9 +4538,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4601,9 +4601,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4664,9 +4664,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4727,9 +4727,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4790,9 +4790,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4853,9 +4853,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4916,9 +4916,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -4979,9 +4979,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5042,9 +5042,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5105,9 +5105,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5168,9 +5168,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5231,9 +5231,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5294,9 +5294,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5357,9 +5357,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5420,9 +5420,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5483,9 +5483,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5546,9 +5546,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5609,9 +5609,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5672,9 +5672,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5735,9 +5735,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5798,9 +5798,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5861,9 +5861,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5924,9 +5924,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -5987,9 +5987,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6050,9 +6050,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6113,9 +6113,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6176,9 +6176,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6239,9 +6239,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6302,9 +6302,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6365,9 +6365,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6428,9 +6428,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6491,9 +6491,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6554,9 +6554,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6617,9 +6617,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6680,9 +6680,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6743,9 +6743,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6806,9 +6806,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6869,9 +6869,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6932,9 +6932,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -6995,9 +6995,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -7058,9 +7058,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -7121,9 +7121,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -7184,9 +7184,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -7247,9 +7247,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -7310,9 +7310,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
@@ -7373,9 +7373,9 @@
                                         padding="1mm"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
-                                 <fo:external-graphic src="url('file:img/mask_number.png')"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
+                                 <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline/>
                               </fo:block>
                            </fo:block>
