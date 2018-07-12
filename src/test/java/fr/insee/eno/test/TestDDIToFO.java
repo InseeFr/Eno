@@ -18,18 +18,18 @@ public class TestDDIToFO {
 	private XMLDiff xmlDiff = new XMLDiff();
 
 	
-	//@Test
+	@Test
 	public void simpleDiffTest() {
 		try {
 			String basePath = "src/test/resources/ddi-to-fo";
-			File in = new File(String.format("%s/simpsons_old.xml", basePath));
+			File in = new File(String.format("%s/in.xml", basePath));
 			Diff diff = null;
 			
 			// Without plugins
 			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
 					new NoopPostprocessor());
-			File outputFile = genService.generateQuestionnaire(in, null);
-			File expectedFile = new File(String.format("%s/simpsons_old.fo", basePath));
+			File outputFile = genService.generateQuestionnaire(in, null,"ddi-2-fo-test");
+			File expectedFile = new File(String.format("%s/out.fo", basePath));
 			diff = xmlDiff.getDiff(outputFile,expectedFile);
 			
 			// With plugins

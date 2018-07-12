@@ -3,6 +3,7 @@ package fr.insee.eno.main;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.xml.transform.Result;
@@ -12,6 +13,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
@@ -31,14 +34,17 @@ public class DummyTestDDI2PDF {
 		File in = new File(String.format("%s/in.xml", basePathddi2PDF));
 		File conf = new File(String.format("%s/fop.xconf", basePathddi2PDF));
 		try {
-			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, null);
+			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, null,"test");
 
+			File imgTempFolder = new File(FilenameUtils.getPath(outputFO.getAbsolutePath()));
+			File imgFolder = new File(String.format("%s/img", basePathddi2PDF));
+			FileUtils.copyDirectory(imgFolder, imgTempFolder);
 			// Step 1: Construct a FopFactory by specifying a reference to the
 			// configuration file
 			// (reuse if you plan to render multiple documents!)
 			FopFactory fopFactory = FopFactory.newInstance(conf);
 
-			File outFilePDF = new File(String.format("%s/out.pdf", basePathddi2PDF));
+			File outFilePDF = new File(String.format("%s.pdf", FilenameUtils.removeExtension(outputFO.getAbsolutePath())));
 
 			// Step 2: Set up output stream.
 			// Note: Using BufferedOutputStream for performance reasons
