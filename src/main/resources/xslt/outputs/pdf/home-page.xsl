@@ -38,7 +38,7 @@
                     </fo:block>
                 </fo:inline-container>
                 <fo:inline-container width="127mm">
-                    <fo:block-container height="20mm" overflow="hidden">
+                    <fo:block-container height="24mm" overflow="hidden">
                         <fo:block font-weight="bold" font-size="18pt" font-family="sans-serif" margin="3mm">
                             <xsl:value-of select="enopdf:get-label($source-context, $languages[1])"/>
                         </fo:block>
