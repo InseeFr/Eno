@@ -26,6 +26,7 @@ public class DummyTestDDI2PDF {
 	public static void main(String[] args) {
 
 		String basePathddi2PDF = "src/test/resources/ddi-to-pdf";
+		
 		GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
 				new PDFPostprocessor());
 		File in = new File(String.format("%s/in.xml", basePathddi2PDF));
