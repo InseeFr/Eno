@@ -115,6 +115,9 @@ public final class Constants {
 	public static final String FODS_2_XML_XSL = TRANSFORMATIONS_FOLDER + "/fods2xml.xsl";
 	public static final String XML_2_XSL_XSL = TRANSFORMATIONS_FOLDER + "/xml2xsl.xsl";
 	
+	public static final String OUPUTS_FOLDER = "/xslt/outputs/pdf";
+	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF =  OUPUTS_FOLDER + "/publipostage.xsl";
+	
 	// ---------- Temporary file system
 	
 	// ----- Folders
@@ -262,28 +265,29 @@ public final class Constants {
 	public static final String FINAL_EXTENSION = "-final.tmp";
 	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
-	public static final String FINAL_PDF_EXTENSION = "-out.fo";
+	public static final String FINAL_PDF_EXTENSION = "-custom.fo";
+	public static final String CUSTOM_FO_EXTENSION = "-out.fo";
 	//public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
-	public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/xforms";
-	}
-	//public static final String TEMP_ODT_FOLDER = SUB_TEMP_FOLDER + "/odt";
-	public static String tEMP_ODT_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/odt";
-	}
-	
-	//public static final String TEMP_PDF_FOLDER = SUB_TEMP_FOLDER + "/pdf";
-	public static String tEMP_PDF_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER+ "/pdf";
-	}
-	//public static final String TEMP_DDI_FOLDER = SUB_TEMP_FOLDER + "/ddi";
-	public static String tEMP_DDI_FOLDER(String sUB_TEMP_FOLDER){
-		 return sUB_TEMP_FOLDER + "/ddi";
-	}
-	//public static final String TEMP_POGUES_XML_FOLDER = SUB_TEMP_FOLDER + "/pogues-xml";
-	public static String tEMP_POGUES_XML_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/pogues-xml";
-	}
+		public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
+			return sUB_TEMP_FOLDER + "/xforms";
+		}
+		//public static final String TEMP_ODT_FOLDER = SUB_TEMP_FOLDER + "/odt";
+		public static String tEMP_ODT_FOLDER(String sUB_TEMP_FOLDER){
+			return sUB_TEMP_FOLDER + "/odt";
+		}
+		
+		//public static final String TEMP_PDF_FOLDER = SUB_TEMP_FOLDER + "/pdf";
+		public static String tEMP_PDF_FOLDER(String sUB_TEMP_FOLDER){
+			return sUB_TEMP_FOLDER+ "/pdf";
+		}
+		//public static final String TEMP_DDI_FOLDER = SUB_TEMP_FOLDER + "/ddi";
+		public static String tEMP_DDI_FOLDER(String sUB_TEMP_FOLDER){
+			 return sUB_TEMP_FOLDER + "/ddi";
+		}
+		//public static final String TEMP_POGUES_XML_FOLDER = SUB_TEMP_FOLDER + "/pogues-xml";
+		public static String tEMP_POGUES_XML_FOLDER(String sUB_TEMP_FOLDER){
+			return sUB_TEMP_FOLDER + "/pogues-xml";
+		}
 	public static final String BASIC_FORM_TMP_FILENAME = "basic-form.tmp";
 
 	
