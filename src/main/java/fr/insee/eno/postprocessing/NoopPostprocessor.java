@@ -13,7 +13,7 @@ public class NoopPostprocessor implements Postprocessor {
 	private static final Logger logger = LoggerFactory.getLogger(NoopPostprocessor.class);
 
 	@Override
-	public File process(File input, File parametersFile, String survey) {
+	public File process(File input, File parametersFile) {
 		logger.info("No-op postprocessor, simply returning generated file.");
 		// Identity
 		return input;

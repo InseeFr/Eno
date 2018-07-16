@@ -24,7 +24,7 @@ public class TestDDIToODT {
 			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2ODTGenerator(),
 					new NoopPostprocessor());
 			File in = new File(String.format("%s/in.xml", basePath));
-			File outputFile = genService.generateQuestionnaire(in, null,"ddi-2-odt-test");
+			File outputFile = genService.generateQuestionnaire(in, null);
 			File expectedFile = new File(String.format("%s/out.odt", basePath));
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());

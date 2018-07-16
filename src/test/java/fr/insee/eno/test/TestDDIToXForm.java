@@ -28,7 +28,7 @@ public class TestDDIToXForm {
 			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2FRGenerator(),
 					new NoopPostprocessor());
 			File in = new File(String.format("%s/in.xml", basePath));
-			File outputFile = genService.generateQuestionnaire(in, null,"ddi-2-fr-test");
+			File outputFile = genService.generateQuestionnaire(in, null);
 			File expectedFile = new File(String.format("%s/out.xhtml", basePath));
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());

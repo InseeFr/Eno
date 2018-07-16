@@ -24,29 +24,28 @@ public class DDIPreprocessor implements Preprocessor {
 	private static XslTransformation saxonService = new XslTransformation();
 
 	@Override
-	public File process(File inputFile, File parametersFile, String survey) throws Exception {
+	public File process(File inputFile, File parametersFile) throws Exception {
 		logger.info("DDIPreprocessing Target : START");
 		
-		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(survey);
 		// ----- Dereferencing
 		logger.debug(
-				"Dereferencing : -Input : " + inputFile + " -Output : " + Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER) + " -Stylesheet : "
-						+ Constants.UTIL_DDI_DEREFERENCING_XSL + " -Parameters : " + sUB_TEMP_FOLDER);
+				"Dereferencing : -Input : " + inputFile + " -Output : " + Constants.TEMP_NULL_TMP + " -Stylesheet : "
+						+ Constants.UTIL_DDI_DEREFERENCING_XSL + " -Parameters : " + Constants.SUB_TEMP_FOLDER);
 		
 		InputStream isDDI_DEREFERENCING_XSL = Constants.getInputStreamFromPath(Constants.DDI_DEREFERENCING_XSL);
 		InputStream isInputFile =  FileUtils.openInputStream(inputFile);
-		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER));
+		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(Constants.TEMP_NULL_TMP);
 		saxonService.transformDereferencing(
 				isInputFile, 
 				isDDI_DEREFERENCING_XSL,
 				osTEMP_NULL_TMP,
-				Constants.sUB_TEMP_FOLDER_FILE(survey)); //FIXME 4th param should be a parameters file (?!!?).
+				Constants.SUB_TEMP_FOLDER); //FIXME 4th param should be a parameters file (?!!?).
 		isInputFile.close();
 		isDDI_DEREFERENCING_XSL.close();
 		osTEMP_NULL_TMP.close();
 		// ----- Cleaning
 		logger.debug("Cleaning target");
-		File f = Constants.sUB_TEMP_FOLDER_FILE(survey);
+		File f = Constants.SUB_TEMP_FOLDER;
 		File[] matchCleaningInput = f.listFiles(new FilenameFilter() {
 
 			@Override
@@ -57,7 +56,7 @@ public class DDIPreprocessor implements Preprocessor {
 		String cleaningInput = null;
 		String cleaningOutput = null;
 
-		logger.debug("Searching matching files in : " + sUB_TEMP_FOLDER);
+		logger.debug("Searching matching files in : " + Constants.SUB_TEMP_FOLDER);
 		for (File file : matchCleaningInput) {
 			cleaningInput = file.getAbsolutePath();
 			logger.debug("Found : " + cleaningInput);

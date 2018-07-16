@@ -12,10 +12,9 @@ public interface Preprocessor {
 	 * TODO Exception is also weak, change to a more robust Exception
 	 * @param inputFile The file to preprocess
 	 * @param parametersFile An optional parameters file
-	 * @param surveyName An optional parameters file
 	 * @return the preprocessed file
 	 * @throws Exception when it goes wrong
 	 */
-	public File process(File inputFile, File parametersFile, String survey) throws Exception;
+	public File process(File inputFile, File parametersFile) throws Exception;
 
 }

@@ -2,17 +2,14 @@ package fr.insee.eno.postprocessing;
 
 import java.io.File;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.StandardCopyOption;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.plugins.tableColumnSizeProcessor.calculator.CalculatorService;
-import fr.insee.eno.transform.xsl.XslTransformation;
 
 /**
  * PDF postprocessor.
@@ -24,12 +21,8 @@ public class PDFPostprocessor implements Postprocessor {
 	// FIXME Inject !
 	private static CalculatorService serviceTableColumnSize = new CalculatorService();
 
-
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
-	
 	@Override
-	public File process(File input, File parametersFile, String survey) throws Exception {
+	public File process(File input, File parametersFile) throws Exception {
 
 		String outputForFO = FilenameUtils.removeExtension(input.getPath()) + Constants.FINAL_PDF_EXTENSION;
 
@@ -49,25 +42,12 @@ public class PDFPostprocessor implements Postprocessor {
 			isConfFile.close();
 			logger.debug("Get conf file : "+confFile.getAbsolutePath());
 		}
-				
-
-		
 		
 		serviceTableColumnSize.tableColumnSizeProcessor(input.getAbsolutePath(), outputForFO,
 				confFilePath);
-		File outputForFOFile = new File(outputForFO);
 
-		File outputCustomFOFile = new File (FilenameUtils.removeExtension(input.getPath()) + Constants.CUSTOM_FO_EXTENSION);
-
-		InputStream PUBLIPOSTAGE_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF);
-		saxonService.transform(
-				FileUtils.openInputStream(outputForFOFile),
-				PUBLIPOSTAGE_XSL, 
-				FileUtils.openOutputStream(outputCustomFOFile));
-		
-		logger.info("end of Customization of fo file : " + input.getAbsolutePath());
-
-		return outputCustomFOFile;
+		return new File(outputForFO);
 
 	}
+
 }

@@ -28,10 +28,10 @@ public class PoguesXML2DDIGenerator implements Generator {
 		String outputBasicFormPath = null;
 
 		formNameFolder = getFormNameFolder(finalInput);
-		
+
 		logger.debug("formNameFolder : " + formNameFolder);
-		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(surveyName);
-		outputBasicFormPath = Constants.tEMP_DDI_FOLDER(sUB_TEMP_FOLDER) + "/" + formNameFolder + "/"
+
+		outputBasicFormPath = Constants.TEMP_DDI_FOLDER + "/" + formNameFolder + "/"
 				+ Constants.BASIC_FORM_TMP_FILENAME;
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
 

@@ -25,7 +25,7 @@ public class TestPoguesXMLToDDI {
 			GenerationService genService = new GenerationService(new PoguesXMLPreprocessor(), new PoguesXML2DDIGenerator(),
 					new DDIPostprocessor());
 			File in = new File(String.format("%s/in.xml", basePath));
-			File outputFile = genService.generateQuestionnaire(in, null,"xml-pogues-2-ddi-test");
+			File outputFile = genService.generateQuestionnaire(in, null);
 			File expectedFile = new File(String.format("%s/out.xml", basePath));
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());

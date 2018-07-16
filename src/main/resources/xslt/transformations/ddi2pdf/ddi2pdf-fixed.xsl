@@ -387,7 +387,13 @@
     </xsl:template>
     
     <xsl:template match="text()" mode="enopdf:format-label">
+    	<xsl:if test="substring(.,1,1)=' '">
+    		<xsl:text> </xsl:text>
+    	</xsl:if>
         <xsl:copy-of select="normalize-space(.)"/>
+<!--         <xsl:if test="substring(.,string-length(.),1)=' '"> -->
+<!--         	<xsl:text>toto</xsl:text> -->
+<!--         </xsl:if> -->
     </xsl:template>
     
     <xsl:template match="xhtml:i" mode="enopdf:format-label">

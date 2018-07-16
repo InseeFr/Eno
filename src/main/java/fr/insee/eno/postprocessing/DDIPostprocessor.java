@@ -23,18 +23,26 @@ public class DDIPostprocessor implements Postprocessor {
 	private static XslTransformation saxonService = new XslTransformation();
 
 	@Override
-	public File process(File input, File parametersFile, String survey) throws Exception {
+	public File process(File input, File parametersFile) throws Exception {
 		logger.info("DDIPostprocessor Target : START");
 		String mw2xhtmlOutput = FilenameUtils.removeExtension(input.getPath()) + Constants.MW_EXTENSION;
 		// ----- mw2xhtml
 		logger.debug("Markdown to XHTML : -Input : " + input + " -Output : " + mw2xhtmlOutput
-				+ " -Stylesheet : " + Constants.UTIL_DDI_MW2XHTML_XSL + " -Parameters : " + Constants.sUB_TEMP_FOLDER(survey));
+				+ " -Stylesheet : " + Constants.UTIL_DDI_MW2XHTML_XSL + " -Parameters : " + Constants.SUB_TEMP_FOLDER);
 
 		InputStream isDDI_MW2XHTML_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_MW2XHTML_XSL);
 		InputStream isInputFile = FileUtils.openInputStream(input);
 		
 		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(new File(mw2xhtmlOutput));
-		saxonService.transformMw2XHTML(isInputFile, isDDI_MW2XHTML_XSL, osTEMP_NULL_TMP, Constants.sUB_TEMP_FOLDER_FILE(survey));
+		saxonService.transformMw2XHTML(isInputFile, isDDI_MW2XHTML_XSL, osTEMP_NULL_TMP, Constants.SUB_TEMP_FOLDER); // FIXME
+																														// 4th
+																														// param
+																														// should
+																														// be
+																														// a
+																														// parameters
+																														// file
+																														// (?!!?).
 		isInputFile.close();
 		isDDI_MW2XHTML_XSL.close();
 		osTEMP_NULL_TMP.close();
@@ -53,7 +61,11 @@ public class DDIPostprocessor implements Postprocessor {
 				.getInputStreamFromPath(Constants.UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL);
 		OutputStream osTweakXhtmlForDdi = FileUtils.openOutputStream(new File(outputTweakXhtmlForDdi));
 		saxonService.transformTweakXhtmlForDdi(isTweakXhtmlForDdi, isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL,
-				osTweakXhtmlForDdi, Constants.sUB_TEMP_FOLDER_FILE(survey));
+				osTweakXhtmlForDdi, Constants.SUB_TEMP_FOLDER); // FIXME 4th
+																// param should
+																// be a
+																// parameters
+																// file (?!!?).
 		isTweakXhtmlForDdi.close();
 		isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL.close();
 		osTweakXhtmlForDdi.close();

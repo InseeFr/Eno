@@ -16,7 +16,7 @@ public class DummyTestDDI2FO {
 				new NoopPostprocessor());
 		File in = new File(String.format("%s/in.xml", basePathDDI2FO));
 		try {
-			File output = genServiceDDI2PDF.generateQuestionnaire(in, null,"test");
+			File output = genServiceDDI2PDF.generateQuestionnaire(in, null);
 			System.out.println(output.getAbsolutePath());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
