@@ -10,7 +10,7 @@
 	<Format>
 		<Columns>1</Columns>
 		<!-- Orientation : portrait= 0 ou paysage =90 -->
-		<Orientation>90</Orientation>
+		<Orientation>0</Orientation>
 	</Format>
 	<HomePage>
 		<Folder>xslt/outputs/pdf</Folder>
