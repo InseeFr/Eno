@@ -46,22 +46,25 @@
 		</xslt>-->
 		<copy file="${input-file}"
 			tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
+		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
+			out="${root-folder}/target/${survey-name}/${form-name}/form/specific-form.${out-extension}"
+			style="${root-folder}/questionnaires/${survey-name}/pdf-specific-treatment.xsl" force="true"
+			classpath="${saxon.jar}"/>
 		<antcall target="compile-TableColumnSizeProcessor"/>
 		<antcall target="call-TableColumnSizeProcessor"/>
 		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/temp-form.${out-extension}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"
-			style="${xslt.home}/util/pdf/insert-generic-pages.xsl" force="true"
+			style="${xslt.home}/util/pdf/insert-generic-pages.xsl" force="true"			
 			classpath="${saxon.jar}">
 			<param name="accompanying-mail" expression="ouverture"/>
+			
 		</xslt>
 	</target>
 	<target name="call-TableColumnSizeProcessor">
 		<java classname="fr.insee.eno.plugins.tableColumnSizeProcessor.calculator.Main" fork="true">
 			<sysproperty key="log4j.configurationFile" value="${root-folder}/lib/log4j2.xml"/>
-			<arg
-				value="inFileName=${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
-			<arg
-				value="outFileName=${root-folder}/target/${survey-name}/${form-name}/form/temp-form.${out-extension}"/>
+			<arg value="inFileName=${root-folder}/target/${survey-name}/${form-name}/form/specific-form.${out-extension}"/>
+			<arg value="outFileName=${root-folder}/target/${survey-name}/${form-name}/form/temp-form.${out-extension}"/>
 			<arg value="xmlConfFile=${root-folder}/src/main/resources/config/plugins-conf.xml"/>
 			<classpath refid="classpath"/>
 		</java>
