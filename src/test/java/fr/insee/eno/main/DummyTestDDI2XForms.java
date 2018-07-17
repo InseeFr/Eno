@@ -22,7 +22,7 @@ public class DummyTestDDI2XForms {
 		File in = new File(String.format("%s/in.xml", basePathDDI2XFORMS));
 		
 		try {
-			File output = genServiceDDI2XFORMS.generateQuestionnaire(in, null);
+			File output = genServiceDDI2XFORMS.generateQuestionnaire(in, null,"test");
 			System.out.println(output.getAbsolutePath());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

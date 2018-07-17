@@ -17,7 +17,7 @@ public class DummyTestDDI2ODT {
 		File in = new File(String.format("%s/in.xml", basePathDDI2ODT));
 		
 		try {
-			File output = genServiceDDI2ODT.generateQuestionnaire(in, null);
+			File output = genServiceDDI2ODT.generateQuestionnaire(in, null,"test");
 			System.out.println(output.getAbsolutePath());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

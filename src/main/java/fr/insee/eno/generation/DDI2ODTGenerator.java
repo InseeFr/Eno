@@ -15,6 +15,8 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 
 public class DDI2ODTGenerator implements Generator {
 	
+	private InputStream propertiesFiles;
+	
 	private static final Logger logger = LoggerFactory.getLogger(DDI2ODTGenerator.class);
 	
 	// FIXME Inject !
@@ -36,7 +38,7 @@ public class DDI2ODTGenerator implements Generator {
 		
 		String outputForm = outputBasicFormPath + "/form.odt";
 		InputStream isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL);
-		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_ODT);
+		InputStream isPROPERTIES_FILE = this.getPropertiesFiles();
 		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
 		
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
@@ -69,4 +71,17 @@ public class DDI2ODTGenerator implements Generator {
 		return formNameFolder;
 	}
 
+	public void setPropertiesFile(InputStream propertiesFiles) {
+		this.propertiesFiles = propertiesFiles;
+	}
+	private InputStream getPropertiesFiles() {
+		InputStream isPROPERTIES_FILE = null;
+		if (propertiesFiles == null) {
+			isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_ODT);
+		}else{
+			isPROPERTIES_FILE = propertiesFiles;
+		}
+		return isPROPERTIES_FILE;
+	}
+	
 }

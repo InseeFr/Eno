@@ -44,22 +44,38 @@ public class GenerationService {
 	 *             bim
 	 */
 	// TODO finish implementation
-	public File generateQuestionnaire(File inputFile, File parametersFile) throws Exception {
-		logger.info("Generating questionnaire for: " + inputFile);
-		logger.debug("Temp folder: "+ System.getProperty("java.io.tmpdir")); 
+	public File generateQuestionnaire(File inputFile, File parametersFile, String surveyName) throws Exception {
+		logger.info("Generating questionnaire for: " + surveyName);
 		
-		cleanTempFolder();
-		File preprocessResultFileName = this.preprocessor.process(inputFile, parametersFile);
-		File generatedForm = this.generator.generate(preprocessResultFileName, "simpsons"); // FIXME
-																							// get
-																							// survey
-																							// name
-																							// dynamically
-		File outputForm = this.postprocessor.process(generatedForm, parametersFile);
+		String tempFolder = System.getProperty("java.io.tmpdir")+ "/"+surveyName;
+		logger.debug("Temp folder: "+ tempFolder); 
+		
+		cleanTempFolder(surveyName);
+		File preprocessResultFileName = this.preprocessor.process(inputFile, parametersFile,surveyName);
+		File generatedForm = this.generator.generate(preprocessResultFileName, surveyName); 
+		File outputForm = this.postprocessor.process(generatedForm, parametersFile, surveyName);
 		logger.debug("Path to generated questionnaire: " + outputForm.getAbsolutePath());
 		return outputForm;
 	}
 
+	
+	/**
+	 * Clean the temp dir if it exists
+	 * 
+	 * @throws IOException
+	 *           
+	 */
+	public void cleanTempFolder(String name) throws IOException {
+		FolderCleaner cleanService = new FolderCleaner();
+		if(Constants.TEMP_FOLDER_PATH !=null){
+			File folderTemp = new File(Constants.TEMP_FOLDER_PATH+"/"+name);
+			cleanService.cleanOneFolder(folderTemp);
+		}
+		else{
+			logger.debug("Temp Folder is null");
+		}
+	}
+	
 	/**
 	 * Clean the temp dir if it exists
 	 * 
