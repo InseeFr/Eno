@@ -2,6 +2,8 @@
 <project name="enoDDI2PDF" basedir="." default="full">
 
 	<import file="build-pdf.xml"/>
+	
+	<import file="build-customization.xml"/>
 
 	<!-- Importing the configuration part that is common to every script -->
 	<import file="build-configuration.xml"/>
@@ -241,8 +243,15 @@
 	<!-- ********************************************** Targets OutPostProcessing ************************************************ -->
 	<target name="OutPostProcessing">
 		<!-- Expects the input file ${temp.home}/pdf/${form-name}/basic-form.tmp -->
+
+		<property name="pdfFilePath"  value="${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"/>
 		<antcall target="pdfPostProcessing">
 			<param name="input-file" value="${temp.home}/pdf/${form-name}/basic-form.tmp"/>
+			<param name="output-file" value="${pdfFilePath}"/>
+		</antcall>
+		<antcall target="customizationPostProcessing">
+			<param name="input-file" value="${pdfFilePath}"/>
+			<param name="properties-file" value="${root-folder}/config/ddi2pdf.xml"/>
 		</antcall>
 	</target>
 

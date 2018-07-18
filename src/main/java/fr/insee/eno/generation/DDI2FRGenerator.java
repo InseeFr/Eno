@@ -93,7 +93,7 @@ public class DDI2FRGenerator implements Generator {
 	private InputStream getPropertiesFiles() {
 		InputStream isPROPERTIES_FILE = null;
 		if (propertiesFiles == null) {
-			isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_FR);
+			isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.CONFIG_DDI2FR);
 		}else{
 			isPROPERTIES_FILE = propertiesFiles;
 		}

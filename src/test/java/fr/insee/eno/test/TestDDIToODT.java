@@ -10,6 +10,7 @@ import org.xmlunit.diff.Diff;
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2ODTGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
+import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
 public class TestDDIToODT {
@@ -22,7 +23,7 @@ public class TestDDIToODT {
 		try {
 			String basePath = "src/test/resources/ddi-to-odt";
 			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2ODTGenerator(),
-					new NoopPostprocessor());
+					new Postprocessor[] {new NoopPostprocessor()});
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, null,"ddi-2-odt-test");
 			File expectedFile = new File(String.format("%s/out.odt", basePath));

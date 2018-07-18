@@ -50,10 +50,11 @@
 			<arg
 				value="inFileName=${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
 			<arg
-				value="outFileName=${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"/>
+				value="outFileName=${output-file}"/>
 			<arg value="xmlConfFile=${root-folder}/src/main/resources/config/plugins-conf.xml"/>
 			<classpath refid="classpath"/>
 		</java>
 	</target>
+	
 
 </project>

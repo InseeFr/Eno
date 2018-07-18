@@ -2,10 +2,8 @@ package fr.insee.eno.postprocessing;
 
 import java.io.File;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.StandardCopyOption;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,25 +47,11 @@ public class PDFPostprocessor implements Postprocessor {
 			isConfFile.close();
 			logger.debug("Get conf file : "+confFile.getAbsolutePath());
 		}
-				
-
-		
-		
+								
 		serviceTableColumnSize.tableColumnSizeProcessor(input.getAbsolutePath(), outputForFO,
 				confFilePath);
-		File outputForFOFile = new File(outputForFO);
-
-		File outputCustomFOFile = new File (FilenameUtils.removeExtension(input.getPath()) + Constants.CUSTOM_FO_EXTENSION);
-
-		InputStream PUBLIPOSTAGE_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF);
-		saxonService.transform(
-				FileUtils.openInputStream(outputForFOFile),
-				PUBLIPOSTAGE_XSL, 
-				FileUtils.openOutputStream(outputCustomFOFile));
 		
-		logger.info("end of Customization of fo file : " + input.getAbsolutePath());
-
-		return outputCustomFOFile;
+		return new File(outputForFO);
 
 	}
 }
