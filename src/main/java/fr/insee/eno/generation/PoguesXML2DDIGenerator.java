@@ -37,7 +37,7 @@ public class PoguesXML2DDIGenerator implements Generator {
 
 		InputStream isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL);
-		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_DDI);
+		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.CONFIG_POGUES_XML2DDI);
 		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
 
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);

@@ -38,10 +38,10 @@ public final class Constants {
 	public static final String PARAMETERS_XML = "parameters.xml";
 	
 	// ----- XSL Parameters path
-	public static final String CONFIG_DDI2FR = "/config/ddi2fr.xml";
-	public static final String CONFIG_DDI2ODT = "/config/ddi2odt.xml";
-	public static final String CONFIG_DDI2PDF = "/config/ddi2pdf.xml";
-	public static final String CONFIG_POGUES_XML2DDI = "/config/pogues-xml2ddi.xml";
+	public static final String CONFIG_DDI2FR = CONFIG_FOLDER + "/ddi2fr.xml";
+	public static final String CONFIG_DDI2ODT = CONFIG_FOLDER + "/ddi2odt.xml";
+	public static final String CONFIG_DDI2PDF = CONFIG_FOLDER + "/ddi2pdf.xml";
+	public static final String CONFIG_POGUES_XML2DDI = CONFIG_FOLDER + "/pogues-xml2ddi.xml";
 	public static final String PARAMETERS = "/parameters.xml";
 	public static final String LABELS_FOLDER = "/lang/fr/";
 	
@@ -59,10 +59,10 @@ public final class Constants {
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
 	public static final String UTIL_DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
 	public static final String BROWSING_FR_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/fr/browsing.xsl";
-	public static final String PROPERTIES_FILE_FR = CONFIG_FOLDER + "/ddi2fr.xml";
-	public static final String PROPERTIES_FILE_ODT = CONFIG_FOLDER + "/ddi2odt.xml";
-	public static final String PROPERTIES_FILE_PDF = CONFIG_FOLDER + "/ddi2pdf.xml";
-	public static final String PROPERTIES_FILE_DDI = CONFIG_FOLDER + "/pogues-xml2ddi.xml";
+//	public static final String PROPERTIES_FILE_FR = CONFIG_FOLDER + "/ddi2fr.xml";
+//	public static final String PROPERTIES_FILE_ODT = CONFIG_FOLDER + "/ddi2odt.xml";
+//	public static final String PROPERTIES_FILE_PDF = CONFIG_FOLDER + "/ddi2pdf.xml";
+//	public static final String PROPERTIES_FILE_DDI = CONFIG_FOLDER + "/pogues-xml2ddi.xml";
 	
 	// ---------- XSL generation
 	public static final String TRANSFORMATIONS_DDI2FR_DDI2FR_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr.xsl";
@@ -243,7 +243,7 @@ public final class Constants {
 	/********************************************************/
 	//// Plugin Conf
 	public static final String PDF_PLUGIN_XML_CONF = "src/main/resources/config/plugins-conf.xml";
-	public static final File PDF_PLUGIN_XML_CONF_FILE = getFileFromUrl(Constants.class.getResource("/config/plugins-conf.xml"));
+	public static final File PDF_PLUGIN_XML_CONF_FILE = getFileFromUrl(Constants.class.getResource(CONFIG_FOLDER + "/plugins-conf.xml"));
 	
 
 

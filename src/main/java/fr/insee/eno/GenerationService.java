@@ -22,13 +22,13 @@ public class GenerationService {
 
 	private final Preprocessor preprocessor;
 	private final Generator generator;
-	private final Postprocessor postprocessor;
+	private final Postprocessor[] postprocessors;
 
 	@Inject
-	public GenerationService(Preprocessor preprocessor, Generator generator, Postprocessor postprocessor) {
+	public GenerationService(final Preprocessor preprocessor, final Generator generator, final Postprocessor[] postprocessors) {
 		this.preprocessor = preprocessor;
 		this.generator = generator;
-		this.postprocessor = postprocessor;
+		this.postprocessors = postprocessors;
 	}
 
 	/**
@@ -53,7 +53,13 @@ public class GenerationService {
 		cleanTempFolder(surveyName);
 		File preprocessResultFileName = this.preprocessor.process(inputFile, parametersFile,surveyName);
 		File generatedForm = this.generator.generate(preprocessResultFileName, surveyName); 
-		File outputForm = this.postprocessor.process(generatedForm, parametersFile, surveyName);
+		
+		//File generatedForm = new File("C:\\Users\\Tarik\\AppData\\Local\\Temp\\eno\\test\\instrument-i6vwid\\form\\form.fo");
+		File outputForm = this.postprocessors[0].process(generatedForm, parametersFile, surveyName);
+		for (int i = 1; i < postprocessors.length; i++) {
+			outputForm = this.postprocessors[i].process(outputForm, parametersFile, surveyName);
+		}
+			
 		logger.debug("Path to generated questionnaire: " + outputForm.getAbsolutePath());
 		return outputForm;
 	}
@@ -69,7 +75,7 @@ public class GenerationService {
 		FolderCleaner cleanService = new FolderCleaner();
 		if(Constants.TEMP_FOLDER_PATH !=null){
 			File folderTemp = new File(Constants.TEMP_FOLDER_PATH+"/"+name);
-			cleanService.cleanOneFolder(folderTemp);
+			cleanTempFolder(folderTemp);
 		}
 		else{
 			logger.debug("Temp Folder is null");
@@ -83,10 +89,9 @@ public class GenerationService {
 	 *           
 	 */
 	public void cleanTempFolder() throws IOException {
-		FolderCleaner cleanService = new FolderCleaner();
 		if(Constants.TEMP_FOLDER_PATH !=null){
 			File folderTemp = new File(Constants.TEMP_FOLDER_PATH);
-			cleanService.cleanOneFolder(folderTemp);
+			cleanTempFolder(folderTemp);
 		}
 		else{
 			logger.debug("Temp Folder is null");

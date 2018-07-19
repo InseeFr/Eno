@@ -20,6 +20,7 @@ public class XslParameters {
 	public static final String DDI2PDF_CAMPAIGN = "campaign";
 	public static final String DDI2PDF_MODEL = "model";
 	public static final String DDI2PDF_PROPERTIES_FILE = "properties-file";
+	public static final String FO2CUSTOMFO_PROPERTIES_FILE = "properties-file";
 	public static final String POGUES_XML2DDI_CAMPAIGN = "campaign";
 	public static final String POGUES_XML2DDI_MODEL = "model";
 	public static final String POGUES_XML2DDI_PROPERTIES_FILE = "properties-file";

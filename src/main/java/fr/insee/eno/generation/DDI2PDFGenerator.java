@@ -59,7 +59,7 @@ public class DDI2PDFGenerator implements Generator {
 	private InputStream getPropertiesFiles() {
 		InputStream isPROPERTIES_FILE = null;
 		if (propertiesFiles == null) {
-			isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_PDF);
+			isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.CONFIG_DDI2PDF);
 		}else{
 			isPROPERTIES_FILE = propertiesFiles;
 		}
