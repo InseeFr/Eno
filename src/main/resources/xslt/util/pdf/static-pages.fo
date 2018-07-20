@@ -38,8 +38,8 @@
 
     <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="ouvertureCOL">
         <fo:static-content flow-name="xsl-region-before-courrier">
-            <fo:block position="absolute" margin="10mm" color="white">
-                &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;${NumeroDocument}col${data-IdEdition}
+            <fo:block position="absolute" margin-top="5mm" margin-left="10mm" margin-right="10mm" margin-bottom="10mm" color="white">
+                &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
             </fo:block>
         </fo:static-content>
 
@@ -110,10 +110,10 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="60.5mm"
-                    width="75mm" height="36.7mm" overflow="hidden" border="black solid 0.5pt">
-                    <fo:block margin-top="0.5mm" margin-left="1mm">
+                    width="75mm" height="36.7mm" overflow="hidden">
+                    <fo:block  margin-left="0.01mm" margin-right="0.01mm" border="black solid 0.5pt">
                         <fo:inline-container>
-                            <fo:block font-weight="bold">Pour nous contacter :</fo:block>
+                            <fo:block font-weight="bold" margin-top="0.5mm">Pour nous contacter :</fo:block>
                             <fo:block><fo:inline text-decoration="underline">Courriel</fo:inline> : #if($!{InitGestionnairesAdresseMessagerie})$!{InitGestionnairesAdresseMessagerie}#else${BddServiceCollecteurAdresseMessagerie}#end </fo:block>
                             <fo:block>#if ($!{InitNumeroSVI}||$!{InitGestionnaireTel})<fo:inline text-decoration="underline">Téléphone</fo:inline> : #end #if ($!{InitNumeroSVI})09-69-32-97-47 #elseif($!{InitGestionnaireTel}) $!{InitGestionnaireTel}#end </fo:block>
                             <fo:block>#if ($!{InitNumeroSVI})<fo:inline text-decoration="underline">Code enquête</fo:inline> : $!{InitNumeroSVI} #end</fo:block>
@@ -190,9 +190,9 @@
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
                     width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
-                    font-size="7pt" border="black solid 0.5pt">
-                    <fo:block margin-top="0.5mm" margin-left="1mm">
-                        <fo:inline-container>
+                    font-size="7pt">
+                    <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
+                        <fo:inline-container margin-top="0.5mm" margin-left="1mm">
                             <fo:block>Vu l'avis favorable du Conseil national de l'information
                                 statistique, cette enquête#if(${BddCaractereObligatoire}=='oui')
                                 reconnue d'${BddStatutEnquete}, est obligatoire#else est reconnue
@@ -222,7 +222,7 @@
                 <fo:block-container absolute-position="absolute" left="30mm" top="33mm"
                     width="150mm" height="190mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify" border="black solid 0.5pt">
-                    <fo:block>
+                    <fo:block border="red solid 0.5pt">
                         <fo:inline-container>
                             <fo:block text-align="center" font-weight="bold" font-size="10pt"
                                 margin-top="7mm" margin-left="7mm" margin-right="7mm">Comment
