@@ -77,7 +77,7 @@ public class DDI2ODTGenerator implements Generator {
 	private InputStream getPropertiesFiles() {
 		InputStream isPROPERTIES_FILE = null;
 		if (propertiesFiles == null) {
-			isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_ODT);
+			isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.CONFIG_DDI2ODT);
 		}else{
 			isPROPERTIES_FILE = propertiesFiles;
 		}
