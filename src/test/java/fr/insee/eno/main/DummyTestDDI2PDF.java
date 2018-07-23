@@ -22,7 +22,9 @@ import org.apache.fop.apps.MimeConstants;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
+import fr.insee.eno.postprocessing.CustomizationPostprocessor;
 import fr.insee.eno.postprocessing.PDFPostprocessor;
+import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
 public class DummyTestDDI2PDF {
@@ -31,8 +33,8 @@ public class DummyTestDDI2PDF {
 
 		String basePathddi2PDF = "src/test/resources/ddi-to-pdf";
 		String basePathImg = "src/test/resources/examples/img/";
-		GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
-				new PDFPostprocessor());
+		Postprocessor[] postprocessors =  {new PDFPostprocessor(), new CustomizationPostprocessor()};
+		GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(), postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathddi2PDF));
 		File xconf = new File(String.format("%s/fop.xconf", basePathddi2PDF));
 

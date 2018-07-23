@@ -11,6 +11,7 @@ import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.postprocessing.PDFPostprocessor;
+import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
 public class TestDDIToFO {
@@ -27,7 +28,7 @@ public class TestDDIToFO {
 			
 			// Without plugins
 			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
-					new NoopPostprocessor());
+					new Postprocessor[] {new NoopPostprocessor()});
 			File outputFile = genService.generateQuestionnaire(in, null,"ddi-2-fo-test");
 			File expectedFile = new File(String.format("%s/out.fo", basePath));
 			diff = xmlDiff.getDiff(outputFile,expectedFile);
