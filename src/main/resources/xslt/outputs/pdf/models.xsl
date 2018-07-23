@@ -310,7 +310,7 @@
 						<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
 							<xsl:choose>
 								<xsl:when test="$separator-position = .">
-									<xsl:text>,</xsl:text>
+									<fo:inline>,</fo:inline>
 								</xsl:when>
 								<xsl:otherwise>
 									<xsl:call-template name="insert-image">
@@ -479,191 +479,107 @@
 	</xsl:template>
 	
 	<!-- Déclenche tous les Table de l'arbre des drivers -->
-	<xsl:template match="main//Table" mode="model">
+	<xsl:template match="main//Table | main//TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		<!-- Necessary for the with-param "driver" called in the for-each... -->
+		
 		<xsl:variable name="current-match" select="."/>
-			
+		<xsl:variable name="total-lines" as="xs:integer">
+			<xsl:choose>
+				<xsl:when test="self::Table">
+					<xsl:value-of select="count(enopdf:get-body-lines($source-context))"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="number(enopdf:get-maximum-lines($source-context))"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:variable name="maxlines-by-table" as="xs:integer">
+			<xsl:choose>
+				<xsl:when test="self::Table">
+					<xsl:value-of select="number($properties//Table/Row/DefaultSize)"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="number($properties//Roster/Row/DefaultSize)"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:variable name="table-pages" select="xs:integer(1+(($total-lines -1) div $maxlines-by-table))" as="xs:integer"/>
+
 		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
 			<!--<xsl:attribute name="id" select="enopdf:get-name($source-context)"/>-->
 			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
 				<xsl:with-param name="driver" select="."/>
 			</xsl:call-template>
 		</fo:block>	
-					
-	<!-- On fixe le nombre max de ligne dans un tableau (DefaultSize) pour pagination -->
-		<xsl:variable name="line-number" select="count(enopdf:get-body-lines($source-context))"/>
-		<xsl:variable name="maxlines-by-table" select="$properties//Table/Row/DefaultSize"/>
-		<xsl:variable name="table-pages" select="xs:integer(1+(($line-number -1) div $maxlines-by-table))" as="xs:integer"/>
-		
+		<!-- long tables are split : $maxlines-by-table lines maximum, except the first one which has 1 less -->
 		<xsl:for-each select="1 to $table-pages">
 			<xsl:variable name="page-position" select="position()"/>
-	
 			<fo:block page-break-inside="avoid">
 				<xsl:attribute name="id" select="concat(enopdf:get-name($source-context),'-',$page-position)"/>
-				<xsl:if test="$line-number &gt;= $maxlines-by-table">
+				<xsl:if test="$current-match/name()='TableLoop' and $total-lines &gt;= $maxlines-by-table">
 					<xsl:attribute name="page-break-after" select="'always'"/>
 				</xsl:if>
 				<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
 					text-align="center" margin-top="1mm" display-align="center" space-after="5mm">
-	
-				<!--Gestion du header-->
 					<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
 						<fo:table-header>
-						<!-- Récupére le nombre de header-lines = Nombre de lignes dans le tableau -->
 							<xsl:for-each select="enopdf:get-header-lines($source-context)">
 								<fo:table-row xsl:use-attribute-sets="entete-ligne" text-align="center">
-								<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
-										<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>
-										<NBHeaderLine><xsl:value-of select="count(enopdf:get-header-line($source-context, position()))"/></NBHeaderLine>
-										<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
-										<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>
-										<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
-										<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
-	
-								<!-- Dans un for-each, la fonction position() renvoie la position de l'élément dans l'arbre temporaire créé dans le select du for-each -->
-									<xsl:apply-templates
-										select="enopdf:get-header-line($source-context, position())"
-										mode="source">
+									<xsl:apply-templates select="enopdf:get-header-line($source-context, position())" mode="source">
 										<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
 										<xsl:with-param name="header"  select="'YES'" tunnel="yes"/>
 										<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
 									</xsl:apply-templates>
-								<!-- Pour chaque boucle , on récupére les infos du header -->
 								</fo:table-row>
 							</xsl:for-each>
 						</fo:table-header>
 					</xsl:if>
-	
-				<!--Gestion du body-->
 					<fo:table-body>
-						<xsl:for-each select="enopdf:get-body-lines($source-context)">
-							<xsl:variable name="position" select="position()"/>
-							<xsl:if test="($position &gt; $maxlines-by-table*($page-position -1)) and ($position &lt;= $maxlines-by-table*$page-position)" >
-								<fo:table-row border-color="black" >
-									<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
-								<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>
-								<NBHeaderLine><xsl:value-of select="count(enopdf:get-header-line($source-context, position()))"/></NBHeaderLine>
-								<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
-								<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>
-								<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
-								<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
-
-									<xsl:apply-templates select="enopdf:get-body-line($source-context, position(),$maxlines-by-table*($page-position -1) +1)" mode="source">
-										<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
-										<xsl:with-param name="table-first-line" select="$maxlines-by-table*($page-position -1) +1" tunnel="yes"/>
-										<xsl:with-param name="table-last-line" select="$maxlines-by-table*$page-position" tunnel="yes"/>
-										<xsl:with-param name="isTable" select="'YES'" tunnel="yes"/>
-										<xsl:with-param name="row-number"  select="position()" tunnel="yes"/>
-										<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
-									</xsl:apply-templates>
-							
-							<!-- Pour chaque boucle , on récupére les infos des lignes du tableau -->
-								</fo:table-row>
-							</xsl:if>
-						</xsl:for-each>
+						<xsl:choose>
+							<xsl:when test="$current-match/name()='Table'">
+								<xsl:for-each select="enopdf:get-body-lines($source-context)">
+									<xsl:variable name="position" select="position()"/>
+									<xsl:if test="($position &gt; $maxlines-by-table*($page-position -1)) and ($position &lt;= $maxlines-by-table*$page-position)" >
+										<fo:table-row border-color="black">
+											<xsl:apply-templates select="enopdf:get-body-line($source-context, position(),$maxlines-by-table*($page-position -1) +1)" mode="source">
+												<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
+												<xsl:with-param name="table-first-line" select="$maxlines-by-table*($page-position -1) +1" tunnel="yes"/>
+												<xsl:with-param name="table-last-line" select="$maxlines-by-table*$page-position" tunnel="yes"/>
+												<xsl:with-param name="isTable" select="'YES'" tunnel="yes"/>
+												<xsl:with-param name="row-number"  select="position()" tunnel="yes"/>
+												<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
+											</xsl:apply-templates>
+										</fo:table-row>
+									</xsl:if>
+								</xsl:for-each>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:for-each select="1 to $maxlines-by-table">
+									<!-- if the dynamic table is on several pages, each page contains maxlines-by-table -->
+									<xsl:if test=". &lt;= $total-lines or $total-lines &gt; $maxlines-by-table">
+										<!-- in a dynamic table, a repeated "line" may be on several get-body-lines -->
+										<xsl:for-each select="enopdf:get-body-lines($source-context)">
+											<xsl:variable name="position" select="position()"/>
+											<fo:table-row border-color="black" >
+												<xsl:apply-templates select="enopdf:get-body-line($source-context, $position)" mode="source">
+													<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
+													<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
+												</xsl:apply-templates>
+											</fo:table-row>
+										</xsl:for-each>
+									</xsl:if>
+								</xsl:for-each>
+							</xsl:otherwise>
+						</xsl:choose>
 					</fo:table-body>
 				</fo:table>
 			</fo:block>
 		</xsl:for-each>
-		
 		<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
-				
 	</xsl:template>
-
-	<!--TableLoop renvoie seulment des headers avec des lignes vierges en des- (rowloop est dupliqué) -->
-	<xsl:template match="main//TableLoop" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:param name="instance-ancestor" tunnel="yes"/>
-				
-		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
-			<xsl:attribute name="id" select="enopdf:get-name($source-context)"/>
-			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
-				<xsl:with-param name="driver" select="."/>
-			</xsl:call-template>
-				</fo:block>		
-				
-				<!-- On fixe le nombre max de ligne dans un tableau (DefaultSize) pour pagination -->
-				<xsl:variable name="line-number" select="count(enopdf:get-body-lines($source-context))"/>
-				<xsl:variable name="table-pages" select="xs:integer(1+(($line-number -1) div $properties//Table/Row/DefaultSize))" as="xs:integer"/>
-				<xsl:for-each select="1 to $table-pages">
-				<xsl:variable name="page-position" select="position()"/>
-					<fo:block  page-break-inside="avoid">
-				
-				<xsl:if test="$line-number &gt;= $properties//Table/Row/DefaultSize">
-					<xsl:attribute name="page-break-after" select="'always'"/>
-				</xsl:if>
-				
-					<fo:table inline-progression-dimension="auto" font-size="10pt" table-layout="fixed" width="100%" border-width="0.35mm"
-					text-align="center" display-align="center" space-after="5mm">
-					
-		<!-- Debut boucle page-break after -->								
-					<!--Gestion du header-->
-					<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
-										
-						<fo:table-header>
-							<!-- Récupére le nombre de header-lines = Nombre de lignes dans le tableau -->
-							<xsl:for-each select="enopdf:get-header-lines($source-context)">
-								<fo:table-row xsl:use-attribute-sets="entete-ligne" text-align="center">
-									
-									<!-- Dans un for-each, la fonction position() renvoie la position de l'élément dans l'arbre temporaire créé dans le select du for-each -->
-									<xsl:apply-templates
-										select="enopdf:get-header-line($source-context, position())"
-										mode="source">
-										<xsl:with-param name="driver" select="." tunnel="yes"/>
-										<xsl:with-param name="header"  select="'YES'" tunnel="yes"/>
-										<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
-									</xsl:apply-templates>
-									<!-- Pour chaque boucle , on récupére les infos du header -->
-								</fo:table-row>
-							</xsl:for-each>
-						</fo:table-header>
-					</xsl:if>	
-					
-					<!--Gestion du body-->
-					<fo:table-body>
-						<xsl:for-each select="1 to xs:integer(enopdf:get-rooster-number-lines($source-context))">
-<!-- 						<xsl:for-each select="1 to xs:integer(enopdf:get-maximum-lines($source-context))"> -->
-							<xsl:for-each select="enopdf:get-body-lines($source-context)">
-							
-							<xsl:variable name="position" select="position()"/>
-							<xsl:if test="($position &gt; $properties//Table/Row/DefaultSize*($page-position -1)) and ($position &lt;= $properties//Table/Row/DefaultSize*$page-position)" >
-							
-								<fo:table-row border-color="black" >
-									<!--<NBHeaderCols><xsl:value-of select="count(enopdf:get-header-columns($source-context))"/></NBHeaderCols>
-									<NBHeaderLines><xsl:value-of select="count(enopdf:get-header-lines($source-context))"/></NBHeaderLines>
-									<NBHeaderLine><xsl:value-of select="count(enopdf:get-header-line($source-context, position()))"/></NBHeaderLine>
-									<NBBodyLines><xsl:value-of select="count(enopdf:get-body-lines($source-context))"/></NBBodyLines>
-									<NBBodyLine><xsl:value-of select="count(enopdf:get-body-line($source-context, position()))"/></NBBodyLine>
-									<NBRowspan><xsl:value-of select="enopdf:get-rowspan($source-context)"/></NBRowspan>
-									<NBColspan><xsl:value-of select="enopdf:get-colspan($source-context)"/></NBColspan>-->
-									<xsl:apply-templates
-										select="enopdf:get-body-line($source-context, position())" mode="source">
-										<xsl:with-param name="driver" select="." tunnel="yes"/>
-										<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
-									</xsl:apply-templates>
-									<!-- Pour chaque boucle , on récupére les infos des lignes du tableau -->
-								</fo:table-row>
-								
-								</xsl:if>
-								
-							</xsl:for-each>
-						</xsl:for-each>
-					</fo:table-body>
-				</fo:table>
-				
-				</fo:block>
-				</xsl:for-each>
-				
-				<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
-					<xsl:with-param name="driver" select="." tunnel="yes"/>
-				</xsl:apply-templates>
-
-		</xsl:template>
 
 	<!-- Déclenche tous les TextCell de l'arbre des drivers -->
 	<xsl:template match="main//TextCell" mode="model">
