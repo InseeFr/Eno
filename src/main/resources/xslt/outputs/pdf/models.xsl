@@ -50,7 +50,7 @@
 					<fo:region-after region-name="xsl-region-after" extent="25mm" display-align="before" precedence="true"/>
 				</fo:simple-page-master>
 			</fo:layout-master-set>
-			<fo:page-sequence master-reference="A4-portrait">
+			<fo:page-sequence master-reference="A4-portrait" initial-page-number="2">
 				<fo:static-content flow-name="xsl-region-before">
 					<fo:block position="absolute" margin="10mm" text-align="right">
 						<xsl:call-template name="insert-image">
