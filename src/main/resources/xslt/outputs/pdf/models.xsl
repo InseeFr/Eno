@@ -266,14 +266,9 @@
 						<xsl:when test="enopdf:get-format($source-context)">
 							<fo:block xsl:use-attribute-sets="general-style">
 								<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
-									<xsl:variable name="curVal" select="."/>
-									<xsl:if test="number(enopdf:get-length($source-context)) = $curVal">
-										<xsl:for-each select="1 to $curVal">
-											<xsl:call-template name="insert-image">
-												<xsl:with-param name="image-name" select="'mask_number.png'"/>
-											</xsl:call-template>
-										</xsl:for-each>
-									</xsl:if>
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'mask_number.png'"/>
+									</xsl:call-template>
 								</xsl:for-each>
 							</fo:block>
 						</xsl:when>
@@ -332,17 +327,11 @@
 						<xsl:attribute name="padding-bottom">0px</xsl:attribute>
 					</xsl:if>
 					<xsl:for-each select="1 to xs:integer(number(string-length(replace($field,'/',''))))">
-						<xsl:variable name="curVal" select="."/>
-						<xsl:if test="number(string-length(replace($field,'/',''))) = $curVal">
-							<xsl:for-each select="1 to $curVal">
-								<xsl:variable name="curVal2" select="."/>
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'mask_number.png'"/>
-								</xsl:call-template>
-								<xsl:if test="$curVal2 = number(string-length(replace($field,'/','')))"> (<xsl:value-of select="$field"/>) </xsl:if>
-							</xsl:for-each>
-						</xsl:if>
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'mask_number.png'"/>
+						</xsl:call-template>
 					</xsl:for-each>
+					(<xsl:value-of select="$field"/>)
 				</fo:block>
 			</xsl:when>
 		</xsl:choose>
@@ -742,26 +731,20 @@
 		<xsl:if test="enopdf:get-type($source-context) = 'duration'">
 			<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
 			<fo:inline>
-				<xsl:for-each select="1 to string-length($field)">
-					<xsl:variable name="curVal" select="."/>
-					<xsl:if test="string-length($field) = $curVal">
-						<fo:block xsl:use-attribute-sets="general-style">
-							<xsl:for-each select="1 to $curVal">
-								<xsl:variable name="curVal2" select="."/>
-								<xsl:choose>
-									<xsl:when test="':' = substring($field,$curVal2,1)">
-										<fo:inline>:</fo:inline>
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:call-template name="insert-image">
-											<xsl:with-param name="image-name" select="'mask_number.png'"/>
-										</xsl:call-template>
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:for-each>
-						</fo:block>
-					</xsl:if>
-				</xsl:for-each>
+				<fo:block xsl:use-attribute-sets="general-style">
+					<xsl:for-each select="1 to string-length($field)">
+						<xsl:choose>
+							<xsl:when test="':' = substring($field,.,1)">
+								<fo:inline>:</fo:inline>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'mask_number.png'"/>
+								</xsl:call-template>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:for-each>
+				</fo:block>
 			</fo:inline>
 		</xsl:if>
 		
