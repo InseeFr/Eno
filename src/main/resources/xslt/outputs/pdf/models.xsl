@@ -57,15 +57,23 @@
 							<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
 						</xsl:call-template>
 					</fo:block>
-					<fo:block position="absolute" margin-top="80%" text-align="right">
+					<fo:block position="absolute" margin-top="80%" text-align="right" margin-right="4mm">
 						<fo:instream-foreign-object>
 							<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
 								message="Code Bar - #page-number#" orientation="90">
 								<barcode:code128>
 									<barcode:height>8mm</barcode:height>
+									<barcode:human-readable>
+										<barcode:placement>none</barcode:placement>
+									</barcode:human-readable>
 								</barcode:code128>
 							</barcode:barcode>
 						</fo:instream-foreign-object>
+					</fo:block>
+					<fo:block>
+						<fo:block-container reference-orientation="90" top="224mm" left="202.5mm" absolute-position="absolute">
+							<fo:block position="absolute" text-align="right" font-size="8pt">Code Bar - <fo:page-number/></fo:block>
+						</fo:block-container>
 					</fo:block>
 					<!-- Je n'ai pas trouvé quel contenu mettre... -->
 					<!--<fo:block>
