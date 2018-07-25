@@ -124,14 +124,14 @@
                     overflow="hidden">
                     <fo:block margin-top="0.5mm" margin-left="0mm" height="37.2mm"
                         font-family="Lucida Console">
-                        <fo:inline-container>
-                            <fo:block>${BddAdressePosteeL1}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL2}</fo:block>
-                            <fo:block>${BddAdressePosteeL3}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL4}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL5}</fo:block>
-                            <fo:block>${BddAdressePosteeL6}</fo:block>
-                            <fo:block>${BddAdressePosteeL7}</fo:block>
+                        <fo:inline-container margin="0mm">
+                            <fo:block line-height="10pt">${BddAdressePosteeL1}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL2}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL3}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL4}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL5}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL6}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL7}</fo:block>
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
@@ -749,7 +749,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="105mm" top="50mm"
-                    width="90mm" height="50mm" background-color="#EEE" padding="3mm">
+                    width="87mm" height="50mm" background-color="#EEE" padding="3mm">
                     <fo:block font-weight="bold" font-size="16pt" text-align="center"
                         >${BddLibelleLong}</fo:block>
                 </fo:block-container>
