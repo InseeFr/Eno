@@ -10,8 +10,8 @@
 
 	<!-- ******************************* Main properties for the non-regression script depending on the input and transformation to be processed *********************************** -->
 	<!-- The name of the survey, conditionning the name of the input file processed. -->
-	<!--<property name="survey-name" value="simpsons"/>-->
-	<property name="survey-name" value="achats-2018-x00"/>
+	<property name="survey-name" value="simpsons"/>
+	<!--<property name="survey-name" value="achats-2018-x00"/>-->
 	<!--<property name="survey-name" value="esa-ddi-v2"/>-->
 	<!-- The transformation to be processed, usually named using a <in>2<out> template. -->
 

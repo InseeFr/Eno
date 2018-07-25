@@ -348,7 +348,7 @@
 		</xsl:variable>
 		
 		<xsl:choose>
-			<xsl:when test="enopdf:get-image($source-context) != ''">
+			<xsl:when test="$image != ''">
 				<xsl:choose>
 					<xsl:when test="starts-with($image,'http')">
 							<fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">&#x274F;</fo:inline>
@@ -408,23 +408,11 @@
 	</xsl:template>
 
 	<!-- Déclenche tous les xf-select de l'arbre des drivers -->
-	<xsl:template match="main//xf-select" mode="model">
+	<xsl:template match="main//xf-select1 | main//xf-select" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
-	
-
-	<!-- Déclenche tous les xf-select de l'arbre des drivers -->
-	<xsl:template match="main//xf-select1" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-
-		<xsl:variable name="format" select="enopdf:get-appearance($source-context)"/>
 		
 		<xsl:choose>
-			<xsl:when test="$format = 'minimal'">
+			<xsl:when test="enopdf:get-appearance($source-context) = 'minimal'">
 				<fo:block xsl:use-attribute-sets="Line-drawing">&#160;</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
@@ -461,7 +449,8 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		<xsl:variable name="table-pages" select="xs:integer(1+(($total-lines -1) div $maxlines-by-table))" as="xs:integer"/>
+		<!-- The table in the first page contains 1 line less than next ones -->
+		<xsl:variable name="table-pages" select="xs:integer(1+(($total-lines -1+1) div $maxlines-by-table))" as="xs:integer"/>
 		
 		<xsl:apply-templates select="enopdf:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
@@ -479,9 +468,9 @@
 			<xsl:variable name="page-position" select="position()"/>
 			<fo:block page-break-inside="avoid">
 				<xsl:attribute name="id" select="concat(enopdf:get-name($source-context),'-',$page-position)"/>
-				<xsl:if test="$current-match/name()='TableLoop' and $total-lines &gt;= $maxlines-by-table">
+				<!--<xsl:if test="$current-match/name()='TableLoop' and $total-lines &gt;= $maxlines-by-table -1">
 					<xsl:attribute name="page-break-after" select="'always'"/>
-				</xsl:if>
+				</xsl:if>-->
 				<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
 					text-align="center" margin-top="1mm" display-align="center" space-after="5mm">
 					<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
@@ -500,14 +489,17 @@
 					<fo:table-body>
 						<xsl:choose>
 							<xsl:when test="$current-match/name()='Table'">
+								<xsl:variable name="first-line" select="$maxlines-by-table*($page-position -1)"/>
+								<xsl:variable name="last-line" select="$maxlines-by-table*($page-position) -1"/>
 								<xsl:for-each select="enopdf:get-body-lines($source-context)">
 									<xsl:variable name="position" select="position()"/>
-									<xsl:if test="($position &gt; $maxlines-by-table*($page-position -1)) and ($position &lt;= $maxlines-by-table*$page-position)">
+									<!-- page 1 starts at line 0, so contains 1 line less than next ones -->
+									<xsl:if test="($position &gt;= $first-line) and ($position &lt;= $last-line)">
 										<fo:table-row border-color="black">
-											<xsl:apply-templates select="enopdf:get-body-line($source-context, position(),$maxlines-by-table*($page-position -1) +1)" mode="source">
+											<xsl:apply-templates select="enopdf:get-body-line($source-context, position(),$first-line)" mode="source">
 												<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
-												<xsl:with-param name="table-first-line" select="$maxlines-by-table*($page-position -1) +1" tunnel="yes"/>
-												<xsl:with-param name="table-last-line" select="$maxlines-by-table*$page-position" tunnel="yes"/>
+												<xsl:with-param name="table-first-line" select="$first-line" tunnel="yes"/>
+												<xsl:with-param name="table-last-line" select="$last-line" tunnel="yes"/>
 												<xsl:with-param name="isTable" select="'YES'" tunnel="yes"/>
 												<xsl:with-param name="row-number" select="position()" tunnel="yes"/>
 												<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
@@ -518,8 +510,8 @@
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:for-each select="1 to $maxlines-by-table">
-									<!-- if the dynamic table is on several pages, each page contains maxlines-by-table -->
-									<xsl:if test=". &lt;= $total-lines or $total-lines &gt; $maxlines-by-table">
+									<!-- if the dynamic table is on several pages, each page contains maxlines-by-table, except the first one, which has maxlines-by-table -1 -->
+									<xsl:if test="$page-position &gt; 1 or (. &lt;= $total-lines and . &lt; $maxlines-by-table)">
 										<!-- in a dynamic table, a repeated "line" may be on several get-body-lines -->
 										<xsl:for-each select="enopdf:get-body-lines($source-context)">
 											<xsl:variable name="position" select="position()"/>
@@ -560,10 +552,9 @@
 				<xsl:attribute name="text-align">center</xsl:attribute>
 			</xsl:if>
 			<xsl:if test="$no-border = 'no-border'">
-				<xsl:attribute name="border">0mm </xsl:attribute>
-				<xsl:attribute name="padding">0mm </xsl:attribute>
+				<xsl:attribute name="border" select="'0mm'"/>
+				<xsl:attribute name="padding" select="'0mm'"/>
 			</xsl:if>
-			
 			<fo:block xsl:use-attribute-sets="general-style">
 				<xsl:if test="not($header)">
 					<xsl:attribute name="margin-left" select="'1mm'"/>
@@ -579,7 +570,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<fo:table-cell text-align="left" border-color="black" border-style="solid" padding="1mm">
 			<xsl:if test="$no-border = 'no-border'">
 				<xsl:attribute name="border">0mm</xsl:attribute>
@@ -619,7 +610,6 @@
 			</fo:block>
 		</fo:table-cell>
 	</xsl:template>
-	
 
 	<!-- Déclenche tous les xf-group de l'arbre des drivers -->
 	<xsl:template match="main//xf-group" mode="model">
