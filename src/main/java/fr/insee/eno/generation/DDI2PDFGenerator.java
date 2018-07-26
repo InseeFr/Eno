@@ -14,9 +14,11 @@ import fr.insee.eno.transform.xsl.XslParameters;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
 public class DDI2PDFGenerator implements Generator {
-	
+
+	private InputStream propertiesFiles;
+
 	private static final Logger logger = LoggerFactory.getLogger(DDI2PDFGenerator.class);
-	
+
 	// FIXME Inject !
 	private static XslTransformation saxonService = new XslTransformation();
 
@@ -33,28 +35,35 @@ public class DDI2PDFGenerator implements Generator {
 
 		outputBasicFormPath = Constants.TEMP_FOLDER_PATH + "/" + surveyName + "/" + formNameFolder + "/form";
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
-		
+
 		String outputForm = outputBasicFormPath + "/form.fo";
-		InputStream isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL);
-		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_PDF);
+		InputStream isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL = Constants
+				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL);
+		InputStream isPROPERTIES_FILE = this.getPropertiesFiles();
 		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
-		
+
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 		OutputStream osOutputForm = FileUtils.openOutputStream(new File(outputForm));
-		saxonService.transformDDI2PDF(
-				isFinalInput,
-				osOutputForm,
-				isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL,
-				isPROPERTIES_FILE,
-				isPARAMETERS_FILE);
-		
+		saxonService.transformDDI2PDF(isFinalInput, osOutputForm, isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL,
+				isPROPERTIES_FILE, isPARAMETERS_FILE);
+
 		isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL.close();
 		isPROPERTIES_FILE.close();
 		isPARAMETERS_FILE.close();
 		isFinalInput.close();
 		osOutputForm.close();
-		
+
 		return new File(outputForm);
+	}
+
+	private InputStream getPropertiesFiles() {
+		InputStream isPROPERTIES_FILE = null;
+		if (propertiesFiles == null) {
+			isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.CONFIG_DDI2PDF);
+		}else{
+			isPROPERTIES_FILE = propertiesFiles;
+		}
+		return isPROPERTIES_FILE;
 	}
 
 	/**
@@ -67,6 +76,10 @@ public class DDI2PDFGenerator implements Generator {
 		formNameFolder = FilenameUtils.removeExtension(formNameFolder);
 		formNameFolder = formNameFolder.replace(XslParameters.TITLED_EXTENSION, "");
 		return formNameFolder;
+	}
+
+	public void setPropertiesFile(InputStream propertiesFiles) {
+		this.propertiesFiles = propertiesFiles;
 	}
 
 }

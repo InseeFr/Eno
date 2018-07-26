@@ -10,6 +10,8 @@
     <dirname property="xml-folder" file="${xml.home}/dummy"/>
     <dirname property="lang-folder" file="${languages.home}/dummy"/>
     <dirname property="questionnaires-folder" file="${questionnaires.home}/dummy"/>
+    <dirname property="config-folder" file="${config.home}/dummy"/>
+    
 
     <!-- Definition of the classpath -->
     <path id="classpath">

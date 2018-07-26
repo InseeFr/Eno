@@ -2,6 +2,8 @@
 <project name="enoDDI2PDF" basedir="." default="full">
 
 	<import file="build-pdf.xml"/>
+	
+	<import file="build-customization.xml"/>
 
 	<!-- Importing the configuration part that is common to every script -->
 	<import file="build-configuration.xml"/>
@@ -56,7 +58,7 @@
 		<xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/pdf/${form-name}/basic-form.tmp"
 			style="${xslt.home}/transformations/ddi2pdf/ddi2pdf.xsl" force="true"
 			classpath="${saxon.jar}">
-			<param name="properties-file" expression="${root-folder}/config/ddi2pdf.xml"/>
+			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
 			<param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
 			<param name="labels-folder" expression="${lang-folder}/fr"/>
 		</xslt>
@@ -241,8 +243,15 @@
 	<!-- ********************************************** Targets OutPostProcessing ************************************************ -->
 	<target name="OutPostProcessing">
 		<!-- Expects the input file ${temp.home}/pdf/${form-name}/basic-form.tmp -->
+
+		<property name="pdfFilePath"  value="${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"/>
 		<antcall target="pdfPostProcessing">
 			<param name="input-file" value="${temp.home}/pdf/${form-name}/basic-form.tmp"/>
+			<param name="output-file" value="${pdfFilePath}"/>
+		</antcall>
+		<antcall target="customizationPostProcessing">
+			<param name="input-file" value="${pdfFilePath}"/>
+			<param name="properties-file" value="${root-folder}/config/ddi2pdf.xml"/>
 		</antcall>
 	</target>
 

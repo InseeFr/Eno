@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.plugins.tableColumnSizeProcessor.calculator.CalculatorService;
+import fr.insee.eno.transform.xsl.XslTransformation;
 
 /**
  * PDF postprocessor.
@@ -21,8 +22,12 @@ public class PDFPostprocessor implements Postprocessor {
 	// FIXME Inject !
 	private static CalculatorService serviceTableColumnSize = new CalculatorService();
 
+
+	// FIXME Inject !
+	private static XslTransformation saxonService = new XslTransformation();
+	
 	@Override
-	public File process(File input, File parametersFile) throws Exception {
+	public File process(File input, File parametersFile, String survey) throws Exception {
 
 		String outputForFO = FilenameUtils.removeExtension(input.getPath()) + Constants.FINAL_PDF_EXTENSION;
 
@@ -42,12 +47,11 @@ public class PDFPostprocessor implements Postprocessor {
 			isConfFile.close();
 			logger.debug("Get conf file : "+confFile.getAbsolutePath());
 		}
-		
+								
 		serviceTableColumnSize.tableColumnSizeProcessor(input.getAbsolutePath(), outputForFO,
 				confFilePath);
-
+		
 		return new File(outputForFO);
 
 	}
-
 }
