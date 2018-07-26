@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="xs" xmlns:eno="http://xml.insee.fr/apps/eno"
-    xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner"
-    version="2.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" >
+    exclude-result-prefixes="xs eno"
+    xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" 
+    xmlns:eno="http://xml.insee.fr/apps/eno"
+    xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
+    version="2.0">
         
     <xsl:function name="eno:Office-styles">
         <xsl:param name="source-context"/>
