@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<office:document office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.text"
-    xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" 
-    xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0">
-    <office:font-face-decls>
-        <style:font-face style:name="Arial" svg:font-family="Arial" style:font-family-generic="system" style:font-pitch="variable"/>
-    </office:font-face-decls>
-    
-    <office:styles>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="xs" xmlns:eno="http://xml.insee.fr/apps/eno"
+    xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner"
+    version="2.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" >
+        
+    <xsl:function name="eno:Office-styles">
+        <xsl:param name="source-context"/>
+        
         <style:style style:name="Standard" style:family="paragraph" style:class="text"/>
         <style:style style:name="Title" style:family="paragraph" style:class="chapter">
             <style:paragraph-properties fo:text-align="center" fo:margin-top="3cm"
@@ -45,10 +46,10 @@
             <style:text-properties fo:font-size="10pt"/>
         </style:style>
         <!-- <style:style style:name="QuestionSelect" style:family="paragraph"
-         style:default-outline-level="2" style:class="text">
-         <style:paragraph-properties fo:text-align="left"/>
-         <style:text-properties fo:font-size="10pt" fo:font-weight="bold"/>
-      </style:style> -->
+					style:default-outline-level="2" style:class="text">
+					<style:paragraph-properties fo:text-align="left"/>
+					<style:text-properties fo:font-size="10pt" fo:font-weight="bold"/>
+					</style:style> -->
         <style:style style:name="Comment" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
             <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
@@ -107,9 +108,8 @@
             <style:paragraph-properties fo:text-align="center"/>
             <style:text-properties fo:font-size="10pt" fo:font-weight="bold"/>
         </style:style>
-    </office:styles>
-    <office:body>
-        <office:text/>
-    </office:body>
-</office:document>
+    </xsl:function>
+
+
+</xsl:stylesheet>
 
