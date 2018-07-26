@@ -682,18 +682,9 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-	<!-- Déclenche tous les ResponseElement de l'arbre des drivers -->
-	<xsl:template match="main//ResponseElement" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>
-		
-		<fo:block font-size="10pt" font-weight="bold" color="black">
-			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-		</fo:block>
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
+	<!-- external variables : do nothing -->
+	<xsl:template match="main//ResponseElement" mode="model"/>
+	
 
 	<xsl:template match="main//DoubleDuration" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
