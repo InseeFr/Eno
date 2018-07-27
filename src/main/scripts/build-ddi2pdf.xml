@@ -12,6 +12,7 @@
 	<!-- The name of the survey, conditionning the name of the input file processed. -->
 	<property name="survey-name" value="simpsons"/>
 	<!--<property name="survey-name" value="achats-2018-x00"/>-->
+	<!--<property name="survey-name" value="ticmenold"/>-->
 	<!--<property name="survey-name" value="esa-ddi-v2"/>-->
 	<!-- The transformation to be processed, usually named using a <in>2<out> template. -->
 
@@ -82,7 +83,7 @@
 			out="${root-folder}/target/${survey-name}/${form-name}/form/form-debug.${out-extension}"
 			style="${xslt.home}/transformations/ddi2pdf/ddi2pdf.xsl" force="true"
 			classpath="${saxon.jar}">
-			<param name="properties-file" expression="${root-folder}/config/ddi2pdf.xml"/>
+			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
 			<param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
 			<param name="labels-folder" expression="${lang-folder}/fr"/>
 		</xslt>

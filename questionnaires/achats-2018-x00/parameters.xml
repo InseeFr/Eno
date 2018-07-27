@@ -5,7 +5,10 @@
     <Language>fr</Language>
     <Language>en</Language>
   </Languages>
-
+  <AccompanyingMails>
+    <AccompanyingMail>ouvertureCOL</AccompanyingMail>
+    <AccompanyingMail>relanceCOL</AccompanyingMail>
+  </AccompanyingMails>
   <Title>
     <Browsing>module</Browsing>
       <Sequence>

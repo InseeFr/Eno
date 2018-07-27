@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="../schema/eno-schema-draft.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<DDIInstance xmlns="ddi:instance:3_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xmlns:a="ddi:archive:3_2" xmlns:r="ddi:reusable:3_2" xmlns:s="ddi:studyunit:3_2"
-   xmlns:d="ddi:datacollection:3_2" xmlns:g="ddi:group:3_2" xmlns:eno="http://xml.insee.fr/apps/eno"
-   xmlns:l="ddi:logicalproduct:3_2" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-   xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
-   xmlns:xhtml="http://www.w3.org/1999/xhtml"
-   xsi:schemaLocation="ddi:instance:3_2 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.2/XMLSchema/instance.xsd"
-   isMaintainable="true">
+<?xml-model href="../../../eno-schema-draft.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="ddi:instance:3_2 ../../../schema/instance.xsd"
+ xmlns:eno="http://xml.insee.fr/apps/eno" xmlns="ddi:instance:3_2" xmlns:g="ddi:group:3_2"
+ xmlns:d="ddi:datacollection:3_2" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
+ xmlns:s="ddi:studyunit:3_2" xmlns:r="ddi:reusable:3_2" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+ xmlns:a="ddi:archive:3_2" xmlns:l="ddi:logicalproduct:3_2"
+ xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" isMaintainable="true">
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-jejocm36</r:ID>
    <r:Version>0.1.0</r:Version>
@@ -68,7 +67,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">Le questionnaire porte sur l’ensemble des achats inscrits
                      dans vos comptes d'exploitation 2017 (marchandises, matières premières et
-                     autres, approvisionnements, y compris les variations de stocks, les autres
+                     autres approvisionnements, y compris les variations de stocks, les autres
                      achats et charges externes, les redevances pour concessions, brevets,
                      licences...), à l’exclusion des rémunérations, des charges sociales, des impôts
                      et des dotations d'exploitation.</d:Text>
@@ -117,7 +116,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">Les montants à saisir dans ce questionnaire sont en
-                     milliers d’euros (k€)</d:Text>
+                     milliers d’euros (k€).</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -152,7 +151,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">Vous n'avez pas répondu à toutes les questions concernant
-                     le dernier exercice comptable clos qui est essentielle dans ce questionnaire.
+                     le dernier exercice comptable clos qui sont essentielles dans ce questionnaire.
                      Il est préférable de le faire avant de passer à la suite.</d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -167,7 +166,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">La question porte sur votre exercice comptable 2017, en
-                     conséquence la date de cloture devrait être comprise entre le 1er juin 2017 et
+                     conséquence la date de clôture devrait être comprise entre le 1er juin 2017 et
                      le 31 mai 2018.</d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -184,23 +183,10 @@
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p>
                         <xhtml:b>HORS RÉMUNÉRATIONS, CHARGES SOCIALES, IMPÔTS ET DOTATIONS
-                           D'EXPLOITATION</xhtml:b>
+                           D'EXPLOITATION</xhtml:b><xhtml:br/>
+                        <xhtml:i>Soit les rubriques 601 à 629 du Plan Comptable Général (PCG), plus les postes 651, 653 et 654.</xhtml:i><xhtml:a href="#ftn207"/>
                      </xhtml:p>
                   </d:Text>
-               </d:LiteralText>
-            </d:InstructionText>
-         </d:Instruction>
-         <d:Instruction>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>jejoqbp4</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <d:InstructionName>
-               <r:String xml:lang="fr-FR">instruction</r:String>
-            </d:InstructionName>
-            <d:InstructionText>
-               <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Indiquez le montant total des charges d'exploitation (y
-                     compris droits de douane)</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -209,40 +195,11 @@
             <r:ID>jeu0eue9</r:ID>
             <r:Version>0.1.0</r:Version>
             <d:InstructionName>
-               <r:String xml:lang="fr-FR">instruction</r:String>
+               <r:String xml:lang="fr-FR">tooltip</r:String>
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Soit les rubriques 601 à 629 du Plan Comptable Général
-                     (PCG), plus les postes 651, 653 et 654</d:Text>
-               </d:LiteralText>
-            </d:InstructionText>
-         </d:Instruction>
-         <d:Instruction>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>jeu0icku</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <d:InstructionName>
-               <r:String xml:lang="fr-FR">instruction</r:String>
-            </d:InstructionName>
-            <d:InstructionText>
-               <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Rubriques FS, FT, FU, FV, FW, GE de la liasse fiscale
-                     régime normal</d:Text>
-               </d:LiteralText>
-            </d:InstructionText>
-         </d:Instruction>
-         <d:Instruction>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>jeu049ia</r:ID>
-            <r:Version>0.1.0</r:Version>
-            <d:InstructionName>
-               <r:String xml:lang="fr-FR">instruction</r:String>
-            </d:InstructionName>
-            <d:InstructionText>
-               <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Rubriques 234, 236, 238, 240,242, 262 de la liasse
-                     fiscale régime simplifié</d:Text>
+                  <d:Text xml:lang="fr-FR"><xhtml:p id="ftn207">Le total des charges peut également être obtenu par l'intermédiaire des liasses fiscales. Pour la liasse fiscale du régime normal, le total des charges correspond à la somme des rubriques FS, FT, FU, FV, FW et GE. Pour la liasse fiscale du régime simplifié, ce total correspond à la somme des rubriques 234, 236, 238, 240, 242 et 262.</xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -308,8 +265,8 @@
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p>
                         <xhtml:i>La sous-traitance est un contrat par lequel une entreprise dite
-                           «donneur d'ordres» confie, sous sa responsabilité, à une autre entreprise
-                           dite «sous traitant ou preneur d’ordres» la réalisation de tout ou partie
+                           « donneuse d'ordres » confie, sous sa responsabilité, à une autre entreprise
+                           dite « sous traitant ou preneuse d’ordres » la réalisation de tout ou partie
                            d’un produit, en se conformant exactement aux directives ou
                            spécifications techniques arrêtées par le donneur d’ordres.</xhtml:i>
                      </xhtml:p>
@@ -359,9 +316,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Vous n'avez pas répondu à la question concernant les
-                     sous-traitance de spécialité qui est essentielle dans ce questionnaire. Il est
-                     préférable de le faire avant de passer à la suite</d:Text>
+                  <d:Text xml:lang="fr-FR">Vous n'avez pas répondu à la question concernant les parts de sous-traitance de capacité et de spécialité qui est essentielle dans ce questionnaire. Il est préférable de le faire avant de passer à la suite</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -407,15 +362,31 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations qui
-                     diffère de la répartition des achats de matières premières (écart de
-                     ¤jf0ys0fq-GOP¤ euros). Merci de bien vouloir vous assurer de vos
+                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations (¤jejp45vg-QOP-jejosgft¤ k€) qui
+                     diffère de la répartition des achats de matières premières (total calculé de ¤jfmeeieo-GOP¤ k€) (écart de
+                     ¤jf0ys0fq-GOP¤ k€). Merci de bien vouloir vous assurer de vos
                      réponses</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>jf0ys0fq-GOP</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jejp45vg-QOP-jejosgft</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfmeeieo-GOP</r:ID>
                      <r:Version>0.1.0</r:Version>
                      <r:TypeOfObject>OutParameter</r:TypeOfObject>
                   </r:SourceParameterReference>
@@ -487,15 +458,31 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations qui
-                     diffère de la répartition des achats de matières premières (écart de
-                     ¤jf0ys0f2-GOP¤ euros). Merci de bien vouloir vous assurer de vos
+                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations (¤jejp45vg-QOP-jejosgft¤ k€) qui
+                     diffère de la répartition des achats de matières premières (total calculé de ¤jfmec6bx-GOP¤ k€) (écart de
+                     ¤jf0ys0f2-GOP¤ k€). Merci de bien vouloir vous assurer de vos
                      réponses</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>jf0ys0f2-GOP</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jejp45vg-QOP-jejosgft</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfmec6bx-GOP</r:ID>
                      <r:Version>0.1.0</r:Version>
                      <r:TypeOfObject>OutParameter</r:TypeOfObject>
                   </r:SourceParameterReference>
@@ -567,15 +554,31 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations qui
-                     diffère de la répartition des achats de matières premières (écart de
-                     ¤jf0ys0f3-GOP¤ euros). Merci de bien vouloir vous assurer de vos
+                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations (¤jejp45vg-QOP-jejosgft¤ k€) qui
+                     diffère de la répartition des achats de matières premières (total calculé de ¤jfme1ybj-GOP¤ k€) (écart de
+                     ¤jf0ys0f3-GOP¤ k€). Merci de bien vouloir vous assurer de vos
                      réponses</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>jf0ys0f3-GOP</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jejp45vg-QOP-jejosgft</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfme1ybj-GOP</r:ID>
                      <r:Version>0.1.0</r:Version>
                      <r:TypeOfObject>OutParameter</r:TypeOfObject>
                   </r:SourceParameterReference>
@@ -647,15 +650,31 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations qui
-                     diffère de la répartition des achats de matières premières (écart de
-                     ¤jf0ys0f4-GOP¤ euros). Merci de bien vouloir vous assurer de vos
+                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations (¤jejp45vg-QOP-jejosgft¤ k€) qui
+                     diffère de la répartition des achats de matières premières (total calculé de ¤jfmdvwrp-GOP¤ k€) (écart de
+                     ¤jf0ys0f4-GOP¤ k€). Merci de bien vouloir vous assurer de vos
                      réponses</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>jf0ys0f4-GOP</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jejp45vg-QOP-jejosgft</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfmdvwrp-GOP</r:ID>
                      <r:Version>0.1.0</r:Version>
                      <r:TypeOfObject>OutParameter</r:TypeOfObject>
                   </r:SourceParameterReference>
@@ -727,15 +746,31 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations qui
-                     diffère de la répartition des achats de matières premières (écart de
-                     ¤jf0ys0f5-GOP¤ euros). Merci de bien vouloir vous assurer de vos
+                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations (¤jejp45vg-QOP-jejosgft¤ k€) qui
+                     diffère de la répartition des achats de matières premières (total calculé de ¤jfmecrk1-GOP¤ k€) (écart de
+                     ¤jf0ys0f5-GOP¤ k€). Merci de bien vouloir vous assurer de vos
                      réponses</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>jf0ys0f5-GOP</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jejp45vg-QOP-jejosgft</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfmecrk1-GOP</r:ID>
                      <r:Version>0.1.0</r:Version>
                      <r:TypeOfObject>OutParameter</r:TypeOfObject>
                   </r:SourceParameterReference>
@@ -807,15 +842,31 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations qui
-                     diffère de la répartition des achats de matières premières (écart de
-                     ¤jf0ys0f6-GOP¤ euros). Merci de bien vouloir vous assurer de vos
+                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations (¤jejp45vg-QOP-jejosgft¤ k€) qui
+                     diffère de la répartition des achats de matières premières (total calculé de ¤jfmdyeuq-GOP¤ k€) (écart de
+                     ¤jf0ys0f6-GOP¤ k€). Merci de bien vouloir vous assurer de vos
                      réponses</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>jf0ys0f6-GOP</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jejp45vg-QOP-jejosgft</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfmdyeuq-GOP</r:ID>
                      <r:Version>0.1.0</r:Version>
                      <r:TypeOfObject>OutParameter</r:TypeOfObject>
                   </r:SourceParameterReference>
@@ -887,15 +938,31 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations qui
-                     diffère de la répartition des achats de matières premières (écart de
-                     ¤jf0ys0f7-GOP¤ euros). Merci de bien vouloir vous assurer de vos
+                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations (¤jejp45vg-QOP-jejosgft¤ k€) qui
+                     diffère de la répartition des achats de matières premières (total calculé de ¤jfmdwykv-GOP¤ k€) (écart de
+                     ¤jf0ys0f7-GOP¤ k€). Merci de bien vouloir vous assurer de vos
                      réponses</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>jf0ys0f7-GOP</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jejp45vg-QOP-jejosgft</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfmdwykv-GOP</r:ID>
                      <r:Version>0.1.0</r:Version>
                      <r:TypeOfObject>OutParameter</r:TypeOfObject>
                   </r:SourceParameterReference>
@@ -967,15 +1034,31 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations qui
-                     diffère de la répartition des achats de matières premières (écart de
-                     ¤jf0ys0f8-GOP¤ euros). Merci de bien vouloir vous assurer de vos
+                  <d:Text xml:lang="fr-FR">Vous indiquez un montant total des consommations (¤jejp45vg-QOP-jejosgft¤ k€) qui
+                     diffère de la répartition des achats de matières premières (total calculé de ¤jfmdyrau-GOP¤ k€) (écart de
+                     ¤jf0ys0f8-GOP¤ k€). Merci de bien vouloir vous assurer de vos
                      réponses</d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
                      <r:Agency>fr.insee</r:Agency>
                      <r:ID>jf0ys0f8-GOP</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jejp45vg-QOP-jejosgft</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                  </r:SourceParameterReference>
+               </d:ConditionalText>
+               <d:ConditionalText>
+                  <r:SourceParameterReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jfmdyrau-GOP</r:ID>
                      <r:Version>0.1.0</r:Version>
                      <r:TypeOfObject>OutParameter</r:TypeOfObject>
                   </r:SourceParameterReference>
@@ -1068,7 +1151,7 @@
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p>
                         <xhtml:i>En général, ces dépenses sont comptabilisées dans les rubriques
-                           615, 628 du PCG</xhtml:i>
+                           615 et 628 du PCG</xhtml:i>
                      </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -1224,7 +1307,7 @@
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p>
                         <xhtml:i>En général, ces dépenses sont comptabilisées dans les rubriques
-                           624, 625, 626 du PCG</xhtml:i>
+                           624, 625 et 626 du PCG</xhtml:i>
                      </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -1257,8 +1340,10 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">En général, ces dépenses sont comptabilisées dans la
-                     rubrique 651 du PCG</d:Text>
+                  <d:Text xml:lang="fr-FR"><xhtml:p><xhtml:i>
+                     En général, ces dépenses sont comptabilisées dans la
+                     rubrique 651 du PCG</xhtml:i>
+                  </xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -1271,9 +1356,10 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">En général, ces montants sont comptabilisés dans les
+                  <d:Text xml:lang="fr-FR"><xhtml:p><xhtml:i>En général, ces montants sont comptabilisés dans les
                      comptes d’achats concernés ou éventuellement dans la rubrique 608 du
-                     PCG</d:Text>
+                     PCG</xhtml:i>
+                  </xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -1286,9 +1372,10 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">En général, ces frais sont comptabilisés dans les
-                     rubriques 609, 619, 629 du PCG ou dans les comptes d’achats et de services
-                     extérieurs concernés</d:Text>
+                  <d:Text xml:lang="fr-FR"><xhtml:p><xhtml:i>En général, ces frais sont comptabilisés dans les
+                     rubriques 609, 619 et 629 du PCG ou dans les comptes d’achats et de services
+                     extérieurs concernés</xhtml:i>
+                  </xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -1530,13 +1617,13 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn1">L’entreprise donneuse d’ordre fait appel à une autre société
+                     <xhtml:p id="ftn1">L’entreprise donneuse d’ordres fait appel à une autre société
                         pour la réalisation d’une tâche ou la fabrication d’un produit qu’elle peut
                         exécuter elle-même. L’entreprise peut recourir aux services d’un
                         sous-traitant de façon temporaire en cas de pic d’activités ou d’incident
                         technique, ou de façon plus ou moins habituelle dans le cas où elle souhaite
                         consacrer ses ressources sur une tâche précise. L’entreprise donneuse
-                        d’ordre fait ainsi appel à des compétences extérieures pour répondre aux
+                        d’ordres fait ainsi appel à des compétences extérieures pour répondre aux
                         besoins de tous ses clients dans les délais impartis.</xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -1552,7 +1639,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn2">L'entreprise donneuse d’ordre a recours aux services d’une
+                     <xhtml:p id="ftn2">L'entreprise donneuse d’ordres a recours aux services d’une
                         société spécialisée pour l’exécution d’une tâche requérant des équipements
                         et des compétences spécifiques dont elle ne dispose pas, afin d’atteindre
                         ses objectifs de production.</xhtml:p>
@@ -1571,7 +1658,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn3">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -1620,7 +1707,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn6">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn6">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -1701,7 +1788,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn11">dont Blé, colza, orge, mais, betteraves, canne à sucre ;
+                     <xhtml:p id="ftn11">dont Blé, colza, orge, maïs, betteraves, canne à sucre ;
                         sapins de noël coupés ; fleurs</xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -1798,7 +1885,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn17">dont Lait, crèmes, beurre, fromage, glaces, sorbets
+                     <xhtml:p id="ftn17">dont Lait, crème, beurre, fromages, glaces, sorbets
                      </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -1815,7 +1902,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn18">dont Farines de céréales, de légumes, semoules, glucose et
-                        sirop de glucose ; tapioca ; huile de mais </xhtml:p>
+                        sirop de glucose ; tapioca ; huile de maïs </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -1862,7 +1949,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn21">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -1911,7 +1998,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn24">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn24">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -1993,7 +2080,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn29">dont Minerais de fer, cuivre, nickel, aluminium, métaux
-                        précieux (or, argent), plomb, argent, zinc </xhtml:p>
+                        précieux (or, argent), plomb, zinc </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -2009,7 +2096,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn30">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2058,7 +2145,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn33">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn33">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2171,7 +2258,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn40">dont Blé, colza, orge, mais, betteraves, canne à sucre ;
+                     <xhtml:p id="ftn40">dont Blé, colza, orge, maïs, betteraves, canne à sucre ;
                         sapins de noël coupés ; fleurs</xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2203,7 +2290,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn42">dont Minerais de fer, cuivre, nickel, aluminium, métaux
-                        précieux (or, argent), plomb, argent, zinc </xhtml:p>
+                        précieux (or, argent), plomb, zinc </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -2235,7 +2322,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn44">dont Farines de céréales, de légumes, semoules, glucose et
-                        sirop de glucose ; tapioca ; huile de mais </xhtml:p>
+                        sirop de glucose ; tapioca ; huile de maïs </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -2251,7 +2338,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn45">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2316,7 +2403,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn49">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn49">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2429,7 +2516,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn56">dont Blé, colza, orge, mais, betteraves, canne à sucre ;
+                     <xhtml:p id="ftn56">dont Blé, colza, orge, maïs, betteraves, canne à sucre ;
                         sapins de noël coupés ; fleurs</xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2526,7 +2613,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn62">dont Lait, crèmes, beurre, fromage, glaces, sorbets
+                     <xhtml:p id="ftn62">dont Lait, crème, beurre, fromages, glaces, sorbets
                      </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2543,7 +2630,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn63">dont Farines de céréales, de légumes, semoules, glucose et
-                        sirop de glucose ; tapioca ; huile de mais </xhtml:p>
+                        sirop de glucose ; tapioca ; huile de maïs </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -2590,7 +2677,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn66">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2639,7 +2726,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn69">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn69">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2722,7 +2809,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn74">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2787,7 +2874,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn78">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn78">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2853,7 +2940,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn82">dont Blé, colza, orge, mais, betteraves, canne à sucre ;
+                     <xhtml:p id="ftn82">dont Blé, colza, orge, maïs, betteraves, canne à sucre ;
                         sapins de noël coupés ; fleurs</xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2885,7 +2972,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn84">dont Minerais de fer, cuivre, nickel, aluminium, métaux
-                        précieux (or, argent), plomb, argent, zinc </xhtml:p>
+                        précieux (or, argent), plomb, zinc </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -2901,7 +2988,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn85">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -2966,7 +3053,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn89">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn89">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3112,7 +3199,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn98">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn98">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3255,7 +3342,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn107">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3304,7 +3391,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn110">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn110">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3385,7 +3472,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn115">dont Blé, colza, orge, mais, betteraves, canne à sucre ;
+                     <xhtml:p id="ftn115">dont Blé, colza, orge, maïs, betteraves, canne à sucre ;
                         sapins de noël coupés ; fleurs</xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3482,7 +3569,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn121">dont Lait, crèmes, beurre, fromage, glaces, sorbets
+                     <xhtml:p id="ftn121">dont Lait, crème, beurre, fromages, glaces, sorbets
                      </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3499,7 +3586,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn122">dont Farines de céréales, de légumes, semoules, glucose et
-                        sirop de glucose ; tapioca ; huile de mais </xhtml:p>
+                        sirop de glucose ; tapioca ; huile de maïs </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -3546,7 +3633,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn125">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3595,7 +3682,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn128">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn128">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3677,7 +3764,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn133">dont Minerais de fer, cuivre, nickel, aluminium, métaux
-                        précieux (or, argent), plomb, argent, zinc </xhtml:p>
+                        précieux (or, argent), plomb, zinc </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -3693,7 +3780,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn134">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3742,7 +3829,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn137">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn137">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3855,7 +3942,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn144">dont Blé, colza, orge, mais, betteraves, canne à sucre ;
+                     <xhtml:p id="ftn144">dont Blé, colza, orge, maïs, betteraves, canne à sucre ;
                         sapins de noël coupés ; fleurs</xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -3887,7 +3974,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn146">dont Minerais de fer, cuivre, nickel, aluminium, métaux
-                        précieux (or, argent), plomb, argent, zinc </xhtml:p>
+                        précieux (or, argent), plomb, zinc </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -3919,7 +4006,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn148">dont Farines de céréales, de légumes, semoules, glucose et
-                        sirop de glucose ; tapioca ; huile de mais </xhtml:p>
+                        sirop de glucose ; tapioca ; huile de maïs </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -3935,7 +4022,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn149">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4000,7 +4087,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn153">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn153">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4113,7 +4200,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn160">dont Blé, colza, orge, mais, betteraves, canne à sucre ;
+                     <xhtml:p id="ftn160">dont Blé, colza, orge, maïs, betteraves, canne à sucre ;
                         sapins de noël coupés ; fleurs</xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4210,7 +4297,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn166">dont Lait, crèmes, beurre, fromage, glaces, sorbets
+                     <xhtml:p id="ftn166">dont Lait, crème, beurre, fromages, glaces, sorbets
                      </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4274,7 +4361,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn170">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4323,7 +4410,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn173">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn173">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4406,7 +4493,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn178">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4471,7 +4558,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn182">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn182">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4537,7 +4624,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn186">dont Blé, colza, orge, mais, betteraves, canne à sucre ;
+                     <xhtml:p id="ftn186">dont Blé, colza, orge, maïs, betteraves, canne à sucre ;
                         sapins de noël coupés ; fleurs</xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4569,7 +4656,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn188">dont Minerais de fer, cuivre, nickel, aluminium, métaux
-                        précieux (or, argent), plomb, argent, zinc </xhtml:p>
+                        précieux (or, argent), plomb, zinc </xhtml:p>
                   </d:Text>
                </d:LiteralText>
             </d:InstructionText>
@@ -4585,7 +4672,7 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p id="ftn189">dont Tissus ; linge de lit, linge de table, linge de
-                        toilettes, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
+                        toilette, couvertures ; rideaux, tapis, moquettes ; ficelles, cordes,
                         filets </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4650,7 +4737,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn193">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn193">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -4796,7 +4883,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
-                     <xhtml:p id="ftn202">dont Plaques, feuilles, tubes en plastique ; sacs, boites,
+                     <xhtml:p id="ftn202">dont Plaques, feuilles, tubes en plastique ; sacs, boîtes,
                         bouteilles, bonbonnes en plastique </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -5237,6 +5324,12 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
+            <d:ControlConstructReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jek8jdhk</r:ID>
+               <r:Version>0.1.0</r:Version>
+               <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
          </d:Sequence>
          <d:Sequence>
             <r:Agency>fr.insee</r:Agency>
@@ -5279,6 +5372,18 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>ComputationItem</r:TypeOfObject>
             </d:ControlConstructReference>
+         </d:Sequence>
+         <d:Sequence>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>jek8jdhk</r:ID>
+            <r:Version>0.1.0</r:Version>
+            <d:ConstructName>
+               <r:String xml:lang="fr-FR">CHARGES_TOT</r:String>
+            </d:ConstructName>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">Total des charges d'exploitation consommées pour l'exercice comptable 2017</r:Content>
+            </r:Label>
+            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>jejoce3u-QC</r:ID>
@@ -6720,6 +6825,12 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>d1e169</r:ID>
             <r:Version>0.1.0</r:Version>
+ <r:Label>
+<r:Content xml:lang="fr-FR">Filtre 1</r:Content>
+</r:Label>
+<r:Description>
+<r:Content xml:lang="fr-FR">Si non allez au module III.</r:Content>
+</r:Description>
             <d:IfCondition>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
@@ -6774,6 +6885,12 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>d1e235</r:ID>
             <r:Version>0.1.0</r:Version>
+<r:Label>
+<r:Content xml:lang="fr-FR">Filtre 2</r:Content>
+</r:Label>
+<r:Description>
+<r:Content xml:lang="fr-FR">Si non, allez au module IV.</r:Content>
+</r:Description>
             <d:IfCondition>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
@@ -6846,6 +6963,12 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>d1e381</r:ID>
             <r:Version>0.1.0</r:Version>
+<r:Label>
+<r:Content xml:lang="fr-FR">Filtre 3</r:Content>
+</r:Label>
+<r:Description>
+<r:Content xml:lang="fr-FR">Si vous n'avez pas de sous-traitance de spécialité, allez au module IV.</r:Content>
+</r:Description>
             <d:IfCondition>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
@@ -6894,7 +7017,7 @@
                      </r:TargetParameterReference>
                   </r:Binding>
                   <r:CommandContent>not( d1e381-IP-1!= '1' ) and not( d1e381-IP-2 =
-                     0)</r:CommandContent>
+                     '0')</r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -7344,10 +7467,10 @@
             <r:ID>jek8esc6-CI-0</r:ID>
             <r:Version>0.1.0</r:Version>
             <d:ConstructName>
-               <r:String xml:lang="fr-FR">date cloture ou duree exercice vide</r:String>
+               <r:String xml:lang="fr-FR">date clôture ou duree exercice vide</r:String>
             </d:ConstructName>
             <r:Description>
-               <r:Content xml:lang="fr-FR">date cloture ou duree exercice vide</r:Content>
+               <r:Content xml:lang="fr-FR">date clôture ou duree exercice vide</r:Content>
             </r:Description>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7623,6 +7746,14 @@
                         <r:String xml:lang="fr-FR">sstrait_specialite_taux</r:String>
                      </r:ParameterName>
                   </r:InParameter>
+                  <r:InParameter isArray="false">
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jejpbtlp-CI-0-IP-2</r:ID>
+                     <r:Version>0.1.0</r:Version>
+                     <r:ParameterName>
+                        <r:String xml:lang="fr-FR">sstrait_capacite_taux</r:String>
+                     </r:ParameterName>
+                  </r:InParameter>
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
@@ -7637,7 +7768,21 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>jejpbtlp-CI-0-IP-1 = ''</r:CommandContent>
+                  <r:Binding>
+                     <r:SourceParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>jejpbtlp-QOP-jfmll2qr</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                     </r:SourceParameterReference>
+                     <r:TargetParameterReference>
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>jejpbtlp-CI-0-IP-2</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                        <r:TypeOfObject>InParameter</r:TypeOfObject>
+                     </r:TargetParameterReference>
+                  </r:Binding>
+                  <r:CommandContent>jejpbtlp-CI-0-IP-1 = '' and jejpbtlp-CI-0-IP-2=''</r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <!--<r:TypeOfComputationItem>info</r:TypeOfComputationItem>-->
@@ -10332,8 +10477,8 @@
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">
                      <xhtml:p>
-                        <xhtml:b>Total des charges d'exploitation consommées pour l'exercice
-                           comptable 2017</xhtml:b>
+                        <xhtml:b>Indiquez le montant total des charges d'exploitation (y
+                           compris droits de douane)</xhtml:b>
                      </xhtml:p>
                   </d:Text>
                </d:LiteralText>
@@ -10353,30 +10498,6 @@
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>jejomobb</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Instruction</r:TypeOfObject>
-            </d:InterviewerInstructionReference>
-            <d:InterviewerInstructionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>jejoqbp4</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Instruction</r:TypeOfObject>
-            </d:InterviewerInstructionReference>
-            <d:InterviewerInstructionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>jeu0eue9</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Instruction</r:TypeOfObject>
-            </d:InterviewerInstructionReference>
-            <d:InterviewerInstructionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>jeu0icku</r:ID>
-               <r:Version>0.1.0</r:Version>
-               <r:TypeOfObject>Instruction</r:TypeOfObject>
-            </d:InterviewerInstructionReference>
-            <d:InterviewerInstructionReference>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>jeu049ia</r:ID>
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
@@ -21425,7 +21546,7 @@
                <d:GridResponseDomain>
                   <d:NumericDomain>
                      <r:NumberRange>
-                        <r:Low isInclusive="true">1</r:Low>
+                        <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">9999999</r:High>
                      </r:NumberRange>
                      <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
@@ -21445,7 +21566,7 @@
                <d:GridResponseDomain>
                   <d:NumericDomain>
                      <r:NumberRange>
-                        <r:Low isInclusive="true">1</r:Low>
+                        <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">9999999</r:High>
                      </r:NumberRange>
                      <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
@@ -21465,7 +21586,7 @@
                <d:GridResponseDomain>
                   <d:NumericDomain>
                      <r:NumberRange>
-                        <r:Low isInclusive="true">1</r:Low>
+                        <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">9999999</r:High>
                      </r:NumberRange>
                      <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
@@ -21485,7 +21606,7 @@
                <d:GridResponseDomain>
                   <d:NumericDomain>
                      <r:NumberRange>
-                        <r:Low isInclusive="true">1</r:Low>
+                        <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">9999999</r:High>
                      </r:NumberRange>
                      <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
@@ -21505,7 +21626,7 @@
                <d:GridResponseDomain>
                   <d:NumericDomain>
                      <r:NumberRange>
-                        <r:Low isInclusive="true">1</r:Low>
+                        <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">9999999</r:High>
                      </r:NumberRange>
                      <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
@@ -23433,7 +23554,7 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn3"/></xhtml:p>
                </r:Content>
             </r:Label>
@@ -23754,8 +23875,8 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Céréales ; légumes, fruits avant transformation ; bovins, ovins, caprins,
-                     volailles avant transformation<xhtml:a href="#ftn11"/></xhtml:p>
+                  <xhtml:p>Céréales ; légumes, fruits (avant transformation) ; bovins, ovins, caprins,
+                     volailles (avant transformation)<xhtml:a href="#ftn11"/></xhtml:p>
                </r:Content>
             </r:Label>
          </l:Category>
@@ -23898,7 +24019,7 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn21"/></xhtml:p>
                </r:Content>
             </r:Label>
@@ -24225,7 +24346,7 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Minerais métalliques avant transformation<xhtml:a href="#ftn29"
+                  <xhtml:p>Minerais métalliques (avant transformation)<xhtml:a href="#ftn29"
                      /></xhtml:p>
                </r:Content>
             </r:Label>
@@ -24260,7 +24381,7 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn30"/></xhtml:p>
                </r:Content>
             </r:Label>
@@ -24594,8 +24715,8 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Céréales ; légumes, fruits avant transformation ; bovins, ovins, caprins,
-                     volailles avant transformation<xhtml:a href="#ftn40"/></xhtml:p>
+                  <xhtml:p>Céréales ; légumes, fruits (avant transformation) ; bovins, ovins, caprins,
+                     volailles (avant transformation)<xhtml:a href="#ftn40"/></xhtml:p>
                </r:Content>
             </r:Label>
          </l:Category>
@@ -24654,7 +24775,7 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Minerais métalliques avant transformation<xhtml:a href="#ftn42"
+                  <xhtml:p>Minerais métalliques (avant transformation)<xhtml:a href="#ftn42"
                      /></xhtml:p>
                </r:Content>
             </r:Label>
@@ -24725,7 +24846,7 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn45"/></xhtml:p>
                </r:Content>
             </r:Label>
@@ -25127,8 +25248,8 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Céréales ; légumes, fruits avant transformation ; bovins, ovins, caprins,
-                     volailles avant transformation<xhtml:a href="#ftn56"/></xhtml:p>
+                  <xhtml:p>Céréales ; légumes, fruits (avant transformation) ; bovins, ovins, caprins,
+                     volailles (avant transformation)<xhtml:a href="#ftn56"/></xhtml:p>
                </r:Content>
             </r:Label>
          </l:Category>
@@ -25271,7 +25392,7 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn66"/></xhtml:p>
                </r:Content>
             </r:Label>
@@ -25557,7 +25678,7 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn74"/></xhtml:p>
                </r:Content>
             </r:Label>
@@ -25849,8 +25970,8 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Céréales ; légumes, fruits avant transformation ; bovins, ovins, caprins,
-                     volailles avant transformation<xhtml:a href="#ftn82"/></xhtml:p>
+                  <xhtml:p>Céréales ; légumes, fruits (avant transformation) ; bovins, ovins, caprins,
+                     volailles (avant transformation)<xhtml:a href="#ftn82"/></xhtml:p>
                </r:Content>
             </r:Label>
          </l:Category>
@@ -25885,7 +26006,7 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Minerais métalliques avant transformation<xhtml:a href="#ftn84"
+                  <xhtml:p>Minerais métalliques (avant transformation)<xhtml:a href="#ftn84"
                      /></xhtml:p>
                </r:Content>
             </r:Label>
@@ -25920,7 +26041,7 @@
             <r:Version>0.1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn85"/></xhtml:p>
                </r:Content>
             </r:Label>
@@ -33385,7 +33506,7 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn107"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
@@ -34379,8 +34500,8 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Céréales ; légumes, fruits avant transformation ; bovins, ovins, caprins,
-                     volailles avant transformation<xhtml:a href="#ftn115"/>-Montant en k€</xhtml:p>
+                  <xhtml:p>Céréales ; légumes, fruits (avant transformation) ; bovins, ovins, caprins,
+                     volailles (avant transformation)<xhtml:a href="#ftn115"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
             <r:SourceParameterReference>
@@ -34695,7 +34816,7 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn125"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
@@ -35304,7 +35425,7 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Minerais métalliques avant transformation<xhtml:a href="#ftn133"
+                  <xhtml:p>Minerais métalliques (avant transformation)<xhtml:a href="#ftn133"
                      />-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
@@ -35361,7 +35482,7 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn134"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
@@ -35978,8 +36099,8 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Céréales ; légumes, fruits avant transformation ; bovins, ovins, caprins,
-                     volailles avant transformation<xhtml:a href="#ftn144"/>-Montant en k€</xhtml:p>
+                  <xhtml:p>Céréales ; légumes, fruits (avant transformation) ; bovins, ovins, caprins,
+                     volailles (avant transformation)<xhtml:a href="#ftn144"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
             <r:SourceParameterReference>
@@ -36114,7 +36235,7 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Minerais métalliques avant transformation<xhtml:a href="#ftn146"
+                  <xhtml:p>Minerais métalliques (avant transformation)<xhtml:a href="#ftn146"
                      />-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
@@ -36230,7 +36351,7 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn149"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
@@ -37010,8 +37131,8 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Céréales ; légumes, fruits avant transformation ; bovins, ovins, caprins,
-                     volailles avant transformation<xhtml:a href="#ftn160"/>-Montant en k€</xhtml:p>
+                  <xhtml:p>Céréales ; légumes, fruits (avant transformation) ; bovins, ovins, caprins,
+                     volailles (avant transformation)<xhtml:a href="#ftn160"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
             <r:SourceParameterReference>
@@ -37326,7 +37447,7 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn170"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
@@ -37855,7 +37976,7 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn178"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
@@ -38356,8 +38477,8 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Céréales ; légumes, fruits avant transformation ; bovins, ovins, caprins,
-                     volailles avant transformation<xhtml:a href="#ftn186"/>-Montant en k€</xhtml:p>
+                  <xhtml:p>Céréales ; légumes, fruits (avant transformation) ; bovins, ovins, caprins,
+                     volailles (avant transformation)<xhtml:a href="#ftn186"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
             <r:SourceParameterReference>
@@ -38414,7 +38535,7 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Minerais métalliques avant transformation<xhtml:a href="#ftn188"
+                  <xhtml:p>Minerais métalliques (avant transformation)<xhtml:a href="#ftn188"
                      />-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
@@ -38471,7 +38592,7 @@
             </l:VariableName>
             <r:Label>
                <r:Content xml:lang="fr-FR">
-                  <xhtml:p>Produits textiles hors habillement (fils, tissus,cordes etc.)<xhtml:a
+                  <xhtml:p>Produits textiles hors habillement (fils, tissus, cordes etc.)<xhtml:a
                         href="#ftn189"/>-Montant en k€</xhtml:p>
                </r:Content>
             </r:Label>
@@ -56140,8 +56261,8 @@
                      (jfme1ybj-IP-20='') then '0' else jfme1ybj-IP-20)+ number(if
                      (jfme1ybj-IP-21='') then '0' else jfme1ybj-IP-21)+ number(if
                      (jfme1ybj-IP-22='') then '0' else jfme1ybj-IP-22)+ number(if
-                     (jfme1ybj-IP-22='') then '0' else jfme1ybj-IP-23)+number(if
-                     (jfme1ybj-IP-22='') then '0' else jfme1ybj-IP-24)</r:CommandContent>
+                     (jfme1ybj-IP-23='') then '0' else jfme1ybj-IP-23)+number(if
+                     (jfme1ybj-IP-24='') then '0' else jfme1ybj-IP-24)</r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <d:ControlConstructReference>
@@ -57220,8 +57341,8 @@
                      (jfmdvwrp-IP-33='') then '0' else jfmdvwrp-IP-33)+ number(if
                      (jfmdvwrp-IP-34='') then '0' else jfmdvwrp-IP-34)+ number(if
                      (jfmdvwrp-IP-35='') then '0' else jfmdvwrp-IP-35)+ number(if
-                     (jfmdvwrp-IP-35='') then '0' else jfmdvwrp-IP-36)+ number(if
-                     (jfmdvwrp-IP-35='') then '0' else jfmdvwrp-IP-37) </r:CommandContent>
+                     (jfmdvwrp-IP-36='') then '0' else jfmdvwrp-IP-36)+ number(if
+                     (jfmdvwrp-IP-37='') then '0' else jfmdvwrp-IP-37) </r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <d:ControlConstructReference>
@@ -60113,7 +60234,7 @@
                   <r:TypeOfObject>Sequence</r:TypeOfObject>
                </d:ControlConstructReference>
             </d:Instrument>
-            <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
+           <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
                xmlns:pr="ddi:ddiprofile:3_2" xmlns:c="ddi:conceptualcomponent:3_2"
                xmlns:cm="ddi:comparative:3_2">
                <r:Agency>fr.insee</r:Agency>
@@ -60133,7 +60254,7 @@
                   <r:TypeOfObject>Sequence</r:TypeOfObject>
                </d:ControlConstructReference>
             </d:Instrument>
-            <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
+         <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
                xmlns:pr="ddi:ddiprofile:3_2" xmlns:c="ddi:conceptualcomponent:3_2"
                xmlns:cm="ddi:comparative:3_2">
                <r:Agency>fr.insee</r:Agency>
