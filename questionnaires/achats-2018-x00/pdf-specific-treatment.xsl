@@ -76,7 +76,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="fo:inline[fo:inline/starts-with(text(),'Autre')]">
+    <xsl:template match="fo:inline[fo:inline[starts-with(text(),'Autre')]]">
         <fo:block>
             <fo:block>
                 <xsl:apply-templates select="ancestor::fo:table-row/fo:table-cell[last()]/fo:block/fo:block[1]/@*"/>

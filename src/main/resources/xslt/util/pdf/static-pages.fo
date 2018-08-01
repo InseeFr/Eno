@@ -163,8 +163,8 @@
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
                             <fo:block margin-top="3mm">&lt;![CDATA[#if($!{BddNom} &amp;&amp;
                                 $!{BddCivilite})$!{BddCivilite} $!{BddNom}, #elseif($!{BddNom})
-                                Madame ou Monsieur $!{BddNom},#else Madame, Monsieur,#end ]]&gt;
-                                ${BddArticleServiceProducteur}${BddNomServiceProducteur} réalise
+                                Madame ou Monsieur $!{BddNom},#else Madame, Monsieur,#end ]]&gt;</fo:block>
+                            <fo:block margin-top="3mm">${BddArticleServiceProducteur}${BddNomServiceProducteur} réalise
                                     l’<fo:inline font-weight="bold">enquête ${BddFrequence}
                                     ${BddLibelleLong}.</fo:inline> ${BddObjectifsLongs}</fo:block>
                             <fo:block margin-top="3mm">Cette enquête<fo:inline font-weight="bold"
@@ -248,7 +248,7 @@
                 <fo:block-container absolute-position="absolute" left="30mm" top="33mm"
                     width="150mm" height="190mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify" border="black solid 0.5pt">
-                    <fo:block border="red solid 0.5pt">
+                    <fo:block border="black solid 0.5pt">
                         <fo:inline-container>
                             <fo:block text-align="center" font-weight="bold" font-size="10pt"
                                 margin-top="7mm" margin-left="7mm" margin-right="7mm">Comment
@@ -471,8 +471,8 @@
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
                             <fo:block margin-top="3mm">&lt;![CDATA[#if($!{BddNom} &amp;&amp;
                                 $!{BddCivilite})$!{BddCivilite} $!{BddNom}, #elseif($!{BddNom})
-                                Madame ou Monsieur $!{BddNom},#else Madame, Monsieur,#end ]]&gt;
-                                ${BddArticleServiceProducteur}${BddNomServiceProducteur} réalise
+                                Madame ou Monsieur $!{BddNom},#else Madame, Monsieur,#end ]]&gt;</fo:block>
+                            <fo:block margin-top="3mm">${BddArticleServiceProducteur}${BddNomServiceProducteur} réalise
                                     l’<fo:inline font-weight="bold">enquête ${BddFrequence}
                                     ${BddLibelleLong}.</fo:inline> ${BddObjectifsLongs}</fo:block>
                             <fo:block margin-top="3mm">Cette enquête<fo:inline font-weight="bold"
@@ -556,7 +556,7 @@
                 <fo:block-container absolute-position="absolute" left="30mm" top="33mm"
                     width="150mm" height="190mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify" border="black solid 0.5pt">
-                    <fo:block border="red solid 0.5pt">
+                    <fo:block border="black solid 0.5pt">
                         <fo:inline-container>
                             <fo:block text-align="center" font-weight="bold" font-size="10pt"
                                 margin-top="7mm" margin-left="7mm" margin-right="7mm">Comment
@@ -712,8 +712,7 @@
                         <fo:inline-container>
                             <fo:block font-weight="bold">Unité enquêtée</fo:block>
                             <fo:block>Identifiant : ${BddIdentifiantUniteEnquetee}</fo:block>
-                            <fo:block>Raison sociale : ${BddRaisonSociale} avec beaucoup de
-                                caractères derrière pour vérifier comment ça fonctionne</fo:block>
+                            <fo:block>Raison sociale : ${BddRaisonSociale}</fo:block>
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
@@ -750,8 +749,8 @@
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="105mm" top="50mm"
                     width="87mm" height="50mm" background-color="#EEE" padding="3mm">
-                    <fo:block font-weight="bold" font-size="16pt" text-align="center"
-                        >${BddLibelleLong}</fo:block>
+                    <fo:block font-weight="bold" font-size="16pt" text-align="center" margin-top="10mm"
+                        >${BddLibelleLong} ${BddPeriode} ${BddAnneeReference}</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="120mm" top="110mm"
                     width="75mm" height="30mm" overflow="hidden">
