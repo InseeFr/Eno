@@ -37,6 +37,40 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Getter function of a table line depending on an index number.</xd:p>
+            <xd:p>Too many parameters to be created in functions.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoddi:get-table-line">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="index"/>
+        <xsl:param name="table-first-line"/>
+        
+        <xsl:apply-templates select="$context" mode="enoddi:get-table-line">
+            <xsl:with-param name="index" select="$index" tunnel="yes"/>
+            <xsl:with-param name="table-first-line" select="$table-first-line" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getter function of the row span of a grid element.</xd:p>
+            <xd:p>Too many parameters to be created in functions.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoddi:get-rowspan" as="xs:string">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="table-first-line"/>
+        <xsl:param name="table-last-line"/>
+        <xsl:apply-templates select="$context" mode="enoddi:get-rowspan">
+            <xsl:with-param name="table-first-line" select="$table-first-line" tunnel="yes"/>
+            <xsl:with-param name="table-last-line" select="$table-last-line" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:function>
+    
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>For a node() which isn't one of those three, there can't be a defined language.</xd:p>
             <xd:p>It's child is returned.</xd:p>
         </xd:desc>
@@ -216,6 +250,7 @@
     </xd:doc>
     <xsl:template match="d:QuestionGrid" mode="enoddi:get-table-line">
         <xsl:param name="index" tunnel="yes"/>
+        <xsl:param name="table-first-line" tunnel="yes" required="no"/>
         <xsl:variable name="codes">
             <xsl:apply-templates select="." mode="enoddi:get-codes-first-dimension"/>
         </xsl:variable>
@@ -223,14 +258,27 @@
             <xsl:value-of select="$codes/l:Code[position()=$index]/r:ID"/>
         </xsl:variable>
 
-        <xsl:apply-templates select="d:GridDimension[@rank='1']//l:Code[r:ID=$id]"
-            mode="enoddi:get-table-line"/>
-        <xsl:for-each
-            select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)[.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]">
-            <xsl:sort
-                select="number(.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum)"/>
-            <xsl:sequence select="."/>
-        </xsl:for-each>
+        <xsl:apply-templates select="d:GridDimension[@rank='1']//l:Code[r:ID=$id]" mode="enoddi:get-table-line"/>
+        <xsl:choose>
+            <xsl:when test="string($table-first-line) = string($index)">
+                <xsl:for-each select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)
+                    [.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]
+                    | d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)
+                    [.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and number(@rangeMinimum) &lt; $index and number(@rangeMaximum &gt;= $index)]]
+                    ">
+                    <xsl:sort select="number(.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum)"/>
+                    <xsl:sequence select="."/>
+                </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain 
+                    | d:NoDataByDefinition)[.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]">
+                    <xsl:sort select="number(.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum)"/>
+                    <xsl:sequence select="."/>
+                </xsl:for-each>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
 
     <xd:doc>
@@ -239,11 +287,13 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="l:Code" mode="enoddi:get-table-line">
+        <xsl:param name="index" tunnel="yes"/>
+        <xsl:param name="table-first-line" tunnel="yes" required="no"/>
         <xsl:if test="parent::l:Code">
             <xsl:variable name="first-parent-code-id">
                 <xsl:value-of select="parent::l:Code/l:Code[1]/r:ID"/>
             </xsl:variable>
-            <xsl:if test="r:ID=$first-parent-code-id">
+            <xsl:if test="string($index) = string($table-first-line) or r:ID=$first-parent-code-id">
                 <xsl:apply-templates select="parent::l:Code" mode="enoddi:get-table-line"/>
             </xsl:if>
         </xsl:if>
@@ -275,15 +325,19 @@
         />
     </xsl:template>
 
-    <!-- For the column headers (that are also part of the line) -->
-    <!-- Those are the r:Label that are directly on top of the referenced codes list -->
-    <!-- We need to get the depth level from the 2nd dimension -->
-    <!-- So, we select all the l:Code that have no child (and therefore have the highest depth-level),
-    for each one we get this depth-level
-    and we keep the maximum, which will be the depth of the 2nd dimension-->
+    <xd:doc>
+        <xd:desc>For the column headers (that are also part of the line.
+            Those are the r:Label that are directly on top of the referenced codes list.
+            We need to get the depth level from the 2nd dimension.
+            So, we select all the l:Code that have no child (and therefore have the highest depth-level), 
+            for each one we get this depth-level
+            and we keep the maximum, which will be the depth of the 2nd dimension.
+        </xd:desc>
+    </xd:doc>
     <xsl:template
         match="r:Label[parent::l:CodeList/parent::r:CodeListReference/parent::d:CodeDomain/parent::d:GridDimension[@rank='1']]"
         mode="enoddi:get-rowspan" priority="1">
+        
         <xsl:variable name="label-or-no">
             <xsl:value-of
                 select="count(ancestor::d:GridDimension[@rank='1']/following-sibling::d:GridDimension[@rank='2']/d:CodeDomain/r:CodeListReference/l:CodeList/r:Label)"
@@ -312,9 +366,33 @@
             <xd:p>When l:Code has a l:Code (representing a box dispatched in sub-boxes), we get the number of children l:Code</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='1'] and l:Code]"
-        mode="enoddi:get-rowspan" priority="1">
-        <xsl:value-of select="count(descendant::l:Code[not(l:Code)])"/>
+    <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='1'] and l:Code]" mode="enoddi:get-rowspan" priority="1">
+        <xsl:param name="table-first-line" tunnel="yes" required="no"/>
+        <xsl:param name="table-last-line" tunnel="yes" required="no"/>
+        
+        <xsl:variable name="first-descendant-position" select="descendant::l:Code[not(l:Code)][1]/count(preceding::l:Code[ancestor::d:GridDimension=current()/ancestor::d:GridDimension and not(l:Code)])+1"/>
+        <xsl:variable name="last-descendant-position" select="descendant::l:Code[not(l:Code)][last()]/count(preceding::l:Code[ancestor::d:GridDimension=current()/ancestor::d:GridDimension and not(l:Code)])+1"/>
+        <xsl:variable name="first-line">
+            <xsl:choose>
+                <xsl:when test="string($table-first-line) != '' and number($table-first-line) &gt; $first-descendant-position">
+                    <xsl:value-of select="$table-first-line"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$first-descendant-position"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="last-line">
+            <xsl:choose>
+                <xsl:when test="string($table-last-line) != '' and number($table-last-line) &lt; $last-descendant-position">
+                    <xsl:value-of select="$table-last-line"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$last-descendant-position"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="1 + $last-line - $first-line"/>
     </xsl:template>
 
     <!-- WARNING -->
@@ -354,9 +432,31 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:NoDataByDefinition[d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1']/@rangeMaximum]" mode="enoddi:get-rowspan" priority="1">
-        <xsl:value-of select="string(1
-            +number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1']/@rangeMaximum)
-            -number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1']/@rangeMinimum))"/>
+        <xsl:param name="table-first-line" tunnel="yes" required="no"/>
+        <xsl:param name="table-last-line" tunnel="yes" required="no"/>
+
+
+        <xsl:variable name="first-line">
+            <xsl:choose>
+                <xsl:when test="$table-first-line != '' and number($table-first-line) &gt; number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1']/@rangeMinimum)">
+                    <xsl:value-of select="$table-first-line"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1']/@rangeMinimum"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="last-line">
+            <xsl:choose>
+                <xsl:when test="$table-last-line != '' and number($table-last-line) &lt; number(d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1']/@rangeMaximum)">
+                    <xsl:value-of select="$table-last-line"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1']/@rangeMaximum"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="string(1 + number($last-line) - number($first-line))"/>
     </xsl:template>
     
     

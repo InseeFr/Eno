@@ -344,6 +344,20 @@ public class XslTransformation {
 		
 	}
 	
+	public void transformFOToCustomFO(InputStream inputFile, OutputStream outputFile, InputStream xslSheet) throws Exception {
+		logger.info("Producing a custom FO (PDF) from the FO with conditioning variables");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		transformer.setParameter(XslParameters.FO2CUSTOMFO_PROPERTIES_FILE, Constants.CONFIG_DDI2PDF);
+		logger.debug(
+				String.format(
+						"FO Transformer parameters file is: %s",
+						transformer.getParameter(Constants.CONFIG_DDI2PDF)));
+		xslTransform(transformer, inputFile, outputFile);
+	}
+	
 	
 	public void transformPoguesXML2DDI(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			InputStream propertiesFile, InputStream parametersFile) throws Exception {

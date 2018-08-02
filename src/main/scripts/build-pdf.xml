@@ -25,7 +25,7 @@
 	</target>-->
 
 	<!-- Javac properties -->
-	<property name="javac1.8" location="C:/Program Files/Java/jdk1.8.0_101/bin/javac"/>
+	<property name="javac1.8" location="C:/Program Files (x86)/INSEE/atelier-dev-2/applications/jdk18_64/jdk-1.8.0_40/bin/javac" />
 
 	<target name="compile-TableColumnSizeProcessor">
 		<mkdir dir="${root-folder}/target/classes"/>
@@ -39,21 +39,37 @@
 
 	<!-- pdfPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
 	<target name="pdfPostProcessing">
-		<copy file="${input-file}"
-			tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
+		<!--		<copy file="${input-file}"
+			tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>-->
+		<xslt in="${input-file}"
+			out="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
+			style="${xslt.home}/util/pdf/mailing-vtl.xsl"
+			force="true" classpath="${saxon.jar}">
+			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
+		</xslt>		
+		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
+			out="${root-folder}/target/${survey-name}/${form-name}/form/specific-form.${out-extension}"
+			style="${root-folder}/questionnaires/${survey-name}/pdf-specific-treatment.xsl" force="true"
+			classpath="${saxon.jar}"/>
 		<antcall target="compile-TableColumnSizeProcessor"/>
 		<antcall target="call-TableColumnSizeProcessor"/>
+		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/temp-form.${out-extension}"
+			out="${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"
+			style="${xslt.home}/util/pdf/insert-generic-pages.xsl" force="true"			
+			classpath="${saxon.jar}">
+			<param name="survey-name" expression="${survey-name}"/>
+			<param name="form-name" expression="${form-name}"/>
+			<param name="parameters-file" expression="${root-folder}/questionnaires/${survey-name}/parameters.xml"/>
+		</xslt>
 	</target>
 	<target name="call-TableColumnSizeProcessor">
 		<java classname="fr.insee.eno.plugins.tableColumnSizeProcessor.calculator.Main" fork="true">
 			<sysproperty key="log4j.configurationFile" value="${root-folder}/lib/log4j2.xml"/>
-			<arg
-				value="inFileName=${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>
-			<arg
-				value="outFileName=${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"/>
+			<arg value="inFileName=${root-folder}/target/${survey-name}/${form-name}/form/specific-form.${out-extension}"/>
+			<arg value="outFileName=${root-folder}/target/${survey-name}/${form-name}/form/temp-form.${out-extension}"/>
 			<arg value="xmlConfFile=${root-folder}/src/main/resources/config/plugins-conf.xml"/>
 			<classpath refid="classpath"/>
 		</java>
 	</target>
-
+	
 </project>

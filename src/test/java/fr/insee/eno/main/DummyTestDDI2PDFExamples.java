@@ -15,6 +15,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
@@ -27,30 +28,34 @@ import fr.insee.eno.postprocessing.PDFPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
-public class DummyTestDDI2PDF {
+public class DummyTestDDI2PDFExamples {
 
 	public static void main(String[] args) {
 
-		String basePathddi2PDF = "src/test/resources/ddi-to-pdf";
+		String basePathExamples = "src/test/resources/examples";
 		String basePathImg = "src/test/resources/examples/img/";
-		Postprocessor[] postprocessors =  {new PDFPostprocessor(), new CustomizationPostprocessor()};
-		GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(), postprocessors);
-		File in = new File(String.format("%s/in.xml", basePathddi2PDF));
-		File xconf = new File(String.format("%s/fop.xconf", basePathddi2PDF));
+		
+		DDI2PDFGenerator generator =  new DDI2PDFGenerator();
 
+		File in = new File(String.format("%s/achats-ddi.xml", basePathExamples));
+		File xconf = new File(String.format("%s/fop.xconf", basePathExamples));
+		File propertiesFile = new File(String.format("%s/achats-ddi2pdf-conf.xml", basePathExamples));
 		try {
 			InputStream isXconf = new FileInputStream(xconf);
 			URI imgFolderUri = new File(basePathImg).toURI();
-
-			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, null, "test");
-
+			generator.setPropertiesFile(FileUtils.openInputStream(propertiesFile));
+			
+			GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), generator,
+					new Postprocessor[] {new PDFPostprocessor(), new CustomizationPostprocessor()});
+			
+			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, null,"examples");
+			
 			// Step 1: Construct a FopFactory by specifying a reference to the
 			// configuration file
 			// (reuse if you plan to render multiple documents!)
-			FopFactory fopFactory = FopFactory.newInstance(imgFolderUri, isXconf);
-
-			File outFilePDF = new File(
-					String.format("%s.pdf", FilenameUtils.removeExtension(outputFO.getAbsolutePath())));
+			FopFactory fopFactory = FopFactory.newInstance(imgFolderUri,isXconf);
+			
+			File outFilePDF = new File(String.format("%s.pdf", FilenameUtils.removeExtension(outputFO.getAbsolutePath())));
 
 			// Step 2: Set up output stream.
 			// Note: Using BufferedOutputStream for performance reasons
@@ -77,8 +82,8 @@ public class DummyTestDDI2PDF {
 
 			// Clean-up
 			out.close();
+			System.out.println(outputFO.getAbsolutePath());
 			System.out.println(outFilePDF.getAbsolutePath());
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

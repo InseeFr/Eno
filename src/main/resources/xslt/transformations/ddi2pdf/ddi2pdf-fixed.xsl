@@ -74,244 +74,28 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>This xforms function is used to get the concatened string corresponding to a dynamic text.</xd:p>
-            <xd:p>It is created by calling the static text and making it dynamic.</xd:p>
+            <xd:p>Linking output function enopdf:get-body-line to input function enoddi:get-table-line.</xd:p>
+            <xd:p>This function has too many parameters to stay in the functions.fods file</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-calculate-text">
+    <xsl:function name="enopdf:get-body-line">
         <xsl:param name="context" as="item()"/>
-        <xsl:param name="language" as="item()"/>
-        <xsl:param name="text-type"/>
-
-        <xsl:variable name="static-text-content">
-            <xsl:choose>
-                <xsl:when test="$text-type='label'">
-                    <xsl:sequence select="enoddi:get-label($context,$language)"/>
-                </xsl:when>
-                <xsl:when test="$text-type='alert'">
-                    <xsl:sequence select="enoddi:get-consistency-message($context,$language)"/>
-                </xsl:when>
-            </xsl:choose>
-        </xsl:variable>
-
-        <xsl:if test="contains(substring-after($static-text-content,$conditioning-variable-begin),$conditioning-variable-end)">
-            <xsl:variable name="condition-variables">
-                <conditions>
-                    <xsl:copy-of select="$context/descendant::d:ConditionalText"/>
-                </conditions>
-            </xsl:variable>
-
-            <xsl:variable name="calculated-text">
-                <xsl:call-template name="enoddi2pdf:calculate-text">
-                    <xsl:with-param name="text-to-calculate" select="eno:serialize($static-text-content)"/>
-                    <xsl:with-param name="condition-variables" select="$condition-variables"/>
-                </xsl:call-template>
-            </xsl:variable>
-
-            <xsl:text>concat(</xsl:text>
-            <xsl:value-of select="substring($calculated-text,2)"/>
-            <xsl:text>)</xsl:text>
-        </xsl:if>
+        <xsl:param name="index"/>
+        <xsl:param name="table-first-line"/>
+        <xsl:sequence select="enoddi:get-table-line($context,$index,$table-first-line)"/>
     </xsl:function>
 
     <xd:doc>
         <xd:desc>
-            <xd:p>This recursive template returns the calculated conditional text from the static one.</xd:p>
+            <xd:p>Linking output function enopdf:get-rowspan to input function enoddi:get-rowspan.</xd:p>
+            <xd:p>This function has too many parameters to stay in the functions.fods file</xd:p>
         </xd:desc>
     </xd:doc>
-
-    <xsl:template name="enoddi2pdf:calculate-text">
-        <xsl:param name="text-to-calculate"/>
-        <xsl:param name="condition-variables"/>
-
-        <xsl:text>,</xsl:text>
-        <xsl:choose>
-            <xsl:when test="contains(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)">
-                <xsl:text>'</xsl:text>
-                <!-- Replacing the single quote by 2 single quotes because a concatenation is made -->
-                <!-- We actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                <xsl:value-of select="replace(substring-before($text-to-calculate,$conditioning-variable-begin),'''','''''')"/>
-                <xsl:text>',</xsl:text>
-                <xsl:choose>
-                    <!-- conditionalText doesn't exist for the element in the DDI structure or it exists and references the variable -->
-                    <xsl:when test="not($condition-variables//text())">
-                        <xsl:text>instance('fr-form-instance')//</xsl:text>
-                        <!-- TODO : add the elements that will show which variable to use when it is in a loop -->
-                        <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
-                    </xsl:when>
-                    <!-- conditionalText exists and references the variable -->
-                    <xsl:when test="index-of($condition-variables//r:SourceParameterReference/r:OutParameter/r:ID,
-                        substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) >0">
-                        <xsl:text>instance('fr-form-instance')//</xsl:text>
-                        <!-- TODO : add the elements that will show which variable to use when it is in a loop -->
-                        <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
-                    </xsl:when>
-                    <!-- conditionalText contains the calculation of the variable -->
-                    <xsl:when test="index-of($condition-variables//d:Expression/r:Command/r:OutParameter/r:ID,
-                        substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) >0">
-                        <!-- TODO : perhaps to change so that the label includes the calculation, not a temporary variable -->
-                        <xsl:value-of select="replace(replace(
-                            $condition-variables//d:Expression/r:Command
-                                                                        [r:OutParameter/r:ID=substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)]
-                                                                        /r:CommandContent,
-                                                      '//','instance(''fr-form-instance'')//'),
-                                              '\]instance(''fr-form-instance'')',']')"/>
-                        <!--                        <xsl:text>instance('fr-form-instance')//</xsl:text>
-                        <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
--->
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <!-- conditionalText exists, but the variable is not in it -->
-                        <xsl:text>'</xsl:text>
-                        <xsl:value-of select="concat($conditioning-variable-begin,
-                            replace(substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end),'''',''''''),
-                            $conditioning-variable-end)"/>
-                        <xsl:text>'</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-                <xsl:call-template name="enoddi2pdf:calculate-text">
-                    <xsl:with-param name="text-to-calculate" select="substring-after(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
-                    <xsl:with-param name="condition-variables" select="$condition-variables"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text>'</xsl:text>
-                <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                <xsl:value-of select="replace($text-to-calculate,'''','''''')"/>
-                <xsl:text>'</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
-            <xd:p>It uses different DDI functions to do this job.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:function name="enopdf:get-hint">
+    <xsl:function name="enopdf:get-rowspan">
         <xsl:param name="context" as="item()"/>
-        <xsl:param name="language"/>
-        <!-- We look for an instruction of 'Format' type -->
-        <xsl:variable name="format-instruction">
-            <xsl:sequence select="enoddi:get-instructions-by-format($context,'format')"/>
-        </xsl:variable>
-        <xsl:choose>
-            <!-- If there is no such instruction -->
-            <xsl:when test="not($format-instruction/*)">
-                <!-- We look for the container of the element -->
-                <xsl:variable name="question-type">
-                    <xsl:value-of select="enoddi:get-container($context)"/>
-                </xsl:variable>
-                <!-- If it is a grid we do not want the hint to be displayed for n fields. If it is a question, we can display this info -->
-                <xsl:if test="$question-type='question'">
-                    <xsl:variable name="type">
-                        <xsl:value-of select="enoddi:get-type($context)"/>
-                    </xsl:variable>
-                    <!-- If it is number, we display this hint -->
-                    <xsl:if test="$type='number'">
-                        <xsl:value-of select="concat($labels-resource/Languages/Language[@xml:lang=$language]/Hint/Number,enoddi:get-maximum($context))"/>
-                    </xsl:if>
-                    <!-- If it is a date, we display this hint -->
-                    <xsl:if test="$type='date'">
-                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Hint/Date"/>
-                    </xsl:if>
-                </xsl:if>
-            </xsl:when>
-            <!-- If there is such an instruction, it is used for the hint xforms element -->
-            <xsl:when test="$format-instruction/*">
-                <xsl:sequence select="$format-instruction/*"/>
-            </xsl:when>
-        </xsl:choose>
-    </xsl:function>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>This function returns an xforms alert for the context on which it is applied.</xd:p>
-            <xd:p>It uses different DDI functions to do this job.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:function name="enopdf:get-alert">
-        <xsl:param name="context" as="item()"/>
-        <xsl:param name="language"/>
-        <!-- We look for a 'message' -->
-        <!-- 02-21-2017 : this function is only called for an Instruction in a ComputationItem on the DDI side -->
-        <xsl:variable name="message">
-            <xsl:sequence select="enoddi:get-consistency-message($context,$language)"/>
-        </xsl:variable>
-        <xsl:choose>
-            <!-- if there is no such message -->
-            <xsl:when test="not($message/node())">
-                <!-- We retrieve the question type -->
-                <xsl:variable name="type">
-                    <xsl:value-of select="enoddi:get-type($context)"/>
-                </xsl:variable>
-                <!-- We retrieve the format -->
-                <xsl:variable name="format">
-                    <xsl:value-of select="enoddi:get-format($context)"/>
-                </xsl:variable>
-                <!-- If it is a 'text' and a format is defined, we use a generic sentence as an alert -->
-                <xsl:if test="$type='text'">
-                    <xsl:if test="not($format='')">
-                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Text"/>
-                    </xsl:if>
-                </xsl:if>
-                <!-- If it is a number, we look for infos about the format and deduce a message for the alert element -->
-                <xsl:if test="$type='number'">
-                    <xsl:variable name="number-of-decimals">
-                        <xsl:value-of select="enoddi:get-number-of-decimals($context)"/>
-                    </xsl:variable>
-                    <xsl:variable name="minimum">
-                        <xsl:value-of select="enoddi:get-minimum($context)"/>
-                    </xsl:variable>
-                    <xsl:variable name="maximum">
-                        <xsl:value-of select="enoddi:get-maximum($context)"/>
-                    </xsl:variable>
-                    <xsl:variable name="beginning">
-                        <xsl:choose>
-                            <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
-                                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Beginning"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Integer"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <xsl:variable name="end">
-                        <xsl:choose>
-                            <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
-                                <xsl:value-of select="' '
-                                    ,concat($labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/DecimalCondition
-                                    ,' '
-                                    ,$number-of-decimals
-                                    ,' '
-                                    ,$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Digit
-                                    ,if (number($number-of-decimals)&gt;1) then $labels-resource/Languages/Language[@xml:lang=$language]/Plural else ''
-                                    ,' '
-                                    ,$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/End)"/>
-                            </xsl:when>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <xsl:value-of select="concat($beginning,' ',$minimum, ' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',$maximum, $end)"/>
-                </xsl:if>
-                <!-- If it is a 'date', we use a generic sentence as an alert -->
-                <xsl:if test="$type='date'">
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
-                </xsl:if>
-                <!-- In those cases, we use specific messages as alert messages -->
-                <xsl:if test="$type='duration'">
-                    <xsl:if test="$format='hh'">
-                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Hours"/>
-                    </xsl:if>
-                    <xsl:if test="$format='mm'">
-                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Minutes"/>
-                    </xsl:if>
-                </xsl:if>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:sequence select="$message/node()"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:param name="table-first-line"/>
+        <xsl:param name="table-last-line"/>
+        <xsl:sequence select="enoddi:get-rowspan($context,$table-first-line,$table-last-line)"/>
     </xsl:function>
 
     <xd:doc>
@@ -361,7 +145,13 @@
     </xsl:template>
     
     <xsl:template match="text()" mode="enopdf:format-label">
+        <xsl:if test="substring(.,1,1)=' '">
+            <xsl:text xml:space="preserve"> </xsl:text>
+        </xsl:if>
         <xsl:copy-of select="normalize-space(.)"/>
+        <xsl:if test="substring(.,string-length(.),1)=' '">
+            <xsl:text xml:space="preserve"> </xsl:text>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="xhtml:i" mode="enopdf:format-label">
@@ -432,15 +222,6 @@
         <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote') | enoddi:get-next-filter-description($context)"/>
     </xsl:function>
     
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Function for retrieving default line number for TableLoop</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:function name="enopdf:get-rooster-number-lines">
-        <xsl:param name="context" as="item()"/>
-        <xsl:sequence select="if($context/self::d:QuestionGrid[d:GridDimension/d:Roster[not(@maximumAllowed)]]) then(8) else()"/>
-    </xsl:function>
     
     <xd:doc>
         <xd:desc>

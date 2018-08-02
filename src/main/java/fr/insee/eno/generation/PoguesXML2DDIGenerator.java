@@ -28,16 +28,16 @@ public class PoguesXML2DDIGenerator implements Generator {
 		String outputBasicFormPath = null;
 
 		formNameFolder = getFormNameFolder(finalInput);
-
+		
 		logger.debug("formNameFolder : " + formNameFolder);
-
-		outputBasicFormPath = Constants.TEMP_DDI_FOLDER + "/" + formNameFolder + "/"
+		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(surveyName);
+		outputBasicFormPath = Constants.tEMP_DDI_FOLDER(sUB_TEMP_FOLDER) + "/" + formNameFolder + "/"
 				+ Constants.BASIC_FORM_TMP_FILENAME;
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
 
 		InputStream isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL);
-		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.PROPERTIES_FILE_DDI);
+		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.CONFIG_POGUES_XML2DDI);
 		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
 
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);

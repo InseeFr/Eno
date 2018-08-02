@@ -62,7 +62,9 @@ public class DummyTestFO2PDF {
 
 			// Clean-up
 			out.close();
-
+			
+			System.out.println(outFile.getAbsolutePath());
+			
 		} catch (
 
 		TransformerException e) {
