@@ -17,9 +17,10 @@
     <xsl:param name="survey-name"/>
     <xsl:param name="form-name"/>
     <xsl:param name="parameters-file"/>
-    <xsl:variable name="parameters" select="doc($parameters-file)"/>
-    
-    <xsl:variable name="static-pages" select="doc('static-pages.fo')"/>
+    <xsl:param name="static-pages"/>
+    <xsl:variable name="parameters" select="document($parameters-file)"/>
+   
+    <!--<xsl:variable name="static-pages" select="document('static-pages.fo')"/>-->
     
     <xd:doc>
         <xd:desc>
@@ -28,7 +29,7 @@
     </xd:doc>
     <xsl:template match="/">
         <xsl:variable name="root" select="."/>
-        <xsl:apply-templates select="*"/>
+        <xsl:apply-templates select="*" mode="#default"/>
         <xsl:for-each select="$parameters//AccompanyingMail">
             <xsl:result-document href="../../courrier_type_{replace($survey-name,'-','')}{$form-name}{.}.fo">
                 <xsl:apply-templates select="$root/*">
@@ -59,7 +60,7 @@
         
         <xsl:copy>
             <xsl:copy-of select="$static-pages//fo:page-sequence-master[@master-name=$accompanying-mail]"/>
-            <!--<xsl:value-of select="$static-pages//fo:page-sequence-master[@master-name=$accompanying-mail]" disable-output-escaping="yes"/>-->
+            <xsl:value-of select="$static-pages//fo:page-sequence-master[@master-name=$accompanying-mail]" disable-output-escaping="yes"/>
             <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name=concat($accompanying-mail,'-recto')]"/>
             <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name=concat($accompanying-mail,'-verso')]"/>
             <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name='Cover-A4']"/>

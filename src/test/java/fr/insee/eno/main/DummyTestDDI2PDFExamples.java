@@ -23,8 +23,8 @@ import org.apache.fop.apps.MimeConstants;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
-import fr.insee.eno.postprocessing.CustomizationPostprocessor;
-import fr.insee.eno.postprocessing.PDFPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep1MailingPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
@@ -46,7 +46,7 @@ public class DummyTestDDI2PDFExamples {
 			generator.setPropertiesFile(FileUtils.openInputStream(propertiesFile));
 			
 			GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), generator,
-					new Postprocessor[] {new PDFPostprocessor(), new CustomizationPostprocessor()});
+					new Postprocessor[] {new PDFStep3TableColumnPostprocessor(), new PDFStep1MailingPostprocessor()});
 			
 			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, null,"examples");
 			

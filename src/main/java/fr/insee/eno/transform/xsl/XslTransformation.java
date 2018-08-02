@@ -1,17 +1,26 @@
 package fr.insee.eno.transform.xsl;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import fr.insee.eno.Constants;
 
@@ -341,7 +350,7 @@ public class XslTransformation {
 						transformer.getParameter(XslParameters.DDI2ODT_PARAMETERS_FILE),
 						transformer.getParameter(XslParameters.DDI2ODT_LABELS_FOLDER)));
 		xslTransform(transformer, inputFile, outputFile);
-		
+
 	}
 	
 	public void transformFOToCustomFO(InputStream inputFile, OutputStream outputFile, InputStream xslSheet) throws Exception {
@@ -359,6 +368,34 @@ public class XslTransformation {
 	}
 	
 	
+	public void transformFOToStep1FO(InputStream inputFile, OutputStream outputFile,
+			InputStream xslSheet) throws Exception {
+		logger.info("Producing a specific treatment FO from survey's parameters");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+
+		xslTransform(transformer, inputFile, outputFile);
+	}
+	
+	public void transformFOToStep2FO(InputStream inputFile, OutputStream outputFile,
+			InputStream xslSheet, String surveyName, String formName, String parametersFile,InputStream staticPages) throws Exception {
+		logger.info("Inserting generic pages in the FO from survey's parameters");
+		
+
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		transformer.setParameter(XslParameters.DDI2PDF_SURVEY_NAME, surveyName);
+		transformer.setParameter(XslParameters.DDI2PDF_FORM_NAME, formName);
+		transformer.setParameter(XslParameters.DDI2PDF_PARAMETERS_FILE, parametersFile);
+		transformer.setParameter(XslParameters.DDI2PDF_STATIC_PAGES,new StreamSource(staticPages));
+		
+		xslTransform(transformer, inputFile, outputFile);
+	}
+
 	public void transformPoguesXML2DDI(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			InputStream propertiesFile, InputStream parametersFile) throws Exception {
 		logger.info("Producing a basic DDI from the PoguesXML spec");
@@ -406,6 +443,5 @@ public class XslTransformation {
 						transformer.getParameter(XslParameters.DDI2ODT_LABELS_FOLDER)));
 		xslTransform(transformer, inputFile, outputFile);
 	}
-	
 
 }
