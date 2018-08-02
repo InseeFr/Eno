@@ -38,7 +38,7 @@ public class PDFStep2SpecificTreatmentPostprocessor implements Postprocessor {
 		
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputStep1FOFile);
-		saxonService.transformFOToStep1FO(inputStream,outputStream,FO_STEP2_XSL);
+		saxonService.transformFOToStep2FO(inputStream,outputStream,FO_STEP2_XSL);
 		inputStream.close();
 		outputStream.close();
 		FO_STEP2_XSL.close();

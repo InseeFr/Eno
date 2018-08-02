@@ -46,7 +46,7 @@ public class PDFStep4InsertGenericPagesPostprocessor implements Postprocessor {
 		InputStream staticPages = Constants.getInputStreamFromPath(Constants.STATIC_PAGES);
 		
 		
-		saxonService.transformFOToStep2FO(
+		saxonService.transformFOToStep4FO(
 				inputStream,outputStream,
 				FO_STEP4_XSL,
 				surveyName,formName,

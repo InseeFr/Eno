@@ -30,7 +30,7 @@ public class PDFStep1MailingPostprocessor implements Postprocessor {
 		InputStream FO_STEP1_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2);
 		
-		saxonService.transformFOToCustomFO(FileUtils.openInputStream(input), 
+		saxonService.transformFOToStep1FO(FileUtils.openInputStream(input), 
 				FileUtils.openOutputStream(outputCustomFOFile),FO_STEP1_XSL);
 		FO_STEP1_XSL.close();
 		logger.info("End of step 1 PDF post-processing : ");

@@ -353,7 +353,7 @@ public class XslTransformation {
 
 	}
 	
-	public void transformFOToCustomFO(InputStream inputFile, OutputStream outputFile, InputStream xslSheet) throws Exception {
+	public void transformFOToStep1FO(InputStream inputFile, OutputStream outputFile, InputStream xslSheet) throws Exception {
 		logger.info("Producing a custom FO (PDF) from the FO with conditioning variables");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
@@ -368,7 +368,7 @@ public class XslTransformation {
 	}
 	
 	
-	public void transformFOToStep1FO(InputStream inputFile, OutputStream outputFile,
+	public void transformFOToStep2FO(InputStream inputFile, OutputStream outputFile,
 			InputStream xslSheet) throws Exception {
 		logger.info("Producing a specific treatment FO from survey's parameters");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
@@ -379,11 +379,9 @@ public class XslTransformation {
 		xslTransform(transformer, inputFile, outputFile);
 	}
 	
-	public void transformFOToStep2FO(InputStream inputFile, OutputStream outputFile,
+	public void transformFOToStep4FO(InputStream inputFile, OutputStream outputFile,
 			InputStream xslSheet, String surveyName, String formName, String parametersFile,InputStream staticPages) throws Exception {
 		logger.info("Inserting generic pages in the FO from survey's parameters");
-		
-
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
