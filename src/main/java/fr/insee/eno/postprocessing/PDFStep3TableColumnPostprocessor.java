@@ -15,9 +15,9 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * PDF postprocessor.
  */
-public class PDFPostprocessor implements Postprocessor {
+public class PDFStep3TableColumnPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(PDFPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(PDFStep3TableColumnPostprocessor.class);
 
 	// FIXME Inject !
 	private static CalculatorService serviceTableColumnSize = new CalculatorService();
@@ -29,8 +29,9 @@ public class PDFPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, File parametersFile, String survey) throws Exception {
 
-		String outputForFO = FilenameUtils.removeExtension(input.getPath()) + Constants.FINAL_PDF_EXTENSION;
-
+		File outputForFOFile = new File(
+				input.getPath().replace(Constants.SPECIFIC_TREAT_PDF_EXTENSION, Constants.TABLE_COL_SIZE_PDF_EXTENSION));
+		
 		String confFilePath = null;
 		
 		if(Constants.PDF_PLUGIN_XML_CONF_FILE !=null){
@@ -48,10 +49,10 @@ public class PDFPostprocessor implements Postprocessor {
 			logger.debug("Get conf file : "+confFile.getAbsolutePath());
 		}
 								
-		serviceTableColumnSize.tableColumnSizeProcessor(input.getAbsolutePath(), outputForFO,
+		serviceTableColumnSize.tableColumnSizeProcessor(input.getAbsolutePath(), outputForFOFile.getPath(),
 				confFilePath);
-		
-		return new File(outputForFO);
+		logger.debug("End of step 3 PDF post-processing");
+		return outputForFOFile;
 
 	}
 }

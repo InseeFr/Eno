@@ -10,7 +10,7 @@ import org.xmlunit.diff.Diff;
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
-import fr.insee.eno.postprocessing.PDFPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
@@ -35,7 +35,7 @@ public class TestDDIToFO {
 			
 			// With plugins
 //			GenerationService genServiceWithPlugins = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
-//					new PDFPostprocessor());
+//					new PDFStep3TableColumnPostprocessor());
 //			File outputFileWithPlugins = genServiceWithPlugins.generateQuestionnaire(in, null);
 //			File expectedFileWithPlugins = new File(String.format("%s/simpsons_old-plugin.fo", basePath));
 //			diff = xmlDiff.getDiff(outputFileWithPlugins,expectedFileWithPlugins);

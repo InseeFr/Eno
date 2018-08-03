@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule;
 
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.generation.Generator;
-import fr.insee.eno.postprocessing.PDFPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
@@ -19,7 +19,7 @@ public class DDI2PDFContext extends AbstractModule {
 	protected void configure() {
 		bind(Preprocessor.class).to(DDIPreprocessor.class);
 		bind(Generator.class).to(DDI2PDFGenerator.class);
-		bind(Postprocessor.class).to(PDFPostprocessor.class);
+		bind(Postprocessor.class).to(PDFStep3TableColumnPostprocessor.class);
 	}
 
 }
