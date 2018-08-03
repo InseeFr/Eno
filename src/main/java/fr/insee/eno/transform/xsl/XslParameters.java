@@ -30,8 +30,11 @@ public class XslParameters {
 	public static final String DDI2FR_PARAMETERS_FILE = "parameters-file";
 	public static final String DDI2ODT_LABELS_FOLDER = "labels-folder";
 	public static final String DDI2ODT_PARAMETERS_FILE = "parameters-file";
+	public static final String DDI2PDF_SURVEY_NAME = "survey-name";
+	public static final String DDI2PDF_FORM_NAME = "form-name";
 	public static final String DDI2PDF_LABELS_FOLDER = "labels-folder";
 	public static final String DDI2PDF_PARAMETERS_FILE = "parameters-file";
+	public static final String DDI2PDF_STATIC_PAGES = "static-pages";
 	public static final String POGUES_XML2DDI_LABELS_FOLDER = "labels-folder";
 	public static final String POGUES_XML2DDI_PARAMETERS_FILE = "parameters-file";
 }

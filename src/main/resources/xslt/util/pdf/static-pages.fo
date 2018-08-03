@@ -750,7 +750,9 @@
                 <fo:block-container absolute-position="absolute" left="105mm" top="50mm"
                     width="87mm" height="50mm" background-color="#EEE" padding="3mm">
                     <fo:block font-weight="bold" font-size="16pt" text-align="center" margin-top="10mm"
-                        >${BddLibelleLong} ${BddPeriode} ${BddAnneeReference}</fo:block>
+                        >&lt;![CDATA[${BddLibelleLong}#if((${BddFrequence}!='annuelle') &amp;&amp;
+                    (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
+                    ${BddAnneeReference}]]&gt;</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="120mm" top="110mm"
                     width="75mm" height="30mm" overflow="hidden">

@@ -4,8 +4,8 @@ import java.io.File;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
-import fr.insee.eno.postprocessing.CustomizationPostprocessor;
-import fr.insee.eno.postprocessing.PDFPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep1MailingPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
@@ -15,7 +15,7 @@ public class DummyTestDDI2FOWithPlugins {
 		
 		String basePathDDI2FO = "src/test/resources/ddi-to-fo";
 		GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
-				new Postprocessor[] {new PDFPostprocessor(), new CustomizationPostprocessor()});
+				new Postprocessor[] {new PDFStep3TableColumnPostprocessor(), new PDFStep1MailingPostprocessor()});
 		File in = new File(String.format("%s/in.xml", basePathDDI2FO));
 		
 		try {
