@@ -71,7 +71,7 @@
 						</fo:instream-foreign-object>
 					</fo:block>
 					<fo:block>
-						<fo:block-container reference-orientation="90" top="160mm" left="202.5mm" absolute-position="absolute">
+						<fo:block-container reference-orientation="90" top="125mm" left="202.5mm" absolute-position="absolute">
 							<fo:block position="absolute" text-align="left" font-size="8pt">Code Bar - <fo:page-number/></fo:block>
 						</fo:block-container>
 					</fo:block>
