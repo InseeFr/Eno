@@ -302,7 +302,7 @@
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
         <xsl:if test="enofr:get-minimum-lines($source-context) &lt; enofr:get-maximum-lines($source-context)">
-            <xsl:element name="{enofr:get-business-name($source-context,$name)}-AddLine"/>
+            <xsl:element name="{enofr:get-business-name($source-context)}-AddLine"/>
         </xsl:if>
     </xsl:template>
 
@@ -882,12 +882,13 @@
         <xsl:param name="instance-ancestor" tunnel="yes"/>
 
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
         <xf:bind id="{$name}-bind" name="{$name}" nodeset="{$name}-Container/{$name}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
                 <xsl:with-param name="instance-ancestor"
-                    select="concat($instance-ancestor,'*[name()=''',enofr:get-business-name($source-context,$name),''' and position()= $',enofr:get-business-name($source-context,$name),'-position ]//')"
+                    select="concat($instance-ancestor,'*[name()=''',$business-name,''' and position()= $',$business-name,'-position ]//')"
                     tunnel="yes"/>
             </xsl:apply-templates>
         </xf:bind>
@@ -902,14 +903,15 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
         <xsl:if test="enofr:get-minimum-lines($source-context) &lt; enofr:get-maximum-lines($source-context)">
-            <xf:bind id="{enofr:get-business-name($source-context,$name)}-addline-bind" ref="{enofr:get-business-name($source-context,$name)}-AddLine"
-                relevant="count({$instance-ancestor}{enofr:get-business-name($source-context,$name)}) &lt; {enofr:get-maximum-lines($source-context)}"/>
+            <xf:bind id="{$business-name}-addline-bind" ref="{$business-name}-AddLine"
+                relevant="count({$instance-ancestor}{$business-name}) &lt; {enofr:get-maximum-lines($source-context)}"/>
         </xsl:if>
     </xsl:template>
 
@@ -1320,11 +1322,12 @@
         <xsl:param name="instance-ancestor" tunnel="yes"/>
 
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
             <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
             <xsl:with-param name="instance-ancestor"
-                select="concat($instance-ancestor,'*[name()=''',enofr:get-business-name($source-context,$name),''' and position()= $',enofr:get-business-name($source-context,$name),'-position ]//')"
+                select="concat($instance-ancestor,'*[name()=''',$business-name,''' and position()= $',$business-name,'-position ]//')"
                 tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -1808,7 +1811,7 @@
             <xsl:copy-of select="root(.)"/>
         </xsl:variable>
         <xsl:variable name="table-name" select="enofr:get-name($source-context)"/>
-        <xsl:variable name="loop-name" select="enofr:get-business-name($source-context,$table-name)"/>
+        <xsl:variable name="loop-name" select="enofr:get-business-name($source-context)"/>
         <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
 
         <xsl:apply-templates select="$table-title//xf-output" mode="model"/>
@@ -1982,13 +1985,15 @@
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
+
         <xf:repeat id="{$name}" nodeset="{$instance-ancestor}{$name}">
             <xf:var name="{$name}-position" value="position()"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for Loops, for which several instances are possible -->
                 <xsl:with-param name="instance-ancestor"
-                    select="concat($instance-ancestor,'*[name()=''',enofr:get-business-name($source-context,$name),''' and position()= $',enofr:get-business-name($source-context,$name),'-position ]//')"
+                    select="concat($instance-ancestor,'*[name()=''',$business-name,''' and position()= $',$business-name,'-position ]//')"
                     tunnel="yes"/>
             </xsl:apply-templates>
         </xf:repeat>
@@ -2109,8 +2114,9 @@
         
         <xsl:choose>
             <xsl:when test="$variables/Variable">
+                <xsl:variable name="variable-business-name" select="enofr:get-variable-business-name($source-context,$variables/Variable[1])"/>
                 <xsl:call-template name="replaceVariablesInFormula">
-                    <xsl:with-param name="formula" select="replace($formula,$variables/Variable[1],enofr:get-business-name($source-context,$variables/Variable[1]))"/>
+                    <xsl:with-param name="formula" select="replace($formula,$variables/Variable[1],$variable-business-name)"/>
                     <xsl:with-param name="variables" as="node()">
                         <Variables>
                             <xsl:copy-of select="$variables/Variable[position() != 1 ]"/>

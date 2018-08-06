@@ -13,6 +13,8 @@
             <xd:p>A library of getter functions for fods with their implementations for different elements.</xd:p>
         </xd:desc>
     </xd:doc>
+    
+    <xsl:variable name="root" select="root(.)"/>
 
     <xd:doc>
         <xd:desc>
@@ -883,23 +885,31 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-business-name">
-        <xsl:param name="variable" tunnel="yes"/>
+        
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="enoddi:get-business-name">
+        <xsl:param name="variable"/>
+
         <xsl:choose>
             <!-- collected variable -->
-            <xsl:when test="//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
-                <xsl:value-of select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $variable]/l:VariableName/r:String"/>
+            <xsl:when test="$root//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
+                <xsl:value-of select="$root//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $variable]/l:VariableName/r:String"/>
             </xsl:when>
             <!-- calculated variable -->
-            <xsl:when test="//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
-                <xsl:value-of select="//l:VariableScheme//l:Variable[descendant::r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable]/l:VariableName/r:String"/>
+            <xsl:when test="$root//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
+                <xsl:value-of select="$root//l:VariableScheme//l:Variable[descendant::r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable]/l:VariableName/r:String"/>
             </xsl:when>
             <!-- external variable -->
-            <xsl:when test="//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
+            <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
                 <xsl:value-of select="$variable"/>
             </xsl:when>
             <!-- Loop -->
-            <xsl:when test="//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference/r:ID = $variable">
-                <xsl:value-of select="//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID= $variable]/l:VariableGroupName/r:String"/>
+            <xsl:when test="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference/r:ID = $variable">
+                <xsl:value-of select="$root//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID= $variable]/l:VariableGroupName/r:String"/>
             </xsl:when>
             <!-- Grid with roster, but without VariableGroup -->
             <xsl:otherwise>
@@ -907,7 +917,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-business-ascendants.</xd:p>

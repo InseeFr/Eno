@@ -97,23 +97,30 @@
     <xsl:function name="enofr:get-name">
         <xsl:param name="context" as="item()"/>
         
-        <xsl:variable name="id" select="enoddi:get-id($context)"/>
         <xsl:variable name="ddi-markup" select="name($context)"/>
         
         <xsl:choose>
             <xsl:when test="($ddi-markup = ('l:Variable','d:GenerationInstruction','d:Loop')) or ends-with($ddi-markup,'Domain') or ends-with($ddi-markup,'DomainReference')">
-                <xsl:sequence select="enoddi:get-business-name($context,$id)"/>
+                <xsl:sequence select="enoddi:get-business-name($context)"/>
             </xsl:when>
             <!--<xsl:when test="enoddi:get-minimum-lines($context)">
-                <xsl:sequence select="enoddi:get-business-name($context,$id)"/>
+                <xsl:sequence select="enoddi:get-business-name($context)"/>
             </xsl:when>-->
             <xsl:otherwise>
-                <xsl:sequence select="$id"/>
+                <xsl:sequence select="enoddi:get-id($context)"/>
             </xsl:otherwise>
         </xsl:choose>
         
     </xsl:function>
-    
+
+    <xsl:function name="enofr:get-variable-business-name">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="variable"/>
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="$variable"/>
+        </xsl:call-template>
+    </xsl:function>
+
     <xd:doc>
         <xd:desc>
             <xd:p>This xforms function is used to get the concatened string corresponding to a dynamic text.</xd:p>
