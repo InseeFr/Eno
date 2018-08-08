@@ -44,8 +44,7 @@
     </xd:doc>
     <xsl:template match="Form" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:variable name="languages" select="enofr:get-form-languages($source-context)"
-            as="xs:string +"/>
+        <xsl:variable name="languages" select="enofr:get-form-languages($source-context)" as="xs:string +"/>
         <xhtml:html>
             <xhtml:head>
                 <xhtml:title>
@@ -1531,7 +1530,7 @@
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:variable name="alert" select="eno:serialize(enofr:get-label($source-context, $languages[1]))"/>
+        <xsl:variable name="conditioning-variables" select="enofr:get-label-conditioning-variables($source-context, $languages[1])" as="xs:string *"/>
         <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
 
         <xsl:element name="xf:output">
@@ -1542,7 +1541,38 @@
                 <xsl:attribute name="class" select="$css-class"/>
             </xsl:if>
             <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
-            <xf:alert ref="$form-resources/{$name}/alert">
+            <xf:alert>
+                <xsl:attribute name="ref">
+                    <xsl:choose>
+                        <xsl:when test="$conditioning-variables != ''">
+                            <xsl:for-each select="$conditioning-variables">
+                                <xsl:value-of select="'replace('"/>
+                            </xsl:for-each>
+                            <xsl:value-of select="concat('$form-resources/',$name,'/alert')"/>
+                            <xsl:for-each select="$conditioning-variables">
+                                <xsl:variable name="conditioning-variable" select="."/>
+                                <xsl:variable name="formula" select="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable)"/>
+                                <xsl:value-of select="concat(',''',$conditioning-variable-begin,$conditioning-variable,$conditioning-variable-end,''',')"/>
+                                <xsl:call-template name="replaceVariablesInFormula">
+                                    <xsl:with-param name="source-context" select="$source-context"/>
+                                    <xsl:with-param name="formula" select="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable)"/>
+                                    <xsl:with-param name="variables" as="node()">
+                                        <Variables>
+                                            <xsl:for-each select="tokenize(enofr:get-conditioning-variable-formula-variables($source-context,$conditioning-variable),' ')">
+                                                <xsl:sort select="string-length(.)" order="descending"/>
+                                                <Variable><xsl:value-of select="."/></Variable>
+                                            </xsl:for-each>
+                                        </Variables>
+                                    </xsl:with-param>
+                                </xsl:call-template>
+                                <xsl:value-of select="')'"/>
+                            </xsl:for-each>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat('$form-resources/',$name,'/alert')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
                 <xsl:if test="enofr:get-alert-level($source-context) != ''">
                     <xsl:attribute name="level" select="enofr:get-alert-level($source-context)"/>
                 </xsl:if>
@@ -1773,7 +1803,7 @@
         <xsl:variable name="label" select="enofr:get-label($source-context, $languages)"/>
         <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
 
-        <xsl:variable name="conditioning-variables" select="enofr:get-label-conditioning-variables($source-context, $languages[1])" as="xs:string +"/>
+        <xsl:variable name="conditioning-variables" select="enofr:get-label-conditioning-variables($source-context, $languages[1])" as="xs:string *"/>
 
         <xhtml:td colspan="{enofr:get-colspan($source-context)}" rowspan="{enofr:get-rowspan($source-context)}">
             <xf:output id="{$name}-control" bind="{$name}-bind">
@@ -1795,7 +1825,14 @@
                                     <xsl:call-template name="replaceVariablesInFormula">
                                         <xsl:with-param name="source-context" select="$source-context"/>
                                         <xsl:with-param name="formula" select="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable)"/>
-                                        <xsl:with-param name="variables" select="enofr:get-conditioning-variable-formula-variables($source-context,$conditioning-variable)"/>
+                                        <xsl:with-param name="variables" as="node()">
+                                            <Variables>
+                                                <xsl:for-each select="tokenize(enofr:get-conditioning-variable-formula-variables($source-context,$conditioning-variable),' ')">
+                                                    <xsl:sort select="string-length(.)" order="descending"/>
+                                                    <Variable><xsl:value-of select="."/></Variable>
+                                                </xsl:for-each>
+                                            </Variables>
+                                        </xsl:with-param>
                                     </xsl:call-template>
                                     <xsl:value-of select="')'"/>
                                 </xsl:for-each>
