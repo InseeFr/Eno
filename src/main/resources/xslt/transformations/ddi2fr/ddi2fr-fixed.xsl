@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
@@ -96,9 +96,8 @@
     </xd:doc>
     <xsl:function name="enofr:get-name">
         <xsl:param name="context" as="item()"/>
-        
         <xsl:variable name="ddi-markup" select="name($context)"/>
-        
+
         <xsl:choose>
             <xsl:when test="($ddi-markup = ('l:Variable','d:GenerationInstruction','d:Loop')) or ends-with($ddi-markup,'Domain') or ends-with($ddi-markup,'DomainReference')">
                 <xsl:sequence select="enoddi:get-business-name($context)"/>
@@ -110,15 +109,21 @@
                 <xsl:sequence select="enoddi:get-id($context)"/>
             </xsl:otherwise>
         </xsl:choose>
-        
     </xsl:function>
 
     <xsl:function name="enofr:get-variable-business-name">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="variable"/>
-        <xsl:call-template name="enoddi:get-business-name">
-            <xsl:with-param name="variable" select="$variable"/>
-        </xsl:call-template>
+        <xsl:choose>
+            <xsl:when test="$variable = concat($list-of-groups//Group/@name,'-position')">
+                <xsl:value-of select="concat('$',$variable)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="enoddi:get-business-name">
+                    <xsl:with-param name="variable" select="$variable"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
 
     <xd:doc>
@@ -240,16 +245,16 @@
             <xd:p>It concats different labels to do this job.</xd:p>
         </xd:desc>
     </xd:doc>
-    
+
     <xsl:function name="enofr:get-label">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
-        
+
         <xsl:variable name="ddi-label" select="enoddi:get-label($context,$language)"/>
         <xsl:variable name="tooltip" select="enoddi:get-instructions-by-format($context,'tooltip')" as="node()*"/>
         <xsl:variable name="tooltips-with-id" select="$tooltip[descendant-or-self::*/@id]" as="node()*"/>
         <xsl:variable name="other-instructions" select="enoddi:get-instructions-by-format($context,'instruction,comment,help')" as="node()*"/>
-        
+
         <xsl:variable name="original-label">
             <xsl:choose>
                 <xsl:when test="$ddi-label/name()='xhtml:p'">
@@ -316,7 +321,7 @@
                 <xsl:otherwise>
                     <xsl:sequence select="$ddi-label"/>
                 </xsl:otherwise>
-            </xsl:choose>            
+            </xsl:choose>
         </xsl:variable>
         <xsl:call-template name="tooltip-in-label">
             <xsl:with-param name="label" select="$label-without-tooltips-with-id"/>
@@ -328,7 +333,7 @@
     <xsl:template name="tooltip-xforms">
         <xsl:param name="ddi-tooltip"/>
         <xsl:param name="language"/>
-        
+
         <xsl:variable name="tooltip-label" select="enoddi:get-label($ddi-tooltip,$language)"/>
         <xsl:variable name="title">
             <xsl:choose>
@@ -352,7 +357,7 @@
         <xsl:param name="label"/>
         <xsl:param name="language"/>
         <xsl:param name="tooltip" as="node()*"/>
-        
+
         <xsl:choose>
             <xsl:when test="$tooltip[1]">
                 <xsl:variable name="href" select="concat('#',$tooltip[1]//*/@id)"/>
@@ -392,7 +397,7 @@
             <xsl:apply-templates select="@*|node()" mode="replace-tooltip"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="xhtml:a" mode="replace-tooltip">
         <xsl:param name="href" tunnel="yes"/>
         <xsl:param name="tooltip-label" tunnel="yes"/>
@@ -403,7 +408,7 @@
             <xsl:otherwise>
                 <xsl:copy>
                     <xsl:apply-templates select="@*|node()" mode="replace-tooltip"/>
-                </xsl:copy>                
+                </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
