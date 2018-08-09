@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<office:document office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.text"
-    xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" 
-    xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0">
-    <office:font-face-decls>
-        <style:font-face style:name="Arial" svg:font-family="Arial" style:font-family-generic="system" style:font-pitch="variable"/>
-    </office:font-face-decls>
-    
-    <office:styles>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="xs eno"
+    xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" 
+    xmlns:eno="http://xml.insee.fr/apps/eno"
+    xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
+    version="2.0">
+        
+    <xsl:function name="eno:Office-styles">
+        <xsl:param name="source-context"/>
         <style:style style:name="Standard" style:family="paragraph" style:class="text"/>
         <style:style style:name="Title" style:family="paragraph" style:class="chapter">
             <style:paragraph-properties fo:text-align="center" fo:margin-top="3cm"
@@ -45,10 +47,10 @@
             <style:text-properties fo:font-size="10pt"/>
         </style:style>
         <!-- <style:style style:name="QuestionSelect" style:family="paragraph"
-         style:default-outline-level="2" style:class="text">
-         <style:paragraph-properties fo:text-align="left"/>
-         <style:text-properties fo:font-size="10pt" fo:font-weight="bold"/>
-      </style:style> -->
+					style:default-outline-level="2" style:class="text">
+					<style:paragraph-properties fo:text-align="left"/>
+					<style:text-properties fo:font-size="10pt" fo:font-weight="bold"/>
+					</style:style> -->
         <style:style style:name="Comment" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
             <style:paragraph-properties fo:margin-top="0.1cm" fo:text-align="left"/>
@@ -95,21 +97,43 @@
         <style:style style:name="MultipleChoice" style:family="table">
             <style:table-properties fo:break-before="page"/>
         </style:style>
-        <style:style style:name="MultipleChoice.Column" style:family="table-column"> </style:style>
-        <style:style style:name="MultipleChoice.Cell" style:family="table-cell"> </style:style>
+        <style:style style:name="MultipleChoice.Column" style:family="table-column"/> 
+        <style:style style:name="MultipleChoice.Cell" style:family="table-cell"/> 
         <style:style style:name="Table" style:family="table">
-            <style:table-properties fo:margin-top="1cm"/>
+            <style:table-properties fo:margin-top="1cm" style:shadow="none"/>
         </style:style>
-        <style:style style:name="Table.Column" style:family="table-column"> </style:style>
-        <style:style style:name="Table.Cell" style:family="table-cell"> </style:style>
+        <style:style style:name="Table.Column" style:family="table-column"/> 
+        <style:style style:name="Table.Cell" style:family="table-cell">
+            <style:table-cell-properties fo:padding="0cm" fo:border="0.05pt solid #000000"/>
+        </style:style>
         <style:style style:name="ColumnHeader" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
             <style:paragraph-properties fo:text-align="center"/>
             <style:text-properties fo:font-size="10pt" fo:font-weight="bold"/>
         </style:style>
-    </office:styles>
-    <office:body>
-        <office:text/>
-    </office:body>
-</office:document>
+        <style:style style:name="Table.Cell.deleted" style:family="table-cell">
+            <style:table-cell-properties  fo:background-color="#f79e9e" fo:padding="0cm" fo:border="0.05pt solid #000000"/>
+        </style:style>
+        <style:style style:name="deleted" style:family="text" style:default-outline-level="2">
+            <style:text-properties fo:background-color="#f79e9e" style:text-line-through-style="solid" style:text-line-through-type="single"/>
+        </style:style>
+        <style:style style:name="added" style:family="text" style:default-outline-level="2">
+            <style:text-properties fo:background-color="#9ef7ac" />
+        </style:style>
+        <style:style style:name="sectionDeleted" style:family="section">
+            <style:section-properties fo:background-color="#f79e9e" style:editable="false">
+                <style:columns fo:column-count="1" fo:column-gap="0cm"/>
+                <style:background-image/>
+            </style:section-properties>
+        </style:style>
+        <style:style style:name="sectionAdded" style:family="section">
+            <style:section-properties fo:background-color="#9ef7ac" style:editable="false">
+                <style:columns fo:column-count="1" fo:column-gap="0cm"/>
+                <style:background-image/>
+            </style:section-properties>
+        </style:style>
+    </xsl:function>
+
+
+</xsl:stylesheet>
 
