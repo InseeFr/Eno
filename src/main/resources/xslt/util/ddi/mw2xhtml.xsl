@@ -58,10 +58,10 @@
     </xsl:template>
     
     <!-- Parsing is done on the text nodes for the default mode only -->
-    <xsl:template match="text()[matches(normalize-space(.),'[*]|\\n|\[.*\]\(.*\)')]">
+    <xsl:template match="text()[matches(normalize-space(replace(.,'&amp;#xd;', 'xhtml:br')),'[*]|xhtml:br|\[.*\]\(.*\)')]">
         <xhtml:p>
             <xsl:call-template name="parse-tags">
-              <xsl:with-param name="expression" select="normalize-space(.)"/>
+              <xsl:with-param name="expression" select="normalize-space(replace(.,'&amp;#xd;', 'xhtml:br'))"/>
             </xsl:call-template>
         </xhtml:p>
     </xsl:template>
@@ -69,7 +69,11 @@
     
     <!-- Parsing is done on the text nodes. -->
     <xsl:template match="text()">
-        <xsl:copy-of select="."/>        
+        <xsl:copy-of select="."/>
+        <!--  <xsl:call-template name="parse-tags">
+              <xsl:with-param name="expression" select="normalize-space(replace(.,'&amp;#xd;', 'xhtml:br'))"/>
+            </xsl:call-template>
+            -->       
     </xsl:template>
     
    <!-- <xsl:template match="text()">        
@@ -251,7 +255,7 @@
             - regexp(3) is the sub-sequence [.*] if regexp(2) has matched, for the text associated to the link,
             - regexp(4) is the sub-sequence (.*) if regexp(2) has matched, for the url associated to the link.
         -->
-        <xsl:analyze-string select="$expression" regex="(\\n)|(\[(.*)\]\((.*)\)){{1}}">
+        <xsl:analyze-string select="$expression" regex="(xhtml:br)|(\[(.*)\]\((.*)\)){{1}}">
              <xsl:matching-substring>
                  <xsl:choose>
                      <!-- Breakline case -->
