@@ -620,27 +620,13 @@
 
         <xsl:variable name="attachment-domain" select="d:AttachmentLocation/d:DomainSpecificValue/@attachmentDomain"/>
         <xsl:variable name="source-response-out-parameter" select="../d:ResponseDomainInMixed[@attachmentBase=$attachment-domain]//r:OutParameter/r:ID"/>
-
-        <!-- relative-path code comes from cleaning.xsl -->
-        <xsl:variable name="source-response-id">
-            <xsl:variable name="relative-path">
-                <xsl:value-of>//</xsl:value-of>
-                <xsl:for-each select="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster]">
-                    <xsl:value-of
-                        select="concat('*[name()=''',r:ID,
-                        ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
-                        r:ID,''']/preceding-sibling::*)]//')"
-                    />
-                </xsl:for-each>
-            </xsl:variable>
-            <xsl:value-of select="concat($relative-path,../../r:Binding[r:SourceParameterReference/r:ID=$source-response-out-parameter]/r:TargetParameterReference/r:ID)"/>
-        </xsl:variable>
+        <xsl:variable name="source-response-id" select="../../r:Binding[r:SourceParameterReference/r:ID=$source-response-out-parameter]/r:TargetParameterReference/r:ID"/>
 
         <xsl:for-each select="d:AttachmentLocation/d:DomainSpecificValue/r:Value">
             <xsl:if test="position()!=1">
                 <xsl:text> or </xsl:text>
             </xsl:if>
-            <xsl:value-of select="concat($source-response-id,'=''',.,'''')"/>
+            <xsl:value-of select="concat($conditioning-variable-begin,$source-response-id,$conditioning-variable-end,'=''',.,'''')"/>
         </xsl:for-each>
     </xsl:template>
 

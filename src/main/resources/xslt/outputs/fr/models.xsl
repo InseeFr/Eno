@@ -2078,7 +2078,7 @@
                 <xsl:variable name="variable-business-name" select="enofr:get-variable-business-name($source-context,$variables/Variable[1])"/>
                 <xsl:call-template name="replaceVariablesInFormula">
                     <xsl:with-param name="formula" select="replace($formula,
-                        concat($properties//TextConditioningVariable/ddi/Before,$variables/Variable[1],$properties//TextConditioningVariable/ddi/After),
+                        concat($conditioning-variable-begin,$variables/Variable[1],$conditioning-variable-end),
                         $variable-business-name)"/>
                     <xsl:with-param name="variables" as="node()">
                         <Variables>
