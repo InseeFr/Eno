@@ -410,15 +410,31 @@
                     </xsl:if>
                     <xsl:attribute name="value">
                         <xsl:if test="enofr:get-readonly-ancestors($source-context) != ''">
-                            <xsl:for-each select="enofr:get-readonly-ancestors($source-context)">
+                            <xsl:variable name="initial-readonly-ancestors">
+                                <xsl:for-each select="enofr:get-readonly-ancestors($source-context)">
+                                    <xsl:value-of select="concat('not(',.,') or ')"/>
+                                </xsl:for-each>                                
+                            </xsl:variable>
+                            <xsl:call-template name="replaceVariablesInFormula">
+                                <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
+                                <xsl:with-param name="variables" as="node()">
+                                    <Variables>
+                                        <xsl:for-each select="enofr:get-readonly-ancestors-variables($source-context)">
+                                            <xsl:sort select="string-length(.)" order="descending"/>
+                                            <Variable><xsl:value-of select="."/></Variable>
+                                        </xsl:for-each>
+                                    </Variables>
+                                </xsl:with-param>
+                            </xsl:call-template>
+<!--                            <xsl:for-each select="enofr:get-readonly-ancestors($source-context)">
                                 <xsl:value-of select="'not('"/>
                                 <xsl:call-template name="replaceGroupsInFormula">
                                     <xsl:with-param name="formula" select="."/>
                                     <xsl:with-param name="position" select="1"/>
                                 </xsl:call-template>
                                 <xsl:value-of select="') or '"/>
-                                <!--<xsl:value-of select="concat('not(',.,') or ')"/>-->
-                            </xsl:for-each>
+                                <!-\-<xsl:value-of select="concat('not(',.,') or ')"/>-\->
+                            </xsl:for-each>-->
                         </xsl:if>
                         <xsl:call-template name="replaceVariablesInFormula">
                             <xsl:with-param name="formula" select="$constraint"/>
