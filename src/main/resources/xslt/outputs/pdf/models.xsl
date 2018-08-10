@@ -25,7 +25,8 @@
 	
 	<xsl:variable name="properties" select="doc($properties-file)"/>
 	
-
+	<!--<xsl:variable name="style-adress" select="concat('../../../',$properties/Style/Folder,'/',$properties/Style/File)"/>
+	<xsl:include href="{$style-adress]"/>-->
 	<xsl:include href="../../../styles/style.xsl"/>
 	
 	<!-- Remove all the ConsistencyCheck messages from the pdf -->

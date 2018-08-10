@@ -5,6 +5,9 @@
     <Language>fr</Language>
     <Language>en</Language>
   </Languages>
+  <HomePage>
+    <File>static-pages.fo</File>
+  </HomePage>
   <AccompanyingMails>
     <AccompanyingMail>ouvertureCOL</AccompanyingMail>
     <AccompanyingMail>relanceCOL</AccompanyingMail>

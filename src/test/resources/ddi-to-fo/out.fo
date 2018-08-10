@@ -102,8 +102,7 @@
                   <fo:inline-container>
                      <fo:block font-weight="bold">Unité enquêtée</fo:block>
                      <fo:block>Identifiant : ${BddIdentifiantUniteEnquetee}</fo:block>
-                     <fo:block>Raison sociale : ${BddRaisonSociale} avec beaucoup de
-                                caractères derrière pour vérifier comment ça fonctionne</fo:block>
+                     <fo:block>Raison sociale : ${BddRaisonSociale}</fo:block>
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
@@ -149,7 +148,12 @@
                                 height="50mm"
                                 background-color="#EEE"
                                 padding="3mm">
-               <fo:block font-weight="bold" font-size="16pt" text-align="center">${BddLibelleLong}</fo:block>
+               <fo:block font-weight="bold"
+                         font-size="16pt"
+                         text-align="center"
+                         margin-top="10mm"><![CDATA[${BddLibelleLong}#if((${BddFrequence}!='annuelle') &&
+                    (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
+                    ${BddAnneeReference}]]></fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
                                 left="120mm"
@@ -266,7 +270,7 @@
             <fo:external-graphic src="encoche-top-right.png"/>
          </fo:block>
          <fo:block margin-right="4mm"
-                   margin-top="80%"
+                   margin-top="65%"
                    position="absolute"
                    text-align="right">
             <fo:instream-foreign-object>
@@ -286,8 +290,8 @@
             <fo:block-container absolute-position="absolute"
                                 left="202.5mm"
                                 reference-orientation="90"
-                                top="224mm">
-               <fo:block font-size="8pt" position="absolute" text-align="right">Code Bar - <fo:page-number/>
+                                top="125mm">
+               <fo:block font-size="8pt" position="absolute" text-align="left">Code Bar - <fo:page-number/>
                </fo:block>
             </fo:block-container>
          </fo:block>
