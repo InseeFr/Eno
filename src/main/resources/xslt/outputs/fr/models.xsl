@@ -2055,10 +2055,15 @@
         <xsl:param name="variables" as="node()"/>
 
         <xsl:choose>
+            <xsl:when test="$variables/Variable[1] = $formula">
+                <xsl:value-of select="enofr:get-variable-business-name($source-context,$variables/Variable[1])"/>
+            </xsl:when>
             <xsl:when test="$variables/Variable">
                 <xsl:variable name="variable-business-name" select="enofr:get-variable-business-name($source-context,$variables/Variable[1])"/>
                 <xsl:call-template name="replaceVariablesInFormula">
-                    <xsl:with-param name="formula" select="replace($formula,$variables/Variable[1],$variable-business-name)"/>
+                    <xsl:with-param name="formula" select="replace($formula,
+                        concat($properties//TextConditioningVariable/ddi/Before,$variables/Variable[1],$properties//TextConditioningVariable/ddi/After),
+                        $variable-business-name)"/>
                     <xsl:with-param name="variables" as="node()">
                         <Variables>
                             <xsl:copy-of select="$variables/Variable[position() != 1 ]"/>

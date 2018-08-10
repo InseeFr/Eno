@@ -22,6 +22,21 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>The properties file used by the stylesheet.</xd:p>
+            <xd:p>It's on a transformation level.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:param name="properties-file"/>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The properties file is charged as an xml tree.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="properties" select="doc($properties-file)"/>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Root template.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -89,44 +104,15 @@
                 <!-- Creating a list of new identifiers -->
                 <xsl:for-each select="parent::r:Command/r:InParameter">
                     <xsl:sort select="string-length(r:ID)" order="descending"/>
-                    <xsl:variable name="old-identifier">
-                        <xsl:value-of select="r:ID"/>
-                    </xsl:variable>
-                    <!-- Getting the parameter id from the source question -->
-                    <xsl:variable name="new-identifier">
-                        <xsl:value-of
-                            select="parent::r:Command/r:Binding[r:TargetParameterReference/r:ID=$old-identifier]/r:SourceParameterReference/r:ID"
-                        />
-                    </xsl:variable>
-                    <!-- Added to be selected with Xpath on the Xforms side-->
-                    <xsl:variable name="relative-path">
-                        <xsl:value-of>//</xsl:value-of>
-                        <xsl:for-each
-                            select="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster]">
-                            <xsl:value-of
-                                select="concat('*[name()=''',r:ID,
-                                ''' and count(preceding-sibling::*)=count(current()/ancestor::*[name()=''',
-                                r:ID,''']/preceding-sibling::*)]//')"
-                            />
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:value-of select="concat($relative-path,$new-identifier)"/>
-                    <!--                        <xsl:choose>
-                            <!-\- for filters and controls in loops, fetching the nearest variable in the tree -\->
-                            <xsl:when test="ancestor::d:Loop | ancestor::d:QuestionGrid[d:GridDimension/d:Roster]">
-                                <xsl:value-of select="concat('ancestor::*[descendant::',$new-identifier,'][1]//',$new-identifier)"/>                           
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of select="concat('//',$new-identifier)"/>
-                            </xsl:otherwise>
-                        </xsl:choose>-->
+                    <xsl:value-of select="concat($properties//TextConditioningVariable/ddi/Before,
+                        parent::r:Command/r:Binding[r:TargetParameterReference/r:ID=current()/r:ID]/r:SourceParameterReference/r:ID,
+                        $properties//TextConditioningVariable/ddi/After)"/>
                 </xsl:for-each>
             </xsl:variable>
 
             <xsl:variable name="modified-text">
                 <!-- The modifications are made through this function --> 
-                <xsl:value-of
-                    select="eno:text-modification($old-identifiers,$new-identifiers,$command,1)"/>
+                <xsl:value-of select="eno:text-modification($old-identifiers,$new-identifiers,$command,1)"/>
             </xsl:variable>
             
             <!-- In the end, some other strings are replaced to have a generic way of describing the empty/null value -->

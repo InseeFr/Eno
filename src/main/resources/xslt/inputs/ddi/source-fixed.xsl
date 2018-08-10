@@ -920,27 +920,47 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Defining getter get-business-ascendants.</xd:p>
+            <xd:p>Defining getter get-business-ancestors.</xd:p>
             <xd:p>Function that returns the business ascendants loop and rowloop business names from a DDI variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-business-ascendants">
-        <xsl:param name="variable" tunnel="yes"/>
+    <xsl:template match="*" mode="enoddi:get-business-ancestors">
+        
+        <xsl:call-template name="enoddi:get-business-ancestors">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    
+    <xsl:template name="enoddi:get-business-ancestors">
+        <xsl:param name="variable"/>
+
         <xsl:choose>
-            <!-- collected or calculated variable -->
-            <xsl:when test="(//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable)
-                or (//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable)">
-                <xsl:for-each select="//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable]">
+            <!-- collected variable -->
+            <xsl:when test="$root//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
+                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable]">
                     <xsl:sequence select="l:VariableGroupName/r:String"/>
                 </xsl:for-each>
-                <!--<xsl:value-of select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $variable]/l:VariableName/r:String"/>-->
+            </xsl:when>
+            <!-- calculated variable -->
+            <xsl:when test="$root//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
+                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable]">
+                    <xsl:sequence select="l:VariableGroupName/r:String"/>
+                </xsl:for-each>
             </xsl:when>
             <!-- external variable -->
-            <xsl:when test="//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
-                <xsl:for-each select="//l:VariableScheme//l:VariableGroup[descendant::l:VariableName/r:String= $variable]">
+            <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
+                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::l:VariableName/r:String= $variable]">
                     <xsl:sequence select="l:VariableGroupName/r:String"/>
                 </xsl:for-each>
             </xsl:when>
+            <!-- Loop -->
+            <xsl:when test="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference/r:ID = $variable"/>
+            <!-- Loop - position -->
+            <xsl:when test="ends-with($variable,'-position') and $root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference/r:ID = substring-before($variable,'-position')"/>
+            <!-- unknown -->
+            <xsl:otherwise>
+                <xsl:value-of select="concat($variable,'_is_not_a_variable_looking_for_its_ancestors')"/>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 

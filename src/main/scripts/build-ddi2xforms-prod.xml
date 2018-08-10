@@ -177,7 +177,9 @@
     <target name="cleaning" description="Cleaning DDI">
         <basename file="${file}" property="file-name" suffix=".tmp"/>
         <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${file-name}-cleaned.tmp"
-            style="${xslt.home}/util/ddi/cleaning.xsl" classpath="${saxon.jar}" force="true"/>
+            style="${xslt.home}/util/ddi/cleaning.xsl" classpath="${saxon.jar}" force="true">
+            <param name="properties-file" expression="${config-folder}/ddi2fr.xml"/>
+        </xslt>
     </target>
     
     <!-- Titling -->
