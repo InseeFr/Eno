@@ -9,14 +9,14 @@
         <Name>MODULE1</Name>
         <Label>Introduction</Label>
         <Declaration id="d1" declarationType="COMMENT" position="AFTER_QUESTION_TEXT">
-            <Text>We're going to test your knowledge about the simpsons series.\n**Welcome in the
+            <Text>We're going to test your knowledge about the simpsons series.&amp;#xd;&amp;#xd;**Welcome in the
                 simspons world!**</Text>
         </Declaration>
         <TargetMode>CAWI</TargetMode>
         <Child id="j6p3dkx6" questionType="SIMPLE"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="QuestionType">
             <Name>COMMENT</Name>
-            <Label>Before starting, do you have any comments about the Simpsons family?</Label>
+            <Label>Before starting, do you have any comments about the Simpsons&amp;#xd; family?</Label>
             <TargetMode>CAWI</TargetMode>
             <Response id="jbgdhaht" mandatory="false">
                 <Datatype typeName="TEXT" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

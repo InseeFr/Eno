@@ -27,7 +27,7 @@
             </d:InstructionName>
             <d:InstructionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR"><xhtml:p>We're going to test your knowledge about the simpsons series.<xhtml:br/><xhtml:b>Welcome in the simspons world!</xhtml:b></xhtml:p></d:Text>
+                  <d:Text xml:lang="fr-FR"><xhtml:p>We're going to test your knowledge about the simpsons series.<xhtml:br/><xhtml:br/><xhtml:b>Welcome in the simspons world!</xhtml:b></xhtml:p></d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -1160,7 +1160,7 @@
             </r:Binding>
             <d:QuestionText>
                <d:LiteralText>
-                  <d:Text xml:lang="fr-FR">Before starting, do you have any comments about the Simpsons family?</d:Text>
+                  <d:Text xml:lang="fr-FR"><xhtml:p>Before starting, do you have any comments about the Simpsons<xhtml:br/> family?</xhtml:p></d:Text>
                </d:LiteralText>
             </d:QuestionText>
             <d:TextDomain maxLength="500">
