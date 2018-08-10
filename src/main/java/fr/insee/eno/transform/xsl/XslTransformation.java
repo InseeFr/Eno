@@ -380,7 +380,7 @@ public class XslTransformation {
 	}
 	
 	public void transformFOToStep4FO(InputStream inputFile, OutputStream outputFile,
-			InputStream xslSheet, String surveyName, String formName, String parametersFile,InputStream staticPages) throws Exception {
+			InputStream xslSheet, String surveyName, String formName, String propertiesFile, String parametersFile) throws Exception {
 		logger.info("Inserting generic pages in the FO from survey's parameters");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
@@ -388,8 +388,9 @@ public class XslTransformation {
 		transformer.setErrorListener(new EnoErrorListener());
 		transformer.setParameter(XslParameters.DDI2PDF_SURVEY_NAME, surveyName);
 		transformer.setParameter(XslParameters.DDI2PDF_FORM_NAME, formName);
+		transformer.setParameter(XslParameters.DDI2PDF_PROPERTIES_FILE,propertiesFile);
 		transformer.setParameter(XslParameters.DDI2PDF_PARAMETERS_FILE, parametersFile);
-		transformer.setParameter(XslParameters.DDI2PDF_STATIC_PAGES,new StreamSource(staticPages));
+		
 		
 		xslTransform(transformer, inputFile, outputFile);
 	}
