@@ -9,8 +9,10 @@ import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
-import fr.insee.eno.postprocessing.NoopPostprocessor;
-import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep1MailingPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep2SpecificTreatmentPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessorFake;
+import fr.insee.eno.postprocessing.PDFStep4InsertGenericPagesPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
@@ -18,30 +20,36 @@ public class TestDDIToFO {
 
 	private XMLDiff xmlDiff = new XMLDiff();
 
-	
 	@Test
 	public void simpleDiffTest() {
 		try {
 			String basePath = "src/test/resources/ddi-to-fo";
 			File in = new File(String.format("%s/in.xml", basePath));
 			Diff diff = null;
-			
+
 			// Without plugins
 			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
-					new Postprocessor[] {new NoopPostprocessor()});
-			File outputFile = genService.generateQuestionnaire(in, null,"ddi-2-fo-test");
+					new Postprocessor[] { new PDFStep1MailingPostprocessor(),
+							new PDFStep2SpecificTreatmentPostprocessor(),
+							new PDFStep3TableColumnPostprocessorFake(),
+							new PDFStep4InsertGenericPagesPostprocessor() });
+			File outputFile = genService.generateQuestionnaire(in, null, "ddi-2-fo-test");
 			File expectedFile = new File(String.format("%s/out.fo", basePath));
-			diff = xmlDiff.getDiff(outputFile,expectedFile);
-			
+			diff = xmlDiff.getDiff(outputFile, expectedFile);
+
 			// With plugins
-//			GenerationService genServiceWithPlugins = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
-//					new PDFStep3TableColumnPostprocessor());
-//			File outputFileWithPlugins = genServiceWithPlugins.generateQuestionnaire(in, null);
-//			File expectedFileWithPlugins = new File(String.format("%s/simpsons_old-plugin.fo", basePath));
-//			diff = xmlDiff.getDiff(outputFileWithPlugins,expectedFileWithPlugins);
-			
+			// GenerationService genServiceWithPlugins = new
+			// GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
+			// new PDFStep3TableColumnPostprocessor());
+			// File outputFileWithPlugins =
+			// genServiceWithPlugins.generateQuestionnaire(in, null);
+			// File expectedFileWithPlugins = new
+			// File(String.format("%s/simpsons_old-plugin.fo", basePath));
+			// diff =
+			// xmlDiff.getDiff(outputFileWithPlugins,expectedFileWithPlugins);
+
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
