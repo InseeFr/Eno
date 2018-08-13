@@ -13,8 +13,7 @@
 		<Orientation>0</Orientation>
 	</Format>
 	<HomePage>
-		<Folder>xslt/outputs/pdf</Folder>
-		<File>home-page.xsl</File>
+		<Folder>xslt/util/pdf</Folder>
 	</HomePage>
 	<Style>
 		<Folder>styles</Folder>
@@ -33,7 +32,7 @@
     <!-- Definit le nombre maximum de lignes dans un tableau -->
     <Table>
     	<Row>
-    		<DefaultSize>15</DefaultSize>
+    		<DefaultSize>19</DefaultSize>
     		<NbRow>1</NbRow>
     	</Row>
     </Table>

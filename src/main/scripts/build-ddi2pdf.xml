@@ -3,7 +3,7 @@
 
 	<import file="build-pdf.xml"/>
 	
-	<import file="build-customization.xml"/>
+	<!--<import file="build-customization.xml"/>-->
 
 	<!-- Importing the configuration part that is common to every script -->
 	<import file="build-configuration.xml"/>
@@ -11,6 +11,9 @@
 	<!-- ******************************* Main properties for the non-regression script depending on the input and transformation to be processed *********************************** -->
 	<!-- The name of the survey, conditionning the name of the input file processed. -->
 	<property name="survey-name" value="simpsons"/>
+	<!--<property name="survey-name" value="achats-2018-x00"/>-->
+	<!--<property name="survey-name" value="ticmenold"/>-->
+	<!--<property name="survey-name" value="esa-ddi-v2"/>-->
 	<!-- The transformation to be processed, usually named using a <in>2<out> template. -->
 
 	<property name="transformation-name" value="ddi2pdf"/>
@@ -80,7 +83,7 @@
 			out="${root-folder}/target/${survey-name}/${form-name}/form/form-debug.${out-extension}"
 			style="${xslt.home}/transformations/ddi2pdf/ddi2pdf.xsl" force="true"
 			classpath="${saxon.jar}">
-			<param name="properties-file" expression="${root-folder}/config/ddi2pdf.xml"/>
+			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
 			<param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
 			<param name="labels-folder" expression="${lang-folder}/fr"/>
 		</xslt>
@@ -244,7 +247,7 @@
 	<target name="OutPostProcessing">
 		<!-- Expects the input file ${temp.home}/pdf/${form-name}/basic-form.tmp -->
 
-		<property name="pdfFilePath"  value="${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"/>
+		<!--<property name="pdfFilePath"  value="${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"/>
 		<antcall target="pdfPostProcessing">
 			<param name="input-file" value="${temp.home}/pdf/${form-name}/basic-form.tmp"/>
 			<param name="output-file" value="${pdfFilePath}"/>
@@ -252,6 +255,9 @@
 		<antcall target="customizationPostProcessing">
 			<param name="input-file" value="${pdfFilePath}"/>
 			<param name="properties-file" value="${root-folder}/config/ddi2pdf.xml"/>
+		</antcall>-->
+		<antcall target="pdfPostProcessing">
+			<param name="input-file" value="${temp.home}/pdf/${form-name}/basic-form.tmp"/>
 		</antcall>
 	</target>
 
