@@ -652,7 +652,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-instructions-by-format">
-        <xsl:param name="format" select="'#all'" tunnel="yes"/>
+        <xsl:param name="format" select="'#all'" tunnel="yes" required="no"/>
         <xsl:sequence select="d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true())
             else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
     </xsl:template>
@@ -663,7 +663,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="l:Code" mode="enoddi:get-instructions-by-format">
-        <xsl:param name="format" select="'#all'" tunnel="yes"/>
+        <xsl:param name="format" select="'#all'" tunnel="yes" required="no"/>
         <xsl:sequence select="r:CategoryReference/l:Category/d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true())
             else(contains(concat(',',$format,','),concat(',',d:InstructionName/r:String,',')))]"/>
         <xsl:choose>
@@ -742,7 +742,9 @@
                 <xsl:with-param name="label" select="enoddi:get-label(.,$language)"/>
             </xsl:call-template>
         </xsl:variable>
-        <xsl:sequence select="$variable-list"/>
+        <xsl:if test="$variable-list != enoddi:get-label(.,$language)">
+            <xsl:sequence select="$variable-list"/>    
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="enoddi:variables-from-label">
@@ -758,11 +760,11 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Defining getter get-conditioning-variable-formula for StatementItem, Instruction, QuestionItem and QuestionGrid.</xd:p>
+            <xd:p>Defining getter get-conditioning-variable-formula for StatementItem, Instruction, QuestionItem, QuestionGrid and ComputationItem.</xd:p>
             <xd:p>Function that returns the formula of a conditioning variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid" mode="enoddi:get-conditioning-variable-formula" priority="2">
+    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid | d:ComputationItem" mode="enoddi:get-conditioning-variable-formula" priority="2">
         <xsl:param name="variable" tunnel="yes"/>
         <!-- The markup containing the text has different names, but it is always a child of the element -->
         <xsl:variable name="conditional-text" select="descendant::d:ConditionalText"/>
@@ -786,11 +788,11 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Defining getter get-conditioning-variable-formula for StatementItem, Instruction, QuestionItem and QuestionGrid.</xd:p>
+            <xd:p>Defining getter get-conditioning-variable-formula-variables for StatementItem, Instruction, QuestionItem, QuestionGrid and ComputationItem.</xd:p>
             <xd:p>Function that returns the variables of the formula of a conditioning variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid" mode="enoddi:get-conditioning-variable-formula-variables" priority="2">
+    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid | d:ComputationItem" mode="enoddi:get-conditioning-variable-formula-variables" priority="2">
         <xsl:param name="variable" tunnel="yes"/>
         <!-- The markup containing the text has different names, but it is always a child of the element -->
         <xsl:variable name="conditional-text" select="descendant::d:ConditionalText"/>

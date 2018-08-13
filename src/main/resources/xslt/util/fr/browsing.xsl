@@ -688,18 +688,20 @@
                     <xsl:if test="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
                         <xsl:text>(</xsl:text>
                         <xsl:for-each select="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
-                            <xsl:value-of select="concat('not(',
-                                                         replace(replace(@relevant,'//','instance(''fr-form-instance'')//'),
-                                                                 '\]instance\(''fr-form-instance''\)',
-                                                                 ']'),
-                                                         ')')"/>
+                            <xsl:value-of select="concat('not(',@relevant,')')"/>
+                            <!--<xsl:value-of select="concat('not(',
+                                replace(replace(@relevant,'//','instance(''fr-form-instance'')//'),
+                                '\]instance\(''fr-form-instance''\)',
+                                ']'),
+                                ')')"/>-->
                             <xsl:text>) or (</xsl:text>
                         </xsl:for-each>
                     </xsl:if>
-                    <xsl:value-of
+                    <xsl:value-of select="@value"/>
+<!--                    <xsl:value-of
                         select="replace(replace(@value,'//','instance(''fr-form-instance'')//'),
                                         '\]instance\(''fr-form-instance''\)',
-                                        ']')"/>
+                                        ']')"/>-->
                     <xsl:if test="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
                         <xsl:text>)</xsl:text>
                     </xsl:if>

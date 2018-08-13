@@ -426,15 +426,6 @@
                                     </Variables>
                                 </xsl:with-param>
                             </xsl:call-template>
-<!--                            <xsl:for-each select="enofr:get-readonly-ancestors($source-context)">
-                                <xsl:value-of select="'not('"/>
-                                <xsl:call-template name="replaceGroupsInFormula">
-                                    <xsl:with-param name="formula" select="."/>
-                                    <xsl:with-param name="position" select="1"/>
-                                </xsl:call-template>
-                                <xsl:value-of select="') or '"/>
-                                <!-\-<xsl:value-of select="concat('not(',.,') or ')"/>-\->
-                            </xsl:for-each>-->
                         </xsl:if>
                         <xsl:call-template name="replaceVariablesInFormula">
                             <xsl:with-param name="formula" select="$constraint"/>
@@ -1445,7 +1436,7 @@
                 <xsl:attribute name="xxf:maxlength" select="$length"/>
             </xsl:if>
             <xsl:if test="$label != '' or $question-label!= ''">
-                <xsl:variable name="conditioning-variables">
+                <xsl:variable name="conditioning-variables" as="xs:string*">
                     <xsl:choose>
                         <xsl:when test="$question-label-variables != ''">
                             <xsl:sequence select="$question-label-variables"/>
@@ -1616,7 +1607,6 @@
                             <xsl:value-of select="concat('$form-resources/',$name,'/alert')"/>
                             <xsl:for-each select="$conditioning-variables">
                                 <xsl:variable name="conditioning-variable" select="."/>
-                                <xsl:variable name="formula" select="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable)"/>
                                 <xsl:value-of select="concat(',''',$conditioning-variable-begin,$conditioning-variable,$conditioning-variable-end,''',')"/>
                                 <xsl:call-template name="replaceVariablesInFormula">
                                     <xsl:with-param name="source-context" select="$source-context"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
@@ -314,6 +315,31 @@
         </xsl:choose>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>enofr:get-label-conditioning-variables</xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:get-label-conditioning-variables">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="language"/>
+        
+        <xsl:variable name="conditioning-variables-with-doubles" as="xs:string*">
+            <xsl:sequence select="enoddi:get-label-conditioning-variables($context,$language)"/>
+            <xsl:choose>
+                <xsl:when test="name($context)='d:QuestionItem' or name($context)='d:QuestionGrid'">
+                    <xsl:for-each select="enoddi:get-instructions-by-format($context)">
+                        <xsl:sequence select="enoddi:get-label-conditioning-variables(.,$language)"/>
+                    </xsl:for-each>                    
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:for-each select="enoddi:get-instructions-by-format($context,'tooltips')">
+                        <xsl:sequence select="enoddi:get-label-conditioning-variables(.,$language)"/>
+                    </xsl:for-each>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:sequence select="distinct-values($conditioning-variables-with-doubles)"/>
+    </xsl:function>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
