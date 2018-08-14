@@ -850,6 +850,24 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Defining getterget-item-label-conditioning-variables.</xd:p>
+            <xd:p>Function that returns the variables of the labels of the items of CodeDomain and NominalDomain.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:CodeDomain | d:NominalDomain" mode="enoddi:get-item-label-conditioning-variables">
+        
+        <xsl:variable name="item-label-conditioning-variables-with-doubles" as="xs:string*">
+            <xsl:for-each select="descendant::l:Category/r:Label/r:Content">
+                <xsl:call-template name="enoddi:variables-from-label">
+                    <xsl:with-param name="label" select="."/>
+                </xsl:call-template>
+            </xsl:for-each>            
+        </xsl:variable>
+        <xsl:sequence select="distinct-values($item-label-conditioning-variables-with-doubles)"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Defining getter get-business-name.</xd:p>
             <xd:p>Function that returns the business variable from the DDI one.</xd:p>
         </xd:desc>
