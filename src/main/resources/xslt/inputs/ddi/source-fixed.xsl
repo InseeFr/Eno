@@ -905,6 +905,15 @@
             <xsl:when test="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference/r:ID = $variable"/>
             <!-- Loop - position -->
             <xsl:when test="ends-with($variable,'-position') and $root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference/r:ID = substring-before($variable,'-position')"/>
+            <!-- calculated variable not in VariableScheme -->
+            <xsl:when test="$root//d:GenerationInstruction/r:CommandCode/r:Command/r:OutParameter/r:ID = $variable">
+                <xsl:for-each select="$root//*[name()='d:Loop' or (name()='d:QuestionGrid' and d:GridDimension/d:Roster)]
+                    [descendant::d:GenerationInstruction/r:CommandCode/r:Command/r:OutParameter/r:ID = $variable]">
+                    <xsl:call-template name="enoddi:get-business-name">
+                        <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+                    </xsl:call-template>
+                </xsl:for-each>
+            </xsl:when>
             <!-- unknown -->
             <xsl:otherwise>
                 <xsl:value-of select="concat($variable,'_is_not_a_variable_looking_for_its_ancestors')"/>

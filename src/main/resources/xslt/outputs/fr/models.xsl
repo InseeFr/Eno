@@ -1968,6 +1968,13 @@
                             </xsl:call-template>
                         </xsl:when>
                         <xsl:otherwise>
+                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
+                            <xsl:variable name="variable-ancestors" select="enofr:get-variable-business-ancestors($source-context,$conditioning-variable)"/>
+                            <xsl:if test="$variable-ancestors != ''">
+                                <xsl:for-each select="tokenize($variable-ancestors,' ')">
+                                    <xsl:value-of select="concat(.,'[$',.,'-position]//')"/>
+                                </xsl:for-each>
+                            </xsl:if>
                             <xsl:value-of select="enofr:get-variable-business-name($source-context,$conditioning-variable)"/>
                         </xsl:otherwise>
                     </xsl:choose>
@@ -1993,14 +2000,21 @@
         <xsl:param name="variables" as="node()"/>
 
         <xsl:choose>
-            <xsl:when test="$variables/Variable[1] = $formula">
-                <xsl:value-of select="enofr:get-variable-business-name($source-context,$variables/Variable[1])"/>
-            </xsl:when>
             <xsl:when test="$variables/Variable">
-                <xsl:variable name="variable-business-name" select="enofr:get-variable-business-name($source-context,$variables/Variable[1])"/>
+                <xsl:variable name="current-variable" select="$variables/Variable[1]"/>
+                <xsl:variable name="variable-business-name">
+                    <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
+                    <xsl:variable name="variable-ancestors" select="enofr:get-variable-business-ancestors($source-context,$current-variable)"/>
+                    <xsl:if test="$variable-ancestors != ''">
+                        <xsl:for-each select="tokenize($variable-ancestors,' ')">
+                            <xsl:value-of select="concat(.,'[\$',.,'-position]//')"/>
+                        </xsl:for-each>
+                    </xsl:if>
+                    <xsl:value-of select="enofr:get-variable-business-name($source-context,$current-variable)"/>
+                </xsl:variable>
                 <xsl:call-template name="replaceVariablesInFormula">
                     <xsl:with-param name="formula" select="replace($formula,
-                        concat($conditioning-variable-begin,$variables/Variable[1],$conditioning-variable-end),
+                        concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end),
                         $variable-business-name)"/>
                     <xsl:with-param name="variables" as="node()">
                         <Variables>
@@ -2010,14 +2024,11 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="replaceGroupsInFormula">
-                    <xsl:with-param name="formula" select="$formula"/>
-                    <xsl:with-param name="position" select="1"/>
-                </xsl:call-template>
+                <xsl:value-of select="$formula"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
+<!--
     <xsl:template name="replaceGroupsInFormula">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="formula"/>
@@ -2026,7 +2037,7 @@
         <xsl:choose>
             <xsl:when test="$list-of-groups//Group[$position]">
                 <xsl:call-template name="replaceGroupsInFormula">
-                    <xsl:with-param name="formula" select="replace($formula,$list-of-groups//Group[$position]/@id,$list-of-groups//Group[$position]/@name)"/>
+                    <xsl:with-param name="formula" select="replace($formula,concat('\$',$list-of-groups//Group[$position]/@name,'-position'),concat('$',$list-of-groups//Group[$position]/@name,'-position'))"/>
                     <xsl:with-param name="position" select="$position +1"/>
                 </xsl:call-template>
             </xsl:when>
@@ -2034,6 +2045,6 @@
                 <xsl:value-of select="$formula"/>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
+    </xsl:template>-->
 
 </xsl:stylesheet>

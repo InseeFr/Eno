@@ -103,9 +103,6 @@
             <xsl:when test="($ddi-markup = ('l:Variable','d:GenerationInstruction','d:Loop')) or ends-with($ddi-markup,'Domain') or ends-with($ddi-markup,'DomainReference')">
                 <xsl:sequence select="enoddi:get-business-name($context)"/>
             </xsl:when>
-            <!--<xsl:when test="enoddi:get-minimum-lines($context)">
-                <xsl:sequence select="enoddi:get-business-name($context)"/>
-            </xsl:when>-->
             <xsl:otherwise>
                 <xsl:sequence select="enoddi:get-id($context)"/>
             </xsl:otherwise>
@@ -115,25 +112,21 @@
     <xsl:function name="enofr:get-variable-business-name">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="variable"/>
-        <xsl:variable name="business-name">
-            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-            <xsl:variable name="variable-ancestors">
-                <xsl:call-template name="enoddi:get-business-ancestors">
-                    <xsl:with-param name="variable" select="$variable"/>
-                </xsl:call-template>
-            </xsl:variable>
-            <xsl:if test="$variable-ancestors != ''">
-                <xsl:for-each select="tokenize($variable-ancestors,' ')">
-                    <xsl:value-of select="concat(.,'[\$',.,'-position]//')"/>
-                </xsl:for-each>
-            </xsl:if>
-            <xsl:call-template name="enoddi:get-business-name">
-                <xsl:with-param name="variable" select="$variable"/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:value-of select="$business-name"/>
+
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="$variable"/>
+        </xsl:call-template>
     </xsl:function>
 
+    <xsl:function name="enofr:get-variable-business-ancestors">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="variable"/>
+        
+        <xsl:call-template name="enoddi:get-business-ancestors">
+            <xsl:with-param name="variable" select="$variable"/>
+        </xsl:call-template>
+    </xsl:function>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms label for the context on which it is applied.</xd:p>
