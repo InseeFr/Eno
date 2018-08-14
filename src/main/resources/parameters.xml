@@ -9,7 +9,7 @@
     <File>static-pages.fo</File>
   </HomePage>
   <AccompanyingMails>
-    <AccompanyingMail>ouvertureCOL</AccompanyingMail>
+    <!--<AccompanyingMail>ouvertureCOL</AccompanyingMail>-->
   </AccompanyingMails>
   <Title>
     <Browsing>module</Browsing>
