@@ -870,7 +870,7 @@
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
                 <xsl:with-param name="instance-ancestor"
-                    select="concat($instance-ancestor,'*[name()=''',$business-name,''' and position()= $',$business-name,'-position ]//')"
+                    select="concat($instance-ancestor,'*[name()=''',$business-name,'''][$',$business-name,'-position]//')"
                     tunnel="yes"/>
             </xsl:apply-templates>
         </xf:bind>
@@ -1673,7 +1673,7 @@
                                     tunnel="yes"/>
                                 <!-- the absolute address of the element in enriched for TableLoop, for which several instances of RowLoop are possible -->
                                 <xsl:with-param name="instance-ancestor"
-                                    select="concat($instance-ancestor,'*[name()=''',$loop-name,''' and position()= $',$loop-name,'-position ]//')"
+                                    select="concat($instance-ancestor,'*[name()=''',$loop-name,'''][$',$loop-name,'-position]//')"
                                     tunnel="yes"/>
                             </xsl:apply-templates>
                         </xhtml:tr>
@@ -1825,7 +1825,7 @@
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for Loops, for which several instances are possible -->
                 <xsl:with-param name="instance-ancestor"
-                    select="concat($instance-ancestor,'*[name()=''',$business-name,''' and position()= $',$business-name,'-position ]//')"
+                    select="concat($instance-ancestor,'*[name()=''',$business-name,'''][$',$business-name,'-position]//')"
                     tunnel="yes"/>
             </xsl:apply-templates>
         </xf:repeat>
@@ -1951,7 +1951,7 @@
                     <xsl:value-of select="concat(',''',$conditioning-variable-begin,$conditioning-variable,$conditioning-variable-end,''',')"/>
                     <xsl:choose>
                         <xsl:when test="ends-with($conditioning-variable,'-position') and substring-before($conditioning-variable,'-position') = $list-of-groups//Group/@name">
-                            <xsl:value-of select="concat('$',$conditioning-variable)"/>
+                            <xsl:value-of select="concat('string($',$conditioning-variable,')')"/>
                         </xsl:when>
                         <xsl:when test="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable) != ''">
                             <xsl:call-template name="replaceVariablesInFormula">
