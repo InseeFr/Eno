@@ -1949,18 +1949,28 @@
                 <xsl:for-each select="$conditioning-variables">
                     <xsl:variable name="conditioning-variable" select="."/>
                     <xsl:value-of select="concat(',''',$conditioning-variable-begin,$conditioning-variable,$conditioning-variable-end,''',')"/>
-                    <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="source-context" select="$source-context"/>
-                        <xsl:with-param name="formula" select="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable)"/>
-                        <xsl:with-param name="variables" as="node()">
-                            <Variables>
-                                <xsl:for-each select="tokenize(enofr:get-conditioning-variable-formula-variables($source-context,$conditioning-variable),' ')">
-                                    <xsl:sort select="string-length(.)" order="descending"/>
-                                    <Variable><xsl:value-of select="."/></Variable>
-                                </xsl:for-each>
-                            </Variables>
-                        </xsl:with-param>
-                    </xsl:call-template>
+                    <xsl:choose>
+                        <xsl:when test="ends-with($conditioning-variable,'-position') and substring-before($conditioning-variable,'-position') = $list-of-groups//Group/@name">
+                            <xsl:value-of select="concat('$',$conditioning-variable)"/>
+                        </xsl:when>
+                        <xsl:when test="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable) != ''">
+                            <xsl:call-template name="replaceVariablesInFormula">
+                                <xsl:with-param name="source-context" select="$source-context"/>
+                                <xsl:with-param name="formula" select="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable)"/>
+                                <xsl:with-param name="variables" as="node()">
+                                    <Variables>
+                                        <xsl:for-each select="tokenize(enofr:get-conditioning-variable-formula-variables($source-context,$conditioning-variable),' ')">
+                                            <xsl:sort select="string-length(.)" order="descending"/>
+                                            <Variable><xsl:value-of select="."/></Variable>
+                                        </xsl:for-each>
+                                    </Variables>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="enofr:get-variable-business-name($source-context,$conditioning-variable)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:value-of select="')'"/>
                 </xsl:for-each>
             </xsl:when>
@@ -2014,10 +2024,9 @@
         <xsl:param name="position" as="xs:integer"/>
 
         <xsl:choose>
-            <xsl:when test="$list-of-groups/Group[$position]">
-                <xsl:value-of select="'tttttttttttttX'"/>
+            <xsl:when test="$list-of-groups//Group[$position]">
                 <xsl:call-template name="replaceGroupsInFormula">
-                    <xsl:with-param name="formula" select="replace($formula,$list-of-groups/Group[$position]/@id,$list-of-groups/Group[$position]/@name)"/>
+                    <xsl:with-param name="formula" select="replace($formula,$list-of-groups//Group[$position]/@id,$list-of-groups//Group[$position]/@name)"/>
                     <xsl:with-param name="position" select="$position +1"/>
                 </xsl:call-template>
             </xsl:when>

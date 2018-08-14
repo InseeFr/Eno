@@ -775,15 +775,7 @@
                 </xsl:if>
             </xsl:for-each>
         </xsl:variable>
-
-        <xsl:choose>
-            <xsl:when test="$possible-formulas != ''">
-                <xsl:value-of select="$possible-formulas[1]"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$variable"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:value-of select="$possible-formulas[1]"/>
     </xsl:template>
 
     <xd:doc>
@@ -807,45 +799,13 @@
                 </xsl:for-each>
             </Variables>
         </xsl:variable>
-
-        <xsl:choose>
-            <xsl:when test="$formula-variables/*">
-                <xsl:variable name="ordered-variables">
-                    <xsl:for-each select="$formula-variables//Variable">
-                        <xsl:sort select="string-length(.)" order="descending"/>
-                        <xsl:copy-of select="."/>
-                    </xsl:for-each>
-                </xsl:variable>
-                <xsl:sequence select="distinct-values($ordered-variables)"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:sequence select="$variable"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Defining getter get-conditioning-variable-formula for the others</xd:p>
-            <xd:p>Function that returns the formula of a conditioning variable.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-conditioning-variable-formula">
-        <xsl:param name="variable" tunnel="yes"/>
-
-        <xsl:value-of select="$variable"/>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Defining getter get-conditioning-variable-formula for the others.</xd:p>
-            <xd:p>Function that returns the variables of the formula of a conditioning variable.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-conditioning-variable-formula-variables">
-        <xsl:param name="variable" tunnel="yes"/>
-
-        <xsl:sequence select="$variable"/>
+        <xsl:variable name="ordered-variables">
+            <xsl:for-each select="$formula-variables//Variable">
+                <xsl:sort select="string-length(.)" order="descending"/>
+                <xsl:copy-of select="."/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:sequence select="distinct-values($ordered-variables)"/>
     </xsl:template>
 
     <xd:doc>

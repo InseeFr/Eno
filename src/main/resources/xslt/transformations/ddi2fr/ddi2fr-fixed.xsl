@@ -71,7 +71,7 @@
     </xd:doc>
     <xsl:variable name="list-of-groups">
         <Groups>
-            <xsl:for-each select="//VariableGroup">
+            <xsl:for-each select="//l:VariableGroup">
                 <xsl:sort select="string-length(r:ID)" order="descending"/>
                 <Group>
                     <xsl:attribute name="id" select="r:ID"/>
@@ -115,30 +115,23 @@
     <xsl:function name="enofr:get-variable-business-name">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="variable"/>
-        <xsl:choose>
-            <xsl:when test="$variable = concat($list-of-groups//Group/@name,'-position')">
-                <xsl:value-of select="concat('\$',$variable)"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:variable name="business-name">
-                    <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-                    <xsl:variable name="variable-ancestors">
-                        <xsl:call-template name="enoddi:get-business-ancestors">
-                            <xsl:with-param name="variable" select="$variable"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:if test="$variable-ancestors != ''">
-                        <xsl:for-each select="tokenize($variable-ancestors,' ')">
-                            <xsl:value-of select="concat(.,'[\$',.,'-position]//')"/>
-                        </xsl:for-each>                        
-                    </xsl:if>
-                    <xsl:call-template name="enoddi:get-business-name">
-                        <xsl:with-param name="variable" select="$variable"/>
-                    </xsl:call-template>
-                </xsl:variable>
-                <xsl:value-of select="$business-name"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:variable name="business-name">
+            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
+            <xsl:variable name="variable-ancestors">
+                <xsl:call-template name="enoddi:get-business-ancestors">
+                    <xsl:with-param name="variable" select="$variable"/>
+                </xsl:call-template>
+            </xsl:variable>
+            <xsl:if test="$variable-ancestors != ''">
+                <xsl:for-each select="tokenize($variable-ancestors,' ')">
+                    <xsl:value-of select="concat(.,'[\$',.,'-position]//')"/>
+                </xsl:for-each>
+            </xsl:if>
+            <xsl:call-template name="enoddi:get-business-name">
+                <xsl:with-param name="variable" select="$variable"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:value-of select="$business-name"/>
     </xsl:function>
 
     <xd:doc>
