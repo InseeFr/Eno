@@ -1995,7 +1995,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template name="replaceVariablesInFormula">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="source-context" as="item()"/>
         <xsl:param name="formula"/>
         <xsl:param name="variables" as="node()"/>
 

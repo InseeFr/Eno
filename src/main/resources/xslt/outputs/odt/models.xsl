@@ -555,8 +555,8 @@
 		<xsl:variable name="variableCalculationLabel" select="enoodt:get-calculate-text($source-context,$languages[1],'label')"/>
 		<xsl:variable name="variableCalculationAlert" select="enoodt:get-calculate-text($source-context,$languages[1],'alert')"/>
 		
-		<xsl:variable name="outVariable" select="enoodt:get-name($source-context)"/>
-		<xsl:variable name="nameOutVariable" select="enoodt:get-business-name($source-context,$outVariable)"/>
+		<!--<xsl:variable name="outVariable" select="enoodt:get-name($source-context)"/>-->
+		<xsl:variable name="nameOutVariable" select="enoodt:get-business-name($source-context)"/>
 		<xsl:variable name="idVariables" select="tokenize(enoodt:get-control-variables($source-context),'\s')"/>
 		<text:section text:name="CalculatedVariable-{enoodt:get-name($source-context)}">
 			<text:p><xsl:value-of select="$variableCalculationLabel"/></text:p>		
@@ -587,7 +587,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="name" select="enoodt:get-label-conditioner($source-context,$languages[1])"/>
+		<!--<xsl:variable name="name" select="enoodt:get-label-conditioner($source-context,$languages[1])"/>-->
 		<xsl:variable name="nameOfControl" select="enoodt:get-check-name($source-context,$languages)"/>
 		<xsl:variable name="control" select="enoodt:get-constraint($source-context)"/>
 		<xsl:variable name="instructionFormat" select="enoodt:get-css-class($source-context)"/>
@@ -652,7 +652,7 @@
 				<xsl:variable name="regexA" select="concat($conditioning-variable-begin,$variables[1],$conditioning-variable-end)"/>				
 				<xsl:variable name="regexB" select="concat('number\(if\s+\(//',$variables[1],'=''''\)\sthen\s+''0''\s+else\s+//',$variables[1],'\)')"/>
 				<xsl:variable name="regexC" select="concat('//',$variables[1])"/>
-				<xsl:variable name="expressionToReplace" select="concat('^',enoodt:get-business-name($source-context,$variables[1]))"/>				
+				<xsl:variable name="expressionToReplace" select="concat('^',enoodt:get-variable-business-name($source-context,$variables[1]))"/>				
 				<xsl:variable name="newFormula" select="replace(replace(replace($formula,
 					$regexA,$expressionToReplace),
 					$regexB,$expressionToReplace),

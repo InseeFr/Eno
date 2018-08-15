@@ -62,6 +62,16 @@
     <xsl:variable name="conditioning-variable-begin" select="$properties//TextConditioningVariable/ddi/Before"/>
     <xsl:variable name="conditioning-variable-end" select="$properties//TextConditioningVariable/ddi/After"/>
 
+	
+	<xsl:function name="enoodt:get-variable-business-name">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="variable"/>
+
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="$variable"/>
+        </xsl:call-template>
+    </xsl:function>
+
     <xd:doc>
         <xd:desc>
             <xd:p>Root template :</xd:p>
