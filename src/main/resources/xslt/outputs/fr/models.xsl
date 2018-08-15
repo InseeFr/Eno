@@ -1955,7 +1955,6 @@
                         </xsl:when>
                         <xsl:when test="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable) != ''">
                             <xsl:call-template name="replaceVariablesInFormula">
-                                <xsl:with-param name="source-context" select="$source-context"/>
                                 <xsl:with-param name="formula" select="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable)"/>
                                 <xsl:with-param name="variables" as="node()">
                                     <Variables>
@@ -1995,7 +1994,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template name="replaceVariablesInFormula">
-        <xsl:param name="source-context" as="item()"/>
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="formula"/>
         <xsl:param name="variables" as="node()"/>
 
