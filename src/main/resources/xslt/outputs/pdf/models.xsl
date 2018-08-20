@@ -16,17 +16,70 @@
 		</xd:desc>
 	</xd:doc>
 	<xsl:param name="properties-file"/>
+	<xsl:param name="parameters-file"/>
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>The properties file is charged as an xml tree.</xd:p>
+			<xd:p>The properties and parameters files are charged as xml trees.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	
 	<xsl:variable name="properties" select="doc($properties-file)"/>
+	<xsl:variable name="parameters" select="doc($parameters-file)"/>
 	
-	<!--<xsl:variable name="style-adress" select="concat('../../../',$properties/Style/Folder,'/',$properties/Style/File)"/>
-	<xsl:include href="{$style-adress]"/>-->
+	<xd:doc>
+		<xd:desc>Variables from propertiers and parameters</xd:desc>
+	</xd:doc>
+	<xsl:variable name="orientation">
+		<xsl:choose>
+			<xsl:when test="$parameters//Format/Orientation != ''">
+				<xsl:value-of select="$parameters//Format/Orientation"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$properties//Format/Orientation"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="roster-defaultsize">
+		<xsl:choose>
+			<xsl:when test="$parameters//Roster/Row/DefaultSize != ''">
+				<xsl:value-of select="$parameters//Roster/Row/DefaultSize"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$properties//Roster/Row/DefaultSize"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="table-defaultsize">
+		<xsl:choose>
+			<xsl:when test="$parameters//Table/Row/DefaultSize != ''">
+				<xsl:value-of select="$parameters//Table/Row/DefaultSize"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$properties//Table/Row/DefaultSize"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="textarea-defaultsize">
+		<xsl:choose>
+			<xsl:when test="$parameters//TextArea/Row/DefaultSize != ''">
+				<xsl:value-of select="$parameters//TextArea/Row/DefaultSize"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$properties//TextArea/Row/DefaultSize"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="images-folder">
+		<xsl:choose>
+			<xsl:when test="$parameters//Images/Folder != ''">
+				<xsl:value-of select="$parameters//Images/Folder"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$properties//Images/Folder"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	
 	<xsl:include href="../../../styles/style.xsl"/>
 	
 	<!-- Remove all the ConsistencyCheck messages from the pdf -->
@@ -44,7 +97,7 @@
 			<fo:layout-master-set>
 				<!-- reference-orientation="90" column-count="2" -->
 				<fo:simple-page-master master-name="A4-portrait" page-height="297mm"
-					page-width="210mm" font-family="arial" font-size="10pt" reference-orientation="{$properties//Format/Orientation}"
+					page-width="210mm" font-family="arial" font-size="10pt" reference-orientation="{$orientation}"
 					font-weight="normal" margin-bottom="5mm">
 					<fo:region-body margin="13mm" column-count="1"/>
 					<fo:region-before region-name="xsl-region-before" extent="25mm" display-align="before" precedence="true"/>
@@ -400,7 +453,7 @@
 					<xsl:otherwise>
 						<fo:external-graphic padding-right="3mm">
 							<xsl:attribute name="src">
-								<xsl:value-of select="concat($properties//Images/Folder,$image)"/>
+								<xsl:value-of select="concat($images-folder,$image)"/>
 							</xsl:attribute>
 						</fo:external-graphic>
 						<fo:inline>
@@ -481,17 +534,17 @@
 					<xsl:value-of select="number(enopdf:get-maximum-lines($source-context))"/>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="number($properties//Roster/Row/DefaultSize) -1"/>
+					<xsl:value-of select="number($roster-defaultsize) -1"/>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
 		<xsl:variable name="maxlines-by-table" as="xs:integer">
 			<xsl:choose>
 				<xsl:when test="self::Table">
-					<xsl:value-of select="number($properties//Table/Row/DefaultSize)"/>
+					<xsl:value-of select="number($table-defaultsize)"/>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:value-of select="number($properties//Roster/Row/DefaultSize)"/>
+					<xsl:value-of select="number($roster-defaultsize)"/>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -675,7 +728,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:for-each select="1 to $properties//TextArea/Row/DefaultSize">
+		<xsl:for-each select="1 to $textarea-defaultsize">
 			<fo:block xsl:use-attribute-sets="Line-drawing">&#160;</fo:block>
 		</xsl:for-each>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -720,8 +773,8 @@
 		<fo:external-graphic>
 			<xsl:attribute name="src">
 				<xsl:choose>
-					<xsl:when test="$properties//Images/Folder != ''">
-						<xsl:value-of select="concat('url(''file:',$properties//Images/Folder,$image-name,''')')"/>
+					<xsl:when test="$images-folder != ''">
+						<xsl:value-of select="concat('url(''file:',$images-folder,$image-name,''')')"/>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="$image-name"/>

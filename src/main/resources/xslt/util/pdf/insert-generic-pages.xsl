@@ -20,7 +20,26 @@
     <xsl:param name="properties-file"/>
     <xsl:variable name="parameters" select="document($parameters-file)"/>
     <xsl:variable name="properties" select="document($properties-file)"/>
-   
+    <xsl:variable name="homepage-folder">
+        <xsl:choose>
+            <xsl:when test="$parameters//HomePage/Folder != ''">
+                <xsl:value-of select="$parameters//HomePage/Folder"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//HomePage/Folder"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="homepage-file">
+        <xsl:choose>
+            <xsl:when test="$parameters//HomePage/File != ''">
+                <xsl:value-of select="$parameters//HomePage/File"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//HomePage/File"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <!--<xsl:variable name="static-pages" select="document('static-pages.fo')"/>-->
     
     <xd:doc>
@@ -59,7 +78,7 @@
     <xsl:template match="fo:root/fo:layout-master-set">
         <xsl:param name="accompanying-mail" tunnel="yes"/>
         
-        <xsl:variable name="static-pages-adress" select="concat('../../../',$properties//HomePage/Folder,'/',$parameters//HomePage/File)"/>
+        <xsl:variable name="static-pages-adress" select="concat('../../../',$homepage-folder,'/',$homepage-file)"/>
         <xsl:variable name="static-pages" select="doc($static-pages-adress)"/>
         
         <xsl:copy>
