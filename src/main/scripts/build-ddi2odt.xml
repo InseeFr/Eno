@@ -59,8 +59,7 @@
             out="${temp.home}/${out-format}/${form-name}/basic-form.tmp"
             style="${xslt.home}/transformations/${in-format}2${out-format}/${in-format}2${out-format}.xsl"
             force="true" classpath="${saxon.jar}">
-            <param name="properties-file"
-                expression="${config-folder}/${in-format}2${out-format}.xml"/>
+            <param name="properties-file" expression="${config-folder}/${in-format}2${out-format}.xml"/>
             <param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
             <param name="labels-folder" expression="${lang-folder}/fr"/>
         </xslt>
@@ -293,7 +292,9 @@
     <target name="cleaning" description="Cleaning DDI">
         <basename file="${file}" property="file-name" suffix=".tmp"/>
         <xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${file-name}-cleaned.tmp"
-            style="${xslt.home}/util/ddi/cleaning.xsl" classpath="${saxon.jar}" force="true"/>
+            style="${xslt.home}/util/ddi/cleaning.xsl" classpath="${saxon.jar}" force="true">
+            <param name="properties-file" expression="${config-folder}/${in-format}2${out-format}.xml"/>
+        </xslt>
     </target>
     
     <!-- Titling -->
