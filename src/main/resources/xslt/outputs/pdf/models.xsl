@@ -401,120 +401,70 @@
 			<xsl:value-of select="enopdf:get-image($source-context)"/>
 		</xsl:variable>
 		
-		<fo:inline wrap-option="no-wrap">
-			<fo:inline font-family="ZapfDingbats" font-size="10pt" padding-before="5mm" padding-after="1mm" wrap-option="inherit">&#x274F;</fo:inline>
-			<xsl:choose>
-				<xsl:when test="$image != ''">
-					<xsl:call-template name="insert-image">
-						<xsl:with-param name="image-name" select="$image"/>
-					</xsl:call-template>
-				</xsl:when>
-				<xsl:otherwise>
-					<fo:inline wrap-option="inherit">
-						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-					</fo:inline>
-				</xsl:otherwise>
-			</xsl:choose>
-		</fo:inline>
-		<!--<fo:list-item>
-			<fo:list-item-label end-indent="label-end()">
-				<fo:block>
-					<fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">&#x274F;</fo:inline>
-				</fo:block>
-			</fo:list-item-label>
-			<fo:list-item-body start-indent="body-start()">
-				<xsl:choose>
-					<xsl:when test="$image != ''">
-						<xsl:call-template name="insert-image">
-							<xsl:with-param name="image-name" select="$image"/>
-						</xsl:call-template>
-					</xsl:when>
-					<xsl:otherwise>
-						<fo:block>
-							<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-						</fo:block>
-					</xsl:otherwise>
-				</xsl:choose>
-			</fo:list-item-body>
-		</fo:list-item>-->
-<!--		<xsl:choose>
-			<xsl:when test="$image != ''">
-				<xsl:choose>
-					<xsl:when test="starts-with($image,'http')">
-						<fo:inline-container>
-							<fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">&#x274F;</fo:inline>
-							<fo:external-graphic padding-right="3mm">
-								<xsl:attribute name="src">
-									<xsl:value-of select="$image"/>
-								</xsl:attribute>
-							</fo:external-graphic>							
-						</fo:inline-container>
-					</xsl:when>
-					<xsl:otherwise>
-						<fo:external-graphic padding-right="3mm">
-							<xsl:attribute name="src">
-								<xsl:value-of select="concat($images-folder,$image)"/>
-							</xsl:attribute>
-						</fo:external-graphic>
-						<fo:inline>
-							<xsl:value-of select="$image"/>
-						</fo:inline>
-					</xsl:otherwise>
-				</xsl:choose>
+		<xsl:choose>
+			<xsl:when test="$no-border = 'no-border'">
+				<fo:inline wrap-option="no-wrap">
+					<fo:inline font-family="ZapfDingbats" font-size="10pt" padding-before="5mm" padding-after="1mm" wrap-option="inherit">&#x274F;</fo:inline>
+					<xsl:choose>
+						<xsl:when test="$image != ''">
+							<xsl:call-template name="insert-image">
+								<xsl:with-param name="image-name" select="$image"/>
+							</xsl:call-template>
+						</xsl:when>
+						<xsl:otherwise>
+							<fo:inline wrap-option="inherit">
+								<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+							</fo:inline>
+						</xsl:otherwise>
+					</xsl:choose>
+				</fo:inline>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:choose>
-					<xsl:when test="$no-border = 'no-border'">
-						<fo:inline-container>
-							<xsl:choose>
-								<xsl:when test="enopdf:get-label($source-context, $languages[1]) != ''">
-									<fo:inline font-family="ZapfDingbats" font-size="10pt" margin-top="3mm">&#x274F;</fo:inline>
-									<fo:inline>
-										<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>										
-									</fo:inline>
-								</xsl:when>
-								<xsl:otherwise>
-									<fo:inline font-family="ZapfDingbats" text-align="center" font-size="10pt" padding-right="4mm" padding-left="6mm" margin-top="3mm">
-										&#x274F;
-									</fo:inline>
-								</xsl:otherwise>
-							</xsl:choose>
-							<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-								<xsl:with-param name="driver" select="." tunnel="yes"/>
-							</xsl:apply-templates>
-						</fo:inline-container>
-					</xsl:when>
-					<xsl:otherwise>
-						<fo:inline-container>
-							<fo:inline font-family="ZapfDingbats" font-size="10pt" padding-right="5mm" margin-top="3mm">&#x274F;</fo:inline>
-							<fo:inline>
-								<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>								
-							</fo:inline>
-						</fo:inline-container>
-						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-							<xsl:with-param name="driver" select="." tunnel="yes"/>
-						</xsl:apply-templates>
-					</xsl:otherwise>
-				</xsl:choose>
+				<fo:list-item>
+					<fo:list-item-label end-indent="label-end()">
+						<fo:block>
+							<fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">&#x274F;</fo:inline>
+						</fo:block>
+					</fo:list-item-label>
+					<fo:list-item-body start-indent="body-start()">
+						<xsl:choose>
+							<xsl:when test="$image != ''">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="$image"/>
+								</xsl:call-template>
+							</xsl:when>
+							<xsl:otherwise>
+								<fo:block>
+									<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+								</fo:block>
+							</xsl:otherwise>
+						</xsl:choose>
+					</fo:list-item-body>
+				</fo:list-item>
 			</xsl:otherwise>
 		</xsl:choose>
--->	
 	</xsl:template>
 
 	<!-- Déclenche tous les xf-select de l'arbre des drivers -->
 	<xsl:template match="main//xf-select1 | main//xf-select" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="no-border" tunnel="yes"/>
 		
 		<xsl:choose>
 			<xsl:when test="enopdf:get-appearance($source-context) = 'minimal'">
 				<fo:block xsl:use-attribute-sets="Line-drawing">&#160;</fo:block>
 			</xsl:when>
+			<xsl:when test="$no-border = 'no-border'">
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>				
+			</xsl:when>
 			<xsl:otherwise>
-				<!--<fo:list-block>-->
+				<fo:list-block>
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
 					</xsl:apply-templates>
-				<!--</fo:list-block>-->
+				</fo:list-block>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -555,7 +505,6 @@
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>
 		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
-			<!--<xsl:attribute name="id" select="enopdf:get-name($source-context)"/>-->
 			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 		<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source-context)" mode="source">
@@ -566,10 +515,17 @@
 		<xsl:for-each select="1 to $table-pages">
 			<xsl:variable name="page-position" select="position()"/>
 			<fo:block page-break-inside="avoid">
-				<xsl:attribute name="id" select="concat(enopdf:get-name($source-context),'-',$page-position)"/>
-				<!--<xsl:if test="$current-match/name()='TableLoop' and $total-lines &gt;= $maxlines-by-table -1">
+				<xsl:choose>
+					<xsl:when test="$total-lines &gt; $maxlines-by-table -1">
+						<xsl:attribute name="id" select="concat(enopdf:get-business-name($source-context),'-',$page-position)"/>		
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:attribute name="id" select="enopdf:get-business-name($source-context)"/>
+					</xsl:otherwise>
+				</xsl:choose>
+				<xsl:if test="$current-match/name()='TableLoop' and $total-lines &gt; $maxlines-by-table -1">
 					<xsl:attribute name="page-break-after" select="'always'"/>
-				</xsl:if>-->
+				</xsl:if>
 				<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
 					text-align="center" margin-top="1mm" display-align="center" space-after="5mm">
 					<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
