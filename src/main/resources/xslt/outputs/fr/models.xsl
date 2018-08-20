@@ -865,7 +865,7 @@
 
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
-        <xf:bind id="{$name}-bind" name="{$name}" nodeset="{$name}-Container/{$name}">
+        <xf:bind id="{$business-name}-Container-bind" name="{$business-name}-Container" nodeset="{$name}-Container/{$name}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
