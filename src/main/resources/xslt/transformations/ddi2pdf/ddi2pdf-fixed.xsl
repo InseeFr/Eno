@@ -155,7 +155,8 @@
     </xsl:template>
     
     <xsl:template match="xhtml:i" mode="enopdf:format-label">
-        <xsl:element name="fo:inline">          
+        <xsl:element name="fo:inline">
+            <xsl:attribute name="font-style" select="'italic'"/>
             <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
         </xsl:element>
     </xsl:template>
