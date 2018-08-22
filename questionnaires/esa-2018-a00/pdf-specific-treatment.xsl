@@ -44,21 +44,21 @@
     <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[1]" mode="roster">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="width" select="'170mm'"/>
+            <xsl:attribute name="min-width" select="'170mm'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
         </xsl:copy>
     </xsl:template>
     <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[2]" mode="roster">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="width" select="'24mm'"/>
+            <xsl:attribute name="min-width" select="'24mm'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
         </xsl:copy>
     </xsl:template>
     <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[3]" mode="roster">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="width" select="'85mm'"/>
+            <xsl:attribute name="min-width" select="'85mm'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
         </xsl:copy>
     </xsl:template>

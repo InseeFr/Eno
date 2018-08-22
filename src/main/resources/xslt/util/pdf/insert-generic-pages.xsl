@@ -40,7 +40,8 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <!--<xsl:variable name="static-pages" select="document('static-pages.fo')"/>-->
+    <xsl:variable name="static-pages-adress" select="concat('../../../',$homepage-folder,'/',$homepage-file)"/>
+    <xsl:variable name="static-pages" select="doc($static-pages-adress)"/>
     
     <xd:doc>
         <xd:desc>
@@ -78,9 +79,6 @@
     <xsl:template match="fo:root/fo:layout-master-set">
         <xsl:param name="accompanying-mail" tunnel="yes"/>
         
-        <xsl:variable name="static-pages-adress" select="concat('../../../',$homepage-folder,'/',$homepage-file)"/>
-        <xsl:variable name="static-pages" select="doc($static-pages-adress)"/>
-        
         <xsl:copy>
             <xsl:copy-of select="$static-pages//fo:page-sequence-master[@master-name=$accompanying-mail]"/>
             <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name=concat($accompanying-mail,'-recto')]"/>
@@ -95,6 +93,13 @@
 
     <xsl:template match="text()" mode="keep-cdata" priority="2">
         <xsl:value-of select="." disable-output-escaping="yes"/>
+    </xsl:template>
+    
+    <xsl:template match="fo:block[@id='TheVeryLastPage']">
+        <xsl:if test="$parameters//ColtraneQuestions/*[name()='TypeRepondantLabel' or name()='Fin']">
+            <xsl:copy-of select="$static-pages//fo:page-sequence[@master-reference='questions-fin']/fo:flow[@flow-name='xsl-region-body']/*"/>
+        </xsl:if>
+        <xsl:copy-of select="."/>
     </xsl:template>
     
 </xsl:stylesheet>
