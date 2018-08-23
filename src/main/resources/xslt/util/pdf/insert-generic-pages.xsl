@@ -42,7 +42,17 @@
     </xsl:variable>
     <xsl:variable name="static-pages-adress" select="concat('../../../',$homepage-folder,'/',$homepage-file)"/>
     <xsl:variable name="static-pages" select="doc($static-pages-adress)"/>
-    
+    <xsl:variable name="orientation">
+        <xsl:choose>
+            <xsl:when test="$parameters//Format/Orientation != ''">
+                <xsl:value-of select="$parameters//Format/Orientation"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//Format/Orientation"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
     <xd:doc>
         <xd:desc>
             <xd:p>Root template.</xd:p>
@@ -79,16 +89,26 @@
     <xsl:template match="fo:root/fo:layout-master-set">
         <xsl:param name="accompanying-mail" tunnel="yes"/>
         
+        <xsl:variable name="cover-name">
+            <xsl:choose>
+                <xsl:when test="$orientation = '0'">
+                    <xsl:value-of select="'Cover-A4'"/>        
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="concat('Cover-A4-',$orientation)"/>
+                </xsl:otherwise>
+            </xsl:choose>            
+        </xsl:variable>
+        
         <xsl:copy>
             <xsl:copy-of select="$static-pages//fo:page-sequence-master[@master-name=$accompanying-mail]"/>
             <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name=concat($accompanying-mail,'-recto')]"/>
             <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name=concat($accompanying-mail,'-verso')]"/>
-            <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name='Cover-A4']"/>
+            <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name=$cover-name]"/>
             <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
-        
         <xsl:apply-templates select="$static-pages//fo:page-sequence[@master-reference=$accompanying-mail]" mode="keep-cdata"/>
-        <xsl:apply-templates select="$static-pages//fo:page-sequence[@master-reference='Cover-A4']" mode="keep-cdata"/>
+        <xsl:apply-templates select="$static-pages//fo:page-sequence[@master-reference=$cover-name]" mode="keep-cdata"/>
     </xsl:template>
 
     <xsl:template match="text()" mode="keep-cdata" priority="2">
