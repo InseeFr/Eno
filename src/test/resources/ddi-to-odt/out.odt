@@ -1141,8 +1141,7 @@
                <text:p text:style-name="Format">Car 255</text:p>
             </text:section>
          </text:section>
-         <text:section text:name="CalculatedVariable-jbcggtca-GOP">
-            <text:p/>
+         <text:section text:name="CalculatedVariable-SUM_EXPENSES">
             <text:p text:style-name="CalculatedVariableTitle">Calcul de la variable SUM_EXPENSES Label : [SUM_EXPENSES]</text:p>
             <text:p text:style-name="CalculatedVariableContent">Formule de calcul : SUM_EXPENSES = ^PERCENTAGE_EXPENSES11 + ^PERCENTAGE_EXPENSES21 + ^PERCENTAGE_EXPENSES31 +
 				^PERCENTAGE_EXPENSES41 + ^PERCENTAGE_EXPENSES51 + ^PERCENTAGE_EXPENSES61 +
