@@ -67,4 +67,7 @@ public class PoguesXML2DDIGenerator implements Generator {
 		return formNameFolder;
 	}
 
+	public String in2out(){
+		return "xml-pogues2ddi";
+	}
 }

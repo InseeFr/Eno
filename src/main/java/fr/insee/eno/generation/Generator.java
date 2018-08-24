@@ -20,5 +20,12 @@ public interface Generator {
 	 * @throws Exception Generic exception
 	 */
 	public File generate(File finalInput, String surveyName) throws Exception;
+	
+	/**
+	 * This method return in2out implementation 
+	 * @return the in2out implementation
+	 * @throws Exception Generic exception
+	 */
+	public String in2out() throws Exception;
 
 }

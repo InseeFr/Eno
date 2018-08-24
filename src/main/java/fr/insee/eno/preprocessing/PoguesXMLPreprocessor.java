@@ -21,11 +21,11 @@ public class PoguesXMLPreprocessor implements Preprocessor {
 
 	// FIXME Inject !
 	private static XslTransformation saxonService = new XslTransformation();
-	
+
 	@Override
-	public File process(File inputFile, File parametersFile, String surveyName) throws Exception {
+	public File process(File inputFile, File parametersFile, String surveyName, String in2out) throws Exception {
 		logger.info("PoguesXMLPreprocessing Target : START");
-		
+
 		String outputPreprocessSuppGoto = null;
 
 		InputStream parametersFileStream;
@@ -33,49 +33,48 @@ public class PoguesXMLPreprocessor implements Preprocessor {
 		// Else : using the provided one
 		if (parametersFile == null) {
 			logger.debug("Using default parameters");
-			parametersFileStream = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);			
+			parametersFileStream = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
 		} else {
 			logger.debug("Using provided parameters");
 			parametersFileStream = FileUtils.openInputStream(parametersFile);
 		}
-		
-		outputPreprocessSuppGoto = FilenameUtils.removeExtension(inputFile.getAbsolutePath()) + Constants.TEMP_EXTENSION;
+
+		outputPreprocessSuppGoto = FilenameUtils.removeExtension(inputFile.getAbsolutePath())
+				+ Constants.TEMP_EXTENSION;
 
 		logger.debug("Supp GOTO : -Input : " + inputFile + " -Output : " + outputPreprocessSuppGoto + " -Stylesheet : "
-				+ Constants.UTIL_POGUES_XML_SUPP_GOTO_XSL + " -Parameters : " + (parametersFile == null ? "Default parameters": "Provided parameters"));
-		
-		InputStream isInputFile =  FileUtils.openInputStream(inputFile);
-		InputStream isUTIL_POGUES_XML_SUPP_GOTO_XSL = Constants.getInputStreamFromPath(Constants.UTIL_POGUES_XML_SUPP_GOTO_XSL);
+				+ Constants.UTIL_POGUES_XML_SUPP_GOTO_XSL + " -Parameters : "
+				+ (parametersFile == null ? "Default parameters" : "Provided parameters"));
+
+		InputStream isInputFile = FileUtils.openInputStream(inputFile);
+		InputStream isUTIL_POGUES_XML_SUPP_GOTO_XSL = Constants
+				.getInputStreamFromPath(Constants.UTIL_POGUES_XML_SUPP_GOTO_XSL);
 		OutputStream osSUPP_GOTO = FileUtils.openOutputStream(new File(outputPreprocessSuppGoto));
-		saxonService.transform(
-				isInputFile,
-				isUTIL_POGUES_XML_SUPP_GOTO_XSL,
-				osSUPP_GOTO);
+		saxonService.transform(isInputFile, isUTIL_POGUES_XML_SUPP_GOTO_XSL, osSUPP_GOTO);
 		isInputFile.close();
 		isUTIL_POGUES_XML_SUPP_GOTO_XSL.close();
 		osSUPP_GOTO.close();
 		parametersFileStream.close();
-		
+
 		String outputPreprocessMergeITE = null;
-		
-		outputPreprocessMergeITE = FilenameUtils.removeExtension(inputFile.getAbsolutePath()) + Constants.FINAL_EXTENSION;
-		
-		logger.debug("MERGE_ITE : -Input : " + outputPreprocessSuppGoto + " -Output : " + outputPreprocessMergeITE + " -Stylesheet : "
-				+ Constants.UTIL_POGUES_XML_MERGE_ITE_XSL + " -Parameters : " + (parametersFile == null ? "Default parameters": "Provided parameters"));
-		
-		InputStream isSuppGoto =  FileUtils.openInputStream(new File(outputPreprocessSuppGoto));
-		InputStream isUTIL_POGUES_XML_MERGE_ITE_XSL = Constants.getInputStreamFromPath(Constants.UTIL_POGUES_XML_MERGE_ITE_XSL);
+
+		outputPreprocessMergeITE = FilenameUtils.removeExtension(inputFile.getAbsolutePath())
+				+ Constants.FINAL_EXTENSION;
+
+		logger.debug("MERGE_ITE : -Input : " + outputPreprocessSuppGoto + " -Output : " + outputPreprocessMergeITE
+				+ " -Stylesheet : " + Constants.UTIL_POGUES_XML_MERGE_ITE_XSL + " -Parameters : "
+				+ (parametersFile == null ? "Default parameters" : "Provided parameters"));
+
+		InputStream isSuppGoto = FileUtils.openInputStream(new File(outputPreprocessSuppGoto));
+		InputStream isUTIL_POGUES_XML_MERGE_ITE_XSL = Constants
+				.getInputStreamFromPath(Constants.UTIL_POGUES_XML_MERGE_ITE_XSL);
 		OutputStream osMergeITE = FileUtils.openOutputStream(new File(outputPreprocessMergeITE));
-		saxonService.transform(
-				isSuppGoto,
-				isUTIL_POGUES_XML_MERGE_ITE_XSL,
-				osMergeITE);
+		saxonService.transform(isSuppGoto, isUTIL_POGUES_XML_MERGE_ITE_XSL, osMergeITE);
 		isSuppGoto.close();
 		isUTIL_POGUES_XML_MERGE_ITE_XSL.close();
 		osMergeITE.close();
 		parametersFileStream.close();
-		
-		
+
 		logger.debug("PoguesXMLPreprocessing : END");
 		return new File(outputPreprocessMergeITE);
 	}
