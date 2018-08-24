@@ -322,17 +322,12 @@
 							</fo:block>
 						</xsl:when>
 						<xsl:otherwise>
-							<fo:block xsl:use-attribute-sets="general-style">
-								<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
-									<xsl:value-of select="'_'"/>
-								</xsl:for-each>
-							</fo:block>
-							<!--<fo:block xsl:use-attribute-sets="Line-drawing">
+							<fo:block xsl:use-attribute-sets="Line-drawing">
 								<xsl:if test="enopdf:get-length($source-context)">
 									<xsl:attribute name="min-width"><xsl:value-of select="(number(enopdf:get-length($source-context)))"/>mm</xsl:attribute>
 								</xsl:if>
 								&#160;
-							</fo:block>-->
+							</fo:block>
 						</xsl:otherwise>
 					</xsl:choose>
 				</fo:block>
