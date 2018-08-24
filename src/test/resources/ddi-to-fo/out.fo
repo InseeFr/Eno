@@ -7567,23 +7567,23 @@
             <fo:block width="100%"
                       height="10mm"
                       position="relative"
-                      border-bottom="1px dotted black"> </fo:block>
+                      border-bottom="1px dashed black"> </fo:block>
             <fo:block width="100%"
                       height="10mm"
                       position="relative"
-                      border-bottom="1px dotted black"> </fo:block>
+                      border-bottom="1px dashed black"> </fo:block>
             <fo:block width="100%"
                       height="10mm"
                       position="relative"
-                      border-bottom="1px dotted black"> </fo:block>
+                      border-bottom="1px dashed black"> </fo:block>
             <fo:block width="100%"
                       height="10mm"
                       position="relative"
-                      border-bottom="1px dotted black"> </fo:block>
+                      border-bottom="1px dashed black"> </fo:block>
             <fo:block width="100%"
                       height="10mm"
                       position="relative"
-                      border-bottom="1px dotted black"> </fo:block>
+                      border-bottom="1px dashed black"> </fo:block>
          </fo:block>
          <fo:block id="TheVeryLastPage"/>
       </fo:flow>
