@@ -166,7 +166,7 @@
                                 <xsl:attribute name="id" select="$ddi-label/@id"/>
                             </xsl:if>
                             <xsl:copy-of select="$original-label"/>
-                            <xsl:for-each select="$tooltip[not(@id) or not(concat('#',descendant-or-self::*/@id) = $ddi-label//xhtml:a/@href)]">
+                            <xsl:for-each select="$tooltip[not(descendant-or-self::*/@id) or not(concat('#',descendant-or-self::*/@id) = $ddi-label//xhtml:a/@href)]">
                                 <xsl:call-template name="tooltip-xforms">
                                     <xsl:with-param name="ddi-tooltip" select="."/>
                                     <xsl:with-param name="language" select="$language"/>
