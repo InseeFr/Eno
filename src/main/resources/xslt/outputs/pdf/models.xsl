@@ -123,10 +123,8 @@
 								</barcode:code128>
 							</barcode:barcode>
 						</fo:instream-foreign-object>
-					</fo:block>
-					<fo:block>
-						<fo:block-container reference-orientation="90" top="125mm" left="202.5mm" absolute-position="absolute">
-							<fo:block position="absolute" text-align="left" font-size="8pt">Code Bar - <fo:page-number/></fo:block>
+						<fo:block-container reference-orientation="90" margin-left="5mm">
+							<fo:block text-align="left" font-size="8pt">Code Bar - <fo:page-number/></fo:block>
 						</fo:block-container>
 					</fo:block>
 					<!-- Je n'ai pas trouvé quel contenu mettre... -->
@@ -234,11 +232,11 @@
 			</xsl:when>
 			<xsl:when test="enopdf:get-format($source-context) = 'filter-alternative-text'">
 				<fo:block width="100%" page-break-inside="avoid" keep-with-previous="always">
-					<fo:inline-container width="10%">
+					<fo:inline-container width="10%" vertical-align="bottom" text-align="right">
 						<fo:block-container>
 							<fo:block>
 								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'filter_arrow_25.png'"/>
+									<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
 								</xsl:call-template>
 							</fo:block>
 						</fo:block-container>
@@ -324,12 +322,17 @@
 							</fo:block>
 						</xsl:when>
 						<xsl:otherwise>
-							<fo:block xsl:use-attribute-sets="Line-drawing">
+							<fo:block xsl:use-attribute-sets="general-style">
+								<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
+									<xsl:value-of select="'_'"/>
+								</xsl:for-each>
+							</fo:block>
+							<!--<fo:block xsl:use-attribute-sets="Line-drawing">
 								<xsl:if test="enopdf:get-length($source-context)">
 									<xsl:attribute name="min-width"><xsl:value-of select="(number(enopdf:get-length($source-context)))"/>mm</xsl:attribute>
 								</xsl:if>
 								&#160;
-							</fo:block>
+							</fo:block>-->
 						</xsl:otherwise>
 					</xsl:choose>
 				</fo:block>
@@ -356,7 +359,7 @@
 						<xsl:for-each select="1 to xs:integer(number(enopdf:get-length($source-context)))">
 							<xsl:choose>
 								<xsl:when test="$separator-position = .">
-									<fo:inline>,</fo:inline>
+									<fo:inline> , </fo:inline>
 								</xsl:when>
 								<xsl:otherwise>
 									<xsl:call-template name="insert-image">
@@ -382,7 +385,7 @@
 							<xsl:with-param name="image-name" select="'mask_number.png'"/>
 						</xsl:call-template>
 					</xsl:for-each>
-					(<xsl:value-of select="$field"/>)
+					(<xsl:value-of select="upper-case(replace($field,'/',''))"/>)
 				</fo:block>
 			</xsl:when>
 		</xsl:choose>
@@ -403,8 +406,14 @@
 		
 		<xsl:choose>
 			<xsl:when test="$no-border = 'no-border'">
-				<fo:inline wrap-option="no-wrap">
-					<fo:inline font-family="ZapfDingbats" font-size="10pt" padding-before="5mm" padding-after="1mm" wrap-option="inherit">&#x274F;</fo:inline>
+				<fo:inline>
+					<!--<fo:inline font-family="ZapfDingbats" font-size="10pt" padding-before="5mm" padding-after="1mm" wrap-option="inherit">&#x274F;</fo:inline>-->
+					<!--<fo:inline font-family="Arial" font-size="15pt" margin-left="5mm" margin-right="1mm" wrap-option="inherit" margin-bottom="10mm">&#9633;</fo:inline>-->
+					<fo:inline>
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'check_case.png'"/>
+						</xsl:call-template>
+					</fo:inline>
 					<xsl:choose>
 						<xsl:when test="$image != ''">
 							<xsl:call-template name="insert-image">
@@ -412,7 +421,7 @@
 							</xsl:call-template>
 						</xsl:when>
 						<xsl:otherwise>
-							<fo:inline wrap-option="inherit">
+							<fo:inline padding="1mm" text-align="left">
 								<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 							</fo:inline>
 						</xsl:otherwise>
@@ -422,8 +431,12 @@
 			<xsl:otherwise>
 				<fo:list-item>
 					<fo:list-item-label end-indent="label-end()">
-						<fo:block>
-							<fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">&#x274F;</fo:inline>
+						<fo:block text-align="right">
+							<!--<fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">&#x274F;</fo:inline>-->
+							<!--<fo:inline font-family="Arial" font-size="15pt" padding="4mm" baseline-shift="super">&#9633;</fo:inline>-->
+							<xsl:call-template name="insert-image">
+								<xsl:with-param name="image-name" select="'check_case.png'"/>
+							</xsl:call-template>
 						</fo:block>
 					</fo:list-item-label>
 					<fo:list-item-body start-indent="body-start()">

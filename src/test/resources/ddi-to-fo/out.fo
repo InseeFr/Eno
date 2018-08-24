@@ -285,13 +285,8 @@
                   </barcode:code128>
                </barcode:barcode>
             </fo:instream-foreign-object>
-         </fo:block>
-         <fo:block>
-            <fo:block-container reference-orientation="90"
-                                top="125mm"
-                                left="202.5mm"
-                                absolute-position="absolute">
-               <fo:block position="absolute" text-align="left" font-size="8pt">Code Bar - <fo:page-number/>
+            <fo:block-container reference-orientation="90" margin-left="5mm">
+               <fo:block text-align="left" font-size="8pt">Code Bar - <fo:page-number/>
                </fo:block>
             </fo:block-container>
          </fo:block>
@@ -368,8 +363,8 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -396,13 +391,10 @@
                    keep-with-next="always">➡ 3. Who is the producer?</fo:block>
          <fo:block id="j3343qhx" page-break-inside="avoid">
             <fo:block>
-               <fo:block width="100%"
-                         height="10mm"
-                         position="relative"
-                         border-bottom="1px dotted black"
-                         min-width="30mm">
-								 
-							</fo:block>
+               <fo:block color="black"
+                         font-weight="normal"
+                         font-size="10pt"
+                         padding="1mm">______________________________</fo:block>
             </fo:block>
          </fo:block>
          <fo:block color="black"
@@ -452,7 +444,7 @@
                <fo:external-graphic src="mask_number.png"/>
                <fo:external-graphic src="mask_number.png"/>
                <fo:external-graphic src="mask_number.png"/>
-					(jj/mm/aaaa)
+					(JJMMAAAA)
 				</fo:block>
          </fo:block>
          <fo:block color="black"
@@ -472,7 +464,7 @@
                          padding-top="0mm">
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline>,</fo:inline>
+                  <fo:inline> , </fo:inline>
                   <fo:external-graphic src="mask_number.png"/>
                   <fo:inline/>
                </fo:block>
@@ -511,8 +503,8 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -521,8 +513,8 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -531,8 +523,8 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -558,8 +550,8 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -568,8 +560,8 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -578,8 +570,8 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -588,8 +580,8 @@
                </fo:list-item>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -640,8 +632,8 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -652,8 +644,8 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -664,8 +656,8 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -676,8 +668,8 @@
             <fo:list-block>
                <fo:list-item>
                   <fo:list-item-label end-indent="label-end()">
-                     <fo:block>
-                        <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                     <fo:block text-align="right">
+                        <fo:external-graphic src="check_case.png"/>
                      </fo:block>
                   </fo:list-item-label>
                   <fo:list-item-body start-indent="body-start()">
@@ -732,21 +724,17 @@
                                     padding="0mm"
                                     border="0mm">
                         <fo:block>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Yes</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Yes</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">No</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">No</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -771,21 +759,17 @@
                                     padding="0mm"
                                     border="0mm">
                         <fo:block>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Yes</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Yes</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">No</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">No</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -810,21 +794,17 @@
                                     padding="0mm"
                                     border="0mm">
                         <fo:block>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Yes</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Yes</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">No</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">No</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -849,21 +829,17 @@
                                     padding="0mm"
                                     border="0mm">
                         <fo:block>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Yes</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Yes</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">No</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">No</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -1038,45 +1014,35 @@
                                     padding="0mm"
                                     border="0mm">
                         <fo:block>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Albuquerque</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Albuquerque</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Springfield</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Springfield</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Portland</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Portland</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Shelbyville</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Shelbyville</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Dagstuhl</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Dagstuhl</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -1101,45 +1067,35 @@
                                     padding="0mm"
                                     border="0mm">
                         <fo:block>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Albuquerque</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Albuquerque</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Springfield</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Springfield</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Portland</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Portland</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Shelbyville</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Shelbyville</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Dagstuhl</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Dagstuhl</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -1164,45 +1120,35 @@
                                     padding="0mm"
                                     border="0mm">
                         <fo:block>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Albuquerque</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Albuquerque</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Springfield</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Springfield</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Portland</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Portland</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Shelbyville</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Shelbyville</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Dagstuhl</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Dagstuhl</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -1227,45 +1173,35 @@
                                     padding="0mm"
                                     border="0mm">
                         <fo:block>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Albuquerque</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Albuquerque</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Springfield</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Springfield</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Portland</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Portland</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Shelbyville</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Shelbyville</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Dagstuhl</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Dagstuhl</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -1290,45 +1226,35 @@
                                     padding="0mm"
                                     border="0mm">
                         <fo:block>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Albuquerque</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Albuquerque</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Springfield</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Springfield</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Portland</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Portland</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Shelbyville</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Shelbyville</fo:inline>
                            </fo:inline>
-                           <fo:inline wrap-option="no-wrap">
-                              <fo:inline font-family="ZapfDingbats"
-                                         font-size="10pt"
-                                         padding-before="5mm"
-                                         padding-after="1mm"
-                                         wrap-option="inherit">❏</fo:inline>
-                              <fo:inline wrap-option="inherit">Dagstuhl</fo:inline>
+                           <fo:inline>
+                              <fo:inline>
+                                 <fo:external-graphic src="check_case.png"/>
+                              </fo:inline>
+                              <fo:inline padding="1mm" text-align="left">Dagstuhl</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -1437,7 +1363,7 @@
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline>,</fo:inline>
+                                 <fo:inline> , </fo:inline>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
@@ -1472,7 +1398,7 @@
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline>,</fo:inline>
+                                 <fo:inline> , </fo:inline>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
@@ -1518,7 +1444,7 @@
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline>,</fo:inline>
+                                 <fo:inline> , </fo:inline>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
@@ -1553,7 +1479,7 @@
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline>,</fo:inline>
+                                 <fo:inline> , </fo:inline>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
@@ -1588,7 +1514,7 @@
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline>,</fo:inline>
+                                 <fo:inline> , </fo:inline>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
@@ -1634,7 +1560,7 @@
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline>,</fo:inline>
+                                 <fo:inline> , </fo:inline>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
@@ -1669,7 +1595,7 @@
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:external-graphic src="mask_number.png"/>
-                                 <fo:inline>,</fo:inline>
+                                 <fo:inline> , </fo:inline>
                                  <fo:external-graphic src="mask_number.png"/>
                                  <fo:inline>%</fo:inline>
                               </fo:block>
@@ -2095,8 +2021,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2114,8 +2040,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2133,8 +2059,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2152,8 +2078,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2171,8 +2097,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2190,8 +2116,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2222,8 +2148,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2241,8 +2167,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2260,8 +2186,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2279,8 +2205,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2298,8 +2224,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2317,8 +2243,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2349,8 +2275,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2368,8 +2294,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2387,8 +2313,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2406,8 +2332,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2425,8 +2351,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2444,8 +2370,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2476,8 +2402,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2495,8 +2421,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2514,8 +2440,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2533,8 +2459,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2552,8 +2478,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -2571,8 +2497,8 @@
                            <fo:list-block>
                               <fo:list-item>
                                  <fo:list-item-label end-indent="label-end()">
-                                    <fo:block>
-                                       <fo:inline font-family="ZapfDingbats" font-size="10pt" padding="5mm">❏</fo:inline>
+                                    <fo:block text-align="right">
+                                       <fo:external-graphic src="check_case.png"/>
                                     </fo:block>
                                  </fo:list-item-label>
                                  <fo:list-item-body start-indent="body-start()">
@@ -7562,6 +7488,79 @@
                    page-break-inside="avoid"
                    keep-with-next="always">➡ 1. Do you have any comment about the survey?</fo:block>
          <fo:block id="j6z0z3us" page-break-inside="avoid">
+            <fo:block width="100%"
+                      height="10mm"
+                      position="relative"
+                      border-bottom="1px dotted black"> </fo:block>
+            <fo:block width="100%"
+                      height="10mm"
+                      position="relative"
+                      border-bottom="1px dotted black"> </fo:block>
+            <fo:block width="100%"
+                      height="10mm"
+                      position="relative"
+                      border-bottom="1px dotted black"> </fo:block>
+            <fo:block width="100%"
+                      height="10mm"
+                      position="relative"
+                      border-bottom="1px dotted black"> </fo:block>
+            <fo:block width="100%"
+                      height="10mm"
+                      position="relative"
+                      border-bottom="1px dotted black"> </fo:block>
+         </fo:block>
+         <fo:block background-color="#666666"
+                   color="white"
+                   font-weight="bold"
+                   margin-bottom="9pt"
+                   margin-top="3pt"
+                   font-size="14pt"
+                   border-color="black"
+                   border-style="solid"
+                   page-break-inside="avoid"
+                   keep-with-next="always">Temps de réponse et commentaires</fo:block>
+         <fo:block color="black"
+                   font-weight="bold"
+                   font-size="10pt"
+                   margin-top="9pt"
+                   margin-bottom="3pt"
+                   page-break-inside="avoid"
+                   keep-with-next="always">➡ <fo:inline font-weight="bold">Combien de temps avez-vous mis en tout pour répondre à cette enquête
+                (recherche des données + remplissage du questionnaire) ?</fo:inline>
+         </fo:block>
+         <fo:block id="HEURE_MIN_REMPL" page-break-inside="avoid">
+            <fo:inline color="black"
+                       font-size="10pt"
+                       font-weight="normal"
+                       padding="1mm">
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:inline color="black"
+                          font-size="10pt"
+                          font-weight="normal"
+                          padding="1mm">heures</fo:inline>
+            </fo:inline>
+            <fo:inline color="black"
+                       font-size="10pt"
+                       font-weight="normal"
+                       padding="1mm">
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:inline color="black"
+                          font-size="10pt"
+                          font-weight="normal"
+                          padding="1mm">minutes</fo:inline>
+            </fo:inline>
+         </fo:block>
+         <fo:block color="black"
+                   font-weight="bold"
+                   font-size="10pt"
+                   margin-top="9pt"
+                   margin-bottom="3pt"
+                   page-break-inside="avoid"
+                   keep-with-next="always">➡ <fo:inline font-weight="bold">Commentaires et remarques éventuelles concernant l'enquête :</fo:inline>
+         </fo:block>
+         <fo:block id="COMMENT_QE" page-break-inside="avoid">
             <fo:block width="100%"
                       height="10mm"
                       position="relative"
