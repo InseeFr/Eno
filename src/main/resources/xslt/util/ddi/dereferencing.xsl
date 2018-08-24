@@ -19,9 +19,9 @@
     <xsl:param name="output-folder"/>
 
     <!-- The output file generated will be xml type -->
-    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    <xsl:output method="xml" indent="no" encoding="UTF-8"/>
 
-    <xsl:strip-space elements="*"/>
+    <!--<xsl:strip-space elements="*"/>-->
 
     <xd:doc>
         <xd:desc>
