@@ -151,6 +151,11 @@
                                       fo:padding="0cm"
                                       fo:border="0.05pt solid #000000"/>
       </style:style>
+      <style:style style:name="Table.Cell.added" style:family="table-cell">
+         <style:table-cell-properties fo:background-color="#9ef7ac"
+                                      fo:padding="0cm"
+                                      fo:border="0.05pt solid #000000"/>
+      </style:style>
       <style:style style:name="deleted"
                    style:family="text"
                    style:default-outline-level="2">
