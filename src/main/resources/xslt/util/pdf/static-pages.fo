@@ -877,7 +877,7 @@
                             scaling="uniform"/>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="50mm" width="75mm"
+                <fo:block-container absolute-position="absolute" left="15mm" top="40mm" width="75mm"
                     height="15mm" overflow="hidden">
                     <fo:block margin-top="3mm" margin-left="1mm">
                         <fo:inline-container>
@@ -940,14 +940,13 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="135mm"
-                    width="135mm" height="50mm" padding="2mm" border="solid black 1pt">
+                    width="130mm" height="50mm" padding="2mm" border="solid black 1pt">
                     <fo:block font-weight="bold">Commentaires et remarques :</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="110mm" top="120mm"
                     width="170mm" height="10mm">
                     <fo:block font-weight="bold" font-size="12pt">Merci de nous retourner ce
-                        questionnaire au plus tard le : ${BddDateEcheance}, à l’adresse
-                        suivante :</fo:block>
+                        questionnaire au plus tard le : ${BddDateEcheance}</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="150mm" top="135mm"
                     width="130mm" height="50mm" padding="2mm" padding-top="10mm"
@@ -973,7 +972,7 @@
                         auprès de
                         ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="100mm" top="195mm"
+                <!--<fo:block-container absolute-position="absolute" left="100mm" top="195mm"
                     width="97mm" height="10mm" background-color="#EFEFFB" border="solid black">
                     <fo:block text-align="left">
                         <fo:block>
@@ -987,8 +986,8 @@
                             </fo:instream-foreign-object>
                         </fo:block>
                     </fo:block>
-                </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="105mm" top="215mm"
+                </fo:block-container>-->
+                <!--<fo:block-container absolute-position="absolute" left="105mm" top="215mm"
                     width="107mm" height="40mm" overflow="hidden">
                     <fo:block margin="3mm">
                         <fo:inline-container>
@@ -1001,7 +1000,7 @@
                             <fo:block>${Adresse_retour_L7}</fo:block>
                         </fo:inline-container>
                     </fo:block>
-                </fo:block-container>
+                </fo:block-container>-->
             </fo:block>
         </fo:flow>
     </fo:page-sequence>
