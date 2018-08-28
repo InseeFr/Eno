@@ -739,7 +739,7 @@
         <xsl:param name="language" tunnel="yes"/>
         <xsl:variable name="variable-list" as="xs:string *">
             <xsl:call-template name="enoddi:variables-from-label">
-                <xsl:with-param name="label" select="enoddi:get-label(.,$language)"/>
+                <xsl:with-param name="label" select="eno:serialize(enoddi:get-label(.,$language))"/>
             </xsl:call-template>
         </xsl:variable>
         <xsl:if test="$variable-list != enoddi:get-label(.,$language)">
@@ -819,7 +819,7 @@
         <xsl:variable name="item-label-conditioning-variables-with-doubles" as="xs:string*">
             <xsl:for-each select="descendant::l:Category/r:Label/r:Content">
                 <xsl:call-template name="enoddi:variables-from-label">
-                    <xsl:with-param name="label" select="."/>
+                    <xsl:with-param name="label" select="eno:serialize(.)"/>
                 </xsl:call-template>
             </xsl:for-each>            
         </xsl:variable>
