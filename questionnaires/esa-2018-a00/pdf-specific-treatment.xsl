@@ -10,6 +10,37 @@
     
     <xsl:variable name="lines-per-page" select="9" as="xs:integer"/>
     
+    <xsl:variable name="dynamic_arrays" as="node()">
+        <Arrays>
+            <Array nbcol="4">vacT</Array>
+            <Array nbcol="4">vacHT</Array>
+            <Array nbcol="4">BTPIMO_vacB</Array>
+            <Array nbcol="4">BTPIMO_vacM</Array>
+            <Array nbcol="4">BTPIMO_vacS</Array>
+            <Array nbcol="3">CA_ProdB1ST1</Array>
+            <Array nbcol="3">CA_ProdM2ST1</Array>
+            <Array nbcol="3">CA_ProdM2ST2</Array>
+            <Array nbcol="3">CA_ProdM3ST1</Array>
+            <Array nbcol="3">CA_ProdM3ST2</Array>
+            <Array nbcol="3">CA_ProdM3ST3</Array>
+            <Array nbcol="3">CA_ProdM4ST1</Array>
+            <Array nbcol="3">CA_ProdM4ST2</Array>
+            <Array nbcol="3">CA_ProdM4ST3</Array>
+            <Array nbcol="3">CA_ProdM4ST4</Array>
+            <Array nbcol="3">CA_ProdS1ST1</Array>
+            <Array nbcol="3">DPE_SVC</Array>
+            <Array nbcol="3">V_PROD_IMMO</Array>
+            <Array nbcol="3">vacB</Array>
+            <Array nbcol="3">vacM</Array>
+            <Array nbcol="3">vacS</Array>
+            <Array nbcol="3">vacU</Array>
+            <Array nbcol="3">VFV1</Array>
+            <Array nbcol="3">VFV1_MB</Array>
+            <Array nbcol="3">VFV2</Array>
+            <Array nbcol="3">VFV2_MB</Array>
+        </Arrays>
+    </xsl:variable>
+    
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
             <xd:p>Template de racine, on applique les templates de tous les enfants</xd:p>
@@ -31,34 +62,80 @@
         </xsl:copy>
     </xsl:template>
     
+    <xsl:template match="fo:external-graphic/@src[contains(.,'mask_number.png')]">
+        <xsl:attribute name="src">
+            <xsl:value-of select="replace(.,'mask_number.png','mask_number_esa.png')"/>
+        </xsl:attribute>
+    </xsl:template>
+
     <xsl:template match="fo:block[contains(@id,'-')]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:apply-templates select="node()" mode="roster">
-                <xsl:with-param name="roster-name" select="substring-before(@id,'-')" tunnel="yes"/>
-                <xsl:with-param name="page" select="substring-after(@id,'-')" tunnel="yes"/>
-            </xsl:apply-templates>
-        </xsl:copy>
+        <xsl:variable name="roster-name" select="substring-before(@id,'-')"/>
+        <xsl:variable name="page-number" select="substring-after(@id,'-')"/>
+        
+        <xsl:choose>
+            <xsl:when test="$dynamic_arrays//Array/text() = $roster-name">
+                <xsl:if test="$page-number != '1'">
+                    <xsl:value-of select="'#{if}($!{',$roster-name,'_LIB-',(number($page-number) -1) * $lines-per-page -1,'})'"/>
+                </xsl:if>
+                <xsl:copy>
+                    <xsl:apply-templates select="@*"/>
+                    <xsl:apply-templates select="node()" mode="roster">
+                        <xsl:with-param name="roster-name" select="$roster-name" tunnel="yes"/>
+                        <xsl:with-param name="page" select="$page-number" tunnel="yes"/>
+                        <xsl:with-param name="nbcol" select="$dynamic_arrays//Array[text()=$roster-name]/@nbcol" tunnel="yes"/>
+                    </xsl:apply-templates>
+                </xsl:copy>
+                <xsl:if test="$page-number != '1'">
+                    <xsl:value-of select="'#{end}'"/>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="node() | @*" mode="#current"/>
+                </xsl:copy>
+                </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[1]" mode="roster">
+        <xsl:param name="nbcol" tunnel="yes"/>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="min-width" select="'170mm'"/>
+            <xsl:choose>
+                <xsl:when test="$nbcol = '4'">
+                    <xsl:attribute name="min-width" select="'70mm'"/>
+                    <xsl:attribute name="max-width" select="'80mm'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="min-width" select="'150mm'"/>
+                    <xsl:attribute name="max-width" select="'160mm'"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:apply-templates select="node()" mode="roster"/>
         </xsl:copy>
     </xsl:template>
     <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[2]" mode="roster">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="min-width" select="'24mm'"/>
+            <xsl:attribute name="min-width" select="'20mm'"/>
+            <xsl:attribute name="max-width" select="'30mm'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
         </xsl:copy>
     </xsl:template>
     <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[3]" mode="roster">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="min-width" select="'85mm'"/>
+            <xsl:attribute name="min-width" select="'70mm'"/>
+            <xsl:attribute name="max-width" select="'90mm'"/>
+            <xsl:apply-templates select="node()" mode="roster"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[4]" mode="roster">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:attribute name="min-width" select="'70mm'"/>
+            <xsl:attribute name="max-width" select="'90mm'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
         </xsl:copy>
     </xsl:template>
@@ -93,15 +170,15 @@
         
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'_LIB-',$line-number,'})')"/>
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB})')"/>
             <xsl:value-of select="'&lt;fo:block'"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'_niveau-',$line-number,'} in (''Titre0'',''Titre1'',''Titre2'',''Intertitre0'',''Intertitre1'',''Intertitre2'')) font-weight=&quot;bold&quot;#{end}')"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'_niveau-',$line-number,'} in (''Ventilation0'',''Ventilation1'',''Ventilation2'',''Intertitre0'',''Intertitre1'',''Intertitre2'')) font-style=&quot;italic&quot;#{end}')"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'_niveau-',$line-number,'} in (''Code1'',''Titre1'',''Intertitre1'',''Ventilation1'')) text-indent=&quot;2em&quot;#{end}')"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'_niveau-',$line-number,'} in (''Code2'',''Titre2'',''Intertitre2'',''Ventilation2'')) text-indent=&quot;4em&quot;#{end}')"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'_niveau-',$line-number,'} eq ''Code3'') text-indent=&quot;6em&quot;#{end}')"/>
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} in (''titre0'',''titre1'',''titre2'',''intertitre0'',''intertitre1'',''intertitre2'')) font-weight=&quot;bold&quot;#{end}')"/>
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} in (''ventilation0'',''ventilation1'',''ventilation2'',''intertitre0'',''intertitre1'',''intertitre2'')) font-style=&quot;italic&quot;#{end}')"/>
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} in (''code1'',''titre1'',''intertitre1'',''ventilation1'')) text-indent=&quot;2em&quot;#{end}')"/>
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} in (''code2'',''titre2'',''intertitre2'',''ventilation2'')) text-indent=&quot;4em&quot;#{end}')"/>
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq ''code3'') text-indent=&quot;6em&quot;#{end}')"/>
             <xsl:value-of select="'&gt;'"/>
-            <xsl:value-of select="concat('$!{',$roster-name,'_LIB-',$line-number,'}')"/>
+            <xsl:value-of select="concat('$!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB}')"/>
             <xsl:value-of select="'&lt;/fo:block&gt;'"/>
             <xsl:value-of select="'#{else}'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
@@ -115,12 +192,13 @@
         
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'_LIB-',$line-number,'})')"/>
-            <xsl:value-of select="concat('$!{',$roster-name,'_CO-',$line-number,'}')"/>
-            <xsl:value-of select="'#{else}'"/>
-            <xsl:apply-templates select="node()" mode="roster"/>
-            <xsl:value-of select="'#{end}'"/>
-        </xsl:copy>
+            <fo:block>
+                <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB})')"/>
+                <xsl:value-of select="concat('&lt;fo:block&gt;$!{',$roster-name,'-',$line-number,'-',$roster-name,'_CO}&lt;/fo:block&gt;')"/>
+                <xsl:value-of select="'#{else}&lt;fo:block background-color=&quot;#CCCCCC&quot;/&gt;'"/>
+                <xsl:value-of select="'#{end}'"/>
+            </fo:block>
+            </xsl:copy>
     </xsl:template>
 
     <xsl:template match="fo:table-body/fo:table-row/fo:table-cell[3]" mode="roster">
@@ -129,8 +207,21 @@
         
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'_LIB-',$line-number,'} || !$!{',$roster-name,'_MO-',$line-number,'})')"/>
-            <xsl:value-of select="'#{else}'"/>
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB} &amp;&amp; !$!{',$roster-name,'-',$line-number,'-',$roster-name,'_MO})')"/>
+            <xsl:value-of select="'&lt;fo:block/&gt;#{else}'"/>
+            <xsl:apply-templates select="node()" mode="roster"/>
+            <xsl:value-of select="'#{end}'"/>
+        </xsl:copy>
+    </xsl:template>
+
+<xsl:template match="fo:table-body/fo:table-row/fo:table-cell[4]" mode="roster">
+        <xsl:param name="roster-name" tunnel="yes"/>
+        <xsl:param name="line-number" as="xs:integer" tunnel="yes"/>
+
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB} &amp;&amp; !$!{',$roster-name,'-',$line-number,'-',$roster-name,'_MOST})')"/>
+            <xsl:value-of select="'&lt;fo:block/&gt;#{else}'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
             <xsl:value-of select="'#{end}'"/>
         </xsl:copy>
