@@ -156,12 +156,22 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="xf:bind[@id='fr-form-instance-binds']/xf:bind[@nodeset]">
+        <xsl:variable name="name">
+            <xsl:choose>
+                <xsl:when test="ends-with(@name,'-Container')">
+                    <xsl:value-of select="substring-before(@name,'-Container')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="@name"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <!-- Each one is relevant only when it needs to be displayed -->
             <xsl:attribute name="relevant">
                 <xsl:value-of
-                    select="concat('count(preceding-sibling::*[name()=''',@name,'''])+1=instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',@name,''']')"
+                    select="concat('count(preceding-sibling::*[name()=''',$name,'''])+1=instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$name,''']')"
                 />
             </xsl:attribute>
             <xsl:apply-templates select="node()"/>
@@ -455,7 +465,7 @@
                 <xsl:for-each select="//xf:repeat[xhtml:tr]">
                     <xsl:variable name="dynamic-array" select="@id"/>
                     <xf:action if="not(instance('fr-form-instance')//{$dynamic-array}-Container/*)
-                        or count(instance('fr-form-instance')//{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count)">
+                        or count(instance('fr-form-instance')//{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
                         <xf:action while="count(instance('fr-form-instance')//{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
                             <xf:insert context="instance('fr-form-instance')//{$dynamic-array}-Container"
                                 nodeset="instance('fr-form-instance')//{$dynamic-array}"
@@ -720,7 +730,9 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[ends-with(name(),'-Container')]" mode="page-bind">
-        <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}" nodeset="{name()}">
+        <xsl:variable name="loop-name" select="substring-before(name(),'-Container')"/>
+        <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}">
+            <xsl:attribute name="ref" select="concat(name(),'/',$loop-name,'[instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$loop-name,''']]')"/>
             <xsl:apply-templates select="child::*/child::*[child::*]" mode="page-bind"/>
         </xf:bind>
     </xsl:template>
