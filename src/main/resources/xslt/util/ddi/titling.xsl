@@ -424,7 +424,14 @@
     </xd:doc>
     <xsl:template match="text()" mode="modif-title" priority="1">
         <xsl:param name="prefix" tunnel="yes"/>
-        <xsl:value-of select="concat($prefix,.)"/>
+        <xsl:choose>
+            <xsl:when test="preceding-sibling::xhtml:p or following-sibling::xhtml:p">
+                <xsl:value-of select="."/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat($prefix,.)"/>        
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>
