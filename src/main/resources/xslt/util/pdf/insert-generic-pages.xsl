@@ -62,7 +62,7 @@
         <xsl:variable name="root" select="."/>
         <xsl:apply-templates select="*" mode="#default"/>
         <xsl:for-each select="$parameters//AccompanyingMail">
-            <xsl:result-document href="../../courrier_type_{replace($survey-name,'-','')}{$form-name}{.}.fo">
+            <xsl:result-document href="../../courrier_type_{replace(replace(concat($survey-name,$form-name),'-',''),'_','')}{.}.fo">
                 <xsl:apply-templates select="$root/*">
                     <xsl:with-param name="accompanying-mail" select="." tunnel="yes"/>
                 </xsl:apply-templates>                
