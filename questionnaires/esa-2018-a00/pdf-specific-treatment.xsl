@@ -145,7 +145,7 @@
                     <xsl:value-of select="position()"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="number($page) * $lines-per-page -1 - number($page) + position()"/>
+                    <xsl:value-of select="number($page) * $lines-per-page -1 - $lines-per-page + position()"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
