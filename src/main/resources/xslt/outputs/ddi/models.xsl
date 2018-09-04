@@ -725,7 +725,7 @@
         <xsl:variable name="related-variables-with-id">
             <xsl:for-each select="$related-variables">
                 <xsl:variable name="ip-id" select="enoddi32:get-ip-id($source-context,position())"/>
-                <xsl:variable name="related-response" select="enoddi32:get-related-response(.)"/>                                
+                <xsl:variable name="related-response" select="enoddi32:get-related-response(.)"/>
                 <!-- A container is created to save all the pre-calculted data to output the command. -->
                 <Container xmlns="" xsl:exclude-result-prefixes="#all">
                     <!-- Corresponding to the inputParameter id. -->
@@ -803,7 +803,7 @@
                     <!-- Calling the specifc template to handle CommandContent when in regular Command case. -->
                     <xsl:when test="self::Command or ancestor-or-self::IfThenElse">
                         <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
-                            <xsl:with-param name="expression" select="$source-context"/>
+                            <xsl:with-param name="expression" select="concat($source-context,' ')"/>
                             <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
                         </xsl:call-template>        
                     </xsl:when>
@@ -828,7 +828,7 @@
         <!--        <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/command-id)"/>-->
         <xsl:variable name="current-variable-name" select="$current-variable-with-id/name"/>
         <xsl:variable name="new-expression">
-            <xsl:analyze-string select="$expression" regex="(\${$current-variable-name})(| |\$)">
+            <xsl:analyze-string select="$expression" regex="(\${$current-variable-name}( |\$))">
                 <xsl:matching-substring>
                     <xsl:value-of select="$current-variable-with-id/command-id"/>
                 </xsl:matching-substring>

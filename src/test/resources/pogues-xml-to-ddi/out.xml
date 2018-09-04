@@ -476,7 +476,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not( d1e50-IP-1 != '1')</r:CommandContent>
+                  <r:CommandContent>not( d1e50-IP-1!= '1') </r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -530,7 +530,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not( d1e119-IP-1 != '1')</r:CommandContent>
+                  <r:CommandContent>not( d1e119-IP-1!= '1') </r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -1105,9 +1105,9 @@
                      </r:TargetParameterReference>
                   </r:Binding>
                   <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1) + number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2) +
-                        number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3) + number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4) + number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5) +
-                        number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6) + number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7) + number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8) +
-                        number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9) + number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10) != 100</r:CommandContent>
+                        number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3)+ number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4)+ number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5)+
+                        number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6)+ number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7)+ number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8)+
+                        number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9)+ number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10)!= 100 </r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <!--<r:TypeOfComputationItem>error</r:TypeOfComputationItem>-->
@@ -9761,14 +9761,7 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>jbcggtca-GI</r:ID>
             <r:Version>1.0</r:Version>
-            <!--<d:SourceQuestion>Not implemented.</d:SourceQuestion>-->
-            <d:SourceVariable>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>jbgdepx7</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:TypeOfObject>Variable</r:TypeOfObject>
-            </d:SourceVariable>
-            <d:SourceVariable>
+            <!--<d:SourceQuestion>Not implemented.</d:SourceQuestion>--><d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>jbgdnfk7</r:ID>
                <r:Version>1.0</r:Version>
@@ -9836,7 +9829,7 @@
                      <r:ID>jbcggtca-IP-1</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:ParameterName>
-                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES101</r:String>
+                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES11</r:String>
                      </r:ParameterName>
                   </r:InParameter>
                   <r:InParameter isArray="false">
@@ -9844,7 +9837,7 @@
                      <r:ID>jbcggtca-IP-2</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:ParameterName>
-                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES11</r:String>
+                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES21</r:String>
                      </r:ParameterName>
                   </r:InParameter>
                   <r:InParameter isArray="false">
@@ -9852,7 +9845,7 @@
                      <r:ID>jbcggtca-IP-3</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:ParameterName>
-                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES21</r:String>
+                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES31</r:String>
                      </r:ParameterName>
                   </r:InParameter>
                   <r:InParameter isArray="false">
@@ -9860,7 +9853,7 @@
                      <r:ID>jbcggtca-IP-4</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:ParameterName>
-                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES31</r:String>
+                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES41</r:String>
                      </r:ParameterName>
                   </r:InParameter>
                   <r:InParameter isArray="false">
@@ -9868,7 +9861,7 @@
                      <r:ID>jbcggtca-IP-5</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:ParameterName>
-                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES41</r:String>
+                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES51</r:String>
                      </r:ParameterName>
                   </r:InParameter>
                   <r:InParameter isArray="false">
@@ -9876,7 +9869,7 @@
                      <r:ID>jbcggtca-IP-6</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:ParameterName>
-                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES51</r:String>
+                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES61</r:String>
                      </r:ParameterName>
                   </r:InParameter>
                   <r:InParameter isArray="false">
@@ -9884,7 +9877,7 @@
                      <r:ID>jbcggtca-IP-7</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:ParameterName>
-                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES61</r:String>
+                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES71</r:String>
                      </r:ParameterName>
                   </r:InParameter>
                   <r:InParameter isArray="false">
@@ -9892,7 +9885,7 @@
                      <r:ID>jbcggtca-IP-8</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:ParameterName>
-                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES71</r:String>
+                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES81</r:String>
                      </r:ParameterName>
                   </r:InParameter>
                   <r:InParameter isArray="false">
@@ -9900,20 +9893,12 @@
                      <r:ID>jbcggtca-IP-9</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:ParameterName>
-                        <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES81</r:String>
-                     </r:ParameterName>
-                  </r:InParameter>
-                  <r:InParameter isArray="false">
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>jbcggtca-IP-10</r:ID>
-                     <r:Version>1.0</r:Version>
-                     <r:ParameterName>
                         <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES91</r:String>
                      </r:ParameterName>
                   </r:InParameter>
                   <r:InParameter isArray="false">
                      <r:Agency>fr.insee</r:Agency>
-                     <r:ID>jbcggtca-IP-11</r:ID>
+                     <r:ID>jbcggtca-IP-10</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:ParameterName>
                         <r:String xml:lang="fr-FR">PERCENTAGE_EXPENSES101</r:String>
@@ -9927,7 +9912,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgd4w4k</r:ID>
+                        <r:ID>j4nwc63q-QOP-jbgde5yl</r:ID>
                         <r:Version>1.0</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -9941,7 +9926,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgde5yl</r:ID>
+                        <r:ID>j4nwc63q-QOP-jbgd2x2t</r:ID>
                         <r:Version>1.0</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -9955,7 +9940,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgd2x2t</r:ID>
+                        <r:ID>j4nwc63q-QOP-jbgdjypz</r:ID>
                         <r:Version>1.0</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -9969,7 +9954,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgdjypz</r:ID>
+                        <r:ID>j4nwc63q-QOP-jbgdcftu</r:ID>
                         <r:Version>1.0</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -9983,7 +9968,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgdcftu</r:ID>
+                        <r:ID>j4nwc63q-QOP-jbgdiyfe</r:ID>
                         <r:Version>1.0</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -9997,7 +9982,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgdiyfe</r:ID>
+                        <r:ID>j4nwc63q-QOP-jbgdj1wd</r:ID>
                         <r:Version>1.0</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -10011,7 +9996,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgdj1wd</r:ID>
+                        <r:ID>j4nwc63q-QOP-jbgddylk</r:ID>
                         <r:Version>1.0</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -10025,7 +10010,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgddylk</r:ID>
+                        <r:ID>j4nwc63q-QOP-jbgd3jj6</r:ID>
                         <r:Version>1.0</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -10039,7 +10024,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgd3jj6</r:ID>
+                        <r:ID>j4nwc63q-QOP-jbgd4w3k</r:ID>
                         <r:Version>1.0</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -10053,7 +10038,7 @@
                   <r:Binding>
                      <r:SourceParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgd4w3k</r:ID>
+                        <r:ID>j4nwc63q-QOP-jbgd4w4k</r:ID>
                         <r:Version>1.0</r:Version>
                         <r:TypeOfObject>OutParameter</r:TypeOfObject>
                      </r:SourceParameterReference>
@@ -10064,24 +10049,10 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:Binding>
-                     <r:SourceParameterReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j4nwc63q-QOP-jbgd4w4k</r:ID>
-                        <r:Version>1.0</r:Version>
-                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
-                     </r:SourceParameterReference>
-                     <r:TargetParameterReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>jbcggtca-IP-11</r:ID>
-                        <r:Version>1.0</r:Version>
-                        <r:TypeOfObject>InParameter</r:TypeOfObject>
-                     </r:TargetParameterReference>
-                  </r:Binding>
-                  <r:CommandContent>number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2) + number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3) + number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4) +
-                number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5) + number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6) + number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7) +
-                number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8) + number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9) + number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10) +
-                number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1)</r:CommandContent>
+                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1) + number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2) + number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3)+
+                number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4)+ number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5)+ number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6)+
+                number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7)+ number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8)+ number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9)+
+                number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10)</r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <d:ControlConstructReference>

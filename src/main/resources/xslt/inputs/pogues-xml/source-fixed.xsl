@@ -147,24 +147,14 @@
     <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label" mode="enopogues:get-related-variable">
         <xsl:variable name="expressionVariable" select="tokenize(., '\$')"/>
         <xsl:variable name="variables" select="//pogues:Variables"/>
-        <!-- Variable names start with a '$' and finish with a ' ', but for the last part of an expression which could not have a ' ' finisher because of extra space handling. -->
+
+        <!-- 2 ways to describe a variable : $Variable$ or $Variable with a space after -->
         <!-- TODO : Use regexp matches instead to handle several ' ' and linebreak cases. -->
-        <xsl:sequence
-            select="
-            $variables/pogues:Variable[some $x in $expressionVariable
-            satisfies (if (contains($x, '\$')) then
-            (substring-before($x, '\$'))
-            else
-            ($x)) = pogues:Name/text()]"
-        />        
-    <xsl:sequence
-            select="
-                $variables/pogues:Variable[some $x in $expressionVariable
-                    satisfies (if (contains($x, ' ')) then
-                        (substring-before($x, ' '))
-                    else
-                        ($x)) = pogues:Name/text()]"
-        />
+        
+        <xsl:sequence select="$variables/pogues:Variable[some $x in $expressionVariable satisfies (if (contains($x, ' '))
+                                                                                                    then (substring-before($x, ' '))
+                                                                                                    else ($x)) 
+                                                                 = pogues:Name/text()]"/>
     </xsl:template>
 
     <xsl:template match="pogues:Variable[pogues:Formula]" mode="enopogues:get-related-variable">
@@ -228,7 +218,7 @@
             <xsl:when test="$variables">
                 <xsl:call-template name="enopogues:id-variable-to-ddi">
                      <xsl:with-param name="variables" select="$variables" as="item()*"/>
-                     <xsl:with-param name="expression" select="./text()"/>            
+                     <xsl:with-param name="expression" select="concat(./text(),' ')"/>            
                 </xsl:call-template>        
             </xsl:when>
             <xsl:otherwise>
@@ -251,10 +241,8 @@
                 <!-- TO DO, variable-name is only for external variables, others should refer to outParam. -->                
                 <!-- TO DO Remove variable without $ end separator -->
                 <xsl:variable name="variable-name" select="enopogues:get-name($currentVariable)"/>
-                <xsl:variable name="variable-ref-name-with-final-dollars"
-                            select="concat('\$',$variable-name,'\$')"/>
-                        <xsl:variable name="variable-ref-name-without-final-dollars"
-                            select="concat('\$',$variable-name)"/>
+                <xsl:variable name="variable-ref-name-with-final-dollars" select="concat('\$',$variable-name,'\$')"/>
+                <xsl:variable name="variable-ref-name-without-final-dollars" select="concat('\$',$variable-name,' ')"/>
                 <xsl:variable name="variable-type" select="enopogues:get-type($currentVariable)"/>                              
                 <xsl:choose>
                     <!-- In this case the variable id separator is '¤' and variable id is the outparam related to the variable (QOP for collected, GOP for calculated).  -->
@@ -263,7 +251,8 @@
                         <xsl:call-template name="enopogues:id-variable-to-ddi">
                             <xsl:with-param name="variables" select="$variables"/>
                             <xsl:with-param name="index" select="$index + 1"/>
-                            <xsl:with-param name="expression" select="replace(replace($expression, $variable-ref-name-with-final-dollars, concat('¤', $variable-ref, '¤')),$variable-ref-name-without-final-dollars, concat('¤', $variable-ref, '¤'))"
+                            <xsl:with-param name="expression" select="replace(replace($expression, $variable-ref-name-with-final-dollars, concat('¤', $variable-ref, '¤')),
+                                                                                                   $variable-ref-name-without-final-dollars, concat('¤', $variable-ref, '¤'))"
                             />
                         </xsl:call-template>
                     </xsl:when>
@@ -274,7 +263,8 @@
                         <xsl:call-template name="enopogues:id-variable-to-ddi">
                                 <xsl:with-param name="variables" select="$variables"/>
                                 <xsl:with-param name="index" select="$index + 1"/>
-                                <xsl:with-param name="expression" select="replace(replace($expression, $variable-ref-name-with-final-dollars, concat('¤', $variable-ref, '¤')),$variable-ref-name-without-final-dollars, concat('¤', $variable-ref, '¤'))"
+                                <xsl:with-param name="expression" select="replace(replace($expression, $variable-ref-name-with-final-dollars, concat('¤', $variable-ref, '¤')),
+                                                                                                       $variable-ref-name-without-final-dollars, concat('¤', $variable-ref, '¤'))"
                             />
                             </xsl:call-template>
                     </xsl:when>
