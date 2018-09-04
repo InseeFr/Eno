@@ -255,7 +255,7 @@
             - regexp(3) is the sub-sequence [.*] if regexp(2) has matched, for the text associated to the link,
             - regexp(4) is the sub-sequence (.*) if regexp(2) has matched, for the url associated to the link.
         -->
-        <xsl:analyze-string select="$expression" regex="(xhtml:br)|(\[(.*)\]\((.*)\)){{1}}">
+        <xsl:analyze-string select="$expression" regex="(xhtml:br)|(\[(.*)\]\(([^\)]+)\)){{1}}">
              <xsl:matching-substring>
                  <xsl:choose>
                      <!-- Breakline case -->
