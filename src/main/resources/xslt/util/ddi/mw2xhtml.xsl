@@ -252,10 +252,10 @@
             Defining a regexp where :
             - regexp(1) is the sequence \n if encountered, for breaklines,
             - regexp(2) is the sequence [.*](.) if encountered, for links.
-            - regexp(3) is the sub-sequence [.*] if regexp(2) has matched, for the text associated to the link,
+            - regexp(3) is the sub-sequence ([^\)]+ if regexp(2) has matched, for the text associated to the link,
             - regexp(4) is the sub-sequence (.*) if regexp(2) has matched, for the url associated to the link.
         -->
-        <xsl:analyze-string select="$expression" regex="(xhtml:br)|(\[(.*)\]\(([^\)]+)\)){{1}}">
+        <xsl:analyze-string select="$expression" regex="(xhtml:br)|(\[([^\]]+)\]\(([^\)]+)\)){{1}}">
              <xsl:matching-substring>
                  <xsl:choose>
                      <!-- Breakline case -->
@@ -270,7 +270,10 @@
                          </xsl:element>
                      </xsl:when>
                  </xsl:choose>
-                                  
+                 <!--<xsl:call-template name="parse-elements">
+                     <xsl:with-param name="expression" select="regex-group(4)"/>
+                     <xsl:with-param name="first" select="$first"/>
+                 </xsl:call-template>-->
              </xsl:matching-substring>
              <xsl:non-matching-substring>
                  <xsl:copy-of select="."/>
