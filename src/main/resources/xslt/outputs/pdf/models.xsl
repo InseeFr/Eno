@@ -207,8 +207,9 @@
 		<xsl:param name="isTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 
+		<xsl:variable name="format" select="normalize-space(enopdf:get-format($source-context))"/>
 		<xsl:choose>
-			<xsl:when test="enopdf:get-format($source-context) = 'footnote'">
+			<xsl:when test="$format = 'footnote'">
 				<fo:block>
 					<fo:footnote>
 						<fo:inline></fo:inline>
@@ -223,14 +224,14 @@
 					</fo:footnote>
 				</fo:block>
 			</xsl:when>
-			<xsl:when test="enopdf:get-format($source-context) = 'tooltip'">
+			<xsl:when test="$format = 'tooltip'">
 			</xsl:when>
-			<xsl:when test="enopdf:get-format($source-context) = 'comment' or enopdf:get-format($source-context) = 'help' or enopdf:get-format($source-context) = 'instruction'">
+			<xsl:when test="$format = 'comment' or $format = 'help' or $format = 'instruction'">
 				<fo:block xsl:use-attribute-sets="instruction" page-break-inside="avoid" keep-with-next="always">
 					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 				</fo:block>
 			</xsl:when>
-			<xsl:when test="enopdf:get-format($source-context) = 'filter-alternative-text'">
+			<xsl:when test="$format = 'filter-alternative-text'">
 				<fo:block width="100%" page-break-inside="avoid" keep-with-previous="always">
 					<fo:inline-container width="10%" vertical-align="bottom" text-align="right">
 						<fo:block-container>

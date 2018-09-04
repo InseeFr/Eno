@@ -128,11 +128,10 @@
         <xsl:sequence select="$tempLabel"/>
     </xsl:function>
 
-<!--
     <xsl:template match="*" mode="enopdf:format-label">
       <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
     </xsl:template>
--->
+
     <xsl:template match="xhtml:p[descendant::xhtml:br]" mode="enopdf:format-label">
         <xsl:element name="fo:block">
             <xsl:attribute name="linefeed-treatment" select="'preserve'"/>
