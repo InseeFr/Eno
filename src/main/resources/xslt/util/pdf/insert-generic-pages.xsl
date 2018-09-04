@@ -63,7 +63,7 @@
         <xsl:apply-templates select="*" mode="#default"/>
         <xsl:for-each select="$parameters//AccompanyingMail">
             <xsl:result-document href="../../courrier_type_{replace(replace(concat($survey-name,$form-name),'-',''),'_','')}{.}.fo">
-                <xsl:apply-templates select="$root/*">
+                <xsl:apply-templates select="$root/*" mode="keep-cdata">
                     <xsl:with-param name="accompanying-mail" select="." tunnel="yes"/>
                 </xsl:apply-templates>                
             </xsl:result-document>
@@ -86,7 +86,7 @@
             <xd:p>add accompanying mail and cover page.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="fo:root/fo:layout-master-set">
+    <xsl:template match="fo:root/fo:layout-master-set" mode="#all">
         <xsl:param name="accompanying-mail" tunnel="yes"/>
         
         <xsl:variable name="cover-name">
@@ -105,7 +105,7 @@
             <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name=concat($accompanying-mail,'-recto')]"/>
             <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name=concat($accompanying-mail,'-verso')]"/>
             <xsl:copy-of select="$static-pages//fo:simple-page-master[@master-name=$cover-name]"/>
-            <xsl:apply-templates select="node() | @*"/>
+            <xsl:apply-templates select="node() | @*" mode="#current"/>
         </xsl:copy>
         <xsl:apply-templates select="$static-pages//fo:page-sequence[@master-reference=$accompanying-mail]" mode="keep-cdata"/>
         <xsl:apply-templates select="$static-pages//fo:page-sequence[@master-reference=$cover-name]" mode="keep-cdata"/>
@@ -115,7 +115,7 @@
         <xsl:value-of select="." disable-output-escaping="yes"/>
     </xsl:template>
     
-    <xsl:template match="fo:block[@id='TheVeryLastPage']">
+    <xsl:template match="fo:block[@id='TheVeryLastPage']" mode="#all">
         <xsl:if test="$parameters//ColtraneQuestions/*[name()='TypeRepondantLabel' or name()='Fin']">
             <xsl:copy-of select="$static-pages//fo:page-sequence[@master-reference='questions-fin']/fo:flow[@flow-name='xsl-region-body']/*"/>
         </xsl:if>
