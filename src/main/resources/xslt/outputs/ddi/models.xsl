@@ -883,6 +883,16 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>				
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:Label>
+                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
+                    <xsl:value-of select="enoddi32:get-label($source-context)"/>
+                </r:Content>
+            </r:Label>
+            <r:Description>
+                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
+                    <xsl:value-of select="enoddi32:get-description($source-context)"/>
+                </r:Content>                
+            </r:Description>
             <d:IfCondition>
                 <xsl:call-template name="Command">
                     <xsl:with-param name="source-context" select="enoddi32:get-command($source-context)" tunnel="yes"/>
