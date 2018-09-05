@@ -884,9 +884,7 @@
             <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>				
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:Label>
-                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
-                    <xsl:value-of select="enoddi32:get-label($source-context)"/>
-                </r:Content>
+                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content>
             </r:Label>
             <r:Description>
                 <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
