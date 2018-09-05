@@ -171,7 +171,7 @@
                 <IfThenElse id="{generate-id()}" xsi:type="SequenceType">
                     <!--TODO : Put a template here to transform expressions-->
                     <xsl:call-template name="transform_goto_expressions">
-                        <xsl:with-param name="goto_expressions" select="$id_with_goto/*/poguesGoto:GoToExpressions"/>
+                        <xsl:with-param name="goto_expressions" select="$id_with_goto/*/poguesGoto:GoToExpressions/poguesGoto:Expression"/>
                     </xsl:call-template>
                     <Description>
                         <xsl:value-of select="$id_with_goto//poguesGoto:Description"/>
@@ -454,7 +454,7 @@
     <xsl:template name="transform_goto_expressions">
         <xsl:param name="goto_expressions"/>
         <Expression>
-            <xsl:value-of select="concat('not( ',string-join(($goto_expressions/*),' ) and not( '),')')"/>
+            <xsl:value-of select="concat('not( ',string-join(($goto_expressions),' ) and not( '),')')"/>
         </Expression>
     </xsl:template>
 

@@ -512,6 +512,13 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>d1e119</r:ID>
             <r:Version>1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">A définir</r:Content>
+            </r:Label>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">If you are not ready, please go to the end of the
+                    questionnaire</r:Content>
+            </r:Description>
             <d:IfCondition>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
