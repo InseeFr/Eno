@@ -352,16 +352,35 @@
                     </d:Text>
                 </d:LiteralText>
                 <xsl:if test="enoddi32:is-with-conditionnal-text($source-context) = true()">
-                    <d:ConditionalText>
-                        <xsl:for-each select="enoddi32:get-related-variable($source-context)[enoddi32:get-type(.) = ('CollectedVariableType','CalculatedVariableType')]">
+                    <xsl:for-each
+                        select="enoddi32:get-related-variable($source-context)[enoddi32:get-type(.) = ('CollectedVariableType', 'CalculatedVariableType')]">
+                        <d:ConditionalText>
                         <r:SourceParameterReference>
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                             <r:ID><xsl:value-of select="enoddi32:get-qop-id(.)"/></r:ID>
                             <r:Version><xsl:value-of select="enoddi32:get-version(.)"/></r:Version>                            
                             <r:TypeOfObject>OutParameter</r:TypeOfObject>
                         </r:SourceParameterReference>
-                        </xsl:for-each>
-                    </d:ConditionalText>
+                        </d:ConditionalText>
+                    </xsl:for-each>
+                <xsl:for-each
+                        select="enoddi32:get-related-variable($source-context)[enoddi32:get-type(.) = ('ExternalVariableType')]">
+                        <d:ConditionalText>
+                            <r:SourceParameterReference>
+                                <r:Agency>
+                                    <xsl:value-of select="$agency"/>
+                                </r:Agency>
+                                <r:ID>
+                                    <xsl:value-of select="enoddi32:get-name(.)"/>
+                                </r:ID>
+                                <r:Version>
+                                    <xsl:value-of select="enoddi32:get-version(.)"/>
+                                </r:Version>
+                                <r:TypeOfObject>InParameter</r:TypeOfObject>
+                            </r:SourceParameterReference>
+                        </d:ConditionalText>
+                    </xsl:for-each>
+
                 </xsl:if>
             </d:InstructionText>
         </d:Instruction>
@@ -599,37 +618,6 @@
         </d:Sequence>
     </xsl:template>
     
-    <!-- This utility template is used to recursively replace names of pogues:Variable in an expression by their correspondant id of ddi:InParameter -->
-    <xsl:template name="replace-pogues-name-variable-by-ddi-id-ip">
-        <xsl:param name="expression"/>
-        <xsl:param name="current-variable-with-id"/>
-        <xsl:variable name="next-variable-with-id" select="$current-variable-with-id/following-sibling::*[1]"/>
-<!--        <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/command-id)"/>-->
-        <xsl:variable name="current-variable-name" select="$current-variable-with-id/name"/>
-        <xsl:variable name="new-expression">
-            <xsl:analyze-string select="$expression" regex="(\${$current-variable-name})( |$)">
-                <xsl:matching-substring>
-                    <xsl:value-of select="$current-variable-with-id/command-id"/>
-                </xsl:matching-substring>
-                <xsl:non-matching-substring>
-                    <xsl:copy-of select="."/>
-                </xsl:non-matching-substring>
-            </xsl:analyze-string>
-        </xsl:variable>
-        <xsl:choose>
-            <xsl:when test="$next-variable-with-id">
-                <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
-                    <xsl:with-param name="expression" select="$new-expression"/>
-                    <xsl:with-param name="current-variable-with-id" select="$next-variable-with-id"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$new-expression"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-    
-    
     <xsl:template name="StatementItem" match="driver-StatementItem//Instruction[not(ancestor::driver-InterviewerInstructionReference)]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
@@ -737,7 +725,7 @@
         <xsl:variable name="related-variables-with-id">
             <xsl:for-each select="$related-variables">
                 <xsl:variable name="ip-id" select="enoddi32:get-ip-id($source-context,position())"/>
-                <xsl:variable name="related-response" select="enoddi32:get-related-response(.)"/>                                
+                <xsl:variable name="related-response" select="enoddi32:get-related-response(.)"/>
                 <!-- A container is created to save all the pre-calculted data to output the command. -->
                 <Container xmlns="" xsl:exclude-result-prefixes="#all">
                     <!-- Corresponding to the inputParameter id. -->
@@ -750,6 +738,9 @@
                         <xsl:value-of select="enoddi32:get-qop-id(.)"/>
                     </qop-id>
                     <name><xsl:value-of select="enoddi32:get-name(.)"/></name>                   
+                <type>
+                        <xsl:value-of select="enoddi32:get-type(.)"/>
+                    </type>
                 </Container>
             </xsl:for-each>
         </xsl:variable>                
@@ -777,10 +768,28 @@
                 <r:Binding>
                     <r:SourceParameterReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="./qop-id"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
-                    </r:SourceParameterReference>
+                        <xsl:choose>
+                            <!-- Use Name for ExternalVariableType -->
+                            <xsl:when test="./type = 'ExternalVariableType'">
+                                <r:ID>
+                                    <xsl:value-of select="./name"/>
+                                </r:ID>
+                                <r:Version>
+                                    <xsl:value-of select="enoddi32:get-version($source-context)"/>
+                                </r:Version>
+                                <r:TypeOfObject>InParameter</r:TypeOfObject>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <r:ID>
+                                    <xsl:value-of select="./qop-id"/>
+                                </r:ID>
+                                <r:Version>
+                                    <xsl:value-of select="enoddi32:get-version($source-context)"/>
+                                </r:Version>
+                                <r:TypeOfObject>OutParameter</r:TypeOfObject>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        </r:SourceParameterReference>
                     <r:TargetParameterReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
                         <r:ID><xsl:value-of select="ip-id"/></r:ID>
@@ -794,7 +803,7 @@
                     <!-- Calling the specifc template to handle CommandContent when in regular Command case. -->
                     <xsl:when test="self::Command or ancestor-or-self::IfThenElse">
                         <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
-                            <xsl:with-param name="expression" select="$source-context"/>
+                            <xsl:with-param name="expression" select="concat($source-context,' ')"/>
                             <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
                         </xsl:call-template>        
                     </xsl:when>
@@ -811,6 +820,37 @@
         </r:Command>        
     </xsl:template>
     
+    <!-- This utility template is used to recursively replace names of pogues:Variable in an expression by their correspondant id of ddi:InParameter -->
+    <xsl:template name="replace-pogues-name-variable-by-ddi-id-ip">
+        <xsl:param name="expression"/>
+        <xsl:param name="current-variable-with-id"/>
+        <xsl:variable name="next-variable-with-id" select="$current-variable-with-id/following-sibling::*[1]"/>
+        <!--        <xsl:variable name="new-expression" select="replace($expression,concat('\$',$current-variable-with-id/name),$current-variable-with-id/command-id)"/>-->
+        <xsl:variable name="current-variable-name" select="$current-variable-with-id/name"/>
+        <xsl:variable name="new-expression">
+            <xsl:analyze-string select="$expression" regex="(\${$current-variable-name}( |\$))">
+                <xsl:matching-substring>
+                    <xsl:value-of select="$current-variable-with-id/command-id"/>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:copy-of select="."/>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="$next-variable-with-id">
+                <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
+                    <xsl:with-param name="expression" select="$new-expression"/>
+                    <xsl:with-param name="current-variable-with-id" select="$next-variable-with-id"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$new-expression"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
     <xsl:template match="driver-ProcessingInstructionScheme//Variable" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -843,6 +883,14 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>				
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:Label>
+                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content>
+            </r:Label>
+            <r:Description>
+                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
+                    <xsl:value-of select="enoddi32:get-description($source-context)"/>
+                </r:Content>                
+            </r:Description>
             <d:IfCondition>
                 <xsl:call-template name="Command">
                     <xsl:with-param name="source-context" select="enoddi32:get-command($source-context)" tunnel="yes"/>

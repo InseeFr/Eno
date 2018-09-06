@@ -16,7 +16,8 @@
          <r:ID>InterviewerInstructionScheme-i6vwi0</r:ID>
          <r:Version>1.0</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">A définir</r:Content>
+            <r:Content xml:lang="fr-FR">A
+                            définir</r:Content>
          </r:Label>
          <d:Instruction>
             <r:Agency>fr.insee</r:Agency>
@@ -41,7 +42,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">For your information, the date of the last broadcast was on
-                        øLAST_BROADCASTø</d:Text>
+                        ¤LAST_BROADCAST¤</d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -132,7 +133,7 @@
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
-      <d:Instruction><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>1.0</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR"><xhtml:p id="ftn1">Included principalities</xhtml:p></d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
+      <d:Instruction xmlns=""><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>1.0</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR"><xhtml:p id="ftn1">Included principalities</xhtml:p></d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
       <d:ControlConstructScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>ControlConstructScheme-i6vwi0</r:ID>
@@ -450,6 +451,13 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>d1e50</r:ID>
             <r:Version>1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">A définir</r:Content>
+            </r:Label>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">If you are not ready, please go to the end of the
+                    questionnaire</r:Content>
+            </r:Description>
             <d:IfCondition>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
@@ -475,7 +483,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not( d1e50-IP-1!= '1')</r:CommandContent>
+                  <r:CommandContent>not( d1e50-IP-1!= '1') </r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -504,6 +512,13 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>d1e119</r:ID>
             <r:Version>1.0</r:Version>
+            <r:Label>
+               <r:Content xml:lang="fr-FR">A définir</r:Content>
+            </r:Label>
+            <r:Description>
+               <r:Content xml:lang="fr-FR">If you are not ready, please go to the end of the
+                    questionnaire</r:Content>
+            </r:Description>
             <d:IfCondition>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
@@ -529,7 +544,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not( d1e119-IP-1!= '1')</r:CommandContent>
+                  <r:CommandContent>not( d1e119-IP-1!= '1') </r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -1103,10 +1118,10 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1)+ number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2)+
+                  <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1) + number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2) +
                         number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3)+ number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4)+ number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5)+
                         number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6)+ number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7)+ number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8)+
-                        number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9)+ number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10)!= 100</r:CommandContent>
+                        number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9)+ number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10)!= 100 </r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <!--<r:TypeOfComputationItem>error</r:TypeOfComputationItem>-->
@@ -1127,7 +1142,8 @@
          <r:ID>QuestionScheme-i6vwi0</r:ID>
          <r:Version>1.0</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">A définir</r:Content>
+            <r:Content xml:lang="fr-FR">A
+                            définir</r:Content>
          </r:Label>
          <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
@@ -6357,7 +6373,8 @@
          <r:ID>CategoryScheme-i6vwi0</r:ID>
          <r:Version>1.0</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">A définir</r:Content>
+            <r:Content xml:lang="fr-FR">A
+                                définir</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
@@ -7533,7 +7550,8 @@
          <r:ID>VariableScheme-i6vwi0</r:ID>
          <r:Version>1.0</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Variable Scheme for the survey</r:Content>
+            <r:Content xml:lang="fr-FR">Variable Scheme
+                            for the survey</r:Content>
          </r:Label>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9750,14 +9768,14 @@
             <r:String xml:lang="en-IE">SIMPSONS</r:String>
          </d:ProcessingInstructionSchemeName>
          <r:Label>
-            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire</r:Content>
+            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons
+                            questionnaire</r:Content>
          </r:Label>
          <d:GenerationInstruction>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>jbcggtca-GI</r:ID>
             <r:Version>1.0</r:Version>
-            <!--<d:SourceQuestion>Not implemented.</d:SourceQuestion>-->
-            <d:SourceVariable>
+            <!--<d:SourceQuestion>Not implemented.</d:SourceQuestion>--><d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>jbgdnfk7</r:ID>
                <r:Version>1.0</r:Version>
@@ -10045,7 +10063,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1)+ number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2)+ number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3)+
+                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1) + number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2) + number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3)+
                 number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4)+ number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5)+ number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6)+
                 number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7)+ number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8)+ number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9)+
                 number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10)</r:CommandContent>
@@ -10066,7 +10084,8 @@
          <r:Label>
             <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
                             l'enquête</r:Content>
-            <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey</r:Content>
+            <r:Content xml:lang="en-IE">Numeric and DateTime list for the
+                            survey</r:Content>
          </r:Label>
          <r:ManagedDateTimeRepresentation>
             <r:Agency>fr.insee</r:Agency>
