@@ -83,5 +83,7 @@ public class DDI2ODTGenerator implements Generator {
 		}
 		return isPROPERTIES_FILE;
 	}
-	
+	public String in2out(){
+		return "ddi2odt";
+	}
 }

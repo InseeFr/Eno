@@ -24,27 +24,6 @@
 	</xd:doc>	
 	<xsl:variable name="properties" select="doc($properties-file)"/>
 	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Get the conditioning characters from properties file</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:variable name="SpecialCharacterSymbol1" select="'ø'" />
-	<xsl:variable name="SpecialCharacterSymbol2_before" select="$properties//TextConditioningVariable/ddi/Before" />
-	<xsl:variable name="SpecialCharacterSymbol2_after" select="$properties//TextConditioningVariable/ddi/After" />
-	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Pattern to match nodes containing the conditioning characters</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:variable name="pattern"
-		select="concat('.*',$SpecialCharacterSymbol1,'.*',$SpecialCharacterSymbol1,'.*','|', '.*',$SpecialCharacterSymbol2_before,'.*',$SpecialCharacterSymbol2_after,'.*')" />
-	
-	<xsl:variable name="valueofBlockPattern"
-		select="concat($SpecialCharacterSymbol1,'.*',$SpecialCharacterSymbol1,'|', $SpecialCharacterSymbol2_before,'.*',$SpecialCharacterSymbol2_after)" />
-	<xsl:variable name="valueOfStringCleanedPattern"
-		select="concat($SpecialCharacterSymbol1,'|',$SpecialCharacterSymbol2_before,'|',$SpecialCharacterSymbol2_after)" />
 
 	<xd:doc>
 		<xd:desc>
@@ -62,72 +41,27 @@
 			<xd:p>Apply conversion of DDI variables to simple velocity variable syntax. Apply to all nodes but the response items (nodes having the element "ResponseBlock")</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="text()[matches(.,$pattern)]">
-		<xsl:variable name='valueOfBlock'>
-			<xsl:copy-of select="." />
-		</xsl:variable>
-		<xsl:analyze-string select="$valueOfBlock" regex="ø.*ø|¤.*¤">
-			<xsl:matching-substring>
-			<xsl:variable name="valueOfStringCleaned"
-					select="translate(.,$valueOfStringCleanedPattern,'')" />
-				<xsl:call-template name="simpleVelocityCondition">
-					<xsl:with-param name="var" select="$valueOfStringCleaned" />
+	<xsl:template match="text()[contains(.,'ø')]">
+		<xsl:call-template name="replace-danish-character">
+			<xsl:with-param name="label" select="."/>
+		</xsl:call-template>
+	</xsl:template>
+	
+	<xsl:template name="replace-danish-character">
+		<xsl:param name="label"/>
+		
+		<xsl:choose>
+			<xsl:when test="contains(substring-after($label,'ø'),'ø')">
+				<xsl:value-of select="concat(substring-before($label,'ø'),'${',substring-before(substring-after($label,'ø'),'ø'),'}')"/>
+				<xsl:call-template name="replace-danish-character">
+					<xsl:with-param name="label" select="substring-after(substring-after($label,'ø'),'ø')"/>
 				</xsl:call-template>
-			</xsl:matching-substring>
-			<xsl:non-matching-substring>
-				<xsl:copy-of select="." />
-			</xsl:non-matching-substring>
-		</xsl:analyze-string>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$label"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
-	
-	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Apply conversion of variables to velocity conditions syntax. Apply to response items (nodes having the element "ResponseBlock")</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:template match="//*[child::ResponseBlock and text()[matches(.,$pattern)]]">
-		<xsl:variable name='valueOfBlock'>
-			<xsl:copy-of select="." />
-		</xsl:variable>
-		<xsl:copy><xsl:apply-templates select="@*"/></xsl:copy>
-		<xsl:analyze-string select="$valueOfBlock" regex="ø.*ø|¤.*¤">
-			<xsl:matching-substring>
-			<xsl:variable name="valueOfStringCleaned"
-					select="translate(.,$valueOfStringCleanedPattern,'')" />
-				<xsl:call-template name="velocityConditionForResponseItems">
-					<xsl:with-param name="var" select="$valueOfStringCleaned" />
-				</xsl:call-template>
-			</xsl:matching-substring>
-			<xsl:non-matching-substring>
-				<xsl:copy-of select="." />
-			</xsl:non-matching-substring>
-		</xsl:analyze-string>
-	</xsl:template>
-	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Velocity condition for replacement of ddi response items variables.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:template name="velocityConditionForResponseItems">
-		<xsl:param name="var" />
-		<xsl:text disable-output-escaping="yes"> if(${</xsl:text>
-		<xsl:value-of select="$var" />
-		<xsl:text disable-output-escaping="yes">}) ${</xsl:text>
-		<xsl:value-of select="$var" />
-		<xsl:text disable-output-escaping="yes">} #else &lt;fo:block border-bottom=&quot;1px dotted black&quot; &gt; &amp;#160; &lt;/fo:block&gt; #end 
-		</xsl:text>
-	</xsl:template>
-	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Velocity variable for replacement of all non ddi response items variables.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:template name="simpleVelocityCondition">
-		<xsl:param name="var" />
-		<xsl:text disable-output-escaping="yes"> ${</xsl:text> <xsl:value-of select="$var" /> <xsl:text disable-output-escaping="yes">} </xsl:text>
-	</xsl:template>
+
 </xsl:stylesheet>
 	

@@ -5,6 +5,9 @@
     <Language>fr</Language>
     <Language>en</Language>
   </Languages>
+  <ColtraneQuestions>
+    <Fin/>
+  </ColtraneQuestions>
   <HomePage>
     <File>static-pages.fo</File>
   </HomePage>

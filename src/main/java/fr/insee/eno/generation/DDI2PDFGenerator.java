@@ -82,4 +82,8 @@ public class DDI2PDFGenerator implements Generator {
 		this.propertiesFiles = propertiesFiles;
 	}
 
+	public String in2out(){
+		return "ddi2pdf";
+	}
+	
 }

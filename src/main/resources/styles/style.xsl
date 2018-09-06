@@ -48,7 +48,7 @@
         <xsl:attribute name="width">100%</xsl:attribute>
         <xsl:attribute name="height">10mm</xsl:attribute>
         <xsl:attribute name="position">relative</xsl:attribute>
-        <xsl:attribute name="border-bottom">1px dotted black</xsl:attribute>
+        <xsl:attribute name="border-bottom">1px dashed black</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="Line-drawing-Garde">
         <xsl:attribute name="position">relative</xsl:attribute>

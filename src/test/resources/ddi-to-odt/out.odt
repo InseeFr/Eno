@@ -151,6 +151,11 @@
                                       fo:padding="0cm"
                                       fo:border="0.05pt solid #000000"/>
       </style:style>
+      <style:style style:name="Table.Cell.added" style:family="table-cell">
+         <style:table-cell-properties fo:background-color="#9ef7ac"
+                                      fo:padding="0cm"
+                                      fo:border="0.05pt solid #000000"/>
+      </style:style>
       <style:style style:name="deleted"
                    style:family="text"
                    style:default-outline-level="2">
@@ -1141,8 +1146,7 @@
                <text:p text:style-name="Format">Car 255</text:p>
             </text:section>
          </text:section>
-         <text:section text:name="CalculatedVariable-jbcggtca-GOP">
-            <text:p/>
+         <text:section text:name="CalculatedVariable-SUM_EXPENSES">
             <text:p text:style-name="CalculatedVariableTitle">Calcul de la variable SUM_EXPENSES Label : [SUM_EXPENSES]</text:p>
             <text:p text:style-name="CalculatedVariableContent">Formule de calcul : SUM_EXPENSES = ^PERCENTAGE_EXPENSES11 + ^PERCENTAGE_EXPENSES21 + ^PERCENTAGE_EXPENSES31 +
 				^PERCENTAGE_EXPENSES41 + ^PERCENTAGE_EXPENSES51 + ^PERCENTAGE_EXPENSES61 +

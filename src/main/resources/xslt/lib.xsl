@@ -189,7 +189,13 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="text()" mode="eno:serialize">
-        <xsl:value-of select="."/>
+        <xsl:if test="substring(.,1,1)=' '">
+            <xsl:text xml:space="preserve"> </xsl:text>
+        </xsl:if>
+        <xsl:copy-of select="normalize-space(.)"/>
+        <xsl:if test="substring(.,string-length(.),1)=' ' and string-length(.) &gt; 1">
+            <xsl:text xml:space="preserve"> </xsl:text>
+        </xsl:if>
     </xsl:template>
 
     <xd:doc>

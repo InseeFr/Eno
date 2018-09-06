@@ -16,6 +16,6 @@ public interface Preprocessor {
 	 * @return the preprocessed file
 	 * @throws Exception when it goes wrong
 	 */
-	public File process(File inputFile, File parametersFile, String survey) throws Exception;
+	public File process(File inputFile, File parametersFile, String survey, String in2out) throws Exception;
 
 }

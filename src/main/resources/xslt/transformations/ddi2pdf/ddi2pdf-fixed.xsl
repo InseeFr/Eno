@@ -21,7 +21,7 @@
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
-    <xsl:strip-space elements="*"/>
+    <!--<xsl:strip-space elements="*"/>-->
 
     <xd:doc>
         <xd:desc>
@@ -127,71 +127,71 @@
         </xsl:variable>
         <xsl:sequence select="$tempLabel"/>
     </xsl:function>
-    
-    
+
     <xsl:template match="*" mode="enopdf:format-label">
       <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
     </xsl:template>
-    
-    <xsl:template match="xhtml:p[.//xhtml:br]" mode="enopdf:format-label">
+
+    <xsl:template match="xhtml:p[descendant::xhtml:br]" mode="enopdf:format-label">
         <xsl:element name="fo:block">
             <xsl:attribute name="linefeed-treatment" select="'preserve'"/>
             <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
         </xsl:element>
     </xsl:template>
-    
+
     <xsl:template match="*[not(descendant-or-self::xhtml:*)]" mode="enopdf:format-label">
         <xsl:copy-of select="."/>
     </xsl:template>
-    
+
     <xsl:template match="text()" mode="enopdf:format-label">
         <xsl:if test="substring(.,1,1)=' '">
             <xsl:text xml:space="preserve"> </xsl:text>
         </xsl:if>
         <xsl:copy-of select="normalize-space(.)"/>
-        <xsl:if test="substring(.,string-length(.),1)=' '">
+        <xsl:if test="substring(.,string-length(.),1)=' ' and string-length(.) &gt; 1">
             <xsl:text xml:space="preserve"> </xsl:text>
         </xsl:if>
     </xsl:template>
-    
+
     <xsl:template match="xhtml:i" mode="enopdf:format-label">
-        <xsl:element name="fo:inline">          
+        <xsl:element name="fo:inline">
+            <xsl:attribute name="font-style" select="'italic'"/>
             <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
         </xsl:element>
     </xsl:template>
-    
+
     <xsl:template match="xhtml:b" mode="enopdf:format-label">
         <xsl:element name="fo:inline">
             <xsl:attribute name="font-weight" select="'bold'"/>
             <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
-        </xsl:element>        
+        </xsl:element>
     </xsl:template>
-    
+
     <xsl:template match="xhtml:span[@style='text-decoration:underline']" mode="enopdf:format-label">
         <xsl:element name="fo:wrapper">
             <xsl:attribute name="text-decoration" select="'underline'"/>
             <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
         </xsl:element>
     </xsl:template>
-    
+
     <xsl:template match="xhtml:br" mode="enopdf:format-label">
         <xsl:text xml:space="preserve">&#xA;</xsl:text>
     </xsl:template>
-    
+
     <xsl:template match="xhtml:a[contains(@href,'#ftn')]" mode="enopdf:format-label">
         <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
-        <xsl:variable name="relatedInstruction" select="enoddi:get-instruction-by-anchor-ref(.,@href)"/>        
+        <xsl:variable name="relatedInstruction" select="enoddi:get-instruction-by-anchor-ref(.,@href)"/>
         <xsl:choose>
             <xsl:when test="$relatedInstruction/d:InstructionName/r:String = 'tooltip'">
                 <xsl:text>*</xsl:text>
             </xsl:when>
             <xsl:when test="$relatedInstruction/d:InstructionName/r:String = 'footnote'">
-                <xsl:value-of select="enoddi:get-instruction-index($relatedInstruction,'footnote')"/>                                
+                <xsl:value-of select="enoddi:get-instruction-index($relatedInstruction,'footnote')"/>
             </xsl:when>
-            <xsl:otherwise/>                             
-        </xsl:choose>                
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Function for debugging, it outputs the input name of the element related to the driver.</xd:p>
@@ -201,7 +201,7 @@
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="local-name($context)"/>
     </xsl:function>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
@@ -211,7 +211,7 @@
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="enoddi:get-instructions-by-format($context,'instruction,comment,help')"/>
     </xsl:function>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
@@ -221,8 +221,8 @@
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote') | enoddi:get-next-filter-description($context)"/>
     </xsl:function>
-    
-    
+
+
     <xd:doc>
         <xd:desc>
             <xd:p>Function for retrieving style for QuestionTable (only 'no-border' or '' as values yet)</xd:p>
@@ -232,7 +232,7 @@
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="if(enoddi:get-style($context) = 'question multiple-choice-question') then ('no-border') else()"/>
     </xsl:function>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Function for retrieving an index for footnote instructions (based on their ordering in the questionnaire)</xd:p>
@@ -242,6 +242,6 @@
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="enoddi:get-instruction-index($context,'footnote,tooltip')"/>
     </xsl:function>
-    
-    
+
+
 </xsl:stylesheet>

@@ -51,7 +51,7 @@ public class GenerationService {
 		logger.debug("Temp folder: "+ tempFolder); 
 		
 		cleanTempFolder(surveyName);
-		File preprocessResultFileName = this.preprocessor.process(inputFile, parametersFile,surveyName);
+		File preprocessResultFileName = this.preprocessor.process(inputFile, parametersFile,surveyName,generator.in2out());
 		File generatedForm = this.generator.generate(preprocessResultFileName, surveyName); 
 		
 		//File generatedForm = new File("C:\\Users\\Tarik\\AppData\\Local\\Temp\\eno\\test\\instrument-i6vwid\\form\\form.fo");
