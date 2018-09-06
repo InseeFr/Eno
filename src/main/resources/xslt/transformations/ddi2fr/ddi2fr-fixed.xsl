@@ -141,7 +141,7 @@
         <xsl:variable name="ddi-label" select="enoddi:get-label($context,$language)"/>
         <xsl:variable name="tooltip" select="enoddi:get-instructions-by-format($context,'tooltip')" as="node()*"/>
         <xsl:variable name="tooltips-with-id" select="$tooltip[descendant-or-self::*/@id]" as="node()*"/>
-        <xsl:variable name="other-instructions" select="enoddi:get-instructions-by-format($context,'instruction,comment,help')" as="node()*"/>
+        <xsl:variable name="other-instructions" select="enoddi:get-instructions-by-format($context,'instruction,comment,help,warning')" as="node()*"/>
 
         <xsl:variable name="original-label">
             <xsl:choose>
