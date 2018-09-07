@@ -455,8 +455,7 @@
                <r:Content xml:lang="fr-FR">A définir</r:Content>
             </r:Label>
             <r:Description>
-               <r:Content xml:lang="fr-FR">If you are not ready, please go to the end of the
-                    questionnaire</r:Content>
+               <r:Content xml:lang="fr-FR"/>
             </r:Description>
             <d:IfCondition>
                <r:Command>
