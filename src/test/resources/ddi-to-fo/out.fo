@@ -275,8 +275,8 @@
                    margin-right="4mm">
             <fo:instream-foreign-object>
                <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                message="Code Bar - #page-number#"
-                                orientation="90">
+                                orientation="90"
+                                message="${idQuestionnaire} - #page-number#">
                   <barcode:code128>
                      <barcode:height>8mm</barcode:height>
                      <barcode:human-readable>
@@ -286,7 +286,7 @@
                </barcode:barcode>
             </fo:instream-foreign-object>
             <fo:block-container reference-orientation="90" margin-left="5mm">
-               <fo:block text-align="left" font-size="8pt">Code Bar - <fo:page-number/>
+               <fo:block text-align="left" font-size="8pt">${idQuestionnaire} - <fo:page-number/>
                </fo:block>
             </fo:block-container>
          </fo:block>
@@ -372,6 +372,26 @@
                   </fo:list-item-body>
                </fo:list-item>
             </fo:list-block>
+         <fo:block width="100%" page-break-inside="avoid" keep-with-previous="always">
+               <fo:inline-container width="10%" vertical-align="bottom" text-align="right">
+                  <fo:block-container>
+                     <fo:block>
+                        <fo:external-graphic src="filter_arrow.png"/>
+                     </fo:block>
+                  </fo:block-container>
+               </fo:inline-container>
+               <fo:inline-container width="87%">
+                  <fo:block font-size="10pt"
+                            font-weight="bold"
+                            margin-top="6pt"
+                            margin-bottom="6pt"
+                            border-color="black"
+                            border-style="solid"
+                            background-color="#CCCCCC"
+                            text-align="center"
+                            width="100%">If you are not ready, please go to the end of the questionnaire</fo:block>
+               </fo:inline-container>
+            </fo:block>
          </fo:block>
          <fo:block font-size="10pt" font-weight="bold" color="black"/>
          <fo:block background-color="#CCCCCC"

@@ -112,7 +112,7 @@
 						</xsl:call-template>
 					</fo:block>
 					<xsl:if test="$orientation='0'">
-						<fo:block position="absolute" margin-before="65%" text-align="right" margin-right="4mm">
+						<fo:block position="absolute" margin-top="65%" text-align="right" margin-right="4mm">
 							<fo:instream-foreign-object>
 								<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
 									orientation="90">
@@ -262,7 +262,7 @@
 					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 				</fo:block>
 			</xsl:when>
-			<xsl:when test="$format = 'filter-alternative-text'">
+			<xsl:when test="$format = ('filter-alternative-text','flowcontrol-text')">
 				<fo:block width="100%" page-break-inside="avoid" keep-with-previous="always">
 					<fo:inline-container width="10%" vertical-align="bottom" text-align="right">
 						<fo:block-container>
