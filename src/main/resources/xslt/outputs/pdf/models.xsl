@@ -111,22 +111,26 @@
 							<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
 						</xsl:call-template>
 					</fo:block>
-					<fo:block position="absolute" margin-top="65%" text-align="right" margin-right="4mm">
-						<fo:instream-foreign-object>
-							<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-								message="Code Bar - #page-number#" orientation="90">
-								<barcode:code128>
-									<barcode:height>8mm</barcode:height>
-									<barcode:human-readable>
-										<barcode:placement>none</barcode:placement>
-									</barcode:human-readable>
-								</barcode:code128>
-							</barcode:barcode>
-						</fo:instream-foreign-object>
-						<fo:block-container reference-orientation="90" margin-left="5mm">
-							<fo:block text-align="left" font-size="8pt">Code Bar - <fo:page-number/></fo:block>
-						</fo:block-container>
-					</fo:block>
+					<xsl:if test="$orientation='0'">
+						<fo:block position="absolute" margin-before="65%" text-align="right" margin-right="4mm">
+							<fo:instream-foreign-object>
+								<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
+									orientation="90">
+									<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
+									<barcode:code128>
+										<barcode:height>8mm</barcode:height>
+										<barcode:human-readable>
+											<barcode:placement>none</barcode:placement>
+										</barcode:human-readable>
+									</barcode:code128>
+								</barcode:barcode>
+							</fo:instream-foreign-object>
+							<fo:block-container reference-orientation="90" margin-left="5mm">
+								<fo:block text-align="left" font-size="8pt">${idQuestionnaire} - <fo:page-number/></fo:block>
+							</fo:block-container>
+						</fo:block>
+					</xsl:if>
+					
 					<!-- Je n'ai pas trouvé quel contenu mettre... -->
 					<!--<fo:block>
 						<xsl:value-of select="'#if '"/>
@@ -144,9 +148,36 @@
 							<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
 						</xsl:call-template>
 					</fo:block>
+					
 					<fo:block text-align="center">
 						<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
 					</fo:block>
+					<xsl:if test="$orientation='90'">
+						<fo:block-container text-align="left" absolute-position="absolute" left="10mm" top="20mm">
+							<fo:block>
+								<fo:instream-foreign-object>
+									<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns">
+										<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
+										<barcode:code128>
+											<barcode:height>8mm</barcode:height>
+											<barcode:human-readable>
+												<barcode:placement>none</barcode:placement>
+											</barcode:human-readable>
+										</barcode:code128>
+									</barcode:barcode>
+								</fo:instream-foreign-object>               
+							</fo:block>
+						</fo:block-container>
+						<fo:block-container 
+							absolute-position="absolute"
+							right="20mm"
+							top="20mm">
+							<fo:block-container>
+								<fo:block text-align="right" font-size="8pt">${idQuestionnaire} - <fo:page-number/>
+								</fo:block>
+							</fo:block-container>
+						</fo:block-container>
+					</xsl:if>
 				</fo:static-content>
 				<fo:flow flow-name="xsl-region-body" border-collapse="collapse" font-size="10pt">
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
