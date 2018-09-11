@@ -58,9 +58,9 @@
                     <poguesGoto:Expression>
                         <xsl:value-of select="./pogues:Expression"/>
                     </poguesGoto:Expression>
-                    <poguesGoto:Description>
+                    <!--<poguesGoto:Description>
                         <xsl:value-of select="./pogues:Description"/>
-                    </poguesGoto:Description>
+                    </poguesGoto:Description>-->
                     <poguesGoto:IfTrue>
                         <xsl:call-template name="find_id_position">
                             <xsl:with-param name="value" select="./pogues:IfTrue"/>
@@ -173,9 +173,9 @@
                     <xsl:call-template name="transform_goto_expressions">
                         <xsl:with-param name="goto_expressions" select="$id_with_goto/*/poguesGoto:GoToExpressions/poguesGoto:Expression"/>
                     </xsl:call-template>
-                    <Description>
+                    <!--<Description>
                         <xsl:value-of select="$id_with_goto//poguesGoto:Description"/>
-                    </Description>
+                    </Description>-->
                     <IfTrue>
                         <xsl:copy>
                             <xsl:copy-of select="@* | text() | comment() | processing-instruction()"/>
@@ -246,7 +246,7 @@
         <xsl:for-each select="$list_forward_goto/*">
             <xsl:if test="-$pos+./poguesGoto:IfTrue/@position gt 0 and $pos - ./poguesGoto:FromId/@position gt 0" >
                 <xsl:copy-of select="./poguesGoto:Expression"/>
-                <xsl:copy-of select="./poguesGoto:Description"/>
+                <!--<xsl:copy-of select="./poguesGoto:Description"/>-->
             </xsl:if>
         </xsl:for-each>
 
