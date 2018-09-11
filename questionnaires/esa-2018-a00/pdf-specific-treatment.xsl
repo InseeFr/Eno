@@ -103,10 +103,10 @@
             <xsl:apply-templates select="@*"/>
             <xsl:choose>
                 <xsl:when test="$nbcol = '4'">
-                    <xsl:attribute name="width" select="'70mm'"/>
+                    <xsl:attribute name="width" select="'85mm'"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:attribute name="width" select="'150mm'"/>
+                    <xsl:attribute name="width" select="'165mm'"/>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:apply-templates select="node()" mode="roster"/>
@@ -122,7 +122,7 @@
     <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[3]" mode="roster">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="width" select="'85mm'"/>
+            <xsl:attribute name="width" select="'80mm'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
         </xsl:copy>
     </xsl:template>
@@ -130,7 +130,7 @@
     <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[4]" mode="roster">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="width" select="'85mm'"/>
+            <xsl:attribute name="width" select="'80mm'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
         </xsl:copy>
     </xsl:template>
@@ -165,7 +165,6 @@
         
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <fo:block>
             <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB})')"/>
             <xsl:value-of select="'&lt;fo:block'"/>
             <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre0'') || 
@@ -199,7 +198,6 @@
             <xsl:value-of select="'#{else}'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
             <xsl:value-of select="'#{end}'"/>
-            </fo:block>
         </xsl:copy>
     </xsl:template>
 
@@ -207,15 +205,28 @@
         <xsl:param name="roster-name" tunnel="yes"/>
         <xsl:param name="line-number" as="xs:integer" tunnel="yes"/>
         
+        <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB})')"/>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <fo:block>
+                <xsl:value-of select="concat('$!{',$roster-name,'-',$line-number,'-',$roster-name,'_CO}')"/>
+            </fo:block>
+        </xsl:copy>
+        <xsl:value-of select="'#{else}'"/>
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:attribute name="background-color" select="'#CCCCCC'"/>
+            <fo:block/>
+        </xsl:copy>
+        <xsl:value-of select="'#{end}'"/>
+<!--
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
                 <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB})')"/>
                 <xsl:value-of select="concat('&lt;fo:block&gt;$!{',$roster-name,'-',$line-number,'-',$roster-name,'_CO}&lt;/fo:block&gt;')"/>
-                <xsl:value-of select="'#{else}&lt;fo:block background-color=&quot;#CCCCCC&quot;/&gt;'"/>
+                <xsl:value-of select="'#{else}&lt;fo:block width=&quot;100%&quot; height=&quot;100%&quot; background-color=&quot;#CCCCCC&quot;/&gt;'"/>
                 <xsl:value-of select="'#{end}'"/>
-            </fo:block>
-            </xsl:copy>
+            </xsl:copy>-->
     </xsl:template>
 
     <xsl:template match="fo:table-body/fo:table-row/fo:table-cell[3]" mode="roster">
@@ -223,13 +234,12 @@
         <xsl:param name="line-number" as="xs:integer" tunnel="yes"/>
         
         <xsl:copy>
-            <fo:block>
             <xsl:apply-templates select="@*"/>
             <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB} and !$!{',$roster-name,'-',$line-number,'-',$roster-name,'_MO})')"/>
-            <xsl:value-of select="'&lt;fo:block/&gt;#{else}'"/>
+            <fo:block/>
+            <xsl:value-of select="'#{else}'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
             <xsl:value-of select="'#{end}'"/>
-            </fo:block>
         </xsl:copy>
     </xsl:template>
 
@@ -239,12 +249,10 @@
 
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <fo:block>
             <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB} and !$!{',$roster-name,'-',$line-number,'-',$roster-name,'_MOST})')"/>
             <xsl:value-of select="'&lt;fo:block/&gt;#{else}'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
             <xsl:value-of select="'#{end}'"/>
-            </fo:block>
         </xsl:copy>
     </xsl:template>
 
