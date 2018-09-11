@@ -116,9 +116,7 @@
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                </d:QuestionScheme>               
-                
-             
+                </d:QuestionScheme>
                 
                 <!-- CategoryScheme part -->
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -153,6 +151,10 @@
                     <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">Variable Scheme for the survey</r:Content></r:Label>
                     <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                    </xsl:apply-templates>
+                    <xsl:apply-templates select="enoddi32:get-questions-table($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroup', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                 </l:VariableScheme>
@@ -323,11 +325,52 @@
     </xsl:template>
 
     <xsl:template match="driver-VariableScheme//Variable//Unit" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>     
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="unit" select="enoddi32:get-unit($source-context)"/>
         <xsl:if test="not(normalize-space($unit) = ('',' '))">
             <r:MeasurementUnit><xsl:value-of select="$unit"/></r:MeasurementUnit>
         </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="driver-VariableGroup//QuestionDynamicTable" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="id" select="enoddi32:get-id($source-context)"/>
+        
+        <l:VariableGroup>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="concat($id,'-gp')"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:BasedOnObject>
+                <r:BasedOnReference>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:ID><xsl:value-of select="$id"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
+                </r:BasedOnReference>
+            </r:BasedOnObject>
+            <l:TypeOfVariableGroup>TableLoop</l:TypeOfVariableGroup>
+            <l:VariableGroupName>
+                <r:String><xsl:value-of select="enoddi32:get-name($source-context)"/></r:String>
+            </l:VariableGroupName>
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
+        </l:VariableGroup>
+    </xsl:template>
+    
+    <xsl:template match="driver-VariableGroup//QuestionDynamicTable//ResponseDomain" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+
+        <xsl:variable name="relatedVariable" select="enoddi32:get-related-variable($source-context)"/>
+
+        <r:VariableReference>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="enoddi32:get-id($relatedVariable)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+        </r:VariableReference>
     </xsl:template>
 
     <xsl:template match="driver-InterviewerInstructionScheme//*[name() = ('Instruction','Control')]" mode="model">
@@ -737,8 +780,8 @@
                     <qop-id>
                         <xsl:value-of select="enoddi32:get-qop-id(.)"/>
                     </qop-id>
-                    <name><xsl:value-of select="enoddi32:get-name(.)"/></name>                   
-                <type>
+                    <name><xsl:value-of select="enoddi32:get-name(.)"/></name>
+                    <type>
                         <xsl:value-of select="enoddi32:get-type(.)"/>
                     </type>
                 </Container>
@@ -920,7 +963,7 @@
     </xsl:template>
     
     
-    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse')]//*[name() =('Sequence','IfThenElse','QuestionMultipleChoice','QuestionSingleChoice','QuestionTable','QuestionSimple','Control','ResponseDomain')]" mode="model" priority="1">
+    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse')]//*[name() =('Sequence','IfThenElse','QuestionMultipleChoice','QuestionSingleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','Control','ResponseDomain')]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="driver" select="."/>
@@ -959,7 +1002,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
  
-    <xsl:template name="QuestionConstruct" match="driver-ControlConstructScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionSimple','QuestionSingleChoice')]" mode="model">
+    <xsl:template name="QuestionConstruct" match="driver-ControlConstructScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','QuestionSingleChoice')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
         <d:QuestionConstruct>
@@ -1029,7 +1072,7 @@
     </xsl:template>
     
     <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
-    <xsl:template match="driver-ResponseDomain/QuestionTable | driver-ResponseDomain/QuestionMultipleChoice" mode="model" priority="3">
+    <xsl:template match="driver-ResponseDomain/QuestionDynamicTable | driver-ResponseDomain/QuestionTable | driver-ResponseDomain/QuestionMultipleChoice" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <d:StructuredMixedGridResponseDomain>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -1038,7 +1081,7 @@
         </d:StructuredMixedGridResponseDomain>
     </xsl:template>
 
-    <xsl:template name="Question" match="driver-QuestionScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionSimple','QuestionSingleChoice')]" mode="model">
+    <xsl:template name="Question" match="driver-QuestionScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','QuestionSingleChoice')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!-- 
@@ -1048,7 +1091,7 @@
         <!-- Retrieve the ddi corresponding element name and store it -->
         <xsl:variable name="ddi-element-name">
             <xsl:choose>
-                <xsl:when test="./name() = ('QuestionMultipleChoice','QuestionTable')">
+                <xsl:when test="./name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable')">
                     <xsl:value-of select="'d:QuestionGrid'"/>
                 </xsl:when>
                 <xsl:when test="./name() = ('QuestionSimple','QuestionSingleChoice')">
@@ -1123,7 +1166,7 @@
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference', .)" tunnel="yes"/>
                 <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-            </xsl:apply-templates>        
+            </xsl:apply-templates>
         </xsl:element>
     </xsl:template>
 
@@ -1181,13 +1224,13 @@
         </xsl:apply-templates>    
     </xsl:template>
 
-    <xsl:template match="driver-QuestionScheme//QuestionTable//GridDimension" mode="model">
+    <xsl:template match="driver-QuestionScheme//*[name() = ('QuestionTable','QuestionDynamicTable')]//GridDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>       
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
-        <xsl:variable name="fake-dimension" select="enoddi32:get-fake-dimension($source-context)"/>                
+        <xsl:variable name="fake-dimension" select="enoddi32:get-fake-dimension($source-context)"/>
         <xsl:if test="$fake-dimension">
             <xsl:apply-templates select="$fake-dimension" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -1372,7 +1415,7 @@
     </xsl:template>
     
     <xsl:template match="*" mode="enoddi32:question-reference">        
-            <xsl:variable name="elementName" select="if(enoddi32:get-question-type(.) = ('MULTIPLE_CHOICE','TABLE')) then('QuestionGrid') else('QuestionItem')"/>
+        <xsl:variable name="elementName" select="if(enoddi32:get-question-type(.) = ('MULTIPLE_CHOICE','TABLE','DYNAMIC_TABLE')) then('QuestionGrid') else('QuestionItem')"/>
             <r:QuestionReference>
                 <r:Agency><xsl:value-of select="enoddi32:get-agency(.)"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-question-id(.)"/></r:ID>

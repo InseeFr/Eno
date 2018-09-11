@@ -58,7 +58,7 @@
     </xsl:template>
     
     <!-- Parsing is done on the text nodes for the default mode only -->
-    <xsl:template match="text()[matches(normalize-space(replace(.,'&amp;#xd;', 'xhtml:br')),'[*]|xhtml:br|\[.*\]\(.*\)')]">
+    <xsl:template match="text()[matches(normalize-space(replace(.,'&amp;#xd;', 'xhtml:br')),'[*]|xhtml:br|\[.*\]\(\. &quot;.*&quot;\)')]">
         <xhtml:p>
             <xsl:call-template name="parse-tags">
               <xsl:with-param name="expression" select="normalize-space(replace(.,'&amp;#xd;', 'xhtml:br'))"/>
@@ -251,11 +251,11 @@
         <!-- 
             Defining a regexp where :
             - regexp(1) is the sequence \n if encountered, for breaklines,
-            - regexp(2) is the sequence [.*](.) if encountered, for links.
+            - regexp(2) is the sequence [.*](\. ".*") if encountered, for links.
             - regexp(3) is the sub-sequence ([^\)]+ if regexp(2) has matched, for the text associated to the link,
-            - regexp(4) is the sub-sequence (.*) if regexp(2) has matched, for the url associated to the link.
+            - regexp(4) is the sub-sequence ([^&quot;]+) if regexp(2) has matched, for the url associated to the link.
         -->
-        <xsl:analyze-string select="$expression" regex="(xhtml:br)|(\[([^\]]+)\]\(([^\)]+)\)){{1}}">
+        <xsl:analyze-string select="$expression" regex="(xhtml:br)|(\[([^\]]+)\]\(\. &quot;([^&quot;]+)&quot;\)){{1}}">
              <xsl:matching-substring>
                  <xsl:choose>
                      <!-- Breakline case -->
@@ -265,7 +265,7 @@
                      <!-- Link case -->
                      <xsl:when test="regex-group(2)">
                          <xsl:element name="xhtml:a">
-                             <xsl:attribute name="href" select="regex-group(4)"/>
+                             <xsl:attribute name="href" select="concat('. &quot;',regex-group(4),'&quot;')"/>
                              <xsl:copy-of select="regex-group(3)"/>
                          </xsl:element>
                      </xsl:when>
