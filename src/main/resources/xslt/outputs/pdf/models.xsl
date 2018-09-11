@@ -39,6 +39,16 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
+	<xsl:variable name="column-count">
+		<xsl:choose>
+			<xsl:when test="$parameters//Format/Columns != ''">
+				<xsl:value-of select="$parameters//Format/Columns"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$properties//Format/Columns"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
 	<xsl:variable name="roster-defaultsize">
 		<xsl:choose>
 			<xsl:when test="$parameters//Roster/Row/DefaultSize != ''">
@@ -95,11 +105,10 @@
 		
 		<fo:root>
 			<fo:layout-master-set>
-				<!-- reference-orientation="90" column-count="2" -->
 				<fo:simple-page-master master-name="A4-portrait" page-height="297mm"
 					page-width="210mm" font-family="arial" font-size="10pt" reference-orientation="{$orientation}"
 					font-weight="normal" margin-bottom="5mm">
-					<fo:region-body margin="13mm" column-count="1"/>
+					<fo:region-body margin="13mm" column-count="{$column-count}"/>
 					<fo:region-before region-name="xsl-region-before" extent="25mm" display-align="before" precedence="true"/>
 					<fo:region-after region-name="xsl-region-after" extent="25mm" display-align="before" precedence="true"/>
 				</fo:simple-page-master>
