@@ -169,15 +169,15 @@
                         <fo:inline-container>
                             <fo:block text-align="right">Paris, le ${DateEdition}</fo:block>
                             <fo:block margin-top="3mm" font-weight="bold">&lt;![CDATA[Objet :
-                                Enquête statistique#if((${BddFrequence}!='annuelle') &amp;&amp;
+                                Enquête statistique#if((${BddFrequence}!='annuelle') and
                                 (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end
-                                ${BddLibelleLong}#if((${BddFrequence}!='annuelle') &amp;&amp;
+                                ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                                 (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
                                 ${BddAnneeReference}]]&gt;</fo:block>
                             <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Identifiant
                                 ${BddLabelUniteEnquetee} :
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
-                            <fo:block margin-top="3mm">&lt;![CDATA[#if($!{BddNom} &amp;&amp;
+                            <fo:block margin-top="3mm">&lt;![CDATA[#if($!{BddNom} and
                                 $!{BddCivilite})$!{BddCivilite} $!{BddNom}, #elseif($!{BddNom})
                                 Madame ou Monsieur $!{BddNom},#else Madame, Monsieur,#end ]]&gt;</fo:block>
                             <fo:block margin-top="3mm">${BddArticleServiceProducteur}${BddNomServiceProducteur} réalise
@@ -217,7 +217,7 @@
                                 suivante : $!{BddURLDiffusion}.#end</fo:block>
                             <fo:block margin-top="3mm">&lt;![CDATA[En vous remerciant par avance de
                                 votre collaboration, je vous prie de bien vouloir agréer,
-                                #if($!{BddNom} &amp;&amp; $!{BddCivilite})$!{BddCivilite}
+                                #if($!{BddNom} and $!{BddCivilite})$!{BddCivilite}
                                 $!{BddNom}, #elseif($!{BddNom}) Madame ou Monsieur $!{BddNom},#else
                                 Madame, Monsieur,#end]]&gt; l'assurance de ma considération
                                 distinguée.</fo:block>
@@ -276,7 +276,7 @@
                                 <fo:inline-container>
                                     <fo:block>Pour répondre à l'enquête
                                         statistique&lt;![CDATA[#if((${BddFrequence}!='annuelle')
-                                        &amp;&amp; (${BddFrequence}!='pluriannuelle'))
+                                        and (${BddFrequence}!='pluriannuelle'))
                                         ${BddFrequence}#end]]&gt; ${BddLibelleLong}, il convient de
                                         vous connecter sur le site sécurisé de réponse aux enquêtes
                                         entreprises de la Statistique publique : http://<fo:inline
@@ -477,15 +477,15 @@
                         <fo:inline-container>
                             <fo:block text-align="right">Paris, le ${DateEdition}</fo:block>
                             <fo:block margin-top="3mm" font-weight="bold">&lt;![CDATA[Objet :
-                                Enquête statistique#if((${BddFrequence}!='annuelle') &amp;&amp;
+                                Enquête statistique#if((${BddFrequence}!='annuelle') and
                                 (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end
-                                ${BddLibelleLong}#if((${BddFrequence}!='annuelle') &amp;&amp;
+                                ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                                 (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
                                 ${BddAnneeReference}]]&gt;</fo:block>
                             <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Identifiant
                                 ${BddLabelUniteEnquetee} :
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
-                            <fo:block margin-top="3mm">&lt;![CDATA[#if($!{BddNom} &amp;&amp;
+                            <fo:block margin-top="3mm">&lt;![CDATA[#if($!{BddNom} and
                                 $!{BddCivilite})$!{BddCivilite} $!{BddNom}, #elseif($!{BddNom})
                                 Madame ou Monsieur $!{BddNom},#else Madame, Monsieur,#end ]]&gt;</fo:block>
                             <fo:block margin-top="3mm">${BddArticleServiceProducteur}${BddNomServiceProducteur} réalise
@@ -525,7 +525,7 @@
                                 suivante : $!{BddURLDiffusion}.#end</fo:block>
                             <fo:block margin-top="3mm">&lt;![CDATA[En vous remerciant par avance de
                                 votre collaboration, je vous prie de bien vouloir agréer,
-                                #if($!{BddNom} &amp;&amp; $!{BddCivilite})$!{BddCivilite}
+                                #if($!{BddNom} and $!{BddCivilite})$!{BddCivilite}
                                 $!{BddNom}, #elseif($!{BddNom}) Madame ou Monsieur $!{BddNom},#else
                                 Madame, Monsieur,#end]]&gt; l'assurance de ma considération
                                 distinguée.</fo:block>
@@ -584,7 +584,7 @@
                                 <fo:inline-container>
                                     <fo:block>Pour répondre à l'enquête
                                         statistique&lt;![CDATA[#if((${BddFrequence}!='annuelle')
-                                        &amp;&amp; (${BddFrequence}!='pluriannuelle'))
+                                        and (${BddFrequence}!='pluriannuelle'))
                                         ${BddFrequence}#end]]&gt; ${BddLibelleLong}, il convient de
                                         vous connecter sur le site sécurisé de réponse aux enquêtes
                                         entreprises de la Statistique publique : http://<fo:inline
@@ -766,7 +766,7 @@
                 <fo:block-container absolute-position="absolute" left="105mm" top="50mm"
                     width="87mm" height="50mm" background-color="#EEE" padding="3mm">
                     <fo:block font-weight="bold" font-size="16pt" text-align="center" margin-top="10mm"
-                        >&lt;![CDATA[${BddLibelleLong}#if((${BddFrequence}!='annuelle') &amp;&amp;
+                        >&lt;![CDATA[${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                     (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
                     ${BddAnneeReference}]]&gt;</fo:block>
                 </fo:block-container>
@@ -921,7 +921,7 @@
                 <fo:block-container absolute-position="absolute" left="150mm" top="40mm"
                     width="90mm" height="30mm" background-color="#EEE" padding="3mm">
                     <fo:block font-weight="bold" font-size="16pt" text-align="center" margin-top="10mm"
-                        >&lt;![CDATA[${BddLibelleLong}#if((${BddFrequence}!='annuelle') &amp;&amp;
+                        >&lt;![CDATA[${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                         (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
                         ${BddAnneeReference}]]&gt;</fo:block>
                 </fo:block-container>
