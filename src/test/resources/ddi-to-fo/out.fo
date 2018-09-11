@@ -151,7 +151,7 @@
                <fo:block font-weight="bold"
                          font-size="16pt"
                          text-align="center"
-                         margin-top="10mm"><![CDATA[${BddLibelleLong}#if((${BddFrequence}!='annuelle') &&
+                         margin-top="10mm"><![CDATA[${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                     (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
                     ${BddAnneeReference}]]></fo:block>
             </fo:block-container>
