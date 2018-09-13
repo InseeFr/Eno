@@ -248,6 +248,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 
 		<xsl:variable name="format" select="normalize-space(enopdf:get-format($source-context))"/>
+		<xsl:variable name="label" select="enopdf:get-label($source-context, $languages[1])" as="node()"/>
 		<xsl:choose>
 			<xsl:when test="$format = 'footnote'">
 				<fo:block>
@@ -258,7 +259,7 @@
 								<fo:inline font-size="75%" baseline-shift="super">
 									<xsl:copy-of select="enopdf:get-end-question-instructions-index($source-context)"/>
 								</fo:inline>
-								<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+								<xsl:copy-of select="$label"/>
 							</fo:block>
 						</fo:footnote-body>
 					</fo:footnote>
@@ -268,33 +269,35 @@
 			</xsl:when>
 			<xsl:when test="$format = 'comment' or $format = 'help' or $format = 'instruction'">
 				<fo:block xsl:use-attribute-sets="instruction" page-break-inside="avoid" keep-with-next="always">
-					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
 			<xsl:when test="$format = ('filter-alternative-text','flowcontrol-text')">
-				<fo:block width="100%" page-break-inside="avoid" keep-with-previous="always">
-					<fo:inline-container width="10%" vertical-align="bottom" text-align="right">
-						<fo:block-container>
-							<fo:block>
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
-								</xsl:call-template>
+				<xsl:if test="$label != ''">
+					<fo:block width="100%" page-break-inside="avoid" keep-with-previous="always">
+						<fo:inline-container width="10%" vertical-align="bottom" text-align="right">
+							<fo:block-container>
+								<fo:block>
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
+									</xsl:call-template>
+								</fo:block>
+							</fo:block-container>
+						</fo:inline-container>
+						<fo:inline-container width="87%">
+							<fo:block xsl:use-attribute-sets="filter-alternative" width="100%">
+								<xsl:copy-of select="$label"/>
 							</fo:block>
-						</fo:block-container>
-					</fo:inline-container>
-					<fo:inline-container width="87%">
-						<fo:block xsl:use-attribute-sets="filter-alternative" width="100%">
-							<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-						</fo:block>
-					</fo:inline-container>
-				</fo:block>
+						</fo:inline-container>
+					</fo:block>
+				</xsl:if>
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:block xsl:use-attribute-sets="general-style" page-break-inside="avoid" keep-with-next="always">
 					<xsl:if test="$isTable = 'YES'">
 						<xsl:attribute name="margin-left">1mm</xsl:attribute>
 					</xsl:if>
-					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:otherwise>
 		</xsl:choose>
