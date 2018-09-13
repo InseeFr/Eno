@@ -120,39 +120,94 @@
     </xsl:function>
 
     <xsl:function name="enopdf:get-formatted-label">
-        <xsl:param name="label" as="item()"/>
+        <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
         <xsl:variable name="tempLabel">
-            <xsl:apply-templates select="enoddi:get-label($label,$language)" mode="enopdf:format-label"/>
+            <xsl:apply-templates select="enoddi:get-label($context,$language)" mode="enopdf:format-label">
+                <xsl:with-param name="label-variables" select="enoddi:get-label-conditioning-variables($context,$language)" tunnel="yes"/>
+            </xsl:apply-templates>
         </xsl:variable>
         <xsl:sequence select="$tempLabel"/>
     </xsl:function>
 
-    <xsl:template match="*" mode="enopdf:format-label">
-      <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+    <xsl:template match="*" mode="enopdf:format-label" priority="-1">
+        <xsl:copy>
+            <xsl:apply-templates select="node()|@*" mode="enopdf:format-label"/>      
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="xhtml:p[not(descendant::xhtml:br) and not(descendant::xhtml:span/@class='block')] | xhtml:span" mode="enopdf:format-label">
+        <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
     </xsl:template>
 
-    <xsl:template match="xhtml:p[descendant::xhtml:br]" mode="enopdf:format-label">
+    <xsl:template match="xhtml:span[@class='block' and preceding-sibling::xhtml:span/@class='block']" mode="enopdf:format-label">
+        <xsl:text xml:space="preserve">&#xA;</xsl:text>
+        <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+    </xsl:template>
+    
+    <xsl:template match="xhtml:p[descendant::xhtml:br or descendant::xhtml:span/@class='block']" mode="enopdf:format-label">
         <xsl:element name="fo:block">
             <xsl:attribute name="linefeed-treatment" select="'preserve'"/>
             <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
         </xsl:element>
     </xsl:template>
-
+<!--
     <xsl:template match="*[not(descendant-or-self::xhtml:*)]" mode="enopdf:format-label">
-        <xsl:copy-of select="."/>
-    </xsl:template>
+        <xsl:copy>
+            <xsl:apply-templates select="node()|@*" mode="enopdf:format-label"/>
+        </xsl:copy>
+    </xsl:template>-->
 
     <xsl:template match="text()" mode="enopdf:format-label">
+        <xsl:param name="label-variables" tunnel="yes"/>
+        
         <xsl:if test="substring(.,1,1)=' '">
             <xsl:text xml:space="preserve"> </xsl:text>
         </xsl:if>
-        <xsl:copy-of select="normalize-space(.)"/>
+        <xsl:call-template name="vtl-label">
+            <xsl:with-param name="label" select="normalize-space(.)"/>
+            <xsl:with-param name="variables" select="$label-variables"/>
+        </xsl:call-template>
         <xsl:if test="substring(.,string-length(.),1)=' ' and string-length(.) &gt; 1">
             <xsl:text xml:space="preserve"> </xsl:text>
         </xsl:if>
     </xsl:template>
 
+    <xsl:template name="vtl-label">
+        <xsl:param name="label"/>
+        <xsl:param name="variables"/>
+        
+        <xsl:choose>
+            <xsl:when test="contains($label,$conditioning-variable-begin) and contains(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)">
+                <xsl:value-of select="substring-before($label,$conditioning-variable-begin)"/>
+                <xsl:variable name="variable-type">
+                    <xsl:call-template name="enoddi:get-variable-type">
+                        <xsl:with-param name="variable" select="substring-before(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                    </xsl:call-template>                    
+                </xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="$variable-type = 'external'">
+                        <xsl:value-of select="'${'"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="'$!{'"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:call-template name="enoddi:get-business-name">
+                    <xsl:with-param name="variable" select="substring-before(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                </xsl:call-template>
+                <xsl:value-of select="'}'"/>
+                <xsl:call-template name="vtl-label">
+                    <xsl:with-param name="label" select="substring-after(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                    <xsl:with-param name="variables" select="$variables"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$label"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <xsl:template match="xhtml:i" mode="enopdf:format-label">
         <xsl:element name="fo:inline">
             <xsl:attribute name="font-style" select="'italic'"/>
