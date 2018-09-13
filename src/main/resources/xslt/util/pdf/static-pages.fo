@@ -1026,7 +1026,9 @@
             <fo:block color="black" font-weight="bold" font-size="10pt" margin-top="9pt" margin-bottom="3pt" page-break-inside="avoid" keep-with-next="always">➡ <fo:inline font-weight="bold">Commentaires et remarques éventuelles concernant l'enquête :</fo:inline>
             </fo:block>
             <fo:block id="COMMENT_QE" page-break-inside="avoid">
-                <fo:block border-color="black" border-style="solid" width="100%" height="30mm">&#160;</fo:block>
+                <fo:block-container height="30mm" border-color="black" border-style="solid">
+                    <fo:block>&#160;</fo:block>	
+                </fo:block-container>
             </fo:block>
         </fo:flow>
     </fo:page-sequence>

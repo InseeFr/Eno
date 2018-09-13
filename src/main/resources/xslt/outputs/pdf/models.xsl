@@ -748,10 +748,14 @@
 		<xsl:variable name="height" select="6*number($textarea-defaultsize)"/>
 		<xsl:choose>
 			<xsl:when test="$isTable = 'YES'">
-				<fo:block height="{$height}mm">&#160;</fo:block>
+				<fo:block-container height="{$height}mm">
+					<fo:block>&#160;</fo:block>	
+				</fo:block-container>
 			</xsl:when>
 			<xsl:otherwise>
-				<fo:block border-color="black" border-style="solid" width="100%" height="{$height}mm">&#160;</fo:block>
+				<fo:block-container height="{$height}mm" border-color="black" border-style="solid">
+					<fo:block>&#160;</fo:block>	
+				</fo:block-container>
 			</xsl:otherwise>
 		</xsl:choose>
 		
