@@ -321,7 +321,10 @@
                    margin-bottom="3pt"
                    margin-left="3pt"
                    page-break-inside="avoid"
-                   keep-with-next="always">We're going to test your knowledge about the simpsons series.<fo:inline font-weight="bold">Welcome in the simspons world!</fo:inline>
+                   keep-with-next="always">
+            <fo:block linefeed-treatment="preserve">We're going to test your knowledge about the simpsons series.
+<fo:inline font-weight="bold">Welcome in the simspons world!</fo:inline>
+            </fo:block>
          </fo:block>
          <fo:block color="black"
                    font-weight="bold"
