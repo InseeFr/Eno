@@ -128,21 +128,21 @@
                 region-name="xsl-region-after-cover"/>
         </fo:simple-page-master>
         
-        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
-            margin-bottom="5mm" master-name="Cover-A4" page-height="297mm" page-width="210mm">
+        <fo:simple-page-master master-name="Cover-A4" font-family="Liberation Sans" font-size="10pt" font-weight="normal"
+            margin-bottom="5mm" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
                 region-name="xsl-region-before-cover"/>
             <fo:region-after display-align="before" extent="100mm" precedence="true"
                 region-name="xsl-region-after-cover"/>
         </fo:simple-page-master>
-        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
-            margin-bottom="5mm" master-name="Cover-A4-90" page-height="297mm" page-width="210mm" reference-orientation="90">
+        <fo:simple-page-master master-name="Cover-A4-90" font-family="Liberation Sans" font-size="10pt" font-weight="normal"
+            margin-bottom="5mm" page-height="297mm" page-width="210mm" reference-orientation="90">
             <fo:region-body column-count="1" margin="0mm"/>
-            <fo:region-before display-align="before" extent="100mm" precedence="true"
-                region-name="xsl-region-before-cover"/>
-            <fo:region-after display-align="before" extent="100mm" precedence="true"
-                region-name="xsl-region-after-cover"/>
+            <!--<fo:region-before display-align="before" extent="100mm" precedence="true"
+                region-name="xsl-region-before-cover"/>-->
+            <fo:region-end display-align="after" extent="20mm"
+                region-name="xsl-region-end-cover"/>
         </fo:simple-page-master>
 
         <fo:simple-page-master master-name="questions-fin" page-height="297mm"
@@ -1632,8 +1632,8 @@
         </fo:flow>
     </fo:page-sequence>
     <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="Cover-A4-90">
-        <fo:static-content flow-name="xsl-region-after-cover">
-            <fo:block-container text-align="left" absolute-position="absolute" left="10mm" top="20mm">
+        <fo:static-content flow-name="xsl-region-end-cover">
+            <fo:block-container text-align="left" absolute-position="absolute" top="20mm" right="5mm" reference-orientation="-90">
                 <fo:block>
                     <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" message="${idQuestionnaire} - 1">
@@ -1647,10 +1647,8 @@
                     </fo:instream-foreign-object>
                 </fo:block>
             </fo:block-container>
-            <fo:block-container absolute-position="absolute" right="20mm" top="20mm">
-                <fo:block-container>
-                    <fo:block text-align="right" font-size="8pt">${idQuestionnaire} - 1</fo:block>
-                </fo:block-container>
+            <fo:block-container absolute-position="absolute" right="5mm" bottom="20mm" reference-orientation="-90">
+                <fo:block text-align="right" font-size="8pt">${idQuestionnaire} - 1</fo:block>
             </fo:block-container>
         </fo:static-content>
         <fo:flow flow-name="xsl-region-body">
