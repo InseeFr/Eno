@@ -174,13 +174,10 @@
 											</barcode:human-readable>
 										</barcode:code128>
 									</barcode:barcode>
-								</fo:instream-foreign-object>               
+								</fo:instream-foreign-object>
 							</fo:block>
 						</fo:block-container>
-						<fo:block-container 
-							absolute-position="absolute"
-							right="20mm"
-							top="20mm">
+						<fo:block-container absolute-position="absolute" right="20mm" top="20mm">
 							<fo:block-container>
 								<fo:block text-align="right" font-size="8pt">${idQuestionnaire} - <fo:page-number/>
 								</fo:block>

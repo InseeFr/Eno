@@ -250,7 +250,7 @@
                                 ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                                 (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
                                 ${BddAnneeReference}]]&gt;</fo:block>
-                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Identifiant
+                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Votre
                                 ${BddLabelUniteEnquetee} :
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
                             <fo:block margin-top="3mm">&lt;![CDATA[#if($!{BddNom} and
@@ -281,7 +281,7 @@
                                     font-weight="bold">par internet selon les modalités précisées au
                                     verso de cette lettre</fo:inline> soit à compléter le
                                 questionnaire joint.#end</fo:block>
-                            <fo:block margin-top="3mm">Je vous serais obligé(e) de bien vouloir
+                            <fo:block margin-top="3mm">Je vous remercie de bien vouloir
                                 transmettre votre questionnaire une fois rempli avant le <fo:inline
                                     font-weight="bold">${BddDateEcheance}</fo:inline>. Notre service
                                 d'assistance se tient à votre disposition pour répondre à vos
@@ -550,7 +550,7 @@
                                 ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                                 (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
                                 ${BddAnneeReference}]]&gt;</fo:block>
-                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Identifiant
+                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Votre
                                 ${BddLabelUniteEnquetee} :
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
                             <fo:block margin-top="3mm">&lt;![CDATA[#if($!{BddNom} and
@@ -581,7 +581,7 @@
                                     font-weight="bold">par internet selon les modalités précisées au
                                     verso de cette lettre</fo:inline> soit à compléter le
                                 questionnaire joint.#end</fo:block>
-                            <fo:block margin-top="3mm">Je vous serais obligé(e) de bien vouloir
+                            <fo:block margin-top="3mm">Je vous serais remercie de bien vouloir
                                 transmettre votre questionnaire une fois rempli avant le <fo:inline
                                     font-weight="bold">${BddDateEcheance}</fo:inline>. Notre service
                                 d'assistance se tient à votre disposition pour répondre à vos
@@ -849,7 +849,7 @@
                                 ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                                 (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
                                 ${BddAnneeReference}]]&gt;</fo:block>
-                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Identifiant
+                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Votre
                                 ${BddLabelUniteEnquetee} :
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
                             <fo:block margin-top="3mm">&lt;![CDATA[#if($!{BddNom} and
@@ -860,7 +860,7 @@
                                 Si, toutefois, vous venez de procéder à cet envoi, je vous prie de ne pas tenir compte de ce rappel.</fo:block>
                             <fo:block margin-top="3mm">Dans le cas contraire, je regrette qu’il ne vous ait pas été possible de respecter les délais prévus (date échéance : <fo:inline font-weight="bold">${BddDateEcheance})</fo:inline>. 
                                 Aussi <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre. 
-                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else soit à répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit à compléter le questionnaire joint. #end</fo:block>
+                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint. #end</fo:block>
                             <fo:block margin-top="3mm">Notre service d'assistance se tient à votre disposition pour répondre à vos questions en cas de besoin.</fo:block>
                             <fo:block margin-top="3mm">${BddObjectifsLongs}</fo:block>
                             <fo:block margin-top="3mm">Je me permets de vous rappeler que cette enquête est reconnue d'${BddStatutEnquete}. Conformément à la loi n° 51-711 du 7 juin 1951 modifiée, les données recueillies sont couvertes par le secret statistique et ne sauraient en aucun cas être utilisées à des fins de contrôle fiscal ou de répression économique.</fo:block>
@@ -1098,7 +1098,7 @@
                                 ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                                 (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
                                 ${BddAnneeReference}]]&gt;</fo:block>
-                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Identifiant
+                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Votre
                                 ${BddLabelUniteEnquetee} :
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
                             <fo:block margin-top="3mm"><fo:block font-weight="bold">Madame la Directrice, Monsieur le Directeur,</fo:block></fo:block>
@@ -1110,10 +1110,10 @@
                                 enquêtes statistiques obligatoires du Conseil national de l’information statistique (Cnis), chargé de donner un avis sur les infractions sur l’obligation en matière de 
                                 statistique, conformément à la loi*.</fo:block>
                             <fo:block margin-top="3mm">Aussi <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre. 
-                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else soit à répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit à compléter le questionnaire joint. #end</fo:block>
+                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint. #end</fo:block>
                             <fo:block margin-top="3mm">Pour tout renseignement complémentaire sur ce courrier ou la procédure en cours, 
                                 notre service d'assistance, dont les coordonnées sont rappelées ci-dessus, se tient à votre disposition.</fo:block>
-                            <fo:block margin-top="3mm">Si l’envoi de votre questionnaire a pu croiser ce présent courrier, je vous prie de ne pas tenir compte de celui‑ci.</fo:block>
+                            <fo:block margin-top="3mm">Si l’envoi de votre questionnaire a pu croiser ce présent courrier, je vous prie de ne pas tenir compte de celui-ci.</fo:block>
                             <fo:block margin-top="3mm">En vous remerciant par avance de
                                 votre collaboration, je vous prie de bien vouloir agréer,
                                 Madame, Monsieur, l'assurance de ma considération
@@ -1337,7 +1337,7 @@
                                 ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                                 (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
                                 ${BddAnneeReference}]]&gt;</fo:block>
-                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Identifiant
+                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Votre
                                 ${BddLabelUniteEnquetee} :
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
                             <fo:block margin-top="3mm">Madame la Directrice, Monsieur le Directeur,</fo:block>
@@ -1345,7 +1345,7 @@
                             <fo:block margin-top="3mm">Dans le cas contraire, les dispositions légales* m’amènent à <fo:inline font-weight="bold">vous mettre en demeure</fo:inline> d’adresser votre réponse à mes services dans un délai de <fo:inline font-weight="bold">15 jours</fo:inline> à compter de la réception de la présente lettre, ou de me faire connaître par écrit les motifs de cette absence de réponse.</fo:block>
                             <fo:block margin-top="3mm">En cas de défaut de réponse dans le délai imparti, la procédure contentieuse prévue par la loi vous serait appliquée et je serais dans l’obligation d’établir un constat de non-réponse à votre encontre puis de soumettre votre dossier au comité du contentieux des enquêtes statistiques obligatoires du Conseil national de l’information statistique (Cnis), chargé de donner un avis sur les infractions à la loi de 1951 sur l’obligation en matière de statistique.</fo:block>
                             <fo:block margin-top="3mm">Aussi <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre. 
-                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else soit à répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit à compléter le questionnaire joint. #end</fo:block>
+                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint. #end</fo:block>
                             <fo:block margin-top="3mm">Notre service d'assistance se tient à votre disposition pour répondre à vos questions en cas de besoin.</fo:block>
                             <fo:block margin-top="3mm">Des renseignements relatifs à l'enquête et à son calendrier sont disponibles sur le site internet du Cnis : ${BddURLCnis}. #if($!{BddURLDiffusion})Les résultats de cette enquête seront disponibles sur le site de l'Insee à l'adresse suivante : $!{BddURLDiffusion}.#end</fo:block>
                             <fo:block margin-top="3mm">En vous remerciant par avance de
