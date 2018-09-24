@@ -201,8 +201,8 @@
                <text:p text:style-name="Question">➡ 2. Are you ready?</text:p>
                <text:p text:style-name="Format">Booléen</text:p>
             </text:section>
-            <text:section text:name="Control-d1e42-THEN">
-               <text:p text:style-name="Control">Filtre : </text:p>
+            <text:section text:name="Control-d1e42">
+               <text:p text:style-name="Control">Début du filtre n° d1e42 :</text:p>
                <text:p text:style-name="Control">not( ^READY != '1')</text:p>
                <text:section text:name="SubModule-j6p0s7o5">
                   <text:p text:style-name="SubModule">General knowledge of the series</text:p>
@@ -221,7 +221,7 @@
                      <text:p text:style-name="Question">➡ 5. When was the first episode of the Simpsons?</text:p>
                      <text:p text:style-name="Comment">For your information, the date of the last broadcast was on
 						øLAST_BROADCASTø</text:p>
-                     <text:p text:style-name="Format">date</text:p>
+                     <text:p text:style-name="Format">date (JJMMAAAA)</text:p>
                   </text:section>
                   <text:section text:name="Question-j6z06z1e">
                      <text:p text:style-name="QuestionName">[AUDIENCE_SHARE]</text:p>
@@ -230,6 +230,7 @@
                      <text:p text:style-name="Format">num 0..99 - 1 chiffre(s) après la virgule</text:p>
                   </text:section>
                </text:section>
+               <text:p text:style-name="Control">Fin du filtre n° d1e42</text:p>
             </text:section>
          </text:section>
          <text:section text:name="Module-j3341528">
@@ -291,6 +292,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[PET1]</text:p>
                         <text:p text:style-name="Format">Booléen</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -303,6 +305,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[PET2]</text:p>
                         <text:p text:style-name="Format">Booléen</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -315,6 +318,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[PET3]</text:p>
                         <text:p text:style-name="Format">Booléen</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -327,6 +331,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[PET4]</text:p>
                         <text:p text:style-name="Format">Booléen</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -349,6 +354,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[ICE_FLAVOUR1]</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -362,6 +368,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[ICE_FLAVOUR2]</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -375,6 +382,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[ICE_FLAVOUR3]</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -388,6 +396,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[ICE_FLAVOUR4]</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -410,6 +419,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[NUCLEAR_CHARACTER1]</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -423,6 +433,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[NUCLEAR_CHARACTER2]</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -436,6 +447,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[NUCLEAR_CHARACTER3]</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -449,6 +461,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[NUCLEAR_CHARACTER4]</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -471,6 +484,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[BIRTH_CHARACTER1]</text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -487,6 +501,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[BIRTH_CHARACTER2]</text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -503,6 +518,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[BIRTH_CHARACTER3]</text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -519,6 +535,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[BIRTH_CHARACTER4]</text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -535,6 +552,7 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[BIRTH_CHARACTER5]</text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -583,6 +601,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[PERCENTAGE_EXPENSES11]</text:p>
                            <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -595,6 +614,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[PERCENTAGE_EXPENSES21]</text:p>
                            <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -614,6 +634,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[PERCENTAGE_EXPENSES31]</text:p>
                            <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -626,6 +647,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[PERCENTAGE_EXPENSES41]</text:p>
                            <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -638,6 +660,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[PERCENTAGE_EXPENSES51]</text:p>
                            <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -655,6 +678,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[PERCENTAGE_EXPENSES61]</text:p>
                            <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -668,6 +692,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[PERCENTAGE_EXPENSES71]</text:p>
                            <text:p text:style-name="Format">num 0..100 - 1 chiffre(s) après la virgule</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -713,6 +738,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[CLOWNING11]</text:p>
                            <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
                            <text:p text:style-name="CodeItem">1 - Jay</text:p>
                            <text:p text:style-name="CodeItem">2 - Bart</text:p>
@@ -722,6 +748,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[CLOWNING12]</text:p>
                            <text:p text:style-name="Format">Car 255</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -734,6 +761,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[CLOWNING21]</text:p>
                            <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
                            <text:p text:style-name="CodeItem">1 - Jay</text:p>
                            <text:p text:style-name="CodeItem">2 - Bart</text:p>
@@ -743,6 +771,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[CLOWNING22]</text:p>
                            <text:p text:style-name="Format">Car 255</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -755,6 +784,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[CLOWNING31]</text:p>
                            <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
                            <text:p text:style-name="CodeItem">1 - Jay</text:p>
                            <text:p text:style-name="CodeItem">2 - Bart</text:p>
@@ -764,6 +794,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[CLOWNING32]</text:p>
                            <text:p text:style-name="Format">Car 255</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -776,6 +807,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[CLOWNING41]</text:p>
                            <text:p text:style-name="Format">Car 1 - liste de modalités</text:p>
                            <text:p text:style-name="CodeItem">1 - Jay</text:p>
                            <text:p text:style-name="CodeItem">2 - Bart</text:p>
@@ -785,6 +817,7 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[CLOWNING42]</text:p>
                            <text:p text:style-name="Format">Car 255</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -850,31 +883,37 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL11]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL12]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL13]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL14]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL15]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL16]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -887,31 +926,37 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL21]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL22]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL23]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL24]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL25]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL26]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -924,31 +969,37 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL31]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL32]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL33]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL34]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL35]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL36]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -961,31 +1012,37 @@
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL41]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL42]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL43]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL44]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL45]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
+                           <text:p>[TRAVEL46]</text:p>
                            <text:p text:style-name="Format">Booléen</text:p>
                         </table:table-cell>
                      </table:table-row>
@@ -1017,11 +1074,13 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS11]</text:p>
                         <text:p text:style-name="Format">Car 255</text:p>
                      </table:table-cell>
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS12]</text:p>
                         <text:p text:style-name="Format">num 0..120</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -1029,11 +1088,13 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS21]</text:p>
                         <text:p text:style-name="Format">Car 255</text:p>
                      </table:table-cell>
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS22]</text:p>
                         <text:p text:style-name="Format">num 0..120</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -1041,11 +1102,13 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS31]</text:p>
                         <text:p text:style-name="Format">Car 255</text:p>
                      </table:table-cell>
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS32]</text:p>
                         <text:p text:style-name="Format">num 0..120</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -1053,11 +1116,13 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS41]</text:p>
                         <text:p text:style-name="Format">Car 255</text:p>
                      </table:table-cell>
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS42]</text:p>
                         <text:p text:style-name="Format">num 0..120</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -1065,11 +1130,13 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS51]</text:p>
                         <text:p text:style-name="Format">Car 255</text:p>
                      </table:table-cell>
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS52]</text:p>
                         <text:p text:style-name="Format">num 0..120</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -1077,11 +1144,13 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS61]</text:p>
                         <text:p text:style-name="Format">Car 255</text:p>
                      </table:table-cell>
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS62]</text:p>
                         <text:p text:style-name="Format">num 0..120</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -1089,11 +1158,13 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS71]</text:p>
                         <text:p text:style-name="Format">Car 255</text:p>
                      </table:table-cell>
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS72]</text:p>
                         <text:p text:style-name="Format">num 0..120</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -1101,11 +1172,13 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS81]</text:p>
                         <text:p text:style-name="Format">Car 255</text:p>
                      </table:table-cell>
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS82]</text:p>
                         <text:p text:style-name="Format">num 0..120</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -1113,11 +1186,13 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS91]</text:p>
                         <text:p text:style-name="Format">Car 255</text:p>
                      </table:table-cell>
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS92]</text:p>
                         <text:p text:style-name="Format">num 0..120</text:p>
                      </table:table-cell>
                   </table:table-row>
@@ -1125,11 +1200,13 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS101]</text:p>
                         <text:p text:style-name="Format">Car 255</text:p>
                      </table:table-cell>
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p>[FAVOURITE_CHARACTERS102]</text:p>
                         <text:p text:style-name="Format">num 0..120</text:p>
                      </table:table-cell>
                   </table:table-row>

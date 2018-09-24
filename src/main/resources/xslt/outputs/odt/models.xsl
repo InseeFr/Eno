@@ -162,7 +162,7 @@
 		<xsl:variable name="numberOfDecimals" select="enoodt:get-number-of-decimals($source-context)"/>
 		<xsl:variable name="minimumResponse" select="enoodt:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enoodt:get-maximum($source-context)"/>
-		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context,enoodt:get-name($source-context))"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<xsl:if test="$typeResponse!=''">
 			<xsl:if test="$typeOfAncestor!='question'">
@@ -210,7 +210,7 @@
 		<xsl:variable name="numberOfDecimals" select="enoodt:get-number-of-decimals($source-context)"/>
 		<xsl:variable name="minimumResponse" select="enoodt:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enoodt:get-maximum($source-context)"/>
-		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context,enoodt:get-name($source-context))"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<xsl:if test="$typeResponse !=''">
 			<xsl:if test="$typeOfAncestor!='question'">
@@ -241,7 +241,7 @@
 		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
 		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context,$languages[1])"/>
-		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context,enoodt:get-name($source-context))"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 	
 		<xsl:choose>
 			<xsl:when test="$maximumLengthCode != ''">
@@ -283,15 +283,15 @@
 		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enoodt:get-length($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
-		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context,enoodt:get-name($source-context))"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 
-		<xsl:if test="$typeOfAncestor!='question multiple-choice-question'">
-			<xsl:if test="$typeOfAncestor!='question' and $maximumLengthCode != ''">
+		<xsl:if test="$typeOfAncestor!='question multiple-choice-question' and $maximumLengthCode != ''">
+			<xsl:if test="$typeOfAncestor!='question'">
 				<text:p><xsl:value-of select="concat('[',$nameOfVariable,']')"/></text:p>
-				<text:p text:style-name="Format">
-					<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
-				</text:p>
 			</xsl:if>
+			<text:p text:style-name="Format">
+				<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
+			</text:p>		
 		</xsl:if>
 		<xsl:if test="$typeOfAncestor='question multiple-choice-question'">
 			<text:p><xsl:value-of select="concat('[',$nameOfVariable,']')"/></text:p>
