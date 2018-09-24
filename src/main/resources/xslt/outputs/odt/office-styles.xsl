@@ -114,6 +114,9 @@
         <style:style style:name="Table.Cell.deleted" style:family="table-cell">
             <style:table-cell-properties  fo:background-color="#f79e9e" fo:padding="0cm" fo:border="0.05pt solid #000000"/>
         </style:style>
+        <style:style style:name="Table.Cell.added" style:family="table-cell">
+            <style:table-cell-properties  fo:background-color="#9ef7ac" fo:padding="0cm" fo:border="0.05pt solid #000000"/>
+        </style:style>
         <style:style style:name="deleted" style:family="text" style:default-outline-level="2">
             <style:text-properties fo:background-color="#f79e9e" style:text-line-through-style="solid" style:text-line-through-type="single"/>
         </style:style>
