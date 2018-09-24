@@ -8,6 +8,9 @@
   <HomePage>
     <File>static-pages.fo</File>
   </HomePage>
+  <ColtraneQuestions>
+    <Fin/>
+  </ColtraneQuestions>
   <AccompanyingMails>
     <AccompanyingMail>ouvertureCOL</AccompanyingMail>
   </AccompanyingMails>

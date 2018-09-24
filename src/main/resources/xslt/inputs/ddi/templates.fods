@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>P2DT11H39M50S</meta:editing-duration><meta:editing-cycles>358</meta:editing-cycles><meta:generator>LibreOffice/5.4.5.1$Windows_X86_64 LibreOffice_project/79c9829dd5d8054ec39a82dc51cd9eff340dbee8</meta:generator><dc:date>2018-05-23T16:45:19.304000000</dc:date><dc:creator>François Bulot</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="430" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+<office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>P2DT20H49M4S</meta:editing-duration><meta:editing-cycles>382</meta:editing-cycles><meta:generator>LibreOffice/5.4.6.2$Windows_X86_64 LibreOffice_project/4014ce260a04f1026ba855d3b8d91541c224eab8</meta:generator><dc:date>2018-09-10T13:44:05.256000000</dc:date><dc:creator>François Bulot</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="411" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">63256</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">74464</config:config-item>
+<config:config-item config:name="VisibleAreaHeight" config:type="int">73363</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
-       <config:config-item config:name="CursorPositionX" config:type="int">4</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">112</config:config-item>
+       <config:config-item config:name="CursorPositionX" config:type="int">2</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">109</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
        <config:config-item config:name="VerticalSplitPosition" config:type="int">0</config:config-item>
        <config:config-item config:name="ActiveSplitRange" config:type="short">2</config:config-item>
-       <config:config-item config:name="PositionLeft" config:type="int">3</config:config-item>
+       <config:config-item config:name="PositionLeft" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionRight" config:type="int">0</config:config-item>
        <config:config-item config:name="PositionTop" config:type="int">0</config:config-item>
-       <config:config-item config:name="PositionBottom" config:type="int">93</config:config-item>
+<config:config-item config:name="PositionBottom" config:type="int">91</config:config-item>
        <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
        <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
        <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -32,7 +32,7 @@
       </config:config-item-map-entry>
      </config:config-item-map-named>
      <config:config-item config:name="ActiveTable" config:type="string">Sheet1</config:config-item>
-     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1616</config:config-item>
+     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1216</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
      <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
      <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -77,8 +77,8 @@
    <config:config-item config:name="IsRasterAxisSynchronized" config:type="boolean">true</config:config-item>
    <config:config-item config:name="AutoCalculate" config:type="boolean">true</config:config-item>
    <config:config-item config:name="ApplyUserData" config:type="boolean">true</config:config-item>
-   <config:config-item config:name="PrinterName" config:type="string">\\S20slinng\m20-207-ricoh mp2554sp</config:config-item>
-   <config:config-item config:name="PrinterSetup" config:type="base64Binary">1hP+/1xcUzIwc2xpbm5nXG0yMC0yMDctcmljb2ggbXAyNTU0c3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUklDT0ggUENMNiBVbml2ZXJzYWxEcml2ZXIgVjQuMQAWAAEA8hIAAAAAAAAEAAhSAAAEdAAAM1ROVwAAAAAKAFwAXABTADIAMABzAGwAaQBuAG4AZwBcAG0AMgAwAC0AMgAwADcALQByAGkAYwBvAGgAIABtAHAAMgA1AAAAAAABBAAg3AAMEg//gAMBAAkAmgs0CGQAAQAHAFgCAQACAFgCAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAAAAAAxMERSDFhkDpG++hkAAAAAKQQAAHicdVPRcuMwCPwXP/ch6dy01/yMB0vYVouERkJJ05v790OyE6eX9M1mVwss8KfLAsFCshEmzL0LsYgkOHeHDopw/cxIaKR7+o/q0TqQc0SlRgIXFExozobQKplQBNOMYD3bxkkuaMTiCIWqnC2R8HNFeRw1VLIS2KtYAI/9ql4LqYo8uVAZt1h7gaMLLek7D2s8cPJALeeq6+zjNxmOyEdMBGcLAv3oCCPIrERFIUZyBsRx+GL2R6BSJfa7Xe2ATfEYJLuvVucvjZmShX2EiKmG+xKcKOb9A+zkrMzquanJfj+/PqAQhkk5+vzQPb+97n5UWRhLXT+IrIn2+5c3JSW0xSAGgjTV6kcnws2w1s5Td9/vhh7UNo+QOTkdCtD6RH/VjuZWnTgn3R9XB5BYo2r3ZdA6KP3IKNeI2s+l/u7retXKZ8RtTRQgDhPaSbdxFFXmqODA/EE3KjbBaUxa2sA64nSNV81LJHDA7Wl/C3HU8vk2gWHiNJwUGwjMh+74aXaCzb/MVNZWX5o/U4I4O5PXnT7q2XC6+AZEgp8CuQldK8MAg94XE6lB25m0BLqVGb83ojeodmx9lWWmy5/h6DBXD5fK7yTV4e2+7w4yz9q1KdKbkpIaoZwL+PcfWFN6vgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAENPTVBBVF9EVVBMRVhfTU9ERRQARHVwbGV4TW9kZTo6TG9uZ0VkZ2U=</config:config-item>
+   <config:config-item config:name="PrinterName" config:type="string">\\S20slinng\M20-207-RICOH MP2554SP</config:config-item>
+   <config:config-item config:name="PrinterSetup" config:type="base64Binary">1hP+/1xcUzIwc2xpbm5nXE0yMC0yMDctUklDT0ggTVAyNTU0U1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUklDT0ggUENMNiBVbml2ZXJzYWxEcml2ZXIgVjQuMQAWAAEA8hIAAAAAAAAEAAhSAAAEdAAAM1ROVwAAAAAKAFwAXABTADIAMABzAGwAaQBuAG4AZwBcAE0AMgAwAC0AMgAwADcALQBSAEkAQwBPAEgAIABNAFAAMgA1AAAAAAABBAAg3AAMEg//gAMBAAkAmgs0CGQAAQAHAFgCAQACAFgCAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAAAAAAxMERSDFhkDpG++hkAAAAAKQQAAHicdVPRcuMwCPwXP/ch6dy01/yMB0vYVouERkJJ05v790OyE6eX9M1mVwss8KfLAsFCshEmzL0LsYgkOHeHDopw/cxIaKR7+o/q0TqQc0SlRgIXFExozobQKplQBNOMYD3bxkkuaMTiCIWqnC2R8HNFeRw1VLIS2KtYAI/9ql4LqYo8uVAZt1h7gaMLLek7D2s8cPJALeeq6+zjNxmOyEdMBGcLAv3oCCPIrERFIUZyBsRx+GL2R6BSJfa7Xe2ATfEYJLuvVucvjZmShX2EiKmG+xKcKOb9A+zkrMzquanJfj+/PqAQhkk5+vzQPb+97n5UWRhLXT+IrIn2+5c3JSW0xSAGgjTV6kcnws2w1s5Td9/vhh7UNo+QOTkdCtD6RH/VjuZWnTgn3R9XB5BYo2r3ZdA6KP3IKNeI2s+l/u7retXKZ8RtTRQgDhPaSbdxFFXmqODA/EE3KjbBaUxa2sA64nSNV81LJHDA7Wl/C3HU8vk2gWHiNJwUGwjMh+74aXaCzb/MVNZWX5o/U4I4O5PXnT7q2XC6+AZEgp8CuQldK8MAg94XE6lB25m0BLqVGb83ojeodmx9lWWmy5/h6DBXD5fK7yTV4e2+7w4yz9q1KdKbkpIaoZwL+PcfWFN6vgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAENPTVBBVF9EVVBMRVhfTU9ERRQARHVwbGV4TW9kZTo6TG9uZ0VkZ2U=</config:config-item>
    <config:config-item-map-indexed config:name="ForbiddenCharacters">
     <config:config-item-map-entry>
      <config:config-item config:name="Language" config:type="string">zxx</config:config-item>
@@ -533,6 +533,9 @@
   <style:style style:name="ro2" style:family="table-row">
    <style:table-row-properties style:row-height="5.79mm" fo:break-before="auto" style:use-optimal-row-height="false"/>
   </style:style>
+  <style:style style:name="ro3" style:family="table-row">
+   <style:table-row-properties style:row-height="4.52mm" fo:break-before="auto" style:use-optimal-row-height="false"/>
+  </style:style>
   <style:style style:name="ta1" style:family="table" style:master-page-name="Default">
    <style:table-properties table:display="true" style:writing-mode="lr-tb"/>
   </style:style>
@@ -623,7 +626,7 @@
      <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2018-05-23">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="16:42:05.207000000">00:00:00</text:time></text:p>
+<text:p><text:date style:data-style-name="N2" text:date-value="2018-09-10">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="12:43:04.093000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -968,21 +971,6 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:Loop</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-id</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>concat(r:ID,&apos;-Loop&apos;)</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>The id returned for a d:Loop.</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
       <text:p>d:StructuredMixedGridResponseDomain[parent::d:QuestionGrid[d:GridDimension/d:Roster]]</text:p>
      </table:table-cell>
@@ -990,7 +978,7 @@
       <text:p>enoddi:get-id</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce5" office:value-type="string" calcext:value-type="string">
-      <text:p>concat(parent::d:QuestionGrid/r:ID,&apos;-RowLoop&apos;)</text:p>
+      <text:p>parent::d:QuestionGrid/r:ID</text:p>
      </table:table-cell>
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1291,6 +1279,23 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>d:ExternalAid[r:Description/r:Content/xhtml:div/@class=&apos;FlowControl&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-label</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>r:Description/r:Content/xhtml:div[@class=&apos;FlowControl&apos;]/xhtml:div[@class=&apos;Description&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
+      <text:p>lang-choice</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>The label of FlowControl</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:ComputationItem</text:p>
      </table:table-cell>
@@ -1361,80 +1366,6 @@
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>The description (label) of a ComputationItem</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce7"/>
-     <table:table-cell/>
-     <table:table-cell table:style-name="ce7" table:number-columns-repeated="2"/>
-     <table:table-cell/>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:StatementItem</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-label-conditioner</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>d:DisplayText/d:ConditionalText</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>lang-choice</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>The label of a StatementItem is conditioned by its CondtionalText</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:Instruction</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-label-conditioner</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>d:InstructionText/d:ConditionalText</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>lang-choice</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>The label of an Instruction is conditioned by its CondtionalText</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:ComputationItem</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-label-conditioner</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>d:InterviewerInstructionReference/d:Instruction/d:InstructionText/d:ConditionalText</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>lang-choice</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>The label of a ComputationItem is conditioned by its Instruction&apos;s CondtionalText</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem | d:QuestionGrid</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-label-conditioner</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>descendant::d:ConditionalText</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>lang-choice</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>The label of a QuestionItem or a QuestionGrid is conditioned by its CondtionalText and the ones of its Instruction.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1666,6 +1597,21 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
+      <text:p>d:Instruction[d:InstructionName/r:String=&apos;warning&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-style</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;warning&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the style of a warning type Instruction.</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce10" office:value-type="string" calcext:value-type="string">
       <text:p>d:ComputationItem[descendant::d:InstructionName/r:String=&apos;help&apos;]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -1863,6 +1809,12 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce11"/>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce11"/>
+     <table:table-cell table:number-columns-repeated="2"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>d:Sequence[parent::d:ThenConstructReference and d:TypeOfSequence/text()=&apos;hideable&apos;]</text:p>
      </table:table-cell>
@@ -1875,6 +1827,36 @@
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Function that returns the list of the variables in a filter.</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+      <text:p>d:ResponseDomainInMixed[d:AttachmentLocation]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-hideable-command-variables</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>../../r:Binding[r:SourceParameterReference/r:ID = current()/../d:ResponseDomainInMixed[@attachmentBase= current()/d:AttachmentLocation/d:DomainSpecificValue/@attachmentDomain]/*[contains(name(),&apos;Domain&apos;)]/r:OutParameter/r:ID]/r:TargetParameterReference/r:ID</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Function that returns the id of the &apos;other&apos; for a &apos;give-details&apos; response.</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+      <text:p>d:Sequence[d:TypeOfSequence/text()=&apos;module&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-hideable-command-variables</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
+      <text:p>ancestor::d:Sequence[d:TypeOfSequence=&apos;hideable&apos;]/../../d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Function that returns the list of the variables in the ancestor filters of a sequence module.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1914,6 +1896,12 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="ce11"/>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce11"/>
+     <table:table-cell table:number-columns-repeated="2"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>d:Sequence[parent::d:ThenConstructReference and d:TypeOfSequence/text()=&apos;deactivatable&apos;]</text:p>
      </table:table-cell>
@@ -1947,6 +1935,62 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce12"/>
+     <table:table-cell table:number-columns-repeated="3"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:ComputationItem</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce12" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-control-variables</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Function that returns the list of the variables in a control-text (get-control).</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro3">
+     <table:table-cell table:number-columns-repeated="5"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:GenerationInstruction</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-variable-calculation</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>descendant::r:CommandContent</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the calculation of the variable</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="Default" table:number-columns-repeated="5"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:GenerationInstruction</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-variable-calculation-variables</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Returns the list of the variables used in a variable calculation.</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
@@ -1963,6 +2007,9 @@
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Getting the minimum of a numeric response domain.</text:p>
      </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
@@ -2270,6 +2317,21 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro2">
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>d:ExternalAid[r:Description/r:Content/xhtml:div/@class=&apos;FlowControl&apos;]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-format</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>&apos;flowcontrol-text&apos;</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>Getting the format of a flowcontrol</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:number-columns-repeated="4"/>
      <table:table-cell table:style-name="Default"/>
     </table:table-row>
@@ -2420,39 +2482,6 @@
       <text:p>Return a string describing the significant ancestor of a ResponseDomain or a ResponseDomainReference.</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro2">
-     <table:table-cell table:style-name="ce7" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionItem</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-container</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8" office:value-type="string" calcext:value-type="string">
-      <text:p>&apos;question&apos;</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="ce8"/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Return a string describing the significant ancestor of a QuestionItem (itself here).</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="5"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:GenerationInstruction</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-variable-calculation</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>descendant::r:CommandContent</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Returns the calculation of the variable</text:p>
-     </table:table-cell>
-    </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
@@ -2469,57 +2498,6 @@
      <table:table-cell/>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>Returns the image associated to a Code</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="5"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:Sequence[d:TypeOfSequence/text()=&apos;submodule&apos;]</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:is-first</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>r:ID=ancestor::d:Sequence[d:TypeOfSequence=&apos;module&apos;]/descendant::*[d:TypeOfSequence=&apos;submodule&apos; or name()=&apos;d:QuestionGrid&apos; or name()=&apos;d:QuestionItem&apos;][1]/r:ID</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Returns true if a &apos;subModule&apos; sequence is the first inside its module.</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>*[local-name() = (&apos;QuestionItem&apos;,&apos;QuestionGrid&apos;,&apos;QuestionBlock&apos;)]</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:is-first</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>r:ID=ancestor::d:Sequence[contains(d:TypeOfSequence,&apos;module&apos;)]/descendant::*[name()=&apos;d:QuestionGrid&apos; or name()=&apos;d:QuestionItem&apos;][1]/r:ID</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Returns true if a QuestionItem/Grid is the first inside its submodule (matching all elements that may fire a &apos;question&apos; driver, FIXME : selection is a bit too wide)</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell table:number-columns-repeated="5"/>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>*</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-instructions</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:InterviewerInstructionReference/d:Instruction</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>List of the Instructions of a question or Sequence (to concatene their label to the question&apos;s/sequence&apos;s one</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
@@ -2553,19 +2531,7 @@
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>d:ComputationItem | d:GenerationInstruction</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-control-variables</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Function that returns the list of the variables in a control-text (get-control).</text:p>
-     </table:table-cell>
+     <table:table-cell table:style-name="Default" table:number-columns-repeated="5"/>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="1048419">
      <table:table-cell table:number-columns-repeated="5"/>

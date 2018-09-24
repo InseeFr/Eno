@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
@@ -21,7 +22,7 @@
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 
-    <xsl:strip-space elements="*"/>
+    <!--<xsl:strip-space elements="*"/>-->
 
     <xd:doc>
         <xd:desc>
@@ -65,6 +66,22 @@
     <xsl:variable name="conditioning-variable-end" select="$properties//TextConditioningVariable/ddi/After"/>
 
     <xd:doc>
+        <xd:desc>Loops and dynamic array's ids may be called in many calculs : filters, consistency checks, calculated variables</xd:desc>
+        <xd:dec>To change their in-language-ID into business-name, everywhere it is necessary, it is simple to try everywhere it could be necessary</xd:dec>
+    </xd:doc>
+    <xsl:variable name="list-of-groups">
+        <Groups>
+            <xsl:for-each select="//l:VariableGroup">
+                <xsl:sort select="string-length(r:ID)" order="descending"/>
+                <Group>
+                    <xsl:attribute name="id" select="r:ID"/>
+                    <xsl:attribute name="name" select="l:VariableGroupName/r:String"/>
+                </Group>
+            </xsl:for-each>
+        </Groups>
+    </xsl:variable>
+
+    <xd:doc>
         <xd:desc>
             <xd:p>Root template :</xd:p>
             <xd:p>The transformation starts with the main Sequence.</xd:p>
@@ -76,134 +93,56 @@
     </xsl:template>
 
     <xd:doc>
-        <xd:desc>
-            <xd:p>This xforms function is used to get the concatened string corresponding to a dynamic text.</xd:p>
-            <xd:p>It is created by calling the static text and making it dynamic.</xd:p>
-        </xd:desc>
+        <xd:desc>For business variables, their name is their business name ; for other objects, their name is their id</xd:desc>
     </xd:doc>
-    <xsl:function name="enofr:get-calculate-text">
+    <xsl:function name="enofr:get-name">
         <xsl:param name="context" as="item()"/>
-        <xsl:param name="language" as="item()"/>
-        <xsl:param name="instance-ancestor"/>
+        <xsl:variable name="ddi-markup" select="name($context)"/>
 
-        <xsl:variable name="static-text-content">
-            <xsl:sequence select="enofr:get-label($context,$language)"/>
-        </xsl:variable>
-
-        <xsl:if
-            test="contains(substring-after($static-text-content,$conditioning-variable-begin),$conditioning-variable-end)">
-            <!-- doesn't work : takes all the ConditionalText in the questionnaire... -->
-            <xsl:variable name="condition-variables">
-                <xsl:sequence select="enoddi:get-label-conditioner($context,$language)"/>
-            </xsl:variable>
-
-            <xsl:variable name="calculated-text">
-                <xsl:call-template name="enoddi2fr:calculate-text">
-                    <xsl:with-param name="text-to-calculate"
-                        select="eno:serialize($static-text-content)"/>
-                    <xsl:with-param name="condition-variables" select="$condition-variables"/>
-                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
-                </xsl:call-template>
-            </xsl:variable>
-
-            <xsl:text>concat(</xsl:text>
-            <xsl:value-of select="substring($calculated-text,2)"/>
-            <xsl:text>)</xsl:text>
-        </xsl:if>
-    </xsl:function>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>This recursive template returns the calculated conditional text from the static one.</xd:p>
-        </xd:desc>
-    </xd:doc>
-
-    <xsl:template name="enoddi2fr:calculate-text">
-        <xsl:param name="text-to-calculate"/>
-        <xsl:param name="condition-variables"/>
-        <xsl:param name="instance-ancestor"/>
-
-        <xsl:text>,</xsl:text>
         <xsl:choose>
-            <xsl:when
-                test="contains(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)">
-                <xsl:text>'</xsl:text>
-                <!-- Replacing the single quote by 2 single quotes because a concatenation is made -->
-                <!-- We actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                <xsl:value-of
-                    select="replace(substring-before($text-to-calculate,$conditioning-variable-begin),'''','''''')"/>
-                <xsl:text>',</xsl:text>
-                <xsl:choose>
-                    <!-- conditionalText doesn't exist for the element in the DDI structure or it exists and references the variable -->
-                    <xsl:when test="not($condition-variables//text())">
-                        <xsl:value-of select="$instance-ancestor"/>
-                        <xsl:value-of
-                            select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"
-                        />
-                    </xsl:when>
-                    <!-- conditionalText exists and references the variable -->
-                    <xsl:when
-                        test="index-of($condition-variables//r:SourceParameterReference//r:ID,
-                        substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) >0">
-                        <xsl:value-of select="$instance-ancestor"/>
-                        <xsl:value-of select="substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
-                    </xsl:when>
-                    <!-- conditionalText contains the calculation of the variable -->
-                    <xsl:when
-                        test="index-of($condition-variables//d:Expression/r:Command/r:OutParameter/r:ID,
-                        substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)) >0">
-                        <xsl:value-of
-                            select="replace(replace(
-                            $condition-variables//d:Expression/r:Command
-                                                                        [r:OutParameter/r:ID=substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)]
-                                                                        /r:CommandContent,
-                                                                        '//',$instance-ancestor),
-                                                                        concat('\]',$instance-ancestor),']//')"
-                        />
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <!-- conditionalText exists, but the variable is not in it -->
-                        <xsl:text>'</xsl:text>
-                        <xsl:value-of
-                            select="concat($conditioning-variable-begin,
-                            replace(substring-before(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end),'''',''''''),
-                            $conditioning-variable-end)"/>
-                        <xsl:text>'</xsl:text>
-                        <xsl:value-of select="eno:serialize($condition-variables)"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-                <xsl:call-template name="enoddi2fr:calculate-text">
-                    <xsl:with-param name="text-to-calculate"
-                        select="substring-after(substring-after($text-to-calculate,$conditioning-variable-begin),$conditioning-variable-end)"/>
-                    <xsl:with-param name="condition-variables" select="$condition-variables"/>
-                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
-                </xsl:call-template>
+            <xsl:when test="($ddi-markup = ('l:Variable','d:GenerationInstruction','d:Loop')) or ends-with($ddi-markup,'Domain') or ends-with($ddi-markup,'DomainReference')">
+                <xsl:sequence select="enoddi:get-business-name($context)"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>'</xsl:text>
-                <!-- Replacing the single quote by 2 single quotes because a concatenation is made, we actually need to double the quotes in order not to generate an error in the xforms concat.-->
-                <xsl:value-of select="replace($text-to-calculate,'''','''''')"/>
-                <xsl:text>'</xsl:text>
+                <xsl:sequence select="enoddi:get-id($context)"/>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
+    </xsl:function>
 
+    <xsl:function name="enofr:get-variable-business-name">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="variable"/>
+
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="$variable"/>
+        </xsl:call-template>
+    </xsl:function>
+
+    <xsl:function name="enofr:get-variable-business-ancestors">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="variable"/>
+        
+        <xsl:call-template name="enoddi:get-business-ancestors">
+            <xsl:with-param name="variable" select="$variable"/>
+        </xsl:call-template>
+    </xsl:function>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms label for the context on which it is applied.</xd:p>
             <xd:p>It concats different labels to do this job.</xd:p>
         </xd:desc>
     </xd:doc>
-    
+
     <xsl:function name="enofr:get-label">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
-        
+
         <xsl:variable name="ddi-label" select="enoddi:get-label($context,$language)"/>
         <xsl:variable name="tooltip" select="enoddi:get-instructions-by-format($context,'tooltip')" as="node()*"/>
         <xsl:variable name="tooltips-with-id" select="$tooltip[descendant-or-self::*/@id]" as="node()*"/>
-        <xsl:variable name="other-instructions" select="enoddi:get-instructions-by-format($context,'instruction,comment,help')" as="node()*"/>
-        
+        <xsl:variable name="other-instructions" select="enoddi:get-instructions-by-format($context,'instruction,comment,help,warning')" as="node()*"/>
+
         <xsl:variable name="original-label">
             <xsl:choose>
                 <xsl:when test="$ddi-label/name()='xhtml:p'">
@@ -227,7 +166,7 @@
                                 <xsl:attribute name="id" select="$ddi-label/@id"/>
                             </xsl:if>
                             <xsl:copy-of select="$original-label"/>
-                            <xsl:for-each select="$tooltip[not(@id) or not(concat('#',descendant-or-self::*/@id) = $ddi-label//xhtml:a/@href)]">
+                            <xsl:for-each select="$tooltip[not(descendant-or-self::*/@id) or not(concat('#',descendant-or-self::*/@id) = $ddi-label//xhtml:a/@href)]">
                                 <xsl:call-template name="tooltip-xforms">
                                     <xsl:with-param name="ddi-tooltip" select="."/>
                                     <xsl:with-param name="language" select="$language"/>
@@ -236,6 +175,7 @@
                         </xsl:element>
                         <xsl:for-each select="$other-instructions">
                             <xsl:variable name="instruction-label" select="enoddi:get-label(.,$language)"/>
+                            <xsl:variable name="instruction-tooltip" select="enoddi:get-instructions-by-format($context,'tooltip')" as="node()*"/>
                             <xsl:element name="xhtml:span">
                                 <xsl:attribute name="class">
                                     <xsl:value-of select="'block '"/>
@@ -252,6 +192,12 @@
                                         <xsl:copy-of select="$instruction-label"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
+                                <xsl:for-each select="$instruction-tooltip[not(descendant-or-self::*/@id) or not(concat('#',descendant-or-self::*/@id) = $instruction-label//xhtml:a/@href)]">
+                                    <xsl:call-template name="tooltip-xforms">
+                                        <xsl:with-param name="ddi-tooltip" select="."/>
+                                        <xsl:with-param name="language" select="$language"/>
+                                    </xsl:call-template>
+                                </xsl:for-each>
                             </xsl:element>
                         </xsl:for-each>
                     </xsl:element>
@@ -270,7 +216,7 @@
                 <xsl:otherwise>
                     <xsl:sequence select="$ddi-label"/>
                 </xsl:otherwise>
-            </xsl:choose>            
+            </xsl:choose>
         </xsl:variable>
         <xsl:call-template name="tooltip-in-label">
             <xsl:with-param name="label" select="$label-without-tooltips-with-id"/>
@@ -282,7 +228,7 @@
     <xsl:template name="tooltip-xforms">
         <xsl:param name="ddi-tooltip"/>
         <xsl:param name="language"/>
-        
+
         <xsl:variable name="tooltip-label" select="enoddi:get-label($ddi-tooltip,$language)"/>
         <xsl:variable name="title">
             <xsl:choose>
@@ -306,7 +252,7 @@
         <xsl:param name="label"/>
         <xsl:param name="language"/>
         <xsl:param name="tooltip" as="node()*"/>
-        
+
         <xsl:choose>
             <xsl:when test="$tooltip[1]">
                 <xsl:variable name="href" select="concat('#',$tooltip[1]//*/@id)"/>
@@ -346,7 +292,7 @@
             <xsl:apply-templates select="@*|node()" mode="replace-tooltip"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="xhtml:a" mode="replace-tooltip">
         <xsl:param name="href" tunnel="yes"/>
         <xsl:param name="tooltip-label" tunnel="yes"/>
@@ -357,11 +303,36 @@
             <xsl:otherwise>
                 <xsl:copy>
                     <xsl:apply-templates select="@*|node()" mode="replace-tooltip"/>
-                </xsl:copy>                
+                </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>enofr:get-label-conditioning-variables</xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:get-label-conditioning-variables">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="language"/>
+        
+        <xsl:variable name="conditioning-variables-with-doubles" as="xs:string*">
+            <xsl:sequence select="enoddi:get-label-conditioning-variables($context,$language)"/>
+            <xsl:choose>
+                <xsl:when test="name($context)='d:QuestionItem' or name($context)='d:QuestionGrid'">
+                    <xsl:for-each select="enoddi:get-instructions-by-format($context)">
+                        <xsl:sequence select="enoddi:get-label-conditioning-variables(.,$language)"/>
+                    </xsl:for-each>                    
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:for-each select="enoddi:get-instructions-by-format($context,'tooltips')">
+                        <xsl:sequence select="enoddi:get-label-conditioning-variables(.,$language)"/>
+                    </xsl:for-each>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:sequence select="distinct-values($conditioning-variables-with-doubles)"/>
+    </xsl:function>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>

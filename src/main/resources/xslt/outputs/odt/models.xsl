@@ -583,15 +583,12 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="variableCalculation" select="enoodt:get-calculate($source-context)"/>
-		<xsl:variable name="variableCalculationLabel" select="enoodt:get-calculate-text($source-context,$languages[1],'label')"/>
-		<xsl:variable name="variableCalculationAlert" select="enoodt:get-calculate-text($source-context,$languages[1],'alert')"/>
+		<xsl:variable name="variableCalculation" select="enoodt:get-variable-calculation($source-context)"/>
 		
-		<xsl:variable name="outVariable" select="enoodt:get-name($source-context)"/>
-		<xsl:variable name="nameOutVariable" select="enoodt:get-business-name($source-context,$outVariable)"/>
-		<xsl:variable name="idVariables" select="tokenize(enoodt:get-control-variables($source-context),'\s')"/>
-		<text:section text:name="CalculatedVariable-{enoodt:get-name($source-context)}">
-			<text:p><xsl:value-of select="$variableCalculationLabel"/></text:p>		
+		<!--<xsl:variable name="outVariable" select="enoodt:get-name($source-context)"/>-->
+		<xsl:variable name="nameOutVariable" select="enoodt:get-business-name($source-context)"/>
+		<xsl:variable name="idVariables" select="tokenize(enoodt:get-variable-calculation-variables($source-context),'\s')"/>
+		<text:section text:name="CalculatedVariable-{$nameOutVariable}">
 			<text:p text:style-name="CalculatedVariableTitle">
 				<xsl:value-of select="concat('Calcul de la variable ',$nameOutVariable,' Label : [',$nameOutVariable,']')"/>
 			</text:p>
@@ -619,7 +616,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="name" select="enoodt:get-label-conditioner($source-context,$languages[1])"/>
+		<!--<xsl:variable name="name" select="enoodt:get-label-conditioner($source-context,$languages[1])"/>-->
 		<xsl:variable name="nameOfControl" select="enoodt:get-check-name($source-context,$languages)"/>
 		<xsl:variable name="control" select="enoodt:get-constraint($source-context)"/>
 		<xsl:variable name="instructionFormat" select="enoodt:get-css-class($source-context)"/>
@@ -666,9 +663,8 @@
 		<xd:desc>
 			<xd:p>Template named:replaceVariablesInFormula.</xd:p>
 			<xd:p>It replaces variables in a all formula (control, instruction, filter).</xd:p>
+			<xd:p>"number(if (¤idVariable¤='') then '0' else ¤idVariable¤)" -> "variableName"</xd:p>
 			<xd:p>"¤idVariable¤" -> "variableName"</xd:p>
-			<xd:p>"number(if (//idVariable='') then '0' else //idVariable)" -> "variableName"</xd:p>
-			<xd:p>"//variable" -> "variableName"</xd:p>
 		</xd:desc>
 	</xd:doc>
 	<xsl:template name="replaceVariablesInFormula">
@@ -681,14 +677,12 @@
 				<xsl:value-of select="$formula"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:variable name="regexA" select="concat($conditioning-variable-begin,$variables[1],$conditioning-variable-end)"/>				
-				<xsl:variable name="regexB" select="concat('number\(if\s+\(//',$variables[1],'=''''\)\sthen\s+''0''\s+else\s+//',$variables[1],'\)')"/>
-				<xsl:variable name="regexC" select="concat('//',$variables[1])"/>
-				<xsl:variable name="expressionToReplace" select="concat('^',enoodt:get-business-name($source-context,$variables[1]))"/>				
-				<xsl:variable name="newFormula" select="replace(replace(replace($formula,
+				<xsl:variable name="regexA" select="concat('number\(if\s+\(',$conditioning-variable-begin,$variables[1],$conditioning-variable-end,'=''''\)\sthen\s+''0''\s+else\s+',$conditioning-variable-begin,$variables[1],$conditioning-variable-end,'\)')"/>
+				<xsl:variable name="regexB" select="concat($conditioning-variable-begin,$variables[1],$conditioning-variable-end)"/>				
+				<xsl:variable name="expressionToReplace" select="concat('^',enoodt:get-variable-business-name($source-context,$variables[1]))"/>				
+				<xsl:variable name="newFormula" select="replace(replace($formula,
 					$regexA,$expressionToReplace),
-					$regexB,$expressionToReplace),
-					$regexC,$expressionToReplace)"/>
+					$regexB,$expressionToReplace)"/>
 				
 				<xsl:call-template name="replaceVariablesInFormula">
 					<xsl:with-param name="formula" select="$newFormula"/>

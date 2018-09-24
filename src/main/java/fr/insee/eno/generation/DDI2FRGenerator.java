@@ -99,4 +99,9 @@ public class DDI2FRGenerator implements Generator {
 		}
 		return isPROPERTIES_FILE;
 	}
+	
+	public String in2out(){
+		return "ddi2fr";
+	}
+	
 }

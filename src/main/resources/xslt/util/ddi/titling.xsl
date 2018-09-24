@@ -20,9 +20,9 @@
     <xsl:param name="parameters-file"/>
 
     <!-- The output file generated will be xml type -->
-    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    <xsl:output method="xml" indent="no" encoding="UTF-8"/>
 
-    <xsl:strip-space elements="*"/>
+    <!--<xsl:strip-space elements="*"/>-->
 
     <xd:doc>
         <xd:desc>
@@ -38,6 +38,7 @@
             <xd:p>Where to restart counting questions :</xd:p>
             <xd:p>sequence : template, module, submodule, group</xd:p>
             <xd:p>filter : numbered-filter, unnumbered-filter : questions inside them don't count for following-sibling, but can be numbered or not</xd:p>
+            <xd:p>no-number : no number for questions</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:variable name="numbering-browser">
@@ -206,6 +207,7 @@
 
         <xsl:variable name="number">
             <xsl:choose>
+                <xsl:when test="$numbering-browser='no-number'"/>
                 <xsl:when test="$numbering-browser='unnumbered-filter'">
                     <xsl:if
                         test="enoddi:is-subquestion(ancestor::d:QuestionConstruct,$question-seq-level)=0">
@@ -422,7 +424,14 @@
     </xd:doc>
     <xsl:template match="text()" mode="modif-title" priority="1">
         <xsl:param name="prefix" tunnel="yes"/>
-        <xsl:value-of select="concat($prefix,.)"/>
+        <xsl:choose>
+            <xsl:when test="preceding-sibling::xhtml:p or following-sibling::xhtml:p">
+                <xsl:value-of select="."/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat($prefix,.)"/>        
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>

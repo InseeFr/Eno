@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="enoPogues-xml2DDI" basedir="." default="pogues-xml2ddi">
+    <!-- This property must be before import build-ddi2xforms-prod, which contains another survey-name... -->
+    <property name="survey-name" value="simpsons"/>
+    
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
     <import file="build-ddi2xforms-prod.xml"/>
-    
+
     <!-- Properties for this non regression script -->
-    <property name="survey-name" value="simpsons"/>
-    <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>    
+    <property name="survey-folder" value="${root-folder}/questionnaires/${survey-name}"/>
+
     
    <!-- Main Target -->
     <target name="pogues-xml2ddi" depends="ENOPreprocessingPogues-xml2ddi">
