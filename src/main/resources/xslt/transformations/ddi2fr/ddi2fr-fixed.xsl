@@ -175,7 +175,7 @@
                         </xsl:element>
                         <xsl:for-each select="$other-instructions">
                             <xsl:variable name="instruction-label" select="enoddi:get-label(.,$language)"/>
-                            <xsl:variable name="instruction-tooltip" select="enoddi:get-instructions-by-format($context,'tooltip')" as="node()*"/>
+                            <xsl:variable name="instruction-tooltip" select="enoddi:get-instructions-by-format(.,'tooltip')" as="node()*"/>
                             <xsl:element name="xhtml:span">
                                 <xsl:attribute name="class">
                                     <xsl:value-of select="'block '"/>
