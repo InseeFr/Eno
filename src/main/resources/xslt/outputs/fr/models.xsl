@@ -260,7 +260,7 @@
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
-        <xsl:if test="enofr:get-minimum-lines($source-context) &lt; enofr:get-maximum-lines($source-context)">
+        <xsl:if test="not(enofr:get-maximum-lines($source-context)!='') or (number(enofr:get-minimum-lines($source-context)) &lt; number(enofr:get-maximum-lines($source-context)))">
             <xsl:element name="{enofr:get-business-name($source-context)}-AddLine"/>
         </xsl:if>
     </xsl:template>
@@ -961,10 +961,16 @@
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
-        <xsl:if test="enofr:get-minimum-lines($source-context) &lt; enofr:get-maximum-lines($source-context)">
-            <xf:bind id="{$business-name}-addline-bind" ref="{$business-name}-AddLine"
-                relevant="count({$instance-ancestor-label}{$business-name}) &lt; {enofr:get-maximum-lines($source-context)}"/>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="not(enofr:get-maximum-lines($source-context)!='') and enofr:get-minimum-lines($source-context)!=''">
+                <xf:bind id="{$business-name}-addline-bind" ref="{$business-name}-AddLine"/>
+            </xsl:when>
+            <xsl:when test="number(enofr:get-minimum-lines($source-context)) &lt; number(enofr:get-maximum-lines($source-context))">
+                <xf:bind id="{$business-name}-addline-bind" ref="{$business-name}-AddLine"
+                    relevant="count({$instance-ancestor-label}{$business-name}) &lt; {enofr:get-maximum-lines($source-context)}"/>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:template>
 
     <xd:doc>
@@ -1801,11 +1807,7 @@
         <xsl:variable name="max-lines" select="enofr:get-maximum-lines($source-context)"/>
 
         <xsl:if test="not($max-lines != '') or $max-lines &gt; enofr:get-minimum-lines($source-context)">
-            <xf:trigger>
-                <xsl:if test="$max-lines != ''">
-                    <xsl:attribute name="id" select="concat($loop-name,'-addline')"/>
-                    <xsl:attribute name="bind" select="concat($loop-name,'-addline-bind')"/>
-                </xsl:if>
+            <xf:trigger id="{$loop-name}-addline" bind="{$loop-name}-addline-bind">
                 <xf:label ref="$form-resources/AddLine/label"/>
                 <xf:insert ev:event="DOMActivate" context="{$instance-ancestor-label}{$loop-name}-Container"
                     nodeset="{$instance-ancestor-label}{$loop-name}" position="after"
