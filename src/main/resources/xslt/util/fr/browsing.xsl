@@ -723,13 +723,16 @@
                         <xsl:for-each select="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
                             <xsl:value-of select="'not('"/>
                             <xsl:choose>
-                                <xsl:when test="starts-with(@relevant,concat($ancestor-beginning,$check-group))">
-                                    <xsl:value-of select="substring(substring-after(@relevant,concat($ancestor-beginning,$check-group)),
+                                <xsl:when test="starts-with(concat('instance(''fr-form-instance'')',@relevant),concat($ancestor-beginning,$check-group))">
+                                    <xsl:value-of select="@relevant"/>
+                                    <!-- no longer sure of what I need in all cases -->
+                                    <!--<xsl:value-of select="substring(substring-after(concat('instance(''fr-form-instance'')',@relevant),concat($ancestor-beginning,$check-group)),
                                         2,
-                                        string-length(substring-after(@relevant,concat($ancestor-beginning,$check-group)))-2)"/>
+                                        string-length(substring-after(concat('instance(''fr-form-instance'')',@relevant),concat($ancestor-beginning,$check-group)))-2)"/>-->
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:analyze-string select="substring-after(@relevant,$ancestor-beginning)" regex="(//(.+)\[\$\2-position\])*//(.+)\[\$\3-position\](\[(^(-position)*)\])">
+                                    <xsl:analyze-string select="substring-after(concat('instance(''fr-form-instance'')',@relevant),$ancestor-beginning)"
+                                                        regex="(//(.+)\[\$\2-position\])*//(.+)\[\$\3-position\](\[(^(-position)*)\])">
                                         <xsl:matching-substring>
                                             <xsl:value-of select="concat('ancestor::',regex-group(3),regex-group(4))"/>
                                         </xsl:matching-substring>
