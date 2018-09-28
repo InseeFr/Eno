@@ -176,29 +176,37 @@
                         <xsl:for-each select="$other-instructions">
                             <xsl:variable name="instruction-label" select="enoddi:get-label(.,$language)"/>
                             <xsl:variable name="instruction-tooltip" select="enoddi:get-instructions-by-format(.,'tooltip')" as="node()*"/>
-                            <xsl:element name="xhtml:span">
-                                <xsl:attribute name="class">
-                                    <xsl:value-of select="'block '"/>
-                                    <xsl:value-of select="enoddi:get-style(.)"/>
-                                </xsl:attribute>
-                                <xsl:if test="$instruction-label/@id">
-                                    <xsl:attribute name="id" select="$instruction-label/@id"/>
-                                </xsl:if>
-                                <xsl:choose>
-                                    <xsl:when test="$instruction-label/name()='xhtml:p'">
-                                        <xsl:copy-of select="$instruction-label/* | $instruction-label/text()"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:copy-of select="$instruction-label"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                                <xsl:for-each select="$instruction-tooltip[not(descendant-or-self::*/@id) or not(concat('#',descendant-or-self::*/@id) = $instruction-label//xhtml:a/@href)]">
-                                    <xsl:call-template name="tooltip-xforms">
-                                        <xsl:with-param name="ddi-tooltip" select="."/>
-                                        <xsl:with-param name="language" select="$language"/>
-                                    </xsl:call-template>
-                                </xsl:for-each>
-                            </xsl:element>
+                            <xsl:variable name="tooltips-with-id" select="$instruction-tooltip[descendant-or-self::*/@id]" as="node()*"/>
+                            <xsl:variable name="instruction-label-without-id-tooltips">
+                                <xsl:element name="xhtml:span">
+                                    <xsl:attribute name="class">
+                                        <xsl:value-of select="'block '"/>
+                                        <xsl:value-of select="enoddi:get-style(.)"/>
+                                    </xsl:attribute>
+                                    <xsl:if test="$instruction-label/@id">
+                                        <xsl:attribute name="id" select="$instruction-label/@id"/>
+                                    </xsl:if>
+                                    <xsl:choose>
+                                        <xsl:when test="$instruction-label/name()='xhtml:p'">
+                                            <xsl:copy-of select="$instruction-label/* | $instruction-label/text()"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:copy-of select="$instruction-label"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                    <xsl:for-each select="$instruction-tooltip[not(descendant-or-self::*/@id) or not(concat('#',descendant-or-self::*/@id) = $instruction-label//xhtml:a/@href)]">
+                                        <xsl:call-template name="tooltip-xforms">
+                                            <xsl:with-param name="ddi-tooltip" select="."/>
+                                            <xsl:with-param name="language" select="$language"/>
+                                        </xsl:call-template>
+                                    </xsl:for-each>
+                                </xsl:element>                                
+                            </xsl:variable>
+                            <xsl:call-template name="tooltip-in-label">
+                                <xsl:with-param name="label" select="$instruction-label-without-id-tooltips"/>
+                                <xsl:with-param name="language" select="$language"/>
+                                <xsl:with-param name="tooltip" select="$instruction-tooltip"/>
+                            </xsl:call-template>
                         </xsl:for-each>
                     </xsl:element>
                 </xsl:when>
