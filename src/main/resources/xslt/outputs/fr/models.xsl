@@ -2136,9 +2136,9 @@
                         <xsl:when test="not($instance-group) or not($variable-ancestors)">
                             <xsl:value-of select="concat('//',$business-name)"/>
                         </xsl:when>
-                        <!-- the calculation and the variable depend on loops and the calculation is a label or a calculation -->
+                        <!-- the calculation and the variable depend on loops and the calculation is a label -->
                         <!-- the variable is called with its whole absolute address -->
-                        <xsl:when test="$calcul-aim = ('calculation','label')">
+                        <xsl:when test="$calcul-aim = 'label'">
                             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
                             <xsl:for-each select="tokenize($variable-ancestors,' ')">
                                 <xsl:if test=". = tokenize($instance-ancestor,' ')">
@@ -2146,6 +2146,11 @@
                                 </xsl:if>
                             </xsl:for-each>
                             <xsl:value-of select="$business-name"/>
+                        </xsl:when>
+                        <!-- the calculation and the variable depend on loops and the calculation is a calculated variable -->
+                        <!-- the variable is called with "ancestor::" before the last ancestor -->
+                        <xsl:when test="$calcul-aim = 'calculation'">
+                            <xsl:value-of select="concat('ancestor::',tokenize($variable-ancestors,' ')[last()],'//',$business-name)"/>
                         </xsl:when>
                         <!-- the calculation and the variable depend on loops and the calculation is a filter or a check and the variable depends on the calculation's loop -->
                         <!-- the variable is called as a descendant of the filter or check instance -->

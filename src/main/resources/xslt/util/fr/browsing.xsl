@@ -754,9 +754,6 @@
                     <xsl:value-of select="substring(substring-after(@value,$ancestor-beginning),
                                                     2,
                                                     string-length(substring-after(@value,$ancestor-beginning))-2)"/>
-                    <xsl:message select="substring(substring-after(@value,$ancestor-beginning),
-                        2,
-                        string-length(substring-after(@value,$ancestor-beginning))-2)"/>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:value-of select="')'"/>
