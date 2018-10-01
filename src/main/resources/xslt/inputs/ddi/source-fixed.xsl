@@ -764,10 +764,21 @@
             <xd:p>Function that returns the formula of a conditioning variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid | d:ComputationItem" mode="enoddi:get-conditioning-variable-formula" priority="2">
+    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid | d:ComputationItem
+        | *[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference')) and ancestor::d:QuestionItem]"
+        mode="enoddi:get-conditioning-variable-formula" priority="2">
         <xsl:param name="variable" tunnel="yes"/>
         <!-- The markup containing the text has different names, but it is always a child of the element -->
-        <xsl:variable name="conditional-text" select="descendant::d:ConditionalText"/>
+        <xsl:variable name="conditional-text">
+            <xsl:choose>
+                <xsl:when test="ends-with(name(),'Domain') or ends-with(name(),'DomainReference')">
+                    <xsl:copy-of select="ancestor::d:QuestionItem/descendant::d:ConditionalText"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="descendant::d:ConditionalText"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:variable name="possible-formulas" as="xs:string *">
             <xsl:for-each select="$conditional-text//d:Expression/r:Command">
                 <xsl:if test="r:OutParameter/r:ID = $variable">
@@ -784,10 +795,21 @@
             <xd:p>Function that returns the variables of the formula of a conditioning variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid | d:ComputationItem" mode="enoddi:get-conditioning-variable-formula-variables" priority="2">
+    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid | d:ComputationItem
+        | *[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference')) and ancestor::d:QuestionItem]"
+        mode="enoddi:get-conditioning-variable-formula-variables" priority="2">
         <xsl:param name="variable" tunnel="yes"/>
         <!-- The markup containing the text has different names, but it is always a child of the element -->
-        <xsl:variable name="conditional-text" select="descendant::d:ConditionalText"/>
+        <xsl:variable name="conditional-text">
+            <xsl:choose>
+                <xsl:when test="ends-with(name(),'Domain') or ends-with(name(),'DomainReference')">
+                    <xsl:copy-of select="ancestor::d:QuestionItem/descendant::d:ConditionalText"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="descendant::d:ConditionalText"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:variable name="formula-variables" as="node()">
             <Variables>
                 <xsl:for-each select="$conditional-text//d:Expression/r:Command">
