@@ -850,6 +850,29 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Defining getterget-item-label-conditioning-variables.</xd:p>
+            <xd:p>Function that returns the variables of the labels of the items of MCQ.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
+        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])]
+        and parent::d:GridResponseDomain and following-sibling::d:GridAttachment//d:SelectDimension]"
+        mode="enoddi:get-item-label-conditioning-variables" priority="2">
+
+        <xsl:variable name="codeCoordinates" select="following-sibling::d:GridAttachment//d:SelectDimension"/>
+        <xsl:variable name="item-label-conditioning-variables-with-doubles">
+            <xsl:call-template name="enoddi:variables-from-label">
+                <xsl:with-param name="label"
+                    select="eno:serialize(ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]
+                                                                  //l:Code[position()=$codeCoordinates/@rangeMinimum]
+                                                                  //l:Category/r:Label/r:Content)"/>
+            </xsl:call-template>            
+        </xsl:variable>
+        <xsl:sequence select="distinct-values($item-label-conditioning-variables-with-doubles)"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
             <xd:p>Defining getter get-variable-type.</xd:p>
             <xd:p>Function that returns the type of a variable.</xd:p>
         </xd:desc>
