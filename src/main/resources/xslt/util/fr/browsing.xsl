@@ -748,7 +748,7 @@
             </xsl:if>
             <xsl:value-of select="'('"/>
             <xsl:choose>
-                <xsl:when test="$last-ancestor = ''">
+                <xsl:when test="not($last-ancestor != '')">
                     <xsl:value-of select="@value"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -775,7 +775,7 @@
             </xsl:if>
             <xsl:value-of select="'(not('"/>
             <xsl:choose>
-                <xsl:when test="$last-ancestor = ''">
+                <xsl:when test="not($last-ancestor != '')">
                     <xsl:value-of select="@relevant"/>
                 </xsl:when>
                 <xsl:otherwise>
