@@ -429,7 +429,9 @@
                 <xf:bind id="confirmation-message-bind" ref="ConfirmationMessage" name="confirmation-message"
                     relevant="instance('fr-form-instance')/Util/Send='true'"/>
                 <xf:bind id="pages-bind" ref="Pages">
-                    <xsl:apply-templates select="//xf:instance[@id='fr-form-instance']/form/*[child::*]" mode="page-bind"/>
+                    <xsl:apply-templates select="//xf:instance[@id='fr-form-instance']/form/*[child::*]" mode="page-bind">
+                        <xsl:with-param name="loop-ancestors"/>
+                    </xsl:apply-templates>
                 </xf:bind>
             </xf:bind>
 
@@ -678,48 +680,92 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p></xd:p>
+            <xd:p>page-bind</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[not(ends-with(name(),'-Container'))]" mode="page-bind">
+        <xsl:param name="loop-ancestors"/>
+        
+        <xsl:variable name="ancestor-beginning">
+            <xsl:value-of select="'instance(''fr-form-instance'')'"/>
+            <xsl:for-each select="tokenize($loop-ancestors,' ')">
+                <xsl:value-of select="concat('//',.,'[$',.,'-position]')"/>
+            </xsl:for-each>
+        </xsl:variable>
+        
         <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}" ref="{name()}">
-            <xf:calculate
-                value="{concat('xxf:evaluate-bind-property(''',concat(name(),'-bind'),''',''relevant'')')}"/>
+            <xf:calculate value="{concat('xxf:evaluate-bind-property(''',concat(name(),'-bind'),''',''relevant'')')}"/>
             <!-- Creating a constraint equals to the sum of warning-level constraints -->
             <xsl:variable name="module-name" select="name()"/>
             <xsl:variable name="constraint">
-                <xsl:value-of select="'('"/>
                 <xsl:for-each select="//xf:bind[@name=$module-name]//xf:constraint[@level='warning']">
                     <xsl:if test="not(position()=1)">
                         <xsl:text>) and (</xsl:text>
                     </xsl:if>
-                    <!-- if the constraint is not relevant or readonly, then it doesn't block the page changing : 
+                    <xsl:variable name="check-group">
+                        <xsl:analyze-string select="substring-after(@value,$ancestor-beginning)" regex="(//(.+)\[\$\2-position\])*\[(.*)\]">
+                            <xsl:matching-substring>
+                                <xsl:value-of select="regex-group(1)"/>
+                            </xsl:matching-substring>
+                            <xsl:non-matching-substring>
+                                <xsl:value-of select="'ERROR-Check-ancestor'"/>
+                            </xsl:non-matching-substring>
+                        </xsl:analyze-string>
+                    </xsl:variable>
+                    <!-- if the constraint is not relevant, then it doesn't block the page changing : 
                         useful when the constraint is : you must answer the hidden question -->
-                    <xsl:if test="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
-                        <xsl:text>(</xsl:text>
-                        <xsl:for-each select="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
-                            <xsl:value-of select="concat('not(',@relevant,')')"/>
-                            <!--<xsl:value-of select="concat('not(',
-                                replace(replace(@relevant,'//','instance(''fr-form-instance'')//'),
-                                '\]instance\(''fr-form-instance''\)',
-                                ']'),
-                                ')')"/>-->
-                            <xsl:text>) or (</xsl:text>
-                        </xsl:for-each>
+                    <xsl:if test="$check-group != ''">
+                        <xsl:value-of select="'not('"/>
+                        <xsl:value-of select="substring(replace($check-group, '//(.+)\[\$\1-position\]', '/descendant::$1'),2)"/>
+                        <xsl:value-of select="'[not('"/>
                     </xsl:if>
-                    <xsl:value-of select="@value"/>
-<!--                    <xsl:value-of
-                        select="replace(replace(@value,'//','instance(''fr-form-instance'')//'),
-                                        '\]instance\(''fr-form-instance''\)',
-                                        ']')"/>-->
+                    <xsl:if test="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
+                        <xsl:for-each select="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
+                            <xsl:value-of select="'not('"/>
+                            <xsl:choose>
+                                <xsl:when test="starts-with(concat('instance(''fr-form-instance'')',@relevant),concat($ancestor-beginning,$check-group))">
+                                    <xsl:value-of select="@relevant"/>
+                                    <!-- no longer sure of what I need in all cases -->
+                                    <!--<xsl:value-of select="substring(substring-after(concat('instance(''fr-form-instance'')',@relevant),concat($ancestor-beginning,$check-group)),
+                                        2,
+                                        string-length(substring-after(concat('instance(''fr-form-instance'')',@relevant),concat($ancestor-beginning,$check-group)))-2)"/>-->
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:analyze-string select="substring-after(concat('instance(''fr-form-instance'')',@relevant),$ancestor-beginning)"
+                                                        regex="(//(.+)\[\$\2-position\])*//(.+)\[\$\3-position\](\[(^(-position)*)\])">
+                                        <xsl:matching-substring>
+                                            <xsl:value-of select="concat('ancestor::',regex-group(3),regex-group(4))"/>
+                                        </xsl:matching-substring>
+                                        <xsl:non-matching-substring>
+                                            <xsl:value-of select="concat('//*',substring-after(.,$ancestor-beginning))"/>
+                                        </xsl:non-matching-substring>
+                                    </xsl:analyze-string>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:value-of select="') or '"/>
+                        </xsl:for-each>
+                        <xsl:text>(</xsl:text>
+                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="$check-group != ''">
+                            <xsl:value-of select="substring(substring-after(@value,$check-group),
+                                                            2,
+                                                            string-length(substring-after(@value,$check-group))-2)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="@value"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:if test="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
                         <xsl:text>)</xsl:text>
                     </xsl:if>
+                    <xsl:if test="$check-group != ''">
+                        <xsl:value-of select="')])'"/>
+                    </xsl:if>
                 </xsl:for-each>
-                <xsl:value-of select="')'"/>
             </xsl:variable>
-            <xsl:if test="$constraint[not(text()='()')]">
-                <xf:constraint value="{$constraint}"/>
+            <xsl:if test="$constraint[not(text()='')]">
+                <xf:constraint value="{$ancestor-beginning}[({$constraint})]"/>
             </xsl:if>
         </xf:bind>
     </xsl:template>
@@ -730,10 +776,13 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[ends-with(name(),'-Container')]" mode="page-bind">
+        <xsl:param name="loop-ancestors"/>
         <xsl:variable name="loop-name" select="substring-before(name(),'-Container')"/>
         <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}">
             <xsl:attribute name="ref" select="concat(name(),'/',$loop-name,'[instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$loop-name,''']]')"/>
-            <xsl:apply-templates select="child::*/child::*[child::*]" mode="page-bind"/>
+            <xsl:apply-templates select="child::*/child::*[child::*]" mode="page-bind">
+                <xsl:with-param name="loop-ancestors" select="if ($loop-ancestors='') then $loop-name else concat($loop-ancestors,' ',$loop-name)"/>
+            </xsl:apply-templates>
         </xf:bind>
     </xsl:template>
 
