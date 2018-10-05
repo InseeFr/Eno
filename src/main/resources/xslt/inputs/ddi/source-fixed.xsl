@@ -480,7 +480,7 @@
         </xsl:variable>
 
         <xsl:for-each select="//d:ComputationItem[r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable]">
-            <xsl:value-of select="enoddi:get-id(current()/d:InterviewerInstructionReference/d:Instruction)"/>
+            <xsl:value-of select="enoddi:get-id(.)"/>
         </xsl:for-each>
     </xsl:template>
 
@@ -868,9 +868,10 @@
                                                                   //l:Category/r:Label/r:Content)"/>
             </xsl:call-template>            
         </xsl:variable>
+
         <xsl:sequence select="distinct-values($item-label-conditioning-variables-with-doubles)"/>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-variable-type.</xd:p>
