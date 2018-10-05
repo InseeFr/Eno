@@ -680,99 +680,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>page-bind</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="*[not(ends-with(name(),'-Container'))]" mode="page-bind">
-        <xsl:param name="loop-ancestors"/>
-        
-        <xsl:variable name="ancestor-beginning">
-            <xsl:value-of select="'instance(''fr-form-instance'')'"/>
-            <xsl:for-each select="tokenize($loop-ancestors,' ')">
-                <xsl:value-of select="concat('//',.,'[$',.,'-position]')"/>
-            </xsl:for-each>
-        </xsl:variable>
-        
-        <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}" ref="{name()}">
-            <xf:calculate value="{concat('xxf:evaluate-bind-property(''',concat(name(),'-bind'),''',''relevant'')')}"/>
-            <!-- Creating a constraint equals to the sum of warning-level constraints -->
-            <xsl:variable name="module-name" select="name()"/>
-            <xsl:variable name="constraint">
-                <xsl:for-each select="//xf:bind[@name=$module-name]//xf:constraint[@level='warning']">
-                    <xsl:if test="not(position()=1)">
-                        <xsl:text>) and (</xsl:text>
-                    </xsl:if>
-                    <xsl:variable name="check-group">
-                        <xsl:analyze-string select="substring-after(@value,$ancestor-beginning)" regex="(//(.+)\[\$\2-position\])*\[(.*)\]">
-                            <xsl:matching-substring>
-                                <xsl:value-of select="regex-group(1)"/>
-                            </xsl:matching-substring>
-                            <xsl:non-matching-substring>
-                                <xsl:value-of select="'ERROR-Check-ancestor'"/>
-                            </xsl:non-matching-substring>
-                        </xsl:analyze-string>
-                    </xsl:variable>
-                    <!-- if the constraint is not relevant, then it doesn't block the page changing : 
-                        useful when the constraint is : you must answer the hidden question -->
-                    <xsl:if test="$check-group != ''">
-                        <xsl:value-of select="'not('"/>
-                        <xsl:value-of select="substring(replace($check-group, '//(.+)\[\$\1-position\]', '/descendant::$1'),2)"/>
-                        <xsl:value-of select="'[not('"/>
-                    </xsl:if>
-                    <xsl:if test="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
-                        <xsl:for-each select="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
-                            <xsl:value-of select="'not('"/>
-                            <xsl:choose>
-                                <xsl:when test="starts-with(concat('instance(''fr-form-instance'')',@relevant),concat($ancestor-beginning,$check-group))">
-                                    <xsl:value-of select="@relevant"/>
-                                    <!-- no longer sure of what I need in all cases -->
-                                    <!--<xsl:value-of select="substring(substring-after(concat('instance(''fr-form-instance'')',@relevant),concat($ancestor-beginning,$check-group)),
-                                        2,
-                                        string-length(substring-after(concat('instance(''fr-form-instance'')',@relevant),concat($ancestor-beginning,$check-group)))-2)"/>-->
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:analyze-string select="substring-after(concat('instance(''fr-form-instance'')',@relevant),$ancestor-beginning)"
-                                                        regex="(//(.+)\[\$\2-position\])*//(.+)\[\$\3-position\](\[(^(-position)*)\])">
-                                        <xsl:matching-substring>
-                                            <xsl:value-of select="concat('ancestor::',regex-group(3),regex-group(4))"/>
-                                        </xsl:matching-substring>
-                                        <xsl:non-matching-substring>
-                                            <xsl:value-of select="concat('//*',substring-after(.,$ancestor-beginning))"/>
-                                        </xsl:non-matching-substring>
-                                    </xsl:analyze-string>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                            <xsl:value-of select="') or '"/>
-                        </xsl:for-each>
-                        <xsl:text>(</xsl:text>
-                    </xsl:if>
-                    <xsl:choose>
-                        <xsl:when test="$check-group != ''">
-                            <xsl:value-of select="substring(substring-after(@value,$check-group),
-                                                            2,
-                                                            string-length(substring-after(@value,$check-group))-2)"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="@value"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    <xsl:if test="ancestor::xf:bind[@relevant][ancestor::xf:bind/@name=$module-name]">
-                        <xsl:text>)</xsl:text>
-                    </xsl:if>
-                    <xsl:if test="$check-group != ''">
-                        <xsl:value-of select="')])'"/>
-                    </xsl:if>
-                </xsl:for-each>
-            </xsl:variable>
-            <xsl:if test="$constraint[not(text()='')]">
-                <xf:constraint value="{$ancestor-beginning}[({$constraint})]"/>
-            </xsl:if>
-        </xf:bind>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p></xd:p>
+            <xd:p>loop of pages : bind</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[ends-with(name(),'-Container')]" mode="page-bind">
@@ -784,6 +692,126 @@
                 <xsl:with-param name="loop-ancestors" select="if ($loop-ancestors='') then $loop-name else concat($loop-ancestors,' ',$loop-name)"/>
             </xsl:apply-templates>
         </xf:bind>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>page-bind</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*[not(ends-with(name(),'-Container'))]" mode="page-bind">
+        <xsl:param name="loop-ancestors"/>
+
+        <xf:bind id="{concat('page-',name(),'-bind')}" name="{name()}" ref="{name()}">
+            <xf:calculate value="{concat('xxf:evaluate-bind-property(''',concat(name(),'-bind'),''',''relevant'')')}"/>
+            <!-- Creating a constraint equals to the sum of warning-level constraints -->
+            <xsl:variable name="module-name" select="name()"/>
+            <xsl:variable name="constraint">
+                <xsl:apply-templates select="//xf:bind[@name=$module-name]/*" mode="page-check">
+                    <xsl:with-param name="parent-name" select="$module-name" tunnel="yes"/>
+                    <xsl:with-param name="last-ancestor" select="tokenize($loop-ancestors,' ')[last()]" tunnel="yes"/>
+                    <xsl:with-param name="level" select="'warning'" tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:variable>
+            <xsl:if test="$constraint[text()!='']">
+                <xf:constraint>
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="'instance(''fr-form-instance'')'"/>
+                        <xsl:for-each select="tokenize($loop-ancestors,' ')">
+                            <xsl:value-of select="concat('//',.,'[$',.,'-position]')"/>
+                        </xsl:for-each>
+                        <xsl:value-of select="concat('[',$constraint,']')"/>
+                    </xsl:attribute>
+                </xf:constraint>
+            </xsl:if>
+        </xf:bind>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>page-check : nothing by default</xd:desc>
+    </xd:doc>
+    <xsl:template match="*[not(@relevant) and not(@nodeset)]" mode="page-check" priority="-1">
+        <xsl:apply-templates select="*" mode="page-check"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>page-check : constraint added : must be true so that there is no pop-up</xd:desc>
+    </xd:doc>
+    <xsl:template match="xf:constraint" mode="page-check">
+        <xsl:param name="parent-name" tunnel="yes"/>
+        <xsl:param name="last-ancestor" tunnel="yes"/>
+        <xsl:param name="level" tunnel="yes"/>
+        
+        <xsl:if test="@level=$level">
+            <xsl:if test="preceding::xf:constraint[@level=$level and ancestor::xf:bind/@name=$parent-name]">
+                <xsl:value-of select="' and '"/>
+            </xsl:if>
+            <xsl:value-of select="'('"/>
+            <xsl:choose>
+                <xsl:when test="not($last-ancestor != '')">
+                    <xsl:value-of select="@value"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="substring(substring-after(@value,concat('ancestor::',$last-ancestor)),
+                                                    2,
+                                                    string-length(substring-after(@value,concat('ancestor::',$last-ancestor)))-2)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:value-of select="')'"/>
+        </xsl:if>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>page-check : relevant ancestor of constraint added : must be not relevant or the constraint inside must be true</xd:desc>
+    </xd:doc>
+    <xsl:template match="xf:bind[@relevant]" mode="page-check">
+        <xsl:param name="parent-name" tunnel="yes"/>
+        <xsl:param name="last-ancestor" tunnel="yes"/>
+        <xsl:param name="level" tunnel="yes"/>
+
+        <xsl:if test="descendant::xf:constraint/@level=$level">
+            <xsl:if test="preceding::xf:constraint[@level=$level and ancestor::xf:bind/@name=$parent-name]">
+                <xsl:value-of select="' and '"/>
+            </xsl:if>
+            <xsl:value-of select="'(not('"/>
+            <xsl:choose>
+                <xsl:when test="not($last-ancestor != '')">
+                    <xsl:value-of select="@relevant"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="substring(substring-after(@relevant,concat('ancestor::',$last-ancestor)),
+                                                    2,
+                                                    string-length(substring-after(@relevant,concat('ancestor::',$last-ancestor)))-2)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:value-of select="') or '"/>
+            <xsl:apply-templates select="*" mode="page-check">
+                <xsl:with-param name="parent-name" select="@name" tunnel="yes"/>
+            </xsl:apply-templates>
+            <xsl:value-of select="')'"/>
+        </xsl:if>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>page-check : relevant nodeset of constraint added : all instances must be true, so no instance can be false</xd:desc>
+    </xd:doc>
+    <xsl:template match="xf:bind[@nodeset]" mode="page-check">
+        <xsl:param name="parent-name" tunnel="yes"/>
+        <xsl:param name="last-ancestor" tunnel="yes"/>
+        <xsl:param name="level" tunnel="yes"/>
+        
+        <xsl:if test="descendant::xf:constraint/@level=$level">
+            <xsl:variable name="loop-name" select="substring-before(@name,'-Container')"/>
+            <xsl:if test="preceding::xf:constraint[@level=$level and ancestor::xf:bind/@name=$parent-name]">
+                <xsl:value-of select="' and '"/>
+            </xsl:if>
+            <xsl:value-of select="concat('not(descendant::',$loop-name,'[not(')"/>
+            <xsl:apply-templates select="*" mode="page-check">
+                <xsl:with-param name="parent-name" select="@name" tunnel="yes"/>
+                <xsl:with-param name="last-ancestor" select="$loop-name" tunnel="yes"/>
+            </xsl:apply-templates>
+            <xsl:value-of select="')])'"/>
+        </xsl:if>
     </xsl:template>
 
     <xd:doc>

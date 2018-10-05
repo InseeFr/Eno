@@ -260,7 +260,7 @@
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
-        <xsl:if test="enofr:get-minimum-lines($source-context) &lt; enofr:get-maximum-lines($source-context)">
+        <xsl:if test="not(enofr:get-maximum-lines($source-context)!='') or (number(enofr:get-minimum-lines($source-context)) &lt; number(enofr:get-maximum-lines($source-context)))">
             <xsl:element name="{enofr:get-business-name($source-context)}-AddLine"/>
         </xsl:if>
     </xsl:template>
@@ -333,13 +333,6 @@
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="constraint" select="enofr:get-constraint($source-context)"/>
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
-        <xsl:variable name="instance-ancestor-head">
-            <xsl:value-of select="'instance(''fr-form-instance'')'"/>
-            <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat('//',.,'[$',.,'-position]')"/>
-            </xsl:for-each>
-            <xsl:value-of select="'['"/>
-        </xsl:variable>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="not($required = ('false()', ''))">
@@ -348,7 +341,7 @@
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
                     <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="$instance-ancestor-head"/>
+                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                     </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
@@ -389,7 +382,7 @@
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
                     <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="$instance-ancestor-head"/>
+                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                     </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
@@ -418,7 +411,7 @@
                     </xsl:if>
                     <xsl:attribute name="value">
                         <xsl:if test="$instance-ancestor != ''">
-                            <xsl:value-of select="$instance-ancestor-head"/>
+                            <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                         </xsl:if>
                         <xsl:if test="enofr:get-readonly-ancestors($source-context) != ''">
                             <xsl:variable name="initial-readonly-ancestors">
@@ -485,13 +478,6 @@
         <xsl:variable name="type" select="enofr:get-type($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
-        <xsl:variable name="instance-ancestor-head">
-            <xsl:value-of select="'instance(''fr-form-instance'')'"/>
-            <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat('//',.,'[$',.,'-position]')"/>
-            </xsl:for-each>
-            <xsl:value-of select="'['"/>
-        </xsl:variable>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="not($required = ('false()', ''))">
@@ -500,7 +486,7 @@
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
                     <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="$instance-ancestor-head"/>
+                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                     </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
@@ -527,7 +513,7 @@
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
                     <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="$instance-ancestor-head"/>
+                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                     </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
@@ -855,19 +841,12 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
-        <xsl:variable name="instance-ancestor-head">
-            <xsl:value-of select="'instance(''fr-form-instance'')'"/>
-            <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat('//',.,'[$',.,'-position]')"/>
-            </xsl:for-each>
-            <xsl:value-of select="'['"/>
-        </xsl:variable>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
                     <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="$instance-ancestor-head"/>
+                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                     </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
@@ -891,7 +870,7 @@
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
                     <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="$instance-ancestor-head"/>
+                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                     </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
@@ -961,10 +940,16 @@
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
-        <xsl:if test="enofr:get-minimum-lines($source-context) &lt; enofr:get-maximum-lines($source-context)">
-            <xf:bind id="{$business-name}-addline-bind" ref="{$business-name}-AddLine"
-                relevant="count({$instance-ancestor-label}{$business-name}) &lt; {enofr:get-maximum-lines($source-context)}"/>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="not(enofr:get-maximum-lines($source-context)!='') and enofr:get-minimum-lines($source-context)!=''">
+                <xf:bind id="{$business-name}-addline-bind" ref="{$business-name}-AddLine"/>
+            </xsl:when>
+            <xsl:when test="number(enofr:get-minimum-lines($source-context)) &lt; number(enofr:get-maximum-lines($source-context))">
+                <xf:bind id="{$business-name}-addline-bind" ref="{$business-name}-AddLine"
+                    relevant="count({$instance-ancestor-label}{$business-name}) &lt; {enofr:get-maximum-lines($source-context)}"/>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:template>
 
     <xd:doc>
@@ -979,13 +964,6 @@
         <xsl:variable name="required" select="enofr:get-required($source-context)"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
-        <xsl:variable name="instance-ancestor-head">
-            <xsl:value-of select="'instance(''fr-form-instance'')'"/>
-            <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat('//',.,'[$',.,'-position]')"/>
-            </xsl:for-each>
-            <xsl:value-of select="'['"/>
-        </xsl:variable>
 
         <!-- Creating one element that correspond to the concatenation of the two ones -->
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
@@ -1007,7 +985,7 @@
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
                     <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="$instance-ancestor-head"/>
+                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                     </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
@@ -1031,7 +1009,7 @@
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
                     <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="$instance-ancestor-head"/>
+                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                     </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
@@ -1061,7 +1039,7 @@
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
                     <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="$instance-ancestor-head"/>
+                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                     </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
@@ -1085,7 +1063,7 @@
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
                     <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="$instance-ancestor-head"/>
+                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                     </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
@@ -1801,11 +1779,7 @@
         <xsl:variable name="max-lines" select="enofr:get-maximum-lines($source-context)"/>
 
         <xsl:if test="not($max-lines != '') or $max-lines &gt; enofr:get-minimum-lines($source-context)">
-            <xf:trigger>
-                <xsl:if test="$max-lines != ''">
-                    <xsl:attribute name="id" select="concat($loop-name,'-addline')"/>
-                    <xsl:attribute name="bind" select="concat($loop-name,'-addline-bind')"/>
-                </xsl:if>
+            <xf:trigger id="{$loop-name}-addline" bind="{$loop-name}-addline-bind">
                 <xf:label ref="$form-resources/AddLine/label"/>
                 <xf:insert ev:event="DOMActivate" context="{$instance-ancestor-label}{$loop-name}-Container"
                     nodeset="{$instance-ancestor-label}{$loop-name}" position="after"
@@ -2134,9 +2108,9 @@
                         <xsl:when test="not($instance-group) or not($variable-ancestors)">
                             <xsl:value-of select="concat('//',$business-name)"/>
                         </xsl:when>
-                        <!-- the calculation and the variable depend on loops and the calculation is a label or a calculation -->
+                        <!-- the calculation and the variable depend on loops and the calculation is a label -->
                         <!-- the variable is called with its whole absolute address -->
-                        <xsl:when test="$calcul-aim = ('calculation','label')">
+                        <xsl:when test="$calcul-aim = 'label'">
                             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
                             <xsl:for-each select="tokenize($variable-ancestors,' ')">
                                 <xsl:if test=". = tokenize($instance-ancestor,' ')">
@@ -2144,6 +2118,11 @@
                                 </xsl:if>
                             </xsl:for-each>
                             <xsl:value-of select="$business-name"/>
+                        </xsl:when>
+                        <!-- the calculation and the variable depend on loops and the calculation is a calculated variable -->
+                        <!-- the variable is called with "ancestor::" before the last ancestor -->
+                        <xsl:when test="$calcul-aim = 'calculation'">
+                            <xsl:value-of select="concat('ancestor::',tokenize($variable-ancestors,' ')[last()],'//',$business-name)"/>
                         </xsl:when>
                         <!-- the calculation and the variable depend on loops and the calculation is a filter or a check and the variable depends on the calculation's loop -->
                         <!-- the variable is called as a descendant of the filter or check instance -->
