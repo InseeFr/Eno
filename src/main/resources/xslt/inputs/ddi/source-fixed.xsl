@@ -1032,4 +1032,22 @@
         </xsl:apply-templates>
     </xsl:function>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Get flowControl linked to a question</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:QuestionItem | d:QuestionGrid"
+        mode="enoddi:get-next-filter-description">
+        <xsl:sequence select="d:ExternalAid/r:Description[r:Content/xhtml:div/@class='FlowControl']"/>
+    </xsl:template>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Get Filter linked to a question</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:QuestionItem | d:QuestionGrid"
+        mode="enoddi:get-previous-filter-description">
+        <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference[not(preceding-sibling::d:ControlConstructReference)]/ancestor::d:IfThenElse[not(d:ExternalAid)]/r:Description"/>
+    </xsl:template>
 </xsl:stylesheet>
