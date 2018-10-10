@@ -17,6 +17,7 @@
 	</xd:doc>
 	<xsl:param name="properties-file"/>
 	<xsl:param name="parameters-file"/>
+	<xsl:param name="parameters-node"/>
 	
 	<xd:doc>
 		<xd:desc>
@@ -24,7 +25,16 @@
 		</xd:desc>
 	</xd:doc>
 	<xsl:variable name="properties" select="doc($properties-file)"/>
-	<xsl:variable name="parameters" select="doc($parameters-file)"/>
+	<xsl:variable name="parameters">
+		<xsl:choose>
+			<xsl:when test="$parameters-node/*">
+				<xsl:copy-of select="$parameters-node"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:copy-of select="doc($parameters-file)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
 	
 	<xd:doc>
 		<xd:desc>Variables from propertiers and parameters</xd:desc>
