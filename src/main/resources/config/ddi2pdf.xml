@@ -20,6 +20,10 @@
 		<Folder>styles</Folder>
 		<File>style.xsl</File>
 	</Style>
+	<Capture>
+		<!-- manual or optical -->
+		<Numeric>manual</Numeric>
+	</Capture>
 	<Images>
 	<!-- <Folder></Folder> for relative folder -->
 	<Folder></Folder>
