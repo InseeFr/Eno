@@ -18,6 +18,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:param name="parameters-file"/>
+    <xsl:param name="parameters-node" as="node()" select="node()"/>
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="no" encoding="UTF-8"/>
@@ -30,7 +31,14 @@
         </xd:desc>
     </xd:doc>
     <xsl:variable name="style">
-        <xsl:copy-of select="document($parameters-file)/Parameters/Title"/>
+        <xsl:choose>
+            <xsl:when test="$parameters-node//Parameters/Title">
+                <xsl:copy-of select="$parameters-node//Parameters/Title"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="document($parameters-file)/Parameters/Title"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:variable>
 
     <xd:doc>
