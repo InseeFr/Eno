@@ -18,8 +18,19 @@
     <xsl:param name="form-name"/>
     <xsl:param name="parameters-file"/>
     <xsl:param name="properties-file"/>
-    <xsl:variable name="parameters" select="document($parameters-file)"/>
+    <xsl:param name="parameters-node"/>
+
     <xsl:variable name="properties" select="document($properties-file)"/>
+    <xsl:variable name="parameters">
+        <xsl:choose>
+            <xsl:when test="$parameters-node/*">
+                <xsl:copy-of select="$parameters-node"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="doc($parameters-file)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:variable name="homepage-folder">
         <xsl:choose>
             <xsl:when test="$parameters//HomePage/Folder != ''">
