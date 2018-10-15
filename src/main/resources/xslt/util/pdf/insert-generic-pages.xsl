@@ -18,7 +18,9 @@
     <xsl:param name="form-name"/>
     <xsl:param name="parameters-file"/>
     <xsl:param name="properties-file"/>
-    <xsl:param name="parameters-node" as="node()" select="node()"/>
+    <xsl:param name="parameters-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
 
     <xsl:variable name="properties" select="document($properties-file)"/>
     <xsl:variable name="parameters">

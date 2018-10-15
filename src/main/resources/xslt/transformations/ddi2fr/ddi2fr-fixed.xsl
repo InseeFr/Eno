@@ -30,7 +30,9 @@
         </xd:desc>
     </xd:doc>
     <xsl:param name="parameters-file"/>
-    <xsl:param name="parameters-node" as="node()" select="node()"/>
+    <xsl:param name="parameters-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
 
     <xd:doc>
         <xd:desc>

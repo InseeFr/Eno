@@ -18,7 +18,9 @@
 	
 	<xsl:param name="properties-file"/>
 	<xsl:param name="parameters-file"/>
-	<xsl:param name="parameters-node"/>
+	<xsl:param name="parameters-node" as="node()" required="no">
+		<empty/>
+	</xsl:param>
 	<xsl:param name="labels-folder"/>
 	
 	<xsl:variable name="properties" select="doc($properties-file)"/>
