@@ -13,7 +13,7 @@
   </ColtraneQuestions>
   <Capture>
     <!-- manual or optical -->
-    <Numeric>manual</Numeric>
+    <Numeric>optical</Numeric>
   </Capture>
   <AccompanyingMails>
     <!--<AccompanyingMail>ouvertureCOL</AccompanyingMail>-->
