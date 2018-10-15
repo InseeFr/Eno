@@ -22,7 +22,7 @@
 	</Style>
 	<Capture>
 		<!-- manual or optical -->
-		<Numeric>manual</Numeric>
+		<Numeric>optical</Numeric>
 	</Capture>
 	<Images>
 	<!-- <Folder></Folder> for relative folder -->
