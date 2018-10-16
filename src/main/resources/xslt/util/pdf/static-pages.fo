@@ -1523,9 +1523,8 @@
                             <fo:block>Nom : $!{BddNom} $!{BddPrenom}</fo:block>
                             <fo:block>Téléphone : $!{BddTelContact}</fo:block>
                             <fo:block>Courriel : $!{BddMailContact}</fo:block>
-                            <fo:block font-weight="bold" margin-top="3mm">Mise à jour des
-                                coordonnées</fo:block>
-                            <fo:block font-weight="bold">en cas de modification :</fo:block>
+                            <fo:block font-weight="bold" margin-top="3mm">Si vous n'êtes pas cette personne, </fo:block>
+                            <fo:block font-weight="bold">merci de compléter vos coordonnées :</fo:block>
                             <fo:block>Nom : ....................</fo:block>
                             <fo:block>Prénom : ....................</fo:block>
                             <fo:block>Fonction : ....................</fo:block>
@@ -1545,7 +1544,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="105mm" top="50mm"
-                    width="87mm" height="50mm" background-color="#EEE" padding="3mm">
+                    width="80mm" height="50mm" background-color="#EEE" padding="3mm">
                     <fo:block font-weight="bold" font-size="16pt" text-align="center" margin-top="10mm"
                         >&lt;![CDATA[${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                     (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
@@ -1600,7 +1599,7 @@
                         ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="100mm" top="195mm"
-                    width="97mm" height="10mm" background-color="#EFEFFB" border="solid black">
+                    width="97mm" height="10mm">
                     <fo:block text-align="left">
                         <fo:block>
                             <fo:instream-foreign-object>
@@ -1618,13 +1617,13 @@
                     width="107mm" height="40mm" overflow="hidden">
                     <fo:block margin="3mm">
                         <fo:inline-container>
-                            <fo:block>${Adresse_retour_L1}</fo:block>
-                            <fo:block>${Adresse_retour_L2}</fo:block>
-                            <fo:block>${Adresse_retour_L3}</fo:block>
-                            <fo:block>${Adresse_retour_L4}</fo:block>
-                            <fo:block>${Adresse_retour_L5}</fo:block>
-                            <fo:block>${Adresse_retour_L6}</fo:block>
-                            <fo:block>${Adresse_retour_L7}</fo:block>
+                            <fo:block>${AdresseRetourL1}</fo:block>
+                            <fo:block>${AdresseRetourL2}</fo:block>
+                            <fo:block>${AdresseRetourL3}</fo:block>
+                            <fo:block>${AdresseRetourL4}</fo:block>
+                            <fo:block>${AdresseRetourL5}</fo:block>
+                            <fo:block>${AdresseRetourL6}</fo:block>
+                            <fo:block>${AdresseRetourL7}</fo:block>
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
@@ -1697,9 +1696,8 @@
                             <fo:block>Nom : $!{BddNom} $!{BddPrenom}</fo:block>
                             <fo:block>Téléphone : $!{BddTelContact}</fo:block>
                             <fo:block>Courriel : $!{BddMailContact}</fo:block>
-                            <fo:block font-weight="bold" margin-top="3mm">Mise à jour des
-                                coordonnées</fo:block>
-                            <fo:block font-weight="bold">en cas de modification :</fo:block>
+                            <fo:block font-weight="bold" margin-top="3mm">Si vous n'êtes pas cette personne,</fo:block>
+                            <fo:block font-weight="bold">merci de compléter vos coordonnées :</fo:block>
                             <fo:block>Nom : ....................</fo:block>
                             <fo:block>Prénom : ....................</fo:block>
                             <fo:block>Fonction : ....................</fo:block>
@@ -1739,8 +1737,8 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="135mm"
-                    width="130mm" height="50mm" padding="2mm" border="solid black 1pt">
+                <fo:block-container absolute-position="absolute" left="25mm" top="135mm"
+                    width="120mm" height="50mm" padding="2mm" border="solid black 1pt">
                     <fo:block font-weight="bold">Commentaires et remarques :</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="110mm" top="120mm"
@@ -1749,7 +1747,7 @@
                         questionnaire au plus tard le : ${BddDateEcheance}</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="150mm" top="135mm"
-                    width="130mm" height="50mm" padding="2mm"
+                    width="120mm" height="50mm" padding="2mm"
                     border="solid black 0.5pt" text-align="justify">
                     <fo:block font-size="7pt">Vu l'avis favorable du Conseil national de
                         l'information statistique, cette enquête
@@ -1772,35 +1770,6 @@
                         auprès de
                         ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
                 </fo:block-container>
-                <!--<fo:block-container absolute-position="absolute" left="100mm" top="195mm"
-                    width="97mm" height="10mm" background-color="#EFEFFB" border="solid black">
-                    <fo:block text-align="left">
-                        <fo:block>
-                            <fo:instream-foreign-object>
-                                <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                    message="Code Bar" orientation="0">
-                                    <barcode:code128>
-                                        <barcode:height>10mm</barcode:height>
-                                    </barcode:code128>
-                                </barcode:barcode>
-                            </fo:instream-foreign-object>
-                        </fo:block>
-                    </fo:block>
-                </fo:block-container>-->
-                <!--<fo:block-container absolute-position="absolute" left="105mm" top="215mm"
-                    width="107mm" height="40mm" overflow="hidden">
-                    <fo:block margin="3mm">
-                        <fo:inline-container>
-                            <fo:block>${Adresse_retour_L1}</fo:block>
-                            <fo:block>${Adresse_retour_L2}</fo:block>
-                            <fo:block>${Adresse_retour_L3}</fo:block>
-                            <fo:block>${Adresse_retour_L4}</fo:block>
-                            <fo:block>${Adresse_retour_L5}</fo:block>
-                            <fo:block>${Adresse_retour_L6}</fo:block>
-                            <fo:block>${Adresse_retour_L7}</fo:block>
-                        </fo:inline-container>
-                    </fo:block>
-                </fo:block-container>-->
             </fo:block>
         </fo:flow>
     </fo:page-sequence>
