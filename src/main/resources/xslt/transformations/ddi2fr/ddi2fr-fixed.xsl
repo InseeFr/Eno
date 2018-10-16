@@ -30,13 +30,25 @@
         </xd:desc>
     </xd:doc>
     <xsl:param name="parameters-file"/>
+    <xsl:param name="parameters-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
 
     <xd:doc>
         <xd:desc>
             <xd:p>The parameters are charged as an xml tree.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:variable name="parameters" select="doc($parameters-file)"/>
+    <xsl:variable name="parameters">
+        <xsl:choose>
+            <xsl:when test="$parameters-node/*">
+                <xsl:copy-of select="$parameters-node"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="doc($parameters-file)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
 
     <xd:doc>
         <xd:desc>

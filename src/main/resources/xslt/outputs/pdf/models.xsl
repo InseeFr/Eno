@@ -17,7 +17,9 @@
 	</xd:doc>
 	<xsl:param name="properties-file"/>
 	<xsl:param name="parameters-file"/>
-	<xsl:param name="parameters-node"/>
+	<xsl:param name="parameters-node" as="node()" required="no">
+		<empty/>
+	</xsl:param>
 	
 	<xd:doc>
 		<xd:desc>
@@ -374,26 +376,7 @@
 			<xsl:when test="$input-type = 'text'">
 				<fo:block>
 					<xsl:choose>
-						<xsl:when test="$length=''">
-							<xsl:choose>
-								<xsl:when test="$no-border = 'no-border'">
-									<fo:block-container height="8mm" width="50mm">
-										<fo:block border-color="black" border-style="solid" width="100%">&#160;</fo:block>
-									</fo:block-container>
-								</xsl:when>
-								<xsl:when test="$isTable = 'YES'">
-									<fo:block-container height="8mm" width="50mm">
-										<fo:block>&#160;</fo:block>	
-									</fo:block-container>
-								</xsl:when>
-								<xsl:otherwise>
-									<fo:block-container height="10mm" width="50mm" border-color="black" border-style="solid">
-										<fo:block width="100%">&#160;</fo:block>
-									</fo:block-container>
-								</xsl:otherwise>								
-							</xsl:choose>
-						</xsl:when>
-						<xsl:when test="enopdf:get-format($source-context) or number($length) &lt;= 20">
+						<xsl:when test="enopdf:get-format($source-context) or ($length !='' and number($length) &lt;= 20)">
 							<fo:block xsl:use-attribute-sets="general-style">
 								<xsl:for-each select="1 to xs:integer(number($length))">
 									<xsl:call-template name="insert-image">
@@ -402,14 +385,19 @@
 								</xsl:for-each>
 							</fo:block>
 						</xsl:when>
+						<xsl:when test="$no-border = 'no-border'">
+							<fo:block-container height="8mm" width="50mm">
+								<fo:block border-color="black" border-style="solid" width="50mm">&#160;</fo:block>
+							</fo:block-container>
+						</xsl:when>
 						<xsl:when test="$isTable = 'YES'">
-							<fo:block-container height="8mm">
+							<fo:block-container height="8mm" width="50mm">
 								<fo:block>&#160;</fo:block>	
 							</fo:block-container>
 						</xsl:when>
 						<xsl:otherwise>
-							<fo:block-container height="10mm">
-								<fo:block border-color="black" border-style="solid" width="100%">&#160;</fo:block>
+							<fo:block-container height="8mm" border-color="black" border-style="solid" width="100%">
+								<fo:block>&#160;</fo:block>
 							</fo:block-container>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -425,7 +413,7 @@
 					</xsl:if>
 					<fo:block xsl:use-attribute-sets="general-style" padding-bottom="0mm" padding-top="0mm">
 						<xsl:choose>
-							<xsl:when test="$numeric-capture = 'manual'">
+							<xsl:when test="$numeric-capture = 'optical'">
 								<xsl:variable name="separator-position">
 									<xsl:choose>
 										<xsl:when test="enopdf:get-number-of-decimals($source-context) != '0'">
@@ -444,21 +432,24 @@
 										<xsl:otherwise>
 											<xsl:call-template name="insert-image">
 												<xsl:with-param name="image-name" select="'mask_number.png'"/>
-											</xsl:call-template>									
+											</xsl:call-template>
 										</xsl:otherwise>
 									</xsl:choose>
-								</xsl:for-each>								
+								</xsl:for-each>
 							</xsl:when>
 							<xsl:otherwise>
-								<fo:inline-container height="10mm">
+								<fo:inline-container>
 									<xsl:attribute name="width" select="concat(string($length*3),'mm')"/>
-									<fo:block>
+									<fo:block-container height="8mm">
+										<xsl:attribute name="width" select="concat(string($length*3),'mm')"/>
 										<xsl:if test="not($isTable = 'YES') or ($no-border = 'no-border')">
 											<xsl:attribute name="border-color" select="'black'"/>
 											<xsl:attribute name="border-style" select="'solid'"/>
 										</xsl:if>
-										&#160;										
-									</fo:block>
+										<fo:block>
+											&#160;
+										</fo:block>										
+									</fo:block-container>
 								</fo:inline-container>
 							</xsl:otherwise>
 						</xsl:choose>
@@ -474,12 +465,9 @@
 						<xsl:attribute name="padding-top">0px</xsl:attribute>
 						<xsl:attribute name="padding-bottom">0px</xsl:attribute>
 					</xsl:if>
-					<xsl:for-each select="1 to xs:integer(number(string-length(replace($field,'/',''))))">
-						<xsl:call-template name="insert-image">
-							<xsl:with-param name="image-name" select="'mask_number.png'"/>
-						</xsl:call-template>
-					</xsl:for-each>
-					(<xsl:value-of select="upper-case(replace($field,'/',''))"/>)
+					<xsl:call-template name="insert-image">
+						<xsl:with-param name="image-name" select="'date.png'"/>
+					</xsl:call-template>
 				</fo:block>
 			</xsl:when>
 		</xsl:choose>
@@ -561,22 +549,27 @@
 		<xsl:choose>
 			<xsl:when test="enopdf:get-appearance($source-context) = 'minimal'">
 				<xsl:choose>
-					<xsl:when test="not($isTable = 'YES') or ($no-border = 'no-border')">
+					<xsl:when test="$no-border = 'no-border'">
+						<fo:block-container height="8mm" width="50mm">
+							<fo:block border-color="black" border-style="solid" width="50mm">&#160;</fo:block>
+						</fo:block-container>
+					</xsl:when>
+					<xsl:when test="$isTable = 'YES'">
 						<fo:block-container height="8mm" width="50mm">
 							<fo:block>&#160;</fo:block>	
 						</fo:block-container>
 					</xsl:when>
 					<xsl:otherwise>
-						<fo:block-container height="10mm" width="50mm">
-							<fo:block border-color="black" border-style="solid" width="100%">&#160;</fo:block>
+						<fo:block-container height="8mm" border-color="black" border-style="solid" width="100%">
+							<fo:block>&#160;</fo:block>
 						</fo:block-container>
-					</xsl:otherwise>					
+					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
 			<xsl:when test="$no-border = 'no-border'">
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
-				</xsl:apply-templates>				
+				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:list-block>

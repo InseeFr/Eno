@@ -18,7 +18,9 @@
         </xd:desc>
     </xd:doc>
     <xsl:param name="parameters-file"/>
-    <xsl:param name="parameters-node" as="node()" select="node()"/>
+    <xsl:param name="parameters-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
 
     <!-- The output file generated will be xml type -->
     <xsl:output method="xml" indent="no" encoding="UTF-8"/>

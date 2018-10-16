@@ -396,8 +396,11 @@
                    keep-with-next="always">➡ 3. Who is the producer?</fo:block>
          <fo:block id="j3343qhx" page-break-inside="avoid">
             <fo:block>
-               <fo:block-container height="10mm">
-                  <fo:block border-color="black" border-style="solid" width="100%"> </fo:block>
+               <fo:block-container height="8mm"
+                                   border-color="black"
+                                   border-style="solid"
+                                   width="100%">
+                  <fo:block> </fo:block>
                </fo:block-container>
             </fo:block>
          </fo:block>
@@ -440,16 +443,8 @@
                       font-weight="normal"
                       font-size="10pt"
                       padding="1mm">
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:external-graphic src="mask_number.png"/>
-					(JJMMAAAA)
-				</fo:block>
+               <fo:external-graphic src="date.png"/>
+               </fo:block>
          </fo:block>
          <fo:block color="black"
                    font-weight="bold"
@@ -602,7 +597,10 @@
                    page-break-inside="avoid"
                    keep-with-next="always">➡ 3. In which state do The Simpsons reside?</fo:block>
          <fo:block id="j4nw5cqz" page-break-inside="avoid">
-            <fo:block-container height="8mm" width="50mm">
+            <fo:block-container height="8mm"
+                                border-color="black"
+                                border-style="solid"
+                                width="100%">
                <fo:block> </fo:block>
             </fo:block-container>
          </fo:block>
@@ -889,7 +887,7 @@
                                     border="0mm">
                         <fo:block>
                            <fo:block-container height="8mm" width="50mm">
-                              <fo:block> </fo:block>
+                              <fo:block border-color="black" border-style="solid" width="50mm"> </fo:block>
                            </fo:block-container>
                         </fo:block>
                      </fo:table-cell>
@@ -915,7 +913,7 @@
                                     border="0mm">
                         <fo:block>
                            <fo:block-container height="8mm" width="50mm">
-                              <fo:block> </fo:block>
+                              <fo:block border-color="black" border-style="solid" width="50mm"> </fo:block>
                            </fo:block-container>
                         </fo:block>
                      </fo:table-cell>
@@ -941,7 +939,7 @@
                                     border="0mm">
                         <fo:block>
                            <fo:block-container height="8mm" width="50mm">
-                              <fo:block> </fo:block>
+                              <fo:block border-color="black" border-style="solid" width="50mm"> </fo:block>
                            </fo:block-container>
                         </fo:block>
                      </fo:table-cell>
@@ -967,7 +965,7 @@
                                     border="0mm">
                         <fo:block>
                            <fo:block-container height="8mm" width="50mm">
-                              <fo:block> </fo:block>
+                              <fo:block border-color="black" border-style="solid" width="50mm"> </fo:block>
                            </fo:block-container>
                         </fo:block>
                      </fo:table-cell>
@@ -1689,8 +1687,8 @@
                                     border-style="solid"
                                     padding="1mm">
                         <fo:block>
-                           <fo:block-container height="10mm" width="50mm">
-                              <fo:block border-color="black" border-style="solid" width="100%"> </fo:block>
+                           <fo:block-container height="8mm" width="50mm">
+                              <fo:block> </fo:block>
                            </fo:block-container>
                         </fo:block>
                      </fo:table-cell>
@@ -1726,8 +1724,8 @@
                                     border-style="solid"
                                     padding="1mm">
                         <fo:block>
-                           <fo:block-container height="10mm" width="50mm">
-                              <fo:block border-color="black" border-style="solid" width="100%"> </fo:block>
+                           <fo:block-container height="8mm" width="50mm">
+                              <fo:block> </fo:block>
                            </fo:block-container>
                         </fo:block>
                      </fo:table-cell>
@@ -1763,8 +1761,8 @@
                                     border-style="solid"
                                     padding="1mm">
                         <fo:block>
-                           <fo:block-container height="10mm" width="50mm">
-                              <fo:block border-color="black" border-style="solid" width="100%"> </fo:block>
+                           <fo:block-container height="8mm" width="50mm">
+                              <fo:block> </fo:block>
                            </fo:block-container>
                         </fo:block>
                      </fo:table-cell>
@@ -1800,8 +1798,8 @@
                                     border-style="solid"
                                     padding="1mm">
                         <fo:block>
-                           <fo:block-container height="10mm" width="50mm">
-                              <fo:block border-color="black" border-style="solid" width="100%"> </fo:block>
+                           <fo:block-container height="8mm" width="50mm">
+                              <fo:block> </fo:block>
                            </fo:block-container>
                         </fo:block>
                      </fo:table-cell>
