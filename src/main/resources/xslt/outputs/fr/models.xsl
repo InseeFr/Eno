@@ -1778,7 +1778,7 @@
 
         <xsl:variable name="max-lines" select="enofr:get-maximum-lines($source-context)"/>
 
-        <xsl:if test="not($max-lines != '') or $max-lines &gt; enofr:get-minimum-lines($source-context)">
+        <xsl:if test="not($max-lines != '') or number($max-lines) &gt; number(enofr:get-minimum-lines($source-context))">
             <xf:trigger id="{$loop-name}-addline" bind="{$loop-name}-addline-bind">
                 <xf:label ref="$form-resources/AddLine/label"/>
                 <xf:insert ev:event="DOMActivate" context="{$instance-ancestor-label}{$loop-name}-Container"

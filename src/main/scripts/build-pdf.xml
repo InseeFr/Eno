@@ -51,9 +51,9 @@
 			out="${root-folder}/target/${survey-name}/${form-name}/form/specific-form.${out-extension}"
 			style="${root-folder}/questionnaires/${survey-name}/pdf-specific-treatment.xsl" force="true"
 			classpath="${saxon.jar}"/>
-		<antcall target="compile-TableColumnSizeProcessor"/>
-		<antcall target="call-TableColumnSizeProcessor"/>
-		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/temp-form.${out-extension}"
+<!--		<antcall target="compile-TableColumnSizeProcessor"/>
+		<antcall target="call-TableColumnSizeProcessor"/>-->
+		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/specific-form.${out-extension}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"
 			style="${xslt.home}/util/pdf/insert-generic-pages.xsl" force="true"			
 			classpath="${saxon.jar}">

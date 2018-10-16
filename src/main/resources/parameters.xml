@@ -11,6 +11,10 @@
   <ColtraneQuestions>
     <Fin/>
   </ColtraneQuestions>
+  <Capture>
+    <!-- manual or optical -->
+    <Numeric>optical</Numeric>
+  </Capture>
   <AccompanyingMails>
     <!--<AccompanyingMail>ouvertureCOL</AccompanyingMail>-->
   </AccompanyingMails>
