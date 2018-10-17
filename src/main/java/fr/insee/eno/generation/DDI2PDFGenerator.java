@@ -15,7 +15,7 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 
 public class DDI2PDFGenerator implements Generator {
 
-	private InputStream propertiesFiles;
+	private String propertiesFiles;
 
 	private static final Logger logger = LoggerFactory.getLogger(DDI2PDFGenerator.class);
 
@@ -39,31 +39,28 @@ public class DDI2PDFGenerator implements Generator {
 		String outputForm = outputBasicFormPath + "/form.fo";
 		InputStream isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL);
-		InputStream isPROPERTIES_FILE = this.getPropertiesFiles();
-		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
 
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 		OutputStream osOutputForm = FileUtils.openOutputStream(new File(outputForm));
 		saxonService.transformDDI2PDF(isFinalInput, osOutputForm, isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL,
-				isPROPERTIES_FILE, isPARAMETERS_FILE);
+				this.getPropertiesFiles(), Constants.PARAMETERS_FILE);
 
 		isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL.close();
-		isPROPERTIES_FILE.close();
-		isPARAMETERS_FILE.close();
+
 		isFinalInput.close();
 		osOutputForm.close();
 
 		return new File(outputForm);
 	}
 
-	private InputStream getPropertiesFiles() {
-		InputStream isPROPERTIES_FILE = null;
+	private String getPropertiesFiles() {
+		String pROPERTIES_FILE = null;
 		if (propertiesFiles == null) {
-			isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.CONFIG_DDI2PDF);
-		}else{
-			isPROPERTIES_FILE = propertiesFiles;
+			pROPERTIES_FILE = Constants.CONFIG_DDI2PDF;
+		} else {
+			pROPERTIES_FILE = propertiesFiles;
 		}
-		return isPROPERTIES_FILE;
+		return pROPERTIES_FILE;
 	}
 
 	/**
@@ -78,12 +75,12 @@ public class DDI2PDFGenerator implements Generator {
 		return formNameFolder;
 	}
 
-	public void setPropertiesFile(InputStream propertiesFiles) {
+	public void setPropertiesFile(String propertiesFiles) {
 		this.propertiesFiles = propertiesFiles;
 	}
 
-	public String in2out(){
+	public String in2out() {
 		return "ddi2pdf";
 	}
-	
+
 }

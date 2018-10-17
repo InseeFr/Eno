@@ -94,7 +94,9 @@
          <get-length>
             <xsl:value-of select="enopdf:get-length(.)"/>
          </get-length>
-
+         <get-length>
+            <xsl:value-of select="enopdf:get-number-of-decimals(.)"/>
+         </get-length>
          <get-suffix>
             <xsl:value-of select="enopdf:get-suffix(.,'fr')"/>
          </get-suffix>
@@ -130,7 +132,9 @@
          <get-minimum-lines>
             <xsl:value-of select="enopdf:get-minimum-lines(.)"/>
          </get-minimum-lines>
-
+         <get-minimum-lines>
+            <xsl:value-of select="enopdf:get-maximum-lines(.)"/>
+         </get-minimum-lines>
          <get-constraint-dependencies>
             <xsl:value-of select="enopdf:get-constraint-dependencies(.)"/>
          </get-constraint-dependencies>
@@ -151,10 +155,6 @@
             <xsl:value-of select="enopdf:get-image(.)"/>
          </get-image>
 
-         <is-first>
-            <xsl:value-of select="enopdf:is-first(.)"/>
-         </is-first>
-
          <get-ddi-element>
             <xsl:value-of select="enopdf:get-ddi-element(.)"/>
          </get-ddi-element>
@@ -171,10 +171,6 @@
             <xsl:value-of select="enopdf:get-before-question-title-instructions(.)"/>
          </get-before-question-title-instructions>
 
-         <get-rooster-number-lines>
-            <xsl:value-of select="enopdf:get-rooster-number-lines(.)"/>
-         </get-rooster-number-lines>
-
          <get-style>
             <xsl:value-of select="enopdf:get-style(.)"/>
          </get-style>
@@ -183,13 +179,13 @@
             <xsl:value-of select="enopdf:get-end-question-instructions-index(.)"/>
          </get-end-question-instructions-index>
 
-         <get-number-of-decimals>
-            <xsl:value-of select="enopdf:get-number-of-decimals(.)"/>
-         </get-number-of-decimals>
-
          <debug-get-formatted-label>
-            <xsl:value-of select="enopdf:debug-get-formatted-label(.,'fr')"/>
+            <xsl:value-of select="enopdf:get-question-name(.,'fr')"/>
          </debug-get-formatted-label>
+         
+         <get-number-of-decimals>
+            <xsl:value-of select="enopdf:get-business-name(.)"/>
+         </get-number-of-decimals>
       </getters-calls>
    </xsl:template>
 </xsl:stylesheet>

@@ -480,7 +480,7 @@
         </xsl:variable>
 
         <xsl:for-each select="//d:ComputationItem[r:CommandCode/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable]">
-            <xsl:value-of select="enoddi:get-id(current()/d:InterviewerInstructionReference/d:Instruction)"/>
+            <xsl:value-of select="enoddi:get-id(.)"/>
         </xsl:for-each>
     </xsl:template>
 
@@ -764,10 +764,21 @@
             <xd:p>Function that returns the formula of a conditioning variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid | d:ComputationItem" mode="enoddi:get-conditioning-variable-formula" priority="2">
+    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid | d:ComputationItem
+        | *[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference')) and ancestor::d:QuestionItem]"
+        mode="enoddi:get-conditioning-variable-formula" priority="2">
         <xsl:param name="variable" tunnel="yes"/>
         <!-- The markup containing the text has different names, but it is always a child of the element -->
-        <xsl:variable name="conditional-text" select="descendant::d:ConditionalText"/>
+        <xsl:variable name="conditional-text">
+            <xsl:choose>
+                <xsl:when test="ends-with(name(),'Domain') or ends-with(name(),'DomainReference')">
+                    <xsl:copy-of select="ancestor::d:QuestionItem/descendant::d:ConditionalText"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="descendant::d:ConditionalText"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:variable name="possible-formulas" as="xs:string *">
             <xsl:for-each select="$conditional-text//d:Expression/r:Command">
                 <xsl:if test="r:OutParameter/r:ID = $variable">
@@ -784,10 +795,21 @@
             <xd:p>Function that returns the variables of the formula of a conditioning variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid | d:ComputationItem" mode="enoddi:get-conditioning-variable-formula-variables" priority="2">
+    <xsl:template match="d:StatementItem | d:Instruction | d:QuestionItem | d:QuestionGrid | d:ComputationItem
+        | *[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference')) and ancestor::d:QuestionItem]"
+        mode="enoddi:get-conditioning-variable-formula-variables" priority="2">
         <xsl:param name="variable" tunnel="yes"/>
         <!-- The markup containing the text has different names, but it is always a child of the element -->
-        <xsl:variable name="conditional-text" select="descendant::d:ConditionalText"/>
+        <xsl:variable name="conditional-text">
+            <xsl:choose>
+                <xsl:when test="ends-with(name(),'Domain') or ends-with(name(),'DomainReference')">
+                    <xsl:copy-of select="ancestor::d:QuestionItem/descendant::d:ConditionalText"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="descendant::d:ConditionalText"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:variable name="formula-variables" as="node()">
             <Variables>
                 <xsl:for-each select="$conditional-text//d:Expression/r:Command">
@@ -823,6 +845,30 @@
                 </xsl:call-template>
             </xsl:for-each>            
         </xsl:variable>
+        <xsl:sequence select="distinct-values($item-label-conditioning-variables-with-doubles)"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getterget-item-label-conditioning-variables.</xd:p>
+            <xd:p>Function that returns the variables of the labels of the items of MCQ.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
+        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])]
+        and parent::d:GridResponseDomain and following-sibling::d:GridAttachment//d:SelectDimension]"
+        mode="enoddi:get-item-label-conditioning-variables" priority="2">
+
+        <xsl:variable name="codeCoordinates" select="following-sibling::d:GridAttachment//d:SelectDimension"/>
+        <xsl:variable name="item-label-conditioning-variables-with-doubles">
+            <xsl:call-template name="enoddi:variables-from-label">
+                <xsl:with-param name="label"
+                    select="eno:serialize(ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]
+                                                                  //l:Code[position()=$codeCoordinates/@rangeMinimum]
+                                                                  //l:Category/r:Label/r:Content)"/>
+            </xsl:call-template>            
+        </xsl:variable>
+
         <xsl:sequence select="distinct-values($item-label-conditioning-variables-with-doubles)"/>
     </xsl:template>
 
@@ -986,4 +1032,22 @@
         </xsl:apply-templates>
     </xsl:function>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Get flowControl linked to a question</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:QuestionItem | d:QuestionGrid"
+        mode="enoddi:get-next-filter-description">
+        <xsl:sequence select="d:ExternalAid/r:Description[r:Content/xhtml:div/@class='FlowControl']"/>
+    </xsl:template>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Get Filter linked to a question</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:QuestionItem | d:QuestionGrid"
+        mode="enoddi:get-previous-filter-description">
+        <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference[not(preceding-sibling::d:ControlConstructReference)]/ancestor::d:IfThenElse[not(d:ExternalAid)]/r:Description"/>
+    </xsl:template>
 </xsl:stylesheet>

@@ -98,7 +98,7 @@
                   <PERCENTAGE_EXPENSES81/>
                   <PERCENTAGE_EXPENSES91/>
                   <PERCENTAGE_EXPENSES101/>
-                  <j4nwc63q-CI-0-j4nwc63q-CI-0-II-0/>
+                  <j4nwc63q-CI-0/>
                   <j6qejudb/>
                   <j4nw0rr6/>
                   <j4nw0rr6-j77dav9b-Header-1/>
@@ -440,9 +440,7 @@
                         ref="PERCENTAGE_EXPENSES101">
                   <xf:constraint value="if(. castable as xs:float) then (xs:float(.)&lt;=100.0 and xs:float(.)&gt;=0.0 and matches(.,'^(0|[1-9][0-9]{0,1})(\.[0-9]{1,1})?$|^100(\.[0-0])?$')) else (.='')"/>
                </xf:bind>
-               <xf:bind id="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0-bind"
-                        name="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0"
-                        ref="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0">
+               <xf:bind id="j4nwc63q-CI-0-bind" name="j4nwc63q-CI-0" ref="j4nwc63q-CI-0">
                   <xf:constraint level="warning"
                                  value="not(number(if (//PERCENTAGE_EXPENSES11='') then '0' else //PERCENTAGE_EXPENSES11) + number(if (//PERCENTAGE_EXPENSES21='') then '0' else //PERCENTAGE_EXPENSES21) + number(if (//PERCENTAGE_EXPENSES31='') then '0' else //PERCENTAGE_EXPENSES31) + number(if (//PERCENTAGE_EXPENSES41='') then '0' else //PERCENTAGE_EXPENSES41) + number(if (//PERCENTAGE_EXPENSES51='') then '0' else //PERCENTAGE_EXPENSES51) + number(if (//PERCENTAGE_EXPENSES61='') then '0' else //PERCENTAGE_EXPENSES61) + number(if (//PERCENTAGE_EXPENSES71='') then '0' else //PERCENTAGE_EXPENSES71) + number(if (//PERCENTAGE_EXPENSES81='') then '0' else //PERCENTAGE_EXPENSES81) + number(if (//PERCENTAGE_EXPENSES91='') then '0' else //PERCENTAGE_EXPENSES91) + number(if (//PERCENTAGE_EXPENSES101='') then '0' else //PERCENTAGE_EXPENSES101) != 100)"/>
                </xf:bind>
@@ -1153,9 +1151,9 @@
                   <PERCENTAGE_EXPENSES101>
                      <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
                   </PERCENTAGE_EXPENSES101>
-                  <j4nwc63q-CI-0-j4nwc63q-CI-0-II-0>
+                  <j4nwc63q-CI-0>
                      <alert>The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of percentages must be equal to 100%.</alert>
-                  </j4nwc63q-CI-0-j4nwc63q-CI-0-II-0>
+                  </j4nwc63q-CI-0>
                   <j6qejudb>
                      <label>Clowning</label>
                   </j6qejudb>
@@ -2048,9 +2046,9 @@
                   <PERCENTAGE_EXPENSES101>
                      <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
                   </PERCENTAGE_EXPENSES101>
-                  <j4nwc63q-CI-0-j4nwc63q-CI-0-II-0>
+                  <j4nwc63q-CI-0>
                      <alert>The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of percentages must be equal to 100%.</alert>
-                  </j4nwc63q-CI-0-j4nwc63q-CI-0-II-0>
+                  </j4nwc63q-CI-0>
                   <j6qejudb>
                      <label>Clowning</label>
                   </j6qejudb>
@@ -2498,10 +2496,10 @@
                      relevant="instance('fr-form-instance')/Util/CurrentSection='1'"
                      ref="Start"/>
             <xf:bind id="previous-bind"
-                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;8)"
+                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt; 8)"
                      ref="Previous"/>
             <xf:bind id="next-bind"
-                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt;7)"
+                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt; 7)"
                      ref="Next"/>
             <xf:bind id="send-bind"
                      ref="Send"
@@ -3330,7 +3328,7 @@
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES11/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
-                                                    target="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0-control"/>
+                                                    target="j4nwc63q-CI-0-control"/>
                                     </xf:input>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
@@ -3354,7 +3352,7 @@
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES21/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
-                                                    target="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0-control"/>
+                                                    target="j4nwc63q-CI-0-control"/>
                                     </xf:input>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
@@ -3386,7 +3384,7 @@
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES31/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
-                                                    target="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0-control"/>
+                                                    target="j4nwc63q-CI-0-control"/>
                                     </xf:input>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
@@ -3410,7 +3408,7 @@
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES41/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
-                                                    target="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0-control"/>
+                                                    target="j4nwc63q-CI-0-control"/>
                                     </xf:input>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
@@ -3434,7 +3432,7 @@
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES51/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
-                                                    target="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0-control"/>
+                                                    target="j4nwc63q-CI-0-control"/>
                                     </xf:input>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
@@ -3466,7 +3464,7 @@
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES61/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
-                                                    target="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0-control"/>
+                                                    target="j4nwc63q-CI-0-control"/>
                                     </xf:input>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
@@ -3490,18 +3488,18 @@
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES71/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
-                                                    target="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0-control"/>
+                                                    target="j4nwc63q-CI-0-control"/>
                                     </xf:input>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
                            </xhtml:tbody>
                         </xhtml:table>
-                        <xf:output id="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0-control"
-                                   name="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0"
-                                   bind="j4nwc63q-CI-0-j4nwc63q-CI-0-II-0-bind"
+                        <xf:output id="j4nwc63q-CI-0-control"
+                                   name="j4nwc63q-CI-0"
+                                   bind="j4nwc63q-CI-0-bind"
                                    xxf:order="label control hint help alert">
-                           <xf:alert ref="replace($form-resources/j4nwc63q-CI-0-j4nwc63q-CI-0-II-0/alert,'¤jbcggtca-GOP¤',instance('fr-form-instance')//SUM_EXPENSES)"
+                           <xf:alert ref="replace($form-resources/j4nwc63q-CI-0/alert,'¤jbcggtca-GOP¤',instance('fr-form-instance')//SUM_EXPENSES)"
                                      level="warning"/>
                         </xf:output>
                      </xhtml:div>
