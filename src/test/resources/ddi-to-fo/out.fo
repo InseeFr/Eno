@@ -26,10 +26,10 @@
                           precedence="true"
                           region-name="xsl-region-after-cover"/>
       </fo:simple-page-master>
-      <fo:simple-page-master master-name="A4-portrait"
+      <fo:simple-page-master master-name="A4"
                              page-height="297mm"
                              page-width="210mm"
-                             font-family="arial"
+                             font-family="Arial"
                              font-size="10pt"
                              reference-orientation="0"
                              font-weight="normal"
@@ -120,9 +120,8 @@
                      <fo:block>Nom : $!{BddNom} $!{BddPrenom}</fo:block>
                      <fo:block>Téléphone : $!{BddTelContact}</fo:block>
                      <fo:block>Courriel : $!{BddMailContact}</fo:block>
-                     <fo:block font-weight="bold" margin-top="3mm">Mise à jour des
-                                coordonnées</fo:block>
-                     <fo:block font-weight="bold">en cas de modification :</fo:block>
+                     <fo:block font-weight="bold" margin-top="3mm">Si vous n'êtes pas cette personne, </fo:block>
+                     <fo:block font-weight="bold">merci de compléter vos coordonnées :</fo:block>
                      <fo:block>Nom : ....................</fo:block>
                      <fo:block>Prénom : ....................</fo:block>
                      <fo:block>Fonction : ....................</fo:block>
@@ -144,7 +143,7 @@
             <fo:block-container absolute-position="absolute"
                                 left="105mm"
                                 top="50mm"
-                                width="87mm"
+                                width="80mm"
                                 height="50mm"
                                 background-color="#EEE"
                                 padding="3mm">
@@ -226,9 +225,7 @@
                                 left="100mm"
                                 top="195mm"
                                 width="97mm"
-                                height="10mm"
-                                background-color="#EFEFFB"
-                                border="solid black">
+                                height="10mm">
                <fo:block text-align="left">
                   <fo:block>
                      <fo:instream-foreign-object>
@@ -251,20 +248,20 @@
                                 overflow="hidden">
                <fo:block margin="3mm">
                   <fo:inline-container>
-                     <fo:block>${Adresse_retour_L1}</fo:block>
-                     <fo:block>${Adresse_retour_L2}</fo:block>
-                     <fo:block>${Adresse_retour_L3}</fo:block>
-                     <fo:block>${Adresse_retour_L4}</fo:block>
-                     <fo:block>${Adresse_retour_L5}</fo:block>
-                     <fo:block>${Adresse_retour_L6}</fo:block>
-                     <fo:block>${Adresse_retour_L7}</fo:block>
+                     <fo:block>${AdresseRetourL1}</fo:block>
+                     <fo:block>${AdresseRetourL2}</fo:block>
+                     <fo:block>${AdresseRetourL3}</fo:block>
+                     <fo:block>${AdresseRetourL4}</fo:block>
+                     <fo:block>${AdresseRetourL5}</fo:block>
+                     <fo:block>${AdresseRetourL6}</fo:block>
+                     <fo:block>${AdresseRetourL7}</fo:block>
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
          </fo:block>
       </fo:flow>
    </fo:page-sequence>
-   <fo:page-sequence master-reference="A4-portrait" initial-page-number="2">
+   <fo:page-sequence master-reference="A4" initial-page-number="2">
       <fo:static-content flow-name="xsl-region-before">
          <fo:block position="absolute" margin="10mm" text-align="right">
             <fo:external-graphic src="encoche-top-right.png"/>

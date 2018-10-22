@@ -127,15 +127,15 @@
 		
 		<fo:root>
 			<fo:layout-master-set>
-				<fo:simple-page-master master-name="A4-portrait" page-height="297mm"
-					page-width="210mm" font-family="arial" font-size="10pt" reference-orientation="{$orientation}"
+				<fo:simple-page-master master-name="A4" page-height="297mm"
+					page-width="210mm" font-family="Arial" font-size="10pt" reference-orientation="{$orientation}"
 					font-weight="normal" margin-bottom="5mm">
 					<fo:region-body margin="13mm" column-count="{$column-count}"/>
 					<fo:region-before region-name="xsl-region-before" extent="25mm" display-align="before" precedence="true"/>
 					<fo:region-after region-name="xsl-region-after" extent="25mm" display-align="before" precedence="true"/>
 				</fo:simple-page-master>
 			</fo:layout-master-set>
-			<fo:page-sequence master-reference="A4-portrait" initial-page-number="2">
+			<fo:page-sequence master-reference="A4" initial-page-number="2">
 				<fo:static-content flow-name="xsl-region-before">
 					<fo:block position="absolute" margin="10mm" text-align="right">
 						<xsl:call-template name="insert-image">
