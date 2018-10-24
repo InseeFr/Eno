@@ -26,24 +26,46 @@
                           precedence="true"
                           region-name="xsl-region-after-cover"/>
       </fo:simple-page-master>
-      <fo:simple-page-master master-name="A4"
+      <fo:simple-page-master master-name="A4-portrait-odd"
                              page-height="297mm"
                              page-width="210mm"
                              font-family="Arial"
                              font-size="10pt"
-                             reference-orientation="0"
                              font-weight="normal"
                              margin-bottom="5mm">
          <fo:region-body margin="13mm" column-count="1"/>
-         <fo:region-before region-name="xsl-region-before"
+         <fo:region-before region-name="portrait-region-before"
                            extent="25mm"
                            display-align="before"
                            precedence="true"/>
-         <fo:region-after region-name="xsl-region-after"
+         <fo:region-after region-name="portrait-region-after"
                           extent="25mm"
                           display-align="before"
                           precedence="true"/>
       </fo:simple-page-master>
+   <fo:simple-page-master master-name="A4-portrait-even"
+                             page-height="297mm"
+                             page-width="210mm"
+                             font-family="Arial"
+                             font-size="10pt"
+                             font-weight="normal"
+                             margin-bottom="5mm">
+         <fo:region-body margin="13mm" column-count="1"/>
+         <fo:region-before region-name="portrait-region-before"
+                           extent="25mm"
+                           display-align="before"
+                           precedence="true"/>
+         <fo:region-after region-name="portrait-region-after"
+                          extent="25mm"
+                          display-align="before"
+                          precedence="true"/>
+      </fo:simple-page-master>
+      <fo:page-sequence-master master-name="A4">
+         <fo:repeatable-page-master-alternatives>
+            <fo:conditional-page-master-reference master-reference="A4-portrait-odd" odd-or-even="odd"/>
+            <fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even"/>
+         </fo:repeatable-page-master-alternatives>
+      </fo:page-sequence-master>
    </fo:layout-master-set>
    <fo:page-sequence font-family="Liberation Sans"
                      font-size="10pt"
@@ -150,9 +172,9 @@
                <fo:block font-weight="bold"
                          font-size="16pt"
                          text-align="center"
-                         margin-top="10mm"><![CDATA[${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
+                         margin-top="10mm">${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
                     (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
-                    ${BddAnneeReference}]]></fo:block>
+                    ${BddAnneeReference}</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
                                 left="120mm"
@@ -262,7 +284,7 @@
       </fo:flow>
    </fo:page-sequence>
    <fo:page-sequence master-reference="A4" initial-page-number="2">
-      <fo:static-content flow-name="xsl-region-before">
+      <fo:static-content flow-name="portrait-region-before">
          <fo:block position="absolute" margin="10mm" text-align="right">
             <fo:external-graphic src="encoche-top-right.png"/>
          </fo:block>
@@ -288,7 +310,7 @@
             </fo:block-container>
          </fo:block>
       </fo:static-content>
-      <fo:static-content flow-name="xsl-region-after">
+      <fo:static-content flow-name="portrait-region-after">
          <fo:block position="absolute"
                    margin-left="10mm"
                    margin-top="10mm"
