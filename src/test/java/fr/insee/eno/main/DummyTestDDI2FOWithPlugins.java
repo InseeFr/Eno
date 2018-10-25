@@ -24,7 +24,7 @@ public class DummyTestDDI2FOWithPlugins {
 		File in = new File(String.format("%s/in.xml", basePathDDI2FO));
 		
 		try {
-			File output = genServiceDDI2PDF.generateQuestionnaire(in, null,"test");
+			File output = genServiceDDI2PDF.generateQuestionnaire(in, "test");
 			System.out.println(output.getAbsolutePath());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

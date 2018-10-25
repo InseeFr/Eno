@@ -33,7 +33,7 @@ public class TestDDIToFO {
 							new PDFStep2SpecificTreatmentPostprocessor(),
 							new PDFStep3TableColumnPostprocessorFake(),
 							new PDFStep4InsertGenericPagesPostprocessor() });
-			File outputFile = genService.generateQuestionnaire(in, null, "ddi-2-fo-test");
+			File outputFile = genService.generateQuestionnaire(in, "ddi-2-fo-test");
 			File expectedFile = new File(String.format("%s/out.fo", basePath));
 			diff = xmlDiff.getDiff(outputFile, expectedFile);
 

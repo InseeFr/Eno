@@ -207,7 +207,7 @@ public final class Constants {
 		return Paths.get(path).toFile();
 	}
 	
-	private static File getFileFromUrl(URL url) {
+	public static File getFileFromUrl(URL url) {
 		File file = null;
 	    try {
 	        file = new File(url.toURI());

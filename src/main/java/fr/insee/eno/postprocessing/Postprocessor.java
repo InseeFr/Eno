@@ -7,7 +7,7 @@ import java.io.File;
  * options.
  */
 public interface Postprocessor {
-	
-	File process(File input, File parametersFile, String survey)  throws Exception;
+
+	File process(File input, byte[] parametersFile, String survey) throws Exception;
 
 }

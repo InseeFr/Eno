@@ -24,9 +24,13 @@ import org.apache.fop.apps.MimeConstants;
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.PDFStep1MailingPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep2SpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessorFake;
+import fr.insee.eno.postprocessing.PDFStep4InsertGenericPagesPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
 
 public class DummyTestDDI2PDFExamples {
 
@@ -34,28 +38,35 @@ public class DummyTestDDI2PDFExamples {
 
 		String basePathExamples = "src/test/resources/examples";
 		String basePathImg = "src/test/resources/examples/img/";
-		
-		DDI2PDFGenerator generator =  new DDI2PDFGenerator();
 
-		File in = new File(String.format("%s/achats-ddi.xml", basePathExamples));
+		DDI2PDFGenerator generator = new DDI2PDFGenerator();
+
+		File in = new File(String.format("%s/fpe-ddi.xml", basePathExamples));
 		File xconf = new File(String.format("%s/fop.xconf", basePathExamples));
-		File propertiesFile = new File(String.format("%s/achats-ddi2pdf-conf.xml", basePathExamples));
+		// File paramFile = new File(String.format("%s/ddi2pdf.xml", basePathExamples));
+		File paramFile = new File(String.format("%s/parameters.xml", basePathExamples));
+		InputStream paramIS = null;
+
 		try {
+			paramIS = new FileInputStream(paramFile);
 			InputStream isXconf = new FileInputStream(xconf);
 			URI imgFolderUri = new File(basePathImg).toURI();
-			generator.setPropertiesFile(FileUtils.openInputStream(propertiesFile));
-			
+
 			GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), generator,
-					new Postprocessor[] {new PDFStep3TableColumnPostprocessor(), new PDFStep1MailingPostprocessor()});
-			
-			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, null,"examples");
-			
+					new Postprocessor[] { new PDFStep1MailingPostprocessor(),
+							new PDFStep2SpecificTreatmentPostprocessor(), new PDFStep3TableColumnPostprocessorFake(),
+							new PDFStep4InsertGenericPagesPostprocessor() });
+			genServiceDDI2PDF.setParameters(paramIS);
+
+			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, "examples");
+
 			// Step 1: Construct a FopFactory by specifying a reference to the
 			// configuration file
 			// (reuse if you plan to render multiple documents!)
-			FopFactory fopFactory = FopFactory.newInstance(imgFolderUri,isXconf);
-			
-			File outFilePDF = new File(String.format("%s.pdf", FilenameUtils.removeExtension(outputFO.getAbsolutePath())));
+			FopFactory fopFactory = FopFactory.newInstance(imgFolderUri, isXconf);
+
+			File outFilePDF = new File(
+					String.format("%s.pdf", FilenameUtils.removeExtension(outputFO.getAbsolutePath())));
 
 			// Step 2: Set up output stream.
 			// Note: Using BufferedOutputStream for performance reasons
@@ -82,6 +93,8 @@ public class DummyTestDDI2PDFExamples {
 
 			// Clean-up
 			out.close();
+			paramIS.close();
+			isXconf.close();
 			System.out.println(outputFO.getAbsolutePath());
 			System.out.println(outFilePDF.getAbsolutePath());
 		} catch (Exception e) {
