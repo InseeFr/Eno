@@ -8,9 +8,18 @@
   <HomePage>
     <File>static-pages.fo</File>
   </HomePage>
+  <Format>
+		<Columns>2</Columns>
+<!-- 		Orientation : portrait= 0 ou paysage =90 -->
+		<Orientation>0</Orientation>
+	</Format>
   <ColtraneQuestions>
     <Fin/>
   </ColtraneQuestions>
+  <Capture>
+    <!-- manual or optical -->
+    <Numeric>optical</Numeric>
+  </Capture>
   <AccompanyingMails>
     <!--<AccompanyingMail>ouvertureCOL</AccompanyingMail>-->
   </AccompanyingMails>

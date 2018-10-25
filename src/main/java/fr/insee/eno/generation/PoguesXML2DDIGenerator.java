@@ -21,14 +21,14 @@ public class PoguesXML2DDIGenerator implements Generator {
 	private static XslTransformation saxonService = new XslTransformation();
 
 	@Override
-	public File generate(File finalInput, String surveyName) throws Exception {
+	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
 		logger.info("PoguesXML2DDI Target : START");
 		logger.debug("Arguments : finalInput : " + finalInput + " surveyName " + surveyName);
 		String formNameFolder = null;
 		String outputBasicFormPath = null;
 
 		formNameFolder = getFormNameFolder(finalInput);
-		
+
 		logger.debug("formNameFolder : " + formNameFolder);
 		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(surveyName);
 		outputBasicFormPath = Constants.tEMP_DDI_FOLDER(sUB_TEMP_FOLDER) + "/" + formNameFolder + "/"
@@ -37,18 +37,13 @@ public class PoguesXML2DDIGenerator implements Generator {
 
 		InputStream isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL);
-		InputStream isPROPERTIES_FILE = Constants.getInputStreamFromPath(Constants.CONFIG_POGUES_XML2DDI);
-		InputStream isPARAMETERS_FILE = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
-
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 		OutputStream osOutputBasicForm = FileUtils.openOutputStream(new File(outputBasicFormPath));
 
 		saxonService.transformPoguesXML2DDI(isFinalInput, osOutputBasicForm,
-				isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL, isPROPERTIES_FILE, isPARAMETERS_FILE);
+				isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL, parameters);
 
 		isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL.close();
-		isPROPERTIES_FILE.close();
-		isPARAMETERS_FILE.close();
 		isFinalInput.close();
 		osOutputBasicForm.close();
 
@@ -67,7 +62,7 @@ public class PoguesXML2DDIGenerator implements Generator {
 		return formNameFolder;
 	}
 
-	public String in2out(){
+	public String in2out() {
 		return "xml-pogues2ddi";
 	}
 }

@@ -48,7 +48,7 @@ public class DummyTestDDI2PDF {
 			InputStream isXconf = new FileInputStream(xconf);
 			URI imgFolderUri = new File(basePathImg).toURI();
 
-			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, null, "test");
+			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, "test");
 
 			// Step 1: Construct a FopFactory by specifying a reference to the
 			// configuration file

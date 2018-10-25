@@ -23,21 +23,10 @@ public class PoguesXMLPreprocessor implements Preprocessor {
 	private static XslTransformation saxonService = new XslTransformation();
 
 	@Override
-	public File process(File inputFile, File parametersFile, String surveyName, String in2out) throws Exception {
+	public File process(File inputFile, byte[] parametersFile, String surveyName, String in2out) throws Exception {
 		logger.info("PoguesXMLPreprocessing Target : START");
 
 		String outputPreprocessSuppGoto = null;
-
-		InputStream parametersFileStream;
-		// If no parameters file was provided : loading the default one
-		// Else : using the provided one
-		if (parametersFile == null) {
-			logger.debug("Using default parameters");
-			parametersFileStream = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
-		} else {
-			logger.debug("Using provided parameters");
-			parametersFileStream = FileUtils.openInputStream(parametersFile);
-		}
 
 		outputPreprocessSuppGoto = FilenameUtils.removeExtension(inputFile.getAbsolutePath())
 				+ Constants.TEMP_EXTENSION;
@@ -54,7 +43,6 @@ public class PoguesXMLPreprocessor implements Preprocessor {
 		isInputFile.close();
 		isUTIL_POGUES_XML_SUPP_GOTO_XSL.close();
 		osSUPP_GOTO.close();
-		parametersFileStream.close();
 
 		String outputPreprocessMergeITE = null;
 
@@ -73,7 +61,6 @@ public class PoguesXMLPreprocessor implements Preprocessor {
 		isSuppGoto.close();
 		isUTIL_POGUES_XML_MERGE_ITE_XSL.close();
 		osMergeITE.close();
-		parametersFileStream.close();
 
 		logger.debug("PoguesXMLPreprocessing : END");
 		return new File(outputPreprocessMergeITE);

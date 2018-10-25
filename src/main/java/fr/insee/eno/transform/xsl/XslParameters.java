@@ -15,6 +15,7 @@ public class XslParameters {
 	public static final String IN2OUT_MODEL = "model";
 	public static final String PROPERTIES_FILE = "properties-file";
 	public static final String IN2OUT_PARAMETERS_FILE = "parameters-file";
+	public static final String IN2OUT_PARAMETERS_NODE = "parameters-node";
 	public static final String IN2OUT_PROPERTIES_FILE = "properties-file";
 	public static final String IN2OUT_PROPERTIES_NODE = "properties-node";
 	public static final String CLEANED_EXTENSION = "-cleaned";

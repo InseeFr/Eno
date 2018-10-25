@@ -24,7 +24,7 @@ public class DDIPreprocessor implements Preprocessor {
 	private static XslTransformation saxonService = new XslTransformation();
 
 	@Override
-	public File process(File inputFile, File parametersFile, String survey, String in2out) throws Exception {
+	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
 		logger.info("DDIPreprocessing Target : START");
 
 		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(survey);
@@ -80,17 +80,6 @@ public class DDIPreprocessor implements Preprocessor {
 
 		String outputTitling = null;
 
-		InputStream parametersFileStream;
-		// If no parameters file was provided : loading the default one
-		// Else : using the provided one
-		if (parametersFile == null) {
-			logger.debug("Using default parameters");
-			parametersFileStream = Constants.getInputStreamFromPath(Constants.PARAMETERS_FILE);
-		} else {
-			logger.debug("Using provided parameters");
-			parametersFileStream = FileUtils.openInputStream(parametersFile);
-		}
-
 		outputTitling = FilenameUtils.removeExtension(cleaningInput) + Constants.FINAL_EXTENSION;
 
 		logger.debug("Titling : -Input : " + cleaningOutput + " -Output : " + outputTitling + " -Stylesheet : "
@@ -100,15 +89,12 @@ public class DDIPreprocessor implements Preprocessor {
 		InputStream isCleaningTitling = FileUtils.openInputStream(new File(cleaningOutput));
 		InputStream isUTIL_DDI_TITLING_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_TITLING_XSL);
 		OutputStream osTitling = FileUtils.openOutputStream(new File(outputTitling));
-		saxonService.transformTitling(isCleaningTitling, isUTIL_DDI_TITLING_XSL, osTitling, parametersFileStream);
+		saxonService.transformTitling(isCleaningTitling, isUTIL_DDI_TITLING_XSL, osTitling, parametersFile);
 		isCleaningTitling.close();
 		isUTIL_DDI_TITLING_XSL.close();
 		osTitling.close();
-		parametersFileStream.close();
 		logger.debug("DDIPreprocessing : END");
 		return new File(outputTitling);
 	}
-
-	
 
 }

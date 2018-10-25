@@ -9,22 +9,29 @@ import java.io.File;
  * specification.
  */
 public interface Generator {
-	
+
 	/**
-	 * This method handles the preprocessing of an input file.
-	 * TODO Exception is also weak, change to a more robust Exception
+	 * This method handles the preprocessing of an input file. TODO Exception is
+	 * also weak, change to a more robust Exception
 	 * 
-	 * @param finalInput The input file, previously transformed in the preprocessing step
-	 * @param surveyName The name of the survey for which we generate a questionnaire
+	 * @param finalInput
+	 *            The input file, previously transformed in the preprocessing step
+	 * @param parameters
+	 *            The parameters of the survey for which we generate a questionnaire
+	 * @param surveyName
+	 *            The name of the survey for which we generate a questionnaire
 	 * @return the generated file
-	 * @throws Exception Generic exception
+	 * @throws Exception
+	 *             Generic exception
 	 */
-	public File generate(File finalInput, String surveyName) throws Exception;
-	
+	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception;
+
 	/**
-	 * This method return in2out implementation 
+	 * This method return in2out implementation
+	 * 
 	 * @return the in2out implementation
-	 * @throws Exception Generic exception
+	 * @throws Exception
+	 *             Generic exception
 	 */
 	public String in2out() throws Exception;
 
