@@ -25,7 +25,9 @@
       <DefaultSize>3</DefaultSize>
     </Row>
   </TextArea>
-  
+  <Capture>
+    <Numeric>manual</Numeric>
+  </Capture>
   <AccompanyingMails>
     <AccompanyingMail>ouvertureCOL</AccompanyingMail>
   </AccompanyingMails>

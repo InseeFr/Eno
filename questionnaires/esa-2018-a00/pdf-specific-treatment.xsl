@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     xmlns:fo="http://www.w3.org/1999/XSL/Format"
+    xmlns:barcode="http://barcode4j.krysalis.org/ns"
     exclude-result-prefixes="xs"
     version="2.0">
     
@@ -61,13 +62,13 @@
             <xsl:apply-templates select="node() | @*" mode="#current"/>
         </xsl:copy>
     </xsl:template>
-    
+<!--    
     <xsl:template match="fo:external-graphic/@src[contains(.,'mask_number.png')]" mode="#all">
         <xsl:attribute name="src">
             <xsl:value-of select="replace(.,'mask_number.png','mask_number_esa.png')"/>
         </xsl:attribute>
     </xsl:template>
-
+-->
     <xsl:template match="fo:block[contains(@id,'-')]">
         <xsl:variable name="roster-name" select="substring-before(@id,'-')"/>
         <xsl:variable name="page-number" select="substring-after(@id,'-')"/>
@@ -205,61 +206,64 @@
         <xsl:param name="roster-name" tunnel="yes"/>
         <xsl:param name="line-number" as="xs:integer" tunnel="yes"/>
         
-        <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB})')"/>
+        <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_CO})')"/>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <fo:block>
+            <xsl:element name="fo:block">
                 <xsl:value-of select="concat('$!{',$roster-name,'-',$line-number,'-',$roster-name,'_CO}')"/>
-            </fo:block>
+            </xsl:element>
         </xsl:copy>
         <xsl:value-of select="'#{else}'"/>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="background-color" select="'#CCCCCC'"/>
-            <fo:block/>
+            <xsl:element name="fo:block"/>
         </xsl:copy>
         <xsl:value-of select="'#{end}'"/>
-<!--
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-                <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB})')"/>
-                <xsl:value-of select="concat('&lt;fo:block&gt;$!{',$roster-name,'-',$line-number,'-',$roster-name,'_CO}&lt;/fo:block&gt;')"/>
-                <xsl:value-of select="'#{else}&lt;fo:block width=&quot;100%&quot; height=&quot;100%&quot; background-color=&quot;#CCCCCC&quot;/&gt;'"/>
-                <xsl:value-of select="'#{end}'"/>
-            </xsl:copy>-->
     </xsl:template>
 
     <xsl:template match="fo:table-body/fo:table-row/fo:table-cell[3]" mode="roster">
         <xsl:param name="roster-name" tunnel="yes"/>
         <xsl:param name="line-number" as="xs:integer" tunnel="yes"/>
         
+        <xsl:value-of select="concat('#{if}(!$!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB} or $!{',$roster-name,'-',$line-number,'-',$roster-name,'_MO})')"/>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB} and !$!{',$roster-name,'-',$line-number,'-',$roster-name,'_MO})')"/>
-            <fo:block/>
-            <xsl:value-of select="'#{else}'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
-            <xsl:value-of select="'#{end}'"/>
         </xsl:copy>
+        <xsl:value-of select="'#{else}'"/>
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:attribute name="background-color" select="'#CCCCCC'"/>
+            <xsl:element name="fo:block"/>
+        </xsl:copy>        
+        <xsl:value-of select="'#{end}'"/>
     </xsl:template>
 
     <xsl:template match="fo:table-body/fo:table-row/fo:table-cell[4]" mode="roster">
         <xsl:param name="roster-name" tunnel="yes"/>
         <xsl:param name="line-number" as="xs:integer" tunnel="yes"/>
 
+        <xsl:value-of select="concat('#{if}(!$!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB} or $!{',$roster-name,'-',$line-number,'-',$roster-name,'_MOST})')"/>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB} and !$!{',$roster-name,'-',$line-number,'-',$roster-name,'_MOST})')"/>
-            <xsl:value-of select="'&lt;fo:block/&gt;#{else}'"/>
             <xsl:apply-templates select="node()" mode="roster"/>
-            <xsl:value-of select="'#{end}'"/>
         </xsl:copy>
+        <xsl:value-of select="'#{else}'"/>
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:attribute name="background-color" select="'#CCCCCC'"/>
+            <xsl:element name="fo:block"/>
+        </xsl:copy>        
+        <xsl:value-of select="'#{end}'"/>
     </xsl:template>
 
-    <xsl:template match="fo:block[fo:external-graphic and contains(text(),'(JJMMAAAA)')]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <fo:external-graphic src="date.png"/>
-        </xsl:copy>
+    <xsl:template match="barcode:barcode/@message">
+        <xsl:attribute name="message">
+            <xsl:value-of select="."/>
+            <xsl:if test="contains(.,'idQuestionnaire')">
+                <xsl:value-of select="' - #page-id#'"/>
+            </xsl:if>
+        </xsl:attribute>
     </xsl:template>
 </xsl:stylesheet>

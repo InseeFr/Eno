@@ -815,7 +815,7 @@
                 <xsl:for-each select="$conditional-text//d:Expression/r:Command">
                     <xsl:if test="r:OutParameter/r:ID = $variable">
                         <Variable>
-                            <xsl:sequence select="r:Binding/r:SourceParameterReference/r:ID"/>
+                            <xsl:value-of select="r:Binding/r:SourceParameterReference/r:ID"/>
                         </Variable>
                     </xsl:if>
                 </xsl:for-each>
@@ -824,7 +824,7 @@
         <xsl:variable name="ordered-variables">
             <xsl:for-each select="$formula-variables//Variable">
                 <xsl:sort select="string-length(.)" order="descending"/>
-                <xsl:copy-of select="."/>
+                <xsl:value-of select="."/>
             </xsl:for-each>
         </xsl:variable>
         <xsl:sequence select="distinct-values($ordered-variables)"/>
