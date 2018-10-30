@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Questionnaire xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Sequence-i6vwid">
+   <label>Questionnaire SIMPSONS</label>
+   <components>
+      <component xsi:type="Sequence" id="j6p0ti5h">
+         <label>I - Introduction</label>
+         <declaration declarationType="comment"
+                      id="j6p0ti5h-d1"
+                      position="AFTER_QUESTION_TEXT">
+            <label>We're going to test your knowledge about the simpsons series.Welcome in the simspons world!</label>
+         </declaration>
+         <component xsi:type="Textarea"
+                    id="j6p3dkx6"
+                    response="comment"
+                    maxLength="500">
+            <label>➡ 1. Before starting, do you have any comments about the Simpsons family?</label>
+         </component>
+         <component xsi:type="CheckboxBoolean" id="j6p0np9q" response="ready">
+            <label>➡ 2. Are you ready?</label>
+         </component>
+         <component xsi:type="Subsequence" id="j6p0s7o5">
+            <label>General knowledge of the series</label>
+            <component xsi:type="Input"
+                       id="j3343qhx"
+                       response="producer"
+                       maxLength="30">
+               <label>➡ 3. Who is the producer?</label>
+            </component>
+            <component xsi:type="InputNumber"
+                       id="j6q9h8tj"
+                       response="season_number"
+                       min="0"
+                       max="99"
+                       decimals="">
+               <label>➡ 4. What is the current season number?</label>
+            </component>
+            <component xsi:type="Datepicker" id="j334cyqb" response="datefirst">
+               <label>➡ 5. When was the first episode of the Simpsons?</label>
+               <declarations>
+                  <declaration declarationType="comment"
+                               id="j334cyqb-d11"
+                               position="AFTER_QUESTION_TEXT">
+                     <label>For your information, the date of the last broadcast was on
+						øLAST_BROADCASTø</label>
+                  </declaration>
+               </declarations>
+            </component>
+            <component xsi:type="InputNumber"
+                       id="j6z06z1e"
+                       response="audience_share"
+                       min="0.0"
+                       max="99.0"
+                       decimals="1">
+               <label>➡ 6. In your opinion, how much is the part of audience share in US for the 2016
+					season? </label>
+            </component>
+         </component>
+      </component>
+      <component xsi:type="Sequence" id="j3341528">
+         <label>II - Simpsons' city</label>
+         <declaration declarationType="comment"
+                      id="j3341528-d2"
+                      position="AFTER_QUESTION_TEXT">
+            <label>This module asks about your general knowledge of the Simpsons city</label>
+         </declaration>
+         <component xsi:type="Radio" id="j3343clt" response="city">
+            <label>➡ 1. In which city do the Simpsons reside?</label>
+            <declaration declarationType="instruction"
+                         id="j3343clt-d3"
+                         position="AFTER_QUESTION_TEXT">
+               <label>One possible answer</label>
+            </declaration>
+            <codeLists id="j334iumu">
+               <label>TOWN</label>
+               <Code>
+                  <parent/>
+                  <value>00001</value>
+                  <label>Springfield</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>00002</value>
+                  <label>Shelbyville</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>00003</value>
+                  <label>Seinfeld</label>
+               </Code>
+            </codeLists>
+         </component>
+         <component xsi:type="CheckboxOne" id="j6qdfhvw" response="mayor">
+            <label>➡ 2. Who is the Simpsons city mayor?</label>
+            <declaration declarationType="instruction"
+                         id="j6qdfhvw-d4"
+                         position="AFTER_QUESTION_TEXT">
+               <label>Only one possible answer</label>
+            </declaration>
+            <codeLists id="j6qdqoen">
+               <label>MAYOR</label>
+               <Code>
+                  <parent/>
+                  <value>1</value>
+                  <label>Constance Harm</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>2</value>
+                  <label>Timothy Lovejoy</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>3</value>
+                  <label>Joe Quimby</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>4</value>
+                  <label>Poochie</label>
+               </Code>
+            </codeLists>
+         </component>
+         <component xsi:type="Dropdown" id="j4nw5cqz" response="state">
+            <label>➡ 3. In which state do The Simpsons reside?</label>
+            <codeLists id="j4nwo00f">
+               <label>State</label>
+               <Code>
+                  <parent/>
+                  <value>1</value>
+                  <label>Washington</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>2</value>
+                  <label>Kentucky</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>3</value>
+                  <label>Ohio</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>4</value>
+                  <label>Maine</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>5</value>
+                  <label>North Dakota</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>6</value>
+                  <label>Florida</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>7</value>
+                  <label>North Takoma</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>8</value>
+                  <label>California</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>9</value>
+                  <label>Texas</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>10</value>
+                  <label>Massachusetts</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>11</value>
+                  <label>Nevada</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>12</value>
+                  <label>Illinois</label>
+               </Code>
+               <Code>
+                  <parent/>
+                  <value>13</value>
+                  <label>Not in any state, you fool!</label>
+               </Code>
+            </codeLists>
+         </component>
+      </component>
+      <component xsi:type="Sequence" id="j6qe0h9q">
+         <label>III - Characters</label>
+      </component>
+      <component xsi:type="Sequence" id="j4nw88h2">
+         <label>IV - General questions</label>
+         <component xsi:type="Subsequence" id="j6qe237q">
+            <label>Kwik-E-Mart</label>
+         </component>
+         <component xsi:type="Subsequence" id="j6qejudb">
+            <label>Clowning</label>
+         </component>
+         <component xsi:type="Subsequence" id="j6qeh91y">
+            <label>Transport</label>
+         </component>
+      </component>
+      <component xsi:type="Sequence" id="j6qfx9qe">
+         <label>V - Favourite characters</label>
+      </component>
+      <component xsi:type="Sequence" id="j6z12s2d">
+         <label>VI - Comment</label>
+         <component xsi:type="Textarea"
+                    id="j6z0z3us"
+                    response="survey_comment"
+                    maxLength="255">
+            <label>➡ 1. Do you have any comment about the survey?</label>
+         </component>
+      </component>
+   </components>
+</Questionnaire>
