@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.plugins.tableColumnSizeProcessor.calculator.CalculatorService;
-import fr.insee.eno.transform.xsl.XslTransformation;
 
 /**
  * PDF postprocessor.
@@ -22,37 +21,31 @@ public class PDFStep3TableColumnPostprocessor implements Postprocessor {
 	// FIXME Inject !
 	private static CalculatorService serviceTableColumnSize = new CalculatorService();
 
-
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
-	
 	@Override
-	public File process(File input, File parametersFile, String survey) throws Exception {
+	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(
-				input.getPath().replace(Constants.SPECIFIC_TREAT_PDF_EXTENSION, Constants.TABLE_COL_SIZE_PDF_EXTENSION));
-		
+		File outputForFOFile = new File(input.getPath().replace(Constants.SPECIFIC_TREAT_PDF_EXTENSION,
+				Constants.TABLE_COL_SIZE_PDF_EXTENSION));
+
 		String confFilePath = null;
-		
-		if(Constants.PDF_PLUGIN_XML_CONF_FILE !=null){
-			logger.debug("Get conf file : "+Constants.PDF_PLUGIN_XML_CONF_FILE.getAbsolutePath());
-			confFilePath =Constants.PDF_PLUGIN_XML_CONF_FILE.getAbsolutePath();
-		}else{
+
+		if (Constants.PDF_PLUGIN_XML_CONF_FILE != null) {
+			logger.debug("Get conf file : " + Constants.PDF_PLUGIN_XML_CONF_FILE.getAbsolutePath());
+			confFilePath = Constants.PDF_PLUGIN_XML_CONF_FILE.getAbsolutePath();
+		} else {
 			InputStream isConfFile = getClass().getClassLoader().getResourceAsStream("/config/plugins-conf.xml");
-			confFilePath = FilenameUtils.removeExtension(input.getPath())+"-conf.xml";
+			confFilePath = FilenameUtils.removeExtension(input.getPath()) + "-conf.xml";
 			File confFile = new File(confFilePath);
-			java.nio.file.Files.copy(
-					isConfFile, 
-					confFile.toPath(), 
-				      StandardCopyOption.REPLACE_EXISTING);
+			java.nio.file.Files.copy(isConfFile, confFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			isConfFile.close();
-			logger.debug("Get conf file : "+confFile.getAbsolutePath());
+			logger.debug("Get conf file : " + confFile.getAbsolutePath());
 		}
-								
+
 		serviceTableColumnSize.tableColumnSizeProcessor(input.getAbsolutePath(), outputForFOFile.getPath(),
 				confFilePath);
 		logger.debug("End of step 3 PDF post-processing");
 		return outputForFOFile;
 
 	}
+
 }

@@ -10,26 +10,24 @@ import org.xmlunit.diff.Diff;
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2FRGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
-import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
 public class TestDDIToXForm {
 
 	private XMLDiff xmlDiff = new XMLDiff();
 
-	
 	@Test
 	public void simpleDiffTest() {
 		try {
 			String basePath = "src/test/resources/ddi-to-xform";
 			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2FRGenerator(),
-					new Postprocessor[] {new NoopPostprocessor()});
+					new NoopPostprocessor());
 			File in = new File(String.format("%s/in.xml", basePath));
-			File outputFile = genService.generateQuestionnaire(in, null,"ddi-2-fr-test");
+			File outputFile = genService.generateQuestionnaire(in, "ddi-2-fr-test");
 			File expectedFile = new File(String.format("%s/out.xhtml", basePath));
-			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
+			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();

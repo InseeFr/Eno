@@ -127,67 +127,67 @@
 		
 		<fo:root>
 			<fo:layout-master-set>
-				<fo:simple-page-master master-name="A4-portrait" page-height="297mm"
-					page-width="210mm" font-family="arial" font-size="10pt" reference-orientation="{$orientation}"
-					font-weight="normal" margin-bottom="5mm">
-					<fo:region-body margin="13mm" column-count="{$column-count}"/>
-					<fo:region-before region-name="xsl-region-before" extent="25mm" display-align="before" precedence="true"/>
-					<fo:region-after region-name="xsl-region-after" extent="25mm" display-align="before" precedence="true"/>
-				</fo:simple-page-master>
+				<xsl:choose>
+					<xsl:when test="$orientation = '0'">
+						<fo:simple-page-master master-name="A4-portrait-odd" page-height="297mm"
+							page-width="210mm" font-family="Arial" font-size="10pt" font-weight="normal" margin-bottom="5mm">
+							<fo:region-body margin="13mm" column-count="{$column-count}"/>
+							<fo:region-before region-name="portrait-region-before" extent="25mm" display-align="before" precedence="true"/>
+							<fo:region-after region-name="portrait-region-after" extent="25mm" display-align="before" precedence="true"/>
+						</fo:simple-page-master>
+						<fo:simple-page-master master-name="A4-portrait-even" page-height="297mm"
+							page-width="210mm" font-family="Arial" font-size="10pt" font-weight="normal" margin-bottom="5mm">
+							<fo:region-body margin="13mm" column-count="{$column-count}"/>
+							<fo:region-before region-name="portrait-region-before" extent="25mm" display-align="before" precedence="true"/>
+							<fo:region-after region-name="portrait-region-after" extent="25mm" display-align="before" precedence="true"/>
+						</fo:simple-page-master>						
+					</xsl:when>
+					<xsl:otherwise>
+						<fo:simple-page-master master-name="A4-landscape-odd" page-height="297mm"
+							page-width="210mm" font-family="Arial" font-size="10pt" reference-orientation="{$orientation}"
+							font-weight="normal" margin-bottom="5mm">
+							<fo:region-body margin="13mm" column-count="{$column-count}"/>
+							<fo:region-before region-name="landscape-region-before-odd" extent="25mm" display-align="before" precedence="true"/>
+							<fo:region-after region-name="landscape-region-after-odd" extent="25mm" display-align="before" precedence="true"/>
+						</fo:simple-page-master>
+						<fo:simple-page-master master-name="A4-landscape-even" page-height="297mm"
+							page-width="210mm" font-family="Arial" font-size="10pt" reference-orientation="{$orientation}"
+							font-weight="normal" margin-bottom="5mm">
+							<fo:region-body margin="13mm" column-count="{$column-count}"/>
+							<fo:region-before region-name="landscape-region-before-even" extent="25mm" display-align="before" precedence="true"/>
+							<fo:region-after region-name="landscape-region-after-even" extent="25mm" display-align="before" precedence="true"/>
+						</fo:simple-page-master>						
+					</xsl:otherwise>
+				</xsl:choose>
+				<fo:page-sequence-master master-name="A4">
+					<xsl:choose>
+						<xsl:when test="$orientation = '0'">
+							<fo:repeatable-page-master-alternatives>
+								<fo:conditional-page-master-reference master-reference="A4-portrait-odd" odd-or-even="odd"/>
+								<fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even"/>
+							</fo:repeatable-page-master-alternatives>
+						</xsl:when>
+						<xsl:otherwise>
+							<fo:repeatable-page-master-alternatives>
+								<fo:conditional-page-master-reference master-reference="A4-landscape-odd" odd-or-even="odd"/>
+								<fo:conditional-page-master-reference master-reference="A4-landscape-even" odd-or-even="even"/>
+							</fo:repeatable-page-master-alternatives>
+						</xsl:otherwise>
+					</xsl:choose>
+				</fo:page-sequence-master>
 			</fo:layout-master-set>
-			<fo:page-sequence master-reference="A4-portrait" initial-page-number="2">
-				<fo:static-content flow-name="xsl-region-before">
-					<fo:block position="absolute" margin="10mm" text-align="right">
-						<xsl:call-template name="insert-image">
-							<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
-						</xsl:call-template>
-					</fo:block>
-					<xsl:if test="$orientation='0'">
-						<fo:block position="absolute" margin-top="65%" text-align="right" margin-right="4mm">
-							<fo:instream-foreign-object>
-								<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-									orientation="90">
-									<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
-									<barcode:code128>
-										<barcode:height>8mm</barcode:height>
-										<barcode:human-readable>
-											<barcode:placement>none</barcode:placement>
-										</barcode:human-readable>
-									</barcode:code128>
-								</barcode:barcode>
-							</fo:instream-foreign-object>
-							<fo:block-container reference-orientation="90" margin-left="5mm">
-								<fo:block text-align="left" font-size="8pt">${idQuestionnaire} - <fo:page-number/></fo:block>
-							</fo:block-container>
-						</fo:block>
-					</xsl:if>
-					
-					<!-- Je n'ai pas trouvé quel contenu mettre... -->
-					<!--<fo:block>
-						<xsl:value-of select="'#if '"/>
-						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-							<xsl:with-param name="driver" select="eno:append-empty-element('barcode', .)" tunnel="yes"/>
-						</xsl:apply-templates>
-						<xsl:value-of select="'(&lt;fo:page-number/&gt; == &lt;fo:page-number-citation ref-id=&quot;TheVeryLastPage&quot;/&gt;) TheVeryLastPage '"/>
-						<xsl:value-of select="'#else unknown Page #end'"/>
-						<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
-					</fo:block>-->
-				</fo:static-content>
-				<fo:static-content flow-name="xsl-region-after">
-					<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0px" text-align="left">
-						<xsl:call-template name="insert-image">
-							<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
-						</xsl:call-template>
-					</fo:block>
-					
-					<fo:block text-align="center">
-						<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
-					</fo:block>
-					<xsl:if test="$orientation='90'">
-						<fo:block-container text-align="left" absolute-position="absolute" left="10mm" top="20mm">
-							<fo:block>
+			<fo:page-sequence master-reference="A4" initial-page-number="2">
+				<xsl:choose>
+					<xsl:when test="$orientation = '0'">
+						<fo:static-content flow-name="portrait-region-before">
+							<fo:block position="absolute" margin="10mm" text-align="right">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
+								</xsl:call-template>
+							</fo:block>
+							<fo:block position="absolute" margin-top="65%" text-align="right" margin-right="4mm">
 								<fo:instream-foreign-object>
-									<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns">
+									<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="90">
 										<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
 										<barcode:code128>
 											<barcode:height>8mm</barcode:height>
@@ -197,16 +197,97 @@
 										</barcode:code128>
 									</barcode:barcode>
 								</fo:instream-foreign-object>
+								<fo:block-container reference-orientation="90" margin-left="5mm">
+									<fo:block text-align="left" font-size="8pt">${idQuestionnaire} - <fo:page-number/></fo:block>
+								</fo:block-container>
 							</fo:block>
-						</fo:block-container>
-						<fo:block-container absolute-position="absolute" right="20mm" top="20mm">
-							<fo:block-container>
+						</fo:static-content>
+						<fo:static-content flow-name="portrait-region-after">
+							<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0px" text-align="left">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
+								</xsl:call-template>
+							</fo:block>
+							<fo:block text-align="center">
+								<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+							</fo:block>
+						</fo:static-content>
+					</xsl:when>
+					<xsl:otherwise>
+						<fo:static-content flow-name="landscape-region-before-odd">
+							<fo:block position="absolute" margin="10mm" text-align="right">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
+								</xsl:call-template>
+							</fo:block>
+						</fo:static-content>
+						<fo:static-content flow-name="landscape-region-after-odd">
+							<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0px" text-align="left">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
+								</xsl:call-template>
+							</fo:block>
+							<fo:block text-align="center">
+								<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+							</fo:block>
+							<fo:block-container text-align="left" absolute-position="absolute" left="200mm" top="15mm">
+								<fo:block>
+									<fo:instream-foreign-object>
+										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns">
+											<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
+											<barcode:code128>
+												<barcode:height>8mm</barcode:height>
+												<barcode:human-readable>
+													<barcode:placement>none</barcode:placement>
+												</barcode:human-readable>
+											</barcode:code128>
+										</barcode:barcode>
+									</fo:instream-foreign-object>
+								</fo:block>
+							</fo:block-container>
+							<fo:block-container absolute-position="absolute" right="20mm" top="20mm">
+								<fo:block text-align="right" font-size="8pt">${idQuestionnaire} - <fo:page-number/></fo:block>
+							</fo:block-container>
+						</fo:static-content>
+						<fo:static-content flow-name="landscape-region-before-even">
+							<fo:block position="absolute" margin="10mm" text-align="right">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
+								</xsl:call-template>
+							</fo:block>
+							<fo:block-container text-align="left" absolute-position="absolute" left="200mm" top="5mm">
+								<fo:block>
+									<fo:instream-foreign-object>
+										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns">
+											<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
+											<barcode:code128>
+												<barcode:height>8mm</barcode:height>
+												<barcode:human-readable>
+													<barcode:placement>none</barcode:placement>
+												</barcode:human-readable>
+											</barcode:code128>
+										</barcode:barcode>
+									</fo:instream-foreign-object>
+								</fo:block>
+							</fo:block-container>
+						</fo:static-content>
+						<fo:static-content flow-name="landscape-region-after-even">
+							<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0px" text-align="left">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
+								</xsl:call-template>
+							</fo:block>
+							<fo:block text-align="center">
+								<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+							</fo:block>
+							<fo:block-container absolute-position="absolute" right="20mm" top="20mm">
 								<fo:block text-align="right" font-size="8pt">${idQuestionnaire} - <fo:page-number/>
 								</fo:block>
 							</fo:block-container>
-						</fo:block-container>
-					</xsl:if>
-				</fo:static-content>
+						</fo:static-content>
+					</xsl:otherwise>
+				</xsl:choose>
+				
 				<fo:flow flow-name="xsl-region-body" border-collapse="collapse" font-size="10pt">
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 						<xsl:with-param name="driver" select="eno:append-empty-element('main', .)" tunnel="yes"/>

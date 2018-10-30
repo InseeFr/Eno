@@ -25,20 +25,6 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>The parameter file used by the stylesheet.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:param name="parameters-file"/>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>The parameters are charged as an xml tree.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:variable name="parameters" select="doc($parameters-file)"/>
-
-    <xd:doc>
-        <xd:desc>
             <xd:p>The folder containing label resources in different languages.</xd:p>
         </xd:desc>
     </xd:doc>
