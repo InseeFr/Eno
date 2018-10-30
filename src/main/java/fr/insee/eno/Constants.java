@@ -107,7 +107,6 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_DDI2PDF_DDI2PDF_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2pdf/ddi2pdf-fixed.xsl";
 	public static final String TRANSFORMATIONS_DDI2JS_DDI2JS_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2js/ddi2js-fixed.xsl";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/pogues-xml2ddi-fixed.xsl";
-	public static final String TRANSFORMATIONS_DDI2JS_DDI2FR_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2js/ddi2js-fixed.xsl";
 	
 	// ---------- 
 	public static final String INPUTS_DDI_FUNCTIONS_FODS = INPUTS_FOLDER + "/ddi/functions.fods";
