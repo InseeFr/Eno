@@ -50,7 +50,7 @@
 	<xsl:template match="Form" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
-		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
+		<xsl:variable name="id" select="replace(enojs:get-name($source-context),'Sequence-','')"/>
 		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
 		<Questionnaire id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
