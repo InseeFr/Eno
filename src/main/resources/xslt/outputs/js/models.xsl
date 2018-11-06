@@ -156,27 +156,34 @@
 			
 			<xsl:choose>
 				<xsl:when test="$typeResponse='text'">
-					<component xsi:type="Input" id="{$idQuestion}" response="{$questionName}" maxLength="{$lengthResponse}">
+					<component xsi:type="Input" id="{$idQuestion}" maxLength="{$lengthResponse}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
-						
+						<xsl:call-template name="enojs:addResponeToComponent">
+							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+						</xsl:call-template>
 					</component>
 				</xsl:when>
 				
 				<xsl:when test="$typeResponse='number'">
-					<component xsi:type="InputNumber" id="{$idQuestion}" response="{$questionName}" min="{$minimumResponse}" max="{$maximumResponse}" decimals="{$numberOfDecimals}">
+					<component xsi:type="InputNumber" id="{$idQuestion}" min="{$minimumResponse}" max="{$maximumResponse}" decimals="{$numberOfDecimals}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
-						
+						<xsl:call-template name="enojs:addResponeToComponent">
+							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+						</xsl:call-template>						
 					</component>
 				</xsl:when>
 				
 				<xsl:when test="$typeResponse='date'">
-					<component xsi:type="Datepicker" id="{$idQuestion}" response="{$questionName}">
+					<component xsi:type="Datepicker" id="{$idQuestion}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<declarations>
 							<xsl:copy-of select="$declarations"></xsl:copy-of>
 						</declarations>
+						<xsl:call-template name="enojs:addResponeToComponent">
+							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+						</xsl:call-template>
 					</component>
 				</xsl:when>
 			</xsl:choose>
@@ -214,7 +221,7 @@
 			<xsl:when test="$maximumLengthCode != '' and $questionName!=''">
 				<!-- remove Format in the cell for table 'question multiple-choice-question'-->
 				<xsl:if test="$typeOfAncestor!='question multiple-choice-question'">
-					<component xsi:type="CheckboxOne" id="{$idQuestion}" response="{$questionName}">
+					<component xsi:type="CheckboxOne" id="{$idQuestion}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
 						
@@ -225,21 +232,22 @@
 								<xsl:with-param name="typeResponse" select="$typeResponse" tunnel="yes"/>
 							</xsl:apply-templates>
 						</codeLists>
+						
+						<xsl:call-template name="enojs:addResponeToComponent">
+							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+						</xsl:call-template>
 					</component>
 				</xsl:if>
 			</xsl:when>
 			
 			<xsl:when test="$typeResponse='boolean' and $typeOfAncestor!=''">
-				<component xsi:type="CheckboxBoolean" id="{$idQuestion}" response="{$questionName}">
+				<component xsi:type="CheckboxBoolean" id="{$idQuestion}">
 					<label><xsl:value-of select="$labelQuestion"/></label>
 					<xsl:copy-of select="$declarations"></xsl:copy-of>
 					
-					
-					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-						<xsl:with-param name="driver" select="." tunnel="yes"/>
-						<xsl:with-param name="typeResponse" select="$typeResponse" tunnel="yes"/>
-					</xsl:apply-templates>
-					
+					<xsl:call-template name="enojs:addResponeToComponent">
+						<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+					</xsl:call-template>					
 				</component>
 			</xsl:when>
 			
@@ -275,7 +283,7 @@
 		<xsl:if test="$maximumLengthCode != '' and $typeOfAncestor!='question multiple-choice-question' and $questionName!=''">
 			<xsl:choose>
 				<xsl:when test="$typeXf='full'">
-					<component xsi:type="Radio" id="{$idQuestion}" response="{$questionName}">
+					<component xsi:type="Radio" id="{$idQuestion}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
 						
@@ -286,14 +294,17 @@
 								<xsl:with-param name="driver" select="." tunnel="yes"/>
 							</xsl:apply-templates>
 						</codeLists>
+												
+						<xsl:call-template name="enojs:addResponeToComponent">
+							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+						</xsl:call-template>
 						
 					</component>
 				</xsl:when>
 				<xsl:when test="$typeXf='minimal'">
-					<component xsi:type="Dropdown" id="{$idQuestion}" response="{$questionName}">
+					<component xsi:type="Dropdown" id="{$idQuestion}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
-						
 						
 						<codeLists id="{$idCodeList}">
 							<label><xsl:value-of select="$name"/></label>
@@ -302,6 +313,9 @@
 							</xsl:apply-templates>
 						</codeLists>
 						
+						<xsl:call-template name="enojs:addResponeToComponent">
+							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+						</xsl:call-template>
 					</component>
 				</xsl:when>
 			</xsl:choose>
@@ -356,9 +370,13 @@
 		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
 		
 		<xsl:if test="$typeResponse !='' and $questionName!=''">
-			<component xsi:type="Textarea" id="{$idQuestion}" response="{$questionName}" maxLength="{$lengthResponse}">
+			<component xsi:type="Textarea" id="{$idQuestion}" maxLength="{$lengthResponse}">
 				<label><xsl:value-of select="$labelQuestion"/></label>
 				<xsl:copy-of select="$declarations"></xsl:copy-of>
+								
+				<xsl:call-template name="enojs:addResponeToComponent">
+					<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+				</xsl:call-template>
 			</component>
 		</xsl:if>
 		
@@ -427,5 +445,17 @@
 			<xsl:with-param name="positionDeclaration" select="'AFTER_QUESTION_TEXT'" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:function>
+	
+	<xsl:template name="enojs:addResponeToComponent">
+		<xsl:param name="responseName"/>
+		<xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
+		<response responseName="{$responseName}">
+			<xsl:for-each select="tokenize($ResponseTypeEnum,',')">
+				<valueState type="{.}">
+					<value/>
+				</valueState>
+			</xsl:for-each>
+		</response>
+	</xsl:template>
 	
 </xsl:stylesheet>
