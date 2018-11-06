@@ -54,14 +54,10 @@
 		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
 		<Questionnaire id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
-			
-			<components>
-				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-					<xsl:with-param name="driver" select="." tunnel="yes"/>
-					<xsl:with-param name="languages" select="$languages" tunnel="yes"/>
-				</xsl:apply-templates>
-			</components>
-			
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+				<xsl:with-param name="languages" select="$languages" tunnel="yes"/>
+			</xsl:apply-templates>
 		</Questionnaire>
 	</xsl:template>
 	
@@ -145,7 +141,14 @@
 		
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
-		<xsl:variable name="numberOfDecimals" select="enojs:get-number-of-decimals($source-context)"/>
+		<xsl:variable name="numberOfDecimals">
+			<xsl:choose>
+				<xsl:when test="enojs:get-number-of-decimals($source-context) !=''">
+					<xsl:value-of select="enojs:get-number-of-decimals($source-context)"/>
+				</xsl:when>
+				<xsl:otherwise>0</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
 		<xsl:variable name="minimumResponse" select="enojs:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enojs:get-maximum($source-context)"/>
 		
@@ -251,7 +254,6 @@
 			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	
 	<xsl:template match="xf-select1" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="driver" tunnel="yes"/>
@@ -425,4 +427,5 @@
 			<xsl:with-param name="positionDeclaration" select="'AFTER_QUESTION_TEXT'" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:function>
+	
 </xsl:stylesheet>
