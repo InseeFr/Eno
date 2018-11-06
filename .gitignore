@@ -42,3 +42,6 @@ src/main/resources/xml/null.xml
 !src/main/resources/xslt/inputs/fods/source.xsl
 !src/main/resources/xslt/inputs/xml/source.xsl
 !src/main/resources/xslt/transformations/*/*-fixed.xsl
+
+#Oxygen project
+enojs.xpr

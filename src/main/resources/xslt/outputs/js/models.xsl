@@ -343,11 +343,11 @@
 		<xsl:variable name="name" select="enojs:get-question-name($source-context, $languages[1])"/>
 		<!-- remove item in the cell for table when the response is boolean-->
 		<xsl:if test="$label !='' and $typeResponse!='boolean' and $typeOfAncestor!=''">
-			<Code>
+			<code>
 				<parent><xsl:value-of select="$name"/></parent>
 				<value><xsl:value-of select="enojs:get-value($source-context)"/></value>
 				<label><xsl:value-of select="$label"/></label>
-			</Code>
+			</code>
 		</xsl:if>
 	</xsl:template>
 	
