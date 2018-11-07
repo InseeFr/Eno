@@ -632,17 +632,47 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>For the Instruction of a ComputationItem, returns the conditions of all its deactivatable ancestors.</xd:p>
+            <xd:p>Returns the conditions of all its deactivatable ancestors.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:ComputationItem" mode="enoddi:get-deactivatable-ancestors" as="xs:string *">
-        <xsl:for-each select="ancestor::d:Sequence[d:TypeOfSequence/text()='deactivatable']">
-            <xsl:value-of select="enoddi:get-deactivatable-command(.)"/>
+    <xsl:template match="*" mode="enoddi:get-deactivatable-ancestors" as="xs:string *">
+        <xsl:for-each select="ancestor::*">
+            <xsl:if test="enoddi:get-deactivatable-command(.) != ''">
+                <xsl:value-of select="enoddi:get-deactivatable-command(.)"/>                
+            </xsl:if>
         </xsl:for-each>
     </xsl:template>
-    <xsl:template match="d:ComputationItem" mode="enoddi:get-deactivatable-ancestors-variables" as="xs:string *">
-        <xsl:for-each select="ancestor::d:Sequence[d:TypeOfSequence/text()='deactivatable']">
-            <xsl:sequence select="enoddi:get-deactivatable-command-variables(.)"/>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Returns the variables of the conditions of all its deactivatable ancestors.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    
+    <xsl:template match="*" mode="enoddi:get-deactivatable-ancestors-variables" as="xs:string *">
+        <xsl:for-each select="ancestor::*">
+            <xsl:if test="enoddi:get-deactivatable-command(.) != ''">
+                <xsl:sequence select="enoddi:get-deactivatable-command-variables(.)"/>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Returns the conditions of all its hideable ancestors.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-hideable-ancestors" as="xs:string *">
+        <xsl:for-each select="ancestor::*">
+            <xsl:if test="enoddi:get-hideable-command(.) != ''">
+                <xsl:value-of select="enoddi:get-hideable-command(.)"/>                
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template match="*" mode="enoddi:get-hideable-ancestors-variables" as="xs:string *">
+        <xsl:for-each select="ancestor::*">
+            <xsl:if test="enoddi:get-hideable-command(.) != ''">
+                <xsl:sequence select="enoddi:get-hideable-command-variables(.)"/>
+            </xsl:if>
         </xsl:for-each>
     </xsl:template>
     
