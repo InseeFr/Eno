@@ -100,8 +100,7 @@
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
 				<xsl:with-param name="driver" select="."/>
-			</xsl:call-template>
-			
+			</xsl:call-template>			
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -112,7 +111,21 @@
 	<xsl:template match="SingleResponseQuestion | MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		
 		<xsl:variable name="questionName" select="enojs:get-question-name($source-context,$languages[1])"/>
+		
+		<xsl:variable name="formulaReadOnly" select="enojs:get-readonly-ancestors($source-context)" as="xs:string*"/>
+		<xsl:variable name="formulaRelevant" select="enojs:get-relevant-ancestors($source-context)" as="xs:string*"/>
+		
+		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
+		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
+		
+		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
+			$formulaReadOnly,
+			$formulaRelevant,
+			$variablesReadOnly,
+			$variablesRelevant
+			)"/>
 		
 		<xsl:if test="$questionName != ''">
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -122,6 +135,7 @@
 				<xsl:with-param name="questionName" select="lower-case($questionName)" tunnel="yes"/>
 				<xsl:with-param name="labelQuestion" select="enojs:get-label($source-context, $languages[1])" tunnel="yes"/>
 				<xsl:with-param name="declarations" select="eno:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
+				<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
 			</xsl:apply-templates>
 		</xsl:if>
 	</xsl:template>
@@ -137,7 +151,9 @@
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="questionName" tunnel="yes"/>
 		<xsl:param name="labelQuestion" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
+		<xsl:param name="filterCondition" tunnel="yes"/>
 		
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
@@ -151,6 +167,7 @@
 		</xsl:variable>
 		<xsl:variable name="minimumResponse" select="enojs:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enojs:get-maximum($source-context)"/>
+		<xsl:variable name="unit" select="enojs:get-suffix($source-context,$languages[1])"/>
 		
 		<xsl:if test="$typeResponse!='' and $questionName!=''">
 			
@@ -158,20 +175,25 @@
 				<xsl:when test="$typeResponse='text'">
 					<component xsi:type="Input" id="{$idQuestion}" maxLength="{$lengthResponse}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
-						<xsl:copy-of select="$declarations"></xsl:copy-of>
+						<xsl:copy-of select="$declarations"/>
 						<xsl:call-template name="enojs:addResponeToComponent">
 							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
 						</xsl:call-template>
+						<xsl:copy-of select="$filterCondition"/>
 					</component>
 				</xsl:when>
 				
 				<xsl:when test="$typeResponse='number'">
 					<component xsi:type="InputNumber" id="{$idQuestion}" min="{$minimumResponse}" max="{$maximumResponse}" decimals="{$numberOfDecimals}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
+						<xsl:if test="$unit!=''">
+							<unit><xsl:value-of select="$unit"/></unit>
+						</xsl:if>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
 						<xsl:call-template name="enojs:addResponeToComponent">
 							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
-						</xsl:call-template>						
+						</xsl:call-template>
+						<xsl:copy-of select="$filterCondition"/>
 					</component>
 				</xsl:when>
 				
@@ -184,6 +206,7 @@
 						<xsl:call-template name="enojs:addResponeToComponent">
 							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
 						</xsl:call-template>
+						<xsl:copy-of select="$filterCondition"/>
 					</component>
 				</xsl:when>
 			</xsl:choose>
@@ -206,6 +229,7 @@
 		<xsl:param name="driver" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>		
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="filterCondition" tunnel="yes"/>
 		
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="questionName" tunnel="yes"/>
@@ -236,6 +260,7 @@
 						<xsl:call-template name="enojs:addResponeToComponent">
 							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
 						</xsl:call-template>
+						<xsl:copy-of select="$filterCondition"/>
 					</component>
 				</xsl:if>
 			</xsl:when>
@@ -247,7 +272,8 @@
 					
 					<xsl:call-template name="enojs:addResponeToComponent">
 						<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
-					</xsl:call-template>					
+					</xsl:call-template>
+					<xsl:copy-of select="$filterCondition"/>
 				</component>
 			</xsl:when>
 			
@@ -267,6 +293,7 @@
 		<xsl:param name="driver" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>		
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="filterCondition" tunnel="yes"/>
 		
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="questionName" tunnel="yes"/>
@@ -298,6 +325,7 @@
 						<xsl:call-template name="enojs:addResponeToComponent">
 							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
 						</xsl:call-template>
+						<xsl:copy-of select="$filterCondition"/>
 						
 					</component>
 				</xsl:when>
@@ -316,6 +344,7 @@
 						<xsl:call-template name="enojs:addResponeToComponent">
 							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
 						</xsl:call-template>
+						<xsl:copy-of select="$filterCondition"/>
 					</component>
 				</xsl:when>
 			</xsl:choose>
@@ -365,6 +394,7 @@
 		<xsl:param name="questionName" tunnel="yes"/>
 		<xsl:param name="labelQuestion" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
+		<xsl:param name="filterCondition" tunnel="yes"/>
 		
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
@@ -377,6 +407,7 @@
 				<xsl:call-template name="enojs:addResponeToComponent">
 					<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
 				</xsl:call-template>
+				<xsl:copy-of select="$filterCondition"/>
 			</component>
 		</xsl:if>
 		
@@ -457,5 +488,27 @@
 			</xsl:for-each>
 		</response>
 	</xsl:template>
+	
+	<xsl:function name="enojs:createLambdaExpression">
+		<xsl:param name="formulaReadOnly" as="xs:string*"/>
+		<xsl:param name="formulaRelevant" as="xs:string*"/>
+		<xsl:param name="variablesReadOnly" as="xs:string*"/>
+		<xsl:param name="variablesRelevant" as="xs:string*"/>
+		
+		<xsl:for-each select="$formulaReadOnly">
+			<readOnlyFormula>
+				<xsl:value-of select="."/>
+			</readOnlyFormula>
+		</xsl:for-each>
+		
+		<xsl:if test="$formulaRelevant !=''">
+			<relevantFormula>
+				<xsl:for-each select="$formulaRelevant">
+					<xsl:value-of select="concat('not(',.,') or ')"/>
+				</xsl:for-each>
+			</relevantFormula>
+		</xsl:if>	
+	</xsl:function>
+	
 	
 </xsl:stylesheet>
