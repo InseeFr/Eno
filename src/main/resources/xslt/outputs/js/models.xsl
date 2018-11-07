@@ -121,6 +121,7 @@
 		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
 		
 		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
+			.,
 			$formulaReadOnly,
 			$formulaRelevant,
 			$variablesReadOnly,
@@ -490,25 +491,37 @@
 	</xsl:template>
 	
 	<xsl:function name="enojs:createLambdaExpression">
+		<xsl:param name="source-context" as="item()"/>
 		<xsl:param name="formulaReadOnly" as="xs:string*"/>
 		<xsl:param name="formulaRelevant" as="xs:string*"/>
 		<xsl:param name="variablesReadOnly" as="xs:string*"/>
 		<xsl:param name="variablesRelevant" as="xs:string*"/>
+				
+		<xsl:variable name="variableFilter" as="xs:string*">
+			<xsl:for-each select="distinct-values($variablesRelevant)">
+				<xsl:sequence select="enojs:get-variable-business-name($source-context,.)"/>
+			</xsl:for-each>
+			<xsl:for-each select="distinct-values($variablesReadOnly)">
+				<xsl:sequence select="enojs:get-variable-business-name($source-context,.)"/>
+			</xsl:for-each>
+		</xsl:variable>
 		
-		<xsl:for-each select="$formulaReadOnly">
-			<readOnlyFormula>
-				<xsl:value-of select="."/>
-			</readOnlyFormula>
-		</xsl:for-each>
+		<xsl:variable name="variables">
+			<xsl:for-each select="distinct-values($variableFilter)">
+				<xsl:if test="position()!=1">
+					<xsl:value-of select="','"/>
+				</xsl:if>
+				<xsl:value-of select="enojs:get-variable-business-name($source-context,.)"/>
+			</xsl:for-each>
+		</xsl:variable>
 		
-		<xsl:if test="$formulaRelevant !=''">
-			<relevantFormula>
-				<xsl:for-each select="$formulaRelevant">
-					<xsl:value-of select="concat('not(',.,') or ')"/>
-				</xsl:for-each>
-			</relevantFormula>
-		</xsl:if>	
+				
+		<conditionFilter>
+			<xsl:value-of select="concat('(',$variables,')',' => true')"/>
+		</conditionFilter>
 	</xsl:function>
+	
+	
 	
 	
 </xsl:stylesheet>
