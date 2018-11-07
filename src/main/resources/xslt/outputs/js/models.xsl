@@ -481,7 +481,7 @@
 	<xsl:template name="enojs:addResponeToComponent">
 		<xsl:param name="responseName"/>
 		<xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
-		<response responseName="{$responseName}">
+		<response name="{$responseName}">
 			<xsl:for-each select="tokenize($ResponseTypeEnum,',')">
 				<valueState type="{.}">
 					<value/>
@@ -522,12 +522,15 @@
 					<xsl:value-of select="'() => true ? ''normal'' : '''''"/><!-- guillemet autour de normal ? -->
 				</xsl:when>
 				<xsl:when test="$variablesReadOnly=''">
+					<xsl:value-of select="'() => true ? ''normal'' : '''''"/>
 					<!-- pas de gris, on affiche (normal) ou pas (hidden) -->
 				</xsl:when>
 				<xsl:when test="$variablesRelevant=''">
+					<xsl:value-of select="'() => true ? ''normal'' : '''''"/>
 					<!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
 				</xsl:when>
 				<xsl:otherwise>
+					<xsl:value-of select="'() => true ? ''normal'' : '''''"/>
 					<!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
 				<!--	si relevant
 						alors 
