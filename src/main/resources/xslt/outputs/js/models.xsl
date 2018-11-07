@@ -517,7 +517,27 @@
 		
 				
 		<conditionFilter>
-			<xsl:value-of select="concat('(',$variables,')',' => true')"/>
+			<xsl:choose>
+				<xsl:when test="$variables=''">
+					<xsl:value-of select="'() => true ? ''normal'' : '''''"/><!-- guillemet autour de normal ? -->
+				</xsl:when>
+				<xsl:when test="$variablesReadOnly=''">
+					<!-- pas de gris, on affiche (normal) ou pas (hidden) -->
+				</xsl:when>
+				<xsl:when test="$variablesRelevant=''">
+					<!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
+				</xsl:when>
+				<xsl:otherwise>
+					<!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
+				<!--	si relevant
+						alors 
+							si readonly,
+								alors normal
+								sinon readonly
+					sinon hidden-->
+				</xsl:otherwise>
+			</xsl:choose>
+			
 		</conditionFilter>
 	</xsl:function>
 	
