@@ -424,7 +424,7 @@
 		<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>
-		<fo:block id="{enopdf:get-name($source-context)}" page-break-inside="avoid">
+		<fo:block id="{enopdf:get-question-name($source-context,$languages[1])}" page-break-inside="avoid">
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="typeOfAncestor" select="'question'" tunnel="yes"/>
@@ -669,9 +669,10 @@
 		
 		<xsl:variable name="current-match" select="."/>
 		<xsl:variable name="no-border" select="enopdf:get-style($source-context)"/>
+		<xsl:variable name="table-type" select="local-name()"/>
 		<xsl:variable name="total-lines" as="xs:integer">
 			<xsl:choose>
-				<xsl:when test="self::Table">
+				<xsl:when test="$table-type = 'Table'">
 					<xsl:value-of select="count(enopdf:get-body-lines($source-context))"/>
 				</xsl:when>
 				<xsl:when test="enopdf:get-maximum-lines($source-context)">
@@ -684,7 +685,7 @@
 		</xsl:variable>
 		<xsl:variable name="maxlines-by-table" as="xs:integer">
 			<xsl:choose>
-				<xsl:when test="self::Table">
+				<xsl:when test="$table-type = 'Table'">
 					<xsl:value-of select="number($table-defaultsize)"/>
 				</xsl:when>
 				<xsl:otherwise>
@@ -709,14 +710,19 @@
 		<xsl:for-each select="1 to $table-pages">
 			<xsl:variable name="page-position" select="position()"/>
 			<fo:block page-break-inside="avoid">
-				<xsl:choose>
-					<xsl:when test="$total-lines &gt; $maxlines-by-table -1">
-						<xsl:attribute name="id" select="concat(enopdf:get-business-name($source-context),'-',$page-position)"/>		
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:attribute name="id" select="enopdf:get-business-name($source-context)"/>
-					</xsl:otherwise>
-				</xsl:choose>
+				<xsl:attribute name="id">
+					<xsl:choose>
+						<xsl:when test="$table-type = 'Table'">
+							<xsl:value-of select="enopdf:get-question-name($source-context,$languages[1])"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="enopdf:get-business-name($source-context)"/>
+						</xsl:otherwise>
+					</xsl:choose>
+					<xsl:if test="$total-lines &gt; $maxlines-by-table -1">
+						<xsl:value-of select="concat('-',$page-position)"/>
+					</xsl:if>
+				</xsl:attribute>
 				<xsl:if test="$current-match/name()='TableLoop' and $total-lines &gt; $maxlines-by-table -1">
 					<xsl:attribute name="page-break-after" select="'always'"/>
 				</xsl:if>
