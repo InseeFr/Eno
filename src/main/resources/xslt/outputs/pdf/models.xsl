@@ -149,6 +149,7 @@
 							<fo:region-body margin="13mm" column-count="{$column-count}"/>
 							<fo:region-before region-name="landscape-region-before-odd" extent="25mm" display-align="before" precedence="true"/>
 							<fo:region-after region-name="landscape-region-after-odd" extent="25mm" display-align="before" precedence="true"/>
+							<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before" precedence="true"/>
 						</fo:simple-page-master>
 						<fo:simple-page-master master-name="A4-landscape-even" page-height="297mm"
 							page-width="210mm" font-family="Arial" font-size="10pt" reference-orientation="{$orientation}"
@@ -156,6 +157,7 @@
 							<fo:region-body margin="13mm" column-count="{$column-count}"/>
 							<fo:region-before region-name="landscape-region-before-even" extent="25mm" display-align="before" precedence="true"/>
 							<fo:region-after region-name="landscape-region-after-even" extent="25mm" display-align="before" precedence="true"/>
+							<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before" precedence="true"/>
 						</fo:simple-page-master>						
 					</xsl:otherwise>
 				</xsl:choose>
@@ -186,20 +188,23 @@
 								</xsl:call-template>
 							</fo:block>
 							<fo:block position="absolute" margin-top="65%" text-align="right" margin-right="4mm">
-								<fo:instream-foreign-object>
-									<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="90">
-										<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
-										<barcode:code128>
-											<barcode:height>8mm</barcode:height>
-											<barcode:human-readable>
-												<barcode:placement>none</barcode:placement>
-											</barcode:human-readable>
-										</barcode:code128>
-									</barcode:barcode>
-								</fo:instream-foreign-object>
-								<fo:block-container reference-orientation="90" margin-left="5mm">
-									<fo:block text-align="left" font-size="8pt">${idQuestionnaire} - <fo:page-number/></fo:block>
-								</fo:block-container>
+								<fo:inline>
+									<fo:instream-foreign-object>
+										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="90">
+											<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
+											<barcode:code128>
+												<barcode:height>8mm</barcode:height>
+												<barcode:human-readable>
+													<barcode:placement>none</barcode:placement>
+												</barcode:human-readable>
+											</barcode:code128>
+										</barcode:barcode>
+									</fo:instream-foreign-object>
+									<fo:block-container reference-orientation="90" margin-left="5mm">
+										<fo:block text-align="left" font-size="8pt">${idQuestionnaire} - <fo:page-number/></fo:block>
+									</fo:block-container>
+								</fo:inline>
+								
 							</fo:block>
 						</fo:static-content>
 						<fo:static-content flow-name="portrait-region-after">
@@ -245,9 +250,6 @@
 									</fo:instream-foreign-object>
 								</fo:block>
 							</fo:block-container>
-							<fo:block-container absolute-position="absolute" right="20mm" top="20mm">
-								<fo:block text-align="right" font-size="8pt">${idQuestionnaire} - <fo:page-number/></fo:block>
-							</fo:block-container>
 						</fo:static-content>
 						<fo:static-content flow-name="landscape-region-before-even">
 							<fo:block position="absolute" margin="10mm" text-align="right">
@@ -280,8 +282,23 @@
 							<fo:block text-align="center">
 								<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
 							</fo:block>
-							<fo:block-container absolute-position="absolute" right="20mm" top="20mm">
-								<fo:block text-align="right" font-size="8pt">${idQuestionnaire} - <fo:page-number/>
+						</fo:static-content>
+						<fo:static-content flow-name="landscape-region-end">
+							<fo:block-container absolute-position="absolute" right="100mm" top="0mm">
+								<!--<fo:block text-align="right" font-size="8pt">${idQuestionnaire} - <fo:page-number/>
+								</fo:block>-->
+								<fo:block background-color="yellow">
+									<fo:instream-foreign-object>
+										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="-90">
+											<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
+											<barcode:code128>
+												<barcode:height>10px</barcode:height>
+												<barcode:human-readable>
+													<barcode:placement>bottom</barcode:placement>
+												</barcode:human-readable>
+											</barcode:code128>
+										</barcode:barcode>
+									</fo:instream-foreign-object>
 								</fo:block>
 							</fo:block-container>
 						</fo:static-content>
