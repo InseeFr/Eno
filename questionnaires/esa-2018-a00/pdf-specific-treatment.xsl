@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fo="http://www.w3.org/1999/XSL/Format"
     xmlns:barcode="http://barcode4j.krysalis.org/ns"
     exclude-result-prefixes="xs"
     version="2.0">
-    
+
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
-    
+
     <xsl:variable name="lines-per-page" select="12" as="xs:integer"/>
-    
+
     <xsl:variable name="dynamic_arrays" as="node()">
         <Arrays>
             <Array nbcol="4">vacT</Array>
@@ -41,7 +41,7 @@
             <Array nbcol="3">VFV2_MB</Array>
         </Arrays>
     </xsl:variable>
-    
+
     <xsl:variable name="table" as="node()">
         <Tables>
             <Table id="CLIENTELE" col="3+1">
@@ -50,7 +50,7 @@
                 <trois>90</trois>
                 <quatre>30</quatre>
             </Table>
-            
+
             <Table id="BTPNAT" col="2+2">
                 <un>30</un>
                 <deux>100</deux>
@@ -63,7 +63,7 @@
                 <trois>45</trois>
                 <quatre>45</quatre>
             </Table>
-            
+
             <Table id="NAT_FINANC" col="2+1">
                 <un>50</un>
                 <deux>120</deux>
@@ -99,7 +99,7 @@
                 <deux>120</deux>
                 <trois>45</trois>
             </Table>
-            
+
             <Table id="VENTIL_RCH" col="1+1">
                 <un>100</un>
                 <deux>45</deux>
@@ -148,10 +148,10 @@
                 <un>90</un>
                 <deux>65</deux>
             </Table>
-            
+
         </Tables>
     </xsl:variable>
-    
+
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
             <xd:p>Template de racine, on applique les templates de tous les enfants</xd:p>
@@ -160,7 +160,7 @@
     <xsl:template match="/">
         <xsl:apply-templates select="*"/>
     </xsl:template>
-    
+
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
             <xd:p>Template de base pour tous les éléments et tous les attributs, on recopie
@@ -190,14 +190,14 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="fo:table-cell" mode="table">
         <xsl:param name="table-name" tunnel="yes"/>
-        
+
         <xsl:variable name="table-carac" as="node()">
             <xsl:copy-of select="$table//Table[@id=$table-name]"/>
         </xsl:variable>
-        
+
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="width">
@@ -275,11 +275,11 @@
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="fo:block[contains(@id,'-')]">
         <xsl:variable name="roster-name" select="substring-before(@id,'-')"/>
         <xsl:variable name="page-number" select="substring-after(@id,'-')"/>
-        
+
         <xsl:choose>
             <xsl:when test="$dynamic_arrays//Array/text() = $roster-name">
                 <xsl:if test="$page-number != '1'">
@@ -312,7 +312,7 @@
                 </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-   
+
     <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[1]" mode="roster">
         <xsl:param name="nbcol" tunnel="yes"/>
         <xsl:copy>
@@ -342,7 +342,7 @@
             <xsl:apply-templates select="node()" mode="roster"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="fo:table-header/fo:table-row/fo:table-cell[4]" mode="roster">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
@@ -350,11 +350,11 @@
             <xsl:apply-templates select="node()" mode="roster"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="fo:table-body/fo:table-row" mode="roster">
         <xsl:param name="roster-name" tunnel="yes"/>
         <xsl:param name="page" tunnel="yes"/>
-        
+
         <xsl:variable name="line-number" as="xs:integer">
             <xsl:choose>
                 <xsl:when test="$page = '1'">
@@ -365,7 +365,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        
+
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="height" select="'11mm'"/>
@@ -374,42 +374,42 @@
             </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
-    
-    
+
+
     <xsl:template match="fo:table-body/fo:table-row/fo:table-cell[1]" mode="roster">
         <xsl:param name="roster-name" tunnel="yes"/>
         <xsl:param name="line-number" as="xs:integer" tunnel="yes"/>
-        
+
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB})')"/>
             <xsl:value-of select="'&lt;fo:block'"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre0'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre1'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre2'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre0'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre1'') || 
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre0'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre1'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre2'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre0'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre1'') ||
                 $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre2'')
                 ) font-weight=&quot;bold&quot;#{end}')"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''ventilation0'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''ventilation1'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''ventilation2'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre0'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre1'') || 
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''ventilation0'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''ventilation1'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''ventilation2'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre0'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre1'') ||
                 $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre2'')
             ) font-style=&quot;italic&quot;#{end}')"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''code1'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre1'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre1'') || 
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''code1'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre1'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre1'') ||
                 $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''ventilation1'')
                 ) text-indent=&quot;2em&quot;#{end}')"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''code2'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre2'') || 
-                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre2'') || 
+            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''code2'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre2'') ||
+                $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre2'') ||
                 $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''ventilation2'')
                 ) text-indent=&quot;4em&quot;#{end}')"/>
             <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq ''code3'') text-indent=&quot;6em&quot;#{end}')"/>
-            
+
             <xsl:value-of select="'&gt;'"/>
             <xsl:value-of select="concat('$!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB}')"/>
             <xsl:value-of select="'&lt;/fo:block&gt;'"/>
@@ -422,7 +422,7 @@
     <xsl:template match="fo:table-body/fo:table-row/fo:table-cell[2]" mode="roster">
         <xsl:param name="roster-name" tunnel="yes"/>
         <xsl:param name="line-number" as="xs:integer" tunnel="yes"/>
-        
+
         <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_CO})')"/>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
@@ -442,7 +442,7 @@
     <xsl:template match="fo:table-body/fo:table-row/fo:table-cell[3]" mode="roster">
         <xsl:param name="roster-name" tunnel="yes"/>
         <xsl:param name="line-number" as="xs:integer" tunnel="yes"/>
-        
+
         <xsl:value-of select="concat('#{if}(!$!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB} or $!{',$roster-name,'-',$line-number,'-',$roster-name,'_MO})')"/>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
@@ -453,7 +453,7 @@
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="background-color" select="'#CCCCCC'"/>
             <xsl:element name="fo:block"/>
-        </xsl:copy>        
+        </xsl:copy>
         <xsl:value-of select="'#{end}'"/>
     </xsl:template>
 
@@ -471,26 +471,27 @@
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="background-color" select="'#CCCCCC'"/>
             <xsl:element name="fo:block"/>
-        </xsl:copy>        
+        </xsl:copy>
         <xsl:value-of select="'#{end}'"/>
     </xsl:template>
-    
+
     <xsl:template match="fo:block-container[@height='24mm']" mode="roster">
         <xsl:copy>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="barcode:barcode/@message">
         <xsl:attribute name="message">
-            <xsl:value-of select="."/>
-            <xsl:if test="contains(.,'idQuestionnaire')">
-                <xsl:value-of select="' - #page-id#'"/>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="contains(.,'idQuestionnaire')">
+                    <xsl:value-of select="replace(.,'\{idQuestionnaire\}','{idQuestionnaire}-#page-id#')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="."/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:attribute>
     </xsl:template>
 
-    <xsl:template match="barcode:placement">
-        <xsl:copy>bottom</xsl:copy>
-    </xsl:template>
 </xsl:stylesheet>

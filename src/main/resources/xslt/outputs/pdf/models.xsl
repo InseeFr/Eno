@@ -149,7 +149,8 @@
 							<fo:region-body margin="13mm" column-count="{$column-count}"/>
 							<fo:region-before region-name="landscape-region-before-odd" extent="25mm" display-align="before" precedence="true"/>
 							<fo:region-after region-name="landscape-region-after-odd" extent="25mm" display-align="before" precedence="true"/>
-							<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before" precedence="true"/>
+							<fo:region-start region-name="landscape-region-start" extent="10mm" display-align="before"/>
+							<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before"/>
 						</fo:simple-page-master>
 						<fo:simple-page-master master-name="A4-landscape-even" page-height="297mm"
 							page-width="210mm" font-family="Arial" font-size="10pt" reference-orientation="{$orientation}"
@@ -157,7 +158,8 @@
 							<fo:region-body margin="13mm" column-count="{$column-count}"/>
 							<fo:region-before region-name="landscape-region-before-even" extent="25mm" display-align="before" precedence="true"/>
 							<fo:region-after region-name="landscape-region-after-even" extent="25mm" display-align="before" precedence="true"/>
-							<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before" precedence="true"/>
+							<fo:region-start region-name="landscape-region-start" extent="10mm" display-align="before"/>
+							<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before"/>
 						</fo:simple-page-master>						
 					</xsl:otherwise>
 				</xsl:choose>
@@ -191,7 +193,7 @@
 								<fo:inline>
 									<fo:instream-foreign-object>
 										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="90">
-											<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
+											<xsl:attribute name="message" select="'${idQuestionnaire}-#page-number#'"/>
 											<barcode:code128>
 												<barcode:height>8mm</barcode:height>
 												<barcode:human-readable>
@@ -201,14 +203,14 @@
 										</barcode:barcode>
 									</fo:instream-foreign-object>
 									<fo:block-container reference-orientation="90" margin-left="5mm">
-										<fo:block text-align="left" font-size="8pt">${idQuestionnaire} - <fo:page-number/></fo:block>
+										<fo:block text-align="left" font-size="8pt">${idQuestionnaire}-<fo:page-number/></fo:block>
 									</fo:block-container>
 								</fo:inline>
 								
 							</fo:block>
 						</fo:static-content>
 						<fo:static-content flow-name="portrait-region-after">
-							<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0px" text-align="left">
+							<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0mm" text-align="left">
 								<xsl:call-template name="insert-image">
 									<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
 								</xsl:call-template>
@@ -227,7 +229,7 @@
 							</fo:block>
 						</fo:static-content>
 						<fo:static-content flow-name="landscape-region-after-odd">
-							<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0px" text-align="left">
+							<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0mm" text-align="left">
 								<xsl:call-template name="insert-image">
 									<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
 								</xsl:call-template>
@@ -235,15 +237,15 @@
 							<fo:block text-align="center">
 								<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
 							</fo:block>
-							<fo:block-container text-align="left" absolute-position="absolute" left="200mm" top="15mm">
+							<fo:block-container text-align="left" absolute-position="absolute" left="220mm" top="10mm">
 								<fo:block>
 									<fo:instream-foreign-object>
 										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns">
-											<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
+											<xsl:attribute name="message" select="'${idQuestionnaire}-#page-number#'"/>
 											<barcode:code128>
 												<barcode:height>8mm</barcode:height>
 												<barcode:human-readable>
-													<barcode:placement>none</barcode:placement>
+													<barcode:placement>top</barcode:placement>
 												</barcode:human-readable>
 											</barcode:code128>
 										</barcode:barcode>
@@ -252,29 +254,29 @@
 							</fo:block-container>
 						</fo:static-content>
 						<fo:static-content flow-name="landscape-region-before-even">
-							<fo:block position="absolute" margin="10mm" text-align="right">
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
-								</xsl:call-template>
-							</fo:block>
-							<fo:block-container text-align="left" absolute-position="absolute" left="200mm" top="5mm">
+							<fo:block-container text-align="left" absolute-position="absolute" left="220mm" top="5mm">
 								<fo:block>
 									<fo:instream-foreign-object>
 										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns">
-											<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
+											<xsl:attribute name="message" select="'${idQuestionnaire}-#page-number#'"/>
 											<barcode:code128>
 												<barcode:height>8mm</barcode:height>
 												<barcode:human-readable>
-													<barcode:placement>none</barcode:placement>
+													<barcode:placement>bottom</barcode:placement>
 												</barcode:human-readable>
 											</barcode:code128>
 										</barcode:barcode>
 									</fo:instream-foreign-object>
 								</fo:block>
 							</fo:block-container>
+							<fo:block position="absolute" margin="10mm" text-align="right">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
+								</xsl:call-template>
+							</fo:block>
 						</fo:static-content>
 						<fo:static-content flow-name="landscape-region-after-even">
-							<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0px" text-align="left">
+							<fo:block position="absolute" margin-left="10mm" margin-top="10mm" bottom="0mm" text-align="left">
 								<xsl:call-template name="insert-image">
 									<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
 								</xsl:call-template>
@@ -283,16 +285,31 @@
 								<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
 							</fo:block>
 						</fo:static-content>
-						<fo:static-content flow-name="landscape-region-end">
-							<fo:block-container absolute-position="absolute" right="100mm" top="0mm">
-								<!--<fo:block text-align="right" font-size="8pt">${idQuestionnaire} - <fo:page-number/>
-								</fo:block>-->
-								<fo:block background-color="yellow">
+						<fo:static-content flow-name="landscape-region-start">
+							<fo:block-container absolute-position="absolute" left="0mm" top="100mm">
+								<fo:block>
 									<fo:instream-foreign-object>
 										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="-90">
-											<xsl:attribute name="message" select="'${idQuestionnaire} - #page-number#'"/>
+											<xsl:attribute name="message" select="'${idQuestionnaire}-#page-number#'"/>
 											<barcode:code128>
-												<barcode:height>10px</barcode:height>
+												<barcode:height>8mm</barcode:height>
+												<barcode:human-readable>
+													<barcode:placement>top</barcode:placement>
+												</barcode:human-readable>
+											</barcode:code128>
+										</barcode:barcode>
+									</fo:instream-foreign-object>
+								</fo:block>
+							</fo:block-container>
+						</fo:static-content>
+						<fo:static-content flow-name="landscape-region-end">
+							<fo:block-container absolute-position="absolute" left="0mm" top="100mm">
+								<fo:block>
+									<fo:instream-foreign-object>
+										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="-90">
+											<xsl:attribute name="message" select="'${idQuestionnaire}-#page-number#'"/>
+											<barcode:code128>
+												<barcode:height>8mm</barcode:height>
 												<barcode:human-readable>
 													<barcode:placement>bottom</barcode:placement>
 												</barcode:human-readable>
@@ -506,8 +523,8 @@
 				<fo:block>
 					<xsl:if test="$isTable = 'YES'">
 						<xsl:attribute name="text-align">right</xsl:attribute>
-						<xsl:attribute name="padding-top">0px</xsl:attribute>
-						<xsl:attribute name="padding-bottom">0px</xsl:attribute>
+						<xsl:attribute name="padding-top">0mm</xsl:attribute>
+						<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
 					</xsl:if>
 					<fo:block xsl:use-attribute-sets="general-style" padding-bottom="0mm" padding-top="0mm">
 						<xsl:choose>
@@ -560,8 +577,8 @@
 				<fo:block xsl:use-attribute-sets="general-style">
 					<xsl:if test="$isTable = 'YES'">
 						<xsl:attribute name="text-align">right</xsl:attribute>
-						<xsl:attribute name="padding-top">0px</xsl:attribute>
-						<xsl:attribute name="padding-bottom">0px</xsl:attribute>
+						<xsl:attribute name="padding-top">0mm</xsl:attribute>
+						<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
 					</xsl:if>
 					<xsl:call-template name="insert-image">
 						<xsl:with-param name="image-name" select="'date.png'"/>
