@@ -44,9 +44,8 @@
 		<xslt in="${input-file}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
 			style="${xslt.home}/util/pdf/mailing-vtl.xsl"
-			force="true" classpath="${saxon.jar}">
-			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
-		</xslt>		
+			force="true" classpath="${saxon.jar}"/>
+
 		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/specific-form.${out-extension}"
 			style="${root-folder}/questionnaires/${survey-name}/pdf-specific-treatment.xsl" force="true"

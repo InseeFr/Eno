@@ -1635,7 +1635,7 @@
             <fo:block-container text-align="left" absolute-position="absolute" left="200mm" top="15mm">
                 <fo:block>
                     <fo:instream-foreign-object>
-                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" message="${idQuestionnaire} - 1">
+                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" message="${idQuestionnaire}-1">
                             <barcode:code128>
                                 <barcode:height>8mm</barcode:height>
                                 <barcode:human-readable>
@@ -1647,7 +1647,7 @@
                 </fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute" right="20mm" top="20mm">
-                <fo:block text-align="right" font-size="8pt">${idQuestionnaire} - 1</fo:block>
+                <fo:block text-align="right" font-size="8pt">${idQuestionnaire}-1</fo:block>
             </fo:block-container>
         </fo:static-content>
         <fo:flow flow-name="xsl-region-body">
