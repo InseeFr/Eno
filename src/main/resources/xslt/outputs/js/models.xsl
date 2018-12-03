@@ -775,6 +775,14 @@
 		</xsl:choose>		
 	</xsl:template>
 	
+	<xsl:template name="enojs:addVariableCollected">
+		<xsl:param name="responseName"/>
+		<xsl:param name="responseRef"/>
+		<variable>
+			<name><xsl:value-of select="$responseName"/></name>
+			<responseRef><xsl:value-of select="$responseRef"/></responseRef>
+		</variable>
+	</xsl:template>
 	
 	
 </xsl:stylesheet>
