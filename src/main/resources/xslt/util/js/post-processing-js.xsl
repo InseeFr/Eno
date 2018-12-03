@@ -227,4 +227,56 @@
             </xsl:otherwise>
         </xsl:choose>	
     </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Recursive template named "enojs:findVariableInFormula"</xd:p>
+            <xd:p>This template research in a formula (or in a value of variable in this case) dependencies with other variables</xd:p>
+            <xd:p>It returns sequence of variables found (with the name and the value of these variables)</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template name="enojs:findVariableInFormula">
+        <xsl:param name="formula" as="xs:string"/>
+        <xsl:if test="contains($formula,'$')">
+            <xsl:variable name="nameOfVariable" select="substring-before(substring-after($formula,'$'),'$')" as="xs:string"/>
+            <variable>
+                <name><xsl:value-of select="$nameOfVariable"/></name>
+                <value><xsl:value-of select="//Questionnaire/descendant::variable[name=$nameOfVariable]/value"/></value>
+            </variable>
+            
+            <xsl:variable name="endOfFormula" select="substring-after(substring-after($formula,'$'),'$')"/>
+            <xsl:call-template name="enojs:findVariableInFormula">
+                <xsl:with-param name="formula" select="$endOfFormula"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:function name="enojs:addArgumentsInFormula">
+        <xsl:param name="newArguments" as="node()*"/>
+        <xsl:param name="oldArguments" as="xs:string"/>
+        <xsl:param name="currentVar" as="node()"/>
+        <xsl:variable name="oldArguments2">
+            <xsl:choose>
+                <xsl:when test="$currentVar/value!=''">
+                    <!-- delete calculated variable and ',,'-->
+                    <xsl:value-of select="replace(replace($oldArguments,$currentVar/name,''),',,',',')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$oldArguments"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="argumentList" as="xs:string*">
+            <xsl:for-each select="$newArguments">
+                <xsl:value-of select="child::name"/>
+            </xsl:for-each>
+            <xsl:for-each select="distinct-values(tokenize($oldArguments2,','))">
+                <xsl:value-of select="."/>
+            </xsl:for-each>
+        </xsl:variable>
+        <!-- delete ',' and concat all variable : ex (var1,var2) -->
+        <xsl:value-of select="replace(concat('(',string-join(distinct-values($argumentList),','),')'),',\s*\)',')')"/>
+    </xsl:function>
+    
+    
 </xsl:stylesheet>
