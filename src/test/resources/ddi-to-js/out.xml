@@ -1,223 +1,481 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Questionnaire xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Sequence-i6vwid">
+<Questionnaire xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="i6vwid">
    <label>Questionnaire SIMPSONS</label>
-   <components>
-      <component xsi:type="Sequence" id="j6p0ti5h">
-         <label>I - Introduction</label>
-         <declaration declarationType="comment"
-                      id="j6p0ti5h-d1"
-                      position="AFTER_QUESTION_TEXT">
-            <label>We're going to test your knowledge about the simpsons series.Welcome in the simspons world!</label>
-         </declaration>
-         <component xsi:type="Textarea"
-                    id="j6p3dkx6"
-                    response="comment"
-                    maxLength="500">
+   <component xsi:type="Sequence" id="j6p0ti5h" page="1">
+      <label>I - Introduction</label>
+      <declaration declarationType="comment"
+                   id="j6p0ti5h-d1"
+                   position="AFTER_QUESTION_TEXT">
+         <label>We're going to test your knowledge about the simpsons series.Welcome in the simspons world!</label>
+      </declaration>
+      <conditionFilter>() =&gt; true ? 'normal' : ''</conditionFilter>
+      <component xsi:type="Textarea" id="j6p3dkx6" maxLength="500" page="1">
             <label>➡ 1. Before starting, do you have any comments about the Simpsons family?</label>
+            <response name="COMMENT">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </response>
+            <conditionFilter>() =&gt; true ? 'normal' : ''</conditionFilter>
          </component>
-         <component xsi:type="CheckboxBoolean" id="j6p0np9q" response="ready">
+      <component xsi:type="CheckboxBoolean" id="j6p0np9q" page="1">
             <label>➡ 2. Are you ready?</label>
+            <response name="READY">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </response>
+            <conditionFilter>() =&gt; true ? 'normal' : ''</conditionFilter>
          </component>
-         <component xsi:type="Subsequence" id="j6p0s7o5">
-            <label>General knowledge of the series</label>
-            <component xsi:type="Input"
-                       id="j3343qhx"
-                       response="producer"
-                       maxLength="30">
+      <component xsi:type="Subsequence" id="j6p0s7o5" page="1">
+         <label>General knowledge of the series</label>
+         <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
+         <component xsi:type="Input" id="j3343qhx" maxLength="30" page="1">
                <label>➡ 3. Who is the producer?</label>
+               <response name="PRODUCER">
+               <valueState type="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState type="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState type="FORCED">
+                  <value/>
+               </valueState>
+               <valueState type="EDITED">
+                  <value/>
+               </valueState>
+               <valueState type="INPUTED">
+                  <value/>
+               </valueState>
+            </response>
+               <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
             </component>
-            <component xsi:type="InputNumber"
-                       id="j6q9h8tj"
-                       response="season_number"
-                       min="0"
-                       max="99"
-                       decimals="">
-               <label>➡ 4. What is the current season number?</label>
-            </component>
-            <component xsi:type="Datepicker" id="j334cyqb" response="datefirst">
+         <component xsi:type="InputNumber"
+                    id="j6q9h8tj"
+                    min="0"
+                    max="99"
+                    decimals="0"
+                    page="1">
+            <label>➡ 4. What is the current season number?</label>
+            <unit/>
+            <response name="SEASON_NUMBER">
+               <valueState type="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState type="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState type="FORCED">
+                  <value/>
+               </valueState>
+               <valueState type="EDITED">
+                  <value/>
+               </valueState>
+               <valueState type="INPUTED">
+                  <value/>
+               </valueState>
+            </response>
+            <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
+         </component>
+         <component xsi:type="Datepicker" id="j334cyqb" page="1">
                <label>➡ 5. When was the first episode of the Simpsons?</label>
-               <declarations>
+               
                   <declaration declarationType="comment"
-                               id="j334cyqb-d11"
-                               position="AFTER_QUESTION_TEXT">
-                     <label>For your information, the date of the last broadcast was on
+                         id="j334cyqb-d11"
+                         position="AFTER_QUESTION_TEXT">
+               <label>For your information, the date of the last broadcast was on
 						øLAST_BROADCASTø</label>
-                  </declaration>
-               </declarations>
+            </declaration>
+               
+               <response name="DATEFIRST">
+               <valueState type="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState type="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState type="FORCED">
+                  <value/>
+               </valueState>
+               <valueState type="EDITED">
+                  <value/>
+               </valueState>
+               <valueState type="INPUTED">
+                  <value/>
+               </valueState>
+            </response>
+               <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
             </component>
-            <component xsi:type="InputNumber"
-                       id="j6z06z1e"
-                       response="audience_share"
-                       min="0.0"
-                       max="99.0"
-                       decimals="1">
-               <label>➡ 6. In your opinion, how much is the part of audience share in US for the 2016
+         <component xsi:type="InputNumber"
+                    id="j6z06z1e"
+                    min="0.0"
+                    max="99.0"
+                    decimals="1"
+                    page="1">
+            <label>➡ 6. In your opinion, how much is the part of audience share in US for the 2016
 					season? </label>
-            </component>
+            <unit/>
+            <response name="AUDIENCE_SHARE">
+               <valueState type="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState type="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState type="FORCED">
+                  <value/>
+               </valueState>
+               <valueState type="EDITED">
+                  <value/>
+               </valueState>
+               <valueState type="INPUTED">
+                  <value/>
+               </valueState>
+            </response>
+            <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
          </component>
       </component>
-      <component xsi:type="Sequence" id="j3341528">
-         <label>II - Simpsons' city</label>
-         <declaration declarationType="comment"
-                      id="j3341528-d2"
+   </component>
+   <component xsi:type="Sequence" id="j3341528" page="2">
+      <label>II - Simpsons' city</label>
+      <declaration declarationType="comment"
+                   id="j3341528-d2"
+                   position="AFTER_QUESTION_TEXT">
+         <label>This module asks about your general knowledge of the Simpsons city</label>
+      </declaration>
+      <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
+      <component xsi:type="Radio" id="j3343clt" toValidate="" page="2">
+         <label>➡ 1. In which city do the Simpsons reside?</label>
+         <declaration declarationType="instruction"
+                      id="j3343clt-d3"
                       position="AFTER_QUESTION_TEXT">
-            <label>This module asks about your general knowledge of the Simpsons city</label>
+            <label>One possible answer</label>
          </declaration>
-         <component xsi:type="Radio" id="j3343clt" response="city">
-            <label>➡ 1. In which city do the Simpsons reside?</label>
-            <declaration declarationType="instruction"
-                         id="j3343clt-d3"
-                         position="AFTER_QUESTION_TEXT">
-               <label>One possible answer</label>
-            </declaration>
-            <codeLists id="j334iumu">
+         <codeLists xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+                    xmlns:eno="http://xml.insee.fr/apps/eno"
+                    xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
+                    xmlns:enoodt="http://xml.insee.fr/apps/eno/out/odt"
+                    xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
+                    xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
+                    xmlns:d="ddi:datacollection:3_2"
+                    xmlns:r="ddi:reusable:3_2"
+                    xmlns:l="ddi:logicalproduct:3_2"
+                    id="j334iumu">
                <label>TOWN</label>
-               <Code>
+               <code>
                   <parent/>
                   <value>00001</value>
                   <label>Springfield</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>00002</value>
                   <label>Shelbyville</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>00003</value>
                   <label>Seinfeld</label>
-               </Code>
+               </code>
             </codeLists>
-         </component>
-         <component xsi:type="CheckboxOne" id="j6qdfhvw" response="mayor">
-            <label>➡ 2. Who is the Simpsons city mayor?</label>
-            <declaration declarationType="instruction"
-                         id="j6qdfhvw-d4"
-                         position="AFTER_QUESTION_TEXT">
-               <label>Only one possible answer</label>
-            </declaration>
-            <codeLists id="j6qdqoen">
+         <response name="CITY">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </response>
+         <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
+      </component>
+      <component xsi:type="CheckboxOne" id="j6qdfhvw" toValidate="" page="2">
+         <label>➡ 2. Who is the Simpsons city mayor?</label>
+         <declaration declarationType="instruction"
+                      id="j6qdfhvw-d4"
+                      position="AFTER_QUESTION_TEXT">
+            <label>Only one possible answer</label>
+         </declaration>
+         <codeLists xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+                    xmlns:eno="http://xml.insee.fr/apps/eno"
+                    xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
+                    xmlns:enoodt="http://xml.insee.fr/apps/eno/out/odt"
+                    xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
+                    xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
+                    xmlns:d="ddi:datacollection:3_2"
+                    xmlns:r="ddi:reusable:3_2"
+                    xmlns:l="ddi:logicalproduct:3_2"
+                    id="j6qdqoen">
                <label>MAYOR</label>
-               <Code>
+               <code>
                   <parent/>
                   <value>1</value>
                   <label>Constance Harm</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>2</value>
                   <label>Timothy Lovejoy</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>3</value>
                   <label>Joe Quimby</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>4</value>
                   <label>Poochie</label>
-               </Code>
+               </code>
             </codeLists>
-         </component>
-         <component xsi:type="Dropdown" id="j4nw5cqz" response="state">
-            <label>➡ 3. In which state do The Simpsons reside?</label>
-            <codeLists id="j4nwo00f">
+         <response name="MAYOR">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </response>
+         <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
+      </component>
+      <component xsi:type="Dropdown" id="j4nw5cqz" toValidate="" page="2">
+         <label>➡ 3. In which state do The Simpsons reside?</label>
+         <codeLists xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+                    xmlns:eno="http://xml.insee.fr/apps/eno"
+                    xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
+                    xmlns:enoodt="http://xml.insee.fr/apps/eno/out/odt"
+                    xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
+                    xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
+                    xmlns:d="ddi:datacollection:3_2"
+                    xmlns:r="ddi:reusable:3_2"
+                    xmlns:l="ddi:logicalproduct:3_2"
+                    id="j4nwo00f">
                <label>State</label>
-               <Code>
+               <code>
                   <parent/>
                   <value>1</value>
                   <label>Washington</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>2</value>
                   <label>Kentucky</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>3</value>
                   <label>Ohio</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>4</value>
                   <label>Maine</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>5</value>
                   <label>North Dakota</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>6</value>
                   <label>Florida</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>7</value>
                   <label>North Takoma</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>8</value>
                   <label>California</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>9</value>
                   <label>Texas</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>10</value>
                   <label>Massachusetts</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>11</value>
                   <label>Nevada</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>12</value>
                   <label>Illinois</label>
-               </Code>
-               <Code>
+               </code>
+               <code>
                   <parent/>
                   <value>13</value>
                   <label>Not in any state, you fool!</label>
-               </Code>
+               </code>
             </codeLists>
-         </component>
+         <response name="STATE">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </response>
+         <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
       </component>
-      <component xsi:type="Sequence" id="j6qe0h9q">
-         <label>III - Characters</label>
+   </component>
+   <component xsi:type="Sequence" id="j6qe0h9q" page="3">
+      <label>III - Characters</label>
+      <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
+   </component>
+   <component xsi:type="Sequence" id="j4nw88h2" page="4">
+      <label>IV - General questions</label>
+      <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
+      <component xsi:type="Subsequence" id="j6qe237q" page="4">
+         <label>Kwik-E-Mart</label>
+         <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
       </component>
-      <component xsi:type="Sequence" id="j4nw88h2">
-         <label>IV - General questions</label>
-         <component xsi:type="Subsequence" id="j6qe237q">
-            <label>Kwik-E-Mart</label>
-         </component>
-         <component xsi:type="Subsequence" id="j6qejudb">
-            <label>Clowning</label>
-         </component>
-         <component xsi:type="Subsequence" id="j6qeh91y">
-            <label>Transport</label>
-         </component>
+      <component xsi:type="Subsequence" id="j6qejudb" page="4">
+         <label>Clowning</label>
+         <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
       </component>
-      <component xsi:type="Sequence" id="j6qfx9qe">
-         <label>V - Favourite characters</label>
+      <component xsi:type="Subsequence" id="j6qeh91y" page="4">
+         <label>Transport</label>
+         <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
       </component>
-      <component xsi:type="Sequence" id="j6z12s2d">
-         <label>VI - Comment</label>
-         <component xsi:type="Textarea"
-                    id="j6z0z3us"
-                    response="survey_comment"
-                    maxLength="255">
+   </component>
+   <component xsi:type="Sequence" id="j6qfx9qe" page="5">
+      <label>V - Favourite characters</label>
+      <conditionFilter>(READY) =&gt;(!( READY !== '1')) ? 'normal' : 'hidden'</conditionFilter>
+   </component>
+   <component xsi:type="Sequence" id="j6z12s2d" page="6">
+      <label>VI - Comment</label>
+      <conditionFilter>() =&gt; true ? 'normal' : ''</conditionFilter>
+      <component xsi:type="Textarea" id="j6z0z3us" maxLength="255" page="6">
             <label>➡ 1. Do you have any comment about the survey?</label>
+            <response name="SURVEY_COMMENT">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </response>
+            <conditionFilter>() =&gt; true ? 'normal' : ''</conditionFilter>
          </component>
-      </component>
-   </components>
+   </component>
+   <variable>
+      <name>COMMENT</name>
+      <responseRef>COMMENT</responseRef>
+   </variable>
+   <variable>
+      <name>READY</name>
+      <responseRef>READY</responseRef>
+   </variable>
+   <variable>
+      <name>PRODUCER</name>
+      <responseRef>PRODUCER</responseRef>
+   </variable>
+   <variable>
+      <name>SEASON_NUMBER</name>
+      <responseRef>SEASON_NUMBER</responseRef>
+   </variable>
+   <variable>
+      <name>DATEFIRST</name>
+      <responseRef>DATEFIRST</responseRef>
+   </variable>
+   <variable>
+      <name>AUDIENCE_SHARE</name>
+      <responseRef>AUDIENCE_SHARE</responseRef>
+   </variable>
+   <variable>
+      <name>CITY</name>
+      <responseRef>CITY</responseRef>
+   </variable>
+   <variable>
+      <name>MAYOR</name>
+      <responseRef>MAYOR</responseRef>
+   </variable>
+   <variable>
+      <name>STATE</name>
+      <responseRef>STATE</responseRef>
+   </variable>
+   <variable>
+      <name>SURVEY_COMMENT</name>
+      <responseRef>SURVEY_COMMENT</responseRef>
+   </variable>
+   <variable>
+      <name>SUM_EXPENSES</name>
+      <value>$PERCENTAGE_EXPENSES11$ + $PERCENTAGE_EXPENSES21$ + $PERCENTAGE_EXPENSES31$ +
+				$PERCENTAGE_EXPENSES41$ + $PERCENTAGE_EXPENSES51$ + $PERCENTAGE_EXPENSES61$ +
+				$PERCENTAGE_EXPENSES71$ + $PERCENTAGE_EXPENSES81$ + $PERCENTAGE_EXPENSES91$ +
+				$PERCENTAGE_EXPENSES101$ </value>
+   </variable>
+   <variable>
+      <name>LAST_BROADCAST</name>
+   </variable>
 </Questionnaire>
