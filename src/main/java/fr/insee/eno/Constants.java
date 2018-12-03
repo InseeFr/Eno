@@ -290,7 +290,7 @@ public final class Constants {
 	public static final String FINAL_PDF_EXTENSION = "-final-out.fo";
 	//public static final String CUSTOM_FO_EXTENSION = "-out.fo";
 	public static final String MAILING_FO_EXTENSION = "-1-mailing-vtl.fo";
-	public static final String POST_PROCESSING_JS_EXTENSION = "-temp.xml";
+	public static final String POST_PROCESSING_JS_EXTENSION = "-final.xml";
 	//public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
 		public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
 			return sUB_TEMP_FOLDER + "/xforms";
