@@ -28,7 +28,7 @@ public class JSAddVariableReferencePostprocessor implements Postprocessor {
 				FilenameUtils.removeExtension(input.getPath()) + Constants.POST_PROCESSING_JS_EXTENSION);
 		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_POST_PROCESSING_JS);
 
-		saxonService.transformFOToStep1FO(FileUtils.openInputStream(input),
+		saxonService.transformJSToJSPost(FileUtils.openInputStream(input),
 				FileUtils.openOutputStream(outputCustomFOFile), JS_XSL);
 		JS_XSL.close();
 		logger.info("End JS post-processing");

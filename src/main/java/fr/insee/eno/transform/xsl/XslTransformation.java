@@ -381,5 +381,15 @@ public class XslTransformation {
 			parametersIS.close();
 		}
 	}
+	
+	public void transformJSToJSPost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
+			throws Exception {
+		logger.info("Post-processing for JS transformation");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		xslTransform(transformer, inputFile, outputFile);
+	}
 
 }
