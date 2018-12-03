@@ -126,11 +126,13 @@ public final class Constants {
 	
 	public static final String OUPUTS_FOLDER = "/xslt/outputs/pdf";
 	public static final String OUPUTS_FOLDER_2 = "/xslt/util/pdf";
+	public static final String OUPUTS_FOLDER_JS = "/xslt/util/js";
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF =  OUPUTS_FOLDER + "/publipostage.xsl";
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2 =  OUPUTS_FOLDER_2 + "/mailing-vtl.xsl";
 	public static final String TRANSFORMATIONS_SPECIF_TREATMENT_FO_4PDF =  "/pdf-specific-treatment.xsl";
 	public static final String TRANSFORMATIONS_GENERIC_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-generic-pages.xsl";
 	public static final String STATIC_PAGES = OUPUTS_FOLDER_2 +"/static-pages.fo";
+	public static final String TRANSFORMATIONS_POST_PROCESSING_JS = OUPUTS_FOLDER_JS + "/post-processing-js.xsl";
 	// ---------- Temporary file system
 	
 	// ----- Folders
@@ -288,6 +290,7 @@ public final class Constants {
 	public static final String FINAL_PDF_EXTENSION = "-final-out.fo";
 	//public static final String CUSTOM_FO_EXTENSION = "-out.fo";
 	public static final String MAILING_FO_EXTENSION = "-1-mailing-vtl.fo";
+	public static final String POST_PROCESSING_JS_EXTENSION = "-temp.xml";
 	//public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
 		public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
 			return sUB_TEMP_FOLDER + "/xforms";
