@@ -413,7 +413,7 @@
                         <xsl:if test="$instance-ancestor != ''">
                             <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
                         </xsl:if>
-                        <xsl:if test="enofr:get-readonly-ancestors($source-context) != ''">
+                        <xsl:if test="self::ConsistencyCheck and enofr:get-readonly-ancestors($source-context) != ''">
                             <xsl:variable name="initial-readonly-ancestors">
                                 <xsl:for-each select="enofr:get-readonly-ancestors($source-context)">
                                     <xsl:value-of select="concat('not(',.,') or ')"/>

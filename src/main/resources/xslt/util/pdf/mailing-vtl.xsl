@@ -11,22 +11,6 @@
 
 	<xd:doc>
 		<xd:desc>
-			<xd:p>The FO/PDF properties file path.</xd:p>
-			<xd:p>Injected by the xsl transformation.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:param name="properties-file"/>
-
-	<xd:doc>
-		<xd:desc>
-			<xd:p>The properties file of FO/PDF generation.</xd:p>
-		</xd:desc>
-	</xd:doc>	
-	<xsl:variable name="properties" select="doc($properties-file)"/>
-	
-
-	<xd:doc>
-		<xd:desc>
 			<xd:p>Copy all nodes with their attributes.</xd:p>
 		</xd:desc>
 	</xd:doc>
