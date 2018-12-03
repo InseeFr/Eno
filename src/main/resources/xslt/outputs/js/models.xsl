@@ -5,7 +5,7 @@
 	xmlns:fn="http://www.w3.org/2005/xpath-functions" 
 	xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
 	xmlns:eno="http://xml.insee.fr/apps/eno" 
-	xmlns:enojs="http://xml.insee.fr/apps/eno/out/js" 
+	xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
 	exclude-result-prefixes="xs fn xd eno enojs" version="2.0">
 	
 	<xsl:import href="../../../styles/style.xsl"/>
@@ -75,6 +75,7 @@
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="languages" select="$languages" tunnel="yes"/>
+				<xsl:with-param name="isInSurvey" select="'yes'" tunnel="yes"/>
 			</xsl:apply-templates>
 		</Questionnaire>
 	</xsl:template>
@@ -90,12 +91,25 @@
 		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
 		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
 		
+		<xsl:variable name="formulaReadOnly" select="enojs:get-readonly-ancestors($source-context)" as="xs:string*"/>
+		<xsl:variable name="formulaRelevant" select="enojs:get-relevant-ancestors($source-context)" as="xs:string*"/>		
+		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
+		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
+		
+		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
+			.,
+			$formulaReadOnly,
+			$formulaRelevant,
+			$variablesReadOnly,
+			$variablesRelevant
+			)"/>
+		
 		<component xsi:type="Sequence" id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
 				<xsl:with-param name="driver" select="."/>
 			</xsl:call-template>
-			
+			<xsl:copy-of select="$filterCondition"/>
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -113,6 +127,19 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
 		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
+		
+		<xsl:variable name="formulaReadOnly" select="enojs:get-readonly-ancestors($source-context)" as="xs:string*"/>
+		<xsl:variable name="formulaRelevant" select="enojs:get-relevant-ancestors($source-context)" as="xs:string*"/>		
+		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
+		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
+		
+		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
+			.,
+			$formulaReadOnly,
+			$formulaRelevant,
+			$variablesReadOnly,
+			$variablesRelevant
+			)"/>
 		
 		<component xsi:type="Subsequence" id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
