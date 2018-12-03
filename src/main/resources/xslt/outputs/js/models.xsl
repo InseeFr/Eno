@@ -741,6 +741,39 @@
 		</conditionFilter>
 	</xsl:function>
 	
+		
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Template named:replaceVariablesInFormula.</xd:p>
+			<xd:p>It replaces variables in a all formula (control, instruction, filter).</xd:p>
+			<xd:p>"number(if (¤idVariable¤='') then '0' else ¤idVariable¤)" -> "variableName"</xd:p>
+			<xd:p>"¤idVariable¤" -> "variableName"</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template name="replaceVariablesInFormula">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="formula"/>
+		<xsl:param name="variables" as="xs:string*"/>
+		
+		<xsl:choose>
+			<xsl:when test="count($variables)=0">
+				<xsl:value-of select="$formula"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:variable name="regexA" select="concat('number\(if\s+\(',$conditioning-variable-begin,$variables[1],$conditioning-variable-end,'=''''\)\sthen\s+''0''\s+else\s+',$conditioning-variable-begin,$variables[1],$conditioning-variable-end,'\)')"/>
+				<xsl:variable name="regexB" select="concat($conditioning-variable-begin,$variables[1],$conditioning-variable-end)"/>				
+				<xsl:variable name="expressionToReplace" select="concat('\$',enojs:get-variable-business-name($source-context,$variables[1]),'\$')"/>				
+				<xsl:variable name="newFormula" select="replace(replace($formula,
+					$regexA,$expressionToReplace),
+					$regexB,$expressionToReplace)"/>
+				
+				<xsl:call-template name="replaceVariablesInFormula">
+					<xsl:with-param name="formula" select="$newFormula"/>
+					<xsl:with-param name="variables" select="$variables[position() &gt; 1]"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>		
+	</xsl:template>
 	
 	
 	
