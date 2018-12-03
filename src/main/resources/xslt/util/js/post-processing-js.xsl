@@ -153,4 +153,78 @@
             </xsl:choose>
         </variable>
     </xsl:template>
+    
+    
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Recursive template named "enojs:replaceVariableValueInFormula"</xd:p>
+            <xd:p>It replaces all variables that depend on other variables in a formula (in a filter)</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template name="enojs:replaceVariableValueInFormula">
+        <xsl:param name="variables" as="node()*"/>
+        <xsl:param name="formula"/>
+        
+        <xsl:choose>
+            <xsl:when test="count($variables)=0">
+                <!-- on enleve les "$" qui restent -->
+                <xsl:value-of select="replace($formula,'\$','')"/>
+            </xsl:when>
+            
+            <xsl:otherwise>
+                <xsl:variable name="var" select="$variables[1]/name" as="xs:string"/>
+                <xsl:variable name="regex" select="concat('\$',$var,'\$')"/>
+                <xsl:variable name="valueOfVaraiable" as="xs:string" select="$variables[1]/value"/>
+                <xsl:variable name="newFormula">
+                    <xsl:choose>
+                        <xsl:when test="$valueOfVaraiable!=''">
+                            <!-- Probleme avec les '$', résolue en les remplacant par \$ -->
+                            <xsl:variable name="expressionToReplace" as="xs:string" select="replace($valueOfVaraiable,'\$','\\\$')"/>
+                            <!-- Replace in formula "$var$" by "(value of the var)" -->
+                            <xsl:value-of select="replace($formula,$regex,concat('(',$expressionToReplace,')'))"/>
+                        </xsl:when>
+                        <!-- on laisse la formule tel quel si la variable n'a pas de valeur => on met "var" au lieu de "$var$" -->
+                        <!-- A voir si on remet des "$" autour des variables dans les lambdas expression-->
+                        <xsl:otherwise><xsl:value-of select="replace($formula,$regex,$var)"/></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                  
+                <!-- Find if in the value of the current variable, there are variables which depends other variables --> 
+                <xsl:variable name="variablesToAdd" as="node()*">
+                    <xsl:call-template name="enojs:findVariableInFormula">
+                        <xsl:with-param name="formula" select="$valueOfVaraiable"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                
+                <xsl:variable name="variablesInFormula" as="node()*">
+                    <xsl:call-template name="enojs:findVariableInFormula">
+                        <xsl:with-param name="formula" select="$newFormula"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                
+                <xsl:variable name="oldArguments" select="substring-before(substring-after($newFormula,'('),')')"/>
+                <xsl:variable name="newArguments" select="enojs:addArgumentsInFormula($variablesInFormula,$oldArguments,$variables[1])"/>
+                
+                <xsl:variable name="endFormula" select="replace(replace($newFormula,concat('\(',$oldArguments,'\)'),'()'),'\(\)',$newArguments)"/>
+                
+                <!-- Add variables found in the value of the current variable in the list of variables -->
+                <xsl:variable name="variablesCalculatedInFormula" as="node()*">
+                    <xsl:for-each select="$variables">
+                        <xsl:copy-of select="."/>
+                    </xsl:for-each>
+                    <xsl:if test="count($variablesToAdd)!=0">
+                        <xsl:for-each select="$variablesToAdd">
+                            <xsl:copy-of select="."/>
+                        </xsl:for-each>
+                    </xsl:if>
+                </xsl:variable>
+                
+                <xsl:call-template name="enojs:replaceVariableValueInFormula">
+                    <xsl:with-param name="formula" select="$endFormula"/>
+                    <xsl:with-param name="variables" select="$variablesCalculatedInFormula[position() &gt; 1]"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>	
+    </xsl:template>
 </xsl:stylesheet>
