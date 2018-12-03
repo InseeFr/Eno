@@ -41,6 +41,24 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
+	
+	
+	<xsl:template match="ResponseElement" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="isInSurvey" tunnel="yes"/>
+		<xsl:variable name="type" select="enojs:getTypeOfVariable($source-context)"/>
+		<!-- display only external variable -->
+		<xsl:if test="$type='External' and $isInSurvey!='yes'">
+			<variable>
+				<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
+			</variable>	
+		</xsl:if>
+			
+		
+			
+	</xsl:template>
+	
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on Form driver.</xd:p>
