@@ -80,7 +80,10 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="/">
-        <xsl:apply-templates select="//d:Sequence[d:TypeOfSequence/text()='template']" mode="source"/>
+        <main>
+           <!-- <xsl:apply-templates select="//d:Sequence[d:TypeOfSequence/text()='template']" mode="source"/>-->
+            <xsl:apply-templates mode="source"/>
+        </main>
     </xsl:template>
 
     <xd:doc>
@@ -142,6 +145,23 @@
     
     <xsl:template match="d:CodeDomain" mode="enojs:get-id-Codelist">
         <xsl:value-of select="r:CodeListReference/l:CodeList/r:ID"/>
+    </xsl:template>
+    
+    <xsl:function name="enojs:getTypeOfVariable">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enojs:getTypeOfVariable"/>
+    </xsl:function>
+    
+    <xsl:template match="l:Variable" mode="enojs:getTypeOfVariable">
+        <xsl:variable name="type" select="l:VariableRepresentation/r:ProcessingInstructionReference/r:TypeOfObject"/>
+        <xsl:choose>
+            <xsl:when test="$type='GenerationInstruction'">
+                <xsl:value-of select="'Calculated'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="'External'"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
 
