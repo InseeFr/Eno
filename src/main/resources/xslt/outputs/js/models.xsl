@@ -145,7 +145,8 @@
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
 				<xsl:with-param name="driver" select="."/>
-			</xsl:call-template>			
+			</xsl:call-template>
+			<xsl:copy-of select="$filterCondition"/>			
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -215,6 +216,8 @@
 		<xsl:variable name="maximumResponse" select="enojs:get-maximum($source-context)"/>
 		<xsl:variable name="unit" select="enojs:get-suffix($source-context,$languages[1])"/>
 		
+		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
+		
 		<xsl:if test="$typeResponse!='' and $questionName!=''">
 			
 			<xsl:choose>
@@ -223,7 +226,7 @@
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"/>
 						<xsl:call-template name="enojs:addResponeToComponent">
-							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+							<xsl:with-param name="responseName" select="$responseName"/>
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</component>
@@ -237,7 +240,7 @@
 						</xsl:if>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
 						<xsl:call-template name="enojs:addResponeToComponent">
-							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+							<xsl:with-param name="responseName" select="$responseName"/>
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</component>
@@ -250,12 +253,17 @@
 							<xsl:copy-of select="$declarations"></xsl:copy-of>
 						</declarations>
 						<xsl:call-template name="enojs:addResponeToComponent">
-							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+							<xsl:with-param name="responseName" select="$responseName"/>
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</component>
 				</xsl:when>
 			</xsl:choose>
+			
+			<xsl:call-template name="enojs:addVariableCollected">
+				<xsl:with-param name="responseName" select="$responseName"/>
+				<xsl:with-param name="responseRef" select="$responseName"/>
+			</xsl:call-template>
 		</xsl:if>		
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -287,6 +295,8 @@
 		<xsl:variable name="maximumLengthCode" select="enojs:get-code-maximum-length($source-context)"/>
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
 		
+		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
+		
 		<xsl:choose>
 			<xsl:when test="$maximumLengthCode != '' and $questionName!=''">
 				<!-- remove Format in the cell for table 'question multiple-choice-question'-->
@@ -304,10 +314,15 @@
 						</codeLists>
 						
 						<xsl:call-template name="enojs:addResponeToComponent">
-							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+							<xsl:with-param name="responseName" select="$responseName"/>
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</component>
+					
+					<xsl:call-template name="enojs:addVariableCollected">
+						<xsl:with-param name="responseName" select="$responseName"/>
+						<xsl:with-param name="responseRef" select="$responseName"/>
+					</xsl:call-template>
 				</xsl:if>
 			</xsl:when>
 			
@@ -317,10 +332,15 @@
 					<xsl:copy-of select="$declarations"></xsl:copy-of>
 					
 					<xsl:call-template name="enojs:addResponeToComponent">
-						<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+						<xsl:with-param name="responseName" select="$responseName"/>
 					</xsl:call-template>
 					<xsl:copy-of select="$filterCondition"/>
 				</component>
+				
+				<xsl:call-template name="enojs:addVariableCollected">
+					<xsl:with-param name="responseName" select="$responseName"/>
+					<xsl:with-param name="responseRef" select="$responseName"/>
+				</xsl:call-template>
 			</xsl:when>
 			
 		</xsl:choose>
@@ -353,6 +373,8 @@
 		<xsl:variable name="maximumLengthCode" select="enojs:get-code-maximum-length($source-context)"/>
 		<xsl:variable name="typeXf" select="enojs:get-appearance($source-context)"/>
 		
+		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
+		
 		<xsl:if test="$maximumLengthCode != '' and $typeOfAncestor!='question multiple-choice-question' and $questionName!=''">
 			<xsl:choose>
 				<xsl:when test="$typeXf='full'">
@@ -369,7 +391,7 @@
 						</codeLists>
 												
 						<xsl:call-template name="enojs:addResponeToComponent">
-							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+							<xsl:with-param name="responseName" select="$responseName"/>
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 						
@@ -388,15 +410,17 @@
 						</codeLists>
 						
 						<xsl:call-template name="enojs:addResponeToComponent">
-							<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+							<xsl:with-param name="responseName" select="$responseName"/>
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</component>
 				</xsl:when>
 			</xsl:choose>
 			
-			
-			
+			<xsl:call-template name="enojs:addVariableCollected">
+				<xsl:with-param name="responseName" select="$responseName"/>
+				<xsl:with-param name="responseRef" select="$responseName"/>
+			</xsl:call-template>
 		</xsl:if>
 		
 		
@@ -445,16 +469,23 @@
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
 		
+		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
+		
 		<xsl:if test="$typeResponse !='' and $questionName!=''">
 			<component xsi:type="Textarea" id="{$idQuestion}" maxLength="{$lengthResponse}">
 				<label><xsl:value-of select="$labelQuestion"/></label>
 				<xsl:copy-of select="$declarations"></xsl:copy-of>
 								
 				<xsl:call-template name="enojs:addResponeToComponent">
-					<xsl:with-param name="responseName" select="enojs:get-business-name($source-context)"/>
+					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
 				<xsl:copy-of select="$filterCondition"/>
 			</component>
+			
+			<xsl:call-template name="enojs:addVariableCollected">
+				<xsl:with-param name="responseName" select="$responseName"/>
+				<xsl:with-param name="responseRef" select="$responseName"/>
+			</xsl:call-template>
 		</xsl:if>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
