@@ -520,6 +520,37 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
+		
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the CalculatedVariable driver.</xd:p>
+			<xd:p>Its displays the formula of the calculated variable.</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="CalculatedVariable" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:variable name="variableCalculation" select="enojs:get-variable-calculation($source-context)"/>
+		
+		<xsl:variable name="nameOutVariable" select="enojs:get-business-name($source-context)"/>
+		<xsl:variable name="idVariables" select="tokenize(enojs:get-variable-calculation-variables($source-context),'\s')"/>
+		<variable>
+			<name>
+				<xsl:value-of select="$nameOutVariable"/>
+			</name>
+			<value>
+				<xsl:call-template name="replaceVariablesInFormula">
+					<xsl:with-param name="formula" select="$variableCalculation"/>
+					<xsl:with-param name="variables" select="$idVariables"/>
+				</xsl:call-template>				
+			</value>
+			
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
+		</variable>
+	</xsl:template>
 	
 	<xd:doc>
 		<xd:desc>
