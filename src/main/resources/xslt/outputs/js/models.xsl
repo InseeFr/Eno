@@ -673,9 +673,9 @@
 							<xsl:with-param name="variables" select="$variablesId"/>
 						</xsl:call-template>
 					</xsl:variable>
-					<!-- replace "!=" by "!==" , "not by "!", "and" by "&&" -->
-					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace($relevant-condition,'!=','!=='),'not','!'),'and','&amp;&amp;')"/>
-					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace($readonly-condition,'!=','!=='),'not','!'),'and','&amp;&amp;')"/>
+					<!-- replace "!=" -> "!==" , "not -> "!", " and " -> "&&", " or " -> "||"-->
+					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'!=','!=='),'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || ')"/>
+					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'!=','!=='),'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || ')"/>
 					
 					<!--<xsl:value-of select="concat('(',$variablesName,') =>', $readonly-condition,'toto',$relevant-condition,' ? ''normal'' : ''''')"/>-->
 					<!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
@@ -706,7 +706,7 @@
 							<xsl:with-param name="variables" select="$variablesId"/>
 						</xsl:call-template>
 					</xsl:variable>
-					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace($relevant-condition,'!=','!=='),'not','!'),'and','&amp;&amp;')"/>
+					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'!=','!=='),'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || ')"/>
 					
 					<xsl:value-of select="concat('(',$variablesName,') =>', $returned-relevant-condition,' ? ''normal'' : ''hidden''')"/>
 					
@@ -728,7 +728,7 @@
 							<xsl:with-param name="variables" select="$variablesId"/>
 						</xsl:call-template>
 					</xsl:variable>
-					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace($readonly-condition,'!=','!=='),'not','!'),'and','&amp;&amp;')"/>
+					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'!=','!=='),'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || ')"/>
 					<xsl:value-of select="'(',$variablesName,') => ',$returned-readonly-condition,' ? ''normal'' : ''readonly'''"/>
 					<!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
 				</xsl:when>
