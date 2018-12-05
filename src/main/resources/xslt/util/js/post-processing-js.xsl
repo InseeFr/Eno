@@ -73,7 +73,7 @@
     </xsl:template>
     
     <xsl:template match="label">
-        <label><xsl:value-of select="."/></label>
+        <label><xsl:value-of select="normalize-space(.)"/></label>
     </xsl:template>
     
     <xsl:template match="conditionFilter">
@@ -145,7 +145,7 @@
             <name><xsl:value-of select="name"/></name>
             <xsl:choose>
                 <xsl:when test="$value!=''">
-                    <value><xsl:value-of select="$value"/></value>
+                    <value><xsl:value-of select="normalize-space($value)"/></value>
                 </xsl:when>
                 <xsl:when test="$responseRef!=''">
                     <responseRef><xsl:value-of select="$responseRef"/></responseRef>
