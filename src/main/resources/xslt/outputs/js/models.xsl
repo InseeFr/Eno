@@ -647,7 +647,7 @@
 						<xsl:for-each select="$formulaRelevant">
 							<xsl:value-of select="concat('(',.,')')"/>
 							<xsl:if test="position()!=last()">
-								<xsl:value-of select="' or '"/>
+								<xsl:value-of select="' || '"/><!-- "||" = "or"-->
 							</xsl:if>
 						</xsl:for-each>
 					</xsl:variable>
@@ -662,7 +662,7 @@
 						<xsl:for-each select="$formulaReadOnly">
 							<xsl:value-of select="concat('(',.,')')"/>
 							<xsl:if test="position()!=last()">
-								<xsl:value-of select="' or '"/>
+								<xsl:value-of select="' || '"/>
 							</xsl:if>
 						</xsl:for-each>
 					</xsl:variable>
@@ -673,9 +673,9 @@
 							<xsl:with-param name="variables" select="$variablesId"/>
 						</xsl:call-template>
 					</xsl:variable>
-					<!-- replace "!=" by "!==" and "not by "!" -->
-					<xsl:variable name="returned-relevant-condition" select="replace(replace($relevant-condition,'!=','!=='),'not','!')"/>
-					<xsl:variable name="returned-readonly-condition" select="replace(replace($readonly-condition,'!=','!=='),'not','!')"/>
+					<!-- replace "!=" by "!==" , "not by "!", "and" by "&&" -->
+					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace($relevant-condition,'!=','!=='),'not','!'),'and','&amp;&amp;')"/>
+					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace($readonly-condition,'!=','!=='),'not','!'),'and','&amp;&amp;')"/>
 					
 					<!--<xsl:value-of select="concat('(',$variablesName,') =>', $readonly-condition,'toto',$relevant-condition,' ? ''normal'' : ''''')"/>-->
 					<!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
@@ -695,7 +695,7 @@
 						<xsl:for-each select="$formulaRelevant">
 							<xsl:value-of select="concat('(',.,')')"/>
 							<xsl:if test="position()!=last()">
-								<xsl:value-of select="' or '"/>
+								<xsl:value-of select="' || '"/>
 							</xsl:if>
 						</xsl:for-each>
 					</xsl:variable>
@@ -706,7 +706,7 @@
 							<xsl:with-param name="variables" select="$variablesId"/>
 						</xsl:call-template>
 					</xsl:variable>
-					<xsl:variable name="returned-relevant-condition" select="replace(replace($relevant-condition,'!=','!=='),'not','!')"/>
+					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace($relevant-condition,'!=','!=='),'not','!'),'and','&amp;&amp;')"/>
 					
 					<xsl:value-of select="concat('(',$variablesName,') =>', $returned-relevant-condition,' ? ''normal'' : ''hidden''')"/>
 					
@@ -717,7 +717,7 @@
 						<xsl:for-each select="$formulaReadOnly">
 							<xsl:value-of select="concat('(',.,')')"/>
 							<xsl:if test="position()!=last()">
-								<xsl:value-of select="' or '"/>
+								<xsl:value-of select="' || '"/>
 							</xsl:if>
 						</xsl:for-each>
 					</xsl:variable>
@@ -728,7 +728,7 @@
 							<xsl:with-param name="variables" select="$variablesId"/>
 						</xsl:call-template>
 					</xsl:variable>
-					<xsl:variable name="returned-readonly-condition" select="replace(replace($readonly-condition,'!=','!=='),'not','!')"/>
+					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace($readonly-condition,'!=','!=='),'not','!'),'and','&amp;&amp;')"/>
 					<xsl:value-of select="'(',$variablesName,') => ',$returned-readonly-condition,' ? ''normal'' : ''readonly'''"/>
 					<!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
 				</xsl:when>
