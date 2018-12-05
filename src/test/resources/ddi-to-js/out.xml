@@ -108,8 +108,7 @@
                   <declaration declarationType="comment"
                          id="j334cyqb-d11"
                          position="AFTER_QUESTION_TEXT">
-               <label>For your information, the date of the last broadcast was on
-						øLAST_BROADCASTø</label>
+               <label>For your information, the date of the last broadcast was on øLAST_BROADCASTø</label>
             </declaration>
                
                <response name="DATEFIRST">
@@ -137,8 +136,7 @@
                     max="99.0"
                     decimals="1"
                     page="1">
-            <label>➡ 6. In your opinion, how much is the part of audience share in US for the 2016
-					season? </label>
+            <label>➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?</label>
             <unit/>
             <response name="AUDIENCE_SHARE">
                <valueState type="PREVIOUS">
@@ -470,10 +468,7 @@
    </variable>
    <variable>
       <name>SUM_EXPENSES</name>
-      <value>$PERCENTAGE_EXPENSES11$ + $PERCENTAGE_EXPENSES21$ + $PERCENTAGE_EXPENSES31$ +
-				$PERCENTAGE_EXPENSES41$ + $PERCENTAGE_EXPENSES51$ + $PERCENTAGE_EXPENSES61$ +
-				$PERCENTAGE_EXPENSES71$ + $PERCENTAGE_EXPENSES81$ + $PERCENTAGE_EXPENSES91$ +
-				$PERCENTAGE_EXPENSES101$ </value>
+      <value>$PERCENTAGE_EXPENSES11$ + $PERCENTAGE_EXPENSES21$ + $PERCENTAGE_EXPENSES31$ + $PERCENTAGE_EXPENSES41$ + $PERCENTAGE_EXPENSES51$ + $PERCENTAGE_EXPENSES61$ + $PERCENTAGE_EXPENSES71$ + $PERCENTAGE_EXPENSES81$ + $PERCENTAGE_EXPENSES91$ + $PERCENTAGE_EXPENSES101$</value>
    </variable>
    <variable>
       <name>LAST_BROADCAST</name>
