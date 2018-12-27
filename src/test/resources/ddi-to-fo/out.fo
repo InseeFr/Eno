@@ -9,11 +9,11 @@
          xmlns:fo="http://www.w3.org/1999/XSL/Format"
          xmlns:fox="http://xmlgraphics.apache.org/fop/extensions">
    <fo:layout-master-set>
-      <fo:simple-page-master font-family="Liberation Sans"
+      <fo:simple-page-master master-name="Cover-A4"
+                             font-family="Arial"
                              font-size="10pt"
                              font-weight="normal"
                              margin-bottom="5mm"
-                             master-name="Cover-A4"
                              page-height="297mm"
                              page-width="210mm">
          <fo:region-body column-count="1" margin="0mm"/>
@@ -67,9 +67,7 @@
          </fo:repeatable-page-master-alternatives>
       </fo:page-sequence-master>
    </fo:layout-master-set>
-   <fo:page-sequence font-family="Liberation Sans"
-                     font-size="10pt"
-                     master-reference="Cover-A4">
+   <fo:page-sequence font-family="Arial" font-size="10pt" master-reference="Cover-A4">
       <fo:flow flow-name="xsl-region-body">
          <fo:block page-break-inside="avoid">
             <fo:block-container absolute-position="absolute"
@@ -254,9 +252,9 @@
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
                                          message="Code Bar"
                                          orientation="0">
-                           <barcode:code128>
+                           <barcode:code39>
                               <barcode:height>10mm</barcode:height>
-                           </barcode:code128>
+                           </barcode:code39>
                         </barcode:barcode>
                      </fo:instream-foreign-object>
                   </fo:block>
@@ -283,7 +281,9 @@
          </fo:block>
       </fo:flow>
    </fo:page-sequence>
-   <fo:page-sequence master-reference="A4" initial-page-number="2">
+   <fo:page-sequence master-reference="A4"
+                     initial-page-number="2"
+                     force-page-count="odd">
       <fo:static-content flow-name="portrait-region-before">
          <fo:block position="absolute" margin="10mm" text-align="right">
             <fo:external-graphic src="encoche-top-right.png"/>
@@ -297,12 +297,12 @@
                   <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
                                    orientation="90"
                                    message="${idQuestionnaire}-#page-number#">
-                     <barcode:code128>
+                     <barcode:code39>
                         <barcode:height>8mm</barcode:height>
                      <barcode:human-readable>
                            <barcode:placement>none</barcode:placement>
                         </barcode:human-readable>
-                     </barcode:code128>
+                     </barcode:code39>
                   </barcode:barcode>
                </fo:instream-foreign-object>
             <fo:block-container reference-orientation="90" margin-left="5mm">
@@ -335,6 +335,8 @@
                    font-size="14pt"
                    border-color="black"
                    border-style="solid"
+                   space-before="10mm"
+                   space-before.conditionality="discard"
                    page-break-inside="avoid"
                    keep-with-next="always">I - Introduction</fo:block>
          <fo:block font-size="9pt"
@@ -498,6 +500,8 @@
                    font-size="14pt"
                    border-color="black"
                    border-style="solid"
+                   space-before="10mm"
+                   space-before.conditionality="discard"
                    page-break-inside="avoid"
                    keep-with-next="always">II - Simpsons' city</fo:block>
          <fo:block font-size="9pt"
@@ -633,6 +637,8 @@
                    font-size="14pt"
                    border-color="black"
                    border-style="solid"
+                   space-before="10mm"
+                   space-before.conditionality="discard"
                    page-break-inside="avoid"
                    keep-with-next="always">III - Characters</fo:block>
          <fo:block color="black"
@@ -1288,6 +1294,8 @@
                    font-size="14pt"
                    border-color="black"
                    border-style="solid"
+                   space-before="10mm"
+                   space-before.conditionality="discard"
                    page-break-inside="avoid"
                    keep-with-next="always">IV - General questions</fo:block>
          <fo:block background-color="#CCCCCC"
@@ -2466,6 +2474,8 @@
                    font-size="14pt"
                    border-color="black"
                    border-style="solid"
+                   space-before="10mm"
+                   space-before.conditionality="discard"
                    page-break-inside="avoid"
                    keep-with-next="always">V - Favourite characters</fo:block>
          <fo:block color="black"
@@ -5724,6 +5734,8 @@
                    font-size="14pt"
                    border-color="black"
                    border-style="solid"
+                   space-before="10mm"
+                   space-before.conditionality="discard"
                    page-break-inside="avoid"
                    keep-with-next="always">VI - Comment</fo:block>
          <fo:block color="black"
