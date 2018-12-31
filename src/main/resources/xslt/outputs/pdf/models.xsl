@@ -863,16 +863,25 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
 		
-		<xsl:variable name="input-type" select="enopdf:get-type($source-context)"/>
-		<xsl:variable name="length" select="enopdf:get-length($source-context)"/>
-		
+		<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
+		<xsl:variable name="field-image-name">
+			<xsl:if test="contains($field,'DD')">
+				<xsl:value-of select="'JJ'"/>
+			</xsl:if>
+			<xsl:if test="contains($field,'MM')">
+				<xsl:value-of select="'MM'"/>
+			</xsl:if>
+			<xsl:if test="contains($field,'YYYY')">
+				<xsl:value-of select="'AAAA'"/>
+			</xsl:if>
+		</xsl:variable>
+
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<fo:block xsl:use-attribute-sets="label-question"> <!--linefeed-treatment="preserve"-->
 				<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 			</fo:block>
 		</xsl:if>
 
-		<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
 		<fo:block xsl:use-attribute-sets="general-style">
 			<xsl:if test="$isTable = 'YES'">
 				<xsl:attribute name="text-align">right</xsl:attribute>
@@ -880,7 +889,7 @@
 				<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
 			</xsl:if>
 			<xsl:call-template name="insert-image">
-				<xsl:with-param name="image-name" select="'date.png'"/>
+				<xsl:with-param name="image-name" select="concat('date_',$field-image-name,'.png')"/>
 			</xsl:call-template>
 		</fo:block>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -895,18 +904,62 @@
 		<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
 		<fo:inline>
 			<fo:block xsl:use-attribute-sets="general-style">
-				<xsl:for-each select="1 to string-length($field)">
-					<xsl:choose>
-						<xsl:when test="':' = substring($field,.,1)">
-							<fo:inline>:</fo:inline>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:call-template name="insert-image">
-								<xsl:with-param name="image-name" select="'mask_number.png'"/>
-							</xsl:call-template>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:for-each>
+				<xsl:choose>
+					<xsl:when test="$field='HH:CH'">
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'mask_number.png'"/>
+						</xsl:call-template>
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'mask_number.png'"/>
+						</xsl:call-template>
+						<fo:inline> heures  </fo:inline>
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'mask_number.png'"/>
+						</xsl:call-template>
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'mask_number.png'"/>
+						</xsl:call-template>
+						<fo:inline> centièmes  </fo:inline>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:for-each select="1 to string-length($field)">
+							<xsl:variable name="current-character" select="substring($field,position(),1)"/>
+							<xsl:choose>
+								<xsl:when test="$current-character = 'P'"/>
+								<xsl:when test="$current-character = 'T'"/>
+								<xsl:when test="$current-character = 'n'">
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'mask_number.png'"/>
+									</xsl:call-template>
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'mask_number.png'"/>
+									</xsl:call-template>									
+								</xsl:when>
+								<xsl:when test="$current-character = 'Y'">
+									<fo:inline> années  </fo:inline>
+								</xsl:when>
+								<xsl:when test="$current-character = 'D'">
+									<fo:inline> jours  </fo:inline>
+								</xsl:when>
+								<xsl:when test="$current-character = 'H'">
+									<fo:inline> heures  </fo:inline>
+								</xsl:when>
+								<xsl:when test="$current-character = 'S'">
+									<fo:inline> secondes  </fo:inline>
+								</xsl:when>
+								<xsl:when test="$current-character = 'M' and not(contains(substring($field,1,position()),'T'))">
+									<fo:inline> mois  </fo:inline>
+								</xsl:when>
+								<xsl:when test="$current-character = 'M' and contains(substring($field,1,position()),'T')">
+									<fo:inline> minutes  </fo:inline>
+								</xsl:when>
+								<xsl:otherwise>
+									<fo:inline> unité de temps inconnue  </fo:inline>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:for-each>
+					</xsl:otherwise>
+				</xsl:choose>
 			</fo:block>
 		</fo:inline>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
