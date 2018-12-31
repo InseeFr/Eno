@@ -912,14 +912,14 @@
 						<xsl:call-template name="insert-image">
 							<xsl:with-param name="image-name" select="'mask_number.png'"/>
 						</xsl:call-template>
-						<fo:inline> heures  </fo:inline>
+						<fo:inline padding-start="1mm" padding-end="2mm">heures</fo:inline>
 						<xsl:call-template name="insert-image">
 							<xsl:with-param name="image-name" select="'mask_number.png'"/>
 						</xsl:call-template>
 						<xsl:call-template name="insert-image">
 							<xsl:with-param name="image-name" select="'mask_number.png'"/>
 						</xsl:call-template>
-						<fo:inline> centièmes  </fo:inline>
+						<fo:inline padding-start="1mm" padding-end="2mm">centièmes</fo:inline>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:for-each select="1 to string-length($field)">
@@ -936,25 +936,25 @@
 									</xsl:call-template>									
 								</xsl:when>
 								<xsl:when test="$current-character = 'Y'">
-									<fo:inline> années  </fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">ans</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'D'">
-									<fo:inline> jours  </fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">jours</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'H'">
-									<fo:inline> heures  </fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">heures</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'S'">
-									<fo:inline> secondes  </fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">secondes</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'M' and not(contains(substring($field,1,position()),'T'))">
-									<fo:inline> mois  </fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'M' and contains(substring($field,1,position()),'T')">
-									<fo:inline> minutes  </fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">minutes</fo:inline>
 								</xsl:when>
 								<xsl:otherwise>
-									<fo:inline> unité de temps inconnue  </fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">unité de temps inconnue</fo:inline>
 								</xsl:otherwise>
 							</xsl:choose>
 						</xsl:for-each>
