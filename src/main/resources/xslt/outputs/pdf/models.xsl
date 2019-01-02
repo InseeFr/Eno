@@ -865,14 +865,14 @@
 		
 		<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
 		<xsl:variable name="field-image-name">
-			<xsl:if test="contains($field,'DD')">
-				<xsl:value-of select="'JJ'"/>
+			<xsl:if test="contains($field,'YYYY')">
+				<xsl:value-of select="'YYYY'"/>
 			</xsl:if>
 			<xsl:if test="contains($field,'MM')">
 				<xsl:value-of select="'MM'"/>
 			</xsl:if>
-			<xsl:if test="contains($field,'YYYY')">
-				<xsl:value-of select="'AAAA'"/>
+			<xsl:if test="contains($field,'DD')">
+				<xsl:value-of select="'DD'"/>
 			</xsl:if>
 		</xsl:variable>
 
@@ -889,7 +889,7 @@
 				<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
 			</xsl:if>
 			<xsl:call-template name="insert-image">
-				<xsl:with-param name="image-name" select="concat('date_',$field-image-name,'.png')"/>
+				<xsl:with-param name="image-name" select="concat('date-',$languages[1],'-',$field-image-name,'.png')"/>
 			</xsl:call-template>
 		</fo:block>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
