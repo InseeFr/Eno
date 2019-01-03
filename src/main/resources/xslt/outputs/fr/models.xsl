@@ -991,22 +991,25 @@
                     <xsl:value-of select="'if ('"/>
                     <xsl:for-each select="$layout-list//format">
                         <xsl:if test="position() != 1">
-                            <xsl:value-of select="' and '"/>
+                            <xsl:value-of select="' or '"/>
                         </xsl:if>
-                        <xsl:value-of select="concat('../',@variable,' != '''' ')"/>
+                        <xsl:value-of select="concat('../',@variable,' = '''' ')"/>
                     </xsl:for-each>
                     <xsl:value-of select="') then '''' else (concat( '"/>
                     <xsl:choose>
                         <xsl:when test="$current-driver='DateTimeDomain'">
                             <xsl:for-each select="$layout-list//format">
                                 <xsl:if test="position() != 1">
-                                    <xsl:value-of select="',-,'"/>
+                                    <xsl:value-of select="',''-'','"/>
                                 </xsl:if>
+                                <xsl:value-of select="concat(' if (string-length(../',@variable,') &lt;= 1) then ''0'' else '''' ,')"/>
                                 <xsl:value-of select="concat(' ../',@variable)"/>
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:when test="$dateduration-format='HH:CH'">
-                            <xsl:value-of select="concat('100*(../',$layout-list//format[1]/@variable,') + ../',$layout-list//format[2]/@variable)"/>
+                            <xsl:value-of select="concat('../',$layout-list//format[1]/@variable,' ,')"/>
+                            <xsl:value-of select="concat(' if (string-length(../',$layout-list//format[2]/@variable,') = 1) then ''0'' else '''' ,')"/>
+                            <xsl:value-of select="concat('../',$layout-list//format[2]/@variable)"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="'''P'''"/>
@@ -1261,7 +1264,7 @@
 
         <xsl:for-each select="$layout-list//format">
             <xsl:element name="{@variable}">
-                <xsl:if test="position()=1 and ($label!='' or $question-label!='')">
+                <xsl:if test="($label!='' or $question-label!='') and ((position() = 1 and $current-driver='DurationDomain') or (position() = last() and $current-driver='DateTimeDomain'))">
                     <label>
                         <xsl:choose>
                             <xsl:when test="$question-label!=''">
@@ -1940,7 +1943,6 @@
 
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="label" select="enofr:get-label($source-context, $languages[1])"/>
-        <xsl:variable name="alert" select="enofr:get-alert($source-context, $languages[1])"/>
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
@@ -1957,6 +1959,23 @@
                 <xsl:with-param name="format" select="$dateduration-format"/>
             </xsl:call-template>
         </xsl:variable>
+        <xsl:variable name="ordered-layout-list" as="node()">
+            <formats>
+                <xsl:choose>
+                    <xsl:when test="$current-driver = 'DateTimeDomain'">
+                        <xsl:for-each select="$layout-list//format">
+                            <xsl:sort select="position()" order="descending"/>
+                            <xsl:copy-of select="."/>
+                        </xsl:for-each>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:for-each select="$layout-list//format">
+                            <xsl:copy-of select="."/>
+                        </xsl:for-each>                        
+                    </xsl:otherwise>
+                </xsl:choose>
+            </formats>
+        </xsl:variable>
         <xsl:variable name="input-format">
             <xsl:choose>
                 <xsl:when test="$current-driver='DurationDomain' or $dateduration-format = 'YYYY-MM-DD'">
@@ -1968,7 +1987,7 @@
             </xsl:choose>
         </xsl:variable>
         
-        <xsl:for-each select="$layout-list//format">
+        <xsl:for-each select="$ordered-layout-list//format">
             <xsl:element name="{$input-format}">
                 <xsl:attribute name="id" select="concat(@variable, '-control')"/>
                 <xsl:attribute name="name" select="@variable"/>
@@ -1976,20 +1995,22 @@
                 <xsl:if test="$input-format='xf:select1'">
                     <xsl:attribute name="appearance" select="'minimal'"/>
                 </xsl:if>
-                <xsl:choose>
-                    <xsl:when test="$question-label !='' and $current-driver='DurationDomain'">
-                        <xsl:attribute name="class" select="'question duration'"/>
-                    </xsl:when>
-                    <xsl:when test="$current-driver='DurationDomain'">
-                        <xsl:attribute name="class" select="'duration'"/>
-                    </xsl:when>
-                    <xsl:when test="$question-label !=''">
-                        <xsl:attribute name="class" select="'question date'"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:attribute name="class" select="'date'"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:attribute name="class">
+                    <xsl:choose>
+                        <xsl:when test="$question-label !='' and $current-driver='DurationDomain'">
+                            <xsl:value-of select="'question duration'"/>
+                        </xsl:when>
+                        <xsl:when test="$current-driver='DurationDomain'">
+                            <xsl:value-of select="'duration'"/>
+                        </xsl:when>
+                        <xsl:when test="$question-label !=''">
+                            <xsl:value-of select="'question date'"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="'date'"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
                 <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
                 <xsl:if test="$current-driver = 'DurationDomain'">
                     <xsl:attribute name="xxf:maxlength" select="'2'"/>    
@@ -2019,16 +2040,14 @@
                         </xsl:if>
                     </xf:label>
                 </xsl:if>
-                <xsl:if test="$alert != ''">
-                    <xf:alert ref="$form-resources/{@variable}/alert">
-                        <xsl:if test="enofr:get-alert-level($source-context) != ''">
-                            <xsl:attribute name="level" select="enofr:get-alert-level($source-context)"/>
-                        </xsl:if>
-                        <xsl:if test="eno:is-rich-content(enofr:get-alert($source-context, $languages[1]))">
-                            <xsl:attribute name="mediatype">text/html</xsl:attribute>
-                        </xsl:if>
-                    </xf:alert>
-                </xsl:if>
+                <xf:alert ref="$form-resources/{@variable}/alert">
+                    <xsl:if test="enofr:get-alert-level($source-context) != ''">
+                        <xsl:attribute name="level" select="enofr:get-alert-level($source-context)"/>
+                    </xsl:if>
+                    <xsl:if test="eno:is-rich-content(enofr:get-alert($source-context, $languages[1]))">
+                        <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                    </xsl:if>
+                </xf:alert>
                 <xsl:for-each select="enofr:get-relevant-dependencies($source-context)">
                     <!-- if the filter is in a loop, instance-ancestor helps choosing the good filter -->
                     <xf:action ev:event="xforms-value-changed"
@@ -2103,12 +2122,12 @@
                     <format id="CH" unit="centièmes" minimum="0" maximum="99" variable="{$variable-name}-layout-CH"/>
                 </xsl:when>
                 <xsl:when test="$driver = 'DateTimeDomain'">
-                    <!-- The order is different between date dans duration -->
-                    <xsl:if test="contains($format,'D')">
-                        <format id="D" unit="jours" minimum="1" maximum="31">
+                    <!-- The extremum are different from duration onesorder is different between date dans duration -->
+                    <xsl:if test="contains($format,'Y')">
+                        <format id="Y" unit="ans" minimum="1970" maximum="{year-from-date(current-date())}">
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-D'"/></xsl:if>
+                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-Y'"/></xsl:if>
                             </xsl:attribute>
                         </format>
                     </xsl:if>
@@ -2120,11 +2139,11 @@
                             </xsl:attribute>
                         </format>
                     </xsl:if>
-                    <xsl:if test="contains($format,'Y')">
-                        <format id="Y" unit="ans" minimum="1970" maximum="{year-from-date(current-date())}">
+                    <xsl:if test="contains($format,'D')">
+                        <format id="D" unit="jours" minimum="1" maximum="31">
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-Y'"/></xsl:if>
+                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-D'"/></xsl:if>
                             </xsl:attribute>
                         </format>
                     </xsl:if>
