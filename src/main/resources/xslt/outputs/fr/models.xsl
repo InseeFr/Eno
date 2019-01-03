@@ -285,7 +285,7 @@
         </xsl:variable>
 
         <xsl:element name="{$name}"/>
-        <xsl:if test="count($layout-list//format) &gt; 1">
+        <xsl:if test="count($layout-list//format) &gt; 1 or $current-driver = 'DurationDomain'">
             <xsl:for-each select="$layout-list//format">
                 <xsl:element name="{$name}-layout-{@id}"/>
             </xsl:for-each>
@@ -985,7 +985,7 @@
         </xsl:variable>
 
         <!-- Creating one calculated element that correspond to the concatenation of the layout ones -->
-        <xsl:if test="count($layout-list//format) &gt; 1">
+        <xsl:if test="count($layout-list//format) &gt; 1 or $current-driver = 'DurationDomain'">
             <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
                 <xsl:attribute name="calculate">
                     <xsl:value-of select="'if ('"/>
@@ -2127,7 +2127,9 @@
                         <format id="Y" unit="ans" minimum="1970" maximum="{year-from-date(current-date())}">
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-Y'"/></xsl:if>
+                                <xsl:if test="$multiple-layout">
+                                    <xsl:value-of select="'-layout-Y'"/>
+                                </xsl:if>
                             </xsl:attribute>
                         </format>
                     </xsl:if>
@@ -2135,7 +2137,9 @@
                         <format id="M" unit="mois" minimum="1" maximum="12">
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-M'"/></xsl:if>
+                                <xsl:if test="$multiple-layout">
+                                    <xsl:value-of select="'-layout-M'"/>
+                                </xsl:if>
                             </xsl:attribute>
                         </format>
                     </xsl:if>
@@ -2143,59 +2147,31 @@
                         <format id="D" unit="jours" minimum="1" maximum="31">
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-D'"/></xsl:if>
+                                <xsl:if test="$multiple-layout">
+                                    <xsl:value-of select="'-layout-D'"/>
+                                </xsl:if>
                             </xsl:attribute>
                         </format>
                     </xsl:if>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:if test="contains($format,'Y')">
-                        <format id="Y" unit="ans" minimum="0" maximum="99">
-                            <xsl:attribute name="variable">
-                                <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-Y'"/></xsl:if>
-                            </xsl:attribute>
-                        </format>
+                        <format id="Y" unit="ans" minimum="0" maximum="99" variable="{$variable-name}-layout-Y"/>
                     </xsl:if>
                     <xsl:if test="contains($format,'M') and not(contains(substring-before($format,'M'),'T'))">
-                        <format id="M" unit="mois" minimum="0" maximum="11">
-                            <xsl:attribute name="variable">
-                                <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-M'"/></xsl:if>
-                            </xsl:attribute>
-                        </format>
+                        <format id="M" unit="mois" minimum="0" maximum="11" variable="{$variable-name}-layout-M"/>
                     </xsl:if>
                     <xsl:if test="contains($format,'D')">
-                        <format id="D" unit="jours" minimum="0" maximum="30">
-                            <xsl:attribute name="variable">
-                                <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-D'"/></xsl:if>
-                            </xsl:attribute>
-                        </format>
+                        <format id="D" unit="jours" minimum="0" maximum="30" variable="{$variable-name}-layout-D"/>
                     </xsl:if>
                     <xsl:if test="contains($format,'H')">
-                        <format id="H" unit="heures" minimum="0" maximum="23">
-                            <xsl:attribute name="variable">
-                                <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-H'"/></xsl:if>
-                            </xsl:attribute>
-                        </format>
+                        <format id="H" unit="heures" minimum="0" maximum="23" variable="{$variable-name}-layout-H"/>
                     </xsl:if>
                     <xsl:if test="contains($format,'T') and contains(substring-after($format,'T'),'M')">
-                        <format id="m" unit="minutes" minimum="0" maximum="59">
-                            <xsl:attribute name="variable">
-                                <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-m'"/></xsl:if>
-                            </xsl:attribute>
-                        </format>
+                        <format id="m" unit="minutes" minimum="0" maximum="59" variable="{$variable-name}-layout-m"/>
                     </xsl:if>
                     <xsl:if test="contains($format,'S')">
-                        <format id="S" unit="secondes" minimum="0" maximum="59">
-                            <xsl:attribute name="variable">
-                                <xsl:value-of select="$variable-name"/>
-                                <xsl:if test="$multiple-layout"><xsl:value-of select="'-layout-S'"/></xsl:if>
-                            </xsl:attribute>
-                        </format>
+                        <format id="S" unit="secondes" minimum="0" maximum="59" variable="{$variable-name}-layout-S"/>
                     </xsl:if>
                 </xsl:otherwise>
             </xsl:choose>
