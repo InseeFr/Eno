@@ -863,15 +863,15 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
 		
-		<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
+		<xsl:variable name="field" select="upper-case(enopdf:get-format($source-context))"/>
 		<xsl:variable name="field-image-name">
-			<xsl:if test="contains($field,'YYYY')">
+			<xsl:if test="contains($field,'YYYY') or contains($field,'AAAA')">
 				<xsl:value-of select="'YYYY'"/>
 			</xsl:if>
 			<xsl:if test="contains($field,'MM')">
 				<xsl:value-of select="'MM'"/>
 			</xsl:if>
-			<xsl:if test="contains($field,'DD')">
+			<xsl:if test="contains($field,'DD') or contains($field,'JJ')">
 				<xsl:value-of select="'DD'"/>
 			</xsl:if>
 		</xsl:variable>
@@ -901,7 +901,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
+		<xsl:variable name="field" select="upper-case(enopdf:get-format($source-context))"/>
 		<fo:inline>
 			<fo:block xsl:use-attribute-sets="general-style">
 				<xsl:choose>
@@ -927,7 +927,7 @@
 							<xsl:choose>
 								<xsl:when test="$current-character = 'P'"/>
 								<xsl:when test="$current-character = 'T'"/>
-								<xsl:when test="$current-character = 'n'">
+								<xsl:when test="$current-character = 'N'">
 									<xsl:call-template name="insert-image">
 										<xsl:with-param name="image-name" select="'mask_number.png'"/>
 									</xsl:call-template>
@@ -935,10 +935,10 @@
 										<xsl:with-param name="image-name" select="'mask_number.png'"/>
 									</xsl:call-template>									
 								</xsl:when>
-								<xsl:when test="$current-character = 'Y'">
+								<xsl:when test="$current-character = 'Y' or $current-character = 'A'">
 									<fo:inline padding-start="1mm" padding-end="3mm">ans</fo:inline>
 								</xsl:when>
-								<xsl:when test="$current-character = 'D'">
+								<xsl:when test="$current-character = 'D' or $current-character = 'J'">
 									<fo:inline padding-start="1mm" padding-end="3mm">jours</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'H'">

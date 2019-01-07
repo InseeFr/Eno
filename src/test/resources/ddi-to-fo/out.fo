@@ -466,7 +466,7 @@
                       font-weight="normal"
                       font-size="10pt"
                       padding="1mm">
-               <fo:external-graphic src="date.png"/>
+               <fo:external-graphic src="date-fr-YYYYMMDD.png"/>
                </fo:block>
          </fo:block>
          <fo:block color="black"

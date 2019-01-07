@@ -275,7 +275,7 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="current-driver" select="self::*/local-name()"/>
 
-        <xsl:variable name="dateduration-format" select="enofr:get-format($source-context)"/>
+        <xsl:variable name="dateduration-format" select="upper-case(enofr:get-format($source-context))"/>
         <xsl:variable name="layout-list" as="node()">
             <xsl:call-template name="dateduration-layout">
                 <xsl:with-param name="variable-name" select="$name"/>
@@ -975,7 +975,7 @@
         <xsl:variable name="required" select="enofr:get-required($source-context)"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
-        <xsl:variable name="dateduration-format" select="enofr:get-format($source-context)"/>
+        <xsl:variable name="dateduration-format" select="upper-case(enofr:get-format($source-context))"/>
         <xsl:variable name="layout-list" as="node()">
             <xsl:call-template name="dateduration-layout">
                 <xsl:with-param name="variable-name" select="$name"/>
@@ -1031,7 +1031,7 @@
         <!-- real element or layout ones -->
         <xsl:for-each select="$layout-list//format">
             <xf:bind id="{@variable}-bind" name="{@variable}" ref="{@variable}">
-                <xsl:if test="$dateduration-format = 'YYYY-MM-DD'">
+                <xsl:if test="$dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">
                     <xsl:attribute name="type" select="'xf:date'"/>
                 </xsl:if>
                 <xsl:if test="self::DurationDomain">
@@ -1253,7 +1253,7 @@
         <xsl:variable name="label" select="enofr:get-label($source-context, $language)"/>
 
         <xsl:variable name="current-driver" select="self::*/local-name()"/>
-        <xsl:variable name="dateduration-format" select="enofr:get-format($source-context)"/>
+        <xsl:variable name="dateduration-format" select="upper-case(enofr:get-format($source-context))"/>
         <xsl:variable name="layout-list" as="node()">
             <xsl:call-template name="dateduration-layout">
                 <xsl:with-param name="variable-name" select="$name"/>
@@ -1284,9 +1284,25 @@
                         </xsl:choose>
                     </label>
                 </xsl:if>
-                <alert>
-                    <xsl:value-of select="'Quel est le message d''erreur ? Et où dois-je le mettre ?'"/>
-                </alert>
+                <xsl:if test="$dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">
+                    <hint>
+                        <xsl:value-of select="enofr:get-hint($source-context, $language)"/>
+                    </hint>
+                </xsl:if>
+                
+                <xsl:choose>
+                    <xsl:when test="$current-driver = 'DurationDomain'">
+                        <alert>
+                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Integer"/>
+                            <xsl:value-of select="concat(' ',@minimum, ' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',@maximum)"/>
+                        </alert>
+                    </xsl:when>
+                    <xsl:when test="$dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">
+                        <alert>
+                            <xsl:value-of select="enofr:get-alert($source-context, $language)"/>
+                        </alert>
+                    </xsl:when>
+                </xsl:choose>
                 <xsl:if test="$current-driver = 'DateTimeDomain' and @unit != ''">
                     <xsl:for-each select="xs:integer(number(@minimum)) to xs:integer(number(@maximum))">
                         <item>
@@ -1951,7 +1967,7 @@
         </xsl:variable>
 
         <xsl:variable name="current-driver" select="self::*/local-name()"/>
-        <xsl:variable name="dateduration-format" select="enofr:get-format($source-context)"/>
+        <xsl:variable name="dateduration-format" select="upper-case(enofr:get-format($source-context))"/>
         <xsl:variable name="layout-list" as="node()">
             <xsl:call-template name="dateduration-layout">
                 <xsl:with-param name="variable-name" select="$name"/>
@@ -1978,7 +1994,7 @@
         </xsl:variable>
         <xsl:variable name="input-format">
             <xsl:choose>
-                <xsl:when test="$current-driver='DurationDomain' or $dateduration-format = 'YYYY-MM-DD'">
+                <xsl:when test="$current-driver='DurationDomain' or $dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">
                     <xsl:value-of select="'xf:input'"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -2040,14 +2056,19 @@
                         </xsl:if>
                     </xf:label>
                 </xsl:if>
-                <xf:alert ref="$form-resources/{@variable}/alert">
-                    <xsl:if test="enofr:get-alert-level($source-context) != ''">
-                        <xsl:attribute name="level" select="enofr:get-alert-level($source-context)"/>
-                    </xsl:if>
-                    <xsl:if test="eno:is-rich-content(enofr:get-alert($source-context, $languages[1]))">
-                        <xsl:attribute name="mediatype">text/html</xsl:attribute>
-                    </xsl:if>
-                </xf:alert>
+                <xsl:if test="$dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">
+                    <xf:hint ref="$form-resources/{@variable}/hint"/>
+                </xsl:if>
+                <xsl:if test="$current-driver = 'DurationDomain' or $dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">
+                    <xf:alert ref="$form-resources/{@variable}/alert">
+                        <xsl:if test="enofr:get-alert-level($source-context) != ''">
+                            <xsl:attribute name="level" select="enofr:get-alert-level($source-context)"/>
+                        </xsl:if>
+                        <xsl:if test="eno:is-rich-content(enofr:get-alert($source-context, $languages[1]))">
+                            <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                        </xsl:if>
+                    </xf:alert>
+                </xsl:if>
                 <xsl:for-each select="enofr:get-relevant-dependencies($source-context)">
                     <!-- if the filter is in a loop, instance-ancestor helps choosing the good filter -->
                     <xf:action ev:event="xforms-value-changed"
@@ -2114,7 +2135,7 @@
 
         <formats>
             <xsl:choose>
-                <xsl:when test="$format='YYYY-MM-DD'">
+                <xsl:when test="$format='YYYY-MM-DD' or $format='JJ/MM/AAAA'">
                     <format id="" unit="" minimum="" maximum="" variable="{$variable-name}"/>
                 </xsl:when>
                 <xsl:when test="$format='HH:CH'">
@@ -2123,7 +2144,7 @@
                 </xsl:when>
                 <xsl:when test="$driver = 'DateTimeDomain'">
                     <!-- The extremum are different from duration onesorder is different between date dans duration -->
-                    <xsl:if test="contains($format,'Y')">
+                    <xsl:if test="contains($format,'Y') or contains($format,'A')">
                         <format id="Y" unit="ans" minimum="1900" maximum="{year-from-date(current-date())}">
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
@@ -2143,7 +2164,7 @@
                             </xsl:attribute>
                         </format>
                     </xsl:if>
-                    <xsl:if test="contains($format,'D')">
+                    <xsl:if test="contains($format,'D') or contains($format,'J')">
                         <format id="D" unit="jours" minimum="1" maximum="31">
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
@@ -2155,13 +2176,13 @@
                     </xsl:if>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:if test="contains($format,'Y')">
+                    <xsl:if test="contains($format,'Y') or contains($format,'A')">
                         <format id="Y" unit="ans" minimum="0" maximum="99" variable="{$variable-name}-layout-Y"/>
                     </xsl:if>
                     <xsl:if test="contains($format,'M') and not(contains(substring-before($format,'M'),'T'))">
                         <format id="M" unit="mois" minimum="0" maximum="11" variable="{$variable-name}-layout-M"/>
                     </xsl:if>
-                    <xsl:if test="contains($format,'D')">
+                    <xsl:if test="contains($format,'D') or contains($format,'J')">
                         <format id="D" unit="jours" minimum="0" maximum="30" variable="{$variable-name}-layout-D"/>
                     </xsl:if>
                     <xsl:if test="contains($format,'H')">
