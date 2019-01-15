@@ -173,18 +173,28 @@
 						</fo:simple-page-master>
 					</xsl:otherwise>
 				</xsl:choose>
+				<fo:simple-page-master master-name="A4-empty" page-height="297mm"
+					page-width="210mm" font-family="Arial" font-size="10pt" font-weight="normal" margin-bottom="5mm">
+					<fo:region-body margin="15mm"/>
+				</fo:simple-page-master>
 				<fo:page-sequence-master master-name="A4">
 					<xsl:choose>
 						<xsl:when test="$orientation = '0'">
 							<fo:repeatable-page-master-alternatives>
 								<fo:conditional-page-master-reference master-reference="A4-portrait-odd" odd-or-even="odd"/>
-								<fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even"/>
+								<fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even" page-position="first"/>
+								<fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even" page-position="rest"/>
+								<fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even" page-position="last" blank-or-not-blank="not-blank"/>
+								<fo:conditional-page-master-reference master-reference="A4-empty" odd-or-even="even" page-position="last" blank-or-not-blank="blank"/>
 							</fo:repeatable-page-master-alternatives>
 						</xsl:when>
 						<xsl:otherwise>
 							<fo:repeatable-page-master-alternatives>
 								<fo:conditional-page-master-reference master-reference="A4-landscape-odd" odd-or-even="odd"/>
-								<fo:conditional-page-master-reference master-reference="A4-landscape-even" odd-or-even="even"/>
+								<fo:conditional-page-master-reference master-reference="A4-landscape-even" odd-or-even="even" page-position="first"/>
+								<fo:conditional-page-master-reference master-reference="A4-landscape-even" odd-or-even="even" page-position="rest"/>
+								<fo:conditional-page-master-reference master-reference="A4-landscape-even" odd-or-even="even" page-position="last" blank-or-not-blank="not-blank"/>
+								<fo:conditional-page-master-reference master-reference="A4-empty" odd-or-even="even" page-position="last" blank-or-not-blank="blank"/>
 							</fo:repeatable-page-master-alternatives>
 						</xsl:otherwise>
 					</xsl:choose>
