@@ -2145,7 +2145,8 @@
                 <xsl:when test="$driver = 'DateTimeDomain'">
                     <!-- The extremum are different from duration onesorder is different between date dans duration -->
                     <xsl:if test="contains($format,'Y') or contains($format,'A')">
-                        <format id="Y" unit="ans" minimum="1900" maximum="{year-from-date(current-date())}">
+                        <!--<format id="Y" unit="ans" minimum="1900" maximum="{year-from-date(current-date())}">-->
+                        <format id="Y" unit="ans" minimum="1960" maximum="2018">
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
                                 <xsl:if test="$multiple-layout">
