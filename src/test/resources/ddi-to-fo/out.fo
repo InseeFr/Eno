@@ -43,7 +43,7 @@
                           display-align="before"
                           precedence="true"/>
       </fo:simple-page-master>
-   <fo:simple-page-master master-name="A4-portrait-even"
+      <fo:simple-page-master master-name="A4-portrait-even"
                              page-height="297mm"
                              page-width="210mm"
                              font-family="Arial"
@@ -60,10 +60,32 @@
                           display-align="before"
                           precedence="true"/>
       </fo:simple-page-master>
+      <fo:simple-page-master master-name="A4-empty"
+                             page-height="297mm"
+                             page-width="210mm"
+                             font-family="Arial"
+                             font-size="10pt"
+                             font-weight="normal"
+                             margin-bottom="5mm">
+         <fo:region-body margin="15mm"/>
+      </fo:simple-page-master>
       <fo:page-sequence-master master-name="A4">
          <fo:repeatable-page-master-alternatives>
             <fo:conditional-page-master-reference master-reference="A4-portrait-odd" odd-or-even="odd"/>
-            <fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even"/>
+            <fo:conditional-page-master-reference master-reference="A4-portrait-even"
+                                                  odd-or-even="even"
+                                                  page-position="first"/>
+            <fo:conditional-page-master-reference master-reference="A4-portrait-even"
+                                                  odd-or-even="even"
+                                                  page-position="rest"/>
+            <fo:conditional-page-master-reference master-reference="A4-portrait-even"
+                                                  odd-or-even="even"
+                                                  page-position="last"
+                                                  blank-or-not-blank="not-blank"/>
+            <fo:conditional-page-master-reference master-reference="A4-empty"
+                                                  odd-or-even="even"
+                                                  page-position="last"
+                                                  blank-or-not-blank="blank"/>
          </fo:repeatable-page-master-alternatives>
       </fo:page-sequence-master>
    </fo:layout-master-set>
@@ -299,18 +321,18 @@
                                    message="${idQuestionnaire}-#page-number#">
                      <barcode:code39>
                         <barcode:height>8mm</barcode:height>
-                     <barcode:human-readable>
+                        <barcode:human-readable>
                            <barcode:placement>none</barcode:placement>
                         </barcode:human-readable>
                      </barcode:code39>
                   </barcode:barcode>
                </fo:instream-foreign-object>
-            <fo:block-container reference-orientation="90" margin-left="5mm">
+               <fo:block-container reference-orientation="90" margin-left="5mm">
                   <fo:block text-align="left" font-size="8pt">${idQuestionnaire}-<fo:page-number/>
                   </fo:block>
                </fo:block-container>
             </fo:inline>
-            </fo:block>
+         </fo:block>
       </fo:static-content>
       <fo:static-content flow-name="portrait-region-after">
          <fo:block position="absolute"
@@ -383,15 +405,15 @@
             </fo:list-block>
          </fo:block>
          <fo:block width="100%" page-break-inside="avoid" keep-with-previous="always">
-               <fo:inline-container width="10%" vertical-align="bottom" text-align="right">
-                  <fo:block-container>
-                     <fo:block>
-                        <fo:external-graphic src="filter_arrow.png"/>
-                     </fo:block>
-                  </fo:block-container>
-               </fo:inline-container>
-               <fo:inline-container width="87%">
-                  <fo:block font-size="10pt"
+            <fo:inline-container width="10%" vertical-align="bottom" text-align="right">
+               <fo:block-container>
+                  <fo:block>
+                     <fo:external-graphic src="filter_arrow.png"/>
+                  </fo:block>
+               </fo:block-container>
+            </fo:inline-container>
+            <fo:inline-container width="87%">
+               <fo:block font-size="10pt"
                             font-weight="bold"
                             margin-top="6pt"
                             margin-bottom="6pt"
@@ -400,8 +422,8 @@
                             background-color="#CCCCCC"
                             text-align="center"
                             width="100%">If you are not ready, please go to the end of the questionnaire</fo:block>
-               </fo:inline-container>
-            </fo:block>
+            </fo:inline-container>
+         </fo:block>
          <fo:block background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
@@ -467,7 +489,7 @@
                       font-size="10pt"
                       padding="1mm">
                <fo:external-graphic src="date-fr-YYYYMMDD.png"/>
-               </fo:block>
+            </fo:block>
          </fo:block>
          <fo:block color="black"
                    font-weight="bold"
