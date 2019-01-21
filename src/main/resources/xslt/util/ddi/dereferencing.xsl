@@ -128,6 +128,8 @@
 
         <!-- Then each d:Instrument is dereferenced with the previous dereferenced tree used as references -->
         <xsl:for-each select="//d:Instrument">
+            <xsl:variable name="template-id" select="d:ControlConstructReference/r:ID"/>
+            <xsl:variable name="variable-groups" select="$dereferenced-template-sequence//*[r:ID=$template-id]//*[name()='d:Loop' or (name()='d:QuestionGrid' and d:GridDimension/d:Roster)]/r:ID"/>
             <xsl:variable name="form-name">
                 <xsl:choose>
                     <xsl:when test="d:InstrumentName">
@@ -156,7 +158,8 @@
                     <g:ResourcePackage>
                         <l:VariableScheme>
                             <xsl:apply-templates select="//l:VariableScheme/l:Variable[not(r:ID=//l:VariableScheme//r:VariableReference/r:ID)]
-                                |//l:VariableScheme/l:VariableGroup[not(r:ID=//l:VariableScheme//r:VariableGroupReference/r:ID)]">
+                                |//l:VariableScheme/l:VariableGroup[not(r:ID=//l:VariableScheme//r:VariableGroupReference/r:ID) 
+                                and r:BasedOnObject/r:BasedOnReference/r:ID = $variable-groups]">
                                 <xsl:with-param name="references" select="//l:VariableScheme" tunnel="yes"/>
                             </xsl:apply-templates>
                         </l:VariableScheme>
