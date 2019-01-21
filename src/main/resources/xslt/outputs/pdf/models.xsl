@@ -173,18 +173,28 @@
 						</fo:simple-page-master>
 					</xsl:otherwise>
 				</xsl:choose>
+				<fo:simple-page-master master-name="A4-empty" page-height="297mm"
+					page-width="210mm" font-family="Arial" font-size="10pt" font-weight="normal" margin-bottom="5mm">
+					<fo:region-body margin="15mm"/>
+				</fo:simple-page-master>
 				<fo:page-sequence-master master-name="A4">
 					<xsl:choose>
 						<xsl:when test="$orientation = '0'">
 							<fo:repeatable-page-master-alternatives>
 								<fo:conditional-page-master-reference master-reference="A4-portrait-odd" odd-or-even="odd"/>
-								<fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even"/>
+								<fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even" page-position="first"/>
+								<fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even" page-position="rest"/>
+								<fo:conditional-page-master-reference master-reference="A4-portrait-even" odd-or-even="even" page-position="last" blank-or-not-blank="not-blank"/>
+								<fo:conditional-page-master-reference master-reference="A4-empty" odd-or-even="even" page-position="last" blank-or-not-blank="blank"/>
 							</fo:repeatable-page-master-alternatives>
 						</xsl:when>
 						<xsl:otherwise>
 							<fo:repeatable-page-master-alternatives>
 								<fo:conditional-page-master-reference master-reference="A4-landscape-odd" odd-or-even="odd"/>
-								<fo:conditional-page-master-reference master-reference="A4-landscape-even" odd-or-even="even"/>
+								<fo:conditional-page-master-reference master-reference="A4-landscape-even" odd-or-even="even" page-position="first"/>
+								<fo:conditional-page-master-reference master-reference="A4-landscape-even" odd-or-even="even" page-position="rest"/>
+								<fo:conditional-page-master-reference master-reference="A4-landscape-even" odd-or-even="even" page-position="last" blank-or-not-blank="not-blank"/>
+								<fo:conditional-page-master-reference master-reference="A4-empty" odd-or-even="even" page-position="last" blank-or-not-blank="blank"/>
 							</fo:repeatable-page-master-alternatives>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -390,6 +400,18 @@
 	</xsl:template>
 
 	<xd:doc>
+		<xd:desc>template for the filters</xd:desc>
+	</xd:doc>
+	<xsl:template match="main//xf-group" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+
+	<xd:doc>
 		<xd:desc>template for the instructions</xd:desc>
 	</xd:doc>
 	<xsl:template match="main//xf-output" mode="model">
@@ -485,239 +507,6 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-<!-- 	REPONSES -->
-	
-	<!-- Déclenche tous les xf-input : REPONSES QUI DOIVENT ETRE RENSEIGNEES DANS LE QUESTIONNAIRE-->
-	<xsl:template match="main//xf-input" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="isTable" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:param name="no-border" tunnel="yes"/>
-		
-		<xsl:variable name="input-type" select="enopdf:get-type($source-context)"/>
-		<xsl:variable name="length" select="enopdf:get-length($source-context)"/>
-		
-		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-			<fo:block xsl:use-attribute-sets="label-question"> <!--linefeed-treatment="preserve"-->
-				<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-			</fo:block>
-		</xsl:if>
-		
-		<xsl:choose>
-			<xsl:when test="$input-type = 'text'">
-				<fo:block>
-					<xsl:choose>
-						<xsl:when test="enopdf:get-format($source-context) or ($length !='' and number($length) &lt;= 20)">
-							<fo:block xsl:use-attribute-sets="general-style">
-								<xsl:for-each select="1 to xs:integer(number($length))">
-									<xsl:call-template name="insert-image">
-										<xsl:with-param name="image-name" select="'mask_number.png'"/>
-									</xsl:call-template>
-								</xsl:for-each>
-							</fo:block>
-						</xsl:when>
-						<xsl:when test="$no-border = 'no-border'">
-							<fo:block-container height="8mm" width="50mm">
-								<fo:block border-color="black" border-style="solid" width="50mm">&#160;</fo:block>
-							</fo:block-container>
-						</xsl:when>
-						<xsl:when test="$isTable = 'YES'">
-							<fo:block-container height="8mm" width="50mm">
-								<fo:block>&#160;</fo:block>	
-							</fo:block-container>
-						</xsl:when>
-						<xsl:otherwise>
-							<fo:block-container height="8mm" border-color="black" border-style="solid" width="100%">
-								<fo:block>&#160;</fo:block>
-							</fo:block-container>
-						</xsl:otherwise>
-					</xsl:choose>
-				</fo:block>
-			</xsl:when>
-			<xsl:when test="$input-type = 'number'">
-				<xsl:variable name="length" select="number(enopdf:get-length($source-context))"/>
-				<fo:block>
-					<xsl:if test="$isTable = 'YES'">
-						<xsl:attribute name="text-align">right</xsl:attribute>
-						<xsl:attribute name="padding-top">0mm</xsl:attribute>
-						<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
-					</xsl:if>
-					<fo:block xsl:use-attribute-sets="general-style" padding-bottom="0mm" padding-top="0mm">
-						<xsl:choose>
-							<xsl:when test="$numeric-capture = 'optical'">
-								<xsl:variable name="separator-position">
-									<xsl:choose>
-										<xsl:when test="enopdf:get-number-of-decimals($source-context) != '0'">
-											<xsl:value-of select="string($length - number(enopdf:get-number-of-decimals($source-context)))"/>
-										</xsl:when>
-										<xsl:otherwise>
-											<xsl:value-of select="'0'"/>
-										</xsl:otherwise>
-									</xsl:choose>
-								</xsl:variable>
-								<xsl:for-each select="1 to xs:integer($length)">
-									<xsl:choose>
-										<xsl:when test="$separator-position = .">
-											<fo:inline> , </fo:inline>
-										</xsl:when>
-										<xsl:otherwise>
-											<xsl:call-template name="insert-image">
-												<xsl:with-param name="image-name" select="'mask_number.png'"/>
-											</xsl:call-template>
-										</xsl:otherwise>
-									</xsl:choose>
-								</xsl:for-each>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:variable name="width-coefficient" as="xs:integer">
-									<xsl:choose>
-										<xsl:when test="not($isTable = 'YES') or ($no-border = 'no-border')">
-											<xsl:value-of select="4"/>
-										</xsl:when>
-										<xsl:otherwise>
-											<xsl:value-of select="3"/>
-										</xsl:otherwise>
-									</xsl:choose>
-								</xsl:variable>
-								<fo:inline-container>
-									<xsl:attribute name="width" select="concat(string($length*$width-coefficient),'mm')"/>
-									<fo:block-container height="8mm">
-										<xsl:attribute name="width" select="concat(string($length*$width-coefficient),'mm')"/>
-										<xsl:if test="not($isTable = 'YES') or ($no-border = 'no-border')">
-											<xsl:attribute name="border-color" select="'black'"/>
-											<xsl:attribute name="border-style" select="'solid'"/>
-										</xsl:if>
-										<fo:block>
-											&#160;
-										</fo:block>										
-									</fo:block-container>
-								</fo:inline-container>
-							</xsl:otherwise>
-						</xsl:choose>
-						<fo:inline><xsl:value-of select="enopdf:get-suffix($source-context, $languages[1])"/></fo:inline>
-					</fo:block>
-				</fo:block>
-			</xsl:when>
-			<xsl:when test="$input-type = 'date'">
-				<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
-				<fo:block xsl:use-attribute-sets="general-style">
-					<xsl:if test="$isTable = 'YES'">
-						<xsl:attribute name="text-align">right</xsl:attribute>
-						<xsl:attribute name="padding-top">0mm</xsl:attribute>
-						<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
-					</xsl:if>
-					<xsl:call-template name="insert-image">
-						<xsl:with-param name="image-name" select="'date.png'"/>
-					</xsl:call-template>
-				</fo:block>
-			</xsl:when>
-		</xsl:choose>
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
-
-	<!-- Déclenche tous les xf-item de l'arbre des drivers -->
-	<xsl:template match="main//xf-item" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="no-border" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>
-		
-		<xsl:variable name="image">
-			<xsl:value-of select="enopdf:get-image($source-context)"/>
-		</xsl:variable>
-		
-		<xsl:choose>
-			<xsl:when test="$no-border = 'no-border'">
-				<fo:inline>
-					<fo:inline>
-						<xsl:call-template name="insert-image">
-							<xsl:with-param name="image-name" select="'check_case.png'"/>
-						</xsl:call-template>
-					</fo:inline>
-					<xsl:choose>
-						<xsl:when test="$image != ''">
-							<xsl:call-template name="insert-image">
-								<xsl:with-param name="image-name" select="$image"/>
-							</xsl:call-template>
-						</xsl:when>
-						<xsl:otherwise>
-							<fo:inline padding="1mm" text-align="left">
-								<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-							</fo:inline>
-						</xsl:otherwise>
-					</xsl:choose>
-				</fo:inline>
-			</xsl:when>
-			<xsl:otherwise>
-				<fo:list-item>
-					<fo:list-item-label end-indent="label-end()">
-						<fo:block text-align="right">
-							<xsl:call-template name="insert-image">
-								<xsl:with-param name="image-name" select="'check_case.png'"/>
-							</xsl:call-template>
-						</fo:block>
-					</fo:list-item-label>
-					<fo:list-item-body start-indent="body-start()">
-						<xsl:choose>
-							<xsl:when test="$image != ''">
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="$image"/>
-								</xsl:call-template>
-							</xsl:when>
-							<xsl:otherwise>
-								<fo:block>
-									<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-								</fo:block>
-							</xsl:otherwise>
-						</xsl:choose>
-					</fo:list-item-body>
-				</fo:list-item>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-
-	<!-- Déclenche tous les xf-select de l'arbre des drivers -->
-	<xsl:template match="main//xf-select1 | main//xf-select" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="no-border" tunnel="yes"/>
-		<xsl:param name="isTable" tunnel="yes"/>
-		
-		<xsl:choose>
-			<xsl:when test="enopdf:get-appearance($source-context) = 'minimal'">
-				<xsl:choose>
-					<xsl:when test="$no-border = 'no-border'">
-						<fo:block-container height="8mm" width="50mm">
-							<fo:block border-color="black" border-style="solid" width="50mm">&#160;</fo:block>
-						</fo:block-container>
-					</xsl:when>
-					<xsl:when test="$isTable = 'YES'">
-						<fo:block-container height="8mm" width="50mm">
-							<fo:block>&#160;</fo:block>	
-						</fo:block-container>
-					</xsl:when>
-					<xsl:otherwise>
-						<fo:block-container height="8mm" border-color="black" border-style="solid" width="100%">
-							<fo:block>&#160;</fo:block>
-						</fo:block-container>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:when>
-			<xsl:when test="$no-border = 'no-border'">
-				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-					<xsl:with-param name="driver" select="." tunnel="yes"/>
-				</xsl:apply-templates>
-			</xsl:when>
-			<xsl:otherwise>
-				<fo:list-block>
-					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-						<xsl:with-param name="driver" select="." tunnel="yes"/>
-					</xsl:apply-templates>
-				</fo:list-block>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-	
 	<!-- Déclenche tous les Table de l'arbre des drivers -->
 	<xsl:template match="main//Table | main//TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -885,7 +674,6 @@
 		</fo:table-cell>
 	</xsl:template>
 
-
 	<!-- Déclenche tous les Cell de l'arbre des drivers -->
 	<xsl:template match="main//Cell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -932,15 +720,10 @@
 		</fo:table-cell>
 	</xsl:template>
 
-	<!-- Déclenche tous les xf-group de l'arbre des drivers -->
-	<xsl:template match="main//xf-group" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>
+	<!-- 	REPONSES -->
 
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
+	<!-- external variables : do nothing -->
+	<xsl:template match="main//ResponseElement" mode="model"/>
 
 	<!-- Déclenche tous les xf-textarea de l'arbre des drivers -->
 	<xsl:template match="main//xf-textarea" mode="model">
@@ -967,38 +750,334 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-	<!-- external variables : do nothing -->
-	<xsl:template match="main//ResponseElement" mode="model"/>
-	
-
-	<xsl:template match="main//DoubleDuration" mode="model">
+	<!-- Déclenche tous les xf-input : REPONSES QUI DOIVENT ETRE RENSEIGNEES DANS LE QUESTIONNAIRE-->
+	<xsl:template match="main//xf-input" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="isTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="no-border" tunnel="yes"/>
 		
-		<xsl:if test="enopdf:get-type($source-context) = 'duration'">
-			<xsl:variable name="field" select="enopdf:get-format($source-context)"/>
-			<fo:inline>
-				<fo:block xsl:use-attribute-sets="general-style">
-					<xsl:for-each select="1 to string-length($field)">
+		<xsl:variable name="input-type" select="enopdf:get-type($source-context)"/>
+		<xsl:variable name="length" select="enopdf:get-length($source-context)"/>
+		
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+			<fo:block xsl:use-attribute-sets="label-question"> <!--linefeed-treatment="preserve"-->
+				<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+			</fo:block>
+		</xsl:if>
+
+		<xsl:choose>
+			<xsl:when test="$input-type = 'text'">
+				<fo:block>
+					<xsl:choose>
+						<xsl:when test="enopdf:get-format($source-context) or ($length !='' and number($length) &lt;= 20)">
+							<fo:block xsl:use-attribute-sets="general-style">
+								<xsl:for-each select="1 to xs:integer(number($length))">
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'mask_number.png'"/>
+									</xsl:call-template>
+								</xsl:for-each>
+							</fo:block>
+						</xsl:when>
+						<xsl:when test="$no-border = 'no-border'">
+							<fo:block-container height="8mm" width="50mm">
+								<fo:block border-color="black" border-style="solid" width="50mm">&#160;</fo:block>
+							</fo:block-container>
+						</xsl:when>
+						<xsl:when test="$isTable = 'YES'">
+							<fo:block-container height="8mm" width="50mm">
+								<fo:block>&#160;</fo:block>	
+							</fo:block-container>
+						</xsl:when>
+						<xsl:otherwise>
+							<fo:block-container height="8mm" border-color="black" border-style="solid" width="100%">
+								<fo:block>&#160;</fo:block>
+							</fo:block-container>
+						</xsl:otherwise>
+					</xsl:choose>
+				</fo:block>
+			</xsl:when>
+			<xsl:when test="$input-type = 'number'">
+				<xsl:variable name="length" select="number(enopdf:get-length($source-context))"/>
+				<fo:block>
+					<xsl:if test="$isTable = 'YES'">
+						<xsl:attribute name="text-align">right</xsl:attribute>
+						<xsl:attribute name="padding-top">0mm</xsl:attribute>
+						<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
+					</xsl:if>
+					<fo:block xsl:use-attribute-sets="general-style" padding-bottom="0mm" padding-top="0mm">
 						<xsl:choose>
-							<xsl:when test="':' = substring($field,.,1)">
-								<fo:inline>:</fo:inline>
+							<xsl:when test="$numeric-capture = 'optical'">
+								<xsl:variable name="separator-position">
+									<xsl:choose>
+										<xsl:when test="enopdf:get-number-of-decimals($source-context) != '0'">
+											<xsl:value-of select="string($length - number(enopdf:get-number-of-decimals($source-context)))"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="'0'"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:variable>
+								<xsl:for-each select="1 to xs:integer($length)">
+									<xsl:choose>
+										<xsl:when test="$separator-position = .">
+											<fo:inline> , </fo:inline>
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:call-template name="insert-image">
+												<xsl:with-param name="image-name" select="'mask_number.png'"/>
+											</xsl:call-template>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:for-each>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'mask_number.png'"/>
-								</xsl:call-template>
+								<xsl:variable name="width-coefficient" as="xs:integer">
+									<xsl:choose>
+										<xsl:when test="not($isTable = 'YES') or ($no-border = 'no-border')">
+											<xsl:value-of select="4"/>
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:value-of select="3"/>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:variable>
+								<fo:inline-container>
+									<xsl:attribute name="width" select="concat(string($length*$width-coefficient),'mm')"/>
+									<fo:block-container height="8mm">
+										<xsl:attribute name="width" select="concat(string($length*$width-coefficient),'mm')"/>
+										<xsl:if test="not($isTable = 'YES') or ($no-border = 'no-border')">
+											<xsl:attribute name="border-color" select="'black'"/>
+											<xsl:attribute name="border-style" select="'solid'"/>
+										</xsl:if>
+										<fo:block>
+											&#160;
+										</fo:block>										
+									</fo:block-container>
+								</fo:inline-container>
 							</xsl:otherwise>
 						</xsl:choose>
-					</xsl:for-each>
+						<fo:inline><xsl:value-of select="enopdf:get-suffix($source-context, $languages[1])"/></fo:inline>
+					</fo:block>
 				</fo:block>
-			</fo:inline>
-		</xsl:if>
+			</xsl:when>
+		</xsl:choose>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
+
+	<xsl:template match="main//DateTimeDomain" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="isTable" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="no-border" tunnel="yes"/>
+		
+		<xsl:variable name="field" select="upper-case(enopdf:get-format($source-context))"/>
+		<xsl:variable name="field-image-name">
+			<xsl:if test="contains($field,'YYYY') or contains($field,'AAAA')">
+				<xsl:value-of select="'YYYY'"/>
+			</xsl:if>
+			<xsl:if test="contains($field,'MM')">
+				<xsl:value-of select="'MM'"/>
+			</xsl:if>
+			<xsl:if test="contains($field,'DD') or contains($field,'JJ')">
+				<xsl:value-of select="'DD'"/>
+			</xsl:if>
+		</xsl:variable>
+
+		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+			<fo:block xsl:use-attribute-sets="label-question"> <!--linefeed-treatment="preserve"-->
+				<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+			</fo:block>
+		</xsl:if>
+
+		<fo:block xsl:use-attribute-sets="general-style">
+			<xsl:if test="$isTable = 'YES'">
+				<xsl:attribute name="text-align">right</xsl:attribute>
+				<xsl:attribute name="padding-top">0mm</xsl:attribute>
+				<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
+			</xsl:if>
+			<xsl:call-template name="insert-image">
+				<xsl:with-param name="image-name" select="concat('date-',$languages[1],'-',$field-image-name,'.png')"/>
+			</xsl:call-template>
+		</fo:block>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+
+	<xsl:template match="main//DurationDomain" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:variable name="field" select="upper-case(enopdf:get-format($source-context))"/>
+		<fo:inline>
+			<fo:block xsl:use-attribute-sets="general-style">
+				<xsl:choose>
+					<xsl:when test="$field='HH:CH'">
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'mask_number.png'"/>
+						</xsl:call-template>
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'mask_number.png'"/>
+						</xsl:call-template>
+						<fo:inline padding-start="1mm" padding-end="2mm">heures</fo:inline>
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'mask_number.png'"/>
+						</xsl:call-template>
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'mask_number.png'"/>
+						</xsl:call-template>
+						<fo:inline padding-start="1mm" padding-end="2mm">centièmes</fo:inline>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:for-each select="1 to string-length($field)">
+							<xsl:variable name="current-character" select="substring($field,position(),1)"/>
+							<xsl:choose>
+								<xsl:when test="$current-character = 'P'"/>
+								<xsl:when test="$current-character = 'T'"/>
+								<xsl:when test="$current-character = 'N'">
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'mask_number.png'"/>
+									</xsl:call-template>
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'mask_number.png'"/>
+									</xsl:call-template>									
+								</xsl:when>
+								<xsl:when test="$current-character = 'Y' or $current-character = 'A'">
+									<fo:inline padding-start="1mm" padding-end="3mm">ans</fo:inline>
+								</xsl:when>
+								<xsl:when test="$current-character = 'D' or $current-character = 'J'">
+									<fo:inline padding-start="1mm" padding-end="3mm">jours</fo:inline>
+								</xsl:when>
+								<xsl:when test="$current-character = 'H'">
+									<fo:inline padding-start="1mm" padding-end="3mm">heures</fo:inline>
+								</xsl:when>
+								<xsl:when test="$current-character = 'S'">
+									<fo:inline padding-start="1mm" padding-end="3mm">secondes</fo:inline>
+								</xsl:when>
+								<xsl:when test="$current-character = 'M' and not(contains(substring($field,1,position()),'T'))">
+									<fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>
+								</xsl:when>
+								<xsl:when test="$current-character = 'M' and contains(substring($field,1,position()),'T')">
+									<fo:inline padding-start="1mm" padding-end="3mm">minutes</fo:inline>
+								</xsl:when>
+								<xsl:otherwise>
+									<fo:inline padding-start="1mm" padding-end="3mm">unité de temps inconnue</fo:inline>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:for-each>
+					</xsl:otherwise>
+				</xsl:choose>
+			</fo:block>
+		</fo:inline>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+
+	<!-- Déclenche tous les xf-select de l'arbre des drivers -->
+	<xsl:template match="main//xf-select1 | main//xf-select" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="no-border" tunnel="yes"/>
+		<xsl:param name="isTable" tunnel="yes"/>
+		
+		<xsl:choose>
+			<xsl:when test="enopdf:get-appearance($source-context) = 'minimal'">
+				<xsl:choose>
+					<xsl:when test="$no-border = 'no-border'">
+						<fo:block-container height="8mm" width="50mm">
+							<fo:block border-color="black" border-style="solid" width="50mm">&#160;</fo:block>
+						</fo:block-container>
+					</xsl:when>
+					<xsl:when test="$isTable = 'YES'">
+						<fo:block-container height="8mm" width="50mm">
+							<fo:block>&#160;</fo:block>	
+						</fo:block-container>
+					</xsl:when>
+					<xsl:otherwise>
+						<fo:block-container height="8mm" border-color="black" border-style="solid" width="100%">
+							<fo:block>&#160;</fo:block>
+						</fo:block-container>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:when test="$no-border = 'no-border'">
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+			</xsl:when>
+			<xsl:otherwise>
+				<fo:list-block>
+					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+						<xsl:with-param name="driver" select="." tunnel="yes"/>
+					</xsl:apply-templates>
+				</fo:list-block>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<!-- Déclenche tous les xf-item de l'arbre des drivers -->
+	<xsl:template match="main//xf-item" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="no-border" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:variable name="image">
+			<xsl:value-of select="enopdf:get-image($source-context)"/>
+		</xsl:variable>
+		
+		<xsl:choose>
+			<xsl:when test="$no-border = 'no-border'">
+				<fo:inline>
+					<fo:inline>
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'check_case.png'"/>
+						</xsl:call-template>
+					</fo:inline>
+					<xsl:choose>
+						<xsl:when test="$image != ''">
+							<xsl:call-template name="insert-image">
+								<xsl:with-param name="image-name" select="$image"/>
+							</xsl:call-template>
+						</xsl:when>
+						<xsl:otherwise>
+							<fo:inline padding="1mm" text-align="left">
+								<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+							</fo:inline>
+						</xsl:otherwise>
+					</xsl:choose>
+				</fo:inline>
+			</xsl:when>
+			<xsl:otherwise>
+				<fo:list-item>
+					<fo:list-item-label end-indent="label-end()">
+						<fo:block text-align="right">
+							<xsl:call-template name="insert-image">
+								<xsl:with-param name="image-name" select="'check_case.png'"/>
+							</xsl:call-template>
+						</fo:block>
+					</fo:list-item-label>
+					<fo:list-item-body start-indent="body-start()">
+						<xsl:choose>
+							<xsl:when test="$image != ''">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="$image"/>
+								</xsl:call-template>
+							</xsl:when>
+							<xsl:otherwise>
+								<fo:block>
+									<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+								</fo:block>
+							</xsl:otherwise>
+						</xsl:choose>
+					</fo:list-item-body>
+				</fo:list-item>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<xsl:template name="insert-image">
 		<xsl:param name="image-name"/>
 		<fo:external-graphic>
