@@ -39,7 +39,7 @@
                         <xsl:non-matching-substring>
                             <xsl:analyze-string select="$descendant-id" regex="^(.+)-([0-9])+$">
                                 <xsl:matching-substring>
-                                    <xsl:value-of select="concat(upper-case(replace(regex-group(1),'_','')),'_0')"/>
+                                    <xsl:value-of select="concat(upper-case(replace(regex-group(1),'_','')),'00')"/>
                                 </xsl:matching-substring>
                                 <xsl:non-matching-substring>
                                     <xsl:value-of select="upper-case(replace($descendant-id,'_',''))"/>
