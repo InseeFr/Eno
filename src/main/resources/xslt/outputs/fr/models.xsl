@@ -506,9 +506,22 @@
                     </xsl:if>
                 </xsl:attribute>
             </xsl:if>
+            
             <xsl:if test="$type = 'date'">
-                <xsl:attribute name="type" select="concat('xf:', $type)"/>
+                <xsl:variable name="formatDate" select="enofr:get-format($source-context)"/>
+                <xsl:choose>
+                    <xsl:when test="$formatDate='jj/mm/aaaa'">
+                        <xsl:attribute name="type" select="concat('xf:', $type)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="enofr:writeInputDate">
+                            <xsl:with-param name="source-context" select="$source-context"/>
+                            <xsl:with-param name="formatDate" select="$formatDate"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:if>
+            
             <xsl:if test="not($readonly = ('false()', ''))">
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
@@ -2023,6 +2036,118 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[name() = ('Resource', 'Body')]//*[name() = ('ResponseElement','CalculatedVariable')]" mode="model"/>
+
+    <xsl:template name="enofr:writeInputDate">
+        <xsl:param name="source-context"/>
+        <xsl:param name="formatDate"/>
+        
+        <xsl:choose>
+        <!-- format de dates -->
+            <!-- mmaaaa -->
+            <xsl:when test="$formatDate='YYYY-MM'">
+                <!-- liste déroulante -->
+                <!-- Format de sortie : xsd: gYearMonth -->
+                
+                <xsl:element name="xf:select1">
+                    <xsl:attribute name="id" select="concat($name, '-control')"/>
+                    <xsl:attribute name="bind" select="concat($name, '-bind')"/>
+                    <xsl:if test="$appearance != ''">
+                        <xsl:attribute name="appearance" select="$appearance"/>
+                    </xsl:if>
+                    <xsl:attribute name="class" select="'double-duration'"/>
+                    <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
+                    <xsl:if test="not($length = '')">
+                        <xsl:attribute name="xxf:maxlength" select="$length"/>
+                    </xsl:if>
+                    <xsl:if test="enofr:get-label($source-context, $languages[1])/node()">
+                        <xf:label ref="$form-resources/{$name}/label">
+                            <xsl:if test="eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
+                                <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                            </xsl:if>
+                        </xf:label>
+                    </xsl:if>
+                    <xsl:if test="enofr:get-hint($source-context, $languages[1])/node()">
+                        <xf:hint ref="$form-resources/{$name}/hint">
+                            <xsl:if test="eno:is-rich-content(enofr:get-hint($source-context, $languages[1]))">
+                                <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                            </xsl:if>
+                        </xf:hint>
+                    </xsl:if>
+                    <xf:item>
+                        <xf:label/>
+                        <xf:value/>
+                    </xf:item>
+                    <xf:itemset ref="$form-resources/{$name}/item">
+                        <xf:label ref="label"/>
+                        <xf:value ref="value"/>
+                    </xf:itemset>
+                </xsl:element>
+                <xsl:element name="xhtml:span">
+                    <xsl:attribute name="class" select="'double-duration-suffix'"/>
+                    <xsl:text>mois</xsl:text>
+                </xsl:element>
+                
+                <xsl:variable name="name" select="replace(enofr:get-name($source-context), '-', '-B-')"/>
+                
+                <xsl:element name="xf:select1">
+                    <xsl:attribute name="id" select="concat($name, '-control')"/>
+                    <xsl:attribute name="bind" select="concat($name, '-bind')"/>
+                    <xsl:if test="$appearance != ''">
+                        <xsl:attribute name="appearance" select="$appearance"/>
+                    </xsl:if>
+                    <xsl:attribute name="class" select="'double-duration'"/>
+                    <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
+                    <xsl:if test="$length != ''">
+                        <xsl:attribute name="xxf:maxlength" select="$length"/>
+                    </xsl:if>
+                    <xsl:if test="enofr:get-label($source-context, $languages[1])/node()">
+                        <xf:label ref="$form-resources/{$name}/label">
+                            <xsl:if test="eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
+                                <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                            </xsl:if>
+                        </xf:label>
+                    </xsl:if>
+                    <xsl:if test="enofr:get-hint($source-context, $languages[1])/node()">
+                        <xf:hint ref="$form-resources/{$name}/hint">
+                            <xsl:if test="eno:is-rich-content(enofr:get-hint($source-context, $languages[1]))">
+                                <xsl:attribute name="mediatype">text/html</xsl:attribute>
+                            </xsl:if>
+                        </xf:hint>
+                    </xsl:if>
+                    <xf:item>
+                        <xf:label/>
+                        <xf:value/>
+                    </xf:item>
+                    <xf:itemset ref="$form-resources/{$name}/item">
+                        <xf:label ref="label"/>
+                        <xf:value ref="value"/>
+                    </xf:itemset>
+                </xsl:element>
+                <xsl:element name="xhtml:span">
+                    <xsl:attribute name="class" select="'double-duration-suffix'"/>
+                    <xsl:text>année(s)</xsl:text>
+                </xsl:element>
+            </xsl:when>
+            <!-- aaaa -->
+            <xsl:when test="$formatDate='YYYY'">
+                <!-- liste déroulante -->
+                <!-- Format de sortie : xsd: gYear -->
+            </xsl:when>
+        <!-- format de durées -->
+            <!-- jours jj -->
+            <xsl:when test="$formatDate='PnD'">
+                <!-- champ avec unité -->
+            </xsl:when>
+            <!-- mois mm -->
+            <xsl:when test="$formatDate='PnM'">
+                <!-- champ avec unité -->
+            </xsl:when>
+            <!-- année mois -->
+            <xsl:when test="$formatDate='PnYnM'">
+                <!-- 2 champs de saisie avec unité -->
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
 
     <xd:doc>
         <xd:desc>references the label and indicates how to customize it</xd:desc>
