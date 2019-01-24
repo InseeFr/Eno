@@ -177,12 +177,31 @@
 					<xsl:when test="$typeResponse='number' and fn:string-length($numberOfDecimals)=0">
 						<xsl:value-of select="concat('num ',$minimumResponse,'..',$maximumResponse)"/>
 					</xsl:when>
-					<xsl:when test="$typeResponse='date'">
-						<xsl:value-of select="$typeResponse"/>
-					</xsl:when>
 				</xsl:choose>
 			</text:p>
 			
+		</xsl:if>		
+		
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+		
+	</xsl:template>
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on xf-input driver.</xd:p>
+			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="DateTimeDomain" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
+		<xsl:variable name="dateFormat" select="enoodt:get-format($source-context)"/>
+		<xsl:if test="$typeResponse!=''">
+			<text:p text:style-name="Format">
+				<xsl:value-of select="concat('date ( ',$dateFormat,' )')"/>
+			</text:p>
 		</xsl:if>		
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
