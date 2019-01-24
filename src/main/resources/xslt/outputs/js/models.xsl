@@ -246,18 +246,6 @@
 					</component>
 				</xsl:when>
 				
-				<xsl:when test="$typeResponse='date'">
-					<component xsi:type="Datepicker" id="{$idQuestion}">
-						<label><xsl:value-of select="$labelQuestion"/></label>
-						<declarations>
-							<xsl:copy-of select="$declarations"></xsl:copy-of>
-						</declarations>
-						<xsl:call-template name="enojs:addResponeToComponent">
-							<xsl:with-param name="responseName" select="$responseName"/>
-						</xsl:call-template>
-						<xsl:copy-of select="$filterCondition"/>
-					</component>
-				</xsl:when>
 			</xsl:choose>
 			
 			<xsl:call-template name="enojs:addVariableCollected">
@@ -271,6 +259,31 @@
 		</xsl:apply-templates>
 		
 	</xsl:template>	
+	
+	<xsl:template match="DateTimeDomain" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="idQuestion" tunnel="yes"/>
+		<xsl:param name="questionName" tunnel="yes"/>
+		<xsl:param name="labelQuestion" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
+		<xsl:param name="filterCondition" tunnel="yes"/>
+		
+		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
+		<xsl:variable name="dateFormat" select="enojs:get-format($source-context)"/>
+		
+		<component xsi:type="Datepicker" id="{$idQuestion}">
+			<label><xsl:value-of select="$labelQuestion"/></label>
+			<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
+			<declarations>
+				<xsl:copy-of select="$declarations"/>
+			</declarations>
+			<xsl:call-template name="enojs:addResponeToComponent">
+				<xsl:with-param name="responseName" select="$responseName"/>
+			</xsl:call-template>
+			<xsl:copy-of select="$filterCondition"/>
+		</component>
+	</xsl:template>
 	
 	<xd:doc>
 		<xd:desc>
