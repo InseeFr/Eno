@@ -72,6 +72,10 @@
             <xsl:apply-templates/>
         </component>
     </xsl:template>
+       
+    <xsl:template match="unit">
+        <xsl:value-of select="."/>
+    </xsl:template>
     
     <xsl:template match="label">
         <label><xsl:value-of select="normalize-space(.)"/></label>
@@ -93,30 +97,8 @@
             <xsl:apply-templates select="label"/>
         </declaration>
     </xsl:template>
-    
-    <xsl:template match="component[@xsi:type='Radio'] | component[@xsi:type='Dropdown'] | component[@xsi:type='CheckboxOne']">
-        <xsl:param name="page" tunnel="yes"/>
-        <component xsi:type="{@xsi:type}" id="{@id}" toValidate="{@toValidate}" page="{$page}">
-            <xsl:apply-templates select="label"/>
-            <xsl:apply-templates select="declaration"/>
-            <xsl:apply-templates select="codeLists"/>
-            <xsl:apply-templates select="response"/>
-            <xsl:apply-templates select="conditionFilter"/>
-        </component>
-    </xsl:template>
-    
-    <xsl:template match="component[@xsi:type='InputNumber']">
-        <xsl:param name="page" tunnel="yes"/>
-        <component>
-            <xsl:copy-of select="@*"/>
-            <xsl:attribute name="page" select="$page"/>
-            <xsl:apply-templates select="label"/>
-            <xsl:apply-templates select="declaration"/>
-            <unit><xsl:value-of select="unit"/></unit>
-            <xsl:apply-templates select="response"/>
-            <xsl:apply-templates select="conditionFilter"/>
-        </component>
-    </xsl:template>
+       
+   
     
     <xsl:template match="response">
         <response name="{@name}">
