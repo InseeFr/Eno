@@ -26,18 +26,19 @@
     </xd:doc>
     
     <xsl:template match="main">
-        <xsl:variable name="idQuestionnaire" select="Questionnaire/@id"/>
-        <Questionnaire 
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            id="{$idQuestionnaire}">
-            <xsl:apply-templates select="Questionnaire"/>
-            <xsl:apply-templates select="descendant::variable"/>
-        </Questionnaire>
+        <xsl:apply-templates select="Questionnaire"/>
     </xsl:template>
     
     
     <xsl:template match="Questionnaire">
-        <xsl:apply-templates select="*[not(self::variable)]"/>
+        <xsl:variable name="idQuestionnaire" select="@id"/>
+        <Questionnaire 
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            id="{$idQuestionnaire}">
+            <xsl:apply-templates select="*[not(self::variable)]"/>
+            <xsl:apply-templates select="descendant::variable"/>
+        </Questionnaire>
+        
     </xsl:template>
     
     <xsl:template match="component[@xsi:type='Sequence']">
@@ -98,9 +99,7 @@
         <component xsi:type="{@xsi:type}" id="{@id}" toValidate="{@toValidate}" page="{$page}">
             <xsl:apply-templates select="label"/>
             <xsl:apply-templates select="declaration"/>
-            
-            <xsl:copy-of select="codeLists"/>
-            
+            <xsl:apply-templates select="codeLists"/>
             <xsl:apply-templates select="response"/>
             <xsl:apply-templates select="conditionFilter"/>
         </component>
@@ -154,7 +153,17 @@
         </variable>
     </xsl:template>
     
+    <xsl:template match="dateFormat">
+        <dateFormat><xsl:value-of select="."/></dateFormat>
+    </xsl:template>
     
+    <xsl:template match="code">
+        <code>
+            <parent><xsl:value-of select="parent"/></parent>
+            <value><xsl:value-of select="value"/></value>
+            <xsl:apply-templates select="label"/>
+        </code>
+    </xsl:template>
     
     <xd:doc>
         <xd:desc>
@@ -175,12 +184,12 @@
             <xsl:otherwise>
                 <xsl:variable name="var" select="$variables[1]/name" as="xs:string"/>
                 <xsl:variable name="regex" select="concat('\$',$var,'\$')"/>
-                <xsl:variable name="valueOfVaraiable" as="xs:string" select="$variables[1]/value"/>
+                <xsl:variable name="valueOfVariable" as="xs:string" select="$variables[1]/value"/>
                 <xsl:variable name="newFormula">
                     <xsl:choose>
-                        <xsl:when test="$valueOfVaraiable!=''">
+                        <xsl:when test="$valueOfVariable!=''">
                             <!-- Probleme avec les '$', résolue en les remplacant par \$ -->
-                            <xsl:variable name="expressionToReplace" as="xs:string" select="replace($valueOfVaraiable,'\$','\\\$')"/>
+                            <xsl:variable name="expressionToReplace" as="xs:string" select="replace($valueOfVariable,'\$','\\\$')"/>
                             <!-- Replace in formula "$var$" by "(value of the var)" -->
                             <xsl:value-of select="replace($formula,$regex,concat('(',$expressionToReplace,')'))"/>
                         </xsl:when>
@@ -189,11 +198,11 @@
                         <xsl:otherwise><xsl:value-of select="replace($formula,$regex,$var)"/></xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
-                  
+                
                 <!-- Find if in the value of the current variable, there are variables which depends other variables --> 
                 <xsl:variable name="variablesToAdd" as="node()*">
                     <xsl:call-template name="enojs:findVariableInFormula">
-                        <xsl:with-param name="formula" select="$valueOfVaraiable"/>
+                        <xsl:with-param name="formula" select="$valueOfVariable"/>
                     </xsl:call-template>
                 </xsl:variable>
                 
