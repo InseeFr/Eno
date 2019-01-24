@@ -313,7 +313,7 @@
         <!--<copy file="${temp.home}/${out-format}/${form-name}/basic-form.tmp" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"></copy>-->
         <xslt in="${temp.home}/${out-format}/${form-name}/basic-form.tmp"
             out="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
-            style="${xslt.home}/util/js/post-processing-js.xsl"
+            style="${xslt.home}/util/js/sort-components.xsl"
             classpath="${saxon.jar}" force="true">
         </xslt>
     </target> 
