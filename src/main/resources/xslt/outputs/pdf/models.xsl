@@ -155,21 +155,21 @@
 					<xsl:otherwise>
 						<fo:simple-page-master master-name="A4-landscape-odd" page-height="297mm"
 							page-width="210mm" font-family="Arial" font-size="10pt" reference-orientation="{$orientation}"
-							font-weight="normal">
-							<fo:region-body margin="15mm" column-count="{$column-count}"/>
-							<fo:region-before region-name="landscape-region-before-odd" extent="25mm" display-align="before" precedence="true"/>
-							<fo:region-after region-name="landscape-region-after-odd" extent="25mm" display-align="before" precedence="true"/>
+							font-weight="normal" margin="5mm">
+							<fo:region-body margin="11mm" column-count="{$column-count}"/>
+							<fo:region-before region-name="landscape-region-before-odd" extent="10mm" display-align="before" precedence="true"/>
+							<fo:region-after region-name="landscape-region-after-odd" extent="10mm" display-align="before" precedence="true"/>
 							<fo:region-start region-name="landscape-region-start" extent="10mm" display-align="before"/>
-							<!--<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before"/>-->
+							<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before"/>
 						</fo:simple-page-master>
 						<fo:simple-page-master master-name="A4-landscape-even" page-height="297mm"
 							page-width="210mm" font-family="Arial" font-size="10pt" reference-orientation="{$orientation}"
-							font-weight="normal">
-							<fo:region-body margin="15mm" column-count="{$column-count}"/>
-							<fo:region-before region-name="landscape-region-before-even" extent="25mm" display-align="before" precedence="true"/>
-							<fo:region-after region-name="landscape-region-after-even" extent="25mm" display-align="before" precedence="true"/>
+							font-weight="normal" margin="5mm">
+							<fo:region-body margin="11mm" column-count="{$column-count}"/>
+							<fo:region-before region-name="landscape-region-before-even" extent="10mm" display-align="before" precedence="true"/>
+							<fo:region-after region-name="landscape-region-after-even" extent="10mm" display-align="before" precedence="true"/>
 							<fo:region-start region-name="landscape-region-start" extent="10mm" display-align="before"/>
-							<!--<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before"/>-->
+							<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before"/>
 						</fo:simple-page-master>
 					</xsl:otherwise>
 				</xsl:choose>
@@ -242,22 +242,28 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<fo:static-content flow-name="landscape-region-before-odd">
-							<fo:block position="absolute" margin-top="6mm" margin-right="6mm" text-align="right">
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
-								</xsl:call-template>
-							</fo:block>
+							<fo:block-container absolute-position="absolute" left="277mm" top="5mm" width="5mm" height="5mm" >
+								<fo:block position="absolute" text-align="right">
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
+									</xsl:call-template>
+								</fo:block>
+							</fo:block-container>
 						</fo:static-content>
 						<fo:static-content flow-name="landscape-region-after-odd">
-							<fo:block position="absolute" margin-left="6mm" margin-top="14mm" bottom="0mm" text-align="left">
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
-								</xsl:call-template>
-							</fo:block>
-							<fo:block text-align="center">
-								<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
-							</fo:block>
-							<fo:block-container text-align="left" absolute-position="absolute" left="180mm" top="15mm">
+							<fo:block-container absolute-position="absolute" left="5mm" top="0mm" width="5mm" height="5mm">
+								<fo:block position="absolute" text-align="left">
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
+									</xsl:call-template>
+								</fo:block>
+							</fo:block-container>
+							<fo:block-container absolute-position="absolute" left="127mm" top="2mm" width="33mm" height="10mm">
+								<fo:block text-align="center">
+									<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+								</fo:block>
+							</fo:block-container>
+							<fo:block-container text-align="left" absolute-position="absolute" left="180mm" width="90mm" height="5mm" top="0mm">
 								<fo:block>
 									<fo:instream-foreign-object>
 										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns">
@@ -274,7 +280,7 @@
 							</fo:block-container>
 						</fo:static-content>
 						<fo:static-content flow-name="landscape-region-before-even">
-							<fo:block-container text-align="left" absolute-position="absolute" left="180mm" top="0mm">
+							<fo:block-container text-align="left" absolute-position="absolute" left="180mm" width="90mm" height="5mm" top="0mm">
 								<fo:block>
 									<fo:instream-foreign-object>
 										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns">
@@ -289,24 +295,30 @@
 									</fo:instream-foreign-object>
 								</fo:block>
 							</fo:block-container>
-							<fo:block position="absolute" margin-top="6mm" margin-right="6mm" text-align="right">
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
-								</xsl:call-template>
-							</fo:block>
+							<fo:block-container absolute-position="absolute" left="277mm" top="5mm" width="5mm" height="5mm" >
+								<fo:block position="absolute" text-align="right">
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'encoche-top-right.png'"/>
+									</xsl:call-template>
+								</fo:block>
+							</fo:block-container>
 						</fo:static-content>
 						<fo:static-content flow-name="landscape-region-after-even">
-							<fo:block position="absolute" margin-left="6mm" margin-top="14mm" bottom="0mm" text-align="left">
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
-								</xsl:call-template>
-							</fo:block>
-							<fo:block text-align="center">
-								<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
-							</fo:block>
+							<fo:block-container absolute-position="absolute" left="5mm" top="0mm" width="5mm" height="5mm">
+								<fo:block position="absolute" text-align="left">
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="'encoche-bottom-left.png'"/>
+									</xsl:call-template>
+								</fo:block>
+							</fo:block-container>
+							<fo:block-container absolute-position="absolute" left="127mm" top="2mm" width="33mm" height="10mm">
+								<fo:block text-align="center">
+									<fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+								</fo:block>
+							</fo:block-container>
 						</fo:static-content>
 						<fo:static-content flow-name="landscape-region-start">
-							<fo:block-container absolute-position="absolute" left="5mm" top="85mm">
+							<fo:block-container absolute-position="absolute" left="0mm" top="80mm"  width="5mm" height="90mm">
 								<fo:block>
 									<fo:instream-foreign-object>
 										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="-90">
