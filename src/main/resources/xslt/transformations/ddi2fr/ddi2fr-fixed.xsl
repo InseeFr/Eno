@@ -388,7 +388,7 @@
                         <xsl:value-of select="enoddi:get-type($context)"/>
                     </xsl:variable>
                     <!-- If it is number, we display this hint -->
-                    <xsl:if test="$type='number' and not(upper-case($numeric-example)='NO')">
+                    <xsl:if test="$type='number' and upper-case($numeric-example)='YES'">
                         <xsl:variable name="number-of-decimals" select="enoddi:get-number-of-decimals($context)"/>
                         <xsl:variable name="number-format">
                             <xsl:value-of select="'#'"/>
