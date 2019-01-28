@@ -3,8 +3,9 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
     xmlns:poguesGoto="http://xml.insee.fr/schema/applis/poguesGoto"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    exclude-result-prefixes="pogues poguesGoto xd" version="2.0">
+    exclude-result-prefixes="xs" version="2.0">
     <xsl:output indent="yes"/>
     <xsl:strip-space elements="*"/>
     <xsl:param name="debug" select="false()"/>
@@ -424,7 +425,7 @@
 
     <xd:doc>
         Child : Sequence or Question
-        parameters : 
+        parameters :
         - stop-position : first Child not to take
         - goto-style (none, before, after) : with stop-position, identifies the last Goto already inserted
         <xd:desc/>
@@ -540,17 +541,18 @@
         <xsl:if test="number($current-position) &lt; number($stop-position) or $stop-position = 'end' or $stop-position = 'last'">
             <xsl:choose>
                 <xsl:when test="$choosen-goto/poguesGoto:gotoValue/@start='before'">
-                    <pogues:IfThenElse id="{generate-id()}">
-                        <pogues:Expression>
+                    <xsl:element name="IfThenElse" namespace="http://xml.insee.fr/schema/applis/pogues">
+                        <xsl:attribute name="id" select="generate-id()"/>
+                        <xsl:element name="Expression" namespace="http://xml.insee.fr/schema/applis/pogues">
                             <xsl:value-of select="concat('not(',$choosen-goto-condition,')')"/>
-                        </pogues:Expression>
-                        <pogues:IfTrue>
+                        </xsl:element>
+                        <xsl:element name="IfTrue" namespace="http://xml.insee.fr/schema/applis/pogues">
                             <xsl:apply-templates select="." mode="first-child-next-brother">
                                 <xsl:with-param name="stop-position" select="$choosen-goto/poguesGoto:gotoValue/poguesGoto:To/@position"/>
                                 <xsl:with-param name="goto-style" select="'before'"/>
                             </xsl:apply-templates>
-                        </pogues:IfTrue>
-                    </pogues:IfThenElse>
+                        </xsl:element>
+                    </xsl:element>
                     <xsl:choose>
                         <xsl:when test="$choosen-goto/poguesGoto:To/@position = 'last'">
                             <xsl:apply-templates select="following-sibling::*[not(name()=pogues:Child) and not(following-sibling::pogues:Child)][1]" mode="first-child-next-brother">
@@ -594,17 +596,18 @@
                             </xsl:apply-templates>
                         </xsl:when>
                         <xsl:otherwise>
-                            <pogues:IfThenElse id="{generate-id()}">
-                                <pogues:Expression>
+                            <xsl:element name="IfThenElse" namespace="http://xml.insee.fr/schema/applis/pogues">
+                                <xsl:attribute name="id" select="generate-id()"/>
+                                <xsl:element name="Expression" namespace="http://xml.insee.fr/schema/applis/pogues">
                                     <xsl:value-of select="concat('not(',$choosen-goto-condition,')')"/>
-                                </pogues:Expression>
-                                <pogues:IfTrue>
+                                </xsl:element>
+                                <xsl:element name="IfTrue" namespace="http://xml.insee.fr/schema/applis/pogues">
                                     <xsl:apply-templates select="." mode="first-child-next-brother">
                                         <xsl:with-param name="stop-position" select="$choosen-goto/poguesGoto:gotoValue/poguesGoto:To/@position"/>
                                         <xsl:with-param name="goto-style" select="'after'"/>
                                     </xsl:apply-templates>
-                                </pogues:IfTrue>
-                            </pogues:IfThenElse>
+                                </xsl:element>
+                            </xsl:element>
                             <xsl:choose>
                                 <xsl:when test="$choosen-goto/poguesGoto:To/@position = 'last'">
                                     <xsl:apply-templates select="following-sibling::*[not(name()=pogues:Child) and not(following-sibling::pogues:Child)][1]" mode="first-child-next-brother">
