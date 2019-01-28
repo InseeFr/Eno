@@ -372,7 +372,6 @@
         <xsl:param name="language"/>
         <!-- We look for an instruction of 'Format' type -->
         <xsl:variable name="format-instruction">
-            <!--<xsl:sequence select="enoddi:get-label(enoddi:get-instructions-by-format($context,'format'),$language)"/>-->
             <xsl:sequence select="enoddi:get-instructions-by-format($context,'format')"/>
         </xsl:variable>
         <xsl:choose>
@@ -484,15 +483,6 @@
         <xsl:if test="$type='date'">
             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
         </xsl:if>
-<!--        <!-\- In those cases, we use specific messages as alert messages -\->
-        <xsl:if test="$type='duration'">
-            <xsl:if test="$format='hh'">
-                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Hours"/>
-            </xsl:if>
-            <xsl:if test="$format='mm'">
-                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Minutes"/>
-            </xsl:if>
-        </xsl:if>-->
     </xsl:function>
 
     <xd:doc>
