@@ -78,6 +78,14 @@
     <xsl:variable name="conditioning-variable-end" select="$properties//TextConditioningVariable/ddi/After"/>
 
     <xd:doc>
+        <xd:desc>
+            <xd:p>Boolean to hide numeric example.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="numeric-example" select="$parameters//NumericExample"/>
+    
+
+    <xd:doc>
         <xd:desc>Loops and dynamic array's ids may be called in many calculs : filters, consistency checks, calculated variables</xd:desc>
         <xd:dec>To change their in-language-ID into business-name, everywhere it is necessary, it is simple to try everywhere it could be necessary</xd:dec>
     </xd:doc>
@@ -380,7 +388,7 @@
                         <xsl:value-of select="enoddi:get-type($context)"/>
                     </xsl:variable>
                     <!-- If it is number, we display this hint -->
-                    <xsl:if test="$type='number'">
+                    <xsl:if test="$type='number' and not(upper-case($numeric-example)='NO')">
                         <xsl:variable name="number-of-decimals" select="enoddi:get-number-of-decimals($context)"/>
                         <xsl:variable name="number-format">
                             <xsl:value-of select="'#'"/>
@@ -476,7 +484,7 @@
         <xsl:if test="$type='date'">
             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
         </xsl:if>
-        <!-- In those cases, we use specific messages as alert messages -->
+<!--        <!-\- In those cases, we use specific messages as alert messages -\->
         <xsl:if test="$type='duration'">
             <xsl:if test="$format='hh'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Hours"/>
@@ -484,7 +492,7 @@
             <xsl:if test="$format='mm'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration/Minutes"/>
             </xsl:if>
-        </xsl:if>
+        </xsl:if>-->
     </xsl:function>
 
     <xd:doc>
