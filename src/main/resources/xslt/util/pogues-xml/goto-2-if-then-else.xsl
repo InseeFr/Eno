@@ -533,7 +533,7 @@
             <xsl:choose>
                 <xsl:when test="$chosen-goto/poguesGoto:gotoValue/@start='before'">
                     <xsl:element name="IfThenElse" namespace="http://xml.insee.fr/schema/applis/pogues">
-                        <xsl:attribute name="id" select="concat($chosen-goto-flowid,'-b-',$chosen-goto-to-id)"/>
+                        <xsl:attribute name="id" select="concat($chosen-goto-flowid,'-b-',$current-id)"/>
                         <xsl:element name="Expression" namespace="http://xml.insee.fr/schema/applis/pogues">
                             <xsl:value-of select="concat('not(',$chosen-goto-condition,')')"/>
                         </xsl:element>
@@ -588,7 +588,7 @@
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:element name="IfThenElse" namespace="http://xml.insee.fr/schema/applis/pogues">
-                                <xsl:attribute name="id" select="concat($chosen-goto-flowid,'-a-',$chosen-goto-to-id)"/>
+                                <xsl:attribute name="id" select="concat($chosen-goto-flowid,'-a-',$current-id)"/>
                                 <xsl:element name="Expression" namespace="http://xml.insee.fr/schema/applis/pogues">
                                     <xsl:value-of select="concat('not(',$chosen-goto-condition,')')"/>
                                 </xsl:element>
