@@ -334,23 +334,6 @@
 								</fo:block>
 							</fo:block-container>
 						</fo:static-content>
-						<!--<fo:static-content flow-name="landscape-region-end">
-							<fo:block-container absolute-position="absolute" left="0mm" top="85mm">
-								<fo:block>
-									<fo:instream-foreign-object>
-										<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="-90">
-											<xsl:attribute name="message" select="'${idQuestionnaire}-#page-number#'"/>
-											<barcode:code39>
-												<barcode:height>10mm</barcode:height>
-												<barcode:human-readable>
-													<barcode:placement>bottom</barcode:placement>
-												</barcode:human-readable>
-											</barcode:code39>
-										</barcode:barcode>
-									</fo:instream-foreign-object>
-								</fo:block>
-							</fo:block-container>
-						</fo:static-content>-->
 					</xsl:otherwise>
 				</xsl:choose>
 				
