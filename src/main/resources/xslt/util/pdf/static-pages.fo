@@ -11,7 +11,7 @@
                     odd-or-even="even"/>
             </fo:repeatable-page-master-alternatives>
         </fo:page-sequence-master>
-        <fo:simple-page-master font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" master-name="ouvertureCOL-recto" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -19,7 +19,7 @@
             <fo:region-after display-align="before" extent="100mm" precedence="true"
                 region-name="xsl-region-after-cover"/>
         </fo:simple-page-master>
-        <fo:simple-page-master font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" master-name="ouvertureCOL-verso" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -36,7 +36,7 @@
                     odd-or-even="even"/>
             </fo:repeatable-page-master-alternatives>
         </fo:page-sequence-master>
-        <fo:simple-page-master font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" master-name="entreeCOL-recto" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -44,7 +44,7 @@
             <fo:region-after display-align="before" extent="100mm" precedence="true"
                 region-name="xsl-region-after-cover"/>
         </fo:simple-page-master>
-        <fo:simple-page-master font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" master-name="entreeCOL-verso" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -61,7 +61,7 @@
                     odd-or-even="even"/>
             </fo:repeatable-page-master-alternatives>
         </fo:page-sequence-master>
-        <fo:simple-page-master font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" master-name="relanceCOL-recto" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -69,7 +69,7 @@
             <fo:region-after display-align="before" extent="100mm" precedence="true"
                 region-name="xsl-region-after-cover"/>
         </fo:simple-page-master>
-        <fo:simple-page-master font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" master-name="relanceCOL-verso" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -86,7 +86,7 @@
                     odd-or-even="even"/>
             </fo:repeatable-page-master-alternatives>
         </fo:page-sequence-master>
-        <fo:simple-page-master font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" master-name="cnrCOL-recto" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -94,7 +94,7 @@
             <fo:region-after display-align="before" extent="100mm" precedence="true"
                 region-name="xsl-region-after-cover"/>
         </fo:simple-page-master>
-        <fo:simple-page-master font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" master-name="cnrCOL-verso" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -111,7 +111,7 @@
                     odd-or-even="even"/>
             </fo:repeatable-page-master-alternatives>
         </fo:page-sequence-master>
-        <fo:simple-page-master font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" master-name="medCOL-recto" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -119,7 +119,7 @@
             <fo:region-after display-align="before" extent="100mm" precedence="true"
                 region-name="xsl-region-after-cover"/>
         </fo:simple-page-master>
-        <fo:simple-page-master font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" master-name="medCOL-verso" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -128,7 +128,7 @@
                 region-name="xsl-region-after-cover"/>
         </fo:simple-page-master>
         
-        <fo:simple-page-master master-name="Cover-A4" font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master master-name="Cover-A4" font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" page-height="297mm" page-width="210mm">
             <fo:region-body column-count="1" margin="0mm"/>
             <fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -136,7 +136,7 @@
             <fo:region-after display-align="before" extent="100mm" precedence="true"
                 region-name="xsl-region-after-cover"/>
         </fo:simple-page-master>
-        <fo:simple-page-master master-name="Cover-A4-90" font-family="Arial" font-size="10pt" font-weight="normal"
+        <fo:simple-page-master master-name="Cover-A4-90" font-family="Liberation Sans" font-size="10pt" font-weight="normal"
             margin-bottom="5mm" page-height="297mm" page-width="210mm" reference-orientation="90">
             <fo:region-body column-count="1" margin="0mm"/>
             <!--<fo:region-before display-align="before" extent="100mm" precedence="true"
@@ -146,7 +146,7 @@
         </fo:simple-page-master>
 
         <fo:simple-page-master master-name="questions-fin" page-height="297mm"
-            page-width="210mm" font-family="Arial" font-size="10pt"
+            page-width="210mm" font-family="Liberation Sans" font-size="10pt"
             font-weight="normal" margin-bottom="5mm">
             <fo:region-body margin="13mm" column-count="1"/>
             <fo:region-before region-name="xsl-region-before" extent="25mm" display-align="before" precedence="true"/>
@@ -154,7 +154,7 @@
         </fo:simple-page-master>
     </fo:layout-master-set>
 
-    <fo:page-sequence font-family="Arial" font-size="10pt" master-reference="ouvertureCOL">
+    <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="ouvertureCOL">
         <fo:static-content flow-name="xsl-region-before-courrier">
             <fo:block position="absolute" margin-top="5mm" margin-left="10mm" margin-right="10mm" margin-bottom="10mm" color="white">
                 &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
@@ -239,7 +239,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="107.2mm"
-                    width="180mm" height="155mm" overflow="hidden" font-family="Arial"
+                    width="180mm" height="155mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify">
                     <fo:block>
                         <fo:inline-container>
@@ -307,7 +307,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Arial"
+                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -338,7 +338,7 @@
             <fo:block page-break-after="always">
                 <fo:block/>
                 <fo:block-container absolute-position="absolute" left="30mm" top="33mm"
-                    width="150mm" height="190mm" overflow="hidden" font-family="Arial"
+                    width="150mm" height="190mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify" border="black solid 0.5pt">
                     <fo:block border="black solid 0.5pt">
                         <fo:inline-container>
@@ -370,7 +370,7 @@
                                         passe.</fo:block>
                                 </fo:inline-container>
                             </fo:block>
-                            <fo:block-container height="11mm" overflow="hidden" font-family="Arial" font-size="9pt">
+                            <fo:block-container height="11mm" overflow="hidden" font-family="Liberation Sans" font-size="9pt">
                                 <fo:block text-align="center" margin-top="1mm" margin-left="7mm" margin-right="7mm" border="black solid 0.5pt">
                                     <fo:inline-container>
                                         <fo:block>Identifiant : ${BddIdentifiantContact}</fo:block>
@@ -455,7 +455,7 @@
         </fo:flow>
     </fo:page-sequence>
 
-    <fo:page-sequence font-family="Arial" font-size="10pt" master-reference="entreeCOL">
+    <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="entreeCOL">
         <fo:static-content flow-name="xsl-region-before-courrier">
             <fo:block position="absolute" margin-top="5mm" margin-left="10mm" margin-right="10mm" margin-bottom="10mm" color="white">
                 &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
@@ -539,7 +539,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="107.2mm"
-                    width="180mm" height="155mm" overflow="hidden" font-family="Arial"
+                    width="180mm" height="155mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify">
                     <fo:block>
                         <fo:inline-container>
@@ -607,7 +607,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Arial"
+                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -638,7 +638,7 @@
             <fo:block page-break-after="always">
                 <fo:block/>
                 <fo:block-container absolute-position="absolute" left="30mm" top="33mm"
-                    width="150mm" height="190mm" overflow="hidden" font-family="Arial"
+                    width="150mm" height="190mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify" border="black solid 0.5pt">
                     <fo:block border="black solid 0.5pt">
                         <fo:inline-container>
@@ -670,7 +670,7 @@
                                         passe.</fo:block>
                                 </fo:inline-container>
                             </fo:block>
-                            <fo:block-container height="11mm" overflow="hidden" font-family="Arial" font-size="9pt">
+                            <fo:block-container height="11mm" overflow="hidden" font-family="Liberation Sans" font-size="9pt">
                                 <fo:block text-align="center" margin-top="1mm" margin-left="7mm" margin-right="7mm" border="black solid 0.5pt">
                                     <fo:inline-container>
                                         <fo:block>Identifiant : ${BddIdentifiantContact}</fo:block>
@@ -754,7 +754,7 @@
         </fo:flow>
     </fo:page-sequence>
 
-    <fo:page-sequence font-family="Arial" font-size="10pt" master-reference="relanceCOL">
+    <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="relanceCOL">
         <fo:static-content flow-name="xsl-region-before-courrier">
             <fo:block position="absolute" margin-top="5mm" margin-left="10mm" margin-right="10mm" margin-bottom="10mm" color="white">
                 &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
@@ -838,7 +838,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="107.2mm"
-                    width="180mm" height="155mm" overflow="hidden" font-family="Arial"
+                    width="180mm" height="155mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify">
                     <fo:block>
                         <fo:inline-container>
@@ -885,7 +885,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Arial"
+                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -916,7 +916,7 @@
             <fo:block page-break-after="always">
                 <fo:block/>
                 <fo:block-container absolute-position="absolute" left="30mm" top="33mm"
-                    width="150mm" height="190mm" overflow="hidden" font-family="Arial"
+                    width="150mm" height="190mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify" border="black solid 0.5pt">
                     <fo:block border="black solid 0.5pt">
                         <fo:inline-container>
@@ -1003,7 +1003,7 @@
         </fo:flow>
     </fo:page-sequence>
 
-    <fo:page-sequence font-family="Arial" font-size="10pt" master-reference="cnrCOL">
+    <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="cnrCOL">
         <fo:static-content flow-name="xsl-region-before-courrier">
             <fo:block position="absolute" margin-top="5mm" margin-left="10mm" margin-right="10mm" margin-bottom="10mm" color="white">
                 &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
@@ -1087,7 +1087,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="107.2mm"
-                    width="180mm" height="155mm" overflow="hidden" font-family="Arial"
+                    width="180mm" height="155mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify">
                     <fo:block>
                         <fo:inline-container>
@@ -1125,7 +1125,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Arial"
+                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -1156,7 +1156,7 @@
             <fo:block page-break-after="always">
                 <fo:block/>
                 <fo:block-container absolute-position="absolute" left="30mm" top="33mm"
-                    width="150mm" height="190mm" overflow="hidden" font-family="Arial"
+                    width="150mm" height="190mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify" border="black solid 0.5pt">
                     <fo:block border="black solid 0.5pt">
                         <fo:inline-container>
@@ -1242,7 +1242,7 @@
         </fo:flow>
     </fo:page-sequence>
 
-    <fo:page-sequence font-family="Arial" font-size="10pt" master-reference="medCOL">
+    <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="medCOL">
         <fo:static-content flow-name="xsl-region-before-courrier">
             <fo:block position="absolute" margin-top="5mm" margin-left="10mm" margin-right="10mm" margin-bottom="10mm" color="white">
                 &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
@@ -1326,7 +1326,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="107.2mm"
-                    width="180mm" height="155mm" overflow="hidden" font-family="Arial"
+                    width="180mm" height="155mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify">
                     <fo:block>
                         <fo:inline-container>
@@ -1359,7 +1359,7 @@
                     </fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Arial"
+                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -1390,7 +1390,7 @@
             <fo:block page-break-after="always">
                 <fo:block/>
                 <fo:block-container absolute-position="absolute" left="30mm" top="33mm"
-                    width="150mm" height="190mm" overflow="hidden" font-family="Arial"
+                    width="150mm" height="190mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="9pt" text-align="justify" border="black solid 0.5pt">
                     <fo:block border="black solid 0.5pt">
                         <fo:inline-container>
@@ -1476,7 +1476,7 @@
         </fo:flow>
     </fo:page-sequence>
     
-    <fo:page-sequence font-family="Arial" font-size="10pt" master-reference="Cover-A4">
+    <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="Cover-A4">
         <fo:flow flow-name="xsl-region-body">
             <fo:block page-break-inside="avoid">
                 <fo:block-container absolute-position="absolute" top="15mm" left="15mm"
@@ -1630,7 +1630,7 @@
             </fo:block>
         </fo:flow>
     </fo:page-sequence>
-    <fo:page-sequence font-family="Arial" font-size="10pt" master-reference="Cover-A4-90">
+    <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="Cover-A4-90">
         <fo:static-content flow-name="landscape-after-cover">
             <fo:block-container text-align="left" absolute-position="absolute" left="190mm" top="10mm">
                 <fo:block>
