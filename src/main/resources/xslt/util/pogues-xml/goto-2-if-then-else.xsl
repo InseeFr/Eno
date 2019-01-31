@@ -497,7 +497,7 @@
                                                                                       /poguesGoto:Expression"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <!-- The final expression is the combination of several expressions : with the word "and" between two of them-->
+                        <!-- The final expression is the combination of several expressions : with the word "or" between two of them-->
                         <xsl:for-each select="$current-goto-list//poguesGoto:gotoValue[poguesGoto:From/@id=$current-id
                                                                                    and @start=$chosen-goto/poguesGoto:gotoValue/@start
                                                                                    and poguesGoto:To/@position=$chosen-goto/poguesGoto:gotoValue/poguesGoto:To/@position]">
@@ -507,7 +507,7 @@
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:if test="not(preceding-sibling::poguesGoto:gotoValue[poguesGoto:Expression = current()/poguesGoto:Expression])">
-                                        <xsl:value-of select="concat(' and (',poguesGoto:Expression,')')"/>
+                                        <xsl:value-of select="concat(' or (',poguesGoto:Expression,')')"/>
                                     </xsl:if>
                                 </xsl:otherwise>
                             </xsl:choose>
