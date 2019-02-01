@@ -140,13 +140,13 @@
 				<xsl:choose>
 					<xsl:when test="$orientation = '0'">
 						<fo:simple-page-master master-name="A4-portrait-odd" page-height="297mm"
-							page-width="210mm" font-family="Arial" font-size="10pt" font-weight="normal" margin-bottom="5mm">
+							page-width="210mm" font-family="Liberation Sans" font-size="10pt" font-weight="normal" margin-bottom="5mm">
 							<fo:region-body margin="13mm" column-count="{$column-count}"/>
 							<fo:region-before region-name="portrait-region-before" extent="25mm" display-align="before" precedence="true"/>
 							<fo:region-after region-name="portrait-region-after" extent="25mm" display-align="before" precedence="true"/>
 						</fo:simple-page-master>
 						<fo:simple-page-master master-name="A4-portrait-even" page-height="297mm"
-							page-width="210mm" font-family="Arial" font-size="10pt" font-weight="normal" margin-bottom="5mm">
+							page-width="210mm" font-family="Liberation Sans" font-size="10pt" font-weight="normal" margin-bottom="5mm">
 							<fo:region-body margin="13mm" column-count="{$column-count}"/>
 							<fo:region-before region-name="portrait-region-before" extent="25mm" display-align="before" precedence="true"/>
 							<fo:region-after region-name="portrait-region-after" extent="25mm" display-align="before" precedence="true"/>
@@ -154,7 +154,7 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<fo:simple-page-master master-name="A4-landscape-odd" page-height="297mm"
-							page-width="210mm" font-family="Arial" font-size="10pt" reference-orientation="{$orientation}"
+							page-width="210mm" font-family="Liberation Sans" font-size="10pt" reference-orientation="{$orientation}"
 							font-weight="normal" margin="5mm">
 							<fo:region-body margin="11mm" column-count="{$column-count}"/>
 							<fo:region-before region-name="landscape-region-before-odd" extent="10mm" display-align="before" precedence="true"/>
@@ -163,7 +163,7 @@
 							<fo:region-end region-name="landscape-region-end" extent="10mm" display-align="before"/>
 						</fo:simple-page-master>
 						<fo:simple-page-master master-name="A4-landscape-even" page-height="297mm"
-							page-width="210mm" font-family="Arial" font-size="10pt" reference-orientation="{$orientation}"
+							page-width="210mm" font-family="Liberation Sans" font-size="10pt" reference-orientation="{$orientation}"
 							font-weight="normal" margin="5mm">
 							<fo:region-body margin="11mm" column-count="{$column-count}"/>
 							<fo:region-before region-name="landscape-region-before-even" extent="10mm" display-align="before" precedence="true"/>
@@ -174,7 +174,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 				<fo:simple-page-master master-name="A4-empty" page-height="297mm"
-					page-width="210mm" font-family="Arial" font-size="10pt" font-weight="normal" margin-bottom="5mm">
+					page-width="210mm" font-family="Liberation Sans" font-size="10pt" font-weight="normal" margin-bottom="5mm">
 					<fo:region-body margin="15mm"/>
 				</fo:simple-page-master>
 				<fo:page-sequence-master master-name="A4">
