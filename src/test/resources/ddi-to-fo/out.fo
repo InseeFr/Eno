@@ -10,7 +10,7 @@
          xmlns:fox="http://xmlgraphics.apache.org/fop/extensions">
    <fo:layout-master-set>
       <fo:simple-page-master master-name="Cover-A4"
-                             font-family="Arial"
+                             font-family="Liberation Sans"
                              font-size="10pt"
                              font-weight="normal"
                              margin-bottom="5mm"
@@ -29,7 +29,7 @@
       <fo:simple-page-master master-name="A4-portrait-odd"
                              page-height="297mm"
                              page-width="210mm"
-                             font-family="Arial"
+                             font-family="Liberation Sans"
                              font-size="10pt"
                              font-weight="normal"
                              margin-bottom="5mm">
@@ -46,7 +46,7 @@
       <fo:simple-page-master master-name="A4-portrait-even"
                              page-height="297mm"
                              page-width="210mm"
-                             font-family="Arial"
+                             font-family="Liberation Sans"
                              font-size="10pt"
                              font-weight="normal"
                              margin-bottom="5mm">
@@ -63,7 +63,7 @@
       <fo:simple-page-master master-name="A4-empty"
                              page-height="297mm"
                              page-width="210mm"
-                             font-family="Arial"
+                             font-family="Liberation Sans"
                              font-size="10pt"
                              font-weight="normal"
                              margin-bottom="5mm">
@@ -89,7 +89,9 @@
          </fo:repeatable-page-master-alternatives>
       </fo:page-sequence-master>
    </fo:layout-master-set>
-   <fo:page-sequence font-family="Arial" font-size="10pt" master-reference="Cover-A4">
+   <fo:page-sequence font-family="Liberation Sans"
+                     font-size="10pt"
+                     master-reference="Cover-A4">
       <fo:flow flow-name="xsl-region-body">
          <fo:block page-break-inside="avoid">
             <fo:block-container absolute-position="absolute"
