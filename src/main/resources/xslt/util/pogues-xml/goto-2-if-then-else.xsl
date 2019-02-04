@@ -353,7 +353,7 @@
     </xd:doc>
     <xsl:template match="/pogues:Questionnaire" priority="1">
         <xsl:copy>
-            <xsl:copy-of select="@* | text() | comment() | processing-instruction()"/>
+            <xsl:copy-of select="@* | text() | processing-instruction()"/>
             <xsl:if test="$debug">
                 <xsl:copy-of select="$child-tree"/>
                 <xsl:copy-of select="$list_goto"/>
@@ -372,7 +372,7 @@
         <xd:desc>every tag not containing Child can be directly copied and calls its first following-sibling</xd:desc>
         <xd:desc>exception : stop-position = 'last' and the element is after the last child : it is the only stop case not managed by the pogues:Child template</xd:desc>
     </xd:doc>
-    <xsl:template match="*[not(descendant::pogues:Child)]" mode="first-child-next-brother">
+    <xsl:template match="*[not(descendant::pogues:Child)] | comment()" mode="first-child-next-brother">
         <xsl:param name="goto-style"/>
         <xsl:param name="stop-position"/>
 
