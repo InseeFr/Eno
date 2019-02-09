@@ -471,16 +471,21 @@
         <xsl:variable name="chosen-goto">
             <poguesGoto:gotoValue>
                 <xsl:choose>
-                    <!-- old $goto-style='none' and new $goto-style='before' -->
+                    <!-- old $goto-style='none' and new $goto-style='before' with To = 'last' -->
+                    <xsl:when test="$goto-style='none' and $current-goto-list//poguesGoto:gotoValue[@start='before' and poguesGoto:To/@id = 'last']">
+                        <xsl:attribute name="start" select="'before'"/>
+                        <poguesGoto:To position="last"/>
+                    </xsl:when>
+                    <!-- old $goto-style='none' and new $goto-style='before' with To != 'last' -->
                     <xsl:when test="$goto-style='none' and $current-goto-list//poguesGoto:gotoValue[@start='before' and poguesGoto:To/@position != $current-position]">
                         <xsl:attribute name="start" select="'before'"/>
                         <poguesGoto:To position="{max($current-goto-list//poguesGoto:gotoValue[@start='before']/poguesGoto:To/number(@position))}"/>
                     </xsl:when>
                     <!-- old $goto-style='before' and new $goto-style='before' -->
                     <xsl:when test="$goto-style='before' and $current-goto-list//poguesGoto:gotoValue[@start='before']/poguesGoto:To[@position != $current-position
-                                                                                                                                 and number(@position) &lt; $stop-position]">
+                                                                                                                                 and number(@position) &lt; number($stop-position)]">
                         <xsl:attribute name="start" select="'before'"/>
-                        <poguesGoto:To position="{max($current-goto-list//poguesGoto:gotoValue[@start='before']/poguesGoto:To[number(@position) &lt; $stop-position]/number(@position))}"/>
+                        <poguesGoto:To position="{max($current-goto-list//poguesGoto:gotoValue[@start='before']/poguesGoto:To[number(@position) &lt; number($stop-position)]/number(@position))}"/>
                     </xsl:when>
                     <!-- old $goto-style='before' or 'none' and new $goto-style='after' with To = 'last' -->
                     <xsl:when test="$goto-style != 'after' and $current-goto-list//poguesGoto:gotoValue[@start='after' and poguesGoto:To/@id='last']">
@@ -501,9 +506,9 @@
                     <!-- old $goto-style='after' and stop-position!='last' and new $goto-style='after' -->
                     <xsl:when test="$goto-style='after' and $stop-position!='last'
                         and $current-goto-list//poguesGoto:gotoValue[@start='after']/poguesGoto:To[@position!='last' and @position != $next-sibling-position
-                                                                                               and number(@position) &lt; $stop-position]">
+                                                                                               and number(@position) &lt; number($stop-position)]">
                         <xsl:attribute name="start" select="'after'"/>
-                        <poguesGoto:To position="{max($current-goto-list//poguesGoto:gotoValue[@start='after']/poguesGoto:To[@position!='last' and number(@position) &lt; $stop-position]/number(@position))}"/>
+                        <poguesGoto:To position="{max($current-goto-list//poguesGoto:gotoValue[@start='after']/poguesGoto:To[@position!='last' and number(@position) &lt; number($stop-position)]/number(@position))}"/>
                     </xsl:when>
                     <!-- new $goto-style='none' -->
                     <xsl:otherwise>
@@ -570,7 +575,7 @@
         </xsl:variable>
 
         <!-- Tests the stop condition -->
-        <xsl:if test="number($current-position) &lt; number($stop-position) or $stop-position = 'end' or $stop-position = 'last'">
+        <xsl:if test="$stop-position = 'end' or $stop-position = 'last' or number($current-position) &lt; number($stop-position)">
             <xsl:choose>
                 <xsl:when test="$chosen-goto/poguesGoto:gotoValue/@start='before'">
                     <xsl:element name="IfThenElse" namespace="http://xml.insee.fr/schema/applis/pogues">
