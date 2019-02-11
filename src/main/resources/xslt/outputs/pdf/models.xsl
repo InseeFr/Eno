@@ -1055,18 +1055,18 @@
 						</fo:block>
 					</fo:list-item-label>
 					<fo:list-item-body start-indent="body-start()">
-						<xsl:choose>
-							<xsl:when test="$image != ''">
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="$image"/>
-								</xsl:call-template>
-							</xsl:when>
+						<fo:block>
+							<xsl:choose>
+								<xsl:when test="$image != ''">
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="$image"/>
+									</xsl:call-template>
+								</xsl:when>
 							<xsl:otherwise>
-								<fo:block>
 									<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-								</fo:block>
-							</xsl:otherwise>
-						</xsl:choose>
+								</xsl:otherwise>
+							</xsl:choose>
+							</fo:block>
 					</fo:list-item-body>
 				</fo:list-item>
 			</xsl:otherwise>
