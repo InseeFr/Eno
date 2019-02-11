@@ -1706,11 +1706,21 @@
             <xsl:copy-of select="root(.)"/>
         </xsl:variable>
         <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
+        <xsl:variable name="isLongTable">
+            <xsl:if test="count(enofr:get-body-lines($source-context))>=$lengthOfLongTable">
+                <xsl:value-of select="'long-table'"/>
+            </xsl:if>
+        </xsl:variable>
 
         <xhtml:table name="{enofr:get-name($source-context)}">
-            <xsl:if test="$css-class != ''">
-                <xsl:attribute name="class" select="$css-class"/>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$css-class != ''">
+                    <xsl:attribute name="class" select="concat($isLongTable,' ',$css-class)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="class" select="$isLongTable"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xhtml:colgroup>
                 <xhtml:col span="{count(enofr:get-header-columns($source-context))}"/>
             </xhtml:colgroup>
@@ -1755,6 +1765,11 @@
         <xsl:variable name="table-name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="loop-name" select="enofr:get-business-name($source-context)"/>
         <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
+        <xsl:variable name="isLongTable">
+            <xsl:if test="count(enofr:get-body-lines($source-context))>=$lengthOfLongTable">
+                <xsl:value-of select="'long-table'"/>
+            </xsl:if>
+        </xsl:variable>
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
@@ -1764,9 +1779,14 @@
 
         <xsl:apply-templates select="$table-title//xf-output" mode="model"/>
         <xhtml:table name="{$table-name}">
-            <xsl:if test="$css-class != ''">
-                <xsl:attribute name="class" select="$css-class"/>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$css-class != ''">
+                    <xsl:attribute name="class" select="concat($isLongTable,' ',$css-class)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="class" select="$isLongTable"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xhtml:colgroup>
                 <xhtml:col span="{count(enofr:get-header-columns($source-context))}"/>
             </xhtml:colgroup>
@@ -2122,118 +2142,6 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*[name() = ('Resource', 'Body')]//*[name() = ('ResponseElement','CalculatedVariable')]" mode="model"/>
-
-    <xsl:template name="enofr:writeInputDate">
-        <xsl:param name="source-context"/>
-        <xsl:param name="formatDate"/>
-        
-        <xsl:choose>
-        <!-- format de dates -->
-            <!-- mmaaaa -->
-            <xsl:when test="$formatDate='YYYY-MM'">
-                <!-- liste déroulante -->
-                <!-- Format de sortie : xsd: gYearMonth -->
-                
-                <xsl:element name="xf:select1">
-                    <xsl:attribute name="id" select="concat($name, '-control')"/>
-                    <xsl:attribute name="bind" select="concat($name, '-bind')"/>
-                    <xsl:if test="$appearance != ''">
-                        <xsl:attribute name="appearance" select="$appearance"/>
-                    </xsl:if>
-                    <xsl:attribute name="class" select="'double-duration'"/>
-                    <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
-                    <xsl:if test="not($length = '')">
-                        <xsl:attribute name="xxf:maxlength" select="$length"/>
-                    </xsl:if>
-                    <xsl:if test="enofr:get-label($source-context, $languages[1])/node()">
-                        <xf:label ref="$form-resources/{$name}/label">
-                            <xsl:if test="eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
-                                <xsl:attribute name="mediatype">text/html</xsl:attribute>
-                            </xsl:if>
-                        </xf:label>
-                    </xsl:if>
-                    <xsl:if test="enofr:get-hint($source-context, $languages[1])/node()">
-                        <xf:hint ref="$form-resources/{$name}/hint">
-                            <xsl:if test="eno:is-rich-content(enofr:get-hint($source-context, $languages[1]))">
-                                <xsl:attribute name="mediatype">text/html</xsl:attribute>
-                            </xsl:if>
-                        </xf:hint>
-                    </xsl:if>
-                    <xf:item>
-                        <xf:label/>
-                        <xf:value/>
-                    </xf:item>
-                    <xf:itemset ref="$form-resources/{$name}/item">
-                        <xf:label ref="label"/>
-                        <xf:value ref="value"/>
-                    </xf:itemset>
-                </xsl:element>
-                <xsl:element name="xhtml:span">
-                    <xsl:attribute name="class" select="'double-duration-suffix'"/>
-                    <xsl:text>mois</xsl:text>
-                </xsl:element>
-                
-                <xsl:variable name="name" select="replace(enofr:get-name($source-context), '-', '-B-')"/>
-                
-                <xsl:element name="xf:select1">
-                    <xsl:attribute name="id" select="concat($name, '-control')"/>
-                    <xsl:attribute name="bind" select="concat($name, '-bind')"/>
-                    <xsl:if test="$appearance != ''">
-                        <xsl:attribute name="appearance" select="$appearance"/>
-                    </xsl:if>
-                    <xsl:attribute name="class" select="'double-duration'"/>
-                    <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
-                    <xsl:if test="$length != ''">
-                        <xsl:attribute name="xxf:maxlength" select="$length"/>
-                    </xsl:if>
-                    <xsl:if test="enofr:get-label($source-context, $languages[1])/node()">
-                        <xf:label ref="$form-resources/{$name}/label">
-                            <xsl:if test="eno:is-rich-content(enofr:get-label($source-context, $languages[1]))">
-                                <xsl:attribute name="mediatype">text/html</xsl:attribute>
-                            </xsl:if>
-                        </xf:label>
-                    </xsl:if>
-                    <xsl:if test="enofr:get-hint($source-context, $languages[1])/node()">
-                        <xf:hint ref="$form-resources/{$name}/hint">
-                            <xsl:if test="eno:is-rich-content(enofr:get-hint($source-context, $languages[1]))">
-                                <xsl:attribute name="mediatype">text/html</xsl:attribute>
-                            </xsl:if>
-                        </xf:hint>
-                    </xsl:if>
-                    <xf:item>
-                        <xf:label/>
-                        <xf:value/>
-                    </xf:item>
-                    <xf:itemset ref="$form-resources/{$name}/item">
-                        <xf:label ref="label"/>
-                        <xf:value ref="value"/>
-                    </xf:itemset>
-                </xsl:element>
-                <xsl:element name="xhtml:span">
-                    <xsl:attribute name="class" select="'double-duration-suffix'"/>
-                    <xsl:text>année(s)</xsl:text>
-                </xsl:element>
-            </xsl:when>
-            <!-- aaaa -->
-            <xsl:when test="$formatDate='YYYY'">
-                <!-- liste déroulante -->
-                <!-- Format de sortie : xsd: gYear -->
-            </xsl:when>
-        <!-- format de durées -->
-            <!-- jours jj -->
-            <xsl:when test="$formatDate='PnD'">
-                <!-- champ avec unité -->
-            </xsl:when>
-            <!-- mois mm -->
-            <xsl:when test="$formatDate='PnM'">
-                <!-- champ avec unité -->
-            </xsl:when>
-            <!-- année mois -->
-            <xsl:when test="$formatDate='PnYnM'">
-                <!-- 2 champs de saisie avec unité -->
-            </xsl:when>
-        </xsl:choose>
-    </xsl:template>
 
     <xd:doc>
         <xd:desc>lists the layout variables for DurationDomain</xd:desc>

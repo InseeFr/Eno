@@ -509,4 +509,13 @@
         </xsl:choose>
     </xsl:function>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Length that defines the size of a long table</xd:p>
+            <xd:p>It is used for defining a css class</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="lengthOfLongTable">
+        <xsl:value-of select="$parameters/Parameters/LengthOfLongTable/Length"/>
+    </xsl:variable>
 </xsl:stylesheet>
