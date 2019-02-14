@@ -306,8 +306,8 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -611,8 +611,8 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -869,7 +869,7 @@
                                 Si, toutefois, vous venez de procéder à cet envoi, je vous prie de ne pas tenir compte de ce rappel.</fo:block>
                             <fo:block margin-top="3mm">Dans le cas contraire, je regrette qu’il ne vous ait pas été possible de respecter les délais prévus (date échéance : <fo:inline font-weight="bold">${BddDateEcheance})</fo:inline>. 
                                 Aussi, <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir dans les meilleurs délais le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre. 
-                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint. #end</fo:block>
+                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else de répondre dans les meilleurs délais à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint. #end</fo:block>
                             <fo:block margin-top="3mm">#if(${BddQuestionnaire}==0) Ce dernier se tient également#else Notre service d'assistance se tient#end à votre disposition pour répondre à vos questions en cas de besoin.</fo:block>
                             <fo:block margin-top="3mm">${BddObjectifsLongs}</fo:block>
                             <fo:block margin-top="3mm">Je vous rappelle que cette enquête est reconnue d'${BddStatutEnquete}. Conformément à la loi n° 51-711 du 7 juin 1951 modifiée, les données recueillies sont couvertes par le secret statistique et ne sauraient en aucun cas être utilisées à des fins de contrôle fiscal ou de répression économique.</fo:block>
@@ -893,8 +893,8 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -1114,7 +1114,7 @@
                             <fo:block margin-top="3mm">- de défaut de réponse à l’enquête#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end ${BddAnneeReference}&#160;;</fo:block>
                             <fo:block margin-top="3mm">- et d’absence de justification à ce défaut de réponse.</fo:block>
                             <fo:block margin-top="3mm">Si vous venez de procéder à la transmission de votre réponse, je vous prie de ne pas tenir compte de ce courrier.</fo:block>
-                            <fo:block margin-top="3mm">A défaut, <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre,#else soit à répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit à compléter le questionnaire joint,#end dans un délai de 15 jours. A l’expiration de ce délai, votre dossier sera soumis pour examen au comité du contentieux des enquêtes statistiques obligatoires du Conseil national de l’information statistique (Cnis), conformément à la loi*.</fo:block>
+                            <fo:block margin-top="3mm">A défaut, <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre,#else de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit à compléter le questionnaire joint,#end dans un délai de 15 jours. A l’expiration de ce délai, votre dossier sera soumis pour examen au comité du contentieux des enquêtes statistiques obligatoires du Conseil national de l’information statistique (Cnis), conformément à la loi*.</fo:block>
                             <fo:block margin-top="3mm">S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre. Ce dernier se tient également à votre disposition pour tout renseignement complémentaire sur ce courrier ou la procédure en cours.</fo:block>
                             <fo:block margin-top="3mm">En vous remerciant par avance de votre collaboration, je vous prie de bien vouloir agréer, Madame, Monsieur, l'assurance de ma considération distinguée.</fo:block>
                             <fo:block margin-top="3mm" text-align="right">${BddServiceProducteurSignataireFonction}</fo:block>
@@ -1123,8 +1123,8 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -1361,8 +1361,8 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
