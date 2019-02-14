@@ -1749,8 +1749,9 @@
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="110mm" top="120mm"
                     width="170mm" height="10mm">
-                    <fo:block font-weight="bold" font-size="12pt">Merci de nous retourner ce
-                        questionnaire au plus tard le : ${BddDateEcheance}</fo:block>
+                    <fo:block font-weight="bold" font-size="12pt">Votre réponse était attendue 
+                        pour le : ${BddDateEcheance}. Merci de nous retourner ce questionnaire 
+                        dans les meilleurs délais.</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="150mm" top="135mm"
                     width="120mm" height="50mm" padding="2mm"
