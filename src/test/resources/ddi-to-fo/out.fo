@@ -231,8 +231,7 @@
                                 top="175mm"
                                 width="180mm"
                                 height="10mm">
-               <fo:block font-weight="bold" font-size="12pt">Merci de nous retourner ce
-                        questionnaire au plus tard le : ${BddDateEcheance}, à l’adresse
+               <fo:block font-weight="bold" font-size="12pt">Votre réponse était attendue pour le ${BddDateEcheance}. Merci de nous retourner ce questionnaire dans les meilleurs délais, à l’adresse
                         suivante :</fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute"
