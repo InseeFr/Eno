@@ -301,63 +301,62 @@
                 <xsl:variable name="initial-start" select="@start"/>
                 <xsl:variable name="initial-condition" select="poguesGoto:Expression"/>
                 <xsl:variable name="initial-flowid" select="@flowid"/>
-                
-                <xsl:for-each select="$child-tree//poguesGoto:idElement[descendant::poguesGoto:idElement/@id = $initial-from/@id or descendant::poguesGoto:idElement/@id = $initial-to/@id]">
-                    <xsl:variable name="start">
-                        <xsl:choose>
-                            <xsl:when test="child::poguesGoto:idElement/@id = $initial-from/@id">
-                                <xsl:value-of select="$initial-start"/>
-                            </xsl:when>
-                            <!-- always after the ancestor -->
-                            <xsl:when test="descendant::poguesGoto:idElement/@id = $initial-from/@id">
-                                <xsl:value-of select="'after'"/>
-                            </xsl:when>
-                            <!-- when $initial-from is not in the sequence, always before the first child -->
-                            <xsl:otherwise>
-                                <xsl:value-of select="'before'"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <xsl:variable name="from-position">
-                        <xsl:choose>
-                            <xsl:when test="descendant::poguesGoto:idElement/@id = $initial-from/@id">
-                                <!-- the element $initial-from or its ancestor -->
-                                <xsl:value-of select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-from/@id]/@position"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <!-- before the first child -->
-                                <xsl:value-of select="child::poguesGoto:idElement[1]/@position"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <xsl:variable name="to-position">
-                        <xsl:choose>
-                            <xsl:when test="descendant::poguesGoto:idElement/@id = $initial-to/@id">
-                                <!-- before the element $initial-to or its ancestor -->
-                                <xsl:value-of select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-to/@id]/@position"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <!-- after the last child -->
-                                <xsl:value-of select="$last"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <!-- if the goto is not empty -->
-                    <xsl:if test="$from-position != $to-position
-                             and ($start != 'after' or child::poguesGoto:idElement[@position = $from-position]/following-sibling::poguesGoto:idElement[1]/@position != $to-position)">
-                        <poguesGoto:gotoValue start="{$start}" flowid="{$initial-flowid}">
-                            <xsl:copy-of select="$initial-condition"/>
-                            <poguesGoto:From id="{child::poguesGoto:idElement[@position = $from-position]/@id}" position="{$from-position}"/>
-                            <xsl:choose>
-                                <xsl:when test="$to-position = $last">
+
+                <xsl:for-each select="$child-tree//poguesGoto:idElement">
+                    <xsl:choose>
+                        <xsl:when test="$initial-start='before' and child::poguesGoto:idElement/@id = $initial-from/@id and descendant::poguesGoto:idElement/@id = $initial-to/@id">
+                            <xsl:variable name="to-child" select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-to/@id]"/>
+                            <xsl:if test="$initial-from/@id != $to-child/@id">
+                                <poguesGoto:gotoValue start="before" flowid="{$initial-flowid}">
+                                    <xsl:copy-of select="$initial-condition"/>
+                                    <poguesGoto:From id="{$initial-from/@id}" position="{$initial-from/@position}"/>
+                                    <poguesGoto:To id="{$to-child/@id}" position="{$to-child/@position}"/>
+                                </poguesGoto:gotoValue>
+                            </xsl:if>
+                        </xsl:when>
+                        <xsl:when test="descendant::poguesGoto:idElement/@id = $initial-from/@id and descendant::poguesGoto:idElement/@id = $initial-to/@id">
+                            <xsl:variable name="from-child" select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-from/@id]"/>
+                            <xsl:variable name="to-child" select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-to/@id]"/>
+                            <xsl:if test="$from-child/@id != $to-child/@id
+                                and child::poguesGoto:idElement[@id = $from-child/@id]/following-sibling::poguesGoto:idElement[1]/@id != $to-child/@id">
+                                <poguesGoto:gotoValue start="after" flowid="{$initial-flowid}">
+                                    <xsl:copy-of select="$initial-condition"/>
+                                    <poguesGoto:From id="{$from-child/@id}" position="{$from-child/@position}"/>
+                                    <poguesGoto:To id="{$to-child/@id}" position="{$to-child/@position}"/>
+                                </poguesGoto:gotoValue>
+                            </xsl:if>
+                        </xsl:when>
+                        <xsl:when test="$initial-start='before' and child::poguesGoto:idElement/@id = $initial-from/@id and not(descendant::poguesGoto:idElement/@id = $initial-to/@id)">
+                            <poguesGoto:gotoValue start="before" flowid="{$initial-flowid}">
+                                <xsl:copy-of select="$initial-condition"/>
+                                <poguesGoto:From id="{$initial-from/@id}" position="{$initial-from/@position}"/>
+                                <poguesGoto:To id="last" position="{$last}"/>
+                            </poguesGoto:gotoValue>
+                        </xsl:when>
+                        <xsl:when test="descendant::poguesGoto:idElement/@id = $initial-from/@id and not(descendant::poguesGoto:idElement/@id = $initial-to/@id)">
+                            <xsl:variable name="from-child" select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-from/@id]"/>
+                            <xsl:if test="child::poguesGoto:idElement[@id = $from-child/@id]/following-sibling::poguesGoto:idElement">
+                                <poguesGoto:gotoValue start="after" flowid="{$initial-flowid}">
+                                    <xsl:copy-of select="$initial-condition"/>
+                                    <poguesGoto:From id="{$from-child/@id}" position="{$from-child/@position}"/>
                                     <poguesGoto:To id="last" position="{$last}"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <poguesGoto:To id="{child::poguesGoto:idElement[@position = $to-position]/@id}" position="{$to-position}"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </poguesGoto:gotoValue>
-                    </xsl:if>
+                                </poguesGoto:gotoValue>
+                            </xsl:if>
+                        </xsl:when>
+                        <xsl:when test="not(descendant::poguesGoto:idElement/@id = $initial-from/@id) and descendant::poguesGoto:idElement/@id = $initial-to/@id">
+                            <xsl:variable name="first-child" select="child::poguesGoto:idElement[1]"/>
+                            <xsl:variable name="to-child" select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-to/@id]"/>
+                            <xsl:if test="$first-child/@id != $to-child/@id">
+                                <poguesGoto:gotoValue start="before" flowid="{$initial-flowid}">
+                                    <xsl:copy-of select="$initial-condition"/>
+                                    <poguesGoto:From id="{$first-child/@id}" position="{$first-child/@position}"/>
+                                    <poguesGoto:To id="{$to-child/@id}" position="{$to-child/@position}"/>
+                                </poguesGoto:gotoValue>
+                            </xsl:if>
+                        </xsl:when>
+                        <!-- not(descendant::poguesGoto:idElement/@id = $initial-from/@id) and not(descendant::poguesGoto:idElement/@id = $initial-to/@id) -->
+                        <xsl:otherwise/>
+                    </xsl:choose>
                 </xsl:for-each>
             </xsl:for-each>
         </poguesGoto:GotoList>
