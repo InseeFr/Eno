@@ -318,8 +318,10 @@
                             <xsl:variable name="from-child" select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-from/@id]"/>
                             <xsl:variable name="to-child" select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-to/@id]"/>
                             <xsl:if test="$from-child/@id != $to-child/@id
-                                and child::poguesGoto:idElement[@id = $from-child/@id]/following-sibling::poguesGoto:idElement[1]/@id != $to-child/@id">
+                                      and child::poguesGoto:idElement[@id = $from-child/@id]/following-sibling::poguesGoto:idElement[1]/@id != $to-child/@id">
+                                <!-- there is at least a Child between from-child and to-child -->
                                 <poguesGoto:gotoValue start="after" flowid="{$initial-flowid}">
+                                    <!-- if $from-child != $initial-from, the split goto starts after $from-child, even if $initial-start = 'before' -->
                                     <xsl:copy-of select="$initial-condition"/>
                                     <poguesGoto:From id="{$from-child/@id}" position="{$from-child/@position}"/>
                                     <poguesGoto:To id="{$to-child/@id}" position="{$to-child/@position}"/>
@@ -336,7 +338,9 @@
                         <xsl:when test="descendant::poguesGoto:idElement/@id = $initial-from/@id and not(descendant::poguesGoto:idElement/@id = $initial-to/@id)">
                             <xsl:variable name="from-child" select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-from/@id]"/>
                             <xsl:if test="child::poguesGoto:idElement[@id = $from-child/@id]/following-sibling::poguesGoto:idElement">
+                                <!-- $from-child is not the last Child -->
                                 <poguesGoto:gotoValue start="after" flowid="{$initial-flowid}">
+                                    <!-- if $from-child != $initial-from, the split goto starts after $from-child, even if $initial-start = 'before' -->
                                     <xsl:copy-of select="$initial-condition"/>
                                     <poguesGoto:From id="{$from-child/@id}" position="{$from-child/@position}"/>
                                     <poguesGoto:To id="last" position="{$last}"/>
@@ -347,6 +351,7 @@
                             <xsl:variable name="first-child" select="child::poguesGoto:idElement[1]"/>
                             <xsl:variable name="to-child" select="child::poguesGoto:idElement[descendant-or-self::poguesGoto:idElement/@id = $initial-to/@id]"/>
                             <xsl:if test="$first-child/@id != $to-child/@id">
+                                <!-- $to-child is not the first Child -->
                                 <poguesGoto:gotoValue start="before" flowid="{$initial-flowid}">
                                     <xsl:copy-of select="$initial-condition"/>
                                     <poguesGoto:From id="{$first-child/@id}" position="{$first-child/@position}"/>
