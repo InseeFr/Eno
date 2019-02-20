@@ -45,17 +45,16 @@
 	
 	<xsl:template match="ResponseElement" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="isInSurvey" tunnel="yes"/>
+		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
+		<!--<xsl:param name="isInSurvey" tunnel="yes"/>-->
 		<xsl:variable name="type" select="enojs:getTypeOfVariable($source-context)"/>
 		<!-- display only external variable -->
-		<xsl:if test="$type='External' and $isInSurvey!='yes'">
+		<xsl:if test="$type='External'">
 			<variable>
 				<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
+				<label><xsl:value-of select="enojs:get-label($source-context,$languages[1])"/></label>
 			</variable>	
 		</xsl:if>
-			
-		
-			
 	</xsl:template>
 	
 	
@@ -75,7 +74,7 @@
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="languages" select="$languages" tunnel="yes"/>
-				<xsl:with-param name="isInSurvey" select="'yes'" tunnel="yes"/>
+				<!--<xsl:with-param name="isInSurvey" select="'yes'" tunnel="yes"/>-->
 			</xsl:apply-templates>
 		</Questionnaire>
 	</xsl:template>
@@ -274,15 +273,18 @@
 		
 		<component xsi:type="Datepicker" id="{$idQuestion}">
 			<label><xsl:value-of select="$labelQuestion"/></label>
-			<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
-			<declarations>
-				<xsl:copy-of select="$declarations"/>
-			</declarations>
+			<xsl:copy-of select="$declarations"/>
 			<xsl:call-template name="enojs:addResponeToComponent">
 				<xsl:with-param name="responseName" select="$responseName"/>
 			</xsl:call-template>
 			<xsl:copy-of select="$filterCondition"/>
+			<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
 		</component>
+		
+		<xsl:call-template name="enojs:addVariableCollected">
+			<xsl:with-param name="responseName" select="$responseName"/>
+			<xsl:with-param name="responseRef" select="$responseName"/>
+		</xsl:call-template>
 	</xsl:template>
 	
 	<xd:doc>
