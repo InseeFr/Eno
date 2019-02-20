@@ -15,7 +15,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
@@ -25,12 +24,10 @@ import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.PDFStep1MailingPostprocessor;
 import fr.insee.eno.postprocessing.PDFStep2SpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessor;
 import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessorFake;
 import fr.insee.eno.postprocessing.PDFStep4InsertGenericPagesPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
-import fr.insee.eno.preprocessing.Preprocessor;
 
 public class DummyTestDDI2PDFExamples {
 

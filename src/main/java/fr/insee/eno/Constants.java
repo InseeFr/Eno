@@ -53,6 +53,7 @@ public final class Constants {
 	public static final String UTIL_DDI_TITLING_XSL = UTIL_FOLDER_PATH + "/ddi/titling.xsl";
 	public static final String UTIL_POGUES_XML_SUPP_GOTO_XSL = UTIL_FOLDER_PATH + "/pogues-xml/2suppressionGoto.xsl";
 	public static final String UTIL_POGUES_XML_MERGE_ITE_XSL = UTIL_FOLDER_PATH + "/pogues-xml/tweak-to-merge-equivalent-ite.xsl";
+	public static final String UTIL_POGUES_XML_GOTO_ITE_XSL = UTIL_FOLDER_PATH + "/pogues-xml/goto-2-if-then-else.xsl";
 	public static final String UTIL_DDI_MW2XHTML_XSL = UTIL_FOLDER_PATH + "/ddi/mw2xhtml.xsl";
 	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = UTIL_FOLDER_PATH + "/ddi/tweak-xhtml-for-ddi.xsl";
 	public static final String UTIL_DDI_CLEANING_XSL = UTIL_FOLDER_PATH + "/ddi/cleaning.xsl";
