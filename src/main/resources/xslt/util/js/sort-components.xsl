@@ -29,7 +29,6 @@
         <xsl:apply-templates select="Questionnaire"/>
     </xsl:template>
     
-    
     <xsl:template match="Questionnaire">
         <xsl:variable name="idQuestionnaire" select="@id"/>
         <Questionnaire 
@@ -38,7 +37,6 @@
             <xsl:apply-templates select="*[not(self::variable)]"/>
             <xsl:apply-templates select="descendant::variable"/>
         </Questionnaire>
-        
     </xsl:template>
     
     <xsl:template match="component[@xsi:type='Sequence']">
@@ -61,7 +59,6 @@
             <xsl:apply-templates select="conditionFilter"/>
             <xsl:apply-templates select="component"/>
         </component>
-        
     </xsl:template>
     
     <xsl:template match="component">
@@ -74,7 +71,7 @@
     </xsl:template>
        
     <xsl:template match="unit">
-        <xsl:value-of select="."/>
+        <unit><xsl:value-of select="."/></unit>
     </xsl:template>
     
     <xsl:template match="label">
@@ -91,15 +88,12 @@
         </conditionFilter>
     </xsl:template>
     
-    
     <xsl:template match="declaration">
         <declaration declarationType="{@declarationType}" id="{@id}" position="{@position}">
             <xsl:apply-templates select="label"/>
         </declaration>
     </xsl:template>
        
-   
-    
     <xsl:template match="response">
         <response name="{@name}">
             <xsl:apply-templates  select="valueState"/>
@@ -132,6 +126,7 @@
                     <responseRef><xsl:value-of select="$responseRef"/></responseRef>
                 </xsl:when>
             </xsl:choose>
+            <xsl:apply-templates select="label"/>
         </variable>
     </xsl:template>
     
