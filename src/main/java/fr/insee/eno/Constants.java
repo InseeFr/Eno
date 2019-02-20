@@ -132,7 +132,7 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_SPECIF_TREATMENT_FO_4PDF =  "/pdf-specific-treatment.xsl";
 	public static final String TRANSFORMATIONS_GENERIC_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-generic-pages.xsl";
 	public static final String STATIC_PAGES = OUPUTS_FOLDER_2 +"/static-pages.fo";
-	public static final String TRANSFORMATIONS_POST_PROCESSING_JS = OUPUTS_FOLDER_JS + "/post-processing-js.xsl";
+	public static final String TRANSFORMATIONS_POST_PROCESSING_JS = OUPUTS_FOLDER_JS + "/sort-components.xsl";
 	// ---------- Temporary file system
 	
 	// ----- Folders
