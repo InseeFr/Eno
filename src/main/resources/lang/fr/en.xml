@@ -25,6 +25,34 @@
     <And>and</And>
     <Plural>s</Plural>
     <AddLine>Add a line</AddLine>
+    <DateTime>
+        <Months>
+            <M01>January</M01>
+            <M02>February</M02>
+            <M03>March</M03>
+            <M04>April</M04>
+            <M05>May</M05>
+            <M06>June</M06>
+            <M07>July</M07>
+            <M08>August</M08>
+            <M09>September</M09>
+            <M10>October</M10>
+            <M11>November</M11>
+            <M12>December</M12>
+        </Months>
+        <Year>year</Year>
+        <Month>month</Month>
+        <Day>day</Day>
+    </DateTime>
+    <Duration>
+        <Year>years</Year>
+        <Month>months</Month>
+        <Day>days</Day>
+        <Hour>hours</Hour>
+        <Minute>minutes</Minute>
+        <Second>seconds</Second>
+        <Hundredth>hundredths</Hundredth>
+    </Duration>
     <Browsing>
         <Beginning>BEGINNING</Beginning>
         <GenericBeginningText>&lt;p&gt;Generic beginning page, can be overridden or removed by
