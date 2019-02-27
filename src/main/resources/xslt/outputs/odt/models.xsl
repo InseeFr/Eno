@@ -547,19 +547,12 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="filter" select="enoodt:get-relevant($source-context)"/>
 		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>		
-		<text:section text:name="Control-{enoodt:get-name($source-context)}">
-			<text:p text:style-name="Control"><xsl:value-of select="'Filtre : '"/></text:p>
-			<text:p text:style-name="Control">
-				<xsl:call-template name="replaceVariablesInFormula">
-					<xsl:with-param name="formula" select="$filter"/>
-					<xsl:with-param name="variables" select="$idVariables"/>
-				</xsl:call-template>
-			</text:p>
-
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-			</xsl:apply-templates>
-		</text:section>
+		<text:p text:style-name="Control">
+			<xsl:call-template name="replaceVariablesInFormula">
+				<xsl:with-param name="formula" select="$filter"/>
+				<xsl:with-param name="variables" select="$idVariables"/>
+			</xsl:call-template>				
+		</text:p>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
