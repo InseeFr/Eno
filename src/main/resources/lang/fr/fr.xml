@@ -25,6 +25,34 @@
     <And>et</And>
     <Plural>s</Plural>
     <AddLine>Ajouter une ligne</AddLine>
+    <DateTime>
+        <Months>
+            <M01>Janvier</M01>
+            <M02>Février</M02>
+            <M03>Mars</M03>
+            <M04>Avril</M04>
+            <M05>Mai</M05>
+            <M06>Juin</M06>
+            <M07>Juillet</M07>
+            <M08>Août</M08>
+            <M09>Septembre</M09>
+            <M10>Octobre</M10>
+            <M11>Novembre</M11>
+            <M12>Décembre</M12>
+        </Months>
+        <Year>an</Year>
+        <Month>mois</Month>
+        <Day>jour</Day>
+    </DateTime>
+    <Duration>
+        <Year>ans</Year>
+        <Month>mois</Month>
+        <Day>jours</Day>
+        <Hour>heures</Hour>
+        <Minute>minutes</Minute>
+        <Second>secondes</Second>
+        <Hundredth>centièmes</Hundredth>
+    </Duration>
     <Browsing>
         <Beginning>DEBUT</Beginning>
         <GenericBeginningText>&lt;p&gt;Page de commencement générique, peut être surchargée ou supprimée en passant une feuille xslt supplémentaire.&lt;/p&gt;</GenericBeginningText>

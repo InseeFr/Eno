@@ -275,12 +275,13 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="current-driver" select="self::*/local-name()"/>
 
-        <xsl:variable name="dateduration-format" select="upper-case(enofr:get-format($source-context))"/>
         <xsl:variable name="layout-list" as="node()">
             <xsl:call-template name="dateduration-layout">
                 <xsl:with-param name="variable-name" select="$name"/>
                 <xsl:with-param name="driver" select="$current-driver"/>
-                <xsl:with-param name="format" select="$dateduration-format"/>
+                <xsl:with-param name="format" select="upper-case(enofr:get-format($source-context))"/>
+                <xsl:with-param name="minimum" select="enofr:get-minimum($source-context)"/>
+                <xsl:with-param name="maximum" select="enofr:get-maximum($source-context)"/>
             </xsl:call-template>
         </xsl:variable>
 
@@ -1053,6 +1054,8 @@
                 <xsl:with-param name="variable-name" select="$name"/>
                 <xsl:with-param name="driver" select="$current-driver"/>
                 <xsl:with-param name="format" select="$dateduration-format"/>
+                <xsl:with-param name="minimum" select="enofr:get-minimum($source-context)"/>
+                <xsl:with-param name="maximum" select="enofr:get-maximum($source-context)"/>
             </xsl:call-template>
         </xsl:variable>
 
@@ -1331,6 +1334,8 @@
                 <xsl:with-param name="variable-name" select="$name"/>
                 <xsl:with-param name="driver" select="$current-driver"/>
                 <xsl:with-param name="format" select="$dateduration-format"/>
+                <xsl:with-param name="minimum" select="enofr:get-minimum($source-context)"/>
+                <xsl:with-param name="maximum" select="enofr:get-maximum($source-context)"/>
             </xsl:call-template>
         </xsl:variable>
 
@@ -1376,10 +1381,30 @@
                     </xsl:when>
                 </xsl:choose>
                 <xsl:if test="$current-driver = 'DateTimeDomain' and @unit != ''">
+                    <xsl:variable name="unit-id" select="@id"/>
+                    <xsl:variable name="number-order">
+                        <xsl:choose>
+                            <xsl:when test="$unit-id = 'Y'">
+                                <xsl:value-of select="'descending'"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="'ascending'"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
                     <xsl:for-each select="xs:integer(number(@minimum)) to xs:integer(number(@maximum))">
+                        <xsl:sort select="." order="{$number-order}"></xsl:sort>
+                        <xsl:variable name="current-value" select="."/>
                         <item>
                             <label>
-                                <xsl:value-of select="."/>
+                                <xsl:choose>
+                                    <xsl:when test="$unit-id = 'M'">
+                                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=$current-value]/text()"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="."/>        
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </label>
                             <value>
                                 <xsl:value-of select="."/>
@@ -2076,6 +2101,8 @@
                 <xsl:with-param name="variable-name" select="$name"/>
                 <xsl:with-param name="driver" select="$current-driver"/>
                 <xsl:with-param name="format" select="$dateduration-format"/>
+                <xsl:with-param name="minimum" select="enofr:get-minimum($source-context)"/>
+                <xsl:with-param name="maximum" select="enofr:get-maximum($source-context)"/>
             </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="ordered-layout-list" as="node()">
@@ -2211,7 +2238,14 @@
             <xsl:if test="$current-driver = 'DurationDomain'">
                 <xsl:element name="xhtml:span">
                     <xsl:attribute name="class" select="'double-duration-suffix'"/>
-                    <xsl:value-of select="@unit"/>
+                    <xsl:choose>
+                        <xsl:when test="$current-driver = 'DurationDomain'">
+                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/*[name()=current()/@unit]/text()"/>        
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/DateTime/*[name()=current()/@unit]/text()"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:element>                
             </xsl:if>
         </xsl:for-each>
@@ -2233,23 +2267,44 @@
         <xsl:param name="variable-name"/>
         <xsl:param name="driver"/>
         <xsl:param name="format"/>
+        <xsl:param name="minimum"/>
+        <xsl:param name="maximum"/>
 
         <xsl:variable name="multiple-layout" select="string-length($format) &gt; 4" as="xs:boolean"/>
 
         <formats>
             <xsl:choose>
                 <xsl:when test="$format='YYYY-MM-DD' or $format='JJ/MM/AAAA'">
-                    <format id="" unit="" minimum="" maximum="" variable="{$variable-name}"/>
+                    <format id="" unit="" minimum="{$minimum}" maximum="{$maximum}" variable="{$variable-name}"/>
                 </xsl:when>
                 <xsl:when test="$format='HH:CH'">
-                    <format id="H" unit="heures" minimum="20" maximum="59" variable="{$variable-name}-layout-H"/>
-                    <format id="CH" unit="centièmes" minimum="0" maximum="99" variable="{$variable-name}-layout-CH"/>
+                    <format id="H" unit="Hour" minimum="20" maximum="59" variable="{$variable-name}-layout-H"/>
+                    <format id="CH" unit="Hundredth" minimum="0" maximum="99" variable="{$variable-name}-layout-CH"/>
                 </xsl:when>
                 <xsl:when test="$driver = 'DateTimeDomain'">
                     <!-- The extremum are different from duration onesorder is different between date dans duration -->
                     <xsl:if test="contains($format,'Y') or contains($format,'A')">
-                        <!--<format id="Y" unit="ans" minimum="1900" maximum="{year-from-date(current-date())}">-->
-                        <format id="Y" unit="ans" minimum="1960" maximum="2018">
+                        <format id="Y" unit="Year">
+                            <xsl:attribute name="minimum">
+                                <xsl:choose>
+                                    <xsl:when test="$minimum != ''">
+                                        <xsl:value-of select="year-from-date($minimum)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="1900"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="maximum">
+                                <xsl:choose>
+                                    <xsl:when test="$maximum != ''">
+                                        <xsl:value-of select="year-from-date($maximum)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="year-from-date(current-date())"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
                                 <xsl:if test="$multiple-layout">
@@ -2259,7 +2314,27 @@
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'M') and not(contains(substring-before($format,'M'),'T'))">
-                        <format id="M" unit="mois" minimum="1" maximum="12">
+                        <format id="M" unit="Month">
+                            <xsl:attribute name="minimum">
+                                <xsl:choose>
+                                    <xsl:when test="$minimum != ''">
+                                        <xsl:value-of select="month-from-date($minimum)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="1"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="maximum">
+                                <xsl:choose>
+                                    <xsl:when test="$maximum != ''">
+                                        <xsl:value-of select="month-from-date($maximum)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="12"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
                                 <xsl:if test="$multiple-layout">
@@ -2269,7 +2344,27 @@
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'D') or contains($format,'J')">
-                        <format id="D" unit="jours" minimum="1" maximum="31">
+                        <format id="D" unit="Day">
+                            <xsl:attribute name="minimum">
+                                <xsl:choose>
+                                    <xsl:when test="$minimum != ''">
+                                        <xsl:value-of select="day-from-date($minimum)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="1"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="maximum">
+                                <xsl:choose>
+                                    <xsl:when test="$maximum != ''">
+                                        <xsl:value-of select="day-from-date($maximum)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="31"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
                             <xsl:attribute name="variable">
                                 <xsl:value-of select="$variable-name"/>
                                 <xsl:if test="$multiple-layout">
@@ -2281,22 +2376,231 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:if test="contains($format,'Y') or contains($format,'A')">
-                        <format id="Y" unit="ans" minimum="0" maximum="99" variable="{$variable-name}-layout-Y"/>
+                        <format id="Y" unit="Year" variable="{$variable-name}-layout-Y">
+                            <xsl:attribute name="minimum">
+                                <xsl:choose>
+                                    <xsl:when test="$minimum != ''">
+                                        <xsl:analyze-string select="$minimum" regex="^P([0-9]+)Y.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(1)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="0"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="maximum">
+                                <xsl:choose>
+                                    <xsl:when test="$maximum != ''">
+                                        <xsl:analyze-string select="$maximum" regex="^P([0-9]+)Y.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(1)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="99"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'M') and not(contains(substring-before($format,'M'),'T'))">
-                        <format id="M" unit="mois" minimum="0" maximum="11" variable="{$variable-name}-layout-M"/>
+                        <format id="M" unit="Month" variable="{$variable-name}-layout-M">
+                            <xsl:attribute name="minimum">
+                                <xsl:choose>
+                                    <xsl:when test="$minimum != ''">
+                                        <xsl:analyze-string select="$minimum" regex="^P[^T]*^[T0-9]([0-9]+)M.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(3)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="0"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="maximum">
+                                <xsl:choose>
+                                    <xsl:when test="$maximum != ''">
+                                        <xsl:analyze-string select="$maximum" regex="^P[^T]*^[T0-9]([0-9]+)M.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(3)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:analyze-string select="$format" regex="^PN+M.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="99"/>
+                                            </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="11"/>
+                                            </xsl:non-matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'D') or contains($format,'J')">
-                        <format id="D" unit="jours" minimum="0" maximum="30" variable="{$variable-name}-layout-D"/>
+                        <format id="D" unit="Day" variable="{$variable-name}-layout-D">
+                            <xsl:attribute name="minimum">
+                                <xsl:choose>
+                                    <xsl:when test="$minimum != ''">
+                                        <xsl:analyze-string select="$minimum" regex="^P.*([0-9]+)D.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(2)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="0"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="maximum">
+                                <xsl:choose>
+                                    <xsl:when test="$maximum != ''">
+                                        <xsl:analyze-string select="$maximum" regex="^P.*([0-9]+)D.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(2)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:analyze-string select="$format" regex="^PN+D.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="99"/>
+                                            </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="30"/>
+                                            </xsl:non-matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'H')">
-                        <format id="H" unit="heures" minimum="0" maximum="23" variable="{$variable-name}-layout-H"/>
+                        <format id="H" unit="Hour" variable="{$variable-name}-layout-H">
+                            <xsl:attribute name="minimum">
+                                <xsl:choose>
+                                    <xsl:when test="$minimum != ''">
+                                        <xsl:analyze-string select="$minimum" regex="^P.*T([0-9]+)H.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(2)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="0"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="maximum">
+                                <xsl:choose>
+                                    <xsl:when test="$maximum != ''">
+                                        <xsl:analyze-string select="$maximum" regex="^P.*T([0-9]+)H.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(2)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:analyze-string select="$format" regex="^PTN+H.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="99"/>
+                                            </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="23"/>
+                                            </xsl:non-matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'T') and contains(substring-after($format,'T'),'M')">
-                        <format id="m" unit="minutes" minimum="0" maximum="59" variable="{$variable-name}-layout-m"/>
+                        <format id="m" unit="Minute" variable="{$variable-name}-layout-m">
+                            <xsl:attribute name="minimum">
+                                <xsl:choose>
+                                    <xsl:when test="$minimum != ''">
+                                        <xsl:analyze-string select="$minimum" regex="^P.*T(.*^[0-9])*([0-9]+)M.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(4)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="0"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="maximum">
+                                <xsl:choose>
+                                    <xsl:when test="$maximum != ''">
+                                        <xsl:analyze-string select="$maximum" regex="^P.*T(.*^[0-9])*([0-9]+)M.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(4)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:analyze-string select="$format" regex="^PTN+M.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="99"/>
+                                            </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="59"/>
+                                            </xsl:non-matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'S')">
-                        <format id="S" unit="secondes" minimum="0" maximum="59" variable="{$variable-name}-layout-S"/>
+                        <format id="S" unit="Second" variable="{$variable-name}-layout-S">
+                            <xsl:attribute name="minimum">
+                                <xsl:choose>
+                                    <xsl:when test="$minimum != ''">
+                                        <xsl:analyze-string select="$minimum" regex="^P.*T(.*^[0-9])*([0-9]+)S.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(4)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="0"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:attribute name="maximum">
+                                <xsl:choose>
+                                    <xsl:when test="$maximum != ''">
+                                        <xsl:analyze-string select="$maximum" regex="^P.*T(.*^[0-9])*([0-9]+)S.*$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="regex-group(4)"/>
+                                            </xsl:matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:analyze-string select="$format" regex="^PTN+S$">
+                                            <xsl:matching-substring>
+                                                <xsl:value-of select="99"/>
+                                            </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="59"/>
+                                            </xsl:non-matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </format>
                     </xsl:if>
                 </xsl:otherwise>
             </xsl:choose>
