@@ -514,6 +514,14 @@
         </xd:desc>
     </xd:doc>
     <xsl:variable name="lengthOfLongTable" as="xs:integer">
-        <xsl:value-of select="$parameters/Parameters/LengthOfLongTable/Length"/>
+        <xsl:variable name="lengthOfLongTableParameters" select="$parameters/Parameters/LengthOfLongTable/Length"/>
+        <xsl:choose>
+            <xsl:when test="$lengthOfLongTableParameters!=''">
+                <xsl:value-of select="$properties//LengthOfLongTable/Length"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$lengthOfLongTableParameters"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:variable>
 </xsl:stylesheet>
