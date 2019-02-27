@@ -219,11 +219,7 @@
     <xsl:template match="d:QuestionGrid" mode="enoddi:get-title-line">
         <xsl:param name="index" tunnel="yes" as="xs:integer"/>
         <!-- Counting the labels located at the top of the referenced list (if they exist, they should not be taken into account)-->
-        <xsl:variable name="label-or-no">
-            <xsl:value-of
-                select="count(d:GridDimension[@rank='2']/d:CodeDomain/r:CodeListReference/l:CodeList/r:Label)"
-            />
-        </xsl:variable>
+        <xsl:variable name="label-or-no" select="count(d:GridDimension[@rank='2']/d:CodeDomain/r:CodeListReference/l:CodeList/r:Label)"/>
 
         <!-- If it is the first line -->
         <xsl:if test="$index=1">
@@ -240,9 +236,8 @@
         1) codes which nesting level in codes lists with labels is equal to index+1
         2) labels from l:CodeList-->
 
-        <xsl:sequence
-            select="d:GridDimension[@rank='2']//(l:Code[count(ancestor::l:CodeList[r:Label])=$index+number($label-or-no)-1] | l:CodeList/r:Label[count(ancestor::l:CodeList[r:Label])=$index+number($label-or-no)])"
-        />
+        <xsl:sequence select="d:GridDimension[@rank='2']//(l:Code[count(ancestor::l:CodeList[r:Label])+count(ancestor::l:Code)=$index+number($label-or-no)-1] 
+                                                         | l:CodeList/r:Label[count(ancestor::l:CodeList[r:Label])+count(ancestor::l:Code)=$index+number($label-or-no)])"/>
     </xsl:template>
 
     <xd:doc>
@@ -307,24 +302,16 @@
             <xd:p>Getting the colspan for l:Code belonging to a 1-dimension of several levels.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template
-        match="l:Code[max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList | ancestor::l:Code))>1]"
-        mode="enoddi:get-colspan" priority="1">
+    <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='1'] and not(descendant::l:Code)]" mode="enoddi:get-colspan" priority="1">
         <!-- Getting the depth-level of parents codes -->
-        <xsl:variable name="parents">
-            <xsl:value-of
-                select="if (string(count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) != 'NaN') then count(ancestor::l:CodeList[r:Label] | ancestor::l:Code) else 0"
-            />
-        </xsl:variable>
+        <xsl:variable name="parents" select="if (string(count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) != 'NaN') then count(ancestor::l:CodeList[r:Label] | ancestor::l:Code) else 0"/>
         <!-- Getting the depth-level of children codes -->
-        <xsl:variable name="children">
-            <xsl:value-of
-                select="if (string(max(.//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))-count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) !='') then max(.//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))-count(ancestor::l:CodeList[r:Label] | ancestor::l:Code) else 0"
-            />
-        </xsl:variable>
-        <xsl:value-of
-            select="max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))-number($parents)-number($children)+1"
-        />
+        <xsl:variable name="children"
+            select="if (string(max(.//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) - count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) !='') 
+                    then max(.//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) - count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)
+                    else 0"/>
+        <xsl:value-of select="max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))
+                            -number($parents) -number($children)+1"/>
     </xsl:template>
 
     <xd:doc>
@@ -397,12 +384,16 @@
         <xsl:value-of select="1 + $last-line - $first-line"/>
     </xsl:template>
 
-    <!-- WARNING -->
-    <!-- At the moment, this is equal to the number of l:Code that we find lower. This will only work with 2 levels. -->
-    <!-- Consider an evolution where the table header would have 3 levels -->
-    <xsl:template match="r:Label[ancestor::d:GridDimension[@rank='2']]" mode="enoddi:get-colspan"
-        priority="1">
-        <xsl:value-of select="count(parent::l:CodeList//l:Code)"/>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Getting colspan for the line labels (2nd dimension). It depends on the depth level.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="r:Label[ancestor::d:GridDimension[@rank='2']]" mode="enoddi:get-colspan" priority="1">
+        <xsl:value-of select="count(parent::l:CodeList//l:Code[not(descendant::l:Code)])"/>
+    </xsl:template>
+    <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='2'] and descendant::l:Code]" mode="enoddi:get-colspan" priority="1">
+        <xsl:value-of select="count(descendant::l:Code[not(descendant::l:Code)])"/>
     </xsl:template>
 
     <xd:doc>
@@ -410,11 +401,19 @@
             <xd:p>Getting rowspan for the line labels (2nd dimension). It depends on the depth level.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='2']]" mode="enoddi:get-rowspan"
-        priority="1">
-        <xsl:value-of
-            select="max(ancestor::d:GridDimension[@rank='2']//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label]))+1-count(ancestor::l:CodeList[r:Label])"
-        />
+    <xsl:template match="l:Code[ancestor::d:GridDimension[@rank='2'] and not(descendant::l:Code)]" mode="enoddi:get-rowspan" priority="1">
+        <xsl:value-of select="max(ancestor::d:GridDimension[@rank='2']//l:Code[not(l:Code)]/(count(ancestor::l:CodeList[r:Label])+count(ancestor::l:Code)+1))
+                             -count(ancestor::l:CodeList[r:Label])
+                             -count(ancestor::l:Code)"/>
+    </xsl:template>
+    <!--<xsl:template match="r:Label[ancestor::d:GridDimension[@rank='2']]" mode="enoddi:get-rowspan" priority="1">
+        <xsl:value-of select="max(ancestor::d:GridDimension[@rank='2']//l:Code[not(l:Code)]/(count(ancestor::l:CodeList[r:Label])+count(ancestor::l:Code)+1))
+            -count(parent::l:CodeList/ancestor::l:CodeList[r:Label])
+            -count(ancestor::l:Code)"/>
+    </xsl:template>-->
+    <xsl:template match="d:GridDimension[@rank='1' and ../d:GridDimension/@rank='2' and d:CodeDomain and not(descendant::l:CodeList/r:Label)]" mode="enoddi:get-rowspan" priority="1">
+        <xsl:value-of select="max(../d:GridDimension[@rank='2']//l:Code[not(l:Code)]/(count(ancestor::l:CodeList[r:Label])+count(ancestor::l:Code)))+1
+            -(if (../d:GridDimension[@rank='2']//l:CodeList[1]/r:Label) then 1 else 0)"/>
     </xsl:template>
 
     <xd:doc>
