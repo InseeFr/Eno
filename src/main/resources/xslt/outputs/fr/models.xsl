@@ -1822,11 +1822,11 @@
 
         <xhtml:table name="{enofr:get-name($source-context)}">
             <xsl:choose>
-                <xsl:when test="$css-class != ''">
+                <xsl:when test="$isLongTable!=''">
                     <xsl:attribute name="class" select="concat($isLongTable,' ',$css-class)"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:attribute name="class" select="$isLongTable"/>
+                    <xsl:attribute name="class" select="$css-class"/>
                 </xsl:otherwise>
             </xsl:choose>
             <xhtml:colgroup>
@@ -1888,11 +1888,11 @@
         <xsl:apply-templates select="$table-title//xf-output" mode="model"/>
         <xhtml:table name="{$table-name}">
             <xsl:choose>
-                <xsl:when test="$css-class != ''">
+                <xsl:when test="$isLongTable!=''">
                     <xsl:attribute name="class" select="concat($isLongTable,' ',$css-class)"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:attribute name="class" select="$isLongTable"/>
+                    <xsl:attribute name="class" select="$css-class"/>
                 </xsl:otherwise>
             </xsl:choose>
             <xhtml:colgroup>

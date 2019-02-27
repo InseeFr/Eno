@@ -513,7 +513,7 @@
             <xd:p>It is used for defining a css class</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:variable name="lengthOfLongTable">
+    <xsl:variable name="lengthOfLongTable" as="xs:integer">
         <xsl:value-of select="$parameters/Parameters/LengthOfLongTable/Length"/>
     </xsl:variable>
 </xsl:stylesheet>
