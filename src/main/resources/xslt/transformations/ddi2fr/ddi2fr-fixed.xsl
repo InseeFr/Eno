@@ -517,10 +517,10 @@
         <xsl:variable name="lengthOfLongTableParameters" select="$parameters/Parameters/LengthOfLongTable/Length"/>
         <xsl:choose>
             <xsl:when test="$lengthOfLongTableParameters!=''">
-                <xsl:value-of select="$properties//LengthOfLongTable/Length"/>
+                <xsl:value-of select="$lengthOfLongTableParameters"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$lengthOfLongTableParameters"/>
+                <xsl:value-of select="$properties//LengthOfLongTable/Length"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
