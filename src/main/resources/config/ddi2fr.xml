@@ -14,4 +14,7 @@
             <After>¤</After>
         </ddi>
     </TextConditioningVariable>
+    <LengthOfLongTable>
+        <Length>7</Length>
+    </LengthOfLongTable>
 </Properties>

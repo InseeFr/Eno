@@ -2532,7 +2532,8 @@
                </xf:bind>
             </xf:bind>
          </xf:bind>
-         <!--You can add a resource attribute for the save submission by processing the result with your own xslt.--><xf:submission id="save"
+         <!--You can add a resource attribute for the save submission by processing the result with your own xslt.-->
+         <xf:submission id="save"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
@@ -2544,7 +2545,8 @@
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
-         <!--You can add a resource attribute for the submit submission by processing the result with your own xslt.--><xf:submission id="submit"
+         <!--You can add a resource attribute for the submit submission by processing the result with your own xslt.-->
+         <xf:submission id="submit"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
@@ -2583,7 +2585,7 @@
                <xxf:show ev:event="DOMActivate" dialog="error"/>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())                     and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false()">
+            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                            and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false()">
                <xxf:show ev:event="DOMActivate" dialog="warning"/>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
@@ -3272,7 +3274,7 @@
                                    xxf:order="label control hint help alert">
                            <xf:label ref="$form-resources/j4nwc63q/label"/>
                         </xf:output>
-                        <xhtml:table name="j4nwc63q" class="question complex-grid">
+                        <xhtml:table name="j4nwc63q" class="long-table question complex-grid">
                            <xhtml:colgroup>
                               <xhtml:col span="2"/>
                            </xhtml:colgroup>
@@ -4219,7 +4221,7 @@
                                 xxf:order="label control hint help alert">
                         <xf:label ref="$form-resources/j6qg8rc6/label"/>
                      </xf:output>
-                     <xhtml:table name="j6qg8rc6" class="question complex-grid">
+                     <xhtml:table name="j6qg8rc6" class="long-table question complex-grid">
                         <xhtml:colgroup>
                            <xhtml:col span="0"/>
                         </xhtml:colgroup>
