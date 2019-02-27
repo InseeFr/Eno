@@ -1,12 +1,16 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    
- <xsl:attribute-set name="Titre-sequence">
+
+    <xsl:attribute-set name="Titre-sequence">
         <xsl:attribute name="background-color">#666666</xsl:attribute>
         <xsl:attribute name="color">white</xsl:attribute>
         <xsl:attribute name="font-weight">bold</xsl:attribute>
         <xsl:attribute name="margin-bottom">9pt</xsl:attribute>
         <xsl:attribute name="margin-top">3pt</xsl:attribute>
         <xsl:attribute name="font-size">14pt</xsl:attribute>
+        <xsl:attribute name="border-color">black</xsl:attribute>
+        <xsl:attribute name="border-style">solid</xsl:attribute>
+        <xsl:attribute name="space-before">10mm</xsl:attribute>
+        <xsl:attribute name="space-before.conditionality">discard</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="Titre-paragraphe">
         <xsl:attribute name="background-color">#CCCCCC</xsl:attribute>

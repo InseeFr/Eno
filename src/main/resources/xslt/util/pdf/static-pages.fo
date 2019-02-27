@@ -146,7 +146,7 @@
         </fo:simple-page-master>
 
         <fo:simple-page-master master-name="questions-fin" page-height="297mm"
-            page-width="210mm" font-family="arial" font-size="10pt"
+            page-width="210mm" font-family="Liberation Sans" font-size="10pt"
             font-weight="normal" margin-bottom="5mm">
             <fo:region-body margin="13mm" column-count="1"/>
             <fo:region-before region-name="xsl-region-before" extent="25mm" display-align="before" precedence="true"/>
@@ -306,8 +306,8 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -324,9 +324,13 @@
                                 questionnaire ne sauraient en aucun cas être utilisés à des fins de
                                 contrôle fiscal ou de répression économique. </fo:block>
                             <fo:block>Questionnaire confidentiel destiné à
-                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. La loi n°
+                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. Le 
+                                règlement 2016/679 du 27 avril 2016 relatif à la protection des 
+                                personnes physiques à l'égard du traitement des données à caractère 
+                                personnel et à la libre circulation de ces données (règlement 
+                                général sur la protection des données, RGPD) ainsi que la loi n° 
                                 78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux
-                                fichiers et aux libertés, s'applique aux réponses faites à la
+                                fichiers et aux libertés, s'appliquent aux réponses faites à la
                                 présente enquête par les entreprises individuelles. Elle leur
                                 garantit un droit d'accès et de rectification pour les données les
                                 concernant. Ce droit peut être exercé auprès de
@@ -567,8 +571,8 @@
                                 cas être utilisées à des fins de contrôle fiscal ou de répression
                                 économique.</fo:block>
                             <fo:block margin-top="3mm">De manière à maintenir une bonne qualité des indicateurs calculés, l’échantillon des unités interrogées 
-                                est régulièrement renouvelé. Cette opération a conduit ${BddArticleServiceProducteur}${BddNomServiceProducteur} à introduire 
-                                votre ${BddLabelUniteEnquetee}  dans le nouvel échantillon. Vous serez dorénavant sollicité de manière régulière et il est 
+                                est régulièrement renouvelé. Cette opération nous a conduit à introduire 
+                                votre ${BddLabelUniteEnquetee} dans le nouvel échantillon. Vous serez dorénavant sollicité de manière régulière et il est 
                                 important que nous puissions recueillir votre réponse afin que la diversité des caractéristiques des entreprises soit prise en compte.</fo:block>
                             <fo:block margin-top="3mm"><fo:inline font-weight="bold">Je vous invite
                                 donc</fo:inline>#if(${BddQuestionnaire}==0) <fo:inline
@@ -577,11 +581,12 @@
                                 cette lettre. S’il vous est matériellement impossible de répondre en
                                 ligne, merci de bien vouloir prendre contact avec notre service
                                 d'assistance dont les coordonnées figurent dans l’en-tête de cette
-                                lettre.#else soit à répondre à cette enquête <fo:inline
-                                    font-weight="bold">par internet selon les modalités précisées au
-                                    verso de cette lettre</fo:inline> soit à compléter le
-                                questionnaire joint.#end</fo:block>
-                            <fo:block margin-top="3mm">Je vous serais remercie de bien vouloir
+                                lettre.#else <fo:inline
+                                    font-weight="bold">soit à répondre à cette enquête 
+                                    par internet selon les modalités précisées au
+                                    verso de cette lettre soit à compléter le
+                                    questionnaire joint.</fo:inline>#end</fo:block>
+                            <fo:block margin-top="3mm">Je vous invite à nous
                                 transmettre votre questionnaire une fois rempli avant le <fo:inline
                                     font-weight="bold">${BddDateEcheance}</fo:inline>. Notre service
                                 d'assistance se tient à votre disposition pour répondre à vos
@@ -606,8 +611,8 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -624,9 +629,13 @@
                                 questionnaire ne sauraient en aucun cas être utilisés à des fins de
                                 contrôle fiscal ou de répression économique. </fo:block>
                             <fo:block>Questionnaire confidentiel destiné à
-                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. La loi n°
+                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. Le 
+                                règlement 2016/679 du 27 avril 2016 relatif à la protection des 
+                                personnes physiques à l'égard du traitement des données à caractère 
+                                personnel et à la libre circulation de ces données (règlement 
+                                général sur la protection des données, RGPD) ainsi que la loi n° 
                                 78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux
-                                fichiers et aux libertés, s'applique aux réponses faites à la
+                                fichiers et aux libertés, s'appliquent aux réponses faites à la
                                 présente enquête par les entreprises individuelles. Elle leur
                                 garantit un droit d'accès et de rectification pour les données les
                                 concernant. Ce droit peut être exercé auprès de
@@ -789,7 +798,7 @@
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="48mm" width="75mm"
                     height="6mm" overflow="hidden">
-                    <fo:block font-weight="bold" text-align="center">#if($!{BddTitreRelance}) $!{BddTitreRelance}#elseRAPPEL#end</fo:block>
+                    <fo:block font-weight="bold" text-align="center">#if($!{BddTitreRelance}) $!{BddTitreRelance}#else RAPPEL #end</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="110mm" top="47.5mm"
                     width="11.88mm" height="11.88mm" overflow="hidden">
@@ -815,14 +824,14 @@
                     overflow="hidden">
                     <fo:block margin-top="0.5mm" margin-left="0mm" height="37.2mm"
                         font-family="Lucida Console">
-                        <fo:inline-container>
-                            <fo:block>${BddAdressePosteeL1}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL2}</fo:block>
-                            <fo:block>${BddAdressePosteeL3}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL4}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL5}</fo:block>
-                            <fo:block>${BddAdressePosteeL6}</fo:block>
-                            <fo:block>${BddAdressePosteeL7}</fo:block>
+                        <fo:inline-container margin="0mm">
+                            <fo:block line-height="10pt">${BddAdressePosteeL1}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL2}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL3}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL4}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL5}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL6}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL7}</fo:block>
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
@@ -859,11 +868,11 @@
                                 l’<fo:inline font-weight="bold">enquête#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end ${BddAnneeReference}</fo:inline>. 
                                 Si, toutefois, vous venez de procéder à cet envoi, je vous prie de ne pas tenir compte de ce rappel.</fo:block>
                             <fo:block margin-top="3mm">Dans le cas contraire, je regrette qu’il ne vous ait pas été possible de respecter les délais prévus (date échéance : <fo:inline font-weight="bold">${BddDateEcheance})</fo:inline>. 
-                                Aussi <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre. 
-                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint. #end</fo:block>
-                            <fo:block margin-top="3mm">Notre service d'assistance se tient à votre disposition pour répondre à vos questions en cas de besoin.</fo:block>
+                                Aussi, <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir dans les meilleurs délais le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre. 
+                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else de répondre dans les meilleurs délais à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint. #end</fo:block>
+                            <fo:block margin-top="3mm">#if(${BddQuestionnaire}==0) Ce dernier se tient également#else Notre service d'assistance se tient#end à votre disposition pour répondre à vos questions en cas de besoin.</fo:block>
                             <fo:block margin-top="3mm">${BddObjectifsLongs}</fo:block>
-                            <fo:block margin-top="3mm">Je me permets de vous rappeler que cette enquête est reconnue d'${BddStatutEnquete}. Conformément à la loi n° 51-711 du 7 juin 1951 modifiée, les données recueillies sont couvertes par le secret statistique et ne sauraient en aucun cas être utilisées à des fins de contrôle fiscal ou de répression économique.</fo:block>
+                            <fo:block margin-top="3mm">Je vous rappelle que cette enquête est reconnue d'${BddStatutEnquete}. Conformément à la loi n° 51-711 du 7 juin 1951 modifiée, les données recueillies sont couvertes par le secret statistique et ne sauraient en aucun cas être utilisées à des fins de contrôle fiscal ou de répression économique.</fo:block>
                             <fo:block margin-top="3mm">Des renseignements relatifs à l'enquête et à
                                 son calendrier sont disponibles sur le site internet du Cnis :
                                 ${BddURLCnis}. #if($!{BddURLDiffusion})Les résultats de cette
@@ -884,8 +893,8 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -902,9 +911,13 @@
                                 questionnaire ne sauraient en aucun cas être utilisés à des fins de
                                 contrôle fiscal ou de répression économique. </fo:block>
                             <fo:block>Questionnaire confidentiel destiné à
-                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. La loi n°
+                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. Le 
+                                règlement 2016/679 du 27 avril 2016 relatif à la protection des 
+                                personnes physiques à l'égard du traitement des données à caractère 
+                                personnel et à la libre circulation de ces données (règlement 
+                                général sur la protection des données, RGPD) ainsi que la loi n° 
                                 78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux
-                                fichiers et aux libertés, s'applique aux réponses faites à la
+                                fichiers et aux libertés, s'appliquent aux réponses faites à la
                                 présente enquête par les entreprises individuelles. Elle leur
                                 garantit un droit d'accès et de rectification pour les données les
                                 concernant. Ce droit peut être exercé auprès de
@@ -1064,14 +1077,14 @@
                     overflow="hidden">
                     <fo:block margin-top="0.5mm" margin-left="0mm" height="37.2mm"
                         font-family="Lucida Console">
-                        <fo:inline-container>
-                            <fo:block>${BddAdressePosteeL1}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL2}</fo:block>
-                            <fo:block>${BddAdressePosteeL3}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL4}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL5}</fo:block>
-                            <fo:block>${BddAdressePosteeL6}</fo:block>
-                            <fo:block>${BddAdressePosteeL7}</fo:block>
+                        <fo:inline-container margin="0mm">
+                            <fo:block line-height="10pt">${BddAdressePosteeL1}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL2}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL3}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL4}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL5}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL6}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL7}</fo:block>
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
@@ -1092,40 +1105,26 @@
                     <fo:block>
                         <fo:inline-container>
                             <fo:block text-align="right">Paris, le ${DateEdition}</fo:block>
-                            <fo:block margin-top="3mm" font-weight="bold">Objet :
-                                Enquête statistique#if((${BddFrequence}!='annuelle') and
-                                (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end
-                                ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
-                                (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
-                                ${BddAnneeReference}</fo:block>
+                            <fo:block margin-top="3mm" font-weight="bold">Objet : Enquête statistique ${BddLibelleLong} ${BddAnneeReference}</fo:block>
                             <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Votre
                                 ${BddLabelUniteEnquetee} :
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
                             <fo:block margin-top="3mm"><fo:block font-weight="bold">Madame la Directrice, Monsieur le Directeur,</fo:block></fo:block>
                             <fo:block margin-top="3mm">Ma lettre de mise en demeure du ${BddDateEnvoiMiseEnDemeure} étant restée sans suite, je suis dans l’obligation aujourd’hui d’établir à votre encontre le constat suivant :</fo:block>
-                            <fo:block margin-top="3mm">- de défaut de réponse à l’enquête#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end ${BddAnneeReference};</fo:block>
+                            <fo:block margin-top="3mm">- de défaut de réponse à l’enquête#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end ${BddAnneeReference}&#160;;</fo:block>
                             <fo:block margin-top="3mm">- et d’absence de justification à ce défaut de réponse.</fo:block>
-                            <fo:block margin-top="3mm">En conséquence, je suis donc au regret de vous informer qu’à l’expiration d’un délai de <fo:inline font-weight="bold">15 jours</fo:inline> pendant 
-                                lequel vous pouvez faire parvenir votre réponse à l’enquête ou fournir les justifications demandées, votre dossier sera soumis pour examen au comité du contentieux des 
-                                enquêtes statistiques obligatoires du Conseil national de l’information statistique (Cnis), chargé de donner un avis sur les infractions sur l’obligation en matière de 
-                                statistique, conformément à la loi*.</fo:block>
-                            <fo:block margin-top="3mm">Aussi <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre. 
-                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint. #end</fo:block>
-                            <fo:block margin-top="3mm">Pour tout renseignement complémentaire sur ce courrier ou la procédure en cours, 
-                                notre service d'assistance, dont les coordonnées sont rappelées ci-dessus, se tient à votre disposition.</fo:block>
-                            <fo:block margin-top="3mm">Si l’envoi de votre questionnaire a pu croiser ce présent courrier, je vous prie de ne pas tenir compte de celui-ci.</fo:block>
-                            <fo:block margin-top="3mm">En vous remerciant par avance de
-                                votre collaboration, je vous prie de bien vouloir agréer,
-                                Madame, Monsieur, l'assurance de ma considération
-                                distinguée.</fo:block>
+                            <fo:block margin-top="3mm">Si vous venez de procéder à la transmission de votre réponse, je vous prie de ne pas tenir compte de ce courrier.</fo:block>
+                            <fo:block margin-top="3mm">A défaut, <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre,#else de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre soit à compléter le questionnaire joint,#end dans un délai de 15 jours. A l’expiration de ce délai, votre dossier sera soumis pour examen au comité du contentieux des enquêtes statistiques obligatoires du Conseil national de l’information statistique (Cnis), conformément à la loi*.</fo:block>
+                            <fo:block margin-top="3mm">S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre. Ce dernier se tient également à votre disposition pour tout renseignement complémentaire sur ce courrier ou la procédure en cours.</fo:block>
+                            <fo:block margin-top="3mm">En vous remerciant par avance de votre collaboration, je vous prie de bien vouloir agréer, Madame, Monsieur, l'assurance de ma considération distinguée.</fo:block>
                             <fo:block margin-top="3mm" text-align="right">${BddServiceProducteurSignataireFonction}</fo:block>
                             <fo:block text-align="right">${BddServiceProducteurSignataireNom}</fo:block>
                             <fo:block margin-top="10mm">(*) Loi n°51-711 du 7 juin 1951 modifiée. Décret n° 2009-318 du 20 mars 2009.</fo:block>
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -1142,9 +1141,13 @@
                                 questionnaire ne sauraient en aucun cas être utilisés à des fins de
                                 contrôle fiscal ou de répression économique. </fo:block>
                             <fo:block>Questionnaire confidentiel destiné à
-                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. La loi n°
+                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. Le 
+                                règlement 2016/679 du 27 avril 2016 relatif à la protection des 
+                                personnes physiques à l'égard du traitement des données à caractère 
+                                personnel et à la libre circulation de ces données (règlement 
+                                général sur la protection des données, RGPD) ainsi que la loi n° 
                                 78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux
-                                fichiers et aux libertés, s'applique aux réponses faites à la
+                                fichiers et aux libertés, s'appliquent aux réponses faites à la
                                 présente enquête par les entreprises individuelles. Elle leur
                                 garantit un droit d'accès et de rectification pour les données les
                                 concernant. Ce droit peut être exercé auprès de
@@ -1303,14 +1306,14 @@
                     overflow="hidden">
                     <fo:block margin-top="0.5mm" margin-left="0mm" height="37.2mm"
                         font-family="Lucida Console">
-                        <fo:inline-container>
-                            <fo:block>${BddAdressePosteeL1}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL2}</fo:block>
-                            <fo:block>${BddAdressePosteeL3}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL4}</fo:block>
-                            <fo:block>$!{BddAdressePosteeL5}</fo:block>
-                            <fo:block>${BddAdressePosteeL6}</fo:block>
-                            <fo:block>${BddAdressePosteeL7}</fo:block>
+                        <fo:inline-container margin="0mm">
+                            <fo:block line-height="10pt">${BddAdressePosteeL1}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL2}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL3}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL4}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL5}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL6}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL7}</fo:block>
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
@@ -1341,12 +1344,12 @@
                                 ${BddLabelUniteEnquetee} :
                                 ${BddIdentifiantUniteEnquetee})</fo:block>
                             <fo:block margin-top="3mm">Madame la Directrice, Monsieur le Directeur,</fo:block>
-                            <fo:block margin-top="3mm">Malgré ma relance en date du ${BddDateEnvoiRappel}, à ma connaissance, votre réponse à l’<fo:inline font-weight="bold">enquête#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end ${BddAnneeReference}</fo:inline> n’est pas encore parvenue à mes services. Au cas où ce courrier se serait croisé avec votre réponse, je vous prie, bien entendu, de ne pas en tenir compte.</fo:block>
+                            <fo:block margin-top="3mm">Malgré ma relance en date du ${BddDateEnvoiRappel}, à ma connaissance votre réponse à l’<fo:inline font-weight="bold">enquête#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end ${BddAnneeReference}</fo:inline> n’est pas encore parvenue à mes services. Au cas où ce courrier se serait croisé avec votre réponse, je vous prie, bien entendu, de ne pas en tenir compte.</fo:block>
                             <fo:block margin-top="3mm">Dans le cas contraire, les dispositions légales* m’amènent à <fo:inline font-weight="bold">vous mettre en demeure</fo:inline> d’adresser votre réponse à mes services dans un délai de <fo:inline font-weight="bold">15 jours</fo:inline> à compter de la réception de la présente lettre, ou de me faire connaître par écrit les motifs de cette absence de réponse.</fo:block>
-                            <fo:block margin-top="3mm">En cas de défaut de réponse dans le délai imparti, la procédure contentieuse prévue par la loi vous serait appliquée et je serais dans l’obligation d’établir un constat de non-réponse à votre encontre puis de soumettre votre dossier au comité du contentieux des enquêtes statistiques obligatoires du Conseil national de l’information statistique (Cnis), chargé de donner un avis sur les infractions à la loi de 1951 sur l’obligation en matière de statistique.</fo:block>
-                            <fo:block margin-top="3mm">Aussi <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre. 
-                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint. #end</fo:block>
-                            <fo:block margin-top="3mm">Notre service d'assistance se tient à votre disposition pour répondre à vos questions en cas de besoin.</fo:block>
+                            <fo:block margin-top="3mm">En cas de défaut de réponse dans le délai imparti, la procédure contentieuse prévue par la loi vous serait appliquée et je serais dans l’obligation d’établir un constat de non-réponse à votre encontre puis de soumettre votre dossier au Comité du contentieux des enquêtes statistiques obligatoires du Conseil national de l’information statistique (Cnis), conformément à la loi de 1951 sur l’obligation en matière de statistique.</fo:block>
+                            <fo:block margin-top="3mm">Aussi, <fo:inline font-weight="bold">je vous prie</fo:inline> #if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir dans les meilleurs délais le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre. 
+                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else <fo:inline font-weight="bold">de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint.</fo:inline> #end</fo:block>
+                            <fo:block margin-top="3mm">#if(${BddQuestionnaire}==0) Ce dernier se tient également#else Notre service d'assistance se tient#end à votre disposition pour répondre à vos questions en cas de besoin.</fo:block>
                             <fo:block margin-top="3mm">Des renseignements relatifs à l'enquête et à son calendrier sont disponibles sur le site internet du Cnis : ${BddURLCnis}. #if($!{BddURLDiffusion})Les résultats de cette enquête seront disponibles sur le site de l'Insee à l'adresse suivante : $!{BddURLDiffusion}.#end</fo:block>
                             <fo:block margin-top="3mm">En vous remerciant par avance de
                                 votre collaboration, je vous prie de bien vouloir agréer,
@@ -1358,8 +1361,8 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" left="15mm" top="258mm"
-                    width="180mm" height="25mm" overflow="hidden" font-family="Liberation Sans"
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
                     font-size="7pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
                         <fo:inline-container margin-top="0.5mm" margin-left="1mm">
@@ -1376,9 +1379,13 @@
                                 questionnaire ne sauraient en aucun cas être utilisés à des fins de
                                 contrôle fiscal ou de répression économique. </fo:block>
                             <fo:block>Questionnaire confidentiel destiné à
-                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. La loi n°
+                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. Le 
+                                règlement 2016/679 du 27 avril 2016 relatif à la protection des 
+                                personnes physiques à l'égard du traitement des données à caractère 
+                                personnel et à la libre circulation de ces données (règlement 
+                                général sur la protection des données, RGPD) ainsi que la loi n° 
                                 78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux
-                                fichiers et aux libertés, s'applique aux réponses faites à la
+                                fichiers et aux libertés, s'appliquent aux réponses faites à la
                                 présente enquête par les entreprises individuelles. Elle leur
                                 garantit un droit d'accès et de rectification pour les données les
                                 concernant. Ce droit peut être exercé auprès de
@@ -1570,8 +1577,7 @@
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="175mm"
                     width="180mm" height="10mm">
-                    <fo:block font-weight="bold" font-size="12pt">Merci de nous retourner ce
-                        questionnaire au plus tard le : ${BddDateEcheance}, à l’adresse
+                    <fo:block font-weight="bold" font-size="12pt">Votre réponse était attendue pour le ${BddDateEcheance}. Merci de nous retourner ce questionnaire dans les meilleurs délais, à l’adresse
                         suivante :</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="15mm" top="210mm"
@@ -1605,9 +1611,9 @@
                             <fo:instream-foreign-object>
                                 <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
                                     message="Code Bar" orientation="0">
-                                    <barcode:code128>
+                                    <barcode:code39>
                                         <barcode:height>10mm</barcode:height>
-                                    </barcode:code128>
+                                    </barcode:code39>
                                 </barcode:barcode>
                             </fo:instream-foreign-object>
                         </fo:block>
@@ -1632,22 +1638,22 @@
     </fo:page-sequence>
     <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="Cover-A4-90">
         <fo:static-content flow-name="landscape-after-cover">
-            <fo:block-container text-align="left" absolute-position="absolute" left="200mm" top="15mm">
+            <fo:block-container text-align="left" absolute-position="absolute" left="190mm" top="10mm">
                 <fo:block>
                     <fo:instream-foreign-object>
-                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" message="${idQuestionnaire} - 1">
-                            <barcode:code128>
+                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" message="${idQuestionnaire}-1">
+                            <barcode:code39>
                                 <barcode:height>8mm</barcode:height>
                                 <barcode:human-readable>
                                     <barcode:placement>none</barcode:placement>
                                 </barcode:human-readable>
-                            </barcode:code128>
+                            </barcode:code39>
                         </barcode:barcode>
                     </fo:instream-foreign-object>
                 </fo:block>
             </fo:block-container>
             <fo:block-container absolute-position="absolute" right="20mm" top="20mm">
-                <fo:block text-align="right" font-size="8pt">${idQuestionnaire} - 1</fo:block>
+                <fo:block text-align="right" font-size="8pt">${idQuestionnaire}-1</fo:block>
             </fo:block-container>
         </fo:static-content>
         <fo:flow flow-name="xsl-region-body">
@@ -1743,8 +1749,9 @@
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="110mm" top="120mm"
                     width="170mm" height="10mm">
-                    <fo:block font-weight="bold" font-size="12pt">Merci de nous retourner ce
-                        questionnaire au plus tard le : ${BddDateEcheance}</fo:block>
+                    <fo:block font-weight="bold" font-size="12pt">Votre réponse était attendue 
+                        pour le : ${BddDateEcheance}. Merci de nous retourner ce questionnaire 
+                        dans les meilleurs délais.</fo:block>
                 </fo:block-container>
                 <fo:block-container absolute-position="absolute" left="150mm" top="135mm"
                     width="120mm" height="50mm" padding="2mm"

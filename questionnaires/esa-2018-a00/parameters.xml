@@ -12,12 +12,12 @@
   </Format>
   <Roster>
     <Row>
-      <DefaultSize>9</DefaultSize>
+      <DefaultSize>12</DefaultSize>
     </Row>
   </Roster>
   <Table>
     <Row>
-      <DefaultSize>9</DefaultSize>
+      <DefaultSize>14</DefaultSize>
     </Row>
   </Table>
   <TextArea>
