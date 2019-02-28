@@ -483,7 +483,7 @@
             <xd:p>It builds the bind by using different enofr functions then the process goes on next to the created bind.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Bind//xf-input" mode="model">
+    <xsl:template match="Bind//TextDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -1585,15 +1585,23 @@
         </xsl:variable>
         <xsl:variable name="xforms-element">
             <xsl:choose>
-                <xsl:when test="self::NumericDomain">
+                <xsl:when test="self::NumericDomain | self::TextDomain">
                     <xsl:value-of select="'xf:input'"/>
                 </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="translate(name(), '-', ':')"/>
-                </xsl:otherwise>
+                <xsl:when test="self::TextareaDomain">
+                    <xsl:value-of select="'xf:textarea'"/>
+                </xsl:when>
+                <xsl:when test="self::xf-output">
+                    <xsl:value-of select="'xf:output'"/>
+                </xsl:when>
+                <xsl:when test="self::xf-select">
+                    <xsl:value-of select="'xf:select'"/>
+                </xsl:when>
+                <xsl:when test="self::xf-select1">
+                    <xsl:value-of select="'xf:select1'"/>
+                </xsl:when>
             </xsl:choose>
         </xsl:variable>
-
 
         <xsl:element name="{$xforms-element}">
             <xsl:attribute name="id" select="concat($name, '-control')"/>
