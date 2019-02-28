@@ -441,18 +441,16 @@
 			</xsl:when>
 			<xsl:when test="$format = ('filter-alternative-text','flowcontrol-text')">
 				<xsl:if test="$label != ''">
-					<fo:block width="100%" page-break-inside="avoid" keep-with-previous="always">
-						<fo:inline-container width="10%" vertical-align="bottom" text-align="right">
-							<fo:block-container>
-								<fo:block>
-									<xsl:call-template name="insert-image">
-										<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
-									</xsl:call-template>
-								</fo:block>
-							</fo:block-container>
+					<fo:block page-break-inside="avoid" keep-with-previous="always" xsl:use-attribute-sets="filter-block">
+						<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
+							<fo:block margin="2pt">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
+								</xsl:call-template>
+							</fo:block>
 						</fo:inline-container>
-						<fo:inline-container width="87%">
-							<fo:block xsl:use-attribute-sets="filter-alternative" width="100%">
+						<fo:inline-container xsl:use-attribute-sets="filter-inline-container">
+							<fo:block xsl:use-attribute-sets="filter-alternative">
 								<xsl:copy-of select="$label"/>
 							</fo:block>
 						</fo:inline-container>
