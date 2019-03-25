@@ -58,15 +58,26 @@
         <xsl:attribute name="position">relative</xsl:attribute>
         <xsl:attribute name="border-bottom">1px dotted black</xsl:attribute>
     </xsl:attribute-set>
+    <xsl:attribute-set name="filter-block">
+        <xsl:attribute name="space-before">2pt</xsl:attribute>
+        <xsl:attribute name="space-after">2pt</xsl:attribute>
+        <xsl:attribute name="start-indent">5%</xsl:attribute>
+        <xsl:attribute name="end-indent">0%</xsl:attribute>
+        <xsl:attribute name="background-color">#f0f0f0</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="filter-inline-container">
+        <xsl:attribute name="width">85%</xsl:attribute>
+        <xsl:attribute name="vertical-align">middle</xsl:attribute>
+        <xsl:attribute name="padding-top">0pt</xsl:attribute>
+        <xsl:attribute name="start-indent">0%</xsl:attribute>
+        <xsl:attribute name="end-indent">0%</xsl:attribute>
+    </xsl:attribute-set>
     <xsl:attribute-set name="filter-alternative">
+        <xsl:attribute name="width">100%</xsl:attribute>
+        <xsl:attribute name="margin">2pt</xsl:attribute>
         <xsl:attribute name="font-size">10pt</xsl:attribute>
         <xsl:attribute name="font-weight">bold</xsl:attribute>
-        <xsl:attribute name="margin-top">6pt</xsl:attribute>
-        <xsl:attribute name="margin-bottom">6pt</xsl:attribute>
-        <xsl:attribute name="border-color">black</xsl:attribute>
-        <xsl:attribute name="border-style">solid</xsl:attribute>
-        <xsl:attribute name="background-color">#CCCCCC</xsl:attribute>
-        <xsl:attribute name="text-align">center</xsl:attribute>
+        <xsl:attribute name="text-align">left</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="footnote">
         <xsl:attribute name="font-size">9pt</xsl:attribute>

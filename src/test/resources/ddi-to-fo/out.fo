@@ -405,24 +405,31 @@
                </fo:list-item>
             </fo:list-block>
          </fo:block>
-         <fo:block width="100%" page-break-inside="avoid" keep-with-previous="always">
-            <fo:inline-container width="10%" vertical-align="bottom" text-align="right">
-               <fo:block-container>
-                  <fo:block>
-                     <fo:external-graphic src="filter_arrow.png"/>
-                  </fo:block>
-               </fo:block-container>
+         <fo:block space-before="2pt"
+                   space-after="2pt"
+                   start-indent="5%"
+                   end-indent="0%"
+                   background-color="#f0f0f0"
+                   page-break-inside="avoid"
+                   keep-with-previous="always">
+            <fo:inline-container start-indent="0%"
+                                 end-indent="0%"
+                                 width="9%"
+                                 vertical-align="middle">
+               <fo:block margin="2pt">
+                  <fo:external-graphic src="filter_arrow.png"/>
+               </fo:block>
             </fo:inline-container>
-            <fo:inline-container width="87%">
-               <fo:block font-size="10pt"
-                            font-weight="bold"
-                            margin-top="6pt"
-                            margin-bottom="6pt"
-                            border-color="black"
-                            border-style="solid"
-                            background-color="#CCCCCC"
-                            text-align="center"
-                            width="100%">If you are not ready, please go to the end of the questionnaire</fo:block>
+            <fo:inline-container width="85%"
+                                 vertical-align="middle"
+                                 padding-top="0pt"
+                                 start-indent="0%"
+                                 end-indent="0%">
+               <fo:block width="100%"
+                         margin="2pt"
+                         font-size="10pt"
+                         font-weight="bold"
+                         text-align="left">If you are not ready, please go to the end of the questionnaire</fo:block>
             </fo:inline-container>
          </fo:block>
          <fo:block background-color="#CCCCCC"
