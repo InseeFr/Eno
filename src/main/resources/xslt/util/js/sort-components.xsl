@@ -6,8 +6,9 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno" 
     xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
-    
-    exclude-result-prefixes="xs fn xd eno enojs " version="2.0">	
+    xmlns:h="http://xml.insee.fr/schema/applis/lunatic-h"
+    xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
+    exclude-result-prefixes="xs fn xd eno enojs h" version="2.0">	
     
     <xsl:output indent="yes"/>
     
@@ -26,56 +27,52 @@
     </xd:doc>
     
     <xsl:template match="main">
-        <xsl:apply-templates select="Questionnaire"/>
+        <xsl:apply-templates select="h:Questionnaire"/>
     </xsl:template>
     
-    <xsl:template match="Questionnaire">
+    <xsl:template match="h:Questionnaire">
         <xsl:variable name="idQuestionnaire" select="@id"/>
-        <Questionnaire 
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
-            xsi:schemaLocation="http://xml.insee.fr/schema/applis/lunatic-h file:/src/main/resources/xsd/QuestionnaireH.xsd"
-            id="{$idQuestionnaire}">
-            <xsl:apply-templates select="*[not(self::variables)]"/>
-            <xsl:apply-templates select="descendant::variables"/>
+        <Questionnaire id="{$idQuestionnaire}">
+            <xsl:apply-templates select="*[not(self::h:variables)]"/>
+            <xsl:apply-templates select="descendant::h:variables"/>
         </Questionnaire>
     </xsl:template>
     
-    <xsl:template match="components[@xsi:type='Sequence']">
+    <xsl:template match="h:components[@xsi:type='Sequence']">
         <components xsi:type="{@xsi:type}" id="{@id}">
-            <xsl:apply-templates select="label"/>
-            <xsl:apply-templates select="declarations"/>
-            <xsl:apply-templates select="conditionFilter"/>
-            <xsl:apply-templates select="components"/>
+            <xsl:apply-templates select="h:label"/>
+            <xsl:apply-templates select="h:declarations"/>
+            <xsl:apply-templates select="h:conditionFilter"/>
+            <xsl:apply-templates select="h:components"/>
         </components>
     </xsl:template>
     
-    <xsl:template match="components[@xsi:type='Subsequence']">
+    <xsl:template match="h:components[@xsi:type='Subsequence']">
         <components xsi:type="{@xsi:type}" id="{@id}">
-            <xsl:apply-templates select="label"/>
-            <xsl:apply-templates select="declarations"/>
-            <xsl:apply-templates select="conditionFilter"/>
-            <xsl:apply-templates select="components"/>
+            <xsl:apply-templates select="h:label"/>
+            <xsl:apply-templates select="h:declarations"/>
+            <xsl:apply-templates select="h:conditionFilter"/>
+            <xsl:apply-templates select="h:components"/>
         </components>
     </xsl:template>
     
-    <xsl:template match="components">
+    <xsl:template match="h:components">
         <components>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="*[not(self::variables)]"/>
+            <xsl:apply-templates select="*[not(self::h:variables)]"/>
         </components>
     </xsl:template>
        
-    <xsl:template match="unit">
+    <xsl:template match="h:unit">
         <unit><xsl:value-of select="."/></unit>
     </xsl:template>
     
-    <xsl:template match="label">
+    <xsl:template match="h:label">
         <label><xsl:value-of select="normalize-space(.)"/></label>
     </xsl:template>
     
-    <xsl:template match="conditionFilter">
-        <xsl:variable name="listVariable" select="//Questionnaire/descendant::variables[value!='']" as="node()*"/>
+    <xsl:template match="h:conditionFilter">
+        <xsl:variable name="listVariable" select="//h:Questionnaire/descendant::h:variables[h:value!='']" as="node()*"/>
         <conditionFilter>
             <xsl:call-template name="enojs:replaceVariableValueInFormula">
                 <xsl:with-param name="variables" select="$listVariable"/>
@@ -84,43 +81,43 @@
         </conditionFilter>
     </xsl:template>
     
-    <xsl:template match="declarations">
+    <xsl:template match="h:declarations">
         <declarations declarationType="{@declarationType}" id="{@id}" position="{@position}">
-            <xsl:apply-templates select="label"/>
+            <xsl:apply-templates select="h:label"/>
         </declarations>
     </xsl:template>
        
-    <xsl:template match="response">
+    <xsl:template match="h:response">
         <response name="{@name}">
-            <xsl:apply-templates  select="valueState"/>
+            <xsl:apply-templates  select="h:valueState"/>
         </response>
     </xsl:template>
     
-    <xsl:template match="valueState">
+    <xsl:template match="h:valueState">
         <valueState type="{@type}">
-            <value><xsl:value-of select="value"/></value>
+            <value><xsl:value-of select="h:value"/></value>
         </valueState>
     </xsl:template>
     
-    <xsl:template match="codeLists">
+    <xsl:template match="h:codeLists">
         <codeLists>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates/>
         </codeLists>
     </xsl:template>	
     
-    <xsl:template match="items">
+    <xsl:template match="h:items">
         <items>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates/>
         </items>
     </xsl:template>
     
-    <xsl:template match="variables">
-        <xsl:variable name="value" select="value"/>
-        <xsl:variable name="responseRef" select="responseRef"/>
+    <xsl:template match="h:variables">
+        <xsl:variable name="value" select="h:value"/>
+        <xsl:variable name="responseRef" select="h:responseRef"/>
         <variables>
-            <name><xsl:value-of select="name"/></name>
+            <name><xsl:value-of select="h:name"/></name>
             <xsl:choose>
                 <xsl:when test="$value!=''">
                     <value><xsl:value-of select="normalize-space($value)"/></value>
@@ -129,19 +126,19 @@
                     <responseRef><xsl:value-of select="$responseRef"/></responseRef>
                 </xsl:when>
             </xsl:choose>
-            <xsl:apply-templates select="label"/>
+            <xsl:apply-templates select="h:label"/>
         </variables>
     </xsl:template>
     
-    <xsl:template match="dateFormat">
+    <xsl:template match="h:dateFormat">
         <dateFormat><xsl:value-of select="."/></dateFormat>
     </xsl:template>
     
-    <xsl:template match="codes">
+    <xsl:template match="h:codes">
         <codes>
-            <parent><xsl:value-of select="parent"/></parent>
-            <value><xsl:value-of select="value"/></value>
-            <xsl:apply-templates select="label"/>
+            <parent><xsl:value-of select="h:parent"/></parent>
+            <value><xsl:value-of select="h:value"/></value>
+            <xsl:apply-templates select="h:label"/>
         </codes>
     </xsl:template>
     
@@ -163,9 +160,9 @@
             </xsl:when>
             
             <xsl:otherwise>
-                <xsl:variable name="var" select="$variables[1]/name" as="xs:string"/>
+                <xsl:variable name="var" select="$variables[1]/h:name" as="xs:string"/>
                 <xsl:variable name="regex" select="concat('\$',$var)"/>
-                <xsl:variable name="valueOfVariable" as="xs:string" select="$variables[1]/value"/>
+                <xsl:variable name="valueOfVariable" as="xs:string" select="$variables[1]/h:value"/>
                 <xsl:variable name="newFormula">
                     <xsl:choose>
                         <xsl:when test="$valueOfVariable!=''">
@@ -229,10 +226,10 @@
         <xsl:param name="formula" as="xs:string"/>
         <xsl:if test="contains($formula,'$')">
             <xsl:variable name="nameOfVariable" select="substring-before(substring-after($formula,'$'),'$')" as="xs:string"/>
-            <variables>
-                <name><xsl:value-of select="$nameOfVariable"/></name>
-                <value><xsl:value-of select="//Questionnaire/descendant::variables[name=$nameOfVariable]/value"/></value>
-            </variables>
+            <h:variables>
+                <h:name><xsl:value-of select="$nameOfVariable"/></h:name>
+                <h:value><xsl:value-of select="//h:Questionnaire/descendant::h:variables[h:name=$nameOfVariable]/h:value"/></h:value>
+            </h:variables>
             
             <xsl:variable name="endOfFormula" select="substring-after(substring-after($formula,'$'),'$')"/>
             <xsl:call-template name="enojs:findVariableInFormula">

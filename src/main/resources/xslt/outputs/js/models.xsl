@@ -6,7 +6,10 @@
 	xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
 	xmlns:eno="http://xml.insee.fr/apps/eno" 
 	xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
+	xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
 	exclude-result-prefixes="xs fn xd eno enojs" version="2.0">
+	
+	
 	
 	<xsl:import href="../../../styles/style.xsl"/>
 	
@@ -268,7 +271,7 @@
 						<xsl:copy-of select="$declarations"/>
 						<xsl:call-template name="enojs:addResponeTocomponents">
 							<xsl:with-param name="responseName" select="$responseName"/>
-							<xsl:with-param name="isResponseTypeInteger" select="false()"/>
+							
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</components>
@@ -283,7 +286,7 @@
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
 						<xsl:call-template name="enojs:addResponeTocomponents">
 							<xsl:with-param name="responseName" select="$responseName"/>
-							<xsl:with-param name="isResponseTypeInteger" select="false()"/>
+							
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</components>
@@ -320,7 +323,7 @@
 			<xsl:copy-of select="$declarations"/>
 			<xsl:call-template name="enojs:addResponeTocomponents">
 				<xsl:with-param name="responseName" select="$responseName"/>				
-				<xsl:with-param name="isResponseTypeInteger" select="false()"/>
+				
 			</xsl:call-template>
 			<xsl:copy-of select="$filterCondition"/>
 			<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
@@ -377,7 +380,7 @@
 						
 						<xsl:call-template name="enojs:addResponeTocomponents">
 							<xsl:with-param name="responseName" select="$responseName"/>
-							<xsl:with-param name="isResponseTypeInteger" select="false()"/>
+							
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</components>
@@ -398,7 +401,7 @@
 					</xsl:apply-templates>
 					<xsl:call-template name="enojs:addResponeTocomponents">
 						<xsl:with-param name="responseName" select="$responseName"/>
-						<xsl:with-param name="isResponseTypeInteger" select="true()"/>
+						<xsl:with-param name="responseType" select="'boolean'"/>
 					</xsl:call-template>
 				</items>
 				<xsl:call-template name="enojs:addVariableCollected">
@@ -414,7 +417,7 @@
 					
 					<xsl:call-template name="enojs:addResponeTocomponents">
 						<xsl:with-param name="responseName" select="$responseName"/>
-						<xsl:with-param name="isResponseTypeInteger" select="true()"/>
+						<xsl:with-param name="responseType" select="'boolean'"/>
 					</xsl:call-template>
 					<xsl:copy-of select="$filterCondition"/>
 				</components>
@@ -477,7 +480,7 @@
 												
 						<xsl:call-template name="enojs:addResponeTocomponents">
 							<xsl:with-param name="responseName" select="$responseName"/>
-							<xsl:with-param name="isResponseTypeInteger" select="false()"/>
+							
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 						
@@ -498,7 +501,7 @@
 						
 						<xsl:call-template name="enojs:addResponeTocomponents">
 							<xsl:with-param name="responseName" select="$responseName"/>
-							<xsl:with-param name="isResponseTypeInteger" select="false()"/>
+							
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</components>
@@ -572,8 +575,7 @@
 				<xsl:copy-of select="$declarations"></xsl:copy-of>
 								
 				<xsl:call-template name="enojs:addResponeTocomponents">
-					<xsl:with-param name="responseName" select="$responseName"/>
-					<xsl:with-param name="isResponseTypeInteger" select="false()"/>
+					<xsl:with-param name="responseName" select="$responseName"/>					
 				</xsl:call-template>
 				<xsl:copy-of select="$filterCondition"/>
 			</components>
@@ -683,14 +685,17 @@
 	
 	<xsl:template name="enojs:addResponeTocomponents">
 		<xsl:param name="responseName"/>
-		<xsl:param name="isResponseTypeInteger" as="xs:boolean"/>
+		<xsl:param name="responseType"/>
 		<xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
 		<response name="{$responseName}">
 			<xsl:for-each select="tokenize($ResponseTypeEnum,',')">
 				<valueState type="{.}">
 					<xsl:choose>
-						<xsl:when test="$isResponseTypeInteger">
+						<xsl:when test="$responseType='int'">
 							<value>0</value>
+						</xsl:when>
+						<xsl:when test="$responseType='boolean'">
+							<value><xsl:value-of select="false()"/></value>
 						</xsl:when>
 						<xsl:otherwise>
 							<value/>
