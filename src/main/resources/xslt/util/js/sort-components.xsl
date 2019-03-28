@@ -39,35 +39,29 @@
         </Questionnaire>
     </xsl:template>
     
-    <xsl:template match="component[@xsi:type='Sequence']">
-        <xsl:variable name="page" select="count(preceding-sibling::component[@xsi:type='Sequence'])+1"/>
-        <component xsi:type="{@xsi:type}" id="{@id}" page="{$page}">
+    <xsl:template match="components[@xsi:type='Sequence']">
+        <components xsi:type="{@xsi:type}" id="{@id}">
             <xsl:apply-templates select="label"/>
-            <xsl:apply-templates select="declaration"/>
+            <xsl:apply-templates select="declarations"/>
             <xsl:apply-templates select="conditionFilter"/>
-            <xsl:apply-templates select="component">
-                <xsl:with-param name="page" select="$page" tunnel="yes"/>
-            </xsl:apply-templates>
-        </component>
+            <xsl:apply-templates select="components"/>
+        </components>
     </xsl:template>
     
-    <xsl:template match="component[@xsi:type='Subsequence']">
-        <xsl:param name="page" tunnel="yes"/>
-        <component xsi:type="{@xsi:type}" id="{@id}" page="{$page}">
+    <xsl:template match="components[@xsi:type='Subsequence']">
+        <components xsi:type="{@xsi:type}" id="{@id}">
             <xsl:apply-templates select="label"/>
-            <xsl:apply-templates select="declaration"/>
+            <xsl:apply-templates select="declarations"/>
             <xsl:apply-templates select="conditionFilter"/>
-            <xsl:apply-templates select="component"/>
-        </component>
+            <xsl:apply-templates select="components"/>
+        </components>
     </xsl:template>
     
-    <xsl:template match="component">
-        <xsl:param name="page" tunnel="yes"/>
-        <component>
+    <xsl:template match="components">
+        <components>
             <xsl:copy-of select="@*"/>
-            <xsl:attribute name="page" select="$page"/>
-            <xsl:apply-templates/>
-        </component>
+            <xsl:apply-templates select="*[not(self::variables)]"/>
+        </components>
     </xsl:template>
        
     <xsl:template match="unit">
@@ -79,7 +73,7 @@
     </xsl:template>
     
     <xsl:template match="conditionFilter">
-        <xsl:variable name="listVariable" select="//Questionnaire/descendant::variable[value!='']" as="node()*"/>
+        <xsl:variable name="listVariable" select="//Questionnaire/descendant::variables[value!='']" as="node()*"/>
         <conditionFilter>
             <xsl:call-template name="enojs:replaceVariableValueInFormula">
                 <xsl:with-param name="variables" select="$listVariable"/>
@@ -88,10 +82,10 @@
         </conditionFilter>
     </xsl:template>
     
-    <xsl:template match="declaration">
-        <declaration declarationType="{@declarationType}" id="{@id}" position="{@position}">
+    <xsl:template match="declarations">
+        <declarations declarationType="{@declarationType}" id="{@id}" position="{@position}">
             <xsl:apply-templates select="label"/>
-        </declaration>
+        </declarations>
     </xsl:template>
        
     <xsl:template match="response">
@@ -116,7 +110,7 @@
     <xsl:template match="variable">
         <xsl:variable name="value" select="value"/>
         <xsl:variable name="responseRef" select="responseRef"/>
-        <variable>
+        <variables>
             <name><xsl:value-of select="name"/></name>
             <xsl:choose>
                 <xsl:when test="$value!=''">
@@ -127,19 +121,19 @@
                 </xsl:when>
             </xsl:choose>
             <xsl:apply-templates select="label"/>
-        </variable>
+        </variables>
     </xsl:template>
     
     <xsl:template match="dateFormat">
         <dateFormat><xsl:value-of select="."/></dateFormat>
     </xsl:template>
     
-    <xsl:template match="code">
-        <code>
+    <xsl:template match="codes">
+        <codes>
             <parent><xsl:value-of select="parent"/></parent>
             <value><xsl:value-of select="value"/></value>
             <xsl:apply-templates select="label"/>
-        </code>
+        </codes>
     </xsl:template>
     
     <xd:doc>
