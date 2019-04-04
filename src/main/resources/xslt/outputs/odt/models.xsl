@@ -12,7 +12,7 @@
 	xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" 
 	xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" 
 	exclude-result-prefixes="xs fn xd eno enoodt" version="2.0">
-	
+
 	<xsl:import href="../../../styles/style.xsl"/>
 	<xsl:include href="../../../xslt/outputs/odt/office-styles.xsl"/>
 	
@@ -118,8 +118,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<text:section text:name="SubModule-{enoodt:get-name($source-context)}">
-			<text:p text:style-name="SubModule"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
-			
+		<text:p text:style-name="SubModule"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
@@ -138,11 +137,11 @@
 			</xsl:if>
 			
 			<!-- print the question label and its instructions -->
-			
+
 			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
 				<xsl:with-param name="driver" select="."/>
 			</xsl:call-template>
-			
+				
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="typeOfAncestor" select="'question'" tunnel="yes"/>
@@ -294,7 +293,7 @@
 				<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
 			</text:p>		
 		</xsl:if>		
-		
+
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -355,8 +354,7 @@
 			</xsl:if>
 			<xsl:if test="$nbMaximumLines!=''">
 				<text:p><xsl:value-of select="concat('Nb line(s) maximum allowed : ',$nbMaximumLines)"/></text:p>
-			</xsl:if>		
-			
+			</xsl:if>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
@@ -559,9 +557,6 @@
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
-		
-		
-		
 	</xsl:template>
 	
 	<xd:doc>
@@ -627,8 +622,8 @@
 					<xsl:call-template name="replaceVariablesInFormula">
 						<xsl:with-param name="formula" select="$control"/>
 						<xsl:with-param name="variables" select="$idVariables"/>
-					</xsl:call-template>				
-				</text:p>	
+					</xsl:call-template>
+				</text:p>
 			</xsl:if>
 			
 			<xsl:choose>
@@ -693,10 +688,10 @@
 		<xsl:param name="driver" tunnel="no"/>
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<xsl:apply-templates select="enoodt:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="$driver"/>
-		</xsl:apply-templates>			
+		</xsl:apply-templates>
 		<xsl:if test="enoodt:get-label($source-context, $languages[1]) != ''">
 			<text:p text:style-name="Question">
 				<xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/>
