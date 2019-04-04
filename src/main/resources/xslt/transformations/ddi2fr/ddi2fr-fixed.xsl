@@ -407,6 +407,9 @@
                     <xsl:if test="$type='date'">
                         <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Hint/Date"/>
                     </xsl:if>
+                    <xsl:if test="$type='gYearMonth'">
+                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Hint/gYearMonth"/>
+                    </xsl:if>
                 </xsl:if>
             </xsl:when>
             <!-- If there is such an instruction, it is used for the hint xforms element -->

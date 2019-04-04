@@ -1326,6 +1326,7 @@
 
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="label" select="enofr:get-label($source-context, $language)"/>
+        <xsl:variable name="hint" select="enofr:get-hint($source-context, $language)"/>
 
         <xsl:variable name="current-driver" select="self::*/local-name()"/>
         <xsl:variable name="dateduration-format" select="upper-case(enofr:get-format($source-context))"/>
@@ -1361,12 +1362,11 @@
                         </xsl:choose>
                     </label>
                 </xsl:if>
-                <xsl:if test="($dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA') and $question-label != ''">
+                <xsl:if test="$hint != '' and $question-label != ''">
                     <hint>
-                        <xsl:value-of select="enofr:get-hint($source-context, $language)"/>
+                        <xsl:value-of select="$hint"/>
                     </hint>
                 </xsl:if>
-                
                 <xsl:choose>
                     <xsl:when test="$current-driver = 'DurationDomain'">
                         <alert>
@@ -2174,7 +2174,8 @@
                         </xsl:if>
                     </xf:label>
                 </xsl:if>
-                <xsl:if test="($dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA') and $question-label !=''">
+                <xsl:if test="($dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA' or (($dateduration-format='YYYY-MM' or $dateduration-format='MM/AAAA') and position() = last()))
+                           and $question-label !=''">
                     <xf:hint ref="$form-resources/{@variable}/hint"/>
                 </xsl:if>
                 <xsl:if test="$current-driver = 'DurationDomain' or $dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">

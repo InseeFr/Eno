@@ -3,6 +3,7 @@
     <Hint>
         <Number>Exemple : </Number>
         <Date>Date au format JJ/MM/AAAA</Date>
+        <gYearMonth>Date au format Mois Année</gYearMonth>
     </Hint>
     <Alert>
         <Text>Vous devez saisir une valeur correcte</Text>
