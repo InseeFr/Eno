@@ -1097,7 +1097,7 @@
                             <xsl:value-of select="'''P'''"/>
                             <xsl:for-each select="$layout-list//format[@id='Y' or @id='M' or @id='D']">
                                 <!--<xsl:value-of select="concat(', ../',@variable,',''',@id,'''')"/>-->
-                                <xsl:value-of select="concat(', if (../',@variable,' != '''') then concat(../',@variable,',''',@id,''')')"/>
+                                <xsl:value-of select="concat(', if (../',@variable,' != '''') then concat(../',@variable,',''',@id,''') else ''''')"/>
                             </xsl:for-each>
                             <xsl:if test="contains($dateduration-format,'T')">
                                 <xsl:value-of select="', if('"/>
@@ -1107,10 +1107,10 @@
                                     </xsl:if>
                                     <xsl:value-of select="concat('../',@variable,' != ''''')"/>
                                 </xsl:for-each>
-                                <xsl:value-of select="') then ''T'''"/>
+                                <xsl:value-of select="') then ''T'' else '''''"/>
                             </xsl:if>
                             <xsl:for-each select="$layout-list//format[@id!='Y' and @id!='M' and @id!='D']">
-                                <xsl:value-of select="concat(', if (../',@variable,' != '''') then concat(../',@variable,',''',upper-case(@id),''')')"/>
+                                <xsl:value-of select="concat(', if (../',@variable,' != '''') then concat(../',@variable,',''',upper-case(@id),''') else ''''')"/>
                             </xsl:for-each>
                         </xsl:otherwise>
                     </xsl:choose>
