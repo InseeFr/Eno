@@ -234,7 +234,6 @@
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on xf-input driver.</xd:p>
-			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
 	<xsl:template match="xf-input" mode="model">
@@ -338,7 +337,6 @@
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on xf-select driver.</xd:p>
-			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
 	<xsl:template match="xf-select" mode="model">
@@ -438,7 +436,6 @@
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on xf-select1 driver.</xd:p>
-			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
 	<xsl:template match="xf-select1" mode="model">
@@ -521,7 +518,6 @@
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on the xf-item driver.</xd:p>
-			<xd:p>It writes the code value and the label of the item.</xd:p>
 		</xd:desc>
 	</xd:doc>
 	<xsl:template match="xf-item" mode="model">
@@ -552,7 +548,6 @@
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on xf-textarea driver.</xd:p>
-			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
 	<xsl:template match="xf-textarea" mode="model">
@@ -594,8 +589,7 @@
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on the xf-output driver.</xd:p>
-			<xd:p>It writes the instruction text, with a different styles for comments, instructions, warning and help.</xd:p>
-			<xd:p>It works for all drivers except for drivers whose contain a question.</xd:p>
+			<xd:p>Adding declarations elements.</xd:p>
 		</xd:desc>
 	</xd:doc>
 	<xsl:template match="xf-output" mode="model">
@@ -622,7 +616,7 @@
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on the CalculatedVariable driver.</xd:p>
-			<xd:p>Its displays the formula of the calculated variable.</xd:p>
+			<xd:p>Its displays the formula of the calculated variable on the elements variables.</xd:p>
 		</xd:desc>
 	</xd:doc>
 	<xsl:template match="CalculatedVariable" mode="model">
