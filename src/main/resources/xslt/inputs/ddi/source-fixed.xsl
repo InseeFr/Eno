@@ -1079,4 +1079,5 @@
         mode="enoddi:get-previous-filter-description">
         <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference[not(preceding-sibling::d:ControlConstructReference)]/ancestor::d:IfThenElse[not(d:ExternalAid)]/r:Description"/>
     </xsl:template>
+    
 </xsl:stylesheet>

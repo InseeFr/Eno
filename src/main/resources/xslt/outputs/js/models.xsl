@@ -50,14 +50,11 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
 		<!--<xsl:param name="isInSurvey" tunnel="yes"/>-->
-		<xsl:variable name="type" select="enojs:getTypeOfVariable($source-context)"/>
 		<!-- display only external variable -->
-		<xsl:if test="$type='External'">
-			<variables>
-				<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
-				<label><xsl:value-of select="enojs:get-label($source-context,$languages[1])"/></label>
-			</variables>	
-		</xsl:if>
+		<variables>
+			<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
+			<label><xsl:value-of select="enojs:get-label($source-context,$languages[1])"/></label>
+		</variables>	
 	</xsl:template>
 	
 	
@@ -351,8 +348,8 @@
 		<xsl:param name="labelQuestion" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		
-		<xsl:variable name="name" select="enojs:get-name-Codelist($source-context)"/>
-		<xsl:variable name="idCodeList" select="enojs:get-id-Codelist($source-context)"/>
+		<xsl:variable name="name" select="enojs:get-codelist-name($source-context)"/>
+		<xsl:variable name="idCodeList" select="enojs:get-codelist-id($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enojs:get-code-maximum-length($source-context)"/>
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
 		
@@ -450,8 +447,8 @@
 		<xsl:param name="labelQuestion" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		
-		<xsl:variable name="name" select="enojs:get-name-Codelist($source-context)"/>
-		<xsl:variable name="idCodeList" select="enojs:get-id-Codelist($source-context)"/>
+		<xsl:variable name="name" select="enojs:get-codelist-name($source-context)"/>
+		<xsl:variable name="idCodeList" select="enojs:get-codelist-id($source-context)"/>
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enojs:get-code-maximum-length($source-context)"/>

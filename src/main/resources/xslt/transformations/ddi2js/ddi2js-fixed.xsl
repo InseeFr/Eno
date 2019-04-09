@@ -125,44 +125,6 @@
     <xsl:function name="enojs:get-end-question-instructions">
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote') | enoddi:get-next-filter-description($context)"/>
-    </xsl:function>
-    
-    
-    
-    <xsl:function name="enojs:get-name-Codelist">
-        <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="enojs:get-name-Codelist"/>
-    </xsl:function>
-        
-    <xsl:template match="d:CodeDomain" mode="enojs:get-name-Codelist">
-        <xsl:value-of select="r:CodeListReference/l:CodeList/r:Label/r:Content"/>
-    </xsl:template>
-    
-    <xsl:function name="enojs:get-id-Codelist">
-        <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="enojs:get-id-Codelist"/>
-    </xsl:function>
-    
-    <xsl:template match="d:CodeDomain" mode="enojs:get-id-Codelist">
-        <xsl:value-of select="r:CodeListReference/l:CodeList/r:ID"/>
-    </xsl:template>
-    
-    <xsl:function name="enojs:getTypeOfVariable">
-        <xsl:param name="context" as="item()"/>
-        <xsl:apply-templates select="$context" mode="enojs:getTypeOfVariable"/>
-    </xsl:function>
-    
-    <xsl:template match="l:Variable" mode="enojs:getTypeOfVariable">
-        <xsl:variable name="type" select="l:VariableRepresentation/r:ProcessingInstructionReference/r:TypeOfObject"/>
-        <xsl:choose>
-            <xsl:when test="$type='GenerationInstruction'">
-                <xsl:value-of select="'Calculated'"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="'External'"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-    
+    </xsl:function>   
 
 </xsl:stylesheet>
