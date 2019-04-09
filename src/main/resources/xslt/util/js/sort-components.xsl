@@ -31,23 +31,13 @@
     </xsl:template>
     
     <xsl:template match="h:Questionnaire">
-        <xsl:variable name="idQuestionnaire" select="@id"/>
-        <Questionnaire id="{$idQuestionnaire}">
+        <Questionnaire id="{@id}">
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
             <xsl:apply-templates select="descendant::h:variables"/>
         </Questionnaire>
     </xsl:template>
     
-    <xsl:template match="h:components[@xsi:type='Sequence']">
-        <components xsi:type="{@xsi:type}" id="{@id}">
-            <xsl:apply-templates select="h:label"/>
-            <xsl:apply-templates select="h:declarations"/>
-            <xsl:apply-templates select="h:conditionFilter"/>
-            <xsl:apply-templates select="h:components"/>
-        </components>
-    </xsl:template>
-    
-    <xsl:template match="h:components[@xsi:type='Subsequence']">
+    <xsl:template match="h:components[@xsi:type='Sequence' or @xsi:type='Subsequence']">
         <components xsi:type="{@xsi:type}" id="{@id}">
             <xsl:apply-templates select="h:label"/>
             <xsl:apply-templates select="h:declarations"/>
@@ -154,8 +144,6 @@
         
         <xsl:choose>
             <xsl:when test="count($variables)=0">
-                <!-- on enleve les "$" qui restent -->
-                <!--<xsl:value-of select="replace($formula,'\$','')"/>-->
                 <xsl:value-of select="$formula"/>
             </xsl:when>
             
@@ -166,13 +154,11 @@
                 <xsl:variable name="newFormula">
                     <xsl:choose>
                         <xsl:when test="$valueOfVariable!=''">
-                            <!-- Probleme avec les '$', résolue en les remplacant par \$ -->
+                            <!-- Issue with '$', solved by replacing by \$ -->
                             <xsl:variable name="expressionToReplace" as="xs:string" select="replace($valueOfVariable,'\$','\\\$')"/>
                             <!-- Replace in formula "$var" by "(value of the var)" -->
                             <xsl:value-of select="replace($formula,$regex,concat('(',$expressionToReplace,')'))"/>
                         </xsl:when>
-                        <!-- on laisse la formule tel quel si la variable n'a pas de valeur => on met "var" au lieu de "$var$" -->
-                        <!-- A voir si on remet des "$" autour des variables dans les lambdas expression-->
                         <xsl:otherwise><xsl:value-of select="replace($formula,$regex,$var)"/></xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
@@ -189,11 +175,6 @@
                         <xsl:with-param name="formula" select="$newFormula"/>
                     </xsl:call-template>
                 </xsl:variable>
-                
-                <!--<xsl:variable name="oldArguments" select="substring-before(substring-after($newFormula,'('),')')"/>
-                <xsl:variable name="newArguments" select="enojs:addArgumentsInFormula($variablesInFormula,$oldArguments,$variables[1])"/>
-                
-                <xsl:variable name="endFormula" select="replace(replace($newFormula,concat('\(',$oldArguments,'\)'),'()'),'\(\)',$newArguments)"/>-->
                 
                 <!-- Add variables found in the value of the current variable in the list of variables -->
                 <xsl:variable name="variablesCalculatedInFormula" as="node()*">
@@ -237,33 +218,5 @@
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
-    
-    <!--<xsl:function name="enojs:addArgumentsInFormula">
-        <xsl:param name="newArguments" as="node()*"/>
-        <xsl:param name="oldArguments" as="xs:string"/>
-        <xsl:param name="currentVar" as="node()"/>
-        <xsl:variable name="oldArguments2">
-            <xsl:choose>
-                <xsl:when test="$currentVar/value!=''">
-                    <!-\- delete calculated variable and ',,'-\->
-                    <xsl:value-of select="replace(replace($oldArguments,$currentVar/name,''),',,',',')"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$oldArguments"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="argumentList" as="xs:string*">
-            <xsl:for-each select="$newArguments">
-                <xsl:value-of select="child::name"/>
-            </xsl:for-each>
-            <xsl:for-each select="distinct-values(tokenize($oldArguments2,','))">
-                <xsl:value-of select="."/>
-            </xsl:for-each>
-        </xsl:variable>
-        <!-\- delete ',' and concat all variable : ex (var1,var2) -\->
-        <xsl:value-of select="replace(concat('(',string-join(distinct-values($argumentList),','),')'),',\s*\)',')')"/>
-    </xsl:function>-->
-    
     
 </xsl:stylesheet>
