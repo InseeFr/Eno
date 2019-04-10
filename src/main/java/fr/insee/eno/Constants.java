@@ -42,6 +42,7 @@ public final class Constants {
 	public static final String CONFIG_DDI2ODT = CONFIG_FOLDER + "/ddi2odt.xml";
 	public static final String CONFIG_DDI2PDF = CONFIG_FOLDER + "/ddi2pdf.xml";
 	public static final String CONFIG_POGUES_XML2DDI = CONFIG_FOLDER + "/pogues-xml2ddi.xml";
+	public static final String CONFIG_DDI2JS = CONFIG_FOLDER + "/ddi2js.xml";
 	public static final String PARAMETERS = "/parameters.xml";
 	public static final String LABELS_FOLDER = "/lang/fr/";
 	
@@ -60,6 +61,7 @@ public final class Constants {
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
 	public static final String UTIL_DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
 	public static final String BROWSING_FR_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/fr/browsing.xsl";
+	public static final String BROWSING_JS_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/js/browsing.xsl";
 //	public static final String PROPERTIES_FILE_FR = CONFIG_FOLDER + "/ddi2fr.xml";
 //	public static final String PROPERTIES_FILE_ODT = CONFIG_FOLDER + "/ddi2odt.xml";
 //	public static final String PROPERTIES_FILE_PDF = CONFIG_FOLDER + "/ddi2pdf.xml";
@@ -70,34 +72,41 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL = TRANSFORMATIONS_FOLDER + "/ddi2odt/ddi2odt.xsl";
 	public static final String TRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL = TRANSFORMATIONS_FOLDER + "/ddi2pdf/ddi2pdf.xsl";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/pogues-xml2ddi.xsl";
+	public static final String TRANSFORMATIONS_DDI2JS_DDI2JS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2js/ddi2js.xsl";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.fods";
 	public static final String TRANSFORMATIONS_DDI2ODT_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2odt/drivers.fods";
 	public static final String TRANSFORMATIONS_DDI2PDF_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2pdf/drivers.fods";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/drivers.fods";
+	public static final String TRANSFORMATIONS_DDI2JS_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2js/drivers.fods";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2fr/functions.fods";
 	public static final String TRANSFORMATIONS_DDI2ODT_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2odt/functions.fods";
 	public static final String TRANSFORMATIONS_DDI2PDF_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2pdf/functions.fods";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/pogues-xml2ddi/functions.fods";
+	public static final String TRANSFORMATIONS_DDI2JS_FUNCTIONS_FODS = TRANSFORMATIONS_FOLDER	+ "/ddi2js/functions.fods";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/functions.xsl";
 	public static final String TRANSFORMATIONS_DDI2ODT_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2odt/functions.xsl";
 	public static final String TRANSFORMATIONS_DDI2PDF_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2pdf/functions.xsl";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/functions.xsl";
+	public static final String TRANSFORMATIONS_DDI2JS_FUNCTIONS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2js/functions.xsl";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.fods";
 	public static final String TRANSFORMATIONS_DDI2ODT_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2odt/tree-navigation.fods";
 	public static final String TRANSFORMATIONS_DDI2PDF_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2pdf/tree-navigation.fods";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/tree-navigation.fods";
+	public static final String TRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_FODS = TRANSFORMATIONS_FOLDER + "/ddi2js/tree-navigation.fods";
 	public static final String TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/tree-navigation.xsl";
 	public static final String TRANSFORMATIONS_DDI2ODT_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2odt/tree-navigation.xsl";
 	public static final String TRANSFORMATIONS_DDI2PDF_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2pdf/tree-navigation.xsl";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/tree-navigation.xsl";
+	public static final String TRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_XSL = TRANSFORMATIONS_FOLDER + "/ddi2js/tree-navigation.xsl";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_DDI2FR_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr-fixed.xsl";
 	public static final String TRANSFORMATIONS_DDI2ODT_DDI2ODT_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2odt/ddi2odt-fixed.xsl";
 	public static final String TRANSFORMATIONS_DDI2PDF_DDI2PDF_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2pdf/ddi2pdf-fixed.xsl";
+	public static final String TRANSFORMATIONS_DDI2JS_DDI2JS_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/ddi2js/ddi2js-fixed.xsl";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_FIXED_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/pogues-xml2ddi-fixed.xsl";
 	
 	// ---------- 
@@ -118,11 +127,13 @@ public final class Constants {
 	
 	public static final String OUPUTS_FOLDER = "/xslt/outputs/pdf";
 	public static final String OUPUTS_FOLDER_2 = "/xslt/util/pdf";
+	public static final String OUPUTS_FOLDER_JS = "/xslt/util/js";
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF =  OUPUTS_FOLDER + "/publipostage.xsl";
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2 =  OUPUTS_FOLDER_2 + "/mailing-vtl.xsl";
 	public static final String TRANSFORMATIONS_SPECIF_TREATMENT_FO_4PDF =  "/pdf-specific-treatment.xsl";
 	public static final String TRANSFORMATIONS_GENERIC_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-generic-pages.xsl";
 	public static final String STATIC_PAGES = OUPUTS_FOLDER_2 +"/static-pages.fo";
+	public static final String TRANSFORMATIONS_POST_PROCESSING_JS = OUPUTS_FOLDER_JS + "/sort-components.xsl";
 	// ---------- Temporary file system
 	
 	// ----- Folders
@@ -167,18 +178,22 @@ public final class Constants {
 	public static final File TRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2odt/ddi2odt.xsl");
 	public static final File TRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2pdf/ddi2pdf.xsl");
 	public static final File TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/pogues-xml2ddi.xsl");
+	public static final File TRANSFORMATIONS_DDI2JS_DDI2JS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2js/ddi2js.xsl");
 	public static final File TRANSFORMATIONS_DDI2FR_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/drivers.xsl");
 	public static final File TRANSFORMATIONS_DDI2ODT_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2odt/drivers.xsl");
 	public static final File TRANSFORMATIONS_DDI2PDF_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2pdf/drivers.xsl");
 	public static final File TRANSFORMATIONS_POGUES_XML2DDI_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/drivers.xsl");
+	public static final File TRANSFORMATIONS_DDI2JS_DRIVERS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2js/drivers.xsl");
 	public static final File TRANSFORMATIONS_DDI2FR_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/functions.xsl");
 	public static final File TRANSFORMATIONS_DDI2ODT_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2odt/functions.xsl");
 	public static final File TRANSFORMATIONS_DDI2PDF_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2pdf/functions.xsl");
 	public static final File TRANSFORMATIONS_POGUES_XML2DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/functions.xsl");
+	public static final File TRANSFORMATIONS_DDI2JS_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2js/functions.xsl");
 	public static final File TRANSFORMATIONS_DDI2FR_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/tree-navigation.xsl");
 	public static final File TRANSFORMATIONS_DDI2ODT_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2odt/tree-navigation.xsl");
 	public static final File TRANSFORMATIONS_DDI2PDF_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2pdf/tree-navigation.xsl");
 	public static final File TRANSFORMATIONS_POGUES_XML2DDI_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/pogues-xml2ddi/tree-navigation.xsl");
+	public static final File TRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2js/tree-navigation.xsl");
 	
 	public static final File INPUTS_DDI_FUNCTIONS_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/functions.xsl");
 	public static final File INPUTS_DDI_TEMPLATES_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi/templates.xsl");
@@ -276,6 +291,7 @@ public final class Constants {
 	public static final String FINAL_PDF_EXTENSION = "-final-out.fo";
 	//public static final String CUSTOM_FO_EXTENSION = "-out.fo";
 	public static final String MAILING_FO_EXTENSION = "-1-mailing-vtl.fo";
+	public static final String POST_PROCESSING_JS_EXTENSION = "-final.xml";
 	//public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
 		public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
 			return sUB_TEMP_FOLDER + "/xforms";
