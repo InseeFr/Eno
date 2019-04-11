@@ -121,7 +121,9 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF =  OUPUTS_FOLDER + "/publipostage.xsl";
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2 =  OUPUTS_FOLDER_2 + "/mailing-vtl.xsl";
 	public static final String TRANSFORMATIONS_SPECIF_TREATMENT_FO_4PDF =  "/pdf-specific-treatment.xsl";
-	public static final String TRANSFORMATIONS_GENERIC_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-generic-pages.xsl";
+	public static final String TRANSFORMATIONS_COVER_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-cover-pages.xsl";
+	public static final String TRANSFORMATIONS_END_QUESTION_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-end-questions.xsl";
+	public static final String TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/edit-structure-page.xsl";
 	public static final String STATIC_PAGES = OUPUTS_FOLDER_2 +"/static-pages.fo";
 	// ---------- Temporary file system
 	
@@ -271,6 +273,9 @@ public final class Constants {
 	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
 	
+
+	public static final String EDIT_STRUCTURE_FO_EXTENSION = "-5-edit-structure.fo";
+	public static final String END_QUESTION_FO_EXTENSION = "-4-end-question.fo";
 	public static final String SPECIFIC_TREAT_PDF_EXTENSION = "-2-specific-form.fo";
 	public static final String TABLE_COL_SIZE_PDF_EXTENSION = "-3-temp.fo";
 	public static final String FINAL_PDF_EXTENSION = "-final-out.fo";

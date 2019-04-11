@@ -21,7 +21,7 @@ public class PDFStep2SpecificTreatmentPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputStep1FOFile = new File(
+		File outputForFOFile = new File(
 				input.getPath().replace(Constants.MAILING_FO_EXTENSION, Constants.SPECIFIC_TREAT_PDF_EXTENSION));
 
 		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(survey);
@@ -34,14 +34,14 @@ public class PDFStep2SpecificTreatmentPostprocessor implements Postprocessor {
 		}
 
 		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputStep1FOFile);
+		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
 		saxonService.transformFOToStep2FO(inputStream, outputStream, FO_STEP2_XSL);
 		inputStream.close();
 		outputStream.close();
 		FO_STEP2_XSL.close();
 		logger.info("End of step 2 PDF post-processing " + input.getAbsolutePath());
 
-		return outputStep1FOFile;
+		return outputForFOFile;
 	}
 
 }
