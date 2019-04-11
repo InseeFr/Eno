@@ -12,7 +12,9 @@ import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.PDFStep1MailingPostprocessor;
 import fr.insee.eno.postprocessing.PDFStep2SpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.PDFStep4InsertGenericPagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep4InsertEndQuestionPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep5EditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep6InsertCoverPagesPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
@@ -32,7 +34,9 @@ public class TestDDIToFO {
 					new Postprocessor[] { new PDFStep1MailingPostprocessor(),
 							new PDFStep2SpecificTreatmentPostprocessor(),
 							new PDFStep3TableColumnPostprocessorFake(),
-							new PDFStep4InsertGenericPagesPostprocessor() });
+							new PDFStep4InsertEndQuestionPostprocessor(),
+							new PDFStep5EditStructurePagesPostprocessor(),
+							new PDFStep6InsertCoverPagesPostprocessor()});
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-fo-test");
 			File expectedFile = new File(String.format("%s/out.fo", basePath));
 			diff = xmlDiff.getDiff(outputFile, expectedFile);

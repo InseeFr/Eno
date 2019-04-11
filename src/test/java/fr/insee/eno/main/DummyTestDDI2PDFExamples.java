@@ -25,7 +25,9 @@ import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.PDFStep1MailingPostprocessor;
 import fr.insee.eno.postprocessing.PDFStep2SpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.PDFStep4InsertGenericPagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep4InsertEndQuestionPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep5EditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep6InsertCoverPagesPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
@@ -51,8 +53,11 @@ public class DummyTestDDI2PDFExamples {
 
 			GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), generator,
 					new Postprocessor[] { new PDFStep1MailingPostprocessor(),
-							new PDFStep2SpecificTreatmentPostprocessor(), new PDFStep3TableColumnPostprocessorFake(),
-							new PDFStep4InsertGenericPagesPostprocessor() });
+							new PDFStep2SpecificTreatmentPostprocessor(),
+							new PDFStep3TableColumnPostprocessorFake(),
+							new PDFStep4InsertEndQuestionPostprocessor(),
+							new PDFStep5EditStructurePagesPostprocessor(),
+							new PDFStep6InsertCoverPagesPostprocessor()});
 			genServiceDDI2PDF.setParameters(paramIS);
 
 			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, "examples");

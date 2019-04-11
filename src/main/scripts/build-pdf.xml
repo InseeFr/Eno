@@ -53,11 +53,25 @@
 <!--		<antcall target="compile-TableColumnSizeProcessor"/>
 		<antcall target="call-TableColumnSizeProcessor"/>-->
 		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/specific-form.${out-extension}"
-			out="${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"
-			style="${xslt.home}/util/pdf/insert-generic-pages.xsl" force="true"			
+			out="${root-folder}/target/${survey-name}/${form-name}/form/form-with-end-questions.${out-extension}"
+			style="${xslt.home}/util/pdf/insert-end-questions.xsl" force="true"			
 			classpath="${saxon.jar}">
 			<param name="survey-name" expression="${survey-name}"/>
 			<param name="form-name" expression="${form-name}"/>
+			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
+			<param name="parameters-file" expression="${root-folder}/questionnaires/${survey-name}/parameters.xml"/>
+		</xslt>
+		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form-with-end-questions.${out-extension}"
+			out="${root-folder}/target/${survey-name}/${form-name}/form/form-custom-pages.${out-extension}"
+			style="${xslt.home}/util/pdf/edit-structure-page.xsl" force="true"			
+			classpath="${saxon.jar}">
+			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
+			<param name="parameters-file" expression="${root-folder}/questionnaires/${survey-name}/parameters.xml"/>
+		</xslt>
+		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form-custom-pages.${out-extension}"
+			out="${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"
+			style="${xslt.home}/util/pdf/insert-cover-pages.xsl" force="true"			
+			classpath="${saxon.jar}">
 			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
 			<param name="parameters-file" expression="${root-folder}/questionnaires/${survey-name}/parameters.xml"/>
 		</xslt>
