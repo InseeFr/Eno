@@ -12,9 +12,9 @@ import fr.insee.eno.Constants;
 /**
  * PDF postprocessor.
  */
-public class PDFStep2TableColumnPostprocessorFake implements Postprocessor {
+public class PDFTableColumnPostprocessorFake implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(PDFStep2TableColumnPostprocessorFake.class);
+	private static final Logger logger = LoggerFactory.getLogger(PDFTableColumnPostprocessorFake.class);
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
@@ -24,7 +24,7 @@ public class PDFStep2TableColumnPostprocessorFake implements Postprocessor {
 
 		FileUtils.copyFile(input, outputForFOFile);
 
-		logger.debug("End of step 3 PDF post-processing (Fake)");
+		logger.debug("End of TableColumn post-processing (Fake)");
 		return outputForFOFile;
 
 	}

@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import fr.insee.eno.Constants;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
-public class PDFStep5SpecificTreatmentPostprocessor implements Postprocessor {
+public class PDFSpecificTreatmentPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(PDFStep5SpecificTreatmentPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(PDFSpecificTreatmentPostprocessor.class);
 
 	// FIXME Inject !
 	private static XslTransformation saxonService = new XslTransformation();
@@ -39,7 +39,7 @@ public class PDFStep5SpecificTreatmentPostprocessor implements Postprocessor {
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of step 2 PDF post-processing " + input.getAbsolutePath());
+		logger.info("End of SpecificTreatment post-processing " + input.getAbsolutePath());
 
 		return outputForFOFile;
 	}

@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import fr.insee.eno.Constants;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
-public class PDFStep7InsertAccompanyingMailsPostprocessor implements Postprocessor {
+public class PDFInsertCoverPagePostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(PDFStep7InsertAccompanyingMailsPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(PDFInsertCoverPagePostprocessor.class);
 
 	// FIXME Inject !
 	private static XslTransformation saxonService = new XslTransformation();
@@ -23,12 +23,12 @@ public class PDFStep7InsertAccompanyingMailsPostprocessor implements Postprocess
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
 		File outputForFOFile = new File(
-				input.getPath().replace(Constants.COVER_PAGE_FO_EXTENSION, Constants.FINAL_PDF_EXTENSION));
+				input.getPath().replace(Constants.SPECIFIC_TREAT_PDF_EXTENSION, Constants.COVER_PAGE_FO_EXTENSION));
 		System.out.println(input.getPath());
 		String surveyName = survey;
 		String formName = getFormName(input);
 
-		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_ACCOMPANYING_MAILS_FO_4PDF);
+		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_COVER_PAGE_FO_4PDF);
 
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
@@ -38,7 +38,7 @@ public class PDFStep7InsertAccompanyingMailsPostprocessor implements Postprocess
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of step 6 PDF post-processing " + input.getAbsolutePath());
+		logger.info("End of InsertCoverPage post-processing " + input.getAbsolutePath());
 
 		return outputForFOFile;
 	}
