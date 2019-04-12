@@ -66,6 +66,16 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="comment-question" as="xs:boolean">
+        <xsl:choose>
+            <xsl:when test="$parameters//EndQuestion/CommentQuestion != ''">
+                <xsl:value-of select="$parameters//EndQuestion/CommentQuestion"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//EndQuestion/CommentQuestion"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:variable name="end-question-folder">
         <xsl:choose>
             <xsl:when test="$parameters//EndQuestion/Folder != ''">
@@ -115,12 +125,24 @@
     
     <xsl:template match="fo:block[@id='TheVeryLastPage']" mode="#all">
         <xsl:choose>
-            <xsl:when test="$studyUnit='business' and $response-time-question">
-                <xsl:copy-of select="$end-question//fo:page-sequence/fo:flow/*[@id!='COMMENT_QUESTION_TITLE']"/>
+            <xsl:when test="$studyUnit='business'">
+                <xsl:choose>
+                    <xsl:when test="$comment-question and $response-time-question">
+                        <xsl:copy-of select="$end-question//fo:page-sequence/fo:flow/*[not(@id='COMMENT_QUESTION_TITLE' or @id='TIME_QUESTION_TITLE')]"/>
+                    </xsl:when>
+                    <xsl:when test="$comment-question">
+                        <xsl:copy-of select="$end-question//fo:page-sequence/fo:flow/*[@id='COMMENT_QUESTION_TITLE' or @id='COMMENT_QUESTION']"/>
+                    </xsl:when>
+                    <xsl:when test="$response-time-question">
+                        <xsl:copy-of select="$end-question//fo:page-sequence/fo:flow/*[@id='TIME_QUESTION_TITLE' or @id='TIME_QUESTION']"/>
+                    </xsl:when>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="$parameters//ColtraneQuestions/*[name()='TypeRepondantLabel' or name()='Fin']">
-                    <xsl:copy-of select="$end-question//fo:page-sequence/fo:flow/*[not(@id='TIME_QUESTION' or @id='TIME_COMMENT_QUESTION_TITLE')]"/>
+                    <xsl:if test="$comment-question">
+                        <xsl:copy-of select="$end-question//fo:page-sequence/fo:flow/*"/>
+                    </xsl:if>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>

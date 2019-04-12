@@ -16,7 +16,7 @@
             
             <fo:block id="TIME_COMMENT_QUESTION_TITLE" background-color="#666666" color="white" font-weight="bold" margin-bottom="9pt" margin-top="3pt" font-size="14pt" border-color="black" border-style="solid" page-break-inside="avoid" keep-with-next="always">Temps de réponse et commentaires</fo:block>
             <fo:block id="COMMENT_QUESTION_TITLE" background-color="#666666" color="white" font-weight="bold" margin-bottom="9pt" margin-top="3pt" font-size="14pt" border-color="black" border-style="solid" page-break-inside="avoid" keep-with-next="always">Commentaires</fo:block>
-            
+            <fo:block id="TIME_QUESTION_TITLE" background-color="#666666" color="white" font-weight="bold" margin-bottom="9pt" margin-top="3pt" font-size="14pt" border-color="black" border-style="solid" page-break-inside="avoid" keep-with-next="always">Temps de réponse</fo:block>
             <fo:wrapper id="TIME_QUESTION">
                 <fo:block color="black" font-weight="bold" font-size="10pt" margin-top="9pt" margin-bottom="3pt" page-break-inside="avoid" keep-with-next="always">➡ <fo:inline font-weight="bold">Combien de temps avez-vous mis en tout pour répondre à cette enquête
                     (recherche des données + remplissage du questionnaire) ?</fo:inline>
