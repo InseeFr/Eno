@@ -384,7 +384,7 @@
             <xsl:apply-templates select="@*"/>
             <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB})')"/>
             <xsl:value-of select="'&lt;fo:block'"/>
-            <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre0'') ||
+            <!--<xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre0'') ||
                 $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre1'') ||
                 $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''titre2'') ||
                 $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''intertitre0'') ||
@@ -409,7 +409,7 @@
                 $!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq (''ventilation2'')
                 ) text-indent=&quot;4em&quot;#{end}')"/>
             <xsl:value-of select="concat('#{if}($!{',$roster-name,'-',$line-number,'-',$roster-name,'_niveau} eq ''code3'') text-indent=&quot;6em&quot;#{end}')"/>
-
+-->
             <xsl:value-of select="'&gt;'"/>
             <xsl:value-of select="concat('$!{',$roster-name,'-',$line-number,'-',$roster-name,'_LIB}')"/>
             <xsl:value-of select="'&lt;/fo:block&gt;'"/>
