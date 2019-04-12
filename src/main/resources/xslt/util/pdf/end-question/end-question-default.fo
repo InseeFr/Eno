@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"
+    xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions">
+    <fo:layout-master-set>
+        <fo:simple-page-master master-name="questions-fin" page-height="297mm"
+            page-width="210mm" font-family="Liberation Sans" font-size="10pt"
+            font-weight="normal" margin-bottom="5mm">
+            <fo:region-body margin="13mm" column-count="1"/>
+            <fo:region-before region-name="xsl-region-before" extent="25mm" display-align="before" precedence="true"/>
+            <fo:region-after region-name="xsl-region-after" extent="25mm" display-align="before" precedence="true"/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence master-reference="questions-fin">
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block/>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>
