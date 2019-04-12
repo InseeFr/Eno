@@ -94,6 +94,9 @@ public class XslTransformation {
 		if (in2out == "ddi2pdf") {
 			default_properties_file = Constants.CONFIG_DDI2PDF;
 		}
+		if (in2out == "ddi2js") {
+			default_properties_file = Constants.CONFIG_DDI2JS;
+		}
 		logger.debug("Using the basic transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
@@ -286,6 +289,14 @@ public class XslTransformation {
 
 	}
 
+	public void transformDDI2JS(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+			byte[] parameters) throws Exception {
+		logger.info("Producing a JS (xml file) from the DDI spec");
+
+		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2JS);
+
+	}
+	
 	public void transformPoguesXML2DDI(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters) throws Exception {
 		logger.info("Producing a basic DDI from the PoguesXML spec");
@@ -314,6 +325,12 @@ public class XslTransformation {
 	public void transformBrowsingDDI2ODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			File labelFolder) throws Exception {
 		logger.info("Include the navigation elements into the ODT questionnaire");
+		transformBrowsingin2Out(inputFile, outputFile, xslSheet, labelFolder);
+	}
+	
+	public void transformBrowsingDDI2JS(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+			File labelFolder) throws Exception {
+		logger.info("Include the navigation elements into the JS questionnaire");
 		transformBrowsingin2Out(inputFile, outputFile, xslSheet, labelFolder);
 	}
 
@@ -363,6 +380,16 @@ public class XslTransformation {
 		if (parameters != null) {
 			parametersIS.close();
 		}
+	}
+	
+	public void transformJSToJSPost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
+			throws Exception {
+		logger.info("Post-processing for JS transformation");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		xslTransform(transformer, inputFile, outputFile);
 	}
 
 }

@@ -641,16 +641,36 @@
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
-
     <xd:doc>
         <xd:desc>
             <xd:p>Returns the variables of the conditions of all its deactivatable ancestors.</xd:p>
         </xd:desc>
     </xd:doc>
+    
     <xsl:template match="*" mode="enoddi:get-deactivatable-ancestors-variables" as="xs:string *">
         <xsl:for-each select="ancestor::*[not(d:TypeOfSequence[text()='module'])]">
             <xsl:if test="enoddi:get-deactivatable-command(.) != ''">
                 <xsl:sequence select="enoddi:get-deactivatable-command-variables(.)"/>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Returns the conditions of all its hideable ancestors.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-hideable-ancestors" as="xs:string *">
+        <xsl:for-each select="ancestor::*[not(d:TypeOfSequence[text()='module'])]">
+            <xsl:if test="enoddi:get-hideable-command(.) != ''">
+                <xsl:value-of select="enoddi:get-hideable-command(.)"/>                
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template match="*" mode="enoddi:get-hideable-ancestors-variables" as="xs:string *">
+        <xsl:for-each select="ancestor::*[not(d:TypeOfSequence[text()='module'])]">
+            <xsl:if test="enoddi:get-hideable-command(.) != ''">
+                <xsl:sequence select="enoddi:get-hideable-command-variables(.)"/>
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
@@ -1059,4 +1079,5 @@
         mode="enoddi:get-previous-filter-description">
         <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference[not(preceding-sibling::d:ControlConstructReference)]/ancestor::d:IfThenElse[not(d:ExternalAid)]/r:Description"/>
     </xsl:template>
+    
 </xsl:stylesheet>

@@ -219,6 +219,7 @@
                   <text:p text:style-name="Question">➡ 5. When was the first episode of the Simpsons?</text:p>
                   <text:p text:style-name="Comment">For your information, the date of the last broadcast was on
 						øLAST_BROADCASTø</text:p>
+
                   <text:p text:style-name="Format">date ( jj/mm/aaaa )</text:p>
                </text:section>
                <text:section text:name="Question-j6z06z1e">

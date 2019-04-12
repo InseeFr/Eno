@@ -135,8 +135,9 @@
 					<xsl:value-of select="concat('[',$questionName,']')"/>
 				</text:p>
 			</xsl:if>
-				
+			
 			<!-- print the question label and its instructions -->
+
 			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
 				<xsl:with-param name="driver" select="."/>
 			</xsl:call-template>
@@ -265,7 +266,7 @@
 				<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
 			</xsl:when>
 		</xsl:choose>
-
+		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 			<xsl:with-param name="typeResponse" select="$typeResponse" tunnel="yes"/>
@@ -290,8 +291,8 @@
 		<xsl:if test="$typeOfAncestor!='question multiple-choice-question' and $maximumLengthCode != ''">
 			<text:p text:style-name="Format">
 				<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
-			</text:p>
-		</xsl:if>
+			</text:p>		
+		</xsl:if>		
 
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -354,7 +355,6 @@
 			<xsl:if test="$nbMaximumLines!=''">
 				<text:p><xsl:value-of select="concat('Nb line(s) maximum allowed : ',$nbMaximumLines)"/></text:p>
 			</xsl:if>
-
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
@@ -493,12 +493,12 @@
 				<xsl:value-of select="fn:concat(enoodt:get-value($source-context), ' - ', $label)"/>
 			</text:p>
 		</xsl:if>
-
+		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on the xf-output driver.</xd:p>
@@ -536,7 +536,7 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on the xf-group driver.</xd:p>

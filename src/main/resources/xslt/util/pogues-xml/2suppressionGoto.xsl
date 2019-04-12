@@ -323,6 +323,7 @@
                         <xsl:for-each select="$list_id/*[@id = $children/poguesGoto:childId]">
                             <xsl:call-template name="find_children_id">
                                 <xsl:with-param name="list_id" select="$list_id"/>
+                                <!--<xsl:with-param name="list_id" select="."/>-->
                                 <xsl:with-param name="list_forward_goto" select="$list_forward_goto"/>
                             </xsl:call-template>
                         </xsl:for-each>

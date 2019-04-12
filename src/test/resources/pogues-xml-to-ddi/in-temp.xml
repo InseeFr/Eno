@@ -15,13 +15,13 @@
       <Name>MODULE1</Name>
       <Label>Introduction</Label>
       <Declaration id="d1" declarationType="COMMENT" position="AFTER_QUESTION_TEXT">
-         <Text>We're going to test your knowledge about the simpsons series.\n**Welcome in the
+         <Text>We're going to test your knowledge about the simpsons series.&amp;#xd;&amp;#xd;**Welcome in the
                 simspons world!**</Text>
       </Declaration>
       <TargetMode>CAWI</TargetMode>
       <Child id="j6p3dkx6" questionType="SIMPLE" xsi:type="QuestionType">
          <Name>COMMENT</Name>
-         <Label>Before starting, do you have any comments about the Simpsons family?</Label>
+         <Label>Before starting, do you have any comments about the Simpsons&amp;#xd; family?</Label>
          <TargetMode>CAWI</TargetMode>
          <Response id="jbgdhaht" mandatory="false">
             <Datatype typeName="TEXT" xsi:type="TextDatatypeType">
@@ -90,7 +90,7 @@
                   <Label>When was the first episode of the Simpsons?</Label>
                   <Declaration id="d11" declarationType="COMMENT">
                      <Text>For your information, the date of the last broadcast was on
-                        $LAST_BROADCAST</Text>
+                        $LAST_BROADCAST$</Text>
                   </Declaration>
                   <TargetMode>CAWI</TargetMode>
                   <Response id="jbgdih2z" mandatory="false">
@@ -512,11 +512,11 @@
                     product?</Label>
                   <Control id="j6z2680o" criticity="ERROR">
                      <Description>Total of percentages</Description>
-                     <Expression>$PERCENTAGE_EXPENSES11 + $PERCENTAGE_EXPENSES21 +
+                     <Expression>$PERCENTAGE_EXPENSES11$ + $PERCENTAGE_EXPENSES21$ +
                         $PERCENTAGE_EXPENSES31 + $PERCENTAGE_EXPENSES41 + $PERCENTAGE_EXPENSES51 +
                         $PERCENTAGE_EXPENSES61 + $PERCENTAGE_EXPENSES71 + $PERCENTAGE_EXPENSES81 +
                         $PERCENTAGE_EXPENSES91 + $PERCENTAGE_EXPENSES101 != 100</Expression>
-                     <FailMessage>The sum of percentages is: $SUM_EXPENSES %. The total of
+                     <FailMessage>The sum of percentages is: $SUM_EXPENSES$ %. The total of
                         percentages must be equal to 100%.</FailMessage>
                   </Control>
                   <TargetMode>CAWI</TargetMode>
@@ -1749,7 +1749,7 @@
          </Datatype>
          <Name>SUM_EXPENSES</Name>
          <Label>SUM_EXPENSES label</Label>
-         <Formula>$PERCENTAGE_EXPENSES11 + $PERCENTAGE_EXPENSES21 + $PERCENTAGE_EXPENSES31 +
+         <Formula>$PERCENTAGE_EXPENSES11$ + $PERCENTAGE_EXPENSES21$ + $PERCENTAGE_EXPENSES31 +
                 $PERCENTAGE_EXPENSES41 + $PERCENTAGE_EXPENSES51 + $PERCENTAGE_EXPENSES61 +
                 $PERCENTAGE_EXPENSES71 + $PERCENTAGE_EXPENSES81 + $PERCENTAGE_EXPENSES91 +
                 $PERCENTAGE_EXPENSES101</Formula>
