@@ -23,11 +23,12 @@ import org.apache.fop.apps.MimeConstants;
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.PDFStep1MailingPostprocessor;
-import fr.insee.eno.postprocessing.PDFStep2SpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.PDFStep4InsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.PDFStep5EditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.PDFStep6InsertCoverPagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep5SpecificTreatmentPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep2TableColumnPostprocessorFake;
+import fr.insee.eno.postprocessing.PDFStep3InsertEndQuestionPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep4EditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFStep6InsertCoverPagePostprocessor;
+import fr.insee.eno.postprocessing.PDFStep7InsertAccompanyingMailsPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
@@ -40,7 +41,7 @@ public class DummyTestDDI2PDFExamples {
 
 		DDI2PDFGenerator generator = new DDI2PDFGenerator();
 
-		File in = new File(String.format("%s/fpe-ddi.xml", basePathExamples));
+		File in = new File(String.format("%s/esa-ddi-v2.xml", basePathExamples));
 		File xconf = new File(String.format("%s/fop.xconf", basePathExamples));
 		// File paramFile = new File(String.format("%s/ddi2pdf.xml", basePathExamples));
 		File paramFile = new File(String.format("%s/parameters.xml", basePathExamples));
@@ -52,12 +53,14 @@ public class DummyTestDDI2PDFExamples {
 			URI imgFolderUri = new File(basePathImg).toURI();
 
 			GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), generator,
-					new Postprocessor[] { new PDFStep1MailingPostprocessor(),
-							new PDFStep2SpecificTreatmentPostprocessor(),
-							new PDFStep3TableColumnPostprocessorFake(),
-							new PDFStep4InsertEndQuestionPostprocessor(),
-							new PDFStep5EditStructurePagesPostprocessor(),
-							new PDFStep6InsertCoverPagesPostprocessor()});
+					new Postprocessor[] { 
+							new PDFStep1MailingPostprocessor(),
+							new PDFStep2TableColumnPostprocessorFake(),
+							new PDFStep3InsertEndQuestionPostprocessor(),
+							new PDFStep4EditStructurePagesPostprocessor(),
+							new PDFStep5SpecificTreatmentPostprocessor(),
+							new PDFStep6InsertCoverPagePostprocessor(),
+							new PDFStep7InsertAccompanyingMailsPostprocessor()});
 			genServiceDDI2PDF.setParameters(paramIS);
 
 			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, "examples");

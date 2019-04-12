@@ -12,14 +12,14 @@ import fr.insee.eno.Constants;
 /**
  * PDF postprocessor.
  */
-public class PDFStep3TableColumnPostprocessorFake implements Postprocessor {
+public class PDFStep2TableColumnPostprocessorFake implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(PDFStep3TableColumnPostprocessorFake.class);
+	private static final Logger logger = LoggerFactory.getLogger(PDFStep2TableColumnPostprocessorFake.class);
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(input.getPath().replace(Constants.SPECIFIC_TREAT_PDF_EXTENSION,
+		File outputForFOFile = new File(input.getPath().replace(Constants.MAILING_FO_EXTENSION,
 				Constants.TABLE_COL_SIZE_PDF_EXTENSION));
 
 		FileUtils.copyFile(input, outputForFOFile);
