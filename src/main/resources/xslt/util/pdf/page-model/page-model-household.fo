@@ -90,29 +90,46 @@
         
         <fo:static-content flow-name="region-after-odd-household">
             
-            <fo:block-container absolute-position="absolute" left="0mm" bottom="0mm" width="5mm" height="5mm">
+            <fo:block-container absolute-position="absolute" left="0mm" bottom="0mm" width="5mm"
+                height="5mm">
                 <fo:block position="absolute" text-align="left">
                     <fo:external-graphic src="encoche-square.png"/>
                 </fo:block>
             </fo:block-container>
             
-            <fo:block-container absolute-position="absolute" left="90mm" top="5mm" width="33mm" height="10mm">
+            <fo:block-container absolute-position="absolute" left="90mm" top="5mm" width="33mm"
+                height="10mm">
                 <fo:block text-align="center">
                     <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
                 </fo:block>
             </fo:block-container>
             
             
-            <fo:block-container absolute-position="absolute" left="110mm" top="2mm"  width="80mm" height="7mm">
-                <fo:block> code barre hauteur 7mm ; barcode:placement="none" </fo:block>
+            <fo:block-container absolute-position="absolute" left="110mm" top="2mm" width="80mm"
+                height="7mm">
+                <fo:block>
+                    <fo:instream-foreign-object>
+                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
+                            message="${IdUE}" >
+                            <barcode:code128>
+                                <barcode:height>10mm</barcode:height>
+                                <barcode:human-readable>
+                                    <barcode:placement>bottom</barcode:placement>
+                                </barcode:human-readable>
+                            </barcode:code128>
+                        </barcode:barcode>
+                    </fo:instream-foreign-object>
+                </fo:block>
             </fo:block-container>
             
             
-            <fo:block-container absolute-position="absolute" left="195mm" bottom="0mm" width="5mm" height="5mm">
-                <fo:block position="absolute" text-align="right" >
+            <fo:block-container absolute-position="absolute" left="195mm" bottom="0mm" width="5mm"
+                height="5mm">
+                <fo:block position="absolute" text-align="right">
                     <fo:external-graphic src="encoche-square.png"/>
                 </fo:block>
-            </fo:block-container>            
+            </fo:block-container>
+            
         </fo:static-content>
         
         
