@@ -201,34 +201,32 @@
                <text:p text:style-name="Question">➡ 2. Are you ready?</text:p>
                <text:p text:style-name="Format">Booléen</text:p>
             </text:section>
-            <text:section text:name="Control-d1e42-THEN">
-               <text:p text:style-name="Control">Filtre : </text:p>
-               <text:p text:style-name="Control">not( ^READY != '1')</text:p>
-               <text:section text:name="SubModule-j6p0s7o5">
-                  <text:p text:style-name="SubModule">General knowledge of the series</text:p>
-                  <text:section text:name="Question-j3343qhx">
-                     <text:p text:style-name="QuestionName">[PRODUCER]</text:p>
-                     <text:p text:style-name="Question">➡ 3. Who is the producer?</text:p>
-                     <text:p text:style-name="Format">Car 30</text:p>
-                  </text:section>
-                  <text:section text:name="Question-j6q9h8tj">
-                     <text:p text:style-name="QuestionName">[SEASON_NUMBER]</text:p>
-                     <text:p text:style-name="Question">➡ 4. What is the current season number?</text:p>
-                     <text:p text:style-name="Format">num 0..99</text:p>
-                  </text:section>
-                  <text:section text:name="Question-j334cyqb">
-                     <text:p text:style-name="QuestionName">[DATEFIRST]</text:p>
-                     <text:p text:style-name="Question">➡ 5. When was the first episode of the Simpsons?</text:p>
-                     <text:p text:style-name="Comment">For your information, the date of the last broadcast was on
+            <text:p text:style-name="Control">not( ^READY != '1')</text:p>
+            <text:section text:name="SubModule-j6p0s7o5">
+               <text:p text:style-name="SubModule">General knowledge of the series</text:p>
+               <text:section text:name="Question-j3343qhx">
+                  <text:p text:style-name="QuestionName">[PRODUCER]</text:p>
+                  <text:p text:style-name="Question">➡ 3. Who is the producer?</text:p>
+                  <text:p text:style-name="Format">Car 30</text:p>
+               </text:section>
+               <text:section text:name="Question-j6q9h8tj">
+                  <text:p text:style-name="QuestionName">[SEASON_NUMBER]</text:p>
+                  <text:p text:style-name="Question">➡ 4. What is the current season number?</text:p>
+                  <text:p text:style-name="Format">num 0..99</text:p>
+               </text:section>
+               <text:section text:name="Question-j334cyqb">
+                  <text:p text:style-name="QuestionName">[DATEFIRST]</text:p>
+                  <text:p text:style-name="Question">➡ 5. When was the first episode of the Simpsons?</text:p>
+                  <text:p text:style-name="Comment">For your information, the date of the last broadcast was on
 						øLAST_BROADCASTø</text:p>
-                     <text:p text:style-name="Format">date</text:p>
-                  </text:section>
-                  <text:section text:name="Question-j6z06z1e">
-                     <text:p text:style-name="QuestionName">[AUDIENCE_SHARE]</text:p>
-                     <text:p text:style-name="Question">➡ 6. In your opinion, how much is the part of audience share in US for the 2016
+
+                  <text:p text:style-name="Format">date ( jj/mm/aaaa )</text:p>
+               </text:section>
+               <text:section text:name="Question-j6z06z1e">
+                  <text:p text:style-name="QuestionName">[AUDIENCE_SHARE]</text:p>
+                  <text:p text:style-name="Question">➡ 6. In your opinion, how much is the part of audience share in US for the 2016
 					season? </text:p>
-                     <text:p text:style-name="Format">num 0..99 - 1 chiffre(s) après la virgule</text:p>
-                  </text:section>
+                  <text:p text:style-name="Format">num 0..99 - 1 chiffre(s) après la virgule</text:p>
                </text:section>
             </text:section>
          </text:section>

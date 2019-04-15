@@ -42,15 +42,18 @@ public class FodsToXSLCompiler {
 			generateDDI2FRDrivers();
 			generateDDI2ODTDrivers();
 			generateDDI2PDFDrivers();
+			generateDDI2JSDrivers();
 			generatePOGUESXML2DDIDrivers();
 			generateDDI2FRFunctions();
 			generateDDI2ODTFunctions();
 			generateDDI2PDFFunctions();
+			generateDDI2JSFunctions();
 			generatePOGUESXML2DDIFunctions();
 			generateDDI2FRTreeNavigation();
 			generatePOGUESXML2DDITreeNavigation();
 			generateDDI2ODTTreeNavigation();
 			generateDDI2PDFTreeNavigation();
+			generateDDI2JSTreeNavigation();
 			// Fods2Xsl for /output/ddi/.fods files
 			generateDDIFunctions();
 			generatePOGUESXMLFunctions();
@@ -61,12 +64,14 @@ public class FodsToXSLCompiler {
 			ddi2frIncorporationTarget();
 			ddi2odtIncorporationTarget();
 			ddi2pdfIncorporationTarget();
+			ddi2jsIncorporationTarget();
 			poguesxml2ddiIncorporationTarget();
 			// TODO Copy generated files to JAR or classpath
 			logger.debug("Fods to XSL: END");
 			copyGeneratedFilesDDI2FR();
 			copyGeneratedFilesDDI2ODT();
 			copyGeneratedFilesDDI2PDF();
+			copyGeneratedFilesDDI2JS();
 			copyGeneratedFilesPOGUESXML2DDI();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -139,6 +144,25 @@ public class FodsToXSLCompiler {
 				osTRANSFORMATIONS_DDI2PDF_DRIVERS_XSL_TMP);
 		isTRANSFORMATIONS_DDI2PDF_DRIVERS_FODS.close();
 		osTRANSFORMATIONS_DDI2PDF_DRIVERS_XSL_TMP.close();
+	}
+	
+	/**
+	 * @throws Exception
+	 * @throws IOException
+	 */
+	private static void generateDDI2JSDrivers() throws Exception, IOException {
+		logger.info("Generating DDI2JS drivers.");
+		logger.debug(
+				FIVE_SPACES + 
+				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2JS_DRIVERS_FODS +
+				" -Output : " + Constants.TRANSFORMATIONS_DDI2JS_DRIVERS_XSL_TMP);
+		InputStream isTRANSFORMATIONS_DDI2JS_DRIVERS_FODS = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2JS_DRIVERS_FODS);
+		OutputStream osTRANSFORMATIONS_DDI2JS_DRIVERS_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2JS_DRIVERS_XSL_TMP);
+		fods2XslTarget(
+				isTRANSFORMATIONS_DDI2JS_DRIVERS_FODS,
+				osTRANSFORMATIONS_DDI2JS_DRIVERS_XSL_TMP);
+		isTRANSFORMATIONS_DDI2JS_DRIVERS_FODS.close();
+		osTRANSFORMATIONS_DDI2JS_DRIVERS_XSL_TMP.close();
 	}
 	
 	
@@ -217,6 +241,25 @@ public class FodsToXSLCompiler {
 		isTRANSFORMATIONS_DDI2PDF_FUNCTIONS_FODS.close();
 		osTRANSFORMATIONS_DDI2PDF_FUNCTIONS_XSL_TMP.close();
 	}
+	
+	/**
+	 * @throws Exception
+	 * @throws IOException
+	 */
+	private static void generateDDI2JSFunctions() throws Exception, IOException {
+		logger.info("Generating DDI2JS functions.");
+		logger.debug(
+				FIVE_SPACES +
+				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2JS_FUNCTIONS_FODS +
+				" -Output : " + Constants.TRANSFORMATIONS_DDI2PDF_FUNCTIONS_XSL);
+		InputStream isTRANSFORMATIONS_DDI2JS_FUNCTIONS_FODS = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2JS_FUNCTIONS_FODS);
+		OutputStream osTRANSFORMATIONS_DDI2JS_FUNCTIONS_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2JS_FUNCTIONS_XSL_TMP);
+		fods2XslTarget(
+				isTRANSFORMATIONS_DDI2JS_FUNCTIONS_FODS,
+				osTRANSFORMATIONS_DDI2JS_FUNCTIONS_XSL_TMP);
+		isTRANSFORMATIONS_DDI2JS_FUNCTIONS_FODS.close();
+		osTRANSFORMATIONS_DDI2JS_FUNCTIONS_XSL_TMP.close();
+	}
 		
 	/**
 	 * @throws Exception
@@ -292,6 +335,25 @@ public class FodsToXSLCompiler {
 				osTRANSFORMATIONS_DDI2PDF_TREE_NAVIGATION_XSL_TMP);
 		isTRANSFORMATIONS_DDI2PDF_TREE_NAVIGATION_FODS.close();
 		osTRANSFORMATIONS_DDI2PDF_TREE_NAVIGATION_XSL_TMP.close();
+	}
+	
+	/**
+	 * @throws Exception
+	 * @throws IOException
+	 */
+	private static void generateDDI2JSTreeNavigation() throws Exception, IOException {
+		logger.info("Generating DDI2JS tree navigation");
+		logger.debug(
+				FIVE_SPACES +
+				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_FODS + 
+				" -Output : " + Constants.TRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_XSL);
+		InputStream isTRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_FODS = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_FODS);
+		OutputStream osTRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_XSL_TMP);
+		fods2XslTarget(
+				isTRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_FODS,
+				osTRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_XSL_TMP);
+		isTRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_FODS.close();
+		osTRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_XSL_TMP.close();
 	}
 	
 	/**
@@ -775,6 +837,98 @@ public class FodsToXSLCompiler {
 	}
 	
 	
+	public static void ddi2jsIncorporationTarget() throws Exception {
+		logger.debug("Entering Incorporation");
+		// Incorporating ddi2js-fixed.xsl, drivers.xsl, functions.xsl and
+		// tree-navigation.xsl into ddi2js.xsl
+		logger.debug(
+				"Incorporating " + Constants.TRANSFORMATIONS_DDI2JS_DDI2JS_FIXED_XSL +
+				" and " + Constants.TRANSFORMATIONS_DDI2JS_DRIVERS_XSL_TMP +
+				" in " + Constants.TEMP_TEMP_TMP);
+		
+		InputStream isTRANSFORMATIONS_DDI2JS_DDI2JS_FIXED_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2JS_DDI2JS_FIXED_XSL);
+		InputStream isUTIL_XSL_INCORPORATION_XSL = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osTEMP_TEMP_TMP = FileUtils.openOutputStream(Constants.TEMP_TEMP_TMP);
+		saxonService.transformIncorporation(
+				isTRANSFORMATIONS_DDI2JS_DDI2JS_FIXED_XSL,
+				isUTIL_XSL_INCORPORATION_XSL,
+				osTEMP_TEMP_TMP,
+				Constants.TRANSFORMATIONS_DDI2JS_DRIVERS_XSL_TMP);
+		isTRANSFORMATIONS_DDI2JS_DDI2JS_FIXED_XSL.close();
+		isUTIL_XSL_INCORPORATION_XSL.close();
+		osTEMP_TEMP_TMP.close();
+		
+		logger.debug(
+				"Incorporating " + Constants.TEMP_TEMP_TMP + 
+				" and " + Constants.TRANSFORMATIONS_DDI2JS_FUNCTIONS_XSL_TMP +
+				" in " + Constants.TEMP_TEMP_BIS_TMP);
+		InputStream isTEMP_TEMP_TMP = FileUtils.openInputStream(Constants.TEMP_TEMP_TMP);
+		InputStream isUTIL_XSL_INCORPORATION_XSL2 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osTEMP_TEMP_BIS_TMP = FileUtils.openOutputStream(Constants.TEMP_TEMP_BIS_TMP);
+		saxonService.transformIncorporation(
+				isTEMP_TEMP_TMP,
+				isUTIL_XSL_INCORPORATION_XSL2,
+				osTEMP_TEMP_BIS_TMP,
+				Constants.TRANSFORMATIONS_DDI2JS_FUNCTIONS_XSL_TMP);
+		isTEMP_TEMP_TMP.close();
+		isUTIL_XSL_INCORPORATION_XSL2.close();
+		osTEMP_TEMP_BIS_TMP.close();
+		
+		logger.debug(
+				"Incorporating " + Constants.TEMP_TEMP_BIS_TMP +
+				" and " + Constants.TRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_XSL_TMP + 
+				" in " + Constants.TRANSFORMATIONS_DDI2JS_DDI2JS_XSL_TMP);
+		
+		InputStream isTEMP_TEMP_BIS_TMP = FileUtils.openInputStream(Constants.TEMP_TEMP_BIS_TMP);
+		InputStream isUTIL_XSL_INCORPORATION_XSL3 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osTRANSFORMATIONS_DDI2JS_DDI2JS_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2JS_DDI2JS_XSL_TMP);
+		saxonService.transformIncorporation(
+				isTEMP_TEMP_BIS_TMP,
+				isUTIL_XSL_INCORPORATION_XSL3,
+				osTRANSFORMATIONS_DDI2JS_DDI2JS_XSL_TMP,
+				Constants.TRANSFORMATIONS_DDI2JS_TREE_NAVIGATION_XSL_TMP);
+		isTEMP_TEMP_BIS_TMP.close();
+		isUTIL_XSL_INCORPORATION_XSL3.close();
+		osTRANSFORMATIONS_DDI2JS_DDI2JS_XSL_TMP.close();
+		// Incorporating source-fixed.xsl, functions.xsl and templates.xsl into
+		// source.xsl
+		logger.debug(
+				"Incorporating " + Constants.INPUTS_DDI_SOURCE_FIXED_XSL +
+				" and " + Constants.INPUTS_DDI_FUNCTIONS_XSL +
+				" in " + Constants.TEMP_TEMP_TMP);
+		
+		InputStream isINPUTS_DDI_SOURCE_FIXED_XSL = Constants.getInputStreamFromPath(Constants.INPUTS_DDI_SOURCE_FIXED_XSL);
+		InputStream isUTIL_XSL_INCORPORATION_XSL4 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osTEMP_TEMP_TMP2 = FileUtils.openOutputStream(Constants.TEMP_TEMP_TMP);
+		saxonService.transformIncorporation(
+				isINPUTS_DDI_SOURCE_FIXED_XSL, 
+				isUTIL_XSL_INCORPORATION_XSL4,
+				osTEMP_TEMP_TMP2, 
+				Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP);
+		isINPUTS_DDI_SOURCE_FIXED_XSL.close();
+		isUTIL_XSL_INCORPORATION_XSL4.close();
+		osTEMP_TEMP_TMP2.close();
+		logger.debug(
+				"Incorporating " + Constants.TEMP_TEMP_TMP +
+				" and " + Constants.INPUTS_DDI_TEMPLATES_XSL +
+				" in " + Constants.INPUTS_DDI_SOURCE_XSL_TMP);
+		
+		InputStream isTEMP_TEMP_TMP2 = FileUtils.openInputStream(Constants.TEMP_TEMP_TMP);
+		InputStream isUTIL_XSL_INCORPORATION_XSL5 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
+		OutputStream osINPUTS_DDI_SOURCE_XSL_TMP = FileUtils.openOutputStream(Constants.INPUTS_DDI_SOURCE_XSL_TMP);
+		
+		saxonService.transformIncorporation(
+				isTEMP_TEMP_TMP2, 
+				isUTIL_XSL_INCORPORATION_XSL5,
+				osINPUTS_DDI_SOURCE_XSL_TMP, 
+				Constants.INPUTS_DDI_TEMPLATES_XSL_TMP);
+		isTEMP_TEMP_TMP2.close();
+		isUTIL_XSL_INCORPORATION_XSL5.close();
+		osINPUTS_DDI_SOURCE_XSL_TMP.close();
+		logger.debug("Leaving Incorporation");
+	}
+	
+	
 	/**
 	 * Main method of the incorporation target
 	 * 
@@ -929,6 +1083,23 @@ public class FodsToXSLCompiler {
 		try {
 			FileUtils.copyDirectory(Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP.getParentFile(), inputsDestination);
 			FileUtils.copyDirectory(Constants.TRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL_TMP.getParentFile(), transformsDestination);
+		} catch(Exception e){
+			throw e;
+		}
+	}
+	
+	/**
+	 * When every file has been generated, we want to copy them in the /xslt directory to be
+	 * used through the Java API.
+	 * */
+	private static void copyGeneratedFilesDDI2JS() throws Exception {
+		String destinationBasePath = System.getProperty("dest");
+		logger.info(String.format("Copying generated files to %s", destinationBasePath));
+		File inputsDestination = new File(destinationBasePath + "/xslt/inputs/ddi");
+		File transformsDestination = new File(destinationBasePath + "/xslt/transformations/ddi2js");
+		try {
+			FileUtils.copyDirectory(Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP.getParentFile(), inputsDestination);
+			FileUtils.copyDirectory(Constants.TRANSFORMATIONS_DDI2JS_DDI2JS_XSL_TMP.getParentFile(), transformsDestination);
 		} catch(Exception e){
 			throw e;
 		}

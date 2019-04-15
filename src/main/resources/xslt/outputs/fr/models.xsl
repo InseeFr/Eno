@@ -1837,11 +1837,21 @@
             <xsl:copy-of select="root(.)"/>
         </xsl:variable>
         <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
+        <xsl:variable name="isLongTable">
+            <xsl:if test="count(enofr:get-body-lines($source-context))>=$lengthOfLongTable">
+                <xsl:value-of select="'long-table'"/>
+            </xsl:if>
+        </xsl:variable>
 
         <xhtml:table name="{enofr:get-name($source-context)}">
-            <xsl:if test="$css-class != ''">
-                <xsl:attribute name="class" select="$css-class"/>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$isLongTable!=''">
+                    <xsl:attribute name="class" select="concat($isLongTable,' ',$css-class)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="class" select="$css-class"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xhtml:colgroup>
                 <xhtml:col span="{count(enofr:get-header-columns($source-context))}"/>
             </xhtml:colgroup>
@@ -1886,6 +1896,11 @@
         <xsl:variable name="table-name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="loop-name" select="enofr:get-business-name($source-context)"/>
         <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
+        <xsl:variable name="isLongTable">
+            <xsl:if test="count(enofr:get-body-lines($source-context))>=$lengthOfLongTable">
+                <xsl:value-of select="'long-table'"/>
+            </xsl:if>
+        </xsl:variable>
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
@@ -1895,9 +1910,14 @@
 
         <xsl:apply-templates select="$table-title//xf-output" mode="model"/>
         <xhtml:table name="{$table-name}">
-            <xsl:if test="$css-class != ''">
-                <xsl:attribute name="class" select="$css-class"/>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="$isLongTable!=''">
+                    <xsl:attribute name="class" select="concat($isLongTable,' ',$css-class)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="class" select="$css-class"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xhtml:colgroup>
                 <xhtml:col span="{count(enofr:get-header-columns($source-context))}"/>
             </xhtml:colgroup>
