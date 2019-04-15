@@ -13,7 +13,7 @@
 	<!--<property name="survey-name" value="simpsons"/>-->
 	<!--<property name="survey-name" value="achats-2018-x00"/>-->
 	<!--<property name="survey-name" value="ticmenold"/>-->
-	<property name="survey-name" value="esa-ddi-v2"/>
+	<property name="survey-name" value="simpsons"/>
 	<!-- The transformation to be processed, usually named using a <in>2<out> template. -->
 
 	<property name="transformation-name" value="ddi2pdf"/>

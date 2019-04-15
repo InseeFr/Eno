@@ -14,9 +14,9 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * Customization of FO postprocessor.
  */
-public class PDFStep1MailingPostprocessor implements Postprocessor {
+public class PDFMailingPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(PDFStep1MailingPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(PDFMailingPostprocessor.class);
 
 	// FIXME Inject !
 	private static XslTransformation saxonService = new XslTransformation();
@@ -24,16 +24,16 @@ public class PDFStep1MailingPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
-		File outputCustomFOFile = new File(
+		File outputForFOFile = new File(
 				FilenameUtils.removeExtension(input.getPath()) + Constants.MAILING_FO_EXTENSION);
-		InputStream FO_STEP1_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2);
+		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2);
 
 		saxonService.transformFOToStep1FO(FileUtils.openInputStream(input),
-				FileUtils.openOutputStream(outputCustomFOFile), FO_STEP1_XSL);
-		FO_STEP1_XSL.close();
-		logger.info("End of step 1 PDF post-processing : ");
+				FileUtils.openOutputStream(outputForFOFile), FO_XSL);
+		FO_XSL.close();
+		logger.info("End of Mailing post-processing : ");
 
-		return outputCustomFOFile;
+		return outputForFOFile;
 	}
 
 }

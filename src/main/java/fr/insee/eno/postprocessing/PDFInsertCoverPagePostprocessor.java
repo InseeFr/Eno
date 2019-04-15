@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import fr.insee.eno.Constants;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
-public class PDFStep4InsertGenericPagesPostprocessor implements Postprocessor {
+public class PDFInsertCoverPagePostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(PDFStep4InsertGenericPagesPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(PDFInsertCoverPagePostprocessor.class);
 
 	// FIXME Inject !
 	private static XslTransformation saxonService = new XslTransformation();
@@ -22,25 +22,25 @@ public class PDFStep4InsertGenericPagesPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputStep2FOFile = new File(
-				input.getPath().replace(Constants.TABLE_COL_SIZE_PDF_EXTENSION, Constants.FINAL_PDF_EXTENSION));
+		File outputForFOFile = new File(
+				input.getPath().replace(Constants.SPECIFIC_TREAT_PDF_EXTENSION, Constants.COVER_PAGE_FO_EXTENSION));
 		System.out.println(input.getPath());
 		String surveyName = survey;
 		String formName = getFormName(input);
 
-		InputStream FO_STEP4_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_GENERIC_PAGES_FO_4PDF);
+		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_COVER_PAGE_FO_4PDF);
 
 		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputStep2FOFile);
+		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
 
-		saxonService.transformFOToStep4FO(inputStream, outputStream, FO_STEP4_XSL, surveyName, formName, parameters);
+		saxonService.transformFOToStep4FO(inputStream, outputStream, FO_XSL, surveyName, formName, parameters);
 
 		inputStream.close();
 		outputStream.close();
-		FO_STEP4_XSL.close();
-		logger.info("End of step 4 PDF post-processing " + input.getAbsolutePath());
+		FO_XSL.close();
+		logger.info("End of InsertCoverPage post-processing " + input.getAbsolutePath());
 
-		return outputStep2FOFile;
+		return outputForFOFile;
 	}
 
 	private String getFormName(File input) {

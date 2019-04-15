@@ -5,15 +5,18 @@
     <Language>fr</Language>
     <Language>en</Language>
   </Languages>
-  <HomePage>
-    <File>static-pages.fo</File>
-  </HomePage>
+  <Format>
+    <Columns>1</Columns>
+    <!-- Orientation : portrait= 0 ou paysage =90 -->
+    <Orientation>0</Orientation>
+  </Format>
   <ColtraneQuestions>
     <Fin/>
   </ColtraneQuestions>
   <AccompanyingMails>
-    <AccompanyingMail>ouvertureCOL</AccompanyingMail>
+    <!--<AccompanyingMail>ouvertureCOL</AccompanyingMail>-->
   </AccompanyingMails>
+  <StudyUnit>household</StudyUnit>
   <Title>
     <Browsing>module</Browsing>
       <Sequence>

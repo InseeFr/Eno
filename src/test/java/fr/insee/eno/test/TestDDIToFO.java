@@ -9,10 +9,13 @@ import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
-import fr.insee.eno.postprocessing.PDFStep1MailingPostprocessor;
-import fr.insee.eno.postprocessing.PDFStep2SpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.PDFStep3TableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.PDFStep4InsertGenericPagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFMailingPostprocessor;
+import fr.insee.eno.postprocessing.PDFSpecificTreatmentPostprocessor;
+import fr.insee.eno.postprocessing.PDFTableColumnPostprocessorFake;
+import fr.insee.eno.postprocessing.PDFInsertEndQuestionPostprocessor;
+import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertCoverPagePostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
@@ -29,10 +32,14 @@ public class TestDDIToFO {
 
 			// Without plugins
 			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
-					new Postprocessor[] { new PDFStep1MailingPostprocessor(),
-							new PDFStep2SpecificTreatmentPostprocessor(),
-							new PDFStep3TableColumnPostprocessorFake(),
-							new PDFStep4InsertGenericPagesPostprocessor() });
+					new Postprocessor[] { 
+							new PDFMailingPostprocessor(),
+							new PDFTableColumnPostprocessorFake(),
+							new PDFInsertEndQuestionPostprocessor(),
+							new PDFEditStructurePagesPostprocessor(),
+							new PDFSpecificTreatmentPostprocessor(),
+							new PDFInsertCoverPagePostprocessor(),
+							new PDFInsertAccompanyingMailsPostprocessor()});
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-fo-test");
 			File expectedFile = new File(String.format("%s/out.fo", basePath));
 			diff = xmlDiff.getDiff(outputFile, expectedFile);
