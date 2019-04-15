@@ -21,7 +21,6 @@
 	</FirstPage>
 	<AccompanyingMails>
 		<Folder>xslt/util/pdf/accompanying-mails</Folder>
-		<File>accompanying-mails.fo</File>
 	</AccompanyingMails>
 	<EndQuestion>
 		<Folder>xslt/util/pdf/end-question</Folder>

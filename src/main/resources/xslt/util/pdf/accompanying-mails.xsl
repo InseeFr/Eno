@@ -57,30 +57,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="accompanying-mails-file">
-        <xsl:choose>
-            <xsl:when test="$parameters//AccompanyingMails/File != ''">
-                <xsl:value-of select="$parameters//AccompanyingMails/File"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$properties//AccompanyingMails/File"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-    
-    <xsl:variable name="firstPage-folder">
-        <xsl:choose>
-            <xsl:when test="$parameters//FirstPage/Folder != ''">
-                <xsl:value-of select="$parameters//FirstPage/Folder"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$properties//FirstPage/Folder"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-    
-    <xsl:variable name="accompanying-mails-adress" select="concat('../../../',$accompanying-mails-folder,'/',$accompanying-mails-file)"/>
-    <xsl:variable name="accompanying-mails-pages" select="doc($accompanying-mails-adress)"/>
+        
        
     <xd:doc>
         <xd:desc>
@@ -89,14 +66,36 @@
     </xd:doc>
     <xsl:template match="/">
         <xsl:variable name="root" select="."/>
-        <xsl:apply-templates select="*" mode="#default"/>
+        <xsl:apply-templates select="*" mode="keep-cdata"/>
         <xsl:for-each select="$parameters//AccompanyingMail">
+            <xsl:variable name="accompanying-mails-adress" select="concat('../../../',$accompanying-mails-folder,'/',.,'.fo')"/>
+            <xsl:variable name="accompanying-mails-page" select="doc($accompanying-mails-adress)"/>
             <xsl:result-document href="../../courrier_type_{replace(replace(concat($survey-name,$form-name),'-',''),'_','')}{.}.fo">
                 <xsl:apply-templates select="$root/*" mode="keep-cdata">
+                    <xsl:with-param name="accompanying-mails-page" select="$accompanying-mails-page" as="node()" tunnel="yes"/>
                     <xsl:with-param name="accompanying-mail" select="." tunnel="yes"/>
-                </xsl:apply-templates>                
+                </xsl:apply-templates>
             </xsl:result-document>
         </xsl:for-each>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>add accompanying mail and cover page.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="fo:root/fo:layout-master-set" mode="#all">
+        <xsl:param name="accompanying-mails-page" as="node()" tunnel="yes">
+            <Empty/>
+        </xsl:param>
+        <xsl:param name="accompanying-mail" tunnel="yes" required="no"/>
+        <xsl:copy>
+            <xsl:copy-of select="$accompanying-mails-page//fo:page-sequence-master[@master-name=$accompanying-mail]"/>
+            <xsl:copy-of select="$accompanying-mails-page//fo:simple-page-master[@master-name=concat($accompanying-mail,'-recto')]"/>
+            <xsl:copy-of select="$accompanying-mails-page//fo:simple-page-master[@master-name=concat($accompanying-mail,'-verso')]"/>
+            <xsl:apply-templates select="node() | @*" mode="#current"/>
+        </xsl:copy>
+        <xsl:apply-templates select="$accompanying-mails-page//fo:page-sequence[@master-reference=$accompanying-mail]" mode="keep-cdata"/>
     </xsl:template>
     
     <xd:doc>
@@ -108,22 +107,6 @@
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" mode="#current"/>
         </xsl:copy>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
-            <xd:p>add accompanying mail and cover page.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="fo:root/fo:layout-master-set" mode="#all">
-        <xsl:param name="accompanying-mail" tunnel="yes"/>
-        <xsl:copy>
-            <xsl:copy-of select="$accompanying-mails-pages//fo:page-sequence-master[@master-name=$accompanying-mail]"/>
-            <xsl:copy-of select="$accompanying-mails-pages//fo:simple-page-master[@master-name=concat($accompanying-mail,'-recto')]"/>
-            <xsl:copy-of select="$accompanying-mails-pages//fo:simple-page-master[@master-name=concat($accompanying-mail,'-verso')]"/>
-            <xsl:apply-templates select="node() | @*" mode="#current"/>
-        </xsl:copy>
-        <xsl:apply-templates select="$accompanying-mails-pages//fo:page-sequence[@master-reference=$accompanying-mail]" mode="keep-cdata"/>
     </xsl:template>
     
     <xsl:template match="text()" mode="keep-cdata" priority="2">
