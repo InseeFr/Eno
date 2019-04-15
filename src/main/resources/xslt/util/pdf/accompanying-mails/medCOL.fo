@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <fo:page-sequence-master master-name="medCOL">
+            <fo:repeatable-page-master-alternatives>
+                <fo:conditional-page-master-reference master-reference="medCOL-recto"
+                    odd-or-even="odd"/>
+                <fo:conditional-page-master-reference master-reference="medCOL-verso"
+                    odd-or-even="even"/>
+            </fo:repeatable-page-master-alternatives>
+        </fo:page-sequence-master>
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
+            margin-bottom="5mm" master-name="medCOL-recto" page-height="297mm" page-width="210mm">
+            <fo:region-body column-count="1" margin="0mm"/>
+            <fo:region-before display-align="before" extent="100mm" precedence="true"
+                region-name="xsl-region-before-courrier"/>
+            <fo:region-after display-align="before" extent="100mm" precedence="true"
+                region-name="xsl-region-after-cover"/>
+        </fo:simple-page-master>
+        <fo:simple-page-master font-family="Liberation Sans" font-size="10pt" font-weight="normal"
+            margin-bottom="5mm" master-name="medCOL-verso" page-height="297mm" page-width="210mm">
+            <fo:region-body column-count="1" margin="0mm"/>
+            <fo:region-before display-align="before" extent="100mm" precedence="true"
+                region-name="xsl-region-before-cover"/>
+            <fo:region-after display-align="before" extent="100mm" precedence="true"
+                region-name="xsl-region-after-cover"/>
+        </fo:simple-page-master>
+    </fo:layout-master-set>
+    <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="medCOL">
+        <fo:static-content flow-name="xsl-region-before-courrier">
+            <fo:block position="absolute" margin-top="5mm" margin-left="10mm" margin-right="10mm" margin-bottom="10mm" color="white">
+                &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
+            </fo:block>
+        </fo:static-content>
+        
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block page-break-after="always">
+                <fo:block-container absolute-position="absolute" top="15mm" left="15mm"
+                    width="50mm" height="20mm">
+                    <fo:block>
+                        <fo:external-graphic src="logo_INSEE.png" width="100%" height="100%"
+                            content-height="scale-to-fit" content-width="scale-to-fit"
+                            scaling="uniform"/>
+                    </fo:block>
+                </fo:block-container>
+                <fo:block-container absolute-position="absolute" top="15mm" left="85.3mm"
+                    width="32mm" height="18.7mm">
+                    <fo:block>
+                        <fo:external-graphic src="marianne.png" width="100%" height="100%"
+                            content-height="scale-to-fit" content-width="scale-to-fit"
+                            scaling="uniform"/>
+                    </fo:block>
+                </fo:block-container>
+                <fo:block-container absolute-position="absolute" top="15mm" right="15mm"
+                    width="11.1mm" height="19.9mm">
+                    <fo:block>
+                        <fo:external-graphic src="statPub.png" width="100%" height="100%"
+                            content-height="scale-to-fit" content-width="scale-to-fit"
+                            scaling="uniform"/>
+                    </fo:block>
+                </fo:block-container>
+                <fo:block-container absolute-position="absolute" left="15mm" top="48mm" width="75mm"
+                    height="6mm" overflow="hidden">
+                    <fo:block font-weight="bold" text-align="center">MISE EN DEMEURE #if($!{InitAccuseReception}=='oui')avec accusé de réception#end</fo:block>
+                </fo:block-container>
+                <fo:block-container absolute-position="absolute" left="110mm" top="47.5mm"
+                    width="11.88mm" height="11.88mm" overflow="hidden">
+                    <fo:block>
+                        <fo:instream-foreign-object>
+                            <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
+                                message="${Barcode}" orientation="0">
+                                <barcode:datamatrix>
+                                    <barcode:module-width>0.53mm</barcode:module-width>
+                                    <barcode:quiet-zone enabled="false">0mw</barcode:quiet-zone>
+                                    <barcode:min-symbol-size>22x22</barcode:min-symbol-size>
+                                    <barcode:max-symbol-size>22x22</barcode:max-symbol-size>
+                                </barcode:datamatrix>
+                            </barcode:barcode>
+                        </fo:instream-foreign-object>
+                    </fo:block>
+                </fo:block-container>
+                <fo:block-container absolute-position="absolute"
+                    left="110mm"
+                    top="60mm"
+                    width="82mm"
+                    height="25.5mm"
+                    overflow="hidden">
+                    <fo:block margin-top="0.5mm" margin-left="0mm" height="37.2mm"
+                        font-family="Lucida Console">
+                        <fo:inline-container margin="0mm">
+                            <fo:block line-height="10pt">${BddAdressePosteeL1}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL2}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL3}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL4}</fo:block>
+                            <fo:block line-height="10pt">$!{BddAdressePosteeL5}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL6}</fo:block>
+                            <fo:block line-height="10pt">${BddAdressePosteeL7}</fo:block>
+                        </fo:inline-container>
+                    </fo:block>
+                </fo:block-container>
+                <fo:block-container absolute-position="absolute" left="15mm" top="60.5mm"
+                    width="75mm" height="36.7mm" overflow="hidden">
+                    <fo:block  margin-left="0.01mm" margin-right="0.01mm" border="black solid 0.5pt">
+                        <fo:inline-container>
+                            <fo:block font-weight="bold" margin-top="0.5mm">Pour nous contacter :</fo:block>
+                            <fo:block><fo:inline text-decoration="underline">Courriel</fo:inline> : #if($!{InitGestionnairesAdresseMessagerie})$!{InitGestionnairesAdresseMessagerie}#else${BddServiceCollecteurAdresseMessagerie}#end </fo:block>
+                            <fo:block>#if ($!{InitNumeroSVI}||$!{InitGestionnaireTel})<fo:inline text-decoration="underline">Téléphone</fo:inline> : #end #if ($!{InitNumeroSVI})09-69-32-97-47 #elseif($!{InitGestionnaireTel}) $!{InitGestionnaireTel}#end </fo:block>
+                            <fo:block>#if ($!{InitNumeroSVI})<fo:inline text-decoration="underline">Code enquête</fo:inline> : $!{InitNumeroSVI} #end</fo:block>
+                        </fo:inline-container>
+                    </fo:block>
+                </fo:block-container>
+                <fo:block-container absolute-position="absolute" left="15mm" top="107.2mm"
+                    width="180mm" height="155mm" overflow="hidden" font-family="Liberation Sans"
+                    font-size="9pt" text-align="justify">
+                    <fo:block>
+                        <fo:inline-container>
+                            <fo:block text-align="right">Paris, le ${DateEdition}</fo:block>
+                            <fo:block margin-top="3mm" font-weight="bold">Objet :
+                                Enquête statistique#if((${BddFrequence}!='annuelle') and
+                                (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end
+                                ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
+                                (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
+                                ${BddAnneeReference}</fo:block>
+                            <fo:block font-weight="bold">Ref. ${BddRaisonSociale} (Votre
+                                ${BddLabelUniteEnquetee} :
+                                ${BddIdentifiantUniteEnquetee})</fo:block>
+                            <fo:block margin-top="3mm">Madame la Directrice, Monsieur le Directeur,</fo:block>
+                            <fo:block margin-top="3mm">Malgré ma relance en date du ${BddDateEnvoiRappel}, à ma connaissance votre réponse à l’<fo:inline font-weight="bold">enquête#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end ${BddAnneeReference}</fo:inline> n’est pas encore parvenue à mes services. Au cas où ce courrier se serait croisé avec votre réponse, je vous prie, bien entendu, de ne pas en tenir compte.</fo:block>
+                            <fo:block margin-top="3mm">Dans le cas contraire, les dispositions légales* m’amènent à <fo:inline font-weight="bold">vous mettre en demeure</fo:inline> d’adresser votre réponse à mes services dans un délai de <fo:inline font-weight="bold">15 jours</fo:inline> à compter de la réception de la présente lettre, ou de me faire connaître par écrit les motifs de cette absence de réponse.</fo:block>
+                            <fo:block margin-top="3mm">En cas de défaut de réponse dans le délai imparti, la procédure contentieuse prévue par la loi vous serait appliquée et je serais dans l’obligation d’établir un constat de non-réponse à votre encontre puis de soumettre votre dossier au Comité du contentieux des enquêtes statistiques obligatoires du Conseil national de l’information statistique (Cnis), conformément à la loi de 1951 sur l’obligation en matière de statistique.</fo:block>
+                            <fo:block margin-top="3mm">Aussi, <fo:inline font-weight="bold">je vous prie</fo:inline>#if(${BddQuestionnaire}==0) <fo:inline font-weight="bold">de remplir dans les meilleurs délais le questionnaire par internet</fo:inline> selon les modalités précisées au verso de cette lettre. 
+                                S’il vous est matériellement impossible de répondre en ligne, merci de bien vouloir prendre contact avec notre service d'assistance dont les coordonnées figurent dans l’en-tête de cette lettre.#else <fo:inline font-weight="bold">de répondre à cette enquête par internet selon les modalités précisées au verso de cette lettre ou de compléter le questionnaire joint.</fo:inline> #end</fo:block>
+                            <fo:block margin-top="3mm">#if(${BddQuestionnaire}==0) Ce dernier se tient également#else Notre service d'assistance se tient#end à votre disposition pour répondre à vos questions en cas de besoin.</fo:block>
+                            <fo:block margin-top="3mm">Des renseignements relatifs à l'enquête et à son calendrier sont disponibles sur le site internet du Cnis : ${BddURLCnis}. #if($!{BddURLDiffusion})Les résultats de cette enquête seront disponibles sur le site de l'Insee à l'adresse suivante : $!{BddURLDiffusion}.#end</fo:block>
+                            <fo:block margin-top="3mm">En vous remerciant par avance de
+                                votre collaboration, je vous prie de bien vouloir agréer,
+                                Madame, Monsieur, l'assurance de ma considération
+                                distinguée.</fo:block>
+                            <fo:block margin-top="3mm" text-align="right">${BddServiceProducteurSignataireFonction}</fo:block>
+                            <fo:block text-align="right">${BddServiceProducteurSignataireNom}</fo:block>
+                            <fo:block margin-top="10mm">(*) Loi n°51-711 du 7 juin 1951 modifiée. Décret n° 2009-318 du 20 mars 2009.</fo:block>
+                        </fo:inline-container>
+                    </fo:block>
+                </fo:block-container>
+                <fo:block-container absolute-position="absolute" left="15mm" top="250mm"
+                    width="180mm" height="30mm" overflow="hidden" font-family="Liberation Sans"
+                    font-size="7pt">
+                    <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
+                        <fo:inline-container margin-top="0.5mm" margin-left="1mm">
+                            <fo:block>Vu l'avis favorable du Conseil national de l'information
+                                statistique, cette enquête#if(${BddCaractereObligatoire}=='oui')
+                                reconnue d'${BddStatutEnquete}, est obligatoire#else est reconnue
+                                d'${BddStatutEnquete} sans avoir de caractère
+                                obligatoire#end.</fo:block>
+                            <fo:block>Visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable
+                                pour l’année ${BddAnneeCollecte}.</fo:block>
+                            <fo:block>Aux termes de l'article 6 de la loi n° 51-711 du 7 juin 1951
+                                modifiée sur l'obligation, la coordination et le secret en matière
+                                de statistiques, les renseignements transmis en réponse au présent
+                                questionnaire ne sauraient en aucun cas être utilisés à des fins de
+                                contrôle fiscal ou de répression économique. </fo:block>
+                            <fo:block>Questionnaire confidentiel destiné à
+                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}. Le 
+                                règlement 2016/679 du 27 avril 2016 relatif à la protection des 
+                                personnes physiques à l'égard du traitement des données à caractère 
+                                personnel et à la libre circulation de ces données (règlement 
+                                général sur la protection des données, RGPD) ainsi que la loi n° 
+                                78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux
+                                fichiers et aux libertés, s'appliquent aux réponses faites à la
+                                présente enquête par les entreprises individuelles. Elle leur
+                                garantit un droit d'accès et de rectification pour les données les
+                                concernant. Ce droit peut être exercé auprès de
+                                ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
+                        </fo:inline-container>
+                    </fo:block>
+                </fo:block-container>
+            </fo:block>
+            <fo:block page-break-after="always">
+                <fo:block/>
+                <fo:block-container absolute-position="absolute" left="30mm" top="33mm"
+                    width="150mm" height="190mm" overflow="hidden" font-family="Liberation Sans"
+                    font-size="9pt" text-align="justify" border="black solid 0.5pt">
+                    <fo:block border="black solid 0.5pt">
+                        <fo:inline-container>
+                            <fo:block text-align="center" font-weight="bold" font-size="10pt"
+                                margin-top="7mm" margin-left="7mm" margin-right="7mm">Comment
+                                répondre à l'enquête par internet ?</fo:block>
+                        </fo:inline-container>
+                        <fo:block-container absolute-position="absolute" left="7mm" top="17mm"
+                            width="133mm" height="250mm" overflow="hidden">
+                            <fo:block>
+                                <fo:inline-container>
+                                    <fo:block>Pour répondre à l'enquête
+                                        statistique#if((${BddFrequence}!='annuelle')
+                                        and (${BddFrequence}!='pluriannuelle'))
+                                        ${BddFrequence}#end ${BddLibelleLong}, il convient de
+                                        vous connecter sur le site sécurisé de réponse aux enquêtes
+                                        entreprises de la Statistique publique : http://<fo:inline
+                                            font-size="0.1pt"
+                                            >&#160;</fo:inline>entreprises.stat-<fo:inline
+                                                font-size="0.1pt">&#160;</fo:inline>publique.fr/. Cette
+                                        adresse est à inscrire dans la barre de navigation de votre
+                                        navigateur.</fo:block>
+                                </fo:inline-container>
+                            </fo:block>
+                            <fo:block>
+                                <fo:inline-container>
+                                    <fo:block>Il vous suffit ensuite de vous authentifier à l’aide
+                                        de vos éléments de connexion.</fo:block>
+                                </fo:inline-container>
+                                <fo:inline-container>
+                                    <fo:block>Lors de la saisie de vos éléments de connexion, merci
+                                        de faire attention à bien respecter les minuscules et
+                                        majuscules.</fo:block>
+                                </fo:inline-container>
+                                <fo:inline-container>
+                                    <fo:block margin-top="2mm" font-weight="bold">Votre identifiant
+                                        de connexion ${BddIdentifiantContact} reste
+                                        inchangé.</fo:block>
+                                </fo:inline-container>
+                                <fo:inline-container>
+                                    <fo:block margin-top="2mm">Le mot de passe précédemment
+                                        communiqué par voie postale étant à usage unique, si vous
+                                        vous êtes déjà authentifié sur le site de réponse à
+                                        l'enquête, vous avez dû le changer lors de votre première
+                                        connexion. </fo:block>
+                                </fo:inline-container>
+                            </fo:block>
+                            <fo:block>
+                                <fo:inline-container>
+                                    <fo:block>En cas de perte ou d'oubli de votre mot de passe, vous
+                                        pouvez demander son renouvellement en ligne sur le site de
+                                        réponse aux enquêtes entreprises de la Statistique publique
+                                        (rubrique « Mot de passe oublié » du site
+                                        http://entreprises.stat-publique.fr/ ).</fo:block>
+                                </fo:inline-container>
+                                <fo:inline-container>
+                                    <fo:block>En cas de trop nombreuses tentatives
+                                        d’authentification, votre compte peut être momentanément
+                                        bloqué, pour des raisons de sécurité. Dans ce cas, avant de
+                                        vous authentifier à nouveau, veuillez patienter quelques
+                                        minutes au terme desquelles le compte sera automatiquement
+                                        débloqué.</fo:block>
+                                </fo:inline-container>
+                                <fo:inline-container>
+                                    <fo:block>Une fois authentifié, vous pourrez remplir votre
+                                        questionnaire en toute sécurité dans un environnement
+                                        protégé.</fo:block>
+                                </fo:inline-container>
+                                <fo:inline-container>
+                                    <fo:block>Pour toutes questions techniques (accès au site de
+                                        réponse en ligne, éléments de connexion, affichage du
+                                        questionnaire, etc.), vous pouvez contacter notre service
+                                        d'assistance technique à l'aide du formulaire disponible
+                                        dans la rubrique « Contacter l'assistance » sur le site de
+                                        réponse aux enquêtes entreprises de la Statistique
+                                        publique.</fo:block>
+                                </fo:inline-container>
+                            </fo:block>
+                        </fo:block-container>
+                    </fo:block>
+                </fo:block-container>
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

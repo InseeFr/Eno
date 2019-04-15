@@ -131,7 +131,10 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF =  OUPUTS_FOLDER + "/publipostage.xsl";
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2 =  OUPUTS_FOLDER_2 + "/mailing-vtl.xsl";
 	public static final String TRANSFORMATIONS_SPECIF_TREATMENT_FO_4PDF =  "/pdf-specific-treatment.xsl";
-	public static final String TRANSFORMATIONS_GENERIC_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-generic-pages.xsl";
+	public static final String TRANSFORMATIONS_ACCOMPANYING_MAILS_FO_4PDF =  OUPUTS_FOLDER_2 + "/accompanying-mails.xsl";
+	public static final String TRANSFORMATIONS_COVER_PAGE_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-cover-page.xsl";
+	public static final String TRANSFORMATIONS_END_QUESTION_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-end-questions.xsl";
+	public static final String TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/edit-structure-page.xsl";
 	public static final String STATIC_PAGES = OUPUTS_FOLDER_2 +"/static-pages.fo";
 	public static final String TRANSFORMATIONS_POST_PROCESSING_JS = OUPUTS_FOLDER_JS + "/sort-components.xsl";
 	// ---------- Temporary file system
@@ -223,6 +226,7 @@ public final class Constants {
 		return Paths.get(path).toFile();
 	}
 	
+	@SuppressWarnings("finally")
 	public static File getFileFromUrl(URL url) {
 		File file = null;
 	    try {
@@ -286,12 +290,18 @@ public final class Constants {
 	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
 	
-	public static final String SPECIFIC_TREAT_PDF_EXTENSION = "-2-specific-form.fo";
-	public static final String TABLE_COL_SIZE_PDF_EXTENSION = "-3-temp.fo";
+
+	public static final String ACCOMPANYING_MAILS_FO_EXTENSION = "-accompanying-mails.fo";
+	public static final String COVER_PAGE_FO_EXTENSION = "-cover-page.fo";
+	public static final String EDIT_STRUCTURE_FO_EXTENSION = "-edit-structure.fo";
+	public static final String END_QUESTION_FO_EXTENSION = "-end-question.fo";
+	public static final String SPECIFIC_TREAT_PDF_EXTENSION = "-specific-form.fo";
+	public static final String TABLE_COL_SIZE_PDF_EXTENSION = "-temp.fo";
 	public static final String FINAL_PDF_EXTENSION = "-final-out.fo";
 	//public static final String CUSTOM_FO_EXTENSION = "-out.fo";
-	public static final String MAILING_FO_EXTENSION = "-1-mailing-vtl.fo";
+	public static final String MAILING_FO_EXTENSION = "-mailing-vtl.fo";
 	public static final String POST_PROCESSING_JS_EXTENSION = "-final.xml";
+	
 	//public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
 		public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
 			return sUB_TEMP_FOLDER + "/xforms";

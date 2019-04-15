@@ -12,10 +12,24 @@
 		<!-- Orientation : portrait= 0 ou paysage =90 -->
 		<Orientation>0</Orientation>
 	</Format>
-	<HomePage>
-		<Folder>xslt/util/pdf</Folder>
-		<File>static-pages.fo</File>
-	</HomePage>
+	
+	<!-- default /household / business -->
+	<StudyUnit>default</StudyUnit>
+	<!-- Modèle de première page -->
+	<FirstPage>
+		<Folder>xslt/util/pdf/page-first</Folder>
+	</FirstPage>
+	<AccompanyingMails>
+		<Folder>xslt/util/pdf/accompanying-mails</Folder>
+	</AccompanyingMails>
+	<EndQuestion>
+		<Folder>xslt/util/pdf/end-question</Folder>
+		<ResponseTimeQuestion>true</ResponseTimeQuestion>
+		<CommentQuestion>true</CommentQuestion>
+	</EndQuestion>
+	<PageModel>
+		<Folder>xslt/util/pdf/page-model</Folder>
+	</PageModel>
 	<Style>
 		<Folder>styles</Folder>
 		<File>style.xsl</File>

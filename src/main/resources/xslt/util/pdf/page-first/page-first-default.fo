@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <!--
+            Définition de la page et de ses marges de page.
+            marges de 5mm autour, blanches.
+            Le body est interne à ces marges et mesure donc 200 par 287.
+            A l'intérieur du body se trouve les zones before/after (en haut en bas) et start/end (à gauche/a droite)
+            qui peuvent faire 1cm de large. Ces zones vont recueillir les numéros de page, encoches des bords, 
+            et code barres.
+            L'emplacement d'une zone fixe la position du coin haut gauche de la zone, et sa taille.
+            La position peut être définie par rapport au haut ou bas de la zone concernée et gauche ou droite.
+                     
+            Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée 
+            et non par rapport au 0,0 de la page.
+            
+            -->
+        
+        <fo:simple-page-master master-name="page-first-default" 
+            page-height="297mm" page-width="210mm" reference-orientation="0"
+            font-family="Liberation Sans" font-size="10pt" font-weight="normal"
+            margin-bottom="5mm" margin-top="5mm" margin-right="5mm" margin-left="5mm">
+            <fo:region-body region-name="region-body-first-default" margin-top="286mm" margin-bottom="11mm"  
+                margin-right="11mm"  margin-left="11mm" column-count="1"/>
+            <fo:region-before region-name="region-before-first-default" extent="281mm"
+                display-align="before" precedence="true" />
+            <fo:region-after region-name="region-after-first-default" extent="10mm"
+                display-align="before" precedence="true" />
+            <fo:region-start region-name="region-start-first-default" extent="10mm"
+                display-align="before" />
+            <fo:region-end region-name="region-end-first-default" extent="10mm" display-align="before"
+                 />
+        </fo:simple-page-master>
+
+    </fo:layout-master-set>
+
+
+    <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="page-first-default">
+        
+        <fo:static-content flow-name="region-before-first-default">
+            
+      
+                
+         
+            
+                      
+            <fo:block-container absolute-position="absolute" left="25mm" top="33mm"
+                width="150mm" height="7mm">
+                <fo:block id="survey-name" font-family="Liberation Sans" font-size="16pt" font-weight="bold" text-align="center"> 
+                    Possible de personnaliser avec le titre du questionnaire ? le libellé comme dans la génération odt ?
+                </fo:block>
+            </fo:block-container>
+           
+       
+            
+                        
+            <fo:block-container absolute-position="absolute" left="15mm" top="115mm"
+                width="170mm" height="30mm" font-family="Liberation Sans" font-size="10pt" >
+                <fo:block margin="20mm"
+                     >
+                    Cette page peut être surchargée par une page standardisée, comportant l'identification de l'enquêté, 
+                    l'adresse de retour du questionnaire, un encadré légal CNIS, un espace libre de commentaire etc...
+                                   </fo:block>
+                                        </fo:block-container>
+        </fo:static-content>
+
+        <fo:static-content flow-name="region-after-first-default">
+            
+                   <fo:block text-align="center">
+                    
+                </fo:block>
+            
+                      
+           
+        </fo:static-content>
+        
+        
+        <fo:static-content flow-name="region-end-first-default">
+            <fo:block text-align="center">
+                
+            </fo:block>
+            
+         </fo:static-content>
+        
+
+        
+        <fo:flow flow-name="region-body-first-default">
+                  
+            <fo:block page-break-inside="avoid"> 
+                  
+            
+            </fo:block>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

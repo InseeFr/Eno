@@ -7,58 +7,116 @@
          xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
          xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
          xmlns:fo="http://www.w3.org/1999/XSL/Format"
-         xmlns:fox="http://xmlgraphics.apache.org/fop/extensions">
+         xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
+         xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions">
    <fo:layout-master-set>
-      <fo:simple-page-master master-name="Cover-A4"
+      <fo:simple-page-master master-name="page-first-default"
+                             page-height="297mm"
+                             page-width="210mm"
+                             reference-orientation="0"
                              font-family="Liberation Sans"
                              font-size="10pt"
                              font-weight="normal"
                              margin-bottom="5mm"
-                             page-height="297mm"
-                             page-width="210mm">
-         <fo:region-body column-count="1" margin="0mm"/>
-         <fo:region-before display-align="before"
-                           extent="100mm"
-                           precedence="true"
-                           region-name="xsl-region-before-cover"/>
-         <fo:region-after display-align="before"
-                          extent="100mm"
-                          precedence="true"
-                          region-name="xsl-region-after-cover"/>
+                             margin-top="5mm"
+                             margin-right="5mm"
+                             margin-left="5mm">
+         <fo:region-body region-name="region-body-first-default"
+                         margin-top="286mm"
+                         margin-bottom="11mm"
+                         margin-right="11mm"
+                         margin-left="11mm"
+                         column-count="1"/>
+         <fo:region-before region-name="region-before-first-default"
+                           extent="281mm"
+                           display-align="before"
+                           precedence="true"/>
+         <fo:region-after region-name="region-after-first-default"
+                          extent="10mm"
+                          display-align="before"
+                          precedence="true"/>
+         <fo:region-start region-name="region-start-first-default"
+                          extent="10mm"
+                          display-align="before"/>
+         <fo:region-end region-name="region-end-first-default"
+                        extent="10mm"
+                        display-align="before"/>
       </fo:simple-page-master>
-      <fo:simple-page-master master-name="A4-portrait-odd"
+      <!--
+            Définition de la page et de ses marges de page.
+            marges de 5mm autour, blanches.
+            Le body est interne à ces marges et mesure donc 200 par 287.
+            A l'intérieur du body se trouve les zones before/after (en haut en bas) et start/end (à gauche/a droite)
+            qui peuvent faire 1cm de large. Ces zones vont recueillir les numéros de page, encoches des bords, 
+            et code barres.
+            L'emplacement d'une zone fixe la position du coin haut gauche de la zone, et sa taille.
+            La position peut être définie par rapport au hautou bas de la zone concernée et gauche ou droite.
+                     
+            Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée.
+            
+            -->
+      <fo:simple-page-master master-name="page-even-default"
                              page-height="297mm"
                              page-width="210mm"
+                             reference-orientation="0"
                              font-family="Liberation Sans"
                              font-size="10pt"
                              font-weight="normal"
-                             margin-bottom="5mm">
-         <fo:region-body margin="13mm" column-count="1"/>
-         <fo:region-before region-name="portrait-region-before"
-                           extent="25mm"
+                             margin-bottom="5mm"
+                             margin-top="5mm"
+                             margin-right="5mm"
+                             margin-left="5mm">
+         <fo:region-body margin-top="11mm"
+                         margin-bottom="11mm"
+                         margin-right="11mm"
+                         margin-left="11mm"
+                         column-count="1"/>
+         <fo:region-before region-name="region-before-even-default"
+                           extent="10mm"
                            display-align="before"
                            precedence="true"/>
-         <fo:region-after region-name="portrait-region-after"
-                          extent="25mm"
+         <fo:region-after region-name="region-after-even-default"
+                          extent="10mm"
                           display-align="before"
                           precedence="true"/>
+         <fo:region-start region-name="region-start-even-default"
+                          extent="10mm"
+                          display-align="before"/>
+         <fo:region-end region-name="region-end-even-default"
+                        extent="10mm"
+                        display-align="before"/>
       </fo:simple-page-master>
-      <fo:simple-page-master master-name="A4-portrait-even"
+      <fo:simple-page-master master-name="page-odd-default"
                              page-height="297mm"
                              page-width="210mm"
+                             reference-orientation="0"
                              font-family="Liberation Sans"
                              font-size="10pt"
                              font-weight="normal"
-                             margin-bottom="5mm">
-         <fo:region-body margin="13mm" column-count="1"/>
-         <fo:region-before region-name="portrait-region-before"
-                           extent="25mm"
+                             margin-bottom="5mm"
+                             margin-top="5mm"
+                             margin-right="5mm"
+                             margin-left="5mm">
+         <fo:region-body margin-top="11mm"
+                         margin-bottom="11mm"
+                         margin-right="11mm"
+                         margin-left="11mm"
+                         column-count="1"
+                         background-color="white"/>
+         <fo:region-before region-name="region-before-odd-default"
+                           extent="10mm"
                            display-align="before"
                            precedence="true"/>
-         <fo:region-after region-name="portrait-region-after"
-                          extent="25mm"
+         <fo:region-after region-name="region-after-odd-default"
+                          extent="10mm"
                           display-align="before"
                           precedence="true"/>
+         <fo:region-start region-name="region-start-odd-default"
+                          extent="10mm"
+                          display-align="before"/>
+         <fo:region-end region-name="region-end-odd-default"
+                        extent="10mm"
+                        display-align="before"/>
       </fo:simple-page-master>
       <fo:simple-page-master master-name="A4-empty"
                              page-height="297mm"
@@ -71,14 +129,14 @@
       </fo:simple-page-master>
       <fo:page-sequence-master master-name="A4">
          <fo:repeatable-page-master-alternatives>
-            <fo:conditional-page-master-reference master-reference="A4-portrait-odd" odd-or-even="odd"/>
-            <fo:conditional-page-master-reference master-reference="A4-portrait-even"
+            <fo:conditional-page-master-reference master-reference="page-odd-default" odd-or-even="odd"/>
+            <fo:conditional-page-master-reference master-reference="page-even-default"
                                                   odd-or-even="even"
                                                   page-position="first"/>
-            <fo:conditional-page-master-reference master-reference="A4-portrait-even"
+            <fo:conditional-page-master-reference master-reference="page-even-default"
                                                   odd-or-even="even"
                                                   page-position="rest"/>
-            <fo:conditional-page-master-reference master-reference="A4-portrait-even"
+            <fo:conditional-page-master-reference master-reference="page-even-default"
                                                   odd-or-even="even"
                                                   page-position="last"
                                                   blank-or-not-blank="not-blank"/>
@@ -91,261 +149,64 @@
    </fo:layout-master-set>
    <fo:page-sequence font-family="Liberation Sans"
                      font-size="10pt"
-                     master-reference="Cover-A4">
-      <fo:flow flow-name="xsl-region-body">
-         <fo:block page-break-inside="avoid">
-            <fo:block-container absolute-position="absolute"
-                                top="15mm"
-                                left="15mm"
-                                width="50mm"
-                                height="20mm">
-               <fo:block>
-                  <fo:external-graphic src="logo_INSEE.png"
-                                       width="100%"
-                                       height="100%"
-                                       content-height="scale-to-fit"
-                                       content-width="scale-to-fit"
-                                       scaling="uniform"/>
-               </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                top="15mm"
-                                left="85.3mm"
-                                width="32mm"
-                                height="18.7mm">
-               <fo:block>
-                  <fo:external-graphic src="marianne.png"
-                                       width="100%"
-                                       height="100%"
-                                       content-height="scale-to-fit"
-                                       content-width="scale-to-fit"
-                                       scaling="uniform"/>
-               </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                top="15mm"
-                                right="15mm"
-                                width="11.1mm"
-                                height="19.9mm">
-               <fo:block>
-                  <fo:external-graphic src="statPub.png"
-                                       width="100%"
-                                       height="100%"
-                                       content-height="scale-to-fit"
-                                       content-width="scale-to-fit"
-                                       scaling="uniform"/>
-               </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="50mm"
-                                width="75mm"
-                                height="25mm"
-                                overflow="hidden">
-               <fo:block margin-top="3mm" margin-left="1mm">
-                  <fo:inline-container>
-                     <fo:block font-weight="bold">Unité enquêtée</fo:block>
-                     <fo:block>Identifiant : ${BddIdentifiantUniteEnquetee}</fo:block>
-                     <fo:block>Raison sociale : ${BddRaisonSociale}</fo:block>
-                  </fo:inline-container>
-               </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="80mm"
-                                width="75mm"
-                                height="60mm"
-                                overflow="hidden">
-               <fo:block margin-top="3mm" margin-left="1mm">
-                  <fo:inline-container>
-                     <fo:block font-weight="bold">Coordonnées de la personne
-                                répondant</fo:block>
-                     <fo:block font-weight="bold">à ce questionnaire :</fo:block>
-                     <fo:block>Nom : $!{BddNom} $!{BddPrenom}</fo:block>
-                     <fo:block>Téléphone : $!{BddTelContact}</fo:block>
-                     <fo:block>Courriel : $!{BddMailContact}</fo:block>
-                     <fo:block font-weight="bold" margin-top="3mm">Si vous n'êtes pas cette personne, </fo:block>
-                     <fo:block font-weight="bold">merci de compléter vos coordonnées :</fo:block>
-                     <fo:block>Nom : ....................</fo:block>
-                     <fo:block>Prénom : ....................</fo:block>
-                     <fo:block>Fonction : ....................</fo:block>
-                     <fo:block>Tél : <fo:external-graphic src="mask_number.png"/>
-                        <fo:external-graphic src="mask_number.png"/>
-                        <fo:external-graphic src="mask_number.png"/>
-                        <fo:external-graphic src="mask_number.png"/>
-                        <fo:external-graphic src="mask_number.png"/>
-                        <fo:external-graphic src="mask_number.png"/>
-                        <fo:external-graphic src="mask_number.png"/>
-                        <fo:external-graphic src="mask_number.png"/>
-                        <fo:external-graphic src="mask_number.png"/>
-                        <fo:external-graphic src="mask_number.png"/>
-                     </fo:block>
-                     <fo:block>Courriel : ....................</fo:block>
-                  </fo:inline-container>
-               </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                left="105mm"
-                                top="50mm"
-                                width="80mm"
-                                height="50mm"
-                                background-color="#EEE"
-                                padding="3mm">
-               <fo:block font-weight="bold"
-                         font-size="16pt"
-                         text-align="center"
-                         margin-top="10mm">${BddLibelleLong}#if((${BddFrequence}!='annuelle') and
-                    (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end
-                    ${BddAnneeReference}</fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                left="120mm"
-                                top="110mm"
-                                width="75mm"
-                                height="30mm"
-                                overflow="hidden">
-               <fo:block margin-top="3mm" margin-left="1mm">
-                  <fo:inline-container>
-                     <fo:block font-weight="bold">Pour nous contacter :</fo:block>
-                     <fo:block>
-                        <fo:inline>Courriel</fo:inline> :
-                                #if($!{InitGestionnairesAdresseMessagerie})$!{InitGestionnairesAdresseMessagerie}#else${BddServiceCollecteurAdresseMessagerie}#end </fo:block>
-                     <fo:block>#if ($!{InitNumeroSVI}||$!{InitGestionnaireTel})<fo:inline>Téléphone</fo:inline> : #end #if
-                                ($!{InitNumeroSVI})09-69-32-97-47 #elseif($!{InitGestionnaireTel})
-                                $!{InitGestionnaireTel}#end </fo:block>
-                     <fo:block>#if ($!{InitNumeroSVI})<fo:inline>Code enquête</fo:inline> : $!{InitNumeroSVI} #end</fo:block>
-                  </fo:inline-container>
-               </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="145mm"
-                                width="180mm"
-                                height="25mm"
-                                padding="2mm"
-                                border="solid black 1pt">
-               <fo:block font-weight="bold">Commentaires et remarques :</fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="175mm"
-                                width="180mm"
-                                height="10mm">
-               <fo:block font-weight="bold" font-size="12pt">Votre réponse était attendue pour le ${BddDateEcheance}. Merci de nous retourner ce questionnaire dans les meilleurs délais, à l’adresse
-                        suivante :</fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                left="15mm"
-                                top="210mm"
-                                width="80mm"
-                                height="65mm"
-                                padding="2mm"
-                                padding-top="10mm"
-                                border="solid black 0.5pt"
-                                text-align="justify">
-               <fo:block font-size="7pt">Vu l'avis favorable du Conseil national de
-                        l'information statistique, cette enquête
-                        #if(${BddCaractereObligatoire}=='oui') reconnue d'${BddStatutEnquete}, est
-                        obligatoire#else est reconnue d'${BddStatutEnquete} sans avoir de caractère
-                        obligatoire#end.</fo:block>
-               <fo:block font-size="7pt">Visa n°${BddNumeroVisa} du ${BddMinistereTutelle},
-                        valable pour l’année ${BddAnneeCollecte}.</fo:block>
-               <fo:block font-size="7pt">Aux termes de l'article 6 de la loi n° 51-711 du 7
-                        juin 1951 modifiée sur l'obligation, la coordination et le secret en matière
-                        de statistiques, les renseignements transmis en réponse au présent
-                        questionnaire ne sauraient en aucun cas être utilisés à des fins de contrôle
-                        fiscal ou de répression économique.</fo:block>
-               <fo:block font-size="7pt">Questionnaire confidentiel destiné à
-                        ${BddArticleServiceProducteur}${BddNomServiceProducteur}. La loi n° 78-17 du
-                        6 janvier 1978 modifiée, relative à l'informatique, aux fichiers et aux
-                        libertés, s'applique aux réponses faites à la présente enquête par les
-                        entreprises individuelles. Elle leur garantit un droit d'accès et de
-                        rectification pour les données les concernant. Ce droit peut être exercé
-                        auprès de
-                        ${BddArticleServiceProducteur}${BddNomServiceProducteur}.</fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                left="100mm"
-                                top="195mm"
-                                width="97mm"
-                                height="10mm">
-               <fo:block text-align="left">
-                  <fo:block>
-                     <fo:instream-foreign-object>
-                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                         message="Code Bar"
-                                         orientation="0">
-                           <barcode:code39>
-                              <barcode:height>10mm</barcode:height>
-                           </barcode:code39>
-                        </barcode:barcode>
-                     </fo:instream-foreign-object>
-                  </fo:block>
-               </fo:block>
-            </fo:block-container>
-            <fo:block-container absolute-position="absolute"
-                                left="105mm"
-                                top="215mm"
-                                width="107mm"
-                                height="40mm"
-                                overflow="hidden">
-               <fo:block margin="3mm">
-                  <fo:inline-container>
-                     <fo:block>${AdresseRetourL1}</fo:block>
-                     <fo:block>${AdresseRetourL2}</fo:block>
-                     <fo:block>${AdresseRetourL3}</fo:block>
-                     <fo:block>${AdresseRetourL4}</fo:block>
-                     <fo:block>${AdresseRetourL5}</fo:block>
-                     <fo:block>${AdresseRetourL6}</fo:block>
-                     <fo:block>${AdresseRetourL7}</fo:block>
-                  </fo:inline-container>
-               </fo:block>
-            </fo:block-container>
-         </fo:block>
+                     master-reference="page-first-default">
+      <fo:static-content flow-name="region-before-first-default">
+         <fo:block-container absolute-position="absolute"
+                             left="25mm"
+                             top="33mm"
+                             width="150mm"
+                             height="7mm">
+            <fo:block id="survey-name"
+                      font-family="Liberation Sans"
+                      font-size="16pt"
+                      font-weight="bold"
+                      text-align="center">ddi-2-fo-test</fo:block>
+         </fo:block-container>
+         <fo:block-container absolute-position="absolute"
+                             left="15mm"
+                             top="115mm"
+                             width="170mm"
+                             height="30mm"
+                             font-family="Liberation Sans"
+                             font-size="10pt">
+            <fo:block margin="20mm">
+                    Cette page peut être surchargée par une page standardisée, comportant l'identification de l'enquêté, 
+                    l'adresse de retour du questionnaire, un encadré légal CNIS, un espace libre de commentaire etc...
+                                   </fo:block>
+         </fo:block-container>
+      </fo:static-content>
+      <fo:static-content flow-name="region-after-first-default">
+         <fo:block text-align="center"/>
+      </fo:static-content>
+      <fo:static-content flow-name="region-end-first-default">
+         <fo:block text-align="center"/>
+      </fo:static-content>
+      <fo:flow flow-name="region-body-first-default">
+         <fo:block page-break-inside="avoid"/>
       </fo:flow>
    </fo:page-sequence>
-   <fo:page-sequence master-reference="A4"
-                     initial-page-number="2"
-                     force-page-count="odd">
-      <fo:static-content flow-name="portrait-region-before">
-         <fo:block position="absolute" margin="10mm" text-align="right">
-            <fo:external-graphic src="encoche-top-right.png"/>
-         </fo:block>
-         <fo:block position="absolute"
-                   margin-top="65%"
-                   text-align="right"
-                   margin-right="4mm">
-            <fo:inline>
-               <fo:instream-foreign-object>
-                  <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                                   orientation="90"
-                                   message="${idQuestionnaire}-#page-number#">
-                     <barcode:code39>
-                        <barcode:height>8mm</barcode:height>
-                        <barcode:human-readable>
-                           <barcode:placement>none</barcode:placement>
-                        </barcode:human-readable>
-                     </barcode:code39>
-                  </barcode:barcode>
-               </fo:instream-foreign-object>
-               <fo:block-container reference-orientation="90" margin-left="5mm">
-                  <fo:block text-align="left" font-size="8pt">${idQuestionnaire}-<fo:page-number/>
-                  </fo:block>
-               </fo:block-container>
-            </fo:inline>
-         </fo:block>
+   <fo:page-sequence master-reference="A4">
+      <fo:static-content flow-name="region-after-even-default">
+         <fo:block-container absolute-position="absolute"
+                             left="90mm"
+                             top="5mm"
+                             width="33mm"
+                             height="10mm">
+            <fo:block text-align="center">
+               <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+            </fo:block>
+         </fo:block-container>
       </fo:static-content>
-      <fo:static-content flow-name="portrait-region-after">
-         <fo:block position="absolute"
-                   margin-left="10mm"
-                   margin-top="10mm"
-                   bottom="0mm"
-                   text-align="left">
-            <fo:external-graphic src="encoche-bottom-left.png"/>
-         </fo:block>
-         <fo:block text-align="center">
-            <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
-         </fo:block>
+      <fo:static-content flow-name="region-after-odd-default">
+         <fo:block-container absolute-position="absolute"
+                             left="90mm"
+                             top="5mm"
+                             width="33mm"
+                             height="10mm">
+            <fo:block text-align="center">
+               <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+            </fo:block>
+         </fo:block-container>
       </fo:static-content>
       <fo:flow flow-name="xsl-region-body"
                border-collapse="collapse"
@@ -5780,62 +5641,7 @@
                <fo:block> </fo:block>
             </fo:block-container>
          </fo:block>
-         <fo:block background-color="#666666"
-                   color="white"
-                   font-weight="bold"
-                   margin-bottom="9pt"
-                   margin-top="3pt"
-                   font-size="14pt"
-                   border-color="black"
-                   border-style="solid"
-                   page-break-inside="avoid"
-                   keep-with-next="always">Temps de réponse et commentaires</fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   page-break-inside="avoid"
-                   keep-with-next="always">➡ <fo:inline font-weight="bold">Combien de temps avez-vous mis en tout pour répondre à cette enquête
-                (recherche des données + remplissage du questionnaire) ?</fo:inline>
-         </fo:block>
-         <fo:block id="HEURE_MIN_REMPL" page-break-inside="avoid">
-            <fo:inline color="black"
-                       font-size="10pt"
-                       font-weight="normal"
-                       padding="1mm">
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:inline color="black"
-                          font-size="10pt"
-                          font-weight="normal"
-                          padding="1mm">heures</fo:inline>
-            </fo:inline>
-            <fo:inline color="black"
-                       font-size="10pt"
-                       font-weight="normal"
-                       padding="1mm">
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:external-graphic src="mask_number.png"/>
-               <fo:inline color="black"
-                          font-size="10pt"
-                          font-weight="normal"
-                          padding="1mm">minutes</fo:inline>
-            </fo:inline>
-         </fo:block>
-         <fo:block color="black"
-                   font-weight="bold"
-                   font-size="10pt"
-                   margin-top="9pt"
-                   margin-bottom="3pt"
-                   page-break-inside="avoid"
-                   keep-with-next="always">➡ <fo:inline font-weight="bold">Commentaires et remarques éventuelles concernant l'enquête :</fo:inline>
-         </fo:block>
-         <fo:block id="COMMENT_QE" page-break-inside="avoid">
-            <fo:block-container height="30mm" border-color="black" border-style="solid">
-               <fo:block> </fo:block>
-            </fo:block-container>
-         </fo:block>
+         <fo:block/>
          <fo:block id="TheVeryLastPage"/>
       </fo:flow>
    </fo:page-sequence>
