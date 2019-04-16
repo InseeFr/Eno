@@ -483,8 +483,11 @@
             <xsl:value-of select="concat($beginning,' ',$minimum, ' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',$maximum, $end)"/>
         </xsl:if>
         <!-- If it is a 'date', we use a generic sentence as an alert -->
-        <xsl:if test="$type='date'">
+        <xsl:if test="$format='YYYY-MM-DD' or upper-case($format)='JJ/MM/AAAA'">
             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
+        </xsl:if>
+        <xsl:if test="$format='YYYY-MM' or upper-case($format)='MM/AAAA'">
+            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date-YYYYMM"/>
         </xsl:if>
     </xsl:function>
 

@@ -18,6 +18,7 @@
             </Decimal>
         </Number>
         <Date>Entrez une date valide</Date>
+        <Date-YYYYMM>Merci de renseigner le mois et l'année</Date-YYYYMM>
         <Duration>
             <Hours>Le nombre d'heures doit être compris entre 0 et 99.</Hours>
             <Minutes>Le nombre de minutes doit être compris entre 0 et 59.</Minutes>
@@ -46,13 +47,13 @@
         <Day>jour</Day>
     </DateTime>
     <Duration>
-        <Year>ans</Year>
+        <Year>an(s)</Year>
         <Month>mois</Month>
-        <Day>jours</Day>
-        <Hour>heures</Hour>
-        <Minute>minutes</Minute>
-        <Second>secondes</Second>
-        <Hundredth>centièmes</Hundredth>
+        <Day>jour(s)</Day>
+        <Hour>heure(s)</Hour>
+        <Minute>minute(s)</Minute>
+        <Second>seconde(s)</Second>
+        <Hundredth>centième(s)</Hundredth>
     </Duration>
     <Browsing>
         <Beginning>DEBUT</Beginning>
