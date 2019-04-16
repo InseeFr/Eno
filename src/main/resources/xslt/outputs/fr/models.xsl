@@ -1064,28 +1064,40 @@
             <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
                 <xsl:attribute name="calculate">
                     <xsl:value-of select="'if ('"/>
-                    <xsl:for-each select="$layout-list//format">
-                        <xsl:if test="position() != 1">
-                            <xsl:choose>
-                                <xsl:when test="$current-driver = 'DurationDomain'">
-                                    <xsl:value-of select="' and '"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="' or '"/>        
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:if>
-                        <xsl:value-of select="concat('../',@variable,' = '''' ')"/>
-                    </xsl:for-each>
-                    <xsl:value-of select="') then '''' else (concat( '"/>
                     <xsl:choose>
-                        <xsl:when test="$current-driver='DateTimeDomain'">
+                        <xsl:when test="upper-case($dateduration-format) = 'MM/AAAA' or $dateduration-format='YYYY-MM'">
+                            <xsl:value-of select="concat($name,'-layout-Y = ''''')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
                             <xsl:for-each select="$layout-list//format">
                                 <xsl:if test="position() != 1">
-                                    <xsl:value-of select="',''-'','"/>
+                                    <xsl:choose>
+                                        <xsl:when test="$current-driver = 'DurationDomain'">
+                                            <xsl:value-of select="' and '"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:value-of select="' or '"/>        
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:if>
-                                <xsl:value-of select="concat(' if (string-length(../',@variable,') &lt;= 1) then ''0'' else '''' ,')"/>
-                                <xsl:value-of select="concat(' ../',@variable)"/>
+                                <xsl:value-of select="concat('../',@variable,' = '''' ')"/>
+                            </xsl:for-each>                            
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:value-of select="') then '''' else (concat( '"/>
+                    <xsl:choose>
+                        <xsl:when test="$dateduration-format = 'YYYY-MM' or upper-case($dateduration-format) = 'MM/AAAA'">
+                            <xsl:value-of select="concat(' ../',$name,'-layout-Y,')"/>
+                            <xsl:value-of select="concat(' if (string-length(../',$name,'-layout-M) = 0) then '''' else if (string-length(../',$name,'-layout-M) = 1) then ''-0'' else ''-''')"/>
+                            <xsl:value-of select="concat(', ../',$name,'-layout-M')"/>
+                        </xsl:when>
+                        <xsl:when test="$current-driver='DateTimeDomain'">
+                            <xsl:for-each select="$layout-list//format">
+                                    <xsl:if test="position() != 1">
+                                        <xsl:value-of select="',''-'','"/>
+                                    </xsl:if>
+                                    <xsl:value-of select="concat(' if (string-length(../',@variable,') &lt;= 1) then ''0'' else '''' ,')"/>
+                                    <xsl:value-of select="concat(' ../',@variable)"/>
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:when test="$dateduration-format='HH:CH'">
@@ -1121,7 +1133,7 @@
         <!-- real element or layout ones -->
         <xsl:for-each select="$layout-list//format">
             <xf:bind id="{@variable}-bind" name="{@variable}" ref="{@variable}">
-                <xsl:if test="$dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">
+                <xsl:if test="$dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA'">
                     <xsl:attribute name="type" select="'xf:date'"/>
                 </xsl:if>
                 <xsl:if test="self::DurationDomain">
@@ -1181,6 +1193,11 @@
                 <xsl:if test="$current-driver = 'DurationDomain'">
                     <xsl:element name="xf:constraint">
                         <xsl:attribute name="value" select="concat('if (. castable as xs:integer) then (xs:integer(.)&lt;=',@maximum,' and xs:integer(.)&gt;=',@minimum,') else (.='''')')"/>
+                    </xsl:element>
+                </xsl:if>
+                <xsl:if test="($dateduration-format='YYYY-MM' or upper-case($dateduration-format)='MM/AAAA') and @id='Y'">
+                    <xsl:element name="xf:constraint">
+                        <xsl:attribute name="value" select="concat('if (string(.)='''') then string(../',$name,'-layout-M)='''' else (.!='''')')"/>
                     </xsl:element>
                 </xsl:if>
             </xf:bind>
@@ -1389,7 +1406,7 @@
                             <xsl:value-of select="concat(' ',@minimum, ' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',@maximum)"/>
                         </alert>
                     </xsl:when>
-                    <xsl:when test="$dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">
+                    <xsl:when test="$dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA' or $dateduration-format = 'YYYY-MM' or upper-case($dateduration-format) = 'MM/AAAA'">
                         <alert>
                             <xsl:value-of select="enofr:get-alert($source-context, $language)"/>
                         </alert>
@@ -2147,7 +2164,7 @@
         </xsl:variable>
         <xsl:variable name="input-format">
             <xsl:choose>
-                <xsl:when test="$current-driver='DurationDomain' or $dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">
+                <xsl:when test="$current-driver='DurationDomain' or $dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA'">
                     <xsl:value-of select="'xf:input'"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -2209,11 +2226,11 @@
                         </xsl:if>
                     </xf:label>
                 </xsl:if>
-                <xsl:if test="($dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA' or (($dateduration-format='YYYY-MM' or $dateduration-format='MM/AAAA') and position() = last()))
+                <xsl:if test="($dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA' or (($dateduration-format='YYYY-MM' or upper-case($dateduration-format)='MM/AAAA') and position() = last()))
                            and $question-label !=''">
                     <xf:hint ref="$form-resources/{@variable}/hint"/>
                 </xsl:if>
-                <xsl:if test="$current-driver = 'DurationDomain' or $dateduration-format = 'YYYY-MM-DD' or $dateduration-format = 'JJ/MM/AAAA'">
+                <xsl:if test="$current-driver = 'DurationDomain' or $dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA' or (($dateduration-format='YYYY-MM' or upper-case($dateduration-format)='MM/AAAA') and @id='Y')">
                     <xf:alert ref="$form-resources/{@variable}/alert">
                         <xsl:if test="enofr:get-alert-level($source-context) != ''">
                             <xsl:attribute name="level" select="enofr:get-alert-level($source-context)"/>
@@ -2298,7 +2315,7 @@
 
         <formats>
             <xsl:choose>
-                <xsl:when test="$format='YYYY-MM-DD' or $format='JJ/MM/AAAA'">
+                <xsl:when test="$format='YYYY-MM-DD' or upper-case($format)='JJ/MM/AAAA'">
                     <format id="" unit="" minimum="{$minimum}" maximum="{$maximum}" variable="{$variable-name}"/>
                 </xsl:when>
                 <xsl:when test="$format='HH:CH'">
