@@ -191,6 +191,34 @@
                         <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
                         <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
                     </r:ManagedDateTimeRepresentation>
+                    <r:ManagedDateTimeRepresentation>
+			            <r:Agency>fr.insee</r:Agency>
+			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-MMAAAA</r:ID>
+			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+			            <r:DateFieldFormat>YYYY-MM</r:DateFieldFormat>
+			            <r:DateTypeCode codeListID="INSEE-DTC-CV">gYearMonth</r:DateTypeCode>
+			        </r:ManagedDateTimeRepresentation>
+			        <r:ManagedDateTimeRepresentation>
+			            <r:Agency>fr.insee</r:Agency>
+			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-AAAA</r:ID>
+			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+			            <r:DateFieldFormat>YYYY</r:DateFieldFormat>
+			            <r:DateTypeCode codeListID="INSEE-DTC-CV">gYear</r:DateTypeCode>
+			        </r:ManagedDateTimeRepresentation>
+			        <r:ManagedDateTimeRepresentation>
+			            <r:Agency>fr.insee</r:Agency>
+			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-DUREEAAMM</r:ID>
+			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+			            <r:DateFieldFormat>PnYnM</r:DateFieldFormat>
+			            <r:DateTypeCode codeListID="INSEE-DTC-CV">duration</r:DateTypeCode>
+			        </r:ManagedDateTimeRepresentation>
+			        <r:ManagedDateTimeRepresentation>
+			            <r:Agency>fr.insee</r:Agency>
+			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-DUREEHHMM</r:ID>
+			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+			            <r:DateFieldFormat>PTnHnM</r:DateFieldFormat>
+			            <r:DateTypeCode codeListID="INSEE-DTC-CV">duration</r:DateTypeCode>
+			        </r:ManagedDateTimeRepresentation>
                 </r:ManagedRepresentationScheme>
             </g:ResourcePackage>
             <s:StudyUnit xmlns="ddi:studyunit:3_2">
@@ -1304,9 +1332,20 @@
     <xsl:template match="DateTimeDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        
+        <!-- Id definition depend on date and duration format -->   
+        <xsl:variable name="id-date-duree">
+	    	<xsl:choose>
+	        	<xsl:when test="$source-context = 'YYYY-MM' ">-MMAAAA</xsl:when>
+	        	<xsl:when test="$source-context = 'YYYY' ">-AAAA</xsl:when>
+	        	<xsl:when test="$source-context = 'PnYnM' ">-DUREEAAMM</xsl:when>
+	        	<xsl:when test="$source-context = 'PTnHnM' ">-DUREEHHMM</xsl:when>
+	        </xsl:choose>
+        </xsl:variable>
+       
         <d:DateTimeDomainReference>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duree"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
             <r:OutParameter isArray="false">
@@ -1315,7 +1354,7 @@
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:DateTimeRepresentationReference>
                     <r:Agency>fr.insee</r:Agency>
-                    <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
+                    <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duree"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
                 </r:DateTimeRepresentationReference>
