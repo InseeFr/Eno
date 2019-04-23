@@ -832,9 +832,6 @@
 						</fo:block-container>
 					</xsl:otherwise>
 				</xsl:choose>
-				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-					<xsl:with-param name="driver" select="." tunnel="yes"/>
-				</xsl:apply-templates>				
 			</xsl:when>
 			<xsl:when test="$no-border = 'no-border'">
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
