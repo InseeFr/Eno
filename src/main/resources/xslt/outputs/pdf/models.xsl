@@ -808,6 +808,9 @@
 						</fo:block-container>
 					</xsl:otherwise>
 				</xsl:choose>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>				
 			</xsl:when>
 			<xsl:when test="$no-border = 'no-border'">
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -815,11 +818,9 @@
 				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
-				<fo:list-block>
-					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-						<xsl:with-param name="driver" select="." tunnel="yes"/>
-					</xsl:apply-templates>
-				</fo:list-block>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -857,31 +858,36 @@
 				</fo:inline>
 			</xsl:when>
 			<xsl:otherwise>
-				<fo:list-item>
-					<fo:list-item-label end-indent="label-end()">
-						<fo:block text-align="right">
-							<xsl:call-template name="insert-image">
-								<xsl:with-param name="image-name" select="'check_case.png'"/>
-							</xsl:call-template>
-						</fo:block>
-					</fo:list-item-label>
-					<fo:list-item-body start-indent="body-start()">
-						<fo:block>
-							<xsl:choose>
-								<xsl:when test="$image != ''">
-									<xsl:call-template name="insert-image">
-										<xsl:with-param name="image-name" select="$image"/>
-									</xsl:call-template>
-								</xsl:when>
-							<xsl:otherwise>
-									<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-								</xsl:otherwise>
-							</xsl:choose>
+				<fo:list-block>
+					<fo:list-item>
+						<fo:list-item-label end-indent="label-end()">
+							<fo:block text-align="right">
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'check_case.png'"/>
+								</xsl:call-template>
 							</fo:block>
-					</fo:list-item-body>
-				</fo:list-item>
+						</fo:list-item-label>
+						<fo:list-item-body start-indent="body-start()">
+							<fo:block>
+								<xsl:choose>
+									<xsl:when test="$image != ''">
+										<xsl:call-template name="insert-image">
+											<xsl:with-param name="image-name" select="$image"/>
+										</xsl:call-template>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</fo:block>
+						</fo:list-item-body>
+					</fo:list-item>
+				</fo:list-block>
 			</xsl:otherwise>
 		</xsl:choose>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
 	</xsl:template>
 
 	<xsl:template name="insert-image">
