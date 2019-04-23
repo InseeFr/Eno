@@ -204,9 +204,21 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
+		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
+	<xsl:choose>
+			<xsl:when test="$other-give-details">
+				<fo:block text-indent="2em">
+					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+						<xsl:with-param name="driver" select="." tunnel="yes"/>
+					</xsl:apply-templates>					
+				</fo:block>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<xd:doc>
@@ -830,9 +842,11 @@
 				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-					<xsl:with-param name="driver" select="." tunnel="yes"/>
-				</xsl:apply-templates>
+				<fo:list-block>
+					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+						<xsl:with-param name="driver" select="." tunnel="yes"/>
+					</xsl:apply-templates>
+				</fo:list-block>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -868,39 +882,42 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</fo:inline>
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+					<xsl:with-param name="other-give-details" select="true()" tunnel="yes"/>
+				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
-				<fo:list-block>
-					<fo:list-item>
-						<fo:list-item-label end-indent="label-end()">
-							<fo:block text-align="right">
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'check_case.png'"/>
-								</xsl:call-template>
-							</fo:block>
+				<fo:list-item>
+					<fo:list-item-label end-indent="label-end()">
+						<fo:block text-align="right">
+							<xsl:call-template name="insert-image">
+								<xsl:with-param name="image-name" select="'check_case.png'"/>
+							</xsl:call-template>
+						</fo:block>
 						</fo:list-item-label>
-						<fo:list-item-body start-indent="body-start()">
-							<fo:block>
-								<xsl:choose>
-									<xsl:when test="$image != ''">
-										<xsl:call-template name="insert-image">
-											<xsl:with-param name="image-name" select="$image"/>
-										</xsl:call-template>
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-									</xsl:otherwise>
-								</xsl:choose>
-							</fo:block>
-						</fo:list-item-body>
-					</fo:list-item>
-				</fo:list-block>
+				<fo:list-item-body start-indent="body-start()">
+						<fo:block>
+							<xsl:choose>
+								<xsl:when test="$image != ''">
+									<xsl:call-template name="insert-image">
+										<xsl:with-param name="image-name" select="$image"/>
+									</xsl:call-template>
+								</xsl:when>
+							<xsl:otherwise>
+									<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</fo:block>
+						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+							<xsl:with-param name="driver" select="." tunnel="yes"/>
+							<xsl:with-param name="other-give-details" select="true()" tunnel="yes"/>
+						</xsl:apply-templates>
+					</fo:list-item-body>
+				</fo:list-item>
 			</xsl:otherwise>
 		</xsl:choose>
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
+		</xsl:template>
 
 	<xsl:template name="insert-image">
 		<xsl:param name="image-name"/>
