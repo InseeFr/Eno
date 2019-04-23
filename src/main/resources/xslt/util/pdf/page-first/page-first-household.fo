@@ -42,7 +42,7 @@
 
             <fo:block-container absolute-position="absolute" left="0mm" top="0mm" width="5mm"
                 height="5mm">
-                <fo:block position="absolute" text-align="left" text-altitude="top">
+                <fo:block position="absolute" text-align="left">
                     <fo:external-graphic src="encoche-square.png"/>
                 </fo:block>
             </fo:block-container>

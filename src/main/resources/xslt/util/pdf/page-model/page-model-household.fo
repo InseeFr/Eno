@@ -72,7 +72,7 @@
         
     </fo:layout-master-set>
     
-    <fo:page-sequence master-reference="A4">
+    <fo:page-sequence master-reference="A4" initial-page-number="2" force-page-count="odd">
         
         <fo:static-content flow-name="region-before-odd-household">
             
