@@ -752,22 +752,34 @@
 									</xsl:call-template>									
 								</xsl:when>
 								<xsl:when test="$current-character = 'Y' or $current-character = 'A'">
-									<fo:inline padding-start="1mm" padding-end="3mm">ans</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Year"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'D' or $current-character = 'J'">
-									<fo:inline padding-start="1mm" padding-end="3mm">jours</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Day"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'H'">
-									<fo:inline padding-start="1mm" padding-end="3mm">heures</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Hour"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'S'">
-									<fo:inline padding-start="1mm" padding-end="3mm">secondes</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Second"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'M' and not(contains(substring($field,1,position()),'T'))">
-									<fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Month"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'M' and contains(substring($field,1,position()),'T')">
-									<fo:inline padding-start="1mm" padding-end="3mm">minutes</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Minute"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:otherwise>
 									<fo:inline padding-start="1mm" padding-end="3mm">unité de temps inconnue</fo:inline>
