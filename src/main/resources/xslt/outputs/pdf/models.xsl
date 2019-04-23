@@ -145,7 +145,7 @@
 						<xsl:with-param name="driver" select="eno:append-empty-element('main', .)" tunnel="yes"/>
 						<xsl:with-param name="languages" select="$languages" tunnel="yes"/>
 					</xsl:apply-templates>
-					<fo:block id="TheVeryLastPage"/> 
+					<fo:block id="TheVeryLastPage"/>
 				</fo:flow>
 			</fo:page-sequence>
 		</fo:root>
@@ -882,7 +882,7 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</fo:inline>
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 					<xsl:with-param name="other-give-details" select="true()" tunnel="yes"/>
 				</xsl:apply-templates>
@@ -895,8 +895,8 @@
 								<xsl:with-param name="image-name" select="'check_case.png'"/>
 							</xsl:call-template>
 						</fo:block>
-						</fo:list-item-label>
-				<fo:list-item-body start-indent="body-start()">
+					</fo:list-item-label>
+					<fo:list-item-body start-indent="body-start()">
 						<fo:block>
 							<xsl:choose>
 								<xsl:when test="$image != ''">
