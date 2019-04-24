@@ -9,10 +9,6 @@
 	xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
 	exclude-result-prefixes="xs fn xd eno enojs" version="2.0">
 	
-	
-	
-	<xsl:import href="../../../styles/style.xsl"/>
-	
 	<xsl:param name="properties-file"/>
 	<xsl:param name="parameters-file"/>
 	<xsl:param name="parameters-node" as="node()" required="no">
@@ -778,9 +774,9 @@
 							<xsl:with-param name="variables" select="$variablesId"/>
 						</xsl:call-template>
 					</xsl:variable>
-					<!-- replace "not -> "!", " and " -> "&&", " or " -> "||"-->
-					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace($relevant-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || ')"/>
-					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace($readonly-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || ')"/>
+					<!-- replace "not -> "!", " and " -> "&&", " or " -> "||", "=" -> "==" -->
+					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
+					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
 					
 					<!--<xsl:value-of select="concat('(',$variablesName,') =>', $readonly-condition,'toto',$relevant-condition,' ? ''normal'' : ''''')"/>-->
 					<!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
@@ -813,7 +809,7 @@
 							<xsl:with-param name="variables" select="$variablesId"/>
 						</xsl:call-template>
 					</xsl:variable>
-					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace($relevant-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || ')"/>
+					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
 					
 					<xsl:value-of select="concat($if,'(', $returned-relevant-condition,')normal',$else,'hidden',$ifEnd)"/>
 					
@@ -835,7 +831,7 @@
 							<xsl:with-param name="variables" select="$variablesId"/>
 						</xsl:call-template>
 					</xsl:variable>
-					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace($readonly-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || ')"/>
+					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
 					<xsl:value-of select="concat($if,'(',$returned-readonly-condition,')normal',$else,'readonly',$ifEnd)"/>
 					<!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
 				</xsl:when>

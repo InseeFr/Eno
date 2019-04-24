@@ -185,7 +185,9 @@
          <fo:block page-break-inside="avoid"/>
       </fo:flow>
    </fo:page-sequence>
-   <fo:page-sequence master-reference="A4">
+   <fo:page-sequence master-reference="A4"
+                     initial-page-number="2"
+                     force-page-count="odd">
       <fo:static-content flow-name="region-after-even-default">
          <fo:block-container absolute-position="absolute"
                              left="90mm"
