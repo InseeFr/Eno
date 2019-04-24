@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xml:lang="fr">
+    <Duration>
+        <Year>an(s)</Year>
+        <Month>mois</Month>
+        <Day>jour(s)</Day>
+        <Hour>heure(s)</Hour>
+        <Minute>minute(s)</Minute>
+        <Second>seconde(s)</Second>
+        <Hundredth>centième(s)</Hundredth>
+    </Duration>
+</Language>

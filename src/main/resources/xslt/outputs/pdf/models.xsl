@@ -145,7 +145,7 @@
 						<xsl:with-param name="driver" select="eno:append-empty-element('main', .)" tunnel="yes"/>
 						<xsl:with-param name="languages" select="$languages" tunnel="yes"/>
 					</xsl:apply-templates>
-					<fo:block id="TheVeryLastPage"/> 
+					<fo:block id="TheVeryLastPage"/>
 				</fo:flow>
 			</fo:page-sequence>
 		</fo:root>
@@ -204,9 +204,21 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
+		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
+	<xsl:choose>
+			<xsl:when test="$other-give-details">
+				<fo:block text-indent="2em">
+					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+						<xsl:with-param name="driver" select="." tunnel="yes"/>
+					</xsl:apply-templates>					
+				</fo:block>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+				</xsl:apply-templates>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<xd:doc>
@@ -752,22 +764,34 @@
 									</xsl:call-template>									
 								</xsl:when>
 								<xsl:when test="$current-character = 'Y' or $current-character = 'A'">
-									<fo:inline padding-start="1mm" padding-end="3mm">ans</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Year"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'D' or $current-character = 'J'">
-									<fo:inline padding-start="1mm" padding-end="3mm">jours</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Day"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'H'">
-									<fo:inline padding-start="1mm" padding-end="3mm">heures</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Hour"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'S'">
-									<fo:inline padding-start="1mm" padding-end="3mm">secondes</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Second"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'M' and not(contains(substring($field,1,position()),'T'))">
-									<fo:inline padding-start="1mm" padding-end="3mm">mois</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Month"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:when test="$current-character = 'M' and contains(substring($field,1,position()),'T')">
-									<fo:inline padding-start="1mm" padding-end="3mm">minutes</fo:inline>
+									<fo:inline padding-start="1mm" padding-end="3mm">
+										<xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/Minute"/>
+									</fo:inline>
 								</xsl:when>
 								<xsl:otherwise>
 									<fo:inline padding-start="1mm" padding-end="3mm">unité de temps inconnue</fo:inline>
@@ -855,6 +879,10 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</fo:inline>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+					<xsl:with-param name="other-give-details" select="true()" tunnel="yes"/>
+				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:list-item>
@@ -877,12 +905,16 @@
 									<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 								</xsl:otherwise>
 							</xsl:choose>
-							</fo:block>
+						</fo:block>
+						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+							<xsl:with-param name="driver" select="." tunnel="yes"/>
+							<xsl:with-param name="other-give-details" select="true()" tunnel="yes"/>
+						</xsl:apply-templates>
 					</fo:list-item-body>
 				</fo:list-item>
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:template>
+		</xsl:template>
 
 	<xsl:template name="insert-image">
 		<xsl:param name="image-name"/>

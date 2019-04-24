@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Language xml:lang="en">
+    <Duration>
+        <Year>years</Year>
+        <Month>months</Month>
+        <Day>days</Day>
+        <Hour>hours</Hour>
+        <Minute>minutes</Minute>
+        <Second>seconds</Second>
+        <Hundredth>hundredths</Hundredth>
+    </Duration>
+</Language>

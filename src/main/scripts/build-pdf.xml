@@ -76,6 +76,8 @@
 			out="${root-folder}/target/${survey-name}/${form-name}/form/cover-page-form.${out-extension}"
 			style="${xslt.home}/util/pdf/insert-cover-page.xsl" force="true"			
 			classpath="${saxon.jar}">
+			<param name="survey-name" expression="${survey-name}"/>
+			<param name="form-name" expression="${form-name}"/>
 			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
 			<param name="parameters-file" expression="${root-folder}/questionnaires/${survey-name}/parameters.xml"/>
 		</xslt>
