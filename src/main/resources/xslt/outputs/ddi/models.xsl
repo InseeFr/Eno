@@ -979,7 +979,16 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-reference-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject><xsl:value-of select="enoddi32:get-reference-element-name($source-context)"/></r:TypeOfObject>
+            
+            <!-- Test by node name allows to generate Sequence unstead of Child type -->
+            <xsl:choose>
+                <xsl:when test="name() = 'Sequence' ">
+                    <r:TypeOfObject>Sequence</r:TypeOfObject>
+                </xsl:when>
+                <xsl:otherwise>
+                    <r:TypeOfObject><xsl:value-of select="enoddi32:get-reference-element-name($source-context)"/></r:TypeOfObject>              
+                </xsl:otherwise>
+            </xsl:choose>
         </d:ControlConstructReference>
         <xsl:if test="not(name()=('Sequence','IfThenElse'))">
             <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
