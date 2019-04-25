@@ -40,7 +40,7 @@ public class TestDDIToFO {
 							new PDFSpecificTreatmentPostprocessor(),
 							new PDFInsertCoverPagePostprocessor(),
 							new PDFInsertAccompanyingMailsPostprocessor()});
-			File outputFile = genService.generateQuestionnaire(in, "ddi-2-fo-test");
+			File outputFile = genService.generateQuestionnaire(in, "simpsons");
 			File expectedFile = new File(String.format("%s/out.fo", basePath));
 			diff = xmlDiff.getDiff(outputFile, expectedFile);
 
