@@ -100,4 +100,11 @@
         <xsl:attribute name="padding-left">1mm</xsl:attribute>
         <xsl:attribute name="text-align">justify</xsl:attribute>
     </xsl:attribute-set>
+    <xsl:attribute-set name="details">
+        <xsl:attribute name="color">black</xsl:attribute>
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
+        <xsl:attribute name="font-size">10pt</xsl:attribute>
+        <xsl:attribute name="padding">1mm</xsl:attribute>
+        <xsl:attribute name="text-align">justify</xsl:attribute>
+    </xsl:attribute-set>
 </xsl:stylesheet>

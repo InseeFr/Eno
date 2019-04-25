@@ -203,22 +203,10 @@
 	<xsl:template match="main//xf-group" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
-		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
-	<xsl:choose>
-			<xsl:when test="$other-give-details">
-				<fo:block text-indent="2em">
-					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-						<xsl:with-param name="driver" select="." tunnel="yes"/>
-					</xsl:apply-templates>					
-				</fo:block>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-					<xsl:with-param name="driver" select="." tunnel="yes"/>
-				</xsl:apply-templates>
-			</xsl:otherwise>
-		</xsl:choose>
+
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
 	</xsl:template>
 
 	<xd:doc>
@@ -299,13 +287,28 @@
 	<xsl:template match="main//SingleResponseQuestion | main//MultipleQuestion | main//MultipleChoiceQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
 
 		<!--<xsl:apply-templates select="enopdf:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>-->
-		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always"> <!--linefeed-treatment="preserve"-->
-			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-		</fo:block>
+		<xsl:choose>
+			<xsl:when test="$other-give-details">
+				<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+					<fo:inline>
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'arrow_details.png'"/>
+						</xsl:call-template>
+						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+					</fo:inline>
+				</fo:block>
+			</xsl:when>
+			<xsl:otherwise>
+				<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+				</fo:block>
+			</xsl:otherwise>
+		</xsl:choose>
 		<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>
@@ -569,13 +572,28 @@
 		<xsl:param name="isTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
+		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
 		
 		<xsl:variable name="length" select="enopdf:get-length($source-context)"/>
 		
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-			<fo:block xsl:use-attribute-sets="label-question"> <!--linefeed-treatment="preserve"-->
-				<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-			</fo:block>
+			<xsl:choose>
+				<xsl:when test="$other-give-details">
+					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+						<fo:inline>
+							<xsl:call-template name="insert-image">
+								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
+							</xsl:call-template>
+							<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+						</fo:inline>
+					</fo:block>
+				</xsl:when>
+				<xsl:otherwise>
+					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+					</fo:block>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
 		<fo:block>
 			<xsl:choose>
@@ -616,13 +634,28 @@
 		<xsl:param name="isTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
+		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
 		
 		<xsl:variable name="length" select="number(enopdf:get-length($source-context))"/>
 		
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-			<fo:block xsl:use-attribute-sets="label-question"> <!--linefeed-treatment="preserve"-->
-				<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-			</fo:block>
+			<xsl:choose>
+				<xsl:when test="$other-give-details">
+					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+						<fo:inline>
+							<xsl:call-template name="insert-image">
+								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
+							</xsl:call-template>
+							<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+						</fo:inline>
+					</fo:block>
+				</xsl:when>
+				<xsl:otherwise>
+					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+					</fo:block>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
 		<fo:block>
 			<xsl:if test="$isTable = 'YES'">
@@ -695,6 +728,7 @@
 		<xsl:param name="isTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
+		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
 		
 		<xsl:variable name="numeric-capture-character" select="substring($numeric-capture,1,1)"/>
 		<xsl:variable name="field" select="upper-case(enopdf:get-format($source-context))"/>
@@ -711,11 +745,24 @@
 		</xsl:variable>
 
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
-			<fo:block xsl:use-attribute-sets="label-question"> <!--linefeed-treatment="preserve"-->
-				<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
-			</fo:block>
+			<xsl:choose>
+				<xsl:when test="$other-give-details">
+					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+						<fo:inline>
+							<xsl:call-template name="insert-image">
+								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
+							</xsl:call-template>
+							<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+						</fo:inline>
+					</fo:block>
+				</xsl:when>
+				<xsl:otherwise>
+					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+					</fo:block>
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
-
 		<fo:block xsl:use-attribute-sets="general-style">
 			<xsl:if test="$isTable = 'YES'">
 				<xsl:attribute name="text-align">right</xsl:attribute>
