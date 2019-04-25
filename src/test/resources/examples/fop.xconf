@@ -10,5 +10,27 @@
        value is specified as auto -->
   <default-page-settings height="11in" width="8.26in"/>
   
-
+  <font-base>../fonts</font-base>
+  
+  <renderers>
+    <renderer mime="application/pdf">
+      <fonts>
+        <font kerning="yes" embed-url="LiberationSans-Regular.ttf">
+          <font-triplet name="Liberation Sans" style="normal" weight="normal"/>
+        </font>
+        <font kerning="yes" embed-url="LiberationSans-Bold.ttf">
+          <font-triplet name="Liberation Sans" style="normal" weight="bold"/>
+        </font>
+        <font kerning="yes" embed-url="LiberationSans-Italic.ttf">
+          <font-triplet name="Liberation Sans" style="italic" weight="normal"/>
+        </font>
+        <font kerning="yes" embed-url="LiberationSans-BoldItalic.ttf">
+          <font-triplet name="Liberation Sans" style="italic" weight="bold"/>
+        </font>
+        <font kerning="yes" embed-url="LucidaConsole.ttf">
+          <font-triplet name="Lucida Console" style="normal" weight="normal"/>
+        </font>
+      </fonts>
+    </renderer>
+  </renderers>
 </fop>
