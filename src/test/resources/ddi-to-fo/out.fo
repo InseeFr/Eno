@@ -160,7 +160,7 @@
                       font-family="Liberation Sans"
                       font-size="16pt"
                       font-weight="bold"
-                      text-align="center">ddi-2-fo-test</fo:block>
+                      text-align="center">simpsons</fo:block>
          </fo:block-container>
          <fo:block-container absolute-position="absolute"
                              left="15mm"
