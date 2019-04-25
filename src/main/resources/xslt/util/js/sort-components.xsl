@@ -159,7 +159,7 @@
                             <!-- Replace in formula "$var" by "(value of the var)" -->
                             <xsl:value-of select="replace($formula,$regex,concat('(',$expressionToReplace,')'))"/>
                         </xsl:when>
-                        <xsl:otherwise><xsl:value-of select="replace($formula,$regex,$var)"/></xsl:otherwise>
+                        <xsl:otherwise><xsl:value-of select="$formula"/></xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
                 
