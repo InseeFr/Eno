@@ -254,6 +254,11 @@
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
+			<xsl:when test="$format = 'statement'">
+				<fo:block xsl:use-attribute-sets="instruction" page-break-inside="avoid" keep-with-next="always">
+					<xsl:copy-of select="$label"/>
+				</fo:block>
+			</xsl:when>
 			<xsl:when test="$format = ('filter-alternative-text','flowcontrol-text')">
 				<xsl:if test="$label != ''">
 					<fo:block page-break-inside="avoid" keep-with-previous="always" xsl:use-attribute-sets="filter-block">
@@ -691,6 +696,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
 		
+		<xsl:variable name="numeric-capture-character" select="substring($numeric-capture,1,1)"/>
 		<xsl:variable name="field" select="upper-case(enopdf:get-format($source-context))"/>
 		<xsl:variable name="field-image-name">
 			<xsl:if test="contains($field,'YYYY') or contains($field,'AAAA')">
@@ -717,7 +723,7 @@
 				<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
 			</xsl:if>
 			<xsl:call-template name="insert-image">
-				<xsl:with-param name="image-name" select="concat('date-',$languages[1],'-',$field-image-name,'.png')"/>
+				<xsl:with-param name="image-name" select="concat('date-',$numeric-capture-character,'-',$languages[1],'-',$field-image-name,'.png')"/>
 			</xsl:call-template>
 		</fo:block>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
