@@ -873,7 +873,7 @@
 							</xsl:call-template>
 						</xsl:when>
 						<xsl:otherwise>
-							<fo:inline padding="1mm" text-align="left">
+							<fo:inline xsl:use-attribute-sets="general-style">
 								<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 							</fo:inline>
 						</xsl:otherwise>
@@ -894,14 +894,14 @@
 						</fo:block>
 					</fo:list-item-label>
 					<fo:list-item-body start-indent="body-start()">
-						<fo:block>
+						<fo:block xsl:use-attribute-sets="answer-item">
 							<xsl:choose>
 								<xsl:when test="$image != ''">
 									<xsl:call-template name="insert-image">
 										<xsl:with-param name="image-name" select="$image"/>
 									</xsl:call-template>
 								</xsl:when>
-							<xsl:otherwise>
+								<xsl:otherwise>
 									<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 								</xsl:otherwise>
 							</xsl:choose>
