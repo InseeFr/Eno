@@ -1334,7 +1334,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         
         <!-- Id definition depend on date and duration format -->   
-        <xsl:variable name="id-date-duree">
+        <xsl:variable name="id-date-duration">
 	    	<xsl:choose>
 	        	<xsl:when test="$source-context = 'YYYY-MM' ">-MMAAAA</xsl:when>
 	        	<xsl:when test="$source-context = 'YYYY' ">-AAAA</xsl:when>
@@ -1345,7 +1345,7 @@
        
         <d:DateTimeDomainReference>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duree"/></r:ID>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
             <r:OutParameter isArray="false">
@@ -1354,7 +1354,7 @@
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:DateTimeRepresentationReference>
                     <r:Agency>fr.insee</r:Agency>
-                    <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duree"/></r:ID>
+                    <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
                 </r:DateTimeRepresentationReference>
