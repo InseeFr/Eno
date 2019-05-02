@@ -5,26 +5,29 @@
         <xsl:attribute name="color">white</xsl:attribute>
         <xsl:attribute name="font-weight">bold</xsl:attribute>
         <xsl:attribute name="margin-bottom">9pt</xsl:attribute>
-        <xsl:attribute name="margin-top">3pt</xsl:attribute>
         <xsl:attribute name="font-size">14pt</xsl:attribute>
         <xsl:attribute name="border-color">black</xsl:attribute>
         <xsl:attribute name="border-style">solid</xsl:attribute>
         <xsl:attribute name="space-before">10mm</xsl:attribute>
         <xsl:attribute name="space-before.conditionality">discard</xsl:attribute>
+        <xsl:attribute name="text-align">left</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="Titre-paragraphe">
         <xsl:attribute name="background-color">#CCCCCC</xsl:attribute>
         <xsl:attribute name="color">black</xsl:attribute>
         <xsl:attribute name="font-weight">bold</xsl:attribute>
         <xsl:attribute name="margin-bottom">9pt</xsl:attribute>
-        <xsl:attribute name="margin-top">3pt</xsl:attribute>
         <xsl:attribute name="font-size">12pt</xsl:attribute>
+        <xsl:attribute name="text-align">left</xsl:attribute>
+        <xsl:attribute name="space-before">6mm</xsl:attribute>
+        <xsl:attribute name="space-before.conditionality">discard</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="general-style">
         <xsl:attribute name="color">black</xsl:attribute>
         <xsl:attribute name="font-weight">normal</xsl:attribute>
         <xsl:attribute name="font-size">10pt</xsl:attribute>
         <xsl:attribute name="padding">1mm</xsl:attribute>
+        <xsl:attribute name="text-align">justify</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="label-question">
         <xsl:attribute name="color">black</xsl:attribute>
@@ -32,16 +35,13 @@
         <xsl:attribute name="font-size">10pt</xsl:attribute>
         <xsl:attribute name="margin-top">9pt</xsl:attribute>
         <xsl:attribute name="margin-bottom">3pt</xsl:attribute>
-    </xsl:attribute-set>
-    <xsl:attribute-set name="label-instruction">
-        <xsl:attribute name="color">black</xsl:attribute>
-        <xsl:attribute name="font-weight">bold</xsl:attribute>
-        <xsl:attribute name="font-size">9pt</xsl:attribute>
+        <xsl:attribute name="text-align">justify</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="entete-ligne">
         <xsl:attribute name="color">black</xsl:attribute>
         <xsl:attribute name="font-weight">normal</xsl:attribute>
         <xsl:attribute name="font-size">10pt</xsl:attribute>
+        <xsl:attribute name="text-align">left</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="colonne-tableau">
         <xsl:attribute name="border-color">black</xsl:attribute>
@@ -77,7 +77,7 @@
         <xsl:attribute name="margin">2pt</xsl:attribute>
         <xsl:attribute name="font-size">10pt</xsl:attribute>
         <xsl:attribute name="font-weight">bold</xsl:attribute>
-        <xsl:attribute name="text-align">left</xsl:attribute>
+        <xsl:attribute name="text-align">justify</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="footnote">
         <xsl:attribute name="font-size">9pt</xsl:attribute>
@@ -86,11 +86,25 @@
         <xsl:attribute name="margin-left">3pt</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="instruction">
-        <xsl:attribute name="font-size">9pt</xsl:attribute>
+        <xsl:attribute name="font-size">10pt</xsl:attribute>
         <xsl:attribute name="font-weight">normal</xsl:attribute>
+        <xsl:attribute name="font-style">italic</xsl:attribute>
         <xsl:attribute name="margin-bottom">3pt</xsl:attribute>
         <xsl:attribute name="margin-left">3pt</xsl:attribute>
+        <xsl:attribute name="text-align">justify</xsl:attribute>
     </xsl:attribute-set>
-    
-    
+    <xsl:attribute-set name="answer-item">
+        <xsl:attribute name="color">black</xsl:attribute>
+        <xsl:attribute name="font-weight">normal</xsl:attribute>
+        <xsl:attribute name="font-size">10pt</xsl:attribute>
+        <xsl:attribute name="padding-left">1mm</xsl:attribute>
+        <xsl:attribute name="text-align">justify</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="details">
+        <xsl:attribute name="color">black</xsl:attribute>
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
+        <xsl:attribute name="font-size">10pt</xsl:attribute>
+        <xsl:attribute name="padding">1mm</xsl:attribute>
+        <xsl:attribute name="text-align">justify</xsl:attribute>
+    </xsl:attribute-set>
 </xsl:stylesheet>
