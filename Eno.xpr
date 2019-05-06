@@ -19,6 +19,7 @@
             <file name="src/main/resources/xslt/transformations/ddi2fr/ddi2fr.xsl"/>
             <file name="src/main/resources/xslt/transformations/ddi2odt/ddi2odt.xsl"/>
             <file name="src/main/resources/xslt/transformations/ddi2pdf/ddi2pdf.xsl"/>
+            <file name="src/main/resources/xslt/transformations/ddi2js/ddi2js.xsl"/>
             <file name="src/main/resources/xslt/transformations/pogues-xml2ddi/pogues-xml2ddi.xsl"/>
         </folder>
         <folder path="."/>
