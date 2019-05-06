@@ -9,8 +9,9 @@
             A l'intérieur du body se trouve les zones before/after (en haut en bas) et start/end (à gauche/a droite)
             qui peuvent faire 1cm de large. Ces zones vont recueillir les numéros de page, encoches des bords, 
             et code barres.
+            Les marges du body correspondent aux tailles des before/after/start/end.
             L'emplacement d'une zone fixe la position du coin haut gauche de la zone, et sa taille.
-            La position peut être définie par rapport au hautou bas de la zone concernée et gauche ou droite.
+            La position peut être définie par rapport au haut ou bas de la zone concernée et gauche ou droite.
                      
             Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée.
             
@@ -161,7 +162,7 @@
 
             <!--    Bloc adresse -->
 
-            <fo:block-container absolute-position="absolute" left="100mm" top="42mm" width="75mm"
+            <fo:block-container absolute-position="absolute" left="95mm" top="42mm" width="75mm"
                 height="32mm">
                 <fo:block margin-top="0mm" margin-left="0mm" font-family="Lucida Console">
                     <fo:inline-container margin="0mm">
