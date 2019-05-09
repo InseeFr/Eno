@@ -90,7 +90,7 @@
             <xsl:when test="local-name(.)='IfThenElse'">                                   
                 <xsl:value-of select="'IfThenElse'"/>
             </xsl:when>
-            <xsl:when test="pogues:Child or pogues:IfThenElse/descendant::pogues:Child">
+            <xsl:when test="local-name(.)='Child' or pogues:Child or pogues:IfThenElse/descendant::pogues:Child">
                 <xsl:value-of select="'Sequence'"/>                
             </xsl:when>
             <xsl:otherwise>
