@@ -193,28 +193,28 @@
                     </r:ManagedDateTimeRepresentation>
                     <r:ManagedDateTimeRepresentation>
 			            <r:Agency>fr.insee</r:Agency>
-			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-MMAAAA</r:ID>
+			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM</r:ID>
 			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
 			            <r:DateFieldFormat>YYYY-MM</r:DateFieldFormat>
 			            <r:DateTypeCode codeListID="INSEE-DTC-CV">gYearMonth</r:DateTypeCode>
 			        </r:ManagedDateTimeRepresentation>
 			        <r:ManagedDateTimeRepresentation>
 			            <r:Agency>fr.insee</r:Agency>
-			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-AAAA</r:ID>
+			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY</r:ID>
 			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
 			            <r:DateFieldFormat>YYYY</r:DateFieldFormat>
 			            <r:DateTypeCode codeListID="INSEE-DTC-CV">gYear</r:DateTypeCode>
 			        </r:ManagedDateTimeRepresentation>
 			        <r:ManagedDateTimeRepresentation>
 			            <r:Agency>fr.insee</r:Agency>
-			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-DUREEAAMM</r:ID>
+			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-PnYnM</r:ID>
 			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
 			            <r:DateFieldFormat>PnYnM</r:DateFieldFormat>
 			            <r:DateTypeCode codeListID="INSEE-DTC-CV">duration</r:DateTypeCode>
 			        </r:ManagedDateTimeRepresentation>
 			        <r:ManagedDateTimeRepresentation>
 			            <r:Agency>fr.insee</r:Agency>
-			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-DUREEHHMM</r:ID>
+			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-PTnHnM</r:ID>
 			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
 			            <r:DateFieldFormat>PTnHnM</r:DateFieldFormat>
 			            <r:DateTypeCode codeListID="INSEE-DTC-CV">duration</r:DateTypeCode>
@@ -1335,12 +1335,9 @@
         
         <!-- Id definition depend on date and duration format -->   
         <xsl:variable name="id-date-duration">
-	    	<xsl:choose>
-	        	<xsl:when test="$source-context = 'YYYY-MM' ">-MMAAAA</xsl:when>
-	        	<xsl:when test="$source-context = 'YYYY' ">-AAAA</xsl:when>
-	        	<xsl:when test="$source-context = 'PnYnM' ">-DUREEAAMM</xsl:when>
-	        	<xsl:when test="$source-context = 'PTnHnM' ">-DUREEHHMM</xsl:when>
-	        </xsl:choose>
+	    	<xsl:if test="$source-context != '' and $source-context != 'YYYY-MM-DD'">
+	        	<xsl:value-of  select="concat('-',$source-context)"/>
+	        </xsl:if>
         </xsl:variable>
        
         <d:DateTimeDomainReference>
