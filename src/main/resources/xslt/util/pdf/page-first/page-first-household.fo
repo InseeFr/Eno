@@ -315,7 +315,7 @@
                             général et de qualité statistique sans avoir de caractère obligatoire
                             #end. </fo:block>
                         <fo:block line-height="10pt"> Visa n°${BddNumeroVisa} du
-                            {BddMinistereTutelle}, valable pour l'année ${BddAnneCollecte}. </fo:block>
+                            {BddMinistereTutelle}, valable pour l'année ${BddAnneeCollecte}. </fo:block>
                         <fo:block line-height="10pt"> En application de la loi n° 51-711 du 7 juin
                             1951 modifiée, les réponses à ce questionnaire sont obligatoires et sont
                             protégées par le secret statistique et destinées à
