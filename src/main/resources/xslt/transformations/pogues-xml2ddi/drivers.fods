@@ -553,7 +553,7 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>pogues:Datatype[not(@visualizationHint) and @xsi:type=&apos;DateDatatypeType&apos;]</text:p>
+      <text:p>pogues:Datatype[not(@visualizationHint) and (@xsi:type=&apos;DateDatatypeType&apos; or @xsi:type=&apos;DurationDatatypeType&apos;)]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>DateTimeDomain</text:p>

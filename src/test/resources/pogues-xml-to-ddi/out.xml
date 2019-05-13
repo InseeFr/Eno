@@ -16,8 +16,7 @@
          <r:ID>InterviewerInstructionScheme-i6vwi0</r:ID>
          <r:Version>1.0</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">A
-                            définir</r:Content>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
          </r:Label>
          <d:Instruction>
             <r:Agency>fr.insee</r:Agency>
@@ -42,7 +41,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">For your information, the date of the last broadcast was on
-                        ¤LAST_BROADCAST¤</d:Text>
+                        ¤LAST_BROADCAST¤ </d:Text>
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
@@ -108,7 +107,7 @@
             <d:InstructionText>
                <d:LiteralText>
                   <d:Text xml:lang="fr-FR">The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of
-                        percentages must be equal to 100%.</d:Text>
+                        percentages must be equal to 100%. </d:Text>
                </d:LiteralText>
                <d:ConditionalText>
                   <r:SourceParameterReference>
@@ -133,7 +132,7 @@
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
-      <d:Instruction xmlns=""><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>1.0</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR"><xhtml:p id="ftn1">Included principalities</xhtml:p></d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
+      <d:Instruction><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>1.0</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR"><xhtml:p id="ftn1">Included principalities</xhtml:p></d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
       <d:ControlConstructScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>ControlConstructScheme-i6vwi0</r:ID>
@@ -1140,8 +1139,7 @@
          <r:ID>QuestionScheme-i6vwi0</r:ID>
          <r:Version>1.0</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">A
-                            définir</r:Content>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
          </r:Label>
          <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
@@ -5651,7 +5649,7 @@
          <r:ID>CategoryScheme-j6qdqoen</r:ID>
          <r:Version>1.0</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">MAYOR</r:Content>
+            <r:Content xml:lang="fr-FR">MAYOR </r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
@@ -6371,8 +6369,7 @@
          <r:ID>CategoryScheme-i6vwi0</r:ID>
          <r:Version>1.0</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">A
-                                définir</r:Content>
+            <r:Content xml:lang="fr-FR">A définir</r:Content>
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
@@ -6443,7 +6440,7 @@
             <r:ID>j6qdqoen</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">MAYOR</r:Content>
+               <r:Content xml:lang="fr-FR">MAYOR </r:Content>
             </r:Label>
             <l:HierarchyType>Regular</l:HierarchyType>
             <l:Level levelNumber="1">
@@ -7548,8 +7545,7 @@
          <r:ID>VariableScheme-i6vwi0</r:ID>
          <r:Version>1.0</r:Version>
          <r:Label>
-            <r:Content xml:lang="fr-FR">Variable Scheme
-                            for the survey</r:Content>
+            <r:Content xml:lang="fr-FR">Variable Scheme for the survey</r:Content>
          </r:Label>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7559,7 +7555,7 @@
                <r:String xml:lang="fr-FR">SUM_EXPENSES</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">SUM_EXPENSES label</r:Content>
+               <r:Content xml:lang="fr-FR">SUM_EXPENSES label </r:Content>
             </r:Label>
             <r:OutParameter>
                <r:Agency>fr.insee</r:Agency>
@@ -7598,7 +7594,7 @@
                <r:String xml:lang="fr-FR">LAST_BROADCAST</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">LAST_BROADCAST label</r:Content>
+               <r:Content xml:lang="fr-FR">LAST_BROADCAST label </r:Content>
             </r:Label>
          </l:Variable>
          <l:Variable>
@@ -7609,7 +7605,7 @@
                <r:String xml:lang="fr-FR">COMMENT</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">COMMENT label</r:Content>
+               <r:Content xml:lang="fr-FR">COMMENT label </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7633,7 +7629,7 @@
                <r:String xml:lang="fr-FR">READY</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">READY label</r:Content>
+               <r:Content xml:lang="fr-FR">READY label </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7657,7 +7653,7 @@
                <r:String xml:lang="fr-FR">PRODUCER</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">PRODUCER label</r:Content>
+               <r:Content xml:lang="fr-FR">PRODUCER label </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7681,7 +7677,7 @@
                <r:String xml:lang="fr-FR">SEASON_NUMBER</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">SEASON_NUMBER label</r:Content>
+               <r:Content xml:lang="fr-FR">SEASON_NUMBER label </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7705,7 +7701,7 @@
                <r:String xml:lang="fr-FR">DATEFIRST</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">DATEFIRST label</r:Content>
+               <r:Content xml:lang="fr-FR">DATEFIRST label </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7729,7 +7725,7 @@
                <r:String xml:lang="fr-FR">AUDIENCE_SHARE</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">AUDIENCE_SHARE label</r:Content>
+               <r:Content xml:lang="fr-FR">AUDIENCE_SHARE label </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7753,7 +7749,7 @@
                <r:String xml:lang="fr-FR">CITY</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">CITY label</r:Content>
+               <r:Content xml:lang="fr-FR">CITY label </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7777,7 +7773,7 @@
                <r:String xml:lang="fr-FR">MAYOR</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">MAYOR label</r:Content>
+               <r:Content xml:lang="fr-FR">MAYOR label </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -7801,7 +7797,7 @@
                <r:String xml:lang="fr-FR">STATE</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">STATE label</r:Content>
+               <r:Content xml:lang="fr-FR">STATE label </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9741,7 +9737,7 @@
                <r:String xml:lang="fr-FR">SURVEY_COMMENT</r:String>
             </l:VariableName>
             <r:Label>
-               <r:Content xml:lang="fr-FR">SURVEY_COMMENT label</r:Content>
+               <r:Content xml:lang="fr-FR">SURVEY_COMMENT label </r:Content>
             </r:Label>
             <r:SourceParameterReference>
                <r:Agency>fr.insee</r:Agency>
@@ -9757,7 +9753,7 @@
             </r:QuestionReference>
             <l:VariableRepresentation/>
          </l:Variable>
-      <l:VariableGroup>
+         <l:VariableGroup>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>j6qg8rc6-gp</r:ID>
             <r:Version>1.0</r:Version>
@@ -9903,14 +9899,14 @@
             <r:String xml:lang="en-IE">SIMPSONS</r:String>
          </d:ProcessingInstructionSchemeName>
          <r:Label>
-            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons
-                            questionnaire</r:Content>
+            <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire</r:Content>
          </r:Label>
          <d:GenerationInstruction>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>jbcggtca-GI</r:ID>
             <r:Version>1.0</r:Version>
-            <!--<d:SourceQuestion>Not implemented.</d:SourceQuestion>--><d:SourceVariable>
+            <!--<d:SourceQuestion>Not implemented.</d:SourceQuestion>-->
+            <d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>jbgdnfk7</r:ID>
                <r:Version>1.0</r:Version>
@@ -10219,8 +10215,7 @@
          <r:Label>
             <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
                             l'enquête</r:Content>
-            <r:Content xml:lang="en-IE">Numeric and DateTime list for the
-                            survey</r:Content>
+            <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey</r:Content>
          </r:Label>
          <r:ManagedDateTimeRepresentation>
             <r:Agency>fr.insee</r:Agency>
@@ -10228,6 +10223,34 @@
             <r:Version>1.0</r:Version>
             <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
             <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
+         </r:ManagedDateTimeRepresentation>
+         <r:ManagedDateTimeRepresentation>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate-MMAAAA</r:ID>
+            <r:Version>1.0</r:Version>
+            <r:DateFieldFormat>YYYY-MM</r:DateFieldFormat>
+            <r:DateTypeCode codeListID="INSEE-DTC-CV">gYearMonth</r:DateTypeCode>
+         </r:ManagedDateTimeRepresentation>
+         <r:ManagedDateTimeRepresentation>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate-AAAA</r:ID>
+            <r:Version>1.0</r:Version>
+            <r:DateFieldFormat>YYYY</r:DateFieldFormat>
+            <r:DateTypeCode codeListID="INSEE-DTC-CV">gYear</r:DateTypeCode>
+         </r:ManagedDateTimeRepresentation>
+         <r:ManagedDateTimeRepresentation>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate-DUREEAAMM</r:ID>
+            <r:Version>1.0</r:Version>
+            <r:DateFieldFormat>PnYnM</r:DateFieldFormat>
+            <r:DateTypeCode codeListID="INSEE-DTC-CV">duration</r:DateTypeCode>
+         </r:ManagedDateTimeRepresentation>
+         <r:ManagedDateTimeRepresentation>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate-DUREEHHMM</r:ID>
+            <r:Version>1.0</r:Version>
+            <r:DateFieldFormat>PTnHnM</r:DateFieldFormat>
+            <r:DateTypeCode codeListID="INSEE-DTC-CV">duration</r:DateTypeCode>
          </r:ManagedDateTimeRepresentation>
       </r:ManagedRepresentationScheme>
    </g:ResourcePackage>
