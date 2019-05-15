@@ -130,6 +130,18 @@
             <xsl:when test=". = 'http://id.insee.fr/unit/percent'">
                 <xsl:value-of select="'%'"/>
             </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/heure'">
+                <xsl:value-of select="'heures'"/>
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/jour'">
+                <xsl:value-of select="'jours'"/>
+            </xsl:when>          
+            <xsl:when test=". = 'http://id.insee.fr/unit/mois'">
+                <xsl:value-of select="'mois'"/>
+            </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/annee'">
+                <xsl:value-of select="'années'"/>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
 
