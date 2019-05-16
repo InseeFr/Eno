@@ -345,7 +345,7 @@
         </l:Variable>
     </xsl:template>
     
-    <xsl:template match="driver-VariableScheme//Variable/*[./name()= ('TextDomain','NumericDomain','DateTimeDomain','BooleanDomain','CodeDomain')]" mode="model" priority="5">
+    <xsl:template match="driver-VariableScheme//Variable/*[./name()= ('TextDomain','NumericDomain','DateTimeDomain','DurationDomain','BooleanDomain','CodeDomain')]" mode="model" priority="5">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -1329,7 +1329,7 @@
         </d:NumericDomain>
     </xsl:template>
 
-    <xsl:template match="DateTimeDomain" mode="model">
+    <xsl:template match="DateTimeDomain | DurationDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         
