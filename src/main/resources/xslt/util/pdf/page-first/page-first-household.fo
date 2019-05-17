@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"
-    xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions">
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
     <fo:layout-master-set>
         <!--
             Définition de la page et de ses marges de page.
@@ -13,67 +12,45 @@
             La position peut être définie par rapport au hautou bas de la zone concernée et gauche ou droite.
                      
             Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée.
-            
             -->
 
-        <fo:simple-page-master master-name="page-first-household" page-height="297mm"
-            page-width="210mm" reference-orientation="0" font-family="Liberation Sans"
-            font-size="10pt" font-weight="normal" margin-bottom="5mm" margin-top="5mm"
-            margin-right="5mm" margin-left="5mm">
-            <fo:region-body region-name="region-body-first-household" margin-top="10mm"
-                margin-bottom="10mm" margin-right="10mm" margin-left="10mm" column-count="1"/>
-            <fo:region-before region-name="region-before-first-household" extent="10mm"
-                display-align="before" precedence="true"/>
-            <fo:region-after region-name="region-after-first-household" extent="10mm"
-                display-align="before" precedence="true"/>
-            <fo:region-start region-name="region-start-first-household" extent="10mm"
-                display-align="before"/>
-            <fo:region-end region-name="region-end-first-household" extent="10mm"
-                display-align="before"/>
+        <fo:simple-page-master master-name="page-first-household" page-height="297mm" page-width="210mm" reference-orientation="0" 
+            font-family="Liberation Sans" font-size="10pt" font-weight="normal" margin-bottom="5mm" margin-top="5mm" margin-right="5mm" margin-left="5mm">
+            <fo:region-body region-name="region-body-first-household" margin-top="10mm" margin-bottom="10mm" margin-right="10mm" margin-left="10mm" column-count="1"/>
+            <fo:region-before region-name="region-before-first-household" extent="10mm" display-align="before" precedence="true"/>
+            <fo:region-after region-name="region-after-first-household" extent="10mm" display-align="before" precedence="true"/>
+            <fo:region-start region-name="region-start-first-household" extent="10mm" display-align="before"/>
+            <fo:region-end region-name="region-end-first-household" extent="10mm" display-align="before"/>
         </fo:simple-page-master>
-
     </fo:layout-master-set>
 
-
-    <fo:page-sequence font-family="Liberation Sans" font-size="10pt"
-        master-reference="page-first-household">
-        
+    <fo:page-sequence font-family="Liberation Sans" font-size="10pt" master-reference="page-first-household">
         <fo:static-content flow-name="region-before-first-household">
-
-            <fo:block-container absolute-position="absolute" left="0mm" top="0mm" width="5mm"
-                height="5mm">
+            <fo:block-container absolute-position="absolute" left="0mm" top="0mm" width="5mm" height="5mm">
                 <fo:block position="absolute" text-align="left">
                     <fo:external-graphic src="encoche-square.png"/>
                 </fo:block>
             </fo:block-container>
-            
-            <fo:block-container absolute-position="absolute" left="195mm" top="0mm" width="5mm"
-                height="5mm">
+            <fo:block-container absolute-position="absolute" left="195mm" top="0mm" width="5mm" height="5mm">
                 <fo:block position="absolute" text-align="right">
                     <fo:external-graphic src="encoche-square.png"/>
                 </fo:block>
             </fo:block-container>
-
-        </fo:static-content>   
+        </fo:static-content>
         
         <fo:static-content flow-name="region-after-first-household">
-            
-            <fo:block-container absolute-position="absolute" left="0mm" bottom="0mm" width="5mm"
-                height="5mm">
+            <fo:block-container absolute-position="absolute" left="0mm" bottom="0mm" width="5mm" height="5mm">
                 <fo:block position="absolute" text-align="left">
                     <fo:external-graphic src="encoche-square.png"/>
                 </fo:block>
             </fo:block-container>
-            
-            <fo:block-container absolute-position="absolute" left="90mm" top="5mm" width="33mm"
-                height="10mm">
+            <fo:block-container absolute-position="absolute" left="90mm" top="5mm" width="33mm" height="10mm"
+                font-family="Liberation Sans" font-size="10pt">
                 <fo:block text-align="center">
-                    <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+                    1 / <fo:page-number-citation ref-id="TheVeryLastPage"/>
                 </fo:block>
             </fo:block-container>
-            
-            <fo:block-container absolute-position="absolute" left="110mm" top="2mm" width="80mm"
-                height="7mm">
+            <fo:block-container absolute-position="absolute" left="120mm" top="2mm" width="80mm" height="7mm">
                 <fo:block>
                     <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
@@ -88,16 +65,13 @@
                     </fo:instream-foreign-object>
                 </fo:block>
             </fo:block-container>
-            
             <fo:block-container absolute-position="absolute" left="195mm" bottom="0mm" width="5mm"
                 height="5mm">
                 <fo:block position="absolute" text-align="right">
                     <fo:external-graphic src="encoche-square.png"/>
                 </fo:block>
             </fo:block-container>
-            
         </fo:static-content>
-        
         
         <fo:static-content flow-name="region-end-first-household">
             <fo:block-container absolute-position="absolute" left="5mm" top="145mm" width="5mm"
@@ -106,14 +80,10 @@
                     <fo:external-graphic src="encoche-square.png"/>
                 </fo:block>
             </fo:block-container>
-            
-            
         </fo:static-content>
-             
             
         <fo:flow flow-name="region-body-first-household">
             <!--    Blocs Logos et Libellé -->
-
             <fo:block-container absolute-position="absolute" left="0mm" top="0mm" width="15mm"
                 height="15mm">
                 <fo:block>
@@ -121,7 +91,6 @@
                         scaling="uniform"/>
                 </fo:block>
             </fo:block-container>
-
             <fo:block-container absolute-position="absolute" left="72mm" top="0mm" width="26mm"
                 height="15mm">
                 <fo:block>
@@ -129,7 +98,6 @@
                         width="26mm" scaling="uniform"/>
                 </fo:block>
             </fo:block-container>
-
             <fo:block-container absolute-position="absolute" left="160mm" top="0mm" width="10mm"
                 height="15mm">
                 <fo:block>
@@ -137,7 +105,6 @@
                         width="10mm" scaling="uniform"/>
                 </fo:block>
             </fo:block-container>
-
             <fo:block-container absolute-position="absolute" left="10mm" top="23mm" width="150mm"
                 height="7mm">
                 <fo:block font-family="Liberation Sans" font-size="16pt" font-weight="bold"
@@ -145,22 +112,17 @@
             </fo:block-container>
 
             <!--    Bloc Consignes retour -->
-
             <fo:block-container absolute-position="absolute" left="0mm" top="42mm" width="60mm"
                 height="32mm" font-family="Liberation Sans" font-size="10pt" font-weight="normal"
                 text-align="left">
-
                 <fo:block line-height="14pt"> Merci de bien vouloir retourner </fo:block>
                 <fo:block line-height="14pt">votre questionnaire complété,</fo:block>
-                <fo:block line-height="14pt">au plus tard le <fo:inline font-weight="bold">
-                        ${DATERETOUR} </fo:inline></fo:block>
+                <fo:block line-height="14pt">au plus tard le <fo:inline font-weight="bold">${DATERETOUR} </fo:inline></fo:block>
                 <fo:block line-height="14pt"> dans l’enveloppe T ci-jointe</fo:block>
                 <fo:block line-height="14pt" start-indent="20mm"> à l’adresse suivante => </fo:block>
-
             </fo:block-container>
 
             <!--    Bloc adresse -->
-
             <fo:block-container absolute-position="absolute" left="100mm" top="42mm" width="75mm"
                 height="32mm">
                 <fo:block margin-top="0mm" margin-left="0mm" font-family="Lucida Console">
@@ -174,7 +136,6 @@
                         <fo:block line-height="10pt">$!{AdresseRetourQL7}</fo:block>
                     </fo:inline-container>
                 </fo:block>
-
             </fo:block-container>
 
             <!--    Blocs Consignes -->
@@ -189,92 +150,70 @@
             <fo:block-container absolute-position="absolute" left="20mm" top="87mm" width="170mm"
                 height="30mm" font-family="Liberation Sans" font-size="12pt">
                 <fo:block line-height="10pt">
-                    <fo:inline font-weight="bold"> Comment remplir ce questionnaire
-                    </fo:inline></fo:block>
+                    <fo:inline font-weight="bold"> Comment remplir ce questionnaire</fo:inline>
+                </fo:block>
             </fo:block-container>
 
             <fo:block-container absolute-position="absolute" left="0mm" top="100mm" width="170mm"
-                height="40mm" font-family="Liberation Sans" font-size="10pt" >
-
-                <!-- list start -->
+                height="40mm" font-family="Liberation Sans" font-size="10pt">
                 <fo:list-block>
-                    <!-- list item -->
                     <fo:list-item>
-
-                        <!-- insert a bullet -->
                         <fo:list-item-label start-indent="5mm">
                             <fo:block>
                                 <fo:inline>&#8226;</fo:inline>
                             </fo:block>
                         </fo:list-item-label>
-                        <!-- list text -->
                         <fo:list-item-body start-indent="10mm">
                             <fo:block> Pour chaque question à choix, cochez la case
-                                <fo:external-graphic src="checkbox_example.jpg" padding-right="3pt" padding-left="3pt" vertical-align="middle"/> correspondant
-                                à votre situation ou les cases si plusieurs réponses sont possibles. </fo:block>
-
+                                <fo:external-graphic src="checkbox_example.jpg" padding-right="3pt" padding-left="3pt" vertical-align="middle"/>
+                                correspondant à votre situation ou les cases si plusieurs réponses sont possibles. </fo:block>
                         </fo:list-item-body>
                     </fo:list-item>
-
                     <fo:list-item>
-                        <!-- insert a bullet -->
                         <fo:list-item-label start-indent="5mm">
                             <fo:block>
                                 <fo:inline>&#8226;</fo:inline>
                             </fo:block>
                         </fo:list-item-label>
-                        <!-- list text -->
                         <fo:list-item-body start-indent="10mm">
-                            <fo:block> Pour chaque question à valeur, renseignez la valeur
-                                correspondante dans les cases prévues à cet effet (par exemple :
-                                    <fo:external-graphic src="year_example.jpg" height="10pt"
-                                        scaling="uniform" padding-right="3pt" padding-left="3pt" vertical-align="middle"/> pour une année) </fo:block>
-
+                            <fo:block> Pour chaque question à valeur, renseignez la valeur correspondante dans les cases prévues à cet effet (par exemple :
+                                <fo:external-graphic src="year_example.jpg" height="10pt"
+                                        scaling="uniform" padding-right="3pt" padding-left="3pt" vertical-align="middle"/>
+                                pour une année) </fo:block>
                         </fo:list-item-body>
                     </fo:list-item>
-
                     <fo:list-item>
-                        <!-- insert a bullet -->
                         <fo:list-item-label start-indent="5mm">
                             <fo:block>
                                 <fo:inline>&#8226;</fo:inline>
                             </fo:block>
                         </fo:list-item-label>
-                        <!-- list text -->
                         <fo:list-item-body start-indent="10mm">
                             <fo:block> Suivez les instructions des renvois.  
                                 <fo:external-graphic src="filter_example.png" content-width="scale-to-fit" width="70mm"
-                                scaling="uniform" padding-right="3pt" padding-left="3pt" vertical-align="middle"/>  </fo:block>
-                            
-                            </fo:list-item-body>
+                                scaling="uniform" padding-right="3pt" padding-left="3pt" vertical-align="middle"/>
+                            </fo:block>
+                        </fo:list-item-body>
                     </fo:list-item>
-                    
                     <fo:list-item>
-                        <!-- insert a bullet -->
                         <fo:list-item-label start-indent="5mm">
                             <fo:block>
                                 <fo:inline>&#8226;</fo:inline>
                             </fo:block>
                         </fo:list-item-label>
-                        <!-- list text -->
                         <fo:list-item-body start-indent="10mm">
                             <fo:block>  Le signe « * » signifie que vous pouvez vous référer à l’aide au remplissage jointe. </fo:block>
                         </fo:list-item-body>
                     </fo:list-item>
-                    
                 </fo:list-block>
-                
-                                         
                 <fo:block margin-top="5mm" >
                     <fo:block line-height="10pt">$!{Consigne1}</fo:block>
                     <fo:block line-height="10pt">$!{Consigne2}</fo:block>
                     <fo:block line-height="10pt">$!{Consigne3}</fo:block>
-            </fo:block>
+                </fo:block>
             </fo:block-container>
 
             <!--    Bloc Qui répond -->
-
-
             <fo:block-container absolute-position="absolute" left="0mm" top="155mm" width="15mm"
                 height="15mm">
                 <fo:block margin="2pt">
@@ -284,16 +223,13 @@
             </fo:block-container>
             <fo:block-container absolute-position="absolute" left="20mm" top="160mm"
                 font-size="12pt">
-                <fo:block line-height="10pt" font-weight="bold"> Qui doit répondre à ce
-                    questionnaire ?</fo:block>
+                <fo:block line-height="10pt" font-weight="bold"> Qui doit répondre à ce questionnaire ?</fo:block>
             </fo:block-container>
-
             <fo:block-container absolute-position="absolute" left="0mm" top="170mm">
                 <fo:block margin-top="5mm" font-size="10pt">
                     <fo:inline-container margin="0mm">
                         <fo:block line-height="10pt">
-                            <fo:block line-height="10pt">${QuiRepond1}                              
-                                </fo:block>
+                            <fo:block line-height="10pt">${QuiRepond1}</fo:block>
                             <fo:block line-height="10pt">$!{QuiRepond2}</fo:block>
                             <fo:block line-height="10pt">$!{QuiRepond3}</fo:block>
                         </fo:block>
@@ -308,33 +244,19 @@
                 border-top-style="solid">
                 <fo:block margin="2mm">
                     <fo:inline-container margin="0mm">
-                        <fo:block line-height="10pt"> Vu l'avis favorable du Conseil National de
-                            l'Information Statistique, cette enquête
-                            #if(${BddCaractereObligatoire}==’oui’) reconnue d’intérêt général et de
-                            qualité statistique, est obligatoire #else est reconnue d’intérêt
-                            général et de qualité statistique sans avoir de caractère obligatoire
-                            #end. </fo:block>
-                        <fo:block line-height="10pt"> Visa n°${BddNumeroVisa} du
-                            {BddMinistereTutelle}, valable pour l'année ${BddAnneeCollecte}. </fo:block>
-                        <fo:block line-height="10pt"> En application de la loi n° 51-711 du 7 juin
-                            1951 modifiée, les réponses à ce questionnaire sont obligatoires et sont
-                            protégées par le secret statistique et destinées à
-                            ${BddNomServiceProducteurCourt}. Le règlement 2016/679 du 27 avril 2016
-                            relatif à la protection des personnes physiques à l'égard du traitement
-                            des données à caractère personnel et à la libre circulation de ces
-                            données (règlement général sur la protection des données, RGPD) ainsi
-                            que la loi n° 78-17 du 6 janvier 1978 modifiée, relative à
-                            l'informatique, aux fichiers et aux libertés, s'appliquent aux réponses
-                            faites à la présente enquête. </fo:block>
-                        <fo:block line-height="10pt"> Elle garantit un droit d'accès et de
-                            rectification pour les données les concernant. Ce droit peut être exercé
-                            auprès de ${BddNomServiceProducteurCourt}. </fo:block>
+                        <fo:block line-height="10pt"> Vu l'avis favorable du Conseil National de l'Information Statistique, cette enquête
+                            #if(${BddCaractereObligatoire}=='oui') reconnue d'<fo:inline font-weight="bold">intérêt général et de qualité statistique</fo:inline>, est <fo:inline font-weight="bold">obligatoire</fo:inline> 
+                            #else est reconnue d'<fo:inline font-weight="bold">intérêt général et de qualité statistique</fo:inline> sans avoir de caractère obligatoire#end, 
+                            en application de la loi n° 51-711 du 7 juin 1951 modifiée sur l’obligation, la coordination et le secret en matière de statistiques.</fo:block>
+                        <fo:block line-height="10pt"> Visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l'année ${BddAnneeCollecte}.
+                            #if(${BddParutionJO}=='oui')Arrêté en date du ${BddDateParutionJO} #else Arrêté en cours de parution #end.</fo:block>
+                        <fo:block line-height="10pt">Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${BddNomServiceProducteurCourt}. Le règlement 2016/679 du 27 avril 2016
+                            sur la protection des données (RGPD), ainsi que la loi n° 78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux fichiers et aux libertés, s'appliquent aux réponses faites à la présente enquête.
+                            Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de ${BddNomServiceRecours}.
+                        </fo:block>
                     </fo:inline-container>
                 </fo:block>
             </fo:block-container>
-       
-
-
         </fo:flow>
     </fo:page-sequence>
 </fo:root>
