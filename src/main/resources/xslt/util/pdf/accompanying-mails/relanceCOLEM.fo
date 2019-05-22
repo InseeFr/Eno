@@ -59,8 +59,6 @@
                     </fo:block>
                 </fo:block-container>
 
-<!-- ################### -->
-
                 <!-- ZONE RESERVE ADRESSE -->
                 <fo:block-container absolute-position="absolute" left="80mm" top="33mm" width="110mm" height="50mm" overflow="hidden">
                     <fo:block/>
@@ -102,10 +100,8 @@
                     <fo:block/>
                 </fo:block-container>
                 
-<!-- ################### -->
-                
                 <fo:block-container absolute-position="absolute" left="1mm" top="38mm" width="78mm" height="6mm" overflow="hidden" font-size="10pt">
-                    <fo:block line-height="10pt" font-weight="bold" text-align="center">#if($!{BddNumRelance}=='2')2ème #endRAPPEL</fo:block>
+                    <fo:block line-height="10pt" font-weight="bold" text-align="center">#if($!{BddNumRelance}=='2')2ème#end RAPPEL</fo:block>
                 </fo:block-container>
 
                 <fo:block-container absolute-position="absolute" left="1mm" top="50.5mm" width="78mm" height="36.7mm" overflow="hidden">
@@ -129,8 +125,6 @@
                         <fo:inline-container>
                             
                             <fo:block text-align="right" font-size="10pt">${BddVille}, le ${BddDateEditionRelance}</fo:block>
-                            <fo:block text-align="right" font-size="10pt">${BddNumEnreg}</fo:block>
-
                             <fo:block margin-top="2mm">
                                 Madame, Monsieur,
                             </fo:block>
