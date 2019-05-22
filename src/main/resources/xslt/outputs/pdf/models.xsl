@@ -4,7 +4,7 @@
 	xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner"
 	xmlns:fo="http://www.w3.org/1999/XSL/Format"
 	xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
-	exclude-result-prefixes="xd xs eno enopdf"
+	exclude-result-prefixes="xd xs eno enopdf fox"
 	version="2.0">
 
 	<xd:doc>

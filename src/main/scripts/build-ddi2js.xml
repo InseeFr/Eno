@@ -6,7 +6,7 @@
 
     <!-- ******************************* Main properties for the non-regression script depending on the input and transformation to be processed *********************************** -->
     <!-- The name of the survey, conditionning the name of the input file processed. -->
-    <property name="survey-name" value="simpsons"/>
+    <property name="survey-name" value="ophelie"/>
     <!-- The transformation to be processed, usually named using a <in>2<out> template. -->
     
     <property name="transformation-name" value="ddi2js"/>

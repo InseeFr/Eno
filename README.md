@@ -1,3 +1,5 @@
+<img align="right" src="docs/img/eno-logo.png" alt="Eno logo"/>
+
 # Eno – Questionnaire generator
 
 [![Build Status](https://travis-ci.org/InseeFr/Eno.svg?branch=master)](https://travis-ci.org/InseeFr/Eno)

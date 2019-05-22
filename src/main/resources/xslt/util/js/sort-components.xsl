@@ -46,6 +46,24 @@
         </components>
     </xsl:template>
     
+    <xsl:template match="h:components[@xsi:type='TableOneAxis']">
+        <components>
+            <xsl:copy-of select="@*"/>
+            <codeLists id="{replace(replace(h:codes[1]/@id,'--1$',''),'-0$','')}">
+                <xsl:apply-templates select="h:codes"/>
+            </codeLists>
+            <xsl:for-each select="h:columns[@id=1]">
+                <xsl:apply-templates select=".">
+                    <xsl:with-param name="nameColumn" select="h:column-name" tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:for-each>
+            <xsl:apply-templates select="h:response">
+                <xsl:with-param name="ancestor" select="'table'" tunnel="yes"/>
+            </xsl:apply-templates>
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:codes or self::h:columns or descendant-or-self::h:response)]"/>
+        </components>
+    </xsl:template>
+    
     <xsl:template match="h:components">
         <components>
             <xsl:copy-of select="@*"/>
@@ -78,9 +96,20 @@
     </xsl:template>
        
     <xsl:template match="h:response">
-        <response name="{@name}">
-            <xsl:apply-templates  select="h:valueState"/>
-        </response>
+        <xsl:param name="ancestor" tunnel="yes"/>
+        <xsl:choose>
+            <xsl:when test="$ancestor='table'">
+                <responses name="{@name}" responseType="{@responseType}">
+                    <xsl:apply-templates select="h:valueState"/>
+                </responses>
+            </xsl:when>
+            <xsl:otherwise>
+                <response name="{@name}" responseType="{@responseType}">
+                    <xsl:apply-templates select="h:valueState"/>
+                </response>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
     
     <xsl:template match="h:valueState">
@@ -126,10 +155,27 @@
     
     <xsl:template match="h:codes">
         <codes>
-            <parent><xsl:value-of select="h:parent"/></parent>
+            <xsl:copy-of select="@depth"/>
             <value><xsl:value-of select="h:value"/></value>
             <xsl:apply-templates select="h:label"/>
         </codes>
+    </xsl:template>
+    
+ 
+    <xsl:template match="h:column-name">
+        <column-name>
+            <xsl:copy-of select="@*"/>
+            <xsl:value-of select="."/>
+        </column-name>
+    </xsl:template>
+    <xsl:template match="h:columns">
+        <columns>
+            <xsl:copy-of select="@*[not(name()='id')]"/>
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:response)]"/>
+        </columns>
+    </xsl:template>
+    <xsl:template match="h:variablesExternal">
+            <xsl:copy-of select="."/>        
     </xsl:template>
     
     <xd:doc>

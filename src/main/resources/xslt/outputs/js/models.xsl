@@ -44,13 +44,25 @@
 	
 	<xsl:template match="ResponseElement" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="finding"/>
 		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
 		<!--<xsl:param name="isInSurvey" tunnel="yes"/>-->
 		<!-- display only external variable -->
-		<variables>
-			<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
-			<label><xsl:value-of select="enojs:get-label($source-context,$languages[1])"/></label>
-		</variables>	
+		<xsl:choose>
+			<xsl:when test="$finding='yo'">
+				<variable-ext>
+					<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
+					<label><xsl:value-of select="enojs:get-label($source-context,$languages[1])"/></label>
+				</variable-ext>
+			</xsl:when>
+			<xsl:otherwise>
+				<variables>
+					<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
+					<label><xsl:value-of select="enojs:get-label($source-context,$languages[1])"/></label>
+				</variables>
+			</xsl:otherwise>
+		</xsl:choose>
+			
 	</xsl:template>
 	
 	
@@ -165,10 +177,139 @@
 	</xsl:template>
 	<xsl:template match="MultipleChoiceQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		
 		<xsl:call-template name="addQuestionArguments">
 			<xsl:with-param name="source-context" select="$source-context"/>
 			<xsl:with-param name="typeOfQuestion" select="'MultipleChoiceQuestion'"/>
 		</xsl:call-template>
+	</xsl:template>
+	
+	<xsl:template match="Table" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:variable name="questionName" select="enojs:get-question-name($source-context,$languages[1])"/>
+		<xsl:variable name="idQuestion" select="enojs:get-name($source-context)"/>
+		
+		<xsl:variable name="formulaReadOnly" select="enojs:get-readonly-ancestors($source-context)" as="xs:string*"/>
+		<xsl:variable name="formulaRelevant" select="enojs:get-relevant-ancestors($source-context)" as="xs:string*"/>
+		
+		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
+		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
+		
+		<xsl:variable name="declarations" select="eno:getInstructionForQuestion($source-context,.)" as="node()*" />
+		<xsl:variable name="labelQuestion" select="enojs:get-label($source-context, $languages[1])"/>
+		
+		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
+			.,
+			$formulaReadOnly,
+			$formulaRelevant,
+			$variablesReadOnly,
+			$variablesRelevant
+			)"/>
+		
+		<xsl:variable name="typeTable" select="enojs:get-css-class($source-context)"/>
+		
+		<xsl:choose>
+			<xsl:when test="$typeTable='question complex-grid'"/>
+			<xsl:when test="$typeTable='question multiple-choice-question'">
+				<components xsi:type="TableOneAxis" id="{$idQuestion}" positioning="HORIZONTAL">
+					<label><xsl:value-of select="$labelQuestion"/></label>
+					<xsl:copy-of select="$declarations"/>
+					<xsl:copy-of select="$filterCondition"/>
+					
+					<xsl:for-each select="enojs:get-body-lines($source-context)">
+						<xsl:apply-templates select="enojs:get-body-line($source-context,position())" mode="source">
+							<xsl:with-param name="ancestorTable" select="'line'" tunnel="yes"/>
+							<xsl:with-param name="typeOfAncestor" select="'table'" tunnel="yes"/>
+							<xsl:with-param name="position" select="position()" tunnel="yes"/>
+							<xsl:with-param name="questionName" select="$questionName" tunnel="yes"/>
+						</xsl:apply-templates>
+					</xsl:for-each>
+					
+					<xsl:for-each select="enojs:get-header-columns($source-context)">
+						<xsl:apply-templates select="enojs:get-header-line($source-context,position())" mode="source">
+							<xsl:with-param name="ancestorTable" select="'headerLine'" tunnel="yes"/>
+							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
+							<xsl:with-param name="typeOfAncestor" select="'table'" tunnel="yes"/>
+						</xsl:apply-templates>
+					</xsl:for-each>
+				</components>
+			</xsl:when>
+		</xsl:choose>
+		
+	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the TextCell driver.</xd:p>
+			<xd:p>It displays the headers on the top and the left.</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="TextCell" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="ancestorTable" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="idColumn" tunnel="yes"/>
+		
+		<xsl:variable name="col-span" select="number(enojs:get-colspan($source-context))"/>
+		<xsl:variable name="row-span" select="number(enojs:get-rowspan($source-context))"/>
+		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
+		<xsl:variable name="depth" select="enojs:get-code-depth($source-context)"/>
+		
+		
+		<xsl:if test="$ancestorTable!=''">
+				<xsl:variable name="label" select="enojs:get-label($source-context,$languages)"/>
+				<xsl:choose>
+					<xsl:when test="$label!='' and $ancestorTable='line'">
+						<codes id="{$id}" depth="{$depth}">
+							<value><xsl:value-of select="enojs:get-value($source-context)"/></value>
+							<label><xsl:value-of select="$label"/></label>
+						</codes>
+					</xsl:when>
+					<xsl:when test="$label!='' and $ancestorTable='headerLine'">
+						<column-name id="{$idColumn}"><xsl:value-of select="$label"/></column-name>
+					</xsl:when>
+				</xsl:choose>
+		</xsl:if>
+	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the Cell driver.</xd:p>
+			<xd:p>Create a cell and call templates for children to fill the cell.</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="Cell" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="ancestorTable" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:variable name="col-span" select="number(enojs:get-colspan($source-context))"/>
+		<xsl:variable name="row-span" select="number(enojs:get-rowspan($source-context))"/>
+		<xsl:if test="$ancestorTable!=''">
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
+		</xsl:if>	
+	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the EmptyCell driver.</xd:p>
+			<xd:p>Create a cell and call templates for children to fill the cell (a priori nothing).</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="EmptyCell" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="ancestorTable" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:variable name="col-span" select="number(enojs:get-colspan($source-context))"/>
+		<xsl:variable name="row-span" select="number(enojs:get-rowspan($source-context))"/>
+		<xsl:if test="$ancestorTable!=''">
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
+		</xsl:if>
+			
 	</xsl:template>
 	
 	<xsl:template name="addQuestionArguments">
@@ -198,7 +339,7 @@
 		<xsl:if test="$typeOfQuestion='MultipleChoiceQuestion'">
 			<components xsi:type="Checkbox" id="{$idQuestion}">
 				<label><xsl:value-of select="$labelQuestion"/></label>
-				<xsl:copy-of select="$declarations"></xsl:copy-of>
+				<xsl:copy-of select="$declarations"/>
 				<xsl:copy-of select="$filterCondition"/>
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -238,6 +379,9 @@
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		<xsl:param name="filterCondition" tunnel="yes"/>
 		
+		<xsl:param name="typeOfAncestor" tunnel="yes"/>
+		<xsl:param name="position" tunnel="yes"/>
+		
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
 		<xsl:variable name="numberOfDecimals">
@@ -254,22 +398,28 @@
 		
 		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
 		
-		<xsl:if test="$typeResponse!='' and $questionName!=''">
+		<xsl:if test="$typeResponse!=''">
 			
 			<xsl:choose>
-				<xsl:when test="$typeResponse='text'">
+				<xsl:when test="$typeResponse='text' and $questionName!='' and $typeOfAncestor!='table'">
 					<components xsi:type="Input" id="{$idQuestion}" maxLength="{$lengthResponse}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"/>
 						<xsl:call-template name="enojs:addResponeTocomponents">
 							<xsl:with-param name="responseName" select="$responseName"/>
-							
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</components>
 				</xsl:when>
 				
-				<xsl:when test="$typeResponse='number'">
+				<xsl:when test="$typeResponse='text' and $typeOfAncestor='table'">
+					<columns componentType="Input" id="{$position}" maxLength="{$lengthResponse}"/>
+					<xsl:call-template name="enojs:addResponeTocomponents">
+						<xsl:with-param name="responseName" select="$responseName"/>
+					</xsl:call-template>
+				</xsl:when>
+								
+				<xsl:when test="$typeResponse='number' and $questionName!='' and $typeOfAncestor!='table'">
 					<components xsi:type="InputNumber" id="{$idQuestion}" min="{$minimumResponse}" max="{$maximumResponse}" decimals="{$numberOfDecimals}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:if test="$unit!=''">
@@ -282,6 +432,17 @@
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</components>
+				</xsl:when>
+				
+				<xsl:when test="$typeResponse='number' and $typeOfAncestor='table'">
+					<columns componentType="InputNumber" id="{$position}" min="{$minimumResponse}" max="{$maximumResponse}" decimals="{$numberOfDecimals}">
+						<xsl:if test="$unit!=''">
+							<unit><xsl:value-of select="$unit"/></unit>
+						</xsl:if>
+					</columns>
+					<xsl:call-template name="enojs:addResponeTocomponents">
+						<xsl:with-param name="responseName" select="$responseName"/>
+					</xsl:call-template>
 				</xsl:when>
 				
 			</xsl:choose>
@@ -307,19 +468,34 @@
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		<xsl:param name="filterCondition" tunnel="yes"/>
 		
+		<xsl:param name="typeOfAncestor" tunnel="yes"/>
+		<xsl:param name="position" tunnel="yes"/>
+		
 		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
 		<xsl:variable name="dateFormat" select="enojs:get-format($source-context)"/>
+		<xsl:choose>
+			<xsl:when test="$typeOfAncestor='table'">
+				<columns componentType="Datepicker" id="{$position}">
+					<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
+				</columns>
+				<xsl:call-template name="enojs:addResponeTocomponents">
+					<xsl:with-param name="responseName" select="$responseName"/>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<components xsi:type="Datepicker" id="{$idQuestion}">
+					<label><xsl:value-of select="$labelQuestion"/></label>
+					<xsl:copy-of select="$declarations"/>
+					<xsl:call-template name="enojs:addResponeTocomponents">
+						<xsl:with-param name="responseName" select="$responseName"/>				
+						
+					</xsl:call-template>
+					<xsl:copy-of select="$filterCondition"/>
+					<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
+				</components>
+			</xsl:otherwise>
+		</xsl:choose>
 		
-		<components xsi:type="Datepicker" id="{$idQuestion}">
-			<label><xsl:value-of select="$labelQuestion"/></label>
-			<xsl:copy-of select="$declarations"/>
-			<xsl:call-template name="enojs:addResponeTocomponents">
-				<xsl:with-param name="responseName" select="$responseName"/>				
-				
-			</xsl:call-template>
-			<xsl:copy-of select="$filterCondition"/>
-			<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
-		</components>
 		
 		<xsl:call-template name="enojs:addVariableCollected">
 			<xsl:with-param name="responseName" select="$responseName"/>
@@ -344,6 +520,8 @@
 		<xsl:param name="labelQuestion" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		
+		<xsl:param name="position" tunnel="yes"/>
+		
 		<xsl:variable name="name" select="enojs:get-codelist-name($source-context)"/>
 		<xsl:variable name="idCodeList" select="enojs:get-codelist-id($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enojs:get-code-maximum-length($source-context)"/>
@@ -351,11 +529,12 @@
 		
 		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
 		
+		
 		<xsl:choose>
 			
 			<xsl:when test="$maximumLengthCode != '' and $questionName!=''">
 				<!-- remove Format in the cell for table 'question multiple-choice-question'-->
-				<xsl:if test="$typeOfAncestor!='MultipleChoiceQuestion'">
+				<xsl:if test="$typeOfAncestor!='MultipleChoiceQuestion' and $typeOfAncestor!='table'">
 					<components xsi:type="CheckboxOne" id="{$idQuestion}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
@@ -376,6 +555,26 @@
 						<xsl:copy-of select="$filterCondition"/>
 					</components>
 					
+					<xsl:call-template name="enojs:addVariableCollected">
+						<xsl:with-param name="responseName" select="$responseName"/>
+						<xsl:with-param name="responseRef" select="$responseName"/>
+					</xsl:call-template>
+				</xsl:if>
+				
+				<xsl:if test="$typeOfAncestor!='MultipleChoiceQuestion' and $typeOfAncestor='table'">
+					<columns id="{$position}" componentType="CheckboxOne">
+						<codeLists id="{$idCodeList}">
+							<label><xsl:value-of select="$name"/></label>
+							<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+								<xsl:with-param name="driver" select="." tunnel="yes"/>
+								<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
+							</xsl:apply-templates>
+						</codeLists>
+					</columns>
+					<xsl:call-template name="enojs:addResponeTocomponents">
+						<xsl:with-param name="responseName" select="$responseName"/>
+						
+					</xsl:call-template>
 					<xsl:call-template name="enojs:addVariableCollected">
 						<xsl:with-param name="responseName" select="$responseName"/>
 						<xsl:with-param name="responseRef" select="$responseName"/>
@@ -443,6 +642,8 @@
 		<xsl:param name="labelQuestion" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		
+		<xsl:param name="position" tunnel="yes"/>
+		
 		<xsl:variable name="name" select="enojs:get-codelist-name($source-context)"/>
 		<xsl:variable name="idCodeList" select="enojs:get-codelist-id($source-context)"/>
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
@@ -456,6 +657,9 @@
 			<xsl:choose>
 				<xsl:when test="$typeXf='full'">
 					<components xsi:type="Radio" id="{$idQuestion}">
+						<xsl:call-template name="findExternalVariablesInFormula">
+							<xsl:with-param name="formula" select="''"/>
+						</xsl:call-template>
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
 						
@@ -480,7 +684,9 @@
 					<components xsi:type="Dropdown" id="{$idQuestion}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
-						
+						<xsl:call-template name="findExternalVariablesInFormula">
+							<xsl:with-param name="formula" select="''"/>
+						</xsl:call-template>
 						<codeLists id="{$idCodeList}">
 							<label><xsl:value-of select="$name"/></label>
 							<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -504,7 +710,43 @@
 			</xsl:call-template>
 		</xsl:if>
 		
-		
+		<xsl:if test="$maximumLengthCode != '' and $typeOfAncestor='table'">
+			<xsl:choose>
+				<xsl:when test="$typeXf='full'">
+					<columns id="{$position}" componentType="Radio">
+						<codeLists id="{$idCodeList}">
+							<label><xsl:value-of select="$name"/></label>
+							<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+								<xsl:with-param name="driver" select="." tunnel="yes"/>
+								<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
+							</xsl:apply-templates>
+						</codeLists>
+					</columns>
+					<xsl:call-template name="enojs:addResponeTocomponents">
+						<xsl:with-param name="responseName" select="$responseName"/>
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:when test="$typeXf='minimal'">
+					<columns id="{$position}" componentType="Dropdown">						
+						<codeLists id="{$idCodeList}">
+							<label><xsl:value-of select="$name"/></label>
+							<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+								<xsl:with-param name="driver" select="." tunnel="yes"/>
+								<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
+							</xsl:apply-templates>
+						</codeLists>
+					</columns>
+					<xsl:call-template name="enojs:addResponeTocomponents">
+						<xsl:with-param name="responseName" select="$responseName"/>
+					</xsl:call-template>
+				</xsl:when>
+			</xsl:choose>
+			
+			<xsl:call-template name="enojs:addVariableCollected">
+				<xsl:with-param name="responseName" select="$responseName"/>
+				<xsl:with-param name="responseRef" select="$responseName"/>
+			</xsl:call-template>
+		</xsl:if>
 	</xsl:template>
 	
 	
@@ -520,12 +762,11 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
-		<xsl:variable name="name" select="enojs:get-question-name($source-context, $languages[1])"/>
+		<xsl:variable name="depth" select="enojs:get-code-depth($source-context)"/>
 		<!-- remove item in the cell for table when the response is boolean-->
 		<xsl:choose>
 			<xsl:when test="$label !='' and $typeResponse!='boolean' and $typeOfAncestor='codeLists'">
-				<codes>
-					<parent><xsl:value-of select="$name"/></parent>
+				<codes depth="{$depth}">
 					<value><xsl:value-of select="enojs:get-value($source-context)"/></value>
 					<label><xsl:value-of select="$label"/></label>
 				</codes>
@@ -552,6 +793,9 @@
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		<xsl:param name="filterCondition" tunnel="yes"/>
 		
+		<xsl:param name="typeOfAncestor" tunnel="yes"/>
+		<xsl:param name="position" tunnel="yes"/>
+		
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
 		
@@ -567,6 +811,22 @@
 				</xsl:call-template>
 				<xsl:copy-of select="$filterCondition"/>
 			</components>
+			
+			<xsl:call-template name="enojs:addVariableCollected">
+				<xsl:with-param name="responseName" select="$responseName"/>
+				<xsl:with-param name="responseRef" select="$responseName"/>
+			</xsl:call-template>
+		</xsl:if>
+		
+		<xsl:if test="$typeResponse !='' and $typeOfAncestor='table'">
+			<columns xsi:type="Textarea" id="{$position}" maxLength="{$lengthResponse}">
+				<label><xsl:value-of select="$labelQuestion"/></label>
+				<xsl:copy-of select="$declarations"></xsl:copy-of>				
+			</columns>
+			<xsl:call-template name="enojs:addResponeTocomponents">
+				<xsl:with-param name="responseName" select="$responseName"/>					
+			</xsl:call-template>
+			<xsl:copy-of select="$filterCondition"/>
 			
 			<xsl:call-template name="enojs:addVariableCollected">
 				<xsl:with-param name="responseName" select="$responseName"/>
@@ -674,7 +934,7 @@
 		<xsl:param name="responseName"/>
 		<xsl:param name="responseType"/>
 		<xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
-		<response name="{$responseName}">
+		<response name="{$responseName}" responseType="{$responseType}">
 			<xsl:for-each select="tokenize($ResponseTypeEnum,',')">
 				<valueState type="{.}">
 					<xsl:choose>
@@ -876,6 +1136,20 @@
 				</xsl:call-template>
 			</xsl:otherwise>
 		</xsl:choose>		
+	</xsl:template>
+	
+	
+	<xsl:template name="replaceExternalVariablesInFormule">
+		
+	</xsl:template>
+	
+	<xsl:template name="findExternalVariablesInFormula">
+		<xsl:param name="formula"/>
+		<variablesExternal>
+			<xsl:apply-templates select="ancestor-or-self::ResponseElement">
+				<xsl:with-param name="finding" select="'yo'"/>
+			</xsl:apply-templates>
+		</variablesExternal>
 	</xsl:template>
 	
 	<xsl:template name="enojs:addVariableCollected">

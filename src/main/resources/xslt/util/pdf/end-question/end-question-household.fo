@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"
-    xmlns:fox="http://xmlgraphics.apache.org/fop/extensions"
-    xmlns:axf="http://www.antennahouse.com/names/XSL/Extensions">
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
     <fo:layout-master-set>
         <fo:simple-page-master master-name="questions-fin" page-height="297mm"
             page-width="210mm" font-family="Liberation Sans" font-size="10pt"
