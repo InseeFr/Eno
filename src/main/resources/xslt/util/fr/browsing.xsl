@@ -854,10 +854,10 @@
 -->
     </xsl:template>
 
-    <xsl:template match="xf:var[@value='position()' and parent::xf:repeat/fr:section]">
+    <xsl:template match="xf:bind[@value='position()' and //xf:repeat[fr:section and xf:var/@bind=current()/@id]]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="value" select="concat('number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',parent::xf:repeat/@id,'''])')"/>
+            <xsl:attribute name="value" select="concat('number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',substring-before(@name,'-position'),'''])')"/>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
