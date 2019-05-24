@@ -1018,7 +1018,7 @@
     </xsl:template>
     
     
-    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse')]//*[name() =('Sequence','IfThenElse','QuestionMultipleChoice','QuestionSingleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','Control') and not(ancestor::driver-ManagedRepresentationScheme)]" mode="model" priority="1">
+    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse')]//*[name() =('Sequence','IfThenElse','QuestionMultipleChoice','QuestionSingleChoice','QuestionOtherDetails','QuestionTable','QuestionDynamicTable','QuestionSimple','Control') and not(ancestor::driver-ManagedRepresentationScheme)]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="driver" select="."/>
@@ -1057,8 +1057,17 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
+    
+    <xsl:template match="driver-Binding//Clarification" mode="model" priority="1">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
  
-    <xsl:template name="QuestionConstruct" match="driver-ControlConstructScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','QuestionSingleChoice')]" mode="model">
+    <xsl:template name="QuestionConstruct" match="driver-ControlConstructScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','QuestionSingleChoice','QuestionOtherDetails')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
         <d:QuestionConstruct>
@@ -1075,7 +1084,7 @@
         </d:QuestionConstruct>
     </xsl:template>
 
-    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain | driver-QuestionOtherDetails/ResponseDomain" mode="model" priority="1">
+    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="mandatory" select="enoddi33:get-ci-type($source-context)"/>
@@ -1104,68 +1113,49 @@
         </d:CodeDomain>
     </xsl:template>
     
-    <!-- Question with a complementary sub-question for clarrification which are linked to each other -->
-    <xsl:template match="driver-QuestionScheme//QuestionOtherDetails" mode="model" priority="1">
+    <!-- Question with a complementary sub-response for clarrification which are linked to each other -->
+    <xsl:template match="driver-SMRD//ResponseDomain[not(ancestor::Clarification)]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        
-        <!-- Value of expresion to show the clarification question -->
-        <xsl:variable name="ValueOfExpression">
-        	<xsl:value-of select="enoddi32:get-command(.)"/>
-        </xsl:variable>
-        
-        ----- ValueOfExpression : <xsl:value-of select="$ValueOfExpression"/>
-        <d:StructuredMixedResponseDomain>
-	        <d:ResponseDomainInMixed attachmentBase="1">
+    	<d:ResponseDomainInMixed attachmentBase="1">
 	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-		        <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionOtherDetails', .)" tunnel="yes"/>
-		       	<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-		    </xsl:apply-templates>
-	        </d:ResponseDomainInMixed>
-	        <d:ResponseDomainInMixed>
-	       		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-		        	<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationQuestion', .)" tunnel="yes"/>
-		        	<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-		       	</xsl:apply-templates>
-			</d:ResponseDomainInMixed>
-    	</d:StructuredMixedResponseDomain>
+            	<xsl:with-param name="driver" select="." tunnel="yes"/>
+        	</xsl:apply-templates>
+	   	</d:ResponseDomainInMixed>
     </xsl:template>
     
-    <xsl:template match="driver-ExpressionOtherDetails/ResponseDomain" mode="model" priority="1">
+    <!-- Clarification -->
+    <xsl:template match="driver-SMRD//Clarification" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:value-of select="enoddi32:get-expression($source-context)"/>
-    </xsl:template>
-    
-    <xsl:template match="driver-ClarificationQuestion/Clarification" mode="model" priority="3">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:TextDomain>
-        	<r:Label>
-	        	<r:Content xml:lang="fr-FR">
-		        	<xhtml:p>
-		            	<xhtml:b><xsl:value-of select="enoddi32:get-label($source-context)"/></xhtml:b>
-		        	</xhtml:p>
-	        	</r:Content>
-        	</r:Label>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-		    	<xsl:with-param name="driver" select="eno:append-empty-element('driver-OutParameter', .)" tunnel="yes"/>
-		    	<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-		    </xsl:apply-templates>
-            </d:TextDomain>
-            <d:AttachmentLocation>
+	    <d:ResponseDomainInMixed>
+	    	<d:TextDomain>
+	        	<r:Label>
+	        		<r:Content xml:lang="{enoddi32:get-lang($source-context)}">
+                        <xhtml:p>
+			            	<xhtml:b><xsl:value-of select="enoddi32:get-label($source-context)"/></xhtml:b>
+			        	</xhtml:p>
+                    </r:Content>
+	        	</r:Label>
+	            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			    	<xsl:with-param name="driver" select="eno:append-empty-element('driver-OutParameter', .)" tunnel="yes"/>
+			    	<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+			    </xsl:apply-templates>
+	        </d:TextDomain>
+	       	<d:AttachmentLocation>
             	<d:DomainSpecificValue attachmentDomain="1">
-                	<r:Value>6!!!!!!!!!!!!!!!!!!!!!!!</r:Value>
+                	<r:Value></r:Value>
                 </d:DomainSpecificValue>
             	<r:CodeReference>
 	            	<r:Agency><xsl:value-of select="$agency"/></r:Agency>
-	            	<r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+	            	<r:ID><xsl:value-of select="enoddi32:get-code-list-id($source-context)"/>-</r:ID>
 	            	<r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
 	            	<r:TypeOfObject>Code</r:TypeOfObject>
             	</r:CodeReference>
             </d:AttachmentLocation>
+		</d:ResponseDomainInMixed>
     </xsl:template>
-    
+      
     <xsl:template match="driver-SMGRD/ResponseDomain" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -1189,11 +1179,21 @@
     </xsl:template>
     
     <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
-    <xsl:template match="driver-ResponseDomain/QuestionSimple | driver-ResponseDomain/QuestionSingleChoice | driver-ResponseDomain/QuestionOtherDetails" mode="model" priority="3">
+    <xsl:template match="driver-ResponseDomain/QuestionSimple | driver-ResponseDomain/QuestionSingleChoice" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates> 
+    </xsl:template>
+    
+    <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
+    <xsl:template match="driver-ResponseDomain/QuestionOtherDetails" mode="model" priority="3">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <d:StructuredMixedResponseDomain>
+	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMRD', .)" tunnel="yes"/>
+        	</xsl:apply-templates>
+    	</d:StructuredMixedResponseDomain>
     </xsl:template>
     
     <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
@@ -1301,6 +1301,13 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
    
+    <xsl:template match="driver-OutParameter//Clarification" mode="model" priority="1">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+        	<xsl:with-param name="driver" select="." tunnel="yes"/>
+       	</xsl:apply-templates>
+    </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-OutParameter//ResponseDomain" mode="model" priority="2">
@@ -1377,7 +1384,7 @@
     <xsl:template match="driver-CodeListReference//*" mode="model"/>
     
 
-    <xsl:template match="driver-CodeListReference//CodeListReference | QuestionSingleChoice//ResponseDomain/CodeListReference | QuestionOtherDetails//ResponseDomain/CodeListReference" mode="model" priority="2">
+    <xsl:template match="driver-CodeListReference//CodeListReference | QuestionSingleChoice//ResponseDomain/CodeListReference" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:CodeListReference>	
@@ -1681,7 +1688,7 @@
     
     <xsl:template match="driver-SMGRD/*" mode="model" priority="2"/>
     
-    <xsl:template match="driver-SMGRD/ResponseDomain/CodeDomain" mode="model" priority="3">
+    <xsl:template match="driver-SMGRD/ResponseDomain/CodeDomain | driver-SMRD/ResponseDomain/CodeDomain" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
