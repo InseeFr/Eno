@@ -50,7 +50,12 @@
                 <xhtml:title>
                     <xsl:value-of select="enofr:get-form-title($source-context, $languages[1])"/>
                 </xhtml:title>
-                <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{$properties//Css/Common}"/>
+                <xsl:for-each select="$properties//Css/Common">
+                    <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                </xsl:for-each>
+                <xsl:for-each select="$parameters//Css">
+                    <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                </xsl:for-each>
                 <xf:model id="fr-form-model" xxf:expose-xpath-types="true" xxf:noscript-support="true">
 
                     <!-- Main instance, it contains the elements linked to fields, and which will be stored when the form will be submitted -->
