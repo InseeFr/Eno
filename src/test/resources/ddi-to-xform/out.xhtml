@@ -549,6 +549,9 @@
                <xf:bind id="j6qg8rc6-Container-bind"
                         name="j6qg8rc6-Container"
                         nodeset="j6qg8rc6-Container/j6qg8rc6">
+                  <xf:bind id="j6qg8rc6-position-bind"
+                           name="j6qg8rc6-position"
+                           value="position()"/>
                   <xf:bind id="FAVOURITE_CHARACTERS11-bind"
                            name="FAVOURITE_CHARACTERS11"
                            ref="FAVOURITE_CHARACTERS11"/>
@@ -2679,27 +2682,27 @@
                         </xf:action>
                         <xf:action ev:event="xforms-value-changed"
                                    if="not(xxf:evaluate-bind-property('d1e42-THEN-bind','relevant'))"
-                                   iterate="instance('fr-form-instance')//d1e42-THEN//*[not(descendant::*)]">
+                                   iterate="instance('fr-form-instance')//d1e42-THEN//*[not(descendant::*) and not(ends-with(name(),'-Count')]">
                            <xf:setvalue ref="." value="''"/>
                         </xf:action>
                         <xf:action ev:event="xforms-value-changed"
                                    if="not(xxf:evaluate-bind-property('j3341528-bind','relevant'))"
-                                   iterate="instance('fr-form-instance')//j3341528//*[not(descendant::*)]">
+                                   iterate="instance('fr-form-instance')//j3341528//*[not(descendant::*) and not(ends-with(name(),'-Count')]">
                            <xf:setvalue ref="." value="''"/>
                         </xf:action>
                         <xf:action ev:event="xforms-value-changed"
                                    if="not(xxf:evaluate-bind-property('j6qe0h9q-bind','relevant'))"
-                                   iterate="instance('fr-form-instance')//j6qe0h9q//*[not(descendant::*)]">
+                                   iterate="instance('fr-form-instance')//j6qe0h9q//*[not(descendant::*) and not(ends-with(name(),'-Count')]">
                            <xf:setvalue ref="." value="''"/>
                         </xf:action>
                         <xf:action ev:event="xforms-value-changed"
                                    if="not(xxf:evaluate-bind-property('j4nw88h2-bind','relevant'))"
-                                   iterate="instance('fr-form-instance')//j4nw88h2//*[not(descendant::*)]">
+                                   iterate="instance('fr-form-instance')//j4nw88h2//*[not(descendant::*) and not(ends-with(name(),'-Count')]">
                            <xf:setvalue ref="." value="''"/>
                         </xf:action>
                         <xf:action ev:event="xforms-value-changed"
                                    if="not(xxf:evaluate-bind-property('j6qfx9qe-bind','relevant'))"
-                                   iterate="instance('fr-form-instance')//j6qfx9qe//*[not(descendant::*)]">
+                                   iterate="instance('fr-form-instance')//j6qfx9qe//*[not(descendant::*) and not(ends-with(name(),'-Count')]">
                            <xf:setvalue ref="." value="''"/>
                         </xf:action>
                      </xf:select>
@@ -4247,7 +4250,7 @@
                         </xhtml:thead>
                         <xhtml:tbody>
                            <xf:repeat id="j6qg8rc6" nodeset="instance('fr-form-instance')//j6qg8rc6">
-                              <xf:var name="j6qg8rc6-position" value="position()"/>
+                              <xf:var name="j6qg8rc6-position" bind="j6qg8rc6-position-bind"/>
                               <xhtml:tr>
                                  <xhtml:td align="center">
                                     <xf:textarea id="FAVOURITE_CHARACTERS11-control"
