@@ -1753,7 +1753,7 @@
                 <!-- if a TableLoop is un the filter, don't empty its counter -->
                 <xf:action ev:event="xforms-value-changed"
                     if="not(xxf:evaluate-bind-property('{.}-bind','relevant'))"
-                    iterate="{$instance-ancestor-label}{.}//*[not(descendant::*) and not(ends-with(name(),'-Count')]">
+                    iterate="{$instance-ancestor-label}{.}//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
             </xsl:for-each>
@@ -2251,7 +2251,7 @@
                     <!-- if the filter is in a loop, instance-ancestor helps choosing the good filter -->
                     <xf:action ev:event="xforms-value-changed"
                         if="not(xxf:evaluate-bind-property('{.}-bind','relevant'))"
-                        iterate="{$instance-ancestor-label}{.}//*[not(descendant::*) and not(ends-with(name(),'-Count')]">
+                        iterate="{$instance-ancestor-label}{.}//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
                         <xf:setvalue ref="." value="''"/>
                     </xf:action>
                 </xsl:for-each>
