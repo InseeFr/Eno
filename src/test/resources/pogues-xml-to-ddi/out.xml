@@ -5621,7 +5621,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j334iumu--1</r:ID>
+            <r:ID>CA-j334iumu-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Springfield</r:Content>
@@ -5629,7 +5629,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j334iumu-0</r:ID>
+            <r:ID>CA-j334iumu-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Shelbyville</r:Content>
@@ -5637,7 +5637,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j334iumu-1</r:ID>
+            <r:ID>CA-j334iumu-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Seinfeld</r:Content>
@@ -5653,7 +5653,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6qdqoen--1</r:ID>
+            <r:ID>CA-j6qdqoen-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Constance Harm</r:Content>
@@ -5661,7 +5661,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6qdqoen-0</r:ID>
+            <r:ID>CA-j6qdqoen-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Timothy Lovejoy</r:Content>
@@ -5669,7 +5669,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6qdqoen-1</r:ID>
+            <r:ID>CA-j6qdqoen-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Joe Quimby</r:Content>
@@ -5677,7 +5677,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6qdqoen-2</r:ID>
+            <r:ID>CA-j6qdqoen-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Poochie</r:Content>
@@ -5693,7 +5693,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f--1</r:ID>
+            <r:ID>CA-j4nwo00f-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Washington</r:Content>
@@ -5701,7 +5701,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-0</r:ID>
+            <r:ID>CA-j4nwo00f-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Kentucky</r:Content>
@@ -5709,7 +5709,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-1</r:ID>
+            <r:ID>CA-j4nwo00f-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Ohio</r:Content>
@@ -5717,7 +5717,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-2</r:ID>
+            <r:ID>CA-j4nwo00f-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Maine</r:Content>
@@ -5725,7 +5725,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-3</r:ID>
+            <r:ID>CA-j4nwo00f-5</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">North Dakota</r:Content>
@@ -5733,7 +5733,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-4</r:ID>
+            <r:ID>CA-j4nwo00f-6</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Florida</r:Content>
@@ -5741,7 +5741,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-5</r:ID>
+            <r:ID>CA-j4nwo00f-7</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">North Takoma</r:Content>
@@ -5749,7 +5749,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-6</r:ID>
+            <r:ID>CA-j4nwo00f-8</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">California</r:Content>
@@ -5757,7 +5757,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-7</r:ID>
+            <r:ID>CA-j4nwo00f-9</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Texas</r:Content>
@@ -5765,7 +5765,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-8</r:ID>
+            <r:ID>CA-j4nwo00f-10</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Massachusetts</r:Content>
@@ -5773,7 +5773,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-9</r:ID>
+            <r:ID>CA-j4nwo00f-11</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Nevada</r:Content>
@@ -5781,7 +5781,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-10</r:ID>
+            <r:ID>CA-j4nwo00f-12</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Illinois</r:Content>
@@ -5789,7 +5789,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwo00f-11</r:ID>
+            <r:ID>CA-j4nwo00f-13</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Not in any state, you fool!</r:Content>
@@ -5805,7 +5805,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j335cu3c--1</r:ID>
+            <r:ID>CA-j335cu3c-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Santa's Little Helper</r:Content>
@@ -5813,7 +5813,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j335cu3c-0</r:ID>
+            <r:ID>CA-j335cu3c-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Snowball I</r:Content>
@@ -5821,7 +5821,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j335cu3c-1</r:ID>
+            <r:ID>CA-j335cu3c-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Coltrane</r:Content>
@@ -5829,7 +5829,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j335cu3c-2</r:ID>
+            <r:ID>CA-j335cu3c-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Mojo the Helper Monkey</r:Content>
@@ -5845,7 +5845,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6p2mvca--1</r:ID>
+            <r:ID>CA-j6p2mvca-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Vanilla</r:Content>
@@ -5853,7 +5853,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6p2mvca-0</r:ID>
+            <r:ID>CA-j6p2mvca-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Strawberry</r:Content>
@@ -5861,7 +5861,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6p2mvca-1</r:ID>
+            <r:ID>CA-j6p2mvca-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Apple</r:Content>
@@ -5869,7 +5869,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6p2mvca-2</r:ID>
+            <r:ID>CA-j6p2mvca-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Bacon</r:Content>
@@ -5885,7 +5885,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdxh138--1</r:ID>
+            <r:ID>CA-jbdxh138-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Yes</r:Content>
@@ -5893,7 +5893,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdxh138-0</r:ID>
+            <r:ID>CA-jbdxh138-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">No</r:Content>
@@ -5909,7 +5909,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6qeytgc--1</r:ID>
+            <r:ID>CA-j6qeytgc-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Charles Montgomery Burns</r:Content>
@@ -5917,7 +5917,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6qeytgc-0</r:ID>
+            <r:ID>CA-j6qeytgc-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Carl Carlson</r:Content>
@@ -5925,7 +5925,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6qeytgc-1</r:ID>
+            <r:ID>CA-j6qeytgc-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Otto Mann</r:Content>
@@ -5933,7 +5933,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6qeytgc-2</r:ID>
+            <r:ID>CA-j6qeytgc-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Carl Carlson</r:Content>
@@ -5949,7 +5949,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6z087mq--1</r:ID>
+            <r:ID>CA-j6z087mq-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Selma Bouvier</r:Content>
@@ -5957,7 +5957,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6z087mq-0</r:ID>
+            <r:ID>CA-j6z087mq-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Kent Brockman</r:Content>
@@ -5965,7 +5965,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6z087mq-1</r:ID>
+            <r:ID>CA-j6z087mq-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Milhouse Van Houten</r:Content>
@@ -5973,7 +5973,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6z087mq-2</r:ID>
+            <r:ID>CA-j6z087mq-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Nelson Muntz</r:Content>
@@ -5981,7 +5981,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6z087mq-3</r:ID>
+            <r:ID>CA-j6z087mq-5</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Crazy Cat Lady</r:Content>
@@ -5997,7 +5997,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdxricm--1</r:ID>
+            <r:ID>CA-jbdxricm-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Albuquerque</r:Content>
@@ -6005,7 +6005,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdxricm-0</r:ID>
+            <r:ID>CA-jbdxricm-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Springfield</r:Content>
@@ -6013,7 +6013,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdxricm-1</r:ID>
+            <r:ID>CA-jbdxricm-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Portland</r:Content>
@@ -6021,7 +6021,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdxricm-2</r:ID>
+            <r:ID>CA-jbdxricm-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Shelbyville</r:Content>
@@ -6029,7 +6029,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdxricm-3</r:ID>
+            <r:ID>CA-jbdxricm-5</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Dagstuhl</r:Content>
@@ -6045,7 +6045,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwh16i--1</r:ID>
+            <r:ID>CA-j4nwh16i-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Frozen products</r:Content>
@@ -6053,7 +6053,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwh16i-0</r:ID>
+            <r:ID>CA-j4nwh16i-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Ice creams</r:Content>
@@ -6061,7 +6061,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwh16i-1</r:ID>
+            <r:ID>CA-j4nwh16i-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Jasper Beardly</r:Content>
@@ -6069,7 +6069,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwh16i-2</r:ID>
+            <r:ID>CA-j4nwh16i-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Meat</r:Content>
@@ -6077,7 +6077,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwh16i-3</r:ID>
+            <r:ID>CA-j4nwh16i-5</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Bacon</r:Content>
@@ -6085,7 +6085,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwh16i-4</r:ID>
+            <r:ID>CA-j4nwh16i-6</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Pork chop</r:Content>
@@ -6093,7 +6093,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwh16i-5</r:ID>
+            <r:ID>CA-j4nwh16i-7</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Chicken</r:Content>
@@ -6101,7 +6101,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwh16i-6</r:ID>
+            <r:ID>CA-j4nwh16i-8</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Compote</r:Content>
@@ -6109,7 +6109,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwh16i-7</r:ID>
+            <r:ID>CA-j4nwh16i-9</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Powersauce</r:Content>
@@ -6117,7 +6117,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwh16i-8</r:ID>
+            <r:ID>CA-j4nwh16i-10</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Other</r:Content>
@@ -6133,7 +6133,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j77dav9b--1</r:ID>
+            <r:ID>CA-j77dav9b-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Break the windows of the whole city</xhtml:i></xhtml:b></xhtml:p></r:Content>
@@ -6141,7 +6141,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j77dav9b-0</r:ID>
+            <r:ID>CA-j77dav9b-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Loose the violin of his daughter playing poker</xhtml:i></xhtml:b></xhtml:p></r:Content>
@@ -6149,7 +6149,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j77dav9b-1</r:ID>
+            <r:ID>CA-j77dav9b-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Kill Mr Burns</xhtml:i></xhtml:b></xhtml:p></r:Content>
@@ -6157,7 +6157,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j77dav9b-2</r:ID>
+            <r:ID>CA-j77dav9b-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR"><xhtml:p><xhtml:b><xhtml:i>Leaving a mechanical object to control the nuclear power plant</xhtml:i></xhtml:b></xhtml:p></r:Content>
@@ -6173,7 +6173,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdyh6b5--1</r:ID>
+            <r:ID>CA-jbdyh6b5-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Jay</r:Content>
@@ -6181,7 +6181,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdyh6b5-0</r:ID>
+            <r:ID>CA-jbdyh6b5-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Bart</r:Content>
@@ -6189,7 +6189,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdyh6b5-1</r:ID>
+            <r:ID>CA-jbdyh6b5-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Krusty the clown</r:Content>
@@ -6197,7 +6197,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdyh6b5-2</r:ID>
+            <r:ID>CA-jbdyh6b5-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Maggie</r:Content>
@@ -6213,7 +6213,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6p2kivg--1</r:ID>
+            <r:ID>CA-j6p2kivg-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Car</r:Content>
@@ -6221,7 +6221,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6p2kivg-0</r:ID>
+            <r:ID>CA-j6p2kivg-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Bike</r:Content>
@@ -6229,7 +6229,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6p2kivg-1</r:ID>
+            <r:ID>CA-j6p2kivg-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Skateboard</r:Content>
@@ -6237,7 +6237,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6p2kivg-2</r:ID>
+            <r:ID>CA-j6p2kivg-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Plane</r:Content>
@@ -6253,7 +6253,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdye1wa--1</r:ID>
+            <r:ID>CA-jbdye1wa-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Brazil</r:Content>
@@ -6261,7 +6261,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdye1wa-0</r:ID>
+            <r:ID>CA-jbdye1wa-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Canada</r:Content>
@@ -6269,7 +6269,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdye1wa-1</r:ID>
+            <r:ID>CA-jbdye1wa-3</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Japan</r:Content>
@@ -6277,7 +6277,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdye1wa-2</r:ID>
+            <r:ID>CA-jbdye1wa-4</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">France</r:Content>
@@ -6285,7 +6285,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdye1wa-3</r:ID>
+            <r:ID>CA-jbdye1wa-5</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR"><xhtml:p>Other country<xhtml:a href="#ftn1"/></xhtml:p></r:Content>
@@ -6293,7 +6293,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-jbdye1wa-4</r:ID>
+            <r:ID>CA-jbdye1wa-6</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Other planet</r:Content>
@@ -6309,7 +6309,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nwc63q-secondDimension-fakeCL-1--1</r:ID>
+            <r:ID>CA-j4nwc63q-secondDimension-fakeCL-1-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Percentage</r:Content>
@@ -6325,7 +6325,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nw0rr6-secondDimension-fakeCL-1--1</r:ID>
+            <r:ID>CA-j4nw0rr6-secondDimension-fakeCL-1-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Clowning</r:Content>
@@ -6333,7 +6333,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j4nw0rr6-secondDimension-fakeCL-1-0</r:ID>
+            <r:ID>CA-j4nw0rr6-secondDimension-fakeCL-1-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Remember?</r:Content>
@@ -6349,7 +6349,7 @@
          </r:Label>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1--1</r:ID>
+            <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1-1</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Name</r:Content>
@@ -6357,7 +6357,7 @@
          </l:Category>
          <l:Category>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1-0</r:ID>
+            <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1-2</r:ID>
             <r:Version>1.0</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">Age</r:Content>
@@ -6400,11 +6400,11 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334iumu--1</r:ID>
+               <r:ID>j334iumu-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j334iumu--1</r:ID>
+                  <r:ID>CA-j334iumu-1</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6412,11 +6412,11 @@
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334iumu-0</r:ID>
+               <r:ID>j334iumu-2</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j334iumu-0</r:ID>
+                  <r:ID>CA-j334iumu-2</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6424,11 +6424,11 @@
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j334iumu-1</r:ID>
+               <r:ID>j334iumu-3</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j334iumu-1</r:ID>
+                  <r:ID>CA-j334iumu-3</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6448,30 +6448,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qdqoen--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6qdqoen--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qdqoen-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6qdqoen-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>j6qdqoen-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -6480,7 +6456,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6489,6 +6465,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-j6qdqoen-2</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6qdqoen-3</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j6qdqoen-3</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6qdqoen-4</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j6qdqoen-4</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6508,30 +6508,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwo00f--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwo00f--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwo00f-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwo00f-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>j4nwo00f-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -6540,7 +6516,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6552,7 +6528,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>4</r:Value>
+               <r:Value>2</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6564,7 +6540,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>5</r:Value>
+               <r:Value>3</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6576,7 +6552,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>6</r:Value>
+               <r:Value>4</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6588,7 +6564,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>7</r:Value>
+               <r:Value>5</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6600,7 +6576,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>8</r:Value>
+               <r:Value>6</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6612,7 +6588,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>9</r:Value>
+               <r:Value>7</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6624,7 +6600,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>10</r:Value>
+               <r:Value>8</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6636,7 +6612,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>11</r:Value>
+               <r:Value>9</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6648,7 +6624,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>12</r:Value>
+               <r:Value>10</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6657,6 +6633,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-j4nwo00f-11</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>11</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwo00f-12</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j4nwo00f-12</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>12</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwo00f-13</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j4nwo00f-13</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6676,30 +6676,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j335cu3c--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j335cu3c--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j335cu3c-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j335cu3c-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>j335cu3c-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -6708,7 +6684,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6717,6 +6693,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-j335cu3c-2</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j335cu3c-3</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j335cu3c-3</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j335cu3c-4</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j335cu3c-4</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6736,30 +6736,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p2mvca--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6p2mvca--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p2mvca-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6p2mvca-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>j6p2mvca-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -6768,7 +6744,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6777,6 +6753,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-j6p2mvca-2</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6p2mvca-3</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j6p2mvca-3</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6p2mvca-4</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j6p2mvca-4</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6796,11 +6796,11 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>jbdxh138--1</r:ID>
+               <r:ID>jbdxh138-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-jbdxh138--1</r:ID>
+                  <r:ID>CA-jbdxh138-1</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6808,11 +6808,11 @@
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>jbdxh138-0</r:ID>
+               <r:ID>jbdxh138-2</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-jbdxh138-0</r:ID>
+                  <r:ID>CA-jbdxh138-2</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6832,30 +6832,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qeytgc--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6qeytgc--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qeytgc-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6qeytgc-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>j6qeytgc-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -6864,7 +6840,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6873,6 +6849,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-j6qeytgc-2</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6qeytgc-3</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j6qeytgc-3</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6qeytgc-4</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j6qeytgc-4</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6892,30 +6892,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6z087mq--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6z087mq--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6z087mq-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6z087mq-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>j6z087mq-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -6924,7 +6900,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6936,7 +6912,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>4</r:Value>
+               <r:Value>2</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -6945,6 +6921,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-j6z087mq-3</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6z087mq-4</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j6z087mq-4</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>4</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6z087mq-5</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j6z087mq-5</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -6964,30 +6964,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>jbdxricm--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-jbdxricm--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>jbdxricm-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-jbdxricm-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>jbdxricm-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -6996,7 +6972,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -7008,7 +6984,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>4</r:Value>
+               <r:Value>2</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -7017,6 +6993,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-jbdxricm-3</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxricm-4</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jbdxricm-4</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>4</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxricm-5</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jbdxricm-5</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -7036,51 +7036,27 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="false">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwh16i--1</r:ID>
+               <r:ID>j4nwh16i-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwh16i--1</r:ID>
+                  <r:ID>CA-j4nwh16i-1</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
                <r:Value>A</r:Value>
                <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-0</r:ID>
+                  <r:ID>j4nwh16i-2</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:CategoryReference>
                      <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-0</r:ID>
+                     <r:ID>CA-j4nwh16i-2</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:TypeOfObject>Category</r:TypeOfObject>
                   </r:CategoryReference>
                   <r:Value>A1</r:Value>
                </l:Code>
-               <l:Code levelNumber="2" isDiscrete="true">
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-1</r:ID>
-                     <r:Version>1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>A2</r:Value>
-               </l:Code>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwh16i-2</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwh16i-2</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>B</r:Value>
                <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>j4nwh16i-3</r:ID>
@@ -7091,20 +7067,20 @@
                      <r:Version>1.0</r:Version>
                      <r:TypeOfObject>Category</r:TypeOfObject>
                   </r:CategoryReference>
-                  <r:Value>B1</r:Value>
+                  <r:Value>A2</r:Value>
                </l:Code>
-               <l:Code levelNumber="2" isDiscrete="true">
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="false">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-4</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>j4nwh16i-4</r:ID>
+                  <r:ID>CA-j4nwh16i-4</r:ID>
                   <r:Version>1.0</r:Version>
-                  <r:CategoryReference>
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>CA-j4nwh16i-4</r:ID>
-                     <r:Version>1.0</r:Version>
-                     <r:TypeOfObject>Category</r:TypeOfObject>
-                  </r:CategoryReference>
-                  <r:Value>B2</r:Value>
-               </l:Code>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>B</r:Value>
                <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>j4nwh16i-5</r:ID>
@@ -7115,20 +7091,20 @@
                      <r:Version>1.0</r:Version>
                      <r:TypeOfObject>Category</r:TypeOfObject>
                   </r:CategoryReference>
-                  <r:Value>B3</r:Value>
+                  <r:Value>B1</r:Value>
                </l:Code>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="false">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwh16i-6</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
+               <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwh16i-6</r:ID>
+                  <r:ID>j4nwh16i-6</r:ID>
                   <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>C</r:Value>
+                  <r:CategoryReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>CA-j4nwh16i-6</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>Category</r:TypeOfObject>
+                  </r:CategoryReference>
+                  <r:Value>B2</r:Value>
+               </l:Code>
                <l:Code levelNumber="2" isDiscrete="true">
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>j4nwh16i-7</r:ID>
@@ -7139,16 +7115,40 @@
                      <r:Version>1.0</r:Version>
                      <r:TypeOfObject>Category</r:TypeOfObject>
                   </r:CategoryReference>
-                  <r:Value>C1</r:Value>
+                  <r:Value>B3</r:Value>
                </l:Code>
             </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
+            <l:Code levelNumber="1" isDiscrete="false">
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j4nwh16i-8</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-j4nwh16i-8</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>C</r:Value>
+               <l:Code levelNumber="2" isDiscrete="true">
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>j4nwh16i-9</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:CategoryReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>CA-j4nwh16i-9</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>Category</r:TypeOfObject>
+                  </r:CategoryReference>
+                  <r:Value>C1</r:Value>
+               </l:Code>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j4nwh16i-10</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j4nwh16i-10</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -7168,30 +7168,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j77dav9b--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j77dav9b--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j77dav9b-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j77dav9b-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>j77dav9b-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -7200,7 +7176,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -7209,6 +7185,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-j77dav9b-2</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j77dav9b-3</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j77dav9b-3</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j77dav9b-4</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j77dav9b-4</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -7228,30 +7228,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>jbdyh6b5--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-jbdyh6b5--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>jbdyh6b5-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-jbdyh6b5-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>jbdyh6b5-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -7260,7 +7236,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -7269,6 +7245,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-jbdyh6b5-2</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdyh6b5-3</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jbdyh6b5-3</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdyh6b5-4</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jbdyh6b5-4</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -7288,30 +7288,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p2kivg--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6p2kivg--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p2kivg-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6p2kivg-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>j6p2kivg-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -7320,7 +7296,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -7329,6 +7305,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-j6p2kivg-2</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>2</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6p2kivg-3</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j6p2kivg-3</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>3</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6p2kivg-4</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-j6p2kivg-4</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -7348,30 +7348,6 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>jbdye1wa--1</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-jbdye1wa--1</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>1</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>jbdye1wa-0</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:CategoryReference>
-                  <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-jbdye1wa-0</r:ID>
-                  <r:Version>1.0</r:Version>
-                  <r:TypeOfObject>Category</r:TypeOfObject>
-               </r:CategoryReference>
-               <r:Value>2</r:Value>
-            </l:Code>
-            <l:Code levelNumber="1" isDiscrete="true">
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>jbdye1wa-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
@@ -7380,7 +7356,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>3</r:Value>
+               <r:Value>1</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -7392,7 +7368,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>4</r:Value>
+               <r:Value>2</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -7404,7 +7380,7 @@
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
-               <r:Value>5</r:Value>
+               <r:Value>3</r:Value>
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
@@ -7413,6 +7389,30 @@
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>CA-jbdye1wa-4</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>4</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdye1wa-5</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jbdye1wa-5</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>Category</r:TypeOfObject>
+               </r:CategoryReference>
+               <r:Value>5</r:Value>
+            </l:Code>
+            <l:Code levelNumber="1" isDiscrete="true">
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdye1wa-6</r:ID>
+               <r:Version>1.0</r:Version>
+               <r:CategoryReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>CA-jbdye1wa-6</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -7432,11 +7432,11 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nwc63q-secondDimension-fakeCL-1--1</r:ID>
+               <r:ID>j4nwc63q-secondDimension-fakeCL-1-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nwc63q-secondDimension-fakeCL-1--1</r:ID>
+                  <r:ID>CA-j4nwc63q-secondDimension-fakeCL-1-1</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -7456,11 +7456,11 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nw0rr6-secondDimension-fakeCL-1--1</r:ID>
+               <r:ID>j4nw0rr6-secondDimension-fakeCL-1-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nw0rr6-secondDimension-fakeCL-1--1</r:ID>
+                  <r:ID>CA-j4nw0rr6-secondDimension-fakeCL-1-1</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -7468,11 +7468,11 @@
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j4nw0rr6-secondDimension-fakeCL-1-0</r:ID>
+               <r:ID>j4nw0rr6-secondDimension-fakeCL-1-2</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j4nw0rr6-secondDimension-fakeCL-1-0</r:ID>
+                  <r:ID>CA-j4nw0rr6-secondDimension-fakeCL-1-2</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -7492,11 +7492,11 @@
             </l:Level>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qg8rc6-secondDimension-fakeCL-1--1</r:ID>
+               <r:ID>j6qg8rc6-secondDimension-fakeCL-1-1</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1--1</r:ID>
+                  <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1-1</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
@@ -7504,11 +7504,11 @@
             </l:Code>
             <l:Code levelNumber="1" isDiscrete="true">
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qg8rc6-secondDimension-fakeCL-1-0</r:ID>
+               <r:ID>j6qg8rc6-secondDimension-fakeCL-1-2</r:ID>
                <r:Version>1.0</r:Version>
                <r:CategoryReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1-0</r:ID>
+                  <r:ID>CA-j6qg8rc6-secondDimension-fakeCL-1-2</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>Category</r:TypeOfObject>
                </r:CategoryReference>
