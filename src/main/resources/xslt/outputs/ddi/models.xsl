@@ -308,7 +308,7 @@
                 <l:VariableRepresentation>
                     <xsl:apply-templates select="eno:child-fields(.)" mode="source">
                         <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
-                    </xsl:apply-templates>   
+                    </xsl:apply-templates>
                 </l:VariableRepresentation>
             </xsl:for-each>
             <!-- It's a dirty (large part is static) hack to test if Variable got formula (aka = CalcultatedVariable), only 0 or 1 are expected, could be done better way (@att on driver ?) -->
@@ -345,14 +345,14 @@
         </l:Variable>
     </xsl:template>
     
-    <xsl:template match="driver-VariableScheme//Variable/*[./name()= ('TextDomain','NumericDomain','DateTimeDomain','DurationDomain','BooleanDomain','CodeDomain')]" mode="model" priority="5">
+    <!-- <xsl:template match="driver-VariableScheme//Variable/*[./name()= ('TextDomain','NumericDomain','DateTimeDomain','DurationDomain','BooleanDomain','CodeDomain')]" mode="model" priority="5">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
-    </xsl:template>
-
-    <xsl:template match="driver-VariableScheme//Variable//Unit" mode="model">
+    </xsl:template> -->
+    
+    <xsl:template match="driver-NumericVariable//Unit" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="unit" select="enoddi32:get-unit($source-context)"/>
         <xsl:if test="not(normalize-space($unit) = ('',' '))">
@@ -1047,10 +1047,10 @@
         </d:QuestionConstruct>
     </xsl:template>
 
-    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain" mode="model" priority="1">
+    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain | driver-SMGRD/ResponseDomain/CodeDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:CodeDomain>            
+		<d:CodeDomain>            
             <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -1067,7 +1067,7 @@
                 </r:CodeRepresentation>
             </r:OutParameter>
             <r:ResponseCardinality maximumResponses="1"/>
-        </d:CodeDomain>
+        </d:CodeDomain>        	
     </xsl:template>
     
     <xsl:template match="driver-SMGRD/ResponseDomain" mode="model" priority="3">
@@ -1294,43 +1294,76 @@
     <xsl:template match="TextDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:TextDomain maxLength="{enoddi32:get-max-length($source-context)}">
-            <r:OutParameter isArray="false">
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
-            </r:OutParameter>
-        </d:TextDomain>
+        <xsl:choose>
+        	<xsl:when test="not(ancestor::driver-VariableScheme)">
+	        	<d:TextDomain maxLength="{enoddi32:get-max-length($source-context)}">
+		        	<r:OutParameter isArray="false">
+		                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
+		                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		                <r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
+		            </r:OutParameter>
+		        </d:TextDomain>
+			</xsl:when>
+			<xsl:otherwise>
+				<r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
+			</xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="NumericDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:NumericDomain>
-            <xsl:variable name="decimalPositions" select="enoddi32:get-decimal-positions($source-context)"/>
-            <xsl:if test="number($decimalPositions) = number($decimalPositions) and number($decimalPositions) &gt; 0">
-                <xsl:attribute name="decimalPositions" select="$decimalPositions"/>
-            </xsl:if>
-            <r:NumberRange>
-                <r:Low isInclusive="true">
-                    <xsl:value-of select="enoddi32:get-low($source-context)"/>
-                </r:Low>
-                <r:High isInclusive="true">
-                    <xsl:value-of select="enoddi32:get-high($source-context)"/>
-                </r:High>
-            </r:NumberRange>
-            <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-            <r:OutParameter isArray="false">
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            </r:OutParameter>
-        </d:NumericDomain>
+        <xsl:variable name="decimalPositions" select="enoddi32:get-decimal-positions($source-context)"/>
+        <xsl:choose>
+        	<xsl:when test="not(ancestor::driver-VariableScheme)">
+	       		<d:NumericDomain>
+	       			<xsl:if test="number($decimalPositions) = number($decimalPositions) and number($decimalPositions) &gt; 0">
+						<xsl:attribute name="decimalPositions" select="$decimalPositions"/>
+					</xsl:if>
+		            <r:NumberRange>
+		                <r:Low isInclusive="true">
+		                    <xsl:value-of select="enoddi32:get-low($source-context)"/>
+		                </r:Low>
+		                <r:High isInclusive="true">
+		                    <xsl:value-of select="enoddi32:get-high($source-context)"/>
+		                </r:High>
+		            </r:NumberRange>
+		            <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+		            <r:OutParameter isArray="false">
+		                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
+		                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		            </r:OutParameter>
+		        </d:NumericDomain>
+			</xsl:when>
+			<xsl:otherwise>
+				<r:NumericRepresentation>
+					<xsl:if test="number($decimalPositions) = number($decimalPositions) and number($decimalPositions) &gt; 0">
+						<xsl:attribute name="decimalPositions" select="$decimalPositions"/>
+					</xsl:if>
+					<r:NumberRange>
+		                <r:Low isInclusive="true">
+		                    <xsl:value-of select="enoddi32:get-low($source-context)"/>
+		                </r:Low>
+		                <r:High isInclusive="true">
+		                    <xsl:value-of select="enoddi32:get-high($source-context)"/>
+		                </r:High>
+		            </r:NumberRange>
+		            <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+		            <!-- Unit -->
+		            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-NumericVariable', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                    </xsl:apply-templates>
+				</r:NumericRepresentation>
+			</xsl:otherwise>
+        </xsl:choose>
+
     </xsl:template>
 
     <xsl:template match="DateTimeDomain | DurationDomain" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+    	<xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         
         <!-- Id definition depend on date and duration format -->   
@@ -1339,35 +1372,66 @@
 	        	<xsl:value-of  select="concat('-',$source-context)"/>
 	        </xsl:if>
         </xsl:variable>
-       
-        <d:DateTimeDomainReference>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
-            <r:OutParameter isArray="false">
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:DateTimeRepresentationReference>
-                    <r:Agency>fr.insee</r:Agency>
+		<xsl:choose>
+			<xsl:when test="not(ancestor::driver-VariableScheme)">
+				<d:DateTimeDomainReference>
+		        	<r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		            <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
+		            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		            <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+		           	<r:OutParameter isArray="false">
+		            	<r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
+		                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		                <r:DateTimeRepresentationReference>
+		                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                    <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
+		                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		                    <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+		                </r:DateTimeRepresentationReference>
+		            </r:OutParameter>
+		        </d:DateTimeDomainReference>        	
+			</xsl:when>
+			<xsl:otherwise>
+				<r:DateTimeRepresentationReference>
+					<r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
-                </r:DateTimeRepresentationReference>
-            </r:OutParameter>
-        </d:DateTimeDomainReference>        
+				</r:DateTimeRepresentationReference>
+			</xsl:otherwise>
+		</xsl:choose>
     </xsl:template>
 
     <xsl:template match="BooleanDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:NominalDomain>
-            <r:OutParameter isArray="false">
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:CodeRepresentation>
+        <xsl:choose>
+			<xsl:when test="not(ancestor::driver-VariableScheme)">
+				<d:NominalDomain>
+		            <r:OutParameter isArray="false">
+		                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
+		                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		                <r:CodeRepresentation>
+		                    <r:CodeSubsetInformation>
+		                        <r:IncludedCode>
+		                            <r:CodeReference>
+		                                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                                <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+		                                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		                                <r:TypeOfObject>Code</r:TypeOfObject>
+		                            </r:CodeReference>
+		                        </r:IncludedCode>
+		                    </r:CodeSubsetInformation>
+		                </r:CodeRepresentation>
+		                <r:DefaultValue/>
+		            </r:OutParameter>
+		            <r:ResponseCardinality maximumResponses="1"/>
+		        </d:NominalDomain>        	
+			</xsl:when>
+			<xsl:otherwise>
+				<r:CodeRepresentation>
                     <r:CodeSubsetInformation>
                         <r:IncludedCode>
                             <r:CodeReference>
@@ -1378,16 +1442,14 @@
                             </r:CodeReference>
                         </r:IncludedCode>
                     </r:CodeSubsetInformation>
-                </r:CodeRepresentation>
-                <r:DefaultValue/>
-            </r:OutParameter>
-            <r:ResponseCardinality maximumResponses="1"/>
-        </d:NominalDomain>
+                </r:CodeRepresentation>	
+			</xsl:otherwise>
+		</xsl:choose>
     </xsl:template>
     
     <xsl:template match="driver-SMGRD/*" mode="model" priority="2"/>
     
-    <xsl:template match="driver-SMGRD/ResponseDomain/CodeDomain" mode="model" priority="3">
+    <!-- <xsl:template match="driver-SMGRD/ResponseDomain/CodeDomain" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:CodeDomain>
@@ -1399,7 +1461,7 @@
                 <r:TypeOfObject>CodeList</r:TypeOfObject>
             </r:CodeListReference>
             <r:OutParameter isArray="false">
-                <r:Agency>fr.insee</r:Agency>
+                <r:Agency>$agency</r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:CodeRepresentation>
@@ -1413,7 +1475,7 @@
             </r:OutParameter>
             <r:ResponseCardinality maximumResponses="1"/>
         </d:CodeDomain>
-      </xsl:template>
+      </xsl:template> -->
 
     <xsl:template match="RosterDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
