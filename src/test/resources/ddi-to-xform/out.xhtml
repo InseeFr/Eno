@@ -1527,11 +1527,14 @@
                      <label>Problème lors de l'enregistrement/l'expédition de vos réponses.</label>
                   </FatalError>
                   <Correct>
-                     <label>Corriger</label>
+                     <label>Corriger ma réponse</label>
                   </Correct>
                   <Continue>
                      <label>Poursuivre</label>
                   </Continue>
+                  <GoBackWarning>
+                     <label>Retour à la page précédente</label>
+                  </GoBackWarning>
                   <GoBack>
                      <label>Revenir à la dernière page accédée</label>
                   </GoBack>
@@ -1551,16 +1554,30 @@
                      <label>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour
             poursuivre votre saisie dans le questionnaire, que souhaitez-vous faire ?&lt;/p&gt;</label>
                   </WelcomeBackText>
-                  <WarningText>
-                     <label>&lt;p&gt;Certains champs de cette page sont indiqués en
-            avertissement.&lt;/p&gt;&lt;p&gt;Souhaitez-vous corriger ces avertissements avant de
-            poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;</label>
-                  </WarningText>
-                  <ErrorText>
-                     <label>&lt;p&gt;Certains champs de cette page sont indiqués en
-            erreur.&lt;/p&gt;&lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le
-            remplissage de ce questionnaire.&lt;/p&gt;</label>
-                  </ErrorText>
+                  <WarningTextPrevious>
+                     <label>
+            &lt;p&gt;Certains champs de cette page sont indiqués en avertissement.&lt;/p&gt;
+            &lt;p&gt;Souhaitez-vous vérifier et corriger votre réponse avant de revenir à la page précédente de ce questionnaire ?&lt;/p&gt;
+        </label>
+                  </WarningTextPrevious>
+                  <WarningTextNext>
+                     <label>
+            &lt;p&gt;Certains champs de cette page sont indiqués en avertissement.&lt;/p&gt;
+            &lt;p&gt;Souhaitez-vous vérifier et corriger votre réponse avant de poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;
+        </label>
+                  </WarningTextNext>
+                  <ErrorTextPrevious>
+                     <label>
+            &lt;p&gt;Certains champs de cette page sont indiqués en erreur.&lt;/p&gt;
+            &lt;p&gt;Vous devez corriger ces erreurs avant de revenir à la page précédente de ce questionnaire.&lt;/p&gt;
+        </label>
+                  </ErrorTextPrevious>
+                  <ErrorTextNext>
+                     <label>
+            &lt;p&gt;Certains champs de cette page sont indiqués en erreur.&lt;/p&gt;
+            &lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le remplissage de ce questionnaire.&lt;/p&gt;
+        </label>
+                  </ErrorTextNext>
                </resource>
                <resource xml:lang="en">
                   <Beginning>
@@ -2421,11 +2438,14 @@
                      <label>There was a problem with saving/submitting your answers.</label>
                   </FatalError>
                   <Correct>
-                     <label>Correct</label>
+                     <label>Correct my answer</label>
                   </Correct>
                   <Continue>
                      <label>Continue</label>
                   </Continue>
+                  <GoBackWarning>
+                     <label>Go back to the previous page</label>
+                  </GoBackWarning>
                   <GoBack>
                      <label>Go back to the last accessed page</label>
                   </GoBack>
@@ -2445,14 +2465,30 @@
                      <label>&lt;p&gt;You started filling the questionnaire. To continue, what do you
             wish to do ?&lt;/p&gt;</label>
                   </WelcomeBackText>
-                  <WarningText>
-                     <label>&lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;&lt;p&gt;Do
-            you wish to correct those warnings before going on filling the questionnaire ?&lt;/p&gt;</label>
-                  </WarningText>
-                  <ErrorText>
-                     <label>&lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;&lt;p&gt;You
-            need to correct those warnings before going on filling the questionnaire.&lt;/p&gt;</label>
-                  </ErrorText>
+                  <WarningTextPrevious>
+                     <label>
+            &lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;
+            &lt;p&gt;Do you wish to correct those warnings before going back to the previous page of this questionnaire ?&lt;/p&gt;
+        </label>
+                  </WarningTextPrevious>
+                  <WarningTextNext>
+                     <label>
+            &lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;
+            &lt;p&gt;Do you wish to correct those warnings before going on filling the questionnaire ?&lt;/p&gt;
+        </label>
+                  </WarningTextNext>
+                  <ErrorTextPrevious>
+                     <label>
+            &lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;
+            &lt;p&gt;You need to correct those errors before going back to the previous page of this questionnaire.&lt;/p&gt;
+        </label>
+                  </ErrorTextPrevious>
+                  <ErrorTextNext>
+                     <label>
+            &lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;
+            &lt;p&gt;You need to correct those errors before going on filling the questionnaire.&lt;/p&gt;
+        </label>
+                  </ErrorTextNext>
                </resource>
             </resources>
          </xf:instance>
@@ -2585,11 +2621,21 @@
             </xf:action>
             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
             <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true()))">
-               <xxf:show ev:event="DOMActivate" dialog="error"/>
+               <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+                  <xxf:show ev:event="DOMActivate" dialog="errorPrevious"/>
+               </xf:action>
+               <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+                  <xxf:show ev:event="DOMActivate" dialog="errorNext"/>
+               </xf:action>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
             <xf:action if="instance('fr-form-util')/PageChangeDone='false'                            and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false()">
-               <xxf:show ev:event="DOMActivate" dialog="warning"/>
+               <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+                  <xxf:show ev:event="DOMActivate" dialog="warningPrevious"/>
+               </xf:action>
+               <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+                  <xxf:show ev:event="DOMActivate" dialog="warningNext"/>
+               </xf:action>
                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
             </xf:action>
             <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false())">
@@ -4497,28 +4543,55 @@
                   </fr:section>
                </xf:case>
             </xf:switch>
-            <xxf:dialog id="error" draggable="false" close="false">
+            <xxf:dialog id="errorPrevious" draggable="false" close="false">
                <xf:label ref="$form-resources/Error/label"/>
                <xf:output ref="instance('fr-form-util')/ErrorText">
-                  <xf:label ref="$form-resources/ErrorText/label" mediatype="text/html"/>
+                  <xf:label ref="$form-resources/ErrorTextPrevious/label" mediatype="text/html"/>
                </xf:output>
-               <xf:trigger id="correct-error">
+               <xf:trigger id="correct-error-previous">
                   <xf:label ref="$form-resources/Correct/label"/>
-                  <xxf:hide ev:event="DOMActivate" dialog="error"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="errorPrevious"/>
                </xf:trigger>
             </xxf:dialog>
-            <xxf:dialog id="warning" close="false" draggable="false">
+            <xxf:dialog id="errorNext" draggable="false" close="false">
+               <xf:label ref="$form-resources/Error/label"/>
+               <xf:output ref="instance('fr-form-util')/ErrorText">
+                  <xf:label ref="$form-resources/ErrorTextNext/label" mediatype="text/html"/>
+               </xf:output>
+               <xf:trigger id="correct-error-next">
+                  <xf:label ref="$form-resources/Correct/label"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="errorNext"/>
+               </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="warningPrevious" close="false" draggable="false">
                <xf:label ref="$form-resources/Warning/label"/>
                <xf:output ref="instance('fr-form-util')/WarningText">
-                  <xf:label ref="$form-resources/WarningText/label" mediatype="text/html"/>
+                  <xf:label ref="$form-resources/WarningTextPrevious/label" mediatype="text/html"/>
                </xf:output>
-               <xf:trigger id="correct-warning">
+               <xf:trigger id="correct-warning-previous">
                   <xf:label ref="$form-resources/Correct/label"/>
-                  <xxf:hide ev:event="DOMActivate" dialog="warning"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                </xf:trigger>
-               <xf:trigger id="continue">
+               <xf:trigger id="warning-previous">
+                  <xf:label ref="$form-resources/GoBackWarning/label"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
+                  <xf:action ev:event="DOMActivate">
+                     <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
+                  </xf:action>
+               </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="warningNext" close="false" draggable="false">
+               <xf:label ref="$form-resources/Warning/label"/>
+               <xf:output ref="instance('fr-form-util')/WarningText">
+                  <xf:label ref="$form-resources/WarningTextNext/label" mediatype="text/html"/>
+               </xf:output>
+               <xf:trigger id="correct-warning-next">
+                  <xf:label ref="$form-resources/Correct/label"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
+               </xf:trigger>
+               <xf:trigger id="warning-continue">
                   <xf:label ref="$form-resources/Continue/label"/>
-                  <xxf:hide ev:event="DOMActivate" dialog="warning"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                   <xf:action ev:event="DOMActivate">
                      <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
                   </xf:action>
