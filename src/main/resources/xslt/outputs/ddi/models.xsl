@@ -306,9 +306,19 @@
                 </r:SourceParameterReference>
                 <xsl:apply-templates select="." mode="enoddi32:question-reference"/>
                 <l:VariableRepresentation>
+                	<!-- Representation of variable: text, numeric, date ... (except code list) -->
                     <xsl:apply-templates select="eno:child-fields(.)" mode="source">
                         <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
                     </xsl:apply-templates>
+                    <!-- Representation of code list variable when codeListReference is not empty, must show CodeRepresentation -->
+                    <xsl:if test="enoddi32:is-code-list-exist(.) = true()">
+						<r:CodeRepresentation>
+					        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					            <xsl:with-param name="driver" select="eno:append-empty-element('driver-CodeListReference', .)" tunnel="yes"/>
+					            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+					        </xsl:apply-templates>
+					    </r:CodeRepresentation>
+                    </xsl:if>
                 </l:VariableRepresentation>
             </xsl:for-each>
             <!-- It's a dirty (large part is static) hack to test if Variable got formula (aka = CalcultatedVariable), only 0 or 1 are expected, could be done better way (@att on driver ?) -->
@@ -1047,7 +1057,7 @@
         </d:QuestionConstruct>
     </xsl:template>
 
-    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain | driver-SMGRD/ResponseDomain/CodeDomain" mode="model" priority="1">
+    <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
 		<d:CodeDomain>            
@@ -1449,7 +1459,7 @@
     
     <xsl:template match="driver-SMGRD/*" mode="model" priority="2"/>
     
-    <!-- <xsl:template match="driver-SMGRD/ResponseDomain/CodeDomain" mode="model" priority="3">
+    <xsl:template match="driver-SMGRD/ResponseDomain/CodeDomain" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:CodeDomain>
@@ -1461,7 +1471,7 @@
                 <r:TypeOfObject>CodeList</r:TypeOfObject>
             </r:CodeListReference>
             <r:OutParameter isArray="false">
-                <r:Agency>$agency</r:Agency>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:CodeRepresentation>
@@ -1475,7 +1485,7 @@
             </r:OutParameter>
             <r:ResponseCardinality maximumResponses="1"/>
         </d:CodeDomain>
-      </xsl:template> -->
+      </xsl:template>
 
     <xsl:template match="RosterDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
