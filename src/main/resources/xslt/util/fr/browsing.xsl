@@ -248,6 +248,11 @@
                     <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Continue"/>
                 </label>
             </Continue>
+            <GoBackWarning>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoBackWarning"/>
+                </label>
+            </GoBackWarning>
             <GoBack>
                 <label>
                     <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoBack"/>
@@ -278,16 +283,26 @@
                     <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBackText"/>
                 </label>
             </WelcomeBackText>
-            <WarningText>
+            <WarningTextPrevious>
                 <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WarningText"/>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WarningTextPrevious"/>
                 </label>
-            </WarningText>
-            <ErrorText>
+            </WarningTextPrevious>
+            <WarningTextNext>
                 <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ErrorText"/>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WarningTextNext"/>
                 </label>
-            </ErrorText>
+            </WarningTextNext>
+            <ErrorTextPrevious>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ErrorTextPrevious"/>
+                </label>
+            </ErrorTextPrevious>
+            <ErrorTextNext>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ErrorTextNext"/>
+                </label>
+            </ErrorTextNext>
         </xsl:copy>
     </xsl:template>
 
@@ -511,8 +526,14 @@
                 <xf:action
                     if="instance('fr-form-util')/PageChangeDone='false'
                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true()))">
-                    <!-- Displaying the dialog window that correspond to an error -->
-                    <xxf:show ev:event="DOMActivate" dialog="error"/>
+                    <!-- Displaying the dialog window that correspond to an error according to value of PreviousNext-->
+                    <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+                        <xxf:show ev:event="DOMActivate" dialog="errorPrevious"/>
+                    </xf:action>
+                    <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+                        <xxf:show ev:event="DOMActivate" dialog="errorNext"/>
+                    </xf:action>
+                    
                     <!-- And we don't change page -->
                     <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                 </xf:action>
@@ -527,7 +548,13 @@
                             and not(xxf:valid(instance('fr-form-instance')//{$loop-name}[count(preceding-sibling::*[name()='{$loop-name}'])+1 = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$loop-name}']]
                                                                                         /*[name()=instance('fr-form-instance')/Util/CurrentSectionName],
                                               true(),true()))">
-                            <xxf:show ev:event="DOMActivate" dialog="error"/>
+                            <!-- Displaying the dialog window that correspond to an error according to value of PreviousNext-->
+                            <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+                                <xxf:show ev:event="DOMActivate" dialog="errorPrevious"/>
+                            </xf:action>
+                            <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+                                <xxf:show ev:event="DOMActivate" dialog="errorNext"/>
+                            </xf:action>
                             <!-- And we don't change page -->
                             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                         </xf:action>
@@ -537,8 +564,13 @@
                 <xf:action if="instance('fr-form-util')/PageChangeDone='false'
                            and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())
                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false()">
-                    <!-- Displaying the dialog window that correspond to an error -->
-                    <xxf:show ev:event="DOMActivate" dialog="warning"/>
+                    <!-- Displaying the dialog window that correspond to an warning according to value of PreviousNext-->
+                    <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+                        <xxf:show ev:event="DOMActivate" dialog="warningPrevious"/>
+                    </xf:action>
+                    <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+                        <xxf:show ev:event="DOMActivate" dialog="warningNext"/>
+                    </xf:action>
                     <!-- And we don't change page. The page change can happen at the level of this dialog window -->
                     <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                         value="string('true')"/>
@@ -554,7 +586,13 @@
                             and xxf:valid(instance('fr-form-instance')//{$loop-name}[count(preceding-sibling::*[name()='{$loop-name}'])+1 = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$loop-name}']]
                                                                                     /*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true()) and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind')
                                           ,'constraint')=false()">
-                            <xxf:show ev:event="DOMActivate" dialog="warning"/>
+                            <!-- Displaying the dialog window that correspond to an warning according to value of PreviousNext-->
+                            <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+                                <xxf:show ev:event="DOMActivate" dialog="warningPrevious"/>
+                            </xf:action>
+                            <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+                                <xxf:show ev:event="DOMActivate" dialog="warningNext"/>
+                            </xf:action>
                             <!-- And we don't change page -->
                             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                                 value="string('true')"/>
@@ -960,30 +998,58 @@
                     </fr:section>
                 </xf:case>
             </xf:switch>
+            
             <!-- The dialog displayed if there is an error on page change -->
-            <xxf:dialog id="error" draggable="false" close="false">
+            <xxf:dialog id="errorPrevious" draggable="false" close="false">
                 <xf:label ref="$form-resources/Error/label"/>
                 <xf:output ref="instance('fr-form-util')/ErrorText">
-                    <xf:label ref="$form-resources/ErrorText/label" mediatype="text/html"/>
+                    <xf:label ref="$form-resources/ErrorTextPrevious/label" mediatype="text/html"/>
                 </xf:output>
-                <xf:trigger id="correct-error">
+                <xf:trigger id="correct-error-previous">
                     <xf:label ref="$form-resources/Correct/label"/>
-                    <xxf:hide ev:event="DOMActivate" dialog="error"/>
+                    <xxf:hide ev:event="DOMActivate" dialog="errorPrevious"/>
+                </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="errorNext" draggable="false" close="false">
+                <xf:label ref="$form-resources/Error/label"/>
+                <xf:output ref="instance('fr-form-util')/ErrorText">
+                    <xf:label ref="$form-resources/ErrorTextNext/label" mediatype="text/html"/>
+                </xf:output>
+                <xf:trigger id="correct-error-next">
+                    <xf:label ref="$form-resources/Correct/label"/>
+                    <xxf:hide ev:event="DOMActivate" dialog="errorNext"/>
                 </xf:trigger>
             </xxf:dialog>
             <!-- The dialog displayed if there is a warning on page change -->
-            <xxf:dialog id="warning" close="false" draggable="false">
+            <xxf:dialog id="warningPrevious" close="false" draggable="false">
                 <xf:label ref="$form-resources/Warning/label"/>
                 <xf:output ref="instance('fr-form-util')/WarningText">
-                    <xf:label ref="$form-resources/WarningText/label" mediatype="text/html"/>
+                    <xf:label ref="$form-resources/WarningTextPrevious/label" mediatype="text/html"/>
                 </xf:output>
-                <xf:trigger id="correct-warning">
+                <xf:trigger id="correct-warning-previous">
                     <xf:label ref="$form-resources/Correct/label"/>
-                    <xxf:hide ev:event="DOMActivate" dialog="warning"/>
+                    <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                 </xf:trigger>
-                <xf:trigger id="continue">
+                <xf:trigger id="warning-previous">
+                    <xf:label ref="$form-resources/GoBackWarning/label"/>
+                    <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
+                    <xf:action ev:event="DOMActivate">
+                        <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
+                    </xf:action>
+                </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="warningNext" close="false" draggable="false">
+                <xf:label ref="$form-resources/Warning/label"/>
+                <xf:output ref="instance('fr-form-util')/WarningText">
+                    <xf:label ref="$form-resources/WarningTextNext/label" mediatype="text/html"/>
+                </xf:output>
+                <xf:trigger id="correct-warning-next">
+                    <xf:label ref="$form-resources/Correct/label"/>
+                    <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
+                </xf:trigger>
+                <xf:trigger id="warning-continue">
                     <xf:label ref="$form-resources/Continue/label"/>
-                    <xxf:hide ev:event="DOMActivate" dialog="warning"/>
+                    <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                     <xf:action ev:event="DOMActivate">
                         <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
                     </xf:action>
