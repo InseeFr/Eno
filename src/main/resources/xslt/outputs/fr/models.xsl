@@ -50,7 +50,12 @@
                 <xhtml:title>
                     <xsl:value-of select="enofr:get-form-title($source-context, $languages[1])"/>
                 </xhtml:title>
-                <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{$properties//Css/Common}"/>
+                <xsl:for-each select="$properties//Css/Common">
+                    <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                </xsl:for-each>
+                <xsl:for-each select="$parameters//Css">
+                    <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                </xsl:for-each>
                 <xf:model id="fr-form-model" xxf:expose-xpath-types="true" xxf:noscript-support="true">
 
                     <!-- Main instance, it contains the elements linked to fields, and which will be stored when the form will be submitted -->
@@ -994,6 +999,7 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
         <xf:bind id="{$business-name}-Container-bind" name="{$business-name}-Container" nodeset="{$name}-Container/{$name}">
+            <xf:bind id="{$business-name}-position-bind" name="{$business-name}-position" value="position()"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
@@ -1744,9 +1750,10 @@
             <!-- For each element which relevance depends on this field, we erase the data if it became unrelevant -->
             <xsl:for-each select="enofr:get-relevant-dependencies($source-context)">
                 <!-- if the filter is in a loop, instance-ancestor helps choosing the good filter -->
+                <!-- if a TableLoop is un the filter, don't empty its counter -->
                 <xf:action ev:event="xforms-value-changed"
                     if="not(xxf:evaluate-bind-property('{.}-bind','relevant'))"
-                    iterate="{$instance-ancestor-label}{.}//*[not(descendant::*)]">
+                    iterate="{$instance-ancestor-label}{.}//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
             </xsl:for-each>
@@ -1950,7 +1957,7 @@
             <xhtml:tbody>
                 <!-- if the loop is in a loop, instance-ancestor helps choosing the good ancestor loop instance -->
                 <xf:repeat id="{$loop-name}" nodeset="{$instance-ancestor-label}{$loop-name}">
-                    <xf:var name="{$loop-name}-position" value="position()"/>
+                    <xf:var name="{$loop-name}-position" bind="{$loop-name}-position-bind"/>
                     <!-- the table has a repeated zone that may have more than one line -->
                     <xsl:for-each select="enofr:get-body-lines($source-context)">
                         <xhtml:tr>
@@ -2103,7 +2110,7 @@
         </xsl:variable>
 
         <xf:repeat id="{$loop-name}" nodeset="{$instance-ancestor-label}{$loop-name}">
-            <xf:var name="{$loop-name}-position" value="position()"/>
+            <xf:var name="{$loop-name}-position" bind="{$loop-name}-position-bind"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for Loops, for which several instances are possible -->
@@ -2244,7 +2251,7 @@
                     <!-- if the filter is in a loop, instance-ancestor helps choosing the good filter -->
                     <xf:action ev:event="xforms-value-changed"
                         if="not(xxf:evaluate-bind-property('{.}-bind','relevant'))"
-                        iterate="{$instance-ancestor-label}{.}//*[not(descendant::*)]">
+                        iterate="{$instance-ancestor-label}{.}//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
                         <xf:setvalue ref="." value="''"/>
                     </xf:action>
                 </xsl:for-each>
