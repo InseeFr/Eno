@@ -68,8 +68,9 @@
         <Send>Send</Send>
         <ConfirmationMessage>Your questionnaire was submitted the</ConfirmationMessage>
         <FatalError>There was a problem with saving/submitting your answers.</FatalError>
-        <Correct>Correct</Correct>
+        <Correct>Correct my answer</Correct>
         <Continue>Continue</Continue>
+        <GoBackWarning>Go back to the previous page</GoBackWarning>
         <GoBack>Go back to the last accessed page</GoBack>
         <GoToFirstPage>Go to the first page</GoToFirstPage>
         <WelcomeBack>Welcome</WelcomeBack>
@@ -77,9 +78,21 @@
         <Error>Blocking error</Error>
         <WelcomeBackText>&lt;p&gt;You started filling the questionnaire. To continue, what do you
             wish to do ?&lt;/p&gt;</WelcomeBackText>
-        <WarningText>&lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;&lt;p&gt;Do
-            you wish to correct those warnings before going on filling the questionnaire ?&lt;/p&gt;</WarningText>
-        <ErrorText>&lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;&lt;p&gt;You
-            need to correct those warnings before going on filling the questionnaire.&lt;/p&gt;</ErrorText>
+        <WarningTextPrevious>
+            &lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;
+            &lt;p&gt;Do you wish to correct those warnings before going back to the previous page of this questionnaire ?&lt;/p&gt;
+        </WarningTextPrevious>
+        <WarningTextNext>
+            &lt;p&gt;Some fields of this page are marked as warnings.&lt;/p&gt;
+            &lt;p&gt;Do you wish to correct those warnings before going on filling the questionnaire ?&lt;/p&gt;
+        </WarningTextNext>
+        <ErrorTextPrevious>
+            &lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;
+            &lt;p&gt;You need to correct those errors before going back to the previous page of this questionnaire.&lt;/p&gt;
+        </ErrorTextPrevious>
+        <ErrorTextNext>
+            &lt;p&gt;Some fields of this page are marked as errors.&lt;/p&gt;
+            &lt;p&gt;You need to correct those errors before going on filling the questionnaire.&lt;/p&gt;
+        </ErrorTextNext>
     </Browsing>
 </Language>
