@@ -1374,16 +1374,21 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         
-        <!-- Id definition depend on date and duration format -->   
+        <!-- Id definition depend on date or duration type -->   
         <xsl:variable name="id-date-duration">
-	    	<xsl:if test="$source-context != '' and $source-context != 'YYYY-MM-DD'">
-	        	<xsl:value-of  select="concat('-',$source-context)"/>
-	        </xsl:if>
+        	<xsl:choose>
+        		<xsl:when test="name() = 'DurationDomain'">
+        			<xsl:value-of  select="concat('Duration','-',$source-context)"/>
+        		</xsl:when>
+        		<xsl:otherwise>
+        			<xsl:value-of  select="concat('DateTimedate','-',$source-context)"/>
+        		</xsl:otherwise>
+        	</xsl:choose>
         </xsl:variable>
        
         <d:DateTimeDomainReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
+            <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
             <r:OutParameter isArray="false">
@@ -1392,7 +1397,7 @@
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:DateTimeRepresentationReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
+                    <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
                 </r:DateTimeRepresentationReference>
