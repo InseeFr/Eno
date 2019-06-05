@@ -7619,7 +7619,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="500"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7643,7 +7645,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7667,7 +7682,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="30"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7691,7 +7708,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">99</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7715,7 +7740,14 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:DateTimeRepresentationReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
+                  <r:Version>1.0</r:Version>
+                  <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+               </r:DateTimeRepresentationReference>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7739,7 +7771,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">99</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7763,7 +7803,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>j334iumu</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7787,7 +7836,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>j6qdqoen</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7811,7 +7869,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>j4nwo00f</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7835,7 +7902,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7859,7 +7939,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7883,7 +7976,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7907,7 +8013,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7931,7 +8050,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxh138</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7955,7 +8083,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxh138</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7979,7 +8116,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxh138</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8003,7 +8149,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxh138</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8027,7 +8182,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxh138</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8051,7 +8215,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxh138</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8075,7 +8248,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxh138</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8099,7 +8281,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxh138</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8123,7 +8314,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxricm</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8147,7 +8347,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxricm</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8171,7 +8380,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxricm</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8195,7 +8413,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxricm</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8219,7 +8446,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdxricm</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8244,7 +8480,14 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8270,7 +8513,14 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8296,7 +8546,14 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8322,7 +8579,14 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8348,7 +8612,14 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8374,7 +8645,14 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8400,7 +8678,14 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8426,7 +8711,14 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8452,7 +8744,14 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8478,7 +8777,14 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8503,7 +8809,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdyh6b5</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8527,7 +8842,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdyh6b5</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8551,7 +8875,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdyh6b5</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8575,7 +8908,16 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeListReference>
+                     <r:Agency>fr.insee</r:Agency>
+                     <r:ID>jbdyh6b5</r:ID>
+                     <r:Version>1.0</r:Version>
+                     <r:TypeOfObject>CodeList</r:TypeOfObject>
+                  </r:CodeListReference>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8599,7 +8941,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8623,7 +8967,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8647,7 +8993,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8671,7 +9019,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8695,7 +9045,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8719,7 +9082,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8743,7 +9119,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8767,7 +9156,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8791,7 +9193,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8815,7 +9230,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8839,7 +9267,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8863,7 +9304,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8887,7 +9341,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8911,7 +9378,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8935,7 +9415,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8959,7 +9452,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8983,7 +9489,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9007,7 +9526,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9031,7 +9563,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9055,7 +9600,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9079,7 +9637,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9103,7 +9674,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9127,7 +9711,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9151,7 +9748,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9175,7 +9785,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9199,7 +9822,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9223,7 +9859,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9247,7 +9896,20 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:CodeRepresentation>
+                  <r:CodeSubsetInformation>
+                     <r:IncludedCode>
+                        <r:CodeReference>
+                           <r:Agency>fr.insee</r:Agency>
+                           <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+                           <r:Version>1.0</r:Version>
+                           <r:TypeOfObject>Code</r:TypeOfObject>
+                        </r:CodeReference>
+                     </r:IncludedCode>
+                  </r:CodeSubsetInformation>
+               </r:CodeRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9271,7 +9933,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9295,7 +9959,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9319,7 +9985,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9343,7 +10011,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9367,7 +10037,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9391,7 +10063,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9415,7 +10089,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9439,7 +10115,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9463,7 +10141,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9487,7 +10167,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9511,7 +10193,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">120</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9535,7 +10225,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">120</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9559,7 +10257,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">120</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9583,7 +10289,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">120</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9607,7 +10321,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">120</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9631,7 +10353,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">120</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9655,7 +10385,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">120</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9679,7 +10417,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">120</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9703,7 +10449,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">120</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9727,7 +10481,15 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:NumericRepresentation>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">120</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -9751,7 +10513,9 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation/>
+            <l:VariableRepresentation>
+               <r:TextRepresentation maxLength="255"/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:VariableGroup>
             <r:Agency>fr.insee</r:Agency>
