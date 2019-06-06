@@ -67,8 +67,9 @@
         <Send>Envoyer</Send>
         <ConfirmationMessage>Votre questionnaire a bien été expédié le</ConfirmationMessage>
         <FatalError>Problème lors de l'enregistrement/l'expédition de vos réponses.</FatalError>
-        <Correct>Corriger</Correct>
+        <Correct>Corriger ma réponse</Correct>
         <Continue>Poursuivre</Continue>
+        <GoBackWarning>Revenir à la page précédente</GoBackWarning>
         <GoBack>Revenir à la dernière page accédée</GoBack>
         <GoToFirstPage>Aller à la première page</GoToFirstPage>
         <WelcomeBack>Bienvenue</WelcomeBack>
@@ -76,11 +77,21 @@
         <Error>Erreur bloquante</Error>
         <WelcomeBackText>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour
             poursuivre votre saisie dans le questionnaire, que souhaitez-vous faire ?&lt;/p&gt;</WelcomeBackText>
-        <WarningText>&lt;p&gt;Certains champs de cette page sont indiqués en
-            avertissement.&lt;/p&gt;&lt;p&gt;Souhaitez-vous corriger ces avertissements avant de
-            poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;</WarningText>
-        <ErrorText>&lt;p&gt;Certains champs de cette page sont indiqués en
-            erreur.&lt;/p&gt;&lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le
-            remplissage de ce questionnaire.&lt;/p&gt;</ErrorText>
+        <WarningTextPrevious>
+            &lt;p&gt;Certains champs de cette page sont indiqués en avertissement.&lt;/p&gt;
+            &lt;p&gt;Souhaitez-vous vérifier et corriger votre réponse avant de revenir à la page précédente de ce questionnaire ?&lt;/p&gt;
+        </WarningTextPrevious>
+        <WarningTextNext>
+            &lt;p&gt;Certains champs de cette page sont indiqués en avertissement.&lt;/p&gt;
+            &lt;p&gt;Souhaitez-vous vérifier et corriger votre réponse avant de poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;
+        </WarningTextNext>
+        <ErrorTextPrevious>
+            &lt;p&gt;Certains champs de cette page sont indiqués en erreur.&lt;/p&gt;
+            &lt;p&gt;Vous devez corriger ces erreurs avant de revenir à la page précédente de ce questionnaire.&lt;/p&gt;
+        </ErrorTextPrevious>
+        <ErrorTextNext>
+            &lt;p&gt;Certains champs de cette page sont indiqués en erreur.&lt;/p&gt;
+            &lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le remplissage de ce questionnaire.&lt;/p&gt;
+        </ErrorTextNext>
     </Browsing>
 </Language>
