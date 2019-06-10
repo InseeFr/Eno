@@ -8486,8 +8486,8 @@
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                  <r:MeasurementUnit>%</r:MeasurementUnit>
                </r:NumericRepresentation>
+               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8519,8 +8519,8 @@
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                  <r:MeasurementUnit>%</r:MeasurementUnit>
                </r:NumericRepresentation>
+               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8552,8 +8552,8 @@
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                  <r:MeasurementUnit>%</r:MeasurementUnit>
                </r:NumericRepresentation>
+               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8585,8 +8585,8 @@
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                  <r:MeasurementUnit>%</r:MeasurementUnit>
                </r:NumericRepresentation>
+               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8618,8 +8618,8 @@
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                  <r:MeasurementUnit>%</r:MeasurementUnit>
                </r:NumericRepresentation>
+               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8651,8 +8651,8 @@
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                  <r:MeasurementUnit>%</r:MeasurementUnit>
                </r:NumericRepresentation>
+               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8684,8 +8684,8 @@
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                  <r:MeasurementUnit>%</r:MeasurementUnit>
                </r:NumericRepresentation>
+               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8717,8 +8717,8 @@
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                  <r:MeasurementUnit>%</r:MeasurementUnit>
                </r:NumericRepresentation>
+               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8750,8 +8750,8 @@
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                  <r:MeasurementUnit>%</r:MeasurementUnit>
                </r:NumericRepresentation>
+               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8783,8 +8783,8 @@
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-                  <r:MeasurementUnit>%</r:MeasurementUnit>
                </r:NumericRepresentation>
+               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>

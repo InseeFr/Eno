@@ -364,7 +364,6 @@
     <xsl:template match="driver-VariableScheme//Unit" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="unit" select="enoddi32:get-unit($source-context)"/>
-        -------------------------------------
         <xsl:if test="not(normalize-space($unit) = ('',' '))">
             <r:MeasurementUnit><xsl:value-of select="$unit"/></r:MeasurementUnit>
         </xsl:if>
@@ -1364,6 +1363,11 @@
             </r:NumberRange>
             <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
 		</r:NumericRepresentation>
+		<!-- MeasurementUnit -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
+            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+        </xsl:apply-templates>
     </xsl:template>
 
     <xsl:template match="DateTimeDomain | DurationDomain" mode="model">
