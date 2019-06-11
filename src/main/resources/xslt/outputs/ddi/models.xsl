@@ -1316,7 +1316,7 @@
     <xsl:template match="driver-VariableScheme//TextDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        	<r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
+        <r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
     </xsl:template>
 
     <xsl:template match="NumericDomain" mode="model">
