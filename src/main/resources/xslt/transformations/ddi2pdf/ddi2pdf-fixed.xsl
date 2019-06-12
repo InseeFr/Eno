@@ -4,8 +4,8 @@
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner"
     xmlns:enoddi2pdf="http://xml.insee.fr/apps/eno/ddi2pdf"
-    xmlns:d="ddi:datacollection:3_2"
-    xmlns:r="ddi:reusable:3_2" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
+    xmlns:d="ddi:datacollection:3_3"
+    xmlns:r="ddi:reusable:3_3" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:l="ddi:logicalproduct:3_3" version="2.0">
 
     <!-- Importing the different resources -->
     <xsl:import href="../../inputs/ddi/source.xsl"/>

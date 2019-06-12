@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:d="ddi:datacollection:3_2"
-    xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" xmlns:g="ddi:group:3_2"
-    xmlns:s="ddi:studyunit:3_2" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0">
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:d="ddi:datacollection:3_3"
+    xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3" xmlns:g="ddi:group:3_3"
+    xmlns:s="ddi:studyunit:3_3" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0">
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -141,15 +141,15 @@
                 </xsl:choose>
             </xsl:variable>
             <xsl:result-document href="{lower-case(concat('file:///',replace($output-folder, '\\' , '/'),'/',$form-name,'.tmp'))}">
-                <DDIInstance xmlns="ddi:instance:3_2"
+                <DDIInstance xmlns="ddi:instance:3_3"
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xmlns:a="ddi:archive:3_2"
+                    xmlns:a="ddi:archive:3_3"
                     xmlns:eno="http://xml.insee.fr/apps/eno"
-                    xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
+                    xmlns:enoddi33="http://xml.insee.fr/apps/eno/out/ddi33"
                     xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-                    xmlns:pr="ddi:ddiprofile:3_2"
-                    xmlns:c="ddi:conceptualcomponent:3_2"
-                    xmlns:cm="ddi:comparative:3_2">
+                    xmlns:pr="ddi:ddiprofile:3_3"
+                    xmlns:c="ddi:conceptualcomponent:3_3"
+                    xmlns:cm="ddi:comparative:3_3">
                     <s:StudyUnit>
                         <xsl:apply-templates select=".">
                             <xsl:with-param name="references" select="$dereferenced-template-sequence" tunnel="yes"/>
@@ -297,7 +297,7 @@
     <!--
     <xd:doc>
         <xd:desc>
-            <xd:p>Instruction are not allowed in Category for DDI 3.2. This template allows to insert tooltips into arrays' labels</xd:p>
+            <xd:p>Instruction are not allowed in Category for DDI 3.3. This template allows to insert tooltips into arrays' labels</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="xhtml:a">
