@@ -175,7 +175,7 @@
         <xsl:variable name="levels">
             <!-- Only one attribute amongst rangeMinimum and specificValue is present -->
             <xsl:for-each-group
-                select="d:StructuredMixedGridResponseDomain/*[name()='d:GridResponseDomain' or name()='d:NoDataByDefinition']//d:SelectDimension[@rank='1']"
+                select="d:StructuredMixedGridResponseDomain/*[name()='d:GridResponseDomainInMixed' or name()='d:NoDataByDefinition']//d:SelectDimension[@rank='1']"
                 group-by="concat(@rangeMinimum,@specificValue)">
                 <dummy/>
             </xsl:for-each-group>
@@ -258,9 +258,9 @@
         <xsl:apply-templates select="d:GridDimension[@rank='1']//l:Code[r:ID=$id]" mode="enoddi:get-table-line"/>
         <xsl:choose>
             <xsl:when test="string($table-first-line) = string($index)">
-                <xsl:for-each select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)
+                <xsl:for-each select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomainInMixed | d:NoDataByDefinition)
                     [.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]
-                    | d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)
+                    | d:StructuredMixedGridResponseDomain/(d:GridResponseDomainInMixed | d:NoDataByDefinition)
                     [.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and number(@rangeMinimum) &lt; $index and number(@rangeMaximum &gt;= $index)]]
                     ">
                     <xsl:sort select="number(.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum)"/>
@@ -268,7 +268,7 @@
                 </xsl:for-each>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:for-each select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain
+                <xsl:for-each select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomainInMixed
                     | d:NoDataByDefinition)[.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]">
                     <xsl:sort select="number(.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum)"/>
                     <xsl:sequence select="."/>
@@ -698,8 +698,8 @@
         <xsl:choose>
             <!-- MCQ -->
             <xsl:when test="parent::r:CodeReference/ancestor::d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
-                and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])]
-                and parent::d:GridResponseDomain and following-sibling::d:GridAttachment//d:SelectDimension]">
+                and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:AttachmentLocation)])]
+                and parent::d:GridResponseDomainInMixed and following-sibling::d:GridAttachment//d:SelectDimension]">
                 <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension"/>
                 <xsl:sequence select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]/
                     r:CategoryReference/l:Category/d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true())
@@ -751,8 +751,8 @@
     </xd:doc>
     <!-- TODO : Simplify the Xpath match ? Only "MCQ" needed ? -->
     <xsl:template match="l:Code[parent::r:CodeReference/ancestor::d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
-        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])]
-        and parent::d:GridResponseDomain and following-sibling::d:GridAttachment//d:SelectDimension]]" mode="enoddi:get-label" priority="2">
+        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:AttachmentLocation)])]
+        and parent::d:GridResponseDomainInMixed and following-sibling::d:GridAttachment//d:SelectDimension]]" mode="enoddi:get-label" priority="2">
         <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension"/>
         <xsl:variable name="correspondingCode" select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]"/>
         <xsl:apply-templates select="$correspondingCode" mode="enoddi:get-label"/>
@@ -884,8 +884,8 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
-        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])]
-        and parent::d:GridResponseDomain and following-sibling::d:GridAttachment//d:SelectDimension]"
+        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:AttachmentLocation)])]
+        and parent::d:GridResponseDomainInMixed and following-sibling::d:GridAttachment//d:SelectDimension]"
         mode="enoddi:get-item-label-conditioning-variables" priority="2">
 
         <xsl:variable name="codeCoordinates" select="following-sibling::d:GridAttachment//d:SelectDimension"/>
