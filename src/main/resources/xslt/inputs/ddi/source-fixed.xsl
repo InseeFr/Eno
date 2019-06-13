@@ -542,8 +542,7 @@
             </xsl:call-template>
         </xsl:variable>
 
-        <xsl:for-each
-            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='hideable'] and (d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable)]">
+        <xsl:for-each select="//d:IfThenElse[d:TypeOfIfThenElse='hideable' and (d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable)]">
             <xsl:choose>
                 <xsl:when test="descendant::d:Sequence/d:TypeOfSequence[text()='module']">
                     <xsl:for-each select="descendant::d:Sequence[d:TypeOfSequence='module']">
@@ -551,11 +550,14 @@
                     </xsl:for-each>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
+                    <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference)"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
         <xsl:for-each select="ancestor::d:StructuredMixedResponseDomain/d:ResponseDomainInMixed[d:AttachmentLocation/d:DomainSpecificValue/@attachmentDomain=current()/parent::d:ResponseDomainInMixed/@attachmentBase]">
+            <xsl:value-of select="enoddi:get-id(current())"/>
+        </xsl:for-each>
+        <xsl:for-each select="ancestor::d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[d:ResponseAttachmentLocation/d:DomainSpecificValue/@attachmentDomain=current()/parent::d:GridResponseDomainInMixed/@attachmentBase]">
             <xsl:value-of select="enoddi:get-id(current())"/>
         </xsl:for-each>
     </xsl:template>
@@ -577,9 +579,9 @@
             </xsl:call-template>
         </xsl:variable>
 
-        <xsl:for-each
-            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='deactivatable'] and d:IfCondition/r:Command/r:CommandContent/text() = $modified-variables//Variable]">
-            <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
+        <xsl:for-each select="//d:IfThenElse[d:TypeOfIfThenElse='greyedout' and (d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable)]
+                                            /*[name()='d:ThenConstructReference' or name()='d:ElseConstructReference']">
+            <xsl:value-of select="enoddi:get-id(current())"/>
         </xsl:for-each>
     </xsl:template>
 
@@ -591,7 +593,7 @@
     <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']"
         mode="enoddi:get-hideable-command">
         <xsl:variable name="filters">
-            <xsl:for-each select="ancestor::d:Sequence[d:TypeOfSequence/text()='hideable']">
+            <xsl:for-each select="ancestor::*[(name()='d:ThenConstructReference' or name()='d:ElseConstructReference') and parent::d:IfThenElse/d:TypeOfIfThenElse='hideable']">
                 <xsl:text> and </xsl:text>
                 <xsl:apply-templates select="current()" mode="enoddi:get-hideable-command"/>
             </xsl:for-each>
