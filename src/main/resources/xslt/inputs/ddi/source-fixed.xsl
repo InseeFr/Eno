@@ -1080,4 +1080,77 @@
         <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference[not(preceding-sibling::d:ControlConstructReference)]/ancestor::d:IfThenElse[not(d:ExternalAid)]/r:Description"/>
     </xsl:template>
     
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The label of a Code with DiaplayCode = 'true' is the concatenation of its r:Value and its descendant r:Label.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="l:Code[ancestor::d:CodeDomain/@displayCode='true']"
+        mode="enoddi:get-label">
+        <xsl:variable name="xhtml-label" as="node()">
+            <xsl:apply-templates select="r:CategoryReference/l:Category/r:Label" mode="lang-choice"/>
+        </xsl:variable>
+        <xsl:apply-templates select="$xhtml-label" mode="modif-title">
+            <xsl:with-param name="prefix" select="concat(r:Value,' - ')" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Only the first child of a xhtml:p must be titled</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="xhtml:p" mode="modif-title" priority="2">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:apply-templates select="node()[position()=1]" mode="modif-title"/>
+            <xsl:apply-templates select="node()[not(position()=1)]"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>When we match a node starting by xhtml, we only process the first child node with modif-title mode.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*[starts-with(name(),'xhtml')]" mode="modif-title">
+        <xsl:param name="prefix" tunnel="yes"/>
+        <xsl:value-of select="$prefix"/>
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Adding the prefix.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="xhtml:span[@class='block']" mode="modif-title" priority="2">
+        <xsl:param name="prefix" tunnel="yes"/>
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:value-of select="$prefix"/>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Adding the prefix.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="text()" mode="modif-title" priority="1">
+        <xsl:param name="prefix" tunnel="yes"/>
+        <xsl:choose>
+            <xsl:when test="preceding-sibling::xhtml:p or following-sibling::xhtml:p">
+                <xsl:value-of select="."/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat($prefix,.)"/>        
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
 </xsl:stylesheet>
