@@ -613,7 +613,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Get the formula to know when a response is hidden or not.</xd:p>
+            <xd:p>Get the formula to know when a response is hidden or not in a QuestionItem.</xd:p>
         </xd:desc>
     </xd:doc>
 
@@ -629,6 +629,29 @@
             </xsl:if>
             <xsl:value-of select="concat($conditioning-variable-begin,$source-response-id,$conditioning-variable-end,'=''',.,'''')"/>
         </xsl:for-each>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Get the formula to know when a response is hidden or not in a QuestionGrid.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    
+    <xsl:template match="d:GridResponseDomainInMixed[d:ResponseAttachmentLocation]" mode="enoddi:get-hideable-command">
+        
+        <xsl:variable name="attachment-domain" select="d:ResponseAttachmentLocation/d:DomainSpecificValue/@attachmentDomain"/>
+        <xsl:variable name="source-response-out-parameter" select="../d:GridResponseDomainInMixed[@attachmentBase=$attachment-domain]//r:OutParameter/r:ID"/>
+        <xsl:variable name="source-response-id" select="../../r:Binding[r:SourceParameterReference/r:ID=$source-response-out-parameter]/r:TargetParameterReference/r:ID"/>
+        
+        <xsl:variable name="result">
+            <xsl:for-each select="d:ResponseAttachmentLocation/d:DomainSpecificValue/r:Value">
+                <xsl:if test="position()!=1">
+                    <xsl:text> or </xsl:text>
+                </xsl:if>
+                <xsl:value-of select="concat($conditioning-variable-begin,$source-response-id,$conditioning-variable-end,'=''',.,'''')"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:value-of select="$result"/>
     </xsl:template>
 
     <xd:doc>
@@ -700,7 +723,7 @@
         <xsl:choose>
             <!-- MCQ -->
             <xsl:when test="parent::r:CodeReference/ancestor::d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
-                and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:AttachmentLocation)])]
+                and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:ResponseAttachmentLocation)])]
                 and parent::d:GridResponseDomainInMixed and following-sibling::d:GridAttachment//d:SelectDimension]">
                 <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension"/>
                 <xsl:sequence select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]/
@@ -753,11 +776,12 @@
     </xd:doc>
     <!-- TODO : Simplify the Xpath match ? Only "MCQ" needed ? -->
     <xsl:template match="l:Code[parent::r:CodeReference/ancestor::d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
-        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:AttachmentLocation)])]
+        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:ResponseAttachmentLocation)])]
         and parent::d:GridResponseDomainInMixed and following-sibling::d:GridAttachment//d:SelectDimension]]" mode="enoddi:get-label" priority="2">
-        <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension"/>
-        <xsl:variable name="correspondingCode" select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]"/>
-        <xsl:apply-templates select="$correspondingCode" mode="enoddi:get-label"/>
+        <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension" as="node()"/>
+        <xsl:apply-templates 
+            select="ancestor::d:QuestionGrid/d:GridDimension[@rank='1']//l:Code[position()=number($codeCoordinates/@rangeMinimum)]" 
+            mode="enoddi:get-label"/>
     </xsl:template>
 
     <xd:doc>
@@ -886,7 +910,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
-        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:AttachmentLocation)])]
+        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:ResponseAttachmentLocation)])]
         and parent::d:GridResponseDomainInMixed and following-sibling::d:GridAttachment//d:SelectDimension]"
         mode="enoddi:get-item-label-conditioning-variables" priority="2">
 
