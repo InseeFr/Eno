@@ -1373,19 +1373,22 @@
     <xsl:template match="DateTimeDomain | DurationDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        
-        <!-- Id definition depend on date or duration type -->   
+        <xsl:variable name="format">
+	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+	            <xsl:with-param name="driver" select="eno:append-empty-element('driver-DateDurationFormat', .)" tunnel="yes"/>
+	        </xsl:apply-templates>
+        </xsl:variable>
+        <!-- Id definition depend on date or duration type -->
         <xsl:variable name="id-date-duration">
         	<xsl:choose>
-        		<xsl:when test="name() = 'DurationDomain'">
-        			<xsl:value-of  select="concat('Duration','-',$source-context)"/>
-        		</xsl:when>
-        		<xsl:otherwise>
-        			<xsl:value-of  select="concat('DateTimedate','-',$source-context)"/>
-        		</xsl:otherwise>
-        	</xsl:choose>
+        		<xsl:when test="name() = 'DurationDomain'">Duration</xsl:when>
+        		<xsl:otherwise>DateTimedate</xsl:otherwise>
+	        </xsl:choose>
+	       	<!-- Keep compatibility with old date if they don't have format -->
+	       	<xsl:if test="$format != '' ">
+	       		<xsl:value-of  select="concat('-',$format)"/>
+	       	</xsl:if>
         </xsl:variable>
-       
         <d:DateTimeDomainReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
@@ -1405,18 +1408,34 @@
         </d:DateTimeDomainReference>        
     </xsl:template>
     
-     <xsl:template match="driver-VariableScheme//DateTimeDomain | driver-VariableScheme//DurationDomain" mode="model">
+    <!-- Format -->
+	<xsl:template match="driver-DateDurationFormat//Format" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:value-of select="$source-context"/>
+	</xsl:template>
+
+	<xsl:template match="driver-VariableScheme//DateTimeDomain | driver-VariableScheme//DurationDomain" mode="model">
     	<xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <!-- Id definition depend on date and duration format -->   
+        <xsl:variable name="format">
+	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+	            <xsl:with-param name="driver" select="eno:append-empty-element('driver-DateDurationFormat', .)" tunnel="yes"/>
+	        </xsl:apply-templates>
+        </xsl:variable>
+        <!-- Id definition depend on date or duration type -->
         <xsl:variable name="id-date-duration">
-	    	<xsl:if test="$source-context != '' and $source-context != 'YYYY-MM-DD'">
-	        	<xsl:value-of  select="concat('-',$source-context)"/>
-	        </xsl:if>
+        	<xsl:choose>
+        		<xsl:when test="name() = 'DurationDomain'">Duration</xsl:when>
+        		<xsl:otherwise>DateTimedate</xsl:otherwise>
+	        </xsl:choose>
+	       	<!-- Keep compatibility with old date if they don't have format -->
+	       	<xsl:if test="$format != '' ">
+	       		<xsl:value-of  select="concat('-',$format)"/>
+	       	</xsl:if>
         </xsl:variable>
 		<r:DateTimeRepresentationReference>
 			<r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
+            <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
 		</r:DateTimeRepresentationReference>
