@@ -184,41 +184,10 @@
                             l'enquête</r:Content>
                         <r:Content xml:lang="en-IE">Numeric and DateTime list for the survey</r:Content>
                     </r:Label>
-                    <r:ManagedDateTimeRepresentation>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                        <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
-                        <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
-                    </r:ManagedDateTimeRepresentation>
-                    <r:ManagedDateTimeRepresentation>
-			            <r:Agency>fr.insee</r:Agency>
-			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM</r:ID>
-			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-			            <r:DateFieldFormat>YYYY-MM</r:DateFieldFormat>
-			            <r:DateTypeCode codeListID="INSEE-DTC-CV">gYearMonth</r:DateTypeCode>
-			        </r:ManagedDateTimeRepresentation>
-			        <r:ManagedDateTimeRepresentation>
-			            <r:Agency>fr.insee</r:Agency>
-			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY</r:ID>
-			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-			            <r:DateFieldFormat>YYYY</r:DateFieldFormat>
-			            <r:DateTypeCode codeListID="INSEE-DTC-CV">gYear</r:DateTypeCode>
-			        </r:ManagedDateTimeRepresentation>
-			        <r:ManagedDateTimeRepresentation>
-			            <r:Agency>fr.insee</r:Agency>
-			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-PnYnM</r:ID>
-			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-			            <r:DateFieldFormat>PnYnM</r:DateFieldFormat>
-			            <r:DateTypeCode codeListID="INSEE-DTC-CV">duration</r:DateTypeCode>
-			        </r:ManagedDateTimeRepresentation>
-			        <r:ManagedDateTimeRepresentation>
-			            <r:Agency>fr.insee</r:Agency>
-			            <r:ID>INSEE-COMMUN-MNR-DateTimedate-PTnHnM</r:ID>
-			            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-			            <r:DateFieldFormat>PTnHnM</r:DateFieldFormat>
-			            <r:DateTypeCode codeListID="INSEE-DTC-CV">duration</r:DateTypeCode>
-			        </r:ManagedDateTimeRepresentation>
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-ManagedRepresentationScheme', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                	</xsl:apply-templates>
                 </r:ManagedRepresentationScheme>
             </g:ResourcePackage>
             <s:StudyUnit xmlns="ddi:studyunit:3_2">
@@ -785,8 +754,8 @@
         </r:CommandCode>
         <!-- Define the scope of the Variable, because of loop. Outside loops, it's the main sequence which is referenced. -->
         <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
-            <d:ControlConstructReference>
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+        	<d:ControlConstructReference>
+        		<r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-referenced-sequence-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>Sequence</r:TypeOfObject>
@@ -1000,7 +969,7 @@
     </xsl:template>
     
     
-    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse')]//*[name() =('Sequence','IfThenElse','QuestionMultipleChoice','QuestionSingleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','Control','ResponseDomain')]" mode="model" priority="1">
+    <xsl:template name="ControlConstructReference" match="*[name()=('Sequence','IfThenElse')]//*[name() =('Sequence','IfThenElse','QuestionMultipleChoice','QuestionSingleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','Control','ResponseDomain') and not(ancestor::driver-ManagedRepresentationScheme)]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="driver" select="."/>
@@ -1292,12 +1261,14 @@
     <xsl:template match="driver-CodeListReference//CodeListReference | QuestionSingleChoice//ResponseDomain/CodeListReference" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:CodeListReference>	
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>CodeList</r:TypeOfObject>
-        </r:CodeListReference>
+        <xsl:if test="not(ancestor::driver-ManagedRepresentationScheme)">
+	        <r:CodeListReference>
+	            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+	            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+	            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+	            <r:TypeOfObject>CodeList</r:TypeOfObject>
+	        </r:CodeListReference>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="TextDomain" mode="model">
@@ -1439,6 +1410,55 @@
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
 		</r:DateTimeRepresentationReference>
+    </xsl:template>
+    
+	<xsl:template match="driver-ManagedRepresentationScheme//*" mode="model">
+	    <xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+	<!-- Format for ManagedRepresentationScheme -->
+	<xsl:template match="driver-ManagedRepresentationScheme//ResponseDomain//Format" mode="model">
+	    <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:value-of select="$source-context"/>
+	</xsl:template>
+    
+    <xsl:template match="driver-ManagedRepresentationScheme//ResponseDomain//DateTimeDomain | driver-ManagedRepresentationScheme//ResponseDomain//DurationDomain" mode="model">
+    	<xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="format">
+	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
+        </xsl:variable>
+        <!-- Id definition depend on date or duration type -->
+        <xsl:variable name="id-date-duration">
+        	<xsl:choose>
+        		<xsl:when test="name() = 'DurationDomain'">Duration</xsl:when>
+        		<xsl:otherwise>DateTimedate</xsl:otherwise>
+	        </xsl:choose>
+	       	<!-- Keep compatibility with old date if they don't have format -->
+	       	<xsl:if test="$format != '' ">
+	       		<xsl:value-of  select="concat('-',$format)"/>
+	       	</xsl:if>
+        </xsl:variable>
+        <xsl:variable name="DateTypeCode">
+        	<xsl:choose>
+        		<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
+        		<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
+        		<xsl:when test="name() = 'DurationDomain'">duration</xsl:when>
+        		<xsl:otherwise>date</xsl:otherwise>
+	        </xsl:choose>
+        </xsl:variable>
+		<r:ManagedDateTimeRepresentation>
+	        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+	        <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
+	        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+	        <r:DateFieldFormat><xsl:value-of select="$format"/></r:DateFieldFormat>
+	        <r:DateTypeCode codeListID="INSEE-DTC-CV"><xsl:value-of select="$DateTypeCode"/></r:DateTypeCode>
+		</r:ManagedDateTimeRepresentation>
     </xsl:template>
 
     <xsl:template match="BooleanDomain" mode="model">
