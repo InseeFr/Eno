@@ -2025,6 +2025,11 @@
     </xsl:template>
 
     <xd:doc>
+        <xd:desc>No other - give details out of cells</xd:desc>
+    </xd:doc>
+    <xsl:template match="Body//xf-group[(ancestor::Table or ancestor::TableLoop) and not(ancestor::Cell)]" mode="model" priority="2"/>
+    
+    <xd:doc>
         <xd:desc>
             <xd:p>The Cell driver produces something only in the Body part but its children can produce something.</xd:p>
         </xd:desc>
