@@ -306,6 +306,7 @@
                 </r:SourceParameterReference>
                 <xsl:apply-templates select="." mode="enoddi32:question-reference"/>
                 <l:VariableRepresentation>
+                	<!-- Representation of variable: text, numeric, date ... -->
                     <xsl:apply-templates select="eno:child-fields(.)" mode="source">
                         <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
                     </xsl:apply-templates>   
@@ -345,14 +346,22 @@
         </l:Variable>
     </xsl:template>
     
-    <xsl:template match="driver-VariableScheme//Variable/*[./name()= ('TextDomain','NumericDomain','DateTimeDomain','DurationDomain','BooleanDomain','CodeDomain')]" mode="model" priority="5">
+    <xsl:template match="driver-VariableScheme//CodeListReference" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-            <xsl:with-param name="driver" select="." tunnel="yes"/>
-        </xsl:apply-templates>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:if test="enoddi32:get-code-list-id($source-context) != '' ">
+			<r:CodeRepresentation>
+		        <r:CodeListReference>	
+		            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
+		            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		            <r:TypeOfObject>CodeList</r:TypeOfObject>
+		        </r:CodeListReference>
+		    </r:CodeRepresentation>
+    	</xsl:if>
     </xsl:template>
-
-    <xsl:template match="driver-VariableScheme//Variable//Unit" mode="model">
+    
+    <xsl:template match="driver-VariableScheme//Unit" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="unit" select="enoddi32:get-unit($source-context)"/>
         <xsl:if test="not(normalize-space($unit) = ('',' '))">
@@ -1303,6 +1312,12 @@
             </r:OutParameter>
         </d:TextDomain>
     </xsl:template>
+    
+    <xsl:template match="driver-VariableScheme//TextDomain" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
+    </xsl:template>
 
     <xsl:template match="NumericDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -1328,6 +1343,32 @@
             </r:OutParameter>
         </d:NumericDomain>
     </xsl:template>
+    
+    <xsl:template match="driver-VariableScheme//NumericDomain" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="driver" select="."/>
+        <xsl:variable name="decimalPositions" select="enoddi32:get-decimal-positions($source-context)"/>
+		<r:NumericRepresentation>
+			<xsl:if test="number($decimalPositions) = number($decimalPositions) and number($decimalPositions) &gt; 0">
+				<xsl:attribute name="decimalPositions" select="$decimalPositions"/>
+			</xsl:if>
+			<r:NumberRange>
+                <r:Low isInclusive="true">
+                    <xsl:value-of select="enoddi32:get-low($source-context)"/>
+                </r:Low>
+                <r:High isInclusive="true">
+                    <xsl:value-of select="enoddi32:get-high($source-context)"/>
+                </r:High>
+            </r:NumberRange>
+            <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+		</r:NumericRepresentation>
+		<!-- MeasurementUnit -->
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
+            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
 
     <xsl:template match="DateTimeDomain | DurationDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -1341,7 +1382,7 @@
         </xsl:variable>
        
         <d:DateTimeDomainReference>
-            <r:Agency>fr.insee</r:Agency>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
@@ -1350,13 +1391,30 @@
                 <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:DateTimeRepresentationReference>
-                    <r:Agency>fr.insee</r:Agency>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
                     <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
                 </r:DateTimeRepresentationReference>
             </r:OutParameter>
         </d:DateTimeDomainReference>        
+    </xsl:template>
+    
+     <xsl:template match="driver-VariableScheme//DateTimeDomain | driver-VariableScheme//DurationDomain" mode="model">
+    	<xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <!-- Id definition depend on date and duration format -->   
+        <xsl:variable name="id-date-duration">
+	    	<xsl:if test="$source-context != '' and $source-context != 'YYYY-MM-DD'">
+	        	<xsl:value-of  select="concat('-',$source-context)"/>
+	        </xsl:if>
+        </xsl:variable>
+		<r:DateTimeRepresentationReference>
+			<r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+		</r:DateTimeRepresentationReference>
     </xsl:template>
 
     <xsl:template match="BooleanDomain" mode="model">
@@ -1385,6 +1443,23 @@
         </d:NominalDomain>
     </xsl:template>
     
+	<xsl:template match="driver-VariableScheme//BooleanDomain" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+		<r:CodeRepresentation>
+        	<r:CodeSubsetInformation>
+            	<r:IncludedCode>
+	               	<r:CodeReference>
+                       <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+	                   <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
+	                   <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+	                   <r:TypeOfObject>Code</r:TypeOfObject>
+	               	</r:CodeReference>
+            	</r:IncludedCode>
+        	</r:CodeSubsetInformation>
+    	</r:CodeRepresentation>	
+    </xsl:template>
+    
     <xsl:template match="driver-SMGRD/*" mode="model" priority="2"/>
     
     <xsl:template match="driver-SMGRD/ResponseDomain/CodeDomain" mode="model" priority="3">
@@ -1399,7 +1474,7 @@
                 <r:TypeOfObject>CodeList</r:TypeOfObject>
             </r:CodeListReference>
             <r:OutParameter isArray="false">
-                <r:Agency>fr.insee</r:Agency>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:CodeRepresentation>
