@@ -1108,10 +1108,12 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p>The label of a Code with DiaplayCode = 'true' is the concatenation of its r:Value and its descendant r:Label.</xd:p>
+            <xd:p>The label of a Code in a CodeDomain with @displayCode = 'true' is the concatenation of its r:Value and its descendant r:Label.</xd:p>
+            <xd:p>The same for a Code in a GridDimension with @displayCode = 'true', but only if it has no descendant.</xd:p>
+            <xd:p>When both are true, only one Code is concatened</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="l:Code[ancestor::d:CodeDomain/@displayCode='true']"
+    <xsl:template match="l:Code[(ancestor::d:CodeDomain/@displayCode='true') or (ancestor::d:GridDimension[@displayCode='true'] and not(descendant::l:Code))]"
         mode="enoddi:get-label">
         <xsl:variable name="xhtml-label" as="node()">
             <xsl:apply-templates select="r:CategoryReference/l:Category/r:Label" mode="lang-choice"/>

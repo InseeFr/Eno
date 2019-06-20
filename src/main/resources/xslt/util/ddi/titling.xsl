@@ -368,26 +368,6 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template used to add code before labels from dropdown lists and tables
-                headers.</xd:p>
-            <xd:p>When l:Code is within a d:GridDimension where attributes @displyCode and displayLabel are true : adding labels.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template
-        match="l:Code[ancestor::d:GridDimension[@displayCode='true'] and not(descendant::l:Code)]
-        /r:CategoryReference/l:Category/r:Label/r:Content">
-        <xsl:variable name="prefix">
-            <xsl:value-of select="concat(../../../../r:Value,' - ')"/>
-        </xsl:variable>
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*" mode="modif-title">
-                <xsl:with-param name="prefix" select="$prefix" tunnel="yes"/>
-            </xsl:apply-templates>
-        </xsl:copy>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:desc>
             <xd:p>Only the first child of a xhtml:p must be titled</xd:p>
         </xd:desc>
     </xd:doc>
