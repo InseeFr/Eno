@@ -1451,12 +1451,12 @@
 	</xsl:template>
 	
 	<!-- Format for ManagedRepresentationScheme -->
-	<xsl:template match="driver-ManagedRepresentationScheme//ResponseDomain//Format" mode="model">
+	<xsl:template match="driver-ManagedRepresentationScheme//ResponseDomain//Format" mode="model" priority="1">
 	    <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:value-of select="$source-context"/>
 	</xsl:template>
     
-    <xsl:template match="driver-ManagedRepresentationScheme//ResponseDomain//DateTimeDomain | driver-ManagedRepresentationScheme//ResponseDomain//DurationDomain" mode="model">
+    <xsl:template match="driver-ManagedRepresentationScheme//ResponseDomain//DateTimeDomain | driver-ManagedRepresentationScheme//ResponseDomain//DurationDomain" mode="model" priority="1">
     	<xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!-- Get Date and Duration Format -->
