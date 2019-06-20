@@ -13,7 +13,7 @@
       <conditionFilter>normal</conditionFilter>
       <components xsi:type="Textarea" id="j6p3dkx6" maxLength="500">
          <label>➡ 1. Before starting, do you have any comments about the Simpsons family?</label>
-         <response name="COMMENT">
+         <response name="COMMENT" responseType="">
             <valueState type="PREVIOUS">
                <value/>
             </valueState>
@@ -34,7 +34,7 @@
       </components>
       <components xsi:type="CheckboxBoolean" id="j6p0np9q">
          <label>➡ 2. Are you ready?</label>
-         <response name="READY">
+         <response name="READY" responseType="boolean">
             <valueState type="PREVIOUS">
                <value>false</value>
             </valueState>
@@ -58,7 +58,7 @@
          <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
          <components xsi:type="Input" id="j3343qhx" maxLength="30">
             <label>➡ 3. Who is the producer?</label>
-            <response name="PRODUCER">
+            <response name="PRODUCER" responseType="">
                <valueState type="PREVIOUS">
                   <value/>
                </valueState>
@@ -83,7 +83,7 @@
                      max="99"
                      decimals="0">
             <label>➡ 4. What is the current season number?</label>
-            <response name="SEASON_NUMBER">
+            <response name="SEASON_NUMBER" responseType="">
                <valueState type="PREVIOUS">
                   <value/>
                </valueState>
@@ -109,7 +109,7 @@
                           position="AFTER_QUESTION_TEXT">
                <label>For your information, the date of the last broadcast was on øLAST_BROADCASTø</label>
             </declarations>
-            <response name="DATEFIRST">
+            <response name="DATEFIRST" responseType="">
                <valueState type="PREVIOUS">
                   <value/>
                </valueState>
@@ -135,7 +135,7 @@
                      max="99.0"
                      decimals="1">
             <label>➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?</label>
-            <response name="AUDIENCE_SHARE">
+            <response name="AUDIENCE_SHARE" responseType="">
                <valueState type="PREVIOUS">
                   <value/>
                </valueState>
@@ -173,23 +173,20 @@
          </declarations>
          <codeLists id="j334iumu">
                <label>TOWN</label>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>00001</value>
                <label>Springfield</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>00002</value>
                <label>Shelbyville</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>00003</value>
                <label>Seinfeld</label>
             </codes>
             </codeLists>
-         <response name="CITY">
+         <response name="CITY" responseType="">
             <valueState type="PREVIOUS">
                <value/>
             </valueState>
@@ -217,28 +214,24 @@
          </declarations>
          <codeLists id="j6qdqoen">
                <label>MAYOR</label>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>1</value>
                <label>Constance Harm</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>2</value>
                <label>Timothy Lovejoy</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>3</value>
                <label>Joe Quimby</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>4</value>
                <label>Poochie</label>
             </codes>
             </codeLists>
-         <response name="MAYOR">
+         <response name="MAYOR" responseType="">
             <valueState type="PREVIOUS">
                <value/>
             </valueState>
@@ -261,73 +254,60 @@
          <label>➡ 3. In which state do The Simpsons reside?</label>
          <codeLists id="j4nwo00f">
                <label>State</label>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>1</value>
                <label>Washington</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>2</value>
                <label>Kentucky</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>3</value>
                <label>Ohio</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>4</value>
                <label>Maine</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>5</value>
                <label>North Dakota</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>6</value>
                <label>Florida</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>7</value>
                <label>North Takoma</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>8</value>
                <label>California</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>9</value>
                <label>Texas</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>10</value>
                <label>Massachusetts</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>11</value>
                <label>Nevada</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>12</value>
                <label>Illinois</label>
             </codes>
-               <codes>
-               <parent/>
+               <codes depth="1">
                <value>13</value>
                <label>Not in any state, you fool!</label>
             </codes>
             </codeLists>
-         <response name="STATE">
+         <response name="STATE" responseType="">
             <valueState type="PREVIOUS">
                <value/>
             </valueState>
@@ -360,7 +340,7 @@
          <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
          <items id="j334akov-QOP-jbgd8qmn">
                <label>Santa's Little Helper</label>
-               <response name="PET1">
+               <response name="PET1" responseType="boolean">
                <valueState type="PREVIOUS">
                   <value>false</value>
                </valueState>
@@ -380,7 +360,7 @@
             </items>
          <items id="j334akov-QOP-jbgd60vl">
                <label>Snowball I</label>
-               <response name="PET2">
+               <response name="PET2" responseType="boolean">
                <valueState type="PREVIOUS">
                   <value>false</value>
                </valueState>
@@ -400,7 +380,7 @@
             </items>
          <items id="j334akov-QOP-jbgda2jo">
                <label>Coltrane</label>
-               <response name="PET3">
+               <response name="PET3" responseType="boolean">
                <valueState type="PREVIOUS">
                   <value>false</value>
                </valueState>
@@ -420,7 +400,7 @@
             </items>
          <items id="j334akov-QOP-jbgdfssy">
                <label>Mojo the Helper Monkey</label>
-               <response name="PET4">
+               <response name="PET4" responseType="boolean">
                <valueState type="PREVIOUS">
                   <value>false</value>
                </valueState>
@@ -438,6 +418,348 @@
                </valueState>
             </response>
             </items>
+      </components>
+      <components xsi:type="TableOneAxis" id="j6p29i81" positioning="HORIZONTAL">
+         <codeLists id="j6p29i81-j6p2mvca">
+            <codes depth="1">
+               <value>1</value>
+               <label>Vanilla</label>
+            </codes>
+            <codes depth="1">
+               <value>2</value>
+               <label>Strawberry</label>
+            </codes>
+            <codes depth="1">
+               <value>3</value>
+               <label>Apple</label>
+            </codes>
+            <codes depth="1">
+               <value>4</value>
+               <label>Bacon</label>
+            </codes>
+         </codeLists>
+         <columns componentType="Radio">
+            <codeLists id="jbdxh138">
+                  <label>YESNO</label>
+                  <codes depth="1">
+                  <value>1</value>
+                  <label>Yes</label>
+               </codes>
+                  <codes depth="1">
+                  <value>0</value>
+                  <label>No</label>
+               </codes>
+               </codeLists>
+         </columns>
+         <responses name="ICE_FLAVOUR1" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <responses name="ICE_FLAVOUR2" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <responses name="ICE_FLAVOUR3" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <responses name="ICE_FLAVOUR4" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <label>➡ 2. Does Jay like the following ice cream flavours?</label>
+         <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
+      </components>
+      <components xsi:type="TableOneAxis" id="j6qefnga" positioning="HORIZONTAL">
+         <codeLists id="j6qefnga-j6qeytgc">
+            <codes depth="1">
+               <value>1</value>
+               <label>Charles Montgomery Burns</label>
+            </codes>
+            <codes depth="1">
+               <value>2</value>
+               <label>Carl Carlson</label>
+            </codes>
+            <codes depth="1">
+               <value>3</value>
+               <label>Otto Mann</label>
+            </codes>
+            <codes depth="1">
+               <value>4</value>
+               <label>Carl Carlson</label>
+            </codes>
+         </codeLists>
+         <columns componentType="Dropdown">
+            <codeLists id="jbdxh138">
+                  <label>YESNO</label>
+                  <codes depth="1">
+                  <value>1</value>
+                  <label>Yes</label>
+               </codes>
+                  <codes depth="1">
+                  <value>0</value>
+                  <label>No</label>
+               </codes>
+               </codeLists>
+         </columns>
+         <responses name="NUCLEAR_CHARACTER1" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <responses name="NUCLEAR_CHARACTER2" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <responses name="NUCLEAR_CHARACTER3" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <responses name="NUCLEAR_CHARACTER4" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <label>➡ 3. Which character works in the nuclear power plant?</label>
+         <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
+      </components>
+      <components xsi:type="TableOneAxis" id="j6yzoc6g" positioning="HORIZONTAL">
+         <codeLists id="j6yzoc6g-j6z087mq">
+            <codes depth="1">
+               <value>1</value>
+               <label>Selma Bouvier</label>
+            </codes>
+            <codes depth="1">
+               <value>2</value>
+               <label>Kent Brockman</label>
+            </codes>
+            <codes depth="1">
+               <value>3</value>
+               <label>Milhouse Van Houten</label>
+            </codes>
+            <codes depth="1">
+               <value>4</value>
+               <label>Nelson Muntz</label>
+            </codes>
+            <codes depth="1">
+               <value>5</value>
+               <label>Crazy Cat Lady</label>
+            </codes>
+         </codeLists>
+         <columns componentType="CheckboxOne">
+            <codeLists id="jbdxricm">
+                  <label>CITY_BIRTH</label>
+                  <codes depth="1">
+                  <value>1</value>
+                  <label>Albuquerque</label>
+               </codes>
+                  <codes depth="1">
+                  <value>2</value>
+                  <label>Springfield</label>
+               </codes>
+                  <codes depth="1">
+                  <value>3</value>
+                  <label>Portland</label>
+               </codes>
+                  <codes depth="1">
+                  <value>4</value>
+                  <label>Shelbyville</label>
+               </codes>
+                  <codes depth="1">
+                  <value>5</value>
+                  <label>Dagstuhl</label>
+               </codes>
+               </codeLists>
+         </columns>
+         <responses name="BIRTH_CHARACTER1" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <responses name="BIRTH_CHARACTER2" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <responses name="BIRTH_CHARACTER3" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <responses name="BIRTH_CHARACTER4" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <responses name="BIRTH_CHARACTER5" responseType="">
+            <valueState type="PREVIOUS">
+               <value/>
+            </valueState>
+            <valueState type="COLLECTED">
+               <value/>
+            </valueState>
+            <valueState type="FORCED">
+               <value/>
+            </valueState>
+            <valueState type="EDITED">
+               <value/>
+            </valueState>
+            <valueState type="INPUTED">
+               <value/>
+            </valueState>
+         </responses>
+         <label>➡ 4. In which city each character was born?</label>
+         <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
       </components>
    </components>
    <components xsi:type="Sequence" id="j4nw88h2">
@@ -465,7 +787,7 @@
       <conditionFilter>normal</conditionFilter>
       <components xsi:type="Textarea" id="j6z0z3us" maxLength="255">
          <label>➡ 1. Do you have any comment about the survey?</label>
-         <response name="SURVEY_COMMENT">
+         <response name="SURVEY_COMMENT" responseType="">
             <valueState type="PREVIOUS">
                <value/>
             </valueState>
@@ -540,6 +862,90 @@
    <variables>
       <name>PET4</name>
       <responseRef>PET4</responseRef>
+   </variables>
+   <variables>
+      <name>ICE_FLAVOUR1</name>
+      <responseRef>ICE_FLAVOUR1</responseRef>
+   </variables>
+   <variables>
+      <name>ICE_FLAVOUR1</name>
+      <responseRef>ICE_FLAVOUR1</responseRef>
+   </variables>
+   <variables>
+      <name>ICE_FLAVOUR2</name>
+      <responseRef>ICE_FLAVOUR2</responseRef>
+   </variables>
+   <variables>
+      <name>ICE_FLAVOUR2</name>
+      <responseRef>ICE_FLAVOUR2</responseRef>
+   </variables>
+   <variables>
+      <name>ICE_FLAVOUR3</name>
+      <responseRef>ICE_FLAVOUR3</responseRef>
+   </variables>
+   <variables>
+      <name>ICE_FLAVOUR3</name>
+      <responseRef>ICE_FLAVOUR3</responseRef>
+   </variables>
+   <variables>
+      <name>ICE_FLAVOUR4</name>
+      <responseRef>ICE_FLAVOUR4</responseRef>
+   </variables>
+   <variables>
+      <name>ICE_FLAVOUR4</name>
+      <responseRef>ICE_FLAVOUR4</responseRef>
+   </variables>
+   <variables>
+      <name>NUCLEAR_CHARACTER1</name>
+      <responseRef>NUCLEAR_CHARACTER1</responseRef>
+   </variables>
+   <variables>
+      <name>NUCLEAR_CHARACTER1</name>
+      <responseRef>NUCLEAR_CHARACTER1</responseRef>
+   </variables>
+   <variables>
+      <name>NUCLEAR_CHARACTER2</name>
+      <responseRef>NUCLEAR_CHARACTER2</responseRef>
+   </variables>
+   <variables>
+      <name>NUCLEAR_CHARACTER2</name>
+      <responseRef>NUCLEAR_CHARACTER2</responseRef>
+   </variables>
+   <variables>
+      <name>NUCLEAR_CHARACTER3</name>
+      <responseRef>NUCLEAR_CHARACTER3</responseRef>
+   </variables>
+   <variables>
+      <name>NUCLEAR_CHARACTER3</name>
+      <responseRef>NUCLEAR_CHARACTER3</responseRef>
+   </variables>
+   <variables>
+      <name>NUCLEAR_CHARACTER4</name>
+      <responseRef>NUCLEAR_CHARACTER4</responseRef>
+   </variables>
+   <variables>
+      <name>NUCLEAR_CHARACTER4</name>
+      <responseRef>NUCLEAR_CHARACTER4</responseRef>
+   </variables>
+   <variables>
+      <name>BIRTH_CHARACTER1</name>
+      <responseRef>BIRTH_CHARACTER1</responseRef>
+   </variables>
+   <variables>
+      <name>BIRTH_CHARACTER2</name>
+      <responseRef>BIRTH_CHARACTER2</responseRef>
+   </variables>
+   <variables>
+      <name>BIRTH_CHARACTER3</name>
+      <responseRef>BIRTH_CHARACTER3</responseRef>
+   </variables>
+   <variables>
+      <name>BIRTH_CHARACTER4</name>
+      <responseRef>BIRTH_CHARACTER4</responseRef>
+   </variables>
+   <variables>
+      <name>BIRTH_CHARACTER5</name>
+      <responseRef>BIRTH_CHARACTER5</responseRef>
    </variables>
    <variables>
       <name>SURVEY_COMMENT</name>
