@@ -193,8 +193,8 @@
                 	<!-- Filter by unique format -->
                 	<xsl:for-each select="distinct-values(tokenize(normalize-space($allFormats), ';'))">
 						<xsl:variable name="formatDate" select="."/>
-						<!-- All existing date and duration format : ('YYYY', 'YYYY-MM','YYYY-MM-DD','PnYnM','PTnHnM') -->
-						<xsl:if test="$formatDate != ''">
+						<!-- Check if format equals one of those date and duration formats who end by ; limiter -->
+						<xsl:if test="contains('YYYY;YYYY-MM;YYYY-MM-DD;PnYnM;PTnHnM;', concat($formatDate, ';'))">
 							<!-- id construct -->
 							<xsl:variable name="id-date-duration">
 					        	<xsl:choose>
