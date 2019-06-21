@@ -1030,6 +1030,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
+            <xsl:with-param name="mandatory" select="enoddi32:get-ci-type($source-context)" tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
     
@@ -1059,6 +1060,7 @@
     <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="mandatory" select="enoddi32:get-ci-type($source-context)"/>
         <d:CodeDomain>            
             <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -1075,7 +1077,11 @@
                     </xsl:apply-templates>
                 </r:CodeRepresentation>
             </r:OutParameter>
-            <r:ResponseCardinality maximumResponses="1"/>
+			<r:ResponseCardinality maximumResponses="1">
+				<xsl:if test="$mandatory = 'mandatory'">
+					<xsl:attribute name="minimumResponses">1</xsl:attribute>
+				</xsl:if>
+			</r:ResponseCardinality>
         </d:CodeDomain>
     </xsl:template>
     
@@ -1088,6 +1094,7 @@
             <d:GridResponseDomain>
                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
+                    <xsl:with-param name="mandatory" select="enoddi32:get-ci-type($source-context)" tunnel="yes"/>
                 </xsl:apply-templates>
                 <d:GridAttachment>
                     <d:CellCoordinatesAsDefined>
@@ -1303,6 +1310,7 @@
     <xsl:template match="TextDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
         <d:TextDomain maxLength="{enoddi32:get-max-length($source-context)}">
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -1310,6 +1318,9 @@
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                 <r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
             </r:OutParameter>
+            <xsl:if test="$mandatory = 'mandatory'">
+				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+            </xsl:if>
         </d:TextDomain>
     </xsl:template>
     
@@ -1322,6 +1333,7 @@
     <xsl:template match="NumericDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
         <d:NumericDomain>
             <xsl:variable name="decimalPositions" select="enoddi32:get-decimal-positions($source-context)"/>
             <xsl:if test="number($decimalPositions) = number($decimalPositions) and number($decimalPositions) &gt; 0">
@@ -1341,6 +1353,9 @@
                 <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             </r:OutParameter>
+            <xsl:if test="$mandatory = 'mandatory'">
+				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+			</xsl:if>
         </d:NumericDomain>
     </xsl:template>
     
@@ -1373,14 +1388,13 @@
     <xsl:template match="DateTimeDomain | DurationDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        
+        <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
         <!-- Id definition depend on date and duration format -->   
         <xsl:variable name="id-date-duration">
 	    	<xsl:if test="$source-context != '' and $source-context != 'YYYY-MM-DD'">
 	        	<xsl:value-of  select="concat('-',$source-context)"/>
 	        </xsl:if>
         </xsl:variable>
-       
         <d:DateTimeDomainReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>INSEE-COMMUN-MNR-DateTimedate<xsl:value-of select="$id-date-duration"/></r:ID>
@@ -1397,6 +1411,9 @@
                     <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
                 </r:DateTimeRepresentationReference>
             </r:OutParameter>
+			<xsl:if test="$mandatory = 'mandatory'">
+				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+			</xsl:if>
         </d:DateTimeDomainReference>        
     </xsl:template>
     
@@ -1420,6 +1437,7 @@
     <xsl:template match="BooleanDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
         <d:NominalDomain>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -1439,7 +1457,11 @@
                 </r:CodeRepresentation>
                 <r:DefaultValue/>
             </r:OutParameter>
-            <r:ResponseCardinality maximumResponses="1"/>
+            <r:ResponseCardinality maximumResponses="1">
+            	<xsl:if test="$mandatory = 'mandatory'">
+            		<xsl:attribute name="minimumResponses">1</xsl:attribute>
+				</xsl:if>
+            </r:ResponseCardinality>
         </d:NominalDomain>
     </xsl:template>
     
@@ -1465,6 +1487,7 @@
     <xsl:template match="driver-SMGRD/ResponseDomain/CodeDomain" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
         <d:CodeDomain>
             <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>            
             <r:CodeListReference>
@@ -1486,7 +1509,11 @@
                     </r:CodeListReference>
                 </r:CodeRepresentation>
             </r:OutParameter>
-            <r:ResponseCardinality maximumResponses="1"/>
+			<r:ResponseCardinality maximumResponses="1">
+				<xsl:if test="$mandatory = 'mandatory'">
+					<xsl:attribute name="minimumResponses">1</xsl:attribute>
+				</xsl:if>
+			</r:ResponseCardinality>
         </d:CodeDomain>
       </xsl:template>
 
