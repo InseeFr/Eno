@@ -718,8 +718,9 @@
         </d:StatementItem>
     </xsl:template>
     
-    
-    <xsl:template name="ComputationItem" match="driver-ControlConstructScheme/Control | driver-ControlConstructScheme/ResponseDomain" mode="model">
+    <!-- ComputationItem only for Control -->
+    <!-- <xsl:template name="ComputationItem" match="driver-ControlConstructScheme/Control | driver-ControlConstructScheme/ResponseDomain" mode="model"> -->
+    <xsl:template name="ComputationItem" match="driver-ControlConstructScheme/Control" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ComputationItem>
