@@ -1373,11 +1373,7 @@
     <xsl:template match="DateTimeDomain | DurationDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:variable name="format">
-	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-	            <xsl:with-param name="driver" select="eno:append-empty-element('driver-DateDurationFormat', .)" tunnel="yes"/>
-	        </xsl:apply-templates>
-        </xsl:variable>
+        <xsl:variable name="format" select="enoddi32:get-format($source-context)"/>
         <!-- Id definition depend on date or duration type -->
         <xsl:variable name="id-date-duration">
         	<xsl:choose>
@@ -1408,20 +1404,10 @@
         </d:DateTimeDomainReference>        
     </xsl:template>
     
-    <!-- Format -->
-	<xsl:template match="driver-DateDurationFormat//Format" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:value-of select="$source-context"/>
-	</xsl:template>
-
 	<xsl:template match="driver-VariableScheme//DateTimeDomain | driver-VariableScheme//DurationDomain" mode="model">
     	<xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:variable name="format">
-	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-	            <xsl:with-param name="driver" select="eno:append-empty-element('driver-DateDurationFormat', .)" tunnel="yes"/>
-	        </xsl:apply-templates>
-        </xsl:variable>
+        <xsl:variable name="format" select="enoddi32:get-format($source-context)"/>
         <!-- Id definition depend on date or duration type -->
         <xsl:variable name="id-date-duration">
         	<xsl:choose>
