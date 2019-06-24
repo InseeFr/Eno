@@ -1026,7 +1026,7 @@
         </xsl:if>
     </xsl:template>
    
-    <xsl:template match="QuestionSimple//ResponseDomain" mode="model" priority="1">
+    <xsl:template match="QuestionSimple//ResponseDomain[not(ancestor::driver-ControlConstructScheme)]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
