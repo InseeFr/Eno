@@ -1078,10 +1078,11 @@
                     </xsl:apply-templates>
                 </r:CodeRepresentation>
             </r:OutParameter>
-			<r:ResponseCardinality maximumResponses="1">
+			<r:ResponseCardinality>
 				<xsl:if test="$mandatory = 'mandatory'">
 					<xsl:attribute name="minimumResponses">1</xsl:attribute>
 				</xsl:if>
+				<xsl:attribute name="maximumResponses">1</xsl:attribute>
 			</r:ResponseCardinality>
         </d:CodeDomain>
     </xsl:template>
@@ -1458,10 +1459,11 @@
                 </r:CodeRepresentation>
                 <r:DefaultValue/>
             </r:OutParameter>
-            <r:ResponseCardinality maximumResponses="1">
+            <r:ResponseCardinality>
             	<xsl:if test="$mandatory = 'mandatory'">
             		<xsl:attribute name="minimumResponses">1</xsl:attribute>
 				</xsl:if>
+				<xsl:attribute name="maximumResponses">1</xsl:attribute>
             </r:ResponseCardinality>
         </d:NominalDomain>
     </xsl:template>
@@ -1510,10 +1512,11 @@
                     </r:CodeListReference>
                 </r:CodeRepresentation>
             </r:OutParameter>
-			<r:ResponseCardinality maximumResponses="1">
+			<r:ResponseCardinality>
 				<xsl:if test="$mandatory = 'mandatory'">
 					<xsl:attribute name="minimumResponses">1</xsl:attribute>
 				</xsl:if>
+				<xsl:attribute name="maximumResponses">1</xsl:attribute>
 			</r:ResponseCardinality>
         </d:CodeDomain>
       </xsl:template>
