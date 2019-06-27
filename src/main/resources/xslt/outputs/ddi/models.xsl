@@ -1381,9 +1381,10 @@
         		<xsl:otherwise>DateTimedate</xsl:otherwise>
 	        </xsl:choose>
 	       	<!-- Keep compatibility with old date if they don't have format -->
-	       	<xsl:if test="$format != '' ">
-	       		<xsl:value-of  select="concat('-',$format)"/>
-	       	</xsl:if>
+	       	<xsl:choose>
+        		<xsl:when test="$format != ''"><xsl:value-of  select="concat('-',$format)"/></xsl:when>
+        		<xsl:otherwise><xsl:value-of  select="concat('-', 'YYYY-MM-DD')"/></xsl:otherwise>
+	        </xsl:choose>
         </xsl:variable>
         <d:DateTimeDomainReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -1415,9 +1416,10 @@
         		<xsl:otherwise>DateTimedate</xsl:otherwise>
 	        </xsl:choose>
 	       	<!-- Keep compatibility with old date if they don't have format -->
-	       	<xsl:if test="$format != '' ">
-	       		<xsl:value-of  select="concat('-',$format)"/>
-	       	</xsl:if>
+	       	<xsl:choose>
+        		<xsl:when test="$format != ''"><xsl:value-of  select="concat('-',$format)"/></xsl:when>
+        		<xsl:otherwise><xsl:value-of  select="concat('-', 'YYYY-MM-DD')"/></xsl:otherwise>
+	        </xsl:choose>
         </xsl:variable>
 		<r:DateTimeRepresentationReference>
 			<r:Agency><xsl:value-of select="$agency"/></r:Agency>
