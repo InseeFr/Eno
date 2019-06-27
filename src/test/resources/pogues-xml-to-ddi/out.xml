@@ -10983,7 +10983,7 @@
          </r:Label>
          <r:ManagedDateTimeRepresentation>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimeDomain-YYYY-MM-DD</r:ID>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM-DD</r:ID>
             <r:Version>1.0</r:Version>
             <r:DateFieldFormat>YYYY-MM-DD</r:DateFieldFormat>
             <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>

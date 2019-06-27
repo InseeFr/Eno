@@ -198,8 +198,8 @@
 							<!-- id construct -->
 							<xsl:variable name="id-date-duration">
 					        	<xsl:choose>
-					        		<xsl:when test="$formatDate = ('PnYnM', 'PTnHnM')">DurationDomain</xsl:when>
-					        		<xsl:otherwise>DateTimeDomain</xsl:otherwise>
+					        		<xsl:when test="$formatDate = ('PnYnM', 'PTnHnM')">Duration</xsl:when>
+					        		<xsl:otherwise>DateTimedate</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
 							<xsl:variable name="DateTypeCode">
