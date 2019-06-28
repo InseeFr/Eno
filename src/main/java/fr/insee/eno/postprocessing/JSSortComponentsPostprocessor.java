@@ -14,9 +14,9 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * Customization of JS postprocessor.
  */
-public class JSAddVariableReferencePostprocessor implements Postprocessor {
+public class JSSortComponentsPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(JSAddVariableReferencePostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(JSSortComponentsPostprocessor.class);
 
 	// FIXME Inject !
 	private static XslTransformation saxonService = new XslTransformation();
@@ -25,13 +25,13 @@ public class JSAddVariableReferencePostprocessor implements Postprocessor {
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
 		File outputCustomFOFile = new File(
-				FilenameUtils.removeExtension(input.getPath()) + Constants.POST_PROCESSING_JS_EXTENSION);
-		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_POST_PROCESSING_JS);
+				FilenameUtils.removeExtension(input.getPath()) + Constants.SORT_COMPONENTS_JS_EXTENSION);
+		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_SORT_COMPONENTS_JS);
 
 		saxonService.transformJSToJSPost(FileUtils.openInputStream(input),
 				FileUtils.openOutputStream(outputCustomFOFile), JS_XSL);
 		JS_XSL.close();
-		logger.info("End JS post-processing");
+		logger.info("End JS sort component post-processing");
 
 		return outputCustomFOFile;
 	}
