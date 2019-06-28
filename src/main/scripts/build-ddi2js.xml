@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="enoDDI2JS" basedir="." default="full">
   
+    <import file="build-js.xml"/>
+  
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
 
     <!-- ******************************* Main properties for the non-regression script depending on the input and transformation to be processed *********************************** -->
     <!-- The name of the survey, conditionning the name of the input file processed. -->
-    <property name="survey-name" value="ophelie"/>
+    <property name="survey-name" value="simpsons"/>
     <!-- The transformation to be processed, usually named using a <in>2<out> template. -->
     
     <property name="transformation-name" value="ddi2js"/>
@@ -232,7 +234,7 @@
     <!-- ********************************************** Targets OutPostProcessing ************************************************ -->
     <target name="OutPostProcessing">
         <!-- Expects the input file ${temp.home}/${out-format}/${form-name}/basic-form.tmp -->
-        <antcall target="${out-format}PostProcessing">            
+        <antcall target="jsPostProcessing">            
             <param name="input-file" value="${temp.home}/${out-format}/${form-name}/basic-form.tmp"/>
         </antcall>
     </target>
@@ -307,15 +309,5 @@
             style="${xslt.home}/util/ddi/titling.xsl" classpath="${saxon.jar}" force="true">
             <param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
         </xslt>
-    </target>
-    
-    <target name="jsPostProcessing">
-        <!--<copy file="${temp.home}/${out-format}/${form-name}/basic-form.tmp" tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"></copy>-->
-        <xslt in="${temp.home}/${out-format}/${form-name}/basic-form.tmp"
-            out="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
-            style="${xslt.home}/util/js/sort-components.xsl"
-            classpath="${saxon.jar}" force="true">
-        </xslt>
-    </target> 
-   
+    </target>   
 </project>

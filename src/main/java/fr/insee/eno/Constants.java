@@ -136,7 +136,8 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_END_QUESTION_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-end-questions.xsl";
 	public static final String TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/edit-structure-page.xsl";
 	public static final String STATIC_PAGES = OUPUTS_FOLDER_2 +"/static-pages.fo";
-	public static final String TRANSFORMATIONS_POST_PROCESSING_JS = OUPUTS_FOLDER_JS + "/sort-components.xsl";
+	public static final String TRANSFORMATIONS_SORT_COMPONENTS_JS = OUPUTS_FOLDER_JS + "/sort-components.xsl";
+	public static final String TRANSFORMATIONS_EXTERNALIZE_CODELISTS_JS = OUPUTS_FOLDER_JS + "/externalize-code-list.xsl";
 	// ---------- Temporary file system
 	
 	// ----- Folders
@@ -300,7 +301,8 @@ public final class Constants {
 	public static final String FINAL_PDF_EXTENSION = "-final-out.fo";
 	//public static final String CUSTOM_FO_EXTENSION = "-out.fo";
 	public static final String MAILING_FO_EXTENSION = "-mailing-vtl.fo";
-	public static final String POST_PROCESSING_JS_EXTENSION = "-final.xml";
+	public static final String SORT_COMPONENTS_JS_EXTENSION = "-sorted.xml";
+	public static final String FINAL_JS_EXTENSION = "-final-out.xml";
 	
 	//public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
 		public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
