@@ -302,7 +302,7 @@ public final class Constants {
 	//public static final String CUSTOM_FO_EXTENSION = "-out.fo";
 	public static final String MAILING_FO_EXTENSION = "-mailing-vtl.fo";
 	public static final String SORT_COMPONENTS_JS_EXTENSION = "-sorted.xml";
-	public static final String FINAL_JS_EXTENSION = "-final-out.xml";
+	public static final String FINAL_JS_EXTENSION = "-lunatic.xml";
 	
 	//public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
 		public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
