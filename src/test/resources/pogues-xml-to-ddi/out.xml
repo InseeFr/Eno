@@ -10983,38 +10983,10 @@
          </r:Label>
          <r:ManagedDateTimeRepresentation>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
+            <r:ID>INSEE-COMMUN-MNR-DateTimeDomain-YYYY-MM-DD</r:ID>
             <r:Version>1.0</r:Version>
-            <r:DateFieldFormat>jj/mm/aaaa</r:DateFieldFormat>
+            <r:DateFieldFormat>YYYY-MM-DD</r:DateFieldFormat>
             <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
-         </r:ManagedDateTimeRepresentation>
-         <r:ManagedDateTimeRepresentation>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM</r:ID>
-            <r:Version>1.0</r:Version>
-            <r:DateFieldFormat>YYYY-MM</r:DateFieldFormat>
-            <r:DateTypeCode codeListID="INSEE-DTC-CV">gYearMonth</r:DateTypeCode>
-         </r:ManagedDateTimeRepresentation>
-         <r:ManagedDateTimeRepresentation>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY</r:ID>
-            <r:Version>1.0</r:Version>
-            <r:DateFieldFormat>YYYY</r:DateFieldFormat>
-            <r:DateTypeCode codeListID="INSEE-DTC-CV">gYear</r:DateTypeCode>
-         </r:ManagedDateTimeRepresentation>
-         <r:ManagedDateTimeRepresentation>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimedate-PnYnM</r:ID>
-            <r:Version>1.0</r:Version>
-            <r:DateFieldFormat>PnYnM</r:DateFieldFormat>
-            <r:DateTypeCode codeListID="INSEE-DTC-CV">duration</r:DateTypeCode>
-         </r:ManagedDateTimeRepresentation>
-         <r:ManagedDateTimeRepresentation>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimedate-PTnHnM</r:ID>
-            <r:Version>1.0</r:Version>
-            <r:DateFieldFormat>PTnHnM</r:DateFieldFormat>
-            <r:DateTypeCode codeListID="INSEE-DTC-CV">duration</r:DateTypeCode>
          </r:ManagedDateTimeRepresentation>
       </r:ManagedRepresentationScheme>
    </g:ResourcePackage>
