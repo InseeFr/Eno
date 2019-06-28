@@ -13,7 +13,7 @@
 		
 		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form-sorted.${out-extension}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
-			style="${xslt.home}/util/js/externalize-code-list.xsl" force="true"			
+			style="${xslt.home}/util/js/externalize-code-lists.xsl" force="true"			
 			classpath="${saxon.jar}">
 		</xslt>
 		
