@@ -125,6 +125,19 @@
     <xsl:function name="enojs:get-end-question-instructions">
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote') | enoddi:get-next-filter-description($context)"/>
-    </xsl:function>   
+    </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enojs:get-required">
+        <xsl:param name="context" as="item()"/>
+        <xsl:if test=" enoddi:get-minimum-responses($context) != '0'">
+            <xsl:value-of select="'true'"/>
+        </xsl:if>
+    </xsl:function>
+    
 
 </xsl:stylesheet>
