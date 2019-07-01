@@ -2,6 +2,7 @@ package fr.insee.eno.postprocessing;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -28,8 +29,14 @@ public class JSSortComponentsPostprocessor implements Postprocessor {
 				FilenameUtils.removeExtension(input.getPath()) + Constants.SORT_COMPONENTS_JS_EXTENSION);
 		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_SORT_COMPONENTS_JS);
 
-		saxonService.transformJSToJSPost(FileUtils.openInputStream(input),
-				FileUtils.openOutputStream(outputCustomFOFile), JS_XSL);
+		
+		InputStream inputStream = FileUtils.openInputStream(input);
+		OutputStream outputStream = FileUtils.openOutputStream(outputCustomFOFile);
+		
+		saxonService.transformJSToJSPost(inputStream,outputStream, JS_XSL);
+		
+		inputStream.close();
+		outputStream.close();
 		JS_XSL.close();
 		logger.info("End JS sort component post-processing");
 
