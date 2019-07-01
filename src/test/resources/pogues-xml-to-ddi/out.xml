@@ -1381,7 +1381,7 @@
             </d:QuestionText>
             <d:DateTimeDomainReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
+               <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM-DD</r:ID>
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
                <r:OutParameter isArray="false">
@@ -1390,7 +1390,7 @@
                   <r:Version>1.0</r:Version>
                   <r:DateTimeRepresentationReference>
                      <r:Agency>fr.insee</r:Agency>
-                     <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
+                     <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM-DD</r:ID>
                      <r:Version>1.0</r:Version>
                      <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
                   </r:DateTimeRepresentationReference>
@@ -7743,7 +7743,7 @@
             <l:VariableRepresentation>
                <r:DateTimeRepresentationReference>
                   <r:Agency>fr.insee</r:Agency>
-                  <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
+                  <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM-DD</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
                </r:DateTimeRepresentationReference>
@@ -10983,7 +10983,7 @@
          </r:Label>
          <r:ManagedDateTimeRepresentation>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-DateTimeDomain-YYYY-MM-DD</r:ID>
+            <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM-DD</r:ID>
             <r:Version>1.0</r:Version>
             <r:DateFieldFormat>YYYY-MM-DD</r:DateFieldFormat>
             <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
