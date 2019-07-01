@@ -2,6 +2,7 @@ package fr.insee.eno.postprocessing;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -27,9 +28,13 @@ public class JSExternalizeCodeListsPostprocessor implements Postprocessor {
 				input.getPath().replace(Constants.SORT_COMPONENTS_JS_EXTENSION, Constants.FINAL_JS_EXTENSION));
 		
 		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EXTERNALIZE_CODELISTS_JS);
+		
+		InputStream inputStream = FileUtils.openInputStream(input);
+		OutputStream outputStream = FileUtils.openOutputStream(outputCustomFOFile);
 
-		saxonService.transformJSToJSPost(FileUtils.openInputStream(input),
-				FileUtils.openOutputStream(outputCustomFOFile), JS_XSL);
+		saxonService.transformJSToJSPost(inputStream,outputStream, JS_XSL);
+		inputStream.close();
+		outputStream.close();
 		JS_XSL.close();
 		logger.info("End JS externalize codeLists post-processing");
 
