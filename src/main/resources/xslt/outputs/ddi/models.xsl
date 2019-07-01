@@ -739,6 +739,16 @@
                     <r:TypeOfObject>Instruction</r:TypeOfObject>
                 </d:InterviewerInstructionReference>
             </xsl:if>
+            <xsl:variable name="type" select="enoddi32:get-ci-type($source-context)"/>
+            <xsl:variable name="controlCrticity">
+	            <xsl:choose>
+					<xsl:when test="normalize-space($type)='error'">stumblingblock</xsl:when>
+					<xsl:otherwise>informational</xsl:otherwise>
+	            </xsl:choose>
+            </xsl:variable>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">
+				<xsl:value-of select="$controlCrticity"/>
+            </d:TypeOfComputationItem>
             <!-- Have a simpler way to deal with regular controls & mandatory response. -->
             <!-- An apply-templates on Expression will Output CommandeCode for Regular Control. -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -750,14 +760,6 @@
                     <!-- In this explicit call, the ResponseDomain itself is used to generated the CommandCode -->    
                     <xsl:with-param name="source-context" select="$source-context" tunnel="yes"/>
                 </xsl:call-template>
-            </xsl:if>
-            <xsl:variable name="type" select="enoddi32:get-ci-type($source-context)"/>
-            <xsl:if test="not(normalize-space($type)=('',' '))">
-                <xsl:comment>
-                    <xsl:text disable-output-escaping="yes">&lt;r:TypeOfComputationItem&gt;</xsl:text>
-                        <xsl:value-of select="$type"/>
-                    <xsl:text disable-output-escaping="yes">&lt;/r:TypeOfComputationItem&gt;</xsl:text>                    
-                </xsl:comment>
             </xsl:if>
         </d:ComputationItem>
     </xsl:template>
