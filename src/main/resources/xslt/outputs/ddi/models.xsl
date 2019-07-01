@@ -28,14 +28,12 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="citation" select="enoddi32:get-citation($source-context)" as="xs:string"/>
         <xsl:variable name="agency" select="enoddi32:get-agency($source-context)" as="xs:string"/>        
-        <DDIInstance xmlns="ddi:instance:3_2"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="ddi:instance:3_2 ../../../src/main/resources/schema/instance.xsd"
-            xmlns:a="ddi:archive:3_2" xmlns:r="ddi:reusable:3_2" xmlns:s="ddi:studyunit:3_2"
-            xmlns:d="ddi:datacollection:3_2" xmlns:g="ddi:group:3_2" xmlns:eno="http://xml.insee.fr/apps/eno"
-            xmlns:l="ddi:logicalproduct:3_2" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-            xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32" xmlns:xhtml="http://www.w3.org/1999/xhtml"
-            isMaintainable="true">
+        <DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
+			xmlns="ddi:instance:3_3" xmlns:g="ddi:group:3_3" xmlns:d="ddi:datacollection:3_3"
+			xmlns:s="ddi:studyunit:3_3" xmlns:r="ddi:reusable:3_3" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+			xmlns:a="ddi:archive:3_3" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:l="ddi:logicalproduct:3_3" isMaintainable="true">
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="concat('INSEE-', enoddi32:get-id($source-context))"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
@@ -73,7 +71,7 @@
                                 <xsl:value-of select="enoddi32:get-label($source-context)"/>
                             </r:Content>
                         </r:Label>
-                        <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
+                        <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
                         <!--creation of references of direct children-->
                         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                             <xsl:with-param name="driver" select="eno:append-empty-element('Sequence', .)" tunnel="yes"/>
@@ -215,7 +213,7 @@
 						        <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/>-<xsl:value-of select="$formatDate"/></r:ID>
 						        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
 						        <r:DateFieldFormat><xsl:value-of select="$formatDate"/></r:DateFieldFormat>
-						        <r:DateTypeCode codeListID="INSEE-DTC-CV"><xsl:value-of select="$DateTypeCode"/></r:DateTypeCode>
+						        <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><xsl:value-of select="$DateTypeCode"/></r:DateTypeCode>
 							</r:ManagedDateTimeRepresentation>
 						</xsl:if>
 					</xsl:for-each>
@@ -686,7 +684,7 @@
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference', .)" tunnel="yes"/>
             </xsl:apply-templates>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">
                 <xsl:value-of select="enoddi32:get-sequence-type($source-context)"/>
             </d:TypeOfSequence>
             <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
@@ -992,7 +990,7 @@
                     <xsl:value-of select="enoddi32:get-label($source-context)"/>
                 </r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-ThenSequence',.)" tunnel="yes"/>
             </xsl:apply-templates>
@@ -1062,7 +1060,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="mandatory" select="enoddi32:get-ci-type($source-context)"/>
         <d:CodeDomain>            
-            <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
+            <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
@@ -1092,7 +1090,7 @@
         <!-- Because of the xsl:for-each, driver context needs to be kept. -->
         <xsl:variable name="driver" select="."/>
         <xsl:for-each select="enoddi32:get-grid-dimensions($source-context)">
-            <d:GridResponseDomain>
+            <d:GridResponseDomainInMixed>
                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
                     <xsl:with-param name="mandatory" select="enoddi32:get-ci-type($source-context)" tunnel="yes"/>
@@ -1104,7 +1102,7 @@
                         </xsl:for-each>
                     </d:CellCoordinatesAsDefined>
                 </d:GridAttachment>
-            </d:GridResponseDomain>
+            </d:GridResponseDomainInMixed>
         </xsl:for-each>
     </xsl:template>
     
@@ -1348,7 +1346,7 @@
                     <xsl:value-of select="enoddi32:get-high($source-context)"/>
                 </r:High>
             </r:NumberRange>
-            <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+            <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
@@ -1377,7 +1375,7 @@
                     <xsl:value-of select="enoddi32:get-high($source-context)"/>
                 </r:High>
             </r:NumberRange>
-            <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+            <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
 		</r:NumericRepresentation>
 		<!-- MeasurementUnit -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -1536,7 +1534,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
         <d:CodeDomain>
-            <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>            
+            <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
             <r:CodeListReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi32:get-code-list-id($source-context)"/></r:ID>
