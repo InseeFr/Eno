@@ -963,6 +963,7 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>				
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
             <r:Label>
                 <r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content>
             </r:Label>
@@ -992,7 +993,6 @@
                     <xsl:value-of select="enoddi32:get-label($source-context)"/>
                 </r:Content>
             </r:Label>
-            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-ThenSequence',.)" tunnel="yes"/>
             </xsl:apply-templates>
