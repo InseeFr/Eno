@@ -185,7 +185,7 @@
 		</xsl:call-template>
 	</xsl:template>
 	
-	<xsl:template match="Table" mode="model">
+	<xsl:template match="Table | TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="questionName" select="enojs:get-question-name($source-context,$languages[1])"/>
@@ -210,61 +210,37 @@
 			$variablesRelevant
 			)"/>
 		
-		<xsl:variable name="typeTable" select="enojs:get-css-class($source-context)"/>
+		<xsl:variable name="nbMinimumLines" select="enojs:get-minimum-lines($source-context)"/>
+		<xsl:variable name="nbMaximumLines" select="enojs:get-maximum-lines($source-context)"/>
 		
-		<xsl:choose>
-			<xsl:when test="$typeTable='question complex-grid'">
-				<components xsi:type="{$componentType-Table}" componentType="{$componentType-Table}" id="{$idQuestion}" positioning="HORIZONTAL">
-					<label><xsl:value-of select="$labelQuestion"/></label>
-					<xsl:copy-of select="$declarations"/>
-					<xsl:copy-of select="$filterCondition"/>
-					
-					<xsl:for-each select="enojs:get-body-lines($source-context)">
-						<xsl:apply-templates select="enojs:get-body-line($source-context,position())" mode="source">
-							<xsl:with-param name="ancestorTable" select="'line'" tunnel="yes"/>
-							<xsl:with-param name="typeOfAncestor" select="'table'" tunnel="yes"/>
-							<xsl:with-param name="position" select="position()" tunnel="yes"/>
-							<xsl:with-param name="questionName" select="$questionName" tunnel="yes"/>
-						</xsl:apply-templates>
-					</xsl:for-each>
-					
-					<xsl:for-each select="enojs:get-header-lines($source-context)">
-						<xsl:apply-templates select="enojs:get-header-line($source-context,position())" mode="source">
-							<xsl:with-param name="ancestorTable" select="'headerLine'" tunnel="yes"/>
-							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
-							<xsl:with-param name="typeOfAncestor" select="'table'" tunnel="yes"/>
-						</xsl:apply-templates>
-					</xsl:for-each>
-				</components>
-			</xsl:when>
-			<xsl:when test="$typeTable='question multiple-choice-question'">
-				<components xsi:type="{$componentType-Table}" componentType="{$componentType-Table}" id="{$idQuestion}" positioning="HORIZONTAL">
-					<label><xsl:value-of select="$labelQuestion"/></label>
-					<xsl:copy-of select="$declarations"/>
-					<xsl:copy-of select="$filterCondition"/>
-					
-					<xsl:for-each select="enojs:get-body-lines($source-context)">
-						<xsl:apply-templates select="enojs:get-body-line($source-context,position())" mode="source">
-							<xsl:with-param name="ancestorTable" select="'line'" tunnel="yes"/>
-							<xsl:with-param name="typeOfAncestor" select="'table'" tunnel="yes"/>
-							<xsl:with-param name="position" select="position()" tunnel="yes"/>
-							<xsl:with-param name="questionName" select="$questionName" tunnel="yes"/>
-						</xsl:apply-templates>
-					</xsl:for-each>
-					
-					<xsl:for-each select="enojs:get-header-columns($source-context)">
-						<xsl:apply-templates select="enojs:get-header-line($source-context,position())" mode="source">
-							<xsl:with-param name="ancestorTable" select="'headerLine'" tunnel="yes"/>
-							<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
-							<xsl:with-param name="typeOfAncestor" select="'table'" tunnel="yes"/>
-						</xsl:apply-templates>
-					</xsl:for-each>
-				</components>
-			</xsl:when>
-		</xsl:choose>
+		<components xsi:type="{$componentType-Table}" componentType="{$componentType-Table}" id="{$idQuestion}" positioning="HORIZONTAL">
+			<label><xsl:value-of select="$labelQuestion"/></label>
+			<xsl:copy-of select="$declarations"/>
+			<xsl:copy-of select="$filterCondition"/>
+			
+			<xsl:for-each select="enojs:get-body-lines($source-context)">
+				<xsl:apply-templates select="enojs:get-body-line($source-context,position())" mode="source">
+					<xsl:with-param name="ancestorTable" select="'line'" tunnel="yes"/>
+					<xsl:with-param name="typeOfAncestor" select="'table'" tunnel="yes"/>
+					<xsl:with-param name="position" select="position()" tunnel="yes"/>
+					<xsl:with-param name="questionName" select="$questionName" tunnel="yes"/>
+				</xsl:apply-templates>
+			</xsl:for-each>
+			
+			<xsl:for-each select="enojs:get-header-lines($source-context)">
+				<xsl:apply-templates select="enojs:get-header-line($source-context,position())" mode="source">
+					<xsl:with-param name="ancestorTable" select="'headerLine'" tunnel="yes"/>
+					<xsl:with-param name="idColumn" select="position()" tunnel="yes"/>
+					<xsl:with-param name="typeOfAncestor" select="'table'" tunnel="yes"/>
+				</xsl:apply-templates>
+			</xsl:for-each>
+			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
+				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
+			</xsl:if>
+		</components>
 		
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on the TextCell driver.</xd:p>

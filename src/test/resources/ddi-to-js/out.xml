@@ -1407,6 +1407,381 @@
    <components xsi:type="Sequence" componentType="Sequence" id="j6qfx9qe">
       <label>V - Favourite characters</label>
       <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
+      <components xsi:type="Table"
+                  componentType="Table"
+                  id="j6qg8rc6"
+                  positioning="HORIZONTAL">
+         <responses>
+            <responses name="FAVOURITE_CHARACTERS11" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+            <responses name="FAVOURITE_CHARACTERS12" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+         </responses>
+         <responses>
+            <responses name="FAVOURITE_CHARACTERS21" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+            <responses name="FAVOURITE_CHARACTERS22" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+         </responses>
+         <responses>
+            <responses name="FAVOURITE_CHARACTERS31" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+            <responses name="FAVOURITE_CHARACTERS32" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+         </responses>
+         <responses>
+            <responses name="FAVOURITE_CHARACTERS41" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+            <responses name="FAVOURITE_CHARACTERS42" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+         </responses>
+         <responses>
+            <responses name="FAVOURITE_CHARACTERS51" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+            <responses name="FAVOURITE_CHARACTERS52" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+         </responses>
+         <responses>
+            <responses name="FAVOURITE_CHARACTERS61" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+            <responses name="FAVOURITE_CHARACTERS62" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+         </responses>
+         <responses>
+            <responses name="FAVOURITE_CHARACTERS71" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+            <responses name="FAVOURITE_CHARACTERS72" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+         </responses>
+         <responses>
+            <responses name="FAVOURITE_CHARACTERS81" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+            <responses name="FAVOURITE_CHARACTERS82" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+         </responses>
+         <responses>
+            <responses name="FAVOURITE_CHARACTERS91" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+            <responses name="FAVOURITE_CHARACTERS92" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+         </responses>
+         <responses>
+            <responses name="FAVOURITE_CHARACTERS101" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+            <responses name="FAVOURITE_CHARACTERS102" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value/>
+               </valueState>
+            </responses>
+         </responses>
+         <label>➡ 1. Please, complete the following grid with your favourite characters</label>
+         <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
+         <lines min="1" max="10"/>
+         <columns componentType="Textarea" maxLength="255">
+            <label/>
+            <header>Name</header>
+         </columns>
+         <columns componentType="InputNumber" min="0" max="120" decimals="0">
+            <header>Age</header>
+         </columns>
+      </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6z12s2d">
       <label>VI - Comment</label>
@@ -2041,6 +2416,126 @@
    <variables>
       <name>TRAVEL46</name>
       <responseRef>TRAVEL46</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS11</name>
+      <responseRef>FAVOURITE_CHARACTERS11</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS11</name>
+      <responseRef>FAVOURITE_CHARACTERS11</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS12</name>
+      <responseRef>FAVOURITE_CHARACTERS12</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS21</name>
+      <responseRef>FAVOURITE_CHARACTERS21</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS21</name>
+      <responseRef>FAVOURITE_CHARACTERS21</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS22</name>
+      <responseRef>FAVOURITE_CHARACTERS22</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS31</name>
+      <responseRef>FAVOURITE_CHARACTERS31</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS31</name>
+      <responseRef>FAVOURITE_CHARACTERS31</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS32</name>
+      <responseRef>FAVOURITE_CHARACTERS32</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS41</name>
+      <responseRef>FAVOURITE_CHARACTERS41</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS41</name>
+      <responseRef>FAVOURITE_CHARACTERS41</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS42</name>
+      <responseRef>FAVOURITE_CHARACTERS42</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS51</name>
+      <responseRef>FAVOURITE_CHARACTERS51</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS51</name>
+      <responseRef>FAVOURITE_CHARACTERS51</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS52</name>
+      <responseRef>FAVOURITE_CHARACTERS52</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS61</name>
+      <responseRef>FAVOURITE_CHARACTERS61</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS61</name>
+      <responseRef>FAVOURITE_CHARACTERS61</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS62</name>
+      <responseRef>FAVOURITE_CHARACTERS62</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS71</name>
+      <responseRef>FAVOURITE_CHARACTERS71</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS71</name>
+      <responseRef>FAVOURITE_CHARACTERS71</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS72</name>
+      <responseRef>FAVOURITE_CHARACTERS72</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS81</name>
+      <responseRef>FAVOURITE_CHARACTERS81</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS81</name>
+      <responseRef>FAVOURITE_CHARACTERS81</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS82</name>
+      <responseRef>FAVOURITE_CHARACTERS82</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS91</name>
+      <responseRef>FAVOURITE_CHARACTERS91</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS91</name>
+      <responseRef>FAVOURITE_CHARACTERS91</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS92</name>
+      <responseRef>FAVOURITE_CHARACTERS92</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS101</name>
+      <responseRef>FAVOURITE_CHARACTERS101</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS101</name>
+      <responseRef>FAVOURITE_CHARACTERS101</responseRef>
+   </variables>
+   <variables>
+      <name>FAVOURITE_CHARACTERS102</name>
+      <responseRef>FAVOURITE_CHARACTERS102</responseRef>
    </variables>
    <variables>
       <name>SURVEY_COMMENT</name>
