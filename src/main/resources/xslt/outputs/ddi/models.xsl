@@ -5,7 +5,7 @@
     xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2" xmlns:r="ddi:reusable:3_2"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_2"
     xmlns:l="ddi:logicalproduct:3_2" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
-    exclude-result-prefixes="xs" version="2.0">
+    exclude-result-prefixes="xs xd eno enoddi32" version="2.0">
 
 
     <xd:doc>
