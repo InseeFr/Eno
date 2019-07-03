@@ -166,7 +166,7 @@
                         </fo:list-item-label>
                         <fo:list-item-body start-indent="10mm">
                             <fo:block> Pour chaque question à choix, cochez la case
-                                <fo:external-graphic src="checkbox_example.jpg" padding-right="3pt" padding-left="3pt" vertical-align="middle"/>
+                                <fo:external-graphic src="checkbox_example.png" padding-right="3pt" padding-left="3pt" vertical-align="middle"/>
                                 correspondant à votre situation ou les cases si plusieurs réponses sont possibles. </fo:block>
                         </fo:list-item-body>
                     </fo:list-item>
@@ -178,7 +178,7 @@
                         </fo:list-item-label>
                         <fo:list-item-body start-indent="10mm">
                             <fo:block> Pour chaque question à valeur, renseignez la valeur correspondante dans les cases prévues à cet effet (par exemple :
-                                <fo:external-graphic src="year_example.jpg" height="10pt"
+                                <fo:external-graphic src="year_example.png" height="10pt"
                                         scaling="uniform" padding-right="3pt" padding-left="3pt" vertical-align="middle"/>
                                 pour une année) </fo:block>
                         </fo:list-item-body>
@@ -245,16 +245,9 @@
                 border-top-style="solid">
                 <fo:block margin="2mm">
                     <fo:inline-container margin="0mm">
-                        <fo:block line-height="10pt"> Vu l'avis favorable du Conseil National de l'Information Statistique, cette enquête
-                            #if(${BddCaractereObligatoire}=='oui') reconnue d'<fo:inline font-weight="bold">intérêt général et de qualité statistique</fo:inline>, est <fo:inline font-weight="bold">obligatoire</fo:inline> 
-                            #else est reconnue d'<fo:inline font-weight="bold">intérêt général et de qualité statistique</fo:inline> sans avoir de caractère obligatoire#end, 
-                            en application de la loi n° 51-711 du 7 juin 1951 modifiée sur l’obligation, la coordination et le secret en matière de statistiques.</fo:block>
-                        <fo:block line-height="10pt"> Visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l'année ${BddAnneeCollecte}.
-                            #if(${BddParutionJO}=='oui')Arrêté en date du ${BddDateParutionJO} #else Arrêté en cours de parution #end.</fo:block>
-                        <fo:block line-height="10pt">Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${BddNomServiceProducteurCourt}. Le règlement 2016/679 du 27 avril 2016
-                            sur la protection des données (RGPD), ainsi que la loi n° 78-17 du 6 janvier 1978 modifiée, relative à l'informatique, aux fichiers et aux libertés, s'appliquent aux réponses faites à la présente enquête.
-                            Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de ${BddNomServiceRecours}.
-                        </fo:block>
+                        <fo:block line-height="10pt"> Vu l’avis favorable du Conseil national de l’information statistique, cette enquête#if(${BddCaractereObligatoire}==’oui’), reconnue d’intérêt général et de qualité statistique, est obligatoire#else est reconnue d’intérêt général et de qualité statistique sans avoir de caractère obligatoire#end, en application de la loi n° 51-711 du 7 juin 1951 sur l’obligation, la coordination et le secret en matière de statistiques.</fo:block>
+                        <fo:block line-height="10pt">Visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l’année ${BddAnneeCollecte} – #if(${BddparutionJO}==’oui’) Arrêté en date du ${BddDateParutionJO} #else Arrêté en cours de parution #end.</fo:block>
+                        <fo:block line-height="10pt">Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${BddNomServiceProducteurCourt}. Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés s'appliquent à la présente enquête. Les droits des personnes, rappelés dans la lettre-avis, peuvent être exercés auprès de ${BddNomServiceRecours}.</fo:block>
                     </fo:inline-container>
                 </fo:block>
             </fo:block-container>
