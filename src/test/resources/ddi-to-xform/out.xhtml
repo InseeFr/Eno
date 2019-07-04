@@ -549,9 +549,6 @@
                <xf:bind id="j6qg8rc6-Container-bind"
                         name="j6qg8rc6-Container"
                         nodeset="j6qg8rc6-Container/j6qg8rc6">
-                  <xf:bind id="j6qg8rc6-position-bind"
-                           name="j6qg8rc6-position"
-                           value="position()"/>
                   <xf:bind id="FAVOURITE_CHARACTERS11-bind"
                            name="FAVOURITE_CHARACTERS11"
                            ref="FAVOURITE_CHARACTERS11"/>
@@ -4296,7 +4293,7 @@
                         </xhtml:thead>
                         <xhtml:tbody>
                            <xf:repeat id="j6qg8rc6" nodeset="instance('fr-form-instance')//j6qg8rc6">
-                              <xf:var name="j6qg8rc6-position" bind="j6qg8rc6-position-bind"/>
+                              <xf:var name="j6qg8rc6-position" value="position()"/>
                               <xhtml:tr>
                                  <xhtml:td align="center">
                                     <xf:textarea id="FAVOURITE_CHARACTERS11-control"
