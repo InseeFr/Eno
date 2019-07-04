@@ -208,12 +208,32 @@
 					        		<xsl:otherwise>date</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
+					        <xsl:variable name="minValue">
+								<xsl:choose>
+									<xsl:when test="$formatDate = 'YYYY'">1900</xsl:when>
+									<xsl:when test="$formatDate = 'YYYY-MM'">1900-01</xsl:when>
+									<xsl:when test="$formatDate = 'YYYY-MM-DD'">1900-01-01</xsl:when>
+									<xsl:when test="$formatDate = 'PnYnM'">P0Y0M</xsl:when>
+									<xsl:when test="$formatDate = 'PTnHnM'">PT0H0M</xsl:when>
+						        </xsl:choose>
+					        </xsl:variable>
+					        <xsl:variable name="maxValue">
+								<xsl:choose>
+									<xsl:when test="$formatDate = 'PnYnM'">P99Y11M</xsl:when>
+									<xsl:when test="$formatDate = 'PTnHnM'">PT99H59M</xsl:when>
+									<xsl:otherwise>format-dateTime(<xsl:value-of select="concat(current-date(), ',' ,$formatDate)"/>)</xsl:otherwise>
+						        </xsl:choose>
+					        </xsl:variable>
 							<r:ManagedDateTimeRepresentation>
 						        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
 						        <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/>-<xsl:value-of select="$formatDate"/></r:ID>
 						        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
 						        <r:DateFieldFormat><xsl:value-of select="$formatDate"/></r:DateFieldFormat>
 						        <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><xsl:value-of select="$DateTypeCode"/></r:DateTypeCode>
+						        <r:Range>
+									<r:MinimumValue included="true"><xsl:value-of select="$minValue"/></r:MinimumValue>
+									<r:MaximumValue included="true"><xsl:value-of select="$maxValue"/></r:MaximumValue>
+								</r:Range>
 							</r:ManagedDateTimeRepresentation>
 						</xsl:if>
 					</xsl:for-each>
