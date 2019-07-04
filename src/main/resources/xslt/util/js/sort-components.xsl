@@ -31,18 +31,77 @@
     </xsl:template>
     
     <xsl:template match="h:Questionnaire">
-        <Questionnaire id="{@id}">
+        <Questionnaire>
+            <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
             <xsl:apply-templates select="descendant::h:variables"/>
         </Questionnaire>
     </xsl:template>
     
     <xsl:template match="h:components[@xsi:type='Sequence' or @xsi:type='Subsequence']">
-        <components xsi:type="{@xsi:type}" id="{@id}">
+        <components>
+            <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="h:label"/>
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
             <xsl:apply-templates select="h:components"/>
+        </components>
+    </xsl:template>
+    
+    <xsl:template match="h:components[@xsi:type='Table']">
+        <components>
+            <xsl:copy-of select="@*"/>
+            <!-- Construction of codeLists from the list of h:codes -->
+            <xsl:if test="h:codes">
+                <columns>
+                    <codeLists id="{replace(replace(h:codes[1]/@id,'--1$',''),'-0$','')}">
+                        <xsl:apply-templates select="h:codes"/>
+                    </codeLists>
+                </columns>
+            </xsl:if>            
+            
+            <xsl:for-each select="h:columns[@id=1]">
+                <columns>
+                    <xsl:attribute name="componentType">
+                        <xsl:value-of select="@componentType"/>
+                    </xsl:attribute>
+                    <xsl:variable name="pos" select="position()"/>
+                    <xsl:apply-templates select="." mode="test"/>
+                    <xsl:apply-templates select="following-sibling::h:header[$pos]"/>
+                </columns>
+            </xsl:for-each>
+            <xsl:variable name="nbResponse" select="count(h:response)"/>
+            <xsl:variable name="nbColumn" select="count(h:columns[@id=1])"/>
+            <xsl:variable name="nbLigne" select="$nbResponse div $nbColumn"/>
+            
+            <xsl:choose>
+                <xsl:when test="h:lines">
+                    <xsl:variable name="nbResponseExpected" select="$nbColumn * h:lines/@max"/>
+                    <xsl:choose>
+                        <xsl:when test="$nbResponseExpected=$nbResponse">
+                            <xsl:call-template name="enojs:orderResponses">
+                                <xsl:with-param name="nbColumn" select="count(h:columns[@id=1])"/>
+                                <xsl:with-param name="responses" select="h:response" as="node()*"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                        <xsl:when test="$nbResponse=$nbColumn">
+                            <xsl:call-template name="enojs:addResponsesForRoster">
+                                <xsl:with-param name="currentLigne" select="1"/>
+                                <xsl:with-param name="nbLigneMax" select="h:lines/@max"/>
+                                <xsl:with-param name="responses" select="h:response" as="node()*"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:call-template name="enojs:orderResponses">
+                        <xsl:with-param name="nbColumn" select="count(h:columns[@id=1])"/>
+                        <xsl:with-param name="responses" select="h:response" as="node()*"/>
+                    </xsl:call-template>
+                </xsl:otherwise>
+            </xsl:choose>
+            
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:codes or self::h:columns or descendant-or-self::h:response or self::h:header)]"/>
         </components>
     </xsl:template>
     
@@ -52,9 +111,13 @@
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
         </components>
     </xsl:template>
-       
+    
     <xsl:template match="h:unit">
         <unit><xsl:value-of select="."/></unit>
+    </xsl:template>
+    
+    <xsl:template match="h:lines">
+        <lines><xsl:copy-of select="@*"/></lines>
     </xsl:template>
     
     <xsl:template match="h:label">
@@ -72,19 +135,44 @@
     </xsl:template>
     
     <xsl:template match="h:declarations">
-        <declarations declarationType="{@declarationType}" id="{@id}" position="{@position}">
+        <declarations>
+            <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="h:label"/>
         </declarations>
     </xsl:template>
-       
+    
     <xsl:template match="h:response">
-        <response name="{@name}">
-            <xsl:apply-templates  select="h:valueState"/>
-        </response>
+        <xsl:param name="idLine" tunnel="yes"/>
+        <xsl:param name="idColmun" tunnel="yes"/>
+        <xsl:param name="ancestor" tunnel="yes"/>
+        <xsl:choose>
+            <xsl:when test="$ancestor='table'">
+                <responses>
+                    <xsl:choose>
+                        <xsl:when test="string($idLine)!='' and string($idColmun)!=''">
+                            <xsl:attribute name="name"><xsl:value-of select="concat(@name,'_',$idLine,'_',$idColmun)"/></xsl:attribute>
+                            <xsl:copy-of select="@xsi:type"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:copy-of select="@*"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:apply-templates select="h:valueState"/>
+                </responses>
+            </xsl:when>
+            <xsl:otherwise>
+                <response>
+                    <xsl:copy-of select="@*"/>
+                    <xsl:apply-templates select="h:valueState"/>
+                </response>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
     
     <xsl:template match="h:valueState">
-        <valueState type="{@type}">
+        <valueState>
+            <xsl:copy-of select="@*"/>
             <value><xsl:value-of select="h:value"/></value>
         </valueState>
     </xsl:template>
@@ -126,12 +214,71 @@
     
     <xsl:template match="h:codes">
         <codes>
-            <parent><xsl:value-of select="h:parent"/></parent>
+            <xsl:copy-of select="@depth"/>
             <value><xsl:value-of select="h:value"/></value>
             <xsl:apply-templates select="h:label"/>
         </codes>
     </xsl:template>
     
+    
+    <xsl:template match="h:header">
+        <header>
+            <xsl:copy-of select="@*"/>
+            <xsl:value-of select="."/>
+        </header>
+    </xsl:template>
+    <xsl:template match="h:columns" mode="test">
+        <xsl:copy-of select="@*[not(name()='id')]"/>
+        <xsl:apply-templates select="*[not(self::h:variables or self::h:response)]"/>
+    </xsl:template>
+    
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Recursive template named "enojs:orderResponses"</xd:p>
+            <xd:p>It orders responses in tables "responses" for each the tables's line</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template name="enojs:orderResponses">
+        <xsl:param name="nbColumn"/>
+        <xsl:param name="responses" as="node()*"/>
+        <responses>
+            <xsl:apply-templates select="$responses[position()&lt;=$nbColumn]">
+                <xsl:with-param name="ancestor" select="'table'" tunnel="yes"/>
+            </xsl:apply-templates>
+        </responses>
+        
+        <xsl:if test="count($responses[position()&gt;$nbColumn])&gt;0"> 
+            <xsl:call-template name="enojs:orderResponses">
+                <xsl:with-param name="nbColumn" select="$nbColumn"/>
+                <xsl:with-param name="responses" select="$responses[position()&gt;$nbColumn]" as="node()*"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+    
+    
+    <xsl:template name="enojs:addResponsesForRoster">
+        <xsl:param name="currentLigne"/>
+        <xsl:param name="nbLigneMax"/>
+        <xsl:param name="responses" as="node()*"/>
+        <xsl:if test="$currentLigne&lt;=$nbLigneMax">
+            <responses>
+                <xsl:for-each select="$responses">
+                    <xsl:apply-templates select=".">
+                        <xsl:with-param name="idLine" select="$currentLigne" tunnel="yes"/>
+                        <xsl:with-param name="idColmun" select="position()" tunnel="yes"/>
+                        <xsl:with-param name="ancestor" select="'table'" tunnel="yes"/>
+                    </xsl:apply-templates>
+                </xsl:for-each>
+                
+            </responses>
+            <xsl:call-template name="enojs:addResponsesForRoster">
+                <xsl:with-param name="nbLigneMax" select="$nbLigneMax"/>
+                <xsl:with-param name="currentLigne" select="$currentLigne +1"/>
+                <xsl:with-param name="responses" select="$responses" as="node()*"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
     <xd:doc>
         <xd:desc>
             <xd:p>Recursive template named "enojs:replaceVariableValueInFormula"</xd:p>

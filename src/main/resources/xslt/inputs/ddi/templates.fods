@@ -2735,7 +2735,19 @@
      <table:table-cell table:number-columns-repeated="5"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell table:style-name="Default" table:number-columns-repeated="5"/>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>*</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-minimum-responses</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>r:ResponseCardinality/@minimumResponses</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default"/>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Minimum number of responses</text:p>
+     </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1" table:number-rows-repeated="1048419">
      <table:table-cell table:number-columns-repeated="5"/>
