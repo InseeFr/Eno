@@ -999,7 +999,6 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
         <xf:bind id="{$business-name}-Container-bind" name="{$business-name}-Container" nodeset="{$name}-Container/{$name}">
-            <xf:bind id="{$business-name}-position-bind" name="{$business-name}-position" value="position()"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
@@ -1957,7 +1956,7 @@
             <xhtml:tbody>
                 <!-- if the loop is in a loop, instance-ancestor helps choosing the good ancestor loop instance -->
                 <xf:repeat id="{$loop-name}" nodeset="{$instance-ancestor-label}{$loop-name}">
-                    <xf:var name="{$loop-name}-position" bind="{$loop-name}-position-bind"/>
+                    <xf:var name="{$loop-name}-position" value="position()"/>
                     <!-- the table has a repeated zone that may have more than one line -->
                     <xsl:for-each select="enofr:get-body-lines($source-context)">
                         <xhtml:tr>
@@ -2110,7 +2109,7 @@
         </xsl:variable>
 
         <xf:repeat id="{$loop-name}" nodeset="{$instance-ancestor-label}{$loop-name}">
-            <xf:var name="{$loop-name}-position" bind="{$loop-name}-position-bind"/>
+            <xf:var name="{$loop-name}-position" value="position()"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for Loops, for which several instances are possible -->

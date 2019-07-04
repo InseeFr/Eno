@@ -680,6 +680,7 @@
         <xsl:param name="loop-ancestors"/>
         <xsl:variable name="loop-name" select="substring-before(name(),'-Container')"/>
         <xf:bind id="page-{name()}-bind" name="{name()}" ref="{name()}/{$loop-name}[instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$loop-name}']]">
+            <xf:bind id="{$loop-name}-position-bind" name="{$loop-name}-position" value="number(instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$loop-name}'])"/>
             <xsl:apply-templates select="child::*/child::*[child::*]" mode="page-bind">
                 <xsl:with-param name="loop-ancestors" select="if ($loop-ancestors='') then $loop-name else concat($loop-ancestors,' ',$loop-name)"/>
             </xsl:apply-templates>
@@ -892,10 +893,10 @@
 -->
     </xsl:template>
 
-    <xsl:template match="xf:bind[@value='position()' and //xf:repeat[fr:section and xf:var/@bind=current()/@id]]">
+    <xsl:template match="xf:var[@value='position()' and parent::xf:repeat/fr:section]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="value" select="concat('number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',substring-before(@name,'-position'),'''])')"/>
+            <xsl:attribute name="value" select="concat('number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',parent::xf:repeat/@id,'''])')"/>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
