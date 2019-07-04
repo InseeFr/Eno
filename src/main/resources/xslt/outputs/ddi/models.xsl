@@ -742,6 +742,7 @@
             <xsl:variable name="type" select="enoddi32:get-ci-type($source-context)"/>
             <xsl:variable name="controlCrticity">
 	            <xsl:choose>
+					<xsl:when test="normalize-space($type)='warn'">warning</xsl:when>
 					<xsl:when test="normalize-space($type)='error'">stumblingblock</xsl:when>
 					<xsl:otherwise>informational</xsl:otherwise>
 	            </xsl:choose>
