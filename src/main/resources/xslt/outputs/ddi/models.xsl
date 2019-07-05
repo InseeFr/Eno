@@ -1449,25 +1449,51 @@
 	<xsl:template match="driver-VariableScheme//DateTimeDomain | driver-VariableScheme//DurationDomain" mode="model">
     	<xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:variable name="format" select="enoddi32:get-format($source-context)"/>
+        <xsl:variable name="maxVal" select="enoddi32:get-high($source-context)"/>
+        <xsl:variable name="minVal" select="enoddi32:get-low($source-context)"/>
+        <!-- Keep compatibility with old date if they don't have format -->
+        <xsl:variable name="format">
+			<xsl:choose>
+				<xsl:when test="normalize-space(enoddi32:get-format($source-context)) != ('',' ')"><xsl:value-of  select="enoddi32:get-format($source-context)"/></xsl:when>
+				<xsl:otherwise>YYYY-MM-DD</xsl:otherwise>
+	        </xsl:choose>
+        </xsl:variable>
         <!-- Id definition depend on date or duration type -->
         <xsl:variable name="id-date-duration">
         	<xsl:choose>
-        		<xsl:when test="name() = 'DurationDomain'">Duration</xsl:when>
-        		<xsl:otherwise>DateTimedate</xsl:otherwise>
-	        </xsl:choose>
-	       	<!-- Keep compatibility with old date if they don't have format -->
-	       	<xsl:choose>
-        		<xsl:when test="$format != ''"><xsl:value-of  select="concat('-',$format)"/></xsl:when>
-        		<xsl:otherwise><xsl:value-of  select="concat('-', 'YYYY-MM-DD')"/></xsl:otherwise>
+				<xsl:when test="name() = 'DurationDomain'"><xsl:value-of  select="concat('Duration-', $format)"/></xsl:when>
+				<xsl:otherwise><xsl:value-of  select="concat('DateTimedate-', $format)"/></xsl:otherwise>
 	        </xsl:choose>
         </xsl:variable>
-		<r:DateTimeRepresentationReference>
-			<r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
-		</r:DateTimeRepresentationReference>
+        <xsl:variable name="DateTypeCode">
+			<xsl:choose>
+				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
+				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
+				<xsl:when test="$format = ('PnYnM', 'PTnHnM')">duration</xsl:when>
+				<xsl:otherwise>date</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<!-- Generate DateTimeRepresentation or DateTimeRepresentationReference depending on min and max existence -->
+        <xsl:choose>
+			<xsl:when test="$maxVal != '' or $minVal != ''">
+				<r:DateTimeRepresentation>
+					<r:DateFieldFormat><xsl:value-of  select="$format"/></r:DateFieldFormat>
+					<r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><xsl:value-of  select="$DateTypeCode"/></r:DateTypeCode>
+					<r:Range>
+						<r:MinimumValue included="true"><xsl:value-of  select="$minVal"/></r:MinimumValue>
+						<r:MaximumValue included="true"><xsl:value-of  select="$maxVal"/></r:MaximumValue>
+					</r:Range>
+				</r:DateTimeRepresentation>
+			</xsl:when>
+			<xsl:otherwise>
+				<r:DateTimeRepresentationReference>
+					<r:Agency><xsl:value-of select="$agency"/></r:Agency>
+					<r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
+					<r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+					<r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+				</r:DateTimeRepresentationReference>
+			</xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
 	<xsl:template match="driver-ManagedRepresentationScheme//*" mode="model">
