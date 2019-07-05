@@ -347,7 +347,8 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="required" select="enofr:get-required($source-context)"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
-        <xsl:variable name="calculate" select="enofr:get-variable-calculation($source-context)"/>
+        <xsl:variable name="variable-calculate" select="enofr:get-variable-calculation($source-context)"/>
+        <xsl:variable name="fixed-cell-calculate" select="enofr:get-cell-value($source-context)"/>
         <xsl:variable name="type" select="enofr:get-type($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="constraint" select="enofr:get-constraint($source-context)"/>
@@ -380,10 +381,10 @@
                     </xsl:if>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="$calculate != ''">
+            <xsl:if test="$variable-calculate != ''">
                 <xsl:attribute name="calculate">
                     <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="$calculate"/>
+                        <xsl:with-param name="formula" select="$variable-calculate"/>
                         <xsl:with-param name="calcul-aim" select="'calculation'"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
@@ -393,6 +394,16 @@
                                 </xsl:for-each>
                             </Variables>
                         </xsl:with-param>
+                        <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                    </xsl:call-template>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="$fixed-cell-calculate != ''">
+                <xsl:attribute name="calculate">
+                    <xsl:call-template name="label-ref-condition">
+                        <xsl:with-param name="source-context" select="$source-context"/>
+                        <xsl:with-param name="label" select="$fixed-cell-calculate"/>
+                        <xsl:with-param name="conditioning-variables" select="enofr:get-cell-value-variables($source-context)"/>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>
                 </xsl:attribute>

@@ -798,8 +798,24 @@
             </xsl:call-template>
         </xsl:variable>
         <xsl:if test="$variable-list != enoddi:get-label(.,$language)">
-            <xsl:sequence select="$variable-list"/>    
+            <xsl:sequence select="$variable-list"/>
         </xsl:if>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-cell-value-variables.</xd:p>
+            <xd:p>Function that returns the list of the variables of the value of a fixed cell.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:FixedCellValue" mode="enoddi:get-cell-value-variables">
+        <xsl:param name="language" tunnel="yes"/>
+        <xsl:variable name="variable-list" as="xs:string *">
+            <xsl:call-template name="enoddi:variables-from-label">
+                <xsl:with-param name="label" select="eno:serialize(enoddi:get-cell-value(.))"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:sequence select="$variable-list"/>
     </xsl:template>
 
     <xsl:template name="enoddi:variables-from-label">
