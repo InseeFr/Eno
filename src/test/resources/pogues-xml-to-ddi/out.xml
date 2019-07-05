@@ -261,12 +261,6 @@
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>jbgdjdkn-CI</r:ID>
-               <r:Version>1.0</r:Version>
-               <r:TypeOfObject>ComputationItem</r:TypeOfObject>
-            </d:ControlConstructReference>
-            <d:ControlConstructReference>
-               <r:Agency>fr.insee</r:Agency>
                <r:ID>j6qdfhvw-QC</r:ID>
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>QuestionConstruct</r:TypeOfObject>
@@ -836,46 +830,6 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
          </d:QuestionConstruct>
-         <d:ComputationItem>
-            <r:Agency>fr.insee</r:Agency>
-            <r:ID>jbgdjdkn-CI</r:ID>
-            <r:Version>1.0</r:Version>
-            <d:ConstructName>
-               <r:String xml:lang="fr-FR">ComputationItem for the mandatory question jbgdjdkn</r:String>
-            </d:ConstructName>
-            <r:Description>
-               <r:Content xml:lang="fr-FR">ComputationItem for the mandatory question jbgdjdkn</r:Content>
-            </r:Description>
-            <r:CommandCode>
-               <r:Command>
-                  <r:ProgramLanguage>xpath</r:ProgramLanguage>
-                  <r:InParameter isArray="false">
-                     <r:Agency>fr.insee</r:Agency>
-                     <r:ID>jbgdjdkn-IP-1</r:ID>
-                     <r:Version>1.0</r:Version>
-                     <r:ParameterName>
-                        <r:String xml:lang="fr-FR">CITY</r:String>
-                     </r:ParameterName>
-                  </r:InParameter>
-                  <r:Binding>
-                     <r:SourceParameterReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>j3343clt-QOP-jbgdjdkn</r:ID>
-                        <r:Version>1.0</r:Version>
-                        <r:TypeOfObject>OutParameter</r:TypeOfObject>
-                     </r:SourceParameterReference>
-                     <r:TargetParameterReference>
-                        <r:Agency>fr.insee</r:Agency>
-                        <r:ID>jbgdjdkn-IP-1</r:ID>
-                        <r:Version>1.0</r:Version>
-                        <r:TypeOfObject>InParameter</r:TypeOfObject>
-                     </r:TargetParameterReference>
-                  </r:Binding>
-                  <r:CommandContent>if jbgdjdkn-IP-1=''</r:CommandContent>
-               </r:Command>
-            </r:CommandCode>
-            <!--<r:TypeOfComputationItem>mandatory</r:TypeOfComputationItem>-->
-         </d:ComputationItem>
          <d:ComputationItem>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>j4nwc63q-CI-0</r:ID>
@@ -1506,7 +1460,7 @@
                      </r:CodeListReference>
                   </r:CodeRepresentation>
                </r:OutParameter>
-               <r:ResponseCardinality maximumResponses="1"/>
+               <r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
             </d:CodeDomain>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
