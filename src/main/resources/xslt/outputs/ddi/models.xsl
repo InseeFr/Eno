@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:g="ddi:group:3_2"
-    xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2" xmlns:r="ddi:reusable:3_2"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_2"
-    xmlns:l="ddi:logicalproduct:3_2" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
+    xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:g="ddi:group:3_3"
+    xmlns:d="ddi:datacollection:3_3" xmlns:s="ddi:studyunit:3_3" xmlns:r="ddi:reusable:3_3"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_3"
+    xmlns:l="ddi:logicalproduct:3_3" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
     exclude-result-prefixes="xs xd eno enoddi32" version="2.0">
 
 
@@ -221,7 +221,7 @@
 								<xsl:choose>
 									<xsl:when test="$formatDate = 'PnYnM'">P99Y11M</xsl:when>
 									<xsl:when test="$formatDate = 'PTnHnM'">PT99H59M</xsl:when>
-									<xsl:otherwise>format-dateTime(<xsl:value-of select="concat(current-date(), ',' ,$formatDate)"/>)</xsl:otherwise>
+									<xsl:otherwise>format-dateTime(current-date(),<xsl:value-of select="$formatDate"/>)</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
 							<r:ManagedDateTimeRepresentation>
@@ -239,7 +239,7 @@
 					</xsl:for-each>
             	</r:ManagedRepresentationScheme>
             </g:ResourcePackage>
-            <s:StudyUnit xmlns="ddi:studyunit:3_2">
+            <s:StudyUnit>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="concat('StudyUnit-',enoddi32:get-id($source-context))"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
@@ -271,8 +271,8 @@
                         <r:ID><xsl:value-of select="concat('InstrumentScheme-',enoddi32:get-id($source-context))"/></r:ID>
                         <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
                         <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-                            xmlns:pr="ddi:ddiprofile:3_2" xmlns:c="ddi:conceptualcomponent:3_2"
-                            xmlns:cm="ddi:comparative:3_2">
+                            xmlns:pr="ddi:ddiprofile:3_3" xmlns:c="ddi:conceptualcomponent:3_3"
+                            xmlns:cm="ddi:comparative:3_3">
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                             <r:ID><xsl:value-of select="concat('Instrument-',enoddi32:get-id($source-context))"/></r:ID>
                             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
@@ -511,19 +511,21 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ExternalAid>
-            <xsl:variable name="ID" select="enoddi32:get-id($source-context)"/>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="$ID"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:Description>
-                <r:Content>
-                    <xhtml:div class="FlowControl" id="{$ID}">
-                        <xhtml:div class="Description"><xsl:value-of select="enoddi32:get-description($source-context)"/></xhtml:div>                        
-                        <xhtml:div class="Expression"><xsl:value-of select="enoddi32:get-expression($source-context)"/></xhtml:div>
-                        <xhtml:div class="IfTrue"><xsl:value-of select="enoddi32:get-if-true($source-context)"/></xhtml:div>
-                    </xhtml:div>
-                </r:Content>
-            </r:Description>
+			<r:OtherMaterial>
+	            <xsl:variable name="ID" select="enoddi32:get-id($source-context)"/>
+	            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+	            <r:ID><xsl:value-of select="$ID"/></r:ID>
+	            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+	            <r:Description>
+	                <r:Content>
+	                    <xhtml:div class="FlowControl" id="{$ID}">
+	                        <xhtml:div class="Description"><xsl:value-of select="enoddi32:get-description($source-context)"/></xhtml:div>
+	                        <xhtml:div class="Expression"><xsl:value-of select="enoddi32:get-expression($source-context)"/></xhtml:div>
+	                        <xhtml:div class="IfTrue"><xsl:value-of select="enoddi32:get-if-true($source-context)"/></xhtml:div>
+	                    </xhtml:div>
+	                </r:Content>
+	            </r:Description>
+            </r:OtherMaterial>
         </d:ExternalAid>
     </xsl:template>
 
@@ -531,7 +533,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" tunnel="yes"/>
         <!-- All CodeLists (regular, fakes and boolean) are stored in a same CodeListScheme. -->
-        <l:CodeListScheme xmlns="ddi:instance:3_2">
+        <l:CodeListScheme>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="concat(enoddi32:get-survey-name($source-context),'-CLS')"/></r:ID>
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
@@ -760,6 +762,13 @@
                 </d:InterviewerInstructionReference>
             </xsl:if>
             <xsl:variable name="type" select="enoddi32:get-ci-type($source-context)"/>
+            <xsl:variable name="idCrticity">
+	            <xsl:choose>
+					<xsl:when test="normalize-space($type)='warn'">2</xsl:when>
+					<xsl:when test="normalize-space($type)='error'">3</xsl:when>
+					<xsl:otherwise>1</xsl:otherwise>
+	            </xsl:choose>
+            </xsl:variable>
             <xsl:variable name="controlCrticity">
 	            <xsl:choose>
 					<xsl:when test="normalize-space($type)='warn'">warning</xsl:when>
@@ -767,7 +776,8 @@
 					<xsl:otherwise>informational</xsl:otherwise>
 	            </xsl:choose>
             </xsl:variable>
-            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">
+			<d:TypeOfComputationItem>
+				<xsl:attribute name="controlledVocabularyID">INSEE-TOCI-CL-<xsl:value-of select="$idCrticity"/></xsl:attribute>
 				<xsl:value-of select="$controlCrticity"/>
             </d:TypeOfComputationItem>
             <!-- Have a simpler way to deal with regular controls & mandatory response. -->
@@ -984,7 +994,6 @@
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>				
             <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
             <r:Label>
                 <r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content>
             </r:Label>
@@ -993,6 +1002,7 @@
                     <xsl:value-of select="enoddi32:get-description($source-context)"/>
                 </r:Content>                
             </r:Description>
+            <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
             <d:IfCondition>
                 <xsl:call-template name="Command">
                     <xsl:with-param name="source-context" select="enoddi32:get-command($source-context)" tunnel="yes"/>
@@ -1390,6 +1400,11 @@
 			<xsl:if test="number($decimalPositions) = number($decimalPositions) and number($decimalPositions) &gt; 0">
 				<xsl:attribute name="decimalPositions" select="$decimalPositions"/>
 			</xsl:if>
+			<!-- MeasurementUnit -->
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+	            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
+	            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+	        </xsl:apply-templates>
 			<r:NumberRange>
                 <r:Low isInclusive="true">
                     <xsl:value-of select="enoddi32:get-low($source-context)"/>
@@ -1400,61 +1415,18 @@
             </r:NumberRange>
             <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
 		</r:NumericRepresentation>
-		<!-- MeasurementUnit -->
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
-            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-        </xsl:apply-templates>
     </xsl:template>
 
     <xsl:template match="DateTimeDomain | DurationDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
-        <xsl:variable name="format" select="enoddi32:get-format($source-context)"/>
-        <!-- Id definition depend on date or duration type -->
-        <xsl:variable name="id-date-duration">
-        	<xsl:choose>
-        		<xsl:when test="name() = 'DurationDomain'">Duration</xsl:when>
-        		<xsl:otherwise>DateTimedate</xsl:otherwise>
-	        </xsl:choose>
-	       	<!-- Keep compatibility with old date if they don't have format -->
-	       	<xsl:choose>
-        		<xsl:when test="$format != ''"><xsl:value-of  select="concat('-',$format)"/></xsl:when>
-        		<xsl:otherwise><xsl:value-of  select="concat('-', 'YYYY-MM-DD')"/></xsl:otherwise>
-	        </xsl:choose>
-        </xsl:variable>
-        <d:DateTimeDomainReference>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
-            <r:OutParameter isArray="false">
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:DateTimeRepresentationReference>
-                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                    <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
-                </r:DateTimeRepresentationReference>
-            </r:OutParameter>
-			<xsl:if test="$mandatory = 'mandatory'">
-				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
-			</xsl:if>
-        </d:DateTimeDomainReference>        
-    </xsl:template>
-    
-	<xsl:template match="driver-VariableScheme//DateTimeDomain | driver-VariableScheme//DurationDomain" mode="model">
-    	<xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="maxVal" select="enoddi32:get-high($source-context)"/>
         <xsl:variable name="minVal" select="enoddi32:get-low($source-context)"/>
         <!-- Keep compatibility with old date if they don't have format -->
         <xsl:variable name="format">
 			<xsl:choose>
-				<xsl:when test="normalize-space(enoddi32:get-format($source-context)) != ('',' ')"><xsl:value-of  select="enoddi32:get-format($source-context)"/></xsl:when>
+				<xsl:when test="enoddi32:get-format($source-context) != ''"><xsl:value-of  select="enoddi32:get-format($source-context)"/></xsl:when>
 				<xsl:otherwise>YYYY-MM-DD</xsl:otherwise>
 	        </xsl:choose>
         </xsl:variable>
@@ -1465,6 +1437,75 @@
 				<xsl:otherwise><xsl:value-of  select="concat('DateTimedate-', $format)"/></xsl:otherwise>
 	        </xsl:choose>
         </xsl:variable>
+        <!-- TypeCode depend on format -->
+        <xsl:variable name="DateTypeCode">
+			<xsl:choose>
+				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
+				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
+				<xsl:when test="$format = ('PnYnM', 'PTnHnM')">duration</xsl:when>
+				<xsl:otherwise>date</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<!-- Generate DateTimeRepresentation or DateTimeRepresentationReference depending on min and max existence -->
+        <xsl:choose>
+			<xsl:when test="$maxVal != '' or $minVal != ''">
+				<d:DateTimeDomain>
+					<r:DateFieldFormat><xsl:value-of select="$format"/></r:DateFieldFormat>
+					<r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><xsl:value-of  select="$DateTypeCode"/></r:DateTypeCode>
+					<r:Range>
+						<r:MinimumValue included="true"><xsl:value-of  select="$minVal"/></r:MinimumValue>
+						<r:MaximumValue included="true"><xsl:value-of  select="$maxVal"/></r:MaximumValue>
+					</r:Range>
+					<xsl:if test="$mandatory = 'mandatory'">
+						<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+					</xsl:if>
+				</d:DateTimeDomain>
+			</xsl:when>
+			<xsl:otherwise>
+				<d:DateTimeDomainReference>
+		            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		            <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
+		            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		            <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+		            <r:OutParameter isArray="false">
+		                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
+		                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		                <r:DateTimeRepresentationReference>
+		                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                    <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
+		                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		                    <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+		                </r:DateTimeRepresentationReference>
+		            </r:OutParameter>
+					<xsl:if test="$mandatory = 'mandatory'">
+						<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+					</xsl:if>
+		        </d:DateTimeDomainReference>
+			</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+	<xsl:template match="driver-VariableScheme//DateTimeDomain | driver-VariableScheme//DurationDomain" mode="model">
+    	<xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="maxVal" select="enoddi32:get-high($source-context)"/>
+        <xsl:variable name="minVal" select="enoddi32:get-low($source-context)"/>
+        <!-- Keep compatibility with old date if they don't have format -->
+        <xsl:variable name="format">
+			<xsl:choose>
+				<xsl:when test="enoddi32:get-format($source-context) != ''"><xsl:value-of  select="enoddi32:get-format($source-context)"/></xsl:when>
+				<xsl:otherwise>YYYY-MM-DD</xsl:otherwise>
+	        </xsl:choose>
+        </xsl:variable>
+        <!-- Id definition depend on date or duration type -->
+        <xsl:variable name="id-date-duration">
+        	<xsl:choose>
+				<xsl:when test="name() = 'DurationDomain'"><xsl:value-of  select="concat('Duration-', $format)"/></xsl:when>
+				<xsl:otherwise><xsl:value-of  select="concat('DateTimedate-', $format)"/></xsl:otherwise>
+	        </xsl:choose>
+        </xsl:variable>
+        <!-- TypeCode depend on format -->
         <xsl:variable name="DateTypeCode">
 			<xsl:choose>
 				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
@@ -1477,7 +1518,7 @@
         <xsl:choose>
 			<xsl:when test="$maxVal != '' or $minVal != ''">
 				<r:DateTimeRepresentation>
-					<r:DateFieldFormat><xsl:value-of  select="$format"/></r:DateFieldFormat>
+					<r:DateFieldFormat><xsl:value-of select="$format"/></r:DateFieldFormat>
 					<r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><xsl:value-of  select="$DateTypeCode"/></r:DateTypeCode>
 					<r:Range>
 						<r:MinimumValue included="true"><xsl:value-of  select="$minVal"/></r:MinimumValue>
