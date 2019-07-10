@@ -132,7 +132,7 @@
         <xsl:param name="language" tunnel="yes"/>
 
         <xsl:variable name="ddi-variable" select="enoddi:get-id(.)"/>
-        <xsl:variable name="variable-measurement-unit" select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $ddi-variable]/l:VariableRepresentation/r:MeasurementUnit"/>
+        <xsl:variable name="variable-measurement-unit" select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $ddi-variable]/l:VariableRepresentation//r:MeasurementUnit"/>
         <xsl:choose>
             <xsl:when test="$variable-measurement-unit != ''">
                 <xsl:value-of select="$variable-measurement-unit"/>
