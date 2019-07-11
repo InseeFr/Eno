@@ -6,7 +6,9 @@
     xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
     xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
     xmlns:d="ddi:datacollection:3_3"
-    xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3" version="2.0">
+    xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    version="2.0">
 
     <!-- Importing the different resources -->
     <xsl:import href="../../inputs/ddi/source.xsl"/>
