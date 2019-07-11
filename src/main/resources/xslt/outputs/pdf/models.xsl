@@ -511,6 +511,11 @@
 		</fo:table-cell>
 	</xsl:template>
 
+	<xd:doc>
+		<xd:desc>No other - give details out of cells</xd:desc>
+	</xd:doc>
+	<xsl:template match="xf-group[(ancestor::Table or ancestor::TableLoop) and not(ancestor::Cell)]" mode="model" priority="2"/>
+
 	<!-- Déclenche tous les EmptyCell de l'arbre des drivers -->
 	<xsl:template match="main//EmptyCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
