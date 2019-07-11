@@ -1175,7 +1175,7 @@
                </r:OutParameter>
                <r:ResponseCardinality maximumResponses="1"/>
             </d:NominalDomain>
-            <d:ExternalAid>
+            <d:ExternalAid><r:OtherMaterial>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j6p6my1d</r:ID>
                <r:Version>0.1.0</r:Version>
@@ -1189,7 +1189,7 @@
                      </xhtml:div>
                   </r:Content>
                </r:Description>
-            </d:ExternalAid>
+            </r:OtherMaterial></d:ExternalAid>
          </d:QuestionItem>
          <d:QuestionItem>
             <r:Agency>fr.insee</r:Agency>
@@ -8129,9 +8129,14 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
-            </l:VariableRepresentation>
+            <l:VariableRepresentation><d:NumericDomain decimalPositions="1"><r:MeasurementUnit>%</r:MeasurementUnit><r:NumberRange>
+                        <r:Low isInclusive="true">0</r:Low>
+                        <r:High isInclusive="true">100</r:High>
+                     </r:NumberRange><r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode><r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j4nwc63q-RDOP-jbgde5yl</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                     </r:OutParameter></d:NumericDomain></l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8155,9 +8160,14 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
-            </l:VariableRepresentation>
+            <l:VariableRepresentation><d:NumericDomain decimalPositions="1"><r:MeasurementUnit>%</r:MeasurementUnit><r:NumberRange>
+                        <r:Low isInclusive="true">0</r:Low>
+                        <r:High isInclusive="true">100</r:High>
+                     </r:NumberRange><r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode><r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j4nwc63q-RDOP-jbgd2x2t</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                     </r:OutParameter></d:NumericDomain></l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8181,9 +8191,14 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
-            </l:VariableRepresentation>
+            <l:VariableRepresentation><d:NumericDomain decimalPositions="1"><r:MeasurementUnit>%</r:MeasurementUnit><r:NumberRange>
+                        <r:Low isInclusive="true">0</r:Low>
+                        <r:High isInclusive="true">100</r:High>
+                     </r:NumberRange><r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode><r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j4nwc63q-RDOP-jbgdjypz</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                     </r:OutParameter></d:NumericDomain></l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8207,9 +8222,14 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
-            </l:VariableRepresentation>
+            <l:VariableRepresentation><d:NumericDomain decimalPositions="1"><r:MeasurementUnit>%</r:MeasurementUnit><r:NumberRange>
+                        <r:Low isInclusive="true">0</r:Low>
+                        <r:High isInclusive="true">100</r:High>
+                     </r:NumberRange><r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode><r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j4nwc63q-RDOP-jbgdcftu</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                     </r:OutParameter></d:NumericDomain></l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8233,9 +8253,14 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
-            </l:VariableRepresentation>
+            <l:VariableRepresentation><d:NumericDomain decimalPositions="1"><r:MeasurementUnit>%</r:MeasurementUnit><r:NumberRange>
+                        <r:Low isInclusive="true">0</r:Low>
+                        <r:High isInclusive="true">100</r:High>
+                     </r:NumberRange><r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode><r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j4nwc63q-RDOP-jbgdiyfe</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                     </r:OutParameter></d:NumericDomain></l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8259,9 +8284,14 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
-            </l:VariableRepresentation>
+            <l:VariableRepresentation><d:NumericDomain decimalPositions="1"><r:MeasurementUnit>%</r:MeasurementUnit><r:NumberRange>
+                        <r:Low isInclusive="true">0</r:Low>
+                        <r:High isInclusive="true">100</r:High>
+                     </r:NumberRange><r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode><r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j4nwc63q-RDOP-jbgdj1wd</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                     </r:OutParameter></d:NumericDomain></l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8285,9 +8315,14 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
-            </l:VariableRepresentation>
+            <l:VariableRepresentation><d:NumericDomain decimalPositions="1"><r:MeasurementUnit>%</r:MeasurementUnit><r:NumberRange>
+                        <r:Low isInclusive="true">0</r:Low>
+                        <r:High isInclusive="true">100</r:High>
+                     </r:NumberRange><r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode><r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j4nwc63q-RDOP-jbgddylk</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                     </r:OutParameter></d:NumericDomain></l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8311,9 +8346,14 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
-            </l:VariableRepresentation>
+            <l:VariableRepresentation><d:NumericDomain decimalPositions="1"><r:MeasurementUnit>%</r:MeasurementUnit><r:NumberRange>
+                        <r:Low isInclusive="true">0</r:Low>
+                        <r:High isInclusive="true">100</r:High>
+                     </r:NumberRange><r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode><r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j4nwc63q-RDOP-jbgd3jj6</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                     </r:OutParameter></d:NumericDomain></l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8337,9 +8377,14 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
-            </l:VariableRepresentation>
+            <l:VariableRepresentation><d:NumericDomain decimalPositions="1"><r:MeasurementUnit>%</r:MeasurementUnit><r:NumberRange>
+                        <r:Low isInclusive="true">0</r:Low>
+                        <r:High isInclusive="true">100</r:High>
+                     </r:NumberRange><r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode><r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j4nwc63q-RDOP-jbgd4w3k</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                     </r:OutParameter></d:NumericDomain></l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -8363,9 +8408,14 @@
                <r:Version>0.1.0</r:Version>
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
-            <l:VariableRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
-            </l:VariableRepresentation>
+            <l:VariableRepresentation><d:NumericDomain decimalPositions="1"><r:MeasurementUnit>%</r:MeasurementUnit><r:NumberRange>
+                        <r:Low isInclusive="true">0</r:Low>
+                        <r:High isInclusive="true">100</r:High>
+                     </r:NumberRange><r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode><r:OutParameter isArray="false">
+                        <r:Agency>fr.insee</r:Agency>
+                        <r:ID>j4nwc63q-RDOP-jbgd4w4k</r:ID>
+                        <r:Version>0.1.0</r:Version>
+                     </r:OutParameter></d:NumericDomain></l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
