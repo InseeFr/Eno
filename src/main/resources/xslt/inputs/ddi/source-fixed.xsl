@@ -1110,7 +1110,7 @@
     </xd:doc>
     <xsl:template match="d:QuestionItem | d:QuestionGrid"
         mode="enoddi:get-next-filter-description">
-        <xsl:sequence select="d:ExternalAid/r:Description[r:Content/xhtml:div/@class='FlowControl']"/>
+        <xsl:sequence select="d:ExternalAid[r:OtherMaterial/r:Description/r:Content/xhtml:div/@class='FlowControl']"/>
     </xsl:template>
     <xd:doc>
         <xd:desc>

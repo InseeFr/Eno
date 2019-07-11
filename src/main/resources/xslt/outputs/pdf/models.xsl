@@ -280,6 +280,36 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
+	<xd:doc>
+		<xd:desc>template for the FlowControl</xd:desc>
+	</xd:doc>
+	<xsl:template match="main//FlowControl" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:variable name="label" select="enopdf:get-label($source-context, $languages[1])" as="node()"/>
+
+		<xsl:if test="$label != ''">
+			<fo:block page-break-inside="avoid" keep-with-previous="always" xsl:use-attribute-sets="filter-block">
+				<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
+					<fo:block margin="2pt">
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
+						</xsl:call-template>
+					</fo:block>
+				</fo:inline-container>
+				<fo:inline-container xsl:use-attribute-sets="filter-inline-container">
+					<fo:block xsl:use-attribute-sets="filter-alternative">
+						<xsl:copy-of select="$label"/>
+					</fo:block>
+				</fo:inline-container>
+			</fo:block>
+		</xsl:if>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+
 	<!-- QUESTIONS -->
 	<xd:doc>
 		<xd:desc>Questions with responses which are not in a table</xd:desc>

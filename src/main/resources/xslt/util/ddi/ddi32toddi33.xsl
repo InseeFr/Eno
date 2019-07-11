@@ -155,6 +155,15 @@
         </xsl:element>
     </xsl:template>
 
-
+    <xd:doc>
+        <xd:desc>https://ddi-alliance.atlassian.net/projects/DDILIFE/issues/DDILIFE-3590</xd:desc>
+    </xd:doc>
+    <xsl:template match="d32:ExternalAid[r32:Description]">
+        <xsl:element name="d:ExternalAid">
+            <xsl:element name="r:OtherMaterial">
+                <xsl:apply-templates select="node()"/>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
 
 </xsl:stylesheet>
