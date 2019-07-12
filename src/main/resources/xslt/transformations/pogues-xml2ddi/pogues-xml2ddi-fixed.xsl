@@ -6,8 +6,8 @@
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
     xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
-    xmlns:d="ddi:datacollection:3_2"
-    xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
+    xmlns:d="ddi:datacollection:3_3"
+    xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3"
     xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
     xmlns:enopogues="http://xml.insee.fr/apps/eno/in/pogues-xml"
     version="2.0">
