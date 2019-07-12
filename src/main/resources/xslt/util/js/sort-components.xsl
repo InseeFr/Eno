@@ -51,57 +51,18 @@
     <xsl:template match="h:components[@xsi:type='Table']">
         <components>
             <xsl:copy-of select="@*"/>
-            <!-- Construction of codeLists from the list of h:codes -->
-            <xsl:if test="h:codes">
-                <columns>
-                    <codeLists id="{replace(replace(h:codes[1]/@id,'--1$',''),'-0$','')}">
-                        <xsl:apply-templates select="h:codes"/>
-                    </codeLists>
-                </columns>
-            </xsl:if>            
-            
-            <xsl:for-each select="h:columns[@id=1]">
-                <columns>
-                    <xsl:attribute name="componentType">
-                        <xsl:value-of select="@componentType"/>
-                    </xsl:attribute>
-                    <xsl:variable name="pos" select="position()"/>
-                    <xsl:apply-templates select="." mode="test"/>
-                    <xsl:apply-templates select="following-sibling::h:header[$pos]"/>
-                </columns>
-            </xsl:for-each>
-            <xsl:variable name="nbResponse" select="count(h:response)"/>
-            <xsl:variable name="nbColumn" select="count(h:columns[@id=1])"/>
-            <xsl:variable name="nbLigne" select="$nbResponse div $nbColumn"/>
-            
             <xsl:choose>
                 <xsl:when test="h:lines">
-                    <xsl:variable name="nbResponseExpected" select="$nbColumn * h:lines/@max"/>
-                    <xsl:choose>
-                        <xsl:when test="$nbResponseExpected=$nbResponse">
-                            <xsl:call-template name="enojs:orderResponses">
-                                <xsl:with-param name="nbColumn" select="count(h:columns[@id=1])"/>
-                                <xsl:with-param name="responses" select="h:response" as="node()*"/>
-                            </xsl:call-template>
-                        </xsl:when>
-                        <xsl:when test="$nbResponse=$nbColumn">
-                            <xsl:call-template name="enojs:addResponsesForRoster">
-                                <xsl:with-param name="currentLigne" select="1"/>
-                                <xsl:with-param name="nbLigneMax" select="h:lines/@max"/>
-                                <xsl:with-param name="responses" select="h:response" as="node()*"/>
-                            </xsl:call-template>
-                        </xsl:when>
-                    </xsl:choose>
+                    <xsl:variable name="nbLines" select="count(h:cells[h:cells/@type!='header'])"/>
+                    <xsl:variable name="nbLinesExpected" select="h:lines/@max"/>
+                    <max value="{$nbLinesExpected}"/>
+                    <real-nb-lines value="{$nbLines}"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:call-template name="enojs:orderResponses">
-                        <xsl:with-param name="nbColumn" select="count(h:columns[@id=1])"/>
-                        <xsl:with-param name="responses" select="h:response" as="node()*"/>
-                    </xsl:call-template>
+                    <xsl:apply-templates select="*[not(self::h:variables)]"/>
                 </xsl:otherwise>
             </xsl:choose>
-            
-            <xsl:apply-templates select="*[not(self::h:variables or self::h:codes or self::h:columns or descendant-or-self::h:response or self::h:header)]"/>
+            <xsl:apply-templates select="*[not(self::h:variables)]"/>
         </components>
     </xsl:template>
     
@@ -184,11 +145,10 @@
         </codeLists>
     </xsl:template>	
     
-    <xsl:template match="h:items">
-        <items>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates/>
-        </items>
+    
+    
+    <xsl:template match="h:value">
+        <value><xsl:value-of select="."/></value>
     </xsl:template>
     
     <xsl:template match="h:variables">
@@ -212,10 +172,16 @@
         <dateFormat><xsl:value-of select="."/></dateFormat>
     </xsl:template>
     
+    <xsl:template match="h:options">
+        <options>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates/>
+        </options>
+    </xsl:template>
+    
     <xsl:template match="h:codes">
         <codes>
-            <xsl:copy-of select="@depth"/>
-            <value><xsl:value-of select="h:value"/></value>
+            <xsl:apply-templates select="h:value"/>
             <xsl:apply-templates select="h:label"/>
         </codes>
     </xsl:template>
@@ -227,9 +193,11 @@
             <xsl:value-of select="."/>
         </header>
     </xsl:template>
-    <xsl:template match="h:columns" mode="test">
-        <xsl:copy-of select="@*[not(name()='id')]"/>
-        <xsl:apply-templates select="*[not(self::h:variables or self::h:response)]"/>
+    <xsl:template match="h:cells">
+        <cells>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="*[not(self::h:variables)]"/>
+        </cells>
     </xsl:template>
     
     
