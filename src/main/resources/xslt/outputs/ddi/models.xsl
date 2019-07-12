@@ -221,7 +221,7 @@
 								<xsl:choose>
 									<xsl:when test="$formatDate = 'PnYnM'">P99Y11M</xsl:when>
 									<xsl:when test="$formatDate = 'PTnHnM'">PT99H59M</xsl:when>
-									<xsl:otherwise>format-dateTime(current-date(),<xsl:value-of select="$formatDate"/>)</xsl:otherwise>
+									<xsl:otherwise>format-dateTime(current-date(),'<xsl:value-of select="$formatDate"/>')</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
 							<r:ManagedDateTimeRepresentation>
