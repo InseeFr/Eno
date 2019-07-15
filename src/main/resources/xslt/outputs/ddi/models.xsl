@@ -5,7 +5,7 @@
     xmlns:d="ddi:datacollection:3_3" xmlns:s="ddi:studyunit:3_3" xmlns:r="ddi:reusable:3_3"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_3"
     xmlns:l="ddi:logicalproduct:3_3" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
-    exclude-result-prefixes="xs xd eno enoddi32" version="2.0">
+    exclude-result-prefixes="xd eno enoddi32" version="2.0">
 
 
     <xd:doc>
@@ -1456,6 +1456,11 @@
 						<r:MinimumValue included="true"><xsl:value-of  select="$minVal"/></r:MinimumValue>
 						<r:MaximumValue included="true"><xsl:value-of  select="$maxVal"/></r:MaximumValue>
 					</r:Range>
+					<r:OutParameter isArray="false">
+						<r:Agency><xsl:value-of select="$agency"/></r:Agency>
+						<r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
+						<r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+					</r:OutParameter>
 					<xsl:if test="$mandatory = 'mandatory'">
 						<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
 					</xsl:if>
