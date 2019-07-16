@@ -183,7 +183,7 @@
             <xd:p>The element is created and we continue to parse the input tree next within the created element.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Instance//*[name() = ('xf-group', 'Module')]" mode="model">
+    <xsl:template match="Instance//*[name() = ('xf-group', 'Module','Clarification')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:element name="{enofr:get-name($source-context)}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -941,7 +941,7 @@
             <xd:p>It builds the bind by using different enofr functions then the process goes on within the created bind.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Bind//*[name() = ('xf-group', 'Module')]" mode="model">
+    <xsl:template match="Bind//*[name() = ('xf-group', 'Module','Clarification')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -1557,10 +1557,10 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template for Body for the xf-group driver.</xd:p>
+            <xd:p>Template for Body for the xf-group or the Clarification drivers.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Body//xf-group" mode="model">
+    <xsl:template match="Body//xf-group | Body//Clarification" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
@@ -2044,7 +2044,7 @@
     <xd:doc>
         <xd:desc>No other - give details out of cells</xd:desc>
     </xd:doc>
-    <xsl:template match="Body//xf-group[(ancestor::Table or ancestor::TableLoop) and not(ancestor::Cell)]" mode="model" priority="2"/>
+    <xsl:template match="Body//Clarification[(ancestor::Table or ancestor::TableLoop) and not(ancestor::Cell)]" mode="model" priority="2"/>
     
     <xd:doc>
         <xd:desc>

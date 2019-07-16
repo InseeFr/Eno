@@ -225,6 +225,18 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>template for the Clarification of a response</xd:desc>
+	</xd:doc>
+	<xsl:template match="main//Clarification" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
 
 	<xd:doc>
 		<xd:desc>template for the instructions</xd:desc>
