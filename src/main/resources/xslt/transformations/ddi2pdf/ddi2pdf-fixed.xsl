@@ -115,6 +115,17 @@
         </xsl:variable>
         <xsl:sequence select="$tempLabel"/>
     </xsl:function>
+    
+    <xsl:function name="enopdf:get-formatted-fixed-value">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="language"/>
+        <xsl:variable name="tempLabel">
+            <xsl:apply-templates select="enoddi:get-cell-value($context)" mode="enopdf:format-label">
+                <xsl:with-param name="label-variables" select="enoddi:get-cell-value-variables($context)" tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:variable>
+        <xsl:sequence select="$tempLabel"/>
+    </xsl:function>
 
     <xsl:template match="*" mode="enopdf:format-label" priority="-1">
         <xsl:copy>

@@ -577,7 +577,8 @@
 			number-columns-spanned="{enopdf:get-colspan($source-context)}"
 			number-rows-spanned="{enopdf:get-rowspan($source-context)}">
 			<fo:block>
-				<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+				<xsl:sequence select="enopdf:get-label($source-context, $languages[1])"/>
+				<xsl:sequence select="enopdf:get-fixed-value($source-context, $languages[1])"/>
 			</fo:block>
 		</fo:table-cell>
 	</xsl:template>
