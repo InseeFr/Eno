@@ -204,6 +204,23 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 
+		<xsl:variable name="label" select="enopdf:get-flowcontrol-label($source-context,$languages[1])"/>
+		<xsl:if test="$label != ''">
+			<fo:block page-break-inside="avoid" keep-with-previous="always" xsl:use-attribute-sets="filter-block">
+				<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
+					<fo:block margin="2pt">
+						<xsl:call-template name="insert-image">
+							<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
+						</xsl:call-template>
+					</fo:block>
+				</fo:inline-container>
+				<fo:inline-container xsl:use-attribute-sets="filter-inline-container">
+					<fo:block xsl:use-attribute-sets="filter-alternative">
+						<xsl:copy-of select="$label"/>
+					</fo:block>
+				</fo:inline-container>
+			</fo:block>
+		</xsl:if>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -247,24 +264,6 @@
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
-			<xsl:when test="$format = ('filter-alternative-text','flowcontrol-text')">
-				<xsl:if test="$label != ''">
-					<fo:block page-break-inside="avoid" keep-with-previous="always" xsl:use-attribute-sets="filter-block">
-						<fo:inline-container start-indent="0%" end-indent="0%" width="9%" vertical-align="middle">
-							<fo:block margin="2pt">
-								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'filter_arrow.png'"/>
-								</xsl:call-template>
-							</fo:block>
-						</fo:inline-container>
-						<fo:inline-container xsl:use-attribute-sets="filter-inline-container">
-							<fo:block xsl:use-attribute-sets="filter-alternative">
-								<xsl:copy-of select="$label"/>
-							</fo:block>
-						</fo:inline-container>
-					</fo:block>
-				</xsl:if>
-			</xsl:when>
 			<xsl:otherwise>
 				<xsl:message select="concat('unknown xf-output : ',enopdf:get-name($source-context),$label)"/>
 				<fo:block xsl:use-attribute-sets="general-style" page-break-inside="avoid" keep-with-next="always">
@@ -281,9 +280,9 @@
 	</xsl:template>
 
 	<xd:doc>
-		<xd:desc>template for the FlowControl</xd:desc>
+		<xd:desc>template for the GoTo</xd:desc>
 	</xd:doc>
-	<xsl:template match="main//FlowControl" mode="model">
+	<xsl:template match="main//GoTo" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		

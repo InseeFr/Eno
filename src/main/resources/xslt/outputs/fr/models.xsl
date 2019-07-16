@@ -158,6 +158,13 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>GoTo are to be removed.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="GoTo" mode="model"/>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Default template for Instance for the drivers.</xd:p>
             <xd:p>The element is created and we continue to parse the input tree next to the created element.</xd:p>
         </xd:desc>
