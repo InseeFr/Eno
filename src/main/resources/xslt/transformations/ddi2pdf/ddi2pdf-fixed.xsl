@@ -132,22 +132,17 @@
             <xsl:apply-templates select="node()|@*" mode="enopdf:format-label"/>      
         </xsl:copy>
     </xsl:template>
-    
-    <xsl:template match="xhtml:p[not(descendant::xhtml:br) and not(descendant::xhtml:span/@class='block')] | xhtml:span" mode="enopdf:format-label">
-        <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
-    </xsl:template>
-
-    <xsl:template match="xhtml:span[@class='block' and preceding-sibling::xhtml:span/@class='block']" mode="enopdf:format-label">
-        <xsl:text xml:space="preserve">&#xA;</xsl:text>
+     
+    <xsl:template match="xhtml:p | xhtml:span" mode="enopdf:format-label">
         <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
     </xsl:template>
     
-    <xsl:template match="xhtml:p[descendant::xhtml:br or descendant::xhtml:span/@class='block']" mode="enopdf:format-label">
+    <xsl:template match="xhtml:span[@class='block']" mode="enopdf:format-label">
         <xsl:element name="fo:block">
-            <xsl:attribute name="linefeed-treatment" select="'preserve'"/>
             <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
         </xsl:element>
     </xsl:template>
+    
 <!--
     <xsl:template match="*[not(descendant-or-self::xhtml:*)]" mode="enopdf:format-label">
         <xsl:copy>

@@ -272,7 +272,7 @@
 				</fo:block>
 			</xsl:when>
 			<xsl:when test="$format = 'statement'">
-				<fo:block xsl:use-attribute-sets="instruction" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="statement" page-break-inside="avoid" keep-with-next="always">
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
