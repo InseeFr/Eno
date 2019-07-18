@@ -1,5 +1,5 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
+    
     <xsl:attribute-set name="Titre-sequence">
         <xsl:attribute name="background-color">#666666</xsl:attribute>
         <xsl:attribute name="color">white</xsl:attribute>
@@ -91,6 +91,14 @@
         <xsl:attribute name="font-style">italic</xsl:attribute>
         <xsl:attribute name="margin-bottom">3pt</xsl:attribute>
         <xsl:attribute name="margin-left">3pt</xsl:attribute>
+        <xsl:attribute name="text-align">justify</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="statement">
+        <xsl:attribute name="font-size">10pt</xsl:attribute>
+        <xsl:attribute name="font-weight">normal</xsl:attribute>
+        <xsl:attribute name="font-style">italic</xsl:attribute>
+        <xsl:attribute name="space-before">20pt</xsl:attribute>
+        <xsl:attribute name="margin-bottom">3pt</xsl:attribute>
         <xsl:attribute name="text-align">justify</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="answer-item">
