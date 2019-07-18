@@ -1453,8 +1453,12 @@
 					<r:DateFieldFormat><xsl:value-of select="$format"/></r:DateFieldFormat>
 					<r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><xsl:value-of  select="$DateTypeCode"/></r:DateTypeCode>
 					<r:Range>
-						<r:MinimumValue included="true"><xsl:value-of  select="$minVal"/></r:MinimumValue>
-						<r:MaximumValue included="true"><xsl:value-of  select="$maxVal"/></r:MaximumValue>
+						<xsl:if test="$minVal != '' ">
+							<r:MinimumValue included="true"><xsl:value-of  select="$minVal"/></r:MinimumValue>
+						</xsl:if>
+						<xsl:if test="$maxVal != '' ">
+							<r:MaximumValue included="true"><xsl:value-of  select="$maxVal"/></r:MaximumValue>
+						</xsl:if>
 					</r:Range>
 					<r:OutParameter isArray="false">
 						<r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -1526,8 +1530,12 @@
 					<r:DateFieldFormat><xsl:value-of select="$format"/></r:DateFieldFormat>
 					<r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><xsl:value-of  select="$DateTypeCode"/></r:DateTypeCode>
 					<r:Range>
-						<r:MinimumValue included="true"><xsl:value-of  select="$minVal"/></r:MinimumValue>
-						<r:MaximumValue included="true"><xsl:value-of  select="$maxVal"/></r:MaximumValue>
+						<xsl:if test="$minVal != '' ">
+							<r:MinimumValue included="true"><xsl:value-of  select="$minVal"/></r:MinimumValue>
+						</xsl:if>
+						<xsl:if test="$maxVal != '' ">
+							<r:MaximumValue included="true"><xsl:value-of  select="$maxVal"/></r:MaximumValue>
+						</xsl:if>
 					</r:Range>
 				</r:DateTimeRepresentation>
 			</xsl:when>
