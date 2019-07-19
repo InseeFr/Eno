@@ -496,8 +496,7 @@
 						</xsl:if>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
 						<xsl:call-template name="enojs:addResponeTocomponents">
-							<xsl:with-param name="responseName" select="$responseName"/>
-							
+							<xsl:with-param name="responseName" select="$responseName"/>							
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</components>
@@ -518,10 +517,10 @@
 						</xsl:if>
 						<xsl:if test="$unit!=''">
 							<unit><xsl:value-of select="$unit"/></unit>
-							<xsl:call-template name="enojs:addResponeTocomponents">
-								<xsl:with-param name="responseName" select="$responseName"/>
-							</xsl:call-template>
 						</xsl:if>
+						<xsl:call-template name="enojs:addResponeTocomponents">
+							<xsl:with-param name="responseName" select="$responseName"/>
+						</xsl:call-template>
 					</cells>					
 				</xsl:when>
 				
@@ -641,8 +640,7 @@
 						</xsl:apply-templates>
 						
 						<xsl:call-template name="enojs:addResponeTocomponents">
-							<xsl:with-param name="responseName" select="$responseName"/>
-							
+							<xsl:with-param name="responseName" select="$responseName"/>							
 						</xsl:call-template>
 						<xsl:copy-of select="$filterCondition"/>
 					</components>
@@ -903,7 +901,7 @@
 		<xsl:if test="$typeResponse !='' and $questionName!='' and $typeOfAncestor!='table'">
 			<components xsi:type="{$componentType-Textarea}" componentType="{$componentType-Textarea}" id="{$idQuestion}" maxLength="{$lengthResponse}">
 				<label><xsl:value-of select="$labelQuestion"/></label>
-				<xsl:copy-of select="$declarations"></xsl:copy-of>
+				<xsl:copy-of select="$declarations"/>
 				
 				<xsl:call-template name="enojs:addResponeTocomponents">
 					<xsl:with-param name="responseName" select="$responseName"/>					
@@ -921,7 +919,6 @@
 			<cells componentType="{$componentType-Textarea}" id="{$position}" maxLength="{$lengthResponse}">
 				<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 				<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-				<label><xsl:value-of select="$labelQuestion"/></label>
 				<xsl:copy-of select="$declarations"></xsl:copy-of>
 				<xsl:call-template name="enojs:addResponeTocomponents">
 					<xsl:with-param name="responseName" select="$responseName"/>					
@@ -1119,7 +1116,7 @@
 						<xsl:for-each select="$formulaRelevant">
 							<xsl:value-of select="concat('(',.,')')"/>
 							<xsl:if test="position()!=last()">
-								<xsl:value-of select="' || '"/><!-- "||" = "or"-->
+								<xsl:value-of select="' &amp;&amp; '"/><!-- "||" = "or"-->
 							</xsl:if>
 						</xsl:for-each>
 					</xsl:variable>
@@ -1152,15 +1149,15 @@
 					<!--<xsl:value-of select="concat('(',$variablesName,') =>', $readonly-condition,'toto',$relevant-condition,' ? ''normal'' : ''''')"/>-->
 					<!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
 					<!--	si relevant
-						alors 
-						si readonly,
-						alors normal
-						sinon readonly
-						sinon hidden-->
+							alors 
+								si readonly,
+								alors readonly
+								sinon normal
+							sinon hidden-->
 					<xsl:value-of select="concat(
 						$if,'(',$returned-relevant-condition,')',
-						$if,'(',$returned-readonly-condition,')normal',
-						$else,'readonly',$ifEnd,')',
+						$if,'(',$returned-readonly-condition,')readonly',
+						$else,'normal',$ifEnd,')',
 						$else,'hidden',$ifEnd
 						)"/>
 				</xsl:when>
@@ -1169,7 +1166,7 @@
 						<xsl:for-each select="$formulaRelevant">
 							<xsl:value-of select="concat('(',.,')')"/>
 							<xsl:if test="position()!=last()">
-								<xsl:value-of select="' || '"/>
+								<xsl:value-of select="' &amp;&amp; '"/>
 							</xsl:if>
 						</xsl:for-each>
 					</xsl:variable>
@@ -1203,7 +1200,7 @@
 						</xsl:call-template>
 					</xsl:variable>
 					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s',' &amp;&amp; '),'\sor\s',' || '),'\s=\s',' == ')"/>
-					<xsl:value-of select="concat($if,'(',$returned-readonly-condition,')normal',$else,'readonly',$ifEnd)"/>
+					<xsl:value-of select="concat($if,'(',$returned-readonly-condition,')readonly',$else,'normal',$ifEnd)"/>
 					<!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
 				</xsl:when>
 				
