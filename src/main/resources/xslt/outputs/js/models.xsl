@@ -53,7 +53,7 @@
 			<xsl:when test="$finding='yo'">
 			</xsl:when>
 			<xsl:otherwise>
-				<variables>
+				<variables variableType="EXTERNAL">
 					<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
 					<label><xsl:value-of select="enojs:get-label($source-context,$languages[1])"/></label>
 				</variables>
@@ -980,7 +980,7 @@
 		
 		<xsl:variable name="nameOutVariable" select="enojs:get-business-name($source-context)"/>
 		<xsl:variable name="idVariables" select="tokenize(enojs:get-variable-calculation-variables($source-context),'\s')"/>
-		<variables>
+		<variables variableType="CALCULATED">
 			<name>
 				<xsl:value-of select="$nameOutVariable"/>
 			</name>
@@ -1249,12 +1249,10 @@
 		</xsl:choose>		
 	</xsl:template>
 	
-	
-	
 	<xsl:template name="enojs:addVariableCollected">
 		<xsl:param name="responseName"/>
 		<xsl:param name="responseRef"/>
-		<variables>
+		<variables variableType="COLLECTED">
 			<name><xsl:value-of select="$responseName"/></name>
 			<responseRef><xsl:value-of select="$responseRef"/></responseRef>
 		</variables>
