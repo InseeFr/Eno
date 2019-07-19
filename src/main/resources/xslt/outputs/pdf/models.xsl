@@ -232,7 +232,6 @@
 	<xsl:template match="main//Clarification" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -850,18 +849,38 @@
 						<fo:inline padding-start="1mm" padding-end="2mm">centièmes</fo:inline>
 					</xsl:when>
 					<xsl:otherwise>
+						<xsl:variable name="first-number-position" select="string-length(substring-before($field,'N'))+1"/>
+						<xsl:variable name="maximum-duration" select="enopdf:get-maximum($source-context)"/>
 						<xsl:for-each select="1 to string-length($field)">
-							<xsl:variable name="current-character" select="substring($field,position(),1)"/>
+							<xsl:variable name="current-position" select="position()"/>
+							<xsl:variable name="current-character" select="substring($field,$current-position,1)"/>
 							<xsl:choose>
 								<xsl:when test="$current-character = 'P'"/>
 								<xsl:when test="$current-character = 'T'"/>
 								<xsl:when test="$current-character = 'N'">
-									<xsl:call-template name="insert-image">
-										<xsl:with-param name="image-name" select="'mask_number.png'"/>
-									</xsl:call-template>
-									<xsl:call-template name="insert-image">
-										<xsl:with-param name="image-name" select="'mask_number.png'"/>
-									</xsl:call-template>									
+									<xsl:variable name="number-of-characters">
+										<xsl:choose>
+											<xsl:when test="$current-position = $first-number-position and $maximum-duration != ''">
+												<xsl:variable name="duration-regex" select="concat('^PT?([0-9]+)',substring($field,$current-position+1,1),'.*$')"/>
+												<xsl:analyze-string select="$maximum-duration" regex="{$duration-regex}">
+													<xsl:matching-substring>
+														<xsl:value-of select="string-length(regex-group(1))"/>
+													</xsl:matching-substring>
+													<xsl:non-matching-substring>
+														<xsl:value-of select="'2'"/>
+													</xsl:non-matching-substring>
+												</xsl:analyze-string>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="'2'"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:variable>
+									<xsl:for-each select="1 to xs:integer(number($number-of-characters))">
+										<xsl:call-template name="insert-image">
+											<xsl:with-param name="image-name" select="'mask_number.png'"/>
+										</xsl:call-template>
+									</xsl:for-each>
 								</xsl:when>
 								<xsl:when test="$current-character = 'Y' or $current-character = 'A'">
 									<fo:inline padding-start="1mm" padding-end="3mm">
