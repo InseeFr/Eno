@@ -112,10 +112,6 @@
 		
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
-			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
-			<!--<xsl:call-template name="eno:printQuestionTitleWithInstruction">
-				<xsl:with-param name="driver" select="."/>
-			</xsl:call-template>-->
 			<xsl:copy-of select="$filterCondition"/>
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -152,10 +148,6 @@
 		
 		<components xsi:type="{$componentType-Subsequence}" componentType="{$componentType-Subsequence}" id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
-			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
-			<!--<xsl:call-template name="eno:printQuestionTitleWithInstruction">
-				<xsl:with-param name="driver" select="."/>
-			</xsl:call-template>-->
 			<xsl:copy-of select="$filterCondition"/>			
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -212,10 +204,12 @@
 			$variablesRelevant
 			)"/>
 		
+		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>
+		
 		<xsl:variable name="nbMinimumLines" select="enojs:get-minimum-lines($source-context)"/>
 		<xsl:variable name="nbMaximumLines" select="enojs:get-maximum-lines($source-context)"/>
 		
-		<components xsi:type="{$componentType-Table}" componentType="{$componentType-Table}" id="{$idQuestion}" positioning="HORIZONTAL">
+		<components xsi:type="{$componentType-Table}" componentType="{$componentType-Table}" id="{$idQuestion}" positioning="HORIZONTAL" mandatory="{$mandatory}">
 			<label><xsl:value-of select="$labelQuestion"/></label>
 			<xsl:copy-of select="$declarations"/>
 			<xsl:copy-of select="$filterCondition"/>
@@ -389,6 +383,7 @@
 			$variablesReadOnly,
 			$variablesRelevant
 			)"/>
+		
 		<xsl:if test="$typeOfQuestion='MultipleChoiceQuestion'">
 			<components xsi:type="Checkbox" componentType="Checkbox" id="{$idQuestion}">
 				<label><xsl:value-of select="$labelQuestion"/></label>
@@ -438,6 +433,8 @@
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
 		
+		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>	
+		
 		<xsl:variable name="componentType-Input" select="'Input'"/>
 		<xsl:variable name="componentType-InputNumber" select="'InputNumber'"/>
 		
@@ -461,7 +458,7 @@
 			
 			<xsl:choose>
 				<xsl:when test="$typeResponse='text' and $questionName!='' and $typeOfAncestor!='table'">
-					<components xsi:type="{$componentType-Input}" componentType="{$componentType-Input}" id="{$idQuestion}" maxLength="{$lengthResponse}">
+					<components xsi:type="{$componentType-Input}" componentType="{$componentType-Input}" id="{$idQuestion}" maxLength="{$lengthResponse}" mandatory="{$mandatory}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"/>
 						<xsl:call-template name="enojs:addResponeTocomponents">
@@ -482,7 +479,7 @@
 				</xsl:when>
 				
 				<xsl:when test="$typeResponse='number' and $questionName!='' and $typeOfAncestor!='table'">
-					<components xsi:type="{$componentType-InputNumber}" componentType="{$componentType-InputNumber}" id="{$idQuestion}"> 
+					<components xsi:type="{$componentType-InputNumber}" componentType="{$componentType-InputNumber}" id="{$idQuestion}" mandatory="{$mandatory}"> 
 						<xsl:if test="$minimumResponse!=''">
 							<xsl:attribute name="min"><xsl:value-of select="$minimumResponse"/></xsl:attribute>
 						</xsl:if>
@@ -555,6 +552,8 @@
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
 		
+		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>
+		
 		<xsl:variable name="componentType-Datepicker" select="'Datepicker'"/>
 		
 		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
@@ -572,7 +571,7 @@
 				
 			</xsl:when>
 			<xsl:otherwise>
-				<components xsi:type="{$componentType-Datepicker}" componentType="{$componentType-Datepicker}" id="{$idQuestion}">
+				<components xsi:type="{$componentType-Datepicker}" componentType="{$componentType-Datepicker}" id="{$idQuestion}" mandatory="{$mandatory}">
 					<label><xsl:value-of select="$labelQuestion"/></label>
 					<xsl:copy-of select="$declarations"/>
 					<xsl:call-template name="enojs:addResponeTocomponents">
@@ -615,6 +614,8 @@
 		
 		<xsl:param name="position" tunnel="yes"/>
 		
+		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>
+		
 		<xsl:variable name="componentType-CheckboxOne" select="'CheckboxOne'"/>
 		<xsl:variable name="componentType-CheckboxBoolean" select="'CheckboxBoolean'"/>
 		
@@ -631,7 +632,7 @@
 			<xsl:when test="$maximumLengthCode != '' and $questionName!=''">
 				<!-- remove Format in the cell for table 'question multiple-choice-question'-->
 				<xsl:if test="$typeOfQuestion!='MultipleChoiceQuestion' and $typeOfAncestor!='table'">
-					<components xsi:type="{$componentType-CheckboxOne}" componentType="{$componentType-CheckboxOne}" id="{$idQuestion}">
+					<components xsi:type="{$componentType-CheckboxOne}" componentType="{$componentType-CheckboxOne}" id="{$idQuestion}" mandatory="{$mandatory}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
 						
@@ -692,7 +693,7 @@
 			</xsl:when>
 			
 			<xsl:when test="$typeResponse='boolean' and $typeOfQuestion='SingleResponseQuestion' and $idQuestion!='' and $typeOfAncestor!='table'">
-				<components xsi:type="{$componentType-CheckboxBoolean}" componentType="{$componentType-CheckboxBoolean}" id="{$idQuestion}">
+				<components xsi:type="{$componentType-CheckboxBoolean}" componentType="{$componentType-CheckboxBoolean}" id="{$idQuestion}" mandatory="{$mandatory}">
 					<label><xsl:value-of select="$labelQuestion"/></label>
 					<xsl:copy-of select="$declarations"/>
 					
@@ -748,6 +749,8 @@
 		
 		<xsl:param name="position" tunnel="yes"/>
 		
+		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>
+		
 		<xsl:variable name="componentType-Radio" select="'Radio'"/>
 		<xsl:variable name="componentType-Dropdown" select="'Dropdown'"/>
 		
@@ -763,7 +766,7 @@
 		<xsl:if test="$maximumLengthCode != '' and $typeOfAncestor!='question multiple-choice-question' and $questionName!='' and $typeOfAncestor!='table'">
 			<xsl:choose>
 				<xsl:when test="$typeXf='full'">
-					<components xsi:type="{$componentType-Radio}" componentType="{$componentType-Radio}" id="{$idQuestion}">
+					<components xsi:type="{$componentType-Radio}" componentType="{$componentType-Radio}" id="{$idQuestion}" mandatory="{$mandatory}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
 						
@@ -782,7 +785,7 @@
 					</components>
 				</xsl:when>
 				<xsl:when test="$typeXf='minimal'">
-					<components xsi:type="{$componentType-Dropdown}" componentType="{$componentType-Dropdown}" id="{$idQuestion}">
+					<components xsi:type="{$componentType-Dropdown}" componentType="{$componentType-Dropdown}" id="{$idQuestion}" mandatory="{$mandatory}">
 						<label><xsl:value-of select="$labelQuestion"/></label>
 						<xsl:copy-of select="$declarations"></xsl:copy-of>
 						
@@ -893,6 +896,7 @@
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
 		
+		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>
 		<xsl:variable name="componentType-Textarea" select="'Textarea'"/>
 		
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
@@ -901,7 +905,7 @@
 		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
 		
 		<xsl:if test="$typeResponse !='' and $questionName!='' and $typeOfAncestor!='table'">
-			<components xsi:type="{$componentType-Textarea}" componentType="{$componentType-Textarea}" id="{$idQuestion}" maxLength="{$lengthResponse}">
+			<components xsi:type="{$componentType-Textarea}" componentType="{$componentType-Textarea}" id="{$idQuestion}" maxLength="{$lengthResponse}" mandatory="{$mandatory}">
 				<label><xsl:value-of select="$labelQuestion"/></label>
 				<xsl:copy-of select="$declarations"/>
 				

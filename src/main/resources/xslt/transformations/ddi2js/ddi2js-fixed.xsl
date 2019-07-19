@@ -153,9 +153,8 @@
     </xd:doc>
     <xsl:function name="enojs:get-required">
         <xsl:param name="context" as="item()"/>
-        <xsl:if test=" enoddi:get-minimum-responses($context) != '0'">
-            <xsl:value-of select="'true'"/>
-        </xsl:if>
+        <xsl:variable name="minimum-responses" select="enoddi:get-minimum-responses($context)"/>
+        <xsl:value-of select="$minimum-responses!='' and $minimum-responses!='0'"/>
     </xsl:function>
     
 
