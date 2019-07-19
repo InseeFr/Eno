@@ -129,6 +129,25 @@
     
     <xd:doc>
         <xd:desc>
+            <xd:p>Function for retrieving instructions before the label of the question</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enojs:get-before-question-title-instructions">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enojs:get-before-question-title-instructions"/>
+    </xsl:function>
+    
+    <xsl:template match="*" mode="enojs:get-before-question-title-instructions">
+        <xsl:sequence select="ancestor::d:QuestionConstruct
+            /parent::d:ControlConstructReference
+            /preceding-sibling::d:ControlConstructReference
+            /d:StatementItem[parent::d:ControlConstructReference
+                            /following-sibling::d:ControlConstructReference[descendant::d:QuestionConstruct][1]
+                            /descendant::d:QuestionConstruct/r:ID=current()/ancestor::d:QuestionConstruct/r:ID]"/>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
             <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
         </xd:desc>
     </xd:doc>

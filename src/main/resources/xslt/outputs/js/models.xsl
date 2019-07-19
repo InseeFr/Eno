@@ -112,9 +112,10 @@
 		
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
-			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
+			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
+			<!--<xsl:call-template name="eno:printQuestionTitleWithInstruction">
 				<xsl:with-param name="driver" select="."/>
-			</xsl:call-template>
+			</xsl:call-template>-->
 			<xsl:copy-of select="$filterCondition"/>
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -151,9 +152,10 @@
 		
 		<components xsi:type="{$componentType-Subsequence}" componentType="{$componentType-Subsequence}" id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
-			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
+			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
+			<!--<xsl:call-template name="eno:printQuestionTitleWithInstruction">
 				<xsl:with-param name="driver" select="."/>
-			</xsl:call-template>
+			</xsl:call-template>-->
 			<xsl:copy-of select="$filterCondition"/>			
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -199,7 +201,7 @@
 		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
 		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
 		
-		<xsl:variable name="declarations" select="eno:getInstructionForQuestion($source-context,.)" as="node()*" />
+		<xsl:variable name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" />
 		<xsl:variable name="labelQuestion" select="enojs:get-label($source-context, $languages[1])"/>
 		
 		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
@@ -377,7 +379,7 @@
 		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
 		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
 		
-		<xsl:variable name="declarations" select="eno:getInstructionForQuestion($source-context,.)" as="node()*" />
+		<xsl:variable name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" />
 		<xsl:variable name="labelQuestion" select="enojs:get-label($source-context, $languages[1])"/>
 		
 		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
@@ -996,31 +998,17 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Template named:eno:printQuestionTitleWithInstruction.</xd:p>
-			<xd:p>It prints the question label and its instructions.</xd:p>
+			<xd:p>Function named: enojs:printQuestionTitleWithInstruction.</xd:p>
+			<xd:p>It prints the instructions of a question.</xd:p>
 		</xd:desc>
-	</xd:doc>
-	<xsl:template name="eno:printQuestionTitleWithInstruction" >
-		<xsl:param name="driver" tunnel="no"/>
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>
-		<!--
-			<xsl:apply-templates select="enojs:get-before-question-title-instructions($source-context)" mode="source">
-			<xsl:with-param name="driver" select="$driver"/>
-			<xsl:with-param name="positionDeclaration" select="'BEFORE'" tunnel="yes"/>
-			</xsl:apply-templates>			
-		-->
-		<!-- The enoddi:get-instructions-by-format getter produces in-language fragments, on which templates must be applied in "source" mode. -->
-		<xsl:apply-templates select="enojs:get-after-question-title-instructions($source-context)" mode="source">
-			<xsl:with-param name="driver" select="$driver"/>
-			<xsl:with-param name="positionDeclaration" select="'AFTER_QUESTION_TEXT'" tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
-	
-	
-	<xsl:function name="eno:getInstructionForQuestion">
+	</xd:doc>	
+	<xsl:function name="enojs:getInstructionForQuestion">
 		<xsl:param name="context" as="item()"/>
-		<xsl:param name="driver"/>		
+		<xsl:param name="driver"/>
+		<xsl:apply-templates select="enojs:get-before-question-title-instructions($context)" mode="source">
+			<xsl:with-param name="driver" select="$driver"/>
+			<xsl:with-param name="positionDeclaration" select="'BEFORE_QUESTION_TEXT'" tunnel="yes"/>
+		</xsl:apply-templates>
 		<xsl:apply-templates select="enojs:get-after-question-title-instructions($context)" mode="source">
 			<xsl:with-param name="driver" select="$driver"/>
 			<xsl:with-param name="positionDeclaration" select="'AFTER_QUESTION_TEXT'" tunnel="yes"/>
@@ -1149,11 +1137,11 @@
 					<!--<xsl:value-of select="concat('(',$variablesName,') =>', $readonly-condition,'toto',$relevant-condition,' ? ''normal'' : ''''')"/>-->
 					<!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
 					<!--	si relevant
-							alors 
-								si readonly,
-								alors readonly
-								sinon normal
-							sinon hidden-->
+						alors 
+						si readonly,
+						alors readonly
+						sinon normal
+						sinon hidden-->
 					<xsl:value-of select="concat(
 						$if,'(',$returned-relevant-condition,')',
 						$if,'(',$returned-readonly-condition,')readonly',

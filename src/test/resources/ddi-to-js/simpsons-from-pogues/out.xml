@@ -425,6 +425,11 @@
                   id="j6p29i81"
                   positioning="HORIZONTAL">
          <label>➡ 2. Does Jay like the following ice cream flavours?</label>
+         <declarations declarationType="STATEMENT"
+                       id="d12-SI"
+                       position="BEFORE_QUESTION_TEXT">
+            <label>Now we are going to know if you think that Jay is a gluton.</label>
+         </declarations>
          <conditionFilter>#if((!($READY!= '1') ))normal#{else}hidden#end</conditionFilter>
          <cells type="line">
             <cells id="j6p29i81-j6p2mvca-1">
