@@ -2357,8 +2357,11 @@
                         <format id="Y" unit="Year">
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
+                                    <xsl:when test="$minimum != '' and contains($minimum,'-')">
+                                        <xsl:value-of select="substring-before($minimum,'-')"/>
+                                    </xsl:when>
                                     <xsl:when test="$minimum != ''">
-                                        <xsl:value-of select="year-from-date($minimum)"/>
+                                        <xsl:value-of select="$minimum"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="1900"/>
@@ -2367,8 +2370,11 @@
                             </xsl:attribute>
                             <xsl:attribute name="maximum">
                                 <xsl:choose>
+                                    <xsl:when test="$maximum != '' and contains($maximum,'-')">
+                                        <xsl:value-of select="substring-before($maximum,'-')"/>
+                                    </xsl:when>
                                     <xsl:when test="$maximum != ''">
-                                        <xsl:value-of select="year-from-date($maximum)"/>
+                                        <xsl:value-of select="$maximum"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="year-from-date(current-date())"/>
@@ -2387,8 +2393,11 @@
                         <format id="M" unit="Month">
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
-                                    <xsl:when test="$minimum != ''">
-                                        <xsl:value-of select="month-from-date($minimum)"/>
+                                    <xsl:when test="not(contains($format,'Y') or contains($format,'A')) and contains($minimum,'-')">
+                                        <xsl:value-of select="substring-before($minimum,'-')"/>
+                                    </xsl:when>
+                                    <xsl:when test="not(contains($format,'Y') or contains($format,'A')) and $minimum != ''">
+                                        <xsl:value-of select="$minimum"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="1"/>
@@ -2397,8 +2406,11 @@
                             </xsl:attribute>
                             <xsl:attribute name="maximum">
                                 <xsl:choose>
-                                    <xsl:when test="$maximum != ''">
-                                        <xsl:value-of select="month-from-date($maximum)"/>
+                                    <xsl:when test="not(contains($format,'Y') or contains($format,'A')) and contains($maximum,'-')">
+                                        <xsl:value-of select="substring-before($maximum,'-')"/>
+                                    </xsl:when>
+                                    <xsl:when test="not(contains($format,'Y') or contains($format,'A')) and $maximum != ''">
+                                        <xsl:value-of select="$maximum"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="12"/>
@@ -2417,8 +2429,8 @@
                         <format id="D" unit="Day">
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
-                                    <xsl:when test="$minimum != ''">
-                                        <xsl:value-of select="day-from-date($minimum)"/>
+                                    <xsl:when test="not(contains($format,'Y') or contains($format,'A')) and not(contains($format,'M') and not(contains(substring-before($format,'M'),'T'))) and $minimum != ''">
+                                        <xsl:value-of select="$minimum"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="1"/>
@@ -2427,8 +2439,8 @@
                             </xsl:attribute>
                             <xsl:attribute name="maximum">
                                 <xsl:choose>
-                                    <xsl:when test="$maximum != ''">
-                                        <xsl:value-of select="day-from-date($maximum)"/>
+                                    <xsl:when test="not(contains($format,'Y') or contains($format,'A')) and not(contains($format,'M') and not(contains(substring-before($format,'M'),'T'))) and $maximum != ''">
+                                        <xsl:value-of select="$maximum"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="31"/>
