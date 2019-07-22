@@ -59,11 +59,11 @@
                     <xsl:choose>
                         <xsl:when test="$nbLines = 1">
                             <xsl:variable name="cell" select="enojs:prepareCellsForRoster(h:cells[@type='line'])"/>
-                            <xsl:apply-templates mode="roaster" select="$cell">
+                            <xsl:apply-templates mode="roster" select="$cell">
                                 <xsl:with-param name="idLine" select="1" tunnel="yes"/>
                                 <xsl:with-param name="ancestor" select="'table'" tunnel="yes"/>
                             </xsl:apply-templates>
-                            <xsl:call-template name="enojs:addLinesForRoaster">
+                            <xsl:call-template name="enojs:addLinesForRoster">
                                 <xsl:with-param name="currentLigne" select="2"/>
                                 <xsl:with-param name="nbLigneMax" select="$nbLinesExpected"/>
                                 <xsl:with-param name="lineToCopy" select="$cell"/>
@@ -223,7 +223,7 @@
         </cells>
     </xsl:template>
     
-    <xsl:template match="h:cells" mode="roaster">
+    <xsl:template match="h:cells" mode="roster">
         <xsl:param name="column" tunnel="yes"/>
         <cells>
             <xsl:copy-of select="@*"/>
@@ -241,18 +241,18 @@
         </variables>
     </xsl:template>
     
-    <xsl:template name="enojs:addLinesForRoaster">
+    <xsl:template name="enojs:addLinesForRoster">
         <xsl:param name="currentLigne"/>
         <xsl:param name="nbLigneMax"/>
         <xsl:param name="lineToCopy" as="node()"/>
         <xsl:if test="$currentLigne&lt;=$nbLigneMax">
             
-            <xsl:apply-templates select="$lineToCopy" mode="roaster">
+            <xsl:apply-templates select="$lineToCopy" mode="roster">
                 <xsl:with-param name="idLine" select="$currentLigne" tunnel="yes"/>
                 <xsl:with-param name="ancestor" select="'table'" tunnel="yes"/>
             </xsl:apply-templates>
             
-            <xsl:call-template name="enojs:addLinesForRoaster">
+            <xsl:call-template name="enojs:addLinesForRoster">
                 <xsl:with-param name="currentLigne" select="$currentLigne +1"/>
                 <xsl:with-param name="nbLigneMax" select="$nbLigneMax"/>
                 <xsl:with-param name="lineToCopy" select="$lineToCopy" as="node()"/>
@@ -266,7 +266,7 @@
         <cells>
             <xsl:copy-of select="$cell/@*"/>
             <xsl:for-each select="$cell/h:cells">
-                <xsl:apply-templates select="." mode="roaster">
+                <xsl:apply-templates select="." mode="roster">
                     <xsl:with-param name="column" select="position()" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:for-each>
