@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:g="ddi:group:3_2"
-    xmlns:d="ddi:datacollection:3_2" xmlns:s="ddi:studyunit:3_2" xmlns:r="ddi:reusable:3_2"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_2"
-    xmlns:l="ddi:logicalproduct:3_2" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32"
-    exclude-result-prefixes="xs" version="2.0">
+    xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:g="ddi:group:3_3"
+    xmlns:d="ddi:datacollection:3_3" xmlns:s="ddi:studyunit:3_3" xmlns:r="ddi:reusable:3_3"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_3"
+    xmlns:l="ddi:logicalproduct:3_3" xmlns:enoddi33="http://xml.insee.fr/apps/eno/out/ddi33"
+    exclude-result-prefixes="xd eno enoddi33" version="2.0">
 
 
     <xd:doc>
@@ -26,19 +26,17 @@
     </xd:doc>
     <xsl:template match="Form" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:variable name="citation" select="enoddi32:get-citation($source-context)" as="xs:string"/>
-        <xsl:variable name="agency" select="enoddi32:get-agency($source-context)" as="xs:string"/>        
-        <DDIInstance xmlns="ddi:instance:3_2"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="ddi:instance:3_2 ../../../src/main/resources/schema/instance.xsd"
-            xmlns:a="ddi:archive:3_2" xmlns:r="ddi:reusable:3_2" xmlns:s="ddi:studyunit:3_2"
-            xmlns:d="ddi:datacollection:3_2" xmlns:g="ddi:group:3_2" xmlns:eno="http://xml.insee.fr/apps/eno"
-            xmlns:l="ddi:logicalproduct:3_2" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-            xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32" xmlns:xhtml="http://www.w3.org/1999/xhtml"
-            isMaintainable="true">
+        <xsl:variable name="citation" select="enoddi33:get-citation($source-context)" as="xs:string"/>
+        <xsl:variable name="agency" select="enoddi33:get-agency($source-context)" as="xs:string"/>
+        <DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd"
+			xmlns="ddi:instance:3_3" xmlns:g="ddi:group:3_3" xmlns:d="ddi:datacollection:3_3"
+			xmlns:s="ddi:studyunit:3_3" xmlns:r="ddi:reusable:3_3" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+			xmlns:a="ddi:archive:3_3" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:l="ddi:logicalproduct:3_3" isMaintainable="true">
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="concat('INSEE-', enoddi32:get-id($source-context))"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="concat('INSEE-', enoddi33:get-id($source-context))"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:Citation>
                 <r:Title>
                     <r:String>
@@ -48,32 +46,32 @@
             </r:Citation>
             <g:ResourcePackage isMaintainable="true" versionDate="2018-01-25+01:00">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="concat('RessourcePackage-', enoddi32:get-id($source-context))"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="concat('RessourcePackage-', enoddi33:get-id($source-context))"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <d:InterviewerInstructionScheme>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="concat('InterviewerInstructionScheme-', enoddi32:get-id($source-context))"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                    <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>
-                    <xsl:apply-templates select="enoddi32:get-instructions($source-context)[not(enoddi32:get-position(.) = 'BEFORE_QUESTION_TEXT')] | enoddi32:get-controls($source-context)" mode="source">
+                    <r:ID><xsl:value-of select="concat('InterviewerInstructionScheme-', enoddi33:get-id($source-context))"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                    <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}">A définir</r:Content></r:Label>
+                    <xsl:apply-templates select="enoddi33:get-instructions($source-context)[not(enoddi33:get-position(.) = 'BEFORE_QUESTION_TEXT')] | enoddi33:get-controls($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                 </d:InterviewerInstructionScheme>
                 <d:ControlConstructScheme>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="concat('ControlConstructScheme-', enoddi32:get-id($source-context))"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:ID><xsl:value-of select="concat('ControlConstructScheme-', enoddi33:get-id($source-context))"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <d:Sequence>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="enoddi32:get-main-sequence-id($source-context)"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                        <r:ID><xsl:value-of select="enoddi33:get-main-sequence-id($source-context)"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                         <r:Label>
-                            <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
-                                <xsl:value-of select="enoddi32:get-label($source-context)"/>
+                            <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                                <xsl:value-of select="enoddi33:get-label($source-context)"/>
                             </r:Content>
                         </r:Label>
-                        <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
+                        <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
                         <!--creation of references of direct children-->
                         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                             <xsl:with-param name="driver" select="eno:append-empty-element('Sequence', .)" tunnel="yes"/>
@@ -81,38 +79,38 @@
                         </xsl:apply-templates>
                     </d:Sequence>
                     <!--creation of control construct from children (everything since we are at the root node), whose reference were created sooner-->
-                    <xsl:apply-templates select="enoddi32:get-sequences($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-sequences($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi32:get-ifthenelses($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-ifthenelses($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi32:get-questions($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-questions($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi32:get-controls($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-controls($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi32:get-statement-item($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-statement-item($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-StatementItem', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>                    
                 </d:ControlConstructScheme>
                 <d:QuestionScheme>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="concat('QuestionScheme-',enoddi32:get-id($source-context))"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                    <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>                  
+                    <r:ID><xsl:value-of select="concat('QuestionScheme-',enoddi33:get-id($source-context))"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                    <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}">A définir</r:Content></r:Label>
                     <!-- This 'hack' is needed to output the question in correct order (QuestionItem first, then QuestionGrid). -->
-                    <xsl:apply-templates select="enoddi32:get-questions-simple($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-questions-simple($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi32:get-questions-table($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-questions-table($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-QuestionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -124,17 +122,17 @@
                     <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                 </xsl:apply-templates>
                 <!-- If needed, add of a codeList for boolean representation. -->
-                <xsl:if test="enoddi32:exist-boolean($source-context)">                    
+                <xsl:if test="enoddi33:exist-boolean($source-context)">
                     <l:CategoryScheme>
-                        <r:Agency><xsl:value-of select="enoddi32:get-agency($source-context)"/></r:Agency>
-                        <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi32:get-id($source-context))"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                        <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content></r:Label>                        
+                        <r:Agency><xsl:value-of select="enoddi33:get-agency($source-context)"/></r:Agency>
+                        <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi33:get-id($source-context))"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}">A définir</r:Content></r:Label>
                         <l:Category>		
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                             <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>	
-                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                            <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}"/></r:Label>	
+                            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                            <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}"/></r:Label>
                         </l:Category>		
                     </l:CategoryScheme>
                 </xsl:if>
@@ -146,14 +144,14 @@
                 <!-- VariableScheme -->
                 <l:VariableScheme>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="concat('VariableScheme-',enoddi32:get-id($source-context))"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                    <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}">Variable Scheme for the survey</r:Content></r:Label>
+                    <r:ID><xsl:value-of select="concat('VariableScheme-',enoddi33:get-id($source-context))"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                    <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}">Variable Scheme for the survey</r:Content></r:Label>
                     <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi32:get-questions-table($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-questions-table($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroup', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -162,14 +160,14 @@
                 <d:ProcessingInstructionScheme>
                     <r:Agency>fr.insee</r:Agency>
                     <r:ID>INSEE-SIMPSONS-PIS-1</r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <d:ProcessingInstructionSchemeName>
                         <r:String xml:lang="en-IE">SIMPSONS</r:String>
                     </d:ProcessingInstructionSchemeName>
                     <r:Label>
                         <r:Content xml:lang="en-IE">Processing instructions of the Simpsons questionnaire</r:Content>
                     </r:Label>
-                    <xsl:apply-templates select="enoddi32:get-generation-instructions($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-generation-instructions($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-ProcessingInstructionScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" tunnel="yes"/>                        
                     </xsl:apply-templates>
@@ -178,7 +176,7 @@
                 <r:ManagedRepresentationScheme>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID>INSEE-SIMPSONS-MRS</r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <r:Label>
                         <r:Content xml:lang="en-IE">Liste de formats numériques et dates de
                             l'enquête</r:Content>
@@ -210,65 +208,85 @@
 					        		<xsl:otherwise>date</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
+					        <xsl:variable name="minValue">
+								<xsl:choose>
+									<xsl:when test="$formatDate = 'YYYY'">1900</xsl:when>
+									<xsl:when test="$formatDate = 'YYYY-MM'">1900-01</xsl:when>
+									<xsl:when test="$formatDate = 'YYYY-MM-DD'">1900-01-01</xsl:when>
+									<xsl:when test="$formatDate = 'PnYnM'">P0Y0M</xsl:when>
+									<xsl:when test="$formatDate = 'PTnHnM'">PT0H0M</xsl:when>
+						        </xsl:choose>
+					        </xsl:variable>
+					        <xsl:variable name="maxValue">
+								<xsl:choose>
+									<xsl:when test="$formatDate = 'PnYnM'">P99Y11M</xsl:when>
+									<xsl:when test="$formatDate = 'PTnHnM'">PT99H59M</xsl:when>
+									<xsl:otherwise>format-dateTime(current-date(),'<xsl:value-of select="$formatDate"/>')</xsl:otherwise>
+						        </xsl:choose>
+					        </xsl:variable>
 							<r:ManagedDateTimeRepresentation>
 						        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
 						        <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/>-<xsl:value-of select="$formatDate"/></r:ID>
-						        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+						        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
 						        <r:DateFieldFormat><xsl:value-of select="$formatDate"/></r:DateFieldFormat>
-						        <r:DateTypeCode codeListID="INSEE-DTC-CV"><xsl:value-of select="$DateTypeCode"/></r:DateTypeCode>
+						        <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><xsl:value-of select="$DateTypeCode"/></r:DateTypeCode>
+						        <r:Range>
+									<r:MinimumValue included="true"><xsl:value-of select="$minValue"/></r:MinimumValue>
+									<r:MaximumValue included="true"><xsl:value-of select="$maxValue"/></r:MaximumValue>
+								</r:Range>
 							</r:ManagedDateTimeRepresentation>
 						</xsl:if>
 					</xsl:for-each>
             	</r:ManagedRepresentationScheme>
             </g:ResourcePackage>
-            <s:StudyUnit xmlns="ddi:studyunit:3_2">
+            <s:StudyUnit>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="concat('StudyUnit-',enoddi32:get-id($source-context))"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="concat('StudyUnit-',enoddi33:get-id($source-context))"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:ExPostEvaluation/>
                 <d:DataCollection>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="concat('DataCollection-',enoddi32:get-id($source-context))"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:ID><xsl:value-of select="concat('DataCollection-',enoddi33:get-id($source-context))"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <r:QuestionSchemeReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="concat('QuestionScheme-',enoddi32:get-id($source-context))"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                        <r:ID><xsl:value-of select="concat('QuestionScheme-',enoddi33:get-id($source-context))"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                         <r:TypeOfObject>QuestionScheme</r:TypeOfObject>
                     </r:QuestionSchemeReference>
                     <r:ControlConstructSchemeReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="concat('ControlConstructScheme-',enoddi32:get-id($source-context))"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                        <r:ID><xsl:value-of select="concat('ControlConstructScheme-',enoddi33:get-id($source-context))"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                         <r:TypeOfObject>ControlConstructScheme</r:TypeOfObject>
                     </r:ControlConstructSchemeReference>
                     <r:InterviewerInstructionSchemeReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="concat('InterviewerInstructionScheme-',enoddi32:get-id($source-context))"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                        <r:ID><xsl:value-of select="concat('InterviewerInstructionScheme-',enoddi33:get-id($source-context))"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                         <r:TypeOfObject>InterviewerInstructionScheme</r:TypeOfObject>
                     </r:InterviewerInstructionSchemeReference>
-                    <d:InstrumentScheme xml:lang="{enoddi32:get-lang($source-context)}">
+                    <d:InstrumentScheme xml:lang="{enoddi33:get-lang($source-context)}">
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="concat('InstrumentScheme-',enoddi32:get-id($source-context))"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                        <r:ID><xsl:value-of select="concat('InstrumentScheme-',enoddi33:get-id($source-context))"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                         <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-                            xmlns:pr="ddi:ddiprofile:3_2" xmlns:c="ddi:conceptualcomponent:3_2"
-                            xmlns:cm="ddi:comparative:3_2">
+                            xmlns:pr="ddi:ddiprofile:3_3" xmlns:c="ddi:conceptualcomponent:3_3"
+                            xmlns:cm="ddi:comparative:3_3">
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                            <r:ID><xsl:value-of select="concat('Instrument-',enoddi32:get-id($source-context))"/></r:ID>
-                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                            <r:ID><xsl:value-of select="concat('Instrument-',enoddi33:get-id($source-context))"/></r:ID>
+                            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                             <d:InstrumentName>
-                                <r:String><xsl:value-of select="enoddi32:get-name($source-context)"/></r:String>
+                                <r:String><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
                             </d:InstrumentName>
                             <r:Label>
-                                <r:Content xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-label($source-context)"/> questionnaire</r:Content>
+                                <r:Content xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-label($source-context)"/> questionnaire</r:Content>
                             </r:Label>
                             <d:TypeOfInstrument>A définir</d:TypeOfInstrument>
                             <d:ControlConstructReference>
                                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                <r:ID><xsl:value-of select="enoddi32:get-main-sequence-id($source-context)"/></r:ID>
-                                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                                <r:ID><xsl:value-of select="enoddi33:get-main-sequence-id($source-context)"/></r:ID>
+                                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                                 <r:TypeOfObject>Sequence</r:TypeOfObject>
                             </d:ControlConstructReference>
                         </d:Instrument>
@@ -282,29 +300,29 @@
     <xsl:template match="driver-VariableScheme//Variable" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:variable name="id" select="enoddi32:get-id($source-context)"/>
+        <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
         <xsl:variable name="driver" select="."/>
         <l:Variable>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="$id"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <l:VariableName>
-                <r:String xml:lang="fr-FR"><xsl:value-of select="enoddi32:get-name($source-context)"/></r:String>
+                <r:String xml:lang="fr-FR"><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
             </l:VariableName>
             <r:Label>
-                <r:Content xml:lang="fr-FR"><xsl:value-of select="enoddi32:get-label($source-context)"/></r:Content>
+                <r:Content xml:lang="fr-FR"><xsl:value-of select="enoddi33:get-label($source-context)"/></r:Content>
             </r:Label>
             <!-- It's a hack to test if Variable got a related-response (aka = CollectedVariable), only 0 or 1 are expected, could be done better way (@att on driver ?). -->
-            <xsl:for-each select="enoddi32:get-related-response($source-context)">
-                <xsl:variable name="idQuestion" select="enoddi32:get-parent-id(current())"/>
-                <xsl:variable name="idResponse" select="enoddi32:get-id(current())"/>
+            <xsl:for-each select="enoddi33:get-related-response($source-context)">
+                <xsl:variable name="idQuestion" select="enoddi33:get-parent-id(current())"/>
+                <xsl:variable name="idResponse" select="enoddi33:get-id(current())"/>
                 <r:SourceParameterReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="enoddi32:get-qop-id(current())"/></r:ID>                    
-                    <r:Version><xsl:value-of select="enoddi32:get-version(current())"/></r:Version>
+                    <r:ID><xsl:value-of select="enoddi33:get-qop-id(current())"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version(current())"/></r:Version>
                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
                 </r:SourceParameterReference>
-                <xsl:apply-templates select="." mode="enoddi32:question-reference"/>
+                <xsl:apply-templates select="." mode="enoddi33:question-reference"/>
                 <l:VariableRepresentation>
                 	<!-- Representation of variable: text, numeric, date ... -->
                     <xsl:apply-templates select="eno:child-fields(.)" mode="source">
@@ -313,29 +331,29 @@
                 </l:VariableRepresentation>
             </xsl:for-each>
             <!-- It's a dirty (large part is static) hack to test if Variable got formula (aka = CalcultatedVariable), only 0 or 1 are expected, could be done better way (@att on driver ?) -->
-            <xsl:for-each select="enoddi32:get-processing-instruction($source-context)">
+            <xsl:for-each select="enoddi33:get-processing-instruction($source-context)">
                 <r:OutParameter>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="enoddi32:get-vrop-id(current())"/></r:ID>                    
-                    <r:Version><xsl:value-of select="enoddi32:get-version(current())"/></r:Version>
+                    <r:ID><xsl:value-of select="enoddi33:get-vrop-id(current())"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version(current())"/></r:Version>
                 </r:OutParameter>
                 <l:VariableRepresentation>
                     <r:ProcessingInstructionReference>                        
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="enoddi32:get-gi-id(current())"/></r:ID>                    
-                        <r:Version><xsl:value-of select="enoddi32:get-version(current())"/></r:Version>
+                        <r:ID><xsl:value-of select="enoddi33:get-gi-id(current())"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version(current())"/></r:Version>
                         <r:TypeOfObject>GenerationInstruction</r:TypeOfObject>
                         <r:Binding>
                             <r:SourceParameterReference>
                                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                <r:ID><xsl:value-of select="enoddi32:get-qop-id(current())"/></r:ID>
-                                <r:Version><xsl:value-of select="enoddi32:get-version(current())"/></r:Version>
+                                <r:ID><xsl:value-of select="enoddi33:get-qop-id(current())"/></r:ID>
+                                <r:Version><xsl:value-of select="enoddi33:get-version(current())"/></r:Version>
                                 <r:TypeOfObject>OutParameter</r:TypeOfObject>
                             </r:SourceParameterReference>
                             <r:TargetParameterReference>
                                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                <r:ID><xsl:value-of select="enoddi32:get-vrop-id(current())"/></r:ID>
-                                <r:Version><xsl:value-of select="enoddi32:get-version(current())"/></r:Version>
+                                <r:ID><xsl:value-of select="enoddi33:get-vrop-id(current())"/></r:ID>
+                                <r:Version><xsl:value-of select="enoddi33:get-version(current())"/></r:Version>
                                 <r:TypeOfObject>OutParameter</r:TypeOfObject>
                             </r:TargetParameterReference>
                         </r:Binding>
@@ -349,12 +367,12 @@
     <xsl:template match="driver-VariableScheme//CodeListReference" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:if test="enoddi32:get-code-list-id($source-context) != '' ">
+        <xsl:if test="enoddi33:get-code-list-id($source-context) != '' ">
 			<r:CodeRepresentation>
 		        <r:CodeListReference>	
 		            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-		            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-		            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+		            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+		            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
 		            <r:TypeOfObject>CodeList</r:TypeOfObject>
 		        </r:CodeListReference>
 		    </r:CodeRepresentation>
@@ -363,7 +381,7 @@
     
     <xsl:template match="driver-VariableScheme//Unit" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:variable name="unit" select="enoddi32:get-unit($source-context)"/>
+        <xsl:variable name="unit" select="enoddi33:get-unit($source-context)"/>
         <xsl:if test="not(normalize-space($unit) = ('',' '))">
             <r:MeasurementUnit><xsl:value-of select="$unit"/></r:MeasurementUnit>
         </xsl:if>
@@ -372,23 +390,23 @@
     <xsl:template match="driver-VariableGroup//QuestionDynamicTable" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:variable name="id" select="enoddi32:get-id($source-context)"/>
+        <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
         
         <l:VariableGroup>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="concat($id,'-gp')"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:BasedOnObject>
                 <r:BasedOnReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="$id"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
                 </r:BasedOnReference>
             </r:BasedOnObject>
             <l:TypeOfVariableGroup>TableLoop</l:TypeOfVariableGroup>
             <l:VariableGroupName>
-                <r:String><xsl:value-of select="enoddi32:get-name($source-context)"/></r:String>
+                <r:String><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
             </l:VariableGroupName>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -400,12 +418,12 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
 
-        <xsl:variable name="relatedVariable" select="enoddi32:get-related-variable($source-context)"/>
+        <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
 
         <r:VariableReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($relatedVariable)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="enoddi33:get-id($relatedVariable)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>Variable</r:TypeOfObject>
         </r:VariableReference>
     </xsl:template>
@@ -416,45 +434,45 @@
         <d:Instruction>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <!-- Use of a specific getter for instruction to cover both Instruction&Control in one case, regular getter are called in Instruction context, specific in Control context -->
-            <r:ID><xsl:value-of select="enoddi32:get-instruction-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="enoddi33:get-instruction-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <d:InstructionName>
-                <r:String xml:lang="{enoddi32:get-lang($source-context)}">
+                <r:String xml:lang="{enoddi33:get-lang($source-context)}">
                     <!-- Use of a specific getter for instruction to cover both Instruction&Control in one case, regular getter are called in Instruction context, specific in Control context -->                    
-                    <xsl:value-of select="enoddi32:get-instruction-name($source-context)"/>
+                    <xsl:value-of select="enoddi33:get-instruction-name($source-context)"/>
                 </r:String>
             </d:InstructionName>
             <d:InstructionText>
                 <d:LiteralText>
-                    <d:Text xml:lang="{enoddi32:get-lang($source-context)}">
+                    <d:Text xml:lang="{enoddi33:get-lang($source-context)}">
                         <!-- Use of a specific getter for instruction to cover both Instruction&Control in one case, regular getter are called in Instruction context, specific in Control context -->                        
-                        <xsl:value-of select="enoddi32:get-instruction-text($source-context)"/>
+                        <xsl:value-of select="enoddi33:get-instruction-text($source-context)"/>
                     </d:Text>
                 </d:LiteralText>
-                <xsl:if test="enoddi32:is-with-conditionnal-text($source-context) = true()">
+                <xsl:if test="enoddi33:is-with-conditionnal-text($source-context) = true()">
                     <xsl:for-each
-                        select="enoddi32:get-related-variable($source-context)[enoddi32:get-type(.) = ('CollectedVariableType', 'CalculatedVariableType')]">
+                        select="enoddi33:get-related-variable($source-context)[enoddi33:get-type(.) = ('CollectedVariableType', 'CalculatedVariableType')]">
                         <d:ConditionalText>
                         <r:SourceParameterReference>
                             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                            <r:ID><xsl:value-of select="enoddi32:get-qop-id(.)"/></r:ID>
-                            <r:Version><xsl:value-of select="enoddi32:get-version(.)"/></r:Version>                            
+                            <r:ID><xsl:value-of select="enoddi33:get-qop-id(.)"/></r:ID>
+                            <r:Version><xsl:value-of select="enoddi33:get-version(.)"/></r:Version>                            
                             <r:TypeOfObject>OutParameter</r:TypeOfObject>
                         </r:SourceParameterReference>
                         </d:ConditionalText>
                     </xsl:for-each>
                 <xsl:for-each
-                        select="enoddi32:get-related-variable($source-context)[enoddi32:get-type(.) = ('ExternalVariableType')]">
+                        select="enoddi33:get-related-variable($source-context)[enoddi33:get-type(.) = ('ExternalVariableType')]">
                         <d:ConditionalText>
                             <r:SourceParameterReference>
                                 <r:Agency>
                                     <xsl:value-of select="$agency"/>
                                 </r:Agency>
                                 <r:ID>
-                                    <xsl:value-of select="enoddi32:get-name(.)"/>
+                                    <xsl:value-of select="enoddi33:get-name(.)"/>
                                 </r:ID>
                                 <r:Version>
-                                    <xsl:value-of select="enoddi32:get-version(.)"/>
+                                    <xsl:value-of select="enoddi33:get-version(.)"/>
                                 </r:Version>
                                 <r:TypeOfObject>InParameter</r:TypeOfObject>
                             </r:SourceParameterReference>
@@ -466,7 +484,7 @@
         </d:Instruction>
     </xsl:template>
 
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
+    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-InterviewerInstructionReference//*" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -477,8 +495,8 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:InterviewerInstructionReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>Instruction</r:TypeOfObject>
         </d:InterviewerInstructionReference>
     </xsl:template>
@@ -493,19 +511,21 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ExternalAid>
-            <xsl:variable name="ID" select="enoddi32:get-id($source-context)"/>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="$ID"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:Description>
-                <r:Content>
-                    <xhtml:div class="FlowControl" id="{$ID}">
-                        <xhtml:div class="Description"><xsl:value-of select="enoddi32:get-description($source-context)"/></xhtml:div>                        
-                        <xhtml:div class="Expression"><xsl:value-of select="enoddi32:get-expression($source-context)"/></xhtml:div>
-                        <xhtml:div class="IfTrue"><xsl:value-of select="enoddi32:get-if-true($source-context)"/></xhtml:div>
-                    </xhtml:div>
-                </r:Content>
-            </r:Description>
+			<r:OtherMaterial>
+	            <xsl:variable name="ID" select="enoddi33:get-id($source-context)"/>
+	            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+	            <r:ID><xsl:value-of select="$ID"/></r:ID>
+	            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+	            <r:Description>
+	                <r:Content>
+	                    <xhtml:div class="FlowControl" id="{$ID}">
+	                        <xhtml:div class="Description"><xsl:value-of select="enoddi33:get-description($source-context)"/></xhtml:div>
+	                        <xhtml:div class="Expression"><xsl:value-of select="enoddi33:get-expression($source-context)"/></xhtml:div>
+	                        <xhtml:div class="IfTrue"><xsl:value-of select="enoddi33:get-if-true($source-context)"/></xhtml:div>
+	                    </xhtml:div>
+	                </r:Content>
+	            </r:Description>
+            </r:OtherMaterial>
         </d:ExternalAid>
     </xsl:template>
 
@@ -513,30 +533,30 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" tunnel="yes"/>
         <!-- All CodeLists (regular, fakes and boolean) are stored in a same CodeListScheme. -->
-        <l:CodeListScheme xmlns="ddi:instance:3_2">
+        <l:CodeListScheme>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="concat(enoddi32:get-survey-name($source-context),'-CLS')"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="concat(enoddi33:get-survey-name($source-context),'-CLS')"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <l:CodeListSchemeName>
-                <r:String xml:lang="en-IE"><xsl:value-of select="enoddi32:get-survey-name($source-context)"/></r:String>
+                <r:String xml:lang="en-IE"><xsl:value-of select="enoddi33:get-survey-name($source-context)"/></r:String>
             </l:CodeListSchemeName>
             <!-- Output the regular codeLists -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
             <!-- If needed, create the fake codeLists for TABLE question with implicit second dimension. -->
-            <xsl:variable name="fake-code-lists" select="enoddi32:get-fake-code-lists($source-context)"/>
+            <xsl:variable name="fake-code-lists" select="enoddi33:get-fake-code-lists($source-context)"/>
             <xsl:if test="$fake-code-lists">
                 <xsl:apply-templates select="$fake-code-lists" mode="source">
                     <xsl:with-param name="driver" select="." tunnel="yes"/>
                 </xsl:apply-templates>               
             </xsl:if>
             <!-- If needed, create the boolean codeList. -->
-            <xsl:if test="enoddi32:exist-boolean($source-context)">
+            <xsl:if test="enoddi33:exist-boolean($source-context)">
                 <l:CodeList>
                     <r:Agency>fr.insee</r:Agency>
                     <r:ID>INSEE-COMMUN-CL-Booleen</r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <l:CodeListName>
                         <r:String xml:lang="fr-FR">Booleen</r:String>
                     </l:CodeListName>
@@ -547,11 +567,11 @@
                     <l:Code levelNumber="1" isDiscrete="true">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                         <r:CategoryReference>
                             <r:Agency>fr.insee</r:Agency>
                             <r:ID>INSEE-COMMUN-CA-Booleen-1</r:ID>
-                            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                             <r:TypeOfObject>Category</r:TypeOfObject>
                         </r:CategoryReference>
                         <r:Value>1</r:Value>
@@ -567,11 +587,11 @@
         <l:CodeList>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>                
-                <xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:Label>
-                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
-                    <xsl:value-of select="enoddi32:get-label($source-context)"/>
+                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                    <xsl:value-of select="enoddi33:get-label($source-context)"/>
                 </r:Content>
             </r:Label>
             <!--TODO define HierarchyType-->
@@ -600,19 +620,19 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="levelNumber" as="xs:integer" tunnel="yes" select="1"/>        
-        <l:Code levelNumber="{$levelNumber}" isDiscrete="{enoddi32:is-discrete($source-context)}">
+        <l:Code levelNumber="{$levelNumber}" isDiscrete="{enoddi33:is-discrete($source-context)}">
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID>
-                <xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:CategoryReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID>CA-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID>CA-<xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>Category</r:TypeOfObject>
             </r:CategoryReference>
             <r:Value>
-                <xsl:value-of select="enoddi32:get-value($source-context)"/>
+                <xsl:value-of select="enoddi33:get-value($source-context)"/>
             </r:Value>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -627,7 +647,7 @@
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
         <!-- Adding fake categorySchemes -->
-        <xsl:variable name="fake-code-lists" select="enoddi32:get-fake-code-lists($source-context)"/>
+        <xsl:variable name="fake-code-lists" select="enoddi33:get-fake-code-lists($source-context)"/>
         <xsl:if test="$fake-code-lists">
             <xsl:apply-templates select="$fake-code-lists" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -640,9 +660,9 @@
         <xsl:param name="agency" tunnel="yes"/>
         <l:CategoryScheme>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi32:get-id($source-context))"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:Label><r:Content xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-label($source-context)"/></r:Content></r:Label>
+            <r:ID><xsl:value-of select="concat('CategoryScheme-',enoddi33:get-id($source-context))"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <r:Label><r:Content xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-label($source-context)"/></r:Content></r:Label>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
@@ -654,11 +674,11 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <l:Category>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>CA-<xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID>CA-<xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:Label>
-                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
-                    <xsl:value-of select="enoddi32:get-label($source-context)"/>
+                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                    <xsl:value-of select="enoddi33:get-label($source-context)"/>
                 </r:Content>
             </r:Label>
         </l:Category>
@@ -673,23 +693,23 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:Sequence>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <d:ConstructName>
-                <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-name($source-context)"></xsl:value-of></r:String>
+                <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-name($source-context)"></xsl:value-of></r:String>
             </d:ConstructName>                       
             <r:Label>
-                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
-                    <xsl:value-of select="enoddi32:get-label($source-context)"/>
+                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                    <xsl:value-of select="enoddi33:get-label($source-context)"/>
                 </r:Content>
             </r:Label>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference', .)" tunnel="yes"/>
             </xsl:apply-templates>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">
-                <xsl:value-of select="enoddi32:get-sequence-type($source-context)"/>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">
+                <xsl:value-of select="enoddi33:get-sequence-type($source-context)"/>
             </d:TypeOfSequence>
-            <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
+            <xsl:apply-templates select="enoddi33:get-related-controls($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -703,15 +723,15 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
         <d:StatementItem>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-si-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-si-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <!--<xsl:apply-templates select="$source-context" mode="source">
                     <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference',.)" tunnel="yes"/>
                 </xsl:apply-templates>-->
             <d:DisplayText>
                 <d:LiteralText>
-                    <d:Text xml:lang="{enoddi32:get-lang($source-context)}">
-                        <xsl:value-of select="enoddi32:get-instruction-text($source-context)"/>
+                    <d:Text xml:lang="{enoddi33:get-lang($source-context)}">
+                        <xsl:value-of select="enoddi33:get-instruction-text($source-context)"/>
                     </d:Text>
                 </d:LiteralText>
             </d:DisplayText>
@@ -724,23 +744,29 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ComputationItem>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-ci-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="enoddi33:get-ci-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <d:ConstructName>
-                <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-ci-name($source-context)"/></r:String>
+                <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-ci-name($source-context)"/></r:String>
             </d:ConstructName>
             <r:Description>
-                <r:Content xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="enoddi32:get-ci-name($source-context)"/></r:Content>
+                <r:Content xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-ci-name($source-context)"/></r:Content>
             </r:Description>
             <!-- If it's a control, an instruction would be generated, if it's a mandatory response, the instruction is not generated, it's handled by the output format. -->
             <xsl:if test="self::Control">
                 <d:InterviewerInstructionReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="enoddi32:get-generated-instruction-id($source-context)"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:ID><xsl:value-of select="enoddi33:get-generated-instruction-id($source-context)"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>Instruction</r:TypeOfObject>
                 </d:InterviewerInstructionReference>
             </xsl:if>
+            <xsl:variable name="type" select="enoddi33:get-ci-type($source-context)"/>
+            <xsl:choose>
+				<xsl:when test="normalize-space($type)='warn'"><d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-2">warning</d:TypeOfComputationItem></xsl:when>
+				<xsl:when test="normalize-space($type)='error'"><d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-3">stumblingblock</d:TypeOfComputationItem></xsl:when>
+				<xsl:otherwise><d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-1">informational</d:TypeOfComputationItem></xsl:otherwise>
+            </xsl:choose>
             <!-- Have a simpler way to deal with regular controls & mandatory response. -->
             <!-- An apply-templates on Expression will Output CommandeCode for Regular Control. -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -752,14 +778,6 @@
                     <!-- In this explicit call, the ResponseDomain itself is used to generated the CommandCode -->    
                     <xsl:with-param name="source-context" select="$source-context" tunnel="yes"/>
                 </xsl:call-template>
-            </xsl:if>
-            <xsl:variable name="type" select="enoddi32:get-ci-type($source-context)"/>
-            <xsl:if test="not(normalize-space($type)=('',' '))">
-                <xsl:comment>
-                    <xsl:text disable-output-escaping="yes">&lt;r:TypeOfComputationItem&gt;</xsl:text>
-                        <xsl:value-of select="$type"/>
-                    <xsl:text disable-output-escaping="yes">&lt;/r:TypeOfComputationItem&gt;</xsl:text>                    
-                </xsl:comment>
             </xsl:if>
         </d:ComputationItem>
     </xsl:template>
@@ -787,8 +805,8 @@
         <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
             <d:ControlConstructReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-referenced-sequence-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-referenced-sequence-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
         </xsl:if>
@@ -800,26 +818,26 @@
         <xsl:param name="agency" tunnel="yes"/>
         <!-- Getting all related variables from the command expression to build parameters and bindings -->
         <!-- Could be done if needed in the parent (external variable case) so it's a param not a variable -->
-        <xsl:param name="related-variables" select="enoddi32:get-related-variable($source-context)" tunnel="yes"/>
+        <xsl:param name="related-variables" select="enoddi33:get-related-variable($source-context)" tunnel="yes"/>
         <!-- Calculating ids needed from the related-variable -->
         <xsl:variable name="related-variables-with-id">
             <xsl:for-each select="$related-variables">
-                <xsl:variable name="ip-id" select="enoddi32:get-ip-id($source-context,position())"/>
-                <xsl:variable name="related-response" select="enoddi32:get-related-response(.)"/>
+                <xsl:variable name="ip-id" select="enoddi33:get-ip-id($source-context,position())"/>
+                <xsl:variable name="related-response" select="enoddi33:get-related-response(.)"/>
                 <!-- A container is created to save all the pre-calculted data to output the command. -->
                 <Container xmlns="" xsl:exclude-result-prefixes="#all">
                     <!-- Corresponding to the inputParameter id. -->
                     <ip-id><xsl:value-of select="$ip-id"/></ip-id>
                     <!-- Corresponding to the id used in the final command code for the current variable. -->
-                    <command-id><xsl:value-of select="enoddi32:get-command-id(.,$ip-id)"/></command-id>
+                    <command-id><xsl:value-of select="enoddi33:get-command-id(.,$ip-id)"/></command-id>
                     <!-- Corresponding to the Out Parameter.
                         TODO : Rename correctly the getter, to get-op-id ?-->
                     <qop-id>
-                        <xsl:value-of select="enoddi32:get-qop-id(.)"/>
+                        <xsl:value-of select="enoddi33:get-qop-id(.)"/>
                     </qop-id>
-                    <name><xsl:value-of select="enoddi32:get-name(.)"/></name>
+                    <name><xsl:value-of select="enoddi33:get-name(.)"/></name>
                     <type>
-                        <xsl:value-of select="enoddi32:get-type(.)"/>
+                        <xsl:value-of select="enoddi33:get-type(.)"/>
                     </type>
                 </Container>
             </xsl:for-each>
@@ -830,9 +848,9 @@
                 <r:InParameter isArray="false">
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
                     <r:ID><xsl:value-of select="ip-id"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <r:ParameterName>
-                        <r:String xml:lang="{enoddi32:get-lang($source-context)}"><xsl:value-of select="name"/></r:String>
+                        <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="name"/></r:String>
                     </r:ParameterName>
                 </r:InParameter>
             </xsl:for-each>
@@ -840,8 +858,8 @@
             <xsl:if test="ancestor::driver-ProcessingInstructionScheme">
                 <r:OutParameter>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:ID><xsl:value-of select="enoddi33:get-qop-id($source-context)"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 </r:OutParameter>
             </xsl:if>
             <xsl:for-each select="$related-variables-with-id/*">
@@ -855,7 +873,7 @@
                                     <xsl:value-of select="./name"/>
                                 </r:ID>
                                 <r:Version>
-                                    <xsl:value-of select="enoddi32:get-version($source-context)"/>
+                                    <xsl:value-of select="enoddi33:get-version($source-context)"/>
                                 </r:Version>
                                 <r:TypeOfObject>InParameter</r:TypeOfObject>
                             </xsl:when>
@@ -864,7 +882,7 @@
                                     <xsl:value-of select="./qop-id"/>
                                 </r:ID>
                                 <r:Version>
-                                    <xsl:value-of select="enoddi32:get-version($source-context)"/>
+                                    <xsl:value-of select="enoddi33:get-version($source-context)"/>
                                 </r:Version>
                                 <r:TypeOfObject>OutParameter</r:TypeOfObject>
                             </xsl:otherwise>
@@ -873,7 +891,7 @@
                     <r:TargetParameterReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>                        
                         <r:ID><xsl:value-of select="ip-id"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                     </r:TargetParameterReference>
                 </r:Binding>                    
@@ -936,15 +954,15 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:GenerationInstruction>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-gi-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <xsl:variable name="related-variables" select="enoddi32:get-related-variable($source-context)"/>
+            <r:ID><xsl:value-of select="enoddi33:get-gi-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <xsl:variable name="related-variables" select="enoddi33:get-related-variable($source-context)"/>
             <xsl:comment><![CDATA[<d:SourceQuestion>Not implemented.</d:SourceQuestion>]]></xsl:comment>
             <xsl:for-each select="$related-variables">            
             <d:SourceVariable>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-id(.)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-id(.)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>Variable</r:TypeOfObject>
             </d:SourceVariable>
             </xsl:for-each>
@@ -961,38 +979,38 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:IfThenElse>					
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>				
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:Label>
-                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">A définir</r:Content>
+                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">A définir</r:Content>
             </r:Label>
             <r:Description>
-                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
-                    <xsl:value-of select="enoddi32:get-description($source-context)"/>
+                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                    <xsl:value-of select="enoddi33:get-description($source-context)"/>
                 </r:Content>                
             </r:Description>
+            <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
             <d:IfCondition>
                 <xsl:call-template name="Command">
-                    <xsl:with-param name="source-context" select="enoddi32:get-command($source-context)" tunnel="yes"/>
+                    <xsl:with-param name="source-context" select="enoddi33:get-command($source-context)" tunnel="yes"/>
                 </xsl:call-template>
            </d:IfCondition>				
             <d:ThenConstructReference>				
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>		
-                <r:ID><xsl:value-of select="enoddi32:get-then-sequence-id($source-context)"/></r:ID>			
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-then-sequence-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>Sequence</r:TypeOfObject>			
             </d:ThenConstructReference>				
         </d:IfThenElse>					
         <d:Sequence>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-then-sequence-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="enoddi33:get-then-sequence-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:Label>
-                <r:Content xml:lang="{enoddi32:get-lang($source-context)}">
-                    <xsl:value-of select="enoddi32:get-label($source-context)"/>
+                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                    <xsl:value-of select="enoddi33:get-label($source-context)"/>
                 </r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-ThenSequence',.)" tunnel="yes"/>
             </xsl:apply-templates>
@@ -1004,22 +1022,22 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="driver" select="."/>
-        <xsl:for-each select="enoddi32:get-instructions($source-context)[enoddi32:get-position(.) = 'BEFORE_QUESTION_TEXT']">                        
+        <xsl:for-each select="enoddi33:get-instructions($source-context)[enoddi33:get-position(.) = 'BEFORE_QUESTION_TEXT']">
             <d:ControlConstructReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-si-id(.)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version(.)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-si-id(.)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version(.)"/></r:Version>
                 <r:TypeOfObject>StatementItem</r:TypeOfObject>
             </d:ControlConstructReference>
         </xsl:for-each>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-reference-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject><xsl:value-of select="enoddi32:get-reference-element-name($source-context)"/></r:TypeOfObject>
+            <r:ID><xsl:value-of select="enoddi33:get-reference-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <r:TypeOfObject><xsl:value-of select="enoddi33:get-reference-element-name($source-context)"/></r:TypeOfObject>
         </d:ControlConstructReference>
         <xsl:if test="not(name()=('Sequence','IfThenElse'))">
-            <xsl:apply-templates select="enoddi32:get-related-controls($source-context)" mode="source">
+            <xsl:apply-templates select="enoddi33:get-related-controls($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:if>
@@ -1030,11 +1048,11 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
-            <xsl:with-param name="mandatory" select="enoddi32:get-ci-type($source-context)" tunnel="yes"/>
+            <xsl:with-param name="mandatory" select="enoddi33:get-ci-type($source-context)" tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
     
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
+    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-Binding//*" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -1045,31 +1063,31 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
         <d:QuestionConstruct>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-qc-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="enoddi33:get-qc-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <d:ConstructName>
                 <xsl:element name="r:String">
-                   <xsl:attribute name="xml:lang" select="enoddi32:get-lang($source-context)"/>
-                   <xsl:value-of select="enoddi32:get-name($source-context)"/>
+                   <xsl:attribute name="xml:lang" select="enoddi33:get-lang($source-context)"/>
+                   <xsl:value-of select="enoddi33:get-name($source-context)"/>
                 </xsl:element>
             </d:ConstructName>
-            <xsl:apply-templates select="$source-context" mode="enoddi32:question-reference"/>
+            <xsl:apply-templates select="$source-context" mode="enoddi33:question-reference"/>
         </d:QuestionConstruct>
     </xsl:template>
 
     <xsl:template match="driver-QuestionScheme//QuestionSingleChoice//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:variable name="mandatory" select="enoddi32:get-ci-type($source-context)"/>
+        <xsl:variable name="mandatory" select="enoddi33:get-ci-type($source-context)"/>
         <d:CodeDomain>            
-            <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
+            <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV"><xsl:value-of select="enoddi33:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:CodeRepresentation>
                     <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-CodeListReference', .)" tunnel="yes"/>
@@ -1091,20 +1109,20 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!-- Because of the xsl:for-each, driver context needs to be kept. -->
         <xsl:variable name="driver" select="."/>
-        <xsl:for-each select="enoddi32:get-grid-dimensions($source-context)">
-            <d:GridResponseDomain>
+        <xsl:for-each select="enoddi33:get-grid-dimensions($source-context)">
+            <d:GridResponseDomainInMixed>
                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
-                    <xsl:with-param name="mandatory" select="enoddi32:get-ci-type($source-context)" tunnel="yes"/>
+                    <xsl:with-param name="mandatory" select="enoddi33:get-ci-type($source-context)" tunnel="yes"/>
                 </xsl:apply-templates>
                 <d:GridAttachment>
                     <d:CellCoordinatesAsDefined>
-                        <xsl:for-each select="enoddi32:get-cell-coordinates($source-context)">
+                        <xsl:for-each select="enoddi33:get-cell-coordinates($source-context)">
                             <d:SelectDimension rank="{position()}" rangeMinimum="{.}" rangeMaximum="{.}"/>
                         </xsl:for-each>
                     </d:CellCoordinatesAsDefined>
                 </d:GridAttachment>
-            </d:GridResponseDomain>
+            </d:GridResponseDomainInMixed>
         </xsl:for-each>
     </xsl:template>
     
@@ -1162,13 +1180,13 @@
         <xsl:element name="{$ddi-element-name}">
             <!-- Getting the triplet Agency/Id/Version -->
             <xsl:element name="r:Agency"><xsl:value-of select="$agency"/></xsl:element>
-            <xsl:element name="r:ID"><xsl:value-of select="enoddi32:get-id($source-context)"/></xsl:element>
-            <xsl:element name="r:Version"><xsl:value-of select="enoddi32:get-version($source-context)"/></xsl:element>
+            <xsl:element name="r:ID"><xsl:value-of select="enoddi33:get-id($source-context)"/></xsl:element>
+            <xsl:element name="r:Version"><xsl:value-of select="enoddi33:get-version($source-context)"/></xsl:element>
             <!-- QuestionName part -->
             <xsl:element name="{$ddi-question-name-element}">                
                <xsl:element name="r:String">
-                   <xsl:attribute name="xml:lang" select="enoddi32:get-lang($source-context)"/>
-                   <xsl:value-of select="enoddi32:get-name($source-context)"/>
+                   <xsl:attribute name="xml:lang" select="enoddi33:get-lang($source-context)"/>
+                   <xsl:value-of select="enoddi33:get-name($source-context)"/>
                </xsl:element>                
             </xsl:element>            
             <!-- OutParameter part -->
@@ -1185,8 +1203,8 @@
             <xsl:element name="d:QuestionText">            
                 <xsl:element name="d:LiteralText">
                     <xsl:element name="d:Text">
-                        <xsl:attribute name="xml:lang" select="enoddi32:get-lang($source-context)"/>
-                        <xsl:value-of select="enoddi32:get-label($source-context)"/>
+                        <xsl:attribute name="xml:lang" select="enoddi33:get-lang($source-context)"/>
+                        <xsl:value-of select="enoddi33:get-label($source-context)"/>
                     </xsl:element>
                 </xsl:element>
             </xsl:element>
@@ -1215,46 +1233,46 @@
         </xsl:element>
     </xsl:template>
 
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
+    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-OutParameter//*" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
    
     
-    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
+    <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-OutParameter//ResponseDomain" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:element name="r:OutParameter">
             <xsl:attribute name="isArray" select="'false'"/>
             <xsl:element name="r:Agency"><xsl:value-of select="$agency"/></xsl:element>
-            <xsl:element name="r:ID"><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></xsl:element>
-            <xsl:element name="r:Version"><xsl:value-of select="enoddi32:get-version($source-context)"/></xsl:element><xsl:element name="r:ParameterName">
-                <xsl:variable name="relatedVariable" select="enoddi32:get-related-variable($source-context)"/>
+            <xsl:element name="r:ID"><xsl:value-of select="enoddi33:get-qop-id($source-context)"/></xsl:element>
+            <xsl:element name="r:Version"><xsl:value-of select="enoddi33:get-version($source-context)"/></xsl:element><xsl:element name="r:ParameterName">
+                <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
                 <xsl:element name="r:String">
-                    <xsl:attribute name="xml:lang" select="enoddi32:get-lang($source-context)"/>
-                    <xsl:value-of select="enoddi32:get-name($relatedVariable)"/>
+                    <xsl:attribute name="xml:lang" select="enoddi33:get-lang($source-context)"/>
+                    <xsl:value-of select="enoddi33:get-name($relatedVariable)"/>
                 </xsl:element>
             </xsl:element>
         </xsl:element>
     </xsl:template>
            
-    <!--this part is designed in this complicated way to maintain the order of the ddi 3.2 xsd schema-->
+    <!--this part is designed in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-Binding//ResponseDomain" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:Binding>
             <r:SourceParameterReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:SourceParameterReference>
             <r:TargetParameterReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-qop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-qop-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:TargetParameterReference>
         </r:Binding>
@@ -1275,7 +1293,7 @@
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
-        <xsl:variable name="fake-dimension" select="enoddi32:get-fake-dimension($source-context)"/>
+        <xsl:variable name="fake-dimension" select="enoddi33:get-fake-dimension($source-context)"/>
         <xsl:if test="$fake-dimension">
             <xsl:apply-templates select="$fake-dimension" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -1288,8 +1306,8 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>ComputationItem</r:TypeOfObject>
         </d:ControlConstructReference>        
     </xsl:template>-->
@@ -1302,8 +1320,8 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:CodeListReference>	
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>CodeList</r:TypeOfObject>
         </r:CodeListReference>
     </xsl:template>
@@ -1312,12 +1330,12 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
-        <d:TextDomain maxLength="{enoddi32:get-max-length($source-context)}">
+        <d:TextDomain maxLength="{enoddi33:get-max-length($source-context)}">
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
+                <r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                <r:TextRepresentation maxLength="{enoddi33:get-max-length($source-context)}"/>
             </r:OutParameter>
 			<xsl:if test="$mandatory = 'mandatory'">
 				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
@@ -1328,7 +1346,7 @@
     <xsl:template match="driver-VariableScheme//TextDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
+        <r:TextRepresentation maxLength="{enoddi33:get-max-length($source-context)}"/>
     </xsl:template>
 
     <xsl:template match="NumericDomain" mode="model">
@@ -1336,23 +1354,23 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
         <d:NumericDomain>
-            <xsl:variable name="decimalPositions" select="enoddi32:get-decimal-positions($source-context)"/>
+            <xsl:variable name="decimalPositions" select="enoddi33:get-decimal-positions($source-context)"/>
             <xsl:if test="number($decimalPositions) = number($decimalPositions) and number($decimalPositions) &gt; 0">
                 <xsl:attribute name="decimalPositions" select="$decimalPositions"/>
             </xsl:if>
             <r:NumberRange>
                 <r:Low isInclusive="true">
-                    <xsl:value-of select="enoddi32:get-low($source-context)"/>
+                    <xsl:value-of select="enoddi33:get-low($source-context)"/>
                 </r:Low>
                 <r:High isInclusive="true">
-                    <xsl:value-of select="enoddi32:get-high($source-context)"/>
+                    <xsl:value-of select="enoddi33:get-high($source-context)"/>
                 </r:High>
             </r:NumberRange>
-            <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+            <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             </r:OutParameter>
 			<xsl:if test="$mandatory = 'mandatory'">
 				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
@@ -1364,89 +1382,159 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="driver" select="."/>
-        <xsl:variable name="decimalPositions" select="enoddi32:get-decimal-positions($source-context)"/>
+        <xsl:variable name="decimalPositions" select="enoddi33:get-decimal-positions($source-context)"/>
 		<r:NumericRepresentation>
 			<xsl:if test="number($decimalPositions) = number($decimalPositions) and number($decimalPositions) &gt; 0">
 				<xsl:attribute name="decimalPositions" select="$decimalPositions"/>
 			</xsl:if>
+			<!-- MeasurementUnit -->
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+	            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
+	            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+	        </xsl:apply-templates>
 			<r:NumberRange>
                 <r:Low isInclusive="true">
-                    <xsl:value-of select="enoddi32:get-low($source-context)"/>
+                    <xsl:value-of select="enoddi33:get-low($source-context)"/>
                 </r:Low>
                 <r:High isInclusive="true">
-                    <xsl:value-of select="enoddi32:get-high($source-context)"/>
+                    <xsl:value-of select="enoddi33:get-high($source-context)"/>
                 </r:High>
             </r:NumberRange>
-            <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+            <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
 		</r:NumericRepresentation>
-		<!-- MeasurementUnit -->
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
-            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-        </xsl:apply-templates>
     </xsl:template>
 
     <xsl:template match="DateTimeDomain | DurationDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
-        <xsl:variable name="format" select="enoddi32:get-format($source-context)"/>
+        <xsl:variable name="maxVal" select="enoddi33:get-high($source-context)"/>
+        <xsl:variable name="minVal" select="enoddi33:get-low($source-context)"/>
+        <!-- Keep compatibility with old date if they don't have format -->
+        <xsl:variable name="format">
+			<xsl:choose>
+				<xsl:when test="enoddi33:get-format($source-context) != ''"><xsl:value-of  select="enoddi33:get-format($source-context)"/></xsl:when>
+				<xsl:otherwise>YYYY-MM-DD</xsl:otherwise>
+	        </xsl:choose>
+        </xsl:variable>
         <!-- Id definition depend on date or duration type -->
         <xsl:variable name="id-date-duration">
         	<xsl:choose>
-        		<xsl:when test="name() = 'DurationDomain'">Duration</xsl:when>
-        		<xsl:otherwise>DateTimedate</xsl:otherwise>
-	        </xsl:choose>
-	       	<!-- Keep compatibility with old date if they don't have format -->
-	       	<xsl:choose>
-        		<xsl:when test="$format != ''"><xsl:value-of  select="concat('-',$format)"/></xsl:when>
-        		<xsl:otherwise><xsl:value-of  select="concat('-', 'YYYY-MM-DD')"/></xsl:otherwise>
+				<xsl:when test="name() = 'DurationDomain'"><xsl:value-of  select="concat('Duration-', $format)"/></xsl:when>
+				<xsl:otherwise><xsl:value-of  select="concat('DateTimedate-', $format)"/></xsl:otherwise>
 	        </xsl:choose>
         </xsl:variable>
-        <d:DateTimeDomainReference>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
-            <r:OutParameter isArray="false">
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                <r:DateTimeRepresentationReference>
-                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-                    <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
-                </r:DateTimeRepresentationReference>
-            </r:OutParameter>
-			<xsl:if test="$mandatory = 'mandatory'">
-				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
-			</xsl:if>
-        </d:DateTimeDomainReference>        
+        <!-- TypeCode depend on format -->
+        <xsl:variable name="DateTypeCode">
+			<xsl:choose>
+				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
+				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
+				<xsl:when test="$format = ('PnYnM', 'PTnHnM')">duration</xsl:when>
+				<xsl:otherwise>date</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<!-- Generate DateTimeRepresentation or DateTimeRepresentationReference depending on min and max existence -->
+        <xsl:choose>
+			<xsl:when test="$maxVal != '' or $minVal != ''">
+				<d:DateTimeDomain>
+					<r:DateFieldFormat><xsl:value-of select="$format"/></r:DateFieldFormat>
+					<r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><xsl:value-of  select="$DateTypeCode"/></r:DateTypeCode>
+					<r:Range>
+						<xsl:if test="$minVal != '' ">
+							<r:MinimumValue included="true"><xsl:value-of  select="$minVal"/></r:MinimumValue>
+						</xsl:if>
+						<xsl:if test="$maxVal != '' ">
+							<r:MaximumValue included="true"><xsl:value-of  select="$maxVal"/></r:MaximumValue>
+						</xsl:if>
+					</r:Range>
+					<r:OutParameter isArray="false">
+						<r:Agency><xsl:value-of select="$agency"/></r:Agency>
+						<r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
+						<r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+					</r:OutParameter>
+					<xsl:if test="$mandatory = 'mandatory'">
+						<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+					</xsl:if>
+				</d:DateTimeDomain>
+			</xsl:when>
+			<xsl:otherwise>
+				<d:DateTimeDomainReference>
+		            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		            <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
+		            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+		            <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+		            <r:OutParameter isArray="false">
+		                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                <r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
+		                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+		                <r:DateTimeRepresentationReference>
+		                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                    <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
+		                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+		                    <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+		                </r:DateTimeRepresentationReference>
+		            </r:OutParameter>
+					<xsl:if test="$mandatory = 'mandatory'">
+						<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+					</xsl:if>
+		        </d:DateTimeDomainReference>
+			</xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
 	<xsl:template match="driver-VariableScheme//DateTimeDomain | driver-VariableScheme//DurationDomain" mode="model">
     	<xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:variable name="format" select="enoddi32:get-format($source-context)"/>
+        <xsl:variable name="maxVal" select="enoddi33:get-high($source-context)"/>
+        <xsl:variable name="minVal" select="enoddi33:get-low($source-context)"/>
+        <!-- Keep compatibility with old date if they don't have format -->
+        <xsl:variable name="format">
+			<xsl:choose>
+				<xsl:when test="enoddi33:get-format($source-context) != ''"><xsl:value-of  select="enoddi33:get-format($source-context)"/></xsl:when>
+				<xsl:otherwise>YYYY-MM-DD</xsl:otherwise>
+	        </xsl:choose>
+        </xsl:variable>
         <!-- Id definition depend on date or duration type -->
         <xsl:variable name="id-date-duration">
         	<xsl:choose>
-        		<xsl:when test="name() = 'DurationDomain'">Duration</xsl:when>
-        		<xsl:otherwise>DateTimedate</xsl:otherwise>
-	        </xsl:choose>
-	       	<!-- Keep compatibility with old date if they don't have format -->
-	       	<xsl:choose>
-        		<xsl:when test="$format != ''"><xsl:value-of  select="concat('-',$format)"/></xsl:when>
-        		<xsl:otherwise><xsl:value-of  select="concat('-', 'YYYY-MM-DD')"/></xsl:otherwise>
+				<xsl:when test="name() = 'DurationDomain'"><xsl:value-of  select="concat('Duration-', $format)"/></xsl:when>
+				<xsl:otherwise><xsl:value-of  select="concat('DateTimedate-', $format)"/></xsl:otherwise>
 	        </xsl:choose>
         </xsl:variable>
-		<r:DateTimeRepresentationReference>
-			<r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
-		</r:DateTimeRepresentationReference>
+        <!-- TypeCode depend on format -->
+        <xsl:variable name="DateTypeCode">
+			<xsl:choose>
+				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
+				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
+				<xsl:when test="$format = ('PnYnM', 'PTnHnM')">duration</xsl:when>
+				<xsl:otherwise>date</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<!-- Generate DateTimeRepresentation or DateTimeRepresentationReference depending on min and max existence -->
+        <xsl:choose>
+			<xsl:when test="$maxVal != '' or $minVal != ''">
+				<r:DateTimeRepresentation>
+					<r:DateFieldFormat><xsl:value-of select="$format"/></r:DateFieldFormat>
+					<r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV"><xsl:value-of  select="$DateTypeCode"/></r:DateTypeCode>
+					<r:Range>
+						<xsl:if test="$minVal != '' ">
+							<r:MinimumValue included="true"><xsl:value-of  select="$minVal"/></r:MinimumValue>
+						</xsl:if>
+						<xsl:if test="$maxVal != '' ">
+							<r:MaximumValue included="true"><xsl:value-of  select="$maxVal"/></r:MaximumValue>
+						</xsl:if>
+					</r:Range>
+				</r:DateTimeRepresentation>
+			</xsl:when>
+			<xsl:otherwise>
+				<r:DateTimeRepresentationReference>
+					<r:Agency><xsl:value-of select="$agency"/></r:Agency>
+					<r:ID>INSEE-COMMUN-MNR-<xsl:value-of select="$id-date-duration"/></r:ID>
+					<r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+					<r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+				</r:DateTimeRepresentationReference>
+			</xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
 	<xsl:template match="driver-ManagedRepresentationScheme//*" mode="model">
@@ -1487,15 +1575,15 @@
         <d:NominalDomain>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:CodeRepresentation>
                     <r:CodeSubsetInformation>
                         <r:IncludedCode>
                             <r:CodeReference>
                                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                                 <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
-                                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                                 <r:TypeOfObject>Code</r:TypeOfObject>
                             </r:CodeReference>
                         </r:IncludedCode>
@@ -1521,7 +1609,7 @@
 	               	<r:CodeReference>
                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
 	                   <r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID>
-	                   <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+	                   <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
 	                   <r:TypeOfObject>Code</r:TypeOfObject>
 	               	</r:CodeReference>
             	</r:IncludedCode>
@@ -1536,22 +1624,22 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
         <d:CodeDomain>
-            <r:GenericOutputFormat codeListID="INSEE-GOF-CV"><xsl:value-of select="enoddi32:get-generic-output-format($source-context)"/></r:GenericOutputFormat>            
+            <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV"><xsl:value-of select="enoddi33:get-generic-output-format($source-context)"/></r:GenericOutputFormat>
             <r:CodeListReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-code-list-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-code-list-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>CodeList</r:TypeOfObject>
             </r:CodeListReference>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                <r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:CodeRepresentation>
                     <r:CodeListReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="enoddi32:get-code-list-id($source-context)"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                        <r:ID><xsl:value-of select="enoddi33:get-code-list-id($source-context)"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                         <r:TypeOfObject>CodeList</r:TypeOfObject>
                     </r:CodeListReference>
                 </r:CodeRepresentation>
@@ -1568,13 +1656,13 @@
     <xsl:template match="RosterDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:GridDimension displayCode="false" displayLabel="false" rank="{enoddi32:get-rank($source-context)}">
+        <d:GridDimension displayCode="false" displayLabel="false" rank="{enoddi33:get-rank($source-context)}">
             <d:Roster baseCodeValue="1" codeIterationValue="1">
                 <xsl:attribute name="minimumRequired">
-                    <xsl:value-of select="substring-before(enoddi32:get-dynamic($source-context), '-')"/>
+                    <xsl:value-of select="substring-before(enoddi33:get-dynamic($source-context), '-')"/>
                 </xsl:attribute>
                 <xsl:attribute name="maximumAllowed">
-                    <xsl:value-of select="substring-after(enoddi32:get-dynamic($source-context), '-')"/>
+                    <xsl:value-of select="substring-after(enoddi33:get-dynamic($source-context), '-')"/>
                 </xsl:attribute>
             </d:Roster>
        </d:GridDimension>
@@ -1588,24 +1676,24 @@
     <xsl:template match="CodeDomainDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
-        <d:GridDimension displayCode="false" displayLabel="false" rank="{enoddi32:get-rank($source-context)}">
+        <d:GridDimension displayCode="false" displayLabel="false" rank="{enoddi33:get-rank($source-context)}">
             <d:CodeDomain>
                 <r:CodeListReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="enoddi32:get-id($source-context)"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
+                    <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                     <r:TypeOfObject>CodeList</r:TypeOfObject>
                 </r:CodeListReference>
             </d:CodeDomain>
         </d:GridDimension>
     </xsl:template>
     
-    <xsl:template match="*" mode="enoddi32:question-reference">        
-        <xsl:variable name="elementName" select="if(enoddi32:get-question-type(.) = ('MULTIPLE_CHOICE','TABLE','DYNAMIC_TABLE')) then('QuestionGrid') else('QuestionItem')"/>
+    <xsl:template match="*" mode="enoddi33:question-reference">
+        <xsl:variable name="elementName" select="if(enoddi33:get-question-type(.) = ('MULTIPLE_CHOICE','TABLE','DYNAMIC_TABLE')) then('QuestionGrid') else('QuestionItem')"/>
             <r:QuestionReference>
-                <r:Agency><xsl:value-of select="enoddi32:get-agency(.)"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi32:get-question-id(.)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi32:get-version(.)"/></r:Version>
+                <r:Agency><xsl:value-of select="enoddi33:get-agency(.)"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi33:get-question-id(.)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version(.)"/></r:Version>
                 <r:TypeOfObject><xsl:value-of select="$elementName"/></r:TypeOfObject>
             </r:QuestionReference>        
     </xsl:template>
