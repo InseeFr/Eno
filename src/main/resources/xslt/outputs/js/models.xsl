@@ -204,7 +204,7 @@
 			$variablesRelevant
 			)"/>
 		
-		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>
+		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
 		
 		<xsl:variable name="nbMinimumLines" select="enojs:get-minimum-lines($source-context)"/>
 		<xsl:variable name="nbMaximumLines" select="enojs:get-maximum-lines($source-context)"/>
@@ -433,7 +433,7 @@
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
 		
-		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>	
+		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>	
 		
 		<xsl:variable name="componentType-Input" select="'Input'"/>
 		<xsl:variable name="componentType-InputNumber" select="'InputNumber'"/>
@@ -552,7 +552,7 @@
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
 		
-		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>
+		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
 		
 		<xsl:variable name="componentType-Datepicker" select="'Datepicker'"/>
 		
@@ -614,7 +614,7 @@
 		
 		<xsl:param name="position" tunnel="yes"/>
 		
-		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>
+		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
 		
 		<xsl:variable name="componentType-CheckboxOne" select="'CheckboxOne'"/>
 		<xsl:variable name="componentType-CheckboxBoolean" select="'CheckboxBoolean'"/>
@@ -749,7 +749,7 @@
 		
 		<xsl:param name="position" tunnel="yes"/>
 		
-		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>
+		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
 		
 		<xsl:variable name="componentType-Radio" select="'Radio'"/>
 		<xsl:variable name="componentType-Dropdown" select="'Dropdown'"/>
@@ -896,7 +896,7 @@
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
 		
-		<xsl:variable name="mandatory" select="enojs:get-required($source-context)" as="xs:boolean"/>
+		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
 		<xsl:variable name="componentType-Textarea" select="'Textarea'"/>
 		
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>

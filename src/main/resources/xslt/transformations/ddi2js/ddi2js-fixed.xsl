@@ -146,16 +146,4 @@
                             /descendant::d:QuestionConstruct/r:ID=current()/ancestor::d:QuestionConstruct/r:ID]"/>
     </xsl:template>
     
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:function name="enojs:get-required">
-        <xsl:param name="context" as="item()"/>
-        <xsl:variable name="minimum-responses" select="enoddi:get-minimum-responses($context)"/>
-        <xsl:value-of select="$minimum-responses!='' and $minimum-responses!='0'"/>
-    </xsl:function>
-    
-
 </xsl:stylesheet>
