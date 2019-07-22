@@ -58,7 +58,7 @@
                     <xsl:variable name="nbLinesExpected" select="h:lines/@max"/>
                     <xsl:choose>
                         <xsl:when test="$nbLines = 1">
-                            <xsl:variable name="cell" select="enojs:prepareCellsForRoaster(h:cells[@type='line'])"/>
+                            <xsl:variable name="cell" select="enojs:prepareCellsForRoster(h:cells[@type='line'])"/>
                             <xsl:apply-templates mode="roaster" select="$cell">
                                 <xsl:with-param name="idLine" select="1" tunnel="yes"/>
                                 <xsl:with-param name="ancestor" select="'table'" tunnel="yes"/>
@@ -155,14 +155,14 @@
     <xsl:template match="h:valueState">
         <valueState>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="node()"/>
         </valueState>
     </xsl:template>
     
     <xsl:template match="h:codeLists">
         <codeLists>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="node()"/>
         </codeLists>
     </xsl:template>	
 
@@ -198,7 +198,7 @@
     <xsl:template match="h:options">
         <options>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="node()"/>
         </options>
     </xsl:template>
     
@@ -261,7 +261,7 @@
     </xsl:template>
     
     
-    <xsl:function name="enojs:prepareCellsForRoaster">
+    <xsl:function name="enojs:prepareCellsForRoster">
         <xsl:param name="cell" as="node()"/>        
         <cells>
             <xsl:copy-of select="$cell/@*"/>
