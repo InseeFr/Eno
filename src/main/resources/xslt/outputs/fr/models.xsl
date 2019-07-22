@@ -352,7 +352,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:variable name="required" select="enofr:get-required($source-context)"/>
+        <xsl:variable name="required" select="enofr:is-required($source-context)" as="xs:boolean"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
         <xsl:variable name="variable-calculate" select="enofr:get-variable-calculation($source-context)"/>
         <xsl:variable name="fixed-cell-calculate" select="enofr:get-cell-value($source-context)"/>
@@ -362,7 +362,7 @@
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
-            <xsl:if test="not($required = ('false()', ''))">
+            <xsl:if test="$required">
                 <xsl:attribute name="required" select="$required"/>
             </xsl:if>
             <xsl:if test="$relevant != ''">
@@ -510,14 +510,14 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:variable name="required" select="enofr:get-required($source-context)"/>
+        <xsl:variable name="required" select="enofr:is-required($source-context)" as="xs:boolean"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
         <xsl:variable name="type" select="enofr:get-type($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
-            <xsl:if test="not($required = ('false()', ''))">
+            <xsl:if test="$required">
                 <xsl:attribute name="required" select="$required"/>
             </xsl:if>
             <xsl:if test="$relevant != ''">
@@ -589,7 +589,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:variable name="required" select="enofr:get-required($source-context)"/>
+        <xsl:variable name="required" select="enofr:is-required($source-context)" as="xs:boolean"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
         <xsl:variable name="type" select="enofr:get-type($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
@@ -605,7 +605,7 @@
         </xsl:variable>
         
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
-            <xsl:if test="not($required = ('false()', ''))">
+            <xsl:if test="$required">
                 <xsl:attribute name="required" select="$required"/>
             </xsl:if>
             <xsl:if test="$relevant != ''">
@@ -1068,7 +1068,7 @@
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="current-driver" select="self::*/local-name()"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:variable name="required" select="enofr:get-required($source-context)"/>
+        <xsl:variable name="required" select="enofr:is-required($source-context)" as="xs:boolean"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="dateduration-format" select="upper-case(enofr:get-format($source-context))"/>
@@ -1162,7 +1162,7 @@
                 <xsl:if test="self::DurationDomain">
                     <xsl:attribute name="type" select="'xf:number'"/>
                 </xsl:if>
-                <xsl:if test="not($required = ('false()', ''))">
+                <xsl:if test="$required">
                     <xsl:attribute name="required" select="$required"/>
                 </xsl:if>
                 <xsl:if test="$relevant != ''">
