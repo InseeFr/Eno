@@ -1039,13 +1039,15 @@
 				<valueState valueType="{.}">
 					<xsl:choose>
 						<xsl:when test="$responseType='Int'">
-							<value>0</value>
+							<value xsi:nil="true"/>
+							<!--<value><xsl:value-of select="false()"/></value>-->
 						</xsl:when>
 						<xsl:when test="$responseType='Boolean'">
-							<value><xsl:value-of select="false()"/></value>
+							<value xsi:nil="true"/>
+							<!--<value><xsl:value-of select="false()"/></value>-->
 						</xsl:when>
 						<xsl:otherwise>
-							<value/>
+							<value xsi:nil="true"/>
 						</xsl:otherwise>
 					</xsl:choose>
 				</valueState>
