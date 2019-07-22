@@ -1080,4 +1080,18 @@
         <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference[not(preceding-sibling::d:ControlConstructReference)]/ancestor::d:IfThenElse[not(d:ExternalAid)]/r:Description"/>
     </xsl:template>
     
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function for retrieving instructions before the label of the question</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoddi:get-previous-statement-item">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi:get-previous-statement-item"/>
+    </xsl:function>
+    
+    <xsl:template match="*" mode="enoddi:get-previous-statement-item">
+        <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference/preceding-sibling::d:ControlConstructReference/d:StatementItem[parent::d:ControlConstructReference/following-sibling::d:ControlConstructReference[descendant::d:QuestionConstruct][1]/descendant::d:QuestionConstruct/r:ID=current()/ancestor::d:QuestionConstruct/r:ID]"></xsl:sequence>
+    </xsl:template>
+    
 </xsl:stylesheet>

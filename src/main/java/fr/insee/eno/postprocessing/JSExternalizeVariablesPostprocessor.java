@@ -14,9 +14,9 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * Customization of JS postprocessor.
  */
-public class JSExternalizeCodeListsPostprocessor implements Postprocessor {
+public class JSExternalizeVariablesPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(JSExternalizeCodeListsPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(JSExternalizeVariablesPostprocessor.class);
 
 	// FIXME Inject !
 	private static XslTransformation saxonService = new XslTransformation();
@@ -27,7 +27,7 @@ public class JSExternalizeCodeListsPostprocessor implements Postprocessor {
 		File outputCustomFOFile = new File(
 				input.getPath().replace(Constants.SORT_COMPONENTS_JS_EXTENSION, Constants.FINAL_JS_EXTENSION));
 		
-		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EXTERNALIZE_CODELISTS_JS);
+		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS);
 		
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputCustomFOFile);

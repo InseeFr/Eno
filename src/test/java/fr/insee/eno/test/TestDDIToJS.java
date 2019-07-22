@@ -9,9 +9,8 @@ import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2JSGenerator;
-import fr.insee.eno.postprocessing.JSExternalizeCodeListsPostprocessor;
+import fr.insee.eno.postprocessing.JSExternalizeVariablesPostprocessor;
 import fr.insee.eno.postprocessing.JSSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
@@ -26,7 +25,7 @@ public class TestDDIToJS {
 			String basePath = "src/test/resources/ddi-to-js";
 			Postprocessor[] postprocessors =  {
 					new JSSortComponentsPostprocessor(),
-					new JSExternalizeCodeListsPostprocessor()};
+					new JSExternalizeVariablesPostprocessor()};
 			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2JSGenerator(),postprocessors);
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-js-test");
@@ -46,7 +45,7 @@ public class TestDDIToJS {
 			Assert.fail();
 		}
 	}
-
+	
 	private String getDiffMessage(Diff diff, String path) {
 		return String.format("Transformed output for %s should match expected XML document:\n %s", path,
 				diff.toString());
