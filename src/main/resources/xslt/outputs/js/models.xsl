@@ -102,6 +102,8 @@
 		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
 		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
 		
+		<xsl:variable name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" />
+		
 		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
 			.,
 			$formulaReadOnly,
@@ -112,6 +114,7 @@
 		
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
+			<xsl:copy-of select="$declarations"/>
 			<xsl:copy-of select="$filterCondition"/>
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -138,6 +141,8 @@
 		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
 		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
 		
+		<xsl:variable name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" />
+		
 		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
 			.,
 			$formulaReadOnly,
@@ -148,7 +153,8 @@
 		
 		<components xsi:type="{$componentType-Subsequence}" componentType="{$componentType-Subsequence}" id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
-			<xsl:copy-of select="$filterCondition"/>			
+			<xsl:copy-of select="$declarations"/>
+			<xsl:copy-of select="$filterCondition"/>
 			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
