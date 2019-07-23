@@ -2357,7 +2357,10 @@
                         <format id="Y" unit="Year">
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
-                                    <xsl:when test="$minimum != '' and contains($minimum,'-')">
+                                    <xsl:when test="contains($minimum,'current-date')">
+                                        <xsl:value-of select="year-from-date(current-date())"/>
+                                    </xsl:when>
+                                    <xsl:when test="contains($minimum,'-')">
                                         <xsl:value-of select="substring-before($minimum,'-')"/>
                                     </xsl:when>
                                     <xsl:when test="$minimum != ''">
@@ -2370,7 +2373,10 @@
                             </xsl:attribute>
                             <xsl:attribute name="maximum">
                                 <xsl:choose>
-                                    <xsl:when test="$maximum != '' and contains($maximum,'-')">
+                                    <xsl:when test="contains($maximum,'current-date')">
+                                        <xsl:value-of select="year-from-date(current-date())"/>
+                                    </xsl:when>
+                                    <xsl:when test="contains($maximum,'-')">
                                         <xsl:value-of select="substring-before($maximum,'-')"/>
                                     </xsl:when>
                                     <xsl:when test="$maximum != ''">
