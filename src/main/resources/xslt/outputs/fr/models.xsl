@@ -409,7 +409,7 @@
                 <xsl:attribute name="calculate">
                     <xsl:call-template name="label-ref-condition">
                         <xsl:with-param name="source-context" select="$source-context"/>
-                        <xsl:with-param name="label" select="$fixed-cell-calculate"/>
+                        <xsl:with-param name="label" select="concat('''',replace($fixed-cell-calculate,'''',''''''),'''')"/>
                         <xsl:with-param name="conditioning-variables" select="enofr:get-cell-value-variables($source-context)"/>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>

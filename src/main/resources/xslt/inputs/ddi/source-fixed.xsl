@@ -808,7 +808,7 @@
             <xd:p>Function that returns the list of the variables of the value of a fixed cell.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="d:FixedCellValue" mode="enoddi:get-cell-value-variables">
+    <xsl:template match="d:NoDataByDefinition" mode="enoddi:get-cell-value-variables">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:variable name="variable-list" as="xs:string *">
             <xsl:call-template name="enoddi:variables-from-label">
