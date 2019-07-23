@@ -234,6 +234,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
+			<xsl:with-param name="other-give-details" select="true()" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
 
@@ -1000,7 +1001,6 @@
 				</fo:inline>
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
-					<xsl:with-param name="other-give-details" select="true()" tunnel="yes"/>
 				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
@@ -1027,7 +1027,6 @@
 						</fo:block>
 						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 							<xsl:with-param name="driver" select="." tunnel="yes"/>
-							<xsl:with-param name="other-give-details" select="true()" tunnel="yes"/>
 						</xsl:apply-templates>
 					</fo:list-item-body>
 				</fo:list-item>
