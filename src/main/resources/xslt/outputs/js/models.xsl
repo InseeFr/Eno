@@ -932,7 +932,14 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="positionDeclaration" tunnel="yes"></xsl:param>
 		
-		<xsl:variable name="instructionFormat" select="upper-case(enojs:get-format($source-context))"/>
+		<xsl:variable name="instructionFormat">
+			<xsl:variable name="format" select="upper-case(enojs:get-format($source-context))"/>
+			<xsl:choose>
+				<xsl:when test="$format!=''"><xsl:value-of select="$format"/></xsl:when>
+				<!-- Default value : COMMENT -->
+				<xsl:otherwise><xsl:value-of select="'COMMENT'"/></xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable> select="upper-case(enojs:get-format($source-context))"
 		<xsl:variable name="instructionLabel" select="enojs:get-label($source-context, $languages[1])"/>
 		<xsl:variable name="instructionFormatMaj" select="concat(upper-case(substring($instructionFormat,1,1)),
 			substring($instructionFormat,2))" as="xs:string"/>
