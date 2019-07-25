@@ -366,7 +366,7 @@
 			)"/>
 		
 		<xsl:if test="$typeOfQuestion='MultipleChoiceQuestion'">
-			<components xsi:type="Checkbox" componentType="Checkbox" id="{$idQuestion}">
+			<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
 				<label><xsl:value-of select="$labelQuestion"/></label>
 				<xsl:copy-of select="$declarations"/>
 				<xsl:copy-of select="$filterCondition"/>
@@ -654,17 +654,17 @@
 			</xsl:when>
 			
 			<xsl:when test="$typeResponse='boolean' and $typeOfQuestion='MultipleChoiceQuestion' and $typeOfAncestor!='table'">
-				<options id="{enojs:get-name($source-context)}">
+				<responses id="{enojs:get-name($source-context)}">
 					<!-- call item driver for the label -->
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
-						<xsl:with-param name="typeOfAncestor" select="'Checkbox'" tunnel="yes"/>
+						<xsl:with-param name="typeOfAncestor" select="'CheckboxGroup'" tunnel="yes"/>
 					</xsl:apply-templates>
 					<xsl:call-template name="enojs:addResponseToComponents">
 						<xsl:with-param name="responseName" select="$responseName"/>
 						<xsl:with-param name="responseType" select="'Boolean'"/>
 					</xsl:call-template>
-				</options>
+				</responses>
 				<xsl:call-template name="enojs:addVariableCollected">
 					<xsl:with-param name="responseName" select="$responseName"/>
 					<xsl:with-param name="responseRef" select="$responseName"/>
@@ -847,7 +847,7 @@
 					<label><xsl:value-of select="$label"/></label>
 				</options>
 			</xsl:when>
-			<xsl:when test="$label !='' and $typeOfAncestor='Checkbox'">
+			<xsl:when test="$label !='' and $typeOfAncestor='CheckboxGroup'">
 				<label><xsl:value-of select="$label"/></label>
 			</xsl:when>
 		</xsl:choose>
