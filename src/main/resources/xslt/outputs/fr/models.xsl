@@ -355,7 +355,6 @@
         <xsl:variable name="required" select="enofr:is-required($source-context)" as="xs:boolean"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
         <xsl:variable name="variable-calculate" select="enofr:get-variable-calculation($source-context)"/>
-        <xsl:variable name="fixed-cell-calculate" select="enofr:get-cell-value($source-context)"/>
         <xsl:variable name="type" select="enofr:get-type($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="constraint" select="enofr:get-constraint($source-context)"/>
@@ -363,7 +362,7 @@
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="$required">
-                <xsl:attribute name="required" select="$required"/>
+                <xsl:attribute name="required" select="'true()'"/>
             </xsl:if>
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
@@ -401,16 +400,6 @@
                                 </xsl:for-each>
                             </Variables>
                         </xsl:with-param>
-                        <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="$fixed-cell-calculate != ''">
-                <xsl:attribute name="calculate">
-                    <xsl:call-template name="label-ref-condition">
-                        <xsl:with-param name="source-context" select="$source-context"/>
-                        <xsl:with-param name="label" select="concat('''',replace($fixed-cell-calculate,'''',''''''),'''')"/>
-                        <xsl:with-param name="conditioning-variables" select="enofr:get-cell-value-variables($source-context)"/>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>
                 </xsl:attribute>
@@ -518,7 +507,7 @@
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="$required">
-                <xsl:attribute name="required" select="$required"/>
+                <xsl:attribute name="required" select="'true()'"/>
             </xsl:if>
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
@@ -603,10 +592,10 @@
                 <xsl:otherwise>xs:integer</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        
+
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="$required">
-                <xsl:attribute name="required" select="$required"/>
+                <xsl:attribute name="required" select="'true()'"/>
             </xsl:if>
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
@@ -781,7 +770,7 @@
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>Recursive named template which calculated the regex of a positive number</xd:desc>
         <xd:desc>5 cases :
@@ -1099,12 +1088,12 @@
                                             <xsl:value-of select="' and '"/>
                                         </xsl:when>
                                         <xsl:otherwise>
-                                            <xsl:value-of select="' or '"/>        
+                                            <xsl:value-of select="' or '"/>
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </xsl:if>
                                 <xsl:value-of select="concat('../',@variable,' = '''' ')"/>
-                            </xsl:for-each>                            
+                            </xsl:for-each>
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:value-of select="') then '''' else (concat( '"/>
@@ -1163,7 +1152,7 @@
                     <xsl:attribute name="type" select="'xf:number'"/>
                 </xsl:if>
                 <xsl:if test="$required">
-                    <xsl:attribute name="required" select="$required"/>
+                    <xsl:attribute name="required" select="'true()'"/>
                 </xsl:if>
                 <xsl:if test="$relevant != ''">
                     <xsl:attribute name="relevant">
@@ -1320,6 +1309,48 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Template for Resource for the driver FixedCell.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Resource//FixedCell" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="language" tunnel="yes"/>
+
+        <xsl:variable name="label" select="eno:serialize(enofr:get-label($source-context, $language))"/>
+        <xsl:variable name="value" select="eno:serialize(enofr:get-cell-value($source-context))"/>
+
+        <xsl:element name="{enofr:get-name($source-context)}">
+            <label>
+                <xsl:choose>
+                    <xsl:when test="$label != '' and $value !=''">
+                        <xsl:choose>
+                            <xsl:when test="contains($label,'xhtml:p') and contains($value,'xhtml:p')">
+                                <xsl:value-of select="concat($label,$value)"/>
+                            </xsl:when>
+                            <xsl:when test="contains($value,'xhtml:p')">
+                                <xsl:value-of select="concat('&lt;xhtml:p&gt;',$label,'&lt;/xhtml:p&gt;',$value)"/>
+                            </xsl:when>
+                            <xsl:when test="contains($label,'xhtml:p')">
+                                <xsl:value-of select="concat($label,'&lt;xhtml:p&gt;',$value,'&lt;/xhtml:p&gt;')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat($label,' ',$value)"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="concat($label,$value)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                </label>
+        </xsl:element>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Template for ResourceItem for xf-item driver.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -1457,7 +1488,7 @@
                                         <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=$current-value]/text()"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of select="."/>        
+                                        <xsl:value-of select="."/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </label>
@@ -2045,7 +2076,7 @@
         <xd:desc>No other - give details out of cells</xd:desc>
     </xd:doc>
     <xsl:template match="Body//Clarification[(ancestor::Table or ancestor::TableLoop) and not(ancestor::Cell)]" mode="model" priority="2"/>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>The Cell driver produces something only in the Body part but its children can produce something.</xd:p>
@@ -2072,6 +2103,10 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="label" select="enofr:get-label($source-context, $languages)"/>
         <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
+        <xsl:variable name="conditioning-variables" as="xs:string*">
+            <xsl:sequence select="enofr:get-label-conditioning-variables($source-context, $languages[1])"/>
+            <xsl:sequence select="enofr:get-cell-value-variables($source-context)"/>
+        </xsl:variable>
 
         <xhtml:td colspan="{enofr:get-colspan($source-context)}" rowspan="{enofr:get-rowspan($source-context)}">
             <xf:output id="{$name}-control" bind="{$name}-bind">
@@ -2083,7 +2118,7 @@
                         <xsl:call-template name="label-ref-condition">
                             <xsl:with-param name="source-context" select="$source-context"/>
                             <xsl:with-param name="label" select="concat('$form-resources/',$name,'/label')"/>
-                            <xsl:with-param name="conditioning-variables" select="enofr:get-label-conditioning-variables($source-context, $languages[1])"/>
+                            <xsl:with-param name="conditioning-variables" select="$conditioning-variables"/>
                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                         </xsl:call-template>
                     </xsl:attribute>
@@ -2186,7 +2221,7 @@
                     <xsl:otherwise>
                         <xsl:for-each select="$layout-list//format">
                             <xsl:copy-of select="."/>
-                        </xsl:for-each>                        
+                        </xsl:for-each>
                     </xsl:otherwise>
                 </xsl:choose>
             </formats>
@@ -2201,7 +2236,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        
+
         <xsl:for-each select="$ordered-layout-list//format">
             <xsl:element name="{$input-format}">
                 <xsl:attribute name="id" select="concat(@variable, '-control')"/>
@@ -2228,7 +2263,7 @@
                 </xsl:attribute>
                 <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
                 <xsl:if test="$current-driver = 'DurationDomain'">
-                    <xsl:attribute name="xxf:maxlength" select="'2'"/>    
+                    <xsl:attribute name="xxf:maxlength" select="'2'"/>
                 </xsl:if>
                 <xsl:if test="position() = 1 and ($label != '' or $question-label!= '')">
                     <xsl:variable name="conditioning-variables" as="xs:string*">
@@ -2286,7 +2321,7 @@
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
             </xsl:for-each>-->
-                
+
                 <xsl:for-each select="enofr:get-constraint-dependencies($source-context)">
                     <xsl:element name="xf:dispatch">
                         <xsl:attribute name="ev:event">DOMFocusOut xforms-value-changed</xsl:attribute>
@@ -2310,13 +2345,13 @@
                     <xsl:attribute name="class" select="'double-duration-suffix'"/>
                     <xsl:choose>
                         <xsl:when test="$current-driver = 'DurationDomain'">
-                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/*[name()=current()/@unit]/text()"/>        
+                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/*[name()=current()/@unit]/text()"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/DateTime/*[name()=current()/@unit]/text()"/>
                         </xsl:otherwise>
                     </xsl:choose>
-                </xsl:element>                
+                </xsl:element>
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
@@ -2472,6 +2507,9 @@
                                             <xsl:matching-substring>
                                                 <xsl:value-of select="regex-group(1)"/>
                                             </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="'0'"/>
+                                            </xsl:non-matching-substring>
                                         </xsl:analyze-string>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -2486,6 +2524,9 @@
                                             <xsl:matching-substring>
                                                 <xsl:value-of select="regex-group(1)"/>
                                             </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="'99'"/>
+                                            </xsl:non-matching-substring>
                                         </xsl:analyze-string>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -2500,10 +2541,13 @@
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
                                     <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^P([^T]*[^T0-9])?([0-9]+)M.*$">
+                                        <xsl:analyze-string select="$minimum" regex="^P([0-9]+)M.*$">
                                             <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(2)"/>
+                                                <xsl:value-of select="regex-group(1)"/>
                                             </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="'0'"/>
+                                            </xsl:non-matching-substring>
                                         </xsl:analyze-string>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -2512,25 +2556,28 @@
                                 </xsl:choose>
                             </xsl:attribute>
                             <xsl:attribute name="maximum">
-                                <xsl:choose>
-                                    <xsl:when test="$maximum != ''">
-                                        <xsl:analyze-string select="$maximum" regex="^P([^T]*[^T0-9])?([0-9]+)M.*$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(2)"/>
-                                            </xsl:matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:analyze-string select="$format" regex="^PN+M.*$">
-                                            <xsl:matching-substring>
+                                <xsl:analyze-string select="$format" regex="^PN+M.*$">
+                                    <xsl:matching-substring>
+                                        <xsl:choose>
+                                            <xsl:when test="$maximum != ''">
+                                                <xsl:analyze-string select="$maximum" regex="^P([0-9]+)M.*$">
+                                                    <xsl:matching-substring>
+                                                        <xsl:value-of select="regex-group(1)"/>
+                                                    </xsl:matching-substring>
+                                                    <xsl:non-matching-substring>
+                                                        <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
+                                                    </xsl:non-matching-substring>
+                                                </xsl:analyze-string>
+                                            </xsl:when>
+                                            <xsl:otherwise>
                                                 <xsl:value-of select="'99'"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'11'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:matching-substring>
+                                    <xsl:non-matching-substring>
+                                        <xsl:value-of select="'11'"/>
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
                             </xsl:attribute>
                         </format>
                     </xsl:if>
@@ -2539,10 +2586,13 @@
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
                                     <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^P.*([0-9]+)D.*$">
+                                        <xsl:analyze-string select="$minimum" regex="^P([0-9]+)D.*$">
                                             <xsl:matching-substring>
                                                 <xsl:value-of select="regex-group(1)"/>
                                             </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="'0'"/>
+                                            </xsl:non-matching-substring>
                                         </xsl:analyze-string>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -2551,25 +2601,28 @@
                                 </xsl:choose>
                             </xsl:attribute>
                             <xsl:attribute name="maximum">
-                                <xsl:choose>
-                                    <xsl:when test="$maximum != ''">
-                                        <xsl:analyze-string select="$maximum" regex="^P.*([0-9]+)D.*$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(1)"/>
-                                            </xsl:matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:analyze-string select="$format" regex="^PN+D.*$">
-                                            <xsl:matching-substring>
+                                <xsl:analyze-string select="$format" regex="^PN+D.*$">
+                                    <xsl:matching-substring>
+                                        <xsl:choose>
+                                            <xsl:when test="$maximum != ''">
+                                                <xsl:analyze-string select="$maximum" regex="^P([0-9]+)D.*$">
+                                                    <xsl:matching-substring>
+                                                        <xsl:value-of select="regex-group(1)"/>
+                                                    </xsl:matching-substring>
+                                                    <xsl:non-matching-substring>
+                                                        <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
+                                                    </xsl:non-matching-substring>
+                                                </xsl:analyze-string>
+                                            </xsl:when>
+                                            <xsl:otherwise>
                                                 <xsl:value-of select="'99'"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'30'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:matching-substring>
+                                    <xsl:non-matching-substring>
+                                        <xsl:value-of select="'30'"/>
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
                             </xsl:attribute>
                         </format>
                     </xsl:if>
@@ -2578,10 +2631,13 @@
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
                                     <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^P.*T([0-9]+)H.*$">
+                                        <xsl:analyze-string select="$minimum" regex="^PT([0-9]+)H.*$">
                                             <xsl:matching-substring>
                                                 <xsl:value-of select="regex-group(1)"/>
                                             </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="'0'"/>
+                                            </xsl:non-matching-substring>
                                         </xsl:analyze-string>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -2590,25 +2646,28 @@
                                 </xsl:choose>
                             </xsl:attribute>
                             <xsl:attribute name="maximum">
-                                <xsl:choose>
-                                    <xsl:when test="$maximum != ''">
-                                        <xsl:analyze-string select="$maximum" regex="^P.*T([0-9]+)H.*$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(1)"/>
-                                            </xsl:matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:analyze-string select="$format" regex="^PTN+H.*$">
-                                            <xsl:matching-substring>
+                                <xsl:analyze-string select="$format" regex="^PTN+H.*$">
+                                    <xsl:matching-substring>
+                                        <xsl:choose>
+                                            <xsl:when test="$maximum != ''">
+                                                <xsl:analyze-string select="$maximum" regex="^PT([0-9]+)H.*$">
+                                                    <xsl:matching-substring>
+                                                        <xsl:value-of select="regex-group(1)"/>
+                                                    </xsl:matching-substring>
+                                                    <xsl:non-matching-substring>
+                                                        <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
+                                                    </xsl:non-matching-substring>
+                                                </xsl:analyze-string>
+                                            </xsl:when>
+                                            <xsl:otherwise>
                                                 <xsl:value-of select="'99'"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'23'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:matching-substring>
+                                    <xsl:non-matching-substring>
+                                        <xsl:value-of select="'23'"/>
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
                             </xsl:attribute>
                         </format>
                     </xsl:if>
@@ -2617,10 +2676,13 @@
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
                                     <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^P.*T(.*[^0-9])?([0-9]+)M.*$">
+                                        <xsl:analyze-string select="$minimum" regex="^PT([0-9]+)M.*$">
                                             <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(2)"/>
+                                                <xsl:value-of select="regex-group(1)"/>
                                             </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="'0'"/>
+                                            </xsl:non-matching-substring>
                                         </xsl:analyze-string>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -2629,25 +2691,28 @@
                                 </xsl:choose>
                             </xsl:attribute>
                             <xsl:attribute name="maximum">
-                                <xsl:choose>
-                                    <xsl:when test="$maximum != ''">
-                                        <xsl:analyze-string select="$maximum" regex="^P.*T(.*[^0-9])?([0-9]+)M.*$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(2)"/>
-                                            </xsl:matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:analyze-string select="$format" regex="^PTN+M.*$">
-                                            <xsl:matching-substring>
+                                <xsl:analyze-string select="$format" regex="^PTN+M.*$">
+                                    <xsl:matching-substring>
+                                        <xsl:choose>
+                                            <xsl:when test="$maximum != ''">
+                                                <xsl:analyze-string select="$maximum" regex="^PT([0-9]+)M.*$">
+                                                    <xsl:matching-substring>
+                                                        <xsl:value-of select="regex-group(1)"/>
+                                                    </xsl:matching-substring>
+                                                    <xsl:non-matching-substring>
+                                                        <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
+                                                    </xsl:non-matching-substring>
+                                                </xsl:analyze-string>
+                                            </xsl:when>
+                                            <xsl:otherwise>
                                                 <xsl:value-of select="'99'"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'59'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:matching-substring>
+                                    <xsl:non-matching-substring>
+                                        <xsl:value-of select="'59'"/>
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
                             </xsl:attribute>
                         </format>
                     </xsl:if>
@@ -2656,10 +2721,13 @@
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
                                     <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^P.*T(.*[^0-9])?([0-9]+)S$">
+                                        <xsl:analyze-string select="$minimum" regex="^PT([0-9]+)S$">
                                             <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(2)"/>
+                                                <xsl:value-of select="regex-group(1)"/>
                                             </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <xsl:value-of select="'0'"/>
+                                            </xsl:non-matching-substring>
                                         </xsl:analyze-string>
                                     </xsl:when>
                                     <xsl:otherwise>
@@ -2668,25 +2736,28 @@
                                 </xsl:choose>
                             </xsl:attribute>
                             <xsl:attribute name="maximum">
-                                <xsl:choose>
-                                    <xsl:when test="$maximum != ''">
-                                        <xsl:analyze-string select="$maximum" regex="^P.*T(.*[^0-9])?([0-9]+)S$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(2)"/>
-                                            </xsl:matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:analyze-string select="$format" regex="^PTN+S$">
-                                            <xsl:matching-substring>
+                                <xsl:analyze-string select="$format" regex="^PTN+S$">
+                                    <xsl:matching-substring>
+                                        <xsl:choose>
+                                            <xsl:when test="$maximum != ''">
+                                                <xsl:analyze-string select="$maximum" regex="^PT([0-9]+)S$">
+                                                    <xsl:matching-substring>
+                                                        <xsl:value-of select="regex-group(1)"/>
+                                                    </xsl:matching-substring>
+                                                    <xsl:non-matching-substring>
+                                                        <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
+                                                    </xsl:non-matching-substring>
+                                                </xsl:analyze-string>
+                                            </xsl:when>
+                                            <xsl:otherwise>
                                                 <xsl:value-of select="'99'"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'59'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:matching-substring>
+                                    <xsl:non-matching-substring>
+                                        <xsl:value-of select="'59'"/>
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
                             </xsl:attribute>
                         </format>
                     </xsl:if>
