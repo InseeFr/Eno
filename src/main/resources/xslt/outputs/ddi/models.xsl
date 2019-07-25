@@ -1131,19 +1131,11 @@
         <xsl:param name="idList" as="xs:string" tunnel="yes"/>
         <xsl:param name="clarificationVal" as="xs:string" tunnel="yes"/>
 	    <d:ResponseDomainInMixed>
-	    	<d:TextDomain>
-	        	<r:Label>
-					<r:Content xml:lang="{enoddi33:get-lang($source-context)}">
-                        <xhtml:p>
-							<xhtml:b><xsl:value-of select="enoddi33:get-label($source-context)"/></xhtml:b>
-			        	</xhtml:p>
-                    </r:Content>
-	        	</r:Label>
-	            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			    	<xsl:with-param name="driver" select="eno:append-empty-element('driver-OutParameter', .)" tunnel="yes"/>
-			    	<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-			    </xsl:apply-templates>
-	        </d:TextDomain>
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationResponseDomain', .)" tunnel="yes"/>
+				<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+				<xsl:with-param name="label" select="enoddi33:get-label($source-context)" as="xs:string" tunnel="yes"/>
+		    </xsl:apply-templates>
 	       	<d:AttachmentLocation>
             	<d:DomainSpecificValue attachmentDomain="1">
 					<r:Value><xsl:value-of select="$clarificationVal"/></r:Value>
@@ -1306,12 +1298,17 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
    
-    <xsl:template match="driver-OutParameter//Clarification" mode="model" priority="2">
+    <xsl:template match="driver-ClarificationResponseDomain//ResponseDomain" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="label" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-        	<xsl:with-param name="driver" select="." tunnel="yes"/>
-       	</xsl:apply-templates>
+			<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationTextDomain', .)" tunnel="yes"/>
+			<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+			<xsl:with-param name="label" select="$label" as="xs:string" tunnel="yes"/>
+			<xsl:with-param name="nameClarification" select="enoddi33:get-name($relatedVariable)" as="xs:string" tunnel="yes"/>
+		</xsl:apply-templates>
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
@@ -1417,6 +1414,31 @@
         </d:TextDomain>
     </xsl:template>
     
+    <xsl:template match="driver-ClarificationTextDomain//TextDomain" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="label" as="xs:string" tunnel="yes"/>
+        <xsl:param name="nameClarification" as="xs:string" tunnel="yes"/>
+        <d:TextDomain maxLength="{enoddi33:get-max-length($source-context)}">
+			<r:Label>
+				<r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+					<xhtml:p>
+						<xhtml:b><xsl:value-of select="$label"/></xhtml:b>
+					</xhtml:p>
+				</r:Content>
+			</r:Label>
+            <r:OutParameter isArray="false">
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                <r:ParameterName>
+                  <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="$nameClarification"/></r:String>
+                </r:ParameterName>
+                <r:TextRepresentation maxLength="{enoddi33:get-max-length($source-context)}"/>
+            </r:OutParameter>
+        </d:TextDomain>
+    </xsl:template>
+
     <xsl:template match="driver-VariableScheme//TextDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
