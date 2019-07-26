@@ -270,9 +270,6 @@
 			<xsl:variable name="label" select="enojs:get-label($source-context,$languages)"/>
 			<cells>
 				<xsl:choose>
-					<xsl:when test="$ancestorTable='line'">
-						<xsl:attribute name="id" select="$id"/>
-					</xsl:when>
 					<xsl:when test="$ancestorTable='headerLine'">
 						<xsl:attribute name="headerCell" select="true()"/>
 					</xsl:when>
@@ -450,7 +447,7 @@
 				</xsl:when>
 				
 				<xsl:when test="$typeResponse='text' and $typeOfAncestor='table'">
-					<cells componentType="{$componentType-Input}" id="{$position}" maxLength="{$lengthResponse}">
+					<cells componentType="{$componentType-Input}" id="{enojs:get-name($source-context)}" maxLength="{$lengthResponse}">
 						<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 						<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 						<xsl:call-template name="enojs:addResponseToComponents">
@@ -483,7 +480,7 @@
 				</xsl:when>
 				
 				<xsl:when test="$typeResponse='number' and $typeOfAncestor='table'">
-					<cells componentType="{$componentType-InputNumber}" id="{$position}">
+					<cells componentType="{$componentType-InputNumber}" id="{enojs:get-name($source-context)}">
 						<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 						<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 						<xsl:if test="$minimumResponse!=''">
@@ -541,7 +538,7 @@
 		<xsl:variable name="dateFormat" select="enojs:get-format($source-context)"/>
 		<xsl:choose>
 			<xsl:when test="$typeOfAncestor='table'">
-				<cells componentType="{$componentType-Datepicker}" id="{$position}">
+				<cells componentType="{$componentType-Datepicker}" id="{enojs:get-name($source-context)}">
 					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 					<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
@@ -634,7 +631,7 @@
 				</xsl:if>
 				
 				<xsl:if test="$typeOfQuestion!='MultipleChoiceQuestion' and $typeOfAncestor='table'">
-					<cells id="{$position}" componentType="{$componentType-CheckboxOne}">
+					<cells id="{enojs:get-name($source-context)}" componentType="{$componentType-CheckboxOne}">
 						<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 						<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -689,7 +686,7 @@
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:when test="$typeResponse='boolean' and $typeOfAncestor='table'">
-				<cells id="{$position}" componentType="{$componentType-CheckboxBoolean}">
+				<cells id="{enojs:get-name($source-context)}" componentType="{$componentType-CheckboxBoolean}">
 					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 					<xsl:call-template name="enojs:addResponseToComponents">
@@ -791,7 +788,7 @@
 		<xsl:if test="$maximumLengthCode != '' and $typeOfAncestor='table'">
 			<xsl:choose>
 				<xsl:when test="$typeXf='full'">
-					<cells id="{$position}" componentType="{$componentType-Radio}">
+					<cells id="{enojs:get-name($source-context)}" componentType="{$componentType-Radio}">
 						<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 						<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -804,7 +801,7 @@
 					</cells>					
 				</xsl:when>
 				<xsl:when test="$typeXf='minimal'">
-					<cells id="{$position}" componentType="{$componentType-Dropdown}">
+					<cells id="{enojs:get-name($source-context)}" componentType="{$componentType-Dropdown}">
 						<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 						<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -889,7 +886,7 @@
 				<xsl:copy-of select="$declarations"/>
 				
 				<xsl:call-template name="enojs:addResponseToComponents">
-					<xsl:with-param name="responseName" select="$responseName"/>					
+					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
 				<xsl:copy-of select="$filterCondition"/>
 			</components>
@@ -901,7 +898,7 @@
 		</xsl:if>
 		
 		<xsl:if test="$typeResponse !='' and $typeOfAncestor='table'">
-			<cells componentType="{$componentType-Textarea}" id="{$position}" maxLength="{$lengthResponse}">
+			<cells componentType="{$componentType-Textarea}" id="{enojs:get-name($source-context)}" maxLength="{$lengthResponse}">
 				<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 				<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 				<xsl:copy-of select="$declarations"></xsl:copy-of>
