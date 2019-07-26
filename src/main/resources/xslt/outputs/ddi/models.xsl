@@ -1320,7 +1320,7 @@
                 <r:TextRepresentation maxLength="{enoddi32:get-max-length($source-context)}"/>
             </r:OutParameter>
 			<xsl:if test="$mandatory = 'mandatory'">
-				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+				<r:ResponseCardinality minimumResponses="1"/>
 			</xsl:if>
         </d:TextDomain>
     </xsl:template>
@@ -1355,7 +1355,7 @@
                 <r:Version><xsl:value-of select="enoddi32:get-version($source-context)"/></r:Version>
             </r:OutParameter>
 			<xsl:if test="$mandatory = 'mandatory'">
-				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+				<r:ResponseCardinality minimumResponses="1"/>
 			</xsl:if>
         </d:NumericDomain>
     </xsl:template>
@@ -1420,7 +1420,7 @@
                 </r:DateTimeRepresentationReference>
             </r:OutParameter>
 			<xsl:if test="$mandatory = 'mandatory'">
-				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+				<r:ResponseCardinality minimumResponses="1"/>
 			</xsl:if>
         </d:DateTimeDomainReference>        
     </xsl:template>
