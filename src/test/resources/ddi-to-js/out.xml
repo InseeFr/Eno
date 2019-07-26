@@ -348,7 +348,9 @@
    <components xsi:type="Sequence" componentType="Sequence" id="j6qe0h9q">
       <label>III - Characters</label>
       <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
-      <components xsi:type="Checkbox" componentType="Checkbox" id="j334akov">
+      <components xsi:type="CheckboxGroup"
+                  componentType="CheckboxGroup"
+                  id="j334akov">
          <label>➡ 1. What are the pet names that the Simpsons family had?</label>
          <declarations declarationType="INSTRUCTION"
                        id="j334akov-d5"
@@ -356,7 +358,7 @@
             <label>Several possible answers</label>
          </declarations>
          <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
-         <options id="j334akov-QOP-jbgd8qmn">
+         <responses id="j334akov-QOP-jbgd8qmn">
                <label>Santa's Little Helper</label>
                <response name="PET1" xsi:type="ResponseContainerBoolean">
                <valueState valueType="PREVIOUS">
@@ -375,8 +377,8 @@
                      <value xsi:nil="true"/>
                   </valueState>
             </response>
-            </options>
-         <options id="j334akov-QOP-jbgd60vl">
+            </responses>
+         <responses id="j334akov-QOP-jbgd60vl">
                <label>Snowball I</label>
                <response name="PET2" xsi:type="ResponseContainerBoolean">
                <valueState valueType="PREVIOUS">
@@ -395,8 +397,8 @@
                      <value xsi:nil="true"/>
                   </valueState>
             </response>
-            </options>
-         <options id="j334akov-QOP-jbgda2jo">
+            </responses>
+         <responses id="j334akov-QOP-jbgda2jo">
                <label>Coltrane</label>
                <response name="PET3" xsi:type="ResponseContainerBoolean">
                <valueState valueType="PREVIOUS">
@@ -415,8 +417,8 @@
                      <value xsi:nil="true"/>
                   </valueState>
             </response>
-            </options>
-         <options id="j334akov-QOP-jbgdfssy">
+            </responses>
+         <responses id="j334akov-QOP-jbgdfssy">
                <label>Mojo the Helper Monkey</label>
                <response name="PET4" xsi:type="ResponseContainerBoolean">
                <valueState valueType="PREVIOUS">
@@ -435,7 +437,7 @@
                      <value xsi:nil="true"/>
                   </valueState>
             </response>
-            </options>
+            </responses>
       </components>
       <components xsi:type="Table"
                   componentType="Table"
@@ -450,11 +452,11 @@
          </declarations>
          <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
          <cells type="line">
-            <cells id="j6p29i81-j6p2mvca--1">
+            <cells>
                <value>1</value>
                <label>Vanilla</label>
             </cells>
-            <cells id="1" componentType="Radio">
+            <cells id="j6p29i81-QOP-jbgdb3jx" componentType="Radio">
                <options>
                      <value>1</value>
                      <label>Yes</label>
@@ -483,11 +485,11 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells id="j6p29i81-j6p2mvca-0">
+            <cells>
                <value>2</value>
                <label>Strawberry</label>
             </cells>
-            <cells id="2" componentType="Radio">
+            <cells id="j6p29i81-QOP-jbgdb61k" componentType="Radio">
                <options>
                      <value>1</value>
                      <label>Yes</label>
@@ -516,11 +518,11 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells id="j6p29i81-j6p2mvca-1">
+            <cells>
                <value>3</value>
                <label>Apple</label>
             </cells>
-            <cells id="3" componentType="Radio">
+            <cells id="j6p29i81-QOP-jbgdl3kc" componentType="Radio">
                <options>
                      <value>1</value>
                      <label>Yes</label>
@@ -549,11 +551,11 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells id="j6p29i81-j6p2mvca-2">
+            <cells>
                <value>4</value>
                <label>Bacon</label>
             </cells>
-            <cells id="4" componentType="Radio">
+            <cells id="j6p29i81-QOP-jbgdcobo" componentType="Radio">
                <options>
                      <value>1</value>
                      <label>Yes</label>
@@ -590,11 +592,11 @@
          <label>➡ 3. Which character works in the nuclear power plant?</label>
          <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
          <cells type="line">
-            <cells id="j6qefnga-j6qeytgc--1">
+            <cells>
                <value>1</value>
                <label>Charles Montgomery Burns</label>
             </cells>
-            <cells id="1" componentType="Dropdown">
+            <cells id="j6qefnga-QOP-jbgd6p0k" componentType="Dropdown">
                <options>
                      <value>1</value>
                      <label>Yes</label>
@@ -623,11 +625,11 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells id="j6qefnga-j6qeytgc-0">
+            <cells>
                <value>2</value>
                <label>Carl Carlson</label>
             </cells>
-            <cells id="2" componentType="Dropdown">
+            <cells id="j6qefnga-QOP-jbgd9ato" componentType="Dropdown">
                <options>
                      <value>1</value>
                      <label>Yes</label>
@@ -656,11 +658,11 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells id="j6qefnga-j6qeytgc-1">
+            <cells>
                <value>3</value>
                <label>Otto Mann</label>
             </cells>
-            <cells id="3" componentType="Dropdown">
+            <cells id="j6qefnga-QOP-jbgd3e0p" componentType="Dropdown">
                <options>
                      <value>1</value>
                      <label>Yes</label>
@@ -689,11 +691,11 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells id="j6qefnga-j6qeytgc-2">
+            <cells>
                <value>4</value>
                <label>Carl Carlson</label>
             </cells>
-            <cells id="4" componentType="Dropdown">
+            <cells id="j6qefnga-QOP-jbgdkxne" componentType="Dropdown">
                <options>
                      <value>1</value>
                      <label>Yes</label>
@@ -730,11 +732,11 @@
          <label>➡ 4. In which city each character was born?</label>
          <conditionFilter>#if((!( $READY != '1')))normal#{else}hidden#end</conditionFilter>
          <cells type="line">
-            <cells id="j6yzoc6g-j6z087mq--1">
+            <cells>
                <value>1</value>
                <label>Selma Bouvier</label>
             </cells>
-            <cells id="1" componentType="CheckboxOne">
+            <cells id="j6yzoc6g-QOP-jbgd7fr6" componentType="CheckboxOne">
                <options>
                      <value>1</value>
                      <label>Albuquerque</label>
@@ -775,11 +777,11 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells id="j6yzoc6g-j6z087mq-0">
+            <cells>
                <value>2</value>
                <label>Kent Brockman</label>
             </cells>
-            <cells id="2" componentType="CheckboxOne">
+            <cells id="j6yzoc6g-QOP-jbgd5e9f" componentType="CheckboxOne">
                <options>
                      <value>1</value>
                      <label>Albuquerque</label>
@@ -820,11 +822,11 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells id="j6yzoc6g-j6z087mq-1">
+            <cells>
                <value>3</value>
                <label>Milhouse Van Houten</label>
             </cells>
-            <cells id="3" componentType="CheckboxOne">
+            <cells id="j6yzoc6g-QOP-jbgd912x" componentType="CheckboxOne">
                <options>
                      <value>1</value>
                      <label>Albuquerque</label>
@@ -865,11 +867,11 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells id="j6yzoc6g-j6z087mq-2">
+            <cells>
                <value>4</value>
                <label>Nelson Muntz</label>
             </cells>
-            <cells id="4" componentType="CheckboxOne">
+            <cells id="j6yzoc6g-QOP-jbgd6bdy" componentType="CheckboxOne">
                <options>
                      <value>1</value>
                      <label>Albuquerque</label>
@@ -910,11 +912,11 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells id="j6yzoc6g-j6z087mq-3">
+            <cells>
                <value>5</value>
                <label>Crazy Cat Lady</label>
             </cells>
-            <cells id="5" componentType="CheckboxOne">
+            <cells id="j6yzoc6g-QOP-jbgddyry" componentType="CheckboxOne">
                <options>
                      <value>1</value>
                      <label>Albuquerque</label>
@@ -978,16 +980,16 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nwc63q-j4nwh16i--1" rowspan="2">
+               <cells rowspan="2">
                   <value>A</value>
                   <label>Frozen products</label>
                </cells>
-               <cells id="j4nwc63q-j4nwh16i-0">
+               <cells>
                   <value>A1</value>
                   <label>Ice creams</label>
                </cells>
                <cells componentType="InputNumber"
-                      id="1"
+                      id="j4nwc63q-QOP-jbgde5yl"
                       min="0.0"
                       max="100.0"
                       decimals="1">
@@ -1012,12 +1014,12 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nwc63q-j4nwh16i-1">
+               <cells>
                   <value>A2</value>
                   <label>Jasper Beardly</label>
                </cells>
                <cells componentType="InputNumber"
-                      id="2"
+                      id="j4nwc63q-QOP-jbgd2x2t"
                       min="0.0"
                       max="100.0"
                       decimals="1">
@@ -1042,16 +1044,16 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nwc63q-j4nwh16i-2" rowspan="3">
+               <cells rowspan="3">
                   <value>B</value>
                   <label>Meat</label>
                </cells>
-               <cells id="j4nwc63q-j4nwh16i-3">
+               <cells>
                   <value>B1</value>
                   <label>Bacon</label>
                </cells>
                <cells componentType="InputNumber"
-                      id="3"
+                      id="j4nwc63q-QOP-jbgdjypz"
                       min="0.0"
                       max="100.0"
                       decimals="1">
@@ -1076,12 +1078,12 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nwc63q-j4nwh16i-4">
+               <cells>
                   <value>B2</value>
                   <label>Pork chop</label>
                </cells>
                <cells componentType="InputNumber"
-                      id="4"
+                      id="j4nwc63q-QOP-jbgdcftu"
                       min="0.0"
                       max="100.0"
                       decimals="1">
@@ -1106,12 +1108,12 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nwc63q-j4nwh16i-5">
+               <cells>
                   <value>B3</value>
                   <label>Chicken</label>
                </cells>
                <cells componentType="InputNumber"
-                      id="5"
+                      id="j4nwc63q-QOP-jbgdiyfe"
                       min="0.0"
                       max="100.0"
                       decimals="1">
@@ -1136,16 +1138,16 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nwc63q-j4nwh16i-6">
+               <cells>
                   <value>C</value>
                   <label>Compote</label>
                </cells>
-               <cells id="j4nwc63q-j4nwh16i-7">
+               <cells>
                   <value>C1</value>
                   <label>Powersauce</label>
                </cells>
                <cells componentType="InputNumber"
-                      id="6"
+                      id="j4nwc63q-QOP-jbgdj1wd"
                       min="0.0"
                       max="100.0"
                       decimals="1">
@@ -1170,12 +1172,12 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nwc63q-j4nwh16i-8" colspan="2">
+               <cells colspan="2">
                   <value>D</value>
                   <label>Other</label>
                </cells>
                <cells componentType="InputNumber"
-                      id="7"
+                      id="j4nwc63q-QOP-jbgddylk"
                       min="0.0"
                       max="100.0"
                       decimals="1">
@@ -1223,11 +1225,11 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nw0rr6-j77dav9b--1">
+               <cells>
                   <value>1</value>
                   <label>Break the windows of the whole city</label>
                </cells>
-               <cells id="1" componentType="Dropdown">
+               <cells id="j4nw0rr6-QOP-jbgd8tyr" componentType="Dropdown">
                   <options>
                         <value>1</value>
                         <label>Jay</label>
@@ -1262,7 +1264,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells componentType="Textarea" id="1" maxLength="255">
+               <cells componentType="Textarea" id="j4nw0rr6-QOP-jbgdit3o" maxLength="255">
                   <response name="CLOWNING12" xsi:type="ResponseContainerString">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1283,11 +1285,11 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nw0rr6-j77dav9b-0">
+               <cells>
                   <value>2</value>
                   <label>Loose the violin of his daughter playing poker</label>
                </cells>
-               <cells id="2" componentType="Dropdown">
+               <cells id="j4nw0rr6-QOP-jbgdep36" componentType="Dropdown">
                   <options>
                         <value>1</value>
                         <label>Jay</label>
@@ -1322,7 +1324,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells componentType="Textarea" id="2" maxLength="255">
+               <cells componentType="Textarea" id="j4nw0rr6-QOP-jbgd366k" maxLength="255">
                   <response name="CLOWNING22" xsi:type="ResponseContainerString">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1343,11 +1345,11 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nw0rr6-j77dav9b-1">
+               <cells>
                   <value>3</value>
                   <label>Kill Mr Burns</label>
                </cells>
-               <cells id="3" componentType="Dropdown">
+               <cells id="j4nw0rr6-QOP-jbgdjjgi" componentType="Dropdown">
                   <options>
                         <value>1</value>
                         <label>Jay</label>
@@ -1382,7 +1384,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells componentType="Textarea" id="3" maxLength="255">
+               <cells componentType="Textarea" id="j4nw0rr6-QOP-jbgdax06" maxLength="255">
                   <response name="CLOWNING32" xsi:type="ResponseContainerString">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1403,11 +1405,11 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j4nw0rr6-j77dav9b-2">
+               <cells>
                   <value>4</value>
                   <label>Leaving a mechanical object to control the nuclear power plant</label>
                </cells>
-               <cells id="4" componentType="Dropdown">
+               <cells id="j4nw0rr6-QOP-jbgdgh6k" componentType="Dropdown">
                   <options>
                         <value>1</value>
                         <label>Jay</label>
@@ -1442,7 +1444,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells componentType="Textarea" id="4" maxLength="255">
+               <cells componentType="Textarea" id="j4nw0rr6-QOP-jbgdfo1j" maxLength="255">
                   <response name="CLOWNING42" xsi:type="ResponseContainerString">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1503,11 +1505,11 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j6p2lwuj-j6p2kivg--1">
+               <cells>
                   <value>1</value>
                   <label>Car</label>
                </cells>
-               <cells id="1" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgd92mb" componentType="CheckboxBoolean">
                   <response name="TRAVEL11" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1526,7 +1528,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="1" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdnxkt" componentType="CheckboxBoolean">
                   <response name="TRAVEL12" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1545,7 +1547,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="1" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdcppc" componentType="CheckboxBoolean">
                   <response name="TRAVEL13" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1564,7 +1566,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="1" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgd4r2a" componentType="CheckboxBoolean">
                   <response name="TRAVEL14" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1583,7 +1585,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="1" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgd9cff" componentType="CheckboxBoolean">
                   <response name="TRAVEL15" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1602,7 +1604,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="1" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdiva0" componentType="CheckboxBoolean">
                   <response name="TRAVEL16" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1623,11 +1625,11 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j6p2lwuj-j6p2kivg-0">
+               <cells>
                   <value>2</value>
                   <label>Bike</label>
                </cells>
-               <cells id="2" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdgsat" componentType="CheckboxBoolean">
                   <response name="TRAVEL21" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1646,7 +1648,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="2" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgd3ef5" componentType="CheckboxBoolean">
                   <response name="TRAVEL22" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1665,7 +1667,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="2" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgd4cm6" componentType="CheckboxBoolean">
                   <response name="TRAVEL23" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1684,7 +1686,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="2" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdkfpq" componentType="CheckboxBoolean">
                   <response name="TRAVEL24" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1703,7 +1705,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="2" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgddwsp" componentType="CheckboxBoolean">
                   <response name="TRAVEL25" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1722,7 +1724,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="2" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgd7dqf" componentType="CheckboxBoolean">
                   <response name="TRAVEL26" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1743,11 +1745,11 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j6p2lwuj-j6p2kivg-1">
+               <cells>
                   <value>3</value>
                   <label>Skateboard</label>
                </cells>
-               <cells id="3" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdaxk2" componentType="CheckboxBoolean">
                   <response name="TRAVEL31" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1766,7 +1768,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="3" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgd8p1v" componentType="CheckboxBoolean">
                   <response name="TRAVEL32" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1785,7 +1787,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="3" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdd2lo" componentType="CheckboxBoolean">
                   <response name="TRAVEL33" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1804,7 +1806,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="3" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgd7u52" componentType="CheckboxBoolean">
                   <response name="TRAVEL34" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1823,7 +1825,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="3" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdncn8" componentType="CheckboxBoolean">
                   <response name="TRAVEL35" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1842,7 +1844,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="3" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdnous" componentType="CheckboxBoolean">
                   <response name="TRAVEL36" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1863,11 +1865,11 @@
                </cells>
             </cells>
             <cells type="line">
-               <cells id="j6p2lwuj-j6p2kivg-2">
+               <cells>
                   <value>4</value>
                   <label>Plane</label>
                </cells>
-               <cells id="4" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgd7myn" componentType="CheckboxBoolean">
                   <response name="TRAVEL41" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1886,7 +1888,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="4" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdgm0c" componentType="CheckboxBoolean">
                   <response name="TRAVEL42" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1905,7 +1907,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="4" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdo0ay" componentType="CheckboxBoolean">
                   <response name="TRAVEL43" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1924,7 +1926,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="4" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdgfwl" componentType="CheckboxBoolean">
                   <response name="TRAVEL44" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1943,7 +1945,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="4" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdnz6b" componentType="CheckboxBoolean">
                   <response name="TRAVEL45" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -1962,7 +1964,7 @@
                         </valueState>
                   </response>
                </cells>
-               <cells id="4" componentType="CheckboxBoolean">
+               <cells id="j6p2lwuj-QOP-jbgdkfcz" componentType="CheckboxBoolean">
                   <response name="TRAVEL46" xsi:type="ResponseContainerBoolean">
                      <valueState valueType="PREVIOUS">
                            <value xsi:nil="true"/>
@@ -2005,7 +2007,7 @@
          </cells>
          <lines min="1" max="10"/>
          <cells type="line">
-            <cells componentType="Textarea" id="1" maxLength="255">
+            <cells componentType="Textarea" id="j6qg8rc6-QOP-jbgdl5jb" maxLength="255">
                <response name="FAVOURITE_CHARACTERS11" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
@@ -2025,7 +2027,7 @@
                </response>
             </cells>
             <cells componentType="InputNumber"
-                   id="1"
+                   id="j6qg8rc6-QOP-jbgdfndq"
                    min="0"
                    max="120"
                    decimals="0">
@@ -2049,7 +2051,7 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells componentType="Textarea" id="2" maxLength="255">
+            <cells componentType="Textarea" id="j6qg8rc6-QOP-jbgd8lwo" maxLength="255">
                <response name="FAVOURITE_CHARACTERS21" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
@@ -2069,7 +2071,7 @@
                </response>
             </cells>
             <cells componentType="InputNumber"
-                   id="2"
+                   id="j6qg8rc6-QOP-jbgd7osi"
                    min="0"
                    max="120"
                    decimals="0">
@@ -2093,7 +2095,7 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells componentType="Textarea" id="3" maxLength="255">
+            <cells componentType="Textarea" id="j6qg8rc6-QOP-jbgdbfag" maxLength="255">
                <response name="FAVOURITE_CHARACTERS31" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
@@ -2113,7 +2115,7 @@
                </response>
             </cells>
             <cells componentType="InputNumber"
-                   id="3"
+                   id="j6qg8rc6-QOP-jbgd7bnw"
                    min="0"
                    max="120"
                    decimals="0">
@@ -2137,7 +2139,7 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells componentType="Textarea" id="4" maxLength="255">
+            <cells componentType="Textarea" id="j6qg8rc6-QOP-jbgdlgja" maxLength="255">
                <response name="FAVOURITE_CHARACTERS41" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
@@ -2157,7 +2159,7 @@
                </response>
             </cells>
             <cells componentType="InputNumber"
-                   id="4"
+                   id="j6qg8rc6-QOP-jbgd9k71"
                    min="0"
                    max="120"
                    decimals="0">
@@ -2181,7 +2183,7 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells componentType="Textarea" id="5" maxLength="255">
+            <cells componentType="Textarea" id="j6qg8rc6-QOP-jbgd745y" maxLength="255">
                <response name="FAVOURITE_CHARACTERS51" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
@@ -2201,7 +2203,7 @@
                </response>
             </cells>
             <cells componentType="InputNumber"
-                   id="5"
+                   id="j6qg8rc6-QOP-jbgdimks"
                    min="0"
                    max="120"
                    decimals="0">
@@ -2225,7 +2227,7 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells componentType="Textarea" id="6" maxLength="255">
+            <cells componentType="Textarea" id="j6qg8rc6-QOP-jbgdjkts" maxLength="255">
                <response name="FAVOURITE_CHARACTERS61" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
@@ -2245,7 +2247,7 @@
                </response>
             </cells>
             <cells componentType="InputNumber"
-                   id="6"
+                   id="j6qg8rc6-QOP-jbgdjquz"
                    min="0"
                    max="120"
                    decimals="0">
@@ -2269,7 +2271,7 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells componentType="Textarea" id="7" maxLength="255">
+            <cells componentType="Textarea" id="j6qg8rc6-QOP-jbgdcax7" maxLength="255">
                <response name="FAVOURITE_CHARACTERS71" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
@@ -2289,7 +2291,7 @@
                </response>
             </cells>
             <cells componentType="InputNumber"
-                   id="7"
+                   id="j6qg8rc6-QOP-jbgdd2w3"
                    min="0"
                    max="120"
                    decimals="0">
@@ -2313,7 +2315,7 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells componentType="Textarea" id="8" maxLength="255">
+            <cells componentType="Textarea" id="j6qg8rc6-QOP-jbgdjye1" maxLength="255">
                <response name="FAVOURITE_CHARACTERS81" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
@@ -2333,7 +2335,7 @@
                </response>
             </cells>
             <cells componentType="InputNumber"
-                   id="8"
+                   id="j6qg8rc6-QOP-jbgdkosc"
                    min="0"
                    max="120"
                    decimals="0">
@@ -2357,7 +2359,7 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells componentType="Textarea" id="9" maxLength="255">
+            <cells componentType="Textarea" id="j6qg8rc6-QOP-jbgd5jet" maxLength="255">
                <response name="FAVOURITE_CHARACTERS91" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
@@ -2377,7 +2379,7 @@
                </response>
             </cells>
             <cells componentType="InputNumber"
-                   id="9"
+                   id="j6qg8rc6-QOP-jbgdk0x4"
                    min="0"
                    max="120"
                    decimals="0">
@@ -2401,7 +2403,7 @@
             </cells>
          </cells>
          <cells type="line">
-            <cells componentType="Textarea" id="10" maxLength="255">
+            <cells componentType="Textarea" id="j6qg8rc6-QOP-jbgdjw90" maxLength="255">
                <response name="FAVOURITE_CHARACTERS101" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
@@ -2421,7 +2423,7 @@
                </response>
             </cells>
             <cells componentType="InputNumber"
-                   id="10"
+                   id="j6qg8rc6-QOP-jbgd2wgf"
                    min="0"
                    max="120"
                    decimals="0">
