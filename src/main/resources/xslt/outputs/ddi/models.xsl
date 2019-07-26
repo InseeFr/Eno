@@ -1297,19 +1297,6 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
-   
-    <xsl:template match="driver-ClarificationResponseDomain//ResponseDomain" mode="model" priority="2">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:param name="label" as="xs:string" tunnel="yes"/>
-        <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
-        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationTextDomain', .)" tunnel="yes"/>
-			<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-			<xsl:with-param name="label" select="$label" as="xs:string" tunnel="yes"/>
-			<xsl:with-param name="nameClarification" select="enoddi33:get-name($relatedVariable)" as="xs:string" tunnel="yes"/>
-		</xsl:apply-templates>
-    </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-OutParameter//ResponseDomain" mode="model" priority="2">
@@ -1328,7 +1315,28 @@
             </xsl:element>
         </xsl:element>
     </xsl:template>
-           
+
+    <xsl:template match="driver-OutParameter//Clarification" mode="model" priority="2">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="agency" as="xs:string" tunnel="yes"/>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+
+    <xsl:template match="driver-ClarificationResponseDomain//ResponseDomain" mode="model" priority="1">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="label" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationTextDomain', .)" tunnel="yes"/>
+			<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+			<xsl:with-param name="label" select="$label" as="xs:string" tunnel="yes"/>
+			<xsl:with-param name="nameClarification" select="enoddi33:get-name($relatedVariable)" as="xs:string" tunnel="yes"/>
+		</xsl:apply-templates>
+    </xsl:template>
+
     <!--this part is designed in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-Binding//ResponseDomain" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
