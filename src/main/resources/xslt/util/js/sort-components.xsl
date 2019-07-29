@@ -195,6 +195,13 @@
         <dateFormat><xsl:value-of select="."/></dateFormat>
     </xsl:template>
     
+    <xsl:template match="h:responses">
+        <responses>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="node()"/>
+        </responses>
+    </xsl:template>
+    
     <xsl:template match="h:options">
         <options>
             <xsl:copy-of select="@*"/>

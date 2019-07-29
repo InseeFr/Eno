@@ -1338,7 +1338,7 @@
                 <r:TextRepresentation maxLength="{enoddi33:get-max-length($source-context)}"/>
             </r:OutParameter>
 			<xsl:if test="$mandatory = 'mandatory'">
-				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+				<r:ResponseCardinality minimumResponses="1"/>
 			</xsl:if>
         </d:TextDomain>
     </xsl:template>
@@ -1373,7 +1373,7 @@
                 <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             </r:OutParameter>
 			<xsl:if test="$mandatory = 'mandatory'">
-				<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+				<r:ResponseCardinality minimumResponses="1"/>
 			</xsl:if>
         </d:NumericDomain>
     </xsl:template>
@@ -1429,7 +1429,8 @@
 			<xsl:choose>
 				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
 				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
-				<xsl:when test="$format = ('PnYnM', 'PTnHnM')">duration</xsl:when>
+			    <xsl:when test="starts-with($format , 'Pn')">duration</xsl:when>
+			    <xsl:when test="starts-with($format , 'PTn')">duration</xsl:when>
 				<xsl:otherwise>date</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -1475,7 +1476,7 @@
 		                </r:DateTimeRepresentationReference>
 		            </r:OutParameter>
 					<xsl:if test="$mandatory = 'mandatory'">
-						<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+					    <r:ResponseCardinality minimumResponses="1"/>
 					</xsl:if>
 		        </d:DateTimeDomainReference>
 			</xsl:otherwise>
@@ -1506,7 +1507,8 @@
 			<xsl:choose>
 				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
 				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
-				<xsl:when test="$format = ('PnYnM', 'PTnHnM')">duration</xsl:when>
+			    <xsl:when test="starts-with($format , 'Pn')">duration</xsl:when>
+			    <xsl:when test="starts-with($format , 'PTn')">duration</xsl:when>
 				<xsl:otherwise>date</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
