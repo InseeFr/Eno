@@ -8,6 +8,7 @@
     exclude-result-prefixes="xs d32 r32 l32 g32 s32 xsl xd"
     version="2.0">
 
+    <xsl:output indent="yes"/>
     <xd:doc>
         <xd:desc>root template : DDIInstance with DDI 3.3 namespaces</xd:desc>
     </xd:doc>
@@ -150,11 +151,41 @@
                 <xsl:element name="r:MeasurementUnit">
                     <xsl:value-of select="r32:MeasurementUnit"/>
                 </xsl:element>
-                <xsl:apply-templates select="$domain/*[not(r32:OutParameter)]"/>
+                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter)]"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>Variables without representation : not new with DDI 3.3, but forgotten till now + evolution needed for MeasurementUnit</xd:desc>
+    </xd:doc>
+    <xsl:template match="l32:VariableRepresentation[not(*)]">
+        <xsl:variable name="QID" select="../r32:QuestionReference/r32:ID"/>
+        <xsl:variable name="QOPID" select="../r32:SourceParameterReference/r32:ID"/>
+        <xsl:variable name="RDOPID" select="//*[not(ends-with(name(),'Reference')) and r32:ID=$QID]/r32:Binding[r32:TargetParameterReference/r32:ID=$QOPID]/r32:SourceParameterReference/r32:ID"/>
+        <xsl:variable name="domain" select="//*[not(ends-with(name(),'Reference')) and r32:ID=$QID]//*[(ends-with(name(),'Domain') or  ends-with(name(),'DomainReference')) and r32:OutParameter/r32:ID=$RDOPID]" as="node()"/>
+        <xsl:variable name="domain-root">
+            <xsl:choose>
+                <xsl:when test="ends-with($domain/local-name(),'Domain')">
+                    <xsl:value-of select="concat('d:',$domain/local-name())"/>
+                </xsl:when>
+                <xsl:when test="ends-with($domain/local-name(),'DomainReference')">
+                    <xsl:value-of select="concat('r:',$domain/local-name())"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="'UNKNWON'"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:element name="l:VariableRepresentation">
+            <xsl:element name="{$domain-root}">
+                <xsl:apply-templates select="$domain/@*"/>
+                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter)]"/>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    
+    
     <xd:doc>
         <xd:desc>https://ddi-alliance.atlassian.net/projects/DDILIFE/issues/DDILIFE-3590</xd:desc>
     </xd:doc>
