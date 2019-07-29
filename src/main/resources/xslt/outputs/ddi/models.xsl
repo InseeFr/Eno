@@ -1429,8 +1429,7 @@
 			<xsl:choose>
 				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
 				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
-			    <xsl:when test="starts-with($format , 'Pn')">duration</xsl:when>
-			    <xsl:when test="starts-with($format , 'PTn')">duration</xsl:when>
+				<xsl:when test="$format = ('PnYnM', 'PTnHnM')">duration</xsl:when>
 				<xsl:otherwise>date</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -1507,8 +1506,7 @@
 			<xsl:choose>
 				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
 				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
-			    <xsl:when test="starts-with($format , 'Pn')">duration</xsl:when>
-			    <xsl:when test="starts-with($format , 'PTn')">duration</xsl:when>
+				<xsl:when test="$format = ('PnYnM', 'PTnHnM')">duration</xsl:when>
 				<xsl:otherwise>date</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
