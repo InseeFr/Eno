@@ -460,7 +460,29 @@
         <xsl:value-of select="string(1 + number($last-line) - number($first-line))"/>
     </xsl:template>
 
-
+    <xd:doc>
+        <xd:desc>getting maximum from date / duration</xd:desc>
+    </xd:doc>
+    <xsl:template match="d:DateTimeDomain|d:DateTimeDomainReference" mode="enoddi:get-maximum">
+        <xsl:variable name="standart-maximum" select="descendant::r:MaximumValue[not(ancestor::r:OutParameter)]"/>
+        
+        <xsl:choose>
+            <xsl:when test="$standart-maximum = ''"/>
+            <xsl:when test="$standart-maximum = 'format-date(current-date(),''[Y0001]-[M01]-[D01]'')'">
+                <xsl:value-of select="format-date(current-date(),'[Y0001]-[M01]-[D01]')"/>
+            </xsl:when>
+            <xsl:when test="$standart-maximum = 'format-date(current-date(),''[Y0001]-[M01]'')'">
+                <xsl:value-of select="format-date(current-date(),'[Y0001]-[M01]')"/>
+            </xsl:when>
+            <xsl:when test="$standart-maximum = 'year-from-date(current-date())'">
+                <xsl:value-of select="year-from-date(current-date())"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$standart-maximum"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>For a given element, return a set of the Instruction ids which are dependent of the said.</xd:p>

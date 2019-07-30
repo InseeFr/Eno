@@ -1061,13 +1061,15 @@
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="dateduration-format" select="upper-case(enofr:get-format($source-context))"/>
+        <xsl:variable name="minimum" select="enofr:get-minimum($source-context)"/>
+        <xsl:variable name="maximum" select="enofr:get-maximum($source-context)"/>
         <xsl:variable name="layout-list" as="node()">
             <xsl:call-template name="dateduration-layout">
                 <xsl:with-param name="variable-name" select="$name"/>
                 <xsl:with-param name="driver" select="$current-driver"/>
                 <xsl:with-param name="format" select="$dateduration-format"/>
-                <xsl:with-param name="minimum" select="enofr:get-minimum($source-context)"/>
-                <xsl:with-param name="maximum" select="enofr:get-maximum($source-context)"/>
+                <xsl:with-param name="minimum" select="$minimum"/>
+                <xsl:with-param name="maximum" select="$maximum"/>
             </xsl:call-template>
         </xsl:variable>
 
@@ -1120,7 +1122,6 @@
                         <xsl:otherwise>
                             <xsl:value-of select="'''P'''"/>
                             <xsl:for-each select="$layout-list//format[@id='Y' or @id='M' or @id='D']">
-                                <!--<xsl:value-of select="concat(', ../',@variable,',''',@id,'''')"/>-->
                                 <xsl:value-of select="concat(', if (../',@variable,' != '''') then concat(../',@variable,',''',@id,''') else ''''')"/>
                             </xsl:for-each>
                             <xsl:if test="contains($dateduration-format,'T')">
@@ -1140,6 +1141,64 @@
                     </xsl:choose>
                     <xsl:value-of select="' ))'"/>
                 </xsl:attribute>
+                <xsl:if test="$minimum != '' or $maximum != ''">
+                    <xsl:element name="xf:constraint">
+                        <xsl:attribute name="value">
+                            <xsl:choose>
+                                <xsl:when test="$current-driver = 'DurationDomain'">
+                                    <xsl:value-of select="'if (string(.) != '''') then (('"/>
+                                    <xsl:if test="$minimum != ''">
+                                        <xsl:for-each select="$layout-list//format">
+                                            <xsl:if test="position() != 1">
+                                                <xsl:value-of select="') or ('"/>
+                                            </xsl:if>
+                                            <xsl:for-each select="preceding-sibling::format">
+                                                <xsl:value-of select="concat('(',lower-case(@unit),'s-from-duration(.) = ',@global-minimum,') and ')"/>
+                                            </xsl:for-each>
+                                            <xsl:value-of select="concat('(',lower-case(@unit),'s-from-duration(.) &gt;')"/>
+                                            <xsl:if test="not(following-sibling::format)">
+                                                <xsl:value-of select="'='"/>
+                                            </xsl:if>
+                                            <xsl:value-of select="concat(' ',@global-minimum,')')"/>
+                                        </xsl:for-each>
+                                    </xsl:if>
+                                    <xsl:if test="$minimum != '' and $minimum != ''">
+                                        <xsl:value-of select="')) and (('"/>
+                                    </xsl:if>
+                                    <xsl:if test="$maximum != ''">
+                                        <xsl:for-each select="$layout-list//format">
+                                            <xsl:if test="position() != 1">
+                                                <xsl:value-of select="') or ('"/>
+                                            </xsl:if>
+                                            <xsl:for-each select="preceding-sibling::format">
+                                                <xsl:value-of select="concat('(',lower-case(@unit),'s-from-duration(.) = ',@global-maximum,') and ')"/>
+                                            </xsl:for-each>
+                                            <xsl:value-of select="concat('(',lower-case(@unit),'s-from-duration(.) &lt;')"/>
+                                            <xsl:if test="not(following-sibling::format)">
+                                                <xsl:value-of select="'='"/>
+                                            </xsl:if>
+                                            <xsl:value-of select="concat(' ',@global-maximum,')')"/>
+                                        </xsl:for-each>
+                                    </xsl:if>
+                                    <xsl:value-of select="'))'"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="'if(string(.) != '''') then ('"/>
+                                    <xsl:if test="$minimum != ''">
+                                        <xsl:value-of select="concat('string(.) &gt;= ''',$minimum,'''')"/>
+                                    </xsl:if>
+                                    <xsl:if test="$minimum != '' and $maximum != ''">
+                                        <xsl:value-of select="' and '"/>
+                                    </xsl:if>
+                                    <xsl:if test="$maximum != ''">
+                                        <xsl:value-of select="concat('string(.) &lt;= ''',$maximum,'''')"/>
+                                    </xsl:if>
+                                    <xsl:value-of select="')'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                    </xsl:element>
+                </xsl:if>
             </xf:bind>
         </xsl:if>
         <!-- real element or layout ones -->
@@ -1201,6 +1260,23 @@
                         </xsl:if>
                         <xsl:value-of select="')'"/>
                     </xsl:attribute>
+                </xsl:if>
+                <xsl:if test="($dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA') and ($minimum != '' or $maximum != '')">
+                    <xsl:element name="xf:constraint">
+                        <xsl:attribute name="value">
+                            <xsl:value-of select="'if (. castable as xs:date) then ('"/>
+                            <xsl:if test="$minimum != ''">
+                                <xsl:value-of select="concat('xs:date(.) &gt;= xs:date(''',$minimum,''')')"/>
+                            </xsl:if>
+                            <xsl:if test="$minimum != '' and $maximum != ''">
+                                <xsl:value-of select="' and '"/>
+                            </xsl:if>
+                            <xsl:if test="$maximum != ''">
+                                <xsl:value-of select="concat('xs:date(.) &lt;= xs:date(''',$maximum,''')')"/>
+                            </xsl:if>
+                            <xsl:value-of select="')'"/>
+                        </xsl:attribute>
+                    </xsl:element>
                 </xsl:if>
                 <xsl:if test="$current-driver = 'DurationDomain'">
                     <xsl:element name="xf:constraint">
@@ -1457,7 +1533,8 @@
                     <xsl:when test="$current-driver = 'DurationDomain'">
                         <alert>
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Integer"/>
-                            <xsl:value-of select="concat(' ',@minimum, ' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',@maximum)"/>
+                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Between,' ',@minimum)"/>
+                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',@maximum)"/>
                         </alert>
                     </xsl:when>
                     <xsl:when test="$dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA' or $dateduration-format = 'YYYY-MM' or upper-case($dateduration-format) = 'MM/AAAA'">
@@ -2387,7 +2464,7 @@
                     <format id="CH" unit="Hundredth" minimum="0" maximum="99" variable="{$variable-name}-layout-CH"/>
                 </xsl:when>
                 <xsl:when test="$driver = 'DateTimeDomain'">
-                    <!-- The extremum are different from duration onesorder is different between date dans duration -->
+                    <!-- The extremum are different from duration ones ; order is different between date and duration -->
                     <xsl:if test="contains($format,'Y') or contains($format,'A')">
                         <format id="Y" unit="Year">
                             <xsl:attribute name="minimum">
@@ -2498,6 +2575,7 @@
                     </xsl:if>
                 </xsl:when>
                 <xsl:otherwise>
+                    <!-- duration -->
                     <xsl:if test="contains($format,'Y') or contains($format,'A')">
                         <format id="Y" unit="Year" variable="{$variable-name}-layout-Y">
                             <xsl:attribute name="minimum">
@@ -2534,6 +2612,12 @@
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>
+                            <xsl:if test="$minimum !=''">
+                                <xsl:attribute name="global-minimum" select="years-from-duration(xs:duration($minimum))"/>
+                            </xsl:if>
+                            <xsl:if test="$maximum !=''">
+                                <xsl:attribute name="global-maximum" select="years-from-duration(xs:duration($maximum))"/>
+                            </xsl:if>
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'M') and not(contains(substring-before($format,'M'),'T'))">
@@ -2579,6 +2663,12 @@
                                     </xsl:non-matching-substring>
                                 </xsl:analyze-string>
                             </xsl:attribute>
+                            <xsl:if test="$minimum !=''">
+                                <xsl:attribute name="global-minimum" select="months-from-duration(xs:duration($minimum))"/>
+                            </xsl:if>
+                            <xsl:if test="$maximum !=''">
+                                <xsl:attribute name="global-maximum" select="months-from-duration(xs:duration($maximum))"/>
+                            </xsl:if>
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'D') or contains($format,'J')">
@@ -2624,6 +2714,12 @@
                                     </xsl:non-matching-substring>
                                 </xsl:analyze-string>
                             </xsl:attribute>
+                            <xsl:if test="$minimum !=''">
+                                <xsl:attribute name="global-minimum" select="days-from-duration(xs:duration($minimum))"/>
+                            </xsl:if>
+                            <xsl:if test="$maximum !=''">
+                                <xsl:attribute name="global-maximum" select="days-from-duration(xs:duration($maximum))"/>
+                            </xsl:if>
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'H')">
@@ -2669,6 +2765,12 @@
                                     </xsl:non-matching-substring>
                                 </xsl:analyze-string>
                             </xsl:attribute>
+                            <xsl:if test="$minimum !=''">
+                                <xsl:attribute name="global-minimum" select="hours-from-duration(xs:duration($minimum))"/>
+                            </xsl:if>
+                            <xsl:if test="$maximum !=''">
+                                <xsl:attribute name="global-maximum" select="hours-from-duration(xs:duration($maximum))"/>
+                            </xsl:if>
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'T') and contains(substring-after($format,'T'),'M')">
@@ -2714,6 +2816,12 @@
                                     </xsl:non-matching-substring>
                                 </xsl:analyze-string>
                             </xsl:attribute>
+                            <xsl:if test="$minimum !=''">
+                                <xsl:attribute name="global-minimum" select="minutes-from-duration(xs:duration($minimum))"/>
+                            </xsl:if>
+                            <xsl:if test="$maximum !=''">
+                                <xsl:attribute name="global-maximum" select="minutes-from-duration(xs:duration($maximum))"/>
+                            </xsl:if>
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'S')">
@@ -2759,6 +2867,12 @@
                                     </xsl:non-matching-substring>
                                 </xsl:analyze-string>
                             </xsl:attribute>
+                            <xsl:if test="$minimum !=''">
+                                <xsl:attribute name="global-minimum" select="seconds-from-duration(xs:duration($minimum))"/>
+                            </xsl:if>
+                            <xsl:if test="$maximum !=''">
+                                <xsl:attribute name="global-maximum" select="seconds-from-duration(xs:duration($maximum))"/>
+                            </xsl:if>
                         </format>
                     </xsl:if>
                 </xsl:otherwise>

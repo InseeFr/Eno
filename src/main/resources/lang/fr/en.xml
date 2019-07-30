@@ -8,22 +8,25 @@
     <Alert>
         <Text>You shall type a correct value</Text>
         <Number>
-            <Integer>You shall type an integer number between</Integer>
+            <Integer>You shall type an integer number</Integer>
             <Decimal>
-                <Beginning>You shall use point as decimal separator, with no spaces, and type a
-                    number between</Beginning>
+                <Beginning>You shall use point as decimal separator, with no spaces, and type a number</Beginning>
                 <DecimalCondition>(with at most</DecimalCondition>
                 <Digit>digit</Digit>
                 <End>behind the "." separator)</End>
             </Decimal>
         </Number>
         <Date>Type a valid date</Date>
-        <Duration>
-            <Hours>The number of hours shall be between 0 and 99.</Hours>
-            <Minutes>The number of minutes shall be between 0 and 59.</Minutes>
-        </Duration>
+        <Date-YYYYMM>Type a valid year and month</Date-YYYYMM>
+        <Date-YYYY>Type a valid year</Date-YYYY>
+        <Duration>Type a valid duration</Duration>
     </Alert>
     <And>and</And>
+    <After>after</After>
+    <Before>before</Before>
+    <Between>between</Between>
+    <GreaterThan>greater than</GreaterThan>
+    <LessThan>less than</LessThan>
     <Plural>s</Plural>
     <AddLine>Add a line</AddLine>
     <DateTime>
