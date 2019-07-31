@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT6H10M49S</meta:editing-duration><meta:editing-cycles>31</meta:editing-cycles><meta:generator>LibreOffice/5.4.5.1$Windows_X86_64 LibreOffice_project/79c9829dd5d8054ec39a82dc51cd9eff340dbee8</meta:generator><dc:date>2018-05-22T17:00:25.815000000</dc:date><dc:creator>François Bulot</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="18" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT6H31M36S</meta:editing-duration><meta:editing-cycles>41</meta:editing-cycles><meta:generator>LibreOffice/5.4.6.2$Windows_X86_64 LibreOffice_project/4014ce260a04f1026ba855d3b8d91541c224eab8</meta:generator><dc:date>2019-07-11T16:12:30.623000000</dc:date><dc:creator>François Bulot</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="24" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">50242</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">3898</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">4792</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
        <config:config-item config:name="CursorPositionX" config:type="int">1</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">4</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">20</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -32,7 +32,7 @@
       </config:config-item-map-entry>
      </config:config-item-map-named>
      <config:config-item config:name="ActiveTable" config:type="string">Sheet1</config:config-item>
-     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1616</config:config-item>
+     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1655</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
      <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
      <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -77,8 +77,8 @@
    <config:config-item config:name="IsRasterAxisSynchronized" config:type="boolean">true</config:config-item>
    <config:config-item config:name="AutoCalculate" config:type="boolean">true</config:config-item>
    <config:config-item config:name="ApplyUserData" config:type="boolean">true</config:config-item>
-   <config:config-item config:name="PrinterName" config:type="string">\\S20slinng\m20-207-ricoh mp2554sp</config:config-item>
-   <config:config-item config:name="PrinterSetup" config:type="base64Binary">1hP+/1xcUzIwc2xpbm5nXG0yMC0yMDctcmljb2ggbXAyNTU0c3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUklDT0ggUENMNiBVbml2ZXJzYWxEcml2ZXIgVjQuMQAWAAEA8hIAAAAAAAAEAAhSAAAEdAAAM1ROVwAAAAAKAFwAXABTADIAMABzAGwAaQBuAG4AZwBcAG0AMgAwAC0AMgAwADcALQByAGkAYwBvAGgAIABtAHAAMgA1AAAAAAABBAAg3AAMEg//gAMBAAkAmgs0CGQAAQAHAFgCAQACAFgCAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAAAAAAxMERSDFhkDpG++hkAAAAAKQQAAHicdVPRcuMwCPwXP/ch6dy01/yMB0vYVouERkJJ05v790OyE6eX9M1mVwss8KfLAsFCshEmzL0LsYgkOHeHDopw/cxIaKR7+o/q0TqQc0SlRgIXFExozobQKplQBNOMYD3bxkkuaMTiCIWqnC2R8HNFeRw1VLIS2KtYAI/9ql4LqYo8uVAZt1h7gaMLLek7D2s8cPJALeeq6+zjNxmOyEdMBGcLAv3oCCPIrERFIUZyBsRx+GL2R6BSJfa7Xe2ATfEYJLuvVucvjZmShX2EiKmG+xKcKOb9A+zkrMzquanJfj+/PqAQhkk5+vzQPb+97n5UWRhLXT+IrIn2+5c3JSW0xSAGgjTV6kcnws2w1s5Td9/vhh7UNo+QOTkdCtD6RH/VjuZWnTgn3R9XB5BYo2r3ZdA6KP3IKNeI2s+l/u7retXKZ8RtTRQgDhPaSbdxFFXmqODA/EE3KjbBaUxa2sA64nSNV81LJHDA7Wl/C3HU8vk2gWHiNJwUGwjMh+74aXaCzb/MVNZWX5o/U4I4O5PXnT7q2XC6+AZEgp8CuQldK8MAg94XE6lB25m0BLqVGb83ojeodmx9lWWmy5/h6DBXD5fK7yTV4e2+7w4yz9q1KdKbkpIaoZwL+PcfWFN6vgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAENPTVBBVF9EVVBMRVhfTU9ERRQARHVwbGV4TW9kZTo6TG9uZ0VkZ2U=</config:config-item>
+   <config:config-item config:name="PrinterName" config:type="string">Envoyer à OneNote 16</config:config-item>
+   <config:config-item config:name="PrinterSetup" config:type="base64Binary">xQT+/0Vudm95ZXIgw6AgT25lTm90ZcKgMTYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU2VuZCB0byBNaWNyb3NvZnQgT25lTm90ZSAxNiBEcgAWAAEA4gMAAAAAAAAEAAhSAAAEdAAAM1ROVwAAAAAKAEUAbgB2AG8AeQBlAHIAIADgACAATwBuAGUATgBvAHQAZQCgADEANgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAAG3AD8AgMvAAABAAkAmgs0CGQAAQAPAFgCAgABAFgCAwABAEEANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAAIAAAABAAAA/////wAAAAAAAAAAAAAAAAAAAABESU5VIgDAAPwCAACsE9jAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAMAAAABTTVRKAAAAABAAsABTAGUAbgBkACAAdABvACAATQBpAGMAcgBvAHMAbwBmAHQAIABPAG4AZQBOAG8AdABlACAAMQA2ACAARAByAGkAdgBlAHIAAABSRVNETEwAVW5pcmVzRExMAFBhcGVyU2l6ZQBMRVRURVIAT3JpZW50YXRpb24AUE9SVFJBSVQAUmVzb2x1dGlvbgBEUEk2MDAAQ29sb3JNb2RlADI0YnBwAAAAAAAAAAAAAAAAAAAAABIAQ09NUEFUX0RVUExFWF9NT0RFEwBEdXBsZXhNb2RlOjpVbmtub3du</config:config-item>
    <config:config-item-map-indexed config:name="ForbiddenCharacters">
     <config:config-item-map-entry>
      <config:config-item config:name="Language" config:type="string">zxx</config:config-item>
@@ -517,7 +517,7 @@
    <style:table-row-properties style:row-height="4.52mm" fo:break-before="auto" style:use-optimal-row-height="true"/>
   </style:style>
   <style:style style:name="ro2" style:family="table-row">
-   <style:table-row-properties style:row-height="16.4mm" fo:break-before="auto" style:use-optimal-row-height="true"/>
+   <style:table-row-properties style:row-height="16.32mm" fo:break-before="auto" style:use-optimal-row-height="true"/>
   </style:style>
   <style:style style:name="ta1" style:family="table" style:master-page-name="Default">
    <style:table-properties table:display="true" style:writing-mode="lr-tb"/>
@@ -570,7 +570,7 @@
      <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2018-05-22">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="16:58:47.374000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2019-07-11">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="16:12:14.815000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -610,10 +610,32 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:StructuredMixedGridResponseDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>*[not(d:ResponseAttachmentLocation)]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>GridResponseDomainInMixed with AttachmentLocation correspond to attached Responsedomain that should&apos;nt be seen as a direct child of the GridResponseDomainInMixed but as a direct child of the response field which it&apos;s attached to (&apos;other:&apos; usecase)</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:ResponseDomainInMixed[@attachmentBase]//l:Code</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>ancestor::d:StructuredMixedResponseDomain/d:ResponseDomainInMixed[d:AttachmentLocation/d:DomainSpecificValue[r:Value = current()/r:Value and @attachmentDomain = current()/ancestor::d:ResponseDomainInMixed/@attachmentBase]]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>For l:Code with attached ResponseDomain, the attached is a direct child of the l:Code. FIXME : Works only for l:Code, if other case are used, need an extension of the implementation.</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:GridResponseDomainInMixed[@attachmentBase]//l:Code</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>ancestor::d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[d:ResponseAttachmentLocation/d:DomainSpecificValue[r:Value = current()/r:Value and @attachmentDomain = current()/ancestor::d:GridResponseDomainInMixed/@attachmentBase]]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>For l:Code with attached ResponseDomain, the attached is a direct child of the l:Code. FIXME : Works only for l:Code, if other case are used, need an extension of the implementation.</text:p>
@@ -632,13 +654,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce3" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionGrid[not(d:GridDimension/@rank=&apos;2&apos;) and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])] </text:p>
+      <text:p>d:QuestionGrid[not(d:GridDimension/@rank=&apos;2&apos;) and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:ResponseAttachmentLocation)])] </text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>.//d:GridResponseDomain/*</text:p>
+      <text:p>.//d:GridResponseDomainInMixed[not(d:ResponseAttachmentLocation)]/*</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>In MultipleChoiceQuestion, only the child of GridResponseDomain are considered as child (GridDimension and GridResponseDomain are escaped to prevent Table&amp;Cell drivers).</text:p>
+      <text:p>In MultipleChoiceQuestion, only the child of GridResponseDomainInMixed are considered as child (GridDimension and GridResponseDomainInMixed are escaped to prevent Table&amp;Cell drivers).</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
@@ -646,7 +668,7 @@
       <text:p>d:QuestionItem | d:QuestionGrid</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>*[not(self::d:InterviewerInstructionReference)]</text:p>
+      <text:p>*[not(self::d:InterviewerInstructionReference) and not(self::d:ExternalAid[r:OtherMaterial/r:Description/r:Content/xhtml:div/@class=&apos;FlowControl&apos;])]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>It deactivate explicit driver flow for Instructions attached to a question. Explicit out-getters should be used instead to retrieve instructions.</text:p>

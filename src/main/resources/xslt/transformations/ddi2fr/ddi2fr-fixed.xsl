@@ -5,8 +5,8 @@
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
-    xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner" xmlns:d="ddi:datacollection:3_2"
-    xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
+    xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner" xmlns:d="ddi:datacollection:3_3"
+    xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3" version="2.0">
 
     <!-- Importing the different resources -->
     <xsl:import href="../../inputs/ddi/source.xsl"/>
@@ -432,63 +432,122 @@
         <xsl:variable name="type">
             <xsl:value-of select="enoddi:get-type($context)"/>
         </xsl:variable>
-        <!-- We retrieve the format -->
         <xsl:variable name="format">
             <xsl:value-of select="enoddi:get-format($context)"/>
         </xsl:variable>
-        <!-- If it is a 'text' and a format is defined, we use a generic sentence as an alert -->
-        <xsl:if test="$type='text'">
-            <xsl:if test="not($format='')">
+        <xsl:variable name="minimum">
+            <xsl:value-of select="enoddi:get-minimum($context)"/>
+        </xsl:variable>
+        <xsl:variable name="maximum">
+            <xsl:value-of select="enoddi:get-maximum($context)"/>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="$type='text'">
+                <xsl:if test="not($format='')">
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Text"/>
+                </xsl:if>
+            </xsl:when>
+            <xsl:when test="$type='number'">
+                <xsl:variable name="number-of-decimals">
+                    <xsl:value-of select="enoddi:get-number-of-decimals($context)"/>
+                </xsl:variable>
+                <xsl:variable name="beginning">
+                    <xsl:choose>
+                        <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
+                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Beginning"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Integer"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Between)"/>
+                </xsl:variable>
+                <xsl:variable name="end">
+                    <xsl:choose>
+                        <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
+                            <xsl:value-of
+                                select="' ',
+                                concat($labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/DecimalCondition,
+                                ' ',
+                                $number-of-decimals,
+                                ' ',
+                                $labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Digit,
+                                if (number($number-of-decimals)&gt;1) then $labels-resource/Languages/Language[@xml:lang=$language]/Plural else '',
+                                ' ',
+                                $labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/End)"
+                            />
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:value-of select="concat($beginning,' ',$minimum, ' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',$maximum, $end)"/>
+            </xsl:when>
+            <xsl:when test="$type='date'">
+                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
+                <xsl:if test="$minimum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ',format-date($minimum, '[D] [MNn] [Y]', $language, (), ()))"/>
+                </xsl:if>
+                <xsl:if test="$minimum != '' and $maximum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
+                </xsl:if>
+                <xsl:if test="$maximum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ',format-date($maximum, '[D] [MNn] [Y]', $language, (), ()))"/>
+                </xsl:if>
+            </xsl:when>
+            <xsl:when test="$type='gYearMonth'">
+                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date-YYYYMM"/>
+                <xsl:if test="$minimum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ',$minimum)"/>
+                </xsl:if>
+                <xsl:if test="$minimum != '' and $maximum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
+                </xsl:if>
+                <xsl:if test="$maximum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ',$maximum)"/>
+                </xsl:if>                
+            </xsl:when>
+            <xsl:when test="$type='gYear'">
+                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date-YYYY"/>
+                <xsl:if test="$minimum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ',$minimum)"/>
+                </xsl:if>
+                <xsl:if test="$minimum != '' and $maximum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
+                </xsl:if>
+                <xsl:if test="$maximum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ',$maximum)"/>
+                </xsl:if>
+            </xsl:when>
+            <xsl:when test="$type='duration'">
+                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration"/>
+                <xsl:if test="$minimum!=''">
+                    <xsl:choose>
+                        <xsl:when test="$maximum!=''">
+                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Between,' ')"/>    
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/GreaterThan,' ')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:value-of select="$minimum"/>
+                </xsl:if>
+                <xsl:if test="$maximum!=''">
+                    <xsl:choose>
+                        <xsl:when test="$minimum!=''">
+                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ')"/>    
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/LessThan,' ')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:value-of select="$maximum"/>
+                </xsl:if>
+            </xsl:when>
+            <xsl:when test="$type='boolean'"/>
+            <xsl:when test="$type!=''">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Text"/>
-            </xsl:if>
-        </xsl:if>
-        <!-- If it is a number, we look for infos about the format and deduce a message for the alert element -->
-        <xsl:if test="$type='number'">
-            <xsl:variable name="number-of-decimals">
-                <xsl:value-of select="enoddi:get-number-of-decimals($context)"/>
-            </xsl:variable>
-            <xsl:variable name="minimum">
-                <xsl:value-of select="enoddi:get-minimum($context)"/>
-            </xsl:variable>
-            <xsl:variable name="maximum">
-                <xsl:value-of select="enoddi:get-maximum($context)"/>
-            </xsl:variable>
-            <xsl:variable name="beginning">
-                <xsl:choose>
-                    <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
-                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Beginning"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Integer"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:variable>
-            <xsl:variable name="end">
-                <xsl:choose>
-                    <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
-                        <xsl:value-of
-                            select="' ',
-                                    concat($labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/DecimalCondition,
-                                    ' ',
-                                    $number-of-decimals,
-                                    ' ',
-                                    $labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Digit,
-                                    if (number($number-of-decimals)&gt;1) then $labels-resource/Languages/Language[@xml:lang=$language]/Plural else '',
-                                    ' ',
-                                    $labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/End)"
-                        />
-                    </xsl:when>
-                </xsl:choose>
-            </xsl:variable>
-            <xsl:value-of select="concat($beginning,' ',$minimum, ' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',$maximum, $end)"/>
-        </xsl:if>
-        <!-- If it is a 'date', we use a generic sentence as an alert -->
-        <xsl:if test="$format='YYYY-MM-DD' or upper-case($format)='JJ/MM/AAAA'">
-            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
-        </xsl:if>
-        <xsl:if test="$format='YYYY-MM' or upper-case($format)='MM/AAAA'">
-            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date-YYYYMM"/>
-        </xsl:if>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:function>
 
     <xd:doc>

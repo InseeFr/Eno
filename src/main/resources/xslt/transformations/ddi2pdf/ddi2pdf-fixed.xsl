@@ -4,8 +4,8 @@
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner"
     xmlns:enoddi2pdf="http://xml.insee.fr/apps/eno/ddi2pdf"
-    xmlns:d="ddi:datacollection:3_2"
-    xmlns:r="ddi:reusable:3_2" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
+    xmlns:d="ddi:datacollection:3_3"
+    xmlns:r="ddi:reusable:3_3" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:l="ddi:logicalproduct:3_3" version="2.0">
 
     <!-- Importing the different resources -->
     <xsl:import href="../../inputs/ddi/source.xsl"/>
@@ -111,6 +111,17 @@
         <xsl:variable name="tempLabel">
             <xsl:apply-templates select="enoddi:get-label($context,$language)" mode="enopdf:format-label">
                 <xsl:with-param name="label-variables" select="enoddi:get-label-conditioning-variables($context,$language)" tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:variable>
+        <xsl:sequence select="$tempLabel"/>
+    </xsl:function>
+    
+    <xsl:function name="enopdf:get-formatted-fixed-value">
+        <xsl:param name="context" as="item()"/>
+        <xsl:param name="language"/>
+        <xsl:variable name="tempLabel">
+            <xsl:apply-templates select="enoddi:get-cell-value($context)" mode="enopdf:format-label">
+                <xsl:with-param name="label-variables" select="enoddi:get-cell-value-variables($context)" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:variable>
         <xsl:sequence select="$tempLabel"/>
