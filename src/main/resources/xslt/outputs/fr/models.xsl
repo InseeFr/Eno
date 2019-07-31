@@ -1180,7 +1180,7 @@
                                             <xsl:value-of select="concat(' ',@global-maximum,')')"/>
                                         </xsl:for-each>
                                     </xsl:if>
-                                    <xsl:value-of select="'))'"/>
+                                    <xsl:value-of select="')) else (.='''')'"/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:value-of select="'if(string(.) != '''') then ('"/>
@@ -1193,7 +1193,7 @@
                                     <xsl:if test="$maximum != ''">
                                         <xsl:value-of select="concat('string(.) &lt;= ''',$maximum,'''')"/>
                                     </xsl:if>
-                                    <xsl:value-of select="')'"/>
+                                    <xsl:value-of select="') else (.='''')'"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:attribute>
@@ -1266,15 +1266,15 @@
                         <xsl:attribute name="value">
                             <xsl:value-of select="'if (. castable as xs:date) then ('"/>
                             <xsl:if test="$minimum != ''">
-                                <xsl:value-of select="concat('xs:date(.) &gt;= xs:date(''',$minimum,''')')"/>
+                                <xsl:value-of select="concat('. &gt;= xs:date(''',$minimum,''')')"/>
                             </xsl:if>
                             <xsl:if test="$minimum != '' and $maximum != ''">
                                 <xsl:value-of select="' and '"/>
                             </xsl:if>
                             <xsl:if test="$maximum != ''">
-                                <xsl:value-of select="concat('xs:date(.) &lt;= xs:date(''',$maximum,''')')"/>
+                                <xsl:value-of select="concat('. &lt;= xs:date(''',$maximum,''')')"/>
                             </xsl:if>
-                            <xsl:value-of select="')'"/>
+                            <xsl:value-of select="') else (xs:string(.) != '''')'"/>
                         </xsl:attribute>
                     </xsl:element>
                 </xsl:if>
@@ -1285,7 +1285,12 @@
                 </xsl:if>
                 <xsl:if test="($dateduration-format='YYYY-MM' or upper-case($dateduration-format)='MM/AAAA') and @id='Y'">
                     <xsl:element name="xf:constraint">
-                        <xsl:attribute name="value" select="concat('if (string(.)='''') then string(../',$name,'-layout-M)='''' else (.!='''')')"/>
+                        <xsl:attribute name="value" select="concat('if (string(.)='''') then string(../',$name,'-layout-M)='''' else (string(../',$name,'-layout-M)!='''')')"/>
+                    </xsl:element>
+                </xsl:if>
+                <xsl:if test="($dateduration-format='YYYY-MM' or upper-case($dateduration-format)='MM/AAAA') and @id='M'">
+                    <xsl:element name="xf:constraint">
+                        <xsl:attribute name="value" select="concat('if (string(.)='''') then string(../',$name,'-layout-Y)='''' else (string(../',$name,'-layout-Y)!='''')')"/>
                     </xsl:element>
                 </xsl:if>
             </xf:bind>
@@ -1524,7 +1529,7 @@
                         </xsl:choose>
                     </label>
                 </xsl:if>
-                <xsl:if test="$hint != '' and $question-label != ''">
+                <xsl:if test="$hint != '' and $question-label != '' and (position() = last() or $current-driver='DurationDomain')">
                     <hint>
                         <xsl:value-of select="$hint"/>
                     </hint>
@@ -1537,7 +1542,12 @@
                             <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ',@maximum)"/>
                         </alert>
                     </xsl:when>
-                    <xsl:when test="$dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA' or $dateduration-format = 'YYYY-MM' or upper-case($dateduration-format) = 'MM/AAAA'">
+                    <xsl:when test="$dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA'">
+                        <alert>
+                            <xsl:value-of select="enofr:get-alert($source-context, $language)"/>
+                        </alert>
+                    </xsl:when>
+                    <xsl:when test="($dateduration-format = 'YYYY-MM' or upper-case($dateduration-format) = 'MM/AAAA') and position()=last()">
                         <alert>
                             <xsl:value-of select="enofr:get-alert($source-context, $language)"/>
                         </alert>
@@ -2340,7 +2350,7 @@
                 </xsl:attribute>
                 <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
                 <xsl:if test="$current-driver = 'DurationDomain'">
-                    <xsl:attribute name="xxf:maxlength" select="'2'"/>
+                    <xsl:attribute name="xxf:maxlength" select="if (string-length(@minimum) &gt; string-length(@maximum)) then string-length(@minimum) else string-length(@maximum)"/>
                 </xsl:if>
                 <xsl:if test="position() = 1 and ($label != '' or $question-label!= '')">
                     <xsl:variable name="conditioning-variables" as="xs:string*">

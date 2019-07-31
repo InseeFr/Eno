@@ -484,25 +484,35 @@
             <xsl:when test="$type='date'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
                 <xsl:if test="$minimum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ',format-date($minimum, '[D] [MNn] [Y]', $language, (), ()))"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ')"/>
+                    <xsl:value-of select="concat(number(substring($minimum,9,2)),' ')"/>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($minimum,6,2))]"/>
+                    <xsl:value-of select="concat(' ',substring($minimum,1,4))"/>
                 </xsl:if>
                 <xsl:if test="$minimum != '' and $maximum != ''">
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ',format-date($maximum, '[D] [MNn] [Y]', $language, (), ()))"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
+                    <xsl:value-of select="concat(number(substring($maximum,9,2)),' ')"/>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($maximum,6,2))]"/>
+                    <xsl:value-of select="concat(' ',substring($maximum,1,4))"/>
                 </xsl:if>
             </xsl:when>
             <xsl:when test="$type='gYearMonth'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date-YYYYMM"/>
                 <xsl:if test="$minimum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ',$minimum)"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ')"/>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($minimum,6,2))]"/>
+                    <xsl:value-of select="concat(' ',substring($minimum,1,4))"/>
                 </xsl:if>
                 <xsl:if test="$minimum != '' and $maximum != ''">
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ',$maximum)"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($maximum,6,2))]"/>
+                    <xsl:value-of select="concat(' ',substring($maximum,1,4))"/>
                 </xsl:if>                
             </xsl:when>
             <xsl:when test="$type='gYear'">
