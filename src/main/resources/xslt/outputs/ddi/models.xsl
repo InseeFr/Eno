@@ -1153,11 +1153,16 @@
     <xsl:template match="driver-SMGRD/ResponseDomain" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="clarificationResponseid" as="xs:string" tunnel="yes"/>
         <!-- Because of the xsl:for-each, driver context needs to be kept. -->
         <xsl:variable name="driver" select="."/>
         <xsl:for-each select="enoddi33:get-grid-dimensions($source-context)">
             <d:GridResponseDomainInMixed>
-               <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<!-- Check wich response has an clarification question attached -->
+				<xsl:if test="$clarificationResponseid !='' and contains($clarificationResponseid,enoddi33:get-id($source-context))">
+					<xsl:attribute name="attachmentBase" select="1"/>
+				</xsl:if>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
                     <xsl:with-param name="mandatory" select="enoddi33:get-ci-type($source-context)" tunnel="yes"/>
                 </xsl:apply-templates>
@@ -1222,10 +1227,12 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- If clarification exist must keep expression value -->
         <xsl:variable name="clarificationExp" select="substring-after(enoddi33:get-clarification-expression($source-context), '=')"/>
+        <xsl:variable name="clarificationResponseid" select="enoddi33:get-clarification-responseid($source-context)"/>
         <d:StructuredMixedGridResponseDomain>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMGRD', .)" tunnel="yes"/>
 				<xsl:with-param name="clarificationVal" select='normalize-space(replace($clarificationExp,"&apos;",""))' tunnel="yes"/>
+				<xsl:with-param name="clarificationResponseid" select='$clarificationResponseid' tunnel="yes"/>
             </xsl:apply-templates> 
         </d:StructuredMixedGridResponseDomain>
     </xsl:template>
