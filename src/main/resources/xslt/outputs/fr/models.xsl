@@ -1264,7 +1264,7 @@
                 <xsl:if test="($dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA') and ($minimum != '' or $maximum != '')">
                     <xsl:element name="xf:constraint">
                         <xsl:attribute name="value">
-                            <xsl:value-of select="'if (. castable as xs:date) then ('"/>
+                            <xsl:value-of select="'if (string(.) != '''' and . castable as xs:date) then ('"/>
                             <xsl:if test="$minimum != ''">
                                 <xsl:value-of select="concat('. &gt;= xs:date(''',$minimum,''')')"/>
                             </xsl:if>
@@ -1274,7 +1274,7 @@
                             <xsl:if test="$maximum != ''">
                                 <xsl:value-of select="concat('. &lt;= xs:date(''',$maximum,''')')"/>
                             </xsl:if>
-                            <xsl:value-of select="') else (xs:string(.) != '''')'"/>
+                            <xsl:value-of select="') else (string(.) = '''')'"/>
                         </xsl:attribute>
                     </xsl:element>
                 </xsl:if>
