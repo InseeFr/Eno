@@ -1231,11 +1231,6 @@
                         <xsl:attribute name="value" select="concat('if (string(.)='''') then string(../',$name,'-layout-M)='''' else (string(../',$name,'-layout-M)!='''')')"/>
                     </xsl:element>
                 </xsl:if>
-                <xsl:if test="($dateduration-format='YYYY-MM' or upper-case($dateduration-format)='MM/AAAA') and @id='M'">
-                    <xsl:element name="xf:constraint">
-                        <xsl:attribute name="value" select="concat('if (string(.)='''') then string(../',$name,'-layout-Y)='''' else (string(../',$name,'-layout-Y)!='''')')"/>
-                    </xsl:element>
-                </xsl:if>
             </xf:bind>
         </xsl:for-each>
         <xsl:if test="count($layout-list//format) &gt; 1 or $current-driver = 'DurationDomain'">
@@ -1548,6 +1543,11 @@
                         </alert>
                     </xsl:when>
                     <xsl:when test="$dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA'">
+                        <alert>
+                            <xsl:value-of select="enofr:get-alert($source-context, $language)"/>
+                        </alert>
+                    </xsl:when>
+                    <xsl:when test="($dateduration-format = 'YYYY-MM' or upper-case($dateduration-format) = 'MM/AAAA') and @unit='Year'">
                         <alert>
                             <xsl:value-of select="enofr:get-alert($source-context, $language)"/>
                         </alert>
@@ -2600,301 +2600,265 @@
                     <!-- duration -->
                     <xsl:if test="contains($format,'Y') or contains($format,'A')">
                         <format id="Y" unit="Year" variable="{$variable-name}-layout-Y">
-                            <xsl:attribute name="minimum">
-                                <xsl:choose>
-                                    <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^P([0-9]+)Y.*$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(1)"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'0'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="'0'"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:attribute>
-                            <xsl:attribute name="maximum">
-                                <xsl:choose>
-                                    <xsl:when test="$maximum != ''">
-                                        <xsl:analyze-string select="$maximum" regex="^P([0-9]+)Y.*$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(1)"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'99'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="'99'"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:attribute>
-                            <xsl:if test="$minimum !=''">
-                                <xsl:attribute name="global-minimum" select="years-from-duration(xs:duration($minimum))"/>
-                            </xsl:if>
-                            <xsl:if test="$maximum !=''">
-                                <xsl:attribute name="global-maximum" select="years-from-duration(xs:duration($maximum))"/>
-                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="$minimum != ''">
+                                    <xsl:analyze-string select="$minimum" regex="^P([0-9]+)Y.*$">
+                                        <xsl:matching-substring>
+                                            <xsl:attribute name="minimum" select="regex-group(1)"/>
+                                            <xsl:attribute name="global-minimum" select="regex-group(1)"/>
+                                        </xsl:matching-substring>
+                                        <xsl:non-matching-substring>
+                                            <xsl:attribute name="minimum" select="'0'"/>
+                                            <xsl:attribute name="global-minimum" select="'0'"/>
+                                        </xsl:non-matching-substring>
+                                    </xsl:analyze-string>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="minimum" select="'0'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:choose>
+                                <xsl:when test="$maximum != ''">
+                                    <xsl:analyze-string select="$maximum" regex="^P([0-9]+)Y.*$">
+                                        <xsl:matching-substring>
+                                            <xsl:attribute name="maximum" select="regex-group(1)"/>
+                                            <xsl:attribute name="global-maximum" select="regex-group(1)"/>
+                                        </xsl:matching-substring>
+                                        <xsl:non-matching-substring>
+                                            <xsl:attribute name="maximum" select="'99'"/>
+                                            <xsl:attribute name="global-maximum" select="'0'"/>
+                                        </xsl:non-matching-substring>
+                                    </xsl:analyze-string>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="maximum" select="'99'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'M') and not(contains(substring-before($format,'M'),'T'))">
                         <format id="M" unit="Month" variable="{$variable-name}-layout-M">
-                            <xsl:attribute name="minimum">
-                                <xsl:choose>
-                                    <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^P([0-9]+)M.*$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(1)"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'0'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="'0'"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:attribute>
-                            <xsl:attribute name="maximum">
-                                <xsl:analyze-string select="$format" regex="^PN+M.*$">
-                                    <xsl:matching-substring>
-                                        <xsl:choose>
-                                            <xsl:when test="$maximum != ''">
-                                                <xsl:analyze-string select="$maximum" regex="^P([0-9]+)M.*$">
-                                                    <xsl:matching-substring>
-                                                        <xsl:value-of select="regex-group(1)"/>
-                                                    </xsl:matching-substring>
-                                                    <xsl:non-matching-substring>
-                                                        <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
-                                                    </xsl:non-matching-substring>
-                                                </xsl:analyze-string>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:value-of select="'99'"/>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:matching-substring>
-                                    <xsl:non-matching-substring>
-                                        <xsl:value-of select="'11'"/>
-                                    </xsl:non-matching-substring>
-                                </xsl:analyze-string>
-                            </xsl:attribute>
-                            <xsl:if test="$minimum !=''">
-                                <xsl:attribute name="global-minimum" select="months-from-duration(xs:duration($minimum))"/>
-                            </xsl:if>
-                            <xsl:if test="$maximum !=''">
-                                <xsl:attribute name="global-maximum" select="months-from-duration(xs:duration($maximum))"/>
-                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="$minimum != ''">
+                                    <xsl:analyze-string select="$minimum" regex="^P([0-9]+)M.*$">
+                                        <xsl:matching-substring>
+                                            <xsl:attribute name="minimum" select="regex-group(1)"/>
+                                            <xsl:attribute name="global-minimum" select="regex-group(1)"/>
+                                        </xsl:matching-substring>
+                                        <xsl:non-matching-substring>
+                                            <xsl:attribute name="minimum" select="'0'"/>
+                                            <xsl:attribute name="global-minimum" select="months-from-duration(xs:duration($minimum))"/>
+                                        </xsl:non-matching-substring>
+                                    </xsl:analyze-string>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="minimum" select="'0'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:analyze-string select="$format" regex="^PN+M.*$">
+                                <xsl:matching-substring>
+                                    <xsl:choose>
+                                        <xsl:when test="$maximum != ''">
+                                            <xsl:analyze-string select="$maximum" regex="^P([0-9]+)M.*$">
+                                                <xsl:matching-substring>
+                                                    <xsl:attribute name="maximum" select="regex-group(1)"/>
+                                                    <xsl:attribute name="global-maximum" select="regex-group(1)"/>
+                                                </xsl:matching-substring>
+                                                <xsl:non-matching-substring>
+                                                    <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
+                                                </xsl:non-matching-substring>
+                                            </xsl:analyze-string>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:attribute name="maximum" select="'99'"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:matching-substring>
+                                <xsl:non-matching-substring>
+                                    <xsl:attribute name="maximum" select="'11'"/>
+                                    <xsl:attribute name="global-maximum" select="months-from-duration(xs:duration($maximum))"/>
+                                </xsl:non-matching-substring>
+                            </xsl:analyze-string>
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'D') or contains($format,'J')">
                         <format id="D" unit="Day" variable="{$variable-name}-layout-D">
-                            <xsl:attribute name="minimum">
-                                <xsl:choose>
-                                    <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^P([0-9]+)D.*$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(1)"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'0'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="'0'"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:attribute>
-                            <xsl:attribute name="maximum">
-                                <xsl:analyze-string select="$format" regex="^PN+D.*$">
-                                    <xsl:matching-substring>
-                                        <xsl:choose>
-                                            <xsl:when test="$maximum != ''">
-                                                <xsl:analyze-string select="$maximum" regex="^P([0-9]+)D.*$">
-                                                    <xsl:matching-substring>
-                                                        <xsl:value-of select="regex-group(1)"/>
-                                                    </xsl:matching-substring>
-                                                    <xsl:non-matching-substring>
-                                                        <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
-                                                    </xsl:non-matching-substring>
-                                                </xsl:analyze-string>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:value-of select="'99'"/>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:matching-substring>
-                                    <xsl:non-matching-substring>
-                                        <xsl:value-of select="'30'"/>
-                                    </xsl:non-matching-substring>
-                                </xsl:analyze-string>
-                            </xsl:attribute>
-                            <xsl:if test="$minimum !=''">
-                                <xsl:attribute name="global-minimum" select="days-from-duration(xs:duration($minimum))"/>
-                            </xsl:if>
-                            <xsl:if test="$maximum !=''">
-                                <xsl:attribute name="global-maximum" select="days-from-duration(xs:duration($maximum))"/>
-                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="$minimum != ''">
+                                    <xsl:analyze-string select="$minimum" regex="^P([0-9]+)D.*$">
+                                        <xsl:matching-substring>
+                                            <xsl:attribute name="minimum" select="regex-group(1)"/>
+                                            <xsl:attribute name="global-minimum" select="regex-group(1)"/>
+                                        </xsl:matching-substring>
+                                        <xsl:non-matching-substring>
+                                            <xsl:attribute name="minimum" select="'0'"/>
+                                            <xsl:attribute name="global-minimum" select="days-from-duration(xs:duration($minimum))"/>
+                                        </xsl:non-matching-substring>
+                                    </xsl:analyze-string>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="minimum" select="'0'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:analyze-string select="$format" regex="^PN+D.*$">
+                                <xsl:matching-substring>
+                                    <xsl:choose>
+                                        <xsl:when test="$maximum != ''">
+                                            <xsl:analyze-string select="$maximum" regex="^P([0-9]+)D.*$">
+                                                <xsl:matching-substring>
+                                                    <xsl:attribute name="maximum" select="regex-group(1)"/>
+                                                    <xsl:attribute name="global-maximum" select="regex-group(1)"/>
+                                                </xsl:matching-substring>
+                                                <xsl:non-matching-substring>
+                                                    <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
+                                                </xsl:non-matching-substring>
+                                            </xsl:analyze-string>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:attribute name="maximum" select="'99'"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:matching-substring>
+                                <xsl:non-matching-substring>
+                                    <xsl:attribute name="maximum" select="'30'"/>
+                                    <xsl:attribute name="global-maximum" select="days-from-duration(xs:duration($maximum))"/>
+                                </xsl:non-matching-substring>
+                            </xsl:analyze-string>
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'H')">
                         <format id="H" unit="Hour" variable="{$variable-name}-layout-H">
-                            <xsl:attribute name="minimum">
-                                <xsl:choose>
-                                    <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^PT([0-9]+)H.*$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(1)"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'0'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="'0'"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:attribute>
-                            <xsl:attribute name="maximum">
-                                <xsl:analyze-string select="$format" regex="^PTN+H.*$">
-                                    <xsl:matching-substring>
-                                        <xsl:choose>
-                                            <xsl:when test="$maximum != ''">
-                                                <xsl:analyze-string select="$maximum" regex="^PT([0-9]+)H.*$">
-                                                    <xsl:matching-substring>
-                                                        <xsl:value-of select="regex-group(1)"/>
-                                                    </xsl:matching-substring>
-                                                    <xsl:non-matching-substring>
-                                                        <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
-                                                    </xsl:non-matching-substring>
-                                                </xsl:analyze-string>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:value-of select="'99'"/>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:matching-substring>
-                                    <xsl:non-matching-substring>
-                                        <xsl:value-of select="'23'"/>
-                                    </xsl:non-matching-substring>
-                                </xsl:analyze-string>
-                            </xsl:attribute>
-                            <xsl:if test="$minimum !=''">
-                                <xsl:attribute name="global-minimum" select="hours-from-duration(xs:duration($minimum))"/>
-                            </xsl:if>
-                            <xsl:if test="$maximum !=''">
-                                <xsl:attribute name="global-maximum" select="hours-from-duration(xs:duration($maximum))"/>
-                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="$minimum != ''">
+                                    <xsl:analyze-string select="$minimum" regex="^PT([0-9]+)H.*$">
+                                        <xsl:matching-substring>
+                                            <xsl:attribute name="minimum" select="regex-group(1)"/>
+                                            <xsl:attribute name="global-minimum" select="regex-group(1)"/>
+                                        </xsl:matching-substring>
+                                        <xsl:non-matching-substring>
+                                            <xsl:attribute name="minimum" select="'0'"/>
+                                            <xsl:attribute name="global-minimum" select="hours-from-duration(xs:duration($minimum))"/>
+                                        </xsl:non-matching-substring>
+                                    </xsl:analyze-string>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="minimum" select="'0'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:analyze-string select="$format" regex="^PTN+H.*$">
+                                <xsl:matching-substring>
+                                    <xsl:choose>
+                                        <xsl:when test="$maximum != ''">
+                                            <xsl:analyze-string select="$maximum" regex="^PT([0-9]+)H.*$">
+                                                <xsl:matching-substring>
+                                                    <xsl:attribute name="maximum" select="regex-group(1)"/>
+                                                    <xsl:attribute name="global-maximum" select="regex-group(1)"/>
+                                                </xsl:matching-substring>
+                                                <xsl:non-matching-substring>
+                                                    <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
+                                                </xsl:non-matching-substring>
+                                            </xsl:analyze-string>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:attribute name="maximum" select="'99'"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:matching-substring>
+                                <xsl:non-matching-substring>
+                                    <xsl:attribute name="maximum" select="'23'"/>
+                                    <xsl:attribute name="global-maximum" select="hours-from-duration(xs:duration($maximum))"/>
+                                </xsl:non-matching-substring>
+                            </xsl:analyze-string>
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'T') and contains(substring-after($format,'T'),'M')">
                         <format id="m" unit="Minute" variable="{$variable-name}-layout-m">
-                            <xsl:attribute name="minimum">
-                                <xsl:choose>
-                                    <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^PT([0-9]+)M.*$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(1)"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'0'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="'0'"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:attribute>
-                            <xsl:attribute name="maximum">
-                                <xsl:analyze-string select="$format" regex="^PTN+M.*$">
-                                    <xsl:matching-substring>
-                                        <xsl:choose>
-                                            <xsl:when test="$maximum != ''">
-                                                <xsl:analyze-string select="$maximum" regex="^PT([0-9]+)M.*$">
-                                                    <xsl:matching-substring>
-                                                        <xsl:value-of select="regex-group(1)"/>
-                                                    </xsl:matching-substring>
-                                                    <xsl:non-matching-substring>
-                                                        <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
-                                                    </xsl:non-matching-substring>
-                                                </xsl:analyze-string>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:value-of select="'99'"/>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:matching-substring>
-                                    <xsl:non-matching-substring>
-                                        <xsl:value-of select="'59'"/>
-                                    </xsl:non-matching-substring>
-                                </xsl:analyze-string>
-                            </xsl:attribute>
-                            <xsl:if test="$minimum !=''">
-                                <xsl:attribute name="global-minimum" select="minutes-from-duration(xs:duration($minimum))"/>
-                            </xsl:if>
-                            <xsl:if test="$maximum !=''">
-                                <xsl:attribute name="global-maximum" select="minutes-from-duration(xs:duration($maximum))"/>
-                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="$minimum != ''">
+                                    <xsl:analyze-string select="$minimum" regex="^PT([0-9]+)M.*$">
+                                        <xsl:matching-substring>
+                                            <xsl:attribute name="minimum" select="regex-group(1)"/>
+                                            <xsl:attribute name="global-minimum" select="regex-group(1)"/>
+                                        </xsl:matching-substring>
+                                        <xsl:non-matching-substring>
+                                            <xsl:attribute name="minimum" select="'0'"/>
+                                            <xsl:attribute name="global-minimum" select="minutes-from-duration(xs:duration($minimum))"/>
+                                        </xsl:non-matching-substring>
+                                    </xsl:analyze-string>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="minimum" select="'0'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:analyze-string select="$format" regex="^PTN+M.*$">
+                                <xsl:matching-substring>
+                                    <xsl:choose>
+                                        <xsl:when test="$maximum != ''">
+                                            <xsl:analyze-string select="$maximum" regex="^PT([0-9]+)M.*$">
+                                                <xsl:matching-substring>
+                                                    <xsl:attribute name="maximum" select="regex-group(1)"/>
+                                                    <xsl:attribute name="global-maximum" select="regex-group(1)"/>
+                                                </xsl:matching-substring>
+                                                <xsl:non-matching-substring>
+                                                    <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
+                                                </xsl:non-matching-substring>
+                                            </xsl:analyze-string>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:attribute name="maximum" select="'99'"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:matching-substring>
+                                <xsl:non-matching-substring>
+                                    <xsl:attribute name="maximum" select="'59'"/>
+                                    <xsl:attribute name="global-maximum" select="minutes-from-duration(xs:duration($maximum))"/>
+                                </xsl:non-matching-substring>
+                            </xsl:analyze-string>
                         </format>
                     </xsl:if>
                     <xsl:if test="contains($format,'S')">
                         <format id="S" unit="Second" variable="{$variable-name}-layout-S">
-                            <xsl:attribute name="minimum">
-                                <xsl:choose>
-                                    <xsl:when test="$minimum != ''">
-                                        <xsl:analyze-string select="$minimum" regex="^PT([0-9]+)S$">
-                                            <xsl:matching-substring>
-                                                <xsl:value-of select="regex-group(1)"/>
-                                            </xsl:matching-substring>
-                                            <xsl:non-matching-substring>
-                                                <xsl:value-of select="'0'"/>
-                                            </xsl:non-matching-substring>
-                                        </xsl:analyze-string>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="'0'"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:attribute>
-                            <xsl:attribute name="maximum">
-                                <xsl:analyze-string select="$format" regex="^PTN+S$">
-                                    <xsl:matching-substring>
-                                        <xsl:choose>
-                                            <xsl:when test="$maximum != ''">
-                                                <xsl:analyze-string select="$maximum" regex="^PT([0-9]+)S$">
-                                                    <xsl:matching-substring>
-                                                        <xsl:value-of select="regex-group(1)"/>
-                                                    </xsl:matching-substring>
-                                                    <xsl:non-matching-substring>
-                                                        <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
-                                                    </xsl:non-matching-substring>
-                                                </xsl:analyze-string>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:value-of select="'99'"/>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:matching-substring>
-                                    <xsl:non-matching-substring>
-                                        <xsl:value-of select="'59'"/>
-                                    </xsl:non-matching-substring>
-                                </xsl:analyze-string>
-                            </xsl:attribute>
-                            <xsl:if test="$minimum !=''">
-                                <xsl:attribute name="global-minimum" select="seconds-from-duration(xs:duration($minimum))"/>
-                            </xsl:if>
-                            <xsl:if test="$maximum !=''">
-                                <xsl:attribute name="global-maximum" select="seconds-from-duration(xs:duration($maximum))"/>
-                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="$minimum != ''">
+                                    <xsl:analyze-string select="$minimum" regex="^PT([0-9]+)S$">
+                                        <xsl:matching-substring>
+                                            <xsl:attribute name="minimum" select="regex-group(1)"/>
+                                            <xsl:attribute name="global-minimum" select="regex-group(1)"/>
+                                        </xsl:matching-substring>
+                                        <xsl:non-matching-substring>
+                                            <xsl:attribute name="minimum" select="'0'"/>
+                                            <xsl:attribute name="global-minimum" select="seconds-from-duration(xs:duration($minimum))"/>
+                                        </xsl:non-matching-substring>
+                                    </xsl:analyze-string>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="minimum" select="'0'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:analyze-string select="$format" regex="^PTN+S$">
+                                <xsl:matching-substring>
+                                    <xsl:choose>
+                                        <xsl:when test="$maximum != ''">
+                                            <xsl:analyze-string select="$maximum" regex="^PT([0-9]+)S$">
+                                                <xsl:matching-substring>
+                                                    <xsl:attribute name="maximum" select="regex-group(1)"/>
+                                                    <xsl:attribute name="global-maximum" select="regex-group(1)"/>
+                                                </xsl:matching-substring>
+                                                <xsl:non-matching-substring>
+                                                    <xsl:message select="concat('format ',$format,' incompatible avec le maximum ',$maximum)"/>
+                                                </xsl:non-matching-substring>
+                                            </xsl:analyze-string>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:attribute name="maximum" select="'99'"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:matching-substring>
+                                <xsl:non-matching-substring>
+                                    <xsl:attribute name="maximum" select="'59'"/>
+                                    <xsl:attribute name="global-maximum" select="seconds-from-duration(xs:duration($maximum))"/>
+                                </xsl:non-matching-substring>
+                            </xsl:analyze-string>
                         </format>
                     </xsl:if>
                 </xsl:otherwise>
