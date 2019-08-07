@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
@@ -83,7 +83,6 @@
         </xd:desc>
     </xd:doc>
     <xsl:variable name="numeric-example" select="$parameters//NumericExample"/>
-    
 
     <xd:doc>
         <xd:desc>Loops and dynamic array's ids may be called in many calculs : filters, consistency checks, calculated variables</xd:desc>
@@ -141,12 +140,12 @@
     <xsl:function name="enofr:get-variable-business-ancestors">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="variable"/>
-        
+
         <xsl:call-template name="enoddi:get-business-ancestors">
             <xsl:with-param name="variable" select="$variable"/>
         </xsl:call-template>
     </xsl:function>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms label for the context on which it is applied.</xd:p>
@@ -220,7 +219,7 @@
                                             <xsl:with-param name="language" select="$language"/>
                                         </xsl:call-template>
                                     </xsl:for-each>
-                                </xsl:element>                                
+                                </xsl:element>
                             </xsl:variable>
                             <xsl:call-template name="tooltip-in-label">
                                 <xsl:with-param name="label" select="$instruction-label-without-id-tooltips"/>
@@ -342,14 +341,14 @@
     <xsl:function name="enofr:get-label-conditioning-variables">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
-        
+
         <xsl:variable name="conditioning-variables-with-doubles" as="xs:string*">
             <xsl:sequence select="enoddi:get-label-conditioning-variables($context,$language)"/>
             <xsl:choose>
                 <xsl:when test="name($context)='d:QuestionItem' or name($context)='d:QuestionGrid'">
                     <xsl:for-each select="enoddi:get-instructions-by-format($context)">
                         <xsl:sequence select="enoddi:get-label-conditioning-variables(.,$language)"/>
-                    </xsl:for-each>                    
+                    </xsl:for-each>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:for-each select="enoddi:get-instructions-by-format($context,'tooltips')">
@@ -360,7 +359,7 @@
         </xsl:variable>
         <xsl:sequence select="distinct-values($conditioning-variables-with-doubles)"/>
     </xsl:function>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms hint for the context on which it is applied.</xd:p>
@@ -484,26 +483,36 @@
             <xsl:when test="$type='date'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
                 <xsl:if test="$minimum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ',format-date($minimum, '[D] [MNn] [Y]', $language, (), ()))"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ')"/>
+                    <xsl:value-of select="concat(number(substring($minimum,9,2)),' ')"/>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($minimum,6,2))]"/>
+                    <xsl:value-of select="concat(' ',substring($minimum,1,4))"/>
                 </xsl:if>
                 <xsl:if test="$minimum != '' and $maximum != ''">
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ',format-date($maximum, '[D] [MNn] [Y]', $language, (), ()))"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
+                    <xsl:value-of select="concat(number(substring($maximum,9,2)),' ')"/>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($maximum,6,2))]"/>
+                    <xsl:value-of select="concat(' ',substring($maximum,1,4))"/>
                 </xsl:if>
             </xsl:when>
             <xsl:when test="$type='gYearMonth'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date-YYYYMM"/>
                 <xsl:if test="$minimum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ',$minimum)"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ')"/>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($minimum,6,2))]"/>
+                    <xsl:value-of select="concat(' ',substring($minimum,1,4))"/>
                 </xsl:if>
                 <xsl:if test="$minimum != '' and $maximum != ''">
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ',$maximum)"/>
-                </xsl:if>                
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($maximum,6,2))]"/>
+                    <xsl:value-of select="concat(' ',substring($maximum,1,4))"/>
+                </xsl:if>
             </xsl:when>
             <xsl:when test="$type='gYear'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date-YYYY"/>
@@ -522,24 +531,30 @@
                 <xsl:if test="$minimum!=''">
                     <xsl:choose>
                         <xsl:when test="$maximum!=''">
-                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Between,' ')"/>    
+                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Between,' ')"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/GreaterThan,' ')"/>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:value-of select="$minimum"/>
+                    <xsl:call-template name="text-from-duration">
+                        <xsl:with-param name="duration" select="$minimum"/>
+                        <xsl:with-param name="language" select="$language"/>
+                    </xsl:call-template>
                 </xsl:if>
                 <xsl:if test="$maximum!=''">
                     <xsl:choose>
                         <xsl:when test="$minimum!=''">
-                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And,' ')"/>    
+                            <xsl:value-of select="concat($labels-resource/Languages/Language[@xml:lang=$language]/And,' ')"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/LessThan,' ')"/>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:value-of select="$maximum"/>
+                    <xsl:call-template name="text-from-duration">
+                        <xsl:with-param name="duration" select="$maximum"/>
+                        <xsl:with-param name="language" select="$language"/>
+                    </xsl:call-template>
                 </xsl:if>
             </xsl:when>
             <xsl:when test="$type='boolean'"/>
@@ -549,6 +564,52 @@
             <xsl:otherwise/>
         </xsl:choose>
     </xsl:function>
+
+    <xd:doc>
+        <xd:desc>Calculates the text from a duration to show it in an alert message</xd:desc>
+    </xd:doc>
+    <xsl:template name="text-from-duration">
+        <xsl:param name="duration"/>
+        <xsl:param name="language"/>
+
+        <xsl:variable name="zero-duration">
+            <xsl:analyze-string select="$duration" regex="^P0(.)[^1-9]*$">
+                <xsl:matching-substring>
+                    <xsl:value-of select="regex-group(1)"/>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:analyze-string select="$duration" regex="^PT0(.)[^1-9]*$">
+                        <xsl:matching-substring>
+                            <xsl:value-of select="lower-case(regex-group(1))"/>
+                        </xsl:matching-substring>
+                    </xsl:analyze-string>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
+
+        <xsl:analyze-string select="$duration" regex="^P(([0-9]+)Y)?(([0-9]+)M)?(([0-9]+)D)?(T(([0-9]+)H)?(([0-9]+)M)?(([0-9]+)S)?)?$">
+            <xsl:matching-substring>
+                <xsl:if test="regex-group(2) != '' and (regex-group(2) != '0' or $zero-duration='Y')">
+                    <xsl:value-of select="concat(regex-group(2),' ',$labels-resource/Languages/Language[@xml:lang=$language]/Duration/Year,' ')"/>
+                </xsl:if>
+                <xsl:if test="regex-group(4) != '' and (regex-group(4) != '0' or $zero-duration='M')">
+                    <xsl:value-of select="concat(regex-group(4),' ',$labels-resource/Languages/Language[@xml:lang=$language]/Duration/Month,' ')"/>
+                </xsl:if>
+                <xsl:if test="regex-group(6) != '' and (regex-group(6) != '0' or $zero-duration='D')">
+                    <xsl:value-of select="concat(regex-group(6),' ',$labels-resource/Languages/Language[@xml:lang=$language]/Duration/Day,' ')"/>
+                </xsl:if>
+                <xsl:if test="regex-group(9) != '' and (regex-group(9) != '0' or $zero-duration='h')">
+                    <xsl:value-of select="concat(regex-group(9),' ',$labels-resource/Languages/Language[@xml:lang=$language]/Duration/Hour,' ')"/>
+                </xsl:if>
+                <xsl:if test="regex-group(11) != '' and (regex-group(11) != '0' or $zero-duration='m')">
+                    <xsl:value-of select="concat(regex-group(11),' ',$labels-resource/Languages/Language[@xml:lang=$language]/Duration/Minute,' ')"/>
+                </xsl:if>
+                <xsl:if test="regex-group(13) != '' and (regex-group(13) != '0' or $zero-duration='s')">
+                    <xsl:value-of select="concat(regex-group(13),' ',$labels-resource/Languages/Language[@xml:lang=$language]/Duration/Second,' ')"/>
+                </xsl:if>
+            </xsl:matching-substring>
+        </xsl:analyze-string>
+    </xsl:template>
 
     <xd:doc>
         <xd:desc>
