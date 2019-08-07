@@ -11,28 +11,26 @@
         </fo:page-sequence-master>
 
         <fo:simple-page-master master-name="relanceCOLEM-recto" font-family="Liberation Sans" font-size="10pt" font-weight="normal" page-height="297mm" page-width="210mm" reference-orientation="0">
-            
             <fo:region-body region-name="xsl-region-body" margin-top="10mm" margin-bottom="10mm" margin-right="10mm" margin-left="10mm" column-count="1"/>
             <fo:region-before region-name="xsl-region-before-courrier" display-align="before" extent="10mm" precedence="true"/>
             <fo:region-after region-name="xsl-region-after-courrier" display-align="before" extent="10mm" precedence="true"/>
             <fo:region-start extent="10mm" display-align="before"/>
             <fo:region-end extent="10mm" display-align="before"/>
-            
         </fo:simple-page-master>
         
         <fo:simple-page-master master-name="relanceCOLEM-verso" font-family="Liberation Sans" font-size="10pt" font-weight="normal" page-height="297mm" page-width="210mm" reference-orientation="0">
-            
             <fo:region-body margin-top="10mm" margin-bottom="10mm" margin-right="10mm" margin-left="10mm" column-count="1"/>
             <fo:region-before region-name="xsl-region-before-cover" display-align="before" extent="10mm" precedence="true"/>
             <fo:region-after region-name="xsl-region-after-cover" display-align="before" extent="10mm" precedence="true"/>
             <fo:region-start extent="10mm" display-align="before"/>
             <fo:region-end extent="10mm" display-align="before"/>
-            
         </fo:simple-page-master>
         
     </fo:layout-master-set>
 
     <fo:page-sequence font-family="Liberation Sans" font-size="8pt" master-reference="relanceCOLEM">
+        
+        <!-- ZONE LIGNE TECHNIQUE -->
         <fo:static-content flow-name="xsl-region-before-courrier">
             <fo:block position="absolute" margin-top="5mm" margin-left="10mm" margin-right="10mm" margin-bottom="10mm" color="white">
                 &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
@@ -43,7 +41,8 @@
             
             <fo:block page-break-after="always">
                 
-                <fo:block-container absolute-position="absolute" top="2mm" left="1mm" width="50mm" height="20mm">
+                <!-- ZONE LOGOS -->
+                <fo:block-container absolute-position="absolute" top="2mm" left="5mm" width="50mm" height="20mm">
                     <fo:block>
                         <fo:external-graphic src="logo_INSEE.png" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                     </fo:block>
@@ -53,7 +52,7 @@
                         <fo:external-graphic src="marianne.png" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                     </fo:block>
                 </fo:block-container>
-                <fo:block-container absolute-position="absolute" top="2mm" right="1mm" width="11.1mm" height="19.9mm">
+                <fo:block-container absolute-position="absolute" top="2mm" right="5mm" width="11.1mm" height="19.9mm">
                     <fo:block>
                         <fo:external-graphic src="statPub.png" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                     </fo:block>
@@ -108,9 +107,9 @@
                     <fo:block>
                         <fo:inline-container>
                             <fo:block font-weight="bold" margin-top="0.5mm">Pour nous contacter&#160;:</fo:block>
-                            <fo:block font-style="italic" margin-top="1mm">Votre contact&#160;: ${BddNomContact}</fo:block>
-                            <fo:block font-style="italic">Tél&#160;: ${BddNumTel}</fo:block>
+                            <fo:block font-style="italic" margin-top="1mm">Tél (de 9h à 17h)&#160;: ${BddNumTel}</fo:block>
                             <fo:block font-style="italic">Courriel&#160;: ${BddServiceAdresseMessagerie}</fo:block>
+                            <fo:block font-style="italic">Courrier :</fo:block>
                             <fo:block font-style="italic">${BddAdresseAssistance1}</fo:block>
                             <fo:block font-style="italic">${BddAdresseAssistance2}</fo:block>
                             <fo:block font-style="italic">${BddAdresseAssistance3}</fo:block>
@@ -129,33 +128,31 @@
                                 Madame, Monsieur,
                             </fo:block>
                             <fo:block margin-top="1.7mm">
-                                Par courrier en date du ${BddDateEdition}, je vous ai sollicité dans le cadre d’une enquête statistique 
+                                Par courrier du ${BddDateEdition}, je vous ai sollicité dans le cadre d’une enquête statistique 
                                 auprès des salariés de l’État que réalise ${BddNomServiceProducteurCourt} par internet. 
-                                <fo:inline font-weight="bold">Le rappel des modalités de cette enquête est repris au verso de ce courrier.</fo:inline>
+                                <fo:inline font-weight="bold">Le rappel des modalités de cette enquête est repris au verso.</fo:inline>
                             </fo:block>
                             <fo:block margin-top="1.7mm">
-                                Cette enquête#if(${BddCaractereObligatoire}=='oui'), <fo:inline font-weight="bold">à caractère obligatoire</fo:inline>,#end 
-                                est reconnue d’intérêt général et de qualité statistique par le Conseil national de l’information statistique (Cnis).
-                            </fo:block>
-                            <fo:block margin-top="1.7mm">
-                                Elle est réalisée auprès d’un échantillon ${BddTypeUniteEnquetees}. 
-                                Vous faites partie de cet échantillon car vous avez été rémunéré par l’État en 2017.
+                                Cette enquête,#if(${BddCaractereObligatoire}=='oui') <fo:inline font-weight="bold">à caractère obligatoire</fo:inline> et#end 
+                                reconnue d’intérêt général et de qualité statistique par le Conseil national de l’information statistique (Cnis) est réalisée auprès d’un échantillon ${BddTypeUniteEnquetees}. 
+                                Vous faites partie de cet échantillon car vous avez été rémunéré par l’État ou l'un de ses opérateurs.
                             </fo:block>
                             <fo:block margin-top="1.7mm">
                                 À ce jour, sauf erreur de ma part, mes services n’ont pas encore reçu votre réponse. 
                                 Si, toutefois, vous venez de procéder à cet envoi, je vous prie de ne pas tenir compte de ce rappel.
                             </fo:block>
                             <fo:block margin-top="1.7mm">
-                                Afin de permettre la prise en compte de la diversité des caractéristiques de la population et d’assurer ainsi la qualité statistique des résultats, 
-                                il est très important que vous répondiez à cette enquête.
+                                Afin d’assurer la qualité statistique des résultats, il est très important que vous répondiez à cette enquête.
                             </fo:block>
                             <fo:block margin-top="1.7mm">
                                 Le questionnaire est accessible en ligne et son remplissage vous prendra ${BddTempsPassation}. 
-                                Pour ce faire, vous devez vous connecter à l’adresse sécurisée suivante&#160;: <fo:inline font-weight="bold">${BddAdresseInternetEnquete}</fo:inline>
+                                Pour ce faire, vous devez vous connecter à l’adresse sécurisée suivante, à inscrire dans la barre de navigation&#160;: 
+                            </fo:block>
+                            <fo:block margin-top="1.7mm" text-align="center">
+                                <fo:inline font-weight="bold">${BddAdresseInternetEnquete}</fo:inline>
                             </fo:block>
                             <fo:block margin-top="1.7mm">
-                                Cette adresse est à inscrire dans la barre de navigation de votre navigateur. Vous aurez besoin de l’identifiant et du mot de passe indiqués ci-dessous 
-                                (merci de faire attention à bien respecter la «&#160;casse&#160;» des caractères&#160;: minuscules / majuscules)&#160;:
+                                Vous aurez besoin de l’identifiant et du mot de passe indiqués ci-dessous (merci de faire attention à bien respecter la «&#160;casse&#160;» des caractères&#160;: minuscules / majuscules)&#160;:
                             </fo:block>
                             <fo:block margin-top="2mm" text-align="center" margin-left="25mm" margin-right="25mm" border="solid black 0.5pt">
 
@@ -166,10 +163,6 @@
                                     </fo:block>
                                 
                             </fo:block>
-                            <fo:block margin-top="2mm">
-                                Des renseignements relatifs à l’enquête et à son calendrier sont disponibles sur le site Internet ${BddURLRenseignement}. 
-                                Les résultats de cette enquête seront également disponibles sur ce site à l’adresse suivante : ${BddURLDiffusion}
-                            </fo:block>
                             <fo:block margin-top="1.7mm">
                                 #if(${BddNumRelance}=='1')Si vous préférez recevoir un questionnaire à remplir sur papier, vous pouvez en demander un exemplaire.#end
                                 #if(${BddNumRelance}=='2')Si vous ne souhaitez pas répondre par internet, vous pouvez également répondre par voie postale en renseignant 
@@ -177,7 +170,7 @@
                             </fo:block>
                             <fo:block margin-top="1.7mm">
                                 Je vous serai obligé#if(${BddServiceCollecteurSignataireSexe}=='F')e#end de bien vouloir renseigner votre questionnaire 
-                                et le transmettre une fois rempli avant le <fo:inline font-weight="bold">${BddDateEcheance}</fo:inline>.
+                                et le transmettre avant le <fo:inline font-weight="bold">${BddDateEcheance}</fo:inline>.
                             </fo:block>
                             <fo:block margin-top="1.7mm">
                                 Vous pouvez avoir l’assurance que, comme la loi en fait la plus stricte obligation, 
@@ -198,26 +191,40 @@
                     </fo:block>
                 </fo:block-container>
                 
-                <fo:block-container absolute-position="absolute" left="1mm" top="250mm" width="188mm" height="30mm" overflow="hidden" font-family="Liberation Sans" font-size="7pt">
+                <fo:block-container absolute-position="absolute" left="1mm" top="233mm" width="188mm" height="44mm" overflow="hidden" font-family="Liberation Sans" font-size="6pt">
                     <fo:block margin-left="0.01mm" margin-right="0.01mm" border="solid black 0.5pt">
-                        <fo:inline-container margin-top="0.5mm" margin-left="1mm">
-                            <fo:block>
-                                Vu l’avis favorable du Conseil national de l’information statistique, cette enquête#if(${BddCaractereObligatoire}=='oui') 
-                                reconnue d’intérêt général et de qualité statistique, est obligatoire#else est reconnue d’intérêt général 
-                                et de qualité statistique sans avoir de caractère obligatoire#end, en application de la loi n° 51-711 du 7 juin 1951 
-                                modifiée sur l’obligation, la coordination et le secret en matière de statistiques.
+                        <fo:inline-container margin-left="1mm" margin-right="1mm" text-align="justify">
+                            <fo:block margin-top="0.5mm">
+                                Vu l’avis favorable du Conseil national de l’information statistique, cette enquête est <fo:inline font-weight="bold">reconnue d’intérêt général et de qualité statistique</fo:inline>, 
+                                en application de la loi n° 51-711 du 7 juin 1951 sur l’obligation, la coordination et le secret en matière de statistiques. 
+                                Elle a obtenu le visa n° ${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l’année ${BddAnneeCollecte} - Arrêté en cours de parution.
                             </fo:block>
                             <fo:block>
-                                Visa n°${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l’année ${BddAnneeCollecte}.
+                                #if(${BddCaractereObligatoire}=='oui')Cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>. 
+                                En cas de défaut de réponse, les personnes enquêtées peuvent être l’objet de l’amende prévue à l’article 131-13 du code pénal.#end
                             </fo:block>
                             <fo:block>
-                                En application de la loi n° 51-711 du 7 juin 1951 modifiée, les réponses à ce questionnaire sont obligatoires 
-                                et sont protégées par le secret statistique et destinées à ${BddNomServiceProducteurCourt}.
+                                Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${BddNomServiceProducteurCourt}. 
+                                Ces réponses ainsi que les données obtenues par appariement seront conservées pendant 5 ans à compter de la fin de la collecte pour les besoins de l’enquête. 
+                                Elles seront archivées au-delà de cette durée. À tout moment, leur usage et leur accès seront strictement contrôlés et limités à l’élaboration de statistiques 
+                                ou à des travaux de recherche scientifique ou historique.
                             </fo:block>
                             <fo:block>
-                                La loi n° 78-17 du 6 janvier 1978 modifiée, relative à l’informatique, aux fichiers et aux libertés, 
-                                s’applique aux réponses faites à la présente enquête. Elle garantit aux personnes concernées un droit d’accès 
-                                et de rectification pour les données les concernant. Ce droit peut être exercé auprès de l’Insee.
+                                Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n° 78-17 du 6 janvier 1978 relative à l’informatique, 
+                                aux fichiers et aux libertés, s’appliquent à la présente enquête.
+                            </fo:block>
+                            <fo:block>
+                                L’Insee est seul destinataire des données d’identification (nom et coordonnées), ainsi que les Archives de France, conformément aux dispositions de l’article L. 212-4 du code du patrimoine.
+                            </fo:block>
+                            <fo:block>
+                                Elles seront conservées par le service producteur pendant 6 mois.
+                            </fo:block>
+                            <fo:block>
+                                Les personnes enquêtées peuvent exercer un droit d’accès, de rectification, d’effacement ou de limitation de traitement pour les données les concernant pendant la période de conservation des données d’identification. 
+                                Ces droits peuvent être exercés auprès de l’Insee, que vous pouvez contacter à l’adresse <fo:inline text-decoration="underline">contacts-enquetes-salaries-etat@insee.fr</fo:inline>. 
+                                Pour toute question relative au traitement de vos données, vous pouvez contacter le délégué à la protection des données du Ministère de l’économie et 
+                                des finances à l’adresse <fo:inline text-decoration="underline">le-delegue-a-la-protection-des-donnees-personnelles@finances.gouv.fr</fo:inline>. 
+                                Vous pouvez si vous l’estimez nécessaire adresser une réclamation à la Cnil.
                             </fo:block>
                         </fo:inline-container>
                     </fo:block>
@@ -229,101 +236,104 @@
                 
                 <fo:block/>
                 
-                <fo:block-container absolute-position="absolute" left="5mm" top="5mm" width="180mm" height="220mm" overflow="hidden" text-align="justify" 
-                    border="black solid 0.5pt" font-family="Liberation Sans" font-size="9pt" background-color="#dddddd">
-                    
-                    <fo:block-container absolute-position="absolute" left="5mm" top="5mm" width="170mm" height="210mm" overflow="hidden">
-                    
-                        <fo:block>
-                            
-                            <fo:inline-container>
-                                
-                                <fo:block font-weight="bold">
-                                    ► Pourquoi cette enquête&#160;?
-                                </fo:block>
-                                <fo:block margin-top="2.5mm" margin-left="4mm">
-                                    L’enquête statistique sur le coût de la main-d’œuvre et la structure des salaires, 
-                                    réalisée tous les ans par l’Insee pour répondre à une demande de l’Union Européenne, 
-                                    couvre partiellement le secteur public : seules les fonctions publiques hospitalière 
-                                    et territoriale participent à cette enquête.
-                                </fo:block>
-                                <fo:block margin-top="2mm" margin-left="4mm">
-                                    En ce qui vous concerne la fonction publique d’État, l’Insee complète l’information sur les rémunérations des ministères 
-                                    et des établissements publics nationaux, disponible dans les fichiers administratifs, 
-                                    par cette enquête auprès des salariés de l’État afin de recueillir les informations non disponibles telles que le niveau de formation du salarié, 
-                                    son parcours professionnel, son temps de travail, sa situation familiale.
-                                </fo:block>
-                                <fo:block margin-top="2mm" margin-left="4mm">
-                                    L’ensemble de ce dispositif permettra d’une part, de mieux mesurer les différences salariales en France, par exemple entre hommes et femmes ou de la discrimination salariale 
-                                    dont pourraient être victimes les personnes issues de l’immigration et d’autre part, d’effectuer des analyses comparatives avec les autres États membres de l’Union Européenne.
-                                </fo:block>
+                <fo:block-container absolute-position="absolute" left="5mm" top="5mm" width="180mm" height="100%" overflow="hidden" text-align="justify" 
+                                    border="black solid 0.5pt" font-family="Liberation Sans" font-size="9pt" background-color="#dddddd">
+       
+                    <fo:block margin="4mm">
+                        
+                        <fo:block font-weight="bold">
+                            ► Pourquoi cette enquête&#160;?
+                        </fo:block>
+                        <fo:block margin-top="2.5mm" margin-left="4mm">
+                            L’enquête statistique sur le coût de la main-d’œuvre et la structure des salaires, 
+                            réalisée tous les ans par l’Insee pour répondre à une demande de l’Union Européenne, 
+                            couvre partiellement le secteur public : seules les fonctions publiques hospitalière 
+                            et territoriale participent à cette enquête.
+                        </fo:block>
+                        <fo:block margin-top="2mm" margin-left="4mm">
+                            En ce qui concerne la fonction publique d’État, l’Insee complète l’information sur les rémunérations des ministères 
+                            et des établissements publics nationaux, disponible dans les fichiers administratifs, 
+                            par cette enquête auprès des salariés de l’État afin de recueillir les informations non disponibles telles que le niveau de formation du salarié, 
+                            son parcours professionnel, son temps de travail, sa situation familiale.
+                        </fo:block>
+                        <fo:block margin-top="2mm" margin-left="4mm">
+                            L’ensemble de ce dispositif permettra d’une part, de mieux mesurer les différences salariales en France, par exemple entre hommes et femmes ou de la discrimination salariale 
+                            dont pourraient être victimes les personnes issues de l’immigration et d’autre part, d’effectuer des analyses comparatives avec les autres États membres de l’Union Européenne.
+                        </fo:block>
 
-                                <fo:block margin-top="6mm" font-weight="bold">
-                                    ► Pourquoi ${BddStatutEnquete}&#160;?
-                                </fo:block>
-                                <fo:block margin-top="2.5mm" margin-left="4mm">
-                                    Pour disposer de résultats représentatifs de l’ensemble des personnes résidant en France#if(${BddMetropole}=='oui') métropolitaine#end, 
-                                    il n’est pas nécessaire d’interroger chacun des salariés de l’État.
-                                </fo:block>
-                                <fo:block margin-top="2mm" margin-left="4mm">
-                                    Un échantillon ${BddTypeUniteEnquetee} a donc été sélectionné aléatoirement à partir des fichiers administratifs (fichiers de paie ou déclarations sociales). 
-                                    Il est représentatif des salariés de l’État dans leur ensemble (fonctionnaires, vacataires, stagiaires, etc.). Vous faites partie de cet échantillon.
-                                </fo:block>
-                                <fo:block margin-top="2mm" margin-left="4mm">
-                                    Il est important que nous puissions recueillir votre réponse afin que la diversité des caractéristiques de la population soit prise en compte 
-                                    et qu’elle assure ainsi la représentativité de l’ensemble des personnes interrogées.
-                                </fo:block>
-                                <fo:block margin-top="2mm" margin-left="4mm">
-                                    Vos réponses resteront confidentielles et serviront uniquement à l’établissement de statistiques.#if(${BddRapprochementDonnees}=='oui') 
-                                    Les données de cette enquête pourront être rapprochées des données administratives auxquelles le service producteur (${BddNomServiceProducteurCourt}) a accès, 
-                                    dans les mêmes conditions de sécurité et de confidentialité.#end
-                                </fo:block>
-                                
-                                <fo:block margin-top="6mm" font-weight="bold">
-                                    ► Comment va se dérouler l’enquête&#160;?
-                                </fo:block>
-                                <fo:block margin-top="2.5mm" margin-left="4mm">
-                                    Nous vous invitons, pour des raisons de simplicité et de rapidité, à répondre directement par Internet, que cela soit depuis votre domicile ou depuis votre lieu de travail, 
-                                    en vous connectant sur <fo:inline font-weight="bold">${BddAdresseInternetEnquete}</fo:inline> à l’aide de l’identifiant et du mot de passe indiqués sur la lettre. 
-                                    Une fois votre réponse validée, cet identifiant ne pourra plus être utilisé.
-                                </fo:block>
-                                <fo:block margin-left="4mm">
-                                    Des informations sur les principaux résultats de l’enquête précédente menée en 2015 sont également disponibles sur ce site.
-                                </fo:block>
-                                <fo:block margin-left="4mm">
-                                    Si vous souhaitez avoir plus de renseignements avant de répondre, vous pouvez joindre <fo:inline font-style="italic">${BddNomContact}</fo:inline> 
-                                    au numéro de téléphone indiqué au recto de cette lettre.
-                                </fo:block>
-                                
-                                <fo:block margin-top="6mm" font-weight="bold">
-                                    ► À quoi servent les informations collectées par ${BddNomServiceProducteurCourt}&#160;?
-                                </fo:block>
-                                <fo:block margin-top="2.5mm" margin-left="4mm">
-                                    Les enquêtes de l’Insee servent à alimenter des études économiques et sociales qui intéressent un large public.
-                                </fo:block>
-                                
-                                <fo:block margin-top="6mm" font-weight="bold">
-                                    ► Pour toute demande d’information d’ordre économique et social, vous pouvez&#160;:
-                                </fo:block>
-                                <fo:block margin-top="2.5mm" text-align="center">
-                                    <fo:inline font-weight="bold">Consulter</fo:inline> le site internet de l’Insee&#160;: <fo:inline text-decoration="underline">www.insee.fr</fo:inline>
-                                </fo:block>
-                                <fo:block margin-top="1.5mm" text-align="center">
-                                    <fo:inline font-weight="bold">Déposer</fo:inline> un courriel sur ce site (en cliquant sur «&#160;Aide et contact&#160;»)
-                                </fo:block>
-                                <fo:block margin-top="1.5mm" text-align="center">
-                                    <fo:inline font-weight="bold">Téléphoner</fo:inline> à Insee contact&#160;: ${BddNumTel}
-                                </fo:block>
-                                <fo:block margin-top="1.5mm" text-align="center">
-                                    (prix d’un appel local) du lundi au vendredi de 9h à 17h
-                                </fo:block>
-                                
-                            </fo:inline-container>
+                        <fo:block margin-top="6mm" font-weight="bold">
+                            ► Pourquoi ${BddStatutEnquete}&#160;?
+                        </fo:block>
+                        <fo:block margin-top="2.5mm" margin-left="4mm">
+                            Pour disposer de résultats représentatifs de l’ensemble des personnes résidant en France#if(${BddMetropole}=='oui') métropolitaine#end, 
+                            il n’est pas nécessaire d’interroger chacun des salariés de l’État.
+                        </fo:block>
+                        <fo:block margin-top="2mm" margin-left="4mm">
+                            Un échantillon ${BddTypeUniteEnquetee} a donc été sélectionné aléatoirement à partir des fichiers administratifs (fichiers de paie ou déclarations sociales). 
+                            Il est représentatif des salariés de l’État dans leur ensemble (fonctionnaires, vacataires, stagiaires, etc.). Vous faites partie de cet échantillon.
+                        </fo:block>
+                        <fo:block margin-top="2mm" margin-left="4mm">
+                            Il est important que nous puissions recueillir votre réponse afin que la diversité des caractéristiques de la population soit prise en compte 
+                            et qu’elle assure ainsi la représentativité de l’ensemble des personnes interrogées.
+                        </fo:block>
+                        <fo:block margin-top="2mm" margin-left="4mm">
+                            Vos réponses resteront confidentielles et serviront uniquement à l’établissement de statistiques.#if(${BddRapprochementDonnees}=='oui') 
+                            Les données de cette enquête pourront être rapprochées des données administratives (Système d'Information sur les Agents du Service Public) 
+                            dans les mêmes conditions de sécurité et de confidentialité, sous contrôle du responsable du traitement.#end
                         </fo:block>
                         
-                    </fo:block-container>
+                        <fo:block margin-top="6mm" font-weight="bold">
+                            ► Comment va se dérouler l’enquête&#160;?
+                        </fo:block>
+                        <fo:block margin-top="2.5mm" margin-left="4mm">
+                            Nous vous invitons, pour des raisons de simplicité et de rapidité, à répondre directement par Internet, que cela soit depuis votre domicile ou depuis votre lieu de travail, 
+                            en vous connectant sur <fo:inline font-weight="bold">${BddAdresseInternetEnquete}</fo:inline> à l’aide de l’identifiant et du mot de passe indiqués sur la lettre. 
+                            Une fois votre réponse validée, cet identifiant ne pourra plus être utilisé.
+                        </fo:block>
+                        <fo:block margin-left="4mm">
+                            Des informations sur les principaux résultats de l’enquête précédente menée en 2015 sont également disponibles sur ce site.
+                        </fo:block>
+                        <fo:block margin-left="4mm">
+                            Si vous souhaitez avoir plus de renseignements avant de répondre, vous pouvez joindre <fo:inline font-style="italic">${BddNomContact}</fo:inline> 
+                            au numéro de téléphone indiqué au recto de cette lettre.
+                        </fo:block>
                         
+                        <fo:block margin-top="6mm" font-weight="bold">
+                            ► À quoi servent les informations collectées par ${BddNomServiceProducteurCourt}&#160;?
+                        </fo:block>
+                        <fo:block margin-top="2.5mm" margin-left="4mm">
+                            Les enquêtes de l’Insee servent à alimenter des études économiques et sociales qui intéressent un large public.
+                        </fo:block>
+                        <fo:block margin-top="2mm" margin-left="4mm" text-align="left">
+                            Des renseignements relatifs à l’enquête et à son calendrier sont disponibles sur le site Internet ${BddURLRenseignement}.
+                        </fo:block>
+                        <fo:block margin-left="4mm" text-align="left">
+                            Les résultats de cette enquête seront disponibles à l’adresse suivante&#160;:
+                        </fo:block>
+                        <fo:block margin-left="4mm">
+                            <fo:inline text-decoration="underline">${BddURLDiffusion}</fo:inline>
+                        </fo:block>
+                        
+                        <fo:block margin-top="6mm" font-weight="bold">
+                            ► Pour toute demande d’information d’ordre économique et social, vous pouvez&#160;:
+                        </fo:block>
+                        <fo:block margin-top="2.5mm" text-align="center">
+                            <fo:inline font-weight="bold">Consulter</fo:inline> le site internet de l’Insee&#160;: <fo:inline text-decoration="underline">www.insee.fr</fo:inline>
+                        </fo:block>
+                        <fo:block margin-top="1.5mm" text-align="center">
+                            <fo:inline font-weight="bold">Déposer</fo:inline> un courriel sur ce site (en cliquant sur «&#160;Aide et contact&#160;»)
+                        </fo:block>
+                        <fo:block margin-top="1.5mm" text-align="center">
+                            <fo:inline font-weight="bold">Téléphoner</fo:inline> à Insee contact&#160;: ${BddNumTel}
+                        </fo:block>
+                        <fo:block margin-top="1.5mm" text-align="center">
+                            (prix d’un appel local) du lundi au vendredi de 9h à 17h
+                        </fo:block>
+
+                    </fo:block>
+                     
                 </fo:block-container>
+                
             </fo:block>
 
         </fo:flow>
