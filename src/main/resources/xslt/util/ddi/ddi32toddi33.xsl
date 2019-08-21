@@ -158,8 +158,9 @@
 
     <xd:doc>
         <xd:desc>Variables without representation : not new with DDI 3.3, but forgotten till now + evolution needed for MeasurementUnit</xd:desc>
+        <xd:desc>Works only for collected variables</xd:desc>
     </xd:doc>
-    <xsl:template match="l32:VariableRepresentation[not(*)]">
+    <xsl:template match="l32:VariableRepresentation[not(*) and ../r32:SourceParameterReference]">
         <xsl:variable name="QID" select="../r32:QuestionReference/r32:ID"/>
         <xsl:variable name="QOPID" select="../r32:SourceParameterReference/r32:ID"/>
         <xsl:variable name="RDOPID" select="//*[not(ends-with(name(),'Reference')) and r32:ID=$QID]/r32:Binding[r32:TargetParameterReference/r32:ID=$QOPID]/r32:SourceParameterReference/r32:ID"/>
