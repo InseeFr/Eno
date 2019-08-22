@@ -231,6 +231,7 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:element name="{$name}-Container">
             <xsl:element name="{$name}">
+                <xsl:attribute name="id" select="concat($name,'-1')"/>
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="." tunnel="yes"/>
                 </xsl:apply-templates>
@@ -252,6 +253,7 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:element name="{$name}-Container">
             <xsl:element name="{$name}">
+                <xsl:attribute name="id" select="concat($name,'-1')"/>
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="." tunnel="yes"/>
                 </xsl:apply-templates>
@@ -333,6 +335,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- create element with same name and acts like what is done for the instance part -->
         <xsl:element name="{enofr:get-name($source-context)}">
+            <xsl:attribute name="id"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
             </xsl:apply-templates>
@@ -2119,9 +2122,15 @@
         <xsl:if test="not($max-lines != '') or number($max-lines) &gt; number(enofr:get-minimum-lines($source-context))">
             <xf:trigger id="{$loop-name}-addline" bind="{$loop-name}-addline-bind">
                 <xf:label ref="$form-resources/AddLine/label"/>
-                <xf:insert ev:event="DOMActivate" context="{$instance-ancestor-label}{$loop-name}-Container"
-                    nodeset="{$instance-ancestor-label}{$loop-name}" position="after"
-                    origin="instance('fr-form-loop-model')/{$loop-name}"/>
+                <xf:action ev:event="DOMActivate">
+                    <xf:insert context="{$instance-ancestor-label}{$loop-name}-Container"
+                        nodeset="{$instance-ancestor-label}{$loop-name}" position="after"
+                        origin="instance('fr-form-loop-model')/{$loop-name}"/>
+                    <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}-Count"
+                        value="number({$instance-ancestor-label}{$loop-name}-Count) +1"/>
+                    <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}[last()]/@id"
+                        value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                </xf:action>
             </xf:trigger>
         </xsl:if>
     </xsl:template>

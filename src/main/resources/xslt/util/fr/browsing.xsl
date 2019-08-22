@@ -470,8 +470,9 @@
                             <xf:insert context="instance('fr-form-instance')//{$dynamic-array}-Container"
                                 nodeset="instance('fr-form-instance')//{$dynamic-array}"
                                 position="after"
-                                origin="instance('fr-form-loop-model')/{$dynamic-array}"
-                            />
+                                origin="instance('fr-form-loop-model')/{$dynamic-array}"/>
+                            <xf:setvalue ref="instance('fr-form-instance')//{$dynamic-array}[last()]/@id"
+                                value="concat('{$dynamic-array}-',count(instance('fr-form-instance')//{$dynamic-array}))"/>
                         </xf:action>
                     </xf:action>
                     <xf:action if="count(instance('fr-form-instance')//{$dynamic-array}) &gt; instance('fr-form-instance')//{$dynamic-array}-Count">
