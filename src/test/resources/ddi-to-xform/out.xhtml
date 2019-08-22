@@ -159,7 +159,7 @@
                   <j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1--1/>
                   <j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-0/>
                   <j6qg8rc6-Container>
-                     <j6qg8rc6>
+                     <j6qg8rc6 id="j6qg8rc6-1">
                         <FAVOURITE_CHARACTERS11/>
                         <FAVOURITE_CHARACTERS21/>
                         <FAVOURITE_CHARACTERS31/>
@@ -202,7 +202,7 @@
          </xf:instance>
          <xf:instance id="fr-form-loop-model">
             <LoopModels>
-               <j6qg8rc6>
+               <j6qg8rc6 id="">
                   <FAVOURITE_CHARACTERS11/>
                   <FAVOURITE_CHARACTERS21/>
                   <FAVOURITE_CHARACTERS31/>
@@ -2600,6 +2600,8 @@
                              nodeset="instance('fr-form-instance')//j6qg8rc6"
                              position="after"
                              origin="instance('fr-form-loop-model')/j6qg8rc6"/>
+                  <xf:setvalue ref="instance('fr-form-instance')//j6qg8rc6[last()]/@id"
+                               value="concat('j6qg8rc6-',count(instance('fr-form-instance')//j6qg8rc6))"/>
                </xf:action>
             </xf:action>
             <xf:action if="count(instance('fr-form-instance')//j6qg8rc6) &gt; instance('fr-form-instance')//j6qg8rc6-Count">
@@ -4497,11 +4499,16 @@
                      </xhtml:table>
                      <xf:trigger id="j6qg8rc6-addline" bind="j6qg8rc6-addline-bind">
                         <xf:label ref="$form-resources/AddLine/label"/>
-                        <xf:insert ev:event="DOMActivate"
-                                   context="instance('fr-form-instance')//j6qg8rc6-Container"
+                        <xf:action ev:event="DOMActivate">
+                           <xf:insert context="instance('fr-form-instance')//j6qg8rc6-Container"
                                    nodeset="instance('fr-form-instance')//j6qg8rc6"
                                    position="after"
                                    origin="instance('fr-form-loop-model')/j6qg8rc6"/>
+                           <xf:setvalue ref="instance('fr-form-instance')//j6qg8rc6-Count"
+                                        value="number(instance('fr-form-instance')//j6qg8rc6-Count) +1"/>
+                           <xf:setvalue ref="instance('fr-form-instance')//j6qg8rc6[last()]/@id"
+                                        value="concat('j6qg8rc6-',instance('fr-form-instance')//j6qg8rc6-Count)"/>
+                        </xf:action>
                      </xf:trigger>
                   </fr:section>
                </xf:case>
