@@ -708,15 +708,7 @@
                 </xsl:apply-templates>
             </xsl:variable>
             <xsl:if test="$constraint[text()!='']">
-                <xf:constraint>
-                    <xsl:attribute name="value">
-                        <xsl:value-of select="'instance(''fr-form-instance'')'"/>
-                        <xsl:for-each select="tokenize($loop-ancestors,' ')">
-                            <xsl:value-of select="concat('//',.,'[$',.,'-position]')"/>
-                        </xsl:for-each>
-                        <xsl:value-of select="concat('[',$constraint,']')"/>
-                    </xsl:attribute>
-                </xf:constraint>
+                <xf:constraint value="{$constraint}"/>
             </xsl:if>
         </xf:bind>
     </xsl:template>
@@ -740,18 +732,7 @@
             <xsl:if test="preceding::xf:constraint[@level=$level and ancestor::xf:bind/@name=$parent-name]">
                 <xsl:value-of select="' and '"/>
             </xsl:if>
-            <xsl:value-of select="'('"/>
-            <xsl:choose>
-                <xsl:when test="not($last-ancestor != '')">
-                    <xsl:value-of select="@value"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="substring(substring-after(@value,concat('ancestor::',$last-ancestor)),
-                                                    2,
-                                                    string-length(substring-after(@value,concat('ancestor::',$last-ancestor)))-2)"/>
-                </xsl:otherwise>
-            </xsl:choose>
-            <xsl:value-of select="')'"/>
+            <xsl:value-of select="concat('(',@value,')')"/>
         </xsl:if>
     </xsl:template>
 
@@ -767,18 +748,7 @@
             <xsl:if test="preceding::xf:constraint[@level=$level and ancestor::xf:bind/@name=$parent-name]">
                 <xsl:value-of select="' and '"/>
             </xsl:if>
-            <xsl:value-of select="'(not('"/>
-            <xsl:choose>
-                <xsl:when test="not($last-ancestor != '')">
-                    <xsl:value-of select="@relevant"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="substring(substring-after(@relevant,concat('ancestor::',$last-ancestor)),
-                                                    2,
-                                                    string-length(substring-after(@relevant,concat('ancestor::',$last-ancestor)))-2)"/>
-                </xsl:otherwise>
-            </xsl:choose>
-            <xsl:value-of select="') or '"/>
+            <xsl:value-of select="concat('(not(',@relevant,') or ')"/>
             <xsl:apply-templates select="*" mode="page-check">
                 <xsl:with-param name="parent-name" select="@name" tunnel="yes"/>
             </xsl:apply-templates>

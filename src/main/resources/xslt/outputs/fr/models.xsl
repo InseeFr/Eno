@@ -214,7 +214,7 @@
     <xsl:template match="SingleResponseQuestion[ancestor::Resource or ancestor::ResourceBind]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
-        <xsl:param name="instance-ancestor" tunnel="yes"/>
+
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
             <xsl:with-param name="question-label" select="eno:serialize(enofr:get-label($source-context,$language))" tunnel="yes"/>
@@ -370,9 +370,6 @@
             </xsl:if>
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                    </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
                         <xsl:with-param name="calcul-aim" select="'filter'"/>
@@ -386,9 +383,6 @@
                         </xsl:with-param>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="']'"/>
-                    </xsl:if>
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="$variable-calculate != ''">
@@ -411,9 +405,6 @@
             <xsl:if test="not($readonly = ('false()', ''))">
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                    </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
                         <xsl:with-param name="calcul-aim" select="'filter'"/>
@@ -427,9 +418,6 @@
                         </xsl:with-param>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="']'"/>
-                    </xsl:if>
                     <xsl:value-of select="')'"/>
                 </xsl:attribute>
             </xsl:if>
@@ -440,9 +428,6 @@
                         <xsl:attribute name="level" select="$alert-level"/>
                     </xsl:if>
                     <xsl:attribute name="value">
-                        <xsl:if test="$instance-ancestor != ''">
-                            <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                        </xsl:if>
                         <xsl:if test="self::ConsistencyCheck and enofr:get-readonly-ancestors($source-context) != ''">
                             <xsl:variable name="initial-readonly-ancestors">
                                 <xsl:for-each select="enofr:get-readonly-ancestors($source-context)">
@@ -476,9 +461,6 @@
                             </xsl:with-param>
                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                         </xsl:call-template>
-                        <xsl:if test="$instance-ancestor != ''">
-                            <xsl:value-of select="']'"/>
-                        </xsl:if>
                     </xsl:attribute>
                 </xsl:element>
             </xsl:if>
@@ -515,9 +497,6 @@
             </xsl:if>
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                    </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
                         <xsl:with-param name="calcul-aim" select="'filter'"/>
@@ -531,17 +510,11 @@
                         </xsl:with-param>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="']'"/>
-                    </xsl:if>
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="not($readonly = ('false()', ''))">
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                    </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
                         <xsl:with-param name="calcul-aim" select="'filter'"/>
@@ -555,9 +528,6 @@
                         </xsl:with-param>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="']'"/>
-                    </xsl:if>
                     <xsl:value-of select="')'"/>
                 </xsl:attribute>
             </xsl:if>
@@ -603,9 +573,6 @@
             </xsl:if>
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                    </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
                         <xsl:with-param name="calcul-aim" select="'filter'"/>
@@ -619,17 +586,11 @@
                         </xsl:with-param>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="']'"/>
-                    </xsl:if>
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="not($readonly = ('false()', ''))">
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                    </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
                         <xsl:with-param name="calcul-aim" select="'filter'"/>
@@ -643,9 +604,6 @@
                         </xsl:with-param>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="']'"/>
-                    </xsl:if>
                     <xsl:value-of select="')'"/>
                 </xsl:attribute>
             </xsl:if>
@@ -944,9 +902,6 @@
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                    </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
                         <xsl:with-param name="calcul-aim" select="'filter'"/>
@@ -960,17 +915,11 @@
                         </xsl:with-param>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="']'"/>
-                    </xsl:if>
                 </xsl:attribute>
             </xsl:if>
             <xsl:if test="not($readonly = ('false()', ''))">
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                    </xsl:if>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
                         <xsl:with-param name="calcul-aim" select="'filter'"/>
@@ -984,9 +933,6 @@
                         </xsl:with-param>
                         <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                     </xsl:call-template>
-                    <xsl:if test="$instance-ancestor != ''">
-                        <xsl:value-of select="']'"/>
-                    </xsl:if>
                     <xsl:value-of select="')'"/>
                 </xsl:attribute>
             </xsl:if>
@@ -1031,7 +977,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat('*[name()=''',.,'''][$',.,'-position]//')"/>
+                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
             </xsl:for-each>
         </xsl:variable>
 
@@ -1161,9 +1107,6 @@
                 </xsl:if>
                 <xsl:if test="$relevant != ''">
                     <xsl:attribute name="relevant">
-                        <xsl:if test="$instance-ancestor != ''">
-                            <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                        </xsl:if>
                         <xsl:call-template name="replaceVariablesInFormula">
                             <xsl:with-param name="formula" select="$relevant"/>
                             <xsl:with-param name="calcul-aim" select="'filter'"/>
@@ -1177,17 +1120,11 @@
                             </xsl:with-param>
                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                         </xsl:call-template>
-                        <xsl:if test="$instance-ancestor != ''">
-                            <xsl:value-of select="']'"/>
-                        </xsl:if>
                     </xsl:attribute>
                 </xsl:if>
                 <xsl:if test="not($readonly = ('false()', ''))">
                     <xsl:attribute name="readonly">
                         <xsl:value-of select="'not('"/>
-                        <xsl:if test="$instance-ancestor != ''">
-                            <xsl:value-of select="concat('ancestor::',tokenize($instance-ancestor,' ')[last()],'[')"/>
-                        </xsl:if>
                         <xsl:call-template name="replaceVariablesInFormula">
                             <xsl:with-param name="formula" select="$readonly"/>
                             <xsl:with-param name="calcul-aim" select="'filter'"/>
@@ -1201,9 +1138,6 @@
                             </xsl:with-param>
                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                         </xsl:call-template>
-                        <xsl:if test="$instance-ancestor != ''">
-                            <xsl:value-of select="']'"/>
-                        </xsl:if>
                         <xsl:value-of select="')'"/>
                     </xsl:attribute>
                 </xsl:if>
@@ -1313,7 +1247,6 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:param name="question-label" tunnel="yes"/>
-        <xsl:param name="instance-ancestor" tunnel="yes"/>
 
         <xsl:variable name="label" select="enofr:get-label($source-context, $language)"/>
         <xsl:variable name="hint" select="enofr:get-hint($source-context, $language)"/>
@@ -1375,7 +1308,6 @@
     <xsl:template match="Resource//ConsistencyCheck" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
-        <xsl:param name="instance-ancestor" tunnel="yes"/>
 
         <xsl:variable name="alert" select="eno:serialize(enofr:get-label($source-context, $language))"/>
 
@@ -1763,7 +1695,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat('*[name()=''',.,'''][$',.,'-position]//')"/>
+                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
             </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="xforms-element">
@@ -2073,7 +2005,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat('*[name()=''',.,'''][$',.,'-position]//')"/>
+                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
             </xsl:for-each>
         </xsl:variable>
 
@@ -2265,7 +2197,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat('*[name()=''',.,'''][$',.,'-position]//')"/>
+                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
             </xsl:for-each>
         </xsl:variable>
 
@@ -2297,7 +2229,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat('*[name()=''',.,'''][$',.,'-position]//')"/>
+                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
             </xsl:for-each>
         </xsl:variable>
 
@@ -2917,7 +2849,7 @@
                             <xsl:variable name="variable-ancestors" select="enofr:get-variable-business-ancestors($source-context,$conditioning-variable)"/>
                             <xsl:if test="$variable-ancestors != ''">
                                 <xsl:for-each select="tokenize($variable-ancestors,' ')">
-                                    <xsl:value-of select="concat(.,'[$',.,'-position]//')"/>
+                                    <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
                                 </xsl:for-each>
                             </xsl:if>
                             <xsl:value-of select="enofr:get-variable-business-name($source-context,$conditioning-variable)"/>
@@ -2954,38 +2886,14 @@
                 <xsl:variable name="variable-business-name">
                     <xsl:variable name="variable-ancestors" select="enofr:get-variable-business-ancestors($source-context,$current-variable)"/>
                     <xsl:variable name="business-name" select="enofr:get-variable-business-name($source-context,$current-variable)"/>
-                    <xsl:choose>
-                        <!-- the calculation or the variable directly depends on the root : the variable is directly called from the root -->
-                        <xsl:when test="not($instance-group) or not($variable-ancestors)">
-                            <xsl:value-of select="concat('//',$business-name)"/>
-                        </xsl:when>
-                        <!-- the calculation and the variable depend on loops and the calculation is a label -->
-                        <!-- the variable is called with its whole absolute address -->
-                        <xsl:when test="$calcul-aim = 'label'">
-                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-                            <xsl:for-each select="tokenize($variable-ancestors,' ')">
-                                <xsl:if test=". = tokenize($instance-ancestor,' ')">
-                                    <xsl:value-of select="concat(.,'[\$',.,'-position]//')"/>
-                                </xsl:if>
-                            </xsl:for-each>
-                            <xsl:value-of select="$business-name"/>
-                        </xsl:when>
-                        <!-- the calculation and the variable depend on loops and the calculation is a calculated variable -->
-                        <!-- the variable is called with "ancestor::" before the last ancestor -->
-                        <xsl:when test="$calcul-aim = 'calculation'">
-                            <xsl:value-of select="concat('ancestor::',tokenize($variable-ancestors,' ')[last()],'//',$business-name)"/>
-                        </xsl:when>
-                        <!-- the calculation and the variable depend on loops and the calculation is a filter or a check and the variable depends on the calculation's loop -->
-                        <!-- the variable is called as a descendant of the filter or check instance -->
-                        <xsl:when test="$instance-group = tokenize($variable-ancestors,' ')">
-                            <xsl:value-of select="concat('descendant::',$business-name)"/>
-                        </xsl:when>
-                        <!-- the calculation and the variable depend on loops and the calculation is a filter or a check and the variable does not depend on the calculation's loop -->
-                        <!-- the variable is called as a descendant of the nearest possible ancestor -->
-                        <xsl:otherwise>
-                            <xsl:value-of select="concat('ancestor::*[descendant::',$business-name,'][1]/descendant::',$business-name)"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    
+                    <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
+                    <xsl:for-each select="tokenize($variable-ancestors,' ')">
+                        <xsl:if test=". = tokenize($instance-ancestor,' ')">
+                            <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                    <xsl:value-of select="$business-name"/>
                 </xsl:variable>
                 <xsl:call-template name="replaceVariablesInFormula">
                     <xsl:with-param name="formula" select="replace($formula,
