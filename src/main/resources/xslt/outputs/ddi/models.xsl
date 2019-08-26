@@ -1180,6 +1180,7 @@
 	<xsl:template match="driver-SMGRD/Clarification" mode="model" priority="3">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="agency" as="xs:string" tunnel="yes"/>
+		<xsl:param name="idCodeList" as="xs:string" tunnel="yes"/>
 		<xsl:param name="clarificationVal" as="xs:string" tunnel="yes"/>
 		<d:GridResponseDomainInMixed>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -1193,7 +1194,10 @@
 				</d:DomainSpecificValue>
 				<r:CodeReference>
 					<r:Agency><xsl:value-of select="$agency"/></r:Agency>
-					<r:ID>INSEE-COMMUN-CL-Booleen-<xsl:value-of select="$clarificationVal"/></r:ID>
+					<xsl:choose>
+						<xsl:when test="$idCodeList != '' "><r:ID><xsl:value-of select="$idCodeList"/>-<xsl:value-of select="$clarificationVal"/></r:ID></xsl:when>
+						<xsl:otherwise><r:ID>INSEE-COMMUN-CL-Booleen-<xsl:value-of select="$clarificationVal"/></r:ID></xsl:otherwise>
+					</xsl:choose>
 					<r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
 					<r:TypeOfObject>Code</r:TypeOfObject>
 				</r:CodeReference>
@@ -1231,6 +1235,7 @@
         <d:StructuredMixedGridResponseDomain>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMGRD', .)" tunnel="yes"/>
+                <xsl:with-param name="idCodeList" select="enoddi33:get-code-list-id($source-context)" tunnel="yes"/>
 				<xsl:with-param name="clarificationVal" select='normalize-space(replace($clarificationExp,"&apos;",""))' tunnel="yes"/>
 				<xsl:with-param name="clarificationResponseid" select='$clarificationResponseid' tunnel="yes"/>
             </xsl:apply-templates> 
