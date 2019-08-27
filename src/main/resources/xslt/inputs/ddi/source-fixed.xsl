@@ -1012,7 +1012,26 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-business-name.</xd:p>
+            <xd:p>Function that returns the business variable from the DDI one.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-container-name">
+        <xsl:variable name="loop-id" select="enoddi:get-id(.)"/>
+        <xsl:variable name="loop-name" select="$root//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID= $loop-id]/l:VariableGroupName/r:String"/>
+        <xsl:variable name="loop-position" select="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference[r:ID= $loop-id]/count(preceding-sibling::r:BasedOnReference)+1"/>
 
+        <xsl:choose>
+            <xsl:when test="$loop-position = 1">
+                <xsl:value-of select="concat($loop-name,'-Container')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat($loop-name,'-',$loop-position,'-Container')"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <xd:doc>
         <xd:desc>

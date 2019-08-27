@@ -229,7 +229,7 @@
     <xsl:template match="Instance//RowLoop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:element name="{$name}-Container">
+        <xsl:element name="{enofr:get-container-name($source-context)}">
             <xsl:element name="{$name}">
                 <xsl:attribute name="id" select="concat($name,'-1')"/>
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -251,7 +251,7 @@
     <xsl:template match="Instance//QuestionLoop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
-        <xsl:element name="{$name}-Container">
+        <xsl:element name="{enofr:get-container-name($source-context)}">
             <xsl:element name="{$name}">
                 <xsl:attribute name="id" select="concat($name,'-1')"/>
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -334,11 +334,13 @@
     <xsl:template match="Model//RowLoop | Model//QuestionLoop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- create element with same name and acts like what is done for the instance part -->
-        <xsl:element name="{enofr:get-name($source-context)}">
-            <xsl:attribute name="id"/>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
-            </xsl:apply-templates>
+        <xsl:element name="{enofr:get-container-name($source-context)}">
+            <xsl:element name="{enofr:get-name($source-context)}">
+                <xsl:attribute name="id"/>
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:element>
         </xsl:element>
         <!-- keep going down the tree in case there are other loops -->
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -955,7 +957,9 @@
 
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
-        <xf:bind id="{$business-name}-Container-bind" name="{$business-name}-Container" nodeset="{$name}-Container/{$name}">
+        <xsl:variable name="container" select="enofr:get-container-name($source-context)"/>
+        
+        <xf:bind id="{$container}-bind" name="{$container}" nodeset="{$container}/{$name}">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
@@ -974,6 +978,7 @@
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
+        <xsl:variable name="container" select="enofr:get-container-name($source-context)"/>
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
@@ -991,7 +996,7 @@
             </xsl:when>
             <xsl:when test="number(enofr:get-minimum-lines($source-context)) &lt; number(enofr:get-maximum-lines($source-context))">
                 <xf:bind id="{$business-name}-addline-bind" ref="{$business-name}-AddLine"
-                    relevant="count({$instance-ancestor-label}{$business-name}) &lt; {enofr:get-maximum-lines($source-context)}"/>
+                    relevant="count({$instance-ancestor-label}{$container}/{$business-name}) &lt; {enofr:get-maximum-lines($source-context)}"/>
             </xsl:when>
             <xsl:otherwise/>
         </xsl:choose>
@@ -1318,6 +1323,19 @@
                 </alert>
             </xsl:if>
         </xsl:element>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template for Resource for the drivers QuestionLoop and Rowloop.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Resource//QuestionLoop | Resource//RowLoop" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
@@ -1996,6 +2014,7 @@
         </xsl:variable>
         <xsl:variable name="table-name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="loop-name" select="enofr:get-business-name($source-context)"/>
+        <xsl:variable name="container-name" select="enofr:get-container-name($source-context)"/>
         <xsl:variable name="css-class" select="enofr:get-css-class($source-context)"/>
         <xsl:variable name="isLongTable">
             <xsl:if test="count(enofr:get-body-lines($source-context))>=$lengthOfLongTable">
@@ -2033,8 +2052,8 @@
             </xhtml:thead>
             <xhtml:tbody>
                 <!-- if the loop is in a loop, instance-ancestor helps choosing the good ancestor loop instance -->
-                <xf:repeat id="{$loop-name}" nodeset="{$instance-ancestor-label}{$loop-name}">
-                    <xf:var name="{$loop-name}-position" value="position()"/>
+                <xf:repeat id="{$container-name}" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
+                    <xf:var name="{$container-name}-position" value="position()"/>
                     <!-- the table has a repeated zone that may have more than one line -->
                     <xsl:for-each select="enofr:get-body-lines($source-context)">
                         <xhtml:tr>
@@ -2052,15 +2071,16 @@
         <xsl:variable name="max-lines" select="enofr:get-maximum-lines($source-context)"/>
 
         <xsl:if test="not($max-lines != '') or number($max-lines) &gt; number(enofr:get-minimum-lines($source-context))">
+            <xsl:variable name="container" select="enofr:get-container-name($source-context)"/>
             <xf:trigger id="{$loop-name}-addline" bind="{$loop-name}-addline-bind">
                 <xf:label ref="$form-resources/AddLine/label"/>
                 <xf:action ev:event="DOMActivate">
-                    <xf:insert context="{$instance-ancestor-label}{$loop-name}-Container"
-                        nodeset="{$instance-ancestor-label}{$loop-name}" position="after"
-                        origin="instance('fr-form-loop-model')/{$loop-name}"/>
                     <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}-Count"
                         value="number({$instance-ancestor-label}{$loop-name}-Count) +1"/>
-                    <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}[last()]/@id"
+                    <xf:insert context="{$instance-ancestor-label}{$container}"
+                        nodeset="{$instance-ancestor-label}{$container}/{$loop-name}" position="after"
+                        origin="instance('fr-form-loop-model')/{$container}/{$loop-name}"/>
+                    <xf:setvalue ref="{$instance-ancestor-label}{$container}/{$loop-name}[last()]/@id"
                         value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
                 </xf:action>
             </xf:trigger>
@@ -2193,6 +2213,7 @@
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
         <xsl:variable name="loop-name" select="enofr:get-name($source-context)"/>
+        <xsl:variable name="container-name" select="enofr:get-container-name($source-context)"/>
         <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
@@ -2201,8 +2222,8 @@
             </xsl:for-each>
         </xsl:variable>
 
-        <xf:repeat id="{$loop-name}" nodeset="{$instance-ancestor-label}{$loop-name}">
-            <xf:var name="{$loop-name}-position" value="position()"/>
+        <xf:repeat id="{$container-name}" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
+            <xf:var name="{$container-name}-position" value="position()"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for Loops, for which several instances are possible -->
