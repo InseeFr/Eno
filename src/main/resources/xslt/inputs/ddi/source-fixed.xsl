@@ -1011,11 +1011,10 @@
         </xsl:choose>
     </xsl:template>
 
-
     <xd:doc>
         <xd:desc>
-            <xd:p>Defining getter get-business-name.</xd:p>
-            <xd:p>Function that returns the business variable from the DDI one.</xd:p>
+            <xd:p>Defining getter get-container-name.</xd:p>
+            <xd:p>Function that returns the business name of the container of a loop or a dynamic array.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-container-name">
@@ -1031,6 +1030,28 @@
                 <xsl:value-of select="concat($loop-name,'-',$loop-position,'-Container')"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-linked-containers.</xd:p>
+            <xd:p>Function that returns the list of the business name of the different containers of an occurrence of the current loop or dynamic array.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-linked-containers">
+        <xsl:variable name="loop-id" select="enoddi:get-id(.)"/>
+        <xsl:variable name="loop-name" select="$root//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID= $loop-id]/l:VariableGroupName/r:String"/>
+        <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject[r:BasedOnReference/r:ID= $loop-id]/r:BasedOnReference">
+            <xsl:variable name="loop-position" select="position()"/>
+            <xsl:choose>
+                <xsl:when test="$loop-position = 1">
+                    <xsl:value-of select="concat($loop-name,'-Container')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="concat($loop-name,'-',$loop-position,'-Container')"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
     </xsl:template>
 
     <xd:doc>
@@ -1254,7 +1275,7 @@
             <xsl:apply-templates select="node()|@*"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Function for retrieving instructions before the label of the question</xd:p>

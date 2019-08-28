@@ -2077,11 +2077,13 @@
                 <xf:action ev:event="DOMActivate">
                     <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}-Count"
                         value="number({$instance-ancestor-label}{$loop-name}-Count) +1"/>
-                    <xf:insert context="{$instance-ancestor-label}{$container}"
-                        nodeset="{$instance-ancestor-label}{$container}/{$loop-name}" position="after"
-                        origin="instance('fr-form-loop-model')/{$container}/{$loop-name}"/>
-                    <xf:setvalue ref="{$instance-ancestor-label}{$container}/{$loop-name}[last()]/@id"
-                        value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                    <xsl:for-each select="enofr:get-linked-containers($source-context)">
+                        <xf:insert context="{$instance-ancestor-label}{.}"
+                            nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
+                            origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
+                        <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@id"
+                            value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>                        
+                    </xsl:for-each>
                 </xf:action>
             </xf:trigger>
         </xsl:if>
