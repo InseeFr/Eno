@@ -1027,7 +1027,7 @@
                 <xsl:value-of select="concat($loop-name,'-Container')"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="concat($loop-name,'-',$loop-position,'-Container')"/>
+                <xsl:value-of select="concat($loop-name,'_',$loop-position,'-Container')"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1048,7 +1048,7 @@
                     <xsl:value-of select="concat($loop-name,'-Container')"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="concat($loop-name,'-',$loop-position,'-Container')"/>
+                    <xsl:value-of select="concat($loop-name,'_',$loop-position,'-Container')"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
