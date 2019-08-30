@@ -238,52 +238,34 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on xf-select driver.</xd:p>
+			<xd:p>Match on BooleanDomain driver.</xd:p>
 			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-select" mode="model">
+	<xsl:template match="BooleanDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="typeOfAncestor" tunnel="yes"/>		
-		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
-		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
-		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context,$languages[1])"/>
-		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
+		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		
-		<xsl:choose>
-			<xsl:when test="$maximumLengthCode != ''">
-				<!-- remove Format in the cell for table 'question multiple-choice-question'-->
-				<xsl:if test="$typeOfAncestor!='question multiple-choice-question'">
-					<text:p text:style-name="Format">
-						<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
-					</text:p>
-				</xsl:if>
-			</xsl:when>
-			<xsl:when test="$typeResponse='boolean' and $typeOfAncestor!=''">
-				<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
-			</xsl:when>
-		</xsl:choose>
+		<xsl:if test="$typeOfAncestor!=''">
+			<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
+		</xsl:if>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
-			<xsl:with-param name="typeResponse" select="$typeResponse" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on xf-select1 driver.</xd:p>
+			<xd:p>Match on CodeDomain driver.</xd:p>
 			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-select1" mode="model">
+	<xsl:template match="CodeDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
-		<xsl:variable name="lengthResponse" select="enoodt:get-length($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
 		
 		<xsl:if test="$typeOfAncestor!='question multiple-choice-question' and $maximumLengthCode != ''">
@@ -481,12 +463,11 @@
 	<xsl:template match="xf-item" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="ancestorTable" tunnel="yes"/>
-		<xsl:param name="typeResponse" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="label" select="enoodt:get-label($source-context, $languages[1])"/>
 		
 		<!-- remove item in the cell for table when the response is boolean-->
-		<xsl:if test="$label !='' and $typeResponse!='boolean'">
+		<xsl:if test="$label !='' and not(ancestor::BooleanDomain)">
 			<text:p text:style-name="CodeItem">
 				<xsl:value-of select="fn:concat(enoodt:get-value($source-context), ' - ', $label)"/>
 			</text:p>
