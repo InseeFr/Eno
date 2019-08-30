@@ -228,7 +228,9 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="lengthResponse" select="enoodt:get-length($source-context)"/>
 		
-		<xsl:value-of select="concat('Car ',$lengthResponse)"/>
+		<text:p text:style-name="Format">
+			<xsl:value-of select="concat('Car ',$lengthResponse)"/>
+		</text:p>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
