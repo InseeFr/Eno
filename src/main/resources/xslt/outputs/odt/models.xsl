@@ -151,57 +151,65 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on xf-input driver.</xd:p>
+			<xd:p>Match on NumericDomain driver.</xd:p>
 			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-input" mode="model">
+	<xsl:template match="NumericDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
-		<xsl:variable name="lengthResponse" select="enoodt:get-length($source-context)"/>
 		<xsl:variable name="numberOfDecimals" select="enoodt:get-number-of-decimals($source-context)"/>
 		<xsl:variable name="minimumResponse" select="enoodt:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enoodt:get-maximum($source-context)"/>
 		
-		<xsl:if test="$typeResponse!=''">
-			<text:p text:style-name="Format">
-				<xsl:choose>
-					<xsl:when test="$typeResponse='text'">
-						<xsl:value-of select="concat('Car ',$lengthResponse)"/>
-					</xsl:when>
-					<xsl:when test="$typeResponse='number' and fn:string-length($numberOfDecimals)>0">
-						<xsl:value-of select="concat('num ',fn:substring-before($minimumResponse,'.'),'..',fn:substring-before($maximumResponse,'.'),' - ',$numberOfDecimals,' chiffre(s) après la virgule')"/>
-					</xsl:when>
-					<xsl:when test="$typeResponse='number' and fn:string-length($numberOfDecimals)=0">
-						<xsl:value-of select="concat('num ',$minimumResponse,'..',$maximumResponse)"/>
-					</xsl:when>
-				</xsl:choose>
-			</text:p>
-			
-		</xsl:if>		
-		
+		<text:p text:style-name="Format">
+			<xsl:choose>
+				<xsl:when test="fn:string-length($numberOfDecimals)>0">
+					<xsl:value-of select="concat('num ',fn:substring-before($minimumResponse,'.'),'..',fn:substring-before($maximumResponse,'.'),' - ',$numberOfDecimals,' chiffre(s) après la virgule')"/>
+				</xsl:when>
+				<xsl:when test="fn:string-length($numberOfDecimals)=0">
+					<xsl:value-of select="concat('num ',$minimumResponse,'..',$maximumResponse)"/>
+				</xsl:when>
+			</xsl:choose>
+		</text:p>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
-		
 	</xsl:template>
+	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on xf-input driver.</xd:p>
+			<xd:p>Match on TextDomain driver.</xd:p>
+			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="TextDomain" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:variable name="lengthResponse" select="enoodt:get-length($source-context)"/>
+		
+		
+		<text:p text:style-name="Format">
+			<xsl:value-of select="concat('Car ',$lengthResponse)"/>
+		</text:p>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on DateTimeDomain driver.</xd:p>
 			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
 	<xsl:template match="DateTimeDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
 		<xsl:variable name="dateFormat" select="enoodt:get-format($source-context)"/>
-		<xsl:if test="$typeResponse!=''">
-			<text:p text:style-name="Format">
-				<xsl:value-of select="concat('date ( ',$dateFormat,' )')"/>
-			</text:p>
-		</xsl:if>		
+		<text:p text:style-name="Format">
+			<xsl:value-of select="concat('date ( ',$dateFormat,' )')"/>
+		</text:p>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -211,28 +219,16 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on xf-textarea driver.</xd:p>
+			<xd:p>Match on TextareaDomain driver.</xd:p>
 			<xd:p>It writes the short name, the label and its response format of a question.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-textarea" mode="model">
+	<xsl:template match="TextareaDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
-		<xsl:variable name="format" select="enoodt:get-format($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enoodt:get-length($source-context)"/>
-		<xsl:variable name="numberOfDecimals" select="enoodt:get-number-of-decimals($source-context)"/>
-		<xsl:variable name="minimumResponse" select="enoodt:get-minimum($source-context)"/>
-		<xsl:variable name="maximumResponse" select="enoodt:get-maximum($source-context)"/>
 		
-		<xsl:if test="$typeResponse !=''">
-			<text:p text:style-name="Format">
-				<xsl:if test="$typeResponse='text'">
-					<xsl:value-of select="concat('Car ',$lengthResponse)"/>
-				</xsl:if>
-			</text:p>
-		</xsl:if>
-		
+		<xsl:value-of select="concat('Car ',$lengthResponse)"/>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
