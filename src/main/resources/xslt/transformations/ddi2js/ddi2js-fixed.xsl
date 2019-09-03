@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enoodt="http://xml.insee.fr/apps/eno/out/odt"
@@ -133,10 +134,10 @@
     <xsl:function name="enojs:get-global-filter">
         <xsl:param name="context" as="item()"/>
         
-        <xsl:variable name="formulaReadOnly" select="enoddi:get-readonly-ancestors($context)" as="xs:string*"/>
-        <xsl:variable name="formulaRelevant" select="enoddi:get-relevant-ancestors($context)" as="xs:string*"/>		
-        <xsl:variable name="variablesReadOnly" select="enoddi:get-readonly-ancestors-variables($context)" as="xs:string*"/>
-        <xsl:variable name="variablesRelevant" select="enoddi:get-relevant-ancestors-variables($context)" as="xs:string*"/>
+        <xsl:variable name="formulaReadOnly" select="enoddi:get-deactivatable-ancestors($context)" as="xs:string*"/>
+        <xsl:variable name="formulaRelevant" select="enoddi:get-hideable-ancestors($context)" as="xs:string*"/>		
+        <xsl:variable name="variablesReadOnly" select="enoddi:get-deactivatable-ancestors-variables($context)" as="xs:string*"/>
+        <xsl:variable name="variablesRelevant" select="enoddi:get-hideable-ancestors-variables($context)" as="xs:string*"/>
 
         <xsl:variable name="variableFilterId" as="xs:string*">
             <xsl:for-each select="distinct-values($variablesRelevant)">
@@ -148,7 +149,7 @@
         </xsl:variable>
         <xsl:variable name="variableFilterName" as="xs:string*">
             <xsl:for-each select="distinct-values($variablesRelevant)">
-                <xsl:sequence select="enojs:get-variable-business-name($source-context,.)"/>
+                <xsl:sequence select="enojs:get-variable-business-name($context,.)"/>
             </xsl:for-each>
             <xsl:for-each select="distinct-values($variablesReadOnly)">
                 <xsl:sequence select="."/>
@@ -168,114 +169,112 @@
             </xsl:for-each>
         </xsl:variable>
         
-        <conditionFilter>
-            <!--Expression VTL : #if(condition)je suis true#{else}je suis false#end-->
-            <!-- Caution for encodage : # -> &#x23;  { -> &#x7B; } -> &#x7D; -->
-            <xsl:variable name="if" select="'&#x23;if'"/>
-            <xsl:variable name="else" select="'&#x23;&#x7B;else&#x7D;'"/>
-            <xsl:variable name="ifEnd" select="'&#x23;end'"/>
-            <xsl:choose>
-                <!--<xsl:when test="$variablesName=''">
+        <!--Expression VTL : #if(condition)je suis true#{else}je suis false#end-->
+        <!-- Caution for encodage : # -> &#x23;  { -> &#x7B; } -> &#x7D; -->
+        <xsl:variable name="if" select="'&#x23;if'"/>
+        <xsl:variable name="else" select="'&#x23;&#x7B;else&#x7D;'"/>
+        <xsl:variable name="ifEnd" select="'&#x23;end'"/>
+        <xsl:choose>
+            <!--<xsl:when test="$variablesName=''">
 					<xsl:value-of select="'() => true ? ''normal'' : '''''"/> guillemet autour de normal ? 
 					</xsl:when>-->
-                <xsl:when test="$formulaRelevant!='' and $formulaReadOnly!=''">
-                    <xsl:variable name="initial-relevant-ancestors">
-                        <xsl:for-each select="$formulaRelevant">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="' &amp;&amp; '"/><!-- "||" = "or"-->
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="relevant-condition">
-                        <xsl:call-template name="replaceVariablesInFormula">
-                            <xsl:with-param name="source-context" select="$source-context" as="item()" tunnel="yes"/>
-                            <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
-                            <xsl:with-param name="variables" select="$variablesId"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="initial-readonly-ancestors">
-                        <xsl:for-each select="$formulaReadOnly">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="' || '"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="readonly-condition">
-                        <xsl:call-template name="replaceVariablesInFormula">
-                            <xsl:with-param name="source-context" select="$source-context" as="item()" tunnel="yes"/>
-                            <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
-                            <xsl:with-param name="variables" select="$variablesId"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <!-- replace "not -> "!", " and " -> "&&", " or " -> "||", "=" -> "==" -->
-                    <xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
-                    <xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
-                    
-                    <!--<xsl:value-of select="concat('(',$variablesName,') =>', $readonly-condition,'toto',$relevant-condition,' ? ''normal'' : ''''')"/>-->
-                    <!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
-                    <!--	si relevant
+            <xsl:when test="$formulaRelevant!='' and $formulaReadOnly!=''">
+                <xsl:variable name="initial-relevant-ancestors">
+                    <xsl:for-each select="$formulaRelevant">
+                        <xsl:value-of select="concat('(',.,')')"/>
+                        <xsl:if test="position()!=last()">
+                            <xsl:value-of select="' &amp;&amp; '"/><!-- "||" = "or"-->
+                        </xsl:if>
+                    </xsl:for-each>
+                </xsl:variable>
+                <xsl:variable name="relevant-condition">
+                    <xsl:call-template name="replaceVariablesInFormula">
+                        <xsl:with-param name="source-context" select="$context" as="item()" tunnel="yes"/>
+                        <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
+                        <xsl:with-param name="variables" select="$variablesId"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:variable name="initial-readonly-ancestors">
+                    <xsl:for-each select="$formulaReadOnly">
+                        <xsl:value-of select="concat('(',.,')')"/>
+                        <xsl:if test="position()!=last()">
+                            <xsl:value-of select="' || '"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                </xsl:variable>
+                <xsl:variable name="readonly-condition">
+                    <xsl:call-template name="replaceVariablesInFormula">
+                        <xsl:with-param name="source-context" select="$context" as="item()" tunnel="yes"/>
+                        <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
+                        <xsl:with-param name="variables" select="$variablesId"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <!-- replace "not -> "!", " and " -> "&&", " or " -> "||", "=" -> "==" -->
+                <xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
+                <xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
+                
+                <!--<xsl:value-of select="concat('(',$variablesName,') =>', $readonly-condition,'toto',$relevant-condition,' ? ''normal'' : ''''')"/>-->
+                <!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
+                <!--	si relevant
 						alors 
 						si readonly,
 						alors readonly
 						sinon normal
 						sinon hidden-->
-                    <xsl:value-of select="concat(
-                        $if,'(',$returned-relevant-condition,')',
-                        $if,'(',$returned-readonly-condition,')readonly',
-                        $else,'normal',$ifEnd,')',
-                        $else,'hidden',$ifEnd
-                        )"/>
-                </xsl:when>
-                <xsl:when test="$formulaRelevant!=''">
-                    <xsl:variable name="initial-relevant-ancestors">
-                        <xsl:for-each select="$formulaRelevant">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="' &amp;&amp; '"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="relevant-condition">
-                        <xsl:call-template name="replaceVariablesInFormula">
-                            <xsl:with-param name="source-context" select="$source-context" as="item()" tunnel="yes"/>
-                            <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
-                            <xsl:with-param name="variables" select="$variablesId"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s',' &amp;&amp; '),'\sor\s',' || '),'\s=\s',' == ')"/>
-                    
-                    <xsl:value-of select="concat($if,'(', $returned-relevant-condition,')normal',$else,'hidden',$ifEnd)"/>
-                    
-                    <!-- pas de gris, on affiche (normal) ou pas (hidden) -->
-                </xsl:when>
-                <xsl:when test="$formulaReadOnly!=''">
-                    <xsl:variable name="initial-readonly-ancestors">
-                        <xsl:for-each select="$formulaReadOnly">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="' || '"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="readonly-condition">
-                        <xsl:call-template name="replaceVariablesInFormula">
-                            <xsl:with-param name="source-context" select="$source-context" as="item()" tunnel="yes"/>
-                            <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
-                            <xsl:with-param name="variables" select="$variablesId"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s',' &amp;&amp; '),'\sor\s',' || '),'\s=\s',' == ')"/>
-                    <xsl:value-of select="concat($if,'(',$returned-readonly-condition,')readonly',$else,'normal',$ifEnd)"/>
-                    <!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
-                </xsl:when>
+                <xsl:value-of select="concat(
+                    $if,'(',$returned-relevant-condition,')',
+                    $if,'(',$returned-readonly-condition,')readonly',
+                    $else,'normal',$ifEnd,')',
+                    $else,'hidden',$ifEnd
+                    )"/>
+            </xsl:when>
+            <xsl:when test="$formulaRelevant!=''">
+                <xsl:variable name="initial-relevant-ancestors">
+                    <xsl:for-each select="$formulaRelevant">
+                        <xsl:value-of select="concat('(',.,')')"/>
+                        <xsl:if test="position()!=last()">
+                            <xsl:value-of select="' &amp;&amp; '"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                </xsl:variable>
+                <xsl:variable name="relevant-condition">
+                    <xsl:call-template name="replaceVariablesInFormula">
+                        <xsl:with-param name="source-context" select="$context" as="item()" tunnel="yes"/>
+                        <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
+                        <xsl:with-param name="variables" select="$variablesId"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s',' &amp;&amp; '),'\sor\s',' || '),'\s=\s',' == ')"/>
                 
-                <xsl:otherwise>
-                    <xsl:value-of select="'normal'"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </conditionFilter>
+                <xsl:value-of select="concat($if,'(', $returned-relevant-condition,')normal',$else,'hidden',$ifEnd)"/>
+                
+                <!-- pas de gris, on affiche (normal) ou pas (hidden) -->
+            </xsl:when>
+            <xsl:when test="$formulaReadOnly!=''">
+                <xsl:variable name="initial-readonly-ancestors">
+                    <xsl:for-each select="$formulaReadOnly">
+                        <xsl:value-of select="concat('(',.,')')"/>
+                        <xsl:if test="position()!=last()">
+                            <xsl:value-of select="' || '"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                </xsl:variable>
+                <xsl:variable name="readonly-condition">
+                    <xsl:call-template name="replaceVariablesInFormula">
+                        <xsl:with-param name="source-context" select="$context" as="item()" tunnel="yes"/>
+                        <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
+                        <xsl:with-param name="variables" select="$variablesId"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s',' &amp;&amp; '),'\sor\s',' || '),'\s=\s',' == ')"/>
+                <xsl:value-of select="concat($if,'(',$returned-readonly-condition,')readonly',$else,'normal',$ifEnd)"/>
+                <!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
+            </xsl:when>
+            
+            <xsl:otherwise>
+                <xsl:value-of select="'normal'"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
 
 </xsl:stylesheet>

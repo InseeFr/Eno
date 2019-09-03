@@ -102,7 +102,7 @@
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
 			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
-			<xsl:copy-of select="enojs:get-global-filter($source-context)"/>
+			<conditionFilter><xsl:value-of select="enojs:get-global-filter($source-context)"/></conditionFilter>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
@@ -111,6 +111,7 @@
 
 	<xsl:template match="SingleResponseQuestion | MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -125,14 +126,17 @@
 	
 	<xsl:template match="MultipleChoiceQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:variable name="idQuestion" select="enojs:get-name($source-context)"/>
 
 		<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
 			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
-			<xsl:copy-of select="enojs:get-global-filter($source-context)"/>
+			<conditionFilter><xsl:value-of select="enojs:get-global-filter($source-context)"/></conditionFilter>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
-				<xsl:with-param name="idQuestion" select="enojs:get-name($source-context)" tunnel="yes"/>
+				<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
 				<xsl:with-param name="questionName" select="lower-case(enojs:get-question-name($source-context,$languages[1]))" tunnel="yes"/>
 				<xsl:with-param name="labelQuestion" select="enojs:get-label($source-context, $languages[1])" tunnel="yes"/>
 				<xsl:with-param name="typeOfQuestion" select="self::*/name()" tunnel="yes"/>
@@ -155,7 +159,7 @@
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" positioning="HORIZONTAL" mandatory="{$mandatory}">
 			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
-			<xsl:copy-of select="enojs:get-global-filter($source-context)"/>
+			<conditionFilter><xsl:value-of select="enojs:get-global-filter($source-context)"/></conditionFilter>
 			
 			<xsl:for-each select="enojs:get-header-lines($source-context)">
 				<cells type="header">
@@ -324,7 +328,7 @@
 					<xsl:call-template name="enojs:addResponseToComponents">
 						<xsl:with-param name="responseName" select="$responseName"/>							
 					</xsl:call-template>
-					<xsl:copy-of select="$filterCondition"/>
+					<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
 				</components>
 			</xsl:when>
 			<xsl:when test="$typeOfAncestor='table'">
@@ -393,7 +397,7 @@
 					<xsl:call-template name="enojs:addResponseToComponents">
 						<xsl:with-param name="responseName" select="$responseName"/>
 					</xsl:call-template>
-					<xsl:copy-of select="$filterCondition"/>
+					<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
 				</components>
 			</xsl:when>
 			<xsl:when test="$typeOfAncestor='table'">
@@ -459,7 +463,7 @@
 					<xsl:call-template name="enojs:addResponseToComponents">
 						<xsl:with-param name="responseName" select="$responseName"/>
 					</xsl:call-template>
-					<xsl:copy-of select="$filterCondition"/>
+					<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
 					<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
 				</components>
 			</xsl:otherwise>
@@ -524,7 +528,7 @@
 						<xsl:with-param name="responseName" select="$responseName"/>
 						<xsl:with-param name="responseType" select="'Boolean'"/>
 					</xsl:call-template>
-					<xsl:copy-of select="$filterCondition"/>
+					<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
 				</components>
 				
 				<xsl:call-template name="enojs:addVariableCollected">
@@ -602,7 +606,7 @@
 				<xsl:call-template name="enojs:addResponseToComponents">
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
-				<xsl:copy-of select="$filterCondition"/>
+				<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
 			</components>
 			
 			<xsl:call-template name="enojs:addVariableCollected">
@@ -694,7 +698,7 @@
 				<xsl:call-template name="enojs:addResponseToComponents">
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
-				<xsl:copy-of select="$filterCondition"/>
+				<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
 			</components>
 			
 			<xsl:call-template name="enojs:addVariableCollected">
