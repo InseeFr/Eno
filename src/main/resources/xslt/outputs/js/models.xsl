@@ -41,8 +41,6 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
-	
-	
 	<xsl:template match="ResponseElement" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="finding"/>
@@ -86,139 +84,78 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on Module driver.</xd:p>
+			<xd:p>Match on Module and SubModule drivers.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="Module" mode="model">
+	<xsl:template match="Module | SubModule" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+
 		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
-		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
-		
-		<xsl:variable name="componentType-Sequence" select="'Sequence'"/>
-		
-		<xsl:variable name="formulaReadOnly" select="enojs:get-readonly-ancestors($source-context)" as="xs:string*"/>
-		<xsl:variable name="formulaRelevant" select="enojs:get-relevant-ancestors($source-context)" as="xs:string*"/>		
-		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
-		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
-		
-		<xsl:variable name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" />
-		
-		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
-			.,
-			$formulaReadOnly,
-			$formulaRelevant,
-			$variablesReadOnly,
-			$variablesRelevant
-			)"/>
+		<xsl:variable name="componentType-Sequence">
+			<xsl:choose>
+				<xsl:when test="self::Module"><xsl:value-of select="'Sequence'"/></xsl:when>
+				<xsl:when test="self::SubModule"><xsl:value-of select="'Subsequence'"/></xsl:when>
+			</xsl:choose>
+		</xsl:variable>
 		
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
-			<label><xsl:value-of select="$label"/></label>
-			<xsl:copy-of select="$declarations"/>
-			<xsl:copy-of select="$filterCondition"/>
-			
+			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
+			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
+			<xsl:copy-of select="enojs:get-global-filter($source-context)"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
 		</components>
 	</xsl:template>
-	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Match on SubModule driver.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:template match="SubModule" mode="model">
+
+	<xsl:template match="SingleResponseQuestion | MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
-		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
 		
-		<xsl:variable name="componentType-Subsequence" select="'Subsequence'"/>
-		
-		<xsl:variable name="formulaReadOnly" select="enojs:get-readonly-ancestors($source-context)" as="xs:string*"/>
-		<xsl:variable name="formulaRelevant" select="enojs:get-relevant-ancestors($source-context)" as="xs:string*"/>		
-		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
-		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
-		
-		<xsl:variable name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" />
-		
-		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
-			.,
-			$formulaReadOnly,
-			$formulaRelevant,
-			$variablesReadOnly,
-			$variablesRelevant
-			)"/>
-		
-		<components xsi:type="{$componentType-Subsequence}" componentType="{$componentType-Subsequence}" id="{$id}">
-			<label><xsl:value-of select="$label"/></label>
-			<xsl:copy-of select="$declarations"/>
-			<xsl:copy-of select="$filterCondition"/>
-			
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-			</xsl:apply-templates>
-		</components>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+			<xsl:with-param name="idQuestion" select="enojs:get-name($source-context)" tunnel="yes"/>
+			<xsl:with-param name="questionName" select="lower-case(enojs:get-question-name($source-context,$languages[1]))" tunnel="yes"/>
+			<xsl:with-param name="labelQuestion" select="enojs:get-label($source-context, $languages[1])" tunnel="yes"/>
+			<xsl:with-param name="typeOfQuestion" select="self::*/name()" tunnel="yes"/>
+			<xsl:with-param name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
+			<xsl:with-param name="filterCondition" select="enojs:get-global-filter($source-context)" tunnel="yes"/>
+		</xsl:apply-templates>
 	</xsl:template>
 	
-	<xsl:template match="SingleResponseQuestion" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:call-template name="addQuestionArguments">
-			<xsl:with-param name="source-context" select="$source-context"/>
-			<xsl:with-param name="typeOfQuestion" select="'SingleResponseQuestion'"/>
-		</xsl:call-template>
-	</xsl:template>
-	<xsl:template match="MultipleQuestion" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:call-template name="addQuestionArguments">
-			<xsl:with-param name="source-context" select="$source-context"/>
-			<xsl:with-param name="typeOfQuestion" select="'MultipleQuestion'"/>
-		</xsl:call-template>
-	</xsl:template>
 	<xsl:template match="MultipleChoiceQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		
-		<xsl:call-template name="addQuestionArguments">
-			<xsl:with-param name="source-context" select="$source-context"/>
-			<xsl:with-param name="typeOfQuestion" select="'MultipleChoiceQuestion'"/>
-		</xsl:call-template>
+
+		<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
+			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
+			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
+			<xsl:copy-of select="enojs:get-global-filter($source-context)"/>
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+				<xsl:with-param name="idQuestion" select="enojs:get-name($source-context)" tunnel="yes"/>
+				<xsl:with-param name="questionName" select="lower-case(enojs:get-question-name($source-context,$languages[1]))" tunnel="yes"/>
+				<xsl:with-param name="labelQuestion" select="enojs:get-label($source-context, $languages[1])" tunnel="yes"/>
+				<xsl:with-param name="typeOfQuestion" select="self::*/name()" tunnel="yes"/>
+				<xsl:with-param name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
+				<xsl:with-param name="filterCondition" select="enojs:get-global-filter($source-context)" tunnel="yes"/>
+			</xsl:apply-templates>
+		</components>
 	</xsl:template>
 	
 	<xsl:template match="Table | TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:variable name="questionName" select="enojs:get-question-name($source-context,$languages[1])"/>
+
 		<xsl:variable name="idQuestion" select="enojs:get-name($source-context)"/>
-		
-		<xsl:variable name="componentType-Table" select="'Table'"/>
-		
-		<xsl:variable name="formulaReadOnly" select="enojs:get-readonly-ancestors($source-context)" as="xs:string*"/>
-		<xsl:variable name="formulaRelevant" select="enojs:get-relevant-ancestors($source-context)" as="xs:string*"/>
-		
-		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
-		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
-		
-		<xsl:variable name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" />
-		<xsl:variable name="labelQuestion" select="enojs:get-label($source-context, $languages[1])"/>
-		
-		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
-			.,
-			$formulaReadOnly,
-			$formulaRelevant,
-			$variablesReadOnly,
-			$variablesRelevant
-			)"/>
-		
+		<xsl:variable name="componentType" select="'Table'"/>
 		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
-		
 		<xsl:variable name="nbMinimumLines" select="enojs:get-minimum-lines($source-context)"/>
 		<xsl:variable name="nbMaximumLines" select="enojs:get-maximum-lines($source-context)"/>
 		
-		<components xsi:type="{$componentType-Table}" componentType="{$componentType-Table}" id="{$idQuestion}" positioning="HORIZONTAL" mandatory="{$mandatory}">
-			<label><xsl:value-of select="$labelQuestion"/></label>
-			<xsl:copy-of select="$declarations"/>
-			<xsl:copy-of select="$filterCondition"/>
+		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" positioning="HORIZONTAL" mandatory="{$mandatory}">
+			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
+			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
+			<xsl:copy-of select="enojs:get-global-filter($source-context)"/>
 			
 			<xsl:for-each select="enojs:get-header-lines($source-context)">
 				<cells type="header">
@@ -228,7 +165,6 @@
 						<xsl:with-param name="typeOfAncestor" select="'table'" tunnel="yes"/>
 					</xsl:apply-templates>
 				</cells>
-				
 			</xsl:for-each>
 			
 			<xsl:for-each select="enojs:get-body-lines($source-context)">
@@ -237,7 +173,7 @@
 						<xsl:with-param name="ancestorTable" select="'line'" tunnel="yes"/>
 						<xsl:with-param name="typeOfAncestor" select="'table'" tunnel="yes"/>
 						<xsl:with-param name="position" select="position()" tunnel="yes"/>
-						<xsl:with-param name="questionName" select="$questionName" tunnel="yes"/>
+						<xsl:with-param name="questionName" select="enojs:get-question-name($source-context,$languages[1])" tunnel="yes"/>
 					</xsl:apply-templates>
 				</cells>
 			</xsl:for-each>			
@@ -246,7 +182,6 @@
 				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
 			</xsl:if>
 		</components>
-		
 	</xsl:template>
 	
 	<xd:doc>
@@ -335,60 +270,6 @@
 			</xsl:choose>
 		</xsl:if>
 		
-	</xsl:template>
-	
-	<xsl:template name="addQuestionArguments">
-		<xsl:param name="source-context"/>
-		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:param name="typeOfQuestion"/>
-		
-		<xsl:variable name="questionName" select="enojs:get-question-name($source-context,$languages[1])"/>
-		<xsl:variable name="idQuestion" select="enojs:get-name($source-context)"/>
-		
-		<xsl:variable name="formulaReadOnly" select="enojs:get-readonly-ancestors($source-context)" as="xs:string*"/>
-		<xsl:variable name="formulaRelevant" select="enojs:get-relevant-ancestors($source-context)" as="xs:string*"/>
-		
-		<xsl:variable name="variablesReadOnly" select="enojs:get-readonly-ancestors-variables($source-context)" as="xs:string*"/>
-		<xsl:variable name="variablesRelevant" select="enojs:get-relevant-ancestors-variables($source-context)" as="xs:string*"/>
-		
-		<xsl:variable name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" />
-		<xsl:variable name="labelQuestion" select="enojs:get-label($source-context, $languages[1])"/>
-		
-		<xsl:variable name="filterCondition" select="enojs:createLambdaExpression(
-			.,
-			$formulaReadOnly,
-			$formulaRelevant,
-			$variablesReadOnly,
-			$variablesRelevant
-			)"/>
-		
-		<xsl:if test="$typeOfQuestion='MultipleChoiceQuestion'">
-			<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
-				<label><xsl:value-of select="$labelQuestion"/></label>
-				<xsl:copy-of select="$declarations"/>
-				<xsl:copy-of select="$filterCondition"/>
-				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-					<xsl:with-param name="driver" select="." tunnel="yes"/>
-					<xsl:with-param name="typeOfQuestion" select="$typeOfQuestion" tunnel="yes"/>
-					<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
-					<xsl:with-param name="questionName" select="lower-case($questionName)" tunnel="yes"/>
-					<xsl:with-param name="labelQuestion" select="$labelQuestion" tunnel="yes"/>
-					<xsl:with-param name="declarations" select="$declarations" as="node()*" tunnel="yes"/>
-					<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
-				</xsl:apply-templates>
-			</components>
-		</xsl:if>
-		<xsl:if test="$idQuestion != '' and $typeOfQuestion!='MultipleChoiceQuestion'">
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-				<xsl:with-param name="typeOfQuestion" select="$typeOfQuestion" tunnel="yes"/>
-				<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
-				<xsl:with-param name="questionName" select="lower-case($questionName)" tunnel="yes"/>
-				<xsl:with-param name="labelQuestion" select="$labelQuestion" tunnel="yes"/>
-				<xsl:with-param name="declarations" select="$declarations" as="node()*" tunnel="yes"/>
-				<xsl:with-param name="filterCondition" select="$filterCondition" tunnel="yes"/>
-			</xsl:apply-templates>
-		</xsl:if>
 	</xsl:template>
 	
 	<xd:doc>
@@ -861,7 +742,7 @@
 				<!-- Default value : COMMENT -->
 				<xsl:otherwise><xsl:value-of select="'COMMENT'"/></xsl:otherwise>
 			</xsl:choose>
-		</xsl:variable> select="upper-case(enojs:get-format($source-context))"
+		</xsl:variable>
 		<xsl:variable name="instructionLabel" select="enojs:get-label($source-context, $languages[1])"/>
 		<xsl:variable name="instructionFormatMaj" select="concat(upper-case(substring($instructionFormat,1,1)),
 			substring($instructionFormat,2))" as="xs:string"/>
@@ -962,158 +843,6 @@
 			</xsl:for-each>
 		</response>
 	</xsl:template>
-	
-	<xsl:function name="enojs:createLambdaExpression">
-		<xsl:param name="source-context" as="item()"/>
-		<xsl:param name="formulaReadOnly" as="xs:string*"/>
-		<xsl:param name="formulaRelevant" as="xs:string*"/>
-		<xsl:param name="variablesReadOnly" as="xs:string*"/>
-		<xsl:param name="variablesRelevant" as="xs:string*"/>
-		<!--		
-			<xsl:variable name="formulaReadOnly1" as="xs:string*" select="tokenize('$SUM_EXPENSES$!=2,$genoux$!=5',',')"/>		
-			<xsl:variable name="variablesReadOnly1" select="'SUM_EXPENSES'" as="xs:string*"/>
-		-->
-		<xsl:variable name="variableFilterId" as="xs:string*">
-			<xsl:for-each select="distinct-values($variablesRelevant)">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-			<xsl:for-each select="distinct-values($variablesReadOnly)">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-		</xsl:variable>
-		<xsl:variable name="variableFilterName" as="xs:string*">
-			<xsl:for-each select="distinct-values($variablesRelevant)">
-				<xsl:sequence select="enojs:get-variable-business-name($source-context,.)"/>
-			</xsl:for-each>
-			<xsl:for-each select="distinct-values($variablesReadOnly)">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-		</xsl:variable>
-		<xsl:variable name="variablesId" as="xs:string*">
-			<xsl:for-each select="distinct-values($variableFilterId)">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-		</xsl:variable>
-		<xsl:variable name="variablesName">
-			<xsl:for-each select="distinct-values($variableFilterName)">
-				<xsl:if test="position()!=1">
-					<xsl:value-of select="','"/>
-				</xsl:if>
-				<xsl:value-of select="."/>
-			</xsl:for-each>
-		</xsl:variable>
-		
-		<conditionFilter>
-			<!--Expression VTL : #if(condition)je suis true#{else}je suis false#end-->
-			<!-- Caution for encodage : # -> &#x23;  { -> &#x7B; } -> &#x7D; -->
-			<xsl:variable name="if" select="'&#x23;if'"/>
-			<xsl:variable name="else" select="'&#x23;&#x7B;else&#x7D;'"/>
-			<xsl:variable name="ifEnd" select="'&#x23;end'"/>
-			<xsl:choose>
-				<!--<xsl:when test="$variablesName=''">
-					<xsl:value-of select="'() => true ? ''normal'' : '''''"/> guillemet autour de normal ? 
-					</xsl:when>-->
-				<xsl:when test="$formulaRelevant!='' and $formulaReadOnly!=''">
-					<xsl:variable name="initial-relevant-ancestors">
-						<xsl:for-each select="$formulaRelevant">
-							<xsl:value-of select="concat('(',.,')')"/>
-							<xsl:if test="position()!=last()">
-								<xsl:value-of select="' &amp;&amp; '"/><!-- "||" = "or"-->
-							</xsl:if>
-						</xsl:for-each>
-					</xsl:variable>
-					<xsl:variable name="relevant-condition">
-						<xsl:call-template name="replaceVariablesInFormula">
-							<xsl:with-param name="source-context" select="$source-context" as="item()" tunnel="yes"/>
-							<xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
-							<xsl:with-param name="variables" select="$variablesId"/>
-						</xsl:call-template>
-					</xsl:variable>
-					<xsl:variable name="initial-readonly-ancestors">
-						<xsl:for-each select="$formulaReadOnly">
-							<xsl:value-of select="concat('(',.,')')"/>
-							<xsl:if test="position()!=last()">
-								<xsl:value-of select="' || '"/>
-							</xsl:if>
-						</xsl:for-each>
-					</xsl:variable>
-					<xsl:variable name="readonly-condition">
-						<xsl:call-template name="replaceVariablesInFormula">
-							<xsl:with-param name="source-context" select="$source-context" as="item()" tunnel="yes"/>
-							<xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
-							<xsl:with-param name="variables" select="$variablesId"/>
-						</xsl:call-template>
-					</xsl:variable>
-					<!-- replace "not -> "!", " and " -> "&&", " or " -> "||", "=" -> "==" -->
-					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
-					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
-					
-					<!--<xsl:value-of select="concat('(',$variablesName,') =>', $readonly-condition,'toto',$relevant-condition,' ? ''normal'' : ''''')"/>-->
-					<!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
-					<!--	si relevant
-						alors 
-						si readonly,
-						alors readonly
-						sinon normal
-						sinon hidden-->
-					<xsl:value-of select="concat(
-						$if,'(',$returned-relevant-condition,')',
-						$if,'(',$returned-readonly-condition,')readonly',
-						$else,'normal',$ifEnd,')',
-						$else,'hidden',$ifEnd
-						)"/>
-				</xsl:when>
-				<xsl:when test="$formulaRelevant!=''">
-					<xsl:variable name="initial-relevant-ancestors">
-						<xsl:for-each select="$formulaRelevant">
-							<xsl:value-of select="concat('(',.,')')"/>
-							<xsl:if test="position()!=last()">
-								<xsl:value-of select="' &amp;&amp; '"/>
-							</xsl:if>
-						</xsl:for-each>
-					</xsl:variable>
-					<xsl:variable name="relevant-condition">
-						<xsl:call-template name="replaceVariablesInFormula">
-							<xsl:with-param name="source-context" select="$source-context" as="item()" tunnel="yes"/>
-							<xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
-							<xsl:with-param name="variables" select="$variablesId"/>
-						</xsl:call-template>
-					</xsl:variable>
-					<xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s',' &amp;&amp; '),'\sor\s',' || '),'\s=\s',' == ')"/>
-					
-					<xsl:value-of select="concat($if,'(', $returned-relevant-condition,')normal',$else,'hidden',$ifEnd)"/>
-					
-					<!-- pas de gris, on affiche (normal) ou pas (hidden) -->
-				</xsl:when>
-				<xsl:when test="$formulaReadOnly!=''">
-					<xsl:variable name="initial-readonly-ancestors">
-						<xsl:for-each select="$formulaReadOnly">
-							<xsl:value-of select="concat('(',.,')')"/>
-							<xsl:if test="position()!=last()">
-								<xsl:value-of select="' || '"/>
-							</xsl:if>
-						</xsl:for-each>
-					</xsl:variable>
-					<xsl:variable name="readonly-condition">
-						<xsl:call-template name="replaceVariablesInFormula">
-							<xsl:with-param name="source-context" select="$source-context" as="item()" tunnel="yes"/>
-							<xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
-							<xsl:with-param name="variables" select="$variablesId"/>
-						</xsl:call-template>
-					</xsl:variable>
-					<xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s',' &amp;&amp; '),'\sor\s',' || '),'\s=\s',' == ')"/>
-					<xsl:value-of select="concat($if,'(',$returned-readonly-condition,')readonly',$else,'normal',$ifEnd)"/>
-					<!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
-				</xsl:when>
-				
-				<xsl:otherwise>
-					<xsl:value-of select="'normal'"/>
-				</xsl:otherwise>
-			</xsl:choose>
-			
-		</conditionFilter>
-	</xsl:function>
-	
 	
 	<xd:doc>
 		<xd:desc>
