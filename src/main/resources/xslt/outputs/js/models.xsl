@@ -393,10 +393,10 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on xf-input driver.</xd:p>
+			<xd:p>Match on NumericDomain driver.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-input" mode="model">
+	<xsl:template match="NumericDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="questionName" tunnel="yes"/>
@@ -404,21 +404,13 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		<xsl:param name="filterCondition" tunnel="yes"/>
-		
 		<xsl:param name="col-span" tunnel="yes"/>
 		<xsl:param name="row-span" tunnel="yes"/>
-		
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
 		
-		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>	
-		
-		<xsl:variable name="componentType-Input" select="'Input'"/>
-		<xsl:variable name="componentType-InputNumber" select="'InputNumber'"/>
-		
-		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
-		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
-		
+		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
+		<xsl:variable name="componentType" select="'InputNumber'"/>
 		<xsl:variable name="minimumResponse" select="enojs:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enojs:get-maximum($source-context)"/>
 		<xsl:variable name="numberOfDecimals">
@@ -429,85 +421,58 @@
 			</xsl:choose>
 		</xsl:variable>
 		<xsl:variable name="unit" select="enojs:get-suffix($source-context,$languages[1])"/>
-		
 		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
 		
-		<xsl:if test="$typeResponse!=''">
-			
-			<xsl:choose>
-				<xsl:when test="$typeResponse='text' and $questionName!='' and $typeOfAncestor!='table'">
-					<components xsi:type="{$componentType-Input}" componentType="{$componentType-Input}" id="{$idQuestion}" maxLength="{$lengthResponse}" mandatory="{$mandatory}">
-						<label><xsl:value-of select="$labelQuestion"/></label>
-						<xsl:copy-of select="$declarations"/>
-						<xsl:call-template name="enojs:addResponseToComponents">
-							<xsl:with-param name="responseName" select="$responseName"/>
-						</xsl:call-template>
-						<xsl:copy-of select="$filterCondition"/>
-					</components>
-				</xsl:when>
-				
-				<xsl:when test="$typeResponse='text' and $typeOfAncestor='table'">
-					<cells componentType="{$componentType-Input}" id="{enojs:get-name($source-context)}" maxLength="{$lengthResponse}">
-						<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
-						<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-						<xsl:call-template name="enojs:addResponseToComponents">
-							<xsl:with-param name="responseName" select="$responseName"/>
-						</xsl:call-template>
-					</cells>
-				</xsl:when>
-				
-				<xsl:when test="$typeResponse='number' and $questionName!='' and $typeOfAncestor!='table'">
-					<components xsi:type="{$componentType-InputNumber}" componentType="{$componentType-InputNumber}" id="{$idQuestion}" mandatory="{$mandatory}"> 
-						<xsl:if test="$minimumResponse!=''">
-							<xsl:attribute name="min"><xsl:value-of select="$minimumResponse"/></xsl:attribute>
-						</xsl:if>
-						<xsl:if test="$maximumResponse!=''">
-							<xsl:attribute name="max"><xsl:value-of select="$maximumResponse"/></xsl:attribute>
-						</xsl:if>
-						<xsl:if test="$numberOfDecimals!=''">
-							<xsl:attribute name="decimals"><xsl:value-of select="$numberOfDecimals"/></xsl:attribute>
-						</xsl:if>
-						<label><xsl:value-of select="$labelQuestion"/></label>
-						<xsl:if test="$unit!=''">
-							<unit><xsl:value-of select="$unit"/></unit>
-						</xsl:if>
-						<xsl:copy-of select="$declarations"></xsl:copy-of>
-						<xsl:call-template name="enojs:addResponseToComponents">
-							<xsl:with-param name="responseName" select="$responseName"/>							
-						</xsl:call-template>
-						<xsl:copy-of select="$filterCondition"/>
-					</components>
-				</xsl:when>
-				
-				<xsl:when test="$typeResponse='number' and $typeOfAncestor='table'">
-					<cells componentType="{$componentType-InputNumber}" id="{enojs:get-name($source-context)}">
-						<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
-						<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-						<xsl:if test="$minimumResponse!=''">
-							<xsl:attribute name="min"><xsl:value-of select="$minimumResponse"/></xsl:attribute>
-						</xsl:if>
-						<xsl:if test="$maximumResponse!=''">
-							<xsl:attribute name="max"><xsl:value-of select="$maximumResponse"/></xsl:attribute>
-						</xsl:if>
-						<xsl:if test="$numberOfDecimals!=''">
-							<xsl:attribute name="decimals"><xsl:value-of select="$numberOfDecimals"/></xsl:attribute>
-						</xsl:if>
-						<xsl:if test="$unit!=''">
-							<unit><xsl:value-of select="$unit"/></unit>
-						</xsl:if>
-						<xsl:call-template name="enojs:addResponseToComponents">
-							<xsl:with-param name="responseName" select="$responseName"/>
-						</xsl:call-template>
-					</cells>					
-				</xsl:when>
-				
-			</xsl:choose>
-			
-			<xsl:call-template name="enojs:addVariableCollected">
-				<xsl:with-param name="responseName" select="$responseName"/>
-				<xsl:with-param name="responseRef" select="$responseName"/>
-			</xsl:call-template>
-		</xsl:if>		
+		<xsl:choose>
+			<xsl:when test="$questionName!='' and $typeOfAncestor!='table'">
+				<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" mandatory="{$mandatory}"> 
+					<xsl:if test="$minimumResponse!=''">
+						<xsl:attribute name="min"><xsl:value-of select="$minimumResponse"/></xsl:attribute>
+					</xsl:if>
+					<xsl:if test="$maximumResponse!=''">
+						<xsl:attribute name="max"><xsl:value-of select="$maximumResponse"/></xsl:attribute>
+					</xsl:if>
+					<xsl:if test="$numberOfDecimals!=''">
+						<xsl:attribute name="decimals"><xsl:value-of select="$numberOfDecimals"/></xsl:attribute>
+					</xsl:if>
+					<label><xsl:value-of select="$labelQuestion"/></label>
+					<xsl:if test="$unit!=''">
+						<unit><xsl:value-of select="$unit"/></unit>
+					</xsl:if>
+					<xsl:copy-of select="$declarations"></xsl:copy-of>
+					<xsl:call-template name="enojs:addResponseToComponents">
+						<xsl:with-param name="responseName" select="$responseName"/>							
+					</xsl:call-template>
+					<xsl:copy-of select="$filterCondition"/>
+				</components>
+			</xsl:when>
+			<xsl:when test="$typeOfAncestor='table'">
+				<cells componentType="{$componentType}" id="{enojs:get-name($source-context)}">
+					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
+					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
+					<xsl:if test="$minimumResponse!=''">
+						<xsl:attribute name="min"><xsl:value-of select="$minimumResponse"/></xsl:attribute>
+					</xsl:if>
+					<xsl:if test="$maximumResponse!=''">
+						<xsl:attribute name="max"><xsl:value-of select="$maximumResponse"/></xsl:attribute>
+					</xsl:if>
+					<xsl:if test="$numberOfDecimals!=''">
+						<xsl:attribute name="decimals"><xsl:value-of select="$numberOfDecimals"/></xsl:attribute>
+					</xsl:if>
+					<xsl:if test="$unit!=''">
+						<unit><xsl:value-of select="$unit"/></unit>
+					</xsl:if>
+					<xsl:call-template name="enojs:addResponseToComponents">
+						<xsl:with-param name="responseName" select="$responseName"/>
+					</xsl:call-template>
+				</cells>
+			</xsl:when>
+		</xsl:choose>
+		
+		<xsl:call-template name="enojs:addVariableCollected">
+			<xsl:with-param name="responseName" select="$responseName"/>
+			<xsl:with-param name="responseRef" select="$responseName"/>
+		</xsl:call-template>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -515,6 +480,68 @@
 		
 	</xsl:template>	
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on TextDomain driver.</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="TextDomain" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="idQuestion" tunnel="yes"/>
+		<xsl:param name="questionName" tunnel="yes"/>
+		<xsl:param name="labelQuestion" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
+		<xsl:param name="filterCondition" tunnel="yes"/>
+		<xsl:param name="col-span" tunnel="yes"/>
+		<xsl:param name="row-span" tunnel="yes"/>
+		<xsl:param name="typeOfAncestor" tunnel="yes"/>
+		<xsl:param name="position" tunnel="yes"/>
+		
+		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>	
+		<xsl:variable name="componentType" select="'Input'"/>
+		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
+		
+		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
+		
+		<xsl:choose>
+			<xsl:when test="$questionName!='' and $typeOfAncestor!='table'">
+				<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" maxLength="{$lengthResponse}" mandatory="{$mandatory}">
+					<label><xsl:value-of select="$labelQuestion"/></label>
+					<xsl:copy-of select="$declarations"/>
+					<xsl:call-template name="enojs:addResponseToComponents">
+						<xsl:with-param name="responseName" select="$responseName"/>
+					</xsl:call-template>
+					<xsl:copy-of select="$filterCondition"/>
+				</components>
+			</xsl:when>
+			<xsl:when test="$typeOfAncestor='table'">
+				<cells componentType="{$componentType}" id="{enojs:get-name($source-context)}" maxLength="{$lengthResponse}">
+					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
+					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
+					<xsl:call-template name="enojs:addResponseToComponents">
+						<xsl:with-param name="responseName" select="$responseName"/>
+					</xsl:call-template>
+				</cells>
+			</xsl:when>
+		</xsl:choose>
+		
+		<xsl:call-template name="enojs:addVariableCollected">
+			<xsl:with-param name="responseName" select="$responseName"/>
+			<xsl:with-param name="responseRef" select="$responseName"/>
+		</xsl:call-template>
+		
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+		
+	</xsl:template>	
+
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on DateTimeDomain driver.</xd:p>
+		</xd:desc>
+	</xd:doc>	
 	<xsl:template match="DateTimeDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="idQuestion" tunnel="yes"/>
@@ -523,22 +550,19 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		<xsl:param name="filterCondition" tunnel="yes"/>
-		
 		<xsl:param name="col-span" tunnel="yes"/>
 		<xsl:param name="row-span" tunnel="yes"/>
-		
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="position" tunnel="yes"/>
 		
 		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
-		
-		<xsl:variable name="componentType-Datepicker" select="'Datepicker'"/>
-		
+		<xsl:variable name="componentType" select="'Datepicker'"/>
 		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
 		<xsl:variable name="dateFormat" select="enojs:get-format($source-context)"/>
+
 		<xsl:choose>
 			<xsl:when test="$typeOfAncestor='table'">
-				<cells componentType="{$componentType-Datepicker}" id="{enojs:get-name($source-context)}">
+				<cells componentType="{$componentType}" id="{enojs:get-name($source-context)}">
 					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 					<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
@@ -546,23 +570,19 @@
 						<xsl:with-param name="responseName" select="$responseName"/>
 					</xsl:call-template>
 				</cells>
-				
 			</xsl:when>
 			<xsl:otherwise>
-				<components xsi:type="{$componentType-Datepicker}" componentType="{$componentType-Datepicker}" id="{$idQuestion}" mandatory="{$mandatory}">
+				<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" mandatory="{$mandatory}">
 					<label><xsl:value-of select="$labelQuestion"/></label>
 					<xsl:copy-of select="$declarations"/>
 					<xsl:call-template name="enojs:addResponseToComponents">
-						<xsl:with-param name="responseName" select="$responseName"/>				
-						
+						<xsl:with-param name="responseName" select="$responseName"/>
 					</xsl:call-template>
 					<xsl:copy-of select="$filterCondition"/>
 					<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
 				</components>
 			</xsl:otherwise>
 		</xsl:choose>
-		
-		
 		<xsl:call-template name="enojs:addVariableCollected">
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="responseRef" select="$responseName"/>
@@ -571,86 +591,34 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on xf-select driver.</xd:p>
+			<xd:p>Match on BooleanDomain driver.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-select" mode="model">
+	<xsl:template match="BooleanDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="driver" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="typeOfQuestion" tunnel="yes"/>	
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="filterCondition" tunnel="yes"/>
-		
 		<xsl:param name="col-span" tunnel="yes"/>
 		<xsl:param name="row-span" tunnel="yes"/>
-		
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="questionName" tunnel="yes"/>
 		<xsl:param name="labelQuestion" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
-		
 		<xsl:param name="position" tunnel="yes"/>
 		
 		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
-		
-		<xsl:variable name="componentType-CheckboxOne" select="'CheckboxOne'"/>
-		<xsl:variable name="componentType-CheckboxBoolean" select="'CheckboxBoolean'"/>
-		
+		<xsl:variable name="componentType" select="'CheckboxBoolean'"/>
 		<xsl:variable name="name" select="enojs:get-codelist-name($source-context)"/>
 		<xsl:variable name="idCodeList" select="enojs:get-codelist-id($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enojs:get-code-maximum-length($source-context)"/>
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
-		
 		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
 		
-		<xsl:choose>			
-			<xsl:when test="$maximumLengthCode != '' and $questionName!=''">
-				<!-- remove Format in the cell for table 'question multiple-choice-question'-->
-				<xsl:if test="$typeOfQuestion!='MultipleChoiceQuestion' and $typeOfAncestor!='table'">
-					<components xsi:type="{$componentType-CheckboxOne}" componentType="{$componentType-CheckboxOne}" id="{$idQuestion}" mandatory="{$mandatory}">
-						<label><xsl:value-of select="$labelQuestion"/></label>
-						<xsl:copy-of select="$declarations"></xsl:copy-of>
-						
-						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-							<xsl:with-param name="driver" select="." tunnel="yes"/>
-							<xsl:with-param name="typeResponse" select="$typeResponse" tunnel="yes"/>
-							<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
-						</xsl:apply-templates>
-						
-						<xsl:call-template name="enojs:addResponseToComponents">
-							<xsl:with-param name="responseName" select="$responseName"/>							
-						</xsl:call-template>
-						<xsl:copy-of select="$filterCondition"/>
-					</components>
-					
-					<xsl:call-template name="enojs:addVariableCollected">
-						<xsl:with-param name="responseName" select="$responseName"/>
-						<xsl:with-param name="responseRef" select="$responseName"/>
-					</xsl:call-template>
-				</xsl:if>
-				
-				<xsl:if test="$typeOfQuestion!='MultipleChoiceQuestion' and $typeOfAncestor='table'">
-					<cells id="{enojs:get-name($source-context)}" componentType="{$componentType-CheckboxOne}">
-						<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
-						<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-							<xsl:with-param name="driver" select="." tunnel="yes"/>
-							<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
-						</xsl:apply-templates>
-						<xsl:call-template name="enojs:addResponseToComponents">
-							<xsl:with-param name="responseName" select="$responseName"/>
-						</xsl:call-template>
-					</cells>
-					
-					<xsl:call-template name="enojs:addVariableCollected">
-						<xsl:with-param name="responseName" select="$responseName"/>
-						<xsl:with-param name="responseRef" select="$responseName"/>
-					</xsl:call-template>
-				</xsl:if>
-			</xsl:when>
-			
-			<xsl:when test="$typeResponse='boolean' and $typeOfQuestion='MultipleChoiceQuestion' and $typeOfAncestor!='table'">
+		<xsl:choose>
+			<xsl:when test="$typeOfQuestion='MultipleChoiceQuestion'">
 				<responses id="{enojs:get-name($source-context)}">
 					<!-- call item driver for the label -->
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -667,12 +635,10 @@
 					<xsl:with-param name="responseRef" select="$responseName"/>
 				</xsl:call-template>
 			</xsl:when>
-			
-			<xsl:when test="$typeResponse='boolean' and $typeOfQuestion='SingleResponseQuestion' and $idQuestion!='' and $typeOfAncestor!='table'">
-				<components xsi:type="{$componentType-CheckboxBoolean}" componentType="{$componentType-CheckboxBoolean}" id="{$idQuestion}" mandatory="{$mandatory}">
+			<xsl:when test="$typeOfQuestion='SingleResponseQuestion' and $idQuestion!=''">
+				<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" mandatory="{$mandatory}">
 					<label><xsl:value-of select="$labelQuestion"/></label>
 					<xsl:copy-of select="$declarations"/>
-					
 					<xsl:call-template name="enojs:addResponseToComponents">
 						<xsl:with-param name="responseName" select="$responseName"/>
 						<xsl:with-param name="responseType" select="'Boolean'"/>
@@ -685,8 +651,8 @@
 					<xsl:with-param name="responseRef" select="$responseName"/>
 				</xsl:call-template>
 			</xsl:when>
-			<xsl:when test="$typeResponse='boolean' and $typeOfAncestor='table'">
-				<cells id="{enojs:get-name($source-context)}" componentType="{$componentType-CheckboxBoolean}">
+			<xsl:when test="$typeOfAncestor='table'">
+				<cells id="{enojs:get-name($source-context)}" componentType="{$componentType}">
 					<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
 					<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
 					<xsl:call-template name="enojs:addResponseToComponents">
@@ -705,79 +671,58 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on xf-select1 driver.</xd:p>
+			<xd:p>Match on CodeDomain driver.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-select1" mode="model">
+	<xsl:template match="CodeDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="driver" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>		
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="filterCondition" tunnel="yes"/>
-		
 		<xsl:param name="col-span" tunnel="yes"/>
 		<xsl:param name="row-span" tunnel="yes"/>
-		
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="questionName" tunnel="yes"/>
 		<xsl:param name="labelQuestion" tunnel="yes"/>
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
-		
 		<xsl:param name="position" tunnel="yes"/>
 		
 		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
-		
-		<xsl:variable name="componentType-Radio" select="'Radio'"/>
-		<xsl:variable name="componentType-Dropdown" select="'Dropdown'"/>
-		
+		<xsl:variable name="typeXf" select="enojs:get-appearance($source-context)"/>
+		<xsl:variable name="componentType">
+			<xsl:choose>
+				<xsl:when test="$typeXf = 'radio-button'">
+					<xsl:value-of select="'Radio'"/>
+				</xsl:when>
+				<xsl:when test="$typeXf = 'drop-down-list'">
+					<xsl:value-of select="'Dropdown'"/>
+				</xsl:when>
+				<xsl:when test="$typeXf = 'checkbox'">
+					<xsl:value-of select="'CheckboxOne'"/>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:variable>
 		<xsl:variable name="name" select="enojs:get-codelist-name($source-context)"/>
 		<xsl:variable name="idCodeList" select="enojs:get-codelist-id($source-context)"/>
 		<xsl:variable name="typeResponse" select="enojs:get-type($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enojs:get-length($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enojs:get-code-maximum-length($source-context)"/>
-		<xsl:variable name="typeXf" select="enojs:get-appearance($source-context)"/>
-		
 		<xsl:variable name="responseName" select="enojs:get-business-name($source-context)"/>
 		
-		<xsl:if test="$maximumLengthCode != '' and $typeOfAncestor!='question multiple-choice-question' and $questionName!='' and $typeOfAncestor!='table'">
-			<xsl:choose>
-				<xsl:when test="$typeXf='full'">
-					<components xsi:type="{$componentType-Radio}" componentType="{$componentType-Radio}" id="{$idQuestion}" mandatory="{$mandatory}">
-						<label><xsl:value-of select="$labelQuestion"/></label>
-						<xsl:copy-of select="$declarations"></xsl:copy-of>
-						
-						
-						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-							<xsl:with-param name="driver" select="." tunnel="yes"/>
-							<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
-						</xsl:apply-templates>
-						
-						<xsl:call-template name="enojs:addResponseToComponents">
-							<xsl:with-param name="responseName" select="$responseName"/>
-							
-						</xsl:call-template>
-						<xsl:copy-of select="$filterCondition"/>
-						
-					</components>
-				</xsl:when>
-				<xsl:when test="$typeXf='minimal'">
-					<components xsi:type="{$componentType-Dropdown}" componentType="{$componentType-Dropdown}" id="{$idQuestion}" mandatory="{$mandatory}">
-						<label><xsl:value-of select="$labelQuestion"/></label>
-						<xsl:copy-of select="$declarations"></xsl:copy-of>
-						
-						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-							<xsl:with-param name="driver" select="." tunnel="yes"/>
-							<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
-						</xsl:apply-templates>
-						
-						<xsl:call-template name="enojs:addResponseToComponents">
-							<xsl:with-param name="responseName" select="$responseName"/>
-							
-						</xsl:call-template>
-						<xsl:copy-of select="$filterCondition"/>
-					</components>
-				</xsl:when>
-			</xsl:choose>
+		<xsl:if test="$typeOfAncestor!='question multiple-choice-question' and $questionName!='' and $typeOfAncestor!='table'">
+			<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" mandatory="{$mandatory}">
+				<label><xsl:value-of select="$labelQuestion"/></label>
+				<xsl:copy-of select="$declarations"></xsl:copy-of>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+					<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
+				</xsl:apply-templates>
+				<xsl:call-template name="enojs:addResponseToComponents">
+					<xsl:with-param name="responseName" select="$responseName"/>
+				</xsl:call-template>
+				<xsl:copy-of select="$filterCondition"/>
+			</components>
 			
 			<xsl:call-template name="enojs:addVariableCollected">
 				<xsl:with-param name="responseName" select="$responseName"/>
@@ -785,44 +730,24 @@
 			</xsl:call-template>
 		</xsl:if>
 		
-		<xsl:if test="$maximumLengthCode != '' and $typeOfAncestor='table'">
-			<xsl:choose>
-				<xsl:when test="$typeXf='full'">
-					<cells id="{enojs:get-name($source-context)}" componentType="{$componentType-Radio}">
-						<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
-						<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-							<xsl:with-param name="driver" select="." tunnel="yes"/>
-							<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
-						</xsl:apply-templates>
-						<xsl:call-template name="enojs:addResponseToComponents">
-							<xsl:with-param name="responseName" select="$responseName"/>
-						</xsl:call-template>
-					</cells>					
-				</xsl:when>
-				<xsl:when test="$typeXf='minimal'">
-					<cells id="{enojs:get-name($source-context)}" componentType="{$componentType-Dropdown}">
-						<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
-						<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
-						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-							<xsl:with-param name="driver" select="." tunnel="yes"/>
-							<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
-						</xsl:apply-templates>
-						<xsl:call-template name="enojs:addResponseToComponents">
-							<xsl:with-param name="responseName" select="$responseName"/>
-						</xsl:call-template>
-					</cells>
-					
-				</xsl:when>
-			</xsl:choose>
-			
+		<xsl:if test="$typeOfAncestor='table'">
+			<cells id="{enojs:get-name($source-context)}" componentType="{$componentType}">
+				<xsl:if test="$col-span&gt;1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
+				<xsl:if test="$row-span&gt;1"><xsl:attribute name="rowspan" select="$row-span"/></xsl:if>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+					<xsl:with-param name="typeOfAncestor" select="'codeLists'" tunnel="yes"/>
+				</xsl:apply-templates>
+				<xsl:call-template name="enojs:addResponseToComponents">
+					<xsl:with-param name="responseName" select="$responseName"/>
+				</xsl:call-template>
+			</cells>
 			<xsl:call-template name="enojs:addVariableCollected">
 				<xsl:with-param name="responseName" select="$responseName"/>
 				<xsl:with-param name="responseRef" select="$responseName"/>
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
-	
 	
 	<xd:doc>
 		<xd:desc>
@@ -854,10 +779,10 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Match on xf-textarea driver.</xd:p>
+			<xd:p>Match on TextareaDomain driver.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="xf-textarea" mode="model">
+	<xsl:template match="TextareaDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idQuestion" tunnel="yes"/>

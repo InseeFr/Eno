@@ -2717,11 +2717,6 @@
                            <xf:value ref="value"/>
                         </xf:itemset>
                         <xf:action ev:event="xforms-value-changed"
-                                   if="substring-after(instance('fr-form-instance')//READY,' ') ne ''">
-                           <xf:setvalue ref="instance('fr-form-instance')//READY"
-                                        value="substring-after(instance('fr-form-instance')//READY,' ')"/>
-                        </xf:action>
-                        <xf:action ev:event="xforms-value-changed"
                                    if="not(xxf:evaluate-bind-property('d1e42-THEN-bind','relevant'))"
                                    iterate="instance('fr-form-instance')//d1e42-THEN//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
                            <xf:setvalue ref="." value="''"/>
@@ -2869,11 +2864,6 @@
                               <xf:label ref="label"/>
                               <xf:value ref="value"/>
                            </xf:itemset>
-                           <xf:action ev:event="xforms-value-changed"
-                                      if="substring-after(instance('fr-form-instance')//PET1,' ') ne ''">
-                              <xf:setvalue ref="instance('fr-form-instance')//PET1"
-                                           value="substring-after(instance('fr-form-instance')//PET1,' ')"/>
-                           </xf:action>
                         </xf:select>
                         <xf:select id="PET2-control"
                                    name="PET2"
@@ -2884,11 +2874,6 @@
                               <xf:label ref="label"/>
                               <xf:value ref="value"/>
                            </xf:itemset>
-                           <xf:action ev:event="xforms-value-changed"
-                                      if="substring-after(instance('fr-form-instance')//PET2,' ') ne ''">
-                              <xf:setvalue ref="instance('fr-form-instance')//PET2"
-                                           value="substring-after(instance('fr-form-instance')//PET2,' ')"/>
-                           </xf:action>
                         </xf:select>
                         <xf:select id="PET3-control"
                                    name="PET3"
@@ -2899,11 +2884,6 @@
                               <xf:label ref="label"/>
                               <xf:value ref="value"/>
                            </xf:itemset>
-                           <xf:action ev:event="xforms-value-changed"
-                                      if="substring-after(instance('fr-form-instance')//PET3,' ') ne ''">
-                              <xf:setvalue ref="instance('fr-form-instance')//PET3"
-                                           value="substring-after(instance('fr-form-instance')//PET3,' ')"/>
-                           </xf:action>
                         </xf:select>
                         <xf:select id="PET4-control"
                                    name="PET4"
@@ -2914,11 +2894,6 @@
                               <xf:label ref="label"/>
                               <xf:value ref="value"/>
                            </xf:itemset>
-                           <xf:action ev:event="xforms-value-changed"
-                                      if="substring-after(instance('fr-form-instance')//PET4,' ') ne ''">
-                              <xf:setvalue ref="instance('fr-form-instance')//PET4"
-                                           value="substring-after(instance('fr-form-instance')//PET4,' ')"/>
-                           </xf:action>
                         </xf:select>
                      </xhtml:div>
                      <xf:output id="d12-SI-control"
@@ -3821,11 +3796,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL11,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL11"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL11,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -3838,11 +3808,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL12,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL12"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL12,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -3855,11 +3820,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL13,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL13"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL13,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -3872,11 +3832,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL14,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL14"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL14,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -3889,11 +3844,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL15,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL15"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL15,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -3906,11 +3856,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL16,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL16"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL16,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3933,11 +3878,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL21,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL21"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL21,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -3950,11 +3890,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL22,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL22"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL22,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -3967,11 +3902,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL23,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL23"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL23,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -3984,11 +3914,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL24,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL24"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL24,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4001,11 +3926,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL25,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL25"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL25,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4018,11 +3938,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL26,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL26"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL26,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -4045,11 +3960,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL31,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL31"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL31,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4062,11 +3972,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL32,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL32"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL32,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4079,11 +3984,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL33,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL33"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL33,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4096,11 +3996,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL34,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL34"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL34,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4113,11 +4008,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL35,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL35"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL35,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4130,11 +4020,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL36,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL36"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL36,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -4157,11 +4042,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL41,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL41"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL41,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4174,11 +4054,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL42,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL42"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL42,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4191,11 +4066,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL43,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL43"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL43,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4208,11 +4078,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL44,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL44"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL44,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4225,11 +4090,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL45,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL45"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL45,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4242,11 +4102,6 @@
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
                                        </xf:itemset>
-                                       <xf:action ev:event="xforms-value-changed"
-                                                  if="substring-after(instance('fr-form-instance')//TRAVEL46,' ') ne ''">
-                                          <xf:setvalue ref="instance('fr-form-instance')//TRAVEL46"
-                                                       value="substring-after(instance('fr-form-instance')//TRAVEL46,' ')"/>
-                                       </xf:action>
                                     </xf:select>
                                  </xhtml:td>
                               </xhtml:tr>
