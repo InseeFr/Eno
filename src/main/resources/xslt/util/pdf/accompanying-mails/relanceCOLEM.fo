@@ -197,7 +197,7 @@
                             <fo:block margin-top="0.5mm">
                                 Vu l’avis favorable du Conseil national de l’information statistique, cette enquête est <fo:inline font-weight="bold">reconnue d’intérêt général et de qualité statistique</fo:inline>, 
                                 en application de la loi n° 51-711 du 7 juin 1951 sur l’obligation, la coordination et le secret en matière de statistiques. 
-                                Elle a obtenu le visa n° ${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l’année ${BddAnneeCollecte} - Arrêté en cours de parution.
+                                Elle a obtenu le visa n° ${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l’année ${BddAnneeCollecte} - Arrêté en du 25 juillet 2019.
                             </fo:block>
                             <fo:block>
                                 #if(${BddCaractereObligatoire}=='oui')Cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>. 
@@ -270,7 +270,7 @@
                         </fo:block>
                         <fo:block margin-top="2mm" margin-left="4mm">
                             Un échantillon ${BddTypeUniteEnquetee} a donc été sélectionné aléatoirement à partir des fichiers administratifs (fichiers de paie ou déclarations sociales). 
-                            Il est représentatif des salariés de l’État dans leur ensemble (fonctionnaires, vacataires, stagiaires, etc.). Vous faites partie de cet échantillon.
+                            Il est représentatif des salariés de l’État dans leur ensemble (fonctionnaires, contractuels, vacataires, stagiaires, etc.). Vous faites partie de cet échantillon.
                         </fo:block>
                         <fo:block margin-top="2mm" margin-left="4mm">
                             Il est important que nous puissions recueillir votre réponse afin que la diversité des caractéristiques de la population soit prise en compte 
