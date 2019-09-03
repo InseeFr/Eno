@@ -197,7 +197,7 @@
                             <fo:block margin-top="0.5mm">
                                 Vu l’avis favorable du Conseil national de l’information statistique, cette enquête est <fo:inline font-weight="bold">reconnue d’intérêt général et de qualité statistique</fo:inline>, 
                                 en application de la loi n° 51-711 du 7 juin 1951 sur l’obligation, la coordination et le secret en matière de statistiques. 
-                                Elle a obtenu le visa n° ${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l’année ${BddAnneeCollecte} - Arrêté en du 25 juillet 2019.
+                                Elle a obtenu le visa n° ${BddNumeroVisa} du ${BddMinistereTutelle}, valable pour l’année ${BddAnneeCollecte} - Arrêté en date du 25 juillet 2019.
                             </fo:block>
                             <fo:block>
                                 #if(${BddCaractereObligatoire}=='oui')Cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>. 
