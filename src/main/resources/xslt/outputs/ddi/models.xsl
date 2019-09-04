@@ -1468,7 +1468,11 @@
         <xsl:param name="nameClarification" as="xs:string" tunnel="yes"/>
         <d:TextDomain maxLength="{enoddi33:get-max-length($source-context)}">
 			<r:Label>
-				<r:Content xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="$label"/></r:Content>
+				<r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+					<xhtml:p>
+						<xhtml:b><xsl:value-of select="$label"/></xhtml:b>
+					</xhtml:p>
+				</r:Content>
 			</r:Label>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
