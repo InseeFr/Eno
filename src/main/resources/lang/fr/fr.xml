@@ -8,10 +8,9 @@
     <Alert>
         <Text>Vous devez saisir une valeur correcte</Text>
         <Number>
-            <Integer>Vous devez saisir un nombre entier compris entre</Integer>
+            <Integer>Vous devez saisir un nombre entier compris</Integer>
             <Decimal>
-                <Beginning>Vous devez utiliser le point comme séparateur de décimale, sans espace,
-                    et saisir un nombre compris entre</Beginning>
+                <Beginning>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris</Beginning>
                 <DecimalCondition>(avec au plus</DecimalCondition>
                 <Digit>chiffre</Digit>
                 <End>derrière le séparateur ".")</End>
@@ -19,12 +18,15 @@
         </Number>
         <Date>Entrez une date valide</Date>
         <Date-YYYYMM>Merci de renseigner le mois et l'année</Date-YYYYMM>
-        <Duration>
-            <Hours>Le nombre d'heures doit être compris entre 0 et 99.</Hours>
-            <Minutes>Le nombre de minutes doit être compris entre 0 et 59.</Minutes>
-        </Duration>
+        <Date-YYYY>Merci de renseigner l'année</Date-YYYY>
+        <Duration>Entrez une durée valide</Duration>
     </Alert>
     <And>et</And>
+    <After>postérieure à</After>
+    <Before>antérieure à</Before>
+    <Between>entre</Between>
+    <GreaterThan>supérieur à</GreaterThan>
+    <LessThan>inférieur à</LessThan>
     <Plural>s</Plural>
     <AddLine>Ajouter une ligne</AddLine>
     <DateTime>

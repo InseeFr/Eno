@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT3H22M40S</meta:editing-duration><meta:editing-cycles>32</meta:editing-cycles><meta:generator>LibreOffice/5.2.6.2$Windows_X86_64 LibreOffice_project/a3100ed2409ebf1c212f5048fbe377c281438fdc</meta:generator><dc:date>2018-06-04T16:10:59.992000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="18" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>PT3H29M16S</meta:editing-duration><meta:editing-cycles>38</meta:editing-cycles><meta:generator>LibreOffice/5.4.6.2$Windows_X86_64 LibreOffice_project/4014ce260a04f1026ba855d3b8d91541c224eab8</meta:generator><dc:date>2019-07-11T16:12:55.566000000</dc:date><dc:creator>François Bulot</dc:creator><meta:document-statistic meta:table-count="1" meta:cell-count="24" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">54881</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">3578</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">4404</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
       <config:config-item-map-entry config:name="Sheet1">
-       <config:config-item config:name="CursorPositionX" config:type="int">0</config:config-item>
-       <config:config-item config:name="CursorPositionY" config:type="int">5</config:config-item>
+       <config:config-item config:name="CursorPositionX" config:type="int">1</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">7</config:config-item>
        <config:config-item config:name="HorizontalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="VerticalSplitMode" config:type="short">0</config:config-item>
        <config:config-item config:name="HorizontalSplitPosition" config:type="int">0</config:config-item>
@@ -28,10 +28,11 @@
        <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
        <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
        <config:config-item config:name="ShowGrid" config:type="boolean">true</config:config-item>
+       <config:config-item config:name="AnchoredTextOverflowLegacy" config:type="boolean">false</config:config-item>
       </config:config-item-map-entry>
      </config:config-item-map-named>
      <config:config-item config:name="ActiveTable" config:type="string">Sheet1</config:config-item>
-     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1376</config:config-item>
+     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1655</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
      <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
      <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -52,6 +53,7 @@
      <config:config-item config:name="RasterSubdivisionX" config:type="int">1</config:config-item>
      <config:config-item config:name="RasterSubdivisionY" config:type="int">1</config:config-item>
      <config:config-item config:name="IsRasterAxisSynchronized" config:type="boolean">true</config:config-item>
+     <config:config-item config:name="AnchoredTextOverflowLegacy" config:type="boolean">false</config:config-item>
     </config:config-item-map-entry>
    </config:config-item-map-indexed>
   </config:config-item-set>
@@ -75,8 +77,8 @@
    <config:config-item config:name="IsRasterAxisSynchronized" config:type="boolean">true</config:config-item>
    <config:config-item config:name="AutoCalculate" config:type="boolean">true</config:config-item>
    <config:config-item config:name="ApplyUserData" config:type="boolean">true</config:config-item>
-   <config:config-item config:name="PrinterName" config:type="string">\\S20slinng\m20-207-ricoh mp2554sp</config:config-item>
-   <config:config-item config:name="PrinterSetup" config:type="base64Binary">0RP+/1xcUzIwc2xpbm5nXG0yMC0yMDctcmljb2ggbXAyNTU0c3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUklDT0ggUENMNiBVbml2ZXJzYWxEcml2ZXIgVjQuMQAWAAEA8hIAAAAAAAAEAAhSAAAEdAAAM1ROVwAAAAAKAFwAXABTADIAMABzAGwAaQBuAG4AZwBcAG0AMgAwAC0AMgAwADcALQByAGkAYwBvAGgAIABtAHAAMgA1AAAAAAABBAAg3AAMEg//gAMBAAkAmgs0CGQAAQAHAFgCAQACAFgCAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAAAAAAxMERSDFhkDpG++hkAAAAAKQQAAHicdVPRcuMwCPwXP/ch6dy01/yMB0vYVouERkJJ05v790OyE6eX9M1mVwss8KfLAsFCshEmzL0LsYgkOHeHDopw/cxIaKR7+o/q0TqQc0SlRgIXFExozobQKplQBNOMYD3bxkkuaMTiCIWqnC2R8HNFeRw1VLIS2KtYAI/9ql4LqYo8uVAZt1h7gaMLLek7D2s8cPJALeeq6+zjNxmOyEdMBGcLAv3oCCPIrERFIUZyBsRx+GL2R6BSJfa7Xe2ATfEYJLuvVucvjZmShX2EiKmG+xKcKOb9A+zkrMzquanJfj+/PqAQhkk5+vzQPb+97n5UWRhLXT+IrIn2+5c3JSW0xSAGgjTV6kcnws2w1s5Td9/vhh7UNo+QOTkdCtD6RH/VjuZWnTgn3R9XB5BYo2r3ZdA6KP3IKNeI2s+l/u7retXKZ8RtTRQgDhPaSbdxFFXmqODA/EE3KjbBaUxa2sA64nSNV81LJHDA7Wl/C3HU8vk2gWHiNJwUGwjMh+74aXaCzb/MVNZWX5o/U4I4O5PXnT7q2XC6+AZEgp8CuQldK8MAg94XE6lB25m0BLqVGb83ojeodmx9lWWmy5/h6DBXD5fK7yTV4e2+7w4yz9q1KdKbkpIaoZwL+PcfWFN6vgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAENPTVBBVF9EVVBMRVhfTU9ERQ8ARFVQTEVYX0xPTkdFREdF</config:config-item>
+   <config:config-item config:name="PrinterName" config:type="string">Envoyer à OneNote 16</config:config-item>
+   <config:config-item config:name="PrinterSetup" config:type="base64Binary">xQT+/0Vudm95ZXIgw6AgT25lTm90ZcKgMTYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU2VuZCB0byBNaWNyb3NvZnQgT25lTm90ZSAxNiBEcgAWAAEA4gMAAAAAAAAEAAhSAAAEdAAAM1ROVwAAAAAKAEUAbgB2AG8AeQBlAHIAIADgACAATwBuAGUATgBvAHQAZQCgADEANgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAAG3AD8AgMvAAABAAkAmgs0CGQAAQAPAFgCAgABAFgCAwABAEEANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAAIAAAABAAAA/////wAAAAAAAAAAAAAAAAAAAABESU5VIgDAAPwCAACsE9jAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAMAAAABTTVRKAAAAABAAsABTAGUAbgBkACAAdABvACAATQBpAGMAcgBvAHMAbwBmAHQAIABPAG4AZQBOAG8AdABlACAAMQA2ACAARAByAGkAdgBlAHIAAABSRVNETEwAVW5pcmVzRExMAFBhcGVyU2l6ZQBMRVRURVIAT3JpZW50YXRpb24AUE9SVFJBSVQAUmVzb2x1dGlvbgBEUEk2MDAAQ29sb3JNb2RlADI0YnBwAAAAAAAAAAAAAAAAAAAAABIAQ09NUEFUX0RVUExFWF9NT0RFEwBEdXBsZXhNb2RlOjpVbmtub3du</config:config-item>
    <config:config-item-map-indexed config:name="ForbiddenCharacters">
     <config:config-item-map-entry>
      <config:config-item config:name="Language" config:type="string">zxx</config:config-item>
@@ -153,19 +155,6 @@
    <number:currency-symbol number:language="fr" number:country="FR">€</number:currency-symbol>
    <style:map style:condition="value()&gt;=0" style:apply-style-name="N110P0"/>
   </number:currency-style>
-  <number:currency-style style:name="N111P0" style:volatile="true">
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> </number:text>
-   <number:currency-symbol number:language="fr" number:country="FR">€</number:currency-symbol>
-  </number:currency-style>
-  <number:currency-style style:name="N111">
-   <style:text-properties fo:color="#ff0000"/>
-   <number:text>-</number:text>
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> </number:text>
-   <number:currency-symbol number:language="fr" number:country="FR">€</number:currency-symbol>
-   <style:map style:condition="value()&gt;=0" style:apply-style-name="N111P0"/>
-  </number:currency-style>
   <number:number-style style:name="N112P0" style:volatile="true">
    <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
    <number:text> €</number:text>
@@ -187,107 +176,40 @@
    <number:text> €</number:text>
    <style:map style:condition="value()&gt;=0" style:apply-style-name="N113P0"/>
   </number:number-style>
-  <number:number-style style:name="N114P0" style:volatile="true">
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> €</number:text>
-  </number:number-style>
-  <number:number-style style:name="N114">
-   <number:text>-</number:text>
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> €</number:text>
-   <style:map style:condition="value()&gt;=0" style:apply-style-name="N114P0"/>
-  </number:number-style>
   <number:number-style style:name="N115P0" style:volatile="true">
    <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
    <number:text> €</number:text>
   </number:number-style>
   <number:number-style style:name="N115">
-   <style:text-properties fo:color="#ff0000"/>
    <number:text>-</number:text>
    <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
    <number:text> €</number:text>
    <style:map style:condition="value()&gt;=0" style:apply-style-name="N115P0"/>
   </number:number-style>
   <number:number-style style:name="N116P0" style:volatile="true">
-   <loext:fill-character> </loext:fill-character>
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text>    </number:text>
-  </number:number-style>
-  <number:number-style style:name="N116P1" style:volatile="true">
-   <loext:fill-character> </loext:fill-character>
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text>    </number:text>
-  </number:number-style>
-  <number:number-style style:name="N116P2" style:volatile="true">
-   <loext:fill-character> </loext:fill-character>
-   <number:text>-    </number:text>
-  </number:number-style>
-  <number:text-style style:name="N116">
-   <number:text-content/>
-   <number:text> </number:text>
-   <style:map style:condition="value()&gt;0" style:apply-style-name="N116P0"/>
-   <style:map style:condition="value()&lt;0" style:apply-style-name="N116P1"/>
-   <style:map style:condition="value()=0" style:apply-style-name="N116P2"/>
-  </number:text-style>
-  <number:number-style style:name="N117P0" style:volatile="true">
-   <loext:fill-character> </loext:fill-character>
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> € </number:text>
-  </number:number-style>
-  <number:number-style style:name="N117P1" style:volatile="true">
-   <loext:fill-character> </loext:fill-character>
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> € </number:text>
-  </number:number-style>
-  <number:number-style style:name="N117P2" style:volatile="true">
-   <loext:fill-character> </loext:fill-character>
-   <number:text>- € </number:text>
-  </number:number-style>
-  <number:text-style style:name="N117">
-   <number:text-content/>
-   <number:text> </number:text>
-   <style:map style:condition="value()&gt;0" style:apply-style-name="N117P0"/>
-   <style:map style:condition="value()&lt;0" style:apply-style-name="N117P1"/>
-   <style:map style:condition="value()=0" style:apply-style-name="N117P2"/>
-  </number:text-style>
-  <number:number-style style:name="N118P0" style:volatile="true">
-   <loext:fill-character> </loext:fill-character>
    <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text>    </number:text>
+   <number:text> €</number:text>
   </number:number-style>
-  <number:number-style style:name="N118P1" style:volatile="true">
-   <loext:fill-character> </loext:fill-character>
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text>    </number:text>
-  </number:number-style>
-  <number:number-style style:name="N118P2" style:volatile="true">
-   <loext:fill-character> </loext:fill-character>
+  <number:number-style style:name="N116">
+   <style:text-properties fo:color="#ff0000"/>
    <number:text>-</number:text>
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="0"/>
-   <number:text>    </number:text>
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> €</number:text>
+   <style:map style:condition="value()&gt;=0" style:apply-style-name="N116P0"/>
   </number:number-style>
-  <number:text-style style:name="N118">
-   <number:text-content/>
-   <number:text> </number:text>
-   <style:map style:condition="value()&gt;0" style:apply-style-name="N118P0"/>
-   <style:map style:condition="value()&lt;0" style:apply-style-name="N118P1"/>
-   <style:map style:condition="value()=0" style:apply-style-name="N118P2"/>
-  </number:text-style>
   <number:number-style style:name="N119P0" style:volatile="true">
    <loext:fill-character> </loext:fill-character>
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> € </number:text>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text>    </number:text>
   </number:number-style>
   <number:number-style style:name="N119P1" style:volatile="true">
    <loext:fill-character> </loext:fill-character>
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> € </number:text>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text>    </number:text>
   </number:number-style>
   <number:number-style style:name="N119P2" style:volatile="true">
    <loext:fill-character> </loext:fill-character>
-   <number:text>-</number:text>
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="0"/>
-   <number:text> € </number:text>
+   <number:text>-    </number:text>
   </number:number-style>
   <number:text-style style:name="N119">
    <number:text-content/>
@@ -296,24 +218,91 @@
    <style:map style:condition="value()&lt;0" style:apply-style-name="N119P1"/>
    <style:map style:condition="value()=0" style:apply-style-name="N119P2"/>
   </number:text-style>
-  <number:time-style style:name="N120">
+  <number:number-style style:name="N122P0" style:volatile="true">
+   <loext:fill-character> </loext:fill-character>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> € </number:text>
+  </number:number-style>
+  <number:number-style style:name="N122P1" style:volatile="true">
+   <loext:fill-character> </loext:fill-character>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> € </number:text>
+  </number:number-style>
+  <number:number-style style:name="N122P2" style:volatile="true">
+   <loext:fill-character> </loext:fill-character>
+   <number:text>- € </number:text>
+  </number:number-style>
+  <number:text-style style:name="N122">
+   <number:text-content/>
+   <number:text> </number:text>
+   <style:map style:condition="value()&gt;0" style:apply-style-name="N122P0"/>
+   <style:map style:condition="value()&lt;0" style:apply-style-name="N122P1"/>
+   <style:map style:condition="value()=0" style:apply-style-name="N122P2"/>
+  </number:text-style>
+  <number:number-style style:name="N125P0" style:volatile="true">
+   <loext:fill-character> </loext:fill-character>
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text>    </number:text>
+  </number:number-style>
+  <number:number-style style:name="N125P1" style:volatile="true">
+   <loext:fill-character> </loext:fill-character>
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text>    </number:text>
+  </number:number-style>
+  <number:number-style style:name="N125P2" style:volatile="true">
+   <loext:fill-character> </loext:fill-character>
+   <number:text>-</number:text>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="0"/>
+   <number:text>    </number:text>
+  </number:number-style>
+  <number:text-style style:name="N125">
+   <number:text-content/>
+   <number:text> </number:text>
+   <style:map style:condition="value()&gt;0" style:apply-style-name="N125P0"/>
+   <style:map style:condition="value()&lt;0" style:apply-style-name="N125P1"/>
+   <style:map style:condition="value()=0" style:apply-style-name="N125P2"/>
+  </number:text-style>
+  <number:number-style style:name="N128P0" style:volatile="true">
+   <loext:fill-character> </loext:fill-character>
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> € </number:text>
+  </number:number-style>
+  <number:number-style style:name="N128P1" style:volatile="true">
+   <loext:fill-character> </loext:fill-character>
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> € </number:text>
+  </number:number-style>
+  <number:number-style style:name="N128P2" style:volatile="true">
+   <loext:fill-character> </loext:fill-character>
+   <number:text>-</number:text>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="0"/>
+   <number:text> € </number:text>
+  </number:number-style>
+  <number:text-style style:name="N128">
+   <number:text-content/>
+   <number:text> </number:text>
+   <style:map style:condition="value()&gt;0" style:apply-style-name="N128P0"/>
+   <style:map style:condition="value()&lt;0" style:apply-style-name="N128P1"/>
+   <style:map style:condition="value()=0" style:apply-style-name="N128P2"/>
+  </number:text-style>
+  <number:time-style style:name="N129">
    <number:minutes number:style="long"/>
    <number:text>:</number:text>
    <number:seconds number:style="long"/>
   </number:time-style>
-  <number:time-style style:name="N121" number:truncate-on-overflow="false">
+  <number:time-style style:name="N130" number:truncate-on-overflow="false">
    <number:hours/>
    <number:text>:</number:text>
    <number:minutes number:style="long"/>
    <number:text>:</number:text>
    <number:seconds number:style="long"/>
   </number:time-style>
-  <number:time-style style:name="N122">
+  <number:time-style style:name="N131">
    <number:minutes number:style="long"/>
    <number:text>:</number:text>
    <number:seconds number:style="long" number:decimal-places="1"/>
   </number:time-style>
-  <number:number-style style:name="N123">
+  <number:number-style style:name="N132">
    <number:scientific-number number:decimal-places="1" loext:min-decimal-places="1" number:min-integer-digits="1" number:min-exponent-digits="1" loext:exponent-interval="1" loext:forced-exponent-sign="true"/>
   </number:number-style>
   <number:date-style style:name="N10107" number:language="fr" number:country="FR">
@@ -360,92 +349,143 @@
    <number:text>:</number:text>
    <number:minutes number:style="long"/>
   </number:date-style>
-  <number:number-style style:name="N10113P0" style:volatile="true" number:language="fr" number:country="FR">
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text>   </number:text>
-  </number:number-style>
-  <number:number-style style:name="N10113" number:language="fr" number:country="FR">
-   <number:text>-</number:text>
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text>   </number:text>
-   <style:map style:condition="value()&gt;=0" style:apply-style-name="N10113P0"/>
-  </number:number-style>
   <number:number-style style:name="N10114P0" style:volatile="true" number:language="fr" number:country="FR">
    <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
    <number:text>   </number:text>
   </number:number-style>
   <number:number-style style:name="N10114" number:language="fr" number:country="FR">
-   <style:text-properties fo:color="#ff0000"/>
    <number:text>-</number:text>
    <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
    <number:text>   </number:text>
    <style:map style:condition="value()&gt;=0" style:apply-style-name="N10114P0"/>
   </number:number-style>
   <number:number-style style:name="N10115P0" style:volatile="true" number:language="fr" number:country="FR">
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
    <number:text>   </number:text>
   </number:number-style>
   <number:number-style style:name="N10115" number:language="fr" number:country="FR">
+   <style:text-properties fo:color="#ff0000"/>
    <number:text>-</number:text>
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
    <number:text>   </number:text>
    <style:map style:condition="value()&gt;=0" style:apply-style-name="N10115P0"/>
   </number:number-style>
-  <number:number-style style:name="N10116P0" style:volatile="true" number:language="fr" number:country="FR">
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text>   </number:text>
-  </number:number-style>
-  <number:number-style style:name="N10116" number:language="fr" number:country="FR">
-   <style:text-properties fo:color="#ff0000"/>
-   <number:text>-</number:text>
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text>   </number:text>
-   <style:map style:condition="value()&gt;=0" style:apply-style-name="N10116P0"/>
-  </number:number-style>
   <number:number-style style:name="N10117P0" style:volatile="true" number:language="fr" number:country="FR">
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> €</number:text>
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text>   </number:text>
   </number:number-style>
   <number:number-style style:name="N10117" number:language="fr" number:country="FR">
    <number:text>-</number:text>
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> €</number:text>
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text>   </number:text>
    <style:map style:condition="value()&gt;=0" style:apply-style-name="N10117P0"/>
   </number:number-style>
   <number:number-style style:name="N10118P0" style:volatile="true" number:language="fr" number:country="FR">
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> €</number:text>
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text>   </number:text>
   </number:number-style>
   <number:number-style style:name="N10118" number:language="fr" number:country="FR">
    <style:text-properties fo:color="#ff0000"/>
    <number:text>-</number:text>
-   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> €</number:text>
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text>   </number:text>
    <style:map style:condition="value()&gt;=0" style:apply-style-name="N10118P0"/>
   </number:number-style>
-  <number:number-style style:name="N10119P0" style:volatile="true" number:language="fr" number:country="FR">
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> €</number:text>
-  </number:number-style>
-  <number:number-style style:name="N10119" number:language="fr" number:country="FR">
-   <number:text>-</number:text>
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
-   <number:text> €</number:text>
-   <style:map style:condition="value()&gt;=0" style:apply-style-name="N10119P0"/>
-  </number:number-style>
   <number:number-style style:name="N10120P0" style:volatile="true" number:language="fr" number:country="FR">
-   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
    <number:text> €</number:text>
   </number:number-style>
   <number:number-style style:name="N10120" number:language="fr" number:country="FR">
+   <number:text>-</number:text>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> €</number:text>
+   <style:map style:condition="value()&gt;=0" style:apply-style-name="N10120P0"/>
+  </number:number-style>
+  <number:number-style style:name="N10121P0" style:volatile="true" number:language="fr" number:country="FR">
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> €</number:text>
+  </number:number-style>
+  <number:number-style style:name="N10121" number:language="fr" number:country="FR">
+   <style:text-properties fo:color="#ff0000"/>
+   <number:text>-</number:text>
+   <number:number number:decimal-places="0" loext:min-decimal-places="0" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> €</number:text>
+   <style:map style:condition="value()&gt;=0" style:apply-style-name="N10121P0"/>
+  </number:number-style>
+  <number:number-style style:name="N10123P0" style:volatile="true" number:language="fr" number:country="FR">
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> €</number:text>
+  </number:number-style>
+  <number:number-style style:name="N10123" number:language="fr" number:country="FR">
+   <number:text>-</number:text>
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> €</number:text>
+   <style:map style:condition="value()&gt;=0" style:apply-style-name="N10123P0"/>
+  </number:number-style>
+  <number:number-style style:name="N10124P0" style:volatile="true" number:language="fr" number:country="FR">
+   <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
+   <number:text> €</number:text>
+  </number:number-style>
+  <number:number-style style:name="N10124" number:language="fr" number:country="FR">
    <style:text-properties fo:color="#ff0000"/>
    <number:text>-</number:text>
    <number:number number:decimal-places="2" loext:min-decimal-places="2" number:min-integer-digits="1" number:grouping="true"/>
    <number:text> €</number:text>
-   <style:map style:condition="value()&gt;=0" style:apply-style-name="N10120P0"/>
+   <style:map style:condition="value()&gt;=0" style:apply-style-name="N10124P0"/>
   </number:number-style>
   <style:style style:name="Default" style:family="table-cell">
    <style:text-properties fo:language="zxx" fo:country="none" style:language-asian="zxx" style:country-asian="none" style:language-complex="zxx" style:country-complex="none"/>
+  </style:style>
+  <style:style style:name="Heading_20__28_user_29_" style:display-name="Heading (user)" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties fo:color="#000000" fo:font-size="24pt" fo:font-style="normal" fo:font-weight="bold"/>
+  </style:style>
+  <style:style style:name="Heading_20_1" style:display-name="Heading 1" style:family="table-cell" style:parent-style-name="Heading_20__28_user_29_">
+   <style:text-properties fo:color="#000000" fo:font-size="18pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="Heading_20_2" style:display-name="Heading 2" style:family="table-cell" style:parent-style-name="Heading_20__28_user_29_">
+   <style:text-properties fo:color="#000000" fo:font-size="12pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="Text" style:family="table-cell" style:parent-style-name="Default"/>
+  <style:style style:name="Note" style:family="table-cell" style:parent-style-name="Text">
+   <style:table-cell-properties fo:background-color="#ffffcc" style:diagonal-bl-tr="none" style:diagonal-tl-br="none" fo:border="0.74pt solid #808080"/>
+   <style:text-properties fo:color="#333333" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="Footnote" style:family="table-cell" style:parent-style-name="Text">
+   <style:text-properties fo:color="#808080" fo:font-size="10pt" fo:font-style="italic" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="Status" style:family="table-cell" style:parent-style-name="Default"/>
+  <style:style style:name="Good" style:family="table-cell" style:parent-style-name="Status">
+   <style:table-cell-properties fo:background-color="#ccffcc"/>
+   <style:text-properties fo:color="#006600" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="Neutral" style:family="table-cell" style:parent-style-name="Status">
+   <style:table-cell-properties fo:background-color="#ffffcc"/>
+   <style:text-properties fo:color="#996600" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="Bad" style:family="table-cell" style:parent-style-name="Status">
+   <style:table-cell-properties fo:background-color="#ffcccc"/>
+   <style:text-properties fo:color="#cc0000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="Warning" style:family="table-cell" style:parent-style-name="Status">
+   <style:text-properties fo:color="#cc0000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="Error" style:family="table-cell" style:parent-style-name="Status">
+   <style:table-cell-properties fo:background-color="#cc0000"/>
+   <style:text-properties fo:color="#ffffff" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="bold"/>
+  </style:style>
+  <style:style style:name="Accent" style:family="table-cell" style:parent-style-name="Default">
+   <style:text-properties fo:color="#000000" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="bold"/>
+  </style:style>
+  <style:style style:name="Accent_20_1" style:display-name="Accent 1" style:family="table-cell" style:parent-style-name="Accent">
+   <style:table-cell-properties fo:background-color="#000000"/>
+   <style:text-properties fo:color="#ffffff" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="Accent_20_2" style:display-name="Accent 2" style:family="table-cell" style:parent-style-name="Accent">
+   <style:table-cell-properties fo:background-color="#808080"/>
+   <style:text-properties fo:color="#ffffff" fo:font-size="10pt" fo:font-style="normal" fo:font-weight="normal"/>
+  </style:style>
+  <style:style style:name="Accent_20_3" style:display-name="Accent 3" style:family="table-cell" style:parent-style-name="Accent">
+   <style:table-cell-properties fo:background-color="#dddddd"/>
   </style:style>
   <style:style style:name="Result" style:family="table-cell" style:parent-style-name="Default">
    <style:text-properties fo:font-style="italic" style:text-underline-style="solid" style:text-underline-width="auto" style:text-underline-color="font-color" fo:font-weight="bold"/>
@@ -477,7 +517,7 @@
    <style:table-row-properties style:row-height="4.52mm" fo:break-before="auto" style:use-optimal-row-height="true"/>
   </style:style>
   <style:style style:name="ro2" style:family="table-row">
-   <style:table-row-properties style:row-height="13.21mm" fo:break-before="auto" style:use-optimal-row-height="true"/>
+   <style:table-row-properties style:row-height="12.44mm" fo:break-before="auto" style:use-optimal-row-height="true"/>
   </style:style>
   <style:style style:name="ta1" style:family="table" style:master-page-name="Default">
    <style:table-properties table:display="true" style:writing-mode="lr-tb"/>
@@ -527,15 +567,15 @@
   <style:master-page style:name="Report" style:page-layout-name="pm2">
    <style:header>
     <style:region-left>
-     <text:p><text:sheet-name>???</text:sheet-name> (<text:title>???</text:title>)</text:p>
+     <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2018-06-04">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="14:43:16.005000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2019-07-11">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="16:12:51.250000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
    <style:footer>
-    <text:p>Page <text:page-number>1</text:page-number> / <text:page-count>99</text:page-count></text:p>
+    <text:p>Page <text:page-number>1</text:page-number><text:s/>/ <text:page-count>99</text:page-count></text:p>
    </style:footer>
    <style:footer-left style:display="false"/>
   </style:master-page>
@@ -570,10 +610,32 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:StructuredMixedGridResponseDomain</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>*[not(d:ResponseAttachmentLocation)]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>GridResponseDomainInMixed with AttachmentLocation correspond to attached Responsedomain that should&apos;nt be seen as a direct child of the GridResponseDomainInMixed but as a direct child of the response field which it&apos;s attached to (&apos;other:&apos; usecase)</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>d:ResponseDomainInMixed[@attachmentBase]//l:Code</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>ancestor::d:StructuredMixedResponseDomain/d:ResponseDomainInMixed[d:AttachmentLocation/d:DomainSpecificValue[r:Value = current()/r:Value and @attachmentDomain = current()/ancestor::d:ResponseDomainInMixed/@attachmentBase]]</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>For l:Code with attached ResponseDomain, the attached is a direct child of the l:Code. FIXME : Works only for l:Code, if other case are used, need an extension of the implementation.</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>d:GridResponseDomainInMixed[@attachmentBase]//l:Code</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>ancestor::d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[d:ResponseAttachmentLocation/d:DomainSpecificValue[r:Value = current()/r:Value and @attachmentDomain = current()/ancestor::d:GridResponseDomainInMixed/@attachmentBase]]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>For l:Code with attached ResponseDomain, the attached is a direct child of the l:Code. FIXME : Works only for l:Code, if other case are used, need an extension of the implementation.</text:p>
@@ -592,13 +654,13 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>d:QuestionGrid[not(d:GridDimension/@rank=&apos;2&apos;) and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])] </text:p>
+      <text:p>d:QuestionGrid[not(d:GridDimension/@rank=&apos;2&apos;) and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:ResponseAttachmentLocation)])] </text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>.//d:GridResponseDomain/*</text:p>
+      <text:p>.//d:GridResponseDomainInMixed[not(d:ResponseAttachmentLocation)]/*</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>In MultipleChoiceQuestion, only the child of GridResponseDomain are considered as child (GridDimension and GridResponseDomain are escaped to prevent Table&amp;Cell drivers).</text:p>
+      <text:p>In MultipleChoiceQuestion, only the child of GridResponseDomainInMixed are considered as child (GridDimension and GridResponseDomainInMixed are escaped to prevent Table&amp;Cell drivers).</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
@@ -606,7 +668,7 @@
       <text:p>d:QuestionItem | d:QuestionGrid</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>*[not(self::d:InterviewerInstructionReference)]</text:p>
+      <text:p>*[not(self::d:InterviewerInstructionReference) and not(self::d:ExternalAid[r:OtherMaterial/r:Description/r:Content/xhtml:div/@class=&apos;FlowControl&apos;])]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>It deactivate explicit driver flow for Instructions attached to a question. Explicit out-getters should be used instead to retrieve instructions.</text:p>

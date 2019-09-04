@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi" xmlns:d="ddi:datacollection:3_2"
-    xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2"
+    xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi" xmlns:d="ddi:datacollection:3_3"
+    xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" version="2.0">
 
     <!-- Importing the different resources -->
@@ -86,7 +86,7 @@
             <xd:p>For a child of an xhtml:p element, it is directly returned.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*[parent::xhtml:p]" priority="1" mode="lang-choice">
+    <xsl:template match="node()[parent::xhtml:p]" priority="1" mode="lang-choice">
         <xsl:sequence select="."/>
     </xsl:template>
 
@@ -101,12 +101,22 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>For a text() sibling of a xhtml:p (and generally empty), nothing is returned</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="text()[parent::*/xhtml:p]" mode="lang-choice" priority="1"/>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>For those nodes, the language is used to return the right text.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="node()[r:Content or r:String or xhtml:p]" mode="lang-choice">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:choose>
+            <xsl:when test="r:Content[@xml:lang=$language and xhtml:p] or r:String[@xml:lang=$language and xhtml:p]">
+                <xsl:sequence select="child::node()[@xml:lang=$language]/xhtml:p"/>
+            </xsl:when>
             <xsl:when test="r:Content[@xml:lang=$language] or r:String[@xml:lang=$language]">
                 <xsl:sequence select="child::node()[@xml:lang=$language]/child::node()"/>
             </xsl:when>
@@ -132,7 +142,7 @@
         <xsl:param name="language" tunnel="yes"/>
 
         <xsl:variable name="ddi-variable" select="enoddi:get-id(.)"/>
-        <xsl:variable name="variable-measurement-unit" select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $ddi-variable]/l:VariableRepresentation/r:MeasurementUnit"/>
+        <xsl:variable name="variable-measurement-unit" select="//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $ddi-variable]/l:VariableRepresentation//r:MeasurementUnit"/>
         <xsl:choose>
             <xsl:when test="$variable-measurement-unit != ''">
                 <xsl:value-of select="$variable-measurement-unit"/>
@@ -175,7 +185,7 @@
         <xsl:variable name="levels">
             <!-- Only one attribute amongst rangeMinimum and specificValue is present -->
             <xsl:for-each-group
-                select="d:StructuredMixedGridResponseDomain/*[name()='d:GridResponseDomain' or name()='d:NoDataByDefinition']//d:SelectDimension[@rank='1']"
+                select="d:StructuredMixedGridResponseDomain/*[name()='d:GridResponseDomainInMixed' or name()='d:NoDataByDefinition']//d:SelectDimension[@rank='1']"
                 group-by="concat(@rangeMinimum,@specificValue)">
                 <dummy/>
             </xsl:for-each-group>
@@ -236,7 +246,7 @@
         1) codes which nesting level in codes lists with labels is equal to index+1
         2) labels from l:CodeList-->
 
-        <xsl:sequence select="d:GridDimension[@rank='2']//(l:Code[count(ancestor::l:CodeList[r:Label])+count(ancestor::l:Code)=$index+number($label-or-no)-1] 
+        <xsl:sequence select="d:GridDimension[@rank='2']//(l:Code[count(ancestor::l:CodeList[r:Label])+count(ancestor::l:Code)=$index+number($label-or-no)-1]
                                                          | l:CodeList/r:Label[count(ancestor::l:CodeList[r:Label])+count(ancestor::l:Code)=$index+number($label-or-no)])"/>
     </xsl:template>
 
@@ -258,9 +268,9 @@
         <xsl:apply-templates select="d:GridDimension[@rank='1']//l:Code[r:ID=$id]" mode="enoddi:get-table-line"/>
         <xsl:choose>
             <xsl:when test="string($table-first-line) = string($index)">
-                <xsl:for-each select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)
+                <xsl:for-each select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomainInMixed | d:NoDataByDefinition)
                     [.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]
-                    | d:StructuredMixedGridResponseDomain/(d:GridResponseDomain | d:NoDataByDefinition)
+                    | d:StructuredMixedGridResponseDomain/(d:GridResponseDomainInMixed | d:NoDataByDefinition)
                     [.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and number(@rangeMinimum) &lt; $index and number(@rangeMaximum &gt;= $index)]]
                     ">
                     <xsl:sort select="number(.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum)"/>
@@ -268,7 +278,7 @@
                 </xsl:for-each>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:for-each select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomain
+                <xsl:for-each select="d:StructuredMixedGridResponseDomain/(d:GridResponseDomainInMixed
                     | d:NoDataByDefinition)[.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='1' and (@rangeMinimum=string($index) or @specificValue=string($index))]]">
                     <xsl:sort select="number(.//d:CellCoordinatesAsDefined/d:SelectDimension[@rank='2']/@rangeMinimum)"/>
                     <xsl:sequence select="."/>
@@ -307,7 +317,7 @@
         <xsl:variable name="parents" select="if (string(count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) != 'NaN') then count(ancestor::l:CodeList[r:Label] | ancestor::l:Code) else 0"/>
         <!-- Getting the depth-level of children codes -->
         <xsl:variable name="children"
-            select="if (string(max(.//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) - count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) !='') 
+            select="if (string(max(.//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) - count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) !='')
                     then max(.//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)) - count(ancestor::l:CodeList[r:Label] | ancestor::l:Code)
                     else 0"/>
         <xsl:value-of select="max(ancestor::d:GridDimension[@rank='1']//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label] | ancestor::l:Code))
@@ -460,6 +470,28 @@
         <xsl:value-of select="string(1 + number($last-line) - number($first-line))"/>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>getting maximum from date / duration</xd:desc>
+    </xd:doc>
+    <xsl:template match="d:DateTimeDomain|d:DateTimeDomainReference" mode="enoddi:get-maximum">
+        <xsl:variable name="standart-maximum" select="descendant::r:MaximumValue[not(ancestor::r:OutParameter)]"/>
+
+        <xsl:choose>
+            <xsl:when test="$standart-maximum = ''"/>
+            <xsl:when test="$standart-maximum = 'format-date(current-date(),''[Y0001]-[M01]-[D01]'')'">
+                <xsl:value-of select="format-date(current-date(),'[Y0001]-[M01]-[D01]')"/>
+            </xsl:when>
+            <xsl:when test="$standart-maximum = 'format-date(current-date(),''[Y0001]-[M01]'')'">
+                <xsl:value-of select="format-date(current-date(),'[Y0001]-[M01]')"/>
+            </xsl:when>
+            <xsl:when test="$standart-maximum = 'year-from-date(current-date())'">
+                <xsl:value-of select="year-from-date(current-date())"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$standart-maximum"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <xd:doc>
         <xd:desc>
@@ -542,8 +574,7 @@
             </xsl:call-template>
         </xsl:variable>
 
-        <xsl:for-each
-            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='hideable'] and (d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable)]">
+        <xsl:for-each select="//d:IfThenElse[d:TypeOfIfThenElse='hideable' and (d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable)]">
             <xsl:choose>
                 <xsl:when test="descendant::d:Sequence/d:TypeOfSequence[text()='module']">
                     <xsl:for-each select="descendant::d:Sequence[d:TypeOfSequence='module']">
@@ -551,11 +582,14 @@
                     </xsl:for-each>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
+                    <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference)"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
         <xsl:for-each select="ancestor::d:StructuredMixedResponseDomain/d:ResponseDomainInMixed[d:AttachmentLocation/d:DomainSpecificValue/@attachmentDomain=current()/parent::d:ResponseDomainInMixed/@attachmentBase]">
+            <xsl:value-of select="enoddi:get-id(current())"/>
+        </xsl:for-each>
+        <xsl:for-each select="ancestor::d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[d:ResponseAttachmentLocation/d:DomainSpecificValue/@attachmentDomain=current()/parent::d:GridResponseDomainInMixed/@attachmentBase]">
             <xsl:value-of select="enoddi:get-id(current())"/>
         </xsl:for-each>
     </xsl:template>
@@ -577,9 +611,9 @@
             </xsl:call-template>
         </xsl:variable>
 
-        <xsl:for-each
-            select="//d:IfThenElse[d:ThenConstructReference/d:Sequence/d:TypeOfSequence[text()='deactivatable'] and d:IfCondition/r:Command/r:CommandContent/text() = $modified-variables//Variable]">
-            <xsl:value-of select="enoddi:get-id(current()/d:ThenConstructReference/d:Sequence)"/>
+        <xsl:for-each select="//d:IfThenElse[d:TypeOfIfThenElse='greyedout' and (d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable)]
+                                            /*[name()='d:ThenConstructReference' or name()='d:ElseConstructReference']">
+            <xsl:value-of select="enoddi:get-id(current())"/>
         </xsl:for-each>
     </xsl:template>
 
@@ -591,7 +625,7 @@
     <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']"
         mode="enoddi:get-hideable-command">
         <xsl:variable name="filters">
-            <xsl:for-each select="ancestor::d:Sequence[d:TypeOfSequence/text()='hideable']">
+            <xsl:for-each select="ancestor::*[(name()='d:ThenConstructReference' or name()='d:ElseConstructReference') and parent::d:IfThenElse/d:TypeOfIfThenElse='hideable']">
                 <xsl:text> and </xsl:text>
                 <xsl:apply-templates select="current()" mode="enoddi:get-hideable-command"/>
             </xsl:for-each>
@@ -611,7 +645,7 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Get the formula to know when a response is hidden or not.</xd:p>
+            <xd:p>Get the formula to know when a response is hidden or not in a QuestionItem.</xd:p>
         </xd:desc>
     </xd:doc>
 
@@ -631,13 +665,36 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>Get the formula to know when a response is hidden or not in a QuestionGrid.</xd:p>
+        </xd:desc>
+    </xd:doc>
+
+    <xsl:template match="d:GridResponseDomainInMixed[d:ResponseAttachmentLocation]" mode="enoddi:get-hideable-command">
+
+        <xsl:variable name="attachment-domain" select="d:ResponseAttachmentLocation/d:DomainSpecificValue/@attachmentDomain"/>
+        <xsl:variable name="source-response-out-parameter" select="../d:GridResponseDomainInMixed[@attachmentBase=$attachment-domain]//r:OutParameter/r:ID"/>
+        <xsl:variable name="source-response-id" select="../../r:Binding[r:SourceParameterReference/r:ID=$source-response-out-parameter]/r:TargetParameterReference/r:ID"/>
+
+        <xsl:variable name="result">
+            <xsl:for-each select="d:ResponseAttachmentLocation/d:DomainSpecificValue/r:Value">
+                <xsl:if test="position()!=1">
+                    <xsl:text> or </xsl:text>
+                </xsl:if>
+                <xsl:value-of select="concat($conditioning-variable-begin,$source-response-id,$conditioning-variable-end,'=''',.,'''')"/>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:value-of select="$result"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Returns the conditions of all its deactivatable ancestors.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-deactivatable-ancestors" as="xs:string *">
         <xsl:for-each select="ancestor::*[not(d:TypeOfSequence[text()='module'])]">
             <xsl:if test="enoddi:get-deactivatable-command(.) != ''">
-                <xsl:value-of select="enoddi:get-deactivatable-command(.)"/>                
+                <xsl:value-of select="enoddi:get-deactivatable-command(.)"/>
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
@@ -646,7 +703,7 @@
             <xd:p>Returns the variables of the conditions of all its deactivatable ancestors.</xd:p>
         </xd:desc>
     </xd:doc>
-    
+
     <xsl:template match="*" mode="enoddi:get-deactivatable-ancestors-variables" as="xs:string *">
         <xsl:for-each select="ancestor::*[not(d:TypeOfSequence[text()='module'])]">
             <xsl:if test="enoddi:get-deactivatable-command(.) != ''">
@@ -663,7 +720,7 @@
     <xsl:template match="*" mode="enoddi:get-hideable-ancestors" as="xs:string *">
         <xsl:for-each select="ancestor::*[not(d:TypeOfSequence[text()='module'])]">
             <xsl:if test="enoddi:get-hideable-command(.) != ''">
-                <xsl:value-of select="enoddi:get-hideable-command(.)"/>                
+                <xsl:value-of select="enoddi:get-hideable-command(.)"/>
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
@@ -674,7 +731,7 @@
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>get-instruction restricted to a format list (if not #all).</xd:p>
@@ -698,8 +755,8 @@
         <xsl:choose>
             <!-- MCQ -->
             <xsl:when test="parent::r:CodeReference/ancestor::d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
-                and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])]
-                and parent::d:GridResponseDomain and following-sibling::d:GridAttachment//d:SelectDimension]">
+                and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:ResponseAttachmentLocation)])]
+                and parent::d:GridResponseDomainInMixed and following-sibling::d:GridAttachment//d:SelectDimension]">
                 <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension"/>
                 <xsl:sequence select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]/
                     r:CategoryReference/l:Category/d:InterviewerInstructionReference/d:Instruction[if($format = '#all') then(true())
@@ -751,11 +808,12 @@
     </xd:doc>
     <!-- TODO : Simplify the Xpath match ? Only "MCQ" needed ? -->
     <xsl:template match="l:Code[parent::r:CodeReference/ancestor::d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
-        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])]
-        and parent::d:GridResponseDomain and following-sibling::d:GridAttachment//d:SelectDimension]]" mode="enoddi:get-label" priority="2">
-        <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension"/>
-        <xsl:variable name="correspondingCode" select="ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]//l:Code[position()=$codeCoordinates/@rangeMinimum]"/>
-        <xsl:apply-templates select="$correspondingCode" mode="enoddi:get-label"/>
+        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:ResponseAttachmentLocation)])]
+        and parent::d:GridResponseDomainInMixed and following-sibling::d:GridAttachment//d:SelectDimension]]" mode="enoddi:get-label" priority="2">
+        <xsl:variable name="codeCoordinates" select="ancestor::d:NominalDomain/following-sibling::d:GridAttachment//d:SelectDimension" as="node()"/>
+        <xsl:apply-templates
+            select="ancestor::d:QuestionGrid/d:GridDimension[@rank='1']//l:Code[position()=number($codeCoordinates/@rangeMinimum)]"
+            mode="enoddi:get-label"/>
     </xsl:template>
 
     <xd:doc>
@@ -772,8 +830,24 @@
             </xsl:call-template>
         </xsl:variable>
         <xsl:if test="$variable-list != enoddi:get-label(.,$language)">
-            <xsl:sequence select="$variable-list"/>    
+            <xsl:sequence select="$variable-list"/>
         </xsl:if>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-cell-value-variables.</xd:p>
+            <xd:p>Function that returns the list of the variables of the value of a fixed cell.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:NoDataByDefinition" mode="enoddi:get-cell-value-variables">
+        <xsl:param name="language" tunnel="yes"/>
+        <xsl:variable name="variable-list" as="xs:string *">
+            <xsl:call-template name="enoddi:variables-from-label">
+                <xsl:with-param name="label" select="eno:serialize(enoddi:get-cell-value(.))"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:sequence select="$variable-list"/>
     </xsl:template>
 
     <xsl:template name="enoddi:variables-from-label">
@@ -866,13 +940,13 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:CodeDomain | d:NominalDomain" mode="enoddi:get-item-label-conditioning-variables">
-        
+
         <xsl:variable name="item-label-conditioning-variables-with-doubles" as="xs:string*">
             <xsl:for-each select="descendant::l:Category/r:Label/r:Content">
                 <xsl:call-template name="enoddi:variables-from-label">
                     <xsl:with-param name="label" select="eno:serialize(.)"/>
                 </xsl:call-template>
-            </xsl:for-each>            
+            </xsl:for-each>
         </xsl:variable>
         <xsl:sequence select="distinct-values($item-label-conditioning-variables-with-doubles)"/>
     </xsl:template>
@@ -884,8 +958,8 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:NominalDomain[ancestor::d:QuestionGrid[not(d:GridDimension/@rank='2')
-        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomain[not(d:NominalDomain) and not(d:AttachmentLocation)])]
-        and parent::d:GridResponseDomain and following-sibling::d:GridAttachment//d:SelectDimension]"
+        and not(d:StructuredMixedGridResponseDomain/d:GridResponseDomainInMixed[not(d:NominalDomain) and not(d:ResponseAttachmentLocation)])]
+        and parent::d:GridResponseDomainInMixed and following-sibling::d:GridAttachment//d:SelectDimension]"
         mode="enoddi:get-item-label-conditioning-variables" priority="2">
 
         <xsl:variable name="codeCoordinates" select="following-sibling::d:GridAttachment//d:SelectDimension"/>
@@ -895,7 +969,7 @@
                     select="eno:serialize(ancestor::d:QuestionGrid/d:GridDimension[@rank=$codeCoordinates/@rank]
                                                                   //l:Code[position()=$codeCoordinates/@rangeMinimum]
                                                                   //l:Category/r:Label/r:Content)"/>
-            </xsl:call-template>            
+            </xsl:call-template>
         </xsl:variable>
 
         <xsl:sequence select="distinct-values($item-label-conditioning-variables-with-doubles)"/>
@@ -908,15 +982,15 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-variable-type">
-        
+
         <xsl:call-template name="enoddi:get-variable-type">
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
     </xsl:template>
-    
+
     <xsl:template name="enoddi:get-variable-type">
         <xsl:param name="variable"/>
-        
+
         <xsl:choose>
             <!-- collected variable -->
             <xsl:when test="$root//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
@@ -936,9 +1010,9 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
-    
-    
+
+
+
 
     <xd:doc>
         <xd:desc>
@@ -987,12 +1061,12 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-business-ancestors">
-        
+
         <xsl:call-template name="enoddi:get-business-ancestors">
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
     </xsl:template>
-    
+
     <xsl:template name="enoddi:get-business-ancestors">
         <xsl:param name="variable"/>
 
@@ -1068,7 +1142,7 @@
     </xd:doc>
     <xsl:template match="d:QuestionItem | d:QuestionGrid"
         mode="enoddi:get-next-filter-description">
-        <xsl:sequence select="d:ExternalAid/r:Description[r:Content/xhtml:div/@class='FlowControl']"/>
+        <xsl:sequence select="d:ExternalAid[r:OtherMaterial/r:Description/r:Content/xhtml:div/@class='FlowControl']"/>
     </xsl:template>
     <xd:doc>
         <xd:desc>
@@ -1079,5 +1153,101 @@
         mode="enoddi:get-previous-filter-description">
         <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference[not(preceding-sibling::d:ControlConstructReference)]/ancestor::d:IfThenElse[not(d:ExternalAid)]/r:Description"/>
     </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The label of a Code in a CodeDomain with @displayCode = 'true' is the concatenation of its r:Value and its descendant r:Label.</xd:p>
+            <xd:p>The same for a Code in a GridDimension with @displayCode = 'true', but only if it has no descendant.</xd:p>
+            <xd:p>When both are true, only one Code is concatened</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="l:Code[(ancestor::d:CodeDomain/@displayCode='true') or (ancestor::d:GridDimension[@displayCode='true'] and not(descendant::l:Code))]"
+        mode="enoddi:get-label">
+        <xsl:variable name="xhtml-label" as="node()*">
+            <xsl:apply-templates select="r:CategoryReference/l:Category/r:Label" mode="lang-choice"/>
+        </xsl:variable>
+        <xsl:variable name="titled-label" as="node()">
+            <xsl:apply-templates select="$xhtml-label" mode="modif-title">
+                <xsl:with-param name="prefix" select="concat(r:Value,' - ')" tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:variable>
+        <xsl:sequence select="$titled-label"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Only the first child of a xhtml:p must be titled</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="xhtml:p" mode="modif-title" priority="2">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:apply-templates select="node()[position()=1]" mode="modif-title"/>
+            <xsl:apply-templates select="node()[not(position()=1)]"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>When we match a node starting by xhtml, we only process the first child node with modif-title mode.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*[starts-with(name(),'xhtml')]" mode="modif-title">
+        <xsl:param name="prefix" tunnel="yes"/>
+        <xsl:value-of select="$prefix"/>
+        <xsl:apply-templates select="."/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Adding the prefix.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="xhtml:span[@class='block']" mode="modif-title" priority="2">
+        <xsl:param name="prefix" tunnel="yes"/>
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:value-of select="$prefix"/>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Adding the prefix.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="text()" mode="modif-title" priority="1">
+        <xsl:param name="prefix" tunnel="yes"/>
+        <xsl:choose>
+            <xsl:when test="preceding-sibling::xhtml:p or following-sibling::xhtml:p"/>
+            <xsl:otherwise>
+                <xsl:value-of select="concat($prefix,.)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>default template</xd:desc>
+    </xd:doc>
+    <xsl:template match="node()|@*">
+        <xsl:copy>
+            <xsl:apply-templates select="node()|@*"/>
+        </xsl:copy>
+    </xsl:template>
     
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function for retrieving instructions before the label of the question</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enoddi:get-previous-statement-item">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi:get-previous-statement-item"/>
+    </xsl:function>
+
+    <xsl:template match="*" mode="enoddi:get-previous-statement-item">
+        <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference/preceding-sibling::d:ControlConstructReference/d:StatementItem[parent::d:ControlConstructReference/following-sibling::d:ControlConstructReference[descendant::d:QuestionConstruct][1]/descendant::d:QuestionConstruct/r:ID=current()/ancestor::d:QuestionConstruct/r:ID]"></xsl:sequence>
+    </xsl:template>
+
 </xsl:stylesheet>

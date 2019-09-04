@@ -137,7 +137,7 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/edit-structure-page.xsl";
 	public static final String STATIC_PAGES = OUPUTS_FOLDER_2 +"/static-pages.fo";
 	public static final String TRANSFORMATIONS_SORT_COMPONENTS_JS = OUPUTS_FOLDER_JS + "/sort-components.xsl";
-	public static final String TRANSFORMATIONS_EXTERNALIZE_CODELISTS_JS = OUPUTS_FOLDER_JS + "/externalize-code-lists.xsl";
+	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS = OUPUTS_FOLDER_JS + "/externalize-variables.xsl";
 	// ---------- Temporary file system
 	
 	// ----- Folders

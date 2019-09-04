@@ -5,8 +5,10 @@
     xmlns:enoodt="http://xml.insee.fr/apps/eno/out/odt"
     xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
     xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
-    xmlns:d="ddi:datacollection:3_2"
-    xmlns:r="ddi:reusable:3_2" xmlns:l="ddi:logicalproduct:3_2" version="2.0">
+    xmlns:d="ddi:datacollection:3_3"
+    xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    version="2.0">
 
     <!-- Importing the different resources -->
     <xsl:import href="../../inputs/ddi/source.xsl"/>
@@ -127,17 +129,4 @@
         <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote') | enoddi:get-next-filter-description($context)"/>
     </xsl:function>
     
-    <xd:doc>
-        <xd:desc>
-            <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:function name="enojs:get-required">
-        <xsl:param name="context" as="item()"/>
-        <xsl:if test=" enoddi:get-minimum-responses($context) != '0'">
-            <xsl:value-of select="'true'"/>
-        </xsl:if>
-    </xsl:function>
-    
-
 </xsl:stylesheet>
