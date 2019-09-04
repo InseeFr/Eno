@@ -188,7 +188,7 @@
                     </xsl:for-each>
                 </xsl:variable>
                 <xsl:variable name="relevant-condition">
-                    <xsl:call-template name="replaceVariablesInFormula">
+                    <xsl:call-template name="enojs:replaceVariablesInFormula">
                         <xsl:with-param name="source-context" select="$context" as="item()" tunnel="yes"/>
                         <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
                         <xsl:with-param name="variables" select="$variablesId"/>
@@ -203,7 +203,7 @@
                     </xsl:for-each>
                 </xsl:variable>
                 <xsl:variable name="readonly-condition">
-                    <xsl:call-template name="replaceVariablesInFormula">
+                    <xsl:call-template name="enojs:replaceVariablesInFormula">
                         <xsl:with-param name="source-context" select="$context" as="item()" tunnel="yes"/>
                         <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
                         <xsl:with-param name="variables" select="$variablesId"/>
@@ -238,7 +238,7 @@
                     </xsl:for-each>
                 </xsl:variable>
                 <xsl:variable name="relevant-condition">
-                    <xsl:call-template name="replaceVariablesInFormula">
+                    <xsl:call-template name="enojs:replaceVariablesInFormula">
                         <xsl:with-param name="source-context" select="$context" as="item()" tunnel="yes"/>
                         <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
                         <xsl:with-param name="variables" select="$variablesId"/>
@@ -260,7 +260,7 @@
                     </xsl:for-each>
                 </xsl:variable>
                 <xsl:variable name="readonly-condition">
-                    <xsl:call-template name="replaceVariablesInFormula">
+                    <xsl:call-template name="enojs:replaceVariablesInFormula">
                         <xsl:with-param name="source-context" select="$context" as="item()" tunnel="yes"/>
                         <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
                         <xsl:with-param name="variables" select="$variablesId"/>
