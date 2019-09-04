@@ -340,7 +340,7 @@
 		</xsl:if>
 		<variables variableType="COLLECTED">
 			<name><xsl:value-of select="$responseName"/></name>
-			<responseRef><xsl:value-of select="$responseRef"/></responseRef>
+			<responseRef><xsl:value-of select="$responseName"/></responseRef>
 		</variables>
 	</xsl:template>
 
@@ -415,7 +415,7 @@
 		</cells>
 		<variables variableType="COLLECTED">
 			<name><xsl:value-of select="$responseName"/></name>
-			<responseRef><xsl:value-of select="$responseRef"/></responseRef>
+			<responseRef><xsl:value-of select="$responseName"/></responseRef>
 		</variables>
 	</xsl:template>
 
@@ -442,7 +442,7 @@
 		</responses>
 		<variables variableType="COLLECTED">
 			<name><xsl:value-of select="$responseName"/></name>
-			<responseRef><xsl:value-of select="$responseRef"/></responseRef>
+			<responseRef><xsl:value-of select="$responseName"/></responseRef>
 		</variables>
 	</xsl:template>
 
@@ -532,7 +532,7 @@
 				<xsl:value-of select="$nameOutVariable"/>
 			</name>
 			<value>
-				<xsl:call-template name="replaceVariablesInFormula">
+				<xsl:call-template name="enojs:replaceVariablesInFormula">
 					<xsl:with-param name="formula" select="$variableCalculation"/>
 					<xsl:with-param name="variables" select="$idVariables"/>
 				</xsl:call-template>
