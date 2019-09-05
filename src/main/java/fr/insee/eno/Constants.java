@@ -36,6 +36,7 @@ public final class Constants {
 	
 	// ----- Ref
 	public static final String PARAMETERS_XML = "parameters.xml";
+	public static final Object METADONNEES = "metadonnees.xml";
 	
 	// ----- XSL Parameters path
 	public static final String CONFIG_DDI2FR = CONFIG_FOLDER + "/ddi2fr.xml";
@@ -51,6 +52,7 @@ public final class Constants {
 	public static final String DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
 	public static final String PARAMETERS_FILE = "/" + PARAMETERS_XML;
 	public static final String UTIL_DDI_TITLING_XSL = UTIL_FOLDER_PATH + "/ddi/titling.xsl";
+	public static final String UTIL_DDI_MAPPING_XSL = UTIL_FOLDER_PATH + "/ddi/mapping.xsl";
 	public static final String UTIL_POGUES_XML_SUPP_GOTO_XSL = UTIL_FOLDER_PATH + "/pogues-xml/2suppressionGoto.xsl";
 	public static final String UTIL_POGUES_XML_MERGE_ITE_XSL = UTIL_FOLDER_PATH + "/pogues-xml/tweak-to-merge-equivalent-ite.xsl";
 	public static final String UTIL_POGUES_XML_GOTO_ITE_XSL = UTIL_FOLDER_PATH + "/pogues-xml/goto-2-if-then-else.xsl";
@@ -60,8 +62,8 @@ public final class Constants {
 	public static final String UTIL_FODS_PREFORMATTING_XSL = UTIL_FOLDER_PATH + "/fods/preformatting.xsl";
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
 	public static final String UTIL_DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
-	public static final String BROWSING_FR_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/fr/browsing.xsl";
-	public static final String BROWSING_JS_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/js/browsing.xsl";
+	
+	
 //	public static final String PROPERTIES_FILE_FR = CONFIG_FOLDER + "/ddi2fr.xml";
 //	public static final String PROPERTIES_FILE_ODT = CONFIG_FOLDER + "/ddi2odt.xml";
 //	public static final String PROPERTIES_FILE_PDF = CONFIG_FOLDER + "/ddi2pdf.xml";
@@ -125,19 +127,33 @@ public final class Constants {
 	public static final String FODS_2_XML_XSL = TRANSFORMATIONS_FOLDER + "/fods2xml.xsl";
 	public static final String XML_2_XSL_XSL = TRANSFORMATIONS_FOLDER + "/xml2xsl.xsl";
 	
+	// ---------- Post-processing files
 	public static final String OUPUTS_FOLDER = "/xslt/outputs/pdf";
-	public static final String OUPUTS_FOLDER_2 = "/xslt/util/pdf";
-	public static final String OUPUTS_FOLDER_JS = "/xslt/util/js";
+	public static final String POST_PROCESSING_FOLDER_PDF = "/xslt/util/pdf";
+	public static final String POST_PROCESSING_FOLDER_JS = "/xslt/util/js";
+	public static final String POST_PROCESSING_FOLDER_FR = "/xslt/util/fr";
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF =  OUPUTS_FOLDER + "/publipostage.xsl";
-	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2 =  OUPUTS_FOLDER_2 + "/mailing-vtl.xsl";
-	public static final String TRANSFORMATIONS_SPECIF_TREATMENT_FO_4PDF =  "/pdf-specific-treatment.xsl";
-	public static final String TRANSFORMATIONS_ACCOMPANYING_MAILS_FO_4PDF =  OUPUTS_FOLDER_2 + "/accompanying-mails.xsl";
-	public static final String TRANSFORMATIONS_COVER_PAGE_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-cover-page.xsl";
-	public static final String TRANSFORMATIONS_END_QUESTION_FO_4PDF =  OUPUTS_FOLDER_2 + "/insert-end-questions.xsl";
-	public static final String TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF =  OUPUTS_FOLDER_2 + "/edit-structure-page.xsl";
-	public static final String STATIC_PAGES = OUPUTS_FOLDER_2 +"/static-pages.fo";
-	public static final String TRANSFORMATIONS_SORT_COMPONENTS_JS = OUPUTS_FOLDER_JS + "/sort-components.xsl";
-	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS = OUPUTS_FOLDER_JS + "/externalize-variables.xsl";
+	// ------------ PDF -----------
+	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2 =  POST_PROCESSING_FOLDER_PDF + "/mailing-vtl.xsl";
+	public static final String TRANSFORMATIONS_SPECIF_TREATMENT_FO_4PDF =  POST_PROCESSING_FOLDER_PDF +"/pdf-specific-treatment.xsl";
+	public static final String TRANSFORMATIONS_ACCOMPANYING_MAILS_FO_4PDF =  POST_PROCESSING_FOLDER_PDF + "/accompanying-mails.xsl";
+	public static final String TRANSFORMATIONS_COVER_PAGE_FO_4PDF =  POST_PROCESSING_FOLDER_PDF + "/insert-cover-page.xsl";
+	public static final String TRANSFORMATIONS_END_QUESTION_FO_4PDF =  POST_PROCESSING_FOLDER_PDF + "/insert-end-questions.xsl";
+	public static final String TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF =  POST_PROCESSING_FOLDER_PDF + "/edit-structure-page.xsl";
+	// ------------ JS -----------
+	public static final String TRANSFORMATIONS_SORT_COMPONENTS_JS = POST_PROCESSING_FOLDER_JS + "/sort-components.xsl";
+	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS = POST_PROCESSING_FOLDER_JS + "/externalize-variables.xsl";
+	// ------------ FR -----------
+	public static final String UTIL_FR_BROWSING_XSL = POST_PROCESSING_FOLDER_FR + "/browsing.xsl";
+	public static final String UTIL_FR_FIX_ADHERENCE_XSL = POST_PROCESSING_FOLDER_FR + "/coltrane.xsl";
+	public static final String UTIL_FR_EDIT_PATRON_XSL = POST_PROCESSING_FOLDER_FR + "/edit-patron.xsl";
+	public static final String UTIL_FR_IDENTIFICATION_XSL = POST_PROCESSING_FOLDER_FR + "/identification.xsl";
+	public static final String UTIL_FR_INSERT_END_XSL = POST_PROCESSING_FOLDER_FR + "/insert-end.xsl";
+	public static final String UTIL_FR_INSERT_GENERIC_QUESTIONS_XSL = POST_PROCESSING_FOLDER_FR + "/insert-generic-questions.xsl";
+	public static final String UTIL_FR_INSERT_WELCOME_XSL = POST_PROCESSING_FOLDER_FR + "/insert-welcome.xsl";
+	public static final String UTIL_FR_MODELE_COLTRANE_XSL = POST_PROCESSING_FOLDER_FR + "/model-coltrane.xsl";
+	public static final String UTIL_FR_SPECIFIC_TREATMENT_XSL = POST_PROCESSING_FOLDER_FR + "/fr-specific-treatment.xsl";
+	
 	// ---------- Temporary file system
 	
 	// ----- Folders
@@ -159,6 +175,9 @@ public final class Constants {
 	//public static final File TEMP_NULL_TMP = getFileOrDirectoryFromPath(SUB_TEMP_FOLDER + "/null.tmp");
 	public static File tEMP_NULL_TMP (String sUB_TEMP_FOLDER){
 		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/null.tmp");
+	}
+	public static File tEMP_MAPPING_TMP (String sUB_TEMP_FOLDER){
+		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/mapping.xml");
 	}
 	public static final File TEMP_PREFORMATE_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/preformate.tmp");
 //	public static File tEMP_PREFORMATE_TMP (String sUB_TEMP_FOLDER) {
@@ -284,14 +303,14 @@ public final class Constants {
 
 	//// Xsl stylesheets used in DDIPreprocessing
 
-	
+	// File Extension 
 	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
 	public static final String MW_EXTENSION = "-mw.tmp";
 	public static final String FINAL_EXTENSION = "-final.tmp";
 	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
 	
-
+	// PDF
 	public static final String ACCOMPANYING_MAILS_FO_EXTENSION = "-accompanying-mails.fo";
 	public static final String COVER_PAGE_FO_EXTENSION = "-cover-page.fo";
 	public static final String EDIT_STRUCTURE_FO_EXTENSION = "-edit-structure.fo";
@@ -301,8 +320,22 @@ public final class Constants {
 	public static final String FINAL_PDF_EXTENSION = "-final-out.fo";
 	//public static final String CUSTOM_FO_EXTENSION = "-out.fo";
 	public static final String MAILING_FO_EXTENSION = "-mailing-vtl.fo";
+	
+	// JS
 	public static final String SORT_COMPONENTS_JS_EXTENSION = "-sorted.xml";
 	public static final String FINAL_JS_EXTENSION = "-lunatic.xml";
+	
+	// FR
+	public static final String BROWSING_FR_EXTENSION = "-browsing.xhtml";
+	public static final String EDIT_PATRON_FR_EXTENSION = "-edit-patron.xhtml";
+	public static final String FIX_ADHERENCE_FR_EXTENSION = "-fix-adherence.xhtml";
+	public static final String IDENTIFICATION_FR_EXTENSION = "-identification.xhtml";
+	public static final String INSERT_END_FR_EXTENSION = "-insert-end.xhtml";
+	public static final String INSERT_WELCOME_FR_EXTENSION = "-insert-welcome.xhtml";
+	public static final String INSERT_GENERIC_QUESTIONS_FR_EXTENSION = "-insert-generic-questions.xhtml";
+	public static final String MODELE_COLTRANE_FR_EXTENSION = "-modele-coltrane.xhtml";
+	public static final String SPECIFIC_TREATMENT_FR_EXTENSION = "-specific-treatment.xhtml";
+	// JS
 	
 	//public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
 		public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
@@ -313,7 +346,11 @@ public final class Constants {
 			return sUB_TEMP_FOLDER + "/odt";
 		}
 		
-		//public static final String TEMP_PDF_FOLDER = SUB_TEMP_FOLDER + "/pdf";
+		//public static final String TEMP_PDF_FOLDER = SUB_TEMP_FOLDER + "/js";
+		public static String tEMP_JS_FOLDER(String sUB_TEMP_FOLDER){
+			return sUB_TEMP_FOLDER+ "/js";
+		}
+		
 		public static String tEMP_PDF_FOLDER(String sUB_TEMP_FOLDER){
 			return sUB_TEMP_FOLDER+ "/pdf";
 		}
@@ -326,6 +363,7 @@ public final class Constants {
 			return sUB_TEMP_FOLDER + "/pogues-xml";
 		}
 	public static final String BASIC_FORM_TMP_FILENAME = "basic-form.tmp";
+	
 
 	
 	
