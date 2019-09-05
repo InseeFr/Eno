@@ -53,7 +53,7 @@ public class DDI2FRGenerator implements Generator {
 
 		InputStream isOutputBasicFormPath = FileUtils.openInputStream(new File(outputBasicFormPath));
 		OutputStream osOutputForm = FileUtils.openOutputStream(new File(outputForm));
-		InputStream isBROWSING_TEMPLATE_XSL = Constants.getInputStreamFromPath(Constants.BROWSING_FR_TEMPLATE_XSL);
+		InputStream isBROWSING_TEMPLATE_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_BROWSING_XSL);
 		saxonService.transformBrowsingDDI2FR(isOutputBasicFormPath, osOutputForm, isBROWSING_TEMPLATE_XSL,
 				Constants.LABEL_FOLDER);
 		isOutputBasicFormPath.close();

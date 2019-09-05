@@ -206,6 +206,26 @@ public class XslTransformation {
 		transformer.setParameter(XslParameters.DEREFERENCING_OUTPUT_FOLDER, outputFolderParameter);
 		xslTransform(transformer, input, output);
 	}
+	
+	public void transformMapping(InputStream input, InputStream xslSheet, OutputStream output,
+			byte[] parameters) throws Exception {
+		InputStream parametersIS = null;
+		logger.debug("Using the Mapping transformer");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS);
+		if (parameters != null) {
+			parametersIS = new ByteArrayInputStream(parameters);
+			Source source = new StreamSource(parametersIS);
+			transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_NODE, source);
+		}
+		xslTransform(transformer, input, output);
+		if (parameters != null) {
+			parametersIS.close();
+		}
+	}
 
 	/**
 	 * Titling Transformer initialization with its parameters
@@ -381,6 +401,91 @@ public class XslTransformation {
 			parametersIS.close();
 		}
 	}
+	
+	/* POST transformations */
+	// FR
+	
+	public void transformBrowsingFr(InputStream inputFile, OutputStream outputFile, InputStream xslSheet) throws Exception {
+		logger.info("Post-processing browing for FR transformation.");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		transformer.setParameter(XslParameters.IN2OUT_LABELS_FOLDER, Constants.LABELS_FOLDER);
+		logger.debug(String.format("Transformer parameter is: %s",
+				transformer.getParameter(XslParameters.IN2OUT_LABELS_FOLDER)));
+		xslTransform(transformer, inputFile, outputFile);
+	}
+	
+	public void transformModelColtraneFr(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, InputStream mappingFile) throws Exception {
+		logger.info("Post-processing for FR transformation with mapping.xml file.");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		if (mappingFile != null) {
+			Source source = new StreamSource(mappingFile);
+			transformer.setParameter(XslParameters.IN2OUT_MAPPING_FILE_NODE, source);
+		}
+		logger.debug(String.format("Transformer parameter is: %s",
+				transformer.getParameter(XslParameters.IN2OUT_MAPPING_FILE_NODE)));
+		xslTransform(transformer, inputFile, outputFile);
+				
+		
+	}
+	
+	public void transformWithMetadonnee(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters, InputStream metadonnees)
+			throws Exception {
+		InputStream parametersIS = null;
+		logger.info("Post-processing for FR transformation with parameter file and metadonnee file");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2FR);
+		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS);
+		transformer.setParameter(XslParameters.IN2OUT_METADONNEE_FILE, Constants.METADONNEES);
+		if (metadonnees != null) {
+			Source source = new StreamSource(metadonnees);
+			transformer.setParameter(XslParameters.IN2OUT_METADONNEE_NODE, source);
+		}
+		if (parameters != null) {
+			parametersIS = new ByteArrayInputStream(parameters);
+			Source source = new StreamSource(parametersIS);
+			transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_NODE, source);
+		}
+		transformer.setErrorListener(new EnoErrorListener());
+		xslTransform(transformer, inputFile, outputFile);
+	}
+	
+	public void transformFRToFRSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
+			throws Exception {
+		InputStream parametersIS = null;
+		logger.info("Post-processing for FR transformation with parameter file");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2FR);
+		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS);
+		if (parameters != null) {
+			parametersIS = new ByteArrayInputStream(parameters);
+			Source source = new StreamSource(parametersIS);
+			transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_NODE, source);
+		}
+		transformer.setErrorListener(new EnoErrorListener());
+		xslTransform(transformer, inputFile, outputFile);
+	}
+	
+	public void transformSimple(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
+			throws Exception {
+		logger.info("Simple post-processing for FR transformation");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		xslTransform(transformer, inputFile, outputFile);
+	}
+	
+	// JS
 	
 	public void transformJSToJSPost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
 			throws Exception {

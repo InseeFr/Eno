@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 
 import fr.insee.eno.generation.Generator;
 import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
 import fr.insee.eno.utils.FolderCleaner;
 
@@ -68,12 +69,23 @@ public class GenerationService {
 		String tempFolder = System.getProperty("java.io.tmpdir") + "/" + surveyName;
 		logger.debug("Temp folder: " + tempFolder);
 		cleanTempFolder(surveyName);
-
-		File preprocessResultFileName = this.preprocessors[0].process(inputFile, parameters, surveyName,
-				generator.in2out());
+		File preprocessResultFileName = null;
+		
+		if(this.preprocessors[0].getClass()==DDIMappingPreprocessor.class) {
+			this.preprocessors[0].process(inputFile, parameters, surveyName,generator.in2out());
+			preprocessResultFileName = inputFile;
+		}
+		else {
+			preprocessResultFileName = this.preprocessors[0].process(inputFile, parameters, surveyName,generator.in2out());
+		}				
 		for (int i = 1; i < preprocessors.length; i++) {
-			preprocessResultFileName = this.preprocessors[0].process(preprocessResultFileName, parameters, surveyName,
+			if(this.preprocessors[i].getClass()==DDIMappingPreprocessor.class) {
+				this.preprocessors[i].process(inputFile, parameters, surveyName,generator.in2out());
+			}
+			else{
+			preprocessResultFileName = this.preprocessors[i].process(preprocessResultFileName, parameters, surveyName,
 					generator.in2out());
+			}
 		}
 
 		File generatedForm = this.generator.generate(preprocessResultFileName, parameters, surveyName);
