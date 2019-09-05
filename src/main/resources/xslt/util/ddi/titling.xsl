@@ -207,7 +207,7 @@
             select="$style/Title/Question/Level[@name=$question-seq-level]"/>
 
         <xsl:variable name="parent-number">
-            <xsl:if test="$styleQuest/NumParent !='N'">
+            <xsl:if test="not(boolean($styleQuest/NumParent))">
                 <xsl:apply-templates
                     select="ancestor::d:Sequence[d:TypeOfSequence='module' or d:TypeOfSequence='submodule' or d:TypeOfSequence='group']
                     [1]"
@@ -300,7 +300,7 @@
             </xsl:if>
         </xsl:variable>
         <xsl:variable name="parent-number">
-            <xsl:if test="$seq-style/NumParent !='N'">
+            <xsl:if test="not(boolean($seq-style/NumParent))">
                 <xsl:apply-templates
                     select="ancestor::d:Sequence[d:TypeOfSequence/text()=$parent-level]"
                     mode="calculate-number"/>
