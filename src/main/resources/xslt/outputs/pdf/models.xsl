@@ -41,18 +41,18 @@
 	</xd:doc>
 	<xsl:variable name="orientation">
 		<xsl:choose>
-			<xsl:when test="$parameters//Format/Orientation != ''">
-				<xsl:value-of select="$parameters//Format/Orientation"/>
+			<xsl:when test="$parameters//pdf-parameters/Format/Orientation != ''">
+				<xsl:value-of select="$parameters//pdf-parameters/Format/Orientation"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="$properties//Format/Orientation"/>
+				<xsl:value-of select="$properties//pdf-parameters/Format/Orientation"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
 	<xsl:variable name="column-count">
 		<xsl:choose>
-			<xsl:when test="$parameters//Format/Columns != ''">
-				<xsl:value-of select="$parameters//Format/Columns"/>
+			<xsl:when test="$parameters//pdf-parameters/Format/Columns != ''">
+				<xsl:value-of select="$parameters//pdf-parameters/Format/Columns"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="$properties//Format/Columns"/>
@@ -61,8 +61,8 @@
 	</xsl:variable>
 	<xsl:variable name="roster-defaultsize">
 		<xsl:choose>
-			<xsl:when test="$parameters//Roster/Row/DefaultSize != ''">
-				<xsl:value-of select="$parameters//Roster/Row/DefaultSize"/>
+			<xsl:when test="$parameters//pdf-parameters/Roster/Row/DefaultSize != ''">
+				<xsl:value-of select="$parameters//pdf-parameters/Roster/Row/DefaultSize"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="$properties//Roster/Row/DefaultSize"/>
@@ -71,18 +71,18 @@
 	</xsl:variable>
 	<xsl:variable name="table-defaultsize">
 		<xsl:choose>
-			<xsl:when test="$parameters//Table/Row/DefaultSize != ''">
-				<xsl:value-of select="$parameters//Table/Row/DefaultSize"/>
+			<xsl:when test="$parameters//pdf-parameters/Table/Row/DefaultSize != ''">
+				<xsl:value-of select="$parameters//pdf-parameters/Table/Row/DefaultSize"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="$properties//Table/Row/DefaultSize"/>
+				<xsl:value-of select="$properties//pdf-parameters/Table/Row/DefaultSize"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
 	<xsl:variable name="textarea-defaultsize">
 		<xsl:choose>
-			<xsl:when test="$parameters//TextArea/Row/DefaultSize != ''">
-				<xsl:value-of select="$parameters//TextArea/Row/DefaultSize"/>
+			<xsl:when test="$parameters//pdf-parameters/TextArea/Row/DefaultSize != ''">
+				<xsl:value-of select="$parameters//pdf-parameters/TextArea/Row/DefaultSize"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="$properties//TextArea/Row/DefaultSize"/>
