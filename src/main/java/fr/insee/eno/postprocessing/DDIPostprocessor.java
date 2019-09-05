@@ -15,6 +15,7 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * DDI postprocessor.
  */
+@Deprecated
 public class DDIPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDIPostprocessor.class);
