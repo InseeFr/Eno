@@ -6,6 +6,7 @@
 	xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
 	xmlns:eno="http://xml.insee.fr/apps/eno" 
 	xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
+	xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2"
 	xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
 	exclude-result-prefixes="xs fn xd eno enojs" version="2.0">
 	
@@ -26,6 +27,7 @@
 		</xd:desc>
 	</xd:doc>
 	
+	<xsl:variable name="modele-questionnaire" select="//d:Instrument/r:ID"/>
 	
 	<xsl:variable name="varName" select="parent"/>
 	
@@ -74,7 +76,7 @@
 		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="id" select="replace(enojs:get-name($source-context),'Sequence-','')"/>
 		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
-		<Questionnaire id="{$id}">
+		<Questionnaire id="{$id}" modele="{$modele-questionnaire}">
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
