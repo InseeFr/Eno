@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    
+    <xs:element name="Pipeline" type="Pipeline"/>
+    
+    <xs:complexType name="Pipeline">
+        <xs:sequence>
+            <xs:element name="InFormat" type="InFormat"/>
+            <xs:element name="OutFormat" type="OutFormat"/>
+            <xs:sequence>
+                <xs:element name="pre-processing" type="PreProcessing" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:sequence>
+                <xs:element name="post-processing" type="PostProcessing" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:element name="VerrueDDI" type="xs:boolean" default="false"/>
+            <xs:element name="VerrueFR" type="xs:boolean" default="false"/>
+            <xs:element name="VerruePDF" type="xs:boolean" default="false"/>
+            <xs:element name="VerrueODT" type="xs:boolean" default="false"/>
+            <xs:element name="VerrueJS" type="xs:boolean" default="false"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="InFormat">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ddi"/>
+            <xs:enumeration value="pogues-xml"/>
+            <!-- Pour les entreprises emb -->
+            <xs:enumeration value="fr"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="OutFormat">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ddi"/>
+            <xs:enumeration value="pogues-xml"/>
+            <xs:enumeration value="fr"/>
+            <xs:enumeration value="pdf"/>
+            <xs:enumeration value="odt"/>
+            <xs:enumeration value="js"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="PreProcessing">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ddi-dereferencing"/>
+            <xs:enumeration value="ddi-cleaning"/>
+            <xs:enumeration value="ddi-titling"/>
+            <xs:enumeration value="pogues-xml-goto-2-ite"/>
+            <xs:enumeration value="pogues-xml-suppression-goto"/>
+            <xs:enumeration value="pogues-xml-tweak-to-merge-equivalent-ite"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="PostProcessing">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="none"/>
+            <xs:enumeration value="ddi-markdownToXhtml"/>
+            
+            <xs:enumeration value="ddi-specificTreatment"/>
+            <xs:enumeration value="pdf-specificTreatment"/>
+            <xs:enumeration value="fr-specificTreatment"/>
+            <xs:enumeration value="js-specificTreatment"/>
+            <xs:enumeration value="odt-specificTreatment"/>
+            
+            <xs:enumeration value="pdf-editStructurePages"/>
+            <xs:enumeration value="pdf-insertAccompanyingMails"/>
+            <xs:enumeration value="pdf-insertCoverPage"/>
+            <xs:enumeration value="pdf-insertEndQuestion"/>
+            <xs:enumeration value="pdf-mailing"/>
+            <xs:enumeration value="pdf-tableColumn"/>
+            
+            <!-- pas sur de mettre des posts prcossings obligatoire... -->
+            <xs:enumeration value="js-sortComponents"/>
+            <xs:enumeration value="js-externalizeVariables"/>
+        
+            <xs:enumeration value="fr-insert-generic-questions"/>
+            <xs:enumeration value="fr-browsing"/>
+            <xs:enumeration value="fr-modele-coltrane"/>
+            <!-- patron-coleman/coltrane -->
+            <xs:enumeration value="fr-edit-patron"/>
+            <xs:enumeration value="fr-identification"/>
+            <xs:enumeration value="fr-insert-welcome"/>
+            <xs:enumeration value="fr-insert-end"/>
+            <!-- coltrane.xsl : adherence with eXist-->
+            <xs:enumeration value="fr-fix-adherence"/>
+            
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>
