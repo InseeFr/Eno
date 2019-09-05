@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadonnees>
+  <Identifiant>TESTE</Identifiant>
+  <LibelleCourtEnquete>TESTE</LibelleCourtEnquete>
+  <LibelleCourtEnqueteMillesime>TESTE2018</LibelleCourtEnqueteMillesime>
+  <Frequence>Pluriannuelle</Frequence>
+  <AnneeReference>2018</AnneeReference>
+  <Idvague>01</Idvague>
+  <DateOuverture>6/05/2022</DateOuverture>
+  <DateFermeture>31/05/2022</DateFermeture>
+  <BddVille>Paris</BddVille>
+  <BddDateOuverture>6/05/2022</BddDateOuverture>
+  <BddArticleServiceProducteur>L’</BddArticleServiceProducteur>
+  <BddNomServiceProducteur>[Surchargeable] - Institut national de la statistique et des études économiques (Insee)</BddNomServiceProducteur>
+  <BddNomServiceProducteurCourt>l’Insee</BddNomServiceProducteurCourt>
+  <BddObjectifsLongs>auprès d'individus. Vous pouvez surcharger les objectifs longs de l'enquête.</BddObjectifsLongs>
+  <BddCaractereObligatoire>OUI</BddCaractereObligatoire>
+  <BddTypeUniteEnquetees>de salariés de l’État, travaillant pour des ministères ou des établissements publics nationaux, quel que soit leur statut</BddTypeUniteEnquetees>
+  <BddTempsPassation>une vingtaine de minutes - [Surchargeable] - </BddTempsPassation>
+  <BddAdresseInternetEnquete>https://www.insee.fr</BddAdresseInternetEnquete>
+  <BddURLRenseignement>de l’Insee</BddURLRenseignement>
+  <BddURLDiffusion>www.insee/xxx.fr</BddURLDiffusion>	
+  <BddServiceCollecteurSignataireFonction>Le directeur - [Surchargeable]</BddServiceCollecteurSignataireFonction>
+  <BddServiceCollecteurSignataireNom>Mr Dupont - [Surchargeable]</BddServiceCollecteurSignataireNom>	
+  <BddServiceCollecteurSignataireSexe>M</BddServiceCollecteurSignataireSexe>
+  <BddNumeroVisa>2019XXXXXX</BddNumeroVisa>
+  <BddMinistereTutelle>Ministre de l’économie et des finances</BddMinistereTutelle>
+  <BddAnneeCollecte>2022</BddAnneeCollecte>
+  <BddParutionJO>oui</BddParutionJO>
+  <BddDateParutionJO>25 juillet 2019 - [Surchargeable] - </BddDateParutionJO>	
+  <BddNomServiceRecours>Insee Grand Est – établissement de Nancy – PENM – 15 rue du Général Hulot – CS 54229 – 54042 Nancy cedex - [Surchargeable] - </BddNomServiceRecours> 
+  <BddStatutEnquete>vous</BddStatutEnquete>
+  <BddMetropole>non</BddMetropole>
+  <BddTypeUniteEnquetee>de 33 000 personnes - [Surchargeable] -</BddTypeUniteEnquetee>
+  <BddRapprochementDonnees>oui</BddRapprochementDonnees>
+  <LibelleEnquete>Enquête de test - [Surchargeable] - </LibelleEnquete>
+  <ObjectifsCourts>L’enquête auprès des individus a pour objectif de recueillir des informations. - [Surchargeable] -</ObjectifsCourts>
+</metadonnees>
