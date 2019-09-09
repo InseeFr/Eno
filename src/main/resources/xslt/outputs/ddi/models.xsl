@@ -1182,8 +1182,8 @@
     <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
     <xsl:template match="driver-ResponseDomain/QuestionOtherDetails" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:variable name="clarificationExp" select="substring-after(enoddi33:get-expression($source-context), '=')"/>
-        <xsl:variable name="clarificationVal" select='normalize-space(replace($clarificationExp,"&apos;",""))'/>
+        <xsl:variable name="clarificationExp" select="enoddi33:get-expression($source-context)"/>
+        <xsl:variable name="clarificationVal" select='normalize-space(replace(substring-after($clarificationExp, "="),"&apos;",""))'/>
         <d:StructuredMixedResponseDomain>
 	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMRD', .)" tunnel="yes"/>
