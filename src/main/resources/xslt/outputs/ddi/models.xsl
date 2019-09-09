@@ -1141,7 +1141,7 @@
 				</d:DomainSpecificValue>
 				<r:CodeReference>
 					<r:Agency><xsl:value-of select="$agency"/></r:Agency>
-					<r:ID><xsl:value-of select="$idList"/>-<xsl:value-of select="$clarificationVal"/></r:ID>
+				    <r:ID><xsl:value-of select="enoddi33:get-clarified-code($source-context,$idList,$clarificationVal)"/></r:ID>
 					<r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
 					<r:TypeOfObject>Code</r:TypeOfObject>
 				</r:CodeReference>
@@ -1183,11 +1183,12 @@
     <xsl:template match="driver-ResponseDomain/QuestionOtherDetails" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:variable name="clarificationExp" select="substring-after(enoddi33:get-expression($source-context), '=')"/>
+        <xsl:variable name="clarificationVal" select='normalize-space(replace($clarificationExp,"&apos;",""))'/>
         <d:StructuredMixedResponseDomain>
 	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMRD', .)" tunnel="yes"/>
                 <xsl:with-param name="idList" select="enoddi33:get-code-list-id($source-context)" tunnel="yes"/>
-                <xsl:with-param name="clarificationVal" select='normalize-space(replace($clarificationExp,"&apos;",""))' tunnel="yes"/>
+                <xsl:with-param name="clarificationVal" select="$clarificationVal" tunnel="yes"/>
 			</xsl:apply-templates>
 		</d:StructuredMixedResponseDomain>
 	</xsl:template>
