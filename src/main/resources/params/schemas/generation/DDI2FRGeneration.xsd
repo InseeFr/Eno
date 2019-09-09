@@ -7,17 +7,17 @@
         <xs:complexContent>
             <xs:extension base="Generation">
                 <xs:sequence>
-                    <xs:element name="NumericExample" type="YesNo" default="No"/>
+                    <xs:element name="NumericExample" type="xs:boolean" default="false"/>
                     <xs:element name="Deblocage" type="xs:boolean" default="false"/>
+                    <xs:element name="LengthOfLongTable" type="LengthOfLongTable" maxOccurs="1"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     
-    <xs:simpleType name="YesNo">
-        <xs:restriction base="xs:token">
-            <xs:enumeration value="Yes"/>
-            <xs:enumeration value="No"/>
-        </xs:restriction>
-    </xs:simpleType>
+    <xs:complexType name="LengthOfLongTable">
+        <xs:sequence>
+            <xs:element name="Length" type="xs:integer" default="7" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

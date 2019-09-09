@@ -6,7 +6,7 @@
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
     xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2"
-    exclude-result-prefixes="xd eno enofr" version="2.0">
+    exclude-result-prefixes="xd eno enofr d r" version="2.0">
 
 <!--    <xsl:import href="../../transformations/ddi2fr/ddi2fr.xsl"/>-->
 

@@ -8,7 +8,7 @@
 	xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
 	xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2"
 	xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
-	exclude-result-prefixes="xs fn xd eno enojs" version="2.0">
+	exclude-result-prefixes="xs fn xd eno enojs d r" version="2.0">
 	
 	<xsl:param name="properties-file"/>
 	<xsl:param name="parameters-file"/>

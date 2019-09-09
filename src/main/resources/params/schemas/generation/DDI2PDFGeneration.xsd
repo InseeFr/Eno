@@ -38,6 +38,18 @@
         </xs:sequence>
     </xs:complexType>
     
+    <xs:complexType name="TextArea">
+        <xs:sequence>
+            <xs:element name="Row" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DefaultSize" type="xs:int" default="3" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
     <xs:complexType name="Table">
         <xs:sequence>
             <xs:element name="Row" maxOccurs="1">
@@ -50,17 +62,7 @@
         </xs:sequence>
     </xs:complexType>
     
-    <xs:complexType name="TextArea">
-        <xs:sequence>
-            <xs:element name="Row" maxOccurs="1">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="DefaultSize" type="xs:int" default="3" maxOccurs="1"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
+   
     
     <xs:complexType name="Capture">
         <xs:sequence>

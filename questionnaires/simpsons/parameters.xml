@@ -18,31 +18,36 @@
   </AccompanyingMails>
   <StudyUnit>household</StudyUnit>
   <Title>
-    <Browsing>module</Browsing>
+    <Browsing>template</Browsing>
       <Sequence>
-      <Level name="template"/>
       <Level name="module">
-        <PreSeq/>
-        <NumParent>N</NumParent>
-        <PostNumParentSeq/>
+        <PreSeq></PreSeq>
+        <NumParent>false</NumParent>
+        <PostNumParentSeq></PostNumParentSeq>
         <StyleNumSeq>I</StyleNumSeq>
         <PostNumSeq> - </PostNumSeq>
       </Level>
-      <Level name="submodule"/>
+      <Level name="submodule">
+        <PreSeq></PreSeq>/>
+        <NumParent>false</NumParent>
+        <PostNumParentSeq></PostNumParentSeq>
+        <StyleNumSeq>I</StyleNumSeq>
+        <PostNumSeq> - </PostNumSeq>
+      </Level>
       </Sequence>
     <Question>
       <Level name="module">
         <PreQuest>&#x27A1; </PreQuest>
-        <NumParent>N</NumParent>
-        <PostNumParentQuest/>
+        <NumParent>false</NumParent>
+        <PostNumParentQuest></PostNumParentQuest>
         <StyleNumQuest>1</StyleNumQuest>
         <PostNumQuest>. </PostNumQuest>
       </Level>
       <Level name="submodule">
         <PreQuest>&#x27A1; </PreQuest>
-        <NumParent>N</NumParent>
-        <PostNumParentQuest/>
-        <StyleNumQuest>1</StyleNumQuest>
+        <NumParent>false</NumParent>
+        <PostNumParentQuest></PostNumParentQuest>
+        <StyleNumQuest>a</StyleNumQuest>
         <PostNumQuest>. </PostNumQuest>
       </Level>
       </Question>
