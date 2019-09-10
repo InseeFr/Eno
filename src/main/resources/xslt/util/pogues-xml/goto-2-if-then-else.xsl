@@ -105,7 +105,7 @@
     </xd:doc>
     <xsl:variable name="list_goto" as="node()">
         <poguesGoto:GotoList>
-            <xsl:for-each select="//pogues:FlowControl">
+            <xsl:for-each select="//pogues:FlowControl[not(@flowControlType)]">
                 <xsl:variable name="official-To" select="pogues:IfTrue"/>
                 
                 <poguesGoto:gotoValue start="after" flowid="{@id}">
