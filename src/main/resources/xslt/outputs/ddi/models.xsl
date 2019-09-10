@@ -1142,7 +1142,7 @@
                 </d:DomainSpecificValue>
             	<r:CodeReference>
 	            	<r:Agency><xsl:value-of select="$agency"/></r:Agency>
-					<r:ID><xsl:value-of select="$idList"/>-<xsl:value-of select="$clarificationVal"/></r:ID>
+                    <r:ID><xsl:value-of select="enoddi33:get-clarified-code($source-context,$idList,$clarificationVal)"/></r:ID>
 					<r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
 	            	<r:TypeOfObject>Code</r:TypeOfObject>
             	</r:CodeReference>
@@ -1195,7 +1195,7 @@
 				<r:CodeReference>
 					<r:Agency><xsl:value-of select="$agency"/></r:Agency>
 					<xsl:choose>
-						<xsl:when test="$idCodeList != '' "><r:ID><xsl:value-of select="$idCodeList"/>-<xsl:value-of select="$clarificationVal"/></r:ID></xsl:when>
+					    <xsl:when test="$idCodeList != '' "><r:ID><xsl:value-of select="enoddi33:get-clarified-code($source-context,$idCodeList,$clarificationVal)"/></r:ID></xsl:when>
 						<xsl:otherwise><r:ID>INSEE-COMMUN-CL-Booleen-<xsl:value-of select="$clarificationVal"/></r:ID></xsl:otherwise>
 					</xsl:choose>
 					<r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
@@ -1216,27 +1216,29 @@
     <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
     <xsl:template match="driver-ResponseDomain/QuestionOtherDetails" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:variable name="clarificationExp" select="substring-after(enoddi33:get-clarification-expression($source-context), '=')"/>
+        <xsl:variable name="clarificationExp" select="enoddi33:get-clarification-expression($source-context)"/>
+        <xsl:variable name="clarificationVal" select='normalize-space(replace(substring-after($clarificationExp, "="),"&apos;",""))'/>
         <d:StructuredMixedResponseDomain>
-	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMRD', .)" tunnel="yes"/>
                 <xsl:with-param name="idList" select="enoddi33:get-code-list-id($source-context)" tunnel="yes"/>
-                <xsl:with-param name="clarificationVal" select='normalize-space(replace($clarificationExp,"&apos;",""))' tunnel="yes"/>
-        	</xsl:apply-templates>
-    	</d:StructuredMixedResponseDomain>
+                <xsl:with-param name="clarificationVal" select="$clarificationVal" tunnel="yes"/>
+            </xsl:apply-templates>
+        </d:StructuredMixedResponseDomain>
     </xsl:template>
     
     <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
     <xsl:template match="driver-ResponseDomain/QuestionDynamicTable | driver-ResponseDomain/QuestionTable | driver-ResponseDomain/QuestionMultipleChoice" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- If clarification exist must keep expression value -->
-        <xsl:variable name="clarificationExp" select="substring-after(enoddi33:get-clarification-expression($source-context), '=')"/>
+        <xsl:variable name="clarificationExp" select="enoddi33:get-clarification-expression($source-context)"/>
+        <xsl:variable name="clarificationVal" select='normalize-space(replace(substring-after($clarificationExp, "="),"&apos;",""))'/>
         <xsl:variable name="clarificationResponseid" select="enoddi33:get-clarification-responseid($source-context)"/>
         <d:StructuredMixedGridResponseDomain>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMGRD', .)" tunnel="yes"/>
                 <xsl:with-param name="idCodeList" select="enoddi33:get-code-list-id($source-context)" tunnel="yes"/>
-				<xsl:with-param name="clarificationVal" select='normalize-space(replace($clarificationExp,"&apos;",""))' tunnel="yes"/>
+                <xsl:with-param name="clarificationVal" select="$clarificationVal" tunnel="yes"/>
 				<xsl:with-param name="clarificationResponseid" select='$clarificationResponseid' tunnel="yes"/>
             </xsl:apply-templates> 
         </d:StructuredMixedGridResponseDomain>
