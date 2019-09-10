@@ -107,8 +107,11 @@
                                 <xsl:element name="xsl:choose">
                                     <xsl:element name="xsl:when">
                                         <xsl:attribute name="test" select="concat('eno:is-rich-content(',$function-call,')')"/>
-                                        <xsl:element name="xsl:value-of">
-                                            <xsl:attribute name="select" select="concat('name(',$function-call,')')"/>
+                                        <xsl:element name="xsl:element">
+                                            <xsl:attribute name="name" select="concat('{name(',$function-call,')}')"/>
+                                            <xsl:element name="xsl:comment">
+                                                <xsl:attribute name="select" select="'''Input content'''"/>
+                                            </xsl:element>
                                         </xsl:element>
                                     </xsl:element>
                                     <xsl:element name="xsl:otherwise">
@@ -128,8 +131,11 @@
                                     <xsl:element name="xsl:choose">
                                         <xsl:element name="xsl:when">
                                             <xsl:attribute name="test" select="'eno:is-rich-content(.)'"/>
-                                            <xsl:element name="xsl:value-of">
-                                                <xsl:attribute name="select" select="'name(.)'"/>
+                                            <xsl:element name="xsl:element">
+                                                <xsl:attribute name="name" select="'{name(.)}'"/>
+                                                <xsl:element name="xsl:comment">
+                                                    <xsl:attribute name="select" select="'''Input content'''"/>
+                                                </xsl:element>
                                             </xsl:element>
                                         </xsl:element>
                                         <xsl:element name="xsl:otherwise">
