@@ -1294,7 +1294,7 @@
                     <xsl:value-of select="eno:serialize($alert)"/>
                 </alert>
             </xsl:if>
-            <xsl:if test="self::xf-select1 or self::xf-select">
+            <xsl:if test="self::CodeDomain or self::BooleanDomain">
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="eno:append-empty-element('ResourceItem', .)" tunnel="yes"/>
                 </xsl:apply-templates>
@@ -1727,10 +1727,13 @@
                 <xsl:when test="self::xf-output">
                     <xsl:value-of select="'xf:output'"/>
                 </xsl:when>
-                <xsl:when test="self::xf-select">
+                <xsl:when test="self::BooleanDomain">
                     <xsl:value-of select="'xf:select'"/>
                 </xsl:when>
-                <xsl:when test="self::xf-select1">
+                <xsl:when test="self::CodeDomain and $appearance='checkbox'">
+                    <xsl:value-of select="'xf:select'"/>
+                </xsl:when>
+                <xsl:when test="self::CodeDomain">
                     <xsl:value-of select="'xf:select1'"/>
                 </xsl:when>
             </xsl:choose>
@@ -1741,7 +1744,14 @@
             <xsl:attribute name="name" select="$name"/>
             <xsl:attribute name="bind" select="concat($name, '-bind')"/>
             <xsl:if test="$appearance != ''">
-                <xsl:attribute name="appearance" select="$appearance"/>
+                <xsl:choose>
+                    <xsl:when test="$appearance = 'drop-down-list'">
+                        <xsl:attribute name="appearance" select="'minimal'"/>        
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="appearance" select="'full'"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:if>
             <xsl:if test="$css-class != '' or $question-label!=''">
                 <xsl:choose>
@@ -1809,8 +1819,8 @@
                     </xsl:if>
                 </xf:alert>
             </xsl:if>
-            <xsl:if test="self::xf-select1 or self::xf-select">
-                <xsl:if test="$appearance = 'minimal'">
+            <xsl:if test="self::CodeDomain or self::BooleanDomain">
+                <xsl:if test="$appearance = 'drop-down-list'">
                     <xf:item>
                         <xf:label/>
                         <xf:value/>
@@ -1836,7 +1846,7 @@
             <!-- In this select case, if there is still something after a space in the current value, that means that 2 boxes are checked.
             We replace the value with what was after the space and that corresponds to the value of the last checked box.
             This unchecks the first box that was checked -->
-            <xsl:if test="self::xf-select">
+            <xsl:if test="self::CodeDomain and $appearance = 'checkbox'">
                 <xf:action ev:event="xforms-value-changed" if="substring-after({$instance-ancestor-label}{$name},' ') ne ''">
                     <!-- if the collected variable is in a loop, instance-ancestor helps choosing the good collected variable -->
                     <xf:setvalue ref="{$instance-ancestor-label}{$name}" value="substring-after({$instance-ancestor-label}{$name},' ')"/>
@@ -1876,7 +1886,7 @@
                 <xsl:copy-of select="$suffix" copy-namespaces="no"/>
             </xsl:element>
         </xsl:if>
-        <xsl:if test="self::xf-select1 or self::xf-select">
+        <xsl:if test="self::CodeDomain or self::BooleanDomain">
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>

@@ -927,14 +927,13 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-	<!-- Déclenche tous les xf-select de l'arbre des drivers -->
-	<xsl:template match="main//xf-select1 | main//xf-select" mode="model">
+	<xsl:template match="main//CodeDomain | main//BooleanDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
 		
 		<xsl:choose>
-			<xsl:when test="enopdf:get-appearance($source-context) = 'minimal'">
+			<xsl:when test="enopdf:get-appearance($source-context) = 'drop-down-list'">
 				<xsl:choose>
 					<xsl:when test="$no-border = 'no-border'">
 						<fo:block-container height="8mm" width="50mm">
