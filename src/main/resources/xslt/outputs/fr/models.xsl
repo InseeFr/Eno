@@ -2899,9 +2899,10 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template named:replaceVariablesInFormula.</xd:p>
-            <xd:p>It replaces variables in a all formula (Filter, ConsistencyCheck, CalculatedVariable).</xd:p>
+            <xd:p>Template named: replaceVariablesInFormula.</xd:p>
+            <xd:p>It replaces variables in a all formulas (Filter, ConsistencyCheck, CalculatedVariable, personalized text).</xd:p>
             <xd:p>"variable" -> "variableBusinessName"</xd:p>
+            <xd:p>or more complicated for numeric variables</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template name="replaceVariablesInFormula">
@@ -2928,6 +2929,7 @@
                     </xsl:for-each>
                     <xsl:value-of select="$business-name"/>
                 </xsl:variable>
+                <xsl:variable name="variable-representation" select="enofr:get-variable-representation($source-context,$current-variable)"/>
                 <xsl:call-template name="replaceVariablesInFormula">
                     <xsl:with-param name="formula" select="replace($formula,
                                                                    concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end),

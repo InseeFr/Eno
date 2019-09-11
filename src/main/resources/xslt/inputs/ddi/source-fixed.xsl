@@ -1150,6 +1150,39 @@
     </xsl:template>
 
     <xd:doc>
+        <xd:desc></xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-variable-representation">
+        <xsl:param name="variable"/>
+        
+        <xsl:variable name="variable-representation">
+            <xsl:choose>
+                <!-- collected variable -->
+                <xsl:when test="$root//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
+                    <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $variable]/l:VariableRepresentation/*)"/>
+                </xsl:when>
+                <!-- calculated variable -->
+                <xsl:when test="$root//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
+                    <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[descendant::r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable]/l:VariableRepresentation/*)"/>
+                </xsl:when>
+                <!-- external variable -->
+                <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
+                    <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[l:VariableName/r:String= $variable]/l:VariableRepresentation/*)"/>
+                </xsl:when>
+                <xsl:otherwise/>
+            </xsl:choose>    
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="$variable-representation != ''">
+                <xsl:value-of select="$variable-representation"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="'UNKNOWN'"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-instruction-by-anchor-ref.</xd:p>
             <xd:p>Retrieving an instruction based on the value of @href attribute.</xd:p>
