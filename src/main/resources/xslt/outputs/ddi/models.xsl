@@ -1057,11 +1057,10 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
     </xsl:template>
-    
+
     <xsl:template match="driver-Binding//Clarification" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
@@ -1243,7 +1242,7 @@
             </xsl:apply-templates> 
         </d:StructuredMixedGridResponseDomain>
     </xsl:template>
-    
+
     <xsl:template name="Question" match="driver-QuestionScheme//*[name() = ('QuestionMultipleChoice','QuestionTable','QuestionDynamicTable','QuestionSimple','QuestionSingleChoice','QuestionOtherDetails')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
