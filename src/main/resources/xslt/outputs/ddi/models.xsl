@@ -1196,7 +1196,7 @@
 					<r:Agency><xsl:value-of select="$agency"/></r:Agency>
 					<xsl:choose>
 					    <xsl:when test="$idCodeList != '' "><r:ID><xsl:value-of select="enoddi33:get-clarified-code($source-context,$idCodeList,$clarificationVal)"/></r:ID></xsl:when>
-						<xsl:otherwise><r:ID>INSEE-COMMUN-CL-Booleen-<xsl:value-of select="$clarificationVal"/></r:ID></xsl:otherwise>
+						<xsl:otherwise><r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID></xsl:otherwise>
 					</xsl:choose>
 					<r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
 					<r:TypeOfObject>Code</r:TypeOfObject>
