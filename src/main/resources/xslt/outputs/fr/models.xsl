@@ -374,7 +374,6 @@
                 <xsl:attribute name="relevant">
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
-                        <xsl:with-param name="calcul-aim" select="'filter'"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-hideable-command-variables($source-context),' ')">
@@ -391,7 +390,6 @@
                 <xsl:attribute name="calculate">
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$variable-calculate"/>
-                        <xsl:with-param name="calcul-aim" select="'calculation'"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-variable-calculation-variables($source-context),' ')">
@@ -409,7 +407,6 @@
                     <xsl:value-of select="'not('"/>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
-                        <xsl:with-param name="calcul-aim" select="'filter'"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-deactivatable-command-variables($source-context),' ')">
@@ -438,7 +435,6 @@
                             </xsl:variable>
                             <xsl:call-template name="replaceVariablesInFormula">
                                 <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
-                                <xsl:with-param name="calcul-aim" select="'check'"/>
                                 <xsl:with-param name="variables" as="node()">
                                     <Variables>
                                         <xsl:for-each select="enofr:get-readonly-ancestors-variables($source-context)">
@@ -452,7 +448,6 @@
                         </xsl:if>
                         <xsl:call-template name="replaceVariablesInFormula">
                             <xsl:with-param name="formula" select="$constraint"/>
-                            <xsl:with-param name="calcul-aim" select="'check'"/>
                             <xsl:with-param name="variables" as="node()">
                                 <Variables>
                                     <xsl:for-each select="tokenize(enofr:get-control-variables($source-context),' ')">
@@ -501,7 +496,6 @@
                 <xsl:attribute name="relevant">
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
-                        <xsl:with-param name="calcul-aim" select="'filter'"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-hideable-command-variables($source-context),' ')">
@@ -519,7 +513,6 @@
                     <xsl:value-of select="'not('"/>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
-                        <xsl:with-param name="calcul-aim" select="'filter'"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-deactivatable-command-variables($source-context),' ')">
@@ -577,7 +570,6 @@
                 <xsl:attribute name="relevant">
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
-                        <xsl:with-param name="calcul-aim" select="'filter'"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-hideable-command-variables($source-context),' ')">
@@ -595,7 +587,6 @@
                     <xsl:value-of select="'not('"/>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
-                        <xsl:with-param name="calcul-aim" select="'filter'"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-deactivatable-command-variables($source-context),' ')">
@@ -906,7 +897,6 @@
                 <xsl:attribute name="relevant">
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$relevant"/>
-                        <xsl:with-param name="calcul-aim" select="'filter'"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-hideable-command-variables($source-context),' ')">
@@ -924,7 +914,6 @@
                     <xsl:value-of select="'not('"/>
                     <xsl:call-template name="replaceVariablesInFormula">
                         <xsl:with-param name="formula" select="$readonly"/>
-                        <xsl:with-param name="calcul-aim" select="'filter'"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-deactivatable-command-variables($source-context),' ')">
@@ -1114,7 +1103,6 @@
                     <xsl:attribute name="relevant">
                         <xsl:call-template name="replaceVariablesInFormula">
                             <xsl:with-param name="formula" select="$relevant"/>
-                            <xsl:with-param name="calcul-aim" select="'filter'"/>
                             <xsl:with-param name="variables" as="node()">
                                 <Variables>
                                     <xsl:for-each select="tokenize(enofr:get-hideable-command-variables($source-context),' ')">
@@ -1132,7 +1120,6 @@
                         <xsl:value-of select="'not('"/>
                         <xsl:call-template name="replaceVariablesInFormula">
                             <xsl:with-param name="formula" select="$readonly"/>
-                            <xsl:with-param name="calcul-aim" select="'filter'"/>
                             <xsl:with-param name="variables" as="node()">
                                 <Variables>
                                     <xsl:for-each select="tokenize(enofr:get-deactivatable-command-variables($source-context),' ')">
@@ -2865,7 +2852,6 @@
                         <xsl:when test="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable) != ''">
                             <xsl:call-template name="replaceVariablesInFormula">
                                 <xsl:with-param name="formula" select="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable)"/>
-                                <xsl:with-param name="calcul-aim" select="'label'"/>
                                 <xsl:with-param name="variables" as="node()">
                                     <Variables>
                                         <xsl:for-each select="tokenize(enofr:get-conditioning-variable-formula-variables($source-context,$conditioning-variable),' ')">
@@ -2908,7 +2894,6 @@
     <xsl:template name="replaceVariablesInFormula">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="formula"/>
-        <xsl:param name="calcul-aim"/>
         <xsl:param name="instance-ancestor"/>
         <xsl:param name="variables" as="node()"/>
 
@@ -2930,18 +2915,151 @@
                     <xsl:value-of select="$business-name"/>
                 </xsl:variable>
                 <xsl:variable name="variable-representation" select="enofr:get-variable-representation($source-context,$current-variable)"/>
-                <xsl:call-template name="replaceVariablesInFormula">
-                    <xsl:with-param name="formula" select="replace($formula,
-                                                                   concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end),
-                                                                   $variable-business-name)"/>
-                    <xsl:with-param name="calcul-aim" select="$calcul-aim"/>
-                    <xsl:with-param name="variables" as="node()">
-                        <Variables>
-                            <xsl:copy-of select="$variables/Variable[position() != 1 ]"/>
-                        </Variables>
-                    </xsl:with-param>
-                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
-                </xsl:call-template>
+                <xsl:choose>
+                    <xsl:when test="$variable-representation = 'number' and contains($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
+                        <!-- sum or mean or count with at most 1 group of conditions : [group of conditions without [condition inside condition] inside] -->
+                        <!-- e.g. sum ( variableId[condition] ) becomes sum(variableName[string() castable as xs:decimal][condition], 0) -->
+                        <xsl:analyze-string select="$formula" regex="^(.*)(sum|mean|count) *\( *{$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}(\[[^(\[|\])]+\])? *\)(.*)$">
+                            <xsl:matching-substring>
+                                <xsl:call-template name="replaceVariablesInFormula">
+                                    <xsl:with-param name="formula" select="regex-group(1)"/>
+                                    <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                </xsl:call-template>
+                                <xsl:value-of select="concat(regex-group(2),'(',$variable-business-name,'[string() castable as xs:decimal]')"/>
+                                <xsl:call-template name="replaceVariablesInFormula">
+                                    <xsl:with-param name="formula" select="regex-group(3)"/>
+                                    <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                </xsl:call-template>
+                                <xsl:value-of select="', 0)'"/>
+                                <xsl:call-template name="replaceVariablesInFormula">
+                                    <xsl:with-param name="formula" select="regex-group(4)"/>
+                                    <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                </xsl:call-template>
+                            </xsl:matching-substring>
+                            <xsl:non-matching-substring>
+                                <!-- min or max with at most 1 group of conditions : [group of conditions without [] inside] -->
+                                <!-- the same as the sum/mean/count case, without a default value if the variable is always empty -->
+                                <!-- e.g. min ( variableId[condition] ) becomes min(variableName[string() castable as xs:decimal][condition]) -->
+                                <xsl:analyze-string select="$formula" regex="^(.*)(min|max) *\( *{$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}(\[[^(\[|\])]+\])? *\)(.*)$">
+                                    <xsl:matching-substring>
+                                        <xsl:call-template name="replaceVariablesInFormula">
+                                            <xsl:with-param name="formula" select="regex-group(1)"/>
+                                            <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                            <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                        </xsl:call-template>
+                                        <xsl:value-of select="concat(regex-group(2),'(',$variable-business-name,'[string() castable as xs:decimal]')"/>
+                                        <xsl:call-template name="replaceVariablesInFormula">
+                                            <xsl:with-param name="formula" select="regex-group(3)"/>
+                                            <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                            <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                        </xsl:call-template>
+                                        <xsl:value-of select="')'"/>
+                                        <xsl:call-template name="replaceVariablesInFormula">
+                                            <xsl:with-param name="formula" select="regex-group(4)"/>
+                                            <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                            <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                        </xsl:call-template>
+                                    </xsl:matching-substring>
+                                    <xsl:non-matching-substring>
+                                        <!-- ='' or !='' -->
+                                        <!-- e.g.  variableId != '' becomes variableName/string()!='' -->
+                                        <xsl:analyze-string select="$formula" regex="^(.*){$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end} *(\!)?= *''(.*)$">
+                                            <xsl:matching-substring>
+                                                <xsl:call-template name="replaceVariablesInFormula">
+                                                    <xsl:with-param name="formula" select="regex-group(1)"/>
+                                                    <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                </xsl:call-template>
+                                                <xsl:value-of select="concat($variable-business-name,'/string()',regex-group(2),'=''''')"/>
+                                                <xsl:call-template name="replaceVariablesInFormula">
+                                                    <xsl:with-param name="formula" select="regex-group(3)"/>
+                                                    <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                </xsl:call-template>
+                                            </xsl:matching-substring>
+                                            <xsl:non-matching-substring>
+                                                <!-- =0 or !=0 -->
+                                                <!-- the same as the default case except that empty value is not transformed into 0 -->
+                                                <!-- e.g.  variableId != 0 becomes (if (variableName/string()='') then 1 else variableName)!=0 -->
+                                                <xsl:analyze-string select="$formula" regex="^(.*){$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end} *(\!)?= *0([^\.](.*))?$">
+                                                    <xsl:matching-substring>
+                                                        <xsl:call-template name="replaceVariablesInFormula">
+                                                            <xsl:with-param name="formula" select="regex-group(1)"/>
+                                                            <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                                            <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                        </xsl:call-template>
+                                                        <xsl:value-of select="concat('(if (',$variable-business-name,'/string()='''') then 1 else ',$variable-business-name,')',regex-group(2),'=0')"/>
+                                                        <xsl:call-template name="replaceVariablesInFormula">
+                                                            <xsl:with-param name="formula" select="regex-group(3)"/>
+                                                            <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                                            <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                        </xsl:call-template>
+                                                    </xsl:matching-substring>
+                                                    <xsl:non-matching-substring>
+                                                        <!-- former default formula for variableId -->
+                                                        <xsl:value-of select="concat('number(if (',$ip-id,'='''') then ''0'' else ',$ip-id,')')"/>
+                                                        <xsl:analyze-string select="$formula" regex="^(.*)number\(if \({$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}=''\) then '0' else {$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}\)(.*)$">
+                                                            <xsl:matching-substring>
+                                                                <xsl:call-template name="replaceVariablesInFormula">
+                                                                    <xsl:with-param name="formula" select="regex-group(1)"/>
+                                                                    <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                                                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                                </xsl:call-template>
+                                                                <xsl:value-of select="concat('(if (',$variable-business-name,'/string()='''') then 0 else ',$variable-business-name,')')"/>
+                                                                <xsl:call-template name="replaceVariablesInFormula">
+                                                                    <xsl:with-param name="formula" select="regex-group(2)"/>
+                                                                    <xsl:with-param name="variables" as="node()" select="$variables"/>
+                                                                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                                </xsl:call-template>
+                                                            </xsl:matching-substring>
+                                                            <xsl:non-matching-substring>
+                                                                <!-- all the numeric default case -->
+                                                                <!-- e.g.  variableId + variable2Id becomes (if (variableName/string()='') then 0 else variableName) + (if (variableName/string()='' then 0 else variableName) -->
+                                                                <xsl:for-each select="tokenize($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
+                                                                    <xsl:if test="not(position()=1)">
+                                                                        <xsl:value-of select="concat('(if (',$variable-business-name,/string()'='''') then 0 else ',$variable-business-name,')')"/>
+                                                                    </xsl:if>
+                                                                    <xsl:call-template name="replaceVariablesInFormula">
+                                                                        <xsl:with-param name="formula" select="current()"/>
+                                                                        <xsl:with-param name="variables" as="node()">
+                                                                            <Variables>
+                                                                                <xsl:copy-of select="$variables/Variable[position() != 1 ]"/>
+                                                                            </Variables>
+                                                                        </xsl:with-param>
+                                                                        <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                                                                    </xsl:call-template>
+                                                                </xsl:for-each>
+                                                            </xsl:non-matching-substring>
+                                                        </xsl:analyze-string>
+                                                    </xsl:non-matching-substring>
+                                                </xsl:analyze-string>
+                                            </xsl:non-matching-substring>
+                                        </xsl:analyze-string>
+                                    </xsl:non-matching-substring>
+                                </xsl:analyze-string>
+                            </xsl:non-matching-substring>
+                        </xsl:analyze-string>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:for-each select="tokenize($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
+                            <xsl:if test="not(position()=1)">
+                                <xsl:value-of select="$variable-business-name"/>
+                            </xsl:if>
+                            <xsl:call-template name="replaceVariablesInFormula">
+                                <xsl:with-param name="formula" select="current()"/>
+                                <xsl:with-param name="variables" as="node()">
+                                    <Variables>
+                                        <xsl:copy-of select="$variables/Variable[position() != 1 ]"/>
+                                    </Variables>
+                                </xsl:with-param>
+                                <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                            </xsl:call-template>
+                        </xsl:for-each>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$formula"/>
