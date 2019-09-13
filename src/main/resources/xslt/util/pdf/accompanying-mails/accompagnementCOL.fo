@@ -273,7 +273,7 @@
                         Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n<fo:inline font-size="0.1pt">&#160;</fo:inline>°&#160;78-17 du 6 janvier 1978 relative à l'informatique, 
                         aux fichiers et aux libertés s'appliquent à la présente enquête. Pour les données à caractère personnel, un droit d'accès, de rectification, 
                         d’effacement ou de limitation de traitement peut être exercé pendant la période de conservation des données d’identification. 
-                        Ces droits peuvent être exercés auprès de ${AdresseRetourL1} que vous pouvez contacter à l’adresse ${BddAdresseMessagerieServiceCollecteur}. 
+                        Ces droits peuvent être exercés auprès de ${AdresseRetourL1} que vous pouvez contacter à l’adresse ${BddServiceCollecteurAdresseMessagerie}. 
                         Pour toute question relative au traitement de vos données, vous pouvez contacter le délégué à la protection des données des ministères économique 
                         et financier à l’adresse <fo:inline text-decoration="underline">le-delegue-a-la-protection-des-donnees-personnelles@finances.gouv.fr</fo:inline> 
                         ou son correspondant à l’Insee : <fo:inline text-decoration="underline">contact-rgpd@insee.fr</fo:inline>. 
