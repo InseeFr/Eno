@@ -1066,7 +1066,26 @@
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
     </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-variable-business-name.</xd:p>
+            <xd:p>Function that returns the business name of a variable from its DDI ID.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-variable-business-name">
+        <xsl:param name="variable" tunnel="yes"/>
+        
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="$variable"/>
+        </xsl:call-template>
+    </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Name template get-business-name that returns the business name of a variable from its DDI ID.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template name="enoddi:get-business-name">
         <xsl:param name="variable"/>
 
