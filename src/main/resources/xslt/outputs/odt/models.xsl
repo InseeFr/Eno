@@ -163,6 +163,7 @@
 		<xsl:variable name="numberOfDecimals" select="enoodt:get-number-of-decimals($source-context)"/>
 		<xsl:variable name="minimumResponse" select="enoodt:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enoodt:get-maximum($source-context)"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<xsl:if test="$typeResponse!=''">
 			<text:p text:style-name="Format">
@@ -263,7 +264,13 @@
 				</xsl:if>
 			</xsl:when>
 			<xsl:when test="$typeResponse='boolean' and $typeOfAncestor!=''">
-				<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
+				
+				<text:p text:style-name="Format">
+					<text:span text:style-name="NameOfVariable">
+						<xsl:value-of select="concat('[',$nameOfVariable,']')"/>
+					</text:span>
+					<xsl:value-of select="' - ','Booléen'"/>
+				</text:p>
 			</xsl:when>
 		</xsl:choose>
 		
