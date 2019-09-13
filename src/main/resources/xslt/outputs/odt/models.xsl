@@ -225,13 +225,17 @@
 		<xsl:variable name="numberOfDecimals" select="enoodt:get-number-of-decimals($source-context)"/>
 		<xsl:variable name="minimumResponse" select="enoodt:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enoodt:get-maximum($source-context)"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
-		<xsl:if test="$typeResponse !=''">
+		<xsl:if test="$typeResponse !=''">	
 			<text:p text:style-name="Format">
+				<text:span text:style-name="NameOfVariable">
+					<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+				</text:span>
 				<xsl:if test="$typeResponse='text'">
 					<xsl:value-of select="concat('Car ',$lengthResponse)"/>
 				</xsl:if>
-			</text:p>
+			</text:p>			
 		</xsl:if>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -318,12 +322,22 @@
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
 		<xsl:variable name="headerCol" select="enoodt:get-body-line($source-context,position())"/>
 		<xsl:variable name="type" select="enoodt:get-css-class($source-context)"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		<text:section text:name="Table-{enoodt:get-name($source-context)}">
 			<xsl:if test="$questionName != ''">
 				<text:p text:style-name="QuestionName"><xsl:value-of select="concat('[',$questionName,']')"/></text:p>
 			</xsl:if>
 			<xsl:if test="$type='question multiple-choice-question' and $maximumLengthCode!=''">
-				<text:p><xsl:value-of select="concat('Car ',$maximumLengthCode)"/></text:p>
+				
+				<text:p text:style-name="Format">
+					<text:span text:style-name="NameOfVariable">
+						<xsl:value-of select="concat('[',$nameOfVariable,']')"/>
+					</text:span>
+					<xsl:value-of select="concat('Car ',$maximumLengthCode)"/>
+				</text:p>
+				
+				
+				
 			</xsl:if>
 			
 			<!-- print the question label and its instructions -->

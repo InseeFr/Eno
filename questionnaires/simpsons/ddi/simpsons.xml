@@ -7,7 +7,6 @@
    <r:Version>0.1.0</r:Version>
    <r:Citation>
       <r:Title>
-         <r:String>Questionnaire SIMPSONS</r:String>
       </r:Title>
    </r:Citation>
    <g:ResourcePackage isMaintainable="true" versionDate="2018-01-25+01:00">
@@ -145,7 +144,6 @@
             <r:ID>Sequence-i6vwid</r:ID>
             <r:Version>0.1.0</r:Version>
             <r:Label>
-               <r:Content xml:lang="fr-FR">Questionnaire SIMPSONS</r:Content>
             </r:Label>
             <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
             <d:ControlConstructReference>
