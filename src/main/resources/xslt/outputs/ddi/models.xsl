@@ -221,7 +221,10 @@
 								<xsl:choose>
 									<xsl:when test="$formatDate = 'PnYnM'">P99Y11M</xsl:when>
 									<xsl:when test="$formatDate = 'PTnHnM'">PT99H59M</xsl:when>
-									<xsl:otherwise>format-dateTime(current-date(),'<xsl:value-of select="$formatDate"/>')</xsl:otherwise>
+								    <xsl:when test="$formatDate = 'YYYY'">year-from-date(current-date())</xsl:when>
+								    <xsl:when test="$formatDate = 'YYYY-MM'">format-date(current-date(),'[Y0001]-[M01]')</xsl:when>
+								    <!-- Default format YYYY-MM-DD -->
+								    <xsl:otherwise>format-date(current-date(),'[Y0001]-[M01]-[D01]')</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
 							<r:ManagedDateTimeRepresentation>
