@@ -128,15 +128,6 @@
         </xsl:choose>
     </xsl:function>
 
-    <xsl:function name="enofr:get-variable-business-ancestors">
-        <xsl:param name="context" as="item()"/>
-        <xsl:param name="variable"/>
-
-        <xsl:call-template name="enoddi:get-business-ancestors">
-            <xsl:with-param name="variable" select="$variable"/>
-        </xsl:call-template>
-    </xsl:function>
-
     <xd:doc>
         <xd:desc>
             <xd:p>This function returns an xforms label for the context on which it is applied.</xd:p>

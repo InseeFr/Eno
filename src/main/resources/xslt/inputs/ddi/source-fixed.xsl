@@ -1126,6 +1126,20 @@
         </xsl:call-template>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-variable-business-ancestors.</xd:p>
+            <xd:p>Function that returns the business ascendants loop and rowloop business names from a DDI variable ID.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-variable-business-ancestors">
+        <xsl:param name="variable" tunnel="yes"/>
+        <xsl:call-template name="enoddi:get-business-ancestors">
+            <xsl:with-param name="variable" select="$variable"/>
+        </xsl:call-template>
+    </xsl:template>
+    
+    
     <xsl:template name="enoddi:get-business-ancestors">
         <xsl:param name="variable"/>
 
