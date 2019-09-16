@@ -10945,7 +10945,7 @@
             <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">date</r:DateTypeCode>
             <r:Range>
                <r:MinimumValue included="true">1900-01-01</r:MinimumValue>
-               <r:MaximumValue included="true">format-dateTime(current-date(),'YYYY-MM-DD')</r:MaximumValue>
+               <r:MaximumValue included="true">format-date(current-date(),'[Y0001]-[M01]-[D01]')</r:MaximumValue>
             </r:Range>
          </r:ManagedDateTimeRepresentation>
       </r:ManagedRepresentationScheme>

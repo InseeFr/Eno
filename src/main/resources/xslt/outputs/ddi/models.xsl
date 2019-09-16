@@ -192,7 +192,7 @@
                 	<xsl:for-each select="distinct-values(tokenize(normalize-space($allFormats), ';'))">
 						<xsl:variable name="formatDate" select="."/>
 						<!-- Check if format equals one of those date and duration formats who end by ; limiter -->
-						<xsl:if test="contains('YYYY;YYYY-MM;YYYY-MM-DD;PnYnM;PTnHnM;', concat($formatDate, ';'))">
+						<xsl:if test="$formatDate !='' and contains('YYYY;YYYY-MM;YYYY-MM-DD;PnYnM;PTnHnM;', concat($formatDate, ';'))">
 							<!-- id construct -->
 							<xsl:variable name="id-date-duration">
 					        	<xsl:choose>
@@ -221,7 +221,10 @@
 								<xsl:choose>
 									<xsl:when test="$formatDate = 'PnYnM'">P99Y11M</xsl:when>
 									<xsl:when test="$formatDate = 'PTnHnM'">PT99H59M</xsl:when>
-									<xsl:otherwise>format-dateTime(current-date(),'<xsl:value-of select="$formatDate"/>')</xsl:otherwise>
+								    <xsl:when test="$formatDate = 'YYYY'">year-from-date(current-date())</xsl:when>
+								    <xsl:when test="$formatDate = 'YYYY-MM'">format-date(current-date(),'[Y0001]-[M01]')</xsl:when>
+								    <!-- Default format YYYY-MM-DD -->
+								    <xsl:otherwise>format-date(current-date(),'[Y0001]-[M01]-[D01]')</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
 							<r:ManagedDateTimeRepresentation>
@@ -1685,26 +1688,17 @@
 	    <xsl:param name="source-context" as="item()" tunnel="yes"/>
 	    <xsl:param name="agency" as="xs:string" tunnel="yes"/>
 	    <!-- List of all date and duration Format -->
-	    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="eno:append-empty-element('driver-ManagedRepresentationScheme', .)" tunnel="yes"/>
+			<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
-	<!-- Format for ManagedRepresentationScheme -->
-	<xsl:template match="driver-ManagedRepresentationScheme//ResponseDomain//Format" mode="model" priority="1">
-	    <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:value-of select="$source-context"/>
-	</xsl:template>
-    
+
     <xsl:template match="driver-ManagedRepresentationScheme//ResponseDomain//DateTimeDomain | driver-ManagedRepresentationScheme//ResponseDomain//DurationDomain" mode="model" priority="1">
     	<xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!-- Get Date and Duration Format -->
-        <xsl:variable name="format">
-	        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="." tunnel="yes"/>
-			</xsl:apply-templates>
-        </xsl:variable>
+        <xsl:variable name="format" select="enoddi33:get-format($source-context)"/>
         <!-- Old Date doesn't have format, should set default format and using ; as separator for list construct -->
         <xsl:choose>
         	<xsl:when test="$format != ''"><xsl:value-of select="$format"/>;</xsl:when>
