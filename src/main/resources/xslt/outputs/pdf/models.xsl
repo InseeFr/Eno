@@ -499,7 +499,8 @@
 		<fo:table-cell xsl:use-attribute-sets="data-cell">
 			<xsl:if test="$no-border = 'no-border'">
 				<xsl:attribute name="border">0mm</xsl:attribute>
-				<xsl:attribute name="padding">0mm</xsl:attribute>
+				<xsl:attribute name="padding-top">0mm</xsl:attribute>
+				<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
 			</xsl:if>
 			<fo:block>
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
