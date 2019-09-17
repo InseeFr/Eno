@@ -1186,7 +1186,7 @@
         <xd:desc></xd:desc>
     </xd:doc>
     <xsl:template match="*" mode="enoddi:get-variable-representation">
-        <xsl:param name="variable"/>
+        <xsl:param name="variable" tunnel="yes"/>
         
         <xsl:variable name="variable-representation">
             <xsl:choose>
