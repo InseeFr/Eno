@@ -2,6 +2,7 @@
 <Questionnaire xmlns="http://xml.insee.fr/schema/applis/pogues" id="i6vwi0"
     genericName="QUESTIONNAIRE" agency="fr.insee" final="false">
     <Name>SIMPSONS</Name>
+    <r:String>Questionnaire SIMPSONS</r:String>
     <TargetMode>CAWI</TargetMode>
     <Child id="j6p0ti5h" depth="1" genericName="MODULE"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SequenceType">
