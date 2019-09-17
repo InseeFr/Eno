@@ -2915,11 +2915,10 @@
                     <xsl:value-of select="$business-name"/>
                 </xsl:variable>
                 <xsl:variable name="variable-representation" select="enofr:get-variable-representation($source-context,$current-variable)"/>
-                <xsl:message select="concat($current-variable,' ',$variable-representation)"></xsl:message>
                 <xsl:choose>
                     <xsl:when test="$variable-representation = 'number' and contains($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
                         <!-- former default formula for variableId -->
-                        <xsl:analyze-string select="$formula" regex="^(.*)number\(if +\({$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}=''\) +then +'0' +else +{$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}\)(.*)$">
+                        <xsl:analyze-string select="$formula" regex="^(.*)number\(if\s+\({$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}=''\)\s+then\s+'0'\s+else\s+{$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}\)(.*)$">
                             <xsl:matching-substring>
                                 <xsl:call-template name="replaceVariablesInFormula">
                                     <xsl:with-param name="formula" select="regex-group(1)"/>
