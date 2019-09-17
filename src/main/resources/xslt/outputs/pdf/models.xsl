@@ -496,7 +496,7 @@
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 
-		<fo:table-cell text-align="left" border-color="black" border-style="solid" padding="1mm">
+		<fo:table-cell xsl:use-attribute-sets="data-cell">
 			<xsl:if test="$no-border = 'no-border'">
 				<xsl:attribute name="border">0mm</xsl:attribute>
 				<xsl:attribute name="padding">0mm</xsl:attribute>
