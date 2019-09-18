@@ -44,8 +44,7 @@
             La position peut être définie par rapport au hautou bas de la zone concernée et gauche ou droite.
                      
             Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée.
-            -->
-      <fo:simple-page-master master-name="page-even-default"
+            --><fo:simple-page-master master-name="page-even-default"
                              page-height="297mm"
                              page-width="210mm"
                              reference-orientation="0"
@@ -698,6 +697,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -712,8 +713,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
                               <fo:inline>
@@ -742,6 +745,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -756,8 +761,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
                               <fo:inline>
@@ -786,6 +793,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -800,8 +809,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
                               <fo:inline>
@@ -830,6 +841,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -844,8 +857,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
                               <fo:inline>
@@ -896,6 +911,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -910,8 +927,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:block-container height="8mm" width="50mm">
                               <fo:block border-color="black" border-style="solid" width="50mm"> </fo:block>
@@ -923,6 +942,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -937,8 +958,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:block-container height="8mm" width="50mm">
                               <fo:block border-color="black" border-style="solid" width="50mm"> </fo:block>
@@ -950,6 +973,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -964,8 +989,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:block-container height="8mm" width="50mm">
                               <fo:block border-color="black" border-style="solid" width="50mm"> </fo:block>
@@ -977,6 +1004,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -991,8 +1020,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:block-container height="8mm" width="50mm">
                               <fo:block border-color="black" border-style="solid" width="50mm"> </fo:block>
@@ -1026,6 +1057,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -1040,8 +1073,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
                               <fo:inline>
@@ -1100,6 +1135,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -1114,8 +1151,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
                               <fo:inline>
@@ -1174,6 +1213,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -1188,8 +1229,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
                               <fo:inline>
@@ -1248,6 +1291,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -1262,8 +1307,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
                               <fo:inline>
@@ -1322,6 +1369,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1"
                                     border="0mm"
@@ -1336,8 +1385,10 @@
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="0mm"
-                                    border="0mm">
+                                    padding="1mm"
+                                    border="0mm"
+                                    padding-top="0mm"
+                                    padding-bottom="0mm">
                         <fo:block>
                            <fo:inline>
                               <fo:inline>
@@ -1443,6 +1494,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="2">
                         <fo:block color="black"
@@ -1454,6 +1507,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1469,6 +1524,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="2"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1481,6 +1538,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1518,6 +1577,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1555,6 +1616,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="3"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1567,6 +1630,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1604,6 +1669,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1641,6 +1708,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1678,6 +1747,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1690,6 +1761,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1727,6 +1800,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="2">
                         <fo:block color="black"
@@ -1799,6 +1874,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1810,6 +1887,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1821,6 +1900,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1836,6 +1917,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1874,6 +1957,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1912,6 +1997,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -1950,6 +2037,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2031,6 +2120,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2042,6 +2133,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2053,6 +2146,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2064,6 +2159,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2075,6 +2172,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2086,6 +2185,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2097,6 +2198,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2112,6 +2215,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2264,6 +2369,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2416,6 +2523,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2568,6 +2677,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="left"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2757,6 +2868,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"
@@ -2768,6 +2881,8 @@
                      <fo:table-cell border-color="black"
                                     border-style="solid"
                                     text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
                                     number-rows-spanned="1"
                                     number-columns-spanned="1">
                         <fo:block color="black"

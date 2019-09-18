@@ -91,7 +91,7 @@
                 
                 <!-- ZONE TITRE COURRIER -->
                 <fo:block-container absolute-position="absolute" left="1mm" top="38mm" width="78mm" height="6mm" overflow="hidden" font-size="10pt">
-                    <fo:block line-height="10pt" font-weight="bold" text-align="center">ENVOI DE QUESTIONNAIRE SUIE A DEMANDE</fo:block>
+                    <fo:block line-height="10pt" font-weight="bold" text-align="center">ENVOI DE QUESTIONNAIRE PAPIER</fo:block>
                 </fo:block-container>
                 
                 <!-- ZONE CONTACT -->
@@ -112,7 +112,7 @@
                         
                     </fo:block>
                     <fo:block margin-top="5mm" font-weight="bold">
-                        Objet&#160;: Enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddPeriode}!='')) ${BddPeriode}#end ${BddAnneeReference}
+                        Objet&#160;: Votre demande de questionnaire pour l'enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddPeriode}!='')) ${BddPeriode}#end ${BddAnneeReference}
                     </fo:block>
                     <fo:block font-weight="bold">
                         Ref.&#160;${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee}&#160;: ${BddIdentifiantUniteEnquetee})
