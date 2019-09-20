@@ -167,6 +167,9 @@
 		
 		<xsl:if test="$typeResponse!=''">
 			<text:p text:style-name="Format">
+				<text:span text:style-name="NameOfVariable">
+				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+			</text:span>
 				<xsl:choose>
 					<xsl:when test="$typeResponse='text'">
 						<xsl:value-of select="concat('Car ',$lengthResponse)"/>
@@ -198,8 +201,12 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
 		<xsl:variable name="dateFormat" select="enoodt:get-format($source-context)"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		<xsl:if test="$typeResponse!=''">
 			<text:p text:style-name="Format">
+				<text:span text:style-name="NameOfVariable">
+				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+			</text:span>
 				<xsl:value-of select="concat('date ( ',$dateFormat,' )')"/>
 			</text:p>
 		</xsl:if>		
@@ -263,6 +270,9 @@
 				<!-- remove Format in the cell for table 'question multiple-choice-question'-->
 				<xsl:if test="$typeOfAncestor!='question multiple-choice-question'">
 					<text:p text:style-name="Format">
+						<text:span text:style-name="NameOfVariable">
+						<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+					</text:span>
 						<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
 					</text:p>
 				</xsl:if>
@@ -298,9 +308,13 @@
 		<xsl:variable name="typeResponse" select="enoodt:get-type($source-context)"/>
 		<xsl:variable name="lengthResponse" select="enoodt:get-length($source-context)"/>
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<xsl:if test="$typeOfAncestor!='question multiple-choice-question' and $maximumLengthCode != ''">
 			<text:p text:style-name="Format">
+				<text:span text:style-name="NameOfVariable">
+				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+			</text:span>
 				<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
 			</text:p>		
 		</xsl:if>		
@@ -331,7 +345,7 @@
 				
 				<text:p text:style-name="Format">
 					<text:span text:style-name="NameOfVariable">
-						<xsl:value-of select="concat('[',$nameOfVariable,']')"/>
+						<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
 					</text:span>
 					<xsl:value-of select="concat('Car ',$maximumLengthCode)"/>
 				</text:p>
