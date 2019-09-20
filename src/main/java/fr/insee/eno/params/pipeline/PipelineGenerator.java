@@ -1,4 +1,4 @@
-package fr.insee.eno.params;
+package fr.insee.eno.params.pipeline;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package fr.insee.eno.validation;
+package fr.insee.eno.params.validation;
 
 public class ValidationBoolean {
 	
