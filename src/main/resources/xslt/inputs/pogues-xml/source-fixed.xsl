@@ -313,6 +313,13 @@
             <xsl:message>Multi Variables references in ConditionnalText (coming from FailMessage) are not supported.</xsl:message>
         </xsl:if>
         <xsl:value-of select="enopogues:get-qop-id($related-variables[1])"/>        
-    </xsl:template>  
+    </xsl:template>
+
+    <!-- id generated from idCodeList with id of Other Choice question -->
+    <xsl:template match="*" mode="enopogues:get-clarified-code">
+        <xsl:param name="idList" as="xs:string" tunnel="yes"/>
+        <xsl:param name="otherValue" as="xs:string" tunnel="yes"/>
+        <xsl:value-of select="enopogues:get-id(//pogues:CodeList[@id=$idList]/pogues:Code[pogues:Value=$otherValue])"/>
+    </xsl:template>
 
 </xsl:stylesheet>
