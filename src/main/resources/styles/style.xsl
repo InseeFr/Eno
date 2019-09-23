@@ -47,7 +47,15 @@
         <xsl:attribute name="border-color">black</xsl:attribute>
         <xsl:attribute name="border-style">solid</xsl:attribute>
         <xsl:attribute name="text-align">left</xsl:attribute>
+        <xsl:attribute name="padding-left">1mm</xsl:attribute>
+        <xsl:attribute name="padding-right">1mm</xsl:attribute>
     </xsl:attribute-set>
+    <xsl:attribute-set name="data-cell">
+        <xsl:attribute name="text-align">left</xsl:attribute>
+        <xsl:attribute name="border-color">black</xsl:attribute>
+        <xsl:attribute name="border-style">solid</xsl:attribute>
+        <xsl:attribute name="padding">1mm</xsl:attribute>
+    </xsl:attribute-set>    
     <xsl:attribute-set name="Line-drawing">
         <xsl:attribute name="width">100%</xsl:attribute>
         <xsl:attribute name="height">10mm</xsl:attribute>
