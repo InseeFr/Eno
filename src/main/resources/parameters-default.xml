@@ -1,6 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ENOParameters>
-    <Pipeline></Pipeline>
+    
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>fr</OutFormat>
+        
+        <pre-processing>ddi-dereferencing</pre-processing>
+        <pre-processing>ddi-cleaning</pre-processing>
+        <pre-processing>ddi-titling</pre-processing>
+        <pre-processing>ddi-mapping</pre-processing>
+        
+        <post-processing>fr-insert-generic-questions</post-processing>
+        <post-processing>fr-browsing</post-processing>
+        <post-processing>fr-modele-coltrane</post-processing>
+        <post-processing>fr-edit-patron</post-processing>
+        <post-processing>fr-identification</post-processing>
+        <post-processing>fr-insert-welcome</post-processing>
+        <post-processing>fr-insert-end</post-processing>
+        <post-processing>fr-fix-adherence</post-processing>
+        
+        <VerrueDDI>false</VerrueDDI>
+        <VerrueFR>false</VerrueFR>
+        <VerruePDF>false</VerruePDF>
+        <VerrueODT>false</VerrueODT>
+        <VerrueJS>false</VerrueJS>
+    </Pipeline>
+    
     <Parameters>
         <Title>
             <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->
@@ -67,9 +91,11 @@
             </EndQuestion>
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
+            <Satisfaction>false</Satisfaction>
             <LengthOfLongTable>
                 <Length>7</Length>
             </LengthOfLongTable>
+            <DecimalSeparator>,</DecimalSeparator>
         </fr-parameters>
         
         <pdf-parameters>
@@ -128,6 +154,7 @@
                 <ResponseTimeQuestion>false</ResponseTimeQuestion>
                 <CommentQuestion>true</CommentQuestion>
             </EndQuestion>
-        </odt-parameters>
+        </odt-parameters>    
     </Parameters>
+    
 </ENOParameters>
