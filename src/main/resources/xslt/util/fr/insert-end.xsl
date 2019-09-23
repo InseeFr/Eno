@@ -36,6 +36,7 @@
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="deblocage-questionnaire" select="$parameters//Deblocage" as="xs:boolean"/>
+    <xsl:variable name="enquete-satisfaction" select="$parameters//Satisfaction" as="xs:boolean"/>
     <!-- metadonnees : donnees-pilotage -->
     <xsl:param name="metadonnees-file"/>
     <xsl:param name="metadonnee-node" as="node()" required="no">
@@ -204,7 +205,7 @@
                                     <xhtml:p class="double-indentation">- revenir dessus dès à présent en cliquant sur le bouton "Retour" ;</xhtml:p>
                                     <xhtml:p class="double-indentation">- ou plus tard en cliquant sur le bouton "Fermer le questionnaire" et en vous authentifiant à nouveau.</xhtml:p>
                                     <xhtml:p class="double-indentation"><xsl:text>Dans les deux cas, vos données seront enregistrées mais</xsl:text>&#160;<xhtml:b><xsl:text>le questionnaire ne sera pas
-                                    envoyé à </xsl:text><xsl:value-of select="$LibelleServiceProducteur"/></xhtml:b>.</xhtml:p>
+                                        envoyé à </xsl:text><xsl:value-of select="$LibelleServiceProducteur"/></xhtml:b>.</xhtml:p>
                                 </xsl:otherwise>
                             </xsl:choose>
                             <xhtml:p class="center-body">
@@ -357,6 +358,13 @@
                                 <xhtml:b>La Statistique publique vous remercie de votre collaboration à
                                     cette enquête.</xhtml:b>
                             </xhtml:p>
+                            <!--                        lien vers le questionnaire de satisfaction-->
+                            <xsl:if test="$enquete-satisfaction">
+                                <xhtml:p>
+                                    <xhtml:a href="{$properties//satisfaction}" target="_blank">Aidez-nous à améliorer notre site en répondant à notre enquête de satisfaction !</xhtml:a>
+                                </xhtml:p>
+                            </xsl:if>
+                            
                         </xhtml:div>
                     </xhtml:div>
                 </fr:section>

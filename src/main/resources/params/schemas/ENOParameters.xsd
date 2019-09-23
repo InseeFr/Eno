@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
     
     <xs:include schemaLocation="Pipeline.xsd"/>
     
@@ -12,19 +15,25 @@
     <xs:include schemaLocation="preprocessing/DDIPreprocessing.xsd"/>
     
         
-    <xs:element name="ENOParameters" type="ENOParameters"/>
-    
-    <xs:complexType name="ENOParameters">
-        <xs:sequence>
-            <xs:element name="Pipeline" type="Pipeline"/>
-            <xs:element name="Parameters" type="Parameters"/>
-        </xs:sequence>
-    </xs:complexType>
-    
+    <xs:element name="ENOParameters">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Pipeline" type="Pipeline"/>
+                <xs:element name="Parameters" type="Parameters"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+        
     <xs:complexType name="Parameters">
         <xs:sequence>
             <xs:element name="Title" type="GlobalNumerotation"/>
-            <xs:element name="Languages" type="LanguagesType"/>
+            <xs:element name="Languages">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Language" type="Language" minOccurs="0" maxOccurs="unbounded" default="fr"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="StudyUnit" type="StudyUnit"/>
             <xs:element name="Campagne" type="xs:string"/>
             <xs:element name="fr-parameters" type="FrParameters" minOccurs="0" maxOccurs="1"/>
@@ -33,13 +42,7 @@
             <xs:element name="odt-parameters" type="ODTParameters" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>        
     </xs:complexType>
-    
-    <xs:complexType name="LanguagesType">
-        <xs:sequence>
-            <xs:element name="Language" type="Language" minOccurs="0" maxOccurs="unbounded" default="fr"/>
-        </xs:sequence>
-    </xs:complexType>
-    
+        
     <xs:simpleType name="Language">
         <xs:restriction base="xs:token">
             <xs:enumeration value="fr"/>
@@ -51,6 +54,7 @@
     </xs:simpleType>
     <xs:simpleType name="StudyUnit">
         <xs:restriction base="xs:token">
+            <xs:enumeration value="default"/>
             <xs:enumeration value="household"/>
             <xs:enumeration value="business"/>
         </xs:restriction>

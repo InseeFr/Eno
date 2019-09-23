@@ -46,6 +46,8 @@
             <xs:enumeration value="ddi-dereferencing"/>
             <xs:enumeration value="ddi-cleaning"/>
             <xs:enumeration value="ddi-titling"/>
+            <xs:enumeration value="ddi-mapping"/>
+            
             <xs:enumeration value="pogues-xml-goto-2-ite"/>
             <xs:enumeration value="pogues-xml-suppression-goto"/>
             <xs:enumeration value="pogues-xml-tweak-to-merge-equivalent-ite"/>
@@ -58,22 +60,22 @@
             <xs:enumeration value="ddi-markdownToXhtml"/>
             
             <xs:enumeration value="ddi-specificTreatment"/>
-            <xs:enumeration value="pdf-specificTreatment"/>
-            <xs:enumeration value="fr-specificTreatment"/>
-            <xs:enumeration value="js-specificTreatment"/>
+            
             <xs:enumeration value="odt-specificTreatment"/>
             
-            <xs:enumeration value="pdf-editStructurePages"/>
-            <xs:enumeration value="pdf-insertAccompanyingMails"/>
-            <xs:enumeration value="pdf-insertCoverPage"/>
-            <xs:enumeration value="pdf-insertEndQuestion"/>
             <xs:enumeration value="pdf-mailing"/>
             <xs:enumeration value="pdf-tableColumn"/>
+            <xs:enumeration value="pdf-insertEndQuestion"/>
+            <xs:enumeration value="pdf-editStructurePages"/>
+            <xs:enumeration value="pdf-specificTreatment"/>
+            <xs:enumeration value="pdf-insertCoverPage"/>
+            <xs:enumeration value="pdf-insertAccompanyingMails"/>
             
             <!-- pas sur de mettre des posts prcossings obligatoire... -->
             <xs:enumeration value="js-sortComponents"/>
+            <xs:enumeration value="js-specificTreatment"/>
             <xs:enumeration value="js-externalizeVariables"/>
-        
+            
             <xs:enumeration value="fr-insert-generic-questions"/>
             <xs:enumeration value="fr-browsing"/>
             <xs:enumeration value="fr-modele-coltrane"/>
@@ -82,6 +84,7 @@
             <xs:enumeration value="fr-identification"/>
             <xs:enumeration value="fr-insert-welcome"/>
             <xs:enumeration value="fr-insert-end"/>
+            <xs:enumeration value="fr-specificTreatment"/>
             <!-- coltrane.xsl : adherence with eXist-->
             <xs:enumeration value="fr-fix-adherence"/>
             
