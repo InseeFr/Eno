@@ -8,16 +8,16 @@
             <xs:element name="InFormat" type="InFormat"/>
             <xs:element name="OutFormat" type="OutFormat"/>
             <xs:sequence>
-                <xs:element name="pre-processing" type="PreProcessing" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="PreProcessing" type="PreProcessing" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:sequence>
-                <xs:element name="post-processing" type="PostProcessing" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="PostProcessing" type="PostProcessing" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:element name="VerrueDDI" type="xs:boolean" default="false"/>
-            <xs:element name="VerrueFR" type="xs:boolean" default="false"/>
-            <xs:element name="VerruePDF" type="xs:boolean" default="false"/>
-            <xs:element name="VerrueODT" type="xs:boolean" default="false"/>
-            <xs:element name="VerrueJS" type="xs:boolean" default="false"/>
+            <xs:element name="SpecificTreatmentDDI" type="xs:boolean" default="false"/>
+            <xs:element name="SpecificTreatmentFR" type="xs:boolean" default="false"/>
+            <xs:element name="SpecificTreatmentPDF" type="xs:boolean" default="false"/>
+            <xs:element name="SpecificTreatmentODT" type="xs:boolean" default="false"/>
+            <xs:element name="SpecificTreatmentJS" type="xs:boolean" default="false"/>
         </xs:sequence>
     </xs:complexType>
     

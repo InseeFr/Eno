@@ -4,25 +4,25 @@
         <InFormat>ddi</InFormat>
         <OutFormat>fr</OutFormat>
         
-        <pre-processing>ddi-dereferencing</pre-processing>
-        <pre-processing>ddi-cleaning</pre-processing>
-        <pre-processing>ddi-titling</pre-processing>
-        <pre-processing>ddi-mapping</pre-processing>
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        <PreProcessing>ddi-mapping</PreProcessing>
         
-        <post-processing>fr-insert-generic-questions</post-processing>
-        <post-processing>fr-browsing</post-processing>
-        <post-processing>fr-modele-coltrane</post-processing>
-        <post-processing>fr-edit-patron</post-processing>
-        <post-processing>fr-identification</post-processing>
-        <post-processing>fr-insert-welcome</post-processing>
-        <post-processing>fr-insert-end</post-processing>
-        <post-processing>fr-fix-adherence</post-processing>
+        <PostProcessing>fr-insert-generic-questions</PostProcessing>
+        <PostProcessing>fr-browsing</PostProcessing>
+        <PostProcessing>fr-modele-coltrane</PostProcessing>
+        <PostProcessing>fr-edit-patron</PostProcessing>
+        <PostProcessing>fr-identification</PostProcessing>
+        <PostProcessing>fr-insert-welcome</PostProcessing>
+        <PostProcessing>fr-insert-end</PostProcessing>
+        <PostProcessing>fr-fix-adherence</PostProcessing>
         
-        <VerrueDDI>false</VerrueDDI>
-        <VerrueFR>false</VerrueFR>
-        <VerruePDF>false</VerruePDF>
-        <VerrueODT>false</VerrueODT>
-        <VerrueJS>false</VerrueJS>
+        <SpecificTreatmentDDI>false</SpecificTreatmentDDI>
+        <SpecificTreatmentFR>false</SpecificTreatmentFR>
+        <SpecificTreatmentPDF>false</SpecificTreatmentPDF>
+        <SpecificTreatmentODT>false</SpecificTreatmentODT>
+        <SpecificTreatmentS>false</SpecificTreatmentS>
     </Pipeline>
     
     <Parameters>
