@@ -26,6 +26,21 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>The properties file used by the stylesheet.</xd:p>
+            <xd:p>It's on a transformation level.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:param name="properties-file"/>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The properties file is charged as an xml tree.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="properties" select="doc($properties-file)"/>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>The parameter file used by the stylesheet.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -84,6 +99,13 @@
     </xd:doc>
     <xsl:variable name="numeric-example" select="$parameters//NumericExample"/>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Character for the decimal separator.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="decimal-separator" select="$parameters//DecimalSeparator"/>
+    
     <xd:doc>
         <xd:desc>Loops and dynamic array's ids may be called in many calculs : filters, consistency checks, calculated variables</xd:desc>
         <xd:dec>To change their in-language-ID into business-name, everywhere it is necessary, it is simple to try everywhere it could be necessary</xd:dec>
