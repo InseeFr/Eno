@@ -2898,6 +2898,7 @@
         <xsl:param name="variables" as="node()"/>
 
         <xsl:variable name="instance-group" select="tokenize($instance-ancestor,' ')[last()]"/>
+        <xsl:variable name="formula" select="normalize-space($formula)"/>
 
         <xsl:choose>
             <xsl:when test="$variables/Variable">
