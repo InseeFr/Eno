@@ -319,7 +319,6 @@
     <xsl:template match="*" mode="enopogues:get-clarified-code">
         <xsl:param name="idList" as="xs:string" tunnel="yes"/>
         <xsl:param name="otherValue" as="xs:string" tunnel="yes"/>
-        <xsl:message select="concat('get-clarified-code : ',$idList,$otherValue)"/>
         <xsl:value-of select="enopogues:get-id(//pogues:CodeList[@id=$idList]/pogues:Code[pogues:Value=$otherValue])"/>
     </xsl:template>
 
