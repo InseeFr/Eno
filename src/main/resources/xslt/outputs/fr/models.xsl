@@ -2286,7 +2286,7 @@
         <xsl:variable name="input-format">
             <xsl:choose>
                 <xsl:when test="$current-driver='DurationDomain' or $dateduration-format = 'YYYY-MM-DD' or upper-case($dateduration-format) = 'JJ/MM/AAAA'">
-                    <xsl:value-of select="'xf:input'"/>
+                    <xsl:value-of select="'fr:number'"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="'xf:select1'"/>
@@ -2301,6 +2301,10 @@
                 <xsl:attribute name="bind" select="concat(@variable, '-bind')"/>
                 <xsl:if test="$input-format='xf:select1'">
                     <xsl:attribute name="appearance" select="'minimal'"/>
+                </xsl:if>
+                <xsl:if test="$input-format='fr:number'">
+                    <xsl:attribute name="xxf:fraction-digits" select="'0'"/>
+                    <xsl:attribute name="xxf:non-negative" select="'true()'"/>
                 </xsl:if>
                 <xsl:attribute name="class">
                     <xsl:choose>
