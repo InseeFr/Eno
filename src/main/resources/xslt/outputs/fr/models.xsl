@@ -1690,8 +1690,11 @@
         </xsl:variable>
         <xsl:variable name="xforms-element">
             <xsl:choose>
-                <xsl:when test="self::NumericDomain | self::TextDomain">
+                <xsl:when test="self::TextDomain">
                     <xsl:value-of select="'xf:input'"/>
+                </xsl:when>
+                <xsl:when test="self::NumericDomain">
+                    <xsl:value-of select="'fr:number'"/>
                 </xsl:when>
                 <xsl:when test="self::TextareaDomain">
                     <xsl:value-of select="'xf:textarea'"/>
@@ -1741,6 +1744,20 @@
             <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
             <xsl:if test="not($length = '')">
                 <xsl:attribute name="xxf:maxlength" select="$length"/>
+            </xsl:if>
+            <xsl:if test="self::NumericDomain">
+                <xsl:attribute name="grouping-separator" select="' '"/>
+                <xsl:choose>
+                    <xsl:when test="number(enofr:get-number-of-decimals($source-context)) &gt; 0">
+                        <xsl:attribute name="decimal-separator" select="$decimal-separator"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="xxf:fraction-digits" select="'0'"/>
+                        <xsl:if test="number(enofr:get-minimum($source-context)) &gt;= 0">
+                            <xsl:attribute name="xxf:non-negative" select="'true()'"/>
+                        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:if>
             <xsl:if test="$label != '' or $question-label!= ''">
                 <xsl:variable name="conditioning-variables" as="xs:string*">
@@ -2904,7 +2921,7 @@
                 <xsl:choose>
                     <xsl:when test="$variable-representation = 'number' and contains($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
                         <!-- former default formula for variableId -->
-                        <xsl:analyze-string select="$formula" regex="^(.*)number\(if\s+\({$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}=''\)\s+then\s+'0'\s+else\s+{$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}\)(.*)$">
+                        <xsl:analyze-string select="$formula" regex="^(.*)number\(if \({$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}=''\) then '0' else {$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}\)(.*)$">
                             <xsl:matching-substring>
                                 <xsl:call-template name="replaceVariablesInFormula">
                                     <xsl:with-param name="formula" select="regex-group(1)"/>
@@ -2986,14 +3003,18 @@
                                                         <!-- =0 or !=0 -->
                                                         <!-- the same as the default case except that empty value is not transformed into 0 -->
                                                         <!-- e.g.  variableId != 0 becomes (if (variableName/string()='') then 1 else variableName)!=0 -->
-                                                        <xsl:analyze-string select="$formula" regex="^(.*){$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end} *(!)?= *0([^\.](.*))?$">
+                                                        <xsl:analyze-string select="$formula" regex="^(.*){$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end} *(&lt;|!|&gt;)?= *0([^\.](.*))?$">
                                                             <xsl:matching-substring>
                                                                 <xsl:call-template name="replaceVariablesInFormula">
                                                                     <xsl:with-param name="formula" select="regex-group(1)"/>
                                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                                                                 </xsl:call-template>
-                                                                <xsl:value-of select="concat('(if (',$variable-business-name,'/string()='''') then 1 else ',$variable-business-name,')',regex-group(2),'=0')"/>
+                                                                <xsl:value-of select="concat('(if (',$variable-business-name,'/string()='''') then ')"/>
+                                                                <xsl:if test="regex-group(2) = '&gt;'">
+                                                                    <xsl:value-of select="'-'"/>
+                                                                </xsl:if>
+                                                                <xsl:value-of select="concat('1 else ',$variable-business-name,')',regex-group(2),'=0')"/>
                                                                 <xsl:call-template name="replaceVariablesInFormula">
                                                                     <xsl:with-param name="formula" select="regex-group(3)"/>
                                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>

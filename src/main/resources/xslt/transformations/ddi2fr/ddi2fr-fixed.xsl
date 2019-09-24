@@ -104,7 +104,16 @@
             <xd:p>Character for the decimal separator.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:variable name="decimal-separator" select="$parameters//DecimalSeparator"/>
+    <xsl:variable name="decimal-separator">
+        <xsl:choose>
+            <xsl:when test="$parameters//DecimalSeparator != ''">
+                <xsl:value-of select="$parameters//DecimalSeparator"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//DecimalSeparator"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     
     <xd:doc>
         <xd:desc>Loops and dynamic array's ids may be called in many calculs : filters, consistency checks, calculated variables</xd:desc>
@@ -439,10 +448,10 @@
             <xsl:value-of select="enoddi:get-format($context)"/>
         </xsl:variable>
         <xsl:variable name="minimum">
-            <xsl:value-of select="enoddi:get-minimum($context)"/>
+            <xsl:value-of select="replace(enoddi:get-minimum($context),'\.',$decimal-separator)"/>
         </xsl:variable>
         <xsl:variable name="maximum">
-            <xsl:value-of select="enoddi:get-maximum($context)"/>
+            <xsl:value-of select="replace(enoddi:get-maximum($context),'\.',$decimal-separator)"/>
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="$type='text'">
@@ -458,6 +467,8 @@
                     <xsl:choose>
                         <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Beginning"/>
+                            <xsl:value-of select="$decimal-separator"/>
+                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Beginning2"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Integer"/>
@@ -469,15 +480,17 @@
                     <xsl:choose>
                         <xsl:when test="not($number-of-decimals='' or $number-of-decimals='0')">
                             <xsl:value-of
-                                select="' ',
-                                concat($labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/DecimalCondition,
+                                select="concat(' ',
+                                $labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/DecimalCondition,
                                 ' ',
                                 $number-of-decimals,
                                 ' ',
                                 $labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/Digit,
                                 if (number($number-of-decimals)&gt;1) then $labels-resource/Languages/Language[@xml:lang=$language]/Plural else '',
                                 ' ',
-                                $labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/End)"
+                                $labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/End,
+                                $decimal-separator,
+                                $labels-resource/Languages/Language[@xml:lang=$language]/Alert/Number/Decimal/End2)"
                             />
                         </xsl:when>
                     </xsl:choose>
