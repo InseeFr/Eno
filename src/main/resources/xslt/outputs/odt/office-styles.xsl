@@ -46,6 +46,10 @@
             <style:paragraph-properties fo:text-align="left"/>
             <style:text-properties fo:font-size="10pt"/>
         </style:style>
+        <style:style style:name="NameOfVariable" style:family="text">
+             <style:text-properties fo:color="#FF00FF"/>
+        </style:style>
+            
         <!-- <style:style style:name="QuestionSelect" style:family="paragraph"
 					style:default-outline-level="2" style:class="text">
 					<style:paragraph-properties fo:text-align="left"/>
