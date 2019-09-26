@@ -362,6 +362,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR1] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -375,6 +378,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR2] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -388,6 +394,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR3] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -401,6 +410,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR4] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -423,6 +435,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER1] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -436,6 +451,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER2] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -449,6 +467,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER3] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -462,6 +483,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER4] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -484,6 +508,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER1] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -500,6 +527,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER2] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -516,6 +546,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER3] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -532,6 +565,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER4] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -548,6 +584,9 @@
                      <table:table-cell table:number-rows-spanned="1"
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
+                        <text:p text:style-name="Format">
+                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER5] - </text:span>
+                        </text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
