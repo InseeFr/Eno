@@ -292,10 +292,17 @@
 		
 		<xsl:if test="$typeOfAncestor!='question multiple-choice-question' and $maximumLengthCode != ''">
 			<text:p text:style-name="Format">
-            <text:span text:style-name="NameOfVariable">
-				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
-			</text:span>
+				<text:span text:style-name="NameOfVariable">
+					<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+				</text:span>
 				<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
+			</text:p>		
+		</xsl:if>
+		<xsl:if test="$typeOfAncestor='question multiple-choice-question'">
+			<text:p text:style-name="Format">
+				<text:span text:style-name="NameOfVariable">
+					<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+				</text:span>
 			</text:p>		
 		</xsl:if>		
 
@@ -550,8 +557,12 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="filter" select="enoodt:get-relevant($source-context)"/>
-		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>		
+		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>		
 		<text:p text:style-name="Control">
+			<text:span text:style-name="NameOfVariable">
+				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+			</text:span>
 			<xsl:call-template name="replaceVariablesInFormula">
 				<xsl:with-param name="formula" select="$filter"/>
 				<xsl:with-param name="variables" select="$idVariables"/>
