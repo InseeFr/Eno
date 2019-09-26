@@ -34,7 +34,7 @@ public class DDI2ODTGenerator implements Generator {
 		outputBasicFormPath = Constants.TEMP_FOLDER_PATH + "/" + surveyName + "/" + formNameFolder + "/form";
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
 
-		String outputForm = outputBasicFormPath + "/form.odt";
+		String outputForm = outputBasicFormPath + "/form.fodt";
 		InputStream isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL);
 
