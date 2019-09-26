@@ -558,11 +558,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="filter" select="enoodt:get-relevant($source-context)"/>
 		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>
-		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>		
 		<text:p text:style-name="Control">
-			<text:span text:style-name="NameOfVariable">
-				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
-			</text:span>
 			<xsl:call-template name="replaceVariablesInFormula">
 				<xsl:with-param name="formula" select="$filter"/>
 				<xsl:with-param name="variables" select="$idVariables"/>
