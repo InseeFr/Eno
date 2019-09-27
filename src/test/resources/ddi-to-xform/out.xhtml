@@ -250,7 +250,7 @@
                            name="DATEFIRST"
                            ref="DATEFIRST"
                            type="xf:date">
-                     <xf:constraint value="if (string(.) != '' and . castable as xs:date) then (. &gt;= xs:date('1900-01-01') and . &lt;= xs:date('2019-09-24')) else (string(.) = '')"/>
+                     <xf:constraint value="if (string(.) != '' and . castable as xs:date) then (. &gt;= xs:date('1900-01-01') and . &lt; current-date()) else (string(.) = '')"/>
                   </xf:bind>
                   <xf:bind id="AUDIENCE_SHARE-bind" name="AUDIENCE_SHARE" ref="AUDIENCE_SHARE">
                      <xf:constraint value="if(. castable as xs:float) then (xs:float(.)&lt;=99.0 and xs:float(.)&gt;=0.0 and matches(.,'^(0|[1-9]|[1-8][0-9]{1}|9[0-8])(\.[0-9]{1,1})?$|^99(\.[0-0])?$')) else (.='')"/>
@@ -706,7 +706,7 @@
                   <DATEFIRST>
                      <label>&lt;p&gt;&lt;span class="block question date"&gt;➡ 5. When was the first episode of the Simpsons?&lt;/span&gt;&lt;span class="block "&gt;For your information, the date of the last broadcast was on ¤LAST_BROADCAST¤ &lt;/span&gt;&lt;/p&gt;</label>
                      <hint>Date au format JJ/MM/AAAA</hint>
-                     <alert>Entrez une date valide postérieure à 1 Janvier 1900 et antérieure à 24 Septembre 2019</alert>
+                     <alert>Entrez une date valide postérieure à 1 Janvier 1900 et antérieure à aujourd'hui</alert>
                   </DATEFIRST>
                   <AUDIENCE_SHARE>
                      <label>➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?</label>
@@ -1616,7 +1616,7 @@
                   <DATEFIRST>
                      <label>&lt;p&gt;&lt;span class="block question date"&gt;➡ 5. When was the first episode of the Simpsons?&lt;/span&gt;&lt;span class="block "&gt;For your information, the date of the last broadcast was on ¤LAST_BROADCAST¤ &lt;/span&gt;&lt;/p&gt;</label>
                      <hint>Date in JJ/MM/AAAA format</hint>
-                     <alert>Type a valid date after 1 January 1900 and before 24 September 2019</alert>
+                     <alert>Type a valid date after 1 January 1900 and before today</alert>
                   </DATEFIRST>
                   <AUDIENCE_SHARE>
                      <label>➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?</label>

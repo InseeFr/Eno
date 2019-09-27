@@ -1209,13 +1209,27 @@
                         <xsl:attribute name="value">
                             <xsl:value-of select="'if (string(.) != '''' and . castable as xs:date) then ('"/>
                             <xsl:if test="$minimum != ''">
-                                <xsl:value-of select="concat('. &gt;= xs:date(''',$minimum,''')')"/>
+                                <xsl:choose>
+                                    <xsl:when test="contains($minimum,'current-date()')">
+                                        <xsl:value-of select="'. &gt; current-date()'"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat('. &gt;= xs:date(''',$minimum,''')')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:if>
                             <xsl:if test="$minimum != '' and $maximum != ''">
                                 <xsl:value-of select="' and '"/>
                             </xsl:if>
                             <xsl:if test="$maximum != ''">
-                                <xsl:value-of select="concat('. &lt;= xs:date(''',$maximum,''')')"/>
+                                <xsl:choose>
+                                    <xsl:when test="contains($maximum,'current-date()')">
+                                        <xsl:value-of select="'. &lt; current-date()'"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat('. &lt;= xs:date(''',$maximum,''')')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:if>
                             <xsl:value-of select="') else (string(.) = '''')'"/>
                         </xsl:attribute>
@@ -1793,7 +1807,7 @@
             <xsl:if test="$appearance != ''">
                 <xsl:choose>
                     <xsl:when test="$appearance = 'drop-down-list'">
-                        <xsl:attribute name="appearance" select="'minimal'"/>        
+                        <xsl:attribute name="appearance" select="'minimal'"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:attribute name="appearance" select="'full'"/>
@@ -2502,7 +2516,7 @@
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
                                     <xsl:when test="contains($minimum,'current-date')">
-                                        <xsl:value-of select="year-from-date(current-date())"/>
+                                        <xsl:value-of select="'year-from-date(current-date())'"/>
                                     </xsl:when>
                                     <xsl:when test="contains($minimum,'-')">
                                         <xsl:value-of select="substring-before($minimum,'-')"/>
@@ -2518,7 +2532,7 @@
                             <xsl:attribute name="maximum">
                                 <xsl:choose>
                                     <xsl:when test="contains($maximum,'current-date')">
-                                        <xsl:value-of select="year-from-date(current-date())"/>
+                                        <xsl:value-of select="'year-from-date(current-date())'"/>
                                     </xsl:when>
                                     <xsl:when test="contains($maximum,'-')">
                                         <xsl:value-of select="substring-before($maximum,'-')"/>
@@ -2527,7 +2541,7 @@
                                         <xsl:value-of select="$maximum"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of select="year-from-date(current-date())"/>
+                                        <xsl:value-of select="'year-from-date(current-date())'"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>

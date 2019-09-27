@@ -29,6 +29,7 @@
     <LessThan>less than</LessThan>
     <Plural>s</Plural>
     <AddLine>Add a line</AddLine>
+    <Today>today</Today>
     <DateTime>
         <Months>
             <M01>January</M01>
