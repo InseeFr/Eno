@@ -29,6 +29,7 @@
     <LessThan>inférieur à</LessThan>
     <Plural>s</Plural>
     <AddLine>Ajouter une ligne</AddLine>
+    <Today>aujourd'hui</Today>
     <DateTime>
         <Months>
             <M01>Janvier</M01>
