@@ -17,15 +17,70 @@
         <PostProcessing>fr-insert-welcome</PostProcessing>
         <PostProcessing>fr-insert-end</PostProcessing>
         <PostProcessing>fr-fix-adherence</PostProcessing>
-        
-        <SpecificTreatmentDDI>false</SpecificTreatmentDDI>
-        <SpecificTreatmentFR>false</SpecificTreatmentFR>
-        <SpecificTreatmentPDF>false</SpecificTreatmentPDF>
-        <SpecificTreatmentODT>false</SpecificTreatmentODT>
-        <SpecificTreatmentS>false</SpecificTreatmentS>
     </Pipeline>
     
     <Parameters>
+        <StudyUnit>default</StudyUnit>
+        
+        <Campagne>test</Campagne>  
+        
+        <Languages>
+            <Language>fr</Language>
+        </Languages>
+        
+        <BeginQuestion>
+            <Identification>false</Identification>
+        </BeginQuestion>
+        
+        <EndQuestion>
+            <ResponseTimeQuestion>false</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+        
+        <fr-parameters>
+            <NumericExample>false</NumericExample>
+            <Deblocage>false</Deblocage>
+            <Satisfaction>false</Satisfaction>
+            <LengthOfLongTable>7</LengthOfLongTable>
+            <DecimalSeparator>.</DecimalSeparator>
+            <Css></Css>
+        </fr-parameters>
+        
+        <pdf-parameters>
+            <Format>
+                <Orientation>0</Orientation>
+                <Columns>1</Columns>
+            </Format>
+            <Roster>
+                <Row>
+                    <DefaultSize>12</DefaultSize>
+                </Row>
+            </Roster>
+            <TextArea>
+                <Row>
+                    <DefaultSize>3</DefaultSize>
+                </Row>
+            </TextArea>
+            <Table>
+                <Row>
+                    <DefaultSize>14</DefaultSize>
+                </Row>
+            </Table>
+            <Capture>
+                <Numeric>manual</Numeric>
+            </Capture>
+            <PageBreakBetween>
+                <pdf>module</pdf>
+            </PageBreakBetween>
+            <AccompanyingMails>
+                <AccompanyingMail>ouvertureCOL</AccompanyingMail>
+            </AccompanyingMails>
+        </pdf-parameters>
+        
+        <js-parameters/>        
+        
+        <odt-parameters/>        
+    
         <Title>
             <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->
             <Browsing>module</Browsing>
@@ -72,89 +127,6 @@
                 </Level>
             </Question>
         </Title>
-        
-        <Languages>
-            <Language>fr</Language>
-        </Languages>
-        
-        <StudyUnit>default</StudyUnit>
-        
-        <Campagne>test</Campagne>
-        
-        <fr-parameters>
-            <BeginQuestion>
-                <Identification>false</Identification>
-            </BeginQuestion>
-            <EndQuestion>
-                <ResponseTimeQuestion>false</ResponseTimeQuestion>
-                <CommentQuestion>true</CommentQuestion>
-            </EndQuestion>
-            <NumericExample>false</NumericExample>
-            <Deblocage>false</Deblocage>
-            <Satisfaction>false</Satisfaction>
-            <LengthOfLongTable>
-                <Length>7</Length>
-            </LengthOfLongTable>
-            <DecimalSeparator>,</DecimalSeparator>
-        </fr-parameters>
-        
-        <pdf-parameters>
-            <BeginQuestion>
-                <Identification>false</Identification>
-            </BeginQuestion>
-            <EndQuestion>
-                <ResponseTimeQuestion>false</ResponseTimeQuestion>
-                <CommentQuestion>true</CommentQuestion>
-            </EndQuestion>
-            <Format>
-                <Orientation>0</Orientation>
-                <Columns>1</Columns>
-            </Format>
-            <Roster>
-                <Row>
-                    <DefaultSize>12</DefaultSize>
-                </Row>
-            </Roster>
-            <TextArea>
-                <Row>
-                    <DefaultSize>3</DefaultSize>
-                </Row>
-            </TextArea>
-            <Table>
-                <Row>
-                    <DefaultSize>14</DefaultSize>
-                </Row>
-            </Table>
-            <Capture>
-                <Numeric>manual</Numeric>
-            </Capture>
-            <PageBreakBetween>
-                <pdf>module</pdf>
-            </PageBreakBetween>
-            <AccompanyingMails>
-                <AccompanyingMail>ouvertureCOL</AccompanyingMail>
-            </AccompanyingMails>
-        </pdf-parameters>
-        
-        <js-parameters>
-            <BeginQuestion>
-                <Identification>false</Identification>
-            </BeginQuestion>
-            <EndQuestion>
-                <ResponseTimeQuestion>false</ResponseTimeQuestion>
-                <CommentQuestion>true</CommentQuestion>
-            </EndQuestion>
-        </js-parameters>
-        
-        <odt-parameters>
-            <BeginQuestion>
-                <Identification>false</Identification>
-            </BeginQuestion>
-            <EndQuestion>
-                <ResponseTimeQuestion>false</ResponseTimeQuestion>
-                <CommentQuestion>true</CommentQuestion>
-            </EndQuestion>
-        </odt-parameters>    
     </Parameters>
     
 </ENOParameters>
