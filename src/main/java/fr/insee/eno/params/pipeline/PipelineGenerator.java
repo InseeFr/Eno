@@ -14,7 +14,7 @@ import fr.insee.eno.preprocessing.Preprocessor;
 
 public interface PipelineGenerator {
 	
-	public GenerationService setPipeLine(Pipeline pipeline);
+	public GenerationService setPipeLine(Pipeline pipeline) throws Exception;
 	
 	public Postprocessor[] setPostProcessors(List<PostProcessing> postProcessings);
 	

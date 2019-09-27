@@ -3,11 +3,15 @@ package fr.insee.eno.params.pipeline;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2FRGenerator;
 import fr.insee.eno.generation.DDI2JSGenerator;
 import fr.insee.eno.generation.DDI2ODTGenerator;
 import fr.insee.eno.generation.DDI2PDFGenerator;
+import fr.insee.eno.generation.DDI2PoguesXMLGenerator;
 import fr.insee.eno.generation.Generator;
 import fr.insee.eno.generation.PoguesXML2DDIGenerator;
 import fr.insee.eno.parameters.InFormat;
@@ -19,6 +23,7 @@ import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.postprocessing.ddi.DDIPostprocessor;
 import fr.insee.eno.postprocessing.fr.FRBrowsingPostprocessor;
+import fr.insee.eno.postprocessing.fr.FREditPatronPostprocessor;
 import fr.insee.eno.postprocessing.fr.FRFixAdherencePostprocessor;
 import fr.insee.eno.postprocessing.fr.FRIdentificationPostprocessor;
 import fr.insee.eno.postprocessing.fr.FRInsertEndPostprocessor;
@@ -35,26 +40,42 @@ import fr.insee.eno.postprocessing.pdf.PDFInsertEndQuestionPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFMailingPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFTableColumnPostprocessorFake;
+import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
+import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
+import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
+import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
 import fr.insee.eno.preprocessing.Preprocessor;
 
 public class PipeLineGeneratorImpl implements PipelineGenerator {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PipeLineGeneratorImpl.class);
 
 	@Override
-	public GenerationService setPipeLine(Pipeline pipeline) {
+	public GenerationService setPipeLine(Pipeline pipeline) throws Exception {
 		
 		Preprocessor[] preprocessors = setPreProcessors(pipeline.getPreProcessing());
 		Generator generator = setGenerator(pipeline.getInFormat(), pipeline.getOutFormat());
 		Postprocessor[] postprocessors = setPostProcessors(pipeline.getPostProcessing());
 		
+		logger.info("PreProccesings : "+preprocessors.length);
+		logger.info("Core generation : "+generator.in2out());
+		logger.info("PostProccesings : "+postprocessors.length);
 		return new GenerationService(preprocessors, generator, postprocessors);
 	}
 
 	@Override
 	public Postprocessor[] setPostProcessors(List<PostProcessing> postProcessings) {
 		List<Postprocessor> postprocessors = new ArrayList<Postprocessor>();
-		for(PostProcessing postProcessing : postProcessings) {
-			postprocessors.add(getPostPorcessor(postProcessing));
+		if(!postProcessings.isEmpty()) {
+			for(PostProcessing postProcessing : postProcessings) {
+				postprocessors.add(getPostPorcessor(postProcessing));
+			}
 		}
+		else {
+			postprocessors.add(new NoopPostprocessor());
+		}
+		
 		return postprocessors.toArray(new Postprocessor[postprocessors.size()]);
 	}
 
@@ -79,6 +100,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		case DDI:
 			switch (outFormat) {
 			case DDI:
+				// DDI32ToDDI33
+				generator=null; //TODO : add new IdentityGenerator()
 				break;
 			case FR:
 				generator = new DDI2FRGenerator();
@@ -93,6 +116,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 				generator = new DDI2PDFGenerator();
 				break;
 			case POGUES_XML:
+				generator = new DDI2PoguesXMLGenerator();
 				break;
 			}
 			break;
@@ -101,7 +125,13 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			case DDI:
 				generator = new PoguesXML2DDIGenerator();
 				break;
+			default:
+				generator=null; //TODO : add new IdentityGenerator()
+				break;
 			}
+		case FR:
+			generator=null; //TODO : add new IdentityGenerator()
+			break;
 		}
 		return generator;
 	}
@@ -117,7 +147,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			postprocessor = new FRBrowsingPostprocessor();
 			break;
 		case FR_EDIT_PATRON:
-			postprocessor = new FRBrowsingPostprocessor();
+			postprocessor = new FREditPatronPostprocessor();
 			break;
 		case FR_FIX_ADHERENCE:
 			postprocessor = new FRFixAdherencePostprocessor();
@@ -170,6 +200,15 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		case JS_SPECIFIC_TREATMENT:
 			postprocessor = new NoopPostprocessor();
 			break;
+		case DDI_SPECIFIC_TREATMENT:
+			postprocessor = new NoopPostprocessor();
+			break;
+		case ODT_SPECIFIC_TREATMENT:
+			postprocessor = new NoopPostprocessor();
+			break;
+		case NONE:
+			postprocessor = new NoopPostprocessor();
+			break;
 		}
 		return postprocessor;
 	}
@@ -179,12 +218,19 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		Preprocessor preprocessor = null;
 		switch (preProcessing) {
 		case DDI_DEREFERENCING:
+			preprocessor = new DDIDereferencingPreprocessor();
 			break;
 		case DDI_CLEANING:
+			preprocessor = new DDICleaningPreprocessor();
 			break;
 		case DDI_TITLING:
+			preprocessor = new DDITitlingPreprocessor();
+			break;
+		case DDI_MAPPING:
+			preprocessor = new DDIMappingPreprocessor();
 			break;
 		case POGUES_XML_GOTO_2_ITE:
+			preprocessor = new PoguesXMLPreprocessorGoToTreatment();
 			break;
 		case POGUES_XML_SUPPRESSION_GOTO:
 			break;
