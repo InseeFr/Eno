@@ -19,8 +19,8 @@ public class PDFTableColumnPostprocessorFake implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(input.getPath().replace(Constants.MAILING_FO_EXTENSION,
-				Constants.TABLE_COL_SIZE_PDF_EXTENSION));
+		File outputForFOFile = new File(input.getParent(),"form"+Constants.TABLE_COL_SIZE_PDF_EXTENSION);
+		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
 
 		FileUtils.copyFile(input, outputForFOFile);
 

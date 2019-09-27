@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,13 +22,10 @@ public class FRInsertGenericQuestionsPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
-		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(surveyName);
-		String outputBasicFormPath = Constants.tEMP_XFORMS_FOLDER(sUB_TEMP_FOLDER) + "/form"+Constants.INSERT_GENERIC_QUESTIONS_FR_EXTENSION;
-		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
+		File outputForFRFile = new File(input.getParent(),"form"+Constants.INSERT_GENERIC_QUESTIONS_FR_EXTENSION);
 		
-
-		File outputForFRFile = new File(outputBasicFormPath);
-		
+		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
+				
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
 		
@@ -39,7 +35,7 @@ public class FRInsertGenericQuestionsPostprocessor implements Postprocessor {
 		inputStream.close();
 		outputStream.close();
 		FR_XSL.close();
-		logger.info("End of Insert-generic-questions post-processing.");
+		logger.info("End of Insert-generic-questions post-processing." + outputForFRFile.getAbsolutePath());
 
 		return outputForFRFile;
 	}

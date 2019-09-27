@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +24,9 @@ public class PDFMailingPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
-		File outputForFOFile = new File(
-				FilenameUtils.removeExtension(input.getPath()) + Constants.MAILING_FO_EXTENSION);
+		File outputForFOFile = new File(input.getParent(),"form"+Constants.MAILING_FO_EXTENSION);
+		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
+		
 		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2);
 
 		saxonService.transformFOToStep1FO(FileUtils.openInputStream(input),

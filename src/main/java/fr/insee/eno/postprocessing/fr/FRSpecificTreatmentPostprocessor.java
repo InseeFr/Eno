@@ -1,11 +1,11 @@
 package fr.insee.eno.postprocessing.fr;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,30 +22,40 @@ public class FRSpecificTreatmentPostprocessor implements Postprocessor {
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
-
-		File outputForFOFile = new File(
-				input.getPath().replace(Constants.INSERT_END_FR_EXTENSION, Constants.SPECIFIC_TREATMENT_FR_EXTENSION));
-		System.out.println(input.getPath());
-		String surveyName = survey;
-		String formName = getFormName(input);
-		
-		//FIXME ajouter la verrue en parametre, si elle est nulle faire ça :
-		InputStream VERRUE_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_SPECIFIC_TREATMENT_XSL); 
-		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
-
-		saxonService.transformSimple(inputStream, outputStream, VERRUE_XSL);
-		
-		inputStream.close();
-		outputStream.close();
-		VERRUE_XSL.close();
-		logger.info("End of specific treatment post-processing " + input.getAbsolutePath());
-
-		return outputForFOFile;
+		return this.process(input, parameters, null, null, survey);
 	}
 
-	private String getFormName(File input) {
-		return FilenameUtils.getBaseName(input.getParentFile().getParent());
+	@Override
+	public File process(File input, byte[] parametersFile, byte[] metadata, String survey) throws Exception {
+		return this.process(input, parametersFile, metadata, null, survey);
+	}
+
+	@Override
+	public File process(File input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, String survey) throws Exception {
+		File outputForFRFile = new File(input.getParent(),"form"+Constants.SPECIFIC_TREATMENT_FR_EXTENSION);
+
+		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
+		
+		InputStream specificTreatmentXslIS = null;
+		
+		if(specificTreatmentXsl!=null) {
+			specificTreatmentXslIS = new ByteArrayInputStream(specificTreatmentXsl);
+			InputStream inputStream = FileUtils.openInputStream(input);
+			OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
+			saxonService.transformWithSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
+
+			inputStream.close();
+			outputStream.close();
+			specificTreatmentXslIS.close();
+			
+		}
+		else {
+			logger.info("Not specific treatment in params : simply copying this file" + input.getAbsolutePath());
+			FileUtils.copyFile(input, outputForFRFile);
+		}
+		logger.info("End of specific treatment post-processing " + outputForFRFile.getAbsolutePath());		
+
+		return outputForFRFile;
 	}
 
 }

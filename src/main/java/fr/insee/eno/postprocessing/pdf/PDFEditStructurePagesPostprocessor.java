@@ -23,12 +23,12 @@ public class PDFEditStructurePagesPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(
-				input.getPath().replace(Constants.END_QUESTION_FO_EXTENSION, Constants.EDIT_STRUCTURE_FO_EXTENSION));
-		System.out.println(input.getPath());
+		
+		File outputForFOFile = new File(input.getParent(),"form"+Constants.EDIT_STRUCTURE_FO_EXTENSION);
+		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
+		
 		String surveyName = survey;
 		String formName = getFormName(input);
-
 		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF);
 
 		InputStream inputStream = FileUtils.openInputStream(input);
@@ -39,7 +39,7 @@ public class PDFEditStructurePagesPostprocessor implements Postprocessor {
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of EditStructurePages post-processing " + input.getAbsolutePath());
+		logger.info("End of EditStructurePages post-processing " + outputForFOFile.getAbsolutePath());
 
 		return outputForFOFile;
 	}

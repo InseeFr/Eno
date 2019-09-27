@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,9 +22,9 @@ public class FRBrowsingPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFRFile = new File(
-				input.getPath().replace(Constants.INSERT_GENERIC_QUESTIONS_FR_EXTENSION, Constants.BROWSING_FR_EXTENSION));
-		System.out.println(input.getPath());
+		File outputForFRFile = new File(input.getParent(),"form"+Constants.BROWSING_FR_EXTENSION);
+		
+		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
 
 		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_BROWSING_XSL);
 
@@ -37,7 +36,7 @@ public class FRBrowsingPostprocessor implements Postprocessor {
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of Browsing post-processing " + input.getAbsolutePath());
+		logger.info("End of Browsing post-processing " + outputForFRFile.getAbsolutePath());
 
 		return outputForFRFile;
 	}

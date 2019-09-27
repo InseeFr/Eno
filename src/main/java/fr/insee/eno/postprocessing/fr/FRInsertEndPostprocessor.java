@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,32 +21,29 @@ public class FRInsertEndPostprocessor implements Postprocessor {
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
+		return this.process(input, parameters, null, survey);
+	}
 
-		File outputForFOFile = new File(
-				input.getPath().replace(Constants.INSERT_WELCOME_FR_EXTENSION, Constants.INSERT_END_FR_EXTENSION));
-		System.out.println(input.getPath());
-		String surveyName = survey;
-		String formName = getFormName(input);
+	@Override
+	public File process(File input, byte[] parameters, byte[] metadata, String survey) throws Exception {
+		
+		File outputForFRFile = new File(input.getParent(),"form"+Constants.INSERT_END_FR_EXTENSION);
+
+		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
 
 		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_INSERT_END_XSL);
 
 		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
-		InputStream metadoneesStream = FileUtils.openInputStream(null);//FIXME pettre en argument les metadonnees
+		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
 
-		saxonService.transformWithMetadonnee(inputStream, outputStream, FO_XSL, parameters ,metadoneesStream);
-		
+		saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters ,metadata);
+
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		metadoneesStream.close();
-		logger.info("End of insert welcome post-processing " + input.getAbsolutePath());
+		logger.info("End of insert end post-processing " + outputForFRFile.getAbsolutePath());
 
-		return outputForFOFile;
-	}
-
-	private String getFormName(File input) {
-		return FilenameUtils.getBaseName(input.getParentFile().getParent());
+		return outputForFRFile;
 	}
 
 }

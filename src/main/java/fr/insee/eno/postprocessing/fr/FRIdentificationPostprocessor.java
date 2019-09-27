@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,30 +22,22 @@ public class FRIdentificationPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(
-				input.getPath().replace(Constants.EDIT_PATRON_FR_EXTENSION, Constants.IDENTIFICATION_FR_EXTENSION));
-		System.out.println(input.getPath());
-		String surveyName = survey;
-		String formName = getFormName(input);
+		File outputForFRFile = new File(input.getParent(),"form"+Constants.IDENTIFICATION_FR_EXTENSION);
 		
-		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.IDENTIFICATION_FR_EXTENSION);
+		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
+		
+		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_IDENTIFICATION_XSL);
 
 		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
+		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
 
-		//FIXME changer identification pour la rendre paramétrable en fonction de studyUnit 
 		saxonService.transformSimple(inputStream, outputStream, FO_XSL);
 		
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of identification post-processing " + input.getAbsolutePath());
+		logger.info("End of identification post-processing " + outputForFRFile.getAbsolutePath());
 
-		return outputForFOFile;
+		return outputForFRFile;
 	}
-
-	private String getFormName(File input) {
-		return FilenameUtils.getBaseName(input.getParentFile().getParent());
-	}
-
 }

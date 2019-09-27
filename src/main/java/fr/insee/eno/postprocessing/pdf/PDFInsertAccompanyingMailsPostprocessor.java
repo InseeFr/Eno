@@ -23,9 +23,9 @@ public class PDFInsertAccompanyingMailsPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(
-				input.getPath().replace(Constants.COVER_PAGE_FO_EXTENSION, Constants.FINAL_PDF_EXTENSION));
-		System.out.println(input.getPath());
+		File outputForFOFile = new File(input.getParent(),"form"+Constants.FINAL_PDF_EXTENSION);
+		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
+		
 		String surveyName = survey;
 		String formName = getFormName(input);
 
@@ -39,7 +39,7 @@ public class PDFInsertAccompanyingMailsPostprocessor implements Postprocessor {
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of InsertAccompanyingMails post-processing " + input.getAbsolutePath());
+		logger.info("End of InsertAccompanyingMails post-processing " + outputForFOFile.getAbsolutePath());
 
 		return outputForFOFile;
 	}

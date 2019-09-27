@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,29 +22,25 @@ public class FRFixAdherencePostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(
-				input.getPath().replace(Constants.SPECIFIC_TREATMENT_FR_EXTENSION, Constants.FIX_ADHERENCE_FR_EXTENSION));
-		System.out.println(input.getPath());
-		String surveyName = survey;
-		String formName = getFormName(input);
+		
+		File outputForFRFile = new File(input.getParent(),"form"+Constants.FIX_ADHERENCE_FR_EXTENSION);
+
+		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
 		
 		InputStream FR_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_FIX_ADHERENCE_XSL);
 
 		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
+		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
+
 
 		saxonService.transformSimple(inputStream, outputStream, FR_XSL);
 		
 		inputStream.close();
 		outputStream.close();
 		FR_XSL.close();
-		logger.info("End of specific treatment post-processing " + input.getAbsolutePath());
+		logger.info("End of fix adherence treatment post-processing " + outputForFRFile.getAbsolutePath());
 
-		return outputForFOFile;
-	}
-
-	private String getFormName(File input) {
-		return FilenameUtils.getBaseName(input.getParentFile().getParent());
+		return outputForFRFile;
 	}
 
 }

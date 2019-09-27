@@ -23,9 +23,8 @@ public class PDFInsertCoverPagePostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(
-				input.getPath().replace(Constants.SPECIFIC_TREAT_PDF_EXTENSION, Constants.COVER_PAGE_FO_EXTENSION));
-		System.out.println(input.getPath());
+		File outputForFOFile = new File(input.getParent(),"form"+Constants.COVER_PAGE_FO_EXTENSION);
+		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
 		String surveyName = survey;
 		String formName = getFormName(input);
 
@@ -39,7 +38,7 @@ public class PDFInsertCoverPagePostprocessor implements Postprocessor {
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of InsertCoverPage post-processing " + input.getAbsolutePath());
+		logger.info("End of InsertCoverPage post-processing " + outputForFOFile.getAbsolutePath());
 
 		return outputForFOFile;
 	}

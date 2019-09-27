@@ -23,9 +23,9 @@ public class PDFInsertEndQuestionPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(
-				input.getPath().replace(Constants.TABLE_COL_SIZE_PDF_EXTENSION, Constants.END_QUESTION_FO_EXTENSION));
-		System.out.println(input.getPath());
+		File outputForFOFile = new File(input.getParent(),"form"+Constants.END_QUESTION_FO_EXTENSION);
+		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
+		
 		String surveyName = survey;
 		String formName = getFormName(input);
 
@@ -39,7 +39,7 @@ public class PDFInsertEndQuestionPostprocessor implements Postprocessor {
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of InsertEndQuestion post-processing " + input.getAbsolutePath());
+		logger.info("End of InsertEndQuestion post-processing " + outputForFOFile.getAbsolutePath());
 
 		return outputForFOFile;
 	}

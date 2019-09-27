@@ -25,13 +25,12 @@ public class JSExternalizeVariablesPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
-		File outputCustomFOFile = new File(
-				input.getPath().replace(Constants.SORT_COMPONENTS_JS_EXTENSION, Constants.FINAL_JS_EXTENSION));
-		
+		File outputForJSFile = new File(input.getParent(),"form"+Constants.FINAL_JS_EXTENSION);
+		logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
+						
 		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS);
-		
 		InputStream inputStream = FileUtils.openInputStream(input);
-		OutputStream outputStream = FileUtils.openOutputStream(outputCustomFOFile);
+		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
 
 		saxonService.transformJSToJSPost(inputStream,outputStream, JS_XSL);
 		inputStream.close();
@@ -39,7 +38,7 @@ public class JSExternalizeVariablesPostprocessor implements Postprocessor {
 		JS_XSL.close();
 		logger.info("End JS externalize codeLists post-processing");
 
-		return outputCustomFOFile;
+		return outputForJSFile;
 	}
 
 }

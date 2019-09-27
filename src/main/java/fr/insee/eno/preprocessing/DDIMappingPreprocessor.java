@@ -1,12 +1,10 @@
 package fr.insee.eno.preprocessing;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

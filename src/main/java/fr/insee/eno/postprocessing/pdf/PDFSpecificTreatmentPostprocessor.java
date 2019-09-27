@@ -22,9 +22,9 @@ public class PDFSpecificTreatmentPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(
-				input.getPath().replace(Constants.EDIT_STRUCTURE_FO_EXTENSION, Constants.SPECIFIC_TREAT_PDF_EXTENSION));
-
+		File outputForFOFile = new File(input.getParent(),"form"+Constants.SPECIFIC_TREAT_PDF_EXTENSION);
+		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
+		
 		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(survey);
 
 		InputStream FO_XSL = Constants
@@ -41,7 +41,7 @@ public class PDFSpecificTreatmentPostprocessor implements Postprocessor {
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of SpecificTreatment post-processing " + input.getAbsolutePath());
+		logger.info("End of SpecificTreatment post-processing " + outputForFOFile.getAbsolutePath());
 
 		return outputForFOFile;
 	}
