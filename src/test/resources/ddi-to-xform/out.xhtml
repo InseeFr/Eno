@@ -2692,17 +2692,13 @@
                <xf:case id="2">
                   <fr:section id="j6p0ti5h-control" bind="j6p0ti5h-bind" name="j6p0ti5h">
                      <xf:label ref="$form-resources/j6p0ti5h/label"/>
-                     <xf:output id="j6p0ti5h-d1-control"
-                                name="j6p0ti5h-d1"
-                                bind="j6p0ti5h-d1-bind"
-                                xxf:order="label control hint help alert">
+                     <xf:output id="j6p0ti5h-d1-control" name="j6p0ti5h-d1" bind="j6p0ti5h-d1-bind">
                         <xf:label ref="$form-resources/j6p0ti5h-d1/label" mediatype="text/html"/>
                      </xf:output>
                      <xf:textarea id="COMMENT-control"
                                   name="COMMENT"
                                   bind="COMMENT-bind"
                                   class="question text text500"
-                                  xxf:order="label control hint help alert"
                                   xxf:maxlength="500">
                         <xf:label ref="$form-resources/COMMENT/label" mediatype="text/html"/>
                      </xf:textarea>
@@ -2710,8 +2706,7 @@
                                 name="READY"
                                 bind="READY-bind"
                                 appearance="full"
-                                class="question"
-                                xxf:order="label control hint help alert">
+                                class="question">
                         <xf:label ref="$form-resources/READY/label"/>
                         <xf:itemset ref="$form-resources/READY/item">
                            <xf:label ref="label"/>
@@ -2754,7 +2749,6 @@
                                      name="PRODUCER"
                                      bind="PRODUCER-bind"
                                      class="question text text30"
-                                     xxf:order="label control hint help alert"
                                      xxf:maxlength="30">
                               <xf:label ref="$form-resources/PRODUCER/label"/>
                            </xf:input>
@@ -2762,7 +2756,6 @@
                                      name="SEASON_NUMBER"
                                      bind="SEASON_NUMBER-bind"
                                      class="question number"
-                                     xxf:order="label control hint help alert"
                                      xxf:maxlength="2">
                               <xf:label ref="$form-resources/SEASON_NUMBER/label"/>
                               <xf:alert ref="$form-resources/SEASON_NUMBER/alert"/>
@@ -2770,8 +2763,7 @@
                            <xf:input id="DATEFIRST-control"
                                      name="DATEFIRST"
                                      bind="DATEFIRST-bind"
-                                     class="question date"
-                                     xxf:order="label control hint help alert">
+                                     class="question date">
                               <xf:label ref="replace($form-resources/DATEFIRST/label,'¤LAST_BROADCAST¤',instance('fr-form-instance')//LAST_BROADCAST)"
                                         mediatype="text/html"/>
                               <xf:hint ref="$form-resources/DATEFIRST/hint"/>
@@ -2781,7 +2773,6 @@
                                      name="AUDIENCE_SHARE"
                                      bind="AUDIENCE_SHARE-bind"
                                      class="question number"
-                                     xxf:order="label control hint help alert"
                                      xxf:maxlength="4">
                               <xf:label ref="$form-resources/AUDIENCE_SHARE/label"/>
                               <xf:alert ref="$form-resources/AUDIENCE_SHARE/alert"/>
@@ -2793,18 +2784,14 @@
                <xf:case id="3">
                   <fr:section id="j3341528-control" bind="j3341528-bind" name="j3341528">
                      <xf:label ref="$form-resources/j3341528/label"/>
-                     <xf:output id="j3341528-d2-control"
-                                name="j3341528-d2"
-                                bind="j3341528-d2-bind"
-                                xxf:order="label control hint help alert">
+                     <xf:output id="j3341528-d2-control" name="j3341528-d2" bind="j3341528-d2-bind">
                         <xf:label ref="$form-resources/j3341528-d2/label"/>
                      </xf:output>
                      <xf:select1 id="CITY-control"
                                  name="CITY"
                                  bind="CITY-bind"
                                  appearance="full"
-                                 class="question"
-                                 xxf:order="label control hint help alert">
+                                 class="question">
                         <xf:label ref="$form-resources/CITY/label" mediatype="text/html"/>
                         <xf:itemset ref="$form-resources/CITY/item">
                            <xf:label ref="label"/>
@@ -2815,8 +2802,7 @@
                                 name="MAYOR"
                                 bind="MAYOR-bind"
                                 appearance="full"
-                                class="question"
-                                xxf:order="label control hint help alert">
+                                class="question">
                         <xf:label ref="$form-resources/MAYOR/label" mediatype="text/html"/>
                         <xf:itemset ref="$form-resources/MAYOR/item">
                            <xf:label ref="label"/>
@@ -2832,8 +2818,7 @@
                                  name="STATE"
                                  bind="STATE-bind"
                                  appearance="minimal"
-                                 class="question"
-                                 xxf:order="label control hint help alert">
+                                 class="question">
                         <xf:label ref="$form-resources/STATE/label"/>
                         <xf:item>
                            <xf:label/>
@@ -2853,15 +2838,13 @@
                         <xf:output id="j334akov-control"
                                    name="j334akov"
                                    bind="j334akov-bind"
-                                   class="question multiple-choice-question"
-                                   xxf:order="label control hint help alert">
+                                   class="question multiple-choice-question">
                            <xf:label ref="$form-resources/j334akov/label" mediatype="text/html"/>
                         </xf:output>
                         <xf:select id="PET1-control"
                                    name="PET1"
                                    bind="PET1-bind"
-                                   appearance="full"
-                                   xxf:order="label control hint help alert">
+                                   appearance="full">
                            <xf:itemset ref="$form-resources/PET1/item">
                               <xf:label ref="label"/>
                               <xf:value ref="value"/>
@@ -2870,8 +2853,7 @@
                         <xf:select id="PET2-control"
                                    name="PET2"
                                    bind="PET2-bind"
-                                   appearance="full"
-                                   xxf:order="label control hint help alert">
+                                   appearance="full">
                            <xf:itemset ref="$form-resources/PET2/item">
                               <xf:label ref="label"/>
                               <xf:value ref="value"/>
@@ -2880,8 +2862,7 @@
                         <xf:select id="PET3-control"
                                    name="PET3"
                                    bind="PET3-bind"
-                                   appearance="full"
-                                   xxf:order="label control hint help alert">
+                                   appearance="full">
                            <xf:itemset ref="$form-resources/PET3/item">
                               <xf:label ref="label"/>
                               <xf:value ref="value"/>
@@ -2890,8 +2871,7 @@
                         <xf:select id="PET4-control"
                                    name="PET4"
                                    bind="PET4-bind"
-                                   appearance="full"
-                                   xxf:order="label control hint help alert">
+                                   appearance="full">
                            <xf:itemset ref="$form-resources/PET4/item">
                               <xf:label ref="label"/>
                               <xf:value ref="value"/>
@@ -2901,15 +2881,13 @@
                      <xf:output id="d12-SI-control"
                                 name="d12-SI"
                                 bind="d12-SI-bind"
-                                class="statement"
-                                xxf:order="label control hint help alert">
+                                class="statement">
                         <xf:label ref="$form-resources/d12-SI/label" mediatype="text/html"/>
                      </xf:output>
                      <xf:output id="j6p29i81-control"
                                 name="j6p29i81"
                                 bind="j6p29i81-bind"
-                                class="question multiple-choice-question"
-                                xxf:order="label control hint help alert">
+                                class="question multiple-choice-question">
                         <xf:label ref="$form-resources/j6p29i81/label"/>
                      </xf:output>
                      <xhtml:table name="j6p29i81" class="question multiple-choice-question">
@@ -2922,8 +2900,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6p29i81-j6p2mvca-1-control"
                                             name="j6p29i81-j6p2mvca-1"
-                                            bind="j6p29i81-j6p2mvca-1-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6p29i81-j6p2mvca-1-bind">
                                     <xf:label ref="$form-resources/j6p29i81-j6p2mvca-1/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -2931,8 +2908,7 @@
                                  <xf:select1 id="ICE_FLAVOUR1-control"
                                              name="ICE_FLAVOUR1"
                                              bind="ICE_FLAVOUR1-bind"
-                                             appearance="full"
-                                             xxf:order="label control hint help alert">
+                                             appearance="full">
                                     <xf:itemset ref="$form-resources/ICE_FLAVOUR1/item">
                                        <xf:label ref="label"/>
                                        <xf:value ref="value"/>
@@ -2944,8 +2920,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6p29i81-j6p2mvca-2-control"
                                             name="j6p29i81-j6p2mvca-2"
-                                            bind="j6p29i81-j6p2mvca-2-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6p29i81-j6p2mvca-2-bind">
                                     <xf:label ref="$form-resources/j6p29i81-j6p2mvca-2/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -2953,8 +2928,7 @@
                                  <xf:select1 id="ICE_FLAVOUR2-control"
                                              name="ICE_FLAVOUR2"
                                              bind="ICE_FLAVOUR2-bind"
-                                             appearance="full"
-                                             xxf:order="label control hint help alert">
+                                             appearance="full">
                                     <xf:itemset ref="$form-resources/ICE_FLAVOUR2/item">
                                        <xf:label ref="label"/>
                                        <xf:value ref="value"/>
@@ -2966,8 +2940,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6p29i81-j6p2mvca-3-control"
                                             name="j6p29i81-j6p2mvca-3"
-                                            bind="j6p29i81-j6p2mvca-3-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6p29i81-j6p2mvca-3-bind">
                                     <xf:label ref="$form-resources/j6p29i81-j6p2mvca-3/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -2975,8 +2948,7 @@
                                  <xf:select1 id="ICE_FLAVOUR3-control"
                                              name="ICE_FLAVOUR3"
                                              bind="ICE_FLAVOUR3-bind"
-                                             appearance="full"
-                                             xxf:order="label control hint help alert">
+                                             appearance="full">
                                     <xf:itemset ref="$form-resources/ICE_FLAVOUR3/item">
                                        <xf:label ref="label"/>
                                        <xf:value ref="value"/>
@@ -2988,8 +2960,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6p29i81-j6p2mvca-4-control"
                                             name="j6p29i81-j6p2mvca-4"
-                                            bind="j6p29i81-j6p2mvca-4-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6p29i81-j6p2mvca-4-bind">
                                     <xf:label ref="$form-resources/j6p29i81-j6p2mvca-4/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -2997,8 +2968,7 @@
                                  <xf:select1 id="ICE_FLAVOUR4-control"
                                              name="ICE_FLAVOUR4"
                                              bind="ICE_FLAVOUR4-bind"
-                                             appearance="full"
-                                             xxf:order="label control hint help alert">
+                                             appearance="full">
                                     <xf:itemset ref="$form-resources/ICE_FLAVOUR4/item">
                                        <xf:label ref="label"/>
                                        <xf:value ref="value"/>
@@ -3011,8 +2981,7 @@
                      <xf:output id="j6qefnga-control"
                                 name="j6qefnga"
                                 bind="j6qefnga-bind"
-                                class="question multiple-choice-question"
-                                xxf:order="label control hint help alert">
+                                class="question multiple-choice-question">
                         <xf:label ref="$form-resources/j6qefnga/label"/>
                      </xf:output>
                      <xhtml:table name="j6qefnga" class="question multiple-choice-question">
@@ -3025,8 +2994,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6qefnga-j6qeytgc-1-control"
                                             name="j6qefnga-j6qeytgc-1"
-                                            bind="j6qefnga-j6qeytgc-1-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6qefnga-j6qeytgc-1-bind">
                                     <xf:label ref="$form-resources/j6qefnga-j6qeytgc-1/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -3034,8 +3002,7 @@
                                  <xf:select1 id="NUCLEAR_CHARACTER1-control"
                                              name="NUCLEAR_CHARACTER1"
                                              bind="NUCLEAR_CHARACTER1-bind"
-                                             appearance="minimal"
-                                             xxf:order="label control hint help alert">
+                                             appearance="minimal">
                                     <xf:item>
                                        <xf:label/>
                                        <xf:value/>
@@ -3051,8 +3018,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6qefnga-j6qeytgc-2-control"
                                             name="j6qefnga-j6qeytgc-2"
-                                            bind="j6qefnga-j6qeytgc-2-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6qefnga-j6qeytgc-2-bind">
                                     <xf:label ref="$form-resources/j6qefnga-j6qeytgc-2/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -3060,8 +3026,7 @@
                                  <xf:select1 id="NUCLEAR_CHARACTER2-control"
                                              name="NUCLEAR_CHARACTER2"
                                              bind="NUCLEAR_CHARACTER2-bind"
-                                             appearance="minimal"
-                                             xxf:order="label control hint help alert">
+                                             appearance="minimal">
                                     <xf:item>
                                        <xf:label/>
                                        <xf:value/>
@@ -3077,8 +3042,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6qefnga-j6qeytgc-3-control"
                                             name="j6qefnga-j6qeytgc-3"
-                                            bind="j6qefnga-j6qeytgc-3-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6qefnga-j6qeytgc-3-bind">
                                     <xf:label ref="$form-resources/j6qefnga-j6qeytgc-3/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -3086,8 +3050,7 @@
                                  <xf:select1 id="NUCLEAR_CHARACTER3-control"
                                              name="NUCLEAR_CHARACTER3"
                                              bind="NUCLEAR_CHARACTER3-bind"
-                                             appearance="minimal"
-                                             xxf:order="label control hint help alert">
+                                             appearance="minimal">
                                     <xf:item>
                                        <xf:label/>
                                        <xf:value/>
@@ -3103,8 +3066,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6qefnga-j6qeytgc-4-control"
                                             name="j6qefnga-j6qeytgc-4"
-                                            bind="j6qefnga-j6qeytgc-4-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6qefnga-j6qeytgc-4-bind">
                                     <xf:label ref="$form-resources/j6qefnga-j6qeytgc-4/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -3112,8 +3074,7 @@
                                  <xf:select1 id="NUCLEAR_CHARACTER4-control"
                                              name="NUCLEAR_CHARACTER4"
                                              bind="NUCLEAR_CHARACTER4-bind"
-                                             appearance="minimal"
-                                             xxf:order="label control hint help alert">
+                                             appearance="minimal">
                                     <xf:item>
                                        <xf:label/>
                                        <xf:value/>
@@ -3130,8 +3091,7 @@
                      <xf:output id="j6yzoc6g-control"
                                 name="j6yzoc6g"
                                 bind="j6yzoc6g-bind"
-                                class="question multiple-choice-question"
-                                xxf:order="label control hint help alert">
+                                class="question multiple-choice-question">
                         <xf:label ref="$form-resources/j6yzoc6g/label"/>
                      </xf:output>
                      <xhtml:table name="j6yzoc6g" class="question multiple-choice-question">
@@ -3144,8 +3104,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6yzoc6g-j6z087mq-1-control"
                                             name="j6yzoc6g-j6z087mq-1"
-                                            bind="j6yzoc6g-j6z087mq-1-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6yzoc6g-j6z087mq-1-bind">
                                     <xf:label ref="$form-resources/j6yzoc6g-j6z087mq-1/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -3153,8 +3112,7 @@
                                  <xf:select id="BIRTH_CHARACTER1-control"
                                             name="BIRTH_CHARACTER1"
                                             bind="BIRTH_CHARACTER1-bind"
-                                            appearance="full"
-                                            xxf:order="label control hint help alert">
+                                            appearance="full">
                                     <xf:itemset ref="$form-resources/BIRTH_CHARACTER1/item">
                                        <xf:label ref="label"/>
                                        <xf:value ref="value"/>
@@ -3171,8 +3129,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6yzoc6g-j6z087mq-2-control"
                                             name="j6yzoc6g-j6z087mq-2"
-                                            bind="j6yzoc6g-j6z087mq-2-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6yzoc6g-j6z087mq-2-bind">
                                     <xf:label ref="$form-resources/j6yzoc6g-j6z087mq-2/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -3180,8 +3137,7 @@
                                  <xf:select id="BIRTH_CHARACTER2-control"
                                             name="BIRTH_CHARACTER2"
                                             bind="BIRTH_CHARACTER2-bind"
-                                            appearance="full"
-                                            xxf:order="label control hint help alert">
+                                            appearance="full">
                                     <xf:itemset ref="$form-resources/BIRTH_CHARACTER2/item">
                                        <xf:label ref="label"/>
                                        <xf:value ref="value"/>
@@ -3198,8 +3154,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6yzoc6g-j6z087mq-3-control"
                                             name="j6yzoc6g-j6z087mq-3"
-                                            bind="j6yzoc6g-j6z087mq-3-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6yzoc6g-j6z087mq-3-bind">
                                     <xf:label ref="$form-resources/j6yzoc6g-j6z087mq-3/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -3207,8 +3162,7 @@
                                  <xf:select id="BIRTH_CHARACTER3-control"
                                             name="BIRTH_CHARACTER3"
                                             bind="BIRTH_CHARACTER3-bind"
-                                            appearance="full"
-                                            xxf:order="label control hint help alert">
+                                            appearance="full">
                                     <xf:itemset ref="$form-resources/BIRTH_CHARACTER3/item">
                                        <xf:label ref="label"/>
                                        <xf:value ref="value"/>
@@ -3225,8 +3179,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6yzoc6g-j6z087mq-4-control"
                                             name="j6yzoc6g-j6z087mq-4"
-                                            bind="j6yzoc6g-j6z087mq-4-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6yzoc6g-j6z087mq-4-bind">
                                     <xf:label ref="$form-resources/j6yzoc6g-j6z087mq-4/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -3234,8 +3187,7 @@
                                  <xf:select id="BIRTH_CHARACTER4-control"
                                             name="BIRTH_CHARACTER4"
                                             bind="BIRTH_CHARACTER4-bind"
-                                            appearance="full"
-                                            xxf:order="label control hint help alert">
+                                            appearance="full">
                                     <xf:itemset ref="$form-resources/BIRTH_CHARACTER4/item">
                                        <xf:label ref="label"/>
                                        <xf:value ref="value"/>
@@ -3252,8 +3204,7 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6yzoc6g-j6z087mq-5-control"
                                             name="j6yzoc6g-j6z087mq-5"
-                                            bind="j6yzoc6g-j6z087mq-5-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6yzoc6g-j6z087mq-5-bind">
                                     <xf:label ref="$form-resources/j6yzoc6g-j6z087mq-5/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -3261,8 +3212,7 @@
                                  <xf:select id="BIRTH_CHARACTER5-control"
                                             name="BIRTH_CHARACTER5"
                                             bind="BIRTH_CHARACTER5-bind"
-                                            appearance="full"
-                                            xxf:order="label control hint help alert">
+                                            appearance="full">
                                     <xf:itemset ref="$form-resources/BIRTH_CHARACTER5/item">
                                        <xf:label ref="label"/>
                                        <xf:value ref="value"/>
@@ -3291,8 +3241,7 @@
                         <xf:output id="j4nwc63q-control"
                                    name="j4nwc63q"
                                    bind="j4nwc63q-bind"
-                                   class="question complex-grid"
-                                   xxf:order="label control hint help alert">
+                                   class="question complex-grid">
                            <xf:label ref="$form-resources/j4nwc63q/label"/>
                         </xf:output>
                         <xhtml:table name="j4nwc63q" class="long-table question complex-grid">
@@ -3304,14 +3253,12 @@
                                  <xhtml:th colspan="2" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwh16i-Header-1-control"
                                                name="j4nwc63q-j4nwh16i-Header-1"
-                                               bind="j4nwc63q-j4nwh16i-Header-1-bind"
-                                               xxf:order="label control hint help alert"/>
+                                               bind="j4nwc63q-j4nwh16i-Header-1-bind"/>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwc63q-secondDimension-fakeCL-1-1-control"
                                                name="j4nwc63q-j4nwc63q-secondDimension-fakeCL-1-1"
-                                               bind="j4nwc63q-j4nwc63q-secondDimension-fakeCL-1-1-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwc63q-secondDimension-fakeCL-1-1-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwc63q-secondDimension-fakeCL-1-1/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3322,16 +3269,14 @@
                                  <xhtml:th colspan="1" rowspan="2">
                                     <xf:output id="j4nwc63q-j4nwh16i-1-control"
                                                name="j4nwc63q-j4nwh16i-1"
-                                               bind="j4nwc63q-j4nwh16i-1-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwh16i-1-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwh16i-1/label"/>
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwh16i-2-control"
                                                name="j4nwc63q-j4nwh16i-2"
-                                               bind="j4nwc63q-j4nwh16i-2-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwh16i-2-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwh16i-2/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3340,7 +3285,6 @@
                                               name="PERCENTAGE_EXPENSES11"
                                               bind="PERCENTAGE_EXPENSES11-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="5">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES11/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
@@ -3354,8 +3298,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwh16i-3-control"
                                                name="j4nwc63q-j4nwh16i-3"
-                                               bind="j4nwc63q-j4nwh16i-3-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwh16i-3-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwh16i-3/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3364,7 +3307,6 @@
                                               name="PERCENTAGE_EXPENSES21"
                                               bind="PERCENTAGE_EXPENSES21-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="5">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES21/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
@@ -3378,16 +3320,14 @@
                                  <xhtml:th colspan="1" rowspan="3">
                                     <xf:output id="j4nwc63q-j4nwh16i-4-control"
                                                name="j4nwc63q-j4nwh16i-4"
-                                               bind="j4nwc63q-j4nwh16i-4-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwh16i-4-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwh16i-4/label"/>
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwh16i-5-control"
                                                name="j4nwc63q-j4nwh16i-5"
-                                               bind="j4nwc63q-j4nwh16i-5-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwh16i-5-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwh16i-5/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3396,7 +3336,6 @@
                                               name="PERCENTAGE_EXPENSES31"
                                               bind="PERCENTAGE_EXPENSES31-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="5">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES31/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
@@ -3410,8 +3349,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwh16i-6-control"
                                                name="j4nwc63q-j4nwh16i-6"
-                                               bind="j4nwc63q-j4nwh16i-6-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwh16i-6-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwh16i-6/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3420,7 +3358,6 @@
                                               name="PERCENTAGE_EXPENSES41"
                                               bind="PERCENTAGE_EXPENSES41-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="5">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES41/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
@@ -3434,8 +3371,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwh16i-7-control"
                                                name="j4nwc63q-j4nwh16i-7"
-                                               bind="j4nwc63q-j4nwh16i-7-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwh16i-7-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwh16i-7/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3444,7 +3380,6 @@
                                               name="PERCENTAGE_EXPENSES51"
                                               bind="PERCENTAGE_EXPENSES51-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="5">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES51/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
@@ -3458,16 +3393,14 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwh16i-8-control"
                                                name="j4nwc63q-j4nwh16i-8"
-                                               bind="j4nwc63q-j4nwh16i-8-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwh16i-8-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwh16i-8/label"/>
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwh16i-9-control"
                                                name="j4nwc63q-j4nwh16i-9"
-                                               bind="j4nwc63q-j4nwh16i-9-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwh16i-9-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwh16i-9/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3476,7 +3409,6 @@
                                               name="PERCENTAGE_EXPENSES61"
                                               bind="PERCENTAGE_EXPENSES61-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="5">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES61/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
@@ -3490,8 +3422,7 @@
                                  <xhtml:th colspan="2" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwh16i-10-control"
                                                name="j4nwc63q-j4nwh16i-10"
-                                               bind="j4nwc63q-j4nwh16i-10-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nwc63q-j4nwh16i-10-bind">
                                        <xf:label ref="$form-resources/j4nwc63q-j4nwh16i-10/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3500,7 +3431,6 @@
                                               name="PERCENTAGE_EXPENSES71"
                                               bind="PERCENTAGE_EXPENSES71-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="5">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES71/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
@@ -3514,8 +3444,7 @@
                         </xhtml:table>
                         <xf:output id="j4nwc63q-CI-0-control"
                                    name="j4nwc63q-CI-0"
-                                   bind="j4nwc63q-CI-0-bind"
-                                   xxf:order="label control hint help alert">
+                                   bind="j4nwc63q-CI-0-bind">
                            <xf:alert ref="replace($form-resources/j4nwc63q-CI-0/alert,'¤jbcggtca-GOP¤',instance('fr-form-instance')//SUM_EXPENSES)"
                                      level="error"/>
                         </xf:output>
@@ -3529,8 +3458,7 @@
                         <xf:output id="j4nw0rr6-control"
                                    name="j4nw0rr6"
                                    bind="j4nw0rr6-bind"
-                                   class="question complex-grid"
-                                   xxf:order="label control hint help alert">
+                                   class="question complex-grid">
                            <xf:label ref="$form-resources/j4nw0rr6/label"/>
                         </xf:output>
                         <xhtml:table name="j4nw0rr6" class="question complex-grid">
@@ -3542,22 +3470,19 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nw0rr6-j77dav9b-Header-1-control"
                                                name="j4nw0rr6-j77dav9b-Header-1"
-                                               bind="j4nw0rr6-j77dav9b-Header-1-bind"
-                                               xxf:order="label control hint help alert"/>
+                                               bind="j4nw0rr6-j77dav9b-Header-1-bind"/>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-1-control"
                                                name="j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-1"
-                                               bind="j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-1-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-1-bind">
                                        <xf:label ref="$form-resources/j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-1/label"/>
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-2-control"
                                                name="j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-2"
-                                               bind="j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-2-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-2-bind">
                                        <xf:label ref="$form-resources/j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-2/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3568,8 +3493,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nw0rr6-j77dav9b-1-control"
                                                name="j4nw0rr6-j77dav9b-1"
-                                               bind="j4nw0rr6-j77dav9b-1-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nw0rr6-j77dav9b-1-bind">
                                        <xf:label ref="$form-resources/j4nw0rr6-j77dav9b-1/label" mediatype="text/html"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3577,8 +3501,7 @@
                                     <xf:select1 id="CLOWNING11-control"
                                                 name="CLOWNING11"
                                                 bind="CLOWNING11-bind"
-                                                appearance="minimal"
-                                                xxf:order="label control hint help alert">
+                                                appearance="minimal">
                                        <xf:item>
                                           <xf:label/>
                                           <xf:value/>
@@ -3594,7 +3517,6 @@
                                                  name="CLOWNING12"
                                                  bind="CLOWNING12-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3602,8 +3524,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nw0rr6-j77dav9b-2-control"
                                                name="j4nw0rr6-j77dav9b-2"
-                                               bind="j4nw0rr6-j77dav9b-2-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nw0rr6-j77dav9b-2-bind">
                                        <xf:label ref="$form-resources/j4nw0rr6-j77dav9b-2/label" mediatype="text/html"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3611,8 +3532,7 @@
                                     <xf:select1 id="CLOWNING21-control"
                                                 name="CLOWNING21"
                                                 bind="CLOWNING21-bind"
-                                                appearance="minimal"
-                                                xxf:order="label control hint help alert">
+                                                appearance="minimal">
                                        <xf:item>
                                           <xf:label/>
                                           <xf:value/>
@@ -3628,7 +3548,6 @@
                                                  name="CLOWNING22"
                                                  bind="CLOWNING22-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3636,8 +3555,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nw0rr6-j77dav9b-3-control"
                                                name="j4nw0rr6-j77dav9b-3"
-                                               bind="j4nw0rr6-j77dav9b-3-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nw0rr6-j77dav9b-3-bind">
                                        <xf:label ref="$form-resources/j4nw0rr6-j77dav9b-3/label" mediatype="text/html"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3645,8 +3563,7 @@
                                     <xf:select1 id="CLOWNING31-control"
                                                 name="CLOWNING31"
                                                 bind="CLOWNING31-bind"
-                                                appearance="minimal"
-                                                xxf:order="label control hint help alert">
+                                                appearance="minimal">
                                        <xf:item>
                                           <xf:label/>
                                           <xf:value/>
@@ -3662,7 +3579,6 @@
                                                  name="CLOWNING32"
                                                  bind="CLOWNING32-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3670,8 +3586,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nw0rr6-j77dav9b-4-control"
                                                name="j4nw0rr6-j77dav9b-4"
-                                               bind="j4nw0rr6-j77dav9b-4-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j4nw0rr6-j77dav9b-4-bind">
                                        <xf:label ref="$form-resources/j4nw0rr6-j77dav9b-4/label" mediatype="text/html"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3679,8 +3594,7 @@
                                     <xf:select1 id="CLOWNING41-control"
                                                 name="CLOWNING41"
                                                 bind="CLOWNING41-bind"
-                                                appearance="minimal"
-                                                xxf:order="label control hint help alert">
+                                                appearance="minimal">
                                        <xf:item>
                                           <xf:label/>
                                           <xf:value/>
@@ -3696,7 +3610,6 @@
                                                  name="CLOWNING42"
                                                  bind="CLOWNING42-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3712,8 +3625,7 @@
                         <xf:output id="j6p2lwuj-control"
                                    name="j6p2lwuj"
                                    bind="j6p2lwuj-bind"
-                                   class="question complex-grid"
-                                   xxf:order="label control hint help alert">
+                                   class="question complex-grid">
                            <xf:label ref="$form-resources/j6p2lwuj/label" mediatype="text/html"/>
                         </xf:output>
                         <xhtml:table name="j6p2lwuj" class="question complex-grid">
@@ -3725,54 +3637,47 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-j6p2kivg-Header-1-control"
                                                name="j6p2lwuj-j6p2kivg-Header-1"
-                                               bind="j6p2lwuj-j6p2kivg-Header-1-bind"
-                                               xxf:order="label control hint help alert"/>
+                                               bind="j6p2lwuj-j6p2kivg-Header-1-bind"/>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-jbdye1wa-1-control"
                                                name="j6p2lwuj-jbdye1wa-1"
-                                               bind="j6p2lwuj-jbdye1wa-1-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j6p2lwuj-jbdye1wa-1-bind">
                                        <xf:label ref="$form-resources/j6p2lwuj-jbdye1wa-1/label"/>
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-jbdye1wa-2-control"
                                                name="j6p2lwuj-jbdye1wa-2"
-                                               bind="j6p2lwuj-jbdye1wa-2-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j6p2lwuj-jbdye1wa-2-bind">
                                        <xf:label ref="$form-resources/j6p2lwuj-jbdye1wa-2/label"/>
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-jbdye1wa-3-control"
                                                name="j6p2lwuj-jbdye1wa-3"
-                                               bind="j6p2lwuj-jbdye1wa-3-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j6p2lwuj-jbdye1wa-3-bind">
                                        <xf:label ref="$form-resources/j6p2lwuj-jbdye1wa-3/label"/>
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-jbdye1wa-4-control"
                                                name="j6p2lwuj-jbdye1wa-4"
-                                               bind="j6p2lwuj-jbdye1wa-4-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j6p2lwuj-jbdye1wa-4-bind">
                                        <xf:label ref="$form-resources/j6p2lwuj-jbdye1wa-4/label"/>
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-jbdye1wa-5-control"
                                                name="j6p2lwuj-jbdye1wa-5"
-                                               bind="j6p2lwuj-jbdye1wa-5-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j6p2lwuj-jbdye1wa-5-bind">
                                        <xf:label ref="$form-resources/j6p2lwuj-jbdye1wa-5/label" mediatype="text/html"/>
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-jbdye1wa-6-control"
                                                name="j6p2lwuj-jbdye1wa-6"
-                                               bind="j6p2lwuj-jbdye1wa-6-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j6p2lwuj-jbdye1wa-6-bind">
                                        <xf:label ref="$form-resources/j6p2lwuj-jbdye1wa-6/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3783,8 +3688,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-j6p2kivg-1-control"
                                                name="j6p2lwuj-j6p2kivg-1"
-                                               bind="j6p2lwuj-j6p2kivg-1-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j6p2lwuj-j6p2kivg-1-bind">
                                        <xf:label ref="$form-resources/j6p2lwuj-j6p2kivg-1/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3792,8 +3696,7 @@
                                     <xf:select id="TRAVEL11-control"
                                                name="TRAVEL11"
                                                bind="TRAVEL11-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL11/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3804,8 +3707,7 @@
                                     <xf:select id="TRAVEL12-control"
                                                name="TRAVEL12"
                                                bind="TRAVEL12-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL12/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3816,8 +3718,7 @@
                                     <xf:select id="TRAVEL13-control"
                                                name="TRAVEL13"
                                                bind="TRAVEL13-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL13/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3828,8 +3729,7 @@
                                     <xf:select id="TRAVEL14-control"
                                                name="TRAVEL14"
                                                bind="TRAVEL14-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL14/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3840,8 +3740,7 @@
                                     <xf:select id="TRAVEL15-control"
                                                name="TRAVEL15"
                                                bind="TRAVEL15-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL15/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3852,8 +3751,7 @@
                                     <xf:select id="TRAVEL16-control"
                                                name="TRAVEL16"
                                                bind="TRAVEL16-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL16/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3865,8 +3763,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-j6p2kivg-2-control"
                                                name="j6p2lwuj-j6p2kivg-2"
-                                               bind="j6p2lwuj-j6p2kivg-2-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j6p2lwuj-j6p2kivg-2-bind">
                                        <xf:label ref="$form-resources/j6p2lwuj-j6p2kivg-2/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3874,8 +3771,7 @@
                                     <xf:select id="TRAVEL21-control"
                                                name="TRAVEL21"
                                                bind="TRAVEL21-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL21/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3886,8 +3782,7 @@
                                     <xf:select id="TRAVEL22-control"
                                                name="TRAVEL22"
                                                bind="TRAVEL22-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL22/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3898,8 +3793,7 @@
                                     <xf:select id="TRAVEL23-control"
                                                name="TRAVEL23"
                                                bind="TRAVEL23-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL23/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3910,8 +3804,7 @@
                                     <xf:select id="TRAVEL24-control"
                                                name="TRAVEL24"
                                                bind="TRAVEL24-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL24/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3922,8 +3815,7 @@
                                     <xf:select id="TRAVEL25-control"
                                                name="TRAVEL25"
                                                bind="TRAVEL25-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL25/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3934,8 +3826,7 @@
                                     <xf:select id="TRAVEL26-control"
                                                name="TRAVEL26"
                                                bind="TRAVEL26-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL26/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3947,8 +3838,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-j6p2kivg-3-control"
                                                name="j6p2lwuj-j6p2kivg-3"
-                                               bind="j6p2lwuj-j6p2kivg-3-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j6p2lwuj-j6p2kivg-3-bind">
                                        <xf:label ref="$form-resources/j6p2lwuj-j6p2kivg-3/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -3956,8 +3846,7 @@
                                     <xf:select id="TRAVEL31-control"
                                                name="TRAVEL31"
                                                bind="TRAVEL31-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL31/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3968,8 +3857,7 @@
                                     <xf:select id="TRAVEL32-control"
                                                name="TRAVEL32"
                                                bind="TRAVEL32-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL32/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3980,8 +3868,7 @@
                                     <xf:select id="TRAVEL33-control"
                                                name="TRAVEL33"
                                                bind="TRAVEL33-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL33/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -3992,8 +3879,7 @@
                                     <xf:select id="TRAVEL34-control"
                                                name="TRAVEL34"
                                                bind="TRAVEL34-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL34/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -4004,8 +3890,7 @@
                                     <xf:select id="TRAVEL35-control"
                                                name="TRAVEL35"
                                                bind="TRAVEL35-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL35/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -4016,8 +3901,7 @@
                                     <xf:select id="TRAVEL36-control"
                                                name="TRAVEL36"
                                                bind="TRAVEL36-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL36/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -4029,8 +3913,7 @@
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-j6p2kivg-4-control"
                                                name="j6p2lwuj-j6p2kivg-4"
-                                               bind="j6p2lwuj-j6p2kivg-4-bind"
-                                               xxf:order="label control hint help alert">
+                                               bind="j6p2lwuj-j6p2kivg-4-bind">
                                        <xf:label ref="$form-resources/j6p2lwuj-j6p2kivg-4/label"/>
                                     </xf:output>
                                  </xhtml:th>
@@ -4038,8 +3921,7 @@
                                     <xf:select id="TRAVEL41-control"
                                                name="TRAVEL41"
                                                bind="TRAVEL41-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL41/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -4050,8 +3932,7 @@
                                     <xf:select id="TRAVEL42-control"
                                                name="TRAVEL42"
                                                bind="TRAVEL42-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL42/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -4062,8 +3943,7 @@
                                     <xf:select id="TRAVEL43-control"
                                                name="TRAVEL43"
                                                bind="TRAVEL43-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL43/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -4074,8 +3954,7 @@
                                     <xf:select id="TRAVEL44-control"
                                                name="TRAVEL44"
                                                bind="TRAVEL44-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL44/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -4086,8 +3965,7 @@
                                     <xf:select id="TRAVEL45-control"
                                                name="TRAVEL45"
                                                bind="TRAVEL45-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL45/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -4098,8 +3976,7 @@
                                     <xf:select id="TRAVEL46-control"
                                                name="TRAVEL46"
                                                bind="TRAVEL46-bind"
-                                               appearance="full"
-                                               xxf:order="label control hint help alert">
+                                               appearance="full">
                                        <xf:itemset ref="$form-resources/TRAVEL46/item">
                                           <xf:label ref="label"/>
                                           <xf:value ref="value"/>
@@ -4118,8 +3995,7 @@
                      <xf:output id="j6qg8rc6-control"
                                 name="j6qg8rc6"
                                 bind="j6qg8rc6-bind"
-                                class="question complex-grid"
-                                xxf:order="label control hint help alert">
+                                class="question complex-grid">
                         <xf:label ref="$form-resources/j6qg8rc6/label"/>
                      </xf:output>
                      <xhtml:table name="j6qg8rc6" class="long-table question complex-grid">
@@ -4131,16 +4007,14 @@
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1-control"
                                             name="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1"
-                                            bind="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1-bind">
                                     <xf:label ref="$form-resources/j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1/label"/>
                                  </xf:output>
                               </xhtml:th>
                               <xhtml:th colspan="1" rowspan="1">
                                  <xf:output id="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2-control"
                                             name="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2"
-                                            bind="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2-bind"
-                                            xxf:order="label control hint help alert">
+                                            bind="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2-bind">
                                     <xf:label ref="$form-resources/j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2/label"/>
                                  </xf:output>
                               </xhtml:th>
@@ -4156,7 +4030,6 @@
                                                  name="FAVOURITE_CHARACTERS11"
                                                  bind="FAVOURITE_CHARACTERS11-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4164,7 +4037,6 @@
                                               name="FAVOURITE_CHARACTERS12"
                                               bind="FAVOURITE_CHARACTERS12-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="3">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS12/alert"/>
                                     </xf:input>
@@ -4176,7 +4048,6 @@
                                                  name="FAVOURITE_CHARACTERS21"
                                                  bind="FAVOURITE_CHARACTERS21-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4184,7 +4055,6 @@
                                               name="FAVOURITE_CHARACTERS22"
                                               bind="FAVOURITE_CHARACTERS22-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="3">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS22/alert"/>
                                     </xf:input>
@@ -4196,7 +4066,6 @@
                                                  name="FAVOURITE_CHARACTERS31"
                                                  bind="FAVOURITE_CHARACTERS31-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4204,7 +4073,6 @@
                                               name="FAVOURITE_CHARACTERS32"
                                               bind="FAVOURITE_CHARACTERS32-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="3">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS32/alert"/>
                                     </xf:input>
@@ -4216,7 +4084,6 @@
                                                  name="FAVOURITE_CHARACTERS41"
                                                  bind="FAVOURITE_CHARACTERS41-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4224,7 +4091,6 @@
                                               name="FAVOURITE_CHARACTERS42"
                                               bind="FAVOURITE_CHARACTERS42-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="3">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS42/alert"/>
                                     </xf:input>
@@ -4236,7 +4102,6 @@
                                                  name="FAVOURITE_CHARACTERS51"
                                                  bind="FAVOURITE_CHARACTERS51-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4244,7 +4109,6 @@
                                               name="FAVOURITE_CHARACTERS52"
                                               bind="FAVOURITE_CHARACTERS52-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="3">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS52/alert"/>
                                     </xf:input>
@@ -4256,7 +4120,6 @@
                                                  name="FAVOURITE_CHARACTERS61"
                                                  bind="FAVOURITE_CHARACTERS61-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4264,7 +4127,6 @@
                                               name="FAVOURITE_CHARACTERS62"
                                               bind="FAVOURITE_CHARACTERS62-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="3">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS62/alert"/>
                                     </xf:input>
@@ -4276,7 +4138,6 @@
                                                  name="FAVOURITE_CHARACTERS71"
                                                  bind="FAVOURITE_CHARACTERS71-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4284,7 +4145,6 @@
                                               name="FAVOURITE_CHARACTERS72"
                                               bind="FAVOURITE_CHARACTERS72-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="3">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS72/alert"/>
                                     </xf:input>
@@ -4296,7 +4156,6 @@
                                                  name="FAVOURITE_CHARACTERS81"
                                                  bind="FAVOURITE_CHARACTERS81-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4304,7 +4163,6 @@
                                               name="FAVOURITE_CHARACTERS82"
                                               bind="FAVOURITE_CHARACTERS82-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="3">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS82/alert"/>
                                     </xf:input>
@@ -4316,7 +4174,6 @@
                                                  name="FAVOURITE_CHARACTERS91"
                                                  bind="FAVOURITE_CHARACTERS91-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4324,7 +4181,6 @@
                                               name="FAVOURITE_CHARACTERS92"
                                               bind="FAVOURITE_CHARACTERS92-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="3">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS92/alert"/>
                                     </xf:input>
@@ -4336,7 +4192,6 @@
                                                  name="FAVOURITE_CHARACTERS101"
                                                  bind="FAVOURITE_CHARACTERS101-bind"
                                                  class="text text255"
-                                                 xxf:order="label control hint help alert"
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
@@ -4344,7 +4199,6 @@
                                               name="FAVOURITE_CHARACTERS102"
                                               bind="FAVOURITE_CHARACTERS102-bind"
                                               class="number"
-                                              xxf:order="label control hint help alert"
                                               xxf:maxlength="3">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS102/alert"/>
                                     </xf:input>
@@ -4371,7 +4225,6 @@
                                   name="SURVEY_COMMENT"
                                   bind="SURVEY_COMMENT-bind"
                                   class="question text text255"
-                                  xxf:order="label control hint help alert"
                                   xxf:maxlength="255">
                         <xf:label ref="$form-resources/SURVEY_COMMENT/label"/>
                      </xf:textarea>
