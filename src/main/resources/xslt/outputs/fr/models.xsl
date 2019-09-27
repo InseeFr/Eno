@@ -1755,7 +1755,6 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:if>
-            <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
             <xsl:if test="not($length = '')">
                 <xsl:attribute name="xxf:maxlength" select="$length"/>
             </xsl:if>
@@ -1915,7 +1914,6 @@
             <xsl:if test="$css-class != ''">
                 <xsl:attribute name="class" select="$css-class"/>
             </xsl:if>
-            <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
             <xf:alert>
                 <xsl:attribute name="ref">
                     <xsl:call-template name="label-ref-condition">
@@ -2336,7 +2334,6 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
-                <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
                 <xsl:if test="$current-driver = 'DurationDomain'">
                     <xsl:attribute name="xxf:maxlength" select="if (string-length(@minimum) &gt; string-length(@maximum)) then string-length(@minimum) else string-length(@maximum)"/>
                 </xsl:if>
@@ -2430,7 +2427,7 @@
             </xsl:if>
         </xsl:for-each>
         <xsl:if test="$current-driver = 'DurationDomain' or count($layout-list//format) &gt; 1">
-            <xf:output id="{$name}-dateduration-constraint-control" name="{$name}-dateduration-constraint" bind="{$name}-dateduration-constraint-bind" xxf:order="label control hint help alert">
+            <xf:output id="{$name}-dateduration-constraint-control" name="{$name}-dateduration-constraint" bind="{$name}-dateduration-constraint-bind">
                 <xf:alert ref="$form-resources/{$name}-dateduration-constraint/alert" level="error"/>
             </xf:output>
         </xsl:if>
