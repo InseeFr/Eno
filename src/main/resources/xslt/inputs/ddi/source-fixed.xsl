@@ -479,13 +479,13 @@
         <xsl:choose>
             <xsl:when test="$standart-maximum = ''"/>
             <xsl:when test="$standart-maximum = 'format-date(current-date(),''[Y0001]-[M01]-[D01]'')'">
-                <xsl:value-of select="format-date(current-date(),'[Y0001]-[M01]-[D01]')"/>
+                <xsl:value-of select="'format-date(current-date(),''[Y0001]-[M01]-[D01]'')'"/>
             </xsl:when>
             <xsl:when test="$standart-maximum = 'format-date(current-date(),''[Y0001]-[M01]'')'">
-                <xsl:value-of select="format-date(current-date(),'[Y0001]-[M01]')"/>
+                <xsl:value-of select="'format-date(current-date(),''[Y0001]-[M01]'')'"/>
             </xsl:when>
             <xsl:when test="$standart-maximum = 'year-from-date(current-date())'">
-                <xsl:value-of select="year-from-date(current-date())"/>
+                <xsl:value-of select="'year-from-date(current-date())'"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$standart-maximum"/>
