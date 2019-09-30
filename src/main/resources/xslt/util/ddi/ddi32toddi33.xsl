@@ -180,7 +180,7 @@
 
                                 <xsl:when test="$dereferenced-questionnaire/* and r32:SourceParameterReference">
                                     <!-- collected variable -->
-                                    <xsl:value-of select="$dereferenced-questionnaire//*[local-name()='QuestionReference'][*/*[local-name()='ID']/text() = current()/r32:QuestionReference/r32:ID/text()]/local-name()"/>
+                                    <xsl:value-of select="$dereferenced-questionnaire//*[local-name()='QuestionReference'][descendant::*[local-name()='ID' and not(ends-with(parent::*/local-name(),'Reference'))]/text() = current()/r32:QuestionReference/r32:ID/text()]/local-name()"/>
                                 </xsl:when>
                                 <xsl:when test="$dereferenced-questionnaire/* and l32:VariableRepresentation/r32:ProcessingInstructionReference">
                                     <!-- calculated variable -->
