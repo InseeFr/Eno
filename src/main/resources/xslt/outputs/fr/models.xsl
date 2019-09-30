@@ -358,7 +358,7 @@
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
                     <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="$relevant"/>
+                        <xsl:with-param name="formula" select="normalize-space($relevant)"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-hideable-command-variables($source-context),' ')">
@@ -374,7 +374,7 @@
             <xsl:if test="$variable-calculate != ''">
                 <xsl:attribute name="calculate">
                     <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="$variable-calculate"/>
+                        <xsl:with-param name="formula" select="normalize-space($variable-calculate)"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-variable-calculation-variables($source-context),' ')">
@@ -391,7 +391,7 @@
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
                     <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="$readonly"/>
+                        <xsl:with-param name="formula" select="normalize-space($readonly)"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-deactivatable-command-variables($source-context),' ')">
@@ -419,7 +419,7 @@
                                 </xsl:for-each>
                             </xsl:variable>
                             <xsl:call-template name="replaceVariablesInFormula">
-                                <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
+                                <xsl:with-param name="formula" select="normalize-space($initial-readonly-ancestors)"/>
                                 <xsl:with-param name="variables" as="node()">
                                     <Variables>
                                         <xsl:for-each select="enofr:get-readonly-ancestors-variables($source-context)">
@@ -432,7 +432,7 @@
                             </xsl:call-template>
                         </xsl:if>
                         <xsl:call-template name="replaceVariablesInFormula">
-                            <xsl:with-param name="formula" select="$constraint"/>
+                            <xsl:with-param name="formula" select="normalize-space($constraint)"/>
                             <xsl:with-param name="variables" as="node()">
                                 <Variables>
                                     <xsl:for-each select="tokenize(enofr:get-control-variables($source-context),' ')">
@@ -480,7 +480,7 @@
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
                     <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="$relevant"/>
+                        <xsl:with-param name="formula" select="normalize-space($relevant)"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-hideable-command-variables($source-context),' ')">
@@ -497,7 +497,7 @@
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
                     <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="$readonly"/>
+                        <xsl:with-param name="formula" select="normalize-space($readonly)"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-deactivatable-command-variables($source-context),' ')">
@@ -554,7 +554,7 @@
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
                     <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="$relevant"/>
+                        <xsl:with-param name="formula" select="normalize-space($relevant)"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-hideable-command-variables($source-context),' ')">
@@ -571,7 +571,7 @@
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
                     <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="$readonly"/>
+                        <xsl:with-param name="formula" select="normalize-space($readonly)"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-deactivatable-command-variables($source-context),' ')">
@@ -881,7 +881,7 @@
             <xsl:if test="$relevant != ''">
                 <xsl:attribute name="relevant">
                     <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="$relevant"/>
+                        <xsl:with-param name="formula" select="normalize-space($relevant)"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-hideable-command-variables($source-context),' ')">
@@ -898,7 +898,7 @@
                 <xsl:attribute name="readonly">
                     <xsl:value-of select="'not('"/>
                     <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="$readonly"/>
+                        <xsl:with-param name="formula" select="normalize-space($readonly)"/>
                         <xsl:with-param name="variables" as="node()">
                             <Variables>
                                 <xsl:for-each select="tokenize(enofr:get-deactivatable-command-variables($source-context),' ')">
@@ -1087,7 +1087,7 @@
                 <xsl:if test="$relevant != ''">
                     <xsl:attribute name="relevant">
                         <xsl:call-template name="replaceVariablesInFormula">
-                            <xsl:with-param name="formula" select="$relevant"/>
+                            <xsl:with-param name="formula" select="normalize-space($relevant)"/>
                             <xsl:with-param name="variables" as="node()">
                                 <Variables>
                                     <xsl:for-each select="tokenize(enofr:get-hideable-command-variables($source-context),' ')">
@@ -1104,7 +1104,7 @@
                     <xsl:attribute name="readonly">
                         <xsl:value-of select="'not('"/>
                         <xsl:call-template name="replaceVariablesInFormula">
-                            <xsl:with-param name="formula" select="$readonly"/>
+                            <xsl:with-param name="formula" select="normalize-space($readonly)"/>
                             <xsl:with-param name="variables" as="node()">
                                 <Variables>
                                     <xsl:for-each select="tokenize(enofr:get-deactivatable-command-variables($source-context),' ')">
@@ -2868,7 +2868,7 @@
                         </xsl:when>
                         <xsl:when test="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable) != ''">
                             <xsl:call-template name="replaceVariablesInFormula">
-                                <xsl:with-param name="formula" select="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable)"/>
+                                <xsl:with-param name="formula" select="normalize-space(enofr:get-conditioning-variable-formula($source-context,$conditioning-variable))"/>
                                 <xsl:with-param name="variables" as="node()">
                                     <Variables>
                                         <xsl:for-each select="tokenize(enofr:get-conditioning-variable-formula-variables($source-context,$conditioning-variable),' ')">
@@ -2915,7 +2915,6 @@
         <xsl:param name="variables" as="node()"/>
 
         <xsl:variable name="instance-group" select="tokenize($instance-ancestor,' ')[last()]"/>
-        <xsl:variable name="formula" select="normalize-space($formula)"/>
 
         <xsl:choose>
             <xsl:when test="$variables/Variable">
