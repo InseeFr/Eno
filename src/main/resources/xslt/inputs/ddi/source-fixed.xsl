@@ -1146,19 +1146,19 @@
         <xsl:choose>
             <!-- collected variable -->
             <xsl:when test="$root//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
-                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable]">
+                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable and not(l:TypeOfVariableGroup='Questionnaire')]">
                     <xsl:sequence select="l:VariableGroupName/r:String"/>
                 </xsl:for-each>
             </xsl:when>
             <!-- calculated variable -->
             <xsl:when test="$root//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
-                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable]">
+                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable and not(l:TypeOfVariableGroup='Questionnaire')]">
                     <xsl:sequence select="l:VariableGroupName/r:String"/>
                 </xsl:for-each>
             </xsl:when>
             <!-- external variable -->
             <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
-                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::l:VariableName/r:String= $variable]">
+                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::l:VariableName/r:String= $variable and not(l:TypeOfVariableGroup='Questionnaire')]">
                     <xsl:sequence select="l:VariableGroupName/r:String"/>
                 </xsl:for-each>
             </xsl:when>
