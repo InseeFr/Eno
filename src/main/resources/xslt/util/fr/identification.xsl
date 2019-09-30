@@ -4,7 +4,7 @@
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
     xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <xsl:output method="xml" encoding="utf-8"/>
+    <xsl:output method="xml" indent="yes" encoding="utf-8"/>
     <!-- Transformation pour ajouter le module d'identification -->
 
     <!-- On détermine quelle est la page d'identification -->
