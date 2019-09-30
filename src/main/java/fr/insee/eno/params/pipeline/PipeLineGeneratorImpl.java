@@ -1,10 +1,13 @@
 package fr.insee.eno.params.pipeline;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2FRGenerator;
@@ -21,7 +24,7 @@ import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.ddi.DDIPostprocessor;
+import fr.insee.eno.postprocessing.ddi.DDIMarkdown2XhtmlPostprocessor;
 import fr.insee.eno.postprocessing.fr.FRBrowsingPostprocessor;
 import fr.insee.eno.postprocessing.fr.FREditPatronPostprocessor;
 import fr.insee.eno.postprocessing.fr.FRFixAdherencePostprocessor;
@@ -47,20 +50,90 @@ import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
 import fr.insee.eno.preprocessing.Preprocessor;
 
+@Service
 public class PipeLineGeneratorImpl implements PipelineGenerator {
 	
-	private static final Logger logger = LoggerFactory.getLogger(PipeLineGeneratorImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(PipeLineGeneratorImpl.class);
+	
+	// In2Out Generator
+	@Autowired
+	DDI2FRGenerator ddi2frGenerator;
+	@Autowired
+	DDI2JSGenerator ddi2jsGenerator;
+	@Autowired
+	DDI2ODTGenerator ddi2odtGenerator;
+	@Autowired
+	DDI2PDFGenerator ddi2pdfGenerator;
+	@Autowired
+	DDI2PoguesXMLGenerator ddi2poguesXmlGenerator;
+	@Autowired
+	PoguesXML2DDIGenerator poguesXml2ddiGenerator;
+	
+	// PreProcessing
+	@Autowired
+	DDIDereferencingPreprocessor ddiDereferencing;
+	@Autowired
+	DDICleaningPreprocessor ddiCleaning;
+	@Autowired
+	DDITitlingPreprocessor ddiTitling;
+	@Autowired
+	DDIMappingPreprocessor ddiMapping;
+	@Autowired
+	PoguesXMLPreprocessorGoToTreatment poguesXmlGoTo;
+	
+	// PostProcessing
+	@Autowired
+	DDIMarkdown2XhtmlPostprocessor ddiMW2XHTML;
+	@Autowired
+	FRBrowsingPostprocessor frBrowsing;
+	@Autowired
+	FREditPatronPostprocessor frEditPatron;
+	@Autowired
+	FRFixAdherencePostprocessor frFixAdherence;
+	@Autowired
+	FRIdentificationPostprocessor frIdentification;
+	@Autowired
+	FRInsertEndPostprocessor frInsertEnd;
+	@Autowired
+	FRInsertGenericQuestionsPostprocessor frInsertGenericQuestions;
+	@Autowired
+	FRInsertWelcomePostprocessor frInsertWelcome;
+	@Autowired
+	FRModeleColtranePostprocessor frModeleColtrane;
+	@Autowired
+	FRSpecificTreatmentPostprocessor frSpecificTreatment;
+	@Autowired
+	PDFEditStructurePagesPostprocessor pdfEditStructurePages;
+	@Autowired
+	PDFInsertAccompanyingMailsPostprocessor pdfInsertAccompanyingMails;
+	@Autowired
+	PDFInsertCoverPagePostprocessor pdfInsertCoverPage;
+	@Autowired
+	PDFInsertEndQuestionPostprocessor pdfInsertEndQuestion;
+	@Autowired
+	PDFMailingPostprocessor pdfMailing;
+	@Autowired
+	PDFSpecificTreatmentPostprocessor pdfSpecificTreatment;
+	@Autowired
+	PDFTableColumnPostprocessorFake pdfTableColumn;
+	@Autowired
+	JSExternalizeVariablesPostprocessor jsExternalizeVariables;
+	@Autowired
+	JSSortComponentsPostprocessor jsSortComponents;
+	@Autowired
+	NoopPostprocessor noop;
+	
 
 	@Override
 	public GenerationService setPipeLine(Pipeline pipeline) throws Exception {
-		
+		LOGGER.info("Creating new pipeline...");
 		Preprocessor[] preprocessors = setPreProcessors(pipeline.getPreProcessing());
 		Generator generator = setGenerator(pipeline.getInFormat(), pipeline.getOutFormat());
 		Postprocessor[] postprocessors = setPostProcessors(pipeline.getPostProcessing());
 		
-		logger.info("PreProccesings : "+preprocessors.length);
-		logger.info("Core generation : "+generator.in2out());
-		logger.info("PostProccesings : "+postprocessors.length);
+		LOGGER.info("PreProccesings : "+Arrays.toString(preprocessors));
+		LOGGER.info("Core generation : "+generator.in2out());
+		LOGGER.info("PostProccesings : "+Arrays.toString(postprocessors));
 		return new GenerationService(preprocessors, generator, postprocessors);
 	}
 
@@ -87,10 +160,6 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		}
 		return preprocessors.toArray(new Preprocessor[preprocessors.size()]);
 	}
-
-	
-	
-	
 	
 	@Override
 	public Generator setGenerator(InFormat inFormat, OutFormat outFormat) {
@@ -104,26 +173,26 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 				generator=null; //TODO : add new IdentityGenerator()
 				break;
 			case FR:
-				generator = new DDI2FRGenerator();
+				generator = ddi2frGenerator;
 				break;
 			case JS:
-				generator = new DDI2JSGenerator();
+				generator = ddi2jsGenerator;
 				break;
 			case ODT:
-				generator = new DDI2ODTGenerator();
+				generator = ddi2odtGenerator;
 				break;
 			case PDF:
-				generator = new DDI2PDFGenerator();
+				generator = ddi2pdfGenerator;
 				break;
 			case POGUES_XML:
-				generator = new DDI2PoguesXMLGenerator();
+				generator = ddi2poguesXmlGenerator;
 				break;
 			}
 			break;
 		case POGUES_XML:
 			switch (outFormat) {
 			case DDI:
-				generator = new PoguesXML2DDIGenerator();
+				generator = poguesXml2ddiGenerator;
 				break;
 			default:
 				generator=null; //TODO : add new IdentityGenerator()
@@ -141,73 +210,70 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		Postprocessor postprocessor = null;
 		switch (postProcessing) {
 		case DDI_MARKDOWN_TO_XHTML:
-			postprocessor = new DDIPostprocessor();
+			postprocessor = ddiMW2XHTML;
 			break;
 		case FR_BROWSING:
-			postprocessor = new FRBrowsingPostprocessor();
+			postprocessor = frBrowsing;
 			break;
 		case FR_EDIT_PATRON:
-			postprocessor = new FREditPatronPostprocessor();
+			postprocessor = frEditPatron;
 			break;
 		case FR_FIX_ADHERENCE:
-			postprocessor = new FRFixAdherencePostprocessor();
+			postprocessor = frFixAdherence;
 			break;
 		case FR_IDENTIFICATION:
-			postprocessor = new FRIdentificationPostprocessor();
+			postprocessor = frIdentification;
 			break;
 		case FR_INSERT_END:
-			postprocessor = new FRInsertEndPostprocessor();
+			postprocessor = frInsertEnd;
 			break;
 		case FR_INSERT_GENERIC_QUESTIONS:
-			postprocessor = new FRInsertGenericQuestionsPostprocessor();
+			postprocessor = frInsertGenericQuestions;
 			break;
 		case FR_INSERT_WELCOME:
-			postprocessor = new FRInsertWelcomePostprocessor();
+			postprocessor = frInsertWelcome;
 			break;
 		case FR_MODELE_COLTRANE:
-			postprocessor = new FRModeleColtranePostprocessor();
+			postprocessor = frModeleColtrane;
 			break;
 		case FR_SPECIFIC_TREATMENT:
-			postprocessor = new FRSpecificTreatmentPostprocessor();
+			postprocessor = frSpecificTreatment;
 			break;
 		case PDF_EDIT_STRUCTURE_PAGES:
-			postprocessor = new PDFEditStructurePagesPostprocessor();
+			postprocessor = pdfEditStructurePages;
 			break;
 		case PDF_INSERT_ACCOMPANYING_MAILS:
-			postprocessor = new PDFInsertAccompanyingMailsPostprocessor();
+			postprocessor = pdfInsertAccompanyingMails;
 			break;
 		case PDF_INSERT_COVER_PAGE:
-			postprocessor = new PDFInsertCoverPagePostprocessor();
+			postprocessor = pdfInsertCoverPage;
 			break;
 		case PDF_INSERT_END_QUESTION:
-			postprocessor = new PDFInsertEndQuestionPostprocessor();
+			postprocessor = pdfInsertEndQuestion;
 			break;
 		case PDF_MAILING:
-			postprocessor = new PDFMailingPostprocessor();
+			postprocessor = pdfMailing;
 			break;
 		case PDF_SPECIFIC_TREATMENT:
-			postprocessor = new PDFSpecificTreatmentPostprocessor();
+			postprocessor = pdfSpecificTreatment;
 			break;
 		case PDF_TABLE_COLUMN:
-			postprocessor = new PDFTableColumnPostprocessorFake();
+			postprocessor = pdfTableColumn;
 			break;
 		case JS_EXTERNALIZE_VARIABLES:
-			postprocessor = new JSExternalizeVariablesPostprocessor();
+			postprocessor = jsExternalizeVariables;
 			break;
 		case JS_SORT_COMPONENTS:
-			postprocessor = new JSSortComponentsPostprocessor();
+			postprocessor = jsSortComponents;
 			break;
 		case JS_SPECIFIC_TREATMENT:
-			postprocessor = new NoopPostprocessor();
+			postprocessor = noop;
 			break;
 		case DDI_SPECIFIC_TREATMENT:
-			postprocessor = new NoopPostprocessor();
+			postprocessor = noop;
 			break;
 		case ODT_SPECIFIC_TREATMENT:
-			postprocessor = new NoopPostprocessor();
-			break;
-		case NONE:
-			postprocessor = new NoopPostprocessor();
+			postprocessor = noop;
 			break;
 		}
 		return postprocessor;
@@ -218,19 +284,19 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		Preprocessor preprocessor = null;
 		switch (preProcessing) {
 		case DDI_DEREFERENCING:
-			preprocessor = new DDIDereferencingPreprocessor();
+			preprocessor = ddiDereferencing;
 			break;
 		case DDI_CLEANING:
-			preprocessor = new DDICleaningPreprocessor();
+			preprocessor = ddiCleaning;
 			break;
 		case DDI_TITLING:
-			preprocessor = new DDITitlingPreprocessor();
+			preprocessor = ddiTitling;
 			break;
 		case DDI_MAPPING:
-			preprocessor = new DDIMappingPreprocessor();
+			preprocessor = ddiMapping;
 			break;
 		case POGUES_XML_GOTO_2_ITE:
-			preprocessor = new PoguesXMLPreprocessorGoToTreatment();
+			preprocessor = poguesXmlGoTo;
 			break;
 		case POGUES_XML_SUPPRESSION_GOTO:
 			break;

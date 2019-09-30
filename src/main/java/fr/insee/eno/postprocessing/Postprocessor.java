@@ -17,4 +17,6 @@ public interface Postprocessor {
 	default File process(File input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, String survey) throws Exception{
 		return this.process(input,parametersFile,metadata,survey);
 	}
+	
+	public String toString();
 }

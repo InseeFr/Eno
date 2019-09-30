@@ -8,18 +8,21 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.transform.xsl.XslParameters;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
+@Service
 public class DDI2FRGenerator implements Generator {
 
 
 	private static final Logger logger = LoggerFactory.getLogger(DDI2FRGenerator.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	@Autowired
+	private XslTransformation saxonService;
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
@@ -49,18 +52,7 @@ public class DDI2FRGenerator implements Generator {
 		isFinalInput.close();
 		osOutputBasicForm.close();
 
-		String outputForm = Constants.TEMP_FOLDER_PATH + "/" + surveyName + "/" + formNameFolder + "/form/form.xhtml";
-
-		InputStream isOutputBasicFormPath = FileUtils.openInputStream(new File(outputBasicFormPath));
-		OutputStream osOutputForm = FileUtils.openOutputStream(new File(outputForm));
-		InputStream isBROWSING_TEMPLATE_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_BROWSING_XSL);
-		saxonService.transformBrowsingDDI2FR(isOutputBasicFormPath, osOutputForm, isBROWSING_TEMPLATE_XSL,
-				Constants.LABEL_FOLDER);
-		isOutputBasicFormPath.close();
-		osOutputForm.close();
-		isBROWSING_TEMPLATE_XSL.close();
-
-		return new File(outputForm);
+		return new File(outputBasicFormPath);
 	}
 
 	/**

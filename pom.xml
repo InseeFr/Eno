@@ -51,6 +51,7 @@
 		<commons-io.version>2.5</commons-io.version>
 		<saxon.version>9.7.0-8</saxon.version>
 		<fop.version>2.2</fop.version>
+		<spring.version>5.1.5.RELEASE</spring.version>
 		<source.plugin.version>3.0.1</source.plugin.version>
 		<javadoc.plugin.version>3.0.0</javadoc.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -88,12 +89,33 @@
 			<version>${fop.version}</version>
 		</dependency>
 
-		<!-- LOG4j and SL4J depandancies -->
+		<!-- LOG4j and SL4J dependancies -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.25</version>
 		</dependency>
+
+		<!-- Spring dependancies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
 
 		<!-- Test dependencies -->
 		<dependency>
@@ -131,8 +153,6 @@
 			<artifactId>eclipselink</artifactId>
 			<version>2.6.0</version>
 		</dependency>
-
-
 
 	</dependencies>
 

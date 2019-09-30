@@ -8,22 +8,28 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
+@Service
 public class PDFInsertEndQuestionPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(PDFInsertEndQuestionPostprocessor.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	@Autowired
+	private XslTransformation saxonService;
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFOFile = new File(input.getParent(),"form"+Constants.END_QUESTION_FO_EXTENSION);
+		File outputForFOFile = new File(input.getParent(),
+				Constants.BASE_NAME_FORM_FILE +
+				Constants.END_QUESTION_FO_EXTENSION);
 		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
 		
 		String surveyName = survey;
@@ -46,6 +52,10 @@ public class PDFInsertEndQuestionPostprocessor implements Postprocessor {
 
 	private String getFormName(File input) {
 		return FilenameUtils.getBaseName(input.getParentFile().getParent());
+	}
+	
+	public String toString() {
+		return PostProcessing.PDF_INSERT_END_QUESTION.name();
 	}
 
 }

@@ -8,17 +8,21 @@ import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
+@Service
 public class FRSpecificTreatmentPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(FRSpecificTreatmentPostprocessor.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	@Autowired
+	private XslTransformation saxonService;
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
@@ -32,7 +36,9 @@ public class FRSpecificTreatmentPostprocessor implements Postprocessor {
 
 	@Override
 	public File process(File input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, String survey) throws Exception {
-		File outputForFRFile = new File(input.getParent(),"form"+Constants.SPECIFIC_TREATMENT_FR_EXTENSION);
+		File outputForFRFile = new File(input.getParent(),
+				Constants.BASE_NAME_FORM_FILE +
+				Constants.SPECIFIC_TREATMENT_FR_EXTENSION);
 
 		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
 		
@@ -42,7 +48,7 @@ public class FRSpecificTreatmentPostprocessor implements Postprocessor {
 			specificTreatmentXslIS = new ByteArrayInputStream(specificTreatmentXsl);
 			InputStream inputStream = FileUtils.openInputStream(input);
 			OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
-			saxonService.transformWithSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
+			saxonService.transformWithFRSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
 
 			inputStream.close();
 			outputStream.close();
@@ -56,6 +62,11 @@ public class FRSpecificTreatmentPostprocessor implements Postprocessor {
 		logger.info("End of specific treatment post-processing " + outputForFRFile.getAbsolutePath());		
 
 		return outputForFRFile;
+	}
+	
+	@Override
+	public String toString() {
+		return PostProcessing.FR_SPECIFIC_TREATMENT.name();
 	}
 
 }

@@ -7,22 +7,28 @@ import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
+@Service
 public class FRInsertGenericQuestionsPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(FRInsertGenericQuestionsPostprocessor.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	@Autowired
+	private XslTransformation saxonService;
 
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
-		File outputForFRFile = new File(input.getParent(),"form"+Constants.INSERT_GENERIC_QUESTIONS_FR_EXTENSION);
+		File outputForFRFile = new File(input.getParent(),
+				Constants.BASE_NAME_FORM_FILE +
+				Constants.INSERT_GENERIC_QUESTIONS_FR_EXTENSION);
 		
 		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
 				
@@ -38,6 +44,11 @@ public class FRInsertGenericQuestionsPostprocessor implements Postprocessor {
 		logger.info("End of Insert-generic-questions post-processing." + outputForFRFile.getAbsolutePath());
 
 		return outputForFRFile;
+	}
+	
+	@Override
+	public String toString() {
+		return PostProcessing.FR_INSERT_GENERIC_QUESTIONS.name();
 	}
 
 }

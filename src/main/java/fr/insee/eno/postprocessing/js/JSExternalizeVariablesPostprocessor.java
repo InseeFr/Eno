@@ -7,25 +7,31 @@ import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
 /**
  * Customization of JS postprocessor.
  */
+@Service
 public class JSExternalizeVariablesPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(JSExternalizeVariablesPostprocessor.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	@Autowired
+	private XslTransformation saxonService;
 
 	@Override
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
-		File outputForJSFile = new File(input.getParent(),"form"+Constants.FINAL_JS_EXTENSION);
+		File outputForJSFile = new File(input.getParent(),
+				Constants.BASE_NAME_FORM_FILE +
+				Constants.FINAL_JS_EXTENSION);
 		logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
 						
 		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS);
@@ -39,6 +45,10 @@ public class JSExternalizeVariablesPostprocessor implements Postprocessor {
 		logger.info("End JS externalize codeLists post-processing");
 
 		return outputForJSFile;
+	}
+	
+	public String toString() {
+		return PostProcessing.JS_EXTERNALIZE_VARIABLES.name();
 	}
 
 }

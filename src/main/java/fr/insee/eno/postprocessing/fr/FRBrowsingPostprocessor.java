@@ -7,22 +7,28 @@ import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
+@Service
 public class FRBrowsingPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(FRBrowsingPostprocessor.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	@Autowired
+	private XslTransformation saxonService;
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		File outputForFRFile = new File(input.getParent(),"form"+Constants.BROWSING_FR_EXTENSION);
+		File outputForFRFile = new File(input.getParent(),
+				Constants.BASE_NAME_FORM_FILE +
+				Constants.BROWSING_FR_EXTENSION);
 		
 		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
 
@@ -39,6 +45,11 @@ public class FRBrowsingPostprocessor implements Postprocessor {
 		logger.info("End of Browsing post-processing " + outputForFRFile.getAbsolutePath());
 
 		return outputForFRFile;
+	}
+	
+	@Override
+	public String toString() {
+		return PostProcessing.FR_BROWSING.name();
 	}
 
 

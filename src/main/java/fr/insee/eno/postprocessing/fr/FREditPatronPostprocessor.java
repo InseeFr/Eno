@@ -7,17 +7,21 @@ import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
+@Service
 public class FREditPatronPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(FREditPatronPostprocessor.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	@Autowired
+	private XslTransformation saxonService;
 
 
 	@Override
@@ -27,7 +31,9 @@ public class FREditPatronPostprocessor implements Postprocessor {
 	
 	@Override
 	public File process(File input, byte[] parameters, byte[] metadata, String survey) throws Exception {
-		File outputForFRFile = new File(input.getParent(),"form"+Constants.EDIT_PATRON_FR_EXTENSION);
+		File outputForFRFile = new File(input.getParent(),
+				Constants.BASE_NAME_FORM_FILE +
+				Constants.EDIT_PATRON_FR_EXTENSION);
 
 		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
 
@@ -35,8 +41,6 @@ public class FREditPatronPostprocessor implements Postprocessor {
 
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
-		
-		System.out.println(outputForFRFile.getAbsolutePath());
 		saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters, metadata);
 
 		inputStream.close();
@@ -44,5 +48,10 @@ public class FREditPatronPostprocessor implements Postprocessor {
 		FO_XSL.close();
 		logger.info("End of EditPatron post-processing " + outputForFRFile.getAbsolutePath());
 		return outputForFRFile;
+	}
+	
+	@Override
+	public String toString() {
+		return PostProcessing.FR_EDIT_PATRON.name();
 	}
 }
