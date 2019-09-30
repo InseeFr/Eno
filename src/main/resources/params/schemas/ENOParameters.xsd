@@ -18,28 +18,30 @@
     <xs:element name="ENOParameters">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="Pipeline" type="Pipeline"/>
-                <xs:element name="Parameters" type="Parameters"/>
+                <xs:element name="Pipeline" type="Pipeline" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Parameters" type="Parameters" minOccurs="1" maxOccurs="1"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
         
-    <xs:complexType name="Parameters">
+    <xs:complexType name="Parameters" >
         <xs:sequence>
-            <xs:element name="Title" type="GlobalNumerotation"/>
-            <xs:element name="Languages">
+            <xs:element name="StudyUnit" type="StudyUnit" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Campagne" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Languages" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="Language" type="Language" minOccurs="0" maxOccurs="unbounded" default="fr"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="StudyUnit" type="StudyUnit"/>
-            <xs:element name="Campagne" type="xs:string"/>
+            <xs:element name="BeginQuestion" type="BeginQuestion" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="EndQuestion" type="EndQuestion" minOccurs="0" maxOccurs="1"/>
             <xs:element name="fr-parameters" type="FrParameters" minOccurs="0" maxOccurs="1"/>
             <xs:element name="pdf-parameters" type="PdfParameters" minOccurs="0" maxOccurs="1"/>
             <xs:element name="js-parameters" type="JSParameters" minOccurs="0" maxOccurs="1"/>
             <xs:element name="odt-parameters" type="ODTParameters" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Title" type="GlobalNumerotation" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>        
     </xs:complexType>
         
@@ -59,5 +61,18 @@
             <xs:enumeration value="business"/>
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:complexType name="BeginQuestion">
+        <xs:sequence>
+            <xs:element name="Identification" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="EndQuestion">
+        <xs:sequence>
+            <xs:element name="ResponseTimeQuestion" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="CommentQuestion" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
     
 </xs:schema>

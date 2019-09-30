@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
     
-    <xs:include schemaLocation="Generation.xsd"/>
-        
+    
     <xs:complexType name="PdfParameters">
-        <xs:complexContent>
-            <xs:extension base="Generation">
-                <xs:sequence>
-                    <xs:element name="Format" type="Format" maxOccurs="1"/>
-                    <xs:element name="Roster" type="Roster" maxOccurs="1"/>
-                    <xs:element name="TextArea" type="TextArea" maxOccurs="1"/>
-                    <xs:element name="Table" type="Table" maxOccurs="1"/>
-                    <xs:element name="Capture" type="Capture" maxOccurs="1"/>
-                    <xs:element name="PageBreakBetween" type="PageBreakBetween" maxOccurs="1"/>
-                    <xs:element name="AccompanyingMails" maxOccurs="1">
-                        <xs:complexType>
-                            <xs:sequence>
-                                <xs:element name="AccompanyingMail" type="AccompanyingMail" minOccurs="0" maxOccurs="unbounded"/>
-                            </xs:sequence>
-                        </xs:complexType>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>        
+        <xs:sequence>
+            <xs:element name="Format" type="Format" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Roster" type="Roster" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="TextArea" type="TextArea" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Table" type="Table" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Capture" type="Capture" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="PageBreakBetween" type="PageBreakBetween" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="AccompanyingMails" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="AccompanyingMail" type="AccompanyingMail" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="Format">
         <xs:sequence>
-            <xs:element name="Orientation" type="Orientation" default="0" maxOccurs="1"/>
-            <xs:element name="Columns" type="xs:int" default="1" maxOccurs="1"/>
+            <xs:element name="Orientation" type="Orientation" default="0" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Columns" type="xs:int" default="1" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="Roster">
         <xs:sequence>
-            <xs:element name="Row" maxOccurs="1">
+            <xs:element name="Row" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="DefaultSize" type="xs:int" default="12"/>
@@ -46,7 +41,7 @@
     
     <xs:complexType name="TextArea">
         <xs:sequence>
-            <xs:element name="Row" maxOccurs="1">
+            <xs:element name="Row" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="DefaultSize" type="xs:int" default="3" maxOccurs="1"/>
@@ -58,7 +53,7 @@
     
     <xs:complexType name="Table">
         <xs:sequence>
-            <xs:element name="Row" maxOccurs="1">
+            <xs:element name="Row" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="DefaultSize" type="xs:int" default="14" maxOccurs="1"/>
@@ -68,19 +63,18 @@
         </xs:sequence>
     </xs:complexType>
     
-   
+    
     
     <xs:complexType name="Capture">
         <xs:sequence>
-            <xs:element name="Numeric" type="CaptureEnum" maxOccurs="1" default="optical">
+            <xs:element name="Numeric" type="CaptureEnum" minOccurs="0" maxOccurs="1" default="optical">
             </xs:element>
         </xs:sequence>
     </xs:complexType>
     
     <xs:complexType name="PageBreakBetween">
         <xs:sequence>
-            <xs:element name="pdf" type="Level" maxOccurs="1" default="module">
-            </xs:element>
+            <xs:element name="pdf" type="Level" minOccurs="0" maxOccurs="1" default="module"/>            
         </xs:sequence>
     </xs:complexType>
     

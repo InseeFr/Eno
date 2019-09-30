@@ -5,19 +5,14 @@
     
     <xs:complexType name="Pipeline">
         <xs:sequence>
-            <xs:element name="InFormat" type="InFormat"/>
-            <xs:element name="OutFormat" type="OutFormat"/>
+            <xs:element name="InFormat" type="InFormat" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="OutFormat" type="OutFormat" minOccurs="1" maxOccurs="1"/>
             <xs:sequence>
                 <xs:element name="PreProcessing" type="PreProcessing" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:sequence>
                 <xs:element name="PostProcessing" type="PostProcessing" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:element name="SpecificTreatmentDDI" type="xs:boolean" default="false"/>
-            <xs:element name="SpecificTreatmentFR" type="xs:boolean" default="false"/>
-            <xs:element name="SpecificTreatmentPDF" type="xs:boolean" default="false"/>
-            <xs:element name="SpecificTreatmentODT" type="xs:boolean" default="false"/>
-            <xs:element name="SpecificTreatmentJS" type="xs:boolean" default="false"/>
         </xs:sequence>
     </xs:complexType>
     
@@ -43,10 +38,10 @@
     
     <xs:simpleType name="PreProcessing">
         <xs:restriction base="xs:token">
+            <xs:enumeration value="ddi-mapping"/>
             <xs:enumeration value="ddi-dereferencing"/>
             <xs:enumeration value="ddi-cleaning"/>
             <xs:enumeration value="ddi-titling"/>
-            <xs:enumeration value="ddi-mapping"/>
             
             <xs:enumeration value="pogues-xml-goto-2-ite"/>
             <xs:enumeration value="pogues-xml-suppression-goto"/>
@@ -56,7 +51,6 @@
     
     <xs:simpleType name="PostProcessing">
         <xs:restriction base="xs:token">
-            <xs:enumeration value="none"/>
             <xs:enumeration value="ddi-markdownToXhtml"/>
             
             <xs:enumeration value="ddi-specificTreatment"/>

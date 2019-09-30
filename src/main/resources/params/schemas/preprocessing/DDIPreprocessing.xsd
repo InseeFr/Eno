@@ -32,11 +32,11 @@
         <xs:complexContent>
             <xs:extension base="LevelAbstract">
                 <xs:sequence>
-                    <xs:element name="PreSeq" type="xs:string" minOccurs="1" maxOccurs="1"/>
-                    <xs:element name="NumParent" type="xs:string" minOccurs="1" maxOccurs="1" default="N"/>
-                    <xs:element name="PostNumParentSeq" type="xs:string" minOccurs="1" maxOccurs="1" default=""/>
-                    <xs:element name="StyleNumSeq" type="xs:string" minOccurs="1" maxOccurs="1" default="I"/>
-                    <xs:element name="PostNumSeq" type="xs:string" minOccurs="1" maxOccurs="1" default=" - "/>
+                    <xs:element name="PreSeq" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="NumParent" type="xs:string" minOccurs="0" maxOccurs="1" default="N"/>
+                    <xs:element name="PostNumParentSeq" type="xs:string" minOccurs="0" maxOccurs="1" default=""/>
+                    <xs:element name="StyleNumSeq" type="xs:string" minOccurs="0" maxOccurs="1" default="I"/>
+                    <xs:element name="PostNumSeq" type="xs:string" minOccurs="0" maxOccurs="1" default=" - "/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -46,11 +46,11 @@
         <xs:complexContent>
             <xs:extension base="LevelAbstract">
                 <xs:sequence>
-                    <xs:element name="PreQuest" type="xs:string" minOccurs="1" maxOccurs="1" default=""/>
-                    <xs:element name="NumParent" type="xs:string" minOccurs="1" maxOccurs="1" default="N"/>
-                    <xs:element name="PostNumParentQuest" type="xs:string" minOccurs="1" maxOccurs="1" default=""/>
-                    <xs:element name="StyleNumQuest" type="xs:string" minOccurs="1" maxOccurs="1" default="1"/>
-                    <xs:element name="PostNumQuest" type="xs:string" minOccurs="1" maxOccurs="1" default=". "/>
+                    <xs:element name="PreQuest" type="xs:string" minOccurs="0" maxOccurs="1" default=""/>
+                    <xs:element name="NumParent" type="xs:string" minOccurs="0" maxOccurs="1" default="N"/>
+                    <xs:element name="PostNumParentQuest" type="xs:string" minOccurs="0" maxOccurs="1" default=""/>
+                    <xs:element name="StyleNumQuest" type="xs:string" minOccurs="0" maxOccurs="1" default="1"/>
+                    <xs:element name="PostNumQuest" type="xs:string" minOccurs="0" maxOccurs="1" default=". "/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
