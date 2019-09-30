@@ -1200,7 +1200,10 @@
                 </xsl:when>
                 <!-- external variable -->
                 <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
-                    <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[l:VariableName/r:String= $variable]/l:VariableRepresentation/*)"/>
+                    <!-- VariableRepresentation may be empty for external variables -->
+                    <xsl:if test="$root//l:VariableScheme//l:Variable[l:VariableName/r:String= $variable]/l:VariableRepresentation/*">
+                        <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[l:VariableName/r:String= $variable]/l:VariableRepresentation/*)"/>    
+                    </xsl:if>
                 </xsl:when>
                 <xsl:otherwise/>
             </xsl:choose>    
