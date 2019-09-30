@@ -10,7 +10,7 @@
 
 <!--    <xsl:import href="../../transformations/ddi2fr/ddi2fr.xsl"/>-->
 
-    <xsl:variable name="modele-questionnaire" select="//d:Instrument/r:ID"/>
+    <xsl:variable name="modele-questionnaire" select="//d:Instrument/d:InstrumentName/r:String"/>
 
     <xd:doc scope="stylesheet">
         <xd:desc>
