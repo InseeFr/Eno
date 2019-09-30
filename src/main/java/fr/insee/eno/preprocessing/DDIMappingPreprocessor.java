@@ -7,23 +7,29 @@ import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
 /**
  * A DDI specific preprocessor.
  */
+@Service
 public class DDIMappingPreprocessor implements Preprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDIMappingPreprocessor.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	@Autowired
+	private XslTransformation saxonService;
 
 	@Override
 	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
 		logger.info("DDIPreprocessing Target : START");
+		System.out.println(saxonService);
 
 		String sUB_TEMP_FOLDER = Constants.tEMP_DDI_FOLDER(Constants.sUB_TEMP_FOLDER(survey));
 		
@@ -44,5 +50,10 @@ public class DDIMappingPreprocessor implements Preprocessor {
 		return mappingFile;
 		
 	}
+	
+	public String toString() {
+		return PreProcessing.DDI_MAPPING.name();
+	}
+
 
 }
