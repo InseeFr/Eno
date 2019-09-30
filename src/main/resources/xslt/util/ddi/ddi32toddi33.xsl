@@ -8,6 +8,9 @@
     exclude-result-prefixes="xs d32 r32 l32 g32 s32 xsl xd"
     version="2.0">
 
+    <!-- useful only for surveys with more than 1 questionnaire and used with ant -->
+    <!-- the first variable is the address of the temporary folder relative to the ddi32toddi33.xsl folder -->
+    <!-- this program will seach for the file generated par dereferencing.xsl : ${TempFolder}/${survey}/ddi/${questionnaire}.tmp -->
     <xsl:variable name="dereferenced-temporary-files-folder" select="'../../../../../../../../../coltrane-dev/coltrane-eno/src/main/temp/'"/>
     <xsl:variable name="file-name" select="replace(substring-before(tokenize(base-uri(),'/')[last()],'.'),'_ddi32','')"/>
 

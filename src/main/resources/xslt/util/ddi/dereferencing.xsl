@@ -252,11 +252,9 @@
                             <l:VariableScheme>
                                 <xsl:choose>
                                     <xsl:when test="key('variablegroup',r:ID)">
-                                        <xsl:message select="'VS issu du VG'"></xsl:message>
                                         <xsl:apply-templates select="key('variablegroup',r:ID)" mode="output-DDI"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:message select="'VS pas issu du VG'"></xsl:message>
                                         <xsl:apply-templates select="//l:VariableScheme/l:Variable[not(r:ID=//l:VariableScheme//r:VariableReference/r:ID)]
                                             |//l:VariableScheme/l:VariableGroup[not(r:ID=//l:VariableScheme//r:VariableGroupReference/r:ID)]" mode="output-DDI">
                                         </xsl:apply-templates>                                        
