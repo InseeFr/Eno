@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!-- This file contains common properties used by the ddi2fr transformation  -->
 <Properties>
     <Css>
@@ -8,15 +8,18 @@
     <Images>
         <Folder>img</Folder>
     </Images>
+    <images>
+        <dossier>img</dossier>
+        <modifier>modifier.png</modifier>
+        <pdf>pdf.png</pdf>
+    </images>
     <TextConditioningVariable>
         <ddi>
             <Before>¤</Before>
             <After>¤</After>
         </ddi>
     </TextConditioningVariable>
-    <LengthOfLongTable>
-        <Length>7</Length>
-    </LengthOfLongTable>
+    <LengthOfLongTable>7</LengthOfLongTable>
     <lois>
         <informatique>https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460</informatique>
         <statistique>https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000888573</statistique>

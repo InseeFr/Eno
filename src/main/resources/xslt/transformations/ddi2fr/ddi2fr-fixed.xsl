@@ -73,7 +73,7 @@
             <xd:p>Boolean to hide numeric example.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:variable name="numeric-example" select="$parameters//NumericExample" />
+    <xsl:variable name="numeric-example" select="$parameters//NumericExample" as="xs:boolean" />
 
 
     <xd:doc>
@@ -507,13 +507,13 @@
         </xd:desc>
     </xd:doc>
     <xsl:variable name="lengthOfLongTable" as="xs:integer">
-        <xsl:variable name="lengthOfLongTableParameters" select="$parameters//LengthOfLongTable/Length" />
+        <xsl:variable name="lengthOfLongTableParameters" select="$parameters//LengthOfLongTable" />
         <xsl:choose>
             <xsl:when test="$lengthOfLongTableParameters!=''">
                 <xsl:value-of select="$lengthOfLongTableParameters" />
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//LengthOfLongTable/Length" />
+                <xsl:value-of select="$properties//LengthOfLongTable" />
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>

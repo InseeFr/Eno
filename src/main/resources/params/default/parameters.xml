@@ -3,11 +3,11 @@
     <Pipeline>
         <InFormat>ddi</InFormat>
         <OutFormat>fr</OutFormat>
-        
+                
+        <PreProcessing>ddi-mapping</PreProcessing>
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
         <PreProcessing>ddi-titling</PreProcessing>
-        <PreProcessing>ddi-mapping</PreProcessing>
         
         <PostProcessing>fr-insert-generic-questions</PostProcessing>
         <PostProcessing>fr-browsing</PostProcessing>
