@@ -8,6 +8,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.postprocessing.Postprocessor;
@@ -16,16 +18,17 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * DDI postprocessor.
  */
-public class DDIPostprocessor implements Postprocessor {
+@Service
+public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(DDIPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(DDIMarkdown2XhtmlPostprocessor.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	@Autowired
+	private XslTransformation saxonService;
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
-		logger.info("DDIPostprocessor Target : START");
+		logger.info("DDIMarkdown2XhtmlPostprocessor Target : START");
 		String mw2xhtmlOutput = FilenameUtils.removeExtension(input.getPath()) + Constants.MW_EXTENSION;
 		// ----- mw2xhtml
 		logger.debug("Markdown to XHTML : -Input : " + input + " -Output : " + mw2xhtmlOutput + " -Stylesheet : "
@@ -60,7 +63,7 @@ public class DDIPostprocessor implements Postprocessor {
 		isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL.close();
 		osTweakXhtmlForDdi.close();
 
-		logger.debug("DDIPostprocessor : END");
+		logger.debug("DDIMarkdown2XhtmlPostprocessor : END");
 		return new File(outputTweakXhtmlForDdi);
 
 	}

@@ -1,9 +1,16 @@
 package fr.insee.eno.params.validation;
 
-public class ValidationBoolean {
+public class ValidationMessage {
 	
+	public ValidationMessage(String message, boolean valid) {
+		super();
+		this.message = message;
+		this.valid = valid;
+	}
 	private String message;
 	private boolean valid;
+	
+	
 	
 	public String getMessage() {
 		return message;
