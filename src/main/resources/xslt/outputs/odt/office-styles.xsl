@@ -47,7 +47,7 @@
             <style:text-properties fo:font-size="10pt"/>
         </style:style>
         <style:style style:name="NameOfVariable" style:family="text">
-             <style:text-properties fo:color="#FF00FF"/>
+            <style:text-properties fo:color="#8B008B" fo:font-style="italic" fo:font-weight="bold"/>
         </style:style>
             
         <!-- <style:style style:name="QuestionSelect" style:family="paragraph"

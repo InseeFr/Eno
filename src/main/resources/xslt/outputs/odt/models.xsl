@@ -265,9 +265,9 @@
 		<xsl:if test="$typeOfAncestor!=''">
 			<text:p text:style-name="Format">
 					<text:span text:style-name="NameOfVariable">
-						<xsl:value-of select="concat('[',$nameOfVariable,']')"/>
+						<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
 					</text:span>
-					<xsl:value-of select="' - ','Booléen'"/>
+					<xsl:value-of select="'Booléen'"/>
             </text:p>
 		</xsl:if>
 		
@@ -290,7 +290,7 @@
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>		
         <xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
-		<xsl:if test="$typeOfAncestor!='question multiple-choice-question' and $maximumLengthCode != ''">
+		<xsl:if test="$maximumLengthCode != ''">
 			<text:p text:style-name="Format">
 				<text:span text:style-name="NameOfVariable">
 					<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
@@ -298,13 +298,6 @@
 				<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
 			</text:p>		
 		</xsl:if>
-		<xsl:if test="$typeOfAncestor='question multiple-choice-question'">
-			<text:p text:style-name="Format">
-				<text:span text:style-name="NameOfVariable">
-					<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
-				</text:span>
-			</text:p>		
-		</xsl:if>		
 
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -326,9 +319,6 @@
 		<text:section text:name="Table-{enoodt:get-name($source-context)}">
 			<xsl:if test="$questionName != ''">
 				<text:p text:style-name="QuestionName"><xsl:value-of select="concat('[',$questionName,']')"/></text:p>
-			</xsl:if>
-			<xsl:if test="$type='question multiple-choice-question' and $maximumLengthCode!=''">
-				<text:p><xsl:value-of select="concat('Car ',$maximumLengthCode)"/></text:p>
 			</xsl:if>
 			
 			<!-- print the question label and its instructions -->
