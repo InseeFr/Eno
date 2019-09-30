@@ -29,14 +29,20 @@ public final class Constants {
 	
 	// ----- Folders
 	public static final String UTIL_FOLDER_PATH = "/xslt/util";
+	public static final String PARAMS_DEFAULT_FOLDER_PATH = "/params/default";
+	public static final String PARAMS_SCHEMAS_FOLDER_PATH = "/params/schemas";
 	public static final String TRANSFORMATIONS_FOLDER = "/xslt/transformations";
 	public static final String CONFIG_FOLDER = "/config";
 	public static final String INPUTS_FOLDER = "/xslt/inputs";
 	public static final File LABEL_FOLDER = getFileFromUrl(Constants.class.getResource("/lang/fr"));
+	public static final File PARAMETERS_DEFAULT_XML = getFileFromUrl(Constants.class.getResource(PARAMS_DEFAULT_FOLDER_PATH+"/parameters.xml"));
+	
+	
+	// Params : schema
+	public static final File ENO_PARAMETERS_XSD = getFileFromUrl(Constants.class.getResource(PARAMS_SCHEMAS_FOLDER_PATH+"/ENOParameters.xsd"));
 	
 	// ----- Ref
-	public static final String PARAMETERS_XML = "parameters.xml";
-	public static final Object METADONNEES = "metadonnees.xml";
+	public static final String PARAMETERS_XML = "parameters.xml";	
 	
 	// ----- XSL Parameters path
 	public static final String CONFIG_DDI2FR = CONFIG_FOLDER + "/ddi2fr.xml";
@@ -44,7 +50,9 @@ public final class Constants {
 	public static final String CONFIG_DDI2PDF = CONFIG_FOLDER + "/ddi2pdf.xml";
 	public static final String CONFIG_POGUES_XML2DDI = CONFIG_FOLDER + "/pogues-xml2ddi.xml";
 	public static final String CONFIG_DDI2JS = CONFIG_FOLDER + "/ddi2js.xml";
-	public static final String PARAMETERS = "/parameters.xml";
+	public static final String PARAMETERS_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/parameters.xml";
+	public static final String METADATA_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/metadata.xml";
+	public static final String MAPPING_DEFAULT = PARAMS_DEFAULT_FOLDER_PATH + "/mapping.xml";
 	public static final String LABELS_FOLDER = "/lang/fr/";
 	
 	
@@ -74,6 +82,7 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL = TRANSFORMATIONS_FOLDER + "/ddi2odt/ddi2odt.xsl";
 	public static final String TRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL = TRANSFORMATIONS_FOLDER + "/ddi2pdf/ddi2pdf.xsl";
 	public static final String TRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL = TRANSFORMATIONS_FOLDER + "/pogues-xml2ddi/pogues-xml2ddi.xsl";
+	public static final String TRANSFORMATIONS_DDI2POGUES_XML_XSL = TRANSFORMATIONS_FOLDER + "/ddi2pogues-xml/ddi2pogues-xml.xsl";
 	public static final String TRANSFORMATIONS_DDI2JS_DDI2JS_XSL = TRANSFORMATIONS_FOLDER + "/ddi2js/ddi2js.xsl";
 	
 	public static final String TRANSFORMATIONS_DDI2FR_DRIVERS_FODS = TRANSFORMATIONS_FOLDER + "/ddi2fr/drivers.fods";
@@ -145,13 +154,13 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS = POST_PROCESSING_FOLDER_JS + "/externalize-variables.xsl";
 	// ------------ FR -----------
 	public static final String UTIL_FR_BROWSING_XSL = POST_PROCESSING_FOLDER_FR + "/browsing.xsl";
-	public static final String UTIL_FR_FIX_ADHERENCE_XSL = POST_PROCESSING_FOLDER_FR + "/coltrane.xsl";
+	public static final String UTIL_FR_FIX_ADHERENCE_XSL = POST_PROCESSING_FOLDER_FR + "/fix-adherence.xsl";
 	public static final String UTIL_FR_EDIT_PATRON_XSL = POST_PROCESSING_FOLDER_FR + "/edit-patron.xsl";
 	public static final String UTIL_FR_IDENTIFICATION_XSL = POST_PROCESSING_FOLDER_FR + "/identification.xsl";
 	public static final String UTIL_FR_INSERT_END_XSL = POST_PROCESSING_FOLDER_FR + "/insert-end.xsl";
 	public static final String UTIL_FR_INSERT_GENERIC_QUESTIONS_XSL = POST_PROCESSING_FOLDER_FR + "/insert-generic-questions.xsl";
 	public static final String UTIL_FR_INSERT_WELCOME_XSL = POST_PROCESSING_FOLDER_FR + "/insert-welcome.xsl";
-	public static final String UTIL_FR_MODELE_COLTRANE_XSL = POST_PROCESSING_FOLDER_FR + "/model-coltrane.xsl";
+	public static final String UTIL_FR_MODELE_COLTRANE_XSL = POST_PROCESSING_FOLDER_FR + "/modele-coltrane.xsl";
 	public static final String UTIL_FR_SPECIFIC_TREATMENT_XSL = POST_PROCESSING_FOLDER_FR + "/fr-specific-treatment.xsl";
 	
 	// ---------- Temporary file system
@@ -160,7 +169,12 @@ public final class Constants {
 	//public static final String TEMP_FOLDER_PATH = "/target/eno";
 	public static final String TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "/eno";
 	
+	
 	public static final File TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH);
+	
+	public static final File TEMP_FILE_PARAMS(String file) {
+		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH +"/"+file);
+	}
 	//public static final File SUB_TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp");
 	public static File sUB_TEMP_FOLDER_FILE (String survey){
 		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/"+survey);
@@ -302,6 +316,9 @@ public final class Constants {
 	}
 
 	//// Xsl stylesheets used in DDIPreprocessing
+	
+	//
+	public static final String BASE_NAME_FORM_FILE = "/form";
 
 	// File Extension 
 	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
@@ -332,7 +349,7 @@ public final class Constants {
 	public static final String IDENTIFICATION_FR_EXTENSION = "-identification.xhtml";
 	public static final String INSERT_END_FR_EXTENSION = "-insert-end.xhtml";
 	public static final String INSERT_WELCOME_FR_EXTENSION = "-insert-welcome.xhtml";
-	public static final String INSERT_GENERIC_QUESTIONS_FR_EXTENSION = "-insert-generic-questions.xhtml";
+	public static final String INSERT_GENERIC_QUESTIONS_FR_EXTENSION = "-insert-questions.xhtml";
 	public static final String MODELE_COLTRANE_FR_EXTENSION = "-modele-coltrane.xhtml";
 	public static final String SPECIFIC_TREATMENT_FR_EXTENSION = "-specific-treatment.xhtml";
 	// JS
