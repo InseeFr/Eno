@@ -66,7 +66,7 @@
          <style:text-properties fo:font-size="10pt"/>
       </style:style>
       <style:style style:name="NameOfVariable" style:family="text">
-         <style:text-properties fo:color="#FF00FF"/>
+         <style:text-properties fo:color="#8B008B" fo:font-style="italic" fo:font-weight="bold"/>
       </style:style>
       <style:style style:name="Comment"
                    style:family="paragraph"
@@ -204,7 +204,7 @@
                <text:p text:style-name="QuestionName">[READY]</text:p>
                <text:p text:style-name="Question">➡ 2. Are you ready?</text:p>
                <text:p text:style-name="Format">
-                  <text:span text:style-name="NameOfVariable">[READY]</text:span> -  Booléen</text:p>
+                  <text:span text:style-name="NameOfVariable">[READY] - </text:span>Booléen</text:p>
             </text:section>
             <text:p text:style-name="Control">not( ^READY!= '1') </text:p>
             <text:section text:name="SubModule-j6p0s7o5">
@@ -301,7 +301,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[PET1]</text:span> -  Booléen</text:p>
+                           <text:span text:style-name="NameOfVariable">[PET1] - </text:span>Booléen</text:p>
                      </table:table-cell>
                   </table:table-row>
                   <table:table-row>
@@ -314,7 +314,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[PET2]</text:span> -  Booléen</text:p>
+                           <text:span text:style-name="NameOfVariable">[PET2] - </text:span>Booléen</text:p>
                      </table:table-cell>
                   </table:table-row>
                   <table:table-row>
@@ -327,7 +327,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[PET3]</text:span> -  Booléen</text:p>
+                           <text:span text:style-name="NameOfVariable">[PET3] - </text:span>Booléen</text:p>
                      </table:table-cell>
                   </table:table-row>
                   <table:table-row>
@@ -340,7 +340,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[PET4]</text:span> -  Booléen</text:p>
+                           <text:span text:style-name="NameOfVariable">[PET4] - </text:span>Booléen</text:p>
                      </table:table-cell>
                   </table:table-row>
                </table:table>
@@ -348,7 +348,6 @@
             <text:p text:style-name="Instruction">Now we are going to know if you think that Jay is a gluton.</text:p>
             <text:section text:name="Table-j6p29i81">
                <text:p text:style-name="QuestionName">[ICE_FLAVOUR]</text:p>
-               <text:p>Car 1</text:p>
                <text:p text:style-name="Question">➡ 2. Does Jay like the following ice cream flavours?</text:p>
                <table:table table:name="j6p29i81" table:style-name="Table">
                   <table:table-column table:style-name="Table.Column"/>
@@ -363,8 +362,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR1] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR1] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -379,8 +377,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR2] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR2] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -395,8 +392,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR3] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR3] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -411,8 +407,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR4] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[ICE_FLAVOUR4] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -421,7 +416,6 @@
             </text:section>
             <text:section text:name="Table-j6qefnga">
                <text:p text:style-name="QuestionName">[NUCLEAR_CHARACTER]</text:p>
-               <text:p>Car 1</text:p>
                <text:p text:style-name="Question">➡ 3. Which character works in the nuclear power plant?</text:p>
                <table:table table:name="j6qefnga" table:style-name="Table">
                   <table:table-column table:style-name="Table.Column"/>
@@ -436,8 +430,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER1] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER1] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -452,8 +445,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER2] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER2] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -468,8 +460,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER3] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER3] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -484,8 +475,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER4] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[NUCLEAR_CHARACTER4] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Yes</text:p>
                         <text:p text:style-name="CodeItem">0 - No</text:p>
                      </table:table-cell>
@@ -494,7 +484,6 @@
             </text:section>
             <text:section text:name="Table-j6yzoc6g">
                <text:p text:style-name="QuestionName">[BIRTH_CHARACTER]</text:p>
-               <text:p>Car 1</text:p>
                <text:p text:style-name="Question">➡ 4. In which city each character was born?</text:p>
                <table:table table:name="j6yzoc6g" table:style-name="Table">
                   <table:table-column table:style-name="Table.Column"/>
@@ -509,8 +498,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER1] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER1] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -528,8 +516,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER2] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER2] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -547,8 +534,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER3] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER3] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -566,8 +552,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER4] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER4] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -585,8 +570,7 @@
                                        table:number-columns-spanned="1"
                                        table:style-name="Table.Cell">
                         <text:p text:style-name="Format">
-                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER5] - </text:span>
-                        </text:p>
+                           <text:span text:style-name="NameOfVariable">[BIRTH_CHARACTER5] - </text:span>Car 1 - liste de modalités</text:p>
                         <text:p text:style-name="CodeItem">1 - Albuquerque</text:p>
                         <text:p text:style-name="CodeItem">2 - Springfield</text:p>
                         <text:p text:style-name="CodeItem">3 - Portland</text:p>
@@ -918,37 +902,37 @@
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL11]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL11] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL12]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL12] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL13]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL13] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL14]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL14] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL15]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL15] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL16]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL16] - </text:span>Booléen</text:p>
                         </table:table-cell>
                      </table:table-row>
                      <table:table-row>
@@ -961,37 +945,37 @@
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL21]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL21] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL22]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL22] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL23]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL23] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL24]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL24] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL25]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL25] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL26]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL26] - </text:span>Booléen</text:p>
                         </table:table-cell>
                      </table:table-row>
                      <table:table-row>
@@ -1004,37 +988,37 @@
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL31]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL31] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL32]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL32] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL33]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL33] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL34]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL34] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL35]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL35] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL36]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL36] - </text:span>Booléen</text:p>
                         </table:table-cell>
                      </table:table-row>
                      <table:table-row>
@@ -1047,37 +1031,37 @@
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL41]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL41] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL42]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL42] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL43]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL43] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL44]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL44] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL45]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL45] - </text:span>Booléen</text:p>
                         </table:table-cell>
                         <table:table-cell table:number-rows-spanned="1"
                                           table:number-columns-spanned="1"
                                           table:style-name="Table.Cell">
                            <text:p text:style-name="Format">
-                              <text:span text:style-name="NameOfVariable">[TRAVEL46]</text:span> -  Booléen</text:p>
+                              <text:span text:style-name="NameOfVariable">[TRAVEL46] - </text:span>Booléen</text:p>
                         </table:table-cell>
                      </table:table-row>
                   </table:table>
