@@ -132,7 +132,7 @@
                </d:LiteralText>
             </d:InstructionText>
          </d:Instruction>
-      <d:Instruction><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>1</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR"><xhtml:p id="ftn1">Included principalities</xhtml:p></d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
+      <d:Instruction xmlns=""><r:Agency>fr.insee</r:Agency><r:ID>FTN-INSTRUCTION-1</r:ID><r:Version>1</r:Version><d:InstructionName><r:String xml:lang="fr-FR">tooltip</r:String></d:InstructionName><d:InstructionText><d:LiteralText><d:Text xml:lang="fr-FR"><xhtml:p id="ftn1">Included principalities</xhtml:p></d:Text></d:LiteralText></d:InstructionText></d:Instruction></d:InterviewerInstructionScheme>
       <d:ControlConstructScheme>
          <r:Agency>fr.insee</r:Agency>
          <r:ID>ControlConstructScheme-i6vwi0</r:ID>
@@ -1070,10 +1070,10 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1) + number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2) +
-                        number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3)+ number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4)+ number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5)+
-                        number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6)+ number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7)+ number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8)+
-                        number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9)+ number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10)!= 100 </r:CommandContent>
+                  <r:CommandContent>j4nwc63q-CI-0-IP-1 + j4nwc63q-CI-0-IP-2 +
+                        j4nwc63q-CI-0-IP-3+ j4nwc63q-CI-0-IP-4+ j4nwc63q-CI-0-IP-5+
+                        j4nwc63q-CI-0-IP-6+ j4nwc63q-CI-0-IP-7+ j4nwc63q-CI-0-IP-8+
+                        j4nwc63q-CI-0-IP-9+ j4nwc63q-CI-0-IP-10!= 100 </r:CommandContent>
                </r:Command>
             </r:CommandCode>
          </d:ComputationItem>
@@ -10625,8 +10625,7 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>jbcggtca-GI</r:ID>
             <r:Version>1</r:Version>
-            <!--<d:SourceQuestion>Not implemented.</d:SourceQuestion>-->
-            <d:SourceVariable>
+            <!--<d:SourceQuestion>Not implemented.</d:SourceQuestion>--><d:SourceVariable>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>jbgdnfk7</r:ID>
                <r:Version>1</r:Version>
@@ -10914,10 +10913,10 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1) + number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2) + number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3)+
-                number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4)+ number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5)+ number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6)+
-                number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7)+ number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8)+ number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9)+
-                number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10)</r:CommandContent>
+                  <r:CommandContent>jbcggtca-IP-1 + jbcggtca-IP-2 + jbcggtca-IP-3+
+                jbcggtca-IP-4+ jbcggtca-IP-5+ jbcggtca-IP-6+
+                jbcggtca-IP-7+ jbcggtca-IP-8+ jbcggtca-IP-9+
+                jbcggtca-IP-10</r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <d:ControlConstructReference>
