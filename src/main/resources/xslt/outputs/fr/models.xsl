@@ -1209,13 +1209,27 @@
                         <xsl:attribute name="value">
                             <xsl:value-of select="'if (string(.) != '''' and . castable as xs:date) then ('"/>
                             <xsl:if test="$minimum != ''">
-                                <xsl:value-of select="concat('. &gt;= xs:date(''',$minimum,''')')"/>
+                                <xsl:choose>
+                                    <xsl:when test="contains($minimum,'current-date()')">
+                                        <xsl:value-of select="'. &gt; current-date()'"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat('. &gt;= xs:date(''',$minimum,''')')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:if>
                             <xsl:if test="$minimum != '' and $maximum != ''">
                                 <xsl:value-of select="' and '"/>
                             </xsl:if>
                             <xsl:if test="$maximum != ''">
-                                <xsl:value-of select="concat('. &lt;= xs:date(''',$maximum,''')')"/>
+                                <xsl:choose>
+                                    <xsl:when test="contains($maximum,'current-date()')">
+                                        <xsl:value-of select="'. &lt; current-date()'"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="concat('. &lt;= xs:date(''',$maximum,''')')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:if>
                             <xsl:value-of select="') else (string(.) = '''')'"/>
                         </xsl:attribute>
@@ -1793,7 +1807,7 @@
             <xsl:if test="$appearance != ''">
                 <xsl:choose>
                     <xsl:when test="$appearance = 'drop-down-list'">
-                        <xsl:attribute name="appearance" select="'minimal'"/>        
+                        <xsl:attribute name="appearance" select="'minimal'"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:attribute name="appearance" select="'full'"/>
@@ -1813,7 +1827,6 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:if>
-            <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
             <xsl:if test="not($length = '')">
                 <xsl:attribute name="xxf:maxlength" select="$length"/>
             </xsl:if>
@@ -1959,7 +1972,6 @@
             <xsl:if test="$css-class != ''">
                 <xsl:attribute name="class" select="$css-class"/>
             </xsl:if>
-            <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
             <xf:alert>
                 <xsl:attribute name="ref">
                     <xsl:call-template name="label-ref-condition">
@@ -2365,7 +2377,6 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
-                <xsl:attribute name="xxf:order" select="'label control hint help alert'"/>
                 <xsl:if test="$current-driver = 'DurationDomain'">
                     <xsl:attribute name="xxf:maxlength" select="if (string-length(@minimum) &gt; string-length(@maximum)) then string-length(@minimum) else string-length(@maximum)"/>
                 </xsl:if>
@@ -2459,7 +2470,7 @@
             </xsl:if>
         </xsl:for-each>
         <xsl:if test="$current-driver = 'DurationDomain' or count($layout-list//format) &gt; 1">
-            <xf:output id="{$name}-dateduration-constraint-control" name="{$name}-dateduration-constraint" bind="{$name}-dateduration-constraint-bind" xxf:order="label control hint help alert">
+            <xf:output id="{$name}-dateduration-constraint-control" name="{$name}-dateduration-constraint" bind="{$name}-dateduration-constraint-bind">
                 <xf:alert ref="$form-resources/{$name}-dateduration-constraint/alert" level="error"/>
             </xf:output>
         </xsl:if>
@@ -2502,7 +2513,7 @@
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
                                     <xsl:when test="contains($minimum,'current-date')">
-                                        <xsl:value-of select="year-from-date(current-date())"/>
+                                        <xsl:value-of select="'year-from-date(current-date())'"/>
                                     </xsl:when>
                                     <xsl:when test="contains($minimum,'-')">
                                         <xsl:value-of select="substring-before($minimum,'-')"/>
@@ -2518,7 +2529,7 @@
                             <xsl:attribute name="maximum">
                                 <xsl:choose>
                                     <xsl:when test="contains($maximum,'current-date')">
-                                        <xsl:value-of select="year-from-date(current-date())"/>
+                                        <xsl:value-of select="'year-from-date(current-date())'"/>
                                     </xsl:when>
                                     <xsl:when test="contains($maximum,'-')">
                                         <xsl:value-of select="substring-before($maximum,'-')"/>
@@ -2527,7 +2538,7 @@
                                         <xsl:value-of select="$maximum"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of select="year-from-date(current-date())"/>
+                                        <xsl:value-of select="'year-from-date(current-date())'"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>
