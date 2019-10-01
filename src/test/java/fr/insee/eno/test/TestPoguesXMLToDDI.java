@@ -10,7 +10,7 @@ import org.xmlunit.diff.Diff;
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.PoguesXML2DDIGenerator;
 import fr.insee.eno.postprocessing.DDIPostprocessor;
-import fr.insee.eno.preprocessing.PoguesXMLPreprocessor;
+import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
 
 public class TestPoguesXMLToDDI {
 
@@ -20,7 +20,7 @@ public class TestPoguesXMLToDDI {
 	public void simpleDiffTest() {
 		try {
 			String basePath = "src/test/resources/pogues-xml-to-ddi";
-			GenerationService genService = new GenerationService(new PoguesXMLPreprocessor(),
+			GenerationService genService = new GenerationService(new PoguesXMLPreprocessorGoToTreatment(),
 					new PoguesXML2DDIGenerator(), new DDIPostprocessor());
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "xml-pogues-2-ddi-test");
