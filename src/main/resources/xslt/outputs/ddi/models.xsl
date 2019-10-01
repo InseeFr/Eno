@@ -1600,7 +1600,7 @@
 						<r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
 					</r:OutParameter>
 					<xsl:if test="$mandatory = 'mandatory'">
-						<r:ResponseCardinality minimumResponses="1" maximumResponses="1"/>
+						<r:ResponseCardinality minimumResponses="1"/>
 					</xsl:if>
 				</d:DateTimeDomain>
 			</xsl:when>
