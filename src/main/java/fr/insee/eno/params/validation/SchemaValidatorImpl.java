@@ -2,7 +2,6 @@ package fr.insee.eno.params.validation;
 
 import java.io.InputStream;
 
-import javax.annotation.PostConstruct;
 import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -28,8 +27,7 @@ public class SchemaValidatorImpl implements SchemaValidator {
 	private Schema schema;
 	private Validator validator;
 	
-	@PostConstruct
-	public void initSchemaValidator() {
+	public SchemaValidatorImpl() {
 		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try {
 			schema = sf.newSchema(Constants.ENO_PARAMETERS_XSD);
@@ -37,16 +35,19 @@ public class SchemaValidatorImpl implements SchemaValidator {
 			e.printStackTrace();
 		}
 		validator = schema.newValidator();
+		
 	}
-	
+		
 	@Override
 	public ValidationMessage validate(InputStream paramsIS)  {
+		LOGGER.info("Validation of parameters file...");
 		boolean valid=false;
 		String message="";
 		try {
 			validateIS(paramsIS);
 			valid=true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			message = e.getMessage();
 			LOGGER.error(message);
 		}
@@ -58,7 +59,7 @@ public class SchemaValidatorImpl implements SchemaValidator {
 	}
 
 	public void validateIS(InputStream paramsIS) throws Exception {
-		validator.reset();		
+		validator.reset();
 		Source source = new StreamSource(paramsIS);
 		source = toDOMSource(source);
 		validator.validate(source);
