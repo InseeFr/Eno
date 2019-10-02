@@ -4,10 +4,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.io.Files;
 import com.google.inject.Inject;
 
 import fr.insee.eno.generation.Generator;
@@ -28,6 +32,8 @@ public class GenerationService {
 	private final Postprocessor[] postprocessors;
 
 	private byte[] parameters;
+	private byte[] metadata;
+	private byte[] specificTreatment;
 
 	@Inject
 	public GenerationService(final Preprocessor[] preprocessors, final Generator generator,
@@ -64,6 +70,7 @@ public class GenerationService {
 	 *             bim
 	 */
 	public File generateQuestionnaire(File inputFile, String surveyName) throws Exception {
+		logger.info(this.toString());
 		logger.info("Generating questionnaire for: " + surveyName);
 
 		String tempFolder = System.getProperty("java.io.tmpdir") + "/" + surveyName;
@@ -89,30 +96,50 @@ public class GenerationService {
 		}
 
 		File generatedForm = this.generator.generate(preprocessResultFileName, parameters, surveyName);
-
-		File outputForm = this.postprocessors[0].process(generatedForm, parameters, surveyName);
+		File outputForm = this.postprocessors[0].process(generatedForm, parameters, metadata, specificTreatment, surveyName);
 		for (int i = 1; i < postprocessors.length; i++) {
-			outputForm = this.postprocessors[i].process(outputForm, parameters, surveyName);
+			outputForm = this.postprocessors[i].process(outputForm, parameters, metadata, specificTreatment,surveyName);
 		}
-		logger.debug("Path to generated questionnaire: " + outputForm.getAbsolutePath());
+		File finalForm = new File(outputForm.getParent()+Constants.BASE_NAME_FORM_FILE+"."+FilenameUtils.getExtension(outputForm.getAbsolutePath()));
+		if(!finalForm.equals(outputForm)) {
+			Files.move(outputForm, finalForm);
+		}
+		logger.debug("Path to generated questionnaire: " + finalForm.getAbsolutePath());
 
-		return outputForm;
+		return finalForm;
 	}
+	
+	
+	public void setParameters(ByteArrayOutputStream parametersBAOS) {
+		this.parameters = parametersBAOS.toByteArray();
+	}	
 
 	public void setParameters(InputStream parametersIS) throws IOException {
-
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		byte[] buf = new byte[1024];
-		int n = 0;
-		while ((n = parametersIS.read(buf)) >= 0) {
-			baos.write(buf, 0, n);
+		if(parametersIS!=null) {
+			this.parameters = IOUtils.toByteArray(parametersIS);
 		}
-		this.parameters = baos.toByteArray();
-
+	}
+	
+	public void setMetadata(InputStream metadataIS) throws IOException {
+		if(metadataIS!=null) {
+			this.metadata = IOUtils.toByteArray(metadataIS);
+		}
+	}
+	
+	public void setSpecificTreatment(InputStream specificTreatmentIS) throws IOException {
+		if(specificTreatmentIS!=null) {
+			this.specificTreatment = IOUtils.toByteArray(specificTreatmentIS);
+		}
 	}
 
 	public byte[] getParameters() {
 		return parameters;
+	}
+	public byte[] getMetadata() {
+		return metadata;
+	}
+	public byte[] getSpecificTreatment() {
+		return specificTreatment;
 	}
 
 	/**
@@ -160,5 +187,13 @@ public class GenerationService {
 			logger.debug("Temp Folder is null");
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "GenerationService [preprocessors=" + Arrays.toString(preprocessors) + ", generator=" + generator.in2out()
+				+ ", postprocessors=" + Arrays.toString(postprocessors) + "]";
+	}
+	
+	
 
 }
