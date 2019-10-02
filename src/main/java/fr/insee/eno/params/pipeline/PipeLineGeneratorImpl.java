@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2FRGenerator;
@@ -50,78 +48,74 @@ import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
 import fr.insee.eno.preprocessing.Preprocessor;
 
-@Service
 public class PipeLineGeneratorImpl implements PipelineGenerator {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(PipeLineGeneratorImpl.class);
 	
 	// In2Out Generator
-	@Autowired
-	DDI2FRGenerator ddi2frGenerator;
-	@Autowired
-	DDI2JSGenerator ddi2jsGenerator;
-	@Autowired
-	DDI2ODTGenerator ddi2odtGenerator;
-	@Autowired
-	DDI2PDFGenerator ddi2pdfGenerator;
-	@Autowired
-	DDI2PoguesXMLGenerator ddi2poguesXmlGenerator;
-	@Autowired
-	PoguesXML2DDIGenerator poguesXml2ddiGenerator;
+	private DDI2FRGenerator ddi2frGenerator = new DDI2FRGenerator();
+
+	private DDI2JSGenerator ddi2jsGenerator = new DDI2JSGenerator();
+
+	private DDI2ODTGenerator ddi2odtGenerator = new DDI2ODTGenerator();
+
+	private DDI2PDFGenerator ddi2pdfGenerator = new DDI2PDFGenerator();
+
+	private DDI2PoguesXMLGenerator ddi2poguesXmlGenerator = new DDI2PoguesXMLGenerator();
+
+	private PoguesXML2DDIGenerator poguesXml2ddiGenerator = new PoguesXML2DDIGenerator();
 	
 	// PreProcessing
-	@Autowired
-	DDIDereferencingPreprocessor ddiDereferencing;
-	@Autowired
-	DDICleaningPreprocessor ddiCleaning;
-	@Autowired
-	DDITitlingPreprocessor ddiTitling;
-	@Autowired
-	DDIMappingPreprocessor ddiMapping;
-	@Autowired
-	PoguesXMLPreprocessorGoToTreatment poguesXmlGoTo;
+	private DDIDereferencingPreprocessor ddiDereferencing = new DDIDereferencingPreprocessor();
+
+	private DDICleaningPreprocessor ddiCleaning = new DDICleaningPreprocessor();
+
+	private DDITitlingPreprocessor ddiTitling = new DDITitlingPreprocessor();
+
+	private DDIMappingPreprocessor ddiMapping = new DDIMappingPreprocessor();
+
+	private PoguesXMLPreprocessorGoToTreatment poguesXmlGoTo = new PoguesXMLPreprocessorGoToTreatment();
 	
 	// PostProcessing
-	@Autowired
-	DDIMarkdown2XhtmlPostprocessor ddiMW2XHTML;
-	@Autowired
-	FRBrowsingPostprocessor frBrowsing;
-	@Autowired
-	FREditPatronPostprocessor frEditPatron;
-	@Autowired
-	FRFixAdherencePostprocessor frFixAdherence;
-	@Autowired
-	FRIdentificationPostprocessor frIdentification;
-	@Autowired
-	FRInsertEndPostprocessor frInsertEnd;
-	@Autowired
-	FRInsertGenericQuestionsPostprocessor frInsertGenericQuestions;
-	@Autowired
-	FRInsertWelcomePostprocessor frInsertWelcome;
-	@Autowired
-	FRModeleColtranePostprocessor frModeleColtrane;
-	@Autowired
-	FRSpecificTreatmentPostprocessor frSpecificTreatment;
-	@Autowired
-	PDFEditStructurePagesPostprocessor pdfEditStructurePages;
-	@Autowired
-	PDFInsertAccompanyingMailsPostprocessor pdfInsertAccompanyingMails;
-	@Autowired
-	PDFInsertCoverPagePostprocessor pdfInsertCoverPage;
-	@Autowired
-	PDFInsertEndQuestionPostprocessor pdfInsertEndQuestion;
-	@Autowired
-	PDFMailingPostprocessor pdfMailing;
-	@Autowired
-	PDFSpecificTreatmentPostprocessor pdfSpecificTreatment;
-	@Autowired
-	PDFTableColumnPostprocessorFake pdfTableColumn;
-	@Autowired
-	JSExternalizeVariablesPostprocessor jsExternalizeVariables;
-	@Autowired
-	JSSortComponentsPostprocessor jsSortComponents;
-	@Autowired
-	NoopPostprocessor noop;
+	private DDIMarkdown2XhtmlPostprocessor ddiMW2XHTML = new DDIMarkdown2XhtmlPostprocessor();
+
+	private FRBrowsingPostprocessor frBrowsing = new FRBrowsingPostprocessor();
+
+	private FREditPatronPostprocessor frEditPatron = new FREditPatronPostprocessor();
+
+	private FRFixAdherencePostprocessor frFixAdherence = new FRFixAdherencePostprocessor();
+
+	private FRIdentificationPostprocessor frIdentification = new FRIdentificationPostprocessor();
+
+	private FRInsertEndPostprocessor frInsertEnd = new FRInsertEndPostprocessor();
+
+	private FRInsertGenericQuestionsPostprocessor frInsertGenericQuestions = new FRInsertGenericQuestionsPostprocessor();
+
+	private FRInsertWelcomePostprocessor frInsertWelcome = new FRInsertWelcomePostprocessor();
+
+	private FRModeleColtranePostprocessor frModeleColtrane = new FRModeleColtranePostprocessor();
+
+	private FRSpecificTreatmentPostprocessor frSpecificTreatment = new FRSpecificTreatmentPostprocessor();
+
+	private PDFEditStructurePagesPostprocessor pdfEditStructurePages = new PDFEditStructurePagesPostprocessor();
+
+	private PDFInsertAccompanyingMailsPostprocessor pdfInsertAccompanyingMails = new PDFInsertAccompanyingMailsPostprocessor();
+
+	private PDFInsertCoverPagePostprocessor pdfInsertCoverPage = new PDFInsertCoverPagePostprocessor();
+
+	private PDFInsertEndQuestionPostprocessor pdfInsertEndQuestion = new PDFInsertEndQuestionPostprocessor();
+	
+	private PDFMailingPostprocessor pdfMailing = new PDFMailingPostprocessor();
+	
+	private PDFSpecificTreatmentPostprocessor pdfSpecificTreatment = new PDFSpecificTreatmentPostprocessor();
+	
+	private PDFTableColumnPostprocessorFake pdfTableColumn = new PDFTableColumnPostprocessorFake();
+	
+	private JSExternalizeVariablesPostprocessor jsExternalizeVariables = new JSExternalizeVariablesPostprocessor();
+	
+	private JSSortComponentsPostprocessor jsSortComponents = new JSSortComponentsPostprocessor();
+	
+	private NoopPostprocessor noop = new NoopPostprocessor();
 	
 
 	@Override

@@ -5,7 +5,6 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.parameters.PostProcessing;
@@ -14,7 +13,6 @@ import fr.insee.eno.postprocessing.Postprocessor;
 /**
  * PDF postprocessor.
  */
-@Service
 public class PDFTableColumnPostprocessorFake implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(PDFTableColumnPostprocessorFake.class);

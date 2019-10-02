@@ -25,7 +25,7 @@ public class DDIPostprocessor implements Postprocessor {
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
-		logger.info("DDIPostprocessor Target : START");
+		logger.info("DDIMarkdown2XhtmlPostprocessor Target : START");
 		String mw2xhtmlOutput = FilenameUtils.removeExtension(input.getPath()) + Constants.MW_EXTENSION;
 		// ----- mw2xhtml
 		logger.debug("Markdown to XHTML : -Input : " + input + " -Output : " + mw2xhtmlOutput + " -Stylesheet : "
@@ -60,7 +60,7 @@ public class DDIPostprocessor implements Postprocessor {
 		isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL.close();
 		osTweakXhtmlForDdi.close();
 
-		logger.debug("DDIPostprocessor : END");
+		logger.debug("DDIMarkdown2XhtmlPostprocessor : END");
 		return new File(outputTweakXhtmlForDdi);
 
 	}

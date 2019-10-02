@@ -7,21 +7,17 @@ import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
-@Service
 public class FRIdentificationPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(FRIdentificationPostprocessor.class);
 
-	@Autowired
-	private XslTransformation saxonService;
+	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {

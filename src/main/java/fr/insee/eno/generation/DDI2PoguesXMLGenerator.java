@@ -5,19 +5,15 @@ import java.io.File;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import fr.insee.eno.transform.xsl.XslParameters;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
-@Service
 public class DDI2PoguesXMLGenerator implements Generator {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDI2PoguesXMLGenerator.class);
 
-	@Autowired
-	private XslTransformation saxonService;
+	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {

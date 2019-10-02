@@ -9,8 +9,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -18,13 +16,11 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * A DDI specific preprocessor.
  */
-@Service
 public class DDIPreprocessor implements Preprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDIPreprocessor.class);
 
-	@Autowired
-	private XslTransformation saxonService;
+	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
 	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
@@ -38,6 +34,9 @@ public class DDIPreprocessor implements Preprocessor {
 		InputStream isDDI_DEREFERENCING_XSL = Constants.getInputStreamFromPath(Constants.DDI_DEREFERENCING_XSL);
 		InputStream isInputFile = FileUtils.openInputStream(inputFile);
 		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER));
+		if(saxonService==null) {
+			saxonService=new XslTransformation();
+		}
 		saxonService.transformDereferencing(isInputFile, isDDI_DEREFERENCING_XSL, osTEMP_NULL_TMP,
 				Constants.sUB_TEMP_FOLDER_FILE(survey)); // FIXME 4th param
 															// should be a

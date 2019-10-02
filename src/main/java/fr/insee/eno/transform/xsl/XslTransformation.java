@@ -14,7 +14,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
 
@@ -24,7 +23,6 @@ import fr.insee.eno.Constants;
  * @author gerose
  *
  */
-@Service
 public class XslTransformation {
 
 	final static Logger LOGGER = LoggerFactory.getLogger(XslTransformation.class);

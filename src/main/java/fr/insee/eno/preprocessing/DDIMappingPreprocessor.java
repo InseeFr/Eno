@@ -7,9 +7,6 @@ import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import fr.insee.eno.Constants;
 import fr.insee.eno.parameters.PreProcessing;
@@ -18,13 +15,11 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * A DDI specific preprocessor.
  */
-@Service
 public class DDIMappingPreprocessor implements Preprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDIMappingPreprocessor.class);
 
-	@Autowired
-	private XslTransformation saxonService;
+	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
 	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {
