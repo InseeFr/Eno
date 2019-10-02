@@ -2,6 +2,7 @@ package fr.insee.eno.params.validation;
 
 import java.io.InputStream;
 
+import javax.annotation.PostConstruct;
 import javax.xml.XMLConstants;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -15,25 +16,24 @@ import javax.xml.validation.Validator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
 import fr.insee.eno.Constants;
 
-@Service
 public class SchemaValidatorImpl implements SchemaValidator {
-
+	
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SchemaValidatorImpl.class);
 	
 	private Schema schema;
 	private Validator validator;
 	
-	public SchemaValidatorImpl() {
+	@PostConstruct
+	public void initSchemaValidator() {
 		SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		try {
 			schema = sf.newSchema(Constants.ENO_PARAMETERS_XSD);
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		validator = schema.newValidator();
