@@ -26,6 +26,7 @@
         
         <Languages>
             <Language>fr</Language>
+            <Language>en</Language>
         </Languages>
         
         <BeginQuestion>
@@ -33,7 +34,7 @@
         </BeginQuestion>
         
         <EndQuestion>
-            <ResponseTimeQuestion>false</ResponseTimeQuestion>
+            <ResponseTimeQuestion>true</ResponseTimeQuestion>
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
         
@@ -53,21 +54,21 @@
             </Format>
             <Roster>
                 <Row>
-                    <DefaultSize>12</DefaultSize>
+                    <DefaultSize>15</DefaultSize>
                 </Row>
             </Roster>
             <TextArea>
                 <Row>
-                    <DefaultSize>3</DefaultSize>
+                    <DefaultSize>5</DefaultSize>
                 </Row>
             </TextArea>
             <Table>
                 <Row>
-                    <DefaultSize>14</DefaultSize>
+                    <DefaultSize>19</DefaultSize>
                 </Row>
             </Table>
             <Capture>
-                <Numeric>manual</Numeric>
+                <Numeric>optical</Numeric>
             </Capture>
             <PageBreakBetween>
                 <pdf>module</pdf>

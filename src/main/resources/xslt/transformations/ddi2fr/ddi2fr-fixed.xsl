@@ -489,8 +489,8 @@
     <xsl:function name="enofr:get-form-languages">
         <xsl:param name="context" as="item()" />
         <xsl:choose>
-            <xsl:when test="$parameters/Parameters/Languages">
-                <xsl:for-each select="$parameters/Parameters/Languages/Language">
+            <xsl:when test="$parameters//Parameters/Languages">
+                <xsl:for-each select="$parameters//Parameters/Languages/Language">
                     <xsl:value-of select="." />
                 </xsl:for-each>
             </xsl:when>
