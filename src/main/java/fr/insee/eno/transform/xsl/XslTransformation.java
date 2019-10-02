@@ -214,10 +214,10 @@ public class XslTransformation {
 		InputStream parametersIS = null;
 		LOGGER.debug("Using the titling transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
 		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.TITLING_PARAMETERS_FILE,
-				new URI("classpath:" + Constants.PARAMETERS_XML));
+		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
 		if (parameters != null) {
 			parametersIS = new ByteArrayInputStream(parameters);
 			Source source = new StreamSource(parametersIS);
