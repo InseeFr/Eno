@@ -9,17 +9,21 @@ import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
+import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertCoverPagePostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertEndQuestionPostprocessor;
 import fr.insee.eno.postprocessing.PDFMailingPostprocessor;
 import fr.insee.eno.postprocessing.PDFSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.PDFTableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.PDFInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
 public class TestDDIToFO {
+	
+	private DDIPreprocessor ddiPreprocessor = new DDIPreprocessor();
+	
+	private DDI2PDFGenerator ddi2pdf = new DDI2PDFGenerator();
 
 	private XMLDiff xmlDiff = new XMLDiff();
 
@@ -31,7 +35,7 @@ public class TestDDIToFO {
 			Diff diff = null;
 
 			// Without plugins
-			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
+			GenerationService genService = new GenerationService(ddiPreprocessor, ddi2pdf,
 					new Postprocessor[] { 
 							new PDFMailingPostprocessor(),
 							new PDFTableColumnPostprocessorFake(),

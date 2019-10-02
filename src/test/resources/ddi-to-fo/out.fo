@@ -44,7 +44,8 @@
             La position peut être définie par rapport au hautou bas de la zone concernée et gauche ou droite.
                      
             Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée.
-            --><fo:simple-page-master master-name="page-even-default"
+            -->
+      <fo:simple-page-master master-name="page-even-default"
                              page-height="297mm"
                              page-width="210mm"
                              reference-orientation="0"
@@ -213,7 +214,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">I - Introduction</fo:block>
+                   keep-with-next="always"
+                   page-break-before="always">I - Introduction</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -405,7 +407,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">II - Simpsons' city</fo:block>
+                   keep-with-next="always"
+                   page-break-before="always">II - Simpsons' city</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -579,7 +582,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">III - Characters</fo:block>
+                   keep-with-next="always"
+                   page-break-before="always">III - Characters</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -1457,7 +1461,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">IV - General questions</fo:block>
+                   keep-with-next="always"
+                   page-break-before="always">IV - General questions</fo:block>
          <fo:block background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
@@ -2841,7 +2846,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">V - Favourite characters</fo:block>
+                   keep-with-next="always"
+                   page-break-before="always">V - Favourite characters</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -6208,7 +6214,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">VI - Comment</fo:block>
+                   keep-with-next="always"
+                   page-break-before="always">VI - Comment</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.GenerationService;
@@ -16,8 +17,11 @@ import fr.insee.eno.preprocessing.DDIPreprocessor;
 
 public class TestDDIToJS {
 
+	private DDIPreprocessor ddiPreprocessor = new DDIPreprocessor();
+	
+	private DDI2JSGenerator ddi2js = new DDI2JSGenerator();
+	
 	private XMLDiff xmlDiff = new XMLDiff();
-
 	
 	@Test
 	public void simpleDiffTest() {
@@ -26,7 +30,7 @@ public class TestDDIToJS {
 			Postprocessor[] postprocessors =  {
 					new JSSortComponentsPostprocessor(),
 					new JSExternalizeVariablesPostprocessor()};
-			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2JSGenerator(),postprocessors);
+			GenerationService genService = new GenerationService(ddiPreprocessor, ddi2js,postprocessors);
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-js-test");
 			File expectedFile = new File(String.format("%s/out.xml", basePath));
