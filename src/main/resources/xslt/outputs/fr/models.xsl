@@ -10,7 +10,16 @@
 
 <!--    <xsl:import href="../../transformations/ddi2fr/ddi2fr.xsl"/>-->
 
-    <xsl:variable name="modele-questionnaire" select="//d:Instrument/d:InstrumentName/r:String"/>
+    <xsl:variable name="modele-questionnaire">
+        <xsl:choose>
+            <xsl:when test="//d:Instrument/d:InstrumentName">
+                <xsl:value-of select="//d:Instrument/d:InstrumentName/r:String"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="//d:Instrument/r:ID/text()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -57,7 +66,9 @@
                     <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
                 </xsl:for-each>
                 <xsl:for-each select="$parameters//Css">
-                    <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                    <xsl:if test=".!=''">
+                        <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                    </xsl:if>
                 </xsl:for-each>
                 <xf:model id="fr-form-model" xxf:expose-xpath-types="true" xxf:noscript-support="true">
 

@@ -27,7 +27,16 @@
 		</xd:desc>
 	</xd:doc>
 	
-	<xsl:variable name="modele-questionnaire" select="//d:Instrument/r:ID"/>
+	<xsl:variable name="modele-questionnaire">
+		<xsl:choose>
+			<xsl:when test="//d:Instrument/d:InstrumentName">
+				<xsl:value-of select="//d:Instrument/d:InstrumentName/r:String"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="//d:Instrument/r:ID/text()"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
 	
 	<xsl:variable name="varName" select="parent"/>
 	
