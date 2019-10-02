@@ -35,7 +35,8 @@ public final class Constants {
 	public static final String CONFIG_FOLDER = "/config";
 	public static final String INPUTS_FOLDER = "/xslt/inputs";
 	public static final File LABEL_FOLDER = getFileFromUrl(Constants.class.getResource("/lang/fr"));
-	public static final File PARAMETERS_DEFAULT_XML = getFileFromUrl(Constants.class.getResource(PARAMS_DEFAULT_FOLDER_PATH+"/parameters.xml"));
+	public static final String PARAMETERS_DEFAULT_XML = PARAMS_DEFAULT_FOLDER_PATH+"/parameters.xml";
+	
 
 
 	// Params : schema
