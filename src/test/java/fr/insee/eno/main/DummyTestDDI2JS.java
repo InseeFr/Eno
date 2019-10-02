@@ -2,6 +2,8 @@ package fr.insee.eno.main;
 
 import java.io.File;
 
+import org.junit.Test;
+
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2JSGenerator;
 import fr.insee.eno.postprocessing.JSExternalizeVariablesPostprocessor;
@@ -11,14 +13,19 @@ import fr.insee.eno.preprocessing.DDIPreprocessor;
 
 public class DummyTestDDI2JS {
 
-	public static void main(String[] args) {
+	private DDIPreprocessor ddiPreprocessor = new DDIPreprocessor();
+	
+	private DDI2JSGenerator ddi2jsGenerator = new DDI2JSGenerator();	
+	
+	@Test
+	public void mainTest() {
 		
 		String basePathDDI2JS = "src/test/resources/ddi-to-js";
 		Postprocessor[] postprocessors =  {
 				new JSSortComponentsPostprocessor(),
 				new JSExternalizeVariablesPostprocessor()};
 		
-		GenerationService genServiceDDI2JS = new GenerationService(new DDIPreprocessor(), new DDI2JSGenerator(),postprocessors);
+		GenerationService genServiceDDI2JS = new GenerationService(ddiPreprocessor, ddi2jsGenerator,postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathDDI2JS));
 		
 		try {

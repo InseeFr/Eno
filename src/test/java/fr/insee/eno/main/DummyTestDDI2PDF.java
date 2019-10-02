@@ -19,22 +19,28 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
+import org.junit.Test;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
+import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertCoverPagePostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertEndQuestionPostprocessor;
 import fr.insee.eno.postprocessing.PDFMailingPostprocessor;
 import fr.insee.eno.postprocessing.PDFSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.PDFTableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.PDFInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
 public class DummyTestDDI2PDF {
+	
+	private DDIPreprocessor ddiPreprocessor = new DDIPreprocessor();
+	
+	private DDI2PDFGenerator ddi2pdfGenerator = new DDI2PDFGenerator();	
 
-	public static void main(String[] args) {
+	@Test
+	public void mainTest() {
 
 		String basePathddi2PDF = "src/test/resources/ddi-to-pdf";
 		String basePathImg = "src/test/resources/examples/img/";
@@ -46,7 +52,7 @@ public class DummyTestDDI2PDF {
 				new PDFSpecificTreatmentPostprocessor(),
 				new PDFInsertCoverPagePostprocessor(),
 				new PDFInsertAccompanyingMailsPostprocessor()};
-		GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(), postprocessors);
+		GenerationService genServiceDDI2PDF = new GenerationService(ddiPreprocessor, ddi2pdfGenerator, postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathddi2PDF));
 		File xconf = new File(String.format("%s/fop.xconf", basePathddi2PDF));
 

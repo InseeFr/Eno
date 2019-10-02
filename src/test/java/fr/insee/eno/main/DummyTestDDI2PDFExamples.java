@@ -19,28 +19,33 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.fop.apps.Fop;
 import org.apache.fop.apps.FopFactory;
 import org.apache.fop.apps.MimeConstants;
+import org.junit.Test;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
+import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertCoverPagePostprocessor;
+import fr.insee.eno.postprocessing.PDFInsertEndQuestionPostprocessor;
 import fr.insee.eno.postprocessing.PDFMailingPostprocessor;
 import fr.insee.eno.postprocessing.PDFSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.PDFTableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.PDFInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
 public class DummyTestDDI2PDFExamples {
 
-	public static void main(String[] args) {
+	private DDI2PDFGenerator generator =  new DDI2PDFGenerator();
+	
+	private DDIPreprocessor ddiPreprocessor = new DDIPreprocessor();
+	
+	@Test
+	public void mainTest() {
 
 		String basePathExamples = "src/test/resources/examples";
 		String basePathImg = "src/test/resources/examples/img/";
 
-		DDI2PDFGenerator generator = new DDI2PDFGenerator();
-
+		
 		File in = new File(String.format("%s/esa-ddi-v2.xml", basePathExamples));
 		File xconf = new File(String.format("%s/fop.xconf", basePathExamples));
 		// File paramFile = new File(String.format("%s/ddi2pdf.xml", basePathExamples));
@@ -52,7 +57,7 @@ public class DummyTestDDI2PDFExamples {
 			InputStream isXconf = new FileInputStream(xconf);
 			URI imgFolderUri = new File(basePathImg).toURI();
 
-			GenerationService genServiceDDI2PDF = new GenerationService(new DDIPreprocessor(), generator,
+			GenerationService genServiceDDI2PDF = new GenerationService(ddiPreprocessor, generator,
 					new Postprocessor[] { 
 							new PDFMailingPostprocessor(),
 							new PDFTableColumnPostprocessorFake(),
