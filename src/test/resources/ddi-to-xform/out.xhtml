@@ -159,7 +159,7 @@
                   <j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1/>
                   <j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2/>
                   <FAVOURITE_CHARACTERS-Container>
-                     <FAVOURITE_CHARACTERS>
+                     <FAVOURITE_CHARACTERS id="FAVOURITE_CHARACTERS-1">
                         <FAVOURITE_CHARACTERS11/>
                         <FAVOURITE_CHARACTERS21/>
                         <FAVOURITE_CHARACTERS31/>
@@ -202,28 +202,30 @@
          </xf:instance>
          <xf:instance id="fr-form-loop-model">
             <LoopModels>
-               <FAVOURITE_CHARACTERS>
-                  <FAVOURITE_CHARACTERS11/>
-                  <FAVOURITE_CHARACTERS21/>
-                  <FAVOURITE_CHARACTERS31/>
-                  <FAVOURITE_CHARACTERS41/>
-                  <FAVOURITE_CHARACTERS51/>
-                  <FAVOURITE_CHARACTERS61/>
-                  <FAVOURITE_CHARACTERS71/>
-                  <FAVOURITE_CHARACTERS81/>
-                  <FAVOURITE_CHARACTERS91/>
-                  <FAVOURITE_CHARACTERS101/>
-                  <FAVOURITE_CHARACTERS12/>
-                  <FAVOURITE_CHARACTERS22/>
-                  <FAVOURITE_CHARACTERS32/>
-                  <FAVOURITE_CHARACTERS42/>
-                  <FAVOURITE_CHARACTERS52/>
-                  <FAVOURITE_CHARACTERS62/>
-                  <FAVOURITE_CHARACTERS72/>
-                  <FAVOURITE_CHARACTERS82/>
-                  <FAVOURITE_CHARACTERS92/>
-                  <FAVOURITE_CHARACTERS102/>
-               </FAVOURITE_CHARACTERS>
+               <FAVOURITE_CHARACTERS-Container>
+                  <FAVOURITE_CHARACTERS id="">
+                     <FAVOURITE_CHARACTERS11/>
+                     <FAVOURITE_CHARACTERS21/>
+                     <FAVOURITE_CHARACTERS31/>
+                     <FAVOURITE_CHARACTERS41/>
+                     <FAVOURITE_CHARACTERS51/>
+                     <FAVOURITE_CHARACTERS61/>
+                     <FAVOURITE_CHARACTERS71/>
+                     <FAVOURITE_CHARACTERS81/>
+                     <FAVOURITE_CHARACTERS91/>
+                     <FAVOURITE_CHARACTERS101/>
+                     <FAVOURITE_CHARACTERS12/>
+                     <FAVOURITE_CHARACTERS22/>
+                     <FAVOURITE_CHARACTERS32/>
+                     <FAVOURITE_CHARACTERS42/>
+                     <FAVOURITE_CHARACTERS52/>
+                     <FAVOURITE_CHARACTERS62/>
+                     <FAVOURITE_CHARACTERS72/>
+                     <FAVOURITE_CHARACTERS82/>
+                     <FAVOURITE_CHARACTERS92/>
+                     <FAVOURITE_CHARACTERS102/>
+                  </FAVOURITE_CHARACTERS>
+               </FAVOURITE_CHARACTERS-Container>
             </LoopModels>
          </xf:instance>
          <xf:bind id="fr-form-instance-binds" ref="instance('fr-form-instance')">
@@ -240,7 +242,7 @@
                <xf:bind id="d1e50-THEN-bind"
                         name="d1e50-THEN"
                         ref="d1e50-THEN"
-                        relevant="not( //READY!= '1') ">
+                        relevant="not( instance('fr-form-instance')//READY!= '1')">
                   <xf:bind id="j6p0s7o5-bind" name="j6p0s7o5" ref="j6p0s7o5"/>
                   <xf:bind id="PRODUCER-bind" name="PRODUCER" ref="PRODUCER"/>
                   <xf:bind id="SEASON_NUMBER-bind" name="SEASON_NUMBER" ref="SEASON_NUMBER">
@@ -260,7 +262,7 @@
             <xf:bind id="j3341528-bind"
                      name="j3341528"
                      ref="j3341528"
-                     relevant="not( //READY!= '1') ">
+                     relevant="not( instance('fr-form-instance')//READY!= '1')">
                <xf:bind id="j3341528-d2-bind" name="j3341528-d2" ref="j3341528-d2"/>
                <xf:bind id="CITY-bind" name="CITY" ref="CITY" required="true()"/>
                <xf:bind id="MAYOR-bind" name="MAYOR" ref="MAYOR"/>
@@ -269,7 +271,7 @@
             <xf:bind id="j6qe0h9q-bind"
                      name="j6qe0h9q"
                      ref="j6qe0h9q"
-                     relevant="not( //READY!= '1') ">
+                     relevant="not( instance('fr-form-instance')//READY!= '1')">
                <xf:bind id="j334akov-bind" name="j334akov" ref="j334akov"/>
                <xf:bind id="PET1-bind" name="PET1" ref="PET1"/>
                <xf:bind id="PET2-bind" name="PET2" ref="PET2"/>
@@ -353,7 +355,7 @@
             <xf:bind id="j4nw88h2-bind"
                      name="j4nw88h2"
                      ref="j4nw88h2"
-                     relevant="not( //READY!= '1') ">
+                     relevant="not( instance('fr-form-instance')//READY!= '1')">
                <xf:bind id="j6qe237q-bind" name="j6qe237q" ref="j6qe237q"/>
                <xf:bind id="j4nwc63q-bind" name="j4nwc63q" ref="j4nwc63q"/>
                <xf:bind id="j4nwc63q-j4nwh16i-Header-1-bind"
@@ -444,7 +446,7 @@
                </xf:bind>
                <xf:bind id="j4nwc63q-CI-0-bind" name="j4nwc63q-CI-0" ref="j4nwc63q-CI-0">
                   <xf:constraint level="error"
-                                 value="not(number(if (//PERCENTAGE_EXPENSES11='') then '0' else //PERCENTAGE_EXPENSES11) + number(if (//PERCENTAGE_EXPENSES21='') then '0' else //PERCENTAGE_EXPENSES21) + number(if (//PERCENTAGE_EXPENSES31='') then '0' else //PERCENTAGE_EXPENSES31)+ number(if (//PERCENTAGE_EXPENSES41='') then '0' else //PERCENTAGE_EXPENSES41)+ number(if (//PERCENTAGE_EXPENSES51='') then '0' else //PERCENTAGE_EXPENSES51)+ number(if (//PERCENTAGE_EXPENSES61='') then '0' else //PERCENTAGE_EXPENSES61)+ number(if (//PERCENTAGE_EXPENSES71='') then '0' else //PERCENTAGE_EXPENSES71)+ number(if (//PERCENTAGE_EXPENSES81='') then '0' else //PERCENTAGE_EXPENSES81)+ number(if (//PERCENTAGE_EXPENSES91='') then '0' else //PERCENTAGE_EXPENSES91)+ number(if (//PERCENTAGE_EXPENSES101='') then '0' else //PERCENTAGE_EXPENSES101)!= 100)"/>
+                                 value="not((if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)!= 100)"/>
                </xf:bind>
                <xf:bind id="j6qejudb-bind" name="j6qejudb" ref="j6qejudb"/>
                <xf:bind id="j4nw0rr6-bind" name="j4nw0rr6" ref="j4nw0rr6"/>
@@ -540,7 +542,7 @@
             <xf:bind id="j6qfx9qe-bind"
                      name="j6qfx9qe"
                      ref="j6qfx9qe"
-                     relevant="not( //READY!= '1') ">
+                     relevant="not( instance('fr-form-instance')//READY!= '1')">
                <xf:bind id="j6qg8rc6-bind" name="j6qg8rc6" ref="j6qg8rc6"/>
                <xf:bind id="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1-bind"
                         name="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1"
@@ -634,7 +636,7 @@
                </xf:bind>
                <xf:bind id="FAVOURITE_CHARACTERS-addline-bind"
                         ref="FAVOURITE_CHARACTERS-AddLine"
-                        relevant="count(instance('fr-form-instance')//FAVOURITE_CHARACTERS) &lt; 10"/>
+                        relevant="count(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS) &lt; 10"/>
             </xf:bind>
             <xf:bind id="j6z12s2d-bind" name="j6z12s2d" ref="j6z12s2d">
                <xf:bind id="SURVEY_COMMENT-bind" name="SURVEY_COMMENT" ref="SURVEY_COMMENT"/>
@@ -642,7 +644,7 @@
             <xf:bind id="SUM_EXPENSES-bind"
                      name="SUM_EXPENSES"
                      ref="SUM_EXPENSES"
-                     calculate="number(if (//PERCENTAGE_EXPENSES11='') then '0' else //PERCENTAGE_EXPENSES11) + number(if (//PERCENTAGE_EXPENSES21='') then '0' else //PERCENTAGE_EXPENSES21) + number(if (//PERCENTAGE_EXPENSES31='') then '0' else //PERCENTAGE_EXPENSES31)+&#xA;                number(if (//PERCENTAGE_EXPENSES41='') then '0' else //PERCENTAGE_EXPENSES41)+ number(if (//PERCENTAGE_EXPENSES51='') then '0' else //PERCENTAGE_EXPENSES51)+ number(if (//PERCENTAGE_EXPENSES61='') then '0' else //PERCENTAGE_EXPENSES61)+&#xA;                number(if (//PERCENTAGE_EXPENSES71='') then '0' else //PERCENTAGE_EXPENSES71)+ number(if (//PERCENTAGE_EXPENSES81='') then '0' else //PERCENTAGE_EXPENSES81)+ number(if (//PERCENTAGE_EXPENSES91='') then '0' else //PERCENTAGE_EXPENSES91)+&#xA;                number(if (//PERCENTAGE_EXPENSES101='') then '0' else //PERCENTAGE_EXPENSES101)"/>
+                     calculate="(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)"/>
             <xf:bind id="end-bind" name="end" ref="End">
                <xf:bind id="generic-end-text-bind"
                         name="generic-end-text"
@@ -710,7 +712,7 @@
                   </DATEFIRST>
                   <AUDIENCE_SHARE>
                      <label>➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?</label>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 99.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 99,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </AUDIENCE_SHARE>
                   <j3341528>
                      <label>II - Simpsons' city</label>
@@ -1122,34 +1124,34 @@
                      <label>Percentage</label>
                   </j4nwc63q-j4nwc63q-secondDimension-fakeCL-1-1>
                   <PERCENTAGE_EXPENSES11>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 100,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </PERCENTAGE_EXPENSES11>
                   <PERCENTAGE_EXPENSES21>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 100,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </PERCENTAGE_EXPENSES21>
                   <PERCENTAGE_EXPENSES31>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 100,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </PERCENTAGE_EXPENSES31>
                   <PERCENTAGE_EXPENSES41>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 100,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </PERCENTAGE_EXPENSES41>
                   <PERCENTAGE_EXPENSES51>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 100,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </PERCENTAGE_EXPENSES51>
                   <PERCENTAGE_EXPENSES61>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 100,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </PERCENTAGE_EXPENSES61>
                   <PERCENTAGE_EXPENSES71>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 100,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </PERCENTAGE_EXPENSES71>
                   <PERCENTAGE_EXPENSES81>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 100,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </PERCENTAGE_EXPENSES81>
                   <PERCENTAGE_EXPENSES91>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 100,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </PERCENTAGE_EXPENSES91>
                   <PERCENTAGE_EXPENSES101>
-                     <alert>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.0 et 100.0 (avec au plus 1 chiffre derrière le séparateur ".")</alert>
+                     <alert>Vous devez utiliser le caractère "," comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0,0 et 100,0 (avec au plus 1 chiffre derrière le séparateur ",")</alert>
                   </PERCENTAGE_EXPENSES101>
                   <j4nwc63q-CI-0>
                      <alert>The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of percentages must be equal to 100%. </alert>
@@ -1448,7 +1450,6 @@
                   <j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2>
                      <label>Age</label>
                   </j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2>
-                  <FAVOURITE_CHARACTERS/>
                   <FAVOURITE_CHARACTERS11/>
                   <FAVOURITE_CHARACTERS21/>
                   <FAVOURITE_CHARACTERS31/>
@@ -1620,7 +1621,7 @@
                   </DATEFIRST>
                   <AUDIENCE_SHARE>
                      <label>➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?</label>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 99.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 99,0 (with at most 1 digit behind the "," separator)</alert>
                   </AUDIENCE_SHARE>
                   <j3341528>
                      <label>II - Simpsons' city</label>
@@ -2032,34 +2033,34 @@
                      <label>Percentage</label>
                   </j4nwc63q-j4nwc63q-secondDimension-fakeCL-1-1>
                   <PERCENTAGE_EXPENSES11>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 100,0 (with at most 1 digit behind the "," separator)</alert>
                   </PERCENTAGE_EXPENSES11>
                   <PERCENTAGE_EXPENSES21>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 100,0 (with at most 1 digit behind the "," separator)</alert>
                   </PERCENTAGE_EXPENSES21>
                   <PERCENTAGE_EXPENSES31>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 100,0 (with at most 1 digit behind the "," separator)</alert>
                   </PERCENTAGE_EXPENSES31>
                   <PERCENTAGE_EXPENSES41>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 100,0 (with at most 1 digit behind the "," separator)</alert>
                   </PERCENTAGE_EXPENSES41>
                   <PERCENTAGE_EXPENSES51>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 100,0 (with at most 1 digit behind the "," separator)</alert>
                   </PERCENTAGE_EXPENSES51>
                   <PERCENTAGE_EXPENSES61>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 100,0 (with at most 1 digit behind the "," separator)</alert>
                   </PERCENTAGE_EXPENSES61>
                   <PERCENTAGE_EXPENSES71>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 100,0 (with at most 1 digit behind the "," separator)</alert>
                   </PERCENTAGE_EXPENSES71>
                   <PERCENTAGE_EXPENSES81>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 100,0 (with at most 1 digit behind the "," separator)</alert>
                   </PERCENTAGE_EXPENSES81>
                   <PERCENTAGE_EXPENSES91>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 100,0 (with at most 1 digit behind the "," separator)</alert>
                   </PERCENTAGE_EXPENSES91>
                   <PERCENTAGE_EXPENSES101>
-                     <alert>You shall use point as decimal separator, with no spaces, and type a number between 0.0 and 100.0 (with at most 1 digit behind the "." separator)</alert>
+                     <alert>You shall use "," character as decimal separator, with no spaces, and type a number between 0,0 and 100,0 (with at most 1 digit behind the "," separator)</alert>
                   </PERCENTAGE_EXPENSES101>
                   <j4nwc63q-CI-0>
                      <alert>The sum of percentages is: ¤jbcggtca-GOP¤ %. The total of percentages must be equal to 100%. </alert>
@@ -2358,7 +2359,6 @@
                   <j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2>
                      <label>Age</label>
                   </j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2>
-                  <FAVOURITE_CHARACTERS/>
                   <FAVOURITE_CHARACTERS11/>
                   <FAVOURITE_CHARACTERS21/>
                   <FAVOURITE_CHARACTERS31/>
@@ -2595,17 +2595,19 @@
             </xf:action>
          </xf:submission>
          <xf:action ev:event="xforms-ready">
-            <xf:action if="not(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/*)                         or count(instance('fr-form-instance')//FAVOURITE_CHARACTERS) &lt; instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count">
-               <xf:action while="count(instance('fr-form-instance')//FAVOURITE_CHARACTERS) &lt; instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count">
+            <xf:action if="not(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/*)                         or count(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS) &lt; instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count">
+               <xf:action while="count(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS) &lt; instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count">
                   <xf:insert context="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container"
-                             nodeset="instance('fr-form-instance')//FAVOURITE_CHARACTERS"
+                             nodeset="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS"
                              position="after"
-                             origin="instance('fr-form-loop-model')/FAVOURITE_CHARACTERS"/>
+                             origin="instance('fr-form-loop-model')/FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS"/>
+                  <xf:setvalue ref="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS[last()]/@id"
+                               value="concat('FAVOURITE_CHARACTERS-',count(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS))"/>
                </xf:action>
             </xf:action>
-            <xf:action if="count(instance('fr-form-instance')//FAVOURITE_CHARACTERS) &gt; instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count">
+            <xf:action if="count(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS) &gt; instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count">
                <xf:setvalue ref="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count"
-                            value="count(instance('fr-form-instance')//FAVOURITE_CHARACTERS)"/>
+                            value="count(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS)"/>
             </xf:action>
             <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
             <xxf:show if="instance('fr-form-instance')/Util/Send='false' and not(instance('fr-form-instance')/Util/CurrentSection='1')"
@@ -2752,31 +2754,38 @@
                                      xxf:maxlength="30">
                               <xf:label ref="$form-resources/PRODUCER/label"/>
                            </xf:input>
-                           <xf:input id="SEASON_NUMBER-control"
-                                     name="SEASON_NUMBER"
-                                     bind="SEASON_NUMBER-bind"
-                                     class="question number"
-                                     xxf:maxlength="2">
+                           <fr:number id="SEASON_NUMBER-control"
+                                      name="SEASON_NUMBER"
+                                      bind="SEASON_NUMBER-bind"
+                                      class="question number"
+                                      xxf:maxlength="2"
+                                      grouping-separator=" "
+                                      xxf:fraction-digits="0"
+                                      xxf:non-negative="true()">
                               <xf:label ref="$form-resources/SEASON_NUMBER/label"/>
                               <xf:alert ref="$form-resources/SEASON_NUMBER/alert"/>
-                           </xf:input>
-                           <xf:input id="DATEFIRST-control"
-                                     name="DATEFIRST"
-                                     bind="DATEFIRST-bind"
-                                     class="question date">
+                           </fr:number>
+                           <fr:number id="DATEFIRST-control"
+                                      name="DATEFIRST"
+                                      bind="DATEFIRST-bind"
+                                      xxf:fraction-digits="0"
+                                      xxf:non-negative="true()"
+                                      class="question date">
                               <xf:label ref="replace($form-resources/DATEFIRST/label,'¤LAST_BROADCAST¤',instance('fr-form-instance')//LAST_BROADCAST)"
                                         mediatype="text/html"/>
                               <xf:hint ref="$form-resources/DATEFIRST/hint"/>
                               <xf:alert ref="$form-resources/DATEFIRST/alert"/>
-                           </xf:input>
-                           <xf:input id="AUDIENCE_SHARE-control"
-                                     name="AUDIENCE_SHARE"
-                                     bind="AUDIENCE_SHARE-bind"
-                                     class="question number"
-                                     xxf:maxlength="4">
+                           </fr:number>
+                           <fr:number id="AUDIENCE_SHARE-control"
+                                      name="AUDIENCE_SHARE"
+                                      bind="AUDIENCE_SHARE-bind"
+                                      class="question number"
+                                      xxf:maxlength="4"
+                                      grouping-separator=" "
+                                      decimal-separator=",">
                               <xf:label ref="$form-resources/AUDIENCE_SHARE/label"/>
                               <xf:alert ref="$form-resources/AUDIENCE_SHARE/alert"/>
-                           </xf:input>
+                           </fr:number>
                         </xhtml:div>
                      </xf:group>
                   </fr:section>
@@ -3281,16 +3290,18 @@
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:td align="center">
-                                    <xf:input id="PERCENTAGE_EXPENSES11-control"
-                                              name="PERCENTAGE_EXPENSES11"
-                                              bind="PERCENTAGE_EXPENSES11-bind"
-                                              class="number"
-                                              xxf:maxlength="5">
+                                    <fr:number id="PERCENTAGE_EXPENSES11-control"
+                                               name="PERCENTAGE_EXPENSES11"
+                                               bind="PERCENTAGE_EXPENSES11-bind"
+                                               class="number"
+                                               xxf:maxlength="5"
+                                               grouping-separator=" "
+                                               decimal-separator=",">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES11/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
-                                    </xf:input>
+                                    </fr:number>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3303,16 +3314,18 @@
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:td align="center">
-                                    <xf:input id="PERCENTAGE_EXPENSES21-control"
-                                              name="PERCENTAGE_EXPENSES21"
-                                              bind="PERCENTAGE_EXPENSES21-bind"
-                                              class="number"
-                                              xxf:maxlength="5">
+                                    <fr:number id="PERCENTAGE_EXPENSES21-control"
+                                               name="PERCENTAGE_EXPENSES21"
+                                               bind="PERCENTAGE_EXPENSES21-bind"
+                                               class="number"
+                                               xxf:maxlength="5"
+                                               grouping-separator=" "
+                                               decimal-separator=",">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES21/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
-                                    </xf:input>
+                                    </fr:number>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3332,16 +3345,18 @@
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:td align="center">
-                                    <xf:input id="PERCENTAGE_EXPENSES31-control"
-                                              name="PERCENTAGE_EXPENSES31"
-                                              bind="PERCENTAGE_EXPENSES31-bind"
-                                              class="number"
-                                              xxf:maxlength="5">
+                                    <fr:number id="PERCENTAGE_EXPENSES31-control"
+                                               name="PERCENTAGE_EXPENSES31"
+                                               bind="PERCENTAGE_EXPENSES31-bind"
+                                               class="number"
+                                               xxf:maxlength="5"
+                                               grouping-separator=" "
+                                               decimal-separator=",">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES31/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
-                                    </xf:input>
+                                    </fr:number>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3354,16 +3369,18 @@
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:td align="center">
-                                    <xf:input id="PERCENTAGE_EXPENSES41-control"
-                                              name="PERCENTAGE_EXPENSES41"
-                                              bind="PERCENTAGE_EXPENSES41-bind"
-                                              class="number"
-                                              xxf:maxlength="5">
+                                    <fr:number id="PERCENTAGE_EXPENSES41-control"
+                                               name="PERCENTAGE_EXPENSES41"
+                                               bind="PERCENTAGE_EXPENSES41-bind"
+                                               class="number"
+                                               xxf:maxlength="5"
+                                               grouping-separator=" "
+                                               decimal-separator=",">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES41/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
-                                    </xf:input>
+                                    </fr:number>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3376,16 +3393,18 @@
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:td align="center">
-                                    <xf:input id="PERCENTAGE_EXPENSES51-control"
-                                              name="PERCENTAGE_EXPENSES51"
-                                              bind="PERCENTAGE_EXPENSES51-bind"
-                                              class="number"
-                                              xxf:maxlength="5">
+                                    <fr:number id="PERCENTAGE_EXPENSES51-control"
+                                               name="PERCENTAGE_EXPENSES51"
+                                               bind="PERCENTAGE_EXPENSES51-bind"
+                                               class="number"
+                                               xxf:maxlength="5"
+                                               grouping-separator=" "
+                                               decimal-separator=",">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES51/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
-                                    </xf:input>
+                                    </fr:number>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3405,16 +3424,18 @@
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:td align="center">
-                                    <xf:input id="PERCENTAGE_EXPENSES61-control"
-                                              name="PERCENTAGE_EXPENSES61"
-                                              bind="PERCENTAGE_EXPENSES61-bind"
-                                              class="number"
-                                              xxf:maxlength="5">
+                                    <fr:number id="PERCENTAGE_EXPENSES61-control"
+                                               name="PERCENTAGE_EXPENSES61"
+                                               bind="PERCENTAGE_EXPENSES61-bind"
+                                               class="number"
+                                               xxf:maxlength="5"
+                                               grouping-separator=" "
+                                               decimal-separator=",">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES61/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
-                                    </xf:input>
+                                    </fr:number>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -3427,16 +3448,18 @@
                                     </xf:output>
                                  </xhtml:th>
                                  <xhtml:td align="center">
-                                    <xf:input id="PERCENTAGE_EXPENSES71-control"
-                                              name="PERCENTAGE_EXPENSES71"
-                                              bind="PERCENTAGE_EXPENSES71-bind"
-                                              class="number"
-                                              xxf:maxlength="5">
+                                    <fr:number id="PERCENTAGE_EXPENSES71-control"
+                                               name="PERCENTAGE_EXPENSES71"
+                                               bind="PERCENTAGE_EXPENSES71-bind"
+                                               class="number"
+                                               xxf:maxlength="5"
+                                               grouping-separator=" "
+                                               decimal-separator=",">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES71/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
-                                    </xf:input>
+                                    </fr:number>
                                     <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
@@ -4021,9 +4044,9 @@
                            </xhtml:tr>
                         </xhtml:thead>
                         <xhtml:tbody>
-                           <xf:repeat id="FAVOURITE_CHARACTERS"
-                                      nodeset="instance('fr-form-instance')//FAVOURITE_CHARACTERS">
-                              <xf:var name="FAVOURITE_CHARACTERS-position" value="position()"/>
+                           <xf:repeat id="FAVOURITE_CHARACTERS-Container"
+                                      nodeset="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS">
+                              <xf:var name="FAVOURITE_CHARACTERS-Container-position" value="position()"/>
                               <xhtml:tr>
                                  <xhtml:td align="center">
                                     <xf:textarea id="FAVOURITE_CHARACTERS11-control"
@@ -4033,13 +4056,16 @@
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
-                                    <xf:input id="FAVOURITE_CHARACTERS12-control"
-                                              name="FAVOURITE_CHARACTERS12"
-                                              bind="FAVOURITE_CHARACTERS12-bind"
-                                              class="number"
-                                              xxf:maxlength="3">
+                                    <fr:number id="FAVOURITE_CHARACTERS12-control"
+                                               name="FAVOURITE_CHARACTERS12"
+                                               bind="FAVOURITE_CHARACTERS12-bind"
+                                               class="number"
+                                               xxf:maxlength="3"
+                                               grouping-separator=" "
+                                               xxf:fraction-digits="0"
+                                               xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS12/alert"/>
-                                    </xf:input>
+                                    </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -4051,13 +4077,16 @@
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
-                                    <xf:input id="FAVOURITE_CHARACTERS22-control"
-                                              name="FAVOURITE_CHARACTERS22"
-                                              bind="FAVOURITE_CHARACTERS22-bind"
-                                              class="number"
-                                              xxf:maxlength="3">
+                                    <fr:number id="FAVOURITE_CHARACTERS22-control"
+                                               name="FAVOURITE_CHARACTERS22"
+                                               bind="FAVOURITE_CHARACTERS22-bind"
+                                               class="number"
+                                               xxf:maxlength="3"
+                                               grouping-separator=" "
+                                               xxf:fraction-digits="0"
+                                               xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS22/alert"/>
-                                    </xf:input>
+                                    </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -4069,13 +4098,16 @@
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
-                                    <xf:input id="FAVOURITE_CHARACTERS32-control"
-                                              name="FAVOURITE_CHARACTERS32"
-                                              bind="FAVOURITE_CHARACTERS32-bind"
-                                              class="number"
-                                              xxf:maxlength="3">
+                                    <fr:number id="FAVOURITE_CHARACTERS32-control"
+                                               name="FAVOURITE_CHARACTERS32"
+                                               bind="FAVOURITE_CHARACTERS32-bind"
+                                               class="number"
+                                               xxf:maxlength="3"
+                                               grouping-separator=" "
+                                               xxf:fraction-digits="0"
+                                               xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS32/alert"/>
-                                    </xf:input>
+                                    </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -4087,13 +4119,16 @@
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
-                                    <xf:input id="FAVOURITE_CHARACTERS42-control"
-                                              name="FAVOURITE_CHARACTERS42"
-                                              bind="FAVOURITE_CHARACTERS42-bind"
-                                              class="number"
-                                              xxf:maxlength="3">
+                                    <fr:number id="FAVOURITE_CHARACTERS42-control"
+                                               name="FAVOURITE_CHARACTERS42"
+                                               bind="FAVOURITE_CHARACTERS42-bind"
+                                               class="number"
+                                               xxf:maxlength="3"
+                                               grouping-separator=" "
+                                               xxf:fraction-digits="0"
+                                               xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS42/alert"/>
-                                    </xf:input>
+                                    </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -4105,13 +4140,16 @@
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
-                                    <xf:input id="FAVOURITE_CHARACTERS52-control"
-                                              name="FAVOURITE_CHARACTERS52"
-                                              bind="FAVOURITE_CHARACTERS52-bind"
-                                              class="number"
-                                              xxf:maxlength="3">
+                                    <fr:number id="FAVOURITE_CHARACTERS52-control"
+                                               name="FAVOURITE_CHARACTERS52"
+                                               bind="FAVOURITE_CHARACTERS52-bind"
+                                               class="number"
+                                               xxf:maxlength="3"
+                                               grouping-separator=" "
+                                               xxf:fraction-digits="0"
+                                               xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS52/alert"/>
-                                    </xf:input>
+                                    </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -4123,13 +4161,16 @@
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
-                                    <xf:input id="FAVOURITE_CHARACTERS62-control"
-                                              name="FAVOURITE_CHARACTERS62"
-                                              bind="FAVOURITE_CHARACTERS62-bind"
-                                              class="number"
-                                              xxf:maxlength="3">
+                                    <fr:number id="FAVOURITE_CHARACTERS62-control"
+                                               name="FAVOURITE_CHARACTERS62"
+                                               bind="FAVOURITE_CHARACTERS62-bind"
+                                               class="number"
+                                               xxf:maxlength="3"
+                                               grouping-separator=" "
+                                               xxf:fraction-digits="0"
+                                               xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS62/alert"/>
-                                    </xf:input>
+                                    </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -4141,13 +4182,16 @@
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
-                                    <xf:input id="FAVOURITE_CHARACTERS72-control"
-                                              name="FAVOURITE_CHARACTERS72"
-                                              bind="FAVOURITE_CHARACTERS72-bind"
-                                              class="number"
-                                              xxf:maxlength="3">
+                                    <fr:number id="FAVOURITE_CHARACTERS72-control"
+                                               name="FAVOURITE_CHARACTERS72"
+                                               bind="FAVOURITE_CHARACTERS72-bind"
+                                               class="number"
+                                               xxf:maxlength="3"
+                                               grouping-separator=" "
+                                               xxf:fraction-digits="0"
+                                               xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS72/alert"/>
-                                    </xf:input>
+                                    </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -4159,13 +4203,16 @@
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
-                                    <xf:input id="FAVOURITE_CHARACTERS82-control"
-                                              name="FAVOURITE_CHARACTERS82"
-                                              bind="FAVOURITE_CHARACTERS82-bind"
-                                              class="number"
-                                              xxf:maxlength="3">
+                                    <fr:number id="FAVOURITE_CHARACTERS82-control"
+                                               name="FAVOURITE_CHARACTERS82"
+                                               bind="FAVOURITE_CHARACTERS82-bind"
+                                               class="number"
+                                               xxf:maxlength="3"
+                                               grouping-separator=" "
+                                               xxf:fraction-digits="0"
+                                               xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS82/alert"/>
-                                    </xf:input>
+                                    </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -4177,13 +4224,16 @@
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
-                                    <xf:input id="FAVOURITE_CHARACTERS92-control"
-                                              name="FAVOURITE_CHARACTERS92"
-                                              bind="FAVOURITE_CHARACTERS92-bind"
-                                              class="number"
-                                              xxf:maxlength="3">
+                                    <fr:number id="FAVOURITE_CHARACTERS92-control"
+                                               name="FAVOURITE_CHARACTERS92"
+                                               bind="FAVOURITE_CHARACTERS92-bind"
+                                               class="number"
+                                               xxf:maxlength="3"
+                                               grouping-separator=" "
+                                               xxf:fraction-digits="0"
+                                               xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS92/alert"/>
-                                    </xf:input>
+                                    </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -4195,13 +4245,16 @@
                                                  xxf:maxlength="255"/>
                                  </xhtml:td>
                                  <xhtml:td align="center">
-                                    <xf:input id="FAVOURITE_CHARACTERS102-control"
-                                              name="FAVOURITE_CHARACTERS102"
-                                              bind="FAVOURITE_CHARACTERS102-bind"
-                                              class="number"
-                                              xxf:maxlength="3">
+                                    <fr:number id="FAVOURITE_CHARACTERS102-control"
+                                               name="FAVOURITE_CHARACTERS102"
+                                               bind="FAVOURITE_CHARACTERS102-bind"
+                                               class="number"
+                                               xxf:maxlength="3"
+                                               grouping-separator=" "
+                                               xxf:fraction-digits="0"
+                                               xxf:non-negative="true()">
                                        <xf:alert ref="$form-resources/FAVOURITE_CHARACTERS102/alert"/>
-                                    </xf:input>
+                                    </fr:number>
                                  </xhtml:td>
                               </xhtml:tr>
                            </xf:repeat>
@@ -4210,11 +4263,16 @@
                      <xf:trigger id="FAVOURITE_CHARACTERS-addline"
                                  bind="FAVOURITE_CHARACTERS-addline-bind">
                         <xf:label ref="$form-resources/AddLine/label"/>
-                        <xf:insert ev:event="DOMActivate"
-                                   context="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container"
-                                   nodeset="instance('fr-form-instance')//FAVOURITE_CHARACTERS"
-                                   position="after"
-                                   origin="instance('fr-form-loop-model')/FAVOURITE_CHARACTERS"/>
+                        <xf:action ev:event="DOMActivate">
+                           <xf:setvalue ref="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count"
+                                        value="number(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count) +1"/>
+                           <xf:insert context="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container"
+                                      nodeset="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS"
+                                      position="after"
+                                      origin="instance('fr-form-loop-model')/FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS"/>
+                           <xf:setvalue ref="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS[last()]/@id"
+                                        value="concat('FAVOURITE_CHARACTERS-',instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count)"/>
+                        </xf:action>
                      </xf:trigger>
                   </fr:section>
                </xf:case>

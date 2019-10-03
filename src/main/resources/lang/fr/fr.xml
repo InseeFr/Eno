@@ -10,10 +10,12 @@
         <Number>
             <Integer>Vous devez saisir un nombre entier compris</Integer>
             <Decimal>
-                <Beginning>Vous devez utiliser le point comme séparateur de décimale, sans espace, et saisir un nombre compris</Beginning>
+                <Beginning>Vous devez utiliser le caractère "</Beginning>
+                <Beginning2>" comme séparateur de décimale, sans espace, et saisir un nombre compris</Beginning2>
                 <DecimalCondition>(avec au plus</DecimalCondition>
                 <Digit>chiffre</Digit>
-                <End>derrière le séparateur ".")</End>
+                <End>derrière le séparateur "</End>
+                <End2>")</End2>
             </Decimal>
         </Number>
         <Date>Entrez une date valide</Date>

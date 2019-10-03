@@ -8,6 +8,12 @@
     exclude-result-prefixes="xs d32 r32 l32 g32 s32 xsl xd"
     version="2.0">
 
+    <!-- useful only for surveys with more than 1 questionnaire and used with ant -->
+    <!-- the first variable is the address of the temporary folder relative to the ddi32toddi33.xsl folder -->
+    <!-- this program will seach for the file generated par dereferencing.xsl : ${TempFolder}/${survey}/ddi/${questionnaire}.tmp -->
+    <xsl:variable name="dereferenced-temporary-files-folder" select="'../../../../../../../../../coltrane-dev/coltrane-eno/src/main/temp/'"/>
+    <xsl:variable name="file-name" select="replace(substring-before(tokenize(base-uri(),'/')[last()],'.'),'_ddi32','')"/>
+
     <xsl:output indent="yes"/>
     <xd:doc>
         <xd:desc>root template : DDIInstance with DDI 3.3 namespaces</xd:desc>
@@ -125,6 +131,117 @@
     </xsl:template>
 
     <xd:doc>
+        <xd:desc>Add VariableGroup "questionnaire"</xd:desc>
+    </xd:doc>
+    <xsl:template match="l32:VariableScheme[1]">
+        <xsl:element name="l:VariableScheme">
+            <xsl:apply-templates select="@* | node()"/>
+            <xsl:for-each select="//s32:StudyUnit//d32:Instrument">
+                <xsl:variable name="questionnaire-name">
+                    <xsl:choose>
+                        <xsl:when test="d32:InstrumentName">
+                            <xsl:value-of select="d32:InstrumentName/r32:String"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="replace(r32:ID/text(), concat(replace(//s32:StudyUnit/r32:ID/text(), '-SU', ''),'-In-'), '')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:variable name="derefenced-questionnaire-address" select="concat($dereferenced-temporary-files-folder,$file-name,'/ddi/',$questionnaire-name,'.tmp')"/>
+                <xsl:variable name="dereferenced-questionnaire" as="node()">
+                    <xsl:choose>
+                        <xsl:when test="unparsed-text-available($derefenced-questionnaire-address)">
+                            <xsl:copy-of select="doc($derefenced-questionnaire-address)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <Empty/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:element name="l:VariableGroup">
+                    <xsl:element name="r:Agency"><xsl:value-of select="r32:Agency"/></xsl:element>
+                    <xsl:element name="r:ID"><xsl:value-of select="concat(r32:ID,'-VG')"/></xsl:element>
+                    <xsl:element name="r:Version"><xsl:value-of select="r32:Version"/></xsl:element>
+                    <xsl:element name="r:BasedOnObject">
+                        <xsl:element name="r:BasedOnReference">
+                            <xsl:element name="r:Agency"><xsl:value-of select="r32:Agency"/></xsl:element>
+                            <xsl:element name="r:ID"><xsl:value-of select="r32:ID"/></xsl:element>
+                            <xsl:element name="r:Version"><xsl:value-of select="r32:Version"/></xsl:element>
+                            <xsl:element name="r:TypeOfObject"><xsl:value-of select="'Instrument'"/></xsl:element>
+                        </xsl:element>
+                    </xsl:element>
+                    <xsl:element name="l:TypeOfVariableGroup"><xsl:value-of select="'Questionnaire'"/></xsl:element>
+                    <xsl:element name="l:VariableGroupName">
+                        <xsl:element name="r:String"><xsl:value-of select="$questionnaire-name"/></xsl:element>
+                    </xsl:element>
+                    <xsl:for-each select="//l32:VariableScheme/l32:Variable">
+                        <xsl:variable name="variable-id" select="r32:ID"/>
+                        <xsl:variable name="is-variable-to-reference">
+                            <xsl:choose>
+                                <!-- variable already in a loop -->
+                                <xsl:when test="//l32:VariableScheme/l32:VariableGroup[contains(l32:TypeOfVariableGroup,'Loop')]/r32:VariableReference/r32:ID = $variable-id"/>
+
+                                <xsl:when test="$dereferenced-questionnaire/* and r32:SourceParameterReference">
+                                    <!-- collected variable -->
+                                    <xsl:value-of select="$dereferenced-questionnaire//*[local-name()='QuestionReference'][descendant::*[local-name()='ID' and not(ends-with(parent::*/local-name(),'Reference'))]/text() = current()/r32:QuestionReference/r32:ID/text()]/local-name()"/>
+                                </xsl:when>
+                                <xsl:when test="$dereferenced-questionnaire/* and l32:VariableRepresentation/r32:ProcessingInstructionReference">
+                                    <!-- calculated variable -->
+                                    <xsl:value-of select="$dereferenced-questionnaire//*[local-name()='GenerationInstruction'][*[local-name()='ID']/text()=current()/l32:VariableRepresentation/r32:ProcessingInstructionReference/r32:ID/text()]/local-name()"/>
+                                </xsl:when>
+                                <xsl:when test="$dereferenced-questionnaire/*">
+                                    <!-- external variable -->
+                                    <xsl:value-of select="contains($dereferenced-questionnaire/text(),concat('¤',$variable-id,'¤'))
+                                                      or contains($dereferenced-questionnaire/text(),concat('ø',$variable-id,'ø'))
+                                                      or $dereferenced-questionnaire//*[local-name()='ID'] = $variable-id"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <!-- no dereferenced questionnaire : all variables are taken -->
+                                    <xsl:value-of select="'true'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:if test="$is-variable-to-reference/text() != ''">
+                            <xsl:element name="r:VariableReference">
+                                <xsl:element name="r:Agency"><xsl:value-of select="r32:Agency"/></xsl:element>
+                                <xsl:element name="r:ID"><xsl:value-of select="$variable-id"/></xsl:element>
+                                <xsl:element name="r:Version"><xsl:value-of select="r32:Version"/></xsl:element>
+                                <xsl:element name="r:TypeOfObject"><xsl:value-of select="'Variable'"/></xsl:element>
+                            </xsl:element>
+                        </xsl:if>
+                    </xsl:for-each>
+                    <xsl:for-each select="//l32:VariableScheme/l32:VariableGroup">
+                        <xsl:variable name="variablegroup-id" select="r32:ID"/>
+                        <xsl:variable name="is-variablegroup-to-reference">
+                            <xsl:choose>
+                                <!-- variable already in a loop -->
+                                <xsl:when test="//l32:VariableScheme/l32:VariableGroup[contains(l32:TypeOfVariableGroup,'Loop')]/r32:VariableGroupReference/r32:ID = $variablegroup-id"/>
+
+                                <xsl:when test="$dereferenced-questionnaire/*">
+                                    <!-- existing dereferenced questionnaire -->
+                                    <xsl:value-of select="$dereferenced-questionnaire//*[not(contains(name(),'Reference')) and *[local-name()='ID']/text() = current()/r32:BasedOnObject/r32:BasedOnReference/r32:ID/text()]/local-name()"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <!-- no dereferenced questionnaire : all variablegroups are taken -->
+                                    <xsl:value-of select="'true'"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <xsl:if test="$is-variablegroup-to-reference/text() != ''">
+                            <xsl:element name="r:VariableGroupReference">
+                                <xsl:element name="r:Agency"><xsl:value-of select="r32:Agency"/></xsl:element>
+                                <xsl:element name="r:ID"><xsl:value-of select="$variablegroup-id"/></xsl:element>
+                                <xsl:element name="r:Version"><xsl:value-of select="r32:Version"/></xsl:element>
+                                <xsl:element name="r:TypeOfObject"><xsl:value-of select="'VariableGroup'"/></xsl:element>
+                            </xsl:element>
+                        </xsl:if>
+                    </xsl:for-each>
+                </xsl:element>
+            </xsl:for-each>
+        </xsl:element>
+    </xsl:template>
+
+    <xd:doc>
         <xd:desc>https://ddi-alliance.atlassian.net/browse/DDILIFE-3532</xd:desc>
     </xd:doc>
     <xsl:template match="l32:VariableRepresentation[r32:MeasurementUnit]">
@@ -185,8 +302,7 @@
             </xsl:element>
         </xsl:element>
     </xsl:template>
-    
-    
+
     <xd:doc>
         <xd:desc>https://ddi-alliance.atlassian.net/projects/DDILIFE/issues/DDILIFE-3590</xd:desc>
     </xd:doc>
@@ -198,4 +314,35 @@
         </xsl:element>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>Simplify numeric formulas</xd:desc>
+    </xd:doc>
+    <xsl:template match="r32:CommandContent">
+        <xsl:element name="r:CommandContent">
+            <xsl:call-template name="simplify-numeric-formulas">
+                <xsl:with-param name="formula" select="normalize-space(text())"/>
+            </xsl:call-template>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template name="simplify-numeric-formulas">
+        <xsl:param name="formula"/>
+
+        <xsl:analyze-string select="$formula" regex="^(.*)number ?\( ?if \( ?(.+) ?= ?'' ?\) then '0' else \2 ?\)(.*)$">
+            <xsl:matching-substring>
+                <xsl:call-template name="simplify-numeric-formulas">
+                    <xsl:with-param name="formula" select="regex-group(1)"/>
+                </xsl:call-template>
+                <xsl:call-template name="simplify-numeric-formulas">
+                    <xsl:with-param name="formula" select="regex-group(2)"/>
+                </xsl:call-template>
+                <xsl:call-template name="simplify-numeric-formulas">
+                    <xsl:with-param name="formula" select="regex-group(3)"/>
+                </xsl:call-template>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <xsl:value-of select="$formula"/>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
+    </xsl:template>
 </xsl:stylesheet>
