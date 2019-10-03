@@ -71,16 +71,16 @@
     </xsl:variable>
 
 
-    <xsl:variable name="LibelleEnquete" select="$metadata//LibelleEnquete" />
-    <!--    <xsl:variable name="LibelleSource" select="$parametres/InformationsCollecte/Source/LibelleLong"/>
-    <xsl:variable name="AnneeCampagne"
-        select="$parametres/InformationsCollecte/Campagne/AnneeReference"/>
-    <xsl:variable name="PeriodeCampagne"
-        select="$parametres/InformationsCollecte/Campagne/PeriodeReference"/>
-    <xsl:variable name="FrequenceEnquete"
-        select="$parametres/InformationsCollecte/Source/Frequence/Libelle"/>
--->
-    <!-- La liste des fréquences qui font afficher la période, séparées par des virgules -->
+    <xsl:variable name="LibelleEnquete">
+        <xsl:choose>
+            <xsl:when test="$metadata//LibelleEnquete!=''">
+                <xsl:value-of select="$metadata//LibelleEnquete" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$metadata//Campagne/Libelle" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:variable name="frequences" select="('mensuelle','trimestrielle','bimestrielle','semestrielle')" as="xs:string *" />
     <xsl:variable name="URLNotice" select="$metadata//URLNotice" />
     <xsl:variable name="URLSpecimen" select="$metadata//URLSpecimen" />
