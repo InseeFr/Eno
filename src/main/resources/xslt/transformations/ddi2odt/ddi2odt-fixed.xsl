@@ -25,6 +25,14 @@
 
     <xsl:strip-space elements="*"/>
     
+    <xsl:param name="properties-file"/>
+    <xsl:param name="parameters-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
+    
+    <xsl:variable name="properties" select="doc($properties-file)"/>
+    
+    
     <xd:doc>
         <xd:desc>
             <xd:p>The parameter file used by the stylesheet.</xd:p>
