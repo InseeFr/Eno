@@ -20,7 +20,7 @@
     exclude-result-prefixes="xd"
     version="2.0">
 
-    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    <xsl:output method="xml" indent="no" encoding="UTF-8"/>
 
     <xd:doc>
         <xd:desc>
