@@ -21,14 +21,14 @@
     version="2.0">
 
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>The output folder in which the dereferenced files (one for each main sequence) are generated.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:param name="output-folder"/>
-    
+
     <xsl:param name="do-not-use-key" select="false()"/><!--set to false() if you don't want to use keys and test how much time keys make you save -->
     <xsl:param name="fast-and-dangerous-mode" select="false()"/><!--set to false() if you don't know-->
     <xsl:param name="build-messages" select="false()"/><!--set to true() if you doubt of the result and false() if you are sure it will succeed -->
@@ -132,8 +132,7 @@
     <xsl:key name="external-variable" match="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]" use="r:ID"/>
     <xsl:key name="referenced-variable" match="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:VariableGroup/r:VariableReference" use="r:ID"/>
     <xsl:key name="calculated-variable" match="/ddi-instance:DDIInstance/g:ResourcePackage/d:ProcessingInstructionScheme/d:GenerationInstruction" use="d:ControlConstructReference/r:ID"/>
-    <xsl:key name="loop-variablegroup" match="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:VariableGroup[l:TypeOfVariableGroup='QuestionLoop']" use="r:BasedOnObject/r:BasedOnReference/r:ID"/>
-    <xsl:key name="tableloop-variablegroup" match="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:VariableGroup[l:TypeOfVariableGroup='TableLoop']" use="r:BasedOnObject/r:BasedOnReference/r:ID"/>
+    <xsl:key name="variablegroup" match="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:VariableGroup" use="r:BasedOnObject/r:BasedOnReference[1]/r:ID"/>
     <xsl:key name="tooltip-with-id" match="/ddi-instance:DDIInstance/g:ResourcePackage/d:InterviewerInstructionScheme/d:Instruction[d:InstructionName/r:String='tooltip' and descendant::*/@id]" use="descendant::*/@id"/>
 
     <xsl:variable name="message-label">
@@ -245,13 +244,22 @@
                         xmlns:c="ddi:conceptualcomponent:3_3"
                         xmlns:cm="ddi:comparative:3_3">
                         <s:StudyUnit>
-                            <xsl:apply-templates select="." mode="output-DDI"/>
+                            <xsl:apply-templates select="." mode="output-DDI">
+                                <xsl:with-param name="form-id" select="r:ID" tunnel="yes"/>
+                            </xsl:apply-templates>
                         </s:StudyUnit>
                         <g:ResourcePackage>
                             <l:VariableScheme>
-                                <xsl:apply-templates select="//l:VariableScheme/l:Variable[not(r:ID=//l:VariableScheme//r:VariableReference/r:ID)]
-                                    |//l:VariableScheme/l:VariableGroup[not(r:ID=//l:VariableScheme//r:VariableGroupReference/r:ID)]" mode="output-DDI">
-                                </xsl:apply-templates>
+                                <xsl:choose>
+                                    <xsl:when test="key('variablegroup',r:ID)">
+                                        <xsl:apply-templates select="key('variablegroup',r:ID)" mode="output-DDI"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:apply-templates select="//l:VariableScheme/l:Variable[not(r:ID=//l:VariableScheme//r:VariableReference/r:ID)]
+                                            |//l:VariableScheme/l:VariableGroup[not(r:ID=//l:VariableScheme//r:VariableGroupReference/r:ID)]" mode="output-DDI">
+                                        </xsl:apply-templates>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </l:VariableScheme>
                         </g:ResourcePackage>
                     </DDIInstance>
@@ -357,14 +365,22 @@
         <xd:desc>Template for template Sequence</xd:desc>
     </xd:doc>
     <xsl:template match="d:Sequence[d:TypeOfSequence/text() = 'template']" mode="output-DDI">
+        <xsl:param name="form-id" tunnel="yes"/>
         <xsl:variable name="current-ID" select="r:ID"/>
-        
+
         <xsl:copy>
-            <xsl:for-each select="//l:VariableScheme/l:Variable">
-                <xsl:if test="count(key('external-variable',r:ID))=1 and not(count(key('referenced-variable',r:ID))=1)">
-                    <xsl:apply-templates select="key('external-variable',r:ID)" mode="output-DDI"/>
-                </xsl:if>
-            </xsl:for-each>
+            <xsl:choose>
+                <xsl:when test="key('variablegroup',$form-id)">
+                    <xsl:apply-templates select="key('variablegroup',$form-id)/r:VariableReference/key('external-variable',r:ID)" mode="output-DDI"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:for-each select="//l:VariableScheme/l:Variable">
+                        <xsl:if test="count(key('external-variable',r:ID))=1 and not(count(key('referenced-variable',r:ID))=1)">
+                            <xsl:apply-templates select="key('external-variable',r:ID)" mode="output-DDI"/>
+                        </xsl:if>
+                    </xsl:for-each>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:apply-templates select="*" mode="output-DDI"/>
             <xsl:apply-templates select="key('calculated-variable',$current-ID)" mode="output-DDI"/>
         </xsl:copy>
@@ -375,9 +391,17 @@
     </xd:doc>
     <xsl:template match="d:Loop" mode="output-DDI">
         <xsl:variable name="current-ID" select="r:ID"/>
-        
+
         <xsl:copy>
-            <xsl:apply-templates select="key('loop-variablegroup',$current-ID)/r:VariableReference/key('external-variable',r:ID)" mode="output-DDI"/>
+            <xsl:choose>
+                <xsl:when test="key('variablegroup',$current-ID)">
+                    <xsl:apply-templates select="key('variablegroup',$current-ID)/r:VariableReference/key('external-variable',r:ID)" mode="output-DDI"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID = $current-ID]
+                                                                                                                             /r:VariableReference/key('external-variable',r:ID)" mode="output-DDI"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:apply-templates select="*" mode="output-DDI"/>
             <xsl:apply-templates select="key('calculated-variable',$current-ID)" mode="output-DDI"/>
         </xsl:copy>
@@ -392,7 +416,7 @@
                 <xsl:value-of select="replace(@href,'#','')"/>
             </xsl:for-each>
         </xsl:variable>
-        
+
         <xsl:copy-of select="."/>
         <xsl:for-each select="key('tooltip-with-id',$ref)">
             <d:InterviewerInstructionReference>
@@ -406,9 +430,9 @@
     </xd:doc>
     <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster]/d:StructuredMixedGridResponseDomain" mode="output-DDI">
         <xsl:variable name="loop-ID" select="../r:ID"/>
-        
+
         <xsl:copy>
-            <xsl:apply-templates select="key('tableloop-variablegroup',$loop-ID)/r:VariableReference/key('external-variable',r:ID)" mode="output-DDI"/>
+            <xsl:apply-templates select="key('variablegroup',$loop-ID)/r:VariableReference/key('external-variable',r:ID)" mode="output-DDI"/>
             <xsl:apply-templates select="*" mode="output-DDI"/>
             <xsl:apply-templates select="key('calculated-variable',$loop-ID)" mode="output-DDI"/>
         </xsl:copy>

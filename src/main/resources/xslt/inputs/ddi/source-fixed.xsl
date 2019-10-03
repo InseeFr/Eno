@@ -479,13 +479,13 @@
         <xsl:choose>
             <xsl:when test="$standart-maximum = ''"/>
             <xsl:when test="$standart-maximum = 'format-date(current-date(),''[Y0001]-[M01]-[D01]'')'">
-                <xsl:value-of select="format-date(current-date(),'[Y0001]-[M01]-[D01]')"/>
+                <xsl:value-of select="'format-date(current-date(),''[Y0001]-[M01]-[D01]'')'"/>
             </xsl:when>
             <xsl:when test="$standart-maximum = 'format-date(current-date(),''[Y0001]-[M01]'')'">
-                <xsl:value-of select="format-date(current-date(),'[Y0001]-[M01]')"/>
+                <xsl:value-of select="'format-date(current-date(),''[Y0001]-[M01]'')'"/>
             </xsl:when>
             <xsl:when test="$standart-maximum = 'year-from-date(current-date())'">
-                <xsl:value-of select="year-from-date(current-date())"/>
+                <xsl:value-of select="'year-from-date(current-date())'"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$standart-maximum"/>
@@ -1011,8 +1011,48 @@
         </xsl:choose>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-container-name.</xd:p>
+            <xd:p>Function that returns the business name of the container of a loop or a dynamic array.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-container-name">
+        <xsl:variable name="loop-id" select="enoddi:get-id(.)"/>
+        <xsl:variable name="loop-name" select="$root//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID= $loop-id]/l:VariableGroupName/r:String"/>
+        <xsl:variable name="loop-position" select="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference[r:ID= $loop-id]/count(preceding-sibling::r:BasedOnReference)+1"/>
 
+        <xsl:choose>
+            <xsl:when test="$loop-position = 1">
+                <xsl:value-of select="concat($loop-name,'-Container')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat($loop-name,'_',$loop-position,'-Container')"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-linked-containers.</xd:p>
+            <xd:p>Function that returns the list of the business name of the different containers of an occurrence of the current loop or dynamic array.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-linked-containers">
+        <xsl:variable name="loop-id" select="enoddi:get-id(.)"/>
+        <xsl:variable name="loop-name" select="$root//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID= $loop-id]/l:VariableGroupName/r:String"/>
+        <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject[r:BasedOnReference/r:ID= $loop-id]/r:BasedOnReference">
+            <xsl:variable name="loop-position" select="position()"/>
+            <xsl:choose>
+                <xsl:when test="$loop-position = 1">
+                    <xsl:value-of select="concat($loop-name,'-Container')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="concat($loop-name,'_',$loop-position,'-Container')"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
+    </xsl:template>
 
     <xd:doc>
         <xd:desc>
@@ -1026,7 +1066,26 @@
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
     </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-variable-business-name.</xd:p>
+            <xd:p>Function that returns the business name of a variable from its DDI ID.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-variable-business-name">
+        <xsl:param name="variable" tunnel="yes"/>
+        
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="$variable"/>
+        </xsl:call-template>
+    </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Name template get-business-name that returns the business name of a variable from its DDI ID.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template name="enoddi:get-business-name">
         <xsl:param name="variable"/>
 
@@ -1067,25 +1126,39 @@
         </xsl:call-template>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining getter get-variable-business-ancestors.</xd:p>
+            <xd:p>Function that returns the business ascendants loop and rowloop business names from a DDI variable ID.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-variable-business-ancestors">
+        <xsl:param name="variable" tunnel="yes"/>
+        <xsl:call-template name="enoddi:get-business-ancestors">
+            <xsl:with-param name="variable" select="$variable"/>
+        </xsl:call-template>
+    </xsl:template>
+    
+    
     <xsl:template name="enoddi:get-business-ancestors">
         <xsl:param name="variable"/>
 
         <xsl:choose>
             <!-- collected variable -->
             <xsl:when test="$root//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
-                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable]">
+                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable and not(l:TypeOfVariableGroup='Questionnaire')]">
                     <xsl:sequence select="l:VariableGroupName/r:String"/>
                 </xsl:for-each>
             </xsl:when>
             <!-- calculated variable -->
             <xsl:when test="$root//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
-                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable]">
+                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::r:SourceParameterReference/r:ID = $variable and not(l:TypeOfVariableGroup='Questionnaire')]">
                     <xsl:sequence select="l:VariableGroupName/r:String"/>
                 </xsl:for-each>
             </xsl:when>
             <!-- external variable -->
             <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
-                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::l:VariableName/r:String= $variable]">
+                <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup[descendant::l:VariableName/r:String= $variable and not(l:TypeOfVariableGroup='Questionnaire')]">
                     <xsl:sequence select="l:VariableGroupName/r:String"/>
                 </xsl:for-each>
             </xsl:when>
@@ -1109,6 +1182,42 @@
         </xsl:choose>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc></xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-variable-representation">
+        <xsl:param name="variable" tunnel="yes"/>
+        
+        <xsl:variable name="variable-representation">
+            <xsl:choose>
+                <!-- collected variable -->
+                <xsl:when test="$root//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
+                    <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $variable]/l:VariableRepresentation/*)"/>
+                </xsl:when>
+                <!-- calculated variable -->
+                <xsl:when test="$root//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
+                    <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[descendant::r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable]/l:VariableRepresentation/*[not(self::r:ProcessingInstructionReference)])"/>
+                </xsl:when>
+                <!-- external variable -->
+                <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
+                    <!-- VariableRepresentation may be empty for external variables -->
+                    <xsl:if test="$root//l:VariableScheme//l:Variable[l:VariableName/r:String= $variable]/l:VariableRepresentation/*">
+                        <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[l:VariableName/r:String= $variable]/l:VariableRepresentation/*)"/>    
+                    </xsl:if>
+                </xsl:when>
+                <xsl:otherwise/>
+            </xsl:choose>    
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="$variable-representation != ''">
+                <xsl:value-of select="$variable-representation"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="'UNKNOWN'"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-instruction-by-anchor-ref.</xd:p>
@@ -1235,7 +1344,7 @@
             <xsl:apply-templates select="node()|@*"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Function for retrieving instructions before the label of the question</xd:p>

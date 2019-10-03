@@ -91,7 +91,7 @@
                 
                 <!-- ZONE TITRE COURRIER -->
                 <fo:block-container absolute-position="absolute" left="1mm" top="38mm" width="78mm" height="6mm" overflow="hidden" font-size="10pt">
-                    <fo:block line-height="10pt" font-weight="bold" text-align="center">ENVOI DE QUESTIONNAIRE SUIE A DEMANDE</fo:block>
+                    <fo:block line-height="10pt" font-weight="bold" text-align="center">ENVOI DE QUESTIONNAIRE PAPIER</fo:block>
                 </fo:block-container>
                 
                 <!-- ZONE CONTACT -->
@@ -112,7 +112,7 @@
                         
                     </fo:block>
                     <fo:block margin-top="5mm" font-weight="bold">
-                        Objet&#160;: Enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddPeriode}!='')) ${BddPeriode}#end ${BddAnneeReference}
+                        Objet&#160;: Votre demande de questionnaire pour l'enquête statistique#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddFrequence}!='')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') and (${BddFrequence}!='pluriannuelle') and (${BddPeriode}!='')) ${BddPeriode}#end ${BddAnneeReference}
                     </fo:block>
                     <fo:block font-weight="bold">
                         Ref.&#160;${BddRaisonSociale} (Votre ${BddLabelUniteEnquetee}&#160;: ${BddIdentifiantUniteEnquetee})
@@ -273,7 +273,7 @@
                         Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n<fo:inline font-size="0.1pt">&#160;</fo:inline>°&#160;78-17 du 6 janvier 1978 relative à l'informatique, 
                         aux fichiers et aux libertés s'appliquent à la présente enquête. Pour les données à caractère personnel, un droit d'accès, de rectification, 
                         d’effacement ou de limitation de traitement peut être exercé pendant la période de conservation des données d’identification. 
-                        Ces droits peuvent être exercés auprès de ${AdresseRetourL1} que vous pouvez contacter à l’adresse ${BddAdresseMessagerieServiceCollecteur}. 
+                        Ces droits peuvent être exercés auprès de ${AdresseRetourL1} que vous pouvez contacter à l’adresse ${BddServiceCollecteurAdresseMessagerie}. 
                         Pour toute question relative au traitement de vos données, vous pouvez contacter le délégué à la protection des données des ministères économique 
                         et financier à l’adresse <fo:inline text-decoration="underline">le-delegue-a-la-protection-des-donnees-personnelles@finances.gouv.fr</fo:inline> 
                         ou son correspondant à l’Insee : <fo:inline text-decoration="underline">contact-rgpd@insee.fr</fo:inline>. 

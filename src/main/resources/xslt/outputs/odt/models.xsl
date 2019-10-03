@@ -161,8 +161,12 @@
 		<xsl:variable name="numberOfDecimals" select="enoodt:get-number-of-decimals($source-context)"/>
 		<xsl:variable name="minimumResponse" select="enoodt:get-minimum($source-context)"/>
 		<xsl:variable name="maximumResponse" select="enoodt:get-maximum($source-context)"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<text:p text:style-name="Format">
+            <text:span text:style-name="NameOfVariable">
+				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+			</text:span>
 			<xsl:choose>
 				<xsl:when test="fn:string-length($numberOfDecimals)>0">
 					<xsl:value-of select="concat('num ',fn:substring-before($minimumResponse,'.'),'..',fn:substring-before($maximumResponse,'.'),' - ',$numberOfDecimals,' chiffre(s) après la virgule')"/>
@@ -187,9 +191,12 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="lengthResponse" select="enoodt:get-length($source-context)"/>
-		
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<text:p text:style-name="Format">
+            <text:span text:style-name="NameOfVariable">
+				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+			</text:span>
 			<xsl:value-of select="concat('Car ',$lengthResponse)"/>
 		</text:p>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -207,7 +214,11 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="dateFormat" select="enoodt:get-format($source-context)"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		<text:p text:style-name="Format">
+				<text:span text:style-name="NameOfVariable">
+				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+			</text:span>
 			<xsl:value-of select="concat('date ( ',$dateFormat,' )')"/>
 		</text:p>
 		
@@ -227,8 +238,12 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="lengthResponse" select="enoodt:get-length($source-context)"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<text:p text:style-name="Format">
+                <text:span text:style-name="NameOfVariable">
+					<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+				</text:span>
 			<xsl:value-of select="concat('Car ',$lengthResponse)"/>
 		</text:p>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -245,9 +260,15 @@
 	<xsl:template match="BooleanDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<xsl:if test="$typeOfAncestor!=''">
-			<text:p text:style-name="Format"><xsl:value-of select="'Booléen'"/></text:p>
+			<text:p text:style-name="Format">
+					<text:span text:style-name="NameOfVariable">
+						<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+					</text:span>
+					<xsl:value-of select="'Booléen'"/>
+            </text:p>
 		</xsl:if>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -266,13 +287,17 @@
 		<xsl:param name="typeOfAncestor" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>
+		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>		
+        <xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
-		<xsl:if test="$typeOfAncestor!='question multiple-choice-question' and $maximumLengthCode != ''">
+		<xsl:if test="$maximumLengthCode != ''">
 			<text:p text:style-name="Format">
+				<text:span text:style-name="NameOfVariable">
+					<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+				</text:span>
 				<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
 			</text:p>		
-		</xsl:if>		
+		</xsl:if>
 
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -294,9 +319,6 @@
 		<text:section text:name="Table-{enoodt:get-name($source-context)}">
 			<xsl:if test="$questionName != ''">
 				<text:p text:style-name="QuestionName"><xsl:value-of select="concat('[',$questionName,']')"/></text:p>
-			</xsl:if>
-			<xsl:if test="$type='question multiple-choice-question' and $maximumLengthCode!=''">
-				<text:p><xsl:value-of select="concat('Car ',$maximumLengthCode)"/></text:p>
 			</xsl:if>
 			
 			<!-- print the question label and its instructions -->
@@ -525,7 +547,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="filter" select="enoodt:get-relevant($source-context)"/>
-		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>		
+		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>
 		<text:p text:style-name="Control">
 			<xsl:call-template name="replaceVariablesInFormula">
 				<xsl:with-param name="formula" select="$filter"/>
