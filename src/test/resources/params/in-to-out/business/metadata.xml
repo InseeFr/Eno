@@ -1,0 +1,117 @@
+<InformationsCollecte>
+    <ServiceProducteur>
+        <Identifiant>INSEE</Identifiant>
+        <Article>l'</Article>
+        <Libelle>Institut national de la statistique et des études économiques</Libelle>
+        <MinistereTutelle>de l'Économie et des Finances</MinistereTutelle>
+        <Logo>
+            <Identifiant>1</Identifiant>
+        </Logo>
+        <ChefSignataire>
+            <Fonction>La directrice des Statistiques d'Entreprises</Fonction>
+            <Nom>Christel COLIN</Nom>
+        </ChefSignataire>
+    </ServiceProducteur>
+    <ServiceCollecteur>
+        <Identifiant>PEE</Identifiant>
+        <Nom>Insee Occitanie - PEE</Nom>
+        <Telephone>0123456789</Telephone>
+        <AdresseMessagerie>dr31-pole-enquetes-entreprises@insee.fr</AdresseMessagerie>
+        <Adresse>
+            <NumeroVoie>36</NumeroVoie>
+            <TypeVoie>Rue</TypeVoie>
+            <LibelleVoie>des 36 Ponts</LibelleVoie>
+            <MentionSpeciale>BP 94217</MentionSpeciale>
+            <CodeCedex>31054</CodeCedex>
+            <LibelleCedex>TOULOUSE CEDEX 4</LibelleCedex>
+        </Adresse>
+        <ChefSignataire>
+            <Fonction>La directrice régionale de l'Insee Occitanie</Fonction>
+            <Nom>Caroline JAMET</Nom>
+        </ChefSignataire>
+    </ServiceCollecteur>
+    <Source>
+        <Identifiant>ASSOT</Identifiant>
+        <LibelleLong>Situation des associations</LibelleLong>
+        <LibelleCourt>ASSOT</LibelleCourt>
+        <Conservation>5</Conservation>
+        <Reference>
+            <TypeObjetReference>ServiceProducteur</TypeObjetReference>
+            <IdReference>INSEE</IdReference>
+        </Reference>
+        <Reference>
+            <TypeObjetReference>ServiceCollecteur</TypeObjetReference>
+            <IdReference>PEE</IdReference>
+        </Reference>
+        <Frequence>
+            <Libelle>pluriannuelle</Libelle>
+        </Frequence>
+    </Source>
+    <Enquete identifiantOperation="ASSOT2019">
+        <AnneeCollecte>2019</AnneeCollecte>
+        <LibelleLong>Situation des associations</LibelleLong>
+        <LibelleCourt>Situation des associations</LibelleCourt>
+        <NomOperation>ASSOT</NomOperation>
+        <TailleEchantillon>10000</TailleEchantillon>
+        <ObjectifsCourts>Les objectifs sont de fournir des données statistiques de cadrage sur
+            l’ensemble des associations relevant de la loi 1901 et assimilées : domaine d’activité,
+            nombre d’adhérents, ressources</ObjectifsCourts>
+        <ObjectifsLongs>Cette enquête a pour objectif de fournir des données statistiques de cadrage
+            sur l’ensemble des associations relevant de la loi 1901 et assimilées en dénombrant les
+            associations actives par domaine d’activité, en évaluant le nombre de leurs adhérents,
+            leurs ressources financières et humaines (salariés et bénévoles) et en informant sur la
+            composition du bureau. À ce titre, des données à caractère personnel sont collectées sur
+            le président, le trésorier et le secrétaire. Conformément à la loi, un droit d’accès et
+            de rectification sur ces données personnelles peut être exercé auprès de
+            contact-enquete-association@insee.fr, merci d’en informer les personnes
+            concernées.</ObjectifsLongs>
+        <URLCnis/>
+        <URLDiffusion>https://insee.fr/fr/statistiques?debut=0&amp;theme=85&amp;categorie=1</URLDiffusion>
+        <URLNotice>https://www.insee.fr/fr/metadonnees/source/fichier/DOC_ASSO_NOTICE_2018.pdf</URLNotice>
+        <URLSpecimen>https://www.insee.fr/fr/metadonnees/source/fichier/DOC_ASSO_QUEST_2018.pdf</URLSpecimen>
+        <StatutEnquete>intérêt général et de qualité statistique</StatutEnquete>
+        <CaractereObligatoire>oui</CaractereObligatoire>
+        <NumeroVisa>2019X090EC (arrêté en date du 25/07/2019)</NumeroVisa>
+    </Enquete>
+    <Campagne idCampagne="ASSOT2019X00">
+        <Libelle>Situation des associations en 2018</Libelle>
+        <Reference>
+            <TypeObjetReference>Enquete</TypeObjetReference>
+            <IdReference>ASSOT2019</IdReference>
+        </Reference>
+        <AnneeReference>2018</AnneeReference>
+        <PeriodeReference>pluriannuelle</PeriodeReference>
+        <Vague idVague="01">
+            <Calendrier dateRetourSouhaitee="20191107">
+                <DateCollecte>
+                    <Date>20171215</Date>
+                    <EtapeCollecte>Ouverture</EtapeCollecte>
+                </DateCollecte>
+                <DateCollecte>
+                    <Date>20191107</Date>
+                    <EtapeCollecte>Relance</EtapeCollecte>
+                </DateCollecte>
+                <DateCollecte>
+                    <Date>20200215</Date>
+                    <EtapeCollecte>Fermeture</EtapeCollecte>
+                </DateCollecte>
+            </Calendrier>
+        </Vague>
+        <Vague idVague="99">
+            <Calendrier dateRetourSouhaitee="20191107">
+                <DateCollecte>
+                    <Date>20171215</Date>
+                    <EtapeCollecte>Ouverture</EtapeCollecte>
+                </DateCollecte>
+                <DateCollecte>
+                    <Date>20191107</Date>
+                    <EtapeCollecte>Relance</EtapeCollecte>
+                </DateCollecte>
+                <DateCollecte>
+                    <Date>20200215</Date>
+                    <EtapeCollecte>Fermeture</EtapeCollecte>
+                </DateCollecte>
+            </Calendrier>
+        </Vague>
+    </Campagne>
+</InformationsCollecte>
