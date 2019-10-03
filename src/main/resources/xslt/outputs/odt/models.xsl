@@ -12,7 +12,7 @@
 	xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" 
 	xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" 
 	exclude-result-prefixes="xs fn xd eno enoodt" version="2.0">
-
+	
 	<xsl:import href="../../../styles/style.xsl"/>
 	<xsl:include href="../../../xslt/outputs/odt/office-styles.xsl"/>
 	
@@ -118,7 +118,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<text:section text:name="SubModule-{enoodt:get-name($source-context)}">
-		<text:p text:style-name="SubModule"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
+			<text:p text:style-name="SubModule"><xsl:value-of select="enoodt:get-label($source-context, $languages[1])"/></text:p>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
@@ -137,11 +137,11 @@
 			</xsl:if>
 			
 			<!-- print the question label and its instructions -->
-
+			
 			<xsl:call-template name="eno:printQuestionTitleWithInstruction">
 				<xsl:with-param name="driver" select="."/>
 			</xsl:call-template>
-				
+			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="typeOfAncestor" select="'question'" tunnel="yes"/>
@@ -164,7 +164,7 @@
 		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<text:p text:style-name="Format">
-            <text:span text:style-name="NameOfVariable">
+			<text:span text:style-name="NameOfVariable">
 				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
 			</text:span>
 			<xsl:choose>
@@ -194,7 +194,7 @@
 		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<text:p text:style-name="Format">
-            <text:span text:style-name="NameOfVariable">
+			<text:span text:style-name="NameOfVariable">
 				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
 			</text:span>
 			<xsl:value-of select="concat('Car ',$lengthResponse)"/>
@@ -216,7 +216,7 @@
 		<xsl:variable name="dateFormat" select="enoodt:get-format($source-context)"/>
 		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		<text:p text:style-name="Format">
-				<text:span text:style-name="NameOfVariable">
+			<text:span text:style-name="NameOfVariable">
 				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
 			</text:span>
 			<xsl:value-of select="concat('date ( ',$dateFormat,' )')"/>
@@ -241,9 +241,9 @@
 		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<text:p text:style-name="Format">
-                <text:span text:style-name="NameOfVariable">
-					<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
-				</text:span>
+			<text:span text:style-name="NameOfVariable">
+				<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+			</text:span>
 			<xsl:value-of select="concat('Car ',$lengthResponse)"/>
 		</text:p>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -264,11 +264,11 @@
 		
 		<xsl:if test="$typeOfAncestor!=''">
 			<text:p text:style-name="Format">
-					<text:span text:style-name="NameOfVariable">
-						<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
-					</text:span>
-					<xsl:value-of select="'Booléen'"/>
-            </text:p>
+				<text:span text:style-name="NameOfVariable">
+					<xsl:value-of select="concat('[',$nameOfVariable,'] - ')"/>
+				</text:span>
+				<xsl:value-of select="'Booléen'"/>
+			</text:p>
 		</xsl:if>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -288,7 +288,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		
 		<xsl:variable name="maximumLengthCode" select="enoodt:get-code-maximum-length($source-context)"/>		
-        <xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
+		<xsl:variable name="nameOfVariable" select="enoodt:get-business-name($source-context)"/>
 		
 		<xsl:if test="$maximumLengthCode != ''">
 			<text:p text:style-name="Format">
@@ -298,7 +298,7 @@
 				<xsl:value-of select="concat('Car ',$maximumLengthCode,' - ','liste de modalités')"/>
 			</text:p>		
 		</xsl:if>
-
+		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -538,6 +538,25 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
+	
+	
+	<xd:doc>
+		<xd:desc>template for the GoTo</xd:desc>
+	</xd:doc>
+	<xsl:template match="GoTo" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:variable name="label" select="enoodt:get-label($source-context, $languages[1])" as="node()"/>
+		<cacac>dfl!ghik</cacac>
+		<xsl:if test="$label != ''">
+			<xsl:copy-of select="$label"/>
+		</xsl:if>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on the xf-group driver.</xd:p>
@@ -548,12 +567,20 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="filter" select="enoodt:get-relevant($source-context)"/>
 		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>
-		<text:p text:style-name="Control">
-			<xsl:call-template name="replaceVariablesInFormula">
-				<xsl:with-param name="formula" select="$filter"/>
-				<xsl:with-param name="variables" select="$idVariables"/>
-			</xsl:call-template>				
-		</text:p>
+		<xsl:variable name="label" select="enoodt:get-business-name($source-context)" as="node()"/>
+		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context,$languages[1])"/>
+		<xsl:if test="$label != ''">
+			<text:p text:style-name="Control">
+				Comportement conditionnel : If you are not ready, please…
+			</text:p><text:p text:style-name="Control">
+				Condition : <xsl:call-template name="replaceVariablesInFormula">
+					<xsl:with-param name="formula" select="$filter"/>
+					<xsl:with-param name="variables" select="$idVariables"/>
+				</xsl:call-template>
+			</text:p><text:p text:style-name="Control">
+				Cible : <xsl:copy-of select="$label"/>
+			</text:p>
+		</xsl:if>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -689,7 +716,7 @@
 		<xsl:param name="driver" tunnel="no"/>
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-
+		
 		<xsl:apply-templates select="enoodt:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="$driver"/>
 		</xsl:apply-templates>
