@@ -57,20 +57,27 @@ public final class Constants {
 	public static final String LABELS_FOLDER = "/lang/fr/";
 
 
-	// ----- Files
-	public static final String DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
-	public static final String PARAMETERS_FILE = "/" + PARAMETERS_XML;
-	public static final String UTIL_DDI_TITLING_XSL = UTIL_FOLDER_PATH + "/ddi/titling.xsl";
-	public static final String UTIL_DDI_MAPPING_XSL = UTIL_FOLDER_PATH + "/ddi/mapping.xsl";
-	public static final String UTIL_POGUES_XML_SUPP_GOTO_XSL = UTIL_FOLDER_PATH + "/pogues-xml/2suppressionGoto.xsl";
-	public static final String UTIL_POGUES_XML_MERGE_ITE_XSL = UTIL_FOLDER_PATH + "/pogues-xml/tweak-to-merge-equivalent-ite.xsl";
-	public static final String UTIL_POGUES_XML_GOTO_ITE_XSL = UTIL_FOLDER_PATH + "/pogues-xml/goto-2-if-then-else.xsl";
-	public static final String UTIL_DDI_MW2XHTML_XSL = UTIL_FOLDER_PATH + "/ddi/mw2xhtml.xsl";
-	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = UTIL_FOLDER_PATH + "/ddi/tweak-xhtml-for-ddi.xsl";
-	public static final String UTIL_DDI_CLEANING_XSL = UTIL_FOLDER_PATH + "/ddi/cleaning.xsl";
+	// ----- Files : pre-processing
+	public static final String PRE_PROCESSING_FOLDER = "/xslt/pre-processing";
+	public static final String DDI_DEREFERENCING_XSL = PRE_PROCESSING_FOLDER + "/ddi/dereferencing.xsl";
+	public static final String PARAMETERS_FILE = "/" + PARAMETERS_XML;	
+
+	public static final String UTIL_DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
+	public static final String UTIL_DDI_TITLING_XSL = PRE_PROCESSING_FOLDER + "/ddi/titling.xsl";
+	public static final String UTIL_DDI_MAPPING_XSL = PRE_PROCESSING_FOLDER + "/ddi/mapping.xsl";
+	public static final String UTIL_DDI_CLEANING_XSL = PRE_PROCESSING_FOLDER + "/ddi/cleaning.xsl";
+	
+	public static final String UTIL_POGUES_XML_SUPP_GOTO_XSL = PRE_PROCESSING_FOLDER + "/pogues-xml/2suppressionGoto.xsl";
+	public static final String UTIL_POGUES_XML_MERGE_ITE_XSL = PRE_PROCESSING_FOLDER + "/pogues-xml/tweak-to-merge-equivalent-ite.xsl";
+	public static final String UTIL_POGUES_XML_GOTO_ITE_XSL = PRE_PROCESSING_FOLDER + "/pogues-xml/goto-2-if-then-else.xsl";
+	
+	// post-processing
+	public static final String POST_PROCESSING_FOLDER = "/xslt/post-processing";
+	public static final String UTIL_DDI_MW2XHTML_XSL = POST_PROCESSING_FOLDER + "/ddi/mw2xhtml.xsl";
+	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = POST_PROCESSING_FOLDER + "/ddi/tweak-xhtml-for-ddi.xsl";
+	
 	public static final String UTIL_FODS_PREFORMATTING_XSL = UTIL_FOLDER_PATH + "/fods/preformatting.xsl";
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
-	public static final String UTIL_DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
 
 
 	//	public static final String PROPERTIES_FILE_FR = CONFIG_FOLDER + "/ddi2fr.xml";
@@ -139,9 +146,9 @@ public final class Constants {
 
 	// ---------- Post-processing files
 	public static final String OUPUTS_FOLDER = "/xslt/outputs/pdf";
-	public static final String POST_PROCESSING_FOLDER_PDF = "/xslt/util/pdf";
-	public static final String POST_PROCESSING_FOLDER_JS = "/xslt/util/js";
-	public static final String POST_PROCESSING_FOLDER_FR = "/xslt/util/fr";
+	public static final String POST_PROCESSING_FOLDER_PDF = "/xslt/post-processing/pdf";
+	public static final String POST_PROCESSING_FOLDER_JS = "/xslt/post-processing/js";
+	public static final String POST_PROCESSING_FOLDER_FR = "/xslt/post-processing/fr";
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF =  OUPUTS_FOLDER + "/publipostage.xsl";
 	// ------------ PDF -----------
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2 =  POST_PROCESSING_FOLDER_PDF + "/mailing-vtl.xsl";
