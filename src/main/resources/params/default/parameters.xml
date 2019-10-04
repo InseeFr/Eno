@@ -73,7 +73,7 @@
             <PageBreakBetween>
                 <pdf>module</pdf>
             </PageBreakBetween>
-            <AccompanyingMail/>
+            <AccompanyingMail></AccompanyingMail>
         </pdf-parameters>
         
         <js-parameters/>

@@ -137,6 +137,9 @@ public class TestValorizatorParametersImpl {
 			//StudyUnit 
 			Assert.assertEquals(StudyUnit.HOUSEHOLD, enoParametersFinal.getParameters().getStudyUnit());
 			
+			//AccompanyingMail
+			Assert.assertEquals(AccompanyingMail.CNR_COL, enoParametersFinal.getParameters().getPdfParameters().getAccompanyingMail());
+			
 
 			debut = System.currentTimeMillis();
 			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/parameters-new.xml");
