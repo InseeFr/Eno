@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.GenerationService;
