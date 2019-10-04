@@ -43,12 +43,12 @@
 			tofile="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"/>-->
 		<xslt in="${input-file}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
-			style="${xslt.home}/util/pdf/mailing-vtl.xsl"
+			style="${xslt.home}/post-processing/pdf/mailing-vtl.xsl"
 			force="true" classpath="${saxon.jar}"/>
 		
 		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form.${out-extension}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/form-custom-pages.${out-extension}"
-			style="${xslt.home}/util/pdf/edit-structure-page.xsl" force="true"			
+			style="${xslt.home}/post-processing/pdf/edit-structure-page.xsl" force="true"			
 			classpath="${saxon.jar}">
 			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
 			<param name="parameters-file" expression="${root-folder}/questionnaires/${survey-name}/parameters.xml"/>
@@ -58,7 +58,7 @@
 		<antcall target="call-TableColumnSizeProcessor"/>-->
 		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form-custom-pages.${out-extension}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/form-with-end-questions.${out-extension}"
-			style="${xslt.home}/util/pdf/insert-end-questions.xsl" force="true"			
+			style="${xslt.home}/post-processing/pdf/insert-end-questions.xsl" force="true"			
 			classpath="${saxon.jar}">
 			<param name="survey-name" expression="${survey-name}"/>
 			<param name="form-name" expression="${form-name}"/>
@@ -74,7 +74,7 @@
 		
 		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/specific-form.${out-extension}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/cover-page-form.${out-extension}"
-			style="${xslt.home}/util/pdf/insert-cover-page.xsl" force="true"			
+			style="${xslt.home}/post-processing/pdf/insert-cover-page.xsl" force="true"			
 			classpath="${saxon.jar}">
 			<param name="survey-name" expression="${survey-name}"/>
 			<param name="form-name" expression="${form-name}"/>
@@ -84,7 +84,7 @@
 		
 		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/cover-page-form.${out-extension}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/out-form.${out-extension}"
-			style="${xslt.home}/util/pdf/accompanying-mails.xsl" force="true"			
+			style="${xslt.home}/post-processing/pdf/accompanying-mails.xsl" force="true"			
 			classpath="${saxon.jar}">
 			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
 			<param name="parameters-file" expression="${root-folder}/questionnaires/${survey-name}/parameters.xml"/>

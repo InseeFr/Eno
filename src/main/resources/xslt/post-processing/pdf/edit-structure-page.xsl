@@ -83,14 +83,7 @@
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="page-model-folder">
-        <xsl:choose>
-            <xsl:when test="$parameters//PageModel/Folder != ''">
-                <xsl:value-of select="$parameters//PageModel/Folder"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$properties//PageModel/Folder"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:value-of select="$properties//PageModel/Folder"/>
     </xsl:variable>
     <xsl:variable name="page-model-file-adress">
         <xsl:choose>

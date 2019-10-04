@@ -134,7 +134,7 @@
 -->
         <xslt in="${input-file}.${file-extension}"
             out="${output-file}.${file-extension}"
-            style="${xslt.home}/util/pogues-xml/goto-2-if-then-else.xsl" classpath="${saxon.jar}" force="true">
+            style="${xslt.home}/pre-processing/pogues-xml/goto-2-if-then-else.xsl" classpath="${saxon.jar}" force="true">
         </xslt>
         
 
@@ -144,12 +144,12 @@
         
        <xslt in="${input-file}.${file-extension}"
            out="${output-file}-temp.${file-extension}"
-            style="${xslt.home}/util/ddi/mw2xhtml.xsl" classpath="${saxon.jar}" force="true">
+           style="${xslt.home}/post-processing/ddi/mw2xhtml.xsl" classpath="${saxon.jar}" force="true">
         </xslt>
         
         <xslt in="${output-file}-temp.${file-extension}"
             out="${output-file}.${file-extension}"
-            style="${xslt.home}/util/ddi/tweak-xhtml-for-ddi.xsl" classpath="${saxon.jar}" force="true">
+            style="${xslt.home}/post-processing/ddi/tweak-xhtml-for-ddi.xsl" classpath="${saxon.jar}" force="true">
         </xslt>
         
     </target>

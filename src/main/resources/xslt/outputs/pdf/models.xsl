@@ -120,7 +120,7 @@
 		</xsl:choose>
 	</xsl:variable>
 	
-	<xsl:variable name="page-model-default" select="doc('../../../xslt/util/pdf/page-model/page-model-default.fo')"/>
+	<xsl:variable name="page-model-default" select="doc('../../../xslt/post-processing/pdf/page-model/page-model-default.fo')"/>
 	
 	<xsl:include href="../../../styles/style.xsl"/>
 	
