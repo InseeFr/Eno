@@ -57,8 +57,10 @@ public class DDIDereferencingPreprocessor implements Preprocessor {
 		
 		logger.debug("Searching matching files in : " + sUB_TEMP_FOLDER);
 		for (File file : matchCleaningInput) {
-			cleaningInput = file.getAbsolutePath();
-			logger.debug("Found : " + cleaningInput);
+			if(!file.isDirectory()) {
+				cleaningInput = file.getAbsolutePath();
+				logger.debug("Found : " + cleaningInput);
+			}
 		}
 		
 		logger.debug("DDIPreprocessing Dereferencing : END");
