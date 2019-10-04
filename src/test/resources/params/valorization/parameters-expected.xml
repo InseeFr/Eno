@@ -60,10 +60,7 @@
             <PageBreakBetween>
                 <pdf>module</pdf>
             </PageBreakBetween>
-            <AccompanyingMails>
-                <AccompanyingMail>cnrCOL</AccompanyingMail>
-                <AccompanyingMail>medCOL</AccompanyingMail>
-            </AccompanyingMails>
+            <AccompanyingMail>cnrCOL</AccompanyingMail>            
         </pdf-parameters>
         <js-parameters/>
         <odt-parameters/>

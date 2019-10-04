@@ -32,7 +32,6 @@ import fr.insee.eno.parameters.OutFormat;
 import fr.insee.eno.parameters.Parameters;
 import fr.insee.eno.parameters.Parameters.Languages;
 import fr.insee.eno.parameters.PdfParameters;
-import fr.insee.eno.parameters.PdfParameters.AccompanyingMails;
 import fr.insee.eno.parameters.Pipeline;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.parameters.StudyUnit;
@@ -80,15 +79,9 @@ public class TestValorizatorParametersImpl {
 		Format format = new Format();
 		format.setOrientation(90);		
 		pdfParameters.setTable(table);
-		pdfParameters.setFormat(format);
+		pdfParameters.setFormat(format);				
 		
-		AccompanyingMails accompanyingMails = new AccompanyingMails();
-		
-		
-		accompanyingMails.getAccompanyingMail().add(AccompanyingMail.CNR_COL);
-		accompanyingMails.getAccompanyingMail().add(AccompanyingMail.MED_COL);
-		
-		pdfParameters.setAccompanyingMails(accompanyingMails);
+		pdfParameters.setAccompanyingMail(AccompanyingMail.CNR_COL);
 		
 		GlobalNumerotation globalNumerotation = new GlobalNumerotation();
 		globalNumerotation.setBrowsing(BrowsingEnum.NO_NUMBER);

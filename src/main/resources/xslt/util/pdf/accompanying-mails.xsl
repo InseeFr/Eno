@@ -45,37 +45,37 @@
     
     
     <xsl:variable name="accompanying-mails-folder">
-        <xsl:choose>
-            <xsl:when test="$parameters//AccompanyingMails/Folder != ''">
-                <xsl:value-of select="$parameters//AccompanyingMails/Folder"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$properties//AccompanyingMails/Folder"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:value-of select="$properties//AccompanyingMails/Folder"/>
     </xsl:variable>
-        
-       
+    
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Root template.</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="/">
-        <xsl:variable name="root" select="."/>
-        <xsl:apply-templates select="*" mode="keep-cdata"/>
-        <xsl:for-each select="$parameters//AccompanyingMail">
-            <xsl:variable name="accompanying-mails-adress" select="concat('../../../',$accompanying-mails-folder,'/',.,'.fo')"/>
-            <xsl:variable name="accompanying-mails-page" select="doc($accompanying-mails-adress)"/>
-            <xsl:result-document href="../../courrier_type_{replace(replace(concat($survey-name,$form-name),'-',''),'_','')}{.}.fo">
-                <xsl:apply-templates select="$root/*" mode="keep-cdata">
-                    <xsl:with-param name="accompanying-mails-page" select="$accompanying-mails-page" as="node()" tunnel="yes"/>
-                    <xsl:with-param name="accompanying-mail" select="." tunnel="yes"/>
-                </xsl:apply-templates>
-            </xsl:result-document>
-        </xsl:for-each>
+        <xsl:variable name="AccompanyingMail" select="$parameters//AccompanyingMail"/>
+        <xsl:variable name="accompanying-mails-adress" select="concat('../../../',$accompanying-mails-folder,'/',$AccompanyingMail,'.fo')"/>
+        <xsl:variable name="accompanying-mails-page">
+            <xsl:choose>
+                <xsl:when test="$AccompanyingMail!=''">
+                    <xsl:value-of select="doc($accompanying-mails-adress)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <Empty/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:apply-templates select="./*" mode="keep-cdata">
+            <xsl:with-param name="accompanying-mails-page" select="$accompanying-mails-page" as="node()" tunnel="yes"/>
+            <xsl:with-param name="accompanying-mail" select="$AccompanyingMail" tunnel="yes"/>
+        </xsl:apply-templates>
+        
+        
+        
     </xsl:template>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>add accompanying mail and cover page.</xd:p>

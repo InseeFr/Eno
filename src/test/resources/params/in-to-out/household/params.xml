@@ -29,7 +29,7 @@
         <Languages>
             <Language>fr</Language>
         </Languages>
-                
+        
         <BeginQuestion>
             <Identification>false</Identification>
         </BeginQuestion>
@@ -72,9 +72,7 @@
             <PageBreakBetween>
                 <pdf>module</pdf>
             </PageBreakBetween>
-            <AccompanyingMails>
-                <AccompanyingMail>ouvertureCOL</AccompanyingMail>
-            </AccompanyingMails>
+            <AccompanyingMail>ouvertureCOL</AccompanyingMail>            
         </pdf-parameters>
         
         <js-parameters/>

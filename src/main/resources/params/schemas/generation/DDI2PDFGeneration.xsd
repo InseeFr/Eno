@@ -10,13 +10,7 @@
             <xs:element name="Table" type="Table" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Capture" type="Capture" minOccurs="0" maxOccurs="1"/>
             <xs:element name="PageBreakBetween" type="PageBreakBetween" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="AccompanyingMails" minOccurs="0" maxOccurs="1">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="AccompanyingMail" type="AccompanyingMail" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+            <xs:element name="AccompanyingMail" type="AccompanyingMail" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
     

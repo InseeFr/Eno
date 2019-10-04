@@ -22,7 +22,7 @@
     <Parameters>
         <StudyUnit>default</StudyUnit>
         
-        <Campagne>test</Campagne>  
+        <Campagne>test</Campagne>
         
         <Languages>
             <Language>fr</Language>
@@ -73,14 +73,12 @@
             <PageBreakBetween>
                 <pdf>module</pdf>
             </PageBreakBetween>
-            <AccompanyingMails>
-                <AccompanyingMail>ouvertureCOL</AccompanyingMail>
-            </AccompanyingMails>
+            <AccompanyingMail/>
         </pdf-parameters>
         
-        <js-parameters/>        
+        <js-parameters/>
         
-        <odt-parameters/>        
+        <odt-parameters/>
     
         <Title>
             <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->
