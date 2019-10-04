@@ -70,14 +70,14 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 	}
 
 	public <T> T mergeEnoParameters(T enoParamsDefault, T newEnoParams) throws IllegalArgumentException, IllegalAccessException  {
-		Class<?> clazz = enoParamsDefault.getClass();
-		LOGGER.debug("Class's name : "+clazz.getSimpleName());
+		Class<?> objectClass = enoParamsDefault.getClass();
+		LOGGER.debug("Class's name : "+objectClass.getSimpleName());
 		Object merged;		
 		// if the class of the object is a Primitive or similar, or an Enumeration, we do a simple merge otherwise:
-		if(isComplexeType(clazz)){
+		if(isComplexeType(objectClass)){
 			merged = enoParamsDefault;
 			// we recover each fields which constitutes the recovered object
-			for (Field field : getAllFields(new ArrayList<>(), clazz)) {
+			for (Field field : getAllFields(new ArrayList<>(), objectClass)) {
 				String className = field.getType().getSimpleName();
 				LOGGER.debug(" Name/Type of field :"+field.getName()+"/"+className);
 				field.setAccessible(true);
@@ -232,9 +232,9 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		return mergedList;
 	}
 	
-	public boolean isComplexeType(Class<?> clazz) {
+	public boolean isComplexeType(Class<?> objectClass) {
 		List<String> PRIMITIVE_JAVA_OBJECT = Arrays.asList("Long", "Long[]", "Integer", "Integer[]", "String", "String[]", "Boolean", "boolean[]", "ArrayList", "LinkedHashMap");
-		return !(clazz.isPrimitive() || clazz.isEnum() || PRIMITIVE_JAVA_OBJECT.contains(clazz.getSimpleName()));
+		return !(objectClass.isPrimitive() || objectClass.isEnum() || PRIMITIVE_JAVA_OBJECT.contains(objectClass.getSimpleName()));
 	}
 
 
