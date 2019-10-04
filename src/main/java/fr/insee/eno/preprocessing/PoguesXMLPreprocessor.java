@@ -17,6 +17,7 @@ import fr.insee.eno.transform.xsl.XslTransformation;
  * See PoguesXMLPreprocessorGoToTreatment for new implementation
  * A PoguesXML specific preprocessor.
  */
+@Deprecated
 public class PoguesXMLPreprocessor implements Preprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(PoguesXMLPreprocessor.class);

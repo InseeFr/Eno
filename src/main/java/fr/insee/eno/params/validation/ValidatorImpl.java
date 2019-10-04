@@ -90,7 +90,7 @@ public class ValidatorImpl implements Validator {
 				
 				message += order ? "" : "PreProcessings are not in the right order. The right order should be : "+preProcessingsCopy;
 				message += consistency ? "" : "PreProcessings are not valid according to the InFormat ('"+inFormat.value()+"') ";
-				message += mapping ? "" : "The PostProcessing '"+PostProcessing.FR_MODELE_COLTRANE.value()+"', need the PreProcessing '"+PreProcessing.DDI_MAPPING.value()+"' ";
+				message += mapping ? "" : "The PreProcessing '"+PostProcessing.FR_MODELE_COLTRANE.value()+"', need the PreProcessing '"+PreProcessing.DDI_MAPPING.value()+"' ";
 								
 			}
 			else {
