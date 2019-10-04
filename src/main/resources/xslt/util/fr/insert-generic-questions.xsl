@@ -80,18 +80,27 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="xf:instance[@id='fr-form-instance']/form">
-        <xsl:choose>
-            <xsl:when test="$studyUnit=$business">
-                <xsl:copy>
-                    <xsl:apply-templates select="@*" />
-                    <xsl:if test="$begin-questions-identification">
+        <xsl:copy>
+            <xsl:apply-templates select="@*" />
+            
+            <xsl:if test="$begin-questions-identification">
+                <xsl:choose>
+                    <xsl:when test="$studyUnit=$business">
                         <INSEE-BUSINESS-QUEST-DEBUT>
                             <INSEE-BUSINESS-SEQ-0-1 />
                             <COMMENT_UE />
                         </INSEE-BUSINESS-QUEST-DEBUT>
-                    </xsl:if>
-                    <xsl:apply-templates select="node()" />
-                    <xsl:if test="$end-response-time-question or $end-comment-question">
+                    </xsl:when>
+                    <xsl:when test="$studyUnit=$household"/>
+                    <xsl:when test="$studyUnit=$default"/>
+                </xsl:choose>
+            </xsl:if>
+            
+            <xsl:apply-templates select="node()" />
+            
+            <xsl:if test="$end-response-time-question or $end-comment-question">
+                <xsl:choose>
+                    <xsl:when test="$studyUnit=$business">
                         <INSEE-BUSINESS-TEMPS>
                             <xsl:if test="$end-response-time-question">
                                 <INSEE-BUSINESS-TEMPS-QI-1 />
@@ -102,14 +111,8 @@
                                 <COMMENT_QE />
                             </xsl:if>
                         </INSEE-BUSINESS-TEMPS>
-                    </xsl:if>
-                </xsl:copy>
-            </xsl:when>
-            <xsl:when test="$studyUnit=$household">
-                <xsl:copy>
-                    <xsl:apply-templates select="@*" />
-                    <xsl:apply-templates select="node()" />
-                    <xsl:if test="$end-response-time-question or $end-comment-question">
+                    </xsl:when>
+                    <xsl:when test="$studyUnit=$household">
                         <INSEE-HOUSEHOLD-TEMPS>
                             <xsl:if test="$end-response-time-question">
                                 <INSEE-HOUSEHOLD-TEMPS-QI-1 />
@@ -120,16 +123,12 @@
                                 <COMMENT_QE />
                             </xsl:if>
                         </INSEE-HOUSEHOLD-TEMPS>
-                    </xsl:if>
-                </xsl:copy>
-            </xsl:when>
-            <xsl:when test="$studyUnit=$default">
-                <xsl:copy>
-                    <xsl:apply-templates select="@*" />
-                    <xsl:apply-templates select="node()" />
-                </xsl:copy>
-            </xsl:when>
-        </xsl:choose>
+                    </xsl:when>
+                    <xsl:when test="$studyUnit=$default"/>
+                </xsl:choose>
+            </xsl:if>
+        </xsl:copy>
+        
     </xsl:template>
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
@@ -319,23 +318,22 @@
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" />
         </xsl:copy>
-        <xsl:if test="$studyUnit=$business and $begin-questions-identification">
+        <xsl:if test="$begin-questions-identification and $studyUnit=$business">
             <INSEE-BUSINESS-QUEST-DEBUT />
         </xsl:if>
     </xsl:template>
     <xsl:template match="xf:instance[@id='fr-form-util']/Util/Pages/End">
-        <xsl:choose>
-            <xsl:when test="$studyUnit=$business">
-                <xsl:if test="$end-response-time-question or $end-comment-question">
+        <xsl:if test="$end-response-time-question or $end-comment-question">
+            <xsl:choose>
+                <xsl:when test="$studyUnit=$business">
                     <INSEE-BUSINESS-TEMPS />
-                </xsl:if>
-            </xsl:when>
-            <xsl:when test="$studyUnit=$household">
-                <xsl:if test="$end-response-time-question or $end-comment-question">
+                </xsl:when>
+                <xsl:when test="$studyUnit=$household">
                     <INSEE-HOUSEHOLD-TEMPS />
-                </xsl:if>
-            </xsl:when>
-        </xsl:choose>
+                </xsl:when>
+                <xsl:when test="$studyUnit=$default"/>
+            </xsl:choose>
+        </xsl:if>
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" />
         </xsl:copy>
@@ -347,11 +345,12 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="fr:view/fr:body">
-        <xsl:choose>
-            <xsl:when test="$studyUnit=$business">
-                <xsl:copy>
-                    <xsl:apply-templates select="@*" />
-                    <xsl:if test="$begin-questions-identification">
+        <xsl:copy>
+            <xsl:apply-templates select="@*" />
+            
+            <xsl:if test="$begin-questions-identification">
+                <xsl:choose>
+                    <xsl:when test="$studyUnit=$business">
                         <fr:section id="INSEE-BUSINESS-QUEST-DEBUT-control" bind="INSEE-BUSINESS-QUEST-DEBUT-bind" name="INSEE-BUSINESS-QUEST-DEBUT">
                             <xf:label ref="$form-resources/INSEE-BUSINESS-QUEST-DEBUT/label" />
                             <xhtml:div class="submodule">
@@ -365,9 +364,17 @@
                                 </xf:textarea>
                             </xhtml:div>
                         </fr:section>
-                    </xsl:if>
-                    <xsl:apply-templates select="node()" />
-                    <xsl:if test="$end-response-time-question or $end-comment-question">
+                    </xsl:when>
+                    <xsl:when test="$studyUnit=$household"/>
+                    <xsl:when test="$studyUnit=$default"/>
+                </xsl:choose>
+            </xsl:if>
+            
+            <xsl:apply-templates select="node()" />
+            
+            <xsl:if test="$end-response-time-question or $end-comment-question">
+                <xsl:choose>
+                    <xsl:when test="$studyUnit=$business">
                         <fr:section id="INSEE-BUSINESS-TEMPS-control" bind="INSEE-BUSINESS-TEMPS-bind" name="INSEE-BUSINESS-TEMPS">
                             <xf:label ref="$form-resources/INSEE-BUSINESS-TEMPS/label" />
                             <xsl:if test="$end-response-time-question">
@@ -391,14 +398,8 @@
                                 </xf:textarea>
                             </xsl:if>
                         </fr:section>
-                    </xsl:if>
-                </xsl:copy>
-            </xsl:when>
-            <xsl:when test="$studyUnit=$household">
-                <xsl:copy>
-                    <xsl:apply-templates select="@*" />
-                    <xsl:apply-templates select="node()" />
-                    <xsl:if test="$end-response-time-question or $end-comment-question">
+                    </xsl:when>
+                    <xsl:when test="$studyUnit=$household">
                         <fr:section id="INSEE-HOUSEHOLD-TEMPS-control" bind="INSEE-HOUSEHOLD-TEMPS-bind" name="INSEE-HOUSEHOLD-TEMPS">
                             <xf:label ref="$form-resources/INSEE-HOUSEHOLD-TEMPS/label" />
                             <xsl:if test="$end-response-time-question">
@@ -422,17 +423,11 @@
                                 </xf:textarea>
                             </xsl:if>
                         </fr:section>
-                    </xsl:if>
-                </xsl:copy>
-            </xsl:when>
-            <xsl:when test="$studyUnit=$default">
-                <xsl:copy>
-                    <xsl:apply-templates select="@*" />
-                    <xsl:apply-templates select="node()" />
-                </xsl:copy>
-            </xsl:when>
-        </xsl:choose>
-
+                    </xsl:when>
+                    <xsl:when test="$studyUnit=$default"/>
+                </xsl:choose>
+            </xsl:if>            
+        </xsl:copy>
     </xsl:template>
 
 </xsl:stylesheet>
