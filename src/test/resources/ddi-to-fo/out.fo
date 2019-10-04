@@ -150,7 +150,7 @@
                       font-family="Liberation Sans"
                       font-size="16pt"
                       font-weight="bold"
-                      text-align="center">simpsons</fo:block>
+                      text-align="center">Questionnaire SIMPSONS</fo:block>
          </fo:block-container>
          <fo:block-container absolute-position="absolute"
                              left="15mm"
@@ -178,6 +178,7 @@
    <fo:page-sequence master-reference="A4"
                      initial-page-number="2"
                      force-page-count="odd">
+      <fo:title>Questionnaire SIMPSONS</fo:title>
       <fo:static-content flow-name="region-after-even-default">
          <fo:block-container absolute-position="absolute"
                              left="90mm"

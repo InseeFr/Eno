@@ -139,6 +139,7 @@
 		<fo:root>
 			<xsl:copy-of select="$page-model-default//fo:layout-master-set"/>
 			<fo:page-sequence master-reference="A4" initial-page-number="2" force-page-count="odd">
+				<fo:title><xsl:value-of select="$survey-name"/></fo:title>
 				<xsl:copy-of select="$page-model-default//fo:static-content"/>
 				<fo:flow flow-name="xsl-region-body" border-collapse="collapse" font-size="10pt">
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">

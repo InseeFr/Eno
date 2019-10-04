@@ -105,6 +105,7 @@
     <xsl:variable name="page-model" select="doc($page-model-file-adress)"/>
 
     <xsl:variable name="questionnaire-flow" select="root(.)//fo:flow"/>
+    <xsl:variable name="questionnaire-title" select="root(.)//fo:title"/>
 
     <xd:doc>
         <xd:desc>
@@ -140,6 +141,10 @@
     
     <xsl:template match="fo:flow" mode="display">
         <xsl:copy-of select="$questionnaire-flow"/>
+    </xsl:template>
+    
+    <xsl:template match="fo:title" mode="display">
+        <xsl:copy-of select="$questionnaire-title"/>
     </xsl:template>
     
 </xsl:stylesheet>

@@ -21,8 +21,7 @@
             <xd:p>The properties file used by the stylesheet.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:param name="survey-name"/>
-    <xsl:param name="form-name"/>
+    <xsl:variable name="form-name" select="//fo:title/text()"/>
     <xsl:param name="parameters-file"/>
     <xsl:param name="properties-file"/>
     <xsl:param name="parameters-node" as="node()" required="no">
@@ -110,7 +109,7 @@
         <xsl:if test="$studyUnit='default'">
             <xsl:copy>
                 <xsl:copy-of select="@*"/>
-                <xsl:value-of select="$survey-name"/>
+                <xsl:value-of select="$form-name"/>
             </xsl:copy>
         </xsl:if>
     </xsl:template>

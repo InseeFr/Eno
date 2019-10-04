@@ -36,6 +36,7 @@
     </fo:layout-master-set>
     
     <fo:page-sequence master-reference="A4" initial-page-number="2" force-page-count="odd">
+        <fo:title/>
         <fo:static-content flow-name="region-before-odd-business">
             <fo:block-container absolute-position="absolute" left="190mm" top="5mm" width="5mm" height="5mm">
                 <fo:block position="absolute" text-align="right">
