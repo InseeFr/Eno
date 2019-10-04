@@ -30,7 +30,7 @@ import fr.insee.eno.parameters.LevelSequence;
 
 public class ValorizatorParametersImpl implements ValorizatorParameters {
 
-	private static final Logger logger = LoggerFactory.getLogger(ValorizatorParametersImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ValorizatorParametersImpl.class);
 
 
 	@Override
@@ -63,25 +63,23 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 
 	@Override
 	public ENOParameters mergeEnoParameters(ENOParameters enoParameters) throws JAXBException, IOException, IllegalArgumentException, IllegalAccessException  {
-		logger.info("Merging eno Parameters");
+		LOGGER.info("Merging eno Parameters");
 		ENOParameters enoParametersDefault = getDefaultParameters();
-		logger.info("Default parameters read");
+		LOGGER.info("Default parameters read");
 		return mergeEnoParameters(enoParametersDefault, enoParameters);
 	}
 
 	public <T> T mergeEnoParameters(T enoParamsDefault, T newEnoParams) throws IllegalArgumentException, IllegalAccessException  {
 		Class<?> clazz = enoParamsDefault.getClass();
-		logger.debug("Name of class "+clazz.getSimpleName());
-		Object merged=null;
-		// List of known "Primitive" java Object and used in xsd model
-		List<String> PRIMITIVE_JAVA_OBJECT = Arrays.asList("Long", "Long[]", "Integer", "Integer[]", "String", "String[]", "Boolean", "boolean[]", "ArrayList", "LinkedHashMap");
-
+		LOGGER.debug("Class's name : "+clazz.getSimpleName());
+		Object merged;		
 		// if the class of the object is a Primitive or similar, or an Enumeration, we do a simple merge otherwise:
-		if(!(clazz.isPrimitive() || clazz.isEnum() || PRIMITIVE_JAVA_OBJECT.contains(clazz.getSimpleName()))){
+		if(isComplexeType(clazz)){
 			merged = enoParamsDefault;
 			// we recover each fields which constitutes the recovered object
-
 			for (Field field : getAllFields(new ArrayList<>(), clazz)) {
+				String className = field.getType().getSimpleName();
+				LOGGER.debug(" Name/Type of field :"+field.getName()+"/"+className);
 				field.setAccessible(true);
 
 				Object enoParamsDefaultValue;
@@ -89,51 +87,54 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 				// we recover the value of each
 				enoParamsDefaultValue = field.get(enoParamsDefault);
 				newEnoParamsValue = newEnoParams!=null ? field.get(newEnoParams) : null;
-
-				// Recursive call except in the case of an ArrayList (if empty we keep default value)
-				if (enoParamsDefaultValue != null) {
-					String className = enoParamsDefaultValue.getClass().getSimpleName();
-					if(className.equals("ArrayList")) {
-						if(newEnoParamsValue==null || ((ArrayList) newEnoParamsValue).isEmpty()) {
-							field.set(merged, enoParamsDefaultValue);
-							logger.debug("ArrayList : No overloaded, default value");
-						}
-						else {
-							// Special case for LevelQuestion and LevelSequence
-							Class<?> levelClass = ((ArrayList) newEnoParamsValue).get(0).getClass();
-							if(levelClass.equals(LevelQuestion.class) || levelClass.equals(LevelSequence.class)) {
-								ArrayList<LevelAbstract> mergedList = new ArrayList<>();
-								for(LevelAbstract levelDefault : (ArrayList<LevelAbstract>) enoParamsDefaultValue) {
-									int size = mergedList.size();
-									for(LevelAbstract  levelNew : (ArrayList<LevelAbstract>) newEnoParamsValue) {
-										if(levelDefault.getName().equals(levelNew.getName())) {
-											mergedList.add(this.mergeEnoParameters(levelDefault, levelNew));
-										}
-									}
-									if(mergedList.size()==size) {
-										mergedList.add(levelDefault);
-									}
-								}
-								field.set(merged, mergedList);
-								logger.debug("ArrayList : Special overloaded");	
+				
+				if (className != null) {
+					if(enoParamsDefaultValue!=null) {
+						
+						// Special case for List (if empty we keep default value)
+						if(className.equals(List.class.getSimpleName())) {
+							if(newEnoParamsValue==null || ((List) newEnoParamsValue).isEmpty()) {
+								field.set(merged, enoParamsDefaultValue);
+								LOGGER.debug("List : No overloaded, default value");
 							}
 							else {
-								field.set(merged, newEnoParamsValue);
-								logger.debug("ArrayList : overloaded, new value");	
+								// Special case for LevelQuestion and LevelSequence
+								Class<?> levelClass = ((List) newEnoParamsValue).get(0).getClass();
+								if(levelClass.equals(LevelQuestion.class) || levelClass.equals(LevelSequence.class)) {									
+									field.set(merged, mergeListNumerotation(enoParamsDefaultValue, newEnoParamsValue));
+									LOGGER.debug("List : Special overloaded");	
+								}
+								else {
+									field.set(merged, newEnoParamsValue);
+									LOGGER.debug("List : overloaded, new value");	
+								}
+							}
+						}
+						else {
+							// Recursive call
+							if(isComplexeType(field.getType())) {
+								LOGGER.debug("Merging... : recursive call");
+								field.set(merged, this.mergeEnoParameters(enoParamsDefaultValue, newEnoParamsValue));
+							}
+							// if field's class is a Primitive or similar, or an Enumeration, we do a simple merge.
+							else {
+								LOGGER.debug("Simple merge of field : values merged");
+								field.set(merged,  (newEnoParamsValue != null) ? newEnoParamsValue : enoParamsDefaultValue);
 							}
 						}
 					}
 					else {
-						// Recursive call
-						logger.debug("Merging... : recursive call");
-						field.set(merged, this.mergeEnoParameters(enoParamsDefaultValue, newEnoParamsValue));
+						// Case if defaultValue of field is null
+						field.set(merged, newEnoParamsValue);
 					}
+					
+					
 				}
 			}
 		}
 		else {
 			// merge simple: new value if it is not null, if not the default one
-			logger.debug("Merging... : values merged");
+			LOGGER.debug("Simple merge of simple class : values merged");
 			merged = (newEnoParams != null) ? newEnoParams : enoParamsDefault;
 		}
 		return (T) merged;
@@ -162,7 +163,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		if (inputStream == null)
 			return null;
 
-		logger.debug("Preparing to translate from XML to java");
+		LOGGER.debug("Preparing to translate from XML to java");
 		
 		
 
@@ -181,7 +182,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		if (xmlStream == null)
 			return null;
 
-		logger.debug("Preparing to translate from XML to java");
+		LOGGER.debug("Preparing to translate from XML to java");
 
 		JAXBContext context = JAXBContext.newInstance(ENOParameters.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -207,12 +208,33 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 
 	public List<Field> getAllFields(List<Field> fields, Class<?> type) {
 		fields.addAll(Arrays.asList(type.getDeclaredFields()));
-
 		if (type.getSuperclass() != null) {
 			getAllFields(fields, type.getSuperclass());
 		}
 
 		return fields;
+	}
+	
+	
+	public List<LevelAbstract> mergeListNumerotation(Object enoParamsDefaultValue, Object newEnoParamsValue) throws IllegalArgumentException, IllegalAccessException  {
+		List<LevelAbstract> mergedList = new ArrayList<>();
+		for(LevelAbstract levelDefault : (List<LevelAbstract>) enoParamsDefaultValue) {
+			int size = mergedList.size();
+			for(LevelAbstract  levelNew : (List<LevelAbstract>) newEnoParamsValue) {
+				if(levelDefault.getName().equals(levelNew.getName())) {
+					mergedList.add(this.mergeEnoParameters(levelDefault, levelNew));
+				}
+			}
+			if(mergedList.size()==size) {
+				mergedList.add(levelDefault);
+			}
+		}
+		return mergedList;
+	}
+	
+	public boolean isComplexeType(Class<?> clazz) {
+		List<String> PRIMITIVE_JAVA_OBJECT = Arrays.asList("Long", "Long[]", "Integer", "Integer[]", "String", "String[]", "Boolean", "boolean[]", "ArrayList", "LinkedHashMap");
+		return !(clazz.isPrimitive() || clazz.isEnum() || PRIMITIVE_JAVA_OBJECT.contains(clazz.getSimpleName()));
 	}
 
 
