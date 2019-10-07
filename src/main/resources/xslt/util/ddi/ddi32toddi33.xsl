@@ -9,6 +9,7 @@
     version="2.0">
 
     <!-- useful only for surveys with more than 1 questionnaire and used with ant -->
+    <xsl:variable name="ant-call" as="xs:boolean" select="false()"/>
     <!-- the first variable is the address of the temporary folder relative to the ddi32toddi33.xsl folder -->
     <!-- this program will seach for the file generated par dereferencing.xsl : ${TempFolder}/${survey}/ddi/${questionnaire}.tmp -->
     <xsl:variable name="dereferenced-temporary-files-folder" select="'../../../../../../../../../coltrane-dev/coltrane-eno/src/main/temp/'"/>
@@ -150,7 +151,7 @@
                 <xsl:variable name="derefenced-questionnaire-address" select="concat($dereferenced-temporary-files-folder,$file-name,'/ddi/',$questionnaire-name,'.tmp')"/>
                 <xsl:variable name="dereferenced-questionnaire" as="node()">
                     <xsl:choose>
-                        <xsl:when test="unparsed-text-available($derefenced-questionnaire-address)">
+                        <xsl:when test="$ant-call and unparsed-text-available($derefenced-questionnaire-address)">
                             <xsl:copy-of select="doc($derefenced-questionnaire-address)"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -201,7 +202,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:variable>
-                        <xsl:if test="$is-variable-to-reference/text() != ''">
+                        <xsl:if test="$is-variable-to-reference != ''">
                             <xsl:element name="r:VariableReference">
                                 <xsl:element name="r:Agency"><xsl:value-of select="r32:Agency"/></xsl:element>
                                 <xsl:element name="r:ID"><xsl:value-of select="$variable-id"/></xsl:element>
@@ -227,7 +228,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:variable>
-                        <xsl:if test="$is-variablegroup-to-reference/text() != ''">
+                        <xsl:if test="$is-variablegroup-to-reference != ''">
                             <xsl:element name="r:VariableGroupReference">
                                 <xsl:element name="r:Agency"><xsl:value-of select="r32:Agency"/></xsl:element>
                                 <xsl:element name="r:ID"><xsl:value-of select="$variablegroup-id"/></xsl:element>
