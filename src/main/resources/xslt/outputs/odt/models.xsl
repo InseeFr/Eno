@@ -545,6 +545,7 @@
 		<xsl:variable name="filter" select="enoodt:get-relevant($source-context)"/>
 		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>
 		<xsl:variable name="label" select="enoodt:get-business-name($source-context)"/>
+		<xsl:variable name="label2" select="enoodt:get-variable-business-name($source-context, $languages[1])"/>
 		<xsl:if test="$label != ''">
 			<text:p text:style-name="Format">
 				<text:span text:style-name="ConditionIntitulé">
@@ -554,7 +555,10 @@
 			<text:p text:style-name="Format">
 				<text:span text:style-name="ConditionIntitulé">
 					<xsl:value-of select="'Condition : '"/>
-				</text:span>
+				</text:span><xsl:call-template name="replaceVariablesInFormula">
+					<xsl:with-param name="formula" select="$filter"/>
+					<xsl:with-param name="variables" select="$idVariables"/>
+				</xsl:call-template>
 			</text:p>
 			<text:p text:style-name="Format">
 				<text:span text:style-name="ConditionIntitulé">
@@ -562,7 +566,7 @@
 				</text:span>
 			</text:p>
 			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionInstance"><xsl:copy-of select="$label"/>
+				<text:span text:style-name="ConditionInstance"><xsl:copy-of select="$label"/><xsl:copy-of select="$label2"/>
 				</text:span>
 			</text:p>
 		</xsl:if>

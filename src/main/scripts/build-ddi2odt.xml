@@ -244,8 +244,6 @@
         <delete>
             <fileset dir="${root-folder}/target/temp" includes="**/*" erroronmissingdir="false"/>
             <fileset dir="${root-folder}/target/test" includes="**/*" erroronmissingdir="false"/>
-            <fileset dir="${root-folder}/target/simpsons" includes="**/*" erroronmissingdir="false"
-            />
         </delete>
     </target>
     
