@@ -42,7 +42,7 @@ public class DDIMappingPreprocessor implements Preprocessor {
 		isDDI_MAPPING_XSL.close();
 		osTEMP_MAPPING_TMP.close();
 		
-		return mappingFile;
+		return inputFile;
 		
 	}
 	

@@ -78,21 +78,11 @@ public class GenerationService {
 		cleanTempFolder(surveyName);
 		File preprocessResultFileName = null;
 		
-		if(this.preprocessors[0].getClass()==DDIMappingPreprocessor.class) {
-			this.preprocessors[0].process(inputFile, parameters, surveyName,generator.in2out());
-			preprocessResultFileName = inputFile;
-		}
-		else {
-			preprocessResultFileName = this.preprocessors[0].process(inputFile, parameters, surveyName,generator.in2out());
-		}				
+		preprocessResultFileName = this.preprocessors[0].process(inputFile, parameters, surveyName,generator.in2out());	
+		
 		for (int i = 1; i < preprocessors.length; i++) {
-			if(this.preprocessors[i].getClass()==DDIMappingPreprocessor.class) {
-				this.preprocessors[i].process(inputFile, parameters, surveyName,generator.in2out());
-			}
-			else{
 			preprocessResultFileName = this.preprocessors[i].process(preprocessResultFileName, parameters, surveyName,
 					generator.in2out());
-			}
 		}
 
 		File generatedForm = this.generator.generate(preprocessResultFileName, parameters, surveyName);
