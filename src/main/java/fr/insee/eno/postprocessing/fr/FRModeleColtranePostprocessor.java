@@ -38,6 +38,7 @@ public class FRModeleColtranePostprocessor implements Postprocessor {
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
 		InputStream mappingStream=null;
 		if(mappingFile.exists()) {
+			logger.info("Loading mapping.xml file : "+mappingFile.getAbsolutePath());
 			mappingStream = FileUtils.openInputStream(mappingFile);
 		}
 
