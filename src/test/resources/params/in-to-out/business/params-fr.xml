@@ -48,33 +48,6 @@
         
         <Title>
             <Browsing>module</Browsing>
-            <Sequence>
-                <Level name="template"/>
-                <Level name="module">
-                    <PreSeq/>
-                    <NumParent>N</NumParent>
-                    <PostNumParentSeq/>
-                    <StyleNumSeq>I</StyleNumSeq>
-                    <PostNumSeq> - </PostNumSeq>
-                </Level>
-                <Level name="submodule"/>
-            </Sequence>
-            <Question>
-                <Level name="module">
-                    <PreQuest>➡ </PreQuest>
-                    <NumParent>N</NumParent>
-                    <PostNumParentQuest/>
-                    <StyleNumQuest>1</StyleNumQuest>
-                    <PostNumQuest>. </PostNumQuest>
-                </Level>
-                <Level name="submodule">
-                    <PreQuest>➡ </PreQuest>
-                    <NumParent>N</NumParent>
-                    <PostNumParentQuest/>
-                    <StyleNumQuest>1</StyleNumQuest>
-                    <PostNumQuest>. </PostNumQuest>
-                </Level>
-            </Question>
         </Title>
     </Parameters>
     
