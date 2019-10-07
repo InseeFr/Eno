@@ -1504,7 +1504,27 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:variable>
-                    <xsl:for-each select="xs:integer(number(@minimum)) to xs:integer(number(@maximum))">
+                    <xsl:variable name="min" as="xs:integer">
+                        <xsl:choose>
+                            <xsl:when test="contains(@minimum,'date')">
+                                <xsl:value-of select="year-from-date(current-date())"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="number(@minimum)"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:variable name="max" as="xs:integer">
+                        <xsl:choose>
+                            <xsl:when test="contains(@maximum,'date')">
+                                <xsl:value-of select="year-from-date(current-date())"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="number(@maximum)"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:for-each select="$min to $max">
                         <xsl:sort select="." order="{$number-order}"/>
                         <xsl:variable name="current-value" select="."/>
                         <item>
