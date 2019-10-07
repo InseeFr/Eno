@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
     
     
-    <xs:complexType name="PdfParameters">
+    <xs:complexType name="PDFParameters">
         <xs:sequence>
             <xs:element name="Format" type="Format" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Roster" type="Roster" minOccurs="0" maxOccurs="1"/>
@@ -26,7 +26,7 @@
             <xs:element name="Row" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="DefaultSize" type="xs:int" default="12"/>
+                        <xs:element name="DefaultSize" type="xs:int" default="15"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -38,7 +38,7 @@
             <xs:element name="Row" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="DefaultSize" type="xs:int" default="3" maxOccurs="1"/>
+                        <xs:element name="DefaultSize" type="xs:int" default="5" maxOccurs="1"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -50,7 +50,7 @@
             <xs:element name="Row" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="DefaultSize" type="xs:int" default="14" maxOccurs="1"/>
+                        <xs:element name="DefaultSize" type="xs:int" default="19" maxOccurs="1"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -68,7 +68,7 @@
     
     <xs:complexType name="PageBreakBetween">
         <xs:sequence>
-            <xs:element name="pdf" type="Level" minOccurs="0" maxOccurs="1" default="module"/>            
+            <xs:element name="pdf" type="Level" minOccurs="0" maxOccurs="1" default=""/>
         </xs:sequence>
     </xs:complexType>
     
@@ -88,6 +88,7 @@
     </xs:simpleType>
     <xs:simpleType name="Level">
         <xs:restriction base="xs:token">
+            <xs:enumeration value=""/>
             <xs:enumeration value="module"/>
             <xs:enumeration value="submodule"/>
         </xs:restriction>

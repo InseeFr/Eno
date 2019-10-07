@@ -20,8 +20,8 @@ import fr.insee.eno.Constants;
 import fr.insee.eno.parameters.AccompanyingMail;
 import fr.insee.eno.parameters.BrowsingEnum;
 import fr.insee.eno.parameters.ENOParameters;
+import fr.insee.eno.parameters.FRParameters;
 import fr.insee.eno.parameters.Format;
-import fr.insee.eno.parameters.FrParameters;
 import fr.insee.eno.parameters.GlobalNumerotation;
 import fr.insee.eno.parameters.InFormat;
 import fr.insee.eno.parameters.Language;
@@ -29,9 +29,9 @@ import fr.insee.eno.parameters.LevelEnum;
 import fr.insee.eno.parameters.LevelQuestion;
 import fr.insee.eno.parameters.NumerotationQuestion;
 import fr.insee.eno.parameters.OutFormat;
+import fr.insee.eno.parameters.PDFParameters;
 import fr.insee.eno.parameters.Parameters;
 import fr.insee.eno.parameters.Parameters.Languages;
-import fr.insee.eno.parameters.PdfParameters;
 import fr.insee.eno.parameters.Pipeline;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.parameters.StudyUnit;
@@ -71,7 +71,7 @@ public class TestValorizatorParametersImpl {
 		parameters.setLanguages(languages);
 		
 		
-		PdfParameters pdfParameters = new PdfParameters();
+		PDFParameters pdfParameters = new PDFParameters();
 		Table table = new Table();
 		Row row = new Row();
 		row.setDefaultSize(150);
@@ -102,7 +102,7 @@ public class TestValorizatorParametersImpl {
 		parameters.setTitle(globalNumerotation);
 		parameters.setPdfParameters(pdfParameters);
 		
-		FrParameters frParameters = new FrParameters();
+		FRParameters frParameters = new FRParameters();
 		frParameters.setLengthOfLongTable(56);
 		frParameters.setNumericExample(true);
 		

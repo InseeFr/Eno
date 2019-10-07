@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
         
-    <xs:complexType name="FrParameters">
+    <xs:complexType name="FRParameters">
         <xs:sequence>
             <xs:element name="NumericExample" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Deblocage" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>

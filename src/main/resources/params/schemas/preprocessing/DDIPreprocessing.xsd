@@ -8,14 +8,14 @@
     
     <xs:complexType name="GlobalNumerotation">
         <xs:sequence>
-            <xs:element name="Browsing" type="BrowsingEnum" minOccurs="1" maxOccurs="1" default="template"/>
-            <xs:element name="Sequence" type="NumerotationSequence" minOccurs="1" maxOccurs="1">
+            <xs:element name="Browsing" type="BrowsingEnum" minOccurs="0" maxOccurs="1" default="template"/>
+            <xs:element name="Sequence" type="NumerotationSequence" minOccurs="0" maxOccurs="1">
                 <xs:unique name="constrainteSeq">
                     <xs:selector xpath="Level"/>
                     <xs:field xpath="@name"/>
                 </xs:unique>
             </xs:element>
-            <xs:element name="Question" type="NumerotationQuestion" minOccurs="1" maxOccurs="1">
+            <xs:element name="Question" type="NumerotationQuestion" minOccurs="0" maxOccurs="1">
                 <xs:unique name="constrainteQuest">
                     <xs:selector xpath="Level"/>
                     <xs:field xpath="@name"/>
@@ -33,7 +33,7 @@
             <xs:extension base="LevelAbstract">
                 <xs:sequence>
                     <xs:element name="PreSeq" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                    <xs:element name="NumParent" type="xs:string" minOccurs="0" maxOccurs="1" default="N"/>
+                    <xs:element name="NumParent" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
                     <xs:element name="PostNumParentSeq" type="xs:string" minOccurs="0" maxOccurs="1" default=""/>
                     <xs:element name="StyleNumSeq" type="xs:string" minOccurs="0" maxOccurs="1" default="I"/>
                     <xs:element name="PostNumSeq" type="xs:string" minOccurs="0" maxOccurs="1" default=" - "/>
@@ -47,7 +47,7 @@
             <xs:extension base="LevelAbstract">
                 <xs:sequence>
                     <xs:element name="PreQuest" type="xs:string" minOccurs="0" maxOccurs="1" default=""/>
-                    <xs:element name="NumParent" type="xs:string" minOccurs="0" maxOccurs="1" default="N"/>
+                    <xs:element name="NumParent" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
                     <xs:element name="PostNumParentQuest" type="xs:string" minOccurs="0" maxOccurs="1" default=""/>
                     <xs:element name="StyleNumQuest" type="xs:string" minOccurs="0" maxOccurs="1" default="1"/>
                     <xs:element name="PostNumQuest" type="xs:string" minOccurs="0" maxOccurs="1" default=". "/>

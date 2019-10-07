@@ -37,8 +37,8 @@
             </xs:element>
             <xs:element name="BeginQuestion" type="BeginQuestion" minOccurs="0" maxOccurs="1"/>
             <xs:element name="EndQuestion" type="EndQuestion" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="fr-parameters" type="FrParameters" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="pdf-parameters" type="PdfParameters" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="fr-parameters" type="FRParameters" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="pdf-parameters" type="PDFParameters" minOccurs="0" maxOccurs="1"/>
             <xs:element name="js-parameters" type="JSParameters" minOccurs="0" maxOccurs="1"/>
             <xs:element name="odt-parameters" type="ODTParameters" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Title" type="GlobalNumerotation" minOccurs="0" maxOccurs="1"/>

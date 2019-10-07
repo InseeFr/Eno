@@ -71,7 +71,7 @@
                 <Numeric>optical</Numeric>
             </Capture>
             <PageBreakBetween>
-                <pdf>module</pdf>
+                <pdf></pdf>
             </PageBreakBetween>
             <AccompanyingMail></AccompanyingMail>
         </pdf-parameters>
