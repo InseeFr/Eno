@@ -532,21 +532,6 @@
 	
 	
 	
-	<xd:doc>
-		<xd:desc>template for the GoTo</xd:desc>
-	</xd:doc>
-	<xsl:template match="GoTo" mode="model">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>
-		<xsl:variable name="label" select="enoodt:get-label($source-context, $languages[1])" as="node()"/>
-		<cacac>dfl!ghik</cacac>
-		<xsl:if test="$label != ''">
-			<xsl:copy-of select="$label"/>
-		</xsl:if>
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
 	
 
 	<xd:doc>
@@ -559,17 +544,56 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="filter" select="enoodt:get-relevant($source-context)"/>
 		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>
-		<xsl:variable name="label" select="enoodt:get-business-name($source-context)" as="node()"/>
-		<xsl:variable name="questionName" select="enoodt:get-question-name($source-context,$languages[1])"/>
+		<xsl:variable name="label" select="enoodt:get-business-name($source-context)"/>
 		<xsl:if test="$label != ''">
+			<text:p text:style-name="Format">
+				<text:span text:style-name="ConditionIntitulé">
+					<xsl:value-of select="'Comportement conditionnel : '"/>
+				</text:span>
+			</text:p>
+			<text:p text:style-name="Format">
+				<text:span text:style-name="ConditionIntitulé">
+					<xsl:value-of select="'Condition : '"/>
+				</text:span>
+			</text:p>
+			<text:p text:style-name="Format">
+				<text:span text:style-name="ConditionIntitulé">
+					<xsl:value-of select="'Cible : '"/>
+				</text:span>
+			</text:p>
+			<text:p text:style-name="Format">
+				<text:span text:style-name="ConditionInstance"><xsl:copy-of select="$label"/>
+				</text:span>
+			</text:p>
+		</xsl:if>
+		
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+	
+	<xd:doc>
+		<xd:desc>template for the GoTo</xd:desc>
+	</xd:doc>
+	<xsl:template match="GoTo" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:variable name="label" select="enoodt:get-label($source-context, $languages[1])" as="node()"/>
+		<xsl:if test="$label != ''">
+		
+			<text:p text:style-name="Format">
+				<text:span text:style-name="ConditionIntitulé">
+					<xsl:value-of select="'Comportement conditionnel : '"/>
+				</text:span>
+			</text:p>
+				<text:p text:style-name="Format">
+					<text:span text:style-name="ConditionIntitulé">
+						<xsl:value-of select="'Condition : '"/><xsl:copy-of select="$label"/>
+					</text:span>
+				</text:p>
 			<text:p text:style-name="Control">
-				Comportement conditionnel : If you are not ready, please…
-			</text:p><text:p text:style-name="Control">
-				Condition : <xsl:call-template name="replaceVariablesInFormula">
-					<xsl:with-param name="formula" select="$filter"/>
-					<xsl:with-param name="variables" select="$idVariables"/>
-				</xsl:call-template>
-			</text:p><text:p text:style-name="Control">
 				Cible : <xsl:copy-of select="$label"/>
 			</text:p>
 		</xsl:if>
@@ -578,6 +602,18 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<xd:doc>
 		<xd:desc>
