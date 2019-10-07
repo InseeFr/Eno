@@ -9,7 +9,7 @@ import org.xmlunit.diff.Diff;
 import fr.insee.eno.ParameterizedGenerationService;
 import fr.insee.eno.test.XMLDiff;
 
-public class TestParameterizedGenerationServiceFr {
+public class TestParameterizedGenerationServiceFR {
 
 	private ParameterizedGenerationService parameterizedGenerationService = new ParameterizedGenerationService();
 	
@@ -28,6 +28,7 @@ public class TestParameterizedGenerationServiceFr {
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
 		} catch (Exception e) {
+			Assert.fail();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -38,7 +39,7 @@ public class TestParameterizedGenerationServiceFr {
 	public void householdTest() {
 		String basePathDDI = "src/test/resources/params/in-to-out/household";
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
-		File params = new File(String.format("%s/params.xml", basePathDDI));
+		File params = new File(String.format("%s/params-fr.xml", basePathDDI));
 		File metadata = new File(String.format("%s/metadata.xml", basePathDDI));
 		File specificTreatment = new File(String.format("%s/fr-specific-treatment.xsl", basePathDDI));
 		
@@ -48,6 +49,7 @@ public class TestParameterizedGenerationServiceFr {
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
 		} catch (Exception e) {
+			Assert.fail();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -58,7 +60,7 @@ public class TestParameterizedGenerationServiceFr {
 	public void businessTest() {
 		String basePathDDI = "src/test/resources/params/in-to-out/business";
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
-		File params = new File(String.format("%s/params.xml", basePathDDI));
+		File params = new File(String.format("%s/params-fr.xml", basePathDDI));
 		File metadata = new File(String.format("%s/metadata.xml", basePathDDI));
 		File specificTreatment = new File(String.format("%s/fr-specific-treatment.xsl", basePathDDI));
 		
@@ -68,6 +70,7 @@ public class TestParameterizedGenerationServiceFr {
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
 		} catch (Exception e) {
+			Assert.fail();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -1,0 +1,43 @@
+<ENOParameters>
+    
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>fr</OutFormat>
+        
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        
+        <PostProcessing>fr-browsing</PostProcessing>
+        <PostProcessing>fr-fix-adherence</PostProcessing>
+    </Pipeline>
+    
+    <Parameters>
+        
+        <StudyUnit>business</StudyUnit>
+        
+        <Campagne>simpsons</Campagne>
+        
+        <Languages>
+            <Language>fr</Language>
+            <Language>en</Language>
+        </Languages>
+        
+        <BeginQuestion>
+            <Identification>false</Identification>
+        </BeginQuestion>
+        
+        <EndQuestion>
+            <ResponseTimeQuestion>true</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+        
+        <fr-parameters>            
+            <NumericExample>false</NumericExample>
+            <Deblocage>false</Deblocage>
+            <Satisfaction>false</Satisfaction>
+        </fr-parameters>  
+        
+    </Parameters>
+    
+</ENOParameters>
