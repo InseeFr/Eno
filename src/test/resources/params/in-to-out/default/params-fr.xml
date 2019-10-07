@@ -21,23 +21,7 @@
         <Languages>
             <Language>fr</Language>
             <Language>en</Language>
-        </Languages>
-        
-        <BeginQuestion>
-            <Identification>false</Identification>
-        </BeginQuestion>
-        
-        <EndQuestion>
-            <ResponseTimeQuestion>true</ResponseTimeQuestion>
-            <CommentQuestion>true</CommentQuestion>
-        </EndQuestion>
-        
-        <fr-parameters>            
-            <NumericExample>false</NumericExample>
-            <Deblocage>false</Deblocage>
-            <Satisfaction>false</Satisfaction>
-        </fr-parameters>  
-        
+        </Languages>        
     </Parameters>
     
 </ENOParameters>

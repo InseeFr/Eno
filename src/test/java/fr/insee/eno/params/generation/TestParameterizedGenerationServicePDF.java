@@ -28,6 +28,7 @@ public class TestParameterizedGenerationServicePDF {
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
 		} catch (Exception e) {
+			Assert.fail();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
