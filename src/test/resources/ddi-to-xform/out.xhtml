@@ -252,7 +252,7 @@
                            name="DATEFIRST"
                            ref="DATEFIRST"
                            type="xf:date">
-                     <xf:constraint value="if (string(.) != '' and . castable as xs:date) then (. &gt;= xs:date('1900-01-01') and . &lt; current-date()) else (string(.) = '')"/>
+                     <xf:constraint value="if (string(.) != '' and . castable as xs:date) then (. &gt;= xs:date('1900-01-01') and . &lt;= xs:date(local-date())) else (string(.) = '')"/>
                   </xf:bind>
                   <xf:bind id="AUDIENCE_SHARE-bind" name="AUDIENCE_SHARE" ref="AUDIENCE_SHARE">
                      <xf:constraint value="if(. castable as xs:float) then (xs:float(.)&lt;=99.0 and xs:float(.)&gt;=0.0 and matches(.,'^(0|[1-9]|[1-8][0-9]{1}|9[0-8])(\.[0-9]{1,1})?$|^99(\.[0-0])?$')) else (.='')"/>
@@ -2765,17 +2765,15 @@
                               <xf:label ref="$form-resources/SEASON_NUMBER/label"/>
                               <xf:alert ref="$form-resources/SEASON_NUMBER/alert"/>
                            </fr:number>
-                           <fr:number id="DATEFIRST-control"
+                           <xf:input id="DATEFIRST-control"
                                       name="DATEFIRST"
                                       bind="DATEFIRST-bind"
-                                      xxf:fraction-digits="0"
-                                      xxf:non-negative="true()"
                                       class="question date">
                               <xf:label ref="replace($form-resources/DATEFIRST/label,'¤LAST_BROADCAST¤',instance('fr-form-instance')//LAST_BROADCAST)"
                                         mediatype="text/html"/>
                               <xf:hint ref="$form-resources/DATEFIRST/hint"/>
                               <xf:alert ref="$form-resources/DATEFIRST/alert"/>
-                           </fr:number>
+                           </xf:input>
                            <fr:number id="AUDIENCE_SHARE-control"
                                       name="AUDIENCE_SHARE"
                                       bind="AUDIENCE_SHARE-bind"
@@ -3296,13 +3294,13 @@
                                                class="number"
                                                xxf:maxlength="5"
                                                grouping-separator=" "
-                                               decimal-separator=",">
+                                               decimal-separator=","
+                                               suffix="%">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES11/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
                                     </fr:number>
-                                    <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -3320,13 +3318,13 @@
                                                class="number"
                                                xxf:maxlength="5"
                                                grouping-separator=" "
-                                               decimal-separator=",">
+                                               decimal-separator=","
+                                               suffix="%">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES21/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
                                     </fr:number>
-                                    <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -3351,13 +3349,13 @@
                                                class="number"
                                                xxf:maxlength="5"
                                                grouping-separator=" "
-                                               decimal-separator=",">
+                                               decimal-separator=","
+                                               suffix="%">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES31/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
                                     </fr:number>
-                                    <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -3375,13 +3373,13 @@
                                                class="number"
                                                xxf:maxlength="5"
                                                grouping-separator=" "
-                                               decimal-separator=",">
+                                               decimal-separator=","
+                                               suffix="%">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES41/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
                                     </fr:number>
-                                    <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -3399,13 +3397,13 @@
                                                class="number"
                                                xxf:maxlength="5"
                                                grouping-separator=" "
-                                               decimal-separator=",">
+                                               decimal-separator=","
+                                               suffix="%">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES51/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
                                     </fr:number>
-                                    <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -3430,13 +3428,13 @@
                                                class="number"
                                                xxf:maxlength="5"
                                                grouping-separator=" "
-                                               decimal-separator=",">
+                                               decimal-separator=","
+                                               suffix="%">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES61/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
                                     </fr:number>
-                                    <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
                               <xhtml:tr>
@@ -3454,13 +3452,13 @@
                                                class="number"
                                                xxf:maxlength="5"
                                                grouping-separator=" "
-                                               decimal-separator=",">
+                                               decimal-separator=","
+                                               suffix="%">
                                        <xf:alert ref="$form-resources/PERCENTAGE_EXPENSES71/alert"/>
                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
                                                     name="DOMFocusOut"
                                                     target="j4nwc63q-CI-0-control"/>
                                     </fr:number>
-                                    <xhtml:span class="suffixe">%</xhtml:span>
                                  </xhtml:td>
                               </xhtml:tr>
                            </xhtml:tbody>

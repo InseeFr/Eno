@@ -1124,8 +1124,8 @@
                             <xsl:value-of select="'if (string(.) != '''' and . castable as xs:date) then ('"/>
                             <xsl:if test="$minimum != ''">
                                 <xsl:choose>
-                                    <xsl:when test="contains($minimum,'current-date()')">
-                                        <xsl:value-of select="'. &gt; current-date()'"/>
+                                    <xsl:when test="contains($minimum,'-date()')">
+                                        <xsl:value-of select="'. &gt;= xs:date(local-date())'"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="concat('. &gt;= xs:date(''',$minimum,''')')"/>
@@ -1137,8 +1137,8 @@
                             </xsl:if>
                             <xsl:if test="$maximum != ''">
                                 <xsl:choose>
-                                    <xsl:when test="contains($maximum,'current-date()')">
-                                        <xsl:value-of select="'. &lt; current-date()'"/>
+                                    <xsl:when test="contains($maximum,'-date()')">
+                                        <xsl:value-of select="'. &lt;= xs:date(local-date())'"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="concat('. &lt;= xs:date(''',$maximum,''')')"/>
@@ -1207,13 +1207,27 @@
                                 <xsl:otherwise>
                                     <xsl:value-of select="concat('if(string(../',$name,') != '''') then (')"/>
                                     <xsl:if test="$minimum != ''">
-                                        <xsl:value-of select="concat('string(../',$name,') &gt;= ''',$minimum,'''')"/>
+                                        <xsl:choose>
+                                            <xsl:when test="contains($minimum,'-date()')">
+                                                <xsl:value-of select="concat('string(../',$name,') &gt;= substring(local-date(),1,7)')"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:value-of select="concat('string(../',$name,') &gt;= ''',$minimum,'''')"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </xsl:if>
                                     <xsl:if test="$minimum != '' and $maximum != ''">
                                         <xsl:value-of select="' and '"/>
                                     </xsl:if>
                                     <xsl:if test="$maximum != ''">
-                                        <xsl:value-of select="concat('string(../',$name,') &lt;= ''',$maximum,'''')"/>
+                                        <xsl:choose>
+                                            <xsl:when test="contains($maximum,'-date()')">
+                                                <xsl:value-of select="concat('string(../',$name,') &lt;= substring(local-date(),1,7)')"/>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:value-of select="concat('string(../',$name,') &lt;= ''',$maximum,'''')"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </xsl:if>
                                     <xsl:value-of select="concat(') else (../',$name,'='''')')"/>
                                 </xsl:otherwise>
@@ -1506,7 +1520,7 @@
                     </xsl:variable>
                     <xsl:variable name="min" as="xs:integer">
                         <xsl:choose>
-                            <xsl:when test="contains(@minimum,'date')">
+                            <xsl:when test="contains(@minimum,'-date()')">
                                 <xsl:value-of select="year-from-date(current-date())"/>
                             </xsl:when>
                             <xsl:otherwise>
@@ -1516,7 +1530,7 @@
                     </xsl:variable>
                     <xsl:variable name="max" as="xs:integer">
                         <xsl:choose>
-                            <xsl:when test="contains(@maximum,'date')">
+                            <xsl:when test="contains(@maximum,'-date()')">
                                 <xsl:value-of select="year-from-date(current-date())"/>
                             </xsl:when>
                             <xsl:otherwise>
@@ -1791,6 +1805,9 @@
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
+                <xsl:if test="not($suffix = '')">
+                    <xsl:attribute name="suffix" select="$suffix"/>
+                </xsl:if>
             </xsl:if>
             <xsl:if test="$label != '' or $question-label!= ''">
                 <xsl:variable name="conditioning-variables" as="xs:string*">
@@ -1902,7 +1919,7 @@
                 </xsl:element>
             </xsl:for-each>
         </xsl:element>
-        <xsl:if test="not($suffix = '')">
+        <xsl:if test="not($suffix = '') and not(self::NumericDomain)">
             <xsl:element name="xhtml:span">
                 <xsl:attribute name="class" select="'suffixe'"/>
                 <xsl:copy-of select="$suffix" copy-namespaces="no"/>
@@ -2492,8 +2509,8 @@
                         <format id="Y" unit="Year">
                             <xsl:attribute name="minimum">
                                 <xsl:choose>
-                                    <xsl:when test="contains($minimum,'current-date')">
-                                        <xsl:value-of select="'year-from-date(current-date())'"/>
+                                    <xsl:when test="contains($minimum,'-date()')">
+                                        <xsl:value-of select="'year-from-date(xs:date(local-date()))'"/>
                                     </xsl:when>
                                     <xsl:when test="contains($minimum,'-')">
                                         <xsl:value-of select="substring-before($minimum,'-')"/>
@@ -2508,8 +2525,8 @@
                             </xsl:attribute>
                             <xsl:attribute name="maximum">
                                 <xsl:choose>
-                                    <xsl:when test="contains($maximum,'current-date')">
-                                        <xsl:value-of select="'year-from-date(current-date())'"/>
+                                    <xsl:when test="contains($maximum,'-date()')">
+                                        <xsl:value-of select="'year-from-date(xs:date(local-date()))'"/>
                                     </xsl:when>
                                     <xsl:when test="contains($maximum,'-')">
                                         <xsl:value-of select="substring-before($maximum,'-')"/>
@@ -2518,7 +2535,7 @@
                                         <xsl:value-of select="$maximum"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of select="'year-from-date(current-date())'"/>
+                                        <xsl:value-of select="'year-from-date(xs:date(local-date()))'"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>

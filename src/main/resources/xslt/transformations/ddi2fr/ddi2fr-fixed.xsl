@@ -511,7 +511,7 @@
                 <xsl:if test="$maximum != ''">
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
                     <xsl:choose>
-                        <xsl:when test="contains($maximum,'current-date()')">
+                        <xsl:when test="contains($maximum,'-date()')">
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Today"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -533,12 +533,12 @@
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
                     <xsl:choose>
-                        <xsl:when test="contains($maximum,'current-date()')">
+                        <xsl:when test="contains($maximum,'-date()')">
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Today"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($maximum,6,2))]"/>
                             <xsl:value-of select="concat(' ',substring($maximum,1,4))"/>
                         </xsl:otherwise>
@@ -554,12 +554,13 @@
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
                     <xsl:choose>
-                        <xsl:when test="contains($maximum,'current-date()')">
+                        <xsl:when test="contains($maximum,'-date()')">
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Today"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ',$maximum)"/>
+                            <xsl:value-of select="$maximum"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:if>
