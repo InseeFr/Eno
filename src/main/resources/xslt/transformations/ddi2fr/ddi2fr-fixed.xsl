@@ -689,4 +689,12 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+
+    <xd:doc>
+        <xd:desc>no use of input enoddi:is-required : always false for Web collect</xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:is-required">
+        <xsl:param name="context" as="item()"/>
+        <xsl:sequence select="false()"/>
+    </xsl:function>
 </xsl:stylesheet>
