@@ -264,7 +264,7 @@
                      ref="j3341528"
                      relevant="not( instance('fr-form-instance')//READY!= '1')">
                <xf:bind id="j3341528-d2-bind" name="j3341528-d2" ref="j3341528-d2"/>
-               <xf:bind id="CITY-bind" name="CITY" ref="CITY" required="true()"/>
+               <xf:bind id="CITY-bind" name="CITY" ref="CITY"/>
                <xf:bind id="MAYOR-bind" name="MAYOR" ref="MAYOR"/>
                <xf:bind id="STATE-bind" name="STATE" ref="STATE"/>
             </xf:bind>
@@ -445,7 +445,7 @@
                   <xf:constraint value="if(. castable as xs:float) then (xs:float(.)&lt;=100.0 and xs:float(.)&gt;=0.0 and matches(.,'^(0|[1-9][0-9]{0,1})(\.[0-9]{1,1})?$|^100(\.[0-0])?$')) else (.='')"/>
                </xf:bind>
                <xf:bind id="j4nwc63q-CI-0-bind" name="j4nwc63q-CI-0" ref="j4nwc63q-CI-0">
-                  <xf:constraint level="error"
+                  <xf:constraint level="warning"
                                  value="not((if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)!= 100)"/>
                </xf:bind>
                <xf:bind id="j6qejudb-bind" name="j6qejudb" ref="j6qejudb"/>
@@ -2560,6 +2560,7 @@
                </xf:bind>
                <xf:bind id="page-j4nw88h2-bind" name="j4nw88h2" ref="j4nw88h2">
                   <xf:calculate value="xxf:evaluate-bind-property('j4nw88h2-bind','relevant')"/>
+                  <xf:constraint value="(not((if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ (if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)!= 100))"/>
                </xf:bind>
                <xf:bind id="page-j6qfx9qe-bind" name="j6qfx9qe" ref="j6qfx9qe">
                   <xf:calculate value="xxf:evaluate-bind-property('j6qfx9qe-bind','relevant')"/>
@@ -3467,7 +3468,7 @@
                                    name="j4nwc63q-CI-0"
                                    bind="j4nwc63q-CI-0-bind">
                            <xf:alert ref="replace($form-resources/j4nwc63q-CI-0/alert,'¤jbcggtca-GOP¤',instance('fr-form-instance')//SUM_EXPENSES)"
-                                     level="error"/>
+                                     level="warning"/>
                         </xf:output>
                      </xhtml:div>
                      <xhtml:div class="submodule">
