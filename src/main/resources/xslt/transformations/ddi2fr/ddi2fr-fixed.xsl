@@ -697,4 +697,21 @@
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="false()"/>
     </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>ddi error message keeps warning for Web collect</xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:get-message-type">
+        <xsl:param name="context" as="item()"/>
+        <xsl:variable name="ddi-message" select="enoddi:get-message-type($context)"/>
+        
+        <xsl:choose>
+            <xsl:when test="$ddi-message = 'error'">
+                <xsl:value-of select="'warning'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$ddi-message"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 </xsl:stylesheet>
