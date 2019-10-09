@@ -2974,17 +2974,11 @@
                 <xsl:variable name="variable-representation" select="enofr:get-variable-representation($source-context,$current-variable)"/>
                 <xsl:choose>
                     <xsl:when test="$variable-representation = 'number' and contains($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
-                        <!-- former default formula for variableId -->
+                        <!-- former default formula for variableId : simplify before analyzing again -->
                         <xsl:analyze-string select="$formula" regex="^(.*)number\(if \({$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}=''\) then '0' else {$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}\)(.*)$">
                             <xsl:matching-substring>
                                 <xsl:call-template name="replaceVariablesInFormula">
-                                    <xsl:with-param name="formula" select="regex-group(1)"/>
-                                    <xsl:with-param name="variables" as="node()" select="$variables"/>
-                                    <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
-                                </xsl:call-template>
-                                <xsl:value-of select="concat('(if (',$variable-business-name,'/string()='''') then 0 else ',$variable-business-name,')')"/>
-                                <xsl:call-template name="replaceVariablesInFormula">
-                                    <xsl:with-param name="formula" select="regex-group(2)"/>
+                                    <xsl:with-param name="formula" select="concat(regex-group(1),$conditioning-variable-begin,$current-variable,$conditioning-variable-end,regex-group(2))"/>
                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                                 </xsl:call-template>
