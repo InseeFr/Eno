@@ -138,6 +138,10 @@
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="typeOfAncestor" select="'question'" tunnel="yes"/>
 			</xsl:apply-templates>
+			
+			<xsl:apply-templates select="enoodt:get-end-question-instructions($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
 		</text:section>
 	</xsl:template>
 	
@@ -546,10 +550,9 @@
 		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>
 		<xsl:variable name="label" select="enoodt:get-business-name($source-context)"/>
 		<xsl:variable name="label2" select="enoodt:get-variable-business-name($source-context, $languages[1])"/>
-		<xsl:if test="$label != ''">
+		<!--<xsl:if test="$label != ''">
 			<text:p text:style-name="Format">
 				<text:span text:style-name="ConditionIntitulé">
-					<xsl:value-of select="'Comportement conditionnel : '"/>
 				</text:span>
 			</text:p>
 			<text:p text:style-name="Format">
@@ -569,12 +572,14 @@
 				<text:span text:style-name="ConditionInstance"><xsl:copy-of select="$label"/><xsl:copy-of select="$label2"/>
 				</text:span>
 			</text:p>
-		</xsl:if>
+		</xsl:if>-->
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
+	
+	
 	
 	
 	<xd:doc>
@@ -589,16 +594,16 @@
 		
 			<text:p text:style-name="Format">
 				<text:span text:style-name="ConditionIntitulé">
-					<xsl:value-of select="'Comportement conditionnel : '"/>
+					<xsl:value-of select="'Comportement conditionnel : '"/><xsl:copy-of select="$label"/>
 				</text:span>
 			</text:p>
 				<text:p text:style-name="Format">
 					<text:span text:style-name="ConditionIntitulé">
-						<xsl:value-of select="'Condition : '"/><xsl:copy-of select="$label"/>
+						<xsl:value-of select="'Condition : '"/><xsl:value-of select="enoodt:get-flowcontrol-condition($source-context)"/>
 					</text:span>
 				</text:p>
-			<text:p text:style-name="Control">
-				Cible : <xsl:copy-of select="$label"/>
+			<text:p text:style-name="ConditionIntitulé">
+				Cible : <xsl:value-of select="enoodt:get-flowcontrol-target($source-context)"/>
 			</text:p>
 		</xsl:if>
 		
@@ -606,18 +611,6 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	<xd:doc>
 		<xd:desc>
