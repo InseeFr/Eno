@@ -534,10 +534,6 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
-	
-	
-	
-
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on the xf-group driver.</xd:p>
@@ -550,37 +546,12 @@
 		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>
 		<xsl:variable name="label" select="enoodt:get-business-name($source-context)"/>
 		<xsl:variable name="label2" select="enoodt:get-variable-business-name($source-context, $languages[1])"/>
-		<!--<xsl:if test="$label != ''">
-			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionIntitulé">
-				</text:span>
-			</text:p>
-			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionIntitulé">
-					<xsl:value-of select="'Condition : '"/>
-				</text:span><xsl:call-template name="replaceVariablesInFormula">
-					<xsl:with-param name="formula" select="$filter"/>
-					<xsl:with-param name="variables" select="$idVariables"/>
-				</xsl:call-template>
-			</text:p>
-			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionIntitulé">
-					<xsl:value-of select="'Cible : '"/>
-				</text:span>
-			</text:p>
-			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionInstance"><xsl:copy-of select="$label"/><xsl:copy-of select="$label2"/>
-				</text:span>
-			</text:p>
-		</xsl:if>-->
+		
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
-	
-	
 	
 	<xd:doc>
 		<xd:desc>template for the GoTo</xd:desc>
@@ -590,20 +561,34 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		
 		<xsl:variable name="label" select="enoodt:get-label($source-context, $languages[1])" as="node()"/>
-		<xsl:if test="$label != ''">
+		<xsl:variable name="nameOfVariable" select="enoodt:get-flowcontrol-target($source-context)"/>
 		
+		<xsl:if test="$label != ''">
 			<text:p text:style-name="Format">
 				<text:span text:style-name="ConditionIntitulé">
-					<xsl:value-of select="'Comportement conditionnel : '"/><xsl:copy-of select="$label"/>
+					<xsl:value-of select="'Comportement conditionnel : '"/>
+				</text:span>
+				<text:span text:style-name="ConditionInstance">
+					<xsl:copy-of select="$label"/>
 				</text:span>
 			</text:p>
-				<text:p text:style-name="Format">
-					<text:span text:style-name="ConditionIntitulé">
-						<xsl:value-of select="'Condition : '"/><xsl:value-of select="enoodt:get-flowcontrol-condition($source-context)"/>
-					</text:span>
-				</text:p>
-			<text:p text:style-name="ConditionIntitulé">
-				Cible : <xsl:value-of select="enoodt:get-flowcontrol-target($source-context)"/>
+			
+			<text:p text:style-name="Format">
+				<text:span text:style-name="ConditionIntitulé">
+					<xsl:value-of select="'Condition : '"/>
+				</text:span>
+				<text:span text:style-name="ConditionInstance">
+					<xsl:value-of select="enoodt:get-flowcontrol-condition($source-context)"/>
+				</text:span>
+			</text:p>
+			
+			<text:p text:style-name="Format">
+				<text:span text:style-name="ConditionIntitulé">
+					<xsl:value-of select="'Cible : '"/>
+				</text:span>
+				<text:span text:style-name="NameOfVariable">
+					<xsl:value-of select="concat('[',$nameOfVariable,']')"/>
+				</text:span>
 			</text:p>
 		</xsl:if>
 		
