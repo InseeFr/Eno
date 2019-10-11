@@ -68,11 +68,8 @@
       <style:style style:name="NameOfVariable" style:family="text">
          <style:text-properties fo:color="#8B008B" fo:font-style="italic" fo:font-weight="bold"/>
       </style:style>
-      <style:style style:name="ConditionIntitulé" style:family="text">
+      <style:style style:name="BoldText" style:family="text">
          <style:text-properties fo:color="#000000" fo:font-weight="bold"/>
-      </style:style>
-      <style:style style:name="ConditionInstance" style:family="text">
-         <style:text-properties fo:color="#000000"/>
       </style:style>
       <style:style style:name="Comment"
                    style:family="paragraph"
@@ -212,15 +209,11 @@
                <text:p text:style-name="Format">
                   <text:span text:style-name="NameOfVariable">[READY] - </text:span>Booléen</text:p>
                <text:p text:style-name="Format">
-                  <text:span text:style-name="ConditionIntitulé">Comportement conditionnel : </text:span>
-                  <text:span text:style-name="ConditionInstance">If you are not ready, please go to the end of the questionnaire</text:span>
-               </text:p>
+                  <text:span text:style-name="BoldText">Comportement conditionnel : </text:span>If you are not ready, please go to the end of the questionnaire</text:p>
                <text:p text:style-name="Format">
-                  <text:span text:style-name="ConditionIntitulé">Condition : </text:span>
-                  <text:span text:style-name="ConditionInstance">$READY != '1'</text:span>
-               </text:p>
+                  <text:span text:style-name="BoldText">Condition : </text:span>$READY != '1'</text:p>
                <text:p text:style-name="Format">
-                  <text:span text:style-name="ConditionIntitulé">Cible : </text:span>
+                  <text:span text:style-name="BoldText">Cible : </text:span>
                   <text:span text:style-name="NameOfVariable">[MODULE6]</text:span>
                </text:p>
             </text:section>

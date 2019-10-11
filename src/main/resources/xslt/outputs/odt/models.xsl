@@ -544,8 +544,6 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="filter" select="enoodt:get-relevant($source-context)"/>
 		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>
-		<xsl:variable name="label" select="enoodt:get-business-name($source-context)"/>
-		<xsl:variable name="label2" select="enoodt:get-variable-business-name($source-context, $languages[1])"/>
 		
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -565,26 +563,23 @@
 		
 		<xsl:if test="$label != ''">
 			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionIntitulé">
+				<text:span text:style-name="BoldText">
 					<xsl:value-of select="'Comportement conditionnel : '"/>
 				</text:span>
-				<text:span text:style-name="ConditionInstance">
-					<xsl:copy-of select="$label"/>
-				</text:span>
+				<xsl:copy-of select="$label"/>
 			</text:p>
 			
 			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionIntitulé">
+				<text:span text:style-name="BoldText">
 					<xsl:value-of select="'Condition : '"/>
 				</text:span>
-				<text:span text:style-name="ConditionInstance">
-					<xsl:value-of select="enoodt:get-flowcontrol-condition($source-context)"/>
-				</text:span>
+				<xsl:value-of select="enoodt:get-flowcontrol-condition($source-context)"/>
+				
 			</text:p>
 			
 			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionIntitulé">
-					<xsl:value-of select="'Cible : '"/>
+				<text:span text:style-name="BoldText">
+				<xsl:value-of select="'Cible : '"/>
 				</text:span>
 				<text:span text:style-name="NameOfVariable">
 					<xsl:value-of select="concat('[',$nameOfVariable,']')"/>

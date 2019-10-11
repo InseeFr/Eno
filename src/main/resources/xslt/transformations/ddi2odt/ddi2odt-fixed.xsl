@@ -159,14 +159,7 @@
     <xsl:template match="xhtml:span[@class='block']" mode="enoodt:format-label">
             <xsl:apply-templates select="node()" mode="enoodt:format-label"/>        
     </xsl:template>
-    
-    <!--
-    <xsl:template match="*[not(descendant-or-self::xhtml:*)]" mode="enoodt:format-label">
-        <xsl:copy>
-            <xsl:apply-templates select="node()|@*" mode="enoodt:format-label"/>
-        </xsl:copy>
-    </xsl:template>-->
-    
+        
     <xsl:template match="text()" mode="enoodt:format-label">
         <xsl:param name="label-variables" tunnel="yes"/>
         

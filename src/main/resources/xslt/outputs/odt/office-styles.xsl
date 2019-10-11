@@ -49,11 +49,8 @@
         <style:style style:name="NameOfVariable" style:family="text">
             <style:text-properties fo:color="#8B008B" fo:font-style="italic" fo:font-weight="bold"/>
         </style:style>
-        <style:style style:name="ConditionIntitulé" style:family="text">
+        <style:style style:name="BoldText" style:family="text">
             <style:text-properties fo:color="#000000" fo:font-weight="bold"/>
-        </style:style>
-        <style:style style:name="ConditionInstance" style:family="text">
-            <style:text-properties fo:color="#000000"/>
         </style:style>
             
         <!-- <style:style style:name="QuestionSelect" style:family="paragraph"
