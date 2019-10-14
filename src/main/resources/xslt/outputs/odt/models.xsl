@@ -543,8 +543,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="filter" select="enoodt:get-relevant($source-context)"/>
-		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>
-		
+		<xsl:variable name="idVariables" select="tokenize(enoodt:get-hideable-command-variables($source-context),'\s')"/>	
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>

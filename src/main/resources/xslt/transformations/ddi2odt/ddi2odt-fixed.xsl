@@ -4,6 +4,7 @@
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enoodt="http://xml.insee.fr/apps/eno/out/odt"
     xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
+    xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
     xmlns:d="ddi:datacollection:3_3"
     xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
@@ -211,17 +212,21 @@
     </xsl:template>
     
     <xsl:template match="xhtml:i" mode="enoodt:format-label">
+        <text:span text:style-name="italic">
             <xsl:apply-templates select="node()" mode="enoodt:format-label"/>
-        
+        </text:span>
     </xsl:template>
     
     <xsl:template match="xhtml:b" mode="enoodt:format-label">
+        <text:span text:style-name="bold">
             <xsl:apply-templates select="node()" mode="enoodt:format-label"/>
-        
+        </text:span>
     </xsl:template>
     
     <xsl:template match="xhtml:span[@style='text-decoration:underline']" mode="enoodt:format-label">
+        <u>
             <xsl:apply-templates select="node()" mode="enoodt:format-label"/>
+        </u>
     </xsl:template>
     
     <xsl:template match="xhtml:br" mode="enoodt:format-label">
@@ -233,7 +238,7 @@
         <xsl:variable name="relatedInstruction" select="enoddi:get-instruction-by-anchor-ref(.,@href)"/>
         <xsl:choose>
             <xsl:when test="$relatedInstruction/d:InstructionName/r:String = 'tooltip'">
-                <xsl:text>*</xsl:text>
+                <xsl:text xml:space="preserve"> (*)</xsl:text>
             </xsl:when>
             <xsl:when test="$relatedInstruction/d:InstructionName/r:String = 'footnote'">
                 <xsl:value-of select="enoddi:get-instruction-index($relatedInstruction,'footnote')"/>
