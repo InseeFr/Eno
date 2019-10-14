@@ -1102,6 +1102,9 @@
             <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
                 <xsl:value-of select="$variable"/>
             </xsl:when>
+            <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/r:ID= $variable">
+                <xsl:value-of select="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference) and descendant::r:ID= $variable]/l:VariableName/r:String"/>
+            </xsl:when>
             <!-- Loop -->
             <xsl:when test="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference/r:ID = $variable">
                 <xsl:value-of select="$root//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID= $variable]/l:VariableGroupName/r:String"/>
