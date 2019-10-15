@@ -68,7 +68,7 @@
       <style:style style:name="NameOfVariable" style:family="text">
          <style:text-properties fo:color="#8B008B" fo:font-style="italic" fo:font-weight="bold"/>
       </style:style>
-      <style:style style:name="BoldText" style:family="text">
+      <style:style style:name="ConditionTitle" style:family="text">
          <style:text-properties fo:color="#000000" fo:font-weight="bold"/>
       </style:style>
       <style:style style:name="Comment"
@@ -186,6 +186,21 @@
             <style:background-image/>
          </style:section-properties>
       </style:style>
+      <style:style style:name="bold" style:family="text">
+         <style:text-properties fo:font-weight="bold"
+                                style:font-weight-asian="bold"
+                                style:font-weight-complex="bold"/>
+      </style:style>
+      <style:style style:name="italic" style:family="text">
+         <style:text-properties fo:font-style="italic"
+                                style:font-style-asian="italic"
+                                style:font-style-complex="italic"/>
+      </style:style>
+      <style:style style:name="underline" style:family="text">
+         <style:text-properties style:text-underline-style="solid"
+                                style:text-underline-width="auto"
+                                style:text-underline-color="font-color"/>
+      </style:style>
    </office:automatic-styles>
    <office:body>
       <office:text>
@@ -209,11 +224,11 @@
                <text:p text:style-name="Format">
                   <text:span text:style-name="NameOfVariable">[READY] - </text:span>Booléen</text:p>
                <text:p text:style-name="Format">
-                  <text:span text:style-name="BoldText">Comportement conditionnel : </text:span>If you are not ready, please go to the end of the questionnaire</text:p>
+                  <text:span text:style-name="ConditionTitle">Comportement conditionnel : </text:span>If you are not ready, please go to the end of the questionnaire</text:p>
                <text:p text:style-name="Format">
-                  <text:span text:style-name="BoldText">Condition : </text:span>$READY != '1'</text:p>
+                  <text:span text:style-name="ConditionTitle">Condition : </text:span>$READY != '1'</text:p>
                <text:p text:style-name="Format">
-                  <text:span text:style-name="BoldText">Cible : </text:span>
+                  <text:span text:style-name="ConditionTitle">Cible : </text:span>
                   <text:span text:style-name="NameOfVariable">[MODULE6]</text:span>
                </text:p>
             </text:section>

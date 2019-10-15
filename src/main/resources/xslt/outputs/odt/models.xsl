@@ -562,14 +562,14 @@
 		
 		<xsl:if test="$label != ''">
 			<text:p text:style-name="Format">
-				<text:span text:style-name="BoldText">
+				<text:span text:style-name="ConditionTitle">
 					<xsl:value-of select="'Comportement conditionnel : '"/>
 				</text:span>
 				<xsl:copy-of select="$label"/>
 			</text:p>
 			
 			<text:p text:style-name="Format">
-				<text:span text:style-name="BoldText">
+				<text:span text:style-name="ConditionTitle">
 					<xsl:value-of select="'Condition : '"/>
 				</text:span>
 				<xsl:value-of select="enoodt:get-flowcontrol-condition($source-context)"/>
@@ -577,7 +577,7 @@
 			</text:p>
 			
 			<text:p text:style-name="Format">
-				<text:span text:style-name="BoldText">
+				<text:span text:style-name="ConditionTitle">
 				<xsl:value-of select="'Cible : '"/>
 				</text:span>
 				<text:span text:style-name="NameOfVariable">

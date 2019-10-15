@@ -224,9 +224,9 @@
     </xsl:template>
     
     <xsl:template match="xhtml:span[@style='text-decoration:underline']" mode="enoodt:format-label">
-        <u>
+        <text:span text:style-name="underline">
             <xsl:apply-templates select="node()" mode="enoodt:format-label"/>
-        </u>
+        </text:span>
     </xsl:template>
     
     <xsl:template match="xhtml:br" mode="enoodt:format-label">
