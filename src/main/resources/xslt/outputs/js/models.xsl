@@ -86,7 +86,7 @@
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
 			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
-			<conditionFilter><xsl:value-of select="enojs:get-global-filter($source-context)"/></conditionFilter>
+			<xsl:copy-of select="enojs:get-global-filter($source-context)"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
@@ -133,7 +133,7 @@
 		<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
 			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
-			<conditionFilter><xsl:value-of select="enojs:get-global-filter($source-context)"/></conditionFilter>
+			<xsl:copy-of select="enojs:get-global-filter($source-context)"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
@@ -162,7 +162,7 @@
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" positioning="HORIZONTAL" mandatory="{$mandatory}">
 			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
-			<conditionFilter><xsl:value-of select="enojs:get-global-filter($source-context)"/></conditionFilter>
+			<xsl:copy-of select="enojs:get-global-filter($source-context)"/>
 
 			<xsl:for-each select="enojs:get-header-lines($source-context)">
 				<cells type="header">
@@ -216,7 +216,7 @@
 			<label><xsl:value-of select="$label"/></label>
 		</cells>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The Cell driver gives the colspan and the rowspan to the Response, which creates the cell.</xd:p>
@@ -335,7 +335,7 @@
 					<xsl:with-param name="responseName" select="$responseName"/>
 					<xsl:with-param name="responseType" select="$responseType"/>
 				</xsl:call-template>
-				<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+				<xsl:copy-of select="enojs:get-global-filter($source-context)"/>
 			</components>
 		</xsl:if>
 		<variables variableType="COLLECTED">
@@ -603,7 +603,7 @@
 			<xsl:otherwise>
 				<xsl:variable name="regexA" select="concat('number\(if\s+\(',$conditioning-variable-begin,$variables[1],$conditioning-variable-end,'=''''\)\sthen\s+''0''\s+else\s+',$conditioning-variable-begin,$variables[1],$conditioning-variable-end,'\)')"/>
 				<xsl:variable name="regexB" select="concat($conditioning-variable-begin,$variables[1],$conditioning-variable-end)"/>
-				<xsl:variable name="expressionToReplace" select="concat('\$',enojs:get-variable-business-name($source-context,$variables[1]))"/>
+				<xsl:variable name="expressionToReplace" select="enojs:get-variable-business-name($source-context,$variables[1])"/>
 				<xsl:variable name="newFormula" select="replace(replace($formula,
 					                                                    $regexA,
 					                                                    $expressionToReplace),
