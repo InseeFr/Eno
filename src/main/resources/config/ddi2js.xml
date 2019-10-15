@@ -10,4 +10,6 @@
             <After>¤</After>
         </ddi>
     </TextConditioningVariable>
+    <!-- sdmx / apache / identity -->
+    <Filter>sdmx</Filter>
 </Properties>
