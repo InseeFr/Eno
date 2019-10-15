@@ -190,11 +190,21 @@
                                     <!-- calculated variable -->
                                     <xsl:value-of select="$dereferenced-questionnaire//*[local-name()='GenerationInstruction'][*[local-name()='ID']/text()=current()/l32:VariableRepresentation/r32:ProcessingInstructionReference/r32:ID/text()]/local-name()"/>
                                 </xsl:when>
+                                <!-- external variable -->
                                 <xsl:when test="$dereferenced-questionnaire/*">
-                                    <!-- external variable -->
-                                    <xsl:value-of select="contains($dereferenced-questionnaire/text(),concat('¤',$variable-id,'¤'))
-                                                      or contains($dereferenced-questionnaire/text(),concat('ø',$variable-id,'ø'))
-                                                      or $dereferenced-questionnaire//*[local-name()='ID'] = $variable-id"/>
+                                    <xsl:variable name="variable-name" select="l32:VariableName/r32:String/text()"/>
+                                    <xsl:choose>
+                                        <xsl:when test="$dereferenced-questionnaire//text()[contains(.,concat('¤',$variable-name,'¤'))]">
+                                            <xsl:value-of select="'¤'"/>        
+                                        </xsl:when>
+                                        <xsl:when test="$dereferenced-questionnaire//text()[contains(.,concat('ø',$variable-name,'ø'))]">
+                                            <xsl:value-of select="'ø'"/>
+                                        </xsl:when>
+                                        <xsl:when test="$dereferenced-questionnaire//*[local-name()='SourceParameterReference' and *[local-name()='TypeOfObject' and text()='InParameter']]/*[local-name()='ID'] = $variable-name">
+                                            <xsl:value-of select="$variable-name"/>
+                                        </xsl:when>
+                                        <xsl:otherwise/>
+                                    </xsl:choose>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <!-- no dereferenced questionnaire : all variables are taken -->

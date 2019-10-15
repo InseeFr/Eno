@@ -511,7 +511,7 @@
                 <xsl:if test="$maximum != ''">
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
                     <xsl:choose>
-                        <xsl:when test="contains($maximum,'current-date()')">
+                        <xsl:when test="contains($maximum,'-date()')">
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Today"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -533,12 +533,12 @@
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
                     <xsl:choose>
-                        <xsl:when test="contains($maximum,'current-date()')">
+                        <xsl:when test="contains($maximum,'-date()')">
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Today"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($maximum,6,2))]"/>
                             <xsl:value-of select="concat(' ',substring($maximum,1,4))"/>
                         </xsl:otherwise>
@@ -554,12 +554,13 @@
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
                     <xsl:choose>
-                        <xsl:when test="contains($maximum,'current-date()')">
+                        <xsl:when test="contains($maximum,'-date()')">
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Today"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ',$maximum)"/>
+                            <xsl:value-of select="$maximum"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:if>
@@ -688,4 +689,29 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+
+    <xd:doc>
+        <xd:desc>no use of input enoddi:is-required : always false for Web collect</xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:is-required">
+        <xsl:param name="context" as="item()"/>
+        <xsl:sequence select="false()"/>
+    </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>ddi error message keeps warning for Web collect</xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:get-message-type">
+        <xsl:param name="context" as="item()"/>
+        <xsl:variable name="ddi-message" select="enoddi:get-message-type($context)"/>
+        
+        <xsl:choose>
+            <xsl:when test="$ddi-message = 'error'">
+                <xsl:value-of select="'warning'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$ddi-message"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 </xsl:stylesheet>

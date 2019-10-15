@@ -33,7 +33,6 @@
     <xsl:param name="fast-and-dangerous-mode" select="false()"/><!--set to false() if you don't know-->
     <xsl:param name="build-messages" select="true()"/><!--set to true() if you doubt of the result and false() if you are sure it will succeed -->
     <xsl:param name="build-DDI" select="true()"/><!--set to true() if you don't know-->
-    <xsl:strip-space elements="*"/>
 
     <xd:doc scope="stylesheet">
         <xd:desc>
