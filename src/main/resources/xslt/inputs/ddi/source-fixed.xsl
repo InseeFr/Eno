@@ -556,6 +556,18 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+      
+    <xsl:template match="*" mode="enoddi:get-generation-instruction">
+        <xsl:param name="variable" tunnel="yes"/>
+        <xsl:variable
+            name="is-calculated-variable"
+            as="xs:boolean"
+            select="$root//l:Variable[r:ID=$variable or l:VariableName/r:String=$variable]/l:VariableRepresentation/r:ProcessingInstructionReference/r:TypeOfObject='GenerationInstruction'"/>
+        <xsl:if test="$is-calculated-variable">
+            <xsl:variable name="idGenerationInstruction" select="$root//l:Variable[r:ID=$variable or l:VariableName/r:String=$variable]/l:VariableRepresentation/r:ProcessingInstructionReference/r:ID"/>
+            <xsl:copy-of select="$root//d:GenerationInstruction[r:ID=$idGenerationInstruction]"/>
+        </xsl:if>
+    </xsl:template>
 
     <xd:doc>
         <xd:desc>
