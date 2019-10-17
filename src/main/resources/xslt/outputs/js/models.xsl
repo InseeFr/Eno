@@ -8,25 +8,25 @@
 	xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
 	xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
 	exclude-result-prefixes="xs fn xd eno enojs" version="2.0">
-
+	
 	<xsl:param name="properties-file"/>
 	<xsl:param name="parameters-file"/>
 	<xsl:param name="parameters-node" as="node()" required="no">
 		<empty/>
 	</xsl:param>
 	<xsl:param name="labels-folder"/>
-
+	
 	<xsl:variable name="properties" select="doc($properties-file)"/>
-
+	
 	<xd:doc scope="stylesheet">
 		<xd:desc>
 			<xd:p>An xslt stylesheet who transforms an input into js through generic driver templates.</xd:p>
 			<xd:p>The real input is mapped with the drivers.</xd:p>
 		</xd:desc>
 	</xd:doc>
-
+	
 	<xsl:variable name="varName" select="parent"/>
-
+	
 	<xsl:template match="ResponseElement" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="finding"/>
@@ -44,7 +44,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on Form driver.</xd:p>
@@ -65,7 +65,7 @@
 			</xsl:apply-templates>
 		</Questionnaire>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on Module and SubModule drivers.</xd:p>
@@ -479,7 +479,53 @@
 			</xsl:apply-templates>
 		</variables>
 	</xsl:template>
-
+	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Match on the ConsistencyCheck driver.</xd:p>
+			<xd:p>It writes the formula of the check.</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template match="ConsistencyCheck" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:variable name="nameOfControl" select="enojs:get-check-name($source-context,$languages[1])"/>
+		<xsl:variable name="control" select="enojs:get-constraint($source-context)"/>
+		<xsl:variable name="instructionFormat" select="enojs:get-css-class($source-context)"/>
+		<xsl:variable name="instructionLabel">
+			<xsl:call-template name="enojs:replaceVariablesInLabel">
+				<xsl:with-param name="source-context" select="$source-context"/>
+				<xsl:with-param name="formula" select="enojs:get-vtl-label($source-context, $languages[1])"/>
+			</xsl:call-template>	
+		</xsl:variable>
+		<xsl:variable name="alertLevel" select="enojs:get-alert-level($source-context)"/>
+		
+		<control>
+			<xsl:if test="$alertLevel != ''">
+				<xsl:attribute name="level" select="$alertLevel"/>
+			</xsl:if>
+			<xsl:if test="$control!=''">
+				<title><xsl:value-of select="concat(upper-case($alertLevel),' control : ',$nameOfControl)"/></title>
+				<value>
+					<xsl:call-template name="enojs:replaceVariablesInLabel">
+						<xsl:with-param name="source-context" select="$source-context"/>
+						<xsl:with-param name="formula" select="$control"/>
+					</xsl:call-template>
+				</value>
+			</xsl:if>
+			
+			<xsl:if test="$instructionLabel!=''">
+				<instruction><xsl:value-of select="$instructionLabel"/>	</instruction>
+			</xsl:if>		
+			
+			<!-- Go to the Calculated Variable -->
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
+		</control>
+	</xsl:template>
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Function named: enojs:printQuestionTitleWithInstruction.</xd:p>
@@ -498,7 +544,7 @@
 			<xsl:with-param name="positionDeclaration" select="'AFTER_QUESTION_TEXT'" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:function>
-
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Named template: enojs:addResponseToComponents.</xd:p>
@@ -518,40 +564,5 @@
 			</xsl:for-each>
 		</response>
 	</xsl:template>
-
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Recursive named template: enojs:replaceVariablesInFormula.</xd:p>
-			<xd:p>It replaces variables in a all formula (filter, control, personalized text, calculated variable).</xd:p>
-			<xd:p>"number(if (¤idVariable¤='') then '0' else ¤idVariable¤)" -> "variableName"</xd:p>
-			<xd:p>"¤idVariable¤" -> "variableName"</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:template name="enojs:replaceVariablesInFormula">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="formula"/>
-		<xsl:param name="variables" as="xs:string*"/>
-
-		<xsl:choose>
-			<xsl:when test="count($variables)=0">
-				<xsl:value-of select="$formula"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:variable name="regexA" select="concat('number\(if\s+\(',$conditioning-variable-begin,$variables[1],$conditioning-variable-end,'=''''\)\sthen\s+''0''\s+else\s+',$conditioning-variable-begin,$variables[1],$conditioning-variable-end,'\)')"/>
-				<xsl:variable name="regexB" select="concat($conditioning-variable-begin,$variables[1],$conditioning-variable-end)"/>
-				<xsl:variable name="expressionToReplace" select="enojs:get-variable-business-name($source-context,$variables[1])"/>
-				<xsl:variable name="newFormula" select="replace(replace($formula,
-					                                                    $regexA,
-					                                                    $expressionToReplace),
-					                                            $regexB,
-					                                            $expressionToReplace)"/>
-
-				<xsl:call-template name="enojs:replaceVariablesInFormula">
-					<xsl:with-param name="formula" select="$newFormula"/>
-					<xsl:with-param name="variables" select="$variables[position() &gt; 1]"/>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-
+	
 </xsl:stylesheet>
