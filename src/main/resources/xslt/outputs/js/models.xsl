@@ -74,7 +74,7 @@
 	<xsl:template match="Module | SubModule" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-
+		
 		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
 		<xsl:variable name="componentType-Sequence">
 			<xsl:choose>
@@ -82,7 +82,7 @@
 				<xsl:when test="self::SubModule"><xsl:value-of select="'Subsequence'"/></xsl:when>
 			</xsl:choose>
 		</xsl:variable>
-
+		
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
 			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
@@ -92,7 +92,7 @@
 			</xsl:apply-templates>
 		</components>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>filters do not create a component because their condition is borne by each of their descendants</xd:desc>
 	</xd:doc>
@@ -102,34 +102,34 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>SingleResponseQuestion driver does not create a component : it is created by its response</xd:desc>
 	</xd:doc>
 	<xsl:template match="SingleResponseQuestion | MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-
+		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 			<xsl:with-param name="idQuestion" select="enojs:get-name($source-context)" tunnel="yes"/>
 			<xsl:with-param name="questionName" select="lower-case(enojs:get-question-name($source-context,$languages[1]))" tunnel="yes"/>
-			<xsl:with-param name="labelQuestion" select="enojs:get-label($source-context, $languages[1])" tunnel="yes"/>
+			<xsl:with-param name="labelQuestion" select="enojs:get-vtl-label($source-context, $languages[1])" tunnel="yes"/>
 			<xsl:with-param name="typeOfQuestion" select="self::*/name()" tunnel="yes"/>
 			<xsl:with-param name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
 			<xsl:with-param name="filterCondition" select="enojs:get-global-filter($source-context)" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>MultipleChoiceQuestion driver creates a CheckboxGroup component</xd:desc>
 	</xd:doc>
 	<xsl:template match="MultipleChoiceQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-
+		
 		<xsl:variable name="idQuestion" select="enojs:get-name($source-context)"/>
-
+		
 		<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
 			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
@@ -145,22 +145,22 @@
 			</xsl:apply-templates>
 		</components>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>Table / TableLoop drivers create a Table component</xd:desc>
 	</xd:doc>
 	<xsl:template match="Table | TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-
+		
 		<xsl:variable name="idQuestion" select="enojs:get-name($source-context)"/>
 		<xsl:variable name="componentType" select="'Table'"/>
 		<xsl:variable name="mandatory" select="enojs:is-required($source-context)" as="xs:boolean"/>
 		<xsl:variable name="nbMinimumLines" select="enojs:get-minimum-lines($source-context)"/>
 		<xsl:variable name="nbMaximumLines" select="enojs:get-maximum-lines($source-context)"/>
-
+		
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" positioning="HORIZONTAL" mandatory="{$mandatory}">
-			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
+			<label><xsl:value-of select="enojs:get-vtl-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
 			<conditionFilter><xsl:value-of select="enojs:get-global-filter($source-context)"/></conditionFilter>
 			
@@ -172,7 +172,7 @@
 					</xsl:apply-templates>
 				</cells>
 			</xsl:for-each>
-
+			
 			<xsl:for-each select="enojs:get-body-lines($source-context)">
 				<cells type="line">
 					<xsl:apply-templates select="enojs:get-body-line($source-context,position())" mode="source">
@@ -182,13 +182,13 @@
 					</xsl:apply-templates>
 				</cells>
 			</xsl:for-each>
-
+			
 			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
 				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
 			</xsl:if>
 		</components>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>TextCell driver displays the header cells, for columns and lines.</xd:p>
@@ -198,12 +198,13 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idColumn" tunnel="yes"/>
-
+		<xsl:param name="ancestorTable" tunnel="yes"/>
+		
 		<xsl:variable name="col-span" select="number(enojs:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enojs:get-rowspan($source-context))"/>
 		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
-		<xsl:variable name="label" select="enojs:get-label($source-context,$languages)"/>
-
+		<xsl:variable name="label" select="enojs:get-vtl-label($source-context,$languages[1])"/>
+		
 		<cells>
 			<xsl:if test="$ancestorTable='headerLine'">
 				<xsl:attribute name="headerCell" select="true()"/>
@@ -224,14 +225,14 @@
 	</xd:doc>
 	<xsl:template match="Cell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-
+		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 			<xsl:with-param name="col-span" select="number(enojs:get-colspan($source-context))" tunnel="yes"/>
 			<xsl:with-param name="row-span" select="number(enojs:get-rowspan($source-context))" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The EmptyCell driver creates an empty cell.</xd:p>
@@ -242,10 +243,10 @@
 		<xsl:param name="ancestorTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idColumn" tunnel="yes"/>
-
+		
 		<xsl:variable name="col-span" select="number(enojs:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enojs:get-rowspan($source-context))"/>
-
+		
 		<xsl:choose>
 			<xsl:when test="$ancestorTable='headerLine'">
 				<cells headerCell="true">
@@ -262,7 +263,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The Response drivers in SingleResponseQuestion and MultipleQuestion create a component, which type depends on the Response driver.</xd:p>
@@ -441,21 +442,21 @@
 				<xsl:otherwise><xsl:value-of select="'COMMENT'"/></xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
-		<xsl:variable name="instructionLabel" select="enojs:get-label($source-context, $languages[1])"/>
+		<xsl:variable name="instructionLabel" select="enojs:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="instructionFormatMaj" select="concat(upper-case(substring($instructionFormat,1,1)),
 			substring($instructionFormat,2))" as="xs:string"/>
-
+		
 		<xsl:if test="$positionDeclaration!=''">
 			<declarations declarationType="{$instructionFormat}" id="{enojs:get-name($source-context)}" position="{$positionDeclaration}">
 				<label><xsl:value-of select="$instructionLabel"/></label>
 			</declarations>
 		</xsl:if>
-
+		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-
+	
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The CalculatedVariable driver displays the formula of the calculated variable on the elements variables.</xd:p>
@@ -463,23 +464,16 @@
 	</xd:doc>
 	<xsl:template match="CalculatedVariable" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>
-
-		<xsl:variable name="variableCalculation" select="enojs:get-variable-calculation($source-context)"/>
-
+		<xsl:param name="languages" tunnel="yes"/>		
 		<xsl:variable name="nameOutVariable" select="enojs:get-business-name($source-context)"/>
-		<xsl:variable name="idVariables" select="tokenize(enojs:get-variable-calculation-variables($source-context),'\s')"/>
+		
 		<variables variableType="CALCULATED">
 			<name>
 				<xsl:value-of select="$nameOutVariable"/>
 			</name>
 			<value>
-				<xsl:call-template name="enojs:replaceVariablesInFormula">
-					<xsl:with-param name="formula" select="$variableCalculation"/>
-					<xsl:with-param name="variables" select="$idVariables"/>
-				</xsl:call-template>
-			</value>
-
+				<xsl:value-of select="enojs:get-complexe-formula($source-context,$nameOutVariable)"/>
+			</value>			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
