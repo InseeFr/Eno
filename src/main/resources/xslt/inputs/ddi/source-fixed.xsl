@@ -1268,6 +1268,23 @@
         mode="enoddi:get-next-filter-description">
         <xsl:sequence select="d:ExternalAid[r:OtherMaterial/r:Description/r:Content/xhtml:div/@class='FlowControl']"/>
     </xsl:template>
+    
+    <xsl:template match="d:ExternalAid" mode="enoddi:get-flowcontrol-target">
+        <xsl:variable name="idTarget" select="r:OtherMaterial/r:Description/r:Content/xhtml:div[@class='FlowControl']/xhtml:div[@class='IfTrue']/text()"/>
+        <xsl:variable name="target" select="$root//*[r:ID=$idTarget]"/>
+        <xsl:choose>
+            <xsl:when test="$target/d:ConstructName!=''">
+                <xsl:copy-of select="$target/d:ConstructName"/>
+            </xsl:when>
+            <xsl:when test="$target/d:QuestionItemName/r:String!=''">
+                <xsl:copy-of select="$target/d:QuestionItemName/r:String"/>
+            </xsl:when>
+            <xsl:when test="$target/d:QuestionGridName/r:String!=''">
+                <xsl:copy-of select="$target/d:QuestionGridName/r:String"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Get Filter linked to a question</xd:p>
@@ -1277,7 +1294,6 @@
         mode="enoddi:get-previous-filter-description">
         <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference[not(preceding-sibling::d:ControlConstructReference)]/ancestor::d:IfThenElse[not(d:ExternalAid)]/r:Description"/>
     </xsl:template>
-
     <xd:doc>
         <xd:desc>
             <xd:p>The label of a Code in a CodeDomain with @displayCode = 'true' is the concatenation of its r:Value and its descendant r:Label.</xd:p>
