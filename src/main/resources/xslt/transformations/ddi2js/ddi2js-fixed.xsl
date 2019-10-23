@@ -218,7 +218,7 @@
                         <xsl:for-each select="$formulaRelevant">
                             <xsl:value-of select="concat('(',.,')')"/>
                             <xsl:if test="position()!=last()">
-                                <xsl:value-of select="$and-logic"/><!-- "||" = "or"-->
+                                <xsl:value-of select="$and-logic"/>
                             </xsl:if>
                         </xsl:for-each>
                     </xsl:variable>
@@ -242,21 +242,17 @@
                             <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
                         </xsl:call-template>
                     </xsl:variable>
-                    <!-- replace "substring -> "substr", " and " -> "&&", " or " -> "||", "=" -> "==" --><!--
-                        <xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
-                        <xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>-->
                     <xsl:variable name="returned-relevant-condition" select="$relevant-condition"/>
-                    <xsl:variable name="returned-readonly-condition" select="$readonly-condition"/>
+                    <xsl:variable name="returned-readonly-condition" select="$readonly-condition"/>                    
                     
-                    <!--<xsl:value-of select="concat('(',$variablesName,') =>', $readonly-condition,'toto',$relevant-condition,' ? ''normal'' : ''''')"/>-->
-                    <!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
+                    <!-- three cases : caché (hidden) , gris (readOnly), affiché (normal) -->
                     <!--	
-                        si relevant
-                        alors 
-                        si readonly,
-                        alors readonly
-                        sinon normal
-                        sinon hidden-->
+                        if relevant
+                        then 
+                        if readonly,
+                        then readonly
+                        else normal
+                        else hidden-->
                     <xsl:value-of select="concat(
                         $if,'(',$returned-relevant-condition,')',
                         $then,
@@ -283,11 +279,8 @@
                             <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
                         </xsl:call-template>
                     </xsl:variable>
-                    <xsl:variable name="returned-relevant-condition" select="$relevant-condition"/>
-                    
-                    <xsl:value-of select="concat($if,'(', $returned-relevant-condition,')',$then,$normal,$else,$hidden,$ifEnd)"/>
-                    
-                    <!-- pas de gris, on affiche (normal) ou pas (hidden) -->
+                    <xsl:variable name="returned-relevant-condition" select="$relevant-condition"/>                    
+                    <xsl:value-of select="concat($if,'(', $returned-relevant-condition,')',$then,$normal,$else,$hidden,$ifEnd)"/>                    
                 </xsl:when>
                 <xsl:when test="$formulaReadOnly!=''">
                     <xsl:variable name="initial-readonly-ancestors">
@@ -306,7 +299,6 @@
                     </xsl:variable>
                     <xsl:variable name="returned-readonly-condition" select="$readonly-condition"/>
                     <xsl:value-of select="concat($if,'(',$returned-readonly-condition,')',$then,$readonly,$else,$normal,$ifEnd)"/>
-                    <!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
                 </xsl:when>
                 
                 <xsl:otherwise>
@@ -316,17 +308,6 @@
         </conditionFilter>
     </xsl:function>
     
-    <!--<xsl:function name="enojs:simple-parsing-to-sdmx-vtl">
-        <xsl:param name="label"/>
-        <xsl:variable name="and-logic" select="' and '"/>
-        <xsl:variable name="or-logic" select="' or '"/>
-        <xsl:variable name="not-logic" select="' not '"/>            
-        <xsl:variable name="not-equal" select="' &lt;&gt; '"/>
-        <xsl:value-of select="replace(replace($label,
-            'substring','substr'),
-            '!=',$not-equal)"/>
-        <!-\- TODO : concat(var1, var2) => var1 || var2 -\->
-    </xsl:function>-->
     
     <xsl:function name="enojs:get-complexe-formula">
         <xsl:param name="context" as="item()"/>
