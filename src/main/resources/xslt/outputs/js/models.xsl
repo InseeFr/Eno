@@ -39,7 +39,7 @@
 			<xsl:otherwise>
 				<variables variableType="EXTERNAL">
 					<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
-					<label><xsl:value-of select="enojs:get-label($source-context,$languages[1])"/></label>
+					<value xsi:nil="true"/>
 				</variables>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -55,7 +55,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="id" select="replace(enojs:get-name($source-context),'Sequence-','')"/>
-		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
+		<xsl:variable name="label" select="enojs:get-vtl-label($source-context, $languages[1])"/>
 		<Questionnaire id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -84,7 +84,7 @@
 		</xsl:variable>
 		
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
-			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
+			<label><xsl:value-of select="enojs:get-vtl-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
 			<conditionFilter><xsl:value-of select="enojs:get-global-filter($source-context)"/></conditionFilter>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -131,14 +131,14 @@
 		<xsl:variable name="idQuestion" select="enojs:get-name($source-context)"/>
 		
 		<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
-			<label><xsl:value-of select="enojs:get-label($source-context, $languages[1])"/></label>
+			<label><xsl:value-of select="enojs:get-vtl-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enojs:getInstructionForQuestion($source-context,.)"/>
 			<conditionFilter><xsl:value-of select="enojs:get-global-filter($source-context)"/></conditionFilter>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
 				<xsl:with-param name="questionName" select="lower-case(enojs:get-question-name($source-context,$languages[1]))" tunnel="yes"/>
-				<xsl:with-param name="labelQuestion" select="enojs:get-label($source-context, $languages[1])" tunnel="yes"/>
+				<xsl:with-param name="labelQuestion" select="enojs:get-vtl-label($source-context, $languages[1])" tunnel="yes"/>
 				<xsl:with-param name="typeOfQuestion" select="self::*/name()" tunnel="yes"/>
 				<xsl:with-param name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
 				<xsl:with-param name="filterCondition" select="enojs:get-global-filter($source-context)" tunnel="yes"/>
@@ -471,9 +471,9 @@
 			<name>
 				<xsl:value-of select="$nameOutVariable"/>
 			</name>
-			<value>
+			<expression>
 				<xsl:value-of select="enojs:get-complexe-formula($source-context,$nameOutVariable)"/>
-			</value>			
+			</expression>			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>

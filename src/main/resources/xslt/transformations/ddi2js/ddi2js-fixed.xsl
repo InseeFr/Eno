@@ -156,12 +156,6 @@
             <xsl:when test="$filter-type='sdmx'">
                 <xsl:copy-of select="enojs:get-vtl-sdmx-filter($context,$formulaReadOnly,$formulaRelevant,$variablesId)"/>
             </xsl:when>
-            <xsl:when test="$filter-type='apache'">
-                <xsl:copy-of select="enojs:get-vtl-apache-filter($context,$formulaReadOnly,$formulaRelevant,$variablesId)"/>
-            </xsl:when>
-            <xsl:when test="$filter-type='identity'">
-                <xsl:copy-of select="enojs:get-vtl-apache-filter($context,$formulaReadOnly,$formulaRelevant,$variablesId)"/>
-            </xsl:when>
         </xsl:choose>
         
     </xsl:function>
@@ -174,8 +168,26 @@
         </xsl:variable>
         <xsl:call-template name="enojs:replaceVariablesInLabel">
             <xsl:with-param name="source-context" select="$context"/>
-            <xsl:with-param name="formula" select="$label"/>
+            <xsl:with-param name="formula" select="enojs:surround-label-with-quote($label)"/>
         </xsl:call-template>
+    </xsl:function>
+    
+    <xsl:function name="enojs:surround-label-with-quote">
+        <xsl:param name="label"/>
+        <xsl:variable name="labelSimple" select="concat('&quot;',$label,'&quot;')"/>
+        <xsl:variable name="regex-var" select="'[a-zA-Z0-9\-_]*'"/>
+        <xsl:variable name="regex-var-surrounded" select="concat($conditioning-variable-begin,$regex-var,$conditioning-variable-end)"/>
+        <xsl:variable name="final-label">
+            <xsl:analyze-string select="$labelSimple" regex="{$regex-var-surrounded}">
+                <xsl:matching-substring>
+                    <xsl:value-of select="concat('&quot; || ','cast(',.,',string)',' || &quot;')"/>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:value-of select="."/>							
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
+        <xsl:value-of select="$final-label"/>
     </xsl:function>
     
     <xsl:function name="enojs:get-vtl-sdmx-filter">
@@ -304,117 +316,7 @@
         </conditionFilter>
     </xsl:function>
     
-    <xsl:function name="enojs:get-vtl-apache-filter">
-        <xsl:param name="context" as="item()"/>
-        <xsl:param name="formulaReadOnly" as="xs:string*"/>
-        <xsl:param name="formulaRelevant" as="xs:string*"/>
-        <xsl:param name="variablesId" as="xs:string*"/>        
-        
-        <!--Expression VTL : #if(condition)je suis true#{else}je suis false#end-->
-        <!-- Caution for encodage : # -> &#x23;  { -> &#x7B; } -> &#x7D; -->
-        <xsl:variable name="if" select="'&#x23;if'"/>
-        <xsl:variable name="else" select="'&#x23;&#x7B;else&#x7D;'"/>
-        <xsl:variable name="ifEnd" select="'&#x23;end'"/>
-        
-        <xsl:element name="conditionFilter">
-            <xsl:choose>
-                <xsl:when test="$formulaRelevant!='' and $formulaReadOnly!=''">
-                    <xsl:variable name="initial-relevant-ancestors">
-                        <xsl:for-each select="$formulaRelevant">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="' &amp;&amp; '"/><!-- "||" = "or"-->
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="relevant-condition">
-                        <xsl:call-template name="enojs:replaceVariablesInLabel">
-                            <xsl:with-param name="source-context" select="$context"/>
-                            <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="initial-readonly-ancestors">
-                        <xsl:for-each select="$formulaReadOnly">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="' || '"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="readonly-condition">
-                        <xsl:call-template name="enojs:replaceVariablesInLabel">
-                            <xsl:with-param name="source-context" select="$context"/>
-                            <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <!-- replace "not -> "!", " and " -> "&&", " or " -> "||", "=" -> "==" -->
-                    <xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
-                    <xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s','&amp;&amp;'),'\sor\s',' || '),'\s=\s',' == ')"/>
-                    
-                    <!--<xsl:value-of select="concat('(',$variablesName,') =>', $readonly-condition,'toto',$relevant-condition,' ? ''normal'' : ''''')"/>-->
-                    <!-- les trois possibles : caché (hidden) , gris (readOnly), affiché (normal) -->
-                    <!--	si relevant
-                        alors 
-                        si readonly,
-                        alors readonly
-                        sinon normal
-                        sinon hidden-->
-                    <xsl:value-of select="concat(
-                        $if,'(',$returned-relevant-condition,')',
-                        '(',$if,'(',$returned-readonly-condition,')readonly',
-                        $else,'normal',$ifEnd,')',
-                        $else,'hidden',$ifEnd
-                        )"/>
-                </xsl:when>
-                <xsl:when test="$formulaRelevant!=''">
-                    <xsl:variable name="initial-relevant-ancestors">
-                        <xsl:for-each select="$formulaRelevant">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="' &amp;&amp; '"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="relevant-condition">
-                        <xsl:call-template name="enojs:replaceVariablesInLabel">
-                            <xsl:with-param name="source-context" select="$context"/>
-                            <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="returned-relevant-condition" select="replace(replace(replace(replace($relevant-condition,'not','!'),'\sand\s',' &amp;&amp; '),'\sor\s',' || '),'\s=\s',' == ')"/>
-                    
-                    <xsl:value-of select="concat($if,'(', $returned-relevant-condition,')normal',$else,'hidden',$ifEnd)"/>
-                    
-                    <!-- pas de gris, on affiche (normal) ou pas (hidden) -->
-                </xsl:when>
-                <xsl:when test="$formulaReadOnly!=''">
-                    <xsl:variable name="initial-readonly-ancestors">
-                        <xsl:for-each select="$formulaReadOnly">
-                            <xsl:value-of select="concat('(',.,')')"/>
-                            <xsl:if test="position()!=last()">
-                                <xsl:value-of select="' || '"/>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <xsl:variable name="readonly-condition">
-                        <xsl:call-template name="enojs:replaceVariablesInLabel">
-                            <xsl:with-param name="source-context" select="$context"/>
-                            <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="returned-readonly-condition" select="replace(replace(replace(replace($readonly-condition,'not','!'),'\sand\s',' &amp;&amp; '),'\sor\s',' || '),'\s=\s',' == ')"/>
-                    <xsl:value-of select="concat($if,'(',$returned-readonly-condition,')readonly',$else,'normal',$ifEnd)"/>
-                    <!-- on ne cache pas , gris (readOnly) ou affiché (normal)-->
-                </xsl:when>
-                
-                <xsl:otherwise>
-                    <xsl:value-of select="'normal'"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:element>
-    </xsl:function>
-    
-    <xsl:function name="enojs:simple-parsing-to-sdmx-vtl">
+    <!--<xsl:function name="enojs:simple-parsing-to-sdmx-vtl">
         <xsl:param name="label"/>
         <xsl:variable name="and-logic" select="' and '"/>
         <xsl:variable name="or-logic" select="' or '"/>
@@ -423,12 +325,13 @@
         <xsl:value-of select="replace(replace($label,
             'substring','substr'),
             '!=',$not-equal)"/>
-        <!-- TODO : concat(var1, var2) => var1 || var2 -->
-    </xsl:function>
+        <!-\- TODO : concat(var1, var2) => var1 || var2 -\->
+    </xsl:function>-->
     
     <xsl:function name="enojs:get-complexe-formula">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="id-variable"/>
+        
         <xsl:variable name="temp" select="enoddi:get-generation-instruction($context,$id-variable)"/>
         <xsl:choose>
             <xsl:when test="$temp!=''">
@@ -442,6 +345,33 @@
         </xsl:choose>
     </xsl:function>
     
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function: enojs:getTypeVariable.</xd:p>
+            <xd:p>It returns the type of variable, string, number, integer, boolean</xd:p>
+            <xd:p>variableName -> cast(variableName,type)</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enojs:get-cast-variable">
+        <xsl:param name="type"/>
+        <xsl:param name="variable"/>
+        <xsl:choose>
+            <xsl:when test="$type='text'">
+                <xsl:value-of select="concat('cast(',$variable,',','string)')"/>
+            </xsl:when>
+            <xsl:when test="$type='number'">
+                <xsl:value-of select="concat('cast(',$variable,',','number)')"/>
+            </xsl:when>
+            <xsl:when test="$type='boolean'">
+                <xsl:value-of select="concat('cast(',$variable,',','integer)')"/>
+            </xsl:when>
+            <xsl:when test="$type='date'"></xsl:when>
+            <xsl:when test="$type='duration'"></xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat('cast(',$variable,',','string)')"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
     <xd:doc>
         <xd:desc>
             <xd:p>Recursive named template: enojs:replaceVariablesInLabel.</xd:p>
@@ -467,9 +397,11 @@
                                 concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$conditioning-variable-begin),''),
                                 concat($conditioning-variable-end,'\)'),'')"/>	
                             <xsl:variable name="var" select="replace(replace($temp,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
-                            <xsl:value-of select="enojs:get-complexe-formula(
+                            <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($source-context,$var)"/>
+                            <xsl:variable name="value-var" select="enojs:get-complexe-formula(
                                 $source-context,
                                 enojs:get-variable-business-name($source-context,$var))"/>
+                            <xsl:value-of select="enojs:get-cast-variable($typeVariable,$value-var)"/>
                         </xsl:matching-substring>
                         <xsl:non-matching-substring>
                             <xsl:value-of select="."/>							
@@ -480,9 +412,11 @@
                     <xsl:analyze-string select="$temp-formula" regex="{$regex-var-surrounded}">
                         <xsl:matching-substring>
                             <xsl:variable name="var" select="replace(replace(.,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
-                            <xsl:value-of select="enojs:get-complexe-formula(
+                            <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($source-context,$var)"/>
+                            <xsl:variable name="value-var" select="enojs:get-complexe-formula(
                                 $source-context,
                                 enojs:get-variable-business-name($source-context,$var))"/>
+                            <xsl:value-of select="enojs:get-cast-variable($typeVariable,$value-var)"/>
                         </xsl:matching-substring>
                         <xsl:non-matching-substring>
                             <xsl:value-of select="."/>
@@ -495,7 +429,7 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="enojs:simple-parsing-to-sdmx-vtl($formula)"/>
+                <xsl:value-of select="$formula"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
