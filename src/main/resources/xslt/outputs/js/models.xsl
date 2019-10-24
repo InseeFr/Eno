@@ -493,12 +493,7 @@
 		<xsl:variable name="nameOfControl" select="enojs:get-check-name($source-context,$languages[1])"/>
 		<xsl:variable name="control" select="enojs:get-constraint($source-context)"/>
 		<xsl:variable name="instructionFormat" select="enojs:get-css-class($source-context)"/>
-		<xsl:variable name="instructionLabel">
-			<xsl:call-template name="enojs:replaceVariablesInLabel">
-				<xsl:with-param name="source-context" select="$source-context"/>
-				<xsl:with-param name="formula" select="enojs:get-vtl-label($source-context, $languages[1])"/>
-			</xsl:call-template>	
-		</xsl:variable>
+		<xsl:variable name="instructionLabel" select="enojs:get-vtl-label($source-context, $languages[1])"/>
 		<xsl:variable name="alertLevel" select="enojs:get-alert-level($source-context)"/>
 		
 		<control>
