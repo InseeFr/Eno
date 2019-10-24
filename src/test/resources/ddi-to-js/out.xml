@@ -359,7 +359,7 @@
                        position="AFTER_QUESTION_TEXT">
             <label>"Several possible answers"</label>
          </declarations>
-         <conditionFilter> if ((not( cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not( cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
          <responses id="j334akov-QOP-jbgd8qmn">
             <label>Santa's Little Helper</label>
             <response name="PET1" xsi:type="ResponseContainerBoolean">
@@ -2829,9 +2829,6 @@
    </variables>
    <variables variableType="CALCULATED">
       <name>SUM_EXPENSES</name>
-      <expression>cast(PERCENTAGE_EXPENSES11,number) + cast(PERCENTAGE_EXPENSES21,number) + cast(PERCENTAGE_EXPENSES31,number)+
-                cast(PERCENTAGE_EXPENSES41,number)+ cast(PERCENTAGE_EXPENSES51,number)+ cast(PERCENTAGE_EXPENSES61,number)+
-                cast(PERCENTAGE_EXPENSES71,number)+ cast(PERCENTAGE_EXPENSES81,number)+ cast(PERCENTAGE_EXPENSES91,number)+
-                cast(PERCENTAGE_EXPENSES101,number)</expression>
+      <expression>cast(PERCENTAGE_EXPENSES11,number) + cast(PERCENTAGE_EXPENSES21,number) + cast(PERCENTAGE_EXPENSES31,number)+ cast(PERCENTAGE_EXPENSES41,number)+ cast(PERCENTAGE_EXPENSES51,number)+ cast(PERCENTAGE_EXPENSES61,number)+ cast(PERCENTAGE_EXPENSES71,number)+ cast(PERCENTAGE_EXPENSES81,number)+ cast(PERCENTAGE_EXPENSES91,number)+ cast(PERCENTAGE_EXPENSES101,number)</expression>
    </variables>
 </Questionnaire>
