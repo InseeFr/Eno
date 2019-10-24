@@ -84,7 +84,6 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 			context = (c==',') ? "" : context+c;
 			switch (c) {
 			case '(':
-				context = context.replace("(", "");
 				if(context.contains(CONCAT_FUNCTION)) {
 					finalString = finalString.replaceFirst(CONCAT_FUNCTION, "");
 					listContext.add(CONCAT_FUNCTION);
@@ -95,7 +94,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 				}
 				else {
 					finalString+=c;
-					listContext.add(context);
+					listContext.add(context.replace("(", ""));
 				}
 				context="";
 				break;
