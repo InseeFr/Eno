@@ -33,7 +33,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 
 		String inputString = FileUtils.readFileToString(input, StandardCharsets.UTF_8);
 
-		FileUtils.writeStringToFile(outputCustomFOFile, fasterReplacement(inputString), StandardCharsets.UTF_8);
+		FileUtils.writeStringToFile(outputCustomFOFile, parseToVTLInNodes(inputString), StandardCharsets.UTF_8);
 		logger.info("End JS parsing xpath to vtl post-processing");
 
 		return outputCustomFOFile;
@@ -49,7 +49,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 	public static final String XML_NODE_VALUE = "value";
 	public static final String XML_NODE_EXPRESSION = "expression";
 	
-	public String fasterReplacement(String input) {
+	public String parseToVTLInNodes(String input) {
 		String possibleNodes = "("+XML_NODE_LABEL+"|"+XML_NODE_CONDITIONFILTER+"|"+XML_NODE_VALUE+"|"+XML_NODE_EXPRESSION+")";
 		Pattern pattern = Pattern.compile("(<"+possibleNodes+">)((.|\\s)*?)(</"+possibleNodes+">)");
 		
