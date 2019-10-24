@@ -154,7 +154,7 @@
         
         <xsl:choose>
             <xsl:when test="$filter-type='sdmx'">
-                <xsl:copy-of select="enojs:get-vtl-sdmx-filter($context,$formulaReadOnly,$formulaRelevant,$variablesId)"/>
+                <xsl:copy-of select="normalize-space(enojs:get-vtl-sdmx-filter($context,$formulaReadOnly,$formulaRelevant,$variablesId))"/>
             </xsl:when>
         </xsl:choose>
         

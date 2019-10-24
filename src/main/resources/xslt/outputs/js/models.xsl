@@ -472,7 +472,7 @@
 				<xsl:value-of select="$nameOutVariable"/>
 			</name>
 			<expression>
-				<xsl:value-of select="enojs:get-complexe-formula($source-context,$nameOutVariable)"/>
+				<xsl:value-of select="normalize-space(enojs:get-complexe-formula($source-context,$nameOutVariable))"/>
 			</expression>			
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -503,10 +503,13 @@
 			<xsl:if test="$control!=''">
 				<title><xsl:value-of select="concat(upper-case($alertLevel),' control : ',$nameOfControl)"/></title>
 				<value>
-					<xsl:call-template name="enojs:replaceVariablesInLabel">
-						<xsl:with-param name="source-context" select="$source-context"/>
-						<xsl:with-param name="formula" select="$control"/>
-					</xsl:call-template>
+					<xsl:variable name="final-control">
+						<xsl:call-template name="enojs:replaceVariablesInLabel">
+							<xsl:with-param name="source-context" select="$source-context"/>
+							<xsl:with-param name="formula" select="$control"/>
+						</xsl:call-template>
+					</xsl:variable>
+					<xsl:value-of select="normalize-space($final-control)"/>
 				</value>
 			</xsl:if>
 			
