@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <test>
-   <label>"Hello there, this is the first test !"</label>
+   <label>Simple test</label>
+   <label>"Hello there, this is 
+      
+      
+      the first test !"</label>
    <label>"Hello there, this is the \"second, only the second,\" test !"</label>
    <label>"Hello there, this is the \"second, only the second,\"" || " test !"</label>
    <label>"Hello there, this is the " || "third" || " test !"</label>
