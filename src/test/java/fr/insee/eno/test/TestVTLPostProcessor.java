@@ -47,7 +47,7 @@ public class TestVTLPostProcessor {
 			
 			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/test-vtl.xml");
 			Files.deleteIfExists(outPath);
-			Path outputFilePath = Files.createFile(outPath);			
+			Path outputFilePath = Files.createFile(outPath);
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outPostProcessing = jsvtlParserPostprocessor.process(in, null, "test");
 			FileUtils.copyFile(outPostProcessing,outputFilePath.toFile());
@@ -55,7 +55,6 @@ public class TestVTLPostProcessor {
 			File expectedFile = new File(String.format("%s/out.xml", basePath));
 			Diff diff = xmlDiff.getDiff(outputFilePath.toFile(),expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
-			
 			
 		} catch (IOException e) {
 			e.printStackTrace();
