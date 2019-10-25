@@ -88,11 +88,11 @@
                 <Level name="template"/>
                 <Level name="module">
                     <!-- toujours affiché -->
-                    <PreSeq/>
+                    <PreSeq></PreSeq>
                     <!-- true ; false -->
                     <NumParent>false</NumParent>
                     <!-- Affiché seulement si un numéro est affiché pour le parent -->
-                    <PostNumParentSeq/>
+                    <PostNumParentSeq></PostNumParentSeq>
                     <!-- 1 ; A ; a ; I ; i -->
                     <StyleNumSeq>I</StyleNumSeq>
                     <!-- Affiché seulement si un numéro est affiché pour la séquence -->
@@ -109,7 +109,7 @@
                     <!-- true ; false -->
                     <NumParent>false</NumParent>
                     <!-- Affiché seulement si un numéro est affiché pour le parent -->
-                    <PostNumParentQuest/>
+                    <PostNumParentQuest></PostNumParentQuest>
                     <!-- 1 ; A ; a ; I ; i -->
                     <StyleNumQuest>1</StyleNumQuest>
                     <!-- Affiché seulement si un numéro est affiché pour la question -->
@@ -120,7 +120,7 @@
                 <Level name="submodule">
                     <PreQuest>➡ </PreQuest>
                     <NumParent>false</NumParent>
-                    <PostNumParentQuest/>
+                    <PostNumParentQuest></PostNumParentQuest>
                     <StyleNumQuest>1</StyleNumQuest>
                     <PostNumQuest>. </PostNumQuest>
                 </Level>

@@ -10,7 +10,7 @@
             <xs:element name="Table" type="Table" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Capture" type="Capture" minOccurs="0" maxOccurs="1"/>
             <xs:element name="PageBreakBetween" type="PageBreakBetween" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="AccompanyingMail" type="AccompanyingMail" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="AccompanyingMail" type="AccompanyingMail" minOccurs="0" maxOccurs="1" default=""/>
         </xs:sequence>
     </xs:complexType>
     
@@ -95,6 +95,7 @@
     </xs:simpleType>
     <xs:simpleType name="AccompanyingMail">
         <xs:restriction base="xs:token">
+            <xs:enumeration value=""/>
             <xs:enumeration value="cnrCOL"/>
             <xs:enumeration value="entreeCOL"/>
             <xs:enumeration value="medCOL"/>

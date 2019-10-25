@@ -34,6 +34,7 @@ import fr.insee.eno.parameters.Parameters;
 import fr.insee.eno.parameters.Parameters.Languages;
 import fr.insee.eno.parameters.Pipeline;
 import fr.insee.eno.parameters.PostProcessing;
+import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.parameters.StudyUnit;
 import fr.insee.eno.parameters.Table;
 import fr.insee.eno.parameters.Table.Row;
@@ -42,35 +43,36 @@ import fr.insee.eno.test.XMLDiff;
 public class TestValorizatorParametersImpl {
 
 	private ValorizatorParametersImpl valorizatorParametersImpl;
-	private ENOParameters enoParameters;
-	
+	private ENOParameters complexeEnoParameters;
+	private ENOParameters simpleEnoParameters;
+
 	private XMLDiff xmlDiff = new XMLDiff();
-	
+
 	@Before
 	public void setValorizator() {
 		valorizatorParametersImpl = new ValorizatorParametersImpl();
 	}
-	
+
 	@Before
-	public void setEnoParameters() throws JAXBException, IOException {
-		enoParameters = new ENOParameters();
-		
+	public void setComplexeEnoParameters() {
+		complexeEnoParameters = new ENOParameters();
+
 		Pipeline pipeline = new Pipeline();
 		pipeline.setInFormat(InFormat.DDI);
 		pipeline.setOutFormat(OutFormat.ODT);
 		pipeline.getPostProcessing().add(PostProcessing.DDI_MARKDOWN_TO_XHTML);
-		
-		enoParameters.setPipeline(pipeline);
+
+		complexeEnoParameters.setPipeline(pipeline);
 		Parameters parameters = new Parameters();
 		parameters.setStudyUnit(StudyUnit.HOUSEHOLD);
-		
+
 		Languages languages = new Languages();
 		languages.getLanguage().add(Language.DE);
 		languages.getLanguage().add(Language.FR);
 		languages.getLanguage().add(Language.EN);
 		parameters.setLanguages(languages);
-		
-		
+
+
 		PDFParameters pdfParameters = new PDFParameters();
 		Table table = new Table();
 		Row row = new Row();
@@ -80,12 +82,12 @@ public class TestValorizatorParametersImpl {
 		format.setOrientation(90);		
 		pdfParameters.setTable(table);
 		pdfParameters.setFormat(format);				
-		
+
 		pdfParameters.setAccompanyingMail(AccompanyingMail.CNR_COL);
-		
+
 		GlobalNumerotation globalNumerotation = new GlobalNumerotation();
 		globalNumerotation.setBrowsing(BrowsingEnum.NO_NUMBER);
-		
+
 		NumerotationQuestion question = new NumerotationQuestion();
 		LevelQuestion levelQuestion2 = new LevelQuestion();
 		levelQuestion2.setPostNumQuest("%***%");
@@ -97,32 +99,48 @@ public class TestValorizatorParametersImpl {
 		levelQuestion.setPostNumParentQuest("yolyo");
 		question.getLevel().add(levelQuestion);
 		//question.getLevel().add(levelQuestion2);
-		
+
 		globalNumerotation.setQuestion(question);
 		parameters.setTitle(globalNumerotation);
 		parameters.setPdfParameters(pdfParameters);
-		
+
 		FRParameters frParameters = new FRParameters();
 		frParameters.setLengthOfLongTable(56);
 		frParameters.setNumericExample(true);
-		
+
 		parameters.setFrParameters(frParameters);
-		
-		enoParameters.setParameters(parameters);
-	}	
-	
+
+		complexeEnoParameters.setParameters(parameters);
+	}
+
+	@Before
+	public void setSimpleEnoParameters() {
+		simpleEnoParameters = new ENOParameters();
+		Pipeline pipeline = new Pipeline();
+		pipeline.setInFormat(InFormat.DDI);
+		pipeline.setOutFormat(OutFormat.FR);
+		pipeline.getPreProcessing().addAll(Arrays.asList(
+				PreProcessing.DDI_DEREFERENCING,
+				PreProcessing.DDI_CLEANING,
+				PreProcessing.DDI_TITLING));
+		pipeline.getPostProcessing().addAll(Arrays.asList(
+				PostProcessing.FR_BROWSING,
+				PostProcessing.FR_FIX_ADHERENCE));
+		simpleEnoParameters.setPipeline(pipeline);
+	}
+
 	@Test
-	public void testValorizationJavaParameters() {
+	public void testValorizationComplexeJavaParameters() {
 		try {			
-			
+
 			ENOParameters defaultParams = valorizatorParametersImpl.getDefaultParameters();
 			long debut = System.currentTimeMillis();
 			ENOParameters enoParametersFinal = valorizatorParametersImpl.mergeEnoParameters(
 					defaultParams, 
-					enoParameters);
+					complexeEnoParameters);
 			System.out.println("Merging time : "+(System.currentTimeMillis()-debut)+" ms");
 			ENOParameters enoParametersDefault = valorizatorParametersImpl.getDefaultParameters();
-			
+
 			// Pipeline
 			Assert.assertEquals(InFormat.DDI, enoParametersFinal.getPipeline().getInFormat());
 			Assert.assertEquals(OutFormat.ODT, enoParametersFinal.getPipeline().getOutFormat());
@@ -130,30 +148,30 @@ public class TestValorizatorParametersImpl {
 			Assert.assertEquals(enoParametersDefault.getPipeline().getPreProcessing(), enoParametersFinal.getPipeline().getPreProcessing());
 			// New value
 			Assert.assertEquals(Arrays.asList(PostProcessing.DDI_MARKDOWN_TO_XHTML), enoParametersFinal.getPipeline().getPostProcessing());
-			
+
 			// Browsing
 			Assert.assertEquals(BrowsingEnum.NO_NUMBER, enoParametersFinal.getParameters().getTitle().getBrowsing());
-			
+
 			//StudyUnit 
 			Assert.assertEquals(StudyUnit.HOUSEHOLD, enoParametersFinal.getParameters().getStudyUnit());
-			
+
 			//AccompanyingMail
 			Assert.assertEquals(AccompanyingMail.CNR_COL, enoParametersFinal.getParameters().getPdfParameters().getAccompanyingMail());
-			
+
 
 			debut = System.currentTimeMillis();
-			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/parameters-new.xml");
+			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/complexe-parameters-new.xml");
 			Files.deleteIfExists(outPath);
-			
+
 			JAXBContext context = JAXBContext.newInstance(ENOParameters.class);
 			Marshaller jaxbMarshaller =  context.createMarshaller();			
 			jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);	 
-			
+
 			jaxbMarshaller.marshal(enoParametersFinal, outPath.toFile());
 			System.out.println("Writing time : "+(System.currentTimeMillis()-debut)+" ms");
 			System.out.println("Write output to "+outPath);
-			
+
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -163,7 +181,65 @@ public class TestValorizatorParametersImpl {
 			Assert.fail();
 		}
 	}
-	
+
+	@Test
+	public void testValorizationSimpleJavaParameters() {
+		try {			
+
+			ENOParameters defaultParams = valorizatorParametersImpl.getDefaultParameters();
+			long debut = System.currentTimeMillis();
+			ENOParameters enoParametersFinal = valorizatorParametersImpl.mergeEnoParameters(
+					defaultParams, 
+					simpleEnoParameters);
+			System.out.println("Merging time : "+(System.currentTimeMillis()-debut)+" ms");
+			ENOParameters enoParametersDefault = valorizatorParametersImpl.getDefaultParameters();			
+
+
+
+			debut = System.currentTimeMillis();
+			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/simple-parameters-new.xml");
+			Files.deleteIfExists(outPath);
+
+			JAXBContext context = JAXBContext.newInstance(ENOParameters.class);
+			Marshaller jaxbMarshaller =  context.createMarshaller();			
+			jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);	 
+
+			jaxbMarshaller.marshal(enoParametersFinal, outPath.toFile());
+			System.out.println("Writing time : "+(System.currentTimeMillis()-debut)+" ms");
+			System.out.println("Write output to "+outPath);
+
+			// Pipeline
+			Assert.assertEquals(InFormat.DDI, enoParametersFinal.getPipeline().getInFormat());
+			Assert.assertEquals(OutFormat.FR, enoParametersFinal.getPipeline().getOutFormat());
+			//PreProcessing value
+			Assert.assertEquals(
+					Arrays.asList(PreProcessing.DDI_DEREFERENCING,PreProcessing.DDI_CLEANING,PreProcessing.DDI_TITLING),
+					enoParametersFinal.getPipeline().getPreProcessing());
+			// PostProcessing value
+			Assert.assertEquals(
+					Arrays.asList(PostProcessing.FR_BROWSING,PostProcessing.FR_FIX_ADHERENCE),
+					enoParametersFinal.getPipeline().getPostProcessing());
+
+
+			//Other params 
+			Assert.assertEquals(
+					enoParametersDefault.getParameters().getStudyUnit(), 
+					enoParametersFinal.getParameters().getStudyUnit());
+			Assert.assertEquals(
+					enoParametersDefault.getParameters().getFrParameters().getDecimalSeparator(), 
+					enoParametersFinal.getParameters().getFrParameters().getDecimalSeparator());
+
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			Assert.fail();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			Assert.fail();
+		}
+	}
+
 	@Test
 	public void testValorizationXmlParameters() {
 		try {
@@ -172,9 +248,9 @@ public class TestValorizatorParametersImpl {
 			File outputFile = valorizatorParametersImpl.mergeParameters(in);
 			File expectedFile = new File(String.format("%s/parameters-expected.xml", basePath));			
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
-			
+
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
-			
+
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -183,15 +259,15 @@ public class TestValorizatorParametersImpl {
 			System.out.println(e.getMessage());
 			Assert.fail();
 		}
-		
+
 	}
-	
-	
-	
+
+
+
 	public void testReadingDefaultParameters() {
 		try {
 			ENOParameters enoParameters = valorizatorParametersImpl.getDefaultParameters();			
-			
+
 			Assert.assertEquals(enoParameters.getPipeline().getInFormat(), InFormat.DDI);
 			Assert.assertEquals(enoParameters.getPipeline().getOutFormat(), OutFormat.FR);
 			Assert.assertEquals(enoParameters.getPipeline().getOutFormat(), OutFormat.FR);
@@ -209,7 +285,7 @@ public class TestValorizatorParametersImpl {
 			Assert.fail();
 		}
 	}
-	
+
 	private String getDiffMessage(Diff diff, String path) {
 		return String.format("Transformed output for %s should match expected XML document:\n %s", path,
 				diff.toString());

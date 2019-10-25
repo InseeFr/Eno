@@ -160,8 +160,9 @@
 							<packageName>fr.insee.eno.parameters</packageName>
 							<encoding>UTF-8</encoding>
 							<sources>
+								<source>src/main/resources/params/schemas/jaxb/bindings.xml</source>
 								<source>src/main/resources/params/schemas/ENOParameters.xsd</source>
-							</sources>
+							</sources>							
 						</configuration>
 					</execution>
 				</executions>
