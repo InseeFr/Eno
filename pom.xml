@@ -196,7 +196,7 @@
 							<outputDirectory>target/generated-sources/jaxb/fr/eno/parameters</outputDirectory>
 							<resources>
 								<resource>
-									<directory>src/main/resources/jaxb</directory>
+									<directory>src/main/resources/params/schemas/jaxb</directory>
 									<includes>
 										<include>bindings.xml</include>
 										<include>jaxb.properties</include>
