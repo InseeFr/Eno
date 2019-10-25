@@ -69,6 +69,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		return mergeEnoParameters(enoParametersDefault, enoParameters);
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T mergeEnoParameters(T enoParamsDefault, T newEnoParams) throws IllegalArgumentException, IllegalAccessException  {
 		Class<?> objectClass = enoParamsDefault.getClass();
 		LOGGER.debug("Class's name : "+objectClass.getSimpleName());
@@ -93,13 +94,13 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 						
 						// Special case for List (if empty we keep default value)
 						if(className.equals(List.class.getSimpleName())) {
-							if(newEnoParamsValue==null || ((List) newEnoParamsValue).isEmpty()) {
+							if(newEnoParamsValue==null || ((List<?>) newEnoParamsValue).isEmpty()) {
 								field.set(merged, enoParamsDefaultValue);
 								LOGGER.debug("List : No overloaded, default value");
 							}
 							else {
 								// Special case for LevelQuestion and LevelSequence
-								Class<?> levelClass = ((List) newEnoParamsValue).get(0).getClass();
+								Class<?> levelClass = ((List<?>) newEnoParamsValue).get(0).getClass();
 								if(levelClass.equals(LevelQuestion.class) || levelClass.equals(LevelSequence.class)) {									
 									field.set(merged, mergeListNumerotation(enoParamsDefaultValue, newEnoParamsValue));
 									LOGGER.debug("List : Special overloaded");	
@@ -216,6 +217,7 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public List<LevelAbstract> mergeListNumerotation(Object enoParamsDefaultValue, Object newEnoParamsValue) throws IllegalArgumentException, IllegalAccessException  {
 		List<LevelAbstract> mergedList = new ArrayList<>();
 		for(LevelAbstract levelDefault : (List<LevelAbstract>) enoParamsDefaultValue) {

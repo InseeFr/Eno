@@ -16,7 +16,6 @@ import com.google.inject.Inject;
 
 import fr.insee.eno.generation.Generator;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
 import fr.insee.eno.utils.FolderCleaner;
 
