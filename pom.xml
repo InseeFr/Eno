@@ -160,9 +160,11 @@
 							<packageName>fr.insee.eno.parameters</packageName>
 							<encoding>UTF-8</encoding>
 							<sources>
-								<source>src/main/resources/params/schemas/jaxb/bindings.xml</source>
 								<source>src/main/resources/params/schemas/ENOParameters.xsd</source>
-							</sources>							
+							</sources>
+							<xjbSources>
+								<xjbSource>src/main/resources/params/schemas/jaxb/bindings.xml</xjbSource>
+							</xjbSources>
 						</configuration>
 					</execution>
 				</executions>
@@ -193,7 +195,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>target/generated-sources/jaxb/fr/eno/parameters</outputDirectory>
+							<outputDirectory>target/generated-sources/jaxb/fr/insee/eno/parameters</outputDirectory>
 							<resources>
 								<resource>
 									<directory>src/main/resources/params/schemas/jaxb</directory>
