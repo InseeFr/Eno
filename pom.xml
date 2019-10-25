@@ -148,7 +148,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>2.1</version>
+				<version>2.3</version>
 				<executions>
 					<execution>
 						<id>xjc-schema</id>
@@ -160,7 +160,7 @@
 							<packageName>fr.insee.eno.parameters</packageName>
 							<encoding>UTF-8</encoding>							
 							<xjbSources>
-								<xjbSource>src/main/resources/params/schemas/jaxb/bindings.xml</xjbSource>
+								<xjbSource>src/main/resources/params/schemas/jaxb/bindings.xjb</xjbSource>
 							</xjbSources>
 							<sources>
 								<source>src/main/resources/params/schemas/ENOParameters.xsd</source>
