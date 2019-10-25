@@ -198,6 +198,7 @@
 								<resource>
 									<directory>src/main/resources/jaxb</directory>
 									<includes>
+										<include>bindings.xml</include>
 										<include>jaxb.properties</include>
 									</includes>
 								</resource>
