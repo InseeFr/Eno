@@ -28,6 +28,7 @@ import fr.insee.eno.parameters.Language;
 import fr.insee.eno.parameters.LevelEnum;
 import fr.insee.eno.parameters.LevelQuestion;
 import fr.insee.eno.parameters.NumerotationQuestion;
+import fr.insee.eno.parameters.Orientation;
 import fr.insee.eno.parameters.OutFormat;
 import fr.insee.eno.parameters.PDFParameters;
 import fr.insee.eno.parameters.Parameters;
@@ -79,7 +80,7 @@ public class TestValorizatorParametersImpl {
 		row.setDefaultSize(150);
 		table.setRow(row);
 		Format format = new Format();
-		format.setOrientation(90);		
+		format.setOrientation(Orientation.LANDSCAPE);		
 		pdfParameters.setTable(table);
 		pdfParameters.setFormat(format);				
 

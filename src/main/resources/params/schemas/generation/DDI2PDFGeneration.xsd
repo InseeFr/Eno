@@ -75,7 +75,7 @@
     
     
     <xs:simpleType name="Orientation">
-        <xs:restriction base="xs:int">
+        <xs:restriction base="xs:token">
             <xs:enumeration value="0"/>
             <xs:enumeration value="90"/>
         </xs:restriction>
