@@ -55,7 +55,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="id" select="replace(enojs:get-name($source-context),'Sequence-','')"/>
-		<xsl:variable name="label" select="enojs:get-vtl-label($source-context, $languages[1])"/>
+		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
 		<Questionnaire id="{$id}">
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -203,7 +203,7 @@
 		<xsl:variable name="col-span" select="number(enojs:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enojs:get-rowspan($source-context))"/>
 		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
-		<xsl:variable name="label" select="enojs:get-vtl-label($source-context,$languages[1])"/>
+		<xsl:variable name="label" select="enojs:get-label($source-context,$languages[1])"/>
 		
 		<cells>
 			<xsl:if test="$ancestorTable='headerLine'">
