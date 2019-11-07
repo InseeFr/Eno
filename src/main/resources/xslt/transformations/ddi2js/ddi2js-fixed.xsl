@@ -168,7 +168,7 @@
         </xsl:variable>
         <xsl:call-template name="enojs:replaceVariablesInLabel">
             <xsl:with-param name="source-context" select="$context"/>
-            <xsl:with-param name="formula" select="enojs:surround-label-with-quote($label)"/>
+            <xsl:with-param name="formula" select="enojs:surround-label-with-quote(enojs:replaceDoubleQuoteBySimpleQuote($label))"/>
         </xsl:call-template>
     </xsl:function>
     
@@ -188,6 +188,11 @@
             </xsl:analyze-string>
         </xsl:variable>
         <xsl:value-of select="$final-label"/>
+    </xsl:function>
+    
+    <xsl:function name="enojs:replaceDoubleQuoteBySimpleQuote">        
+        <xsl:param name="label"/>
+        <xsl:value-of select="replace($label,'&quot;','''')"/>
     </xsl:function>
     
     <xsl:function name="enojs:get-vtl-sdmx-filter">
