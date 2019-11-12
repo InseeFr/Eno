@@ -561,29 +561,37 @@
 		<xsl:variable name="nameOfVariable" select="enoodt:get-flowcontrol-target($source-context)"/>
 		
 		<xsl:if test="$label != ''">
-			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionTitle">
-					<xsl:value-of select="'Comportement conditionnel : '"/>
-				</text:span>
-				<xsl:copy-of select="$label"/>
-			</text:p>
-			
-			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionTitle">
-					<xsl:value-of select="'Condition : '"/>
-				</text:span>
-				<xsl:value-of select="enoodt:get-flowcontrol-condition($source-context)"/>
+			<text:section text:name="ConsistencyCheck-{enoodt:get-name($source-context)}">
+				<text:p text:style-name="Format">
+						<text:span text:style-name="GotoTitle">
+							<xsl:value-of select="'Redirection : '" />
+						</text:span>
+				</text:p>
+					<text:p text:style-name="Format">
+						<text:span text:style-name="GotoText">
+							<xsl:copy-of select="$label"/>
+						</text:span>
+				</text:p>
 				
-			</text:p>
-			
-			<text:p text:style-name="Format">
-				<text:span text:style-name="ConditionTitle">
-				<xsl:value-of select="'Cible : '"/>
-				</text:span>
-				<text:span text:style-name="NameOfVariable">
-					<xsl:value-of select="concat('[',$nameOfVariable,']')"/>
-				</text:span>
-			</text:p>
+				<text:p text:style-name="Format">
+					<text:span text:style-name="GotoTitle">
+						<xsl:value-of select="'Condition : '"/>
+					</text:span>
+					<text:span text:style-name="GotoText">
+						<xsl:value-of select="enoodt:get-flowcontrol-condition($source-context)"/>
+					</text:span>
+				</text:p>
+				
+				<text:p text:style-name="Format">
+					<text:span text:style-name="GotoTitle">
+						<xsl:value-of select="'Cible : '"/>
+					</text:span>
+					<text:span text:style-name="NameOfVariable">
+						<xsl:value-of select="concat('[',$nameOfVariable,']')"/>
+					</text:span>
+				</text:p>
+				
+			</text:section >
 		</xsl:if>
 		
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
