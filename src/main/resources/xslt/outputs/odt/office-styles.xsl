@@ -43,14 +43,17 @@
         </style:style>
         <style:style style:name="Format" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
-            <style:paragraph-properties fo:text-align="left" fo:margin-top="0.7cm"
-                fo:border="0.05pt solid #000000"/>
             <style:text-properties fo:font-size="10pt"/>
         </style:style>
         <style:style style:name="NameOfVariable" style:family="text">
             <style:text-properties fo:color="#0000ff" fo:font-style="italic" fo:font-weight="bold"/>
-        </style:style>   
-        
+        </style:style>
+        <style:style style:name="GotoBlock" style:family="paragraph"
+            style:class="text">
+            <style:text-properties fo:color="#0000ff" fo:font-weight="bold"/>
+            <style:paragraph-properties fo:text-align="left" fo:margin-top="0.7cm"
+                fo:border="0.05pt solid #000000"/>
+        </style:style>
         <style:style style:name="GotoTitle" style:family="text">
             <style:text-properties fo:color="#0000ff" fo:font-weight="bold"/>
         </style:style>
