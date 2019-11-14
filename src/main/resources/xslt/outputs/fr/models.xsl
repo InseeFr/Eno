@@ -1011,6 +1011,9 @@
                         <xsl:when test="upper-case($dateduration-format) = 'MM/AAAA' or $dateduration-format='YYYY-MM'">
                             <xsl:value-of select="concat($name,'-layout-Y = ''''')"/>
                         </xsl:when>
+                        <xsl:when test="$dateduration-format='HH:CH'">
+                            <xsl:value-of select="concat('../',$name,'-layout-H = ''''')"/>
+                        </xsl:when>
                         <xsl:otherwise>
                             <xsl:for-each select="$layout-list//format">
                                 <xsl:if test="position() != 1">
@@ -1045,7 +1048,8 @@
                         </xsl:when>
                         <xsl:when test="$dateduration-format='HH:CH'">
                             <xsl:value-of select="concat('../',$layout-list//format[1]/@variable,' ,')"/>
-                            <xsl:value-of select="concat(' if (string-length(../',$layout-list//format[2]/@variable,') = 1) then ''0'' else '''' ,')"/>
+                            <xsl:value-of select="''':'','"/>
+                            <xsl:value-of select="concat(' if (string-length(../',$layout-list//format[2]/@variable,') = 1) then ''0'' else (if (string-length(../',$layout-list//format[2]/@variable,') = 0) then ''00'' else '''') ,')"/>
                             <xsl:value-of select="concat('../',$layout-list//format[2]/@variable)"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -2376,6 +2380,7 @@
                 </xsl:attribute>
                 <xsl:if test="$current-driver = 'DurationDomain'">
                     <xsl:attribute name="xxf:maxlength" select="if (string-length(@minimum) &gt; string-length(@maximum)) then string-length(@minimum) else string-length(@maximum)"/>
+                    <xsl:attribute name="suffix" select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/*[name()=current()/@unit]/text()"/>
                 </xsl:if>
                 <xsl:if test="position() = 1 and ($label != '' or $question-label!= '')">
                     <xsl:variable name="conditioning-variables" as="xs:string*">
@@ -2452,19 +2457,6 @@
                     </xf:itemset>
                 </xsl:if>
             </xsl:element>
-            <xsl:if test="$current-driver = 'DurationDomain'">
-                <xsl:element name="xhtml:span">
-                    <xsl:attribute name="class" select="'double-duration-suffix'"/>
-                    <xsl:choose>
-                        <xsl:when test="$current-driver = 'DurationDomain'">
-                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/*[name()=current()/@unit]/text()"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/DateTime/*[name()=current()/@unit]/text()"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:element>
-            </xsl:if>
         </xsl:for-each>
         <xsl:if test="$current-driver = 'DurationDomain' or count($layout-list//format) &gt; 1">
             <xf:output id="{$name}-dateduration-constraint-control" name="{$name}-dateduration-constraint" bind="{$name}-dateduration-constraint-bind">
