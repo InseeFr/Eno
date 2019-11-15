@@ -4,10 +4,10 @@
     version="2.1">
     <jxb:bindings schemaLocation="../generation/DDI2PDFGeneration.xsd">
         <jxb:bindings node="//xs:simpleType[@name='AccompanyingMail']/xs:restriction/xs:enumeration[@value='']">
-            <jxb:typesafeEnumMember name="BLANK"/>
+            <jxb:typesafeEnumMember name="NONE"/>
         </jxb:bindings>
         <jxb:bindings node="//xs:simpleType[@name='Level']/xs:restriction/xs:enumeration[@value='']">
-            <jxb:typesafeEnumMember name="BLANK"/>
+            <jxb:typesafeEnumMember name="NONE"/>
         </jxb:bindings>
         <jxb:bindings node="//xs:simpleType[@name='Orientation']/xs:restriction/xs:enumeration[@value='0']">
             <jxb:typesafeEnumMember name="PORTRAIT"/>
