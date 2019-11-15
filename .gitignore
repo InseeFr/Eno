@@ -49,3 +49,5 @@ src/main/resources/xml/null.xml
 
 #Oxygen project
 enojs.xpr
+questionnaires/test/ddi/test.xml
+questionnaires/test/pogues-xml/simpsons.xml
