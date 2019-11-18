@@ -241,12 +241,14 @@
 									<xsl:when test="$formatDate = 'YYYY'">1900</xsl:when>
 									<xsl:when test="$formatDate = 'YYYY-MM'">1900-01</xsl:when>
 									<xsl:when test="$formatDate = 'YYYY-MM-DD'">1900-01-01</xsl:when>
+								    <xsl:when test="$formatDate = 'HH:CH'">00:00</xsl:when>
 									<xsl:when test="$formatDate = 'PnYnM'">P0Y0M</xsl:when>
 									<xsl:when test="$formatDate = 'PTnHnM'">PT0H0M</xsl:when>
 						        </xsl:choose>
 					        </xsl:variable>
 					        <xsl:variable name="maxValue">
 								<xsl:choose>
+								    <xsl:when test="$formatDate = 'HH:CH'">99:99</xsl:when>
 									<xsl:when test="$formatDate = 'PnYnM'">P99Y11M</xsl:when>
 									<xsl:when test="$formatDate = 'PTnHnM'">PT99H59M</xsl:when>
 								    <xsl:when test="$formatDate = 'YYYY'">year-from-date(current-date())</xsl:when>
