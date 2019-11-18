@@ -612,7 +612,7 @@
 		<xsl:variable name="nameOfVariable" select="enoodt:get-flowcontrol-target($source-context)"/>
 		
 		<xsl:if test="$label != ''">
-			<text:section text:name="ConsistencyCheck-{enoodt:get-name($source-context)}">
+			<text:section text:name="GoTo-{enoodt:get-name($source-context)}">
 				<text:p text:style-name="Format">
 					<text:span text:style-name="GotoTitle">
 						<xsl:value-of select="'Redirection : '"/>
