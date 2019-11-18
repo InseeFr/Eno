@@ -220,11 +220,11 @@
                 	<xsl:for-each select="distinct-values(tokenize(normalize-space($allFormats), ';'))">
 						<xsl:variable name="formatDate" select="."/>
 						<!-- Check if format equals one of those date and duration formats who end by ; limiter -->
-						<xsl:if test="$formatDate !='' and contains('YYYY;YYYY-MM;YYYY-MM-DD;PnYnM;PTnHnM;', concat($formatDate, ';'))">
+                        <xsl:if test="$formatDate !='' and contains('YYYY;YYYY-MM;YYYY-MM-DD;PnYnM;PTnHnM;HH:CH;', concat($formatDate, ';'))">
 							<!-- id construct -->
 							<xsl:variable name="id-date-duration">
 					        	<xsl:choose>
-					        		<xsl:when test="$formatDate = ('PnYnM', 'PTnHnM')">Duration</xsl:when>
+                                    <xsl:when test="$formatDate = ('PnYnM','PTnHnM','HH:CH')">Duration</xsl:when>
 					        		<xsl:otherwise>DateTimedate</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
@@ -232,7 +232,7 @@
 					        	<xsl:choose>
 					        		<xsl:when test="$formatDate = 'YYYY'">gYear</xsl:when>
 					        		<xsl:when test="$formatDate = 'YYYY-MM'">gYearMonth</xsl:when>
-					        		<xsl:when test="$formatDate = ('PnYnM', 'PTnHnM')">duration</xsl:when>
+                                    <xsl:when test="$formatDate = ('PnYnM','PTnHnM','HH:CH')">duration</xsl:when>
 					        		<xsl:otherwise>date</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
@@ -1640,7 +1640,7 @@
 			<xsl:choose>
 				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
 				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
-				<xsl:when test="$format = ('PnYnM', 'PTnHnM')">duration</xsl:when>
+			    <xsl:when test="$format = ('PnYnM', 'PTnHnM','HH:CH')">duration</xsl:when>
 				<xsl:otherwise>date</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -1717,7 +1717,7 @@
 			<xsl:choose>
 				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
 				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
-				<xsl:when test="$format = ('PnYnM', 'PTnHnM')">duration</xsl:when>
+			    <xsl:when test="$format = ('PnYnM', 'PTnHnM','HH:CH')">duration</xsl:when>
 				<xsl:otherwise>date</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
