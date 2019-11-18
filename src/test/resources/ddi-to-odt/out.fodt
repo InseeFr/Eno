@@ -230,7 +230,7 @@
                <text:p text:style-name="Question">➡ 2. Are you ready?</text:p>
                <text:p text:style-name="Format">
                   <text:span text:style-name="NameOfVariable">[READY] - </text:span>Booléen</text:p>
-               <text:section text:name="ConsistencyCheck-j6p6my1d">
+               <text:section text:name="GoTo-j6p6my1d">
                   <text:p text:style-name="Format">
                      <text:span text:style-name="GotoTitle">Redirection : </text:span>
                   </text:p>
