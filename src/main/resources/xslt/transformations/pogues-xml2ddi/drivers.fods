@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>P6DT3H27M54S</meta:editing-duration><meta:editing-cycles>198</meta:editing-cycles><meta:generator>LibreOffice/6.1.5.2$Windows_X86_64 LibreOffice_project/90f8dcf33c87b3705e78202e3df5142b201bd805</meta:generator><dc:date>2019-11-15T15:16:41.418000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="107" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
+ <office:meta><meta:creation-date>2009-04-16T11:32:48.39</meta:creation-date><meta:editing-duration>P6DT3H28M15S</meta:editing-duration><meta:editing-cycles>199</meta:editing-cycles><meta:generator>LibreOffice/6.1.5.2$Windows_X86_64 LibreOffice_project/90f8dcf33c87b3705e78202e3df5142b201bd805</meta:generator><dc:date>2019-11-18T10:33:45.567000000</dc:date><meta:document-statistic meta:table-count="1" meta:cell-count="107" meta:object-count="0"/><meta:user-defined meta:name="Info 1"/><meta:user-defined meta:name="Info 2"/><meta:user-defined meta:name="Info 3"/><meta:user-defined meta:name="Info 4"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">0</config:config-item>
@@ -32,7 +32,7 @@
       </config:config-item-map-entry>
      </config:config-item-map-named>
      <config:config-item config:name="ActiveTable" config:type="string">Sheet1</config:config-item>
-     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1302</config:config-item>
+     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1286</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
      <config:config-item config:name="ZoomValue" config:type="int">100</config:config-item>
      <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -252,16 +252,6 @@
   <style:style style:name="ta1" style:family="table" style:master-page-name="Default">
    <style:table-properties table:display="true" style:writing-mode="lr-tb"/>
   </style:style>
-  <style:style style:name="ce1" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="#99ccff"/>
-   <style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
-  </style:style>
-  <style:style style:name="ce2" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:background-color="transparent"/>
-  </style:style>
-  <style:style style:name="ce3" style:family="table-cell" style:parent-style-name="Default">
-   <style:table-cell-properties fo:wrap-option="wrap"/>
-  </style:style>
   <style:style style:name="ce7" style:family="table-cell" style:parent-style-name="Default">
    <style:table-cell-properties fo:background-color="#99ccff"/>
    <style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
@@ -294,12 +284,6 @@
     </style:header-footer-properties>
    </style:footer-style>
   </style:page-layout>
-  <style:style style:name="T1" style:family="text">
-   <style:text-properties style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Arial" fo:font-size="10pt" fo:language="zxx" fo:country="none" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="normal" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-name-asian="Andale Sans UI" style:font-size-asian="10pt" style:language-asian="zxx" style:country-asian="none" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-name-complex="Tahoma" style:font-size-complex="10pt" style:language-complex="zxx" style:country-complex="none" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
-  </style:style>
-  <style:style style:name="T2" style:family="text">
-   <style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:font-weight="normal" style:text-underline-style="none" style:text-underline-color="font-color" style:text-line-through-type="none" fo:font-style="normal" style:text-outline="false" fo:text-shadow="none" style:text-line-through-mode="continuous" fo:language="zxx" fo:country="none" style:language-asian="zxx" style:country-asian="none" style:language-complex="zxx" style:country-complex="none" style:font-name-asian="Andale Sans UI" style:font-name-complex="Tahoma" style:font-size-asian="10pt" style:font-size-complex="10pt" style:font-weight-asian="normal" style:font-weight-complex="normal" style:font-style-asian="normal" style:font-style-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/>
-  </style:style>
  </office:automatic-styles>
  <office:master-styles>
   <style:master-page style:name="Default" style:page-layout-name="pm1">
@@ -318,7 +302,7 @@
      <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2019-11-15">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="15:17:31.637000000">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2019-11-18">00/00/0000</text:date>, <text:time style:data-style-name="N2" text:time-value="10:33:24.980000000">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -446,7 +430,8 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string"><text:p><text:span text:style-name="T2">pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;SINGLE_CHOICE&apos; and not(descendant::pogues:ClarificationQuestion)</text:span>]</text:p>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;SINGLE_CHOICE&apos; and not(descendant::pogues:ClarificationQuestion)]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>QuestionSingleChoice</text:p>
@@ -456,7 +441,8 @@
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string"><text:p><text:span text:style-name="T2">pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;SINGLE_CHOICE&apos; and descendant::pogues:ClarificationQuestion</text:span>]</text:p>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>pogues:Child[@xsi:type=&apos;QuestionType&apos; and @questionType=&apos;SINGLE_CHOICE&apos; and descendant::pogues:ClarificationQuestion]</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>QuestionOtherDetails</text:p>
