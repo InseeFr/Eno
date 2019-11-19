@@ -1049,7 +1049,7 @@
                         <xsl:when test="$dateduration-format='HH:CH'">
                             <xsl:value-of select="concat('../',$layout-list//format[1]/@variable,' ,')"/>
                             <xsl:value-of select="''':'','"/>
-                            <xsl:value-of select="concat(' if (string-length(../',$layout-list//format[2]/@variable,') = 1) then ''0'' else (if (string-length(../',$layout-list//format[2]/@variable,') = 0) then ''00'' else '''') ,')"/>
+                            <xsl:value-of select="concat(' if (string-length(../',$layout-list//format[2]/@variable,') = 1) then ''0'' else '''' ,')"/>
                             <xsl:value-of select="concat('../',$layout-list//format[2]/@variable)"/>
                         </xsl:when>
                         <xsl:otherwise>
