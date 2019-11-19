@@ -95,12 +95,12 @@
     <xd:doc>
         <xd:desc>https://ddi-alliance.atlassian.net/projects/DDILIFE/issues/DDILIFE-3523</xd:desc>
     </xd:doc>
-    <xsl:template match="d32:ComputationItem">
-        <xsl:element name="d:ComputationItem">
-            <xsl:apply-templates select="@*"/>
-            <xsl:element name="d:TypeOfComputationItem">
-                <xsl:value-of select="'informational'"/>
-            </xsl:element>
+    <xsl:template match="d32:ComputationItem/r32:CommandCode">
+        <xsl:element name="d:TypeOfComputationItem">
+            <xsl:attribute name="controlledVocabularyID" select="'INSEE-TOCI-CL-3'"/>
+            <xsl:value-of select="'informational'"/>
+        </xsl:element>
+        <xsl:element name="r:CommandCode">
             <xsl:apply-templates select="node()"/>
         </xsl:element>
     </xsl:template>
@@ -239,7 +239,7 @@
                             </xsl:choose>
                         </xsl:variable>
                         <xsl:if test="$is-variablegroup-to-reference != ''">
-                            <xsl:element name="r:VariableGroupReference">
+                            <xsl:element name="l:VariableGroupReference">
                                 <xsl:element name="r:Agency"><xsl:value-of select="r32:Agency"/></xsl:element>
                                 <xsl:element name="r:ID"><xsl:value-of select="$variablegroup-id"/></xsl:element>
                                 <xsl:element name="r:Version"><xsl:value-of select="r32:Version"/></xsl:element>
@@ -279,7 +279,7 @@
                 <xsl:element name="r:MeasurementUnit">
                     <xsl:value-of select="r32:MeasurementUnit"/>
                 </xsl:element>
-                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter)]"/>
+                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter) and not(self::r32:ResponseCardinality)]"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>
@@ -309,7 +309,7 @@
         <xsl:element name="l:VariableRepresentation">
             <xsl:element name="{$domain-root}">
                 <xsl:apply-templates select="$domain/@*"/>
-                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter)]"/>
+                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter) and not(self::r32:ResponseCardinality)]"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>

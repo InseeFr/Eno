@@ -99,7 +99,7 @@
                 <dereferencing:key-name name='d:NumericDomainReference-_-ManagedNumericRepresentation' name1='d:NumericDomainReference' name2='ManagedNumericRepresentation'/>
                 <dereferencing:key-name name='r:NumericRepresentationReference-_-ManagedNumericRepresentation' name1='r:NumericRepresentationReference' name2='ManagedNumericRepresentation'/>
                 <dereferencing:key-name name='r:VariableReference-_-Variable' name1='r:VariableReference' name2='Variable'/>
-                <dereferencing:key-name name='r:VariableGroupReference-_-VariableGroup' name1='r:VariableGroupReference' name2='VariableGroup'/>
+                <dereferencing:key-name name='l:VariableGroupReference-_-VariableGroup' name1='l:VariableGroupReference' name2='VariableGroup'/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -126,7 +126,7 @@
     <xsl:key name="d:NumericDomainReference-_-ManagedNumericRepresentation"           match="/ddi-instance:DDIInstance/g:ResourcePackage/r:ManagedRepresentationScheme/r:ManagedNumericRepresentation"  use="r:ID"/>
     <xsl:key name="r:NumericRepresentationReference-_-ManagedNumericRepresentation"   match="/ddi-instance:DDIInstance/g:ResourcePackage/r:ManagedRepresentationScheme/r:ManagedNumericRepresentation"  use="r:ID"/>
     <xsl:key name="r:VariableReference-_-Variable"                                    match="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:Variable"                                   use="r:ID"/>
-    <xsl:key name="r:VariableGroupReference-_-VariableGroup"                          match="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:VariableGroup"                              use="r:ID"/>
+    <xsl:key name="l:VariableGroupReference-_-VariableGroup"                          match="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:VariableGroup"                              use="r:ID"/>
     <!--when modifying keys : modify key-names variable ; if you do not the program will not work-->
     <xsl:key name="external-variable" match="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]" use="r:ID"/>
     <xsl:key name="referenced-variable" match="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:VariableGroup/r:VariableReference" use="r:ID"/>
@@ -255,7 +255,7 @@
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:apply-templates select="//l:VariableScheme/l:Variable[not(r:ID=//l:VariableScheme//r:VariableReference/r:ID)]
-                                            |//l:VariableScheme/l:VariableGroup[not(r:ID=//l:VariableScheme//r:VariableGroupReference/r:ID)]" mode="output-DDI">
+                                            |//l:VariableScheme/l:VariableGroup[not(r:ID=//l:VariableScheme//l:VariableGroupReference/r:ID)]" mode="output-DDI">
                                         </xsl:apply-templates>                                        
                                     </xsl:otherwise>
                                 </xsl:choose>
