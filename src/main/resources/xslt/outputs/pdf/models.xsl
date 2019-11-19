@@ -168,7 +168,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<fo:block xsl:use-attribute-sets="Titre-sequence" page-break-inside="avoid" keep-with-next="always">
+		<fo:block xsl:use-attribute-sets="Titre-sequence" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 			<xsl:if test="lower-case($page-break-between) = 'module' or lower-case($page-break-between) = 'submodule'">
 				<xsl:attribute name="page-break-before" select="'always'"/>
 			</xsl:if>
@@ -186,7 +186,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<fo:block xsl:use-attribute-sets="Titre-paragraphe" page-break-inside="avoid" keep-with-next="always"> <!-- linefeed-treatment="preserve" -->
+		<fo:block xsl:use-attribute-sets="Titre-paragraphe" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always"> <!-- linefeed-treatment="preserve" -->
 			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -267,18 +267,18 @@
 			<xsl:when test="$format = 'tooltip'">
 			</xsl:when>
 			<xsl:when test="$format = 'comment' or $format = 'help' or $format = 'instruction'">
-				<fo:block xsl:use-attribute-sets="instruction" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="instruction" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
 			<xsl:when test="$format = 'statement'">
-				<fo:block xsl:use-attribute-sets="statement" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="statement" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:message select="concat('unknown xf-output : ',enopdf:get-name($source-context),$label)"/>
-				<fo:block xsl:use-attribute-sets="general-style" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="general-style" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 					<xsl:if test="$isTable = 'YES'">
 						<xsl:attribute name="margin-left">1mm</xsl:attribute>
 					</xsl:if>
@@ -335,7 +335,7 @@
 		</xsl:apply-templates>-->
 		<xsl:choose>
 			<xsl:when test="$other-give-details">
-				<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 					<fo:inline>
 						<xsl:call-template name="insert-image">
 							<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -345,7 +345,7 @@
 				</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
-				<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 				</fo:block>
 			</xsl:otherwise>
@@ -401,7 +401,7 @@
 		<!--<xsl:apply-templates select="enopdf:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>-->
-		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 		<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source-context)" mode="source">
@@ -627,7 +627,7 @@
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
-					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -637,7 +637,7 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -689,7 +689,7 @@
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
-					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -699,7 +699,7 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -795,7 +795,7 @@
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
-					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -805,7 +805,7 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 					</fo:block>
 				</xsl:otherwise>
