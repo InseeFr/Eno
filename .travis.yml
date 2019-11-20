@@ -15,8 +15,3 @@ deploy:
   file: target/*.jar
   on:
     tags: true
-
-script:
-  - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
-  - docker build -t $DOCKER_USER/eno:$TRAVIS_TAG .
-  - docker push $DOCKER_USER/eno:$TRAVIS_TAG
