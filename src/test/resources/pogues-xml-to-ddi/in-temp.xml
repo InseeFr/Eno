@@ -46,12 +46,8 @@
             <CollectedVariableReference>jbcgm0ip</CollectedVariableReference>
          </Response>
       </Child>
-      <IfThenElse xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-                  xmlns:poguesGoto="http://xml.insee.fr/schema/applis/poguesGoto"
-                  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-                  id="d1e50"
-                  xsi:type="SequenceType">
-         <Expression>not( $READY != '1')</Expression>
+      <IfThenElse id="j6p6my1d-a-j6p0np9q">
+         <Expression>not($READY != '1')</Expression>
          <IfTrue>
             <Child id="j6p0s7o5"
                    depth="2"
@@ -116,15 +112,11 @@
          </IfTrue>
       </IfThenElse>
    </Child>
-   <IfThenElse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-               xmlns:poguesGoto="http://xml.insee.fr/schema/applis/poguesGoto"
-               xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-               id="d1e119"
-               xsi:type="SequenceType">
-      <Expression>not( $READY != '1')</Expression>
+   <IfThenElse id="j6p6my1d-a-j6p0ti5h">
+      <Expression>not($READY != '1')</Expression>
       <IfTrue>
-         <Child id="j3341528"
+         <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                id="j3341528"
                 depth="1"
                 genericName="MODULE"
                 xsi:type="SequenceType">
@@ -190,17 +182,8 @@
                </Response>
             </Child>
          </Child>
-      </IfTrue>
-   </IfThenElse>
-   <IfThenElse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-               xmlns:poguesGoto="http://xml.insee.fr/schema/applis/poguesGoto"
-               xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-               id="d1e183"
-               xsi:type="SequenceType">
-      <Expression>not( $READY != '1')</Expression>
-      <IfTrue>
-         <Child id="j6qe0h9q"
+         <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                id="j6qe0h9q"
                 depth="1"
                 genericName="MODULE"
                 xsi:type="SequenceType">
@@ -482,17 +465,8 @@
                </ResponseStructure>
             </Child>
          </Child>
-      </IfTrue>
-   </IfThenElse>
-   <IfThenElse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-               xmlns:poguesGoto="http://xml.insee.fr/schema/applis/poguesGoto"
-               xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-               id="d1e462"
-               xsi:type="SequenceType">
-      <Expression>not( $READY != '1')</Expression>
-      <IfTrue>
-         <Child id="j4nw88h2"
+         <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                id="j4nw88h2"
                 depth="1"
                 genericName="MODULE"
                 xsi:type="SequenceType">
@@ -1007,17 +981,8 @@
                </Child>
             </Child>
          </Child>
-      </IfTrue>
-   </IfThenElse>
-   <IfThenElse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
-               xmlns:poguesGoto="http://xml.insee.fr/schema/applis/poguesGoto"
-               xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-               id="d1e1045"
-               xsi:type="SequenceType">
-      <Expression>not( $READY != '1')</Expression>
-      <IfTrue>
-         <Child id="j6qfx9qe"
+         <Child xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                id="j6qfx9qe"
                 depth="1"
                 genericName="MODULE"
                 xsi:type="SequenceType">

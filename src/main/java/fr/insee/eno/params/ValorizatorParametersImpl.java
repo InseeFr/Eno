@@ -69,7 +69,6 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		return mergeEnoParameters(enoParametersDefault, enoParameters);
 	}
 
-	@SuppressWarnings("unchecked")
 	public <T> T mergeEnoParameters(T enoParamsDefault, T newEnoParams) throws IllegalArgumentException, IllegalAccessException  {
 		Class<?> objectClass = enoParamsDefault.getClass();
 		LOGGER.debug("Class's name : "+objectClass.getSimpleName());
@@ -148,7 +147,6 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		return this.getParameters(xml);
 	}
 
-	@Override
 	public ENOParameters getParameters(String xmlString) throws JAXBException, UnsupportedEncodingException {
 
 		if ((xmlString == null) || (xmlString.length() == 0))
@@ -177,7 +175,6 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		return enoParameters;
 	}
 
-	@Override
 	public ENOParameters getParameters(StreamSource xmlStream) throws JAXBException, UnsupportedEncodingException {
 
 		if (xmlStream == null)

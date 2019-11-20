@@ -24,7 +24,7 @@ import fr.insee.eno.params.validation.Validator;
 import fr.insee.eno.params.validation.ValidatorImpl;
 
 /**
- * Orchestrates the whole generation process.
+ * Orchestrates the whole parameterized generation process.
  */
 public class ParameterizedGenerationService {	
 
@@ -38,6 +38,15 @@ public class ParameterizedGenerationService {
 	
 	private SchemaValidator schemaValidator = new SchemaValidatorImpl();
 
+	/**
+	 * 
+	 * @param inputFile
+	 * @param params
+	 * @param metadata
+	 * @param specificTreatment
+	 * @return
+	 * @throws Exception
+	 */
 	public File generateQuestionnaire(File inputFile, ENOParameters params, InputStream metadata, InputStream specificTreatment) throws Exception{
 		File output=null;
 		Pipeline pipeline = params.getPipeline();
@@ -52,7 +61,7 @@ public class ParameterizedGenerationService {
 			generationService.setMetadata(metadata);
 			LOGGER.info("Setting specific treamtment to the pipeline.");
 			generationService.setSpecificTreatment(specificTreatment);
-			String survey = params.getParameters().getCampagne();
+			String survey = params.getParameters()!=null?params.getParameters().getCampagne():"test";
 			output = generationService.generateQuestionnaire(inputFile, survey);
 			paramsFinal.close();
 		}
@@ -65,6 +74,15 @@ public class ParameterizedGenerationService {
 
 	}
 
+	/**
+	 * 
+	 * @param inputFile
+	 * @param params
+	 * @param metadata
+	 * @param specificTreatment
+	 * @return
+	 * @throws Exception
+	 */
 	public File generateQuestionnaire(File inputFile, InputStream params, InputStream metadata, InputStream specificTreatment) throws Exception {
 		LOGGER.info("Parameterized Generation of questionnaire -- STARTED --");
 		File output=null;
@@ -122,6 +140,15 @@ public class ParameterizedGenerationService {
 
 	}
 
+	/**
+	 * 
+	 * @param inputFile
+	 * @param params
+	 * @param metadata
+	 * @param specificTreatment
+	 * @return
+	 * @throws Exception
+	 */
 	public File generateQuestionnaire(File inputFile, File params, File metadata, File specificTreatment)  throws Exception{
 		File output = null;
 

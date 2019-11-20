@@ -4,6 +4,11 @@ import java.io.InputStream;
 
 public interface SchemaValidator {
 	
+	/**
+	 * 
+	 * @param paramsIS
+	 * @return
+	 */
 	ValidationMessage validate(InputStream paramsIS);
 	
 

@@ -14,6 +14,9 @@ import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
+/**
+ * A PDF post processing
+ */
 public class PDFInsertEndQuestionPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(PDFInsertEndQuestionPostprocessor.class);
