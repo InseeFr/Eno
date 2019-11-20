@@ -258,8 +258,10 @@
                         <xsl:for-each select="$ddi-label//xhtml:span[@class='block']">
                             <xsl:element name="xhtml:span">
                                 <xsl:attribute name="class">
-                                    <xsl:value-of select="'block '"/>
-                                    <xsl:value-of select="enoddi:get-style($context)"/>
+                                    <xsl:value-of select="'block'"/>
+                                    <xsl:if test="enoddi:get-style($context) != ''">
+                                        <xsl:value-of select="concat(' ',enoddi:get-style($context))"/>    
+                                    </xsl:if>
                                 </xsl:attribute>
                                 <xsl:if test="$ddi-label/@id and not(preceding-sibling::xhtml:span)">
                                     <xsl:attribute name="id" select="$ddi-label/@id"/>
