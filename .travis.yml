@@ -3,7 +3,7 @@ jdk:
   - openjdk8
 
 install:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V
   - mvn test -B
 
 deploy:
@@ -11,6 +11,6 @@ deploy:
   provider: releases
   api_key:
     secure: "VrwvaQi2YfM8N5hHz1xPMAjwZnfNRoRM75+OQPu+Qz6TquCG6iruDB3ZJZK1DRWDbbeFfW6qN/RsSBlLBxMPxtDHiT6v+fHrhIgqx9TsY+k9tGL9ZJAihqWTuNW77tmMfVlsZLETVbdm/yMmR7YkKrM/5egizOvAP7fqJFYZ+N+2l7ZMkJbLaUpd7F23mn1OV5xRT3Ka/WT5kZgeaH6IGPouIsZBbpwMqObncu0GpGYRHDCOmwgmDCXg1A/hNL65pB7lwg6XweP2f9R+tqBmIpT+nZzC4d/ce3+Kff7y2U3QhC5zNSdv03HEwzMSCf1wVHn3o26qQMo8m3/gdMPNVoEGPMTuQpdR97cyuauTCqBlCk6oza3dAxod9Fvy+qd6ePLgI1Mei9pgOKkM5c4waq3QL58+f4Fh9lQtLQHgPLLL112FxI0FtIIEA1/VHoMBQdJ989ThuMFPXZ/rPT9nwgsrDegjd2g0jHpyg22KQoTRoU/jrOUgLN4nBBnv1HpjnjyYixROG0NT9nsvniOcjIVXu0d2RVgMDWTyEMdGD/39atCazuADNwb97Ct0gkFeUtx4SqJqxXG9F9FC1BiwyEDObfmgQG3t4Uml3wmQ+HPRWVhhMfHpucxZ0jUxzGxBOGDGhK3aJepnRZKkWE8NdbQq8eAtTRKmcA5YhZOVVR4="
-  file: target/*.jar
+  file: target/eno-core.jar
   on:
     tags: true
