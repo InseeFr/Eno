@@ -263,10 +263,10 @@
         <xsl:variable name="domain-root">
             <xsl:choose>
                 <xsl:when test="$domain/local-name()='NumericDomain'">
-                    <xsl:value-of select="'d:NumericDomain'"/>
+                    <xsl:value-of select="'r:NumericRepresentation'"/>
                 </xsl:when>
                 <xsl:when test="$domain/local-name()='NumericDomainReference'">
-                    <xsl:value-of select="'d:NumericDomainReference'"/>
+                    <xsl:value-of select="'r:NumericRepresentationReference'"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="'UNKNWON'"/>
@@ -296,10 +296,10 @@
         <xsl:variable name="domain-root">
             <xsl:choose>
                 <xsl:when test="ends-with($domain/local-name(),'Domain')">
-                    <xsl:value-of select="concat('d:',$domain/local-name())"/>
+                    <xsl:value-of select="concat('r:',replace($domain/local-name(),'Domain','Representation'))"/>
                 </xsl:when>
                 <xsl:when test="ends-with($domain/local-name(),'DomainReference')">
-                    <xsl:value-of select="concat('d:',$domain/local-name())"/>
+                    <xsl:value-of select="concat('r:',replace($domain/local-name(),'Domain','Representation'))"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="'UNKNWON'"/>
@@ -309,7 +309,7 @@
         <xsl:element name="l:VariableRepresentation">
             <xsl:element name="{$domain-root}">
                 <xsl:apply-templates select="$domain/@*"/>
-                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter) and not(self::r32:ResponseCardinality)]"/>
+                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter) and not(self::r32:ResponseCardinality) and not(self::r32:GenericOutputFormat )]"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>
