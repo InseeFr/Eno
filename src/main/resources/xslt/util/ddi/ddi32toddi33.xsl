@@ -266,7 +266,7 @@
                     <xsl:value-of select="'d:NumericDomain'"/>
                 </xsl:when>
                 <xsl:when test="$domain/local-name()='NumericDomainReference'">
-                    <xsl:value-of select="'r:NumericDomainReference'"/>
+                    <xsl:value-of select="'d:NumericDomainReference'"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="'UNKNWON'"/>
@@ -299,7 +299,7 @@
                     <xsl:value-of select="concat('d:',$domain/local-name())"/>
                 </xsl:when>
                 <xsl:when test="ends-with($domain/local-name(),'DomainReference')">
-                    <xsl:value-of select="concat('r:',$domain/local-name())"/>
+                    <xsl:value-of select="concat('d:',$domain/local-name())"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="'UNKNWON'"/>
