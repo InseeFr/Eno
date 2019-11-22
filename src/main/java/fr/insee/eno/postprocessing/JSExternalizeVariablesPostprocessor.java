@@ -26,7 +26,7 @@ public class JSExternalizeVariablesPostprocessor implements Postprocessor {
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
 		File outputCustomFOFile = new File(
-				input.getPath().replace(Constants.SORT_COMPONENTS_JS_EXTENSION, Constants.FINAL_JS_EXTENSION));
+				input.getPath().replace(Constants.SORT_COMPONENTS_JS_EXTENSION, Constants.EXTERNALIZE_VARIABLES_JS_EXTENSION));
 		
 		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS);
 		

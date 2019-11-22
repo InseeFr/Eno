@@ -20,6 +20,7 @@
         </ddi>
     </TextConditioningVariable>
     <LengthOfLongTable>7</LengthOfLongTable>
+    <DecimalSeparator>,</DecimalSeparator>
     <lois>
         <informatique>https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460</informatique>
         <statistique>https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000888573</statistique>

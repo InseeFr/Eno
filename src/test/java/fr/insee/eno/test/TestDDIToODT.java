@@ -29,7 +29,7 @@ public class TestDDIToODT {
 					new NoopPostprocessor());
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-odt-test");
-			File expectedFile = new File(String.format("%s/out.odt", basePath));
+			File expectedFile = new File(String.format("%s/out.fodt", basePath));
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());
 			

@@ -11,6 +11,7 @@ import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2JSGenerator;
 import fr.insee.eno.postprocessing.JSExternalizeVariablesPostprocessor;
 import fr.insee.eno.postprocessing.JSSortComponentsPostprocessor;
+import fr.insee.eno.postprocessing.JSVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
@@ -28,8 +29,10 @@ public class TestDDIToJS {
 			String basePath = "src/test/resources/ddi-to-js";
 			Postprocessor[] postprocessors =  {
 					new JSSortComponentsPostprocessor(),
-					new JSExternalizeVariablesPostprocessor()};
-			GenerationService genService = new GenerationService(ddiPreprocessor, ddi2js,postprocessors);
+					new JSExternalizeVariablesPostprocessor(),
+					new JSVTLParserPostprocessor()};
+			GenerationService genService = new GenerationService(ddiPreprocessor, ddi2js, postprocessors);
+			
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-js-test");
 			File expectedFile = new File(String.format("%s/out.xml", basePath));

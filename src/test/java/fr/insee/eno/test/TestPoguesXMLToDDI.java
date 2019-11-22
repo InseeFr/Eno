@@ -27,6 +27,7 @@ public class TestPoguesXMLToDDI {
 		try {
 			String basePath = "src/test/resources/pogues-xml-to-ddi";
 			GenerationService genService = new GenerationService(poguesXMLPreprocessorGoToTreatment, poguesXML2DDI, ddiMarkdown2XhtmlPostprocessor);
+
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "xml-pogues-2-ddi-test");
 			File expectedFile = new File(String.format("%s/out.xml", basePath));

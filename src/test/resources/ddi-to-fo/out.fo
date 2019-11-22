@@ -225,6 +225,7 @@
                    page-break-inside="avoid"
                    keep-with-next="always">
             <fo:block>We're going to test your knowledge about the simpsons series.</fo:block>
+            <fo:block/>
             <fo:block>
                <fo:inline font-weight="bold">Welcome in the simspons world!</fo:inline>
             </fo:block>
@@ -236,7 +237,10 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Before starting, do you have any comments about the Simpsons family?</fo:block>
+                   keep-with-next="always">
+            <fo:block>➡ 1. Before starting, do you have any comments about the Simpsons</fo:block>
+            <fo:block> family?</fo:block>
+         </fo:block>
          <fo:block id="COMMENT" page-break-inside="avoid">
             <fo:block-container height="40mm" border-color="black" border-style="solid">
                <fo:block> </fo:block>
@@ -361,7 +365,7 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">For your information, the date of the last broadcast was on ${LAST_BROADCAST}</fo:block>
+                   keep-with-next="always">For your information, the date of the last broadcast was on ${LAST_BROADCAST} </fo:block>
          <fo:block id="DATEFIRST" page-break-inside="avoid">
             <fo:block color="black"
                       font-weight="normal"
@@ -378,7 +382,7 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season? </fo:block>
+                   keep-with-next="always">➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?</fo:block>
          <fo:block id="AUDIENCE_SHARE" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -1477,7 +1481,7 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product? </fo:block>
+                   keep-with-next="always">➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?</fo:block>
          <fo:block page-break-inside="avoid" id="PERCENTAGE_EXPENSES">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -1857,7 +1861,7 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Who did these clownings and tell us what you remember? </fo:block>
+                   keep-with-next="always">➡ 2. Who did these clownings and tell us what you remember?</fo:block>
          <fo:block page-break-inside="avoid" id="CLOWNING">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -2095,7 +2099,7 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 3. Which of the following means of transport were used by the hero and in which country? </fo:block>
+                   keep-with-next="always">➡ 3. Which of the following means of transport were used by the hero and in which country?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2103,7 +2107,7 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Several answers possible: check off all the relevant boxes </fo:block>
+                   keep-with-next="always">Several answers possible: check off all the relevant boxes</fo:block>
          <fo:block page-break-inside="avoid" id="TRAVEL">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -2195,7 +2199,7 @@
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm"
-                                  text-align="justify">Other country*</fo:block>
+                                  text-align="justify">Other country* </fo:block>
                      </fo:table-cell>
                      <fo:table-cell border-color="black"
                                     border-style="solid"
@@ -2852,7 +2856,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always">➡ 1. Please, complete the following grid with your favourite characters</fo:block>
-         <fo:block page-break-inside="avoid" id="j6qg8rc6">
+         <fo:block page-break-inside="avoid" id="FAVOURITE_CHARACTERS">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
                       width="100%"
