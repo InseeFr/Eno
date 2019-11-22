@@ -6,7 +6,7 @@
 	xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
 	xmlns:eno="http://xml.insee.fr/apps/eno"
 	xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
-	xmlns:d="ddi:datacollection:3_2" xmlns:r="ddi:reusable:3_2"
+	xmlns:d="ddi:datacollection:3_3" xmlns:r="ddi:reusable:3_3"
 	xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
 	exclude-result-prefixes="xs fn xd eno enojs d r" version="2.0">
 	

@@ -11,8 +11,8 @@ import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2JSGenerator;
 import fr.insee.eno.postprocessing.JSExternalizeVariablesPostprocessor;
 import fr.insee.eno.postprocessing.JSSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.JSVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
 
 public class TestDDIToJS {

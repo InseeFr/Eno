@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.Constants;
-import fr.insee.eno.postprocessing.JSVTLParserPostprocessor;
+import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
 
 public class TestVTLPostProcessor {
 

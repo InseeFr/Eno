@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Questionnaire xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               id="i6vwid0"
-               modele="Instrument-i6vwid">
+               id="i6vwi0"
+               modele="SIMPSONS">
    <label>Questionnaire SIMPSONS</label>
    <components xsi:type="Sequence" componentType="Sequence" id="j6p0ti5h">
       <label>"I - Introduction"</label>
