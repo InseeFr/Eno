@@ -42,20 +42,12 @@
 	
 	<xsl:template match="ResponseElement" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="finding"/>
 		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
-		<!--<xsl:param name="isInSurvey" tunnel="yes"/>-->
 		<!-- display only external variable -->
-		<xsl:choose>
-			<xsl:when test="$finding='yo'">
-			</xsl:when>
-			<xsl:otherwise>
-				<variables variableType="EXTERNAL">
-					<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
-					<value xsi:nil="true"/>
-				</variables>
-			</xsl:otherwise>
-		</xsl:choose>
+		<variables variableType="EXTERNAL">
+			<name><xsl:value-of select="enojs:get-name($source-context)"/></name>
+			<value xsi:nil="true"/>
+		</variables>
 	</xsl:template>
 	
 	<xd:doc>
