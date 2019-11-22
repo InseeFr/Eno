@@ -324,7 +324,7 @@
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 				</xsl:apply-templates>
-				<xsl:call-template name="enojs:addResponseToComponents">
+				<xsl:call-template name="enojs:add-response-to-components">
 					<xsl:with-param name="responseName" select="$responseName"/>
 					<xsl:with-param name="responseType" select="'Boolean'"/>
 				</xsl:call-template>
@@ -351,7 +351,7 @@
 						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 							<xsl:with-param name="driver" select="." tunnel="yes"/>
 						</xsl:apply-templates>
-						<xsl:call-template name="enojs:addResponseToComponents">
+						<xsl:call-template name="enojs:add-response-to-components">
 							<xsl:with-param name="responseName" select="$responseName"/>
 							<xsl:with-param name="responseType" select="$responseType"/>
 						</xsl:call-template>
@@ -375,7 +375,7 @@
 						<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 							<xsl:with-param name="driver" select="." tunnel="yes"/>
 						</xsl:apply-templates>
-						<xsl:call-template name="enojs:addResponseToComponents">
+						<xsl:call-template name="enojs:add-response-to-components">
 							<xsl:with-param name="responseName" select="$responseName"/>
 							<xsl:with-param name="responseType" select="$responseType"/>
 						</xsl:call-template>
@@ -545,11 +545,11 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>Named template: enojs:addResponseToComponents.</xd:p>
+			<xd:p>Named template: enojs:add-response-to-components.</xd:p>
 			<xd:p>It creates the response with its different possible states.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template name="enojs:addResponseToComponents">
+	<xsl:template name="enojs:add-response-to-components">
 		<xsl:param name="responseName"/>
 		<xsl:param name="responseType"/>
 		<xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
