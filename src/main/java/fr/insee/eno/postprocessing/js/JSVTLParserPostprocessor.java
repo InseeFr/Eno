@@ -1,4 +1,4 @@
-package fr.insee.eno.postprocessing;
+package fr.insee.eno.postprocessing.js;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.postprocessing.Postprocessor;
 
 /**
  * Customization of JS postprocessor.
@@ -27,7 +28,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 	public File process(File input, byte[] parameters, String surveyName) throws Exception {
 
 		File outputCustomFOFile = new File(input.getParent(),
-				"form" +
+				Constants.BASE_NAME_FORM_FILE +
 				Constants.FINAL_JS_EXTENSION);
 		logger.info("Start JS parsing xpath to vtl post-processing");
 
