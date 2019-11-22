@@ -43,14 +43,22 @@
         </style:style>
         <style:style style:name="Format" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
-            <style:paragraph-properties fo:text-align="left"/>
             <style:text-properties fo:font-size="10pt"/>
         </style:style>
         <style:style style:name="NameOfVariable" style:family="text">
-            <style:text-properties fo:color="#8B008B" fo:font-style="italic" fo:font-weight="bold"/>
+            <style:text-properties fo:color="#0000ff" fo:font-style="italic" fo:font-weight="bold"/>
         </style:style>
-        <style:style style:name="ConditionTitle" style:family="text">
-            <style:text-properties fo:color="#000000" fo:font-weight="bold"/>
+        <style:style style:name="GotoBlock" style:family="paragraph"
+            style:class="text">
+            <style:text-properties fo:color="#0000ff" fo:font-weight="bold"/>
+            <style:paragraph-properties fo:text-align="left" fo:margin-top="0.7cm"
+                fo:border="0.05pt solid #000000"/>
+        </style:style>
+        <style:style style:name="GotoTitle" style:family="text">
+            <style:text-properties fo:color="#0000ff" fo:font-weight="bold"/>
+        </style:style>
+        <style:style style:name="GotoText" style:family="text">
+            <style:text-properties fo:color="#0000ff"/>
         </style:style>
         
         <!-- <style:style style:name="QuestionSelect" style:family="paragraph"

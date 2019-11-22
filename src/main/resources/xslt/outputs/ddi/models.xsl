@@ -155,6 +155,34 @@
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroup', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
+                    <!-- Global VariableGroup -->
+                    <l:VariableGroup>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="concat('INSEE-Instrument-',enoddi33:get-id($source-context),'-vg')"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:BasedOnObject>
+                            <r:BasedOnReference>
+                                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                                <r:ID><xsl:value-of select="concat('Instrument-',enoddi33:get-id($source-context))"/></r:ID>
+                                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                                <r:TypeOfObject>Instrument</r:TypeOfObject>
+                            </r:BasedOnReference>
+                        </r:BasedOnObject>
+                        <l:TypeOfVariableGroup>Questionnaire</l:TypeOfVariableGroup>
+                        <l:VariableGroupName>
+                            <r:String><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
+                        </l:VariableGroupName>
+                        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGlobal', .)" tunnel="yes"/>
+                            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                            <xsl:with-param name="questionnaire-id" select="enoddi33:get-id($source-context)" as="xs:string" tunnel="yes"/>
+                        </xsl:apply-templates>
+                        <xsl:apply-templates select="enoddi33:get-questions-table($source-context)" mode="source">
+                            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroupGlobal', .)" tunnel="yes"/>
+                            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                        </xsl:apply-templates>
+                    </l:VariableGroup>
+                    <!-- End of the Global VariableGroup -->
                 </l:VariableScheme>
                 <!-- ProcessingInstructionScheme -->
                 <d:ProcessingInstructionScheme>
@@ -429,6 +457,33 @@
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>Variable</r:TypeOfObject>
         </r:VariableReference>
+    </xsl:template>
+
+    <xsl:template match="driver-VariableGlobal//Variable" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="questionnaire-id" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
+        <xsl:if test="enoddi33:get-variable-group($source-context) = $questionnaire-id">
+            <r:VariableReference>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="$id"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="driver-VariableGroupGlobal//QuestionDynamicTable" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
+        <l:VariableGroupReference>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="concat($id,'-gp')"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <r:TypeOfObject>VariableGroup</r:TypeOfObject>
+        </l:VariableGroupReference>
     </xsl:template>
 
     <xsl:template match="driver-InterviewerInstructionScheme//*[name() = ('Instruction','Control')]" mode="model">
