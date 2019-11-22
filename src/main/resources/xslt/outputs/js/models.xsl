@@ -18,6 +18,21 @@
 	
 	<xsl:variable name="properties" select="doc($properties-file)"/>
 	
+	<xd:doc>
+		<xd:desc>Variables from propertiers and parameters</xd:desc>
+	</xd:doc>
+	<xsl:variable name="management">
+		<xsl:choose>
+			<xsl:when test="$parameters//Management != ''">
+				<xsl:value-of select="$parameters//Management"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$properties//Management"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	
+	
 	<xd:doc scope="stylesheet">
 		<xd:desc>
 			<xd:p>An xslt stylesheet who transforms an input into js through generic driver templates.</xd:p>
@@ -123,6 +138,10 @@
 			<xsl:with-param name="typeOfQuestion" select="self::*/name()" tunnel="yes"/>
 			<xsl:with-param name="declarations" select="enojs:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
 			<xsl:with-param name="filterCondition" select="enojs:get-global-filter($source-context)" tunnel="yes"/>
+		</xsl:apply-templates>
+		
+		<xsl:apply-templates select="enojs:get-end-question-instructions($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
 	
@@ -543,6 +562,25 @@
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
 		</variables>
+	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>template for the GoTo</xd:desc>
+	</xd:doc>
+	<xsl:template match="GoTo" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		
+		<xsl:variable name="componentType" select="'FilterDescription'"/>
+		<xsl:variable name="idGoTo" select="enojs:get-name($source-context)"/>
+		<xsl:variable name="label" select="enojs:get-vtl-label($source-context,$languages[1])"/>
+		
+		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idGoTo}" management="{$management}">
+			<label><xsl:value-of select="$label"/></label>
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
+		</components>
 	</xsl:template>
 	
 	<xd:doc>
