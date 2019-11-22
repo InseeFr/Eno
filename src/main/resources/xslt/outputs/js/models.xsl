@@ -504,7 +504,7 @@
 				<title><xsl:value-of select="concat(upper-case($alertLevel),' control : ',$nameOfControl)"/></title>
 				<value>
 					<xsl:variable name="final-control">
-						<xsl:call-template name="enojs:replaceVariablesInLabel">
+						<xsl:call-template name="enojs:replace-variables-in-formula">
 							<xsl:with-param name="source-context" select="$source-context"/>
 							<xsl:with-param name="formula" select="$control"/>
 						</xsl:call-template>

@@ -166,9 +166,9 @@
         <xsl:variable name="label">
             <xsl:sequence select="enoddi:get-label($context,$language)"/>
         </xsl:variable>
-        <xsl:call-template name="enojs:replaceVariablesInLabel">
+        <xsl:call-template name="enojs:replace-variables-in-formula">
             <xsl:with-param name="source-context" select="$context"/>
-            <xsl:with-param name="formula" select="enojs:surround-label-with-quote(enojs:replaceDoubleQuoteBySimpleQuote($label))"/>
+            <xsl:with-param name="formula" select="enojs:surround-label-with-quote(enojs:replace-double-quote-by-simple-quote($label))"/>
         </xsl:call-template>
     </xsl:function>
     
@@ -190,7 +190,7 @@
         <xsl:value-of select="$final-label"/>
     </xsl:function>
     
-    <xsl:function name="enojs:replaceDoubleQuoteBySimpleQuote">        
+    <xsl:function name="enojs:replace-double-quote-by-simple-quote">        
         <xsl:param name="label"/>
         <xsl:value-of select="replace($label,'&quot;','''')"/>
     </xsl:function>
@@ -228,7 +228,7 @@
                         </xsl:for-each>
                     </xsl:variable>
                     <xsl:variable name="relevant-condition">
-                        <xsl:call-template name="enojs:replaceVariablesInLabel">
+                        <xsl:call-template name="enojs:replace-variables-in-formula">
                             <xsl:with-param name="source-context" select="$context"/>
                             <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
                         </xsl:call-template>
@@ -242,7 +242,7 @@
                         </xsl:for-each>
                     </xsl:variable>
                     <xsl:variable name="readonly-condition">
-                        <xsl:call-template name="enojs:replaceVariablesInLabel">
+                        <xsl:call-template name="enojs:replace-variables-in-formula">
                             <xsl:with-param name="source-context" select="$context"/>
                             <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
                         </xsl:call-template>
@@ -279,7 +279,7 @@
                         </xsl:for-each>
                     </xsl:variable>
                     <xsl:variable name="relevant-condition">
-                        <xsl:call-template name="enojs:replaceVariablesInLabel">
+                        <xsl:call-template name="enojs:replace-variables-in-formula">
                             <xsl:with-param name="source-context" select="$context"/>
                             <xsl:with-param name="formula" select="$initial-relevant-ancestors"/>
                         </xsl:call-template>
@@ -297,7 +297,7 @@
                         </xsl:for-each>
                     </xsl:variable>
                     <xsl:variable name="readonly-condition">
-                        <xsl:call-template name="enojs:replaceVariablesInLabel">
+                        <xsl:call-template name="enojs:replace-variables-in-formula">
                             <xsl:with-param name="source-context" select="$context"/>
                             <xsl:with-param name="formula" select="$initial-readonly-ancestors"/>
                         </xsl:call-template>
@@ -314,7 +314,7 @@
     </xsl:function>
     
     
-    <xsl:function name="enojs:get-complexe-formula">
+    <xsl:function name="enojs:replace-variable-with-collected-and-external-variables-formula">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="id-variable"/>
         
@@ -322,7 +322,7 @@
         <xsl:choose>
             <xsl:when test="$temp!=''">
                 <xsl:variable name="variableCalculation" select="enoddi:get-variable-calculation($temp)"/>                
-                <xsl:call-template name="enojs:replaceVariablesInLabel">
+                <xsl:call-template name="enojs:replace-variables-in-formula">
                     <xsl:with-param name="source-context" select="$context"/>
                     <xsl:with-param name="formula" select="$variableCalculation"/>
                 </xsl:call-template>
@@ -333,7 +333,7 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p>Function: enojs:getTypeVariable.</xd:p>
+            <xd:p>Function: enojs:get-cast-variable.</xd:p>
             <xd:p>It returns the type of variable, string, number, integer, boolean</xd:p>
             <xd:p>variableName -> cast(variableName,type)</xd:p>
         </xd:desc>
@@ -360,13 +360,13 @@
     </xsl:function>
     <xd:doc>
         <xd:desc>
-            <xd:p>Recursive named template: enojs:replaceVariablesInLabel.</xd:p>
+            <xd:p>Recursive named template: enojs:replace-variables-in-formula.</xd:p>
             <xd:p>It replaces variables in a all formula (filter, control, personalized text, calculated variable).</xd:p>
             <xd:p>"number(if (¤idVariable¤='') then '0' else ¤idVariable¤)" -> "variableName"</xd:p>
             <xd:p>"¤idVariable¤" -> "variableName"</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template name="enojs:replaceVariablesInLabel">
+    <xsl:template name="enojs:replace-variables-in-formula">
         <xsl:param name="source-context" as="item()"/>
         <xsl:param name="formula"/>
         
@@ -384,7 +384,7 @@
                                 concat($conditioning-variable-end,'\)'),'')"/>	
                             <xsl:variable name="var" select="replace(replace($temp,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
                             <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($source-context,$var)"/>
-                            <xsl:variable name="value-var" select="enojs:get-complexe-formula(
+                            <xsl:variable name="value-var" select="enojs:replace-variable-with-collected-and-external-variables-formula(
                                 $source-context,
                                 enojs:get-variable-business-name($source-context,$var))"/>
                             <xsl:value-of select="enojs:get-cast-variable($typeVariable,$value-var)"/>
@@ -399,7 +399,7 @@
                         <xsl:matching-substring>
                             <xsl:variable name="var" select="replace(replace(.,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
                             <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($source-context,$var)"/>
-                            <xsl:variable name="value-var" select="enojs:get-complexe-formula(
+                            <xsl:variable name="value-var" select="enojs:replace-variable-with-collected-and-external-variables-formula(
                                 $source-context,
                                 enojs:get-variable-business-name($source-context,$var))"/>
                             <xsl:value-of select="enojs:get-cast-variable($typeVariable,$value-var)"/>
@@ -409,7 +409,7 @@
                         </xsl:non-matching-substring>
                     </xsl:analyze-string>
                 </xsl:variable>
-                <xsl:call-template name="enojs:replaceVariablesInLabel">
+                <xsl:call-template name="enojs:replace-variables-in-formula">
                     <xsl:with-param name="source-context" select="$source-context"/>
                     <xsl:with-param name="formula" select="$new-formula"/>
                 </xsl:call-template>
