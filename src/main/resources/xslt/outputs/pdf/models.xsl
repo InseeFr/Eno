@@ -377,23 +377,13 @@
 				<xsl:when test="$table-type = 'Table'">
 					<xsl:value-of select="count(enopdf:get-body-lines($source-context))"/>
 				</xsl:when>
-				<xsl:when test="enopdf:get-maximum-lines($source-context)">
-					<xsl:value-of select="number(enopdf:get-maximum-lines($source-context))"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="number($roster-defaultsize) -1"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-		<xsl:variable name="maxlines-by-page" as="xs:integer">
-			<xsl:choose>
-				<xsl:when test="$table-type = 'Table'">
-					<xsl:value-of select="number($table-defaultsize)"/>
-				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="number($roster-defaultsize)"/>
 				</xsl:otherwise>
 			</xsl:choose>
+		</xsl:variable>
+		<xsl:variable name="maxlines-by-page" as="xs:integer">
+			<xsl:value-of select="number($table-defaultsize)"/>
 		</xsl:variable>
 		<!-- The table in the first page contains 1 line less than next ones -->
 		<xsl:variable name="table-pages" select="xs:integer(1+(($total-lines -1+1) div $maxlines-by-page))" as="xs:integer"/>
