@@ -7552,6 +7552,14 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">LAST_BROADCAST label </r:Content>
             </r:Label>
+            <l:VariableRepresentation>
+               <r:DateTimeRepresentationReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM-DD</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+               </r:DateTimeRepresentationReference>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
