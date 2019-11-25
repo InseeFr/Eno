@@ -314,7 +314,7 @@
                 <xsl:otherwise>
                     <xsl:element name="{$domain-root}">
                         <xsl:apply-templates select="$domain/@*"/>
-                        <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter) and not(self::r32:ResponseCardinality)]"/>
+                        <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter) and not(self::r32:ResponseCardinality) and not(self::r32:Label)]"/>
                     </xsl:element>
                 </xsl:otherwise>
             </xsl:choose>
