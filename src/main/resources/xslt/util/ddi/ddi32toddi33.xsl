@@ -195,7 +195,7 @@
                                     <xsl:variable name="variable-name" select="l32:VariableName/r32:String/text()"/>
                                     <xsl:choose>
                                         <xsl:when test="$dereferenced-questionnaire//text()[contains(.,concat('¤',$variable-name,'¤'))]">
-                                            <xsl:value-of select="'¤'"/>        
+                                            <xsl:value-of select="'¤'"/>
                                         </xsl:when>
                                         <xsl:when test="$dereferenced-questionnaire//text()[contains(.,concat('ø',$variable-name,'ø'))]">
                                             <xsl:value-of select="'ø'"/>
@@ -307,10 +307,17 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:element name="l:VariableRepresentation">
-            <xsl:element name="{$domain-root}">
-                <xsl:apply-templates select="$domain/@*"/>
-                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter) and not(self::r32:ResponseCardinality) and not(self::r32:GenericOutputFormat )]"/>
-            </xsl:element>
+            <xsl:choose>
+                <xsl:when test="$domain/local-name()='NominalDomain'">
+                    <xsl:apply-templates select="$domain/descendant::r32:CodeRepresentation"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:element name="{$domain-root}">
+                        <xsl:apply-templates select="$domain/@*"/>
+                        <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter) and not(self::r32:ResponseCardinality)]"/>
+                    </xsl:element>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:element>
     </xsl:template>
 
