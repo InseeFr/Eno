@@ -343,6 +343,15 @@
             <r:Label>
                 <r:Content xml:lang="fr-FR"><xsl:value-of select="enoddi33:get-label($source-context)"/></r:Content>
             </r:Label>
+            <!-- Variable representation if type is ExternalVariableType-->
+            <xsl:if test="enoddi33:get-type($source-context)= 'ExternalVariableType'">
+                <l:VariableRepresentation>
+                    <!-- Representation of variable: text, numeric, date ... -->
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
+                    </xsl:apply-templates>
+                </l:VariableRepresentation>
+            </xsl:if>
             <!-- It's a hack to test if Variable got a related-response (aka = CollectedVariable), only 0 or 1 are expected, could be done better way (@att on driver ?). -->
             <xsl:for-each select="enoddi33:get-related-response($source-context)">
                 <xsl:variable name="idQuestion" select="enoddi33:get-parent-id(current())"/>
