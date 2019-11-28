@@ -3053,7 +3053,7 @@
                                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                                                                 </xsl:call-template>
-                                                                <xsl:value-of select="concat('(if (',$variable-business-name,'/string()='''') then ')"/>
+                                                                <xsl:value-of select="concat('number(if (',$variable-business-name,'/string()='''') then ')"/>
                                                                 <xsl:if test="regex-group(2) = '&gt;'">
                                                                     <xsl:value-of select="'-'"/>
                                                                 </xsl:if>
@@ -3069,7 +3069,7 @@
                                                                 <!-- e.g.  variableId + variable2Id becomes (if (variableName/string()='') then 0 else variableName) + (if (variableName/string()='' then 0 else variableName) -->
                                                                 <xsl:for-each select="tokenize($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
                                                                     <xsl:if test="not(position()=1)">
-                                                                        <xsl:value-of select="concat('(if (',$variable-business-name,'/string()='''') then 0 else ',$variable-business-name,')')"/>
+                                                                        <xsl:value-of select="concat('number(if (',$variable-business-name,'/string()='''') then 0 else ',$variable-business-name,')')"/>
                                                                     </xsl:if>
                                                                     <xsl:call-template name="replaceVariablesInFormula">
                                                                         <xsl:with-param name="formula" select="current()"/>
