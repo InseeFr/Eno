@@ -224,15 +224,19 @@
 							<!-- id construct -->
 							<xsl:variable name="id-date-duration">
 					        	<xsl:choose>
-                                    <xsl:when test="$formatDate = ('PnYnM','PTnHnM','HH:CH')">Duration</xsl:when>
-					        		<xsl:otherwise>DateTimedate</xsl:otherwise>
+									<xsl:when test="$formatDate = 'HH:CH'">Duration</xsl:when>
+									<xsl:when test="starts-with($formatDate,'Pn')">Duration</xsl:when>
+									<xsl:when test="starts-with($formatDate,'PTn')">Duration</xsl:when>
+									<xsl:otherwise>DateTimedate</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
 							<xsl:variable name="DateTypeCode">
 					        	<xsl:choose>
 					        		<xsl:when test="$formatDate = 'YYYY'">gYear</xsl:when>
 					        		<xsl:when test="$formatDate = 'YYYY-MM'">gYearMonth</xsl:when>
-                                    <xsl:when test="$formatDate = ('PnYnM','PTnHnM','HH:CH')">duration</xsl:when>
+									<xsl:when test="$formatDate = 'HH:CH'">duration</xsl:when>
+									<xsl:when test="starts-with($formatDate,'Pn')">duration</xsl:when>
+									<xsl:when test="starts-with($formatDate,'PTn')">duration</xsl:when>
 					        		<xsl:otherwise>date</xsl:otherwise>
 						        </xsl:choose>
 					        </xsl:variable>
@@ -1642,7 +1646,9 @@
 			<xsl:choose>
 				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
 				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
-			    <xsl:when test="$format = ('PnYnM', 'PTnHnM','HH:CH')">duration</xsl:when>
+			    <xsl:when test="$format = 'HH:CH'">duration</xsl:when>
+			    <xsl:when test="starts-with($format,'Pn')">duration</xsl:when>
+			    <xsl:when test="starts-with($format,'PTn')">duration</xsl:when>
 				<xsl:otherwise>date</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
@@ -1719,7 +1725,9 @@
 			<xsl:choose>
 				<xsl:when test="$format = 'YYYY'">gYear</xsl:when>
 				<xsl:when test="$format = 'YYYY-MM'">gYearMonth</xsl:when>
-			    <xsl:when test="$format = ('PnYnM', 'PTnHnM','HH:CH')">duration</xsl:when>
+			    <xsl:when test="$format = 'HH:CH'">duration</xsl:when>
+			    <xsl:when test="starts-with($format,'Pn')">duration</xsl:when>
+			    <xsl:when test="starts-with($format,'PTn')">duration</xsl:when>
 				<xsl:otherwise>date</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
