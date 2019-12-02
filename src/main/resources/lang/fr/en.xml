@@ -24,8 +24,16 @@
         <Duration>Type a valid duration</Duration>
     </Alert>
     <And>and</And>
-    <After>after</After>
-    <Before>before</Before>
+    <After>
+        <Date>after</Date>
+        <Date-YYYYMM>after</Date-YYYYMM>
+        <Date-YYYY>after</Date-YYYY>
+    </After>
+    <Before>
+        <Date>before</Date>
+        <Date-YYYYMM>before</Date-YYYYMM>
+        <Date-YYYY>before</Date-YYYY>
+    </Before>
     <Between>between</Between>
     <GreaterThan>greater than</GreaterThan>
     <LessThan>less than</LessThan>
