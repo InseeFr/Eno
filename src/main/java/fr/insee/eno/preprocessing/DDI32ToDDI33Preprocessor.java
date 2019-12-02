@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
 /**
@@ -42,6 +43,10 @@ public class DDI32ToDDI33Preprocessor implements Preprocessor {
 		
 		logger.debug("DDI32ToDDI33Preprocessing : END");
 		return new File(output);
+	}
+	
+	public String toString() {
+		return PreProcessing.DDI_32_TO_DDI_33.name();
 	}
 
 }
