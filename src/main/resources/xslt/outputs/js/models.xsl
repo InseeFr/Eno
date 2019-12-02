@@ -53,20 +53,7 @@
 	</xsl:variable>
 	
 	<xsl:variable name="varName" select="parent"/>
-	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Forces the traversal of the whole driver tree. Must be present once in the
-				transformation.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:template match="*" mode="model" priority="-1">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
-	
+		
 	<xsl:template match="ResponseElement" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
@@ -385,7 +372,7 @@
 			<xd:p>The Response drivers in the body lines of tables create a cell, which type depends on the Response driver.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="*[name(.) =('NumericDomain','TextDomain','TextareaDomain','DateTimeDomain','CodeDomain','BooleanDomain')]" mode="model" priority="0">
+	<xsl:template match="*[name(.) =('NumericDomain','TextDomain','TextareaDomain','DateTimeDomain','CodeDomain','BooleanDomain')]" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>

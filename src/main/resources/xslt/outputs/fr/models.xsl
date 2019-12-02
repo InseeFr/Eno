@@ -1025,6 +1025,9 @@
                         <xsl:when test="upper-case($dateduration-format) = 'MM/AAAA' or $dateduration-format='YYYY-MM'">
                             <xsl:value-of select="concat($name,'-layout-Y = ''''')"/>
                         </xsl:when>
+                        <xsl:when test="$dateduration-format='HH:CH'">
+                            <xsl:value-of select="concat('../',$name,'-layout-H = ''''')"/>
+                        </xsl:when>
                         <xsl:otherwise>
                             <xsl:for-each select="$layout-list//format">
                                 <xsl:if test="position() != 1">
@@ -1059,6 +1062,7 @@
                         </xsl:when>
                         <xsl:when test="$dateduration-format='HH:CH'">
                             <xsl:value-of select="concat('../',$layout-list//format[1]/@variable,' ,')"/>
+                            <xsl:value-of select="''':'','"/>
                             <xsl:value-of select="concat(' if (string-length(../',$layout-list//format[2]/@variable,') = 1) then ''0'' else '''' ,')"/>
                             <xsl:value-of select="concat('../',$layout-list//format[2]/@variable)"/>
                         </xsl:when>
@@ -2390,6 +2394,7 @@
                 </xsl:attribute>
                 <xsl:if test="$current-driver = 'DurationDomain'">
                     <xsl:attribute name="xxf:maxlength" select="if (string-length(@minimum) &gt; string-length(@maximum)) then string-length(@minimum) else string-length(@maximum)"/>
+                    <xsl:attribute name="suffix" select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/*[name()=current()/@unit]/text()"/>
                 </xsl:if>
                 <xsl:if test="position() = 1 and ($label != '' or $question-label!= '')">
                     <xsl:variable name="conditioning-variables" as="xs:string*">
@@ -2466,19 +2471,6 @@
                     </xf:itemset>
                 </xsl:if>
             </xsl:element>
-            <xsl:if test="$current-driver = 'DurationDomain'">
-                <xsl:element name="xhtml:span">
-                    <xsl:attribute name="class" select="'double-duration-suffix'"/>
-                    <xsl:choose>
-                        <xsl:when test="$current-driver = 'DurationDomain'">
-                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/Duration/*[name()=current()/@unit]/text()"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$languages[1]]/DateTime/*[name()=current()/@unit]/text()"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:element>
-            </xsl:if>
         </xsl:for-each>
         <xsl:if test="$current-driver = 'DurationDomain' or count($layout-list//format) &gt; 1">
             <xf:output id="{$name}-dateduration-constraint-control" name="{$name}-dateduration-constraint" bind="{$name}-dateduration-constraint-bind">
@@ -3075,7 +3067,7 @@
                                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                                                                 </xsl:call-template>
-                                                                <xsl:value-of select="concat('(if (',$variable-business-name,'/string()='''') then ')"/>
+                                                                <xsl:value-of select="concat('number(if (',$variable-business-name,'/string()='''') then ')"/>
                                                                 <xsl:if test="regex-group(2) = '&gt;'">
                                                                     <xsl:value-of select="'-'"/>
                                                                 </xsl:if>
@@ -3091,7 +3083,7 @@
                                                                 <!-- e.g.  variableId + variable2Id becomes (if (variableName/string()='') then 0 else variableName) + (if (variableName/string()='' then 0 else variableName) -->
                                                                 <xsl:for-each select="tokenize($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
                                                                     <xsl:if test="not(position()=1)">
-                                                                        <xsl:value-of select="concat('(if (',$variable-business-name,'/string()='''') then 0 else ',$variable-business-name,')')"/>
+                                                                        <xsl:value-of select="concat('number(if (',$variable-business-name,'/string()='''') then 0 else ',$variable-business-name,')')"/>
                                                                     </xsl:if>
                                                                     <xsl:call-template name="replaceVariablesInFormula">
                                                                         <xsl:with-param name="formula" select="current()"/>

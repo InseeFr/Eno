@@ -169,7 +169,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<fo:block xsl:use-attribute-sets="Titre-sequence" page-break-inside="avoid" keep-with-next="always">
+		<fo:block xsl:use-attribute-sets="Titre-sequence" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 			<xsl:if test="lower-case($page-break-between) = 'module' or lower-case($page-break-between) = 'submodule'">
 				<xsl:attribute name="page-break-before" select="'always'"/>
 			</xsl:if>
@@ -187,7 +187,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<fo:block xsl:use-attribute-sets="Titre-paragraphe" page-break-inside="avoid" keep-with-next="always"> <!-- linefeed-treatment="preserve" -->
+		<fo:block xsl:use-attribute-sets="Titre-paragraphe" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always"> <!-- linefeed-treatment="preserve" -->
 			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -268,18 +268,18 @@
 			<xsl:when test="$format = 'tooltip'">
 			</xsl:when>
 			<xsl:when test="$format = 'comment' or $format = 'help' or $format = 'instruction'">
-				<fo:block xsl:use-attribute-sets="instruction" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="instruction" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
 			<xsl:when test="$format = 'statement'">
-				<fo:block xsl:use-attribute-sets="statement" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="statement" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 					<xsl:copy-of select="$label"/>
 				</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:message select="concat('unknown xf-output : ',enopdf:get-name($source-context),$label)"/>
-				<fo:block xsl:use-attribute-sets="general-style" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="general-style" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 					<xsl:if test="$isTable = 'YES'">
 						<xsl:attribute name="margin-left">1mm</xsl:attribute>
 					</xsl:if>
@@ -336,7 +336,7 @@
 		</xsl:apply-templates>-->
 		<xsl:choose>
 			<xsl:when test="$other-give-details">
-				<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 					<fo:inline>
 						<xsl:call-template name="insert-image">
 							<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -346,7 +346,7 @@
 				</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
-				<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+				<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 				</fo:block>
 			</xsl:otherwise>
@@ -378,38 +378,28 @@
 				<xsl:when test="$table-type = 'Table'">
 					<xsl:value-of select="count(enopdf:get-body-lines($source-context))"/>
 				</xsl:when>
-				<xsl:when test="enopdf:get-maximum-lines($source-context)">
-					<xsl:value-of select="number(enopdf:get-maximum-lines($source-context))"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="number($roster-defaultsize) -1"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-		<xsl:variable name="maxlines-by-table" as="xs:integer">
-			<xsl:choose>
-				<xsl:when test="$table-type = 'Table'">
-					<xsl:value-of select="number($table-defaultsize)"/>
-				</xsl:when>
 				<xsl:otherwise>
 					<xsl:value-of select="number($roster-defaultsize)"/>
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:variable>
+		<xsl:variable name="maxlines-by-page" as="xs:integer">
+			<xsl:value-of select="number($table-defaultsize)"/>
+		</xsl:variable>
 		<!-- The table in the first page contains 1 line less than next ones -->
-		<xsl:variable name="table-pages" select="xs:integer(1+(($total-lines -1+1) div $maxlines-by-table))" as="xs:integer"/>
+		<xsl:variable name="table-pages" select="xs:integer(1+(($total-lines -1+1) div $maxlines-by-page))" as="xs:integer"/>
 		
 		<!--<xsl:apply-templates select="enopdf:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>-->
-		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 		</fo:block>
 		<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>
 
-		<!-- long tables are split : $maxlines-by-table lines maximum, except the first one which has 1 less -->
+		<!-- long tables are split : $maxlines-by-page lines maximum, except the first one which has 1 less -->
 		<xsl:for-each select="1 to $table-pages">
 			<xsl:variable name="page-position" select="position()"/>
 			<fo:block page-break-inside="avoid">
@@ -422,7 +412,7 @@
 							<xsl:value-of select="enopdf:get-business-name($source-context)"/>
 						</xsl:otherwise>
 					</xsl:choose>
-					<xsl:if test="$total-lines &gt; $maxlines-by-table -1">
+					<xsl:if test="$total-lines &gt; $maxlines-by-page -1">
 						<xsl:choose>
 							<!-- For TableLoop, "-" character will be used to identify pages which will have the same input mask -->
 							<!-- For Table, input masks of page 2 and page 3 will be different -->
@@ -436,7 +426,7 @@
 						<xsl:value-of select="$page-position"/>
 					</xsl:if>
 				</xsl:attribute>
-				<xsl:if test="$current-match/name()='TableLoop' and $total-lines &gt; $maxlines-by-table -1">
+				<xsl:if test="$current-match/name()='TableLoop' and $total-lines &gt; $maxlines-by-page -1">
 					<xsl:attribute name="page-break-after" select="'always'"/>
 				</xsl:if>
 				<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
@@ -457,8 +447,8 @@
 					<fo:table-body>
 						<xsl:choose>
 							<xsl:when test="$current-match/name()='Table'">
-								<xsl:variable name="first-line" select="$maxlines-by-table*($page-position -1)"/>
-								<xsl:variable name="last-line" select="$maxlines-by-table*($page-position) -1"/>
+								<xsl:variable name="first-line" select="$maxlines-by-page*($page-position -1)"/>
+								<xsl:variable name="last-line" select="$maxlines-by-page*($page-position) -1"/>
 								<xsl:for-each select="enopdf:get-body-lines($source-context)">
 									<xsl:variable name="position" select="position()"/>
 									<!-- page 1 starts at line 0, so contains 1 line less than next ones -->
@@ -477,9 +467,9 @@
 								</xsl:for-each>
 							</xsl:when>
 							<xsl:otherwise>
-								<xsl:for-each select="1 to $maxlines-by-table">
-									<!-- if the dynamic table is on several pages, each page contains maxlines-by-table, except the first one, which has maxlines-by-table -1 -->
-									<xsl:if test="$page-position &gt; 1 or (. &lt;= $total-lines and . &lt; $maxlines-by-table)">
+								<xsl:for-each select="1 to $maxlines-by-page">
+									<!-- if the dynamic table is on several pages, each page contains maxlines-by-page, except the first one, which has maxlines-by-page -1 -->
+									<xsl:if test="$page-position &gt; 1 or (. &lt;= $total-lines and . &lt; $maxlines-by-page)">
 										<!-- in a dynamic table, a repeated "line" may be on several get-body-lines -->
 										<xsl:for-each select="enopdf:get-body-lines($source-context)">
 											<xsl:variable name="position" select="position()"/>
@@ -628,7 +618,7 @@
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
-					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -638,7 +628,7 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -690,7 +680,7 @@
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
-					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -700,7 +690,7 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 					</fo:block>
 				</xsl:otherwise>
@@ -796,7 +786,7 @@
 		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
-					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<fo:inline>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
@@ -806,7 +796,7 @@
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
-					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always">
+					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
 					</fo:block>
 				</xsl:otherwise>

@@ -250,6 +250,24 @@
                         </xsl:for-each>
                     </xsl:element>
                 </xsl:when>
+                <xsl:when test="$ddi-label//xhtml:span/@class='block' ">
+                    <xsl:element name="xhtml:p">
+                        <xsl:for-each select="$ddi-label//xhtml:span[@class='block']">
+                            <xsl:element name="xhtml:span">
+                                <xsl:attribute name="class">
+                                    <xsl:value-of select="'block'"/>
+                                    <xsl:if test="enoddi:get-style($context) != ''">
+                                        <xsl:value-of select="concat(' ',enoddi:get-style($context))"/>    
+                                    </xsl:if>
+                                </xsl:attribute>
+                                <xsl:if test="$ddi-label/@id and not(preceding-sibling::xhtml:span)">
+                                    <xsl:attribute name="id" select="$ddi-label/@id"/>
+                                </xsl:if>
+                                <xsl:copy-of select="node()|text()"/>
+                            </xsl:element>
+                        </xsl:for-each>
+                    </xsl:element>
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:sequence select="$ddi-label" />
                 </xsl:otherwise>
@@ -496,7 +514,7 @@
             <xsl:when test="$type='date'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date"/>
                 <xsl:if test="$minimum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ')"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After/Date,' ')"/>
                     <xsl:value-of select="concat(number(substring($minimum,9,2)),' ')"/>
                     <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($minimum,6,2))]"/>
                     <xsl:value-of select="concat(' ',substring($minimum,1,4))"/>
@@ -505,12 +523,13 @@
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
                     <xsl:choose>
                         <xsl:when test="contains($maximum,'-date()')">
+                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before/Date-YYYY,' ')"/>
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Today"/>
                         </xsl:when>
                         <xsl:otherwise>
+                            <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before/Date,' ')"/>
                             <xsl:value-of select="concat(number(substring($maximum,9,2)),' ')"/>
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($maximum,6,2))]"/>
                             <xsl:value-of select="concat(' ',substring($maximum,1,4))"/>
@@ -521,7 +540,7 @@
             <xsl:when test="$type='gYearMonth'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date-YYYYMM"/>
                 <xsl:if test="$minimum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ')"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After/Date-YYYYMM,' ')"/>
                     <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/DateTime/Months/*[position()=number(substring($minimum,6,2))]"/>
                     <xsl:value-of select="concat(' ',substring($minimum,1,4))"/>
                 </xsl:if>
@@ -529,7 +548,7 @@
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before/Date-YYYYMM,' ')"/>
                     <xsl:choose>
                         <xsl:when test="contains($maximum,'-date()')">
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Today"/>
@@ -544,13 +563,13 @@
             <xsl:when test="$type='gYear'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Date-YYYY"/>
                 <xsl:if test="$minimum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After,' ',$minimum)"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/After/Date-YYYY,' ',$minimum)"/>
                 </xsl:if>
                 <xsl:if test="$minimum != '' and $maximum != ''">
                     <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/And)"/>
                 </xsl:if>
                 <xsl:if test="$maximum != ''">
-                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before,' ')"/>
+                    <xsl:value-of select="concat(' ',$labels-resource/Languages/Language[@xml:lang=$language]/Before/Date-YYYY,' ')"/>
                     <xsl:choose>
                         <xsl:when test="contains($maximum,'-date()')">
                             <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Today"/>
