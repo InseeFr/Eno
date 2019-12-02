@@ -245,7 +245,7 @@
 
                     <xsl:text>&lt;/p&gt;&lt;p&gt;Visa n°</xsl:text>
                     <xsl:value-of select="$NumeroVisa" />
-                    <xsl:text></xsl:text>
+                    <xsl:text> </xsl:text>
                     <xsl:for-each select="$MinistereTutelle">
                         <xsl:text>du </xsl:text>
                         <xsl:value-of select="." />
