@@ -552,10 +552,7 @@
     </xsl:template>
 
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
-    <xsl:template match="driver-InterviewerInstructionReference//*" mode="model" priority="2">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
+    <xsl:template match="driver-InterviewerInstructionReference//*" mode="model" priority="2"/>
     
     <xsl:template match="driver-InterviewerInstructionReference//Instruction" mode="model" priority="3">           
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -569,10 +566,7 @@
     </xsl:template>
     
     
-    <xsl:template match="driver-ExternalAid//*" mode="model" priority="3">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
+    <xsl:template match="driver-ExternalAid//*" mode="model" priority="3"/>
     
     <xsl:template match="driver-ExternalAid//FlowControl" mode="model" priority="4">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
@@ -1112,7 +1106,6 @@
    
     <xsl:template match="QuestionSimple//ResponseDomain[not(ancestor::driver-ControlConstructScheme)]" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
             <xsl:with-param name="mandatory" select="enoddi33:get-ci-type($source-context)" tunnel="yes"/>
@@ -1120,14 +1113,10 @@
     </xsl:template>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
-    <xsl:template match="driver-Binding//*" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
+    <xsl:template match="driver-Binding//*" mode="model" priority="1"/>
 
     <xsl:template match="driver-Binding//Clarification" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
@@ -1181,7 +1170,6 @@
     <!-- Question with a complementary sub-response for clarification which are linked to each other -->
 	<xsl:template match="driver-SMRD//ResponseDomain[not(ancestor::Clarification)]" mode="model" priority="1">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="agency" as="xs:string" tunnel="yes"/>
 		<d:ResponseDomainInMixed attachmentBase="1">
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -1216,7 +1204,6 @@
 
     <xsl:template match="driver-SMGRD/ResponseDomain" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="clarificationResponseid" as="xs:string" tunnel="yes"/>
         <!-- Because of the xsl:for-each, driver context needs to be kept. -->
         <xsl:variable name="driver" select="."/>
@@ -1393,10 +1380,7 @@
     </xsl:template>
 
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
-    <xsl:template match="driver-OutParameter//*" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
+    <xsl:template match="driver-OutParameter//*" mode="model" priority="1"/>
     
     <!--this part is disigned in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-OutParameter//ResponseDomain" mode="model" priority="2">
@@ -1418,7 +1402,6 @@
 
     <xsl:template match="driver-OutParameter//Clarification" mode="model" priority="2">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="agency" as="xs:string" tunnel="yes"/>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
@@ -1456,7 +1439,6 @@
    
     <xsl:template match="driver-QuestionScheme//QuestionMultipleChoice//GridDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>        
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>    
@@ -1464,7 +1446,6 @@
 
     <xsl:template match="driver-QuestionScheme//*[name() = ('QuestionTable','QuestionDynamicTable')]//GridDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>       
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
@@ -1545,7 +1526,6 @@
 
     <xsl:template match="driver-VariableScheme//TextDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:TextRepresentation maxLength="{enoddi33:get-max-length($source-context)}"/>
     </xsl:template>
 
@@ -1580,7 +1560,6 @@
     
     <xsl:template match="driver-VariableScheme//NumericDomain" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="driver" select="."/>
         <xsl:variable name="decimalPositions" select="enoddi33:get-decimal-positions($source-context)"/>
 		<r:NumericRepresentation>
@@ -1738,7 +1717,6 @@
     
 	<xsl:template match="driver-ManagedRepresentationScheme//*" mode="model">
 	    <xsl:param name="source-context" as="item()" tunnel="yes"/>
-	    <xsl:param name="agency" as="xs:string" tunnel="yes"/>
 	    <!-- List of all date and duration Format -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="eno:append-empty-element('driver-ManagedRepresentationScheme', .)" tunnel="yes"/>
@@ -1747,7 +1725,6 @@
 
     <xsl:template match="driver-ManagedRepresentationScheme//ResponseDomain//DateTimeDomain | driver-ManagedRepresentationScheme//ResponseDomain//DurationDomain" mode="model" priority="1">
     	<xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!-- Get Date and Duration Format -->
         <xsl:variable name="format" select="enoddi33:get-format($source-context)"/>
         <!-- Old Date doesn't have format, should set default format and using ; as separator for list construct -->
@@ -1844,7 +1821,6 @@
 
     <xsl:template match="RosterDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:GridDimension displayCode="false" displayLabel="false" rank="{enoddi33:get-rank($source-context)}">
             <d:Roster baseCodeValue="1" codeIterationValue="1">
                 <xsl:attribute name="minimumRequired">
@@ -1857,10 +1833,7 @@
        </d:GridDimension>
     </xsl:template>
 
-    <xsl:template match="UnknownDimension" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-    </xsl:template>
+    <xsl:template match="UnknownDimension" mode="model"/>
 
     <xsl:template match="CodeDomainDimension" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
