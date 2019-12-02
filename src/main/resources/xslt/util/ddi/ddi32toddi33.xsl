@@ -95,12 +95,12 @@
     <xd:doc>
         <xd:desc>https://ddi-alliance.atlassian.net/projects/DDILIFE/issues/DDILIFE-3523</xd:desc>
     </xd:doc>
-    <xsl:template match="d32:ComputationItem">
-        <xsl:element name="d:ComputationItem">
-            <xsl:apply-templates select="@*"/>
-            <xsl:element name="d:TypeOfComputationItem">
-                <xsl:value-of select="'informational'"/>
-            </xsl:element>
+    <xsl:template match="d32:ComputationItem/r32:CommandCode">
+        <xsl:element name="d:TypeOfComputationItem">
+            <xsl:attribute name="controlledVocabularyID" select="'INSEE-TOCI-CL-3'"/>
+            <xsl:value-of select="'informational'"/>
+        </xsl:element>
+        <xsl:element name="r:CommandCode">
             <xsl:apply-templates select="node()"/>
         </xsl:element>
     </xsl:template>
@@ -195,7 +195,7 @@
                                     <xsl:variable name="variable-name" select="l32:VariableName/r32:String/text()"/>
                                     <xsl:choose>
                                         <xsl:when test="$dereferenced-questionnaire//text()[contains(.,concat('¤',$variable-name,'¤'))]">
-                                            <xsl:value-of select="'¤'"/>        
+                                            <xsl:value-of select="'¤'"/>
                                         </xsl:when>
                                         <xsl:when test="$dereferenced-questionnaire//text()[contains(.,concat('ø',$variable-name,'ø'))]">
                                             <xsl:value-of select="'ø'"/>
@@ -239,7 +239,7 @@
                             </xsl:choose>
                         </xsl:variable>
                         <xsl:if test="$is-variablegroup-to-reference != ''">
-                            <xsl:element name="r:VariableGroupReference">
+                            <xsl:element name="l:VariableGroupReference">
                                 <xsl:element name="r:Agency"><xsl:value-of select="r32:Agency"/></xsl:element>
                                 <xsl:element name="r:ID"><xsl:value-of select="$variablegroup-id"/></xsl:element>
                                 <xsl:element name="r:Version"><xsl:value-of select="r32:Version"/></xsl:element>
@@ -263,10 +263,10 @@
         <xsl:variable name="domain-root">
             <xsl:choose>
                 <xsl:when test="$domain/local-name()='NumericDomain'">
-                    <xsl:value-of select="'d:NumericDomain'"/>
+                    <xsl:value-of select="'r:NumericRepresentation'"/>
                 </xsl:when>
                 <xsl:when test="$domain/local-name()='NumericDomainReference'">
-                    <xsl:value-of select="'r:NumericDomainReference'"/>
+                    <xsl:value-of select="'r:NumericRepresentationReference'"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="'UNKNWON'"/>
@@ -279,7 +279,7 @@
                 <xsl:element name="r:MeasurementUnit">
                     <xsl:value-of select="r32:MeasurementUnit"/>
                 </xsl:element>
-                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter)]"/>
+                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter) and not(self::r32:ResponseCardinality)]"/>
             </xsl:element>
         </xsl:element>
     </xsl:template>
@@ -296,10 +296,10 @@
         <xsl:variable name="domain-root">
             <xsl:choose>
                 <xsl:when test="ends-with($domain/local-name(),'Domain')">
-                    <xsl:value-of select="concat('d:',$domain/local-name())"/>
+                    <xsl:value-of select="concat('r:',replace($domain/local-name(),'Domain','Representation'))"/>
                 </xsl:when>
                 <xsl:when test="ends-with($domain/local-name(),'DomainReference')">
-                    <xsl:value-of select="concat('r:',$domain/local-name())"/>
+                    <xsl:value-of select="concat('r:',replace($domain/local-name(),'Domain','Representation'))"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="'UNKNWON'"/>
@@ -307,10 +307,17 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:element name="l:VariableRepresentation">
-            <xsl:element name="{$domain-root}">
-                <xsl:apply-templates select="$domain/@*"/>
-                <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter)]"/>
-            </xsl:element>
+            <xsl:choose>
+                <xsl:when test="$domain/local-name()='NominalDomain'">
+                    <xsl:apply-templates select="$domain/descendant::r32:CodeRepresentation"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:element name="{$domain-root}">
+                        <xsl:apply-templates select="$domain/@*"/>
+                        <xsl:apply-templates select="$domain/*[not(self::r32:OutParameter) and not(self::r32:ResponseCardinality) and not(self::r32:Label)]"/>
+                    </xsl:element>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:element>
     </xsl:template>
 
