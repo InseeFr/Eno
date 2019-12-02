@@ -1166,7 +1166,6 @@
                 <r:CodeRepresentation>
                     <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-CodeListReference', .)" tunnel="yes"/>
-                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                 </r:CodeRepresentation>
             </r:OutParameter>
@@ -1199,7 +1198,6 @@
 		<d:ResponseDomainInMixed>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationResponseDomain', .)" tunnel="yes"/>
-				<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
 				<xsl:with-param name="label" select="enoddi33:get-label($source-context)" as="xs:string" tunnel="yes"/>
 			</xsl:apply-templates>
 			<d:AttachmentLocation>
@@ -1251,7 +1249,6 @@
 		<d:GridResponseDomainInMixed>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationResponseDomain', .)" tunnel="yes"/>
-				<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
 				<xsl:with-param name="label" select="enoddi33:get-label($source-context)" as="xs:string" tunnel="yes"/>
 			</xsl:apply-templates>
 			<d:ResponseAttachmentLocation>
@@ -1358,12 +1355,10 @@
             <!-- OutParameter part -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-OutParameter', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
             </xsl:apply-templates>
             <!-- Binding part -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-Binding', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
             </xsl:apply-templates>            
             <!-- QuestionText -->
             <xsl:element name="d:QuestionText">            
@@ -1389,12 +1384,10 @@
             <!--External-Aid part - Used to store specific Pogues UI element -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-ExternalAid', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
             </xsl:apply-templates>
             <!-- Instruction part -->
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-InterviewerInstructionReference', .)" tunnel="yes"/>
-                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:element>
     </xsl:template>
@@ -1433,13 +1426,9 @@
 
     <xsl:template match="driver-ClarificationResponseDomain//ResponseDomain" mode="model" priority="1">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:param name="label" as="xs:string" tunnel="yes"/>
         <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationTextDomain', .)" tunnel="yes"/>
-			<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
-			<xsl:with-param name="label" select="$label" as="xs:string" tunnel="yes"/>
 			<xsl:with-param name="nameClarification" select="enoddi33:get-name($relatedVariable)" as="xs:string" tunnel="yes"/>
 		</xsl:apply-templates>
     </xsl:template>
@@ -1601,7 +1590,6 @@
 			<!-- MeasurementUnit -->
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 	            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableScheme', .)" tunnel="yes"/>
-	            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
 	        </xsl:apply-templates>
 			<r:NumberRange>
                 <r:Low isInclusive="true">
@@ -1754,7 +1742,6 @@
 	    <!-- List of all date and duration Format -->
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="eno:append-empty-element('driver-ManagedRepresentationScheme', .)" tunnel="yes"/>
-			<xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
 
