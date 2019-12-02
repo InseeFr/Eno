@@ -360,7 +360,7 @@
 			<xd:p>The Response drivers in the body lines of tables create a cell, which type depends on the Response driver.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	<xsl:template match="*[name(.) =('NumericDomain','TextDomain','TextareaDomain','DateTimeDomain','CodeDomain','BooleanDomain')]" mode="model">
+	<xsl:template match="*[name(.) =('NumericDomain','TextDomain','TextareaDomain','DateTimeDomain','CodeDomain','BooleanDomain')]" mode="model" priority="0">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="idQuestion" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
