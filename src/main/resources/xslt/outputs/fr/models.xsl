@@ -47,9 +47,18 @@
                 <xhtml:title>
                     <xsl:value-of select="enofr:get-form-title($source-context, $languages[1])"/>
                 </xhtml:title>
-                <xsl:for-each select="$properties//Css/Common">
-                    <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
-                </xsl:for-each>
+                <xsl:choose>
+                    <xsl:when test="$parameters//StudyUnit='business'">
+                        <xsl:for-each select="$properties//Css/CommonBusinness">
+                            <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                        </xsl:for-each>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:for-each select="$properties//Css/Common">
+                            <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                        </xsl:for-each>
+                    </xsl:otherwise>
+                </xsl:choose>                
                 <xsl:for-each select="$parameters//Css">
                     <xsl:if test=".!=''">
                         <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>

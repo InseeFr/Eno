@@ -97,6 +97,9 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="LibelleServiceProducteur">
+        <xsl:value-of select="concat($metadata//ServiceProducteur/Article,$metadata//ServiceProducteur/Libelle)"/>
+    </xsl:variable>
     <xsl:variable name="ObjectifsEnquete" select="normalize-space($metadata//ObjectifsCourts)" />
     <xsl:variable name="SimplificationEntreprises" select="$metadata//SimplificationEntreprises" />
     <!-- Valeur pour laquelle on affiche le fait que l'enquête a un caractère obligatoire -->
@@ -218,7 +221,7 @@
                     &lt;p&gt;Lorsque vous quitterez ce questionnaire, privilégiez la fermeture par le bouton &lt;b&gt;Déconnexion&lt;/b&gt; afin d'éviter d'éventuels problèmes de navigation ultérieurs.&lt;/p&gt;
                     &lt;p&gt;&lt;b&gt;Veuillez utiliser les boutons &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Retour &lt;/button&gt; et &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Enregistrer et continuer &lt;/button&gt; pour naviguer dans le
                     questionnaire&lt;/b&gt; et non pas les boutons "Précédent" et "Suivant" de votre
-                    navigateur.&lt;/p&gt;&lt;p&gt;&lt;/div&gt;
+                    navigateur.&lt;/p&gt;&lt;/div&gt;
                     </xsl:text>
                 </xsl:if>
             </label>
@@ -278,24 +281,22 @@
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Vu l'avis favorable du Conseil national de
                     l'information statistique, cette enquête</xsl:text>
                     <xsl:choose>
-                        <xsl:when test="$CaractereObligatoire=$CaractereObligatoireEnqueteReference">
+                        <xsl:when
+                            test="$CaractereObligatoire=$CaractereObligatoireEnqueteReference">
                             <xsl:text>, reconnue d'&lt;b&gt;</xsl:text>
-                            <xsl:value-of select="$StatutEnquete" />
-                            <!--<xsl:text>, est
-                            obligatoire.&lt;/b&gt;</xsl:text>-->
+                            <xsl:value-of select="$StatutEnquete"/>
                             <xsl:text>, est
                             obligatoire, &lt;/b&gt;en application de la &lt;a
                     href="</xsl:text>
-                            <xsl:value-of select="$properties//lois/statistique" />
+                            <xsl:value-of select="$properties//lois/statistique"/>
                             <xsl:text>" target="_blank"&gt;loi n° 51-711 du 7 juin 1951 modifiée&lt;/a&gt; sur l’obligation, la coordination et le secret en matière de statistiques.</xsl:text>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:text> est reconnue d'&lt;b&gt;</xsl:text>
-                            <xsl:value-of select="$StatutEnquete" />
-                            <!-- <xsl:text>&lt;/b&gt; sans avoir de caractère obligatoire.</xsl:text>-->
+                            <xsl:value-of select="$StatutEnquete"/>
                             <xsl:text>&lt;/b&gt; sans avoir de caractère obligatoire, en application de la &lt;a
                     href="</xsl:text>
-                            <xsl:value-of select="$properties//lois/statistique" />
+                            <xsl:value-of select="$properties//lois/statistique"/>
                             <xsl:text>" target="_blank"&gt;loi n° 51-711 du 7 juin 1951 modifiée&lt;/a&gt; sur l’obligation, la coordination et le secret en matière de statistiques.</xsl:text>
                         </xsl:otherwise>
                     </xsl:choose>
@@ -304,29 +305,29 @@
                             dans le cadre des mesures de simplification pour les entreprises.</xsl:text>
                     </xsl:if>
                     <xsl:text>&lt;/p&gt;&lt;p&gt;Visa n°</xsl:text>
-                    <xsl:value-of select="$NumeroVisa" />
-                    <xsl:text></xsl:text>
+                    <xsl:value-of select="$NumeroVisa"/>
+                    <xsl:text> </xsl:text>
                     <xsl:for-each select="$MinistereTutelle">
-                        <xsl:text>du </xsl:text>
-                        <xsl:value-of select="." />
+                        <xsl:text>du Ministre </xsl:text>
+                        <xsl:value-of select="."/>
                         <xsl:text>, </xsl:text>
                     </xsl:for-each>
-
                     <xsl:text>valable pour l'année </xsl:text>
-                    <xsl:value-of select="$AnneeCollecte" />
+                    <xsl:value-of select="$AnneeCollecte"/>
+                    
                     <xsl:text>.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à </xsl:text>
-                    <xsl:value-of select="$NomServiceProducteurCourt" />
-                    <xsl:text>&lt;/p&gt;</xsl:text>
-
+                    <xsl:value-of select="$LibelleServiceProducteur"/>
+                    <xsl:text>.&lt;/p&gt;</xsl:text>
+                    
                     <xsl:text>&lt;p&gt;Le &lt;a href="</xsl:text>
-                    <xsl:value-of select="$properties//lois/rgpd" />
+                    <xsl:value-of select="$properties//lois/rgpd"/>
                     <xsl:text>" target="_blank"&gt;règlement général 2016/679 du 27 avril 2016&lt;/a&gt; sur la protection des données (RGPD)</xsl:text>
                     <xsl:text> ainsi que la &lt;a href="</xsl:text>
-                    <xsl:value-of select="$properties//lois/informatique" />
+                    <xsl:value-of select="$properties//lois/informatique"/>
                     <xsl:text>" target="_blank"&gt;loi n°78-17 du 6 janvier 1978 modifiée&lt;/a&gt; relative à l'informatique, aux fichiers et aux libertés s'appliquent à la présente enquête pour les données à caractère personnel. Ces droits, rappelés dans la lettre-avis, peuvent être exercés auprès de </xsl:text>
-                    <xsl:value-of select="$NomServiceProducteurCourt" />
+                    <xsl:value-of select="$LibelleServiceProducteur"/>
                     <xsl:text>.&lt;/p&gt;</xsl:text>
-                    <xsl:text>.&lt;/div&gt;</xsl:text>
+                    <xsl:text>&lt;/div&gt;</xsl:text>                    
                 </xsl:if>
 
             </label>
