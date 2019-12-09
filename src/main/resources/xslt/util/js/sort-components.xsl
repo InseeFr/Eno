@@ -176,18 +176,19 @@
     <xsl:template match="h:variables">
         <xsl:variable name="value" select="h:value"/>
         <xsl:variable name="responseRef" select="h:responseRef"/>
+        <xsl:variable name="expression" select="h:expression"/>
         <variables>
             <xsl:copy-of select="@*"/>
             <name><xsl:value-of select="h:name"/></name>
             <xsl:choose>
-                <xsl:when test="$value!=''">
-                    <value><xsl:value-of select="normalize-space($value)"/></value>
-                </xsl:when>
                 <xsl:when test="$responseRef!=''">
                     <responseRef><xsl:value-of select="$responseRef"/></responseRef>
                 </xsl:when>
+                <xsl:when test="$expression!=''">
+                    <expression><xsl:value-of select="$expression"/></expression>
+                </xsl:when>
             </xsl:choose>
-            <xsl:apply-templates select="h:label"/>
+            <xsl:apply-templates select="h:value"/>
         </variables>
     </xsl:template>
     

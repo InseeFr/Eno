@@ -24,8 +24,16 @@
         <Duration>Entrez une durée valide</Duration>
     </Alert>
     <And>et</And>
-    <After>postérieure à</After>
-    <Before>antérieure à</Before>
+    <After>
+        <Date>postérieure au</Date>
+        <Date-YYYYMM>postérieures à</Date-YYYYMM>
+        <Date-YYYY>postérieure à</Date-YYYY>
+    </After>
+    <Before>
+        <Date>antérieure au</Date>
+        <Date-YYYYMM>antérieures à</Date-YYYYMM>
+        <Date-YYYY>antérieure à</Date-YYYY>
+    </Before>
     <Between>entre</Between>
     <GreaterThan>supérieur à</GreaterThan>
     <LessThan>inférieur à</LessThan>

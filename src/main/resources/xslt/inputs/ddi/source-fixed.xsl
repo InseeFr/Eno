@@ -556,6 +556,18 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+      
+    <xsl:template match="*" mode="enoddi:get-generation-instruction">
+        <xsl:param name="variable" tunnel="yes"/>
+        <xsl:variable
+            name="is-calculated-variable"
+            as="xs:boolean"
+            select="$root//l:Variable[r:ID=$variable or l:VariableName/r:String=$variable]/l:VariableRepresentation/r:ProcessingInstructionReference/r:TypeOfObject='GenerationInstruction'"/>
+        <xsl:if test="$is-calculated-variable">
+            <xsl:variable name="idGenerationInstruction" select="$root//l:Variable[r:ID=$variable or l:VariableName/r:String=$variable]/l:VariableRepresentation/r:ProcessingInstructionReference/r:ID"/>
+            <xsl:copy-of select="$root//d:GenerationInstruction[r:ID=$idGenerationInstruction]"/>
+        </xsl:if>
+    </xsl:template>
 
     <xd:doc>
         <xd:desc>
@@ -1101,6 +1113,9 @@
             <!-- external variable -->
             <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
                 <xsl:value-of select="$variable"/>
+            </xsl:when>
+            <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/r:ID= $variable">
+                <xsl:value-of select="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference) and descendant::r:ID= $variable]/l:VariableName/r:String"/>
             </xsl:when>
             <!-- Loop -->
             <xsl:when test="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference/r:ID = $variable">
