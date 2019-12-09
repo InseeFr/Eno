@@ -156,6 +156,11 @@
         <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
     </xsl:template>
 
+    <xsl:template match="pogues:ClarificationQuestion" mode="enopogues:get-related-variable">
+        <xsl:variable name="idVariable" select="pogues:Response/pogues:CollectedVariableReference"/>
+        <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
+    </xsl:template>
+
     <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label" mode="enopogues:get-related-variable">
         <xsl:variable name="expressionVariable" select="tokenize(., '\$')"/>
         <xsl:variable name="variables" select="//pogues:Variables"/>
