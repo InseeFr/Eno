@@ -292,9 +292,6 @@
             <xsl:otherwise>
                 <xsl:variable name="clarified-response-codelist" select="enopogues:get-code-list-id($clarified-response)"/>
                 <xsl:variable name="clarified-value" select="enoddi33:get-clarified-value(.)"/>
-                <xsl:message select="enopogues:get-type($clarified-response)"></xsl:message>
-                <xsl:message select="$clarified-response-codelist"></xsl:message>
-                <xsl:message select="$clarified-value"></xsl:message>
                 <xsl:value-of select="enopogues:get-id(//pogues:CodeList[@id=$clarified-response-codelist]/pogues:Code[pogues:Value=$clarified-value])"/>                
             </xsl:otherwise>
         </xsl:choose>
