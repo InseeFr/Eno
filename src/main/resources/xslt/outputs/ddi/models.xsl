@@ -1168,51 +1168,68 @@
     </xsl:template>
 
     <!-- Question with a complementary sub-response for clarification which are linked to each other -->
-	<xsl:template match="driver-SMRD//ResponseDomain[not(ancestor::Clarification)]" mode="model" priority="1">
+	<xsl:template match="driver-SMRD//ResponseDomain" mode="model" priority="1">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<d:ResponseDomainInMixed attachmentBase="1">
+	    <xsl:param name="agency" tunnel="yes"/>
+	    <xsl:param name="attached-position" tunnel="yes"/>
+	    <xsl:param name="clarified-value" tunnel="yes"/>
+	    <xsl:param name="clarified-code" tunnel="yes"/>
+	    
+	    <xsl:variable name="response-attachment" select="enoddi33:get-attachment-position($source-context)"/>
+	    
+		<d:ResponseDomainInMixed>
+		    <xsl:if test="$response-attachment !=''">
+		        <xsl:attribute name="attachmentBase" select="$response-attachment"/>
+		    </xsl:if>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
+		    <xsl:if test="ancestor::Clarification">
+		        <d:AttachmentLocation>
+		            <d:DomainSpecificValue>
+		                <xsl:attribute name="attachmentDomain" select="$attached-position"/>
+		                <r:Value>
+		                    <xsl:value-of select="$clarified-value"/>
+		                </r:Value>
+		            </d:DomainSpecificValue>
+		            <r:CodeReference>
+		                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+		                <r:ID><xsl:value-of select="$clarified-code"/></r:ID>
+		                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+		                <r:TypeOfObject>Code</r:TypeOfObject>
+		            </r:CodeReference>
+		        </d:AttachmentLocation>
+		    </xsl:if>
 		</d:ResponseDomainInMixed>
 	</xsl:template>
 
-    <!-- Clarification -->
-	<xsl:template match="driver-SMRD//Clarification" mode="model" priority="1">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="agency" as="xs:string" tunnel="yes"/>
-		<xsl:param name="idList" as="xs:string" tunnel="yes"/>
-		<xsl:param name="clarificationVal" as="xs:string" tunnel="yes"/>
-		<d:ResponseDomainInMixed>
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationResponseDomain', .)" tunnel="yes"/>
-				<xsl:with-param name="label" select="enoddi33:get-label($source-context)" as="xs:string" tunnel="yes"/>
-			</xsl:apply-templates>
-			<d:AttachmentLocation>
-				<d:DomainSpecificValue attachmentDomain="1">
-					<r:Value><xsl:value-of select="$clarificationVal"/></r:Value>
-				</d:DomainSpecificValue>
-				<r:CodeReference>
-					<r:Agency><xsl:value-of select="$agency"/></r:Agency>
-					<r:ID><xsl:value-of select="enoddi33:get-clarified-code($source-context,$idList,$clarificationVal)"/></r:ID>
-					<r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-					<r:TypeOfObject>Code</r:TypeOfObject>
-				</r:CodeReference>
-			</d:AttachmentLocation>
-		</d:ResponseDomainInMixed>
-	</xsl:template>
-
-    <xsl:template match="driver-SMGRD/ResponseDomain" mode="model" priority="3">
+    <xsl:template match="driver-SMRD//Clarification" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="clarificationResponseid" as="xs:string" tunnel="yes"/>
-        <!-- Because of the xsl:for-each, driver context needs to be kept. -->
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+            <xsl:with-param name="clarification-label" select="enoddi33:get-label($source-context)" as="xs:string" tunnel="yes"/>
+            <xsl:with-param name="attached-position" select="enoddi33:get-attachment-position($source-context)" tunnel="yes"/>
+            <xsl:with-param name="clarified-value" select="enoddi33:get-clarified-value($source-context)" tunnel="yes"/>
+            <xsl:with-param name="clarified-code" select="enoddi33:get-clarified-code($source-context)" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xsl:template match="driver-SMGRD//ResponseDomain[not(ancestor::Clarification)]" mode="model" priority="3">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" tunnel="yes"/>
+        <xsl:param name="attached-position" tunnel="yes"/>
+        <xsl:param name="clarified-value" tunnel="yes"/>
+        <xsl:param name="clarified-code" tunnel="yes"/>
+        
         <xsl:variable name="driver" select="."/>
+        <xsl:variable name="response-attachment" select="enoddi33:get-attachment-position($source-context)"/>
+        
         <xsl:for-each select="enoddi33:get-grid-dimensions($source-context)">
             <d:GridResponseDomainInMixed>
-				<!-- Check wich response has an clarification question attached -->
-				<xsl:if test="$clarificationResponseid !='' and contains($clarificationResponseid,enoddi33:get-id($source-context))">
-					<xsl:attribute name="attachmentBase" select="1"/>
-				</xsl:if>
+                <xsl:if test="$response-attachment !=''">
+                    <xsl:attribute name="attachmentBase" select="$response-attachment"/>
+                </xsl:if>
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
                     <xsl:with-param name="mandatory" select="enoddi33:get-ci-type($source-context)" tunnel="yes"/>
@@ -1228,32 +1245,43 @@
         </xsl:for-each>
     </xsl:template>
     
-	<xsl:template match="driver-SMGRD/Clarification" mode="model" priority="3">
-		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="agency" as="xs:string" tunnel="yes"/>
-		<xsl:param name="idCodeList" as="xs:string" tunnel="yes"/>
-		<xsl:param name="clarificationVal" as="xs:string" tunnel="yes"/>
-		<d:GridResponseDomainInMixed>
-			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-				<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationResponseDomain', .)" tunnel="yes"/>
-				<xsl:with-param name="label" select="enoddi33:get-label($source-context)" as="xs:string" tunnel="yes"/>
-			</xsl:apply-templates>
-			<d:ResponseAttachmentLocation>
-				<d:DomainSpecificValue attachmentDomain="1">
-					<r:Value><xsl:value-of select="$clarificationVal"/></r:Value>
-				</d:DomainSpecificValue>
-				<r:CodeReference>
-					<r:Agency><xsl:value-of select="$agency"/></r:Agency>
-					<xsl:choose>
-					    <xsl:when test="$idCodeList != '' "><r:ID><xsl:value-of select="enoddi33:get-clarified-code($source-context,$idCodeList,$clarificationVal)"/></r:ID></xsl:when>
-						<xsl:otherwise><r:ID>INSEE-COMMUN-CL-Booleen-1</r:ID></xsl:otherwise>
-					</xsl:choose>
-					<r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-					<r:TypeOfObject>Code</r:TypeOfObject>
-				</r:CodeReference>
-			</d:ResponseAttachmentLocation>
-		</d:GridResponseDomainInMixed>
-	</xsl:template>
+    <xsl:template match="driver-SMGRD//Clarification" mode="model" priority="3">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" tunnel="yes"/>
+        
+        <xsl:variable name="driver" select="."/>
+        
+        <xsl:for-each select="enoddi33:get-grid-dimensions($source-context)">
+            <d:GridResponseDomainInMixed>
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
+                    <xsl:with-param name="clarification-label" select="enoddi33:get-label($source-context)" as="xs:string" tunnel="yes"/>
+                </xsl:apply-templates>
+                <d:ResponseAttachmentLocation>
+                    <d:DomainSpecificValue>
+                        <xsl:attribute name="attachmentDomain" select="enoddi33:get-attachment-position($source-context)"/>
+                        <r:Value>
+                            <xsl:value-of select="enoddi33:get-clarified-value($source-context)"/>
+                        </r:Value>
+                    </d:DomainSpecificValue>
+                    <r:CodeReference>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="enoddi33:get-clarified-code($source-context)"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:TypeOfObject>Code</r:TypeOfObject>
+                    </r:CodeReference>
+                </d:ResponseAttachmentLocation>
+            </d:GridResponseDomainInMixed>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="driver-SMGRD//Clarification//ResponseDomain" mode="model" priority="3">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
 
     <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
     <xsl:template match="driver-ResponseDomain/QuestionSimple | driver-ResponseDomain/QuestionSingleChoice" mode="model" priority="3">
@@ -1266,13 +1294,9 @@
     <!-- This template is only matched when call just after driver-ResponseDomain (why it got 3 priority), to check if SMR is needed. -->
     <xsl:template match="driver-ResponseDomain/QuestionOtherDetails" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:variable name="clarificationExp" select="enoddi33:get-clarification-expression($source-context)"/>
-        <xsl:variable name="clarificationVal" select='normalize-space(replace(substring-after($clarificationExp, "="),"&apos;",""))'/>
         <d:StructuredMixedResponseDomain>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMRD', .)" tunnel="yes"/>
-                <xsl:with-param name="idList" select="enoddi33:get-code-list-id($source-context)" tunnel="yes"/>
-                <xsl:with-param name="clarificationVal" select="$clarificationVal" tunnel="yes"/>
 			</xsl:apply-templates>
 		</d:StructuredMixedResponseDomain>
 	</xsl:template>
@@ -1281,15 +1305,9 @@
     <xsl:template match="driver-ResponseDomain/QuestionDynamicTable | driver-ResponseDomain/QuestionTable | driver-ResponseDomain/QuestionMultipleChoice" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <!-- If clarification exist must keep expression value -->
-        <xsl:variable name="clarificationExp" select="enoddi33:get-clarification-expression($source-context)"/>
-        <xsl:variable name="clarificationVal" select='normalize-space(replace(substring-after($clarificationExp, "="),"&apos;",""))'/>
-        <xsl:variable name="clarificationResponseid" select="enoddi33:get-clarification-responseid($source-context)"/>
         <d:StructuredMixedGridResponseDomain>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="eno:append-empty-element('driver-SMGRD', .)" tunnel="yes"/>
-                <xsl:with-param name="idCodeList" select="enoddi33:get-code-list-id($source-context)" tunnel="yes"/>
-                <xsl:with-param name="clarificationVal" select="$clarificationVal" tunnel="yes"/>
-				<xsl:with-param name="clarificationResponseid" select='$clarificationResponseid' tunnel="yes"/>
             </xsl:apply-templates> 
         </d:StructuredMixedGridResponseDomain>
     </xsl:template>
@@ -1390,7 +1408,8 @@
             <xsl:attribute name="isArray" select="'false'"/>
             <xsl:element name="r:Agency"><xsl:value-of select="$agency"/></xsl:element>
             <xsl:element name="r:ID"><xsl:value-of select="enoddi33:get-qop-id($source-context)"/></xsl:element>
-            <xsl:element name="r:Version"><xsl:value-of select="enoddi33:get-version($source-context)"/></xsl:element><xsl:element name="r:ParameterName">
+            <xsl:element name="r:Version"><xsl:value-of select="enoddi33:get-version($source-context)"/></xsl:element>
+            <xsl:element name="r:ParameterName">
                 <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
                 <xsl:element name="r:String">
                     <xsl:attribute name="xml:lang" select="enoddi33:get-lang($source-context)"/>
@@ -1398,6 +1417,9 @@
                 </xsl:element>
             </xsl:element>
         </xsl:element>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
     </xsl:template>
 
     <xsl:template match="driver-OutParameter//Clarification" mode="model" priority="2">
@@ -1406,15 +1428,6 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-
-    <xsl:template match="driver-ClarificationResponseDomain//ResponseDomain" mode="model" priority="1">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
-        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-			<xsl:with-param name="driver" select="eno:append-empty-element('driver-ClarificationTextDomain', .)" tunnel="yes"/>
-			<xsl:with-param name="nameClarification" select="enoddi33:get-name($relatedVariable)" as="xs:string" tunnel="yes"/>
-		</xsl:apply-templates>
-    </xsl:template>
 
     <!--this part is designed in this complicated way to maintain the order of the ddi 3.3 xsd schema-->
     <xsl:template match="driver-Binding//ResponseDomain" mode="model" priority="2">
@@ -1434,6 +1447,9 @@
                 <r:TypeOfObject>OutParameter</r:TypeOfObject>
             </r:TargetParameterReference>
         </r:Binding>
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
     </xsl:template>
     
    
@@ -1471,7 +1487,7 @@
     <xsl:template match="driver-CodeListReference//*" mode="model"/>
     
 
-    <xsl:template match="driver-CodeListReference//CodeListReference | QuestionSingleChoice//ResponseDomain/CodeListReference" mode="model" priority="2">
+    <xsl:template match="driver-CodeListReference//CodeListReference | QuestionSingleChoice//ResponseDomain[not(ancestor::driver-OutParameter) and not(ancestor::driver-Binding)]/CodeListReference" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:CodeListReference>	
@@ -1486,7 +1502,18 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="mandatory" as="xs:string" tunnel="yes" select="''"/>
+        <xsl:param name="clarification-label" as="xs:string" tunnel="yes" select="''"/>
+        
         <d:TextDomain maxLength="{enoddi33:get-max-length($source-context)}">
+            <xsl:if test="$clarification-label != ''">
+                <r:Label>
+                    <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                        <xhtml:p>
+                            <xhtml:b><xsl:value-of select="$clarification-label"/></xhtml:b>
+                        </xhtml:p>
+                    </r:Content>
+                </r:Label>
+            </xsl:if>
             <r:OutParameter isArray="false">
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
@@ -1496,31 +1523,6 @@
 			<xsl:if test="$mandatory = 'mandatory'">
 				<r:ResponseCardinality minimumResponses="1"/>
 			</xsl:if>
-        </d:TextDomain>
-    </xsl:template>
-    
-    <xsl:template match="driver-ClarificationTextDomain//TextDomain" mode="model">
-        <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:param name="label" as="xs:string" tunnel="yes"/>
-        <xsl:param name="nameClarification" as="xs:string" tunnel="yes"/>
-        <d:TextDomain maxLength="{enoddi33:get-max-length($source-context)}">
-			<r:Label>
-				<r:Content xml:lang="{enoddi33:get-lang($source-context)}">
-					<xhtml:p>
-						<xhtml:b><xsl:value-of select="$label"/></xhtml:b>
-					</xhtml:p>
-				</r:Content>
-			</r:Label>
-            <r:OutParameter isArray="false">
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                <r:ID><xsl:value-of select="enoddi33:get-rdop-id($source-context)"/></r:ID>
-                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-                <r:ParameterName>
-                  <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="$nameClarification"/></r:String>
-                </r:ParameterName>
-                <r:TextRepresentation maxLength="{enoddi33:get-max-length($source-context)}"/>
-            </r:OutParameter>
         </d:TextDomain>
     </xsl:template>
 

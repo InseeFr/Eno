@@ -268,5 +268,36 @@
         <xsl:apply-templates select="." mode="enopogues:is-with-dynamic-text"/>
     </xsl:template>
     
+    <xsl:function name="enoddi33:get-clarified-value">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi33:get-clarified-value"/>
+    </xsl:function>
+    <xsl:template match="pogues:ClarificationQuestion" mode="enoddi33:get-clarified-value">
+        <xsl:variable name="clarified-expression" select="enopogues:get-clarification-expression(.)"/>
+        
+        <xsl:value-of select="normalize-space(replace(substring-after($clarified-expression, '='),'''',''))"/>
+    </xsl:template>
+
+    <xsl:function name="enoddi33:get-clarified-code">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi33:get-clarified-code"/>
+    </xsl:function>
+    <xsl:template match="pogues:ClarificationQuestion" mode="enoddi33:get-clarified-code">
+        <xsl:variable name="clarified-response" select="enopogues:get-clarified-response(.)" as="node()"/>
+        
+        <xsl:choose>
+            <xsl:when test="enopogues:get-type($clarified-response)='BOOLEAN'">
+                <xsl:value-of select="'INSEE-COMMUN-CL-Booleen-1'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="clarified-response-codelist" select="enopogues:get-code-list-id($clarified-response)"/>
+                <xsl:variable name="clarified-value" select="enoddi33:get-clarified-value(.)"/>
+                <xsl:message select="enopogues:get-type($clarified-response)"></xsl:message>
+                <xsl:message select="$clarified-response-codelist"></xsl:message>
+                <xsl:message select="$clarified-value"></xsl:message>
+                <xsl:value-of select="enopogues:get-id(//pogues:CodeList[@id=$clarified-response-codelist]/pogues:Code[pogues:Value=$clarified-value])"/>                
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
     
 </xsl:stylesheet>
