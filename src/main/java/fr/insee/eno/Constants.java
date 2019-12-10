@@ -79,11 +79,9 @@ public final class Constants {
 	public static final String UTIL_FODS_PREFORMATTING_XSL = UTIL_FOLDER_PATH + "/fods/preformatting.xsl";
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
 
-
-	//	public static final String PROPERTIES_FILE_FR = CONFIG_FOLDER + "/ddi2fr.xml";
-	//	public static final String PROPERTIES_FILE_ODT = CONFIG_FOLDER + "/ddi2odt.xml";
-	//	public static final String PROPERTIES_FILE_PDF = CONFIG_FOLDER + "/ddi2pdf.xml";
-	//	public static final String PROPERTIES_FILE_DDI = CONFIG_FOLDER + "/pogues-xml2ddi.xml";
+	public static final String UTIL_DDI32_TO_DDI33_XSL = UTIL_FOLDER_PATH + "/ddi/ddi32toddi33.xsl";
+	public static final String BROWSING_FR_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/fr/browsing.xsl";
+	public static final String BROWSING_JS_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/js/browsing.xsl";
 
 	// ---------- XSL generation
 	public static final String TRANSFORMATIONS_DDI2FR_DDI2FR_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr.xsl";
@@ -335,6 +333,8 @@ public final class Constants {
 	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
 
+	public static final String DDI32_DDI33_EXTENSION = "-ddi33.xml";
+
 	// PDF
 	public static final String ACCOMPANYING_MAILS_FO_EXTENSION = "-accompanying-mails.fo";
 	public static final String COVER_PAGE_FO_EXTENSION = "-cover-page.fo";
@@ -348,6 +348,8 @@ public final class Constants {
 
 	// JS
 	public static final String SORT_COMPONENTS_JS_EXTENSION = "-sorted.xml";
+	public static final String EXTERNALIZE_VARIABLES_JS_EXTENSION = "-ext-variables.xml";
+	public static final String VTL_PARSER_JS_EXTENSION = "-vtl-parsed.xml";
 	public static final String FINAL_JS_EXTENSION = "-lunatic.xml";
 
 	// FR

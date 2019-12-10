@@ -7,6 +7,7 @@
 
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
+    
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
             <xd:p>Template de racine, on applique les templates de tous les enfants</xd:p>
@@ -27,81 +28,84 @@
         </xsl:copy>
     </xsl:template>
     
-       
-    <!-- Autre : précisez dans les QCM -->
-    <!-- Remplacer -QOPI- par -Details- pour le contenu de @QOPI -->
     
-    <xsl:variable name="table-give-details">
-        <TableGiveDetailsList>
-            <TableGiveDetail other="AUT_PERS_AUTRES" give-details="AUT_PERS_AUTRES_P" QOPI="js0dvdaw-Details-1" value="1"/>
-            <TableGiveDetail other="MAD_LOCAUX_PAR_AUTRES" give-details="MAD_LOCAUX_PAR_AUTRES_P" QOPI="js1wmyn8-Details-1" value="1"/>
-            <TableGiveDetail other="MAD_TERRAINS_PAR_AUTRES" give-details="MAD_TERRAINS_PAR_AUTRES_P" QOPI="js1wqahn-Details-1" value="1"/>
-        </TableGiveDetailsList>
-    </xsl:variable>
+    <!-- Première colonne des tableaux de l'Esa -->
     
-    <xsl:template match="xf:instance[@id='fr-form-instance']//Variable[@idVariable=$table-give-details//TableGiveDetail/@give-details
-        and preceding-sibling::Variable[@idVariable=$table-give-details//TableGiveDetail/@other]]">
-        
-        <xsl:element name="{$table-give-details//TableGiveDetail[@give-details=current()/@idVariable]/@QOPI}">
-            <xsl:copy-of select="."/>
+    <xsl:template match="Groupe[@typeGroupe='REPARTITION_CA']">
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*"/>
+            <xsl:element name="output-REPARTITION_CA1"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="xf:bind[@id='REPARTITION_CA1-bind']">
+        <xsl:variable name="groupe" select="'REPARTITION_CA'"/>
+        <xsl:copy>
+            <xsl:attribute name="id" select="concat('output-',@id)"/>
+            <xsl:attribute name="name" select="concat('output-',@name)"/>
+            <xsl:attribute name="ref" select="concat('output-',@name)"/>
+            <xsl:attribute name="relevant" select="'instance(''fr-form-instance'')//Groupe[@typeGroupe=''REPARTITION_CA'' and @idGroupe = current()/ancestor::Groupe[@typeGroupe=''REPARTITION_CA'']/@idGroupe]//Variable[@idVariable=''REPARTITION_CA2''] != '''''"/>
+        </xsl:copy>
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:attribute name="relevant" select="'not(instance(''fr-form-instance'')//Groupe[@typeGroupe=''REPARTITION_CA'' and @idGroupe = current()/ancestor::Groupe[@typeGroupe=''REPARTITION_CA'']/@idGroupe]//Variable[@idVariable=''REPARTITION_CA2''] != '''')'"/>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="xf:repeat[@id='REPARTITION_CA']/xhtml:tr/xhtml:td[1]">
+        <xsl:copy>
+            <xsl:apply-templates select="node()"/>
+            <xf:output>
+                <xsl:attribute name="id" select="concat('output-',node()/@id)"/>
+                <xsl:attribute name="name" select="concat('output-',node()/@name)"/>
+                <xsl:attribute name="bind" select="concat('output-',node()/@bind)"/>
+                <xsl:copy-of select="@xxf:order"/>
+                <xf:label>
+                    <xsl:attribute name="ref" select="'replace($form-resources/output-REPARTITION_CA1/label
+                        ,''¤REPARTITION_CA1¤'',instance(''fr-form-instance'')//Groupe[@typeGroupe=''REPARTITION_CA'' and @idGroupe = current()/ancestor::Groupe[@typeGroupe=''REPARTITION_CA'']/@idGroupe]//Variable[@idVariable=''REPARTITION_CA1''])
+                        '"/>
+                    <xsl:attribute name="mediatype" select="'text/html'"/>
+                </xf:label>
+            </xf:output>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="xf:repeat[@id='REPARTITION_CA']/xhtml:tr/xhtml:td[2]">
+        <xsl:copy>
+            <xf:output>
+                <xsl:apply-templates select="*/@id"/>
+                <xsl:apply-templates select="*/@name"/>
+                <xsl:apply-templates select="*/@bind"/>
+            </xf:output>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="xf:instance[@id='fr-form-resources']//*[name()='REPARTITION_CA1']">
+        <xsl:element name="output-REPARTITION_CA1">
+            <label><xsl:value-of select="'¤REPARTITION_CA1¤'"/></label>
         </xsl:element>
-    </xsl:template>
-    
-    <xsl:template match="xf:bind[ends-with(@id,'-bind') and substring-before(@id,'-bind')=$table-give-details//TableGiveDetail/@give-details 
-        and preceding-sibling::xf:bind[substring-before(@id,'-bind')=$table-give-details//TableGiveDetail/@other]]">
-        
-        <xsl:variable name="QOPI-id" select="$table-give-details//TableGiveDetail[@give-details=substring-before(current()/@id,'-bind')]/@QOPI"/>
-        
-        <xf:bind id="{$QOPI-id}-bind" name="{$QOPI-id}" ref="{$QOPI-id}"
-            relevant="../Variable[@idVariable='{$table-give-details//TableGiveDetail[@give-details=substring-before(current()/@id,'-bind')]/@other}'] ='{$table-give-details//TableGiveDetail[@give-details=substring-before(current()/@id,'-bind')]/@value}'">
-            <xsl:copy-of select="."/>
-        </xf:bind>
-    </xsl:template>
-    
-    <xsl:template match="xf:instance[@id='fr-form-resources']//*[name()=$table-give-details//TableGiveDetail/@give-details]">
-        <xsl:element name="{$table-give-details//TableGiveDetail[@give-details=current()/name()]/@QOPI}"/>
         <xsl:copy-of select="."/>
     </xsl:template>
     
-    <!--a eclaircir-->
-    <!--    vu sur INVT : ne change rien-->
-    <!--    vu sur ASSOT : change qqch !-->
-     <xsl:template match="xf:instance[@id='fr-form-resources']//*[name()=$table-give-details//TableGiveDetail/@QOPI]"/>
+    <!-- Complément avec les libellés de cases -->
+    <!-- Initialisation des données fixes des tableaux dynamiques -->
     
-    <xsl:template match="xhtml:body//xhtml:td[*[ends-with(@id,'-control') and substring-before(@id,'-control')=$table-give-details//TableGiveDetail/@other]]">  
-        <xsl:variable name="give-details" select="$table-give-details//TableGiveDetail[@other=substring-before(current()/*/@id,'-control')]/@give-details"/>
-        <xsl:variable name="QOPI-id" select="$table-give-details//TableGiveDetail[@other=substring-before(current()/*/@id,'-control')]/@QOPI"/>
-        
+    
+    
+    <xsl:template match="xf:action[@ev:event='xforms-ready']">
         <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-            <xsl:if test="following-sibling::xhtml:td[*/@id=concat($give-details,'-control')]">
-                <xf:group id="{$QOPI-id}-control" bind="{$QOPI-id}-bind">
-                    <!--<xsl:copy-of select="following-sibling::xhtml:td[xf:input/@id=concat($give-details,'-control')]/xf:input"/>-->
-                    <xsl:copy-of select="following-sibling::xhtml:td/xf:input[@id=concat($give-details,'-control')]"/>
-                    <xsl:copy-of select="following-sibling::xhtml:td/xf:textarea[@id=concat($give-details,'-control')]"/>
-                </xf:group>
-            </xsl:if>
-        </xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xf:action xxf:iterate="instance('fr-form-instance')//Groupe[@typeGroupe='REPARTITION_CA']">
+                <xf:action if="not(output-REPARTITION_CA1)">
+                    <xf:insert origin="instance('fr-form-loop-model')/Groupe/Groupe[@typeGroupe='REPARTITION_CA']/output-REPARTITION_CA1"
+                        context="instance('fr-form-instance')//Groupe[@typeGroupe='REPARTITION_CA'][not(output-REPARTITION_CA1)][1]/*[last()]"
+                        nodeset="instance('fr-form-instance')//Groupe[@typeGroupe='REPARTITION_CA'][not(output-REPARTITION_CA1)][1]/*[last()]"
+                        position="after"/>
+                </xf:action>
+            </xf:action>
+            <xsl:apply-templates select="node()"/>
+        </xsl:copy>        
     </xsl:template>
     
-    <!--a eclaircir-->
-    <!--    vu sur INVT : ne change rien-->
-    <!--    vu sur ASSOT : change qqch !-->
-        <xsl:template match="xhtml:body//xhtml:td[*[ends-with(@id,'-control') and substring-before(@id,'-control')=$table-give-details//TableGiveDetail/@give-details]]"/>
-    
-    <xsl:variable name="tablehead-variable">
-        <Variables>
-            <Variable name="RESS_AUTRES_P"/>
-            </Variables>
-    </xsl:variable>
-    
-    <xsl:template match="xhtml:td[*/@name = $tablehead-variable//Variable/@name]"/>
-    
-    <xsl:template match="xhtml:th[following-sibling::xhtml:td/*/@name = $tablehead-variable//Variable/@name]">
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-            <xsl:apply-templates select="following-sibling::xhtml:td/*[@name = $tablehead-variable//Variable/@name]"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    </xsl:transform>
+</xsl:transform>

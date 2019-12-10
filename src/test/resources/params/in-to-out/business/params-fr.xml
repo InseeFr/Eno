@@ -24,7 +24,7 @@
         
         <StudyUnit>business</StudyUnit>
         
-        <Campagne>assot-2019-x00</Campagne>
+        <Campagne>esem-2019-a00</Campagne>
         
         <Languages>
             <Language>fr</Language>
@@ -43,7 +43,8 @@
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
             <Satisfaction>false</Satisfaction>
-            <Css>entreprise.css</Css>
+            <DecimalSeparator>.</DecimalSeparator>
+            <Css>enterpriseEnglish.css</Css>
         </fr-parameters>
         
         <Title>

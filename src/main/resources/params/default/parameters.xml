@@ -43,7 +43,7 @@
             <Deblocage>false</Deblocage>
             <Satisfaction>false</Satisfaction>
             <LengthOfLongTable>7</LengthOfLongTable>
-            <DecimalSeparator>.</DecimalSeparator>
+            <DecimalSeparator>,</DecimalSeparator>
             <Css></Css>
         </fr-parameters>
         
@@ -76,7 +76,9 @@
             <AccompanyingMail></AccompanyingMail>
         </pdf-parameters>
         
-        <js-parameters/>
+        <js-parameters>
+            <Management>false</Management>
+        </js-parameters>
         
         <odt-parameters/>
     

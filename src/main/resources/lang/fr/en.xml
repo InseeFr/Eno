@@ -8,24 +8,38 @@
     <Alert>
         <Text>You shall type a correct value</Text>
         <Number>
-            <Integer>You shall type an integer number between</Integer>
+            <Integer>You shall type an integer number</Integer>
             <Decimal>
-                <Beginning>You shall use point as decimal separator, with no spaces, and type a
-                    number between</Beginning>
+                <Beginning>You shall use "</Beginning>
+                <Beginning2>" character as decimal separator, with no spaces, and type a number</Beginning2>
                 <DecimalCondition>(with at most</DecimalCondition>
                 <Digit>digit</Digit>
-                <End>behind the "." separator)</End>
+                <End>behind the "</End>
+                <End2>" separator)</End2>
             </Decimal>
         </Number>
         <Date>Type a valid date</Date>
-        <Duration>
-            <Hours>The number of hours shall be between 0 and 99.</Hours>
-            <Minutes>The number of minutes shall be between 0 and 59.</Minutes>
-        </Duration>
+        <Date-YYYYMM>Type a valid year and month</Date-YYYYMM>
+        <Date-YYYY>Type a valid year</Date-YYYY>
+        <Duration>Type a valid duration</Duration>
     </Alert>
     <And>and</And>
+    <After>
+        <Date>after</Date>
+        <Date-YYYYMM>after</Date-YYYYMM>
+        <Date-YYYY>after</Date-YYYY>
+    </After>
+    <Before>
+        <Date>before</Date>
+        <Date-YYYYMM>before</Date-YYYYMM>
+        <Date-YYYY>before</Date-YYYY>
+    </Before>
+    <Between>between</Between>
+    <GreaterThan>greater than</GreaterThan>
+    <LessThan>less than</LessThan>
     <Plural>s</Plural>
     <AddLine>Add a line</AddLine>
+    <Today>today</Today>
     <DateTime>
         <Months>
             <M01>January</M01>

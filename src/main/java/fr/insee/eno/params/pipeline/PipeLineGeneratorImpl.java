@@ -14,6 +14,7 @@ import fr.insee.eno.generation.DDI2ODTGenerator;
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.generation.DDI2PoguesXMLGenerator;
 import fr.insee.eno.generation.Generator;
+import fr.insee.eno.generation.IdentityGenerator;
 import fr.insee.eno.generation.PoguesXML2DDIGenerator;
 import fr.insee.eno.parameters.InFormat;
 import fr.insee.eno.parameters.OutFormat;
@@ -41,6 +42,7 @@ import fr.insee.eno.postprocessing.pdf.PDFInsertEndQuestionPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFMailingPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFTableColumnPostprocessorFake;
+import fr.insee.eno.preprocessing.DDI32ToDDI33Preprocessor;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
 import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
@@ -53,6 +55,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PipeLineGeneratorImpl.class);
 	
 	// In2Out Generator
+	private IdentityGenerator identityGenerator = new IdentityGenerator();
+	
 	private DDI2FRGenerator ddi2frGenerator = new DDI2FRGenerator();
 
 	private DDI2JSGenerator ddi2jsGenerator = new DDI2JSGenerator();
@@ -75,6 +79,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private DDIMappingPreprocessor ddiMapping = new DDIMappingPreprocessor();
 
 	private PoguesXMLPreprocessorGoToTreatment poguesXmlGoTo = new PoguesXMLPreprocessorGoToTreatment();
+	
+	private DDI32ToDDI33Preprocessor ddi32ToDDI33Preprocessor = new DDI32ToDDI33Preprocessor();
 	
 	// PostProcessing
 	private DDIMarkdown2XhtmlPostprocessor ddiMW2XHTML = new DDIMarkdown2XhtmlPostprocessor();
@@ -163,8 +169,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		case DDI:
 			switch (outFormat) {
 			case DDI:
-				// DDI32ToDDI33
-				generator=null; //TODO : add new IdentityGenerator()
+				generator = identityGenerator;
 				break;
 			case FR:
 				generator = ddi2frGenerator;
@@ -189,11 +194,11 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 				generator = poguesXml2ddiGenerator;
 				break;
 			default:
-				generator=null; //TODO : add new IdentityGenerator()
+				generator = identityGenerator;
 				break;
 			}
 		case FR:
-			generator=null; //TODO : add new IdentityGenerator()
+			generator = identityGenerator;
 			break;
 		}
 		return generator;
@@ -277,6 +282,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	public Preprocessor getPrePorcessor(PreProcessing preProcessing) {
 		Preprocessor preprocessor = null;
 		switch (preProcessing) {
+		case DDI_32_TO_DDI_33:
+			preprocessor = ddi32ToDDI33Preprocessor;
+			break;
 		case DDI_DEREFERENCING:
 			preprocessor = ddiDereferencing;
 			break;

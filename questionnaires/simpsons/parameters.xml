@@ -60,7 +60,9 @@
             <AccompanyingMail></AccompanyingMail>
         </pdf-parameters>
         
-        <js-parameters/>
+        <js-parameters>
+            <Management>false</Management>
+        </js-parameters>
         
         <odt-parameters/>
     

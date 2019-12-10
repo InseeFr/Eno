@@ -48,7 +48,7 @@
     		<DefaultSize>15</DefaultSize>
     	</Row>
     </Roster>
-    <!-- Definit le nombre maximum de lignes dans un tableau -->
+    <!-- Definit le nombre maximum de lignes dans une page pour un tableau ou un roster ; et le nombre de lignes en moins sur la première page du tableau -->
     <Table>
     	<Row>
     		<DefaultSize>19</DefaultSize>

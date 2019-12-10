@@ -78,18 +78,5 @@
             <xsl:apply-templates select="fo:list-block"/>
         </xsl:copy>
     </xsl:template>
-
-    <xsl:template match="fo:block[@id='RAISPROMO']//fo:list-item-body[fo:block='Autre']">
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-            <fo:block color="black" font-weight="bold" font-size="10pt" padding="1mm" text-align="justify" page-break-inside="avoid" keep-with-next="always">
-                <fo:inline>
-                    <fo:external-graphic src="arrow_details.png"/>
-                    <fo:inline>Précisez :</fo:inline>
-                </fo:inline>
-            </fo:block>
-            <xsl:apply-templates select="../../../fo:block[2]"/>
-        </xsl:copy>
-    </xsl:template>
     
 </xsl:stylesheet>

@@ -21,7 +21,7 @@
         
         <StudyUnit>business</StudyUnit>
         
-        <Campagne>assot-2019-x00</Campagne>
+        <Campagne>esem-2019-a00</Campagne>
         
         <Languages>
             <Language>fr</Language>
@@ -37,11 +37,20 @@
         </EndQuestion>
         
         <pdf-parameters>
+            <Roster>
+                <Row>
+                    <DefaultSize>20</DefaultSize>
+                </Row>
+            </Roster>
             <Table>
                 <Row>
-                    <DefaultSize>37</DefaultSize>
+                    <DefaultSize>15</DefaultSize>
                 </Row>
-            </Table>        
+            </Table>
+            <Capture>
+                <Numeric>manual</Numeric>
+            </Capture>
+            <AccompanyingMail>cnrCOL</AccompanyingMail>
         </pdf-parameters>
         
         <Title>

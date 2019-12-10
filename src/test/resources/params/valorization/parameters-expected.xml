@@ -62,7 +62,9 @@
             </PageBreakBetween>
             <AccompanyingMail>cnrCOL</AccompanyingMail>            
         </pdf-parameters>
-        <js-parameters/>
+        <js-parameters>
+            <Management>false</Management>
+        </js-parameters>
         <odt-parameters/>
         <Title>
             <Browsing>no-number</Browsing>

@@ -610,7 +610,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">I - VOTRE SITUATION PROFESSIONNELLE ACTUELLE</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">I - VOTRE SITUATION PROFESSIONNELLE ACTUELLE</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -618,7 +619,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:block>En 2018, vous avez exercé un emploi salarié dans l'administration désignée ci-dessous :</fo:block>
             <fo:block>${ADMINISTRATION1}</fo:block>
             <fo:block>${ADMINISTRATION2}</fo:block>
@@ -630,7 +632,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Êtes-vous toujours en activité au sein de cette administration ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 1. Êtes-vous toujours en activité au sein de cette administration ?</fo:block>
          <fo:block id="ACTADMIN" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -697,7 +700,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Si vous n'êtes plus en activité dans cette administration, quand l'avez-vous quittée ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 2. Si vous n'êtes plus en activité dans cette administration, quand l'avez-vous quittée ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -705,7 +709,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Indiquez le mois et l'année.</fo:inline>
          </fo:block>
          <fo:block id="DATEDEP" page-break-inside="avoid">
@@ -724,7 +729,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 3. Pour quelle raison avez-vous quitté cette administration ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 3. Pour quelle raison avez-vous quitté cette administration ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -732,7 +738,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Une seule réponse possible.</fo:inline>
          </fo:block>
          <fo:block id="RAISONDEP" page-break-inside="avoid">
@@ -820,7 +827,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">II - VOTRE FORMATION </fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">II - VOTRE FORMATION </fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -828,7 +836,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 4. En quelle année avez-vous cessé de fréquenter régulièrement l'école ou l'université dans le cadre de vos études ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 4. En quelle année avez-vous cessé de fréquenter régulièrement l'école ou l'université dans le cadre de vos études ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -836,9 +845,10 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Si vous avez repris vos études, année de la première</fo:inline>
-            <fo:inline font-style="italic">sortie</fo:inline>.*</fo:block>
+            <fo:inline font-style="italic">sortie</fo:inline>.* </fo:block>
          <fo:block id="ANNEEFORM" page-break-inside="avoid">
             <fo:block color="black"
                       font-weight="normal"
@@ -855,7 +865,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 5. Quel est votre diplôme le plus élevé ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 5. Quel est votre diplôme le plus élevé ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -863,7 +874,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Y compris parmi ceux acquis par la formation professionnelle.</fo:inline>
          </fo:block>
          <fo:block font-size="10pt"
@@ -873,7 +885,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Une seule réponse possible.</fo:inline>
          </fo:block>
          <fo:block id="DIPL" page-break-inside="avoid">
@@ -890,7 +903,7 @@
                                font-size="10pt"
                                padding-left="1mm"
                                text-align="justify">
-                        <fo:inline font-weight="bold">Aucun diplôme</fo:inline>, certificat d'études primaires </fo:block>
+                        <fo:inline font-weight="bold">Aucun diplôme</fo:inline>, certificat d'études primaires</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
                <fo:list-item>
@@ -905,7 +918,7 @@
                                font-size="10pt"
                                padding-left="1mm"
                                text-align="justify">
-                        <fo:inline font-weight="bold">Brevet des collèges</fo:inline> ou diplôme de niveau équivalent (BEPC, brevet élémentaire, diplôme national du brevet, etc.) </fo:block>
+                        <fo:inline font-weight="bold">Brevet des collèges</fo:inline> ou diplôme de niveau équivalent (BEPC, brevet élémentaire, diplôme national du brevet, etc.)</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
                <fo:list-item>
@@ -920,7 +933,7 @@
                                font-size="10pt"
                                padding-left="1mm"
                                text-align="justify">
-                        <fo:inline font-weight="bold">CAP, BEP</fo:inline> ou diplôme de niveau équivalent </fo:block>
+                        <fo:inline font-weight="bold">CAP, BEP</fo:inline> ou diplôme de niveau équivalent</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
                <fo:list-item>
@@ -935,7 +948,7 @@
                                font-size="10pt"
                                padding-left="1mm"
                                text-align="justify">
-                        <fo:inline font-weight="bold">Baccalauréat général, technologique, professionnel</fo:inline> ou diplôme de niveau équivalent (brevet supérieur, capacité en droit, DAEU, ESEU, brevet professionnel, de technicien ou d'enseignement, etc.) </fo:block>
+                        <fo:inline font-weight="bold">Baccalauréat général, technologique, professionnel</fo:inline> ou diplôme de niveau équivalent (brevet supérieur, capacité en droit, DAEU, ESEU, brevet professionnel, de technicien ou d'enseignement, etc.)</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
                <fo:list-item>
@@ -950,7 +963,7 @@
                                font-size="10pt"
                                padding-left="1mm"
                                text-align="justify">
-                        <fo:inline font-weight="bold">BTS, DUT, Deug,</fo:inline> diplôme ou titre équivalent de niveau bac+2 (Deust, diplôme de la santé ou du social, etc.) </fo:block>
+                        <fo:inline font-weight="bold">BTS, DUT, Deug,</fo:inline> diplôme ou titre équivalent de niveau bac+2 (Deust, diplôme de la santé ou du social, etc.)</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
                <fo:list-item>
@@ -965,7 +978,7 @@
                                font-size="10pt"
                                padding-left="1mm"
                                text-align="justify">
-                        <fo:inline font-weight="bold">Licence, maîtrise,</fo:inline> diplôme ou titre équivalent de niveau bac+3 ou bac+4 (Licence pro, Master 1, etc.) </fo:block>
+                        <fo:inline font-weight="bold">Licence, maîtrise,</fo:inline> diplôme ou titre équivalent de niveau bac+3 ou bac+4 (Licence pro, Master 1, etc.)</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
                <fo:list-item>
@@ -980,7 +993,7 @@
                                font-size="10pt"
                                padding-left="1mm"
                                text-align="justify">
-                        <fo:inline font-weight="bold">Master, DEA, DESS, diplôme grande école, doctorat de santé,</fo:inline> diplôme ou titre équivalent de niveau bac+5 (Master 2, etc.) </fo:block>
+                        <fo:inline font-weight="bold">Master, DEA, DESS, diplôme grande école, doctorat de santé,</fo:inline> diplôme ou titre équivalent de niveau bac+5 (Master 2, etc.)</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
                <fo:list-item>
@@ -995,7 +1008,7 @@
                                font-size="10pt"
                                padding-left="1mm"
                                text-align="justify">
-                        <fo:inline font-weight="bold">Doctorat de recherche</fo:inline> (hors santé) ou HDR </fo:block>
+                        <fo:inline font-weight="bold">Doctorat de recherche</fo:inline> (hors santé) ou HDR</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
             </fo:list-block>
@@ -1011,7 +1024,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">III - VOTRE ENTRÉE DANS LA VIE ACTIVE</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">III - VOTRE ENTRÉE DANS LA VIE ACTIVE</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1019,7 +1033,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Dans cette partie, nous allons décrire votre premier emploi rémunéré, qu'il soit dans la fonction publique ou dans le privé, ainsi que les éventuelles périodes de chômage que vous avez connues.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Dans cette partie, nous allons décrire votre premier emploi rémunéré, qu'il soit dans la fonction publique ou dans le privé, ainsi que les éventuelles périodes de chômage que vous avez connues.</fo:block>
          <fo:block background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
@@ -1029,7 +1044,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">III.A - VOTRE PREMIER EMPLOI RÉMUNÉRÉ</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">III.A - VOTRE PREMIER EMPLOI RÉMUNÉRÉ</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -1037,7 +1053,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 6. En quelle année avez-vous commencé à exercer un emploi rémunéré ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 6. En quelle année avez-vous commencé à exercer un emploi rémunéré ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1045,8 +1062,9 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
-            <fo:inline font-style="italic">Ne prenez pas en compte l’apprentissage, les petits boulots ou jobs d’été ou la période de formation initiale (exemples : élèves fonctionnaires, doctorants rémunérés pour leur thèse, etc.)</fo:inline>.*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">
+            <fo:inline font-style="italic">Ne prenez pas en compte l’apprentissage, les petits boulots ou jobs d’été ou la période de formation initiale (exemples : élèves fonctionnaires, doctorants rémunérés pour leur thèse, etc.)</fo:inline>.* </fo:block>
          <fo:block id="ANNEEREM" page-break-inside="avoid">
             <fo:block color="black"
                       font-weight="normal"
@@ -1063,7 +1081,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 7. Dans quel secteur se situait votre premier emploi rémunéré ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 7. Dans quel secteur se situait votre premier emploi rémunéré ?</fo:block>
          <fo:block id="SECTEUR" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1130,7 +1149,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 8. Combien d’employeurs différents avez-vous eu dans le secteur privé, avant votre entrée dans la fonction publique ?*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 8. Combien d’employeurs différents avez-vous eu dans le secteur privé, avant votre entrée dans la fonction publique ?* </fo:block>
          <fo:block id="NBEMPL" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -1153,7 +1173,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 9. Combien de temps avez-vous travaillé dans le secteur privé, même approximativement ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 9. Combien de temps avez-vous travaillé dans le secteur privé, même approximativement ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1161,7 +1182,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREEPRIV" page-break-inside="avoid">
@@ -1189,7 +1211,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">III.B - PÉRIODES DE CHÔMAGE</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">III.B - PÉRIODES DE CHÔMAGE</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -1197,7 +1220,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 10. Au cours de votre carrière, avez-vous connu des périodes de chômage supérieures à 6 mois ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 10. Au cours de votre carrière, avez-vous connu des périodes de chômage supérieures à 6 mois ?</fo:block>
          <fo:block id="PERIODCHOM" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1264,7 +1288,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 11. Combien de périodes de chômage de plus de 6 mois avez-vous connues ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 11. Combien de périodes de chômage de plus de 6 mois avez-vous connues ?</fo:block>
          <fo:block id="NBCHOM" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -1287,7 +1312,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 12. Quelle a été la durée totale de ces périodes de chômage ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 12. Quelle a été la durée totale de ces périodes de chômage ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1295,7 +1321,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre de mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREECHOM" page-break-inside="avoid">
@@ -1325,7 +1352,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">IV - VOTRE PREMIER POSTE DANS LA FONCTION PUBLIQUE</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">IV - VOTRE PREMIER POSTE DANS LA FONCTION PUBLIQUE</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1333,7 +1361,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Les questions qui vont suivre portent sur votre premier poste dans la fonction publique, y compris si celui-ci était dans la fonction publique hospitalière ou territoriale.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Les questions qui vont suivre portent sur votre premier poste dans la fonction publique, y compris si celui-ci était dans la fonction publique hospitalière ou territoriale.</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -1341,7 +1370,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 13. En quelle année avez-vous commencé à travailler dans la fonction publique ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 13. En quelle année avez-vous commencé à travailler dans la fonction publique ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1349,8 +1379,9 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
-            <fo:inline font-style="italic">Il s’agit de la prise effective du premier poste y compris en tant que contractuel mais hors période de formation initiale (exemples : élèves fonctionnaires, doctorants rémunérés pour leur thèse, etc.)</fo:inline>.*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">
+            <fo:inline font-style="italic">Il s’agit de la prise effective du premier poste y compris en tant que contractuel mais hors période de formation initiale (exemples : élèves fonctionnaires, doctorants rémunérés pour leur thèse, etc.)</fo:inline>.* </fo:block>
          <fo:block id="ANNEEFP" page-break-inside="avoid">
             <fo:block color="black"
                       font-weight="normal"
@@ -1367,7 +1398,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 14. Dans quelle fonction publique avez-vous débuté ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 14. Dans quelle fonction publique avez-vous débuté ?</fo:block>
          <fo:block id="FPDEBUT" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1421,7 +1453,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 15. Comment êtes-vous entré dans la fonction publique ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 15. Comment êtes-vous entré dans la fonction publique ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1429,7 +1462,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Une seule réponse possible.</fo:inline>
          </fo:block>
          <fo:block id="MOYENENTREE" page-break-inside="avoid">
@@ -1487,7 +1521,7 @@
                                font-weight="normal"
                                font-size="10pt"
                                padding-left="1mm"
-                               text-align="justify"> Sans concours : non-titulaires (contractuels/vacataires/auxiliaires), Pacte*, recrutement externe sans concours etc. </fo:block>
+                               text-align="justify">Sans concours : non-titulaires (contractuels/vacataires/auxiliaires), Pacte*, recrutement externe sans concours etc.</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
             </fo:list-block>
@@ -1499,7 +1533,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 16. À la prise de votre premier poste dans la fonction publique, vous étiez :</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 16. À la prise de votre premier poste dans la fonction publique, vous étiez :</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1507,7 +1542,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Une seule réponse possible.</fo:inline>
          </fo:block>
          <fo:block id="STATUTPP" page-break-inside="avoid">
@@ -1523,7 +1559,7 @@
                                font-weight="normal"
                                font-size="10pt"
                                padding-left="1mm"
-                               text-align="justify"> Fonctionnaire titulaire* (dont fonctionnaire stagiaire) ou militaire </fo:block>
+                               text-align="justify">Fonctionnaire titulaire* (dont fonctionnaire stagiaire) ou militaire</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
                <fo:list-item>
@@ -1590,7 +1626,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 17. Êtes-vous devenu fonctionnaire titulaire depuis votre entrée dans la fonction publique ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 17. Êtes-vous devenu fonctionnaire titulaire depuis votre entrée dans la fonction publique ?</fo:block>
          <fo:block id="TITUL" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1657,7 +1694,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 18. Par quel moyen êtes-vous devenu fonctionnaire titulaire depuis votre entrée dans la fonction publique ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 18. Par quel moyen êtes-vous devenu fonctionnaire titulaire depuis votre entrée dans la fonction publique ?</fo:block>
          <fo:block id="MOYTIT" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1706,7 +1744,8 @@
                                padding="1mm"
                                text-align="justify"
                                page-break-inside="avoid"
-                               keep-with-next="always">
+                               keep-with-next="always"
+                               keep-together.within-column="always">
                         <fo:inline>
                            <fo:external-graphic src="arrow_details.png"/>
                            <fo:inline font-weight="bold">Précisez :</fo:inline>
@@ -1731,7 +1770,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 19. En quelle année êtes-vous devenu fonctionnaire titulaire ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 19. En quelle année êtes-vous devenu fonctionnaire titulaire ?</fo:block>
          <fo:block id="ANNEE_FONC" page-break-inside="avoid">
             <fo:block color="black"
                       font-weight="normal"
@@ -1748,7 +1788,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 20. Pour votre premier poste dans la fonction publique, quelle était votre catégorie ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 20. Pour votre premier poste dans la fonction publique, quelle était votre catégorie ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1756,7 +1797,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Indiquez le niveau du poste occupé si vous n'étiez pas fonctionnaire. Si vous étiez enseignant-chercheur, cochez A.</fo:inline>
          </fo:block>
          <fo:block id="CATPP" page-break-inside="avoid">
@@ -1826,7 +1868,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 21. Où avez-vous commencé à travailler dans la fonction publique ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 21. Où avez-vous commencé à travailler dans la fonction publique ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1834,7 +1877,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Indiquez le lieu de la première prise de poste et non celui de la période de formation pour les fonctionnaires stagiaires.</fo:inline>
          </fo:block>
          <fo:block id="LIEUFP" page-break-inside="avoid">
@@ -1903,7 +1947,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 22. Si vous avez commencé en France, précisez dans quel département :</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 22. Si vous avez commencé en France, précisez dans quel département :</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1911,7 +1956,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Par exemple : 971 pour la Guadeloupe, 86 pour la Vienne.</fo:inline>
          </fo:block>
          <fo:block id="DEPTFP" page-break-inside="avoid">
@@ -1935,7 +1981,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">V - VOTRE PARCOURS PROFESSIONNEL DANS LA FONCTION PUBLIQUE</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">V - VOTRE PARCOURS PROFESSIONNEL DANS LA FONCTION PUBLIQUE</fo:block>
          <fo:block background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
@@ -1945,7 +1992,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">V.A - VOTRE POSTE ACTUEL</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">V.A - VOTRE POSTE ACTUEL</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1953,7 +2001,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Si vous êtes retraité, avez quitté la fonction publique ou si vous êtes actuellement en formation professionnelle, pour les questions sur le poste actuel, répondez sur votre dernier poste.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Si vous êtes retraité, avez quitté la fonction publique ou si vous êtes actuellement en formation professionnelle, pour les questions sur le poste actuel, répondez sur votre dernier poste.</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -1961,7 +2010,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 23. Au 31 décembre 2018, quelle était votre catégorie ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 23. Au 31 décembre 2018, quelle était votre catégorie ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1969,7 +2019,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Indiquez le niveau du poste occupé si vous n'êtes pas fonctionnaire. Si vous êtes enseignant-chercheur, cochez A.</fo:inline>
          </fo:block>
          <fo:block id="CATDEC" page-break-inside="avoid">
@@ -2025,7 +2076,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 24. Votre poste actuel est-il dans le même ministère ou dans la même institution que celui de votre premier poste dans la fonction publique ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 24. Votre poste actuel est-il dans le même ministère ou dans la même institution que celui de votre premier poste dans la fonction publique ?</fo:block>
          <fo:block id="MINPOSTE" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -2065,7 +2117,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 25. Votre poste actuel correspond-il au même métier que celui de votre premier poste dans la fonction publique ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 25. Votre poste actuel correspond-il au même métier que celui de votre premier poste dans la fonction publique ?</fo:block>
          <fo:block id="FILIEREPOSTE" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -2105,7 +2158,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 26. Avez-vous une autre activité professionnelle en dehors de votre poste actuel ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 26. Avez-vous une autre activité professionnelle en dehors de votre poste actuel ?</fo:block>
          <fo:block id="AUTRE_ACT" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -2147,7 +2201,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">V.B - MOBILITÉ GÉOGRAPHIQUE ET PROMOTION</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">V.B - MOBILITÉ GÉOGRAPHIQUE ET PROMOTION</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -2155,7 +2210,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 27. Combien de fois avez-vous changé de département depuis votre entrée dans la fonction publique ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 27. Combien de fois avez-vous changé de département depuis votre entrée dans la fonction publique ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2163,8 +2219,9 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
-            <fo:inline font-style="italic">Comptez le nombre de changements de département du lieu de travail</fo:inline>.*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">
+            <fo:inline font-style="italic">Comptez le nombre de changements de département du lieu de travail</fo:inline>.* </fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2172,7 +2229,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Ne comptez pas la mobilité liée à la formation des fonctionnaires stagiaires.</fo:inline>
          </fo:block>
          <fo:block id="NBDPT" page-break-inside="avoid">
@@ -2224,7 +2282,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 28. Parmi ce(s) changement(s), combien en avez-vous souhaité(s)?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 28. Parmi ce(s) changement(s), combien en avez-vous souhaité(s)?</fo:block>
          <fo:block id="CHGMT_SOUHAIT" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2247,7 +2306,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 29. Parmi ce(s) changement(s), combien sont lié(s) au suivi de votre conjoint ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 29. Parmi ce(s) changement(s), combien sont lié(s) au suivi de votre conjoint ?</fo:block>
          <fo:block id="CHGMT_SUIVI" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2270,7 +2330,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 30. Depuis votre entrée dans la fonction publique, avez-vous bénéficié d'une ou plusieurs promotions par le biais d'un changement de corps (ou assimilé) ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 30. Depuis votre entrée dans la fonction publique, avez-vous bénéficié d'une ou plusieurs promotions par le biais d'un changement de corps (ou assimilé) ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2278,7 +2339,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Par exemple, passage de catégorie B en catégorie A. Ne prenez pas en compte les changements de grade ou d'échelon.</fo:inline>
          </fo:block>
          <fo:block id="PROMOTION" page-break-inside="avoid">
@@ -2347,7 +2409,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 31. Lorsque vous avez bénéficié d'une ou plusieurs promotions, comment avez-vous obtenu ce(s) changement(s) de corps ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 31. Lorsque vous avez bénéficié d'une ou plusieurs promotions, comment avez-vous obtenu ce(s) changement(s) de corps ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2355,7 +2418,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Plusieurs réponses possibles.</fo:inline>
          </fo:block>
          <fo:block id="RAISPROMO" page-break-inside="avoid">
@@ -2387,7 +2451,7 @@
                                font-weight="normal"
                                font-size="10pt"
                                padding-left="1mm"
-                               text-align="justify"> «Au choix», sur proposition de votre hiérarchie (en CAP* par exemple) </fo:block>
+                               text-align="justify">«Au choix», sur proposition de votre hiérarchie (en CAP* par exemple)</fo:block>
                   </fo:list-item-body>
                </fo:list-item>
             </fo:list-block>
@@ -2442,11 +2506,10 @@
                                padding="1mm"
                                text-align="justify"
                                page-break-inside="avoid"
-                               keep-with-next="always">
+                               keep-with-next="always"
+                               keep-together.within-column="always">
                         <fo:inline>
-                           <fo:external-graphic src="arrow_details.png"/>
-                           <fo:inline>Précisez :</fo:inline>
-                        </fo:inline>
+                           <fo:external-graphic src="arrow_details.png"/>Précisez :</fo:inline>
                      </fo:block>
                      <fo:block>
                         <fo:block-container height="8mm"
@@ -2469,7 +2532,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">V.C - ORGANISATION DU TRAVAIL ET INTERRUPTIONS DE CARRIÈRE</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">V.C - ORGANISATION DU TRAVAIL ET INTERRUPTIONS DE CARRIÈRE</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -2477,7 +2541,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 32. Depuis votre entrée dans la fonction publique, avez-vous déjà travaillé à temps partiel ou non complet ?*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 32. Depuis votre entrée dans la fonction publique, avez-vous déjà travaillé à temps partiel ou non complet ?* </fo:block>
          <fo:block id="TPSPART" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -2544,7 +2609,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 33. Qui a été à l'initiative de cette demande de temps partiel ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 33. Qui a été à l'initiative de cette demande de temps partiel ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2552,7 +2618,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Plusieurs réponses possibles si plusieurs temps partiels ou non complets pendant la carrière.</fo:inline>
          </fo:block>
          <fo:block id="RAISON_TP" page-break-inside="avoid">
@@ -2568,7 +2635,7 @@
                                font-weight="normal"
                                font-size="10pt"
                                padding-left="1mm"
-                               text-align="justify"> Vous êtes à l'initiative de cette demande* </fo:block>
+                               text-align="justify">Vous êtes à l'initiative de cette demande* </fo:block>
                   </fo:list-item-body>
                </fo:list-item>
             </fo:list-block>
@@ -2596,7 +2663,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 34. Indiquez la durée totale de travail à temps partiel ou non complet, même approximativement :</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 34. Indiquez la durée totale de travail à temps partiel ou non complet, même approximativement :</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2604,7 +2672,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREETP" page-break-inside="avoid">
@@ -2630,7 +2699,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 35. Sur votre poste actuel, êtes-vous en télétravail ?*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 35. Sur votre poste actuel, êtes-vous en télétravail ?* </fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2638,7 +2708,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Les enseignants ne sont pas concernés par cette question.</fo:inline>
          </fo:block>
          <fo:block id="TELETRAV" page-break-inside="avoid">
@@ -2722,7 +2793,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 36. Depuis votre entrée dans la fonction publique, avez-vous déjà interrompu votre carrière sur une période d’au moins 6 mois consécutifs ?*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 36. Depuis votre entrée dans la fonction publique, avez-vous déjà interrompu votre carrière sur une période d’au moins 6 mois consécutifs ?* </fo:block>
          <fo:block page-break-inside="avoid" id="INTERRUPTION">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -2749,7 +2821,7 @@
                                   font-size="10pt"
                                   padding="1mm"
                                   text-align="justify"
-                                  margin-left="1mm"> - Pour vous occuper de vos enfants <fo:inline font-style="italic">(hors congés maternité ou paternité)</fo:inline>
+                                  margin-left="1mm">- Pour vous occuper de vos enfants <fo:inline font-style="italic">(hors congés maternité ou paternité)</fo:inline>
                         </fo:block>
                      </fo:table-cell>
                      <fo:table-cell text-align="left"
@@ -2916,7 +2988,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 37. Pendant combien de temps avez-vous interrompu votre carrière pour vous occuper de vos enfants ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 37. Pendant combien de temps avez-vous interrompu votre carrière pour vous occuper de vos enfants ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2924,7 +2997,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois</fo:inline>.</fo:block>
          <fo:block id="DUREEINTERR_1" page-break-inside="avoid">
             <fo:inline>
@@ -2949,7 +3023,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 38. Pendant combien de temps avez-vous interrompu votre carrière pour travailler hors de la fonction publique ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 38. Pendant combien de temps avez-vous interrompu votre carrière pour travailler hors de la fonction publique ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2957,7 +3032,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREEINTERR_2" page-break-inside="avoid">
@@ -2983,7 +3059,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 39. Pendant combien de temps avez-vous interrompu votre carrière pour une autre raison (hors formations) ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 39. Pendant combien de temps avez-vous interrompu votre carrière pour une autre raison (hors formations) ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2991,7 +3068,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREEINTERR_3" page-break-inside="avoid">
@@ -3021,7 +3099,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">VI - VOTRE TEMPS DE TRAVAIL, VOS CONGÉS ET ABSENCES EN 2018</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">VI - VOTRE TEMPS DE TRAVAIL, VOS CONGÉS ET ABSENCES EN 2018</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -3029,7 +3108,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 40. Êtes-vous enseignant du primaire ou du secondaire ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 40. Êtes-vous enseignant du primaire ou du secondaire ?</fo:block>
          <fo:block id="INDIC_ENSEIGN" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -3112,7 +3192,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">VI.A - VOUS ÊTES ENSEIGNANT DU PRIMAIRE OU DU SECONDAIRE (SANS DÉCHARGE TOTALE)</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">VI.A - VOUS ÊTES ENSEIGNANT DU PRIMAIRE OU DU SECONDAIRE (SANS DÉCHARGE TOTALE)</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3120,7 +3201,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Les questions 41 à 47 portent sur l'année scolaire 2018-2019.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Les questions 41 à 47 portent sur l'année scolaire 2018-2019.</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -3128,7 +3210,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 41. Étiez-vous affecté sur plusieurs établissements en même temps ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 41. Étiez-vous affecté sur plusieurs établissements en même temps ?</fo:block>
          <fo:block id="PLS_ETAB" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -3168,7 +3251,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 42. En tenant compte de tous vos postes occupés, quel était votre temps de travail ?*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 42. En tenant compte de tous vos postes occupés, quel était votre temps de travail ?* </fo:block>
          <fo:block id="TPS_TRAV" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -3208,7 +3292,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-weight="bold">Durant une semaine type de travail (semaine sans absence ou jour férié), hors vacances scolaires :</fo:inline>
          </fo:block>
          <fo:block color="black"
@@ -3218,7 +3303,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 43. Combien de temps avez-vous consacré à l'enseignement ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 43. Combien de temps avez-vous consacré à l'enseignement ?</fo:block>
          <fo:block id="NBHEURPROF" page-break-inside="avoid">
             <fo:inline>
                <fo:block color="black"
@@ -3242,7 +3328,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 44. Combien de temps approximativement avez-vous consacré à la préparation des cours et à la correction des copies ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 44. Combien de temps approximativement avez-vous consacré à la préparation des cours et à la correction des copies ?</fo:block>
          <fo:block id="NBHEURPREP" page-break-inside="avoid">
             <fo:inline>
                <fo:block color="black"
@@ -3266,7 +3353,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 45. Combien de temps approximativement avez-vous consacré à d’autres tâches liées à votre métier d’enseignant (réunions avec les parents, conseils des professeurs, activités périscolaires, formation, décharge partielle…) ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 45. Combien de temps approximativement avez-vous consacré à d’autres tâches liées à votre métier d’enseignant (réunions avec les parents, conseils des professeurs, activités périscolaires, formation, décharge partielle…) ?</fo:block>
          <fo:block id="NBHEURAUTRE" page-break-inside="avoid">
             <fo:inline>
                <fo:block color="black"
@@ -3290,7 +3378,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-weight="bold">Pendant les vacances scolaires, combien de temps avez-vous consacré à des activités en rapport avec l'exercice de votre métier d'enseignant :</fo:inline>
          </fo:block>
          <fo:block color="black"
@@ -3300,7 +3389,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 46. En moyenne, pendant une semaine de vacances hors congés d'été ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 46. En moyenne, pendant une semaine de vacances hors congés d'été ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3308,7 +3398,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Si vous y avez consacré une demi-journée, indiquez 0.5</fo:inline>
          </fo:block>
          <fo:block id="TPS_PREP_VAC" page-break-inside="avoid">
@@ -3334,7 +3425,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 47. En moyenne, pendant les congés d'été ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 47. En moyenne, pendant les congés d'été ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3342,7 +3434,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Si vous y avez consacré une demi-journée, indiquez 0.5</fo:inline>
          </fo:block>
          <fo:block id="TPS_PREP_ETE" page-break-inside="avoid">
@@ -3398,7 +3491,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">VI.B - VOUS N'ÊTES PAS ENSEIGNANT DU PRIMAIRE OU DU SECONDAIRE (OU EN CAS DE DÉCHARGE TOTALE)</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">VI.B - VOUS N'ÊTES PAS ENSEIGNANT DU PRIMAIRE OU DU SECONDAIRE (OU EN CAS DE DÉCHARGE TOTALE)</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -3406,7 +3500,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 48. Quelle est votre durée hebdomadaire de travail habituelle ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 48. Quelle est votre durée hebdomadaire de travail habituelle ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3414,7 +3509,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Indiquez ici le temps de travail réel effectif (et non le nombre d'heures légales).</fo:inline>
          </fo:block>
          <fo:block font-size="10pt"
@@ -3424,7 +3520,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">En cas de cycle ou de modulation, indiquez la durée moyenne.</fo:inline>
          </fo:block>
          <fo:block font-size="10pt"
@@ -3434,7 +3531,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre d'heures et minutes par semaine.</fo:inline>
          </fo:block>
          <fo:block id="NBHEURHEBDO" page-break-inside="avoid">
@@ -3460,7 +3558,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 49. Combien de jours travaillez-vous habituellement par semaine ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 49. Combien de jours travaillez-vous habituellement par semaine ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3468,7 +3567,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Répondez en nombre de jours travaillés par semaine (exemple : 3 ou 3.5)</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Répondez en nombre de jours travaillés par semaine (exemple : 3 ou 3.5)</fo:block>
          <fo:block id="NBJOURHEBDO" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -3492,7 +3592,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:block>
                <fo:inline font-weight="bold">
                   <fo:inline font-style="italic">Les questions suivantes portent sur vos congés (Questions 50 à 56).</fo:inline>
@@ -3521,7 +3622,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 50. En 2018, à combien de jours de congés payés aviez-vous droit au total (congés annuels, RTT, jours de fractionnement) ?*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 50. En 2018, à combien de jours de congés payés aviez-vous droit au total (congés annuels, RTT, jours de fractionnement) ?* </fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3529,7 +3631,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Ne comptez pas les jours de récupération pour horaires variables.</fo:inline>
          </fo:block>
          <fo:block font-size="10pt"
@@ -3539,7 +3642,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 25 ou 25.5)</fo:block>
          <fo:block id="NBCGE" page-break-inside="avoid">
             <fo:block>
@@ -3566,7 +3670,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 51. Parmi ces jours de congés payés, à combien de jours de RTT aviez-vous droit en 2018 ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 51. Parmi ces jours de congés payés, à combien de jours de RTT aviez-vous droit en 2018 ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3574,7 +3679,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 9 ou 9.5)</fo:block>
          <fo:block id="NBRTT" page-break-inside="avoid">
             <fo:block>
@@ -3600,7 +3706,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 52. Parmi ces jours de congés payés, combien en avez-vous effectivement pris en 2018 (congés annuels, RTT, jours de fractionnement) ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 52. Parmi ces jours de congés payés, combien en avez-vous effectivement pris en 2018 (congés annuels, RTT, jours de fractionnement) ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3608,7 +3715,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Ne comptez pas les jours en provenance d'un compte épargne-temps.</fo:inline>
          </fo:block>
          <fo:block font-size="10pt"
@@ -3618,7 +3726,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 22 ou 22.5)</fo:block>
          <fo:block id="NBCONGPRIS" page-break-inside="avoid">
             <fo:block>
@@ -3645,7 +3754,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 53. Parmi ces jours de congés payés, combien de jours avez-vous déposés sur un compte épargne-temps ?*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 53. Parmi ces jours de congés payés, combien de jours avez-vous déposés sur un compte épargne-temps ?* </fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3653,7 +3763,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 3 ou 3.5)</fo:block>
          <fo:block id="NBCET" page-break-inside="avoid">
             <fo:block>
@@ -3679,7 +3790,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 54. En 2018, combien de jours avez-vous pris en provenance d'un compte épargne-temps ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 54. En 2018, combien de jours avez-vous pris en provenance d'un compte épargne-temps ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3687,7 +3799,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés (exemple : 3 ou 3.5)</fo:inline>
          </fo:block>
          <fo:block id="NBCET_PRIS" page-break-inside="avoid">
@@ -3715,7 +3828,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 55. Au 31 décembre 2018, au total, combien de jours avez-vous en stock sur votre (vos) compte(s) épargne-temps ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 55. Au 31 décembre 2018, au total, combien de jours avez-vous en stock sur votre (vos) compte(s) épargne-temps ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3723,7 +3837,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Tenez compte des jours déposés en 2019 au titre de l'année 2018.</fo:inline>
          </fo:block>
          <fo:block font-size="10pt"
@@ -3733,7 +3848,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 10 ou 10.5)</fo:block>
          <fo:block id="STOCK_CET" page-break-inside="avoid">
             <fo:block>
@@ -3760,7 +3876,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 56. En 2018, combien avez-vous pris de jours de récupération pour horaires variables ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 56. En 2018, combien avez-vous pris de jours de récupération pour horaires variables ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3768,7 +3885,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés</fo:inline> (exemple : 4 ou 4.5)</fo:block>
          <fo:block id="JOURSRECUP" page-break-inside="avoid">
             <fo:block>
@@ -3796,7 +3914,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">VI.C - POUR TOUS - ABSENCES</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">VI.C - POUR TOUS - ABSENCES</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -3804,7 +3923,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 57. En 2018, à l'exclusion des congés annuels, RTT et jours de fractionnement, combien de jours avez-vous été absent (exemples : pour maladie, congés maternité ou paternité, accident ou maladie professionnelle, raisons familiales ou personnelles, garde d’enfants, jours de grève, etc.) ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 57. En 2018, à l'exclusion des congés annuels, RTT et jours de fractionnement, combien de jours avez-vous été absent (exemples : pour maladie, congés maternité ou paternité, accident ou maladie professionnelle, raisons familiales ou personnelles, garde d’enfants, jours de grève, etc.) ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3812,7 +3932,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Indiquez le nombre de jours même approximativement.</fo:inline>
          </fo:block>
          <fo:block font-size="10pt"
@@ -3822,7 +3943,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre de jours ouvrés (exemple : 4 ou 4.5)</fo:inline>
          </fo:block>
          <fo:block id="NBJOURSABS" page-break-inside="avoid">
@@ -3854,7 +3976,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">VII - VOTRE FORMATION CONTINUE</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">VII - VOTRE FORMATION CONTINUE</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -3862,7 +3985,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 58. Depuis que vous avez commencé à exercer un emploi rémunéré, avez-vous suivi une période de formation à temps plein qui s’étalait sur 6 mois consécutifs ou plus ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 58. Depuis que vous avez commencé à exercer un emploi rémunéré, avez-vous suivi une période de formation à temps plein qui s’étalait sur 6 mois consécutifs ou plus ?</fo:block>
          <fo:block id="FORMATION" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -3929,7 +4053,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 59. Ces formations préparaient-elles, ou étaient-elles consécutives à un concours, à un examen professionnel, à un diplôme (ou à un titre homologué qui a favorisé une promotion personnelle ou une reconversion) ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 59. Ces formations préparaient-elles, ou étaient-elles consécutives à un concours, à un examen professionnel, à un diplôme (ou à un titre homologué qui a favorisé une promotion personnelle ou une reconversion) ?</fo:block>
          <fo:block id="FORMRAISON" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -3996,7 +4121,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 60. Indiquez la durée cumulée de ces formations à temps plein*, même approximativement :</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 60. Indiquez la durée cumulée de ces formations à temps plein*, même approximativement :</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -4004,7 +4130,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Répondez en nombre d'années et de mois. Exemple : 3 ans et 6 mois.</fo:inline>
          </fo:block>
          <fo:block id="DUREEFORM" page-break-inside="avoid">
@@ -4034,7 +4161,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">VIII - VOTRE SITUATION FAMILIALE, VOS ORIGINES GÉOGRAPHIQUES ET FAMILIALES</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">VIII - VOTRE SITUATION FAMILIALE, VOS ORIGINES GÉOGRAPHIQUES ET FAMILIALES</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -4042,7 +4170,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 61. Êtes-vous en couple ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 61. Êtes-vous en couple ?</fo:block>
          <fo:block id="COUPLE" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -4109,7 +4238,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 62. Votre conjoint(e) ou partenaire travaille-t-il (elle) dans la fonction publique actuellement ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 62. Votre conjoint(e) ou partenaire travaille-t-il (elle) dans la fonction publique actuellement ?</fo:block>
          <fo:block id="EMPLOI_CONJ" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -4163,7 +4293,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 63. Avez-vous des enfants à charge ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 63. Avez-vous des enfants à charge ?</fo:block>
          <fo:block id="ENFANTS" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -4230,7 +4361,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 64. Combien avez-vous d'enfants à charge ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 64. Combien avez-vous d'enfants à charge ?</fo:block>
          <fo:block id="NBENFANTS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -4253,7 +4385,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 65. Quelle est l'année de naissance du plus jeune (ou de l'enfant s'il n'y en a qu'un) ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 65. Quelle est l'année de naissance du plus jeune (ou de l'enfant s'il n'y en a qu'un) ?</fo:block>
          <fo:block id="ANNEEJEUNE" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -4305,7 +4438,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 66. Quelle est l'année de naissance du plus âgé ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 66. Quelle est l'année de naissance du plus âgé ?</fo:block>
          <fo:block id="ANNEEAINE" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -4330,7 +4464,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 67. Quelle est votre nationalité ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 67. Quelle est votre nationalité ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -4338,7 +4473,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Une seule réponse possible. En cas de double nationalité, cochez en priorité "né français" ou "devenu français".</fo:inline>
          </fo:block>
          <fo:block id="NATIONALITE" page-break-inside="avoid">
@@ -4421,7 +4557,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 68. Si vous n’êtes pas Français de naissance, précisez votre nationalité à la naissance :</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 68. Si vous n’êtes pas Français de naissance, précisez votre nationalité à la naissance :</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -4429,7 +4566,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Exemples : Italienne, Japonaise, Algérienne ...</fo:inline>
          </fo:block>
          <fo:block id="NATIONAISS" page-break-inside="avoid">
@@ -4474,7 +4612,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 69. Où êtes-vous né ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 69. Où êtes-vous né ?</fo:block>
          <fo:block id="LIEUNAISS" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -4555,7 +4694,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 70. Si vous n'êtes pas né en France, précisez votre pays de naissance :</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 70. Si vous n'êtes pas né en France, précisez votre pays de naissance :</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -4563,7 +4703,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Exemples : Italie, Japon, Algérie...</fo:inline>
          </fo:block>
          <fo:block id="PAYSNAISS" page-break-inside="avoid">
@@ -4608,7 +4749,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 71. Où sont nés vos parents ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 71. Où sont nés vos parents ?</fo:block>
          <fo:block id="LIEUNAISSPAR" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -4676,7 +4818,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 72. Est-ce que vos parents travaillent ou ont travaillé dans la fonction publique ?*</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 72. Est-ce que vos parents travaillent ou ont travaillé dans la fonction publique ?* </fo:block>
          <fo:block page-break-inside="avoid" id="EMPL_PAR">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
