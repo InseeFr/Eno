@@ -177,7 +177,6 @@
 
     <xsl:template match="fo:block[contains(@id,'-')]">
         
-        <xsl:message>Coucou block</xsl:message>
         <xsl:variable name="roster-name" select="substring-before(@id,'-')"/>
         <xsl:variable name="page-number" select="substring-after(@id,'-')"/>
 

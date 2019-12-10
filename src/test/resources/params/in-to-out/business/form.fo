@@ -329,6 +329,7 @@
    <fo:page-sequence master-reference="A4"
                      initial-page-number="2"
                      force-page-count="odd">
+      <fo:title>Enquête sur les entreprises mahoraises</fo:title>
       <fo:static-content flow-name="region-before-odd-business">
          <fo:block-container absolute-position="absolute"
                              left="190mm"
@@ -429,7 +430,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">I - Activité et situation juridique</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">I - Activité et situation juridique</fo:block>
          <fo:block background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
@@ -439,7 +441,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">Activité principale de l'entreprise</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Activité principale de l'entreprise</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -447,7 +450,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Est-ce que votre activité principale est bien ${LIB_APE_LANC} (${APE_LANC}) ? </fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 1. Est-ce que votre activité principale est bien ${LIB_APE_LANC} (${APE_LANC}) ? </fo:block>
          <fo:block id="APE_LANC_OK" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -514,7 +518,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Quelle est l'activité principale de votre entreprise ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 2. Quelle est l'activité principale de votre entreprise ?</fo:block>
          <fo:block id="APE" page-break-inside="avoid">
             <fo:block>
                <fo:block-container height="8mm"
@@ -534,7 +539,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">Catégorie juridique</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Catégorie juridique</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -542,7 +548,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 3. Est-ce que votre catégorie juridique est bien ${LIB_CJ_LANC} (${CJ_LANC}) ? </fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 3. Est-ce que votre catégorie juridique est bien ${LIB_CJ_LANC} (${CJ_LANC}) ? </fo:block>
          <fo:block id="CJ_LANC_OK" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -609,7 +616,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 4. Quelle est la catégorie juridique de votre entreprise ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 4. Quelle est la catégorie juridique de votre entreprise ?</fo:block>
          <fo:block id="CJ" page-break-inside="avoid">
             <fo:block>
                <fo:block-container height="8mm"
@@ -631,7 +639,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">II - Salariés de l'entreprise</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">II - Salariés de l'entreprise</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -639,7 +648,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Est-ce que le dirigeant de l'entreprise est salarié ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 1. Est-ce que le dirigeant de l'entreprise est salarié ?</fo:block>
          <fo:block id="DIRIGEANT_SALARIE" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -679,7 +689,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Combien l'entreprise compte de salariés au 31/12/${ANNEE_EXERCICE} ? </fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 2. Combien l'entreprise compte de salariés au 31/12/${ANNEE_EXERCICE} ? </fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -687,7 +698,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Y compris les dirigeants de sociétés et gérants salariés, le personnel saisonnier ou occasionnel. Ne comptez pas le personnel rémunéré par d’autres entreprises (travail temporaire, personnel prêté par d’autres entreprises) ni les stagiaires non rémunérés.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Y compris les dirigeants de sociétés et gérants salariés, le personnel saisonnier ou occasionnel. Ne comptez pas le personnel rémunéré par d’autres entreprises (travail temporaire, personnel prêté par d’autres entreprises) ni les stagiaires non rémunérés.</fo:block>
          <fo:block id="EFF3112" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -718,7 +730,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 3. Combien l'entreprise compte de salariés en équivalent temps plein sur l'année ${ANNEE_EXERCICE} ? </fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 3. Combien l'entreprise compte de salariés en équivalent temps plein sur l'année ${ANNEE_EXERCICE} ? </fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -726,7 +739,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Pour calculer l'effectif en équivalent temps plein, on divise le nombre d'heures travaillées dans l'entreprise pendant l'année par le temps de travail légal d'un salarié à temps plein. Par exemple, un salarié travaillant à temps plein durant 1 an compte pour 1, un salarié travaillant pendant 6 mois à temps plein compte pour 0,5, un salarié travaillant à mi-temps (50%) pendant un an compte également pour 0,5.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Pour calculer l'effectif en équivalent temps plein, on divise le nombre d'heures travaillées dans l'entreprise pendant l'année par le temps de travail légal d'un salarié à temps plein. Par exemple, un salarié travaillant à temps plein durant 1 an compte pour 1, un salarié travaillant pendant 6 mois à temps plein compte pour 0,5, un salarié travaillant à mi-temps (50%) pendant un an compte également pour 0,5.</fo:block>
          <fo:block id="EFF_ETP" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -761,7 +775,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">III - Dernier exercice comptable</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">III - Dernier exercice comptable</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -769,7 +784,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Quelle est la date de clôture de l'exercice qui se réfère à l'année ${ANNEE_EXERCICE} ? </fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 1. Quelle est la date de clôture de l'exercice qui se réfère à l'année ${ANNEE_EXERCICE} ? </fo:block>
          <fo:block id="DATE_CLOTURE_EXERCICE" page-break-inside="avoid">
             <fo:block color="black"
                       font-weight="normal"
@@ -786,7 +802,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Quelle est la durée de l'exercice qui se réfère à l'année ${ANNEE_EXERCICE}? (en mois) </fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 2. Quelle est la durée de l'exercice qui se réfère à l'année ${ANNEE_EXERCICE}? (en mois) </fo:block>
          <fo:block id="DUREE_EXERCICE" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -821,7 +838,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">IV - Chiffre d'affaires de l'exercice ${ANNEE_EXERCICE} </fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">IV - Chiffre d'affaires de l'exercice ${ANNEE_EXERCICE} </fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -829,7 +847,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Pour la suite du questionnaire, toutes les questions concerneront l'exercice que vous venez de décrire.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Pour la suite du questionnaire, toutes les questions concerneront l'exercice que vous venez de décrire.</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -837,7 +856,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Quel est le chiffre d'affaires net de l'exercice ${ANNEE_EXERCICE} ? </fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 1. Quel est le chiffre d'affaires net de l'exercice ${ANNEE_EXERCICE} ? </fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -845,7 +865,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always"> Il s’agit du montant des ventes de produits (y compris revente de produits en l’état) et services liées à l’activité courante, diminué des réductions sur ventes, de la taxe sur la valeur ajoutée et des taxes assimilées (compte 70 du plan comptable général).</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always"> Il s’agit du montant des ventes de produits (y compris revente de produits en l’état) et services liées à l’activité courante, diminué des réductions sur ventes, de la taxe sur la valeur ajoutée et des taxes assimilées (compte 70 du plan comptable général).</fo:block>
          <fo:block id="CA" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -876,7 +897,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Quel est le montant du chiffre d'affaires déclaré ci-dessus qui résulte de la vente de marchandises en l'état (négoce) ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 2. Quel est le montant du chiffre d'affaires déclaré ci-dessus qui résulte de la vente de marchandises en l'état (négoce) ?</fo:block>
          <fo:block id="CA_MARCHANDISES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -907,7 +929,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 3. Quel est le montant de la production stockée et en cours ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 3. Quel est le montant de la production stockée et en cours ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -915,7 +938,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Il s’agit de la variation des stocks de produits finis ou des en-cours de production de biens et de services (compte 71 du plan comptable général).</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Il s’agit de la variation des stocks de produits finis ou des en-cours de production de biens et de services (compte 71 du plan comptable général).</fo:block>
          <fo:block id="PROD_STOCKEE_ET_EN_COURS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -946,7 +970,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 4. Quel est le montant de la production immobilisée ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 4. Quel est le montant de la production immobilisée ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -954,7 +979,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Il s'agit du montant des immobilisations incorporelles et corporelles que votre entreprise a produites par son propre compte (compte 72 du plan comptable général).</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Il s'agit du montant des immobilisations incorporelles et corporelles que votre entreprise a produites par son propre compte (compte 72 du plan comptable général).</fo:block>
          <fo:block id="PRODUCTION_IMMOBILISEE" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -985,7 +1011,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 5. Quel est le montant des subventions d'exploitation que vous avez perçues ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 5. Quel est le montant des subventions d'exploitation que vous avez perçues ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -993,7 +1020,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Il s'agit du compte 74 du plan comptable général</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Il s'agit du compte 74 du plan comptable général</fo:block>
          <fo:block id="SUBVENTIONS_EXPLOITATION" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -1024,7 +1052,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 6. Quel est le montant des autres produits d'exploitation non financiers ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 6. Quel est le montant des autres produits d'exploitation non financiers ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1032,7 +1061,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Il s'agit du compte 75 du plan comptable général.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Il s'agit du compte 75 du plan comptable général.</fo:block>
          <fo:block id="AUTRES_PRODUITS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -1065,7 +1095,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">Répartition du chiffre d'affaires</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Répartition du chiffre d'affaires</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1073,7 +1104,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Vous allez maintenant renseigner la répartition de votre chiffre d'affaires suivant les différentes activités réalisées.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Vous allez maintenant renseigner la répartition de votre chiffre d'affaires suivant les différentes activités réalisées.</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -1081,7 +1113,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 7. Vous souhaitez renseigner votre réponse :</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 7. Vous souhaitez renseigner votre réponse :</fo:block>
          <fo:block id="UNITE_REPARTITION" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1121,7 +1154,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 8. Veuillez répartir votre chiffre d'affaires net entre les différentes activités que vous effectuez. Nous vous proposons quelques exemples, mais vous êtes invités à ajouter autant de lignes que vous avez d'activités.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 8. Veuillez répartir votre chiffre d'affaires net entre les différentes activités que vous effectuez. Nous vous proposons quelques exemples, mais vous êtes invités à ajouter autant de lignes que vous avez d'activités.</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -1129,7 +1163,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Si vous déclarez en euros, la sommes des CA ventilés doit être égale au CA total. Sinon, le total doit être égal à 100 %.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Si vous déclarez en euros, la sommes des CA ventilés doit être égale au CA total. Sinon, le total doit être égal à 100 %.</fo:block>
          <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-1"
                    page-break-after="always">
@@ -2444,7 +2479,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">V - Salaires, traitements, charges sociales versées au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">V - Salaires, traitements, charges sociales versées au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -2452,7 +2488,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Quel est le montant des salaires et traitements ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 1. Quel est le montant des salaires et traitements ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2460,7 +2497,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always"> Il s’agit des rémunérations brutes versées avant déduction de la part salariale des cotisations sociales et de la contribution sociale généralisée (comptes 641 et 644 du plan comptable général).</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always"> Il s’agit des rémunérations brutes versées avant déduction de la part salariale des cotisations sociales et de la contribution sociale généralisée (comptes 641 et 644 du plan comptable général).</fo:block>
          <fo:block id="SALAIRES_TRAITEMENTS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2491,7 +2529,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Quel est le montant des charges sociales ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 2. Quel est le montant des charges sociales ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2499,7 +2538,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Il s’agit de la part patronale des versements effectués par l’employeur aux organismes de sécurité sociale et de prévoyance ainsi que des cotisations sociales personnelles. (compte 645 et 646 du plan comptable général).</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Il s’agit de la part patronale des versements effectués par l’employeur aux organismes de sécurité sociale et de prévoyance ainsi que des cotisations sociales personnelles. (compte 645 et 646 du plan comptable général).</fo:block>
          <fo:block id="CHARGES_SOCIALES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2530,7 +2570,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 3. Parmi ces charges sociales, quel est le montant des cotisations sociales personnelles de l'exploitant ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 3. Parmi ces charges sociales, quel est le montant des cotisations sociales personnelles de l'exploitant ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2538,7 +2579,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always"> Il s’agit de l’assurance vieillesse, allocations familiales, assurance maladie et maternité obligatoires personnelles de l'exploitant (compte 646 du plan comptable général).</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always"> Il s’agit de l’assurance vieillesse, allocations familiales, assurance maladie et maternité obligatoires personnelles de l'exploitant (compte 646 du plan comptable général).</fo:block>
          <fo:block id="COTISATIONS_SOCIALES_EXPLOITANT" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2573,7 +2615,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">VI - Acquisitions et cessions</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">VI - Acquisitions et cessions</fo:block>
          <fo:block background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
@@ -2583,7 +2626,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">Acquisitions</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Acquisitions</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -2591,7 +2635,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Quel est le montant total des acquisitions d'actifs corporels (achat ou aménagement de terrains, de bâtiments, achat de véhicules, d'outillage, de mobilier, de matériel de bureau ou informatique...) ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 1. Quel est le montant total des acquisitions d'actifs corporels (achat ou aménagement de terrains, de bâtiments, achat de véhicules, d'outillage, de mobilier, de matériel de bureau ou informatique...) ?</fo:block>
          <fo:block id="ACQUSITIONS_CORPORELLES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2622,7 +2667,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Parmi les acquisitions d'actifs corporels, quel est le montant des acquisitions de terrains ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 2. Parmi les acquisitions d'actifs corporels, quel est le montant des acquisitions de terrains ?</fo:block>
          <fo:block id="ACQUSITIONS_TERRAINS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2653,7 +2699,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 3. Quel est le montant des acquisitions d’actifs incorporels en logiciel, base de donnée, recherche et développement</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 3. Quel est le montant des acquisitions d’actifs incorporels en logiciel, base de donnée, recherche et développement</fo:block>
          <fo:block id="ACQUISITIONS_INCORP_BDD" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2686,7 +2733,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">Cessions</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Cessions</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -2694,7 +2742,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 4. Quelle est le montant des cessions corporelles courantes (vente de terrains, de bâtiments, de véhicules, d'outillage, de mobilier, de matériel de bureau ou informatique...) ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 4. Quelle est le montant des cessions corporelles courantes (vente de terrains, de bâtiments, de véhicules, d'outillage, de mobilier, de matériel de bureau ou informatique...) ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2702,7 +2751,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">
+                   keep-with-next="always"
+                   keep-together.within-column="always">
             <fo:inline font-style="italic">Au prix de cession</fo:inline>
          </fo:block>
          <fo:block id="CESSIONS_CORPORELLES" page-break-inside="avoid">
@@ -2735,7 +2785,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 5. Parmi les cessions corporelles, quel est le montant des cessions de terrains ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 5. Parmi les cessions corporelles, quel est le montant des cessions de terrains ?</fo:block>
          <fo:block id="CESSIONS_TERRAINS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2766,7 +2817,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 6. Quel est le montant des cessions incorporelles en logiciel, base de donnée, recherche et développement ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 6. Quel est le montant des cessions incorporelles en logiciel, base de donnée, recherche et développement ?</fo:block>
          <fo:block id="CESSIONS_INCORPORELLES_BDD" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2801,7 +2853,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">VII - Dépenses professionnelles et montant des stocks</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">VII - Dépenses professionnelles et montant des stocks</fo:block>
          <fo:block background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
@@ -2811,7 +2864,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">Dépenses professionnelles</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Dépenses professionnelles</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -2819,7 +2873,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Quel est le montant des achats de marchandises pour revente en l'état ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 1. Quel est le montant des achats de marchandises pour revente en l'état ?</fo:block>
          <fo:block id="ACHAT_MARCHANDISES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2850,7 +2905,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Quel est le montant des achats de matières premières, fournitures et autres approvisionnements ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 2. Quel est le montant des achats de matières premières, fournitures et autres approvisionnements ?</fo:block>
          <fo:block id="ACHATS_MATIERES_PREMIERES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2881,7 +2937,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 3. Quel est le montant des autres achats et charges externes ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 3. Quel est le montant des autres achats et charges externes ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2889,7 +2946,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">comptes 61 et 62 du plan comptable général</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">comptes 61 et 62 du plan comptable général</fo:block>
          <fo:block id="CHARGES_EXTERNES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2920,7 +2978,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 4. Quel est le montant des impôts, taxes et versements assimilés ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 4. Quel est le montant des impôts, taxes et versements assimilés ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2928,7 +2987,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always"> Ne comprends pas les impôts sur le résultat mais uniquement le compte 63 du plan comptable général.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always"> Ne comprends pas les impôts sur le résultat mais uniquement le compte 63 du plan comptable général.</fo:block>
          <fo:block id="IMPOTS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2959,7 +3019,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 5. Quel est le montant des autres charges ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 5. Quel est le montant des autres charges ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -2967,7 +3028,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">compte 65 du plan comptable général</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">compte 65 du plan comptable général</fo:block>
          <fo:block id="AUTRES_CHARGES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -3000,7 +3062,8 @@
                    space-before="6mm"
                    space-before.conditionality="discard"
                    page-break-inside="avoid"
-                   keep-with-next="always">Montant des variations des stocks</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Montant des variations des stocks</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3008,7 +3071,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Veuillez indiquer les variations de stocks de marchandises, matières premières et autres approvisionnements de l’exercice. <fo:inline font-weight="bold">La variation du stock est égal au stock en début d'exercice auquel on soustrait le stock en fin d'exercice. Elle peut être négative ou positive, bien le préciser.</fo:inline>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Veuillez indiquer les variations de stocks de marchandises, matières premières et autres approvisionnements de l’exercice. <fo:inline font-weight="bold">La variation du stock est égal au stock en début d'exercice auquel on soustrait le stock en fin d'exercice. Elle peut être négative ou positive, bien le préciser.</fo:inline>
          </fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
@@ -3017,7 +3081,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Les montants s’entendent hors TVA. Ils correspondent aux comptes 603 du plan comptable général. Les stocks de produits et d’en-cours (comptes 33, 34 et 35) sont à exclure.</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Les montants s’entendent hors TVA. Ils correspondent aux comptes 603 du plan comptable général. Les stocks de produits et d’en-cours (comptes 33, 34 et 35) sont à exclure.</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -3025,7 +3090,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 6. Quel est le montant de la variation du stock de marchandises ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 6. Quel est le montant de la variation du stock de marchandises ?</fo:block>
          <fo:block id="VARIATION_STOCK_MARCHANDISES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -3056,7 +3122,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 7. Quel est le montant de la variation du stock de matières premières ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 7. Quel est le montant de la variation du stock de matières premières ?</fo:block>
          <fo:block id="VARIATION_STOCK_MATIERES_PREMIERES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -3091,7 +3158,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">VIII - Exportations / importations</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">VIII - Exportations / importations</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -3099,7 +3167,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Quel est le montant total des exportations hors de Mayotte au cours du dernier exercice ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 1. Quel est le montant total des exportations hors de Mayotte au cours du dernier exercice ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3107,7 +3176,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">Indiquez le montant total hors frais (douane, transport, stockage...)</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">Indiquez le montant total hors frais (douane, transport, stockage...)</fo:block>
          <fo:block id="EXPORTATIONS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -3138,7 +3208,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Quel est le montant total des importations ou acquisitions hors de Mayotte au cours du dernier exercice ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 2. Quel est le montant total des importations ou acquisitions hors de Mayotte au cours du dernier exercice ?</fo:block>
          <fo:block font-size="10pt"
                    font-weight="normal"
                    font-style="italic"
@@ -3146,7 +3217,8 @@
                    margin-left="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always"> Indiquez le montant total hors frais (douane, transport, stockage...)</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always"> Indiquez le montant total hors frais (douane, transport, stockage...)</fo:block>
          <fo:block id="IMPORTATIONS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -3181,7 +3253,8 @@
                    space-before.conditionality="discard"
                    text-align="left"
                    page-break-inside="avoid"
-                   keep-with-next="always">IX - Compte financier</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">IX - Compte financier</fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -3189,7 +3262,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 1. Quel est le montant des intérêts et charges assimilés versés ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 1. Quel est le montant des intérêts et charges assimilés versés ?</fo:block>
          <fo:block id="INTERETS_VERSES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -3220,7 +3294,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 2. Quel est le montant des charges et intérêts assimilés perçus ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 2. Quel est le montant des charges et intérêts assimilés perçus ?</fo:block>
          <fo:block id="INTERETS_PERCUS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -3251,7 +3326,8 @@
                    margin-bottom="3pt"
                    text-align="justify"
                    page-break-inside="avoid"
-                   keep-with-next="always">➡ 3. Quel est le montant des dividendes versés ?</fo:block>
+                   keep-with-next="always"
+                   keep-together.within-column="always">➡ 3. Quel est le montant des dividendes versés ?</fo:block>
          <fo:block id="DIVIDENDES" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"

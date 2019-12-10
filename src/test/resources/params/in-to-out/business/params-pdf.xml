@@ -36,12 +36,17 @@
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
         
-        <pdf-parameters><!--
+        <pdf-parameters>
+            <Roster>
+                <Row>
+                    <DefaultSize>20</DefaultSize>
+                </Row>
+            </Roster>
             <Table>
                 <Row>
-                    <DefaultSize>37</DefaultSize>
+                    <DefaultSize>15</DefaultSize>
                 </Row>
-            </Table>-->
+            </Table>
             <Capture>
                 <Numeric>manual</Numeric>
             </Capture>
