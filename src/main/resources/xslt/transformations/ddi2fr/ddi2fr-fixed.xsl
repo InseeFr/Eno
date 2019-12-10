@@ -712,7 +712,7 @@
     <xd:doc>
         <xd:desc>no use of input enoddi:is-required : always false for Web collect</xd:desc>
     </xd:doc>
-    <xsl:function name="enofr:is-required">
+    <xsl:function name="enofr:is-required" as="xs:boolean">
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="false()"/>
     </xsl:function>
