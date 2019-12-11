@@ -2,9 +2,9 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     
     <xs:complexType name="JSParameters">
-        <xs:sequence>
+        <xs:all>
             <xs:element name="Management" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
-        </xs:sequence>
+        </xs:all>
     </xs:complexType>
     
 </xs:schema>

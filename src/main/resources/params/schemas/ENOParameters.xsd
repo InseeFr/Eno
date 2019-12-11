@@ -25,7 +25,7 @@
     </xs:element>
         
     <xs:complexType name="Parameters" >
-        <xs:sequence>
+        <xs:all>
             <xs:element name="StudyUnit" type="StudyUnit" minOccurs="1" maxOccurs="1"/>
             <xs:element name="Campagne" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="Languages" minOccurs="0" maxOccurs="1">
@@ -42,7 +42,7 @@
             <xs:element name="js-parameters" type="JSParameters" minOccurs="0" maxOccurs="1"/>
             <xs:element name="odt-parameters" type="ODTParameters" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Title" type="GlobalNumerotation" minOccurs="0" maxOccurs="1"/>
-        </xs:sequence>        
+        </xs:all>        
     </xs:complexType>
         
     <xs:simpleType name="Language">
@@ -69,10 +69,10 @@
     </xs:complexType>
     
     <xs:complexType name="EndQuestion">
-        <xs:sequence>
+        <xs:all>
             <xs:element name="ResponseTimeQuestion" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
             <xs:element name="CommentQuestion" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
-        </xs:sequence>
+        </xs:all>
     </xs:complexType>
     
 </xs:schema>

@@ -3,7 +3,7 @@
     
     
     <xs:complexType name="PDFParameters">
-        <xs:sequence>
+        <xs:all>
             <xs:element name="Format" type="Format" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Roster" type="Roster" minOccurs="0" maxOccurs="1"/>
             <xs:element name="TextArea" type="TextArea" minOccurs="0" maxOccurs="1"/>
@@ -11,14 +11,14 @@
             <xs:element name="Capture" type="Capture" minOccurs="0" maxOccurs="1"/>
             <xs:element name="PageBreakBetween" type="PageBreakBetween" minOccurs="0" maxOccurs="1"/>
             <xs:element name="AccompanyingMail" type="AccompanyingMail" minOccurs="0" maxOccurs="1" default=""/>
-        </xs:sequence>
+        </xs:all>
     </xs:complexType>
     
     <xs:complexType name="Format">
-        <xs:sequence>
+        <xs:all>
             <xs:element name="Orientation" type="Orientation" default="0" minOccurs="0" maxOccurs="1"/>
             <xs:element name="Columns" type="xs:int" default="1" minOccurs="0" maxOccurs="1"/>
-        </xs:sequence>
+        </xs:all>
     </xs:complexType>
     
     <xs:complexType name="Roster">
@@ -61,8 +61,7 @@
     
     <xs:complexType name="Capture">
         <xs:sequence>
-            <xs:element name="Numeric" type="CaptureEnum" minOccurs="0" maxOccurs="1" default="optical">
-            </xs:element>
+            <xs:element name="Numeric" type="CaptureEnum" minOccurs="0" maxOccurs="1" default="optical"/>
         </xs:sequence>
     </xs:complexType>
     
