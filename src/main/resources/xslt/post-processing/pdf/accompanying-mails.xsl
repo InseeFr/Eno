@@ -60,7 +60,7 @@
         <xsl:variable name="accompanying-mails-page">
             <xsl:choose>
                 <xsl:when test="$AccompanyingMail!=''">
-                    <xsl:value-of select="doc($accompanying-mails-adress)"/>
+                    <xsl:copy-of select="doc($accompanying-mails-adress)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <Empty/>
