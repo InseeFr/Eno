@@ -460,7 +460,7 @@
         </l:VariableGroup>
     </xsl:template>
     
-    <xsl:template match="driver-VariableGroup//QuestionDynamicTable//ResponseDomain" mode="model">
+    <xsl:template match="driver-VariableGroup//QuestionDynamicTable//ResponseDomain | driver-VariableGroup//QuestionDynamicTable//Clarification" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
 
