@@ -10,25 +10,45 @@
 	xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
 	exclude-result-prefixes="xs fn xd eno enojs d r" version="2.0">
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>The properties file used by the stylesheet.</xd:p>
+			<xd:p>It's on a transformation level.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:param name="properties-file"/>
 	<xsl:param name="parameters-file"/>
 	<xsl:param name="parameters-node" as="node()" required="no">
 		<empty/>
 	</xsl:param>
-	<xsl:param name="labels-folder"/>
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>The properties and parameters files are charged as xml trees.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:variable name="properties" select="doc($properties-file)"/>
+	<xsl:variable name="parameters">
+		<xsl:choose>
+			<xsl:when test="$parameters-node/*">
+				<xsl:copy-of select="$parameters-node"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:copy-of select="doc($parameters-file)"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
 	
 	<xd:doc>
 		<xd:desc>Variables from propertiers and parameters</xd:desc>
 	</xd:doc>
-	<xsl:variable name="management">
+	<xsl:variable name="filterDescription">
 		<xsl:choose>
-			<xsl:when test="$parameters//Management != ''">
-				<xsl:value-of select="$parameters//Management"/>
+			<xsl:when test="$parameters//FilterDescription != ''">
+				<xsl:value-of select="$parameters//FilterDescription"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="$properties//Management"/>
+				<xsl:value-of select="$properties//FilterDescription"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
@@ -574,7 +594,7 @@
 		<xsl:variable name="idGoTo" select="enojs:get-name($source-context)"/>
 		<xsl:variable name="label" select="enojs:get-vtl-label($source-context,$languages[1])"/>
 		
-		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idGoTo}" management="{$management}">
+		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idGoTo}" filterDescription="{$filterDescription}">
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
