@@ -3,7 +3,7 @@
     
     <xs:complexType name="JSParameters">
         <xs:all>
-            <xs:element name="Management" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="FilterDescription" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
         </xs:all>
     </xs:complexType>
     

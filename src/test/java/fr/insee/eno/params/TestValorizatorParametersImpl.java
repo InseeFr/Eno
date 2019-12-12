@@ -24,6 +24,7 @@ import fr.insee.eno.parameters.FRParameters;
 import fr.insee.eno.parameters.Format;
 import fr.insee.eno.parameters.GlobalNumerotation;
 import fr.insee.eno.parameters.InFormat;
+import fr.insee.eno.parameters.JSParameters;
 import fr.insee.eno.parameters.Language;
 import fr.insee.eno.parameters.LevelEnum;
 import fr.insee.eno.parameters.LevelQuestion;
@@ -110,6 +111,12 @@ public class TestValorizatorParametersImpl {
 		frParameters.setNumericExample(true);
 
 		parameters.setFrParameters(frParameters);
+		
+		JSParameters jsParameters = new JSParameters();
+		jsParameters.setFilterDescription(true);
+		
+		parameters.setJsParameters(jsParameters);
+
 
 		complexeEnoParameters.setParameters(parameters);
 	}
@@ -158,6 +165,8 @@ public class TestValorizatorParametersImpl {
 
 			//AccompanyingMail
 			Assert.assertEquals(AccompanyingMail.CNR_COL, enoParametersFinal.getParameters().getPdfParameters().getAccompanyingMail());
+			
+			Assert.assertEquals(true, enoParametersFinal.getParameters().getJsParameters().isFilterDescription());
 
 
 			debut = System.currentTimeMillis();

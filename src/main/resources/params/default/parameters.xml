@@ -77,7 +77,7 @@
         </pdf-parameters>
         
         <js-parameters>
-            <Management>false</Management>
+            <FilterDescription>false</FilterDescription>
         </js-parameters>
         
         <odt-parameters/>
