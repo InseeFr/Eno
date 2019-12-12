@@ -35,6 +35,7 @@ import fr.insee.eno.postprocessing.fr.FRModeleColtranePostprocessor;
 import fr.insee.eno.postprocessing.fr.FRSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.js.JSExternalizeVariablesPostprocessor;
 import fr.insee.eno.postprocessing.js.JSSortComponentsPostprocessor;
+import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFEditStructurePagesPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFInsertAccompanyingMailsPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFInsertCoverPagePostprocessor;
@@ -120,6 +121,8 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private JSExternalizeVariablesPostprocessor jsExternalizeVariables = new JSExternalizeVariablesPostprocessor();
 	
 	private JSSortComponentsPostprocessor jsSortComponents = new JSSortComponentsPostprocessor();
+	
+	private JSVTLParserPostprocessor jsvtlParser = new JSVTLParserPostprocessor();
 	
 	private NoopPostprocessor noop = new NoopPostprocessor();
 	
@@ -264,6 +267,9 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			break;
 		case JS_SORT_COMPONENTS:
 			postprocessor = jsSortComponents;
+			break;
+		case JS_VTL_PARSER:
+			postprocessor = jsvtlParser;
 			break;
 		case JS_SPECIFIC_TREATMENT:
 			postprocessor = noop;

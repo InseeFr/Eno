@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 
 /**
@@ -137,6 +138,10 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 		if (!contexts.isEmpty()) {
 			contexts.remove(contexts.size()-1);
 		}
+	}
+	
+	public String toString() {
+		return PostProcessing.JS_VTL_PARSER.name();
 	}
 
 }
