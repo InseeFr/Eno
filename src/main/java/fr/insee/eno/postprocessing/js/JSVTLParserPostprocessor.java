@@ -65,10 +65,9 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 			//matcher.group(4)=last char in group(3) ?
 			//matcher.group(5)=end of xml node ex:</label>
 			//matcher.group(6)=name of xml node ex:label
-			matcher.appendReplacement(stringBuffer,
-					matcher.group(1)
-				  + parseToVTL(matcher.group(3))
-				  + matcher.group(5));
+			String replacement = matcher.group(1) + parseToVTL(matcher.group(3)) + matcher.group(5);
+			matcher.appendReplacement(stringBuffer,"");
+			stringBuffer.append(replacement);
 		}
 		matcher.appendTail(stringBuffer);
 		return stringBuffer.toString();
@@ -106,9 +105,6 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 					isBetweenRealQuote=!isBetweenRealQuote;
 				}				
 				finalString+=c;
-				break;
-			case '\\':
-				finalString+="\\\\";
 				break;
 			case ',':
 				finalString += getLastElement(listContext).equals(CONCAT_FUNCTION) && !isBetweenRealQuote ? " || " : c;
