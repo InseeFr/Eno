@@ -200,6 +200,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 				generator = identityGenerator;
 				break;
 			}
+			break;
 		case FR:
 			generator = identityGenerator;
 			break;
