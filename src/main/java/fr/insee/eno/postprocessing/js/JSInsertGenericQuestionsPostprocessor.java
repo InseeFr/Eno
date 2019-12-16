@@ -44,7 +44,7 @@ public class JSInsertGenericQuestionsPostprocessor implements Postprocessor {
 		inputStream.close();
 		outputStream.close();
 		JS_XSL.close();
-		logger.info("End of Insert-generic-questions post-processing." + outputForJSFile.getAbsolutePath());
+		logger.info("End of Insert-generic-questions post-processing.");
 
 		return outputForJSFile;
 	}
