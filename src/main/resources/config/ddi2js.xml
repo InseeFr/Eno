@@ -12,5 +12,15 @@
     </TextConditioningVariable>
     <!-- sdmx / apache / identity -->
     <Filter>sdmx</Filter>
-    <Management>false</Management>
+    <StudyUnit>default</StudyUnit>
+    <FilterDescription>false</FilterDescription>
+    <EndQuestion>
+        <Folder>xslt/post-processing/js/end-question</Folder>
+        <ResponseTimeQuestion>false</ResponseTimeQuestion>
+        <CommentQuestion>false</CommentQuestion>
+    </EndQuestion>    
+    <BeginQuestion>
+        <Folder>xslt/post-processing/js/begin-question</Folder>
+        <Identification>false</Identification>
+    </BeginQuestion>
 </Properties>

@@ -70,6 +70,7 @@
             <!-- pas sur de mettre des posts prcossings obligatoire... -->
             <xs:enumeration value="js-sortComponents"/>
             <xs:enumeration value="js-specificTreatment"/>
+            <xs:enumeration value="js-insert-generic-questions"/>
             <xs:enumeration value="js-externalizeVariables"/>
             <xs:enumeration value="js-vtlParser"/>
             

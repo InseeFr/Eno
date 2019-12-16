@@ -28,4 +28,11 @@
         <rgpd>https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32016R0679</rgpd>
     </lois>
     <satisfaction>https://www.sphinxonline.com/SurveyServer/s/ccpesatisf/EnqueteColtrane2019/questionnaire.htm</satisfaction>
+    <EndQuestion>
+        <ResponseTimeQuestion>false</ResponseTimeQuestion>
+        <CommentQuestion>false</CommentQuestion>
+    </EndQuestion>
+    <BeginQuestion>
+        <Identification>false</Identification>
+    </BeginQuestion>
 </Properties>
