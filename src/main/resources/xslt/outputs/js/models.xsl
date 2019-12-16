@@ -246,7 +246,7 @@
 		<xsl:variable name="col-span" select="number(enojs:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enojs:get-rowspan($source-context))"/>
 		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
-		<xsl:variable name="label" select="enojs:get-label($source-context,$languages[1])"/>
+		<xsl:variable name="label" select="enojs:get-vtl-label($source-context,$languages[1])"/>
 		
 		<cells>
 			<xsl:if test="$ancestorTable='headerLine'">
@@ -501,7 +501,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
+		<xsl:variable name="label" select="enojs:get-vtl-label($source-context, $languages[1])"/>
 		
 		<xsl:if test="$label !=''">
 			<options>
@@ -520,7 +520,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
+		<xsl:variable name="label" select="enojs:get-vtl-label($source-context, $languages[1])"/>
 		
 		<xsl:if test="$label !=''">
 			<label><xsl:value-of select="$label"/></label>

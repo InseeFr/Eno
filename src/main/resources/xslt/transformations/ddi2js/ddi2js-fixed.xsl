@@ -152,10 +152,15 @@
         <xsl:variable name="label">
             <xsl:sequence select="enoddi:get-label($context,$language)"/>
         </xsl:variable>
-        <xsl:call-template name="enojs:replace-variables-in-formula">
-            <xsl:with-param name="source-context" select="$context"/>
-            <xsl:with-param name="formula" select="enojs:surround-label-with-quote(enojs:replace-double-quote-by-simple-quote($label))"/>
-        </xsl:call-template>
+        <xsl:choose>
+            <xsl:when test="$label!=''">
+                <xsl:call-template name="enojs:replace-variables-in-formula">
+                    <xsl:with-param name="source-context" select="$context"/>
+                    <xsl:with-param name="formula" select="enojs:surround-label-with-quote(enojs:replace-double-quote-by-simple-quote($label))"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:function>
     
     <xsl:function name="enojs:surround-label-with-quote">
