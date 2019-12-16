@@ -484,6 +484,24 @@ public class XslTransformation {
 		transformer.setErrorListener(new EnoErrorListener());
 		xslTransform(transformer, inputFile, outputFile);
 	}
+	
+	public void transformJSToJSSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+			byte[] parameters) throws Exception {
+		InputStream parametersIS = null;
+		LOGGER.info("Post-processing for JS transformation with parameter file");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2JS);
+		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
+		if (parameters != null) {
+			parametersIS = new ByteArrayInputStream(parameters);
+			Source source = new StreamSource(parametersIS);
+			transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_NODE, source);
+		}
+		transformer.setErrorListener(new EnoErrorListener());
+		xslTransform(transformer, inputFile, outputFile);
+	}
 
 	public void transformSimple(InputStream inputFile, OutputStream outputFile, InputStream xslSheet) throws Exception {
 		LOGGER.info("Simple post-processing for FR transformation");

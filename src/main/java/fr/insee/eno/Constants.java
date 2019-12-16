@@ -158,6 +158,7 @@ public final class Constants {
 	// ------------ JS -----------
 	public static final String TRANSFORMATIONS_SORT_COMPONENTS_JS = POST_PROCESSING_FOLDER_JS + "/sort-components.xsl";
 	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS = POST_PROCESSING_FOLDER_JS + "/externalize-variables.xsl";
+	public static final String TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_JS = POST_PROCESSING_FOLDER_JS + "/insert-generic-questions.xsl";
 	// ------------ FR -----------
 	public static final String UTIL_FR_BROWSING_XSL = POST_PROCESSING_FOLDER_FR + "/browsing.xsl";
 	public static final String UTIL_FR_FIX_ADHERENCE_XSL = POST_PROCESSING_FOLDER_FR + "/fix-adherence.xsl";
@@ -348,6 +349,7 @@ public final class Constants {
 
 	// JS
 	public static final String SORT_COMPONENTS_JS_EXTENSION = "-sorted.xml";
+	public static final String INSERT_GENERIC_QUESTIONS_JS_EXTENSION = "-insert-questions.xml";
 	public static final String EXTERNALIZE_VARIABLES_JS_EXTENSION = "-ext-variables.xml";
 	public static final String VTL_PARSER_JS_EXTENSION = "-vtl-parsed.xml";
 	public static final String FINAL_JS_EXTENSION = "-lunatic.xml";

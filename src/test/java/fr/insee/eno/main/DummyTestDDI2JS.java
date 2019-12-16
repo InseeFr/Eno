@@ -8,6 +8,7 @@ import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2JSGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.postprocessing.js.JSExternalizeVariablesPostprocessor;
+import fr.insee.eno.postprocessing.js.JSInsertGenericQuestionsPostprocessor;
 import fr.insee.eno.postprocessing.js.JSSortComponentsPostprocessor;
 import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
@@ -24,6 +25,7 @@ public class DummyTestDDI2JS {
 		String basePathDDI2JS = "src/test/resources/ddi-to-js";
 		Postprocessor[] postprocessors =  {
 				new JSSortComponentsPostprocessor(),
+				new JSInsertGenericQuestionsPostprocessor(),
 				new JSExternalizeVariablesPostprocessor(),
 				new JSVTLParserPostprocessor()};
 		
