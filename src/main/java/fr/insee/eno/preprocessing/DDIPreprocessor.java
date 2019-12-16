@@ -16,6 +16,7 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * A DDI specific preprocessor.
  */
+@Deprecated
 public class DDIPreprocessor implements Preprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDIPreprocessor.class);
