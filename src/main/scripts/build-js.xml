@@ -12,6 +12,13 @@
 		</xslt>
 		
 		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form-sorted.${out-extension}"
+			out="${root-folder}/target/${survey-name}/${form-name}/form/form-end-questions.${out-extension}"
+			style="${xslt.home}/post-processing/js/insert-generic-questions.xsl" force="true"			
+			classpath="${saxon.jar}">
+			<param name="properties-file" expression="${config-folder}/${in-format}2${out-format}.xml"/>
+		</xslt>
+		
+		<xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form-end-questions.${out-extension}"
 			out="${root-folder}/target/${survey-name}/${form-name}/form/form-lunatic.${out-extension}"
 			style="${xslt.home}/post-processing/js/externalize-variables.xsl" force="true"			
 			classpath="${saxon.jar}">

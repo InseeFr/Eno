@@ -33,6 +33,13 @@
         </Questionnaire>
     </xsl:template>
     
+    <xsl:template match="h:components">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="*[not(self::h:variables)]"/>
+        </xsl:copy>
+    </xsl:template>
+    
     <xsl:template match="h:cells">
         <xsl:copy>
             <xsl:copy-of select="@*"/>
