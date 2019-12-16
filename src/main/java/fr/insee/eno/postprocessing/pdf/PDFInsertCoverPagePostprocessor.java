@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -38,7 +39,11 @@ public class PDFInsertCoverPagePostprocessor implements Postprocessor {
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
 
-		saxonService.transformFOToStep4FO(inputStream, outputStream, FO_XSL, surveyName, formName, parameters);
+		try {
+			saxonService.transformFOToStep4FO(inputStream, outputStream, FO_XSL, surveyName, formName, parameters);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
 
 		inputStream.close();
 		outputStream.close();
@@ -51,7 +56,7 @@ public class PDFInsertCoverPagePostprocessor implements Postprocessor {
 	private String getFormName(File input) {
 		return FilenameUtils.getBaseName(input.getParentFile().getParent());
 	}
-	
+
 	public String toString() {
 		return PostProcessing.PDF_INSERT_COVER_PAGE.name();
 	}

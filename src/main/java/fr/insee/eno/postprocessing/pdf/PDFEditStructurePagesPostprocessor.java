@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -26,12 +27,12 @@ public class PDFEditStructurePagesPostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		
+
 		File outputForFOFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
 				Constants.EDIT_STRUCTURE_FO_EXTENSION);
 		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
-		
+
 		String surveyName = survey;
 		String formName = getFormName(input);
 		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF);
@@ -39,7 +40,11 @@ public class PDFEditStructurePagesPostprocessor implements Postprocessor {
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFOFile);
 
-		saxonService.transformFOToStep4FO(inputStream, outputStream, FO_XSL, surveyName, formName, parameters);
+		try {
+			saxonService.transformFOToStep4FO(inputStream, outputStream, FO_XSL, surveyName, formName, parameters);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
 
 		inputStream.close();
 		outputStream.close();
@@ -52,7 +57,7 @@ public class PDFEditStructurePagesPostprocessor implements Postprocessor {
 	private String getFormName(File input) {
 		return FilenameUtils.getBaseName(input.getParentFile().getParent());
 	}
-	
+
 	public String toString() {
 		return PostProcessing.PDF_EDIT_STRUCTURE_PAGES.name();
 	}

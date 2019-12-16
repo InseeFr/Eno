@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -25,15 +26,18 @@ public class FRInsertGenericQuestionsPostprocessor implements Postprocessor {
 		File outputForFRFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
 				Constants.INSERT_GENERIC_QUESTIONS_FR_EXTENSION);
-		
+
 		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
-				
+
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
-		
-		InputStream FR_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_INSERT_GENERIC_QUESTIONS_XSL);
 
-		saxonService.transformFRToFRSimplePost(inputStream,outputStream, FR_XSL,parameters);
+		InputStream FR_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_INSERT_GENERIC_QUESTIONS_XSL);
+		try {
+			saxonService.transformFRToFRSimplePost(inputStream,outputStream, FR_XSL,parameters);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
 		inputStream.close();
 		outputStream.close();
 		FR_XSL.close();
@@ -41,7 +45,7 @@ public class FRInsertGenericQuestionsPostprocessor implements Postprocessor {
 
 		return outputForFRFile;
 	}
-	
+
 	@Override
 	public String toString() {
 		return PostProcessing.FR_INSERT_GENERIC_QUESTIONS.name();

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -26,7 +27,7 @@ public class FRInsertEndPostprocessor implements Postprocessor {
 
 	@Override
 	public File process(File input, byte[] parameters, byte[] metadata, String survey) throws Exception {
-		
+
 		File outputForFRFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
 				Constants.INSERT_END_FR_EXTENSION);
@@ -38,7 +39,11 @@ public class FRInsertEndPostprocessor implements Postprocessor {
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
 
-		saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters ,metadata);
+		try {
+			saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters, metadata);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
 
 		inputStream.close();
 		outputStream.close();
@@ -47,7 +52,7 @@ public class FRInsertEndPostprocessor implements Postprocessor {
 
 		return outputForFRFile;
 	}
-	
+
 	@Override
 	public String toString() {
 		return PostProcessing.FR_INSERT_END.name();

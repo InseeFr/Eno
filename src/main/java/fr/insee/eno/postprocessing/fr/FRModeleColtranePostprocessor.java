@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -22,13 +23,13 @@ public class FRModeleColtranePostprocessor implements Postprocessor {
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 
-		
+
 		File outputForFRFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
 				Constants.MODELE_COLTRANE_FR_EXTENSION);
 
 		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
-		
+
 		String sUB_TEMP_FOLDER = Constants.tEMP_DDI_FOLDER(Constants.sUB_TEMP_FOLDER(survey));
 		File mappingFile = Constants.tEMP_MAPPING_TMP(sUB_TEMP_FOLDER);
 
@@ -42,7 +43,11 @@ public class FRModeleColtranePostprocessor implements Postprocessor {
 			mappingStream = FileUtils.openInputStream(mappingFile);
 		}
 
-		saxonService.transformModelColtraneFr(inputStream, outputStream, FO_XSL, mappingStream);
+		try {
+			saxonService.transformModelColtraneFr(inputStream, outputStream, FO_XSL, mappingStream);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
 
 		inputStream.close();
 		outputStream.close();
@@ -52,7 +57,7 @@ public class FRModeleColtranePostprocessor implements Postprocessor {
 
 		return outputForFRFile;
 	}
-	
+
 	@Override
 	public String toString() {
 		return PostProcessing.FR_MODELE_COLTRANE.name();

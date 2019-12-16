@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -28,17 +29,21 @@ public class PDFMailingPostprocessor implements Postprocessor {
 				Constants.BASE_NAME_FORM_FILE +
 				Constants.MAILING_FO_EXTENSION);
 		logger.debug("Output folder for basic-form : " + outputForFOFile.getAbsolutePath());
-		
-		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2);
 
-		saxonService.transformFOToStep1FO(FileUtils.openInputStream(input),
-				FileUtils.openOutputStream(outputForFOFile), FO_XSL);
+		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2);
+		try {
+			saxonService.transformFOToStep1FO(FileUtils.openInputStream(input),
+					FileUtils.openOutputStream(outputForFOFile), FO_XSL);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
+		
 		FO_XSL.close();
 		logger.info("End of Mailing post-processing : ");
 
 		return outputForFOFile;
 	}
-	
+
 	public String toString() {
 		return PostProcessing.PDF_MAILING.name();
 	}

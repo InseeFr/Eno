@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -23,7 +24,7 @@ public class FREditPatronPostprocessor implements Postprocessor {
 	public File process(File input, byte[] parameters, String survey) throws Exception {
 		return this.process(input, parameters, null, survey);
 	}
-	
+
 	@Override
 	public File process(File input, byte[] parameters, byte[] metadata, String survey) throws Exception {
 		File outputForFRFile = new File(input.getParent(),
@@ -36,15 +37,18 @@ public class FREditPatronPostprocessor implements Postprocessor {
 
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
-		saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters, metadata);
-
+		try {
+			saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters, metadata);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
 		logger.info("End of EditPatron post-processing " + outputForFRFile.getAbsolutePath());
 		return outputForFRFile;
 	}
-	
+
 	@Override
 	public String toString() {
 		return PostProcessing.FR_EDIT_PATRON.name();

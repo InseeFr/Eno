@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
@@ -27,7 +28,7 @@ public class DDIMappingPreprocessor implements Preprocessor {
 		System.out.println(saxonService);
 
 		String sUB_TEMP_FOLDER = Constants.tEMP_DDI_FOLDER(Constants.sUB_TEMP_FOLDER(survey));
-		
+
 		File mappingFile =Constants.tEMP_MAPPING_TMP(sUB_TEMP_FOLDER);
 		// ----- Dereferencing
 		logger.debug("Mapping : -Input : " + inputFile + " -Output : " + mappingFile
@@ -36,16 +37,21 @@ public class DDIMappingPreprocessor implements Preprocessor {
 		InputStream isDDI_MAPPING_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_MAPPING_XSL);
 		InputStream isInputFile = FileUtils.openInputStream(inputFile);
 		OutputStream osTEMP_MAPPING_TMP = FileUtils.openOutputStream(mappingFile);
-		saxonService.transformMapping(isInputFile, isDDI_MAPPING_XSL, osTEMP_MAPPING_TMP,parametersFile);
 		
+		try {
+			saxonService.transformMapping(isInputFile, isDDI_MAPPING_XSL, osTEMP_MAPPING_TMP,parametersFile);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
+
 		isInputFile.close();
 		isDDI_MAPPING_XSL.close();
 		osTEMP_MAPPING_TMP.close();
-		
+
 		return inputFile;
-		
+
 	}
-	
+
 	public String toString() {
 		return PreProcessing.DDI_MAPPING.name();
 	}

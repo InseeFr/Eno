@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
@@ -34,8 +35,13 @@ public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
 		InputStream isInputFile = FileUtils.openInputStream(input);
 
 		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(new File(mw2xhtmlOutput));
-		saxonService.transformMw2XHTML(isInputFile, isDDI_MW2XHTML_XSL, osTEMP_NULL_TMP,
-				Constants.sUB_TEMP_FOLDER_FILE(survey));
+
+		try {
+			saxonService.transformMw2XHTML(isInputFile, isDDI_MW2XHTML_XSL, osTEMP_NULL_TMP,
+					Constants.sUB_TEMP_FOLDER_FILE(survey));
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the Markdown2Xhtml transformation. "+e.getMessage());
+		}
 		isInputFile.close();
 		isDDI_MW2XHTML_XSL.close();
 		osTEMP_NULL_TMP.close();
@@ -53,8 +59,12 @@ public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
 		InputStream isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = Constants
 				.getInputStreamFromPath(Constants.UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL);
 		OutputStream osTweakXhtmlForDdi = FileUtils.openOutputStream(new File(outputTweakXhtmlForDdi));
-		saxonService.transformTweakXhtmlForDdi(isTweakXhtmlForDdi, isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL,
-				osTweakXhtmlForDdi, Constants.sUB_TEMP_FOLDER_FILE(survey));
+		try {
+			saxonService.transformTweakXhtmlForDdi(isTweakXhtmlForDdi, isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL,
+					osTweakXhtmlForDdi, Constants.sUB_TEMP_FOLDER_FILE(survey));
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the Markdown2Xhtml transformation. "+e.getMessage());
+		}
 		isTweakXhtmlForDdi.close();
 		isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL.close();
 		osTweakXhtmlForDdi.close();

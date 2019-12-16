@@ -10,11 +10,11 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.insee.eno.exception.EnoParametersException;
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.parameters.Pipeline;
 import fr.insee.eno.params.ValorizatorParameters;
 import fr.insee.eno.params.ValorizatorParametersImpl;
-import fr.insee.eno.params.exception.EnoParametersException;
 import fr.insee.eno.params.pipeline.PipeLineGeneratorImpl;
 import fr.insee.eno.params.pipeline.PipelineGenerator;
 import fr.insee.eno.params.validation.SchemaValidator;

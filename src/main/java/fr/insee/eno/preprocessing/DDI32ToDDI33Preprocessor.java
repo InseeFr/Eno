@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
@@ -36,7 +37,13 @@ public class DDI32ToDDI33Preprocessor implements Preprocessor {
 		InputStream isDDI32_TO_DDI33_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI32_TO_DDI33_XSL);
 		InputStream isInputFile = FileUtils.openInputStream(inputFile);
 		OutputStream osDDI32DDI33 = FileUtils.openOutputStream(new File(output));
-		saxonService.transform(isInputFile, isDDI32_TO_DDI33_XSL, osDDI32DDI33);
+		
+		try {
+			saxonService.transform(isInputFile, isDDI32_TO_DDI33_XSL, osDDI32DDI33);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
+		
 		isInputFile.close();
 		isDDI32_TO_DDI33_XSL.close();
 		osDDI32DDI33.close();

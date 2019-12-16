@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 
@@ -20,7 +21,7 @@ import fr.insee.eno.postprocessing.Postprocessor;
  */
 public class JSVTLParserPostprocessor implements Postprocessor {
 
-	
+
 
 	private static final Logger logger = LoggerFactory.getLogger(JSVTLParserPostprocessor.class);
 
@@ -34,8 +35,11 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 		logger.info("Start JS parsing xpath to vtl post-processing");
 
 		String inputString = FileUtils.readFileToString(input, StandardCharsets.UTF_8);
-
-		FileUtils.writeStringToFile(outputCustomFOFile, parseToVTLInNodes(inputString), StandardCharsets.UTF_8);
+		try {
+			FileUtils.writeStringToFile(outputCustomFOFile, parseToVTLInNodes(inputString), StandardCharsets.UTF_8);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
 		logger.info("End JS parsing xpath to vtl post-processing");
 
 		return outputCustomFOFile;
@@ -45,16 +49,16 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 	public static final String CONCAT_FUNCTION = "concat";
 	public static final String SUBSTRING_FUNCTION = "substring";
 	public static final String CAST_FUNCTION = "cast";
-	
+
 	public static final String XML_NODE_LABEL = "label";
 	public static final String XML_NODE_CONDITIONFILTER = "conditionFilter";
 	public static final String XML_NODE_VALUE = "value";
 	public static final String XML_NODE_EXPRESSION = "expression";
-	
+
 	public String parseToVTLInNodes(String input) {
 		String possibleNodes = "("+XML_NODE_LABEL+"|"+XML_NODE_CONDITIONFILTER+"|"+XML_NODE_VALUE+"|"+XML_NODE_EXPRESSION+")";
 		Pattern pattern = Pattern.compile("(<"+possibleNodes+">)((.|\\s)*?)(</"+possibleNodes+">)");
-		
+
 		Matcher matcher = pattern.matcher(input);
 		StringBuffer stringBuffer = new StringBuffer();
 		while(matcher.find()){
@@ -125,7 +129,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 	public char getLastChar(String text) {
 		return text.isEmpty() ? 0: text.charAt(text.length()-1);
 	}
-	
+
 	public String getLastElement(List<String> contexts) {
 		return contexts.isEmpty() ?"": contexts.get(contexts.size()-1);
 	}
@@ -135,7 +139,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 			contexts.remove(contexts.size()-1);
 		}
 	}
-	
+
 	public String toString() {
 		return PostProcessing.JS_VTL_PARSER.name();
 	}

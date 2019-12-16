@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
@@ -29,16 +30,19 @@ public class DDIDereferencingPreprocessor implements Preprocessor {
 		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(survey);
 		// ----- Dereferencing
 		logger.debug("Dereferencing : -Input : " + inputFile + " -Output : " + Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER)
-				+ " -Stylesheet : " + Constants.UTIL_DDI_DEREFERENCING_XSL + " -Parameters : " + sUB_TEMP_FOLDER);
+		+ " -Stylesheet : " + Constants.UTIL_DDI_DEREFERENCING_XSL + " -Parameters : " + sUB_TEMP_FOLDER);
 
 		InputStream isDDI_DEREFERENCING_XSL = Constants.getInputStreamFromPath(Constants.DDI_DEREFERENCING_XSL);
 		InputStream isInputFile = FileUtils.openInputStream(inputFile);
 		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER));
-		saxonService.transformDereferencing(isInputFile, isDDI_DEREFERENCING_XSL, osTEMP_NULL_TMP,
-				Constants.sUB_TEMP_FOLDER_FILE(survey)); // FIXME 4th param
-															// should be a
-															// parameters file
-															// (?!!?).
+		
+		try {
+			saxonService.transformDereferencing(isInputFile, isDDI_DEREFERENCING_XSL, osTEMP_NULL_TMP,
+					Constants.sUB_TEMP_FOLDER_FILE(survey));
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
+
 		isInputFile.close();
 		isDDI_DEREFERENCING_XSL.close();
 		osTEMP_NULL_TMP.close();
@@ -52,9 +56,9 @@ public class DDIDereferencingPreprocessor implements Preprocessor {
 				return !name.startsWith("null");
 			}
 		});
-		
+
 		String cleaningInput = null;
-		
+
 		logger.debug("Searching matching files in : " + sUB_TEMP_FOLDER);
 		for (File file : matchCleaningInput) {
 			if(!file.isDirectory()) {
@@ -62,11 +66,14 @@ public class DDIDereferencingPreprocessor implements Preprocessor {
 				logger.debug("Found : " + cleaningInput);
 			}
 		}
-		
+		if(cleaningInput==null) {
+			throw new EnoGenerationException("DDIDereferencing produced no file.");
+		}
+
 		logger.debug("DDIPreprocessing Dereferencing : END");
 		return new File(cleaningInput);
 	}
-	
+
 	public String toString() {
 		return PreProcessing.DDI_DEREFERENCING.name();
 	}

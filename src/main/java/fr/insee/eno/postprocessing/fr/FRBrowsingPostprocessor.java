@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -25,15 +26,18 @@ public class FRBrowsingPostprocessor implements Postprocessor {
 		File outputForFRFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
 				Constants.BROWSING_FR_EXTENSION);
-		
+
 		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
 
 		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_BROWSING_XSL);
 
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
-
-		saxonService.transformBrowsingFr(inputStream, outputStream, FO_XSL);
+		try {
+			saxonService.transformBrowsingFr(inputStream, outputStream, FO_XSL);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
 
 		inputStream.close();
 		outputStream.close();
@@ -42,7 +46,7 @@ public class FRBrowsingPostprocessor implements Postprocessor {
 
 		return outputForFRFile;
 	}
-	
+
 	@Override
 	public String toString() {
 		return PostProcessing.FR_BROWSING.name();

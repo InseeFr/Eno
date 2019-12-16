@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.transform.xsl.XslParameters;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
@@ -40,8 +41,12 @@ public class DDI2ODTGenerator implements Generator {
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 		OutputStream osOutputFile = FileUtils.openOutputStream(new File(outputForm));
 
-		saxonService.transformDDI2ODT(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL, parameters);
-
+		try {
+			saxonService.transformDDI2ODT(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL, parameters);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the "+in2out()+" transformation. "+e.getMessage());
+		}
+		
 		isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL.close();
 
 		isFinalInput.close();

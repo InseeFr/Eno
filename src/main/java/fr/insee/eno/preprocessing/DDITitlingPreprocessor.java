@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
@@ -37,15 +38,20 @@ public class DDITitlingPreprocessor implements Preprocessor {
 		InputStream isCleaningTitling = FileUtils.openInputStream(new File(titlingInput));
 		InputStream isUTIL_DDI_TITLING_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_TITLING_XSL);
 		OutputStream osTitling = FileUtils.openOutputStream(new File(outputTitling));
-		saxonService.transformTitling(isCleaningTitling, isUTIL_DDI_TITLING_XSL, osTitling, parametersFile);
-		
+
+		try {
+			saxonService.transformTitling(isCleaningTitling, isUTIL_DDI_TITLING_XSL, osTitling, parametersFile);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
+
 		isCleaningTitling.close();
 		isUTIL_DDI_TITLING_XSL.close();
 		osTitling.close();
 		logger.debug("DDIPreprocessing titling: END");
 		return new File(outputTitling);
 	}
-	
+
 	public String toString() {
 		return PreProcessing.DDI_TITLING.name();
 	}

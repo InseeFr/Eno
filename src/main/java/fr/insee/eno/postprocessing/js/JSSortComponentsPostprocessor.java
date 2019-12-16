@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -29,13 +30,16 @@ public class JSSortComponentsPostprocessor implements Postprocessor {
 				Constants.BASE_NAME_FORM_FILE +
 				Constants.SORT_COMPONENTS_JS_EXTENSION);
 		logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
-		
+
 		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_SORT_COMPONENTS_JS);
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
-		
-		saxonService.transformJSToJSPost(inputStream,outputStream, JS_XSL);
-		
+		try {
+			saxonService.transformJSToJSPost(inputStream,outputStream, JS_XSL);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
+
 		inputStream.close();
 		outputStream.close();
 		JS_XSL.close();
@@ -43,7 +47,7 @@ public class JSSortComponentsPostprocessor implements Postprocessor {
 
 		return outputForJSFile;
 	}
-	
+
 	public String toString() {
 		return PostProcessing.JS_SORT_COMPONENTS.name();
 	}

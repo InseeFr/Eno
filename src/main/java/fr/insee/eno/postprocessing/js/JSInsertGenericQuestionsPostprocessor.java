@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
@@ -25,15 +26,19 @@ public class JSInsertGenericQuestionsPostprocessor implements Postprocessor {
 		File outputForJSFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
 				Constants.INSERT_GENERIC_QUESTIONS_JS_EXTENSION);
-		
+
 		logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
-				
+
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
-		
-		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_JS);
 
-		saxonService.transformJSToJSSimplePost(inputStream,outputStream, JS_XSL,parameters);
+		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_JS);
+		try {
+			saxonService.transformJSToJSSimplePost(inputStream,outputStream, JS_XSL,parameters);
+		}catch(Exception e) {
+			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+		}
+
 		inputStream.close();
 		outputStream.close();
 		JS_XSL.close();
@@ -41,7 +46,7 @@ public class JSInsertGenericQuestionsPostprocessor implements Postprocessor {
 
 		return outputForJSFile;
 	}
-	
+
 	@Override
 	public String toString() {
 		return PostProcessing.JS_INSERT_GENERIC_QUESTIONS.name();
