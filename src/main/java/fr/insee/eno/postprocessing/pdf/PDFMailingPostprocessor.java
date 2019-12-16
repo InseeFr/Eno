@@ -35,7 +35,9 @@ public class PDFMailingPostprocessor implements Postprocessor {
 			saxonService.transformFOToStep1FO(FileUtils.openInputStream(input),
 					FileUtils.openOutputStream(outputForFOFile), FO_XSL);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 		
 		FO_XSL.close();

@@ -41,7 +41,9 @@ public class DDI32ToDDI33Preprocessor implements Preprocessor {
 		try {
 			saxonService.transform(isInputFile, isDDI32_TO_DDI33_XSL, osDDI32DDI33);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 		
 		isInputFile.close();

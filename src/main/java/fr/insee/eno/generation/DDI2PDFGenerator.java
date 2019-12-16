@@ -45,7 +45,9 @@ public class DDI2PDFGenerator implements Generator {
 		try {
 			saxonService.transformDDI2PDF(isFinalInput, osOutputForm, isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL, parameters);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the "+in2out()+" transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 		isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL.close();
 

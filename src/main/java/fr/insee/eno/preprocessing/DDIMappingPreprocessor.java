@@ -41,7 +41,9 @@ public class DDIMappingPreprocessor implements Preprocessor {
 		try {
 			saxonService.transformMapping(isInputFile, isDDI_MAPPING_XSL, osTEMP_MAPPING_TMP,parametersFile);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 
 		isInputFile.close();

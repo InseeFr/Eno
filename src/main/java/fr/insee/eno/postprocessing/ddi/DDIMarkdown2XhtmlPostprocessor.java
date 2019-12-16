@@ -63,7 +63,9 @@ public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
 			saxonService.transformTweakXhtmlForDdi(isTweakXhtmlForDdi, isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL,
 					osTweakXhtmlForDdi, Constants.sUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the Markdown2Xhtml transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the Markdown2Xhtml transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 		isTweakXhtmlForDdi.close();
 		isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL.close();

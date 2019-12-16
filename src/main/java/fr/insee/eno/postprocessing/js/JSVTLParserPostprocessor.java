@@ -38,7 +38,9 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 		try {
 			FileUtils.writeStringToFile(outputCustomFOFile, parseToVTLInNodes(inputString), StandardCharsets.UTF_8);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 		logger.info("End JS parsing xpath to vtl post-processing");
 

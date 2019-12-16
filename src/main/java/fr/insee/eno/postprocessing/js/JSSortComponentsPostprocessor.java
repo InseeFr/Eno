@@ -37,7 +37,9 @@ public class JSSortComponentsPostprocessor implements Postprocessor {
 		try {
 			saxonService.transformJSToJSPost(inputStream,outputStream, JS_XSL);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 
 		inputStream.close();

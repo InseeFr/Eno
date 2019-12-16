@@ -44,7 +44,9 @@ public class PoguesXML2DDIGenerator implements Generator {
 			saxonService.transformPoguesXML2DDI(isFinalInput, osOutputBasicForm,
 					isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL, parameters);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the "+in2out()+" transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 
 		isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL.close();

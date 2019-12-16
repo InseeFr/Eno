@@ -46,7 +46,9 @@ public class FRModeleColtranePostprocessor implements Postprocessor {
 		try {
 			saxonService.transformModelColtraneFr(inputStream, outputStream, FO_XSL, mappingStream);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 
 		inputStream.close();

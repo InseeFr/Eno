@@ -40,7 +40,9 @@ public class FREditPatronPostprocessor implements Postprocessor {
 		try {
 			saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters, metadata);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 		inputStream.close();
 		outputStream.close();

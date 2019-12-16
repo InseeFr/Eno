@@ -45,7 +45,9 @@ public class DDI2JSGenerator implements Generator {
 		try {
 			saxonService.transformDDI2JS(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2JS_DDI2JS_XSL, parameters);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the "+in2out()+" transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 		
 		isTRANSFORMATIONS_DDI2JS_DDI2JS_XSL.close();

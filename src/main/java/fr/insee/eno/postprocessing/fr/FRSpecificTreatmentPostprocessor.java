@@ -48,7 +48,9 @@ public class FRSpecificTreatmentPostprocessor implements Postprocessor {
 			try {
 				saxonService.transformWithFRSpecificTreatment(inputStream, outputStream, specificTreatmentXslIS, parametersFile);
 			}catch(Exception e) {
-				throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
+				String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
+				logger.error(errorMessage);
+				throw new EnoGenerationException(errorMessage);
 			}
 
 			inputStream.close();

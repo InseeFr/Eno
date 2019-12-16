@@ -44,7 +44,9 @@ public class DDI2FRGenerator implements Generator {
 			saxonService.transformDDI2FR(isFinalInput, osOutputBasicForm, isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL,
 					parameters);
 		}catch(Exception e) {
-			throw new EnoGenerationException("An error was occured during the "+in2out()+" transformation. "+e.getMessage());
+			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
 		}
 
 		isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL.close();
