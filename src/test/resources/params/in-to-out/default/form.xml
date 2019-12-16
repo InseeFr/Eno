@@ -2486,6 +2486,39 @@
          <conditionFilter>"normal"</conditionFilter>
       </components>
    </components>
+   <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
+      <label>"Commentaire"</label>
+      <conditionFilter>"normal"</conditionFilter>
+      <components xsi:type="Textarea"
+                  componentType="Textarea"
+                  id="COMMENT-QUESTION"
+                  maxLength="2000"
+                  mandatory="false">
+         <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
+         <response name="COMMENT_QE" xsi:type="ResponseContainerString">
+                <valueState valueType="PREVIOUS">
+                    <value xsi:nil="true"/>
+                </valueState>
+                <valueState valueType="COLLECTED">
+                    <value xsi:nil="true"/>
+                </valueState>
+                <valueState valueType="FORCED">
+                    <value xsi:nil="true"/>
+                </valueState>
+                <valueState valueType="EDITED">
+                    <value xsi:nil="true"/>
+                </valueState>
+                <valueState valueType="INPUTED">
+                    <value xsi:nil="true"/>
+                </valueState>
+            </response>
+         <conditionFilter>"normal"</conditionFilter>
+      </components>
+   </components>
+   <variables variableType="COLLECTED">
+      <name>COMMENT_QE</name>
+      <responseRef>COMMENT_QE</responseRef>
+   </variables>
    <variables variableType="EXTERNAL">
       <name>LAST_BROADCAST</name>
       <value xsi:nil="true"/>

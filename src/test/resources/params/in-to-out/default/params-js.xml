@@ -9,6 +9,7 @@
         <PreProcessing>ddi-titling</PreProcessing>
         
         <PostProcessing>js-sortComponents</PostProcessing>
+        <PostProcessing>js-insert-generic-questions</PostProcessing>
         <PostProcessing>js-externalizeVariables</PostProcessing>
         <PostProcessing>js-vtlParser</PostProcessing>
     </Pipeline>
@@ -24,9 +25,14 @@
             <Language>en</Language>
         </Languages>
         
+        <EndQuestion>
+            <ResponseTimeQuestion>false</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+        
         <js-parameters>            
             <FilterDescription>true</FilterDescription>
-        </js-parameters>        
+        </js-parameters>
     </Parameters>
     
 </ENOParameters>
