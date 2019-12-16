@@ -1,4 +1,4 @@
-package fr.insee.eno.params.exception;
+package fr.insee.eno.exception;
 public class EnoParametersException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
