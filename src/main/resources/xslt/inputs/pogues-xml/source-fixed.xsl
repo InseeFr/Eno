@@ -83,7 +83,7 @@
             </xsl:when>
             <xsl:when test=". = 'MODULE'">
                 <xsl:value-of select="'module'"/>
-            </xsl:when>            
+            </xsl:when>
             <xsl:when test=". = 'SUBMODULE'">
                 <xsl:value-of select="'submodule'"/>
             </xsl:when>
@@ -98,7 +98,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="pogues:Control/@criticity" mode="conversion-table">
         <xsl:choose>
             <xsl:when test=". = 'INFO'">
@@ -106,7 +106,7 @@
             </xsl:when>
             <xsl:when test=". = 'WARN'">
                 <xsl:value-of select="'warn'"/>
-            </xsl:when>            
+            </xsl:when>
             <xsl:when test=". = 'ERROR'">
                 <xsl:value-of select="'error'"/>
             </xsl:when>
@@ -118,7 +118,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="pogues:Unit" mode="conversion-table">
         <xsl:choose>
             <xsl:when test=". = 'http://id.insee.fr/unit/euro'">
@@ -126,7 +126,7 @@
             </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/keuro'">
                 <xsl:value-of select="'k€'"/>
-            </xsl:when>          
+            </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/percent'">
                 <xsl:value-of select="'%'"/>
             </xsl:when>
@@ -135,7 +135,7 @@
             </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/jour'">
                 <xsl:value-of select="'jours'"/>
-            </xsl:when>          
+            </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/mois'">
                 <xsl:value-of select="'mois'"/>
             </xsl:when>
@@ -156,23 +156,28 @@
         <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
     </xsl:template>
 
+    <xsl:template match="pogues:ClarificationQuestion" mode="enopogues:get-related-variable">
+        <xsl:variable name="idVariable" select="pogues:Response/pogues:CollectedVariableReference"/>
+        <xsl:sequence select="//pogues:Variable[@id = $idVariable]"/>
+    </xsl:template>
+
     <xsl:template match="pogues:Expression | pogues:Formula | pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label" mode="enopogues:get-related-variable">
         <xsl:variable name="expressionVariable" select="tokenize(., '\$')"/>
         <xsl:variable name="variables" select="//pogues:Variables"/>
 
         <!-- 2 ways to describe a variable : $Variable$ or $Variable with a space after -->
         <!-- TODO : Use regexp matches instead to handle several ' ' and linebreak cases. -->
-        
+
         <xsl:sequence select="$variables/pogues:Variable[some $x in $expressionVariable satisfies (if (contains($x, ' '))
                                                                                                     then (substring-before($x, ' '))
-                                                                                                    else ($x)) 
+                                                                                                    else ($x))
                                                                  = pogues:Name/text()]"/>
     </xsl:template>
 
     <xsl:template match="pogues:Variable[pogues:Formula]" mode="enopogues:get-related-variable">
         <xsl:sequence select="enopogues:get-related-variable(pogues:Formula)"/>
     </xsl:template>
-    
+
     <xsl:template match="pogues:Response" mode="enopogues:get-cell-coordinates">
         <xsl:variable name="correspondingMapping"
             select="following-sibling::pogues:ResponseStructure/pogues:Mapping[pogues:MappingSource = current()/@id]"/>
@@ -198,9 +203,9 @@
     </xsl:template>
 
     <xsl:template match="pogues:CodeLists | pogues:Questionnaire" mode="enopogues:get-fake-code-lists">
-        <xsl:apply-templates select="ancestor-or-self::pogues:Questionnaire//pogues:ResponseStructure" mode="enopogues:get-fake-code-lists"/>    
+        <xsl:apply-templates select="ancestor-or-self::pogues:Questionnaire//pogues:ResponseStructure" mode="enopogues:get-fake-code-lists"/>
     </xsl:template>
-    
+
     <xsl:template match="pogues:Child[@questionType = 'TABLE']/pogues:ResponseStructure[not(pogues:Dimension/@dimensionType = 'SECONDARY')]"
         mode="enopogues:get-fake-code-lists">
         <xsl:variable name="fake-code-list">
@@ -210,7 +215,7 @@
                 <xsl:for-each select="pogues:Dimension[@dimensionType='MEASURE' and @dynamic='0']">
                     <pogues:Code>
                         <pogues:Value><xsl:value-of select="position()"/></pogues:Value>
-                        <pogues:Label><xsl:value-of select="enopogues:get-label(.)"/></pogues:Label>                         
+                        <pogues:Label><xsl:value-of select="enopogues:get-label(.)"/></pogues:Label>
                     </pogues:Code>
                 </xsl:for-each>
             </pogues:CodeList>
@@ -225,19 +230,19 @@
     </xsl:function>
 
     <xsl:template match="pogues:Declaration/pogues:Text | pogues:Control/pogues:FailMessage | pogues:Label" mode="id-variable">
-        <xsl:variable name="variables" select="enopogues:get-related-variable(.)"/>       
+        <xsl:variable name="variables" select="enopogues:get-related-variable(.)"/>
         <xsl:choose>
             <xsl:when test="$variables">
                 <xsl:call-template name="enopogues:id-variable-to-ddi">
                      <xsl:with-param name="variables" select="$variables" as="item()*"/>
-                     <xsl:with-param name="expression" select="concat(./text(),' ')"/>            
-                </xsl:call-template>        
+                     <xsl:with-param name="expression" select="concat(./text(),' ')"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>
             </xsl:otherwise>
         </xsl:choose>
-        
+
     </xsl:template>
 
     <xsl:template name="enopogues:id-variable-to-ddi">
@@ -247,15 +252,15 @@
         <xsl:choose>
             <xsl:when test="$index &gt; count($variables)">
                 <xsl:value-of select="$expression"/>
-            </xsl:when>            
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="currentVariable" select="$variables[$index]"/>
-                <!-- TO DO, variable-name is only for external variables, others should refer to outParam. -->                
+                <!-- TO DO, variable-name is only for external variables, others should refer to outParam. -->
                 <!-- TO DO Remove variable without $ end separator -->
                 <xsl:variable name="variable-name" select="enopogues:get-name($currentVariable)"/>
                 <xsl:variable name="variable-ref-name-with-final-dollars" select="concat('\$',$variable-name,'\$')"/>
                 <xsl:variable name="variable-ref-name-without-final-dollars" select="concat('\$',$variable-name,' ')"/>
-                <xsl:variable name="variable-type" select="enopogues:get-type($currentVariable)"/>                              
+                <xsl:variable name="variable-type" select="enopogues:get-type($currentVariable)"/>
                 <xsl:choose>
                     <!-- In this case the variable id separator is '¤' and variable id is the outparam related to the variable (QOP for collected, GOP for calculated).  -->
                     <xsl:when test="$variable-type = ('CollectedVariableType','CalculatedVariableType')">
@@ -268,7 +273,7 @@
                             />
                         </xsl:call-template>
                     </xsl:when>
-                    <!-- In this case the variable id separator is 'ø' and variable id is the variable name.  -->                    
+                    <!-- In this case the variable id separator is 'ø' and variable id is the variable name.  -->
                     <xsl:when test="$variable-type = 'ExternalVariableType'">
                             <xsl:variable name="variable-ref"
                             select="enopogues:get-name($currentVariable)"/>
@@ -285,34 +290,34 @@
                             <xsl:with-param name="variables" select="$variables"/>
                             <xsl:with-param name="index" select="$index + 1"/>
                             <xsl:with-param name="expression" select="$expression"/>
-                        </xsl:call-template>                       
+                        </xsl:call-template>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
-    
+
+
     <xsl:template match="pogues:Variable" mode="enopogues:get-command-id">
         <xsl:param name="ip-id" tunnel="yes"/>
-        <xsl:choose>
-            <!-- FailOver : Variable data types is an evolution and this Xpath is intended to keep handling the previous data type for variable (only collectedVariable had type through their related-response) -->
-            <xsl:when test="if(enopogues:get-data-type(.)!='') then(enopogues:get-data-type(.) = 'NUMERIC') else(enopogues:get-related-response(.) and enopogues:get-type(enopogues:get-related-response(.)) = 'NUMERIC')">
-                <xsl:value-of select="concat('number(if (',$ip-id,'='''') then ''0'' else ',$ip-id,')')"/>  
-            </xsl:when>        
-            <xsl:otherwise>
-                <xsl:value-of select="$ip-id"/>
-            </xsl:otherwise>
-        </xsl:choose>
+
+        <xsl:value-of select="$ip-id"/>
     </xsl:template>
-    
-    <!--TODO Better handling of multi variable references  -->    
+
+    <!--TODO Better handling of multi variable references  -->
     <xsl:template match="pogues:FailMessage | pogues:Text" mode="enopogues:get-qop-id">
         <xsl:variable name="related-variables" select="enopogues:get-related-variable(.)"/>
         <xsl:if test="count($related-variables) &gt; 1">
             <xsl:message>Multi Variables references in ConditionnalText (coming from FailMessage) are not supported.</xsl:message>
         </xsl:if>
-        <xsl:value-of select="enopogues:get-qop-id($related-variables[1])"/>        
-    </xsl:template>  
+        <xsl:value-of select="enopogues:get-qop-id($related-variables[1])"/>
+    </xsl:template>
+
+    <!-- id generated from idCodeList with id of Other Choice question -->
+    <xsl:template match="*" mode="enopogues:get-clarified-code">
+        <xsl:param name="idList" as="xs:string" tunnel="yes"/>
+        <xsl:param name="otherValue" as="xs:string" tunnel="yes"/>
+        <xsl:value-of select="enopogues:get-id(//pogues:CodeList[@id=$idList]/pogues:Code[pogues:Value=$otherValue])"/>
+    </xsl:template>
 
 </xsl:stylesheet>

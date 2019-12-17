@@ -43,9 +43,24 @@
         </style:style>
         <style:style style:name="Format" style:family="paragraph" style:default-outline-level="2"
             style:class="text">
-            <style:paragraph-properties fo:text-align="left"/>
             <style:text-properties fo:font-size="10pt"/>
         </style:style>
+        <style:style style:name="NameOfVariable" style:family="text">
+            <style:text-properties fo:color="#0000ff" fo:font-style="italic" fo:font-weight="bold"/>
+        </style:style>
+        <style:style style:name="GotoBlock" style:family="paragraph"
+            style:class="text">
+            <style:text-properties fo:color="#0000ff" fo:font-weight="bold"/>
+            <style:paragraph-properties fo:text-align="left" fo:margin-top="0.7cm"
+                fo:border="0.05pt solid #000000"/>
+        </style:style>
+        <style:style style:name="GotoTitle" style:family="text">
+            <style:text-properties fo:color="#0000ff" fo:font-weight="bold"/>
+        </style:style>
+        <style:style style:name="GotoText" style:family="text">
+            <style:text-properties fo:color="#0000ff"/>
+        </style:style>
+        
         <!-- <style:style style:name="QuestionSelect" style:family="paragraph"
 					style:default-outline-level="2" style:class="text">
 					<style:paragraph-properties fo:text-align="left"/>
@@ -134,6 +149,16 @@
                 <style:columns fo:column-count="1" fo:column-gap="0cm"/>
                 <style:background-image/>
             </style:section-properties>
+        </style:style>
+        <!-- styles from input file -->
+        <style:style style:name="bold" style:family="text">
+            <style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+        </style:style>
+        <style:style style:name="italic" style:family="text">
+            <style:text-properties fo:font-style="italic" style:font-style-asian="italic" style:font-style-complex="italic"/>
+        </style:style>
+        <style:style style:name="underline" style:family="text">
+            <style:text-properties style:text-underline-style="solid" style:text-underline-width="auto" style:text-underline-color="font-color"/>
         </style:style>
     </xsl:function>
 

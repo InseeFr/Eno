@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><DDIInstance xmlns="ddi:instance:3_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:a="ddi:archive:3_2" xmlns:r="ddi:reusable:3_2" xmlns:s="ddi:studyunit:3_2" xmlns:d="ddi:datacollection:3_2" xmlns:g="ddi:group:3_2" xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:l="ddi:logicalproduct:3_2" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:enoddi32="http://xml.insee.fr/apps/eno/out/ddi32" xmlns:xhtml="http://www.w3.org/1999/xhtml" xsi:schemaLocation="ddi:instance:3_2 ../../../src/main/resources/schema/instance.xsd" isMaintainable="true">
+<?xml version="1.0" encoding="UTF-8"?><DDIInstance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="ddi:instance:3_3" xmlns:g="ddi:group:3_3" xmlns:d="ddi:datacollection:3_3" xmlns:s="ddi:studyunit:3_3" xmlns:r="ddi:reusable:3_3" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:a="ddi:archive:3_3" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:l="ddi:logicalproduct:3_3" xsi:schemaLocation="ddi:instance:3_3 https://www.ddialliance.org/Specification/DDI-Lifecycle/3.3/XMLSchema/instance.xsd" isMaintainable="true">
    <r:Agency>fr.insee</r:Agency>
    <r:ID>INSEE-i6vwi0</r:ID>
    <r:Version>1</r:Version>
@@ -144,7 +144,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">Questionnaire SIMPSONS</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">template</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j6p0ti5h</r:ID>
@@ -153,7 +153,7 @@
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>d1e119</r:ID>
+               <r:ID>j6p6my1d-a-j6p0ti5h</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>IfThenElse</r:TypeOfObject>
             </d:ControlConstructReference>
@@ -180,7 +180,7 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j6p3dkx6-QC</r:ID>
@@ -195,7 +195,7 @@
             </d:ControlConstructReference>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>d1e50</r:ID>
+               <r:ID>j6p6my1d-a-j6p0np9q</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>IfThenElse</r:TypeOfObject>
             </d:ControlConstructReference>
@@ -210,7 +210,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">General knowledge of the series</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j3343qhx-QC</r:ID>
@@ -252,7 +252,7 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j3343clt-QC</r:ID>
@@ -282,7 +282,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">Characters</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j334akov-QC</r:ID>
@@ -324,7 +324,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">General questions</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j6qe237q</r:ID>
@@ -354,7 +354,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">Kwik-E-Mart</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j4nwc63q-QC</r:ID>
@@ -378,7 +378,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">Clowning</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j4nw0rr6-QC</r:ID>
@@ -396,7 +396,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">Transport</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">submodule</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j6p2lwuj-QC</r:ID>
@@ -414,7 +414,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">Favourite characters</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j6qg8rc6-QC</r:ID>
@@ -432,7 +432,7 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">Comment</r:Content>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
+            <d:TypeOfSequence controlledVocabularyID="INSEE-TOS-CL-1">module</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j6z0z3us-QC</r:ID>
@@ -442,7 +442,7 @@
          </d:Sequence>
          <d:IfThenElse>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>d1e50</r:ID>
+            <r:ID>j6p6my1d-a-j6p0np9q</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">A définir</r:Content>
@@ -450,12 +450,13 @@
             <r:Description>
                <r:Content xml:lang="fr-FR"/>
             </r:Description>
+            <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
             <d:IfCondition>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
                   <r:InParameter isArray="false">
                      <r:Agency>fr.insee</r:Agency>
-                     <r:ID>d1e50-IP-1</r:ID>
+                     <r:ID>j6p6my1d-a-j6p0np9q-IP-1</r:ID>
                      <r:Version>1</r:Version>
                      <r:ParameterName>
                         <r:String xml:lang="fr-FR">READY</r:String>
@@ -470,29 +471,28 @@
                      </r:SourceParameterReference>
                      <r:TargetParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>d1e50-IP-1</r:ID>
+                        <r:ID>j6p6my1d-a-j6p0np9q-IP-1</r:ID>
                         <r:Version>1</r:Version>
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not( d1e50-IP-1!= '1') </r:CommandContent>
+                  <r:CommandContent>not(j6p6my1d-a-j6p0np9q-IP-1!= '1') </r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>d1e50-THEN</r:ID>
+               <r:ID>j6p6my1d-a-j6p0np9q-THEN</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ThenConstructReference>
          </d:IfThenElse>
          <d:Sequence>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>d1e50-THEN</r:ID>
+            <r:ID>j6p6my1d-a-j6p0np9q-THEN</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR"/>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j6p0s7o5</r:ID>
@@ -502,7 +502,7 @@
          </d:Sequence>
          <d:IfThenElse>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>d1e119</r:ID>
+            <r:ID>j6p6my1d-a-j6p0ti5h</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR">A définir</r:Content>
@@ -510,12 +510,13 @@
             <r:Description>
                <r:Content xml:lang="fr-FR"/>
             </r:Description>
+            <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
             <d:IfCondition>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
                   <r:InParameter isArray="false">
                      <r:Agency>fr.insee</r:Agency>
-                     <r:ID>d1e119-IP-1</r:ID>
+                     <r:ID>j6p6my1d-a-j6p0ti5h-IP-1</r:ID>
                      <r:Version>1</r:Version>
                      <r:ParameterName>
                         <r:String xml:lang="fr-FR">READY</r:String>
@@ -530,29 +531,28 @@
                      </r:SourceParameterReference>
                      <r:TargetParameterReference>
                         <r:Agency>fr.insee</r:Agency>
-                        <r:ID>d1e119-IP-1</r:ID>
+                        <r:ID>j6p6my1d-a-j6p0ti5h-IP-1</r:ID>
                         <r:Version>1</r:Version>
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not( d1e119-IP-1!= '1') </r:CommandContent>
+                  <r:CommandContent>not(j6p6my1d-a-j6p0ti5h-IP-1!= '1') </r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>d1e119-THEN</r:ID>
+               <r:ID>j6p6my1d-a-j6p0ti5h-THEN</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ThenConstructReference>
          </d:IfThenElse>
          <d:Sequence>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>d1e119-THEN</r:ID>
+            <r:ID>j6p6my1d-a-j6p0ti5h-THEN</r:ID>
             <r:Version>1</r:Version>
             <r:Label>
                <r:Content xml:lang="fr-FR"/>
             </r:Label>
-            <d:TypeOfSequence codeListID="INSEE-TOS-CL-1">hideable</d:TypeOfSequence>
             <d:ControlConstructReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>j3341528</r:ID>
@@ -846,6 +846,7 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-3">stumblingblock</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
@@ -1069,13 +1070,12 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (j4nwc63q-CI-0-IP-1='') then '0' else j4nwc63q-CI-0-IP-1) + number(if (j4nwc63q-CI-0-IP-2='') then '0' else j4nwc63q-CI-0-IP-2) +
-                        number(if (j4nwc63q-CI-0-IP-3='') then '0' else j4nwc63q-CI-0-IP-3)+ number(if (j4nwc63q-CI-0-IP-4='') then '0' else j4nwc63q-CI-0-IP-4)+ number(if (j4nwc63q-CI-0-IP-5='') then '0' else j4nwc63q-CI-0-IP-5)+
-                        number(if (j4nwc63q-CI-0-IP-6='') then '0' else j4nwc63q-CI-0-IP-6)+ number(if (j4nwc63q-CI-0-IP-7='') then '0' else j4nwc63q-CI-0-IP-7)+ number(if (j4nwc63q-CI-0-IP-8='') then '0' else j4nwc63q-CI-0-IP-8)+
-                        number(if (j4nwc63q-CI-0-IP-9='') then '0' else j4nwc63q-CI-0-IP-9)+ number(if (j4nwc63q-CI-0-IP-10='') then '0' else j4nwc63q-CI-0-IP-10)!= 100 </r:CommandContent>
+                  <r:CommandContent>j4nwc63q-CI-0-IP-1 + j4nwc63q-CI-0-IP-2 +
+                        j4nwc63q-CI-0-IP-3+ j4nwc63q-CI-0-IP-4+ j4nwc63q-CI-0-IP-5+
+                        j4nwc63q-CI-0-IP-6+ j4nwc63q-CI-0-IP-7+ j4nwc63q-CI-0-IP-8+
+                        j4nwc63q-CI-0-IP-9+ j4nwc63q-CI-0-IP-10!= 100 </r:CommandContent>
                </r:Command>
             </r:CommandCode>
-            <!--<r:TypeOfComputationItem>error</r:TypeOfComputationItem>-->
          </d:ComputationItem>
          <d:StatementItem>
             <r:Agency>fr.insee</r:Agency>
@@ -1194,19 +1194,21 @@
                <r:ResponseCardinality maximumResponses="1"/>
             </d:NominalDomain>
             <d:ExternalAid>
-               <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6p6my1d</r:ID>
-               <r:Version>1</r:Version>
-               <r:Description>
-                  <r:Content>
-                     <xhtml:div class="FlowControl" id="j6p6my1d">
-                        <xhtml:div class="Description">If you are not ready, please go to the end of the
+               <r:OtherMaterial>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>j6p6my1d</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:Description>
+                     <r:Content>
+                        <xhtml:div class="FlowControl" id="j6p6my1d">
+                           <xhtml:div class="Description">If you are not ready, please go to the end of the
                     questionnaire</xhtml:div>
-                        <xhtml:div class="Expression">$READY != '1'</xhtml:div>
-                        <xhtml:div class="IfTrue">j6z12s2d</xhtml:div>
-                     </xhtml:div>
-                  </r:Content>
-               </r:Description>
+                           <xhtml:div class="Expression">$READY != '1'</xhtml:div>
+                           <xhtml:div class="IfTrue">j6z12s2d</xhtml:div>
+                        </xhtml:div>
+                     </r:Content>
+                  </r:Description>
+               </r:OtherMaterial>
             </d:ExternalAid>
          </d:QuestionItem>
          <d:QuestionItem>
@@ -1291,7 +1293,7 @@
                   <r:Low isInclusive="true">0</r:Low>
                   <r:High isInclusive="true">99</r:High>
                </r:NumberRange>
-               <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>j6q9h8tj-RDOP-jbgdjy8h</r:ID>
@@ -1397,7 +1399,7 @@
                   <r:Low isInclusive="true">0</r:Low>
                   <r:High isInclusive="true">99</r:High>
                </r:NumberRange>
-               <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                <r:OutParameter isArray="false">
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>j6z06z1e-RDOP-jbgddnrd</r:ID>
@@ -1440,7 +1442,7 @@
                </d:LiteralText>
             </d:QuestionText>
             <d:CodeDomain>
-               <r:GenericOutputFormat codeListID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
                <r:CodeListReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>j334iumu</r:ID>
@@ -1504,7 +1506,7 @@
                </d:LiteralText>
             </d:QuestionText>
             <d:CodeDomain>
-               <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
+               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                <r:CodeListReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>j6qdqoen</r:ID>
@@ -1568,7 +1570,7 @@
                </d:LiteralText>
             </d:QuestionText>
             <d:CodeDomain>
-               <r:GenericOutputFormat codeListID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+               <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
                <r:CodeListReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>j4nwo00f</r:ID>
@@ -1745,7 +1747,7 @@
                </d:CodeDomain>
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomain>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -1772,8 +1774,8 @@
                         <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -1800,8 +1802,8 @@
                         <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -1828,8 +1830,8 @@
                         <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -1856,7 +1858,7 @@
                         <d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
@@ -1976,9 +1978,9 @@
                </d:CodeDomain>
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomain>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxh138</r:ID>
@@ -2005,10 +2007,10 @@
                         <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxh138</r:ID>
@@ -2035,10 +2037,10 @@
                         <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxh138</r:ID>
@@ -2065,10 +2067,10 @@
                         <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxh138</r:ID>
@@ -2095,7 +2097,7 @@
                         <d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
          </d:QuestionGrid>
          <d:QuestionGrid>
@@ -2209,9 +2211,9 @@
                </d:CodeDomain>
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomain>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxh138</r:ID>
@@ -2238,10 +2240,10 @@
                         <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxh138</r:ID>
@@ -2268,10 +2270,10 @@
                         <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxh138</r:ID>
@@ -2298,10 +2300,10 @@
                         <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxh138</r:ID>
@@ -2328,7 +2330,7 @@
                         <d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
          </d:QuestionGrid>
          <d:QuestionGrid>
@@ -2464,9 +2466,9 @@
                </d:CodeDomain>
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomain>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxricm</r:ID>
@@ -2493,10 +2495,10 @@
                         <d:SelectDimension rank="1" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxricm</r:ID>
@@ -2523,10 +2525,10 @@
                         <d:SelectDimension rank="1" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxricm</r:ID>
@@ -2553,10 +2555,10 @@
                         <d:SelectDimension rank="1" rangeMinimum="3" rangeMaximum="3"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxricm</r:ID>
@@ -2583,10 +2585,10 @@
                         <d:SelectDimension rank="1" rangeMinimum="4" rangeMaximum="4"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">checkbox</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdxricm</r:ID>
@@ -2613,7 +2615,7 @@
                         <d:SelectDimension rank="1" rangeMinimum="5" rangeMaximum="5"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
          </d:QuestionGrid>
          <d:QuestionGrid>
@@ -2870,13 +2872,13 @@
                </d:CodeDomain>
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomain>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain decimalPositions="1">
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">100</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j4nwc63q-RDOP-jbgde5yl</r:ID>
@@ -2889,14 +2891,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain decimalPositions="1">
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">100</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j4nwc63q-RDOP-jbgd2x2t</r:ID>
@@ -2909,14 +2911,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain decimalPositions="1">
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">100</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j4nwc63q-RDOP-jbgdjypz</r:ID>
@@ -2929,14 +2931,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain decimalPositions="1">
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">100</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j4nwc63q-RDOP-jbgdcftu</r:ID>
@@ -2949,14 +2951,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain decimalPositions="1">
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">100</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j4nwc63q-RDOP-jbgdiyfe</r:ID>
@@ -2969,14 +2971,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain decimalPositions="1">
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">100</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j4nwc63q-RDOP-jbgdj1wd</r:ID>
@@ -2989,14 +2991,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain decimalPositions="1">
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">100</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j4nwc63q-RDOP-jbgddylk</r:ID>
@@ -3009,14 +3011,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain decimalPositions="1">
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">100</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j4nwc63q-RDOP-jbgd3jj6</r:ID>
@@ -3029,14 +3031,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain decimalPositions="1">
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">100</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j4nwc63q-RDOP-jbgd4w3k</r:ID>
@@ -3049,14 +3051,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain decimalPositions="1">
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">100</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j4nwc63q-RDOP-jbgd4w4k</r:ID>
@@ -3069,7 +3071,7 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
          </d:QuestionGrid>
          <d:QuestionGrid>
@@ -3281,9 +3283,9 @@
                </d:CodeDomain>
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomain>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdyh6b5</r:ID>
@@ -3311,10 +3313,10 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdyh6b5</r:ID>
@@ -3342,10 +3344,10 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdyh6b5</r:ID>
@@ -3373,10 +3375,10 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:CodeDomain>
-                     <r:GenericOutputFormat codeListID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
+                     <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">drop-down-list</r:GenericOutputFormat>
                      <r:CodeListReference>
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>jbdyh6b5</r:ID>
@@ -3404,8 +3406,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -3420,8 +3422,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -3436,8 +3438,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -3452,8 +3454,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -3468,7 +3470,7 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
          </d:QuestionGrid>
          <d:QuestionGrid>
@@ -4033,7 +4035,7 @@
                </d:CodeDomain>
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomain>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4061,8 +4063,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4090,8 +4092,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4119,8 +4121,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4148,8 +4150,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4177,8 +4179,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4206,8 +4208,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4235,8 +4237,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4264,8 +4266,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4293,8 +4295,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="3" rangeMaximum="3"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4322,8 +4324,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="3" rangeMaximum="3"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4351,8 +4353,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="3" rangeMaximum="3"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4380,8 +4382,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="3" rangeMaximum="3"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4409,8 +4411,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="4" rangeMaximum="4"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4438,8 +4440,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="4" rangeMaximum="4"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4467,8 +4469,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="4" rangeMaximum="4"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4496,8 +4498,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="4" rangeMaximum="4"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4525,8 +4527,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="5" rangeMaximum="5"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4554,8 +4556,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="5" rangeMaximum="5"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4583,8 +4585,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="5" rangeMaximum="5"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4612,8 +4614,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="5" rangeMaximum="5"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4641,8 +4643,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="6" rangeMaximum="6"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4670,8 +4672,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="6" rangeMaximum="6"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4699,8 +4701,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="6" rangeMaximum="6"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NominalDomain>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -4728,7 +4730,7 @@
                         <d:SelectDimension rank="2" rangeMinimum="6" rangeMaximum="6"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
             <d:InterviewerInstructionReference>
                <r:Agency>fr.insee</r:Agency>
@@ -5203,7 +5205,7 @@
                </d:CodeDomain>
             </d:GridDimension>
             <d:StructuredMixedGridResponseDomain>
-               <d:GridResponseDomain>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5218,8 +5220,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5234,8 +5236,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5250,8 +5252,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5266,8 +5268,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5282,8 +5284,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5298,8 +5300,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5314,8 +5316,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5330,8 +5332,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5346,8 +5348,8 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:TextDomain maxLength="255">
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
@@ -5362,14 +5364,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="1" rangeMaximum="1"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain>
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">120</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qg8rc6-RDOP-jbgdfndq</r:ID>
@@ -5382,14 +5384,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain>
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">120</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qg8rc6-RDOP-jbgd7osi</r:ID>
@@ -5402,14 +5404,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain>
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">120</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qg8rc6-RDOP-jbgd7bnw</r:ID>
@@ -5422,14 +5424,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain>
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">120</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qg8rc6-RDOP-jbgd9k71</r:ID>
@@ -5442,14 +5444,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain>
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">120</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qg8rc6-RDOP-jbgdimks</r:ID>
@@ -5462,14 +5464,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain>
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">120</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qg8rc6-RDOP-jbgdjquz</r:ID>
@@ -5482,14 +5484,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain>
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">120</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qg8rc6-RDOP-jbgdd2w3</r:ID>
@@ -5502,14 +5504,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain>
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">120</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qg8rc6-RDOP-jbgdkosc</r:ID>
@@ -5522,14 +5524,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain>
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">120</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qg8rc6-RDOP-jbgdk0x4</r:ID>
@@ -5542,14 +5544,14 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
-               <d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
+               <d:GridResponseDomainInMixed>
                   <d:NumericDomain>
                      <r:NumberRange>
                         <r:Low isInclusive="true">0</r:Low>
                         <r:High isInclusive="true">120</r:High>
                      </r:NumberRange>
-                     <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                     <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                      <r:OutParameter isArray="false">
                         <r:Agency>fr.insee</r:Agency>
                         <r:ID>j6qg8rc6-RDOP-jbgd2wgf</r:ID>
@@ -5562,7 +5564,7 @@
                         <d:SelectDimension rank="2" rangeMinimum="2" rangeMaximum="2"/>
                      </d:CellCoordinatesAsDefined>
                   </d:GridAttachment>
-               </d:GridResponseDomain>
+               </d:GridResponseDomainInMixed>
             </d:StructuredMixedGridResponseDomain>
          </d:QuestionGrid>
       </d:QuestionScheme>
@@ -7550,6 +7552,14 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">LAST_BROADCAST label </r:Content>
             </r:Label>
+            <l:VariableRepresentation>
+               <r:DateTimeRepresentationReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM-DD</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
+               </r:DateTimeRepresentationReference>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -7668,7 +7678,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">99</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -7731,7 +7741,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">99</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -8435,13 +8445,13 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8468,13 +8478,13 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8501,13 +8511,13 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8534,13 +8544,13 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8567,13 +8577,13 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8600,13 +8610,13 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8633,13 +8643,13 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8666,13 +8676,13 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8699,13 +8709,13 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -8732,13 +8742,13 @@
             </r:QuestionReference>
             <l:VariableRepresentation>
                <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">100</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
-               <r:MeasurementUnit>%</r:MeasurementUnit>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -10153,7 +10163,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">120</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -10185,7 +10195,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">120</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -10217,7 +10227,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">120</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -10249,7 +10259,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">120</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -10281,7 +10291,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">120</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -10313,7 +10323,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">120</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -10345,7 +10355,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">120</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -10377,7 +10387,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">120</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -10409,7 +10419,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">120</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -10441,7 +10451,7 @@
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">120</r:High>
                   </r:NumberRange>
-                  <r:NumericTypeCode codeListID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
                </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
@@ -10607,6 +10617,455 @@
                <r:Version>1</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
+         </l:VariableGroup>
+         <l:VariableGroup>
+            <r:Agency>fr.insee</r:Agency>
+            <r:ID>INSEE-Instrument-i6vwi0-vg</r:ID>
+            <r:Version>1</r:Version>
+            <r:BasedOnObject>
+               <r:BasedOnReference>
+                  <r:Agency>fr.insee</r:Agency>
+                  <r:ID>Instrument-i6vwi0</r:ID>
+                  <r:Version>1</r:Version>
+                  <r:TypeOfObject>Instrument</r:TypeOfObject>
+               </r:BasedOnReference>
+            </r:BasedOnObject>
+            <l:TypeOfVariableGroup>Questionnaire</l:TypeOfVariableGroup>
+            <l:VariableGroupName>
+               <r:String>SIMPSONS</r:String>
+            </l:VariableGroupName>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcggtca</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcggtex</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcgfvir</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcgm0ip</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcgf11f</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcgcy2x</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcgbg33</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcgieyw</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcgasbh</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcg9yr6</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcgpija</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxewlq</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxjmst</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxjuay</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxniuw</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxtl1d</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxvai9</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxpltw</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxzx2x</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdy4nhp</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxtanu</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdy25if</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxvta8</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdy3nh7</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdy6lk3</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdxsby0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdy7sra</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbdy2wyl</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdnfk7</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdje4w</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdlth7</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdelbl</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd95jq</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdadd9</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdlwzk</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdfz77</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdepx6</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdepx7</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd9vqv</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgden0i</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdndju</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdfwg9</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdd3ky</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdm9lm</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdcdhv</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdjlit</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd1zxu</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd8lfs</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd56qo</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd4wu8</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdak6h</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdmsy4</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd2zlu</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd6v73</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdf5fg</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd2xg0</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdc06l</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdb8i9</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdhzve</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd93ks</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdfw7h</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdfavn</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdc199</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdfqph</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd8r0n</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd3aqk</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdltql</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgd9um3</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgddj7v</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbgdb4ym</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <r:VariableReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>jbcggt4x</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+            <l:VariableGroupReference>
+               <r:Agency>fr.insee</r:Agency>
+               <r:ID>j6qg8rc6-gp</r:ID>
+               <r:Version>1</r:Version>
+               <r:TypeOfObject>VariableGroup</r:TypeOfObject>
+            </l:VariableGroupReference>
          </l:VariableGroup>
       </l:VariableScheme>
       <d:ProcessingInstructionScheme>
@@ -10912,10 +11371,10 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>number(if (jbcggtca-IP-1='') then '0' else jbcggtca-IP-1) + number(if (jbcggtca-IP-2='') then '0' else jbcggtca-IP-2) + number(if (jbcggtca-IP-3='') then '0' else jbcggtca-IP-3)+
-                number(if (jbcggtca-IP-4='') then '0' else jbcggtca-IP-4)+ number(if (jbcggtca-IP-5='') then '0' else jbcggtca-IP-5)+ number(if (jbcggtca-IP-6='') then '0' else jbcggtca-IP-6)+
-                number(if (jbcggtca-IP-7='') then '0' else jbcggtca-IP-7)+ number(if (jbcggtca-IP-8='') then '0' else jbcggtca-IP-8)+ number(if (jbcggtca-IP-9='') then '0' else jbcggtca-IP-9)+
-                number(if (jbcggtca-IP-10='') then '0' else jbcggtca-IP-10)</r:CommandContent>
+                  <r:CommandContent>jbcggtca-IP-1 + jbcggtca-IP-2 + jbcggtca-IP-3+
+                jbcggtca-IP-4+ jbcggtca-IP-5+ jbcggtca-IP-6+
+                jbcggtca-IP-7+ jbcggtca-IP-8+ jbcggtca-IP-9+
+                jbcggtca-IP-10</r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <d:ControlConstructReference>
@@ -10940,11 +11399,15 @@
             <r:ID>INSEE-COMMUN-MNR-DateTimedate-YYYY-MM-DD</r:ID>
             <r:Version>1</r:Version>
             <r:DateFieldFormat>YYYY-MM-DD</r:DateFieldFormat>
-            <r:DateTypeCode codeListID="INSEE-DTC-CV">date</r:DateTypeCode>
+            <r:DateTypeCode controlledVocabularyID="INSEE-DTC-CV">date</r:DateTypeCode>
+            <r:Range>
+               <r:MinimumValue included="true">1900-01-01</r:MinimumValue>
+               <r:MaximumValue included="true">format-date(current-date(),'[Y0001]-[M01]-[D01]')</r:MaximumValue>
+            </r:Range>
          </r:ManagedDateTimeRepresentation>
       </r:ManagedRepresentationScheme>
    </g:ResourcePackage>
-   <s:StudyUnit xmlns="ddi:studyunit:3_2">
+   <s:StudyUnit>
       <r:Agency>fr.insee</r:Agency>
       <r:ID>StudyUnit-i6vwi0</r:ID>
       <r:Version>1</r:Version>
@@ -10975,7 +11438,7 @@
             <r:Agency>fr.insee</r:Agency>
             <r:ID>InstrumentScheme-i6vwi0</r:ID>
             <r:Version>1</r:Version>
-            <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues" xmlns:pr="ddi:ddiprofile:3_2" xmlns:c="ddi:conceptualcomponent:3_2" xmlns:cm="ddi:comparative:3_2">
+            <d:Instrument xmlns:pogues="http://xml.insee.fr/schema/applis/pogues" xmlns:pr="ddi:ddiprofile:3_3" xmlns:c="ddi:conceptualcomponent:3_3" xmlns:cm="ddi:comparative:3_3">
                <r:Agency>fr.insee</r:Agency>
                <r:ID>Instrument-i6vwi0</r:ID>
                <r:Version>1</r:Version>

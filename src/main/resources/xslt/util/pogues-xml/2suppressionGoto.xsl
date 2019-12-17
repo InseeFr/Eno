@@ -53,7 +53,7 @@
 
         <!-- list of the gotos-->
         <xsl:variable name="list_goto">
-            <xsl:for-each select="//pogues:FlowControl">
+            <xsl:for-each select="//pogues:FlowControl[not(@flowControlType)]">
                 <poguesGoto:gotoValue>
                     <poguesGoto:Expression>
                         <xsl:value-of select="./pogues:Expression"/>

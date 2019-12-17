@@ -17,6 +17,7 @@
     <LengthOfLongTable>
         <Length>7</Length>
     </LengthOfLongTable>
+    <DecimalSeparator>,</DecimalSeparator>
     <lois>
         <informatique>https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460</informatique>
         <statistique>https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000888573</statistique>

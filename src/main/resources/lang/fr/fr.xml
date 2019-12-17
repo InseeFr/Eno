@@ -8,25 +8,38 @@
     <Alert>
         <Text>Vous devez saisir une valeur correcte</Text>
         <Number>
-            <Integer>Vous devez saisir un nombre entier compris entre</Integer>
+            <Integer>Vous devez saisir un nombre entier compris</Integer>
             <Decimal>
-                <Beginning>Vous devez utiliser le point comme séparateur de décimale, sans espace,
-                    et saisir un nombre compris entre</Beginning>
+                <Beginning>Vous devez utiliser le caractère "</Beginning>
+                <Beginning2>" comme séparateur de décimale, sans espace, et saisir un nombre compris</Beginning2>
                 <DecimalCondition>(avec au plus</DecimalCondition>
                 <Digit>chiffre</Digit>
-                <End>derrière le séparateur ".")</End>
+                <End>derrière le séparateur "</End>
+                <End2>")</End2>
             </Decimal>
         </Number>
         <Date>Entrez une date valide</Date>
         <Date-YYYYMM>Merci de renseigner le mois et l'année</Date-YYYYMM>
-        <Duration>
-            <Hours>Le nombre d'heures doit être compris entre 0 et 99.</Hours>
-            <Minutes>Le nombre de minutes doit être compris entre 0 et 59.</Minutes>
-        </Duration>
+        <Date-YYYY>Merci de renseigner l'année</Date-YYYY>
+        <Duration>Entrez une durée valide</Duration>
     </Alert>
     <And>et</And>
+    <After>
+        <Date>postérieure au</Date>
+        <Date-YYYYMM>postérieures à</Date-YYYYMM>
+        <Date-YYYY>postérieure à</Date-YYYY>
+    </After>
+    <Before>
+        <Date>antérieure au</Date>
+        <Date-YYYYMM>antérieures à</Date-YYYYMM>
+        <Date-YYYY>antérieure à</Date-YYYY>
+    </Before>
+    <Between>entre</Between>
+    <GreaterThan>supérieur à</GreaterThan>
+    <LessThan>inférieur à</LessThan>
     <Plural>s</Plural>
     <AddLine>Ajouter une ligne</AddLine>
+    <Today>aujourd'hui</Today>
     <DateTime>
         <Months>
             <M01>Janvier</M01>
