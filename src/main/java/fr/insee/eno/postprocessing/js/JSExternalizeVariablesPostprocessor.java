@@ -28,7 +28,7 @@ public class JSExternalizeVariablesPostprocessor implements Postprocessor {
 
 		File outputForJSFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
-				Constants.FINAL_JS_EXTENSION);
+				Constants.EXTERNALIZE_VARIABLES_JS_EXTENSION);
 		logger.debug("Output folder for basic-form : " + outputForJSFile.getAbsolutePath());
 
 		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS);
