@@ -31,13 +31,17 @@ public class TestVTLPostProcessor {
 		String test3 = "x!=y";
 		String expected3 = "x &lt;&gt; y";
 		
-		String test4 = "concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'";
-		String expected4 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'";
+		String test4 = "x div y";
+		String expected4 = "x / y";
+		
+		String test5 = "concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'";
+		String expected5 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'";
 		
 		Assert.assertEquals(expected1, jsvtlParserPostprocessor.parseToVTL(test1));
 		Assert.assertEquals(expected2, jsvtlParserPostprocessor.parseToVTL(test2));
 		Assert.assertEquals(expected3, jsvtlParserPostprocessor.parseToVTL(test3));
 		Assert.assertEquals(expected4, jsvtlParserPostprocessor.parseToVTL(test4));
+		Assert.assertEquals(expected5, jsvtlParserPostprocessor.parseToVTL(test5));
 	}
 	
 	@Test

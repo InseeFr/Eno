@@ -51,6 +51,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 	public static final String CONCAT_FUNCTION = "concat";
 	public static final String SUBSTRING_FUNCTION = "substring";
 	public static final String CAST_FUNCTION = "cast";
+	public static final String DIVISION_FUNCTION = " div ";
 
 	public static final String XML_NODE_LABEL = "label";
 	public static final String XML_NODE_CONDITIONFILTER = "conditionFilter";
@@ -83,6 +84,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 
 	public String parseToVTL(String input) {
 		input = input.replaceAll("!=", " &lt;&gt; ");
+		input = input.replaceAll(DIVISION_FUNCTION, " / ");
 		String finalString="";String context="";
 		List<String> listContext = new ArrayList<String>();
 		boolean isBetweenRealQuote=false;
