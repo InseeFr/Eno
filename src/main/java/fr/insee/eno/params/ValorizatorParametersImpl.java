@@ -69,6 +69,14 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		return mergeEnoParameters(enoParametersDefault, enoParameters);
 	}
 
+	/**
+	 * This is a recursive function that merges two java object 
+	 * @param enoParamsDefault : default java object
+	 * @param newEnoParams : new java object
+	 * @return a java object of the same type as the params
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
 	public <T> T mergeEnoParameters(T enoParamsDefault, T newEnoParams) throws IllegalArgumentException, IllegalAccessException  {
 		Class<?> objectClass = enoParamsDefault.getClass();
 		LOGGER.debug("Class's name : "+objectClass.getSimpleName());
@@ -141,20 +149,18 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 	}
 
 
+	/**
+	 * 
+	 * @return the java object representing parameters of default parameters xml file
+	 * @throws JAXBException
+	 * @throws IOException
+	 */
 	public ENOParameters getDefaultParameters() throws JAXBException, IOException {
 		InputStream xmlParameters = Constants.getInputStreamFromPath(Constants.PARAMETERS_DEFAULT_XML);
 		StreamSource xml = new StreamSource(xmlParameters);
 		return this.getParameters(xml);
 	}
 
-	public ENOParameters getParameters(String xmlString) throws JAXBException, UnsupportedEncodingException {
-
-		if ((xmlString == null) || (xmlString.length() == 0))
-			return null;
-		StreamSource xml = new StreamSource(new StringReader(xmlString));
-
-		return this.getParameters(xml);
-	}
 	
 	@Override
 	public ENOParameters getParameters(InputStream inputStream) throws JAXBException, UnsupportedEncodingException {
@@ -195,12 +201,12 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 
 		@Override
 		public void beforeUnmarshal(Object target, Object parent) {
-			//LOGGER.debug("Before unmarshalling object " + target);
+			LOGGER.debug("Before unmarshalling object " + target);
 		}
 
 		@Override
 		public void afterUnmarshal(Object target, Object parent) {
-			//LOGGER.debug("After unmarshalling object " + target);
+			LOGGER.debug("After unmarshalling object " + target);
 		}
 	}
 
@@ -214,7 +220,14 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * This function merges two complex type : List of LevelAbstract
+	 * @param enoParamsDefaultValue
+	 * @param newEnoParamsValue
+	 * @return the merging of the two params
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
 	public List<LevelAbstract> mergeListNumerotation(Object enoParamsDefaultValue, Object newEnoParamsValue) throws IllegalArgumentException, IllegalAccessException  {
 		List<LevelAbstract> mergedList = new ArrayList<>();
 		for(LevelAbstract levelDefault : (List<LevelAbstract>) enoParamsDefaultValue) {
@@ -231,6 +244,11 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		return mergedList;
 	}
 	
+	/**
+	 * 
+	 * @param objectClass
+	 * @return boolean : if the param is a complexeType according to a determined list.
+	 */
 	public boolean isComplexeType(Class<?> objectClass) {
 		List<String> PRIMITIVE_JAVA_OBJECT = Arrays.asList("Long", "Long[]", "Integer", "Integer[]", "String", "String[]", "Boolean", "boolean[]", "ArrayList", "LinkedHashMap");
 		return !(objectClass.isPrimitive() || objectClass.isEnum() || PRIMITIVE_JAVA_OBJECT.contains(objectClass.getSimpleName()));

@@ -17,7 +17,7 @@ public interface PipelineGenerator {
 	/**
 	 * 
 	 * @param pipeline
-	 * @return
+	 * @return a GenerationService with the Eno transformation (PreProcessor, Generator and PostProcessor) according to the param.
 	 * @throws Exception
 	 */
 	public GenerationService setPipeLine(Pipeline pipeline) throws Exception;
@@ -25,13 +25,13 @@ public interface PipelineGenerator {
 	/**
 	 * 
 	 * @param postProcessings
-	 * @return
+	 * @return a list of Postprocessor (Java class) according to a List of PostProcessing (Enum)
 	 */
 	public Postprocessor[] setPostProcessors(List<PostProcessing> postProcessings);
 	
 	/**
 	 * 
-	 * @param preProcessings
+	 * @param a list of Preprocessor (Java class) according to a List of PreProcessing (Enum)
 	 * @return
 	 */
 	public Preprocessor[] setPreProcessors(List<PreProcessing> preProcessings);
@@ -40,21 +40,21 @@ public interface PipelineGenerator {
 	 * 
 	 * @param inFormat
 	 * @param outFormat
-	 * @return
+	 * @return the Generator according to the inFormat(Enum) and outFormat(Enum)
 	 */
 	public Generator setGenerator(InFormat inFormat, OutFormat outFormat);
 	
 	/**
-	 * 
+	 * Linking function : Postprocessor with PostProcessing
 	 * @param postProcessing
-	 * @return
+	 * @return the Postprocessor java class according to PostProcessing(Enum)
 	 */
 	public Postprocessor getPostPorcessor(PostProcessing postProcessing);
 	
 	/**
-	 * 
-	 * @param preProcessing
-	 * @return
+	 * Linking function : Preprocessor with PreProcessing
+	 * @param postProcessing
+	 * @return the Preprocessor java class according to PreProcessing(Enum)
 	 */
 	public Preprocessor getPrePorcessor(PreProcessing preProcessing);
 
