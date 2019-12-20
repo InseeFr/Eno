@@ -39,12 +39,12 @@ public class ParameterizedGenerationService {
 	private SchemaValidator schemaValidator = new SchemaValidatorImpl();
 
 	/**
-	 * 
-	 * @param inputFile
-	 * @param params
-	 * @param metadata
-	 * @param specificTreatment
-	 * @return
+	 * It generates File using transformations defined in ENOParameters
+	 * @param inputFile : the xml input File (required)
+	 * @param params : java object ENOParameter (required)
+	 * @param metadata : InputStream of metadata xml file (optional)
+	 * @param specificTreatment : InputStream of an xsl sheet (optional)
+	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
 	public File generateQuestionnaire(File inputFile, ENOParameters params, InputStream metadata, InputStream specificTreatment) throws Exception{
@@ -75,12 +75,12 @@ public class ParameterizedGenerationService {
 	}
 
 	/**
-	 * 
-	 * @param inputFile
-	 * @param params
-	 * @param metadata
-	 * @param specificTreatment
-	 * @return
+	 * It generates File using transformations defined in ENOParameters
+	 * @param inputFile : the xml input File (required)
+	 * @param params : InputStream of parameters xml file (required)
+	 * @param metadata : InputStream of metadata xml file (optional)
+	 * @param specificTreatment : InputStream of an xsl sheet (optional)
+	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
 	public File generateQuestionnaire(File inputFile, InputStream params, InputStream metadata, InputStream specificTreatment) throws Exception {
@@ -141,12 +141,12 @@ public class ParameterizedGenerationService {
 	}
 
 	/**
-	 * 
-	 * @param inputFile
-	 * @param params
-	 * @param metadata
-	 * @param specificTreatment
-	 * @return
+	 * It generates File using transformations defined in ENOParameters
+	 * @param inputFile : the xml input File (required)
+	 * @param params : xml File of ENOParameter (required)
+	 * @param metadata : xml File of metadata (optional)
+	 * @param specificTreatment : xsl file of the xsl sheet (optional)
+	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
 	public File generateQuestionnaire(File inputFile, File params, File metadata, File specificTreatment)  throws Exception{
