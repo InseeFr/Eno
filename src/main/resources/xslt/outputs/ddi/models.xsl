@@ -762,9 +762,10 @@
     <xsl:template match="driver-ControlConstructScheme//Sequence" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="idSequence" select="enoddi33:get-id($source-context)"/>
         <d:Sequence>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:ID><xsl:value-of select="$idSequence"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <d:ConstructName>
                 <r:String xml:lang="{enoddi33:get-lang($source-context)}"><xsl:value-of select="enoddi33:get-name($source-context)"></xsl:value-of></r:String>
@@ -787,6 +788,48 @@
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
         </d:Sequence>
+        <xsl:apply-templates select="enoddi33:get-related-loop($source-context)" mode="source">
+            <xsl:with-param name="driver" select="eno:append-empty-element('driver-SequenceLoop', .)" tunnel="yes"/>
+            <xsl:with-param name="idSequence" select="$idSequence" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xsl:template name="sequenceLoop" match="driver-SequenceLoop//*[name()='Loop']" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:param name="idSequence" as="xs:string" tunnel="yes"/>
+        <d:Loop>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:Version>1</r:Version>
+            <r:Label>
+                <r:Content xml:lang="fr-FR"><xsl:value-of select="enoddi33:get-label($source-context)"/></r:Content>
+            </r:Label>
+            <d:InitialValue>
+                <r:Command>
+                <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                    <r:CommandContent><xsl:value-of select="enoddi33:get-low($source-context)"/></r:CommandContent>
+                </r:Command>
+            </d:InitialValue>
+            <d:LoopWhile>
+                <r:Command>
+                <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                    <r:CommandContent><xsl:value-of select="enoddi33:get-high($source-context)"/></r:CommandContent>
+                </r:Command>
+            </d:LoopWhile>
+            <d:StepValue>
+                <r:Command>
+                <r:ProgramLanguage>xpath</r:ProgramLanguage>
+                    <r:CommandContent><xsl:value-of select="enoddi33:get-loop-step($source-context)"/></r:CommandContent>
+                </r:Command>
+            </d:StepValue>
+            <d:ControlConstructReference>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="$idSequence"/></r:ID>
+                <r:Version>1</r:Version>
+                <r:TypeOfObject>Sequence</r:TypeOfObject>
+            </d:ControlConstructReference>
+        </d:Loop>
     </xsl:template>
     
     <xsl:template name="StatementItem" match="driver-StatementItem//Instruction[not(ancestor::driver-InterviewerInstructionReference)]" mode="model">
@@ -1093,6 +1136,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="driver" select="."/>
+        <xsl:variable name="idLoop" select="enoddi33:get-loop-id($source-context)"/>
         <xsl:for-each select="enoddi33:get-instructions($source-context)[enoddi33:get-position(.) = 'BEFORE_QUESTION_TEXT']">
             <d:ControlConstructReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -1103,9 +1147,19 @@
         </xsl:for-each>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi33:get-reference-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject><xsl:value-of select="enoddi33:get-reference-element-name($source-context)"/></r:TypeOfObject>
+            <!-- Check if sequence is linked to loop -->
+            <xsl:choose>
+                <xsl:when test="name()='Sequence' and $idLoop != ''">
+                    <r:ID><xsl:value-of select="$idLoop"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                    <r:TypeOfObject><xsl:value-of select="'Loop'"/></r:TypeOfObject>
+                </xsl:when>
+                <xsl:otherwise>
+                    <r:ID><xsl:value-of select="enoddi33:get-reference-id($source-context)"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                    <r:TypeOfObject><xsl:value-of select="enoddi33:get-reference-element-name($source-context)"/></r:TypeOfObject>
+                </xsl:otherwise>
+            </xsl:choose>
         </d:ControlConstructReference>
         <xsl:if test="not(name()=('Sequence','IfThenElse'))">
             <xsl:apply-templates select="enoddi33:get-related-controls($source-context)" mode="source">
