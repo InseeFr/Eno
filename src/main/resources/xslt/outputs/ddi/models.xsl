@@ -155,6 +155,11 @@
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroup', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
+                    <!-- VariableGroup for Loops-->
+                    <xsl:apply-templates select="enoddi33:get-loops($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroup', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                    </xsl:apply-templates>
                     <!-- Global VariableGroup -->
                     <l:VariableGroup>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
@@ -178,6 +183,10 @@
                             <xsl:with-param name="questionnaire-id" select="enoddi33:get-id($source-context)" as="xs:string" tunnel="yes"/>
                         </xsl:apply-templates>
                         <xsl:apply-templates select="enoddi33:get-questions-table($source-context)" mode="source">
+                            <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroupGlobal', .)" tunnel="yes"/>
+                            <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                        </xsl:apply-templates>
+                        <xsl:apply-templates select="enoddi33:get-loops($source-context)" mode="source">
                             <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroupGlobal', .)" tunnel="yes"/>
                             <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                         </xsl:apply-templates>
@@ -463,7 +472,44 @@
             </xsl:apply-templates>
         </l:VariableGroup>
     </xsl:template>
+
+    <xsl:template match="driver-VariableGroup//Loop" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
+        <l:VariableGroup>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="$id"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <r:BasedOnObject>
+                <r:BasedOnReference>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:ID><xsl:value-of select="$id"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                    <r:TypeOfObject>Loop</r:TypeOfObject>
+                </r:BasedOnReference>
+            </r:BasedOnObject>
+            <l:TypeOfVariableGroup>QuestionLoop</l:TypeOfVariableGroup>
+            <l:VariableGroupName>
+                <r:String><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
+            </l:VariableGroupName>
+            <xsl:apply-templates select="enoddi33:get-loop-related-variables($source-context)" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopVariables', .)" tunnel="yes"/>
+            </xsl:apply-templates>
+        </l:VariableGroup>
+    </xsl:template>
     
+    <xsl:template match="driver-LoopVariables//Variable" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <r:VariableReference>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <r:TypeOfObject>Variable</r:TypeOfObject>
+        </r:VariableReference>
+    </xsl:template>
+
     <xsl:template match="driver-VariableGroup//QuestionDynamicTable//ResponseDomain | driver-VariableGroup//QuestionDynamicTable//Clarification" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
@@ -500,6 +546,18 @@
         <l:VariableGroupReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="concat($id,'-gp')"/></r:ID>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <r:TypeOfObject>VariableGroup</r:TypeOfObject>
+        </l:VariableGroupReference>
+    </xsl:template>
+
+    <xsl:template match="driver-VariableGroupGlobal//Loop" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
+        <l:VariableGroupReference>
+            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+            <r:ID><xsl:value-of select="concat($id,'-vg')"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>VariableGroup</r:TypeOfObject>
         </l:VariableGroupReference>
@@ -801,7 +859,7 @@
         <d:Loop>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
-            <r:Version>1</r:Version>
+            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:Label>
                 <r:Content xml:lang="fr-FR"><xsl:value-of select="enoddi33:get-label($source-context)"/></r:Content>
             </r:Label>
@@ -826,7 +884,7 @@
             <d:ControlConstructReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="$idSequence"/></r:ID>
-                <r:Version>1</r:Version>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
                 <r:TypeOfObject>Sequence</r:TypeOfObject>
             </d:ControlConstructReference>
         </d:Loop>
