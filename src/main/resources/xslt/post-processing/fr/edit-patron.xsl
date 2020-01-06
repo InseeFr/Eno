@@ -181,6 +181,7 @@
         <xsl:copy>
             <xsl:apply-templates select="@*" />
             <xsl:variable name="resource">
+                <!-- TODO : change /restxq/ to /apps/orbeon/ -->
                 <xsl:value-of select="concat('{xxf:property(''server-exist-orbeon'')}/restxq/{xxf:property(''enregistrer-service'')}/',$campagne-value,'/',$modele,'/{xxf:get-request-parameter(''unite-enquete'')}?ongletproof=oui')" />
             </xsl:variable>
             <xsl:attribute name="resource" select="$resource" />

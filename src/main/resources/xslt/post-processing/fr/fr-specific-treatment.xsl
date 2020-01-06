@@ -5,7 +5,7 @@
     exclude-result-prefixes="xs"
     version="2.0">
     
-    <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+    <xsl:output method="xml" indent="no" encoding="UTF-8"/>
     <xsl:strip-space elements="*"/>
     
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
