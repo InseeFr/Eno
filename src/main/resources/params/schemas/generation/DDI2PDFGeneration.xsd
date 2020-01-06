@@ -101,6 +101,7 @@
             <xs:enumeration value="ouvertureCOL"/>
             <xs:enumeration value="relanceCOL"/>
             <xs:enumeration value="relanceCOLEM"/>
+            <xs:enumeration value="accompagnementCOL"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
