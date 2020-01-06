@@ -1936,7 +1936,7 @@
         </xsl:element>
         <xsl:if test="not($suffix = '') and not(self::NumericDomain)">
             <xsl:element name="xhtml:span">
-                <xsl:attribute name="class" select="'suffixe'"/>
+                <xsl:attribute name="class" select="'suffix'"/>
                 <xsl:copy-of select="$suffix" copy-namespaces="no"/>
             </xsl:element>
         </xsl:if>

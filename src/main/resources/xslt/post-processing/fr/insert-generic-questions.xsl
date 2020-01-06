@@ -385,11 +385,11 @@
                                     <xf:input id="HEURE_REMPL-control" name="HEURE_REMPL" bind="HEURE_REMPL-bind" class="duree" xxf:maxlength="2">
                                         <xf:alert ref="$form-resources/HEURE_REMPL/alert" />
                                     </xf:input>
-                                    <xhtml:span class="suffixe">heures</xhtml:span>
+                                    <xhtml:span class="suffix">heures</xhtml:span>
                                     <xf:input id="MIN_REMPL-control" name="MIN_REMPL" bind="MIN_REMPL-bind" class="duree" xxf:maxlength="2">
                                         <xf:alert ref="$form-resources/MIN_REMPL/alert" />
                                     </xf:input>
-                                    <xhtml:span class="suffixe">minutes</xhtml:span>
+                                    <xhtml:span class="suffix">minutes</xhtml:span>
                                 </xhtml:div>
                             </xsl:if>
                             <xsl:if test="$end-comment-question">
@@ -410,11 +410,11 @@
                                     <xf:input id="HEURE_REMPL-control" name="HEURE_REMPL" bind="HEURE_REMPL-bind" class="duree" xxf:maxlength="2">
                                         <xf:alert ref="$form-resources/HEURE_REMPL/alert" />
                                     </xf:input>
-                                    <xhtml:span class="suffixe">heures</xhtml:span>
+                                    <xhtml:span class="suffix">heures</xhtml:span>
                                     <xf:input id="MIN_REMPL-control" name="MIN_REMPL" bind="MIN_REMPL-bind" class="duree" xxf:maxlength="2">
                                         <xf:alert ref="$form-resources/MIN_REMPL/alert" />
                                     </xf:input>
-                                    <xhtml:span class="suffixe">minutes</xhtml:span>
+                                    <xhtml:span class="suffix">minutes</xhtml:span>
                                 </xhtml:div>
                             </xsl:if>
                             <xsl:if test="$end-comment-question">

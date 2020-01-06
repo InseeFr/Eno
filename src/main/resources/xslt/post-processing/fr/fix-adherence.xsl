@@ -20,10 +20,6 @@
     <!-- On dégage les commentaires éventuellement inscrits dans le core du formulaire -->
     <xsl:template match="comment()[following-sibling::xf:submission]" priority="2"/>
 
-    <xsl:template match="@class[.='suffixe']">
-        <xsl:attribute name="class" select="string('suffix')"/>
-    </xsl:template>
-
     <!--***********************************************Instance de perso, adhérences dans les services eXist***********************************************-->
 
     <!-- On remplace la partie util de l'instance de perso et les binds associés -->
