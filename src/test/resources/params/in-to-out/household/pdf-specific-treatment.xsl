@@ -71,12 +71,5 @@
             <xsl:apply-templates select="node() | @*" mode="#current"/>
         </xsl:copy>
     </xsl:template>
-    
-    <xsl:template match="fo:block[@id='RAISPROMO']">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:apply-templates select="fo:list-block"/>
-        </xsl:copy>
-    </xsl:template>
-    
+
 </xsl:stylesheet>

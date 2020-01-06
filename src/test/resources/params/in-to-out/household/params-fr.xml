@@ -15,7 +15,6 @@
         <PostProcessing>fr-edit-patron</PostProcessing>
         <PostProcessing>fr-insert-welcome</PostProcessing>
         <PostProcessing>fr-insert-end</PostProcessing>
-        <PostProcessing>fr-specificTreatment</PostProcessing>
         <PostProcessing>fr-fix-adherence</PostProcessing>
     </Pipeline>
     
