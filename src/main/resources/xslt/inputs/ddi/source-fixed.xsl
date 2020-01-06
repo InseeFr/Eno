@@ -1393,5 +1393,21 @@
     <xsl:template match="*" mode="enoddi:get-previous-statement-item">
         <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference/preceding-sibling::d:ControlConstructReference/d:StatementItem[parent::d:ControlConstructReference/following-sibling::d:ControlConstructReference[descendant::d:QuestionConstruct][1]/descendant::d:QuestionConstruct/r:ID=current()/ancestor::d:QuestionConstruct/r:ID]"></xsl:sequence>
     </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function for retrieving the id (modele) of a questionnaire.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='template']" mode="enoddi:get-form-model">
+        <xsl:choose>
+            <xsl:when test="//d:Instrument/d:InstrumentName">
+                <xsl:value-of select="//d:Instrument/d:InstrumentName/r:String"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="//d:Instrument/r:ID/text()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
 </xsl:stylesheet>
