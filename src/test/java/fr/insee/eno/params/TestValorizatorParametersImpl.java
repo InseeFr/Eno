@@ -22,13 +22,13 @@ import fr.insee.eno.parameters.BrowsingEnum;
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.parameters.FRParameters;
 import fr.insee.eno.parameters.Format;
-import fr.insee.eno.parameters.GlobalNumerotation;
+import fr.insee.eno.parameters.GlobalNumbering;
 import fr.insee.eno.parameters.InFormat;
 import fr.insee.eno.parameters.JSParameters;
 import fr.insee.eno.parameters.Language;
 import fr.insee.eno.parameters.LevelEnum;
 import fr.insee.eno.parameters.LevelQuestion;
-import fr.insee.eno.parameters.NumerotationQuestion;
+import fr.insee.eno.parameters.NumberingQuestion;
 import fr.insee.eno.parameters.Orientation;
 import fr.insee.eno.parameters.OutFormat;
 import fr.insee.eno.parameters.PDFParameters;
@@ -87,10 +87,10 @@ public class TestValorizatorParametersImpl {
 
 		pdfParameters.setAccompanyingMail(AccompanyingMail.CNR_COL);
 
-		GlobalNumerotation globalNumerotation = new GlobalNumerotation();
+		GlobalNumbering globalNumerotation = new GlobalNumbering();
 		globalNumerotation.setBrowsing(BrowsingEnum.NO_NUMBER);
 
-		NumerotationQuestion question = new NumerotationQuestion();
+		NumberingQuestion question = new NumberingQuestion();
 		LevelQuestion levelQuestion2 = new LevelQuestion();
 		levelQuestion2.setPostNumQuest("%***%");
 		levelQuestion2.setName(LevelEnum.SUBMODULE);
