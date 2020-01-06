@@ -5,21 +5,9 @@
     xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
     xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
-    xmlns:d="ddi:datacollection:3_3" xmlns:r="ddi:reusable:3_3"
-    exclude-result-prefixes="xd eno enofr d r" version="2.0">
+    exclude-result-prefixes="xd eno enofr" version="2.0">
 
 <!--    <xsl:import href="../../transformations/ddi2fr/ddi2fr.xsl"/>-->
-
-    <xsl:variable name="modele-questionnaire">
-        <xsl:choose>
-            <xsl:when test="//d:Instrument/d:InstrumentName">
-                <xsl:value-of select="//d:Instrument/d:InstrumentName/r:String"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="//d:Instrument/r:ID/text()"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
 
     <xd:doc scope="stylesheet">
         <xd:desc>
@@ -68,7 +56,7 @@
 
                     <!-- Main instance, it contains the elements linked to fields, and which will be stored when the form will be submitted -->
                     <xf:instance id="fr-form-instance">
-                        <form modele="{$modele-questionnaire}">
+                        <form modele="{enofr:get-form-model($source-context)}">
                             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                                 <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
                             </xsl:apply-templates>

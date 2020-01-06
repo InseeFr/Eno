@@ -6,9 +6,8 @@
 	xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
 	xmlns:eno="http://xml.insee.fr/apps/eno"
 	xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
-	xmlns:d="ddi:datacollection:3_3" xmlns:r="ddi:reusable:3_3"
 	xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
-	exclude-result-prefixes="xs fn xd eno enojs d r" version="2.0">
+	exclude-result-prefixes="xs fn xd eno enojs" version="2.0">
 	
 	<xd:doc>
 		<xd:desc>
@@ -28,17 +27,6 @@
 			<xd:p>The real input is mapped with the drivers.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	
-	<xsl:variable name="modele-questionnaire">
-		<xsl:choose>
-			<xsl:when test="//d:Instrument/d:InstrumentName">
-				<xsl:value-of select="//d:Instrument/d:InstrumentName/r:String"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="//d:Instrument/r:ID/text()"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
 	
 	<xsl:variable name="varName" select="parent"/>
 		
@@ -63,7 +51,7 @@
 		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="id" select="replace(enojs:get-name($source-context),'Sequence-','')"/>
 		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
-		<Questionnaire id="{$id}" modele="{$modele-questionnaire}">
+		<Questionnaire id="{$id}" modele="{enojs:get-form-model($source-context)}">
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
