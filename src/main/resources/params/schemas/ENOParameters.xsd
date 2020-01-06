@@ -41,7 +41,7 @@
             <xs:element name="pdf-parameters" type="PDFParameters" minOccurs="0" maxOccurs="1"/>
             <xs:element name="js-parameters" type="JSParameters" minOccurs="0" maxOccurs="1"/>
             <xs:element name="odt-parameters" type="ODTParameters" minOccurs="0" maxOccurs="1"/>
-            <xs:element name="Title" type="GlobalNumerotation" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Title" type="GlobalNumbering" minOccurs="0" maxOccurs="1"/>
         </xs:all>        
     </xs:complexType>
         
