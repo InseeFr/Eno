@@ -42,7 +42,6 @@
             <xsl:if test="$end-response-time-question">
                 <Variable name="HEURE_REMPL" type="Collected" />
                 <Variable name="MIN_REMPL" type="Collected" />
-                *
             </xsl:if>
             <xsl:if test="$end-comment-question">
                 <Variable name="COMMENT_QE" type="Collected" />
