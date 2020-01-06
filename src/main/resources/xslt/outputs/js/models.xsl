@@ -22,38 +22,6 @@
 		<empty/>
 	</xsl:param>
 	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>The properties and parameters files are charged as xml trees.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:variable name="properties" select="doc($properties-file)"/>
-	<xsl:variable name="parameters">
-		<xsl:choose>
-			<xsl:when test="$parameters-node/*">
-				<xsl:copy-of select="$parameters-node"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:copy-of select="doc($parameters-file)"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	
-	<xd:doc>
-		<xd:desc>Variables from propertiers and parameters</xd:desc>
-	</xd:doc>
-	<xsl:variable name="filterDescription">
-		<xsl:choose>
-			<xsl:when test="$parameters//FilterDescription != ''">
-				<xsl:value-of select="$parameters//FilterDescription"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$properties//FilterDescription"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	
-	
 	<xd:doc scope="stylesheet">
 		<xd:desc>
 			<xd:p>An xslt stylesheet who transforms an input into js through generic driver templates.</xd:p>
