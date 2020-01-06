@@ -1562,7 +1562,6 @@
             </r:QuestionReference>
          </d:QuestionConstruct>
          <d:ComputationItem>
-            <d:TypeOfComputationItem>informational</d:TypeOfComputationItem>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>ji5qzo7i-CI-0</r:ID>
             <r:Version>1.0</r:Version>
@@ -1578,6 +1577,7 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-3">informational</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
@@ -1631,7 +1631,6 @@
             <!--<r:TypeOfComputationItem>warn</r:TypeOfComputationItem>-->
          </d:ComputationItem>
          <d:ComputationItem>
-            <d:TypeOfComputationItem>informational</d:TypeOfComputationItem>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>ji5rmgik-CI-0</r:ID>
             <r:Version>1.0</r:Version>
@@ -1647,6 +1646,7 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-3">informational</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
@@ -1700,7 +1700,6 @@
             <!--<r:TypeOfComputationItem>error</r:TypeOfComputationItem>-->
          </d:ComputationItem>
          <d:ComputationItem>
-            <d:TypeOfComputationItem>informational</d:TypeOfComputationItem>
             <r:Agency>fr.insee</r:Agency>
             <r:ID>ji5sgt4d-CI-0</r:ID>
             <r:Version>1.0</r:Version>
@@ -1716,6 +1715,7 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>Instruction</r:TypeOfObject>
             </d:InterviewerInstructionReference>
+            <d:TypeOfComputationItem controlledVocabularyID="INSEE-TOCI-CL-3">informational</d:TypeOfComputationItem>
             <r:CommandCode>
                <r:Command>
                   <r:ProgramLanguage>xpath</r:ProgramLanguage>
@@ -4261,7 +4261,7 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:CodeDomain>
+               <r:CodeRepresentation>
                   <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
                   <r:CodeListReference>
                      <r:Agency>fr.insee</r:Agency>
@@ -4269,8 +4269,7 @@
                      <r:Version>1.0</r:Version>
                      <r:TypeOfObject>CodeList</r:TypeOfObject>
                   </r:CodeListReference>
-                  <r:ResponseCardinality maximumResponses="1"/>
-               </d:CodeDomain>
+               </r:CodeRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4296,7 +4295,7 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:TextDomain maxLength="100"/>
+               <r:TextRepresentation maxLength="100"/>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4322,7 +4321,7 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:CodeDomain>
+               <r:CodeRepresentation>
                   <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
                   <r:CodeListReference>
                      <r:Agency>fr.insee</r:Agency>
@@ -4330,8 +4329,7 @@
                      <r:Version>1.0</r:Version>
                      <r:TypeOfObject>CodeList</r:TypeOfObject>
                   </r:CodeListReference>
-                  <r:ResponseCardinality maximumResponses="1"/>
-               </d:CodeDomain>
+               </r:CodeRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4357,7 +4355,7 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:TextDomain maxLength="100"/>
+               <r:TextRepresentation maxLength="100"/>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4383,7 +4381,7 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:CodeDomain>
+               <r:CodeRepresentation>
                   <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
                   <r:CodeListReference>
                      <r:Agency>fr.insee</r:Agency>
@@ -4391,8 +4389,7 @@
                      <r:Version>1.0</r:Version>
                      <r:TypeOfObject>CodeList</r:TypeOfObject>
                   </r:CodeListReference>
-                  <r:ResponseCardinality maximumResponses="1"/>
-               </d:CodeDomain>
+               </r:CodeRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4418,13 +4415,13 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">5000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4450,13 +4447,13 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain decimalPositions="2">
+               <r:NumericRepresentation decimalPositions="2">
                   <r:NumberRange>
                      <r:Low isInclusive="true">0</r:Low>
                      <r:High isInclusive="true">1000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4482,12 +4479,12 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <r:DateTimeDomainReference>
+               <r:DateTimeRepresentationReference>
                   <r:Agency>fr.insee</r:Agency>
                   <r:ID>INSEE-COMMUN-MNR-DateTimedate</r:ID>
                   <r:Version>1.0</r:Version>
                   <r:TypeOfObject>ManagedDateTimeRepresentation</r:TypeOfObject>
-               </r:DateTimeDomainReference>
+               </r:DateTimeRepresentationReference>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4513,13 +4510,13 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:NumberRange>
                      <r:Low isInclusive="true">1</r:Low>
                      <r:High isInclusive="true">24</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4545,14 +4542,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-10000000</r:Low>
                      <r:High isInclusive="true">1000000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4578,14 +4575,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-10000000</r:Low>
                      <r:High isInclusive="true">2000000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4611,14 +4608,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-10000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4644,14 +4641,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-10000000</r:Low>
                      <r:High isInclusive="true">200000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4677,14 +4674,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-10000000</r:Low>
                      <r:High isInclusive="true">200000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4710,14 +4707,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-10000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4743,7 +4740,7 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:CodeDomain>
+               <r:CodeRepresentation>
                   <r:GenericOutputFormat controlledVocabularyID="INSEE-GOF-CV">radio-button</r:GenericOutputFormat>
                   <r:CodeListReference>
                      <r:Agency>fr.insee</r:Agency>
@@ -4751,8 +4748,7 @@
                      <r:Version>1.0</r:Version>
                      <r:TypeOfObject>CodeList</r:TypeOfObject>
                   </r:CodeListReference>
-                  <r:ResponseCardinality maximumResponses="1"/>
-               </d:CodeDomain>
+               </r:CodeRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4778,7 +4774,7 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:TextDomain maxLength="249"/>
+               <r:TextRepresentation maxLength="249"/>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4804,7 +4800,7 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:TextDomain maxLength="5"/>
+               <r:TextRepresentation maxLength="5"/>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4830,13 +4826,13 @@
                <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:NumberRange>
                         <r:Low isInclusive="true">-10000000</r:Low>
                         <r:High isInclusive="true">10000000</r:High>
                      </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4862,14 +4858,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4895,14 +4891,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4928,14 +4924,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4961,14 +4957,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -4994,14 +4990,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5027,14 +5023,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">1000000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5060,14 +5056,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5093,14 +5089,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5126,14 +5122,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5159,14 +5155,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5192,14 +5188,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5225,14 +5221,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5258,14 +5254,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5291,14 +5287,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5324,14 +5320,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-100000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5357,14 +5353,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-100000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5390,14 +5386,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5423,14 +5419,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">100000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5456,14 +5452,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">10000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5489,14 +5485,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">10000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
@@ -5522,14 +5518,14 @@
                <r:TypeOfObject>QuestionItem</r:TypeOfObject>
             </r:QuestionReference>
             <l:VariableRepresentation>
-               <d:NumericDomain>
+               <r:NumericRepresentation>
                   <r:MeasurementUnit>€</r:MeasurementUnit>
                   <r:NumberRange>
                      <r:Low isInclusive="true">-1000000</r:Low>
                      <r:High isInclusive="true">1000000000</r:High>
                   </r:NumberRange>
                   <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
-               </d:NumericDomain>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:VariableGroup>
@@ -5847,12 +5843,12 @@
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>Variable</r:TypeOfObject>
             </r:VariableReference>
-            <r:VariableGroupReference>
+            <l:VariableGroupReference>
                <r:Agency>fr.insee</r:Agency>
                <r:ID>jjjliro2-gp</r:ID>
                <r:Version>1.0</r:Version>
                <r:TypeOfObject>VariableGroup</r:TypeOfObject>
-            </r:VariableGroupReference>
+            </l:VariableGroupReference>
          </l:VariableGroup>
       </l:VariableScheme>
       <d:ProcessingInstructionScheme>

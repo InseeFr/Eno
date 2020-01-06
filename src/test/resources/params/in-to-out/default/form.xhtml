@@ -2571,7 +2571,6 @@
                </xf:bind>
             </xf:bind>
          </xf:bind>
-         
          <xf:submission id="enregistrer"
                         method="post"
                         ref="instance('fr-form-instance')"
@@ -2584,7 +2583,6 @@
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
-         
          <xf:submission id="expedier"
                         method="post"
                         ref="instance('fr-form-instance')"
@@ -2669,7 +2667,6 @@
             <xf:send submission="enregistrer"/>
             <xf:setfocus control="page-top-control"/>
          </xf:action>
-         
       </xf:model>
    </xhtml:head>
    <xhtml:body>

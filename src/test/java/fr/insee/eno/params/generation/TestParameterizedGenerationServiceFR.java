@@ -42,10 +42,9 @@ public class TestParameterizedGenerationServiceFR {
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
 		File params = new File(String.format("%s/params-fr.xml", basePathDDI));
 		File metadata = new File(String.format("%s/metadata.xml", basePathDDI));
-		File specificTreatment = new File(String.format("%s/fr-specific-treatment.xsl", basePathDDI));
 		
 		try {
-			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, metadata, specificTreatment);
+			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, metadata, null);
 			File expectedFile = new File(String.format("%s/form.xhtml", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
