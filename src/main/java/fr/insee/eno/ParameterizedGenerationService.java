@@ -44,10 +44,11 @@ public class ParameterizedGenerationService {
 	 * @param params : java object ENOParameter (required)
 	 * @param metadata : InputStream of metadata xml file (optional)
 	 * @param specificTreatment : InputStream of an xsl sheet (optional)
+	 * @param mapping : InputStream of a xml file using in FRModeleColtranePostProcessor (optional)
 	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
-	public File generateQuestionnaire(File inputFile, ENOParameters params, InputStream metadata, InputStream specificTreatment) throws Exception{
+	public File generateQuestionnaire(File inputFile, ENOParameters params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception{
 		File output=null;
 		Pipeline pipeline = params.getPipeline();
 
@@ -61,6 +62,8 @@ public class ParameterizedGenerationService {
 			generationService.setMetadata(metadata);
 			LOGGER.info("Setting specific treamtment to the pipeline.");
 			generationService.setSpecificTreatment(specificTreatment);
+			LOGGER.info("Setting mapping file to the pipeline.");
+			generationService.setMapping(mapping);
 			String survey = params.getParameters()!=null?params.getParameters().getCampagne():"test";
 			output = generationService.generateQuestionnaire(inputFile, survey);
 			paramsFinal.close();
@@ -80,10 +83,11 @@ public class ParameterizedGenerationService {
 	 * @param params : InputStream of parameters xml file (required)
 	 * @param metadata : InputStream of metadata xml file (optional)
 	 * @param specificTreatment : InputStream of an xsl sheet (optional)
+	 * @param mapping : InputStream of a xml file using in FRModeleColtranePostProcessor (optional)
 	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
-	public File generateQuestionnaire(File inputFile, InputStream params, InputStream metadata, InputStream specificTreatment) throws Exception {
+	public File generateQuestionnaire(File inputFile, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {
 		LOGGER.info("Parameterized Generation of questionnaire -- STARTED --");
 		File output=null;
 		
@@ -114,6 +118,8 @@ public class ParameterizedGenerationService {
 					generationService.setMetadata(metadata);
 					LOGGER.info("Setting specific treamtment to the pipeline.");
 					generationService.setSpecificTreatment(specificTreatment);
+					LOGGER.info("Setting mapping file to the pipeline.");
+					generationService.setMapping(mapping);
 					String survey = enoParameters.getParameters().getCampagne();
 					output = generationService.generateQuestionnaire(inputFile, survey);
 					paramsFinal.close();
@@ -146,23 +152,27 @@ public class ParameterizedGenerationService {
 	 * @param params : xml File of ENOParameter (required)
 	 * @param metadata : xml File of metadata (optional)
 	 * @param specificTreatment : xsl file of the xsl sheet (optional)
+	 * @param mapping : a xml File using in FRModeleColtranePostProcessor (optional)
 	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
-	public File generateQuestionnaire(File inputFile, File params, File metadata, File specificTreatment)  throws Exception{
+	public File generateQuestionnaire(File inputFile, File params, File metadata, File specificTreatment, File mapping)  throws Exception{
 		File output = null;
 
 		InputStream parametersIS = null;
 		InputStream metadataIS = null;
 		InputStream specificTreatmentIS = null;
+		InputStream mappingIS = null;
 		parametersIS = params!=null ? FileUtils.openInputStream(params):null;
 		metadataIS = metadata!=null ? FileUtils.openInputStream(metadata):null;
 		specificTreatmentIS = specificTreatment!=null ? FileUtils.openInputStream(specificTreatment):null;
-		output = generateQuestionnaire(inputFile, parametersIS, metadataIS, specificTreatmentIS);
+		mappingIS = mapping!=null ? FileUtils.openInputStream(mapping):null;
+		output = generateQuestionnaire(inputFile, parametersIS, metadataIS, specificTreatmentIS, mappingIS);
 
 		if(parametersIS!=null) {parametersIS.close();};
 		if(metadataIS!=null) {metadataIS.close();};
 		if(specificTreatmentIS!=null) {specificTreatmentIS.close();};
+		if(mappingIS!=null) {mappingIS.close();};
 
 		return output;
 

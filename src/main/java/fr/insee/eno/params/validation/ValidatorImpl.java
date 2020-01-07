@@ -84,13 +84,13 @@ public class ValidatorImpl implements Validator {
 				
 				boolean order = preProcessingsCopy.equals(preProcessings);
 				boolean consistency = preProcessingInFormat.containsAll(preProcessingsCopy);
-				boolean mapping = preProcessingNeeded ? preProcessings.contains(PreProcessing.DDI_MAPPING):true;
+				boolean mapping = preProcessingNeeded ? preProcessings.contains(PreProcessing.DDI_MAPPING) || inFormat.equals(InFormat.FR):true;
 				
 				isValid = order && consistency && mapping;
 				
 				message += order ? "" : "PreProcessings are not in the right order. The right order should be : "+preProcessingsCopy;
 				message += consistency ? "" : "PreProcessings are not valid according to the InFormat ('"+inFormat.value()+"') ";
-				message += mapping ? "" : "The PreProcessing '"+PostProcessing.FR_MODELE_COLTRANE.value()+"', need the PreProcessing '"+PreProcessing.DDI_MAPPING.value()+"' ";
+				message += mapping ? "" : "The PostProcessing '"+PostProcessing.FR_MODELE_COLTRANE.value()+"', need the PreProcessing '"+PreProcessing.DDI_MAPPING.value()+"' ";
 								
 			}
 			else {

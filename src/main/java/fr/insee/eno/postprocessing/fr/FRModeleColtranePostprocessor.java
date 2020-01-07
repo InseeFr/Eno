@@ -1,5 +1,6 @@
 package fr.insee.eno.postprocessing.fr;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -20,10 +21,14 @@ public class FRModeleColtranePostprocessor implements Postprocessor {
 
 	private XslTransformation saxonService = new XslTransformation();
 
+
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
+		return this.process(input, parameters, null, null, null, survey);
+	}
 
-
+	@Override
+	public File process(File input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, byte[] mapping, String survey) throws Exception {
 		File outputForFRFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
 				Constants.MODELE_COLTRANE_FR_EXTENSION);
@@ -31,16 +36,21 @@ public class FRModeleColtranePostprocessor implements Postprocessor {
 		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
 
 		String sUB_TEMP_FOLDER = Constants.tEMP_DDI_FOLDER(Constants.sUB_TEMP_FOLDER(survey));
-		File mappingFile = Constants.tEMP_MAPPING_TMP(sUB_TEMP_FOLDER);
 
 		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.UTIL_FR_MODELE_COLTRANE_XSL);
 
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
 		InputStream mappingStream=null;
-		if(mappingFile.exists()) {
-			logger.info("Loading mapping.xml file : "+mappingFile.getAbsolutePath());
-			mappingStream = FileUtils.openInputStream(mappingFile);
+		if(mapping!=null) {
+			mappingStream = new ByteArrayInputStream(mapping);
+		}
+		else {
+			File mappingFile = Constants.tEMP_MAPPING_TMP(sUB_TEMP_FOLDER);
+			if(mappingFile.exists()) {
+				logger.info("Loading mapping.xml file : "+mappingFile.getAbsolutePath());
+				mappingStream = FileUtils.openInputStream(mappingFile);
+			}
 		}
 
 		try {
@@ -58,6 +68,7 @@ public class FRModeleColtranePostprocessor implements Postprocessor {
 		logger.info("End of ModeleColtrane post-processing " + outputForFRFile.getAbsolutePath());
 
 		return outputForFRFile;
+
 	}
 
 	@Override

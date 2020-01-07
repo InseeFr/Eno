@@ -33,6 +33,7 @@ public class GenerationService {
 	private byte[] parameters;
 	private byte[] metadata;
 	private byte[] specificTreatment;
+	private byte[] mapping;
 
 	@Inject
 	public GenerationService(final Preprocessor[] preprocessors, final Generator generator,
@@ -85,9 +86,9 @@ public class GenerationService {
 		}
 
 		File generatedForm = this.generator.generate(preprocessResultFileName, parameters, surveyName);
-		File outputForm = this.postprocessors[0].process(generatedForm, parameters, metadata, specificTreatment, surveyName);
+		File outputForm = this.postprocessors[0].process(generatedForm, parameters, metadata, specificTreatment, mapping, surveyName);
 		for (int i = 1; i < postprocessors.length; i++) {
-			outputForm = this.postprocessors[i].process(outputForm, parameters, metadata, specificTreatment,surveyName);
+			outputForm = this.postprocessors[i].process(outputForm, parameters, metadata, specificTreatment, mapping,surveyName);
 		}
 		File finalForm = new File(outputForm.getParent()+Constants.BASE_NAME_FORM_FILE+"."+FilenameUtils.getExtension(outputForm.getAbsolutePath()));
 		if(!finalForm.equals(outputForm)) {
@@ -120,6 +121,12 @@ public class GenerationService {
 			this.specificTreatment = IOUtils.toByteArray(specificTreatmentIS);
 		}
 	}
+	
+	public void setMapping(InputStream mappingIS) throws IOException {
+		if(mappingIS!=null) {
+			this.mapping = IOUtils.toByteArray(mappingIS);
+		}
+	}
 
 	public byte[] getParameters() {
 		return parameters;
@@ -129,6 +136,9 @@ public class GenerationService {
 	}
 	public byte[] getSpecificTreatment() {
 		return specificTreatment;
+	}
+	public byte[] getMapping() {
+		return mapping;
 	}
 
 	/**

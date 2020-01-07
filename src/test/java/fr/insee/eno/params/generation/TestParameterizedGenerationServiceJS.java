@@ -24,7 +24,7 @@ public class TestParameterizedGenerationServiceJS {
 		File params = new File(String.format("%s/params-js.xml", basePathDDI));
 		
 		try {
-			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, null);
+			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);
 			File expectedFile = new File(String.format("%s/form.xml", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());

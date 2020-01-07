@@ -23,7 +23,7 @@ public class TestParameterizedGenerationServicePDF {
 		File params = new File(String.format("%s/params-pdf.xml", basePathDDI));
 		
 		try {
-			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, null);
+			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);
 			File expectedFile = new File(String.format("%s/form.fo", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
@@ -43,7 +43,7 @@ public class TestParameterizedGenerationServicePDF {
 		File specificTreatment = new File(String.format("%s/pdf-specific-treatment.xsl", basePathDDI));
 		
 		try {
-			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment);
+			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment, null);
 			File expectedFile = new File(String.format("%s/form.fo", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
@@ -63,7 +63,7 @@ public class TestParameterizedGenerationServicePDF {
 		File specificTreatment = new File(String.format("%s/pdf-specific-treatment.xsl", basePathDDI));
 		
 		try {
-			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment);
+			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment, null);
 			File expectedFile = new File(String.format("%s/form.fo", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
