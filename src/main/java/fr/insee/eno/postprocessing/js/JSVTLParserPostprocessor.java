@@ -46,12 +46,17 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 
 		return outputCustomFOFile;
 	}
+	public static final String XPATH_CONCAT_FUNCTION = "concat";
+	public static final String XPATH_SUBSTRING_FUNCTION = "substring";
+	public static final String XPATH_CAST_FUNCTION = "cast";
+	public static final String XPATH_DIVISION_FUNCTION = " div ";
+	public static final String XPATH_NOT_EQUAL_TO = "!=";
 
-
-	public static final String CONCAT_FUNCTION = "concat";
-	public static final String SUBSTRING_FUNCTION = "substring";
-	public static final String CAST_FUNCTION = "cast";
-	public static final String DIVISION_FUNCTION = " div ";
+	public static final String VTL_CONCAT_FUNCTION = "||";
+	public static final String VTL_SUBSTRING_FUNCTION = "substr";
+	public static final String VTL_CAST_FUNCTION = "cast";
+	public static final String VTL_DIVISION_FUNCTION = " / ";
+	public static final String VTL_NOT_EQUAL_TO = " &lt;&gt; ";
 
 	public static final String XML_NODE_LABEL = "label";
 	public static final String XML_NODE_CONDITIONFILTER = "conditionFilter";
@@ -83,8 +88,8 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 
 
 	public String parseToVTL(String input) {
-		input = input.replaceAll("!=", " &lt;&gt; ");
-		input = input.replaceAll(DIVISION_FUNCTION, " / ");
+		input = input.replaceAll(XPATH_NOT_EQUAL_TO, VTL_NOT_EQUAL_TO);
+		input = input.replaceAll(XPATH_DIVISION_FUNCTION, VTL_DIVISION_FUNCTION);
 		String finalString="";String context="";
 		List<String> listContext = new ArrayList<String>();
 		boolean isBetweenRealQuote=false;
@@ -94,13 +99,13 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 			switch (c) {
 			case '(':
 				// order functions by descending length
-				if(context.contains(CONCAT_FUNCTION)) {
-					finalString = finalString.replaceFirst(CONCAT_FUNCTION, "");
-					listContext.add(CONCAT_FUNCTION);
+				if(context.contains(XPATH_CONCAT_FUNCTION)) {
+					finalString = replaceLast(finalString, XPATH_CONCAT_FUNCTION, "");
+					listContext.add(XPATH_CONCAT_FUNCTION);
 				}
-				else if(context.contains(SUBSTRING_FUNCTION)) {
-					finalString = finalString.replaceFirst(SUBSTRING_FUNCTION, "substr")+c;
-					listContext.add(SUBSTRING_FUNCTION);
+				else if(context.contains(XPATH_SUBSTRING_FUNCTION)) {
+					finalString = replaceLast(finalString, XPATH_SUBSTRING_FUNCTION, VTL_SUBSTRING_FUNCTION)+c;
+					listContext.add(XPATH_SUBSTRING_FUNCTION);
 				}
 				else {
 					finalString+=c;
@@ -115,10 +120,10 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 				finalString+=c;
 				break;
 			case ',':
-				finalString += getLastElement(listContext).equals(CONCAT_FUNCTION) && !isBetweenRealQuote ? " || " : c;
+				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) && !isBetweenRealQuote ? " "+VTL_CONCAT_FUNCTION+" " : c;
 				break;
 			case ')':
-				finalString += getLastElement(listContext).equals(CONCAT_FUNCTION) ? "" : c;
+				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) ? "" : c;
 				removeLast(listContext);
 				context="";
 				break;
@@ -142,6 +147,13 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 		if (!contexts.isEmpty()) {
 			contexts.remove(contexts.size()-1);
 		}
+	}
+	
+	public String replaceLast(String string, String substring, String replacement){
+		int index = string.lastIndexOf(substring);
+		if (index == -1)
+			return string;
+		return string.substring(0, index) + replacement + string.substring(index+substring.length());
 	}
 
 	public String toString() {
