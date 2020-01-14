@@ -469,7 +469,7 @@
                 <xsl:for-each select="//xf:repeat">
                     <xsl:variable name="container" select="@id"/>
                     <xsl:variable name="dynamic-array" select="substring-after(@nodeset,concat($container,'/'))"/>
-                    <xsl:if test="following::xf:trigger[1]/preceding::xf:repeat[1]/@id=$container">
+                    <xsl:if test="//xf:repeat[tokenize(@nodeset,'/')[last()]=$dynamic-array][not(preceding::xf:repeat[tokenize(@nodeset,'/')[last()]=$dynamic-array])]/@id=$container">
                         <xf:action if="not(instance('fr-form-instance')//{$container}/*)
                             or count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
                             <xf:action while="count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
