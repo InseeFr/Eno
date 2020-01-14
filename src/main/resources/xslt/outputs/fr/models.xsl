@@ -360,6 +360,9 @@
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
+            <xsl:if test="$type != ''">
+                <xsl:attribute name="type" select="$type"/>
+            </xsl:if>
             <xsl:if test="$required">
                 <xsl:attribute name="required" select="'true()'"/>
             </xsl:if>

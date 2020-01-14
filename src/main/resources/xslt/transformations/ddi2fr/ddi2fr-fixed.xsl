@@ -736,4 +736,20 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
+    
+    <xd:doc>
+        <xd:desc>Eno type (text, number, date, gMonthDate) is not always XForms type</xd:desc>
+    </xd:doc>
+    <xsl:function name="enofr:get-type">
+        <xsl:param name="context" as="item()"/>
+        <xsl:variable name="ddi-type" select="enoddi:get-type($context)"/>
+        
+        <xsl:choose>
+            <xsl:when test="$ddi-type = ''"/>
+            <xsl:when test="$ddi-type = 'text' or $ddi-type = 'code' or $ddi-type = 'boolean'"/>
+            <xsl:otherwise>
+                <xsl:value-of select="concat('xf:',$ddi-type)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 </xsl:stylesheet>
