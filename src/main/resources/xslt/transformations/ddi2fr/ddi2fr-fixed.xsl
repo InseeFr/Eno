@@ -584,6 +584,9 @@
                     </xsl:choose>
                 </xsl:if>
             </xsl:when>
+            <xsl:when test="$type='duration' and $format='HH:CH'">
+                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/DurationHHCH"/>
+            </xsl:when>
             <xsl:when test="$type='duration'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration"/>
                 <xsl:if test="$minimum!=''">

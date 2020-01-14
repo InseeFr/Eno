@@ -1070,9 +1070,6 @@
                         <xsl:when test="upper-case($dateduration-format) = 'MM/AAAA' or $dateduration-format='YYYY-MM'">
                             <xsl:value-of select="concat($name,'-layout-Y = ''''')"/>
                         </xsl:when>
-                        <xsl:when test="$dateduration-format='HH:CH'">
-                            <xsl:value-of select="concat('../',$name,'-layout-H = ''''')"/>
-                        </xsl:when>
                         <xsl:otherwise>
                             <xsl:for-each select="$layout-list//format">
                                 <xsl:if test="position() != 1">
@@ -1230,6 +1227,9 @@
                     <xsl:element name="xf:constraint">
                         <xsl:attribute name="value">
                             <xsl:choose>
+                                <xsl:when test="$dateduration-format='HH:CH'">
+                                    <xsl:value-of select="concat('if (string(../',$name,') != '''') then (substring(../',$name,',1,1) != '':'') else (../',$name,'='''')')"/>
+                                </xsl:when>
                                 <xsl:when test="$current-driver = 'DurationDomain'">
                                     <xsl:value-of select="concat('if (string(../',$name,') != '''') then ((')"/>
                                     <xsl:if test="$minimum != ''">
@@ -2589,7 +2589,25 @@
                     <format id="" unit="" minimum="{$minimum}" maximum="{$maximum}" variable="{$variable-name}"/>
                 </xsl:when>
                 <xsl:when test="$format='HH:CH'">
-                    <format id="H" unit="Hour" minimum="20" maximum="59" variable="{$variable-name}-layout-H"/>
+                    <format id="H" unit="Hour">
+                        <xsl:choose>
+                            <xsl:when test="$minimum != ''">
+                                <xsl:attribute name="minimum" select="substring-before($minimum,':')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="minimum" select="'20'"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:choose>
+                            <xsl:when test="$maximum != ''">
+                                <xsl:attribute name="maximum" select="substring-before($maximum,':')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="maximum" select="'59'"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:attribute name="variable" select="concat($variable-name,'-layout-H')"/>
+                    </format>
                     <format id="CH" unit="Hundredth" minimum="0" maximum="99" variable="{$variable-name}-layout-CH"/>
                 </xsl:when>
                 <xsl:when test="$driver = 'DateTimeDomain'">
