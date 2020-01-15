@@ -164,6 +164,10 @@
     <xsl:template match="pogues:Formula" mode="enoddi33:get-vrop-id">
         <xsl:value-of select="concat(enoddi33:get-id(parent::pogues:Variable),'-VROP')"/>
     </xsl:template>
+
+    <xsl:template match="pogues:Variable[@xsi:type='CalculatedVariableType']" mode="enoddi33:get-vrop-id">
+        <xsl:value-of select="concat(enoddi33:get-id(.),'-VROP')"/>
+    </xsl:template>
     
     <!--TODO The implementation of building id should be done with "rich" outGetter mechanism =>@v2.0 -->
     <xsl:function name="enoddi33:get-gi-id">
