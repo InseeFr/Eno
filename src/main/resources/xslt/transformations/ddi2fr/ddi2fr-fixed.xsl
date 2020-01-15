@@ -747,8 +747,11 @@
         <xsl:choose>
             <xsl:when test="$ddi-type = ''"/>
             <xsl:when test="$ddi-type = 'text' or $ddi-type = 'code' or $ddi-type = 'boolean'"/>
+            <xsl:when test="$ddi-type = 'number'">
+                <xsl:value-of select="'xs:decimal'"/>
+            </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="concat('xf:',$ddi-type)"/>
+                <xsl:value-of select="concat('xs:',$ddi-type)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>

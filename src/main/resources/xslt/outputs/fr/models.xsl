@@ -3017,6 +3017,7 @@
                             <xsl:value-of select="concat('string($',$conditioning-variable,')')"/>
                         </xsl:when>
                         <xsl:when test="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable) != ''">
+                            <xsl:value-of select="'string('"/>
                             <xsl:call-template name="replaceVariablesInFormula">
                                 <xsl:with-param name="formula" select="normalize-space(enofr:get-conditioning-variable-formula($source-context,$conditioning-variable))"/>
                                 <xsl:with-param name="variables" as="node()">
@@ -3029,16 +3030,24 @@
                                 </xsl:with-param>
                                 <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                             </xsl:call-template>
+                            <xsl:value-of select="')'"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
                             <xsl:variable name="variable-ancestors" select="enofr:get-variable-business-ancestors($source-context,$conditioning-variable)"/>
+                            <xsl:variable name="variable-type" select="enofr:get-variable-representation($source-context,$conditioning-variable)"/>
+                            <xsl:if test="$variable-type = 'number' or $variable-type = 'date' or $variable-type = 'duration'">
+                                <xsl:value-of select="'string('"/>
+                            </xsl:if>
+                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
                             <xsl:if test="$variable-ancestors != ''">
                                 <xsl:for-each select="tokenize($variable-ancestors,' ')">
                                     <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
                                 </xsl:for-each>
                             </xsl:if>
                             <xsl:value-of select="enofr:get-variable-business-name($source-context,$conditioning-variable)"/>
+                            <xsl:if test="$variable-type = 'number' or $variable-type = 'date' or $variable-type = 'duration'">
+                                <xsl:value-of select="')'"/>
+                            </xsl:if>
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:value-of select="')'"/>
