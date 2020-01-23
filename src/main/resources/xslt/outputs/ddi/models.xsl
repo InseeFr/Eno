@@ -465,7 +465,7 @@
         </xsl:variable>
         <xsl:variable name="typeVarGroup">
             <xsl:choose>
-                <xsl:when test="name()='Loop'">QuestionLoop</xsl:when>
+                <xsl:when test="name()='Loop'">Loop</xsl:when>
                 <xsl:otherwise>TableLoop</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
