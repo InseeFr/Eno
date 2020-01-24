@@ -339,10 +339,11 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
         <xsl:variable name="driver" select="."/>
+        <xsl:variable name="version" select="enoddi33:get-version($source-context)"/>
         <l:Variable>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="$id"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+            <r:Version><xsl:value-of select="$version"/></r:Version>
             <l:VariableName>
                 <r:String xml:lang="fr-FR"><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
             </l:VariableName>
@@ -365,7 +366,7 @@
                 <r:SourceParameterReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="enoddi33:get-qop-id(current())"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi33:get-version(current())"/></r:Version>
+                    <r:Version><xsl:value-of select="$version"/></r:Version>
                     <r:TypeOfObject>OutParameter</r:TypeOfObject>
                 </r:SourceParameterReference>
                 <xsl:apply-templates select="." mode="enoddi33:question-reference"/>
@@ -377,39 +378,42 @@
                 </l:VariableRepresentation>
             </xsl:for-each>
             <!-- It's a dirty (large part is static) hack to test if Variable got formula (aka = CalcultatedVariable), only 0 or 1 are expected, could be done better way (@att on driver ?) -->
-            <xsl:for-each select="enoddi33:get-processing-instruction($source-context)">
+            <xsl:if test="enoddi33:get-type($source-context)= 'CalculatedVariableType'">
                 <r:OutParameter>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                    <r:ID><xsl:value-of select="enoddi33:get-vrop-id(current())"/></r:ID>
-                    <r:Version><xsl:value-of select="enoddi33:get-version(current())"/></r:Version>
+                    <r:ID><xsl:value-of select="enoddi33:get-vrop-id($source-context)"/></r:ID>
+                    <r:Version><xsl:value-of select="$version"/></r:Version>
                 </r:OutParameter>
                 <l:VariableRepresentation>
                     <r:ProcessingInstructionReference>                        
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="enoddi33:get-gi-id(current())"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi33:get-version(current())"/></r:Version>
+                        <r:ID><xsl:value-of select="enoddi33:get-gi-id($source-context)"/></r:ID>
+                        <r:Version><xsl:value-of select="$version"/></r:Version>
                         <r:TypeOfObject>GenerationInstruction</r:TypeOfObject>
                         <r:Binding>
                             <r:SourceParameterReference>
                                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                <r:ID><xsl:value-of select="enoddi33:get-qop-id(current())"/></r:ID>
-                                <r:Version><xsl:value-of select="enoddi33:get-version(current())"/></r:Version>
+                                <r:ID><xsl:value-of select="enoddi33:get-qop-id($source-context)"/></r:ID>
+                                <r:Version><xsl:value-of select="$version"/></r:Version>
                                 <r:TypeOfObject>OutParameter</r:TypeOfObject>
                             </r:SourceParameterReference>
                             <r:TargetParameterReference>
                                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                                <r:ID><xsl:value-of select="enoddi33:get-vrop-id(current())"/></r:ID>
-                                <r:Version><xsl:value-of select="enoddi33:get-version(current())"/></r:Version>
+                                <r:ID><xsl:value-of select="enoddi33:get-vrop-id($source-context)"/></r:ID>
+                                <r:Version><xsl:value-of select="$version"/></r:Version>
                                 <r:TypeOfObject>OutParameter</r:TypeOfObject>
                             </r:TargetParameterReference>
                         </r:Binding>
                     </r:ProcessingInstructionReference>
-                    <r:NumericRepresentation/>
+                    <!-- Representation of variable: text, numeric, date ... -->
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="$driver" tunnel="yes"/>
+                    </xsl:apply-templates>
                 </l:VariableRepresentation>
-            </xsl:for-each>
+            </xsl:if>
         </l:Variable>
     </xsl:template>
-    
+
     <xsl:template match="driver-VariableScheme//CodeListReference" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
