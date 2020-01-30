@@ -53,7 +53,7 @@ public class DDIDereferencingPreprocessor implements Preprocessor {
 
 			@Override
 			public boolean accept(File dir, String name) {
-				return !name.startsWith("null");
+				return !name.startsWith("null") && name.endsWith(".tmp");
 			}
 		});
 
