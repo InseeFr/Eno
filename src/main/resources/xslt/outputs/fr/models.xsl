@@ -360,7 +360,7 @@
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
-            <xsl:if test="$type != ''">
+            <xsl:if test="$type != '' and (self::CalculatedVariable or self::ResponseElement)">
                 <xsl:attribute name="type" select="$type"/>
             </xsl:if>
             <xsl:if test="$required">
@@ -480,7 +480,6 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="required" select="enofr:is-required($source-context)" as="xs:boolean"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
-        <xsl:variable name="type" select="enofr:get-type($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
 
@@ -545,7 +544,6 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="required" select="enofr:is-required($source-context)" as="xs:boolean"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
-        <xsl:variable name="type" select="enofr:get-type($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
         <xsl:variable name="number-of-decimals" select="enofr:get-number-of-decimals($source-context)"/>
@@ -3035,7 +3033,7 @@
                         <xsl:otherwise>
                             <xsl:variable name="variable-ancestors" select="enofr:get-variable-business-ancestors($source-context,$conditioning-variable)"/>
                             <xsl:variable name="variable-type" select="enofr:get-variable-representation($source-context,$conditioning-variable)"/>
-                            <xsl:if test="$variable-type = 'number' or $variable-type = 'date' or $variable-type = 'duration'">
+                            <xsl:if test="$variable-type = 'integer' or $variable-type = 'decimal' or $variable-type = 'date' or $variable-type = 'duration'">
                                 <xsl:value-of select="'string('"/>
                             </xsl:if>
                             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
@@ -3045,7 +3043,7 @@
                                 </xsl:for-each>
                             </xsl:if>
                             <xsl:value-of select="enofr:get-variable-business-name($source-context,$conditioning-variable)"/>
-                            <xsl:if test="$variable-type = 'number' or $variable-type = 'date' or $variable-type = 'duration'">
+                            <xsl:if test="$variable-type = 'integer' or $variable-type = 'decimal' or $variable-type = 'date' or $variable-type = 'duration'">
                                 <xsl:value-of select="')'"/>
                             </xsl:if>
                         </xsl:otherwise>
@@ -3092,7 +3090,7 @@
                 </xsl:variable>
                 <xsl:variable name="variable-representation" select="enofr:get-variable-representation($source-context,$current-variable)"/>
                 <xsl:choose>
-                    <xsl:when test="$variable-representation = 'number' and contains($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
+                    <xsl:when test="($variable-representation = 'integer' or $variable-representation = 'decimal') and contains($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
                         <!-- former default formula for variableId : simplify before analyzing again -->
                         <xsl:analyze-string select="$formula" regex="^(.*)number\(if \({$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}=''\) then '0' else {$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}\)(.*)$">
                             <xsl:matching-substring>

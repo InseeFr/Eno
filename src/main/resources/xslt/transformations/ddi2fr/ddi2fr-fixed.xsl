@@ -417,7 +417,7 @@
                         <xsl:value-of select="enoddi:get-type($context)"/>
                     </xsl:variable>
                     <!-- If it is number, we display this hint -->
-                    <xsl:if test="$type='number' and upper-case($numeric-example)='YES'">
+                    <xsl:if test="($type='integer' or $type='decimal') and upper-case($numeric-example)='YES'">
                         <xsl:variable name="number-of-decimals" select="enoddi:get-number-of-decimals($context)"/>
                         <xsl:variable name="number-format">
                             <xsl:value-of select="'#'"/>
@@ -477,7 +477,7 @@
                     <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Text"/>
                 </xsl:if>
             </xsl:when>
-            <xsl:when test="$type='number'">
+            <xsl:when test="$type='integer' or $type='decimal'">
                 <xsl:variable name="number-of-decimals">
                     <xsl:value-of select="enoddi:get-number-of-decimals($context)"/>
                 </xsl:variable>
@@ -746,9 +746,8 @@
         
         <xsl:choose>
             <xsl:when test="$ddi-type = ''"/>
-            <xsl:when test="$ddi-type = 'text' or $ddi-type = 'code' or $ddi-type = 'boolean'"/>
-            <xsl:when test="$ddi-type = 'number'">
-                <xsl:value-of select="'xs:decimal'"/>
+            <xsl:when test="$ddi-type = 'text' or $ddi-type = 'code' or $ddi-type = 'boolean'">
+                <xsl:value-of select="'xs:string'"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="concat('xs:',$ddi-type)"/>
