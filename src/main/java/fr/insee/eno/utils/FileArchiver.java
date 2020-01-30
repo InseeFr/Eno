@@ -16,7 +16,7 @@ public class FileArchiver {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileArchiver.class);
 	
 	/**
-     * Add a file into Zip archive.
+     * Add a file into Zip file.
      * 
      * @param filePath
      * @param zipStream

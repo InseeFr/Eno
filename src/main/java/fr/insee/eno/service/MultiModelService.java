@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.zip.ZipOutputStream;
 
@@ -31,13 +34,13 @@ public class MultiModelService {
 	private DDISplittingPreprocessor ddiSplitPreprocessor = new DDISplittingPreprocessor();
 
 	/**
-	 * It generates archive file using parameterizedGenerationService
+	 * It generates Zip file using parameterizedGenerationService
 	 * @param inputFile : the xml input File which contains multiple ddi instrument in the same file (required)
 	 * @param params : java object ENOParameter (required)
 	 * @param metadata : InputStream of metadata xml file (optional)
 	 * @param specificTreatment : InputStream of an xsl sheet (optional)
 	 * @param mapping : InputStream of a xml file using in FRModeleColtranePostProcessor (optional)
-	 * @return the zip archive file which contains all generated files
+	 * @return the Zip file which contains all generated files
 	 * @throws Exception
 	 */
 	public File generateQuestionnaire(File inputFile, ENOParameters params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception{
@@ -46,18 +49,21 @@ public class MultiModelService {
 		String surveyName = params.getParameters()!=null?params.getParameters().getCampagne():"test";
 		cleanTempFolder(surveyName);
 		
+		File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + surveyName);
+		
 		List<File> ddiFiles = ddiSplitPreprocessor.splitDDI(inputFile, surveyName);
 
-		File outputArchive = File.createTempFile(surveyName+"-", ".zip", Constants.TEMP_FOLDER);	
-		FileOutputStream fileOutputStream = new FileOutputStream(outputArchive);
+		Path outputZipPath = Paths.get(folderTemp.getAbsolutePath()+"/"+ surveyName+".zip");
+		Files.deleteIfExists(outputZipPath);
+		File outputZip = new File(outputZipPath.toString());
+		FileOutputStream fileOutputStream = new FileOutputStream(outputZip);
 		ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
-		LOGGER.info("Archive file initalized to :"+outputArchive.getAbsolutePath());
+		LOGGER.info("Archive file initalized to :"+outputZip.getAbsolutePath());
 		
 		for(File ddiFile : ddiFiles) {
 			File output = parameterizedGenerationService.generateQuestionnaire(ddiFile, params, metadata, specificTreatment, mapping);
 			FileArchiver.writeToZipFile(output.getAbsolutePath(), zipOutputStream);
 			FolderCleaner cleanService = new FolderCleaner();
-			File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + surveyName);
 			cleanService.specialCleaningFiles(folderTemp, output.getParentFile().getName());
 		}
 		
@@ -65,18 +71,18 @@ public class MultiModelService {
 		fileOutputStream.close();
 
 		LOGGER.info("MultiModel Generation of questionnaire -- END --");
-		return outputArchive;
+		return outputZip;
 
 	}
 
 	/**
-	 * It generates archive file using parameterizedGenerationService
+	 * It generates a Zip file using parameterizedGenerationService
 	 * @param inputFile : the xml input File which contains multiple ddi instrument in the same file (required)
 	 * @param params : InputStream of parameters xml file (required)
 	 * @param metadata : InputStream of metadata xml file (optional)
 	 * @param specificTreatment : InputStream of an xsl sheet (optional)
 	 * @param mapping : InputStream of a xml file using in FRModeleColtranePostProcessor (optional)
-	 * @return the zip archive file which contains all generated files
+	 * @return the Zip file which contains all generated files
 	 * @throws Exception
 	 */
 	public File generateQuestionnaire(File inputFile, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {		
@@ -87,19 +93,23 @@ public class MultiModelService {
 		ENOParameters enoParameters = valorizatorParameters.getParameters(new ByteArrayInputStream(paramsBytes));
 		String surveyName = enoParameters.getParameters()!=null?enoParameters.getParameters().getCampagne():"test";
 		cleanTempFolder(surveyName);
-
+		
+		File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + surveyName);
+		
+		
 		List<File> ddiFiles = ddiSplitPreprocessor.splitDDI(inputFile, surveyName);
 
-		File outputArchive = File.createTempFile(surveyName+"-", ".zip", Constants.TEMP_FOLDER);	
-		FileOutputStream fileOutputStream = new FileOutputStream(outputArchive);
+		Path outputZipPath = Paths.get(folderTemp.getAbsolutePath()+"/"+ surveyName+".zip");
+		Files.deleteIfExists(outputZipPath);
+		File outputZip = new File(outputZipPath.toString());
+		FileOutputStream fileOutputStream = new FileOutputStream(outputZip);
 		ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
-		LOGGER.info("Archive file initalized to :"+outputArchive.getAbsolutePath());
+		LOGGER.info("Archive file initalized to :"+outputZip.getAbsolutePath());
 		
 		for(File ddiFile : ddiFiles) {
 			File output = parameterizedGenerationService.generateQuestionnaire(ddiFile, new ByteArrayInputStream(paramsBytes), metadata, specificTreatment, mapping);
 			FileArchiver.writeToZipFile(output.getAbsolutePath(), zipOutputStream);
-			FolderCleaner cleanService = new FolderCleaner();
-			File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + surveyName);
+			FolderCleaner cleanService = new FolderCleaner();			
 			cleanService.specialCleaningFiles(folderTemp, output.getParentFile().getName());
 		}
 		
@@ -107,18 +117,18 @@ public class MultiModelService {
 		fileOutputStream.close();
 
 		LOGGER.info("MultiModel Generation of questionnaire -- END --");
-		return outputArchive;
+		return outputZip;
 
 	}
 
 	/**
-	 * It generates archive file using parameterizedGenerationService
+	 * It generates Zip file using parameterizedGenerationService
 	 * @param inputFile : the xml input File which contains multiple ddi instrument in the same file (required)
 	 * @param params : xml File of ENOParameter (required)
 	 * @param metadata : xml File of metadata (optional)
 	 * @param specificTreatment : xsl file of the xsl sheet (optional)
 	 * @param mapping : a xml File using in FRModeleColtranePostProcessor (optional)
-	 * @return the zip archive file which contains all generated file
+	 * @return the Zip file which contains all generated file
 	 * @throws Exception
 	 */
 	public File generateQuestionnaire(File inputFile, File params, File metadata, File specificTreatment, File mapping)  throws Exception{

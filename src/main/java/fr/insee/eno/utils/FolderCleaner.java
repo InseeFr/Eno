@@ -73,13 +73,13 @@ public class FolderCleaner {
 	 * @throws IOException
 	 *             : FileNotfound / NoAccess mainly
 	 */
-	public void specialCleaningFiles(File folder, String fileName) throws IOException {
-		logger.debug("Special Cleaning : " + folder+" (deleting files generated with '"+fileName+"' ddi model)");
+	public void specialCleaningFiles(File folder, String modelName) throws IOException {
+		logger.debug("Special Cleaning : " + folder+" (deleting files generated with '"+modelName+"' ddi model)");
 		if (folder.exists() && Files.isDirectory(folder.toPath())) {
 			File[] matchCleaningInput = folder.listFiles(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String name) {
-					return name.startsWith(fileName);
+					return name.startsWith(modelName);
 				}
 			});
 			for(File file : matchCleaningInput) {
