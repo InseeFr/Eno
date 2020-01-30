@@ -490,13 +490,13 @@
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
             </xsl:apply-templates>
             <!-- List all linked variables to loop-->
-            <xsl:apply-templates select="enoddi33:get-loop-related-variables($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopVariables', .)" tunnel="yes"/>
+            <xsl:apply-templates select="enoddi33:get-scope-variables($source-context)" mode="source">
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-TableLoopVariables', .)" tunnel="yes"/>
             </xsl:apply-templates>
         </l:VariableGroup>
     </xsl:template>
 
-    <xsl:template match="driver-LoopVariables//Variable" mode="model">
+    <xsl:template match="driver-TableLoopVariables//Variable" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:VariableReference>
@@ -510,15 +510,16 @@
     <xsl:template match="driver-VariableGroup//QuestionDynamicTable//ResponseDomain | driver-VariableGroup//QuestionDynamicTable//Clarification" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-
-        <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
-
-        <r:VariableReference>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi33:get-id($relatedVariable)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-            <r:TypeOfObject>Variable</r:TypeOfObject>
-        </r:VariableReference>
+        <!-- Check if the variable isn't linked to a table or loop by scope to avoid duplication  -->
+        <xsl:if test="not(enoddi33:get-scope-id($source-context)!='')">
+            <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
+            <r:VariableReference>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="enoddi33:get-id($relatedVariable)"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                <r:TypeOfObject>Variable</r:TypeOfObject>
+            </r:VariableReference>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="driver-VariableGlobal//Variable" mode="model">
