@@ -1,6 +1,7 @@
 package fr.insee.eno.utils;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 
@@ -61,6 +62,29 @@ public class FolderCleaner {
 		logger.debug("Cleaning " + folder);
 		if (folder.exists() && Files.isDirectory(folder.toPath())) {
 			FileUtils.cleanDirectory(folder);
+		}		
+	}
+	
+	/**
+	 * Generic method to clean one folder
+	 * 
+	 * @param folder
+	 *            : the folder to be cleaned
+	 * @throws IOException
+	 *             : FileNotfound / NoAccess mainly
+	 */
+	public void specialCleaningFiles(File folder, String fileName) throws IOException {
+		logger.debug("Special Cleaning : " + folder+" (deleting files generated with '"+fileName+"' ddi model)");
+		if (folder.exists() && Files.isDirectory(folder.toPath())) {
+			File[] matchCleaningInput = folder.listFiles(new FilenameFilter() {
+				@Override
+				public boolean accept(File dir, String name) {
+					return name.startsWith(fileName);
+				}
+			});
+			for(File file : matchCleaningInput) {
+				Files.delete(file.toPath());
+			}
 		}		
 	}
 }
