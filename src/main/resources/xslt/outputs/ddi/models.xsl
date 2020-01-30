@@ -486,14 +486,17 @@
             <l:VariableGroupName>
                 <r:String><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
             </l:VariableGroupName>
-            <!-- List all linked variables to table or loop -->
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+            </xsl:apply-templates>
+            <!-- List all linked variables to loop-->
             <xsl:apply-templates select="enoddi33:get-loop-related-variables($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopTableVariables', .)" tunnel="yes"/>
+                <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopVariables', .)" tunnel="yes"/>
             </xsl:apply-templates>
         </l:VariableGroup>
     </xsl:template>
 
-    <xsl:template match="driver-LoopTableVariables//Variable" mode="model">
+    <xsl:template match="driver-LoopVariables//Variable" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:VariableReference>
