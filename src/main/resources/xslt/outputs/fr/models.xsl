@@ -361,7 +361,16 @@
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
             <xsl:if test="$type != '' and (self::CalculatedVariable or self::ResponseElement)">
-                <xsl:attribute name="type" select="$type"/>
+                <xsl:attribute name="type">
+                    <xsl:choose>
+                        <xsl:when test="$type = 'text' or $type = 'code' or $type = 'boolean'">
+                            <xsl:value-of select="'xs:string'"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat('xs:',$type)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
             </xsl:if>
             <xsl:if test="$required">
                 <xsl:attribute name="required" select="'true()'"/>
@@ -3178,7 +3187,7 @@
                                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                                                                 </xsl:call-template>
-                                                                <xsl:value-of select="concat('number(if (',$variable-business-name,'/string()='''') then ')"/>
+                                                                <xsl:value-of select="concat('xs:',$variable-representation,'(if (',$variable-business-name,'/string()='''') then ')"/>
                                                                 <xsl:if test="regex-group(2) = '&gt;'">
                                                                     <xsl:value-of select="'-'"/>
                                                                 </xsl:if>
@@ -3194,7 +3203,7 @@
                                                                 <!-- e.g.  variableId + variable2Id becomes (if (variableName/string()='') then 0 else variableName) + (if (variableName/string()='' then 0 else variableName) -->
                                                                 <xsl:for-each select="tokenize($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
                                                                     <xsl:if test="not(position()=1)">
-                                                                        <xsl:value-of select="concat('number(if (',$variable-business-name,'/string()='''') then 0 else ',$variable-business-name,')')"/>
+                                                                        <xsl:value-of select="concat('xs:',$variable-representation,'(if (',$variable-business-name,'/string()='''') then 0 else ',$variable-business-name,')')"/>
                                                                     </xsl:if>
                                                                     <xsl:call-template name="replaceVariablesInFormula">
                                                                         <xsl:with-param name="formula" select="current()"/>
