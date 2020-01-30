@@ -4,7 +4,6 @@ import java.io.File;
 
 import org.junit.Test;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
 import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
@@ -15,6 +14,7 @@ import fr.insee.eno.postprocessing.PDFSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.PDFTableColumnPostprocessorFake;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
+import fr.insee.eno.service.GenerationService;
 
 public class DummyTestDDI2FO {
 		

@@ -1,4 +1,4 @@
-package fr.insee.eno;
+package fr.insee.eno.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -30,13 +30,31 @@ public class ParameterizedGenerationService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ParameterizedGenerationService.class);
 
-	private PipelineGenerator pipelineGenerator = new PipeLineGeneratorImpl();
+	private PipelineGenerator pipelineGenerator;
 	
-	private ValorizatorParameters valorizatorParameters = new ValorizatorParametersImpl();
+	private ValorizatorParameters valorizatorParameters;
 	
-	private Validator validator = new ValidatorImpl();
+	private Validator validator;
 	
-	private SchemaValidator schemaValidator = new SchemaValidatorImpl();
+	private SchemaValidator schemaValidator ;
+	
+	private boolean cleaningFolder;
+	
+	public ParameterizedGenerationService() {
+		this.pipelineGenerator = new PipeLineGeneratorImpl();
+		this.valorizatorParameters = new ValorizatorParametersImpl();
+		this.validator = new ValidatorImpl();
+		this.schemaValidator = new SchemaValidatorImpl();
+		this.cleaningFolder=true;
+	}
+	
+	public ParameterizedGenerationService(boolean cleaningFolder) {
+		this.pipelineGenerator = new PipeLineGeneratorImpl();
+		this.valorizatorParameters = new ValorizatorParametersImpl();
+		this.validator = new ValidatorImpl();
+		this.schemaValidator = new SchemaValidatorImpl();
+		this.cleaningFolder=cleaningFolder;
+	}
 
 	/**
 	 * It generates File using transformations defined in ENOParameters
@@ -55,6 +73,8 @@ public class ParameterizedGenerationService {
 		ValidationMessage valid = validator.validate(params);
 		if(valid.isValid()) {
 			GenerationService generationService = pipelineGenerator.setPipeLine(pipeline);
+			generationService.setCleaningFolder(cleaningFolder);
+			
 			ByteArrayOutputStream paramsFinal = valorizatorParameters.mergeParameters(params);
 			LOGGER.info("Setting paramaters to the pipeline.");
 			generationService.setParameters(paramsFinal);
@@ -111,6 +131,7 @@ public class ParameterizedGenerationService {
 					LOGGER.info(valid.getMessage());
 					Pipeline pipeline = enoParameters.getPipeline();
 					GenerationService generationService = pipelineGenerator.setPipeLine(pipeline);
+					generationService.setCleaningFolder(cleaningFolder);
 					ByteArrayOutputStream paramsFinal =  valorizatorParameters.mergeParameters(enoParameters);
 					LOGGER.info("Setting paramaters to the pipeline.");
 					generationService.setParameters(paramsFinal);

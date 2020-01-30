@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
 import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
@@ -18,6 +17,7 @@ import fr.insee.eno.postprocessing.PDFSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.PDFTableColumnPostprocessorFake;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
+import fr.insee.eno.service.GenerationService;
 
 public class TestDDIToFO {
 	

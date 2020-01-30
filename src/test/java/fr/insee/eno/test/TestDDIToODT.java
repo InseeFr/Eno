@@ -7,10 +7,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2ODTGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.preprocessing.DDIPreprocessor;
+import fr.insee.eno.service.GenerationService;
 
 public class TestDDIToODT {
 	

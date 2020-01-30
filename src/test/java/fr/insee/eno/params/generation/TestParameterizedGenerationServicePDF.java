@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.ParameterizedGenerationService;
+import fr.insee.eno.service.ParameterizedGenerationService;
 import fr.insee.eno.test.XMLDiff;
 
 public class TestParameterizedGenerationServicePDF {
