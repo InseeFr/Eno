@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -23,14 +24,12 @@ public class FolderCleaner {
 
 	/**
 	 * Method representing the Clean ant target : Cleaning the current
-	 * questionnaireFolder (with the created survey name) Cleaning the temp
-	 * folder Cleaning the test folder
+	 * questionnaireFolder (with the created survey name) Cleaning the temp folder
+	 * Cleaning the test folder
 	 * 
-	 * @param questionnaireFolder
-	 *            : the folder that has to be either created or cleaned (having
-	 *            the survey's name)
-	 * @throws Exception
-	 *             : FileNotfound / NoAccess mainly
+	 * @param questionnaireFolder : the folder that has to be either created or
+	 *                            cleaned (having the survey's name)
+	 * @throws Exception : FileNotfound / NoAccess mainly
 	 */
 	public void cleanTarget(String questionnaireFolder) throws Exception {
 
@@ -53,38 +52,49 @@ public class FolderCleaner {
 	/**
 	 * Generic method to clean one folder
 	 * 
-	 * @param folder
-	 *            : the folder to be cleaned
-	 * @throws IOException
-	 *             : FileNotfound / NoAccess mainly
+	 * @param folder : the folder to be cleaned
+	 * @throws IOException : FileNotfound / NoAccess mainly
 	 */
 	public void cleanOneFolder(File folder) throws IOException {
 		logger.debug("Cleaning " + folder);
 		if (folder.exists() && Files.isDirectory(folder.toPath())) {
 			FileUtils.cleanDirectory(folder);
-		}		
+		}
 	}
-	
+
 	/**
-	 * Generic method to clean one folder
+	 * Method to clean all files in folder except one
 	 * 
-	 * @param folder
-	 *            : the folder to be cleaned
-	 * @throws IOException
-	 *             : FileNotfound / NoAccess mainly
+	 * @param folder : the folder to be cleaned
+	 * @param generatedFile : the file to not delete
+	 * @throws IOException : FileNotfound / NoAccess mainly
 	 */
-	public void specialCleaningFiles(File folder, String modelName) throws IOException {
-		logger.debug("Special Cleaning : " + folder+" (deleting files generated with '"+modelName+"' ddi model)");
+	public void cleanOneFolderExceptGeneratedFile(File folder, File generatedFile) throws IOException  {
+		logger.debug("Special cleaning into : " + folder+" (deleting all files except : "+generatedFile.getName() +")");
 		if (folder.exists() && Files.isDirectory(folder.toPath())) {
 			File[] matchCleaningInput = folder.listFiles(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String name) {
-					return name.startsWith(modelName);
+					if(Files.isDirectory(Paths.get(dir+"/"+name))){
+						try {
+							cleanOneFolderExceptGeneratedFile(Paths.get(dir+"/"+name).toFile(),generatedFile);
+						} catch (IOException e) {
+							logger.error(e.getMessage());
+						}
+					}
+					return !name.equals(generatedFile.getName());
 				}
 			});
 			for(File file : matchCleaningInput) {
-				Files.delete(file.toPath());
-			}
-		}		
+				if(Files.isDirectory(file.toPath())) {
+					if(file.list().length==0) {
+						FileUtils.forceDelete(file);
+					}
+				}
+				else {
+					FileUtils.forceDelete(file);
+				}
+			}		
+		}
 	}
 }
