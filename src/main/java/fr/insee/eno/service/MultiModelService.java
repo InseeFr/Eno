@@ -8,15 +8,22 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.params.ValorizatorParameters;
 import fr.insee.eno.params.ValorizatorParametersImpl;
@@ -28,9 +35,6 @@ public class MultiModelService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MultiModelService.class);
 
-	private ParameterizedGenerationService parameterizedGenerationService = new ParameterizedGenerationService(false);
-	private ValorizatorParameters valorizatorParameters = new ValorizatorParametersImpl();
-	
 	private DDISplittingPreprocessor ddiSplitPreprocessor = new DDISplittingPreprocessor();
 
 	/**
@@ -44,31 +48,47 @@ public class MultiModelService {
 	 * @throws Exception
 	 */
 	public File generateQuestionnaire(File inputFile, ENOParameters params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception{
-		LOGGER.info("MultiModel Generation of questionnaire -- STARTED --");		
+		LOGGER.info("MultiModel Generation of questionnaire -- STARTED --");
+		
+		byte[] metadataBytes = metadata!=null ? IOUtils.toByteArray(metadata):null;
+		byte[] specificTreatmentBytes = specificTreatment !=null ? IOUtils.toByteArray(specificTreatment):null;
+		byte[] mappingBytes = mapping !=null ? IOUtils.toByteArray(mapping):null;
 
 		String surveyName = params.getParameters()!=null?params.getParameters().getCampagne():"test";
 		cleanTempFolder(surveyName);
-		
+
 		File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + surveyName);
-		
+
 		List<File> ddiFiles = ddiSplitPreprocessor.splitDDI(inputFile, surveyName);
 
+		ExecutorService generationThreadsService = Executors.newFixedThreadPool(ddiFiles.size());
 		Path outputZipPath = Paths.get(folderTemp.getAbsolutePath()+"/"+ surveyName+".zip");
 		Files.deleteIfExists(outputZipPath);
 		File outputZip = new File(outputZipPath.toString());
-		FileOutputStream fileOutputStream = new FileOutputStream(outputZip);
-		ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
-		LOGGER.info("Archive file initalized to :"+outputZip.getAbsolutePath());
-		
-		for(File ddiFile : ddiFiles) {
-			File output = parameterizedGenerationService.generateQuestionnaire(ddiFile, params, metadata, specificTreatment, mapping);
-			FileArchiver.writeToZipFile(output.getAbsolutePath(), zipOutputStream);
-			FolderCleaner cleanService = new FolderCleaner();
-			cleanService.specialCleaningFiles(folderTemp, output.getParentFile().getName());
+
+		try {
+			List<Callable<File>> callableThreads = initThreads(ddiFiles,params,metadataBytes,specificTreatmentBytes,mappingBytes);
+			List<Future<File>> outputsFutureFile = generationThreadsService.invokeAll(callableThreads);
+
+			FileOutputStream fileOutputStream = new FileOutputStream(outputZip);
+			ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
+			LOGGER.info("Archive file initalized to :"+outputZip.getAbsolutePath());
+
+			for(Future<File> future : outputsFutureFile) {
+				FileArchiver.writeToZipFile(surveyName, future.get().getAbsolutePath(), zipOutputStream);
+			}
+
+			zipOutputStream.close();
+			fileOutputStream.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new EnoGenerationException("An error was occured during thread execution");
+		} finally {
+			if(generationThreadsService != null) {generationThreadsService.shutdown();}
+			FolderCleaner cleanerService = new FolderCleaner();
+			cleanerService.cleanOneFolderExceptGeneratedFile(folderTemp, outputZip);
 		}
-		
-		zipOutputStream.close();
-		fileOutputStream.close();
 
 		LOGGER.info("MultiModel Generation of questionnaire -- END --");
 		return outputZip;
@@ -88,8 +108,13 @@ public class MultiModelService {
 	public File generateQuestionnaire(File inputFile, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {		
 		LOGGER.info("MultiModel Generation of questionnaire -- STARTED --");
 		
-		byte[] paramsBytes = IOUtils.toByteArray(params);
-		
+		ValorizatorParameters valorizatorParameters = new ValorizatorParametersImpl();
+
+		byte[] paramsBytes = params!=null ? IOUtils.toByteArray(params):null;
+		byte[] metadataBytes = metadata!=null ? IOUtils.toByteArray(metadata):null;
+		byte[] specificTreatmentBytes = specificTreatment !=null ? IOUtils.toByteArray(specificTreatment):null;
+		byte[] mappingBytes = mapping !=null ? IOUtils.toByteArray(mapping):null;
+
 		ENOParameters enoParameters = valorizatorParameters.getParameters(new ByteArrayInputStream(paramsBytes));
 		String surveyName = enoParameters.getParameters()!=null?enoParameters.getParameters().getCampagne():"test";
 		cleanTempFolder(surveyName);
@@ -99,22 +124,34 @@ public class MultiModelService {
 		
 		List<File> ddiFiles = ddiSplitPreprocessor.splitDDI(inputFile, surveyName);
 
+		ExecutorService generationThreadsService = Executors.newFixedThreadPool(ddiFiles.size());
 		Path outputZipPath = Paths.get(folderTemp.getAbsolutePath()+"/"+ surveyName+".zip");
 		Files.deleteIfExists(outputZipPath);
 		File outputZip = new File(outputZipPath.toString());
-		FileOutputStream fileOutputStream = new FileOutputStream(outputZip);
-		ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
-		LOGGER.info("Archive file initalized to :"+outputZip.getAbsolutePath());
-		
-		for(File ddiFile : ddiFiles) {
-			File output = parameterizedGenerationService.generateQuestionnaire(ddiFile, new ByteArrayInputStream(paramsBytes), metadata, specificTreatment, mapping);
-			FileArchiver.writeToZipFile(output.getAbsolutePath(), zipOutputStream);
-			FolderCleaner cleanService = new FolderCleaner();			
-			cleanService.specialCleaningFiles(folderTemp, output.getParentFile().getName());
+
+		try {
+			List<Callable<File>> callableThreads = initThreads(ddiFiles,paramsBytes,metadataBytes,specificTreatmentBytes,mappingBytes);
+			List<Future<File>> outputsFutureFile = generationThreadsService.invokeAll(callableThreads);
+
+			FileOutputStream fileOutputStream = new FileOutputStream(outputZip);
+			ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
+			LOGGER.info("Archive file initalized to :"+outputZip.getAbsolutePath());
+
+			for(Future<File> future : outputsFutureFile) {
+				FileArchiver.writeToZipFile(surveyName, future.get().getAbsolutePath(), zipOutputStream);
+			}
+
+			zipOutputStream.close();
+			fileOutputStream.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new EnoGenerationException("An error was occured during thread execution");
+		} finally {
+			if(generationThreadsService != null) {generationThreadsService.shutdown();}
+			FolderCleaner cleanerService = new FolderCleaner();
+			cleanerService.cleanOneFolderExceptGeneratedFile(folderTemp, outputZip);
 		}
-		
-		zipOutputStream.close();
-		fileOutputStream.close();
 
 		LOGGER.info("MultiModel Generation of questionnaire -- END --");
 		return outputZip;
@@ -152,7 +189,85 @@ public class MultiModelService {
 		return output;
 
 	}
+
+	/**
+	 * It creates a list of Callable<File> in order to create multiple threads (one per file)
+	 * @param ddiFiles : list of input files
+	 * @param paramsBytes
+	 * @param metadataBytes
+	 * @param specificTreatmentBytes
+	 * @param mappingBytes
+	 * @return list of Callable<File> 
+	 * @throws IOException
+	 */
+	private List<Callable<File>> initThreads(List<File> ddiFiles, byte[] paramsBytes, byte[] metadataBytes, byte[] specificTreatmentBytes, byte[] mappingBytes) throws IOException{
+		LOGGER.info("Creation of new threads to transform the models in parallel");
+		List<Callable<File>> callableThreads = new ArrayList<Callable<File>>();
+		for(File ddiFile : ddiFiles) {
+			File movedFile = moveFile(ddiFile);
+			callableThreads.add( ()-> {
+				ParameterizedGenerationService parameterizedGenerationServiceThread = new ParameterizedGenerationService(false,getTempSurveyFolder(movedFile));
+				File output = parameterizedGenerationServiceThread.generateQuestionnaire(
+						movedFile, 
+						paramsBytes!=null? new ByteArrayInputStream(paramsBytes):null, 
+						metadataBytes!=null? new ByteArrayInputStream(metadataBytes):null,
+						specificTreatmentBytes!=null ? new ByteArrayInputStream(specificTreatmentBytes):null, 
+						mappingBytes!=null ? new ByteArrayInputStream(mappingBytes):null);
+				return output;});
+		}
+		return callableThreads;
+
+	}
 	
+	/**
+	 * It creates a list of Callable<File> in order to create multiple threads (one per file)
+	 * @param ddiFiles : list of input files
+	 * @param enoParameters
+	 * @param metadataBytes
+	 * @param specificTreatmentBytes
+	 * @param mappingBytes
+	 * @return list of Callable<File> 
+	 * @throws IOException
+	 */
+	private List<Callable<File>> initThreads(List<File> ddiFiles, ENOParameters enoParameters, byte[] metadataBytes, byte[] specificTreatmentBytes, byte[] mappingBytes) throws IOException{
+		LOGGER.info("Creation of new threads to transform the models in parallel");
+		List<Callable<File>> callableThreads = new ArrayList<Callable<File>>();
+		for(File ddiFile : ddiFiles) {
+			File movedFile = moveFile(ddiFile);
+			callableThreads.add( ()-> {
+				ParameterizedGenerationService parameterizedGenerationServiceThread = new ParameterizedGenerationService(false,getTempSurveyFolder(movedFile));
+				File output = parameterizedGenerationServiceThread.generateQuestionnaire(
+						movedFile, 
+						enoParameters, 
+						metadataBytes!=null? new ByteArrayInputStream(metadataBytes):null,
+						specificTreatmentBytes!=null ? new ByteArrayInputStream(specificTreatmentBytes):null, 
+						mappingBytes!=null ? new ByteArrayInputStream(mappingBytes):null);
+				return output;});
+		}
+		return callableThreads;
+
+	}
+	
+	/**
+	 * Move a file to a sub-directory whose name is the file's name
+	 * The goal is to prevent parallel treatments from interfering
+	 * @param file to move
+	 * @return the file moved
+	 * @throws IOException
+	 */
+	private File moveFile(File file) throws IOException {
+		Path newDirectoryPath = Paths.get(file.getParent() + "/"+ FilenameUtils.removeExtension(file.getName()));
+		Files.createDirectories(newDirectoryPath);	
+		Path movedPath = Paths.get(newDirectoryPath.toString()+"/"+file.getName());
+		Files.move(file.toPath(), movedPath);
+		return movedPath.toFile();
+	}
+	
+	
+	private String getTempSurveyFolder(File ddifile) {
+		return ddifile.getParentFile().getParentFile().getName() + "/" + ddifile.getParentFile().getName();
+	}
+
 	/**
 	 * Clean the temp dir if it exists
 	 * 
@@ -160,7 +275,6 @@ public class MultiModelService {
 	 * 
 	 */
 	public void cleanTempFolder(String name) throws IOException {
-		FolderCleaner cleanService = new FolderCleaner();
 		if (Constants.TEMP_FOLDER_PATH != null) {
 			File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + name);
 			cleanTempFolder(folderTemp);
