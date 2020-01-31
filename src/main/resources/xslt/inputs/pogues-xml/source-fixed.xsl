@@ -335,5 +335,15 @@
         <xsl:variable name="response-id" select="enopogues:get-clarified-response(.)"/>
         <xsl:value-of select="enopogues:get-attachment-position($response-id)"/>
     </xsl:template>
-    
+
+    <xsl:template match="pogues:Response" mode="enopogues:get-scope-id">
+        <xsl:variable name="idVariable" select="pogues:CollectedVariableReference"/>
+        <xsl:value-of select="//pogues:Variable[@id=$idVariable]/pogues:Scope"/>
+    </xsl:template>
+
+    <xsl:template match="pogues:ClarificationQuestion" mode="enopogues:get-scope-id">
+        <xsl:variable name="idVariable" select="pogues:Response/pogues:CollectedVariableReference"/>
+        <xsl:value-of select="//pogues:Variable[@id=$idVariable]/pogues:Scope"/>
+    </xsl:template>
+
 </xsl:stylesheet>
