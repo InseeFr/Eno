@@ -20,16 +20,16 @@ import fr.insee.eno.transform.xsl.XslTransformation;
  */
 public class DDISplittingPreprocessor  {
 
-	private static final Logger logger = LoggerFactory.getLogger(DDISplittingPreprocessor.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DDISplittingPreprocessor.class);
 
 	private XslTransformation saxonService = new XslTransformation();
 
 	public List<File> splitDDI(File inputFile, String survey) throws Exception {
-		logger.info("DDI splitting preprocessing Target : START");
+		LOGGER.info("DDI splitting preprocessing Target : START");
 
 		String sUB_TEMP_FOLDER = Constants.sUB_TEMP_FOLDER(survey);
 		// ----- Dereferencing
-		logger.debug("Dereferencing : -Input : " + inputFile + " -Output : " + Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER)
+		LOGGER.debug("Dereferencing : -Input : " + inputFile + " -Output : " + Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER)
 		+ " -Stylesheet : " + Constants.UTIL_DDI_SPLITTING_XSL + " -Parameters : " + sUB_TEMP_FOLDER);
 
 		InputStream isDDI_DEREFERENCING_XSL = Constants.getInputStreamFromPath(Constants.UTIL_DDI_SPLITTING_XSL);
@@ -47,7 +47,7 @@ public class DDISplittingPreprocessor  {
 		isDDI_DEREFERENCING_XSL.close();
 		osTEMP_NULL_TMP.close();
 		// ----- Cleaning
-		logger.debug("Cleaning target");
+		LOGGER.debug("Cleaning target");
 		File f = Constants.sUB_TEMP_FOLDER_FILE(survey);
 		File[] matchCleaningInput = f.listFiles(new FilenameFilter() {
 
@@ -58,12 +58,11 @@ public class DDISplittingPreprocessor  {
 		});
 
 		List<File> outputFiles = new ArrayList<File>();
-		String cleaningInput = null;
 
-		logger.debug("Searching matching files in : " + sUB_TEMP_FOLDER);
+		LOGGER.debug("Searching matching files in : " + sUB_TEMP_FOLDER);
 		for (File file : matchCleaningInput) {
 			if(!file.isDirectory()) {
-				logger.debug("Found : " + file.getAbsolutePath());
+				LOGGER.debug("Found : " + file.getAbsolutePath());
 				outputFiles.add(file);
 			}
 		}
@@ -71,7 +70,7 @@ public class DDISplittingPreprocessor  {
 			throw new EnoGenerationException("DDI Splitting produced no file.");
 		}
 
-		logger.debug("DDI splitting preprocessing : END");
+		LOGGER.debug("DDI splitting preprocessing : END");
 		return outputFiles;
 	}
 
