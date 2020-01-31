@@ -15,6 +15,7 @@ public class FileArchiver {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileArchiver.class);
 	
+	private static final String ZIP_ENTRY_PATH_FORMAT = "orbeon/fr/%s/%s/form/%s";
 	/**
      * Add a file into Zip file.
      * 
@@ -31,7 +32,8 @@ public class FileArchiver {
         File file = new File(filePath);
         FileInputStream fileIS = new FileInputStream(file);
         
-        ZipEntry zipEntry = new ZipEntry(surveyName + "/" + file.getParentFile().getName()+"/form/"+file.getName());
+        ZipEntry zipEntry = new ZipEntry(
+        		String.format(ZIP_ENTRY_PATH_FORMAT, surveyName, file.getParentFile().getName(),file.getName()));
         
         zipStream.putNextEntry(zipEntry);
         zipStream.write(IOUtils.toByteArray(fileIS));
