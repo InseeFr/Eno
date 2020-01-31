@@ -82,10 +82,13 @@ public class MultiModelService {
 			fileOutputStream.close();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			throw new EnoGenerationException("An error was occured during thread execution");
 		} finally {
-			if(generationThreadsService != null) {generationThreadsService.shutdown();}
+			if(generationThreadsService != null) {
+				generationThreadsService.shutdown();
+			}
+			LOGGER.info("Cleaning temp files into :"+folderTemp);
 			FolderCleaner cleanerService = new FolderCleaner();
 			cleanerService.cleanOneFolderExceptGeneratedFile(folderTemp, outputZip);
 		}
@@ -145,10 +148,13 @@ public class MultiModelService {
 			fileOutputStream.close();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 			throw new EnoGenerationException("An error was occured during thread execution");
 		} finally {
-			if(generationThreadsService != null) {generationThreadsService.shutdown();}
+			if(generationThreadsService != null) {
+				generationThreadsService.shutdown();
+			}
+			LOGGER.info("Cleaning temp files into :"+folderTemp);
 			FolderCleaner cleanerService = new FolderCleaner();
 			cleanerService.cleanOneFolderExceptGeneratedFile(folderTemp, outputZip);
 		}
