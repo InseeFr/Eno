@@ -23,19 +23,20 @@ public class FileArchiver {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public static void writeToZipFile(String filePath, ZipOutputStream zipStream)
+    public static void writeToZipFile(String surveyName, String filePath, ZipOutputStream zipStream)
             throws FileNotFoundException, IOException {
+    	
     	LOGGER.info("Writing file : '"+filePath+ "' to archive file.");
 
         File file = new File(filePath);
-
-    	LOGGER.info("Parent directory :"+file.getParentFile().getName());
-        FileInputStream fis = new FileInputStream(file);
-        ZipEntry zipEntry = new ZipEntry(file.getParentFile().getName()+"/"+file.getName());
+        FileInputStream fileIS = new FileInputStream(file);
+        
+        ZipEntry zipEntry = new ZipEntry(surveyName + "/" + file.getParentFile().getName()+"/form/"+file.getName());
+        
         zipStream.putNextEntry(zipEntry);
-        zipStream.write(IOUtils.toByteArray(fis));
+        zipStream.write(IOUtils.toByteArray(fileIS));
         zipStream.closeEntry();
-        fis.close();
+        fileIS.close();
     }
 
 }
