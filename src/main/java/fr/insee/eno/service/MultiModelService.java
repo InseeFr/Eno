@@ -67,8 +67,8 @@ public class MultiModelService {
 		File outputZip = new File(outputZipPath.toString());
 
 		try {
-			List<Callable<File>> callableThreads = initThreads(ddiFiles,params,metadataBytes,specificTreatmentBytes,mappingBytes);
-			List<Future<File>> outputsFutureFile = generationThreadsService.invokeAll(callableThreads);
+			List<Callable<File>> generationTasks = initGenerationTasks(ddiFiles,params,metadataBytes,specificTreatmentBytes,mappingBytes);
+			List<Future<File>> outputsFutureFile = generationThreadsService.invokeAll(generationTasks);
 
 			FileOutputStream fileOutputStream = new FileOutputStream(outputZip);
 			ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
@@ -133,8 +133,8 @@ public class MultiModelService {
 		File outputZip = new File(outputZipPath.toString());
 
 		try {
-			List<Callable<File>> callableThreads = initThreads(ddiFiles,paramsBytes,metadataBytes,specificTreatmentBytes,mappingBytes);
-			List<Future<File>> outputsFutureFile = generationThreadsService.invokeAll(callableThreads);
+			List<Callable<File>> generationTasks = initGenerationTasks(ddiFiles,paramsBytes,metadataBytes,specificTreatmentBytes,mappingBytes);
+			List<Future<File>> outputsFutureFile = generationThreadsService.invokeAll(generationTasks);
 
 			FileOutputStream fileOutputStream = new FileOutputStream(outputZip);
 			ZipOutputStream zipOutputStream = new ZipOutputStream(fileOutputStream);
@@ -206,12 +206,12 @@ public class MultiModelService {
 	 * @return list of Callable<File> 
 	 * @throws IOException
 	 */
-	private List<Callable<File>> initThreads(List<File> ddiFiles, byte[] paramsBytes, byte[] metadataBytes, byte[] specificTreatmentBytes, byte[] mappingBytes) throws IOException{
-		LOGGER.info("Creation of new threads to transform the models in parallel");
-		List<Callable<File>> callableThreads = new ArrayList<Callable<File>>();
+	private List<Callable<File>> initGenerationTasks(List<File> ddiFiles, byte[] paramsBytes, byte[] metadataBytes, byte[] specificTreatmentBytes, byte[] mappingBytes) throws IOException{
+		LOGGER.info("Creation of new Tasks (which will be executed on separated threads) to transform the models in parallel");
+		List<Callable<File>> generationTasks = new ArrayList<Callable<File>>();
 		for(File ddiFile : ddiFiles) {
 			File movedFile = moveFile(ddiFile);
-			callableThreads.add( ()-> {
+			generationTasks.add( ()-> {
 				ParameterizedGenerationService parameterizedGenerationServiceThread = new ParameterizedGenerationService(false,getTempSurveyFolder(movedFile));
 				File output = parameterizedGenerationServiceThread.generateQuestionnaire(
 						movedFile, 
@@ -221,7 +221,7 @@ public class MultiModelService {
 						mappingBytes!=null ? new ByteArrayInputStream(mappingBytes):null);
 				return output;});
 		}
-		return callableThreads;
+		return generationTasks;
 
 	}
 	
@@ -235,12 +235,12 @@ public class MultiModelService {
 	 * @return list of Callable<File> 
 	 * @throws IOException
 	 */
-	private List<Callable<File>> initThreads(List<File> ddiFiles, ENOParameters enoParameters, byte[] metadataBytes, byte[] specificTreatmentBytes, byte[] mappingBytes) throws IOException{
-		LOGGER.info("Creation of new threads to transform the models in parallel");
-		List<Callable<File>> callableThreads = new ArrayList<Callable<File>>();
+	private List<Callable<File>> initGenerationTasks(List<File> ddiFiles, ENOParameters enoParameters, byte[] metadataBytes, byte[] specificTreatmentBytes, byte[] mappingBytes) throws IOException{
+		LOGGER.info("Creation of new Tasks (which will be executed on separated threads) to transform the models in parallel");
+		List<Callable<File>> generationTasks = new ArrayList<Callable<File>>();
 		for(File ddiFile : ddiFiles) {
 			File movedFile = moveFile(ddiFile);
-			callableThreads.add( ()-> {
+			generationTasks.add( ()-> {
 				ParameterizedGenerationService parameterizedGenerationServiceThread = new ParameterizedGenerationService(false,getTempSurveyFolder(movedFile));
 				File output = parameterizedGenerationServiceThread.generateQuestionnaire(
 						movedFile, 
@@ -250,7 +250,7 @@ public class MultiModelService {
 						mappingBytes!=null ? new ByteArrayInputStream(mappingBytes):null);
 				return output;});
 		}
-		return callableThreads;
+		return generationTasks;
 
 	}
 	
