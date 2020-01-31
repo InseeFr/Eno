@@ -92,7 +92,9 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 		input = input.replaceAll(XPATH_DIVISION_FUNCTION, VTL_DIVISION_FUNCTION);
 		String finalString="";String context="";
 		List<String> listContext = new ArrayList<String>();
-		boolean isBetweenRealQuote=false;
+		boolean isBetweenRealDoubleQuote=false;
+		boolean isBetweenRealSimpleQuote=false;
+		String contentBetweenSimpleQuote="";
 		for(int i=0;i<input.length();i++) {
 			char c = input.charAt(i);
 			context = (c==',') ? "" : context+c;
@@ -115,12 +117,23 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 				break;
 			case '\"':
 				if(getLastChar(finalString)!='\\') {
-					isBetweenRealQuote=!isBetweenRealQuote;
-				}				
+					isBetweenRealDoubleQuote=!isBetweenRealDoubleQuote;					
+				}
 				finalString+=c;
 				break;
+			case '\'':
+				// remove "'" around number
+				finalString += c;				
+				if(getLastChar(finalString)!='\\') {
+					isBetweenRealSimpleQuote=!isBetweenRealSimpleQuote;
+					if(isNumeric(contentBetweenSimpleQuote)) {
+						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", contentBetweenSimpleQuote);
+					}					
+					contentBetweenSimpleQuote="";
+				}
+				break;
 			case ',':
-				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) && !isBetweenRealQuote ? " "+VTL_CONCAT_FUNCTION+" " : c;
+				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) && !isBetweenRealDoubleQuote ? " "+VTL_CONCAT_FUNCTION+" " : c;
 				break;
 			case ')':
 				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) ? "" : c;
@@ -128,6 +141,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 				context="";
 				break;
 			default:
+				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
 				finalString+=c;
 				break;
 			}
@@ -158,6 +172,18 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 
 	public String toString() {
 		return PostProcessing.JS_VTL_PARSER.name();
+	}
+	
+	public boolean isNumeric(String strNum) {
+	    if (strNum == null) {
+	        return false;
+	    }
+	    try {
+	        double d = Double.parseDouble(strNum);
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
+	    return true;
 	}
 
 }
