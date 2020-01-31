@@ -371,7 +371,7 @@
                 <xsl:value-of select="concat('cast(',$variable,',','number)')"/>
             </xsl:when>
             <xsl:when test="$type='boolean'">
-                <xsl:value-of select="concat('cast(',$variable,',','number)')"/>
+                <xsl:value-of select="concat('cast(',$variable,',','integer)')"/>
             </xsl:when>
             <xsl:when test="$type='date'"></xsl:when>
             <xsl:when test="$type='duration'"></xsl:when>
