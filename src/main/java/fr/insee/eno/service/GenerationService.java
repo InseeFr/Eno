@@ -162,7 +162,6 @@ public class GenerationService {
 	 * 
 	 */
 	public void cleanTempFolder(String name) throws IOException {
-		FolderCleaner cleanService = new FolderCleaner();
 		if (Constants.TEMP_FOLDER_PATH != null) {
 			File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + name);
 			cleanTempFolder(folderTemp);
