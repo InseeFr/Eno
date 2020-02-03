@@ -93,6 +93,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 		boolean isBetweenRealDoubleQuote=false;
 		boolean isBetweenRealSimpleQuote=false;
 		String contentBetweenSimpleQuote="";
+		String lastCastType=""; // number, string or integer TODO:date/duration/etc
 		for(int i=0;i<input.length();i++) {
 			char c = input.charAt(i);
 			context = (c==',') ? "" : context+c;
@@ -118,6 +119,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 					finalString+=c;
 					listContext.add(context.replace("(", ""));
 				}
+				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
 				context="";
 				break;
 			case '\"':
@@ -125,13 +127,14 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 					isBetweenRealDoubleQuote=!isBetweenRealDoubleQuote;					
 				}
 				finalString+=c;
+				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
 				break;
 			case '\'':
 				finalString += c;
-				// remove "'" around number
+				// remove "'" around number when the last casting function is to integer or number
 				if(!isBetweenRealDoubleQuote) {
 					isBetweenRealSimpleQuote=!isBetweenRealSimpleQuote;
-					if(isNumeric(contentBetweenSimpleQuote)) {
+					if(isNumeric(contentBetweenSimpleQuote) && isCastingToIntegerOrNumber(lastCastType)) {
 						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", contentBetweenSimpleQuote);
 					}					
 					contentBetweenSimpleQuote="";
@@ -139,10 +142,15 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 				break;
 			case ',':
 				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) && !isBetweenRealDoubleQuote ? " "+VTL_CONCAT_FUNCTION+" " : c;
+				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
 				break;
 			case ')':
-				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) ? "" : c;
+				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) ? "" : c;				
+				if(getLastElement(listContext).equals(XPATH_CAST_FUNCTION)) {
+					lastCastType=context.replace(")", "");
+				}
 				removeLast(listContext);
+				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
 				context="";
 				break;
 			default:
@@ -152,6 +160,10 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 			}
 		}
 		return finalString;
+	}
+
+	private boolean isCastingToIntegerOrNumber(String castType) {
+		return castType.equals("integer") || castType.equals("number");
 	}
 
 	public char getLastChar(String text) {
