@@ -97,6 +97,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 		for(int i=0;i<input.length();i++) {
 			char c = input.charAt(i);
 			context = (c==',') ? "" : context+c;
+			
 			if(context.contains(XPATH_NOT_EQUAL_TO) && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_NOT_EQUAL_TO, VTL_NOT_EQUAL_TO);
 			}
@@ -146,7 +147,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 				break;
 			case ')':
 				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) ? "" : c;				
-				if(getLastElement(listContext).equals(XPATH_CAST_FUNCTION)) {
+				if(getLastElement(listContext).contains(XPATH_CAST_FUNCTION)) {
 					lastCastType=context.replace(")", "");
 				}
 				removeLast(listContext);
