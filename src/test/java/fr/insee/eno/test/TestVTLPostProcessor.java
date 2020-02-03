@@ -22,8 +22,8 @@ public class TestVTLPostProcessor {
 	@Test
 	public void simpleTest() {
 		
-		String test1 = "concat(x,y,z)";
-		String expected1 = "x || y || z";		
+		String test1 = "concat(x,y,z, \"concat(a,b,c)\")";
+		String expected1 = "x || y || z ||  \"concat(a,b,c)\"";		
 
 		String test2 = "substring(x,y,z)";
 		String expected2 = "substr(x,y,z)";
@@ -34,14 +34,22 @@ public class TestVTLPostProcessor {
 		String test4 = "x div y";
 		String expected4 = "x / y";
 		
-		String test5 = "concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'";
-		String expected5 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'";
+		String test5 = "x != '1'";
+		String expected5 ="x  &lt;&gt;  1";
+		
+		String test6 = "\"x != '1'\"";
+		String expected6 ="\"x != '1'\"";
+		
+		String test7 = "concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'";
+		String expected7 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'";
 		
 		Assert.assertEquals(expected1, jsvtlParserPostprocessor.parseToVTL(test1));
 		Assert.assertEquals(expected2, jsvtlParserPostprocessor.parseToVTL(test2));
 		Assert.assertEquals(expected3, jsvtlParserPostprocessor.parseToVTL(test3));
 		Assert.assertEquals(expected4, jsvtlParserPostprocessor.parseToVTL(test4));
 		Assert.assertEquals(expected5, jsvtlParserPostprocessor.parseToVTL(test5));
+		Assert.assertEquals(expected6, jsvtlParserPostprocessor.parseToVTL(test6));
+		Assert.assertEquals(expected7, jsvtlParserPostprocessor.parseToVTL(test7));
 	}
 	
 	@Test

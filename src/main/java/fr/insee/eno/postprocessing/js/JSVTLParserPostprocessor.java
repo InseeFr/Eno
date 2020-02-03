@@ -88,8 +88,6 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 
 
 	public String parseToVTL(String input) {
-		input = input.replaceAll(XPATH_NOT_EQUAL_TO, VTL_NOT_EQUAL_TO);
-		input = input.replaceAll(XPATH_DIVISION_FUNCTION, VTL_DIVISION_FUNCTION);
 		String finalString="";String context="";
 		List<String> listContext = new ArrayList<String>();
 		boolean isBetweenRealDoubleQuote=false;
@@ -98,14 +96,21 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 		for(int i=0;i<input.length();i++) {
 			char c = input.charAt(i);
 			context = (c==',') ? "" : context+c;
+			if(context.contains(XPATH_NOT_EQUAL_TO) && !isBetweenRealDoubleQuote) {
+				finalString = replaceLast(finalString, XPATH_NOT_EQUAL_TO, VTL_NOT_EQUAL_TO);
+			}
+			else if(context.contains(XPATH_DIVISION_FUNCTION) && !isBetweenRealDoubleQuote) {
+				finalString = replaceLast(finalString, XPATH_DIVISION_FUNCTION, VTL_DIVISION_FUNCTION);
+			}
+			
 			switch (c) {
 			case '(':
 				// order functions by descending length
-				if(context.contains(XPATH_CONCAT_FUNCTION)) {
+				if(context.contains(XPATH_CONCAT_FUNCTION) && !isBetweenRealDoubleQuote) {
 					finalString = replaceLast(finalString, XPATH_CONCAT_FUNCTION, "");
 					listContext.add(XPATH_CONCAT_FUNCTION);
 				}
-				else if(context.contains(XPATH_SUBSTRING_FUNCTION)) {
+				else if(context.contains(XPATH_SUBSTRING_FUNCTION) && !isBetweenRealDoubleQuote) {
 					finalString = replaceLast(finalString, XPATH_SUBSTRING_FUNCTION, VTL_SUBSTRING_FUNCTION)+c;
 					listContext.add(XPATH_SUBSTRING_FUNCTION);
 				}
@@ -122,9 +127,9 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 				finalString+=c;
 				break;
 			case '\'':
+				finalString += c;
 				// remove "'" around number
-				finalString += c;				
-				if(getLastChar(finalString)!='\\') {
+				if(!isBetweenRealDoubleQuote) {
 					isBetweenRealSimpleQuote=!isBetweenRealSimpleQuote;
 					if(isNumeric(contentBetweenSimpleQuote)) {
 						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", contentBetweenSimpleQuote);
