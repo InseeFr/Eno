@@ -137,7 +137,10 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 					isBetweenRealSimpleQuote=!isBetweenRealSimpleQuote;
 					if(isNumeric(contentBetweenSimpleQuote) && isCastingToIntegerOrNumber(lastCastType)) {
 						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", contentBetweenSimpleQuote);
-					}					
+					} 
+					else if(isCastingToString(lastCastType)) {
+						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", "\""+contentBetweenSimpleQuote+"\"");
+					}
 					contentBetweenSimpleQuote="";
 				}
 				break;
@@ -161,6 +164,10 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 			}
 		}
 		return finalString;
+	}
+
+	private boolean isCastingToString(String castType) {
+		return castType.equals("string");
 	}
 
 	private boolean isCastingToIntegerOrNumber(String castType) {

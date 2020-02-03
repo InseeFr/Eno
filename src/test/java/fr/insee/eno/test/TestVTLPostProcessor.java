@@ -44,7 +44,7 @@ public class TestVTLPostProcessor {
 		String expected7 = "substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'";
 		
 		String test8 = "cast(cast(ABCD,integer),string) = '3'";
-		String expected8 = "cast(cast(ABCD,integer),string) = '3'";
+		String expected8 = "cast(cast(ABCD,integer),string) = \"3\"";
 		
 		String test9 = "cast(cast(ABCD,string),integer) = '3'";
 		String expected9 = "cast(cast(ABCD,string),integer) = 3";
