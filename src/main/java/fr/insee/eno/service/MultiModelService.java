@@ -49,7 +49,7 @@ public class MultiModelService {
 	 */
 	public File generateQuestionnaire(File inputFile, ENOParameters params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception{
 		LOGGER.info("MultiModel Generation of questionnaire -- STARTED --");
-		
+
 		byte[] metadataBytes = metadata!=null ? IOUtils.toByteArray(metadata):null;
 		byte[] specificTreatmentBytes = specificTreatment !=null ? IOUtils.toByteArray(specificTreatment):null;
 		byte[] mappingBytes = mapping !=null ? IOUtils.toByteArray(mapping):null;
@@ -60,10 +60,11 @@ public class MultiModelService {
 		File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + surveyName);
 
 		List<File> ddiFiles = ddiSplitPreprocessor.splitDDI(inputFile, surveyName);
-		
-		int nbCpu = Runtime.getRuntime().availableProcessors();
 
-		ExecutorService generationThreadsService = Executors.newFixedThreadPool(Math.min(nbCpu, ddiFiles.size()));
+		// nbThreads = min between number of available CPUs and number of input files
+		int nbThreads = Math.min(Runtime.getRuntime().availableProcessors(), ddiFiles.size());
+		ExecutorService generationThreadsService = Executors.newFixedThreadPool(nbThreads);
+		
 		Path outputZipPath = Paths.get(folderTemp.getAbsolutePath()+"/"+ surveyName+".zip");
 		Files.deleteIfExists(outputZipPath);
 		File outputZip = new File(outputZipPath.toString());
@@ -112,7 +113,7 @@ public class MultiModelService {
 	 */
 	public File generateQuestionnaire(File inputFile, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {		
 		LOGGER.info("MultiModel Generation of questionnaire -- STARTED --");
-		
+
 		ValorizatorParameters valorizatorParameters = new ValorizatorParametersImpl();
 
 		byte[] paramsBytes = params!=null ? IOUtils.toByteArray(params):null;
@@ -123,14 +124,15 @@ public class MultiModelService {
 		ENOParameters enoParameters = valorizatorParameters.getParameters(new ByteArrayInputStream(paramsBytes));
 		String surveyName = enoParameters.getParameters()!=null?enoParameters.getParameters().getCampagne():"test";
 		cleanTempFolder(surveyName);
-		
-		File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + surveyName);
-		
-		
-		List<File> ddiFiles = ddiSplitPreprocessor.splitDDI(inputFile, surveyName);
-		int nbCpu = Runtime.getRuntime().availableProcessors();
 
-		ExecutorService generationThreadsService = Executors.newFixedThreadPool(Math.min(nbCpu, ddiFiles.size()));
+		File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + surveyName);
+
+		List<File> ddiFiles = ddiSplitPreprocessor.splitDDI(inputFile, surveyName);
+		
+		// nbThreads = min between number of available CPUs and number of input files
+		int nbThreads = Math.min(Runtime.getRuntime().availableProcessors(), ddiFiles.size());
+		ExecutorService generationThreadsService = Executors.newFixedThreadPool(nbThreads);;
+		
 		Path outputZipPath = Paths.get(folderTemp.getAbsolutePath()+"/"+ surveyName+".zip");
 		Files.deleteIfExists(outputZipPath);
 		File outputZip = new File(outputZipPath.toString());
@@ -227,7 +229,7 @@ public class MultiModelService {
 		return generationTasks;
 
 	}
-	
+
 	/**
 	 * It creates a list of Callable<File> in order to create multiple threads (one per file)
 	 * @param ddiFiles : list of input files
@@ -256,7 +258,7 @@ public class MultiModelService {
 		return generationTasks;
 
 	}
-	
+
 	/**
 	 * Move a file to a sub-directory whose name is the file's name
 	 * The goal is to prevent parallel treatments from interfering
@@ -271,8 +273,8 @@ public class MultiModelService {
 		Files.move(file.toPath(), movedPath);
 		return movedPath.toFile();
 	}
-	
-	
+
+
 	private String getTempSurveyFolder(File ddifile) {
 		return ddifile.getParentFile().getParentFile().getName() + "/" + ddifile.getParentFile().getName();
 	}
@@ -291,7 +293,7 @@ public class MultiModelService {
 			LOGGER.debug("Temp Folder is null");
 		}
 	}
-	
+
 	/**
 	 * Clean the temp dir if it exists
 	 * 
