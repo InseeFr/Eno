@@ -451,28 +451,16 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
         <!-- Define variables for loop or QuestionDynamicTable-->
-        <xsl:variable name="groupeId">
-            <xsl:choose>
-                <xsl:when test="name()='Loop'"><xsl:value-of select="concat($id,'-vg')"/></xsl:when>
-                <xsl:otherwise><xsl:value-of select="concat($id,'-gp')"/></xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
         <xsl:variable name="typeObject">
             <xsl:choose>
                 <xsl:when test="name()='Loop'">Loop</xsl:when>
                 <xsl:otherwise>QuestionGrid</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="typeVarGroup">
-            <xsl:choose>
-                <xsl:when test="name()='Loop'">Loop</xsl:when>
-                <xsl:otherwise>TableLoop</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
         <!-- End variables definition -->
         <l:VariableGroup>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="$groupeId"/></r:ID>
+            <r:ID><xsl:value-of select="concat($id,'-vg')"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:BasedOnObject>
                 <r:BasedOnReference>
@@ -482,7 +470,7 @@
                     <r:TypeOfObject><xsl:value-of select="$typeObject"/></r:TypeOfObject>
                 </r:BasedOnReference>
             </r:BasedOnObject>
-            <l:TypeOfVariableGroup><xsl:value-of select="$typeVarGroup"/></l:TypeOfVariableGroup>
+            <l:TypeOfVariableGroup>Loop</l:TypeOfVariableGroup>
             <l:VariableGroupName>
                 <r:String><xsl:value-of select="enoddi33:get-name($source-context)"/></r:String>
             </l:VariableGroupName>
@@ -540,15 +528,9 @@
     <xsl:template match="driver-VariableGroupGlobal//QuestionDynamicTable | driver-VariableGroupGlobal//Loop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <xsl:variable name="groupSuffix">
-            <xsl:choose>
-                <xsl:when test="name()='Loop'">vg</xsl:when>
-                <xsl:otherwise>gp</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
         <l:VariableGroupReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="concat(enoddi33:get-id($source-context),'-',$groupSuffix)"/></r:ID>
+            <r:ID><xsl:value-of select="concat(enoddi33:get-id($source-context),'-vg')"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
             <r:TypeOfObject>VariableGroup</r:TypeOfObject>
         </l:VariableGroupReference>
@@ -847,6 +829,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:param name="idSequence" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="maxVal" select="enoddi33:get-high($source-context)"/>
         <d:Loop>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
             <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
@@ -861,10 +844,11 @@
                 </r:Command>
             </d:InitialValue>
             <d:LoopWhile>
-                <r:Command>
-                <r:ProgramLanguage>xpath</r:ProgramLanguage>
-                    <r:CommandContent><xsl:value-of select="enoddi33:get-high($source-context)"/></r:CommandContent>
-                </r:Command>
+                <!-- Call Command template if Maximum contains a formula-->
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopWhile', .)" tunnel="yes"/>
+                    <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                </xsl:apply-templates>
             </d:LoopWhile>
             <d:StepValue>
                 <r:Command>
@@ -974,7 +958,15 @@
             </d:ControlConstructReference>
         </xsl:if>
     </xsl:template>
-    
+
+    <xsl:template match="driver-LoopWhile/Command" mode="model" priority="2">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="agency" tunnel="yes"/>
+        <xsl:call-template name="Command">
+            <xsl:with-param name="source-context" select="$source-context" tunnel="yes"/>
+        </xsl:call-template>
+    </xsl:template>
+
     <!-- This specific template is needed because for IfInstruction Command no CommandCode is required (driver missing ?) -->
     <xsl:template name="Command">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
