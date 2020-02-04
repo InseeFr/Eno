@@ -60,8 +60,10 @@ public class MultiModelService {
 		File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + surveyName);
 
 		List<File> ddiFiles = ddiSplitPreprocessor.splitDDI(inputFile, surveyName);
+		
+		int nbCpu = Runtime.getRuntime().availableProcessors();
 
-		ExecutorService generationThreadsService = Executors.newFixedThreadPool(ddiFiles.size());
+		ExecutorService generationThreadsService = Executors.newFixedThreadPool(Math.min(nbCpu, ddiFiles.size()));
 		Path outputZipPath = Paths.get(folderTemp.getAbsolutePath()+"/"+ surveyName+".zip");
 		Files.deleteIfExists(outputZipPath);
 		File outputZip = new File(outputZipPath.toString());
@@ -126,8 +128,9 @@ public class MultiModelService {
 		
 		
 		List<File> ddiFiles = ddiSplitPreprocessor.splitDDI(inputFile, surveyName);
+		int nbCpu = Runtime.getRuntime().availableProcessors();
 
-		ExecutorService generationThreadsService = Executors.newFixedThreadPool(ddiFiles.size());
+		ExecutorService generationThreadsService = Executors.newFixedThreadPool(Math.min(nbCpu, ddiFiles.size()));
 		Path outputZipPath = Paths.get(folderTemp.getAbsolutePath()+"/"+ surveyName+".zip");
 		Files.deleteIfExists(outputZipPath);
 		File outputZip = new File(outputZipPath.toString());
