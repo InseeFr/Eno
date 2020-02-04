@@ -75,7 +75,7 @@ public class MultiModelService {
 			LOGGER.info("Archive file initalized to :"+outputZip.getAbsolutePath());
 
 			for(Future<File> future : outputsFutureFile) {
-				FileArchiver.writeToZipFile(surveyName, future.get().getAbsolutePath(), zipOutputStream);
+				FileArchiver.writeToZipFile(surveyName, future.get().getAbsolutePath(), zipOutputStream, params.getPipeline().getOutFormat());
 			}
 
 			zipOutputStream.close();
@@ -141,7 +141,7 @@ public class MultiModelService {
 			LOGGER.info("Archive file initalized to :"+outputZip.getAbsolutePath());
 
 			for(Future<File> future : outputsFutureFile) {
-				FileArchiver.writeToZipFile(surveyName, future.get().getAbsolutePath(), zipOutputStream);
+				FileArchiver.writeToZipFile(surveyName, future.get().getAbsolutePath(), zipOutputStream, enoParameters.getPipeline().getOutFormat());
 			}
 
 			zipOutputStream.close();

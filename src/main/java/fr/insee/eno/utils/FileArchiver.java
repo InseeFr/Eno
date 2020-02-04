@@ -11,11 +11,14 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.insee.eno.parameters.OutFormat;
+
 public class FileArchiver {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileArchiver.class);
 	
-	private static final String ZIP_ENTRY_PATH_FORMAT = "orbeon/fr/%s/%s/form/%s";
+	private static final String FR_ZIP_ENTRY_PATH_FORMAT = "orbeon/fr/%s/%s/form/%s";
+	private static final String DEFAULT_ZIP_ENTRY_PATH_FORMAT = "%s/%s/%s";
 	/**
      * Add a file into Zip file.
      * 
@@ -24,7 +27,7 @@ public class FileArchiver {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public static void writeToZipFile(String surveyName, String filePath, ZipOutputStream zipStream)
+    public static void writeToZipFile(String surveyName, String filePath, ZipOutputStream zipStream, OutFormat outFormat)
             throws FileNotFoundException, IOException {
     	
     	LOGGER.info("Writing file : '"+filePath+ "' to archive file.");
@@ -32,8 +35,16 @@ public class FileArchiver {
         File file = new File(filePath);
         FileInputStream fileIS = new FileInputStream(file);
         
-        ZipEntry zipEntry = new ZipEntry(
-        		String.format(ZIP_ENTRY_PATH_FORMAT, surveyName, file.getParentFile().getName(),file.getName()));
+        
+        ZipEntry zipEntry=null;        
+        switch (outFormat) {
+		case FR:
+			zipEntry = new ZipEntry(String.format(FR_ZIP_ENTRY_PATH_FORMAT, surveyName, file.getParentFile().getName(),file.getName()));
+			break;
+		default:
+			zipEntry = new ZipEntry(String.format(DEFAULT_ZIP_ENTRY_PATH_FORMAT, surveyName, file.getParentFile().getName(),file.getName()));
+			break;
+		}
         
         zipStream.putNextEntry(zipEntry);
         zipStream.write(IOUtils.toByteArray(fileIS));
