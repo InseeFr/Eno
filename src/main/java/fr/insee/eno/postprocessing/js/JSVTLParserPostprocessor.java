@@ -87,6 +87,28 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 
 
 
+	/**
+	 * This function translates XPATH expression to VTL(sdmx) expression
+	 * 
+	 * Definition of used variables in this function:
+	 * 	- finalString is the output
+	 * 	- context is the current string read before a '(' (if there is the char , (comma), context is reset)
+	 *  - listContext is the list which contains all context (the last context corresponds to the function wrote before '(' )
+	 *  - isBetweenRealDoubleQuote : boolean, true if the current char is between the char \" literally (and not " char), so if true, the current char is plain text
+	 *  - isBetweenRealSimpleQuote : boolean, true if the current char is between ' literally 
+	 *  - lastCastType is a string which defines what is the type fo the cast function (example : cast(ABCD,string) -> string)
+	 *  
+	 *  Transformations: 
+	 *  	x!=y -> x &lt;&gt; y (x <> y)
+	 *  	x div y -> x / y
+	 *  	substring(A,1,2) -> substr(A,1,2)
+	 *  	concat(A,B,C) -> A || B || C
+	 *  	cast(ABCD,string) = '1' -> cast(ABCD,string) = \"1\"
+	 *  	cast(ABCD,integer) = '1' -> cast(ABCD,integer) = 1
+	 *    
+	 * @param input : the string to parse
+	 * @return finalString : the result of parsing
+	 */
 	public String parseToVTL(String input) {
 		String finalString="";String context="";
 		List<String> listContext = new ArrayList<String>();
@@ -98,6 +120,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 			char c = input.charAt(i);
 			context = (c==',') ? "" : context+c;
 			
+			// order functions by descending length
 			if(context.contains(XPATH_NOT_EQUAL_TO) && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_NOT_EQUAL_TO, VTL_NOT_EQUAL_TO);
 			}
@@ -188,15 +211,18 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 		}
 	}
 	
+	/**
+	 * Function which replaces the last occurences of a string to another in the input
+	 * @param string : the input
+	 * @param substring : the target to replace
+	 * @param replacement : the replacement
+	 * @return the new string
+	 */
 	public String replaceLast(String string, String substring, String replacement){
 		int index = string.lastIndexOf(substring);
 		if (index == -1)
 			return string;
 		return string.substring(0, index) + replacement + string.substring(index+substring.length());
-	}
-
-	public String toString() {
-		return PostProcessing.JS_VTL_PARSER.name();
 	}
 	
 	public boolean isNumeric(String strNum) {
@@ -209,6 +235,10 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 	        return false;
 	    }
 	    return true;
+	}
+
+	public String toString() {
+		return PostProcessing.JS_VTL_PARSER.name();
 	}
 
 }
