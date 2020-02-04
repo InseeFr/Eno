@@ -131,7 +131,7 @@ public class MultiModelService {
 		
 		// nbThreads = min between number of available CPUs and number of input files
 		int nbThreads = Math.min(Runtime.getRuntime().availableProcessors(), ddiFiles.size());
-		ExecutorService generationThreadsService = Executors.newFixedThreadPool(nbThreads);;
+		ExecutorService generationThreadsService = Executors.newFixedThreadPool(nbThreads);
 		
 		Path outputZipPath = Paths.get(folderTemp.getAbsolutePath()+"/"+ surveyName+".zip");
 		Files.deleteIfExists(outputZipPath);
