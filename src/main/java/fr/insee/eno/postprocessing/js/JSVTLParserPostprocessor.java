@@ -90,7 +90,7 @@ public class JSVTLParserPostprocessor implements Postprocessor {
 	/**
 	 * This function translates XPATH expression to VTL(sdmx) expression
 	 * 
-	 * Definition of used var in this function:
+	 * Definition of used variables in this function:
 	 * 	- finalString is the output
 	 * 	- context is the current string read before a '(' (if there is the char , (comma), context is reset)
 	 *  - listContext is the list which contains all context (the last context corresponds to the function wrote before '(' )
