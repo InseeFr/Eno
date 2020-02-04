@@ -42,7 +42,7 @@ public class FileArchiver {
 			zipEntry = new ZipEntry(String.format(FR_ZIP_ENTRY_PATH_FORMAT, surveyName, file.getParentFile().getName(),file.getName()));
 			break;
 		default:
-			zipEntry = new ZipEntry(String.format(DEFAULT_ZIP_ENTRY_PATH_FORMAT, surveyName, file.getParentFile().getName(),file.getName()));
+			zipEntry = new ZipEntry(String.format(DEFAULT_ZIP_ENTRY_PATH_FORMAT, surveyName, file.getParentFile().getParentFile().getName(),file.getName()));
 			break;
 		}
         
