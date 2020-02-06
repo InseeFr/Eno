@@ -77,7 +77,7 @@
                             <xsl:with-param name="driver" select="eno:append-empty-element('Sequence', .)" tunnel="yes"/>
                             <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                         </xsl:apply-templates>
-                        <xsl:apply-templates select="enoddi33:get-related-loop($source-context)" mode="source">
+                        <xsl:apply-templates select="enoddi33:get-loops($source-context)" mode="source">
                             <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopControlConstruct', .)" tunnel="yes"/>
                             <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                         </xsl:apply-templates>
@@ -87,7 +87,7 @@
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi33:get-related-loop($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-loops($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-SequenceLoop', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -164,7 +164,7 @@
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                     <!-- VariableGroup for Loops-->
-                    <xsl:apply-templates select="enoddi33:get-loops($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-loops-vg($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroup', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -194,7 +194,7 @@
                             <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroupGlobal', .)" tunnel="yes"/>
                             <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                         </xsl:apply-templates>
-                        <xsl:apply-templates select="enoddi33:get-loops($source-context)" mode="source">
+                        <xsl:apply-templates select="enoddi33:get-loops-vg($source-context)" mode="source">
                             <xsl:with-param name="driver" select="eno:append-empty-element('driver-VariableGroupGlobal', .)" tunnel="yes"/>
                             <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                         </xsl:apply-templates>
