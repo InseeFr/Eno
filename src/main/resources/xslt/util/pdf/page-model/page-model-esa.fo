@@ -52,7 +52,7 @@
                 <fo:block>
                     <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                            message="'${idQuestionnaire}-#page-number#'">
+                            message="${idQuestionnaire}-#page-number#">
                             <barcode:code39>
                                 <barcode:height>8mm</barcode:height>
                                 <barcode:human-readable>
@@ -89,7 +89,7 @@
                 <fo:block>
                     <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="-90"
-                            message="'${idQuestionnaire}-#page-number#'">
+                            message="${idQuestionnaire}-#page-number#">
                             <barcode:code39>
                                 <barcode:height>8mm</barcode:height>
                                 <barcode:human-readable>
@@ -107,7 +107,7 @@
                 <fo:block>
                     <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" 
-                            message="'${idQuestionnaire}-#page-number#'">
+                            message="${idQuestionnaire}-#page-number#">
                             <barcode:code39>
                                 <barcode:height>8mm</barcode:height>
                                 <barcode:human-readable>
@@ -143,7 +143,7 @@
                 <fo:block>
                     <fo:instream-foreign-object>
                         <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="-90"
-                            message="'${idQuestionnaire}-#page-number#'">
+                            message="${idQuestionnaire}-#page-number#">
                             <barcode:code39>
                                 <barcode:height>8mm</barcode:height>
                                 <barcode:human-readable>
