@@ -53,8 +53,6 @@
         </xsl:choose>
     </xsl:variable>
 
-
-    <!-- On récupère ces informations, si le modèle de données change, on pourra simplement modifier cette partie -->
     <xsl:variable name="ArticleServiceProducteur"
         select="if($metadata/InformationsCollecte/ServiceProducteur/Article/text()='l''')
         then($metadata/InformationsCollecte/ServiceProducteur/Article)
@@ -78,8 +76,8 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- La page de fin générique est remplacée par 3 pages -->
-    <!-- Côté instance -->
+    <!-- The generic end page is replaced by 3 pages -->
+    <!-- Instance : -->
     <xsl:template match="End[parent::form[parent::xf:instance[@id='fr-form-instance']]]">
         <Validation />
         <xsl:if test="$studyUnit=$business">
@@ -88,7 +86,7 @@
         <xsl:copy />
     </xsl:template>
 
-    <!-- On rajoute la balise extrait dans Util -->
+    <!-- We add the extracted tag in Util -->
     <xsl:template match="Send[parent::Util/parent::form[parent::xf:instance[@id='fr-form-instance']]]">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" />
@@ -96,7 +94,7 @@
         <extrait>non</extrait>
     </xsl:template>
 
-    <!-- Côté bind -->
+    <!-- The binds -->
     <xsl:template match="xf:bind[@name='end' and ancestor::xf:bind[@id='fr-form-instance-binds']]">
         <xf:bind id="validation-bind" name="validation" ref="Validation" relevant="instance('fr-form-instance')/Util/Send='false'" />
         <xsl:if test="$studyUnit=$business">
@@ -107,7 +105,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- Côté ressources -->
+    <!-- The resources -->
     <xsl:template match="End[ancestor::xf:instance[@id='fr-form-resources']]">
         <Validation>
             <label>VALIDATION</label>
@@ -123,7 +121,7 @@
     </xsl:template>
     <xsl:template match="GenericEndText[ancestor::xf:instance[@id='fr-form-resources']]" />
 
-    <!-- Côté pages dans l'instance util -->
+    <!-- Pages in the util instance -->
     <xsl:template match="End[ancestor::xf:instance[@id='fr-form-util']]">
         <Validation />
         <xsl:if test="$studyUnit=$business">
@@ -132,7 +130,7 @@
         <xsl:copy />
     </xsl:template>
 
-    <!-- Et dans le html -->
+    <!-- In the html -->
     <xsl:template match="xf:case[fr:section[@name='end']]">
         <xsl:variable name="index">
             <xsl:value-of select="number(@id)" />
@@ -371,7 +369,7 @@
                                     cette enquête.</xhtml:b>
                             </xhtml:p>
                             
-                            <!--                        lien vers le questionnaire de satisfaction-->
+                            <!-- link to the satisfaction questionnaire-->
                             <xsl:if test="$enquete-satisfaction">
                                 <xhtml:p>
                                     <xhtml:a href="{$properties//satisfaction}" target="_blank">Aidez-nous à améliorer notre site en répondant à notre enquête de satisfaction !</xhtml:a>
@@ -386,7 +384,7 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- On rajoute certains éléments liés à la navigation pour ces dernières pages -->
+    <!-- Some navigational elements are added for these last pages -->
     <xsl:template match="Util[parent::xf:instance[@id='fr-form-util']]">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" />
@@ -401,7 +399,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- Et les binds correspondants -->
+    <!-- And the corresponding binds -->
     <xsl:template match="xf:bind[@id='fr-form-util-binds']">
         <xsl:choose>
             <xsl:when test="$studyUnit=$business">
@@ -422,7 +420,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- On modifie le bind du bouton Envoyer pour éviter qu'on puisse cliquer deux fois de suite -->
+    <!-- We modify the bind of the Send button to avoid double clicking. -->
     <xsl:template match="xf:bind[@id='send-bind']">
         <xsl:copy>
             <xsl:apply-templates select="@*" />
@@ -432,21 +430,21 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- La submission expedier est modifiée suite à l'enchaînement des pages de fin -->
-    <!-- Si problème -->
+    <!-- The expedier submission is modified by chaining the end pages. -->
+    <!-- If problem -->
     <xsl:template match="xf:action[@ev:event='xforms-submit-error' and parent::xf:submission[@id='submit']]">
         <xsl:copy>
             <xsl:apply-templates select="@*" />
-            <!-- On diminue l'index de 1 -->
+            <!-- Decrease the index by 1 -->
             <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="string(number(instance('fr-form-instance')/Util/CurrentSection)-1)" />
             <xsl:apply-templates select="node()" />
         </xsl:copy>
     </xsl:template>
-    <!-- Si la submission est réussie -->
+    <!-- If the submission success -->
     <xsl:template match="xf:action[@ev:event='xforms-submit-done' and parent::xf:submission[@id='submit']]">
         <xsl:copy>
             <xsl:apply-templates select="@*" />
-            <!-- On change de page -->
+            <!-- We're moving to a new page -->
             <xsl:variable name="choix">
                 <xsl:value-of select="'{instance(''fr-form-instance'')/Util/CurrentSection}'" />
             </xsl:variable>
@@ -456,8 +454,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- la méthode d'enregistrement forcée corrige la méthode classique à la marge -->
-
+    <!-- the forced posting method corrects the conventional method at the margin. -->
     <xsl:template match="xf:submission[@id='save']">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" />

@@ -17,12 +17,12 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- On dégage les commentaires éventuellement inscrits dans le core du formulaire -->
+    <!-- Deletion of any comments entered in the core of the form. -->
     <xsl:template match="comment()[following-sibling::xf:submission]" priority="2"/>
 
-    <!--***********************************************Instance de perso, adhérences dans les services eXist***********************************************-->
+    <!--***********************************************Personal instance, adherence in eXist services.***********************************************-->
 
-    <!-- On remplace la partie util de l'instance de perso et les binds associés -->
+    <!-- Replacement of the util part of the perso instance and the associated binds -->
     <xsl:template match="Util[ancestor::xf:instance[@id='fr-form-instance']]">
         <stromae>
             <util>
@@ -48,7 +48,7 @@
         </xf:bind>
     </xsl:template>
 
-    <!-- La priorité est à -1 en attendant de supprimer le template de remplacement de chaîne plus bas, pour se contenter de remplacer les chaînes de la fonction modifications-perso -->
+    <!-- The priority is set to -1 while waiting to delete the string replacement template below, to simply replace the strings of the custom edit function -->
     <xsl:template
         match="@*[contains(.,('/Util/'))
         or contains(.,('CurrentSectionName'))
@@ -59,7 +59,7 @@
         <xsl:attribute name="{name()}" select="boom:modifications-perso(.)"/>
     </xsl:template>
 
-    <!-- Fonction de chaîne de remplacement des éléments contenus dans stromae/util -->
+    <!-- String function for replacing elements contained in stroma/util -->
     <xsl:function name="boom:modifications-perso">
         <xsl:param name="input"/>
         <xsl:value-of
@@ -74,7 +74,7 @@
         <!--'Send=''false''','expedie=''non'''),-->
     </xsl:function>
 
-    <!-- Templates spéciaux, ces attributs ne doivent pas être modifiés, ils correspondent à l'élément Send de l'instance util et non à l'élément Send de l'instance de personnalisation -->
+    <!-- Special templates, these attributes must not be modified, they correspond to the Send element of the user instance and not to the Send element of the customization instance. -->
     <xsl:template match="@ref[parent::xf:bind[@id='send-bind']]" priority="2">
         <xsl:copy/>
     </xsl:template>
@@ -83,8 +83,8 @@
     </xsl:template>    
     
 
-    <!-- Pour certains éléments, on doit aussi remplacer la chaîne false en non (valeur liée l'élément expedie) mais on ne doit pas faire systématiquement ce remplacement,
-    la chaîne false étant souvent utilisée par ailleurs -->
+    <!-- For some elements, we must also replace the false string in non (value linked to the element shipped) but we must not systematically make this replacement,
+    the false chain being often used in addition -->
     <xsl:template match="@*" mode="special_translation">
         <xsl:attribute name="{name()}">
             <xsl:variable name="modifie">
@@ -94,7 +94,7 @@
         </xsl:attribute>
     </xsl:template>
 
-    <!-- Et on modifie les mentions suivantes de false à non -->
+    <!-- And the following entries are changed from false to no -->
     <xsl:template match="@relevant[parent::xf:bind[@id='send-bind' or @id='validation-bind' or @id='confirmation-bind']]" priority="2">
         <xsl:apply-templates select="." mode="special_translation"/>
     </xsl:template>
@@ -108,13 +108,13 @@
         <xsl:apply-templates select="." mode="special_translation"/>
     </xsl:template>
 
-    <!--***********************************************Instance de perso, adhérences dans les services eXist***********************************************-->
+    <!--***********************************************Personal instance, adherence in eXist services***********************************************-->
 
 
 
-    <!--*****************************Instance de perso, adhérence dans les instances perso déjà en base et dans une css Orbeon*****************************-->
+    <!--*****************************Perso instance, adherence in already existing perso instances and in an Orbeon css*****************************-->
 
-    <!-- On remplace les '-Header-' en '-entete-'. Utilisé dans une css côté Orbeon. -->
+    <!-- Change '-Header-' to '-entete-'. Used in a css on the Orbeon side. -->
     <xsl:template
         match="*[ancestor::xf:instance[@id='fr-form-instance' or @id='fr-form-loop-model'] and contains(name(),'-Header-')]">
         <xsl:element name="{replace(name(),'\-Header\-','-entete-')}">
@@ -180,7 +180,7 @@
     <xsl:template match="End[ancestor::xf:instance[@id='fr-form-instance' or @id='fr-form-util']]">
         <FIN/>
     </xsl:template>
-    <!-- Il faut être précis dans les libellés modifiés pour éviter de créer descFINant par exemple -->
+    <!-- It is necessary to be precise in the modified labels to avoid creating "descFINant" for example -->
     <xsl:template match="@name[.='end']">
         <xsl:attribute name="name">FIN</xsl:attribute>
     </xsl:template>
@@ -200,12 +200,9 @@
         </FIN>
     </xsl:template>
     
-    <!--*****************************Instance de perso, adhérence dans les instances perso déjà en base et dans une css Orbeon*****************************-->
-
-
-
-    <!--***********************************************************Pas d'adhérences, remplaçable***********************************************************-->
-    <!-- Une action qu'on peut réintégrer et appeler lors de l'envoi -->
+    
+    <!--***********************************************************No adherences, replaceable***********************************************************-->
+    <!-- An action that can be reintegrated and called up when sending -->
     <xsl:template match="xf:action[@ev:event='submit-form']"/>
 
     <!--<xsl:template match="xf:instance[@id='fr-form-loop-model']">
@@ -219,18 +216,17 @@
             <xsl:apply-templates select="*"/>
         </modeles>
     </xsl:template>-->
-
-    <!--***********************************************************Pas d'adhérences, remplaçable***********************************************************-->  
     
-     <!--********************************Adhérences dans les css (pas les classes, c'est au dessus) ou dans les xslt Orbeon********************************-->
+    
+    <!--****************************************************************Adherences in css or xslt in Orbeon***************************************************-->
 
-    <!-- Pour l'ensemble des attributs, on procède à certaines modifications de chaînes -->
+    <!-- For all of the attributes, certain string modifications are carried out -->
     <xsl:template match="@*">
         <xsl:attribute name="{name()}" select="boom:modifications(.)"/>
         <!--<xsl:attribute name="{name()}" select="."/>-->
     </xsl:template>
 
-    <!-- Voici une liste de chaînes à remplacer dans les attributs (adhérences dans Orbeon) -->
+    <!-- Here is a list of strings to replace in attributes (adherence in Orbeon) -->
     <xsl:function name="boom:modifications">
         <xsl:param name="input"/>
         <xsl:variable name="modifie">
@@ -244,22 +240,17 @@
                 ,'^submit$','expedier')"
             />
         </xsl:variable>
-        <!-- A la fin, on remplace encore d'autres chaînes -->
+        <!-- In the end, more chains are replaced... -->
         <xsl:value-of select="boom:modifications-perso($modifie)"/>
     </xsl:function>
 
-    <!-- Cet élément doit être renommé, il y a une adhérence dans readonly.xsl -->
+    <!-- This element must be renamed, there is an adherence in readonly.xsl -->
     <xsl:template match="PageChangeDone[ancestor::xf:instance[@id='fr-form-util']]">
         <changementPageEffectue/>
     </xsl:template>
 
-    <!-- Cet attribut doit être renommé, l'identifiant HTML correspondant est utilisé dans les css Orbeon -->
-   <!-- <xsl:template match="@id[.='progress-percent' and parent::xf:output]" priority="2">
-        <xsl:attribute name="id" select="'pourcentageAvancement'"/>
-    </xsl:template>-->
-
-    <!-- ATTENTION : si on supprime ces différences et qu'on se cale sur ce qui est fait côté OpenSource (il faut modifier fin.xsl), le HTML généré n'est plus exactement le même pour le texte correspondant -->
-    <!-- Il ne s'agit donc pas simplement de traduire la classe css côté Orbeon, il faut aussi modifier à la marge le sélecteur pour qu'elle s'applique sur les nouveaux et les anciens questionnaires -->
+    <!-- WARNING: if we remove these differences and we change what is done on the OpenSource side (we have to modify fin.xsl), the generated HTML is not exactly the same for the corresponding text. -->
+    <!-- So it is not only a question of translating the css class on the Orbeon side, it is also necessary to modify the selector in the margin so that it applies to the new and old questionnaires. -->
     <xsl:template match="@*[contains(.,'confirmation-message')]" priority="2">
         <xsl:attribute name="{name()}"
             select="replace(.,'confirmation\-message','messageConfirmation')"/>
@@ -272,8 +263,5 @@
             calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"
         />
     </xsl:template>
-    <!-- ATTENTION -->
-
-    <!--********************************Adhérences dans les css (pas les classes, c'est au dessus) ou dans les xslt Orbeon********************************-->
 
 </xsl:transform>

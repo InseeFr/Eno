@@ -26,9 +26,9 @@ public class XslParameters {
 	public static final String IN2OUT_LABELS_FOLDER = "labels-folder";
 	public static final String IN2OUT_SURVEY_NAME = "survey-name";
 	public static final String IN2OUT_FORM_NAME = "form-name";
-	public static final String IN2OUT_MAPPING_FILE = "fichier-mapping";
-	public static final String IN2OUT_MAPPING_FILE_NODE = "fichier-mapping-node";
-	public static final String IN2OUT_CAMPAGNE = "campagne";
+	public static final String IN2OUT_MAPPING_FILE = "mapping-file";
+	public static final String IN2OUT_MAPPING_FILE_NODE = "mapping-file-node";
+	public static final String IN2OUT_CAMPAGNE = "campaign";
 	public static final String IN2OUT_MODELE = "model";
 
 }

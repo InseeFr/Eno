@@ -5,7 +5,7 @@
     <xsl:output method="xml" indent="yes" encoding="UTF-8" />
     <xsl:strip-space elements="*" />
 
-    <!-- En paramètre le fichier de paramétrage qui contient l'information du besoin des variables Coltrane standards -->
+    <!-- As a parameter the parameter file which contains the requirement information of the standard Coltrane variables. -->
     <xsl:param name="parameters-file" />
     <xsl:param name="parameters-node" as="node()" required="no">
         <empty />
@@ -30,7 +30,7 @@
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
-            <xd:p>Template de racine, on applique les templates de tous les enfants</xd:p>
+            <xd:p>Root Template, we apply the templates of all children</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="/">
@@ -57,7 +57,7 @@
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
-            <xd:p>On fait le mapping identifiant VariableScheme / identifiant QuestionScheme</xd:p>
+            <xd:p>We do the mapping VariableScheme identifier / QuestionScheme identifier</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="l:Variable">

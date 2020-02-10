@@ -20,7 +20,7 @@
         <xs:restriction base="xs:token">
             <xs:enumeration value="ddi"/>
             <xs:enumeration value="pogues-xml"/>
-            <!-- Pour les entreprises emb -->
+            <!-- For emb companies -->
             <xs:enumeration value="fr"/>
         </xs:restriction>
     </xs:simpleType>
@@ -67,7 +67,6 @@
             <xs:enumeration value="pdf-insertCoverPage"/>
             <xs:enumeration value="pdf-insertAccompanyingMails"/>
             
-            <!-- pas sur de mettre des posts prcossings obligatoire... -->
             <xs:enumeration value="js-sortComponents"/>
             <xs:enumeration value="js-specificTreatment"/>
             <xs:enumeration value="js-insert-generic-questions"/>
@@ -77,7 +76,7 @@
             <xs:enumeration value="fr-insert-generic-questions"/>
             <xs:enumeration value="fr-browsing"/>
             <xs:enumeration value="fr-modele-coltrane"/>
-            <!-- patron-coleman/coltrane -->
+            <!-- patron : coleman/coltrane -->
             <xs:enumeration value="fr-edit-patron"/>
             <xs:enumeration value="fr-identification"/>
             <xs:enumeration value="fr-insert-welcome"/>

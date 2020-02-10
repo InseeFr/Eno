@@ -3,15 +3,15 @@
 
     <xsl:output method="xml" indent="no" encoding="UTF-8" />
 
-    <!-- Fichier de propriétés eno -->
+    <!-- Eno properties file -->
     <xsl:param name="properties-file" />
-    <!-- Fichier de paramétrage eno -->
+    <!-- Eno parameters file -->
     <xsl:param name="parameters-file" />
     <xsl:param name="parameters-node" as="node()" required="no">
         <empty />
     </xsl:param>
 
-    <!-- Les informations provenant de Pilotage -->
+    <!-- metadata file coming from database "Pilotageé) -->
     <xsl:param name="metadata-file" />
     <xsl:param name="metadata-node" as="node()" required="no">
         <empty />
@@ -54,7 +54,7 @@
         </xsl:choose>
     </xsl:variable>
 
-    <!-- On récupère ces informations, si le modèle de données change, on pourra simplement modifier cette partie -->
+    <!-- Retrieving metadata -->
     <xsl:variable name="Identifiant" select="$metadata//Identifiant" />
     <xsl:variable name="LibelleCourtEnquete" select="$metadata//LibelleCourtEnquete" />
     <xsl:variable name="LibelleCourtEnqueteMillesime" select="$metadata//LibelleCourtEnqueteMillesime" />
@@ -102,7 +102,7 @@
     </xsl:variable>
     <xsl:variable name="ObjectifsEnquete" select="normalize-space($metadata//ObjectifsCourts)" />
     <xsl:variable name="SimplificationEntreprises" select="$metadata//SimplificationEntreprises" />
-    <!-- Valeur pour laquelle on affiche le fait que l'enquête a un caractère obligatoire -->
+    <!-- Value for which the fact that the survey is mandatory is displayed -->
     <xsl:variable name="CaractereObligatoireEnqueteReference" select="string('oui')" />
     <xsl:variable name="SimplificationEntreprisesReference" select="string('oui')" />
 
@@ -122,7 +122,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- On remplace la page de début générique par une page d'accueil coltrane -->
+    <!-- The generic start page is replaced by a coltrane home page. -->
     <xsl:template match="Beginning[parent::form[parent::xf:instance[@id='fr-form-instance']]]">
         <xsl:if test="$studyUnit=$household">
             <Variable idVariable="QuiRepond1" />
@@ -140,7 +140,7 @@
         </ACCUEIL>
     </xsl:template>
 
-    <!-- Le bind correspondant -->
+    <!-- The corresponding bind -->
     <xsl:template match="xf:bind[@name='beginning']">
         <xf:bind id="ACCUEIL-bind" name="ACCUEIL" ref="ACCUEIL">
             <xf:bind id="ACCUEIL-1-bind" name="ACCUEIL-1" ref="ACCUEIL-1" />
@@ -153,7 +153,7 @@
         </xf:bind>
     </xsl:template>
 
-    <!-- Les ressources correspondantes -->
+    <!-- The corresponding resources -->
     <xsl:template match="Beginning[ancestor::xf:instance[@id='fr-form-resources']]">
         <ACCUEIL>
             <label>ACCUEIL</label>
@@ -336,12 +336,12 @@
 
     <xsl:template match="GenericBeginningText[ancestor::xf:instance[@id='fr-form-resources']]" />
 
-    <!-- On remplace la page dans l'instance qui sert à gérer le questionnaire -->
+    <!-- Replace the page in the instance that is used to manage the questionnaire -->
     <xsl:template match="Beginning[ancestor::xf:instance[@id='fr-form-util']]">
         <ACCUEIL />
     </xsl:template>
 
-    <!-- On place le corps html ici -->
+    <!-- We place the html body here -->
     <xsl:template match="fr:section[@name='beginning']">
         <fr:section id="ACCUEIL-control" bind="ACCUEIL-bind" name="ACCUEIL">
             <xf:label ref="$form-resources/ACCUEIL/label" />
@@ -381,7 +381,7 @@
         </fr:section>
     </xsl:template>
 
-    <!-- On fait apparaître/disparaître le cadre legal de la page d'accueil à l'aide d'un lien -->
+    <!-- The legal framework of the homepage is displayed/displayed by means of a link. -->
     <xsl:template match="xf:instance [@id='fr-form-util']/Util">
         <xsl:copy>
             <cadreLegal />
