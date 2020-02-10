@@ -14,11 +14,12 @@ import fr.insee.eno.postprocessing.js.JSExternalizeVariablesPostprocessor;
 import fr.insee.eno.postprocessing.js.JSInsertGenericQuestionsPostprocessor;
 import fr.insee.eno.postprocessing.js.JSSortComponentsPostprocessor;
 import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
-import fr.insee.eno.preprocessing.DDIPreprocessor;
+import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
+import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
 
 public class TestDDIToJS {
-
-	private DDIPreprocessor ddiPreprocessor = new DDIPreprocessor();
 	
 	private DDI2JSGenerator ddi2js = new DDI2JSGenerator();
 	
@@ -28,12 +29,17 @@ public class TestDDIToJS {
 	public void simpleDiffTest() {
 		try {
 			String basePath = "src/test/resources/ddi-to-js";
+			Preprocessor[] preprocessors = {
+					new DDIDereferencingPreprocessor(),
+					new DDICleaningPreprocessor(),
+					new DDITitlingPreprocessor()};
+			
 			Postprocessor[] postprocessors =  {
 					new JSSortComponentsPostprocessor(),
 					new JSInsertGenericQuestionsPostprocessor(),
 					new JSExternalizeVariablesPostprocessor(),
 					new JSVTLParserPostprocessor()};
-			GenerationService genService = new GenerationService(ddiPreprocessor, ddi2js, postprocessors);
+			GenerationService genService = new GenerationService(preprocessors, ddi2js, postprocessors);
 			
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-js-test");

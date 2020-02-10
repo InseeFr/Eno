@@ -23,21 +23,22 @@ import org.junit.Test;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
-import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.PDFMailingPostprocessor;
-import fr.insee.eno.postprocessing.PDFSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.PDFTableColumnPostprocessorFake;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.preprocessing.DDIPreprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFEditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFInsertAccompanyingMailsPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFInsertCoverPagePostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFInsertEndQuestionPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFMailingPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFSpecificTreatmentPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFTableColumnPostprocessorFake;
+import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
+import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
 
 public class DummyTestDDI2PDFExamples {
 
 	private DDI2PDFGenerator generator =  new DDI2PDFGenerator();
-	
-	private DDIPreprocessor ddiPreprocessor = new DDIPreprocessor();
 	
 	@Test
 	public void mainTest() {
@@ -56,16 +57,22 @@ public class DummyTestDDI2PDFExamples {
 			paramIS = new FileInputStream(paramFile);
 			InputStream isXconf = new FileInputStream(xconf);
 			URI imgFolderUri = new File(basePathImg).toURI();
+			
+			Preprocessor[] preprocessors = {
+					new DDIDereferencingPreprocessor(),
+					new DDICleaningPreprocessor(),
+					new DDITitlingPreprocessor()};
+			
+			Postprocessor[] postprocessors = { 
+					new PDFMailingPostprocessor(),
+					new PDFTableColumnPostprocessorFake(),
+					new PDFInsertEndQuestionPostprocessor(),
+					new PDFEditStructurePagesPostprocessor(),
+					new PDFSpecificTreatmentPostprocessor(),
+					new PDFInsertCoverPagePostprocessor(),
+					new PDFInsertAccompanyingMailsPostprocessor()};
 
-			GenerationService genServiceDDI2PDF = new GenerationService(ddiPreprocessor, generator,
-					new Postprocessor[] { 
-							new PDFMailingPostprocessor(),
-							new PDFTableColumnPostprocessorFake(),
-							new PDFInsertEndQuestionPostprocessor(),
-							new PDFEditStructurePagesPostprocessor(),
-							new PDFSpecificTreatmentPostprocessor(),
-							new PDFInsertCoverPagePostprocessor(),
-							new PDFInsertAccompanyingMailsPostprocessor()});
+			GenerationService genServiceDDI2PDF = new GenerationService(preprocessors, generator, postprocessors);
 			genServiceDDI2PDF.setParameters(paramIS);
 
 			File outputFO = genServiceDDI2PDF.generateQuestionnaire(in, "examples");
