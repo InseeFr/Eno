@@ -466,39 +466,41 @@
             <!-- Initialization of all variable text fields -->
             <xf:action ev:event="xforms-ready">
                 <!-- Initialization of dynamic arrays -->
-                <xsl:for-each select="//xf:repeat[xhtml:tr]">
+                <xsl:for-each select="//xf:repeat">
                     <xsl:variable name="container" select="@id"/>
                     <xsl:variable name="dynamic-array" select="substring-after(@nodeset,concat($container,'/'))"/>
-                    <xf:action if="not(instance('fr-form-instance')//{$container}/*)
-                        or count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
-                        <xf:action while="count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
-                            <xf:insert context="instance('fr-form-instance')//{$container}"
-                                nodeset="instance('fr-form-instance')//{$container}/{$dynamic-array}"
-                                position="after"
-                                origin="instance('fr-form-loop-model')/{$container}/{$dynamic-array}"/>
-                            <xf:setvalue ref="instance('fr-form-instance')//{$container}/{$dynamic-array}[last()]/@id"
-                                value="concat('{$dynamic-array}-',count(instance('fr-form-instance')//{$container}/{$dynamic-array}))"/>
-                        </xf:action>
-                    </xf:action>
-                    <xf:action if="count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &gt; instance('fr-form-instance')//{$dynamic-array}-Count">
-                        <xf:setvalue ref="instance('fr-form-instance')//{$dynamic-array}-Count"
-                            value="count(instance('fr-form-instance')//{$container}/{$dynamic-array})"/>
-                    </xf:action>
-                    <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array]">
-                        <xsl:if test="@id != $container">
-                            <xf:action if="not(instance('fr-form-instance')//{@id}/*)
-                                or count(instance('fr-form-instance')//{@id}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
-                                <xf:action while="count(instance('fr-form-instance')//{@id}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
-                                    <xf:insert context="instance('fr-form-instance')//{@id}"
-                                        nodeset="instance('fr-form-instance')//{@id}/{$dynamic-array}"
-                                        position="after"
-                                        origin="instance('fr-form-loop-model')/{@id}/{$dynamic-array}"/>
-                                    <xf:setvalue ref="instance('fr-form-instance')//{@id}/{$dynamic-array}[last()]/@id"
-                                        value="instance('fr-form-instance')//{$container}/{$dynamic-array}[position() = count(instance('fr-form-instance')//{@id}/{$dynamic-array})]/@id"/>
-                                </xf:action>
+                    <xsl:if test="//xf:repeat[tokenize(@nodeset,'/')[last()]=$dynamic-array][not(preceding::xf:repeat[tokenize(@nodeset,'/')[last()]=$dynamic-array])]/@id=$container">
+                        <xf:action if="not(instance('fr-form-instance')//{$container}/*)
+                            or count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
+                            <xf:action while="count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
+                                <xf:insert context="instance('fr-form-instance')//{$container}"
+                                    nodeset="instance('fr-form-instance')//{$container}/{$dynamic-array}"
+                                    position="after"
+                                    origin="instance('fr-form-loop-model')/{$container}/{$dynamic-array}"/>
+                                <xf:setvalue ref="instance('fr-form-instance')//{$container}/{$dynamic-array}[last()]/@id"
+                                    value="concat('{$dynamic-array}-',count(instance('fr-form-instance')//{$container}/{$dynamic-array}))"/>
                             </xf:action>
-                        </xsl:if>
-                    </xsl:for-each>
+                        </xf:action>
+                        <xf:action if="count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &gt; instance('fr-form-instance')//{$dynamic-array}-Count">
+                            <xf:setvalue ref="instance('fr-form-instance')//{$dynamic-array}-Count"
+                                value="count(instance('fr-form-instance')//{$container}/{$dynamic-array})"/>
+                        </xf:action>
+                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array]">
+                            <xsl:if test="@id != $container">
+                                <xf:action if="not(instance('fr-form-instance')//{@id}/*)
+                                    or count(instance('fr-form-instance')//{@id}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
+                                    <xf:action while="count(instance('fr-form-instance')//{@id}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
+                                        <xf:insert context="instance('fr-form-instance')//{@id}"
+                                            nodeset="instance('fr-form-instance')//{@id}/{$dynamic-array}"
+                                            position="after"
+                                            origin="instance('fr-form-loop-model')/{@id}/{$dynamic-array}"/>
+                                        <xf:setvalue ref="instance('fr-form-instance')//{@id}/{$dynamic-array}[last()]/@id"
+                                            value="instance('fr-form-instance')//{$container}/{$dynamic-array}[position() = count(instance('fr-form-instance')//{@id}/{$dynamic-array})]/@id"/>
+                                    </xf:action>
+                                </xf:action>
+                            </xsl:if>
+                        </xsl:for-each>
+                    </xsl:if>
                 </xsl:for-each>
                 <!-- Going back to the page we left -->
                 <xf:toggle case="{$choice}"/>
