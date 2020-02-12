@@ -91,6 +91,10 @@
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-SequenceLoop', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
+                    <xsl:apply-templates select="enoddi33:get-loops-filter($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopFilter', .)" tunnel="yes"/>
+                        <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                    </xsl:apply-templates>
                     <xsl:apply-templates select="enoddi33:get-ifthenelses($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
@@ -496,7 +500,7 @@
         </l:VariableGroup>
     </xsl:template>
 
-    <xsl:template match="driver-LinkedLoops//Loop" mode="model">
+    <xsl:template match="driver-LinkedLoops//Loop" mode="model" priority="2">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <r:BasedOnReference>
@@ -895,15 +899,18 @@
     <xsl:template match="driver-LoopMemberReference//MemberReference | driver-LoopControlConstruct//Loop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
+        <xsl:variable name="filterVal" select="enoddi33:get-filter($source-context)"/>
         <xsl:variable name="idVal">
             <xsl:choose>
-                <xsl:when test="name() = 'Loop'"><xsl:value-of select="enoddi33:get-id($source-context)"/></xsl:when>
+                <xsl:when test="name() = 'Loop' and $filterVal = ''"><xsl:value-of select="enoddi33:get-id($source-context)"/></xsl:when>
+                <xsl:when test="name() = 'Loop' and $filterVal != ''"><xsl:value-of select="concat(enoddi33:get-id($source-context),'-ITE')"/></xsl:when>
                 <xsl:otherwise><xsl:value-of select="$source-context"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="typeVal">
             <xsl:choose>
-                <xsl:when test="name() = 'Loop'">Loop</xsl:when>
+                <xsl:when test="name() = 'Loop' and $filterVal = ''">Loop</xsl:when>
+                <xsl:when test="name() = 'Loop' and $filterVal != ''">IfThenElse</xsl:when>
                 <xsl:otherwise>Sequence</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -1009,7 +1016,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="driver-LoopWhile/Command" mode="model" priority="2">
+    <xsl:template match="driver-LoopWhile/Command | driver-LoopIfThenElse/Command" mode="model" priority="3">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" tunnel="yes"/>
         <xsl:call-template name="Command">
@@ -1102,23 +1109,29 @@
                 </r:Binding>                    
             </xsl:for-each>
             <r:CommandContent>
+                <xsl:variable name="result">
+                    <xsl:choose>
+                        <!-- Calling the specifc template to handle CommandContent when in regular Command case. -->
+                        <xsl:when test="self::Command or ancestor-or-self::IfThenElse or self::Loop">
+                            <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
+                                <xsl:with-param name="expression" select="concat($source-context,' ')"/>
+                                <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                        <!-- When no driver is associated (= no regular Control case), it's a mandatory response Case, for this case only single answer is implemented. -->
+                        <xsl:when test="count($related-variables-with-id/*)=1">
+                            <!-- The command value associated with the error message Instruction is VAR1 = '' -->
+                            <xsl:value-of select="concat('if ',$related-variables-with-id/*[1]/ip-id,'=&apos;'''')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:message>Only madatory Response with unique answer is supported.</xsl:message>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
                 <xsl:choose>
-                    <!-- Calling the specifc template to handle CommandContent when in regular Command case. -->
-                    <xsl:when test="self::Command or ancestor-or-self::IfThenElse">
-                        <xsl:call-template name="replace-pogues-name-variable-by-ddi-id-ip">
-                            <xsl:with-param name="expression" select="concat($source-context,' ')"/>
-                            <xsl:with-param name="current-variable-with-id" select="$related-variables-with-id/*[1]"/>
-                        </xsl:call-template>        
-                    </xsl:when>
-                    <!-- When no driver is associated (= no regular Control case), it's a mandatory response Case, for this case only single answer is implemented. -->
-                    <xsl:when test="count($related-variables-with-id/*)=1">
-                        <!-- The command value associated with the error message Instruction is VAR1 = '' -->
-                        <xsl:value-of select="concat('if ',$related-variables-with-id/*[1]/ip-id,'=&apos;'''')"/>                            
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:message>Only madatory Response with unique answer is supported.</xsl:message>    
-                    </xsl:otherwise>
-                </xsl:choose>                    
+                    <xsl:when test="contains($result,'-ITE-IP-')"><xsl:value-of select="concat('not(',normalize-space($result),')')"/></xsl:when>
+                    <xsl:otherwise><xsl:value-of select="normalize-space($result)"/></xsl:otherwise>
+                </xsl:choose>
             </r:CommandContent>
         </r:Command>        
     </xsl:template>
@@ -1179,47 +1192,81 @@
     </xsl:template>
 
     <!-- that does'nt work (I hate you!!!!!!!!!!!!!!!!!) -->
-    <xsl:template match="driver-ControlConstructScheme//IfThenElse" mode="model">
+    <xsl:template match="driver-ControlConstructScheme//IfThenElse | driver-LoopFilter//Loop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
-        <d:IfThenElse>					
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-            <r:Label>
-                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">A définir</r:Content>
-            </r:Label>
-            <r:Description>
-                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
-                    <xsl:value-of select="enoddi33:get-description($source-context)"/>
-                </r:Content>                
-            </r:Description>
-            <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
-            <d:IfCondition>
-                <xsl:call-template name="Command">
-                    <xsl:with-param name="source-context" select="enoddi33:get-command($source-context)" tunnel="yes"/>
-                </xsl:call-template>
-           </d:IfCondition>				
-            <d:ThenConstructReference>				
-                <r:Agency><xsl:value-of select="$agency"/></r:Agency>		
-                <r:ID><xsl:value-of select="enoddi33:get-then-sequence-id($source-context)"/></r:ID>
+        <xsl:variable name="id">
+            <xsl:choose>
+                <xsl:when test="name()='Loop'"><xsl:value-of select="concat(enoddi33:get-id($source-context),'-ITE')"/></xsl:when>
+                <xsl:otherwise><xsl:value-of select="enoddi33:get-id($source-context)"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="idSeq">
+            <xsl:choose>
+                <xsl:when test="name()='Loop'"><xsl:value-of select="concat($id,'-THEN')"/></xsl:when>
+                <xsl:otherwise><xsl:value-of select="enoddi33:get-then-sequence-id($source-context)"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:if test="name()='IfThenElse' or (name()='Loop' and enoddi33:get-filter($source-context) != '')">
+            <d:IfThenElse>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="$id"/></r:ID>
                 <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-                <r:TypeOfObject>Sequence</r:TypeOfObject>			
-            </d:ThenConstructReference>				
-        </d:IfThenElse>					
-        <d:Sequence>
-            <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="enoddi33:get-then-sequence-id($source-context)"/></r:ID>
-            <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-            <r:Label>
-                <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
-                    <xsl:value-of select="enoddi33:get-label($source-context)"/>
-                </r:Content>
-            </r:Label>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-ThenSequence',.)" tunnel="yes"/>
-            </xsl:apply-templates>
-        </d:Sequence>
+                <r:Label>
+                    <r:Content xml:lang="{enoddi33:get-lang($source-context)}">A définir</r:Content>
+                </r:Label>
+                <r:Description>
+                    <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                        <xsl:value-of select="enoddi33:get-description($source-context)"/>
+                    </r:Content>
+                </r:Description>
+                <d:TypeOfIfThenElse controlledVocabularyID="INSEE-TOITE-CL-1">hideable</d:TypeOfIfThenElse>
+                <d:IfCondition>
+                    <xsl:choose>
+                        <xsl:when test="name() = 'Loop'">
+                            <!-- Call Command template for the Loop Filter-->
+                            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                                <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopIfThenElse', .)" tunnel="yes"/>
+                                <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
+                            </xsl:apply-templates>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="Command">
+                                <xsl:with-param name="source-context" select="enoddi33:get-command($source-context)" tunnel="yes"/>
+                            </xsl:call-template>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </d:IfCondition>
+                <d:ThenConstructReference>
+                    <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                    <r:ID><xsl:value-of select="$idSeq"/></r:ID>
+                    <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                    <r:TypeOfObject>Sequence</r:TypeOfObject>
+                </d:ThenConstructReference>
+            </d:IfThenElse>
+            <d:Sequence>
+                <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                <r:ID><xsl:value-of select="$idSeq"/></r:ID>
+                <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                <r:Label>
+                    <r:Content xml:lang="{enoddi33:get-lang($source-context)}">
+                        <xsl:value-of select="enoddi33:get-label($source-context)"/>
+                    </r:Content>
+                </r:Label>
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="eno:append-empty-element('driver-ThenSequence',.)" tunnel="yes"/>
+                </xsl:apply-templates>
+                <!-- Add ControlConstruct for Loop -->
+                <xsl:if test="name()='Loop'">
+                    <d:ControlConstructReference>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:TypeOfObject>Loop</r:TypeOfObject>
+                    </d:ControlConstructReference>
+                </xsl:if>
+            </d:Sequence>
+        </xsl:if>
     </xsl:template>
     
     
