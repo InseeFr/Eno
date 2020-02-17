@@ -147,6 +147,9 @@ public final class Constants {
 	public static final String FODS_2_XML_XSL = TRANSFORMATIONS_FOLDER + "/fods2xml.xsl";
 	public static final String XML_2_XSL_XSL = TRANSFORMATIONS_FOLDER + "/xml2xsl.xsl";
 	
+	/********************* Merging paramters ******************/
+	public static final String MERGE_PARAMETERS_XSL = UTIL_FOLDER_PATH + "/params/merge-parameters.xsl";
+	
 	
 
 	/********************************************************/
