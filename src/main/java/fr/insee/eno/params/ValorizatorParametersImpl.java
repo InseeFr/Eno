@@ -104,7 +104,6 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 		ByteArrayOutputStream outputStream = this.mergeParameters(enoParameters);
 		ENOParameters finalEnoParam = this.getParameters(new ByteArrayInputStream(outputStream.toByteArray()));
 		outputStream.close();
-		LOGGER.info("Default parameters read");
 		return finalEnoParam;
 	}
 
