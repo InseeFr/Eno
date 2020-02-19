@@ -59,13 +59,43 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
-	<xsl:variable name="roster-defaultsize">
+	<xsl:variable name="roster-minimum-empty-row" as="xs:integer">
+		<xsl:choose>
+			<xsl:when test="$parameters//Roster/Row/MinimumEmpty != ''">
+				<xsl:value-of select="$parameters//Roster/Row/MinimumEmpty"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$properties//Roster/Row/MinimumEmpty"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="roster-defaultsize" as="xs:integer">
 		<xsl:choose>
 			<xsl:when test="$parameters//Roster/Row/DefaultSize != ''">
 				<xsl:value-of select="$parameters//Roster/Row/DefaultSize"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="$properties//Roster/Row/DefaultSize"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="loop-minimumoccurrence" as="xs:integer">
+		<xsl:choose>
+			<xsl:when test="$parameters//Loop/MinimumOccurrence != ''">
+				<xsl:value-of select="$parameters//Loop/MinimumOccurrence"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$properties//Loop/MinimumOccurrence"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="loop-minimum-emptyoccurrence" as="xs:integer">
+		<xsl:choose>
+			<xsl:when test="$parameters//Loop/MinimumEmptyOccurrence != ''">
+				<xsl:value-of select="$parameters//Loop/MinimumEmptyOccurrence"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$properties//Loop/MinimumEmptyOccurrence"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
@@ -321,6 +351,46 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
+	<xd:doc>
+		<xd:desc>template for loops</xd:desc>
+	</xd:doc>
+	<xsl:template match="main//QuestionLoop" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="loop-position" tunnel="yes" select="''"/>
+		<xsl:param name="empty-occurrence" tunnel="yes" as="xs:boolean" select="false()"/>
+
+		<xsl:variable name="loop-name" select="enopdf:get-business-name($source-context)"/>
+		<xsl:variable name="current-match" select="."/>
+		
+		<!-- initialized occurrences -->
+		<xsl:if test="not($empty-occurrence)">
+			<xsl:value-of select="concat('#FOREACH( ${',$loop-name,'} IN ${',$loop-name,'-Container} ) ')"/>
+			<xsl:value-of select="concat('#set( ${',$loop-name,'.LoopPosition} = $velocityCount)')"/>
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+				<xsl:with-param name="loop-position" select="concat($loop-position,'-${',$loop-name,'.LoopPosition}')" tunnel="yes"/>
+			</xsl:apply-templates>
+			<xsl:value-of select="'#{END}'"/>			
+		</xsl:if>
+		<!-- empty occurrences -->
+		<xsl:if test="$loop-minimum-emptyoccurrence != 0 or $loop-minimumoccurrence != 0">
+			<xsl:for-each select="1 to (if ($loop-minimum-emptyoccurrence &gt; $loop-minimumoccurrence) then $loop-minimum-emptyoccurrence else $loop-minimumoccurrence)">
+				<xsl:variable name="empty-position" select="position()"/>
+				<xsl:if test="$empty-position &gt; $loop-minimum-emptyoccurrence">
+					<xsl:value-of select="concat('#IF (${',$loop-name,'-TotalOccurrenceCount} LE ',$loop-minimumoccurrence - $empty-position,') ')"/>
+				</xsl:if>
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
+					<xsl:with-param name="loop-position" select="concat($loop-position,'--',$empty-position)" tunnel="yes"/>
+					<xsl:with-param name="empty-occurrence" as="xs:boolean" select="true()" tunnel="yes"/>
+				</xsl:apply-templates>
+				<xsl:if test="$empty-position &gt; $loop-minimum-emptyoccurrence">
+					<xsl:value-of select="'#END '"/>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:if>
+	</xsl:template>
+	
 	<!-- QUESTIONS -->
 	<xd:doc>
 		<xd:desc>Questions with responses which are not in a table</xd:desc>
@@ -329,6 +399,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
+		<xsl:param name="loop-position" tunnel="yes" select="''"/>
 
 		<!--<xsl:apply-templates select="enopdf:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
@@ -353,7 +424,7 @@
 		<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>
-		<fo:block id="{enopdf:get-question-name($source-context,$languages[1])}" page-break-inside="avoid">
+		<fo:block id="{enopdf:get-question-name($source-context,$languages[1])}{$loop-position}" page-break-inside="avoid">
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="typeOfAncestor" select="'question'" tunnel="yes"/>
@@ -365,26 +436,14 @@
 	</xsl:template>
 
 	<!-- Déclenche tous les Table de l'arbre des drivers -->
-	<xsl:template match="main//Table | main//TableLoop" mode="model">
+	<xsl:template match="main//Table" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-position" tunnel="yes" select="''"/>
 		
 		<xsl:variable name="current-match" select="."/>
-		<xsl:variable name="no-border" select="enopdf:get-style($source-context)"/>
-		<xsl:variable name="table-type" select="local-name()"/>
-		<xsl:variable name="total-lines" as="xs:integer">
-			<xsl:choose>
-				<xsl:when test="$table-type = 'Table'">
-					<xsl:value-of select="count(enopdf:get-body-lines($source-context))"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="number($roster-defaultsize)"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
-		<xsl:variable name="maxlines-by-page" as="xs:integer">
-			<xsl:value-of select="number($table-defaultsize)"/>
-		</xsl:variable>
+		<xsl:variable name="total-lines" as="xs:integer" select="count(enopdf:get-body-lines($source-context))"/>
+		<xsl:variable name="maxlines-by-page" as="xs:integer" select="xs:integer($table-defaultsize)"/>
 		<!-- The table in the first page contains 1 line less than next ones -->
 		<xsl:variable name="table-pages" select="xs:integer(1+(($total-lines -1+1) div $maxlines-by-page))" as="xs:integer"/>
 		
@@ -403,31 +462,12 @@
 			<xsl:variable name="page-position" select="position()"/>
 			<fo:block page-break-inside="avoid">
 				<xsl:attribute name="id">
-					<xsl:choose>
-						<xsl:when test="$table-type = 'Table'">
-							<xsl:value-of select="enopdf:get-question-name($source-context,$languages[1])"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="enopdf:get-business-name($source-context)"/>
-						</xsl:otherwise>
-					</xsl:choose>
+					<xsl:value-of select="concat(enopdf:get-question-name($source-context,$languages[1]),$loop-position)"/>
 					<xsl:if test="$total-lines &gt; $maxlines-by-page -1">
-						<xsl:choose>
-							<!-- For TableLoop, "-" character will be used to identify pages which will have the same input mask -->
-							<!-- For Table, input masks of page 2 and page 3 will be different -->
-							<xsl:when test="$table-type = 'Table'">
-								<xsl:value-of select="'0'"/>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="'-'"/>	
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:value-of select="'0'"/>
 						<xsl:value-of select="$page-position"/>
 					</xsl:if>
 				</xsl:attribute>
-				<xsl:if test="$current-match/name()='TableLoop' and $total-lines &gt; $maxlines-by-page -1">
-					<xsl:attribute name="page-break-after" select="'always'"/>
-				</xsl:if>
 				<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
 					text-align="center" margin-top="1mm" display-align="center" space-after="5mm">
 					<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
@@ -437,52 +477,31 @@
 									<xsl:apply-templates select="enopdf:get-header-line($source-context, position())" mode="source">
 										<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
 										<xsl:with-param name="header" select="'YES'" tunnel="yes"/>
-										<xsl:with-param name="no-border" select="$no-border" tunnel="yes"/>
+										<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
 									</xsl:apply-templates>
 								</fo:table-row>
 							</xsl:for-each>
 						</fo:table-header>
 					</xsl:if>
 					<fo:table-body>
-						<xsl:choose>
-							<xsl:when test="$current-match/name()='Table'">
-								<xsl:variable name="first-line" select="$maxlines-by-page*($page-position -1)"/>
-								<xsl:variable name="last-line" select="$maxlines-by-page*($page-position) -1"/>
-								<xsl:for-each select="enopdf:get-body-lines($source-context)">
-									<xsl:variable name="position" select="position()"/>
-									<!-- page 1 starts at line 0, so contains 1 line less than next ones -->
-									<xsl:if test="($position &gt;= $first-line) and ($position &lt;= $last-line)">
-										<fo:table-row border-color="black">
-											<xsl:apply-templates select="enopdf:get-body-line($source-context, position(),$first-line)" mode="source">
-												<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
-												<xsl:with-param name="table-first-line" select="$first-line" tunnel="yes"/>
-												<xsl:with-param name="table-last-line" select="$last-line" tunnel="yes"/>
-												<xsl:with-param name="isTable" select="'YES'" tunnel="yes"/>
-												<xsl:with-param name="row-number" select="position()" tunnel="yes"/>
-												<xsl:with-param name="no-border" select="$no-border" tunnel="yes"/>
-											</xsl:apply-templates>
-										</fo:table-row>
-									</xsl:if>
-								</xsl:for-each>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:for-each select="1 to $maxlines-by-page">
-									<!-- if the dynamic table is on several pages, each page contains maxlines-by-page, except the first one, which has maxlines-by-page -1 -->
-									<xsl:if test="$page-position &gt; 1 or (. &lt;= $total-lines and . &lt; $maxlines-by-page)">
-										<!-- in a dynamic table, a repeated "line" may be on several get-body-lines -->
-										<xsl:for-each select="enopdf:get-body-lines($source-context)">
-											<xsl:variable name="position" select="position()"/>
-											<fo:table-row border-color="black">
-												<xsl:apply-templates select="enopdf:get-body-line($source-context, $position)" mode="source">
-													<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
-													<xsl:with-param name="no-border" select="$no-border" tunnel="yes"/>
-												</xsl:apply-templates>
-											</fo:table-row>
-										</xsl:for-each>
-									</xsl:if>
-								</xsl:for-each>
-							</xsl:otherwise>
-						</xsl:choose>
+						<xsl:variable name="first-line" select="$maxlines-by-page*($page-position -1)"/>
+						<xsl:variable name="last-line" select="$maxlines-by-page*($page-position) -1"/>
+						<xsl:for-each select="enopdf:get-body-lines($source-context)">
+							<xsl:variable name="position" select="position()"/>
+							<!-- page 1 starts at line 0, so contains 1 line less than next ones -->
+							<xsl:if test="($position &gt;= $first-line) and ($position &lt;= $last-line)">
+								<fo:table-row border-color="black">
+									<xsl:apply-templates select="enopdf:get-body-line($source-context, position(),$first-line)" mode="source">
+										<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
+										<xsl:with-param name="table-first-line" select="$first-line" tunnel="yes"/>
+										<xsl:with-param name="table-last-line" select="$last-line" tunnel="yes"/>
+										<xsl:with-param name="isTable" select="'YES'" tunnel="yes"/>
+										<xsl:with-param name="row-number" select="position()" tunnel="yes"/>
+										<xsl:with-param name="no-border" select="enopdf:get-style($source-context)" tunnel="yes"/>
+									</xsl:apply-templates>
+								</fo:table-row>
+							</xsl:if>
+						</xsl:for-each>
 					</fo:table-body>
 				</fo:table>
 			</fo:block>
@@ -492,6 +511,98 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
+	<!-- Déclenche tous les Table de l'arbre des drivers -->
+	<xsl:template match="main//TableLoop" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-position" tunnel="yes" select="''"/>
+		<xsl:param name="empty-occurrence" tunnel="yes" as="xs:boolean" select="false()"/>
+		
+		<xsl:variable name="loop-name" select="enopdf:get-business-name($source-context)"/>
+		<xsl:variable name="current-match" select="."/>
+		<xsl:variable name="no-border" select="enopdf:get-style($source-context)"/>
+		<xsl:variable name="total-lines" as="xs:integer" select="xs:integer($roster-defaultsize)"/>
+		<xsl:variable name="maxlines-by-page" as="xs:integer" select="xs:integer($table-defaultsize)"/>
+
+		<xsl:variable name="table-header" as="node()*">
+			<xsl:for-each select="enopdf:get-header-lines($source-context)">
+				<fo:table-row xsl:use-attribute-sets="entete-ligne" text-align="center">
+					<xsl:apply-templates select="enopdf:get-header-line($source-context, position())" mode="source">
+						<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
+						<xsl:with-param name="header" select="'YES'" tunnel="yes"/>
+						<xsl:with-param name="no-border" select="$no-border" tunnel="yes"/>
+					</xsl:apply-templates>
+				</fo:table-row>
+			</xsl:for-each>
+		</xsl:variable>
+		<!--<xsl:apply-templates select="enopdf:get-before-question-title-instructions($source-context)" mode="source">
+			<xsl:with-param name="driver" select="."/>
+		</xsl:apply-templates>-->
+		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
+			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+		</fo:block>
+		<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source-context)" mode="source">
+			<xsl:with-param name="driver" select="."/>
+		</xsl:apply-templates>
+		
+		<fo:block page-break-inside="avoid">
+			<xsl:attribute name="id" select="concat($loop-position,$loop-name)"/>
+			<xsl:attribute name="page-break-after" select="'always'"/>
+			<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
+				text-align="center" margin-top="1mm" display-align="center" space-after="5mm">
+				<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
+					<fo:table-header>
+						<xsl:copy-of select="$table-header"/>	
+					</fo:table-header>
+				</xsl:if>
+				<fo:table-body>
+					<!-- initialized rows -->
+					<xsl:if test="not($empty-occurrence)">
+						<xsl:value-of select="concat('#FOREACH( ${',$loop-name,'} IN ${',$loop-name,'-Container} ) ')"/>
+						<xsl:value-of select="concat('#set( ${',$loop-name,'.LoopPosition} = $velocityCount)')"/>
+						<xsl:for-each select="enopdf:get-body-lines($source-context)">
+							<xsl:variable name="position" select="position()"/>
+							<fo:table-row border-color="black">
+								<xsl:apply-templates select="enopdf:get-body-line($source-context, $position)" mode="source">
+									<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
+									<xsl:with-param name="no-border" select="$no-border" tunnel="yes"/>
+									<xsl:with-param name="loop-position" select="concat($loop-position,'-${',$loop-name,'.LoopPosition}')" tunnel="yes"/>
+								</xsl:apply-templates>
+							</fo:table-row>
+						</xsl:for-each>
+						<xsl:value-of select="'#{END}'"/>						
+					</xsl:if>
+					<!-- empty rows -->
+					<xsl:if test="$roster-minimum-empty-row != 0 or $roster-defaultsize != 0">
+						<xsl:for-each select="1 to (if ($roster-minimum-empty-row &gt; $roster-defaultsize) then $roster-minimum-empty-row else $roster-defaultsize)">
+							<xsl:variable name="empty-position" select="position()"/>
+							<xsl:if test="$empty-position &gt; $roster-minimum-empty-row">
+								<xsl:value-of select="concat('#IF (${',$loop-name,'-TotalOccurrenceCount} LE ',$roster-defaultsize - $empty-position,') ')"/>
+							</xsl:if>
+							<xsl:for-each select="enopdf:get-body-lines($source-context)">
+								<xsl:variable name="position" select="position()"/>
+								<fo:table-row border-color="black">
+									<xsl:apply-templates select="enopdf:get-body-line($source-context, $position)" mode="source">
+										<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
+										<xsl:with-param name="no-border" select="$no-border" tunnel="yes"/>
+										<xsl:with-param name="loop-position" select="concat($loop-position,'--',$empty-position)" tunnel="yes"/>
+										<xsl:with-param name="empty-occurrence" as="xs:boolean" select="true()" tunnel="yes"/>
+									</xsl:apply-templates>
+								</fo:table-row>
+							</xsl:for-each>
+							<xsl:if test="$empty-position &gt; $roster-minimum-empty-row">
+								<xsl:value-of select="'#END '"/>
+							</xsl:if>
+						</xsl:for-each>
+					</xsl:if>
+				</fo:table-body>
+			</fo:table>
+		</fo:block>
+		<xsl:apply-templates select="enopdf:get-end-question-instructions($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
 	<!-- Déclenche tous les TextCell de l'arbre des drivers -->
 	<xsl:template match="main//TextCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>

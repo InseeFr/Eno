@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner"
@@ -156,7 +156,7 @@
         <xsl:if test="substring(.,1,1)=' '">
             <xsl:text xml:space="preserve"> </xsl:text>
         </xsl:if>
-        <xsl:call-template name="vtl-label">
+        <xsl:call-template name="velocity-label">
             <xsl:with-param name="label" select="normalize-space(.)"/>
             <xsl:with-param name="variables" select="$label-variables"/>
         </xsl:call-template>
@@ -165,17 +165,18 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template name="vtl-label">
+    <xsl:template name="velocity-label">
         <xsl:param name="label"/>
         <xsl:param name="variables"/>
         
         <xsl:choose>
             <xsl:when test="contains($label,$conditioning-variable-begin) and contains(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)">
                 <xsl:value-of select="substring-before($label,$conditioning-variable-begin)"/>
+                <xsl:variable name="variable-name" select="substring-before(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
                 <xsl:variable name="variable-type">
                     <xsl:call-template name="enoddi:get-variable-type">
-                        <xsl:with-param name="variable" select="substring-before(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
-                    </xsl:call-template>                    
+                        <xsl:with-param name="variable" select="$variable-name"/>
+                    </xsl:call-template>
                 </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="$variable-type = 'external'">
@@ -185,11 +186,20 @@
                         <xsl:value-of select="'$!{'"/>
                     </xsl:otherwise>
                 </xsl:choose>
+                <xsl:variable name="variable-ancestors" as="xs:string *">
+                    <xsl:call-template name="enoddi:get-business-ancestors">
+                        <xsl:with-param name="variable" select="$variable-name"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:if test="$variable-ancestors != ''">
+                    <xsl:value-of select="$variable-ancestors[last()]"/>
+                    <xsl:value-of select="'.'"/>
+                </xsl:if>
                 <xsl:call-template name="enoddi:get-business-name">
-                    <xsl:with-param name="variable" select="substring-before(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
+                    <xsl:with-param name="variable" select="$variable-name"/>
                 </xsl:call-template>
                 <xsl:value-of select="'}'"/>
-                <xsl:call-template name="vtl-label">
+                <xsl:call-template name="velocity-label">
                     <xsl:with-param name="label" select="substring-after(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
                     <xsl:with-param name="variables" select="$variables"/>
                 </xsl:call-template>
