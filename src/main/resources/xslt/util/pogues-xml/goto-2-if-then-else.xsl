@@ -221,7 +221,7 @@
                                 <xsl:for-each select="$list_distinct_goto//poguesGoto:gotoValue[number(poguesGoto:From/@position) &lt; number($initial-from/@position)
                                                                                             and number(poguesGoto:To/@position) &gt; number($initial-from/@position)
                                                                                             and number(poguesGoto:To/@position) &lt; number($initial-to/@position)]">
-                                    <xsl:sort select="poguesGoto:To/@position" order="ascending"/>
+                                    <xsl:sort select="number(poguesGoto:To/@position)" order="ascending"/>
                                     <xsl:copy-of select="."/>
                                 </xsl:for-each>
                             </poguesGoto:gotoValues>
