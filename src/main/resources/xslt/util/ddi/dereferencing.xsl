@@ -392,15 +392,7 @@
         <xsl:variable name="current-ID" select="r:ID"/>
 
         <xsl:copy>
-            <xsl:choose>
-                <xsl:when test="key('variablegroup',$current-ID)">
-                    <xsl:apply-templates select="key('variablegroup',$current-ID)/r:VariableReference/key('external-variable',r:ID)" mode="output-DDI"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates select="/ddi-instance:DDIInstance/g:ResourcePackage/l:VariableScheme/l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID = $current-ID]
-                                                                                                                             /r:VariableReference/key('external-variable',r:ID)" mode="output-DDI"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates select="key('variablegroup',$current-ID)/r:VariableReference/key('external-variable',r:ID)" mode="output-DDI"/>
             <xsl:apply-templates select="*" mode="output-DDI"/>
             <xsl:apply-templates select="key('calculated-variable',$current-ID)" mode="output-DDI"/>
         </xsl:copy>

@@ -313,11 +313,37 @@
         <xsl:value-of select="enopogues:get-qop-id($related-variables[1])"/>
     </xsl:template>
 
-    <!-- id generated from idCodeList with id of Other Choice question -->
-    <xsl:template match="*" mode="enopogues:get-clarified-code">
-        <xsl:param name="idList" as="xs:string" tunnel="yes"/>
-        <xsl:param name="otherValue" as="xs:string" tunnel="yes"/>
-        <xsl:value-of select="enopogues:get-id(//pogues:CodeList[@id=$idList]/pogues:Code[pogues:Value=$otherValue])"/>
+
+    <xsl:template match="pogues:ClarificationQuestion" mode="enopogues:get-clarified-response">
+        <xsl:variable name="clarification-formula" select="parent::*/pogues:FlowControl[@flowControlType='CLARIFICATION' and pogues:IfTrue=current()/@id]"/>
+        <xsl:variable name="response-variable-name" select="substring-before(substring-after($clarification-formula,'$'),'$')"/>
+        <xsl:variable name="collected-variable" select="//pogues:Variable[pogues:Name=$response-variable-name]/@id"/>
+
+        <xsl:sequence select="../pogues:Response[pogues:CollectedVariableReference=$collected-variable]"/>
+    </xsl:template>
+    <xd:doc>
+        <xd:desc>number used to link the clarified Response and its clarifications</xd:desc>
+    </xd:doc>
+    <xsl:template match="pogues:Response" mode="enopogues:get-attachment-position">
+        <xsl:variable name="variable-name" select="enopogues:get-name(enopogues:get-related-variable(.))"/>
+        
+        <xsl:if test="parent::*/pogues:FlowControl[@flowControlType='CLARIFICATION' and contains(pogues:Expression,concat('$',$variable-name,'$'))]">
+            <xsl:value-of select="count(preceding-sibling::pogues:Response)+1"/>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="pogues:ClarificationQuestion" mode="enopogues:get-attachment-position">
+        <xsl:variable name="response-id" select="enopogues:get-clarified-response(.)"/>
+        <xsl:value-of select="enopogues:get-attachment-position($response-id)"/>
+    </xsl:template>
+
+    <xsl:template match="pogues:Response" mode="enopogues:get-scope-id">
+        <xsl:variable name="idVariable" select="pogues:CollectedVariableReference"/>
+        <xsl:value-of select="//pogues:Variable[@id=$idVariable]/pogues:Scope"/>
+    </xsl:template>
+
+    <xsl:template match="pogues:ClarificationQuestion" mode="enopogues:get-scope-id">
+        <xsl:variable name="idVariable" select="pogues:Response/pogues:CollectedVariableReference"/>
+        <xsl:value-of select="//pogues:Variable[@id=$idVariable]/pogues:Scope"/>
     </xsl:template>
 
 </xsl:stylesheet>

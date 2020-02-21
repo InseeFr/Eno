@@ -7539,7 +7539,14 @@
                      </r:TargetParameterReference>
                   </r:Binding>
                </r:ProcessingInstructionReference>
-               <r:NumericRepresentation/>
+               <r:NumericRepresentation decimalPositions="1">
+                  <r:MeasurementUnit>%</r:MeasurementUnit>
+                  <r:NumberRange>
+                     <r:Low isInclusive="true">0</r:Low>
+                     <r:High isInclusive="true">100</r:High>
+                  </r:NumberRange>
+                  <r:NumericTypeCode controlledVocabularyID="INSEE-CIS-NTC-CV">Decimal</r:NumericTypeCode>
+               </r:NumericRepresentation>
             </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
