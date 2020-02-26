@@ -53,7 +53,7 @@
 		<fop.version>2.2</fop.version>
 		<xalan.version>2.7.1</xalan.version>
 		<slf4j.version>1.7.25</slf4j.version>
-		<eclipse.version>2.7.4</eclipse.version>
+		<eclipse.version>2.6.0</eclipse.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 		
 		<apache-commons.version>3.5</apache-commons.version>
@@ -136,6 +136,7 @@
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>org.eclipse.persistence.moxy</artifactId>
 			<version>${eclipse.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
