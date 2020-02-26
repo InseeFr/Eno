@@ -1,0 +1,48 @@
+<ENOParameters>
+    
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>fr</OutFormat>
+        
+        <PreProcessing>ddi-mapping</PreProcessing>
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        
+        <PostProcessing>fr-insert-generic-questions</PostProcessing>
+        <PostProcessing>fr-browsing</PostProcessing>
+        <PostProcessing>fr-modele-coltrane</PostProcessing>
+        <PostProcessing>fr-edit-patron</PostProcessing>
+        <PostProcessing>fr-insert-welcome</PostProcessing>
+        <PostProcessing>fr-insert-end</PostProcessing>
+        <PostProcessing>fr-fix-adherence</PostProcessing>
+    </Pipeline>
+    
+    <Parameters>
+        
+        <StudyUnit>household</StudyUnit>
+        
+        <Campagne>fpe-2019-x00</Campagne>
+        
+        <Languages>
+            <Language>fr</Language>
+        </Languages>
+        
+        <EndQuestion>
+            <ResponseTimeQuestion>false</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+        
+        <fr-parameters>            
+            <NumericExample>false</NumericExample>
+            <Deblocage>false</Deblocage>
+            <Satisfaction>true</Satisfaction>
+            <LengthOfLongTable>7</LengthOfLongTable>
+        </fr-parameters>
+        
+        <Title>
+            <Browsing>template</Browsing>
+        </Title>
+    </Parameters>
+    
+</ENOParameters>

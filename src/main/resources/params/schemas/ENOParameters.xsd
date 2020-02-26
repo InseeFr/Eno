@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+    
+    <xs:include schemaLocation="Pipeline.xsd"/>
+    
+    <xs:include schemaLocation="generation/PoguesXML2DDIGeneration.xsd"/>
+    <xs:include schemaLocation="generation/DDI2FRGeneration.xsd"/>
+    <xs:include schemaLocation="generation/DDI2JSGeneration.xsd"/>
+    <xs:include schemaLocation="generation/DDI2ODTGeneration.xsd"/>
+    <xs:include schemaLocation="generation/DDI2PDFGeneration.xsd"/>
+    
+    <xs:include schemaLocation="preprocessing/DDIPreprocessing.xsd"/>
+    
+        
+    <xs:element name="ENOParameters">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Pipeline" type="Pipeline" minOccurs="1" maxOccurs="1"/>
+                <xs:element name="Parameters" type="Parameters" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+        
+    <xs:complexType name="Parameters" >
+        <xs:all>
+            <xs:element name="StudyUnit" type="StudyUnit" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Campagne" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Languages" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Language" type="Language" minOccurs="0" maxOccurs="unbounded" default="fr"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BeginQuestion" type="BeginQuestion" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="EndQuestion" type="EndQuestion" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="fr-parameters" type="FRParameters" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="pdf-parameters" type="PDFParameters" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="js-parameters" type="JSParameters" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="odt-parameters" type="ODTParameters" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Title" type="GlobalNumbering" minOccurs="0" maxOccurs="1"/>
+        </xs:all>        
+    </xs:complexType>
+        
+    <xs:simpleType name="Language">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="fr"/>
+            <xs:enumeration value="en"/>
+            <xs:enumeration value="it"/>
+            <xs:enumeration value="es"/>
+            <xs:enumeration value="de"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StudyUnit">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="default"/>
+            <xs:enumeration value="household"/>
+            <xs:enumeration value="business"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="BeginQuestion">
+        <xs:sequence>
+            <xs:element name="Identification" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="EndQuestion">
+        <xs:all>
+            <xs:element name="ResponseTimeQuestion" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="CommentQuestion" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+</xs:schema>

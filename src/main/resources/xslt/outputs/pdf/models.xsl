@@ -18,109 +18,8 @@
 	<xsl:param name="parameters-node" as="node()" required="no">
 		<empty/>
 	</xsl:param>
-	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>The properties and parameters files are charged as xml trees.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:variable name="properties" select="doc($properties-file)"/>
-	<xsl:variable name="parameters">
-		<xsl:choose>
-			<xsl:when test="$parameters-node/*">
-				<xsl:copy-of select="$parameters-node"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:copy-of select="doc($parameters-file)"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	
-	<xd:doc>
-		<xd:desc>Variables from propertiers and parameters</xd:desc>
-	</xd:doc>
-	<xsl:variable name="orientation">
-		<xsl:choose>
-			<xsl:when test="$parameters//Format/Orientation != ''">
-				<xsl:value-of select="$parameters//Format/Orientation"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$properties//Format/Orientation"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	<xsl:variable name="column-count">
-		<xsl:choose>
-			<xsl:when test="$parameters//Format/Columns != ''">
-				<xsl:value-of select="$parameters//Format/Columns"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$properties//Format/Columns"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	<xsl:variable name="roster-defaultsize">
-		<xsl:choose>
-			<xsl:when test="$parameters//Roster/Row/DefaultSize != ''">
-				<xsl:value-of select="$parameters//Roster/Row/DefaultSize"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$properties//Roster/Row/DefaultSize"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	<xsl:variable name="table-defaultsize">
-		<xsl:choose>
-			<xsl:when test="$parameters//Table/Row/DefaultSize != ''">
-				<xsl:value-of select="$parameters//Table/Row/DefaultSize"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$properties//Table/Row/DefaultSize"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	<xsl:variable name="textarea-defaultsize">
-		<xsl:choose>
-			<xsl:when test="$parameters//TextArea/Row/DefaultSize != ''">
-				<xsl:value-of select="$parameters//TextArea/Row/DefaultSize"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$properties//TextArea/Row/DefaultSize"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	<xsl:variable name="images-folder">
-		<xsl:choose>
-			<xsl:when test="$parameters//Images/Folder != ''">
-				<xsl:value-of select="$parameters//Images/Folder"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$properties//Images/Folder"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	<xsl:variable name="numeric-capture">
-		<xsl:choose>
-			<xsl:when test="$parameters//Capture/Numeric != ''">
-				<xsl:value-of select="$parameters//Capture/Numeric"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$properties//Capture/Numeric"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	<xsl:variable name="page-break-between">
-		<xsl:choose>
-			<xsl:when test="$parameters//PageBreakBetween/pdf != ''">
-				<xsl:value-of select="$parameters//PageBreakBetween/pdf"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$properties//PageBreakBetween/pdf"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	
-	<xsl:variable name="page-model-default" select="doc('../../../xslt/util/pdf/page-model/page-model-default.fo')"/>
+		
+	<xsl:variable name="page-model-default" select="doc('../../../xslt/post-processing/pdf/page-model/page-model-default.fo')"/>
 	
 	<xsl:include href="../../../styles/style.xsl"/>
 	
@@ -139,6 +38,7 @@
 		<fo:root>
 			<xsl:copy-of select="$page-model-default//fo:layout-master-set"/>
 			<fo:page-sequence master-reference="A4" initial-page-number="2" force-page-count="odd">
+				<fo:title><xsl:value-of select="$survey-name"/></fo:title>
 				<xsl:copy-of select="$page-model-default//fo:static-content"/>
 				<fo:flow flow-name="xsl-region-body" border-collapse="collapse" font-size="10pt">
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">

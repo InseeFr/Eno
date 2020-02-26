@@ -1,0 +1,2270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xhtml:html xmlns:xhtml="http://www.w3.org/1999/xhtml"
+            xmlns:xf="http://www.w3.org/2002/xforms"
+            xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:fn="http://www.w3.org/2005/xpath-functions"
+            xmlns:ev="http://www.w3.org/2001/xml-events"
+            xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+            xmlns:fr="http://orbeon.org/oxf/xml/form-runner">
+   <xhtml:head>
+      <xhtml:title>Enquête sur les entreprises mahoraises (ESEM) 2018</xhtml:title>
+      <xhtml:link rel="stylesheet" href="/css/commonEnglish.css"/>
+      <xhtml:link rel="stylesheet" href="/css/enterpriseEnglish.css"/>
+      <xf:model id="fr-form-model"
+                xxf:expose-xpath-types="true"
+                xxf:noscript-support="true">
+         <xf:instance id="fr-form-instance">
+            <form modele="m1">
+               <ACCUEIL>
+                  <ACCUEIL-1/>
+                  <ACCUEIL-2/>
+                  <ACCUEIL-3/>
+                  <ACCUEIL-4/>
+                  <ACCUEIL-5/>
+                  <ACCUEIL-6/>
+                  <ACCUEIL-7/>
+               </ACCUEIL>
+               <INSEE-BUSINESS-QUEST-DEBUT>
+                  <INSEE-BUSINESS-SEQ-0-1/>
+                  <Variable idVariable="COMMENT_UE"/>
+                  <Identification/>
+                  <Identification-1/>
+                  <Identification-2/>
+                  <Identification-3/>
+               </INSEE-BUSINESS-QUEST-DEBUT>
+               <Variable idVariable="LIB_APE_LANC"/>
+               <Variable idVariable="LIB_CJ_LANC"/>
+               <Variable idVariable="APE_LANC"/>
+               <Variable idVariable="CJ_LANC"/>
+               <Variable idVariable="ANNEE_EXERCICE"/>
+               <ji5ozd1c>
+                  <ji5qkhex/>
+                  <Variable idVariable="APE_LANC_OK"/>
+                  <ji5qzpgp-a-ji5p2udq-THEN>
+                     <Variable idVariable="APE"/>
+                  </ji5qzpgp-a-ji5p2udq-THEN>
+                  <ji5qm1f7/>
+                  <Variable idVariable="CJ_LANC_OK"/>
+                  <ji5z3x4o-a-ji5qj9re-THEN>
+                     <Variable idVariable="CJ"/>
+                  </ji5z3x4o-a-ji5qj9re-THEN>
+               </ji5ozd1c>
+               <ji5ra55r>
+                  <Variable idVariable="DIRIGEANT_SALARIE"/>
+                  <Variable idVariable="EFF3112"/>
+                  <ji5qzo7i-CI-0/>
+                  <Variable idVariable="EFF_ETP"/>
+               </ji5ra55r>
+               <ji5s5tl9>
+                  <Variable idVariable="DATE_CLOTURE_EXERCICE"/>
+                  <ji5rmgik-CI-0/>
+                  <Variable idVariable="DUREE_EXERCICE"/>
+               </ji5s5tl9>
+               <ji5s9w50>
+                  <ji5s9w50-jseg5fj3/>
+                  <Variable idVariable="CA"/>
+                  <Variable idVariable="CA_MARCHANDISES"/>
+                  <ji5sgt4d-CI-0/>
+                  <Variable idVariable="PROD_STOCKEE_ET_EN_COURS"/>
+                  <Variable idVariable="PRODUCTION_IMMOBILISEE"/>
+                  <Variable idVariable="SUBVENTIONS_EXPLOITATION"/>
+                  <Variable idVariable="AUTRES_PRODUITS"/>
+                  <jjjlfk33/>
+                  <jjjl8hwg-SI/>
+                  <Variable idVariable="UNITE_REPARTITION"/>
+                  <jjjliro2/>
+                  <jjjliro2-jjjliro2-secondDimension-fakeCL-1--1/>
+                  <jjjliro2-jjjliro2-secondDimension-fakeCL-1-0/>
+                  <jjjliro2-jjjliro2-secondDimension-fakeCL-1-1/>
+                  <Groupe idGroupe="REPARTITION_CA">
+                     <Groupe typeGroupe="REPARTITION_CA" idGroupe="REPARTITION_CA-1">
+                        <Variable idVariable="REPARTITION_CA1"/>
+                        <Variable idVariable="REPARTITION_CA2"/>
+                        <Variable idVariable="REPARTITION_CA3"/>
+                        <output-REPARTITION_CA1/>
+                     </Groupe>
+                  </Groupe>
+                  <REPARTITION_CA-Count>1</REPARTITION_CA-Count>
+                  <REPARTITION_CA-AddLine/>
+               </ji5s9w50>
+               <ji5siius>
+                  <Variable idVariable="SALAIRES_TRAITEMENTS"/>
+                  <Variable idVariable="CHARGES_SOCIALES"/>
+                  <Variable idVariable="COTISATIONS_SOCIALES_EXPLOITANT"/>
+               </ji5siius>
+               <ji5sq5d2>
+                  <ji5w59we/>
+                  <Variable idVariable="ACQUSITIONS_CORPORELLES"/>
+                  <Variable idVariable="ACQUSITIONS_TERRAINS"/>
+                  <Variable idVariable="ACQUISITIONS_INCORP_BDD"/>
+                  <ji5wczsp/>
+                  <Variable idVariable="CESSIONS_CORPORELLES"/>
+                  <Variable idVariable="CESSIONS_TERRAINS"/>
+                  <Variable idVariable="CESSIONS_INCORPORELLES_BDD"/>
+               </ji5sq5d2>
+               <ji5xdzvj>
+                  <ji5xwx2y/>
+                  <Variable idVariable="ACHAT_MARCHANDISES"/>
+                  <Variable idVariable="ACHATS_MATIERES_PREMIERES"/>
+                  <Variable idVariable="CHARGES_EXTERNES"/>
+                  <Variable idVariable="IMPOTS"/>
+                  <Variable idVariable="AUTRES_CHARGES"/>
+                  <ji5y9h1d/>
+                  <ji5y9h1d-ji5z2dpv/>
+                  <ji5y9h1d-ji5zd2vu/>
+                  <Variable idVariable="VARIATION_STOCK_MARCHANDISES"/>
+                  <Variable idVariable="VARIATION_STOCK_MATIERES_PREMIERES"/>
+               </ji5xdzvj>
+               <ji5yf1co>
+                  <Variable idVariable="EXPORTATIONS"/>
+                  <Variable idVariable="IMPORTATIONS"/>
+               </ji5yf1co>
+               <ji5y7dai>
+                  <Variable idVariable="INTERETS_VERSES"/>
+                  <Variable idVariable="INTERETS_PERCUS"/>
+                  <Variable idVariable="DIVIDENDES"/>
+               </ji5y7dai>
+               <Variable idVariable="ANNEE_EXERCICE_PLUS_UN"/>
+               <Variable idVariable="SOMME_COLONNE"/>
+               <INSEE-BUSINESS-TEMPS>
+                  <INSEE-BUSINESS-TEMPS-QI-1/>
+                  <Variable idVariable="HEURE_REMPL"/>
+                  <Variable idVariable="MIN_REMPL"/>
+                  <Variable idVariable="COMMENT_QE"/>
+               </INSEE-BUSINESS-TEMPS>
+               <VALIDATION/>
+               <CONFIRMATION/>
+               <FIN/>
+               <stromae>
+                  <util>
+                     <sectionCourante>1</sectionCourante>
+                     <nomSectionCourante/>
+                     <expedie>non</expedie>
+                     <extrait>non</extrait>
+                     <dateHeure/>
+                  </util>
+                  <perso/>
+               </stromae>
+               
+            </form>
+         </xf:instance>
+         <xf:instance id="fr-form-loop-model">
+            <LoopModels>
+               <Groupe idGroupe="REPARTITION_CA">
+                  <Groupe typeGroupe="REPARTITION_CA" idGroupe="">
+                     <Variable idVariable="REPARTITION_CA1"/>
+                     <Variable idVariable="REPARTITION_CA2"/>
+                     <Variable idVariable="REPARTITION_CA3"/>
+                     <output-REPARTITION_CA1/>
+                  </Groupe>
+               </Groupe>
+            </LoopModels>
+         </xf:instance>
+         <xf:bind id="fr-form-instance-binds" ref="instance('fr-form-instance')">
+            <xf:bind id="ACCUEIL-bind" name="ACCUEIL" ref="ACCUEIL">
+               <xf:bind id="ACCUEIL-1-bind" name="ACCUEIL-1" ref="ACCUEIL-1"/>
+               <xf:bind id="ACCUEIL-2-bind" name="ACCUEIL-2" ref="ACCUEIL-2"/>
+               <xf:bind id="ACCUEIL-3-bind" name="ACCUEIL-3" ref="ACCUEIL-3"/>
+               <xf:bind id="ACCUEIL-4-bind" name="ACCUEIL-4" ref="ACCUEIL-4"/>
+               <xf:bind id="ACCUEIL-5-bind" name="ACCUEIL-5" ref="ACCUEIL-5"/>
+               <xf:bind id="ACCUEIL-6-bind" name="ACCUEIL-6" ref="ACCUEIL-6"/>
+               <xf:bind id="ACCUEIL-7-bind"
+                        name="ACCUEIL-7"
+                        ref="ACCUEIL-7"
+                        relevant="if (instance('fr-form-util')/cadreLegal/text()!='') then (true()) else (false())"/>
+            </xf:bind>
+            <xf:bind id="INSEE-BUSINESS-QUEST-DEBUT-bind"
+                     name="INSEE-BUSINESS-QUEST-DEBUT"
+                     ref="INSEE-BUSINESS-QUEST-DEBUT">
+               <xf:bind id="INSEE-BUSINESS-SEQ-0-1-bind"
+                        name="INSEE-BUSINESS-SEQ-0-1"
+                        ref="INSEE-BUSINESS-SEQ-0-1"/>
+               <xf:bind id="COMMENT_UE-bind"
+                        name="COMMENT_UE"
+                        ref="Variable[@idVariable='COMMENT_UE']"/>
+               <xf:bind id="Identification-bind" name="Identification" ref="Identification"/>
+               <xf:bind id="Identification-1-bind"
+                        name="Identification-1"
+                        ref="Identification-1"/>
+               <xf:bind id="Identification-2-bind"
+                        name="Identification-2"
+                        ref="Identification-2"/>
+               <xf:bind id="Identification-3-bind"
+                        name="Identification-3"
+                        ref="Identification-3"/>
+            </xf:bind>
+            <xf:bind id="LIB_APE_LANC-bind"
+                     name="LIB_APE_LANC"
+                     ref="Variable[@idVariable='LIB_APE_LANC']"/>
+            <xf:bind id="LIB_CJ_LANC-bind"
+                     name="LIB_CJ_LANC"
+                     ref="Variable[@idVariable='LIB_CJ_LANC']"/>
+            <xf:bind id="APE_LANC-bind"
+                     name="APE_LANC"
+                     ref="Variable[@idVariable='APE_LANC']"/>
+            <xf:bind id="CJ_LANC-bind"
+                     name="CJ_LANC"
+                     ref="Variable[@idVariable='CJ_LANC']"/>
+            <xf:bind id="ANNEE_EXERCICE-bind"
+                     name="ANNEE_EXERCICE"
+                     ref="Variable[@idVariable='ANNEE_EXERCICE']"/>
+            <xf:bind id="ji5ozd1c-bind" name="ji5ozd1c" ref="ji5ozd1c">
+               <xf:bind id="ji5qkhex-bind" name="ji5qkhex" ref="ji5qkhex"/>
+               <xf:bind id="APE_LANC_OK-bind"
+                        name="APE_LANC_OK"
+                        ref="Variable[@idVariable='APE_LANC_OK']"/>
+               <xf:bind id="ji5qzpgp-a-ji5p2udq-THEN-bind"
+                        name="ji5qzpgp-a-ji5p2udq-THEN"
+                        ref="ji5qzpgp-a-ji5p2udq-THEN"
+                        relevant="not(instance('fr-form-instance')//Variable[@idVariable='APE_LANC_OK']!= '2')">
+                  <xf:bind id="APE-bind" name="APE" ref="Variable[@idVariable='APE']"/>
+               </xf:bind>
+               <xf:bind id="ji5qm1f7-bind" name="ji5qm1f7" ref="ji5qm1f7"/>
+               <xf:bind id="CJ_LANC_OK-bind"
+                        name="CJ_LANC_OK"
+                        ref="Variable[@idVariable='CJ_LANC_OK']"/>
+               <xf:bind id="ji5z3x4o-a-ji5qj9re-THEN-bind"
+                        name="ji5z3x4o-a-ji5qj9re-THEN"
+                        ref="ji5z3x4o-a-ji5qj9re-THEN"
+                        relevant="not(instance('fr-form-instance')//Variable[@idVariable='CJ_LANC_OK']!= '2')">
+                  <xf:bind id="CJ-bind" name="CJ" ref="Variable[@idVariable='CJ']"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="ji5ra55r-bind" name="ji5ra55r" ref="ji5ra55r">
+               <xf:bind id="DIRIGEANT_SALARIE-bind"
+                        name="DIRIGEANT_SALARIE"
+                        ref="Variable[@idVariable='DIRIGEANT_SALARIE']"/>
+               <xf:bind id="EFF3112-bind"
+                        name="EFF3112"
+                        ref="Variable[@idVariable='EFF3112']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=5000 and xs:integer(.)&gt;=0) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="ji5qzo7i-CI-0-bind" name="ji5qzo7i-CI-0" ref="ji5qzo7i-CI-0">
+                  <xf:constraint level="warning"
+                                 value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='EFF3112']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='EFF3112'])=0 and instance('fr-form-instance')//Variable[@idVariable='DIRIGEANT_SALARIE'] ='1')"/>
+               </xf:bind>
+               <xf:bind id="EFF_ETP-bind"
+                        name="EFF_ETP"
+                        ref="Variable[@idVariable='EFF_ETP']">
+                  <xf:constraint value="if(. castable as xs:float) then (xs:float(.)&lt;=1000.00 and xs:float(.)&gt;=0.00 and matches(.,'^(0|[1-9][0-9]{0,2})(\.[0-9]{1,2})?$|^1000(\.0[0-0])?$')) else (.='')"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="ji5s5tl9-bind" name="ji5s5tl9" ref="ji5s5tl9">
+               <xf:bind id="DATE_CLOTURE_EXERCICE-bind"
+                        name="DATE_CLOTURE_EXERCICE"
+                        ref="Variable[@idVariable='DATE_CLOTURE_EXERCICE']"
+                        type="xf:date"/>
+               <xf:bind id="ji5rmgik-CI-0-bind" name="ji5rmgik-CI-0" ref="ji5rmgik-CI-0">
+                  <xf:constraint level="warning"
+                                 value="not(if (string(instance('fr-form-instance')//Variable[@idVariable='DATE_CLOTURE_EXERCICE']) != '') then (instance('fr-form-instance')//Variable[@idVariable='DATE_CLOTURE_EXERCICE']&gt;xs:date(concat(number(if (instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE_PLUS_UN']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE_PLUS_UN']),'-06-30'))) else (1=0))"/>
+               </xf:bind>
+               <xf:bind id="DUREE_EXERCICE-bind"
+                        name="DUREE_EXERCICE"
+                        ref="Variable[@idVariable='DUREE_EXERCICE']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=24 and xs:integer(.)&gt;=1) else (.='')"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="ji5s9w50-bind" name="ji5s9w50" ref="ji5s9w50">
+               <xf:bind id="ji5s9w50-jseg5fj3-bind"
+                        name="ji5s9w50-jseg5fj3"
+                        ref="ji5s9w50-jseg5fj3"/>
+               <xf:bind id="CA-bind" name="CA" ref="Variable[@idVariable='CA']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=1000000000 and xs:integer(.)&gt;=-10000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="CA_MARCHANDISES-bind"
+                        name="CA_MARCHANDISES"
+                        ref="Variable[@idVariable='CA_MARCHANDISES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=2000000000 and xs:integer(.)&gt;=-10000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="ji5sgt4d-CI-0-bind" name="ji5sgt4d-CI-0" ref="ji5sgt4d-CI-0">
+                  <xf:constraint level="warning"
+                                 value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='CA_MARCHANDISES']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CA_MARCHANDISES'])&gt; number(if (instance('fr-form-instance')//Variable[@idVariable='CA']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CA']))"/>
+               </xf:bind>
+               <xf:bind id="PROD_STOCKEE_ET_EN_COURS-bind"
+                        name="PROD_STOCKEE_ET_EN_COURS"
+                        ref="Variable[@idVariable='PROD_STOCKEE_ET_EN_COURS']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-10000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="PRODUCTION_IMMOBILISEE-bind"
+                        name="PRODUCTION_IMMOBILISEE"
+                        ref="Variable[@idVariable='PRODUCTION_IMMOBILISEE']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=200000000 and xs:integer(.)&gt;=-10000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="SUBVENTIONS_EXPLOITATION-bind"
+                        name="SUBVENTIONS_EXPLOITATION"
+                        ref="Variable[@idVariable='SUBVENTIONS_EXPLOITATION']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=200000000 and xs:integer(.)&gt;=-10000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="AUTRES_PRODUITS-bind"
+                        name="AUTRES_PRODUITS"
+                        ref="Variable[@idVariable='AUTRES_PRODUITS']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-10000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="jjjlfk33-bind" name="jjjlfk33" ref="jjjlfk33"/>
+               <xf:bind id="jjjl8hwg-SI-bind" name="jjjl8hwg-SI" ref="jjjl8hwg-SI"/>
+               <xf:bind id="UNITE_REPARTITION-bind"
+                        name="UNITE_REPARTITION"
+                        ref="Variable[@idVariable='UNITE_REPARTITION']"/>
+               <xf:bind id="jjjliro2-bind" name="jjjliro2" ref="jjjliro2"/>
+               <xf:bind id="jjjliro2-jjjliro2-secondDimension-fakeCL-1--1-bind"
+                        name="jjjliro2-jjjliro2-secondDimension-fakeCL-1--1"
+                        ref="jjjliro2-jjjliro2-secondDimension-fakeCL-1--1"/>
+               <xf:bind id="jjjliro2-jjjliro2-secondDimension-fakeCL-1-0-bind"
+                        name="jjjliro2-jjjliro2-secondDimension-fakeCL-1-0"
+                        ref="jjjliro2-jjjliro2-secondDimension-fakeCL-1-0"/>
+               <xf:bind id="jjjliro2-jjjliro2-secondDimension-fakeCL-1-1-bind"
+                        name="jjjliro2-jjjliro2-secondDimension-fakeCL-1-1"
+                        ref="jjjliro2-jjjliro2-secondDimension-fakeCL-1-1"/>
+               <xf:bind id="REPARTITION_CA-bind"
+                        name="REPARTITION_CA"
+                        nodeset="Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']">
+                  <xf:bind id="output-REPARTITION_CA1-bind"
+                           name="output-REPARTITION_CA1"
+                           ref="output-REPARTITION_CA1"
+                           relevant="instance('fr-form-instance')//Groupe[@typeGroupe='REPARTITION_CA' and @idGroupe = current()/ancestor::Groupe[@typeGroupe='REPARTITION_CA']/@idGroupe]//Variable[@idVariable='REPARTITION_CA2'] != ''"/>
+                  <xf:bind id="REPARTITION_CA1-bind"
+                           name="REPARTITION_CA1"
+                           ref="Variable[@idVariable='REPARTITION_CA1']"
+                           relevant="not(instance('fr-form-instance')//Groupe[@typeGroupe='REPARTITION_CA' and @idGroupe = current()/ancestor::Groupe[@typeGroupe='REPARTITION_CA']/@idGroupe]//Variable[@idVariable='REPARTITION_CA2'] != '')"/>
+                  <xf:bind id="REPARTITION_CA2-bind"
+                           name="REPARTITION_CA2"
+                           ref="Variable[@idVariable='REPARTITION_CA2']"/>
+                  <xf:bind id="REPARTITION_CA3-bind"
+                           name="REPARTITION_CA3"
+                           ref="Variable[@idVariable='REPARTITION_CA3']">
+                     <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=10000000 and xs:integer(.)&gt;=-10000000) else (.='')"/>
+                  </xf:bind>
+               </xf:bind>
+               <xf:bind id="REPARTITION_CA-addline-bind"
+                        ref="REPARTITION_CA-AddLine"
+                        relevant="count(instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']) &lt; 15"/>
+            </xf:bind>
+            <xf:bind id="ji5siius-bind" name="ji5siius" ref="ji5siius">
+               <xf:bind id="SALAIRES_TRAITEMENTS-bind"
+                        name="SALAIRES_TRAITEMENTS"
+                        ref="Variable[@idVariable='SALAIRES_TRAITEMENTS']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="CHARGES_SOCIALES-bind"
+                        name="CHARGES_SOCIALES"
+                        ref="Variable[@idVariable='CHARGES_SOCIALES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="COTISATIONS_SOCIALES_EXPLOITANT-bind"
+                        name="COTISATIONS_SOCIALES_EXPLOITANT"
+                        ref="Variable[@idVariable='COTISATIONS_SOCIALES_EXPLOITANT']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="ji5sq5d2-bind" name="ji5sq5d2" ref="ji5sq5d2">
+               <xf:bind id="ji5w59we-bind" name="ji5w59we" ref="ji5w59we"/>
+               <xf:bind id="ACQUSITIONS_CORPORELLES-bind"
+                        name="ACQUSITIONS_CORPORELLES"
+                        ref="Variable[@idVariable='ACQUSITIONS_CORPORELLES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="ACQUSITIONS_TERRAINS-bind"
+                        name="ACQUSITIONS_TERRAINS"
+                        ref="Variable[@idVariable='ACQUSITIONS_TERRAINS']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="ACQUISITIONS_INCORP_BDD-bind"
+                        name="ACQUISITIONS_INCORP_BDD"
+                        ref="Variable[@idVariable='ACQUISITIONS_INCORP_BDD']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=1000000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="ji5wczsp-bind" name="ji5wczsp" ref="ji5wczsp"/>
+               <xf:bind id="CESSIONS_CORPORELLES-bind"
+                        name="CESSIONS_CORPORELLES"
+                        ref="Variable[@idVariable='CESSIONS_CORPORELLES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="CESSIONS_TERRAINS-bind"
+                        name="CESSIONS_TERRAINS"
+                        ref="Variable[@idVariable='CESSIONS_TERRAINS']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="CESSIONS_INCORPORELLES_BDD-bind"
+                        name="CESSIONS_INCORPORELLES_BDD"
+                        ref="Variable[@idVariable='CESSIONS_INCORPORELLES_BDD']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="ji5xdzvj-bind" name="ji5xdzvj" ref="ji5xdzvj">
+               <xf:bind id="ji5xwx2y-bind" name="ji5xwx2y" ref="ji5xwx2y"/>
+               <xf:bind id="ACHAT_MARCHANDISES-bind"
+                        name="ACHAT_MARCHANDISES"
+                        ref="Variable[@idVariable='ACHAT_MARCHANDISES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="ACHATS_MATIERES_PREMIERES-bind"
+                        name="ACHATS_MATIERES_PREMIERES"
+                        ref="Variable[@idVariable='ACHATS_MATIERES_PREMIERES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="CHARGES_EXTERNES-bind"
+                        name="CHARGES_EXTERNES"
+                        ref="Variable[@idVariable='CHARGES_EXTERNES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="IMPOTS-bind" name="IMPOTS" ref="Variable[@idVariable='IMPOTS']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="AUTRES_CHARGES-bind"
+                        name="AUTRES_CHARGES"
+                        ref="Variable[@idVariable='AUTRES_CHARGES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="ji5y9h1d-bind" name="ji5y9h1d" ref="ji5y9h1d"/>
+               <xf:bind id="ji5y9h1d-ji5z2dpv-bind"
+                        name="ji5y9h1d-ji5z2dpv"
+                        ref="ji5y9h1d-ji5z2dpv"/>
+               <xf:bind id="ji5y9h1d-ji5zd2vu-bind"
+                        name="ji5y9h1d-ji5zd2vu"
+                        ref="ji5y9h1d-ji5zd2vu"/>
+               <xf:bind id="VARIATION_STOCK_MARCHANDISES-bind"
+                        name="VARIATION_STOCK_MARCHANDISES"
+                        ref="Variable[@idVariable='VARIATION_STOCK_MARCHANDISES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-100000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="VARIATION_STOCK_MATIERES_PREMIERES-bind"
+                        name="VARIATION_STOCK_MATIERES_PREMIERES"
+                        ref="Variable[@idVariable='VARIATION_STOCK_MATIERES_PREMIERES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-100000000) else (.='')"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="ji5yf1co-bind" name="ji5yf1co" ref="ji5yf1co">
+               <xf:bind id="EXPORTATIONS-bind"
+                        name="EXPORTATIONS"
+                        ref="Variable[@idVariable='EXPORTATIONS']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="IMPORTATIONS-bind"
+                        name="IMPORTATIONS"
+                        ref="Variable[@idVariable='IMPORTATIONS']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=100000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="ji5y7dai-bind" name="ji5y7dai" ref="ji5y7dai">
+               <xf:bind id="INTERETS_VERSES-bind"
+                        name="INTERETS_VERSES"
+                        ref="Variable[@idVariable='INTERETS_VERSES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=10000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="INTERETS_PERCUS-bind"
+                        name="INTERETS_PERCUS"
+                        ref="Variable[@idVariable='INTERETS_PERCUS']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=10000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+               <xf:bind id="DIVIDENDES-bind"
+                        name="DIVIDENDES"
+                        ref="Variable[@idVariable='DIVIDENDES']">
+                  <xf:constraint value="if(. castable as xs:integer) then (xs:integer(.)&lt;=1000000000 and xs:integer(.)&gt;=-1000000) else (.='')"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="ANNEE_EXERCICE_PLUS_UN-bind"
+                     name="ANNEE_EXERCICE_PLUS_UN"
+                     ref="Variable[@idVariable='ANNEE_EXERCICE_PLUS_UN']"
+                     calculate="instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE'] + 1"/>
+            <xf:bind id="SOMME_COLONNE-bind"
+                     name="SOMME_COLONNE"
+                     ref="Variable[@idVariable='SOMME_COLONNE']"
+                     calculate="sum(instance('fr-form-instance')//Variable[@idVariable='REPARTITION_CA3'][string() castable as xs:decimal], 0)"/>
+            <xf:bind id="INSEE-BUSINESS-TEMPS-bind"
+                     name="INSEE-BUSINESS-TEMPS"
+                     ref="INSEE-BUSINESS-TEMPS">
+               <xf:bind id="INSEE-BUSINESS-TEMPS-QI-1-bind"
+                        name="INSEE-BUSINESS-TEMPS-QI-1"
+                        ref="INSEE-BUSINESS-TEMPS-QI-1"/>
+               <xf:bind id="HEURE_REMPL-bind"
+                        name="HEURE_REMPL"
+                        ref="Variable[@idVariable='HEURE_REMPL']">
+                  <xf:constraint value="matches(.,'^[0-9]?[0-9]$') or .=''"/>
+               </xf:bind>
+               <xf:bind id="MIN_REMPL-bind"
+                        name="MIN_REMPL"
+                        ref="Variable[@idVariable='MIN_REMPL']">
+                  <xf:constraint value="matches(.,'^[0-5]?[0-9]$') or .=''"/>
+               </xf:bind>
+               <xf:bind id="COMMENT_QE-bind"
+                        name="COMMENT_QE"
+                        ref="Variable[@idVariable='COMMENT_QE']"/>
+            </xf:bind>
+            <xf:bind id="VALIDATION-bind"
+                     name="VALIDATION"
+                     ref="VALIDATION"
+                     relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
+            <xf:bind id="CONFIRMATION-bind"
+                     name="CONFIRMATION"
+                     ref="CONFIRMATION"
+                     relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
+            <xf:bind id="FIN-bind" name="FIN" ref="FIN"/>
+            <xf:bind id="nomSectionCourante-bind"
+                     name="nomSectionCourante"
+                     ref="stromae/util/nomSectionCourante"
+                     calculate="(instance('fr-form-util')/Pages/*)[position()=number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
+         </xf:bind>
+         <xf:instance id="donnees-pilotage">
+            <InformationsQuestionnaire>
+               <Contact>
+                  <Nom/>
+                  <Mel/>
+                  <Telephone/>
+                  <Adresse>
+                     <ComplementAdresse/>
+                     <MentionSpeciale/>
+                     <LibellePays/>
+                     <InformationsVoie/>
+                     <Ville/>
+                  </Adresse>
+               </Contact>
+               <UniteEnquetee>
+                  <BarreFixe/>
+                  <LabelUniteEnquetee/>
+               </UniteEnquetee>
+            </InformationsQuestionnaire>
+         </xf:instance>
+         <xf:bind id="donnees-pilotage-binds" ref="instance('donnees-pilotage')">
+            <xf:bind id="Contact-bind" ref="Contact">
+               <xf:bind id="Nom-bind" ref="Nom"/>
+               <xf:bind id="Mel-bind" ref="Mel"/>
+               <xf:bind id="Telephone-bind" ref="Telephone"/>
+               <xf:bind id="Adresse-bind" ref="Adresse">
+                  <xf:bind id="ComplementAdresse-bind" ref="ComplementAdresse"/>
+                  <xf:bind id="MentionSpeciale-bind" ref="MentionSpeciale"/>
+                  <xf:bind id="LibellePays-bind" ref="LibellePays"/>
+                  <xf:bind id="InformationsVoie-bind" ref="InformationsVoie"/>
+                  <xf:bind id="Ville-bind" ref="Ville"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="UniteEnquetee-bind" ref="UniteEnquetee">
+               <xf:bind id="BarreFixe-bind" ref="BarreFixe"/>
+               <xf:bind id="LabelUniteEnquetee-bind" ref="LabelUniteEnquetee"/>
+            </xf:bind>
+         </xf:bind>
+         <xf:instance id="fr-form-metadata" xxf:readonly="true">
+            <metadata>
+               <application-name>Sequence-ji5o91o9</application-name>
+               <form-name>Sequence-ji5o91o9</form-name>
+               <title>Enquête sur les entreprises mahoraises (ESEM) 2018</title>
+            </metadata>
+         </xf:instance>
+         <xf:instance id="fr-form-attachments">
+            <attachments>
+               <css mediatype="text/css" filename="" size=""/>
+               <pdf mediatype="application/pdf" filename="" size=""/>
+            </attachments>
+         </xf:instance>
+         <xf:instance id="fr-form-resources">
+            <resources>
+               <resource xml:lang="fr">
+                  <ACCUEIL>
+                     <label>ACCUEIL</label>
+                  </ACCUEIL>
+                  <ACCUEIL-1>
+                     <label>&lt;p&gt;Bienvenue sur le questionnaire de réponse à l'enquête &lt;b&gt;Enquête sur les entreprises mahoraises (ESEM) 2018&lt;/b&gt;&lt;span title="Cette enquête vise à établir un système d’information statistique sur les entreprises de Mayotte."&gt; &lt;img src="/img/Help-browser.svg.png"/&gt; &lt;/span&gt;&lt;/p&gt;</label>
+                  </ACCUEIL-1>
+                  <ACCUEIL-2>
+                     <label>&lt;div class="frame"&gt;&lt;p&gt;Cette enquête,
+                        à &lt;b&gt;&lt;span style="text-decoration:underline"&gt;caractère
+                        obligatoire&lt;/span&gt;&lt;/b&gt;, est reconnue d'&lt;b&gt;intérêt général et de qualité statistique&lt;/b&gt;.&lt;/p&gt;&lt;p&gt;Merci de répondre avant le :
+                    &lt;b&gt;øDATE_RETOUR_SOUHAITEEø&lt;/b&gt;&lt;/p&gt;&lt;/div&gt;</label>
+                  </ACCUEIL-2>
+                  <ACCUEIL-3>
+                     <label>&lt;p&gt; &lt;/p&gt;</label>
+                  </ACCUEIL-3>
+                  <ACCUEIL-4>
+                     <label>&lt;p&gt;&lt;b&gt;Informations pratiques pour le
+                remplissage&lt;/b&gt;&lt;/p&gt;</label>
+                  </ACCUEIL-4>
+                  <ACCUEIL-5>
+                     <label>&lt;div class="frameAvertissement"&gt;&lt;p&gt;&lt;b&gt;Pensez à enregistrer
+                    régulièrement votre questionnaire.&lt;/b&gt; Au bout de 30 minutes sans
+                    activité, pour des raisons de sécurité, vous serez en effet automatiquement
+                    déconnecté. La sauvegarde des données vous incombant, les données saisies depuis
+                    la dernière sauvegarde seront perdues.&lt;/p&gt;
+                    &lt;p&gt;Lorsque vous quitterez ce questionnaire, privilégiez la fermeture par le bouton &lt;b&gt;Déconnexion&lt;/b&gt; afin d'éviter d'éventuels problèmes de navigation ultérieurs.&lt;/p&gt;
+                    &lt;p&gt;&lt;b&gt;Veuillez utiliser les boutons &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Retour &lt;/button&gt; et &lt;button class="btn txt" type="button" style="cursor: default;" tabIndex="-1"&gt;Enregistrer et continuer &lt;/button&gt; pour naviguer dans le
+                    questionnaire&lt;/b&gt; et non pas les boutons "Précédent" et "Suivant" de votre
+                    navigateur.&lt;/p&gt;&lt;/div&gt;
+                    </label>
+                  </ACCUEIL-5>
+                  <ACCUEIL-6>
+                     <label>&lt;p&gt; &lt;/p&gt;</label>
+                  </ACCUEIL-6>
+                  <ACCUEIL-7>
+                     <label>&lt;div class="frame"&gt;&lt;p&gt;Vu l'avis favorable du Conseil national de
+                    l'information statistique, cette enquête, reconnue d'&lt;b&gt;intérêt général et de qualité statistique, est
+                            obligatoire, &lt;/b&gt;en application de la &lt;a
+                    href="https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000888573" target="_blank"&gt;loi n° 51-711 du 7 juin 1951 modifiée&lt;/a&gt; sur l’obligation, la coordination et le secret en matière de statistiques.&lt;/p&gt;&lt;p&gt;Visa n°2019A903RG du Ministre de l'Économie et des Finances, valable pour l'année 2019.&lt;/p&gt;&lt;p&gt;Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à l'Institut national de la statistique et des études économiques.&lt;/p&gt;&lt;p&gt;Le &lt;a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32016R0679" target="_blank"&gt;règlement général 2016/679 du 27 avril 2016&lt;/a&gt; sur la protection des données (RGPD) ainsi que la &lt;a href="https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460" target="_blank"&gt;loi n°78-17 du 6 janvier 1978 modifiée&lt;/a&gt; relative à l'informatique, aux fichiers et aux libertés s'appliquent à la présente enquête pour les données à caractère personnel. Ces droits, rappelés dans la lettre-avis, peuvent être exercés auprès de l'Institut national de la statistique et des études économiques.&lt;/p&gt;&lt;/div&gt;</label>
+                  </ACCUEIL-7>
+                  <INSEE-BUSINESS-QUEST-DEBUT>
+                     <label>Identification</label>
+                  </INSEE-BUSINESS-QUEST-DEBUT>
+                  <INSEE-BUSINESS-SEQ-0-1>
+                     <label>Identification de votre øLabelUniteEnqueteeø</label>
+                  </INSEE-BUSINESS-SEQ-0-1>
+                  <COMMENT_UE>
+                     <label>➡ Remarque, commentaire sur un changement concernant votre øLabelUniteEnqueteeø :</label>
+                  </COMMENT_UE>
+                  <Identification>
+                     <label>Identification de la personne</label>
+                  </Identification>
+                  <Identification-1>
+                     <label>Afin de bénéficier pleinement des services proposés
+                dans le cadre de la réponse en ligne aux enquêtes de la statistique publique,
+                nous vous invitons à vérifier que les coordonnées du contact répondant à
+                l'enquête, rappelées ci-dessous, sont bien à jour. L'adresse de messagerie est
+                en particulier nécessaire en cas de réinitialisation en ligne du mot de passe.</label>
+                  </Identification-1>
+                  <Identification-2>
+                     <label>&lt;b&gt;Vos informations personnelles : &lt;/b&gt;</label>
+                  </Identification-2>
+                  <Identification-3>
+                     <label>&lt;b&gt;Vos coordonnées postales : &lt;/b&gt;</label>
+                  </Identification-3>
+                  <Nom>
+                     <label>Nom :</label>
+                  </Nom>
+                  <Mel>
+                     <label>Mél :</label>
+                  </Mel>
+                  <Telephone>
+                     <label>Téléphone :</label>
+                  </Telephone>
+                  <ji5ozd1c>
+                     <label>I - Activité et situation juridique</label>
+                  </ji5ozd1c>
+                  <ji5qkhex>
+                     <label>Activité principale de l'entreprise</label>
+                  </ji5qkhex>
+                  <APE_LANC_OK>
+                     <label>➡ 1. Est-ce que votre activité principale est bien ¤LIB_APE_LANC¤ (¤APE_LANC¤) ? </label>
+                     <item>
+                        <label>Oui</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>Non</label>
+                        <value>2</value>
+                     </item>
+                  </APE_LANC_OK>
+                  <ji5qzpgp-a-ji5p2udq-THEN/>
+                  <APE>
+                     <label>➡ 2. Quelle est l'activité principale de votre entreprise ?</label>
+                  </APE>
+                  <ji5qm1f7>
+                     <label>Catégorie juridique</label>
+                  </ji5qm1f7>
+                  <CJ_LANC_OK>
+                     <label>➡ 3. Est-ce que votre catégorie juridique est bien ¤LIB_CJ_LANC¤ (¤CJ_LANC¤) ? </label>
+                     <item>
+                        <label>Oui</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>Non</label>
+                        <value>2</value>
+                     </item>
+                  </CJ_LANC_OK>
+                  <ji5z3x4o-a-ji5qj9re-THEN/>
+                  <CJ>
+                     <label>➡ 4. Quelle est la catégorie juridique de votre entreprise ?</label>
+                  </CJ>
+                  <ji5ra55r>
+                     <label>II - Salariés de l'entreprise</label>
+                  </ji5ra55r>
+                  <DIRIGEANT_SALARIE>
+                     <label>➡ 1. Est-ce que le dirigeant de l'entreprise est salarié ?</label>
+                     <item>
+                        <label>Oui</label>
+                        <value>1</value>
+                     </item>
+                     <item>
+                        <label>Non</label>
+                        <value>2</value>
+                     </item>
+                  </DIRIGEANT_SALARIE>
+                  <EFF3112>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 2. Combien l'entreprise compte de salariés au 31/12/¤ANNEE_EXERCICE¤ ? &lt;/span&gt;&lt;span class="block hint"&gt;Y compris les dirigeants de sociétés et gérants salariés, le personnel saisonnier ou occasionnel. Ne comptez pas le personnel rémunéré par d’autres entreprises (travail temporaire, personnel prêté par d’autres entreprises) ni les stagiaires non rémunérés.&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre 0 et 5000</alert>
+                  </EFF3112>
+                  <ji5qzo7i-CI-0>
+                     <alert>Le dirigeant est salarié, il y a donc au moins un salarié dans l'entreprise.</alert>
+                  </ji5qzo7i-CI-0>
+                  <EFF_ETP>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 3. Combien l'entreprise compte de salariés en équivalent temps plein sur l'année ¤ANNEE_EXERCICE¤ ? &lt;/span&gt;&lt;span class="block hint"&gt;Pour calculer l'effectif en équivalent temps plein, on divise le nombre d'heures travaillées dans l'entreprise pendant l'année par le temps de travail légal d'un salarié à temps plein. Par exemple, un salarié travaillant à temps plein durant 1 an compte pour 1, un salarié travaillant pendant 6 mois à temps plein compte pour 0,5, un salarié travaillant à mi-temps (50%) pendant un an compte également pour 0,5.&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez utiliser le caractère "." comme séparateur de décimale, sans espace, et saisir un nombre compris entre 0.00 et 1000.00 (avec au plus 2 chiffres derrière le séparateur ".")</alert>
+                  </EFF_ETP>
+                  <ji5s5tl9>
+                     <label>III - Dernier exercice comptable</label>
+                  </ji5s5tl9>
+                  <DATE_CLOTURE_EXERCICE>
+                     <label>➡ 1. Quelle est la date de clôture de l'exercice qui se réfère à l'année ¤ANNEE_EXERCICE¤ ? </label>
+                     <hint>Date au format JJ/MM/AAAA</hint>
+                     <alert>Entrez une date valide</alert>
+                  </DATE_CLOTURE_EXERCICE>
+                  <ji5rmgik-CI-0>
+                     <alert>L'exercice demandé concerne l'année ¤ANNEE_EXERCICE¤. Merci de renseigner une date antérieure au 30 juin ¤ANNEE_EXERCICE¤. </alert>
+                  </ji5rmgik-CI-0>
+                  <DUREE_EXERCICE>
+                     <label>➡ 2. Quelle est la durée de l'exercice qui se réfère à l'année ¤ANNEE_EXERCICE¤? (en mois) </label>
+                     <alert>Vous devez saisir un nombre entier compris entre 1 et 24</alert>
+                  </DUREE_EXERCICE>
+                  <ji5s9w50>
+                     <label>IV - Chiffre d'affaires de l'exercice ¤ANNEE_EXERCICE¤ </label>
+                  </ji5s9w50>
+                  <ji5s9w50-jseg5fj3>
+                     <label>Pour la suite du questionnaire, toutes les questions concerneront l'exercice que vous venez de décrire.</label>
+                  </ji5s9w50-jseg5fj3>
+                  <CA>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 1. Quel est le chiffre d'affaires net de l'exercice ¤ANNEE_EXERCICE¤ ? &lt;/span&gt;&lt;span class="block hint"&gt; Il s’agit du montant des ventes de produits (y compris revente de produits en l’état) et services liées à l’activité courante, diminué des réductions sur ventes, de la taxe sur la valeur ajoutée et des taxes assimilées (compte 70 du plan comptable général).&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -10000000 et 1000000000</alert>
+                  </CA>
+                  <CA_MARCHANDISES>
+                     <label>➡ 2. Quel est le montant du chiffre d'affaires déclaré ci-dessus qui résulte de la vente de marchandises en l'état (négoce) ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -10000000 et 2000000000</alert>
+                  </CA_MARCHANDISES>
+                  <ji5sgt4d-CI-0>
+                     <alert>Les ventes de marchandises ne peuvent être supérieurs au chiffre d'affaires.</alert>
+                  </ji5sgt4d-CI-0>
+                  <PROD_STOCKEE_ET_EN_COURS>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 3. Quel est le montant de la production stockée et en cours ?&lt;/span&gt;&lt;span class="block hint"&gt;Il s’agit de la variation des stocks de produits finis ou des en-cours de production de biens et de services (compte 71 du plan comptable général).&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -10000000 et 100000000</alert>
+                  </PROD_STOCKEE_ET_EN_COURS>
+                  <PRODUCTION_IMMOBILISEE>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 4. Quel est le montant de la production immobilisée ?&lt;/span&gt;&lt;span class="block hint"&gt;Il s'agit du montant des immobilisations incorporelles et corporelles que votre entreprise a produites par son propre compte (compte 72 du plan comptable général).&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -10000000 et 200000000</alert>
+                  </PRODUCTION_IMMOBILISEE>
+                  <SUBVENTIONS_EXPLOITATION>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 5. Quel est le montant des subventions d'exploitation que vous avez perçues ?&lt;/span&gt;&lt;span class="block hint"&gt;Il s'agit du compte 74 du plan comptable général&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -10000000 et 200000000</alert>
+                  </SUBVENTIONS_EXPLOITATION>
+                  <AUTRES_PRODUITS>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 6. Quel est le montant des autres produits d'exploitation non financiers ?&lt;/span&gt;&lt;span class="block hint"&gt;Il s'agit du compte 75 du plan comptable général.&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -10000000 et 100000000</alert>
+                  </AUTRES_PRODUITS>
+                  <jjjlfk33>
+                     <label>Répartition du chiffre d'affaires</label>
+                  </jjjlfk33>
+                  <jjjl8hwg-SI>
+                     <label>Vous allez maintenant renseigner la répartition de votre chiffre d'affaires suivant les différentes activités réalisées.</label>
+                  </jjjl8hwg-SI>
+                  <UNITE_REPARTITION>
+                     <label>➡ 7. Vous souhaitez renseigner votre réponse :</label>
+                     <item>
+                        <label>en euros</label>
+                        <value>euro</value>
+                     </item>
+                     <item>
+                        <label>en pourcent</label>
+                        <value>pourcent</value>
+                     </item>
+                  </UNITE_REPARTITION>
+                  <jjjliro2>
+                     <label>&lt;p&gt;&lt;span class="block question complex-grid"&gt;➡ 8. Veuillez répartir votre chiffre d'affaires net entre les différentes activités que vous effectuez. Nous vous proposons quelques exemples, mais vous êtes invités à ajouter autant de lignes que vous avez d'activités.&lt;/span&gt;&lt;span class="block hint"&gt;Si vous déclarez en euros, la sommes des CA ventilés doit être égale au CA total. Sinon, le total doit être égal à 100 %.&lt;/span&gt;&lt;/p&gt;</label>
+                  </jjjliro2>
+                  <jjjliro2-jjjliro2-secondDimension-fakeCL-1--1>
+                     <label>Activité</label>
+                  </jjjliro2-jjjliro2-secondDimension-fakeCL-1--1>
+                  <jjjliro2-jjjliro2-secondDimension-fakeCL-1-0>
+                     <label>Code activité</label>
+                  </jjjliro2-jjjliro2-secondDimension-fakeCL-1-0>
+                  <jjjliro2-jjjliro2-secondDimension-fakeCL-1-1>
+                     <label>% ou montant en euros</label>
+                  </jjjliro2-jjjliro2-secondDimension-fakeCL-1-1>
+                  <output-REPARTITION_CA1>
+                     <label>¤REPARTITION_CA1¤</label>
+                  </output-REPARTITION_CA1>
+                  <REPARTITION_CA1/>
+                  <REPARTITION_CA2/>
+                  <REPARTITION_CA3>
+                     <alert>Vous devez saisir un nombre entier compris entre -10000000 et 10000000</alert>
+                  </REPARTITION_CA3>
+                  <ji5siius>
+                     <label>V - Salaires, traitements, charges sociales versées au cours de l'exercice ¤ANNEE_EXERCICE¤ </label>
+                  </ji5siius>
+                  <SALAIRES_TRAITEMENTS>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 1. Quel est le montant des salaires et traitements ?&lt;/span&gt;&lt;span class="block hint"&gt; Il s’agit des rémunérations brutes versées avant déduction de la part salariale des cotisations sociales et de la contribution sociale généralisée (comptes 641 et 644 du plan comptable général).&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </SALAIRES_TRAITEMENTS>
+                  <CHARGES_SOCIALES>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 2. Quel est le montant des charges sociales ?&lt;/span&gt;&lt;span class="block hint"&gt;Il s’agit de la part patronale des versements effectués par l’employeur aux organismes de sécurité sociale et de prévoyance ainsi que des cotisations sociales personnelles. (compte 645 et 646 du plan comptable général).&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </CHARGES_SOCIALES>
+                  <COTISATIONS_SOCIALES_EXPLOITANT>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 3. Parmi ces charges sociales, quel est le montant des cotisations sociales personnelles de l'exploitant ?&lt;/span&gt;&lt;span class="block hint"&gt; Il s’agit de l’assurance vieillesse, allocations familiales, assurance maladie et maternité obligatoires personnelles de l'exploitant (compte 646 du plan comptable général).&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </COTISATIONS_SOCIALES_EXPLOITANT>
+                  <ji5sq5d2>
+                     <label>VI - Acquisitions et cessions</label>
+                  </ji5sq5d2>
+                  <ji5w59we>
+                     <label>Acquisitions</label>
+                  </ji5w59we>
+                  <ACQUSITIONS_CORPORELLES>
+                     <label>➡ 1. Quel est le montant total des acquisitions d'actifs corporels (achat ou aménagement de terrains, de bâtiments, achat de véhicules, d'outillage, de mobilier, de matériel de bureau ou informatique...) ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </ACQUSITIONS_CORPORELLES>
+                  <ACQUSITIONS_TERRAINS>
+                     <label>➡ 2. Parmi les acquisitions d'actifs corporels, quel est le montant des acquisitions de terrains ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </ACQUSITIONS_TERRAINS>
+                  <ACQUISITIONS_INCORP_BDD>
+                     <label>➡ 3. Quel est le montant des acquisitions d’actifs incorporels en logiciel, base de donnée, recherche et développement</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 1000000000</alert>
+                  </ACQUISITIONS_INCORP_BDD>
+                  <ji5wczsp>
+                     <label>Cessions</label>
+                  </ji5wczsp>
+                  <CESSIONS_CORPORELLES>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 4. Quelle est le montant des cessions corporelles courantes (vente de terrains, de bâtiments, de véhicules, d'outillage, de mobilier, de matériel de bureau ou informatique...) ?&lt;/span&gt;&lt;span class="block hint"&gt; &lt;i&gt;Au prix de cession&lt;/i&gt; &lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </CESSIONS_CORPORELLES>
+                  <CESSIONS_TERRAINS>
+                     <label>➡ 5. Parmi les cessions corporelles, quel est le montant des cessions de terrains ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </CESSIONS_TERRAINS>
+                  <CESSIONS_INCORPORELLES_BDD>
+                     <label>➡ 6. Quel est le montant des cessions incorporelles en logiciel, base de donnée, recherche et développement ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </CESSIONS_INCORPORELLES_BDD>
+                  <ji5xdzvj>
+                     <label>VII - Dépenses professionnelles et montant des stocks</label>
+                  </ji5xdzvj>
+                  <ji5xwx2y>
+                     <label>Dépenses professionnelles</label>
+                  </ji5xwx2y>
+                  <ACHAT_MARCHANDISES>
+                     <label>➡ 1. Quel est le montant des achats de marchandises pour revente en l'état ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </ACHAT_MARCHANDISES>
+                  <ACHATS_MATIERES_PREMIERES>
+                     <label>➡ 2. Quel est le montant des achats de matières premières, fournitures et autres approvisionnements ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </ACHATS_MATIERES_PREMIERES>
+                  <CHARGES_EXTERNES>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 3. Quel est le montant des autres achats et charges externes ?&lt;/span&gt;&lt;span class="block hint"&gt;comptes 61 et 62 du plan comptable général&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </CHARGES_EXTERNES>
+                  <IMPOTS>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 4. Quel est le montant des impôts, taxes et versements assimilés ?&lt;/span&gt;&lt;span class="block hint"&gt; Ne comprends pas les impôts sur le résultat mais uniquement le compte 63 du plan comptable général.&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </IMPOTS>
+                  <AUTRES_CHARGES>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 5. Quel est le montant des autres charges ?&lt;/span&gt;&lt;span class="block hint"&gt;compte 65 du plan comptable général&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </AUTRES_CHARGES>
+                  <ji5y9h1d>
+                     <label>Montant des variations des stocks</label>
+                  </ji5y9h1d>
+                  <ji5y9h1d-ji5z2dpv>
+                     <label>&lt;p&gt;Veuillez indiquer les variations de stocks de marchandises, matières premières et autres approvisionnements de l’exercice. &lt;b&gt;La variation du stock est égal au stock en début d'exercice auquel on soustrait le stock en fin d'exercice. Elle peut être négative ou positive, bien le préciser.&lt;/b&gt; &lt;/p&gt;</label>
+                  </ji5y9h1d-ji5z2dpv>
+                  <ji5y9h1d-ji5zd2vu>
+                     <label>Les montants s’entendent hors TVA. Ils correspondent aux comptes 603 du plan comptable général. Les stocks de produits et d’en-cours (comptes 33, 34 et 35) sont à exclure.</label>
+                  </ji5y9h1d-ji5zd2vu>
+                  <VARIATION_STOCK_MARCHANDISES>
+                     <label>➡ 6. Quel est le montant de la variation du stock de marchandises ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -100000000 et 100000000</alert>
+                  </VARIATION_STOCK_MARCHANDISES>
+                  <VARIATION_STOCK_MATIERES_PREMIERES>
+                     <label>➡ 7. Quel est le montant de la variation du stock de matières premières ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -100000000 et 100000000</alert>
+                  </VARIATION_STOCK_MATIERES_PREMIERES>
+                  <ji5yf1co>
+                     <label>VIII - Exportations / importations</label>
+                  </ji5yf1co>
+                  <EXPORTATIONS>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 1. Quel est le montant total des exportations hors de Mayotte au cours du dernier exercice ?&lt;/span&gt;&lt;span class="block hint"&gt;Indiquez le montant total hors frais (douane, transport, stockage...)&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </EXPORTATIONS>
+                  <IMPORTATIONS>
+                     <label>&lt;p&gt;&lt;span class="block question number"&gt;➡ 2. Quel est le montant total des importations ou acquisitions hors de Mayotte au cours du dernier exercice ?&lt;/span&gt;&lt;span class="block hint"&gt; Indiquez le montant total hors frais (douane, transport, stockage...)&lt;/span&gt;&lt;/p&gt;</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 100000000</alert>
+                  </IMPORTATIONS>
+                  <ji5y7dai>
+                     <label>IX - Compte financier</label>
+                  </ji5y7dai>
+                  <INTERETS_VERSES>
+                     <label>➡ 1. Quel est le montant des intérêts et charges assimilés versés ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 10000000</alert>
+                  </INTERETS_VERSES>
+                  <INTERETS_PERCUS>
+                     <label>➡ 2. Quel est le montant des charges et intérêts assimilés perçus ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 10000000</alert>
+                  </INTERETS_PERCUS>
+                  <DIVIDENDES>
+                     <label>➡ 3. Quel est le montant des dividendes versés ?</label>
+                     <alert>Vous devez saisir un nombre entier compris entre -1000000 et 1000000000</alert>
+                  </DIVIDENDES>
+                  <AddLine>
+                     <label>Ajouter une ligne</label>
+                  </AddLine>
+                  <INSEE-BUSINESS-TEMPS>
+                     <label>Temps de réponse et commentaires</label>
+                  </INSEE-BUSINESS-TEMPS>
+                  <INSEE-BUSINESS-TEMPS-QI-1>
+                     <label>&lt;p&gt;➡ Combien de temps avez-vous mis en tout pour répondre à cette enquête
+                                    (recherche des données + remplissage du questionnaire) ?&lt;/p&gt;</label>
+                  </INSEE-BUSINESS-TEMPS-QI-1>
+                  <HEURE_REMPL>
+                     <alert>Le nombre d'heures doit être compris entre 0 et 99.</alert>
+                  </HEURE_REMPL>
+                  <MIN_REMPL>
+                     <alert>Le nombre de minutes doit être compris entre 0 et 59.</alert>
+                  </MIN_REMPL>
+                  <COMMENT_QE>
+                     <label>➡ Commentaires et remarques éventuelles concernant l’enquête :</label>
+                  </COMMENT_QE>
+                  <VALIDATION>
+                     <label>VALIDATION</label>
+                  </VALIDATION>
+                  <CONFIRMATION>
+                     <label>CONFIRMATION</label>
+                  </CONFIRMATION>
+                  <FIN>
+                     <label>FIN</label>
+                  </FIN>
+                  <Progress>
+                     <label>&lt;p&gt;&lt;b&gt;Avancement&lt;/b&gt;&lt;/p&gt;</label>
+                  </Progress>
+                  <Start>
+                     <label>Commencer</label>
+                  </Start>
+                  <Previous>
+                     <label>Retour</label>
+                  </Previous>
+                  <Next>
+                     <label>Enregistrer et continuer</label>
+                  </Next>
+                  <Send>
+                     <label>Envoyer</label>
+                  </Send>
+                  <ConfirmationMessage>
+                     <label>Votre questionnaire a bien été expédié le</label>
+                  </ConfirmationMessage>
+                  <FatalError>
+                     <label>Problème lors de l'enregistrement/l'expédition de vos réponses.</label>
+                  </FatalError>
+                  <Correct>
+                     <label>Corriger ma réponse</label>
+                  </Correct>
+                  <Continue>
+                     <label>Poursuivre</label>
+                  </Continue>
+                  <GoBackWarning>
+                     <label>Revenir à la page précédente</label>
+                  </GoBackWarning>
+                  <GoBack>
+                     <label>Revenir à la dernière page accédée</label>
+                  </GoBack>
+                  <GoToFirstPage>
+                     <label>Aller à la première page</label>
+                  </GoToFirstPage>
+                  <WelcomeBack>
+                     <label>Bienvenue</label>
+                  </WelcomeBack>
+                  <Warning>
+                     <label>Avertissement</label>
+                  </Warning>
+                  <Error>
+                     <label>Erreur bloquante</label>
+                  </Error>
+                  <WelcomeBackText>
+                     <label>&lt;p&gt;Vous avez déjà commencé à renseigner le questionnaire. Pour
+            poursuivre votre saisie dans le questionnaire, que souhaitez-vous faire ?&lt;/p&gt;</label>
+                  </WelcomeBackText>
+                  <WarningTextPrevious>
+                     <label>
+            &lt;p&gt;Certains champs de cette page sont indiqués en avertissement.&lt;/p&gt;
+            &lt;p&gt;Souhaitez-vous vérifier et corriger votre réponse avant de revenir à la page précédente de ce questionnaire ?&lt;/p&gt;
+        </label>
+                  </WarningTextPrevious>
+                  <WarningTextNext>
+                     <label>
+            &lt;p&gt;Certains champs de cette page sont indiqués en avertissement.&lt;/p&gt;
+            &lt;p&gt;Souhaitez-vous vérifier et corriger votre réponse avant de poursuivre le remplissage de ce questionnaire ?&lt;/p&gt;
+        </label>
+                  </WarningTextNext>
+                  <ErrorTextPrevious>
+                     <label>
+            &lt;p&gt;Certains champs de cette page sont indiqués en erreur.&lt;/p&gt;
+            &lt;p&gt;Vous devez corriger ces erreurs avant de revenir à la page précédente de ce questionnaire.&lt;/p&gt;
+        </label>
+                  </ErrorTextPrevious>
+                  <ErrorTextNext>
+                     <label>
+            &lt;p&gt;Certains champs de cette page sont indiqués en erreur.&lt;/p&gt;
+            &lt;p&gt;Vous devez corriger ces erreurs avant de poursuivre le remplissage de ce questionnaire.&lt;/p&gt;
+        </label>
+                  </ErrorTextNext>
+                  <BarreFixe>
+                     <label>Votre </label>
+                  </BarreFixe>
+               </resource>
+            </resources>
+         </xf:instance>
+         <xf:instance id="fr-service-request-instance" xxf:exclude-result-prefixes="#all">
+            <request/>
+         </xf:instance>
+         <xf:instance id="fr-service-response-instance" xxf:exclude-result-prefixes="#all">
+            <response/>
+         </xf:instance>
+         <xf:instance id="fr-form-util">
+            <Util>
+               <cadreLegal/>
+               <Start/>
+               <Previous/>
+               <Next/>
+               <Send/>
+               <ProgressPercent/>
+               <Progress/>
+               <PageTop/>
+               <Pages>
+                  <ACCUEIL/>
+                  <INSEE-BUSINESS-QUEST-DEBUT/>
+                  <ji5ozd1c/>
+                  <ji5ra55r/>
+                  <ji5s5tl9/>
+                  <ji5s9w50/>
+                  <ji5siius/>
+                  <ji5sq5d2/>
+                  <ji5xdzvj/>
+                  <ji5yf1co/>
+                  <ji5y7dai/>
+                  <INSEE-BUSINESS-TEMPS/>
+                  <VALIDATION/>
+                  <CONFIRMATION/>
+                  <FIN/>
+               </Pages>
+               <PreviousNext/>
+               <changementPageEffectue/>
+               <messageConfirmation/>
+               <FatalError/>
+               <ErrorText/>
+               <WarningText/>
+               <WelcomeBackText/>
+               <confirmationNon/>
+               <confirmationOui/>
+               <cliquable/>
+            </Util>
+         </xf:instance>
+         <xf:bind id="fr-form-util-binds" ref="instance('fr-form-util')">
+            <xf:bind id="start-bind"
+                     relevant="instance('fr-form-instance')/stromae/util/sectionCourante='1'"
+                     ref="Start"/>
+            <xf:bind id="previous-bind"
+                     relevant="not(instance('fr-form-instance')/stromae/util/sectionCourante='1' or number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt; 13)"
+                     ref="Previous"/>
+            <xf:bind id="next-bind"
+                     relevant="not(instance('fr-form-instance')/stromae/util/sectionCourante='1' or number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt; 12)"
+                     ref="Next"/>
+            <xf:bind id="send-bind"
+                     ref="Send"
+                     relevant="instance('fr-form-instance')/stromae/util/expedie='non'"
+                     readonly="instance('fr-form-util')/cliquable='non'"/>
+            <xf:bind id="progress-percent-bind"
+                     name="progress-percent"
+                     ref="ProgressPercent"
+                     calculate="if (number(instance('fr-form-instance')/stromae/util/sectionCourante)=1) then '0' else (if (number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt;12) then '100' else round((number(instance('fr-form-instance')/stromae/util/sectionCourante) - 2) div (11)*100))"/>
+            <xf:bind id="progress-bind" ref="Progress"/>
+            <xf:bind id="page-top-bind" ref="PageTop"/>
+            <xf:bind id="messageConfirmation-bind"
+                     ref="messageConfirmation"
+                     name="messageConfirmation"
+                     calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"/>
+            <xf:bind id="pages-bind" ref="Pages">
+               <xf:bind id="page-INSEE-BUSINESS-QUEST-DEBUT-bind"
+                        name="INSEE-BUSINESS-QUEST-DEBUT"
+                        ref="INSEE-BUSINESS-QUEST-DEBUT">
+                  <xf:calculate value="xxf:evaluate-bind-property('INSEE-BUSINESS-QUEST-DEBUT-bind','relevant')"/>
+               </xf:bind>
+               <xf:bind id="page-ji5ozd1c-bind" name="ji5ozd1c" ref="ji5ozd1c">
+                  <xf:calculate value="xxf:evaluate-bind-property('ji5ozd1c-bind','relevant')"/>
+               </xf:bind>
+               <xf:bind id="page-ji5ra55r-bind" name="ji5ra55r" ref="ji5ra55r">
+                  <xf:calculate value="xxf:evaluate-bind-property('ji5ra55r-bind','relevant')"/>
+                  <xf:constraint value="(not(number(if (instance('fr-form-instance')//Variable[@idVariable='EFF3112']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='EFF3112'])=0 and instance('fr-form-instance')//Variable[@idVariable='DIRIGEANT_SALARIE'] ='1'))"/>
+               </xf:bind>
+               <xf:bind id="page-ji5s5tl9-bind" name="ji5s5tl9" ref="ji5s5tl9">
+                  <xf:calculate value="xxf:evaluate-bind-property('ji5s5tl9-bind','relevant')"/>
+                  <xf:constraint value="(not(if (string(instance('fr-form-instance')//Variable[@idVariable='DATE_CLOTURE_EXERCICE']) != '') then (instance('fr-form-instance')//Variable[@idVariable='DATE_CLOTURE_EXERCICE']&gt;xs:date(concat(number(if (instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE_PLUS_UN']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE_PLUS_UN']),'-06-30'))) else (1=0)))"/>
+               </xf:bind>
+               <xf:bind id="page-ji5s9w50-bind" name="ji5s9w50" ref="ji5s9w50">
+                  <xf:calculate value="xxf:evaluate-bind-property('ji5s9w50-bind','relevant')"/>
+                  <xf:constraint value="(not(number(if (instance('fr-form-instance')//Variable[@idVariable='CA_MARCHANDISES']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CA_MARCHANDISES'])&gt; number(if (instance('fr-form-instance')//Variable[@idVariable='CA']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CA'])))"/>
+               </xf:bind>
+               <xf:bind id="page-ji5siius-bind" name="ji5siius" ref="ji5siius">
+                  <xf:calculate value="xxf:evaluate-bind-property('ji5siius-bind','relevant')"/>
+               </xf:bind>
+               <xf:bind id="page-ji5sq5d2-bind" name="ji5sq5d2" ref="ji5sq5d2">
+                  <xf:calculate value="xxf:evaluate-bind-property('ji5sq5d2-bind','relevant')"/>
+               </xf:bind>
+               <xf:bind id="page-ji5xdzvj-bind" name="ji5xdzvj" ref="ji5xdzvj">
+                  <xf:calculate value="xxf:evaluate-bind-property('ji5xdzvj-bind','relevant')"/>
+               </xf:bind>
+               <xf:bind id="page-ji5yf1co-bind" name="ji5yf1co" ref="ji5yf1co">
+                  <xf:calculate value="xxf:evaluate-bind-property('ji5yf1co-bind','relevant')"/>
+               </xf:bind>
+               <xf:bind id="page-ji5y7dai-bind" name="ji5y7dai" ref="ji5y7dai">
+                  <xf:calculate value="xxf:evaluate-bind-property('ji5y7dai-bind','relevant')"/>
+               </xf:bind>
+               <xf:bind id="page-INSEE-BUSINESS-TEMPS-bind"
+                        name="INSEE-BUSINESS-TEMPS"
+                        ref="INSEE-BUSINESS-TEMPS">
+                  <xf:calculate value="xxf:evaluate-bind-property('INSEE-BUSINESS-TEMPS-bind','relevant')"/>
+               </xf:bind>
+            </xf:bind>
+            <xf:bind id="confirmationNon-bind" ref="confirmationNon"/>
+            <xf:bind id="confirmationOui-bind" ref="confirmationOui"/>
+         </xf:bind>
+         
+         <xf:submission id="enregistrer"
+                        method="post"
+                        ref="instance('fr-form-instance')"
+                        replace="none"
+                        relevant="false"
+                        resource="{xxf:property('server-exist-orbeon')}/restxq/{xxf:property('enregistrer-service')}/esem-2019-a00/m1/{xxf:get-request-parameter('unite-enquete')}?ongletproof=oui">
+            <xf:action ev:event="xforms-submit-error">
+               <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
+            </xf:action>
+            <xf:action ev:event="xforms-submit-done">
+               <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
+            </xf:action>
+         </xf:submission>
+         
+         <xf:submission id="expedier"
+                        method="post"
+                        ref="instance('fr-form-instance')"
+                        replace="none"
+                        relevant="false"
+                        resource="{xxf:property('server-exist-orbeon')}/restxq/{xxf:property('enregistrer-service')}/esem-2019-a00/m1/{xxf:get-request-parameter('unite-enquete')}?ongletproof=oui">
+            <xf:action ev:event="xforms-submit-error">
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                            value="string(number(instance('fr-form-instance')/stromae/util/sectionCourante)-1)"/>
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
+                            value="string('non')"/>
+               <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
+            </xf:action>
+            <xf:action ev:event="xforms-submit-done">
+               <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
+               <xf:setfocus control="page-top-control"/>
+               <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
+            </xf:action>
+         </xf:submission>
+         <xf:submission id="expedierPdf"
+                        method="post"
+                        replace="none"
+                        resource="/expedier/esem-2019-a00/{xxf:get-request-parameter('unite-enquete')}?modele=m1"/>
+         <xf:action ev:event="xforms-ready">
+            <xf:action xxf:iterate="instance('fr-form-instance')//Groupe[@typeGroupe='REPARTITION_CA']">
+               <xf:action if="not(output-REPARTITION_CA1)">
+                  <xf:insert origin="instance('fr-form-loop-model')/Groupe/Groupe[@typeGroupe='REPARTITION_CA']/output-REPARTITION_CA1"
+                             context="instance('fr-form-instance')//Groupe[@typeGroupe='REPARTITION_CA'][not(output-REPARTITION_CA1)][1]/*[last()]"
+                             nodeset="instance('fr-form-instance')//Groupe[@typeGroupe='REPARTITION_CA'][not(output-REPARTITION_CA1)][1]/*[last()]"
+                             position="after"/>
+               </xf:action>
+            </xf:action>
+            <xf:action if="not(instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/*)                         or count(instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']) &lt; instance('fr-form-instance')//REPARTITION_CA-Count">
+               <xf:action while="count(instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']) &lt; instance('fr-form-instance')//REPARTITION_CA-Count">
+                  <xf:insert context="instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']"
+                             nodeset="instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']"
+                             position="after"
+                             origin="instance('fr-form-loop-model')/Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']"/>
+                  <xf:setvalue ref="instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA'][last()]/@idGroupe"
+                               value="concat('REPARTITION_CA-',count(instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']))"/>
+               </xf:action>
+            </xf:action>
+            <xf:action if="count(instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']) &gt; instance('fr-form-instance')//REPARTITION_CA-Count">
+               <xf:setvalue ref="instance('fr-form-instance')//REPARTITION_CA-Count"
+                            value="count(instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA'])"/>
+            </xf:action>
+            <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
+            <xxf:show if="instance('fr-form-instance')/stromae/util/expedie='non' and not(instance('fr-form-instance')/stromae/util/sectionCourante='1')"
+                      dialog="welcome-back"/>
+         </xf:action>
+         <xf:action ev:event="ChangementPage">
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*">
+               <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
+            </xf:action>
+            <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                         value="string('false')"/>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true()))">
+               <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+                  <xxf:show ev:event="DOMActivate" dialog="errorPrevious"/>
+               </xf:action>
+               <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+                  <xxf:show ev:event="DOMActivate" dialog="errorNext"/>
+               </xf:action>
+               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                            value="string('true')"/>
+            </xf:action>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                            and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false()">
+               <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
+                  <xxf:show ev:event="DOMActivate" dialog="warningPrevious"/>
+               </xf:action>
+               <xf:action if="instance('fr-form-util')/PreviousNext='1'">
+                  <xxf:show ev:event="DOMActivate" dialog="warningNext"/>
+               </xf:action>
+               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                            value="string('true')"/>
+            </xf:action>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false())">
+               <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
+            </xf:action>
+         </xf:action>
+         <xf:action ev:event="ChangementPageEffectif">
+            <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                         value="string('false')"/>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false' and instance('fr-form-util')/PreviousNext='1'">
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/sectionCourante]/following-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
+               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                            value="string('true')"/>
+            </xf:action>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false' and instance('fr-form-util')/PreviousNext='-1'">
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/sectionCourante]/preceding-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
+               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                            value="string('true')"/>
+            </xf:action>
+            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
+                         value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
+            <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
+            <xf:send submission="enregistrer"/>
+            <xf:setfocus control="page-top-control"/>
+         </xf:action>
+         
+      </xf:model>
+   </xhtml:head>
+   <xhtml:body>
+      <fr:view>
+         <fr:body>
+            <xf:input id="page-top-control" bind="page-top-bind" class="page-top"/>
+            <xhtml:div class="progress-bar-container">
+               <xf:output id="BarreFixe-control" bind="BarreFixe-bind">
+                  <xf:label ref="$form-resources/BarreFixe/label" mediatype="text/html"/>
+               </xf:output>
+               <xhtml:span class="right">
+                  <xf:output id="progress-control" bind="progress-bind">
+                     <xf:label ref="$form-resources/Progress/label" mediatype="text/html"/>
+                  </xf:output>
+                  <xhtml:progress id="progress"
+                                  max="100"
+                                  value="{instance('fr-form-util')/ProgressPercent}"/>
+                  <xf:output id="progress-percent" ref="instance('fr-form-util')/ProgressPercent"/> %</xhtml:span>
+            </xhtml:div>
+            <xhtml:div class="perso-formulaire">
+               <xhtml:a href="https://insee.fr/fr/metadonnees/source/fichier/Questionnaire_ESEM_2018.pdf"
+                        id="URLSpecimen"/>
+               <xhtml:a href="https://insee.fr/fr/statistiques?theme=39&amp;collection=25+106"
+                        id="URLDiffusion"/>
+            </xhtml:div>
+            <xf:switch id="corpsSection">
+               <xf:case id="1">
+                  <fr:section id="ACCUEIL-control" bind="ACCUEIL-bind" name="ACCUEIL">
+                     <xf:label ref="$form-resources/ACCUEIL/label"/>
+                     <xf:output id="ACCUEIL-1-control"
+                                name="ACCUEIL-1"
+                                bind="ACCUEIL-1-bind"
+                                class="icone-help">
+                        <xf:label ref="$form-resources/ACCUEIL-1/label" mediatype="text/html"/>
+                        <xf:help ref="$form-resources/ACCUEIL-1/help" mediatype="text/html"/>
+                     </xf:output>
+                     <xf:output id="ACCUEIL-2-control" name="ACCUEIL-2" bind="ACCUEIL-2-bind">
+                        <xf:label ref="$form-resources/ACCUEIL-2/label" mediatype="text/html"/>
+                     </xf:output>
+                     <xf:output id="ACCUEIL-3-control" name="ACCUEIL-3" bind="ACCUEIL-3-bind">
+                        <xf:label ref="$form-resources/ACCUEIL-3/label" mediatype="text/html"/>
+                     </xf:output>
+                     <xf:output id="ACCUEIL-4-control" name="ACCUEIL-4" bind="ACCUEIL-4-bind">
+                        <xf:label ref="$form-resources/ACCUEIL-4/label" mediatype="text/html"/>
+                     </xf:output>
+                     <xf:output id="ACCUEIL-5-control" name="ACCUEIL-5" bind="ACCUEIL-5-bind">
+                        <xf:label ref="$form-resources/ACCUEIL-5/label" mediatype="text/html"/>
+                     </xf:output>
+                     <xf:output id="ACCUEIL-6-control" name="ACCUEIL-6" bind="ACCUEIL-6-bind">
+                        <xf:label ref="$form-resources/ACCUEIL-6/label" mediatype="text/html"/>
+                     </xf:output>
+                     <xf:trigger id="cadreLegal" appearance="minimal">
+                        <xf:label>
+                           <xf:output value="concat(if (instance('fr-form-util')/cadreLegal/text()!='') then ('-') else ('+'),' Connaître le cadre légal de l''enquête ?')"/>
+                        </xf:label>
+                        <xf:setvalue ev:event="DOMActivate"
+                                     ref="instance('fr-form-util')/cadreLegal"
+                                     value="if (instance('fr-form-util')/cadreLegal/text()!='') then ('') else ('affiche')"/>
+                     </xf:trigger>
+                     <xf:output id="ACCUEIL-7-control" name="ACCUEIL-7" bind="ACCUEIL-7-bind">
+                        <xf:label ref="$form-resources/ACCUEIL-7/label" mediatype="text/html"/>
+                     </xf:output>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="2">
+                  <fr:section id="INSEE-BUSINESS-QUEST-DEBUT-control"
+                              bind="INSEE-BUSINESS-QUEST-DEBUT-bind"
+                              name="INSEE-BUSINESS-QUEST-DEBUT">
+                     <xf:label ref="$form-resources/INSEE-BUSINESS-QUEST-DEBUT/label"/>
+                     <xhtml:div class="submodule">
+                        <xhtml:h3>
+                           <xf:output id="INSEE-BUSINESS-SEQ-0-1-control" bind="INSEE-BUSINESS-SEQ-0-1-bind">
+                              <xf:label ref="$form-resources/INSEE-BUSINESS-SEQ-0-1/label"
+                                        class="submodule"
+                                        mediatype="text/html"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <xf:textarea id="COMMENT_UE-control"
+                                     name="COMMENT_UE"
+                                     bind="COMMENT_UE-bind"
+                                     class="question text text2000"
+                                     xxf:maxlength="2000">
+                           <xf:label ref="$form-resources/COMMENT_UE/label"/>
+                        </xf:textarea>
+                     </xhtml:div>
+                     <xhtml:div class="submodule">
+                        <xhtml:h3>
+                           <xf:output id="Identification-control" bind="Identification-bind">
+                              <xf:label ref="$form-resources/Identification/label"
+                                        class="submodule"
+                                        mediatype="text/html"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <xhtml:div class="framePerso">
+                           <xf:output id="Identification-1-control" bind="Identification-1-bind">
+                              <xf:label ref="$form-resources/Identification-1/label"
+                                        class="submodule"
+                                        mediatype="text/html"/>
+                           </xf:output>
+                        </xhtml:div>
+                        <xhtml:div class="framePerso">
+                           <xf:output id="Identification-2-control" bind="Identification-2-bind">
+                              <xf:label ref="$form-resources/Identification-2/label"
+                                        class="submodule"
+                                        mediatype="text/html"/>
+                           </xf:output>
+                           <xf:output id="Nom-control" bind="Nom-bind">
+                              <xf:label ref="$form-resources/Nom/label" mediatype="text/html"/>
+                           </xf:output>
+                           <xf:output id="Mel-control" bind="Mel-bind">
+                              <xf:label ref="$form-resources/Mel/label" mediatype="text/html"/>
+                           </xf:output>
+                           <xf:output id="Telephone-control" bind="Telephone-bind">
+                              <xf:label ref="$form-resources/Telephone/label" mediatype="text/html"/>
+                           </xf:output>
+                        </xhtml:div>
+                        <xhtml:div class="framePerso">
+                           <xf:output id="Identification-3-control" bind="Identification-3-bind">
+                              <xf:label ref="$form-resources/Identification-3/label"
+                                        class="submodule"
+                                        mediatype="text/html"/>
+                           </xf:output>
+                           <xf:output id="ComplementAdresse-control" bind="ComplementAdresse-bind"/>
+                           <xf:output id="InformationsVoie-control" bind="InformationsVoie-bind"/>
+                           <xf:output id="MentionSpeciale-control" bind="MentionSpeciale-bind"/>
+                           <xf:output id="Ville-control" bind="Ville-bind"/>
+                           <xf:output id="LibellePays-control" bind="LibellePays-bind"/>
+                        </xhtml:div>
+                        <xhtml:div class="framePerso">
+                           <xhtml:p>
+                              <xhtml:b>Pour renseigner ou mettre à jour vos coordonnées</xhtml:b>, cliquez
+                        sur ce lien : <xhtml:a href="{concat(xxf:property('url-portail'),xxf:property('mon-compte'))}"
+                                       target="_blank">Mon
+                            compte</xhtml:a>.</xhtml:p>
+                        </xhtml:div>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="3">
+                  <fr:section id="ji5ozd1c-control" bind="ji5ozd1c-bind" name="ji5ozd1c">
+                     <xf:label ref="$form-resources/ji5ozd1c/label"/>
+                     <xhtml:div class="submodule">
+                        <xhtml:h3>
+                           <xf:output id="ji5qkhex-control" bind="ji5qkhex-bind">
+                              <xf:label ref="$form-resources/ji5qkhex/label" class="submodule"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <xf:select1 id="APE_LANC_OK-control"
+                                    name="APE_LANC_OK"
+                                    bind="APE_LANC_OK-bind"
+                                    appearance="full"
+                                    class="question">
+                           <xf:label ref="replace(replace($form-resources/APE_LANC_OK/label,'¤LIB_APE_LANC¤',instance('fr-form-instance')//Variable[@idVariable='LIB_APE_LANC']),'¤APE_LANC¤',instance('fr-form-instance')//Variable[@idVariable='APE_LANC'])"/>
+                           <xf:itemset ref="$form-resources/APE_LANC_OK/item">
+                              <xf:label ref="label"/>
+                              <xf:value ref="value"/>
+                           </xf:itemset>
+                           <xf:action ev:event="xforms-value-changed"
+                                      if="not(xxf:evaluate-bind-property('ji5qzpgp-a-ji5p2udq-THEN-bind','relevant'))"
+                                      iterate="instance('fr-form-instance')//ji5qzpgp-a-ji5p2udq-THEN//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
+                              <xf:setvalue ref="." value="''"/>
+                           </xf:action>
+                        </xf:select1>
+                        <xf:group id="ji5qzpgp-a-ji5p2udq-THEN-control"
+                                  bind="ji5qzpgp-a-ji5p2udq-THEN-bind">
+                           <xf:input id="APE-control"
+                                     name="APE"
+                                     bind="APE-bind"
+                                     class="question text text100"
+                                     xxf:maxlength="100">
+                              <xf:label ref="$form-resources/APE/label"/>
+                           </xf:input>
+                        </xf:group>
+                     </xhtml:div>
+                     <xhtml:div class="submodule">
+                        <xhtml:h3>
+                           <xf:output id="ji5qm1f7-control" bind="ji5qm1f7-bind">
+                              <xf:label ref="$form-resources/ji5qm1f7/label" class="submodule"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <xf:select1 id="CJ_LANC_OK-control"
+                                    name="CJ_LANC_OK"
+                                    bind="CJ_LANC_OK-bind"
+                                    appearance="full"
+                                    class="question">
+                           <xf:label ref="replace(replace($form-resources/CJ_LANC_OK/label,'¤LIB_CJ_LANC¤',instance('fr-form-instance')//Variable[@idVariable='LIB_CJ_LANC']),'¤CJ_LANC¤',instance('fr-form-instance')//Variable[@idVariable='CJ_LANC'])"/>
+                           <xf:itemset ref="$form-resources/CJ_LANC_OK/item">
+                              <xf:label ref="label"/>
+                              <xf:value ref="value"/>
+                           </xf:itemset>
+                           <xf:action ev:event="xforms-value-changed"
+                                      if="not(xxf:evaluate-bind-property('ji5z3x4o-a-ji5qj9re-THEN-bind','relevant'))"
+                                      iterate="instance('fr-form-instance')//ji5z3x4o-a-ji5qj9re-THEN//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
+                              <xf:setvalue ref="." value="''"/>
+                           </xf:action>
+                        </xf:select1>
+                        <xf:group id="ji5z3x4o-a-ji5qj9re-THEN-control"
+                                  bind="ji5z3x4o-a-ji5qj9re-THEN-bind">
+                           <xf:input id="CJ-control"
+                                     name="CJ"
+                                     bind="CJ-bind"
+                                     class="question text text100"
+                                     xxf:maxlength="100">
+                              <xf:label ref="$form-resources/CJ/label"/>
+                           </xf:input>
+                        </xf:group>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="4">
+                  <fr:section id="ji5ra55r-control" bind="ji5ra55r-bind" name="ji5ra55r">
+                     <xf:label ref="$form-resources/ji5ra55r/label"/>
+                     <xf:select1 id="DIRIGEANT_SALARIE-control"
+                                 name="DIRIGEANT_SALARIE"
+                                 bind="DIRIGEANT_SALARIE-bind"
+                                 appearance="full"
+                                 class="question">
+                        <xf:label ref="$form-resources/DIRIGEANT_SALARIE/label"/>
+                        <xf:itemset ref="$form-resources/DIRIGEANT_SALARIE/item">
+                           <xf:label ref="label"/>
+                           <xf:value ref="value"/>
+                        </xf:itemset>
+                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                     name="DOMFocusOut"
+                                     target="ji5qzo7i-CI-0-control"/>
+                     </xf:select1>
+                     <fr:number id="EFF3112-control"
+                                name="EFF3112"
+                                bind="EFF3112-bind"
+                                class="question number"
+                                xxf:maxlength="4"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                xxf:non-negative="true()">
+                        <xf:label ref="replace($form-resources/EFF3112/label,'¤ANNEE_EXERCICE¤',instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE'])"
+                                  mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/EFF3112/alert"/>
+                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                     name="DOMFocusOut"
+                                     target="ji5qzo7i-CI-0-control"/>
+                     </fr:number>
+                     <xf:output id="ji5qzo7i-CI-0-control"
+                                name="ji5qzo7i-CI-0"
+                                bind="ji5qzo7i-CI-0-bind">
+                        <xf:alert ref="$form-resources/ji5qzo7i-CI-0/alert" level="warning"/>
+                     </xf:output>
+                     <fr:number id="EFF_ETP-control"
+                                name="EFF_ETP"
+                                bind="EFF_ETP-bind"
+                                class="question number"
+                                xxf:maxlength="7"
+                                grouping-separator=" "
+                                decimal-separator=".">
+                        <xf:label ref="replace($form-resources/EFF_ETP/label,'¤ANNEE_EXERCICE¤',instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE'])"
+                                  mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/EFF_ETP/alert"/>
+                     </fr:number>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="5">
+                  <fr:section id="ji5s5tl9-control" bind="ji5s5tl9-bind" name="ji5s5tl9">
+                     <xf:label ref="$form-resources/ji5s5tl9/label"/>
+                     <xf:input id="DATE_CLOTURE_EXERCICE-control"
+                               name="DATE_CLOTURE_EXERCICE"
+                               bind="DATE_CLOTURE_EXERCICE-bind"
+                               class="question date">
+                        <xf:label ref="replace($form-resources/DATE_CLOTURE_EXERCICE/label,'¤ANNEE_EXERCICE¤',instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE'])"/>
+                        <xf:hint ref="$form-resources/DATE_CLOTURE_EXERCICE/hint"/>
+                        <xf:alert ref="$form-resources/DATE_CLOTURE_EXERCICE/alert"/>
+                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                     name="DOMFocusOut"
+                                     target="ji5rmgik-CI-0-control"/>
+                     </xf:input>
+                     <xf:output id="ji5rmgik-CI-0-control"
+                                name="ji5rmgik-CI-0"
+                                bind="ji5rmgik-CI-0-bind">
+                        <xf:alert ref="replace($form-resources/ji5rmgik-CI-0/alert,'¤ANNEE_EXERCICE¤',instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE'])"
+                                  level="warning"/>
+                     </xf:output>
+                     <fr:number id="DUREE_EXERCICE-control"
+                                name="DUREE_EXERCICE"
+                                bind="DUREE_EXERCICE-bind"
+                                class="question number"
+                                xxf:maxlength="2"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                xxf:non-negative="true()">
+                        <xf:label ref="replace($form-resources/DUREE_EXERCICE/label,'¤ANNEE_EXERCICE¤',instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE'])"/>
+                        <xf:alert ref="$form-resources/DUREE_EXERCICE/alert"/>
+                     </fr:number>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="6">
+                  <fr:section id="ji5s9w50-control" bind="ji5s9w50-bind" name="ji5s9w50">
+                     <xf:label ref="replace($form-resources/ji5s9w50/label,'¤ANNEE_EXERCICE¤',instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE'])"/>
+                     <xf:output id="ji5s9w50-jseg5fj3-control"
+                                name="ji5s9w50-jseg5fj3"
+                                bind="ji5s9w50-jseg5fj3-bind"
+                                class="hint">
+                        <xf:label ref="$form-resources/ji5s9w50-jseg5fj3/label"/>
+                     </xf:output>
+                     <fr:number id="CA-control"
+                                name="CA"
+                                bind="CA-bind"
+                                class="question number"
+                                xxf:maxlength="10"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="replace($form-resources/CA/label,'¤ANNEE_EXERCICE¤',instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE'])"
+                                  mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/CA/alert"/>
+                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                     name="DOMFocusOut"
+                                     target="ji5sgt4d-CI-0-control"/>
+                     </fr:number>
+                     <fr:number id="CA_MARCHANDISES-control"
+                                name="CA_MARCHANDISES"
+                                bind="CA_MARCHANDISES-bind"
+                                class="question number"
+                                xxf:maxlength="10"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/CA_MARCHANDISES/label"/>
+                        <xf:alert ref="$form-resources/CA_MARCHANDISES/alert"/>
+                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed"
+                                     name="DOMFocusOut"
+                                     target="ji5sgt4d-CI-0-control"/>
+                     </fr:number>
+                     <xf:output id="ji5sgt4d-CI-0-control"
+                                name="ji5sgt4d-CI-0"
+                                bind="ji5sgt4d-CI-0-bind">
+                        <xf:alert ref="$form-resources/ji5sgt4d-CI-0/alert" level="warning"/>
+                     </xf:output>
+                     <fr:number id="PROD_STOCKEE_ET_EN_COURS-control"
+                                name="PROD_STOCKEE_ET_EN_COURS"
+                                bind="PROD_STOCKEE_ET_EN_COURS-bind"
+                                class="question number"
+                                xxf:maxlength="9"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/PROD_STOCKEE_ET_EN_COURS/label"
+                                  mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/PROD_STOCKEE_ET_EN_COURS/alert"/>
+                     </fr:number>
+                     <fr:number id="PRODUCTION_IMMOBILISEE-control"
+                                name="PRODUCTION_IMMOBILISEE"
+                                bind="PRODUCTION_IMMOBILISEE-bind"
+                                class="question number"
+                                xxf:maxlength="9"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/PRODUCTION_IMMOBILISEE/label"
+                                  mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/PRODUCTION_IMMOBILISEE/alert"/>
+                     </fr:number>
+                     <fr:number id="SUBVENTIONS_EXPLOITATION-control"
+                                name="SUBVENTIONS_EXPLOITATION"
+                                bind="SUBVENTIONS_EXPLOITATION-bind"
+                                class="question number"
+                                xxf:maxlength="9"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/SUBVENTIONS_EXPLOITATION/label"
+                                  mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/SUBVENTIONS_EXPLOITATION/alert"/>
+                     </fr:number>
+                     <fr:number id="AUTRES_PRODUITS-control"
+                                name="AUTRES_PRODUITS"
+                                bind="AUTRES_PRODUITS-bind"
+                                class="question number"
+                                xxf:maxlength="9"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/AUTRES_PRODUITS/label" mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/AUTRES_PRODUITS/alert"/>
+                     </fr:number>
+                     <xhtml:div class="submodule">
+                        <xhtml:h3>
+                           <xf:output id="jjjlfk33-control" bind="jjjlfk33-bind">
+                              <xf:label ref="$form-resources/jjjlfk33/label" class="submodule"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <xf:output id="jjjl8hwg-SI-control"
+                                   name="jjjl8hwg-SI"
+                                   bind="jjjl8hwg-SI-bind"
+                                   class="statement">
+                           <xf:label ref="$form-resources/jjjl8hwg-SI/label"/>
+                        </xf:output>
+                        <xf:select1 id="UNITE_REPARTITION-control"
+                                    name="UNITE_REPARTITION"
+                                    bind="UNITE_REPARTITION-bind"
+                                    appearance="full"
+                                    class="question">
+                           <xf:label ref="$form-resources/UNITE_REPARTITION/label"/>
+                           <xf:itemset ref="$form-resources/UNITE_REPARTITION/item">
+                              <xf:label ref="label"/>
+                              <xf:value ref="value"/>
+                           </xf:itemset>
+                        </xf:select1>
+                        <xf:output id="jjjliro2-control"
+                                   name="jjjliro2"
+                                   bind="jjjliro2-bind"
+                                   class="question complex-grid">
+                           <xf:label ref="$form-resources/jjjliro2/label" mediatype="text/html"/>
+                        </xf:output>
+                        <xhtml:table name="jjjliro2" class="question complex-grid">
+                           <xhtml:colgroup>
+                              <xhtml:col span="0"/>
+                           </xhtml:colgroup>
+                           <xhtml:thead>
+                              <xhtml:tr>
+                                 <xhtml:th colspan="1" rowspan="1">
+                                    <xf:output id="jjjliro2-jjjliro2-secondDimension-fakeCL-1--1-control"
+                                               name="jjjliro2-jjjliro2-secondDimension-fakeCL-1--1"
+                                               bind="jjjliro2-jjjliro2-secondDimension-fakeCL-1--1-bind">
+                                       <xf:label ref="$form-resources/jjjliro2-jjjliro2-secondDimension-fakeCL-1--1/label"/>
+                                    </xf:output>
+                                 </xhtml:th>
+                                 <xhtml:th colspan="1" rowspan="1">
+                                    <xf:output id="jjjliro2-jjjliro2-secondDimension-fakeCL-1-0-control"
+                                               name="jjjliro2-jjjliro2-secondDimension-fakeCL-1-0"
+                                               bind="jjjliro2-jjjliro2-secondDimension-fakeCL-1-0-bind">
+                                       <xf:label ref="$form-resources/jjjliro2-jjjliro2-secondDimension-fakeCL-1-0/label"/>
+                                    </xf:output>
+                                 </xhtml:th>
+                                 <xhtml:th colspan="1" rowspan="1">
+                                    <xf:output id="jjjliro2-jjjliro2-secondDimension-fakeCL-1-1-control"
+                                               name="jjjliro2-jjjliro2-secondDimension-fakeCL-1-1"
+                                               bind="jjjliro2-jjjliro2-secondDimension-fakeCL-1-1-bind">
+                                       <xf:label ref="$form-resources/jjjliro2-jjjliro2-secondDimension-fakeCL-1-1/label"/>
+                                    </xf:output>
+                                 </xhtml:th>
+                              </xhtml:tr>
+                           </xhtml:thead>
+                           <xhtml:tbody>
+                              <xf:repeat id="REPARTITION_CA"
+                                         nodeset="instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']">
+                                 <xf:var name="REPARTITION_CA-position" value="position()"/>
+                                 <xhtml:tr>
+                                    <xhtml:td>
+                                       <xf:input id="REPARTITION_CA1-control"
+                                                 name="REPARTITION_CA1"
+                                                 bind="REPARTITION_CA1-bind"
+                                                 class="text text249"
+                                                 xxf:maxlength="249"/>
+                                       <xf:output id="output-REPARTITION_CA1-control"
+                                                  name="output-REPARTITION_CA1"
+                                                  bind="output-REPARTITION_CA1-bind">
+                                          <xf:label ref="replace($form-resources/output-REPARTITION_CA1/label                         ,'¤REPARTITION_CA1¤',instance('fr-form-instance')//Groupe[@typeGroupe='REPARTITION_CA' and @idGroupe = current()/ancestor::Groupe[@typeGroupe='REPARTITION_CA']/@idGroupe]//Variable[@idVariable='REPARTITION_CA1'])                         "
+                                                    mediatype="text/html"/>
+                                       </xf:output>
+                                    </xhtml:td>
+                                    <xhtml:td>
+                                       <xf:output id="REPARTITION_CA2-control"
+                                                  name="REPARTITION_CA2"
+                                                  bind="REPARTITION_CA2-bind"/>
+                                    </xhtml:td>
+                                    <xhtml:td align="center">
+                                       <fr:number id="REPARTITION_CA3-control"
+                                                  name="REPARTITION_CA3"
+                                                  bind="REPARTITION_CA3-bind"
+                                                  class="number"
+                                                  xxf:maxlength="9"
+                                                  grouping-separator=" "
+                                                  xxf:fraction-digits="0">
+                                          <xf:alert ref="$form-resources/REPARTITION_CA3/alert"/>
+                                       </fr:number>
+                                    </xhtml:td>
+                                 </xhtml:tr>
+                              </xf:repeat>
+                           </xhtml:tbody>
+                        </xhtml:table>
+                        <xf:trigger id="REPARTITION_CA-addline" bind="REPARTITION_CA-addline-bind">
+                           <xf:label ref="$form-resources/AddLine/label"/>
+                           <xf:action ev:event="DOMActivate">
+                              <xf:setvalue ref="instance('fr-form-instance')//REPARTITION_CA-Count"
+                                           value="number(instance('fr-form-instance')//REPARTITION_CA-Count) +1"/>
+                              <xf:insert context="instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']"
+                                         nodeset="instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']"
+                                         position="after"
+                                         origin="instance('fr-form-loop-model')/Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA']"/>
+                              <xf:setvalue ref="instance('fr-form-instance')//Groupe[@idGroupe='REPARTITION_CA']/Groupe[@typeGroupe='REPARTITION_CA'][last()]/@idGroupe"
+                                           value="concat('REPARTITION_CA-',instance('fr-form-instance')//REPARTITION_CA-Count)"/>
+                           </xf:action>
+                        </xf:trigger>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="7">
+                  <fr:section id="ji5siius-control" bind="ji5siius-bind" name="ji5siius">
+                     <xf:label ref="replace($form-resources/ji5siius/label,'¤ANNEE_EXERCICE¤',instance('fr-form-instance')//Variable[@idVariable='ANNEE_EXERCICE'])"/>
+                     <fr:number id="SALAIRES_TRAITEMENTS-control"
+                                name="SALAIRES_TRAITEMENTS"
+                                bind="SALAIRES_TRAITEMENTS-bind"
+                                class="question number"
+                                xxf:maxlength="9"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/SALAIRES_TRAITEMENTS/label" mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/SALAIRES_TRAITEMENTS/alert"/>
+                     </fr:number>
+                     <fr:number id="CHARGES_SOCIALES-control"
+                                name="CHARGES_SOCIALES"
+                                bind="CHARGES_SOCIALES-bind"
+                                class="question number"
+                                xxf:maxlength="9"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/CHARGES_SOCIALES/label" mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/CHARGES_SOCIALES/alert"/>
+                     </fr:number>
+                     <fr:number id="COTISATIONS_SOCIALES_EXPLOITANT-control"
+                                name="COTISATIONS_SOCIALES_EXPLOITANT"
+                                bind="COTISATIONS_SOCIALES_EXPLOITANT-bind"
+                                class="question number"
+                                xxf:maxlength="9"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/COTISATIONS_SOCIALES_EXPLOITANT/label"
+                                  mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/COTISATIONS_SOCIALES_EXPLOITANT/alert"/>
+                     </fr:number>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="8">
+                  <fr:section id="ji5sq5d2-control" bind="ji5sq5d2-bind" name="ji5sq5d2">
+                     <xf:label ref="$form-resources/ji5sq5d2/label"/>
+                     <xhtml:div class="submodule">
+                        <xhtml:h3>
+                           <xf:output id="ji5w59we-control" bind="ji5w59we-bind">
+                              <xf:label ref="$form-resources/ji5w59we/label" class="submodule"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <fr:number id="ACQUSITIONS_CORPORELLES-control"
+                                   name="ACQUSITIONS_CORPORELLES"
+                                   bind="ACQUSITIONS_CORPORELLES-bind"
+                                   class="question number"
+                                   xxf:maxlength="9"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/ACQUSITIONS_CORPORELLES/label"/>
+                           <xf:alert ref="$form-resources/ACQUSITIONS_CORPORELLES/alert"/>
+                        </fr:number>
+                        <fr:number id="ACQUSITIONS_TERRAINS-control"
+                                   name="ACQUSITIONS_TERRAINS"
+                                   bind="ACQUSITIONS_TERRAINS-bind"
+                                   class="question number"
+                                   xxf:maxlength="9"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/ACQUSITIONS_TERRAINS/label"/>
+                           <xf:alert ref="$form-resources/ACQUSITIONS_TERRAINS/alert"/>
+                        </fr:number>
+                        <fr:number id="ACQUISITIONS_INCORP_BDD-control"
+                                   name="ACQUISITIONS_INCORP_BDD"
+                                   bind="ACQUISITIONS_INCORP_BDD-bind"
+                                   class="question number"
+                                   xxf:maxlength="10"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/ACQUISITIONS_INCORP_BDD/label"/>
+                           <xf:alert ref="$form-resources/ACQUISITIONS_INCORP_BDD/alert"/>
+                        </fr:number>
+                     </xhtml:div>
+                     <xhtml:div class="submodule">
+                        <xhtml:h3>
+                           <xf:output id="ji5wczsp-control" bind="ji5wczsp-bind">
+                              <xf:label ref="$form-resources/ji5wczsp/label" class="submodule"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <fr:number id="CESSIONS_CORPORELLES-control"
+                                   name="CESSIONS_CORPORELLES"
+                                   bind="CESSIONS_CORPORELLES-bind"
+                                   class="question number"
+                                   xxf:maxlength="9"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/CESSIONS_CORPORELLES/label" mediatype="text/html"/>
+                           <xf:alert ref="$form-resources/CESSIONS_CORPORELLES/alert"/>
+                        </fr:number>
+                        <fr:number id="CESSIONS_TERRAINS-control"
+                                   name="CESSIONS_TERRAINS"
+                                   bind="CESSIONS_TERRAINS-bind"
+                                   class="question number"
+                                   xxf:maxlength="9"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/CESSIONS_TERRAINS/label"/>
+                           <xf:alert ref="$form-resources/CESSIONS_TERRAINS/alert"/>
+                        </fr:number>
+                        <fr:number id="CESSIONS_INCORPORELLES_BDD-control"
+                                   name="CESSIONS_INCORPORELLES_BDD"
+                                   bind="CESSIONS_INCORPORELLES_BDD-bind"
+                                   class="question number"
+                                   xxf:maxlength="9"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/CESSIONS_INCORPORELLES_BDD/label"/>
+                           <xf:alert ref="$form-resources/CESSIONS_INCORPORELLES_BDD/alert"/>
+                        </fr:number>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="9">
+                  <fr:section id="ji5xdzvj-control" bind="ji5xdzvj-bind" name="ji5xdzvj">
+                     <xf:label ref="$form-resources/ji5xdzvj/label"/>
+                     <xhtml:div class="submodule">
+                        <xhtml:h3>
+                           <xf:output id="ji5xwx2y-control" bind="ji5xwx2y-bind">
+                              <xf:label ref="$form-resources/ji5xwx2y/label" class="submodule"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <fr:number id="ACHAT_MARCHANDISES-control"
+                                   name="ACHAT_MARCHANDISES"
+                                   bind="ACHAT_MARCHANDISES-bind"
+                                   class="question number"
+                                   xxf:maxlength="9"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/ACHAT_MARCHANDISES/label"/>
+                           <xf:alert ref="$form-resources/ACHAT_MARCHANDISES/alert"/>
+                        </fr:number>
+                        <fr:number id="ACHATS_MATIERES_PREMIERES-control"
+                                   name="ACHATS_MATIERES_PREMIERES"
+                                   bind="ACHATS_MATIERES_PREMIERES-bind"
+                                   class="question number"
+                                   xxf:maxlength="9"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/ACHATS_MATIERES_PREMIERES/label"/>
+                           <xf:alert ref="$form-resources/ACHATS_MATIERES_PREMIERES/alert"/>
+                        </fr:number>
+                        <fr:number id="CHARGES_EXTERNES-control"
+                                   name="CHARGES_EXTERNES"
+                                   bind="CHARGES_EXTERNES-bind"
+                                   class="question number"
+                                   xxf:maxlength="9"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/CHARGES_EXTERNES/label" mediatype="text/html"/>
+                           <xf:alert ref="$form-resources/CHARGES_EXTERNES/alert"/>
+                        </fr:number>
+                        <fr:number id="IMPOTS-control"
+                                   name="IMPOTS"
+                                   bind="IMPOTS-bind"
+                                   class="question number"
+                                   xxf:maxlength="9"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/IMPOTS/label" mediatype="text/html"/>
+                           <xf:alert ref="$form-resources/IMPOTS/alert"/>
+                        </fr:number>
+                        <fr:number id="AUTRES_CHARGES-control"
+                                   name="AUTRES_CHARGES"
+                                   bind="AUTRES_CHARGES-bind"
+                                   class="question number"
+                                   xxf:maxlength="9"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/AUTRES_CHARGES/label" mediatype="text/html"/>
+                           <xf:alert ref="$form-resources/AUTRES_CHARGES/alert"/>
+                        </fr:number>
+                     </xhtml:div>
+                     <xhtml:div class="submodule">
+                        <xhtml:h3>
+                           <xf:output id="ji5y9h1d-control" bind="ji5y9h1d-bind">
+                              <xf:label ref="$form-resources/ji5y9h1d/label" class="submodule"/>
+                           </xf:output>
+                        </xhtml:h3>
+                        <xf:output id="ji5y9h1d-ji5z2dpv-control"
+                                   name="ji5y9h1d-ji5z2dpv"
+                                   bind="ji5y9h1d-ji5z2dpv-bind"
+                                   class="hint">
+                           <xf:label ref="$form-resources/ji5y9h1d-ji5z2dpv/label" mediatype="text/html"/>
+                        </xf:output>
+                        <xf:output id="ji5y9h1d-ji5zd2vu-control"
+                                   name="ji5y9h1d-ji5zd2vu"
+                                   bind="ji5y9h1d-ji5zd2vu-bind"
+                                   class="hint">
+                           <xf:label ref="$form-resources/ji5y9h1d-ji5zd2vu/label"/>
+                        </xf:output>
+                        <fr:number id="VARIATION_STOCK_MARCHANDISES-control"
+                                   name="VARIATION_STOCK_MARCHANDISES"
+                                   bind="VARIATION_STOCK_MARCHANDISES-bind"
+                                   class="question number"
+                                   xxf:maxlength="10"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/VARIATION_STOCK_MARCHANDISES/label"/>
+                           <xf:alert ref="$form-resources/VARIATION_STOCK_MARCHANDISES/alert"/>
+                        </fr:number>
+                        <fr:number id="VARIATION_STOCK_MATIERES_PREMIERES-control"
+                                   name="VARIATION_STOCK_MATIERES_PREMIERES"
+                                   bind="VARIATION_STOCK_MATIERES_PREMIERES-bind"
+                                   class="question number"
+                                   xxf:maxlength="10"
+                                   grouping-separator=" "
+                                   xxf:fraction-digits="0"
+                                   suffix="€">
+                           <xf:label ref="$form-resources/VARIATION_STOCK_MATIERES_PREMIERES/label"/>
+                           <xf:alert ref="$form-resources/VARIATION_STOCK_MATIERES_PREMIERES/alert"/>
+                        </fr:number>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="10">
+                  <fr:section id="ji5yf1co-control" bind="ji5yf1co-bind" name="ji5yf1co">
+                     <xf:label ref="$form-resources/ji5yf1co/label"/>
+                     <fr:number id="EXPORTATIONS-control"
+                                name="EXPORTATIONS"
+                                bind="EXPORTATIONS-bind"
+                                class="question number"
+                                xxf:maxlength="9"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/EXPORTATIONS/label" mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/EXPORTATIONS/alert"/>
+                     </fr:number>
+                     <fr:number id="IMPORTATIONS-control"
+                                name="IMPORTATIONS"
+                                bind="IMPORTATIONS-bind"
+                                class="question number"
+                                xxf:maxlength="9"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/IMPORTATIONS/label" mediatype="text/html"/>
+                        <xf:alert ref="$form-resources/IMPORTATIONS/alert"/>
+                     </fr:number>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="11">
+                  <fr:section id="ji5y7dai-control" bind="ji5y7dai-bind" name="ji5y7dai">
+                     <xf:label ref="$form-resources/ji5y7dai/label"/>
+                     <fr:number id="INTERETS_VERSES-control"
+                                name="INTERETS_VERSES"
+                                bind="INTERETS_VERSES-bind"
+                                class="question number"
+                                xxf:maxlength="8"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/INTERETS_VERSES/label"/>
+                        <xf:alert ref="$form-resources/INTERETS_VERSES/alert"/>
+                     </fr:number>
+                     <fr:number id="INTERETS_PERCUS-control"
+                                name="INTERETS_PERCUS"
+                                bind="INTERETS_PERCUS-bind"
+                                class="question number"
+                                xxf:maxlength="8"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/INTERETS_PERCUS/label"/>
+                        <xf:alert ref="$form-resources/INTERETS_PERCUS/alert"/>
+                     </fr:number>
+                     <fr:number id="DIVIDENDES-control"
+                                name="DIVIDENDES"
+                                bind="DIVIDENDES-bind"
+                                class="question number"
+                                xxf:maxlength="10"
+                                grouping-separator=" "
+                                xxf:fraction-digits="0"
+                                suffix="€">
+                        <xf:label ref="$form-resources/DIVIDENDES/label"/>
+                        <xf:alert ref="$form-resources/DIVIDENDES/alert"/>
+                     </fr:number>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="12">
+                  <fr:section id="INSEE-BUSINESS-TEMPS-control"
+                              bind="INSEE-BUSINESS-TEMPS-bind"
+                              name="INSEE-BUSINESS-TEMPS">
+                     <xf:label ref="$form-resources/INSEE-BUSINESS-TEMPS/label"/>
+                     <xhtml:div class="question">
+                        <xf:output id="INSEE-BUSINESS-TEMPS-QI-1-control"
+                                   name="INSEE-BUSINESS-TEMPS-QI-1"
+                                   bind="INSEE-BUSINESS-TEMPS-QI-1-bind"
+                                   class="question">
+                           <xf:label ref="$form-resources/INSEE-BUSINESS-TEMPS-QI-1/label"
+                                     mediatype="text/html"/>
+                        </xf:output>
+                        <xf:input id="HEURE_REMPL-control"
+                                  name="HEURE_REMPL"
+                                  bind="HEURE_REMPL-bind"
+                                  class="duree"
+                                  xxf:maxlength="2">
+                           <xf:alert ref="$form-resources/HEURE_REMPL/alert"/>
+                        </xf:input>
+                        <xhtml:span class="suffix">heures</xhtml:span>
+                        <xf:input id="MIN_REMPL-control"
+                                  name="MIN_REMPL"
+                                  bind="MIN_REMPL-bind"
+                                  class="duree"
+                                  xxf:maxlength="2">
+                           <xf:alert ref="$form-resources/MIN_REMPL/alert"/>
+                        </xf:input>
+                        <xhtml:span class="suffix">minutes</xhtml:span>
+                     </xhtml:div>
+                     <xf:textarea id="COMMENT_QE-control"
+                                  name="COMMENT_QE"
+                                  bind="COMMENT_QE-bind"
+                                  class="question text text2000"
+                                  xxf:maxlength="2000">
+                        <xf:label ref="$form-resources/COMMENT_QE/label"/>
+                     </xf:textarea>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="13">
+                  <fr:section id="VALIDATION-control" bind="VALIDATION-bind" name="VALIDATION">
+                     <xf:label ref="$form-resources/VALIDATION/label"/>
+                     <xhtml:div class="center">
+                        <xhtml:div class="frame">
+                           <xhtml:p>
+                              <xhtml:b>Vous êtes arrivé à la fin du questionnaire.</xhtml:b>
+                           </xhtml:p>
+                           <xhtml:p class="indentation-with-bullet">
+                              <xhtml:b>Si vous avez terminé de renseigner </xhtml:b>votre questionnaire,
+                                        pour le transmettre à nos services, merci de cliquer ci-dessous sur le bouton : "Envoyer".</xhtml:p>
+                           <xhtml:p class="simple-identation">
+                              <xhtml:b>Une fois le questionnaire envoyé :</xhtml:b>
+                           </xhtml:p>
+                           <xhtml:p class="double-indentation">- vous ne pourrez <xhtml:b>plus modifier vos réponses</xhtml:b> ;</xhtml:p>
+                           <xhtml:p class="double-indentation">- vous pourrez télécharger le <xhtml:b>récapitulatif de vos réponses au format pdf</xhtml:b>.</xhtml:p>
+                           <xhtml:div class="center-body">
+                              <xf:trigger id="send" bind="send-bind">
+                                 <xf:label ref="$form-resources/Send/label"/>
+                                 <xf:action ev:event="DOMActivate">
+                                    <xf:setvalue ref="instance('fr-form-util')/cliquable" value="string('non')"/>
+                                    <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
+                                    <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
+                                 </xf:action>
+                              </xf:trigger>
+                           </xhtml:div>
+                           <xhtml:p class="indentation-with-bullet">
+                              <xhtml:b>Si vous souhaitez y apporter des modifications</xhtml:b>, vous pouvez :</xhtml:p>
+                           <xhtml:p class="double-indentation">- revenir dessus dès à présent en cliquant sur le bouton "Retour" ;</xhtml:p>
+                           <xhtml:p class="double-indentation">- ou plus tard en cliquant sur le bouton "Fermer le questionnaire" et en vous authentifiant à nouveau.</xhtml:p>
+                           <xhtml:p class="double-indentation">Dans les deux cas, vos données seront enregistrées mais <xhtml:b>le questionnaire ne sera pas
+                                        envoyé à l'Institut national de la statistique et des études économiques</xhtml:b>.</xhtml:p>
+                           <xhtml:p class="center-body">
+                              <xhtml:a href="{concat(xxf:property('url-orbeon'),xxf:property('lien-deconnexion'))}">Fermer le questionnaire</xhtml:a>
+                           </xhtml:p>
+                        </xhtml:div>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="14">
+                  <fr:section id="CONFIRMATION-control"
+                              bind="CONFIRMATION-bind"
+                              name="CONFIRMATION">
+                     <xf:label ref="$form-resources/CONFIRMATION/label"/>
+                     <xhtml:div class="center center-body">
+                        <xhtml:div class="frame">
+                           <xhtml:p>
+                              <xhtml:b>CONFIRMER VOTRE ENVOI</xhtml:b>
+                           </xhtml:p>
+                           <xhtml:p>Votre réponse est définitive et vous souhaitez l'envoyer.</xhtml:p>
+                           <xf:trigger bind="confirmationOui-bind">
+                              <xf:label>Je confirme l'envoi</xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
+                                              value="string('oui')"/>
+                                 <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
+                                              value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
+                                 <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                                              value="string(number(instance('fr-form-instance')/stromae/util/sectionCourante)+1)"/>
+                                 <xf:send submission="expedier"/>
+                                 <xf:send submission="expedierPdf"/>
+                              </xf:action>
+                           </xf:trigger>
+                           <xf:trigger bind="confirmationNon-bind">
+                              <xf:label>Ne pas envoyer</xf:label>
+                              <xf:action ev:event="DOMActivate">
+                                 <xf:setvalue ref="instance('fr-form-util')/cliquable" value="string('oui')"/>
+                                 <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="-1"/>
+                                 <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
+                              </xf:action>
+                           </xf:trigger>
+                        </xhtml:div>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+               <xf:case id="15">
+                  <fr:section id="FIN-control" bind="FIN-bind" name="FIN">
+                     <xf:label ref="$form-resources/FIN/label"/>
+                     <xhtml:div class="center center-body">
+                        <xhtml:div class="frame">
+                           <xf:output id="messageConfirmation"
+                                      bind="messageConfirmation-bind"
+                                      class="messageConfirmation"/>
+                           <xhtml:p>
+                              <xhtml:a href="recapitulatifPdf">Télécharger le récapitulatif de vos
+                                    réponses au format PDF</xhtml:a>. <xhtml:img src="/img/pdf.png"/>
+                           </xhtml:p>
+                           <xhtml:p>
+                              <xhtml:b>La Statistique publique vous remercie de votre collaboration à
+                                    cette enquête.</xhtml:b>
+                           </xhtml:p>
+                        </xhtml:div>
+                     </xhtml:div>
+                  </fr:section>
+               </xf:case>
+            </xf:switch>
+            <xxf:dialog id="errorPrevious" draggable="false" close="false">
+               <xf:label ref="$form-resources/Error/label"/>
+               <xf:output ref="instance('fr-form-util')/ErrorText">
+                  <xf:label ref="$form-resources/ErrorTextPrevious/label" mediatype="text/html"/>
+               </xf:output>
+               <xf:trigger id="correct-error-previous">
+                  <xf:label ref="$form-resources/Correct/label"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="errorPrevious"/>
+               </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="errorNext" draggable="false" close="false">
+               <xf:label ref="$form-resources/Error/label"/>
+               <xf:output ref="instance('fr-form-util')/ErrorText">
+                  <xf:label ref="$form-resources/ErrorTextNext/label" mediatype="text/html"/>
+               </xf:output>
+               <xf:trigger id="correct-error-next">
+                  <xf:label ref="$form-resources/Correct/label"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="errorNext"/>
+               </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="warningPrevious" close="false" draggable="false">
+               <xf:label ref="$form-resources/Warning/label"/>
+               <xf:output ref="instance('fr-form-util')/WarningText">
+                  <xf:label ref="$form-resources/WarningTextPrevious/label" mediatype="text/html"/>
+               </xf:output>
+               <xf:trigger id="correct-warning-previous">
+                  <xf:label ref="$form-resources/Correct/label"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
+               </xf:trigger>
+               <xf:trigger id="warning-previous">
+                  <xf:label ref="$form-resources/GoBackWarning/label"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
+                  <xf:action ev:event="DOMActivate">
+                     <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
+                  </xf:action>
+               </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="warningNext" close="false" draggable="false">
+               <xf:label ref="$form-resources/Warning/label"/>
+               <xf:output ref="instance('fr-form-util')/WarningText">
+                  <xf:label ref="$form-resources/WarningTextNext/label" mediatype="text/html"/>
+               </xf:output>
+               <xf:trigger id="correct-warning-next">
+                  <xf:label ref="$form-resources/Correct/label"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
+               </xf:trigger>
+               <xf:trigger id="warning-continue">
+                  <xf:label ref="$form-resources/Continue/label"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
+                  <xf:action ev:event="DOMActivate">
+                     <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
+                  </xf:action>
+               </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="welcome-back" close="false" draggable="false">
+               <xf:label ref="$form-resources/WelcomeBack/label"/>
+               <xf:output ref="instance('fr-form-util')/WelcomeBackText">
+                  <xf:label ref="$form-resources/WelcomeBackText/label" mediatype="text/html"/>
+               </xf:output>
+               <xf:trigger id="go-back">
+                  <xf:label ref="$form-resources/GoBack/label"/>
+                  <xxf:hide ev:event="DOMActivate" dialog="welcome-back"/>
+               </xf:trigger>
+               <xf:trigger id="go-to-first-page">
+                  <xf:label ref="$form-resources/GoToFirstPage/label"/>
+                  <xf:action ev:event="DOMActivate">
+                     <xxf:hide dialog="welcome-back"/>
+                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                                  value="'1'"/>
+                     <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
+                  </xf:action>
+               </xf:trigger>
+            </xxf:dialog>
+            <xxf:dialog id="fatal-error" close="true" draggable="false">
+               <xf:label ref="$form-resources/Error/label"/>
+               <xf:output ref="instance('fr-form-util')/FatalError">
+                  <xf:label ref="$form-resources/FatalError/label"/>
+               </xf:output>
+            </xxf:dialog>
+         </fr:body>
+         <fr:buttons>
+            <xf:trigger id="start" bind="start-bind">
+               <xf:label ref="$form-resources/Start/label"/>
+               <xf:action ev:event="DOMActivate">
+                  <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
+                  <xf:dispatch name="ChangementPage" targetid="fr-form-model"/>
+               </xf:action>
+            </xf:trigger>
+            <xf:trigger id="previous" bind="previous-bind">
+               <xf:label ref="$form-resources/Previous/label"/>
+               <xf:action ev:event="DOMActivate">
+                  <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="-1"/>
+                  <xf:dispatch name="ChangementPage" targetid="fr-form-model"/>
+               </xf:action>
+            </xf:trigger>
+            <xf:trigger id="next" bind="next-bind">
+               <xf:label ref="$form-resources/Next/label"/>
+               <xf:action ev:event="DOMActivate">
+                  <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
+                  <xf:dispatch name="ChangementPage" targetid="fr-form-model"/>
+               </xf:action>
+            </xf:trigger>
+         </fr:buttons>
+      </fr:view>
+   </xhtml:body>
+</xhtml:html>

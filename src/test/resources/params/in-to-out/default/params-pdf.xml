@@ -1,0 +1,50 @@
+<ENOParameters>
+    
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>pdf</OutFormat>
+        
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        
+        <PostProcessing>pdf-mailing</PostProcessing>
+        <PostProcessing>pdf-tableColumn</PostProcessing>
+        <PostProcessing>pdf-insertEndQuestion</PostProcessing>
+        <PostProcessing>pdf-editStructurePages</PostProcessing>
+        <PostProcessing>pdf-insertCoverPage</PostProcessing>
+    </Pipeline>
+    
+    <Parameters>
+        
+        <StudyUnit>default</StudyUnit>
+        
+        <Campagne>simpsons</Campagne>
+        
+        <Languages>
+            <Language>fr</Language>
+            <Language>en</Language>
+        </Languages>
+        
+        <BeginQuestion>
+            <Identification>false</Identification>
+        </BeginQuestion>
+        
+        <EndQuestion>
+            <ResponseTimeQuestion>true</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+        
+        <pdf-parameters>
+            <Format>
+                <Orientation>0</Orientation>
+                <Columns>1</Columns>
+            </Format>
+            <Capture>
+                <Numeric>optical</Numeric>
+            </Capture>
+        </pdf-parameters>        
+        
+    </Parameters>
+    
+</ENOParameters>

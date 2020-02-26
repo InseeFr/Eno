@@ -13,4 +13,5 @@
    <value>concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'</value>
    <expression>concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'</expression>
    <expression>Expression using special java regex characters : $, $$ and \$ and quote : "hello \"World\""</expression>
+   <expression>a div b</expression>
 </test>

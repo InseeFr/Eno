@@ -44,7 +44,8 @@
             La position peut être définie par rapport au hautou bas de la zone concernée et gauche ou droite.
                      
             Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée.
-            --><fo:simple-page-master master-name="page-even-default"
+            -->
+      <fo:simple-page-master master-name="page-even-default"
                              page-height="297mm"
                              page-width="210mm"
                              reference-orientation="0"
@@ -149,7 +150,7 @@
                       font-family="Liberation Sans"
                       font-size="16pt"
                       font-weight="bold"
-                      text-align="center">simpsons</fo:block>
+                      text-align="center">Questionnaire SIMPSONS</fo:block>
          </fo:block-container>
          <fo:block-container absolute-position="absolute"
                              left="15mm"
@@ -177,6 +178,7 @@
    <fo:page-sequence master-reference="A4"
                      initial-page-number="2"
                      force-page-count="odd">
+      <fo:title>Questionnaire SIMPSONS</fo:title>
       <fo:static-content flow-name="region-after-even-default">
          <fo:block-container absolute-position="absolute"
                              left="90mm"
@@ -7912,7 +7914,6 @@
                <fo:block> </fo:block>
             </fo:block-container>
          </fo:block>
-         <fo:block/>
          <fo:block id="TheVeryLastPage"/>
       </fo:flow>
    </fo:page-sequence>

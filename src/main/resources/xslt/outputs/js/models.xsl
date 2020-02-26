@@ -9,29 +9,17 @@
 	xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
 	exclude-result-prefixes="xs fn xd eno enojs" version="2.0">
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>The properties file used by the stylesheet.</xd:p>
+			<xd:p>It's on a transformation level.</xd:p>
+		</xd:desc>
+	</xd:doc>
 	<xsl:param name="properties-file"/>
 	<xsl:param name="parameters-file"/>
 	<xsl:param name="parameters-node" as="node()" required="no">
 		<empty/>
 	</xsl:param>
-	<xsl:param name="labels-folder"/>
-	
-	<xsl:variable name="properties" select="doc($properties-file)"/>
-	
-	<xd:doc>
-		<xd:desc>Variables from propertiers and parameters</xd:desc>
-	</xd:doc>
-	<xsl:variable name="management">
-		<xsl:choose>
-			<xsl:when test="$parameters//Management != ''">
-				<xsl:value-of select="$parameters//Management"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="$properties//Management"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	
 	
 	<xd:doc scope="stylesheet">
 		<xd:desc>
@@ -63,7 +51,7 @@
 		<xsl:variable name="languages" select="enojs:get-form-languages($source-context)" as="xs:string +"/>
 		<xsl:variable name="id" select="replace(enojs:get-name($source-context),'Sequence-','')"/>
 		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
-		<Questionnaire id="{$id}">
+		<Questionnaire id="{$id}" modele="{enojs:get-form-model($source-context)}">
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -214,7 +202,7 @@
 		<xsl:variable name="col-span" select="number(enojs:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enojs:get-rowspan($source-context))"/>
 		<xsl:variable name="id" select="enojs:get-name($source-context)"/>
-		<xsl:variable name="label" select="enojs:get-label($source-context,$languages[1])"/>
+		<xsl:variable name="label" select="enojs:get-vtl-label($source-context,$languages[1])"/>
 		
 		<cells>
 			<xsl:if test="$ancestorTable='headerLine'">
@@ -469,7 +457,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
+		<xsl:variable name="label" select="enojs:get-vtl-label($source-context, $languages[1])"/>
 		
 		<xsl:if test="$label !=''">
 			<options>
@@ -488,7 +476,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		
-		<xsl:variable name="label" select="enojs:get-label($source-context, $languages[1])"/>
+		<xsl:variable name="label" select="enojs:get-vtl-label($source-context, $languages[1])"/>
 		
 		<xsl:if test="$label !=''">
 			<label><xsl:value-of select="$label"/></label>
@@ -562,7 +550,7 @@
 		<xsl:variable name="idGoTo" select="enojs:get-name($source-context)"/>
 		<xsl:variable name="label" select="enojs:get-vtl-label($source-context,$languages[1])"/>
 		
-		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idGoTo}" management="{$management}">
+		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idGoTo}" filterDescription="{$filterDescription}">
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>

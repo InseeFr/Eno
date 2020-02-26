@@ -1,0 +1,27 @@
+<jxb:bindings
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+    version="2.1">
+    <jxb:bindings schemaLocation="../generation/DDI2PDFGeneration.xsd">
+        <jxb:bindings node="//xs:simpleType[@name='AccompanyingMail']/xs:restriction/xs:enumeration[@value='']">
+            <jxb:typesafeEnumMember name="NONE"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='Level']/xs:restriction/xs:enumeration[@value='']">
+            <jxb:typesafeEnumMember name="NONE"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='Orientation']/xs:restriction/xs:enumeration[@value='0']">
+            <jxb:typesafeEnumMember name="PORTRAIT"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='Orientation']/xs:restriction/xs:enumeration[@value='90']">
+            <jxb:typesafeEnumMember name="LANDSCAPE"/>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../generation/DDI2FRGeneration.xsd">
+        <jxb:bindings node="//xs:simpleType[@name='DecimalSeparator']/xs:restriction/xs:enumeration[@value='.']">
+            <jxb:typesafeEnumMember name="POINT"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xs:simpleType[@name='DecimalSeparator']/xs:restriction/xs:enumeration[@value=',']">
+            <jxb:typesafeEnumMember name="COMMA"/>
+        </jxb:bindings>
+    </jxb:bindings>
+</jxb:bindings>

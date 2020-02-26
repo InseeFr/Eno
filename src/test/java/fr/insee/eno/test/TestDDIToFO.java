@@ -9,17 +9,22 @@ import org.xmlunit.diff.Diff;
 
 import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
-import fr.insee.eno.postprocessing.PDFMailingPostprocessor;
-import fr.insee.eno.postprocessing.PDFSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.PDFTableColumnPostprocessorFake;
-import fr.insee.eno.postprocessing.PDFInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFEditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFInsertAccompanyingMailsPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFInsertCoverPagePostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFInsertEndQuestionPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFMailingPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFSpecificTreatmentPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFTableColumnPostprocessorFake;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.preprocessing.DDIPreprocessor;
+import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
+import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
 
 public class TestDDIToFO {
+		
+	private DDI2PDFGenerator ddi2pdf = new DDI2PDFGenerator();
 
 	private XMLDiff xmlDiff = new XMLDiff();
 
@@ -31,15 +36,21 @@ public class TestDDIToFO {
 			Diff diff = null;
 
 			// Without plugins
-			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2PDFGenerator(),
-					new Postprocessor[] { 
-							new PDFMailingPostprocessor(),
-							new PDFTableColumnPostprocessorFake(),
-							new PDFInsertEndQuestionPostprocessor(),
-							new PDFEditStructurePagesPostprocessor(),
-							new PDFSpecificTreatmentPostprocessor(),
-							new PDFInsertCoverPagePostprocessor(),
-							new PDFInsertAccompanyingMailsPostprocessor()});
+			Preprocessor[] preprocessors = {
+					new DDIDereferencingPreprocessor(),
+					new DDICleaningPreprocessor(),
+					new DDITitlingPreprocessor()};
+			
+			Postprocessor[] postprocessors = { 
+					new PDFMailingPostprocessor(),
+					new PDFTableColumnPostprocessorFake(),
+					new PDFInsertEndQuestionPostprocessor(),
+					new PDFEditStructurePagesPostprocessor(),
+					new PDFSpecificTreatmentPostprocessor(),
+					new PDFInsertCoverPagePostprocessor(),
+					new PDFInsertAccompanyingMailsPostprocessor()};
+			
+			GenerationService genService = new GenerationService(preprocessors, ddi2pdf, postprocessors);
 			File outputFile = genService.generateQuestionnaire(in, "simpsons");
 			File expectedFile = new File(String.format("%s/out.fo", basePath));
 			diff = xmlDiff.getDiff(outputFile, expectedFile);

@@ -21,7 +21,7 @@ import org.xml.sax.SAXException;
 
 public class DummyTestFO2PDF {
 
-	public static void main(String[] args) {
+	public void main(String[] args) {
 
 		String basePathFO2PDF = "src/test/resources/fo-to-pdf";
 		File in = new File(String.format("%s/in.fo", basePathFO2PDF));

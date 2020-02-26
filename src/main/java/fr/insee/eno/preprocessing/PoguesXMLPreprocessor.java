@@ -22,8 +22,7 @@ public class PoguesXMLPreprocessor implements Preprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(PoguesXMLPreprocessor.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
 	public File process(File inputFile, byte[] parametersFile, String surveyName, String in2out) throws Exception {
@@ -68,5 +67,4 @@ public class PoguesXMLPreprocessor implements Preprocessor {
 		logger.debug("PoguesXMLPreprocessing : END");
 		return new File(outputPreprocessMergeITE);
 	}
-
 }

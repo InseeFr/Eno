@@ -14,6 +14,7 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * Customization of FO postprocessor.
  */
+@Deprecated
 public class PDFMailingPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(PDFMailingPostprocessor.class);

@@ -30,9 +30,7 @@ public interface Generator {
 	 * This method return in2out implementation
 	 * 
 	 * @return the in2out implementation
-	 * @throws Exception
-	 *             Generic exception
 	 */
-	public String in2out() throws Exception;
+	public String in2out() ;
 
 }

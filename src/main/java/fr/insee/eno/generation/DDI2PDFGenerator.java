@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.transform.xsl.XslParameters;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
@@ -17,8 +18,7 @@ public class DDI2PDFGenerator implements Generator {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDI2PDFGenerator.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
@@ -41,8 +41,14 @@ public class DDI2PDFGenerator implements Generator {
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 
 		OutputStream osOutputForm = FileUtils.openOutputStream(new File(outputForm));
-		saxonService.transformDDI2PDF(isFinalInput, osOutputForm, isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL, parameters);
 
+		try {
+			saxonService.transformDDI2PDF(isFinalInput, osOutputForm, isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL, parameters);
+		}catch(Exception e) {
+			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
+		}
 		isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL.close();
 
 		isFinalInput.close();

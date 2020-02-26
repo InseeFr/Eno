@@ -348,7 +348,7 @@
 
 		<!-- Creates a dereferenced DDI for each model with the already dereferenced files and adding some variables from the VariableScheme to the upcoming result -->
 		<xslt in="${input-file}" out="${temp.home}/null.tmp"
-			style="${xslt.home}/util/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
+			style="${xslt.home}/pre-processing/ddi/dereferencing.xsl" classpath="${saxon.jar}" force="true">
 			<param name="output-folder" expression="${temp-folder}"/>
 		</xslt>
 
@@ -359,7 +359,7 @@
 	<target name="cleaning" description="Cleaning DDI">
 		<basename file="${file}" property="file-name" suffix=".tmp"/>
 		<xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${file-name}-cleaned.tmp"
-			style="${xslt.home}/util/ddi/cleaning.xsl" classpath="${saxon.jar}" force="true">
+			style="${xslt.home}/pre-processing/ddi/cleaning.xsl" classpath="${saxon.jar}" force="true">
 			<param name="properties-file" expression="${config-folder}/ddi2pdf.xml"/>
 		</xslt>
 	</target>
@@ -371,7 +371,7 @@
 		<propertyregex property="output-name" input="${file-name}" regexp="-cleaned" replace=""
 			global="true"/>
 		<xslt in="${temp.home}/${file-name}.tmp" out="${temp.home}/${output-name}-final.tmp"
-			style="${xslt.home}/util/ddi/titling.xsl" classpath="${saxon.jar}" force="true">
+			style="${xslt.home}/pre-processing/ddi/titling.xsl" classpath="${saxon.jar}" force="true">
 			<param name="parameters-file" expression="${survey-folder}/parameters.xml"/>
 		</xslt>
 	</target>
