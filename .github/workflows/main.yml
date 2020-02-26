@@ -16,7 +16,9 @@ jobs:
       with:
         java-version: 11
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V --file pom.xml
+    - name: Test with Maven
+      run: mvn test -B --file pom.xml
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
