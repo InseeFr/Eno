@@ -1,0 +1,27 @@
+<ENOParameters>
+    
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>fr</OutFormat>
+        
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        
+        <PostProcessing>fr-browsing</PostProcessing>
+        <PostProcessing>fr-fix-adherence</PostProcessing>
+    </Pipeline>
+    
+    <Parameters>
+        
+        <StudyUnit>default</StudyUnit>
+        
+        <Campagne>acemotrim-2020-t01</Campagne>
+        
+        <Languages>
+            <Language>fr</Language>
+            <Language>en</Language>
+        </Languages>        
+    </Parameters>
+    
+</ENOParameters>

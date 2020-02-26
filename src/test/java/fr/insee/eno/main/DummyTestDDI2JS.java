@@ -4,13 +4,13 @@ import java.io.File;
 
 import org.junit.Test;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2JSGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.postprocessing.js.JSExternalizeVariablesPostprocessor;
 import fr.insee.eno.postprocessing.js.JSInsertGenericQuestionsPostprocessor;
 import fr.insee.eno.postprocessing.js.JSSortComponentsPostprocessor;
 import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
+import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;

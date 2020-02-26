@@ -1,4 +1,4 @@
-package fr.insee.eno;
+package fr.insee.eno.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoParametersException;
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.parameters.Pipeline;
@@ -22,6 +23,7 @@ import fr.insee.eno.params.validation.SchemaValidatorImpl;
 import fr.insee.eno.params.validation.ValidationMessage;
 import fr.insee.eno.params.validation.Validator;
 import fr.insee.eno.params.validation.ValidatorImpl;
+import fr.insee.eno.utils.FolderCleaner;
 
 /**
  * Orchestrates the whole parameterized generation process.
@@ -30,13 +32,34 @@ public class ParameterizedGenerationService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ParameterizedGenerationService.class);
 
-	private PipelineGenerator pipelineGenerator = new PipeLineGeneratorImpl();
+	private PipelineGenerator pipelineGenerator;
 	
-	private ValorizatorParameters valorizatorParameters = new ValorizatorParametersImpl();
+	private ValorizatorParameters valorizatorParameters;
 	
-	private Validator validator = new ValidatorImpl();
+	private Validator validator;
 	
-	private SchemaValidator schemaValidator = new SchemaValidatorImpl();
+	private SchemaValidator schemaValidator ;
+	
+	private boolean cleaningFolder;
+	
+	private String surveyName;
+
+	public ParameterizedGenerationService() {
+		this.pipelineGenerator = new PipeLineGeneratorImpl();
+		this.valorizatorParameters = new ValorizatorParametersImpl();
+		this.validator = new ValidatorImpl();
+		this.schemaValidator = new SchemaValidatorImpl();
+		this.cleaningFolder=true;
+	}
+
+	public ParameterizedGenerationService(boolean cleaningFolder, String surveyName) {
+		this.pipelineGenerator = new PipeLineGeneratorImpl();
+		this.valorizatorParameters = new ValorizatorParametersImpl();
+		this.validator = new ValidatorImpl();
+		this.schemaValidator = new SchemaValidatorImpl();
+		this.cleaningFolder=cleaningFolder;
+		this.surveyName=surveyName;
+	}
 
 	/**
 	 * It generates File using transformations defined in ENOParameters
@@ -55,6 +78,8 @@ public class ParameterizedGenerationService {
 		ValidationMessage valid = validator.validate(params);
 		if(valid.isValid()) {
 			GenerationService generationService = pipelineGenerator.setPipeLine(pipeline);
+			generationService.setCleaningFolder(cleaningFolder);
+
 			ByteArrayOutputStream paramsFinal = valorizatorParameters.mergeParameters(params);
 			LOGGER.info("Setting paramaters to the pipeline.");
 			generationService.setParameters(paramsFinal);
@@ -64,7 +89,7 @@ public class ParameterizedGenerationService {
 			generationService.setSpecificTreatment(specificTreatment);
 			LOGGER.info("Setting mapping file to the pipeline.");
 			generationService.setMapping(mapping);
-			String survey = params.getParameters()!=null?params.getParameters().getCampagne():"test";
+			String survey = surveyName != null ? surveyName : params.getParameters() != null ? params.getParameters().getCampagne():"test";
 			output = generationService.generateQuestionnaire(inputFile, survey);
 			paramsFinal.close();
 		}
@@ -90,13 +115,13 @@ public class ParameterizedGenerationService {
 	public File generateQuestionnaire(File inputFile, InputStream params, InputStream metadata, InputStream specificTreatment, InputStream mapping) throws Exception {
 		LOGGER.info("Parameterized Generation of questionnaire -- STARTED --");
 		File output=null;
-		
+
 		if(params!=null) {
 			byte[] paramsBytes = IOUtils.toByteArray(params);
-			
+
 			LOGGER.info("First validation ...");
 			ValidationMessage validSchema = schemaValidator.validate(new ByteArrayInputStream(paramsBytes));
-			
+
 			if(validSchema.isValid()) {
 				LOGGER.info(validSchema.getMessage());
 				LOGGER.info("Parameters reading ...");
@@ -111,6 +136,7 @@ public class ParameterizedGenerationService {
 					LOGGER.info(valid.getMessage());
 					Pipeline pipeline = enoParameters.getPipeline();
 					GenerationService generationService = pipelineGenerator.setPipeLine(pipeline);
+					generationService.setCleaningFolder(cleaningFolder);
 					ByteArrayOutputStream paramsFinal =  valorizatorParameters.mergeParameters(enoParameters);
 					LOGGER.info("Setting paramaters to the pipeline.");
 					generationService.setParameters(paramsFinal);
@@ -120,9 +146,13 @@ public class ParameterizedGenerationService {
 					generationService.setSpecificTreatment(specificTreatment);
 					LOGGER.info("Setting mapping file to the pipeline.");
 					generationService.setMapping(mapping);
-					String survey = enoParameters.getParameters().getCampagne();
+					String survey = surveyName!=null ? surveyName : enoParameters.getParameters().getCampagne();					
 					output = generationService.generateQuestionnaire(inputFile, survey);
 					paramsFinal.close();
+					FolderCleaner cleanerService = new FolderCleaner();
+					if(cleaningFolder) {
+						cleanerService.cleanOneFolderExceptGeneratedFile(new File(Constants.TEMP_FOLDER_PATH + "/" + survey), output);
+					}
 				}
 				else {
 					LOGGER.error(valid.getMessage());
@@ -139,7 +169,7 @@ public class ParameterizedGenerationService {
 			LOGGER.error(error);
 			throw new EnoParametersException(error);
 		}
-		
+
 
 		LOGGER.info("Parameterized Generation of questionnaire -- FINISHED --");
 		return output;

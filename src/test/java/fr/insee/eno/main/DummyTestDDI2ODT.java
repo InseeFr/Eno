@@ -4,9 +4,9 @@ import java.io.File;
 
 import org.junit.Test;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2ODTGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
+import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;

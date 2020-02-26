@@ -4,10 +4,10 @@ import java.io.File;
 
 import org.junit.Test;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.PoguesXML2DDIGenerator;
 import fr.insee.eno.postprocessing.ddi.DDIMarkdown2XhtmlPostprocessor;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
+import fr.insee.eno.service.GenerationService;
 
 public class DummyTestPoguesXML2DDI {
 	

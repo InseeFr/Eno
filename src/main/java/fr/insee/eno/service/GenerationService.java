@@ -1,4 +1,4 @@
-package fr.insee.eno;
+package fr.insee.eno.service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 
+import fr.insee.eno.Constants;
 import fr.insee.eno.generation.Generator;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.preprocessing.Preprocessor;
@@ -34,6 +35,8 @@ public class GenerationService {
 	private byte[] metadata;
 	private byte[] specificTreatment;
 	private byte[] mapping;
+	
+	private boolean cleaningFolder;
 
 	@Inject
 	public GenerationService(final Preprocessor[] preprocessors, final Generator generator,
@@ -41,6 +44,7 @@ public class GenerationService {
 		this.preprocessors = preprocessors;
 		this.generator = generator;
 		this.postprocessors = postprocessors;
+		this.cleaningFolder = true;
 	}
 
 	@Inject
@@ -49,6 +53,7 @@ public class GenerationService {
 		this.preprocessors = new Preprocessor[] { preprocessor };
 		this.generator = generator;
 		this.postprocessors = postprocessors;
+		this.cleaningFolder = true;
 	}
 
 	@Inject
@@ -57,6 +62,7 @@ public class GenerationService {
 		this.preprocessors = new Preprocessor[] { preprocessor };
 		this.generator = generator;
 		this.postprocessors = new Postprocessor[] { postprocessor };
+		this.cleaningFolder = true;
 	}
 
 	/**
@@ -75,7 +81,9 @@ public class GenerationService {
 
 		String tempFolder = System.getProperty("java.io.tmpdir") + "/" + surveyName;
 		logger.debug("Temp folder: " + tempFolder);
-		cleanTempFolder(surveyName);
+		if(cleaningFolder) {
+			cleanTempFolder(surveyName);
+		}
 		File preprocessResultFileName = null;
 		
 		preprocessResultFileName = this.preprocessors[0].process(inputFile, parameters, surveyName,generator.in2out());	
@@ -140,6 +148,12 @@ public class GenerationService {
 	public byte[] getMapping() {
 		return mapping;
 	}
+	
+	public void setCleaningFolder(boolean cleaning) {
+		this.cleaningFolder = cleaning;
+	}
+	
+
 
 	/**
 	 * Clean the temp dir if it exists
@@ -148,7 +162,6 @@ public class GenerationService {
 	 * 
 	 */
 	public void cleanTempFolder(String name) throws IOException {
-		FolderCleaner cleanService = new FolderCleaner();
 		if (Constants.TEMP_FOLDER_PATH != null) {
 			File folderTemp = new File(Constants.TEMP_FOLDER_PATH + "/" + name);
 			cleanTempFolder(folderTemp);

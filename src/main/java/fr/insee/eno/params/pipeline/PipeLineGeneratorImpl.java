@@ -7,7 +7,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2FRGenerator;
 import fr.insee.eno.generation.DDI2JSGenerator;
 import fr.insee.eno.generation.DDI2ODTGenerator;
@@ -51,6 +50,7 @@ import fr.insee.eno.preprocessing.DDIMappingPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
 import fr.insee.eno.preprocessing.Preprocessor;
+import fr.insee.eno.service.GenerationService;
 
 public class PipeLineGeneratorImpl implements PipelineGenerator {
 	

@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2PDFGenerator;
 import fr.insee.eno.postprocessing.pdf.PDFEditStructurePagesPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFInsertAccompanyingMailsPostprocessor;
@@ -17,6 +16,7 @@ import fr.insee.eno.postprocessing.pdf.PDFMailingPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.pdf.PDFTableColumnPostprocessorFake;
 import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
 import fr.insee.eno.preprocessing.DDITitlingPreprocessor;

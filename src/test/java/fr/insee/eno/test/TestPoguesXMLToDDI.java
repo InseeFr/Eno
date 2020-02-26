@@ -7,10 +7,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.PoguesXML2DDIGenerator;
 import fr.insee.eno.postprocessing.ddi.DDIMarkdown2XhtmlPostprocessor;
 import fr.insee.eno.preprocessing.PoguesXMLPreprocessorGoToTreatment;
+import fr.insee.eno.service.GenerationService;
 
 public class TestPoguesXMLToDDI {
 
