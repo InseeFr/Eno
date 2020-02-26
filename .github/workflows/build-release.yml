@@ -2,8 +2,8 @@ name: Upload Release Asset
 
 on:
   push:
-    branches: 
-      - 'test-actions'
+    tags: 
+      - 'v*'
 
 jobs:
   build:
