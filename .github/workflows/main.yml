@@ -16,9 +16,13 @@ jobs:
       with:
         java-version: 11
     - name: Build with Maven
-      run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V --file pom.xml
+      run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
     - name: Test with Maven
       run: mvn test -B --file pom.xml
+    - name: Deploy GitHub package
+      run: mvn deploy -Dregistry=https://maven.pkg.github.com/laurentC35 -Dtoken=$GITHUB_TOKEN
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -34,9 +38,8 @@ jobs:
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        ENO_VERSION: ${{mvn help:evaluate -Dexpression=project.version -q -DforceStdout --file pom.xml}} 
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: target/eno-core-$ENO_VERSION.jar
-        asset_name: eno-core-$ENO_VERSION.jar
+        asset_path: target/eno-core.jar
+        asset_name: eno-core-${{ github.ref }}.jar
         asset_content_type: application/java-archive
