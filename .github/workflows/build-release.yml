@@ -2,8 +2,8 @@ name: Upload Release Asset
 
 on:
   push:
-    branches: 
-      - 'test-actions'
+    tags: 
+      - 'v*'
 
 jobs:
   build:
@@ -19,10 +19,6 @@ jobs:
       run: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Djar.finalName="eno-core" -B -V --file pom.xml
     - name: Test with Maven
       run: mvn test -B --file pom.xml
-    - name: Deploy GitHub package
-      run: mvn deploy -DaltDeploymentRepository=repository::default::https://maven.pkg.github.com/laurentC35 -Dtoken=$GITHUB_TOKEN
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
