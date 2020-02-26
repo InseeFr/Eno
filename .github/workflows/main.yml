@@ -20,7 +20,7 @@ jobs:
     - name: Test with Maven
       run: mvn test -B --file pom.xml
     - name: Deploy GitHub package
-      run: mvn deploy -Dregistry=https://maven.pkg.github.com/laurentC35 -Dtoken=$GITHUB_TOKEN
+      run: mvn deploy -DaltDeploymentRepository=repository::default::https://maven.pkg.github.com/laurentC35 -Dtoken=$GITHUB_TOKEN
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Create Release
