@@ -2,8 +2,8 @@ name: Upload Release Asset
 
 on:
   push:
-    tags: 
-      - 'v*'
+    branches: 
+      - 'test-actions'
 
 jobs:
   build:
@@ -12,6 +12,7 @@ jobs:
     steps:
     - name: Eno name
       id: get_name
+      run: echo ENO_NAME $ENO_NAME
       env:
         ENO_NAME: "eno-core" 
     - uses: actions/checkout@v2
