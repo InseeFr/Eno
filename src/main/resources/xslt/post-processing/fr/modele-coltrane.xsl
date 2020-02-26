@@ -6,17 +6,17 @@
 
     <xsl:output method="xml" encoding="utf-8"/>
 
-    <!-- On passe l'instance, et par conséquence d'autres éléments du form au modèle Coltrane -->
+    <!-- We pass the instance, and consequently other elements of the form, to the Coltrane model. -->
 
-    <!-- Fichier de mapping -->
-    <xsl:param name="fichier-mapping"/>
-    <xsl:param name="fichier-mapping-node" as="node()" required="no"/>
+    <!-- Mapping file -->
+    <xsl:param name="mapping-file"/>
+    <xsl:param name="mapping-file-node" as="node()" required="no"/>
 
     <xsl:variable name="list">
         <xsl:choose>
-            <xsl:when test="$fichier-mapping-node/*">
+            <xsl:when test="$mapping-file-node/*">
                 <mapping>
-                    <xsl:for-each select="$fichier-mapping-node//mapping/*">
+                    <xsl:for-each select="$mapping-file-node//mapping/*">
                         <xsl:sort select="string-length(@name)" order="descending"/>
                         <xsl:sort select="name()" order="ascending"/>
                         <xsl:copy-of select="."/>
@@ -25,7 +25,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <mapping>
-                    <xsl:for-each select="doc($fichier-mapping)//mapping/*">
+                    <xsl:for-each select="doc($mapping-file)//mapping/*">
                         <xsl:sort select="string-length(@name)" order="descending"/>
                         <xsl:sort select="name()" order="ascending"/>
                         <xsl:copy-of select="."/>

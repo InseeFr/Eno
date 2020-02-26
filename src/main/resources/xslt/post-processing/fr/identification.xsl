@@ -5,14 +5,14 @@
     xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <xsl:output method="xml" indent="no" encoding="utf-8"/>
-    <!-- Transformation pour ajouter le module d'identification -->
+    <!-- Transformation to add the identification module -->
 
-    <!-- On détermine quelle est la page d'identification -->
+    <!-- We determine which is the identification page -->
     <xsl:variable name="nomPageId">
         <xsl:value-of select="//xf:instance[@id='fr-form-instance']/form/Beginning/following-sibling::*[name()!='Groupe' and name()!='Variable'][1]/name()"/>
     </xsl:variable>
     
-    <!-- Lorsque les éléments d'identification sont mis à la fin du premier module, leurs labels sont mis juste avant le 2° module -->
+    <!-- When the identification elements are put at the end of the first module, their labels are put just before the second module. -->
     <xsl:variable name="nomPageSuivanteId">
         <xsl:value-of select="//xf:instance[@id='fr-form-instance']/form/*[name()=$nomPageId]/following-sibling::*[name()!='Groupe' and name()!='Variable'][1]/name()"/>
     </xsl:variable>        
@@ -37,7 +37,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- On rajoute des éléments à l'instance principale -->
+    <!-- Elements are added to the main proceeding -->
     <xsl:template
         match="*[parent::form[parent::xf:instance[@id='fr-form-instance']] and name()=$nomPageId]">
         <xsl:copy>
@@ -49,8 +49,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- On rajoute des éléments aux binds correspondants -->
-    <!-- On rajoute des éléments à l'instance principale -->
+    <!-- Elements are added to the corresponding binds -->
     <xsl:template
         match="xf:bind[@name=$nomPageId and ancestor::xf:bind[@id='fr-form-instance-binds']]">
         <xsl:copy>
@@ -62,7 +61,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- On rajoute des éléments à l'instance des données de pilotage -->
+    <!-- Elements are added to the instance of the metadata -->
     <xsl:template match="xf:instance[@id='donnees-pilotage']/InformationsQuestionnaire">
         <xsl:copy>
             <xsl:apply-templates select="node()[name() !='UniteEnquetee'] | @*"/>
@@ -82,7 +81,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- On rajoute des éléments aux binds correspondants -->
+    <!-- Elements are added to the corresponding binds -->
     <xsl:template match="xf:bind[@id='donnees-pilotage-binds']">
         <xsl:copy>
             <xsl:apply-templates select="node()[@id !='UniteEnquetee-bind'] | @*"/>
@@ -102,7 +101,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- On rajoute des éléments aux ressources -->
+    <!-- Adding elements to the resources -->
     <xsl:template match="xf:instance[@id='fr-form-resources']/resources/resource/*[name()=$nomPageSuivanteId]">
         <Identification>
             <label>Identification de la personne</label>
@@ -135,7 +134,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- Au niveau du body -->
+    <!-- At body level -->
     <xsl:template match="fr:section[@name=$nomPageId]">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
@@ -175,7 +174,7 @@
                     <xf:output id="LibellePays-control" bind="LibellePays-bind"/>
                 </xhtml:div>
                 <xhtml:div class="framePerso">
-                    <!-- Dépend de l'environnement, configuré dans orbeon -->
+                    <!-- Depends on the environment, configured in Orbeon -->
                     <xsl:variable name="lien"
                         select="string('{concat(xxf:property(''url-portail''),xxf:property(''mon-compte''))}')"/>
                     <xhtml:p>

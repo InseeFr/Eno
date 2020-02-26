@@ -141,19 +141,14 @@ public class TestValorizatorParametersImpl {
 	public void testValorizationComplexeJavaParameters() {
 		try {			
 
-			ENOParameters defaultParams = valorizatorParametersImpl.getDefaultParameters();
 			long debut = System.currentTimeMillis();
-			ENOParameters enoParametersFinal = valorizatorParametersImpl.mergeEnoParameters(
-					defaultParams, 
-					complexeEnoParameters);
+			ENOParameters enoParametersFinal = valorizatorParametersImpl.mergeEnoParameters(complexeEnoParameters);
 			System.out.println("Merging time : "+(System.currentTimeMillis()-debut)+" ms");
 			ENOParameters enoParametersDefault = valorizatorParametersImpl.getDefaultParameters();
 
 			// Pipeline
 			Assert.assertEquals(InFormat.DDI, enoParametersFinal.getPipeline().getInFormat());
 			Assert.assertEquals(OutFormat.ODT, enoParametersFinal.getPipeline().getOutFormat());
-			//Default value
-			Assert.assertEquals(enoParametersDefault.getPipeline().getPreProcessing(), enoParametersFinal.getPipeline().getPreProcessing());
 			// New value
 			Assert.assertEquals(Arrays.asList(PostProcessing.DDI_MARKDOWN_TO_XHTML), enoParametersFinal.getPipeline().getPostProcessing());
 
@@ -198,8 +193,7 @@ public class TestValorizatorParametersImpl {
 
 			ENOParameters defaultParams = valorizatorParametersImpl.getDefaultParameters();
 			long debut = System.currentTimeMillis();
-			ENOParameters enoParametersFinal = valorizatorParametersImpl.mergeEnoParameters(
-					defaultParams, 
+			ENOParameters enoParametersFinal = valorizatorParametersImpl.mergeEnoParameters( 
 					simpleEnoParameters);
 			System.out.println("Merging time : "+(System.currentTimeMillis()-debut)+" ms");
 			ENOParameters enoParametersDefault = valorizatorParametersImpl.getDefaultParameters();			

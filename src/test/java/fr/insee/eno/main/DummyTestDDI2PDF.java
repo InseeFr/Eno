@@ -22,20 +22,21 @@ import org.apache.fop.apps.MimeConstants;
 import org.junit.Test;
 
 import fr.insee.eno.generation.DDI2PDFGenerator;
-import fr.insee.eno.postprocessing.PDFEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertAccompanyingMailsPostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.PDFInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.PDFMailingPostprocessor;
-import fr.insee.eno.postprocessing.PDFSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.PDFTableColumnPostprocessorFake;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.preprocessing.DDIPreprocessor;
 import fr.insee.eno.service.GenerationService;
+import fr.insee.eno.postprocessing.pdf.PDFEditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFInsertAccompanyingMailsPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFInsertCoverPagePostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFInsertEndQuestionPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFMailingPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFSpecificTreatmentPostprocessor;
+import fr.insee.eno.postprocessing.pdf.PDFTableColumnPostprocessorFake;
+import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
+import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
 
 public class DummyTestDDI2PDF {
-	
-	private DDIPreprocessor ddiPreprocessor = new DDIPreprocessor();
 	
 	private DDI2PDFGenerator ddi2pdfGenerator = new DDI2PDFGenerator();	
 
@@ -44,7 +45,13 @@ public class DummyTestDDI2PDF {
 
 		String basePathddi2PDF = "src/test/resources/ddi-to-pdf";
 		String basePathImg = "src/test/resources/examples/img/";
-		Postprocessor[] postprocessors =  {
+
+		Preprocessor[] preprocessors = {
+				new DDIDereferencingPreprocessor(),
+				new DDICleaningPreprocessor(),
+				new DDITitlingPreprocessor()};
+		
+		Postprocessor[] postprocessors = { 
 				new PDFMailingPostprocessor(),
 				new PDFTableColumnPostprocessorFake(),
 				new PDFInsertEndQuestionPostprocessor(),
@@ -52,7 +59,8 @@ public class DummyTestDDI2PDF {
 				new PDFSpecificTreatmentPostprocessor(),
 				new PDFInsertCoverPagePostprocessor(),
 				new PDFInsertAccompanyingMailsPostprocessor()};
-		GenerationService genServiceDDI2PDF = new GenerationService(ddiPreprocessor, ddi2pdfGenerator, postprocessors);
+		
+		GenerationService genServiceDDI2PDF = new GenerationService(preprocessors, ddi2pdfGenerator, postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathddi2PDF));
 		File xconf = new File(String.format("%s/fop.xconf", basePathddi2PDF));
 

@@ -32,7 +32,6 @@
             <Satisfaction>false</Satisfaction>
             <LengthOfLongTable>56</LengthOfLongTable>
             <DecimalSeparator>,</DecimalSeparator>
-            <Css></Css>
         </fr-parameters>
         <pdf-parameters>
             <Format>

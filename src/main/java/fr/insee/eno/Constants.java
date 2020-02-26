@@ -22,7 +22,6 @@ public final class Constants {
 	private static final Logger logger = LoggerFactory.getLogger(Constants.class);
 
 	private Constants() {
-
 	}
 
 	// ---------- Core resources: references to XSL, XML, etc. resources used to generate a questionnaire
@@ -42,9 +41,6 @@ public final class Constants {
 	// Params : schema
 	public static final URL ENO_PARAMETERS_XSD = Constants.class.getResource(PARAMS_SCHEMAS_FOLDER_PATH+"/ENOParameters.xsd");
 
-	// ----- Ref
-	public static final String PARAMETERS_XML = "parameters.xml";	
-
 	// ----- XSL Parameters path
 	public static final String CONFIG_DDI2FR = CONFIG_FOLDER + "/ddi2fr.xml";
 	public static final String CONFIG_DDI2ODT = CONFIG_FOLDER + "/ddi2odt.xml";
@@ -57,34 +53,42 @@ public final class Constants {
 	public static final String LABELS_FOLDER = "/lang/fr/";
 
 
-	// ----- Files : pre-processing
+	/********************************************************/
+	/********************** Pre-processing ******************/
+	/********************************************************/
 	public static final String PRE_PROCESSING_FOLDER = "/xslt/pre-processing";
-	public static final String DDI_DEREFERENCING_XSL = PRE_PROCESSING_FOLDER + "/ddi/dereferencing.xsl";
-	public static final String PARAMETERS_FILE = "/" + PARAMETERS_XML;	
-
 	public static final String UTIL_DDI_SPLITTING_XSL = UTIL_FOLDER_PATH + "/ddi/splitting.xsl";
+	/******************* DDI - Pre-processing ****************/
+	public static final String DDI_DEREFERENCING_XSL = PRE_PROCESSING_FOLDER + "/ddi/dereferencing.xsl";
 	public static final String UTIL_DDI_DEREFERENCING_XSL = UTIL_FOLDER_PATH + "/ddi/dereferencing.xsl";
 	public static final String UTIL_DDI_TITLING_XSL = PRE_PROCESSING_FOLDER + "/ddi/titling.xsl";
 	public static final String UTIL_DDI_MAPPING_XSL = PRE_PROCESSING_FOLDER + "/ddi/mapping.xsl";
 	public static final String UTIL_DDI_CLEANING_XSL = PRE_PROCESSING_FOLDER + "/ddi/cleaning.xsl";
+	public static final String UTIL_DDI32_TO_DDI33_XSL = UTIL_FOLDER_PATH + "/ddi/ddi32toddi33.xsl";
 	
+	/*************** PoguesXML - Pre-processing **************/
 	public static final String UTIL_POGUES_XML_SUPP_GOTO_XSL = PRE_PROCESSING_FOLDER + "/pogues-xml/2suppressionGoto.xsl";
 	public static final String UTIL_POGUES_XML_MERGE_ITE_XSL = PRE_PROCESSING_FOLDER + "/pogues-xml/tweak-to-merge-equivalent-ite.xsl";
 	public static final String UTIL_POGUES_XML_GOTO_ITE_XSL = PRE_PROCESSING_FOLDER + "/pogues-xml/goto-2-if-then-else.xsl";
 	
-	// post-processing
+	
+	
+	/********************************************************/
+	/********************* Post-processing ******************/
+	/********************************************************/
 	public static final String POST_PROCESSING_FOLDER = "/xslt/post-processing";
+	
+	/********************* DDI - Post-processing ******************/
 	public static final String UTIL_DDI_MW2XHTML_XSL = POST_PROCESSING_FOLDER + "/ddi/mw2xhtml.xsl";
 	public static final String UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL = POST_PROCESSING_FOLDER + "/ddi/tweak-xhtml-for-ddi.xsl";
 	
 	public static final String UTIL_FODS_PREFORMATTING_XSL = UTIL_FOLDER_PATH + "/fods/preformatting.xsl";
 	public static final String UTIL_XSL_INCORPORATION_XSL = UTIL_FOLDER_PATH + "/xsl/incorporation.xsl";
 
-	public static final String UTIL_DDI32_TO_DDI33_XSL = UTIL_FOLDER_PATH + "/ddi/ddi32toddi33.xsl";
+	
 	public static final String BROWSING_FR_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/fr/browsing.xsl";
-	public static final String BROWSING_JS_TEMPLATE_XSL = UTIL_FOLDER_PATH + "/js/browsing.xsl";
 
-	// ---------- XSL generation
+	/********************* XSL generation ******************/
 	public static final String TRANSFORMATIONS_DDI2FR_DDI2FR_XSL = TRANSFORMATIONS_FOLDER + "/ddi2fr/ddi2fr.xsl";
 	public static final String TRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL = TRANSFORMATIONS_FOLDER + "/ddi2odt/ddi2odt.xsl";
 	public static final String TRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL = TRANSFORMATIONS_FOLDER + "/ddi2pdf/ddi2pdf.xsl";
@@ -142,25 +146,35 @@ public final class Constants {
 	public static final String INPUTS_POGUES_XML_SOURCE_FIXED_XSL = INPUTS_FOLDER + "/pogues-xml/source-fixed.xsl";
 	public static final String FODS_2_XML_XSL = TRANSFORMATIONS_FOLDER + "/fods2xml.xsl";
 	public static final String XML_2_XSL_XSL = TRANSFORMATIONS_FOLDER + "/xml2xsl.xsl";
+	
+	/********************* Merging paramters ******************/
+	public static final String MERGE_PARAMETERS_XSL = UTIL_FOLDER_PATH + "/params/merge-parameters.xsl";
+	
+	
 
-	// ---------- Post-processing files
+	/********************************************************/
+	/********************* Post-processing ******************/
+	/********************************************************/
 	public static final String OUPUTS_FOLDER = "/xslt/outputs/pdf";
 	public static final String POST_PROCESSING_FOLDER_PDF = "/xslt/post-processing/pdf";
 	public static final String POST_PROCESSING_FOLDER_JS = "/xslt/post-processing/js";
 	public static final String POST_PROCESSING_FOLDER_FR = "/xslt/post-processing/fr";
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF =  OUPUTS_FOLDER + "/publipostage.xsl";
-	// ------------ PDF -----------
+
+	/********************* PDF/FO - Post-processing ******************/
 	public static final String TRANSFORMATIONS_CUSTOMIZATION_FO_4PDF_2 =  POST_PROCESSING_FOLDER_PDF + "/mailing-vtl.xsl";
 	public static final String TRANSFORMATIONS_SPECIF_TREATMENT_FO_4PDF =  POST_PROCESSING_FOLDER_PDF +"/pdf-specific-treatment.xsl";
 	public static final String TRANSFORMATIONS_ACCOMPANYING_MAILS_FO_4PDF =  POST_PROCESSING_FOLDER_PDF + "/accompanying-mails.xsl";
 	public static final String TRANSFORMATIONS_COVER_PAGE_FO_4PDF =  POST_PROCESSING_FOLDER_PDF + "/insert-cover-page.xsl";
 	public static final String TRANSFORMATIONS_END_QUESTION_FO_4PDF =  POST_PROCESSING_FOLDER_PDF + "/insert-end-questions.xsl";
 	public static final String TRANSFORMATIONS_EDIT_STRUCTURE_PAGES_FO_4PDF =  POST_PROCESSING_FOLDER_PDF + "/edit-structure-page.xsl";
-	// ------------ JS -----------
+	
+	/********************* JS/XML-Lunatic - Post-processing ******************/
 	public static final String TRANSFORMATIONS_SORT_COMPONENTS_JS = POST_PROCESSING_FOLDER_JS + "/sort-components.xsl";
 	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_JS = POST_PROCESSING_FOLDER_JS + "/externalize-variables.xsl";
 	public static final String TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_JS = POST_PROCESSING_FOLDER_JS + "/insert-generic-questions.xsl";
-	// ------------ FR -----------
+	
+	/********************* FR/Xform Post-processing ******************/
 	public static final String UTIL_FR_BROWSING_XSL = POST_PROCESSING_FOLDER_FR + "/browsing.xsl";
 	public static final String UTIL_FR_FIX_ADHERENCE_XSL = POST_PROCESSING_FOLDER_FR + "/fix-adherence.xsl";
 	public static final String UTIL_FR_EDIT_PATRON_XSL = POST_PROCESSING_FOLDER_FR + "/edit-patron.xsl";
@@ -171,19 +185,16 @@ public final class Constants {
 	public static final String UTIL_FR_MODELE_COLTRANE_XSL = POST_PROCESSING_FOLDER_FR + "/modele-coltrane.xsl";
 	public static final String UTIL_FR_SPECIFIC_TREATMENT_XSL = POST_PROCESSING_FOLDER_FR + "/fr-specific-treatment.xsl";
 
-	// ---------- Temporary file system
-
+	
+	/********************* Temporary file system ******************/
 	// ----- Folders
-	//public static final String TEMP_FOLDER_PATH = "/target/eno";
 	public static final String TEMP_FOLDER_PATH = System.getProperty("java.io.tmpdir") + "/eno";
-
 
 	public static final File TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH);
 
 	public static final File TEMP_FILE_PARAMS(String file) {
 		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH +"/"+file);
 	}
-	//public static final File SUB_TEMP_FOLDER = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp");
 	public static File sUB_TEMP_FOLDER_FILE (String survey){
 		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/"+survey);
 	}
@@ -192,9 +203,7 @@ public final class Constants {
 		return TEMP_FOLDER_PATH + "/"+survey;
 	}
 
-
 	// ----- Files
-	//public static final File TEMP_NULL_TMP = getFileOrDirectoryFromPath(SUB_TEMP_FOLDER + "/null.tmp");
 	public static File tEMP_NULL_TMP (String sUB_TEMP_FOLDER){
 		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/null.tmp");
 	}
@@ -202,21 +211,9 @@ public final class Constants {
 		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/mapping.xml");
 	}
 	public static final File TEMP_PREFORMATE_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/preformate.tmp");
-	//	public static File tEMP_PREFORMATE_TMP (String sUB_TEMP_FOLDER) {
-	//		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/preformate.tmp");
-	//	}
 	public static final File TEMP_XML_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/xml.tmp");
-	//	public static File tEMP_XML_TMP (String sUB_TEMP_FOLDER){
-	//		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/xml.tmp");
-	//	}
 	public static final File TEMP_TEMP_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp.tmp");
-	//	public static File tEMP_TEMP_TMP(String sUB_TEMP_FOLDER){
-	//		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/temp.tmp");
-	//	}
 	public static final File TEMP_TEMP_BIS_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/temp/temp-bis.tmp");
-	//	public static File tEMP_TEMP_BIS_TMP(String sUB_TEMP_FOLDER){
-	//		return getFileOrDirectoryFromPath(sUB_TEMP_FOLDER + "/temp-bis.tmp");
-	//	}
 
 	// Those files holds the XSL generated from FODS ; they will be then copied to resource directory when packaging to JAR
 	public static final File TRANSFORMATIONS_DDI2FR_DDI2FR_XSL_TMP = getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/ddi2fr/ddi2fr.xsl");
@@ -279,65 +276,48 @@ public final class Constants {
 			return file;
 		}
 	}
-
-	// TODO Under this comment are the legacy references to files and directories that eventually will be deleted.
-	// ----------------------------------------------- //
-
-	// Root folder of the project : must be filled
-	// FIXME use a dynamic path
-	//	public static final String ROOT_FOLDER = "D:/arkn1q/Mes Documents/eclipse_workspace/Eno";
-	//
-	//	public static final String QUESTIONNAIRE_FOLDER = ROOT_FOLDER + "/questionnaires";
-	//	public static final String TEMP_TEST_FOLDER = TEMP_FOLDER_PATH + "/nonRegressionTest";
-
+	
 	/********************************************************/
-	/******************* ENOPreprocessing *******************/
+	/*********************** Temp foder  ********************/
 	/********************************************************/
-
-
-
-
-	////// INCORPORATION TARGET
-	//// Temporary files used in INCORPORATION
-
-
-	//// Xsl stylesheets used in INCORPORATION
-
-
-	/********************************************************/
-	/******************* DDIPreprocessing *******************/
-	/********************************************************/
-	//// Plugin Conf
-	public static final String PDF_PLUGIN_XML_CONF = "src/main/resources/config/plugins-conf.xml";
-	public static final File PDF_PLUGIN_XML_CONF_FILE = getFileFromUrl(Constants.class.getResource(CONFIG_FOLDER + "/plugins-conf.xml"));
-
-
-
-	/********************************************************/
-	/******************* DDIPreprocessing *******************/
-	/********************************************************/
-
-	//// Temporary files used in DDIPreprocessing
-	//public static final String OLD_TEMP_NULL_TMP2 = SUB_TEMP_FOLDER + "/null.tmp";
-	public String oLD_TEMP_NULL_TMP2(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/null.tmp";
+	public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER + "/xforms";
 	}
-
-	//// Xsl stylesheets used in DDIPreprocessing
-
-	//
+	public static String tEMP_ODT_FOLDER(String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER + "/odt";
+	}
+	public static String tEMP_JS_FOLDER(String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER+ "/js";
+	}
+	public static String tEMP_PDF_FOLDER(String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER+ "/pdf";
+	}
+	public static String tEMP_DDI_FOLDER(String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER + "/ddi";
+	}
+	public static String tEMP_POGUES_XML_FOLDER(String sUB_TEMP_FOLDER){
+		return sUB_TEMP_FOLDER + "/pogues-xml";
+	}
+	public static final String BASIC_FORM_TMP_FILENAME = "basic-form.tmp";
+	
+	
+	
+	
+	/********************************************************/
+	/********************* File Extension *******************/
+	/************** (used during post-processing) ***********/
+	
 	public static final String BASE_NAME_FORM_FILE = "/form";
 
-	// File Extension 
+	/************ DDI and pogues-xml extension ***************/
 	public static final String CLEANED_EXTENSION = "-cleaned.tmp";
 	public static final String MW_EXTENSION = "-mw.tmp";
 	public static final String FINAL_EXTENSION = "-final.tmp";
 	public static final String TEMP_EXTENSION = "-temp.xml";
 	public static final String FINAL_DDI_EXTENSION = "-final.xml";
-
 	public static final String DDI32_DDI33_EXTENSION = "-ddi33.xml";
 
-	// PDF
+	/********************* pdf/fo extension *******************/
 	public static final String ACCOMPANYING_MAILS_FO_EXTENSION = "-accompanying-mails.fo";
 	public static final String COVER_PAGE_FO_EXTENSION = "-cover-page.fo";
 	public static final String EDIT_STRUCTURE_FO_EXTENSION = "-edit-structure.fo";
@@ -345,17 +325,16 @@ public final class Constants {
 	public static final String SPECIFIC_TREAT_PDF_EXTENSION = "-specific-form.fo";
 	public static final String TABLE_COL_SIZE_PDF_EXTENSION = "-temp.fo";
 	public static final String FINAL_PDF_EXTENSION = "-final-out.fo";
-	//public static final String CUSTOM_FO_EXTENSION = "-out.fo";
 	public static final String MAILING_FO_EXTENSION = "-mailing-vtl.fo";
 
-	// JS
+	/****************** js/xml-lunatic extension **************/
 	public static final String SORT_COMPONENTS_JS_EXTENSION = "-sorted.xml";
 	public static final String INSERT_GENERIC_QUESTIONS_JS_EXTENSION = "-insert-questions.xml";
 	public static final String EXTERNALIZE_VARIABLES_JS_EXTENSION = "-ext-variables.xml";
 	public static final String VTL_PARSER_JS_EXTENSION = "-vtl-parsed.xml";
 	public static final String FINAL_JS_EXTENSION = "-lunatic.xml";
 
-	// FR
+	/******************** fr/xform extension ******************/
 	public static final String BROWSING_FR_EXTENSION = "-browsing.xhtml";
 	public static final String EDIT_PATRON_FR_EXTENSION = "-edit-patron.xhtml";
 	public static final String FIX_ADHERENCE_FR_EXTENSION = "-fix-adherence.xhtml";
@@ -365,36 +344,4 @@ public final class Constants {
 	public static final String INSERT_GENERIC_QUESTIONS_FR_EXTENSION = "-insert-questions.xhtml";
 	public static final String MODELE_COLTRANE_FR_EXTENSION = "-modele-coltrane.xhtml";
 	public static final String SPECIFIC_TREATMENT_FR_EXTENSION = "-specific-treatment.xhtml";
-	// JS
-
-	//public static final String TEMP_XFORMS_FOLDER = SUB_TEMP_FOLDER + "/xforms";
-	public static String tEMP_XFORMS_FOLDER (String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/xforms";
-	}
-	//public static final String TEMP_ODT_FOLDER = SUB_TEMP_FOLDER + "/odt";
-	public static String tEMP_ODT_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/odt";
-	}
-
-	//public static final String TEMP_PDF_FOLDER = SUB_TEMP_FOLDER + "/js";
-	public static String tEMP_JS_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER+ "/js";
-	}
-
-	public static String tEMP_PDF_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER+ "/pdf";
-	}
-	//public static final String TEMP_DDI_FOLDER = SUB_TEMP_FOLDER + "/ddi";
-	public static String tEMP_DDI_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/ddi";
-	}
-	//public static final String TEMP_POGUES_XML_FOLDER = SUB_TEMP_FOLDER + "/pogues-xml";
-	public static String tEMP_POGUES_XML_FOLDER(String sUB_TEMP_FOLDER){
-		return sUB_TEMP_FOLDER + "/pogues-xml";
-	}
-	public static final String BASIC_FORM_TMP_FILENAME = "basic-form.tmp";
-
-
-
-
 }

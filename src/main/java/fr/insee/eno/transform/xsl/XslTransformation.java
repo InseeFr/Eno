@@ -523,5 +523,15 @@ public class XslTransformation {
 		transformer.setErrorListener(new EnoErrorListener());
 		xslTransform(transformer, inputFile, outputFile);
 	}
+	
+	public void mergeEnoParameters(InputStream newParameters, OutputStream finalParameters, InputStream xslSheet) throws Exception {
+		LOGGER.info("Merging new eno paramters with default parameters.");
+		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
+		tFactory.setURIResolver(new ClasspathURIResolver());
+		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
+		transformer.setErrorListener(new EnoErrorListener());
+		xslTransform(transformer, newParameters, finalParameters);
+
+	}
 
 }

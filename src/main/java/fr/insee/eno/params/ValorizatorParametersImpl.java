@@ -1,9 +1,11 @@
 package fr.insee.eno.params;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -15,6 +17,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.FileUtils;
@@ -22,131 +27,87 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.ENOParameters;
 import fr.insee.eno.parameters.LevelAbstract;
 import fr.insee.eno.parameters.LevelQuestion;
 import fr.insee.eno.parameters.LevelSequence;
+import fr.insee.eno.transform.xsl.ClasspathURIResolver;
+import fr.insee.eno.transform.xsl.EnoErrorListener;
+import fr.insee.eno.transform.xsl.XslParameters;
+import fr.insee.eno.transform.xsl.XslTransformation;
 
 
 public class ValorizatorParametersImpl implements ValorizatorParameters {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ValorizatorParametersImpl.class);
+	
+	private XslTransformation saxonService = new XslTransformation();
 
 
 	@Override
 	public ByteArrayOutputStream mergeParameters(ENOParameters enoParameters) throws JAXBException, IllegalArgumentException, IllegalAccessException, IOException   {
-		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-		ENOParameters enoParametersFinal = mergeEnoParameters(enoParameters);		
+		
+		ByteArrayOutputStream tempByteArrayOutputStream = new ByteArrayOutputStream();
+		
 		JAXBContext context = JAXBContext.newInstance(ENOParameters.class);
-		Marshaller jaxbMarshaller =  context.createMarshaller();			
+		Marshaller jaxbMarshaller =  context.createMarshaller();
 		jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);		
-		jaxbMarshaller.marshal(enoParametersFinal, byteArrayOutputStream);
+		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		jaxbMarshaller.marshal(enoParameters, tempByteArrayOutputStream);
+		
+		InputStream PARAM_XSL = Constants.getInputStreamFromPath(Constants.MERGE_PARAMETERS_XSL);
+		InputStream inputStream = new ByteArrayInputStream(tempByteArrayOutputStream.toByteArray());
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		
+		try {
+			saxonService.mergeEnoParameters(inputStream, outputStream, PARAM_XSL);
+		}catch(Exception e) {
+			String errorMessage = "An error was occured during the valorisation of parameters. "+e.getMessage();
+			LOGGER.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
+		}
+		
+		tempByteArrayOutputStream.close();
+		inputStream.close();
+		PARAM_XSL.close();
 
-		return byteArrayOutputStream;
+		return outputStream;
 	}
 	
 	@Override
 	public File mergeParameters(File enoParameters) throws JAXBException, IllegalArgumentException, IllegalAccessException, IOException   {
-		File output = Constants.TEMP_FILE_PARAMS("new-params.xml");		
-		InputStream paramsIS = FileUtils.openInputStream(enoParameters);
-		ENOParameters enoParms = getParameters(paramsIS);
-		ENOParameters enoParametersFinal = mergeEnoParameters(enoParms);		
-		JAXBContext context = JAXBContext.newInstance(ENOParameters.class);
-		Marshaller jaxbMarshaller =  context.createMarshaller();			
-		jaxbMarshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		jaxbMarshaller.marshal(enoParametersFinal, output);
-
-		return output;
+		File finalParam = Constants.TEMP_FILE_PARAMS("new-params.xml");
+		
+		InputStream PARAM_XSL = Constants.getInputStreamFromPath(Constants.MERGE_PARAMETERS_XSL);
+		InputStream inputStream = FileUtils.openInputStream(enoParameters);
+		OutputStream outputStream = FileUtils.openOutputStream(finalParam);
+		
+		try {
+			saxonService.mergeEnoParameters(inputStream, outputStream, PARAM_XSL);
+		}catch(Exception e) {
+			String errorMessage = "An error was occured during the valorisation of parameters. "+e.getMessage();
+			LOGGER.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
+		}
+		
+		inputStream.close();
+		outputStream.close();
+		PARAM_XSL.close();
+		
+		return finalParam;
 	}
 
 	@Override
 	public ENOParameters mergeEnoParameters(ENOParameters enoParameters) throws JAXBException, IOException, IllegalArgumentException, IllegalAccessException  {
 		LOGGER.info("Merging eno Parameters");
-		ENOParameters enoParametersDefault = getDefaultParameters();
-		LOGGER.info("Default parameters read");
-		return mergeEnoParameters(enoParametersDefault, enoParameters);
+		ByteArrayOutputStream outputStream = this.mergeParameters(enoParameters);
+		ENOParameters finalEnoParam = this.getParameters(new ByteArrayInputStream(outputStream.toByteArray()));
+		outputStream.close();
+		return finalEnoParam;
 	}
 
-	/**
-	 * This is a recursive function that merges two java object 
-	 * @param enoParamsDefault : default java object
-	 * @param newEnoParams : new java object
-	 * @return a java object of the same type as the params
-	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
-	 */
-	public <T> T mergeEnoParameters(T enoParamsDefault, T newEnoParams) throws IllegalArgumentException, IllegalAccessException  {
-		Class<?> objectClass = enoParamsDefault.getClass();
-		LOGGER.debug("Class's name : "+objectClass.getSimpleName());
-		Object merged;		
-		// if the class of the object is a Primitive or similar, or an Enumeration, we do a simple merge otherwise:
-		if(isComplexeType(objectClass)){
-			merged = enoParamsDefault;
-			// we recover each fields which constitutes the recovered object
-			for (Field field : getAllFields(new ArrayList<>(), objectClass)) {
-				String className = field.getType().getSimpleName();
-				LOGGER.debug(" Name/Type of field :"+field.getName()+"/"+className);
-				field.setAccessible(true);
-
-				Object enoParamsDefaultValue;
-				Object newEnoParamsValue;
-				// we recover the value of each
-				enoParamsDefaultValue = field.get(enoParamsDefault);
-				newEnoParamsValue = newEnoParams!=null ? field.get(newEnoParams) : null;
-				
-				if (className != null) {
-					if(enoParamsDefaultValue!=null) {
-						
-						// Special case for List (if empty we keep default value)
-						if(className.equals(List.class.getSimpleName())) {
-							if(newEnoParamsValue==null || ((List<?>) newEnoParamsValue).isEmpty()) {
-								field.set(merged, enoParamsDefaultValue);
-								LOGGER.debug("List : No overloaded, default value");
-							}
-							else {
-								// Special case for LevelQuestion and LevelSequence
-								Class<?> levelClass = ((List<?>) newEnoParamsValue).get(0).getClass();
-								if(levelClass.equals(LevelQuestion.class) || levelClass.equals(LevelSequence.class)) {									
-									field.set(merged, mergeListNumerotation(enoParamsDefaultValue, newEnoParamsValue));
-									LOGGER.debug("List : Special overloaded");	
-								}
-								else {
-									field.set(merged, newEnoParamsValue);
-									LOGGER.debug("List : overloaded, new value");	
-								}
-							}
-						}
-						else {
-							// Recursive call
-							if(isComplexeType(field.getType())) {
-								LOGGER.debug("Merging... : recursive call");
-								field.set(merged, this.mergeEnoParameters(enoParamsDefaultValue, newEnoParamsValue));
-							}
-							// if field's class is a Primitive or similar, or an Enumeration, we do a simple merge.
-							else {
-								LOGGER.debug("Simple merge of field : values merged");
-								field.set(merged,  (newEnoParamsValue != null) ? newEnoParamsValue : enoParamsDefaultValue);
-							}
-						}
-					}
-					else {
-						// Case if defaultValue of field is null
-						field.set(merged, newEnoParamsValue);
-					}
-					
-					
-				}
-			}
-		}
-		else {
-			// merge simple: new value if it is not null, if not the default one
-			LOGGER.debug("Simple merge of simple class : values merged");
-			merged = (newEnoParams != null) ? newEnoParams : enoParamsDefault;
-		}
-		return (T) merged;
-	}
+	
 
 
 	/**
@@ -218,41 +179,4 @@ public class ValorizatorParametersImpl implements ValorizatorParameters {
 
 		return fields;
 	}
-	
-	
-	/**
-	 * This function merges two complex type : List of LevelAbstract
-	 * @param enoParamsDefaultValue
-	 * @param newEnoParamsValue
-	 * @return the merging of the two params
-	 * @throws IllegalArgumentException
-	 * @throws IllegalAccessException
-	 */
-	public List<LevelAbstract> mergeListNumerotation(Object enoParamsDefaultValue, Object newEnoParamsValue) throws IllegalArgumentException, IllegalAccessException  {
-		List<LevelAbstract> mergedList = new ArrayList<>();
-		for(LevelAbstract levelDefault : (List<LevelAbstract>) enoParamsDefaultValue) {
-			int size = mergedList.size();
-			for(LevelAbstract  levelNew : (List<LevelAbstract>) newEnoParamsValue) {
-				if(levelDefault.getName().equals(levelNew.getName())) {
-					mergedList.add(this.mergeEnoParameters(levelDefault, levelNew));
-				}
-			}
-			if(mergedList.size()==size) {
-				mergedList.add(levelDefault);
-			}
-		}
-		return mergedList;
-	}
-	
-	/**
-	 * 
-	 * @param objectClass
-	 * @return boolean : if the param is a complexeType according to a determined list.
-	 */
-	public boolean isComplexeType(Class<?> objectClass) {
-		List<String> PRIMITIVE_JAVA_OBJECT = Arrays.asList("Long", "Long[]", "Integer", "Integer[]", "String", "String[]", "Boolean", "boolean[]", "ArrayList", "LinkedHashMap");
-		return !(objectClass.isPrimitive() || objectClass.isEnum() || PRIMITIVE_JAVA_OBJECT.contains(objectClass.getSimpleName()));
-	}
-
-
 }
