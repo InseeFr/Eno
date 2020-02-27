@@ -129,7 +129,7 @@
 
     <xsl:template match="*" mode="enopdf:format-label" priority="-1">
         <xsl:copy>
-            <xsl:apply-templates select="node()|@*" mode="enopdf:format-label"/>      
+            <xsl:apply-templates select="node()|@*" mode="enopdf:format-label"/>
         </xsl:copy>
     </xsl:template>
      
