@@ -2,7 +2,7 @@ name: Upload Release Asset
 
 on:
   push:
-    branches: 
+    tags: 
       - '*'
 
 jobs:
