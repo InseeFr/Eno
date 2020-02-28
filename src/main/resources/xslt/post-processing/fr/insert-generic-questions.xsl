@@ -25,13 +25,13 @@
         </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="studyUnit">
+    <xsl:variable name="context">
         <xsl:choose>
-            <xsl:when test="$parameters//StudyUnit != ''">
-                <xsl:value-of select="$parameters//StudyUnit" />
+            <xsl:when test="$parameters//Context != ''">
+                <xsl:value-of select="$parameters//Context" />
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//StudyUnit" />
+                <xsl:value-of select="$properties//Context" />
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -85,14 +85,14 @@
             
             <xsl:if test="$begin-questions-identification">
                 <xsl:choose>
-                    <xsl:when test="$studyUnit=$business">
+                    <xsl:when test="$context=$business">
                         <INSEE-BUSINESS-QUEST-DEBUT>
                             <INSEE-BUSINESS-SEQ-0-1 />
                             <COMMENT_UE />
                         </INSEE-BUSINESS-QUEST-DEBUT>
                     </xsl:when>
-                    <xsl:when test="$studyUnit=$household"/>
-                    <xsl:when test="$studyUnit=$default"/>
+                    <xsl:when test="$context=$household"/>
+                    <xsl:when test="$context=$default"/>
                 </xsl:choose>
             </xsl:if>
             
@@ -100,7 +100,7 @@
             
             <xsl:if test="$end-response-time-question or $end-comment-question">
                 <xsl:choose>
-                    <xsl:when test="$studyUnit=$business">
+                    <xsl:when test="$context=$business">
                         <INSEE-BUSINESS-TEMPS>
                             <xsl:if test="$end-response-time-question">
                                 <INSEE-BUSINESS-TEMPS-QI-1 />
@@ -112,7 +112,7 @@
                             </xsl:if>
                         </INSEE-BUSINESS-TEMPS>
                     </xsl:when>
-                    <xsl:when test="$studyUnit=$household">
+                    <xsl:when test="$context=$household">
                         <INSEE-HOUSEHOLD-TEMPS>
                             <xsl:if test="$end-response-time-question">
                                 <INSEE-HOUSEHOLD-TEMPS-QI-1 />
@@ -124,7 +124,7 @@
                             </xsl:if>
                         </INSEE-HOUSEHOLD-TEMPS>
                     </xsl:when>
-                    <xsl:when test="$studyUnit=$default"/>
+                    <xsl:when test="$context=$default"/>
                 </xsl:choose>
             </xsl:if>
         </xsl:copy>
@@ -138,7 +138,7 @@
     </xd:doc>
     <xsl:template match="xf:bind[@id='fr-form-instance-binds']">
         <xsl:choose>
-            <xsl:when test="$studyUnit=$business">
+            <xsl:when test="$context=$business">
                 <xsl:copy>
                     <xsl:apply-templates select="@*" />
                     <xsl:if test="$begin-questions-identification">
@@ -166,7 +166,7 @@
                     </xsl:if>
                 </xsl:copy>
             </xsl:when>
-            <xsl:when test="$studyUnit=$household">
+            <xsl:when test="$context=$household">
                 <xsl:copy>
                     <xsl:apply-templates select="@*" />
                     <xsl:apply-templates select="node()" />
@@ -188,7 +188,7 @@
                     </xsl:if>
                 </xsl:copy>
             </xsl:when>
-            <xsl:when test="$studyUnit=$default">
+            <xsl:when test="$context=$default">
                 <xsl:copy>
                     <xsl:apply-templates select="@*" />
                     <xsl:apply-templates select="node()" />
@@ -205,7 +205,7 @@
     </xd:doc>
     <xsl:template match="xf:instance[@id='fr-form-resources']/resources/resource[@xml:lang='fr']">
         <xsl:choose>
-            <xsl:when test="$studyUnit=$business">
+            <xsl:when test="$context=$business">
                 <xsl:copy>
                     <xsl:apply-templates select="@*" />
                     <xsl:if test="$begin-questions-identification">
@@ -260,7 +260,7 @@
                     </xsl:if>
                 </xsl:copy>
             </xsl:when>
-            <xsl:when test="$studyUnit=$household">
+            <xsl:when test="$context=$household">
                 <xsl:copy>
                     <xsl:apply-templates select="@*" />
                     <xsl:apply-templates select="node()" />
@@ -300,7 +300,7 @@
                     </xsl:if>
                 </xsl:copy>
             </xsl:when>
-            <xsl:when test="$studyUnit=$default">
+            <xsl:when test="$context=$default">
                 <xsl:copy>
                     <xsl:apply-templates select="@*" />
                     <xsl:apply-templates select="node()" />
@@ -318,20 +318,20 @@
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" />
         </xsl:copy>
-        <xsl:if test="$begin-questions-identification and $studyUnit=$business">
+        <xsl:if test="$begin-questions-identification and $context=$business">
             <INSEE-BUSINESS-QUEST-DEBUT />
         </xsl:if>
     </xsl:template>
     <xsl:template match="xf:instance[@id='fr-form-util']/Util/Pages/End">
         <xsl:if test="$end-response-time-question or $end-comment-question">
             <xsl:choose>
-                <xsl:when test="$studyUnit=$business">
+                <xsl:when test="$context=$business">
                     <INSEE-BUSINESS-TEMPS />
                 </xsl:when>
-                <xsl:when test="$studyUnit=$household">
+                <xsl:when test="$context=$household">
                     <INSEE-HOUSEHOLD-TEMPS />
                 </xsl:when>
-                <xsl:when test="$studyUnit=$default"/>
+                <xsl:when test="$context=$default"/>
             </xsl:choose>
         </xsl:if>
         <xsl:copy>
@@ -350,7 +350,7 @@
             
             <xsl:if test="$begin-questions-identification">
                 <xsl:choose>
-                    <xsl:when test="$studyUnit=$business">
+                    <xsl:when test="$context=$business">
                         <fr:section id="INSEE-BUSINESS-QUEST-DEBUT-control" bind="INSEE-BUSINESS-QUEST-DEBUT-bind" name="INSEE-BUSINESS-QUEST-DEBUT">
                             <xf:label ref="$form-resources/INSEE-BUSINESS-QUEST-DEBUT/label" />
                             <xhtml:div class="submodule">
@@ -365,8 +365,8 @@
                             </xhtml:div>
                         </fr:section>
                     </xsl:when>
-                    <xsl:when test="$studyUnit=$household"/>
-                    <xsl:when test="$studyUnit=$default"/>
+                    <xsl:when test="$context=$household"/>
+                    <xsl:when test="$context=$default"/>
                 </xsl:choose>
             </xsl:if>
             
@@ -374,7 +374,7 @@
             
             <xsl:if test="$end-response-time-question or $end-comment-question">
                 <xsl:choose>
-                    <xsl:when test="$studyUnit=$business">
+                    <xsl:when test="$context=$business">
                         <fr:section id="INSEE-BUSINESS-TEMPS-control" bind="INSEE-BUSINESS-TEMPS-bind" name="INSEE-BUSINESS-TEMPS">
                             <xf:label ref="$form-resources/INSEE-BUSINESS-TEMPS/label" />
                             <xsl:if test="$end-response-time-question">
@@ -399,7 +399,7 @@
                             </xsl:if>
                         </fr:section>
                     </xsl:when>
-                    <xsl:when test="$studyUnit=$household">
+                    <xsl:when test="$context=$household">
                         <fr:section id="INSEE-HOUSEHOLD-TEMPS-control" bind="INSEE-HOUSEHOLD-TEMPS-bind" name="INSEE-HOUSEHOLD-TEMPS">
                             <xf:label ref="$form-resources/INSEE-HOUSEHOLD-TEMPS/label" />
                             <xsl:if test="$end-response-time-question">
@@ -424,7 +424,7 @@
                             </xsl:if>
                         </fr:section>
                     </xsl:when>
-                    <xsl:when test="$studyUnit=$default"/>
+                    <xsl:when test="$context=$default"/>
                 </xsl:choose>
             </xsl:if>            
         </xsl:copy>

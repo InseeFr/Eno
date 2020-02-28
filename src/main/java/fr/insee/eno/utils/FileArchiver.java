@@ -18,6 +18,8 @@ public class FileArchiver {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileArchiver.class);
 	
 	private static final String FR_ZIP_ENTRY_PATH_FORMAT = "orbeon/fr/%s/%s/form/%s";
+	//TODO final to pattern example courrier_type_esa2019a00trasouvertureCOL.fo
+	private static final String PDF_ZIP_ENTRY_PATH_FORMAT = "courrier_type_%s_%s.fo";
 	private static final String DEFAULT_ZIP_ENTRY_PATH_FORMAT = "%s/%s/%s";
 	/**
      * Add a file into Zip file.
@@ -30,6 +32,7 @@ public class FileArchiver {
     public static void writeToZipFile(String surveyName, String filePath, ZipOutputStream zipStream, OutFormat outFormat)
             throws FileNotFoundException, IOException {
     	
+    	
     	LOGGER.info("Writing file : '"+filePath+ "' to archive file.");
 
         File file = new File(filePath);
@@ -40,6 +43,9 @@ public class FileArchiver {
         switch (outFormat) {
 		case FR:
 			zipEntry = new ZipEntry(String.format(FR_ZIP_ENTRY_PATH_FORMAT, surveyName, file.getParentFile().getName(),file.getName()));
+			break;
+		case PDF:
+			zipEntry = new ZipEntry(String.format(PDF_ZIP_ENTRY_PATH_FORMAT, surveyName,file.getParentFile().getParentFile().getName()));
 			break;
 		default:
 			zipEntry = new ZipEntry(String.format(DEFAULT_ZIP_ENTRY_PATH_FORMAT, surveyName, file.getParentFile().getParentFile().getName(),file.getName()));

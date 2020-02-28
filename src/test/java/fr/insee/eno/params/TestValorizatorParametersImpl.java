@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import org.junit.Assert;
@@ -37,7 +36,7 @@ import fr.insee.eno.parameters.Parameters.Languages;
 import fr.insee.eno.parameters.Pipeline;
 import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.parameters.PreProcessing;
-import fr.insee.eno.parameters.StudyUnit;
+import fr.insee.eno.parameters.Context;
 import fr.insee.eno.parameters.Table;
 import fr.insee.eno.parameters.Table.Row;
 import fr.insee.eno.test.XMLDiff;
@@ -66,7 +65,7 @@ public class TestValorizatorParametersImpl {
 
 		complexeEnoParameters.setPipeline(pipeline);
 		Parameters parameters = new Parameters();
-		parameters.setStudyUnit(StudyUnit.HOUSEHOLD);
+		parameters.setContext(Context.HOUSEHOLD);
 
 		Languages languages = new Languages();
 		languages.getLanguage().add(Language.DE);
@@ -155,8 +154,8 @@ public class TestValorizatorParametersImpl {
 			// Browsing
 			Assert.assertEquals(BrowsingEnum.NO_NUMBER, enoParametersFinal.getParameters().getTitle().getBrowsing());
 
-			//StudyUnit 
-			Assert.assertEquals(StudyUnit.HOUSEHOLD, enoParametersFinal.getParameters().getStudyUnit());
+			//Context 
+			Assert.assertEquals(Context.HOUSEHOLD, enoParametersFinal.getParameters().getContext());
 
 			//AccompanyingMail
 			Assert.assertEquals(AccompanyingMail.CNR_COL, enoParametersFinal.getParameters().getPdfParameters().getAccompanyingMail());
@@ -228,8 +227,8 @@ public class TestValorizatorParametersImpl {
 
 			//Other params 
 			Assert.assertEquals(
-					enoParametersDefault.getParameters().getStudyUnit(), 
-					enoParametersFinal.getParameters().getStudyUnit());
+					enoParametersDefault.getParameters().getContext(), 
+					enoParametersFinal.getParameters().getContext());
 			Assert.assertEquals(
 					enoParametersDefault.getParameters().getFrParameters().getDecimalSeparator(), 
 					enoParametersFinal.getParameters().getFrParameters().getDecimalSeparator());
@@ -275,7 +274,7 @@ public class TestValorizatorParametersImpl {
 			Assert.assertEquals(enoParameters.getPipeline().getInFormat(), InFormat.DDI);
 			Assert.assertEquals(enoParameters.getPipeline().getOutFormat(), OutFormat.FR);
 			Assert.assertEquals(enoParameters.getPipeline().getOutFormat(), OutFormat.FR);
-			Assert.assertEquals(enoParameters.getParameters().getStudyUnit(), StudyUnit.DEFAULT);
+			Assert.assertEquals(enoParameters.getParameters().getContext(), Context.DEFAULT);
 
 		} catch (IOException e) {
 			e.printStackTrace();

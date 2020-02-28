@@ -34,13 +34,13 @@
         </xsl:choose>
     </xsl:variable>
     
-    <xsl:variable name="studyUnit">
+    <xsl:variable name="context">
         <xsl:choose>
-            <xsl:when test="$parameters//StudyUnit != ''">
-                <xsl:value-of select="$parameters//StudyUnit" />
+            <xsl:when test="$parameters//Context != ''">
+                <xsl:value-of select="$parameters//Context" />
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//StudyUnit" />
+                <xsl:value-of select="$properties//Context" />
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -82,7 +82,7 @@
     
     <xsl:variable name="end-question-folder" select="$properties//EndQuestion/Folder" />
     <xsl:variable name="end-question-file">
-        <xsl:value-of select="concat('end-question-',$studyUnit,'.xml')" />
+        <xsl:value-of select="concat('end-question-',$context,'.xml')" />
     </xsl:variable>
     <xsl:variable name="end-question-adress" select="concat('../../../',$end-question-folder,'/',$end-question-file)" />
     <xsl:variable name="end-question" select="doc($end-question-adress)" />
@@ -114,11 +114,11 @@
     <xsl:template match="h:components[@componentType='Sequence'][1]">
         
         <xsl:choose>
-            <xsl:when test="$studyUnit=$business and $begin-questions-identification">
+            <xsl:when test="$context=$business and $begin-questions-identification">
                 <xsl:copy-of select="$begin-question//*[@id='BEGIN-QUESTION-SEQ']"/>
             </xsl:when>
-            <xsl:when test="$studyUnit=$household"/>
-            <xsl:when test="$studyUnit=$default"/>
+            <xsl:when test="$context=$household"/>
+            <xsl:when test="$context=$default"/>
         </xsl:choose>
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" />
@@ -137,7 +137,7 @@
             <xsl:apply-templates select="node() | @*" />
         </xsl:copy>
         <xsl:choose>
-            <xsl:when test="$studyUnit=$business">
+            <xsl:when test="$context=$business">
                 <xsl:choose>
                     <xsl:when test="$end-response-time-question and $end-comment-question">
                         <xsl:copy-of select="$end-question//*[@id='TIME-COMMENT-SEQ']"/>
@@ -150,7 +150,7 @@
                     </xsl:when>
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="$studyUnit=$household">
+            <xsl:when test="$context=$household">
                 <xsl:choose>
                     <xsl:when test="$end-response-time-question and $end-comment-question">
                         <xsl:copy-of select="$end-question//*[@id='TIME-COMMENT-SEQ']"/>
@@ -163,7 +163,7 @@
                     </xsl:when>
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="$studyUnit=$default">
+            <xsl:when test="$context=$default">
                 <xsl:choose>
                     <xsl:when test="$end-response-time-question and $end-comment-question">
                         <xsl:copy-of select="$end-question//*[@id='TIME-COMMENT-SEQ']"/>

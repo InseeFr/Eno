@@ -39,13 +39,13 @@
         </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="studyUnit">
+    <xsl:variable name="context">
         <xsl:choose>
-            <xsl:when test="$parameters//StudyUnit != ''">
-                <xsl:value-of select="$parameters//StudyUnit" />
+            <xsl:when test="$parameters//Context != ''">
+                <xsl:value-of select="$parameters//Context" />
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//StudyUnit" />
+                <xsl:value-of select="$properties//Context" />
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -81,7 +81,7 @@
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="end-question-file">
-        <xsl:value-of select="concat('end-question-',$studyUnit,'.fo')" />
+        <xsl:value-of select="concat('end-question-',$context,'.fo')" />
     </xsl:variable>
     <xsl:variable name="end-question-adress" select="concat('../../../',$end-question-folder,'/',$end-question-file)" />
     <xsl:variable name="end-question" select="doc($end-question-adress)" />
@@ -119,7 +119,7 @@
 
     <xsl:template match="fo:block[@id='TheVeryLastPage']" mode="#all">
         <xsl:choose>
-            <xsl:when test="$studyUnit='business'">
+            <xsl:when test="$context='business'">
                 <xsl:choose>
                     <xsl:when test="$comment-question and $response-time-question">
                         <xsl:copy-of select="$end-question//fo:page-sequence/fo:flow/*[not(@id='COMMENT_QUESTION_TITLE' or @id='TIME_QUESTION_TITLE')]" />

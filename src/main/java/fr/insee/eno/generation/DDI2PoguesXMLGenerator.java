@@ -17,7 +17,7 @@ public class DDI2PoguesXMLGenerator implements Generator {
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
-		//TODO:implement this generator
+		logger.warn("Functionnality not yet implemented !");
 		return null;
 	}
 

@@ -59,13 +59,13 @@
         </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="studyUnit">
+    <xsl:variable name="context">
         <xsl:choose>
-            <xsl:when test="$parameters//StudyUnit != ''">
-                <xsl:value-of select="$parameters//StudyUnit" />
+            <xsl:when test="$parameters//Context != ''">
+                <xsl:value-of select="$parameters//Context" />
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//StudyUnit" />
+                <xsl:value-of select="$properties//Context" />
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -117,7 +117,7 @@
         <!-- An instance to possibly host the metadata -->
         <xf:instance id="donnees-pilotage">
             <InformationsQuestionnaire>
-                <xsl:if test="$studyUnit=$business">
+                <xsl:if test="$context=$business">
                     <UniteEnquetee>
                         <BarreFixe />
                         <LabelUniteEnquetee />
@@ -127,7 +127,7 @@
         </xf:instance>
         <!-- and the corresponding bind -->
         <xf:bind id="donnees-pilotage-binds" ref="instance('donnees-pilotage')">
-            <xsl:if test="$studyUnit=$business">
+            <xsl:if test="$context=$business">
                 <xf:bind id="UniteEnquetee-bind" ref="UniteEnquetee">
                     <xf:bind id="BarreFixe-bind" ref="BarreFixe" />
                     <xf:bind id="LabelUniteEnquetee-bind" ref="LabelUniteEnquetee" />
@@ -140,7 +140,7 @@
     <xsl:template match="resource[ancestor::xf:instance[@id='fr-form-resources']]">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" />
-            <xsl:if test="$studyUnit=$business">
+            <xsl:if test="$context=$business">
                 <BarreFixe>
                     <label>Votre </label>
                 </BarreFixe>
@@ -152,7 +152,7 @@
     <xsl:template match="xhtml:div[parent::fr:body]">
         <xsl:copy>
             <xsl:apply-templates select="@*" />
-            <xsl:if test="$studyUnit=$business">
+            <xsl:if test="$context=$business">
                 <xf:output id="BarreFixe-control" bind="BarreFixe-bind">
                     <xf:label ref="$form-resources/BarreFixe/label" mediatype="text/html" />
                 </xf:output>

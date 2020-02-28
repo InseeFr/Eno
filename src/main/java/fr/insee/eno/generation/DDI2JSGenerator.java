@@ -36,13 +36,11 @@ public class DDI2JSGenerator implements Generator {
 
 		String outputForm = outputBasicFormPath + "/form.xml";
 		
-		InputStream isTRANSFORMATIONS_DDI2JS_DDI2JS_XSL = Constants
-				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2JS_DDI2JS_XSL);
 
-		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
-		OutputStream osOutputFile = FileUtils.openOutputStream(new File(outputForm));
-		
-		try {
+		try (InputStream isTRANSFORMATIONS_DDI2JS_DDI2JS_XSL = Constants
+				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2JS_DDI2JS_XSL);
+				InputStream isFinalInput = FileUtils.openInputStream(finalInput);
+				OutputStream osOutputFile = FileUtils.openOutputStream(new File(outputForm));){
 			saxonService.transformDDI2JS(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2JS_DDI2JS_XSL, parameters);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
@@ -50,10 +48,6 @@ public class DDI2JSGenerator implements Generator {
 			throw new EnoGenerationException(errorMessage);
 		}
 		
-		isTRANSFORMATIONS_DDI2JS_DDI2JS_XSL.close();
-
-		isFinalInput.close();
-		osOutputFile.close();
 		return new File(outputForm);
 	}
 

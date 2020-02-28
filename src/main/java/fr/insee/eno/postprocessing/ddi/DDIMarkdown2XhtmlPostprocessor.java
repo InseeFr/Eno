@@ -38,7 +38,7 @@ public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
 
 		try {
 			saxonService.transformMw2XHTML(isInputFile, isDDI_MW2XHTML_XSL, osTEMP_NULL_TMP,
-					Constants.sUB_TEMP_FOLDER_FILE(survey));
+					Constants.SUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
 			throw new EnoGenerationException("An error was occured during the Markdown2Xhtml transformation. "+e.getMessage());
 		}
@@ -61,7 +61,7 @@ public class DDIMarkdown2XhtmlPostprocessor implements Postprocessor {
 		OutputStream osTweakXhtmlForDdi = FileUtils.openOutputStream(new File(outputTweakXhtmlForDdi));
 		try {
 			saxonService.transformTweakXhtmlForDdi(isTweakXhtmlForDdi, isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL,
-					osTweakXhtmlForDdi, Constants.sUB_TEMP_FOLDER_FILE(survey));
+					osTweakXhtmlForDdi, Constants.SUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the Markdown2Xhtml transformation. "+e.getMessage();
 			logger.error(errorMessage);

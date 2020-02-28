@@ -35,24 +35,21 @@ public class DDI2ODTGenerator implements Generator {
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
 
 		String outputForm = outputBasicFormPath + "/form.fodt";
-		InputStream isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL = Constants
+		
+
+		try (InputStream isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL);
-
-		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
-		OutputStream osOutputFile = FileUtils.openOutputStream(new File(outputForm));
-
-		try {
+			InputStream isFinalInput = FileUtils.openInputStream(finalInput);
+			OutputStream osOutputFile = FileUtils.openOutputStream(new File(outputForm));){
+			
 			saxonService.transformDDI2ODT(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL, parameters);
+		
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
 		
-		isTRANSFORMATIONS_DDI2ODT_DDI2ODT_XSL.close();
-
-		isFinalInput.close();
-		osOutputFile.close();
 		return new File(outputForm);
 	}
 

@@ -4,7 +4,7 @@
     </Pipeline>
     
     <Parameters>
-        <StudyUnit>default</StudyUnit>
+        <Context>default</Context>
         
         <Campagne>test</Campagne>
         

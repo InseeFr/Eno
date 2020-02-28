@@ -24,13 +24,13 @@
         </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="studyUnit">
+    <xsl:variable name="context">
         <xsl:choose>
-            <xsl:when test="$parameters//StudyUnit != ''">
-                <xsl:value-of select="$parameters//StudyUnit" />
+            <xsl:when test="$parameters//Context != ''">
+                <xsl:value-of select="$parameters//Context" />
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//StudyUnit" />
+                <xsl:value-of select="$properties//Context" />
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -80,7 +80,7 @@
     <!-- Instance : -->
     <xsl:template match="End[parent::form[parent::xf:instance[@id='fr-form-instance']]]">
         <Validation />
-        <xsl:if test="$studyUnit=$business">
+        <xsl:if test="$context=$business">
             <Confirmation />
         </xsl:if>
         <xsl:copy />
@@ -97,7 +97,7 @@
     <!-- The binds -->
     <xsl:template match="xf:bind[@name='end' and ancestor::xf:bind[@id='fr-form-instance-binds']]">
         <xf:bind id="validation-bind" name="validation" ref="Validation" relevant="instance('fr-form-instance')/Util/Send='false'" />
-        <xsl:if test="$studyUnit=$business">
+        <xsl:if test="$context=$business">
             <xf:bind id="confirmation-bind" name="confirmation" ref="Confirmation" relevant="instance('fr-form-instance')/Util/Send='false'" />
         </xsl:if>
         <xsl:copy>
@@ -110,7 +110,7 @@
         <Validation>
             <label>VALIDATION</label>
         </Validation>
-        <xsl:if test="$studyUnit=$business">
+        <xsl:if test="$context=$business">
             <Confirmation>
                 <label>CONFIRMATION</label>
             </Confirmation>
@@ -124,7 +124,7 @@
     <!-- Pages in the util instance -->
     <xsl:template match="End[ancestor::xf:instance[@id='fr-form-util']]">
         <Validation />
-        <xsl:if test="$studyUnit=$business">
+        <xsl:if test="$context=$business">
             <Confirmation />
         </xsl:if>
         <xsl:copy />
@@ -140,7 +140,7 @@
         </xsl:variable>
 
         <xf:case id="{$index}">
-            <xsl:if test="$studyUnit=$business">
+            <xsl:if test="$context=$business">
                 <fr:section id="validation-control" bind="validation-bind" name="validation">
                     <xf:label ref="$form-resources/Validation/label"/>
                     <xhtml:div class="center">
@@ -209,7 +209,7 @@
                     </xhtml:div>
                 </fr:section>
             </xsl:if>
-            <xsl:if test="$studyUnit=$household">
+            <xsl:if test="$context=$household">
                 <fr:section id="validation-control" bind="validation-bind" name="validation">
                     <xf:label ref="$form-resources/Validation/label" />
                     <xhtml:div class="center">
@@ -257,7 +257,7 @@
         </xf:case>
 
         <xf:case id="{$index+1}">
-            <xsl:if test="$studyUnit=$business">
+            <xsl:if test="$context=$business">
                 <fr:section id="confirmation-control" bind="confirmation-bind" name="confirmation">
                     <xf:label ref="$form-resources/Confirmation/label"/>
                     <xhtml:div class="center center-body">
@@ -303,7 +303,7 @@
                     </xhtml:div>
                 </fr:section>
             </xsl:if>
-            <xsl:if test="$studyUnit=$household">
+            <xsl:if test="$context=$household">
                 <fr:section id="end-control" bind="end-bind" name="end">
                     <xf:label ref="$form-resources/End/label" />
                     <xhtml:div class="center center-body">
@@ -330,7 +330,7 @@
             </xsl:if>
         </xf:case>
 
-        <xsl:if test="$studyUnit=$business">
+        <xsl:if test="$context=$business">
             <xf:case id="{$index+2}">
 
                 <fr:section id="end-control" bind="end-bind" name="end">
@@ -388,12 +388,12 @@
     <xsl:template match="Util[parent::xf:instance[@id='fr-form-util']]">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*" />
-            <xsl:if test="$studyUnit=$business">
+            <xsl:if test="$context=$business">
                 <confirmationNon />
                 <confirmationOui />
             </xsl:if>
             <cliquable />
-            <xsl:if test="$studyUnit=$business and $deblocage-questionnaire">
+            <xsl:if test="$context=$business and $deblocage-questionnaire">
                 <debloquer />
             </xsl:if>
         </xsl:copy>
@@ -402,7 +402,7 @@
     <!-- And the corresponding binds -->
     <xsl:template match="xf:bind[@id='fr-form-util-binds']">
         <xsl:choose>
-            <xsl:when test="$studyUnit=$business">
+            <xsl:when test="$context=$business">
                 <xsl:copy>
                     <xsl:apply-templates select="node() | @*" />
                     <xf:bind id="confirmationNon-bind" ref="confirmationNon" />

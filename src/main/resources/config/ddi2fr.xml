@@ -3,8 +3,8 @@
 <Properties>
     <Css>
         <Folder>css</Folder>
-        <Common>common.css</Common>
-        <CommonBusinness>commonEnglish.css</CommonBusinness>
+		<Common>commonEnglish.css</Common>
+        <CommonBusinness>enterpriseEnglish.css</CommonBusinness>
     </Css>
     <Images>
         <Folder>img</Folder>

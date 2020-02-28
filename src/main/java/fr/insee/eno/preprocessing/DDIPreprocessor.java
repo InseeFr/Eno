@@ -36,7 +36,7 @@ public class DDIPreprocessor implements Preprocessor {
 		InputStream isInputFile = FileUtils.openInputStream(inputFile);
 		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(Constants.tEMP_NULL_TMP(sUB_TEMP_FOLDER));
 		saxonService.transformDereferencing(isInputFile, isDDI_DEREFERENCING_XSL, osTEMP_NULL_TMP,
-				Constants.sUB_TEMP_FOLDER_FILE(survey)); // FIXME 4th param
+				Constants.SUB_TEMP_FOLDER_FILE(survey)); // FIXME 4th param
 															// should be a
 															// parameters file
 															// (?!!?).
@@ -45,7 +45,7 @@ public class DDIPreprocessor implements Preprocessor {
 		osTEMP_NULL_TMP.close();
 		// ----- Cleaning
 		logger.debug("Cleaning target");
-		File f = Constants.sUB_TEMP_FOLDER_FILE(survey);
+		File f = Constants.SUB_TEMP_FOLDER_FILE(survey);
 		File[] matchCleaningInput = f.listFiles(new FilenameFilter() {
 
 			@Override

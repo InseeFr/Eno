@@ -35,12 +35,13 @@ public class DDI2FRGenerator implements Generator {
 				+ Constants.BASIC_FORM_TMP_FILENAME;
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
 
-		InputStream isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL = Constants
+		
+		try (
+			InputStream isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2FR_DDI2FR_XSL);
-
-		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
-		OutputStream osOutputBasicForm = FileUtils.openOutputStream(new File(outputBasicFormPath));
-		try {
+			InputStream isFinalInput = FileUtils.openInputStream(finalInput);
+			OutputStream osOutputBasicForm = FileUtils.openOutputStream(new File(outputBasicFormPath));){
+			
 			saxonService.transformDDI2FR(isFinalInput, osOutputBasicForm, isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL,
 					parameters);
 		}catch(Exception e) {
@@ -48,10 +49,6 @@ public class DDI2FRGenerator implements Generator {
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-
-		isTRANSFORMATIONS_DDI2FR_DDI2FR_XSL.close();
-		isFinalInput.close();
-		osOutputBasicForm.close();
 
 		return new File(outputBasicFormPath);
 	}

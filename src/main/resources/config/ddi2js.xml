@@ -12,7 +12,7 @@
     </TextConditioningVariable>
     <!-- sdmx / apache / identity -->
     <Filter>sdmx</Filter>
-    <StudyUnit>default</StudyUnit>
+    <Context>default</Context>
     <FilterDescription>false</FilterDescription>
     <EndQuestion>
         <Folder>xslt/post-processing/js/end-question</Folder>

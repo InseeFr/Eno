@@ -17,7 +17,7 @@
     
     <Parameters>
         
-        <StudyUnit>default</StudyUnit>
+        <Context>default</Context>
         
         <Campagne>simpsons</Campagne>
         

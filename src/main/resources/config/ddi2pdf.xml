@@ -14,7 +14,7 @@
 	</Format>
 	
 	<!-- default /household / business -->
-	<StudyUnit>default</StudyUnit>
+	<Context>default</Context>
 	<!-- Modèle de première page -->
 	<FirstPage>
 		<Folder>xslt/post-processing/pdf/page-first</Folder>
