@@ -164,7 +164,10 @@
 	<xsl:template match="Form" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enopdf:get-form-languages($source-context)" as="xs:string +"/>
-		<xsl:variable name="survey-name" select="enopdf:get-label($source-context, $languages[1])"/>
+		<xsl:variable name="loop-navigation" as="node()">
+			<Loops/>
+		</xsl:variable>
+		<xsl:variable name="survey-name" select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 		
 		<fo:root>
 			<xsl:copy-of select="$page-model-default//fo:layout-master-set"/>
@@ -174,6 +177,7 @@
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 						<xsl:with-param name="driver" select="eno:append-empty-element('main', .)" tunnel="yes"/>
 						<xsl:with-param name="languages" select="$languages" tunnel="yes"/>
+						<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()" tunnel="yes"/>
 					</xsl:apply-templates>
 					<fo:block id="TheVeryLastPage"/>
 				</fo:flow>
@@ -197,12 +201,13 @@
 	<xsl:template match="main//Module" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		
 		<fo:block xsl:use-attribute-sets="Titre-sequence" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 			<xsl:if test="lower-case($page-break-between) = 'module' or lower-case($page-break-between) = 'submodule'">
 				<xsl:attribute name="page-break-before" select="'always'"/>
 			</xsl:if>
-			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -215,9 +220,10 @@
 	<xsl:template match="main//SubModule" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		
 		<fo:block xsl:use-attribute-sets="Titre-paragraphe" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always"> <!-- linefeed-treatment="preserve" -->
-			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -275,9 +281,10 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
 		<xsl:variable name="format" select="normalize-space(enopdf:get-format($source-context))"/>
-		<xsl:variable name="label" select="enopdf:get-label($source-context, $languages[1])" as="node()"/>
+		<xsl:variable name="label" select="enopdf:get-label($source-context, $languages[1],$loop-navigation)" as="node()"/>
 		<xsl:choose>
 			<xsl:when test="$format = 'footnote'">
 				<fo:block>
@@ -327,8 +334,9 @@
 	<xsl:template match="main//GoTo" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		
-		<xsl:variable name="label" select="enopdf:get-label($source-context, $languages[1])" as="node()"/>
+		<xsl:variable name="label" select="enopdf:get-label($source-context, $languages[1],$loop-navigation)" as="node()"/>
 
 		<xsl:if test="$label != ''">
 			<fo:block page-break-inside="avoid" keep-with-previous="always" xsl:use-attribute-sets="filter-block">
@@ -356,6 +364,7 @@
 	</xd:doc>
 	<xsl:template match="main//QuestionLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		<xsl:param name="loop-position" tunnel="yes" select="''"/>
 		<xsl:param name="empty-occurrence" tunnel="yes" as="xs:boolean" select="false()"/>
 
@@ -391,6 +400,12 @@
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="loop-position" select="concat($loop-position,'-${',$loop-name,'.LoopPosition}')" tunnel="yes"/>
+				<xsl:with-param name="loop-navigation" as="node()" tunnel="yes">
+					<Loops>
+						<xsl:copy-of select="$loop-navigation//Loop"/>
+						<Loop name="{$loop-name}"/>
+					</Loops>
+				</xsl:with-param>
 			</xsl:apply-templates>
 			<xsl:value-of select="'#end '"/>			
 		</xsl:if>
@@ -405,6 +420,12 @@
 					<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
 					<xsl:with-param name="loop-position" select="concat($loop-position,'-0',$empty-position)" tunnel="yes"/>
 					<xsl:with-param name="empty-occurrence" as="xs:boolean" select="true()" tunnel="yes"/>
+					<xsl:with-param name="loop-navigation" as="node()" tunnel="yes">
+						<Loops>
+							<xsl:copy-of select="$loop-navigation//Loop"/>
+							<Loop name="{$loop-name}"><xsl:value-of select="$empty-position"/></Loop>
+						</Loops>
+					</xsl:with-param>
 				</xsl:apply-templates>
 				<xsl:if test="$empty-position &gt; $loop-minimum-empty-occurrence">
 					<xsl:value-of select="'#end '"/>
@@ -420,6 +441,7 @@
 	<xsl:template match="main//SingleResponseQuestion | main//MultipleQuestion | main//MultipleChoiceQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
 		<xsl:param name="loop-position" tunnel="yes" select="''"/>
 
@@ -433,13 +455,13 @@
 						<xsl:call-template name="insert-image">
 							<xsl:with-param name="image-name" select="'arrow_details.png'"/>
 						</xsl:call-template>
-						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 					</fo:inline>
 				</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+					<xsl:copy-of select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 				</fo:block>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -461,6 +483,7 @@
 	<xsl:template match="main//Table" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		<xsl:param name="loop-position" tunnel="yes" select="''"/>
 		
 		<xsl:variable name="current-match" select="."/>
@@ -473,7 +496,7 @@
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>-->
 		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
@@ -537,6 +560,7 @@
 	<xsl:template match="main//TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		<xsl:param name="loop-position" tunnel="yes" select="''"/>
 		<xsl:param name="empty-occurrence" tunnel="yes" as="xs:boolean" select="false()"/>
 		
@@ -570,11 +594,32 @@
 				</fo:table-row>
 			</xsl:for-each>
 		</xsl:variable>
+		<xsl:variable name="table-split-content">
+			<xsl:value-of select="concat('#if (PositionInTheLoop % ',$maxlines-by-page,' eq 0) ')"/>
+			<xsl:value-of select="'&lt;/fo:table-body&gt; '"/>
+			<xsl:value-of select="'&lt;/fo:table&gt;'"/>
+			<xsl:value-of select="'&lt;/fo:block&gt;'"/>
+			<xsl:value-of select="concat('#set ($DynamicArrayPage = PositionInTheLoop / ',$maxlines-by-page,')')"/>
+			<xsl:variable name="table-begin" as="node()">
+				<fo:block page-break-inside="avoid">
+					<xsl:attribute name="id" select="concat($loop-name,$loop-position,'-$DynamicArrayPage')"/>
+					<xsl:attribute name="page-break-after" select="'always'"/>
+					<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
+						text-align="center" margin-top="1mm" display-align="center" space-after="5mm"/>
+				</fo:block>
+			</xsl:variable>
+			<xsl:value-of select="concat(substring-before(eno:serialize($table-begin),'/&gt;'),'&gt;')"/>
+			<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
+				<xsl:value-of select="concat('&lt;fo:table-header&gt;',eno:serialize($table-header),'&lt;/fo:table-header&gt;')"/>
+			</xsl:if>
+			<xsl:value-of select="'&lt;fo:table-body&gt;'"/>
+			<xsl:value-of select="'#end '"/>
+		</xsl:variable>
 		<!--<xsl:apply-templates select="enopdf:get-before-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 		</xsl:apply-templates>-->
 		<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+			<xsl:copy-of select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="enopdf:get-after-question-title-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
@@ -597,28 +642,7 @@
 					<xsl:if test="not($empty-occurrence)">
 						<xsl:value-of select="concat('#foreach( ${',$loop-name,'} in ${',$loop-name,'-Container} ) ')"/>
 						<xsl:value-of select="concat('#set( ${',$loop-name,'.LoopPosition} = $velocityCount)')"/>
-						<!-- page-change in dynamic array : close and re-open : fo:table-body, fo:table and fo:block ; personalize the fo:block id -->
-						<xsl:value-of select="concat('#if (${',$loop-name,'.LoopPosition} % ',$maxlines-by-page,' eq 0) ')"/>
-						<xsl:value-of select="'&lt;/fo:table-body&gt; '"/>
-						<xsl:value-of select="'&lt;/fo:table&gt;'"/>
-						<xsl:value-of select="'&lt;/fo:block&gt;'"/>
-						<xsl:value-of select="concat('#set ($DynamicArrayPage = ${',$loop-name,'.LoopPosition} / ',$maxlines-by-page,')')"/>
-						<xsl:variable name="table-begin" as="node()">
-							<fo:block page-break-inside="avoid">
-								<xsl:attribute name="id" select="concat($loop-name,$loop-position,'-$DynamicArrayPage')"/>
-								<xsl:attribute name="page-break-after" select="'always'"/>
-								<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
-									text-align="center" margin-top="1mm" display-align="center" space-after="5mm"/>
-							</fo:block>
-						</xsl:variable>
-						<xsl:value-of select="concat(substring-before(eno:serialize($table-begin),'/&gt;'),'&gt;')"/>
-						<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
-							<fo:table-header>
-								<xsl:copy-of select="$table-header"/>
-							</fo:table-header>
-						</xsl:if>
-						<xsl:value-of select="'&lt;fo:table-body&gt;'"/>
-						<xsl:value-of select="'#end '"/>
+						<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('\${',$loop-name,'.LoopPosition}'))"/>
 						<!-- the line to loop on -->
 						<xsl:for-each select="enopdf:get-body-lines($source-context)">
 							<xsl:variable name="position" select="position()"/>
@@ -627,6 +651,12 @@
 									<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
 									<xsl:with-param name="no-border" select="$no-border" tunnel="yes"/>
 									<xsl:with-param name="loop-position" select="concat($loop-position,'-${',$loop-name,'.LoopPosition}')" tunnel="yes"/>
+									<xsl:with-param name="loop-navigation" as="node()" tunnel="yes">
+										<Loops>
+											<xsl:copy-of select="$loop-navigation//Loop"/>
+											<Loop name="{$loop-name}"/>
+										</Loops>
+									</xsl:with-param>
 								</xsl:apply-templates>
 							</fo:table-row>
 						</xsl:for-each>
@@ -639,28 +669,7 @@
 							<xsl:if test="$empty-position &gt; $roster-minimum-empty-row">
 								<xsl:value-of select="concat('#if (${',$loop-name,'-TotalOccurrenceCount} le ',$roster-minimum-lines - $empty-position,') ')"/>
 							</xsl:if>
-							<!-- page-change in dynamic array : close and re-open : fo:table-body, fo:table and fo:block ; personalize the fo:block id -->
-							<xsl:value-of select="concat('#if ((${',$loop-name,'-TotalOccurrenceCount} + ',$empty-position,') % ',$maxlines-by-page,' eq 0) ')"/>
-							<xsl:value-of select="'&lt;/fo:table-body&gt; '"/>
-							<xsl:value-of select="'&lt;/fo:table&gt;'"/>
-							<xsl:value-of select="'&lt;/fo:block&gt;'"/>
-							<xsl:value-of select="concat('#set ($DynamicArrayPage = (${',$loop-name,'-TotalOccurrenceCount} + ',$empty-position,') / ',$maxlines-by-page,')')"/>
-							<xsl:variable name="table-begin" as="node()">
-								<fo:block page-break-inside="avoid">
-									<xsl:attribute name="id" select="concat($loop-name,$loop-position,'-$DynamicArrayPage')"/>
-									<xsl:attribute name="page-break-after" select="'always'"/>
-									<fo:table inline-progression-dimension="auto" table-layout="fixed" width="100%" font-size="10pt" border-width="0.35mm"
-										text-align="center" margin-top="1mm" display-align="center" space-after="5mm"/>
-								</fo:block>
-							</xsl:variable>
-							<xsl:value-of select="concat(substring-before(eno:serialize($table-begin),'/&gt;'),'&gt;')"/>
-							<xsl:if test="count(enopdf:get-header-lines($source-context)) != 0">
-								<fo:table-header>
-									<xsl:copy-of select="$table-header"/>
-								</fo:table-header>
-							</xsl:if>
-							<xsl:value-of select="'&lt;fo:table-body&gt;'"/>
-							<xsl:value-of select="'#end '"/>
+							<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('(\${',$loop-name,'-TotalOccurrenceCount} + ',$empty-position,')'))"/>
 							<!-- the line to fake-loop on -->
 							<xsl:for-each select="enopdf:get-body-lines($source-context)">
 								<xsl:variable name="position" select="position()"/>
@@ -670,6 +679,12 @@
 										<xsl:with-param name="no-border" select="$no-border" tunnel="yes"/>
 										<xsl:with-param name="loop-position" select="concat($loop-position,'-0',$empty-position)" tunnel="yes"/>
 										<xsl:with-param name="empty-occurrence" as="xs:boolean" select="true()" tunnel="yes"/>
+										<xsl:with-param name="loop-navigation" as="node()" tunnel="yes">
+											<Loops>
+												<xsl:copy-of select="$loop-navigation//Loop"/>
+												<Loop name="{$loop-name}"><xsl:value-of select="$empty-position"/></Loop>
+											</Loops>
+										</xsl:with-param>
 									</xsl:apply-templates>
 								</fo:table-row>
 							</xsl:for-each>
@@ -690,6 +705,7 @@
 	<xsl:template match="main//TextCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		<xsl:param name="header" tunnel="yes"/>
 		<xsl:param name="row-number" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
@@ -710,7 +726,7 @@
 				<xsl:if test="not($header)">
 					<xsl:attribute name="margin-left" select="'1mm'"/>
 				</xsl:if>
-				<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+				<xsl:copy-of select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 			</fo:block>
 		</fo:table-cell>
 	</xsl:template>
@@ -757,13 +773,14 @@
 	<xsl:template match="main//FixedCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		
 		<fo:table-cell background-color="#CCCCCC" border-color="black" border-style="solid"
 			number-columns-spanned="{enopdf:get-colspan($source-context)}"
 			number-rows-spanned="{enopdf:get-rowspan($source-context)}">
 			<fo:block>
-				<xsl:sequence select="enopdf:get-label($source-context, $languages[1])"/>
-				<xsl:sequence select="enopdf:get-fixed-value($source-context, $languages[1])"/>
+				<xsl:sequence select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
+				<xsl:sequence select="enopdf:get-fixed-value($source-context, $languages[1],$loop-navigation)"/>
 			</fo:block>
 		</fo:table-cell>
 	</xsl:template>
@@ -803,12 +820,14 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
 		
 		<xsl:variable name="length" select="enopdf:get-length($source-context)"/>
+		<xsl:variable name="label" select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 		
-		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+		<xsl:if test="$label != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
 					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
@@ -816,13 +835,13 @@
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
 							</xsl:call-template>
-							<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+							<xsl:copy-of select="$label"/>
 						</fo:inline>
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -865,12 +884,14 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
 		
 		<xsl:variable name="length" select="number(enopdf:get-length($source-context))"/>
+		<xsl:variable name="label" select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 		
-		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+		<xsl:if test="$label != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
 					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
@@ -878,13 +899,13 @@
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
 							</xsl:call-template>
-							<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+							<xsl:copy-of select="$label"/>
 						</fo:inline>
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -959,9 +980,11 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="other-give-details" tunnel="yes" select="false()"/>
 		
+		<xsl:variable name="label" select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 		<xsl:variable name="numeric-capture-character" select="substring($numeric-capture,1,1)"/>
 		<xsl:variable name="field" select="upper-case(enopdf:get-format($source-context))"/>
 		<xsl:variable name="field-image-name">
@@ -976,7 +999,7 @@
 			</xsl:if>
 		</xsl:variable>
 
-		<xsl:if test="enopdf:get-label($source-context, $languages[1]) != ''">
+		<xsl:if test="$label != ''">
 			<xsl:choose>
 				<xsl:when test="$other-give-details">
 					<fo:block xsl:use-attribute-sets="details" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
@@ -984,13 +1007,13 @@
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'arrow_details.png'"/>
 							</xsl:call-template>
-							<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+							<xsl:copy-of select="$label"/>
 						</fo:inline>
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block xsl:use-attribute-sets="label-question" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
-						<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+						<xsl:copy-of select="$label"/>
 					</fo:block>
 				</xsl:otherwise>
 			</xsl:choose>
@@ -1157,6 +1180,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		
 		<xsl:variable name="image">
 			<xsl:value-of select="enopdf:get-image($source-context)"/>
@@ -1178,7 +1202,7 @@
 						</xsl:when>
 						<xsl:otherwise>
 							<fo:inline xsl:use-attribute-sets="general-style">
-								<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+								<xsl:copy-of select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 							</fo:inline>
 						</xsl:otherwise>
 					</xsl:choose>
@@ -1205,7 +1229,7 @@
 									</xsl:call-template>
 								</xsl:when>
 								<xsl:otherwise>
-									<xsl:copy-of select="enopdf:get-label($source-context, $languages[1])"/>
+									<xsl:copy-of select="enopdf:get-label($source-context, $languages[1],$loop-navigation)"/>
 								</xsl:otherwise>
 							</xsl:choose>
 						</fo:block>

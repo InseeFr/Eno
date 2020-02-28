@@ -105,23 +105,27 @@
         </xsl:choose>
     </xsl:function>
 
-    <xsl:function name="enopdf:get-formatted-label">
+    <xsl:function name="enopdf:get-label">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
+        <xsl:param name="loop-navigation" as="node()"/>
         <xsl:variable name="tempLabel">
             <xsl:apply-templates select="enoddi:get-label($context,$language)" mode="enopdf:format-label">
                 <xsl:with-param name="label-variables" select="enoddi:get-label-conditioning-variables($context,$language)" tunnel="yes"/>
+                <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:variable>
         <xsl:sequence select="$tempLabel"/>
     </xsl:function>
     
-    <xsl:function name="enopdf:get-formatted-fixed-value">
+    <xsl:function name="enopdf:get-fixed-value">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
+        <xsl:param name="loop-navigation" as="node()"/>
         <xsl:variable name="tempLabel">
             <xsl:apply-templates select="enoddi:get-cell-value($context)" mode="enopdf:format-label">
                 <xsl:with-param name="label-variables" select="enoddi:get-cell-value-variables($context)" tunnel="yes"/>
+                <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:variable>
         <xsl:sequence select="$tempLabel"/>
@@ -152,6 +156,7 @@
 
     <xsl:template match="text()" mode="enopdf:format-label">
         <xsl:param name="label-variables" tunnel="yes"/>
+        <xsl:param name="loop-navigation" tunnel="yes" as="node()"/>
         
         <xsl:if test="substring(.,1,1)=' '">
             <xsl:text xml:space="preserve"> </xsl:text>
@@ -159,6 +164,7 @@
         <xsl:call-template name="velocity-label">
             <xsl:with-param name="label" select="normalize-space(.)"/>
             <xsl:with-param name="variables" select="$label-variables"/>
+            <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
         </xsl:call-template>
         <xsl:if test="substring(.,string-length(.),1)=' ' and string-length(.) &gt; 1">
             <xsl:text xml:space="preserve"> </xsl:text>
@@ -168,6 +174,7 @@
     <xsl:template name="velocity-label">
         <xsl:param name="label"/>
         <xsl:param name="variables"/>
+        <xsl:param name="loop-navigation" as="node()"/>
         
         <xsl:choose>
             <xsl:when test="contains($label,$conditioning-variable-begin) and contains(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)">
@@ -178,7 +185,26 @@
                         <xsl:with-param name="variable" select="$variable-name"/>
                     </xsl:call-template>
                 </xsl:variable>
+                <xsl:variable name="variable-ancestors" as="xs:string *">
+                    <xsl:call-template name="enoddi:get-business-ancestors">
+                        <xsl:with-param name="variable" select="$variable-name"/>
+                    </xsl:call-template>
+                </xsl:variable>
                 <xsl:choose>
+                    <xsl:when test="$variable-ancestors != ''">
+                        <xsl:variable name="current-ancestor" select="$variable-ancestors[last()]"/>
+                        <xsl:choose>
+                            <xsl:when test="$loop-navigation//Loop[@name=$current-ancestor]/text() != ''">
+                                <xsl:value-of select="concat('$!{',$current-ancestor,'-0-')"/>
+                            </xsl:when>
+                            <xsl:when test="$variable-type = 'external'">
+                                <xsl:value-of select="concat('${',$current-ancestor,'.')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat('$!{',$current-ancestor,'.')"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
                     <xsl:when test="$variable-type = 'external'">
                         <xsl:value-of select="'${'"/>
                     </xsl:when>
@@ -186,15 +212,6 @@
                         <xsl:value-of select="'$!{'"/>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:variable name="variable-ancestors" as="xs:string *">
-                    <xsl:call-template name="enoddi:get-business-ancestors">
-                        <xsl:with-param name="variable" select="$variable-name"/>
-                    </xsl:call-template>
-                </xsl:variable>
-                <xsl:if test="$variable-ancestors != ''">
-                    <xsl:value-of select="$variable-ancestors[last()]"/>
-                    <xsl:value-of select="'.'"/>
-                </xsl:if>
                 <xsl:call-template name="enoddi:get-business-name">
                     <xsl:with-param name="variable" select="$variable-name"/>
                 </xsl:call-template>
@@ -202,6 +219,7 @@
                 <xsl:call-template name="velocity-label">
                     <xsl:with-param name="label" select="substring-after(substring-after($label,$conditioning-variable-begin),$conditioning-variable-end)"/>
                     <xsl:with-param name="variables" select="$variables"/>
+                    <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
