@@ -439,7 +439,7 @@
                                 </xsl:for-each>
                             </xsl:variable>
                             <xsl:call-template name="replaceVariablesInFormula">
-                                <xsl:with-param name="formula" select="normalize-space($initial-readonly-ancestors)"/>
+                                <xsl:with-param name="formula" select="concat(normalize-space($initial-readonly-ancestors),' ')"/>
                                 <xsl:with-param name="variables" as="node()">
                                     <Variables>
                                         <xsl:for-each select="enofr:get-readonly-ancestors-variables($source-context)">
