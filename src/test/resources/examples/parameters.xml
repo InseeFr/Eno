@@ -10,7 +10,7 @@
 <!-- 		Orientation : portrait= 0 ou paysage =90 -->
 		<Orientation>0</Orientation>
 	</Format>
-  <StudyUnit>household</StudyUnit>
+  <Context>household</Context>
   <ColtraneQuestions>
     <Fin/>
   </ColtraneQuestions>

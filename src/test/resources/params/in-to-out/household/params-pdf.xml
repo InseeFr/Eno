@@ -19,7 +19,7 @@
     
     <Parameters>
         
-        <StudyUnit>household</StudyUnit>
+        <Context>household</Context>
         
         <Campagne>fpe-2019-x00</Campagne>
         

@@ -72,13 +72,13 @@
         </xsl:choose>
     </xsl:variable>
     
-    <xsl:variable name="studyUnit">
+    <xsl:variable name="context">
         <xsl:choose>
-            <xsl:when test="$parameters//StudyUnit != ''">
-                <xsl:value-of select="$parameters//StudyUnit"/>
+            <xsl:when test="$parameters//Context != ''">
+                <xsl:value-of select="$parameters//Context"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//StudyUnit"/>
+                <xsl:value-of select="$properties//Context"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -87,11 +87,11 @@
     </xsl:variable>
     <xsl:variable name="page-model-file-adress">
         <xsl:choose>
-            <xsl:when test="$studyUnit='business' and $orientation='90'">
+            <xsl:when test="$context='business' and $orientation='90'">
                 <xsl:value-of select="concat('../../../',$page-model-folder,'/page-model-esa.fo')"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="concat('../../../',$page-model-folder,'/page-model-',$studyUnit,'.fo')"/>
+                <xsl:value-of select="concat('../../../',$page-model-folder,'/page-model-',$context,'.fo')"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>

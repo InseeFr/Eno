@@ -36,7 +36,7 @@ public class DDIPostprocessor implements Postprocessor {
 
 		OutputStream osTEMP_NULL_TMP = FileUtils.openOutputStream(new File(mw2xhtmlOutput));
 		saxonService.transformMw2XHTML(isInputFile, isDDI_MW2XHTML_XSL, osTEMP_NULL_TMP,
-				Constants.sUB_TEMP_FOLDER_FILE(survey));
+				Constants.SUB_TEMP_FOLDER_FILE(survey));
 		isInputFile.close();
 		isDDI_MW2XHTML_XSL.close();
 		osTEMP_NULL_TMP.close();
@@ -55,7 +55,7 @@ public class DDIPostprocessor implements Postprocessor {
 				.getInputStreamFromPath(Constants.UTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL);
 		OutputStream osTweakXhtmlForDdi = FileUtils.openOutputStream(new File(outputTweakXhtmlForDdi));
 		saxonService.transformTweakXhtmlForDdi(isTweakXhtmlForDdi, isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL,
-				osTweakXhtmlForDdi, Constants.sUB_TEMP_FOLDER_FILE(survey));
+				osTweakXhtmlForDdi, Constants.SUB_TEMP_FOLDER_FILE(survey));
 		isTweakXhtmlForDdi.close();
 		isUTIL_DDI_TWEAK_XHTML_FOR_DDI_XSL.close();
 		osTweakXhtmlForDdi.close();

@@ -26,7 +26,7 @@
         
     <xs:complexType name="Parameters" >
         <xs:all>
-            <xs:element name="StudyUnit" type="StudyUnit" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="Context" type="Context" minOccurs="1" maxOccurs="1"/>
             <xs:element name="Campagne" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="Languages" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
@@ -54,7 +54,7 @@
             <xs:enumeration value="de"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:simpleType name="StudyUnit">
+    <xs:simpleType name="Context">
         <xs:restriction base="xs:token">
             <xs:enumeration value="default"/>
             <xs:enumeration value="household"/>

@@ -22,7 +22,7 @@
     
     <Parameters>
         
-        <StudyUnit>business</StudyUnit>
+        <Context>business</Context>
         
         <Campagne>esem-2019-a00</Campagne>
         
@@ -44,7 +44,6 @@
             <Deblocage>false</Deblocage>
             <Satisfaction>false</Satisfaction>
             <DecimalSeparator>.</DecimalSeparator>
-            <Css>enterpriseEnglish.css</Css>
         </fr-parameters>
         
         <Title>

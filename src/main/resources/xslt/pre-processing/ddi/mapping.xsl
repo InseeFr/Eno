@@ -22,7 +22,7 @@
         </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="studyUnit" select="$parameters//StudyUnit" />
+    <xsl:variable name="context" select="$parameters//Context" />
 
     <xsl:variable name="begin-questions-identification" as="xs:boolean" select="$parameters//BeginQuestion/Identification" />
     <xsl:variable name="end-response-time-question" as="xs:boolean" select="$parameters//EndQuestion/ResponseTimeQuestion" />

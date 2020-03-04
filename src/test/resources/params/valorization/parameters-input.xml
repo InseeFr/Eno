@@ -9,7 +9,7 @@
         <PostProcessing>ddi-markdownToXhtml</PostProcessing>
     </Pipeline>
     <Parameters>
-        <StudyUnit>household</StudyUnit>
+        <Context>household</Context>
         <Campagne>test</Campagne>
         <Languages>
             <Language>de</Language>

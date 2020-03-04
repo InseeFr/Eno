@@ -35,24 +35,19 @@ public class DDI2PDFGenerator implements Generator {
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
 
 		String outputForm = outputBasicFormPath + "/form.fo";
-		InputStream isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL = Constants
+
+
+		try (InputStream isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL);
-
-		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
-
-		OutputStream osOutputForm = FileUtils.openOutputStream(new File(outputForm));
-
-		try {
+			 InputStream isFinalInput = FileUtils.openInputStream(finalInput);
+				OutputStream osOutputForm = FileUtils.openOutputStream(new File(outputForm));) {
+			
 			saxonService.transformDDI2PDF(isFinalInput, osOutputForm, isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL, parameters);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
-		isTRANSFORMATIONS_DDI2PDF_DDI2PDF_XSL.close();
-
-		isFinalInput.close();
-		osOutputForm.close();
 
 		return new File(outputForm);
 	}

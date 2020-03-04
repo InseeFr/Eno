@@ -45,13 +45,13 @@
         </xsl:choose>
     </xsl:variable>
     
-    <xsl:variable name="studyUnit">
+    <xsl:variable name="context">
         <xsl:choose>
-            <xsl:when test="$parameters//StudyUnit != ''">
-                <xsl:value-of select="$parameters//StudyUnit"/>
+            <xsl:when test="$parameters//Context != ''">
+                <xsl:value-of select="$parameters//Context"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//StudyUnit"/>
+                <xsl:value-of select="$properties//Context"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -67,7 +67,7 @@
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="firstPage-file">
-        <xsl:value-of select="concat('page-first-',$studyUnit,'.fo')"/>
+        <xsl:value-of select="concat('page-first-',$context,'.fo')"/>
     </xsl:variable>
     
     <xsl:variable name="firstPage-adress" select="concat('../../../',$firstPage-folder,'/',$firstPage-file)"/>
@@ -106,7 +106,7 @@
     </xsl:template>
     
     <xsl:template match="fo:block[@id='survey-name' and ancestor::fo:page-sequence[@master-reference='page-first-default']]" mode="keep-cdata">
-        <xsl:if test="$studyUnit='default'">
+        <xsl:if test="$context='default'">
             <xsl:copy>
                 <xsl:copy-of select="@*"/>
                 <xsl:value-of select="$form-name"/>

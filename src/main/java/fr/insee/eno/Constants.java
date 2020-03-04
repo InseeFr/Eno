@@ -195,7 +195,7 @@ public final class Constants {
 	public static final File TEMP_FILE_PARAMS(String file) {
 		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH +"/"+file);
 	}
-	public static File sUB_TEMP_FOLDER_FILE (String survey){
+	public static File SUB_TEMP_FOLDER_FILE (String survey){
 		return getFileOrDirectoryFromPath(TEMP_FOLDER_PATH + "/"+survey);
 	}
 

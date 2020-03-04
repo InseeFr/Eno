@@ -43,13 +43,13 @@
         </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="studyUnit">
+    <xsl:variable name="context">
         <xsl:choose>
-            <xsl:when test="$parameters//StudyUnit != ''">
-                <xsl:value-of select="$parameters//StudyUnit" />
+            <xsl:when test="$parameters//Context != ''">
+                <xsl:value-of select="$parameters//Context" />
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//StudyUnit" />
+                <xsl:value-of select="$properties//Context" />
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -124,7 +124,7 @@
 
     <!-- The generic start page is replaced by a coltrane home page. -->
     <xsl:template match="Beginning[parent::form[parent::xf:instance[@id='fr-form-instance']]]">
-        <xsl:if test="$studyUnit=$household">
+        <xsl:if test="$context=$household">
             <Variable idVariable="QuiRepond1" />
             <Variable idVariable="QuiRepond2" />
             <Variable idVariable="QuiRepond3" />
@@ -171,14 +171,14 @@
         </ACCUEIL-1>
         <ACCUEIL-2>
             <label>
-                <xsl:if test="$studyUnit=$household">
+                <xsl:if test="$context=$household">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;&lt;b&gt;Qui doit répondre à ce questionnaire ?&lt;/b&gt;&lt;/p&gt;</xsl:text>
                     <xsl:text>&lt;p&gt;¤QuiRepond1¤&lt;/p&gt;</xsl:text>
                     <xsl:text>&lt;p&gt;¤QuiRepond2¤&lt;/p&gt;</xsl:text>
                     <xsl:text>&lt;p&gt;¤QuiRepond3¤&lt;/p&gt;</xsl:text>
                     <xsl:text>&lt;/div&gt;</xsl:text>
                 </xsl:if>
-                <xsl:if test="$studyUnit=$business">
+                <xsl:if test="$context=$business">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Cette enquête</xsl:text>
                     <xsl:if test="$CaractereObligatoire=$CaractereObligatoireEnqueteReference">
                         <xsl:text>,
@@ -201,7 +201,7 @@
         </ACCUEIL-4>
         <ACCUEIL-5>
             <label>
-                <xsl:if test="$studyUnit=$household">
+                <xsl:if test="$context=$household">
                     <xsl:text>&lt;div class="frameAvertissement"&gt;&lt;p&gt;&lt;b&gt;Pensez à enregistrer
                     régulièrement votre questionnaire.&lt;/b&gt; Au bout de 30 minutes sans
                     activité, pour des raisons de sécurité, vous serez en effet automatiquement
@@ -212,7 +212,7 @@
                     symbole &lt;span title="Les symboles similaires contiennent une aide sur la question ou ses mots-clefs"&gt;&#160;&lt;img src="/img/Help-browser.svg.png"/&gt;&#160;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
                     </xsl:text>
                 </xsl:if>
-                <xsl:if test="$studyUnit=$business">
+                <xsl:if test="$context=$business">
                     <xsl:text>&lt;div class="frameAvertissement"&gt;&lt;p&gt;&lt;b&gt;Pensez à enregistrer
                     régulièrement votre questionnaire.&lt;/b&gt; Au bout de 30 minutes sans
                     activité, pour des raisons de sécurité, vous serez en effet automatiquement
@@ -231,7 +231,7 @@
         </ACCUEIL-6>
         <ACCUEIL-7>
             <label>
-                <xsl:if test="$studyUnit=$household">
+                <xsl:if test="$context=$household">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Vu l'avis favorable du Conseil national de
                     l'information statistique, cette enquête</xsl:text>
                     <xsl:choose>
@@ -277,7 +277,7 @@
                     <xsl:value-of select="$NomServiceRecours" />
                     <xsl:text>.&lt;/p&gt;&lt;/div&gt;</xsl:text>
                 </xsl:if>
-                <xsl:if test="$studyUnit=$business">
+                <xsl:if test="$context=$business">
                     <xsl:text>&lt;div class="frame"&gt;&lt;p&gt;Vu l'avis favorable du Conseil national de
                     l'information statistique, cette enquête</xsl:text>
                     <xsl:choose>
@@ -350,10 +350,10 @@
                 <xf:help ref="$form-resources/ACCUEIL-1/help" mediatype="text/html" />
             </xf:output>
             <xf:output id="ACCUEIL-2-control" name="ACCUEIL-2" bind="ACCUEIL-2-bind">
-                <xsl:if test="$studyUnit=$household">
+                <xsl:if test="$context=$household">
                     <xf:label ref="replace(replace(replace($form-resources/ACCUEIL-2/label,'¤QuiRepond1¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond1']),'¤QuiRepond2¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond2']),'¤QuiRepond3¤',instance('fr-form-instance')//Variable[@idVariable='QuiRepond3'])" mediatype="text/html" />
                 </xsl:if>
-                <xsl:if test="$studyUnit=$business">
+                <xsl:if test="$context=$business">
                     <xf:label ref="$form-resources/ACCUEIL-2/label" mediatype="text/html" />
                 </xsl:if>
             </xf:output>

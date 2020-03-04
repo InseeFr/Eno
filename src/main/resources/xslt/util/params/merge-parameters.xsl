@@ -27,11 +27,11 @@
         <xsl:copy-of select="$root//Pipeline"/>
     </xsl:template>
     
-    <xsl:template match="StudyUnit">
+    <xsl:template match="Context">
         <xsl:copy>
             <xsl:choose>
-                <xsl:when test="$root//StudyUnit!=''">
-                    <xsl:value-of select="$root//StudyUnit"/>
+                <xsl:when test="$root//Context!=''">
+                    <xsl:value-of select="$root//Context"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="."/>
