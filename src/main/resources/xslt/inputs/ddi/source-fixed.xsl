@@ -343,7 +343,7 @@
             />
         </xsl:variable>
         <xsl:value-of
-            select="max(ancestor::d:GridDimension[@rank='1']/following-sibling::d:GridDimension[@rank='2']//l:Code[not(l:Code)]/(count(ancestor::l:CodeList[r:Label])+ count(ancestor-or-self::l:Code)))-number($label-or-no)"
+            select="max(ancestor::d:GridDimension[@rank='1']/following-sibling::d:GridDimension[@rank='2']//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label]))+1-number($label-or-no)"
         />
     </xsl:template>
 
@@ -369,8 +369,8 @@
         <xsl:param name="table-first-line" tunnel="yes" required="no"/>
         <xsl:param name="table-last-line" tunnel="yes" required="no"/>
 
-        <xsl:variable name="first-descendant-position" select="descendant::l:Code[not(l:Code)][1]/count(preceding::l:Code[ancestor::d:QuestionGrid/r:ID=current()/ancestor::d:QuestionGrid/r:ID and ancestor::d:GridDimension=current()/ancestor::d:GridDimension and not(l:Code)])+1"/>
-        <xsl:variable name="last-descendant-position" select="descendant::l:Code[not(l:Code)][last()]/count(preceding::l:Code[ancestor::d:QuestionGrid/r:ID=current()/ancestor::d:QuestionGrid/r:ID and ancestor::d:GridDimension=current()/ancestor::d:GridDimension and not(l:Code)])+1"/>
+        <xsl:variable name="first-descendant-position" select="descendant::l:Code[not(l:Code)][1]/count(preceding::l:Code[ancestor::d:GridDimension=current()/ancestor::d:GridDimension and not(l:Code)])+1"/>
+        <xsl:variable name="last-descendant-position" select="descendant::l:Code[not(l:Code)][last()]/count(preceding::l:Code[ancestor::d:GridDimension=current()/ancestor::d:GridDimension and not(l:Code)])+1"/>
         <xsl:variable name="first-line">
             <xsl:choose>
                 <xsl:when test="string($table-first-line) != '' and number($table-first-line) &gt; $first-descendant-position">
