@@ -315,7 +315,7 @@
 
 
     <xsl:template match="pogues:ClarificationQuestion" mode="enopogues:get-clarified-response">
-        <xsl:variable name="clarification-formula" select="parent::*/pogues:FlowControl[@flowControlType='CLARIFICATION' and pogues:IfTrue=current()/@id]"/>
+        <xsl:variable name="clarification-formula" select="parent::*/pogues:FlowControl[@flowControlType='CLARIFICATION' and pogues:IfTrue=current()/@id]/pogues:Expression"/>
         <xsl:variable name="response-variable-name" select="substring-before(substring-after($clarification-formula,'$'),'$')"/>
         <xsl:variable name="collected-variable" select="//pogues:Variable[pogues:Name=$response-variable-name]/@id"/>
 
