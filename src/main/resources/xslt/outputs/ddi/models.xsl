@@ -87,7 +87,7 @@
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-SequenceLoop', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
-                    <xsl:apply-templates select="enoddi33:get-loops-filter($source-context)" mode="source">
+                    <xsl:apply-templates select="enoddi33:get-filtered-loops($source-context)" mode="source">
                         <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopFilter', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
@@ -1188,7 +1188,7 @@
                 <xsl:otherwise><xsl:value-of select="enoddi33:get-then-sequence-id($source-context)"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:if test="name()='IfThenElse' or (name()='Loop' and enoddi33:get-filter($source-context) != '')">
+        <xsl:if test="name()='IfThenElse' or (name()='Loop' and enoddi33:get-loop-filter($source-context) != '')">
             <d:IfThenElse>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="$id"/></r:ID>
@@ -1269,9 +1269,9 @@
             <!-- Check if the element is linked to a loop -->
             <xsl:when test="$idLoop != ''">
                 <!-- Check if there's no preceding element who is linked to loop too, to avoid duplication -->
-                <xsl:if test="enoddi33:is-preceding-linked-before($source-context)='false' and enoddi33:is-ancestor-linked-loop($source-context)='false'">
+                <xsl:if test="enoddi33:is-first-loop-sequence($source-context)">
                     <!-- Get filter for the linked loop -->
-                    <xsl:variable name="filterLoop" select="enoddi33:get-filter($source-context)"/>
+                    <xsl:variable name="filterLoop" select="enoddi33:get-loop-filter($source-context)"/>
                     <xsl:variable name="idLoopVal">
                         <xsl:choose>
                             <xsl:when test="$filterLoop = ''"><xsl:value-of select="$idLoop"/></xsl:when>
