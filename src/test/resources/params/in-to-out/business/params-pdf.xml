@@ -1,0 +1,61 @@
+<ENOParameters>
+    
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>pdf</OutFormat>
+        
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        
+        <PostProcessing>pdf-mailing</PostProcessing>
+        <PostProcessing>pdf-tableColumn</PostProcessing>
+        <PostProcessing>pdf-insertEndQuestion</PostProcessing>
+        <PostProcessing>pdf-editStructurePages</PostProcessing>
+        <PostProcessing>pdf-specificTreatment</PostProcessing>
+        <PostProcessing>pdf-insertCoverPage</PostProcessing>
+        <PostProcessing>pdf-insertAccompanyingMails</PostProcessing>
+    </Pipeline>
+    
+    <Parameters>
+        
+        <StudyUnit>business</StudyUnit>
+        
+        <Campagne>esem-2019-a00</Campagne>
+        
+        <Languages>
+            <Language>fr</Language>
+        </Languages>
+        
+        <BeginQuestion>
+            <Identification>true</Identification>
+        </BeginQuestion>
+        
+        <EndQuestion>
+            <ResponseTimeQuestion>true</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+        
+        <pdf-parameters>
+            <Roster>
+                <Row>
+                    <DefaultSize>20</DefaultSize>
+                </Row>
+            </Roster>
+            <Table>
+                <Row>
+                    <DefaultSize>15</DefaultSize>
+                </Row>
+            </Table>
+            <Capture>
+                <Numeric>manual</Numeric>
+            </Capture>
+            <AccompanyingMail>cnrCOL</AccompanyingMail>
+        </pdf-parameters>
+        
+        <Title>
+            <Browsing>module</Browsing>
+        </Title>
+    </Parameters>
+    
+</ENOParameters>

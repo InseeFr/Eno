@@ -13,7 +13,7 @@
                 xxf:expose-xpath-types="true"
                 xxf:noscript-support="true">
          <xf:instance id="fr-form-instance">
-            <form>
+            <form modele="SIMPSONS">
                <Beginning>
                   <GenericBeginningText/>
                </Beginning>
@@ -2571,7 +2571,8 @@
                </xf:bind>
             </xf:bind>
          </xf:bind>
-         <!--You can add a resource attribute for the save submission by processing the result with your own xslt.--><xf:submission id="save"
+         <!--You can add a resource attribute for the save submission by processing the result with your own xslt.-->
+         <xf:submission id="save"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
@@ -2583,7 +2584,8 @@
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
-         <!--You can add a resource attribute for the submit submission by processing the result with your own xslt.--><xf:submission id="submit"
+         <!--You can add a resource attribute for the submit submission by processing the result with your own xslt.-->
+         <xf:submission id="submit"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"

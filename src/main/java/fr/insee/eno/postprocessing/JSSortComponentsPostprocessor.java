@@ -15,6 +15,7 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * Customization of JS postprocessor.
  */
+@Deprecated
 public class JSSortComponentsPostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(JSSortComponentsPostprocessor.class);

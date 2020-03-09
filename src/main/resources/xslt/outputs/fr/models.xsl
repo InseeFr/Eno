@@ -35,17 +35,28 @@
                 <xhtml:title>
                     <xsl:value-of select="enofr:get-form-title($source-context, $languages[1])"/>
                 </xhtml:title>
-                <xsl:for-each select="$properties//Css/Common">
-                    <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
-                </xsl:for-each>
+                <xsl:choose>
+                    <xsl:when test="$parameters//StudyUnit='business'">
+                        <xsl:for-each select="$properties//Css/CommonBusinness">
+                            <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                        </xsl:for-each>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:for-each select="$properties//Css/Common">
+                            <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                        </xsl:for-each>
+                    </xsl:otherwise>
+                </xsl:choose>                
                 <xsl:for-each select="$parameters//Css">
-                    <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                    <xsl:if test=".!=''">
+                        <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
+                    </xsl:if>
                 </xsl:for-each>
                 <xf:model id="fr-form-model" xxf:expose-xpath-types="true" xxf:noscript-support="true">
 
                     <!-- Main instance, it contains the elements linked to fields, and which will be stored when the form will be submitted -->
                     <xf:instance id="fr-form-instance">
-                        <form>
+                        <form modele="{enofr:get-form-model($source-context)}">
                             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                                 <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
                             </xsl:apply-templates>
@@ -2015,7 +2026,7 @@
         </xsl:element>
         <xsl:if test="not($suffix = '') and not(self::NumericDomain)">
             <xsl:element name="xhtml:span">
-                <xsl:attribute name="class" select="'suffixe'"/>
+                <xsl:attribute name="class" select="'suffix'"/>
                 <xsl:copy-of select="$suffix" copy-namespaces="no"/>
             </xsl:element>
         </xsl:if>

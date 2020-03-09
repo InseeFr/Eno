@@ -7,28 +7,40 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2JSGenerator;
-import fr.insee.eno.postprocessing.JSExternalizeVariablesPostprocessor;
-import fr.insee.eno.postprocessing.JSSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.JSVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.preprocessing.DDIPreprocessor;
+import fr.insee.eno.postprocessing.js.JSExternalizeVariablesPostprocessor;
+import fr.insee.eno.postprocessing.js.JSInsertGenericQuestionsPostprocessor;
+import fr.insee.eno.postprocessing.js.JSSortComponentsPostprocessor;
+import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
+import fr.insee.eno.service.GenerationService;
+import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
+import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
 
 public class TestDDIToJS {
-
+	
+	private DDI2JSGenerator ddi2js = new DDI2JSGenerator();
+	
 	private XMLDiff xmlDiff = new XMLDiff();
-
 	
 	@Test
 	public void simpleDiffTest() {
 		try {
 			String basePath = "src/test/resources/ddi-to-js";
+			Preprocessor[] preprocessors = {
+					new DDIDereferencingPreprocessor(),
+					new DDICleaningPreprocessor(),
+					new DDITitlingPreprocessor()};
+			
 			Postprocessor[] postprocessors =  {
 					new JSSortComponentsPostprocessor(),
+					new JSInsertGenericQuestionsPostprocessor(),
 					new JSExternalizeVariablesPostprocessor(),
 					new JSVTLParserPostprocessor()};
-			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2JSGenerator(),postprocessors);
+			GenerationService genService = new GenerationService(preprocessors, ddi2js, postprocessors);
+			
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-js-test");
 			File expectedFile = new File(String.format("%s/out.xml", basePath));

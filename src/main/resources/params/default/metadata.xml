@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadata>
+  <Identifiant>TEST</Identifiant>
+  <LibelleCourtEnquete>TEST</LibelleCourtEnquete>
+  <LibelleCourtEnqueteMillesime>TEST2018</LibelleCourtEnqueteMillesime>
+  <Frequence>Pluriannuelle</Frequence>
+  <AnneeReference>2018</AnneeReference>
+  <Idvague>01</Idvague>
+  <DateOuverture>6/05/2022</DateOuverture>
+  <DateFermeture>31/05/2022</DateFermeture>
+  <Ville>Paris</Ville>
+  <ArticleServiceProducteur>L’</ArticleServiceProducteur>
+  <NomServiceProducteur>[Surchargeable] - Institut national de la statistique et des études économiques (Insee)</NomServiceProducteur>
+  <NomServiceProducteurCourt>l’Insee</NomServiceProducteurCourt>
+  <ObjectifsLongs>auprès d'individus. Vous pouvez surcharger les objectifs longs de l'enquête.</ObjectifsLongs>
+  <CaractereObligatoire>OUI</CaractereObligatoire>
+  <TypeUniteEnquetees>de salariés de l’État, travaillant pour des ministères ou des établissements publics nationaux, quel que soit leur statut</TypeUniteEnquetees>
+  <TempsPassation>une vingtaine de minutes - [Surchargeable] - </TempsPassation>
+  <AdresseInternetEnquete>https://www.insee.fr</AdresseInternetEnquete>
+  <URLRenseignement>de l’Insee</URLRenseignement>
+  <ServiceCollecteurSignataireFonction>Le directeur - [Surchargeable]</ServiceCollecteurSignataireFonction>
+  <ServiceCollecteurSignataireNom>Mr Dupont - [Surchargeable]</ServiceCollecteurSignataireNom>
+  <ServiceCollecteurSignataireSexe>M</ServiceCollecteurSignataireSexe>
+  <NumeroVisa>2019XXXXXX</NumeroVisa>
+  <MinistereTutelle>Ministre de l’économie et des finances</MinistereTutelle>
+  <AnneeCollecte>2022</AnneeCollecte>
+  <ParutionJO>oui</ParutionJO>
+  <DateParutionJO>25 juillet 2019 - [Surchargeable] - </DateParutionJO>
+  <NomServiceRecours>Insee Grand Est – établissement de Nancy – PENM – 15 rue du Général Hulot – CS 54229 – 54042 Nancy cedex - [Surchargeable] - </NomServiceRecours>
+  <StatutEnquete>vous</StatutEnquete>
+  <Metropole>non</Metropole>
+  <TypeUniteEnquetee>de 33 000 personnes - [Surchargeable] -</TypeUniteEnquetee>
+  <RapprochementDonnees>oui</RapprochementDonnees>
+  <LibelleEnquete>Enquête de test - [Surchargeable] - </LibelleEnquete>
+  <ObjectifsCourts>L’enquête auprès des individus a pour objectif de recueillir des informations. - [Surchargeable] -</ObjectifsCourts>
+  <URLNotice>https://www.insee.fr/notice</URLNotice>
+  <URLSpecimen>https://www.insee.fr/specimen</URLSpecimen>
+  <URLDiffusion>https://www.insee.fr/diffusion</URLDiffusion>
+</metadata>

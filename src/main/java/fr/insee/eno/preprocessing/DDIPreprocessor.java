@@ -16,12 +16,12 @@ import fr.insee.eno.transform.xsl.XslTransformation;
 /**
  * A DDI specific preprocessor.
  */
+@Deprecated
 public class DDIPreprocessor implements Preprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDIPreprocessor.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
 	public File process(File inputFile, byte[] parametersFile, String survey, String in2out) throws Exception {

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+    <fo:layout-master-set>
+        <!--
+            Définition de la page et de ses marges de page.
+            marges de 5mm autour, blanches.
+            Le body est interne à ces marges et mesure donc 200 par 287.
+            A l'intérieur du body se trouve les zones before/after (en haut en bas) et start/end (à gauche/a droite)
+            qui peuvent faire 1cm de large. Ces zones vont recueillir les numéros de page, encoches des bords, 
+            et code barres.
+            L'emplacement d'une zone fixe la position du coin haut gauche de la zone, et sa taille.
+            La position peut être définie par rapport au hautou bas de la zone concernée et gauche ou droite.
+                     
+            Dans les zones before/after/start/end, les mesures se font par rapport au 0,0 de la zone concernée.
+            -->
+        
+        <fo:simple-page-master master-name="page-even-default" page-height="297mm" page-width="210mm" reference-orientation="0"
+            font-family="Liberation Sans" font-size="10pt" font-weight="normal" margin-bottom="5mm" margin-top="5mm" margin-right="5mm" margin-left="5mm">
+            <fo:region-body margin-top="11mm" margin-bottom="11mm"  margin-right="11mm"  margin-left="11mm" column-count="1"/>
+            <fo:region-before region-name="region-before-even-default" extent="10mm" display-align="before" precedence="true"/>
+            <fo:region-after region-name="region-after-even-default" extent="10mm" display-align="before" precedence="true"/>
+            <fo:region-start region-name="region-start-even-default" extent="10mm" display-align="before"/>
+            <fo:region-end region-name="region-end-even-default" extent="10mm" display-align="before"/>
+        </fo:simple-page-master>
+        
+        <fo:simple-page-master master-name="page-odd-default" page-height="297mm" page-width="210mm" reference-orientation="0"
+            font-family="Liberation Sans" font-size="10pt" font-weight="normal" margin-bottom="5mm" margin-top="5mm" margin-right="5mm" margin-left="5mm">
+            <fo:region-body margin-top="11mm" margin-bottom="11mm"  margin-right="11mm"  margin-left="11mm" column-count="1" background-color="white"/>
+            <fo:region-before region-name="region-before-odd-default" extent="10mm" display-align="before" precedence="true"/>
+            <fo:region-after region-name="region-after-odd-default" extent="10mm" display-align="before" precedence="true"/>
+            <fo:region-start region-name="region-start-odd-default" extent="10mm" display-align="before"/>
+            <fo:region-end region-name="region-end-odd-default" extent="10mm" display-align="before"/>
+        </fo:simple-page-master>
+        
+        <fo:simple-page-master master-name="A4-empty" page-height="297mm" page-width="210mm"
+            font-family="Liberation Sans" font-size="10pt" font-weight="normal" margin-bottom="5mm">
+            <fo:region-body margin="15mm"/>
+        </fo:simple-page-master>
+        
+        <fo:page-sequence-master master-name="A4">
+            <fo:repeatable-page-master-alternatives>
+                <fo:conditional-page-master-reference master-reference="page-odd-default" odd-or-even="odd"/>
+                <fo:conditional-page-master-reference master-reference="page-even-default" odd-or-even="even" page-position="first"/>
+                <fo:conditional-page-master-reference master-reference="page-even-default" odd-or-even="even" page-position="rest"/>
+                <fo:conditional-page-master-reference master-reference="page-even-default" odd-or-even="even" page-position="last" blank-or-not-blank="not-blank"/>
+                <fo:conditional-page-master-reference master-reference="A4-empty" odd-or-even="even" page-position="last" blank-or-not-blank="blank"/>
+            </fo:repeatable-page-master-alternatives>	
+        </fo:page-sequence-master>
+    </fo:layout-master-set>
+    
+    <fo:page-sequence master-reference="A4" initial-page-number="2" force-page-count="odd">
+        <fo:title/>
+        <fo:static-content flow-name="region-after-even-default">
+            <fo:block-container absolute-position="absolute" left="90mm" top="5mm" width="33mm" height="10mm">
+                <fo:block text-align="center">
+                    <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+                </fo:block>
+            </fo:block-container>
+        </fo:static-content>
+        
+        <fo:static-content flow-name="region-after-odd-default">
+            <fo:block-container absolute-position="absolute" left="90mm" top="5mm" width="33mm" height="10mm">
+                <fo:block text-align="center">
+                    <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+                </fo:block>
+            </fo:block-container>
+        </fo:static-content>  
+        
+
+        <fo:flow flow-name="xsl-region-body">
+            <fo:block id="TheVeryLastPage"/>
+        </fo:flow>
+    </fo:page-sequence>
+</fo:root>

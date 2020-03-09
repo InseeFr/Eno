@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Questionnaire xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <components xsi:type="Sequence" componentType="Sequence" id="BEGIN-QUESTION-SEQ">
+        <label>"Identification"</label>      
+        <conditionFilter>"normal"</conditionFilter>
+        <components xsi:type="Subsequence" componentType="Subsequence" id="BEGIN-QUESTION-SUBSEQ">
+            <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
+            <conditionFilter>"normal"</conditionFilter>
+            <components xsi:type="Textarea"
+                componentType="Textarea"
+                id="COMMENT-UE-QUESTION"
+                maxLength="2000"
+                mandatory="false">
+                <label>"Remarque, commentaire sur un changement concernant votre " || cast(LABEL_UNITE_ENQUETEE,string) || " :"</label>
+                <response name="COMMENT_UE" xsi:type="ResponseContainerString">
+                    <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                    </valueState>
+                    <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                    </valueState>
+                    <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                    </valueState>
+                    <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                    </valueState>
+                    <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                    </valueState>
+                </response>
+                <conditionFilter>"normal"</conditionFilter>
+                <variables variableType="COLLECTED">
+                    <name>COMMENT_UE</name>
+                    <responseRef>COMMENT_UE</responseRef>
+                </variables>
+                <variables variableType="EXTERNAL">
+                    <name>LABEL_UNITE_ENQUETEE</name>
+                    <value xsi:nil="true"/>
+                </variables>
+            </components>
+        </components>
+    </components>
+    
+</Questionnaire>

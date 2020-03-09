@@ -17,18 +17,18 @@
 	<StudyUnit>default</StudyUnit>
 	<!-- Modèle de première page -->
 	<FirstPage>
-		<Folder>xslt/util/pdf/page-first</Folder>
+		<Folder>xslt/post-processing/pdf/page-first</Folder>
 	</FirstPage>
 	<AccompanyingMails>
-		<Folder>xslt/util/pdf/accompanying-mails</Folder>
+		<Folder>xslt/post-processing/pdf/accompanying-mails</Folder>
 	</AccompanyingMails>
 	<EndQuestion>
-		<Folder>xslt/util/pdf/end-question</Folder>
+		<Folder>xslt/post-processing/pdf/end-question</Folder>
 		<ResponseTimeQuestion>true</ResponseTimeQuestion>
 		<CommentQuestion>true</CommentQuestion>
 	</EndQuestion>
 	<PageModel>
-		<Folder>xslt/util/pdf/page-model</Folder>
+		<Folder>xslt/post-processing/pdf/page-model</Folder>
 	</PageModel>
 	<Style>
 		<Folder>styles</Folder>

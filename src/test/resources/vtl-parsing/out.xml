@@ -13,4 +13,5 @@
    <value>substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'</value>
    <expression>substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'</expression>
    <expression>Expression using special java regex characters : $, $$ and \$ and quote : "hello \"World\""</expression>
+   <expression>a / b</expression>
 </test>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Questionnaire xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               id="i6vwi0">
+               id="i6vwi0"
+               modele="SIMPSONS">
    <label>Questionnaire SIMPSONS</label>
    <components xsi:type="Sequence" componentType="Sequence" id="j6p0ti5h">
       <label>"I - Introduction"</label>
@@ -63,12 +64,12 @@
       <components xsi:type="FilterDescription"
                   componentType="FilterDescription"
                   id="j6p6my1d"
-                  management="false">
+                  filterDescription="false">
          <label>"If you are not ready, please go to the end of the questionnaire"</label>
       </components>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6p0s7o5">
          <label>"General knowledge of the series"</label>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <components xsi:type="Input"
                      componentType="Input"
                      id="j3343qhx"
@@ -92,7 +93,7 @@
                   <value xsi:nil="true"/>
                </valueState>
             </response>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -119,7 +120,7 @@
                   <value xsi:nil="true"/>
                </valueState>
             </response>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          </components>
          <components xsi:type="Datepicker"
                      componentType="Datepicker"
@@ -151,7 +152,7 @@
                   <value xsi:nil="true"/>
                </valueState>
             </response>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -178,7 +179,7 @@
                   <value xsi:nil="true"/>
                </valueState>
             </response>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          </components>
       </components>
    </components>
@@ -189,7 +190,7 @@
                     position="AFTER_QUESTION_TEXT">
          <label>"This module asks about your general knowledge of the Simpsons city"</label>
       </declarations>
-      <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+      <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
       <components xsi:type="Radio"
                   componentType="Radio"
                   id="j3343clt"
@@ -202,15 +203,15 @@
          </declarations>
          <options>
             <value>00001</value>
-            <label>Springfield</label>
+            <label>"Springfield"</label>
          </options>
          <options>
             <value>00002</value>
-            <label>Shelbyville</label>
+            <label>"Shelbyville"</label>
          </options>
          <options>
             <value>00003</value>
-            <label>Seinfeld</label>
+            <label>"Seinfeld"</label>
          </options>
          <response name="CITY" xsi:type="ResponseContainerString">
             <valueState valueType="PREVIOUS">
@@ -229,7 +230,7 @@
                <value xsi:nil="true"/>
             </valueState>
          </response>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
       </components>
       <components xsi:type="CheckboxOne"
                   componentType="CheckboxOne"
@@ -243,19 +244,19 @@
          </declarations>
          <options>
             <value>1</value>
-            <label>Constance Harm</label>
+            <label>"Constance Harm"</label>
          </options>
          <options>
             <value>2</value>
-            <label>Timothy Lovejoy</label>
+            <label>"Timothy Lovejoy"</label>
          </options>
          <options>
             <value>3</value>
-            <label>Joe Quimby</label>
+            <label>"Joe Quimby"</label>
          </options>
          <options>
             <value>4</value>
-            <label>Poochie</label>
+            <label>"Poochie"</label>
          </options>
          <response name="MAYOR" xsi:type="ResponseContainerString">
             <valueState valueType="PREVIOUS">
@@ -274,7 +275,7 @@
                <value xsi:nil="true"/>
             </valueState>
          </response>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
       </components>
       <components xsi:type="Dropdown"
                   componentType="Dropdown"
@@ -283,55 +284,55 @@
          <label>"➡ 3. In which state do The Simpsons reside?"</label>
          <options>
             <value>1</value>
-            <label>Washington</label>
+            <label>"Washington"</label>
          </options>
          <options>
             <value>2</value>
-            <label>Kentucky</label>
+            <label>"Kentucky"</label>
          </options>
          <options>
             <value>3</value>
-            <label>Ohio</label>
+            <label>"Ohio"</label>
          </options>
          <options>
             <value>4</value>
-            <label>Maine</label>
+            <label>"Maine"</label>
          </options>
          <options>
             <value>5</value>
-            <label>North Dakota</label>
+            <label>"North Dakota"</label>
          </options>
          <options>
             <value>6</value>
-            <label>Florida</label>
+            <label>"Florida"</label>
          </options>
          <options>
             <value>7</value>
-            <label>North Takoma</label>
+            <label>"North Takoma"</label>
          </options>
          <options>
             <value>8</value>
-            <label>California</label>
+            <label>"California"</label>
          </options>
          <options>
             <value>9</value>
-            <label>Texas</label>
+            <label>"Texas"</label>
          </options>
          <options>
             <value>10</value>
-            <label>Massachusetts</label>
+            <label>"Massachusetts"</label>
          </options>
          <options>
             <value>11</value>
-            <label>Nevada</label>
+            <label>"Nevada"</label>
          </options>
          <options>
             <value>12</value>
-            <label>Illinois</label>
+            <label>"Illinois"</label>
          </options>
          <options>
             <value>13</value>
-            <label>Not in any state, you fool!</label>
+            <label>"Not in any state, you fool!"</label>
          </options>
          <response name="STATE" xsi:type="ResponseContainerString">
             <valueState valueType="PREVIOUS">
@@ -350,12 +351,12 @@
                <value xsi:nil="true"/>
             </valueState>
          </response>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
       </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6qe0h9q">
       <label>"III - Characters"</label>
-      <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+      <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
       <components xsi:type="CheckboxGroup"
                   componentType="CheckboxGroup"
                   id="j334akov">
@@ -365,9 +366,9 @@
                        position="AFTER_QUESTION_TEXT">
             <label>"Several possible answers"</label>
          </declarations>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <responses id="j334akov-QOP-jbgd8qmn">
-            <label>Santa's Little Helper</label>
+            <label>"Santa's Little Helper"</label>
             <response name="PET1" xsi:type="ResponseContainerBoolean">
                <valueState valueType="PREVIOUS">
                   <value xsi:nil="true"/>
@@ -387,7 +388,7 @@
             </response>
          </responses>
          <responses id="j334akov-QOP-jbgd60vl">
-            <label>Snowball I</label>
+            <label>"Snowball I"</label>
             <response name="PET2" xsi:type="ResponseContainerBoolean">
                <valueState valueType="PREVIOUS">
                   <value xsi:nil="true"/>
@@ -407,7 +408,7 @@
             </response>
          </responses>
          <responses id="j334akov-QOP-jbgda2jo">
-            <label>Coltrane</label>
+            <label>"Coltrane"</label>
             <response name="PET3" xsi:type="ResponseContainerBoolean">
                <valueState valueType="PREVIOUS">
                   <value xsi:nil="true"/>
@@ -427,7 +428,7 @@
             </response>
          </responses>
          <responses id="j334akov-QOP-jbgdfssy">
-            <label>Mojo the Helper Monkey</label>
+            <label>"Mojo the Helper Monkey"</label>
             <response name="PET4" xsi:type="ResponseContainerBoolean">
                <valueState valueType="PREVIOUS">
                   <value xsi:nil="true"/>
@@ -458,20 +459,20 @@
                        position="BEFORE_QUESTION_TEXT">
             <label>"Now we are going to know if you think that Jay is a gluton."</label>
          </declarations>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <cells type="line">
             <cells>
                <value>1</value>
-               <label>Vanilla</label>
+               <label>"Vanilla"</label>
             </cells>
             <cells id="j6p29i81-QOP-jbgdb3jx" componentType="Radio">
                <options>
                   <value>1</value>
-                  <label>Yes</label>
+                  <label>"Yes"</label>
                </options>
                <options>
                   <value>0</value>
-                  <label>No</label>
+                  <label>"No"</label>
                </options>
                <response name="ICE_FLAVOUR1" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -495,16 +496,16 @@
          <cells type="line">
             <cells>
                <value>2</value>
-               <label>Strawberry</label>
+               <label>"Strawberry"</label>
             </cells>
             <cells id="j6p29i81-QOP-jbgdb61k" componentType="Radio">
                <options>
                   <value>1</value>
-                  <label>Yes</label>
+                  <label>"Yes"</label>
                </options>
                <options>
                   <value>0</value>
-                  <label>No</label>
+                  <label>"No"</label>
                </options>
                <response name="ICE_FLAVOUR2" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -528,16 +529,16 @@
          <cells type="line">
             <cells>
                <value>3</value>
-               <label>Apple</label>
+               <label>"Apple"</label>
             </cells>
             <cells id="j6p29i81-QOP-jbgdl3kc" componentType="Radio">
                <options>
                   <value>1</value>
-                  <label>Yes</label>
+                  <label>"Yes"</label>
                </options>
                <options>
                   <value>0</value>
-                  <label>No</label>
+                  <label>"No"</label>
                </options>
                <response name="ICE_FLAVOUR3" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -561,16 +562,16 @@
          <cells type="line">
             <cells>
                <value>4</value>
-               <label>Bacon</label>
+               <label>"Bacon"</label>
             </cells>
             <cells id="j6p29i81-QOP-jbgdcobo" componentType="Radio">
                <options>
                   <value>1</value>
-                  <label>Yes</label>
+                  <label>"Yes"</label>
                </options>
                <options>
                   <value>0</value>
-                  <label>No</label>
+                  <label>"No"</label>
                </options>
                <response name="ICE_FLAVOUR4" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -598,20 +599,20 @@
                   positioning="HORIZONTAL"
                   mandatory="false">
          <label>"➡ 3. Which character works in the nuclear power plant?"</label>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <cells type="line">
             <cells>
                <value>1</value>
-               <label>Charles Montgomery Burns</label>
+               <label>"Charles Montgomery Burns"</label>
             </cells>
             <cells id="j6qefnga-QOP-jbgd6p0k" componentType="Dropdown">
                <options>
                   <value>1</value>
-                  <label>Yes</label>
+                  <label>"Yes"</label>
                </options>
                <options>
                   <value>0</value>
-                  <label>No</label>
+                  <label>"No"</label>
                </options>
                <response name="NUCLEAR_CHARACTER1" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -635,16 +636,16 @@
          <cells type="line">
             <cells>
                <value>2</value>
-               <label>Carl Carlson</label>
+               <label>"Carl Carlson"</label>
             </cells>
             <cells id="j6qefnga-QOP-jbgd9ato" componentType="Dropdown">
                <options>
                   <value>1</value>
-                  <label>Yes</label>
+                  <label>"Yes"</label>
                </options>
                <options>
                   <value>0</value>
-                  <label>No</label>
+                  <label>"No"</label>
                </options>
                <response name="NUCLEAR_CHARACTER2" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -668,16 +669,16 @@
          <cells type="line">
             <cells>
                <value>3</value>
-               <label>Otto Mann</label>
+               <label>"Otto Mann"</label>
             </cells>
             <cells id="j6qefnga-QOP-jbgd3e0p" componentType="Dropdown">
                <options>
                   <value>1</value>
-                  <label>Yes</label>
+                  <label>"Yes"</label>
                </options>
                <options>
                   <value>0</value>
-                  <label>No</label>
+                  <label>"No"</label>
                </options>
                <response name="NUCLEAR_CHARACTER3" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -701,16 +702,16 @@
          <cells type="line">
             <cells>
                <value>4</value>
-               <label>Carl Carlson</label>
+               <label>"Carl Carlson"</label>
             </cells>
             <cells id="j6qefnga-QOP-jbgdkxne" componentType="Dropdown">
                <options>
                   <value>1</value>
-                  <label>Yes</label>
+                  <label>"Yes"</label>
                </options>
                <options>
                   <value>0</value>
-                  <label>No</label>
+                  <label>"No"</label>
                </options>
                <response name="NUCLEAR_CHARACTER4" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -738,32 +739,32 @@
                   positioning="HORIZONTAL"
                   mandatory="false">
          <label>"➡ 4. In which city each character was born?"</label>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <cells type="line">
             <cells>
                <value>1</value>
-               <label>Selma Bouvier</label>
+               <label>"Selma Bouvier"</label>
             </cells>
             <cells id="j6yzoc6g-QOP-jbgd7fr6" componentType="CheckboxOne">
                <options>
                   <value>1</value>
-                  <label>Albuquerque</label>
+                  <label>"Albuquerque"</label>
                </options>
                <options>
                   <value>2</value>
-                  <label>Springfield</label>
+                  <label>"Springfield"</label>
                </options>
                <options>
                   <value>3</value>
-                  <label>Portland</label>
+                  <label>"Portland"</label>
                </options>
                <options>
                   <value>4</value>
-                  <label>Shelbyville</label>
+                  <label>"Shelbyville"</label>
                </options>
                <options>
                   <value>5</value>
-                  <label>Dagstuhl</label>
+                  <label>"Dagstuhl"</label>
                </options>
                <response name="BIRTH_CHARACTER1" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -787,28 +788,28 @@
          <cells type="line">
             <cells>
                <value>2</value>
-               <label>Kent Brockman</label>
+               <label>"Kent Brockman"</label>
             </cells>
             <cells id="j6yzoc6g-QOP-jbgd5e9f" componentType="CheckboxOne">
                <options>
                   <value>1</value>
-                  <label>Albuquerque</label>
+                  <label>"Albuquerque"</label>
                </options>
                <options>
                   <value>2</value>
-                  <label>Springfield</label>
+                  <label>"Springfield"</label>
                </options>
                <options>
                   <value>3</value>
-                  <label>Portland</label>
+                  <label>"Portland"</label>
                </options>
                <options>
                   <value>4</value>
-                  <label>Shelbyville</label>
+                  <label>"Shelbyville"</label>
                </options>
                <options>
                   <value>5</value>
-                  <label>Dagstuhl</label>
+                  <label>"Dagstuhl"</label>
                </options>
                <response name="BIRTH_CHARACTER2" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -832,28 +833,28 @@
          <cells type="line">
             <cells>
                <value>3</value>
-               <label>Milhouse Van Houten</label>
+               <label>"Milhouse Van Houten"</label>
             </cells>
             <cells id="j6yzoc6g-QOP-jbgd912x" componentType="CheckboxOne">
                <options>
                   <value>1</value>
-                  <label>Albuquerque</label>
+                  <label>"Albuquerque"</label>
                </options>
                <options>
                   <value>2</value>
-                  <label>Springfield</label>
+                  <label>"Springfield"</label>
                </options>
                <options>
                   <value>3</value>
-                  <label>Portland</label>
+                  <label>"Portland"</label>
                </options>
                <options>
                   <value>4</value>
-                  <label>Shelbyville</label>
+                  <label>"Shelbyville"</label>
                </options>
                <options>
                   <value>5</value>
-                  <label>Dagstuhl</label>
+                  <label>"Dagstuhl"</label>
                </options>
                <response name="BIRTH_CHARACTER3" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -877,28 +878,28 @@
          <cells type="line">
             <cells>
                <value>4</value>
-               <label>Nelson Muntz</label>
+               <label>"Nelson Muntz"</label>
             </cells>
             <cells id="j6yzoc6g-QOP-jbgd6bdy" componentType="CheckboxOne">
                <options>
                   <value>1</value>
-                  <label>Albuquerque</label>
+                  <label>"Albuquerque"</label>
                </options>
                <options>
                   <value>2</value>
-                  <label>Springfield</label>
+                  <label>"Springfield"</label>
                </options>
                <options>
                   <value>3</value>
-                  <label>Portland</label>
+                  <label>"Portland"</label>
                </options>
                <options>
                   <value>4</value>
-                  <label>Shelbyville</label>
+                  <label>"Shelbyville"</label>
                </options>
                <options>
                   <value>5</value>
-                  <label>Dagstuhl</label>
+                  <label>"Dagstuhl"</label>
                </options>
                <response name="BIRTH_CHARACTER4" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -922,28 +923,28 @@
          <cells type="line">
             <cells>
                <value>5</value>
-               <label>Crazy Cat Lady</label>
+               <label>"Crazy Cat Lady"</label>
             </cells>
             <cells id="j6yzoc6g-QOP-jbgddyry" componentType="CheckboxOne">
                <options>
                   <value>1</value>
-                  <label>Albuquerque</label>
+                  <label>"Albuquerque"</label>
                </options>
                <options>
                   <value>2</value>
-                  <label>Springfield</label>
+                  <label>"Springfield"</label>
                </options>
                <options>
                   <value>3</value>
-                  <label>Portland</label>
+                  <label>"Portland"</label>
                </options>
                <options>
                   <value>4</value>
-                  <label>Shelbyville</label>
+                  <label>"Shelbyville"</label>
                </options>
                <options>
                   <value>5</value>
-                  <label>Dagstuhl</label>
+                  <label>"Dagstuhl"</label>
                </options>
                <response name="BIRTH_CHARACTER5" xsi:type="ResponseContainerString">
                   <valueState valueType="PREVIOUS">
@@ -968,33 +969,33 @@
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j4nw88h2">
       <label>"IV - General questions"</label>
-      <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+      <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qe237q">
          <label>"Kwik-E-Mart"</label>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <components xsi:type="Table"
                      componentType="Table"
                      id="j4nwc63q"
                      positioning="HORIZONTAL"
                      mandatory="false">
             <label>"➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?"</label>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
             <cells type="header">
                <cells headerCell="true" colspan="2">
                   <label/>
                </cells>
                <cells headerCell="true">
-                  <label>Percentage</label>
+                  <label>"Percentage"</label>
                </cells>
             </cells>
             <cells type="line">
                <cells rowspan="2">
                   <value>A</value>
-                  <label>Frozen products</label>
+                  <label>"Frozen products"</label>
                </cells>
                <cells>
                   <value>A1</value>
-                  <label>Ice creams</label>
+                  <label>"Ice creams"</label>
                </cells>
                <cells id="j4nwc63q-QOP-jbgde5yl"
                       componentType="InputNumber"
@@ -1024,7 +1025,7 @@
             <cells type="line">
                <cells>
                   <value>A2</value>
-                  <label>Jasper Beardly</label>
+                  <label>"Jasper Beardly"</label>
                </cells>
                <cells id="j4nwc63q-QOP-jbgd2x2t"
                       componentType="InputNumber"
@@ -1054,11 +1055,11 @@
             <cells type="line">
                <cells rowspan="3">
                   <value>B</value>
-                  <label>Meat</label>
+                  <label>"Meat"</label>
                </cells>
                <cells>
                   <value>B1</value>
-                  <label>Bacon</label>
+                  <label>"Bacon"</label>
                </cells>
                <cells id="j4nwc63q-QOP-jbgdjypz"
                       componentType="InputNumber"
@@ -1088,7 +1089,7 @@
             <cells type="line">
                <cells>
                   <value>B2</value>
-                  <label>Pork chop</label>
+                  <label>"Pork chop"</label>
                </cells>
                <cells id="j4nwc63q-QOP-jbgdcftu"
                       componentType="InputNumber"
@@ -1118,7 +1119,7 @@
             <cells type="line">
                <cells>
                   <value>B3</value>
-                  <label>Chicken</label>
+                  <label>"Chicken"</label>
                </cells>
                <cells id="j4nwc63q-QOP-jbgdiyfe"
                       componentType="InputNumber"
@@ -1148,11 +1149,11 @@
             <cells type="line">
                <cells>
                   <value>C</value>
-                  <label>Compote</label>
+                  <label>"Compote"</label>
                </cells>
                <cells>
                   <value>C1</value>
-                  <label>Powersauce</label>
+                  <label>"Powersauce"</label>
                </cells>
                <cells id="j4nwc63q-QOP-jbgdj1wd"
                       componentType="InputNumber"
@@ -1182,7 +1183,7 @@
             <cells type="line">
                <cells colspan="2">
                   <value>D</value>
-                  <label>Other</label>
+                  <label>"Other"</label>
                </cells>
                <cells id="j4nwc63q-QOP-jbgddylk"
                       componentType="InputNumber"
@@ -1213,46 +1214,46 @@
       </components>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qejudb">
          <label>"Clowning"</label>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <components xsi:type="Table"
                      componentType="Table"
                      id="j4nw0rr6"
                      positioning="HORIZONTAL"
                      mandatory="false">
             <label>"➡ 2. Who did these clownings and tell us what you remember?"</label>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
             <cells type="header">
                <cells headerCell="true">
                   <label/>
                </cells>
                <cells headerCell="true">
-                  <label>Clowning</label>
+                  <label>"Clowning"</label>
                </cells>
                <cells headerCell="true">
-                  <label>Remember?</label>
+                  <label>"Remember?"</label>
                </cells>
             </cells>
             <cells type="line">
                <cells>
                   <value>1</value>
-                  <label>Break the windows of the whole city</label>
+                  <label>"Break the windows of the whole city"</label>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgd8tyr" componentType="Dropdown">
                   <options>
                      <value>1</value>
-                     <label>Jay</label>
+                     <label>"Jay"</label>
                   </options>
                   <options>
                      <value>2</value>
-                     <label>Bart</label>
+                     <label>"Bart"</label>
                   </options>
                   <options>
                      <value>3</value>
-                     <label>Krusty the clown</label>
+                     <label>"Krusty the clown"</label>
                   </options>
                   <options>
                      <value>4</value>
-                     <label>Maggie</label>
+                     <label>"Maggie"</label>
                   </options>
                   <response name="CLOWNING11" xsi:type="ResponseContainerString">
                      <valueState valueType="PREVIOUS">
@@ -1295,24 +1296,24 @@
             <cells type="line">
                <cells>
                   <value>2</value>
-                  <label>Loose the violin of his daughter playing poker</label>
+                  <label>"Loose the violin of his daughter playing poker"</label>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgdep36" componentType="Dropdown">
                   <options>
                      <value>1</value>
-                     <label>Jay</label>
+                     <label>"Jay"</label>
                   </options>
                   <options>
                      <value>2</value>
-                     <label>Bart</label>
+                     <label>"Bart"</label>
                   </options>
                   <options>
                      <value>3</value>
-                     <label>Krusty the clown</label>
+                     <label>"Krusty the clown"</label>
                   </options>
                   <options>
                      <value>4</value>
-                     <label>Maggie</label>
+                     <label>"Maggie"</label>
                   </options>
                   <response name="CLOWNING21" xsi:type="ResponseContainerString">
                      <valueState valueType="PREVIOUS">
@@ -1355,24 +1356,24 @@
             <cells type="line">
                <cells>
                   <value>3</value>
-                  <label>Kill Mr Burns</label>
+                  <label>"Kill Mr Burns"</label>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgdjjgi" componentType="Dropdown">
                   <options>
                      <value>1</value>
-                     <label>Jay</label>
+                     <label>"Jay"</label>
                   </options>
                   <options>
                      <value>2</value>
-                     <label>Bart</label>
+                     <label>"Bart"</label>
                   </options>
                   <options>
                      <value>3</value>
-                     <label>Krusty the clown</label>
+                     <label>"Krusty the clown"</label>
                   </options>
                   <options>
                      <value>4</value>
-                     <label>Maggie</label>
+                     <label>"Maggie"</label>
                   </options>
                   <response name="CLOWNING31" xsi:type="ResponseContainerString">
                      <valueState valueType="PREVIOUS">
@@ -1415,24 +1416,24 @@
             <cells type="line">
                <cells>
                   <value>4</value>
-                  <label>Leaving a mechanical object to control the nuclear power plant</label>
+                  <label>"Leaving a mechanical object to control the nuclear power plant"</label>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgdgh6k" componentType="Dropdown">
                   <options>
                      <value>1</value>
-                     <label>Jay</label>
+                     <label>"Jay"</label>
                   </options>
                   <options>
                      <value>2</value>
-                     <label>Bart</label>
+                     <label>"Bart"</label>
                   </options>
                   <options>
                      <value>3</value>
-                     <label>Krusty the clown</label>
+                     <label>"Krusty the clown"</label>
                   </options>
                   <options>
                      <value>4</value>
-                     <label>Maggie</label>
+                     <label>"Maggie"</label>
                   </options>
                   <response name="CLOWNING41" xsi:type="ResponseContainerString">
                      <valueState valueType="PREVIOUS">
@@ -1476,7 +1477,7 @@
       </components>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qeh91y">
          <label>"Transport"</label>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <components xsi:type="Table"
                      componentType="Table"
                      id="j6p2lwuj"
@@ -1488,34 +1489,34 @@
                           position="AFTER_QUESTION_TEXT">
                <label>"Several answers possible: check off all the relevant boxes"</label>
             </declarations>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
             <cells type="header">
                <cells headerCell="true">
                   <label/>
                </cells>
                <cells headerCell="true">
-                  <label>Brazil</label>
+                  <label>"Brazil"</label>
                </cells>
                <cells headerCell="true">
-                  <label>Canada</label>
+                  <label>"Canada"</label>
                </cells>
                <cells headerCell="true">
-                  <label>Japan</label>
+                  <label>"Japan"</label>
                </cells>
                <cells headerCell="true">
-                  <label>France</label>
+                  <label>"France"</label>
                </cells>
                <cells headerCell="true">
-                  <label>Other country</label>
+                  <label>"Other country"</label>
                </cells>
                <cells headerCell="true">
-                  <label>Other planet</label>
+                  <label>"Other planet"</label>
                </cells>
             </cells>
             <cells type="line">
                <cells>
                   <value>1</value>
-                  <label>Car</label>
+                  <label>"Car"</label>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd92mb" componentType="CheckboxBoolean">
                   <response name="TRAVEL11" xsi:type="ResponseContainerBoolean">
@@ -1635,7 +1636,7 @@
             <cells type="line">
                <cells>
                   <value>2</value>
-                  <label>Bike</label>
+                  <label>"Bike"</label>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdgsat" componentType="CheckboxBoolean">
                   <response name="TRAVEL21" xsi:type="ResponseContainerBoolean">
@@ -1755,7 +1756,7 @@
             <cells type="line">
                <cells>
                   <value>3</value>
-                  <label>Skateboard</label>
+                  <label>"Skateboard"</label>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdaxk2" componentType="CheckboxBoolean">
                   <response name="TRAVEL31" xsi:type="ResponseContainerBoolean">
@@ -1875,7 +1876,7 @@
             <cells type="line">
                <cells>
                   <value>4</value>
-                  <label>Plane</label>
+                  <label>"Plane"</label>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd7myn" componentType="CheckboxBoolean">
                   <response name="TRAVEL41" xsi:type="ResponseContainerBoolean">
@@ -1997,20 +1998,20 @@
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6qfx9qe">
       <label>"V - Favourite characters"</label>
-      <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+      <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
       <components xsi:type="Table"
                   componentType="Table"
                   id="j6qg8rc6"
                   positioning="HORIZONTAL"
                   mandatory="false">
          <label>"➡ 1. Please, complete the following grid with your favourite characters"</label>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  '1') )) then "normal" else "hidden"</conditionFilter>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <cells type="header">
             <cells headerCell="true">
-               <label>Name</label>
+               <label>"Name"</label>
             </cells>
             <cells headerCell="true">
-               <label>Age</label>
+               <label>"Age"</label>
             </cells>
          </cells>
          <lines min="1" max="10"/>
