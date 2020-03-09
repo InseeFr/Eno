@@ -417,7 +417,7 @@
                         <xsl:value-of select="enoddi:get-type($context)"/>
                     </xsl:variable>
                     <!-- If it is number, we display this hint -->
-                    <xsl:if test="$type='number' and upper-case($numeric-example)='YES'">
+                    <xsl:if test="($type='integer' or $type='decimal') and upper-case($numeric-example)='YES'">
                         <xsl:variable name="number-of-decimals" select="enoddi:get-number-of-decimals($context)"/>
                         <xsl:variable name="number-format">
                             <xsl:value-of select="'#'"/>
@@ -477,7 +477,7 @@
                     <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Text"/>
                 </xsl:if>
             </xsl:when>
-            <xsl:when test="$type='number'">
+            <xsl:when test="$type='integer' or $type='decimal'">
                 <xsl:variable name="number-of-decimals">
                     <xsl:value-of select="enoddi:get-number-of-decimals($context)"/>
                 </xsl:variable>
@@ -583,6 +583,9 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:if>
+            </xsl:when>
+            <xsl:when test="$type='duration' and $format='HH:CH'">
+                <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/DurationHHCH"/>
             </xsl:when>
             <xsl:when test="$type='duration'">
                 <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Alert/Duration"/>
@@ -712,7 +715,7 @@
     <xd:doc>
         <xd:desc>no use of input enoddi:is-required : always false for Web collect</xd:desc>
     </xd:doc>
-    <xsl:function name="enofr:is-required">
+    <xsl:function name="enofr:is-required" as="xs:boolean">
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="false()"/>
     </xsl:function>
@@ -733,4 +736,5 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
+
 </xsl:stylesheet>

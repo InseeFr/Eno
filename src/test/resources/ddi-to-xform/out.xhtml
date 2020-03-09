@@ -22,13 +22,13 @@
                   <j6p0ti5h-d1/>
                   <COMMENT/>
                   <READY/>
-                  <d1e50-THEN>
+                  <j6p6my1d-a-j6p0np9q-THEN>
                      <j6p0s7o5/>
                      <PRODUCER/>
                      <SEASON_NUMBER/>
                      <DATEFIRST/>
                      <AUDIENCE_SHARE/>
-                  </d1e50-THEN>
+                  </j6p6my1d-a-j6p0np9q-THEN>
                </j6p0ti5h>
                <j3341528>
                   <j3341528-d2/>
@@ -239,10 +239,10 @@
                <xf:bind id="j6p0ti5h-d1-bind" name="j6p0ti5h-d1" ref="j6p0ti5h-d1"/>
                <xf:bind id="COMMENT-bind" name="COMMENT" ref="COMMENT"/>
                <xf:bind id="READY-bind" name="READY" ref="READY"/>
-               <xf:bind id="d1e50-THEN-bind"
-                        name="d1e50-THEN"
-                        ref="d1e50-THEN"
-                        relevant="not( instance('fr-form-instance')//READY!= '1')">
+               <xf:bind id="j6p6my1d-a-j6p0np9q-THEN-bind"
+                        name="j6p6my1d-a-j6p0np9q-THEN"
+                        ref="j6p6my1d-a-j6p0np9q-THEN"
+                        relevant="not(instance('fr-form-instance')//READY!= '1')">
                   <xf:bind id="j6p0s7o5-bind" name="j6p0s7o5" ref="j6p0s7o5"/>
                   <xf:bind id="PRODUCER-bind" name="PRODUCER" ref="PRODUCER"/>
                   <xf:bind id="SEASON_NUMBER-bind" name="SEASON_NUMBER" ref="SEASON_NUMBER">
@@ -262,7 +262,7 @@
             <xf:bind id="j3341528-bind"
                      name="j3341528"
                      ref="j3341528"
-                     relevant="not( instance('fr-form-instance')//READY!= '1')">
+                     relevant="not(instance('fr-form-instance')//READY!= '1')">
                <xf:bind id="j3341528-d2-bind" name="j3341528-d2" ref="j3341528-d2"/>
                <xf:bind id="CITY-bind" name="CITY" ref="CITY"/>
                <xf:bind id="MAYOR-bind" name="MAYOR" ref="MAYOR"/>
@@ -271,7 +271,7 @@
             <xf:bind id="j6qe0h9q-bind"
                      name="j6qe0h9q"
                      ref="j6qe0h9q"
-                     relevant="not( instance('fr-form-instance')//READY!= '1')">
+                     relevant="not(instance('fr-form-instance')//READY!= '1')">
                <xf:bind id="j334akov-bind" name="j334akov" ref="j334akov"/>
                <xf:bind id="PET1-bind" name="PET1" ref="PET1"/>
                <xf:bind id="PET2-bind" name="PET2" ref="PET2"/>
@@ -355,7 +355,7 @@
             <xf:bind id="j4nw88h2-bind"
                      name="j4nw88h2"
                      ref="j4nw88h2"
-                     relevant="not( instance('fr-form-instance')//READY!= '1')">
+                     relevant="not(instance('fr-form-instance')//READY!= '1')">
                <xf:bind id="j6qe237q-bind" name="j6qe237q" ref="j6qe237q"/>
                <xf:bind id="j4nwc63q-bind" name="j4nwc63q" ref="j4nwc63q"/>
                <xf:bind id="j4nwc63q-j4nwh16i-Header-1-bind"
@@ -446,7 +446,7 @@
                </xf:bind>
                <xf:bind id="j4nwc63q-CI-0-bind" name="j4nwc63q-CI-0" ref="j4nwc63q-CI-0">
                   <xf:constraint level="warning"
-                                 value="not(number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)!= 100)"/>
+                                 value="not(xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)!= 100)"/>
                </xf:bind>
                <xf:bind id="j6qejudb-bind" name="j6qejudb" ref="j6qejudb"/>
                <xf:bind id="j4nw0rr6-bind" name="j4nw0rr6" ref="j4nw0rr6"/>
@@ -542,7 +542,7 @@
             <xf:bind id="j6qfx9qe-bind"
                      name="j6qfx9qe"
                      ref="j6qfx9qe"
-                     relevant="not( instance('fr-form-instance')//READY!= '1')">
+                     relevant="not(instance('fr-form-instance')//READY!= '1')">
                <xf:bind id="j6qg8rc6-bind" name="j6qg8rc6" ref="j6qg8rc6"/>
                <xf:bind id="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1-bind"
                         name="j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1"
@@ -644,7 +644,8 @@
             <xf:bind id="SUM_EXPENSES-bind"
                      name="SUM_EXPENSES"
                      ref="SUM_EXPENSES"
-                     calculate="number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)"/>
+                     type="xs:decimal"
+                     calculate="xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)"/>
             <xf:bind id="end-bind" name="end" ref="End">
                <xf:bind id="generic-end-text-bind"
                         name="generic-end-text"
@@ -694,7 +695,7 @@
                         <value>1</value>
                      </item>
                   </READY>
-                  <d1e50-THEN/>
+                  <j6p6my1d-a-j6p0np9q-THEN/>
                   <j6p0s7o5>
                      <label>General knowledge of the series</label>
                   </j6p0s7o5>
@@ -1603,7 +1604,7 @@
                         <value>1</value>
                      </item>
                   </READY>
-                  <d1e50-THEN/>
+                  <j6p6my1d-a-j6p0np9q-THEN/>
                   <j6p0s7o5>
                      <label>General knowledge of the series</label>
                   </j6p0s7o5>
@@ -2560,7 +2561,7 @@
                </xf:bind>
                <xf:bind id="page-j4nw88h2-bind" name="j4nw88h2" ref="j4nw88h2">
                   <xf:calculate value="xxf:evaluate-bind-property('j4nw88h2-bind','relevant')"/>
-                  <xf:constraint value="(not(number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ number(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)!= 100))"/>
+                  <xf:constraint value="(not(xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)!= 100))"/>
                </xf:bind>
                <xf:bind id="page-j6qfx9qe-bind" name="j6qfx9qe" ref="j6qfx9qe">
                   <xf:calculate value="xxf:evaluate-bind-property('j6qfx9qe-bind','relevant')"/>
@@ -2716,8 +2717,8 @@
                            <xf:value ref="value"/>
                         </xf:itemset>
                         <xf:action ev:event="xforms-value-changed"
-                                   if="not(xxf:evaluate-bind-property('d1e50-THEN-bind','relevant'))"
-                                   iterate="instance('fr-form-instance')//d1e50-THEN//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
+                                   if="not(xxf:evaluate-bind-property('j6p6my1d-a-j6p0np9q-THEN-bind','relevant'))"
+                                   iterate="instance('fr-form-instance')//j6p6my1d-a-j6p0np9q-THEN//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
                            <xf:setvalue ref="." value="''"/>
                         </xf:action>
                         <xf:action ev:event="xforms-value-changed"
@@ -2741,7 +2742,8 @@
                            <xf:setvalue ref="." value="''"/>
                         </xf:action>
                      </xf:select>
-                     <xf:group id="d1e50-THEN-control" bind="d1e50-THEN-bind">
+                     <xf:group id="j6p6my1d-a-j6p0np9q-THEN-control"
+                               bind="j6p6my1d-a-j6p0np9q-THEN-bind">
                         <xhtml:div class="submodule">
                            <xhtml:h3>
                               <xf:output id="j6p0s7o5-control" bind="j6p0s7o5-bind">
@@ -3467,7 +3469,7 @@
                         <xf:output id="j4nwc63q-CI-0-control"
                                    name="j4nwc63q-CI-0"
                                    bind="j4nwc63q-CI-0-bind">
-                           <xf:alert ref="replace($form-resources/j4nwc63q-CI-0/alert,'¤jbcggtca-GOP¤',instance('fr-form-instance')//SUM_EXPENSES)"
+                           <xf:alert ref="replace($form-resources/j4nwc63q-CI-0/alert,'¤jbcggtca-GOP¤',string(instance('fr-form-instance')//SUM_EXPENSES))"
                                      level="warning"/>
                         </xf:output>
                      </xhtml:div>

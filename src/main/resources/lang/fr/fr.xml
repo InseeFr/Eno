@@ -21,6 +21,7 @@
         <Date>Entrez une date valide</Date>
         <Date-YYYYMM>Merci de renseigner le mois et l'année</Date-YYYYMM>
         <Date-YYYY>Merci de renseigner l'année</Date-YYYY>
+        <DurationHHCH>Merci de renseigner les heures des durées hebdomadaires</DurationHHCH>
         <Duration>Entrez une durée valide</Duration>
     </Alert>
     <And>et</And>
