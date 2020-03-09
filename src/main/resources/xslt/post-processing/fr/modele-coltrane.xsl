@@ -10,7 +10,9 @@
 
     <!-- Mapping file -->
     <xsl:param name="mapping-file"/>
-    <xsl:param name="mapping-file-node" as="node()" required="no"/>
+    <xsl:param name="mapping-file-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
 
     <xsl:variable name="list">
         <xsl:choose>

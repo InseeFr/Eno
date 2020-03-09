@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="enoBuild" basedir="." default="fulls">
+    <!-- Importing the configuration part that is common to every script -->
+    <import file="build-configuration.xml"/>
+    <!-- Importing the builds for each interface. -->
+    <import file="build-in-${Properties.InFormat}.xml"/>
+    <import file="build-out-${Properties.OutFormat}.xml"/>
+    
+    <xmlproperty file="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+
+    <!--************************MAIN TARGETS*****************************-->
+    
+    <!-- The first main target that can be called -->
+    <!-- Cleaning, preprocessing the DDI and preprocessing the generator -->
+    <!-- Targets are called in the strict order of the 'depends' attribute : clean first, then DDIPreprocessing and finally ENOPreprocessing-->
+    <target name="full" depends="clean, InPreprocessing">
+        <!-- For each dereferenced file created in temp, creating the corresponding out-format -->
+        <switch value="${Properties.Debug}">
+            <case value="true">
+                <foreach target="in2debug" param="file" inheritall="true">
+                    <path>
+                        <fileset dir="${temp.home}/${Properties.SurveyName}/${Properties.InFormat}" includes="*-final.tmp"/>
+                    </path>
+                </foreach>
+            </case>
+            <default>
+                <foreach target="in2out" param="file" inheritall="true">
+                    <path>
+                        <fileset dir="${temp.home}/${Properties.SurveyName}/${Properties.InFormat}" includes="*-final.tmp"/>
+                    </path>
+                </foreach>
+            </default>
+        </switch>
+    </target>
+
+    <target name="fulls" depends="ENOPreprocessing">
+        
+        <foreach target="full" list="${Properties.SurveyName}" param="survey-name" inheritall="true"/>
+    </target>
+
+
+    <!--************************TARGETS TO GENERATE A SURVEY *****************************-->
+
+    <target name="in2out">
+        <!-- From the -final suffixed file, this target will create an orbeon readable questionnaire -->
+        <!-- Expect files named xxx-final.tmp in the temp.home directory. -->
+        <basename file="${file}" property="file-name" suffix=".tmp"/>
+        <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
+            global="true"/>
+
+        <!-- Generating out-format from the in-format : basic-form.tmp using the in2out.xsl stylesheet -->
+        <xslt in="${temp.home}/${Properties.SurveyName}/${Properties.InFormat}/${file-name}.tmp"
+            out="${temp.home}/${Properties.SurveyName}/${Properties.OutFormat}/${form-name}/basic-form.tmp"
+            style="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl"
+            force="true" classpath="${saxon.jar}">
+            <param name="properties-file"
+                expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
+            <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+            <param name="labels-folder" expression="${lang-folder}/${Properties.OutFormat}"/>
+        </xslt>
+
+        <!-- PostProcess of the out file depending on the out-format. -->
+        <antcall target="OutPostProcessing"/>
+
+        <!-- Deleting temp file -->
+        <delete file="${temp.home}/${survey-name}/${Properties.OutFormat}/${form-name}/basic-form.tmp"/>
+        <copy file="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"
+            tofile="${questionnaires.home}/${survey-name}/${out-folder}/${form-name}/form/form.${out-extension}"/>
+        <delete file="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"/>
+
+    </target>
+
+    <target name="in2debug">
+        <basename file="${file}" property="file-name" suffix=".tmp"/>
+        <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
+            global="true"/>
+
+        <!-- Generating out-format from the in-format : basic-form.tmp using the in2out.xsl stylesheet -->
+        <xslt in="${temp.home}/${survey-name}/${Properties.InFormat}/${file-name}.tmp"
+            out="${target-folder}/${survey-name}/${form-name}/form/form-debug.${out-extension}"
+            style="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl"
+            force="true" classpath="${saxon.jar}">
+            <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
+            <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+            <param name="labels-folder" expression="${lang-folder}/${Properties.OutFormat}"/>
+        </xslt>
+    </target>
+
+    <!--************************TARGETS : PREPROCESSING ENO*****************************-->
+    
+    <target name="ENOPreprocessing">
+        <!-- Generating the xsl files from the different fods files -->
+        <!-- This will generate Xsl but without dynamic creation of namespaces. -->
+        <!-- Generating the driver flow implementation (drivers.fods) -->
+        <delete>
+            <fileset dir="${temp.home}/eno" includes="**/*" erroronmissingdir="false"/>    
+        </delete>
+
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}"/>
+            <param name="name" value="drivers"/>
+            <param name="format" value="DriverFlow"/>
+        </antcall>
+        <!-- Generating the outGetter implementation (in2out/functions.fods) -->
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}"/>
+            <param name="name" value="functions"/>
+            <param name="format" value="OutGetterImplementation"/>
+        </antcall>
+        <!-- Generating the tree navigation implementation (tree-navigations.fods) -->
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}"/>
+            <param name="name" value="tree-navigation"/>
+            <param name="format" value="TreeNavigation"/>
+        </antcall>
+        <!-- Generating the inGetter librairy (in/functions.fods) -->
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/inputs/${Properties.InFormat}/"/>
+            <param name="name" value="functions"/>
+            <param name="format" value="InGetterLibrairy"/>
+        </antcall>
+        <!-- Generating the inGetter implementation (in/templates.fods) -->
+        <antcall target="fods2xsl">
+            <param name="dir" value="${xslt.home}/inputs/${Properties.InFormat}/"/>
+            <param name="name" value="templates"/>
+            <param name="format" value="InGetterImplementation"/>
+        </antcall>
+        <!-- Generating debug model file (models-debug.xsl) if debug mode is enabled based on outGetters (in2out/functions.fods). -->
+        <if>
+            <equals arg1="${Properties.Debug}" arg2="true"/>
+            <then>
+                <antcall target="fods2xsl">
+                    <param name="dir"
+                        value="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}"/>
+                    <param name="name" value="functions"/>
+                    <param name="out-dir" value="${xslt.home}/outputs/${Properties.OutFormat}"/>
+                    <param name="out-name" value="models-debug"/>
+                    <param name="format" value="Debug"/>
+                </antcall>
+            </then>
+        </if>
+
+        <!-- Using a sheet from the util folder in order to create a link-sheet from DDI to form-runner from the 
+        generated sheet and the non-generated sheets.
+        The sheets's content is directly integrated in the first one (the one that will contain the appropriate namespaces)
+        -->
+
+        <!-- Generating transformations/${Properties.InFormat}2${Properties.OutFormat}/drivers.xsl with appropriate namespaces -->
+        <xslt in="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}-fixed.xsl"
+            out="${temp.home}/eno/temp.tmp"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true"
+            classpath="${saxon.jar}">
+            <param name="generated-file"
+                expression="../../transformations/${Properties.InFormat}2${Properties.OutFormat}/drivers.xsl"/>
+        </xslt>
+
+        <!-- Generating transformations/${Properties.InFormat}2${Properties.OutFormat}/functions.xsl with appropriate namespaces -->
+        <xslt in="${temp.home}/eno/temp.tmp" 
+            out="${temp.home}/eno/temp-bis.tmp"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file"
+                expression="../../transformations/${Properties.InFormat}2${Properties.OutFormat}/functions.xsl"/>
+        </xslt>
+
+        <!-- Generating transformations/${Properties.InFormat}2${Properties.OutFormat}/tree-navigation.xsl with appropriate namespaces -->
+        <xslt in="${temp.home}/eno/temp-bis.tmp"
+            out="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file"
+                expression="../../transformations/${Properties.InFormat}2${Properties.OutFormat}/tree-navigation.xsl"/>
+            <param name="debug" expression="${Properties.Debug}"/>
+        </xslt>
+
+        <!-- Generating inputs/ddi/functions.xsl with appropriate namespaces -->
+        <xslt in="${xslt.home}/inputs/${Properties.InFormat}/source-fixed.xsl" 
+            out="${temp.home}/eno/temp.tmp"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../inputs/${Properties.InFormat}/functions.xsl"/>
+        </xslt>
+
+        <!-- Generating inputs/ddi/templates.xsl with appropriate namespaces -->
+        <xslt in="${temp.home}/eno/temp.tmp" 
+            out="${xslt.home}/inputs/${Properties.InFormat}/source.xsl"
+            style="${xslt.home}/util/xsl/incorporation.xsl" force="true" classpath="${saxon.jar}">
+            <param name="generated-file" expression="../../inputs/${Properties.InFormat}/templates.xsl"/>
+        </xslt>
+    </target>
+
+    <!-- The target used to transform a fods into an xsl stylesheet. -->
+    <target name="fods2xsl">
+        <!-- Steps to transform a fods file to a xsl file -->
+        <!-- From the input fods file, create a preformate.tmp (fods file) with a specific, cleaned up format -->
+        <!-- This cleaned fods file will then be transformed into an xml file (xml.tmp) using fods2xml.xsl -->
+        <!-- This xml file is then transformed into an xsl stylesheet using xml2xsl.xsl -->
+        <!-- Preformatting a matrix using a sheet for the util folder -->
+        <!-- Params :
+            - 'dir': params for the directory of the input-file
+            - 'name': param for the name of the fods file (.fods as expected suffix of the file)
+            - 'format': param for the expected output format (see xml2xsl for the supported formats)
+            - 'out-dir': param for the expected out directory, if omitted =${dir} (same as input)
+            - 'out-name': param for the expected out file name (the '.xml' suffix will be added), if omitted =${name}-->
+        <condition property="out-name" else="${name}">
+            <isset property="out-name"/>
+        </condition>
+        <condition property="out-dir" else="${dir}">
+            <isset property="out-dir"/>
+        </condition>
+        <condition property="format" else="NoFormat">
+            <isset property="format"/>
+        </condition>
+
+        <xslt in="${dir}/${name}.fods" out="${temp.home}/eno/preformate.tmp"
+            style="${xslt.home}/util/fods/preformatting.xsl" force="true" classpath="${saxon.jar}"/>
+
+        <!-- From fods to xml using the generator -->
+        <xslt in="${temp.home}/eno/preformate.tmp" out="${temp.home}/eno/xml.tmp"
+            style="${xslt.home}/transformations/fods2xml.xsl" force="true" classpath="${saxon.jar}"/>
+        
+        <!-- From xml to xsl using the generator -->
+        <xslt in="${temp.home}/eno/xml.tmp" out="${out-dir}/${out-name}.xsl"
+            style="${xslt.home}/transformations/xml2xsl.xsl" force="true" classpath="${saxon.jar}">
+            <param name="format" expression="${format}"/>
+            <param name="models-uri-for-debug-mode"
+                expression="../../outputs/${Properties.OutFormat}/models.xsl"/>
+        </xslt>
+        <!--
+        <if>
+            <and>
+            <equals arg1="${Properties.Debug}" arg2="true"/>
+            <equals arg1="${process-debug}" arg2="true"/>
+            </and>
+            <then>                
+                <!-\- From xml to xsl using the generator -\->
+                <xslt in="${temp.home}/eno/xml.tmp" out="${xslt.home}/outputs/${Properties.OutFormat}/models-debug.xsl"
+                    style="${xslt.home}/transformations/xml2xsl.xsl" force="true" classpath="${saxon.jar}">
+                    <!-\- debug mode param -\->
+                    <param name="debug" expression="${Properties.Debug}"/>
+                    <!-\- needed for getting back the namespaces  -\->
+                    <param name="models-uri-for-debug-mode" expression="../../outputs/${Properties.OutFormat}/models.xsl"/>
+                </xslt>                                
+            </then>
+        </if>-->
+    </target>
+
+    <!--************************TARGETS : PREPROCESSING *****************************-->
+
+    <target name="InPreprocessing">
+        <!-- Expects the input file ${questionnaires.home}/${survey-name}/ddi/${survey-name}.xml -->
+        <antcall target="${Properties.InFormat}Preprocessing">
+            <param name="preprocessing-input-file" value="${questionnaires.home}/${survey-name}/${Properties.InFormat}/${survey-name}.xml"/>
+        </antcall>
+    </target>
+
+    <!-- ********************************************** Targets OutPostProcessing ************************************************ -->
+    <target name="OutPostProcessing">
+        <!-- Expects the input file ${temp.home}/${Properties.OutFormat}/${form-name}/basic-form.tmp -->
+        <antcall target="${Properties.OutFormat}PostProcessing">
+            <param name="postprocessing-input-file" value="${temp.home}/${survey-name}/${Properties.OutFormat}/${form-name}/basic-form.tmp"/>
+        </antcall>
+    </target>
+
+    <!--************************TARGET : CLEAN*****************************-->
+    <!-- Cleaning everything : -->
+    <!-- Deleting the content of the temporary folders : temp, test and survey -->
+    <target name="clean">
+        <delete>
+            <fileset dir="${target-folder}/${survey-name}" includes="**/*" erroronmissingdir="false"/>
+            <fileset dir="${temp.home}/${survey-name}" includes="**/*" erroronmissingdir="false"/>
+            <fileset dir="${target-folder}/test" includes="**/*" erroronmissingdir="false"/>
+        </delete>
+    </target>
+
+    <!--************************TARGETS WITH NON REGRESSION TEST *****************************-->
+    
+    <!-- The full target with non regression tests calculates the difference with the generated out-format Simpsons questionnaire expected -->
+    <target name="full-with-test" depends="compile-tests,full">
+        <!-- Creating directory target/test/xslt where the difference file will be put -->
+        <mkdir dir="${target-folder}/test/xslt"/>
+        <!-- At the end of the treatment, the difference between the generated and the expected form written in the file target/test/xslt/diff.txt-->
+        <foreach target="test" param="file" inheritall="true">
+            <path>
+                <fileset dir="${temp.home}" includes="*-final.tmp"/>
+            </path>
+        </foreach>
+        <delete dir="${root-folder}/target/classes"/>
+    </target>
+
+    <!-- The test target comparing form.out-extension with ${survey-name}}-form.${out-extension} -->
+    <target name="test">
+        <basename file="${file}" property="file-name" suffix=".tmp"/>
+        <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
+            global="true"/>
+        <mkdir dir="${target-folder}/test/xslt/${survey-name}/${form-name}"/>
+        <!-- Linking the java class used to do this test -->
+        <java classname="fr.insee.eno.test.Difference" fork="true">
+            <!-- The output file with differences -->
+            <arg value="${target-folder}/test/xslt/${survey-name}/${form-name}/diff.txt"/>
+            <!-- The input generated form to compare -->
+            <arg value="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"/>
+            <!-- The expected form -->
+            <arg value="${questionnaires.home}/${survey-name}/${Properties.OutFormat}/${form-name}/${survey-name}-form.${out-extension}"/>
+            <classpath refid="classpath"/>
+        </java>
+    </target>
+
+    <!-- Classes compilation for tests -->
+    <target name="compile-tests">
+        <mkdir dir="${target-folder}/classes"/>
+        <javac srcdir="${test.java.home}/fr/insee/eno/test" destdir="${target-folder}/classes"
+            includeantruntime="false">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+</project>

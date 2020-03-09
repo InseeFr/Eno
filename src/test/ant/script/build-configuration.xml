@@ -1,24 +1,29 @@
-﻿<project>
+﻿<?xml version="1.0"?>
+<project>
     <!-- Importing the configuration files -->
-    <property file="../config/config.properties"/>
-    <xmlproperty file="${source}/config/ddi2fr.xml"/>
+    <property file="../../../main/config/config.properties"/>
+    <xmlproperty file="../config/in2out.xml"/>
+    <xmlproperty file="${config.home}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
     
     <!-- Getting the path to the folders (that will be passed to xsl files) -->
     <dirname property="root-folder" file="${root}/dummy"/>
     <dirname property="temp-folder" file="${temp.home}/dummy"/>
     <dirname property="xml-folder" file="${xml.home}/dummy"/>
     <dirname property="lang-folder" file="${languages.home}/dummy"/>
-    <dirname property="questionnaires-folder" file="${questionnaires.home}/dummy"/>
     <dirname property="config-folder" file="${config.home}/dummy"/>
-    
+    <dirname property="questionnaires-folder" file="${questionnaires.home}/dummy"/>
+    <dirname property="target-folder" file="${target.home}/dummy"/>
 
     <!-- Definition of the classpath -->
     <path id="classpath">
         <fileset dir="${lib.home}" includes="**/*.jar"/>
-        <pathelement location="${root-folder}/target/classes" />
+    <pathelement location="${root-folder}/target/classes" />
     </path>
-    <!-- antcontrib tasks initialization -->
+    <!-- antcontrib tasks initialization -->    
     <taskdef name="foreach" classname="net.sf.antcontrib.logic.ForEach">
+        <classpath refid="classpath"/>
+    </taskdef>
+    <taskdef name="switch" classname="net.sf.antcontrib.logic.Switch">
         <classpath refid="classpath"/>
     </taskdef>
     <taskdef name="if" classname="net.sf.antcontrib.logic.IfTask">
