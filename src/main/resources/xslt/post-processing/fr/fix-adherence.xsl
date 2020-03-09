@@ -138,13 +138,6 @@
         </xsl:element>
     </xsl:template>
 
-
- <!--   <xsl:template match="@origin[contains(.,'fr-form-loop-model')]" priority="2">
-        <xsl:attribute name="origin"
-            select="replace(.,'fr-form-loop-model','fr-form-modeles')"
-        />
-    </xsl:template>-->
-    
     <xsl:template match="Validation[ancestor::xf:instance[@id='fr-form-instance' or @id='fr-form-util']]">
         <VALIDATION/>
     </xsl:template>
@@ -205,25 +198,12 @@
     <!-- An action that can be reintegrated and called up when sending -->
     <xsl:template match="xf:action[@ev:event='submit-form']"/>
 
-    <!--<xsl:template match="xf:instance[@id='fr-form-loop-model']">
-        <xf:instance id="fr-form-modeles">
-            <xsl:apply-templates select="*"/>
-        </xf:instance>
-    </xsl:template>
-
-    <xsl:template match="LoopModels[parent::xf:instance[@id='fr-form-loop-model']]">
-        <modeles>
-            <xsl:apply-templates select="*"/>
-        </modeles>
-    </xsl:template>-->
-    
     
     <!--****************************************************************Adherences in css or xslt in Orbeon***************************************************-->
 
     <!-- For all of the attributes, certain string modifications are carried out -->
     <xsl:template match="@*">
         <xsl:attribute name="{name()}" select="boom:modifications(.)"/>
-        <!--<xsl:attribute name="{name()}" select="."/>-->
     </xsl:template>
 
     <!-- Here is a list of strings to replace in attributes (adherence in Orbeon) -->
