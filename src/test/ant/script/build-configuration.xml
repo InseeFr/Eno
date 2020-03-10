@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <project>
     <!-- Importing the configuration files -->
-    <property file="../../../main/config/config.properties"/>
+    <property file="../config/config.properties"/>
     <xmlproperty file="../config/in2out.xml"/>
     <xmlproperty file="${config.home}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
     

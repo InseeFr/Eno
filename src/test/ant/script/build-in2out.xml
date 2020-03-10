@@ -3,8 +3,8 @@
     <!-- Importing the configuration part that is common to every script -->
     <import file="build-configuration.xml"/>
     <!-- Importing the builds for each interface. -->
-    <import file="build-in-${Properties.InFormat}.xml"/>
-    <import file="build-out-${Properties.OutFormat}.xml"/>
+    <import file="in/build-in-${Properties.InFormat}.xml"/>
+    <import file="out/build-out-${Properties.OutFormat}.xml"/>
     
     <xmlproperty file="${questionnaires-folder}/${survey-name}/parameters.xml"/>
 
@@ -19,14 +19,14 @@
             <case value="true">
                 <foreach target="in2debug" param="file" inheritall="true">
                     <path>
-                        <fileset dir="${temp.home}/${Properties.SurveyName}/${Properties.InFormat}" includes="*-final.tmp"/>
+                        <fileset dir="${temp.home}/${survey-name}/${Properties.InFormat}" includes="*-final.tmp"/>
                     </path>
                 </foreach>
             </case>
             <default>
                 <foreach target="in2out" param="file" inheritall="true">
                     <path>
-                        <fileset dir="${temp.home}/${Properties.SurveyName}/${Properties.InFormat}" includes="*-final.tmp"/>
+                        <fileset dir="${temp.home}/${survey-name}/${Properties.InFormat}" includes="*-final.tmp"/>
                     </path>
                 </foreach>
             </default>
@@ -49,8 +49,8 @@
             global="true"/>
 
         <!-- Generating out-format from the in-format : basic-form.tmp using the in2out.xsl stylesheet -->
-        <xslt in="${temp.home}/${Properties.SurveyName}/${Properties.InFormat}/${file-name}.tmp"
-            out="${temp.home}/${Properties.SurveyName}/${Properties.OutFormat}/${form-name}/basic-form.tmp"
+        <xslt in="${temp.home}/${survey-name}/${Properties.InFormat}/${file-name}.tmp"
+            out="${temp.home}/${survey-name}/${Properties.OutFormat}/${form-name}/basic-form.tmp"
             style="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl"
             force="true" classpath="${saxon.jar}">
             <param name="properties-file"

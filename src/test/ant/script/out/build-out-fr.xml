@@ -94,7 +94,7 @@
                     </case>
                     <default>
                         <copy file="${root-folder}/target/${survey-name}/${form-name}/form/form-fin.xhtml"
-                            tofile="${root-folder}/target/${survey-name}/${form-name}/form/form-verrue.xhtml" />
+                            tofile="${root-folder}/target/${survey-name}/${form-name}/form/form-verrue.xhtml"/>
                     </default>
                 </switch>
                 

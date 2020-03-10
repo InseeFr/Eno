@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="enoPogues-xml" basedir=".">
+
+	<!-- poguesPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
+	<target name="pogues-xmlPreprocessing">
+		<xslt in="${preprocessing-input-file}"
+			out="${temp.home}/${survey-name}/${Properties.InFormat}/${survey-name}-final.tmp"
+			style="${xslt.home}/pre-processing/pogues-xml/goto-2-if-then-else.xsl" classpath="${saxon.jar}" force="true">
+		</xslt>
+	</target>
+</project>

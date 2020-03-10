@@ -32,11 +32,18 @@
         </foreach>
         <!-- Then adding titles to the created file below -->
         <!-- Creating a -final suffixed file -->
-        <foreach target="titling" param="file" inheritall="true">
-            <path>
-                <fileset dir="${temp.home}/${survey-name}/${Properties.InFormat}" includes="*-cleaned.tmp"/>
-            </path>
-        </foreach>
+        <if>
+            <not>
+                <equals arg1="${Properties.OutFormat}" arg2="pogues"/>
+            </not>
+            <then>
+                <foreach target="titling" param="file" inheritall="true">
+                    <path>
+                        <fileset dir="${temp.home}/${survey-name}/${Properties.InFormat}" includes="*-cleaned.tmp"/>
+                    </path>
+                </foreach>                
+            </then>
+        </if>
     </target>
     
     <!-- Dereferencing -->
