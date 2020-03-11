@@ -285,7 +285,6 @@
                   </util>
                   <perso/>
                </stromae>
-               
             </form>
          </xf:instance>
          <xf:instance id="fr-form-loop-model">
@@ -306,10 +305,12 @@
             </xf:bind>
             <xf:bind id="ADMINISTRATION1-bind"
                      name="ADMINISTRATION1"
-                     ref="Variable[@idVariable='ADMINISTRATION1']"/>
+                     ref="Variable[@idVariable='ADMINISTRATION1']"
+                     type="xs:string"/>
             <xf:bind id="ADMINISTRATION2-bind"
                      name="ADMINISTRATION2"
-                     ref="Variable[@idVariable='ADMINISTRATION2']"/>
+                     ref="Variable[@idVariable='ADMINISTRATION2']"
+                     type="xs:string"/>
             <xf:bind id="ji4d7eko-bind" name="ji4d7eko" ref="ji4d7eko">
                <xf:bind id="ji5pfex8-SI-bind" name="ji5pfex8-SI" ref="ji5pfex8-SI"/>
                <xf:bind id="ACTADMIN-bind"
@@ -514,7 +515,7 @@
                <xf:bind id="jrgfrrrn-a-jje9mvyn-THEN-bind"
                         name="jrgfrrrn-a-jje9mvyn-THEN"
                         ref="jrgfrrrn-a-jje9mvyn-THEN"
-                        relevant="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='NBDPT'])=0 and instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()!='')">
+                        relevant="not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='NBDPT'])=0 and instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()!='')">
                   <xf:bind id="CHGMT_SOUHAIT-bind"
                            name="CHGMT_SOUHAIT"
                            ref="Variable[@idVariable='CHGMT_SOUHAIT']">
@@ -522,7 +523,7 @@
                   </xf:bind>
                   <xf:bind id="jo4k1wz1-CI-0-bind" name="jo4k1wz1-CI-0" ref="jo4k1wz1-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']) &gt; number(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and number(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt; 0)"/>
+                                    value="not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt; 0)"/>
                   </xf:bind>
                   <xf:bind id="CHGMT_SUIVI-bind"
                            name="CHGMT_SUIVI"
@@ -531,7 +532,7 @@
                   </xf:bind>
                   <xf:bind id="jo4khrya-CI-0-bind" name="jo4khrya-CI-0" ref="jo4khrya-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']) &gt; number(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and number(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt;0)"/>
+                                    value="not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt;0)"/>
                   </xf:bind>
                </xf:bind>
                <xf:bind id="PROMOTION-bind"
@@ -796,7 +797,7 @@
                   </xf:bind>
                   <xf:bind id="jjfrk62q-CI-0-bind" name="jjfrk62q-CI-0" ref="jjfrk62q-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']) ) mod 5 != 0)"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']) ) mod 5 != 0)"/>
                   </xf:bind>
                   <xf:bind id="TPS_PREP_ETE-bind"
                            name="TPS_PREP_ETE"
@@ -805,7 +806,7 @@
                   </xf:bind>
                   <xf:bind id="jjfrtikv-CI-0-bind" name="jjfrtikv-CI-0" ref="jjfrtikv-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']) ) mod 5 != 0)"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']) ) mod 5 != 0)"/>
                   </xf:bind>
                </xf:bind>
                <xf:bind id="jp3t0zmv-jjyebdv3-b-jozeysd5-THEN-bind"
@@ -847,7 +848,7 @@
                   </xf:bind>
                   <xf:bind id="jozf688x-CI-0-bind" name="jozf688x-CI-0" ref="jozf688x-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']) ) mod 5 != 0)"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']) ) mod 5 != 0)"/>
                   </xf:bind>
                   <xf:bind id="jozf688x-CI-1-bind" name="jozf688x-CI-1" ref="jozf688x-CI-1">
                      <xf:constraint level="warning"
@@ -859,7 +860,7 @@
                   </xf:bind>
                   <xf:bind id="jjfrm2qf-CI-0-bind" name="jjfrm2qf-CI-0" ref="jjfrm2qf-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) ) mod 5 != 0)"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) ) mod 5 != 0)"/>
                   </xf:bind>
                   <xf:bind id="jjfrm2qf-CI-1-bind" name="jjfrm2qf-CI-1" ref="jjfrm2qf-CI-1">
                      <xf:constraint level="warning"
@@ -870,11 +871,11 @@
                   </xf:bind>
                   <xf:bind id="jjfrsfl4-CI-0-bind" name="jjfrsfl4-CI-0" ref="jjfrsfl4-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT']) &gt;= number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()!='')"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT']) &gt;= xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()!='')"/>
                   </xf:bind>
                   <xf:bind id="jjfrsfl4-CI-1-bind" name="jjfrsfl4-CI-1" ref="jjfrsfl4-CI-1">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT']) ) mod 5 != 0)"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT']) ) mod 5 != 0)"/>
                   </xf:bind>
                   <xf:bind id="NBCONGPRIS-bind"
                            name="NBCONGPRIS"
@@ -883,11 +884,11 @@
                   </xf:bind>
                   <xf:bind id="jjfrzvhu-CI-0-bind" name="jjfrzvhu-CI-0" ref="jjfrzvhu-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) &gt; number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) &gt; xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')"/>
                   </xf:bind>
                   <xf:bind id="jjfrzvhu-CI-1-bind" name="jjfrzvhu-CI-1" ref="jjfrzvhu-CI-1">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) ) mod 5 != 0)"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) ) mod 5 != 0)"/>
                   </xf:bind>
                   <xf:bind id="jjfrzvhu-CI-2-bind" name="jjfrzvhu-CI-2" ref="jjfrzvhu-CI-2">
                      <xf:constraint level="warning"
@@ -898,15 +899,15 @@
                   </xf:bind>
                   <xf:bind id="jjfs3b3c-CI-0-bind" name="jjfs3b3c-CI-0" ref="jjfs3b3c-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']) &gt; number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']) &gt; xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')"/>
                   </xf:bind>
                   <xf:bind id="jjfs3b3c-CI-1-bind" name="jjfs3b3c-CI-1" ref="jjfs3b3c-CI-1">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']) ) mod 5 != 0)"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']) ) mod 5 != 0)"/>
                   </xf:bind>
                   <xf:bind id="jjfs3b3c-CI-2-bind" name="jjfs3b3c-CI-2" ref="jjfs3b3c-CI-2">
                      <xf:constraint level="warning"
-                                    value="not((number(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) + number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']))&gt; number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')"/>
+                                    value="not((xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) + xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']))&gt; xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')"/>
                   </xf:bind>
                   <xf:bind id="NBCET_PRIS-bind"
                            name="NBCET_PRIS"
@@ -915,7 +916,7 @@
                   </xf:bind>
                   <xf:bind id="jozfj20z-CI-0-bind" name="jozfj20z-CI-0" ref="jozfj20z-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']) ) mod 5 != 0)"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']) ) mod 5 != 0)"/>
                   </xf:bind>
                   <xf:bind id="STOCK_CET-bind"
                            name="STOCK_CET"
@@ -924,7 +925,7 @@
                   </xf:bind>
                   <xf:bind id="jozfsqpe-CI-0-bind" name="jozfsqpe-CI-0" ref="jozfsqpe-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='STOCK_CET'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']) ) mod 5 != 0)"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='STOCK_CET'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']) ) mod 5 != 0)"/>
                   </xf:bind>
                   <xf:bind id="JOURSRECUP-bind"
                            name="JOURSRECUP"
@@ -933,7 +934,7 @@
                   </xf:bind>
                   <xf:bind id="jrc3ye5q-CI-0-bind" name="jrc3ye5q-CI-0" ref="jrc3ye5q-CI-0">
                      <xf:constraint level="warning"
-                                    value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']) ) mod 5 != 0)"/>
+                                    value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']) ) mod 5 != 0)"/>
                   </xf:bind>
                </xf:bind>
                <xf:bind id="jozfk2zz-bind" name="jozfk2zz" ref="jozfk2zz"/>
@@ -944,7 +945,7 @@
                </xf:bind>
                <xf:bind id="jjfsdz8f-CI-0-bind" name="jjfsdz8f-CI-0" ref="jjfsdz8f-CI-0">
                   <xf:constraint level="warning"
-                                 value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']) ) mod 5 != 0)"/>
+                                 value="not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']) ) mod 5 != 0)"/>
                </xf:bind>
                <xf:bind id="jjfsdz8f-CI-1-bind" name="jjfsdz8f-CI-1" ref="jjfsdz8f-CI-1">
                   <xf:constraint level="warning"
@@ -952,7 +953,7 @@
                </xf:bind>
                <xf:bind id="jjfsdz8f-CI-2-bind" name="jjfsdz8f-CI-2" ref="jjfsdz8f-CI-2">
                   <xf:constraint level="warning"
-                                 value="not((instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3') and (number(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) + number(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']) )&gt; 365 and instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!='')"/>
+                                 value="not((instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3') and (xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) + xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']) )&gt; 365 and instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!='')"/>
                </xf:bind>
             </xf:bind>
             <xf:bind id="jj5q7j9i-bind" name="jj5q7j9i" ref="jj5q7j9i">
@@ -1022,7 +1023,7 @@
                   <xf:bind id="jp2t8dsf-a-jjio3k4v-THEN-bind"
                            name="jp2t8dsf-a-jjio3k4v-THEN"
                            ref="jp2t8dsf-a-jjio3k4v-THEN"
-                           relevant="not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']) = 1)">
+                           relevant="not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']) = 1)">
                      <xf:bind id="ANNEEAINE-bind"
                               name="ANNEEAINE"
                               ref="Variable[@idVariable='ANNEEAINE']">
@@ -1030,7 +1031,7 @@
                      </xf:bind>
                      <xf:bind id="jjintpi8-CI-0-bind" name="jjintpi8-CI-0" ref="jjintpi8-CI-0">
                         <xf:constraint level="warning"
-                                       value="not(number(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']) &gt; number(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE']))"/>
+                                       value="not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE']))"/>
                      </xf:bind>
                   </xf:bind>
                </xf:bind>
@@ -6021,18 +6022,18 @@
                </xf:bind>
                <xf:bind id="page-jje9445l-bind" name="jje9445l" ref="jje9445l">
                   <xf:calculate value="xxf:evaluate-bind-property('jje9445l-bind','relevant')"/>
-                  <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='1' and instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='2' and instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='3')) and (not(not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='NBDPT'])=0 and instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()!='')) or (not(number(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']) &gt; number(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and number(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt; 0)) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']) &gt; number(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and number(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt;0)))"/>
+                  <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='1' and instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='2' and instance('fr-form-instance')//Variable[@idVariable='CATDEC'] !='3')) and (not(not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 1 else instance('fr-form-instance')//Variable[@idVariable='NBDPT'])=0 and instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()!='')) or (not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SOUHAIT']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt; 0)) and (not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='CHGMT_SUIVI']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) and xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBDPT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBDPT']) &gt;0)))"/>
                </xf:bind>
                <xf:bind id="page-jjfrghoq-bind" name="jjfrghoq" ref="jjfrghoq">
                   <xf:calculate value="xxf:evaluate-bind-property('jjfrghoq-bind','relevant')"/>
-                  <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '1' and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '2' and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '3')) and (not(not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3')) or (not((instance('fr-form-instance')//Variable[@idVariable='PLS_ETAB']='1' or instance('fr-form-instance')//Variable[@idVariable='PLS_ETAB']='2') and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '')) and (not(string(instance('fr-form-instance')//Variable[@idVariable='NBHEURPROF']) ='')) and (not(string(instance('fr-form-instance')//Variable[@idVariable='NBHEURPREP']) = '')) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']) ) mod 5 != 0)) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']) ) mod 5 != 0))) and (not(not((instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '1') and not ((instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3')))) or (not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '' and string (instance('fr-form-instance')//Variable[@idVariable='NBHEURHEBDO']) != '')) and (not(string(instance('fr-form-instance')//Variable[@idVariable='NBHEURHEBDO'])='')) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']) ) mod 5 != 0)) and (not(instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']/string()='')) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) ) mod 5 != 0)) and (not(instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='')) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT']) &gt;= number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()!='')) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT']) ) mod 5 != 0)) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) &gt; number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) ) mod 5 != 0)) and (not(instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='')) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']) &gt; number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']) ) mod 5 != 0)) and (not((number(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) + number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']))&gt; number(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']) ) mod 5 != 0)) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='STOCK_CET'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']) ) mod 5 != 0)) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']) ) mod 5 != 0))) and (not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS'])&gt;0 and ( 10 * number(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']) ) mod 5 != 0)) and (not(instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='')) and (not((instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3') and (number(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) + number(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']) )&gt; 365 and instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!=''))"/>
+                  <xf:constraint value="(not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '1' and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '2' and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] != '3')) and (not(not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3')) or (not((instance('fr-form-instance')//Variable[@idVariable='PLS_ETAB']='1' or instance('fr-form-instance')//Variable[@idVariable='PLS_ETAB']='2') and instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '')) and (not(string(instance('fr-form-instance')//Variable[@idVariable='NBHEURPROF']) ='')) and (not(string(instance('fr-form-instance')//Variable[@idVariable='NBHEURPREP']) = '')) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_VAC']) ) mod 5 != 0)) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='TPS_PREP_ETE']) ) mod 5 != 0))) and (not(not((instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '1') and not ((instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3')))) or (not(instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '' and string (instance('fr-form-instance')//Variable[@idVariable='NBHEURHEBDO']) != '')) and (not(string(instance('fr-form-instance')//Variable[@idVariable='NBHEURHEBDO'])='')) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']) ) mod 5 != 0)) and (not(instance('fr-form-instance')//Variable[@idVariable='NBJOURHEBDO']/string()='')) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) ) mod 5 != 0)) and (not(instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='')) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT']) &gt;= xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()!='')) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBRTT']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBRTT']) ) mod 5 != 0)) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) &gt; xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) ) mod 5 != 0)) and (not(instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='')) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']) &gt; xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']) ) mod 5 != 0)) and (not((xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) + xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET']))&gt; xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCGE']) and instance('fr-form-instance')//Variable[@idVariable='NBCET']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCGE']/string()!='')) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCET_PRIS']) ) mod 5 != 0)) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='STOCK_CET'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='STOCK_CET']) ) mod 5 != 0)) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='JOURSRECUP']) ) mod 5 != 0))) and (not(xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS'])&gt;0 and ( 10 * xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']) ) mod 5 != 0)) and (not(instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='')) and (not((instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] = '2' or instance('fr-form-instance')//Variable[@idVariable='INDIC_ENSEIGN'] ='3') and (xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']) + xs:decimal(if (instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']) )&gt; 365 and instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']/string()!='' and instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']/string()!=''))"/>
                </xf:bind>
                <xf:bind id="page-jj5q7j9i-bind" name="jj5q7j9i" ref="jj5q7j9i">
                   <xf:calculate value="xxf:evaluate-bind-property('jj5q7j9i-bind','relevant')"/>
                </xf:bind>
                <xf:bind id="page-ji4dnal1-bind" name="ji4dnal1" ref="ji4dnal1">
                   <xf:calculate value="xxf:evaluate-bind-property('ji4dnal1-bind','relevant')"/>
-                  <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='ENFANTS'] = '2')) or (not(not(number(if (instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']) = 1)) or (not(number(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']) &gt; number(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE'])))))"/>
+                  <xf:constraint value="(not(not(instance('fr-form-instance')//Variable[@idVariable='ENFANTS'] = '2')) or (not(not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='NBENFANTS']) = 1)) or (not(xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEAINE']) &gt; xs:integer(if (instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE']/string()='') then 0 else instance('fr-form-instance')//Variable[@idVariable='ANNEEJEUNE'])))))"/>
                </xf:bind>
                <xf:bind id="page-INSEE-HOUSEHOLD-TEMPS-bind"
                         name="INSEE-HOUSEHOLD-TEMPS"
@@ -6041,13 +6042,12 @@
                </xf:bind>
             </xf:bind>
          </xf:bind>
-         
          <xf:submission id="enregistrer"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
                         relevant="false"
-                        resource="{xxf:property('server-exist-orbeon')}/restxq/{xxf:property('enregistrer-service')}/fpe-2019-x00/v1/{xxf:get-request-parameter('unite-enquete')}?ongletproof=oui">
+                        resource="{xxf:property('server-exist-orbeon')}/apps/orbeon/{xxf:property('enregistrer-service')}/fpe-2019-x00/v1/{xxf:get-request-parameter('unite-enquete')}?ongletproof=oui">
             <xf:action ev:event="xforms-submit-error">
                <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
             </xf:action>
@@ -6055,13 +6055,12 @@
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
-         
          <xf:submission id="expedier"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
                         relevant="false"
-                        resource="{xxf:property('server-exist-orbeon')}/restxq/{xxf:property('enregistrer-service')}/fpe-2019-x00/v1/{xxf:get-request-parameter('unite-enquete')}?ongletproof=oui">
+                        resource="{xxf:property('server-exist-orbeon')}/apps/orbeon/{xxf:property('enregistrer-service')}/fpe-2019-x00/v1/{xxf:get-request-parameter('unite-enquete')}?ongletproof=oui">
             <xf:action ev:event="xforms-submit-error">
                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
                             value="string(number(instance('fr-form-instance')/stromae/util/sectionCourante)-1)"/>
@@ -6135,7 +6134,6 @@
             <xf:send submission="enregistrer"/>
             <xf:setfocus control="page-top-control"/>
          </xf:action>
-         
       </xf:model>
    </xhtml:head>
    <xhtml:body>
@@ -7710,7 +7708,7 @@
                            <xf:output id="jjfrsfl4-CI-0-control"
                                       name="jjfrsfl4-CI-0"
                                       bind="jjfrsfl4-CI-0-bind">
-                              <xf:alert ref="replace($form-resources/jjfrsfl4-CI-0/alert,'¤jjfrm2qf-QOP-jjfrqs55¤',instance('fr-form-instance')//Variable[@idVariable='NBCGE'])"
+                              <xf:alert ref="replace($form-resources/jjfrsfl4-CI-0/alert,'¤jjfrm2qf-QOP-jjfrqs55¤',string(instance('fr-form-instance')//Variable[@idVariable='NBCGE']))"
                                         level="warning"/>
                            </xf:output>
                            <xf:output id="jjfrsfl4-CI-1-control"
@@ -7747,7 +7745,7 @@
                            <xf:output id="jjfrzvhu-CI-0-control"
                                       name="jjfrzvhu-CI-0"
                                       bind="jjfrzvhu-CI-0-bind">
-                              <xf:alert ref="replace($form-resources/jjfrzvhu-CI-0/alert,'¤jjfrm2qf-QOP-jjfrqs55¤',instance('fr-form-instance')//Variable[@idVariable='NBCGE'])"
+                              <xf:alert ref="replace($form-resources/jjfrzvhu-CI-0/alert,'¤jjfrm2qf-QOP-jjfrqs55¤',string(instance('fr-form-instance')//Variable[@idVariable='NBCGE']))"
                                         level="warning"/>
                            </xf:output>
                            <xf:output id="jjfrzvhu-CI-1-control"
@@ -7783,7 +7781,7 @@
                            <xf:output id="jjfs3b3c-CI-0-control"
                                       name="jjfs3b3c-CI-0"
                                       bind="jjfs3b3c-CI-0-bind">
-                              <xf:alert ref="replace($form-resources/jjfs3b3c-CI-0/alert,'¤jjfrm2qf-QOP-jjfrqs55¤',instance('fr-form-instance')//Variable[@idVariable='NBCGE'])"
+                              <xf:alert ref="replace($form-resources/jjfs3b3c-CI-0/alert,'¤jjfrm2qf-QOP-jjfrqs55¤',string(instance('fr-form-instance')//Variable[@idVariable='NBCGE']))"
                                         level="warning"/>
                            </xf:output>
                            <xf:output id="jjfs3b3c-CI-1-control"
@@ -7794,7 +7792,7 @@
                            <xf:output id="jjfs3b3c-CI-2-control"
                                       name="jjfs3b3c-CI-2"
                                       bind="jjfs3b3c-CI-2-bind">
-                              <xf:alert ref="replace(replace(replace($form-resources/jjfs3b3c-CI-2/alert,'¤jjfrzvhu-QOP-jjfs8u5a¤',instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']),'¤jjfs3b3c-QOP-jjfsgm0w¤',instance('fr-form-instance')//Variable[@idVariable='NBCET']),'¤jjfrm2qf-QOP-jjfrqs55¤',instance('fr-form-instance')//Variable[@idVariable='NBCGE'])"
+                              <xf:alert ref="replace(replace(replace($form-resources/jjfs3b3c-CI-2/alert,'¤jjfrzvhu-QOP-jjfs8u5a¤',string(instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS'])),'¤jjfs3b3c-QOP-jjfsgm0w¤',string(instance('fr-form-instance')//Variable[@idVariable='NBCET'])),'¤jjfrm2qf-QOP-jjfrqs55¤',string(instance('fr-form-instance')//Variable[@idVariable='NBCGE']))"
                                         level="warning"/>
                            </xf:output>
                            <fr:number id="NBCET_PRIS-control"
@@ -7895,7 +7893,7 @@
                         <xf:output id="jjfsdz8f-CI-2-control"
                                    name="jjfsdz8f-CI-2"
                                    bind="jjfsdz8f-CI-2-bind">
-                           <xf:alert ref="replace(replace($form-resources/jjfsdz8f-CI-2/alert,'¤jjfrzvhu-QOP-jjfs8u5a¤',instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS']),'¤jjfsdz8f-QOP-jozfxq9v¤',instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS'])"
+                           <xf:alert ref="replace(replace($form-resources/jjfsdz8f-CI-2/alert,'¤jjfrzvhu-QOP-jjfs8u5a¤',string(instance('fr-form-instance')//Variable[@idVariable='NBCONGPRIS'])),'¤jjfsdz8f-QOP-jozfxq9v¤',string(instance('fr-form-instance')//Variable[@idVariable='NBJOURSABS']))"
                                      level="warning"/>
                         </xf:output>
                      </xhtml:div>
