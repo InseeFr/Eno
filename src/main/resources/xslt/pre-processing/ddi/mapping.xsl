@@ -24,9 +24,36 @@
 
     <xsl:variable name="studyUnit" select="$parameters//StudyUnit"/>
 
-    <xsl:variable name="begin-questions-identification" as="xs:boolean" select="$parameters//BeginQuestion/Identification"/>
-    <xsl:variable name="end-response-time-question" as="xs:boolean" select="$parameters//EndQuestion/ResponseTimeQuestion"/>
-    <xsl:variable name="end-comment-question" as="xs:boolean" select="$parameters//EndQuestion/CommentQuestion"/>
+    <xsl:variable name="begin-questions-identification" as="xs:boolean">
+        <xsl:choose>
+            <xsl:when test="$parameters//BeginQuestion/Identification != ''">
+                <xsl:value-of select="$parameters//BeginQuestion/Identification"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="false()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="end-response-time-question" as="xs:boolean">
+        <xsl:choose>
+            <xsl:when test="$parameters//EndQuestion/ResponseTimeQuestion != ''">
+                <xsl:value-of select="$parameters//EndQuestion/ResponseTimeQuestion"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="false()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="end-comment-question" as="xs:boolean">
+        <xsl:choose>
+            <xsl:when test="$parameters//EndQuestion/CommentQuestion != ''">
+                <xsl:value-of select="$parameters//EndQuestion/CommentQuestion"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="false()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
