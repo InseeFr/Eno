@@ -62,10 +62,19 @@
                     <param name="metadata-file" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>
                 </xslt>
                 
-                <!-- On rajoute la partie sur l'identification -->
-                <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-patron.xhtml"
-                    out="${target-folder}/${survey-name}/${form-name}/form/form-identification.xhtml"
-                    style="${xslt.home}/post-processing/fr/identification.xsl" force="true" classpath="${saxon.jar}"/>
+                <if>
+                    <equals arg1="${ENOParameters.Parameters.StudyUnit}" arg2="business"/>
+                    <then>
+                        <!-- On rajoute la partie sur l'identification -->
+                        <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-patron.xhtml"
+                            out="${target-folder}/${survey-name}/${form-name}/form/form-identification.xhtml"
+                            style="${xslt.home}/post-processing/fr/identification.xsl" force="true" classpath="${saxon.jar}"/>                        
+                    </then>
+                    <else>
+                        <copy file="${target-folder}/${survey-name}/${form-name}/form/form-patron.xhtml"
+                            tofile="${target-folder}/${survey-name}/${form-name}/form/form-identification.xhtml"/>
+                    </else>
+                </if>
                 
                 <!-- On surcharge la première page par une page d'accueil -->
                 <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-identification.xhtml"
