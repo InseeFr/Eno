@@ -164,8 +164,7 @@
    </fo:layout-master-set>
    <fo:page-sequence font-family="Liberation Sans"
                      font-size="8pt"
-                     master-reference="cnrCOL"><!-- ZONE LIGNE TECHNIQUE -->
-      <fo:static-content flow-name="xsl-region-before-courrier">
+                     master-reference="cnrCOL"><!-- ZONE LIGNE TECHNIQUE --><fo:static-content flow-name="xsl-region-before-courrier">
          <fo:block position="absolute"
                    margin-top="5mm"
                    margin-left="10mm"
@@ -176,8 +175,7 @@
             </fo:block>
       </fo:static-content>
       <fo:flow flow-name="xsl-region-body">
-         <fo:block page-break-after="always"><!-- ZONE LOGOS -->
-            <fo:block-container absolute-position="absolute"
+         <fo:block page-break-after="always"><!-- ZONE LOGOS --><fo:block-container absolute-position="absolute"
                                 left="5mm"
                                 top="2mm"
                                 width="180mm"
@@ -191,8 +189,7 @@
                                        scaling="uniform"/>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE RESERVE ADRESSE -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE RESERVE ADRESSE --><fo:block-container absolute-position="absolute"
                                 left="80mm"
                                 top="33mm"
                                 width="110mm"
@@ -200,8 +197,7 @@
                                 overflow="hidden">
                <fo:block/>
             </fo:block-container>
-            <!-- ZONE DATAMATRIX ALLIAGE -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE DATAMATRIX ALLIAGE --><fo:block-container absolute-position="absolute"
                                 left="100mm"
                                 top="37.8mm"
                                 width="11.88mm"
@@ -222,8 +218,7 @@
                   </fo:instream-foreign-object>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE ADRESSE -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE ADRESSE --><fo:block-container absolute-position="absolute"
                                 left="100mm"
                                 top="50mm"
                                 width="82mm"
@@ -242,8 +237,7 @@
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE RESERVE INTEGRALITE -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE RESERVE INTEGRALITE --><fo:block-container absolute-position="absolute"
                                 left="187mm"
                                 top="75mm"
                                 width="13mm"
@@ -252,8 +246,7 @@
                                 font-size="10pt">
                <fo:block/>
             </fo:block-container>
-            <!-- ZONE TITRE COURRIER -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE TITRE COURRIER --><fo:block-container absolute-position="absolute"
                                 left="1mm"
                                 top="38mm"
                                 width="78mm"
@@ -262,8 +255,7 @@
                                 font-size="10pt">
                <fo:block line-height="10pt" font-weight="bold" text-align="center">CONSTAT DE NON-RÉPONSE #if($!{InitAccuseReception}=='oui')avec accusé de réception#end</fo:block>
             </fo:block-container>
-            <!-- ZONE CONTACT -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE CONTACT --><fo:block-container absolute-position="absolute"
                                 left="1mm"
                                 top="50.5mm"
                                 width="78mm"
@@ -281,8 +273,7 @@
                   </fo:inline-container>
                </fo:block>
             </fo:block-container>
-            <!-- ZONE COURRIER -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE COURRIER --><fo:block-container absolute-position="absolute"
                                 left="1mm"
                                 top="98mm"
                                 width="188mm"
@@ -334,8 +325,7 @@
                         ${BddServiceProducteurSignataireNom}
                     </fo:block>
             </fo:block-container>
-            <!-- ZONE NOTE DE BAS DE PAGE -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE NOTE DE BAS DE PAGE --><fo:block-container absolute-position="absolute"
                                 left="1mm"
                                 top="250mm"
                                 width="188mm"
@@ -348,8 +338,7 @@
          </fo:block>
          <fo:block page-break-after="always">
             <fo:block/>
-            <!-- ZONE NOTICE -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE NOTICE --><fo:block-container absolute-position="absolute"
                                 left="20mm"
                                 top="20mm"
                                 width="150mm"
@@ -399,8 +388,7 @@
                         réponse aux enquêtes entreprises de la Statistique publique.
                     </fo:block>
             </fo:block-container>
-            <!-- ZONE CADRE LEGAL -->
-            <fo:block-container absolute-position="absolute"
+            <!-- ZONE CADRE LEGAL --><fo:block-container absolute-position="absolute"
                                 left="5mm"
                                 top="210mm"
                                 width="180mm"
@@ -781,7 +769,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 1. Est-ce que votre activité principale est bien ${LIB_APE_LANC} (${APE_LANC}) ? </fo:block>
+                   keep-together.within-column="always">➡ 1. Est-ce que votre activité principale (APE) est bien ${LIB_APE_LANC} (${APE_LANC}) ? </fo:block>
          <fo:block id="APE_LANC_OK" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -879,7 +867,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 3. Est-ce que votre catégorie juridique est bien ${LIB_CJ_LANC} (${CJ_LANC}) ? </fo:block>
+                   keep-together.within-column="always">➡ 3. Est-ce que votre catégorie juridique (CJ) est bien ${LIB_CJ_LANC} (${CJ_LANC}) ? </fo:block>
          <fo:block id="CJ_LANC_OK" page-break-inside="avoid">
             <fo:list-block>
                <fo:list-item>
@@ -1116,6 +1104,15 @@
                    page-break-inside="avoid"
                    keep-with-next="always"
                    keep-together.within-column="always">➡ 1. Quelle est la date de clôture de l'exercice qui se réfère à l'année ${ANNEE_EXERCICE} ? </fo:block>
+         <fo:block font-size="10pt"
+                   font-weight="normal"
+                   font-style="italic"
+                   margin-bottom="3pt"
+                   margin-left="3pt"
+                   text-align="justify"
+                   page-break-inside="avoid"
+                   keep-with-next="always"
+                   keep-together.within-column="always">L'exercice demandé concerne l'année ${ANNEE_EXERCICE}. Merci de renseigner une date postérieure au 1er juillet $!{ANNEE_EXERCICE_MOINS_UN} et antérieure au 30 juin ${ANNEE_EXERCICE} </fo:block>
          <fo:block id="DATE_CLOTURE_EXERCICE" page-break-inside="avoid">
             <fo:block color="black"
                       font-weight="normal"
@@ -1494,7 +1491,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">Si vous déclarez en euros, la sommes des CA ventilés doit être égale au CA total. Sinon, le total doit être égal à 100 %.</fo:block>
+                   keep-together.within-column="always">Si vous déclarez en euros, la somme des CA ventilés doit être égale au CA total. Sinon, le total doit être égal à 100 %.</fo:block>
          <fo:block page-break-inside="avoid"
                    id="REPARTITION_CA-1"
                    page-break-after="always">
@@ -1523,8 +1520,7 @@
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
-                                  padding="1mm"
-                                  text-align="justify">Activité</fo:block>
+                                  padding="1mm">Activité</fo:block>
                      </fo:table-cell>
                      <fo:table-cell border-color="black"
                                     border-style="solid"
@@ -1537,8 +1533,7 @@
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
-                                  padding="1mm"
-                                  text-align="justify">Code activité</fo:block>
+                                  padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
                      <fo:table-cell border-color="black"
                                     border-style="solid"
@@ -1551,8 +1546,7 @@
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
-                                  padding="1mm"
-                                  text-align="justify">% ou montant en euros</fo:block>
+                                  padding="1mm">% ou montant en euros</fo:block>
                      </fo:table-cell>
                   </fo:table-row>
                </fo:table-header>
@@ -1588,7 +1582,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -1635,7 +1628,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -1682,7 +1674,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -1729,7 +1720,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -1776,7 +1766,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -1823,7 +1812,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -1870,7 +1858,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -1917,7 +1904,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -1964,7 +1950,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2011,7 +1996,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2057,8 +2041,7 @@
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
-                                  padding="1mm"
-                                  text-align="justify">Activité</fo:block>
+                                  padding="1mm">Activité</fo:block>
                      </fo:table-cell>
                      <fo:table-cell border-color="black"
                                     border-style="solid"
@@ -2071,8 +2054,7 @@
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
-                                  padding="1mm"
-                                  text-align="justify">Code activité</fo:block>
+                                  padding="1mm">Code activité</fo:block>
                      </fo:table-cell>
                      <fo:table-cell border-color="black"
                                     border-style="solid"
@@ -2085,8 +2067,7 @@
                         <fo:block color="black"
                                   font-weight="normal"
                                   font-size="10pt"
-                                  padding="1mm"
-                                  text-align="justify">% ou montant en euros</fo:block>
+                                  padding="1mm">% ou montant en euros</fo:block>
                      </fo:table-cell>
                   </fo:table-row>
                </fo:table-header>
@@ -2122,7 +2103,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2169,7 +2149,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2216,7 +2195,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2263,7 +2241,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2310,7 +2287,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2357,7 +2333,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2404,7 +2379,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2451,7 +2425,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2498,7 +2471,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2545,7 +2517,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2592,7 +2563,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2639,7 +2609,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2686,7 +2655,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2733,7 +2701,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2780,7 +2747,6 @@
                                         font-weight="normal"
                                         font-size="10pt"
                                         padding="1mm"
-                                        text-align="justify"
                                         padding-bottom="0mm"
                                         padding-top="0mm">
                                  <fo:inline-container width="27mm">
@@ -2828,7 +2794,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always"> Il s’agit des rémunérations brutes versées avant déduction de la part salariale des cotisations sociales et de la contribution sociale généralisée (comptes 641 et 644 du plan comptable général).</fo:block>
+                   keep-together.within-column="always">Il s’agit des rémunérations brutes versées avant déduction de la part salariale des cotisations sociales, de la contribution sociale généralisée et de la contribution au remboursement de la dette sociale (comptes 641 et 644 du plan comptable général).</fo:block>
          <fo:block id="SALAIRES_TRAITEMENTS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -2946,7 +2912,7 @@
                    text-align="left"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">VI - Acquisitions et cessions</fo:block>
+                   keep-together.within-column="always">VI - Acquisitions et cessions au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
          <fo:block background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
@@ -3184,7 +3150,7 @@
                    text-align="left"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">VII - Dépenses professionnelles et montant des stocks</fo:block>
+                   keep-together.within-column="always">VII - Dépenses professionnelles et montant des stocks au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
          <fo:block background-color="#CCCCCC"
                    color="black"
                    font-weight="bold"
@@ -3318,7 +3284,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always"> Ne comprends pas les impôts sur le résultat mais uniquement le compte 63 du plan comptable général.</fo:block>
+                   keep-together.within-column="always">Ne comprend pas les impôts sur le résultat mais uniquement le compte 63 du plan comptable général.</fo:block>
          <fo:block id="IMPOTS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
@@ -3431,9 +3397,9 @@
                          text-align="justify"
                          padding-bottom="0mm"
                          padding-top="0mm">
-                  <fo:inline-container width="40mm">
+                  <fo:inline-container width="28mm">
                      <fo:block-container height="8mm"
-                                         width="40mm"
+                                         width="28mm"
                                          border-color="black"
                                          border-style="solid">
                         <fo:block>
@@ -3463,9 +3429,9 @@
                          text-align="justify"
                          padding-bottom="0mm"
                          padding-top="0mm">
-                  <fo:inline-container width="40mm">
+                  <fo:inline-container width="32mm">
                      <fo:block-container height="8mm"
-                                         width="40mm"
+                                         width="32mm"
                                          border-color="black"
                                          border-style="solid">
                         <fo:block>
@@ -3489,7 +3455,7 @@
                    text-align="left"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">VIII - Exportations / importations</fo:block>
+                   keep-together.within-column="always">VIII - Exportations / importations au cours de l'exercice ${ANNEE_EXERCICE} </fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -3584,7 +3550,7 @@
                    text-align="left"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">IX - Compte financier</fo:block>
+                   keep-together.within-column="always">IX - Compte financier de l'exercice ${ANNEE_EXERCICE} </fo:block>
          <fo:block color="black"
                    font-weight="bold"
                    font-size="10pt"
@@ -3625,7 +3591,7 @@
                    text-align="justify"
                    page-break-inside="avoid"
                    keep-with-next="always"
-                   keep-together.within-column="always">➡ 2. Quel est le montant des charges et intérêts assimilés perçus ?</fo:block>
+                   keep-together.within-column="always">➡ 2. Quel est le montant des intérêts et produits assimilés perçus ?</fo:block>
          <fo:block id="INTERETS_PERCUS" page-break-inside="avoid">
             <fo:block>
                <fo:block color="black"
