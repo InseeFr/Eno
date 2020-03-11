@@ -1,7 +1,7 @@
 ﻿<project basedir="." name="enoFr">
     <property name="out-extension" value="xhtml"/>
     <property name="out-folder" value="xforms"/>
-    <available file="${questionnaires.home}/${survey-name}/xforms-specific-treatment.xsl" property="specific-treatment.present"/>
+    <available file="${questionnaires-folder}/${survey-name}/xforms-specific-treatment.xsl" property="specific-treatment.present"/>
 
     <!-- **************************** frPostProcessing ************************************************************************** -->
     <target name="frPostProcessing">
@@ -12,28 +12,30 @@
                     style="${xslt.home}/post-processing/fr/browsing.xsl" force="true" classpath="${saxon.jar}">
                     <param name="labels-folder" expression="${lang-folder}/fr"/>
                 </xslt>
-                <switch value="specific-treatment.present">
-                    <case value="true()">
+                <if>
+                    <available file="${questionnaires-folder}/${survey-name}/xforms-specific-treatment.xsl"/>
+                    <then>
                         <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-navigation.xhtml"
                             out="${target-folder}/${survey-name}/${form-name}/form/form.xhtml"
                             style="${questionnaires-folder}/${survey-name}/xforms-specific-treatment.xsl" force="true" classpath="${saxon.jar}">
-                            <param name="fichier-proprietes" expression="${root-folder}/${Properties.InFormat}2fr.xml"/>
+                            <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
                         </xslt>
-                    </case>
-                    <default>
+                    </then>
+                    <else>
                         <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-navigation.xhtml"
                             out="${target-folder}/${survey-name}/${form-name}/form/form.xhtml"
                             style="${xslt.home}/post-processing/fr/fr-specific-treatment.xsl" force="true" classpath="${saxon.jar}">
-                            <param name="fichier-proprietes" expression="${root-folder}/${Properties.InFormat}2fr.xml"/>
+                            <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
                         </xslt>
-                    </default>
-                </switch>
+                    </else>
+                </if>
             </case>
             <default>
                 <!-- On rajoute les questions spécifiques Coltrane -->
                 <xslt in="${postprocessing-input-file}"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-questions-coltrane.xhtml"
                     style="${xslt.home}/post-processing/fr/insert-generic-questions.xsl" force="true" classpath="${saxon.jar}">
+                    <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
                     <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
                 </xslt>
                 
@@ -55,10 +57,9 @@
                 <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-modele-coltrane.xhtml"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-patron.xhtml"
                     style="${xslt.home}/post-processing/fr/edit-patron.xsl" force="true" classpath="${saxon.jar}">
-                    <param name="fichier-proprietes" expression="${root-folder}/${Properties.InFormat}2fr.xml"/>
-                    <param name="fichier-parametrage" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>
-                    <param name="campagne" expression="${survey-name}"/>
-                    <param name="modele" expression="${form-name}"/>
+                    <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
+                    <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+                    <param name="metadata-file" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>
                 </xslt>
                 
                 <!-- On rajoute la partie sur l'identification -->
@@ -70,51 +71,52 @@
                 <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-identification.xhtml"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-accueil.xhtml"
                     style="${xslt.home}/post-processing/fr/insert-welcome.xsl" force="true" classpath="${saxon.jar}">
-                    <param name="fichier-parametrage" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>
-                    <param name="fichier-proprietes" expression="${root-folder}/${Properties.InFormat}2fr.xml"/>
+                    <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
+                    <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+                    <param name="metadata-file" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>
                 </xslt>
                 
                 <!-- On surcharge la dernière page par plusieurs pages de fin -->
                 <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-accueil.xhtml"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-fin.xhtml"
                     style="${xslt.home}/post-processing/fr/insert-end.xsl" force="true" classpath="${saxon.jar}">
-                    <param name="fichier-proprietes" expression="${root-folder}/${Properties.InFormat}2fr.xml"/>
-                    <param name="fichier-parametrage" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>
+                    <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
                     <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+                    <param name="metadata-file" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>
                 </xslt>
                 
                 <!-- On applique une verrue liée à chaque campagne -->
-                <switch value="specific-treatment.present">
-                    <case value="true()">
-                        <xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form-fin.xhtml"
-                            out="${root-folder}/target/${survey-name}/${form-name}/form/form-verrue.xhtml"
-                            style="${questionnaires.home}/${survey-name}/xforms-specific-treatment.xsl" force="true" classpath="${saxon.jar}">
-                            <param name="fichier-proprietes" expression="${root-folder}/${Properties.InFormat}2fr.xml"/>
+                <if>
+                    <available file="${questionnaires-folder}/${survey-name}/xforms-specific-treatment.xsl"/>
+                    <then>
+                        <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-fin.xhtml"
+                            out="${target-folder}/${survey-name}/${form-name}/form/form-verrue.xhtml"
+                            style="${questionnaires-folder}/${survey-name}/xforms-specific-treatment.xsl" force="true" classpath="${saxon.jar}">
+                            <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
                         </xslt>
-                    </case>
-                    <default>
-                        <copy file="${root-folder}/target/${survey-name}/${form-name}/form/form-fin.xhtml"
-                            tofile="${root-folder}/target/${survey-name}/${form-name}/form/form-verrue.xhtml"/>
-                    </default>
-                </switch>
-                
-                
+                    </then>
+                    <else>
+                        <copy file="${target-folder}/${survey-name}/${form-name}/form/form-fin.xhtml"
+                            tofile="${target-folder}/${survey-name}/${form-name}/form/form-verrue.xhtml"/>
+                    </else>
+                </if>
+
                 <!-- On fait passer une xslt pour gommer l'effet du nouvel eno sur le form produit -->
-                <xslt in="${root-folder}/target/${survey-name}/${form-name}/form/form-verrue.xhtml"
-                    out="${root-folder}/target/${survey-name}/${form-name}/form/form.xhtml"
+                <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-verrue.xhtml"
+                    out="${target-folder}/${survey-name}/${form-name}/form/form.xhtml"
                     style="${xslt.home}/post-processing/fr/fix-adherence.xsl" force="true" classpath="${saxon.jar}"/>
                 
                 
                 <!-- Si l'on souhaite supprimer les différentes étapes -->
-                <delete file="${root-folder}/target/${survey-name}/${form-name}/form/form-basique.xhtml"/>
-                <delete file="${root-folder}/target/${survey-name}/${form-name}/form/form-questions-coltrane.xhtml"/>
-                <delete file="${root-folder}/target/${survey-name}/${form-name}/form/form-navigation.xhtml"/>
-                <delete file="${root-folder}/target/${survey-name}/${form-name}/form/form-modele-coltrane.xhtml"/>
-                <delete file="${root-folder}/target/${survey-name}/${form-name}/form/form-patron.xhtml"/>
-                <delete file="${root-folder}/target/${survey-name}/${form-name}/form/form-identification.xhtml"/>
-                <delete file="${root-folder}/target/${survey-name}/${form-name}/form/form-accueil.xhtml"/>
-                <delete file="${root-folder}/target/${survey-name}/${form-name}/form/form-fin.xhtml"/>
-                <delete file="${root-folder}/target/${survey-name}/${form-name}/form/form-verrue.xhtml"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/form/form-basique.xhtml"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/form/form-questions-coltrane.xhtml"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/form/form-navigation.xhtml"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/form/form-modele-coltrane.xhtml"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/form/form-patron.xhtml"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/form/form-identification.xhtml"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/form/form-accueil.xhtml"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/form/form-fin.xhtml"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/form/form-verrue.xhtml"/>
                 
             </default>
         </switch>
