@@ -110,7 +110,7 @@
                 <xsl:value-of select="$parameters//pdf-parameters/Table/Row/DefaultSize"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//pdf-parameters/Table/Row/DefaultSize"/>
+                <xsl:value-of select="$properties//Table/Row/DefaultSize"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
