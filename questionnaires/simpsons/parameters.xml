@@ -6,7 +6,7 @@
     <Parameters>
         <StudyUnit>default</StudyUnit>
         
-        <Campagne>test</Campagne>
+        <Campagne>simpsons</Campagne>
         
         <Languages>
             <Language>fr</Language>

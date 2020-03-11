@@ -31,8 +31,8 @@
         </BeginQuestion>
         
         <EndQuestion>
-            <ResponseTimeQuestion>true</ResponseTimeQuestion>
-            <CommentQuestion>true</CommentQuestion>
+            <ResponseTimeQuestion>false</ResponseTimeQuestion>
+            <CommentQuestion>false</CommentQuestion>
         </EndQuestion>
         
         <pdf-parameters>
