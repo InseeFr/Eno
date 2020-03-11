@@ -3248,7 +3248,6 @@
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm"
-                                  text-align="justify"
                                   margin-left="1mm">- Pour vous occuper de vos enfants <fo:inline font-style="italic">(hors congés maternité ou paternité)</fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -3267,8 +3266,7 @@
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
-                                         padding="1mm"
-                                         text-align="justify">Oui</fo:inline>
+                                         padding="1mm">Oui</fo:inline>
                            </fo:inline>
                            <fo:inline>
                               <fo:inline>
@@ -3277,8 +3275,7 @@
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
-                                         padding="1mm"
-                                         text-align="justify">Non</fo:inline>
+                                         padding="1mm">Non</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -3297,7 +3294,6 @@
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm"
-                                  text-align="justify"
                                   margin-left="1mm">- Pour travailler hors de la fonction publique</fo:block>
                      </fo:table-cell>
                      <fo:table-cell text-align="left"
@@ -3315,8 +3311,7 @@
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
-                                         padding="1mm"
-                                         text-align="justify">Oui</fo:inline>
+                                         padding="1mm">Oui</fo:inline>
                            </fo:inline>
                            <fo:inline>
                               <fo:inline>
@@ -3325,8 +3320,7 @@
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
-                                         padding="1mm"
-                                         text-align="justify">Non</fo:inline>
+                                         padding="1mm">Non</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -3345,7 +3339,6 @@
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm"
-                                  text-align="justify"
                                   margin-left="1mm">- Pour une autre raison (hors formations)</fo:block>
                      </fo:table-cell>
                      <fo:table-cell text-align="left"
@@ -3363,8 +3356,7 @@
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
-                                         padding="1mm"
-                                         text-align="justify">Oui</fo:inline>
+                                         padding="1mm">Oui</fo:inline>
                            </fo:inline>
                            <fo:inline>
                               <fo:inline>
@@ -3373,8 +3365,7 @@
                               <fo:inline color="black"
                                          font-weight="normal"
                                          font-size="10pt"
-                                         padding="1mm"
-                                         text-align="justify">Non</fo:inline>
+                                         padding="1mm">Non</fo:inline>
                            </fo:inline>
                         </fo:block>
                      </fo:table-cell>
@@ -5274,7 +5265,6 @@
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm"
-                                  text-align="justify"
                                   margin-left="1mm">Votre père</fo:block>
                      </fo:table-cell>
                      <fo:table-cell text-align="left"
@@ -5293,8 +5283,7 @@
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
-                                            padding="1mm"
-                                            text-align="justify">Oui</fo:inline>
+                                            padding="1mm">Oui</fo:inline>
                               </fo:inline>
                            </fo:block>
                            <fo:block>
@@ -5305,8 +5294,7 @@
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
-                                            padding="1mm"
-                                            text-align="justify">Non</fo:inline>
+                                            padding="1mm">Non</fo:inline>
                               </fo:inline>
                            </fo:block>
                            <fo:block>
@@ -5317,8 +5305,7 @@
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
-                                            padding="1mm"
-                                            text-align="justify">Ne sais pas</fo:inline>
+                                            padding="1mm">Ne sais pas</fo:inline>
                               </fo:inline>
                            </fo:block>
                         </fo:block>
@@ -5339,7 +5326,6 @@
                                   font-weight="normal"
                                   font-size="10pt"
                                   padding="1mm"
-                                  text-align="justify"
                                   margin-left="1mm">Votre mère</fo:block>
                      </fo:table-cell>
                      <fo:table-cell text-align="left"
@@ -5358,8 +5344,7 @@
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
-                                            padding="1mm"
-                                            text-align="justify">Oui</fo:inline>
+                                            padding="1mm">Oui</fo:inline>
                               </fo:inline>
                            </fo:block>
                            <fo:block>
@@ -5370,8 +5355,7 @@
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
-                                            padding="1mm"
-                                            text-align="justify">Non</fo:inline>
+                                            padding="1mm">Non</fo:inline>
                               </fo:inline>
                            </fo:block>
                            <fo:block>
@@ -5382,8 +5366,7 @@
                                  <fo:inline color="black"
                                             font-weight="normal"
                                             font-size="10pt"
-                                            padding="1mm"
-                                            text-align="justify">Ne sais pas</fo:inline>
+                                            padding="1mm">Ne sais pas</fo:inline>
                               </fo:inline>
                            </fo:block>
                         </fo:block>

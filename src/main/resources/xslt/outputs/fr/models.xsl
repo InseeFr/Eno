@@ -236,9 +236,11 @@
                 </xsl:apply-templates>
             </xsl:element>
         </xsl:element>
-        <xsl:element name="{$name}-Count">
-            <xsl:value-of select="enofr:get-minimum-lines($source-context)"/>
-        </xsl:element>
+        <xsl:if test="enofr:get-linked-containers($source-context)[1] = enofr:get-container-name($source-context)">
+            <xsl:element name="{$name}-Count">
+                <xsl:value-of select="enofr:get-minimum-lines($source-context)"/>
+            </xsl:element>
+        </xsl:if>
     </xsl:template>
 
     <xd:doc>
@@ -258,6 +260,12 @@
                 </xsl:apply-templates>
             </xsl:element>
         </xsl:element>
+        <xsl:if test="enofr:get-linked-containers($source-context)[1] = enofr:get-container-name($source-context)">
+            <xsl:element name="{$name}-Count">
+                <xsl:value-of select="enofr:get-minimum-occurrences($source-context)"/>
+            </xsl:element>
+            <xsl:element name="{enofr:get-name($source-context)}-AddOccurrence"/>
+        </xsl:if>
     </xsl:template>
 
     <xd:doc>
@@ -366,6 +374,18 @@
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
+            <xsl:if test="$type != '' and (self::CalculatedVariable or self::ResponseElement)">
+                <xsl:attribute name="type">
+                    <xsl:choose>
+                        <xsl:when test="$type = 'text' or $type = 'code' or $type = 'boolean'">
+                            <xsl:value-of select="'xs:string'"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat('xs:',$type)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:if test="$required">
                 <xsl:attribute name="required" select="'true()'"/>
             </xsl:if>
@@ -433,7 +453,7 @@
                                 </xsl:for-each>
                             </xsl:variable>
                             <xsl:call-template name="replaceVariablesInFormula">
-                                <xsl:with-param name="formula" select="normalize-space($initial-readonly-ancestors)"/>
+                                <xsl:with-param name="formula" select="concat(normalize-space($initial-readonly-ancestors),' ')"/>
                                 <xsl:with-param name="variables" as="node()">
                                     <Variables>
                                         <xsl:for-each select="enofr:get-readonly-ancestors-variables($source-context)">
@@ -483,7 +503,6 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="required" select="enofr:is-required($source-context)" as="xs:boolean"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
-        <xsl:variable name="type" select="enofr:get-type($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
 
@@ -548,7 +567,6 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:variable name="required" select="enofr:is-required($source-context)" as="xs:boolean"/>
         <xsl:variable name="relevant" select="enofr:get-relevant($source-context)"/>
-        <xsl:variable name="type" select="enofr:get-type($source-context)"/>
         <xsl:variable name="readonly" select="enofr:get-readonly($source-context)"/>
         <xsl:variable name="format-constraint" select="enofr:get-format-constraint($source-context)"/>
         <xsl:variable name="number-of-decimals" select="enofr:get-number-of-decimals($source-context)"/>
@@ -939,7 +957,7 @@
             <xd:p>It builds the bind then the process goes on within the created bind.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Bind//RowLoop | Bind//QuestionLoop" mode="model">
+    <xsl:template match="Bind//RowLoop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
 
@@ -954,6 +972,57 @@
                 <xsl:with-param name="instance-ancestor" select="if ($instance-ancestor='') then $business-name else concat($instance-ancestor,' ',$business-name)" tunnel="yes"/>
             </xsl:apply-templates>
         </xf:bind>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template for Bind for the following drivers.</xd:p>
+            <xd:p>It uses the nodeset attribute instead of the ref attribute.</xd:p>
+            <xd:p>It builds the bind then the process goes on within the created bind.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Bind//QuestionLoop" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="instance-ancestor" tunnel="yes"/>
+        
+        <xsl:variable name="name" select="enofr:get-name($source-context)"/>
+        <xsl:variable name="business-name" select="enofr:get-business-name($source-context)"/>
+        <xsl:variable name="container" select="enofr:get-container-name($source-context)"/>
+        <xsl:variable name="instance-ancestor-label">
+            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
+            <xsl:for-each select="tokenize($instance-ancestor,' ')">
+                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
+            </xsl:for-each>
+        </xsl:variable>
+        
+        <xf:bind id="{$container}-bind" name="{$container}" nodeset="{$container}/{$name}">
+            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
+                <xsl:with-param name="instance-ancestor" select="if ($instance-ancestor='') then $business-name else concat($instance-ancestor,' ',$business-name)" tunnel="yes"/>
+            </xsl:apply-templates>
+        </xf:bind>
+        <xsl:if test="enofr:get-linked-containers($source-context)[1] = enofr:get-container-name($source-context)">
+            <xf:bind id="{$business-name}-add-occurrence-bind" ref="{$business-name}-AddOccurrence">
+                <xsl:if test="enofr:get-maximum-occurrences($source-context)!=''">
+                    <xsl:variable name="maximum">
+                        <xsl:call-template name="replaceVariablesInFormula">
+                            <xsl:with-param name="formula" select="enofr:get-maximum-occurrences($source-context)"/>
+                            <xsl:with-param name="variables" as="node()">
+                                <Variables>
+                                    <xsl:for-each select="tokenize(enofr:get-maximum-occurrences-variables($source-context),' ')">
+                                        <xsl:sort select="string-length(.)" order="descending"/>
+                                        <Variable><xsl:value-of select="."/></Variable>
+                                    </xsl:for-each>
+                                </Variables>
+                            </xsl:with-param>
+                            <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                        </xsl:call-template>
+                    </xsl:variable>
+                    <xsl:attribute name="relevant" select="concat('count(',$instance-ancestor-label,$container,'/',$business-name,') &lt; ',$maximum)"/>
+                </xsl:if>
+            </xf:bind>
+        </xsl:if>
     </xsl:template>
 
     <xd:doc>
@@ -1024,9 +1093,6 @@
                     <xsl:choose>
                         <xsl:when test="upper-case($dateduration-format) = 'MM/AAAA' or $dateduration-format='YYYY-MM'">
                             <xsl:value-of select="concat($name,'-layout-Y = ''''')"/>
-                        </xsl:when>
-                        <xsl:when test="$dateduration-format='HH:CH'">
-                            <xsl:value-of select="concat('../',$name,'-layout-H = ''''')"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:for-each select="$layout-list//format">
@@ -1185,6 +1251,9 @@
                     <xsl:element name="xf:constraint">
                         <xsl:attribute name="value">
                             <xsl:choose>
+                                <xsl:when test="$dateduration-format='HH:CH'">
+                                    <xsl:value-of select="concat('if (string(../',$name,') != '''') then (substring(../',$name,',1,1) != '':'') else (../',$name,'='''')')"/>
+                                </xsl:when>
                                 <xsl:when test="$current-driver = 'DurationDomain'">
                                     <xsl:value-of select="concat('if (string(../',$name,') != '''') then ((')"/>
                                     <xsl:if test="$minimum != ''">
@@ -1351,9 +1420,30 @@
             <xd:p>Template for Resource for the drivers QuestionLoop and Rowloop.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="Resource//QuestionLoop | Resource//RowLoop" mode="model">
+    <xsl:template match="Resource//RowLoop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
 
+        <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+            <xsl:with-param name="driver" select="." tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Template for Resource for the drivers QuestionLoop and Rowloop.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="Resource//QuestionLoop" mode="model">
+        <xsl:param name="source-context" as="item()" tunnel="yes"/>
+        <xsl:param name="language" tunnel="yes"/>
+        
+        <xsl:if test="enofr:get-linked-containers($source-context)[1] = enofr:get-container-name($source-context)">
+            <xsl:element name="{enofr:get-name($source-context)}-AddOccurrence">
+                <label>
+                    <xsl:value-of select="enofr:get-label($source-context,$language)"/>
+                </label>
+            </xsl:element>
+        </xsl:if>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
@@ -2148,7 +2238,7 @@
                             nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
                             origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
                         <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@id"
-                            value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>                        
+                            value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
                     </xsl:for-each>
                 </xf:action>
             </xf:trigger>
@@ -2298,6 +2388,23 @@
                 <xsl:with-param name="instance-ancestor" select="if ($instance-ancestor='') then $business-name else concat($instance-ancestor,' ',$business-name)" tunnel="yes"/>
             </xsl:apply-templates>
         </xf:repeat>
+        
+        <xsl:if test="enofr:get-linked-containers($source-context)[1] = enofr:get-container-name($source-context)">
+            <xf:trigger id="{$loop-name}-add-occurrence" bind="{$loop-name}-add-occurrence-bind">
+                <xf:label ref="$form-resources/{$loop-name}-AddOccurrence/label"/>
+                <xf:action ev:event="DOMActivate">
+                    <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}-Count"
+                        value="number({$instance-ancestor-label}{$loop-name}-Count) +1"/>
+                    <xsl:for-each select="enofr:get-linked-containers($source-context)">
+                        <xf:insert context="{$instance-ancestor-label}{.}"
+                            nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
+                            origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
+                        <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@id"
+                            value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                    </xsl:for-each>
+                </xf:action>
+            </xf:trigger>
+        </xsl:if>
     </xsl:template>
 
     <xd:doc>
@@ -2506,7 +2613,25 @@
                     <format id="" unit="" minimum="{$minimum}" maximum="{$maximum}" variable="{$variable-name}"/>
                 </xsl:when>
                 <xsl:when test="$format='HH:CH'">
-                    <format id="H" unit="Hour" minimum="20" maximum="59" variable="{$variable-name}-layout-H"/>
+                    <format id="H" unit="Hour">
+                        <xsl:choose>
+                            <xsl:when test="$minimum != ''">
+                                <xsl:attribute name="minimum" select="substring-before($minimum,':')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="minimum" select="'20'"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:choose>
+                            <xsl:when test="$maximum != ''">
+                                <xsl:attribute name="maximum" select="substring-before($maximum,':')"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="maximum" select="'59'"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:attribute name="variable" select="concat($variable-name,'-layout-H')"/>
+                    </format>
                     <format id="CH" unit="Hundredth" minimum="0" maximum="99" variable="{$variable-name}-layout-CH"/>
                 </xsl:when>
                 <xsl:when test="$driver = 'DateTimeDomain'">
@@ -2913,6 +3038,7 @@
                             <xsl:value-of select="concat('string($',$conditioning-variable,')')"/>
                         </xsl:when>
                         <xsl:when test="enofr:get-conditioning-variable-formula($source-context,$conditioning-variable) != ''">
+                            <xsl:value-of select="'string('"/>
                             <xsl:call-template name="replaceVariablesInFormula">
                                 <xsl:with-param name="formula" select="normalize-space(enofr:get-conditioning-variable-formula($source-context,$conditioning-variable))"/>
                                 <xsl:with-param name="variables" as="node()">
@@ -2925,16 +3051,24 @@
                                 </xsl:with-param>
                                 <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                             </xsl:call-template>
+                            <xsl:value-of select="')'"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
                             <xsl:variable name="variable-ancestors" select="enofr:get-variable-business-ancestors($source-context,$conditioning-variable)"/>
+                            <xsl:variable name="variable-type" select="enofr:get-variable-representation($source-context,$conditioning-variable)"/>
+                            <xsl:if test="$variable-type = 'integer' or $variable-type = 'decimal' or $variable-type = 'date' or $variable-type = 'duration'">
+                                <xsl:value-of select="'string('"/>
+                            </xsl:if>
+                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
                             <xsl:if test="$variable-ancestors != ''">
                                 <xsl:for-each select="tokenize($variable-ancestors,' ')">
                                     <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
                                 </xsl:for-each>
                             </xsl:if>
                             <xsl:value-of select="enofr:get-variable-business-name($source-context,$conditioning-variable)"/>
+                            <xsl:if test="$variable-type = 'integer' or $variable-type = 'decimal' or $variable-type = 'date' or $variable-type = 'duration'">
+                                <xsl:value-of select="')'"/>
+                            </xsl:if>
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:value-of select="')'"/>
@@ -2965,21 +3099,19 @@
         <xsl:choose>
             <xsl:when test="$variables/Variable">
                 <xsl:variable name="current-variable" select="$variables/Variable[1]"/>
-                <xsl:variable name="variable-business-name">
+                <xsl:variable name="variable-ancestry">
                     <xsl:variable name="variable-ancestors" select="enofr:get-variable-business-ancestors($source-context,$current-variable)"/>
-                    <xsl:variable name="business-name" select="enofr:get-variable-business-name($source-context,$current-variable)"/>
-                    
                     <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
                     <xsl:for-each select="tokenize($variable-ancestors,' ')">
                         <xsl:if test=". = tokenize($instance-ancestor,' ')">
                             <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
                         </xsl:if>
                     </xsl:for-each>
-                    <xsl:value-of select="$business-name"/>
                 </xsl:variable>
+                <xsl:variable name="variable-business-name" select="enofr:get-variable-business-name($source-context,$current-variable)"/>
                 <xsl:variable name="variable-representation" select="enofr:get-variable-representation($source-context,$current-variable)"/>
                 <xsl:choose>
-                    <xsl:when test="$variable-representation = 'number' and contains($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
+                    <xsl:when test="($variable-representation = 'integer' or $variable-representation = 'decimal') and contains($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
                         <!-- former default formula for variableId : simplify before analyzing again -->
                         <xsl:analyze-string select="$formula" regex="^(.*)number\(if \({$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}=''\) then '0' else {$conditioning-variable-begin}{$current-variable}{$conditioning-variable-end}\)(.*)$">
                             <xsl:matching-substring>
@@ -2999,7 +3131,7 @@
                                             <xsl:with-param name="variables" as="node()" select="$variables"/>
                                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                                         </xsl:call-template>
-                                        <xsl:value-of select="concat(regex-group(2),'(',$variable-business-name,'[string() castable as xs:decimal]')"/>
+                                        <xsl:value-of select="concat(regex-group(2),'(',$variable-ancestry,'xs:',$variable-representation,'(',$variable-business-name,'[string() castable as xs:decimal])')"/>
                                         <xsl:call-template name="replaceVariablesInFormula">
                                             <xsl:with-param name="formula" select="regex-group(3)"/>
                                             <xsl:with-param name="variables" as="node()" select="$variables"/>
@@ -3032,7 +3164,7 @@
                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                                                 </xsl:call-template>
-                                                <xsl:value-of select="concat($variable-business-name,'/string()',regex-group(2),'=''''')"/>
+                                                <xsl:value-of select="concat($variable-ancestry,$variable-business-name,'/string()',regex-group(2),'=''''')"/>
                                                 <xsl:call-template name="replaceVariablesInFormula">
                                                     <xsl:with-param name="formula" select="regex-group(3)"/>
                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
@@ -3049,7 +3181,7 @@
                                                             <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                             <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                                                         </xsl:call-template>
-                                                        <xsl:value-of select="concat($variable-business-name,'/string()',regex-group(2),'=''''')"/>
+                                                        <xsl:value-of select="concat($variable-ancestry,$variable-business-name,'/string()',regex-group(2),'=''''')"/>
                                                         <xsl:call-template name="replaceVariablesInFormula">
                                                             <xsl:with-param name="formula" select="regex-group(3)"/>
                                                             <xsl:with-param name="variables" as="node()" select="$variables"/>
@@ -3067,11 +3199,11 @@
                                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
                                                                     <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
                                                                 </xsl:call-template>
-                                                                <xsl:value-of select="concat('number(if (',$variable-business-name,'/string()='''') then ')"/>
+                                                                <xsl:value-of select="concat('xs:',$variable-representation,'(if (',$variable-ancestry,$variable-business-name,'/string()='''') then ')"/>
                                                                 <xsl:if test="regex-group(2) = '&gt;'">
                                                                     <xsl:value-of select="'-'"/>
                                                                 </xsl:if>
-                                                                <xsl:value-of select="concat('1 else ',$variable-business-name,')',regex-group(2),'=0')"/>
+                                                                <xsl:value-of select="concat('1 else ',$variable-ancestry,$variable-business-name,')',regex-group(2),'=0')"/>
                                                                 <xsl:call-template name="replaceVariablesInFormula">
                                                                     <xsl:with-param name="formula" select="regex-group(3)"/>
                                                                     <xsl:with-param name="variables" as="node()" select="$variables"/>
@@ -3083,7 +3215,7 @@
                                                                 <!-- e.g.  variableId + variable2Id becomes (if (variableName/string()='') then 0 else variableName) + (if (variableName/string()='' then 0 else variableName) -->
                                                                 <xsl:for-each select="tokenize($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
                                                                     <xsl:if test="not(position()=1)">
-                                                                        <xsl:value-of select="concat('number(if (',$variable-business-name,'/string()='''') then 0 else ',$variable-business-name,')')"/>
+                                                                        <xsl:value-of select="concat('xs:',$variable-representation,'(if (',$variable-ancestry,$variable-business-name,'/string()='''') then 0 else ',$variable-ancestry,$variable-business-name,')')"/>
                                                                     </xsl:if>
                                                                     <xsl:call-template name="replaceVariablesInFormula">
                                                                         <xsl:with-param name="formula" select="current()"/>
@@ -3109,7 +3241,7 @@
                     <xsl:otherwise>
                         <xsl:for-each select="tokenize($formula,concat($conditioning-variable-begin,$current-variable,$conditioning-variable-end))">
                             <xsl:if test="not(position()=1)">
-                                <xsl:value-of select="$variable-business-name"/>
+                                <xsl:value-of select="concat($variable-ancestry,$variable-business-name)"/>
                             </xsl:if>
                             <xsl:call-template name="replaceVariablesInFormula">
                                 <xsl:with-param name="formula" select="current()"/>

@@ -6,7 +6,7 @@
     <Parameters>
         <Context>default</Context>
         
-        <Campagne>test</Campagne>
+        <Campagne>simpsons</Campagne>
         
         <Languages>
             <Language>fr</Language>

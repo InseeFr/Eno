@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="enoPogues" basedir=".">
+
+	<property name="out-extension" value="xml"/>
+
+	<!-- poguesPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
+	<target name="poguesPostProcessing">
+		<copy file="${postprocessing-input-file}"
+			tofile="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}" />
+	</target>
+</project>

@@ -10,7 +10,9 @@
 
     <!-- Mapping file -->
     <xsl:param name="mapping-file"/>
-    <xsl:param name="mapping-file-node" as="node()" required="no"/>
+    <xsl:param name="mapping-file-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
 
     <xsl:variable name="list">
         <xsl:choose>
@@ -70,21 +72,33 @@
                     <xsl:apply-templates select="node() | @*"/>
                 </Groupe>
             </xsl:when>
-            <xsl:when test="ends-with(name(),'-Container') and starts-with(name() , concat($list//Group/@name,'_'))
-                        and (substring-after(substring-before(name(),'-Container') , concat($list//Group/@name,'_')) castable as xs:integer)">
-                <Groupe idGroupe="{substring-before(name(),'-Container')}">
-                    <xsl:apply-templates select="node() | @*"/>
-                </Groupe>
-            </xsl:when>
             <xsl:when test="name()='CurrentLoopElement' and (ends-with(@loop-name,'-Container'))">
                 <CurrentLoopElement loop-name="{substring-before(@loop-name,'-Container')}">
                     <xsl:apply-templates select="node()"/>
                 </CurrentLoopElement>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy>
-                    <xsl:apply-templates select="node() | @*"/>
-                </xsl:copy>
+                <xsl:variable name="group-id">
+                    <xsl:analyze-string select="name()" regex="(.*)_\d+-Container">
+                        <xsl:matching-substring>
+                            <xsl:if test="regex-group(1) = $list//Group/@name">
+                                    <xsl:value-of select="substring-before(.,'-Container')"/>
+                            </xsl:if>
+                        </xsl:matching-substring>
+                    </xsl:analyze-string>
+                </xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="$group-id != ''">
+                        <Groupe idGroupe="{$group-id}">
+                            <xsl:apply-templates select="node() | @*"/>
+                        </Groupe>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:copy>
+                            <xsl:apply-templates select="node() | @*"/>
+                        </xsl:copy>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -196,6 +210,28 @@
                                     </xsl:call-template>
                                 </xsl:for-each>
                             </xsl:when>
+                            <xsl:when test="contains($text,concat('/xs:integer(',$current-variable))">
+                                <xsl:for-each select="tokenize($text,concat('/xs:integer\(',$current-variable))">
+                                    <xsl:if test="not(position()=1)">
+                                        <xsl:value-of select="concat('/xs:integer(Variable[@idVariable=''',$current-variable,''']')"/>
+                                    </xsl:if>
+                                    <xsl:call-template name="replace-element">
+                                        <xsl:with-param name="position" select="$position"/>
+                                        <xsl:with-param name="text" select="current()"/>
+                                    </xsl:call-template>
+                                </xsl:for-each>
+                            </xsl:when>
+                            <xsl:when test="contains($text,concat('/xs:decimal(',$current-variable))">
+                                <xsl:for-each select="tokenize($text,concat('/xs:decimal\(',$current-variable))">
+                                    <xsl:if test="not(position()=1)">
+                                        <xsl:value-of select="concat('/xs:decimal(Variable[@idVariable=''',$current-variable,''']')"/>
+                                    </xsl:if>
+                                    <xsl:call-template name="replace-element">
+                                        <xsl:with-param name="position" select="$position"/>
+                                        <xsl:with-param name="text" select="current()"/>
+                                    </xsl:call-template>
+                                </xsl:for-each>
+                            </xsl:when>
                             <xsl:otherwise>
                                 <xsl:for-each select="tokenize($text,$current-variable)">
                                     <xsl:if test="not(position()=1)">
@@ -272,6 +308,17 @@
                                 <xsl:for-each select="tokenize($text,concat('//',$current-group,'\[@id = current\(\)/ancestor::',$current-group,'/@id\]'))">
                                     <xsl:if test="not(position()=1)">
                                         <xsl:value-of select="concat('//Groupe[@typeGroupe=''',$current-group,''' and @idGroupe = current()/ancestor::Groupe[@typeGroupe=''',$current-group,''']/@idGroupe]')"/>
+                                    </xsl:if>
+                                    <xsl:call-template name="replace-element">
+                                        <xsl:with-param name="position" select="$position"/>
+                                        <xsl:with-param name="text" select="current()"/>
+                                    </xsl:call-template>
+                                </xsl:for-each>
+                            </xsl:when>
+                            <xsl:when test="contains($text,concat('//',$current-group,'[@id = current()/ancestor-or-self::',$current-group,'/@id]'))">
+                                <xsl:for-each select="tokenize($text,concat('//',$current-group,'\[@id = current\(\)/ancestor-or-self::',$current-group,'/@id\]'))">
+                                    <xsl:if test="not(position()=1)">
+                                        <xsl:value-of select="concat('//Groupe[@typeGroupe=''',$current-group,''' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe=''',$current-group,''']/@idGroupe]')"/>
                                     </xsl:if>
                                     <xsl:call-template name="replace-element">
                                         <xsl:with-param name="position" select="$position"/>

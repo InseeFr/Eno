@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file contains common properties used by the build-in2out transformation -->
+<Properties>
+    <!-- The name of the survey, conditionning the name of the input file processed. -->
+    <SurveyName>simpsons</SurveyName>
+    
+    <!-- The in-format to be read : ddi / pogues-xml -->
+    <InFormat>pogues-xml</InFormat>
+    
+    <!-- The out-format to be written : fr / pdf / odt / ddi / js / pogues -->
+    <OutFormat>ddi</OutFormat>
+    
+    <!-- (re)Build Eno before generate true / false -->
+    <EnoBuild>true</EnoBuild>
+    
+    <!-- debug mode : true / false -->
+    <Debug>false</Debug>
+
+</Properties>

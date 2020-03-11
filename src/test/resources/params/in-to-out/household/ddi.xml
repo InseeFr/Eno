@@ -27161,6 +27161,9 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">nom_admin_1</r:Content>
             </r:Label>
+            <l:VariableRepresentation>
+               <r:TextRepresentation/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
@@ -27172,6 +27175,9 @@
             <r:Label>
                <r:Content xml:lang="fr-FR">nom_admin_2</r:Content>
             </r:Label>
+            <l:VariableRepresentation>
+               <r:TextRepresentation/>
+            </l:VariableRepresentation>
          </l:Variable>
          <l:Variable>
             <r:Agency>fr.insee</r:Agency>
