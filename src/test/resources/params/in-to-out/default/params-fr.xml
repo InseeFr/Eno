@@ -9,7 +9,7 @@
         <PreProcessing>ddi-titling</PreProcessing>
         
         <PostProcessing>fr-browsing</PostProcessing>
-        <PostProcessing>fr-fix-adherence</PostProcessing>
+        <!--<PostProcessing>fr-fix-adherence</PostProcessing>-->
     </Pipeline>
     
     <Parameters>
