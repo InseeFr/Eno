@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-import fr.insee.eno.generation.DDI2ODTGenerator;
+import fr.insee.eno.generation.DDI2FODTGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.postprocessing.Postprocessor;
@@ -15,7 +15,7 @@ import fr.insee.eno.preprocessing.Preprocessor;
 
 public class DummyTestDDI2ODT {
 	
-	private DDI2ODTGenerator ddi2odtGenerator = new DDI2ODTGenerator();
+	private DDI2FODTGenerator ddi2odtGenerator = new DDI2FODTGenerator();
 
 	@Test
 	public void main() {

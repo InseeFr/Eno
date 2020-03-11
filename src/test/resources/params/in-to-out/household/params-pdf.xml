@@ -2,19 +2,19 @@
     
     <Pipeline>
         <InFormat>ddi</InFormat>
-        <OutFormat>pdf</OutFormat>
+        <OutFormat>fo</OutFormat>
         
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
         <PreProcessing>ddi-titling</PreProcessing>
         
-        <PostProcessing>pdf-mailing</PostProcessing>
-        <PostProcessing>pdf-tableColumn</PostProcessing>
-        <PostProcessing>pdf-insertEndQuestion</PostProcessing>
-        <PostProcessing>pdf-editStructurePages</PostProcessing>
-        <PostProcessing>pdf-specificTreatment</PostProcessing>
-        <PostProcessing>pdf-insertCoverPage</PostProcessing>
-        <PostProcessing>pdf-insertAccompanyingMails</PostProcessing>
+        <PostProcessing>fo-mailing</PostProcessing>
+        <PostProcessing>fo-tableColumn</PostProcessing>
+        <PostProcessing>fo-insertEndQuestion</PostProcessing>
+        <PostProcessing>fo-editStructurePages</PostProcessing>
+        <PostProcessing>fo-specificTreatment</PostProcessing>
+        <PostProcessing>fo-insertCoverPage</PostProcessing>
+        <PostProcessing>fo-insertAccompanyingMails</PostProcessing>
     </Pipeline>
     
     <Parameters>
@@ -32,7 +32,7 @@
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
         
-        <pdf-parameters>
+        <fo-parameters>
             <Format>
                 <Orientation>0</Orientation>
                 <Columns>2</Columns>
@@ -41,11 +41,11 @@
                 <Numeric>optical</Numeric>
             </Capture>
             <AccompanyingMail>relanceCOLEM</AccompanyingMail>            
-        </pdf-parameters>
+        </fo-parameters>
         
-        <js-parameters/>
+        <lunatic-xml-parameters/>
         
-        <odt-parameters/>  
+        <fodt-parameters/>  
         
         <Title>
             <Browsing>template</Browsing>

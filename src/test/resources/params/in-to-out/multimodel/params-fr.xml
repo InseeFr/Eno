@@ -2,14 +2,14 @@
     
     <Pipeline>
         <InFormat>ddi</InFormat>
-        <OutFormat>fr</OutFormat>
+        <OutFormat>xforms</OutFormat>
         
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
         <PreProcessing>ddi-titling</PreProcessing>
         
-        <PostProcessing>fr-browsing</PostProcessing>
-        <PostProcessing>fr-fix-adherence</PostProcessing>
+        <PostProcessing>xforms-browsing</PostProcessing>
+        <PostProcessing>xforms-fix-adherence</PostProcessing>
     </Pipeline>
     
     <Parameters>

@@ -2,7 +2,7 @@
 <ENOParameters>
     <Pipeline>
         <InFormat>ddi</InFormat>
-        <OutFormat>odt</OutFormat>
+        <OutFormat>fodt</OutFormat>
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
         <PreProcessing>ddi-titling</PreProcessing>
@@ -25,15 +25,15 @@
             <ResponseTimeQuestion>false</ResponseTimeQuestion>
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
-        <fr-parameters>
+        <xforms-parameters>
             
             <NumericExample>true</NumericExample>
             <Deblocage>false</Deblocage>
             <Satisfaction>false</Satisfaction>
             <LengthOfLongTable>56</LengthOfLongTable>
             <DecimalSeparator>,</DecimalSeparator>
-        </fr-parameters>
-        <pdf-parameters>
+        </xforms-parameters>
+        <fo-parameters>
             <Format>
                 <Orientation>90</Orientation>
                 <Columns>1</Columns>
@@ -60,11 +60,11 @@
                 <pdf>module</pdf>
             </PageBreakBetween>
             <AccompanyingMail>cnrCOL</AccompanyingMail>            
-        </pdf-parameters>
-        <js-parameters>
+        </fo-parameters>
+        <lunatic-xml-parameters>
             <FilterDescription>false</FilterDescription>
-        </js-parameters>
-        <odt-parameters/>
+        </lunatic-xml-parameters>
+        <fodt-parameters/>
         <Title>
             <Browsing>no-number</Browsing>
             <Sequence>

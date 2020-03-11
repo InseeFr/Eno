@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-import fr.insee.eno.generation.DDI2FRGenerator;
+import fr.insee.eno.generation.DDI2XFORMSGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.postprocessing.Postprocessor;
@@ -15,7 +15,7 @@ import fr.insee.eno.preprocessing.Preprocessor;
 
 public class DummyTestDDI2XForms {
 	
-	private DDI2FRGenerator ddi2frGenerator = new DDI2FRGenerator();
+	private DDI2XFORMSGenerator ddi2frGenerator = new DDI2XFORMSGenerator();
 	
 	@Test
 	public void mainTest() {

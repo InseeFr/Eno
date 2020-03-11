@@ -7,10 +7,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.generation.DDI2FRGenerator;
-import fr.insee.eno.generation.DDI2JSGenerator;
-import fr.insee.eno.generation.DDI2ODTGenerator;
-import fr.insee.eno.generation.DDI2PDFGenerator;
+import fr.insee.eno.generation.DDI2XFORMSGenerator;
+import fr.insee.eno.generation.DDI2LunaticXMLGenerator;
+import fr.insee.eno.generation.DDI2FODTGenerator;
+import fr.insee.eno.generation.DDI2FOGenerator;
 import fr.insee.eno.generation.DDI2PoguesXMLGenerator;
 import fr.insee.eno.generation.Generator;
 import fr.insee.eno.generation.IdentityGenerator;
@@ -23,26 +23,26 @@ import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.postprocessing.ddi.DDIMarkdown2XhtmlPostprocessor;
-import fr.insee.eno.postprocessing.fr.FRBrowsingPostprocessor;
-import fr.insee.eno.postprocessing.fr.FREditPatronPostprocessor;
-import fr.insee.eno.postprocessing.fr.FRFixAdherencePostprocessor;
-import fr.insee.eno.postprocessing.fr.FRIdentificationPostprocessor;
-import fr.insee.eno.postprocessing.fr.FRInsertEndPostprocessor;
-import fr.insee.eno.postprocessing.fr.FRInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.fr.FRInsertWelcomePostprocessor;
-import fr.insee.eno.postprocessing.fr.FRModeleColtranePostprocessor;
-import fr.insee.eno.postprocessing.fr.FRSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.js.JSExternalizeVariablesPostprocessor;
-import fr.insee.eno.postprocessing.js.JSInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.js.JSSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFInsertAccompanyingMailsPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFMailingPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFTableColumnPostprocessorFake;
+import fr.insee.eno.postprocessing.fo.FOEditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.fo.FOInsertAccompanyingMailsPostprocessor;
+import fr.insee.eno.postprocessing.fo.FOInsertCoverPagePostprocessor;
+import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
+import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
+import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
+import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSEditPatronPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSFixAdherencePostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSIdentificationPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInsertEndPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInsertGenericQuestionsPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInsertWelcomePostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSModeleColtranePostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSSpecificTreatmentPostprocessor;
 import fr.insee.eno.preprocessing.DDI32ToDDI33Preprocessor;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
@@ -59,13 +59,13 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	// In2Out Generator
 	private IdentityGenerator identityGenerator = new IdentityGenerator();
 	
-	private DDI2FRGenerator ddi2frGenerator = new DDI2FRGenerator();
+	private DDI2XFORMSGenerator ddi2frGenerator = new DDI2XFORMSGenerator();
 
-	private DDI2JSGenerator ddi2jsGenerator = new DDI2JSGenerator();
+	private DDI2LunaticXMLGenerator ddi2jsGenerator = new DDI2LunaticXMLGenerator();
 
-	private DDI2ODTGenerator ddi2odtGenerator = new DDI2ODTGenerator();
+	private DDI2FODTGenerator ddi2odtGenerator = new DDI2FODTGenerator();
 
-	private DDI2PDFGenerator ddi2pdfGenerator = new DDI2PDFGenerator();
+	private DDI2FOGenerator ddi2pdfGenerator = new DDI2FOGenerator();
 
 	private DDI2PoguesXMLGenerator ddi2poguesXmlGenerator = new DDI2PoguesXMLGenerator();
 
@@ -87,45 +87,45 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	// PostProcessing
 	private DDIMarkdown2XhtmlPostprocessor ddiMW2XHTML = new DDIMarkdown2XhtmlPostprocessor();
 
-	private FRBrowsingPostprocessor frBrowsing = new FRBrowsingPostprocessor();
+	private XFORMSBrowsingPostprocessor frBrowsing = new XFORMSBrowsingPostprocessor();
 
-	private FREditPatronPostprocessor frEditPatron = new FREditPatronPostprocessor();
+	private XFORMSEditPatronPostprocessor frEditPatron = new XFORMSEditPatronPostprocessor();
 
-	private FRFixAdherencePostprocessor frFixAdherence = new FRFixAdherencePostprocessor();
+	private XFORMSFixAdherencePostprocessor frFixAdherence = new XFORMSFixAdherencePostprocessor();
 
-	private FRIdentificationPostprocessor frIdentification = new FRIdentificationPostprocessor();
+	private XFORMSIdentificationPostprocessor frIdentification = new XFORMSIdentificationPostprocessor();
 
-	private FRInsertEndPostprocessor frInsertEnd = new FRInsertEndPostprocessor();
+	private XFORMSInsertEndPostprocessor frInsertEnd = new XFORMSInsertEndPostprocessor();
 
-	private FRInsertGenericQuestionsPostprocessor frInsertGenericQuestions = new FRInsertGenericQuestionsPostprocessor();
+	private XFORMSInsertGenericQuestionsPostprocessor frInsertGenericQuestions = new XFORMSInsertGenericQuestionsPostprocessor();
 
-	private FRInsertWelcomePostprocessor frInsertWelcome = new FRInsertWelcomePostprocessor();
+	private XFORMSInsertWelcomePostprocessor frInsertWelcome = new XFORMSInsertWelcomePostprocessor();
 
-	private FRModeleColtranePostprocessor frModeleColtrane = new FRModeleColtranePostprocessor();
+	private XFORMSModeleColtranePostprocessor frModeleColtrane = new XFORMSModeleColtranePostprocessor();
 
-	private FRSpecificTreatmentPostprocessor frSpecificTreatment = new FRSpecificTreatmentPostprocessor();
+	private XFORMSSpecificTreatmentPostprocessor frSpecificTreatment = new XFORMSSpecificTreatmentPostprocessor();
 
-	private PDFEditStructurePagesPostprocessor pdfEditStructurePages = new PDFEditStructurePagesPostprocessor();
+	private FOEditStructurePagesPostprocessor pdfEditStructurePages = new FOEditStructurePagesPostprocessor();
 
-	private PDFInsertAccompanyingMailsPostprocessor pdfInsertAccompanyingMails = new PDFInsertAccompanyingMailsPostprocessor();
+	private FOInsertAccompanyingMailsPostprocessor pdfInsertAccompanyingMails = new FOInsertAccompanyingMailsPostprocessor();
 
-	private PDFInsertCoverPagePostprocessor pdfInsertCoverPage = new PDFInsertCoverPagePostprocessor();
+	private FOInsertCoverPagePostprocessor pdfInsertCoverPage = new FOInsertCoverPagePostprocessor();
 
-	private PDFInsertEndQuestionPostprocessor pdfInsertEndQuestion = new PDFInsertEndQuestionPostprocessor();
+	private FOInsertEndQuestionPostprocessor pdfInsertEndQuestion = new FOInsertEndQuestionPostprocessor();
 	
-	private PDFMailingPostprocessor pdfMailing = new PDFMailingPostprocessor();
+	private FOMailingPostprocessor pdfMailing = new FOMailingPostprocessor();
 	
-	private PDFSpecificTreatmentPostprocessor pdfSpecificTreatment = new PDFSpecificTreatmentPostprocessor();
+	private FOSpecificTreatmentPostprocessor pdfSpecificTreatment = new FOSpecificTreatmentPostprocessor();
 	
-	private PDFTableColumnPostprocessorFake pdfTableColumn = new PDFTableColumnPostprocessorFake();
+	private FOTableColumnPostprocessorFake pdfTableColumn = new FOTableColumnPostprocessorFake();
 	
-	private JSInsertGenericQuestionsPostprocessor jsInsertGenericQuestions = new JSInsertGenericQuestionsPostprocessor();
+	private LunaticXMLInsertGenericQuestionsPostprocessor jsInsertGenericQuestions = new LunaticXMLInsertGenericQuestionsPostprocessor();
 	
-	private JSExternalizeVariablesPostprocessor jsExternalizeVariables = new JSExternalizeVariablesPostprocessor();
+	private LunaticXMLExternalizeVariablesPostprocessor jsExternalizeVariables = new LunaticXMLExternalizeVariablesPostprocessor();
 	
-	private JSSortComponentsPostprocessor jsSortComponents = new JSSortComponentsPostprocessor();
+	private LunaticXMLSortComponentsPostprocessor jsSortComponents = new LunaticXMLSortComponentsPostprocessor();
 	
-	private JSVTLParserPostprocessor jsvtlParser = new JSVTLParserPostprocessor();
+	private LunaticXMLVTLParserPostprocessor jsvtlParser = new LunaticXMLVTLParserPostprocessor();
 	
 	private NoopPostprocessor noop = new NoopPostprocessor();
 	
@@ -177,16 +177,16 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			case DDI:
 				generator = identityGenerator;
 				break;
-			case FR:
+			case XFORMS:
 				generator = ddi2frGenerator;
 				break;
-			case JS:
+			case LUNATIC_XML:
 				generator = ddi2jsGenerator;
 				break;
-			case ODT:
+			case FODT:
 				generator = ddi2odtGenerator;
 				break;
-			case PDF:
+			case FO:
 				generator = ddi2pdfGenerator;
 				break;
 			case POGUES_XML:
@@ -204,7 +204,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 				break;
 			}
 			break;
-		case FR:
+		case XFORMS:
 			generator = identityGenerator;
 			break;
 		}
@@ -218,73 +218,73 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		case DDI_MARKDOWN_TO_XHTML:
 			postprocessor = ddiMW2XHTML;
 			break;
-		case FR_BROWSING:
+		case XFORMS_BROWSING:
 			postprocessor = frBrowsing;
 			break;
-		case FR_EDIT_PATRON:
+		case XFORMS_EDIT_PATRON:
 			postprocessor = frEditPatron;
 			break;
-		case FR_FIX_ADHERENCE:
+		case XFORMS_FIX_ADHERENCE:
 			postprocessor = frFixAdherence;
 			break;
-		case FR_IDENTIFICATION:
+		case XFORMS_IDENTIFICATION:
 			postprocessor = frIdentification;
 			break;
-		case FR_INSERT_END:
+		case XFORMS_INSERT_END:
 			postprocessor = frInsertEnd;
 			break;
-		case FR_INSERT_GENERIC_QUESTIONS:
+		case XFORMS_INSERT_GENERIC_QUESTIONS:
 			postprocessor = frInsertGenericQuestions;
 			break;
-		case FR_INSERT_WELCOME:
+		case XFORMS_INSERT_WELCOME:
 			postprocessor = frInsertWelcome;
 			break;
-		case FR_MODELE_COLTRANE:
+		case XFORMS_MODELE_COLTRANE:
 			postprocessor = frModeleColtrane;
 			break;
-		case FR_SPECIFIC_TREATMENT:
+		case XFORMS_SPECIFIC_TREATMENT:
 			postprocessor = frSpecificTreatment;
 			break;
-		case PDF_EDIT_STRUCTURE_PAGES:
+		case FO_EDIT_STRUCTURE_PAGES:
 			postprocessor = pdfEditStructurePages;
 			break;
-		case PDF_INSERT_ACCOMPANYING_MAILS:
+		case FO_INSERT_ACCOMPANYING_MAILS:
 			postprocessor = pdfInsertAccompanyingMails;
 			break;
-		case PDF_INSERT_COVER_PAGE:
+		case FO_INSERT_COVER_PAGE:
 			postprocessor = pdfInsertCoverPage;
 			break;
-		case PDF_INSERT_END_QUESTION:
+		case FO_INSERT_END_QUESTION:
 			postprocessor = pdfInsertEndQuestion;
 			break;
-		case PDF_MAILING:
+		case FO_MAILING:
 			postprocessor = pdfMailing;
 			break;
-		case PDF_SPECIFIC_TREATMENT:
+		case FO_SPECIFIC_TREATMENT:
 			postprocessor = pdfSpecificTreatment;
 			break;
-		case PDF_TABLE_COLUMN:
+		case FO_TABLE_COLUMN:
 			postprocessor = pdfTableColumn;
 			break;
-		case JS_EXTERNALIZE_VARIABLES:
+		case LUNATIC_XML_EXTERNALIZE_VARIABLES:
 			postprocessor = jsExternalizeVariables;
 			break;
-		case JS_INSERT_GENERIC_QUESTIONS:
+		case LUNATIC_XML_INSERT_GENERIC_QUESTIONS:
 			postprocessor= jsInsertGenericQuestions;
 			break;
-		case JS_SORT_COMPONENTS:
+		case LUNATIC_XML_SORT_COMPONENTS:
 			postprocessor = jsSortComponents;
 			break;
-		case JS_VTL_PARSER:
+		case LUNATIC_XML_VTL_PARSER:
 			postprocessor = jsvtlParser;
 			break;
-		case JS_SPECIFIC_TREATMENT:
+		case LUNATIC_XML_SPECIFIC_TREATMENT:
 			postprocessor = noop;
 			break;
 		case DDI_SPECIFIC_TREATMENT:
 			postprocessor = noop;
 			break;
-		case ODT_SPECIFIC_TREATMENT:
+		case FODT_SPECIFIC_TREATMENT:
 			postprocessor = noop;
 			break;
 		}

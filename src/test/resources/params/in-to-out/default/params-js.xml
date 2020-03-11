@@ -2,16 +2,16 @@
     
     <Pipeline>
         <InFormat>ddi</InFormat>
-        <OutFormat>js</OutFormat>
+        <OutFormat>lunatic-xml</OutFormat>
         
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
         <PreProcessing>ddi-titling</PreProcessing>
         
-        <PostProcessing>js-sortComponents</PostProcessing>
-        <PostProcessing>js-insert-generic-questions</PostProcessing>
-        <PostProcessing>js-externalizeVariables</PostProcessing>
-        <PostProcessing>js-vtlParser</PostProcessing>
+        <PostProcessing>lunatic-xml-sortComponents</PostProcessing>
+        <PostProcessing>lunatic-xml-insert-generic-questions</PostProcessing>
+        <PostProcessing>lunatic-xml-externalizeVariables</PostProcessing>
+        <PostProcessing>lunatic-xml-vtlParser</PostProcessing>
     </Pipeline>
     
     <Parameters>
@@ -30,9 +30,9 @@
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
         
-        <js-parameters>            
+        <lunatic-xml-parameters>            
             <FilterDescription>true</FilterDescription>
-        </js-parameters>
+        </lunatic-xml-parameters>
     </Parameters>
     
 </ENOParameters>

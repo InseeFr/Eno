@@ -4,12 +4,12 @@ import java.io.File;
 
 import org.junit.Test;
 
-import fr.insee.eno.generation.DDI2JSGenerator;
+import fr.insee.eno.generation.DDI2LunaticXMLGenerator;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.postprocessing.js.JSExternalizeVariablesPostprocessor;
-import fr.insee.eno.postprocessing.js.JSInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.js.JSSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
@@ -18,7 +18,7 @@ import fr.insee.eno.preprocessing.Preprocessor;
 
 public class DummyTestDDI2JS {
 	
-	private DDI2JSGenerator ddi2jsGenerator = new DDI2JSGenerator();	
+	private DDI2LunaticXMLGenerator ddi2jsGenerator = new DDI2LunaticXMLGenerator();	
 	
 	@Test
 	public void mainTest() {
@@ -31,10 +31,10 @@ public class DummyTestDDI2JS {
 				new DDITitlingPreprocessor()};
 		
 		Postprocessor[] postprocessors =  {
-				new JSSortComponentsPostprocessor(),
-				new JSInsertGenericQuestionsPostprocessor(),
-				new JSExternalizeVariablesPostprocessor(),
-				new JSVTLParserPostprocessor()};
+				new LunaticXMLSortComponentsPostprocessor(),
+				new LunaticXMLInsertGenericQuestionsPostprocessor(),
+				new LunaticXMLExternalizeVariablesPostprocessor(),
+				new LunaticXMLVTLParserPostprocessor()};
 		
 		GenerationService genServiceDDI2JS = new GenerationService(preprocessors, ddi2jsGenerator,postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathDDI2JS));

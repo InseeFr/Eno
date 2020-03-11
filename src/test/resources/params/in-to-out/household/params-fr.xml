@@ -2,20 +2,20 @@
     
     <Pipeline>
         <InFormat>ddi</InFormat>
-        <OutFormat>fr</OutFormat>
+        <OutFormat>xforms</OutFormat>
         
         <PreProcessing>ddi-mapping</PreProcessing>
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
         <PreProcessing>ddi-titling</PreProcessing>
         
-        <PostProcessing>fr-insert-generic-questions</PostProcessing>
-        <PostProcessing>fr-browsing</PostProcessing>
-        <PostProcessing>fr-modele-coltrane</PostProcessing>
-        <PostProcessing>fr-edit-patron</PostProcessing>
-        <PostProcessing>fr-insert-welcome</PostProcessing>
-        <PostProcessing>fr-insert-end</PostProcessing>
-        <PostProcessing>fr-fix-adherence</PostProcessing>
+        <PostProcessing>xforms-insert-generic-questions</PostProcessing>
+        <PostProcessing>xforms-browsing</PostProcessing>
+        <PostProcessing>xforms-modele-coltrane</PostProcessing>
+        <PostProcessing>xforms-edit-patron</PostProcessing>
+        <PostProcessing>xforms-insert-welcome</PostProcessing>
+        <PostProcessing>xforms-insert-end</PostProcessing>
+        <PostProcessing>xforms-fix-adherence</PostProcessing>
     </Pipeline>
     
     <Parameters>
@@ -33,12 +33,12 @@
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
         
-        <fr-parameters>            
+        <xforms-parameters>            
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
             <Satisfaction>true</Satisfaction>
             <LengthOfLongTable>7</LengthOfLongTable>
-        </fr-parameters>
+        </xforms-parameters>
         
         <Title>
             <Browsing>template</Browsing>

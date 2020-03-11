@@ -51,8 +51,8 @@ public class ValidatorImpl implements Validator {
 			case POGUES_XML:
 				isValid = outFormat.equals(OutFormat.DDI) || outFormat.equals(OutFormat.POGUES_XML);
 				break;
-			case FR:
-				isValid = outFormat.equals(OutFormat.FR);
+			case XFORMS:
+				isValid = outFormat.equals(OutFormat.XFORMS);
 			default:
 				isValid=false;
 				break;
@@ -73,7 +73,7 @@ public class ValidatorImpl implements Validator {
 		boolean isValid=true;
 		String message="";
 		InFormat inFormat = pipeline.getInFormat();
-		boolean preProcessingNeeded = pipeline.getPostProcessing().contains(PostProcessing.FR_MODELE_COLTRANE);	
+		boolean preProcessingNeeded = pipeline.getPostProcessing().contains(PostProcessing.XFORMS_MODELE_COLTRANE);	
 		List<PreProcessing> preProcessings = pipeline.getPreProcessing();
 		List<PreProcessing> preProcessingsCopy = new ArrayList<>(preProcessings);
 
@@ -84,13 +84,13 @@ public class ValidatorImpl implements Validator {
 				
 				boolean order = preProcessingsCopy.equals(preProcessings);
 				boolean consistency = preProcessingInFormat.containsAll(preProcessingsCopy);
-				boolean mapping = preProcessingNeeded ? preProcessings.contains(PreProcessing.DDI_MAPPING) || inFormat.equals(InFormat.FR):true;
+				boolean mapping = preProcessingNeeded ? preProcessings.contains(PreProcessing.DDI_MAPPING) || inFormat.equals(InFormat.XFORMS):true;
 				
 				isValid = order && consistency && mapping;
 				
 				message += order ? "" : "PreProcessings are not in the right order. The right order should be : "+preProcessingsCopy;
 				message += consistency ? "" : "PreProcessings are not valid according to the InFormat ('"+inFormat.value()+"') ";
-				message += mapping ? "" : "The PostProcessing '"+PostProcessing.FR_MODELE_COLTRANE.value()+"', need the PreProcessing '"+PreProcessing.DDI_MAPPING.value()+"' ";
+				message += mapping ? "" : "The PostProcessing '"+PostProcessing.XFORMS_MODELE_COLTRANE.value()+"', need the PreProcessing '"+PreProcessing.DDI_MAPPING.value()+"' ";
 								
 			}
 			else {

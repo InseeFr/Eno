@@ -22,16 +22,16 @@
             <CommentQuestion>false</CommentQuestion>
         </EndQuestion>
         
-        <fr-parameters>
+        <xforms-parameters>
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
             <Satisfaction>false</Satisfaction>
             <LengthOfLongTable>7</LengthOfLongTable>
             <DecimalSeparator>,</DecimalSeparator>
             <Css></Css>
-        </fr-parameters>
+        </xforms-parameters>
         
-        <pdf-parameters>
+        <fo-parameters>
             <Format>
                 <Orientation>0</Orientation>
                 <Columns>1</Columns>
@@ -58,13 +58,13 @@
                 <pdf></pdf>
             </PageBreakBetween>
             <AccompanyingMail></AccompanyingMail>
-        </pdf-parameters>
+        </fo-parameters>
         
-        <js-parameters>
+        <lunatic-xml-parameters>
             <FilterDescription>false</FilterDescription>
-        </js-parameters>
+        </lunatic-xml-parameters>
         
-        <odt-parameters/>
+        <fodt-parameters/>
         
         <Title>
             <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->
