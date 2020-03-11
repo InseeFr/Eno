@@ -56,12 +56,10 @@
         <!-- Generating out-format from the in-format : basic-form.tmp using the in2out.xsl stylesheet -->
         <xslt in="${temp.home}/${survey-name}/${Properties.InFormat}/${file-name}.tmp"
             out="${temp.home}/${survey-name}/${Properties.OutFormat}/${form-name}/basic-form.tmp"
-            style="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl"
-            force="true" classpath="${saxon.jar}">
-            <param name="properties-file"
-                expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
-            <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+            style="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl" force="true" classpath="${saxon.jar}">
             <param name="labels-folder" expression="${lang-folder}/${Properties.OutFormat}"/>
+            <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
+            <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
         </xslt>
 
         <!-- PostProcess of the out file depending on the out-format. -->
@@ -70,7 +68,7 @@
         <!-- Deleting temp file -->
         <delete file="${temp.home}/${survey-name}/${Properties.OutFormat}/${form-name}/basic-form.tmp"/>
         <copy file="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"
-            tofile="${questionnaires.home}/${survey-name}/${out-folder}/${form-name}/form/form.${out-extension}"/>
+            tofile="${questionnaires-folder}/${survey-name}/${out-folder}/${form-name}/form/form.${out-extension}"/>
         <delete file="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"/>
 
     </target>
@@ -81,15 +79,13 @@
 
         <xslt in="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl"
             out="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}-debug.xsl"
-            style="${xslt.home}/util/debug.xsl"
-            force="true" classpath="${saxon.jar}">
+            style="${xslt.home}/util/debug.xsl" force="true" classpath="${saxon.jar}">
         </xslt>
 
         <!-- Generating out-format from the in-format : basic-form.tmp using the in2out-debug.xsl stylesheet -->
         <xslt in="${temp.home}/${survey-name}/${Properties.InFormat}/${file-name}.tmp"
             out="${target-folder}/${survey-name}/${Properties.OutFormat}/form-debug.${out-extension}"
-            style="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}-debug.xsl"
-            force="true" classpath="${saxon.jar}">
+            style="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}-debug.xsl" force="true" classpath="${saxon.jar}">
             <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
             <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
             <param name="labels-folder" expression="${lang-folder}/${Properties.OutFormat}"/>
