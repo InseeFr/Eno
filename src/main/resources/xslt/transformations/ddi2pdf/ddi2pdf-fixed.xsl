@@ -32,6 +32,20 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>The properties file used by the stylesheet.</xd:p>
+            <xd:p>It's on a transformation level.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:param name="properties-file"/>
+    <xsl:param name="parameters-file"/>
+    <xsl:param name="parameters-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
+    
+    <xsl:variable name="page-model-default" select="doc('../../../xslt/post-processing/pdf/page-model/page-model-default.fo')"/>
+    
+    <xd:doc>
+        <xd:desc>
             <xd:p>A variable is created to build a set of label resources in different languages.</xd:p>
             <xd:p>Only the resources in languages already present in the DDI input are charged.</xd:p>
         </xd:desc>

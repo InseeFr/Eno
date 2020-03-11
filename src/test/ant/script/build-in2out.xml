@@ -33,8 +33,13 @@
         </switch>
     </target>
 
-    <target name="fulls" depends="ENOPreprocessing">
-        
+    <target name="fulls">
+        <if>
+            <equals arg1="${Properties.EnoBuild}" arg2="true"/>
+            <then>
+                <antcall target="ENOPreprocessing"/>
+            </then>
+        </if>
         <foreach target="full" list="${Properties.SurveyName}" param="survey-name" inheritall="true"/>
     </target>
 
@@ -72,13 +77,18 @@
 
     <target name="in2debug">
         <basename file="${file}" property="file-name" suffix=".tmp"/>
-        <propertyregex property="form-name" input="${file-name}" regexp="-final" replace=""
-            global="true"/>
+        <propertyregex property="form-name" input="${file-name}" regexp="-final" replace="" global="true"/>
 
-        <!-- Generating out-format from the in-format : basic-form.tmp using the in2out.xsl stylesheet -->
+        <xslt in="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl"
+            out="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}-debug.xsl"
+            style="${xslt.home}/util/debug.xsl"
+            force="true" classpath="${saxon.jar}">
+        </xslt>
+
+        <!-- Generating out-format from the in-format : basic-form.tmp using the in2out-debug.xsl stylesheet -->
         <xslt in="${temp.home}/${survey-name}/${Properties.InFormat}/${file-name}.tmp"
-            out="${target-folder}/${survey-name}/${form-name}/form/form-debug.${out-extension}"
-            style="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}.xsl"
+            out="${target-folder}/${survey-name}/${Properties.OutFormat}/form-debug.${out-extension}"
+            style="${xslt.home}/transformations/${Properties.InFormat}2${Properties.OutFormat}/${Properties.InFormat}2${Properties.OutFormat}-debug.xsl"
             force="true" classpath="${saxon.jar}">
             <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
             <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>

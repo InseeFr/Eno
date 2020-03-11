@@ -7,20 +7,7 @@
 	exclude-result-prefixes="xd xs eno enopdf fox"
 	version="2.0">
 
-	<xd:doc>
-		<xd:desc>
-			<xd:p>The properties file used by the stylesheet.</xd:p>
-			<xd:p>It's on a transformation level.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:param name="properties-file"/>
-	<xsl:param name="parameters-file"/>
-	<xsl:param name="parameters-node" as="node()" required="no">
-		<empty/>
-	</xsl:param>
-		
-	<xsl:variable name="page-model-default" select="doc('../../../xslt/post-processing/pdf/page-model/page-model-default.fo')"/>
-	
+
 	<xsl:include href="../../../styles/style.xsl"/>
 	
 	<!-- Remove all the ConsistencyCheck messages from the pdf -->
