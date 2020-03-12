@@ -3658,7 +3658,6 @@
                    border-style="solid"
                    page-break-inside="avoid"
                    keep-with-next="always">Temps de réponse et commentaires</fo:block>
-         <fo:wrapper id="TIME_QUESTION">
             <fo:block color="black"
                       font-weight="bold"
                       font-size="10pt"
@@ -3692,8 +3691,6 @@
                              padding="1mm">minutes</fo:inline>
                </fo:inline>
             </fo:block>
-         </fo:wrapper>
-         <fo:wrapper id="COMMENT_QUESTION">
             <fo:block color="black"
                       font-weight="bold"
                       font-size="10pt"
@@ -3707,7 +3704,6 @@
                   <fo:block> </fo:block>
                </fo:block-container>
             </fo:block>
-         </fo:wrapper>
          <fo:block id="TheVeryLastPage"/>
       </fo:flow>
    </fo:page-sequence>

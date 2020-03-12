@@ -5386,7 +5386,6 @@
                    border-style="solid"
                    page-break-inside="avoid"
                    keep-with-next="always">Commentaires</fo:block>
-         <fo:wrapper id="COMMENT_QUESTION">
             <fo:block color="black"
                       font-weight="bold"
                       font-size="10pt"
@@ -5400,7 +5399,6 @@
                   <fo:block> </fo:block>
                </fo:block-container>
             </fo:block>
-         </fo:wrapper>
          <fo:block id="TheVeryLastPage"/>
       </fo:flow>
    </fo:page-sequence>
