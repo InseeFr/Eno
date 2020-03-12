@@ -18,7 +18,7 @@ import fr.insee.eno.preprocessing.Preprocessor;
 
 public class TestDDI2FODT {
 	
-	private DDI2FODTGenerator ddi2odt = new DDI2FODTGenerator();
+	private DDI2FODTGenerator ddi2fodt = new DDI2FODTGenerator();
 	
 	private XMLDiff xmlDiff = new XMLDiff();
 
@@ -26,7 +26,7 @@ public class TestDDI2FODT {
 	@Test
 	public void simpleDiffTest() {
 		try {
-			String basePath = "src/test/resources/ddi-to-odt";
+			String basePath = "src/test/resources/ddi-to-fodt";
 			
 			Preprocessor[] preprocessors = {
 					new DDIDereferencingPreprocessor(),
@@ -35,7 +35,7 @@ public class TestDDI2FODT {
 			
 			Postprocessor[] postprocessors = {new NoopPostprocessor()};
 			
-			GenerationService genService = new GenerationService(preprocessors, ddi2odt, postprocessors);
+			GenerationService genService = new GenerationService(preprocessors, ddi2fodt, postprocessors);
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-odt-test");
 			File expectedFile = new File(String.format("%s/out.fodt", basePath));

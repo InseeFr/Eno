@@ -1,5 +1,6 @@
 package fr.insee.eno.postprocessing.xforms;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,45 +15,65 @@ import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
-public class XFORMSEditPatronPostprocessor implements Postprocessor {
+public class XFORMSInseeModelPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(XFORMSEditPatronPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(XFORMSInseeModelPostprocessor.class);
 
 	private XslTransformation saxonService = new XslTransformation();
 
+
 	@Override
 	public File process(File input, byte[] parameters, String survey) throws Exception {
-		return this.process(input, parameters, null, survey);
+		return this.process(input, parameters, null, null, null, survey);
 	}
 
 	@Override
-	public File process(File input, byte[] parameters, byte[] metadata, String survey) throws Exception {
+	public File process(File input, byte[] parametersFile, byte[] metadata, byte[] specificTreatmentXsl, byte[] mapping, String survey) throws Exception {
 		File outputForFRFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
-				Constants.INSEE_PATTERN_XFORMS_EXTENSION);
+				Constants.INSEE_MODEL_XFORMS_EXTENSION);
 
 		logger.debug("Output folder for basic-form : " + outputForFRFile.getAbsolutePath());
 
-		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.UTIL_XFORMS_INSEE_PATTERN_XSL);
+		String sUB_TEMP_FOLDER = Constants.tEMP_DDI_FOLDER(Constants.sUB_TEMP_FOLDER(survey));
+
+		InputStream FO_XSL = Constants.getInputStreamFromPath(Constants.UTIL_XFORMS_INSEE_MODEL_XSL);
 
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
+		InputStream mappingStream=null;
+		if(mapping!=null) {
+			mappingStream = new ByteArrayInputStream(mapping);
+		}
+		else {
+			File mappingFile = Constants.tEMP_MAPPING_TMP(sUB_TEMP_FOLDER);
+			if(mappingFile.exists()) {
+				logger.info("Loading mapping.xml file : "+mappingFile.getAbsolutePath());
+				mappingStream = FileUtils.openInputStream(mappingFile);
+			}
+		}
+
 		try {
-			saxonService.transformWithMetadata(inputStream, outputStream, FO_XSL, parameters, metadata);
+			saxonService.transformModelColtraneXforms(inputStream, outputStream, FO_XSL, mappingStream);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
 			logger.error(errorMessage);
 			throw new EnoGenerationException(errorMessage);
 		}
+
 		inputStream.close();
 		outputStream.close();
 		FO_XSL.close();
-		logger.info("End of EditPatron post-processing " + outputForFRFile.getAbsolutePath());
+		mappingStream.close();
+		logger.info("End of ModeleColtrane post-processing " + outputForFRFile.getAbsolutePath());
+
 		return outputForFRFile;
+
 	}
 
 	@Override
 	public String toString() {
-		return PostProcessing.XFORMS_INSEE_PATTERN.name();
+		return PostProcessing.XFORMS_INSEE_MODEL.name();
 	}
+
 }

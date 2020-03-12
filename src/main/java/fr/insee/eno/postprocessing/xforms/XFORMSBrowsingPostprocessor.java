@@ -34,7 +34,7 @@ public class XFORMSBrowsingPostprocessor implements Postprocessor {
 		InputStream inputStream = FileUtils.openInputStream(input);
 		OutputStream outputStream = FileUtils.openOutputStream(outputForFRFile);
 		try {
-			saxonService.transformBrowsingFr(inputStream, outputStream, FO_XSL);
+			saxonService.transformBrowsingXforms(inputStream, outputStream, FO_XSL);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
 			logger.error(errorMessage);

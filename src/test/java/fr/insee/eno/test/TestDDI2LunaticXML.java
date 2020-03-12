@@ -21,14 +21,14 @@ import fr.insee.eno.preprocessing.Preprocessor;
 
 public class TestDDI2LunaticXML {
 	
-	private DDI2LunaticXMLGenerator ddi2js = new DDI2LunaticXMLGenerator();
+	private DDI2LunaticXMLGenerator ddi2lunaticXML = new DDI2LunaticXMLGenerator();
 	
 	private XMLDiff xmlDiff = new XMLDiff();
 	
 	@Test
 	public void simpleDiffTest() {
 		try {
-			String basePath = "src/test/resources/ddi-to-js";
+			String basePath = "src/test/resources/ddi-to-lunatic-xml";
 			Preprocessor[] preprocessors = {
 					new DDIDereferencingPreprocessor(),
 					new DDICleaningPreprocessor(),
@@ -39,10 +39,10 @@ public class TestDDI2LunaticXML {
 					new LunaticXMLInsertGenericQuestionsPostprocessor(),
 					new LunaticXMLExternalizeVariablesPostprocessor(),
 					new LunaticXMLVTLParserPostprocessor()};
-			GenerationService genService = new GenerationService(preprocessors, ddi2js, postprocessors);
+			GenerationService genService = new GenerationService(preprocessors, ddi2lunaticXML, postprocessors);
 			
 			File in = new File(String.format("%s/in.xml", basePath));
-			File outputFile = genService.generateQuestionnaire(in, "ddi-2-js-test");
+			File outputFile = genService.generateQuestionnaire(in, "ddi-2-lunatic-xml-test");
 			File expectedFile = new File(String.format("%s/out.xml", basePath));
 			Diff diff = xmlDiff.getDiff(outputFile,expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());

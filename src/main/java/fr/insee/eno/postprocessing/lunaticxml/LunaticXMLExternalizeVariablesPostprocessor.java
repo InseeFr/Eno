@@ -36,7 +36,7 @@ public class LunaticXMLExternalizeVariablesPostprocessor implements Postprocesso
 		OutputStream outputStream = FileUtils.openOutputStream(outputForJSFile);
 
 		try {
-			saxonService.transformJSToJSPost(inputStream,outputStream, JS_XSL);
+			saxonService.transformLunaticXMLToLunaticXMLPost(inputStream,outputStream, JS_XSL);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
 			logger.error(errorMessage);

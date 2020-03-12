@@ -18,14 +18,14 @@ import fr.insee.eno.preprocessing.Preprocessor;
 
 public class TestDDI2XFORMS {
 	
-	private DDI2XFORMSGenerator ddi2fr = new DDI2XFORMSGenerator();
+	private DDI2XFORMSGenerator ddi2xforms = new DDI2XFORMSGenerator();
 	
 	private XMLDiff xmlDiff = new XMLDiff();
 
 	@Test
 	public void simpleDiffTest() {
 		try {
-			String basePath = "src/test/resources/ddi-to-xform";
+			String basePath = "src/test/resources/ddi-to-xforms";
 			
 			Preprocessor[] preprocessors = {
 					new DDIDereferencingPreprocessor(),
@@ -34,9 +34,9 @@ public class TestDDI2XFORMS {
 			
 			Postprocessor[] postprocessors = {new XFORMSBrowsingPostprocessor()};
 			
-			GenerationService genService = new GenerationService(preprocessors, ddi2fr, postprocessors);
+			GenerationService genService = new GenerationService(preprocessors, ddi2xforms, postprocessors);
 			File in = new File(String.format("%s/in.xml", basePath));
-			File outputFile = genService.generateQuestionnaire(in, "ddi-2-fr-test");
+			File outputFile = genService.generateQuestionnaire(in, "ddi-2-xforms-test");
 			File expectedFile = new File(String.format("%s/out.xhtml", basePath));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePath), diff.hasDifferences());

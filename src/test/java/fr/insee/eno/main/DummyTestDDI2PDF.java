@@ -43,7 +43,7 @@ public class DummyTestDDI2PDF {
 	@Test
 	public void mainTest() {
 
-		String basePathddi2PDF = "src/test/resources/ddi-to-pdf";
+		String basePathddi2PDF = "src/test/resources/ddi-to-fo";
 		String basePathImg = "src/test/resources/examples/img/";
 
 		Preprocessor[] preprocessors = {

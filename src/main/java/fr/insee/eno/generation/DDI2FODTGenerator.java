@@ -42,7 +42,7 @@ public class DDI2FODTGenerator implements Generator {
 			InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 			OutputStream osOutputFile = FileUtils.openOutputStream(new File(outputForm));){
 			
-			saxonService.transformDDI2ODT(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2FODT_DDI2ODT_XSL, parameters);
+			saxonService.transformDDI2FODT(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2FODT_DDI2ODT_XSL, parameters);
 		
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
@@ -66,6 +66,6 @@ public class DDI2FODTGenerator implements Generator {
 	}
 
 	public String in2out() {
-		return "ddi2odt";
+		return "ddi2fodt";
 	}
 }

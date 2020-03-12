@@ -73,7 +73,7 @@ public class ValidatorImpl implements Validator {
 		boolean isValid=true;
 		String message="";
 		InFormat inFormat = pipeline.getInFormat();
-		boolean preProcessingNeeded = pipeline.getPostProcessing().contains(PostProcessing.XFORMS_MODELE_COLTRANE);	
+		boolean preProcessingNeeded = pipeline.getPostProcessing().contains(PostProcessing.XFORMS_INSEE_MODEL);	
 		List<PreProcessing> preProcessings = pipeline.getPreProcessing();
 		List<PreProcessing> preProcessingsCopy = new ArrayList<>(preProcessings);
 
@@ -90,7 +90,7 @@ public class ValidatorImpl implements Validator {
 				
 				message += order ? "" : "PreProcessings are not in the right order. The right order should be : "+preProcessingsCopy;
 				message += consistency ? "" : "PreProcessings are not valid according to the InFormat ('"+inFormat.value()+"') ";
-				message += mapping ? "" : "The PostProcessing '"+PostProcessing.XFORMS_MODELE_COLTRANE.value()+"', need the PreProcessing '"+PreProcessing.DDI_MAPPING.value()+"' ";
+				message += mapping ? "" : "The PostProcessing '"+PostProcessing.XFORMS_INSEE_MODEL.value()+"', need the PreProcessing '"+PreProcessing.DDI_MAPPING.value()+"' ";
 								
 			}
 			else {

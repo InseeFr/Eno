@@ -9,7 +9,8 @@ import org.xmlunit.diff.Diff;
 import fr.insee.eno.service.ParameterizedGenerationService;
 import fr.insee.eno.test.XMLDiff;
 
-public class TestParameterizedGenerationServicePDF {
+public class TestParameterizedGenerationServiceXFORMS {
+	
 
 	private ParameterizedGenerationService parameterizedGenerationService = new ParameterizedGenerationService();
 	
@@ -20,11 +21,11 @@ public class TestParameterizedGenerationServicePDF {
 	public void defaultTest() {
 		String basePathDDI = "src/test/resources/params/in-to-out/default";
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
-		File params = new File(String.format("%s/params-fo.xml", basePathDDI));
+		File params = new File(String.format("%s/params-xforms.xml", basePathDDI));
 		
 		try {
 			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);
-			File expectedFile = new File(String.format("%s/form.fo", basePathDDI));
+			File expectedFile = new File(String.format("%s/form.xhtml", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
 		} catch (Exception e) {
@@ -39,12 +40,12 @@ public class TestParameterizedGenerationServicePDF {
 	public void householdTest() {
 		String basePathDDI = "src/test/resources/params/in-to-out/household";
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
-		File params = new File(String.format("%s/params-fo.xml", basePathDDI));
-		File specificTreatment = new File(String.format("%s/fo-specific-treatment.xsl", basePathDDI));
+		File params = new File(String.format("%s/params-xforms.xml", basePathDDI));
+		File metadata = new File(String.format("%s/metadata.xml", basePathDDI));
 		
 		try {
-			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment, null);
-			File expectedFile = new File(String.format("%s/form.fo", basePathDDI));
+			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, metadata, null, null);
+			File expectedFile = new File(String.format("%s/form.xhtml", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
 		} catch (Exception e) {
@@ -59,18 +60,18 @@ public class TestParameterizedGenerationServicePDF {
 	public void businessTest() {
 		String basePathDDI = "src/test/resources/params/in-to-out/business";
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
-		File params = new File(String.format("%s/params-fo.xml", basePathDDI));
-		File specificTreatment = new File(String.format("%s/fo-specific-treatment.xsl", basePathDDI));
+		File params = new File(String.format("%s/params-xforms.xml", basePathDDI));
+		File metadata = new File(String.format("%s/metadata.xml", basePathDDI));
+		File specificTreatment = new File(String.format("%s/xforms-specific-treatment.xsl", basePathDDI));
 		
 		try {
-			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment, null);
-			File expectedFile = new File(String.format("%s/form.fo", basePathDDI));
+			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, metadata, specificTreatment, null);
+			File expectedFile = new File(String.format("%s/form.xhtml", basePathDDI));
 			Diff diff = xmlDiff.getDiff(outputFile, expectedFile);
 			Assert.assertFalse(getDiffMessage(diff, basePathDDI), diff.hasDifferences());
 		} catch (Exception e) {
-			Assert.fail();
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail();
 		}
 	}
 	

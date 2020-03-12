@@ -25,46 +25,8 @@
             <ResponseTimeQuestion>false</ResponseTimeQuestion>
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
-        <xforms-parameters>
-            
-            <NumericExample>true</NumericExample>
-            <Deblocage>false</Deblocage>
-            <Satisfaction>false</Satisfaction>
-            <LengthOfLongTable>56</LengthOfLongTable>
-            <DecimalSeparator>,</DecimalSeparator>
-        </xforms-parameters>
-        <fo-parameters>
-            <Format>
-                <Orientation>90</Orientation>
-                <Columns>1</Columns>
-            </Format>
-            <Roster>
-                <Row>
-                    <DefaultSize>12</DefaultSize>
-                </Row>
-            </Roster>
-            <TextArea>
-                <Row>
-                    <DefaultSize>3</DefaultSize>
-                </Row>
-            </TextArea>
-            <Table>
-                <Row>
-                    <DefaultSize>150</DefaultSize>
-                </Row>
-            </Table>
-            <Capture>
-                <Numeric>manual</Numeric>
-            </Capture>
-            <PageBreakBetween>
-                <pdf>module</pdf>
-            </PageBreakBetween>
-            <AccompanyingMail>cnrCOL</AccompanyingMail>            
-        </fo-parameters>
-        <lunatic-xml-parameters>
-            <FilterDescription>false</FilterDescription>
-        </lunatic-xml-parameters>
-        <fodt-parameters/>
+ 
+          <fodt-parameters/>
         <Title>
             <Browsing>no-number</Browsing>
             <Sequence>

@@ -16,7 +16,7 @@ import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 
 public class TestLunaticXMLVTLParserPostProcessor {
 
-	private LunaticXMLVTLParserPostprocessor jsvtlParserPostprocessor = new LunaticXMLVTLParserPostprocessor();
+	private LunaticXMLVTLParserPostprocessor lunaticXMLVtlParserPostprocessor = new LunaticXMLVTLParserPostprocessor();
 	private XMLDiff xmlDiff = new XMLDiff();
 		
 	@Test
@@ -49,27 +49,27 @@ public class TestLunaticXMLVTLParserPostProcessor {
 		String test9 = "cast(cast(ABCD,string),integer) = '3'";
 		String expected9 = "cast(cast(ABCD,string),integer) = 3";
 		
-		Assert.assertEquals(expected1, jsvtlParserPostprocessor.parseToVTL(test1));
-		Assert.assertEquals(expected2, jsvtlParserPostprocessor.parseToVTL(test2));
-		Assert.assertEquals(expected3, jsvtlParserPostprocessor.parseToVTL(test3));
-		Assert.assertEquals(expected4, jsvtlParserPostprocessor.parseToVTL(test4));
-		Assert.assertEquals(expected5, jsvtlParserPostprocessor.parseToVTL(test5));
-		Assert.assertEquals(expected6, jsvtlParserPostprocessor.parseToVTL(test6));
-		Assert.assertEquals(expected7, jsvtlParserPostprocessor.parseToVTL(test7));
-		Assert.assertEquals(expected8, jsvtlParserPostprocessor.parseToVTL(test8));
-		Assert.assertEquals(expected9, jsvtlParserPostprocessor.parseToVTL(test9));
+		Assert.assertEquals(expected1, lunaticXMLVtlParserPostprocessor.parseToVTL(test1));
+		Assert.assertEquals(expected2, lunaticXMLVtlParserPostprocessor.parseToVTL(test2));
+		Assert.assertEquals(expected3, lunaticXMLVtlParserPostprocessor.parseToVTL(test3));
+		Assert.assertEquals(expected4, lunaticXMLVtlParserPostprocessor.parseToVTL(test4));
+		Assert.assertEquals(expected5, lunaticXMLVtlParserPostprocessor.parseToVTL(test5));
+		Assert.assertEquals(expected6, lunaticXMLVtlParserPostprocessor.parseToVTL(test6));
+		Assert.assertEquals(expected7, lunaticXMLVtlParserPostprocessor.parseToVTL(test7));
+		Assert.assertEquals(expected8, lunaticXMLVtlParserPostprocessor.parseToVTL(test8));
+		Assert.assertEquals(expected9, lunaticXMLVtlParserPostprocessor.parseToVTL(test9));
 	}
 	
 	@Test
 	public void simpleWithFileTest() {
 		try {
-			String basePath = "src/test/resources/vtl-parsing";
+			String basePath = "src/test/resources/lunatic-xml-vtl-parsing";
 			
 			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/test-vtl.xml");
 			Files.deleteIfExists(outPath);
 			Path outputFilePath = Files.createFile(outPath);
 			File in = new File(String.format("%s/in.xml", basePath));
-			File outPostProcessing = jsvtlParserPostprocessor.process(in, null, "test");
+			File outPostProcessing = lunaticXMLVtlParserPostprocessor.process(in, null, "test");
 			FileUtils.copyFile(outPostProcessing,outputFilePath.toFile());
 			FileUtils.forceDelete(outPostProcessing);
 			File expectedFile = new File(String.format("%s/out.xml", basePath));

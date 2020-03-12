@@ -34,7 +34,7 @@ public class LunaticXMLInsertGenericQuestionsPostprocessor implements Postproces
 
 		InputStream JS_XSL = Constants.getInputStreamFromPath(Constants.TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_LUNATIC_XML);
 		try {
-			saxonService.transformJSToJSSimplePost(inputStream,outputStream, JS_XSL,parameters);
+			saxonService.transformLunaticXMLToLunaticXMLSimplePost(inputStream,outputStream, JS_XSL,parameters);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
 			logger.error(errorMessage);

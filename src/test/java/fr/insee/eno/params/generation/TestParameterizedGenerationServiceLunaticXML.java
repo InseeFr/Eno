@@ -21,7 +21,7 @@ public class TestParameterizedGenerationServiceLunaticXML {
 	public void defaultTest() {
 		String basePathDDI = "src/test/resources/params/in-to-out/default";
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
-		File params = new File(String.format("%s/params-js.xml", basePathDDI));
+		File params = new File(String.format("%s/params-lunatic-xml.xml", basePathDDI));
 		
 		try {
 			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);

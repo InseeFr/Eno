@@ -22,7 +22,7 @@ public class DDI2FOGenerator implements Generator {
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
-		logger.info("DDI2PDF Target : START");
+		logger.info("DDI2FO Target : START");
 		logger.debug("Arguments : finalInput : " + finalInput + " surveyName " + surveyName);
 		String formNameFolder = null;
 		String outputBasicFormPath = null;
@@ -42,7 +42,7 @@ public class DDI2FOGenerator implements Generator {
 			 InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 				OutputStream osOutputForm = FileUtils.openOutputStream(new File(outputForm));) {
 			
-			saxonService.transformDDI2PDF(isFinalInput, osOutputForm, isTRANSFORMATIONS_DDI2FO_DDI2PDF_XSL, parameters);
+			saxonService.transformDDI2FO(isFinalInput, osOutputForm, isTRANSFORMATIONS_DDI2FO_DDI2PDF_XSL, parameters);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
 			logger.error(errorMessage);
@@ -65,7 +65,7 @@ public class DDI2FOGenerator implements Generator {
 	}
 
 	public String in2out() {
-		return "ddi2pdf";
+		return "ddi2fo";
 	}
 
 }

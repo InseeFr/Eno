@@ -22,7 +22,7 @@ public class DDI2XFORMSGenerator implements Generator {
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
-		logger.info("DDI2FR Target : START");
+		logger.info("DDI2XFORMS Target : START");
 		logger.debug("Arguments : finalInput : " + finalInput + " surveyName " + surveyName);
 		String formNameFolder = null;
 		String outputBasicFormPath = null;
@@ -37,12 +37,12 @@ public class DDI2XFORMSGenerator implements Generator {
 
 		
 		try (
-			InputStream isTRANSFORMATIONS_DDI2XFORMS_DDI2FR_XSL = Constants
+			InputStream isTRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL);
 			InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 			OutputStream osOutputBasicForm = FileUtils.openOutputStream(new File(outputBasicFormPath));){
 			
-			saxonService.transformDDI2FR(isFinalInput, osOutputBasicForm, isTRANSFORMATIONS_DDI2XFORMS_DDI2FR_XSL,
+			saxonService.transformDDI2XFORMS(isFinalInput, osOutputBasicForm, isTRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL,
 					parameters);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
@@ -66,7 +66,7 @@ public class DDI2XFORMSGenerator implements Generator {
 	}
 
 	public String in2out() {
-		return "ddi2fr";
+		return "ddi2xforms";
 	}
 
 }

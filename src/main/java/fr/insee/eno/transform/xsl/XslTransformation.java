@@ -73,16 +73,16 @@ public class XslTransformation {
 	public void transformCleaning(InputStream input, InputStream xslSheet, OutputStream output, String in2out)
 			throws Exception {
 		String default_properties_file = null;
-		if (in2out == "ddi2fr") {
+		if (in2out == "ddi2xforms") {
 			default_properties_file = Constants.CONFIG_DDI2XFORMS;
 		}
-		if (in2out == "ddi2odt") {
+		if (in2out == "ddi2fodt") {
 			default_properties_file = Constants.CONFIG_DDI2FODT;
 		}
-		if (in2out == "ddi2pdf") {
+		if (in2out == "ddi2fo") {
 			default_properties_file = Constants.CONFIG_DDI2FO;
 		}
-		if (in2out == "ddi2js") {
+		if (in2out == "ddi2lunatic-xml") {
 			default_properties_file = Constants.CONFIG_DDI2LUNATIC_XML;
 		}
 		LOGGER.debug("Using the basic transformer");
@@ -255,21 +255,21 @@ public class XslTransformation {
 		}
 	}
 
-	public void transformDDI2FR(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
+	public void transformDDI2XFORMS(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
 			throws Exception {
 		LOGGER.info("Producing a basic XForms from the DDI spec");
 		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2XFORMS);
 
 	}
 
-	public void transformDDI2ODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformDDI2FODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters) throws Exception {
 		LOGGER.info("Producing a basic ODT from the DDI spec");
 		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2FODT);
 
 	}
 
-	public void transformDDI2PDF(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformDDI2FO(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters) throws Exception {
 		LOGGER.info("Producing a basic PDF (Fo) from the DDI spec");
 
@@ -277,7 +277,7 @@ public class XslTransformation {
 
 	}
 
-	public void transformDDI2JS(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
+	public void transformDDI2LunaticXML(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
 			throws Exception {
 		LOGGER.info("Producing a JS (xml file) from the DDI spec");
 
@@ -310,15 +310,15 @@ public class XslTransformation {
 		transformBrowsingin2Out(inputFile, outputFile, xslSheet, labelFolder);
 	}
 
-	public void transformBrowsingDDI2ODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformBrowsingDDI2FODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			File labelFolder) throws Exception {
 		LOGGER.info("Include the navigation elements into the ODT questionnaire");
 		transformBrowsingin2Out(inputFile, outputFile, xslSheet, labelFolder);
 	}
 
-	public void transformBrowsingDDI2JS(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformBrowsingDDI2LunaticXML(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			File labelFolder) throws Exception {
-		LOGGER.info("Include the navigation elements into the JS questionnaire");
+		LOGGER.info("Include the navigation elements into the Lunatic XML questionnaire");
 		transformBrowsingin2Out(inputFile, outputFile, xslSheet, labelFolder);
 	}
 
@@ -373,7 +373,7 @@ public class XslTransformation {
 	/* POST transformations */
 	// FR
 
-	public void transformBrowsingFr(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
+	public void transformBrowsingXforms(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
 			throws Exception {
 		LOGGER.info("Post-processing browsing for FR transformation.");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
@@ -386,7 +386,7 @@ public class XslTransformation {
 		xslTransform(transformer, inputFile, outputFile);
 	}
 
-	public void transformModelColtraneFr(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformModelColtraneXforms(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			InputStream mappingFile) throws Exception {
 		LOGGER.info("Post-processing for FR transformation with mapping.xml file.");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
@@ -467,10 +467,10 @@ public class XslTransformation {
 		xslTransform(transformer, inputFile, outputFile);
 	}
 
-	public void transformFRToFRSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformXformsToXformsSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters) throws Exception {
 		InputStream parametersIS = null;
-		LOGGER.info("Post-processing for FR transformation with parameter file");
+		LOGGER.info("Post-processing for Xforms transformation with parameter file");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
@@ -485,7 +485,7 @@ public class XslTransformation {
 		xslTransform(transformer, inputFile, outputFile);
 	}
 	
-	public void transformJSToJSSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformLunaticXMLToLunaticXMLSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters) throws Exception {
 		InputStream parametersIS = null;
 		LOGGER.info("Post-processing for JS transformation with parameter file");
@@ -514,7 +514,7 @@ public class XslTransformation {
 
 	// JS
 
-	public void transformJSToJSPost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
+	public void transformLunaticXMLToLunaticXMLPost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
 			throws Exception {
 		LOGGER.info("Post-processing for JS transformation");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();

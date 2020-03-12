@@ -39,21 +39,21 @@ public class FodsToXSLCompiler {
 			cleaning();
 			logger.info("Fods to XSL: START");			
 			// Fods2Xsl for /transformations/ddi/.fods files
-			generateDDI2FRDrivers();
-			generateDDI2ODTDrivers();
-			generateDDI2PDFDrivers();
-			generateDDI2JSDrivers();
+			generateDDI2XFORMSDrivers();
+			generateDDI2FODTDrivers();
+			generateDDI2FODrivers();
+			generateDDI2LUNATICXMLDrivers();
 			generatePOGUESXML2DDIDrivers();
-			generateDDI2FRFunctions();
-			generateDDI2ODTFunctions();
-			generateDDI2PDFFunctions();
-			generateDDI2JSFunctions();
+			generateDDI2XFORMSFunctions();
+			generateDDI2FODTFunctions();
+			generateDDI2FOFunctions();
+			generateDDI2LUNATICXMLFunctions();
 			generatePOGUESXML2DDIFunctions();
-			generateDDI2FRTreeNavigation();
+			generateDDI2XFORMSTreeNavigation();
 			generatePOGUESXML2DDITreeNavigation();
-			generateDDI2ODTTreeNavigation();
-			generateDDI2PDFTreeNavigation();
-			generateDDI2JSTreeNavigation();
+			generateDDI2FODTTreeNavigation();
+			generateDDI2FOTreeNavigation();
+			generateDDI2LUNATICXMLTreeNavigation();
 			// Fods2Xsl for /output/ddi/.fods files
 			generateDDIFunctions();
 			generatePOGUESXMLFunctions();
@@ -61,17 +61,17 @@ public class FodsToXSLCompiler {
 			generatePOGUESXMLTemplates();
 			logger.info("Fods2Xsl : xsl stylesheets created.");
 			// Incorporation target : creating ddi2fr.xsl
-			ddi2frIncorporationTarget();
-			ddi2odtIncorporationTarget();
-			ddi2pdfIncorporationTarget();
-			ddi2jsIncorporationTarget();
+			ddi2xformsIncorporationTarget();
+			ddi2fodtIncorporationTarget();
+			ddi2foIncorporationTarget();
+			ddi2lunaticxmlIncorporationTarget();
 			poguesxml2ddiIncorporationTarget();
 			// TODO Copy generated files to JAR or classpath
 			logger.debug("Fods to XSL: END");
-			copyGeneratedFilesDDI2FR();
-			copyGeneratedFilesDDI2ODT();
-			copyGeneratedFilesDDI2PDF();
-			copyGeneratedFilesDDI2JS();
+			copyGeneratedFilesDDI2XFORMS();
+			copyGeneratedFilesDDI2FODT();
+			copyGeneratedFilesDDI2FO();
+			copyGeneratedFilesDDI2LUNATICXML();
 			copyGeneratedFilesPOGUESXML2DDI();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -93,8 +93,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2FRDrivers() throws Exception, IOException {
-		logger.info("Generating DDI2FR drivers.");
+	private static void generateDDI2XFORMSDrivers() throws Exception, IOException {
+		logger.info("Generating DDI2XFORMS drivers.");
 		logger.debug(
 				FIVE_SPACES + 
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2XFORMS_DRIVERS_FODS +
@@ -112,8 +112,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2ODTDrivers() throws Exception, IOException {
-		logger.info("Generating DDI2ODT drivers.");
+	private static void generateDDI2FODTDrivers() throws Exception, IOException {
+		logger.info("Generating DDI2FODT drivers.");
 		logger.debug(
 				FIVE_SPACES + 
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2FODT_DRIVERS_FODS +
@@ -131,8 +131,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2PDFDrivers() throws Exception, IOException {
-		logger.info("Generating DDI2PDF drivers.");
+	private static void generateDDI2FODrivers() throws Exception, IOException {
+		logger.info("Generating DDI2FO drivers.");
 		logger.debug(
 				FIVE_SPACES + 
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2FO_DRIVERS_FODS +
@@ -150,8 +150,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2JSDrivers() throws Exception, IOException {
-		logger.info("Generating DDI2JS drivers.");
+	private static void generateDDI2LUNATICXMLDrivers() throws Exception, IOException {
+		logger.info("Generating DDI2lUNATICXML drivers.");
 		logger.debug(
 				FIVE_SPACES + 
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2LUNATIC_XML_DRIVERS_FODS +
@@ -189,8 +189,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2FRFunctions() throws Exception, IOException {
-		logger.info("Generating DDI2FR functions.");
+	private static void generateDDI2XFORMSFunctions() throws Exception, IOException {
+		logger.info("Generating DDI2XFORMS functions.");
 		logger.debug(
 				FIVE_SPACES +
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2XFORMS_FUNCTIONS_FODS +
@@ -208,8 +208,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2ODTFunctions() throws Exception, IOException {
-		logger.info("Generating DDI2ODT functions.");
+	private static void generateDDI2FODTFunctions() throws Exception, IOException {
+		logger.info("Generating DDI2FODT functions.");
 		logger.debug(
 				FIVE_SPACES +
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2FODT_FUNCTIONS_FODS +
@@ -227,8 +227,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2PDFFunctions() throws Exception, IOException {
-		logger.info("Generating DDI2PDF functions.");
+	private static void generateDDI2FOFunctions() throws Exception, IOException {
+		logger.info("Generating DDI2FO functions.");
 		logger.debug(
 				FIVE_SPACES +
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2FO_FUNCTIONS_FODS +
@@ -246,8 +246,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2JSFunctions() throws Exception, IOException {
-		logger.info("Generating DDI2JS functions.");
+	private static void generateDDI2LUNATICXMLFunctions() throws Exception, IOException {
+		logger.info("Generating DDI2LUNATICXML functions.");
 		logger.debug(
 				FIVE_SPACES +
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2LUNATIC_XML_FUNCTIONS_FODS +
@@ -284,8 +284,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2FRTreeNavigation() throws Exception, IOException {
-		logger.info("Generating DDI2FR tree navigation");
+	private static void generateDDI2XFORMSTreeNavigation() throws Exception, IOException {
+		logger.info("Generating DDI2XFORMS tree navigation");
 		logger.debug(
 				FIVE_SPACES +
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2XFORMS_TREE_NAVIGATION_FODS + 
@@ -303,8 +303,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2ODTTreeNavigation() throws Exception, IOException {
-		logger.info("Generating DDI2ODT tree navigation");
+	private static void generateDDI2FODTTreeNavigation() throws Exception, IOException {
+		logger.info("Generating DDI2FODT tree navigation");
 		logger.debug(
 				FIVE_SPACES +
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2FODT_TREE_NAVIGATION_FODS + 
@@ -322,8 +322,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2PDFTreeNavigation() throws Exception, IOException {
-		logger.info("Generating DDI2PDF tree navigation");
+	private static void generateDDI2FOTreeNavigation() throws Exception, IOException {
+		logger.info("Generating DDI2FO tree navigation");
 		logger.debug(
 				FIVE_SPACES +
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2FO_TREE_NAVIGATION_FODS + 
@@ -341,8 +341,8 @@ public class FodsToXSLCompiler {
 	 * @throws Exception
 	 * @throws IOException
 	 */
-	private static void generateDDI2JSTreeNavigation() throws Exception, IOException {
-		logger.info("Generating DDI2JS tree navigation");
+	private static void generateDDI2LUNATICXMLTreeNavigation() throws Exception, IOException {
+		logger.info("Generating DDI2LUNATICXML tree navigation");
 		logger.debug(
 				FIVE_SPACES +
 				"Fods2Xsl -Input : " + Constants.TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_FODS + 
@@ -542,7 +542,7 @@ public class FodsToXSLCompiler {
 	 * 
 	 * @throws Exception
 	 */
-	public static void ddi2frIncorporationTarget() throws Exception {
+	public static void ddi2xformsIncorporationTarget() throws Exception {
 		logger.debug("Entering Incorporation");
 		// Incorporating ddi2fr-fixed.xsl, drivers.xsl, functions.xsl and
 		// tree-navigation.xsl into ddi2fr.xsl
@@ -648,7 +648,7 @@ public class FodsToXSLCompiler {
 	 * 
 	 * @throws Exception
 	 */
-	public static void ddi2odtIncorporationTarget() throws Exception {
+	public static void ddi2fodtIncorporationTarget() throws Exception {
 		logger.debug("Entering Incorporation");
 		// Incorporating ddi2odt-fixed.xsl, drivers.xsl, functions.xsl and
 		// tree-navigation.xsl into ddi2odt.xsl
@@ -745,10 +745,10 @@ public class FodsToXSLCompiler {
 	 * 
 	 * @throws Exception
 	 */
-	public static void ddi2pdfIncorporationTarget() throws Exception {
+	public static void ddi2foIncorporationTarget() throws Exception {
 		logger.debug("Entering Incorporation");
-		// Incorporating ddi2pdf-fixed.xsl, drivers.xsl, functions.xsl and
-		// tree-navigation.xsl into ddi2pdf.xsl
+		// Incorporating ddi2fo-fixed.xsl, drivers.xsl, functions.xsl and
+		// tree-navigation.xsl into ddi2fo.xsl
 		logger.debug(
 				"Incorporating " + Constants.TRANSFORMATIONS_DDI2FO_DDI2FO_FIXED_XSL +
 				" and " + Constants.TRANSFORMATIONS_DDI2FO_DRIVERS_XSL_TMP +
@@ -837,10 +837,10 @@ public class FodsToXSLCompiler {
 	}
 	
 	
-	public static void ddi2jsIncorporationTarget() throws Exception {
+	public static void ddi2lunaticxmlIncorporationTarget() throws Exception {
 		logger.debug("Entering Incorporation");
 		// Incorporating ddi2js-fixed.xsl, drivers.xsl, functions.xsl and
-		// tree-navigation.xsl into ddi2js.xsl
+		// tree-navigation.xsl into ddi2lunaticxml.xsl
 		logger.debug(
 				"Incorporating " + Constants.TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_FIXED_XSL +
 				" and " + Constants.TRANSFORMATIONS_DDI2LUNATIC_XML_DRIVERS_XSL_TMP +
@@ -881,15 +881,15 @@ public class FodsToXSLCompiler {
 		
 		InputStream isTEMP_TEMP_BIS_TMP = FileUtils.openInputStream(Constants.TEMP_TEMP_BIS_TMP);
 		InputStream isUTIL_XSL_INCORPORATION_XSL3 = Constants.getInputStreamFromPath(Constants.UTIL_XSL_INCORPORATION_XSL);
-		OutputStream osTRANSFORMATIONS_DDI2LUNATIC_XML_DDI2JS_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP);
+		OutputStream osTRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP = FileUtils.openOutputStream(Constants.TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP);
 		saxonService.transformIncorporation(
 				isTEMP_TEMP_BIS_TMP,
 				isUTIL_XSL_INCORPORATION_XSL3,
-				osTRANSFORMATIONS_DDI2LUNATIC_XML_DDI2JS_XSL_TMP,
+				osTRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP,
 				Constants.TRANSFORMATIONS_DDI2LUNATIC_XML_TREE_NAVIGATION_XSL_TMP);
 		isTEMP_TEMP_BIS_TMP.close();
 		isUTIL_XSL_INCORPORATION_XSL3.close();
-		osTRANSFORMATIONS_DDI2LUNATIC_XML_DDI2JS_XSL_TMP.close();
+		osTRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP.close();
 		// Incorporating source-fixed.xsl, functions.xsl and templates.xsl into
 		// source.xsl
 		logger.debug(
@@ -1036,11 +1036,11 @@ public class FodsToXSLCompiler {
 	 * When every file has been generated, we want to copy them in the /xslt directory to be
 	 * used through the Java API.
 	 * */
-	private static void copyGeneratedFilesDDI2FR() throws Exception {
+	private static void copyGeneratedFilesDDI2XFORMS() throws Exception {
 		String destinationBasePath = System.getProperty("dest");
 		logger.info(String.format("Copying generated files to %s", destinationBasePath));
 		File inputsDestination = new File(destinationBasePath + "/xslt/inputs/ddi");
-		File transformsDestination = new File(destinationBasePath + "/xslt/transformations/ddi2fr");
+		File transformsDestination = new File(destinationBasePath + "/xslt/transformations/ddi2xforms");
 		try {
 			FileUtils.copyDirectory(Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP.getParentFile(), inputsDestination);
 			FileUtils.copyDirectory(Constants.TRANSFORMATIONS_DDI2XFORMS_DDI2XFORMS_XSL_TMP.getParentFile(), transformsDestination);
@@ -1053,11 +1053,11 @@ public class FodsToXSLCompiler {
 	 * When every file has been generated, we want to copy them in the /xslt directory to be
 	 * used through the Java API.
 	 * */
-	private static void copyGeneratedFilesDDI2ODT() throws Exception {
+	private static void copyGeneratedFilesDDI2FODT() throws Exception {
 		String destinationBasePath = System.getProperty("dest");
 		logger.info(String.format("Copying generated files to %s", destinationBasePath));
 		File inputsDestination = new File(destinationBasePath + "/xslt/inputs/ddi");
-		File transformsDestination = new File(destinationBasePath + "/xslt/transformations/ddi2odt");
+		File transformsDestination = new File(destinationBasePath + "/xslt/transformations/ddi2fodt");
 		try {
 			FileUtils.copyDirectory(Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP.getParentFile(), inputsDestination);
 			FileUtils.copyDirectory(Constants.TRANSFORMATIONS_DDI2FODT_DDI2FODT_XSL_TMP.getParentFile(), transformsDestination);
@@ -1070,11 +1070,11 @@ public class FodsToXSLCompiler {
 	 * When every file has been generated, we want to copy them in the /xslt directory to be
 	 * used through the Java API.
 	 * */
-	private static void copyGeneratedFilesDDI2PDF() throws Exception {
+	private static void copyGeneratedFilesDDI2FO() throws Exception {
 		String destinationBasePath = System.getProperty("dest");
 		logger.info(String.format("Copying generated files to %s", destinationBasePath));
 		File inputsDestination = new File(destinationBasePath + "/xslt/inputs/ddi");
-		File transformsDestination = new File(destinationBasePath + "/xslt/transformations/ddi2pdf");
+		File transformsDestination = new File(destinationBasePath + "/xslt/transformations/ddi2fo");
 		try {
 			FileUtils.copyDirectory(Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP.getParentFile(), inputsDestination);
 			FileUtils.copyDirectory(Constants.TRANSFORMATIONS_DDI2FO_DDI2FO_XSL_TMP.getParentFile(), transformsDestination);
@@ -1087,11 +1087,11 @@ public class FodsToXSLCompiler {
 	 * When every file has been generated, we want to copy them in the /xslt directory to be
 	 * used through the Java API.
 	 * */
-	private static void copyGeneratedFilesDDI2JS() throws Exception {
+	private static void copyGeneratedFilesDDI2LUNATICXML() throws Exception {
 		String destinationBasePath = System.getProperty("dest");
 		logger.info(String.format("Copying generated files to %s", destinationBasePath));
 		File inputsDestination = new File(destinationBasePath + "/xslt/inputs/ddi");
-		File transformsDestination = new File(destinationBasePath + "/xslt/transformations/ddi2js");
+		File transformsDestination = new File(destinationBasePath + "/xslt/transformations/ddi2lunatic-xml");
 		try {
 			FileUtils.copyDirectory(Constants.INPUTS_DDI_FUNCTIONS_XSL_TMP.getParentFile(), inputsDestination);
 			FileUtils.copyDirectory(Constants.TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL_TMP.getParentFile(), transformsDestination);

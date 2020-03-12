@@ -75,9 +75,9 @@
             
             <xs:enumeration value="xforms-insert-generic-questions"/>
             <xs:enumeration value="xforms-browsing"/>
-            <xs:enumeration value="xforms-modele-coltrane"/>
+            <xs:enumeration value="xforms-insee-model"/>
             <!-- patron : coleman/coltrane -->
-            <xs:enumeration value="xforms-edit-patron"/>
+            <xs:enumeration value="xforms-insee-pattern"/>
             <xs:enumeration value="xforms-identification"/>
             <xs:enumeration value="xforms-insert-welcome"/>
             <xs:enumeration value="xforms-insert-end"/>

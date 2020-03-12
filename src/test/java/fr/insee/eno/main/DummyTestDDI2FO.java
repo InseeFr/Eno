@@ -21,7 +21,7 @@ import fr.insee.eno.preprocessing.Preprocessor;
 
 public class DummyTestDDI2FO {
 	
-	private DDI2FOGenerator ddi2pdf = new DDI2FOGenerator();
+	private DDI2FOGenerator ddi2fo = new DDI2FOGenerator();
 	
 	@Test
 	public void mainTest() {		
@@ -41,7 +41,7 @@ public class DummyTestDDI2FO {
 				new FOInsertCoverPagePostprocessor(),
 				new FOInsertAccompanyingMailsPostprocessor()};
 		
-		GenerationService genServiceDDI2PDF = new GenerationService(preprocessors, ddi2pdf, postprocessors);
+		GenerationService genServiceDDI2PDF = new GenerationService(preprocessors, ddi2fo, postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathDDI2FO));
 		try {
 			File output = genServiceDDI2PDF.generateQuestionnaire(in, "test");

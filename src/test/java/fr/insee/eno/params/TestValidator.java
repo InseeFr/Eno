@@ -46,7 +46,7 @@ public class TestValidator {
 				PreProcessing.DDI_DEREFERENCING);
 		List<PostProcessing> postProcessings = Arrays.asList(
 				PostProcessing.XFORMS_BROWSING,
-				PostProcessing.XFORMS_MODELE_COLTRANE);
+				PostProcessing.XFORMS_INSEE_MODEL);
 		
 		Pipeline pipeline = new Pipeline();
 		pipeline.setInFormat(InFormat.DDI);

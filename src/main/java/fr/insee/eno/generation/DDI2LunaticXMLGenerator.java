@@ -22,7 +22,7 @@ public class DDI2LunaticXMLGenerator implements Generator {
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
-		logger.info("DDI2JS Target : START");
+		logger.info("DDI2LunaticXML Target : START");
 		logger.debug("Arguments : finalInput : " + finalInput + " surveyName " + surveyName);
 		String formNameFolder = null;
 		String outputBasicFormPath = null;
@@ -41,7 +41,7 @@ public class DDI2LunaticXMLGenerator implements Generator {
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2LUNATIC_XML_DDI2LUNATIC_XML_XSL);
 				InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 				OutputStream osOutputFile = FileUtils.openOutputStream(new File(outputForm));){
-			saxonService.transformDDI2JS(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2LUNATIC_XML_DDI2JS_XSL, parameters);
+			saxonService.transformDDI2LunaticXML(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2LUNATIC_XML_DDI2JS_XSL, parameters);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
 			logger.error(errorMessage);
@@ -64,6 +64,6 @@ public class DDI2LunaticXMLGenerator implements Generator {
 	}
 
 	public String in2out() {
-		return "ddi2js";
+		return "ddi2lunatic-xml";
 	}
 }
