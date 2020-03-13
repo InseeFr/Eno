@@ -4,7 +4,8 @@
     <Css>
         <Folder>css</Folder>
         <Common>common.css</Common>
-        <CommonBusinness>commonEnglish.css</CommonBusinness>
+        <CommonBusiness>commonEnglish.css</CommonBusiness>
+        <CommonBusiness>enterpriseEnglish.css</CommonBusiness>
     </Css>
     <Images>
         <Folder>img</Folder>

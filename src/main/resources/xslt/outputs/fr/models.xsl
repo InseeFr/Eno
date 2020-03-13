@@ -37,7 +37,7 @@
                 </xhtml:title>
                 <xsl:choose>
                     <xsl:when test="$parameters//StudyUnit='business'">
-                        <xsl:for-each select="$properties//Css/CommonBusinness">
+                        <xsl:for-each select="$properties//Css/CommonBusiness">
                             <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
                         </xsl:for-each>
                     </xsl:when>
