@@ -1,0 +1,133 @@
+<ENOParameters>
+    
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>fr</OutFormat>
+                
+        <PreProcessing>ddi-mapping</PreProcessing>
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        
+        <PostProcessing>fr-insert-generic-questions</PostProcessing>
+        <PostProcessing>fr-browsing</PostProcessing>
+        <PostProcessing>fr-modele-coltrane</PostProcessing>
+        <PostProcessing>fr-edit-patron</PostProcessing>
+        <PostProcessing>fr-identification</PostProcessing>
+        <PostProcessing>fr-insert-welcome</PostProcessing>
+        <PostProcessing>fr-insert-end</PostProcessing>
+        <PostProcessing>fr-fix-adherence</PostProcessing>
+    </Pipeline>
+    
+    <Parameters>
+        <StudyUnit>default</StudyUnit>
+        
+        <Campagne>test</Campagne>
+        
+        <Languages>
+            <Language>fr</Language>
+            <Language>en</Language>
+        </Languages>
+        
+        <BeginQuestion>
+            <Identification>false</Identification>
+        </BeginQuestion>
+        
+        <EndQuestion>
+            <ResponseTimeQuestion>false</ResponseTimeQuestion>
+            <CommentQuestion>false</CommentQuestion>
+        </EndQuestion>
+        
+        <fr-parameters>
+            <NumericExample>false</NumericExample>
+            <Deblocage>false</Deblocage>
+            <Satisfaction>false</Satisfaction>
+            <LengthOfLongTable>7</LengthOfLongTable>
+            <DecimalSeparator>,</DecimalSeparator>
+            <Css></Css>
+        </fr-parameters>
+        
+        <pdf-parameters>
+            <Format>
+                <Orientation>0</Orientation>
+                <Columns>1</Columns>
+            </Format>
+            <Roster>
+                <Row>
+                    <DefaultSize>15</DefaultSize>
+                </Row>
+            </Roster>
+            <TextArea>
+                <Row>
+                    <DefaultSize>5</DefaultSize>
+                </Row>
+            </TextArea>
+            <Table>
+                <Row>
+                    <DefaultSize>19</DefaultSize>
+                </Row>
+            </Table>
+            <Capture>
+                <Numeric>optical</Numeric>
+            </Capture>
+            <PageBreakBetween>
+                <pdf></pdf>
+            </PageBreakBetween>
+            <AccompanyingMail></AccompanyingMail>
+        </pdf-parameters>
+        
+        <js-parameters>
+            <FilterDescription>false</FilterDescription>
+        </js-parameters>
+        
+        <odt-parameters/>
+    
+        <Title>
+            <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->
+            <Browsing>module</Browsing>
+            <Sequence>
+                <!-- template level: useful because it allows to define the hierarchy of the sequences, even if it is not numbered -->
+                <Level name="template"/>
+                <Level name="module">
+                    <!-- always displayed -->
+                    <PreSeq></PreSeq>
+                    <!-- true ; false -->
+                    <NumParent>false</NumParent>
+                    <!-- Displayed only if a number is displayed for the parent -->
+                    <PostNumParentSeq></PostNumParentSeq>
+                    <!-- 1 ; A ; a ; I ; i -->
+                    <StyleNumSeq>I</StyleNumSeq>
+                    <!-- Displayed only if a number is displayed for the sequence -->
+                    <PostNumSeq> - </PostNumSeq>
+                </Level>
+                <!-- no numbering at submodule level = no element -->
+                <Level name="submodule"/>
+            </Sequence>
+            <Question>
+                <!-- Question at module level -->
+                <Level name="module">
+                    <!-- always displayed -->
+                    <PreQuest>➡ </PreQuest>
+                    <!-- true ; false -->
+                    <NumParent>false</NumParent>
+                    <!-- Displayed only if a number is displayed for the parent -->
+                    <PostNumParentQuest></PostNumParentQuest>
+                    <!-- 1 ; A ; a ; I ; i -->
+                    <StyleNumQuest>1</StyleNumQuest>
+                    <!-- Displayed only if a number is displayed for the question -->
+                    <PostNumQuest>. </PostNumQuest>
+                </Level>
+                <!-- The presentation of module and submodule level questions must be specified if both are present; it may be separate. -->
+                <!-- Question at sub-module level -->
+                <Level name="submodule">
+                    <PreQuest>➡ </PreQuest>
+                    <NumParent>false</NumParent>
+                    <PostNumParentQuest></PostNumParentQuest>
+                    <StyleNumQuest>1</StyleNumQuest>
+                    <PostNumQuest>. </PostNumQuest>
+                </Level>
+            </Question>
+        </Title>
+    </Parameters>
+    
+</ENOParameters>

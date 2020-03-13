@@ -1,0 +1,129 @@
+<InformationsCollecte>
+    <ServiceProducteur>
+        <Identifiant>INSEE</Identifiant>
+        <Article>l'</Article>
+        <Libelle>Institut national de la statistique et des études économiques</Libelle>
+        <MinistereTutelle>de l'Économie et des Finances</MinistereTutelle>
+        <Logo>
+            <Identifiant>1</Identifiant>
+        </Logo>
+        <ChefSignataire>
+            <Fonction>La directrice des Statistiques d'Entreprises</Fonction>
+            <Nom>Christel COLIN</Nom>
+        </ChefSignataire>
+    </ServiceProducteur>
+    <Source>
+    <Identifiant>ESEM</Identifiant>
+    <LibelleLong>Enquête sur les entreprises mahoraises</LibelleLong>
+    <LibelleCourt>ESEM</LibelleCourt>
+	<NiveauDeSecurite>moyen</NiveauDeSecurite>
+    <Conservation>5 ans</Conservation> 	
+    <Reference>
+        <TypeObjetReference>ServiceCollecteur</TypeObjetReference>
+        <IdReference>INSEE</IdReference>
+    </Reference>
+    <Reference>
+        <TypeObjetReference>ServiceProducteur</TypeObjetReference>
+        <IdReference>INSEE</IdReference>
+    </Reference>
+    <Frequence>
+        <Libelle>annuelle</Libelle>
+    </Frequence>
+</Source>
+    <Enquete identifiantOperation="ESEM2019">
+    <AnneeCollecte>2019</AnneeCollecte>
+    <LibelleLong>ESEM - Enquête sur les entreprises mahoraises 2018</LibelleLong>
+    <LibelleCourt>ESEM 2018</LibelleCourt>
+    <ObjectifsCourts>Cette enquête vise à établir un système d’information statistique sur les entreprises de Mayotte.</ObjectifsCourts>
+    <ObjectifsLongs>Cette enquête vise à établir un système d’information statistique sur les entreprises de Mayotte vous permettant notamment de situer votre activité au sein de l’économie mahoraise. Une fois constituée, cette base statistique permettra une meilleure connaissance du tissu économique, nécessaire au développement de Mayotte.</ObjectifsLongs>
+    <NiveauDeSecurite>moyen</NiveauDeSecurite>
+    <StatutEnquete>intérêt général et de qualité statistique</StatutEnquete>
+    <CaractereObligatoire>oui</CaractereObligatoire>
+    <NumeroVisa>2019A903RG</NumeroVisa>
+    <URLCnis>http://www.cnis.fr</URLCnis>
+    <URLDiffusion>https://insee.fr/fr/statistiques?theme=39&amp;collection=25+106</URLDiffusion>
+    <URLNotice/>
+    <URLSpecimen>https://insee.fr/fr/metadonnees/source/fichier/Questionnaire_ESEM_2018.pdf</URLSpecimen>
+</Enquete>
+    <Campagne idCampagne="ESEM2019A00">
+    <Libelle>Enquête sur les entreprises mahoraises (ESEM) 2018</Libelle>
+    <Reference>
+        <TypeObjetReference>Enquete</TypeObjetReference>
+        <IdReference>ESEM2019</IdReference>
+    </Reference>
+    <AnneeReference>2018</AnneeReference>
+    <PeriodeReference/>
+    <Vague idVague="01">
+        <Calendrier dateRetourSouhaitee="20190630">
+            <DateCollecte>
+                <Date>20190415</Date>
+                <EtapeCollecte>Ouverture</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20190701</Date>
+                <EtapeCollecte>Relance</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20190901</Date>
+                <EtapeCollecte>MiseEnDemeure</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20191001</Date>
+                <EtapeCollecte>ConstatNonReponse</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20191231</Date>
+                <EtapeCollecte>Fermeture</EtapeCollecte>
+            </DateCollecte>
+        </Calendrier>
+				</Vague>
+     <Vague idVague="02">
+        <Calendrier dateRetourSouhaitee="20190630">
+            <DateCollecte>
+                <Date>20190415</Date>
+                <EtapeCollecte>Ouverture</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20190701</Date>
+                <EtapeCollecte>Relance</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20190901</Date>
+                <EtapeCollecte>MiseEnDemeure</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20191001</Date>
+                <EtapeCollecte>ConstatNonReponse</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20191231</Date>
+                <EtapeCollecte>Fermeture</EtapeCollecte>
+            </DateCollecte>
+        </Calendrier>
+				</Vague>
+    <Vague idVague="99">
+        <Calendrier dateRetourSouhaitee="20190630">
+            <DateCollecte>
+                <Date>20190415</Date>
+                <EtapeCollecte>Ouverture</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20190701</Date>
+                <EtapeCollecte>Relance</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20190901</Date>
+                <EtapeCollecte>MiseEnDemeure</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20191001</Date>
+                <EtapeCollecte>ConstatNonReponse</EtapeCollecte>
+            </DateCollecte>
+            <DateCollecte>
+                <Date>20191231</Date>
+                <EtapeCollecte>Fermeture</EtapeCollecte>
+            </DateCollecte>
+        </Calendrier>
+		</Vague>
+ </Campagne>
+</InformationsCollecte>

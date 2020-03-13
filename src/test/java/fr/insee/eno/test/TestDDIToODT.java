@@ -7,13 +7,19 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.xmlunit.diff.Diff;
 
-import fr.insee.eno.GenerationService;
 import fr.insee.eno.generation.DDI2ODTGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
-import fr.insee.eno.preprocessing.DDIPreprocessor;
+import fr.insee.eno.service.GenerationService;
+import fr.insee.eno.postprocessing.Postprocessor;
+import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
+import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
 
 public class TestDDIToODT {
-
+	
+	private DDI2ODTGenerator ddi2odt = new DDI2ODTGenerator();
+	
 	private XMLDiff xmlDiff = new XMLDiff();
 
 	
@@ -21,8 +27,15 @@ public class TestDDIToODT {
 	public void simpleDiffTest() {
 		try {
 			String basePath = "src/test/resources/ddi-to-odt";
-			GenerationService genService = new GenerationService(new DDIPreprocessor(), new DDI2ODTGenerator(),
-					new NoopPostprocessor());
+			
+			Preprocessor[] preprocessors = {
+					new DDIDereferencingPreprocessor(),
+					new DDICleaningPreprocessor(),
+					new DDITitlingPreprocessor()};
+			
+			Postprocessor[] postprocessors = {new NoopPostprocessor()};
+			
+			GenerationService genService = new GenerationService(preprocessors, ddi2odt, postprocessors);
 			File in = new File(String.format("%s/in.xml", basePath));
 			File outputFile = genService.generateQuestionnaire(in, "ddi-2-odt-test");
 			File expectedFile = new File(String.format("%s/out.fodt", basePath));

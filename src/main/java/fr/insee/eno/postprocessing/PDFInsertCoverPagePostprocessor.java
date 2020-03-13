@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import fr.insee.eno.Constants;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
+@Deprecated
 public class PDFInsertCoverPagePostprocessor implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(PDFInsertCoverPagePostprocessor.class);

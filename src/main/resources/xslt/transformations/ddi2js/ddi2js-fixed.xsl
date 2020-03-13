@@ -29,20 +29,6 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p>The parameter file used by the stylesheet.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:param name="parameters-file"/>
-    
-    <xd:doc>
-        <xd:desc>
-            <xd:p>The parameters are charged as an xml tree.</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:variable name="parameters" select="doc($parameters-file)"/>
-    
-    <xd:doc>
-        <xd:desc>
             <xd:p>The folder containing label resources in different languages.</xd:p>
         </xd:desc>
     </xd:doc>
@@ -56,6 +42,37 @@
     </xd:doc>
     <xsl:variable name="labels-resource">
         <xsl:sequence select="eno:build-labels-resource($labels-folder,enojs:get-form-languages(//d:Sequence[d:TypeOfSequence/text()='template']))"/>
+    </xsl:variable>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The properties and parameters files are charged as xml trees.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:variable name="properties" select="doc($properties-file)"/>
+    <xsl:variable name="parameters">
+        <xsl:choose>
+            <xsl:when test="$parameters-node/*">
+                <xsl:copy-of select="$parameters-node"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="doc($parameters-file)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    
+    <xd:doc>
+        <xd:desc>Variables from propertiers and parameters</xd:desc>
+    </xd:doc>
+    <xsl:variable name="filterDescription">
+        <xsl:choose>
+            <xsl:when test="$parameters//FilterDescription != ''">
+                <xsl:value-of select="$parameters//FilterDescription"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//FilterDescription"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:variable>
     
     <xd:doc>
@@ -166,10 +183,15 @@
         <xsl:variable name="label">
             <xsl:sequence select="enoddi:get-label($context,$language)"/>
         </xsl:variable>
-        <xsl:call-template name="enojs:replace-variables-in-formula">
-            <xsl:with-param name="source-context" select="$context"/>
-            <xsl:with-param name="formula" select="enojs:surround-label-with-quote(enojs:replace-double-quote-by-simple-quote($label))"/>
-        </xsl:call-template>
+        <xsl:choose>
+            <xsl:when test="$label!=''">
+                <xsl:call-template name="enojs:replace-variables-in-formula">
+                    <xsl:with-param name="source-context" select="$context"/>
+                    <xsl:with-param name="formula" select="enojs:surround-label-with-quote(enojs:replace-double-quote-by-simple-quote($label))"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:function>
     
     <xsl:function name="enojs:surround-label-with-quote">
@@ -345,7 +367,7 @@
             <xsl:when test="$type='text'">
                 <xsl:value-of select="concat('cast(',$variable,',','string)')"/>
             </xsl:when>
-            <xsl:when test="$type='number'">
+            <xsl:when test="$type='integer' or $type='decimal'">
                 <xsl:value-of select="concat('cast(',$variable,',','number)')"/>
             </xsl:when>
             <xsl:when test="$type='boolean'">

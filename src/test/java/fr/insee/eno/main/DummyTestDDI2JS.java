@@ -2,25 +2,41 @@ package fr.insee.eno.main;
 
 import java.io.File;
 
-import fr.insee.eno.GenerationService;
+import org.junit.Test;
+
 import fr.insee.eno.generation.DDI2JSGenerator;
-import fr.insee.eno.postprocessing.JSExternalizeVariablesPostprocessor;
-import fr.insee.eno.postprocessing.JSSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.JSVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
-import fr.insee.eno.preprocessing.DDIPreprocessor;
+import fr.insee.eno.postprocessing.js.JSExternalizeVariablesPostprocessor;
+import fr.insee.eno.postprocessing.js.JSInsertGenericQuestionsPostprocessor;
+import fr.insee.eno.postprocessing.js.JSSortComponentsPostprocessor;
+import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
+import fr.insee.eno.service.GenerationService;
+import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
+import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
+import fr.insee.eno.preprocessing.DDITitlingPreprocessor;
+import fr.insee.eno.preprocessing.Preprocessor;
 
 public class DummyTestDDI2JS {
-
-	public static void main(String[] args) {
+	
+	private DDI2JSGenerator ddi2jsGenerator = new DDI2JSGenerator();	
+	
+	@Test
+	public void mainTest() {
 		
 		String basePathDDI2JS = "src/test/resources/ddi-to-js";
+		
+		Preprocessor[] preprocessors = {
+				new DDIDereferencingPreprocessor(),
+				new DDICleaningPreprocessor(),
+				new DDITitlingPreprocessor()};
+		
 		Postprocessor[] postprocessors =  {
 				new JSSortComponentsPostprocessor(),
+				new JSInsertGenericQuestionsPostprocessor(),
 				new JSExternalizeVariablesPostprocessor(),
 				new JSVTLParserPostprocessor()};
 		
-		GenerationService genServiceDDI2JS = new GenerationService(new DDIPreprocessor(), new DDI2JSGenerator(),postprocessors);
+		GenerationService genServiceDDI2JS = new GenerationService(preprocessors, ddi2jsGenerator,postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathDDI2JS));
 		
 		try {

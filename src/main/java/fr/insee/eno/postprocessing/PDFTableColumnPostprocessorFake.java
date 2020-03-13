@@ -12,6 +12,7 @@ import fr.insee.eno.Constants;
 /**
  * PDF postprocessor.
  */
+@Deprecated
 public class PDFTableColumnPostprocessorFake implements Postprocessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(PDFTableColumnPostprocessorFake.class);

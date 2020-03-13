@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
+    
+    
+    <xs:complexType name="PDFParameters">
+        <xs:all>
+            <xs:element name="Format" type="Format" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Roster" type="Roster" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="TextArea" type="TextArea" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Table" type="Table" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Capture" type="Capture" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="PageBreakBetween" type="PageBreakBetween" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="AccompanyingMail" type="AccompanyingMail" minOccurs="0" maxOccurs="1" default=""/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="Format">
+        <xs:all>
+            <xs:element name="Orientation" type="Orientation" default="0" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Columns" type="xs:int" default="1" minOccurs="0" maxOccurs="1"/>
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="Roster">
+        <xs:sequence>
+            <xs:element name="Row" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DefaultSize" type="xs:int" default="15"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TextArea">
+        <xs:sequence>
+            <xs:element name="Row" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DefaultSize" type="xs:int" default="5" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Table">
+        <xs:sequence>
+            <xs:element name="Row" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DefaultSize" type="xs:int" default="19" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="Capture">
+        <xs:sequence>
+            <xs:element name="Numeric" type="CaptureEnum" minOccurs="0" maxOccurs="1" default="optical"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PageBreakBetween">
+        <xs:sequence>
+            <xs:element name="pdf" type="Level" minOccurs="0" maxOccurs="1" default=""/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    
+    <xs:simpleType name="Orientation">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="90"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CaptureEnum">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="manual"/>
+            <xs:enumeration value="optical"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Level">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value=""/>
+            <xs:enumeration value="module"/>
+            <xs:enumeration value="submodule"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AccompanyingMail">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value=""/>
+            <xs:enumeration value="cnrCOL"/>
+            <xs:enumeration value="entreeCOL"/>
+            <xs:enumeration value="medCOL"/>
+            <xs:enumeration value="ouvertureCOL"/>
+            <xs:enumeration value="relanceCOL"/>
+            <xs:enumeration value="relanceCOLEM"/>
+            <xs:enumeration value="accompagnementCOL"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

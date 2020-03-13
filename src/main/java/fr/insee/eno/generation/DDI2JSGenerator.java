@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.transform.xsl.XslParameters;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
@@ -17,8 +18,7 @@ public class DDI2JSGenerator implements Generator {
 
 	private static final Logger logger = LoggerFactory.getLogger(DDI2JSGenerator.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
@@ -35,14 +35,21 @@ public class DDI2JSGenerator implements Generator {
 		logger.debug("Output folder for basic-form : " + outputBasicFormPath);
 
 		String outputForm = outputBasicFormPath + "/form.xml";
+		
 		InputStream isTRANSFORMATIONS_DDI2JS_DDI2JS_XSL = Constants
 				.getInputStreamFromPath(Constants.TRANSFORMATIONS_DDI2JS_DDI2JS_XSL);
 
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 		OutputStream osOutputFile = FileUtils.openOutputStream(new File(outputForm));
-
-		saxonService.transformDDI2JS(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2JS_DDI2JS_XSL, parameters);
-
+		
+		try {
+			saxonService.transformDDI2JS(isFinalInput, osOutputFile, isTRANSFORMATIONS_DDI2JS_DDI2JS_XSL, parameters);
+		}catch(Exception e) {
+			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
+		}
+		
 		isTRANSFORMATIONS_DDI2JS_DDI2JS_XSL.close();
 
 		isFinalInput.close();

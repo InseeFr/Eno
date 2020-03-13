@@ -27,7 +27,7 @@
       <Level name="template"/>
       <Level name="module">
         <PreSeq/>
-        <NumParent>N</NumParent>
+        <NumParent>false</NumParent>
         <PostNumParentSeq/>
         <StyleNumSeq>I</StyleNumSeq>
         <PostNumSeq> - </PostNumSeq>
@@ -37,14 +37,14 @@
     <Question>
       <Level name="module">
         <PreQuest>&#x27A1; </PreQuest>
-        <NumParent>N</NumParent>
+        <NumParent>false</NumParent>
         <PostNumParentQuest/>
         <StyleNumQuest>1</StyleNumQuest>
         <PostNumQuest>. </PostNumQuest>
       </Level>
       <Level name="submodule">
         <PreQuest>&#x27A1; </PreQuest>
-        <NumParent>N</NumParent>
+        <NumParent>false</NumParent>
         <PostNumParentQuest/>
         <StyleNumQuest>1</StyleNumQuest>
         <PostNumQuest>. </PostNumQuest>

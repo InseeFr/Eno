@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+        
+    <xs:complexType name="FRParameters">
+        <xs:sequence>
+            <xs:element name="NumericExample" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Deblocage" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Satisfaction" type="xs:boolean" default="false" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="LengthOfLongTable" type="xs:int" default="7" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="DecimalSeparator" type="DecimalSeparator" default="," minOccurs="0" maxOccurs="1"/>
+            <xs:sequence>
+                <xs:element name="Css" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="DecimalSeparator">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="."/>
+            <xs:enumeration value=","/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

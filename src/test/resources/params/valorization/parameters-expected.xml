@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ENOParameters>
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>odt</OutFormat>
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        <PostProcessing>ddi-markdownToXhtml</PostProcessing>
+    </Pipeline>
+    <Parameters>
+        <StudyUnit>household</StudyUnit>
+        <Campagne>test</Campagne>
+        
+        <Languages>
+            <Language>de</Language>
+            <Language>fr</Language>
+            <Language>en</Language>
+        </Languages>
+        
+        <BeginQuestion>
+            <Identification>false</Identification>
+        </BeginQuestion>
+        <EndQuestion>
+            <ResponseTimeQuestion>false</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+        <fr-parameters>
+            
+            <NumericExample>true</NumericExample>
+            <Deblocage>false</Deblocage>
+            <Satisfaction>false</Satisfaction>
+            <LengthOfLongTable>56</LengthOfLongTable>
+            <DecimalSeparator>,</DecimalSeparator>
+        </fr-parameters>
+        <pdf-parameters>
+            <Format>
+                <Orientation>90</Orientation>
+                <Columns>1</Columns>
+            </Format>
+            <Roster>
+                <Row>
+                    <DefaultSize>12</DefaultSize>
+                </Row>
+            </Roster>
+            <TextArea>
+                <Row>
+                    <DefaultSize>3</DefaultSize>
+                </Row>
+            </TextArea>
+            <Table>
+                <Row>
+                    <DefaultSize>150</DefaultSize>
+                </Row>
+            </Table>
+            <Capture>
+                <Numeric>manual</Numeric>
+            </Capture>
+            <PageBreakBetween>
+                <pdf>module</pdf>
+            </PageBreakBetween>
+            <AccompanyingMail>cnrCOL</AccompanyingMail>            
+        </pdf-parameters>
+        <js-parameters>
+            <FilterDescription>false</FilterDescription>
+        </js-parameters>
+        <odt-parameters/>
+        <Title>
+            <Browsing>no-number</Browsing>
+            <Sequence>
+                <Level name="template"/>
+                <Level name="module">
+                    <PreSeq/>
+                    <NumParent>false</NumParent>
+                    <PostNumParentSeq/>
+                    <StyleNumSeq>I</StyleNumSeq>
+                    <PostNumSeq> - </PostNumSeq>
+                </Level>
+                <Level name="submodule"/>
+            </Sequence>
+            <Question>
+                <Level name="module">
+                    <PreQuest>➡ </PreQuest>
+                    <NumParent>false</NumParent>
+                    <PostNumParentQuest></PostNumParentQuest>
+                    <StyleNumQuest>1</StyleNumQuest>
+                    <PostNumQuest>%***%</PostNumQuest>
+                </Level>
+                <Level name="submodule">
+                    <PreQuest>➡ </PreQuest>
+                    <NumParent>false</NumParent>
+                    <PostNumParentQuest/>
+                    <StyleNumQuest>1</StyleNumQuest>
+                    <PostNumQuest>. </PostNumQuest>
+                </Level>
+            </Question>
+        </Title>
+    </Parameters>
+</ENOParameters>

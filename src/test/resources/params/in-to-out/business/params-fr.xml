@@ -1,0 +1,55 @@
+<ENOParameters>
+    
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>fr</OutFormat>
+        
+        <PreProcessing>ddi-mapping</PreProcessing>
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        
+        <PostProcessing>fr-insert-generic-questions</PostProcessing>
+        <PostProcessing>fr-browsing</PostProcessing>
+        <PostProcessing>fr-modele-coltrane</PostProcessing>
+        <PostProcessing>fr-edit-patron</PostProcessing>
+        <PostProcessing>fr-identification</PostProcessing>
+        <PostProcessing>fr-insert-welcome</PostProcessing>
+        <PostProcessing>fr-insert-end</PostProcessing>
+        <PostProcessing>fr-specificTreatment</PostProcessing>
+        <PostProcessing>fr-fix-adherence</PostProcessing>
+    </Pipeline>
+    
+    <Parameters>
+        
+        <StudyUnit>business</StudyUnit>
+        
+        <Campagne>esem-2019-a00</Campagne>
+        
+        <Languages>
+            <Language>fr</Language>
+        </Languages>
+        
+        <BeginQuestion>
+            <Identification>true</Identification>
+        </BeginQuestion>
+        
+        <EndQuestion>
+            <ResponseTimeQuestion>true</ResponseTimeQuestion>
+            <CommentQuestion>true</CommentQuestion>
+        </EndQuestion>
+        
+        <fr-parameters>            
+            <NumericExample>false</NumericExample>
+            <Deblocage>false</Deblocage>
+            <Satisfaction>false</Satisfaction>
+            <DecimalSeparator>.</DecimalSeparator>
+            <Css>enterpriseEnglish.css</Css>
+        </fr-parameters>
+        
+        <Title>
+            <Browsing>module</Browsing>
+        </Title>
+    </Parameters>
+    
+</ENOParameters>
