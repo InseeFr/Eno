@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:fr="http://orbeon.org/oxf/xml/form-runner" xmlns:xxf="http://orbeon.org/oxf/xml/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <xsl:output method="xml" indent="no" encoding="UTF-8" />
+    <xsl:output method="xml" indent="no" encoding="UTF-8"/>
 
-    <xsl:param name="properties-file" />
-    <xsl:param name="parameters-file" />
+    <xsl:param name="properties-file"/>
+    <xsl:param name="parameters-file"/>
     <xsl:param name="parameters-node" as="node()" required="no">
-        <empty />
+        <empty/>
     </xsl:param>
 
-    <xsl:variable name="business" select="'business'" />
-    <xsl:variable name="household" select="'household'" />
+    <xsl:variable name="business" select="'business'"/>
+    <xsl:variable name="household" select="'household'"/>
 
-    <xsl:variable name="properties" select="doc($properties-file)" />
+    <xsl:variable name="properties" select="doc($properties-file)"/>
     <xsl:variable name="parameters">
         <xsl:choose>
             <xsl:when test="$parameters-node/*">
-                <xsl:copy-of select="$parameters-node" />
+                <xsl:copy-of select="$parameters-node"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="doc($parameters-file)" />
+                <xsl:copy-of select="doc($parameters-file)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -27,28 +27,37 @@
     <xsl:variable name="studyUnit">
         <xsl:choose>
             <xsl:when test="$parameters//StudyUnit != ''">
-                <xsl:value-of select="$parameters//StudyUnit" />
+                <xsl:value-of select="$parameters//StudyUnit"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//StudyUnit" />
+                <xsl:value-of select="$properties//StudyUnit"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="deblocage-questionnaire" select="$parameters//Deblocage" as="xs:boolean" />
-    <xsl:variable name="enquete-satisfaction" select="$parameters//Satisfaction" as="xs:boolean" />
+    <xsl:variable name="deblocage-questionnaire" select="$parameters//Deblocage" as="xs:boolean"/>
+    <xsl:variable name="enquete-satisfaction" as="xs:boolean">
+        <xsl:choose>
+            <xsl:when test="$parameters//Satisfaction != ''">
+                <xsl:value-of select="$parameters//Satisfaction"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="false()"/>
+            </xsl:otherwise>
+        </xsl:choose>        
+    </xsl:variable>
     <!-- metadata : donnees-pilotage -->
-    <xsl:param name="metadata-file" />
+    <xsl:param name="metadata-file"/>
     <xsl:param name="metadata-node" as="node()" required="no">
-        <empty />
+        <empty/>
     </xsl:param>
 
     <xsl:variable name="metadata">
         <xsl:choose>
             <xsl:when test="$metadata-node/*">
-                <xsl:copy-of select="$metadata-node" />
+                <xsl:copy-of select="$metadata-node"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="doc($metadata-file)" />
+                <xsl:copy-of select="doc($metadata-file)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -61,7 +70,7 @@
         select="concat($ArticleServiceProducteur,$metadata/InformationsCollecte/ServiceProducteur/Libelle)"/>
 
     <xsl:template match="/">
-        <xsl:apply-templates select="xhtml:html" />
+        <xsl:apply-templates select="xhtml:html"/>
     </xsl:template>
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
@@ -72,36 +81,36 @@
     </xd:doc>
     <xsl:template match="node() | @*">
         <xsl:copy>
-            <xsl:apply-templates select="node() | @*" />
+            <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
     </xsl:template>
 
     <!-- The generic end page is replaced by 3 pages -->
     <!-- Instance : -->
     <xsl:template match="End[parent::form[parent::xf:instance[@id='fr-form-instance']]]">
-        <Validation />
+        <Validation/>
         <xsl:if test="$studyUnit=$business">
-            <Confirmation />
+            <Confirmation/>
         </xsl:if>
-        <xsl:copy />
+        <xsl:copy/>
     </xsl:template>
 
     <!-- We add the extracted tag in Util -->
     <xsl:template match="Send[parent::Util/parent::form[parent::xf:instance[@id='fr-form-instance']]]">
         <xsl:copy>
-            <xsl:apply-templates select="node() | @*" />
+            <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
         <extrait>non</extrait>
     </xsl:template>
 
     <!-- The binds -->
     <xsl:template match="xf:bind[@name='end' and ancestor::xf:bind[@id='fr-form-instance-binds']]">
-        <xf:bind id="validation-bind" name="validation" ref="Validation" relevant="instance('fr-form-instance')/Util/Send='false'" />
+        <xf:bind id="validation-bind" name="validation" ref="Validation" relevant="instance('fr-form-instance')/Util/Send='false'"/>
         <xsl:if test="$studyUnit=$business">
-            <xf:bind id="confirmation-bind" name="confirmation" ref="Confirmation" relevant="instance('fr-form-instance')/Util/Send='false'" />
+            <xf:bind id="confirmation-bind" name="confirmation" ref="Confirmation" relevant="instance('fr-form-instance')/Util/Send='false'"/>
         </xsl:if>
         <xsl:copy>
-            <xsl:apply-templates select="@*" />
+            <xsl:apply-templates select="@*"/>
         </xsl:copy>
     </xsl:template>
 
@@ -116,27 +125,27 @@
             </Confirmation>
         </xsl:if>
         <xsl:copy>
-            <xsl:apply-templates select="node() | @*" />
+            <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
     </xsl:template>
-    <xsl:template match="GenericEndText[ancestor::xf:instance[@id='fr-form-resources']]" />
+    <xsl:template match="GenericEndText[ancestor::xf:instance[@id='fr-form-resources']]"/>
 
     <!-- Pages in the util instance -->
     <xsl:template match="End[ancestor::xf:instance[@id='fr-form-util']]">
-        <Validation />
+        <Validation/>
         <xsl:if test="$studyUnit=$business">
-            <Confirmation />
+            <Confirmation/>
         </xsl:if>
-        <xsl:copy />
+        <xsl:copy/>
     </xsl:template>
 
     <!-- In the html -->
     <xsl:template match="xf:case[fr:section[@name='end']]">
         <xsl:variable name="index">
-            <xsl:value-of select="number(@id)" />
+            <xsl:value-of select="number(@id)"/>
         </xsl:variable>
         <xsl:variable name="link">
-            <xsl:value-of select="'{concat(xxf:property(''url-orbeon''),xxf:property(''lien-deconnexion''))}'" />
+            <xsl:value-of select="'{concat(xxf:property(''url-orbeon''),xxf:property(''lien-deconnexion''))}'"/>
         </xsl:variable>
 
         <xf:case id="{$index}">
@@ -211,7 +220,7 @@
             </xsl:if>
             <xsl:if test="$studyUnit=$household">
                 <fr:section id="validation-control" bind="validation-bind" name="validation">
-                    <xf:label ref="$form-resources/Validation/label" />
+                    <xf:label ref="$form-resources/Validation/label"/>
                     <xhtml:div class="center">
                         <xhtml:div class="frame">
                             <xhtml:p>
@@ -238,15 +247,15 @@
                             </xhtml:p>
                             <xhtml:div class="center-body">
                                 <xf:trigger id="send" bind="send-bind">
-                                    <xf:label ref="$form-resources/Send/label" />
+                                    <xf:label ref="$form-resources/Send/label"/>
                                     <xf:action ev:event="DOMActivate">
-                                        <xf:setvalue ref="instance('fr-form-util')/cliquable" value="string('non')" />
-                                        <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1" />
-                                        <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('oui')" />
-                                        <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime" value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')" />
-                                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="string(number(instance('fr-form-instance')/Util/CurrentSection)+1)" />
-                                        <xf:send submission="submit" />
-                                        <xf:send submission="expedierPdf" />
+                                        <xf:setvalue ref="instance('fr-form-util')/cliquable" value="string('non')"/>
+                                        <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
+                                        <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('oui')"/>
+                                        <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime" value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
+                                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="string(number(instance('fr-form-instance')/Util/CurrentSection)+1)"/>
+                                        <xf:send submission="submit"/>
+                                        <xf:send submission="expedierPdf"/>
                                     </xf:action>
                                 </xf:trigger>
                             </xhtml:div>
@@ -296,7 +305,7 @@
                                     <xf:setvalue ref="instance('fr-form-util')/PreviousNext"
                                         value="-1"/>
                                     <xf:dispatch name="page-change-done" targetid="fr-form-model"
-                                    />
+                                   />
                                 </xf:action>
                             </xf:trigger>
                         </xhtml:div>
@@ -305,17 +314,17 @@
             </xsl:if>
             <xsl:if test="$studyUnit=$household">
                 <fr:section id="end-control" bind="end-bind" name="end">
-                    <xf:label ref="$form-resources/End/label" />
+                    <xf:label ref="$form-resources/End/label"/>
                     <xhtml:div class="center center-body">
                         <xhtml:div class="frame">
-                            <xf:output id="confirmation-message" bind="confirmation-message-bind" class="confirmation-message" />
+                            <xf:output id="confirmation-message" bind="confirmation-message-bind" class="confirmation-message"/>
                             <xhtml:p>
                                 <xhtml:b>L'Insee vous remercie de votre collaboration à cette enquête.</xhtml:b>
                             </xhtml:p>
                             <xhtml:p>
                                 <xhtml:a href="recapitulatifPdf">Télécharger la preuve de votre participation à l'enquête </xhtml:a>
                                 .
-                                <xhtml:img src="/img/pdf.png" />
+                                <xhtml:img src="/img/pdf.png"/>
                             </xhtml:p>
                             <xhtml:p>
                                 Pour quitter l’enquête,&#160;
@@ -362,7 +371,7 @@
                                 <xhtml:a href="recapitulatifPdf">Télécharger le récapitulatif de vos
                                     réponses au format PDF</xhtml:a>. <xhtml:img
                                         src="{concat('/',$properties//images/dossier,'/',$properties//images/pdf)}"
-                                    />
+                                   />
                             </xhtml:p>
                             <xhtml:p>
                                 <xhtml:b>La Statistique publique vous remercie de votre collaboration à
@@ -387,14 +396,14 @@
     <!-- Some navigational elements are added for these last pages -->
     <xsl:template match="Util[parent::xf:instance[@id='fr-form-util']]">
         <xsl:copy>
-            <xsl:apply-templates select="node() | @*" />
+            <xsl:apply-templates select="node() | @*"/>
             <xsl:if test="$studyUnit=$business">
-                <confirmationNon />
-                <confirmationOui />
+                <confirmationNon/>
+                <confirmationOui/>
             </xsl:if>
-            <cliquable />
+            <cliquable/>
             <xsl:if test="$studyUnit=$business and $deblocage-questionnaire">
-                <debloquer />
+                <debloquer/>
             </xsl:if>
         </xsl:copy>
     </xsl:template>
@@ -404,17 +413,17 @@
         <xsl:choose>
             <xsl:when test="$studyUnit=$business">
                 <xsl:copy>
-                    <xsl:apply-templates select="node() | @*" />
-                    <xf:bind id="confirmationNon-bind" ref="confirmationNon" />
-                    <xf:bind id="confirmationOui-bind" ref="confirmationOui" />
+                    <xsl:apply-templates select="node() | @*"/>
+                    <xf:bind id="confirmationNon-bind" ref="confirmationNon"/>
+                    <xf:bind id="confirmationOui-bind" ref="confirmationOui"/>
                     <xsl:if test="$deblocage-questionnaire">
-                        <xf:bind id="debloquer-bind" ref="debloquer" />
+                        <xf:bind id="debloquer-bind" ref="debloquer"/>
                     </xsl:if>
                 </xsl:copy>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy>
-                    <xsl:apply-templates select="node() | @*" />
+                    <xsl:apply-templates select="node() | @*"/>
                 </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
@@ -423,9 +432,9 @@
     <!-- We modify the bind of the Send button to avoid double clicking. -->
     <xsl:template match="xf:bind[@id='send-bind']">
         <xsl:copy>
-            <xsl:apply-templates select="@*" />
+            <xsl:apply-templates select="@*"/>
             <xsl:attribute name="readonly">
-                <xsl:value-of select="'instance(''fr-form-util'')/cliquable=''non'''" />
+                <xsl:value-of select="'instance(''fr-form-util'')/cliquable=''non'''"/>
             </xsl:attribute>
         </xsl:copy>
     </xsl:template>
@@ -434,37 +443,37 @@
     <!-- If problem -->
     <xsl:template match="xf:action[@ev:event='xforms-submit-error' and parent::xf:submission[@id='submit']]">
         <xsl:copy>
-            <xsl:apply-templates select="@*" />
+            <xsl:apply-templates select="@*"/>
             <!-- Decrease the index by 1 -->
-            <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="string(number(instance('fr-form-instance')/Util/CurrentSection)-1)" />
-            <xsl:apply-templates select="node()" />
+            <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="string(number(instance('fr-form-instance')/Util/CurrentSection)-1)"/>
+            <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
     <!-- If the submission success -->
     <xsl:template match="xf:action[@ev:event='xforms-submit-done' and parent::xf:submission[@id='submit']]">
         <xsl:copy>
-            <xsl:apply-templates select="@*" />
+            <xsl:apply-templates select="@*"/>
             <!-- We're moving to a new page -->
             <xsl:variable name="choix">
-                <xsl:value-of select="'{instance(''fr-form-instance'')/Util/CurrentSection}'" />
+                <xsl:value-of select="'{instance(''fr-form-instance'')/Util/CurrentSection}'"/>
             </xsl:variable>
-            <xf:toggle case="{$choix}" />
-            <xf:setfocus control="page-top-control" />
-            <xsl:apply-templates select="node()" />
+            <xf:toggle case="{$choix}"/>
+            <xf:setfocus control="page-top-control"/>
+            <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
 
     <!-- the forced posting method corrects the conventional method at the margin. -->
     <xsl:template match="xf:submission[@id='save']">
         <xsl:copy>
-            <xsl:apply-templates select="node() | @*" />
+            <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
         <xsl:if test="$deblocage-questionnaire">
             <xsl:copy>
-                <xsl:attribute name="id" select="'enregistrer-deblocage'" />
-                <xsl:apply-templates select="@method | @ref | @replace | @relevant" />
-                <xsl:attribute name="resource" select="substring-before(@resource,'?')" />
-                <xsl:apply-templates select="node()" />
+                <xsl:attribute name="id" select="'enregistrer-deblocage'"/>
+                <xsl:apply-templates select="@method | @ref | @replace | @relevant"/>
+                <xsl:attribute name="resource" select="substring-before(@resource,'?')"/>
+                <xsl:apply-templates select="node()"/>
             </xsl:copy>
         </xsl:if>
     </xsl:template>
