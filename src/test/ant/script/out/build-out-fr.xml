@@ -82,7 +82,7 @@
         </if>
         
         <!-- On applique une verrue liée à chaque campagne -->
-        <if>
+        <!--<if>
             <available file="${questionnaires-folder}/${survey-name}/xforms-specific-treatment.xsl"/>
             <then>
                 <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-fin.${out-extension}"
@@ -97,12 +97,16 @@
             </else>
         </if>
         
-        <!-- On fait passer une xslt pour gommer l'effet du nouvel eno sur le form produit -->
+        <!-\- On fait passer une xslt pour gommer l'effet du nouvel eno sur le form produit -\->
         <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-verrue.${out-extension}"
             out="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"
             style="${xslt.home}/post-processing/fr/fix-adherence.xsl" force="true" classpath="${saxon.jar}"/>
-        
-        
+        -->
+        <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-fin.${out-extension}"
+            out="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"
+            style="${questionnaires-folder}/${survey-name}/xforms-specific-treatment.xsl" force="true" classpath="${saxon.jar}">
+            <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
+        </xslt>
         <!-- Si l'on souhaite supprimer les différentes étapes -->
         <delete file="${target-folder}/${survey-name}/${form-name}/form/form-basique.${out-extension}"/>
         <delete file="${target-folder}/${survey-name}/${form-name}/form/form-questions-coltrane.${out-extension}"/>

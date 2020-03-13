@@ -6084,8 +6084,15 @@
                       dialog="welcome-back"/>
          </xf:action>
          <xf:action ev:event="ChangementPage">
-            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*">
-               <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable and not(ancestor::Groupe[ancestor::*[name()=instance(''fr-form-instance'')/stromae/util/nomSectionCourante]])]">
+               <xf:dispatch name="DOMFocusOut" target="{concat(context()/@idVariable,'-control')}"/>
+            </xf:action>
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
+               <xf:var name="loop-index" value="position()"/>
+               <xf:setindex repeat="{context()/parent::Groupe/@idGroupe}" index="$loop-index"/>
+               <xf:action iterate="descendant::*">
+                  <xf:dispatch name="DOMFocusOut" target="{concat(context()/@idVariable,'-control')}"/>
+               </xf:action>
             </xf:action>
             <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                          value="string('false')"/>

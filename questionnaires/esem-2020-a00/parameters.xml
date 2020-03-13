@@ -24,7 +24,6 @@
             <Deblocage>false</Deblocage>
             <Satisfaction>false</Satisfaction>
             <DecimalSeparator>.</DecimalSeparator>
-            <Css>enterpriseEnglish.css</Css>
         </fr-parameters>
         <pdf-parameters>
             <Roster>

@@ -1155,7 +1155,7 @@
                         ref="instance('fr-form-instance')"
                         replace="none"
                         relevant="false"
-                        resource="{xxf:property('server-exist-orbeon')}/apps/orbeon/{xxf:property('enregistrer-service')}/esem-2019-a00/m1/{xxf:get-request-parameter('unite-enquete')}?ongletproof=oui">
+                        resource="{xxf:property('server-exist-orbeon')}/apps/orbeon/{xxf:property('enregistrer-service')}/esem-2020-a00/m1/{xxf:get-request-parameter('unite-enquete')}?ongletproof=oui">
             <xf:action ev:event="xforms-submit-error">
                <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
             </xf:action>
@@ -1168,7 +1168,7 @@
                         ref="instance('fr-form-instance')"
                         replace="none"
                         relevant="false"
-                        resource="{xxf:property('server-exist-orbeon')}/apps/orbeon/{xxf:property('enregistrer-service')}/esem-2019-a00/m1/{xxf:get-request-parameter('unite-enquete')}?ongletproof=oui">
+                        resource="{xxf:property('server-exist-orbeon')}/apps/orbeon/{xxf:property('enregistrer-service')}/esem-2020-a00/m1/{xxf:get-request-parameter('unite-enquete')}?ongletproof=oui">
             <xf:action ev:event="xforms-submit-error">
                <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
                             value="string(number(instance('fr-form-instance')/stromae/util/sectionCourante)-1)"/>
@@ -1185,7 +1185,7 @@
          <xf:submission id="expedierPdf"
                         method="post"
                         replace="none"
-                        resource="/expedier/esem-2019-a00/{xxf:get-request-parameter('unite-enquete')}?modele=m1"/>
+                        resource="/expedier/esem-2020-a00/{xxf:get-request-parameter('unite-enquete')}?modele=m1"/>
          <xf:action ev:event="xforms-ready">
             <xf:action xxf:iterate="instance('fr-form-instance')//Groupe[@typeGroupe='REPARTITION_CA']">
                <xf:action if="not(output-REPARTITION_CA1)">
@@ -1214,8 +1214,15 @@
                       dialog="welcome-back"/>
          </xf:action>
          <xf:action ev:event="ChangementPage">
-            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*">
-               <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable and not(ancestor::Groupe[ancestor::*[name()=instance(''fr-form-instance'')/stromae/util/nomSectionCourante]])]">
+               <xf:dispatch name="DOMFocusOut" target="{concat(context()/@idVariable,'-control')}"/>
+            </xf:action>
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
+               <xf:var name="loop-index" value="position()"/>
+               <xf:setindex repeat="{context()/parent::Groupe/@idGroupe}" index="$loop-index"/>
+               <xf:action iterate="descendant::*">
+                  <xf:dispatch name="DOMFocusOut" target="{concat(context()/@idVariable,'-control')}"/>
+               </xf:action>
             </xf:action>
             <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
                          value="string('false')"/>

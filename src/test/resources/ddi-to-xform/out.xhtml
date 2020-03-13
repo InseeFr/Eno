@@ -13,7 +13,7 @@
                 xxf:expose-xpath-types="true"
                 xxf:noscript-support="true">
          <xf:instance id="fr-form-instance">
-            <form modele="SIMPSONS">
+            <form modele="simpsons">
                <Beginning>
                   <GenericBeginningText/>
                </Beginning>
@@ -159,7 +159,7 @@
                   <j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-1/>
                   <j6qg8rc6-j6qg8rc6-secondDimension-fakeCL-1-2/>
                   <FAVOURITE_CHARACTERS-Container>
-                     <FAVOURITE_CHARACTERS id="FAVOURITE_CHARACTERS-1">
+                     <FAVOURITE_CHARACTERS occurrence-id="FAVOURITE_CHARACTERS-1">
                         <FAVOURITE_CHARACTERS11/>
                         <FAVOURITE_CHARACTERS21/>
                         <FAVOURITE_CHARACTERS31/>
@@ -203,7 +203,7 @@
          <xf:instance id="fr-form-loop-model">
             <LoopModels>
                <FAVOURITE_CHARACTERS-Container>
-                  <FAVOURITE_CHARACTERS id="">
+                  <FAVOURITE_CHARACTERS occurrence-id="">
                      <FAVOURITE_CHARACTERS11/>
                      <FAVOURITE_CHARACTERS21/>
                      <FAVOURITE_CHARACTERS31/>
@@ -2571,8 +2571,7 @@
                </xf:bind>
             </xf:bind>
          </xf:bind>
-         <!--You can add a resource attribute for the save submission by processing the result with your own xslt.-->
-         <xf:submission id="save"
+         <!--You can add a resource attribute for the save submission by processing the result with your own xslt.--><xf:submission id="save"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
@@ -2584,8 +2583,7 @@
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
-         <!--You can add a resource attribute for the submit submission by processing the result with your own xslt.-->
-         <xf:submission id="submit"
+         <!--You can add a resource attribute for the submit submission by processing the result with your own xslt.--><xf:submission id="submit"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
@@ -2605,7 +2603,7 @@
                              nodeset="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS"
                              position="after"
                              origin="instance('fr-form-loop-model')/FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS"/>
-                  <xf:setvalue ref="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS[last()]/@id"
+                  <xf:setvalue ref="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS[last()]/@occurrence-id"
                                value="concat('FAVOURITE_CHARACTERS-',count(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS))"/>
                </xf:action>
             </xf:action>
@@ -2618,8 +2616,15 @@
                       dialog="welcome-back"/>
          </xf:action>
          <xf:action ev:event="page-change">
-            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*">
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*[not(ancestor::*[ends-with(name(),'-Container') and ancestor::*[name()=instance('fr-form-instance')/Util/CurrentSectionName]])]">
                <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
+            </xf:action>
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[ends-with(name(),'-Container')]/*">
+               <xf:var name="loop-index" value="position()"/>
+               <xf:setindex repeat="{context()/parent::*/name()}" index="$loop-index"/>
+               <xf:action iterate="descendant::*">
+                  <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
+               </xf:action>
             </xf:action>
             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
             <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true()))">
@@ -4273,7 +4278,7 @@
                                       nodeset="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS"
                                       position="after"
                                       origin="instance('fr-form-loop-model')/FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS"/>
-                           <xf:setvalue ref="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS[last()]/@id"
+                           <xf:setvalue ref="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS[last()]/@occurrence-id"
                                         value="concat('FAVOURITE_CHARACTERS-',instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count)"/>
                         </xf:action>
                      </xf:trigger>
