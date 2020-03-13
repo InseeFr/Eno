@@ -95,7 +95,16 @@
             <xd:p>Boolean to hide numeric example.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:variable name="numeric-example" select="$parameters//NumericExample" as="xs:boolean" />
+    <xsl:variable name="numeric-example" as="xs:boolean">
+        <xsl:choose>
+            <xsl:when test="$parameters//NumericExample != ''">
+                <xsl:value-of select="$parameters//NumericExample"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//NumericExample"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
 
     <xd:doc>
         <xd:desc>
