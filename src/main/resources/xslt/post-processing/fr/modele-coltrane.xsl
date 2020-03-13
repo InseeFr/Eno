@@ -109,6 +109,29 @@
         </xsl:element>
     </xsl:template>
 
+    <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]//*[not(ancestor::*[ends-with(name(),''-Container'') and ancestor::*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]])]']">
+        <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable and not(ancestor::Groupe[ancestor::*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]])]">
+            <xf:dispatch name="DOMFocusOut">
+                <xsl:attribute name="target" select="'{concat(context()/@idVariable,''-control'')}'"/>
+            </xf:dispatch>
+        </xf:action>
+    </xsl:template>
+    
+    <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/stromae/util/nomSectionCourante]//*[ends-with(name(),''-Container'')]/*']">
+        <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
+            <xf:var name="loop-index" value="position()"/>
+            <xf:setindex>
+                <xsl:attribute name="repeat" select="'{context()/parent::Groupe/@idGroupe}'"/>
+                <xsl:attribute name="index" select="'$loop-index'"/>
+            </xf:setindex>
+            <xf:action iterate="descendant::*">
+                <xf:dispatch name="DOMFocusOut">
+                    <xsl:attribute name="target" select="'{concat(context()/@idVariable,''-control'')}'"/>
+                </xf:dispatch>
+            </xf:action>
+        </xf:action>
+    </xsl:template>
+
     <xsl:template match="*/@nodeset | */@relevant | */@readonly | */@calculate | *[@nodeset]/@* | xf:var/@* |
         xf:action/@if | xf:action/@iterate | xf:action/@while | xf:setvalue/@* | xf:constraint/@value | xf:insert/@*">
         <xsl:attribute name="{name()}">

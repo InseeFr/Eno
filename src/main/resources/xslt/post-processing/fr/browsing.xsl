@@ -512,12 +512,24 @@
             <!-- Page changing action -->
             <xf:action ev:event="page-change">
                 <!-- Iterating on every field of the current page and doing a DOMFocusOut in order to display potential error messages -->
-                <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*">
+                <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*[not(ancestor::*[ends-with(name(),'-Container') and ancestor::*[name()=instance('fr-form-instance')/Util/CurrentSectionName]])]">
                     <xf:dispatch name="DOMFocusOut">
                         <xsl:attribute name="target">
                             <xsl:value-of select="'{concat(context()/name(),''-control'')}'"/>
                         </xsl:attribute>
                     </xf:dispatch>
+                </xf:action>
+                <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[ends-with(name(),'-Container')]/*">
+                    <xf:var name="loop-index" value="position()"/>
+                    <xf:setindex>
+                        <xsl:attribute name="repeat" select="'{context()/parent::*/name()}'"/>
+                        <xsl:attribute name="index" select="'$loop-index'"/>
+                    </xf:setindex>
+                    <xf:action iterate="descendant::*">
+                        <xf:dispatch name="DOMFocusOut">
+                            <xsl:attribute name="target" select="'{concat(context()/name(),''-control'')}'"/>
+                        </xf:dispatch>
+                    </xf:action>
                 </xf:action>
                 <!-- The same for loops of pages -->
                 <xsl:for-each select="//fr:body/xf:repeat">
