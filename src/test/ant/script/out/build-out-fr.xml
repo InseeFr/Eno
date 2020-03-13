@@ -41,6 +41,7 @@
                 <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-modele-coltrane.${out-extension}"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-patron.${out-extension}"
                     style="${xslt.home}/post-processing/fr/edit-patron.xsl" force="true" classpath="${saxon.jar}">
+                    <param name="campaign" expression="${survey-name}"/>
                     <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
                     <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
                     <param name="metadata-file" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>

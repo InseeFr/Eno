@@ -56,7 +56,7 @@
 
                     <!-- Main instance, it contains the elements linked to fields, and which will be stored when the form will be submitted -->
                     <xf:instance id="fr-form-instance">
-                        <form modele="{enofr:get-form-model($source-context)}">
+                        <form modele="{lower-case(enofr:get-form-model($source-context))}">
                             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                                 <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
                             </xsl:apply-templates>
