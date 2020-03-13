@@ -476,7 +476,7 @@
                                     nodeset="instance('fr-form-instance')//{$container}/{$dynamic-array}"
                                     position="after"
                                     origin="instance('fr-form-loop-model')/{$container}/{$dynamic-array}"/>
-                                <xf:setvalue ref="instance('fr-form-instance')//{$container}/{$dynamic-array}[last()]/@id"
+                                <xf:setvalue ref="instance('fr-form-instance')//{$container}/{$dynamic-array}[last()]/@occurrence-id"
                                     value="concat('{$dynamic-array}-',count(instance('fr-form-instance')//{$container}/{$dynamic-array}))"/>
                             </xf:action>
                         </xf:action>
@@ -493,8 +493,8 @@
                                             nodeset="instance('fr-form-instance')//{@id}/{$dynamic-array}"
                                             position="after"
                                             origin="instance('fr-form-loop-model')/{@id}/{$dynamic-array}"/>
-                                        <xf:setvalue ref="instance('fr-form-instance')//{@id}/{$dynamic-array}[last()]/@id"
-                                            value="instance('fr-form-instance')//{$container}/{$dynamic-array}[position() = count(instance('fr-form-instance')//{@id}/{$dynamic-array})]/@id"/>
+                                        <xf:setvalue ref="instance('fr-form-instance')//{@id}/{$dynamic-array}[last()]/@occurrence-id"
+                                            value="instance('fr-form-instance')//{$container}/{$dynamic-array}[position() = count(instance('fr-form-instance')//{@id}/{$dynamic-array})]/@occurrence-id"/>
                                     </xf:action>
                                 </xf:action>
                             </xsl:if>

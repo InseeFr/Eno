@@ -227,7 +227,7 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:element name="{enofr:get-container-name($source-context)}">
             <xsl:element name="{$name}">
-                <xsl:attribute name="id" select="concat($name,'-1')"/>
+                <xsl:attribute name="occurrence-id" select="concat($name,'-1')"/>
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="." tunnel="yes"/>
                 </xsl:apply-templates>
@@ -251,7 +251,7 @@
         <xsl:variable name="name" select="enofr:get-name($source-context)"/>
         <xsl:element name="{enofr:get-container-name($source-context)}">
             <xsl:element name="{$name}">
-                <xsl:attribute name="id" select="concat($name,'-1')"/>
+                <xsl:attribute name="occurrence-id" select="concat($name,'-1')"/>
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="." tunnel="yes"/>
                 </xsl:apply-templates>
@@ -340,7 +340,7 @@
         <!-- create element with same name and acts like what is done for the instance part -->
         <xsl:element name="{enofr:get-container-name($source-context)}">
             <xsl:element name="{enofr:get-name($source-context)}">
-                <xsl:attribute name="id"/>
+                <xsl:attribute name="occurrence-id"/>
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
                 </xsl:apply-templates>
@@ -988,7 +988,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
+                <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
             </xsl:for-each>
         </xsl:variable>
         
@@ -1036,7 +1036,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
+                <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
             </xsl:for-each>
         </xsl:variable>
 
@@ -1838,7 +1838,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
+                <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
             </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="xforms-element">
@@ -2177,7 +2177,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
+                <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
             </xsl:for-each>
         </xsl:variable>
 
@@ -2234,7 +2234,7 @@
                         <xf:insert context="{$instance-ancestor-label}{.}"
                             nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
                             origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
-                        <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@id"
+                        <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@occurrence-id"
                             value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
                     </xsl:for-each>
                 </xf:action>
@@ -2373,7 +2373,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
+                <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
             </xsl:for-each>
         </xsl:variable>
 
@@ -2396,7 +2396,7 @@
                         <xf:insert context="{$instance-ancestor-label}{.}"
                             nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
                             origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
-                        <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@id"
+                        <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@occurrence-id"
                             value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
                     </xsl:for-each>
                 </xf:action>
@@ -2422,7 +2422,7 @@
         <xsl:variable name="instance-ancestor-label">
             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
             <xsl:for-each select="tokenize($instance-ancestor,' ')">
-                <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
+                <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
             </xsl:for-each>
         </xsl:variable>
 
@@ -3059,7 +3059,7 @@
                             <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
                             <xsl:if test="$variable-ancestors != ''">
                                 <xsl:for-each select="tokenize($variable-ancestors,' ')">
-                                    <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
+                                    <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
                                 </xsl:for-each>
                             </xsl:if>
                             <xsl:value-of select="enofr:get-variable-business-name($source-context,$conditioning-variable)"/>
@@ -3101,7 +3101,7 @@
                     <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
                     <xsl:for-each select="tokenize($variable-ancestors,' ')">
                         <xsl:if test=". = tokenize($instance-ancestor,' ')">
-                            <xsl:value-of select="concat(.,'[@id = current()/ancestor::',.,'/@id]//')"/>
+                            <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
                         </xsl:if>
                     </xsl:for-each>
                 </xsl:variable>
