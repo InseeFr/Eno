@@ -101,7 +101,7 @@
                 <xsl:value-of select="$parameters//NumericExample"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//NumericExample"/>
+                <xsl:value-of select="false()"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
