@@ -110,7 +110,7 @@
     </xsl:template>
 
     <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]//*[not(ancestor::*[ends-with(name(),''-Container'') and ancestor::*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]])]']">
-        <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable and not(ancestor::Groupe[ancestor::*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]])]">
+        <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable and not(ancestor::Groupe[ancestor::*[name()=instance('fr-form-instance')/Util/CurrentSectionName]])]">
             <xf:dispatch name="DOMFocusOut">
                 <xsl:attribute name="target" select="'{concat(context()/@idVariable,''-control'')}'"/>
             </xf:dispatch>
