@@ -133,7 +133,7 @@
     </xsl:template>
 
     <xsl:template match="*/@nodeset | */@relevant | */@readonly | */@calculate | *[@nodeset]/@* | xf:var/@* |
-        xf:action/@if | xf:action/@iterate | xf:action/@while | xf:setvalue/@* | xf:constraint/@value | xf:insert/@*">
+        xf:action/@if | xf:action/@iterate | xf:action/@while | xf:setvalue/@* | xf:constraint/@value | xf:insert/@* | xf:setindex/@*">
         <xsl:attribute name="{name()}">
             <xsl:call-template name="replace-element">
                 <xsl:with-param name="position" as="xs:integer" select="1"/>

@@ -873,6 +873,9 @@
                 then (count(instance('fr-form-instance')//{$container}/{$loop-id}[not(text()='false')][last()]/preceding-sibling::*[name()='{$loop-id}'])+1)
                               else 0)"/>
         </xf:action>
+        <xf:action if="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{@id}'] &gt; 0">
+            <xf:setindex repeat="{$container}" index="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{@id}']"/>
+        </xf:action>
  <!--Waiting for loop on several pages to be tested-->
         <!-- at least needs to add the occurrence of the loop -->
  <!--       <xf:action if="instance('fr-form-util')/PreviousNext='1' and number(instance('fr-form-instance')/Util/CurrentSection) = {$module-position}">
