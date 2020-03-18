@@ -60,8 +60,8 @@ public class TestValorizatorParametersImpl {
 
 		Pipeline pipeline = new Pipeline();
 		pipeline.setInFormat(InFormat.DDI);
-		pipeline.setOutFormat(OutFormat.FODT);
-		pipeline.getPostProcessing().add(PostProcessing.DDI_MARKDOWN_TO_XHTML);
+		pipeline.setOutFormat(OutFormat.FO);
+		pipeline.getPostProcessing().add(PostProcessing.FO_INSERT_ACCOMPANYING_MAILS);
 
 		complexeEnoParameters.setPipeline(pipeline);
 		Parameters parameters = new Parameters();
@@ -145,9 +145,9 @@ public class TestValorizatorParametersImpl {
 			System.out.println("Merging time : "+(System.currentTimeMillis()-debut)+" ms");
 			// Pipeline
 			Assert.assertEquals(InFormat.DDI, enoParametersFinal.getPipeline().getInFormat());
-			Assert.assertEquals(OutFormat.FODT, enoParametersFinal.getPipeline().getOutFormat());
+			Assert.assertEquals(OutFormat.FO, enoParametersFinal.getPipeline().getOutFormat());
 			// New value
-			Assert.assertEquals(Arrays.asList(PostProcessing.DDI_MARKDOWN_TO_XHTML), enoParametersFinal.getPipeline().getPostProcessing());
+			Assert.assertEquals(Arrays.asList(PostProcessing.FO_INSERT_ACCOMPANYING_MAILS), enoParametersFinal.getPipeline().getPostProcessing());
 
 			// Browsing
 			Assert.assertEquals(BrowsingEnum.NO_NUMBER, enoParametersFinal.getParameters().getTitle().getBrowsing());
@@ -158,9 +158,7 @@ public class TestValorizatorParametersImpl {
 			//AccompanyingMail
 			Assert.assertEquals(AccompanyingMail.CNR_COL, enoParametersFinal.getParameters().getFoParameters().getAccompanyingMail());
 			
-			Assert.assertEquals(true, enoParametersFinal.getParameters().getLunaticXmlParameters().isFilterDescription());
-
-
+			
 			debut = System.currentTimeMillis();
 			Path outPath = Paths.get(Constants.TEMP_FOLDER_PATH + "/complexe-parameters-new.xml");
 			Files.deleteIfExists(outPath);

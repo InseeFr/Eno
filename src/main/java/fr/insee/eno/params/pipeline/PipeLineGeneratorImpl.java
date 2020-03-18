@@ -35,7 +35,7 @@ import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPo
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
 import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
-import fr.insee.eno.postprocessing.xforms.XFORMSEditPatronPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInseePatternPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSFixAdherencePostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSIdentificationPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSInsertEndPostprocessor;
@@ -89,7 +89,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 
 	private XFORMSBrowsingPostprocessor xformsBrowsing = new XFORMSBrowsingPostprocessor();
 
-	private XFORMSEditPatronPostprocessor xformsEditPatron = new XFORMSEditPatronPostprocessor();
+	private XFORMSInseePatternPostprocessor xformsInseePattern = new XFORMSInseePatternPostprocessor();
 
 	private XFORMSFixAdherencePostprocessor xformsFixAdherence = new XFORMSFixAdherencePostprocessor();
 
@@ -101,7 +101,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 
 	private XFORMSInsertWelcomePostprocessor xformsInsertWelcome = new XFORMSInsertWelcomePostprocessor();
 
-	private XFORMSInseeModelPostprocessor xformsModeleColtrane = new XFORMSInseeModelPostprocessor();
+	private XFORMSInseeModelPostprocessor xformsInseeModel = new XFORMSInseeModelPostprocessor();
 
 	private XFORMSSpecificTreatmentPostprocessor xformsSpecificTreatment = new XFORMSSpecificTreatmentPostprocessor();
 
@@ -162,7 +162,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	public Preprocessor[] setPreProcessors(List<PreProcessing> preProcessings) {
 		List<Preprocessor> preprocessors = new ArrayList<Preprocessor>();
 		for(PreProcessing preProcessing : preProcessings) {
-			preprocessors.add(getPrePorcessor(preProcessing));
+			preprocessors.add(getPreProcessor(preProcessing));
 		}
 		return preprocessors.toArray(new Preprocessor[preprocessors.size()]);
 	}
@@ -222,7 +222,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			postprocessor = xformsBrowsing;
 			break;
 		case XFORMS_INSEE_PATTERN:
-			postprocessor = xformsEditPatron;
+			postprocessor = xformsInseePattern;
 			break;
 		case XFORMS_FIX_ADHERENCE:
 			postprocessor = xformsFixAdherence;
@@ -240,7 +240,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			postprocessor = xformsInsertWelcome;
 			break;
 		case XFORMS_INSEE_MODEL:
-			postprocessor = xformsModeleColtrane;
+			postprocessor = xformsInseeModel;
 			break;
 		case XFORMS_SPECIFIC_TREATMENT:
 			postprocessor = xformsSpecificTreatment;
@@ -292,7 +292,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	}
 
 	@Override
-	public Preprocessor getPrePorcessor(PreProcessing preProcessing) {
+	public Preprocessor getPreProcessor(PreProcessing preProcessing) {
 		Preprocessor preprocessor = null;
 		switch (preProcessing) {
 		case DDI_32_TO_DDI_33:

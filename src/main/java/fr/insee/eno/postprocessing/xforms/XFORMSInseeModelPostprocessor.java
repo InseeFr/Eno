@@ -54,7 +54,7 @@ public class XFORMSInseeModelPostprocessor implements Postprocessor {
 		}
 
 		try {
-			saxonService.transformModelColtraneXforms(inputStream, outputStream, FO_XSL, mappingStream);
+			saxonService.transformInseeModelXforms(inputStream, outputStream, FO_XSL, mappingStream);
 		}catch(Exception e) {
 			String errorMessage = "An error was occured during the " + toString() + " transformation. "+e.getMessage();
 			logger.error(errorMessage);
@@ -65,7 +65,7 @@ public class XFORMSInseeModelPostprocessor implements Postprocessor {
 		outputStream.close();
 		FO_XSL.close();
 		mappingStream.close();
-		logger.info("End of ModeleColtrane post-processing " + outputForFRFile.getAbsolutePath());
+		logger.info("End of InseeModel post-processing " + outputForFRFile.getAbsolutePath());
 
 		return outputForFRFile;
 

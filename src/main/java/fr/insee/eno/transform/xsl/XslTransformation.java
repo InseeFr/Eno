@@ -386,7 +386,7 @@ public class XslTransformation {
 		xslTransform(transformer, inputFile, outputFile);
 	}
 
-	public void transformModelColtraneXforms(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformInseeModelXforms(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			InputStream mappingFile) throws Exception {
 		LOGGER.info("Post-processing for FR transformation with mapping.xml file.");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();

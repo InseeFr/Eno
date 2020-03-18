@@ -54,6 +54,7 @@
                 <Numeric>optical</Numeric>
             </Capture>
             <PageBreakBetween/>
+            <AccompanyingMail/>
         </fo-parameters>
         
         <lunatic-xml-parameters>

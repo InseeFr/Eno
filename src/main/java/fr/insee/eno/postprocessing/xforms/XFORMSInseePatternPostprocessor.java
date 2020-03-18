@@ -14,9 +14,9 @@ import fr.insee.eno.parameters.PostProcessing;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
-public class XFORMSEditPatronPostprocessor implements Postprocessor {
+public class XFORMSInseePatternPostprocessor implements Postprocessor {
 
-	private static final Logger logger = LoggerFactory.getLogger(XFORMSEditPatronPostprocessor.class);
+	private static final Logger logger = LoggerFactory.getLogger(XFORMSInseePatternPostprocessor.class);
 
 	private XslTransformation saxonService = new XslTransformation();
 
