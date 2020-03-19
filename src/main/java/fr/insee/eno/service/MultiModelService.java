@@ -43,7 +43,7 @@ public class MultiModelService {
 	 * @param params : java object ENOParameter (required)
 	 * @param metadata : InputStream of metadata xml file (optional)
 	 * @param specificTreatment : InputStream of an xsl sheet (optional)
-	 * @param mapping : InputStream of a xml file using in FRModeleColtranePostProcessor (optional)
+	 * @param mapping : InputStream of a xml file using in XformsInseeModelPostProcessor (optional)
 	 * @return the Zip file which contains all generated files
 	 * @throws Exception
 	 */
@@ -107,7 +107,7 @@ public class MultiModelService {
 	 * @param params : InputStream of parameters xml file (required)
 	 * @param metadata : InputStream of metadata xml file (optional)
 	 * @param specificTreatment : InputStream of an xsl sheet (optional)
-	 * @param mapping : InputStream of a xml file using in FRModeleColtranePostProcessor (optional)
+	 * @param mapping : InputStream of a xml file using in XFORMSInseeModelPostProcessor (optional)
 	 * @return the Zip file which contains all generated files
 	 * @throws Exception
 	 */
@@ -175,7 +175,7 @@ public class MultiModelService {
 	 * @param params : xml File of ENOParameter (required)
 	 * @param metadata : xml File of metadata (optional)
 	 * @param specificTreatment : xsl file of the xsl sheet (optional)
-	 * @param mapping : a xml File using in FRModeleColtranePostProcessor (optional)
+	 * @param mapping : a xml File using in XFORMSInseeModelPostProcessor (optional)
 	 * @return the Zip file which contains all generated file
 	 * @throws Exception
 	 */

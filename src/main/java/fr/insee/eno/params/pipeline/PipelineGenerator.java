@@ -56,6 +56,6 @@ public interface PipelineGenerator {
 	 * @param postProcessing
 	 * @return the Preprocessor java class according to PreProcessing(Enum)
 	 */
-	public Preprocessor getPrePorcessor(PreProcessing preProcessing);
+	public Preprocessor getPreProcessor(PreProcessing preProcessing);
 
 }

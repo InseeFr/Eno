@@ -18,7 +18,7 @@ public class TestMultiModelGenerationService {
 	public void defaultTest() {
 		String basePathDDI = "src/test/resources/params/in-to-out/multimodel";
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
-		File params = new File(String.format("%s/params-fr.xml", basePathDDI));
+		File params = new File(String.format("%s/params-xforms.xml", basePathDDI));
 		
 		try {
 			File outputFile = multiModelService.generateQuestionnaire(input, params, null, null, null);

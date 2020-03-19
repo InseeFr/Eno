@@ -2,7 +2,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
     version="2.1">
-    <jxb:bindings schemaLocation="../generation/DDI2PDFGeneration.xsd">
+    <jxb:bindings schemaLocation="../generation/DDI2FOGeneration.xsd">
         <jxb:bindings node="//xs:simpleType[@name='AccompanyingMail']/xs:restriction/xs:enumeration[@value='']">
             <jxb:typesafeEnumMember name="NONE"/>
         </jxb:bindings>
@@ -16,7 +16,7 @@
             <jxb:typesafeEnumMember name="LANDSCAPE"/>
         </jxb:bindings>
     </jxb:bindings>
-    <jxb:bindings schemaLocation="../generation/DDI2FRGeneration.xsd">
+    <jxb:bindings schemaLocation="../generation/DDI2XFORMSGeneration.xsd">
         <jxb:bindings node="//xs:simpleType[@name='DecimalSeparator']/xs:restriction/xs:enumeration[@value='.']">
             <jxb:typesafeEnumMember name="POINT"/>
         </jxb:bindings>

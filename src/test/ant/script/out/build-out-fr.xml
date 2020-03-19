@@ -10,7 +10,7 @@
             <then>
                 <xslt in="${postprocessing-input-file}"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-fin.${out-extension}"
-                    style="${xslt.home}/post-processing/fr/browsing.xsl" force="true" classpath="${saxon.jar}">
+                    style="${xslt.home}/post-processing/xforms/browsing.xsl" force="true" classpath="${saxon.jar}">
                     <param name="labels-folder" expression="${lang-folder}/fr"/>
                 </xslt>
             </then>
@@ -18,7 +18,7 @@
                 <!-- On rajoute les questions spécifiques Coltrane -->
                 <xslt in="${postprocessing-input-file}"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-questions-coltrane.${out-extension}"
-                    style="${xslt.home}/post-processing/fr/insert-generic-questions.xsl" force="true" classpath="${saxon.jar}">
+                    style="${xslt.home}/post-processing/xforms/insert-generic-questions.xsl" force="true" classpath="${saxon.jar}">
                     <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
                     <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
                 </xslt>
@@ -26,21 +26,21 @@
                 <!-- Adding the layer in charge of the survey's navigation by applying browsing.xsl stylesheet -->
                 <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-questions-coltrane.${out-extension}"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-navigation.${out-extension}"
-                    style="${xslt.home}/post-processing/fr/browsing.xsl" force="true" classpath="${saxon.jar}">
+                    style="${xslt.home}/post-processing/xforms/browsing.xsl" force="true" classpath="${saxon.jar}">
                     <param name="labels-folder" expression="${lang-folder}/fr"/>
                 </xslt>
                 
                 <!-- On passe au modèle Coltrane -->
                 <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-navigation.${out-extension}"
-                    out="${target-folder}/${survey-name}/${form-name}/form/form-modele-coltrane.${out-extension}"
-                    style="${xslt.home}/post-processing/fr/modele-coltrane.xsl" force="true" classpath="${saxon.jar}">
+                    out="${target-folder}/${survey-name}/${form-name}/form/form-insee-model.${out-extension}"
+                    style="${xslt.home}/post-processing/xforms/insee-model.xsl" force="true" classpath="${saxon.jar}">
                     <param name="mapping-file" expression="${temp-folder}/${survey-name}/mapping.xml"/>
                 </xslt>
                 
                 <!-- On rajoute la couche liée à la navigation du questionnaire propre à Coltrane -->
-                <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-modele-coltrane.${out-extension}"
+                <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-insee-model.${out-extension}"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-patron.${out-extension}"
-                    style="${xslt.home}/post-processing/fr/edit-patron.xsl" force="true" classpath="${saxon.jar}">
+                    style="${xslt.home}/post-processing/xforms/insee-pattern.xsl" force="true" classpath="${saxon.jar}">
                     <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
                     <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
                     <param name="metadata-file" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>
@@ -52,7 +52,7 @@
                         <!-- On rajoute la partie sur l'identification -->
                         <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-patron.${out-extension}"
                             out="${target-folder}/${survey-name}/${form-name}/form/form-identification.${out-extension}"
-                            style="${xslt.home}/post-processing/fr/identification.xsl" force="true" classpath="${saxon.jar}"/>                        
+                            style="${xslt.home}/post-processing/xforms/identification.xsl" force="true" classpath="${saxon.jar}"/>                        
                     </then>
                     <else>
                         <copy file="${target-folder}/${survey-name}/${form-name}/form/form-patron.${out-extension}"
@@ -63,7 +63,7 @@
                 <!-- On surcharge la première page par une page d'accueil -->
                 <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-identification.${out-extension}"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-accueil.${out-extension}"
-                    style="${xslt.home}/post-processing/fr/insert-welcome.xsl" force="true" classpath="${saxon.jar}">
+                    style="${xslt.home}/post-processing/xforms/insert-welcome.xsl" force="true" classpath="${saxon.jar}">
                     <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
                     <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
                     <param name="metadata-file" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>
@@ -72,7 +72,7 @@
                 <!-- On surcharge la dernière page par plusieurs pages de fin -->
                 <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-accueil.${out-extension}"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-fin.${out-extension}"
-                    style="${xslt.home}/post-processing/fr/insert-end.xsl" force="true" classpath="${saxon.jar}">
+                    style="${xslt.home}/post-processing/xforms/insert-end.xsl" force="true" classpath="${saxon.jar}">
                     <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2fr.xml"/>
                     <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
                     <param name="metadata-file" expression="${questionnaires-folder}/${survey-name}/metadata.xml"/>
@@ -99,14 +99,14 @@
         <!-- On fait passer une xslt pour gommer l'effet du nouvel eno sur le form produit -->
         <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-verrue.${out-extension}"
             out="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"
-            style="${xslt.home}/post-processing/fr/fix-adherence.xsl" force="true" classpath="${saxon.jar}"/>
+            style="${xslt.home}/post-processing/xforms/fix-adherence.xsl" force="true" classpath="${saxon.jar}"/>
         
         
         <!-- Si l'on souhaite supprimer les différentes étapes -->
         <delete file="${target-folder}/${survey-name}/${form-name}/form/form-basique.${out-extension}"/>
         <delete file="${target-folder}/${survey-name}/${form-name}/form/form-questions-coltrane.${out-extension}"/>
         <delete file="${target-folder}/${survey-name}/${form-name}/form/form-navigation.${out-extension}"/>
-        <delete file="${target-folder}/${survey-name}/${form-name}/form/form-modele-coltrane.${out-extension}"/>
+        <delete file="${target-folder}/${survey-name}/${form-name}/form/form-insee-model.${out-extension}"/>
         <delete file="${target-folder}/${survey-name}/${form-name}/form/form-patron.${out-extension}"/>
         <delete file="${target-folder}/${survey-name}/${form-name}/form/form-identification.${out-extension}"/>
         <delete file="${target-folder}/${survey-name}/${form-name}/form/form-accueil.${out-extension}"/>

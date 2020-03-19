@@ -4,7 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
+
 
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -73,17 +73,17 @@ public class XslTransformation {
 	public void transformCleaning(InputStream input, InputStream xslSheet, OutputStream output, String in2out)
 			throws Exception {
 		String default_properties_file = null;
-		if (in2out == "ddi2fr") {
-			default_properties_file = Constants.CONFIG_DDI2FR;
+		if (in2out == "ddi2xforms") {
+			default_properties_file = Constants.CONFIG_DDI2XFORMS;
 		}
-		if (in2out == "ddi2odt") {
-			default_properties_file = Constants.CONFIG_DDI2ODT;
+		if (in2out == "ddi2fodt") {
+			default_properties_file = Constants.CONFIG_DDI2FODT;
 		}
-		if (in2out == "ddi2pdf") {
-			default_properties_file = Constants.CONFIG_DDI2PDF;
+		if (in2out == "ddi2fo") {
+			default_properties_file = Constants.CONFIG_DDI2FO;
 		}
-		if (in2out == "ddi2js") {
-			default_properties_file = Constants.CONFIG_DDI2JS;
+		if (in2out == "ddi2lunatic-xml") {
+			default_properties_file = Constants.CONFIG_DDI2LUNATIC_XML;
 		}
 		LOGGER.debug("Using the basic transformer");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
@@ -255,33 +255,33 @@ public class XslTransformation {
 		}
 	}
 
-	public void transformDDI2FR(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
+	public void transformDDI2XFORMS(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
 			throws Exception {
 		LOGGER.info("Producing a basic XForms from the DDI spec");
-		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2FR);
+		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2XFORMS);
 
 	}
 
-	public void transformDDI2ODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformDDI2FODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters) throws Exception {
 		LOGGER.info("Producing a basic ODT from the DDI spec");
-		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2ODT);
+		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2FODT);
 
 	}
 
-	public void transformDDI2PDF(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformDDI2FO(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters) throws Exception {
 		LOGGER.info("Producing a basic PDF (Fo) from the DDI spec");
 
-		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2PDF);
+		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2FO);
 
 	}
 
-	public void transformDDI2JS(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
+	public void transformDDI2LunaticXML(InputStream inputFile, OutputStream outputFile, InputStream xslSheet, byte[] parameters)
 			throws Exception {
 		LOGGER.info("Producing a JS (xml file) from the DDI spec");
 
-		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2JS);
+		transformIn2Out(inputFile, outputFile, xslSheet, parameters, Constants.CONFIG_DDI2LUNATIC_XML);
 
 	}
 
@@ -310,15 +310,15 @@ public class XslTransformation {
 		transformBrowsingin2Out(inputFile, outputFile, xslSheet, labelFolder);
 	}
 
-	public void transformBrowsingDDI2ODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformBrowsingDDI2FODT(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			File labelFolder) throws Exception {
 		LOGGER.info("Include the navigation elements into the ODT questionnaire");
 		transformBrowsingin2Out(inputFile, outputFile, xslSheet, labelFolder);
 	}
 
-	public void transformBrowsingDDI2JS(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformBrowsingDDI2LunaticXML(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			File labelFolder) throws Exception {
-		LOGGER.info("Include the navigation elements into the JS questionnaire");
+		LOGGER.info("Include the navigation elements into the Lunatic XML questionnaire");
 		transformBrowsingin2Out(inputFile, outputFile, xslSheet, labelFolder);
 	}
 
@@ -329,9 +329,9 @@ public class XslTransformation {
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
 		transformer.setErrorListener(new EnoErrorListener());
-		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2PDF);
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2FO);
 		LOGGER.debug(String.format("FO Transformer parameters file is: %s",
-				transformer.getParameter(Constants.CONFIG_DDI2PDF)));
+				transformer.getParameter(Constants.CONFIG_DDI2FO)));
 		xslTransform(transformer, inputFile, outputFile);
 	}
 
@@ -357,7 +357,7 @@ public class XslTransformation {
 		transformer.setErrorListener(new EnoErrorListener());
 		transformer.setParameter(XslParameters.IN2OUT_SURVEY_NAME, surveyName);
 		transformer.setParameter(XslParameters.IN2OUT_FORM_NAME, formName);
-		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2PDF);
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2FO);
 		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
 		if (parameters != null) {
 			parametersIS = new ByteArrayInputStream(parameters);
@@ -373,7 +373,7 @@ public class XslTransformation {
 	/* POST transformations */
 	// FR
 
-	public void transformBrowsingFr(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
+	public void transformBrowsingXforms(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
 			throws Exception {
 		LOGGER.info("Post-processing browsing for FR transformation.");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
@@ -386,7 +386,7 @@ public class XslTransformation {
 		xslTransform(transformer, inputFile, outputFile);
 	}
 
-	public void transformModelColtraneFr(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformInseeModelXforms(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			InputStream mappingFile) throws Exception {
 		LOGGER.info("Post-processing for FR transformation with mapping.xml file.");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
@@ -412,7 +412,7 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2FR);
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2XFORMS);
 		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
 		transformer.setParameter(XslParameters.IN2OUT_METADATA_FILE, Constants.METADATA_DEFAULT);
 		if (metadata != null) {
@@ -436,7 +436,7 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(specificTreatmentXsl));
-		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2FR);
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2XFORMS);
 		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
 
 		if (parameters != null) {
@@ -455,7 +455,7 @@ public class XslTransformation {
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(specificTreatmentXsl));
-		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2PDF);
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2FO);
 		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
 
 		if (parameters != null) {
@@ -467,14 +467,14 @@ public class XslTransformation {
 		xslTransform(transformer, inputFile, outputFile);
 	}
 
-	public void transformFRToFRSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformXformsToXformsSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters) throws Exception {
 		InputStream parametersIS = null;
-		LOGGER.info("Post-processing for FR transformation with parameter file");
+		LOGGER.info("Post-processing for Xforms transformation with parameter file");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2FR);
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2XFORMS);
 		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
 		if (parameters != null) {
 			parametersIS = new ByteArrayInputStream(parameters);
@@ -485,14 +485,14 @@ public class XslTransformation {
 		xslTransform(transformer, inputFile, outputFile);
 	}
 	
-	public void transformJSToJSSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
+	public void transformLunaticXMLToLunaticXMLSimplePost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet,
 			byte[] parameters) throws Exception {
 		InputStream parametersIS = null;
 		LOGGER.info("Post-processing for JS transformation with parameter file");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();
 		tFactory.setURIResolver(new ClasspathURIResolver());
 		Transformer transformer = tFactory.newTransformer(new StreamSource(xslSheet));
-		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2JS);
+		transformer.setParameter(XslParameters.IN2OUT_PROPERTIES_FILE, Constants.CONFIG_DDI2LUNATIC_XML);
 		transformer.setParameter(XslParameters.IN2OUT_PARAMETERS_FILE, Constants.PARAMETERS_DEFAULT);
 		if (parameters != null) {
 			parametersIS = new ByteArrayInputStream(parameters);
@@ -514,7 +514,7 @@ public class XslTransformation {
 
 	// JS
 
-	public void transformJSToJSPost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
+	public void transformLunaticXMLToLunaticXMLPost(InputStream inputFile, OutputStream outputFile, InputStream xslSheet)
 			throws Exception {
 		LOGGER.info("Post-processing for JS transformation");
 		TransformerFactory tFactory = new net.sf.saxon.TransformerFactoryImpl();

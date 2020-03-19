@@ -67,7 +67,7 @@ public class ParameterizedGenerationService {
 	 * @param params : java object ENOParameter (required)
 	 * @param metadata : InputStream of metadata xml file (optional)
 	 * @param specificTreatment : InputStream of an xsl sheet (optional)
-	 * @param mapping : InputStream of a xml file using in FRModeleColtranePostProcessor (optional)
+	 * @param mapping : InputStream of a xml file using in XFORMSInseeModel (optional)
 	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */
@@ -182,7 +182,7 @@ public class ParameterizedGenerationService {
 	 * @param params : xml File of ENOParameter (required)
 	 * @param metadata : xml File of metadata (optional)
 	 * @param specificTreatment : xsl file of the xsl sheet (optional)
-	 * @param mapping : a xml File using in FRModeleColtranePostProcessor (optional)
+	 * @param mapping : a xml File using in XFORMSInseeModelProcessor (optional)
 	 * @return the file resulting from the xslt transformations
 	 * @throws Exception
 	 */

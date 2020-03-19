@@ -2,14 +2,14 @@
 <ENOParameters>
     <Pipeline>
         <InFormat>ddi</InFormat>
-        <OutFormat>odt</OutFormat>
+        <OutFormat>fodt</OutFormat>
         <PreProcessing>ddi-dereferencing</PreProcessing>
         <PreProcessing>ddi-cleaning</PreProcessing>
         <PreProcessing>ddi-titling</PreProcessing>
         <PostProcessing>ddi-markdownToXhtml</PostProcessing>
     </Pipeline>
     <Parameters>
-        <StudyUnit>household</StudyUnit>
+        <Context>household</Context>
         <Campagne>test</Campagne>
         <Languages>
             <Language>de</Language>
@@ -24,15 +24,15 @@
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
         
-        <fr-parameters>
+        <xforms-parameters>
             
             <NumericExample>true</NumericExample>
             <Deblocage>false</Deblocage>
             <Satisfaction>false</Satisfaction>
             <LengthOfLongTable>56</LengthOfLongTable>
             <DecimalSeparator>,</DecimalSeparator>
-        </fr-parameters>
-        <pdf-parameters>
+        </xforms-parameters>
+        <fo-parameters>
             <Format>
                 <Orientation>90</Orientation>
             </Format>
@@ -58,7 +58,7 @@
                 <pdf>module</pdf>
             </PageBreakBetween>
             <AccompanyingMail>cnrCOL</AccompanyingMail>            
-        </pdf-parameters>
+        </fo-parameters>
         <Title>
             <Browsing>no-number</Browsing>
             <Sequence>

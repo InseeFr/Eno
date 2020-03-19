@@ -20,7 +20,7 @@ public class TestParameterizedGenerationServicePDF {
 	public void defaultTest() {
 		String basePathDDI = "src/test/resources/params/in-to-out/default";
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
-		File params = new File(String.format("%s/params-pdf.xml", basePathDDI));
+		File params = new File(String.format("%s/params-fo.xml", basePathDDI));
 		
 		try {
 			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, null, null);
@@ -39,8 +39,8 @@ public class TestParameterizedGenerationServicePDF {
 	public void householdTest() {
 		String basePathDDI = "src/test/resources/params/in-to-out/household";
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
-		File params = new File(String.format("%s/params-pdf.xml", basePathDDI));
-		File specificTreatment = new File(String.format("%s/pdf-specific-treatment.xsl", basePathDDI));
+		File params = new File(String.format("%s/params-fo.xml", basePathDDI));
+		File specificTreatment = new File(String.format("%s/fo-specific-treatment.xsl", basePathDDI));
 		
 		try {
 			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment, null);
@@ -59,8 +59,8 @@ public class TestParameterizedGenerationServicePDF {
 	public void businessTest() {
 		String basePathDDI = "src/test/resources/params/in-to-out/business";
 		File input = new File(String.format("%s/ddi.xml", basePathDDI));
-		File params = new File(String.format("%s/params-pdf.xml", basePathDDI));
-		File specificTreatment = new File(String.format("%s/pdf-specific-treatment.xsl", basePathDDI));
+		File params = new File(String.format("%s/params-fo.xml", basePathDDI));
+		File specificTreatment = new File(String.format("%s/fo-specific-treatment.xsl", basePathDDI));
 		
 		try {
 			File outputFile = parameterizedGenerationService.generateQuestionnaire(input, params, null, specificTreatment, null);

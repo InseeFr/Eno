@@ -45,19 +45,19 @@ public class TestValidator {
 		List<PreProcessing> preProcessings = Arrays.asList(
 				PreProcessing.DDI_DEREFERENCING);
 		List<PostProcessing> postProcessings = Arrays.asList(
-				PostProcessing.FR_BROWSING,
-				PostProcessing.FR_MODELE_COLTRANE);
+				PostProcessing.XFORMS_BROWSING,
+				PostProcessing.XFORMS_INSEE_MODEL);
 		
 		Pipeline pipeline = new Pipeline();
 		pipeline.setInFormat(InFormat.DDI);
-		pipeline.setOutFormat(OutFormat.FR);
+		pipeline.setOutFormat(OutFormat.XFORMS);
 		pipeline.getPreProcessing().addAll(preProcessings);
 		pipeline.getPostProcessing().addAll(postProcessings);
 		
 		List<PreProcessing> preProcessings2 = Arrays.asList(
 				PreProcessing.DDI_DEREFERENCING);
 		List<PostProcessing> postProcessings2 = Arrays.asList(
-				PostProcessing.FR_BROWSING);
+				PostProcessing.XFORMS_BROWSING);
 		
 		Pipeline pipeline2 = new Pipeline();
 		pipeline2.setInFormat(InFormat.DDI);
@@ -78,8 +78,8 @@ public class TestValidator {
 	
 	@Test
 	public void testValidateIn2Out() {
-		ValidationMessage valid0 = validator.validateIn2Out(InFormat.DDI, OutFormat.FR);
-		ValidationMessage valid1 = validator.validateIn2Out(InFormat.POGUES_XML, OutFormat.FR);
+		ValidationMessage valid0 = validator.validateIn2Out(InFormat.DDI, OutFormat.XFORMS);
+		ValidationMessage valid1 = validator.validateIn2Out(InFormat.POGUES_XML, OutFormat.XFORMS);
 		ValidationMessage valid2 = validator.validateIn2Out(InFormat.DDI, OutFormat.DDI);
 		ValidationMessage valid3 = validator.validateIn2Out(InFormat.POGUES_XML, OutFormat.DDI);
 		ValidationMessage valid4 = validator.validateIn2Out(InFormat.DDI, OutFormat.POGUES_XML);
