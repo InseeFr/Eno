@@ -38,7 +38,7 @@ public class DDISplittingPreprocessor  {
 		
 		try {
 			saxonService.transformDereferencing(isInputFile, isDDI_DEREFERENCING_XSL, osTEMP_NULL_TMP,
-					Constants.sUB_TEMP_FOLDER_FILE(survey));
+					Constants.SUB_TEMP_FOLDER_FILE(survey));
 		}catch(Exception e) {
 			throw new EnoGenerationException("An error was occured during the " + toString() + " transformation. "+e.getMessage());
 		}
@@ -48,7 +48,7 @@ public class DDISplittingPreprocessor  {
 		osTEMP_NULL_TMP.close();
 		// ----- Cleaning
 		LOGGER.debug("Cleaning target");
-		File f = Constants.sUB_TEMP_FOLDER_FILE(survey);
+		File f = Constants.SUB_TEMP_FOLDER_FILE(survey);
 		File[] matchCleaningInput = f.listFiles(new FilenameFilter() {
 
 			@Override

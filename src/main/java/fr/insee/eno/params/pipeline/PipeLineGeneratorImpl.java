@@ -7,10 +7,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.insee.eno.generation.DDI2FRGenerator;
-import fr.insee.eno.generation.DDI2JSGenerator;
-import fr.insee.eno.generation.DDI2ODTGenerator;
-import fr.insee.eno.generation.DDI2PDFGenerator;
+import fr.insee.eno.generation.DDI2XFORMSGenerator;
+import fr.insee.eno.generation.DDI2LunaticXMLGenerator;
+import fr.insee.eno.generation.DDI2FODTGenerator;
+import fr.insee.eno.generation.DDI2FOGenerator;
 import fr.insee.eno.generation.DDI2PoguesXMLGenerator;
 import fr.insee.eno.generation.Generator;
 import fr.insee.eno.generation.IdentityGenerator;
@@ -23,26 +23,26 @@ import fr.insee.eno.parameters.PreProcessing;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.postprocessing.Postprocessor;
 import fr.insee.eno.postprocessing.ddi.DDIMarkdown2XhtmlPostprocessor;
-import fr.insee.eno.postprocessing.fr.FRBrowsingPostprocessor;
-import fr.insee.eno.postprocessing.fr.FREditPatronPostprocessor;
-import fr.insee.eno.postprocessing.fr.FRFixAdherencePostprocessor;
-import fr.insee.eno.postprocessing.fr.FRIdentificationPostprocessor;
-import fr.insee.eno.postprocessing.fr.FRInsertEndPostprocessor;
-import fr.insee.eno.postprocessing.fr.FRInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.fr.FRInsertWelcomePostprocessor;
-import fr.insee.eno.postprocessing.fr.FRModeleColtranePostprocessor;
-import fr.insee.eno.postprocessing.fr.FRSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.js.JSExternalizeVariablesPostprocessor;
-import fr.insee.eno.postprocessing.js.JSInsertGenericQuestionsPostprocessor;
-import fr.insee.eno.postprocessing.js.JSSortComponentsPostprocessor;
-import fr.insee.eno.postprocessing.js.JSVTLParserPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFEditStructurePagesPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFInsertAccompanyingMailsPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFInsertCoverPagePostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFInsertEndQuestionPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFMailingPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFSpecificTreatmentPostprocessor;
-import fr.insee.eno.postprocessing.pdf.PDFTableColumnPostprocessorFake;
+import fr.insee.eno.postprocessing.fo.FOEditStructurePagesPostprocessor;
+import fr.insee.eno.postprocessing.fo.FOInsertAccompanyingMailsPostprocessor;
+import fr.insee.eno.postprocessing.fo.FOInsertCoverPagePostprocessor;
+import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
+import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
+import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
+import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInseePatternPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSFixAdherencePostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSIdentificationPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInsertEndPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInsertGenericQuestionsPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInsertWelcomePostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSInseeModelPostprocessor;
+import fr.insee.eno.postprocessing.xforms.XFORMSSpecificTreatmentPostprocessor;
 import fr.insee.eno.preprocessing.DDI32ToDDI33Preprocessor;
 import fr.insee.eno.preprocessing.DDICleaningPreprocessor;
 import fr.insee.eno.preprocessing.DDIDereferencingPreprocessor;
@@ -59,13 +59,13 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	// In2Out Generator
 	private IdentityGenerator identityGenerator = new IdentityGenerator();
 	
-	private DDI2FRGenerator ddi2frGenerator = new DDI2FRGenerator();
+	private DDI2XFORMSGenerator ddi2xformsGenerator = new DDI2XFORMSGenerator();
 
-	private DDI2JSGenerator ddi2jsGenerator = new DDI2JSGenerator();
+	private DDI2LunaticXMLGenerator ddi2lunaticXmlGenerator = new DDI2LunaticXMLGenerator();
 
-	private DDI2ODTGenerator ddi2odtGenerator = new DDI2ODTGenerator();
+	private DDI2FODTGenerator ddi2fodtGenerator = new DDI2FODTGenerator();
 
-	private DDI2PDFGenerator ddi2pdfGenerator = new DDI2PDFGenerator();
+	private DDI2FOGenerator ddi2foGenerator = new DDI2FOGenerator();
 
 	private DDI2PoguesXMLGenerator ddi2poguesXmlGenerator = new DDI2PoguesXMLGenerator();
 
@@ -87,45 +87,45 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	// PostProcessing
 	private DDIMarkdown2XhtmlPostprocessor ddiMW2XHTML = new DDIMarkdown2XhtmlPostprocessor();
 
-	private FRBrowsingPostprocessor frBrowsing = new FRBrowsingPostprocessor();
+	private XFORMSBrowsingPostprocessor xformsBrowsing = new XFORMSBrowsingPostprocessor();
 
-	private FREditPatronPostprocessor frEditPatron = new FREditPatronPostprocessor();
+	private XFORMSInseePatternPostprocessor xformsInseePattern = new XFORMSInseePatternPostprocessor();
 
-	private FRFixAdherencePostprocessor frFixAdherence = new FRFixAdherencePostprocessor();
+	private XFORMSFixAdherencePostprocessor xformsFixAdherence = new XFORMSFixAdherencePostprocessor();
 
-	private FRIdentificationPostprocessor frIdentification = new FRIdentificationPostprocessor();
+	private XFORMSIdentificationPostprocessor xformsIdentification = new XFORMSIdentificationPostprocessor();
 
-	private FRInsertEndPostprocessor frInsertEnd = new FRInsertEndPostprocessor();
+	private XFORMSInsertEndPostprocessor xformsInsertEnd = new XFORMSInsertEndPostprocessor();
 
-	private FRInsertGenericQuestionsPostprocessor frInsertGenericQuestions = new FRInsertGenericQuestionsPostprocessor();
+	private XFORMSInsertGenericQuestionsPostprocessor xformsInsertGenericQuestions = new XFORMSInsertGenericQuestionsPostprocessor();
 
-	private FRInsertWelcomePostprocessor frInsertWelcome = new FRInsertWelcomePostprocessor();
+	private XFORMSInsertWelcomePostprocessor xformsInsertWelcome = new XFORMSInsertWelcomePostprocessor();
 
-	private FRModeleColtranePostprocessor frModeleColtrane = new FRModeleColtranePostprocessor();
+	private XFORMSInseeModelPostprocessor xformsInseeModel = new XFORMSInseeModelPostprocessor();
 
-	private FRSpecificTreatmentPostprocessor frSpecificTreatment = new FRSpecificTreatmentPostprocessor();
+	private XFORMSSpecificTreatmentPostprocessor xformsSpecificTreatment = new XFORMSSpecificTreatmentPostprocessor();
 
-	private PDFEditStructurePagesPostprocessor pdfEditStructurePages = new PDFEditStructurePagesPostprocessor();
+	private FOEditStructurePagesPostprocessor foEditStructurePages = new FOEditStructurePagesPostprocessor();
 
-	private PDFInsertAccompanyingMailsPostprocessor pdfInsertAccompanyingMails = new PDFInsertAccompanyingMailsPostprocessor();
+	private FOInsertAccompanyingMailsPostprocessor foInsertAccompanyingMails = new FOInsertAccompanyingMailsPostprocessor();
 
-	private PDFInsertCoverPagePostprocessor pdfInsertCoverPage = new PDFInsertCoverPagePostprocessor();
+	private FOInsertCoverPagePostprocessor foInsertCoverPage = new FOInsertCoverPagePostprocessor();
 
-	private PDFInsertEndQuestionPostprocessor pdfInsertEndQuestion = new PDFInsertEndQuestionPostprocessor();
+	private FOInsertEndQuestionPostprocessor foInsertEndQuestion = new FOInsertEndQuestionPostprocessor();
 	
-	private PDFMailingPostprocessor pdfMailing = new PDFMailingPostprocessor();
+	private FOMailingPostprocessor foMailing = new FOMailingPostprocessor();
 	
-	private PDFSpecificTreatmentPostprocessor pdfSpecificTreatment = new PDFSpecificTreatmentPostprocessor();
+	private FOSpecificTreatmentPostprocessor foSpecificTreatment = new FOSpecificTreatmentPostprocessor();
 	
-	private PDFTableColumnPostprocessorFake pdfTableColumn = new PDFTableColumnPostprocessorFake();
+	private FOTableColumnPostprocessorFake foTableColumn = new FOTableColumnPostprocessorFake();
 	
-	private JSInsertGenericQuestionsPostprocessor jsInsertGenericQuestions = new JSInsertGenericQuestionsPostprocessor();
+	private LunaticXMLInsertGenericQuestionsPostprocessor lunaticXmlInsertGenericQuestions = new LunaticXMLInsertGenericQuestionsPostprocessor();
 	
-	private JSExternalizeVariablesPostprocessor jsExternalizeVariables = new JSExternalizeVariablesPostprocessor();
+	private LunaticXMLExternalizeVariablesPostprocessor lunaticXmlExternalizeVariables = new LunaticXMLExternalizeVariablesPostprocessor();
 	
-	private JSSortComponentsPostprocessor jsSortComponents = new JSSortComponentsPostprocessor();
+	private LunaticXMLSortComponentsPostprocessor lunaticXmlSortComponents = new LunaticXMLSortComponentsPostprocessor();
 	
-	private JSVTLParserPostprocessor jsvtlParser = new JSVTLParserPostprocessor();
+	private LunaticXMLVTLParserPostprocessor lunaticXmlvtlParser = new LunaticXMLVTLParserPostprocessor();
 	
 	private NoopPostprocessor noop = new NoopPostprocessor();
 	
@@ -162,7 +162,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	public Preprocessor[] setPreProcessors(List<PreProcessing> preProcessings) {
 		List<Preprocessor> preprocessors = new ArrayList<Preprocessor>();
 		for(PreProcessing preProcessing : preProcessings) {
-			preprocessors.add(getPrePorcessor(preProcessing));
+			preprocessors.add(getPreProcessor(preProcessing));
 		}
 		return preprocessors.toArray(new Preprocessor[preprocessors.size()]);
 	}
@@ -177,17 +177,17 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			case DDI:
 				generator = identityGenerator;
 				break;
-			case FR:
-				generator = ddi2frGenerator;
+			case XFORMS:
+				generator = ddi2xformsGenerator;
 				break;
-			case JS:
-				generator = ddi2jsGenerator;
+			case LUNATIC_XML:
+				generator = ddi2lunaticXmlGenerator;
 				break;
-			case ODT:
-				generator = ddi2odtGenerator;
+			case FODT:
+				generator = ddi2fodtGenerator;
 				break;
-			case PDF:
-				generator = ddi2pdfGenerator;
+			case FO:
+				generator = ddi2foGenerator;
 				break;
 			case POGUES_XML:
 				generator = ddi2poguesXmlGenerator;
@@ -204,7 +204,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 				break;
 			}
 			break;
-		case FR:
+		case XFORMS:
 			generator = identityGenerator;
 			break;
 		}
@@ -218,73 +218,73 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 		case DDI_MARKDOWN_TO_XHTML:
 			postprocessor = ddiMW2XHTML;
 			break;
-		case FR_BROWSING:
-			postprocessor = frBrowsing;
+		case XFORMS_BROWSING:
+			postprocessor = xformsBrowsing;
 			break;
-		case FR_EDIT_PATRON:
-			postprocessor = frEditPatron;
+		case XFORMS_INSEE_PATTERN:
+			postprocessor = xformsInseePattern;
 			break;
-		case FR_FIX_ADHERENCE:
-			postprocessor = frFixAdherence;
+		case XFORMS_FIX_ADHERENCE:
+			postprocessor = xformsFixAdherence;
 			break;
-		case FR_IDENTIFICATION:
-			postprocessor = frIdentification;
+		case XFORMS_IDENTIFICATION:
+			postprocessor = xformsIdentification;
 			break;
-		case FR_INSERT_END:
-			postprocessor = frInsertEnd;
+		case XFORMS_INSERT_END:
+			postprocessor = xformsInsertEnd;
 			break;
-		case FR_INSERT_GENERIC_QUESTIONS:
-			postprocessor = frInsertGenericQuestions;
+		case XFORMS_INSERT_GENERIC_QUESTIONS:
+			postprocessor = xformsInsertGenericQuestions;
 			break;
-		case FR_INSERT_WELCOME:
-			postprocessor = frInsertWelcome;
+		case XFORMS_INSERT_WELCOME:
+			postprocessor = xformsInsertWelcome;
 			break;
-		case FR_MODELE_COLTRANE:
-			postprocessor = frModeleColtrane;
+		case XFORMS_INSEE_MODEL:
+			postprocessor = xformsInseeModel;
 			break;
-		case FR_SPECIFIC_TREATMENT:
-			postprocessor = frSpecificTreatment;
+		case XFORMS_SPECIFIC_TREATMENT:
+			postprocessor = xformsSpecificTreatment;
 			break;
-		case PDF_EDIT_STRUCTURE_PAGES:
-			postprocessor = pdfEditStructurePages;
+		case FO_EDIT_STRUCTURE_PAGES:
+			postprocessor = foEditStructurePages;
 			break;
-		case PDF_INSERT_ACCOMPANYING_MAILS:
-			postprocessor = pdfInsertAccompanyingMails;
+		case FO_INSERT_ACCOMPANYING_MAILS:
+			postprocessor = foInsertAccompanyingMails;
 			break;
-		case PDF_INSERT_COVER_PAGE:
-			postprocessor = pdfInsertCoverPage;
+		case FO_INSERT_COVER_PAGE:
+			postprocessor = foInsertCoverPage;
 			break;
-		case PDF_INSERT_END_QUESTION:
-			postprocessor = pdfInsertEndQuestion;
+		case FO_INSERT_END_QUESTION:
+			postprocessor = foInsertEndQuestion;
 			break;
-		case PDF_MAILING:
-			postprocessor = pdfMailing;
+		case FO_MAILING:
+			postprocessor = foMailing;
 			break;
-		case PDF_SPECIFIC_TREATMENT:
-			postprocessor = pdfSpecificTreatment;
+		case FO_SPECIFIC_TREATMENT:
+			postprocessor = foSpecificTreatment;
 			break;
-		case PDF_TABLE_COLUMN:
-			postprocessor = pdfTableColumn;
+		case FO_TABLE_COLUMN:
+			postprocessor = foTableColumn;
 			break;
-		case JS_EXTERNALIZE_VARIABLES:
-			postprocessor = jsExternalizeVariables;
+		case LUNATIC_XML_EXTERNALIZE_VARIABLES:
+			postprocessor = lunaticXmlExternalizeVariables;
 			break;
-		case JS_INSERT_GENERIC_QUESTIONS:
-			postprocessor= jsInsertGenericQuestions;
+		case LUNATIC_XML_INSERT_GENERIC_QUESTIONS:
+			postprocessor= lunaticXmlInsertGenericQuestions;
 			break;
-		case JS_SORT_COMPONENTS:
-			postprocessor = jsSortComponents;
+		case LUNATIC_XML_SORT_COMPONENTS:
+			postprocessor = lunaticXmlSortComponents;
 			break;
-		case JS_VTL_PARSER:
-			postprocessor = jsvtlParser;
+		case LUNATIC_XML_VTL_PARSER:
+			postprocessor = lunaticXmlvtlParser;
 			break;
-		case JS_SPECIFIC_TREATMENT:
+		case LUNATIC_XML_SPECIFIC_TREATMENT:
 			postprocessor = noop;
 			break;
 		case DDI_SPECIFIC_TREATMENT:
 			postprocessor = noop;
 			break;
-		case ODT_SPECIFIC_TREATMENT:
+		case FODT_SPECIFIC_TREATMENT:
 			postprocessor = noop;
 			break;
 		}
@@ -292,7 +292,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	}
 
 	@Override
-	public Preprocessor getPrePorcessor(PreProcessing preProcessing) {
+	public Preprocessor getPreProcessor(PreProcessing preProcessing) {
 		Preprocessor preprocessor = null;
 		switch (preProcessing) {
 		case DDI_32_TO_DDI_33:

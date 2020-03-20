@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.StringReader;
+
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,9 +17,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.FileUtils;
@@ -29,12 +26,6 @@ import org.slf4j.LoggerFactory;
 import fr.insee.eno.Constants;
 import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.parameters.ENOParameters;
-import fr.insee.eno.parameters.LevelAbstract;
-import fr.insee.eno.parameters.LevelQuestion;
-import fr.insee.eno.parameters.LevelSequence;
-import fr.insee.eno.transform.xsl.ClasspathURIResolver;
-import fr.insee.eno.transform.xsl.EnoErrorListener;
-import fr.insee.eno.transform.xsl.XslParameters;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
 

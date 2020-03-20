@@ -1,0 +1,27 @@
+<ENOParameters>
+    
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>xforms</OutFormat>
+        
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        
+        <PostProcessing>xforms-browsing</PostProcessing>
+        <PostProcessing>xforms-fix-adherence</PostProcessing>
+    </Pipeline>
+    
+    <Parameters>
+        
+        <Context>default</Context>
+        
+        <Campagne>simpsons</Campagne>
+        
+        <Languages>
+            <Language>fr</Language>
+            <Language>en</Language>
+        </Languages>        
+    </Parameters>
+    
+</ENOParameters>

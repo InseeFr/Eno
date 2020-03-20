@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-import fr.insee.eno.generation.DDI2FRGenerator;
+import fr.insee.eno.generation.DDI2XFORMSGenerator;
 import fr.insee.eno.postprocessing.NoopPostprocessor;
 import fr.insee.eno.service.GenerationService;
 import fr.insee.eno.postprocessing.Postprocessor;
@@ -15,12 +15,12 @@ import fr.insee.eno.preprocessing.Preprocessor;
 
 public class DummyTestDDI2XForms {
 	
-	private DDI2FRGenerator ddi2frGenerator = new DDI2FRGenerator();
+	private DDI2XFORMSGenerator ddi2xformsGenerator = new DDI2XFORMSGenerator();
 	
 	@Test
 	public void mainTest() {
 
-		String basePathDDI2XFORMS = "src/test/resources/ddi-to-xform";
+		String basePathDDI2XFORMS = "src/test/resources/ddi-to-xforms";
 		
 		Preprocessor[] preprocessors = {
 				new DDIDereferencingPreprocessor(),
@@ -29,7 +29,7 @@ public class DummyTestDDI2XForms {
 		
 		Postprocessor[] postprocessors = {new NoopPostprocessor()};
 		
-		GenerationService genServiceDDI2XFORMS = new GenerationService(preprocessors, ddi2frGenerator, postprocessors);
+		GenerationService genServiceDDI2XFORMS = new GenerationService(preprocessors, ddi2xformsGenerator, postprocessors);
 		File in = new File(String.format("%s/in.xml", basePathDDI2XFORMS));
 
 		try {
