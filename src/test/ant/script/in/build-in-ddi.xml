@@ -7,9 +7,9 @@
         <!-- Creates a mapping.tmp file in the temp folder-->
         <if>
             <and>
-                <equals arg1="${Properties.OutFormat}" arg2="fr"/>
+                <equals arg1="${Properties.OutFormat}" arg2="xforms"/>
                 <not>
-                    <equals arg1="${ENOParameters.Parameters.StudyUnit}" arg2="default"/>
+                    <equals arg1="${ENOParameters.Parameters.Context}" arg2="default"/>
                 </not>
             </and>
             <then>
@@ -34,7 +34,7 @@
         <!-- Creating a -final suffixed file -->
         <if>
             <not>
-                <equals arg1="${Properties.OutFormat}" arg2="pogues"/>
+                <equals arg1="${Properties.OutFormat}" arg2="xml-pogues"/>
             </not>
             <then>
                 <foreach target="titling" param="file" inheritall="true">

@@ -5,7 +5,7 @@
     <!-- **************************** xformsPostProcessing ************************************************************************** -->
     <target name="xformsPostProcessing">
         <if>
-            <equals arg1="${ENOParameters.Parameters.StudyUnit}" arg2="default"/>
+            <equals arg1="${ENOParameters.Parameters.Context}" arg2="default"/>
             <then>
                 <xslt in="${postprocessing-input-file}"
                     out="${target-folder}/${survey-name}/${form-name}/form/form-insert-end.${out-extension}"
@@ -46,7 +46,7 @@
                 </xslt>
                 
                 <if>
-                    <equals arg1="${ENOParameters.Parameters.StudyUnit}" arg2="business"/>
+                    <equals arg1="${ENOParameters.Parameters.Context}" arg2="business"/>
                     <then>
                         <!-- insert identification half-page -->
                         <xslt in="${target-folder}/${survey-name}/${form-name}/form/form-insee-pattern.${out-extension}"
