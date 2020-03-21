@@ -19,7 +19,7 @@
         
         <EndQuestion>
             <ResponseTimeQuestion>false</ResponseTimeQuestion>
-            <CommentQuestion>false</CommentQuestion>
+            <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
         
         <xforms-parameters>
@@ -61,7 +61,7 @@
         </fo-parameters>
         
         <lunatic-xml-parameters>
-            <FilterDescription>false</FilterDescription>
+            <FilterDescription>true</FilterDescription>
         </lunatic-xml-parameters>
         
         <fodt-parameters/>
