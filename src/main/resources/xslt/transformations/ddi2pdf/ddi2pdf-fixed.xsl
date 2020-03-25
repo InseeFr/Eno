@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
-    xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner"
-    xmlns:enoddi2pdf="http://xml.insee.fr/apps/eno/ddi2pdf"
+    xmlns:enofo="http://xml.insee.fr/apps/eno/out/fo"
+    xmlns:enoddi2fo="http://xml.insee.fr/apps/eno/ddi2fo"
     xmlns:d="ddi:datacollection:3_3"
     xmlns:r="ddi:reusable:3_3" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:l="ddi:logicalproduct:3_3" version="2.0">
 
@@ -37,7 +37,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:variable name="labels-resource">
-        <xsl:sequence select="eno:build-labels-resource($labels-folder,enopdf:get-form-languages(//d:Sequence[d:TypeOfSequence/text()='template']))"/>
+        <xsl:sequence select="eno:build-labels-resource($labels-folder,enofo:get-form-languages(//d:Sequence[d:TypeOfSequence/text()='template']))"/>
     </xsl:variable>
 
     <xd:doc>
@@ -60,11 +60,11 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Linking output function enopdf:get-body-line to input function enoddi:get-table-line.</xd:p>
+            <xd:p>Linking output function enofo:get-body-line to input function enoddi:get-table-line.</xd:p>
             <xd:p>This function has too many parameters to stay in the functions.fods file</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-body-line">
+    <xsl:function name="enofo:get-body-line">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="index"/>
         <xsl:param name="table-first-line"/>
@@ -73,11 +73,11 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Linking output function enopdf:get-rowspan to input function enoddi:get-rowspan.</xd:p>
+            <xd:p>Linking output function enofo:get-rowspan to input function enoddi:get-rowspan.</xd:p>
             <xd:p>This function has too many parameters to stay in the functions.fods file</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-rowspan">
+    <xsl:function name="enofo:get-rowspan">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="table-first-line"/>
         <xsl:param name="table-last-line"/>
@@ -91,7 +91,7 @@
             <xd:p>If not, it will get the languages defined in the DDI input.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-form-languages">
+    <xsl:function name="enofo:get-form-languages">
         <xsl:param name="context" as="item()"/>
         <xsl:choose>
             <xsl:when test="$parameters/Parameters/Languages">
@@ -105,12 +105,12 @@
         </xsl:choose>
     </xsl:function>
 
-    <xsl:function name="enopdf:get-label">
+    <xsl:function name="enofo:get-label">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
         <xsl:param name="loop-navigation" as="node()"/>
         <xsl:variable name="tempLabel">
-            <xsl:apply-templates select="enoddi:get-label($context,$language)" mode="enopdf:format-label">
+            <xsl:apply-templates select="enoddi:get-label($context,$language)" mode="enofo:format-label">
                 <xsl:with-param name="label-variables" select="enoddi:get-label-conditioning-variables($context,$language)" tunnel="yes"/>
                 <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()" tunnel="yes"/>
             </xsl:apply-templates>
@@ -118,12 +118,12 @@
         <xsl:sequence select="$tempLabel"/>
     </xsl:function>
     
-    <xsl:function name="enopdf:get-fixed-value">
+    <xsl:function name="enofo:get-fixed-value">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="language"/>
         <xsl:param name="loop-navigation" as="node()"/>
         <xsl:variable name="tempLabel">
-            <xsl:apply-templates select="enoddi:get-cell-value($context)" mode="enopdf:format-label">
+            <xsl:apply-templates select="enoddi:get-cell-value($context)" mode="enofo:format-label">
                 <xsl:with-param name="label-variables" select="enoddi:get-cell-value-variables($context)" tunnel="yes"/>
                 <xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()" tunnel="yes"/>
             </xsl:apply-templates>
@@ -131,30 +131,30 @@
         <xsl:sequence select="$tempLabel"/>
     </xsl:function>
 
-    <xsl:template match="*" mode="enopdf:format-label" priority="-1">
+    <xsl:template match="*" mode="enofo:format-label" priority="-1">
         <xsl:copy>
-            <xsl:apply-templates select="node()|@*" mode="enopdf:format-label"/>
+            <xsl:apply-templates select="node()|@*" mode="enofo:format-label"/>
         </xsl:copy>
     </xsl:template>
      
-    <xsl:template match="xhtml:p | xhtml:span" mode="enopdf:format-label">
-        <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+    <xsl:template match="xhtml:p | xhtml:span" mode="enofo:format-label">
+        <xsl:apply-templates select="node()" mode="enofo:format-label"/>
     </xsl:template>
     
-    <xsl:template match="xhtml:span[@class='block']" mode="enopdf:format-label">
+    <xsl:template match="xhtml:span[@class='block']" mode="enofo:format-label">
         <xsl:element name="fo:block">
-            <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+            <xsl:apply-templates select="node()" mode="enofo:format-label"/>
         </xsl:element>
     </xsl:template>
     
 <!--
-    <xsl:template match="*[not(descendant-or-self::xhtml:*)]" mode="enopdf:format-label">
+    <xsl:template match="*[not(descendant-or-self::xhtml:*)]" mode="enofo:format-label">
         <xsl:copy>
-            <xsl:apply-templates select="node()|@*" mode="enopdf:format-label"/>
+            <xsl:apply-templates select="node()|@*" mode="enofo:format-label"/>
         </xsl:copy>
     </xsl:template>-->
 
-    <xsl:template match="text()" mode="enopdf:format-label">
+    <xsl:template match="text()" mode="enofo:format-label">
         <xsl:param name="label-variables" tunnel="yes"/>
         <xsl:param name="loop-navigation" tunnel="yes" as="node()"/>
         
@@ -228,33 +228,33 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="xhtml:i" mode="enopdf:format-label">
+    <xsl:template match="xhtml:i" mode="enofo:format-label">
         <xsl:element name="fo:inline">
             <xsl:attribute name="font-style" select="'italic'"/>
-            <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+            <xsl:apply-templates select="node()" mode="enofo:format-label"/>
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="xhtml:b" mode="enopdf:format-label">
+    <xsl:template match="xhtml:b" mode="enofo:format-label">
         <xsl:element name="fo:inline">
             <xsl:attribute name="font-weight" select="'bold'"/>
-            <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+            <xsl:apply-templates select="node()" mode="enofo:format-label"/>
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="xhtml:span[@style='text-decoration:underline']" mode="enopdf:format-label">
+    <xsl:template match="xhtml:span[@style='text-decoration:underline']" mode="enofo:format-label">
         <xsl:element name="fo:wrapper">
             <xsl:attribute name="text-decoration" select="'underline'"/>
-            <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+            <xsl:apply-templates select="node()" mode="enofo:format-label"/>
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="xhtml:br" mode="enopdf:format-label">
+    <xsl:template match="xhtml:br" mode="enofo:format-label">
         <xsl:text xml:space="preserve">&#xA;</xsl:text>
     </xsl:template>
 
-    <xsl:template match="xhtml:a[contains(@href,'#ftn')]" mode="enopdf:format-label">
-        <xsl:apply-templates select="node()" mode="enopdf:format-label"/>
+    <xsl:template match="xhtml:a[contains(@href,'#ftn')]" mode="enofo:format-label">
+        <xsl:apply-templates select="node()" mode="enofo:format-label"/>
         <xsl:variable name="relatedInstruction" select="enoddi:get-instruction-by-anchor-ref(.,@href)"/>
         <xsl:choose>
             <xsl:when test="$relatedInstruction/d:InstructionName/r:String = 'tooltip'">
@@ -272,7 +272,7 @@
             <xd:p>Function for debugging, it outputs the input name of the element related to the driver.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-ddi-element">
+    <xsl:function name="enofo:get-ddi-element">
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="local-name($context)"/>
     </xsl:function>
@@ -282,7 +282,7 @@
             <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-after-question-title-instructions">
+    <xsl:function name="enofo:get-after-question-title-instructions">
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="enoddi:get-instructions-by-format($context,'instruction,comment,help')"/>
     </xsl:function>
@@ -292,7 +292,7 @@
             <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-end-question-instructions">
+    <xsl:function name="enofo:get-end-question-instructions">
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote') | enoddi:get-next-filter-description($context)"/>
     </xsl:function>
@@ -303,7 +303,7 @@
             <xd:p>Function for retrieving style for QuestionTable (only 'no-border' or '' as values yet)</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-style">
+    <xsl:function name="enofo:get-style">
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="if(enoddi:get-style($context) = 'question multiple-choice-question') then ('no-border') else()"/>
     </xsl:function>
@@ -313,7 +313,7 @@
             <xd:p>Function for retrieving an index for footnote instructions (based on their ordering in the questionnaire)</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:function name="enopdf:get-end-question-instructions-index">
+    <xsl:function name="enofo:get-end-question-instructions-index">
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="enoddi:get-instruction-index($context,'footnote,tooltip')"/>
     </xsl:function>
