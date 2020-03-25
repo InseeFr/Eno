@@ -9,7 +9,7 @@
 
     <!-- Importing the different resources -->
     <xsl:import href="../../inputs/ddi/source.xsl"/>
-    <xsl:import href="../../outputs/pdf/models.xsl"/>
+    <xsl:import href="../../outputs/fo/models.xsl"/>
     <xsl:import href="../../lib.xsl"/>
 
     <xd:doc scope="stylesheet">
