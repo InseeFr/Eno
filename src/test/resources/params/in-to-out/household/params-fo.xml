@@ -9,7 +9,7 @@
         <PreProcessing>ddi-titling</PreProcessing>
         
         <PostProcessing>fo-mailing</PostProcessing>
-        <PostProcessing>fo-tableColumn</PostProcessing>
+        <!--<PostProcessing>fo-tableColumn</PostProcessing>-->
         <PostProcessing>fo-insertEndQuestion</PostProcessing>
         <PostProcessing>fo-editStructurePages</PostProcessing>
         <PostProcessing>fo-specificTreatment</PostProcessing>

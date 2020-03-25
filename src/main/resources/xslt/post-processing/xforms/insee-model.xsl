@@ -63,7 +63,7 @@
                 <Variable idVariable="{name()}"/>
             </xsl:when>
             <xsl:when test="name() = $list//Group/@name and (parent::LoopModels or parent::*[ends-with(name(),'-Container')])">
-                <Groupe typeGroupe="{name()}" idGroupe="{replace(@id,'-Container','')}">
+                <Groupe typeGroupe="{name()}" idGroupe="{@occurrence-id}">
                     <xsl:apply-templates select="node()"/>
                 </Groupe>
             </xsl:when>
@@ -109,8 +109,31 @@
         </xsl:element>
     </xsl:template>
 
+    <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]//*[not(ancestor::*[ends-with(name(),''-Container'') and ancestor::*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]])]']">
+        <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable and not(ancestor::Groupe[ancestor::*[name()=instance('fr-form-instance')/Util/CurrentSectionName]])]">
+            <xf:dispatch name="DOMFocusOut">
+                <xsl:attribute name="target" select="'{concat(context()/@idVariable,''-control'')}'"/>
+            </xf:dispatch>
+        </xf:action>
+    </xsl:template>
+    
+    <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/stromae/util/nomSectionCourante]//*[ends-with(name(),''-Container'')]/*']">
+        <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
+            <xf:var name="loop-index" value="position()"/>
+            <xf:setindex>
+                <xsl:attribute name="repeat" select="'{context()/parent::Groupe/@idGroupe}'"/>
+                <xsl:attribute name="index" select="'$loop-index'"/>
+            </xf:setindex>
+            <xf:action iterate="descendant::*">
+                <xf:dispatch name="DOMFocusOut">
+                    <xsl:attribute name="target" select="'{concat(context()/@idVariable,''-control'')}'"/>
+                </xf:dispatch>
+            </xf:action>
+        </xf:action>
+    </xsl:template>
+
     <xsl:template match="*/@nodeset | */@relevant | */@readonly | */@calculate | *[@nodeset]/@* | xf:var/@* |
-        xf:action/@if | xf:action/@iterate | xf:action/@while | xf:setvalue/@* | xf:constraint/@value | xf:insert/@*">
+        xf:action/@if | xf:action/@iterate | xf:action/@while | xf:setvalue/@* | xf:constraint/@value | xf:insert/@* | xf:setindex/@*">
         <xsl:attribute name="{name()}">
             <xsl:call-template name="replace-element">
                 <xsl:with-param name="position" as="xs:integer" select="1"/>
@@ -258,8 +281,8 @@
                 <xsl:choose>
                     <xsl:when test="contains($text,$current-group)">
                         <xsl:choose>
-                            <xsl:when test="matches($text,concat($current-group,'(_\d+)?-Container/',$current-group,'\)\]/@id'))">
-                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-Container/{$current-group}\)\]/@id(.*)$">
+                            <xsl:when test="matches($text,concat($current-group,'(_\d+)?-Container/',$current-group,'\)\]/@occurrence-id'))">
+                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-Container/{$current-group}\)\]/@occurrence-id(.*)$">
                                     <xsl:matching-substring>
                                         <xsl:call-template name="replace-element">
                                             <xsl:with-param name="position" select="$position"/>
@@ -274,8 +297,8 @@
                                 </xsl:analyze-string>
                             </xsl:when>
                             
-                            <xsl:when test="matches($text,concat($current-group,'(_\d+)?-Container/',$current-group,'\[last\(\)\]/@id'))">
-                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-Container/{$current-group}\[last\(\)\]/@id(.*)$">
+                            <xsl:when test="matches($text,concat($current-group,'(_\d+)?-Container/',$current-group,'\[last\(\)\]/@occurrence-id'))">
+                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-Container/{$current-group}\[last\(\)\]/@occurrence-id(.*)$">
                                     <xsl:matching-substring>
                                         <xsl:call-template name="replace-element">
                                             <xsl:with-param name="position" select="$position"/>
@@ -304,8 +327,8 @@
                                     </xsl:matching-substring>
                                 </xsl:analyze-string>
                             </xsl:when>
-                            <xsl:when test="contains($text,concat('//',$current-group,'[@id = current()/ancestor::',$current-group,'/@id]'))">
-                                <xsl:for-each select="tokenize($text,concat('//',$current-group,'\[@id = current\(\)/ancestor::',$current-group,'/@id\]'))">
+                            <xsl:when test="contains($text,concat('//',$current-group,'[@occurrence-id = current()/ancestor::',$current-group,'/@occurrence-id]'))">
+                                <xsl:for-each select="tokenize($text,concat('//',$current-group,'\[@occurrence-id = current\(\)/ancestor::',$current-group,'/@occurrence-id\]'))">
                                     <xsl:if test="not(position()=1)">
                                         <xsl:value-of select="concat('//Groupe[@typeGroupe=''',$current-group,''' and @idGroupe = current()/ancestor::Groupe[@typeGroupe=''',$current-group,''']/@idGroupe]')"/>
                                     </xsl:if>
@@ -315,8 +338,8 @@
                                     </xsl:call-template>
                                 </xsl:for-each>
                             </xsl:when>
-                            <xsl:when test="contains($text,concat('//',$current-group,'[@id = current()/ancestor-or-self::',$current-group,'/@id]'))">
-                                <xsl:for-each select="tokenize($text,concat('//',$current-group,'\[@id = current\(\)/ancestor-or-self::',$current-group,'/@id\]'))">
+                            <xsl:when test="contains($text,concat('//',$current-group,'[@occurrence-id = current()/ancestor-or-self::',$current-group,'/@occurrence-id]'))">
+                                <xsl:for-each select="tokenize($text,concat('//',$current-group,'\[@occurrence-id = current\(\)/ancestor-or-self::',$current-group,'/@occurrence-id\]'))">
                                     <xsl:if test="not(position()=1)">
                                         <xsl:value-of select="concat('//Groupe[@typeGroupe=''',$current-group,''' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe=''',$current-group,''']/@idGroupe]')"/>
                                     </xsl:if>

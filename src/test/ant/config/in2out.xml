@@ -2,16 +2,16 @@
 <!-- This file contains common properties used by the build-in2out transformation -->
 <Properties>
     <!-- The name of the survey, conditionning the name of the input file processed. -->
-    <SurveyName>simpsons</SurveyName>
+    <SurveyName>esem-2020-a00</SurveyName>
     
     <!-- The in-format to be read : ddi / pogues-xml -->
-    <InFormat>pogues-xml</InFormat>
+    <InFormat>ddi</InFormat>
     
-    <!-- The out-format to be written : fr / pdf / odt / ddi / js / pogues -->
-    <OutFormat>ddi</OutFormat>
+    <!-- The out-format to be written : xforms / fo / fodt / ddi / lunatic-xml / pogues-xml -->
+    <OutFormat>xforms</OutFormat>
     
     <!-- (re)Build Eno before generate true / false -->
-    <EnoBuild>true</EnoBuild>
+    <EnoBuild>false</EnoBuild>
     
     <!-- debug mode : true / false -->
     <Debug>false</Debug>

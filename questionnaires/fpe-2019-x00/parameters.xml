@@ -1,41 +1,33 @@
 <ENOParameters>
     
-    <Pipeline>
-    </Pipeline>
-    
     <Parameters>
-        <Context>default</Context>
         
-        <Campagne>simpsons</Campagne>
+        <Context>household</Context>
+        
+        <Campagne>fpe-2019-x00</Campagne>
         
         <Languages>
             <Language>fr</Language>
-            <Language>en</Language>
         </Languages>
-        
-        <BeginQuestion>
-            <Identification>false</Identification>
-        </BeginQuestion>
         
         <EndQuestion>
             <ResponseTimeQuestion>false</ResponseTimeQuestion>
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
-        
         <xforms-parameters>
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
-            <Satisfaction>false</Satisfaction>
+            <Satisfaction>true</Satisfaction>
             <LengthOfLongTable>7</LengthOfLongTable>
-            <DecimalSeparator>,</DecimalSeparator>
-            <Css></Css>
         </xforms-parameters>
-        
         <fo-parameters>
             <Format>
                 <Orientation>0</Orientation>
-                <Columns>1</Columns>
+                <Columns>2</Columns>
             </Format>
+            <Capture>
+                <Numeric>optical</Numeric>
+            </Capture>
             <Roster>
                 <Row>
                     <DefaultSize>15</DefaultSize>
@@ -51,58 +43,50 @@
                     <DefaultSize>19</DefaultSize>
                 </Row>
             </Table>
-            <Capture>
-                <Numeric>optical</Numeric>
-            </Capture>
-            <PageBreakBetween>
-                <pdf></pdf>
-            </PageBreakBetween>
-            <AccompanyingMail></AccompanyingMail>
+            <AccompanyingMail>relanceCOLEM</AccompanyingMail>            
         </fo-parameters>
         
-        <lunatic-xml-parameters>
-            <FilterDescription>true</FilterDescription>
-        </lunatic-xml-parameters>
+        <lunatic-xml-parameters/>
         
-        <fodt-parameters/>
+        <fodt-parameters/>  
         
         <Title>
             <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->
-            <Browsing>module</Browsing>
+            <Browsing>template</Browsing>
             <Sequence>
-                <!-- niveau template utile car permet de définir la hiérarchie des séquences, alors même qu'il n'est pas numéroté -->
+                <!-- template level: useful because it allows to define the hierarchy of the sequences, even if it is not numbered -->
                 <Level name="template"/>
                 <Level name="module">
-                    <!-- toujours affiché -->
+                    <!-- always displayed -->
                     <PreSeq></PreSeq>
                     <!-- true ; false -->
                     <NumParent>false</NumParent>
-                    <!-- Affiché seulement si un numéro est affiché pour le parent -->
+                    <!-- Displayed only if a number is displayed for the parent -->
                     <PostNumParentSeq></PostNumParentSeq>
                     <!-- 1 ; A ; a ; I ; i -->
                     <StyleNumSeq>I</StyleNumSeq>
-                    <!-- Affiché seulement si un numéro est affiché pour la séquence -->
+                    <!-- Displayed only if a number is displayed for the sequence -->
                     <PostNumSeq> - </PostNumSeq>
                 </Level>
-                <!-- pas de numérotation au niveau submodule = pas d'élément -->
+                <!-- no numbering at submodule level = no element -->
                 <Level name="submodule"/>
             </Sequence>
             <Question>
-                <!-- Question niveau module -->
+                <!-- Question at module level -->
                 <Level name="module">
-                    <!-- toujours affiché -->
+                    <!-- always displayed -->
                     <PreQuest>➡ </PreQuest>
                     <!-- true ; false -->
                     <NumParent>false</NumParent>
-                    <!-- Affiché seulement si un numéro est affiché pour le parent -->
+                    <!-- Displayed only if a number is displayed for the parent -->
                     <PostNumParentQuest></PostNumParentQuest>
                     <!-- 1 ; A ; a ; I ; i -->
                     <StyleNumQuest>1</StyleNumQuest>
-                    <!-- Affiché seulement si un numéro est affiché pour la question -->
+                    <!-- Displayed only if a number is displayed for the question -->
                     <PostNumQuest>. </PostNumQuest>
                 </Level>
-                <!-- La présentation des questions de niveau module et submodule doit être précisée si les deux sont présents ; elle peut être distincte -->
-                <!-- Question niveau sous-module -->
+                <!-- The presentation of module and submodule level questions must be specified if both are present; it may be separate. -->
+                <!-- Question at sub-module level -->
                 <Level name="submodule">
                     <PreQuest>➡ </PreQuest>
                     <NumParent>false</NumParent>

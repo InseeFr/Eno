@@ -3658,56 +3658,52 @@
                    border-style="solid"
                    page-break-inside="avoid"
                    keep-with-next="always">Temps de réponse et commentaires</fo:block>
-         <fo:wrapper id="TIME_QUESTION">
-            <fo:block color="black"
-                      font-weight="bold"
-                      font-size="10pt"
-                      margin-top="9pt"
-                      margin-bottom="3pt"
-                      page-break-inside="avoid"
-                      keep-with-next="always">➡ <fo:inline font-weight="bold">Combien de temps avez-vous mis en tout pour répondre à cette enquête
+         <fo:block color="black"
+                   font-weight="bold"
+                   font-size="10pt"
+                   margin-top="9pt"
+                   margin-bottom="3pt"
+                   page-break-inside="avoid"
+                   keep-with-next="always">➡ <fo:inline font-weight="bold">Combien de temps avez-vous mis en tout pour répondre à cette enquête
                     (recherche des données + remplissage du questionnaire) ?</fo:inline>
-            </fo:block>
-            <fo:block id="HEURE_MIN_REMPL" page-break-inside="avoid">
+         </fo:block>
+         <fo:block id="HEURE_MIN_REMPL" page-break-inside="avoid">
+            <fo:inline color="black"
+                       font-size="10pt"
+                       font-weight="normal"
+                       padding="1mm">
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
                <fo:inline color="black"
                           font-size="10pt"
                           font-weight="normal"
-                          padding="1mm">
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline color="black"
-                             font-size="10pt"
-                             font-weight="normal"
-                             padding="1mm">heures</fo:inline>
-               </fo:inline>
+                          padding="1mm">heures</fo:inline>
+            </fo:inline>
+            <fo:inline color="black"
+                       font-size="10pt"
+                       font-weight="normal"
+                       padding="1mm">
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
                <fo:inline color="black"
                           font-size="10pt"
                           font-weight="normal"
-                          padding="1mm">
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline color="black"
-                             font-size="10pt"
-                             font-weight="normal"
-                             padding="1mm">minutes</fo:inline>
-               </fo:inline>
-            </fo:block>
-         </fo:wrapper>
-         <fo:wrapper id="COMMENT_QUESTION">
-            <fo:block color="black"
-                      font-weight="bold"
-                      font-size="10pt"
-                      margin-top="9pt"
-                      margin-bottom="3pt"
-                      page-break-inside="avoid"
-                      keep-with-next="always">➡ <fo:inline font-weight="bold">Commentaires et remarques éventuelles concernant l'enquête :</fo:inline>
-            </fo:block>
-            <fo:block id="COMMENT_QE" page-break-inside="avoid">
-               <fo:block-container height="30mm" border-color="black" border-style="solid">
-                  <fo:block> </fo:block>
-               </fo:block-container>
-            </fo:block>
-         </fo:wrapper>
+                          padding="1mm">minutes</fo:inline>
+            </fo:inline>
+         </fo:block>
+         <fo:block color="black"
+                   font-weight="bold"
+                   font-size="10pt"
+                   margin-top="9pt"
+                   margin-bottom="3pt"
+                   page-break-inside="avoid"
+                   keep-with-next="always">➡ <fo:inline font-weight="bold">Commentaires et remarques éventuelles concernant l'enquête :</fo:inline>
+         </fo:block>
+         <fo:block id="COMMENT_QE" page-break-inside="avoid">
+            <fo:block-container height="30mm" border-color="black" border-style="solid">
+               <fo:block> </fo:block>
+            </fo:block-container>
+         </fo:block>
          <fo:block id="TheVeryLastPage"/>
       </fo:flow>
    </fo:page-sequence>
