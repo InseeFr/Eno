@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadata>
+    <Identifiant>FPE</Identifiant>
+    <LibelleCourtEnquete>FPE</LibelleCourtEnquete>
+    <LibelleCourtEnqueteMillesime>FPE2018</LibelleCourtEnqueteMillesime>
+    <Frequence>Pluriannuelle</Frequence>
+    <AnneeReference>2018</AnneeReference>
+    <Idvague>01</Idvague>
+    <DateOuverture>6/05/2019</DateOuverture>
+    <DateFermeture>31/05/2019</DateFermeture>
+    <Ville>Paris</Ville>
+    <DateOuverture>6/05/2019</DateOuverture>
+    <ArticleServiceProducteur>L’</ArticleServiceProducteur>
+    <NomServiceProducteur>Institut national de la statistique et des études économiques (Insee)</NomServiceProducteur>
+    <NomServiceProducteurCourt>l’Insee</NomServiceProducteurCourt>
+    <ObjectifsLongs>auprès des salariés de l’État. Cette enquête s’insère dans le dispositif européen d’enquêtes sur le coût de la main-d’œuvre et la structure des salaires.</ObjectifsLongs>
+    <CaractereObligatoire>OUI</CaractereObligatoire>
+    <TypeUniteEnquetees>de salariés de l’État, travaillant pour des ministères ou des établissements publics nationaux, quel que soit leur statut</TypeUniteEnquetees>
+    <TempsPassation>une vingtaine de minutes</TempsPassation>
+    <AdresseInternetEnquete>https://particuliers.stat-publique.fr/fpe</AdresseInternetEnquete>
+    <URLRenseignement>de l’Insee</URLRenseignement>
+    <ServiceCollecteurSignataireFonction>La directrice des statistiques démographiques et sociales</ServiceCollecteurSignataireFonction>
+    <ServiceCollecteurSignataireNom>Chantal Cases</ServiceCollecteurSignataireNom>
+    <ServiceCollecteurSignataireSexe>F</ServiceCollecteurSignataireSexe>
+    <NumeroVisa>2019X081EC</NumeroVisa>
+    <MinistereTutelle>Ministre de l’économie et des finances</MinistereTutelle>
+    <AnneeCollecte>2019</AnneeCollecte>
+    <ParutionJO>oui</ParutionJO>
+    <DateParutionJO>25 juillet 2019</DateParutionJO>
+    <NomServiceRecours>Insee Grand Est – établissement de Nancy – PENM – 15 rue du Général Hulot – CS 54229 – 54042 Nancy cedex </NomServiceRecours>
+    <StatutEnquete>vous</StatutEnquete>
+    <Metropole>non</Metropole>
+    <TypeUniteEnquetee>de 33 000 personnes</TypeUniteEnquetee>
+    <RapprochementDonnees>oui</RapprochementDonnees>
+    <LibelleEnquete>Enquête auprès des salariés de l’État en 2018</LibelleEnquete>
+    <ObjectifsCourts>L’enquête auprès des salariés de l’État a pour objectif de recueillir des informations sur les salariés de la Fonction publique d’État</ObjectifsCourts>
+</metadata>

@@ -1,0 +1,76 @@
+﻿<project basedir="." name="enoFo">
+    <property name="out-extension" value="fo"/>
+    <property name="out-folder" value="fo"/>
+    <!-- **************************** foPostProcessing ************************************************************************** -->
+    <target name="foPostProcessing">
+
+        <!-- Replace labels surrounded by ø -->
+        <xslt in="${postprocessing-input-file}"
+            out="${target-folder}/${survey-name}/${form-name}/fo/fo-danish.${out-extension}"
+            style="${xslt.home}/post-processing/fo/mailing-vtl.xsl" force="true" classpath="${saxon.jar}"/>
+
+        <!-- Add structure-page -->
+        <xslt in="${target-folder}/${survey-name}/${form-name}/fo/fo-danish.${out-extension}"
+            out="${target-folder}/${survey-name}/${form-name}/fo/form-custom-pages.${out-extension}"
+            style="${xslt.home}/post-processing/fo/edit-structure-page.xsl" force="true" classpath="${saxon.jar}">
+            <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
+            <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+        </xslt>
+
+        <!-- Insert end questions -->
+        <xslt in="${target-folder}/${survey-name}/${form-name}/fo/form-custom-pages.${out-extension}"
+            out="${target-folder}/${survey-name}/${form-name}/fo/form-with-end-questions.${out-extension}"
+            style="${xslt.home}/post-processing/fo/insert-end-questions.xsl" force="true" classpath="${saxon.jar}">
+            <param name="survey-name" expression="${survey-name}"/>
+            <param name="form-name" expression="${form-name}"/>
+            <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
+            <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+        </xslt>
+
+        <!-- treatment specifif to 1 survey -->
+        <if>
+            <available file="${questionnaires-folder}/${survey-name}/fo-specific-treatment.xsl"/>
+            <then>
+                <xslt in="${target-folder}/${survey-name}/${form-name}/fo/form-with-end-questions.${out-extension}"
+                    out="${target-folder}/${survey-name}/${form-name}/fo/form-specific-treatment.${out-extension}"
+                    style="${questionnaires-folder}/${survey-name}/fo-specific-treatment.xsl" force="true" classpath="${saxon.jar}"/>
+            </then>
+            <else>
+                <copy file="${target-folder}/${survey-name}/${form-name}/fo/form-with-end-questions.${out-extension}"
+                    tofile="${target-folder}/${survey-name}/${form-name}/fo/form-specific-treatment.${out-extension}"/>
+            </else>
+        </if>
+
+        <!-- cover page -->
+        <xslt in="${target-folder}/${survey-name}/${form-name}/fo/form-specific-treatment.${out-extension}"
+            out="${target-folder}/${survey-name}/${form-name}/fo/cover-page-form.${out-extension}"
+            style="${xslt.home}/post-processing/fo/insert-cover-page.xsl" force="true" classpath="${saxon.jar}">
+            <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
+            <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+        </xslt>
+        
+        <!-- accompanying mail -->
+        <xslt in="${target-folder}/${survey-name}/${form-name}/fo/cover-page-form.${out-extension}"
+            out="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"
+            style="${xslt.home}/post-processing/fo/accompanying-mails.xsl" force="true" classpath="${saxon.jar}">
+            <param name="survey-name" expression="${survey-name}"/>
+            <param name="form-name" expression="${form-name}"/>
+            <param name="properties-file" expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
+            <param name="parameters-file" expression="${questionnaires-folder}/${survey-name}/parameters.xml"/>
+        </xslt>
+
+        <!-- remove temporary files -->
+         <if>
+            <equals arg1="${Properties.Debug}" arg2="false"/>
+            <then>
+                <delete file="${target-folder}/${survey-name}/${form-name}/fo/form-basique.fo"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/fo/fo-danish.fo"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/fo/form-custom-pages.fo"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/fo/form-with-end-questions.fo"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/fo/form-specific-treatment.fo"/>
+                <delete file="${target-folder}/${survey-name}/${form-name}/fo/cover-page-form.fo"/>
+            </then>
+        </if>
+    </target>
+
+</project>

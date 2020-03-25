@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+   <label>Simple test</label>
+   <label>"Hello there, this is 
+      
+      
+      the first test !"</label>
+   <label>"Hello there, this is the \"second, only the second,\" test !"</label>
+   <label>"Hello there, this is the \"second, only the second,\"" || " test !"</label>
+   <label>"Hello there, this is the " || "third" || " test !"</label>
+   <label>substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'</label>
+   <conditionFilter>substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'</conditionFilter>
+   <value>substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'</value>
+   <expression>substr(x,y,z) || a || x || substr(x1,y1,z1) || b &lt;&gt; 'abc'</expression>
+   <expression>Expression using special java regex characters : $, $$ and \$ and quote : "hello \"World\""</expression>
+   <expression>a / b</expression>
+</test>

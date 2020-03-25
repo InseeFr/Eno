@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    
+    <xs:element name="Pipeline" type="Pipeline"/>
+    
+    <xs:complexType name="Pipeline">
+        <xs:sequence>
+            <xs:element name="InFormat" type="InFormat" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="OutFormat" type="OutFormat" minOccurs="1" maxOccurs="1"/>
+            <xs:sequence>
+                <xs:element name="PreProcessing" type="PreProcessing" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:sequence>
+                <xs:element name="PostProcessing" type="PostProcessing" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="InFormat">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ddi"/>
+            <xs:enumeration value="pogues-xml"/>
+            <!-- For emb companies -->
+            <xs:enumeration value="xforms"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="OutFormat">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ddi"/>
+            <xs:enumeration value="pogues-xml"/>
+            <xs:enumeration value="xforms"/>
+            <xs:enumeration value="fo"/>
+            <xs:enumeration value="fodt"/>
+            <xs:enumeration value="lunatic-xml"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="PreProcessing">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ddi-32-to-ddi-33"/>
+            
+            <xs:enumeration value="ddi-mapping"/>
+            <xs:enumeration value="ddi-dereferencing"/>
+            <xs:enumeration value="ddi-cleaning"/>
+            <xs:enumeration value="ddi-titling"/>
+            
+            <xs:enumeration value="pogues-xml-goto-2-ite"/>
+            <xs:enumeration value="pogues-xml-suppression-goto"/>
+            <xs:enumeration value="pogues-xml-tweak-to-merge-equivalent-ite"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="PostProcessing">
+        <xs:restriction base="xs:token">
+            <xs:enumeration value="ddi-markdownToXhtml"/>
+            
+            <xs:enumeration value="ddi-specificTreatment"/>
+            
+            <xs:enumeration value="fodt-specificTreatment"/>
+            
+            <xs:enumeration value="fo-mailing"/>
+            <xs:enumeration value="fo-tableColumn"/>
+            <xs:enumeration value="fo-insertEndQuestion"/>
+            <xs:enumeration value="fo-editStructurePages"/>
+            <xs:enumeration value="fo-specificTreatment"/>
+            <xs:enumeration value="fo-insertCoverPage"/>
+            <xs:enumeration value="fo-insertAccompanyingMails"/>
+            
+            <xs:enumeration value="lunatic-xml-sortComponents"/>
+            <xs:enumeration value="lunatic-xml-specificTreatment"/>
+            <xs:enumeration value="lunatic-xml-insert-generic-questions"/>
+            <xs:enumeration value="lunatic-xml-externalizeVariables"/>
+            <xs:enumeration value="lunatic-xml-vtlParser"/>
+            
+            <xs:enumeration value="xforms-insert-generic-questions"/>
+            <xs:enumeration value="xforms-browsing"/>
+            <xs:enumeration value="xforms-insee-model"/>
+            <!-- patron : coleman/coltrane -->
+            <xs:enumeration value="xforms-insee-pattern"/>
+            <xs:enumeration value="xforms-identification"/>
+            <xs:enumeration value="xforms-insert-welcome"/>
+            <xs:enumeration value="xforms-insert-end"/>
+            <xs:enumeration value="xforms-specificTreatment"/>
+            <!-- coltrane.xsl : adherence with eXist-->
+            <xs:enumeration value="xforms-fix-adherence"/>
+            
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="enoDDI" basedir=".">
+
+	<property name="out-extension" value="xml"/>
+	<property name="out-folder" value="ddi"/>
+
+	<!-- jsPostProcessing : sort elements ; add generic questions ; put variables to the end -->
+	<target name="ddiPostProcessing">		
+		<xslt in="${postprocessing-input-file}"
+			out="${target-folder}/${survey-name}/${form-name}/form/form-xhtml.${out-extension}"
+			style="${xslt.home}/post-processing/ddi/mw2xhtml.xsl" classpath="${saxon.jar}" force="true">
+		</xslt>
+		
+		<xslt in="${target-folder}/${survey-name}/${form-name}/form/form-xhtml.${out-extension}"
+			out="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"
+			style="${xslt.home}/post-processing/ddi/tweak-xhtml-for-ddi.xsl" force="true" classpath="${saxon.jar}">
+		</xslt>
+		
+	</target>
+</project>

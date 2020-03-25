@@ -7,7 +7,7 @@
    <ColtraneQuestions>
       <TypeRepondantLabel>entreprise</TypeRepondantLabel>
    </ColtraneQuestions>
-  <StudyUnit>business</StudyUnit>
+  <Context>business</Context>
 <Format>
     <Orientation>90</Orientation>
   </Format>

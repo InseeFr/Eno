@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+   <label>Simple test</label>
+   <label>"Hello there, this is 
+      
+      
+      the first test !"</label>
+   <label>"Hello there, this is the \"second, only the second,\" test !"</label>
+   <label>concat("Hello there, this is the \"second, only the second,\""," test !")</label>
+   <label>concat("Hello there, this is the ","third"," test !")</label>
+   <label>concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'</label>
+   <conditionFilter>concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'</conditionFilter>
+   <value>concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'</value>
+   <expression>concat(substring(x,y,z),a,concat(x,substring(x1,y1,z1)),b)!='abc'</expression>
+   <expression>Expression using special java regex characters : $, $$ and \$ and quote : "hello \"World\""</expression>
+   <expression>a div b</expression>
+</test>

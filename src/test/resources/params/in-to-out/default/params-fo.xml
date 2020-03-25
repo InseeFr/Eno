@@ -1,0 +1,50 @@
+<ENOParameters>
+    
+    <Pipeline>
+        <InFormat>ddi</InFormat>
+        <OutFormat>fo</OutFormat>
+        
+        <PreProcessing>ddi-dereferencing</PreProcessing>
+        <PreProcessing>ddi-cleaning</PreProcessing>
+        <PreProcessing>ddi-titling</PreProcessing>
+        
+        <PostProcessing>fo-mailing</PostProcessing>
+        <PostProcessing>fo-tableColumn</PostProcessing>
+        <PostProcessing>fo-insertEndQuestion</PostProcessing>
+        <PostProcessing>fo-editStructurePages</PostProcessing>
+        <PostProcessing>fo-insertCoverPage</PostProcessing>
+    </Pipeline>
+    
+    <Parameters>
+        
+        <Context>default</Context>
+        
+        <Campagne>simpsons</Campagne>
+        
+        <Languages>
+            <Language>fr</Language>
+            <Language>en</Language>
+        </Languages>
+        
+        <BeginQuestion>
+            <Identification>false</Identification>
+        </BeginQuestion>
+        
+        <EndQuestion>
+            <ResponseTimeQuestion>false</ResponseTimeQuestion>
+            <CommentQuestion>false</CommentQuestion>
+        </EndQuestion>
+        
+        <fo-parameters>
+            <Format>
+                <Orientation>0</Orientation>
+                <Columns>1</Columns>
+            </Format>
+            <Capture>
+                <Numeric>optical</Numeric>
+            </Capture>
+        </fo-parameters>        
+        
+    </Parameters>
+    
+</ENOParameters>

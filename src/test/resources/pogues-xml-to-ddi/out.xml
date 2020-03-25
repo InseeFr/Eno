@@ -476,7 +476,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not(j6p6my1d-a-j6p0np9q-IP-1!= '1') </r:CommandContent>
+                  <r:CommandContent>not(j6p6my1d-a-j6p0np9q-IP-1!= '1')</r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -536,7 +536,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>not(j6p6my1d-a-j6p0ti5h-IP-1!= '1') </r:CommandContent>
+                  <r:CommandContent>not(j6p6my1d-a-j6p0ti5h-IP-1!= '1')</r:CommandContent>
                </r:Command>
             </d:IfCondition>
             <d:ThenConstructReference>
@@ -1070,10 +1070,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>j4nwc63q-CI-0-IP-1 + j4nwc63q-CI-0-IP-2 +
-                        j4nwc63q-CI-0-IP-3+ j4nwc63q-CI-0-IP-4+ j4nwc63q-CI-0-IP-5+
-                        j4nwc63q-CI-0-IP-6+ j4nwc63q-CI-0-IP-7+ j4nwc63q-CI-0-IP-8+
-                        j4nwc63q-CI-0-IP-9+ j4nwc63q-CI-0-IP-10!= 100 </r:CommandContent>
+                  <r:CommandContent>j4nwc63q-CI-0-IP-1 + j4nwc63q-CI-0-IP-2 + j4nwc63q-CI-0-IP-3+ j4nwc63q-CI-0-IP-4+ j4nwc63q-CI-0-IP-5+ j4nwc63q-CI-0-IP-6+ j4nwc63q-CI-0-IP-7+ j4nwc63q-CI-0-IP-8+ j4nwc63q-CI-0-IP-9+ j4nwc63q-CI-0-IP-10!= 100</r:CommandContent>
                </r:Command>
             </r:CommandCode>
          </d:ComputationItem>
@@ -10490,7 +10487,7 @@
          </l:Variable>
          <l:VariableGroup>
             <r:Agency>fr.insee</r:Agency>
-            <r:ID>j6qg8rc6-gp</r:ID>
+            <r:ID>j6qg8rc6-vg</r:ID>
             <r:Version>1</r:Version>
             <r:BasedOnObject>
                <r:BasedOnReference>
@@ -10500,7 +10497,7 @@
                   <r:TypeOfObject>QuestionGrid</r:TypeOfObject>
                </r:BasedOnReference>
             </r:BasedOnObject>
-            <l:TypeOfVariableGroup>TableLoop</l:TypeOfVariableGroup>
+            <l:TypeOfVariableGroup>Loop</l:TypeOfVariableGroup>
             <l:VariableGroupName>
                <r:String>FAVOURITE_CHARACTERS</r:String>
             </l:VariableGroupName>
@@ -11069,7 +11066,7 @@
             </r:VariableReference>
             <l:VariableGroupReference>
                <r:Agency>fr.insee</r:Agency>
-               <r:ID>j6qg8rc6-gp</r:ID>
+               <r:ID>j6qg8rc6-vg</r:ID>
                <r:Version>1</r:Version>
                <r:TypeOfObject>VariableGroup</r:TypeOfObject>
             </l:VariableGroupReference>
@@ -11378,10 +11375,7 @@
                         <r:TypeOfObject>InParameter</r:TypeOfObject>
                      </r:TargetParameterReference>
                   </r:Binding>
-                  <r:CommandContent>jbcggtca-IP-1 + jbcggtca-IP-2 + jbcggtca-IP-3+
-                jbcggtca-IP-4+ jbcggtca-IP-5+ jbcggtca-IP-6+
-                jbcggtca-IP-7+ jbcggtca-IP-8+ jbcggtca-IP-9+
-                jbcggtca-IP-10</r:CommandContent>
+                  <r:CommandContent>jbcggtca-IP-1 + jbcggtca-IP-2 + jbcggtca-IP-3+ jbcggtca-IP-4+ jbcggtca-IP-5+ jbcggtca-IP-6+ jbcggtca-IP-7+ jbcggtca-IP-8+ jbcggtca-IP-9+ jbcggtca-IP-10</r:CommandContent>
                </r:Command>
             </r:CommandCode>
             <d:ControlConstructReference>
