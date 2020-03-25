@@ -19,13 +19,13 @@
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
         
-        <fr-parameters>            
+        <xforms-parameters>            
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
             <Satisfaction>false</Satisfaction>
             <DecimalSeparator>.</DecimalSeparator>
-        </fr-parameters>
-        <pdf-parameters>
+        </xforms-parameters>
+        <fo-parameters>
             <Roster>
                 <Row>
                     <DefaultSize>20</DefaultSize>
@@ -40,7 +40,7 @@
                 <Numeric>manual</Numeric>
             </Capture>
             <AccompanyingMail>cnrCOL</AccompanyingMail>
-        </pdf-parameters>
+        </fo-parameters>
         <Title>
             <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->
             <Browsing>module</Browsing>

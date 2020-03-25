@@ -14,13 +14,13 @@
             <ResponseTimeQuestion>false</ResponseTimeQuestion>
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
-        <fr-parameters>            
+        <xforms-parameters>
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
             <Satisfaction>true</Satisfaction>
             <LengthOfLongTable>7</LengthOfLongTable>
-        </fr-parameters>
-        <pdf-parameters>
+        </xforms-parameters>
+        <fo-parameters>
             <Format>
                 <Orientation>0</Orientation>
                 <Columns>2</Columns>
@@ -28,12 +28,27 @@
             <Capture>
                 <Numeric>optical</Numeric>
             </Capture>
+            <Roster>
+                <Row>
+                    <DefaultSize>15</DefaultSize>
+                </Row>
+            </Roster>
+            <TextArea>
+                <Row>
+                    <DefaultSize>5</DefaultSize>
+                </Row>
+            </TextArea>
+            <Table>
+                <Row>
+                    <DefaultSize>19</DefaultSize>
+                </Row>
+            </Table>
             <AccompanyingMail>relanceCOLEM</AccompanyingMail>            
-        </pdf-parameters>
+        </fo-parameters>
         
-        <js-parameters/>
+        <lunatic-xml-parameters/>
         
-        <odt-parameters/>  
+        <fodt-parameters/>  
         
         <Title>
             <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->
