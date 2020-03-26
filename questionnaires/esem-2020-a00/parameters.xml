@@ -1,24 +1,17 @@
 <ENOParameters>
-    
     <Parameters>
-        
         <Context>business</Context>
-        
         <Campagne>esem-2019-a00</Campagne>
-        
         <Languages>
             <Language>fr</Language>
         </Languages>
-        
         <BeginQuestion>
             <Identification>true</Identification>
         </BeginQuestion>
-        
         <EndQuestion>
             <ResponseTimeQuestion>true</ResponseTimeQuestion>
             <CommentQuestion>true</CommentQuestion>
         </EndQuestion>
-        
         <xforms-parameters>            
             <NumericExample>false</NumericExample>
             <Deblocage>false</Deblocage>
@@ -28,9 +21,14 @@
         <fo-parameters>
             <Roster>
                 <Row>
-                    <DefaultSize>20</DefaultSize>
+                    <DefaultSize>5</DefaultSize>
+                    <MinimumEmpty>1</MinimumEmpty>
                 </Row>
             </Roster>
+            <Loop>
+                <DefaultOccurrence>5</DefaultOccurrence>
+                <MinimumEmptyOccurrence>1</MinimumEmptyOccurrence>
+            </Loop>
             <Table>
                 <Row>
                     <DefaultSize>15</DefaultSize>
