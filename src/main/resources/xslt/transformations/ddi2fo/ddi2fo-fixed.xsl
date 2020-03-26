@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
     xmlns:enofo="http://xml.insee.fr/apps/eno/out/fo"
@@ -94,13 +94,43 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="roster-defaultsize">
+    <xsl:variable name="roster-minimum-empty-row" as="xs:integer">
         <xsl:choose>
-            <xsl:when test="$parameters//fo-parameters/Roster/Row/DefaultSize != ''">
-                <xsl:value-of select="$parameters//fo-parameters/Roster/Row/DefaultSize"/>
+            <xsl:when test="$parameters//Roster/Row/MinimumEmpty != ''">
+                <xsl:value-of select="$parameters//Roster/Row/MinimumEmpty"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//Roster/Row/MinimumEmpty"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="roster-defaultsize" as="xs:integer">
+        <xsl:choose>
+            <xsl:when test="$parameters//Roster/Row/DefaultSize != ''">
+                <xsl:value-of select="$parameters//Roster/Row/DefaultSize"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$properties//Roster/Row/DefaultSize"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="loop-default-occurrence" as="xs:integer">
+        <xsl:choose>
+            <xsl:when test="$parameters//Loop/DefaultOccurrence != ''">
+                <xsl:value-of select="$parameters//Loop/DefaultOccurrence"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//Loop/DefaultOccurrence"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="loop-minimum-empty-occurrence" as="xs:integer">
+        <xsl:choose>
+            <xsl:when test="$parameters//Loop/MinimumEmptyOccurrence != ''">
+                <xsl:value-of select="$parameters//Loop/MinimumEmptyOccurrence"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//Loop/MinimumEmptyOccurrence"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
