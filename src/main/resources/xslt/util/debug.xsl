@@ -4,8 +4,11 @@
   version="2.0">
   
   <!-- Apply transformation on generated xslt\transformations/in2out/in2out.xsl file and create xslt\transformations/in2out/in2out-debug.xsl file -->
+  <xsl:param name="source-file"/>
   <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
   <xsl:strip-space elements="*"/>
+  
+  <xsl:variable name="source" select="doc($source-file)"/>
   
   <xsl:template match="/">
     <xsl:apply-templates select="*"/>
@@ -62,6 +65,16 @@
   </xsl:template>
   
   <xsl:template match="xsl:function[not(xsl:param/@name='variable') and not(xsl:param/@name='ip-id')]" mode="debug">
+    <xsl:variable name="function-type">
+      <xsl:choose>
+        <xsl:when test="@as != ''">
+          <xsl:value-of select="@as"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$source//xsl:function[@name=substring-before(current()/xsl:sequence[1]/@select,'(')]/@as"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
     <xsl:variable name="function-call">
       <xsl:value-of select="@name"/>
       <xsl:value-of select="'('"/>
@@ -81,6 +94,7 @@
           <xsl:when test="@name='index'">
             <xsl:value-of select="'1'"/>
           </xsl:when>
+          <!-- the tables are always limited to their 20 first lines in fo  -->
           <xsl:when test="@name='table-first-line'">
             <xsl:value-of select="'1'"/>
           </xsl:when>
@@ -91,25 +105,58 @@
       </xsl:for-each>
       <xsl:value-of select="')'"/>
     </xsl:variable>
-    
-    <xsl:element name="xsl:choose">
-      <xsl:element name="xsl:when">
-        <xsl:attribute name="test" select="concat($function-call,' castable as xs:boolean')"/>
-        <xsl:element name="xsl:element">
-          <xsl:attribute name="name" select="substring-after(@name,':')"/>
-          <xsl:element name="xsl:value-of">
-            <xsl:attribute name="select" select="$function-call"/>
+
+    <xsl:choose>
+      <xsl:when test="$function-type = 'xs:boolean'">
+        <xsl:element name="xsl:if">
+          <xsl:attribute name="test" select="$function-call"/>
+          <xsl:element name="xsl:element">
+            <xsl:attribute name="name" select="substring-after(@name,':')"/>
+            <xsl:element name="xsl:value-of">
+              <xsl:attribute name="select" select="$function-call"/>
+            </xsl:element>
+          </xsl:element>          
+        </xsl:element>
+      </xsl:when>
+      <xsl:when test="$function-type = 'xs:string'">
+        <xsl:element name="xsl:if">
+          <xsl:attribute name="test" select="concat($function-call,' != ''''')"/>
+          <xsl:element name="xsl:element">
+            <xsl:attribute name="name" select="substring-after(@name,':')"/>
+            <xsl:element name="xsl:sequence">
+              <xsl:attribute name="select" select="$function-call"/>
+            </xsl:element>
           </xsl:element>
         </xsl:element>
-      </xsl:element>
-      <xsl:element name="xsl:otherwise">
+      </xsl:when>
+      <xsl:when test="$function-type = 'xs:string*' or $function-type = 'xs:string *'">
+        <xsl:element name="xsl:if">
+          <xsl:attribute name="test" select="concat($function-call,' != ''''')"/>
+          <xsl:element name="xsl:element">
+            <xsl:attribute name="name" select="substring-after(@name,':')"/>
+            <xsl:element name="xsl:value-of">
+              <xsl:attribute name="select" select="'''liste des éléments : '''"/>
+            </xsl:element>
+            <xsl:element name="xsl:for-each">
+              <xsl:attribute name="select" select="$function-call"/>
+              <xsl:element name="xsl:sequence">
+                <xsl:attribute name="select" select="'.'"/>
+              </xsl:element>
+              <xsl:element name="xsl:text">
+                <xsl:value-of select="'&amp;#xA;'"/>
+              </xsl:element>
+            </xsl:element>
+          </xsl:element>
+        </xsl:element>
+      </xsl:when>
+      <xsl:otherwise>
         <xsl:element name="xsl:if">
           <xsl:attribute name="test" select="concat($function-call,' != ''''')"/>
           <xsl:element name="xsl:element">
             <xsl:attribute name="name" select="substring-after(@name,':')"/>
             <xsl:element name="xsl:choose">
               <xsl:element name="xsl:when">
-                <xsl:attribute name="test" select="concat($function-call,' castable as xs:string')"/>
+                <xsl:attribute name="test" select="concat($function-call,' instance of xs:string')"/>
                 <xsl:element name="xsl:choose">
                   <xsl:element name="xsl:when">
                     <xsl:attribute name="test" select="concat('eno:is-rich-content(',$function-call,')')"/>
@@ -128,7 +175,7 @@
                 </xsl:element>
               </xsl:element>
               <xsl:element name="xsl:when">
-                <xsl:attribute name="test" select="concat($function-call,'[1] castable as xs:string')"/>
+                <xsl:attribute name="test" select="concat($function-call,'[1] instance of xs:string')"/>
                 <xsl:element name="xsl:value-of">
                   <xsl:attribute name="select" select="'''liste des éléments : '''"/>
                 </xsl:element>
@@ -151,7 +198,7 @@
                     </xsl:element>
                   </xsl:element>
                   <xsl:element name="xsl:text">
-                    <xsl:text>&#xA;</xsl:text>
+                    <xsl:value-of select="'&amp;#xA;'"/>
                   </xsl:element>
                 </xsl:element>
               </xsl:element>
@@ -161,14 +208,14 @@
                   <xsl:attribute name="select" select="$function-call"/>
                 </xsl:element>
                 <xsl:element name="xsl:message">
-                  <xsl:attribute name="select" select="concat('''5',replace($function-call,'''',''''''),'''')"/>
+                  <xsl:attribute name="select" select="concat('''',replace($function-call,'''',''''''),'''')"/>
                 </xsl:element>
               </xsl:element>
             </xsl:element>
           </xsl:element>
         </xsl:element>
-      </xsl:element>
-    </xsl:element>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template match="xsl:function[xsl:param/@name='variable' or xsl:param/@name='ip-id']" mode="debug">
