@@ -33,7 +33,7 @@
         <xhtml:html>
             <xhtml:head>
                 <xhtml:title>
-                    <xsl:value-of select="enoxforms:get-form-title($source-context, $languages[1])"/>
+                    <xsl:value-of select="enoxforms:get-label($source-context, $languages[1])"/>
                 </xhtml:title>
                 <xsl:for-each select="$properties//Css/Common">
                     <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
@@ -80,14 +80,14 @@
                     <xf:instance id="fr-form-metadata" xxf:readonly="true">
                         <metadata>
                             <application-name>
-                                <xsl:value-of select="enoxforms:get-application-name($source-context)"/>
+                                <xsl:value-of select="enoxforms:get-name($source-context)"/>
                             </application-name>
                             <form-name>
-                                <xsl:value-of select="enoxforms:get-form-name($source-context)"/>
+                                <xsl:value-of select="enoxforms:get-name($source-context)"/>
                             </form-name>
                             <xsl:for-each select="$languages">
                                 <title xml:lang="{.}">
-                                    <xsl:value-of select="enoxforms:get-form-title($source-context, .)"/>
+                                    <xsl:value-of select="enoxforms:get-label($source-context, .)"/>
                                 </title>
                             </xsl:for-each>
                         </metadata>
@@ -2227,11 +2227,32 @@
                     <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}-Count"
                         value="number({$instance-ancestor-label}{$loop-name}-Count) +1"/>
                     <xsl:for-each select="enoxforms:get-linked-containers($source-context)">
-                        <xf:insert context="{$instance-ancestor-label}{.}"
-                            nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
-                            origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
-                        <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@occurrence-id"
-                            value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                        <xsl:choose>
+                            <xsl:when test="enoxforms:get-loop-filter(.) != ''">
+                                <xf:action>
+                                    <xsl:attribute name="if">
+                                        <xsl:call-template name="replaceVariablesInFormula">
+                                            <xsl:with-param name="formula" select="enoxforms:get-loop-filter(.)"/>
+                                            <xsl:with-param name="instance-ancestor" select=""/><!-- aïe -->
+                                            <xsl:with-param name="source-context" select="."/>
+                                            <xsl:with-param name="variables" select="enoxforms:get-loop-filter-variables(.)"/>
+                                        </xsl:call-template>
+                                    </xsl:attribute>
+                                    <xf:insert context="{$instance-ancestor-label}{.}"
+                                        nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
+                                        origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
+                                    <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@occurrence-id"
+                                        value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>                                    
+                                </xf:action>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xf:insert context="{$instance-ancestor-label}{.}"
+                                    nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
+                                    origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
+                                <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@occurrence-id"
+                                    value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>                                
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:for-each>
                 </xf:action>
             </xf:trigger>
