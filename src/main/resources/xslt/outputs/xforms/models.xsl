@@ -2233,7 +2233,7 @@
                                     <xsl:attribute name="if">
                                         <xsl:call-template name="replaceVariablesInFormula">
                                             <xsl:with-param name="formula" select="enoxforms:get-loop-filter(.)"/>
-                                            <xsl:with-param name="instance-ancestor" select=""/><!-- aïe -->
+                                            <xsl:with-param name="instance-ancestor" select="enoxforms:get-business-name(.)"/><!-- aïe -->
                                             <xsl:with-param name="source-context" select="."/>
                                             <xsl:with-param name="variables" select="enoxforms:get-loop-filter-variables(.)"/>
                                         </xsl:call-template>
