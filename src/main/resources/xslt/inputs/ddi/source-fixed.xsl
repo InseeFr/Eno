@@ -993,12 +993,22 @@
             <xd:p>Function that returns the type of a variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-variable-type">
-
+    <xsl:template match="l:Variable" mode="enoddi:get-variable-type">
         <xsl:call-template name="enoddi:get-variable-type">
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
     </xsl:template>
+    <xsl:template match="*[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference')) and not(ancestor::d:GridDimension) and not(name()='d:StructuredMixedGridResponseDomain')]" mode="enoddi:get-variable-type">
+        <xsl:call-template name="enoddi:get-variable-type">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="d:GenerationInstruction" mode="enoddi:get-variable-type">
+        <xsl:call-template name="enoddi:get-variable-type">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    
 
     <xsl:template name="enoddi:get-variable-type">
         <xsl:param name="variable"/>
@@ -1029,7 +1039,7 @@
             <xd:p>Function that returns the business name of the container of a loop or a dynamic array.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-container-name">
+    <xsl:template match="d:Loop | d:QuestionGrid[d:GridDimension/d:Roster] | d:StructuredMixedGridResponseDomain[parent::d:QuestionGrid[d:GridDimension/d:Roster]]" mode="enoddi:get-container-name">
         <xsl:variable name="loop-id" select="enoddi:get-id(.)"/>
         <xsl:variable name="loop-name" select="$root//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID= $loop-id]/l:VariableGroupName/r:String"/>
         <xsl:variable name="loop-position" select="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference[r:ID= $loop-id]/count(preceding-sibling::r:BasedOnReference)+1"/>
@@ -1072,8 +1082,27 @@
             <xd:p>Function that returns the business variable from the DDI one.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-business-name">
-
+    <xsl:template match="l:Variable" mode="enoddi:get-business-name">
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="*[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference')) and not(ancestor::d:GridDimension) and not(name()='d:StructuredMixedGridResponseDomain')]" mode="enoddi:get-business-name">
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="d:GenerationInstruction" mode="enoddi:get-business-name">
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="d:Loop" mode="enoddi:get-business-name">
+        <xsl:call-template name="enoddi:get-business-name">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster]" mode="enoddi:get-business-name">
         <xsl:call-template name="enoddi:get-business-name">
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
@@ -1134,8 +1163,27 @@
             <xd:p>Function that returns the business ascendants loop and rowloop business names from a DDI variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-business-ancestors">
-
+    <xsl:template match="l:Variable" mode="enoddi:get-business-ancestors">
+        <xsl:call-template name="enoddi:get-business-ancestors">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="*[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference')) and not(ancestor::d:GridDimension) and not(name()='d:StructuredMixedGridResponseDomain')]" mode="enoddi:get-business-ancestors">
+        <xsl:call-template name="enoddi:get-business-ancestors">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="d:GenerationInstruction" mode="enoddi:get-business-ancestors">
+        <xsl:call-template name="enoddi:get-business-ancestors">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="d:Loop" mode="enoddi:get-business-ancestors">
+        <xsl:call-template name="enoddi:get-business-ancestors">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="d:QuestionGrid[d:GridDimension/d:Roster]" mode="enoddi:get-business-ancestors">
         <xsl:call-template name="enoddi:get-business-ancestors">
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
@@ -1153,8 +1201,7 @@
             <xsl:with-param name="variable" select="$variable"/>
         </xsl:call-template>
     </xsl:template>
-    
-    
+
     <xsl:template name="enoddi:get-business-ancestors">
         <xsl:param name="variable"/>
 
