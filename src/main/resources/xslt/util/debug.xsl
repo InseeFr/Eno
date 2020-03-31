@@ -2,14 +2,14 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   version="2.0">
-  
+
   <!-- Apply transformation on generated xslt\transformations/in2out/in2out.xsl file and create xslt\transformations/in2out/in2out-debug.xsl file -->
   <xsl:param name="source-file"/>
   <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
   <xsl:strip-space elements="*"/>
-  
+
   <xsl:variable name="source" select="doc($source-file)"/>
-  
+
   <xsl:template match="/">
     <xsl:apply-templates select="*"/>
   </xsl:template>
@@ -18,7 +18,7 @@
       <xsl:apply-templates select="node() | @*" mode="#current"/>
     </xsl:copy>
   </xsl:template>
-  
+
   <xsl:template match="xsl:import[contains(@href,'models')]">
     <xsl:variable name="models-debug" select="replace(@href,'models','models-debug')"/>
     <xsl:copy>
@@ -28,7 +28,7 @@
       <xsl:apply-templates select="//xsl:stylesheet" mode="debug"/>
     </xsl:result-document>
   </xsl:template>
-  
+
   <xsl:template match="xsl:stylesheet" mode="debug">
     <xsl:copy copy-namespaces="yes">
       <xsl:namespace name="xs" select="'http://www.w3.org/2001/XMLSchema'"/>
@@ -63,7 +63,7 @@
       </xsl:element>
     </xsl:copy>
   </xsl:template>
-  
+
   <xsl:template match="xsl:function[not(xsl:param/@name='variable') and not(xsl:param/@name='ip-id')]" mode="debug">
     <xsl:variable name="function-type">
       <xsl:choose>
@@ -115,7 +115,7 @@
             <xsl:element name="xsl:value-of">
               <xsl:attribute name="select" select="$function-call"/>
             </xsl:element>
-          </xsl:element>          
+          </xsl:element>
         </xsl:element>
       </xsl:when>
       <xsl:when test="$function-type = 'xs:string'">
@@ -139,11 +139,11 @@
             </xsl:element>
             <xsl:element name="xsl:for-each">
               <xsl:attribute name="select" select="$function-call"/>
+              <xsl:element name="xsl:text">
+                <xsl:value-of select="'&#xA;'"/>
+              </xsl:element>
               <xsl:element name="xsl:sequence">
                 <xsl:attribute name="select" select="'.'"/>
-              </xsl:element>
-              <xsl:element name="xsl:text">
-                <xsl:value-of select="'&amp;#xA;'"/>
               </xsl:element>
             </xsl:element>
           </xsl:element>
@@ -181,6 +181,9 @@
                 </xsl:element>
                 <xsl:element name="xsl:for-each">
                   <xsl:attribute name="select" select="$function-call"/>
+                  <xsl:element name="xsl:text">
+                    <xsl:value-of select="'&#xA;'"/>
+                  </xsl:element>
                   <xsl:element name="xsl:choose">
                     <xsl:element name="xsl:when">
                       <xsl:attribute name="test" select="'eno:is-rich-content(.)'"/>
@@ -197,18 +200,39 @@
                       </xsl:element>
                     </xsl:element>
                   </xsl:element>
-                  <xsl:element name="xsl:text">
-                    <xsl:value-of select="'&amp;#xA;'"/>
-                  </xsl:element>
                 </xsl:element>
               </xsl:element>
               <xsl:element name="xsl:otherwise">
-                <xsl:element name="xsl:copy-of">
-                  <xsl:attribute name="copy-namespaces" select="'no'"/>
-                  <xsl:attribute name="select" select="$function-call"/>
+                <xsl:element name="xsl:if">
+                  <xsl:attribute name="test" select="concat($function-call,'[2] != ''''')"/>
+                  <xsl:element name="xsl:value-of">
+                    <xsl:attribute name="select" select="'''liste des éléments : '''"/>
+                  </xsl:element>
                 </xsl:element>
-                <xsl:element name="xsl:message">
-                  <xsl:attribute name="select" select="concat('''',replace($function-call,'''',''''''),'''')"/>
+                <xsl:element name="xsl:for-each">
+                  <xsl:attribute name="select" select="$function-call"/>
+                  <xsl:element name="xsl:if">
+                    <xsl:attribute name="test" select="concat($function-call,'[2] = ''''')"/>
+                    <xsl:element name="xsl:text">
+                      <xsl:value-of select="'&#xA;'"/>
+                    </xsl:element>
+                  </xsl:element>
+                  <xsl:element name="xsl:choose">
+                    <xsl:element name="xsl:when">
+                      <xsl:attribute name="test" select="'eno:is-rich-content(.)'"/>
+                      <xsl:element name="xsl:element">
+                        <xsl:attribute name="name" select="'{name(.)}'"/>
+                        <xsl:element name="xsl:comment">
+                          <xsl:attribute name="select" select="'''Input content'''"/>
+                        </xsl:element>
+                      </xsl:element>
+                    </xsl:element>
+                    <xsl:element name="xsl:otherwise">
+                      <xsl:element name="xsl:sequence">
+                        <xsl:attribute name="select" select="'.'"/>
+                      </xsl:element>
+                    </xsl:element>
+                  </xsl:element>
                 </xsl:element>
               </xsl:element>
             </xsl:element>
@@ -217,7 +241,7 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-  
+
   <xsl:template match="xsl:function[xsl:param/@name='variable' or xsl:param/@name='ip-id']" mode="debug">
     <xsl:element name="xsl:element">
       <xsl:attribute name="name" select="substring-after(@name,':')"/>
@@ -226,5 +250,5 @@
       </xsl:element>
     </xsl:element>
   </xsl:template>
-  
+
 </xsl:stylesheet>
