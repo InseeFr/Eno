@@ -1087,7 +1087,7 @@
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
     </xsl:template>
-    <xsl:template match="*[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference')) and not(ancestor::d:GridDimension) and not(name()='d:StructuredMixedGridResponseDomain')]" mode="enoddi:get-business-name">
+    <xsl:template match="*[ends-with(name(),'Domain') or ends-with(name(),'DomainReference')]" mode="enoddi:get-business-name">
         <xsl:call-template name="enoddi:get-business-name">
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
