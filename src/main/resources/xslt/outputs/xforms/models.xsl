@@ -229,7 +229,7 @@
                 </xsl:apply-templates>
             </xsl:element>
         </xsl:element>
-        <xsl:if test="enoxforms:get-linked-containers($source-context)[1] = enoxforms:get-container-name($source-context)">
+        <xsl:if test="not(enoxforms:is-linked-loop($source-context))">
             <xsl:element name="{$name}-Count">
                 <xsl:value-of select="enoxforms:get-minimum-lines($source-context)"/>
             </xsl:element>
@@ -253,7 +253,7 @@
                 </xsl:apply-templates>
             </xsl:element>
         </xsl:element>
-        <xsl:if test="enoxforms:get-linked-containers($source-context)[1] = enoxforms:get-container-name($source-context)">
+        <xsl:if test="not(enoxforms:is-linked-loop($source-context))">
             <xsl:element name="{$name}-Count">
                 <xsl:value-of select="enoxforms:get-minimum-occurrences($source-context)"/>
             </xsl:element>
@@ -995,7 +995,7 @@
                 <xsl:with-param name="instance-ancestor" select="if ($instance-ancestor='') then $business-name else concat($instance-ancestor,' ',$business-name)" tunnel="yes"/>
             </xsl:apply-templates>
         </xf:bind>
-        <xsl:if test="enoxforms:get-linked-containers($source-context)[1] = enoxforms:get-container-name($source-context)">
+        <xsl:if test="not(enoxforms:is-linked-loop($source-context))">
             <xf:bind id="{$business-name}-add-occurrence-bind" ref="{$business-name}-AddOccurrence">
                 <xsl:if test="enoxforms:get-maximum-occurrences($source-context)!=''">
                     <xsl:variable name="maximum">
@@ -1430,7 +1430,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         
-        <xsl:if test="enoxforms:get-linked-containers($source-context)[1] = enoxforms:get-container-name($source-context)">
+        <xsl:if test="not(enoxforms:is-linked-loop($source-context))">
             <xsl:element name="{enoxforms:get-name($source-context)}-AddOccurrence">
                 <label>
                     <xsl:value-of select="enoxforms:get-label($source-context,$language)"/>
@@ -2227,32 +2227,41 @@
                     <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}-Count"
                         value="number({$instance-ancestor-label}{$loop-name}-Count) +1"/>
                     <xsl:for-each select="enoxforms:get-linked-containers($source-context)">
-<!--                        <xsl:choose>-->
-                            <!--<xsl:when test="enoxforms:get-loop-filter(.) != ''">
+                        <xsl:variable name="linked-loop-name" select="enoxforms:get-container-name(.)"/>
+                        <xsl:variable name="insert-action" as="node()">
+                            <xf:insert context="{$instance-ancestor-label}{$linked-loop-name}"
+                                nodeset="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}" position="after"
+                                origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>                            
+                        </xsl:variable>
+                        <xsl:variable name="set-value" as="node()">
+                            <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
+                                value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="enoxforms:get-loop-filter(.) != ''">
                                 <xf:action>
                                     <xsl:attribute name="if">
                                         <xsl:call-template name="replaceVariablesInFormula">
                                             <xsl:with-param name="source-context" select="." tunnel="yes"/>
                                             <xsl:with-param name="formula" select="enoxforms:get-loop-filter(.)"/>
-                                            <xsl:with-param name="instance-ancestor" select="enoxforms:get-business-name(.)"/><!-\- aïe -\->
-                                            <xsl:with-param name="variables" select="enoxforms:get-loop-filter-variables(.)"/>
+                                            <xsl:with-param name="instance-ancestor" select="enoxforms:get-business-name(.)"/><!-- maybe use get-business-ancestors too -->
+                                            <xsl:with-param name="variables">
+                                                <xsl:for-each select="tokenize(enoxforms:get-loop-filter-variables(.),' ')">
+                                                    <xsl:sort select="string-length(.)" order="descending"/>
+                                                    <Variable><xsl:value-of select="."/></Variable>
+                                                </xsl:for-each>
+                                            </xsl:with-param>
                                         </xsl:call-template>
                                     </xsl:attribute>
-                                    <xf:insert context="{$instance-ancestor-label}{.}"
-                                        nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
-                                        origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
-                                    <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@occurrence-id"
-                                        value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>                                    
+                                    <xsl:copy-of select="$insert-action"/>
+                                    <xsl:copy-of select="$set-value"/>
                                 </xf:action>
-                            </xsl:when>-->
-<!--                            <xsl:otherwise>-->
-                                <xf:insert context="{$instance-ancestor-label}{.}"
-                                    nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
-                                    origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
-                                <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@occurrence-id"
-                                    value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>                                
-                            <!--</xsl:otherwise>-->
-                        <!--</xsl:choose>-->
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:copy-of select="$insert-action"/>
+                                <xsl:copy-of select="$set-value"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:for-each>
                 </xf:action>
             </xf:trigger>
@@ -2403,18 +2412,48 @@
             </xsl:apply-templates>
         </xf:repeat>
         
-        <xsl:if test="enoxforms:get-linked-containers($source-context)[1] = enoxforms:get-container-name($source-context)">
+        <xsl:if test="not(enoxforms:is-linked-loop($source-context))">
             <xf:trigger id="{$loop-name}-add-occurrence" bind="{$loop-name}-add-occurrence-bind">
                 <xf:label ref="$form-resources/{$loop-name}-AddOccurrence/label"/>
                 <xf:action ev:event="DOMActivate">
                     <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}-Count"
                         value="number({$instance-ancestor-label}{$loop-name}-Count) +1"/>
                     <xsl:for-each select="enoxforms:get-linked-containers($source-context)">
-                        <xf:insert context="{$instance-ancestor-label}{.}"
-                            nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
-                            origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
-                        <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@occurrence-id"
-                            value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                        <xsl:variable name="linked-loop-name" select="enoxforms:get-container-name(.)"/>
+                        <xsl:variable name="insert-action" as="node()">
+                            <xf:insert context="{$instance-ancestor-label}{$linked-loop-name}"
+                                nodeset="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}" position="after"
+                                origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>                            
+                        </xsl:variable>
+                        <xsl:variable name="set-value" as="node()">
+                            <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
+                                value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
+                        </xsl:variable>
+                        <xsl:choose>
+                            <xsl:when test="enoxforms:get-loop-filter(.) != ''">
+                                <xf:action>
+                                    <xsl:attribute name="if">
+                                        <xsl:call-template name="replaceVariablesInFormula">
+                                            <xsl:with-param name="source-context" select="." tunnel="yes"/>
+                                            <xsl:with-param name="formula" select="enoxforms:get-loop-filter(.)"/>
+                                            <xsl:with-param name="instance-ancestor" select="enoxforms:get-business-name(.)"/><!-- maybe use get-business-ancestors too -->
+                                            <xsl:with-param name="variables">
+                                                <xsl:for-each select="tokenize(enoxforms:get-loop-filter-variables(.),' ')">
+                                                    <xsl:sort select="string-length(.)" order="descending"/>
+                                                    <Variable><xsl:value-of select="."/></Variable>
+                                                </xsl:for-each>
+                                            </xsl:with-param>
+                                        </xsl:call-template>
+                                    </xsl:attribute>
+                                    <xsl:copy-of select="$insert-action"/>
+                                    <xsl:copy-of select="$set-value"/>                                    
+                                </xf:action>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:copy-of select="$insert-action"/>
+                                <xsl:copy-of select="$set-value"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:for-each>
                 </xf:action>
             </xf:trigger>

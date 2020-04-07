@@ -1057,23 +1057,32 @@
     <xd:doc>
         <xd:desc>
             <xd:p>Defining getter get-linked-containers.</xd:p>
-            <xd:p>Function that returns the list of the business name of the different containers of an occurrence of the current loop or dynamic array.</xd:p>
+            <xd:p>Function that returns the list of the different containers of an occurrence of the current loop or dynamic array.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-linked-containers">
+    <xsl:template match="d:Loop | d:QuestionGrid[d:GridDimension/d:Roster] | d:StructuredMixedGridResponseDomain[parent::d:QuestionGrid[d:GridDimension/d:Roster]]" mode="enoddi:get-linked-containers">
         <xsl:variable name="loop-id" select="enoddi:get-id(.)"/>
         <xsl:variable name="loop-name" select="$root//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference/r:ID= $loop-id]/l:VariableGroupName/r:String"/>
         <xsl:for-each select="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject[r:BasedOnReference/r:ID= $loop-id]/r:BasedOnReference">
-            <xsl:variable name="loop-position" select="position()"/>
             <xsl:choose>
-                <xsl:when test="$loop-position = 1">
-                    <xsl:value-of select="concat($loop-name,'-Container')"/>
+                <xsl:when test="r:TypeOfObject='QuestionGrid'">
+                    <xsl:copy-of select="$root//d:QuestionGrid[r:ID=current()/r:ID]"/>
                 </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="concat($loop-name,'_',$loop-position,'-Container')"/>
-                </xsl:otherwise>
+                <xsl:when test="r:TypeOfObject='Loop'">
+                    <xsl:copy-of select="$root//d:Loop[r:ID=current()/r:ID]"/>
+                </xsl:when>
             </xsl:choose>
         </xsl:for-each>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Defining the boolean getter is-linked-loop.</xd:p>
+            <xd:p>Function that returns if a loop is not a leader one...</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Loop | d:QuestionGrid[d:GridDimension/d:Roster] | d:StructuredMixedGridResponseDomain[parent::d:QuestionGrid[d:GridDimension/d:Roster]]" mode="enoddi:is-linked-loop">
+        <xsl:value-of select="exists($root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference[r:ID= enoddi:get-id(.)]/preceding-sibling::r:BasedOnReference)"/>
     </xsl:template>
 
     <xd:doc>
