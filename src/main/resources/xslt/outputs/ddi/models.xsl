@@ -84,7 +84,7 @@
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                     <xsl:apply-templates select="enoddi33:get-loops($source-context)" mode="source">
-                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-SequenceLoop', .)" tunnel="yes"/>
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                     <xsl:apply-templates select="enoddi33:get-filtered-loops($source-context)" mode="source">
@@ -844,7 +844,7 @@
         </d:Sequence>
     </xsl:template>
 
-    <xsl:template name="sequenceLoop" match="driver-SequenceLoop//Loop" mode="model">
+    <xsl:template match="driver-ControlConstructScheme//Loop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="maxVal" select="enoddi33:get-high($source-context)"/>
@@ -909,7 +909,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="$source-context"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version(.)"/></r:Version>
             <r:TypeOfObject>Sequence</r:TypeOfObject>
         </d:ControlConstructReference>
