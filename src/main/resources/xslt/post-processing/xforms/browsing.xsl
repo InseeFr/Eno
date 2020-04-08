@@ -766,7 +766,7 @@
         <xsl:param name="constraint-end" as="xs:string" tunnel="yes"/>
 
         <xsl:if test="@level=$level">
-            <xf:constraint level="{$level}">
+            <xf:constraint>
                 <xsl:attribute name="value">
                     <xsl:value-of select="concat($constraint-begin,'(',replace(@value,'ancestor::','ancestor-or-self::'),')',$constraint-end)"/>        
                 </xsl:attribute>
