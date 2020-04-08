@@ -84,7 +84,7 @@
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                     <xsl:apply-templates select="enoddi33:get-loops($source-context)" mode="source">
-                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-SequenceLoop', .)" tunnel="yes"/>
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-ControlConstructScheme', .)" tunnel="yes"/>
                         <xsl:with-param name="agency" select="$agency" as="xs:string" tunnel="yes"/>
                     </xsl:apply-templates>
                     <xsl:apply-templates select="enoddi33:get-filtered-loops($source-context)" mode="source">
@@ -844,7 +844,7 @@
         </d:Sequence>
     </xsl:template>
 
-    <xsl:template name="sequenceLoop" match="driver-SequenceLoop//Loop" mode="model">
+    <xsl:template match="driver-ControlConstructScheme//Loop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <xsl:variable name="maxVal" select="enoddi33:get-high($source-context)"/>
@@ -885,10 +885,22 @@
                     </r:Command>
                 </d:StepValue>
             </xsl:if>
-            <!-- Add ControlConstructReference for each sequence linked to the loop -->
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopMemberReference', .)" tunnel="yes"/>
-            </xsl:apply-templates>
+            <xsl:choose>
+                <xsl:when test="enoddi33:get-loop-filter($source-context) != ''">
+                    <d:ControlConstructReference>
+                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
+                        <r:ID><xsl:value-of select="concat(enoddi33:get-id($source-context),'-ITE-THEN')"/></r:ID>
+                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
+                        <r:TypeOfObject>IfThenElse</r:TypeOfObject>
+                    </d:ControlConstructReference>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- Add ControlConstructReference for each sequence linked to the loop -->
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopMemberReference', .)" tunnel="yes"/>
+                    </xsl:apply-templates>
+                </xsl:otherwise>
+            </xsl:choose>
         </d:Loop>
     </xsl:template>
 
@@ -897,7 +909,7 @@
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <d:ControlConstructReference>
             <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-            <r:ID><xsl:value-of select="$source-context"/></r:ID>
+            <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
             <r:Version><xsl:value-of select="enoddi33:get-version(.)"/></r:Version>
             <r:TypeOfObject>Sequence</r:TypeOfObject>
         </d:ControlConstructReference>
@@ -1239,12 +1251,10 @@
                 </xsl:apply-templates>
                 <!-- Add ControlConstruct for Loop -->
                 <xsl:if test="name()='Loop'">
-                    <d:ControlConstructReference>
-                        <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
-                        <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-                        <r:TypeOfObject>Loop</r:TypeOfObject>
-                    </d:ControlConstructReference>
+                    <!-- Add ControlConstructReference for each sequence linked to the loop -->
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('driver-LoopMemberReference', .)" tunnel="yes"/>
+                    </xsl:apply-templates>
                 </xsl:if>
             </d:Sequence>
         </xsl:if>
@@ -1270,25 +1280,11 @@
             <xsl:when test="$idLoop != ''">
                 <!-- Check if there's no preceding element who is linked to loop too, to avoid duplication -->
                 <xsl:if test="enoddi33:is-first-loop-sequence($source-context)">
-                    <!-- Get filter for the linked loop -->
-                    <xsl:variable name="filterLoop" select="enoddi33:get-loop-filter($source-context)"/>
-                    <xsl:variable name="idLoopVal">
-                        <xsl:choose>
-                            <xsl:when test="$filterLoop = ''"><xsl:value-of select="$idLoop"/></xsl:when>
-                            <xsl:when test="$filterLoop != ''"><xsl:value-of select="concat($idLoop,'-ITE')"/></xsl:when>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <xsl:variable name="typeLoopVal">
-                        <xsl:choose>
-                            <xsl:when test="$filterLoop = ''">Loop</xsl:when>
-                            <xsl:when test="$filterLoop != ''">IfThenElse</xsl:when>
-                        </xsl:choose>
-                    </xsl:variable>
                     <d:ControlConstructReference>
                         <r:Agency><xsl:value-of select="$agency"/></r:Agency>
-                        <r:ID><xsl:value-of select="$idLoopVal"/></r:ID>
+                        <r:ID><xsl:value-of select="$idLoop"/></r:ID>
                         <r:Version><xsl:value-of select="enoddi33:get-version($source-context)"/></r:Version>
-                        <r:TypeOfObject><xsl:value-of select="$typeLoopVal"/></r:TypeOfObject>
+                        <r:TypeOfObject>Loop</r:TypeOfObject>
                     </d:ControlConstructReference>
                 </xsl:if>
             </xsl:when>
