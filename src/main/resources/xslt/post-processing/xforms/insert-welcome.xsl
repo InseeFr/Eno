@@ -304,11 +304,9 @@
                         <xsl:text> Elle entre dans le champ de la circulaire n° 2015-11 du 5 novembre 2015, qui s’inscrit 
                             dans le cadre des mesures de simplification pour les entreprises.</xsl:text>
                     </xsl:if>
-                    <xsl:text>&lt;/p&gt;&lt;p&gt;Visa n°</xsl:text>
-                    <xsl:value-of select="$NumeroVisa"/>
-                    <xsl:text> </xsl:text>
+                    <xsl:text>&lt;/p&gt;&lt;p&gt;Visa n°øVISAø</xsl:text>
                     <xsl:for-each select="$MinistereTutelle">
-                        <xsl:text>du Ministre </xsl:text>
+                        <xsl:text> du Ministre </xsl:text>
                         <xsl:value-of select="."/>
                         <xsl:text>, </xsl:text>
                     </xsl:for-each>
