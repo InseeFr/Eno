@@ -357,16 +357,8 @@
         <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
         <xsl:variable name="driver" select="."/>
         <xsl:variable name="version" select="enoddi33:get-version($source-context)"/>
-        <xsl:variable name="related-response" select="enoddi33:get-related-response($source-context)"/>
         <!-- Check if reponse is linked to attribute of NoDatabyDefinition by mapping-target -->
-        <xsl:variable name="hide-variable">
-            <xsl:if test="$related-response">
-                <xsl:if test="enoddi33:get-attribute-target($related-response)!=''">
-                    <xsl:value-of select="enoddi33:get-attribute-target($related-response)=normalize-space(string-join(enoddi33:get-cell-coordinates($related-response),' '))"/>
-                </xsl:if>
-            </xsl:if>
-        </xsl:variable>
-        <xsl:if test="$hide-variable!='true'">
+        <xsl:if test="not(enoddi33:is-not-collected($source-context))">
             <l:Variable>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="$id"/></r:ID>
@@ -522,15 +514,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!-- Check if reponse is linked to attribute of NoDatabyDefinition by mapping-target -->
-        <xsl:variable name="related-response" select="enoddi33:get-related-response($source-context)"/>
-        <xsl:variable name="hide-variable">
-            <xsl:if test="$related-response">
-                <xsl:if test="enoddi33:get-attribute-target($related-response)!=''">
-                    <xsl:value-of select="enoddi33:get-attribute-target($related-response)=normalize-space(string-join(enoddi33:get-cell-coordinates($related-response),' '))"/>
-                </xsl:if>
-            </xsl:if>
-        </xsl:variable>
-        <xsl:if test="$hide-variable!='true'">
+        <xsl:if test="not(enoddi33:is-not-collected($source-context))">
             <r:VariableReference>
                 <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                 <r:ID><xsl:value-of select="enoddi33:get-id($source-context)"/></r:ID>
@@ -547,15 +531,7 @@
         <xsl:if test="not(enoddi33:get-scope-id($source-context)!='')">
             <xsl:variable name="relatedVariable" select="enoddi33:get-related-variable($source-context)"/>
             <!-- Check if reponse is linked to attribute of NoDatabyDefinition by mapping-target -->
-            <xsl:variable name="related-response" select="enoddi33:get-related-response($relatedVariable)"/>
-            <xsl:variable name="hide-variable">
-                <xsl:if test="$related-response">
-                    <xsl:if test="enoddi33:get-attribute-target($related-response)!=''">
-                        <xsl:value-of select="enoddi33:get-attribute-target($related-response)=normalize-space(string-join(enoddi33:get-cell-coordinates($related-response),' '))"/>
-                    </xsl:if>
-                </xsl:if>
-            </xsl:variable>
-            <xsl:if test="$hide-variable!='true'">
+            <xsl:if test="not(enoddi33:is-not-collected($source-context))">
                 <r:VariableReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="enoddi33:get-id($relatedVariable)"/></r:ID>
@@ -573,15 +549,7 @@
         <xsl:variable name="id" select="enoddi33:get-id($source-context)"/>
         <xsl:if test="enoddi33:get-variable-group($source-context) = $questionnaire-id">
             <!-- Check if reponse is linked to attribute of NoDatabyDefinition by mapping-target -->
-            <xsl:variable name="related-response" select="enoddi33:get-related-response($source-context)"/>
-            <xsl:variable name="hide-variable">
-                <xsl:if test="$related-response">
-                    <xsl:if test="enoddi33:get-attribute-target($related-response)!=''">
-                        <xsl:value-of select="enoddi33:get-attribute-target($related-response)=normalize-space(string-join(enoddi33:get-cell-coordinates($related-response),' '))"/>
-                    </xsl:if>
-                </xsl:if>
-            </xsl:variable>
-            <xsl:if test="$hide-variable!='true'">
+            <xsl:if test="not(enoddi33:is-not-collected($source-context))">
                 <r:VariableReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
                     <r:ID><xsl:value-of select="$id"/></r:ID>
@@ -1468,12 +1436,10 @@
         
         <xsl:variable name="driver" select="."/>
         <xsl:variable name="response-attachment" select="enoddi33:get-attachment-position($source-context)"/>
-        <xsl:variable name="attribute-target" select="enoddi33:get-attribute-target($source-context)"/>
-        
         <xsl:for-each select="enoddi33:get-grid-dimensions($source-context)">
             <xsl:choose>
-                <xsl:when test="$attribute-target = normalize-space(string-join(enoddi33:get-cell-coordinates($source-context),' '))">
-                    <!-- Check which (default) reponse is set with the NoDatByDefinition attribute  -->
+                <xsl:when test="enoddi33:is-not-collected($source-context)">
+                    <!-- Check if response match the default NoDatByDefinition attribute  -->
                     <d:NoDataByDefinition>
                         <d:CellCoordinatesAsDefined>
                             <xsl:for-each select="enoddi33:get-cell-coordinates($source-context)">
@@ -1664,12 +1630,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!-- Check if reponse is linked to attribute of NoDatabyDefinition by mapping-target -->
-        <xsl:variable name="hide-OutParameter">
-            <xsl:if test="enoddi33:get-attribute-target($source-context)!=''">
-                <xsl:value-of select="enoddi33:get-attribute-target($source-context)=normalize-space(string-join(enoddi33:get-cell-coordinates($source-context),' '))"/>
-            </xsl:if>
-        </xsl:variable>
-        <xsl:if test="$hide-OutParameter!='true'">
+        <xsl:if test="not(enoddi33:is-not-collected($source-context))">
             <xsl:element name="r:OutParameter">
                 <xsl:attribute name="isArray" select="'false'"/>
                 <xsl:element name="r:Agency"><xsl:value-of select="$agency"/></xsl:element>
@@ -1701,12 +1662,7 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="agency" as="xs:string" tunnel="yes"/>
         <!-- Check if reponse is linked to attribute of NoDatabyDefinition by mapping-target -->
-        <xsl:variable name="hide-Binding">
-            <xsl:if test="enoddi33:get-attribute-target($source-context)!=''">
-                <xsl:value-of select="enoddi33:get-attribute-target($source-context)=normalize-space(string-join(enoddi33:get-cell-coordinates($source-context),' '))"/>
-            </xsl:if>
-        </xsl:variable>
-        <xsl:if test="$hide-Binding!='true'">
+        <xsl:if test="not(enoddi33:is-not-collected($source-context))">
             <r:Binding>
                 <r:SourceParameterReference>
                     <r:Agency><xsl:value-of select="$agency"/></r:Agency>
