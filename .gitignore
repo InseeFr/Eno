@@ -7,10 +7,12 @@ target/
 # Ignore java libraries
 lib/
 
-# Ignore Eclipse files
+# Ignore IDE files
 .classpath
 .project
 .settings/
+.idea
+*.iml
 
 # Generated files
 #src/main/resources/xslt/inputs/ddi/source.xsl
