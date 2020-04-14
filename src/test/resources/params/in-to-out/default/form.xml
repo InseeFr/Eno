@@ -18,6 +18,7 @@
                   maxLength="500"
                   mandatory="false">
          <label>"➡ 1. Before starting, do you have any comments about the Simpsons family?"</label>
+         <conditionFilter>"normal"</conditionFilter>
          <response name="COMMENT" xsi:type="ResponseContainerString">
             <valueState valueType="PREVIOUS">
                <value xsi:nil="true"/>
@@ -35,13 +36,13 @@
                <value xsi:nil="true"/>
             </valueState>
          </response>
-         <conditionFilter>"normal"</conditionFilter>
       </components>
       <components xsi:type="CheckboxBoolean"
                   componentType="CheckboxBoolean"
                   id="j6p0np9q"
                   mandatory="false">
          <label>"➡ 2. Are you ready?"</label>
+         <conditionFilter>"normal"</conditionFilter>
          <response name="READY" xsi:type="ResponseContainerBoolean">
             <valueState valueType="PREVIOUS">
                <value xsi:nil="true"/>
@@ -59,7 +60,6 @@
                <value xsi:nil="true"/>
             </valueState>
          </response>
-         <conditionFilter>"normal"</conditionFilter>
       </components>
       <components xsi:type="FilterDescription"
                   componentType="FilterDescription"
@@ -76,6 +76,7 @@
                      maxLength="30"
                      mandatory="false">
             <label>"➡ 3. Who is the producer?"</label>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
             <response name="PRODUCER" xsi:type="ResponseContainerString">
                <valueState valueType="PREVIOUS">
                   <value xsi:nil="true"/>
@@ -93,7 +94,6 @@
                   <value xsi:nil="true"/>
                </valueState>
             </response>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -103,6 +103,7 @@
                      max="99"
                      decimals="0">
             <label>"➡ 4. What is the current season number?"</label>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
             <response name="SEASON_NUMBER" xsi:type="ResponseContainerString">
                <valueState valueType="PREVIOUS">
                   <value xsi:nil="true"/>
@@ -120,7 +121,6 @@
                   <value xsi:nil="true"/>
                </valueState>
             </response>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          </components>
          <components xsi:type="Datepicker"
                      componentType="Datepicker"
@@ -129,12 +129,13 @@
                      min="1900-01-01"
                      max="format-date(current-date(),'[Y0001]-[M01]-[D01]')">
             <label>"➡ 5. When was the first episode of the Simpsons?"</label>
-            <dateFormat>YYYY-MM-DD</dateFormat>
             <declarations declarationType="COMMENT"
                           id="j334cyqb-d11"
                           position="AFTER_QUESTION_TEXT">
                <label>"For your information, the date of the last broadcast was on " || cast(cast(LAST_BROADCAST,string),string) || " "</label>
             </declarations>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+            <dateFormat>YYYY-MM-DD</dateFormat>
             <response name="DATEFIRST" xsi:type="ResponseContainerString">
                <valueState valueType="PREVIOUS">
                   <value xsi:nil="true"/>
@@ -152,7 +153,6 @@
                   <value xsi:nil="true"/>
                </valueState>
             </response>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -162,6 +162,7 @@
                      max="99.0"
                      decimals="1">
             <label>"➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?"</label>
+            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
             <response name="AUDIENCE_SHARE" xsi:type="ResponseContainerString">
                <valueState valueType="PREVIOUS">
                   <value xsi:nil="true"/>
@@ -179,7 +180,6 @@
                   <value xsi:nil="true"/>
                </valueState>
             </response>
-            <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          </components>
       </components>
    </components>
@@ -201,6 +201,7 @@
                        position="AFTER_QUESTION_TEXT">
             <label>"One possible answer"</label>
          </declarations>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <options>
             <value>00001</value>
             <label>"Springfield"</label>
@@ -230,7 +231,6 @@
                <value xsi:nil="true"/>
             </valueState>
          </response>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
       </components>
       <components xsi:type="CheckboxOne"
                   componentType="CheckboxOne"
@@ -242,6 +242,7 @@
                        position="AFTER_QUESTION_TEXT">
             <label>"Only one possible answer"</label>
          </declarations>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <options>
             <value>1</value>
             <label>"Constance Harm"</label>
@@ -275,13 +276,13 @@
                <value xsi:nil="true"/>
             </valueState>
          </response>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
       </components>
       <components xsi:type="Dropdown"
                   componentType="Dropdown"
                   id="j4nw5cqz"
                   mandatory="false">
          <label>"➡ 3. In which state do The Simpsons reside?"</label>
+         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
          <options>
             <value>1</value>
             <label>"Washington"</label>
@@ -351,7 +352,6 @@
                <value xsi:nil="true"/>
             </valueState>
          </response>
-         <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
       </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6qe0h9q">
@@ -2006,6 +2006,7 @@
                   mandatory="false">
          <label>"➡ 1. Please, complete the following grid with your favourite characters"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
+         <lines min="1" max="10"/>
          <cells type="header">
             <cells headerCell="true">
                <label>"Name"</label>
@@ -2014,7 +2015,6 @@
                <label>"Age"</label>
             </cells>
          </cells>
-         <lines min="1" max="10"/>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdl5jb" componentType="Textarea" maxLength="255">
                <response name="FAVOURITE_CHARACTERS11" xsi:type="ResponseContainerString">
@@ -2466,6 +2466,7 @@
                   maxLength="255"
                   mandatory="false">
          <label>"➡ 1. Do you have any comment about the survey?"</label>
+         <conditionFilter>"normal"</conditionFilter>
          <response name="SURVEY_COMMENT" xsi:type="ResponseContainerString">
             <valueState valueType="PREVIOUS">
                <value xsi:nil="true"/>
@@ -2483,7 +2484,6 @@
                <value xsi:nil="true"/>
             </valueState>
          </response>
-         <conditionFilter>"normal"</conditionFilter>
       </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
@@ -2496,22 +2496,22 @@
                   mandatory="false">
          <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
          <response name="COMMENT_QE" xsi:type="ResponseContainerString">
-                <valueState valueType="PREVIOUS">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="COLLECTED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="FORCED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="EDITED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="INPUTED">
-                    <value xsi:nil="true"/>
-                </valueState>
-            </response>
+            <valueState valueType="PREVIOUS">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="COLLECTED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="FORCED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="EDITED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="INPUTED">
+               <value xsi:nil="true"/>
+            </valueState>
+         </response>
          <conditionFilter>"normal"</conditionFilter>
       </components>
    </components>
