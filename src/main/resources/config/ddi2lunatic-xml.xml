@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file contains common properties used by the ddi2fr transformation  -->
+<Properties>
+    <Images>
+        <Folder>img</Folder>
+    </Images>
+    <TextConditioningVariable>
+        <ddi>
+            <Before>¤</Before>
+            <After>¤</After>
+        </ddi>
+    </TextConditioningVariable>
+    <!-- sdmx / apache / identity -->
+    <Filter>sdmx</Filter>
+    <Context>default</Context>
+    <FilterDescription>false</FilterDescription>
+    <EndQuestion>
+        <Folder>xslt/post-processing/lunatic-xml/end-question</Folder>
+        <ResponseTimeQuestion>false</ResponseTimeQuestion>
+        <CommentQuestion>false</CommentQuestion>
+    </EndQuestion>    
+    <BeginQuestion>
+        <Folder>xslt/post-processing/lunatic-xml/begin-question</Folder>
+        <Identification>false</Identification>
+    </BeginQuestion>
+</Properties>

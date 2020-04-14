@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="enoLunatic" basedir=".">
+
+	<property name="out-extension" value="xml"/>
+	<property name="out-folder" value="lunatic-xml"/>
+
+	<!-- lunaticPostProcessing : sort elements ; add generic questions ; put variables to the end -->
+	<target name="lunatic-xmlPostProcessing">
+		<xslt in="${postprocessing-input-file}"
+			out="${target-folder}/${survey-name}/${form-name}/form/form-sorted.${out-extension}"
+			style="${xslt.home}/post-processing/lunatic-xml/sort-components.xsl" classpath="${saxon.jar}" force="true">
+		</xslt>
+		
+		<xslt in="${target-folder}/${survey-name}/${form-name}/form/form-sorted.${out-extension}"
+			out="${target-folder}/${survey-name}/${form-name}/form/form-end-questions.${out-extension}"
+			style="${xslt.home}/post-processing/lunatic-xml/insert-generic-questions.xsl" force="true" classpath="${saxon.jar}">
+			<param name="properties-file" expression="${config-folder}/${Properties.InFormat}2${Properties.OutFormat}.xml"/>
+		</xslt>
+		
+		<xslt in="${target-folder}/${survey-name}/${form-name}/form/form-end-questions.${out-extension}"
+			out="${target-folder}/${survey-name}/${form-name}/form/form-externalize.${out-extension}"
+			style="${xslt.home}/post-processing/lunatic-xml/externalize-variables.xsl" force="true" classpath="${saxon.jar}">
+		</xslt>
+		
+		<copy file="${target-folder}/${survey-name}/${form-name}/form/form-externalize.${out-extension}"
+			tofile="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"/>
+		<!-- Manque l'appel au lunatic-vtlParser -->
+		<!-- Pourrait s'inspirer de ceci, mais il manque une méthode main dans vtl-parser -->
+		<!--<target name="compile-TableColumnSizeProcessor">
+			<mkdir dir="${root-folder}/target/build/TableColumnSizeProcessor/classes"/>
+			<javac srcdir="${plugin.TableColumnSizeProcessor.java.home}/src/com/calculator" destdir="${root-folder}/target/build/TableColumnSizeProcessor/classes"
+				includeantruntime="false">
+				<classpath refid="classpath"/>
+			</javac>
+		</target>
+		
+		<target name="jar-TableColumnSizeProcessor">
+			<mkdir dir="${root-folder}/target/build/TableColumnSizeProcessor/jar"/>
+			<jar destfile="${root-folder}/target/build/TableColumnSizeProcessor/jar/TableColumnSizeProcessor.jar" basedir="${root-folder}/target/build/TableColumnSizeProcessor/classes">
+				<manifest>
+					<attribute name="Main-Class" value="com.calculator.Main"/>
+				</manifest>
+			</jar>
+		</target>
+		
+		<target name="call-TableColumnSizeProcessor">
+			<java jar="${root-folder}/target/build/TableColumnSizeProcessor/jar/TableColumnSizeProcessor.jar" fork="true">
+				<arg value="inFileName=${target-folder}/${survey-name}/${form-name}/form/form-externalize.${out-extension}" />
+				<arg value="outFileName=${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}" />
+				<arg value="xmlConfFile=${root-folder}/config/plugins-conf.xml" />
+			</java>
+		</target>-->
+	</target>
+</project>

@@ -38,6 +38,7 @@ src/main/resources/xslt/inputs/*/source.xsl
 src/main/resources/xslt/inputs/*/templates.xsl
 src/main/resources/xslt/inputs/*/functions.xsl
 src/main/resources/xslt/transformations/*/*.xsl
+src/main/resources/xslt/outputs/*/models-debug.xsl
 src/main/resources/xml/null.xml
 
 # Ignore temp and debug files
@@ -50,5 +51,6 @@ src/main/resources/xml/null.xml
 !src/main/resources/xslt/transformations/*/*-fixed.xsl
 
 #Oxygen project
-enojs.xpr
+Eno.xpr
 questionnaires/test/
+/bin/

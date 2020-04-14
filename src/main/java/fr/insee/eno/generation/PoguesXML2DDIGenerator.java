@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.insee.eno.Constants;
+import fr.insee.eno.exception.EnoGenerationException;
 import fr.insee.eno.transform.xsl.XslParameters;
 import fr.insee.eno.transform.xsl.XslTransformation;
 
@@ -17,8 +18,7 @@ public class PoguesXML2DDIGenerator implements Generator {
 
 	private static final Logger logger = LoggerFactory.getLogger(PoguesXML2DDIGenerator.class);
 
-	// FIXME Inject !
-	private static XslTransformation saxonService = new XslTransformation();
+	private XslTransformation saxonService = new XslTransformation();
 
 	@Override
 	public File generate(File finalInput, byte[] parameters, String surveyName) throws Exception {
@@ -40,8 +40,14 @@ public class PoguesXML2DDIGenerator implements Generator {
 		InputStream isFinalInput = FileUtils.openInputStream(finalInput);
 		OutputStream osOutputBasicForm = FileUtils.openOutputStream(new File(outputBasicFormPath));
 
-		saxonService.transformPoguesXML2DDI(isFinalInput, osOutputBasicForm,
-				isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL, parameters);
+		try {
+			saxonService.transformPoguesXML2DDI(isFinalInput, osOutputBasicForm,
+					isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL, parameters);
+		}catch(Exception e) {
+			String errorMessage = "An error was occured during the "+in2out()+" transformation. "+e.getMessage();
+			logger.error(errorMessage);
+			throw new EnoGenerationException(errorMessage);
+		}
 
 		isTRANSFORMATIONS_POGUES_XML2DDI_POGUES_XML2DDI_XSL.close();
 		isFinalInput.close();

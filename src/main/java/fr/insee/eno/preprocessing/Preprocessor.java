@@ -23,4 +23,5 @@ public interface Preprocessor {
 	 */
 	public File process(File inputFile, byte[] parameters, String survey, String in2out) throws Exception;
 
+	public String toString();
 }
