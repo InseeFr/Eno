@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:fn="http://www.w3.org/2005/xpath-functions"
-	xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-	xmlns:eno="http://xml.insee.fr/apps/eno"
-	xmlns:enolunatic="http://xml.insee.fr/apps/eno/out/js"
-	xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
-	exclude-result-prefixes="xs fn xd eno enolunatic" version="2.0">
-	
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:fn="http://www.w3.org/2005/xpath-functions"
+				xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+				xmlns:eno="http://xml.insee.fr/apps/eno"
+				xmlns:enolunatic="http://xml.insee.fr/apps/eno/out/js"
+				xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
+				exclude-result-prefixes="xs fn xd eno enolunatic" version="2.0">
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The properties file used by the stylesheet.</xd:p>
@@ -20,16 +20,16 @@
 	<xsl:param name="parameters-node" as="node()" required="no">
 		<empty/>
 	</xsl:param>
-	
+
 	<xd:doc scope="stylesheet">
 		<xd:desc>
 			<xd:p>An xslt stylesheet who transforms an input into js through generic driver templates.</xd:p>
 			<xd:p>The real input is mapped with the drivers.</xd:p>
 		</xd:desc>
 	</xd:doc>
-	
+
 	<xsl:variable name="varName" select="parent"/>
-		
+
 	<xsl:template match="ResponseElement" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:variable name="languages" select="enolunatic:get-form-languages($source-context)" as="xs:string +"/>
@@ -39,7 +39,7 @@
 			<value xsi:nil="true"/>
 		</variables>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on Form driver.</xd:p>
@@ -60,7 +60,7 @@
 			</xsl:apply-templates>
 		</Questionnaire>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on Module and SubModule drivers.</xd:p>
@@ -69,7 +69,7 @@
 	<xsl:template match="Module | SubModule" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="componentType-Sequence">
 			<xsl:choose>
@@ -77,7 +77,7 @@
 				<xsl:when test="self::SubModule"><xsl:value-of select="'Subsequence'"/></xsl:when>
 			</xsl:choose>
 		</xsl:variable>
-		
+
 		<components xsi:type="{$componentType-Sequence}" componentType="{$componentType-Sequence}" id="{$id}">
 			<label><xsl:value-of select="enolunatic:get-vtl-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
@@ -87,7 +87,7 @@
 			</xsl:apply-templates>
 		</components>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>filters do not create a component because their condition is borne by each of their descendants</xd:desc>
 	</xd:doc>
@@ -97,14 +97,14 @@
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>SingleResponseQuestion driver does not create a component : it is created by its response</xd:desc>
 	</xd:doc>
 	<xsl:template match="SingleResponseQuestion | MultipleQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 			<xsl:with-param name="idQuestion" select="enolunatic:get-name($source-context)" tunnel="yes"/>
@@ -114,21 +114,21 @@
 			<xsl:with-param name="declarations" select="enolunatic:getInstructionForQuestion($source-context,.)" as="node()*" tunnel="yes"/>
 			<xsl:with-param name="filterCondition" select="enolunatic:get-global-filter($source-context)" tunnel="yes"/>
 		</xsl:apply-templates>
-		
+
 		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>MultipleChoiceQuestion driver creates a CheckboxGroup component</xd:desc>
 	</xd:doc>
 	<xsl:template match="MultipleChoiceQuestion" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
-		
+
 		<components xsi:type="CheckboxGroup" componentType="CheckboxGroup" id="{$idQuestion}">
 			<label><xsl:value-of select="enolunatic:get-vtl-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
@@ -144,25 +144,28 @@
 			</xsl:apply-templates>
 		</components>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>Table / TableLoop drivers create a Table component</xd:desc>
 	</xd:doc>
 	<xsl:template match="Table | TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<xsl:variable name="idQuestion" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="componentType" select="'Table'"/>
 		<xsl:variable name="mandatory" select="enolunatic:is-required($source-context)" as="xs:boolean"/>
 		<xsl:variable name="nbMinimumLines" select="enolunatic:get-minimum-lines($source-context)"/>
 		<xsl:variable name="nbMaximumLines" select="enolunatic:get-maximum-lines($source-context)"/>
-		
+
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}" positioning="HORIZONTAL" mandatory="{$mandatory}">
 			<label><xsl:value-of select="enolunatic:get-vtl-label($source-context, $languages[1])"/></label>
 			<xsl:copy-of select="enolunatic:getInstructionForQuestion($source-context,.)"/>
 			<conditionFilter><xsl:value-of select="enolunatic:get-global-filter($source-context)"/></conditionFilter>
-			
+			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
+				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
+			</xsl:if>
+
 			<xsl:for-each select="enolunatic:get-header-lines($source-context)">
 				<cells type="header">
 					<xsl:apply-templates select="enolunatic:get-header-line($source-context,position())" mode="source">
@@ -171,7 +174,7 @@
 					</xsl:apply-templates>
 				</cells>
 			</xsl:for-each>
-			
+
 			<xsl:for-each select="enolunatic:get-body-lines($source-context)">
 				<cells type="line">
 					<xsl:apply-templates select="enolunatic:get-body-line($source-context,position())" mode="source">
@@ -181,13 +184,9 @@
 					</xsl:apply-templates>
 				</cells>
 			</xsl:for-each>
-			
-			<xsl:if test="$nbMinimumLines!='' and $nbMaximumLines!=''">
-				<lines min="{$nbMinimumLines}" max="{$nbMaximumLines}"/>
-			</xsl:if>
 		</components>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>TextCell driver displays the header cells, for columns and lines.</xd:p>
@@ -198,12 +197,12 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idColumn" tunnel="yes"/>
 		<xsl:param name="ancestorTable" tunnel="yes"/>
-		
+
 		<xsl:variable name="col-span" select="number(enolunatic:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enolunatic:get-rowspan($source-context))"/>
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
-		
+
 		<cells>
 			<xsl:if test="$ancestorTable='headerLine'">
 				<xsl:attribute name="headerCell" select="true()"/>
@@ -216,7 +215,7 @@
 			<label><xsl:value-of select="$label"/></label>
 		</cells>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The Cell driver gives the colspan and the rowspan to the Response, which creates the cell.</xd:p>
@@ -224,14 +223,14 @@
 	</xd:doc>
 	<xsl:template match="Cell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		
+
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="."/>
 			<xsl:with-param name="col-span" select="number(enolunatic:get-colspan($source-context))" tunnel="yes"/>
 			<xsl:with-param name="row-span" select="number(enolunatic:get-rowspan($source-context))" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The EmptyCell driver creates an empty cell.</xd:p>
@@ -242,10 +241,10 @@
 		<xsl:param name="ancestorTable" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="idColumn" tunnel="yes"/>
-		
+
 		<xsl:variable name="col-span" select="number(enolunatic:get-colspan($source-context))"/>
 		<xsl:variable name="row-span" select="number(enolunatic:get-rowspan($source-context))"/>
-		
+
 		<xsl:choose>
 			<xsl:when test="$ancestorTable='headerLine'">
 				<cells headerCell="true">
@@ -262,7 +261,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The Response drivers in SingleResponseQuestion and MultipleQuestion create a component, which type depends on the Response driver.</xd:p>
@@ -311,7 +310,7 @@
 		<xsl:variable name="lengthResponse" select="enolunatic:get-length($source-context)"/>
 		<!-- DateTimeDomain getters -->
 		<xsl:variable name="dateFormat" select="enolunatic:get-format($source-context)"/>
-		
+
 		<xsl:if test="$questionName!=''">
 			<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}">
 				<xsl:if test="$lengthResponse!='' and (self::TextDomain or self::TextareaDomain)"><xsl:attribute name="maxLength" select="$lengthResponse"/></xsl:if>
@@ -320,13 +319,15 @@
 				<xsl:if test="$maximumResponse!=''"><xsl:attribute name="max" select="$maximumResponse"/></xsl:if>
 				<xsl:if test="$numberOfDecimals!=''"><xsl:attribute name="decimals" select="$numberOfDecimals"/></xsl:if>
 				<label><xsl:value-of select="$labelQuestion"/></label>
+
+				<xsl:copy-of select="$declarations"/>
+				<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
 				<xsl:if test="$unit!=''">
 					<unit><xsl:value-of select="$unit"/></unit>
 				</xsl:if>
 				<xsl:if test="$dateFormat != ''">
 					<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
 				</xsl:if>
-				<xsl:copy-of select="$declarations"/>
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 				</xsl:apply-templates>
@@ -334,7 +335,7 @@
 					<xsl:with-param name="responseName" select="$responseName"/>
 					<xsl:with-param name="responseType" select="$responseType"/>
 				</xsl:call-template>
-				<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+
 			</components>
 		</xsl:if>
 		<variables variableType="COLLECTED">
@@ -342,7 +343,7 @@
 			<responseRef><xsl:value-of select="$responseName"/></responseRef>
 		</variables>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The Response drivers in the body lines of tables create a cell, which type depends on the Response driver.</xd:p>
@@ -355,7 +356,7 @@
 		<xsl:param name="col-span" tunnel="yes"/>
 		<xsl:param name="row-span" tunnel="yes"/>
 		<xsl:param name="ancestorTable" tunnel="yes"/>
-		
+
 		<xsl:variable name="responseName" select="enolunatic:get-business-name($source-context)"/>
 		<xsl:variable name="responseType">
 			<xsl:choose>
@@ -391,7 +392,7 @@
 		<xsl:variable name="lengthResponse" select="enolunatic:get-length($source-context)"/>
 		<!-- DateTimeDomain getters -->
 		<xsl:variable name="dateFormat" select="enolunatic:get-format($source-context)"/>
-		
+
 		<cells id="{enolunatic:get-name($source-context)}" componentType="{$componentType}">
 			<xsl:if test="$lengthResponse!='' and (self::TextDomain or self::TextareaDomain)"><xsl:attribute name="maxLength" select="$lengthResponse"/></xsl:if>
 			<xsl:if test="$col-span &gt; 1"><xsl:attribute name="colspan" select="$col-span"/></xsl:if>
@@ -417,10 +418,10 @@
 			<name><xsl:value-of select="$responseName"/></name>
 			<responseRef><xsl:value-of select="$responseName"/></responseRef>
 		</variables>
-		
-		
+
+
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The Response of MultipleChoiceQuestion creates a response element of the CheckboxGroup.</xd:p>
@@ -429,9 +430,9 @@
 	<xsl:template match="MultipleChoiceQuestion//BooleanDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<xsl:variable name="responseName" select="enolunatic:get-business-name($source-context)"/>
-		
+
 		<responses id="{enolunatic:get-name($source-context)}">
 			<!-- call item driver for the label -->
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -447,7 +448,7 @@
 			<responseRef><xsl:value-of select="$responseName"/></responseRef>
 		</variables>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Each value of a CodeDomain response creates an option.</xd:p>
@@ -456,9 +457,9 @@
 	<xsl:template match="CodeDomain//xf-item" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context, $languages[1])"/>
-		
+
 		<xsl:if test="$label !=''">
 			<options>
 				<value><xsl:value-of select="enolunatic:get-value($source-context)"/></value>
@@ -466,7 +467,7 @@
 			</options>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The value of a BooleanDomain gives its label.</xd:p>
@@ -475,14 +476,14 @@
 	<xsl:template match="BooleanDomain//xf-item" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context, $languages[1])"/>
-		
+
 		<xsl:if test="$label !=''">
 			<label><xsl:value-of select="$label"/></label>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The xf-output driver adds declaration elements.</xd:p>
@@ -492,7 +493,7 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="positionDeclaration" tunnel="yes"></xsl:param>
-		
+
 		<xsl:variable name="instructionFormat">
 			<xsl:variable name="format" select="upper-case(enolunatic:get-format($source-context))"/>
 			<xsl:choose>
@@ -504,18 +505,18 @@
 		<xsl:variable name="instructionLabel" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="instructionFormatMaj" select="concat(upper-case(substring($instructionFormat,1,1)),
 			substring($instructionFormat,2))" as="xs:string"/>
-		
+
 		<xsl:if test="$positionDeclaration!=''">
 			<declarations declarationType="{$instructionFormat}" id="{enolunatic:get-name($source-context)}" position="{$positionDeclaration}">
 				<label><xsl:value-of select="$instructionLabel"/></label>
 			</declarations>
 		</xsl:if>
-		
+
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 			<xsl:with-param name="driver" select="." tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>The CalculatedVariable driver displays the formula of the calculated variable on the elements variables.</xd:p>
@@ -523,9 +524,9 @@
 	</xd:doc>
 	<xsl:template match="CalculatedVariable" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:param name="languages" tunnel="yes"/>		
+		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:variable name="nameOutVariable" select="enolunatic:get-business-name($source-context)"/>
-		
+
 		<variables variableType="CALCULATED">
 			<name>
 				<xsl:value-of select="$nameOutVariable"/>
@@ -538,18 +539,18 @@
 			</xsl:apply-templates>
 		</variables>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>template for the GoTo</xd:desc>
 	</xd:doc>
 	<xsl:template match="GoTo" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<xsl:variable name="componentType" select="'FilterDescription'"/>
 		<xsl:variable name="idGoTo" select="enolunatic:get-name($source-context)"/>
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
-		
+
 		<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idGoTo}" filterDescription="{$filterDescription}">
 			<label><xsl:value-of select="$label"/></label>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -557,7 +558,7 @@
 			</xsl:apply-templates>
 		</components>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on the ConsistencyCheck driver.</xd:p>
@@ -567,13 +568,13 @@
 	<xsl:template match="ConsistencyCheck" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
-		
+
 		<xsl:variable name="nameOfControl" select="enolunatic:get-check-name($source-context,$languages[1])"/>
 		<xsl:variable name="control" select="enolunatic:get-constraint($source-context)"/>
 		<xsl:variable name="instructionFormat" select="enolunatic:get-css-class($source-context)"/>
 		<xsl:variable name="instructionLabel" select="enolunatic:get-vtl-label($source-context, $languages[1])"/>
 		<xsl:variable name="alertLevel" select="enolunatic:get-alert-level($source-context)"/>
-		
+
 		<control>
 			<xsl:if test="$alertLevel != ''">
 				<xsl:attribute name="level" select="$alertLevel"/>
@@ -590,18 +591,18 @@
 					<xsl:value-of select="normalize-space($final-control)"/>
 				</value>
 			</xsl:if>
-			
+
 			<xsl:if test="$instructionLabel!=''">
 				<instruction><xsl:value-of select="$instructionLabel"/>	</instruction>
-			</xsl:if>		
-			
+			</xsl:if>
+
 			<!-- Go to the Calculated Variable -->
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 			</xsl:apply-templates>
 		</control>
 	</xsl:template>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Function named: enolunatic:printQuestionTitleWithInstruction.</xd:p>
@@ -620,7 +621,7 @@
 			<xsl:with-param name="positionDeclaration" select="'AFTER_QUESTION_TEXT'" tunnel="yes"/>
 		</xsl:apply-templates>
 	</xsl:function>
-	
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Named template: enolunatic:add-response-to-components.</xd:p>
@@ -640,5 +641,5 @@
 			</xsl:for-each>
 		</response>
 	</xsl:template>
-	
+
 </xsl:stylesheet>
