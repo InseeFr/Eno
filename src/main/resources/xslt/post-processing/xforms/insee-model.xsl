@@ -312,6 +312,21 @@
                                     </xsl:matching-substring>
                                 </xsl:analyze-string>
                             </xsl:when>
+                            <xsl:when test="matches($text,concat($current-group,'(_\d+)?-Container/',$current-group,'\[@occurrence-id = '))">
+                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-Container/{$current-group}\[@occurrence-id = (.*)$">
+                                    <xsl:matching-substring>
+                                        <xsl:call-template name="replace-element">
+                                            <xsl:with-param name="position" select="$position"/>
+                                            <xsl:with-param name="text" select="regex-group(1)"/>
+                                        </xsl:call-template>
+                                        <xsl:value-of select="concat('Groupe[@idGroupe=''',$current-group,regex-group(2),''']/Groupe[@typeGroupe=''',$current-group,''' and @idGroupe = ')"/>
+                                        <xsl:call-template name="replace-element">
+                                            <xsl:with-param name="position" select="$position"/>
+                                            <xsl:with-param name="text" select="regex-group(3)"/>
+                                        </xsl:call-template>
+                                    </xsl:matching-substring>
+                                </xsl:analyze-string>
+                            </xsl:when>
                             <xsl:when test="matches($text,concat($current-group,'(_\d+)?-Container/',$current-group))">
                                 <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-Container/{$current-group}(.*)$">
                                     <xsl:matching-substring>
@@ -342,6 +357,17 @@
                                 <xsl:for-each select="tokenize($text,concat('//',$current-group,'\[@occurrence-id = current\(\)/ancestor-or-self::',$current-group,'/@occurrence-id\]'))">
                                     <xsl:if test="not(position()=1)">
                                         <xsl:value-of select="concat('//Groupe[@typeGroupe=''',$current-group,''' and @idGroupe = current()/ancestor-or-self::Groupe[@typeGroupe=''',$current-group,''']/@idGroupe]')"/>
+                                    </xsl:if>
+                                    <xsl:call-template name="replace-element">
+                                        <xsl:with-param name="position" select="$position"/>
+                                        <xsl:with-param name="text" select="current()"/>
+                                    </xsl:call-template>
+                                </xsl:for-each>
+                            </xsl:when>
+                            <xsl:when test="contains($text,concat('following-sibling::',$current-group,'[@occurrence-id = current()/ancestor::',$current-group,'/@occurrence-id]'))">
+                                <xsl:for-each select="tokenize($text,concat('following-sibling::',$current-group,'\[@occurrence-id = current\(\)/ancestor::',$current-group,'/@occurrence-id\]'))">
+                                    <xsl:if test="not(position()=1)">
+                                        <xsl:value-of select="concat('following-sibling::Groupe[@typeGroupe=''',$current-group,''' and idGroupe = current()/ancestor::Groupe[@typeGroupe=''',$current-group,''']/@idGroupe]')"/>
                                     </xsl:if>
                                     <xsl:call-template name="replace-element">
                                         <xsl:with-param name="position" select="$position"/>

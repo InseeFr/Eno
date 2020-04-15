@@ -631,6 +631,30 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>For a given element, return a set of the Loop ids which filter is dependent of the said element regarding their hideable property.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*" mode="enoddi:get-loop-occurrence-filter-dependencies" as="item()*">
+        <xsl:variable name="modified-variables" as="node()">
+            <xsl:call-template name="enoddi:modified-variables">
+                <xsl:with-param name="position" select="1"/>
+                <xsl:with-param name="list-of-variables">
+                    <Variables>
+                        <Variable><xsl:value-of select="enoddi:get-id(.)"/></Variable>
+                    </Variables>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:variable>
+        
+        <xsl:for-each select="//d:Loop[d:ControlConstructReference[d:IfThenElse/d:IfCondition/r:Command/r:Binding/r:SourceParameterReference/r:ID = $modified-variables//Variable 
+                                                               and not(preceding-sibling::d:ControlConstructReference or following-sibling::d:ControlConstructReference)]]">
+            <xsl:sequence select="."/>
+        </xsl:for-each>
+    </xsl:template>
+    
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Get the formula to know when a module is hidden or not.</xd:p>
         </xd:desc>
     </xd:doc>
