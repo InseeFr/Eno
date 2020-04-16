@@ -2090,15 +2090,15 @@
                 </xsl:variable>
                 <xsl:variable name="main-loop-name" select="enoxforms:get-business-name(enoxforms:get-linked-containers(.)[1])"/>
                 <xsl:variable name="position-before">
-                    <xsl:value-of select="concat($linked-address,'/',$loop-name,'[count(',$linked-address,'/',$loop-name,'[@occurrence-id = instance(''fr-form-instance'')//')"/>
+                    <xsl:value-of select="concat('count(',$linked-address,'/',$loop-name,'[@occurrence-id = instance(''fr-form-instance'')//')"/>
                     <xsl:for-each select="tokenize(enoxforms:get-business-ancestors(enoxforms:get-linked-containers(.)[1]),' ')">
                         <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
                     </xsl:for-each>
-                    <xsl:value-of select="concat(enoxforms:get-container-name(enoxforms:get-linked-containers(.)[1]),'/',$loop-name,'[following-sibling::',$loop-name,'[@occurrence-id = current()/ancestor::',$loop-name,'/@occurrence-id]]])]')"/>
+                    <xsl:value-of select="concat(enoxforms:get-container-name(enoxforms:get-linked-containers(.)[1]),'/',$loop-name,'[following-sibling::',$loop-name,'[@occurrence-id = current()/ancestor::',$loop-name,'/@occurrence-id]]])')"/>
                 </xsl:variable>
 
                 <xf:action ev:event="xforms-value-changed" if="({$loop-filter-condition}) and not({$linked-address}/{$loop-name}[@occurrence-id = current()/ancestor::{$loop-name}/@occurrence-id])">
-                    <xf:insert context="{$linked-address}" nodeset="{$position-before}" position="after" origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
+                    <xf:insert context="{$linked-address}" nodeset="{$linked-address}/{$loop-name}" at="{$position-before}" position="after" origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
                 </xf:action>
             </xsl:for-each>
             
