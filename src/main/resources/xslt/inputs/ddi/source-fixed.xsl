@@ -1425,7 +1425,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:Loop | d:QuestionGrid[d:GridDimension/d:Roster]" mode="enoddi:get-external-variables">
-        <xsl:sequence select="//l:VariableScheme/l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=enoddi:get-id(current())]
+        <xsl:sequence select="//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=current()/r:ID]
             /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
     </xsl:template>
     <xd:doc>
@@ -1434,7 +1434,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:StructuredMixedGridResponseDomain[parent::d:QuestionGrid[d:GridDimension/d:Roster]]" mode="enoddi:get-external-variables">
-        <xsl:sequence select="//l:VariableScheme/l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=enoddi:get-id(current()/parent::d:QuestionGrid)]
+        <xsl:sequence select="//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=current()/parent::d:QuestionGrid/r:ID]
             /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
     </xsl:template>
 
