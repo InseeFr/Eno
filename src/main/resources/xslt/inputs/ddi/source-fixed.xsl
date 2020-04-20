@@ -1410,4 +1410,32 @@
         </xsl:choose>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The list of the external variables linked to the questionnaire</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='template']" mode="enoddi:get-external-variables">
+        <xsl:sequence select="//l:VariableScheme/l:VariableGroup[l:TypeOfVariableGroup='Questionnaire']
+            /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
+    </xsl:template>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The list of the external variables linked to a loop / a dynamic array</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Loop | d:QuestionGrid[d:GridDimension/d:Roster]" mode="enoddi:get-external-variables">
+        <xsl:sequence select="//l:VariableScheme/l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=enoddi:get-id(current())]
+            /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
+    </xsl:template>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The list of the external variables linked to a dynamic array</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:StructuredMixedGridResponseDomain[parent::d:QuestionGrid[d:GridDimension/d:Roster]]" mode="enoddi:get-external-variables">
+        <xsl:sequence select="//l:VariableScheme/l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=enoddi:get-id(current()/parent::d:QuestionGrid)]
+            /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
+    </xsl:template>
+
 </xsl:stylesheet>
