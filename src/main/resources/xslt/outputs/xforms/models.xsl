@@ -53,6 +53,9 @@
                     <!-- Main instance, it contains the elements linked to fields, and which will be stored when the form will be submitted -->
                     <xf:instance id="fr-form-instance">
                         <form modele="{lower-case(enoxforms:get-form-model($source-context))}">
+                            <xsl:apply-templates select="enoxforms:get-external-variables($source-context)" mode="source">
+                                <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
+                            </xsl:apply-templates>
                             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                                 <xsl:with-param name="driver" select="eno:append-empty-element('Instance', .)" tunnel="yes"/>
                             </xsl:apply-templates>
@@ -69,6 +72,9 @@
 
                     <!-- Bindings -->
                     <xf:bind id="fr-form-instance-binds" ref="instance('fr-form-instance')">
+                        <xsl:apply-templates select="enoxforms:get-external-variables($source-context)" mode="source">
+                            <xsl:with-param name="driver" select="eno:append-empty-element('Bind', .)" tunnel="yes"/>
+                        </xsl:apply-templates>
                         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                             <xsl:with-param name="driver" select="eno:append-empty-element('Bind', .)" tunnel="yes"/>
                             <!-- the instance ancestor is used for having the absolute, not relative, address of the element -->
@@ -157,6 +163,13 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>VariableGroup are used through the element they are based on.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="VariableGroup" mode="model"/>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Default template for Instance for the drivers.</xd:p>
             <xd:p>The element is created and we continue to parse the input tree next to the created element.</xd:p>
         </xd:desc>
@@ -224,6 +237,9 @@
         <xsl:element name="{enoxforms:get-container-name($source-context)}">
             <xsl:element name="{$name}">
                 <xsl:attribute name="occurrence-id" select="concat($name,'-1')"/>
+                <xsl:apply-templates select="enoxforms:get-external-variables($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="." tunnel="yes"/>
                 </xsl:apply-templates>
@@ -367,7 +383,7 @@
         <xsl:variable name="format-constraint" select="enoxforms:get-format-constraint($source-context)"/>
 
         <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
-            <xsl:if test="$type != '' and (self::CalculatedVariable or self::ResponseElement)">
+            <xsl:if test="$type != '' and (self::CalculatedVariable or self::Variable)">
                 <xsl:attribute name="type">
                     <xsl:choose>
                         <xsl:when test="$type = 'text' or $type = 'code' or $type = 'boolean'">
@@ -959,6 +975,10 @@
         <xsl:variable name="container" select="enoxforms:get-container-name($source-context)"/>
         
         <xf:bind id="{$container}-bind" name="{$container}" nodeset="{$container}/{$name}">
+            <xsl:apply-templates select="enoxforms:get-external-variables($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <xsl:with-param name="instance-ancestor" select="if ($instance-ancestor='') then $business-name else concat($instance-ancestor,' ',$business-name)" tunnel="yes"/>
+            </xsl:apply-templates>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
@@ -989,6 +1009,10 @@
         </xsl:variable>
         
         <xf:bind id="{$container}-bind" name="{$container}" nodeset="{$container}/{$name}">
+            <xsl:apply-templates select="enoxforms:get-external-variables($source-context)" mode="source">
+                <xsl:with-param name="driver" select="." tunnel="yes"/>
+                <xsl:with-param name="instance-ancestor" select="if ($instance-ancestor='') then $business-name else concat($instance-ancestor,' ',$business-name)" tunnel="yes"/>
+            </xsl:apply-templates>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <!-- the absolute address of the element in enriched for RowLoop and QuestionLoop, for which several instances are possible -->
@@ -2581,12 +2605,12 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>Template for Body for the ResponseElement and CalculatedVariable drivers.</xd:p>
+            <xd:p>Template for Body for the (external) Variable and CalculatedVariable drivers.</xd:p>
             <xd:p>It corresponds to elements which will be present in the Instance and Bind but not in the Resource and the Body.</xd:p>
             <xd:p>Their prefilled value can have an impact on other elements of the form.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*[name() = ('Resource', 'Body')]//*[name() = ('ResponseElement','CalculatedVariable')]" mode="model"/>
+    <xsl:template match="*[name() = ('Resource', 'Body')]//*[name() = ('Variable','CalculatedVariable')]" mode="model"/>
 
     <xd:doc>
         <xd:desc>lists the layout variables for DurationDomain</xd:desc>
