@@ -993,8 +993,17 @@
             <xd:p>Function that returns the type of a variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-variable-type">
-
+    <xsl:template match="l:Variable" mode="enoddi:get-variable-type">
+        <xsl:call-template name="enoddi:get-variable-type">
+            <xsl:with-param name="variable" select="enoddi:get-business-name(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="*[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference')) and not(ancestor::d:GridDimension) and not(name()='d:StructuredMixedGridResponseDomain')]" mode="enoddi:get-variable-type">
+        <xsl:call-template name="enoddi:get-variable-type">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="d:GenerationInstruction" mode="enoddi:get-variable-type">
         <xsl:call-template name="enoddi:get-variable-type">
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
@@ -1008,8 +1017,14 @@
             <xsl:when test="$root//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
                 <xsl:value-of select="'collected'"/>
             </xsl:when>
+            <xsl:when test="$root//l:VariableScheme//l:Variable[r:SourceParameterReference]/l:VariableName/r:String = $variable">
+                <xsl:value-of select="'collected'"/>
+            </xsl:when>
             <!-- calculated variable -->
             <xsl:when test="$root//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
+                <xsl:value-of select="'calculated'"/>
+            </xsl:when>
+            <xsl:when test="$root//l:VariableScheme//l:Variable[descendant::r:ProcessingInstructionReference]/l:VariableName/r:String = $variable">
                 <xsl:value-of select="'calculated'"/>
             </xsl:when>
             <!-- external variable -->
@@ -1018,7 +1033,7 @@
             </xsl:when>
             <!-- unknown -->
             <xsl:otherwise>
-                <xsl:value-of select="concat('unknow type for : ',$variable)"/>
+                <xsl:value-of select="concat('unknown type for : ',$variable)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
