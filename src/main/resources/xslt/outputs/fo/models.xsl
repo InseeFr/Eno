@@ -463,8 +463,9 @@
 
 	<!-- 	REPONSES -->
 
-	<!-- external variables : do nothing -->
-	<xsl:template match="main//ResponseElement" mode="model"/>
+	<!-- variables and variable groups : do nothing -->
+	<xsl:template match="main//VariableGroup" mode="model"/>
+	<xsl:template match="main//Variable" mode="model"/>
 
 	<!-- Déclenche tous les TextareaDomain de l'arbre des drivers -->
 	<xsl:template match="main//TextareaDomain" mode="model">

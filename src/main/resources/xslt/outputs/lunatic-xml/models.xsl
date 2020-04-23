@@ -9,18 +9,6 @@
 				xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
 				exclude-result-prefixes="xs fn xd eno enolunatic" version="2.0">
 
-	<xd:doc>
-		<xd:desc>
-			<xd:p>The properties file used by the stylesheet.</xd:p>
-			<xd:p>It's on a transformation level.</xd:p>
-		</xd:desc>
-	</xd:doc>
-	<xsl:param name="properties-file"/>
-	<xsl:param name="parameters-file"/>
-	<xsl:param name="parameters-node" as="node()" required="no">
-		<empty/>
-	</xsl:param>
-
 	<xd:doc scope="stylesheet">
 		<xd:desc>
 			<xd:p>An xslt stylesheet who transforms an input into js through generic driver templates.</xd:p>
@@ -30,14 +18,28 @@
 
 	<xsl:variable name="varName" select="parent"/>
 
-	<xsl:template match="ResponseElement" mode="model">
+	<xd:doc>
+		<xd:desc>VariableGroup only leads to its children</xd:desc>
+	</xd:doc>
+	<xsl:template match="VariableGroup" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
-		<xsl:variable name="languages" select="enolunatic:get-form-languages($source-context)" as="xs:string +"/>
+		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
+	</xsl:template>
+	
+	<xd:doc>
+		<xd:desc>template Variable is used only for external variables : TODO : refactor for other ones</xd:desc>
+	</xd:doc>
+	<xsl:template match="Variable" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<!-- display only external variable -->
-		<variables variableType="EXTERNAL">
-			<name><xsl:value-of select="enolunatic:get-name($source-context)"/></name>
-			<value xsi:nil="true"/>
-		</variables>
+		<xsl:if test="enolunatic:get-variable-type($source-context) = 'external'">
+			<variables variableType="EXTERNAL">
+				<name><xsl:value-of select="enolunatic:get-name($source-context)"/></name>
+				<value xsi:nil="true"/>
+			</variables>			
+		</xsl:if>
 	</xsl:template>
 
 	<xd:doc>
