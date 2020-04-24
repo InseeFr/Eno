@@ -29,9 +29,15 @@
     
     <xd:doc>
         <xd:desc>
-            <xd:p>The folder containing label resources in different languages.</xd:p>
+            <xd:p>The properties file used by the stylesheet.</xd:p>
+            <xd:p>It's on a transformation level.</xd:p>
         </xd:desc>
     </xd:doc>
+    <xsl:param name="properties-file"/>
+    <xsl:param name="parameters-file"/>
+    <xsl:param name="parameters-node" as="node()" required="no">
+        <empty/>
+    </xsl:param>
     <xsl:param name="labels-folder"/>
     
     <xd:doc>
@@ -144,7 +150,16 @@
         <xsl:param name="context" as="item()"/>
         <xsl:sequence select="enoddi:get-instructions-by-format($context,'footnote') | enoddi:get-next-filter-description($context)"/>
     </xsl:function>
-    
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function for retrieving instructions based on the location they need to be outputted</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enolunatic:get-variable-type">
+        <xsl:param name="context" as="item()"/>
+        <xsl:sequence select="enoddi:get-variable-type($context,enoddi:get-id($context))"/>
+    </xsl:function>
     
     <xsl:function name="enolunatic:get-global-filter">
         <xsl:param name="context" as="item()"/>
@@ -205,7 +220,7 @@
                     <xsl:value-of select="concat('&quot; || ','cast(',.,',string)',' || &quot;')"/>
                 </xsl:matching-substring>
                 <xsl:non-matching-substring>
-                    <xsl:value-of select="."/>							
+                    <xsl:value-of select="."/>
                 </xsl:non-matching-substring>
             </xsl:analyze-string>
         </xsl:variable>
@@ -338,9 +353,9 @@
     
     <xsl:function name="enolunatic:replace-variable-with-collected-and-external-variables-formula">
         <xsl:param name="context" as="item()"/>
-        <xsl:param name="id-variable"/>
+        <xsl:param name="variable"/>
         
-        <xsl:variable name="temp" select="enoddi:get-generation-instruction($context,$id-variable)"/>
+        <xsl:variable name="temp" select="enoddi:get-generation-instruction($context,$variable)"/>
         <xsl:choose>
             <xsl:when test="$temp!=''">
                 <xsl:variable name="variableCalculation" select="enoddi:get-variable-calculation($temp)"/>                
@@ -349,7 +364,7 @@
                     <xsl:with-param name="formula" select="$variableCalculation"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:otherwise><xsl:value-of select="$id-variable"/></xsl:otherwise>
+            <xsl:otherwise><xsl:value-of select="$variable"/></xsl:otherwise>
         </xsl:choose>
     </xsl:function>
     

@@ -9,6 +9,16 @@
   <xsl:strip-space elements="*"/>
 
   <xsl:variable name="source" select="doc($source-file)"/>
+  <xsl:variable name="excluded-variables">
+    <Variables>
+      <Variable>variable</Variable>
+      <Variable>ip-id</Variable>
+      <Variable>label</Variable>
+      <Variable>formulaReadOnly</Variable>
+      <Variable>formulaRelevant</Variable>
+      <Variable>variablesId</Variable>
+    </Variables>
+  </xsl:variable>
 
   <xsl:template match="/">
     <xsl:apply-templates select="*"/>
@@ -46,10 +56,10 @@
           <xsl:element name="xsl:if">
             <xsl:attribute name="test" select="'self::Form'"/>
             <xsl:element name="getters_for_which_context_is_not_enough">
-              <xsl:apply-templates select="xsl:function[xsl:param/@name='variable' or xsl:param/@name='ip-id']" mode="debug"/>
+              <xsl:apply-templates select="xsl:function[xsl:param/@name=$excluded-variables//Variable]" mode="debug"/>
             </xsl:element>
           </xsl:element>
-          <xsl:apply-templates select="xsl:function[not(xsl:param/@name='variable') and not(xsl:param/@name='ip-id')]" mode="debug"/>
+          <xsl:apply-templates select="xsl:function[not(xsl:param/@name=$excluded-variables//Variable)]" mode="debug"/>
           <xsl:element name="xsl:apply-templates">
             <xsl:attribute name="select" select="'eno:child-fields($source-context)'"/>
             <xsl:attribute name="mode" select="'source'"/>
@@ -63,8 +73,7 @@
       </xsl:element>
     </xsl:copy>
   </xsl:template>
-
-  <xsl:template match="xsl:function[not(xsl:param/@name='variable') and not(xsl:param/@name='ip-id')]" mode="debug">
+  <xsl:template match="xsl:function[not(xsl:param/@name=$excluded-variables//Variable)]" mode="debug">
     <xsl:variable name="function-type">
       <xsl:choose>
         <xsl:when test="@as != ''">
@@ -241,8 +250,8 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-
-  <xsl:template match="xsl:function[xsl:param/@name='variable' or xsl:param/@name='ip-id']" mode="debug">
+  
+  <xsl:template match="xsl:function[xsl:param/@name=$excluded-variables//Variable]" mode="debug">
     <xsl:element name="xsl:element">
       <xsl:attribute name="name" select="substring-after(@name,':')"/>
       <xsl:element name="xsl:value-of">

@@ -34,7 +34,9 @@
         <Questionnaire>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
-            <xsl:apply-templates select="descendant::h:variables"/>
+            <xsl:apply-templates select="descendant::h:variables[@variableType='EXTERNAL']"/>
+            <xsl:apply-templates select="descendant::h:variables[@variableType='COLLECTED']"/>
+            <xsl:apply-templates select="descendant::h:variables[@variableType='CALCULATED']"/>
         </Questionnaire>
     </xsl:template>
     
