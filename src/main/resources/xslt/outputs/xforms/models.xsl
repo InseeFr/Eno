@@ -929,6 +929,11 @@
 
         <xsl:choose>
             <xsl:when test="enoxforms:get-filtered-loop-name($source-context) != ''">
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:otherwise>
                 <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
                     <xsl:if test="$relevant != ''">
                         <xsl:attribute name="relevant">
@@ -968,11 +973,6 @@
                         <xsl:with-param name="driver" select="." tunnel="yes"/>
                     </xsl:apply-templates>
                 </xf:bind>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                    <xsl:with-param name="driver" select="." tunnel="yes"/>
-                </xsl:apply-templates>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
