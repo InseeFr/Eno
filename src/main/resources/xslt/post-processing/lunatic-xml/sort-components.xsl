@@ -132,19 +132,16 @@
                             <xsl:copy-of select="@*"/>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:apply-templates select="h:valueState"/>
                 </response>
                 <xsl:if test="string($idLine)!='' and string($idColumn)!=''">                    
                     <xsl:call-template name="enojs:addVariableCollected">
                         <xsl:with-param name="responseName" select="concat(@name,'_',$idLine,'_',$idColumn)"/>
-                        <xsl:with-param name="responseRef" select="concat(@name,'_',$idLine,'_',$idColumn)"/>
                     </xsl:call-template>
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <response>
                     <xsl:copy-of select="@*"/>
-                    <xsl:apply-templates select="h:valueState"/>
                 </response>
             </xsl:otherwise>
         </xsl:choose>
@@ -171,25 +168,25 @@
             <xsl:value-of select="."/>
         </value>
     </xsl:template>
-    
+
     <xsl:template match="h:variables">
-        <xsl:variable name="value" select="h:value"/>
-        <xsl:variable name="responseRef" select="h:responseRef"/>
-        <xsl:variable name="expression" select="h:expression"/>
-        <variables>
-            <xsl:copy-of select="@*"/>
-            <name><xsl:value-of select="h:name"/></name>
-            <xsl:choose>
-                <xsl:when test="$responseRef!=''">
-                    <responseRef><xsl:value-of select="$responseRef"/></responseRef>
-                </xsl:when>
-                <xsl:when test="$expression!=''">
-                    <expression><xsl:value-of select="$expression"/></expression>
-                </xsl:when>
-            </xsl:choose>
-            <xsl:apply-templates select="h:value"/>
-        </variables>
-    </xsl:template>
+    <xsl:variable name="responseRef" select="h:responseRef"/>
+    <xsl:variable name="expression" select="h:expression"/>
+    <variables>
+        <xsl:copy-of select="@*"/>
+        <name><xsl:value-of select="h:name"/></name>
+        <xsl:choose>
+            <xsl:when test="$responseRef!=''">
+                <responseRef><xsl:value-of select="$responseRef"/></responseRef>
+            </xsl:when>
+            <xsl:when test="$expression!=''">
+                <expression><xsl:value-of select="$expression"/></expression>
+            </xsl:when>
+        </xsl:choose>
+        <xsl:apply-templates select="h:value"/>
+        <xsl:apply-templates select="h:valueState"/>
+    </variables>
+</xsl:template>
     
     <xsl:template match="h:dateFormat">
         <dateFormat><xsl:value-of select="."/></dateFormat>
@@ -241,10 +238,16 @@
     
     <xsl:template name="enojs:addVariableCollected">
         <xsl:param name="responseName"/>
-        <xsl:param name="responseRef"/>
+        <xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
+        <!-- responseType="{$responseType}" -->
         <variables variableType="COLLECTED">
             <name><xsl:value-of select="$responseName"/></name>
-            <responseRef><xsl:value-of select="$responseRef"/></responseRef>
+            <responseRef><xsl:value-of select="$responseName"/></responseRef>
+            <xsl:for-each select="tokenize($ResponseTypeEnum,',')">
+                <valueState valueType="{.}">
+                    <value xsi:nil="true"/>
+                </valueState>
+            </xsl:for-each>
         </variables>
     </xsl:template>
     

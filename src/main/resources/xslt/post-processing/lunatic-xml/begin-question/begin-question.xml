@@ -14,7 +14,11 @@
                 maxLength="2000"
                 mandatory="false">
                 <label>"Remarque, commentaire sur un changement concernant votre " || cast(LABEL_UNITE_ENQUETEE,string) || " :"</label>
-                <response name="COMMENT_UE" xsi:type="ResponseContainerString">
+                <conditionFilter>"normal"</conditionFilter>
+                <response name="COMMENT_UE"/>
+                <variables variableType="COLLECTED">
+                    <name>COMMENT_UE</name>
+                    <responseRef>COMMENT_UE</responseRef>
                     <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
                     </valueState>
@@ -30,11 +34,6 @@
                     <valueState valueType="INPUTED">
                         <value xsi:nil="true"/>
                     </valueState>
-                </response>
-                <conditionFilter>"normal"</conditionFilter>
-                <variables variableType="COLLECTED">
-                    <name>COMMENT_UE</name>
-                    <responseRef>COMMENT_UE</responseRef>
                 </variables>
                 <variables variableType="EXTERNAL">
                     <name>LABEL_UNITE_ENQUETEE</name>

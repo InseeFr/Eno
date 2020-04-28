@@ -278,12 +278,6 @@
 		<xsl:param name="declarations" as="node()*" tunnel="yes"/>
 		<xsl:param name="filterCondition" tunnel="yes"/>
 		<xsl:variable name="responseName" select="enolunatic:get-business-name($source-context)"/>
-		<xsl:variable name="responseType">
-			<xsl:choose>
-				<xsl:when test="self::BooleanDomain"><xsl:value-of select="'Boolean'"/></xsl:when>
-				<xsl:otherwise><xsl:value-of select="'String'"/></xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
 		<xsl:variable name="code-appearance" select="enolunatic:get-appearance($source-context)"/>
 		<xsl:variable name="componentType">
 			<xsl:choose>
@@ -335,15 +329,12 @@
 				</xsl:apply-templates>
 				<xsl:call-template name="enolunatic:add-response-to-components">
 					<xsl:with-param name="responseName" select="$responseName"/>
-					<xsl:with-param name="responseType" select="$responseType"/>
 				</xsl:call-template>
-
 			</components>
 		</xsl:if>
-		<variables variableType="COLLECTED">
-			<name><xsl:value-of select="$responseName"/></name>
-			<responseRef><xsl:value-of select="$responseName"/></responseRef>
-		</variables>
+		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+			<xsl:with-param name="responseName" select="$responseName"/>
+		</xsl:call-template>
 	</xsl:template>
 
 	<xd:doc>
@@ -360,12 +351,6 @@
 		<xsl:param name="ancestorTable" tunnel="yes"/>
 
 		<xsl:variable name="responseName" select="enolunatic:get-business-name($source-context)"/>
-		<xsl:variable name="responseType">
-			<xsl:choose>
-				<xsl:when test="self::BooleanDomain"><xsl:value-of select="'Boolean'"/></xsl:when>
-				<xsl:otherwise><xsl:value-of select="'String'"/></xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
 		<xsl:variable name="code-appearance" select="enolunatic:get-appearance($source-context)"/>
 		<xsl:variable name="componentType">
 			<xsl:choose>
@@ -413,15 +398,11 @@
 			</xsl:apply-templates>
 			<xsl:call-template name="enolunatic:add-response-to-components">
 				<xsl:with-param name="responseName" select="$responseName"/>
-				<xsl:with-param name="responseType" select="$responseType"/>
 			</xsl:call-template>
 		</cells>
-		<variables variableType="COLLECTED">
-			<name><xsl:value-of select="$responseName"/></name>
-			<responseRef><xsl:value-of select="$responseName"/></responseRef>
-		</variables>
-
-
+		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+			<xsl:with-param name="responseName" select="$responseName"/>
+		</xsl:call-template>
 	</xsl:template>
 
 	<xd:doc>
@@ -442,13 +423,11 @@
 			</xsl:apply-templates>
 			<xsl:call-template name="enolunatic:add-response-to-components">
 				<xsl:with-param name="responseName" select="$responseName"/>
-				<xsl:with-param name="responseType" select="'Boolean'"/>
 			</xsl:call-template>
 		</responses>
-		<variables variableType="COLLECTED">
-			<name><xsl:value-of select="$responseName"/></name>
-			<responseRef><xsl:value-of select="$responseName"/></responseRef>
-		</variables>
+		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
+			<xsl:with-param name="responseName" select="$responseName"/>
+		</xsl:call-template>
 	</xsl:template>
 
 	<xd:doc>
@@ -632,16 +611,27 @@
 	</xd:doc>
 	<xsl:template name="enolunatic:add-response-to-components">
 		<xsl:param name="responseName"/>
-		<xsl:param name="responseType"/>
+		<response name="{$responseName}"/>
+	</xsl:template>
+
+	<xd:doc>
+		<xd:desc>
+			<xd:p>Named template: enolunatic:add-collected-variable-to-components.</xd:p>
+			<xd:p>It creates the response with its different possible states.</xd:p>
+		</xd:desc>
+	</xd:doc>
+	<xsl:template name="enolunatic:add-collected-variable-to-components">
+		<xsl:param name="responseName"/>
 		<xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
-		<!-- responseType="{$responseType}" -->
-		<response name="{$responseName}" xsi:type="ResponseContainer{$responseType}" >
+		<variables variableType="COLLECTED">
+			<name><xsl:value-of select="$responseName"/></name>
+			<responseRef><xsl:value-of select="$responseName"/></responseRef>
 			<xsl:for-each select="tokenize($ResponseTypeEnum,',')">
 				<valueState valueType="{.}">
 					<value xsi:nil="true"/>
 				</valueState>
 			</xsl:for-each>
-		</response>
+		</variables>
 	</xsl:template>
 
 </xsl:stylesheet>
