@@ -385,16 +385,19 @@
                 </xsl:non-matching-substring>
             </xsl:analyze-string>
         </xsl:variable>
-        <xsl:analyze-string select="$temp-formula" regex="{$regex-var-surrounded}">
-            <xsl:matching-substring>
-                <xsl:variable name="var" select="replace(replace(.,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
-                <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($context,$var)"/>
-                <xsl:value-of select="enolunatic:get-cast-variable($typeVariable,enolunatic:get-variable-business-name($context,$var))"/>
-            </xsl:matching-substring>
-            <xsl:non-matching-substring>
-                <xsl:value-of select="."/>
-            </xsl:non-matching-substring>
-        </xsl:analyze-string>
+        <xsl:variable name="final-formula">
+            <xsl:analyze-string select="$temp-formula" regex="{$regex-var-surrounded}">
+                <xsl:matching-substring>
+                    <xsl:variable name="var" select="replace(replace(.,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
+                    <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($context,$var)"/>
+                    <xsl:value-of select="enolunatic:get-cast-variable($typeVariable,enolunatic:get-variable-business-name($context,$var))"/>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:value-of select="."/>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
+        <xsl:value-of select="$final-formula"/>
     </xsl:function>
 
     <xd:doc>
