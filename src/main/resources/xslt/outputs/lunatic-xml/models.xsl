@@ -513,7 +513,8 @@
 				<xsl:value-of select="$nameOutVariable"/>
 			</name>
 			<expression>
-				<xsl:value-of select="normalize-space(enolunatic:replace-variable-with-collected-and-external-variables-formula($source-context,$nameOutVariable))"/>
+				<xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,
+					enolunatic:replace-variable-with-collected-and-external-variables-formula($source-context,$nameOutVariable))"/>
 			</expression>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
