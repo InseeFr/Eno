@@ -1125,7 +1125,7 @@
    </components>
    <variables variableType="COLLECTED">
       <name>COMMENT_QE</name>
-      <responseRef>COMMENT_QE</responseRef>
+      <componentRef>COMMENT-QUESTION</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1148,7 +1148,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>COMMENT</name>
-      <responseRef>COMMENT</responseRef>
+      <componentRef>j6p3dkx6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1167,7 +1167,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>READY</name>
-      <responseRef>READY</responseRef>
+      <componentRef>j6p0np9q</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1186,7 +1186,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PRODUCER</name>
-      <responseRef>PRODUCER</responseRef>
+      <componentRef>j3343qhx</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1205,7 +1205,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>SEASON_NUMBER</name>
-      <responseRef>SEASON_NUMBER</responseRef>
+      <componentRef>j6q9h8tj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1224,7 +1224,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>DATEFIRST</name>
-      <responseRef>DATEFIRST</responseRef>
+      <componentRef>j334cyqb</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1243,7 +1243,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>AUDIENCE_SHARE</name>
-      <responseRef>AUDIENCE_SHARE</responseRef>
+      <componentRef>j6z06z1e</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1262,7 +1262,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>CITY</name>
-      <responseRef>CITY</responseRef>
+      <componentRef>j3343clt</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1281,7 +1281,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>MAYOR</name>
-      <responseRef>MAYOR</responseRef>
+      <componentRef>j6qdfhvw</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1300,7 +1300,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>STATE</name>
-      <responseRef>STATE</responseRef>
+      <componentRef>j4nw5cqz</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1319,7 +1319,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PET1</name>
-      <responseRef>PET1</responseRef>
+      <componentRef>j334akov</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1338,7 +1338,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PET2</name>
-      <responseRef>PET2</responseRef>
+      <componentRef>j334akov</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1357,7 +1357,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PET3</name>
-      <responseRef>PET3</responseRef>
+      <componentRef>j334akov</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1376,7 +1376,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PET4</name>
-      <responseRef>PET4</responseRef>
+      <componentRef>j334akov</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1395,7 +1395,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>ICE_FLAVOUR1</name>
-      <responseRef>ICE_FLAVOUR1</responseRef>
+      <componentRef>j6p29i81</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1414,7 +1414,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>ICE_FLAVOUR2</name>
-      <responseRef>ICE_FLAVOUR2</responseRef>
+      <componentRef>j6p29i81</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1433,7 +1433,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>ICE_FLAVOUR3</name>
-      <responseRef>ICE_FLAVOUR3</responseRef>
+      <componentRef>j6p29i81</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1452,7 +1452,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>ICE_FLAVOUR4</name>
-      <responseRef>ICE_FLAVOUR4</responseRef>
+      <componentRef>j6p29i81</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1471,7 +1471,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>NUCLEAR_CHARACTER1</name>
-      <responseRef>NUCLEAR_CHARACTER1</responseRef>
+      <componentRef>j6qefnga</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1490,7 +1490,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>NUCLEAR_CHARACTER2</name>
-      <responseRef>NUCLEAR_CHARACTER2</responseRef>
+      <componentRef>j6qefnga</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1509,7 +1509,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>NUCLEAR_CHARACTER3</name>
-      <responseRef>NUCLEAR_CHARACTER3</responseRef>
+      <componentRef>j6qefnga</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1528,7 +1528,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>NUCLEAR_CHARACTER4</name>
-      <responseRef>NUCLEAR_CHARACTER4</responseRef>
+      <componentRef>j6qefnga</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1547,7 +1547,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>BIRTH_CHARACTER1</name>
-      <responseRef>BIRTH_CHARACTER1</responseRef>
+      <componentRef>j6yzoc6g</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1566,7 +1566,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>BIRTH_CHARACTER2</name>
-      <responseRef>BIRTH_CHARACTER2</responseRef>
+      <componentRef>j6yzoc6g</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1585,7 +1585,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>BIRTH_CHARACTER3</name>
-      <responseRef>BIRTH_CHARACTER3</responseRef>
+      <componentRef>j6yzoc6g</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1604,7 +1604,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>BIRTH_CHARACTER4</name>
-      <responseRef>BIRTH_CHARACTER4</responseRef>
+      <componentRef>j6yzoc6g</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1623,7 +1623,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>BIRTH_CHARACTER5</name>
-      <responseRef>BIRTH_CHARACTER5</responseRef>
+      <componentRef>j6yzoc6g</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1642,7 +1642,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES11</name>
-      <responseRef>PERCENTAGE_EXPENSES11</responseRef>
+      <componentRef>j4nwc63q</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1661,7 +1661,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES21</name>
-      <responseRef>PERCENTAGE_EXPENSES21</responseRef>
+      <componentRef>j4nwc63q</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1680,7 +1680,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES31</name>
-      <responseRef>PERCENTAGE_EXPENSES31</responseRef>
+      <componentRef>j4nwc63q</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1699,7 +1699,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES41</name>
-      <responseRef>PERCENTAGE_EXPENSES41</responseRef>
+      <componentRef>j4nwc63q</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1718,7 +1718,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES51</name>
-      <responseRef>PERCENTAGE_EXPENSES51</responseRef>
+      <componentRef>j4nwc63q</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1737,7 +1737,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES61</name>
-      <responseRef>PERCENTAGE_EXPENSES61</responseRef>
+      <componentRef>j4nwc63q</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1756,7 +1756,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES71</name>
-      <responseRef>PERCENTAGE_EXPENSES71</responseRef>
+      <componentRef>j4nwc63q</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1775,7 +1775,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING11</name>
-      <responseRef>CLOWNING11</responseRef>
+      <componentRef>j4nw0rr6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1794,7 +1794,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING12</name>
-      <responseRef>CLOWNING12</responseRef>
+      <componentRef>j4nw0rr6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1813,7 +1813,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING21</name>
-      <responseRef>CLOWNING21</responseRef>
+      <componentRef>j4nw0rr6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1832,7 +1832,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING22</name>
-      <responseRef>CLOWNING22</responseRef>
+      <componentRef>j4nw0rr6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1851,7 +1851,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING31</name>
-      <responseRef>CLOWNING31</responseRef>
+      <componentRef>j4nw0rr6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1870,7 +1870,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING32</name>
-      <responseRef>CLOWNING32</responseRef>
+      <componentRef>j4nw0rr6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1889,7 +1889,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING41</name>
-      <responseRef>CLOWNING41</responseRef>
+      <componentRef>j4nw0rr6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1908,7 +1908,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING42</name>
-      <responseRef>CLOWNING42</responseRef>
+      <componentRef>j4nw0rr6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1927,7 +1927,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL11</name>
-      <responseRef>TRAVEL11</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1946,7 +1946,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL12</name>
-      <responseRef>TRAVEL12</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1965,7 +1965,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL13</name>
-      <responseRef>TRAVEL13</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -1984,7 +1984,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL14</name>
-      <responseRef>TRAVEL14</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2003,7 +2003,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL15</name>
-      <responseRef>TRAVEL15</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2022,7 +2022,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL16</name>
-      <responseRef>TRAVEL16</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2041,7 +2041,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL21</name>
-      <responseRef>TRAVEL21</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2060,7 +2060,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL22</name>
-      <responseRef>TRAVEL22</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2079,7 +2079,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL23</name>
-      <responseRef>TRAVEL23</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2098,7 +2098,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL24</name>
-      <responseRef>TRAVEL24</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2117,7 +2117,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL25</name>
-      <responseRef>TRAVEL25</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2136,7 +2136,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL26</name>
-      <responseRef>TRAVEL26</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2155,7 +2155,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL31</name>
-      <responseRef>TRAVEL31</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2174,7 +2174,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL32</name>
-      <responseRef>TRAVEL32</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2193,7 +2193,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL33</name>
-      <responseRef>TRAVEL33</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2212,7 +2212,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL34</name>
-      <responseRef>TRAVEL34</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2231,7 +2231,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL35</name>
-      <responseRef>TRAVEL35</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2250,7 +2250,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL36</name>
-      <responseRef>TRAVEL36</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2269,7 +2269,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL41</name>
-      <responseRef>TRAVEL41</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2288,7 +2288,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL42</name>
-      <responseRef>TRAVEL42</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2307,7 +2307,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL43</name>
-      <responseRef>TRAVEL43</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2326,7 +2326,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL44</name>
-      <responseRef>TRAVEL44</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2345,7 +2345,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL45</name>
-      <responseRef>TRAVEL45</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2364,7 +2364,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL46</name>
-      <responseRef>TRAVEL46</responseRef>
+      <componentRef>j6p2lwuj</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2383,7 +2383,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS11</name>
-      <responseRef>FAVOURITE_CHARACTERS11</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2402,7 +2402,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS12</name>
-      <responseRef>FAVOURITE_CHARACTERS12</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2421,7 +2421,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS21</name>
-      <responseRef>FAVOURITE_CHARACTERS21</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2440,7 +2440,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS22</name>
-      <responseRef>FAVOURITE_CHARACTERS22</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2459,7 +2459,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS31</name>
-      <responseRef>FAVOURITE_CHARACTERS31</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2478,7 +2478,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS32</name>
-      <responseRef>FAVOURITE_CHARACTERS32</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2497,7 +2497,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS41</name>
-      <responseRef>FAVOURITE_CHARACTERS41</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2516,7 +2516,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS42</name>
-      <responseRef>FAVOURITE_CHARACTERS42</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2535,7 +2535,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS51</name>
-      <responseRef>FAVOURITE_CHARACTERS51</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2554,7 +2554,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS52</name>
-      <responseRef>FAVOURITE_CHARACTERS52</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2573,7 +2573,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS61</name>
-      <responseRef>FAVOURITE_CHARACTERS61</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2592,7 +2592,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS62</name>
-      <responseRef>FAVOURITE_CHARACTERS62</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2611,7 +2611,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS71</name>
-      <responseRef>FAVOURITE_CHARACTERS71</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2630,7 +2630,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS72</name>
-      <responseRef>FAVOURITE_CHARACTERS72</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2649,7 +2649,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS81</name>
-      <responseRef>FAVOURITE_CHARACTERS81</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2668,7 +2668,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS82</name>
-      <responseRef>FAVOURITE_CHARACTERS82</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2687,7 +2687,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS91</name>
-      <responseRef>FAVOURITE_CHARACTERS91</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2706,7 +2706,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS92</name>
-      <responseRef>FAVOURITE_CHARACTERS92</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2725,7 +2725,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS101</name>
-      <responseRef>FAVOURITE_CHARACTERS101</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2744,7 +2744,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS102</name>
-      <responseRef>FAVOURITE_CHARACTERS102</responseRef>
+      <componentRef>j6qg8rc6</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>
@@ -2763,7 +2763,7 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>SURVEY_COMMENT</name>
-      <responseRef>SURVEY_COMMENT</responseRef>
+      <componentRef>j6z0z3us</componentRef>
       <valueState valueType="PREVIOUS">
          <value xsi:nil="true"/>
       </valueState>

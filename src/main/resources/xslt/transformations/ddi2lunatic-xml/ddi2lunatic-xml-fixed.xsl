@@ -427,6 +427,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
+
     <xd:doc>
         <xd:desc>
             <xd:p>Recursive named template: enolunatic:replace-variables-in-formula.</xd:p>
@@ -485,7 +486,7 @@
                                     <xsl:value-of select="enolunatic:get-cast-variable($typeVariable,$value-var)"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="$var"/>
+                                    <xsl:value-of select="concat($conditioning-variable-begin,$var,$conditioning-variable-end)"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:matching-substring>
@@ -507,7 +508,7 @@
                                     <xsl:value-of select="enolunatic:get-cast-variable($typeVariable,$value-var)"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="$var"/>
+                                    <xsl:value-of select="concat($conditioning-variable-begin,$var,$conditioning-variable-end)"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </xsl:matching-substring>

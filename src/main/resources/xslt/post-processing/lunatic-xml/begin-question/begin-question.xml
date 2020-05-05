@@ -18,7 +18,7 @@
                 <response name="COMMENT_UE"/>
                 <variables variableType="COLLECTED">
                     <name>COMMENT_UE</name>
-                    <responseRef>COMMENT_UE</responseRef>
+                    <componentRef>COMMENT-UE-QUESTION</componentRef>
                     <valueState valueType="PREVIOUS">
                         <value xsi:nil="true"/>
                     </valueState>

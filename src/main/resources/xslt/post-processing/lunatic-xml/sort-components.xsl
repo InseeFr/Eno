@@ -170,14 +170,14 @@
     </xsl:template>
 
     <xsl:template match="h:variables">
-    <xsl:variable name="responseRef" select="h:responseRef"/>
+    <xsl:variable name="componentRef" select="h:componentRef"/>
     <xsl:variable name="expression" select="h:expression"/>
     <variables>
         <xsl:copy-of select="@*"/>
         <name><xsl:value-of select="h:name"/></name>
         <xsl:choose>
-            <xsl:when test="$responseRef!=''">
-                <responseRef><xsl:value-of select="$responseRef"/></responseRef>
+            <xsl:when test="$componentRef!=''">
+                <componentRef><xsl:value-of select="$componentRef"/></componentRef>
             </xsl:when>
             <xsl:when test="$expression!=''">
                 <expression><xsl:value-of select="$expression"/></expression>

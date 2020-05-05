@@ -18,7 +18,7 @@
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED">
                 <name>HEURE_REMPL</name>
-                <responseRef>HEURE_REMPL</responseRef>
+                <componentRef>TIME-QUESTION-HEURE-REMPL</componentRef>
                 <valueState valueType="PREVIOUS">
                     <value xsi:nil="true"/>
                 </valueState>
@@ -77,7 +77,7 @@
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED">
                 <name>COMMENT_QE</name>
-                <responseRef>COMMENT_QE</responseRef>
+                <componentRef>COMMENT-QUESTION</componentRef>
                 <valueState valueType="PREVIOUS">
                     <value xsi:nil="true"/>
                 </valueState>
@@ -110,7 +110,7 @@
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED">
                 <name>COMMENT_QE</name>
-                <responseRef>COMMENT_QE</responseRef>
+                <componentRef>COMMENT-QUESTION</componentRef>
                 <valueState valueType="PREVIOUS">
                     <value xsi:nil="true"/>
                 </valueState>
@@ -146,7 +146,7 @@
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED">
                 <name>HEURE_REMPL</name>
-                <responseRef>HEURE_REMPL</responseRef>
+                <componentRef>TIME-QUESTION-HEURE-REMPL</componentRef>
                 <valueState valueType="PREVIOUS">
                     <value xsi:nil="true"/>
                 </valueState>
@@ -177,7 +177,7 @@
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED">
                 <name>MIN_REMPL</name>
-                <responseRef>MIN_REMPL</responseRef>
+                <componentRef>TIME-QUESTION-MIN-REMPL</componentRef>
                 <valueState valueType="PREVIOUS">
                     <value xsi:nil="true"/>
                 </valueState>
