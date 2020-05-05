@@ -46,6 +46,8 @@
             <xsl:apply-templates select="h:label"/>
             <xsl:apply-templates select="h:declarations"/>
             <xsl:apply-templates select="h:conditionFilter"/>
+            <xsl:variable name="dependencies" select="h:dependencies" as="node()*"/>
+            <bindingsDependency><xsl:value-of select="count($dependencies)!=0"/></bindingsDependency>
             <xsl:apply-templates select="h:components"/>
         </components>
     </xsl:template>
@@ -53,7 +55,12 @@
     <xsl:template match="h:components[@xsi:type='Table']">
         <components>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="*[not(self::h:variables or self::h:cells[@type='line'])]"/>
+            <xsl:apply-templates select="h:label"/>
+            <xsl:apply-templates select="h:declarations"/>
+            <xsl:apply-templates select="h:conditionFilter"/>
+            <xsl:variable name="dependencies" select="descendant::h:dependencies" as="node()*"/>
+            <bindingsDependency><xsl:value-of select="count($dependencies)!=0"/></bindingsDependency>
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:cells[@type='line'] or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
             <xsl:choose>
                 <xsl:when test="h:lines">
                     <xsl:variable name="nbLines" select="count(h:cells[@type='line'])"/>
@@ -86,7 +93,12 @@
     <xsl:template match="h:components">
         <components>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="*[not(self::h:variables)]"/>
+            <xsl:apply-templates select="h:label"/>
+            <xsl:apply-templates select="h:declarations"/>
+            <xsl:apply-templates select="h:conditionFilter"/>
+            <xsl:variable name="dependencies" select="descendant::h:dependencies" as="node()*"/>
+            <bindingsDependency><xsl:value-of select="count($dependencies)!=0"/></bindingsDependency>
+            <xsl:apply-templates select="*[not(self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
         </components>
     </xsl:template>
     
@@ -103,7 +115,6 @@
     </xsl:template>
     
     <xsl:template match="h:conditionFilter">
-        <xsl:variable name="listVariable" select="//h:Questionnaire/descendant::h:variables[h:value!='']" as="node()*"/>
         <conditionFilter>
             <xsl:value-of select="."/>
         </conditionFilter>
