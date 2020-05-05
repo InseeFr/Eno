@@ -1117,7 +1117,7 @@
         </xd:desc>
     </xd:doc>
     <xsl:template match="d:Loop | d:QuestionGrid[d:GridDimension/d:Roster] | d:StructuredMixedGridResponseDomain[parent::d:QuestionGrid[d:GridDimension/d:Roster]]" mode="enoddi:is-linked-loop">
-        <xsl:value-of select="exists($root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference[r:ID= enoddi:get-id(.)]/preceding-sibling::r:BasedOnReference)"/>
+        <xsl:value-of select="$root//l:VariableScheme//l:VariableGroup/r:BasedOnObject/r:BasedOnReference[r:ID= enoddi:get-id(current())]/exists(preceding-sibling::r:BasedOnReference)"/>
     </xsl:template>
 
     <xd:doc>
