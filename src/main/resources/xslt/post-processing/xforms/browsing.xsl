@@ -485,7 +485,7 @@
                                 value="count(instance('fr-form-instance')//{$container}/{$dynamic-array})"/>
                         </xf:action>
                         <!-- loops without filter -->
-                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array]">
+                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array and not(@relevant)]">
                             <xsl:if test="@id != $container">
                                 <xf:action if="not(instance('fr-form-instance')//{@id}/*)
                                     or count(instance('fr-form-instance')//{@id}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
@@ -501,7 +501,7 @@
                             </xsl:if>
                         </xsl:for-each>
                         <!-- loops with filter -->
-                        <xsl:for-each select="//xf:repeat[substring-before(substring-after(@nodeset,concat(@id,'/')),'[') = $dynamic-array]">
+                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array and @relevant]">
                             <!-- TODO : the loop is in another loop -->
                             <xsl:variable name="filter-condition" select="replace(@nodeset,concat(@id,'/',$dynamic-array),concat($dynamic-array,'[@occurrence-id = context()/@occurrence-id]'))"/>
                             <xf:action iterate="instance('fr-form-instance')//{$container}/{$dynamic-array}">
@@ -795,7 +795,7 @@
     <xd:doc>
         <xd:desc>page-check : relevant ancestor of constraint added : must be not relevant or the constraint inside must be true</xd:desc>
     </xd:doc>
-    <xsl:template match="xf:bind[@relevant]" mode="page-check">
+    <xsl:template match="xf:bind[@relevant and not(@nodeset)]" mode="page-check">
         <xsl:param name="constraint-begin" as="xs:string" tunnel="yes"/>
         <xsl:param name="constraint-end" as="xs:string" tunnel="yes"/>
         
