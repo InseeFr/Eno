@@ -5,9 +5,11 @@
     <components xsi:type="Sequence" componentType="Sequence" id="BEGIN-QUESTION-SEQ">
         <label>"Identification"</label>      
         <conditionFilter>"normal"</conditionFilter>
+        <bindingsDependency>false</bindingsDependency>
         <components xsi:type="Subsequence" componentType="Subsequence" id="BEGIN-QUESTION-SUBSEQ">
             <label>"Identification de votre " || cast(LABEL_UNITE_ENQUETEE,string)</label>
             <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependency>true</bindingsDependency>
             <components xsi:type="Textarea"
                 componentType="Textarea"
                 id="COMMENT-UE-QUESTION"
@@ -15,6 +17,7 @@
                 mandatory="false">
                 <label>"Remarque, commentaire sur un changement concernant votre " || cast(LABEL_UNITE_ENQUETEE,string) || " :"</label>
                 <conditionFilter>"normal"</conditionFilter>
+                <bindingsDependency>true</bindingsDependency>
                 <response name="COMMENT_UE"/>
                 <variables variableType="COLLECTED">
                     <name>COMMENT_UE</name>
