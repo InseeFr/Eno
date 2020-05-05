@@ -378,7 +378,7 @@
                             <xsl:when test="contains($text,concat('following-sibling::',$current-group,'[@occurrence-id = current()/ancestor::',$current-group,'/@occurrence-id]'))">
                                 <xsl:for-each select="tokenize($text,concat('following-sibling::',$current-group,'\[@occurrence-id = current\(\)/ancestor::',$current-group,'/@occurrence-id\]'))">
                                     <xsl:if test="not(position()=1)">
-                                        <xsl:value-of select="concat('following-sibling::Groupe[@typeGroupe=''',$current-group,''' and idGroupe = current()/ancestor::Groupe[@typeGroupe=''',$current-group,''']/@idGroupe]')"/>
+                                        <xsl:value-of select="concat('following-sibling::Groupe[@typeGroupe=''',$current-group,''' and @idGroupe = current()/ancestor::Groupe[@typeGroupe=''',$current-group,''']/@idGroupe]')"/>
                                     </xsl:if>
                                     <xsl:call-template name="replace-element">
                                         <xsl:with-param name="position" select="$position"/>
