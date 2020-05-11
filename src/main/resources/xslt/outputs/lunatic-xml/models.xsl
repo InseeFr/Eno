@@ -515,7 +515,6 @@
 				<value><xsl:value-of select="enolunatic:get-value($source-context)"/></value>
 				<label><xsl:value-of select="enolunatic:replace-all-variables-with-business-name($source-context,$label)"/></label>
 			</options>
-			<dependencies>TOTO</dependencies>
 			<xsl:copy-of select="$dependencies"/>
 		</xsl:if>
 	</xsl:template>
@@ -722,11 +721,13 @@
 		<variables variableType="COLLECTED">
 			<name><xsl:value-of select="$responseName"/></name>
 			<componentRef><xsl:value-of select="$componentRef"/></componentRef>
-			<xsl:for-each select="tokenize($ResponseTypeEnum,',')">
-				<valueState valueType="{.}">
-					<value xsi:nil="true"/>
-				</valueState>
-			</xsl:for-each>
+			<values>
+				<xsl:for-each select="tokenize($ResponseTypeEnum,',')">
+					<xsl:element name="{.}">
+						<xsl:attribute name="xsi:nil" select="true()"/>
+					</xsl:element>
+				</xsl:for-each>
+			</values>
 		</variables>
 	</xsl:template>
 

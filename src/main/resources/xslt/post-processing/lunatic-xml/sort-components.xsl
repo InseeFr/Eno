@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:fn="http://www.w3.org/2005/xpath-functions" 
-    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:eno="http://xml.insee.fr/apps/eno" 
-    xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
-    xmlns:h="http://xml.insee.fr/schema/applis/lunatic-h"
-    xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
-    exclude-result-prefixes="xs fn xd eno enojs h" version="2.0">	
-    
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:fn="http://www.w3.org/2005/xpath-functions"
+                xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+                xmlns:eno="http://xml.insee.fr/apps/eno"
+                xmlns:enojs="http://xml.insee.fr/apps/eno/out/js"
+                xmlns:h="http://xml.insee.fr/schema/applis/lunatic-h"
+                xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
+                exclude-result-prefixes="xs fn xd eno enojs h" version="2.0">
+
     <xsl:output indent="yes"/>
-    
+
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>An xslt stylesheet who transforms an input into js through generic driver templates.</xd:p>
             <xd:p>The real input is mapped with the drivers.</xd:p>
         </xd:desc>
     </xd:doc>
-    
+
+    <xsl:template match="@*|node()">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+    </xsl:template>
+
     <xd:doc>
         <xd:desc>
             <xd:p>Match on Form driver.</xd:p>
             <xd:p>It writes the root of the document with the main title.</xd:p>
         </xd:desc>
     </xd:doc>
-    
+
     <xsl:template match="main">
         <xsl:apply-templates select="h:Questionnaire"/>
     </xsl:template>
-    
+
     <xsl:template match="h:Questionnaire">
         <Questionnaire>
             <xsl:copy-of select="@*"/>
@@ -39,7 +45,7 @@
             <xsl:apply-templates select="descendant::h:variables[@variableType='CALCULATED']"/>
         </Questionnaire>
     </xsl:template>
-    
+
     <xsl:template match="h:components[@xsi:type='Sequence' or @xsi:type='Subsequence']">
         <components>
             <xsl:copy-of select="@*"/>
@@ -51,7 +57,7 @@
             <xsl:apply-templates select="h:components"/>
         </components>
     </xsl:template>
-    
+
     <xsl:template match="h:components[@xsi:type='Table']">
         <components>
             <xsl:copy-of select="@*"/>
@@ -89,7 +95,7 @@
             </xsl:choose>
         </components>
     </xsl:template>
-    
+
     <xsl:template match="h:components">
         <components>
             <xsl:copy-of select="@*"/>
@@ -101,32 +107,7 @@
             <xsl:apply-templates select="*[not(self::h:variables or self::h:label or self::h:declarations or self::h:conditionFilter)]"/>
         </components>
     </xsl:template>
-    
-    <xsl:template match="h:unit">
-        <unit><xsl:value-of select="."/></unit>
-    </xsl:template>
-    
-    <xsl:template match="h:lines">
-        <lines><xsl:copy-of select="@*"/></lines>
-    </xsl:template>
-    
-    <xsl:template match="h:label">
-        <label><xsl:value-of select="normalize-space(.)"/></label>
-    </xsl:template>
-    
-    <xsl:template match="h:conditionFilter">
-        <conditionFilter>
-            <xsl:value-of select="."/>
-        </conditionFilter>
-    </xsl:template>
-    
-    <xsl:template match="h:declarations">
-        <declarations>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="h:label"/>
-        </declarations>
-    </xsl:template>
-    
+
     <xsl:template match="h:response">
         <xsl:param name="idLine" tunnel="yes"/>
         <xsl:param name="ancestor" tunnel="yes"/>
@@ -144,7 +125,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </response>
-                <xsl:if test="string($idLine)!='' and string($idColumn)!=''">                    
+                <xsl:if test="string($idLine)!='' and string($idColumn)!=''">
                     <xsl:call-template name="enojs:addVariableCollected">
                         <xsl:with-param name="responseName" select="concat(@name,'_',$idLine,'_',$idColumn)"/>
                     </xsl:call-template>
@@ -156,88 +137,21 @@
                 </response>
             </xsl:otherwise>
         </xsl:choose>
-        
-    </xsl:template>
-    
-    <xsl:template match="h:valueState">
-        <valueState>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="node()"/>
-        </valueState>
-    </xsl:template>
-    
-    <xsl:template match="h:codeLists">
-        <codeLists>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="node()"/>
-        </codeLists>
-    </xsl:template>	
-
-    <xsl:template match="h:value">
-        <value>
-            <xsl:copy-of select="@*"/>
-            <xsl:value-of select="."/>
-        </value>
     </xsl:template>
 
-    <xsl:template match="h:variables">
-    <xsl:variable name="componentRef" select="h:componentRef"/>
-    <xsl:variable name="expression" select="h:expression"/>
-    <variables>
-        <xsl:copy-of select="@*"/>
-        <name><xsl:value-of select="h:name"/></name>
-        <xsl:choose>
-            <xsl:when test="$componentRef!=''">
-                <componentRef><xsl:value-of select="$componentRef"/></componentRef>
-            </xsl:when>
-            <xsl:when test="$expression!=''">
-                <expression><xsl:value-of select="$expression"/></expression>
-            </xsl:when>
-        </xsl:choose>
-        <xsl:apply-templates select="h:value"/>
-        <xsl:apply-templates select="h:valueState"/>
-    </variables>
-</xsl:template>
-    
-    <xsl:template match="h:dateFormat">
-        <dateFormat><xsl:value-of select="."/></dateFormat>
+    <xsl:template match="h:dependencies"/>
+
+    <xsl:template match="h:label">
+        <label><xsl:value-of select="normalize-space(.)"/></label>
     </xsl:template>
-    
-    <xsl:template match="h:responses">
-        <responses>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="node()"/>
-        </responses>
-    </xsl:template>
-    
-    <xsl:template match="h:options">
-        <options>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates select="node()"/>
-        </options>
-    </xsl:template>
-    
-    <xsl:template match="h:codes">
-        <codes>
-            <xsl:apply-templates select="h:value"/>
-            <xsl:apply-templates select="h:label"/>
-        </codes>
-    </xsl:template>
-    
-    
-    <xsl:template match="h:header">
-        <header>
-            <xsl:copy-of select="@*"/>
-            <xsl:value-of select="."/>
-        </header>
-    </xsl:template>
+
     <xsl:template match="h:cells">
         <cells>
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
         </cells>
     </xsl:template>
-    
+
     <xsl:template match="h:cells" mode="roster">
         <xsl:param name="column" tunnel="yes"/>
         <cells>
@@ -246,7 +160,7 @@
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
         </cells>
     </xsl:template>
-    
+
     <xsl:template name="enojs:addVariableCollected">
         <xsl:param name="responseName"/>
         <xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
@@ -254,25 +168,27 @@
         <variables variableType="COLLECTED">
             <name><xsl:value-of select="$responseName"/></name>
             <responseRef><xsl:value-of select="$responseName"/></responseRef>
-            <xsl:for-each select="tokenize($ResponseTypeEnum,',')">
-                <valueState valueType="{.}">
-                    <value xsi:nil="true"/>
-                </valueState>
-            </xsl:for-each>
+            <values>
+                <xsl:for-each select="tokenize($ResponseTypeEnum,',')">
+                    <xsl:element name="{.}">
+                        <xsl:attribute name="xsi:nil" select="true()"/>
+                    </xsl:element>
+                </xsl:for-each>
+            </values>
         </variables>
     </xsl:template>
-    
+
     <xsl:template name="enojs:addLinesForRoster">
         <xsl:param name="currentLigne"/>
         <xsl:param name="nbLigneMax"/>
         <xsl:param name="lineToCopy" as="node()"/>
         <xsl:if test="$currentLigne&lt;=$nbLigneMax">
-            
+
             <xsl:apply-templates select="$lineToCopy" mode="roster">
                 <xsl:with-param name="idLine" select="$currentLigne" tunnel="yes"/>
                 <xsl:with-param name="ancestor" select="'table'" tunnel="yes"/>
             </xsl:apply-templates>
-            
+
             <xsl:call-template name="enojs:addLinesForRoster">
                 <xsl:with-param name="currentLigne" select="$currentLigne +1"/>
                 <xsl:with-param name="nbLigneMax" select="$nbLigneMax"/>
@@ -280,10 +196,9 @@
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
-    
-    
+
     <xsl:function name="enojs:prepareCellsForRoster">
-        <xsl:param name="cell" as="node()"/>        
+        <xsl:param name="cell" as="node()"/>
         <cells>
             <xsl:copy-of select="$cell/@*"/>
             <xsl:for-each select="$cell/h:cells">
@@ -293,5 +208,4 @@
             </xsl:for-each>
         </cells>
     </xsl:function>
-    
 </xsl:stylesheet>
