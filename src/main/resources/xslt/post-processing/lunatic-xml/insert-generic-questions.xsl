@@ -132,7 +132,7 @@
             <xd:p>Add qeneric questions to the end</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="h:components[@componentType='Sequence'][last()]">
+    <xsl:template match="h:components[@componentType='Sequence'][last()]" priority="1">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
