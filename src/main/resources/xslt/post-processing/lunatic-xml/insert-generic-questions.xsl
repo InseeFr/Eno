@@ -108,10 +108,10 @@
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
-            <xd:p>Add qeneric questions to begining and to the end</xd:p>
+            <xd:p>Add generic questions to beginning and to the end</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="h:components[@componentType='Sequence'][1 or last()]">
+    <xsl:template match="h:components[@componentType='Sequence'][@id=$first-sequence-id or @id=$last-sequence-id]">
         <xsl:variable name="current-id" select="@id"/>
         <xsl:if test="$current-id=$first-sequence-id">
             <xsl:call-template name="add-begin-questions"/>
