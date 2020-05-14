@@ -203,6 +203,7 @@
                 <xsl:when test="$evolution='0' and contains($initial-extremum,'.') and string-length(substring-after($initial-extremum,'.')) = number($decimal-position)">
                     <xsl:value-of select="$initial-extremum"/>
                 </xsl:when>
+                <xsl:when test="not($initial-extremum)"/>
                 <xsl:otherwise>
                     <xsl:variable name="power">
                         <xsl:value-of select="'1'"/>
