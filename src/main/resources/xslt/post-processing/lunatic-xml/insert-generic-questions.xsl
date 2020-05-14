@@ -114,68 +114,60 @@
     <xsl:template match="h:components[@componentType='Sequence'][@id=$first-sequence-id or @id=$last-sequence-id]">
         <xsl:variable name="current-id" select="@id"/>
         <xsl:if test="$current-id=$first-sequence-id">
-            <xsl:call-template name="add-begin-questions"/>
+            <xsl:choose>
+                <xsl:when test="$context=$business and $begin-questions-identification">
+                    <xsl:copy-of select="$begin-question//*[@id='BEGIN-QUESTION-SEQ']"/>
+                </xsl:when>
+                <xsl:when test="$context=$household"/>
+                <xsl:when test="$context=$default"/>
+            </xsl:choose>
         </xsl:if>
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
         <xsl:if test="$current-id=$last-sequence-id">
-            <xsl:call-template name="add-end-questions"/>
+            <xsl:choose>
+                <xsl:when test="$context=$business">
+                    <xsl:choose>
+                        <xsl:when test="$end-response-time-question and $end-comment-question">
+                            <xsl:copy-of select="$end-question//*[@id='TIME-COMMENT-SEQ']"/>
+                        </xsl:when>
+                        <xsl:when test="$end-comment-question">
+                            <xsl:copy-of select="$end-question//*[@id='COMMENT-SEQ']"/>
+                        </xsl:when>
+                        <xsl:when test="$end-response-time-question">
+                            <xsl:copy-of select="$end-question//*[@id='TIME-SEQ']"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:when test="$context=$household">
+                    <xsl:choose>
+                        <xsl:when test="$end-response-time-question and $end-comment-question">
+                            <xsl:copy-of select="$end-question//*[@id='TIME-COMMENT-SEQ']"/>
+                        </xsl:when>
+                        <xsl:when test="$end-comment-question">
+                            <xsl:copy-of select="$end-question//*[@id='COMMENT-SEQ']"/>
+                        </xsl:when>
+                        <xsl:when test="$end-response-time-question">
+                            <xsl:copy-of select="$end-question//*[@id='TIME-SEQ']"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:when test="$context=$default">
+                    <xsl:choose>
+                        <xsl:when test="$end-response-time-question and $end-comment-question">
+                            <xsl:copy-of select="$end-question//*[@id='TIME-COMMENT-SEQ']"/>
+                        </xsl:when>
+                        <xsl:when test="$end-comment-question">
+                            <xsl:copy-of select="$end-question//*[@id='COMMENT-SEQ']"/>
+                        </xsl:when>
+                        <xsl:when test="$end-response-time-question">
+                            <xsl:copy-of select="$end-question//*[@id='TIME-SEQ']"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:when>
+            </xsl:choose>
         </xsl:if>
-    </xsl:template>
-
-    <xsl:template name="add-begin-questions">
-        <xsl:choose>
-            <xsl:when test="$context=$business and $begin-questions-identification">
-                <xsl:copy-of select="$begin-question//*[@id='BEGIN-QUESTION-SEQ']"/>
-            </xsl:when>
-            <xsl:when test="$context=$household"/>
-            <xsl:when test="$context=$default"/>
-        </xsl:choose>
-    </xsl:template>
-
-    <xsl:template name="add-end-questions">
-        <xsl:choose>
-            <xsl:when test="$context=$business">
-                <xsl:choose>
-                    <xsl:when test="$end-response-time-question and $end-comment-question">
-                        <xsl:copy-of select="$end-question//*[@id='TIME-COMMENT-SEQ']"/>
-                    </xsl:when>
-                    <xsl:when test="$end-comment-question">
-                        <xsl:copy-of select="$end-question//*[@id='COMMENT-SEQ']"/>
-                    </xsl:when>
-                    <xsl:when test="$end-response-time-question">
-                        <xsl:copy-of select="$end-question//*[@id='TIME-SEQ']"/>
-                    </xsl:when>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$context=$household">
-                <xsl:choose>
-                    <xsl:when test="$end-response-time-question and $end-comment-question">
-                        <xsl:copy-of select="$end-question//*[@id='TIME-COMMENT-SEQ']"/>
-                    </xsl:when>
-                    <xsl:when test="$end-comment-question">
-                        <xsl:copy-of select="$end-question//*[@id='COMMENT-SEQ']"/>
-                    </xsl:when>
-                    <xsl:when test="$end-response-time-question">
-                        <xsl:copy-of select="$end-question//*[@id='TIME-SEQ']"/>
-                    </xsl:when>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="$context=$default">
-                <xsl:choose>
-                    <xsl:when test="$end-response-time-question and $end-comment-question">
-                        <xsl:copy-of select="$end-question//*[@id='TIME-COMMENT-SEQ']"/>
-                    </xsl:when>
-                    <xsl:when test="$end-comment-question">
-                        <xsl:copy-of select="$end-question//*[@id='COMMENT-SEQ']"/>
-                    </xsl:when>
-                    <xsl:when test="$end-response-time-question">
-                        <xsl:copy-of select="$end-question//*[@id='TIME-SEQ']"/>
-                    </xsl:when>
-                </xsl:choose>
-            </xsl:when>
-        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>
