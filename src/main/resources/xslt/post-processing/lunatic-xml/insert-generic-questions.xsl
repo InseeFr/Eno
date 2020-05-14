@@ -90,7 +90,10 @@
     <xsl:template match="/">
         <xsl:apply-templates select="*"/>
     </xsl:template>
-    
+
+    <xsl:variable name="first-sequence-id" select="//h:components[@componentType='Sequence'][1]/@id"/>
+    <xsl:variable name="last-sequence-id" select="//h:components[@componentType='Sequence'][last()]/@id"/>
+
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
             <xd:p>Template de base pour tous les éléments et tous les attributs, on recopie
@@ -102,17 +105,26 @@
             <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
     </xsl:template>
-    
-    
-    
-    
+
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
-            <xd:p>Add qeneric questions to the end</xd:p>
+            <xd:p>Add qeneric questions to begining and to the end</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="h:components[@componentType='Sequence'][1]">
-        
+    <xsl:template match="h:components[@componentType='Sequence'][1 or last()]">
+        <xsl:variable name="current-id" select="@id"/>
+        <xsl:if test="$current-id=$first-sequence-id">
+            <xsl:call-template name="add-begin-questions"/>
+        </xsl:if>
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*"/>
+        </xsl:copy>
+        <xsl:if test="$current-id=$last-sequence-id">
+            <xsl:call-template name="add-end-questions"/>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template name="add-begin-questions">
         <xsl:choose>
             <xsl:when test="$context=$business and $begin-questions-identification">
                 <xsl:copy-of select="$begin-question//*[@id='BEGIN-QUESTION-SEQ']"/>
@@ -120,22 +132,9 @@
             <xsl:when test="$context=$household"/>
             <xsl:when test="$context=$default"/>
         </xsl:choose>
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-        </xsl:copy>
     </xsl:template>
-    
-    
-    
-    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
-        <xd:desc>
-            <xd:p>Add qeneric questions to the end</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="h:components[@componentType='Sequence'][last()]">
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-        </xsl:copy>
+
+    <xsl:template name="add-end-questions">
         <xsl:choose>
             <xsl:when test="$context=$business">
                 <xsl:choose>
@@ -178,7 +177,5 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-    
-    
-    
+
 </xsl:stylesheet>
