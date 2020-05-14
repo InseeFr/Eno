@@ -108,7 +108,7 @@
 
     <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
-            <xd:p>Add generic questions to beginning and to the end</xd:p>
+            <xd:p>Add generic questions to the beginning and to the end</xd:p>
         </xd:desc>
     </xd:doc>
     <xsl:template match="h:components[@componentType='Sequence'][@id=$first-sequence-id or @id=$last-sequence-id]">
