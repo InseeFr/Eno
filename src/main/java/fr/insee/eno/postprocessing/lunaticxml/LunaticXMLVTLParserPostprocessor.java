@@ -31,7 +31,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 
 		File outputCustomFOFile = new File(input.getParent(),
 				Constants.BASE_NAME_FORM_FILE +
-				Constants.FINAL_LUNATIC_XML_EXTENSION);
+				Constants.VTL_PARSER_LUNATIC_XML_EXTENSION);
 		logger.info("Start JS parsing xpath to vtl post-processing");
 
 		String inputString = FileUtils.readFileToString(input, StandardCharsets.UTF_8);
@@ -89,23 +89,23 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 
 	/**
 	 * This function translates XPATH expression to VTL(sdmx) expression
-	 * 
+	 *
 	 * Definition of used variables in this function:
 	 * 	- finalString is the output
 	 * 	- context is the current string read before a '(' (if there is the char , (comma), context is reset)
 	 *  - listContext is the list which contains all context (the last context corresponds to the function wrote before '(' )
 	 *  - isBetweenRealDoubleQuote : boolean, true if the current char is between the char \" literally (and not " char), so if true, the current char is plain text
-	 *  - isBetweenRealSimpleQuote : boolean, true if the current char is between ' literally 
+	 *  - isBetweenRealSimpleQuote : boolean, true if the current char is between ' literally
 	 *  - lastCastType is a string which defines what is the type fo the cast function (example : cast(ABCD,string) -> string)
-	 *  
-	 *  Transformations: 
+	 *
+	 *  Transformations:
 	 *  	x!=y -> x &lt;&gt; y (x <> y)
 	 *  	x div y -> x / y
 	 *  	substring(A,1,2) -> substr(A,1,2)
 	 *  	concat(A,B,C) -> A || B || C
 	 *  	cast(ABCD,string) = '1' -> cast(ABCD,string) = \"1\"
 	 *  	cast(ABCD,integer) = '1' -> cast(ABCD,integer) = 1
-	 *    
+	 *
 	 * @param input : the string to parse
 	 * @return finalString : the result of parsing
 	 */
@@ -119,7 +119,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 		for(int i=0;i<input.length();i++) {
 			char c = input.charAt(i);
 			context = (c==',') ? "" : context+c;
-			
+
 			// order functions by descending length
 			if(context.contains(XPATH_NOT_EQUAL_TO) && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_NOT_EQUAL_TO, VTL_NOT_EQUAL_TO);
@@ -127,7 +127,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 			else if(context.contains(XPATH_DIVISION_FUNCTION) && !isBetweenRealDoubleQuote) {
 				finalString = replaceLast(finalString, XPATH_DIVISION_FUNCTION, VTL_DIVISION_FUNCTION);
 			}
-			
+
 			switch (c) {
 			case '(':
 				// order functions by descending length
@@ -148,7 +148,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 				break;
 			case '\"':
 				if(getLastChar(finalString)!='\\') {
-					isBetweenRealDoubleQuote=!isBetweenRealDoubleQuote;					
+					isBetweenRealDoubleQuote=!isBetweenRealDoubleQuote;
 				}
 				finalString+=c;
 				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
@@ -160,7 +160,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 					isBetweenRealSimpleQuote=!isBetweenRealSimpleQuote;
 					if(isNumeric(contentBetweenSimpleQuote) && isCastingToIntegerOrNumber(lastCastType)) {
 						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", contentBetweenSimpleQuote);
-					} 
+					}
 					else if(isCastingToString(lastCastType)) {
 						finalString = replaceLast(finalString, "'"+contentBetweenSimpleQuote+"'", "\""+contentBetweenSimpleQuote+"\"");
 					}
@@ -172,7 +172,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 				contentBetweenSimpleQuote+=isBetweenRealSimpleQuote ? c:"";
 				break;
 			case ')':
-				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) ? "" : c;				
+				finalString += getLastElement(listContext).equals(XPATH_CONCAT_FUNCTION) ? "" : c;
 				if(getLastElement(listContext).contains(XPATH_CAST_FUNCTION)) {
 					lastCastType=context.replace(")", "");
 				}
@@ -210,7 +210,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 			contexts.remove(contexts.size()-1);
 		}
 	}
-	
+
 	/**
 	 * Function which replaces the last occurences of a string to another in the input
 	 * @param string : the input
@@ -224,7 +224,7 @@ public class LunaticXMLVTLParserPostprocessor implements Postprocessor {
 			return string;
 		return string.substring(0, index) + replacement + string.substring(index+substring.length());
 	}
-	
+
 	public boolean isNumeric(String strNum) {
 	    if (strNum == null) {
 	        return false;

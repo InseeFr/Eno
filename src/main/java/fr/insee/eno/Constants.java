@@ -171,7 +171,7 @@ public final class Constants {
 	public static final String TRANSFORMATIONS_SORT_COMPONENTS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/sort-components.xsl";
 	public static final String TRANSFORMATIONS_EXTERNALIZE_VARIABLES_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/externalize-variables.xsl";
 	public static final String TRANSFORMATIONS_INSERT_GENERIC_QUESTIONS_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/insert-generic-questions.xsl";
-	
+	public static final String TRANSFORMATIONS_USELESS_QUOTE_TREATMENT_LUNATIC_XML = POST_PROCESSING_FOLDER_LUNATIC_XML + "/useless-quote-treatment.xsl";
 	/********************* FR/Xform Post-processing ******************/
 	public static final String UTIL_XFORMS_BROWSING_XSL = POST_PROCESSING_FOLDER_XFORMS + "/browsing.xsl";
 	public static final String UTIL_XFORMS_FIX_ADHERENCE_XSL = POST_PROCESSING_FOLDER_XFORMS + "/fix-adherence.xsl";
