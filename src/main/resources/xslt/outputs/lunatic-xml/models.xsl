@@ -82,12 +82,8 @@
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="filterCondition" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
-		<xsl:variable name="filterDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($filterCondition)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-			<xsl:for-each select="$filterDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
 		</xsl:variable>
@@ -124,12 +120,8 @@
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="filterCondition" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
-		<xsl:variable name="filterDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($filterCondition)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-			<xsl:for-each select="$filterDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
 		</xsl:variable>
@@ -162,12 +154,8 @@
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="filterCondition" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
-		<xsl:variable name="filterDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($filterCondition)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-			<xsl:for-each select="$filterDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
 		</xsl:variable>
@@ -201,12 +189,8 @@
 		<xsl:variable name="label" select="enolunatic:get-vtl-label($source-context,$languages[1])"/>
 		<xsl:variable name="filterCondition" select="enolunatic:get-global-filter($source-context)"/>
 		<xsl:variable name="labelDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($label)"/>
-		<xsl:variable name="filterDependencies" as="xs:string*" select="enolunatic:find-variables-in-formula($filterCondition)"/>
 		<xsl:variable name="dependenciesVariables" as="xs:string*">
 			<xsl:for-each select="$labelDependencies">
-				<xsl:sequence select="."/>
-			</xsl:for-each>
-			<xsl:for-each select="$filterDependencies">
 				<xsl:sequence select="."/>
 			</xsl:for-each>
 		</xsl:variable>
