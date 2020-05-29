@@ -254,11 +254,11 @@
 			<xsl:text>&#xa;</xsl:text>
 			<xsl:value-of select="concat('#foreach( ${',$loop-name,'} in ${',$loop-name,'-Container} ) ')"/>
 			<xsl:text>&#xa;</xsl:text>
-			<xsl:value-of select="concat('#set( ${',$loop-name,'.LoopPosition} = $velocityCount)')"/>
+			<xsl:value-of select="concat('#set( $',$loop-name,'.LoopPosition = $velocityCount)')"/>
 			<xsl:text>&#xa;</xsl:text>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
-				<xsl:with-param name="loop-position" select="concat($loop-position,'-${',$loop-name,'.LoopPosition}')" tunnel="yes"/>
+				<xsl:with-param name="loop-position" select="concat($loop-position,'-$',$loop-name,'.LoopPosition')" tunnel="yes"/>
 				<xsl:with-param name="loop-navigation" as="node()" tunnel="yes">
 					<Loops>
 						<xsl:copy-of select="$loop-navigation//Loop"/>
@@ -272,11 +272,14 @@
 		</xsl:if>
 		<!-- empty occurrences -->
 		<xsl:if test="$loop-minimum-empty-occurrence != 0 or $loop-minimum-occurrence != 0">
+			<xsl:text>&#xa;#set( $initializeInt = 0)&#xa;</xsl:text>
+			<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$loop-name,'-TotalOccurrenceCount))')"/>
+			<xsl:text>&#xa;</xsl:text>
 			<xsl:for-each select="1 to (if ($loop-minimum-empty-occurrence &gt; $loop-minimum-occurrence) then $loop-minimum-empty-occurrence else $loop-minimum-occurrence)">
 				<xsl:variable name="empty-position" select="position()"/>
 				<xsl:if test="$empty-position &gt; $loop-minimum-empty-occurrence">
 					<xsl:text>&#xa;</xsl:text>
-					<xsl:value-of select="concat('#if (${',$loop-name,'-TotalOccurrenceCount} le ',$loop-minimum-occurrence - $empty-position,') ')"/>
+					<xsl:value-of select="concat('#if ($',$loop-name,'-TotalOccurrenceInt le ',$loop-minimum-occurrence - $empty-position,') ')"/>
 					<xsl:text>&#xa;</xsl:text>
 				</xsl:if>
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -515,9 +518,9 @@
 						<xsl:text>&#xd;</xsl:text>
 						<xsl:value-of select="concat('#foreach( ${',$loop-name,'} in ${',$loop-name,'-Container} ) ')"/>
 						<xsl:text>&#xd;</xsl:text>
-						<xsl:value-of select="concat('#set( ${',$loop-name,'.LoopPosition} = $velocityCount)')"/>
+						<xsl:value-of select="concat('#set( $',$loop-name,'.LoopPosition = $velocityCount)')"/>
 						<xsl:text>&#xd;</xsl:text>
-						<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('\${',$loop-name,'.LoopPosition}'))"/>
+						<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('\$',$loop-name,'.LoopPosition'))"/>
 						<!-- the line to loop on -->
 						<xsl:for-each select="enofo:get-body-lines($source-context)">
 							<xsl:variable name="position" select="position()"/>
@@ -525,7 +528,7 @@
 								<xsl:apply-templates select="enofo:get-body-line($source-context, $position)" mode="source">
 									<xsl:with-param name="driver" select="$current-match" tunnel="yes"/>
 									<xsl:with-param name="no-border" select="$no-border" tunnel="yes"/>
-									<xsl:with-param name="loop-position" select="concat($loop-position,'-${',$loop-name,'.LoopPosition}')" tunnel="yes"/>
+									<xsl:with-param name="loop-position" select="concat($loop-position,'-$',$loop-name,'.LoopPosition')" tunnel="yes"/>
 									<xsl:with-param name="loop-navigation" as="node()" tunnel="yes">
 										<Loops>
 											<xsl:copy-of select="$loop-navigation//Loop"/>
@@ -541,14 +544,17 @@
 					</xsl:if>
 					<!-- empty rows -->
 					<xsl:if test="$roster-minimum-empty-row != 0 or $roster-minimum-lines != 0">
+						<xsl:text>&#xa;#set( $initializeInt = 0)&#xa;</xsl:text>
+						<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$loop-name,'-TotalOccurrenceCount))')"/>
+						<xsl:text>&#xa;</xsl:text>
 						<xsl:for-each select="1 to (if ($roster-minimum-empty-row &gt; $roster-minimum-lines) then $roster-minimum-empty-row else $roster-minimum-lines)">
 							<xsl:variable name="empty-position" select="position()"/>
 							<xsl:if test="$empty-position &gt; $roster-minimum-empty-row">
 								<xsl:text>&#xa;</xsl:text>
-								<xsl:value-of select="concat('#if (${',$loop-name,'-TotalOccurrenceCount} le ',$roster-minimum-lines - $empty-position,') ')"/>
+								<xsl:value-of select="concat('#if ($',$loop-name,'-TotalOccurrenceInt le ',$roster-minimum-lines - $empty-position,') ')"/>
 								<xsl:text>&#xa;</xsl:text>
 							</xsl:if>
-							<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('(\${',$loop-name,'-TotalOccurrenceCount} + ',$empty-position,')'))"/>
+							<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('(\$',$loop-name,'-TotalOccurrenceInt + ',$empty-position,')'))"/>
 							<!-- the line to fake-loop on -->
 							<xsl:for-each select="enofo:get-body-lines($source-context)">
 								<xsl:variable name="position" select="position()"/>
