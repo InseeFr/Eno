@@ -273,7 +273,7 @@
 		<!-- empty occurrences -->
 		<xsl:if test="$loop-minimum-empty-occurrence != 0 or $loop-minimum-occurrence != 0">
 			<xsl:text>&#xa;#set( $initializeInt = 0)&#xa;</xsl:text>
-			<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$loop-name,'-TotalOccurrenceCount))')"/>
+			<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$loop-name,'-TotalOccurrenceCount}))')"/>
 			<xsl:text>&#xa;</xsl:text>
 			<xsl:for-each select="1 to (if ($loop-minimum-empty-occurrence &gt; $loop-minimum-occurrence) then $loop-minimum-empty-occurrence else $loop-minimum-occurrence)">
 				<xsl:variable name="empty-position" select="position()"/>
@@ -545,7 +545,7 @@
 					<!-- empty rows -->
 					<xsl:if test="$roster-minimum-empty-row != 0 or $roster-minimum-lines != 0">
 						<xsl:text>&#xa;#set( $initializeInt = 0)&#xa;</xsl:text>
-						<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$loop-name,'-TotalOccurrenceCount))')"/>
+						<xsl:value-of select="concat('#set( $',$loop-name,'-TotalOccurrenceInt = $initializeInt.parseInt(${',$loop-name,'-TotalOccurrenceCount}))')"/>
 						<xsl:text>&#xa;</xsl:text>
 						<xsl:for-each select="1 to (if ($roster-minimum-empty-row &gt; $roster-minimum-lines) then $roster-minimum-empty-row else $roster-minimum-lines)">
 							<xsl:variable name="empty-position" select="position()"/>
