@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import fr.insee.eno.postprocessing.lunaticxml.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +30,10 @@ import fr.insee.eno.postprocessing.fo.FOInsertEndQuestionPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOMailingPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOSpecificTreatmentPostprocessor;
 import fr.insee.eno.postprocessing.fo.FOTableColumnPostprocessorFake;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLExternalizeVariablesPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLInsertGenericQuestionsPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLSortComponentsPostprocessor;
+import fr.insee.eno.postprocessing.lunaticxml.LunaticXMLVTLParserPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSBrowsingPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSInseePatternPostprocessor;
 import fr.insee.eno.postprocessing.xforms.XFORMSFixAdherencePostprocessor;
@@ -123,9 +126,7 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 	private LunaticXMLSortComponentsPostprocessor lunaticXmlSortComponents = new LunaticXMLSortComponentsPostprocessor();
 	
 	private LunaticXMLVTLParserPostprocessor lunaticXmlvtlParser = new LunaticXMLVTLParserPostprocessor();
-
-	private LunaticXMLUselessQuotePostprocessor lunaticXmlUselessQuoteTreatment = new LunaticXMLUselessQuotePostprocessor();
-
+	
 	private NoopPostprocessor noop = new NoopPostprocessor();
 	
 
@@ -276,9 +277,6 @@ public class PipeLineGeneratorImpl implements PipelineGenerator {
 			break;
 		case LUNATIC_XML_VTL_PARSER:
 			postprocessor = lunaticXmlvtlParser;
-			break;
-		case LUNATIC_XML_USELESS_QUOTE_TREATMENT:
-			postprocessor= lunaticXmlUselessQuoteTreatment;
 			break;
 		case LUNATIC_XML_SPECIFIC_TREATMENT:
 			postprocessor = noop;
