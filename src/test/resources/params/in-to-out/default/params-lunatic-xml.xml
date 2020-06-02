@@ -12,7 +12,6 @@
         <PostProcessing>lunatic-xml-insert-generic-questions</PostProcessing>
         <PostProcessing>lunatic-xml-externalizeVariables</PostProcessing>
         <PostProcessing>lunatic-xml-vtlParser</PostProcessing>
-        <PostProcessing>lunatic-xml-uselessQuoteTreatment</PostProcessing>
     </Pipeline>
     
     <Parameters>
