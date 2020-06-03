@@ -464,10 +464,11 @@
             <!-- Initialization action -->
             <!-- Initialization of all variable text fields -->
             <xf:action ev:event="xforms-ready">
-                <!-- Initialization of dynamic arrays -->
+                <!-- Initialization of dynamic arrays and loops -->
                 <xsl:for-each select="//xf:repeat">
                     <xsl:variable name="container" select="@id"/>
                     <xsl:variable name="dynamic-array" select="substring-after(@nodeset,concat($container,'/'))"/>
+                    <!-- Always initialized through the first one if linked loops -->
                     <xsl:if test="//xf:repeat[tokenize(@nodeset,'/')[last()]=$dynamic-array][not(preceding::xf:repeat[tokenize(@nodeset,'/')[last()]=$dynamic-array])]/@id=$container">
                         <xf:action if="not(instance('fr-form-instance')//{$container}/*)
                             or count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
@@ -484,8 +485,8 @@
                             <xf:setvalue ref="instance('fr-form-instance')//{$dynamic-array}-Count"
                                 value="count(instance('fr-form-instance')//{$container}/{$dynamic-array})"/>
                         </xf:action>
-                        <!-- loops without filter -->
-                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array and not(@relevant)]">
+                        <!-- linked loops without filter -->
+                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array and not(//xf:bind[@id=current()/@bind]/@relevant)]">
                             <xsl:if test="@id != $container">
                                 <xf:action if="not(instance('fr-form-instance')//{@id}/*)
                                     or count(instance('fr-form-instance')//{@id}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
@@ -500,10 +501,10 @@
                                 </xf:action>
                             </xsl:if>
                         </xsl:for-each>
-                        <!-- loops with filter -->
-                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array and @relevant]">
+                        <!-- linked loops with filter -->
+                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array and //xf:bind[@id=current()/@bind]/@relevant]">
                             <!-- TODO : the loop is in another loop -->
-                            <xsl:variable name="filter-condition" select="replace(@nodeset,concat(@id,'/',$dynamic-array),concat($dynamic-array,'[@occurrence-id = context()/@occurrence-id]'))"/>
+                            <xsl:variable name="filter-condition" select="//xf:bind[@id=current()/@bind]/@relevant"/>
                             <xf:action iterate="instance('fr-form-instance')//{$container}/{$dynamic-array}">
                                 <xf:action if="not(instance('fr-form-instance')//{@id}/{$dynamic-array}[@occurrence-id = context()/@occurrence-id]) and {$filter-condition}">
                                     <xf:insert context="instance('fr-form-instance')//{@id}"

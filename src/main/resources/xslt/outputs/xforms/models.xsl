@@ -2106,17 +2106,25 @@
                     <xsl:value-of select="$linked-loop-name"/>
                 </xsl:variable>
                 <xsl:variable name="main-loop-name" select="enoxforms:get-business-name(enoxforms:get-linked-containers(.)[1])"/>
-                <xsl:variable name="occurrences-before">
+                <!--<xsl:variable name="occurrences-before">
                     <xsl:value-of select="concat($linked-address,'/',$loop-name,'[@occurrence-id = instance(''fr-form-instance'')//')"/>
                     <xsl:for-each select="tokenize(enoxforms:get-business-ancestors(enoxforms:get-linked-containers(.)[1]),' ')">
                         <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
                     </xsl:for-each>
-                    <xsl:value-of select="concat(enoxforms:get-container-name(enoxforms:get-linked-containers(.)[1]),'/',$loop-name,'[following-sibling::',$loop-name,'[@occurrence-id = current()/ancestor::',$loop-name,'/@occurrence-id]]]')"/>
+                    <xsl:value-of select="concat(enoxforms:get-container-name(enoxforms:get-linked-containers(.)[1]),'/',$loop-name,'[following-sibling::*              [@occurrence-id = context()/ancestor::',$loop-name,'/@occurrence-id]]/@occurrence-id]')"/>
+                </xsl:variable>-->
+                <xsl:variable name="occurrences-before">
+                    <xsl:value-of select="concat($linked-address,'/',$loop-name,'/@occurrence-id = instance(''fr-form-instance'')//')"/>
+                    <xsl:for-each select="tokenize(enoxforms:get-business-ancestors(enoxforms:get-linked-containers(.)[1]),' ')">
+                        <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
+                    </xsl:for-each>
+                    <xsl:value-of select="concat(enoxforms:get-container-name(enoxforms:get-linked-containers(.)[1]),'/',$loop-name,'[@occurrence-id = context()/ancestor::',$loop-name,'preceding-sibling::*/@occurrence-id]/@occurrence-id')"/>
                 </xsl:variable>
 
                 <xf:action ev:event="xforms-value-changed" if="({$loop-filter-condition}) and not({$linked-address}/{$loop-name}[@occurrence-id = current()/ancestor::{$loop-name}/@occurrence-id])">
                     <xf:insert if="exists({$occurrences-before})" context="{$linked-address}" nodeset="{$linked-address}/{$loop-name}" at="count({$occurrences-before})" position="after" origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
                     <xf:insert if="not(exists({$occurrences-before}))" context="{$linked-address}" nodeset="{$linked-address}/{$loop-name}" at="1" position="before" origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
+                    <!--<xf:insert context="{$linked-address}" nodeset="{$linked-address}/{$loop-name}" at="count({$occurrences-before})" position="after" origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>-->
                     <xf:setvalue ref="{$linked-address}/{$loop-name}[@occurrence-id = '']/@occurrence-id" value="context()/ancestor::{$loop-name}/@occurrence-id"/>
                 </xf:action>
             </xsl:for-each>
@@ -2310,7 +2318,7 @@
             </xhtml:thead>
             <xhtml:tbody>
                 <!-- if the loop is in a loop, instance-ancestor helps choosing the good ancestor loop instance -->
-                <xf:repeat id="{$container-name}" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
+                <xf:repeat id="{$container-name}" bind="{$container-name}-bind" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
                     <xf:var name="{$container-name}-position" value="position()"/>
                     <!-- the table has a repeated zone that may have more than one line -->
                     <xsl:for-each select="enoxforms:get-body-lines($source-context)">
@@ -2514,7 +2522,7 @@
             </xsl:for-each>
         </xsl:variable>
 
-        <xf:repeat id="{$container-name}" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
+        <xf:repeat id="{$container-name}" bind="{$container-name}-bind" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
             <xf:var name="{$container-name}-position" value="position()"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
