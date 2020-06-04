@@ -485,8 +485,8 @@
                             <xf:setvalue ref="instance('fr-form-instance')//{$dynamic-array}-Count"
                                 value="count(instance('fr-form-instance')//{$container}/{$dynamic-array})"/>
                         </xf:action>
-                        <!-- linked loops without filter -->
-                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array and not(//xf:bind[@id=current()/@bind]/@relevant)]">
+                        <!-- linked loops -->
+                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array]">
                             <xsl:if test="@id != $container">
                                 <xf:action if="not(instance('fr-form-instance')//{@id}/*)
                                     or count(instance('fr-form-instance')//{@id}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
@@ -500,23 +500,6 @@
                                     </xf:action>
                                 </xf:action>
                             </xsl:if>
-                        </xsl:for-each>
-                        <!-- linked loops with filter -->
-                        <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array and //xf:bind[@id=current()/@bind]/@relevant]">
-                            <!-- TODO : the loop is in another loop -->
-                            <xsl:variable name="filter-condition" select="//xf:bind[@id=current()/@bind]/@relevant"/>
-                            <xf:action iterate="instance('fr-form-instance')//{$container}/{$dynamic-array}">
-                                <xf:action if="not(instance('fr-form-instance')//{@id}/{$dynamic-array}[@occurrence-id = context()/@occurrence-id]) and {$filter-condition}">
-                                    <xf:insert context="instance('fr-form-instance')//{@id}"
-                                        nodeset="instance('fr-form-instance')//{@id}/{$dynamic-array}"
-                                        at="count(instance('fr-form-instance')//{@id}/{$dynamic-array}[@occurrence-id = context()/preceding-sibling::{$dynamic-array}/@occurrence-id])"
-                                        position="after"
-                                        origin="instance('fr-form-loop-model')/{@id}/{$dynamic-array}"/>
-                                    <xf:setvalue
-                                        ref="instance('fr-form-instance')//{@id}/{$dynamic-array}[count(instance('fr-form-instance')//{@id}/{$dynamic-array}[@occurrence-id = context()/preceding-sibling::{$dynamic-array}/@occurrence-id])+1]/@occurrence-id"
-                                        value="context()/@occurrence-id"/>
-                                </xf:action>
-                            </xf:action>
                         </xsl:for-each>
                     </xsl:if>
                 </xsl:for-each>
