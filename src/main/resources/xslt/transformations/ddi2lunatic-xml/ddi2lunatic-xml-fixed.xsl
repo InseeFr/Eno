@@ -3,7 +3,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
+    xmlns:enofodt="http://xml.insee.fr/apps/eno/out/odt"
     xmlns:enolunatic="http://xml.insee.fr/apps/eno/out/js"
+    xmlns:enoddi2xforms="http://xml.insee.fr/apps/eno/ddi2form-runner"
     xmlns:d="ddi:datacollection:3_3"
     xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
@@ -88,12 +90,9 @@
     <xsl:variable name="conditioning-variable-end" select="$properties//TextConditioningVariable/ddi/After"/>
     
     <xsl:variable name="filter-type" select="$properties//Filter"/>
-
-    <xsl:variable name="regex-var" select="'[a-zA-Z0-9\-_]*'"/>
-    <xsl:variable name="regex-var-surrounded" select="concat($conditioning-variable-begin,$regex-var,$conditioning-variable-end)"/>
-    <xsl:variable name="regex-var-large-surrounded" select="concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$regex-var-surrounded,'\)')"/>
     
     <xsl:function name="enolunatic:get-variable-business-name">
+        <xsl:param name="context" as="item()"/>
         <xsl:param name="variable"/>        
         <xsl:call-template name="enoddi:get-business-name">
             <xsl:with-param name="variable" select="$variable"/>
@@ -167,10 +166,27 @@
         
         <xsl:variable name="formulaReadOnly" select="enoddi:get-deactivatable-ancestors($context)" as="xs:string*"/>
         <xsl:variable name="formulaRelevant" select="enoddi:get-hideable-ancestors($context)" as="xs:string*"/>		
-
+        <xsl:variable name="variablesReadOnly" select="enoddi:get-deactivatable-ancestors-variables($context)" as="xs:string*"/>
+        <xsl:variable name="variablesRelevant" select="enoddi:get-hideable-ancestors-variables($context)" as="xs:string*"/>
+        
+        <xsl:variable name="variableFilterId" as="xs:string*">
+            <xsl:for-each select="distinct-values($variablesRelevant)">
+                <xsl:sequence select="."/>
+            </xsl:for-each>
+            <xsl:for-each select="distinct-values($variablesReadOnly)">
+                <xsl:sequence select="."/>
+            </xsl:for-each>
+        </xsl:variable>
+        
+        <xsl:variable name="variablesId" as="xs:string*">
+            <xsl:for-each select="distinct-values($variableFilterId)">
+                <xsl:sequence select="."/>
+            </xsl:for-each>
+        </xsl:variable>
+        
         <xsl:choose>
             <xsl:when test="$filter-type='sdmx'">
-                <xsl:copy-of select="normalize-space(enolunatic:get-vtl-sdmx-filter($context,$formulaReadOnly,$formulaRelevant))"/>
+                <xsl:copy-of select="normalize-space(enolunatic:get-vtl-sdmx-filter($context,$formulaReadOnly,$formulaRelevant,$variablesId))"/>
             </xsl:when>
         </xsl:choose>
         
@@ -196,6 +212,8 @@
     <xsl:function name="enolunatic:surround-label-with-quote">
         <xsl:param name="label"/>
         <xsl:variable name="labelSimple" select="concat('&quot;',$label,'&quot;')"/>
+        <xsl:variable name="regex-var" select="'[a-zA-Z0-9\-_]*'"/>
+        <xsl:variable name="regex-var-surrounded" select="concat($conditioning-variable-begin,$regex-var,$conditioning-variable-end)"/>
         <xsl:variable name="final-label">
             <xsl:analyze-string select="$labelSimple" regex="{$regex-var-surrounded}">
                 <xsl:matching-substring>
@@ -218,6 +236,7 @@
         <xsl:param name="context" as="item()"/>
         <xsl:param name="formulaReadOnly" as="xs:string*"/>
         <xsl:param name="formulaRelevant" as="xs:string*"/>
+        <xsl:param name="variablesId" as="xs:string*"/>
         
         <!--Expression VTL : if(condition) then "i'm true" else "i'm false"-->
         <xsl:variable name="if" select="' if '"/>
@@ -335,62 +354,20 @@
     <xsl:function name="enolunatic:replace-variable-with-collected-and-external-variables-formula">
         <xsl:param name="context" as="item()"/>
         <xsl:param name="variable"/>
-
-        <xsl:variable name="temp" select="enoddi:get-generation-instruction($context,enolunatic:get-variable-business-name($variable))"/>
+        
+        <xsl:variable name="temp" select="enoddi:get-generation-instruction($context,$variable)"/>
         <xsl:choose>
             <xsl:when test="$temp!=''">
-                <xsl:value-of select="enoddi:get-variable-calculation($temp)"/>
+                <xsl:variable name="variableCalculation" select="enoddi:get-variable-calculation($temp)"/>                
+                <xsl:call-template name="enolunatic:replace-variables-in-formula">
+                    <xsl:with-param name="source-context" select="$context"/>
+                    <xsl:with-param name="formula" select="$variableCalculation"/>
+                </xsl:call-template>
             </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$variable"/>
-            </xsl:otherwise>
+            <xsl:otherwise><xsl:value-of select="$variable"/></xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-
-    <xsl:function name="enolunatic:replace-all-variables-with-business-name">
-        <xsl:param name="context" as="item()"/>
-        <xsl:param name="formula"/>
-
-        <xsl:variable name="temp-formula">
-            <xsl:choose>
-                <xsl:when test="$formula">
-                    <xsl:analyze-string select="$formula" regex="{$regex-var-large-surrounded}">
-                        <xsl:matching-substring>
-                            <xsl:variable name="temp" select="replace(replace(.,
-                                concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$conditioning-variable-begin),''),
-                                concat($conditioning-variable-end,'\)'),'')"/>
-                            <xsl:variable name="var" select="replace(replace($temp,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
-                            <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($context,$var)"/>
-                            <xsl:value-of select="enolunatic:get-cast-variable($typeVariable,enolunatic:get-variable-business-name($var))"/>
-                        </xsl:matching-substring>
-                        <xsl:non-matching-substring>
-                            <xsl:value-of select="."/>
-                        </xsl:non-matching-substring>
-                    </xsl:analyze-string>
-                </xsl:when>
-                <xsl:otherwise><xsl:value-of select="$formula"/></xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="final-formula">
-            <xsl:choose>
-                <xsl:when test="$temp-formula">
-                    <xsl:analyze-string select="$temp-formula" regex="{$regex-var-surrounded}">
-                        <xsl:matching-substring>
-                            <xsl:variable name="var" select="replace(replace(.,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
-                            <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($context,$var)"/>
-                            <xsl:value-of select="enolunatic:get-cast-variable($typeVariable,enolunatic:get-variable-business-name($var))"/>
-                        </xsl:matching-substring>
-                        <xsl:non-matching-substring>
-                            <xsl:value-of select="."/>
-                        </xsl:non-matching-substring>
-                    </xsl:analyze-string>
-                </xsl:when>
-                <xsl:otherwise><xsl:value-of select="$temp-formula"/></xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:value-of select="$final-formula"/>
-    </xsl:function>
-
+    
     <xd:doc>
         <xd:desc>
             <xd:p>Function: enolunatic:get-cast-variable.</xd:p>
@@ -418,34 +395,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-
-    <xsl:function name="enolunatic:find-variables-in-formula">
-        <xsl:param name="formula"/>
-        <xsl:if test="$formula">
-            <xsl:variable name="variables" as="xs:string*">
-                <xsl:analyze-string select="$formula" regex="{$regex-var-large-surrounded}">
-                    <xsl:matching-substring>
-                        <xsl:variable name="temp" select="replace(replace(.,
-                                concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$conditioning-variable-begin),''),
-                                concat($conditioning-variable-end,'\)'),'')"/>
-                        <xsl:variable name="var" select="replace(replace($temp,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
-                        <xsl:copy-of select="$var"/>
-                    </xsl:matching-substring>
-                </xsl:analyze-string>
-                <xsl:analyze-string select="$formula" regex="{$regex-var-surrounded}">
-                    <xsl:matching-substring>
-                        <xsl:variable name="var" select="replace(replace(.,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
-                        <xsl:copy-of select="$var"/>
-                    </xsl:matching-substring>
-                </xsl:analyze-string>
-            </xsl:variable>
-
-            <xsl:for-each select="distinct-values($variables)">
-                <xsl:sequence select="."/>
-            </xsl:for-each>
-        </xsl:if>
-    </xsl:function>
-
     <xd:doc>
         <xd:desc>
             <xd:p>Recursive named template: enolunatic:replace-variables-in-formula.</xd:p>
@@ -457,43 +406,28 @@
     <xsl:template name="enolunatic:replace-variables-in-formula">
         <xsl:param name="source-context" as="item()"/>
         <xsl:param name="formula"/>
-
-        <xsl:variable name="variablesFound" as="xs:string*" select="enolunatic:find-variables-in-formula($formula)"/>
-
-        <xsl:variable name="conditions" as="xs:boolean*">
-            <xsl:for-each select="$variablesFound">
-                <xsl:value-of select=".!=enolunatic:replace-variable-with-collected-and-external-variables-formula($source-context,.)"/>
-            </xsl:for-each>
-        </xsl:variable>
-
-        <xsl:variable name="conditionToContinue" as="xs:boolean">
-            <xsl:value-of select="count($conditions[.=true()])=count($conditions) and count($conditions)!=0"/>
-        </xsl:variable>
-
+        
+        <xsl:variable name="regex-var" select="'[a-zA-Z0-9\-_]*'"/>
+        <xsl:variable name="regex-var-surrounded" select="concat($conditioning-variable-begin,$regex-var,$conditioning-variable-end)"/>
+        <xsl:variable name="regex-var-large-surrounded" select="concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$regex-var-surrounded,'\)')"/>
+        
         <xsl:choose>
-            <xsl:when test="$conditionToContinue">
+            <xsl:when test="matches($formula,$regex-var-surrounded)">
                 <xsl:variable name="temp-formula">
                     <xsl:analyze-string select="$formula" regex="{$regex-var-large-surrounded}">
                         <xsl:matching-substring>
                             <xsl:variable name="temp" select="replace(replace(.,
                                 concat('number\(if\s+\(',$regex-var-surrounded,'=''''\)\sthen\s+''0''\s+else\s+',$conditioning-variable-begin),''),
-                                concat($conditioning-variable-end,'\)'),'')"/>
+                                concat($conditioning-variable-end,'\)'),'')"/>	
                             <xsl:variable name="var" select="replace(replace($temp,$conditioning-variable-begin,''),$conditioning-variable-end,'')"/>
                             <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($source-context,$var)"/>
                             <xsl:variable name="value-var" select="enolunatic:replace-variable-with-collected-and-external-variables-formula(
                                 $source-context,
-                                $var)"/>
-                            <xsl:choose>
-                                <xsl:when test="$var!=$value-var">
-                                    <xsl:value-of select="enolunatic:get-cast-variable($typeVariable,$value-var)"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="concat($conditioning-variable-begin,$var,$conditioning-variable-end)"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                                enolunatic:get-variable-business-name($source-context,$var))"/>
+                            <xsl:value-of select="enolunatic:get-cast-variable($typeVariable,$value-var)"/>
                         </xsl:matching-substring>
                         <xsl:non-matching-substring>
-                            <xsl:value-of select="."/>
+                            <xsl:value-of select="."/>							
                         </xsl:non-matching-substring>
                     </xsl:analyze-string>
                 </xsl:variable>
@@ -504,15 +438,8 @@
                             <xsl:variable name="typeVariable" select="enoddi:get-variable-representation($source-context,$var)"/>
                             <xsl:variable name="value-var" select="enolunatic:replace-variable-with-collected-and-external-variables-formula(
                                 $source-context,
-                                $var)"/>
-                            <xsl:choose>
-                                <xsl:when test="$var!=$value-var">
-                                    <xsl:value-of select="enolunatic:get-cast-variable($typeVariable,$value-var)"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="concat($conditioning-variable-begin,$var,$conditioning-variable-end)"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                                enolunatic:get-variable-business-name($source-context,$var))"/>
+                            <xsl:value-of select="enolunatic:get-cast-variable($typeVariable,$value-var)"/>
                         </xsl:matching-substring>
                         <xsl:non-matching-substring>
                             <xsl:value-of select="."/>
@@ -529,5 +456,4 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
 </xsl:stylesheet>

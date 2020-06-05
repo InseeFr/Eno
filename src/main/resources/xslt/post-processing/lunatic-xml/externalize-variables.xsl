@@ -46,4 +46,11 @@
             <xsl:apply-templates select="*[not(self::h:variables)]"/>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template match="h:variables">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:copy-of select="./*"/>
+        </xsl:copy>
+    </xsl:template>
 </xsl:stylesheet>
