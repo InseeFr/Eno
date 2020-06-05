@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Questionnaire xmlns="http://xml.insee.fr/schema/applis/lunatic-h"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
     <components xsi:type="Sequence" componentType="Sequence" id="TIME-COMMENT-SEQ">
-        <label>"Temps de réponse et commentaires"</label>      
+        <label>"Temps de réponse et commentaires"</label>
         <conditionFilter>"normal"</conditionFilter>
+        <bindingsDependency>false</bindingsDependency>
         <components xsi:type="InputNumber"
-            componentType="InputNumber"
-            id="TIME-QUESTION-HEURE-REMPL"
-            mandatory="false"
-            min="0"
-            max="99"
-            decimals="0">
+                    componentType="InputNumber"
+                    id="TIME-QUESTION-HEURE-REMPL"
+                    mandatory="false"
+                    min="0"
+                    max="99"
+                    decimals="0">
             <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
             <unit>heures</unit>
-            <response name="HEURE_REMPL" xsi:type="ResponseContainerString">
+            <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependency>false</bindingsDependency>
+            <response name="HEURE_REMPL"/>
+            <variables variableType="COLLECTED">
+                <name>HEURE_REMPL</name>
+                <componentRef>TIME-QUESTION-HEURE-REMPL</componentRef>
                 <valueState valueType="PREVIOUS">
                     <value xsi:nil="true"/>
                 </valueState>
@@ -30,23 +36,23 @@
                 <valueState valueType="INPUTED">
                     <value xsi:nil="true"/>
                 </valueState>
-            </response>
-            <conditionFilter>"normal"</conditionFilter>
-            <variables variableType="COLLECTED">
-                <name>HEURE_REMPL</name>
-                <responseRef>HEURE_REMPL</responseRef>
             </variables>
         </components>
         <components xsi:type="InputNumber"
-            componentType="InputNumber"
-            id="TIME-QUESTION-MIN-REMPL"
-            mandatory="false"
-            min="0"
-            max="59"
-            decimals="0">
+                    componentType="InputNumber"
+                    id="TIME-QUESTION-MIN-REMPL"
+                    mandatory="false"
+                    min="0"
+                    max="59"
+                    decimals="0">
             <label></label>
             <unit>minutes</unit>
-            <response name="MIN_REMPL" xsi:type="ResponseContainerString">
+            <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependency>false</bindingsDependency>
+            <response name="MIN_REMPL"/>
+            <variables variableType="COLLECTED">
+                <name>MIN_REMPL</name>
+                <componentRef>TIME-QUESTION-MIN-REMPL</componentRef>
                 <valueState valueType="PREVIOUS">
                     <value xsi:nil="true"/>
                 </valueState>
@@ -62,20 +68,20 @@
                 <valueState valueType="INPUTED">
                     <value xsi:nil="true"/>
                 </valueState>
-            </response>
-            <conditionFilter>"normal"</conditionFilter>
-            <variables variableType="COLLECTED">
-                <name>MIN_REMPL</name>
-                <responseRef>MIN_REMPL</responseRef>
             </variables>
         </components>
         <components xsi:type="Textarea"
-            componentType="Textarea"
-            id="COMMENT-QUESTION"
-            maxLength="2000"
-            mandatory="false">
+                    componentType="Textarea"
+                    id="COMMENT-QUESTION"
+                    maxLength="2000"
+                    mandatory="false">
             <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
-            <response name="COMMENT_QE" xsi:type="ResponseContainerString">
+            <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependency>false</bindingsDependency>
+            <response name="COMMENT_QE"/>
+            <variables variableType="COLLECTED">
+                <name>COMMENT_QE</name>
+                <componentRef>COMMENT-QUESTION</componentRef>
                 <valueState valueType="PREVIOUS">
                     <value xsi:nil="true"/>
                 </valueState>
@@ -91,62 +97,64 @@
                 <valueState valueType="INPUTED">
                     <value xsi:nil="true"/>
                 </valueState>
-            </response>
-            <conditionFilter>"normal"</conditionFilter>
-            <variables variableType="COLLECTED">
-                <name>COMMENT_QE</name>
-                <responseRef>COMMENT_QE</responseRef>
             </variables>
         </components>
     </components>
-    
+
     <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
-        <label>"Commentaire"</label>     
+        <label>"Commentaire"</label>
         <conditionFilter>"normal"</conditionFilter>
+        <bindingsDependency>false</bindingsDependency>
         <components xsi:type="Textarea"
-            componentType="Textarea"
-            id="COMMENT-QUESTION"
-            maxLength="2000"
-            mandatory="false">
+                    componentType="Textarea"
+                    id="COMMENT-QUESTION"
+                    maxLength="2000"
+                    mandatory="false">
             <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
-            <response name="COMMENT_QE" xsi:type="ResponseContainerString">
-                <valueState valueType="PREVIOUS">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="COLLECTED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="FORCED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="EDITED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="INPUTED">
-                    <value xsi:nil="true"/>
-                </valueState>
-            </response>
             <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependency>false</bindingsDependency>
+            <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED">
                 <name>COMMENT_QE</name>
-                <responseRef>COMMENT_QE</responseRef>
+                <componentRef>COMMENT-QUESTION</componentRef>
+                <valueState valueType="PREVIOUS">
+                    <value xsi:nil="true"/>
+                </valueState>
+                <valueState valueType="COLLECTED">
+                    <value xsi:nil="true"/>
+                </valueState>
+                <valueState valueType="FORCED">
+                    <value xsi:nil="true"/>
+                </valueState>
+                <valueState valueType="EDITED">
+                    <value xsi:nil="true"/>
+                </valueState>
+                <valueState valueType="INPUTED">
+                    <value xsi:nil="true"/>
+                </valueState>
             </variables>
         </components>
     </components>
-    
+
     <components xsi:type="Sequence" componentType="Sequence" id="TIME-SEQ">
-        <label>"Temps de réponse"</label>        
+        <label>"Temps de réponse"</label>
         <conditionFilter>"normal"</conditionFilter>
+        <bindingsDependency>false</bindingsDependency>
         <components xsi:type="InputNumber"
-            componentType="InputNumber"
-            id="TIME-QUESTION-HEURE-REMPL"
-            mandatory="false"
-            min="0"
-            max="99"
-            decimals="0">
+                    componentType="InputNumber"
+                    id="TIME-QUESTION-HEURE-REMPL"
+                    mandatory="false"
+                    min="0"
+                    max="99"
+                    decimals="0">
             <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
             <unit>heures</unit>
-            <response name="HEURE_REMPL" xsi:type="ResponseContainerString">
+            <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependency>false</bindingsDependency>
+            <response name="HEURE_REMPL"/>
+            <variables variableType="COLLECTED">
+                <name>HEURE_REMPL</name>
+                <componentRef>TIME-QUESTION-HEURE-REMPL</componentRef>
                 <valueState valueType="PREVIOUS">
                     <value xsi:nil="true"/>
                 </valueState>
@@ -162,23 +170,23 @@
                 <valueState valueType="INPUTED">
                     <value xsi:nil="true"/>
                 </valueState>
-            </response>
-            <conditionFilter>"normal"</conditionFilter>
-            <variables variableType="COLLECTED">
-                <name>HEURE_REMPL</name>
-                <responseRef>HEURE_REMPL</responseRef>
             </variables>
         </components>
         <components xsi:type="InputNumber"
-            componentType="InputNumber"
-            id="TIME-QUESTION-MIN-REMPL"
-            mandatory="false"
-            min="0"
-            max="59"
-            decimals="0">
+                    componentType="InputNumber"
+                    id="TIME-QUESTION-MIN-REMPL"
+                    mandatory="false"
+                    min="0"
+                    max="59"
+                    decimals="0">
             <label></label>
             <unit>minutes</unit>
-            <response name="MIN_REMPL" xsi:type="ResponseContainerString">
+            <conditionFilter>"normal"</conditionFilter>
+            <bindingsDependency>false</bindingsDependency>
+            <response name="MIN_REMPL"/>
+            <variables variableType="COLLECTED">
+                <name>MIN_REMPL</name>
+                <componentRef>TIME-QUESTION-MIN-REMPL</componentRef>
                 <valueState valueType="PREVIOUS">
                     <value xsi:nil="true"/>
                 </valueState>
@@ -194,13 +202,7 @@
                 <valueState valueType="INPUTED">
                     <value xsi:nil="true"/>
                 </valueState>
-            </response>
-            <conditionFilter>"normal"</conditionFilter>
-            <variables variableType="COLLECTED">
-                <name>MIN_REMPL</name>
-                <responseRef>MIN_REMPL</responseRef>
             </variables>
         </components>
     </components>
-    
 </Questionnaire>
