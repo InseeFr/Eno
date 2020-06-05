@@ -12,7 +12,6 @@
          <label>"We're going to test your knowledge about the simpsons series.Welcome in the simspons world!"</label>
       </declarations>
       <conditionFilter>"normal"</conditionFilter>
-      <bindingsDependency>false</bindingsDependency>
       <components xsi:type="Textarea"
                   componentType="Textarea"
                   id="j6p3dkx6"
@@ -20,8 +19,23 @@
                   mandatory="false">
          <label>"➡ 1. Before starting, do you have any comments about the Simpsons family?"</label>
          <conditionFilter>"normal"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
-         <response name="COMMENT"/>
+         <response name="COMMENT" xsi:type="ResponseContainerString">
+            <valueState valueType="PREVIOUS">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="COLLECTED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="FORCED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="EDITED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="INPUTED">
+               <value xsi:nil="true"/>
+            </valueState>
+         </response>
       </components>
       <components xsi:type="CheckboxBoolean"
                   componentType="CheckboxBoolean"
@@ -29,20 +43,33 @@
                   mandatory="false">
          <label>"➡ 2. Are you ready?"</label>
          <conditionFilter>"normal"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
-         <response name="READY"/>
+         <response name="READY" xsi:type="ResponseContainerBoolean">
+            <valueState valueType="PREVIOUS">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="COLLECTED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="FORCED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="EDITED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="INPUTED">
+               <value xsi:nil="true"/>
+            </valueState>
+         </response>
       </components>
       <components xsi:type="FilterDescription"
                   componentType="FilterDescription"
                   id="j6p6my1d"
                   filterDescription="false">
          <label>"If you are not ready, please go to the end of the questionnaire"</label>
-         <bindingsDependency>false</bindingsDependency>
       </components>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6p0s7o5">
          <label>"General knowledge of the series"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <components xsi:type="Input"
                      componentType="Input"
                      id="j3343qhx"
@@ -50,8 +77,23 @@
                      mandatory="false">
             <label>"➡ 3. Who is the producer?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
-            <response name="PRODUCER"/>
+            <response name="PRODUCER" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+            </response>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -62,8 +104,23 @@
                      decimals="0">
             <label>"➡ 4. What is the current season number?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
-            <response name="SEASON_NUMBER"/>
+            <response name="SEASON_NUMBER" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+            </response>
          </components>
          <components xsi:type="Datepicker"
                      componentType="Datepicker"
@@ -78,9 +135,24 @@
                <label>"For your information, the date of the last broadcast was on " || cast(cast(LAST_BROADCAST,string),string) || " "</label>
             </declarations>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-            <bindingsDependency>true</bindingsDependency>
             <dateFormat>YYYY-MM-DD</dateFormat>
-            <response name="DATEFIRST"/>
+            <response name="DATEFIRST" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+            </response>
          </components>
          <components xsi:type="InputNumber"
                      componentType="InputNumber"
@@ -91,8 +163,23 @@
                      decimals="1">
             <label>"➡ 6. In your opinion, how much is the part of audience share in US for the 2016 season?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
-            <response name="AUDIENCE_SHARE"/>
+            <response name="AUDIENCE_SHARE" xsi:type="ResponseContainerString">
+               <valueState valueType="PREVIOUS">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+            </response>
          </components>
       </components>
    </components>
@@ -104,7 +191,6 @@
          <label>"This module asks about your general knowledge of the Simpsons city"</label>
       </declarations>
       <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-      <bindingsDependency>false</bindingsDependency>
       <components xsi:type="Radio"
                   componentType="Radio"
                   id="j3343clt"
@@ -116,7 +202,6 @@
             <label>"One possible answer"</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <options>
             <value>00001</value>
             <label>"Springfield"</label>
@@ -129,7 +214,23 @@
             <value>00003</value>
             <label>"Seinfeld"</label>
          </options>
-         <response name="CITY"/>
+         <response name="CITY" xsi:type="ResponseContainerString">
+            <valueState valueType="PREVIOUS">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="COLLECTED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="FORCED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="EDITED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="INPUTED">
+               <value xsi:nil="true"/>
+            </valueState>
+         </response>
       </components>
       <components xsi:type="CheckboxOne"
                   componentType="CheckboxOne"
@@ -142,7 +243,6 @@
             <label>"Only one possible answer"</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <options>
             <value>1</value>
             <label>"Constance Harm"</label>
@@ -159,7 +259,23 @@
             <value>4</value>
             <label>"Poochie"</label>
          </options>
-         <response name="MAYOR"/>
+         <response name="MAYOR" xsi:type="ResponseContainerString">
+            <valueState valueType="PREVIOUS">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="COLLECTED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="FORCED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="EDITED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="INPUTED">
+               <value xsi:nil="true"/>
+            </valueState>
+         </response>
       </components>
       <components xsi:type="Dropdown"
                   componentType="Dropdown"
@@ -167,7 +283,6 @@
                   mandatory="false">
          <label>"➡ 3. In which state do The Simpsons reside?"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <options>
             <value>1</value>
             <label>"Washington"</label>
@@ -220,13 +335,28 @@
             <value>13</value>
             <label>"Not in any state, you fool!"</label>
          </options>
-         <response name="STATE"/>
+         <response name="STATE" xsi:type="ResponseContainerString">
+            <valueState valueType="PREVIOUS">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="COLLECTED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="FORCED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="EDITED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="INPUTED">
+               <value xsi:nil="true"/>
+            </valueState>
+         </response>
       </components>
    </components>
    <components xsi:type="Sequence" componentType="Sequence" id="j6qe0h9q">
       <label>"III - Characters"</label>
       <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-      <bindingsDependency>false</bindingsDependency>
       <components xsi:type="CheckboxGroup"
                   componentType="CheckboxGroup"
                   id="j334akov">
@@ -237,22 +367,85 @@
             <label>"Several possible answers"</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <responses id="j334akov-QOP-jbgd8qmn">
             <label>"Santa's Little Helper"</label>
-            <response name="PET1"/>
+            <response name="PET1" xsi:type="ResponseContainerBoolean">
+               <valueState valueType="PREVIOUS">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+            </response>
          </responses>
          <responses id="j334akov-QOP-jbgd60vl">
             <label>"Snowball I"</label>
-            <response name="PET2"/>
+            <response name="PET2" xsi:type="ResponseContainerBoolean">
+               <valueState valueType="PREVIOUS">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+            </response>
          </responses>
          <responses id="j334akov-QOP-jbgda2jo">
             <label>"Coltrane"</label>
-            <response name="PET3"/>
+            <response name="PET3" xsi:type="ResponseContainerBoolean">
+               <valueState valueType="PREVIOUS">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+            </response>
          </responses>
          <responses id="j334akov-QOP-jbgdfssy">
             <label>"Mojo the Helper Monkey"</label>
-            <response name="PET4"/>
+            <response name="PET4" xsi:type="ResponseContainerBoolean">
+               <valueState valueType="PREVIOUS">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="COLLECTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="FORCED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="EDITED">
+                  <value xsi:nil="true"/>
+               </valueState>
+               <valueState valueType="INPUTED">
+                  <value xsi:nil="true"/>
+               </valueState>
+            </response>
          </responses>
       </components>
       <components xsi:type="Table"
@@ -267,7 +460,6 @@
             <label>"Now we are going to know if you think that Jay is a gluton."</label>
          </declarations>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -282,7 +474,23 @@
                   <value>0</value>
                   <label>"No"</label>
                </options>
-               <response name="ICE_FLAVOUR1"/>
+               <response name="ICE_FLAVOUR1" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
@@ -299,7 +507,23 @@
                   <value>0</value>
                   <label>"No"</label>
                </options>
-               <response name="ICE_FLAVOUR2"/>
+               <response name="ICE_FLAVOUR2" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
@@ -316,7 +540,23 @@
                   <value>0</value>
                   <label>"No"</label>
                </options>
-               <response name="ICE_FLAVOUR3"/>
+               <response name="ICE_FLAVOUR3" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
@@ -333,7 +573,23 @@
                   <value>0</value>
                   <label>"No"</label>
                </options>
-               <response name="ICE_FLAVOUR4"/>
+               <response name="ICE_FLAVOUR4" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
       </components>
@@ -344,7 +600,6 @@
                   mandatory="false">
          <label>"➡ 3. Which character works in the nuclear power plant?"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -359,7 +614,23 @@
                   <value>0</value>
                   <label>"No"</label>
                </options>
-               <response name="NUCLEAR_CHARACTER1"/>
+               <response name="NUCLEAR_CHARACTER1" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
@@ -376,7 +647,23 @@
                   <value>0</value>
                   <label>"No"</label>
                </options>
-               <response name="NUCLEAR_CHARACTER2"/>
+               <response name="NUCLEAR_CHARACTER2" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
@@ -393,7 +680,23 @@
                   <value>0</value>
                   <label>"No"</label>
                </options>
-               <response name="NUCLEAR_CHARACTER3"/>
+               <response name="NUCLEAR_CHARACTER3" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
@@ -410,7 +713,23 @@
                   <value>0</value>
                   <label>"No"</label>
                </options>
-               <response name="NUCLEAR_CHARACTER4"/>
+               <response name="NUCLEAR_CHARACTER4" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
       </components>
@@ -421,7 +740,6 @@
                   mandatory="false">
          <label>"➡ 4. In which city each character was born?"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <cells type="line">
             <cells>
                <value>1</value>
@@ -448,7 +766,23 @@
                   <value>5</value>
                   <label>"Dagstuhl"</label>
                </options>
-               <response name="BIRTH_CHARACTER1"/>
+               <response name="BIRTH_CHARACTER1" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
@@ -477,7 +811,23 @@
                   <value>5</value>
                   <label>"Dagstuhl"</label>
                </options>
-               <response name="BIRTH_CHARACTER2"/>
+               <response name="BIRTH_CHARACTER2" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
@@ -506,7 +856,23 @@
                   <value>5</value>
                   <label>"Dagstuhl"</label>
                </options>
-               <response name="BIRTH_CHARACTER3"/>
+               <response name="BIRTH_CHARACTER3" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
@@ -535,7 +901,23 @@
                   <value>5</value>
                   <label>"Dagstuhl"</label>
                </options>
-               <response name="BIRTH_CHARACTER4"/>
+               <response name="BIRTH_CHARACTER4" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
@@ -564,7 +946,23 @@
                   <value>5</value>
                   <label>"Dagstuhl"</label>
                </options>
-               <response name="BIRTH_CHARACTER5"/>
+               <response name="BIRTH_CHARACTER5" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
       </components>
@@ -572,11 +970,9 @@
    <components xsi:type="Sequence" componentType="Sequence" id="j4nw88h2">
       <label>"IV - General questions"</label>
       <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-      <bindingsDependency>false</bindingsDependency>
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qe237q">
          <label>"Kwik-E-Mart"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <components xsi:type="Table"
                      componentType="Table"
                      id="j4nwc63q"
@@ -584,7 +980,6 @@
                      mandatory="false">
             <label>"➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
             <cells type="header">
                <cells headerCell="true" colspan="2">
                   <label/>
@@ -608,7 +1003,23 @@
                       max="100.0"
                       decimals="1">
                   <unit>%</unit>
-                  <response name="PERCENTAGE_EXPENSES11"/>
+                  <response name="PERCENTAGE_EXPENSES11" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -622,7 +1033,23 @@
                       max="100.0"
                       decimals="1">
                   <unit>%</unit>
-                  <response name="PERCENTAGE_EXPENSES21"/>
+                  <response name="PERCENTAGE_EXPENSES21" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -640,7 +1067,23 @@
                       max="100.0"
                       decimals="1">
                   <unit>%</unit>
-                  <response name="PERCENTAGE_EXPENSES31"/>
+                  <response name="PERCENTAGE_EXPENSES31" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -654,7 +1097,23 @@
                       max="100.0"
                       decimals="1">
                   <unit>%</unit>
-                  <response name="PERCENTAGE_EXPENSES41"/>
+                  <response name="PERCENTAGE_EXPENSES41" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -668,7 +1127,23 @@
                       max="100.0"
                       decimals="1">
                   <unit>%</unit>
-                  <response name="PERCENTAGE_EXPENSES51"/>
+                  <response name="PERCENTAGE_EXPENSES51" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -686,7 +1161,23 @@
                       max="100.0"
                       decimals="1">
                   <unit>%</unit>
-                  <response name="PERCENTAGE_EXPENSES61"/>
+                  <response name="PERCENTAGE_EXPENSES61" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -700,7 +1191,23 @@
                       max="100.0"
                       decimals="1">
                   <unit>%</unit>
-                  <response name="PERCENTAGE_EXPENSES71"/>
+                  <response name="PERCENTAGE_EXPENSES71" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
          </components>
@@ -708,7 +1215,6 @@
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qejudb">
          <label>"Clowning"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <components xsi:type="Table"
                      componentType="Table"
                      id="j4nw0rr6"
@@ -716,7 +1222,6 @@
                      mandatory="false">
             <label>"➡ 2. Who did these clownings and tell us what you remember?"</label>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
             <cells type="header">
                <cells headerCell="true">
                   <label/>
@@ -750,10 +1255,42 @@
                      <value>4</value>
                      <label>"Maggie"</label>
                   </options>
-                  <response name="CLOWNING11"/>
+                  <response name="CLOWNING11" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgdit3o" componentType="Textarea" maxLength="255">
-                  <response name="CLOWNING12"/>
+                  <response name="CLOWNING12" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -778,10 +1315,42 @@
                      <value>4</value>
                      <label>"Maggie"</label>
                   </options>
-                  <response name="CLOWNING21"/>
+                  <response name="CLOWNING21" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgd366k" componentType="Textarea" maxLength="255">
-                  <response name="CLOWNING22"/>
+                  <response name="CLOWNING22" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -806,10 +1375,42 @@
                      <value>4</value>
                      <label>"Maggie"</label>
                   </options>
-                  <response name="CLOWNING31"/>
+                  <response name="CLOWNING31" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgdax06" componentType="Textarea" maxLength="255">
-                  <response name="CLOWNING32"/>
+                  <response name="CLOWNING32" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -834,10 +1435,42 @@
                      <value>4</value>
                      <label>"Maggie"</label>
                   </options>
-                  <response name="CLOWNING41"/>
+                  <response name="CLOWNING41" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j4nw0rr6-QOP-jbgdfo1j" componentType="Textarea" maxLength="255">
-                  <response name="CLOWNING42"/>
+                  <response name="CLOWNING42" xsi:type="ResponseContainerString">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
          </components>
@@ -845,7 +1478,6 @@
       <components xsi:type="Subsequence" componentType="Subsequence" id="j6qeh91y">
          <label>"Transport"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <components xsi:type="Table"
                      componentType="Table"
                      id="j6p2lwuj"
@@ -858,7 +1490,6 @@
                <label>"Several answers possible: check off all the relevant boxes"</label>
             </declarations>
             <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
             <cells type="header">
                <cells headerCell="true">
                   <label/>
@@ -888,22 +1519,118 @@
                   <label>"Car"</label>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd92mb" componentType="CheckboxBoolean">
-                  <response name="TRAVEL11"/>
+                  <response name="TRAVEL11" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdnxkt" componentType="CheckboxBoolean">
-                  <response name="TRAVEL12"/>
+                  <response name="TRAVEL12" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdcppc" componentType="CheckboxBoolean">
-                  <response name="TRAVEL13"/>
+                  <response name="TRAVEL13" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd4r2a" componentType="CheckboxBoolean">
-                  <response name="TRAVEL14"/>
+                  <response name="TRAVEL14" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd9cff" componentType="CheckboxBoolean">
-                  <response name="TRAVEL15"/>
+                  <response name="TRAVEL15" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdiva0" componentType="CheckboxBoolean">
-                  <response name="TRAVEL16"/>
+                  <response name="TRAVEL16" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -912,22 +1639,118 @@
                   <label>"Bike"</label>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdgsat" componentType="CheckboxBoolean">
-                  <response name="TRAVEL21"/>
+                  <response name="TRAVEL21" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd3ef5" componentType="CheckboxBoolean">
-                  <response name="TRAVEL22"/>
+                  <response name="TRAVEL22" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd4cm6" componentType="CheckboxBoolean">
-                  <response name="TRAVEL23"/>
+                  <response name="TRAVEL23" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdkfpq" componentType="CheckboxBoolean">
-                  <response name="TRAVEL24"/>
+                  <response name="TRAVEL24" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgddwsp" componentType="CheckboxBoolean">
-                  <response name="TRAVEL25"/>
+                  <response name="TRAVEL25" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd7dqf" componentType="CheckboxBoolean">
-                  <response name="TRAVEL26"/>
+                  <response name="TRAVEL26" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -936,22 +1759,118 @@
                   <label>"Skateboard"</label>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdaxk2" componentType="CheckboxBoolean">
-                  <response name="TRAVEL31"/>
+                  <response name="TRAVEL31" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd8p1v" componentType="CheckboxBoolean">
-                  <response name="TRAVEL32"/>
+                  <response name="TRAVEL32" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdd2lo" componentType="CheckboxBoolean">
-                  <response name="TRAVEL33"/>
+                  <response name="TRAVEL33" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd7u52" componentType="CheckboxBoolean">
-                  <response name="TRAVEL34"/>
+                  <response name="TRAVEL34" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdncn8" componentType="CheckboxBoolean">
-                  <response name="TRAVEL35"/>
+                  <response name="TRAVEL35" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdnous" componentType="CheckboxBoolean">
-                  <response name="TRAVEL36"/>
+                  <response name="TRAVEL36" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
             <cells type="line">
@@ -960,22 +1879,118 @@
                   <label>"Plane"</label>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgd7myn" componentType="CheckboxBoolean">
-                  <response name="TRAVEL41"/>
+                  <response name="TRAVEL41" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdgm0c" componentType="CheckboxBoolean">
-                  <response name="TRAVEL42"/>
+                  <response name="TRAVEL42" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdo0ay" componentType="CheckboxBoolean">
-                  <response name="TRAVEL43"/>
+                  <response name="TRAVEL43" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdgfwl" componentType="CheckboxBoolean">
-                  <response name="TRAVEL44"/>
+                  <response name="TRAVEL44" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdnz6b" componentType="CheckboxBoolean">
-                  <response name="TRAVEL45"/>
+                  <response name="TRAVEL45" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
                <cells id="j6p2lwuj-QOP-jbgdkfcz" componentType="CheckboxBoolean">
-                  <response name="TRAVEL46"/>
+                  <response name="TRAVEL46" xsi:type="ResponseContainerBoolean">
+                     <valueState valueType="PREVIOUS">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="COLLECTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="FORCED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="EDITED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                     <valueState valueType="INPUTED">
+                        <value xsi:nil="true"/>
+                     </valueState>
+                  </response>
                </cells>
             </cells>
          </components>
@@ -984,7 +1999,6 @@
    <components xsi:type="Sequence" componentType="Sequence" id="j6qfx9qe">
       <label>"V - Favourite characters"</label>
       <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-      <bindingsDependency>false</bindingsDependency>
       <components xsi:type="Table"
                   componentType="Table"
                   id="j6qg8rc6"
@@ -992,7 +2006,6 @@
                   mandatory="false">
          <label>"➡ 1. Please, complete the following grid with your favourite characters"</label>
          <conditionFilter>if ((not(cast(READY,integer) &lt;&gt;  1) )) then "normal" else "hidden"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <lines min="1" max="10"/>
          <cells type="header">
             <cells headerCell="true">
@@ -1004,122 +2017,442 @@
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdl5jb" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS11"/>
+               <response name="FAVOURITE_CHARACTERS11" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdfndq"
                    componentType="InputNumber"
                    min="0"
                    max="120"
                    decimals="0">
-               <response name="FAVOURITE_CHARACTERS12"/>
+               <response name="FAVOURITE_CHARACTERS12" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgd8lwo" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS21"/>
+               <response name="FAVOURITE_CHARACTERS21" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgd7osi"
                    componentType="InputNumber"
                    min="0"
                    max="120"
                    decimals="0">
-               <response name="FAVOURITE_CHARACTERS22"/>
+               <response name="FAVOURITE_CHARACTERS22" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdbfag" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS31"/>
+               <response name="FAVOURITE_CHARACTERS31" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgd7bnw"
                    componentType="InputNumber"
                    min="0"
                    max="120"
                    decimals="0">
-               <response name="FAVOURITE_CHARACTERS32"/>
+               <response name="FAVOURITE_CHARACTERS32" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdlgja" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS41"/>
+               <response name="FAVOURITE_CHARACTERS41" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgd9k71"
                    componentType="InputNumber"
                    min="0"
                    max="120"
                    decimals="0">
-               <response name="FAVOURITE_CHARACTERS42"/>
+               <response name="FAVOURITE_CHARACTERS42" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgd745y" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS51"/>
+               <response name="FAVOURITE_CHARACTERS51" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdimks"
                    componentType="InputNumber"
                    min="0"
                    max="120"
                    decimals="0">
-               <response name="FAVOURITE_CHARACTERS52"/>
+               <response name="FAVOURITE_CHARACTERS52" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdjkts" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS61"/>
+               <response name="FAVOURITE_CHARACTERS61" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdjquz"
                    componentType="InputNumber"
                    min="0"
                    max="120"
                    decimals="0">
-               <response name="FAVOURITE_CHARACTERS62"/>
+               <response name="FAVOURITE_CHARACTERS62" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdcax7" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS71"/>
+               <response name="FAVOURITE_CHARACTERS71" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdd2w3"
                    componentType="InputNumber"
                    min="0"
                    max="120"
                    decimals="0">
-               <response name="FAVOURITE_CHARACTERS72"/>
+               <response name="FAVOURITE_CHARACTERS72" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdjye1" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS81"/>
+               <response name="FAVOURITE_CHARACTERS81" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdkosc"
                    componentType="InputNumber"
                    min="0"
                    max="120"
                    decimals="0">
-               <response name="FAVOURITE_CHARACTERS82"/>
+               <response name="FAVOURITE_CHARACTERS82" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgd5jet" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS91"/>
+               <response name="FAVOURITE_CHARACTERS91" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgdk0x4"
                    componentType="InputNumber"
                    min="0"
                    max="120"
                    decimals="0">
-               <response name="FAVOURITE_CHARACTERS92"/>
+               <response name="FAVOURITE_CHARACTERS92" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
          <cells type="line">
             <cells id="j6qg8rc6-QOP-jbgdjw90" componentType="Textarea" maxLength="255">
-               <response name="FAVOURITE_CHARACTERS101"/>
+               <response name="FAVOURITE_CHARACTERS101" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
             <cells id="j6qg8rc6-QOP-jbgd2wgf"
                    componentType="InputNumber"
                    min="0"
                    max="120"
                    decimals="0">
-               <response name="FAVOURITE_CHARACTERS102"/>
+               <response name="FAVOURITE_CHARACTERS102" xsi:type="ResponseContainerString">
+                  <valueState valueType="PREVIOUS">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="COLLECTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="FORCED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="EDITED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+                  <valueState valueType="INPUTED">
+                     <value xsi:nil="true"/>
+                  </valueState>
+               </response>
             </cells>
          </cells>
       </components>
@@ -1127,7 +2460,6 @@
    <components xsi:type="Sequence" componentType="Sequence" id="j6z12s2d">
       <label>"VI - Comment"</label>
       <conditionFilter>"normal"</conditionFilter>
-      <bindingsDependency>false</bindingsDependency>
       <components xsi:type="Textarea"
                   componentType="Textarea"
                   id="j6z0z3us"
@@ -1135,8 +2467,23 @@
                   mandatory="false">
          <label>"➡ 1. Do you have any comment about the survey?"</label>
          <conditionFilter>"normal"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
-         <response name="SURVEY_COMMENT"/>
+         <response name="SURVEY_COMMENT" xsi:type="ResponseContainerString">
+            <valueState valueType="PREVIOUS">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="COLLECTED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="FORCED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="EDITED">
+               <value xsi:nil="true"/>
+            </valueState>
+            <valueState valueType="INPUTED">
+               <value xsi:nil="true"/>
+            </valueState>
+         </response>
       </components>
    </components>
    <variables variableType="EXTERNAL">
@@ -1145,949 +2492,347 @@
    </variables>
    <variables variableType="COLLECTED">
       <name>COMMENT</name>
-      <componentRef>j6p3dkx6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>COMMENT</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>READY</name>
-      <componentRef>j6p0np9q</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>READY</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PRODUCER</name>
-      <componentRef>j3343qhx</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PRODUCER</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>SEASON_NUMBER</name>
-      <componentRef>j6q9h8tj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>SEASON_NUMBER</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>DATEFIRST</name>
-      <componentRef>j334cyqb</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>DATEFIRST</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>AUDIENCE_SHARE</name>
-      <componentRef>j6z06z1e</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>AUDIENCE_SHARE</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>CITY</name>
-      <componentRef>j3343clt</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>CITY</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>MAYOR</name>
-      <componentRef>j6qdfhvw</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>MAYOR</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>STATE</name>
-      <componentRef>j4nw5cqz</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>STATE</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PET1</name>
-      <componentRef>j334akov</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PET1</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PET2</name>
-      <componentRef>j334akov</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PET2</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PET3</name>
-      <componentRef>j334akov</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PET3</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PET4</name>
-      <componentRef>j334akov</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PET4</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>ICE_FLAVOUR1</name>
-      <componentRef>j6p29i81</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>ICE_FLAVOUR1</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>ICE_FLAVOUR2</name>
-      <componentRef>j6p29i81</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>ICE_FLAVOUR2</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>ICE_FLAVOUR3</name>
-      <componentRef>j6p29i81</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>ICE_FLAVOUR3</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>ICE_FLAVOUR4</name>
-      <componentRef>j6p29i81</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>ICE_FLAVOUR4</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>NUCLEAR_CHARACTER1</name>
-      <componentRef>j6qefnga</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>NUCLEAR_CHARACTER1</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>NUCLEAR_CHARACTER2</name>
-      <componentRef>j6qefnga</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>NUCLEAR_CHARACTER2</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>NUCLEAR_CHARACTER3</name>
-      <componentRef>j6qefnga</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>NUCLEAR_CHARACTER3</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>NUCLEAR_CHARACTER4</name>
-      <componentRef>j6qefnga</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>NUCLEAR_CHARACTER4</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>BIRTH_CHARACTER1</name>
-      <componentRef>j6yzoc6g</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>BIRTH_CHARACTER1</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>BIRTH_CHARACTER2</name>
-      <componentRef>j6yzoc6g</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>BIRTH_CHARACTER2</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>BIRTH_CHARACTER3</name>
-      <componentRef>j6yzoc6g</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>BIRTH_CHARACTER3</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>BIRTH_CHARACTER4</name>
-      <componentRef>j6yzoc6g</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>BIRTH_CHARACTER4</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>BIRTH_CHARACTER5</name>
-      <componentRef>j6yzoc6g</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>BIRTH_CHARACTER5</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES11</name>
-      <componentRef>j4nwc63q</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PERCENTAGE_EXPENSES11</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES21</name>
-      <componentRef>j4nwc63q</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PERCENTAGE_EXPENSES21</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES31</name>
-      <componentRef>j4nwc63q</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PERCENTAGE_EXPENSES31</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES41</name>
-      <componentRef>j4nwc63q</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PERCENTAGE_EXPENSES41</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES51</name>
-      <componentRef>j4nwc63q</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PERCENTAGE_EXPENSES51</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES61</name>
-      <componentRef>j4nwc63q</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PERCENTAGE_EXPENSES61</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>PERCENTAGE_EXPENSES71</name>
-      <componentRef>j4nwc63q</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>PERCENTAGE_EXPENSES71</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING11</name>
-      <componentRef>j4nw0rr6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>CLOWNING11</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING12</name>
-      <componentRef>j4nw0rr6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>CLOWNING12</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING21</name>
-      <componentRef>j4nw0rr6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>CLOWNING21</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING22</name>
-      <componentRef>j4nw0rr6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>CLOWNING22</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING31</name>
-      <componentRef>j4nw0rr6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>CLOWNING31</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING32</name>
-      <componentRef>j4nw0rr6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>CLOWNING32</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING41</name>
-      <componentRef>j4nw0rr6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>CLOWNING41</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>CLOWNING42</name>
-      <componentRef>j4nw0rr6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>CLOWNING42</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL11</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL11</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL12</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL12</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL13</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL13</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL14</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL14</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL15</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL15</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL16</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL16</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL21</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL21</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL22</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL22</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL23</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL23</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL24</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL24</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL25</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL25</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL26</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL26</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL31</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL31</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL32</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL32</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL33</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL33</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL34</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL34</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL35</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL35</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL36</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL36</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL41</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL41</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL42</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL42</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL43</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL43</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL44</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL44</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL45</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL45</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>TRAVEL46</name>
-      <componentRef>j6p2lwuj</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>TRAVEL46</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS11</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS11</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS12</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS12</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS21</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS21</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS22</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS22</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS31</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS31</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS32</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS32</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS41</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS41</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS42</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS42</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS51</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS51</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS52</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS52</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS61</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS61</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS62</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS62</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS71</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS71</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS72</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS72</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS81</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS81</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS82</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS82</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS91</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS91</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS92</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS92</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS101</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS101</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>FAVOURITE_CHARACTERS102</name>
-      <componentRef>j6qg8rc6</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>FAVOURITE_CHARACTERS102</responseRef>
    </variables>
    <variables variableType="COLLECTED">
       <name>SURVEY_COMMENT</name>
-      <componentRef>j6z0z3us</componentRef>
-      <values>
-         <PREVIOUS xsi:nil="true"/>
-         <COLLECTED xsi:nil="true"/>
-         <FORCED xsi:nil="true"/>
-         <EDITED xsi:nil="true"/>
-         <INPUTED xsi:nil="true"/>
-      </values>
+      <responseRef>SURVEY_COMMENT</responseRef>
    </variables>
    <variables variableType="CALCULATED">
       <name>SUM_EXPENSES</name>

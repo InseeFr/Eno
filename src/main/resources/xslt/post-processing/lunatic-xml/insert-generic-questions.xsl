@@ -94,7 +94,7 @@
     <xsl:variable name="first-sequence-id" select="//h:components[@componentType='Sequence'][1]/@id"/>
     <xsl:variable name="last-sequence-id" select="//h:components[@componentType='Sequence'][last()]/@id"/>
 
-    <xd:doc>
+    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
             <xd:p>Template de base pour tous les éléments et tous les attributs, on recopie
                 simplement en sortie</xd:p>
@@ -106,7 +106,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <xd:doc>
+    <xd:doc xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl">
         <xd:desc>
             <xd:p>Add generic questions to the beginning and to the end</xd:p>
         </xd:desc>
@@ -169,4 +169,5 @@
             </xsl:choose>
         </xsl:if>
     </xsl:template>
+
 </xsl:stylesheet>
