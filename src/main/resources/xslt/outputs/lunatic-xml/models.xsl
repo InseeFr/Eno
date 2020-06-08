@@ -63,6 +63,28 @@
 		</Questionnaire>
 	</xsl:template>
 
+
+	<xd:doc>
+		<xs:desc>
+			<xd:p>Match on QuestionLoop driver</xd:p>
+		</xs:desc>
+	</xd:doc>
+	<xsl:template match="QuestionLoop" mode="model">
+		<xsl:param name="source-context" as="item()" tunnel="yes"/>
+		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
+		<xsl:variable name="miniumumOccurences" select="enolunatic:get-minimum-occurrences($source-context)"/>
+		<xsl:variable name="maximumOccurences" select="enolunatic:get-maximum-occurrences($source-context)"/>
+		<components xsi:type="Loop" componentType="Loop" id="{$id}">
+			<xsl:attribute name="min" select="$miniumumOccurences"/>
+			<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurences)"/>
+			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+				<xsl:with-param name="driver" select="." tunnel="yes"/>
+			</xsl:apply-templates>
+		</components>
+
+	</xsl:template>
+
 	<xd:doc>
 		<xd:desc>
 			<xd:p>Match on Module and SubModule drivers.</xd:p>
