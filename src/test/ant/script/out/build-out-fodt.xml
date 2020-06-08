@@ -5,7 +5,7 @@
 	<property name="out-folder" value="fodt"/>
 
 	<!-- fodtPostProcessing : Only copying the basic-form.tmp to the target folder and renaming as form -->
-	<target name="odtPostProcessing">
+	<target name="fodtPostProcessing">
 		<copy file="${postprocessing-input-file}"
 			tofile="${target-folder}/${survey-name}/${form-name}/form/form.${out-extension}"/>
 	</target>

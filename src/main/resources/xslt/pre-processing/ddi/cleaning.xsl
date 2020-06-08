@@ -197,6 +197,7 @@
         
         <xsl:copy>
             <xsl:choose>
+                <xsl:when test="not($initial-extremum)"/>
                 <xsl:when test="$evolution='0' and $decimal-position='0' and not(contains($initial-extremum,'.'))">
                     <xsl:value-of select="$initial-extremum"/>
                 </xsl:when>

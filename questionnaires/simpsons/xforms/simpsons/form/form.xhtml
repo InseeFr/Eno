@@ -76,7 +76,7 @@
                <j4nw88h2>
                   <j6qe237q/>
                   <j4nwc63q/>
-                  <j4nwc63q-j4nwh16i-Header-1/>
+                  <j4nwc63q-j4nwh16i-entete-1/>
                   <j4nwc63q-j4nwh16i-1/>
                   <j4nwc63q-j4nwh16i-2/>
                   <j4nwc63q-j4nwh16i-3/>
@@ -101,7 +101,7 @@
                   <j4nwc63q-CI-0/>
                   <j6qejudb/>
                   <j4nw0rr6/>
-                  <j4nw0rr6-j77dav9b-Header-1/>
+                  <j4nw0rr6-j77dav9b-entete-1/>
                   <j4nw0rr6-j77dav9b-1/>
                   <j4nw0rr6-j77dav9b-2/>
                   <j4nw0rr6-j77dav9b-3/>
@@ -118,7 +118,7 @@
                   <CLOWNING42/>
                   <j6qeh91y/>
                   <j6p2lwuj/>
-                  <j6p2lwuj-j6p2kivg-Header-1/>
+                  <j6p2lwuj-j6p2kivg-entete-1/>
                   <j6p2lwuj-j6p2kivg-1/>
                   <j6p2lwuj-j6p2kivg-2/>
                   <j6p2lwuj-j6p2kivg-3/>
@@ -189,15 +189,16 @@
                   <SURVEY_COMMENT/>
                </j6z12s2d>
                <SUM_EXPENSES/>
-               <End>
-                  <GenericEndText/>
-               </End>
-               <Util>
-                  <CurrentSection>1</CurrentSection>
-                  <CurrentSectionName/>
-                  <Send>false</Send>
-                  <DateTime/>
-               </Util>
+               <FIN/>
+               <stromae>
+                  <util>
+                     <sectionCourante>1</sectionCourante>
+                     <nomSectionCourante/>
+                     <expedie>non</expedie>
+                     <extrait>non</extrait>
+                     <dateHeure/>
+                  </util>
+               </stromae>
             </form>
          </xf:instance>
          <xf:instance id="fr-form-loop-model">
@@ -358,9 +359,9 @@
                      relevant="not(instance('fr-form-instance')//READY!= '1')">
                <xf:bind id="j6qe237q-bind" name="j6qe237q" ref="j6qe237q"/>
                <xf:bind id="j4nwc63q-bind" name="j4nwc63q" ref="j4nwc63q"/>
-               <xf:bind id="j4nwc63q-j4nwh16i-Header-1-bind"
-                        name="j4nwc63q-j4nwh16i-Header-1"
-                        ref="j4nwc63q-j4nwh16i-Header-1"/>
+               <xf:bind id="j4nwc63q-j4nwh16i-entete-1-bind"
+                        name="j4nwc63q-j4nwh16i-entete-1"
+                        ref="j4nwc63q-j4nwh16i-entete-1"/>
                <xf:bind id="j4nwc63q-j4nwh16i-1-bind"
                         name="j4nwc63q-j4nwh16i-1"
                         ref="j4nwc63q-j4nwh16i-1"/>
@@ -450,9 +451,9 @@
                </xf:bind>
                <xf:bind id="j6qejudb-bind" name="j6qejudb" ref="j6qejudb"/>
                <xf:bind id="j4nw0rr6-bind" name="j4nw0rr6" ref="j4nw0rr6"/>
-               <xf:bind id="j4nw0rr6-j77dav9b-Header-1-bind"
-                        name="j4nw0rr6-j77dav9b-Header-1"
-                        ref="j4nw0rr6-j77dav9b-Header-1"/>
+               <xf:bind id="j4nw0rr6-j77dav9b-entete-1-bind"
+                        name="j4nw0rr6-j77dav9b-entete-1"
+                        ref="j4nw0rr6-j77dav9b-entete-1"/>
                <xf:bind id="j4nw0rr6-j77dav9b-1-bind"
                         name="j4nw0rr6-j77dav9b-1"
                         ref="j4nw0rr6-j77dav9b-1"/>
@@ -481,9 +482,9 @@
                <xf:bind id="CLOWNING42-bind" name="CLOWNING42" ref="CLOWNING42"/>
                <xf:bind id="j6qeh91y-bind" name="j6qeh91y" ref="j6qeh91y"/>
                <xf:bind id="j6p2lwuj-bind" name="j6p2lwuj" ref="j6p2lwuj"/>
-               <xf:bind id="j6p2lwuj-j6p2kivg-Header-1-bind"
-                        name="j6p2lwuj-j6p2kivg-Header-1"
-                        ref="j6p2lwuj-j6p2kivg-Header-1"/>
+               <xf:bind id="j6p2lwuj-j6p2kivg-entete-1-bind"
+                        name="j6p2lwuj-j6p2kivg-entete-1"
+                        ref="j6p2lwuj-j6p2kivg-entete-1"/>
                <xf:bind id="j6p2lwuj-j6p2kivg-1-bind"
                         name="j6p2lwuj-j6p2kivg-1"
                         ref="j6p2lwuj-j6p2kivg-1"/>
@@ -646,15 +647,15 @@
                      ref="SUM_EXPENSES"
                      type="xs:decimal"
                      calculate="xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)"/>
-            <xf:bind id="end-bind" name="end" ref="End">
-               <xf:bind id="generic-end-text-bind"
-                        name="generic-end-text"
+            <xf:bind id="FIN-bind" name="FIN" ref="FIN">
+               <xf:bind id="generic-FIN-text-bind"
+                        name="generic-FIN-text"
                         ref="GenericEndText"/>
             </xf:bind>
-            <xf:bind id="current-section-name-bind"
-                     name="current-section-name"
-                     ref="Util/CurrentSectionName"
-                     calculate="(instance('fr-form-util')/Pages/*)[position()=number(instance('fr-form-instance')/Util/CurrentSection)]/name()"/>
+            <xf:bind id="nomSectionCourante-bind"
+                     name="nomSectionCourante"
+                     ref="stromae/util/nomSectionCourante"
+                     calculate="(instance('fr-form-util')/Pages/*)[position()=number(instance('fr-form-instance')/stromae/util/sectionCourante)]/name()"/>
          </xf:bind>
          <xf:instance id="fr-form-metadata" xxf:readonly="true">
             <metadata>
@@ -1090,7 +1091,7 @@
                   <j4nwc63q>
                      <label>➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?</label>
                   </j4nwc63q>
-                  <j4nwc63q-j4nwh16i-Header-1/>
+                  <j4nwc63q-j4nwh16i-entete-1/>
                   <j4nwc63q-j4nwh16i-1>
                      <label>Frozen products</label>
                   </j4nwc63q-j4nwh16i-1>
@@ -1163,7 +1164,7 @@
                   <j4nw0rr6>
                      <label>➡ 2. Who did these clownings and tell us what you remember?</label>
                   </j4nw0rr6>
-                  <j4nw0rr6-j77dav9b-Header-1/>
+                  <j4nw0rr6-j77dav9b-entete-1/>
                   <j4nw0rr6-j77dav9b-1>
                      <label>&lt;p&gt;&lt;b&gt;&lt;i&gt;Break the windows of the whole city&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;</label>
                   </j4nw0rr6-j77dav9b-1>
@@ -1264,7 +1265,7 @@
                   <j6p2lwuj>
                      <label>&lt;p&gt;&lt;span class="block question complex-grid"&gt;➡ 3. Which of the following means of transport were used by the hero and in which country?&lt;/span&gt;&lt;span class="block hint"&gt;Several answers possible: check off all the relevant boxes&lt;/span&gt;&lt;/p&gt;</label>
                   </j6p2lwuj>
-                  <j6p2lwuj-j6p2kivg-Header-1/>
+                  <j6p2lwuj-j6p2kivg-entete-1/>
                   <j6p2lwuj-j6p2kivg-1>
                      <label>Car</label>
                   </j6p2lwuj-j6p2kivg-1>
@@ -1500,9 +1501,9 @@
                   <AddLine>
                      <label>Ajouter une ligne</label>
                   </AddLine>
-                  <End>
+                  <FIN>
                      <label>FIN</label>
-                  </End>
+                  </FIN>
                   <GenericEndText>
                      <label>&lt;p&gt;Page de fin générique, peut être surchargée ou supprimée en passant une feuille xslt supplémentaire.&lt;/p&gt;</label>
                   </GenericEndText>
@@ -1999,7 +2000,7 @@
                   <j4nwc63q>
                      <label>➡ 1. Please, specify the percentage of Jay's expenses in the Kwik-E-Mart for each product?</label>
                   </j4nwc63q>
-                  <j4nwc63q-j4nwh16i-Header-1/>
+                  <j4nwc63q-j4nwh16i-entete-1/>
                   <j4nwc63q-j4nwh16i-1>
                      <label>Frozen products</label>
                   </j4nwc63q-j4nwh16i-1>
@@ -2072,7 +2073,7 @@
                   <j4nw0rr6>
                      <label>➡ 2. Who did these clownings and tell us what you remember?</label>
                   </j4nw0rr6>
-                  <j4nw0rr6-j77dav9b-Header-1/>
+                  <j4nw0rr6-j77dav9b-entete-1/>
                   <j4nw0rr6-j77dav9b-1>
                      <label>&lt;p&gt;&lt;b&gt;&lt;i&gt;Break the windows of the whole city&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;</label>
                   </j4nw0rr6-j77dav9b-1>
@@ -2173,7 +2174,7 @@
                   <j6p2lwuj>
                      <label>&lt;p&gt;&lt;span class="block question complex-grid"&gt;➡ 3. Which of the following means of transport were used by the hero and in which country?&lt;/span&gt;&lt;span class="block hint"&gt;Several answers possible: check off all the relevant boxes&lt;/span&gt;&lt;/p&gt;</label>
                   </j6p2lwuj>
-                  <j6p2lwuj-j6p2kivg-Header-1/>
+                  <j6p2lwuj-j6p2kivg-entete-1/>
                   <j6p2lwuj-j6p2kivg-1>
                      <label>Car</label>
                   </j6p2lwuj-j6p2kivg-1>
@@ -2409,9 +2410,9 @@
                   <AddLine>
                      <label>Add a line</label>
                   </AddLine>
-                  <End>
-                     <label>END</label>
-                  </End>
+                  <FIN>
+                     <label>FIN</label>
+                  </FIN>
                   <GenericEndText>
                      <label>&lt;p&gt;Generic end page, can be overridden or removed by processing
             your own xslt on the result.&lt;/p&gt;</label>
@@ -2515,11 +2516,11 @@
                   <j4nw88h2/>
                   <j6qfx9qe/>
                   <j6z12s2d/>
-                  <End/>
+                  <FIN/>
                </Pages>
                <PreviousNext/>
-               <PageChangeDone/>
-               <ConfirmationMessage/>
+               <changementPageEffectue/>
+               <messageConfirmation/>
                <FatalError/>
                <ErrorText/>
                <WarningText/>
@@ -2528,27 +2529,27 @@
          </xf:instance>
          <xf:bind id="fr-form-util-binds" ref="instance('fr-form-util')">
             <xf:bind id="start-bind"
-                     relevant="instance('fr-form-instance')/Util/CurrentSection='1'"
+                     relevant="instance('fr-form-instance')/stromae/util/sectionCourante='1'"
                      ref="Start"/>
             <xf:bind id="previous-bind"
-                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt; 8)"
+                     relevant="not(instance('fr-form-instance')/stromae/util/sectionCourante='1' or number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt; 8)"
                      ref="Previous"/>
             <xf:bind id="next-bind"
-                     relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt; 7)"
+                     relevant="not(instance('fr-form-instance')/stromae/util/sectionCourante='1' or number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt; 7)"
                      ref="Next"/>
             <xf:bind id="send-bind"
                      ref="Send"
-                     relevant="instance('fr-form-instance')/Util/Send='false'"/>
+                     relevant="instance('fr-form-instance')/stromae/util/expedie='non'"/>
             <xf:bind id="progress-percent-bind"
                      name="progress-percent"
                      ref="ProgressPercent"
-                     calculate="if (number(instance('fr-form-instance')/Util/CurrentSection)=1) then '0' else (if (number(instance('fr-form-instance')/Util/CurrentSection)&gt;7) then '100' else round((number(instance('fr-form-instance')/Util/CurrentSection) - 2) div (6)*100))"/>
+                     calculate="if (number(instance('fr-form-instance')/stromae/util/sectionCourante)=1) then '0' else (if (number(instance('fr-form-instance')/stromae/util/sectionCourante)&gt;7) then '100' else round((number(instance('fr-form-instance')/stromae/util/sectionCourante) - 2) div (6)*100))"/>
             <xf:bind id="progress-bind" ref="Progress"/>
             <xf:bind id="page-top-bind" ref="PageTop"/>
-            <xf:bind id="confirmation-message-bind"
-                     ref="ConfirmationMessage"
-                     name="confirmation-message"
-                     relevant="instance('fr-form-instance')/Util/Send='true'"/>
+            <xf:bind id="messageConfirmation-bind"
+                     ref="messageConfirmation"
+                     name="messageConfirmation"
+                     calculate="concat('Votre questionnaire a bien été expédié le ',instance('fr-form-instance')/stromae/util/dateHeure)"/>
             <xf:bind id="pages-bind" ref="Pages">
                <xf:bind id="page-j6p0ti5h-bind" name="j6p0ti5h" ref="j6p0ti5h">
                   <xf:calculate value="xxf:evaluate-bind-property('j6p0ti5h-bind','relevant')"/>
@@ -2561,8 +2562,7 @@
                </xf:bind>
                <xf:bind id="page-j4nw88h2-bind" name="j4nw88h2" ref="j4nw88h2">
                   <xf:calculate value="xxf:evaluate-bind-property('j4nw88h2-bind','relevant')"/>
-                  <xf:constraint level="warning"
-                                 value="(not(xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)!= 100))"/>
+                  <xf:constraint value="(not(xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES11/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES11) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES21/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES21) + xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES31/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES31)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES41/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES41)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES51/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES51)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES61/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES61)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES71/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES71)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES81/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES81)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES91/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES91)+ xs:decimal(if (instance('fr-form-instance')//PERCENTAGE_EXPENSES101/string()='') then 0 else instance('fr-form-instance')//PERCENTAGE_EXPENSES101)!= 100))"/>
                </xf:bind>
                <xf:bind id="page-j6qfx9qe-bind" name="j6qfx9qe" ref="j6qfx9qe">
                   <xf:calculate value="xxf:evaluate-bind-property('j6qfx9qe-bind','relevant')"/>
@@ -2572,7 +2572,7 @@
                </xf:bind>
             </xf:bind>
          </xf:bind>
-         <!--You can add a resource attribute for the save submission by processing the result with your own xslt.--><xf:submission id="save"
+         <xf:submission id="enregistrer"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
@@ -2584,13 +2584,14 @@
                <xf:setvalue ref="xxf:instance('fr-persistence-instance')/data-safe-override">true</xf:setvalue>
             </xf:action>
          </xf:submission>
-         <!--You can add a resource attribute for the submit submission by processing the result with your own xslt.--><xf:submission id="submit"
+         <xf:submission id="expedier"
                         method="post"
                         ref="instance('fr-form-instance')"
                         replace="none"
                         relevant="false">
             <xf:action ev:event="xforms-submit-error">
-               <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('false')"/>
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/expedie"
+                            value="string('non')"/>
                <xxf:show ev:event="DOMActivate" dialog="fatal-error"/>
             </xf:action>
             <xf:action ev:event="xforms-submit-done">
@@ -2612,12 +2613,12 @@
                <xf:setvalue ref="instance('fr-form-instance')//FAVOURITE_CHARACTERS-Count"
                             value="count(instance('fr-form-instance')//FAVOURITE_CHARACTERS-Container/FAVOURITE_CHARACTERS)"/>
             </xf:action>
-            <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
-            <xxf:show if="instance('fr-form-instance')/Util/Send='false' and not(instance('fr-form-instance')/Util/CurrentSection='1')"
+            <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
+            <xxf:show if="instance('fr-form-instance')/stromae/util/expedie='non' and not(instance('fr-form-instance')/stromae/util/sectionCourante='1')"
                       dialog="welcome-back"/>
          </xf:action>
-         <xf:action ev:event="page-change">
-            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*[not(ancestor::*[ends-with(name(),'-Container') and ancestor::*[name()=instance('fr-form-instance')/Util/CurrentSectionName]])]">
+         <xf:action ev:event="ChangementPage">
+            <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[not(ancestor::*[ends-with(name(),'-Container') and ancestor::*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]])]">
                <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
             </xf:action>
             <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[ends-with(name(),'-Container')]/*">
@@ -2627,53 +2628,54 @@
                   <xf:dispatch name="DOMFocusOut" target="{concat(context()/name(),'-control')}"/>
                </xf:action>
             </xf:action>
-            <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true()))">
+            <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                         value="string('false')"/>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true()))">
                <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
                   <xxf:show ev:event="DOMActivate" dialog="errorPrevious"/>
                </xf:action>
                <xf:action if="instance('fr-form-util')/PreviousNext='1'">
                   <xxf:show ev:event="DOMActivate" dialog="errorNext"/>
                </xf:action>
-               <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                            value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                            and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false()">
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                            and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false()">
                <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
                   <xxf:show ev:event="DOMActivate" dialog="warningPrevious"/>
                </xf:action>
                <xf:action if="instance('fr-form-util')/PreviousNext='1'">
                   <xxf:show ev:event="DOMActivate" dialog="warningNext"/>
                </xf:action>
-               <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                            value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false())">
-               <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false'                     and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante],true(),true())                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/stromae/util/nomSectionCourante,'-bind'),'constraint')=false())">
+               <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
             </xf:action>
          </xf:action>
-         <xf:action ev:event="page-change-done">
-            <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='1'">
-               <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
-                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/Util/CurrentSection]/following-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
-               <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+         <xf:action ev:event="ChangementPageEffectif">
+            <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                         value="string('false')"/>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false' and instance('fr-form-util')/PreviousNext='1'">
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/sectionCourante]/following-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
+               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                            value="string('true')"/>
             </xf:action>
-            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/PreviousNext='-1'">
-               <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
-                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/Util/CurrentSection]/preceding-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
-               <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+            <xf:action if="instance('fr-form-util')/changementPageEffectue='false' and instance('fr-form-util')/PreviousNext='-1'">
+               <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                            value="count(instance('fr-form-util')/Pages/*[position()=instance('fr-form-instance')/stromae/util/sectionCourante]/preceding-sibling::*[not(text()='false')][1]/preceding-sibling::*)+1"/>
+               <xf:setvalue ref="instance('fr-form-util')/changementPageEffectue"
+                            value="string('true')"/>
             </xf:action>
-            <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime"
+            <xf:setvalue ref="instance('fr-form-instance')/stromae/util/dateHeure"
                          value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
-            <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
-            <xf:send submission="save"/>
+            <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
+            <xf:send submission="enregistrer"/>
             <xf:setfocus control="page-top-control"/>
          </xf:action>
-         <xf:action ev:event="submit-form">
-            <xf:setvalue ref="instance('fr-form-instance')/Util/Send" value="string('true')"/>
-            <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime"
-                         value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
-            <xf:send submission="submit"/>
-         </xf:action>
+         
       </xf:model>
    </xhtml:head>
    <xhtml:body>
@@ -2690,7 +2692,7 @@
                                   value="{instance('fr-form-util')/ProgressPercent}"/>
                   <xf:output id="progress-percent" ref="instance('fr-form-util')/ProgressPercent"/> %</xhtml:span>
             </xhtml:div>
-            <xf:switch id="section-body">
+            <xf:switch id="corpsSection">
                <xf:case id="1">
                   <fr:section id="beginning-control" bind="beginning-bind" name="beginning">
                      <xf:label ref="$form-resources/Beginning/label"/>
@@ -3269,9 +3271,9 @@
                            <xhtml:thead>
                               <xhtml:tr>
                                  <xhtml:th colspan="2" rowspan="1">
-                                    <xf:output id="j4nwc63q-j4nwh16i-Header-1-control"
-                                               name="j4nwc63q-j4nwh16i-Header-1"
-                                               bind="j4nwc63q-j4nwh16i-Header-1-bind"/>
+                                    <xf:output id="j4nwc63q-j4nwh16i-entete-1-control"
+                                               name="j4nwc63q-j4nwh16i-entete-1"
+                                               bind="j4nwc63q-j4nwh16i-entete-1-bind"/>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nwc63q-j4nwc63q-secondDimension-fakeCL-1-1-control"
@@ -3500,9 +3502,9 @@
                            <xhtml:thead>
                               <xhtml:tr>
                                  <xhtml:th colspan="1" rowspan="1">
-                                    <xf:output id="j4nw0rr6-j77dav9b-Header-1-control"
-                                               name="j4nw0rr6-j77dav9b-Header-1"
-                                               bind="j4nw0rr6-j77dav9b-Header-1-bind"/>
+                                    <xf:output id="j4nw0rr6-j77dav9b-entete-1-control"
+                                               name="j4nw0rr6-j77dav9b-entete-1"
+                                               bind="j4nw0rr6-j77dav9b-entete-1-bind"/>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j4nw0rr6-j4nw0rr6-secondDimension-fakeCL-1-1-control"
@@ -3667,9 +3669,9 @@
                            <xhtml:thead>
                               <xhtml:tr>
                                  <xhtml:th colspan="1" rowspan="1">
-                                    <xf:output id="j6p2lwuj-j6p2kivg-Header-1-control"
-                                               name="j6p2lwuj-j6p2kivg-Header-1"
-                                               bind="j6p2lwuj-j6p2kivg-Header-1-bind"/>
+                                    <xf:output id="j6p2lwuj-j6p2kivg-entete-1-control"
+                                               name="j6p2lwuj-j6p2kivg-entete-1"
+                                               bind="j6p2lwuj-j6p2kivg-entete-1-bind"/>
                                  </xhtml:th>
                                  <xhtml:th colspan="1" rowspan="1">
                                     <xf:output id="j6p2lwuj-jbdye1wa-1-control"
@@ -4298,10 +4300,10 @@
                   </fr:section>
                </xf:case>
                <xf:case id="8">
-                  <fr:section id="end-control" bind="end-bind" name="end">
-                     <xf:label ref="$form-resources/End/label"/>
+                  <fr:section id="FIN-control" bind="FIN-bind" name="FIN">
+                     <xf:label ref="$form-resources/FIN/label"/>
                      <xhtml:div class="center">
-                        <xf:output id="generic-end-text-control" bind="generic-end-text-bind">
+                        <xf:output id="generic-FIN-text-control" bind="generic-FIN-text-bind">
                            <xf:label ref="$form-resources/GenericEndText/label" mediatype="text/html"/>
                         </xf:output>
                         <xf:trigger id="send" bind="send-bind">
@@ -4310,8 +4312,8 @@
                               <xf:dispatch name="submit-form" targetid="fr-form-model"/>
                            </xf:action>
                         </xf:trigger>
-                        <xf:output id="confirmation-message" bind="confirmation-message-bind">
-                           <xf:label ref="concat($form-resources/ConfirmationMessage/label,' ',instance('fr-form-instance')/Util/DateTime)"/>
+                        <xf:output id="messageConfirmation" bind="messageConfirmation-bind">
+                           <xf:label ref="concat($form-resources/CONFIRMATIONMessage/label,' ',instance('fr-form-instance')/Util/DateTime)"/>
                         </xf:output>
                      </xhtml:div>
                   </fr:section>
@@ -4350,7 +4352,7 @@
                   <xf:label ref="$form-resources/GoBackWarning/label"/>
                   <xxf:hide ev:event="DOMActivate" dialog="warningPrevious"/>
                   <xf:action ev:event="DOMActivate">
-                     <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
+                     <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
                   </xf:action>
                </xf:trigger>
             </xxf:dialog>
@@ -4367,7 +4369,7 @@
                   <xf:label ref="$form-resources/Continue/label"/>
                   <xxf:hide ev:event="DOMActivate" dialog="warningNext"/>
                   <xf:action ev:event="DOMActivate">
-                     <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
+                     <xf:dispatch name="ChangementPageEffectif" targetid="fr-form-model"/>
                   </xf:action>
                </xf:trigger>
             </xxf:dialog>
@@ -4384,8 +4386,9 @@
                   <xf:label ref="$form-resources/GoToFirstPage/label"/>
                   <xf:action ev:event="DOMActivate">
                      <xxf:hide dialog="welcome-back"/>
-                     <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="'1'"/>
-                     <xf:toggle case="{instance('fr-form-instance')/Util/CurrentSection}"/>
+                     <xf:setvalue ref="instance('fr-form-instance')/stromae/util/sectionCourante"
+                                  value="'1'"/>
+                     <xf:toggle case="{instance('fr-form-instance')/stromae/util/sectionCourante}"/>
                   </xf:action>
                </xf:trigger>
             </xxf:dialog>
@@ -4401,21 +4404,21 @@
                <xf:label ref="$form-resources/Start/label"/>
                <xf:action ev:event="DOMActivate">
                   <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
-                  <xf:dispatch name="page-change" targetid="fr-form-model"/>
+                  <xf:dispatch name="ChangementPage" targetid="fr-form-model"/>
                </xf:action>
             </xf:trigger>
             <xf:trigger id="previous" bind="previous-bind">
                <xf:label ref="$form-resources/Previous/label"/>
                <xf:action ev:event="DOMActivate">
                   <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="-1"/>
-                  <xf:dispatch name="page-change" targetid="fr-form-model"/>
+                  <xf:dispatch name="ChangementPage" targetid="fr-form-model"/>
                </xf:action>
             </xf:trigger>
             <xf:trigger id="next" bind="next-bind">
                <xf:label ref="$form-resources/Next/label"/>
                <xf:action ev:event="DOMActivate">
                   <xf:setvalue ref="instance('fr-form-util')/PreviousNext" value="1"/>
-                  <xf:dispatch name="page-change" targetid="fr-form-model"/>
+                  <xf:dispatch name="ChangementPage" targetid="fr-form-model"/>
                </xf:action>
             </xf:trigger>
          </fr:buttons>
