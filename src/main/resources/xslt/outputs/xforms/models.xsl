@@ -2082,41 +2082,20 @@
                 </xf:action>
             </xsl:for-each>-->
             <xsl:for-each select="enoxforms:get-loop-occurrence-filter-dependencies($source-context)">
-                <!-- TODO : aller chercher l'occurrence au sein du bon conteneur afin de nettoyer les données vides -->
-                
-                
-                <!--
                 <xsl:variable name="linked-loop-name" select="enoxforms:get-container-name(.)"/>
                 <xsl:variable name="linked-ancestor" select="enoxforms:get-business-ancestors(.)"/>
                 <xsl:variable name="loop-name" select="enoxforms:get-business-name(.)"/>
-                <xsl:variable name="loop-filter-condition">
-                    <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="source-context" select="." tunnel="yes"/>
-                        <xsl:with-param name="formula" select="enoxforms:get-loop-filter(.)"/>
-                        <xsl:with-param name="instance-ancestor" select="$loop-name"/><!-\- maybe use get-business-ancestors too -\->
-                        <xsl:with-param name="variables">
-                            <xsl:for-each select="tokenize(enoxforms:get-loop-filter-variables(.),' ')">
-                                <xsl:sort select="string-length(.)" order="descending"/>
-                                <Variable><xsl:value-of select="."/></Variable>
-                            </xsl:for-each>
-                        </xsl:with-param>
-                    </xsl:call-template>
-                </xsl:variable>
-                <xsl:variable name="linked-address">
+                <xsl:variable name="linked-ancestor-label">
                     <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
                     <xsl:for-each select="tokenize($linked-ancestor,' ')">
                         <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
                     </xsl:for-each>
-                    <xsl:value-of select="$linked-loop-name"/>
                 </xsl:variable>
-                <xsl:variable name="main-loop-name" select="enoxforms:get-business-name(enoxforms:get-linked-containers(.)[1])"/>
-                
-                <xf:action ev:event="xforms-value-changed" if="({$loop-filter-condition}) and not({$linked-address}/{$loop-name}[@occurrence-id = current()/ancestor::{$loop-name}/@occurrence-id])">
-                    <xf:insert if="exists({$occurrences-before})" context="{$linked-address}" nodeset="{$linked-address}/{$loop-name}" at="count({$occurrences-before})" position="after" origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
-                    <xf:insert if="not(exists({$occurrences-before}))" context="{$linked-address}" nodeset="{$linked-address}/{$loop-name}" at="1" position="before" origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
-                    <!-\-<xf:insert context="{$linked-address}" nodeset="{$linked-address}/{$loop-name}" at="count({$occurrences-before})" position="after" origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>-\->
-                    <xf:setvalue ref="{$linked-address}/{$loop-name}[@occurrence-id = '']/@occurrence-id" value="context()/ancestor::{$loop-name}/@occurrence-id"/>
-                </xf:action>-->
+                <xf:action ev:event="xforms-value-changed"
+                    if="not(xxf:evaluate-bind-property('{$linked-loop-name}-bind','relevant'))"
+                    iterate="{$linked-ancestor-label}{$linked-loop-name}/{$loop-name}[@occurrence-id = current()/ancestor::{$loop-name}/@occurrence-id]//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
+                    <xf:setvalue ref="." value="''"/>
+                </xf:action>
             </xsl:for-each>
 
             <xsl:for-each select="enoxforms:get-constraint-dependencies($source-context)">
