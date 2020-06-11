@@ -21,8 +21,8 @@
         <fo-parameters>
             <Roster>
                 <Row>
-                    <DefaultSize>5</DefaultSize>
-                    <MinimumEmpty>1</MinimumEmpty>
+                    <DefaultSize>10</DefaultSize>
+                    <MinimumEmpty>0</MinimumEmpty>
                 </Row>
             </Roster>
             <Loop>
@@ -37,7 +37,9 @@
             <Capture>
                 <Numeric>manual</Numeric>
             </Capture>
-            <AccompanyingMail>cnrCOL</AccompanyingMail>
+<!--            <AccompanyingMail>relanceCOL</AccompanyingMail>-->
+<!--            <AccompanyingMail>cnrCOL</AccompanyingMail>-->
+            <AccompanyingMail>medCOL</AccompanyingMail>
         </fo-parameters>
         <Title>
             <!-- no-number ; template ; module ; submodule ; unnumbered-filter -->
