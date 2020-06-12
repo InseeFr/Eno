@@ -264,6 +264,9 @@
         <xsl:element name="{enoxforms:get-container-name($source-context)}">
             <xsl:element name="{$name}">
                 <xsl:attribute name="occurrence-id" select="concat($name,'-1')"/>
+                <xsl:apply-templates select="enoxforms:get-external-variables($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
                 <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                     <xsl:with-param name="driver" select="." tunnel="yes"/>
                 </xsl:apply-templates>
