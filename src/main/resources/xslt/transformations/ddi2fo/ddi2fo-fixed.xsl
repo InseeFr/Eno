@@ -90,47 +90,47 @@
                 <xsl:value-of select="$parameters//fo-parameters/Format/Columns"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//Format/Columns"/>
+                <xsl:value-of select="$properties//fo-parameters/Format/Columns"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="roster-minimum-empty-row" as="xs:integer">
         <xsl:choose>
-            <xsl:when test="$parameters//Roster/Row/MinimumEmpty != ''">
-                <xsl:value-of select="$parameters//Roster/Row/MinimumEmpty"/>
+            <xsl:when test="$parameters//fo-parameters/Roster/Row/MinimumEmpty != ''">
+                <xsl:value-of select="$parameters//fo-parameters/Roster/Row/MinimumEmpty"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//Roster/Row/MinimumEmpty"/>
+                <xsl:value-of select="$properties//fo-parameters/Roster/Row/MinimumEmpty"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="roster-defaultsize" as="xs:integer">
         <xsl:choose>
-            <xsl:when test="$parameters//Roster/Row/DefaultSize != ''">
-                <xsl:value-of select="$parameters//Roster/Row/DefaultSize"/>
+            <xsl:when test="$parameters//fo-parameters/Roster/Row/DefaultSize != ''">
+                <xsl:value-of select="$parameters//fo-parameters/Roster/Row/DefaultSize"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//Roster/Row/DefaultSize"/>
+                <xsl:value-of select="$properties//fo-parameters/Roster/Row/DefaultSize"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="loop-default-occurrence" as="xs:integer">
         <xsl:choose>
-            <xsl:when test="$parameters//Loop/DefaultOccurrence != ''">
-                <xsl:value-of select="$parameters//Loop/DefaultOccurrence"/>
+            <xsl:when test="$parameters//fo-parameters/Loop/DefaultOccurrence != ''">
+                <xsl:value-of select="$parameters//fo-parameters/Loop/DefaultOccurrence"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//Loop/DefaultOccurrence"/>
+                <xsl:value-of select="$properties//fo-parameters/Loop/DefaultOccurrence"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="loop-minimum-empty-occurrence" as="xs:integer">
         <xsl:choose>
-            <xsl:when test="$parameters//Loop/MinimumEmptyOccurrence != ''">
-                <xsl:value-of select="$parameters//Loop/MinimumEmptyOccurrence"/>
+            <xsl:when test="$parameters//fo-parameters/Loop/MinimumEmptyOccurrence != ''">
+                <xsl:value-of select="$parameters//fo-parameters/Loop/MinimumEmptyOccurrence"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//Loop/MinimumEmptyOccurrence"/>
+                <xsl:value-of select="$properties//fo-parameters/Loop/MinimumEmptyOccurrence"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -150,7 +150,7 @@
                 <xsl:value-of select="$parameters//fo-parameters/TextArea/Row/DefaultSize"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//TextArea/Row/DefaultSize"/>
+                <xsl:value-of select="$properties//fo-parameters/TextArea/Row/DefaultSize"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -166,21 +166,21 @@
     </xsl:variable>
     <xsl:variable name="numeric-capture">
         <xsl:choose>
-            <xsl:when test="$parameters//Capture/Numeric != ''">
-                <xsl:value-of select="$parameters//Capture/Numeric"/>
+            <xsl:when test="$parameters//fo-parameters/Capture/Numeric != ''">
+                <xsl:value-of select="$parameters//fo-parameters/Capture/Numeric"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//Capture/Numeric"/>
+                <xsl:value-of select="$properties//fo-parameters/Capture/Numeric"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     <xsl:variable name="page-break-between">
         <xsl:choose>
-            <xsl:when test="$parameters//PageBreakBetween/pdf != ''">
-                <xsl:value-of select="$parameters//PageBreakBetween/pdf"/>
+            <xsl:when test="$parameters//fo-parameters/PageBreakBetween/pdf != ''">
+                <xsl:value-of select="$parameters//fo-parameters/PageBreakBetween/pdf"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$properties//PageBreakBetween/pdf"/>
+                <xsl:value-of select="$properties//fo-parameters/PageBreakBetween/pdf"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -481,12 +481,12 @@
     <xsl:function name="enofo:is-initializable-variable" as="xs:boolean">
         <xsl:param name="context" as="item()"/>
         <xsl:choose>
-            <xsl:when test="lower($initialize-all-variables) = 'true'">
+            <xsl:when test="lower-case($initialize-all-variables) = 'true'">
                 <xsl:value-of select="true()"/>
             </xsl:when>
             <xsl:otherwise>
                 <!-- TODO : improve DDI content -->
-                <xsl:value-of select="enofo:get-variable-type($context) = 'external'"/>
+                <xsl:value-of select="enoddi:get-variable-type($context,enoddi:get-id($context)) = 'external'"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>

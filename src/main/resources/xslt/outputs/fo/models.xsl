@@ -682,7 +682,7 @@
 		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
 		<xsl:variable name="height" select="8*number($textarea-defaultsize)"/>
-		<xsl:variable name="variable-name">
+		<xsl:variable name="variable-name" as="xs:string">
 			<xsl:call-template name="variable-velocity-name">
 				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
@@ -720,7 +720,7 @@
 
 		<xsl:variable name="length" select="enofo:get-length($source-context)"/>
 		<xsl:variable name="label" select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
-		<xsl:variable name="variable-name">
+		<xsl:variable name="variable-name" as="xs:string">
 			<xsl:call-template name="variable-velocity-name">
 				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
@@ -838,7 +838,7 @@
 
 		<xsl:variable name="length" select="number(enofo:get-length($source-context))"/>
 		<xsl:variable name="label" select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
-		<xsl:variable name="variable-name">
+		<xsl:variable name="variable-name" as="xs:string">
 			<xsl:call-template name="variable-velocity-name">
 				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
@@ -902,7 +902,9 @@
 							<fo:block xsl:use-attribute-sets="label-cell" padding-bottom="0mm" padding-top="0mm">
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
-										<xsl:copy-of select="concat($variable-personalization-begin,$optical-content,'#{end})"/>
+										<xsl:value-of select="$variable-personalization-begin"/>
+										<xsl:copy-of select="$optical-content"/>
+										<xsl:value-of select="'#{end}'"/>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:copy-of select="$optical-content"/>
@@ -915,7 +917,9 @@
 							<fo:block xsl:use-attribute-sets="general-style" padding-bottom="0mm" padding-top="0mm">
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
-										<xsl:copy-of select="concat($variable-personalization-begin,$optical-content,'#{end})"/>
+										<xsl:value-of select="$variable-personalization-begin"/>
+										<xsl:copy-of select="$optical-content"/>
+										<xsl:value-of select="'#{end}'"/>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:copy-of select="$optical-content"/>
@@ -957,7 +961,7 @@
 							<fo:block xsl:use-attribute-sets="label-cell" padding-bottom="0mm" padding-top="0mm">
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
-										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end})"/>
+										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end}')"/>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:copy-of select="$manual-content"/>
@@ -970,7 +974,7 @@
 							<fo:block xsl:use-attribute-sets="general-style" padding-bottom="0mm" padding-top="0mm">
 								<xsl:choose>
 									<xsl:when test="enofo:is-initializable-variable($source-context)">
-										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end})"/>
+										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end}')"/>
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:copy-of select="$manual-content"/>
@@ -1010,7 +1014,7 @@
 				<xsl:value-of select="'DD'"/>
 			</xsl:if>
 		</xsl:variable>
-		<xsl:variable name="variable-name">
+		<xsl:variable name="variable-name" as="xs:string">
 			<xsl:call-template name="variable-velocity-name">
 				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
@@ -1097,7 +1101,7 @@
 		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
 		<xsl:variable name="field" select="upper-case(enofo:get-format($source-context))"/>
-		<xsl:variable name="variable-name">
+		<xsl:variable name="variable-name" as="xs:string">
 			<xsl:call-template name="variable-velocity-name">
 				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
@@ -1232,8 +1236,9 @@
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
-		<xsl:variable name="variable-name">
+		<xsl:variable name="variable-name" as="xs:string">
 			<xsl:call-template name="variable-velocity-name">
 				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
@@ -1432,6 +1437,7 @@
 			<xsl:value-of select="$variable"/>
 			<xsl:value-of select="'}'"/>
 		</xsl:variable>
+		<xsl:value-of select="$variable-name"/>
 	</xsl:template>
 
 </xsl:stylesheet>
