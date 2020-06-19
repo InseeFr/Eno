@@ -838,6 +838,13 @@
 
 		<xsl:variable name="length" select="number(enofo:get-length($source-context))"/>
 		<xsl:variable name="label" select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
+		<xsl:variable name="variable-name">
+			<xsl:call-template name="variable-velocity-name">
+				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
+				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="variable-personalization-begin" select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
 
 		<xsl:if test="$label != ''">
 			<xsl:choose>
@@ -893,13 +900,27 @@
 					<xsl:choose>
 						<xsl:when test="ancestor::Cell">
 							<fo:block xsl:use-attribute-sets="label-cell" padding-bottom="0mm" padding-top="0mm">
-								<xsl:copy-of select="$optical-content"/>
+								<xsl:choose>
+									<xsl:when test="enofo:is-initializable-variable($source-context)">
+										<xsl:copy-of select="concat($variable-personalization-begin,$optical-content,'#{end})"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:copy-of select="$optical-content"/>
+									</xsl:otherwise>
+								</xsl:choose>
 								<fo:inline><xsl:value-of select="enofo:get-suffix($source-context, $languages[1])"/></fo:inline>
 							</fo:block>
 						</xsl:when>
 						<xsl:otherwise>
 							<fo:block xsl:use-attribute-sets="general-style" padding-bottom="0mm" padding-top="0mm">
-								<xsl:copy-of select="$optical-content"/>
+								<xsl:choose>
+									<xsl:when test="enofo:is-initializable-variable($source-context)">
+										<xsl:copy-of select="concat($variable-personalization-begin,$optical-content,'#{end})"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:copy-of select="$optical-content"/>
+									</xsl:otherwise>
+								</xsl:choose>
 								<fo:inline><xsl:value-of select="enofo:get-suffix($source-context, $languages[1])"/></fo:inline>
 							</fo:block>
 						</xsl:otherwise>
@@ -934,13 +955,27 @@
 					<xsl:choose>
 						<xsl:when test="ancestor::Cell">
 							<fo:block xsl:use-attribute-sets="label-cell" padding-bottom="0mm" padding-top="0mm">
-								<xsl:copy-of select="$manual-content"/>
+								<xsl:choose>
+									<xsl:when test="enofo:is-initializable-variable($source-context)">
+										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end})"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:copy-of select="$manual-content"/>
+									</xsl:otherwise>
+								</xsl:choose>
 								<fo:inline><xsl:value-of select="enofo:get-suffix($source-context, $languages[1])"/></fo:inline>
 							</fo:block>
 						</xsl:when>
 						<xsl:otherwise>
 							<fo:block xsl:use-attribute-sets="general-style" padding-bottom="0mm" padding-top="0mm">
-								<xsl:copy-of select="$manual-content"/>
+								<xsl:choose>
+									<xsl:when test="enofo:is-initializable-variable($source-context)">
+										<xsl:copy-of select="concat($variable-personalization-begin,$manual-content,'#{end})"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:copy-of select="$manual-content"/>
+									</xsl:otherwise>
+								</xsl:choose>
 								<fo:inline><xsl:value-of select="enofo:get-suffix($source-context, $languages[1])"/></fo:inline>
 							</fo:block>
 						</xsl:otherwise>
