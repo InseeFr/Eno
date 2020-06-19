@@ -184,6 +184,16 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="initialize-all-variables">
+        <xsl:choose>
+            <xsl:when test="$parameters//fo-parameters/InitializeAllVariables  != ''">
+                <xsl:value-of select="$parameters//fo-parameters/InitializeAllVariables "/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$properties//fo-parameters/InitializeAllVariables "/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
 
     <xd:doc>
         <xd:desc>
@@ -463,5 +473,21 @@
         <xsl:sequence select="enoddi:get-instruction-index($context,'footnote,tooltip')"/>
     </xsl:function>
 
-
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function that returns if a variable is initializable or not</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:function name="enofo:is-initializable-variable" as="xs:boolean">
+        <xsl:param name="context" as="item()"/>
+        <xsl:choose>
+            <xsl:when test="lower($initialize-all-variables) = 'true'">
+                <xsl:value-of select="true()"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- TODO : improve DDI content -->
+                <xsl:value-of select="enofo:get-variable-type($context) = 'external'"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 </xsl:stylesheet>
