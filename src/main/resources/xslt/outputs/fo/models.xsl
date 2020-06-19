@@ -8,11 +8,12 @@
 	version="2.0">
 
 	<xsl:include href="../../../styles/style.xsl"/>
-	
-	<!-- Remove all the ConsistencyCheck messages from the pdf -->
+
+	<xd:doc>
+		<xd:desc>Remove all the ConsistencyCheck messages from the pdf</xd:desc>
+	</xd:doc>
 	<xsl:template match="main//ConsistencyCheck" mode="model"/>
-	
-	
+
 	<xd:doc>
 		<xd:desc>root template : main sequence = the questionnaire</xd:desc>
 	</xd:doc>
@@ -78,7 +79,7 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 		
-		<fo:block xsl:use-attribute-sets="Titre-paragraphe" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always"> <!-- linefeed-treatment="preserve" -->
+		<fo:block xsl:use-attribute-sets="Titre-paragraphe" page-break-inside="avoid" keep-with-next="always" keep-together.within-column="always">
 			<xsl:copy-of select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
 		</fo:block>
 		<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -347,7 +348,6 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-	<!-- Déclenche tous les Table de l'arbre des drivers -->
 	<xsl:template match="main//Table" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
@@ -424,7 +424,6 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-	<!-- Déclenche tous les Table de l'arbre des drivers -->
 	<xsl:template match="main//TableLoop" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
@@ -588,7 +587,6 @@
 		</xsl:apply-templates>
 	</xsl:template>
 	
-	<!-- Déclenche tous les TextCell de l'arbre des drivers -->
 	<xsl:template match="main//TextCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
@@ -618,7 +616,6 @@
 		</fo:table-cell>
 	</xsl:template>
 
-	<!-- Déclenche tous les Cell de l'arbre des drivers -->
 	<xsl:template match="main//Cell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
@@ -645,7 +642,6 @@
 	</xd:doc>
 	<xsl:template match="xf-group[(ancestor::Table or ancestor::TableLoop) and not(ancestor::Cell)]" mode="model" priority="2"/>
 
-	<!-- Déclenche tous les EmptyCell de l'arbre des drivers -->
 	<xsl:template match="main//EmptyCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
@@ -656,7 +652,6 @@
 		</fo:table-cell>
 	</xsl:template>
 	
-	<!-- Déclenche tous les FixedCell de l'arbre des drivers -->
 	<xsl:template match="main//FixedCell" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
@@ -672,13 +667,14 @@
 		</fo:table-cell>
 	</xsl:template>
 
-	<!-- 	REPONSES -->
+	<!-- 	RESPONSES -->
 
-	<!-- variables and variable groups : do nothing -->
+	<xd:doc>
+		<xd:desc>variables and variable groups : do nothing</xd:desc>
+	</xd:doc>
 	<xsl:template match="main//VariableGroup" mode="model"/>
 	<xsl:template match="main//Variable" mode="model"/>
 
-	<!-- Déclenche tous les TextareaDomain de l'arbre des drivers -->
 	<xsl:template match="main//TextareaDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
@@ -703,7 +699,6 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-	<!-- Déclenche tous les TextDomain : REPONSES QUI DOIVENT ETRE RENSEIGNEES DANS LE QUESTIONNAIRE-->
 	<xsl:template match="main//TextDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
@@ -776,7 +771,6 @@
 		</xsl:apply-templates>
 	</xsl:template>
 
-	<!-- Déclenche tous les NumericDomain : REPONSES QUI DOIVENT ETRE RENSEIGNEES DANS LE QUESTIONNAIRE-->
 	<xsl:template match="main//NumericDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
@@ -1122,7 +1116,6 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<!-- Déclenche tous les xf-item de l'arbre des drivers -->
 	<xsl:template match="main//xf-item" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="no-border" tunnel="yes"/>
