@@ -1094,6 +1094,7 @@
 	<xsl:template match="main//DurationDomain" mode="model">
 		<xsl:param name="source-context" as="item()" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
+		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
 
 		<xsl:variable name="field" select="upper-case(enofo:get-format($source-context))"/>
 		<xsl:variable name="variable-name">
@@ -1232,22 +1233,56 @@
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="isTable" tunnel="yes"/>
 
+		<xsl:variable name="variable-name">
+			<xsl:call-template name="variable-velocity-name">
+				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
+				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
+			</xsl:call-template>
+		</xsl:variable>
+
 		<xsl:choose>
 			<xsl:when test="enofo:get-appearance($source-context) = 'drop-down-list'">
 				<xsl:choose>
 					<xsl:when test="$no-border = 'no-border'">
 						<fo:block-container height="8mm" width="50mm">
-							<fo:block border-color="black" border-style="solid" width="50mm">&#160;</fo:block>
+							<fo:block border-color="black" border-style="solid" width="50mm">
+								<xsl:choose>
+									<xsl:when test="enofo:is-initializable-variable($source-context)">
+										<xsl:value-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}&#160;#{end}')"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="'&#160;'"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</fo:block>
 						</fo:block-container>
 					</xsl:when>
 					<xsl:when test="$isTable = 'YES'">
 						<fo:block-container height="8mm" width="50mm">
-							<fo:block>&#160;</fo:block>
+							<fo:block>
+								<xsl:choose>
+								<xsl:when test="enofo:is-initializable-variable($source-context)">
+									<xsl:value-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}&#160;#{end}')"/>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="'&#160;'"/>
+								</xsl:otherwise>
+							</xsl:choose>
+							</fo:block>
 						</fo:block-container>
 					</xsl:when>
 					<xsl:otherwise>
 						<fo:block-container height="8mm" border-color="black" border-style="solid" width="100%">
-							<fo:block>&#160;</fo:block>
+							<fo:block>
+								<xsl:choose>
+									<xsl:when test="enofo:is-initializable-variable($source-context)">
+										<xsl:value-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}&#160;#{end}')"/>
+									</xsl:when>
+									<xsl:otherwise>
+										<xsl:value-of select="'&#160;'"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</fo:block>
 						</fo:block-container>
 					</xsl:otherwise>
 				</xsl:choose>
@@ -1255,12 +1290,14 @@
 			<xsl:when test="$no-border = 'no-border'">
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
+					<xsl:with-param name="variable-name" select="$variable-name" tunnel="yes"/>
 				</xsl:apply-templates>
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:list-block>
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 						<xsl:with-param name="driver" select="." tunnel="yes"/>
+						<xsl:with-param name="variable-name" select="$variable-name" tunnel="yes"/>
 					</xsl:apply-templates>
 				</fo:list-block>
 			</xsl:otherwise>
@@ -1272,6 +1309,7 @@
 		<xsl:param name="no-border" tunnel="yes"/>
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loop-navigation" as="node()" tunnel="yes"/>
+		<xsl:param name="variable-name" tunnel="yes"/>
 
 		<xsl:variable name="image">
 			<xsl:value-of select="enofo:get-image($source-context)"/>
@@ -1281,9 +1319,19 @@
 			<xsl:when test="$no-border = 'no-border'">
 				<fo:inline>
 					<fo:inline>
+						<xsl:if test="enofo:is-initializable-variable($source-context)">
+							<xsl:value-of select="concat('#{if}(',$variable-name,' = ''',enofo:get-value($source-context),''') ')"/>
+							<xsl:call-template name="insert-image">
+								<xsl:with-param name="image-name" select="'checkbox-checked.png'"/>
+							</xsl:call-template>
+							<xsl:value-of select="'#{else}'"/>
+						</xsl:if>
 						<xsl:call-template name="insert-image">
 							<xsl:with-param name="image-name" select="'check_case.png'"/>
 						</xsl:call-template>
+						<xsl:if test="enofo:is-initializable-variable($source-context)">
+							<xsl:value-of select="'#{end}'"/>
+						</xsl:if>
 					</fo:inline>
 					<xsl:choose>
 						<xsl:when test="$image != ''">
@@ -1306,9 +1354,19 @@
 				<fo:list-item>
 					<fo:list-item-label end-indent="label-end()">
 						<fo:block text-align="right">
+							<xsl:if test="enofo:is-initializable-variable($source-context)">
+								<xsl:value-of select="concat('#{if}(',$variable-name,' = ''',enofo:get-value($source-context),''') ')"/>
+								<xsl:call-template name="insert-image">
+									<xsl:with-param name="image-name" select="'checkbox-checked.png'"/>
+								</xsl:call-template>
+								<xsl:value-of select="'#{else}'"/>
+							</xsl:if>
 							<xsl:call-template name="insert-image">
 								<xsl:with-param name="image-name" select="'check_case.png'"/>
 							</xsl:call-template>
+							<xsl:if test="enofo:is-initializable-variable($source-context)">
+								<xsl:value-of select="'#{end}'"/>
+							</xsl:if>
 						</fo:block>
 					</fo:list-item-label>
 					<fo:list-item-body start-indent="body-start()">
