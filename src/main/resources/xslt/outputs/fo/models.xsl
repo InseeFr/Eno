@@ -1010,6 +1010,31 @@
 				<xsl:value-of select="'DD'"/>
 			</xsl:if>
 		</xsl:variable>
+		<xsl:variable name="variable-name">
+			<xsl:call-template name="variable-velocity-name">
+				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
+				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="variable-personalization-begin">
+			<xsl:value-of select="concat('#{if}(',$variable-name,')')"/>
+			<xsl:choose>
+				<xsl:when test="$field = 'YYYY-MM-DD'">
+					<xsl:value-of select="concat($variable-name,'.substring(8,2) / ',$variable-name,'.substring(5,2) / ',$variable-name,'.substring(0,4)')"/>
+				</xsl:when>
+				<xsl:when test="$field = 'YYYY-MM'">
+					<xsl:value-of select="concat($variable-name,'.substring(5,2) / ',$variable-name,'.substring(0,4)')"/>
+				</xsl:when>
+				<xsl:when test="$field = 'YYYY'">
+					<xsl:value-of select="$variable-name"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$variable-name"/>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:value-of select="'#{else}'"/>
+		</xsl:variable>
+		
 
 		<xsl:if test="$label != ''">
 			<xsl:choose>
@@ -1036,16 +1061,28 @@
 					<xsl:attribute name="text-align">right</xsl:attribute>
 					<xsl:attribute name="padding-top">0mm</xsl:attribute>
 					<xsl:attribute name="padding-bottom">0mm</xsl:attribute>
+					<xsl:if test="enofo:is-initializable-variable($source-context)">
+						<xsl:value-of select="$variable-personalization-begin"/>
+					</xsl:if>
 					<xsl:call-template name="insert-image">
 						<xsl:with-param name="image-name" select="concat('date-',$numeric-capture-character,'-',$languages[1],'-',$field-image-name,'.png')"/>
 					</xsl:call-template>
+					<xsl:if test="enofo:is-initializable-variable($source-context)">
+						<xsl:value-of select="'#{end}'"/>
+					</xsl:if>
 				</fo:block>
 			</xsl:when>
 			<xsl:otherwise>
 				<fo:block xsl:use-attribute-sets="general-style">
+					<xsl:if test="enofo:is-initializable-variable($source-context)">
+						<xsl:value-of select="$variable-personalization-begin"/>
+					</xsl:if>
 					<xsl:call-template name="insert-image">
 						<xsl:with-param name="image-name" select="concat('date-',$numeric-capture-character,'-',$languages[1],'-',$field-image-name,'.png')"/>
 					</xsl:call-template>
+					<xsl:if test="enofo:is-initializable-variable($source-context)">
+						<xsl:value-of select="'#{end}'"/>
+					</xsl:if>
 				</fo:block>
 			</xsl:otherwise>
 		</xsl:choose>
@@ -1059,6 +1096,14 @@
 		<xsl:param name="languages" tunnel="yes"/>
 
 		<xsl:variable name="field" select="upper-case(enofo:get-format($source-context))"/>
+		<xsl:variable name="variable-name">
+			<xsl:call-template name="variable-velocity-name">
+				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
+				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="variable-personalization-begin" select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
+
 		<fo:inline>
 			<xsl:variable name="duration-content" as="node() *">
 				<xsl:choose>
@@ -1153,12 +1198,26 @@
 			<xsl:choose>
 				<xsl:when test="ancestor::Cell">
 					<fo:block xsl:use-attribute-sets="label-cell">
-						<xsl:copy-of select="$duration-content"/>
+						<xsl:choose>
+							<xsl:when test="enofo:is-initializable-variable($source-context)">
+								<xsl:copy-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}',$duration-content,'#{end}')"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:copy-of select="$duration-content"/>
+							</xsl:otherwise>
+						</xsl:choose>
 					</fo:block>
 				</xsl:when>
 				<xsl:otherwise>
 					<fo:block xsl:use-attribute-sets="general-style">
-						<xsl:copy-of select="$duration-content"/>
+						<xsl:choose>
+							<xsl:when test="enofo:is-initializable-variable($source-context)">
+								<xsl:copy-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}',$duration-content,'#{end}')"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:copy-of select="$duration-content"/>
+							</xsl:otherwise>
+						</xsl:choose>
 					</fo:block>
 				</xsl:otherwise>
 			</xsl:choose>
