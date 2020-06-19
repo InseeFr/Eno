@@ -126,6 +126,12 @@
                     </fo:block>
                     
                     <fo:block margin-top="3mm">
+                        Compte tenu de la crise sanitaire, l’Insee a naturellement été conduit dès le mois de mars et pendant toute la période de confinement puis de déconfinement à allonger 
+                        les délais accordés aux entreprises pour répondre à ses enquêtes. Nous sommes conscients des difficultés que la crise a fait peser sur vous et de ses conséquences 
+                        appelées à perdurer encore quelque temps. Cependant, pour mieux évaluer l’impact de la crise, il est essentiel de suivre dans le détail l’activité économique en France.
+                    </fo:block>
+                    
+                    <fo:block margin-top="3mm">
                         Malgré ma relance en date du ${BddDateEnvoiRappel}, et sauf erreur de ma part, votre réponse à l’<fo:inline font-weight="bold">enquête#if((${BddFrequence}!='annuelle') 
                         and (${BddFrequence}!='pluriannuelle')) ${BddFrequence}#end ${BddLibelleLong}#if((${BddFrequence}!='annuelle') 
                         and (${BddFrequence}!='pluriannuelle')) ${BddPeriode}#end ${BddAnneeReference}</fo:inline> n’est pas encore parvenue à mes services. 
@@ -134,7 +140,10 @@
                     <fo:block margin-top="3mm">
                         Dans le cas contraire, les dispositions légales* m’amènent à <fo:inline font-weight="bold">vous mettre en demeure</fo:inline> d’adresser votre réponse 
                         à mes services dans un délai de <fo:inline font-weight="bold">15 jours</fo:inline> à compter de la réception de la présente lettre, 
-                        ou de me faire connaître par écrit les motifs de cette absence de réponse.
+                        ou de me faire connaître par écrit les motifs de cette absence de réponse. Je peux tout à fait comprendre que nous n’ayez pas été en mesure de répondre 
+                        jusqu’à présent, compte tenu du contexte, mais votre réponse est essentielle pour garantir la qualité et la fiabilité des statistiques sur 2019. 
+                        Ceci permettra de disposer d’un point de référence solide pour calculer des évolutions correctes entre 2020 et 2019 dans chaque secteur, et ainsi estimer 
+                        précisément l’impact économique de la crise vécue aujourd’hui.
                     </fo:block>
                     <fo:block margin-top="3mm"
                         >En cas de défaut de réponse dans le délai imparti, la procédure contentieuse prévue par la loi vous serait appliquée 
@@ -169,7 +178,7 @@
                 </fo:block-container>
                 
                 <!-- ZONE NOTE DE BAS DE PAGE -->
-                <fo:block-container absolute-position="absolute" left="1mm" top="250mm" width="188mm" height="100%" overflow="hidden">
+                <fo:block-container absolute-position="absolute" left="1mm" top="265mm" width="188mm" height="100%" overflow="hidden">
                     <fo:block>
                         (*) Loi n°51-711 du 7 juin 1951 modifiée. Décret n° 2009-318 du 20 mars 2009.
                     </fo:block>
