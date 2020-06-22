@@ -1298,6 +1298,13 @@
 					<xsl:with-param name="variable-name" select="$variable-name" tunnel="yes"/>
 				</xsl:apply-templates>
 			</xsl:when>
+			<!-- image codes are supposed to be scale codes, which have to be in horizontal mode -->
+			<xsl:when test="enofo:get-style($source-context) = 'image'">
+				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+					<xsl:with-param name="driver" select="." tunnel="yes"/>
+					<xsl:with-param name="variable-name" select="$variable-name" tunnel="yes"/>
+				</xsl:apply-templates>
+			</xsl:when>
 			<xsl:otherwise>
 				<fo:list-block>
 					<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
@@ -1321,13 +1328,13 @@
 		</xsl:variable>
 
 		<xsl:choose>
-			<xsl:when test="$no-border = 'no-border'">
+			<xsl:when test="$no-border = 'no-border' or $image != ''">
 				<fo:inline>
 					<fo:inline>
 						<xsl:if test="enofo:is-initializable-variable($source-context)">
-							<xsl:value-of select="concat('#{if}(',$variable-name,' = ''',enofo:get-value($source-context),''') ')"/>
+							<xsl:value-of select="concat('#{if}(',$variable-name,' eq ''',enofo:get-value($source-context),''') ')"/>
 							<xsl:call-template name="insert-image">
-								<xsl:with-param name="image-name" select="'checkbox-checked.png'"/>
+								<xsl:with-param name="image-name" select="'checkbox_selected.png'"/>
 							</xsl:call-template>
 							<xsl:value-of select="'#{else}'"/>
 						</xsl:if>
@@ -1360,9 +1367,9 @@
 					<fo:list-item-label end-indent="label-end()">
 						<fo:block text-align="right">
 							<xsl:if test="enofo:is-initializable-variable($source-context)">
-								<xsl:value-of select="concat('#{if}(',$variable-name,' = ''',enofo:get-value($source-context),''') ')"/>
+								<xsl:value-of select="concat('#{if}(',$variable-name,' eq ''',enofo:get-value($source-context),''') ')"/>
 								<xsl:call-template name="insert-image">
-									<xsl:with-param name="image-name" select="'checkbox-checked.png'"/>
+									<xsl:with-param name="image-name" select="'checkbox_selected.png'"/>
 								</xsl:call-template>
 								<xsl:value-of select="'#{else}'"/>
 							</xsl:if>
