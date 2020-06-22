@@ -1428,14 +1428,14 @@
 
 		<xsl:variable name="variable-name">
 			<xsl:value-of select="'$!{'"/>
-			<xsl:value-of select="$loop-navigation//Loop[last()]/name()"/>
+			<xsl:value-of select="$loop-navigation//Loop[last()]/@name"/>
 			<xsl:choose>
 				<!-- variable in empty occurrence after loop -->
 				<xsl:when test="$loop-navigation//Loop[last()]/text() != ''">
 					<xsl:value-of select="'-0-'"/>
 				</xsl:when>
 				<!-- variable in loop occurrence -->
-				<xsl:when test="$loop-navigation//Loop != ''">
+				<xsl:when test="$loop-navigation//Loop">
 					<xsl:value-of select="'.'"/>
 				</xsl:when>
 				<!-- variable out of loops -->

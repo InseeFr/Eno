@@ -460,7 +460,7 @@
     </xd:doc>
     <xsl:function name="enofo:get-style">
         <xsl:param name="context" as="item()"/>
-        <xsl:sequence select="if(enoddi:get-style($context) = 'question multiple-choice-question') then ('no-border') else()"/>
+        <xsl:sequence select="if(enoddi:get-style($context) = 'question multiple-choice-question') then ('no-border') else(if(enoddi:get-style($context) = 'image') then ('image') else())"/>
     </xsl:function>
 
     <xd:doc>
