@@ -1205,7 +1205,9 @@
 					<fo:block xsl:use-attribute-sets="label-cell">
 						<xsl:choose>
 							<xsl:when test="enofo:is-initializable-variable($source-context)">
-								<xsl:copy-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}',$duration-content,'#{end}')"/>
+								<xsl:value-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
+								<xsl:copy-of select="$duration-content"/>
+								<xsl:value-of select="'#{end}'"/>
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:copy-of select="$duration-content"/>
@@ -1217,7 +1219,9 @@
 					<fo:block xsl:use-attribute-sets="general-style">
 						<xsl:choose>
 							<xsl:when test="enofo:is-initializable-variable($source-context)">
-								<xsl:copy-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}',$duration-content,'#{end}')"/>
+								<xsl:value-of select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
+								<xsl:copy-of select="$duration-content"/>
+								<xsl:value-of select="'#{end}'"/>
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:copy-of select="$duration-content"/>
