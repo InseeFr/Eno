@@ -849,7 +849,8 @@
 			<xsl:value-of select="concat('#{if}(',$variable-name,')')"/>
 			<xsl:choose>
 				<xsl:when test="number(enofo:get-number-of-decimals($source-context)) &gt;= 0">
-					<xsl:value-of select="concat('#set( $',$variable-business-name,'-layout = ',$variable-name,'.replaceAll(&quot;.&quot;,&quot;,&quot;))')"/>
+					<xsl:value-of select="concat('#set( $',$variable-business-name,'-layout = ',$variable-name)"/>
+					<xsl:text>.replace('.',','))</xsl:text>
 					<xsl:text>&#xa;</xsl:text>
 					<xsl:value-of select="concat('$',$variable-business-name,'-layout')"/>
 				</xsl:when>
