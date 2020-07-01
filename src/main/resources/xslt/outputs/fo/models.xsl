@@ -838,13 +838,27 @@
 
 		<xsl:variable name="length" select="number(enofo:get-length($source-context))"/>
 		<xsl:variable name="label" select="enofo:get-label($source-context, $languages[1],$loop-navigation)"/>
+		<xsl:variable name="variable-business-name" select="enofo:get-business-name($source-context)"/>
 		<xsl:variable name="variable-name" as="xs:string">
 			<xsl:call-template name="variable-velocity-name">
-				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
+				<xsl:with-param name="variable" select="$variable-business-name"/>
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
 			</xsl:call-template>
 		</xsl:variable>
-		<xsl:variable name="variable-personalization-begin" select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
+		<xsl:variable name="variable-personalization-begin">
+			<xsl:value-of select="concat('#{if}(',$variable-name,')')"/>
+			<xsl:choose>
+				<xsl:when test="number(enofo:get-number-of-decimals($source-context)) &gt;= 0">
+					<xsl:value-of select="concat('#set( $',$variable-business-name,'-layout = ',$variable-name,'.replaceAll(&quot;.&quot;,&quot;,&quot;))')"/>
+					<xsl:text>&#xa;</xsl:text>
+					<xsl:value-of select="concat('$',$variable-business-name,'-layout')"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$variable-name"/>
+				</xsl:otherwise>
+			</xsl:choose>
+			<xsl:value-of select="'#{else}'"/>
+		</xsl:variable>
 
 		<xsl:if test="$label != ''">
 			<xsl:choose>
