@@ -478,13 +478,13 @@
 						text-align="center" margin-top="1mm" display-align="center" space-after="5mm"/>
 				</fo:block>
 			</xsl:variable>
-			<xsl:value-of select="replace(concat(substring-before(eno:serialize($table-begin),'/&gt;'),'&gt;'),'&lt;','&lt;fo:')"/>
+			<xsl:value-of select="replace(concat(substring-before(eno:serialize($table-begin),'/&gt;'),'&gt;'),'&lt;','&lt;fo:')" disable-output-escaping="yes"/>
 			<xsl:if test="count(enofo:get-header-lines($source-context)) != 0">
 				<xsl:value-of select="concat('&lt;fo:table-header&gt;',
 					                  replace(replace(eno:serialize($table-header),'&lt;','&lt;fo:'),'&lt;fo:/','&lt;/fo:'),
-					                  '&lt;/fo:table-header&gt;')"/>
+					                  '&lt;/fo:table-header&gt;')" disable-output-escaping="yes"/>
 			</xsl:if>
-			<xsl:value-of select="'&lt;fo:table-body&gt;'"/>
+			<xsl:value-of select="'&lt;fo:table-body&gt;'" disable-output-escaping="yes"/>
 			<xsl:text>&#xa;</xsl:text>
 			<xsl:value-of select="'#end '"/>
 			<xsl:text>&#xa;</xsl:text>
@@ -519,7 +519,7 @@
 						<xsl:text>&#xd;</xsl:text>
 						<xsl:value-of select="concat('#set( $',$loop-name,'.LoopPosition = $velocityCount)')"/>
 						<xsl:text>&#xd;</xsl:text>
-						<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('\$',$loop-name,'.LoopPosition'))"/>
+						<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('\$',$loop-name,'.LoopPosition'))" disable-output-escaping="yes"/>
 						<!-- the line to loop on -->
 						<xsl:for-each select="enofo:get-body-lines($source-context)">
 							<xsl:variable name="position" select="position()"/>
@@ -553,7 +553,7 @@
 								<xsl:value-of select="concat('#if ($',$loop-name,'-TotalOccurrenceInt le ',$roster-minimum-lines - $empty-position,') ')"/>
 								<xsl:text>&#xa;</xsl:text>
 							</xsl:if>
-							<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('(\$',$loop-name,'-TotalOccurrenceInt + ',$empty-position,')'))"/>
+							<xsl:value-of select="replace($table-split-content,'PositionInTheLoop',concat('(\$',$loop-name,'-TotalOccurrenceInt + ',$empty-position,')'))" disable-output-escaping="yes"/>
 							<!-- the line to fake-loop on -->
 							<xsl:for-each select="enofo:get-body-lines($source-context)">
 								<xsl:variable name="position" select="position()"/>

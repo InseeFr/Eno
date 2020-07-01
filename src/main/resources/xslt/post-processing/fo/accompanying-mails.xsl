@@ -107,6 +107,8 @@
     </xsl:template>
     
     <xsl:template match="text()" mode="keep-cdata" priority="2">
-        <xsl:value-of select="replace(.,'&amp;','&amp;amp;')" disable-output-escaping="yes"/>
+        <xsl:value-of select="replace(replace(replace(.,'&amp;','&amp;amp;')
+                                                       ,'&gt;','&amp;gt;')
+                                                       ,'&lt;','&amp;lt;')" disable-output-escaping="yes"/>
     </xsl:template>
 </xsl:stylesheet>
