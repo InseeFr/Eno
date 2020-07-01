@@ -1028,9 +1028,10 @@
 				<xsl:value-of select="'DD'"/>
 			</xsl:if>
 		</xsl:variable>
+		<xsl:variable name="variable-business-name" select="enofo:get-business-name($source-context)"/>
 		<xsl:variable name="variable-name" as="xs:string">
 			<xsl:call-template name="variable-velocity-name">
-				<xsl:with-param name="variable" select="enofo:get-business-name($source-context)"/>
+				<xsl:with-param name="variable" select="$variable-business-name"/>
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
 			</xsl:call-template>
 		</xsl:variable>
@@ -1038,10 +1039,14 @@
 			<xsl:value-of select="concat('#{if}(',$variable-name,')')"/>
 			<xsl:choose>
 				<xsl:when test="$field = 'YYYY-MM-DD'">
-					<xsl:value-of select="concat($variable-name,'.substring(8,2) / ',$variable-name,'.substring(5,2) / ',$variable-name,'.substring(0,4)')"/>
+					<xsl:value-of select="concat('#set( $',$variable-business-name,'-layout = ',$variable-name,'.substring(8,2) + &quot;/&quot; + ',$variable-name,'.substring(5,2) + &quot;/&quot; + ',$variable-name,'.substring(0,4))')"/>
+					<xsl:text>&#xa;</xsl:text>
+					<xsl:value-of select="concat('$',$variable-business-name,'-layout')"/>
 				</xsl:when>
 				<xsl:when test="$field = 'YYYY-MM'">
-					<xsl:value-of select="concat($variable-name,'.substring(5,2) / ',$variable-name,'.substring(0,4)')"/>
+					<xsl:value-of select="concat('#set( $',$variable-business-name,'-layout = ',$variable-name,'.substring(5,2) + &quot;/&quot; + ',$variable-name,'.substring(0,4))')"/>
+					<xsl:text>&#xa;</xsl:text>
+					<xsl:value-of select="concat('$',$variable-business-name,'-layout')"/>
 				</xsl:when>
 				<xsl:when test="$field = 'YYYY'">
 					<xsl:value-of select="$variable-name"/>
