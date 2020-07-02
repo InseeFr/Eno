@@ -845,21 +845,7 @@
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
 			</xsl:call-template>
 		</xsl:variable>
-		<xsl:variable name="variable-personalization-begin">
-			<xsl:value-of select="concat('#{if}(',$variable-name,')')"/>
-			<xsl:choose>
-				<xsl:when test="number(enofo:get-number-of-decimals($source-context)) &gt;= 0">
-					<xsl:value-of select="concat('#set( $',$variable-business-name,'-layout = ',$variable-name)"/>
-					<xsl:text>.replace('.',','))</xsl:text>
-					<xsl:text>&#xa;</xsl:text>
-					<xsl:value-of select="concat('$',$variable-business-name,'-layout')"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="$variable-name"/>
-				</xsl:otherwise>
-			</xsl:choose>
-			<xsl:value-of select="'#{else}'"/>
-		</xsl:variable>
+		<xsl:variable name="variable-personalization-begin" select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
 
 		<xsl:if test="$label != ''">
 			<xsl:choose>
@@ -1036,29 +1022,7 @@
 				<xsl:with-param name="loop-navigation" select="$loop-navigation" as="node()"/>
 			</xsl:call-template>
 		</xsl:variable>
-		<xsl:variable name="variable-personalization-begin">
-			<xsl:value-of select="concat('#{if}(',$variable-name,')')"/>
-			<xsl:choose>
-				<xsl:when test="$field = 'YYYY-MM-DD'">
-					<xsl:value-of select="concat('#set( $',$variable-business-name,'-layout = ',$variable-name,'.substring(8,2) + &quot;/&quot; + ',$variable-name,'.substring(5,2) + &quot;/&quot; + ',$variable-name,'.substring(0,4))')"/>
-					<xsl:text>&#xa;</xsl:text>
-					<xsl:value-of select="concat('$',$variable-business-name,'-layout')"/>
-				</xsl:when>
-				<xsl:when test="$field = 'YYYY-MM'">
-					<xsl:value-of select="concat('#set( $',$variable-business-name,'-layout = ',$variable-name,'.substring(5,2) + &quot;/&quot; + ',$variable-name,'.substring(0,4))')"/>
-					<xsl:text>&#xa;</xsl:text>
-					<xsl:value-of select="concat('$',$variable-business-name,'-layout')"/>
-				</xsl:when>
-				<xsl:when test="$field = 'YYYY'">
-					<xsl:value-of select="$variable-name"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="$variable-name"/>
-				</xsl:otherwise>
-			</xsl:choose>
-			<xsl:value-of select="'#{else}'"/>
-		</xsl:variable>
-		
+		<xsl:variable name="variable-personalization-begin" select="concat('#{if}(',$variable-name,')',$variable-name,'#{else}')"/>
 
 		<xsl:if test="$label != ''">
 			<xsl:choose>
