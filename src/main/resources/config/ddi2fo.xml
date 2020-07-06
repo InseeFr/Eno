@@ -64,7 +64,7 @@
 				<DefaultSize>5</DefaultSize>
 			</Row>
 		</TextArea>
-		<InitializeAllVariables>true</InitializeAllVariables>
+		<InitializeAllVariables>false</InitializeAllVariables>
 		<!-- BarCode type: Datamatrix ou 2D -->
 		<BarCode>
 			<Type>Datamatrix</Type>
