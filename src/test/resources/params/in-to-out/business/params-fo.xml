@@ -37,9 +37,11 @@
         </EndQuestion>
         
         <fo-parameters>
+            <InitializeAllVariables>false</InitializeAllVariables>
             <Roster>
                 <Row>
                     <DefaultSize>20</DefaultSize>
+                    <MinimumEmpty>0</MinimumEmpty>
                 </Row>
             </Roster>
             <Table>
