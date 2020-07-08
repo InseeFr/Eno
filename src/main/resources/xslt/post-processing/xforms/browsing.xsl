@@ -194,116 +194,13 @@
                 </label>
             </GenericBeginningText>
             <xsl:apply-templates select="node()"/>
-            <End>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/End"/>
-                </label>
-            </End>
-            <GenericEndText>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GenericEndText"/>
-                </label>
-            </GenericEndText>
-            <Progress>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Progress"/>
-                </label>
-            </Progress>
-            <Start>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Start"/>
-                </label>
-            </Start>
-            <Previous>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Previous"/>
-                </label>
-            </Previous>
-            <Next>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Next"/>
-                </label>
-            </Next>
-            <Send>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Send"/>
-                </label>
-            </Send>
-            <ConfirmationMessage>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ConfirmationMessage"/>
-                </label>
-            </ConfirmationMessage>
-            <FatalError>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/FatalError"/>
-                </label>
-            </FatalError>
-            <Correct>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Correct"/>
-                </label>
-            </Correct>
-            <Continue>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Continue"/>
-                </label>
-            </Continue>
-            <GoBackWarning>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoBackWarning"/>
-                </label>
-            </GoBackWarning>
-            <GoBack>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoBack"/>
-                </label>
-            </GoBack>
-            <GoToFirstPage>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoToFirstPage"/>
-                </label>
-            </GoToFirstPage>
-            <WelcomeBack>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBack"/>
-                </label>
-            </WelcomeBack>
-            <Warning>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Warning"/>
-                </label>
-            </Warning>
-            <Error>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Error"/>
-                </label>
-            </Error>
-            <WelcomeBackText>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBackText"/>
-                </label>
-            </WelcomeBackText>
-            <WarningTextPrevious>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WarningTextPrevious"/>
-                </label>
-            </WarningTextPrevious>
-            <WarningTextNext>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WarningTextNext"/>
-                </label>
-            </WarningTextNext>
-            <ErrorTextPrevious>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ErrorTextPrevious"/>
-                </label>
-            </ErrorTextPrevious>
-            <ErrorTextNext>
-                <label>
-                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ErrorTextNext"/>
-                </label>
-            </ErrorTextNext>
+            <xsl:for-each select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/*[name() != 'Beginning' and name() != 'GenericBeginningText']">
+                <xsl:element name="{name()}">
+                    <label>
+                        <xsl:value-of select="."/>
+                    </label>
+                </xsl:element>
+            </xsl:for-each>
         </xsl:copy>
     </xsl:template>
 
@@ -711,6 +608,7 @@
         </xsl:copy>
     </xsl:template>
 
+    
     <xd:doc>
         <xd:desc>
             <xd:p>loop of pages : bind</xd:p>
