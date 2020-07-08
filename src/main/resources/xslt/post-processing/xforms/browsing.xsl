@@ -127,12 +127,27 @@
                 <xf:bind id="generic-end-text-bind" name="generic-end-text" ref="GenericEndText"/>
             </xf:bind>
             <!-- The CurrentSectionName depends of the CurrentSection -->
-            <xf:bind id="current-section-name-bind" name="current-section-name" ref="Util/CurrentSectionName" calculate="instance('fr-form-util')/Pages//*[not(*)][position()=number(instance('fr-form-instance')/Util/CurrentSection)]/name()"/>
+            <xf:bind id="current-section-name-bind" name="current-section-name"
+                ref="Util/CurrentSectionName">
+                <xsl:attribute name="calculate">
+                    <xsl:for-each select="//fr:body/xf:repeat">
+                        <xsl:variable name="section-position">
+                            <xsl:value-of select="count(preceding-sibling::*)+1"/>
+                        </xsl:variable>
+                        <xsl:variable name="loop-module" select="fr:section/@name"/>
+                        <xsl:value-of select="concat('(if (instance(''fr-form-instance'')/Util/CurrentSection=''',$section-position,''')
+                            then ''',$loop-module,''' else ')"
+                        />
+                    </xsl:for-each>
+                    <xsl:value-of select="'(instance(''fr-form-util'')/Pages/*)[position()=number(instance(''fr-form-instance'')/Util/CurrentSection)]/name()'"/>
+                    <xsl:for-each select="//fr:body/xf:repeat">
+                        <xsl:value-of select="')'"/>
+                    </xsl:for-each>
+                </xsl:attribute>
+            </xf:bind>
         </xsl:copy>
     </xsl:template>
 
-<!-- I believe that this is writting in a wrong place since 2016-2017 : the @nodeset doesn't have to be linked to only one occurrence -->
-<!--
     <xd:doc>
         <xd:desc>
             <xd:p>Direct child of a loop at the root of the questionnaire : it means this child is considered as a module.</xd:p>
@@ -152,12 +167,12 @@
         </xsl:variable>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <!-\- Each one is relevant only when it needs to be displayed -\->
+            <!-- Each one is relevant only when it needs to be displayed -->
             <xsl:attribute name="relevant" select="concat('count(preceding-sibling::*[name()=''',$name,'''])+1=instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$container,''']')"/>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
--->
+
     <xd:doc>
         <xd:desc>
             <xd:p>Template to add elements to the resource instance.</xd:p>
@@ -179,13 +194,116 @@
                 </label>
             </GenericBeginningText>
             <xsl:apply-templates select="node()"/>
-            <xsl:for-each select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/*[name() != 'Beginning' and name() != 'GenericBeginningText']">
-                <xsl:element name="{name()}">
-                    <label>
-                        <xsl:value-of select="."/>
-                    </label>
-                </xsl:element>
-            </xsl:for-each>
+            <End>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/End"/>
+                </label>
+            </End>
+            <GenericEndText>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GenericEndText"/>
+                </label>
+            </GenericEndText>
+            <Progress>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Progress"/>
+                </label>
+            </Progress>
+            <Start>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Start"/>
+                </label>
+            </Start>
+            <Previous>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Previous"/>
+                </label>
+            </Previous>
+            <Next>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Next"/>
+                </label>
+            </Next>
+            <Send>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Send"/>
+                </label>
+            </Send>
+            <ConfirmationMessage>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ConfirmationMessage"/>
+                </label>
+            </ConfirmationMessage>
+            <FatalError>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/FatalError"/>
+                </label>
+            </FatalError>
+            <Correct>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Correct"/>
+                </label>
+            </Correct>
+            <Continue>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Continue"/>
+                </label>
+            </Continue>
+            <GoBackWarning>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoBackWarning"/>
+                </label>
+            </GoBackWarning>
+            <GoBack>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoBack"/>
+                </label>
+            </GoBack>
+            <GoToFirstPage>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/GoToFirstPage"/>
+                </label>
+            </GoToFirstPage>
+            <WelcomeBack>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBack"/>
+                </label>
+            </WelcomeBack>
+            <Warning>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Warning"/>
+                </label>
+            </Warning>
+            <Error>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/Error"/>
+                </label>
+            </Error>
+            <WelcomeBackText>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WelcomeBackText"/>
+                </label>
+            </WelcomeBackText>
+            <WarningTextPrevious>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WarningTextPrevious"/>
+                </label>
+            </WarningTextPrevious>
+            <WarningTextNext>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/WarningTextNext"/>
+                </label>
+            </WarningTextNext>
+            <ErrorTextPrevious>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ErrorTextPrevious"/>
+                </label>
+            </ErrorTextPrevious>
+            <ErrorTextNext>
+                <label>
+                    <xsl:value-of select="$labels-resource/Languages/Language[@xml:lang=$language]/Browsing/ErrorTextNext"/>
+                </label>
+            </ErrorTextNext>
         </xsl:copy>
     </xsl:template>
 
@@ -218,7 +336,10 @@
                     <PageTop/>
                     <Pages>
                         <Beginning/>
-                        <xsl:apply-templates select="xf:instance[@id='fr-form-instance']/form/*[not(name()='Util') and child::*]" mode="page-name"/>
+                        <!-- One element is created for each page -->
+                        <xsl:for-each select="//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and not(name()='Util') and child::*]">
+                            <xsl:element name="{name()}"/>
+                        </xsl:for-each>
                         <End/>
                     </Pages>
                     <PreviousNext/>
@@ -343,11 +464,10 @@
             <!-- Initialization action -->
             <!-- Initialization of all variable text fields -->
             <xf:action ev:event="xforms-ready">
-                <!-- Initialization of dynamic arrays and loops -->
+                <!-- Initialization of dynamic arrays -->
                 <xsl:for-each select="//xf:repeat">
                     <xsl:variable name="container" select="@id"/>
                     <xsl:variable name="dynamic-array" select="substring-after(@nodeset,concat($container,'/'))"/>
-                    <!-- Always initialized through the first one if linked loops -->
                     <xsl:if test="//xf:repeat[tokenize(@nodeset,'/')[last()]=$dynamic-array][not(preceding::xf:repeat[tokenize(@nodeset,'/')[last()]=$dynamic-array])]/@id=$container">
                         <xf:action if="not(instance('fr-form-instance')//{$container}/*)
                             or count(instance('fr-form-instance')//{$container}/{$dynamic-array}) &lt; instance('fr-form-instance')//{$dynamic-array}-Count">
@@ -364,7 +484,6 @@
                             <xf:setvalue ref="instance('fr-form-instance')//{$dynamic-array}-Count"
                                 value="count(instance('fr-form-instance')//{$container}/{$dynamic-array})"/>
                         </xf:action>
-                        <!-- linked loops -->
                         <xsl:for-each select="//xf:repeat[substring-after(@nodeset,concat(@id,'/')) = $dynamic-array]">
                             <xsl:if test="@id != $container">
                                 <xf:action if="not(instance('fr-form-instance')//{@id}/*)
@@ -592,20 +711,6 @@
 
     <xd:doc>
         <xd:desc>
-            <xd:p>loop of page names</xd:p>
-        </xd:desc>
-    </xd:doc>
-    <xsl:template match="*[*/@occurrence-id]" mode="page-name">
-        <xsl:element name="{name()}">
-            <xsl:apply-templates select="*/*[*]" mode="page-name"/>    
-        </xsl:element>
-    </xsl:template>
-    <xsl:template match="*[not(*/@occurrence-id)]" mode="page-name">
-        <xsl:element name="{name()}"/>
-    </xsl:template>
-    
-    <xd:doc>
-        <xd:desc>
             <xd:p>loop of pages : bind</xd:p>
         </xd:desc>
     </xd:doc>
@@ -672,7 +777,7 @@
     <xd:doc>
         <xd:desc>page-check : relevant ancestor of constraint added : must be not relevant or the constraint inside must be true</xd:desc>
     </xd:doc>
-    <xsl:template match="xf:bind[@relevant and not(@nodeset)]" mode="page-check">
+    <xsl:template match="xf:bind[@relevant]" mode="page-check">
         <xsl:param name="constraint-begin" as="xs:string" tunnel="yes"/>
         <xsl:param name="constraint-end" as="xs:string" tunnel="yes"/>
         
@@ -803,14 +908,13 @@
 -->
     </xsl:template>
 
-<!-- maybe not useful due to setindex -->
-<!--    <xsl:template match="xf:var[@value='position()' and parent::xf:repeat/fr:section]">
+    <xsl:template match="xf:var[@value='position()' and parent::xf:repeat/fr:section]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="value" select="concat('number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',parent::xf:repeat/@id,'''])')"/>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
-    </xsl:template>-->
+    </xsl:template>
 
     <xd:doc>
         <xd:desc>
