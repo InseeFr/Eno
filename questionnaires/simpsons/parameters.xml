@@ -19,7 +19,7 @@
         
         <EndQuestion>
             <ResponseTimeQuestion>false</ResponseTimeQuestion>
-            <CommentQuestion>true</CommentQuestion>
+            <CommentQuestion>false</CommentQuestion>
         </EndQuestion>
         
         <xforms-parameters>
