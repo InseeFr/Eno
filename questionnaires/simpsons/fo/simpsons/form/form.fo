@@ -3219,8 +3219,6 @@
                   </fo:table-row>#end 
 #set( $initializeInt = 0)
 #set( $FAVOURITE_CHARACTERS-TotalOccurrenceInt = $initializeInt.parseInt(${FAVOURITE_CHARACTERS-TotalOccurrenceCount}))
-
-#if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 9) 
 #if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 1) % 19 eq 0) 
 </fo:table-body>
             </fo:table>
@@ -3591,8 +3589,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
-
 #if ($FAVOURITE_CHARACTERS-TotalOccurrenceInt le 8) 
 #if (($FAVOURITE_CHARACTERS-TotalOccurrenceInt + 2) % 19 eq 0) 
 </fo:table-body>

@@ -1550,7 +1550,10 @@
                      </fo:table-cell>
                   </fo:table-row>
                </fo:table-header>
-               <fo:table-body>#foreach( ${REPARTITION_CA} in ${REPARTITION_CA-Container} ) #set( $REPARTITION_CA.LoopPosition = $velocityCount)#if ($REPARTITION_CA.LoopPosition % 15 eq 0) 
+               <fo:table-body>
+#foreach( ${REPARTITION_CA} in ${REPARTITION_CA-Container} ) 
+#set( $REPARTITION_CA.LoopPosition = $velocityCount)
+#if ($REPARTITION_CA.LoopPosition % 15 eq 0) 
 </fo:table-body>
             </fo:table>
          </fo:block>
@@ -1652,11 +1655,10 @@
                            </fo:block>
                         </fo:block>
                      </fo:table-cell>
-                  </fo:table-row>#end 
+                  </fo:table-row>
+#end 
 #set( $initializeInt = 0)
 #set( $REPARTITION_CA-TotalOccurrenceInt = $initializeInt.parseInt(${REPARTITION_CA-TotalOccurrenceCount}))
-
-#if ($REPARTITION_CA-TotalOccurrenceInt le 9) 
 #if (($REPARTITION_CA-TotalOccurrenceInt + 1) % 15 eq 0) 
 </fo:table-body>
             </fo:table>
@@ -1767,8 +1769,6 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-#end 
-
 #if ($REPARTITION_CA-TotalOccurrenceInt le 8) 
 #if (($REPARTITION_CA-TotalOccurrenceInt + 2) % 15 eq 0) 
 </fo:table-body>

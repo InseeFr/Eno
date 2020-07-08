@@ -37,11 +37,6 @@
         </EndQuestion>
         
         <fo-parameters>
-            <Roster>
-                <Row>
-                    <DefaultSize>20</DefaultSize>
-                </Row>
-            </Roster>
             <Table>
                 <Row>
                     <DefaultSize>15</DefaultSize>

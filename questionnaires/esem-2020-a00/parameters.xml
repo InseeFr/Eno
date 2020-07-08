@@ -19,7 +19,7 @@
             <DecimalSeparator>.</DecimalSeparator>
         </xforms-parameters>
         <fo-parameters>
-            <Roster>
+            <!--<Roster>
                 <Row>
                     <DefaultSize>10</DefaultSize>
                     <MinimumEmpty>0</MinimumEmpty>
@@ -28,7 +28,7 @@
             <Loop>
                 <DefaultOccurrence>5</DefaultOccurrence>
                 <MinimumEmptyOccurrence>1</MinimumEmptyOccurrence>
-            </Loop>
+            </Loop>-->
             <Table>
                 <Row>
                     <DefaultSize>15</DefaultSize>
