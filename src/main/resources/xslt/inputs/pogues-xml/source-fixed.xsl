@@ -136,6 +136,9 @@
             <xsl:when test=". = 'http://id.insee.fr/unit/jour'">
                 <xsl:value-of select="'jours'"/>
             </xsl:when>
+            <xsl:when test=". = 'http://id.insee.fr/unit/semaine'">
+                <xsl:value-of select="'semaines'"/>
+            </xsl:when>
             <xsl:when test=". = 'http://id.insee.fr/unit/mois'">
                 <xsl:value-of select="'mois'"/>
             </xsl:when>
