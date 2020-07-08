@@ -127,27 +127,12 @@
                 <xf:bind id="generic-end-text-bind" name="generic-end-text" ref="GenericEndText"/>
             </xf:bind>
             <!-- The CurrentSectionName depends of the CurrentSection -->
-            <xf:bind id="current-section-name-bind" name="current-section-name"
-                ref="Util/CurrentSectionName">
-                <xsl:attribute name="calculate">
-                    <xsl:for-each select="//fr:body/xf:repeat">
-                        <xsl:variable name="section-position">
-                            <xsl:value-of select="count(preceding-sibling::*)+1"/>
-                        </xsl:variable>
-                        <xsl:variable name="loop-module" select="fr:section/@name"/>
-                        <xsl:value-of select="concat('(if (instance(''fr-form-instance'')/Util/CurrentSection=''',$section-position,''')
-                            then ''',$loop-module,''' else ')"
-                        />
-                    </xsl:for-each>
-                    <xsl:value-of select="'(instance(''fr-form-util'')/Pages/*)[position()=number(instance(''fr-form-instance'')/Util/CurrentSection)]/name()'"/>
-                    <xsl:for-each select="//fr:body/xf:repeat">
-                        <xsl:value-of select="')'"/>
-                    </xsl:for-each>
-                </xsl:attribute>
-            </xf:bind>
+            <xf:bind id="current-section-name-bind" name="current-section-name" ref="Util/CurrentSectionName" calculate="instance('fr-form-util')/Pages//*[not(*)][position()=number(instance('fr-form-instance')/Util/CurrentSection)]/name()"/>
         </xsl:copy>
     </xsl:template>
 
+<!-- I believe that this is writting in a wrong place since 2016-2017 : the @nodeset doesn't have to be linked to only one occurrence -->
+<!--
     <xd:doc>
         <xd:desc>
             <xd:p>Direct child of a loop at the root of the questionnaire : it means this child is considered as a module.</xd:p>
@@ -167,12 +152,12 @@
         </xsl:variable>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <!-- Each one is relevant only when it needs to be displayed -->
+            <!-\- Each one is relevant only when it needs to be displayed -\->
             <xsl:attribute name="relevant" select="concat('count(preceding-sibling::*[name()=''',$name,'''])+1=instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$container,''']')"/>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
     </xsl:template>
-
+-->
     <xd:doc>
         <xd:desc>
             <xd:p>Template to add elements to the resource instance.</xd:p>
@@ -233,10 +218,7 @@
                     <PageTop/>
                     <Pages>
                         <Beginning/>
-                        <!-- One element is created for each page -->
-                        <xsl:for-each select="//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and not(name()='Util') and child::*]">
-                            <xsl:element name="{name()}"/>
-                        </xsl:for-each>
+                        <xsl:apply-templates select="xf:instance[@id='fr-form-instance']/form/*[not(name()='Util') and child::*]" mode="page-name"/>
                         <End/>
                     </Pages>
                     <PreviousNext/>
@@ -608,6 +590,19 @@
         </xsl:copy>
     </xsl:template>
 
+    <xd:doc>
+        <xd:desc>
+            <xd:p>loop of page names</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="*[*/@occurrence-id]" mode="page-name">
+        <xsl:element name="{name()}">
+            <xsl:apply-templates select="*/*[*]" mode="page-name"/>    
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="*[not(*/@occurrence-id)]" mode="page-name">
+        <xsl:element name="{name()}"/>
+    </xsl:template>
     
     <xd:doc>
         <xd:desc>
@@ -808,13 +803,14 @@
 -->
     </xsl:template>
 
-    <xsl:template match="xf:var[@value='position()' and parent::xf:repeat/fr:section]">
+<!-- maybe not useful due to setindex -->
+<!--    <xsl:template match="xf:var[@value='position()' and parent::xf:repeat/fr:section]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="value" select="concat('number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',parent::xf:repeat/@id,'''])')"/>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
-    </xsl:template>
+    </xsl:template>-->
 
     <xd:doc>
         <xd:desc>
