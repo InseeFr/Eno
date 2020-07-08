@@ -168,7 +168,7 @@
         <xsl:param name="componentRef"/>
         <xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
         <!-- responseType="{$responseType}" -->
-        <variables variableType="COLLECTED">
+        <variables variableType="COLLECTED" xsi:type="VariableType">
             <name><xsl:value-of select="$responseName"/></name>
             <componentRef><xsl:value-of select="$componentRef"/></componentRef>
             <values>
