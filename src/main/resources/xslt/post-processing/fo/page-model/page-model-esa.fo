@@ -49,21 +49,6 @@
     <fo:page-sequence master-reference="A4" initial-page-number="2" force-page-count="odd">
         <fo:title/>
         <fo:static-content flow-name="region-before-odd-esa">
-            <fo:block-container text-align="left" absolute-position="absolute" left="180mm" width="90mm" height="5mm" top="0mm">
-                <fo:block>
-                    <fo:instream-foreign-object>
-                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
-                            message="${idQuestionnaire}-#page-number#">
-                            <barcode:code39>
-                                <barcode:height>8mm</barcode:height>
-                                <barcode:human-readable>
-                                    <barcode:placement>top</barcode:placement>
-                                </barcode:human-readable>
-                            </barcode:code39>
-                        </barcode:barcode>
-                    </fo:instream-foreign-object>
-                </fo:block>
-            </fo:block-container>
             <fo:block-container absolute-position="absolute" left="277mm" top="5mm" width="5mm" height="5mm">
                 <fo:block position="absolute" text-align="right">
                     <fo:external-graphic src="encoche-top-right.png"/>
@@ -81,6 +66,21 @@
             <fo:block-container absolute-position="absolute" left="127mm" top="2mm" width="33mm" height="10mm">
                 <fo:block text-align="center">
                     <fo:page-number/> / <fo:page-number-citation ref-id="TheVeryLastPage"/>
+                </fo:block>
+            </fo:block-container>
+            <fo:block-container text-align="left" absolute-position="absolute" left="180mm" width="90mm" height="5mm" top="0mm">
+                <fo:block>
+                    <fo:instream-foreign-object>
+                        <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns"
+                            message="${idQuestionnaire}-#page-number#">
+                            <barcode:code39>
+                                <barcode:height>8mm</barcode:height>
+                                <barcode:human-readable>
+                                    <barcode:placement>top</barcode:placement>
+                                </barcode:human-readable>
+                            </barcode:code39>
+                        </barcode:barcode>
+                    </fo:instream-foreign-object>
                 </fo:block>
             </fo:block-container>
         </fo:static-content>
