@@ -48,9 +48,9 @@ public class ValidatorImpl implements Validator {
 			case DDI:
 				isValid = true;
 				break;
-//			case POGUES_XML:
-//				isValid = outFormat.equals(OutFormat.DDI) || outFormat.equals(OutFormat.POGUES_XML);
-//				break;
+			case POGUES_XML:
+				isValid = outFormat.equals(OutFormat.DDI);
+				break;
 			case XFORMS:
 				isValid = outFormat.equals(OutFormat.XFORMS);
 			default:
