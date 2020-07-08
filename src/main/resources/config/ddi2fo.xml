@@ -43,8 +43,8 @@
 		<!-- Definit la taille par défaut des rosters -->
 		<Roster>
 			<Row>
-				<DefaultSize>15</DefaultSize>
-				<MinimumEmpty>0</MinimumEmpty>
+				<DefaultSize>10</DefaultSize>
+				<MinimumEmpty>1</MinimumEmpty>
 			</Row>
 		</Roster>
 		<Loop>
@@ -64,7 +64,7 @@
 				<DefaultSize>5</DefaultSize>
 			</Row>
 		</TextArea>
-		<InitializeAllVariables>true</InitializeAllVariables>
+		<InitializeAllVariables>false</InitializeAllVariables>
 		<!-- BarCode type: Datamatrix ou 2D -->
 		<BarCode>
 			<Type>Datamatrix</Type>

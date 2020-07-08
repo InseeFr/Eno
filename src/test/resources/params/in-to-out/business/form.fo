@@ -171,7 +171,7 @@
                    margin-right="10mm"
                    margin-bottom="10mm"
                    color="white">
-                <![CDATA[#]]><![CDATA[#]]><![CDATA[#]]>DS${NumeroDocument}col${data-IdEdition}
+                &lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;&lt;![CDATA[#]]&gt;DS${NumeroDocument}col${data-IdEdition}
             </fo:block>
       </fo:static-content>
       <fo:flow flow-name="xsl-region-body">
@@ -1493,7 +1493,7 @@
                    keep-with-next="always"
                    keep-together.within-column="always">Si vous déclarez en euros, la somme des CA ventilés doit être égale au CA total. Sinon, le total doit être égal à 100 %.</fo:block>
          <fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-1"
+                   id="REPARTITION_CA"
                    page-break-after="always">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -1551,470 +1551,15 @@
                   </fo:table-row>
                </fo:table-header>
                <fo:table-body>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-1-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-1-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-1-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-1-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-2-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-2-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-2-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-2-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-3-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-3-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-3-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-3-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-4-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-4-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-4-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-4-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-5-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-5-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-5-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-5-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-6-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-6-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-6-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-6-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-7-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-7-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-7-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-7-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-8-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-8-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-8-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-8-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-9-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-9-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-9-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-9-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-10-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-10-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-10-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-10-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-body>
+#foreach( ${REPARTITION_CA} in ${REPARTITION_CA-Container} ) 
+#set( $REPARTITION_CA.LoopPosition = $velocityCount)
+#if ($REPARTITION_CA.LoopPosition % 15 eq 0) 
+</fo:table-body>
             </fo:table>
-         </fo:block>#{if}($!{REPARTITION_CA-10-REPARTITION_CA1})<fo:block page-break-inside="avoid"
-                   id="REPARTITION_CA-2"
+         </fo:block>
+#set ($DynamicArrayPage = $REPARTITION_CA.LoopPosition / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
                    page-break-after="always">
             <fo:table inline-progression-dimension="auto"
                       table-layout="fixed"
@@ -2072,28 +1617,21 @@
                   </fo:table-row>
                </fo:table-header>
                <fo:table-body>
-                  <fo:table-row border-color="black" height="11mm">
+#end 
+<fo:table-row border-color="black" height="11mm">
                      <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-11-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-11-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-11-REPARTITION_CA2})<fo:table-cell text-align="left"
+                                    padding="1mm">
+                        <fo:block>${REPARTITION_CA.REPARTITION_CA1}</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
                                     padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-11-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
+                        <fo:block>$!{REPARTITION_CA.REPARTITION_CA2}</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
                                     border-color="black"
                                     border-style="solid"
                                     padding="1mm">
@@ -2118,653 +1656,1139 @@
                         </fo:block>
                      </fo:table-cell>
                   </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-12-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-12-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-12-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-12-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-13-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-13-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-13-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-13-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-14-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-14-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-14-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-14-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-15-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-15-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-15-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-15-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-16-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-16-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-16-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-16-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-17-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-17-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-17-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-17-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-18-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-18-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-18-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-18-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-19-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-19-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-19-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-19-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-20-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-20-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-20-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-20-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-21-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-21-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-21-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-21-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-22-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-22-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-22-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-22-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-23-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-23-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-23-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-23-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-24-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-24-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-24-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-24-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-                  <fo:table-row border-color="black" height="11mm">
-                     <fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">#{if}($!{REPARTITION_CA-25-REPARTITION_CA1})<fo:block>$!{REPARTITION_CA-25-REPARTITION_CA1}</fo:block>#{else}<fo:block>
-                           <fo:block>
-                              <fo:block-container height="8mm" width="50mm">
-                                 <fo:block> </fo:block>
-                              </fo:block-container>
-                           </fo:block>
-                        </fo:block>#{end}</fo:table-cell>#{if}($!{REPARTITION_CA-25-REPARTITION_CA2})<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>$!{REPARTITION_CA-25-REPARTITION_CA2}</fo:block>
-                     </fo:table-cell>#{else}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm"
-                                    background-color="#CCCCCC">
-                        <fo:block/>
-                     </fo:table-cell>#{end}<fo:table-cell text-align="left"
-                                    border-color="black"
-                                    border-style="solid"
-                                    padding="1mm">
-                        <fo:block>
-                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
-                              <fo:block color="black"
-                                        font-weight="normal"
-                                        font-size="10pt"
-                                        padding="1mm"
-                                        padding-bottom="0mm"
-                                        padding-top="0mm">
-                                 <fo:inline-container width="27mm">
-                                    <fo:block-container height="8mm" width="27mm">
-                                       <fo:block>
-									 
-								</fo:block>
-                                    </fo:block-container>
-                                 </fo:inline-container>
-                                 <fo:inline/>
-                              </fo:block>
-                           </fo:block>
-                        </fo:block>
-                     </fo:table-cell>
-                  </fo:table-row>
-               </fo:table-body>
+#end 
+#set( $initializeInt = 0)
+#set( $REPARTITION_CA-TotalOccurrenceInt = $initializeInt.parseInt(${REPARTITION_CA-TotalOccurrenceCount}))
+#if (($REPARTITION_CA-TotalOccurrenceInt + 1) % 15 eq 0) 
+</fo:table-body>
             </fo:table>
-         </fo:block>#{end}<fo:block background-color="#666666"
+         </fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 1) / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm"
+                                        padding-bottom="0mm"
+                                        padding-top="0mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#if ($REPARTITION_CA-TotalOccurrenceInt le 8) 
+#if (($REPARTITION_CA-TotalOccurrenceInt + 2) % 15 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 2) / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm"
+                                        padding-bottom="0mm"
+                                        padding-top="0mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#end 
+
+#if ($REPARTITION_CA-TotalOccurrenceInt le 7) 
+#if (($REPARTITION_CA-TotalOccurrenceInt + 3) % 15 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 3) / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm"
+                                        padding-bottom="0mm"
+                                        padding-top="0mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#end 
+
+#if ($REPARTITION_CA-TotalOccurrenceInt le 6) 
+#if (($REPARTITION_CA-TotalOccurrenceInt + 4) % 15 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 4) / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm"
+                                        padding-bottom="0mm"
+                                        padding-top="0mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#end 
+
+#if ($REPARTITION_CA-TotalOccurrenceInt le 5) 
+#if (($REPARTITION_CA-TotalOccurrenceInt + 5) % 15 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 5) / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm"
+                                        padding-bottom="0mm"
+                                        padding-top="0mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#end 
+
+#if ($REPARTITION_CA-TotalOccurrenceInt le 4) 
+#if (($REPARTITION_CA-TotalOccurrenceInt + 6) % 15 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 6) / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm"
+                                        padding-bottom="0mm"
+                                        padding-top="0mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#end 
+
+#if ($REPARTITION_CA-TotalOccurrenceInt le 3) 
+#if (($REPARTITION_CA-TotalOccurrenceInt + 7) % 15 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 7) / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm"
+                                        padding-bottom="0mm"
+                                        padding-top="0mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#end 
+
+#if ($REPARTITION_CA-TotalOccurrenceInt le 2) 
+#if (($REPARTITION_CA-TotalOccurrenceInt + 8) % 15 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 8) / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm"
+                                        padding-bottom="0mm"
+                                        padding-top="0mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#end 
+
+#if ($REPARTITION_CA-TotalOccurrenceInt le 1) 
+#if (($REPARTITION_CA-TotalOccurrenceInt + 9) % 15 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 9) / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm"
+                                        padding-bottom="0mm"
+                                        padding-top="0mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#end 
+
+#if ($REPARTITION_CA-TotalOccurrenceInt le 0) 
+#if (($REPARTITION_CA-TotalOccurrenceInt + 10) % 15 eq 0) 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+#set ($DynamicArrayPage = ($REPARTITION_CA-TotalOccurrenceInt + 10) / 15)
+<fo:block page-break-inside="avoid"
+                   id="REPARTITION_CA-$DynamicArrayPage"
+                   page-break-after="always">
+            <fo:table inline-progression-dimension="auto"
+                      table-layout="fixed"
+                      width="100%"
+                      font-size="10pt"
+                      border-width="0.35mm"
+                      text-align="center"
+                      margin-top="1mm"
+                      display-align="center"
+                      space-after="5mm">
+               <fo:table-header>
+                  <fo:table-row color="black"
+                                font-weight="normal"
+                                font-size="10pt"
+                                text-align="center">
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="120mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="20mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">Code activité</fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell border-color="black"
+                                    border-style="solid"
+                                    text-align="center"
+                                    padding-left="1mm"
+                                    padding-right="1mm"
+                                    number-rows-spanned="1"
+                                    number-columns-spanned="1"
+                                    width="40mm">
+                        <fo:block color="black"
+                                  font-weight="normal"
+                                  font-size="10pt"
+                                  padding="1mm">% ou montant en euros</fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+               </fo:table-header>
+               <fo:table-body>
+#end 
+<fo:table-row border-color="black" height="11mm">
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block>
+                              <fo:block-container height="8mm" width="50mm">
+                                 <fo:block> </fo:block>
+                              </fo:block-container>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm"
+                                    background-color="#CCCCCC">
+                        <fo:block/>
+                     </fo:table-cell>
+                     <fo:table-cell text-align="left"
+                                    border-color="black"
+                                    border-style="solid"
+                                    padding="1mm">
+                        <fo:block>
+                           <fo:block text-align="right" padding-top="0mm" padding-bottom="0mm">
+                              <fo:block color="black"
+                                        font-weight="normal"
+                                        font-size="10pt"
+                                        padding="1mm"
+                                        padding-bottom="0mm"
+                                        padding-top="0mm">
+                                 <fo:inline-container width="27mm">
+                                    <fo:block-container height="8mm" width="27mm">
+                                       <fo:block>
+									 
+								</fo:block>
+                                    </fo:block-container>
+                                 </fo:inline-container>
+                                 <fo:inline/>
+                              </fo:block>
+                           </fo:block>
+                        </fo:block>
+                     </fo:table-cell>
+                  </fo:table-row>
+#end 
+</fo:table-body>
+            </fo:table>
+         </fo:block>
+         <fo:block background-color="#666666"
                    color="white"
                    font-weight="bold"
                    margin-bottom="9pt"
@@ -3658,52 +3682,52 @@
                    border-style="solid"
                    page-break-inside="avoid"
                    keep-with-next="always">Temps de réponse et commentaires</fo:block>
-            <fo:block color="black"
-                      font-weight="bold"
-                      font-size="10pt"
-                      margin-top="9pt"
-                      margin-bottom="3pt"
-                      page-break-inside="avoid"
-                      keep-with-next="always">➡ <fo:inline font-weight="bold">Combien de temps avez-vous mis en tout pour répondre à cette enquête
+         <fo:block color="black"
+                   font-weight="bold"
+                   font-size="10pt"
+                   margin-top="9pt"
+                   margin-bottom="3pt"
+                   page-break-inside="avoid"
+                   keep-with-next="always">➡ <fo:inline font-weight="bold">Combien de temps avez-vous mis en tout pour répondre à cette enquête
                     (recherche des données + remplissage du questionnaire) ?</fo:inline>
-            </fo:block>
-            <fo:block id="HEURE_MIN_REMPL" page-break-inside="avoid">
+         </fo:block>
+         <fo:block id="HEURE_MIN_REMPL" page-break-inside="avoid">
+            <fo:inline color="black"
+                       font-size="10pt"
+                       font-weight="normal"
+                       padding="1mm">
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
                <fo:inline color="black"
                           font-size="10pt"
                           font-weight="normal"
-                          padding="1mm">
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline color="black"
-                             font-size="10pt"
-                             font-weight="normal"
-                             padding="1mm">heures</fo:inline>
-               </fo:inline>
+                          padding="1mm">heures</fo:inline>
+            </fo:inline>
+            <fo:inline color="black"
+                       font-size="10pt"
+                       font-weight="normal"
+                       padding="1mm">
+               <fo:external-graphic src="mask_number.png"/>
+               <fo:external-graphic src="mask_number.png"/>
                <fo:inline color="black"
                           font-size="10pt"
                           font-weight="normal"
-                          padding="1mm">
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:external-graphic src="mask_number.png"/>
-                  <fo:inline color="black"
-                             font-size="10pt"
-                             font-weight="normal"
-                             padding="1mm">minutes</fo:inline>
-               </fo:inline>
-            </fo:block>
-            <fo:block color="black"
-                      font-weight="bold"
-                      font-size="10pt"
-                      margin-top="9pt"
-                      margin-bottom="3pt"
-                      page-break-inside="avoid"
-                      keep-with-next="always">➡ <fo:inline font-weight="bold">Commentaires et remarques éventuelles concernant l'enquête :</fo:inline>
-            </fo:block>
-            <fo:block id="COMMENT_QE" page-break-inside="avoid">
-               <fo:block-container height="30mm" border-color="black" border-style="solid">
-                  <fo:block> </fo:block>
-               </fo:block-container>
-            </fo:block>
+                          padding="1mm">minutes</fo:inline>
+            </fo:inline>
+         </fo:block>
+         <fo:block color="black"
+                   font-weight="bold"
+                   font-size="10pt"
+                   margin-top="9pt"
+                   margin-bottom="3pt"
+                   page-break-inside="avoid"
+                   keep-with-next="always">➡ <fo:inline font-weight="bold">Commentaires et remarques éventuelles concernant l'enquête :</fo:inline>
+         </fo:block>
+         <fo:block id="COMMENT_QE" page-break-inside="avoid">
+            <fo:block-container height="30mm" border-color="black" border-style="solid">
+               <fo:block> </fo:block>
+            </fo:block-container>
+         </fo:block>
          <fo:block id="TheVeryLastPage"/>
       </fo:flow>
    </fo:page-sequence>
