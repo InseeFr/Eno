@@ -33,7 +33,7 @@
         <xhtml:html>
             <xhtml:head>
                 <xhtml:title>
-                    <xsl:value-of select="enoxforms:get-form-title($source-context, $languages[1])"/>
+                    <xsl:value-of select="enoxforms:get-label($source-context, $languages[1])"/>
                 </xhtml:title>
                 <xsl:for-each select="$properties//Css/Common">
                     <xhtml:link rel="stylesheet" href="/{$properties//Css/Folder}/{.}"/>
@@ -86,14 +86,14 @@
                     <xf:instance id="fr-form-metadata" xxf:readonly="true">
                         <metadata>
                             <application-name>
-                                <xsl:value-of select="enoxforms:get-application-name($source-context)"/>
+                                <xsl:value-of select="enoxforms:get-name($source-context)"/>
                             </application-name>
                             <form-name>
-                                <xsl:value-of select="enoxforms:get-form-name($source-context)"/>
+                                <xsl:value-of select="enoxforms:get-name($source-context)"/>
                             </form-name>
                             <xsl:for-each select="$languages">
                                 <title xml:lang="{.}">
-                                    <xsl:value-of select="enoxforms:get-form-title($source-context, .)"/>
+                                    <xsl:value-of select="enoxforms:get-label($source-context, .)"/>
                                 </title>
                             </xsl:for-each>
                         </metadata>
@@ -190,11 +190,20 @@
     </xd:doc>
     <xsl:template match="Instance//*[name() = ('xf-group', 'Module','Clarification')]" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
-        <xsl:element name="{enoxforms:get-name($source-context)}">
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>
-        </xsl:element>
+        <xsl:choose>
+            <xsl:when test="enoxforms:get-filtered-loop-name($source-context) != ''">
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:element name="{enoxforms:get-name($source-context)}">
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="." tunnel="yes"/>
+                    </xsl:apply-templates>
+                </xsl:element>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xd:doc>
@@ -245,7 +254,7 @@
                 </xsl:apply-templates>
             </xsl:element>
         </xsl:element>
-        <xsl:if test="enoxforms:get-linked-containers($source-context)[1] = enoxforms:get-container-name($source-context)">
+        <xsl:if test="not(enoxforms:is-linked-loop($source-context))">
             <xsl:element name="{$name}-Count">
                 <xsl:value-of select="enoxforms:get-minimum-lines($source-context)"/>
             </xsl:element>
@@ -272,7 +281,7 @@
                 </xsl:apply-templates>
             </xsl:element>
         </xsl:element>
-        <xsl:if test="enoxforms:get-linked-containers($source-context)[1] = enoxforms:get-container-name($source-context)">
+        <xsl:if test="not(enoxforms:is-linked-loop($source-context))">
             <xsl:element name="{$name}-Count">
                 <xsl:value-of select="enoxforms:get-minimum-occurrences($source-context)"/>
             </xsl:element>
@@ -924,45 +933,54 @@
         <xsl:variable name="relevant" select="enoxforms:get-relevant($source-context)"/>
         <xsl:variable name="readonly" select="enoxforms:get-readonly($source-context)"/>
 
-        <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
-            <xsl:if test="$relevant != ''">
-                <xsl:attribute name="relevant">
-                    <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="normalize-space($relevant)"/>
-                        <xsl:with-param name="variables" as="node()">
-                            <Variables>
-                                <xsl:for-each select="tokenize(enoxforms:get-hideable-command-variables($source-context),' ')">
-                                    <xsl:sort select="string-length(.)" order="descending"/>
-                                    <Variable><xsl:value-of select="."/></Variable>
-                                </xsl:for-each>
-                            </Variables>
-                        </xsl:with-param>
-                        <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
-                    </xsl:call-template>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="not($readonly = ('false()', ''))">
-                <xsl:attribute name="readonly">
-                    <xsl:value-of select="'not('"/>
-                    <xsl:call-template name="replaceVariablesInFormula">
-                        <xsl:with-param name="formula" select="normalize-space($readonly)"/>
-                        <xsl:with-param name="variables" as="node()">
-                            <Variables>
-                                <xsl:for-each select="tokenize(enoxforms:get-deactivatable-command-variables($source-context),' ')">
-                                    <xsl:sort select="string-length(.)" order="descending"/>
-                                    <Variable><xsl:value-of select="."/></Variable>
-                                </xsl:for-each>
-                            </Variables>
-                        </xsl:with-param>
-                        <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
-                    </xsl:call-template>
-                    <xsl:value-of select="')'"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>
-        </xf:bind>
+        <xsl:choose>
+            <xsl:when test="enoxforms:get-filtered-loop-name($source-context) != ''">
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:otherwise>
+                <xf:bind id="{$name}-bind" name="{$name}" ref="{$name}">
+                    <xsl:if test="$relevant != ''">
+                        <xsl:attribute name="relevant">
+                            <xsl:call-template name="replaceVariablesInFormula">
+                                <xsl:with-param name="formula" select="normalize-space($relevant)"/>
+                                <xsl:with-param name="variables" as="node()">
+                                    <Variables>
+                                        <xsl:for-each select="tokenize(enoxforms:get-hideable-command-variables($source-context),' ')">
+                                            <xsl:sort select="string-length(.)" order="descending"/>
+                                            <Variable><xsl:value-of select="."/></Variable>
+                                        </xsl:for-each>
+                                    </Variables>
+                                </xsl:with-param>
+                                <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                            </xsl:call-template>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="not($readonly = ('false()', ''))">
+                        <xsl:attribute name="readonly">
+                            <xsl:value-of select="'not('"/>
+                            <xsl:call-template name="replaceVariablesInFormula">
+                                <xsl:with-param name="formula" select="normalize-space($readonly)"/>
+                                <xsl:with-param name="variables" as="node()">
+                                    <Variables>
+                                        <xsl:for-each select="tokenize(enoxforms:get-deactivatable-command-variables($source-context),' ')">
+                                            <xsl:sort select="string-length(.)" order="descending"/>
+                                            <Variable><xsl:value-of select="."/></Variable>
+                                        </xsl:for-each>
+                                    </Variables>
+                                </xsl:with-param>
+                                <xsl:with-param name="instance-ancestor" select="$instance-ancestor"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="')'"/>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="." tunnel="yes"/>
+                    </xsl:apply-templates>
+                </xf:bind>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xd:doc>
@@ -979,7 +997,7 @@
         <xsl:variable name="name" select="enoxforms:get-name($source-context)"/>
         <xsl:variable name="business-name" select="enoxforms:get-business-name($source-context)"/>
         <xsl:variable name="container" select="enoxforms:get-container-name($source-context)"/>
-        
+
         <xf:bind id="{$container}-bind" name="{$container}" nodeset="{$container}/{$name}">
             <xsl:apply-templates select="enoxforms:get-external-variables($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -992,7 +1010,7 @@
             </xsl:apply-templates>
         </xf:bind>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Template for Bind for the following drivers.</xd:p>
@@ -1003,7 +1021,7 @@
     <xsl:template match="Bind//QuestionLoop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="instance-ancestor" tunnel="yes"/>
-        
+
         <xsl:variable name="name" select="enoxforms:get-name($source-context)"/>
         <xsl:variable name="business-name" select="enoxforms:get-business-name($source-context)"/>
         <xsl:variable name="container" select="enoxforms:get-container-name($source-context)"/>
@@ -1013,8 +1031,24 @@
                 <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
             </xsl:for-each>
         </xsl:variable>
-        
-        <xf:bind id="{$container}-bind" name="{$container}" nodeset="{$container}/{$name}">
+
+        <xf:bind id="{$container}-bind" name="{$container}" nodeset="{$instance-ancestor-label}{$container}/{$business-name}">
+            <xsl:if test="enoxforms:get-loop-filter($source-context) != ''">
+                <xsl:variable name="relevant">
+                    <xsl:call-template name="replaceVariablesInFormula">
+                        <xsl:with-param name="source-context" select="$source-context" tunnel="yes"/>
+                        <xsl:with-param name="formula" select="concat('@occurrence-id = ',$instance-ancestor-label,$business-name,'[',enoxforms:get-loop-filter($source-context),']/@occurrence-id')"/>
+                        <xsl:with-param name="instance-ancestor" select="concat($instance-ancestor,' ',$business-name)"/>
+                        <xsl:with-param name="variables">
+                            <xsl:for-each select="tokenize(enoxforms:get-loop-filter-variables($source-context),' ')">
+                                <xsl:sort select="string-length(.)" order="descending"/>
+                                <Variable><xsl:value-of select="."/></Variable>
+                            </xsl:for-each>
+                        </xsl:with-param>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:attribute name="relevant" select="replace($relevant,'ancestor::','ancestor-or-self::')"/>
+            </xsl:if>
             <xsl:apply-templates select="enoxforms:get-external-variables($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
                 <xsl:with-param name="instance-ancestor" select="if ($instance-ancestor='') then $business-name else concat($instance-ancestor,' ',$business-name)" tunnel="yes"/>
@@ -1025,7 +1059,7 @@
                 <xsl:with-param name="instance-ancestor" select="if ($instance-ancestor='') then $business-name else concat($instance-ancestor,' ',$business-name)" tunnel="yes"/>
             </xsl:apply-templates>
         </xf:bind>
-        <xsl:if test="enoxforms:get-linked-containers($source-context)[1] = enoxforms:get-container-name($source-context)">
+        <xsl:if test="not(enoxforms:is-linked-loop($source-context))">
             <xf:bind id="{$business-name}-add-occurrence-bind" ref="{$business-name}-AddOccurrence">
                 <xsl:if test="enoxforms:get-maximum-occurrences($source-context)!=''">
                     <xsl:variable name="maximum">
@@ -1368,48 +1402,50 @@
         <xsl:variable name="help" select="enoxforms:get-help($source-context, $language)"/>
         <xsl:variable name="alert" select="enoxforms:get-alert($source-context, $language)"/>
 
-        <xsl:element name="{enoxforms:get-name($source-context)}">
-            <xsl:if test="$label!='' or $question-label!=''">
-                <label>
-                    <xsl:choose>
-                        <xsl:when test="$question-label!=''">
-                            <xsl:variable name="css-class" select="enoxforms:get-css-class($source-context)"/>
-                            <xsl:choose>
-                                <xsl:when test="$css-class != ''">
-                                    <xsl:value-of select="replace($question-label,'block question',concat('block question ',$css-class))"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="$question-label"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="eno:serialize($label)"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </label>
-            </xsl:if>
-            <xsl:if test="$hint != ''">
-                <hint>
-                    <xsl:value-of select="eno:serialize($hint)"/>
-                </hint>
-            </xsl:if>
-            <xsl:if test="$help != ''">
-                <help>
-                    <xsl:value-of select="eno:serialize($help)"/>
-                </help>
-            </xsl:if>
-            <xsl:if test="$alert != ''">
-                <alert>
-                    <xsl:value-of select="eno:serialize($alert)"/>
-                </alert>
-            </xsl:if>
-            <xsl:if test="self::CodeDomain or self::BooleanDomain">
-                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                    <xsl:with-param name="driver" select="eno:append-empty-element('ResourceItem', .)" tunnel="yes"/>
-                </xsl:apply-templates>
-            </xsl:if>
-        </xsl:element>
+        <xsl:if test="enoxforms:get-filtered-loop-name($source-context) = ''">
+            <xsl:element name="{enoxforms:get-name($source-context)}">
+                <xsl:if test="$label!='' or $question-label!=''">
+                    <label>
+                        <xsl:choose>
+                            <xsl:when test="$question-label!=''">
+                                <xsl:variable name="css-class" select="enoxforms:get-css-class($source-context)"/>
+                                <xsl:choose>
+                                    <xsl:when test="$css-class != ''">
+                                        <xsl:value-of select="replace($question-label,'block question',concat('block question ',$css-class))"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="$question-label"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="eno:serialize($label)"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </label>
+                </xsl:if>
+                <xsl:if test="$hint != ''">
+                    <hint>
+                        <xsl:value-of select="eno:serialize($hint)"/>
+                    </hint>
+                </xsl:if>
+                <xsl:if test="$help != ''">
+                    <help>
+                        <xsl:value-of select="eno:serialize($help)"/>
+                    </help>
+                </xsl:if>
+                <xsl:if test="$alert != ''">
+                    <alert>
+                        <xsl:value-of select="eno:serialize($alert)"/>
+                    </alert>
+                </xsl:if>
+                <xsl:if test="self::CodeDomain or self::BooleanDomain">
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="eno:append-empty-element('ResourceItem', .)" tunnel="yes"/>
+                    </xsl:apply-templates>
+                </xsl:if>
+            </xsl:element>
+        </xsl:if>
         <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
@@ -1437,7 +1473,7 @@
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Template for Resource for the drivers QuestionLoop and Rowloop.</xd:p>
@@ -1450,7 +1486,7 @@
             <xsl:with-param name="driver" select="." tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
-    
+
     <xd:doc>
         <xd:desc>
             <xd:p>Template for Resource for the drivers QuestionLoop and Rowloop.</xd:p>
@@ -1459,8 +1495,8 @@
     <xsl:template match="Resource//QuestionLoop" mode="model">
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
-        
-        <xsl:if test="enoxforms:get-linked-containers($source-context)[1] = enoxforms:get-container-name($source-context)">
+
+        <xsl:if test="not(enoxforms:is-linked-loop($source-context))">
             <xsl:element name="{enoxforms:get-name($source-context)}-AddOccurrence">
                 <label>
                     <xsl:value-of select="enoxforms:get-label($source-context,$language)"/>
@@ -1793,11 +1829,21 @@
         <xsl:param name="source-context" as="item()" tunnel="yes"/>
         <xsl:param name="languages" tunnel="yes"/>
         <xsl:variable name="name" select="enoxforms:get-name($source-context)"/>
-        <xf:group id="{$name}-control" bind="{$name}-bind">
-            <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
-                <xsl:with-param name="driver" select="." tunnel="yes"/>
-            </xsl:apply-templates>
-        </xf:group>
+        <xsl:choose>
+            <xsl:when test="enoxforms:get-filtered-loop-name($source-context) != ''">
+                <!-- nothing to do : the loop already filters its occurrences -->
+                <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                    <xsl:with-param name="driver" select="." tunnel="yes"/>
+                </xsl:apply-templates>
+            </xsl:when>
+            <xsl:otherwise>
+                <xf:group id="{$name}-control" bind="{$name}-bind">
+                    <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
+                        <xsl:with-param name="driver" select="." tunnel="yes"/>
+                    </xsl:apply-templates>
+                </xf:group>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xd:doc>
@@ -2025,7 +2071,7 @@
             <!-- For each element which relevance depends on this field, we erase the data if it became unrelevant -->
             <xsl:for-each select="enoxforms:get-relevant-dependencies($source-context)">
                 <!-- if the filter is in a loop, instance-ancestor helps choosing the good filter -->
-                <!-- if a TableLoop is un the filter, don't empty its counter -->
+                <!-- if a TableLoop is in the filter, don't empty its counter -->
                 <xf:action ev:event="xforms-value-changed"
                     if="not(xxf:evaluate-bind-property('{.}-bind','relevant'))"
                     iterate="{$instance-ancestor-label}{.}//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
@@ -2041,6 +2087,22 @@
                     <xf:setvalue ref="." value="''"/>
                 </xf:action>
             </xsl:for-each>-->
+            <xsl:for-each select="enoxforms:get-loop-occurrence-filter-dependencies($source-context)">
+                <xsl:variable name="linked-loop-name" select="enoxforms:get-container-name(.)"/>
+                <xsl:variable name="linked-ancestor" select="enoxforms:get-business-ancestors(.)"/>
+                <xsl:variable name="loop-name" select="enoxforms:get-business-name(.)"/>
+                <xsl:variable name="linked-ancestor-label">
+                    <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
+                    <xsl:for-each select="tokenize($linked-ancestor,' ')">
+                        <xsl:value-of select="concat(.,'[@occurrence-id = current()/ancestor::',.,'/@occurrence-id]//')"/>
+                    </xsl:for-each>
+                </xsl:variable>
+                <xf:action ev:event="xforms-value-changed"
+                    if="not(xxf:evaluate-bind-property('{$linked-loop-name}-bind','relevant'))"
+                    iterate="{$linked-ancestor-label}{$linked-loop-name}/{$loop-name}[@occurrence-id = current()/ancestor::{$loop-name}/@occurrence-id]//*[not(descendant::*) and not(ends-with(name(),'-Count'))]">
+                    <xf:setvalue ref="." value="''"/>
+                </xf:action>
+            </xsl:for-each>
 
             <xsl:for-each select="enoxforms:get-constraint-dependencies($source-context)">
                 <xsl:element name="xf:dispatch">
@@ -2231,7 +2293,7 @@
             </xhtml:thead>
             <xhtml:tbody>
                 <!-- if the loop is in a loop, instance-ancestor helps choosing the good ancestor loop instance -->
-                <xf:repeat id="{$container-name}" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
+                <xf:repeat id="{$container-name}" bind="{$container-name}-bind" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
                     <xf:var name="{$container-name}-position" value="position()"/>
                     <!-- the table has a repeated zone that may have more than one line -->
                     <xsl:for-each select="enoxforms:get-body-lines($source-context)">
@@ -2257,10 +2319,11 @@
                     <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}-Count"
                         value="number({$instance-ancestor-label}{$loop-name}-Count) +1"/>
                     <xsl:for-each select="enoxforms:get-linked-containers($source-context)">
-                        <xf:insert context="{$instance-ancestor-label}{.}"
-                            nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
-                            origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
-                        <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@occurrence-id"
+                        <xsl:variable name="linked-loop-name" select="enoxforms:get-container-name(.)"/>
+                        <xf:insert context="{$instance-ancestor-label}{$linked-loop-name}"
+                            nodeset="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}" position="after"
+                            origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
+                        <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
                             value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
                     </xsl:for-each>
                 </xf:action>
@@ -2403,7 +2466,7 @@
             </xsl:for-each>
         </xsl:variable>
 
-        <xf:repeat id="{$container-name}" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
+        <xf:repeat id="{$container-name}" bind="{$container-name}-bind" nodeset="{$instance-ancestor-label}{$container-name}/{$loop-name}">
             <xf:var name="{$container-name}-position" value="position()"/>
             <xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
                 <xsl:with-param name="driver" select="." tunnel="yes"/>
@@ -2411,18 +2474,19 @@
                 <xsl:with-param name="instance-ancestor" select="if ($instance-ancestor='') then $business-name else concat($instance-ancestor,' ',$business-name)" tunnel="yes"/>
             </xsl:apply-templates>
         </xf:repeat>
-        
-        <xsl:if test="enoxforms:get-linked-containers($source-context)[1] = enoxforms:get-container-name($source-context)">
+
+        <xsl:if test="not(enoxforms:is-linked-loop($source-context))">
             <xf:trigger id="{$loop-name}-add-occurrence" bind="{$loop-name}-add-occurrence-bind">
                 <xf:label ref="$form-resources/{$loop-name}-AddOccurrence/label"/>
                 <xf:action ev:event="DOMActivate">
                     <xf:setvalue ref="{$instance-ancestor-label}{$loop-name}-Count"
                         value="number({$instance-ancestor-label}{$loop-name}-Count) +1"/>
                     <xsl:for-each select="enoxforms:get-linked-containers($source-context)">
-                        <xf:insert context="{$instance-ancestor-label}{.}"
-                            nodeset="{$instance-ancestor-label}{.}/{$loop-name}" position="after"
-                            origin="instance('fr-form-loop-model')/{.}/{$loop-name}"/>
-                        <xf:setvalue ref="{$instance-ancestor-label}{.}/{$loop-name}[last()]/@occurrence-id"
+                        <xsl:variable name="linked-loop-name" select="enoxforms:get-container-name(.)"/>
+                        <xf:insert context="{$instance-ancestor-label}{$linked-loop-name}"
+                            nodeset="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}" position="after"
+                            origin="instance('fr-form-loop-model')/{$linked-loop-name}/{$loop-name}"/>
+                        <xf:setvalue ref="{$instance-ancestor-label}{$linked-loop-name}/{$loop-name}[last()]/@occurrence-id"
                             value="concat('{$loop-name}-',{$instance-ancestor-label}{$loop-name}-Count)"/>
                     </xsl:for-each>
                 </xf:action>
@@ -3163,14 +3227,13 @@
                                         <xsl:choose>
                                             <xsl:when test="regex-group(2) = ('sum','mean','count')">
                                                 <!-- equal to 0, when all empty for sum, mean and count -->
-                                                <xsl:value-of select="', 0)'"/>        
+                                                <xsl:value-of select="', 0)'"/>
                                             </xsl:when>
                                             <xsl:otherwise>
                                                 <!-- equal to blank, when all empty for min and max -->
                                                 <xsl:value-of select="')'"/>
                                             </xsl:otherwise>
                                         </xsl:choose>
-                                        
                                         <xsl:call-template name="replaceVariablesInFormula">
                                             <xsl:with-param name="formula" select="regex-group(4)"/>
                                             <xsl:with-param name="variables" as="node()" select="$variables"/>
