@@ -715,6 +715,44 @@
     </table:table-row>
     <table:table-row table:style-name="ro2">
      <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoxforms:get-form-title</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>language</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-label</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enoxforms:get-form-title to input function enoddi:get-label.</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoxforms:get-application-name</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-id</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enoxforms:get-application-name to input function enoddi:get-id.</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
+      <text:p>enoxforms:get-form-name</text:p>
+     </table:table-cell>
+     <table:table-cell/>
+     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
+      <text:p>enoddi:get-id</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Default" office:value-type="string" calcext:value-type="string">
+      <text:p>Linking output function enoxforms:get-form-name to input function enoddi:get-id.</text:p>
+     </table:table-cell>
+    </table:table-row>
+    <table:table-row table:style-name="ro2">
+     <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoxforms:get-form-model</text:p>
      </table:table-cell>
      <table:table-cell/>
@@ -1249,18 +1287,6 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoxforms:is-linked-loop</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:is-linked-loop</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking output function enoxforms:is-linked-loop to input function enoddi:is-linked-loop</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
       <text:p>enoxforms:get-business-ancestors</text:p>
      </table:table-cell>
      <table:table-cell/>
@@ -1494,55 +1520,7 @@
       <text:p>Linking output function enoxforms:get-maximum-occurrences-variables to input function enoddi:get-maximum-occurrences-variables</text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoxforms:get-loop-filter</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-loop-filter</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking output function enoxforms:get-loop-filter to input function enoddi:get-loop-filter</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoxforms:get-loop-filter-variables</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-loop-filter-variables</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking output function enoxforms:get-loop-filter-variables to input function enoddi:get-loop-filter-variables</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoxforms:get-filtered-loop-name</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-filtered-loop-name</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking output function enoxforms:get-filtered-loop-name to input function enoddi:get-filtered-loop-name</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1">
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>enoxforms:get-loop-occurrence-filter-dependencies</text:p>
-     </table:table-cell>
-     <table:table-cell/>
-     <table:table-cell table:style-name="ce2" office:value-type="string" calcext:value-type="string">
-      <text:p>enoddi:get-loop-occurrence-filter-dependencies</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string" calcext:value-type="string">
-      <text:p>Linking output function enoxforms:get-loop-occurrence-filter-dependencies to input function enoddi:get-loop-occurrence-filter-dependencies</text:p>
-     </table:table-cell>
-    </table:table-row>
-    <table:table-row table:style-name="ro1" table:number-rows-repeated="1048507">
+    <table:table-row table:style-name="ro1" table:number-rows-repeated="1048508">
      <table:table-cell table:number-columns-repeated="4"/>
     </table:table-row>
     <table:table-row table:style-name="ro1">
