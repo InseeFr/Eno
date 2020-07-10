@@ -74,21 +74,21 @@
 		<xsl:param name="languages" tunnel="yes"/>
 		<xsl:param name="loopDepth" select="0" tunnel="yes"/>
 		<xsl:variable name="id" select="enolunatic:get-name($source-context)"/>
-		<xsl:variable name="miniumumOccurences">
+		<xsl:variable name="minimumOccurrences">
 			<xsl:call-template name="enolunatic:replace-variables-in-formula">
 				<xsl:with-param name="source-context" select="$source-context"/>
 				<xsl:with-param name="formula" select="enolunatic:get-minimum-occurrences($source-context)"/>
 			</xsl:call-template>
 		</xsl:variable>
-		<xsl:variable name="maximumOccurences" >
+		<xsl:variable name="maximumOccurrences">
 			<xsl:call-template name="enolunatic:replace-variables-in-formula">
 				<xsl:with-param name="source-context" select="$source-context"/>
 				<xsl:with-param name="formula" select="enolunatic:get-maximum-occurrences($source-context)"/>
 			</xsl:call-template>
 		</xsl:variable>
 		<components xsi:type="Loop" componentType="Loop" id="{$id}">
-			<xsl:attribute name="min" select="$miniumumOccurences"/>
-			<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurences)"/>
+			<xsl:attribute name="min" select="$minimumOccurrences"/>
+			<xsl:attribute name="iterations" select="enolunatic:replace-all-variables-with-business-name($source-context,$maximumOccurrences)"/>
 			<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 				<xsl:with-param name="driver" select="." tunnel="yes"/>
 				<xsl:with-param name="loopDepth" select="$loopDepth + 1" tunnel="yes"/>
@@ -518,7 +518,7 @@
 		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
-			<xsl:with-param name="loopDepth" select="$loopDepth"></xsl:with-param>
+			<xsl:with-param name="loopDepth" select="$loopDepth"/>
 		</xsl:call-template>
 	</xsl:template>
 
@@ -789,7 +789,7 @@
 					<xsl:attribute name="xsi:type" select="concat($valueType,'Array')"/>
 					<xsl:call-template name="enolunatic:add-collected-value">
 						<xsl:with-param name="valueType" select="$valueType"/>
-						<xsl:with-param name="depth" select="$depth - 1"></xsl:with-param>
+						<xsl:with-param name="depth" select="$depth - 1"/>
 					</xsl:call-template>
 				</xsl:element>
 			</xsl:when>
