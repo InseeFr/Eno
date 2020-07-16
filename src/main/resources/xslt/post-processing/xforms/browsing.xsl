@@ -53,11 +53,10 @@
     <xd:doc>
         <xd:desc>
             <xd:p>The number of modules.</xd:p>
+            <xd:p>TODO : update for page splitting ?</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:variable name="number-of-modules">
-        <xsl:value-of select="count(//fr:body/*[name()='fr:section' or name()='xf:repeat'])"/>
-    </xsl:variable>
+    <xsl:variable name="number-of-pages" as="xs:integer" select="count(//fr:body//fr:section)"/>
 
     <xd:doc>
         <xd:desc>
@@ -74,7 +73,7 @@
                 output file.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="node() | @*">
+    <xsl:template match="node() | @*" priority="-1">
         <xsl:copy>
             <xsl:apply-templates select="node() | @*"/>
         </xsl:copy>
@@ -101,8 +100,8 @@
             <Util>
                 <CurrentSection>1</CurrentSection>
                 <CurrentSectionName/>
-                <xsl:for-each select="//fr:body/xf:repeat">
-                    <CurrentLoopElement loop-name="{@id}">0</CurrentLoopElement>
+                <xsl:for-each select="//fr:body//xf:repeat[descendant::fr:section]">
+                    <CurrentLoopElement loop-name="{@id}" current-occurrence="">0</CurrentLoopElement>
                 </xsl:for-each>
                 <Send>false</Send>
                 <DateTime/>
@@ -218,6 +217,7 @@
                     <PageTop/>
                     <Pages>
                         <Beginning/>
+                        <!-- TODO : when 1 question by page : exclude external and calculated variables through the page-name mode -->
                         <xsl:apply-templates select="xf:instance[@id='fr-form-instance']/form/*[not(name()='Util') and child::*]" mode="page-name"/>
                         <End/>
                     </Pages>
@@ -234,18 +234,15 @@
             <!-- The corresponding binds -->
             <xf:bind id="fr-form-util-binds" ref="instance('fr-form-util')">
                 <!-- The number of pages in the form (not counting the beginning and end pages) -->
-                <xsl:variable name="inner-questionnaire-pages-or-repeats-number" as="xs:integer">
-                    <xsl:value-of select="count(//*[parent::form[parent::xf:instance[@id='fr-form-instance']] and not(name()='Util') and child::*])"/>
-                </xsl:variable>
                 <xf:bind id="start-bind"
                     relevant="instance('fr-form-instance')/Util/CurrentSection='1'" ref="Start"/>
                 <!-- The previous button does not appear on first page and after the last page -->
                 <xf:bind id="previous-bind"
-                    relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt; {$inner-questionnaire-pages-or-repeats-number +2})"
+                    relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt; {$number-of-pages +2})"
                     ref="Previous"/>
                 <!-- The next button does not appear on first and last pages -->
                 <xf:bind id="next-bind"
-                    relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt; {$inner-questionnaire-pages-or-repeats-number+1})"
+                    relevant="not(instance('fr-form-instance')/Util/CurrentSection='1' or number(instance('fr-form-instance')/Util/CurrentSection)&gt; {$number-of-pages +1})"
                     ref="Next"/>
                 <xf:bind id="send-bind" ref="Send"
                     relevant="instance('fr-form-instance')/Util/Send='false'"/>
@@ -264,12 +261,12 @@
                             </xsl:for-each>
                         </xsl:variable>
                         <!-- The number of repeats is removed from the number pages because it is counted in the total number of pages instead -->
-                        <xsl:variable name="denominator" select="concat('(',string($inner-questionnaire-pages-or-repeats-number - $repeats-number),$total-group-pages-count,')')"/>
+                        <xsl:variable name="denominator" select="concat('(',string($number-of-pages - $repeats-number),$total-group-pages-count,')')"/>
 
                         <xsl:value-of select="'if (number(instance(''fr-form-instance'')/Util/CurrentSection)=1) then ''0'' '"/>
                         <xsl:value-of
                             select="concat('else (if (number(instance(''fr-form-instance'')/Util/CurrentSection)&gt;',
-                                           $inner-questionnaire-pages-or-repeats-number+1,
+                                           $number-of-pages +1,
                                            ') then ''100''')"/>
                         <xsl:for-each select="//fr:body/xf:repeat">
                             <xsl:variable name="occurrence-position" select="count(//fr:body/xf:repeat/preceding-sibling::fr:section)+1"/>
@@ -415,7 +412,7 @@
                 <!-- The same for loops of pages -->
                 <xsl:for-each select="//fr:body/xf:repeat">
                     <xsl:variable name="section-position">
-                        <xsl:value-of select="count(preceding-sibling::*)+1"/>
+                        <xsl:value-of select="count(preceding::fr:section)+1"/>
                     </xsl:variable>
                     <xsl:variable name="container" select="@id"/>
                     <xsl:variable name="loop-name" select="substring-after(@nodeset,concat($container,'/'))"/>
@@ -455,9 +452,7 @@
                 </xf:action>
                 <!-- The same for loops of pages -->
                 <xsl:for-each select="//fr:body/xf:repeat">
-                    <xsl:variable name="section-position">
-                        <xsl:value-of select="count(preceding-sibling::*)+1"/>
-                    </xsl:variable>
+                    <xsl:variable name="section-position" select="count(preceding::fr:section)+1"/>
                     <xsl:variable name="container" select="@id"/>
                     <xsl:variable name="loop-name" select="substring-after(@nodeset,concat($container,'/'))"/>
                     <xf:action if="instance('fr-form-instance')/Util/CurrentSection='{$section-position}'">
@@ -803,14 +798,13 @@
 -->
     </xsl:template>
 
-<!-- maybe not useful due to setindex -->
-<!--    <xsl:template match="xf:var[@value='position()' and parent::xf:repeat/fr:section]">
+    <xsl:template match="xf:var[@value='position()' and parent::xf:repeat/descendant::fr:section]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="value" select="concat('number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',parent::xf:repeat/@id,'''])')"/>
             <xsl:apply-templates select="node()"/>
         </xsl:copy>
-    </xsl:template>-->
+    </xsl:template>
 
     <xd:doc>
         <xd:desc>
@@ -888,7 +882,7 @@
                     </fr:section>
                 </xf:case>
                 <xsl:apply-templates select="*[name()='fr:section' or name()='xf:repeat']"/>
-                <xf:case id="{string(number($number-of-modules)+2)}">
+                <xf:case id="{string(number($number-of-pages)+2)}">
                     <fr:section id="end-control" bind="end-bind" name="end">
                         <xf:label ref="$form-resources/End/label"/>
                         <xhtml:div class="center">
@@ -998,14 +992,20 @@
 
     <xd:doc>
         <xd:desc>
+            <xd:p>a loop of pages is just a filter on one occurrence of the loop, with a complex navigation mode</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="xf:repeat[ancestor::fr:body and descendant::fr:section]">
+        <xsl:apply-templates select="node()"/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
             <xd:p>Template to wrap each existing module in a xf:case.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="fr:section[parent::fr:body] | xf:repeat[parent::fr:body]">
-        <!-- Calculating its index -->
-        <xsl:variable name="index"
-            select="number($number-of-modules)-count(following-sibling::fr:section)-count(following-sibling::xf:repeat)+1"/>
-        <xf:case id="{$index}">
+    <xsl:template match="fr:section">
+        <xf:case id="{count(preceding::fr:section)+2}">
             <xsl:copy>
                 <xsl:apply-templates select="node() | @*"/>
             </xsl:copy>
