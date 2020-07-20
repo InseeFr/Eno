@@ -117,7 +117,7 @@
         </xf:action>
     </xsl:template>
     
-    <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/stromae/util/nomSectionCourante]//*[ends-with(name(),''-Container'')]/*']">
+    <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]//*[ends-with(name(),''-Container'')]/*']">
         <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
             <xf:var name="loop-index" value="position()"/>
             <xf:setindex>
@@ -132,7 +132,7 @@
         </xf:action>
     </xsl:template>
 
-    <xsl:template match="*/@relevant | */@readonly | */@calculate | xf:var/@* | xf:constraint/@value | xf:setindex/@*">
+    <xsl:template match="*/@relevant | */@readonly | */@calculate | xf:var/@* | xf:constraint/@value | xf:calculate/@value">
         <xsl:attribute name="{name()}">
             <xsl:call-template name="replace-element">
                 <xsl:with-param name="position" as="xs:integer" select="1"/>
@@ -141,7 +141,7 @@
         </xsl:attribute>
     </xsl:template>
     
-    <xsl:template match="*/@nodeset | *[@nodeset]/@* | xf:action/@if | xf:action/@iterate | xf:action/@while | xf:setvalue/@* | xf:insert/@*" priority="1">
+    <xsl:template match="*/@nodeset | *[@nodeset]/@* | xf:action/@if | xf:action/@iterate | xf:action/@while | xf:setvalue/@* | xf:insert/@* | xf:setindex/@*" priority="1">
         <xsl:variable name="content">
             <xsl:call-template name="replace-element">
                 <xsl:with-param name="position" as="xs:integer" select="1"/>
@@ -307,7 +307,6 @@
                                     </xsl:matching-substring>
                                 </xsl:analyze-string>
                             </xsl:when>
-                            
                             <xsl:when test="matches($text,concat($current-group,'(_\d+)?-Container/',$current-group,'\[last\(\)\]/@occurrence-id'))">
                                 <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)?-Container/{$current-group}\[last\(\)\]/@occurrence-id(.*)$">
                                     <xsl:matching-substring>
@@ -385,6 +384,21 @@
                                         <xsl:with-param name="text" select="current()"/>
                                     </xsl:call-template>
                                 </xsl:for-each>
+                            </xsl:when>
+                            <xsl:when test="matches($text,concat('CurrentLoopElement\[@loop-name=''',$current-group,'(_\d+)?-Container''\]'))">
+                                <xsl:analyze-string select="$text" regex="^(.*)CurrentLoopElement\[@loop-name='{$current-group}(_\d+)?-Container'\](.*)$">
+                                    <xsl:matching-substring>
+                                        <xsl:call-template name="replace-element">
+                                            <xsl:with-param name="position" select="$position"/>
+                                            <xsl:with-param name="text" select="regex-group(1)"/>
+                                        </xsl:call-template>
+                                        <xsl:value-of select="concat('CurrentLoopElement[@loop-name=''',$current-group,regex-group(2),''']')"/>
+                                        <xsl:call-template name="replace-element">
+                                            <xsl:with-param name="position" select="$position"/>
+                                            <xsl:with-param name="text" select="regex-group(3)"/>
+                                        </xsl:call-template>
+                                    </xsl:matching-substring>
+                                </xsl:analyze-string>
                             </xsl:when>
                             <xsl:when test="contains($text,concat('*[name()=''',$current-group,''''))">
                                 <xsl:for-each select="tokenize($text,concat('\*\[name\(\)=''',$current-group,''''))">
@@ -481,21 +495,6 @@
                                         <xsl:with-param name="text" select="current()"/>
                                     </xsl:call-template>
                                 </xsl:for-each>
-                            </xsl:when>
-                            <xsl:when test="matches($text,concat('CurrentLoopElement\[@loop-name=''',$current-group,'(_\d+)?-Container''\]'))">
-                                <xsl:analyze-string select="$text" regex="^(.*)CurrentLoopElement\[@loop-name='{$current-group}(_\d+)?-Container'\](.*)$">
-                                    <xsl:matching-substring>
-                                        <xsl:call-template name="replace-element">
-                                            <xsl:with-param name="position" select="$position"/>
-                                            <xsl:with-param name="text" select="regex-group(1)"/>
-                                        </xsl:call-template>
-                                        <xsl:value-of select="concat('CurrentLoopElement[@loop-name=''',$current-group,regex-group(2),''']')"/>
-                                        <xsl:call-template name="replace-element">
-                                            <xsl:with-param name="position" select="$position"/>
-                                            <xsl:with-param name="text" select="regex-group(3)"/>
-                                        </xsl:call-template>
-                                    </xsl:matching-substring>
-                                </xsl:analyze-string>
                             </xsl:when>
                             <xsl:when test="contains($text,concat('descendant::',$current-group))">
                                 <xsl:for-each select="tokenize($text,concat('descendant::',$current-group))">
