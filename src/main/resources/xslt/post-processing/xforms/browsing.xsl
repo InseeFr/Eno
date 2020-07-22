@@ -461,7 +461,7 @@
                         <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
                         <xsl:variable name="first-page-position" select="count(preceding::fr:section) + 2"/>
                         <xsl:variable name="last-page-position" select="$number-of-pages - count(following::fr:section) + 1"/>
-                        <xsl:variable name="first-page-name" select="descendant::*[not(descendant::*)][1]/name()"/>
+                        <xsl:variable name="first-page-name" select="descendant::fr:section[1]/@name"/>
                         <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
                         <xsl:variable name="filter-label">
                             <xsl:if test="$repeat-filter != ''">
@@ -559,7 +559,7 @@
                         <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
                         <xsl:variable name="first-page-position" select="count(preceding::fr:section) + 2"/>
                         <xsl:variable name="last-page-position" select="$number-of-pages - count(following::fr:section) + 1"/>
-                        <xsl:variable name="last-page-name" select="descendant::*[not(descendant::*)][last()]/name()"/>
+                        <xsl:variable name="last-page-name" select="descendant::fr:section[last()]/@name"/>
                         <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
                         <xsl:variable name="filter-label">
                             <xsl:if test="$repeat-filter != ''">
@@ -577,7 +577,7 @@
 
                         <xf:action if="number(instance('fr-form-instance')/Util/CurrentSection) &gt;= {$first-page-position} and number(instance('fr-form-instance')/Util/CurrentSection) &lt;= {$last-page-position}">
                             <!-- find a previous unfiltered page in the current repeat -->
-                            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/preceding-sibling::*[not(text()='false')][1]/count(preceding-sibling::*) &gt;= {$first-page-position +1 }">
+                            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/preceding-sibling::*[not(text()='false')][1]/count(preceding-sibling::*) &gt;= {$first-page-position -1 }">
                                 <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
                                     value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/name()"/>
                                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
