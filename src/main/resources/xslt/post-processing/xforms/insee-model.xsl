@@ -109,16 +109,16 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]//*[not(ancestor::*[ends-with(name(),''-Container'') and ancestor::*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]])]']">
-        <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable and not(ancestor::Groupe[ancestor::*[name()=instance('fr-form-instance')/Util/CurrentSectionName]])]">
+    <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')//*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]//*']">
+        <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//*[@idVariable]">
             <xf:dispatch name="DOMFocusOut">
                 <xsl:attribute name="target" select="'{concat(context()/@idVariable,''-control'')}'"/>
             </xf:dispatch>
         </xf:action>
     </xsl:template>
-    
-    <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]//*[ends-with(name(),''-Container'')]/*']">
-        <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
+
+    <xsl:template match="xf:action[@ev:event='page-change']/xf:action[@iterate='instance(''fr-form-instance'')//*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]//*[ends-with(name(),''-Container'')]/*']">
+        <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/stromae/util/nomSectionCourante]//Groupe[@typeGroupe]">
             <xf:var name="loop-index" value="position()"/>
             <xf:setindex>
                 <xsl:attribute name="repeat" select="'{context()/parent::Groupe/@idGroupe}'"/>
