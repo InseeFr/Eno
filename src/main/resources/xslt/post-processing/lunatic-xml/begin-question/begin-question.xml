@@ -19,26 +19,18 @@
                 <conditionFilter>"normal"</conditionFilter>
                 <bindingsDependency>true</bindingsDependency>
                 <response name="COMMENT_UE"/>
-                <variables variableType="COLLECTED">
+                <variables variableType="COLLECTED" xsi:type="VariableType">
                     <name>COMMENT_UE</name>
                     <componentRef>COMMENT-UE-QUESTION</componentRef>
-                    <valueState valueType="PREVIOUS">
-                        <value xsi:nil="true"/>
-                    </valueState>
-                    <valueState valueType="COLLECTED">
-                        <value xsi:nil="true"/>
-                    </valueState>
-                    <valueState valueType="FORCED">
-                        <value xsi:nil="true"/>
-                    </valueState>
-                    <valueState valueType="EDITED">
-                        <value xsi:nil="true"/>
-                    </valueState>
-                    <valueState valueType="INPUTED">
-                        <value xsi:nil="true"/>
-                    </valueState>
+                    <values>
+                        <PREVIOUS xsi:nil="true"/>
+                        <COLLECTED xsi:nil="true"/>
+                        <FORCED xsi:nil="true"/>
+                        <EDITED xsi:nil="true"/>
+                        <INPUTED xsi:nil="true"/>
+                    </values>
                 </variables>
-                <variables variableType="EXTERNAL">
+                <variables variableType="EXTERNAL" xsi:type="VariableType">
                     <name>LABEL_UNITE_ENQUETEE</name>
                     <value xsi:nil="true"/>
                 </variables>

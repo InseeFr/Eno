@@ -112,6 +112,7 @@
         <xsl:param name="idLine" tunnel="yes"/>
         <xsl:param name="ancestor" tunnel="yes"/>
         <xsl:variable name="idColumn" select="ancestor::h:cells/@idColumn"/>
+        <xsl:variable name="tableId" select="ancestor::h:components[@xsi:type='Table']/@id"/>
         <xsl:choose>
             <xsl:when test="$ancestor='table'">
                 <response>
@@ -128,6 +129,7 @@
                 <xsl:if test="string($idLine)!='' and string($idColumn)!=''">
                     <xsl:call-template name="enojs:addVariableCollected">
                         <xsl:with-param name="responseName" select="concat(@name,'_',$idLine,'_',$idColumn)"/>
+                        <xsl:with-param name="componentRef" select="$tableId"/>
                     </xsl:call-template>
                 </xsl:if>
             </xsl:when>
@@ -163,11 +165,12 @@
 
     <xsl:template name="enojs:addVariableCollected">
         <xsl:param name="responseName"/>
+        <xsl:param name="componentRef"/>
         <xsl:variable name="ResponseTypeEnum" select="'PREVIOUS,COLLECTED,FORCED,EDITED,INPUTED'" as="xs:string"/>
         <!-- responseType="{$responseType}" -->
-        <variables variableType="COLLECTED">
+        <variables variableType="COLLECTED" xsi:type="VariableType">
             <name><xsl:value-of select="$responseName"/></name>
-            <responseRef><xsl:value-of select="$responseName"/></responseRef>
+            <componentRef><xsl:value-of select="$componentRef"/></componentRef>
             <values>
                 <xsl:for-each select="tokenize($ResponseTypeEnum,',')">
                     <xsl:element name="{.}">

@@ -18,24 +18,16 @@
             <conditionFilter>"normal"</conditionFilter>
             <bindingsDependency>false</bindingsDependency>
             <response name="HEURE_REMPL"/>
-            <variables variableType="COLLECTED">
+            <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>
                 <componentRef>TIME-QUESTION-HEURE-REMPL</componentRef>
-                <valueState valueType="PREVIOUS">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="COLLECTED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="FORCED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="EDITED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="INPUTED">
-                    <value xsi:nil="true"/>
-                </valueState>
+                <values>
+                    <PREVIOUS xsi:nil="true"/>
+                    <COLLECTED xsi:nil="true"/>
+                    <FORCED xsi:nil="true"/>
+                    <EDITED xsi:nil="true"/>
+                    <INPUTED xsi:nil="true"/>
+                </values>
             </variables>
         </components>
         <components xsi:type="InputNumber"
@@ -50,24 +42,16 @@
             <conditionFilter>"normal"</conditionFilter>
             <bindingsDependency>false</bindingsDependency>
             <response name="MIN_REMPL"/>
-            <variables variableType="COLLECTED">
+            <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>MIN_REMPL</name>
                 <componentRef>TIME-QUESTION-MIN-REMPL</componentRef>
-                <valueState valueType="PREVIOUS">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="COLLECTED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="FORCED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="EDITED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="INPUTED">
-                    <value xsi:nil="true"/>
-                </valueState>
+                <values>
+                    <PREVIOUS xsi:nil="true"/>
+                    <COLLECTED xsi:nil="true"/>
+                    <FORCED xsi:nil="true"/>
+                    <EDITED xsi:nil="true"/>
+                    <INPUTED xsi:nil="true"/>
+                </values>
             </variables>
         </components>
         <components xsi:type="Textarea"
@@ -79,24 +63,16 @@
             <conditionFilter>"normal"</conditionFilter>
             <bindingsDependency>false</bindingsDependency>
             <response name="COMMENT_QE"/>
-            <variables variableType="COLLECTED">
+            <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>COMMENT_QE</name>
                 <componentRef>COMMENT-QUESTION</componentRef>
-                <valueState valueType="PREVIOUS">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="COLLECTED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="FORCED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="EDITED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="INPUTED">
-                    <value xsi:nil="true"/>
-                </valueState>
+                <values>
+                    <PREVIOUS xsi:nil="true"/>
+                    <COLLECTED xsi:nil="true"/>
+                    <FORCED xsi:nil="true"/>
+                    <EDITED xsi:nil="true"/>
+                    <INPUTED xsi:nil="true"/>
+                </values>
             </variables>
         </components>
     </components>
@@ -114,24 +90,16 @@
             <conditionFilter>"normal"</conditionFilter>
             <bindingsDependency>false</bindingsDependency>
             <response name="COMMENT_QE"/>
-            <variables variableType="COLLECTED">
+            <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>COMMENT_QE</name>
                 <componentRef>COMMENT-QUESTION</componentRef>
-                <valueState valueType="PREVIOUS">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="COLLECTED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="FORCED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="EDITED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="INPUTED">
-                    <value xsi:nil="true"/>
-                </valueState>
+                <values>
+                    <PREVIOUS xsi:nil="true"/>
+                    <COLLECTED xsi:nil="true"/>
+                    <FORCED xsi:nil="true"/>
+                    <EDITED xsi:nil="true"/>
+                    <INPUTED xsi:nil="true"/>
+                </values>
             </variables>
         </components>
     </components>
@@ -152,24 +120,16 @@
             <conditionFilter>"normal"</conditionFilter>
             <bindingsDependency>false</bindingsDependency>
             <response name="HEURE_REMPL"/>
-            <variables variableType="COLLECTED">
+            <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>
                 <componentRef>TIME-QUESTION-HEURE-REMPL</componentRef>
-                <valueState valueType="PREVIOUS">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="COLLECTED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="FORCED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="EDITED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="INPUTED">
-                    <value xsi:nil="true"/>
-                </valueState>
+                <values>
+                    <PREVIOUS xsi:nil="true"/>
+                    <COLLECTED xsi:nil="true"/>
+                    <FORCED xsi:nil="true"/>
+                    <EDITED xsi:nil="true"/>
+                    <INPUTED xsi:nil="true"/>
+                </values>
             </variables>
         </components>
         <components xsi:type="InputNumber"
@@ -184,24 +144,16 @@
             <conditionFilter>"normal"</conditionFilter>
             <bindingsDependency>false</bindingsDependency>
             <response name="MIN_REMPL"/>
-            <variables variableType="COLLECTED">
+            <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>MIN_REMPL</name>
                 <componentRef>TIME-QUESTION-MIN-REMPL</componentRef>
-                <valueState valueType="PREVIOUS">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="COLLECTED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="FORCED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="EDITED">
-                    <value xsi:nil="true"/>
-                </valueState>
-                <valueState valueType="INPUTED">
-                    <value xsi:nil="true"/>
-                </valueState>
+                <values>
+                    <PREVIOUS xsi:nil="true"/>
+                    <COLLECTED xsi:nil="true"/>
+                    <FORCED xsi:nil="true"/>
+                    <EDITED xsi:nil="true"/>
+                    <INPUTED xsi:nil="true"/>
+                </values>
             </variables>
         </components>
     </components>
