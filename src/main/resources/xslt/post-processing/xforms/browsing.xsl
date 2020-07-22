@@ -124,7 +124,7 @@
                 <xf:bind id="generic-end-text-bind" name="generic-end-text" ref="GenericEndText"/>
             </xf:bind>
             <!-- The CurrentSectionName depends of the CurrentSection -->
-            <xf:bind id="current-section-name-bind" name="current-section-name" ref="Util/CurrentSectionName" calculate="instance('fr-form-util')/Pages//*[not(*)][position()=number(instance('fr-form-instance')/Util/CurrentSection)]/name()"/>
+            <!--<xf:bind id="current-section-name-bind" name="current-section-name" ref="Util/CurrentSectionName" calculate="instance('fr-form-util')/Pages//*[not(*)][position()=number(instance('fr-form-instance')/Util/CurrentSection)]/name()"/>-->
         </xsl:copy>
     </xsl:template>
 
@@ -387,14 +387,14 @@
             <!-- Page changing action -->
             <xf:action ev:event="page-change">
                 <!-- Iterating on every field of the current page and doing a DOMFocusOut in order to display potential error messages -->
-                <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*[not(ancestor::*[ends-with(name(),'-Container') and ancestor::*[name()=instance('fr-form-instance')/Util/CurrentSectionName]])]">
+                <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*">
                     <xf:dispatch name="DOMFocusOut">
                         <xsl:attribute name="target">
                             <xsl:value-of select="'{concat(context()/name(),''-control'')}'"/>
                         </xsl:attribute>
                     </xf:dispatch>
                 </xf:action>
-                <xf:action iterate="instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*[ends-with(name(),'-Container')]/*">
+                <xf:action iterate="instance('fr-form-instance')//*[name()=instance('fr-form-instance')/Util/CurrentSectionName]//*[ends-with(name(),'-Container')]/*">
                     <xf:var name="loop-index" value="position()"/>
                     <xf:setindex>
                         <xsl:attribute name="repeat" select="'{context()/parent::*/name()}'"/>
@@ -407,7 +407,7 @@
                     </xf:action>
                 </xf:action>
                 <!-- The same for loops of pages -->
-                <xsl:for-each select="//fr:body/xf:repeat">
+                <!--<xsl:for-each select="//fr:body/xf:repeat">
                     <xsl:variable name="section-position">
                         <xsl:value-of select="count(preceding::fr:section)+1"/>
                     </xsl:variable>
@@ -422,7 +422,7 @@
                             </xf:dispatch>
                         </xf:action>
                     </xf:action>
-                </xsl:for-each>
+                </xsl:for-each>-->
 
 
                 <!-- Forcing this to false to notify that the page change isn't done yet. -->
@@ -435,7 +435,7 @@
                         Also, each action will end by setting this property to true (which will prevent other actions from triggering-->
                 <xf:action
                     if="instance('fr-form-util')/PageChangeDone='false'
-                    and not(xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true()))">
+                    and not(xxf:valid(instance('fr-form-instance')//*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true()))">
                     <!-- Displaying the dialog window that correspond to an error according to value of PreviousNext-->
                     <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
                         <xxf:show ev:event="DOMActivate" dialog="errorPrevious"/>
@@ -448,7 +448,7 @@
                     <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                 </xf:action>
                 <!-- The same for loops of pages -->
-                <xsl:for-each select="//fr:body/xf:repeat">
+                <!--<xsl:for-each select="//fr:body/xf:repeat">
                     <xsl:variable name="section-position" select="count(preceding::fr:section)+1"/>
                     <xsl:variable name="container" select="@id"/>
                     <xsl:variable name="loop-name" select="substring-after(@nodeset,concat($container,'/'))"/>
@@ -457,21 +457,21 @@
                             and not(xxf:valid(instance('fr-form-instance')//{$container}/{$loop-name}[count(preceding-sibling::*[name()='{$loop-name}'])+1 = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']]
                                                                                         /*[name()=instance('fr-form-instance')/Util/CurrentSectionName],
                                               true(),true()))">
-                            <!-- Displaying the dialog window that correspond to an error according to value of PreviousNext-->
+                            <!-\- Displaying the dialog window that correspond to an error according to value of PreviousNext-\->
                             <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
                                 <xxf:show ev:event="DOMActivate" dialog="errorPrevious"/>
                             </xf:action>
                             <xf:action if="instance('fr-form-util')/PreviousNext='1'">
                                 <xxf:show ev:event="DOMActivate" dialog="errorNext"/>
                             </xf:action>
-                            <!-- And we don't change page -->
+                            <!-\- And we don't change page -\->
                             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                         </xf:action>
                     </xf:action>
-                </xsl:for-each>
+                </xsl:for-each>-->
 
                 <xf:action if="instance('fr-form-util')/PageChangeDone='false'
-                           and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())
+                           and xxf:valid(instance('fr-form-instance')//*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())
                            and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false()">
                     <!-- Displaying the dialog window that correspond to an warning according to value of PreviousNext-->
                     <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
@@ -485,7 +485,7 @@
                         value="string('true')"/>
                 </xf:action>
                 <!-- The same for loops of pages -->
-                <xsl:for-each select="//fr:body/xf:repeat">
+                <!--<xsl:for-each select="//fr:body/xf:repeat">
                     <xsl:variable name="section-position">
                         <xsl:value-of select="count(preceding-sibling::*)+1"/>
                     </xsl:variable>
@@ -496,29 +496,29 @@
                             and xxf:valid(instance('fr-form-instance')//{$container}/{$loop-name}[count(preceding-sibling::*[name()='{$loop-name}'])+1 = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']]
                                                                                     /*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true()) and xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind')
                                           ,'constraint')=false()">
-                            <!-- Displaying the dialog window that correspond to an warning according to value of PreviousNext-->
+                            <!-\- Displaying the dialog window that correspond to an warning according to value of PreviousNext-\->
                             <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
                                 <xxf:show ev:event="DOMActivate" dialog="warningPrevious"/>
                             </xf:action>
                             <xf:action if="instance('fr-form-util')/PreviousNext='1'">
                                 <xxf:show ev:event="DOMActivate" dialog="warningNext"/>
                             </xf:action>
-                            <!-- And we don't change page -->
+                            <!-\- And we don't change page -\->
                             <xf:setvalue ref="instance('fr-form-util')/PageChangeDone"
                                 value="string('true')"/>
                         </xf:action>
                     </xf:action>
-                </xsl:for-each>
+                </xsl:for-each>-->
 
                 <xf:action
                     if="instance('fr-form-util')/PageChangeDone='false'
-                    and xxf:valid(instance('fr-form-instance')/*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())
+                    and xxf:valid(instance('fr-form-instance')//*[name()=instance('fr-form-instance')/Util/CurrentSectionName],true(),true())
                     and not(xxf:evaluate-bind-property(concat('page-',instance('fr-form-instance')/Util/CurrentSectionName,'-bind'),'constraint')=false())">
                     <!-- The page change happens -->
                     <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
                 </xf:action>
                 <!-- The same for loops of pages -->
-                <xsl:for-each select="//fr:body/xf:repeat">
+                <!--<xsl:for-each select="//fr:body/xf:repeat">
                     <xsl:variable name="section-position" select="count(preceding-sibling::*)+1"/>
                     <xsl:variable name="container" select="@id"/>
                     <xsl:variable name="loop-name" select="substring-after(@nodeset,concat($container,'/'))"/>
@@ -531,7 +531,7 @@
                             <xf:dispatch name="page-change-done" targetid="fr-form-model"/>
                         </xf:action>
                     </xf:action>
-                </xsl:for-each>
+                </xsl:for-each>-->
 
             </xf:action>
 
@@ -588,9 +588,9 @@
 
                         <xf:action if="number(instance('fr-form-instance')/Util/CurrentSection) &gt;= {$first-page-position} and number(instance('fr-form-instance')/Util/CurrentSection) &lt;= {$last-page-position}">
                             <!-- find a next unfiltered page in the current repeat -->
-                            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/Pages//*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/count(preceding-sibling::*) &lt; {$last-page-position}">
+                            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/count(preceding-sibling::*) &lt; {$last-page-position}">
                                 <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                                    value="instance('fr-form-util')/Pages//*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/name()"/>
+                                    value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/name()"/>
                                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                             </xf:action>
                             <!-- find a next occurrence for the current repeat -->
@@ -622,7 +622,7 @@
                                         </xf:action>
                                     </xsl:for-each>
                                     <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                                        value="if (instance('fr-form-util')/Pages//{$first-page-name}[not(text()='false')]) then '{$first-page-name}' else instance('fr-form-util')/Pages//{$first-page-name}/following-sibling::*[not(text()='false')][1]/name()"/>
+                                        value="if (instance('fr-form-util')/Pages/{$first-page-name}[not(text()='false')]) then '{$first-page-name}' else instance('fr-form-util')/Pages/{$first-page-name}/following-sibling::*[not(text()='false')][1]/name()"/>
                                     <xf:setindex repeat="{$container}" index="instance('fr-form-instance')//{$container}/*[@occurrence-id = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']]/position()"/>
                                     <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                                 </xf:action>
@@ -631,7 +631,7 @@
                     </xsl:for-each>
                     <xf:action if="instance('fr-form-util')/PageChangeDone='false'">
                         <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                            value="instance('fr-form-util')/Pages//*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/name()"/>
+                            value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/name()"/>
                         <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                     </xf:action>
                 </xf:action>
@@ -686,9 +686,9 @@
 
                         <xf:action if="number(instance('fr-form-instance')/Util/CurrentSection) &gt;= {$first-page-position} and number(instance('fr-form-instance')/Util/CurrentSection) &lt;= {$last-page-position}">
                             <!-- find a previous unfiltered page in the current repeat -->
-                            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/Pages//*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/preceding-sibling::*[not(text()='false')][1]/count(preceding-sibling::*) &gt;= {$first-page-position +1 }">
+                            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/preceding-sibling::*[not(text()='false')][1]/count(preceding-sibling::*) &gt;= {$first-page-position +1 }">
                                 <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                                    value="instance('fr-form-util')/Pages//*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/name()"/>
+                                    value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/name()"/>
                                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                             </xf:action>
                             <!-- find a previous occurrence for the current repeat -->
@@ -720,7 +720,7 @@
                                         </xf:action>
                                     </xsl:for-each>
                                     <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                                        value="if (instance('fr-form-util')/Pages//{$last-page-name}[not(text()='false')]) then '{$last-page-name}' else instance('fr-form-util')/Pages//{$last-page-name}/preceding-sibling::*[not(text()='false')][1]/name()"/>
+                                        value="if (instance('fr-form-util')/Pages/{$last-page-name}[not(text()='false')]) then '{$last-page-name}' else instance('fr-form-util')/Pages/{$last-page-name}/preceding-sibling::*[not(text()='false')][1]/name()"/>
                                     <xf:setindex repeat="{$container}" index="instance('fr-form-instance')//{$container}/*[@occurrence-id = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']]/position()"/>
                                     <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                                 </xf:action>
@@ -729,13 +729,13 @@
                     </xsl:for-each>
                     <xf:action if="instance('fr-form-util')/PageChangeDone='false'">
                         <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                            value="instance('fr-form-util')/Pages//*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/preceding-sibling::*[not(text()='false')][1]/name()"/>
+                            value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/preceding-sibling::*[not(text()='false')][1]/name()"/>
                         <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
                     </xf:action>
                 </xf:action>
                 <!-- Saving the time when the saving happened -->
                 <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
-                    value="count(instance('fr-form-util')/Pages//*[not(descendant::*) and following-sibling::*[name()=instance('fr-form-instance')/Util/CurrentSectionName])"/>
+                    value="count(instance('fr-form-util')/Pages/*[following-sibling::*[name()=instance('fr-form-instance')/Util/CurrentSectionName]]) +1"/>
                 <xf:setvalue ref="instance('fr-form-instance')/Util/DateTime"
                     value="fn:format-dateTime(fn:current-dateTime(),'[D01]-[M01]-[Y0001] à [H01]:[m01]')"/>
 
@@ -1156,6 +1156,7 @@
                     <xf:action ev:event="DOMActivate">
                         <xxf:hide dialog="welcome-back"/>
                         <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection" value="'1'"/>
+                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName" value="instance('fr-form-util')/Pages/*[1]/name()"/>
                         <xf:toggle case="{$choice}"/>
                     </xf:action>
                 </xf:trigger>
