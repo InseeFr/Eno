@@ -566,10 +566,10 @@
                                     </xsl:call-template>
                                 </xsl:for-each>
                             </xsl:when>
-                            <xsl:when test="contains($text,concat('context()/preceding-sibling::',$current-group,'/@occurrence-id'))">
-                                <xsl:for-each select="tokenize($text,concat('context\(\)/preceding-sibling::',$current-group,'/@occurrence-id'))">
+                            <xsl:when test="contains($text,concat('ing-sibling::',$current-group))">
+                                <xsl:for-each select="tokenize($text,concat('ing-sibling::',$current-group))">
                                     <xsl:if test="not(position()=1)">
-                                        <xsl:value-of select="concat('context()/preceding-sibling::Groupe[@typeGroupe=''',$current-group,''']/@idGroupe')"/>
+                                        <xsl:value-of select="concat('ing-sibling::Groupe[@typeGroupe=''',$current-group,''']')"/>
                                     </xsl:if>
                                     <xsl:call-template name="replace-element">
                                         <xsl:with-param name="position" select="$position"/>
@@ -583,6 +583,7 @@
                                         <xsl:value-of select="concat(regex-group(1),$current-group,regex-group(2),regex-group(3))"/>
                                     </xsl:matching-substring>
                                     <xsl:non-matching-substring>
+                                        <xsl:message select="concat('loop Insee-model : don''t recognize : ',.)"/>
                                         <xsl:value-of select="'toto'"/>
                                         <xsl:for-each select="tokenize($text,$current-group)">
                                             <xsl:if test="not(position()=1)">
