@@ -119,11 +119,112 @@
                 <xf:bind id="generic-beginning-text-bind" name="generic-beginning-text"
                     ref="GenericBeginningText"/>
             </xf:bind>
-            <xsl:apply-templates select="node()"/>
+            <xsl:apply-templates select="node()">
+                <xsl:with-param name="bind-in-page" as="xs:boolean" select="false()" tunnel="yes"/>
+                <xsl:with-param name="page-loop" as="node()" tunnel="yes">
+                    <Loops/>
+                </xsl:with-param>
+            </xsl:apply-templates>
             <xf:bind id="end-bind" name="end" ref="End">
                 <xf:bind id="generic-end-text-bind" name="generic-end-text" ref="GenericEndText"/>
             </xf:bind>
         </xsl:copy>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>Replace page loop occurrence with CurrentLoopElement</xd:desc>
+    </xd:doc>
+    <xsl:template match="xf:bind">
+        <xsl:param name="bind-in-page" as="xs:boolean" tunnel="yes"/>
+        <xsl:param name="page-loop" as="node()" tunnel="yes"/>
+        
+        <xsl:choose>
+            <!-- when enterring into a page -->
+            <xsl:when test="not($bind-in-page) and //fr:body//*[@bind=current()/@id]/name()='fr:section'">
+                <xsl:copy>
+                    <xsl:apply-templates select="@*" mode="bind"/>
+                    <xsl:if test="$page-loop//Loop">
+                        <xsl:attribute name="relevant">
+                            <xsl:variable name="loop-condition">
+                                <xsl:for-each select="$page-loop//Loop">
+                                    <xsl:value-of select="concat('instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',@container,'''] != '''' and ')"/>
+                                </xsl:for-each>                                
+                            </xsl:variable>
+                            <xsl:choose>
+                                <xsl:when test="@relevant">
+                                    <xsl:value-of select="$loop-condition"/>
+                                    <xsl:call-template name="bind-in-page-loop">
+                                        <xsl:with-param name="attribute" select="@relevant"/>
+                                        <xsl:with-param name="page-loop" as="node()" select="$page-loop"/>
+                                    </xsl:call-template>                                    
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="substring($loop-condition,1,string-length($loop-condition) - 5)"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates select="node()">
+                        <xsl:with-param name="bind-in-page" select="true()" tunnel="yes"/>
+                    </xsl:apply-templates>
+                </xsl:copy>
+            </xsl:when>
+            <!-- when enterring into a loop of pages -->
+            <xsl:when test="not($bind-in-page) and @nodeset">
+                <xsl:copy>
+                    <xsl:apply-templates select="@*" mode="bind"/>
+                    <xsl:apply-templates select="node()">
+                        <xsl:with-param name="page-loop" tunnel="yes">
+                            <Loops>
+                                <xsl:copy-of select="$page-loop//Loop"/>
+                                <Loop container="{@name}" loop="{substring-after(@nodeset,concat(@name,'/'))}"/>
+                            </Loops>
+                        </xsl:with-param>
+                    </xsl:apply-templates>
+                </xsl:copy>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="@*" mode="bind"/>
+                    <xsl:apply-templates select="node()"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="@*" mode="bind">
+        <xsl:param name="page-loop" as="node()" tunnel="yes"/>
+        
+        <xsl:attribute name="{name()}">
+            <xsl:call-template name="bind-in-page-loop">
+                <xsl:with-param name="attribute" select="."/>
+                <xsl:with-param name="page-loop" as="node()" select="$page-loop"/>
+            </xsl:call-template>
+        </xsl:attribute>
+    </xsl:template>
+
+    <xsl:template name="bind-in-page-loop">
+        <xsl:param name="attribute"/>
+        <xsl:param name="page-loop"/>
+        
+        <xsl:choose>
+            <xsl:when test="$page-loop//Loop">
+                <xsl:call-template name="bind-in-page-loop">
+                    <xsl:with-param name="attribute"
+                        select="replace($attribute,
+                                        concat('current\(\)/ancestor::',$page-loop//Loop[1]/@loop,'/@occurrence-id'),
+                                        concat('instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$page-loop//Loop[1]/@container,''']'))"/>
+                    <xsl:with-param name="page-loop">
+                        <Loops>
+                            <xsl:copy-of select="$page-loop//Loop[position() &gt; 1]"/>
+                        </Loops>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$attribute"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xd:doc>
@@ -686,14 +787,7 @@
         <xsl:param name="loop-ancestors"/>
 
         <xf:bind id="page-{name()}-bind" name="{name()}" ref="{name()}">
-            <xf:calculate>
-                <xsl:attribute name="value">
-                    <xsl:for-each select="tokenize($loop-ancestors,' ')">
-                        <xsl:value-of select="concat('instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',.,'''] !='''' and ')"/>
-                    </xsl:for-each>
-                    <xsl:value-of select="concat('xxf:evaluate-bind-property(''',name(),'-bind'',''relevant'')')"/>
-                </xsl:attribute>
-            </xf:calculate>
+            <xf:calculate value="xxf:evaluate-bind-property('{name()}-bind','relevant')"/>
             <!-- Creating a constraint equals to the sum of warning-level constraints -->
             <xsl:variable name="module-name" select="name()"/>
             <xsl:apply-templates select="//xf:bind[@name=$module-name]/*" mode="page-check">
