@@ -102,7 +102,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="xf:instance[@id='fr-form-util']//Pages/*[ends-with(name(),'-Container')]">
         <xsl:element name="{replace(name(),'-Container','')}">
             <xsl:apply-templates select="node() | @*"/>
@@ -132,16 +132,8 @@
         </xf:action>
     </xsl:template>
 
-    <xsl:template match="*/@relevant | */@readonly | */@calculate | xf:var/@* | xf:constraint/@value | xf:calculate/@value">
-        <xsl:attribute name="{name()}">
-            <xsl:call-template name="replace-element">
-                <xsl:with-param name="position" as="xs:integer" select="1"/>
-                <xsl:with-param name="text" select="."/>
-            </xsl:call-template>
-        </xsl:attribute>
-    </xsl:template>
-    
-    <xsl:template match="*/@nodeset | *[@nodeset]/@* | xf:action/@if | xf:action/@iterate | xf:action/@while | xf:setvalue/@* | xf:insert/@* | xf:setindex/@*" priority="1">
+    <xsl:template match="*/@relevant | */@readonly | */@calculate | xf:var/@* | xf:constraint/@value | xf:calculate/@value | */@nodeset | *[@nodeset]/@*
+        | xf:action/@if | xf:action/@iterate | xf:action/@while | xf:setvalue/@* | xf:insert/@* | xf:setindex/@*" priority="1">
         <xsl:variable name="content">
             <xsl:call-template name="replace-element">
                 <xsl:with-param name="position" as="xs:integer" select="1"/>
@@ -187,7 +179,7 @@
             </xsl:call-template>
         </xsl:attribute>
     </xsl:template>
-    
+
     <xsl:template match="xf:bind/@ref">
         <xsl:attribute name="ref">
             <xsl:choose>
