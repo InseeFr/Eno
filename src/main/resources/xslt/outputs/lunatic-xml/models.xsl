@@ -583,7 +583,7 @@
 		<xsl:variable name="instructionFormat">
 			<xsl:variable name="format" select="upper-case(enolunatic:get-format($source-context))"/>
 			<xsl:choose>
-				<xsl:when test="$format!=''"><xsl:value-of select="$format"/></xsl:when>
+				<xsl:when test="$format!=''"><xsl:value-of select="normalize-space($format)"/></xsl:when>
 				<!-- Default value : COMMENT -->
 				<xsl:otherwise><xsl:value-of select="'COMMENT'"/></xsl:otherwise>
 			</xsl:choose>
