@@ -210,6 +210,10 @@
 				<xsl:with-param name="filterCondition" select="enolunatic:replace-all-variables-with-business-name($source-context, $filterCondition)" tunnel="yes"/>
 			</xsl:apply-templates>
 		</components>
+		
+		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
 	</xsl:template>
 
 	<xd:doc>
@@ -263,6 +267,10 @@
 				</cells>
 			</xsl:for-each>
 		</components>
+		
+		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
+			<xsl:with-param name="driver" select="." tunnel="yes"/>
+		</xsl:apply-templates>
 	</xsl:template>
 
 	<xd:doc>
@@ -575,7 +583,7 @@
 		<xsl:variable name="instructionFormat">
 			<xsl:variable name="format" select="upper-case(enolunatic:get-format($source-context))"/>
 			<xsl:choose>
-				<xsl:when test="$format!=''"><xsl:value-of select="$format"/></xsl:when>
+				<xsl:when test="$format!=''"><xsl:value-of select="normalize-space($format)"/></xsl:when>
 				<!-- Default value : COMMENT -->
 				<xsl:otherwise><xsl:value-of select="'COMMENT'"/></xsl:otherwise>
 			</xsl:choose>
