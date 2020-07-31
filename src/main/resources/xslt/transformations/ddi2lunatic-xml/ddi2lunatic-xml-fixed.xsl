@@ -26,6 +26,8 @@
     <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
     
     
+    <xsl:strip-space elements="*"/>
+    
     <xd:doc>
         <xd:desc>
             <xd:p>The properties file used by the stylesheet.</xd:p>
