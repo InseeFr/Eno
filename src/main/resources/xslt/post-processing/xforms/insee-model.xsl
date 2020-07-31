@@ -187,7 +187,13 @@
                     <xsl:value-of select="concat('Variable[@idVariable=''',.,''']')"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="."/>
+                    <xsl:variable name="content">
+                        <xsl:call-template name="replace-element">
+                            <xsl:with-param name="position" as="xs:integer" select="1"/>
+                            <xsl:with-param name="text" select="."/>
+                        </xsl:call-template>
+                    </xsl:variable>
+                    <xsl:value-of select="replace($content,'@occurrence-id','@idGroupe')"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:attribute>
