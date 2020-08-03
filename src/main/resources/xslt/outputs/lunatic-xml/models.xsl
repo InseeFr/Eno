@@ -146,10 +146,7 @@
 			</xsl:apply-templates>
 		</components>
 		
-		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
+		</xsl:template>
 
 	<xd:doc>
 		<xd:desc>Table / TableLoop drivers create a Table component</xd:desc>
@@ -192,10 +189,7 @@
 			</xsl:for-each>
 		</components>
 		
-		<xsl:apply-templates select="enolunatic:get-end-question-instructions($source-context)" mode="source">
-			<xsl:with-param name="driver" select="." tunnel="yes"/>
-		</xsl:apply-templates>
-	</xsl:template>
+		</xsl:template>
 
 	<xd:doc>
 		<xd:desc>
@@ -507,7 +501,7 @@
 		<xsl:variable name="instructionFormat">
 			<xsl:variable name="format" select="upper-case(enolunatic:get-format($source-context))"/>
 			<xsl:choose>
-				<xsl:when test="$format!=''"><xsl:value-of select="normalize-space($format)"/></xsl:when>
+				<xsl:when test="$format!=''"><xsl:value-of select="$format"/></xsl:when>
 				<!-- Default value : COMMENT -->
 				<xsl:otherwise><xsl:value-of select="'COMMENT'"/></xsl:otherwise>
 			</xsl:choose>
