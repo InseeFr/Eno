@@ -4,8 +4,8 @@
     xmlns:pogues="http://xml.insee.fr/schema/applis/pogues"
     xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:eno="http://xml.insee.fr/apps/eno"
     xmlns:enoddi="http://xml.insee.fr/apps/eno/ddi"
-    xmlns:enofr="http://xml.insee.fr/apps/eno/form-runner"
-    xmlns:enoddi2fr="http://xml.insee.fr/apps/eno/ddi2form-runner"
+    xmlns:enoxforms="http://xml.insee.fr/apps/eno/form-runner"
+    xmlns:enoddi2xforms="http://xml.insee.fr/apps/eno/ddi2form-runner"
     xmlns:d="ddi:datacollection:3_3"
     xmlns:r="ddi:reusable:3_3" xmlns:l="ddi:logicalproduct:3_3"
     xmlns:enoddi33="http://xml.insee.fr/apps/eno/out/ddi33"
@@ -164,6 +164,10 @@
     <xsl:template match="pogues:Formula" mode="enoddi33:get-vrop-id">
         <xsl:value-of select="concat(enoddi33:get-id(parent::pogues:Variable),'-VROP')"/>
     </xsl:template>
+
+    <xsl:template match="pogues:Variable[@xsi:type='CalculatedVariableType']" mode="enoddi33:get-vrop-id">
+        <xsl:value-of select="concat(enoddi33:get-id(.),'-VROP')"/>
+    </xsl:template>
     
     <!--TODO The implementation of building id should be done with "rich" outGetter mechanism =>@v2.0 -->
     <xsl:function name="enoddi33:get-gi-id">
@@ -268,5 +272,33 @@
         <xsl:apply-templates select="." mode="enopogues:is-with-dynamic-text"/>
     </xsl:template>
     
+    <xsl:function name="enoddi33:get-clarified-value">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi33:get-clarified-value"/>
+    </xsl:function>
+    <xsl:template match="pogues:ClarificationQuestion" mode="enoddi33:get-clarified-value">
+        <xsl:variable name="clarified-expression" select="enopogues:get-clarification-expression(.)"/>
+        
+        <xsl:value-of select="normalize-space(replace(substring-after($clarified-expression, '='),'''',''))"/>
+    </xsl:template>
+
+    <xsl:function name="enoddi33:get-clarified-code">
+        <xsl:param name="context" as="item()"/>
+        <xsl:apply-templates select="$context" mode="enoddi33:get-clarified-code"/>
+    </xsl:function>
+    <xsl:template match="pogues:ClarificationQuestion" mode="enoddi33:get-clarified-code">
+        <xsl:variable name="clarified-response" select="enopogues:get-clarified-response(.)" as="node()"/>
+        
+        <xsl:choose>
+            <xsl:when test="enopogues:get-type($clarified-response)='BOOLEAN'">
+                <xsl:value-of select="'INSEE-COMMUN-CL-Booleen-1'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="clarified-response-codelist" select="enopogues:get-code-list-id($clarified-response)"/>
+                <xsl:variable name="clarified-value" select="enoddi33:get-clarified-value(.)"/>
+                <xsl:value-of select="enopogues:get-id(//pogues:CodeList[@id=$clarified-response-codelist]/pogues:Code[pogues:Value=$clarified-value])"/>                
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
     
 </xsl:stylesheet>

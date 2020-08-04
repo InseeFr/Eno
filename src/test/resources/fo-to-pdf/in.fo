@@ -13,7 +13,7 @@
    </fo:layout-master-set>
    <fo:page-sequence font-family="arial" font-size="10pt" master-reference="Cover-A4">
       <fo:flow flow-name="xsl-region-body">
-         <fo:block xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enopdf="http://xml.insee.fr/apps/eno/out/form-runner" page-break-inside="avoid">
+         <fo:block xmlns:eno="http://xml.insee.fr/apps/eno" xmlns:enofo="http://xml.insee.fr/apps/eno/out/form-runner" page-break-inside="avoid">
             <fo:block width="100%">
                <fo:inline-container width="50mm">
                   <fo:block-container height="20mm" max-height="20mm" overflow="hidden">

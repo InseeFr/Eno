@@ -343,7 +343,7 @@
             />
         </xsl:variable>
         <xsl:value-of
-            select="max(ancestor::d:GridDimension[@rank='1']/following-sibling::d:GridDimension[@rank='2']//l:Code[not(l:Code)]/count(ancestor::l:CodeList[r:Label]))+1-number($label-or-no)"
+            select="max(ancestor::d:GridDimension[@rank='1']/following-sibling::d:GridDimension[@rank='2']//l:Code[not(l:Code)]/(count(ancestor::l:CodeList[r:Label])+ count(ancestor-or-self::l:Code)))-number($label-or-no)"
         />
     </xsl:template>
 
@@ -369,8 +369,8 @@
         <xsl:param name="table-first-line" tunnel="yes" required="no"/>
         <xsl:param name="table-last-line" tunnel="yes" required="no"/>
 
-        <xsl:variable name="first-descendant-position" select="descendant::l:Code[not(l:Code)][1]/count(preceding::l:Code[ancestor::d:GridDimension=current()/ancestor::d:GridDimension and not(l:Code)])+1"/>
-        <xsl:variable name="last-descendant-position" select="descendant::l:Code[not(l:Code)][last()]/count(preceding::l:Code[ancestor::d:GridDimension=current()/ancestor::d:GridDimension and not(l:Code)])+1"/>
+        <xsl:variable name="first-descendant-position" select="descendant::l:Code[not(l:Code)][1]/count(preceding::l:Code[ancestor::d:QuestionGrid/r:ID=current()/ancestor::d:QuestionGrid/r:ID and ancestor::d:GridDimension=current()/ancestor::d:GridDimension and not(l:Code)])+1"/>
+        <xsl:variable name="last-descendant-position" select="descendant::l:Code[not(l:Code)][last()]/count(preceding::l:Code[ancestor::d:QuestionGrid/r:ID=current()/ancestor::d:QuestionGrid/r:ID and ancestor::d:GridDimension=current()/ancestor::d:GridDimension and not(l:Code)])+1"/>
         <xsl:variable name="first-line">
             <xsl:choose>
                 <xsl:when test="string($table-first-line) != '' and number($table-first-line) &gt; $first-descendant-position">
@@ -993,8 +993,17 @@
             <xd:p>Function that returns the type of a variable.</xd:p>
         </xd:desc>
     </xd:doc>
-    <xsl:template match="*" mode="enoddi:get-variable-type">
-
+    <xsl:template match="l:Variable" mode="enoddi:get-variable-type">
+        <xsl:call-template name="enoddi:get-variable-type">
+            <xsl:with-param name="variable" select="enoddi:get-business-name(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="*[(ends-with(name(),'Domain') or ends-with(name(),'DomainReference')) and not(ancestor::d:GridDimension) and not(name()='d:StructuredMixedGridResponseDomain')]" mode="enoddi:get-variable-type">
+        <xsl:call-template name="enoddi:get-variable-type">
+            <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
+        </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="d:GenerationInstruction" mode="enoddi:get-variable-type">
         <xsl:call-template name="enoddi:get-variable-type">
             <xsl:with-param name="variable" select="enoddi:get-id(.)"/>
         </xsl:call-template>
@@ -1008,8 +1017,14 @@
             <xsl:when test="$root//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
                 <xsl:value-of select="'collected'"/>
             </xsl:when>
+            <xsl:when test="$root//l:VariableScheme//l:Variable[r:SourceParameterReference]/l:VariableName/r:String = $variable">
+                <xsl:value-of select="'collected'"/>
+            </xsl:when>
             <!-- calculated variable -->
             <xsl:when test="$root//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
+                <xsl:value-of select="'calculated'"/>
+            </xsl:when>
+            <xsl:when test="$root//l:VariableScheme//l:Variable[descendant::r:ProcessingInstructionReference]/l:VariableName/r:String = $variable">
                 <xsl:value-of select="'calculated'"/>
             </xsl:when>
             <!-- external variable -->
@@ -1018,7 +1033,7 @@
             </xsl:when>
             <!-- unknown -->
             <xsl:otherwise>
-                <xsl:value-of select="concat('unknow type for : ',$variable)"/>
+                <xsl:value-of select="concat('unknown type for : ',$variable)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -1207,11 +1222,15 @@
             <xsl:choose>
                 <!-- collected variable -->
                 <xsl:when test="$root//l:VariableScheme//l:Variable/r:SourceParameterReference/r:ID = $variable">
-                    <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $variable]/l:VariableRepresentation/*)"/>
+                    <xsl:if test="$root//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $variable]/l:VariableRepresentation/*">                        
+                        <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[r:SourceParameterReference/r:ID = $variable]/l:VariableRepresentation/*)"/>
+                    </xsl:if>
                 </xsl:when>
                 <!-- calculated variable -->
                 <xsl:when test="$root//l:VariableScheme//l:Variable//r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable">
-                    <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[descendant::r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable]/l:VariableRepresentation/*[not(self::r:ProcessingInstructionReference)])"/>
+                    <xsl:if test="$root//l:VariableScheme//l:Variable[descendant::r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable]/l:VariableRepresentation/*[not(self::r:ProcessingInstructionReference)]">
+                        <xsl:value-of select="enoddi:get-type($root//l:VariableScheme//l:Variable[descendant::r:ProcessingInstructionReference/r:Binding/r:SourceParameterReference/r:ID = $variable]/l:VariableRepresentation/*[not(self::r:ProcessingInstructionReference)])"/>
+                    </xsl:if>                    
                 </xsl:when>
                 <!-- external variable -->
                 <xsl:when test="$root//l:VariableScheme//l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]/l:VariableName/r:String= $variable">
@@ -1388,6 +1407,50 @@
 
     <xsl:template match="*" mode="enoddi:get-previous-statement-item">
         <xsl:sequence select="ancestor::d:QuestionConstruct/parent::d:ControlConstructReference/preceding-sibling::d:ControlConstructReference/d:StatementItem[parent::d:ControlConstructReference/following-sibling::d:ControlConstructReference[descendant::d:QuestionConstruct][1]/descendant::d:QuestionConstruct/r:ID=current()/ancestor::d:QuestionConstruct/r:ID]"></xsl:sequence>
+    </xsl:template>
+    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Function for retrieving the id (modele) of a questionnaire.</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='template']" mode="enoddi:get-form-model">
+        <xsl:choose>
+            <xsl:when test="//d:Instrument/d:InstrumentName">
+                <xsl:value-of select="//d:Instrument/d:InstrumentName/r:String"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="//d:Instrument/r:ID/text()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The list of the external variables linked to the questionnaire</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Sequence[d:TypeOfSequence/text()='template']" mode="enoddi:get-external-variables">
+        <xsl:sequence select="//l:VariableScheme/l:VariableGroup[l:TypeOfVariableGroup='Questionnaire']
+            /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
+    </xsl:template>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The list of the external variables linked to a loop / a dynamic array</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:Loop | d:QuestionGrid[d:GridDimension/d:Roster]" mode="enoddi:get-external-variables">
+        <xsl:sequence select="//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=current()/r:ID]
+            /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
+    </xsl:template>
+    <xd:doc>
+        <xd:desc>
+            <xd:p>The list of the external variables linked to a dynamic array</xd:p>
+        </xd:desc>
+    </xd:doc>
+    <xsl:template match="d:StructuredMixedGridResponseDomain[parent::d:QuestionGrid[d:GridDimension/d:Roster]]" mode="enoddi:get-external-variables">
+        <xsl:sequence select="//l:VariableScheme//l:VariableGroup[r:BasedOnObject/r:BasedOnReference[1]/r:ID=current()/parent::d:QuestionGrid/r:ID]
+            /r:VariableReference/l:Variable[not(r:QuestionReference or r:SourceParameterReference or descendant::r:ProcessingInstructionReference)]"/>
     </xsl:template>
 
 </xsl:stylesheet>
