@@ -152,7 +152,7 @@
                     <xsl:value-of select="concat(substring-before(.,','),',')"/>
                     <xsl:call-template name="replace-element">
                         <xsl:with-param name="position" as="xs:integer" select="1"/>
-                        <xsl:with-param name="text" select="substring-after(.,',')"/>
+                        <xsl:with-param name="text" select="replace(substring-after(.,','),'@occurrence-id','@idGroupe')"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
