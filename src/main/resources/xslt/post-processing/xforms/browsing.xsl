@@ -516,205 +516,12 @@
             <!-- What happens when the page change is effective -->
             <xf:action ev:event="page-change-done">
                 <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('false')"/>
-                <xf:action if="instance('fr-form-util')/PreviousNext='1'">
-                    <!-- preparate the following xf:repeat occurrences -->
-                    <xsl:for-each select="//fr:body//xf:repeat[descendant::fr:section]">
-                        <xsl:variable name="container" select="@id"/>
-                        <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
-                        <xsl:variable name="first-page-position" select="count(preceding::fr:section) + 2"/>
-                        <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
-                        <xsl:variable name="filter-label">
-                            <xsl:if test="$repeat-filter != ''">
-                                <xsl:value-of select="concat('[',$repeat-filter,']')"/>
-                            </xsl:if>
-                        </xsl:variable>
-                        <xsl:variable name="ancestor-address">
-                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-                            <xsl:for-each select="ancestor::xf:repeat">
-                                <xsl:variable name="ancestor-container" select="@id"/>
-                                <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                                <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
-                            </xsl:for-each>
-                        </xsl:variable>
-                        <xf:action if="number(instance('fr-form-instance')/Util/CurrentSection) &lt; {$first-page-position}">
-                            <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
-                                value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}) then ({$ancestor-address}{$container}/{$loop-id}{$filter-label}[1]/@occurrence-id) else ''"/>
-                            <xsl:for-each select="descendant::fr:section">
-                                <xf:dispatch ev:event="DOMFocusOut xforms-value-changed" name="DOMFocusOut" target="{@id}"/>
-                            </xsl:for-each>
-                        </xf:action>
-                    </xsl:for-each>
-                    <!-- find a next page in the current xf:repeat or a next occurrence's first page in it -->
-                    <xsl:for-each select="//fr:body//xf:repeat[descendant::fr:section]">
-                        <xsl:sort order="descending"/>
-                        <xsl:variable name="container" select="@id"/>
-                        <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
-                        <xsl:variable name="first-page-position" select="count(preceding::fr:section) + 2"/>
-                        <xsl:variable name="last-page-position" select="$number-of-pages - count(following::fr:section) + 1"/>
-                        <xsl:variable name="first-page-name" select="descendant::fr:section[1]/@name"/>
-                        <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
-                        <xsl:variable name="filter-label">
-                            <xsl:if test="$repeat-filter != ''">
-                                <xsl:value-of select="concat('[',$repeat-filter,']')"/>
-                            </xsl:if>
-                        </xsl:variable>
-                        <xsl:variable name="ancestor-address">
-                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-                            <xsl:for-each select="ancestor::xf:repeat">
-                                <xsl:variable name="ancestor-container" select="@id"/>
-                                <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                                <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
-                            </xsl:for-each>
-                        </xsl:variable>
-
-                        <xf:action if="number(instance('fr-form-instance')/Util/CurrentSection) &gt;= {$first-page-position} and number(instance('fr-form-instance')/Util/CurrentSection) &lt;= {$last-page-position}">
-                            <!-- find a next unfiltered page in the current repeat -->
-                            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/count(preceding-sibling::*) &lt; {$last-page-position}">
-                                <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                                    value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/name()"/>
-                                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
-                            </xf:action>
-                            <!-- find a next occurrence for the current repeat -->
-                            <xf:action if="instance('fr-form-util')/PageChangeDone='false'">
-                                <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
-                                    value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}[preceding-sibling::{$loop-id}/@occurrence-id = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']]) then ({$ancestor-address}{$container}/{$loop-id}[@occurrence-id = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']]/following-sibling::{$loop-id}{$filter-label}[1]/@occurrence-id) else ''"/>
-                                <xf:action if="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}'] != ''">
-                                    <xsl:for-each select="descendant::xf:repeat[descendant::fr:section]">
-                                        <xsl:variable name="container" select="@id"/>
-                                        <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
-                                        <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
-                                        <xsl:variable name="filter-label">
-                                            <xsl:if test="$repeat-filter != ''">
-                                                <xsl:value-of select="concat('[',$repeat-filter,']')"/>
-                                            </xsl:if>
-                                        </xsl:variable>
-                                        <xsl:variable name="ancestor-address">
-                                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-                                            <xsl:for-each select="ancestor::xf:repeat">
-                                                <xsl:variable name="ancestor-container" select="@id"/>
-                                                <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                                                <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
-                                            </xsl:for-each>
-                                        </xsl:variable>
-                                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
-                                            value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}) then ({$ancestor-address}{$container}/{$loop-id}{$filter-label}[1]/@occurrence-id) else ''"/>
-                                    </xsl:for-each>
-                                    <xsl:for-each select="descendant::fr:section">
-                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed" name="DOMFocusOut" target="{@id}"/>
-                                    </xsl:for-each>
-                                    <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                                        value="if (instance('fr-form-util')/Pages/{$first-page-name}[not(text()='false')]) then '{$first-page-name}' else instance('fr-form-util')/Pages/{$first-page-name}/following-sibling::*[not(text()='false')][1]/name()"/>
-                                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
-                                </xf:action>
-                            </xf:action>
-                        </xf:action>
-                    </xsl:for-each>
-                    <xf:action if="instance('fr-form-util')/PageChangeDone='false'">
-                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                            value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/following-sibling::*[not(text()='false')][1]/name()"/>
-                        <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
-                    </xf:action>
-                </xf:action>
-
-                <xf:action if="instance('fr-form-util')/PreviousNext='-1'">
-                    <!-- preparate the following xf:repeat occurrences -->
-                    <xsl:for-each select="//fr:body//xf:repeat[descendant::fr:section]">
-                        <xsl:variable name="container" select="@id"/>
-                        <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
-                        <xsl:variable name="last-page-position" select="$number-of-pages - count(following::fr:section) + 1"/>
-                        <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
-                        <xsl:variable name="filter-label">
-                            <xsl:if test="$repeat-filter != ''">
-                                <xsl:value-of select="concat('[',$repeat-filter,']')"/>
-                            </xsl:if>
-                        </xsl:variable>
-                        <xsl:variable name="ancestor-address">
-                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-                            <xsl:for-each select="ancestor::xf:repeat">
-                                <xsl:variable name="ancestor-container" select="@id"/>
-                                <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                                <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
-                            </xsl:for-each>
-                        </xsl:variable>
-                        <xf:action if="number(instance('fr-form-instance')/Util/CurrentSection) &gt; {$last-page-position}">
-                            <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
-                                value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}) then ({$ancestor-address}{$container}/{$loop-id}{$filter-label}[last()]/@occurrence-id) else ''"/>
-                            <xsl:for-each select="descendant::fr:section">
-                                <xf:dispatch ev:event="DOMFocusOut xforms-value-changed" name="DOMFocusOut" target="{@id}"/>
-                            </xsl:for-each>
-                        </xf:action>
-                    </xsl:for-each>
-                    <!-- find a next page in the current xf:repeat or a next occurrence's first page in it -->
-                    <xsl:for-each select="//fr:body//xf:repeat[descendant::fr:section]">
-                        <xsl:sort order="descending"/>
-                        <xsl:variable name="container" select="@id"/>
-                        <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
-                        <xsl:variable name="first-page-position" select="count(preceding::fr:section) + 2"/>
-                        <xsl:variable name="last-page-position" select="$number-of-pages - count(following::fr:section) + 1"/>
-                        <xsl:variable name="last-page-name" select="descendant::fr:section[last()]/@name"/>
-                        <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
-                        <xsl:variable name="filter-label">
-                            <xsl:if test="$repeat-filter != ''">
-                                <xsl:value-of select="concat('[',$repeat-filter,']')"/>
-                            </xsl:if>
-                        </xsl:variable>
-                        <xsl:variable name="ancestor-address">
-                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-                            <xsl:for-each select="ancestor::xf:repeat">
-                                <xsl:variable name="ancestor-container" select="@id"/>
-                                <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                                <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
-                            </xsl:for-each>
-                        </xsl:variable>
-
-                        <xf:action if="number(instance('fr-form-instance')/Util/CurrentSection) &gt;= {$first-page-position} and number(instance('fr-form-instance')/Util/CurrentSection) &lt;= {$last-page-position}">
-                            <!-- find a previous unfiltered page in the current repeat -->
-                            <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/preceding-sibling::*[not(text()='false')][1]/count(preceding-sibling::*) &gt;= {$first-page-position -1 }">
-                                <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                                    value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/preceding-sibling::*[not(text()='false')][1]/name()"/>
-                                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
-                            </xf:action>
-                            <!-- find a previous occurrence for the current repeat -->
-                            <xf:action if="instance('fr-form-util')/PageChangeDone='false'">
-                                <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
-                                    value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}[following-sibling::{$loop-id}/@occurrence-id = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']]) then ({$ancestor-address}{$container}/{$loop-id}[@occurrence-id = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']]/preceding-sibling::{$loop-id}{$filter-label}[1]/@occurrence-id) else ''"/>
-                                <xf:action if="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}'] != ''">
-                                    <xsl:for-each select="descendant::xf:repeat[descendant::fr:section]">
-                                        <xsl:variable name="container" select="@id"/>
-                                        <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
-                                        <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
-                                        <xsl:variable name="filter-label">
-                                            <xsl:if test="$repeat-filter != ''">
-                                                <xsl:value-of select="concat('[',$repeat-filter,']')"/>
-                                            </xsl:if>
-                                        </xsl:variable>
-                                        <xsl:variable name="ancestor-address">
-                                            <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
-                                            <xsl:for-each select="ancestor::xf:repeat">
-                                                <xsl:variable name="ancestor-container" select="@id"/>
-                                                <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                                                <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
-                                            </xsl:for-each>
-                                        </xsl:variable>
-                                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
-                                            value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}) then ({$ancestor-address}{$container}/{$loop-id}{$filter-label}[last()]/@occurrence-id) else ''"/>
-                                    </xsl:for-each>
-                                    <xsl:for-each select="descendant::fr:section">
-                                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed" name="DOMFocusOut" target="{@id}"/>
-                                    </xsl:for-each>
-                                    <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                                        value="if (instance('fr-form-util')/Pages/{$last-page-name}[not(text()='false')]) then '{$last-page-name}' else instance('fr-form-util')/Pages/{$last-page-name}/preceding-sibling::*[not(text()='false')][1]/name()"/>
-                                    <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
-                                </xf:action>
-                            </xf:action>
-                        </xf:action>
-                    </xsl:for-each>
-                    <xf:action if="instance('fr-form-util')/PageChangeDone='false'">
-                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
-                            value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/preceding-sibling::*[not(text()='false')][1]/name()"/>
-                        <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
-                    </xf:action>
-                </xf:action>
+                <xsl:call-template name="navigation">
+                    <xsl:with-param name="direction" select="'1'"/>
+                </xsl:call-template>
+                <xsl:call-template name="navigation">
+                    <xsl:with-param name="direction" select="'-1'"/>
+                </xsl:call-template>
                 <!-- Saving the time when the saving happened -->
                 <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSection"
                     value="count(instance('fr-form-util')/Pages/*[following-sibling::*[name()=instance('fr-form-instance')/Util/CurrentSectionName]]) +1"/>
@@ -740,6 +547,151 @@
             </xf:action>
 
         </xsl:copy>
+    </xsl:template>
+
+    <xsl:template name="navigation">
+        <xsl:param name="direction"/>
+        
+        <xsl:variable name="first-in-direction">
+            <xsl:choose>
+                <xsl:when test="$direction = '1'"><xsl:value-of select="'1'"/></xsl:when>
+                <xsl:when test="$direction = '-1'"><xsl:value-of select="'last()'"/></xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="next-sibling">
+            <xsl:choose>
+                <xsl:when test="$direction = '1'"><xsl:value-of select="'following-sibling'"/></xsl:when>
+                <xsl:when test="$direction = '-1'"><xsl:value-of select="'preceding-sibling'"/></xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+        
+        <xf:action if="instance('fr-form-util')/PreviousNext='{$direction}'">
+            <!-- preparate the following xf:repeat occurrences -->
+            <xsl:for-each select="//fr:body//xf:repeat[descendant::fr:section]">
+                <xsl:variable name="container" select="@id"/>
+                <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
+                <xsl:variable name="repeat-page-limit">
+                    <xsl:choose>
+                        <xsl:when test="$direction = '1'">
+                            <xsl:value-of select="concat(' &lt; ',count(preceding::fr:section) + 2)"/>
+                        </xsl:when>
+                        <xsl:when test="$direction = '-1'">
+                            <xsl:value-of select="concat(' &gt; ',$number-of-pages - count(following::fr:section) + 1)"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
+                <xsl:variable name="filter-label">
+                    <xsl:if test="$repeat-filter != ''">
+                        <xsl:value-of select="concat('[',$repeat-filter,']')"/>
+                    </xsl:if>
+                </xsl:variable>
+                <xsl:variable name="ancestor-address">
+                    <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
+                    <xsl:for-each select="ancestor::xf:repeat">
+                        <xsl:variable name="ancestor-container" select="@id"/>
+                        <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
+                        <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
+                    </xsl:for-each>
+                </xsl:variable>
+                <xf:action if="number(instance('fr-form-instance')/Util/CurrentSection) {$repeat-page-limit}">
+                    <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
+                        value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}) then ({$ancestor-address}{$container}/{$loop-id}{$filter-label}[{$first-in-direction}]/@occurrence-id) else ''"/>
+                    <xsl:for-each select="descendant::fr:section">
+                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed" name="DOMFocusOut" target="{@id}"/>
+                    </xsl:for-each>
+                </xf:action>
+            </xsl:for-each>
+            <!-- find a next page in the current xf:repeat or a next occurrence's first page in it -->
+            <xsl:for-each select="//fr:body//xf:repeat[descendant::fr:section]">
+                <xsl:sort order="descending"/>
+                <xsl:variable name="container" select="@id"/>
+                <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
+                <xsl:variable name="first-page-position" select="count(preceding::fr:section) + 2"/>
+                <xsl:variable name="last-page-position" select="$number-of-pages - count(following::fr:section) + 1"/>
+                <xsl:variable name="repeat-out-position">
+                    <xsl:choose>
+                        <xsl:when test="$direction = '1'">
+                            <xsl:value-of select="concat('&lt;= ',$last-page-position -1)"/>
+                        </xsl:when>
+                        <xsl:when test="$direction = '-1'">
+                            <xsl:value-of select="concat('&gt;= ',$first-page-position -1)"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:variable name="first-in-direction-page-name">
+                    <xsl:choose>
+                        <xsl:when test="$direction = '1'">
+                            <xsl:value-of select="descendant::fr:section[1]/@name"/>
+                        </xsl:when>
+                        <xsl:when test="$direction = '-1'">
+                            <xsl:value-of select="descendant::fr:section[last()]/@name"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
+                <xsl:variable name="filter-label">
+                    <xsl:if test="$repeat-filter != ''">
+                        <xsl:value-of select="concat('[',$repeat-filter,']')"/>
+                    </xsl:if>
+                </xsl:variable>
+                <xsl:variable name="ancestor-address">
+                    <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
+                    <xsl:for-each select="ancestor::xf:repeat">
+                        <xsl:variable name="ancestor-container" select="@id"/>
+                        <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
+                        <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
+                    </xsl:for-each>
+                </xsl:variable>
+                
+                <xf:action if="number(instance('fr-form-instance')/Util/CurrentSection) &gt;= {$first-page-position} and number(instance('fr-form-instance')/Util/CurrentSection) &lt;= {$last-page-position}">
+                    <!-- find a next unfiltered page in the current repeat -->
+                    <xf:action if="instance('fr-form-util')/PageChangeDone='false' and instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/{$next-sibling}::*[not(text()='false')][1]/count(preceding-sibling::*) {$repeat-out-position}">
+                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
+                            value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/{$next-sibling}::*[not(text()='false')][1]/name()"/>
+                        <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+                    </xf:action>
+                    <!-- find a next occurrence for the current repeat -->
+                    <xf:action if="instance('fr-form-util')/PageChangeDone='false'">
+                        <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
+                            value="if (instance('fr-form-instance')//{$container}/{$loop-id}[@occurrence-id = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']][{$next-sibling}::{$loop-id}{$filter-label}]) then ({$ancestor-address}{$container}/{$loop-id}[@occurrence-id = instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']]/{$next-sibling}::{$loop-id}{$filter-label}[1]/@occurrence-id) else ''"/>
+                        <xf:action if="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}'] != ''">
+                            <xsl:for-each select="descendant::xf:repeat[descendant::fr:section]">
+                                <xsl:variable name="container" select="@id"/>
+                                <xsl:variable name="loop-id" select="substring-after(@nodeset,concat($container,'/'))"/>
+                                <xsl:variable name="repeat-filter" select="//xf:bind[@id=concat($container,'-bind')]/@relevant"/>
+                                <xsl:variable name="filter-label">
+                                    <xsl:if test="$repeat-filter != ''">
+                                        <xsl:value-of select="concat('[',$repeat-filter,']')"/>
+                                    </xsl:if>
+                                </xsl:variable>
+                                <xsl:variable name="ancestor-address">
+                                    <xsl:value-of select="'instance(''fr-form-instance'')//'"/>
+                                    <xsl:for-each select="ancestor::xf:repeat">
+                                        <xsl:variable name="ancestor-container" select="@id"/>
+                                        <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
+                                        <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
+                                    </xsl:for-each>
+                                </xsl:variable>
+                                <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
+                                    value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}) then ({$ancestor-address}{$container}/{$loop-id}{$filter-label}[1]/@occurrence-id) else ''"/>
+                            </xsl:for-each>
+                            <xsl:for-each select="descendant::fr:section">
+                                <xf:dispatch ev:event="DOMFocusOut xforms-value-changed" name="DOMFocusOut" target="{@id}"/>
+                            </xsl:for-each>
+                            <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
+                                value="if (instance('fr-form-util')/Pages/{$first-in-direction-page-name}[not(text()='false')]) then '{$first-in-direction-page-name}' else instance('fr-form-util')/Pages/{$first-in-direction-page-name}/{$next-sibling}::*[not(text()='false')][1]/name()"/>
+                            <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+                        </xf:action>
+                    </xf:action>
+                </xf:action>
+            </xsl:for-each>
+            <xf:action if="instance('fr-form-util')/PageChangeDone='false'">
+                <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
+                    value="instance('fr-form-util')/Pages/*[name()=instance('fr-form-instance')/Util/CurrentSectionName]/{$next-sibling}::*[not(text()='false')][1]/name()"/>
+                <xf:setvalue ref="instance('fr-form-util')/PageChangeDone" value="string('true')"/>
+            </xf:action>
+        </xf:action>
     </xsl:template>
 
     <xd:doc>
