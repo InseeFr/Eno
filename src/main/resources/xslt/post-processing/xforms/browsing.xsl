@@ -303,56 +303,53 @@
                     relevant="instance('fr-form-instance')/Util/Send='false'"/>
                 <xf:bind id="progress-percent-bind" name="progress-percent" ref="ProgressPercent">
                     <xsl:attribute name="calculate">
-                        <xsl:variable name="repeats-number" as="xs:integer" select="count(//fr:body/xf:repeat)"/>
-                        <!-- The total number of pages in the repeat : it can evolve when filling questionnaire -->
                         <xsl:variable name="total-group-pages-count">
                             <xsl:for-each select="//fr:body//xf:repeat[descendant::fr:section]">
                                 <xsl:variable name="container" select="@id"/>
                                 <xsl:variable name="group-name" select="substring-after(@nodeset,concat($container,'/'))"/>
-                                <xsl:variable name="group-pages-number" select="count(descendant::fr:section[ancestor::xf:repeat[1]/@id=$container])"/>
-                                <xsl:value-of select="concat('+count(instance(''fr-form-instance'')//',$container,'/',$group-name,')*',$group-pages-number)"/>
+                                <xsl:variable name="group-condition">
+                                    <xsl:if test="@relevant">
+                                        <xsl:value-of select="concat('[',@relevant,']')"/>
+                                    </xsl:if>
+                                </xsl:variable>
+                                <xsl:variable name="group-pages-number" select="count(descendant::fr:section)"/>
+                                <xsl:value-of select="concat(' + (count(instance(''fr-form-instance'')//',$container,'/',$group-name,$group-condition,') -1)*',$group-pages-number)"/>
                             </xsl:for-each>
                         </xsl:variable>
-                        <!-- The number of repeats is removed from the number pages because it is counted in the total number of pages instead -->
-                        <xsl:variable name="denominator" select="concat('(',string($number-of-pages - $repeats-number),$total-group-pages-count,')')"/>
+                        <xsl:variable name="denominator" select="concat('(',string($number-of-pages),$total-group-pages-count,')')"/>
 
                         <xsl:value-of select="'if (number(instance(''fr-form-instance'')/Util/CurrentSection)=1) then ''0'' '"/>
-                        <xsl:value-of
-                            select="concat('else (if (number(instance(''fr-form-instance'')/Util/CurrentSection)&gt;',
-                                           $number-of-pages +1,
-                                           ') then ''100''')"/>
-                        <xsl:for-each select="//fr:body/xf:repeat">
-                            <xsl:variable name="occurrence-position" select="count(//fr:body/xf:repeat/preceding-sibling::fr:section)+1"/>
+                        <xsl:value-of select="concat('else (if (number(instance(''fr-form-instance'')/Util/CurrentSection)&gt;',$number-of-pages +1,') then ''100''')"/>
+                        <!-- numerator : the CurrentSection number corrected by the previous or current repeat -->
+                        <xsl:value-of select="' else round((number(instance(''fr-form-instance'')/Util/CurrentSection) - 2'"/>
+                        <xsl:for-each select="//fr:body//xf:repeat[descendant::fr:section]">
+                            <xsl:variable name="first-page-position" select="count(preceding::fr:section)+1"/>
+                            <xsl:variable name="last-page-position" select="$number-of-pages - count(following::fr:section) + 1"/>
                             <xsl:variable name="container" select="@id"/>
-                            <xsl:variable name="previous-group-pages-count">
-                                <xsl:for-each select="//fr:body/xf:repeat[following::xf:repeat/@id=$container]">
-                                    <xsl:variable name="previous-group-container" select="@id"/>
-                                    <xsl:variable name="previous-group-name" select="substring-after(@nodeset,concat($previous-group-container,'/'))"/>
-                                    <xsl:variable name="previous-group-pages-number" select="count(descendant::fr:section[ancestor::xf:repeat[1]/@id=$previous-group-container])"/>
-                                    <xsl:value-of select="concat('+(count(instance(''fr-form-instance'')//',$previous-group-container,'/',$previous-group-name,')*',$previous-group-pages-number,'-1)')"/>
-                                </xsl:for-each>
+                            <xsl:variable name="repeat-name" select="substring-after(@nodeset,concat($container,'/'))"/>
+                            <xsl:variable name="repeat-condition">
+                                <xsl:if test="@relevant">
+                                    <xsl:value-of select="concat('[',@relevant,']')"/>
+                                </xsl:if>
                             </xsl:variable>
-                            <!-- TODO : improve for loop of loops -->
-                            <xsl:variable name="group-pages-number" select="count(descendant::fr:section)"/>
-
-                            <xsl:value-of select="concat(' else (if (number(instance(''fr-form-instance'')/Util/CurrentSection) &lt;',$occurrence-position,')')"/>
-                            <xsl:value-of select="concat(' then round((number(instance(''fr-form-instance'')/Util/CurrentSection)-2',$previous-group-pages-count,')')"/>
-                            <xsl:value-of select="concat(' div ',$denominator,'*100)')"/>
-                            <xsl:value-of select="concat(' else (if (instance(''fr-form-instance'')/Util/CurrentSection =',$occurrence-position,')')"/>
-                            <!-- pages due to sections previous from the repeat + pages due to previous occurrences + pages due to previous sections in the current occurrence -->
-                            <xsl:value-of select="concat(' then round((',$occurrence-position,'-2',$previous-group-pages-count)"/>
-                            <xsl:value-of select="concat('+(number(instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$container,'''])-1)*',$group-pages-number)"/>
-                            <xsl:value-of select="'+count(instance(''fr-form-instance'')/*[name()=instance(''fr-form-instance'')/Util/CurrentSectionName]/preceding::fr:section))'"/>
-                            <xsl:value-of select="concat(' div ',$denominator,'*100)')"/>
+                            <xsl:variable name="repeat-pages-count" select="count(descendant::fr:section)"/>
+                            
+                            <!-- before the repeat : 0 page -->
+                            <xsl:value-of select="concat('+ (if (number(instance(''fr-form-instance'')/Util/CurrentSection) &lt;',$first-page-position,') then 0')"/>
+                            <!-- after the repeat : (number of relevant occurrences -1) * number of pages  -->
+                            <xsl:value-of select="concat(' else (if (number(instance(''fr-form-instance'')/Util/CurrentSection) &gt;',$last-page-position,')')"/>
+                            <xsl:value-of select="concat(' then ((count(instance(''fr-form-instance'')//',$container,'/',$repeat-name,$repeat-condition,') -1)*',$repeat-pages-count,')')"/>
+                            <!-- inside the repeat : (number of previous relevant occurrences) * number of pages  -->
+                            <xsl:value-of select="' else (count(instance(''fr-form-instance'')//'"/>
+                            <xsl:for-each select="ancestor-or-self::xf:repeat">
+                                <xsl:sort order="descending"/>
+                                <xsl:variable name="ancestor-container" select="@id"/>
+                                <xsl:variable name="ancestor-group-name" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
+                                <xsl:value-of select="concat($ancestor-group-name,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']]')"/>
+                            </xsl:for-each>
+                            <xsl:value-of select="concat('/preceding::',$repeat-name,'[parent::',$container,']',$repeat-condition,')*',$repeat-pages-count,')))')"/>
                         </xsl:for-each>
-                        <xsl:value-of select="concat(' else round((number(instance(''fr-form-instance'')/Util/CurrentSection) - 2',
-                                                     $total-group-pages-count,
-                                                     ')')"/>
-                        <xsl:value-of select="concat(' div ',$denominator,'*100))')"/>
-                        <!-- if ends -->
-                        <xsl:for-each select="//fr:body/xf:repeat">
-                            <xsl:value-of select="'))'"/>
-                        </xsl:for-each>
+                        <xsl:value-of select="concat(') div ',$denominator,'*100))')"/>
                     </xsl:attribute>
                 </xf:bind>
                 <xf:bind id="progress-bind" ref="Progress"/>
