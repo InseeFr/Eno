@@ -170,8 +170,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy>
-                    <xsl:apply-templates select="@*" mode="bind"/>
-                    <xsl:apply-templates select="node()"/>
+                    <xsl:apply-templates select="@* | node()"/>
                 </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
@@ -196,7 +195,9 @@
             <xsl:when test="$page-loop//Loop">
                 <xsl:call-template name="bind-in-page-loop">
                     <xsl:with-param name="attribute"
-                        select="replace($attribute,
+                        select="replace(replace($attribute,
+                                                concat('current\(\)/ancestor-or-self::',$page-loop//Loop[1]/@loop,'/@occurrence-id'),
+                                                concat('instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$page-loop//Loop[1]/@container,''']')),
                                         concat('current\(\)/ancestor::',$page-loop//Loop[1]/@loop,'/@occurrence-id'),
                                         concat('instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$page-loop//Loop[1]/@container,''']'))"/>
                     <xsl:with-param name="page-loop">
@@ -359,6 +360,9 @@
                 <xf:bind id="pages-bind" ref="Pages">
                     <xsl:apply-templates select="//xf:instance[@id='fr-form-instance']/form/*[child::*]" mode="page-bind">
                         <xsl:with-param name="loop-ancestors"/>
+                        <xsl:with-param name="page-loop" as="node()" tunnel="yes">
+                            <Loops/>
+                        </xsl:with-param>
                     </xsl:apply-templates>
                 </xf:bind>
             </xf:bind>
@@ -588,13 +592,13 @@
                     <xsl:for-each select="ancestor::xf:repeat">
                         <xsl:variable name="ancestor-container" select="@id"/>
                         <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                        <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
+                        <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']]//')"/>
                     </xsl:for-each>
                 </xsl:variable>
                 <xf:action if="number(instance('fr-form-instance')/Util/CurrentSection) {$repeat-page-limit}">
                     <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
                         value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}) then ({$ancestor-address}{$container}/{$loop-id}{$filter-label}[{$first-in-direction}]/@occurrence-id) else ''"/>
-                    <xsl:for-each select="descendant::fr:section">
+                    <xsl:for-each select="descendant::fr:section/descendant-or-self::*[@id]">
                         <xf:dispatch ev:event="DOMFocusOut xforms-value-changed" name="DOMFocusOut" target="{@id}"/>
                     </xsl:for-each>
                 </xf:action>
@@ -637,7 +641,7 @@
                     <xsl:for-each select="ancestor::xf:repeat">
                         <xsl:variable name="ancestor-container" select="@id"/>
                         <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                        <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
+                        <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']]//')"/>
                     </xsl:for-each>
                 </xsl:variable>
                 
@@ -667,13 +671,13 @@
                                     <xsl:for-each select="ancestor::xf:repeat">
                                         <xsl:variable name="ancestor-container" select="@id"/>
                                         <xsl:variable name="ancestor-loop-id" select="substring-after(@nodeset,concat($ancestor-container,'/'))"/>
-                                        <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']//')"/>
+                                        <xsl:value-of select="concat($ancestor-container,'/',$ancestor-loop-id,'[@occurrence-id = instance(''fr-form-instance'')/Util/CurrentLoopElement[@loop-name=''',$ancestor-container,''']]//')"/>
                                     </xsl:for-each>
                                 </xsl:variable>
                                 <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
                                     value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}) then ({$ancestor-address}{$container}/{$loop-id}{$filter-label}[1]/@occurrence-id) else ''"/>
                             </xsl:for-each>
-                            <xsl:for-each select="descendant::fr:section">
+                            <xsl:for-each select="descendant::fr:section/descendant-or-self::*[@id]">
                                 <xf:dispatch ev:event="DOMFocusOut xforms-value-changed" name="DOMFocusOut" target="{@id}"/>
                             </xsl:for-each>
                             <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
@@ -710,10 +714,17 @@
     </xd:doc>
     <xsl:template match="*[ends-with(name(),'-Container')]" mode="page-bind">
         <xsl:param name="loop-ancestors"/>
+        <xsl:param name="page-loop" as="node()" tunnel="yes"/>
         <xsl:variable name="container" select="name()"/>
         <xsl:variable name="loop-name" select="child::*/name()"/>
         <xsl:apply-templates select="child::*/child::*[child::*]" mode="page-bind">
             <xsl:with-param name="loop-ancestors" select="if ($loop-ancestors='') then $container else concat($loop-ancestors,' ',$container)"/>
+            <xsl:with-param name="page-loop" tunnel="yes">
+                <Loops>
+                    <xsl:copy-of select="$page-loop//Loop"/>
+                    <Loop container="{$container}" loop="{$loop-name}"/>
+                </Loops>
+            </xsl:with-param>
         </xsl:apply-templates>
     </xsl:template>
 
@@ -724,6 +735,7 @@
     </xd:doc>
     <xsl:template match="*[not(ends-with(name(),'-Container'))]" mode="page-bind">
         <xsl:param name="loop-ancestors"/>
+        <xsl:param name="page-loop" as="node()" tunnel="yes"/>
 
         <xf:bind id="page-{name()}-bind" name="{name()}" ref="{name()}">
             <xf:calculate value="xxf:evaluate-bind-property('{name()}-bind','relevant')"/>
@@ -735,6 +747,7 @@
                 <xsl:with-param name="level" select="'warning'" tunnel="yes"/>
                 <xsl:with-param name="constraint-begin" select="''" as="xs:string" tunnel="yes"/>
                 <xsl:with-param name="constraint-end" select="''" as="xs:string" tunnel="yes"/>
+                <xsl:with-param name="page-loop" select="$page-loop" as="node()" tunnel="yes"/>
             </xsl:apply-templates>
         </xf:bind>
     </xsl:template>
@@ -755,11 +768,15 @@
         <xsl:param name="level" tunnel="yes"/>
         <xsl:param name="constraint-begin" as="xs:string" tunnel="yes"/>
         <xsl:param name="constraint-end" as="xs:string" tunnel="yes"/>
+        <xsl:param name="page-loop" as="node()" tunnel="yes"/>
 
         <xsl:if test="@level=$level">
             <xf:constraint>
                 <xsl:attribute name="value">
-                    <xsl:value-of select="concat($constraint-begin,'(',replace(@value,'ancestor::','ancestor-or-self::'),')',$constraint-end)"/>
+                    <xsl:call-template name="bind-in-page-loop">
+                        <xsl:with-param name="attribute" select="concat($constraint-begin,'(',replace(@value,'ancestor::','ancestor-or-self::'),')',$constraint-end)"/>
+                        <xsl:with-param name="page-loop" as="node()" select="$page-loop"/>
+                    </xsl:call-template>
                 </xsl:attribute>
             </xf:constraint>
         </xsl:if>
@@ -1035,10 +1052,10 @@
         </xf:case>
     </xsl:template>
 
-    <xsl:template match="xf:label/@ref | xf:alert/@ref">
+    <xsl:template match="xf:label/@ref | xf:alert/@ref | xf:action/@* |xf:setvalue/@*">
         <xsl:param name="page-loop" as="node()" tunnel="yes"/>
 
-        <xsl:attribute name="ref">
+        <xsl:attribute name="{name()}">
             <xsl:call-template name="bind-in-page-loop">
                 <xsl:with-param name="attribute" select="."/>
                 <xsl:with-param name="page-loop" select="$page-loop"/>
