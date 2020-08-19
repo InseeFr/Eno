@@ -599,7 +599,7 @@
                     <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentLoopElement[@loop-name='{$container}']"
                         value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}) then ({$ancestor-address}{$container}/{$loop-id}{$filter-label}[{$first-in-direction}]/@occurrence-id) else ''"/>
                     <xsl:for-each select="descendant::fr:section/descendant-or-self::*[@id]">
-                        <xf:dispatch ev:event="DOMFocusOut xforms-value-changed" name="DOMFocusOut" target="{@id}"/>
+                        <xf:action ev:event="DOMFocusIn xforms-value-changed" name="DOMFocusIn" target="{@id}"/>
                     </xsl:for-each>
                 </xf:action>
             </xsl:for-each>
@@ -678,7 +678,7 @@
                                     value="if (instance('fr-form-instance')//{$container}/{$loop-id}{$filter-label}) then ({$ancestor-address}{$container}/{$loop-id}{$filter-label}[1]/@occurrence-id) else ''"/>
                             </xsl:for-each>
                             <xsl:for-each select="descendant::fr:section/descendant-or-self::*[@id]">
-                                <xf:dispatch ev:event="DOMFocusOut xforms-value-changed" name="DOMFocusOut" target="{@id}"/>
+                                <xf:action ev:event="DOMFocusIn xforms-value-changed" name="DOMFocusIn" target="{@id}"/>
                             </xsl:for-each>
                             <xf:setvalue ref="instance('fr-form-instance')/Util/CurrentSectionName"
                                 value="if (instance('fr-form-util')/Pages/{$first-in-direction-page-name}[not(text()='false')]) then '{$first-in-direction-page-name}' else instance('fr-form-util')/Pages/{$first-in-direction-page-name}/{$next-sibling}::*[not(text()='false')][1]/name()"/>
