@@ -527,14 +527,14 @@
                                     </xsl:matching-substring>
                                 </xsl:analyze-string>
                             </xsl:when>
-                            <xsl:when test="matches($text,concat($current-group,'_\d+-Container-bind'))">
-                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)-Container-bind(.*)$">
+                            <xsl:when test="matches($text,concat($current-group,'_\d+-Container-'))">
+                                <xsl:analyze-string select="$text" regex="^(.*){$current-group}(_\d+)-Container-(.*)$">
                                     <xsl:matching-substring>
                                         <xsl:call-template name="replace-element">
                                             <xsl:with-param name="position" select="$position"/>
                                             <xsl:with-param name="text" select="regex-group(1)"/>
                                         </xsl:call-template>
-                                        <xsl:value-of select="concat($current-group,regex-group(2),'-bind')"/>
+                                        <xsl:value-of select="concat($current-group,regex-group(2),'-')"/>
                                         <xsl:call-template name="replace-element">
                                             <xsl:with-param name="position" select="$position"/>
                                             <xsl:with-param name="text" select="regex-group(3)"/>
