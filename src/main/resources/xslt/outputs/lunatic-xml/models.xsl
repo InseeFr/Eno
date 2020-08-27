@@ -394,7 +394,7 @@
 		<!-- TextDomain getters -->
 		<xsl:variable name="lengthResponse" select="enolunatic:get-length($source-context)"/>
 		<!-- DateTimeDomain getters -->
-		<xsl:variable name="dateFormat" select="enolunatic:get-format($source-context)"/>
+		<xsl:variable name="format" select="enolunatic:get-format($source-context)"/>
 
 		<xsl:if test="$questionName!=''">
 			<components xsi:type="{$componentType}" componentType="{$componentType}" id="{$idQuestion}">
@@ -407,17 +407,31 @@
 
 				<xsl:copy-of select="$declarations"/>
 				<conditionFilter><xsl:value-of select="$filterCondition"/></conditionFilter>
+				
 				<xsl:copy-of select="$dependencies"/>
+				<xsl:if test="$loopDepth &gt; 0">
+					<xsl:call-template name="enolunatic:add-response-dependencies">
+						<xsl:with-param name="responseName" select="$responseName"/>
+					</xsl:call-template>
+				</xsl:if>
+				
 				<xsl:if test="$unit!=''">
 					<unit><xsl:value-of select="$unit"/></unit>
 				</xsl:if>
-				<xsl:if test="$dateFormat != ''">
-					<dateFormat><xsl:value-of select="$dateFormat"/></dateFormat>
+				<xsl:if test="$format != ''">
+					<xsl:choose>
+						<xsl:when test="self::DateTimeDomain">
+							<dateFormat><xsl:value-of select="$format"/></dateFormat>
+						</xsl:when>
+						<xsl:otherwise>
+							<format><xsl:value-of select="$format"/></format>
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:if>
 				<xsl:apply-templates select="eno:child-fields($source-context)" mode="source">
 					<xsl:with-param name="driver" select="." tunnel="yes"/>
 					<xsl:with-param name="idQuestion" select="$idQuestion" tunnel="yes"/>
-				</xsl:apply-templates>
+				</xsl:apply-templates>				
 				<xsl:call-template name="enolunatic:add-response-to-components">
 					<xsl:with-param name="responseName" select="$responseName"/>
 				</xsl:call-template>
@@ -481,6 +495,11 @@
 			<xsl:if test="$minimumResponse!=''"><xsl:attribute name="min" select="$minimumResponse"/></xsl:if>
 			<xsl:if test="$maximumResponse!=''"><xsl:attribute name="max" select="$maximumResponse"/></xsl:if>
 			<xsl:if test="$numberOfDecimals!=''"><xsl:attribute name="decimals" select="$numberOfDecimals"/></xsl:if>
+			<xsl:if test="$loopDepth &gt; 0">
+				<xsl:call-template name="enolunatic:add-response-dependencies">
+					<xsl:with-param name="responseName" select="$responseName"/>
+				</xsl:call-template>
+			</xsl:if>
 			<xsl:if test="$unit!=''">
 				<unit><xsl:value-of select="$unit"/></unit>
 			</xsl:if>
@@ -523,6 +542,11 @@
 				<xsl:with-param name="responseName" select="$responseName"/>
 			</xsl:call-template>
 		</responses>
+		<xsl:if test="$loopDepth &gt; 0">
+			<xsl:call-template name="enolunatic:add-response-dependencies">
+				<xsl:with-param name="responseName" select="$responseName"/>
+			</xsl:call-template>
+		</xsl:if>
 		<xsl:call-template name="enolunatic:add-collected-variable-to-components">
 			<xsl:with-param name="responseName" select="$responseName"/>
 			<xsl:with-param name="componentRef" select="$idQuestion"/>
@@ -738,6 +762,11 @@
 	<xsl:template name="enolunatic:add-response-to-components">
 		<xsl:param name="responseName"/>
 		<response name="{$responseName}"/>
+	</xsl:template>
+	
+	<xsl:template name="enolunatic:add-response-dependencies">
+		<xsl:param name="responseName"/>
+		<dependencies><xsl:value-of select="$responseName"/></dependencies>
 	</xsl:template>
 
 	<xd:doc>
