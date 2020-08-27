@@ -1114,7 +1114,6 @@
    <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
       <label>"Commentaire"</label>
       <conditionFilter>"normal"</conditionFilter>
-      <bindingsDependency>false</bindingsDependency>
       <components xsi:type="Textarea"
                   componentType="Textarea"
                   id="COMMENT-QUESTION"
@@ -1122,7 +1121,6 @@
                   mandatory="false">
          <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
          <conditionFilter>"normal"</conditionFilter>
-         <bindingsDependency>false</bindingsDependency>
          <response name="COMMENT_QE"/>
       </components>
    </components>
