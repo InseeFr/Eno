@@ -135,7 +135,6 @@
         <xsl:param name="ancestor" tunnel="yes"/>
         <xsl:param name="tableId" tunnel="yes"/>
         <xsl:variable name="idColumn" select="ancestor::h:cells/@idColumn"/>
-        <!--<xsl:variable name="tableId" select="ancestor::h:components[@componentType='Table']/@id"/>-->        
         <xsl:choose>
             <xsl:when test="$ancestor='table'">
                 <response>
