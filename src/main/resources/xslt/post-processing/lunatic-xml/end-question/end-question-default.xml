@@ -5,7 +5,6 @@
     <components xsi:type="Sequence" componentType="Sequence" id="TIME-COMMENT-SEQ">
         <label>"Temps de réponse et commentaires"</label>
         <conditionFilter>"normal"</conditionFilter>
-        <bindingsDependency>false</bindingsDependency>
         <components xsi:type="InputNumber"
             componentType="InputNumber"
             id="TIME-QUESTION-HEURE-REMPL"
@@ -16,7 +15,6 @@
             <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
             <unit>heures</unit>
             <conditionFilter>"normal"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>
@@ -40,7 +38,6 @@
             <label></label>
             <unit>minutes</unit>
             <conditionFilter>"normal"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>MIN_REMPL</name>
@@ -61,7 +58,6 @@
             mandatory="false">
             <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
             <conditionFilter>"normal"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>COMMENT_QE</name>
@@ -80,7 +76,6 @@
     <components xsi:type="Sequence" componentType="Sequence" id="COMMENT-SEQ">
         <label>"Commentaire"</label>
         <conditionFilter>"normal"</conditionFilter>
-        <bindingsDependency>false</bindingsDependency>
         <components xsi:type="Textarea"
             componentType="Textarea"
             id="COMMENT-QUESTION"
@@ -88,7 +83,6 @@
             mandatory="false">
             <label>"Commentaires et remarques éventuelles concernant l’enquête :"</label>
             <conditionFilter>"normal"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
             <response name="COMMENT_QE"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>COMMENT_QE</name>
@@ -107,7 +101,6 @@
     <components xsi:type="Sequence" componentType="Sequence" id="TIME-SEQ">
         <label>"Temps de réponse"</label>
         <conditionFilter>"normal"</conditionFilter>
-        <bindingsDependency>false</bindingsDependency>
         <components xsi:type="InputNumber"
             componentType="InputNumber"
             id="TIME-QUESTION-HEURE-REMPL"
@@ -118,7 +111,6 @@
             <label>"Combien de temps avez-vous mis en tout pour répondre à cette enquête (recherche des données + remplissage du questionnaire) ?"</label>
             <unit>heures</unit>
             <conditionFilter>"normal"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
             <response name="HEURE_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>HEURE_REMPL</name>
@@ -142,7 +134,6 @@
             <label></label>
             <unit>minutes</unit>
             <conditionFilter>"normal"</conditionFilter>
-            <bindingsDependency>false</bindingsDependency>
             <response name="MIN_REMPL"/>
             <variables variableType="COLLECTED" xsi:type="VariableType">
                 <name>MIN_REMPL</name>
