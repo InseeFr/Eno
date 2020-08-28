@@ -661,7 +661,8 @@
     <xsl:template match="d:Sequence[d:TypeOfSequence/text()='module']"
         mode="enoddi:get-hideable-command">
         <xsl:variable name="filters">
-            <xsl:for-each select="ancestor::*[(name()='d:ThenConstructReference' or name()='d:ElseConstructReference') and parent::d:IfThenElse/d:TypeOfIfThenElse='hideable']">
+            <xsl:for-each select="ancestor::*[(name()='d:ThenConstructReference' or name()='d:ElseConstructReference') and parent::d:IfThenElse/d:TypeOfIfThenElse='hideable'
+                and not(parent::d:IfThenElse/parent::d:ControlConstructReference[parent::d:Loop and not(preceding-sibling::d:ControlConstructReference) and not(following-sibling::d:ControlConstructReference)])]">
                 <xsl:text> and </xsl:text>
                 <xsl:apply-templates select="current()" mode="enoddi:get-hideable-command"/>
             </xsl:for-each>
